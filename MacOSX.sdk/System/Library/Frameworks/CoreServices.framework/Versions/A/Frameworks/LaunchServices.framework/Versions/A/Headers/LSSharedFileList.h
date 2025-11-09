@@ -3,13 +3,15 @@
  
      Contains:   Services to load and share file lists.
  
-     Copyright:  Copyright 2003-2009 by Apple Inc., all rights reserved.
+     Copyright:  (c) 2003-2012 by Apple Inc. All rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
  
                      http://developer.apple.com/bugreporter/
+
 */
+
 #ifndef __LSSHAREDFILELIST__
 #define __LSSHAREDFILELIST__
 
@@ -57,7 +59,7 @@ typedef struct OpaqueLSSharedFileListItemRef*  LSSharedFileListItemRef;
  *  kLSSharedFileListFavoriteVolumes
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -68,7 +70,7 @@ extern CFStringRef kLSSharedFileListFavoriteVolumes                  __OSX_AVAIL
  *  kLSSharedFileListFavoriteItems
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -79,7 +81,7 @@ extern CFStringRef kLSSharedFileListFavoriteItems                    __OSX_AVAIL
  *  kLSSharedFileListRecentApplicationItems
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -90,7 +92,7 @@ extern CFStringRef kLSSharedFileListRecentApplicationItems           __OSX_AVAIL
  *  kLSSharedFileListRecentDocumentItems
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -101,7 +103,7 @@ extern CFStringRef kLSSharedFileListRecentDocumentItems              __OSX_AVAIL
  *  kLSSharedFileListRecentServerItems
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -112,7 +114,7 @@ extern CFStringRef kLSSharedFileListRecentServerItems                __OSX_AVAIL
  *  kLSSharedFileListSessionLoginItems
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -120,14 +122,17 @@ extern CFStringRef kLSSharedFileListSessionLoginItems                __OSX_AVAIL
 
 
 /*
- *  kLSSharedFileListGlobalLoginItems
- *  
+ *  kLSSharedFileListGlobalLoginItems   *** DEPRECATED ***
+ *
+ *  Deprecated:
+ *    Use a LaunchAgent instead.
+ *
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern CFStringRef kLSSharedFileListGlobalLoginItems                 __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+extern CFStringRef kLSSharedFileListGlobalLoginItems                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5, __MAC_10_9, __IPHONE_NA, __IPHONE_NA);
 
 
 /* LSSharedFileList property keys */
@@ -141,7 +146,7 @@ extern CFStringRef kLSSharedFileListGlobalLoginItems                 __OSX_AVAIL
  *    CFNumber
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -155,7 +160,7 @@ extern CFStringRef kLSSharedFileListRecentItemsMaxAmount             __OSX_AVAIL
  *    property is CFBoolean.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -169,7 +174,7 @@ extern CFStringRef kLSSharedFileListVolumesComputerVisible           __OSX_AVAIL
  *    property is CFBoolean.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -183,7 +188,7 @@ extern CFStringRef kLSSharedFileListVolumesIDiskVisible              __OSX_AVAIL
  *    property is CFBoolean.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -200,7 +205,7 @@ extern CFStringRef kLSSharedFileListVolumesNetworkVisible            __OSX_AVAIL
  *    the list.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -214,7 +219,7 @@ extern LSSharedFileListItemRef kLSSharedFileListItemBeforeFirst      __OSX_AVAIL
  *    list.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -231,7 +236,7 @@ extern LSSharedFileListItemRef kLSSharedFileListItemLast             __OSX_AVAIL
  *    Is item hidden in UI? Associated property is CFBoolean.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -244,7 +249,7 @@ extern CFStringRef kLSSharedFileListItemHidden                       __OSX_AVAIL
  *    CFBoolean.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.6 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.6 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -280,7 +285,7 @@ typedef CALLBACK_API_C( void , LSSharedFileListChangedProcPtr )(LSSharedFileList
  *    CFTypeID for the LSSharedFileListRef type.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -302,7 +307,7 @@ LSSharedFileListGetTypeID(void)                               __OSX_AVAILABLE_ST
  *    CFTypeID for the LSSharedFileListItemRef type.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -343,7 +348,7 @@ LSSharedFileListItemGetTypeID(void)                           __OSX_AVAILABLE_ST
  *    object is not needed anymore.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -379,7 +384,7 @@ LSSharedFileListCreate(
  *      Authorization reference.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -421,7 +426,7 @@ LSSharedFileListSetAuthorization(
  *      Context pointer defined by client.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -464,7 +469,7 @@ LSSharedFileListAddObserver(
  *      Context pointer defined by client.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -495,7 +500,7 @@ LSSharedFileListRemoveObserver(
  *      Shared list reference.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -529,7 +534,7 @@ LSSharedFileListGetSeedValue(LSSharedFileListRef inList)      __OSX_AVAILABLE_ST
  *    property object is not needed anymore.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -563,7 +568,7 @@ LSSharedFileListCopyProperty(
  *      Property data to set. Pass NULL to remove existing property.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -600,7 +605,7 @@ LSSharedFileListSetProperty(
  *    released with CFRelease when snapshot array is not needed anymore.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -657,7 +662,7 @@ LSSharedFileListCopySnapshot(
  *    item is not needed anymore.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -719,7 +724,7 @@ LSSharedFileListInsertItemURL(
  *    item is not needed anymore.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -760,7 +765,7 @@ LSSharedFileListInsertItemFSRef(
  *      end of the shared list.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -792,7 +797,7 @@ LSSharedFileListItemMove(
  *      Item to remove.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -820,7 +825,7 @@ LSSharedFileListItemRemove(
  *      Shared list to clear.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -841,7 +846,7 @@ LSSharedFileListRemoveAllItems(LSSharedFileListRef inList)    __OSX_AVAILABLE_ST
  *    Thread safe since version 10.5
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -866,7 +871,7 @@ LSSharedFileListItemGetID(LSSharedFileListItemRef inItem)     __OSX_AVAILABLE_ST
  *    calling ReleaseIconRef().
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -888,7 +893,7 @@ LSSharedFileListItemCopyIconRef(LSSharedFileListItemRef inItem) __OSX_AVAILABLE_
  *    Thread safe since version 10.5
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -924,7 +929,7 @@ LSSharedFileListItemCopyDisplayName(LSSharedFileListItemRef inItem) __OSX_AVAILA
  *      FSRef of original item. Can be NULL.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -950,7 +955,7 @@ LSSharedFileListItemResolve(
  *    Thread safe since version 10.5
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -973,7 +978,7 @@ LSSharedFileListItemCopyProperty(
  *    Thread safe since version 10.5
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */

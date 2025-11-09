@@ -13,7 +13,7 @@
  GLKEffectPropertyMaterial encapsulates material properties for an GLKEffect in
  accordance with the specification and lighting behavior of OpenGL ES 1.1.
 */
-
+NS_CLASS_AVAILABLE(10_8, 5_0)
 @interface GLKEffectPropertyMaterial : GLKEffectProperty
 {    
     @private

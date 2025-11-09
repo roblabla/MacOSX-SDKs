@@ -23,6 +23,28 @@ COREDATA_EXTERN NSString * const NSXMLStoreType NS_AVAILABLE(10_4, NA);
 COREDATA_EXTERN NSString * const NSBinaryStoreType NS_AVAILABLE(10_4, 3_0);
 COREDATA_EXTERN NSString * const NSInMemoryStoreType NS_AVAILABLE(10_4, 3_0);
 
+/*
+ NSPersistentStoreUbiquitousTransitionTypeAccountAdded
+ This value indicates that a new iCloud account is available, and the persistent store in use will / did transition to the new account.
+ It is only possible to discern this state when the application is running, and therefore this transition type will only be posted if the account changes while the application is running or in the background.
+ 
+ NSPersistentStoreUbiquitousTransitionTypeAccountRemoved
+ This value indicates that no iCloud account is available, and the persistent store in use will / did transition to the “local” store.
+ It is only possible to discern this state when the application is running, and therefore this transition type will only be posted if the account is removed while the application is running or in the background.
+ 
+ NSPersistentStoreUbiquitousTransitionTypeContentRemoved
+ This value indicates that the user has wiped the contents of the iCloud account, usually using Delete All from Documents & Data in Settings. The Core Data integration will transition to an empty store file as a result of this event.
+ 
+ NSPersistentStoreUbiquitousTransitionTypeInitialImportCompleted
+ This value indicates that the Core Data integration has finished building a store file that is consistent with the contents of the iCloud account, and is readyto replace the fallback store with that file.
+ */
+typedef NS_ENUM(NSUInteger, NSPersistentStoreUbiquitousTransitionType) {
+    NSPersistentStoreUbiquitousTransitionTypeAccountAdded = 1,
+    NSPersistentStoreUbiquitousTransitionTypeAccountRemoved,
+    NSPersistentStoreUbiquitousTransitionTypeContentRemoved,
+    NSPersistentStoreUbiquitousTransitionTypeInitialImportCompleted
+} NS_ENUM_AVAILABLE(10_9, 7_0);
+
 // Persistent store metadata dictionary keys:
 
 // key in the metadata dictionary to identify the store type
@@ -30,6 +52,10 @@ COREDATA_EXTERN NSString * const NSStoreTypeKey NS_AVAILABLE(10_4, 3_0);
 
 // key in the metadata dictionary to identify the store UUID - the store UUID is useful to identify stores through URI representations, but it is NOT guaranteed to be unique (while the UUID generated for new stores is unique, users can freely copy files and thus the UUID stored inside, so developers that track/reference stores explicitly do need to be aware of duplicate UUIDs and potentially override the UUID when a new store is added to the list of known stores in their application)
 COREDATA_EXTERN NSString * const NSStoreUUIDKey NS_AVAILABLE(10_4, 3_0);    
+
+/* A notification posted before the list of open persistent stores changes, similar to NSPersistentStoreCoordinatorStoresDidChangeNotification.  If the application is running, Core Data will post this before responding to iCloud account changes or "Delete All" from Documents & Data.
+ */
+COREDATA_EXTERN NSString * const NSPersistentStoreCoordinatorStoresWillChangeNotification NS_AVAILABLE(10_9, 7_0);
 
 // user info dictionary contains information about the stores that were added or removed
 COREDATA_EXTERN NSString * const NSPersistentStoreCoordinatorStoresDidChangeNotification NS_AVAILABLE(10_4, 3_0);    
@@ -140,6 +166,28 @@ COREDATA_EXTERN NSString * const NSPersistentStoreUbiquitousContentURLKey NS_AVA
 /* Notification sent after records are imported from the ubiquity store. The notification is sent with the object set to the NSPersistentStoreCoordinator instance which registered the store. */
 COREDATA_EXTERN NSString * const NSPersistentStoreDidImportUbiquitousContentChangesNotification NS_AVAILABLE(10_7, 5_0);
 
+/*
+ In the NSPersistentStoreCoordinatorStoresWillChangeNotification / NSPersistentStoreCoordinatorStoresDidChangeNotification userInfo dictionaries, this identifies the type of event. This could be one of the NSPersistentStoreUbiquitousTransitionType enum values as an NSNumber
+ */
+COREDATA_EXTERN NSString * const NSPersistentStoreUbiquitousTransitionTypeKey NS_AVAILABLE(10_9, 7_0);
+
+/*
+ Optionally specified string which will be mixed in to Core Data’s identifier for each iCloud peer. The value must be an alphanumeric string without any special characters, whitespace or punctuation.  The primary use for this option is to allow multiple applications on the same peer (device) to share a Core Data store integrated with iCloud. Each application will require its own store file.
+ */
+COREDATA_EXTERN NSString * const NSPersistentStoreUbiquitousPeerTokenOption NS_AVAILABLE(10_9, 7_0);
+
+/* NSNumber boolean indicating that the receiver should remove all associated ubiquity metadata from a persistent store. This is mostly used during migration or copying to disassociate a persistent store file from an iCloud account
+ */
+COREDATA_EXTERN NSString * const NSPersistentStoreRemoveUbiquitousMetadataOption NS_AVAILABLE(10_9, 7_0);
+
+/* NSString specifying the iCloud container identifier Core Data should pass to  -URLForUbiquitousContainerIdentifier:
+ */
+COREDATA_EXTERN NSString * const NSPersistentStoreUbiquitousContainerIdentifierKey NS_AVAILABLE(10_9, 7_0);
+
+/* NSNumber boolean indicating that the receiver should erase the local store file and rebuild it from the iCloud data in Mobile Documents.
+ */
+COREDATA_EXTERN NSString * const NSPersistentStoreRebuildFromUbiquitousContentOption NS_AVAILABLE(10_9, 7_0);
+
 NS_CLASS_AVAILABLE(10_4, 3_0)
 @interface NSPersistentStoreCoordinator : NSObject <NSLocking> {
 @private
@@ -150,12 +198,12 @@ NS_CLASS_AVAILABLE(10_4, 3_0)
 #ifdef __LP64__
 	uint32_t _reserved32;
 #endif
-    void *_reserved;
+    long _miniLock;
     NSMutableArray *_extendedStoreURLs;
     id _externalRecordsHelper;
     NSManagedObjectModel *_managedObjectModel;
     id _coreLock;
-    NSMutableArray *_persistentStores;
+    NSArray *_persistentStores;
 }
 
 /* Returns a dictionary of the registered store types:  the keys are the store type strings and the values are the NSPersistentStore subclasses wrapped in NSValues.
@@ -181,6 +229,11 @@ NS_CLASS_AVAILABLE(10_4, 3_0)
         NSObjectURIKey - URI of the object instance.
 */
 + (NSDictionary *)elementsDerivedFromExternalRecordURL:(NSURL *)fileURL NS_AVAILABLE(10_6, NA);
+
+/*
+ Delete all ubiquitous content for all peers for the persistent store at the given URL and also delete the local store file. storeOptions should contain the options normally passed to addPersistentStoreWithType:URL:options:error. Errors may be returned as a result of file I/O, iCloud network or iCloud account issues.
+ */
++ (BOOL)removeUbiquitousContentAndPersistentStoreAtURL:(NSURL *)storeURL options:(NSDictionary *)options error:(NSError**)error NS_AVAILABLE(10_9, 7_0);
 
 /* Creates and populates a store with the external records found at externalRecordsURL. The store is written to destinationURL using
     options and with type storeType. If storeIdentifier is nil, the records for a single store at externalRecordsURL at imported.

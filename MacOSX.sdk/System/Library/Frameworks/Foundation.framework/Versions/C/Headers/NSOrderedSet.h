@@ -1,5 +1,5 @@
 /*	NSOrderedSet.h
-	Copyright (c) 2007-2012, Apple Inc. All rights reserved.
+	Copyright (c) 2007-2013, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -81,28 +81,30 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
 
 @interface NSOrderedSet (NSOrderedSetCreation)
 
-+ (id)orderedSet;
-+ (id)orderedSetWithObject:(id)object;
-+ (id)orderedSetWithObjects:(const id [])objects count:(NSUInteger)cnt;
-+ (id)orderedSetWithObjects:(id)firstObj, ... NS_REQUIRES_NIL_TERMINATION;
-+ (id)orderedSetWithOrderedSet:(NSOrderedSet *)set;
-+ (id)orderedSetWithOrderedSet:(NSOrderedSet *)set range:(NSRange)range copyItems:(BOOL)flag;
-+ (id)orderedSetWithArray:(NSArray *)array;
-+ (id)orderedSetWithArray:(NSArray *)array range:(NSRange)range copyItems:(BOOL)flag;
-+ (id)orderedSetWithSet:(NSSet *)set;
-+ (id)orderedSetWithSet:(NSSet *)set copyItems:(BOOL)flag;
++ (instancetype)orderedSet;
++ (instancetype)orderedSetWithObject:(id)object;
++ (instancetype)orderedSetWithObjects:(const id [])objects count:(NSUInteger)cnt;
++ (instancetype)orderedSetWithObjects:(id)firstObj, ... NS_REQUIRES_NIL_TERMINATION;
++ (instancetype)orderedSetWithOrderedSet:(NSOrderedSet *)set;
++ (instancetype)orderedSetWithOrderedSet:(NSOrderedSet *)set range:(NSRange)range copyItems:(BOOL)flag;
++ (instancetype)orderedSetWithArray:(NSArray *)array;
++ (instancetype)orderedSetWithArray:(NSArray *)array range:(NSRange)range copyItems:(BOOL)flag;
++ (instancetype)orderedSetWithSet:(NSSet *)set;
++ (instancetype)orderedSetWithSet:(NSSet *)set copyItems:(BOOL)flag;
 
-- (id)initWithObject:(id)object;
-- (id)initWithObjects:(const id [])objects count:(NSUInteger)cnt;
-- (id)initWithObjects:(id)firstObj, ... NS_REQUIRES_NIL_TERMINATION;
-- (id)initWithOrderedSet:(NSOrderedSet *)set;
-- (id)initWithOrderedSet:(NSOrderedSet *)set copyItems:(BOOL)flag;
-- (id)initWithOrderedSet:(NSOrderedSet *)set range:(NSRange)range copyItems:(BOOL)flag;
-- (id)initWithArray:(NSArray *)array;
-- (id)initWithArray:(NSArray *)set copyItems:(BOOL)flag;
-- (id)initWithArray:(NSArray *)set range:(NSRange)range copyItems:(BOOL)flag;
-- (id)initWithSet:(NSSet *)set;
-- (id)initWithSet:(NSSet *)set copyItems:(BOOL)flag;
+- (instancetype)init;	/* designated initializer */
+- (instancetype)initWithObjects:(const id [])objects count:(NSUInteger)cnt;	/* designated initializer */
+
+- (instancetype)initWithObject:(id)object;
+- (instancetype)initWithObjects:(id)firstObj, ... NS_REQUIRES_NIL_TERMINATION;
+- (instancetype)initWithOrderedSet:(NSOrderedSet *)set;
+- (instancetype)initWithOrderedSet:(NSOrderedSet *)set copyItems:(BOOL)flag;
+- (instancetype)initWithOrderedSet:(NSOrderedSet *)set range:(NSRange)range copyItems:(BOOL)flag;
+- (instancetype)initWithArray:(NSArray *)array;
+- (instancetype)initWithArray:(NSArray *)set copyItems:(BOOL)flag;
+- (instancetype)initWithArray:(NSArray *)set range:(NSRange)range copyItems:(BOOL)flag;
+- (instancetype)initWithSet:(NSSet *)set;
+- (instancetype)initWithSet:(NSSet *)set copyItems:(BOOL)flag;
 
 @end
 
@@ -159,8 +161,10 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
 
 @interface NSMutableOrderedSet (NSMutableOrderedSetCreation)
 
-+ (id)orderedSetWithCapacity:(NSUInteger)numItems;
-- (id)initWithCapacity:(NSUInteger)numItems;
-    
++ (instancetype)orderedSetWithCapacity:(NSUInteger)numItems;
+
+- (instancetype)init;	/* designated initializer */
+- (instancetype)initWithCapacity:(NSUInteger)numItems;	/* designated initializer */
+
 @end
 

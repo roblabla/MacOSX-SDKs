@@ -128,7 +128,6 @@ typedef struct AudioCodecMagicCookieInfo	AudioCodecMagicCookieInfo;
 //=============================================================================
 
 
-#if !TARGET_OS_IPHONE
 /*!
 	@enum           AudioCodecComponentType
  
@@ -150,7 +149,6 @@ enum
 	kAudioEncoderComponentType								= 'aenc',	
 	kAudioUnityCodecComponentType							= 'acdc'
 };
-#endif
 
 //=============================================================================
 #pragma	mark Global Codec Properties
@@ -299,6 +297,14 @@ enum
 						This always refers to the encoded data, so for encoders it refers to the
 						output data and for decoders the input data.
 						Not writable.
+	@constant		kAudioCodecPropertyPacketSizeLimitForVBR
+                        A UInt32 indicating the maximum number of bits in an output packet of an encoder.
+                        The output packet size will not exceed this number. The size should be smaller 
+                        than kAudioCodecPropertyMaximumPacketByteSize. This property will configure the 
+                        encoder to VBR mode with the highest VBR quality that can maintain the packet 
+                        size limit. kAudioCodecPropertySoundQualityForVBR can be used to retrieve the 
+                        quality setting that will be used given that packet size limit.
+                        Writeable if supported.
 	@constant		kAudioCodecPropertyCurrentInputFormat
 						An AudioStreamBasicDescription describing the format the codec
 						expects its input data in
@@ -349,6 +355,11 @@ enum
 						This property is only relevant to encoders.
 						See also kAudioCodecPropertyAvailableBitRateRange.
 						Not writable.
+    @constant		kAudioCodecPropertyRecommendedBitRateRange
+                        An array of AudioValueRange indicating the recommended bit rates
+                        at given sample rate.
+                        This property is only relevant to encoders.
+                        Not writable.
 	@constant		kAudioCodecPropertyApplicableInputSampleRates
 						An array of AudioValueRange indicating the valid ranges for the
 						input sample rate of the codec for the current bit rate. 
@@ -421,13 +432,39 @@ enum
     @constant		kAudioCodecPropertyDelayMode
                         A UInt32 specifying the delay mode. See enum below.                        
                         Encoders only, writable if supported.
- */
+	@constant		kAudioCodecPropertyAdjustLocalQuality
+						An SInt32 number in the range [-128, 127] to allow encoding quality adjustements on a packet by packet basis.
+						This property can be set on an initialized encoder object without having to uninitialize and re-intialize it
+						and allows to adjust the encoder quality level for every packet. This is useful for packets streamed over
+						unreliable IP networks where the encoder needs to adapt immediately to network condition changes.
+						Escape property ID's start with a '^' symbol as the first char code. This bypasses the initilization check.
+    @constant		kAudioCodecPropertyProgramTargetLevel
+						A Float32 specifying the program target level in dB FS for decoders.
+						Supported target levels are in the range of -31.0 to -20.0dB.
+						This property controls the decoding of broadcast loudness
+						normalization metadata with goal of achieving consistent loudness across various
+						programs. The property complies with the target level defined in the MPEG Audio
+						standard ISO/IEC 14496-3. It will override kAudioCodecPropertyProgramTargetLevelConstant.
+	@constant		kAudioCodecPropertyProgramTargetLevelConstant
+						A UInt32 specifying the program target level constant in dB FS (Full Scale) for decoders.
+						Supported target levels are defined as enum with the prefix kProgramTargetLevel
+						(see below). This property controls the decoding of broadcast loudness
+						normalization metadata with the goal of achieving consistent loudness across various
+						programs. The property complies with the target level defined in the MPEG Audio
+						standard ISO/IEC 14496-3. The default is kProgramTargetLevel_None.
+    @constant		kAudioCodecPropertyDynamicRangeControlMode
+						A UInt32 specifying the DRC mode. Supported modes are defined as enum with the
+						prefix kDynamicRangeControlMode (see below). This property controls which
+						dynamic range compression scheme is applied if the information is present in
+						the bitstream. The default is kDynamicRangeControlMode_None.
+*/
 enum
 {
 	kAudioCodecPropertyInputBufferSize											= 'tbuf',
 	kAudioCodecPropertyPacketFrameSize											= 'pakf',
 	kAudioCodecPropertyHasVariablePacketByteSizes								= 'vpk?',
 	kAudioCodecPropertyMaximumPacketByteSize									= 'pakb',
+    kAudioCodecPropertyPacketSizeLimitForVBR                                    = 'pakl',
 	kAudioCodecPropertyCurrentInputFormat										= 'ifmt',
 	kAudioCodecPropertyCurrentOutputFormat										= 'ofmt',
 	kAudioCodecPropertyMagicCookie												= 'kuki',
@@ -437,7 +474,8 @@ enum
   	kAudioCodecPropertyCurrentInputSampleRate									= 'cisr',
   	kAudioCodecPropertyCurrentOutputSampleRate									= 'cosr',
 	kAudioCodecPropertyQualitySetting											= 'srcq',
-	kAudioCodecPropertyApplicableBitRateRange									= 'brta',	
+	kAudioCodecPropertyApplicableBitRateRange									= 'brta',
+    kAudioCodecPropertyRecommendedBitRateRange                                  = 'brtr',
 	kAudioCodecPropertyApplicableInputSampleRates								= 'isra',	
 	kAudioCodecPropertyApplicableOutputSampleRates								= 'osra',
 	kAudioCodecPropertyPaddedZeros												= 'pad0',
@@ -449,7 +487,11 @@ enum
 	kAudioCodecPropertyFormatList												= 'acfl',
 	kAudioCodecPropertyBitRateControlMode										= 'acbf',
 	kAudioCodecPropertySoundQualityForVBR										= 'vbrq',
-	kAudioCodecPropertyDelayMode                                                = 'dmod'
+	kAudioCodecPropertyDelayMode                                                = 'dmod',
+    kAudioCodecPropertyAdjustLocalQuality										= '^qal',
+    kAudioCodecPropertyProgramTargetLevel										= 'pptl',
+    kAudioCodecPropertyDynamicRangeControlMode									= 'mdrc',
+    kAudioCodecPropertyProgramTargetLevelConstant								= 'ptlc',
 };
 
 
@@ -553,12 +595,50 @@ enum
     @constant		kAudioCodecDelayMode_Optimal
                         In this mode, the resulting bitstream has the minimum amount of priming necessary for the decoder.
                         For aac this number is 1024 which corresponds to exactly one packet.
- */
+*/
 enum
 {
     kAudioCodecDelayMode_Compatibility  = 0,
     kAudioCodecDelayMode_Minimum        = 1,
     kAudioCodecDelayMode_Optimal        = 2
+};
+
+/*!
+	@enum			ProgramTargetLevel
+
+	@discussion		Constants to be used with kAudioCodecPropertyProgramTargetLevelConstant
+
+	@constant		kProgramTargetLevel_None
+						
+	@constant		kProgramTargetLevel_Minus31dB
+	@constant		kProgramTargetLevel_Minus23dB
+	@constant		kProgramTargetLevel_Minus20dB
+*/
+enum
+{
+	kProgramTargetLevel_None		= 0,
+	kProgramTargetLevel_Minus31dB	= 1,
+	kProgramTargetLevel_Minus23dB	= 2,
+	kProgramTargetLevel_Minus20dB	= 3
+};
+    
+/*!
+	@enum			DynamicRangeControlMode
+
+	@discussion		Constants to be used with kAudioCodecPropertyDynamicRangeControlMode
+
+	@constant		kDynamicRangeControlMode_None
+						Dynamic range compression disabled
+	@constant		kDynamicRangeControlMode_Light
+						Light compression according to MPEG-Audio ISO/IEC 14496
+	@constant		kDynamicRangeControlMode_Heavy
+						Heavy compression according to ETSI TS 101 154
+*/
+enum
+{
+	kDynamicRangeControlMode_None	= 0,
+	kDynamicRangeControlMode_Light	= 1,
+	kDynamicRangeControlMode_Heavy	= 2
 };
 
 /*!
@@ -941,7 +1021,7 @@ AudioCodecAppendInputBufferList(	AudioCodec							inCodec,
 									UInt32*								ioNumberPackets,
 									const AudioStreamPacketDescription*	inPacketDescription,
 									UInt32*								outBytesConsumed)
-																		__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_NA);
+																		__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 extern OSStatus
 AudioCodecProduceOutputBufferList(	AudioCodec						inCodec,
@@ -949,7 +1029,7 @@ AudioCodecProduceOutputBufferList(	AudioCodec						inCodec,
 									UInt32*							ioNumberPackets,
 									AudioStreamPacketDescription*	outPacketDescription,
 									UInt32*							outStatus)
-																		__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_NA);
+																		__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!
 	@function		AudioCodecReset
@@ -1012,7 +1092,7 @@ typedef OSStatus
 /*!
     @enum		AudioCodecProperty
     @deprecated
- 
+
     @constant	kAudioCodecPropertyMinimumDelayMode
                     A UInt32 equal 1 sets the encoder, where applicable, in it's lowest possible delay mode. An encoder
                     may prepend zero valued samples to the input signal in order to make additional delays, like e.g.

@@ -3,7 +3,7 @@
  
      Contains:   QuickTime Error codes.
  
-     Version:    QuickTime 7.7.1
+     Version:    QuickTime 7.7.3
  
      Copyright:  © 1999-2012 by Apple Inc., all rights reserved.
  
@@ -11,8 +11,15 @@
                  the World Wide Web:
  
                      http://developer.apple.com/bugreporter/
- 
 */
+
+/*
+  QuickTime has been deprecated in 10.9.
+
+  AVFoundation and AVKit are the frameworks recommended for all new development 
+  involving time-based audiovisual media on OS X.
+*/
+
 #ifndef __QUICKTIMEERRORS__
 #define __QUICKTIMEERRORS__
 

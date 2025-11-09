@@ -2,13 +2,29 @@
  *  AXAttributeConstants.h
  *  HIServices
  *
- *  Created by John Louch on Wed Feb 25 2004.
- *  Copyright (c) 2004, 2006 Apple Computer, Inc. All rights reserved.
+ *  Copyright (c) 2004, 2006, 2012 Apple Inc. All rights reserved.
  *
  */
 
 #ifndef __AXATTRIBUTECONSTANTS__
 #define __AXATTRIBUTECONSTANTS__
+
+/*! @header AXAttributeConstants.h
+	@discussion Each UIElement has a set of attributes that assistive applications use to get information about the UIElement.
+	The list of attributes vary depending on the type of UIElement. The value of some attributes can be changed, while others cannot.
+	For example, changing the "value" attribute of a slider changes the slider's setting.
+
+	Attribute values are stored as Core Foundation types, CFTypeRefs, and are reference counted (CFRetain/CFRelease). Some attributes
+	have a particular type associated with them. For example, the "title" attribute, if defined, always has a string value, regardless
+	of the type of UIElement from which it is obtained. A UIElement's "value" attribute, however, varies with the UIElement. For
+	example, a text field's value is a string whereas a checkbox's value is a boolean. You need to explictly test the returned objects,
+	using the CFGetTypeID function, for what type they really are.
+
+	Finally, some attribute values hold simple structures, such as CGPoint and CGRect, instead of regular CFTypes. These are still passed
+	between the target and assistive application as CFTypeRefs, but they merely wrap an encoded version of the structure. You need to use
+	the functions AXValueCreate and AXValueGetValue to convert between the structures and CFTypeRefs. Each supported structure has an
+	AXValueType associated with it. The AXValueGetType function returns the AXValueType of the structure contained within a CFTypeRef.
+*/
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /* Attributes                                                                           */
@@ -153,41 +169,52 @@
 	kAXFocusedApplicationAttribute
 */
 
+/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+/*! @group Informational Attributes                                                     */
+/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+/*!	
+	@defined kAXRoleAttribute
 
-/*
-	kAXRoleAttribute
-	
+	@abstract
 	Identifies the basic type of an element.
 	
-	Value: A CFStringRef of one of the role strings defined in this header, or a new
+	@attributeblock Value
+	A CFStringRef of one of the role strings defined in this header, or a new
 	role string of your own invention. The string should not be localized, and it does
 	not need to be human-readable. Instead of inventing new role strings, see if a
 	custom element can be identified by an existing role string and a new subrole. See
 	kAXSubroleAttribute.
 	
-	Writable? No.
+	@attributeblock Writable
+	No
 	
+	@discussion
 	Required for all elements. Even in the worst case scenario where an element cannot
 	figure out what its basic type is, it can still supply the value kAXUnknownRole.
 	
-	Carbon Accessorization Notes: If your HIObjectClass or Carbon Event handler provides
+	@attributeblock Carbon Accessorization Notes
+	If your HIObjectClass or Carbon Event handler provides
 	the kAXRoleAttribute, it must also provide the kAXRoleDescriptionAttribute.
 */
 #define kAXRoleAttribute				CFSTR("AXRole")
 
 
-/*
-	kAXSubroleAttribute
+/*!
+	@defined kAXSubroleAttribute
 	
+	@abstract
 	More specifically identifies the type of an element beyond the basic type provided
 	by kAXRoleAttribute.
 	
-	Value: A CFStringRef of one of the subrole strings defined in this header, or a new
+	@attributeblock Value
+	A CFStringRef of one of the subrole strings defined in this header, or a new
 	subrole string of your own invention. The string should not be localized, and it does
 	not need to be human-readable.
 	
-	Writable? No.
+	@attributeblock Writable
+	No
 	
+	@discussion
 	Required only when an element's kAXRoleAttribute alone doesn't provide an assistive
 	application with enough information to convey the meaning of this element to the user.
 	
@@ -198,15 +225,17 @@
 	was given a subrole in order to allow an assistive app to communicate the close box's
 	semantic difference to the user.
 	
-	Carbon Accessorization Notes: If your HIObjectClass or Carbon Event handler provides
+	@attributeblock Carbon Accessorization Notes
+	If your HIObjectClass or Carbon Event handler provides
 	the kAXSubroleAttribute, it must also provide the kAXRoleDescriptionAttribute.
 */
 #define kAXSubroleAttribute				CFSTR("AXSubrole")
 
 
-/*
-	kAXRoleDescriptionAttribute
+/*!
+	@defined kAXRoleDescriptionAttribute
 	
+	@discussion
 	A localized, human-readable string that an assistive application can present to the user
 	as an explanation of an element's basic type or purpose. Examples would be "push button"
 	or "secure text field". The string's language should match the language of the app that
@@ -215,65 +244,80 @@
 	Two elements with the same kAXRoleAttribute and kAXSubroleAttribute should have the
 	same kAXRoleDescriptionAttribute.
 	
-	Value: A localized, human-readable CFStringRef.
+	@attributeblock Value
+	A localized, human-readable CFStringRef
 	
-	Writable? No.
+	@attributeblock Writable
+	No
 	
-	Required for all elements. Even in the worst case scenario where an element cannot
+	@abstract Required for all elements. Even in the worst case scenario where an element cannot
 	figure out what its basic type is, it can still supply the value "unknown".
 	
-	Carbon Accessorization Notes: The HIObjectClass or Carbon Event handler that provides
+	@attributeblock Carbon Accessorization Notes
+	The HIObjectClass or Carbon Event handler that provides
 	the AXRole and/or AXSubrole for an element is the one that must also handle the
 	AXRoleDescription attribute. If an HIObjectClass or Carbon Event handler does not
 	provide either the AXRole or AXSubrole, it must not provide the AXRoleDescription.
 */
 #define kAXRoleDescriptionAttribute			CFSTR("AXRoleDescription")
 
-
-/*
-	kAXHelpAttribute
-	
-	A localized, human-readable CFStringRef that offers help content for an element.
+/*!
+	@define kAXHelpAttribute
+	@abstract A localized, human-readable CFStringRef that offers help content for an element.
+	@discussion
 	This is often the same information that would be provided in a help tag for the element.
 	
-	Value: A localized, human-readable CFStringRef.
-	
-	Writable? No.
-	
 	Recommended for any element that has help data available.
+	
+	@attributeblock Value
+	A localized, human-readable CFStringRef.
+	
+	@attributeblock Writable
+	No.
 */
 #define kAXHelpAttribute				CFSTR("AXHelp")
 
+/*!
+	@defined kAXTitleAttribute
 
-/*
-	kAXTitleAttribute
-	
+	@discussion
 	The localized, human-readable string that is displayed as part of the element's
-	normal visual interface. For example, a OK button's kAXTitleElement is the string
+	normal visual interface. For example, an OK button's kAXTitleElement is the string
 	"OK", and a menu item's kAXTitleElement is the text of the menu item.
 	
-	Value: A localized, human-readable CFStringRef.
-	
-	Writable? No.
-	
 	Required if the element draws a string as part of its normal visual interface.
+	
+	@attributeblock Value
+	A localized, human-readable CFStringRef
+	
+	@attributeblock Writable
+	No
+	
 */
 #define kAXTitleAttribute				CFSTR("AXTitle")
 
+/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+/*! @group Value Attributes                                                             */
+/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+/*!
+	@defined kAXValueAttribute
 
-/*
-	kAXValueAttribute
-	
+	@discussion
 	A catch-all attribute that represents a user modifiable setting of an element. For
 	example, the contents of an editable text field, the position of a scroll bar thumb,
 	and whether a check box is checked are all communicated by the kAXValueAttribute of
 	their respective elements.
 	
-	Value: Varies, but will always be the same type for a given kind of element. Each
+	Required for many user manipulatable elements, or those whose value state conveys
+	important information.
+	
+	@attributeblock Value
+	Varies, but will always be the same type for a given kind of element. Each
 	role that offers kAXValueAttribute will specify the type of data that will be used
 	for its value.
 	
-	Writable? Generally yes. However, it does not need to be writable if some other form
+	@attributeblock Writable
+	Generally yes. However, it does not need to be writable if some other form
 	of direct manipulation is more appropriate for causing a value change. For example,
 	a kAXScrollBar's kAXValueAttribute is writable because it allows an efficient way
 	for the user to get to a specific position in the element being scrolled. By
@@ -287,8 +331,8 @@
 #define kAXValueAttribute				CFSTR("AXValue")
 
 
-/*
-    kAXValueDescriptionAttribute
+/*!
+    @define kAXValueDescriptionAttribute
     
     Used to supplement kAXValueAttribute.  This attribute returns a string description that best 
     describes the current value stored in kAXValueAttribute.  This is useful for things like
@@ -308,8 +352,8 @@
 #define kAXValueDescriptionAttribute    CFSTR("AXValueDescription")
 
 
-/*
-	kAXMinValueAttribute
+/*!
+	@define kAXMinValueAttribute
 	
 	Only used in conjunction with kAXValueAttribute and kAXMaxValueAttribute, this
 	attribute represents the minimum value that an element can display. This is useful
@@ -326,8 +370,8 @@
 #define kAXMinValueAttribute				CFSTR("AXMinValue")
 
 
-/*
-	kAXMaxValueAttribute
+/*!
+	@define kAXMaxValueAttribute
 	
 	Only used in conjunction with kAXValueAttribute and kAXMinValueAttribute, this
 	attribute represents the maximum value that an element can display. This is useful
@@ -344,8 +388,8 @@
 #define kAXMaxValueAttribute				CFSTR("AXMaxValue")
 
 
-/*
-	kAXValueIncrementAttribute
+/*!
+	@define kAXValueIncrementAttribute
 	
 	Only used in conjunction with kAXValueAttribute, this attribute represents the amount
 	a value will change in one action on the given element. In particular, it is used on
@@ -361,9 +405,7 @@
 #define kAXValueIncrementAttribute			CFSTR("AXValueIncrement")
 
 
-/*
-	kAXAllowedValuesAttribute
-	
+/*!
 	An array of the allowed values for a slider or other widget that displays
 	a large value range, but which can only be set to a small subset of values
 	within that range.
@@ -392,8 +434,8 @@
 #define kAXPlaceholderValueAttribute			CFSTR("AXPlaceholderValue")
 
 
-/*
-	kAXEnabledAttribute
+/*!
+	@define kAXEnabledAttribute
 	
 	Indicates whether the element can be interacted with by the user. For example,
 	a disabled push button's kAXEnabledAttribute will be false.
@@ -407,8 +449,8 @@
 #define kAXEnabledAttribute				CFSTR("AXEnabled")
 
 
-/*
-	kAXFocusedAttribute
+/*!
+	@define kAXFocusedAttribute
 	
 	Indicates whether the element is the current keyboard focus. It should be writable
 	for any element that can accept keyboard focus, though you can only set the value
@@ -426,8 +468,8 @@
 #define kAXFocusedAttribute				CFSTR("AXFocused")
 
 
-/*
-	kAXParentAttribute
+/*!
+	@define kAXParentAttribute
 	
 	Indicates the element's container element in the visual element hierarchy. A push
 	button's kAXParentElement might be a window element or a group. A sheet's
@@ -444,8 +486,8 @@
 #define kAXParentAttribute				CFSTR("AXParent")
 
 
-/*
-	kAXChildrenAttribute
+/*!
+	@define kAXChildrenAttribute
 	
 	Indicates the sub elements of a given element in the visual element hierarchy. A tab
 	group's kAXChildrenAttribute is an array of tab radio button elements. A window's
@@ -465,8 +507,8 @@
 #define kAXChildrenAttribute				CFSTR("AXChildren")
 
 
-/*
-	kAXSelectedChildrenAttribute
+/*!
+	@define kAXSelectedChildrenAttribute
 	
 	Indicates the selected sub elements of a given element in the visual element hierarchy.
 	This is a the subset of the element's kAXChildrenAttribute that are selected. This is
@@ -485,8 +527,8 @@
 #define kAXSelectedChildrenAttribute			CFSTR("AXSelectedChildren")
 
 
-/*
-	kAXVisibleChildrenAttribute
+/*!
+	@define kAXVisibleChildrenAttribute
 	
 	Indicates the visible sub elements of a given element in the visual element hierarchy.
 	This is a the subset of the element's kAXChildrenAttribute that a sighted user can
@@ -502,8 +544,8 @@
 #define kAXVisibleChildrenAttribute			CFSTR("AXVisibleChildren")
 
 
-/*
-	kAXWindowAttribute
+/*!
+	@define kAXWindowAttribute
 	
 	A short cut for traversing an element's parent hierarchy until an element of role
 	kAXWindowRole is found. Note that the value for kAXWindowAttribute should not be
@@ -520,8 +562,8 @@
 #define kAXWindowAttribute				CFSTR("AXWindow")
 
 
-/*
-	kAXTopLevelUIElementAttribute
+/*!
+	@define kAXTopLevelUIElementAttribute
 	
 	This is very much like the kAXWindowAttribute, except that the value of this
 	attribute can be an element with role kAXSheetRole or kAXDrawerRole. It is
@@ -538,8 +580,8 @@
 #define kAXTopLevelUIElementAttribute			CFSTR("AXTopLevelUIElement")
 
 
-/*
-	kAXPositionAttribute
+/*!
+	@define kAXPositionAttribute
 	
 	The global screen position of the top-left corner of an element.
 	
@@ -558,8 +600,8 @@
 #define kAXPositionAttribute				CFSTR("AXPosition")
 
 
-/*
-	kAXSizeAttribute
+/*!
+	@define kAXSizeAttribute
 	
 	The vertical and horizontal dimensions of the element.
 	
@@ -574,8 +616,8 @@
 #define kAXSizeAttribute				CFSTR("AXSize")
 
 
-/*
-	kAXOrientationAttribute
+/*!
+	@define kAXOrientationAttribute
 	
 	An indication of whether an element is drawn and/or interacted with in a
 	vertical or horizontal manner. Elements such as scroll bars and sliders offer
@@ -592,8 +634,8 @@
 #define kAXOrientationAttribute				CFSTR("AXOrientation")
 
 
-/*
-	kAXDescriptionAttribute
+/*!
+	@define kAXDescriptionAttribute
 	
 	A localized, human-readable string that indicates an element's purpose in a way
 	that is slightly more specific than the kAXRoleDescriptionAttribute, but which
@@ -613,8 +655,8 @@
 #define kAXDescription					CFSTR("AXDescription") // old name
 
 
-/*
-	kAXSelectedTextAttribute
+/*!
+	@define kAXSelectedTextAttribute
 	
 	The selected text of an editable text element.
 	
@@ -627,8 +669,8 @@
 #define kAXSelectedTextAttribute			CFSTR("AXSelectedText")
 
 
-/*
-	kAXSelectedTextRangeAttribute
+/*!
+	@define kAXSelectedTextRangeAttribute
 	
 	The range of characters (not bytes) that defines the current selection of an
 	editable text element.
@@ -641,8 +683,8 @@
 */
 #define kAXSelectedTextRangeAttribute			CFSTR("AXSelectedTextRange")
 
-/*
-	kAXSelectedTextRangesAttribute
+/*!
+	@define kAXSelectedTextRangesAttribute
 	
 	An array of noncontiguous ranges of characters (not bytes) that defines the current selections of an
 	editable text element.  
@@ -656,8 +698,8 @@
 #define kAXSelectedTextRangesAttribute			CFSTR("AXSelectedTextRanges")
 
 
-/*
-	kAXVisibleCharacterRangeAttribute
+/*!
+	@define kAXVisibleCharacterRangeAttribute
 	
 	The range of characters (not bytes) that are scrolled into view in the editable
 	text element.
@@ -673,8 +715,8 @@
 #define kAXVisibleCharacterRangeAttribute		CFSTR("AXVisibleCharacterRange")
 
 
-/*
-	kAXNumberOfCharactersAttribute
+/*!
+	@define kAXNumberOfCharactersAttribute
 	
 	The total number of characters (not bytes) in an editable text element.
 	
@@ -687,8 +729,8 @@
 #define kAXNumberOfCharactersAttribute			CFSTR("AXNumberOfCharacters")
 
 
-/*
-	kAXSharedTextUIElementsAttribute
+/*!
+	@define kAXSharedTextUIElementsAttribute
 	
 	Value: CFArrayRef of AXUIElementRefs
 	
@@ -699,8 +741,8 @@
 #define kAXSharedTextUIElementsAttribute		CFSTR("AXSharedTextUIElements")
 
 
-/*
-	kAXSharedCharacterRangeAttribute
+/*!
+	@define kAXSharedCharacterRangeAttribute
 	
 	Value: AXValueRef of type kAXValueCFRangeType
 	
@@ -710,10 +752,13 @@
 */
 #define kAXSharedCharacterRangeAttribute		CFSTR("AXSharedCharacterRange")
 
+/*!
+	@define kAXInsertionPointLineNumberAttribute
+ */
 #define kAXInsertionPointLineNumberAttribute		CFSTR("AXInsertionPointLineNumber")
 
-/*
-	kAXMainAttribute
+/*!
+	@define kAXMainAttribute
 	
 	Whether a window is the main document window of an application. For an active
 	app, the main window is the single active document window. For an inactive app,
@@ -729,8 +774,8 @@
 #define kAXMainAttribute				CFSTR("AXMain")
 
 
-/*
-	kAXMinimizedAttribute
+/*!
+	@define kAXMinimizedAttribute
 	
 	Whether a window is currently minimized to the dock.
 	
@@ -743,8 +788,8 @@
 #define kAXMinimizedAttribute				CFSTR("AXMinimized")
 
 
-/*
-	kAXCloseButtonAttribute
+/*!
+	@define kAXCloseButtonAttribute
 	
 	A convenience attribute so assistive apps can quickly access a window's close
 	button element.
@@ -758,8 +803,8 @@
 #define kAXCloseButtonAttribute				CFSTR("AXCloseButton")
 
 
-/*
-	kAXZoomButtonAttribute
+/*!
+	@define kAXZoomButtonAttribute
 	
 	A convenience attribute so assistive apps can quickly access a window's zoom
 	button element.
@@ -773,8 +818,8 @@
 #define kAXZoomButtonAttribute				CFSTR("AXZoomButton")
 
 
-/*
-	kAXMinimizeButtonAttribute
+/*!
+	@define kAXMinimizeButtonAttribute
 	
 	A convenience attribute so assistive apps can quickly access a window's minimize
 	button element.
@@ -788,8 +833,8 @@
 #define kAXMinimizeButtonAttribute			CFSTR("AXMinimizeButton")
 
 
-/*
-	kAXToolbarButtonAttribute
+/*!
+	@define kAXToolbarButtonAttribute
 	
 	A convenience attribute so assistive apps can quickly access a window's toolbar
 	button element.
@@ -818,8 +863,8 @@
 #define kAXFullScreenButtonAttribute			CFSTR("AXFullScreenButton")
 
 
-/*
-	kAXProxyAttribute
+/*!
+	@define kAXProxyAttribute
 	
 	A convenience attribute so assistive apps can quickly access a window's document
 	proxy element.
@@ -833,8 +878,8 @@
 #define kAXProxyAttribute				CFSTR("AXProxy")
 
 
-/*
-	kAXGrowAreaAttribute
+/*!
+	@define kAXGrowAreaAttribute
 	
 	A convenience attribute so assistive apps can quickly access a window's grow
 	area element.
@@ -848,8 +893,8 @@
 #define kAXGrowAreaAttribute				CFSTR("AXGrowArea")
 
 
-/*
-	kAXModalAttribute
+/*!
+	@define kAXModalAttribute
 	
 	Whether a window is modal.
 	
@@ -862,8 +907,8 @@
 #define kAXModalAttribute				CFSTR("AXModal")
 
 
-/*
-	kAXDefaultButtonAttribute
+/*!
+	@define kAXDefaultButtonAttribute
 	
 	A convenience attribute so assistive apps can quickly access a window's default
 	button element, if any.
@@ -877,8 +922,8 @@
 #define kAXDefaultButtonAttribute			CFSTR("AXDefaultButton")
 
 
-/*
-	kAXCancelButtonAttribute
+/*!
+	@define kAXCancelButtonAttribute
 	
 	A convenience attribute so assistive apps can quickly access a window's cancel
 	button element, if any.
@@ -899,6 +944,18 @@
 #define kAXMenuItemMarkCharAttribute			CFSTR("AXMenuItemMarkChar")
 #define kAXMenuItemPrimaryUIElementAttribute		CFSTR("AXMenuItemPrimaryUIElement")
 
+/*! @typedef AXMenuItemModifiers
+      @abstract Values that indicate the keyboard shortcut modifiers for a menu item (used with the {@link kAXMenuItemCmdModifiersAttribute} attribute).
+ */    
+enum {
+    kAXMenuItemModifierNone         = 0,        /* Mask for no modifiers other than the command key (which is used by default) */
+    kAXMenuItemModifierShift        = (1 << 0), /* Mask for shift key modifier */
+    kAXMenuItemModifierOption       = (1 << 1), /* Mask for option key modifier */
+    kAXMenuItemModifierControl      = (1 << 2), /* Mask for control key modifier */
+    kAXMenuItemModifierNoCommand    = (1 << 3)  /* Mask for no modifiers at all, not even the command key */
+};
+typedef UInt32 AXMenuItemModifiers;
+
 // application-specific attributes
 #define kAXMenuBarAttribute				CFSTR("AXMenuBar")
 #define kAXWindowsAttribute				CFSTR("AXWindows")
@@ -909,8 +966,8 @@
 #define kAXFocusedUIElementAttribute			CFSTR("AXFocusedUIElement") 
 #define kAXExtrasMenuBarAttribute			CFSTR("AXExtrasMenuBar")
 
-/*
-	kAXHeaderAttribute
+/*!
+	@define kAXHeaderAttribute
 	
 	A convenience attribute whose value is an element that is a header for another
 	element. For example, an outline element has a header attribute whose value is
@@ -943,8 +1000,8 @@
 #define kAXPreviousContentsAttribute			CFSTR("AXPreviousContents")
 
 
-/*
-	kAXContentsAttribute
+/*!
+	@define kAXContentsAttribute
 	
 	A convenience attribute so assistive apps can find interesting child elements
 	of a given element, while at the same time avoiding non-interesting child
@@ -962,8 +1019,8 @@
 #define kAXContentsAttribute				CFSTR("AXContents")
 
 
-/*
-	kAXIncrementorAttribute
+/*!
+	@define kAXIncrementorAttribute
 	
 	Convenience attribute that yields the incrementor of a time field or date
 	field element.
@@ -977,8 +1034,8 @@
 #define kAXIncrementorAttribute				CFSTR("AXIncrementor")
 
 
-/*
-	kAXHourFieldAttribute
+/*!
+	@define kAXHourFieldAttribute
 	
 	Convenience attribute that yields the hour field of a time field element.
 	
@@ -992,8 +1049,8 @@
 #define kAXHourFieldAttribute				CFSTR("AXHourField")
 
 
-/*
-	kAXMinuteFieldAttribute
+/*!
+	@define kAXMinuteFieldAttribute
 	
 	Convenience attribute that yields the minute field of a time field element.
 	
@@ -1007,8 +1064,8 @@
 #define kAXMinuteFieldAttribute				CFSTR("AXMinuteField")
 
 
-/*
-	kAXSecondFieldAttribute
+/*!
+	@define kAXSecondFieldAttribute
 	
 	Convenience attribute that yields the seconds field of a time field element.
 	
@@ -1022,8 +1079,8 @@
 #define kAXSecondFieldAttribute				CFSTR("AXSecondField")
 
 
-/*
-	kAXAMPMFieldAttribute
+/*!
+	@define kAXAMPMFieldAttribute
 	
 	Convenience attribute that yields the AM/PM field of a time field element.
 	
@@ -1037,8 +1094,8 @@
 #define kAXAMPMFieldAttribute				CFSTR("AXAMPMField")
 
 
-/*
-	kAXDayFieldAttribute
+/*!
+	@define kAXDayFieldAttribute
 	
 	Convenience attribute that yields the day field of a date field element.
 	
@@ -1052,8 +1109,8 @@
 #define kAXDayFieldAttribute				CFSTR("AXDayField")
 
 
-/*
-	kAXMonthFieldAttribute
+/*!
+	@define kAXMonthFieldAttribute
 	
 	Convenience attribute that yields the month field of a date field element.
 	
@@ -1067,8 +1124,8 @@
 #define kAXMonthFieldAttribute				CFSTR("AXMonthField")
 
 
-/*
-	kAXYearFieldAttribute
+/*!
+	@define kAXYearFieldAttribute
 	
 	Convenience attribute that yields the year field of a date field element.
 	
@@ -1082,14 +1139,14 @@
 #define kAXYearFieldAttribute				CFSTR("AXYearField")
 
 
-/*
-	kAXColumnTitleAttribute
+/*!
+	@define kAXColumnTitleAttribute
 */
 #define kAXColumnTitleAttribute				CFSTR("AXColumnTitles")
 
 
-/*
-	kAXURLAttribute
+/*!
+	@define kAXURLAttribute
 	
 	Value: A CFURLRef.
 	
@@ -1111,8 +1168,8 @@
 #define kAXColumnsAttribute				CFSTR("AXColumns")
 
 
-/*
-	kAXVisibleColumnsAttribute
+/*!
+	@define kAXVisibleColumnsAttribute
 	
 	Indicates the visible column sub-elements of a kAXBrowserRole element.
 	This is the subset of a browser's kAXColumnsAttribute where each column in the
@@ -1198,7 +1255,7 @@
 
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
-/* Parameterized Attributes                                                             */
+/*! @group Parameterized Attributes                                                     */
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 
 // Text Suite Parameterized Attributes

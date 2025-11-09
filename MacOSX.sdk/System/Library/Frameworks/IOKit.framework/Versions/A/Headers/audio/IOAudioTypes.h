@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2012 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2013 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  *
@@ -25,7 +25,6 @@
 
 #include <libkern/OSTypes.h>
 #include <mach/message.h>
-#include <device/device_types.h>
 
 
 /*!

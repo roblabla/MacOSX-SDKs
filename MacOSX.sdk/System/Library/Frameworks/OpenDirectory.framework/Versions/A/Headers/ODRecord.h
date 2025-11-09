@@ -71,7 +71,7 @@
     @discussion Returns a dictionary containing the password policy for the record if available.  If no policy for record
                 nil will be returned.  outError is optional parameter, nil can be passed if error details are not needed.
 */
-- (NSDictionary *)passwordPolicyAndReturnError:(NSError **)outError NS_AVAILABLE(10_6, NA);
+- (NSDictionary *)passwordPolicyAndReturnError:(NSError **)outError __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_6, __MAC_10_9, __IPHONE_NA, __IPHONE_NA, "use effectivePoliciesAndReturnError");
 
 /*!
     @method     verifyPassword:error:
@@ -184,6 +184,50 @@
                 released after deletion.  outError is optional parameter, nil can be passed if error details are not needed.
 */
 - (BOOL)deleteRecordAndReturnError:(NSError **)outError NS_AVAILABLE(10_6, NA);
+
+/*!
+    @method     policiesAndReturnError:
+    @abstract   This will copy any policies configured for the record.
+    @discussion This will copy any policies configured for the record.
+*/
+- (NSDictionary *)policiesAndReturnError:(NSError **)error __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+
+/*!
+    @method     effectivePoliciesAndReturnError:
+    @abstract   This will copy any policies configured for the record.
+    @discussion This will copy any policies configured for the record.
+*/
+- (NSDictionary *)effectivePoliciesAndReturnError:(NSError **)error __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+
+/*!
+    @function   supportedPoliciesAndReturnError:
+    @abstract   This will return a dictionary of supported policies.
+    @discussion This will return a dictionary of supported policies, if appropriate, the value will be the maximum value allowed
+                for the policy in question.  For example, if password history is available, it will state how much history is
+                supported.
+*/
+- (NSDictionary *)supportedPoliciesAndReturnError:(NSError **)error __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+
+/*!
+    @function   setPolicies:error:
+    @abstract   This will set the policy for the record.
+    @discussion This will set the policy for the record.  Policies are evaluated in combination with node-level policies.
+*/
+- (BOOL)setPolicies:(NSDictionary *)policies error:(NSError **)error __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+
+/*!
+    @function   setPolicy:value:error:
+    @abstract   This will set a specific policy setting for the record.
+    @discussion This will set a specific policy setting for the record.
+*/
+- (BOOL)setPolicy:(ODPolicyType)policy value:(id)value error:(NSError **)error __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+
+/*!
+    @function   removePolicy:error:
+    @abstract   This will remove a specific policy setting from the record.
+    @discussion This will remove a specific policy setting from the record.
+*/
+- (BOOL)removePolicy:(ODPolicyType)policy error:(NSError **)error __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
 
 @end
 

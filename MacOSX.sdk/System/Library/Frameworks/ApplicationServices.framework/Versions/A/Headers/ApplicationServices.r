@@ -3,9 +3,7 @@
  
      Contains:   Master include for ApplicationServices public framework
  
-     Version:    ApplicationServices-master~1
- 
-     Copyright:  © 2000-2008 by Apple Computer, Inc., all rights reserved.
+     Copyright:  (c) 2000-2012 by Apple Inc. All rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -21,10 +19,6 @@
 #include <CoreServices/CoreServices.r>
 #endif
 
-#ifndef __QD_R__
-#include <QD/QD.r>
-#endif
-
 #ifndef __HISERVICES_R__
 #include <HIServices/HIServices.r>
 #endif
@@ -33,6 +27,8 @@
 #include <PrintCore/PrintCore.r>
 #endif
 
+#ifndef __QD_R__
+#include <QD/QD.r>
+#endif
 
 #endif /* __APPLICATIONSERVICES_R__ */
-

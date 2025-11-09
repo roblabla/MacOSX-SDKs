@@ -1,7 +1,7 @@
 /*
 	NSComboBoxCell.h
 	Application Kit
-	Copyright (c) 1996-2012, Apple Inc.
+	Copyright (c) 1996-2013, Apple Inc.
 	All rights reserved.
 */
 

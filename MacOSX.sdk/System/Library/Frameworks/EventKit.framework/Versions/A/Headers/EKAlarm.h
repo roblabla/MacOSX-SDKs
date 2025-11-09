@@ -101,7 +101,10 @@ EVENTKIT_CLASS_AVAILABLE(10_8, 4_0)
     @abstract   The URL to open when the alarm triggers.
     @discussion When you set the url property, the action property is set to EKAlarmTypeProcedure, 
                 and the emailAddress and soundName properties are set to nil.
+                Note: Starting with OS X 10.9, it is not possible to create new procedure alarms or view URLs for existing procedure alarms.
+                Trying to save or modify a procedure alarm will result in a save error.  
+                Editing other aspects of events or reminders that have existing procedure alarms is allowed as long as the alarm isn't modified.
  */
-@property(nonatomic, copy) NSURL *url __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
+@property(nonatomic, copy) NSURL *url __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_8, __MAC_10_9, __IPHONE_NA, __IPHONE_NA);
 
 @end

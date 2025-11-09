@@ -46,7 +46,7 @@ enum {
     kCCWRAPAES = 1,
 };
 
-extern const uint8_t *CCrfc3394_iv  __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_5_0);
+extern const uint8_t * const CCrfc3394_iv  __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_5_0);
 extern const size_t CCrfc3394_ivLen  __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_5_0);
 
 typedef uint32_t CCWrappingAlgorithm;
@@ -99,6 +99,7 @@ CCSymmetricKeyWrap( CCWrappingAlgorithm algorithm,
  @param ivLen           The length of the initialization value to be used.  
                         CCrfc3394_ivLen is available as a constant for the 
                         standard IV to use.
+ @param kek             The Key Encryption Key to be used to unwrap the raw key.
  @param kekLen          The length of the KEK in bytes.
  @param wrappedKey      The wrapped key bytes.
  @param wrappedKeyLen   The length of the wrapped key in bytes.

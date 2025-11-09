@@ -103,6 +103,7 @@
       glDrawArrays(GL_TRIANGLE_STRIP, 0, vertCt);
 */
 
+NS_CLASS_AVAILABLE(10_8, 5_0)
 @interface GLKBaseEffect : NSObject <GLKNamedEffect>
 {
     @protected

@@ -351,7 +351,8 @@ QL_EXPORT Boolean QLPreviewRequestIsCancelled(QLPreviewRequestRef preview);
  * @param contentTypeUTI The contentTypeUTI for the preview representation.
  * @param properties Additional properties for the preview response.
  * @discussion Currently supported UTIs are: kUTTypeImage, kUTTypePDF, kUTTypeHTML,
- *             kUTTypeXML, kUTTypePlainText, kUTTypeRTF, kUTTypeMovie, kUTTypeAudio
+ *             kUTTypeXML, kUTTypePlainText, kUTTypeRTF, kUTTypeMovie, kUTTypeAudio,
+ *             and "org.khronos.collada.digital-asset-exchange" (from OSX 10.9)
  */
 QL_EXPORT void QLPreviewRequestSetDataRepresentation(QLPreviewRequestRef preview, CFDataRef data, CFStringRef contentTypeUTI, CFDictionaryRef properties);
 
@@ -362,7 +363,9 @@ QL_EXPORT void QLPreviewRequestSetDataRepresentation(QLPreviewRequestRef preview
  *      @param url The url to the preview response.
  *      @param contentTypeUTI The contentTypeUTI for the preview representation.
  *      @param properties Additional properties for the preview response.
- *      @discussion Currently supported UTIs are: kUTTypeImage, kUTTypePDF, kUTTypeHTML, kUTTypeXML, kUTTypePlainText, kUTTypeRTF, kUTTypeRTFD, kUTTypeMovie, kUTTypeAudio
+ *      @discussion Currently supported UTIs are: kUTTypeImage, kUTTypePDF, kUTTypeHTML,
+ *                  kUTTypeXML, kUTTypePlainText, kUTTypeRTF, kUTTypeRTFD, kUTTypeMovie, kUTTypeAudio,
+ *                  and "org.khronos.collada.digital-asset-exchange" (from OSX 10.9)
  */
 QL_EXPORT void QLPreviewRequestSetURLRepresentation(QLPreviewRequestRef preview, CFURLRef url, CFStringRef contentTypeUTI, CFDictionaryRef properties);
 

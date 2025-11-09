@@ -19,7 +19,7 @@
  * @class
  * @abstract Encapsulates an immutable network profile entry.
  */
-@interface CWNetworkProfile : NSObject <NSCopying, NSMutableCopying, NSCoding> {
+@interface CWNetworkProfile : NSObject <NSCopying, NSMutableCopying, NSSecureCoding> {
 @private
 	NSDictionary *_info;
 @protected
@@ -30,10 +30,16 @@
 	BOOL _systemMode;
 	BOOL _hiddenNetwork;
 	NSDate *_lastConnected;
-	CWNetwork *_cachedNetwork;
 	BOOL _captiveNetwork;
 	BOOL _temporarilyDisabled;
     BOOL _autoLogin;
+    BOOL _isPasspoint;
+    NSString *_domainName;
+    NSString *_displayName;
+    NSArray *_roamingConsortiumList;
+    NSArray *_naiRealmList;
+    BOOL _isServiceProviderRoamingEnabled;
+    BOOL _possiblyHiddenNetwork;
 }
 
 /*!

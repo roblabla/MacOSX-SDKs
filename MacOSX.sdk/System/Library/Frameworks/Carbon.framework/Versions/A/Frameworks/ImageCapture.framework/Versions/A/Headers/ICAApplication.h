@@ -130,7 +130,8 @@ enum
     kICADeviceUnsupportedErr            = -9918,
     kICAFrameworkInternalErr            = -9919,
     kICAExtensionInternalErr            = -9920,
-    kICAInvalidSessionErr               = -9921
+    kICAInvalidSessionErr               = -9921,
+    kICASandboxViolation                = -9922
 };
 
 //------------------------------------------------------------------------------------------------- ICAObject types and subtypes

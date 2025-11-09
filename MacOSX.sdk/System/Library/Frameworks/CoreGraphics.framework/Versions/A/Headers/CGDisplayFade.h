@@ -131,6 +131,6 @@ CG_EXTERN CGError CGDisplayFade(CGDisplayFadeReservationToken token,
    otherwise. */
 
 CG_EXTERN boolean_t CGDisplayFadeOperationInProgress(void)
-  CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+  CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_9, __IPHONE_NA, __IPHONE_NA);
 
 #endif /* CGDISPLAYFADE_H_ */

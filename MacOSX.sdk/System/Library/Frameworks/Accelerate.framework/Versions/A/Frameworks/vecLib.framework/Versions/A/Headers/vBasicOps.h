@@ -3,9 +3,9 @@
  
      Contains:   Basic Algebraic Operations for AltiVec
  
-     Version:    vecLib-380.6
+     Version:    vecLib-423.32
  
-     Copyright:  © 1999-2012 by Apple Computer, Inc., all rights reserved.
+     Copyright:  ï¿½ 1999-2013 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -37,6 +37,7 @@ extern "C" {
 
 #if defined(__ppc__) || defined(__ppc64__) || defined(__i386__) || defined(__x86_64__)
 #if defined _AltiVecPIMLanguageExtensionsAreEnabled || defined __SSE2__
+
 /*                                                                                  
   This section is a collection of algebraic functions that uses the AltiVec       
   instruction set, and is designed to facilitate vector processing in             
@@ -142,6 +143,16 @@ Following is a short description of functions in this section:
       Rotate2      Rotate by two factors( only apply to 64 bit operation )     
                                                                                  
 */
+
+// There are certain routines (namely vS64Add and vU64Add) with 1
+// instruction implementations. There is no point in having a function
+// call occur and then return after executing 1 instruction. Thus we
+// introduce this conditional define to allow for certain inline
+// attributes to be defined.
+#if defined __SSE2__
+#include <immintrin.h>
+#define __VBASICOPS_INLINE_ATTR__ __attribute__((__always_inline__, __nodebug__))
+#endif // defined __SSE2__
 
 
 /*
@@ -326,29 +337,50 @@ vS8HalfMultiply(
 /*
  *  vU16HalfMultiply()
  *  
+ *  Currently on Intel, we inline a one instruction implementation of vU16HalfMultiply.
+ *  An implementation is also exported in the library for legacy applications.
+ *
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in vecLib.framework
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
+#if defined __SSE2__
+static __inline__ vUInt16 __VBASICOPS_INLINE_ATTR__
+vU16HalfMultiply(
+  vUInt16   __vbasicops_vA,
+  vUInt16   __vbasicops_vB) { return _mm_mullo_epi16(__vbasicops_vA, __vbasicops_vB); }
+#else // defined __SSE2__
 extern vUInt16 
 vU16HalfMultiply(
   vUInt16   vA,
   vUInt16   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+#endif // defined __SSE2__
 
 
 /*
  *  vS16HalfMultiply()
  *  
+ *  On Intel, this function has a one instruction implementation that we inline. An
+ *  implementation is also available via an exported symbol in the library for legacy
+ *  applications.
+ *
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in vecLib.framework
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
+#if defined __SSE2__
+static __inline__ vSInt16 __VBASICOPS_INLINE_ATTR__
+vS16HalfMultiply(
+  vSInt16   __vbasicops_vA,
+  vSInt16   __vbasicops_vB) { return _mm_mullo_epi16(__vbasicops_vA, __vbasicops_vB); }
+#else // defined __SSE2__
 extern vSInt16 
 vS16HalfMultiply(
   vSInt16   vA,
   vSInt16   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+#endif // defined __SSE2__
 
 
 /*
@@ -382,29 +414,55 @@ vS32HalfMultiply(
 /*
  *  vU32FullMulEven()
  *  
+ *  Currently we use a 3 instruction inlined implementation for vU32FullMulEven
+ *  on Intel. Note that for legacy applications, there is still a compiled 
+ *  implementation available in the library via an exported symbol.
+ *
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in vecLib.framework
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
+#if defined (__SSE2__)
+static __inline__ vUInt32 __VBASICOPS_INLINE_ATTR__
+vU32FullMulEven(
+  vUInt32   __vbasicops_vA,
+  vUInt32   __vbasicops_vB)
+{
+    __vbasicops_vA = _mm_srli_epi64(__vbasicops_vA, 32);
+    __vbasicops_vB = _mm_srli_epi64(__vbasicops_vB, 32);
+    return _mm_mul_epu32(__vbasicops_vA, __vbasicops_vB);
+}
+#else // defined __SSE2__
 extern vUInt32 
 vU32FullMulEven(
   vUInt32   vA,
   vUInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+#endif // defined __SSE2__
 
 
 /*
  *  vU32FullMulOdd()
  *  
+ *  Currently on Intel, we inline a one instruction implementation of vU32FullMulOdd.
+ *  An implementation is also exported in the library for legacy applications.
+ *
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in vecLib.framework
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
+#if defined __SSE2__
+static __inline__ vUInt32 __VBASICOPS_INLINE_ATTR__
+vU32FullMulOdd(
+  vUInt32   __vbasicops_vA,
+  vUInt32   __vbasicops_vB) { return _mm_mul_epu32(__vbasicops_vA, __vbasicops_vB); }
+#else // defined __SSE2__
 extern vUInt32 
 vU32FullMulOdd(
   vUInt32   vA,
   vUInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+#endif // defined __SSE2__
 
 
 /*
@@ -551,15 +609,29 @@ vS128HalfMultiply(
 /*
  *  vU64Sub()
  *  
+ *  When SSE2 code generation is enabled on Intel architectures,
+ *  vU64Sub has a single instruction implementation provided by an
+ *  inlined function. On other architectures, the extern declaration
+ *  will be provided and on all architectures, an exported vU64Sub
+ *  routine is provided. This ensures that legacy applications are
+ *  supported on Intel.
+ *
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in vecLib.framework
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
+#if defined __SSE2__
+static __inline__ vUInt32 __VBASICOPS_INLINE_ATTR__
+vU64Sub(
+  vUInt32   __vbasicops_vA,
+  vUInt32   __vbasicops_vB) { return _mm_sub_epi64(__vbasicops_vA, __vbasicops_vB); }
+#else
 extern vUInt32 
 vU64Sub(
   vUInt32   vA,
   vUInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+#endif
 
 
 /*
@@ -606,16 +678,30 @@ vU128SubS(
 
 /*
  *  vS64Sub()
- *  
+ *
+ *  When SSE2 code generation is enabled on Intel architectures,
+ *  vS64Sub has a single instruction implementation provided by an
+ *  inlined function. On other architectures, the extern declaration
+ *  will be provided and on all architectures, an exported vS64Sub
+ *  routine is provided. This ensures that legacy applications are
+ *  supported on Intel.
+ *
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in vecLib.framework
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
+#if defined __SSE2__
+static __inline__ vSInt32 __VBASICOPS_INLINE_ATTR__
+vS64Sub(
+  vSInt32   __vbasicops_vA,
+  vSInt32   __vbasicops_vB) { return _mm_sub_epi64(__vbasicops_vA, __vbasicops_vB); }
+#else
 extern vSInt32 
 vS64Sub(
   vSInt32   vA,
   vSInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+#endif
 
 
 /*
@@ -664,16 +750,25 @@ vS128SubS(
 /*
  *  vU64Add()
  *  
+ *  When SSE2 code generation is enabled on Intel architectures, single-instruction
+ *  implementations of vU64Add is inlined instead of making an external function call. 
+ * 
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in vecLib.framework
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vUInt32 
+#if defined (__SSE2__)
+static __inline__ vUInt32 __VBASICOPS_INLINE_ATTR__
+vU64Add(
+  vUInt32   __vbasicops_vA,
+  vUInt32   __vbasicops_vB) { return _mm_add_epi64(__vbasicops_vA, __vbasicops_vB); }
+#else
+extern vUInt32
 vU64Add(
   vUInt32   vA,
   vUInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
-
+#endif
 
 /*
  *  vU64AddS()
@@ -719,16 +814,26 @@ vU128AddS(
 
 /*
  *  vS64Add()
+ *
+ *  When SSE2 code generation is enabled on Intel architectures, single-instruction
+ *  implementations of vS64Add is inlined instead of making an external function call. 
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in vecLib.framework
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
+#if defined __SSE2__
+static __inline__ vSInt32 __VBASICOPS_INLINE_ATTR__
+vS64Add(
+  vSInt32   __vbasicops_vA,
+  vSInt32   __vbasicops_vB) { return _mm_add_epi64(__vbasicops_vA, __vbasicops_vB); }
+#else // defined __SSE2__
 extern vSInt32 
 vS64Add(
   vSInt32   vA,
   vSInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+#endif // defined __SSE2__
 
 
 /*
@@ -815,11 +920,21 @@ vS128Neg (
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
+#if defined (__SSE2__)
+static __inline__ vUInt32 __VBASICOPS_INLINE_ATTR__
+vLL64Shift(
+  vUInt32   __vbasicops_vA,
+  vUInt8    __vbasicops_vShiftFactor)
+{
+    return _mm_sll_epi64(__vbasicops_vA,
+                         _mm_and_si128(__vbasicops_vShiftFactor, _mm_cvtsi32_si128( 0x3F )));
+}
+#else
 extern vUInt32 
 vLL64Shift(
   vUInt32   vA,
   vUInt8    vShiftFactor) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
-
+#endif
 
 /*
  *  vA64Shift()
@@ -843,11 +958,21 @@ vA64Shift(
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
+#if defined (__SSE2__)
+static __inline__ vUInt32 __VBASICOPS_INLINE_ATTR__
+vLR64Shift(
+    vUInt32   __vbasicops_vA,
+    vUInt8    __vbasicops_vShiftFactor)
+{
+    return _mm_srl_epi64(__vbasicops_vA,
+                         _mm_and_si128(__vbasicops_vShiftFactor, _mm_cvtsi32_si128( 0x3F )));
+}
+#else
 extern vUInt32 
 vLR64Shift(
   vUInt32   vA,
   vUInt8    vShiftFactor) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
-
+#endif
 
 /*
  *  vLL64Shift2()

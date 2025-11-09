@@ -31,8 +31,6 @@
 
 #if defined (__i386__) || defined(__x86_64__)
 #include "mach/i386/machine_types.defs"
-#elif defined (__arm__)
-#include "mach/arm/machine_types.defs"
 #else
 #error architecture not supported
 #endif

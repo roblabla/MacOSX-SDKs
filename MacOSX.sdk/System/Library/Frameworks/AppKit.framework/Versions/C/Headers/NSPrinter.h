@@ -1,7 +1,7 @@
 /*
 	NSPrinter.h
 	Application Kit
-	Copyright (c) 1994-2012, Apple Inc.
+	Copyright (c) 1994-2013, Apple Inc.
 	All rights reserved.
 */
 
@@ -66,21 +66,6 @@ typedef NSUInteger NSPrinterTableStatus;
 */
 - (NSSize)pageSizeForPaper:(NSString *)paperName;
 
-/* Return the status of the named table in the printer's PostScript Printer Description (PPD) if the PPD is available. NSPrinterTableNotFound is returned for every table name if no PPD is available.
-*/
-- (NSPrinterTableStatus)statusForTable:(NSString *)tableName;
-
-/* Methods for accessing the information in the printer's PPD. If no PPD is available for the printer, values such as NO, 0, NSZeroRect, NSZeroSize, and nil are returned.
-*/
-- (BOOL)isKey:(NSString *)key inTable:(NSString *)table;
-- (BOOL)booleanForKey:(NSString *)key inTable:(NSString *)table;
-- (float)floatForKey:(NSString *)key inTable:(NSString *)table;
-- (int)intForKey:(NSString *)key inTable:(NSString *)table;
-- (NSRect)rectForKey:(NSString *)key inTable:(NSString *)table;
-- (NSSize)sizeForKey:(NSString *)key inTable:(NSString *)table;
-- (NSString *)stringForKey:(NSString *)key inTable:(NSString *)table;
-- (NSArray *)stringListForKey:(NSString *)key inTable:(NSString *)table;
-
 /* Return a dictionary that describes the printing device using entries keyed by the NSDevice... strings declared in NSGraphics.h. The only entry that is guaranteed to exist in the returned dictionary is NSDeviceIsPrinter.
 */
 - (NSDictionary *)deviceDescription;
@@ -88,6 +73,23 @@ typedef NSUInteger NSPrinterTableStatus;
 @end
 
 @interface NSPrinter(NSDeprecated)
+
+
+/* Deprecated in OS X 10.9. PMPrinter API should be used instead. Return the status of the named table in the printer's PostScript Printer Description (PPD) if the PPD is available. NSPrinterTableNotFound is returned for every table name if no PPD is available.
+ */
+- (NSPrinterTableStatus)statusForTable:(NSString *)tableName NS_DEPRECATED_MAC(10_0, 10_9);
+
+/* Deprecated in OS X 10.9. PMPrinter API should be used instead. Methods for accessing the information in the printer's PPD. If no PPD is available for the printer, values such as NO, 0, NSZeroRect, NSZeroSize, and nil are returned.
+ */
+- (BOOL)isKey:(NSString *)key inTable:(NSString *)table NS_DEPRECATED_MAC(10_0, 10_9);
+- (BOOL)booleanForKey:(NSString *)key inTable:(NSString *)table NS_DEPRECATED_MAC(10_0, 10_9);
+- (float)floatForKey:(NSString *)key inTable:(NSString *)table NS_DEPRECATED_MAC(10_0, 10_9);
+- (int)intForKey:(NSString *)key inTable:(NSString *)table NS_DEPRECATED_MAC(10_0, 10_9);
+- (NSRect)rectForKey:(NSString *)key inTable:(NSString *)table NS_DEPRECATED_MAC(10_0, 10_9);
+- (NSSize)sizeForKey:(NSString *)key inTable:(NSString *)table NS_DEPRECATED_MAC(10_0, 10_9);
+- (NSString *)stringForKey:(NSString *)key inTable:(NSString *)table NS_DEPRECATED_MAC(10_0, 10_9);
+- (NSArray *)stringListForKey:(NSString *)key inTable:(NSString *)table NS_DEPRECATED_MAC(10_0, 10_9);
+
 
 /* A method that was deprecated in Mac OS 10.2. -[NSPrinter imageRectForPaper:] will attempt to determine and return the bounds of the imageable area for a particular paper name, but querying such information by paper name alone is not reliable. Use -[NSPrintInfo imageablePageBounds], which was introduced in Mac OS 10.2, instead.
 */

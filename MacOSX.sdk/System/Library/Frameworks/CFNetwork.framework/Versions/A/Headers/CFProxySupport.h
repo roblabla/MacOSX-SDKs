@@ -3,7 +3,7 @@
  
 	 Contains:   Support for computing which proxy applies when
  
-	 Copyright:  Copyright (c) 2006-2008, Apple Inc. All rights reserved.
+	 Copyright:  Copyright (c) 2006-2008 Apple Inc. All rights reserved.
  
 	 Bugs?:	  For bug reports, consult the following page on
 				 the World Wide Web:

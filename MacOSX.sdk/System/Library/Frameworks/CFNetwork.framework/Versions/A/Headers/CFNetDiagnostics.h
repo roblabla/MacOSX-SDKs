@@ -3,7 +3,7 @@
  
 	 Contains:   CFNetDiagnostics interface
   
-	 Copyright:  Copyright (c) 2004-2008, Apple Inc. All rights reserved.
+	 Copyright:  Copyright (c) 2004-2008 Apple Inc. All rights reserved.
  
 	 Bugs?:	  For bug reports, consult the following page on
 				 the World Wide Web:

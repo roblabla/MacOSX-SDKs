@@ -1,7 +1,7 @@
 /*
 	NSPrintOperation.h
 	Application Kit
-	Copyright (c) 1994-2012, Apple Inc.
+	Copyright (c) 1994-2013, Apple Inc.
 	All rights reserved.
 */
 
@@ -9,7 +9,7 @@
 #import <Foundation/NSRange.h>
 #import <AppKit/AppKitDefines.h>
 
-@class NSMutableData, NSGraphicsContext, NSPrintPanel, NSPrintInfo, NSView, NSWindow;
+@class NSMutableData, NSGraphicsContext, NSPDFPanel, NSPrintPanel, NSPrintInfo, NSView, NSWindow;
 
 /* Values for -setPageOrder:/-pageOrder.
 */
@@ -88,6 +88,11 @@ APPKIT_EXTERN NSString *NSPrintOperationExistsException;
 */
 - (void)setPrintPanel:(NSPrintPanel *)panel;
 - (NSPrintPanel *)printPanel;
+
+/* The panel to be presented by the operation when it is run, if [[self printInfo] jobDisposition] is NSPrintSaveJob and [[[self printInfo] dictionary] objectForKey:NSPrintJobSavingURL] is nil. -PDFPanel will create a new NSPDFPanel if one hasn't been set yet. NSPrintOperation will throw an exception if panel.options contains NSPDFPanelRequestsParentDirectory when it attempts to display the panel.
+*/
+- (void)setPDFPanel:(NSPDFPanel *)panel NS_AVAILABLE_MAC(10_9);
+- (NSPDFPanel *)PDFPanel NS_AVAILABLE_MAC(10_9);
 
 /* Whether the print operation should spawn a separate thread in which to run itself.
 */

@@ -98,8 +98,8 @@ CG_EXTERN CGError CGWaitForScreenRefreshRects(CGRect **rects, uint32_t *count)
 
 enum {
   kCGScreenUpdateOperationRefresh = 0,
-  kCGScreenUpdateOperationMove = (1 << 0),
-  kCGScreenUpdateOperationReducedDirtyRectangleCount = (1 << 31)
+  kCGScreenUpdateOperationMove = (1u << 0),
+  kCGScreenUpdateOperationReducedDirtyRectangleCount = (1u << 31)
 };
 typedef uint32_t CGScreenUpdateOperation;
 
@@ -190,7 +190,7 @@ CG_EXTERN void CGReleaseScreenRefreshRects(CGRect *rects)
 /* Return true if the mouse cursor is visible, false otherwise. */
 
 CG_EXTERN boolean_t CGCursorIsVisible(void)
-  CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_NA);
+  CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_3,__MAC_10_9, __IPHONE_NA, __IPHONE_NA);
 
 /* Return true if the mouse cursor is drawn in frame buffer memory, false
    otherwise. (The cursor could exist in an overlay plane or a similar
@@ -203,7 +203,7 @@ CG_EXTERN boolean_t CGCursorIsVisible(void)
    function returns true. */
 
 CG_EXTERN boolean_t CGCursorIsDrawnInFramebuffer(void)
-  CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_NA);
+  CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_3,__MAC_10_9, __IPHONE_NA, __IPHONE_NA);
 
 /* Move the mouse cursor to the desired position in global display
    coordinates without generating events. */

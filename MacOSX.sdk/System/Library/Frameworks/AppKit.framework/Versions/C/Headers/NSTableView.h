@@ -1,7 +1,7 @@
 /*
     NSTableView.h
     Application Kit
-    Copyright (c) 1995-2012, Apple Inc.
+    Copyright (c) 1995-2013, Apple Inc.
     All rights reserved.
 */
 
@@ -61,9 +61,91 @@ typedef struct __TvFlags {
 
 /* In drag and drop, used to specify a dropOperation.  For example, given a table with N rows (numbered with row 0 at the top visually), a row of N-1 and operation of NSTableViewDropOn would specify a drop on the last row.  To specify a drop below the last row, one would use a row of N and NSTableViewDropAbove for the operation.
 */
-enum { NSTableViewDropOn, NSTableViewDropAbove };
-typedef NSUInteger NSTableViewDropOperation;
+typedef NS_ENUM(NSUInteger, NSTableViewDropOperation) {
+    NSTableViewDropOn,
+    NSTableViewDropAbove
+};
 
+typedef NS_ENUM(NSUInteger, NSTableViewColumnAutoresizingStyle) {
+    /* Turn off column autoresizing
+     */
+    NSTableViewNoColumnAutoresizing = 0,
+    
+    /* Autoresize all columns by distributing equal shares of space simultaeously
+     */
+    NSTableViewUniformColumnAutoresizingStyle,
+    
+    /* Autoresize each table column one at a time.  Proceed to the next column when
+     the current column can no longer be autoresized (when it reaches maximum/minimum size).
+     */
+    NSTableViewSequentialColumnAutoresizingStyle,        // Start with the last autoresizable column, proceed to the first.
+    NSTableViewReverseSequentialColumnAutoresizingStyle, // Start with the first autoresizable column, proceed to the last.
+    
+    /* Autoresize only one table column one at a time.  When that table column can no longer be
+     resized, stop autoresizing.  Normally you should use one of the Sequential autoresizing
+     modes instead.
+     */
+    NSTableViewLastColumnOnlyAutoresizingStyle,
+    NSTableViewFirstColumnOnlyAutoresizingStyle
+};
+
+/* Grid styles for the gridStyleMask.
+ */
+typedef NS_OPTIONS(NSUInteger, NSTableViewGridLineStyle) {
+    NSTableViewGridNone                    = 0,
+    NSTableViewSolidVerticalGridLineMask   = 1 << 0,
+    NSTableViewSolidHorizontalGridLineMask = 1 << 1,
+    NSTableViewDashedHorizontalGridLineMask NS_ENUM_AVAILABLE_MAC(10_7) = 1 << 3, // Draw the horizontal grid as a dashed line
+};
+
+typedef NS_ENUM(NSInteger, NSTableViewRowSizeStyle) {
+    /* The table will use the system default layout size: small, medium or large. */
+    NSTableViewRowSizeStyleDefault = -1,
+    
+    /* The table will use the -rowHeight or ask the delegate for a variable row height (if implemented) and cell layout is not changed. */
+    NSTableViewRowSizeStyleCustom = 0,
+    
+    /* The table will use a row height specified for a small/medium or large table.
+     It is required that all sizes be fully tested and supported if NSTableViewRowSizeStyleCustom is not used.
+     Some standard Aqua metrics may be applied to cells based on the current size. */
+    NSTableViewRowSizeStyleSmall = 1,
+    NSTableViewRowSizeStyleMedium = 2,
+    NSTableViewRowSizeStyleLarge = 3,
+} NS_ENUM_AVAILABLE_MAC(10_7);
+
+typedef NS_ENUM(NSInteger, NSTableViewSelectionHighlightStyle) {
+    /* The highlight style to show no highlight at all. Available in MacOS 10.6 and higher.
+     */
+    NSTableViewSelectionHighlightStyleNone NS_ENUM_AVAILABLE_MAC(10_6) = -1,
+    
+    /* The regular highlight style of NSTableView. On the current OS, a light blue ([NSColor alternateSelectedControlColor]) or light gray color ([NSColor secondarySelectedControlColor]) is used to highlight selected rows.
+     */
+    NSTableViewSelectionHighlightStyleRegular = 0,
+    
+    /* The source list style of NSTableView. On the current OS, a light blue gradient is used to highlight selected rows. Note: Cells that have a drawsBackground property should have it set to NO. Otherwise, they will draw over the highlighting that NSTableView does. Setting this style will have the side effect of setting the background color to the "source list" background color. Additionally in NSOutlineView, the following properties are changed to get the standard "source list" look: indentationPerLevel, rowHeight and intercellSpacing. After calling setSelectionHighlightStyle: one can change any of the other properties as required.
+     */
+    NSTableViewSelectionHighlightStyleSourceList = 1,
+};
+
+
+typedef NS_ENUM(NSInteger, NSTableViewDraggingDestinationFeedbackStyle) {
+    /* Provides no feedback when the user drags over the table view. This option exists to allow subclasses to implement their dragging destination highlighting, or to make it not show anything all.
+     */
+    NSTableViewDraggingDestinationFeedbackStyleNone = -1,
+    
+    /* Draws a solid round-rect background on drop target rows, and an insertion marker between rows. This style should be used in most cases.
+     */
+    NSTableViewDraggingDestinationFeedbackStyleRegular = 0,
+    
+    /* Draws an outline on drop target rows, and an insertion marker between rows. This style will automatically be set for source lists when [table setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleSourceList] is called, as it is the standard look for Source Lists, but may be used in other areas as needed.
+     */
+    NSTableViewDraggingDestinationFeedbackStyleSourceList = 1,
+    
+    /* Provides a gap insertion when dragging over the table. Note that this style is only officially supported for View Based TableViews, but may partially work in Cell Based TableViews. The decision to use the gap style (compared to another style) can be made in tableView:draggingSession:willBeginAtPoint:forRowIndexes:, or it can dynamically be changed.
+     */
+    NSTableViewDraggingDestinationFeedbackStyleGap NS_ENUM_AVAILABLE_MAC(10_9) = 2,
+    
+} NS_ENUM_AVAILABLE_MAC(10_6);
 
 @interface NSTableView : NSControl <NSUserInterfaceValidations, NSTextViewDelegate, NSDraggingSource>
 {
@@ -127,48 +209,11 @@ typedef NSUInteger NSTableViewDropOperation;
 - (void)setAllowsColumnResizing:(BOOL)flag;
 - (BOOL)allowsColumnResizing;
 
-enum {
-    /* Turn off column autoresizing
-    */
-    NSTableViewNoColumnAutoresizing = 0,
-
-    /* Autoresize all columns by distributing equal shares of space simultaeously
-    */
-    NSTableViewUniformColumnAutoresizingStyle,
-
-    /* Autoresize each table column one at a time.  Proceed to the next column when 
-       the current column can no longer be autoresized (when it reaches maximum/minimum size).
-    */
-    NSTableViewSequentialColumnAutoresizingStyle,        // Start with the last autoresizable column, proceed to the first.
-    NSTableViewReverseSequentialColumnAutoresizingStyle, // Start with the first autoresizable column, proceed to the last.
-
-    /* Autoresize only one table column one at a time.  When that table column can no longer be
-       resized, stop autoresizing.  Normally you should use one of the Sequential autoresizing
-       modes instead.
-    */
-    NSTableViewLastColumnOnlyAutoresizingStyle,
-    NSTableViewFirstColumnOnlyAutoresizingStyle
-};
-typedef NSUInteger NSTableViewColumnAutoresizingStyle;
-
 /* Get and set the columnAutoresizingStyle. This controls resizing in response to a tableView frame size change, usually done by dragging a window larger that has an auto-resized tableView inside it. The default value is NSTableViewLastColumnOnlyAutoresizingStyle.
    Compatability Note: This method replaces -setAutoresizesAllColumnsToFit: on 10.4 and higher.
  */
 - (void)setColumnAutoresizingStyle:(NSTableViewColumnAutoresizingStyle)style;
 - (NSTableViewColumnAutoresizingStyle)columnAutoresizingStyle;
-
-/* Grid styles for the gridStyleMask.
- */
-enum {
-    NSTableViewGridNone                    = 0,
-    NSTableViewSolidVerticalGridLineMask   = 1 << 0,
-    NSTableViewSolidHorizontalGridLineMask = 1 << 1,
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_7
-    NSTableViewDashedHorizontalGridLineMask = 1 << 3, // Draw the horizontal grid as a dashed line
-#endif
-};
-
-typedef NSUInteger NSTableViewGridLineStyle;
 
 /* Get and set the gridStyleMask. Values can be bitwise or'ed together, however, only one horizontal style can be used at a time. The default value is NSTableViewGridNone. 
  */
@@ -194,25 +239,6 @@ typedef NSUInteger NSTableViewGridLineStyle;
  */
 - (void)setGridColor:(NSColor *)color;
 - (NSColor *)gridColor;
-
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_7
-enum {
-    /* The table will use the system default layout size: small, medium or large. */
-    NSTableViewRowSizeStyleDefault = -1, 
-    
-    /* The table will use the -rowHeight or ask the delegate for a variable row height (if implemented) and cell layout is not changed. */
-    NSTableViewRowSizeStyleCustom = 0,
-    
-    /* The table will use a row height specified for a small/medium or large table. 
-     It is required that all sizes be fully tested and supported if NSTableViewRowSizeStyleCustom is not used.
-     Some standard Aqua metrics may be applied to cells based on the current size. */
-    NSTableViewRowSizeStyleSmall = 1,  
-    NSTableViewRowSizeStyleMedium = 2,
-    NSTableViewRowSizeStyleLarge = 3,
-};
-#endif
-
-typedef NSInteger NSTableViewRowSizeStyle;
 
 /* Get and set the rowSizeStyle. The default value is NSTableViewRowSizeStyleCustom, which allows the table to behave as it traditionally has. If the value is not NSTableViewRowSizeStyleCustom, then all three sizes must be properly supported by the view or cell. Changing the rowSizeStyle will automatically update the rowHeight if NSTableViewRowSizeStyleCustom is not used, and the rowHeight should not be changed. It is a recommendation that the variable row height delegate method should generally NOT be implemented when using a non-custom style, and instead the standard provided row heights should be used.
  */
@@ -376,6 +402,8 @@ typedef NSInteger NSTableViewRowSizeStyle;
 
 /* Sets the row selection using 'indexes'. Selection is set/extended based on the extend flag. On 10.5 and greater, selectRowIndexes:byExtendingSelection: will allow you to progrmatically select more than one index, regardless of the allowsMultipleSelection and allowsEmptySelection options set on the table.
  
+   View Based TableViews: This method is animatable by using the animator proxy. IE: [tableView.animator selectRowIndexes:.. byExtendingSelection:..];
+ 
    Compatability Note: This method replaces selectRow:byExtendingSelection:
        If a subclasser implements only the deprecated single-index method (selectRow:byExtendingSelection:), the single-index method will be invoked for each index.  If a subclasser implements the multi-index method (selectRowIndexes:byExtendingSelection:), the deprecated single-index version method will not be used.  This allows subclassers already overriding the single-index method to still receive a selection message.  Note: to avoid cycles, subclassers of this method and single-index method should not call each other.
 */
@@ -402,49 +430,10 @@ typedef NSInteger NSTableViewRowSizeStyle;
 - (BOOL)allowsTypeSelect NS_AVAILABLE_MAC(10_5);
 - (void)setAllowsTypeSelect:(BOOL)value NS_AVAILABLE_MAC(10_5);
 
-enum {
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
-    
-/* The highlight style to show no highlight at all. Available in MacOS 10.6 and higher.
- */
-    NSTableViewSelectionHighlightStyleNone = -1,
-    
-#endif
-    
-/* The regular highlight style of NSTableView. On the current OS, a light blue ([NSColor alternateSelectedControlColor]) or light gray color ([NSColor secondarySelectedControlColor]) is used to highlight selected rows.
- */
-    NSTableViewSelectionHighlightStyleRegular = 0,
-    
-/* The source list style of NSTableView. On the current OS, a light blue gradient is used to highlight selected rows. Note: Cells that have a drawsBackground property should have it set to NO. Otherwise, they will draw over the highlighting that NSTableView does. Setting this style will have the side effect of setting the background color to the "source list" background color. Additionally in NSOutlineView, the following properties are changed to get the standard "source list" look: indentationPerLevel, rowHeight and intercellSpacing. After calling setSelectionHighlightStyle: one can change any of the other properties as required.
- */
-    NSTableViewSelectionHighlightStyleSourceList = 1,
-};
-typedef NSInteger NSTableViewSelectionHighlightStyle;
-
-/* Gets and sets the current selection highlight style. The default value is NSTableViewSelectionHighlightStyleRegular. 
+/* Gets and sets the current selection highlight style. The default value is NSTableViewSelectionHighlightStyleRegular.
  */
 - (NSTableViewSelectionHighlightStyle)selectionHighlightStyle NS_AVAILABLE_MAC(10_5);
 - (void)setSelectionHighlightStyle:(NSTableViewSelectionHighlightStyle)selectionHighlightStyle NS_AVAILABLE_MAC(10_5);
-
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
-
-enum {
-/* Provides no feedback when the user drags over the table view. This option exists to allow subclasses to implement their dragging destination highlighting, or to make it not show anything all.
- */
-    NSTableViewDraggingDestinationFeedbackStyleNone = -1,
-    
-/* Draws a solid round-rect background on drop target rows, and an insertion marker between rows. This style should be used in most cases.
- */
-    NSTableViewDraggingDestinationFeedbackStyleRegular = 0,
-
-/* Draws an outline on drop target rows, and an insertion marker between rows. This style will automatically be set for source lists when [table setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleSourceList] is called, as it is the standard look for Source Lists, but may be used in other areas as needed.
- */
-    NSTableViewDraggingDestinationFeedbackStyleSourceList = 1,
-};
-
-#endif
-
-typedef NSInteger NSTableViewDraggingDestinationFeedbackStyle;
 
 /* Gets and sets the dragging destination feedback style. The default value is NSTableViewDraggingDestinationFeedbackStyleRegular for all tables. However, changing the -selectionHighlightStyle to NSTableViewSelectionHighlightStyleSourceList will automatically change the -draggingDestinationFeedbackStyle to NSTableViewDraggingDestinationFeedbackStyleSourceList.
  */
@@ -584,41 +573,27 @@ typedef NSInteger NSTableViewDraggingDestinationFeedbackStyle;
 #pragma mark -
 #pragma mark ***** Insert / Remove / Delete Rows *****
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_7
-
 /* NSTableView Animation Options */
 
-/* Use to not apply any animation effect (the default). Specifying any animation from the effect groups below negates this effect. 
+typedef NS_OPTIONS(NSUInteger, NSTableViewAnimationOptions) {
+/* Use to not apply any animation effect (the default). Specifying any animation from the effect groups below negates this effect.
  */
-enum {
     NSTableViewAnimationEffectNone = 0x0,
-};
 
 /* Row animation Effect (optional). The effect can be combined with other any NSTableViewRowAnimationSlide* option.
  */
-enum {
-    /* Fades in new rows. 
-     */
-    NSTableViewAnimationEffectFade = 0x1,
-
-    /* Creates a gap for newly inserted rows. This is useful for drag and drop animations that animate to a newly opened gap and should be used in -tableView:acceptDrop:row:dropOperation:.
-     */
-    NSTableViewAnimationEffectGap = 0x2,
-};
+    NSTableViewAnimationEffectFade = 0x1, // Fades in new rows.
+    NSTableViewAnimationEffectGap = 0x2, // Creates a gap for newly inserted rows. This is useful for drag and drop animations that animate to a newly opened gap and should be used in -tableView:acceptDrop:row:dropOperation:.
 
 /* Row Animation Sliding (optional). Currently only one option from this group may be specified at a time.
  */
-enum {      
     NSTableViewAnimationSlideUp    = 0x10, // Animates a row in or out by sliding upward.
     NSTableViewAnimationSlideDown  = 0x20, // Animates a row in or out by sliding downward.
     NSTableViewAnimationSlideLeft  = 0x30, // Animates a row in by sliding from the left. Animates a row out by sliding towards the left.
     NSTableViewAnimationSlideRight = 0x40, // Animates a row in by sliding from the right. Animates a row out by sliding towards the right.
-};
+} NS_ENUM_AVAILABLE_MAC(10_7);
 
-#endif
-
-typedef NSUInteger NSTableViewAnimationOptions;
-
+    
 /* View Based TableView: Multiple row changes (inserts/deletes/moves/scrolling) can be animated simultaneously by surrounding calls around a beginUpdates/endUpdates pair. When changing rows, the prior state before -beginUpdates is the starting point assumed for all deletion and move calls. Calls are nestable. -selectedRowIndexes is properly maintained based on the series of inserts/deletes/moves. If a selected row is deleted, a selection changed notification will happen after endUpdates is called. It is not necessary to call beginUpdates/endUpdates if only one insertion/deletion/move is happening. Note that these methods should be called to reflect changes in your model; they do not make any underlying model changes.
  
    Cell Based TableView: Any row modifications must first be wrapped in a -beginUpdates/-endUpdates block -- this is required to properly maintain state and to allow animations to happen.
@@ -626,8 +601,7 @@ typedef NSUInteger NSTableViewAnimationOptions;
 - (void)beginUpdates NS_AVAILABLE_MAC(10_7);
 - (void)endUpdates NS_AVAILABLE_MAC(10_7);
 
-
-/* Inserts a new rows located at the final positions passed to by 'indexes'. This is similar to NSMutableArray's -insertObjects:atIndexes:  The -numberOfRows in the TableView will automatically be increased by the count in 'indexes'. Calling this method multiple times within the same beginUpdates/endUpdates block is allowed, and changes are processed incrementally. This method should not be called for NSOutlineView (use -insertItemsAtIndexes:inParent:withAnimation: instead). The "Cell Based TableView" must first call -beginUpdates before calling this method. 
+/* Inserts a new rows located at the final positions passed to by 'indexes'. This is similar to NSMutableArray's -insertObjects:atIndexes:  The -numberOfRows in the TableView will automatically be increased by the count in 'indexes'. Calling this method multiple times within the same beginUpdates/endUpdates block is allowed, and changes are processed incrementally. This method should not be called for NSOutlineView (use -insertItemsAtIndexes:inParent:withAnimation: instead). The "Cell Based TableView" must first call -beginUpdates before calling this method.
  */
 - (void)insertRowsAtIndexes:(NSIndexSet *)indexes withAnimation:(NSTableViewAnimationOptions)animationOptions NS_AVAILABLE_MAC(10_7);
 
@@ -646,6 +620,14 @@ typedef NSUInteger NSTableViewAnimationOptions;
 /* View Based TableView: Returns a dictionary of all registered nibs. The keys are the identifier, and the value is the NSNib that is registered.
  */
 - (NSDictionary *)registeredNibsByIdentifier NS_AVAILABLE_MAC(10_8);
+
+/* View Based TableView: The subclass can implement this method to be alerted when a new 'rowView' has been added to the table. At this point, the subclass can choose to add in extra views, or modify any properties on 'rowView'. Be sure to call 'super'.
+ */
+- (void)didAddRowView:(NSTableRowView *)rowView forRow:(NSInteger)row NS_AVAILABLE_MAC(10_7);
+
+/* View Based TableView: The subclass can implement this method to be alerted when 'rowView' has been removed from the table. The removed 'rowView' may be reused by the table, so any additionally inserted views should be removed at this point. A 'row' parameter is included. 'row' will be '-1' for rows that are being deleted from the table, and no longer have a valid row, otherwise it will be the valid row that is being removed due to it being moved off screen. Be sure to call 'super'.
+ */
+- (void)didRemoveRowView:(NSTableRowView *)rowView forRow:(NSInteger)row NS_AVAILABLE_MAC(10_7);
 
 @end
 
@@ -712,6 +694,8 @@ typedef NSUInteger NSTableViewAnimationOptions;
 #pragma mark -
 #pragma mark ***** Common Delegate Methods *****
 
+/* Optional - called whenever the user is about to change the selection. Return NO to prevent the selection from being changed at that time.
+ */
 - (BOOL)selectionShouldChangeInTableView:(NSTableView *)tableView;
 
 /* Optional - Return YES if 'row' should be selected and NO if it should not. For better performance and better control over the selection, you should use tableView:selectionIndexesForProposedSelection:. 
@@ -769,6 +753,9 @@ typedef NSUInteger NSTableViewAnimationOptions;
 - (void)tableViewSelectionDidChange:(NSNotification *)notification;
 - (void)tableViewColumnDidMove:(NSNotification *)notification;
 - (void)tableViewColumnDidResize:(NSNotification *)notification;
+    
+/* Optional -  Called when the selection is about to be changed, but note, tableViewSelectionIsChanging: is only called when mouse events are changing the selection and not keyboard events.
+ */
 - (void)tableViewSelectionIsChanging:(NSNotification *)notification;
 
 @end

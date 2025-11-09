@@ -97,7 +97,7 @@
 #include "mibgroup/disman/schedule/schedTable.h"
 #include "mibgroup/utilities/override.h"
 #include "mibgroup/hardware/memory/hw_mem.h"
-/*#include "mibgroup/hardware/memory/memory_null.h"*/
+/*#include "mibgroup/hardware/memory/memory_darwin.h"*/
 /*#include "mibgroup/host/data_access/swinst_darwin.h"*/
 /*#include "mibgroup/host/data_access/swrun_darwin.h"*/
 #include "mibgroup/hardware/cpu/cpu.h"

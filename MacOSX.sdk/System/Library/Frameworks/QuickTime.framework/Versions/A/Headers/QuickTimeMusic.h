@@ -3,7 +3,7 @@
  
      Contains:   QuickTime Interfaces.
  
-     Version:    QuickTime 7.7.1
+     Version:    QuickTime 7.7.3
  
      Copyright:  © 1990-2012 by Apple Inc., all rights reserved
  
@@ -11,8 +11,16 @@
                  the World Wide Web:
  
                      http://developer.apple.com/bugreporter/
- 
 */
+
+/*
+  QuickTime Music was deprecated in 10.5.
+  And QuickTime has been deprecated in 10.9.
+
+  AVFoundation and AVKit are the frameworks recommended for all new development 
+  involving time-based audiovisual media on OS X.
+*/
+
 #ifndef __QUICKTIMEMUSIC__
 #define __QUICKTIMEMUSIC__
 
@@ -2959,10 +2967,10 @@ enum {
 
 /* UPP call backs */
 /*
- *  NewMusicMIDISendUPP()
+ *  NewMusicMIDISendUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -2970,10 +2978,10 @@ extern MusicMIDISendUPP
 NewMusicMIDISendUPP(MusicMIDISendProcPtr userRoutine)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
- *  NewMusicOfflineDataUPP()
+ *  NewMusicOfflineDataUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -2981,10 +2989,10 @@ extern MusicOfflineDataUPP
 NewMusicOfflineDataUPP(MusicOfflineDataProcPtr userRoutine)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
- *  NewTuneCallBackUPP()
+ *  NewTuneCallBackUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -2992,10 +3000,10 @@ extern TuneCallBackUPP
 NewTuneCallBackUPP(TuneCallBackProcPtr userRoutine)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
- *  NewTunePlayCallBackUPP()
+ *  NewTunePlayCallBackUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -3003,10 +3011,10 @@ extern TunePlayCallBackUPP
 NewTunePlayCallBackUPP(TunePlayCallBackProcPtr userRoutine)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
- *  DisposeMusicMIDISendUPP()
+ *  DisposeMusicMIDISendUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -3014,10 +3022,10 @@ extern void
 DisposeMusicMIDISendUPP(MusicMIDISendUPP userUPP)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
- *  DisposeMusicOfflineDataUPP()
+ *  DisposeMusicOfflineDataUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -3025,10 +3033,10 @@ extern void
 DisposeMusicOfflineDataUPP(MusicOfflineDataUPP userUPP)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
- *  DisposeTuneCallBackUPP()
+ *  DisposeTuneCallBackUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -3036,10 +3044,10 @@ extern void
 DisposeTuneCallBackUPP(TuneCallBackUPP userUPP)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
- *  DisposeTunePlayCallBackUPP()
+ *  DisposeTunePlayCallBackUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -3047,10 +3055,10 @@ extern void
 DisposeTunePlayCallBackUPP(TunePlayCallBackUPP userUPP)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
- *  InvokeMusicMIDISendUPP()
+ *  InvokeMusicMIDISendUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -3062,10 +3070,10 @@ InvokeMusicMIDISendUPP(
   MusicMIDISendUPP   userUPP)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
- *  InvokeMusicOfflineDataUPP()
+ *  InvokeMusicOfflineDataUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -3077,10 +3085,10 @@ InvokeMusicOfflineDataUPP(
   MusicOfflineDataUPP  userUPP)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
- *  InvokeTuneCallBackUPP()
+ *  InvokeTuneCallBackUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -3091,10 +3099,10 @@ InvokeTuneCallBackUPP(
   TuneCallBackUPP     userUPP)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 /*
- *  InvokeTunePlayCallBackUPP()
+ *  InvokeTunePlayCallBackUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */

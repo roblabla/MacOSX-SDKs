@@ -1,5 +1,5 @@
 /*
- * Copyright © 2007, 2012 Apple Inc. All rights reserved.
+ * Copyright © 2007-2013 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -27,6 +27,7 @@
 #include	<IOKit/IOService.h>
 #include	<IOKit/usb/IOUSBController.h>
 #include	<IOKit/usb/IOUSBHubDevice.h>
+#include    <IOKit/usb/IOUSBUserClient.h>
 
 
 enum {
@@ -45,10 +46,10 @@ enum {
 
 #define kIOUSBHubPowerStateStable	-1
 
-/*!
- @class IOUSBHubPolicyMaker
- @abstract Super class for Hub drivers to incorporate common Power Management code.
- */
+/*
+ class IOUSBHubPolicyMaker
+ Super class for Hub drivers to incorporate common Power Management code.
+*/
 class IOUSBHubPolicyMaker : public IOService
 {
 	OSDeclareAbstractStructors(IOUSBHubPolicyMaker)
@@ -74,6 +75,7 @@ protected:
 public:
 	// IOService methods
     virtual bool						start(IOService * provider);
+	virtual void						stop( IOService * provider );
 	virtual IOReturn					powerStateWillChangeTo ( IOPMPowerFlags capabilities, unsigned long stateNumber, IOService* whatDevice);
 	virtual unsigned long				powerStateForDomainState ( IOPMPowerFlags domainState );
 	virtual IOReturn					setPowerState ( unsigned long powerStateOrdinal, IOService* whatDevice );
@@ -111,7 +113,10 @@ public:
     OSMetaClassDeclareReservedUsed(IOUSBHubPolicyMaker,  5);
 	virtual IOReturn					ReturnExtraPower(UInt32 portNum, UInt32 type, UInt32 returnedPower);
 
-    OSMetaClassDeclareReservedUnused(IOUSBHubPolicyMaker,  6);
+    OSMetaClassDeclareReservedUsed(IOUSBHubPolicyMaker,  6);
+    virtual IOReturn                    ProcessUSBNotification(UInt8 action, IOUSBNotification *note, UInt64 notificationToken);
+
+    
     OSMetaClassDeclareReservedUnused(IOUSBHubPolicyMaker,  7);
     OSMetaClassDeclareReservedUnused(IOUSBHubPolicyMaker,  8);
     OSMetaClassDeclareReservedUnused(IOUSBHubPolicyMaker,  9);

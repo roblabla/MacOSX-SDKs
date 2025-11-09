@@ -62,6 +62,7 @@
 #define kAudioUnitSubType_NetSend				'nsnd'
 #define kAudioUnitSubType_Distortion			'dist'
 #define kAudioUnitSubType_RogerBeep				'rogr'
+#define kAudioUnitSubType_NBandEQ               'nbeq'
 
 #define kAudioUnitType_Mixer					'aumx'
 #define kAudioUnitSubType_StereoMixer			'smxr'

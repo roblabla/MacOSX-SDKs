@@ -1,12 +1,14 @@
 /*
 	NSAlert.h
 	Application Kit
-	Copyright (c) 1994-2012, Apple Inc.
+	Copyright (c) 1994-2013, Apple Inc.
 	All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
+#import <AppKit/NSApplication.h>
 #import <AppKit/NSGraphics.h>
+
 @class NSTextField, NSPanel, NSArray, NSWindow, NSImage, NSButton, NSError;
 @protocol NSAlertDelegate;
 
@@ -62,8 +64,10 @@ typedef NSUInteger NSAlertStyle;
 + (NSAlert *)alertWithError:(NSError *)error;
 
 
-/* the following class method is for use by apps migrating from the C-based API.  Note that this returns an NSAlert that is equivalent to the one created in NSRunAlertPanel, so the layout, button return values, and key equivalents are the same as for the C-based API.  For return values, see NSAlertDefaultReturn, etc. in NSPanel.h
-*/
+/* This method is deprecated in 10.9 and will be formally deprecated in the following release.
+ This was intended for use by apps migrating from the C-based API.  This uses alternate return codes that were compatible with this C-based API, but not with modern alerts, see NSAlertDefaultReturn, etc. in NSPanel.h
+ Alerts should be created with the -init method and setting properties.
+ */
 + (NSAlert *)alertWithMessageText:(NSString *)message defaultButton:(NSString *)defaultButton alternateButton:(NSString *)alternateButton otherButton:(NSString *)otherButton informativeTextWithFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(5,6);
 
 - (void)setMessageText:(NSString *)messageText;
@@ -84,15 +88,16 @@ typedef NSUInteger NSAlertStyle;
 */
 - (NSArray *)buttons;
 
-/* by default, NSAlert return values are position dependent, with this mapping:
+/* These are additional NSModalResponse values used by NSAlert's -runModal and -beginSheetModalForWindow:completionHandler:.
+ 
+   By default, NSAlert return values are position dependent, with this mapping:
        first (rightmost) button = NSAlertFirstButtonReturn
        second button = NSAlertSecondButtonReturn
        third button = NSAlertThirdButtonReturn
        buttonPosition 3+x = NSAlertThirdButtonReturn + x
-       
+ 
    Note that these return values do not apply to an NSAlert created via +alertWithMessageText:defaultButton:alternateButton:otherButton:informativeTextWithFormat:, which instead uses the same return values as NSRunAlertPanel.  See NSAlertDefaultReturn, etc. in NSPanel.h
 */
-
 enum {
 	NSAlertFirstButtonReturn	= 1000,
 	NSAlertSecondButtonReturn	= 1001,
@@ -146,13 +151,19 @@ enum {
 
 /* Run the alert as an application-modal panel and return the result.
 */
-- (NSInteger)runModal;
+- (NSModalResponse)runModal;
 
-/* Run the alert as a sheet.  didEndSelector will be invoked after the return value is known but before the sheet is dismissed.  Callers that want to dismiss the sheet themselves before carrying out an action in response to the return value should do so by calling orderOut: on [alert window].  The didEndSelector should have the following signature:
-
-- (void)alertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
-*/
+/* This method is deprecated in 10.9 and will be formally deprecated in the following release.
+ -beginSheetModalForWindow:completionHandler: should be used instead.
+ */
 - (void)beginSheetModalForWindow:(NSWindow *)window modalDelegate:(id)delegate didEndSelector:(SEL)didEndSelector contextInfo:(void *)contextInfo;
+
+/* Begins a sheet on the doc window using NSWindow's sheet API.
+   If the alert has an alertStyle of NSCriticalAlertStyle, it will be shown as a "critical" sheet; it will otherwise be presented as a normal sheet.
+ */
+#if NS_BLOCKS_AVAILABLE
+- (void)beginSheetModalForWindow:(NSWindow *)sheetWindow completionHandler:(void (^)(NSModalResponse returnCode))handler NS_AVAILABLE_MAC(10_9);
+#endif
 
 /* return the application-modal panel or the document-modal sheet corresponding to this alert.
 */

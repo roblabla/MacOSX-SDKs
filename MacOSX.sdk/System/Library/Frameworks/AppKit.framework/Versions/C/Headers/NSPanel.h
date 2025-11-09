@@ -1,18 +1,19 @@
 /*
 	NSPanel.h
 	Application Kit
-	Copyright (c) 1994-2012, Apple Inc.
+	Copyright (c) 1994-2013, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/NSWindow.h>
 
 /*
+ These functions are deprecated in 10.9 and will be formally deprecated in the following release
+ NSAlert should be used instead
  * In the following three functions, msg may be a printf-like message with
  * the arguments tacked onto the end.  Thus, to get a '%' in your message,
  * you must use '%%'
  */
-
 APPKIT_EXTERN NSInteger NSRunAlertPanel(NSString *title, NSString *msgFormat, NSString *defaultButton, NSString *alternateButton, NSString *otherButton, ...) NS_FORMAT_FUNCTION(2,6);
 APPKIT_EXTERN NSInteger NSRunInformationalAlertPanel(NSString *title, NSString *msgFormat, NSString *defaultButton, NSString *alternateButton, NSString *otherButton, ...) NS_FORMAT_FUNCTION(2,6);
 APPKIT_EXTERN NSInteger NSRunCriticalAlertPanel(NSString *title, NSString *msgFormat, NSString *defaultButton, NSString *alternateButton, NSString *otherButton, ...) NS_FORMAT_FUNCTION(2,6);
@@ -26,6 +27,8 @@ APPKIT_EXTERN NSInteger NSRunInformationalAlertPanelRelativeToWindow(NSString *t
 APPKIT_EXTERN NSInteger NSRunCriticalAlertPanelRelativeToWindow(NSString *title, NSString *msgFormat, NSString *defaultButton, NSString *alternateButton, NSString *otherButton, NSWindow *docWindow, ...) NS_DEPRECATED_MAC(10_0, 10_0);
 
 /*
+ These functions are deprecated in 10.9 and will be formally deprecated in the following release
+ NSAlert should be used instead.
 **  Present a sheet alert on the given window.  When the modal session is ended, but before the sheet is dismissed,
 ** the didEndSelector will be invoked in the modalDelegate.  After the sheet
 ** is dismissed, the didDismissSelector will be invoked. Typically, you will want to implement the didEndSelector but you may
@@ -38,29 +41,30 @@ APPKIT_EXTERN NSInteger NSRunCriticalAlertPanelRelativeToWindow(NSString *title,
 APPKIT_EXTERN void NSBeginAlertSheet(NSString *title, NSString *defaultButton, NSString *alternateButton, NSString *otherButton, NSWindow *docWindow, id modalDelegate, SEL didEndSelector, SEL didDismissSelector, void *contextInfo, NSString *msgFormat, ...) NS_FORMAT_FUNCTION(10,11);
 APPKIT_EXTERN void NSBeginInformationalAlertSheet(NSString *title, NSString *defaultButton, NSString *alternateButton, NSString *otherButton, NSWindow *docWindow, id modalDelegate, SEL didEndSelector, SEL didDismissSelector, void *contextInfo, NSString *msgFormat, ...)NS_FORMAT_FUNCTION(10,11);
 APPKIT_EXTERN void NSBeginCriticalAlertSheet(NSString *title, NSString *defaultButton, NSString *alternateButton, NSString *otherButton, NSWindow *docWindow, id modalDelegate, SEL didEndSelector, SEL didDismissSelector, void *contextInfo, NSString *msgFormat, ...) NS_FORMAT_FUNCTION(10,11);
-
 APPKIT_EXTERN id NSGetAlertPanel(NSString *title, NSString *msgFormat, NSString *defaultButton, NSString *alternateButton, NSString *otherButton, ...) NS_FORMAT_FUNCTION(2,6);
 APPKIT_EXTERN id NSGetInformationalAlertPanel(NSString *title, NSString *msgFormat, NSString *defaultButton, NSString *alternateButton, NSString *otherButton, ...) NS_FORMAT_FUNCTION(2,6);
 APPKIT_EXTERN id NSGetCriticalAlertPanel(NSString *title, NSString *msgFormat, NSString *defaultButton, NSString *alternateButton, NSString *otherButton, ...) NS_FORMAT_FUNCTION(2,6);
-
 APPKIT_EXTERN void NSReleaseAlertPanel(id panel);
 
-/*
- * NSRunAlertPanel() return values (also returned by runModalSession: when
- * the modal session is run with a panel returned by NSGetAlertPanel()).
- */
 
+
+/*
+ These constants are deprecated in 10.9 and will be formally deprecated in the following release 
+ These constants are used by deprecated NSRunAlertPanel() and NSGetAlertPanel()functions.
+ Modern NSAlert API uses NSAlertFirstButtonReturn, etc.
+ */
 enum {
     NSAlertDefaultReturn		= 1,
     NSAlertAlternateReturn		= 0,
     NSAlertOtherReturn			= -1,
     NSAlertErrorReturn			= -2
 };
-
 enum {
-    NSOKButton				= 1,
-    NSCancelButton			= 0
+    NSOKButton				= 1, // NSModalResponseOK should be used instead (in NSWindow)
+    NSCancelButton			= 0  // NSModalResponseCancel should be used instead (in NSWindow)
 };
+
+
 
 // Panel specific styleMask
 enum {

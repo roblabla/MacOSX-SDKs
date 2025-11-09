@@ -71,6 +71,11 @@
 
 #include <sys/cdefs.h>
 
+
+#if defined(__STDC_WANT_LIB_EXT1__) && __STDC_WANT_LIB_EXT1__ >= 1
+#include <sys/_types/_errno_t.h>
+#endif
+
 __BEGIN_DECLS
 extern int * __error(void);
 #define errno (*__error())

@@ -10,7 +10,7 @@
 #define __DEBUGGING__
 
 #ifndef __MACTYPES__
-#include <CarbonCore/MacTypes.h>
+#include <MacTypes.h>
 #endif
 
 #ifndef __MIXEDMODE__
@@ -848,11 +848,6 @@ extern const char *
 GetMacOSStatusCommentString(OSStatus err)                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
-
-/*
-   pascal < threadsafe, exportset=fw_CarbonCore_XMerlot >
-   Boolean IsDebuggerAttachedToProcess ( );
-*/
 /*
  *  NewDebugComponentCallbackUPP()
  *  

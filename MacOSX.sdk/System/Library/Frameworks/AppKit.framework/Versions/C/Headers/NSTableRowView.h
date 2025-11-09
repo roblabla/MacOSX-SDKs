@@ -1,7 +1,7 @@
 /*
     NSTableRowView.h
     Application Kit
-    Copyright (c) 2008-2012, Apple Inc.
+    Copyright (c) 2008-2013, Apple Inc.
     All rights reserved.
 */
 
@@ -11,7 +11,7 @@
 #import <AppKit/NSCell.h>
 #import <AppKit/NSTableView.h>
 
-/* View Based TableView: The NSTableRowView is the view shown for a row in the table. It is responsible for drawing things associated with the row, including the selection highlight, and group row look. Properties can be changed on a row-by-row basis by overriding -[NSTableView didAddRowView:forRow:]. Modifications of the properties are NOT reflected by the NSTableView instance; the NSTableRowView is simply a representation of the state. In other words, setting rowView.selected will NOT change the -selectedRowIndexes in NSTableView.
+/* View Based TableView: The NSTableRowView is the view shown for a row in the table. It is responsible for drawing things associated with the row, including the selection highlight, and group row look. Properties can be changed on a row-by-row basis by using the table delegate method -tableView:didAddRowView:forRow:. Modifications of the properties are NOT reflected by the NSTableView instance; the NSTableRowView is simply a representation of the state. In other words, setting rowView.selected will NOT change the -selectedRowIndexes in NSTableView.
  */
 NS_CLASS_AVAILABLE(10_7, NA)
 @interface NSTableRowView : NSView {
@@ -41,7 +41,9 @@ NS_CLASS_AVAILABLE(10_7, NA)
     unsigned int _gridStyleMask:4;
     unsigned int _updatingBackgroundStyle:1;
     unsigned int _locationNeedsUpdating:1;
+#if !__LP64__    
     unsigned int _reserved2:13;
+#endif
 }
 
 /* The tableView sets the selectionHighlightStyle based on its current value. 
@@ -74,9 +76,12 @@ NS_CLASS_AVAILABLE(10_7, NA)
  */
 @property(readonly) NSBackgroundStyle interiorBackgroundStyle;
 
-/* The backgroundColor property defaults to the Table View's backgroundColor, unless usesAlternatingRowBackgroundColors is set to YES. In that case, the colors alternate, and are automatically updated as required by insertions and deletions. The value can be customized in didAddRowView:forRow:. The property is animatable.
+/* The backgroundColor property defaults to the Table View's backgroundColor, unless usesAlternatingRowBackgroundColors is set to YES. In that case, the colors alternate, and are automatically updated as required by insertions and deletions. The value can be customized in the delegate method -tableView:didAddRowView:forRow:. The property is animatable.
  */
 @property(copy) NSColor *backgroundColor;
+
+/* NOTE: NSTableRowView overrides isFlipped and returns YES.
+ */
 
 #pragma mark -
 #pragma mark ***** Drawing override points *****

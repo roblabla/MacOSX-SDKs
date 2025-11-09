@@ -1,9 +1,9 @@
 /*
      File:       CoreServices.r
  
-     Contains:   Master include for CoreServices (non-UI toolbox)
+     Contains:   Master include for CoreServices
   
-     Copyright:  � 1999-2011 by Apple, Inc., all rights reserved.
+     Copyright:  (c) 1999-2012 Apple Inc. All rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -27,6 +27,4 @@
 #include <OSServices/OSServices.r>
 #endif
 
-
 #endif /* __CORESERVICES_R__ */
-

@@ -1,7 +1,7 @@
 /*
 	NSAccessibility.h
 	Application Kit
-	Copyright (c) 2001-2012, Apple Inc.
+	Copyright (c) 2001-2013, Apple Inc.
 	All rights reserved.
 */
 
@@ -64,6 +64,19 @@
 */
 - (NSArray *)accessibilityArrayAttributeValues:(NSString *)attribute index:(NSUInteger)index maxCount:(NSUInteger)maxCount;
 
+/*
+ Prior to OS X 10.9, the only accessible objects that could post accessibility notifications were those that inherited from NSView, NSWindow, or NSCell. An application's custom accessible object, subclassed from NSObject, could not post notifications.
+ 
+ In 10.9 and later, an application's custom accessible object may post accessibility notifications if it follows the following guidelines:
+ 
+ - the lifetime of the NSObject must match the lifetime of the corresponding element in the application's visual interface. It is common for a custom accessible object that acts as a proxy for an onscreen UI element to be autoreleased and deallocated very quickly, immediately after the application responds to a single accessibility request. This is not sufficient to support posting notifications, because any notification observers that are registered on the object will be removed as soon as the object is deallocated. Instead, the application must arrange for an accessible object that refers to a specific UI element to remain allocated as long as that UI element is visible.
+ 
+ - the object must post the NSAccessibilityUIElementDestroyed notification at appropriate times, typically when the corresponding UI element in the application's visual interface is removed from the screen, and certainly when the accessible object is deallocated.
+ 
+ - the object must implement -accessibilityNotifiesWhenDestroyed to return YES.
+ */
+- (BOOL)accessibilityNotifiesWhenDestroyed NS_AVAILABLE_MAC(10_9);
+
 @end
 
 
@@ -77,6 +90,11 @@
 
 @end
 
+/* Setting whether the application may have protected content. Protected content is identified by a value of TRUE for the accessibility attribute NSAccessibilityContainsProtectedContentAttribute. If NSAccessibilityMayContainProtectedContent returns NO, then NSAccessibilityContainsProtectedContentAttribute is completely ignored.
+
+    A return value of TRUE indicates success.
+ */
+APPKIT_EXTERN BOOL NSAccessibilitySetMayContainProtectedContent(BOOL flag);
 
 /* Getting descriptions for standard roles and actions.
 */
@@ -102,7 +120,7 @@ APPKIT_EXTERN NSArray *NSAccessibilityUnignoredChildrenForOnlyChild(id originalC
 
 /* Posts a notification to accessibility client observers.  Note that accessibility notifications are not NSNotifications and do not use the NSNotificationCenter mechanism.  These notifications are received by client processes using the AX API defined in <HIServices/Accessibility.h> including AXUIElement.h.
 
-For all notifications, the observer recieves the provided notification string and the AX API representation of the provided element. 
+For all notifications, the observer receives the provided notification string and the AX API representation of the provided element. 
 
 For most notifications, the provided element is checked for observers of the provided notification.
 
@@ -192,6 +210,7 @@ APPKIT_EXTERN NSString *const NSAccessibilityCriticalValueAttribute	//(id)  - cr
     NS_AVAILABLE_MAC(10_6);
 APPKIT_EXTERN NSString *const NSAccessibilityPlaceholderValueAttribute	//(NSString *)  - placeholder value of a control such as a text field
     NS_AVAILABLE_MAC(10_6);
+APPKIT_EXTERN NSString *const NSAccessibilityContainsProtectedContentAttribute NS_AVAILABLE_MAC(10_9);   // (NSNumber *) - (boolValue) contains protected content?
 
 /* Linkage attributes
 */
@@ -239,9 +258,20 @@ APPKIT_EXTERN NSString *const NSAccessibilityStrikethroughTextAttribute;		//(NSN
 APPKIT_EXTERN NSString *const NSAccessibilityShadowTextAttribute;		//(NSNumber *)	    - (boolValue)
 APPKIT_EXTERN NSString *const NSAccessibilityAttachmentTextAttribute;		//id - corresponding element
 APPKIT_EXTERN NSString *const NSAccessibilityLinkTextAttribute;			//id - corresponding element
-APPKIT_EXTERN NSString *const NSAccessibilityMisspelledTextAttribute;		//(NSNumber *)	    - (boolValue)
 APPKIT_EXTERN NSString *const NSAccessibilityAutocorrectedTextAttribute NS_AVAILABLE_MAC(10_7);		//(NSNumber *)	    - (boolValue)
-    
+
+/*
+ About MisspelledText attributes for attribute strings:
+ 
+ NSAccessibilityMisspelledTextAttribute was the original attribute to indicate misspelled text. In OS X 10.4, the Cocoa text system added support for NSAccessibilityMarkedMisspelledTextAttribute, which was used to indicate a word that was visibly marked as misspelled (for example, with a red squiggle underneath); the original MisspelledText attribute could also be used on text that was not visibly marked as mispelled (for example, a misspelled word that was currently being edited by the user).
+ 
+ Typically, a screen reader only wants to vocalize what a sighted user could see, and so the MarkedMisspelledText attribute was adopted by VoiceOver to provide feedback to the user about misspelled text. In OS X 10.9, VoiceOver has entirely stopped using the original MisspelledText attribute, and now only checks for MarkedMisspelledText.
+ 
+ When implementing accessibility for a custom text-editing engine, you should generally provide the MarkedMisspelledText attribute in order to support VoiceOver, especially in OS X 10.9 and later. You may optionally also support the MisspelledText attribute for compatibility with other accessibility clients.
+ */
+APPKIT_EXTERN NSString *const NSAccessibilityMisspelledTextAttribute;		//(NSNumber *)	    - (boolValue)
+APPKIT_EXTERN NSString *const NSAccessibilityMarkedMisspelledTextAttribute NS_AVAILABLE_MAC(10_4);	//(NSNumber *) - (boolValue)
+
 APPKIT_EXTERN NSString *const NSAccessibilityFontNameKey;	// required
 APPKIT_EXTERN NSString *const NSAccessibilityFontFamilyKey;	// optional
 APPKIT_EXTERN NSString *const NSAccessibilityVisibleNameKey;	// optional
@@ -398,7 +428,12 @@ APPKIT_EXTERN NSString *const NSAccessibilityPickAction;
 APPKIT_EXTERN NSString *const NSAccessibilityCancelAction;
 APPKIT_EXTERN NSString *const NSAccessibilityRaiseAction;
 APPKIT_EXTERN NSString *const NSAccessibilityShowMenuAction; 
-APPKIT_EXTERN NSString *const NSAccessibilityDeleteAction; 
+APPKIT_EXTERN NSString *const NSAccessibilityDeleteAction;
+
+/* Actions that allow the developer to present either alternative or original UI. There may be new UI elements that appear. There may be UI elements that disappear. There may be changes to existing UI elements. Or a combination of them. Currently this is typically seen during a mouse hovering event.
+ */
+APPKIT_EXTERN NSString *const NSAccessibilityShowAlternateUIAction	NS_AVAILABLE_MAC(10_9);
+APPKIT_EXTERN NSString *const NSAccessibilityShowDefaultUIAction	NS_AVAILABLE_MAC(10_9);
 
 /* Focus notifications
 */
@@ -435,6 +470,10 @@ APPKIT_EXTERN NSString *const NSAccessibilityResizedNotification;
 APPKIT_EXTERN NSString *const NSAccessibilityMovedNotification;
 APPKIT_EXTERN NSString *const NSAccessibilityCreatedNotification;
 
+/* Used when UI changes require the attention of assistive application.  Pass along a user info dictionary with the key NSAccessibilityUIElementsKey and an array of elements that have been added or changed as a result of this layout change.
+ */
+APPKIT_EXTERN NSString *const NSAccessibilityLayoutChangedNotification	NS_AVAILABLE_MAC(10_9);
+
 /* Misc notifications
 */
 APPKIT_EXTERN NSString *const NSAccessibilityHelpTagCreatedNotification;
@@ -455,6 +494,10 @@ APPKIT_EXTERN NSString *const NSAccessibilitySelectedCellsChangedNotification NS
 */
 APPKIT_EXTERN NSString *const NSAccessibilityUnitsChangedNotification NS_AVAILABLE_MAC(10_6);
 APPKIT_EXTERN NSString *const NSAccessibilitySelectedChildrenMovedNotification NS_AVAILABLE_MAC(10_6);
+
+/* This notification allows an application to request that an announcement be made to the user by an assistive application such as VoiceOver.  The notification requires a user info dictionary with the key NSAccessibilityAnnouncementKey and the announcement as a localized string.  In addition, the key NSAccessibilityAnnouncementPriorityKey should also be used to help an assistive application determine the importance of this announcement.  This notification should be posted for the application element.
+ */
+APPKIT_EXTERN NSString *const NSAccessibilityAnnouncementRequestedNotification NS_AVAILABLE_MAC(10_7);
 
 
 /* Roles
@@ -546,8 +589,44 @@ APPKIT_EXTERN NSString *const NSAccessibilityRatingIndicatorSubrole		NS_AVAILABL
 APPKIT_EXTERN NSString *const NSAccessibilityContentListSubrole			NS_AVAILABLE_MAC(10_6);
 APPKIT_EXTERN NSString *const NSAccessibilityDefinitionListSubrole		NS_AVAILABLE_MAC(10_6);
 APPKIT_EXTERN NSString *const NSAccessibilityFullScreenButtonSubrole		NS_AVAILABLE_MAC(10_7);
+APPKIT_EXTERN NSString *const NSAccessibilityToggleSubrole                      NS_AVAILABLE_MAC(10_9);
+APPKIT_EXTERN NSString *const NSAccessibilitySwitchSubrole                      NS_AVAILABLE_MAC(10_9);
+APPKIT_EXTERN NSString *const NSAccessibilityDescriptionListSubrole		NS_AVAILABLE_MAC(10_9);
+
+
+
+/* This function allows an accessibility notification to be posted with a user info dictionary.  The user info dictionary can be nil.  Valid contents of the user info dictionary are limited to classes which can be returned to an accessibility client.  That list currently includes NSString, NSNumber, NSArray, NSValues of points, ranges, sizes, rects, and valid NSAccessibility objects.  Most accessibility notifications do not require a user info dictionary.  
+ */
+APPKIT_EXTERN void NSAccessibilityPostNotificationWithUserInfo(id element, NSString *notification, NSDictionary *userInfo) NS_AVAILABLE_MAC(10_7);
+
+
+/* Below are keys used for the user info dictionary of the NSAccessibilityPostNotificationWithUserInfo API */
+
+/* Key used in the user info dictionary for notifications.  The value is an array of elements that is associated with the notification.  For example, a NSAccessibilityLayoutChangedNotification should include an array of elements that have been added/changed using this key.
+ */
+APPKIT_EXTERN NSString *const NSAccessibilityUIElementsKey		NS_AVAILABLE_MAC(10_9);
+
+/* Key used in the user info dictionary for any relevant notification.  This gives the assistive application client an opportunity to determine how to handle the corresponding notification based on the priority.  For example, a developer should pass the priority key for NSAccessibilityAnnouncementRequestedNotification.  Then clients such as VoiceOver can decide to speak the announcement immediately or after the current speech is completed based on the priority level.  This key is required for NSAccessibilityAnnouncementRequestedNotification.  The NSAccessibilityLayoutChangedNotification is another example where priority can help assistive applications determine how to handle the UI change.
+ */
+APPKIT_EXTERN NSString *const NSAccessibilityPriorityKey		NS_AVAILABLE_MAC(10_9);
+
+/* Key used in the user info dictionary sent with the NSAccessibilityAnnouncementRequestedNotification.  The value for the announcement should be a localized string.  This should generally be used in conjunction with the NSAccessibilityPriorityKey to help assistive applications determine the importance of this announcement.
+ */
+APPKIT_EXTERN NSString *const NSAccessibilityAnnouncementKey            NS_AVAILABLE_MAC(10_7);
+
+    
+/* System defined priority levels.  This priority level should be included for every NSAccessibilityAnnouncementRequestedNotification.
+ */
+typedef NS_ENUM(NSUInteger, NSAccessibilityPriorityLevel) {
+    NSAccessibilityPriorityLow = 10,
+    NSAccessibilityPriorityMedium = 50,
+    NSAccessibilityPriorityHigh = 90
+    } NS_ENUM_AVAILABLE_MAC(10_9);
+
+
+
 
 /* Deprecated
-*/
+ */
 APPKIT_EXTERN NSString *const NSAccessibilitySortButtonRole	NS_DEPRECATED_MAC(10_4, 10_6);
 

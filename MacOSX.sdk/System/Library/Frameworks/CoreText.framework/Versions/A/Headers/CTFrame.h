@@ -23,7 +23,8 @@
 #include <CoreFoundation/CFNumber.h>
 #include <CoreFoundation/CFString.h>
 #include <CoreGraphics/CGContext.h>
-#include <AvailabilityMacros.h>
+
+CF_IMPLICIT_BRIDGING_ENABLED
 
 #if defined(__cplusplus)
 extern "C" {
@@ -41,7 +42,7 @@ typedef const struct __CTFrame * CTFrameRef;
 	@abstract	Returns the CFType of the frame object
 */
 
-CFTypeID CTFrameGetTypeID( void ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
+CFTypeID CTFrameGetTypeID( void ) CT_AVAILABLE(10_5, 3_2);
 
 
 /* --------------------------------------------------------------------------- */
@@ -49,25 +50,29 @@ CFTypeID CTFrameGetTypeID( void ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_
 /* --------------------------------------------------------------------------- */
 
 /*!
-	@enum		CTFrameProgression
-	@abstract	These constants specify frame progression types.
-	
-	@discussion The lines of text within a frame may be stacked for either
-				horizontal or vertical text. Values are enumerated for each
-				stacking type supported by CTFrame. Frames created with a
-				progression type specifying vertical text will rotate lines
-				90 degrees counterclockwise when drawing.
-	
-	@constant	kCTFrameProgressionTopToBottom
-				Lines are stacked top to bottom for horizontal text.
-	
-	@constant	kCTFrameProgressionRightToLeft
-				Lines are stacked right to left for vertical text.
+    @enum		CTFrameProgression
+    @abstract	These constants specify frame progression types.
+
+    @discussion The lines of text within a frame may be stacked for either
+                horizontal or vertical text. Values are enumerated for each
+                stacking type supported by CTFrame. Frames created with a
+                progression type specifying vertical text will rotate lines
+                90 degrees counterclockwise when drawing.
+
+    @constant	kCTFrameProgressionTopToBottom
+                Lines are stacked top to bottom for horizontal text.
+
+    @constant	kCTFrameProgressionRightToLeft
+                Lines are stacked right to left for vertical text.
+
+    @constant	kCTFrameProgressionLeftToRight
+                Lines are stacked left to right for vertical text.
 */
 
 typedef CF_ENUM(uint32_t, CTFrameProgression) {
-	kCTFrameProgressionTopToBottom  = 0,
-	kCTFrameProgressionRightToLeft  = 1
+    kCTFrameProgressionTopToBottom  = 0,
+    kCTFrameProgressionRightToLeft  = 1,
+    kCTFrameProgressionLeftToRight  = 2
 };
 
 
@@ -83,7 +88,7 @@ typedef CF_ENUM(uint32_t, CTFrameProgression) {
 	@seealso	CTFramesetterCreateFrame
 */
 
-extern const CFStringRef kCTFrameProgressionAttributeName CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
+extern const CFStringRef kCTFrameProgressionAttributeName CT_AVAILABLE(10_5, 3_2);
 
 /*!
 	@enum		CTFramePathFillRule
@@ -118,7 +123,7 @@ typedef CF_ENUM(uint32_t, CTFramePathFillRule) {
 	@seealso	CTFramesetterCreateFrame
  */
 
-extern const CFStringRef kCTFramePathFillRuleAttributeName CT_AVAILABLE_STARTING( __MAC_10_7, __IPHONE_4_2);
+extern const CFStringRef kCTFramePathFillRuleAttributeName CT_AVAILABLE(10_7, 4_2);
 
 /*!
 	@const		kCTFramePathWidthAttributeName
@@ -131,7 +136,7 @@ extern const CFStringRef kCTFramePathFillRuleAttributeName CT_AVAILABLE_STARTING
 	@seealso	CTFramesetterCreateFrame
  */
 
-extern const CFStringRef kCTFramePathWidthAttributeName CT_AVAILABLE_STARTING( __MAC_10_7, __IPHONE_4_2);
+extern const CFStringRef kCTFramePathWidthAttributeName CT_AVAILABLE(10_7, 4_2);
 
 	
 /*!
@@ -145,19 +150,19 @@ extern const CFStringRef kCTFramePathWidthAttributeName CT_AVAILABLE_STARTING( _
 	@seealso	CTFramesetterCreateFrame
 */
 
-extern const CFStringRef kCTFrameClippingPathsAttributeName CT_AVAILABLE_STARTING( __MAC_10_7, __IPHONE_4_3);
+extern const CFStringRef kCTFrameClippingPathsAttributeName CT_AVAILABLE(10_7, 4_3);
 
 /*!
 	@const		kCTFramePathClippingPathAttributeName
 	@abstract	Specifies clipping path.  This attribute is valid in a dictionary contained in an array specified by kCTFrameClippingPathsAttributeName.
 				On 10.8 or later, This attribute is also valid in frameAttributes dictionary passed to CTFramesetterCreateFrame.
 
-	@discussion Value must be a CGPathRef specifying a clipping pat.
+	@discussion Value must be a CGPathRef specifying a clipping path.
 
 	@seealso	kCTFrameClippingPathsAttributeName
  */
 
-extern const CFStringRef kCTFramePathClippingPathAttributeName CT_AVAILABLE_STARTING( __MAC_10_7, __IPHONE_4_3);
+extern const CFStringRef kCTFramePathClippingPathAttributeName CT_AVAILABLE(10_7, 4_3);
 
 /* --------------------------------------------------------------------------- */
 /* Frame Accessors */
@@ -178,7 +183,7 @@ extern const CFStringRef kCTFramePathClippingPathAttributeName CT_AVAILABLE_STAR
 */
 
 CFRange CTFrameGetStringRange(
-	CTFrameRef frame ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
+	CTFrameRef frame ) CT_AVAILABLE(10_5, 3_2);
 
 
 /*!
@@ -201,7 +206,7 @@ CFRange CTFrameGetStringRange(
 */
 
 CFRange CTFrameGetVisibleStringRange(
-	CTFrameRef frame ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
+	CTFrameRef frame ) CT_AVAILABLE(10_5, 3_2);
 
 
 /*!
@@ -213,7 +218,7 @@ CFRange CTFrameGetVisibleStringRange(
 */
 
 CGPathRef CTFrameGetPath(
-	CTFrameRef frame ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
+	CTFrameRef frame ) CT_AVAILABLE(10_5, 3_2);
 
 
 /*!
@@ -235,7 +240,7 @@ CGPathRef CTFrameGetPath(
 */
 
 CFDictionaryRef CTFrameGetFrameAttributes(
-	CTFrameRef frame ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
+	CTFrameRef frame ) CT_AVAILABLE(10_5, 3_2);
 
 
 /*!
@@ -257,7 +262,7 @@ CFDictionaryRef CTFrameGetFrameAttributes(
 */
 
 CFArrayRef CTFrameGetLines(
-	CTFrameRef frame ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
+	CTFrameRef frame ) CT_AVAILABLE(10_5, 3_2);
 
 
 /*!
@@ -294,7 +299,7 @@ CFArrayRef CTFrameGetLines(
 void CTFrameGetLineOrigins(
 	CTFrameRef frame,
 	CFRange range,
-	CGPoint origins[] ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
+	CGPoint origins[] ) CT_AVAILABLE(10_5, 3_2);
 
 
 /*!
@@ -317,11 +322,13 @@ void CTFrameGetLineOrigins(
 
 void CTFrameDraw(
 	CTFrameRef frame,
-	CGContextRef context ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
+	CGContextRef context ) CT_AVAILABLE(10_5, 3_2);
 
 
 #if defined(__cplusplus)
 }
 #endif
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif

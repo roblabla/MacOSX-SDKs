@@ -2,7 +2,7 @@
  *  CoreText.h
  *  CoreText
  *
- *  Copyright 2006-2012 Apple Inc. All rights reserved.
+ *  Copyright (c) 2006-2013 Apple Inc. All rights reserved.
  *
  */
 
@@ -17,7 +17,6 @@
 #ifndef __CORETEXT__
 #define __CORETEXT__
 
-#include <AvailabilityMacros.h>
 #include <CoreText/CTDefines.h>
 #include <CoreText/CTFont.h>
 #include <CoreText/CTFontCollection.h>
@@ -30,9 +29,7 @@
 #include <CoreText/CTLine.h>
 #include <CoreText/CTParagraphStyle.h>
 #include <CoreText/CTRun.h>
-#if TARGET_OS_IPHONE
 #include <CoreText/CTRunDelegate.h>
-#endif // TARGET_OS_IPHONE
 #include <CoreText/CTStringAttributes.h>
 #include <CoreText/CTTextTab.h>
 #include <CoreText/CTTypesetter.h>
@@ -62,7 +59,7 @@ extern "C" {
                 constants beginning with kCTVersionNumber.
 */
 
-uint32_t CTGetCoreTextVersion( void ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
+uint32_t CTGetCoreTextVersion( void ) CT_AVAILABLE(10_5, 3_2);
 
 #define kCTVersionNumber10_5 0x00020000
 #define kCTVersionNumber10_5_2 0x00020001
@@ -71,6 +68,7 @@ uint32_t CTGetCoreTextVersion( void ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHON
 #define kCTVersionNumber10_6 0x00030000
 #define kCTVersionNumber10_7 0x00040000
 #define kCTVersionNumber10_8 0x00050000
+#define kCTVersionNumber10_9 0x00060000
 
 #if defined(__cplusplus)
 }

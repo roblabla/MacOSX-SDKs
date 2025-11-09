@@ -72,6 +72,6 @@
 #define SWITCH_OPTION_DEPRESS		1
 #define SWITCH_OPTION_WAIT			2
 
-#define valid_switch_option(opt)	(0 <= (opt) && (opt) <= 2)
+#define valid_switch_option(opt)	(0 <= (opt) && (opt) <= 5)
 
 #endif	/* _MACH_THREAD_SWITCH_H_ */

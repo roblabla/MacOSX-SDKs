@@ -133,6 +133,8 @@ enum
                         A CMIOFeatureControl that controls the adjustment of the white color of the picture. The units for the control's absolute value are kelvin (K).
     @constant       kCMIOWhiteBalanceVControlClassID
                         A CMIOFeatureControl that controls a adjustment of the white color of the picture. The units for the control's absolute value are kelvin (K).
+    @constant       kCMIOWhiteBalanceControlClassID
+                        A CMIOFeatureControl that controls a adjustment of the white color of the picture. The units for the control's absolute value are kelvin (K).
     @constant       kCMIOGammaControlClassID
                         A CMIOFeatureControl that defines the function between incoming light level and output picture level. The units for the control's absolute value are undefined.
     @constant       kCMIOTemperatureControlClassID
@@ -148,7 +150,7 @@ enum
                         A CMIOFeatureControl that controls a tilt mechanism. Positive values mean updwards, negative values means downwards. The units for the control's absolute value are
                         degrees (°).
     @constant       kCMIOOpticalFilterClassID
-                        A CMIOFeatureControl that controls chagning the optical filter of camera lens function. The units for the control's absolute value are undefined.
+                        A CMIOFeatureControl that controls changing the optical filter of camera lens function. The units for the control's absolute value are undefined.
     @constant       kCMIOBacklightCompensationControlClassID
                         A CMIOFeatureControl that controls the amount of backlight compensation to apply. A low number indicates the least amount of backlight compensation. The units for the
                         control's absolute value are undefined.
@@ -172,6 +174,7 @@ enum
     kCMIOExposureControlClassID                 = 'xpsr',
     kCMIOWhiteBalanceUControlClassID            = 'whbu',
     kCMIOWhiteBalanceVControlClassID            = 'whbv',
+    kCMIOWhiteBalanceControlClassID             = 'whbl',
     kCMIOGammaControlClassID                    = 'gmma',
     kCMIOTemperatureControlClassID              = 'temp',
     kCMIOZoomControlClassID                     = 'zoom',

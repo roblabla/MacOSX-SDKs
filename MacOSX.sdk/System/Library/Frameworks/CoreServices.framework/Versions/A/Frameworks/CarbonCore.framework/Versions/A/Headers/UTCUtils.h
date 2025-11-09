@@ -15,7 +15,7 @@
 #define __UTCUTILS__
 
 #ifndef __MACTYPES__
-#include <CarbonCore/MacTypes.h>
+#include <MacTypes.h>
 #endif
 
 #ifndef __MACERRORS__

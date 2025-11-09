@@ -3,8 +3,6 @@
  
      Contains:   HIToolbox HITheme interfaces.
  
-     Version:    HIToolbox-626.1~1
- 
      Copyright:  © 1994-2008 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
@@ -22,10 +20,6 @@
 
 #ifndef __APPEARANCE__
 #include <HIToolbox/Appearance.h>
-#endif
-
-#ifndef __HISHAPE__
-#include <HIServices/HIShape.h>
 #endif
 
 #ifndef __CARBONEVENTS__

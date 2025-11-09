@@ -18,7 +18,7 @@
  * @class
  * @abstract Encapsulates an IEEE 802.11 network, providing read-only accessors to various properties of the network.
  */
-@interface CWNetwork : NSObject <NSCopying, NSCoding> {
+@interface CWNetwork : NSObject <NSCopying, NSSecureCoding> {
 @private
 	NSDictionary *_scanRecord;
 }
@@ -114,68 +114,6 @@
  * @abstract Method for determining which PHY modes a network supports.
  */
 - (BOOL)supportsPHYMode:(CWPHYMode)phyMode;
-@end
-
-#pragma mark -
-@class CWWirelessProfile;
-@interface CWNetwork (Deprecated)
-
-/*!
- * @property
- * @abstract Security mode for the given CWNetwork.
- * @see //apple_ref/occ/tdef/CWSecurityMode CWSecurityMode
- */
-
-@property(readonly) NSNumber *securityMode NS_DEPRECATED_MAC(10_6, 10_7);
-
-/*!
- * @property
- * @abstract Physical layer mode for the given CWNetwork.
- * @see //apple_ref/occ/tdef/CWPHYMode CWPHYMode
- */
-@property(readonly) NSNumber *phyMode NS_DEPRECATED_MAC(10_6, 10_7);
-
-/*!
- * @property
- * @abstract Channel number for the given CWNetwork.
- */
-@property(readonly) NSNumber *channel NS_DEPRECATED_MAC(10_6, 10_7);
-
-/*!
- * @property
- * @abstract Aggregate RSSI value for the given CWNetwork.
- */
-@property(readonly) NSNumber *rssi NS_DEPRECATED_MAC(10_6, 10_7);
-
-/*!
- * @property
- * @abstract Aggregate noise value for the given CWNetwork.
- */
-@property(readonly) NSNumber *noise NS_DEPRECATED_MAC(10_6, 10_7);
-
-/*!
- * @property
- * @abstract Information element data included in beacon or probe response.
- */
-@property(readonly) NSData *ieData NS_DEPRECATED_MAC(10_6, 10_7);
-
-/*!
- * @property
- * @abstract Whether or not the given CWNetwork is a computer-to-computer network.
- */
-@property(readonly) BOOL isIBSS NS_DEPRECATED_MAC(10_6, 10_7);
-
-/*!
- * @property
- * @abstract Basic service set identifier for the given CWNetwork.
- */
-@property(readonly) NSData *bssidData NS_DEPRECATED_MAC(10_6, 10_7);
-
-/*!
- * @property
- * @abstract Stored CWWirelessProfile for the given CWNetwork.
- */
-@property(readonly) CWWirelessProfile *wirelessProfile NS_DEPRECATED_MAC(10_6, 10_7);
 @end
 
 #endif /* _CORE_WLAN_NETWORK_H_ */

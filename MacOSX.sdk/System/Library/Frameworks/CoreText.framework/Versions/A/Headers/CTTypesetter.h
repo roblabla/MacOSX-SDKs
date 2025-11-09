@@ -20,6 +20,8 @@
 #include <CoreText/CTDefines.h>
 #include <CoreText/CTLine.h>
 
+CF_IMPLICIT_BRIDGING_ENABLED
+
 #if defined(__cplusplus)
 extern "C" {
 #endif
@@ -36,7 +38,7 @@ typedef const struct __CTTypesetter * CTTypesetterRef;
 	@abstract	Returns the CFType of the typesetter object
 */
 
-CFTypeID CTTypesetterGetTypeID( void ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
+CFTypeID CTTypesetterGetTypeID( void ) CT_AVAILABLE(10_5, 3_2);
 
 
 /* --------------------------------------------------------------------------- */
@@ -53,7 +55,7 @@ CFTypeID CTTypesetterGetTypeID( void ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHO
 				performed and any directional control characters are ignored.
 */
 
-extern const CFStringRef kCTTypesetterOptionDisableBidiProcessing CT_AVAILABLE_BUT_DEPRECATED( __MAC_10_5, __MAC_10_8, __IPHONE_3_2, __IPHONE_6_0);
+extern const CFStringRef kCTTypesetterOptionDisableBidiProcessing CT_DEPRECATED(10_5, 10_8, 3_2, 6_0);
 
 /*!
 	@const		kCTTypesetterOptionForcedEmbeddingLevel
@@ -64,7 +66,7 @@ extern const CFStringRef kCTTypesetterOptionDisableBidiProcessing CT_AVAILABLE_B
 				level and any directional control characters are ignored.
 */
 
-extern const CFStringRef kCTTypesetterOptionForcedEmbeddingLevel CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
+extern const CFStringRef kCTTypesetterOptionForcedEmbeddingLevel CT_AVAILABLE(10_5, 3_2);
 
 
 /* --------------------------------------------------------------------------- */
@@ -89,7 +91,7 @@ extern const CFStringRef kCTTypesetterOptionForcedEmbeddingLevel CT_AVAILABLE_ST
 */
 
 CTTypesetterRef CTTypesetterCreateWithAttributedString(
-	CFAttributedStringRef string ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
+	CFAttributedStringRef string ) CT_AVAILABLE(10_5, 3_2);
 
 
 /*!
@@ -114,7 +116,7 @@ CTTypesetterRef CTTypesetterCreateWithAttributedString(
 
 CTTypesetterRef CTTypesetterCreateWithAttributedStringAndOptions(
 	CFAttributedStringRef string,
-	CFDictionaryRef options ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
+	CFDictionaryRef options ) CT_AVAILABLE(10_5, 3_2);
 
 
 /* --------------------------------------------------------------------------- */
@@ -137,7 +139,7 @@ CTTypesetterRef CTTypesetterCreateWithAttributedStringAndOptions(
 				portion of range is set to 0, then the typesetter will continue
 				to add glyphs to the line until it runs out of characters in the
 				string. The location and length of the range must be within the
-				bounds of the string, othewise the call will fail.
+				bounds of the string, otherwise the call will fail.
 
 	@param		offset
 				The line position offset.
@@ -149,7 +151,7 @@ CTTypesetterRef CTTypesetterCreateWithAttributedStringAndOptions(
 CTLineRef CTTypesetterCreateLineWithOffset(
 	CTTypesetterRef typesetter,
 	CFRange stringRange,
-	double offset ) CT_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_3_2);
+	double offset ) CT_AVAILABLE(10_6, 3_2);
 
 /*!
 	@function	CTTypesetterCreateLine
@@ -158,7 +160,7 @@ CTLineRef CTTypesetterCreateLineWithOffset(
 
 CTLineRef CTTypesetterCreateLine(
 	CTTypesetterRef typesetter,
-	CFRange stringRange ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
+	CFRange stringRange ) CT_AVAILABLE(10_5, 3_2);
 
 
 /* --------------------------------------------------------------------------- */
@@ -196,7 +198,7 @@ CFIndex CTTypesetterSuggestLineBreakWithOffset(
 	CTTypesetterRef typesetter,
 	CFIndex startIndex,
 	double width,
-	double offset ) CT_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_3_2);
+	double offset ) CT_AVAILABLE(10_6, 3_2);
 
 /*!
 	@function	CTTypesetterSuggestLineBreak
@@ -206,7 +208,7 @@ CFIndex CTTypesetterSuggestLineBreakWithOffset(
 CFIndex CTTypesetterSuggestLineBreak(
 	CTTypesetterRef typesetter,
 	CFIndex startIndex,
-	double width ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
+	double width ) CT_AVAILABLE(10_5, 3_2);
 
 
 /*!
@@ -245,7 +247,7 @@ CFIndex CTTypesetterSuggestClusterBreakWithOffset(
 	CTTypesetterRef typesetter,
 	CFIndex startIndex,
 	double width,
-	double offset ) CT_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_3_2);
+	double offset ) CT_AVAILABLE(10_6, 3_2);
 
 
 /*!
@@ -256,11 +258,13 @@ CFIndex CTTypesetterSuggestClusterBreakWithOffset(
 CFIndex CTTypesetterSuggestClusterBreak(
 	CTTypesetterRef typesetter,
 	CFIndex startIndex,
-	double width ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
+	double width ) CT_AVAILABLE(10_5, 3_2);
 
 
 #if defined(__cplusplus)
 }
 #endif
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif

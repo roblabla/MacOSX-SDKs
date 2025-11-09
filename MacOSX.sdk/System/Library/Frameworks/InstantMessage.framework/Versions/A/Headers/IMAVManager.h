@@ -22,13 +22,13 @@
 /*! Received from IMService's custom notification center. Posted when Messages AV's input state has changed. This notification
     is relevant to the shared IMAVManager instance. The user information dictionary will not contain keys. Clients should call
     <tt>state</tt> to get the new state. */
-extern NSString * const IMAVManagerStateChangedNotification;
+extern NSString * const IMAVManagerStateChangedNotification NS_DEPRECATED_MAC(10_5, 10_9);
 
 /*! Received from IMService's custom notification center. Posted when the selected document to be shared has been changed by
     the user during a running session. This notification is relevant to the shared IMAVManager instance. The user information
     dictionary will not contain keys. Clients should call <tt>URLToShare</tt> to get the new URL. This notification will not be
     sent when the IMAVManager's state first changes to IMAVRequested. */
-extern NSString * const IMAVManagerURLToShareChangedNotification;
+extern NSString * const IMAVManagerURLToShareChangedNotification NS_DEPRECATED_MAC(10_5, 10_9);
 
 /*! @group Constants */
 
@@ -64,7 +64,7 @@ enum {
     IMAVPending         = 4,
     IMAVRunning         = 5
 };
-typedef NSUInteger IMAVManagerState;
+typedef NSUInteger IMAVManagerState NS_DEPRECATED_MAC(10_5, 10_9);
 
 /*! @enum       IMVideoOptimizationOptions
     @abstract       These constants describe the content the video data source will provide to Messages to allow for optimization of
@@ -82,7 +82,7 @@ enum {
     IMVideoOptimizationStills = 1 << 0,
     IMVideoOptimizationReplacement = 1 << 1,
 };
-typedef NSUInteger IMVideoOptimizationOptions;
+typedef NSUInteger IMVideoOptimizationOptions NS_DEPRECATED_MAC(10_5, 10_9);
 
 /*! @class IMAVManager
     @abstract A shared object which manages the state and configuration of auxiliary audio/video input to Messages AV.
@@ -99,21 +99,21 @@ typedef NSUInteger IMVideoOptimizationOptions;
     @abstract Returns the shared instance of the IMAVManager.
     @result The shared manager.
 */
-+ (IMAVManager *) sharedAVManager;
++ (IMAVManager *) sharedAVManager NS_DEPRECATED_MAC(10_5, 10_9);
 
 /*! 
     @method state
     @abstract Returns the current state of the receiver.
     @result The current IMAVManagerState, as updated by Messages AV. See "Constants" in this document for possible values.
 */
-- (IMAVManagerState) state;
+- (IMAVManagerState) state NS_DEPRECATED_MAC(10_5, 10_9);
 
 /*! 
  @method URLToShare
  @abstract Returns the URL of the document that has been chosen by the user and should be shared with iChat Theater.
  @result The URL of the document to be shared. Returns <tt>nil</tt> if the receiver's state is <tt>IMAVInactive</tt>.
 */
-- (NSURL *) URLToShare;
+- (NSURL *) URLToShare NS_DEPRECATED_MAC(10_5, 10_9);
 
 /*!
     @method setVideoDataSource:
@@ -123,42 +123,42 @@ typedef NSUInteger IMVideoOptimizationOptions;
                       Any NSView (or subclass) may be used as well, providing basic functionality without the need for clients
                       to implement the frame callbacks.
 */
-- (void) setVideoDataSource:(id)dataSource;
+- (void) setVideoDataSource:(id)dataSource NS_DEPRECATED_MAC(10_5, 10_9);
 
 /*! 
     @method videoDataSource
     @abstract Returns the current video data source.
     @result The data source, or <tt>nil</tt> if none is set.
 */
-- (id) videoDataSource;
+- (id) videoDataSource NS_DEPRECATED_MAC(10_5, 10_9);
 
 /*! 
  @method setVideoOptimizationOptions:
  @abstract Describes the video content that will be provided by the data source.
  @param mode The options to use. See "Constants" in this document for possible values.
 */
-- (void) setVideoOptimizationOptions:(IMVideoOptimizationOptions)options;
+- (void) setVideoOptimizationOptions:(IMVideoOptimizationOptions)options NS_DEPRECATED_MAC(10_5, 10_9);
 
 /*! 
  @method videoOptimizationOptions
  @abstract Returns the current video optimization options.
  @result The current options. See "Constants" in this document for possible values.
 */
-- (IMVideoOptimizationOptions) videoOptimizationOptions;
+- (IMVideoOptimizationOptions) videoOptimizationOptions NS_DEPRECATED_MAC(10_5, 10_9);
 
 /*!
     @method setNumberOfAudioChannels:
     @abstract Sets the number of audio channels that will be configured after calling <tt>start</tt>.
     @param count The number of channels. Pass zero to disable sending audio, 1 for mono sound, and 2 for stereo.
 */
-- (void) setNumberOfAudioChannels:(NSInteger)count;
+- (void) setNumberOfAudioChannels:(NSInteger)count NS_DEPRECATED_MAC(10_5, 10_9);
 
 /*! 
     @method numberOfAudioChannels
     @abstract Returns the number of audio channels that will be configured by the receiver.
     @result The number of channels.
 */
-- (NSInteger) numberOfAudioChannels;
+- (NSInteger) numberOfAudioChannels NS_DEPRECATED_MAC(10_5, 10_9);
 
 /*! 
  @method audioDeviceUID
@@ -166,14 +166,14 @@ typedef NSUInteger IMVideoOptimizationOptions;
  @result The UID of the device. The device is obtained by calling <tt>AudioHardwareGetProperty()</tt> with this value and the
          <tt>kAudioHardwarePropertyDeviceForUID</tt> property ID.
 */
-- (NSString *) audioDeviceUID;
+- (NSString *) audioDeviceUID NS_DEPRECATED_MAC(10_5, 10_9);
 
 /*! 
  @method audioDeviceChannels
  @abstract The channel numbers into which audio should be played on the output device.
  @result An array of NSNumbers identifying the channels to use. If two channels were requested, they correspond to the left and right channels, in that order.
 */
-- (NSArray *) audioDeviceChannels;
+- (NSArray *) audioDeviceChannels NS_DEPRECATED_MAC(10_5, 10_9);
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
 
@@ -182,7 +182,7 @@ typedef NSUInteger IMVideoOptimizationOptions;
  @abstract The control bar configured for use with an IMAVManager.
  @result The control bar.
  */
-- (IMAVControlBar *) controlBar;
+- (IMAVControlBar *) controlBar NS_DEPRECATED_MAC(10_5, 10_9);
 
 #endif
 
@@ -193,13 +193,13 @@ typedef NSUInteger IMVideoOptimizationOptions;
               change to <tt>IMAVStartingUp</tt>, and then either to <tt>IMAVPending</tt> or <tt>IMAVRunning</tt>, depending on
               whether or not there is an active conference in Messages AV.
 */
-- (void) start;
+- (void) start NS_DEPRECATED_MAC(10_5, 10_9);
 
 /*! 
     @method stop
     @abstract Stops sending audio and/or video to Messages AV.
 */
-- (void) stop;
+- (void) stop NS_DEPRECATED_MAC(10_5, 10_9);
 
 @end
 
@@ -220,7 +220,7 @@ typedef NSUInteger IMVideoOptimizationOptions;
     @abstract This method is optional. Called once after <tt>setVideoDataSource:</tt>, if implemented.
     @param pixelFormatOut The pixel format to be used for the CVPixelBufferRef instances passed to <tt>renderIntoPixelBuffer:forTime:</tt>.
 */
-- (void) getPixelBufferPixelFormat:(OSType *)pixelFormatOut;
+- (void) getPixelBufferPixelFormat:(OSType *)pixelFormatOut NS_DEPRECATED_MAC(10_5, 10_9);
 
 /*! 
     @method renderIntoPixelBuffer:forTime:
@@ -229,7 +229,7 @@ typedef NSUInteger IMVideoOptimizationOptions;
     @param timeStamp The frame time for which the buffer should be rendered.
     @result Return <tt>YES</tt> if the buffer was successfully filled with new frame data. Return <tt>NO</tt> if nothing has changed or an error was encountered.
 */
-- (BOOL) renderIntoPixelBuffer:(CVPixelBufferRef)buffer forTime:(CVTimeStamp *)timeStamp;
+- (BOOL) renderIntoPixelBuffer:(CVPixelBufferRef)buffer forTime:(CVTimeStamp *)timeStamp NS_DEPRECATED_MAC(10_5, 10_9);
 
 /*! 
     @method getOpenGLBufferContext:pixelFormat:
@@ -237,7 +237,7 @@ typedef NSUInteger IMVideoOptimizationOptions;
     @param contextOut The OpenGL context to be used for the CVOpenGLBufferRef instances passed to <tt>renderIntoOpenGLBuffer:onScreen:forTime:</tt>.
     @param pixelFormatOut The OpenGL pixel format to be used for the CVOpenGLBufferRef instances passed to <tt>renderIntoOpenGLBuffer:onScreen:forTime:</tt>.
 */
-- (void) getOpenGLBufferContext:(CGLContextObj *)contextOut pixelFormat:(CGLPixelFormatObj *)pixelFormatOut;
+- (void) getOpenGLBufferContext:(CGLContextObj *)contextOut pixelFormat:(CGLPixelFormatObj *)pixelFormatOut NS_DEPRECATED_MAC(10_5, 10_9);
 
 /*! 
     @method renderIntoOpenGLBuffer:onScreen:forTime:
@@ -248,7 +248,7 @@ typedef NSUInteger IMVideoOptimizationOptions;
     @param timeStamp The frame time for which the buffer should be rendered.
     @result Return <tt>YES</tt> if the buffer was successfully filled with new frame data. Return <tt>NO</tt> if nothing has changed or an error was encountered.
 */
-- (BOOL) renderIntoOpenGLBuffer:(CVOpenGLBufferRef)buffer onScreen:(int *)screenInOut forTime:(CVTimeStamp *)timeStamp;
+- (BOOL) renderIntoOpenGLBuffer:(CVOpenGLBufferRef)buffer onScreen:(int *)screenInOut forTime:(CVTimeStamp *)timeStamp NS_DEPRECATED_MAC(10_5, 10_9);
 
 @end
 

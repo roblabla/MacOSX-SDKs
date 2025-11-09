@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2012 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -151,6 +151,7 @@
 #define	SIOCSETVLAN	SIOCSIFVLAN
 #define	SIOCGETVLAN	SIOCGIFVLAN
 
+#define	SIOCIFGCLONERS	_IOWR('i', 129, struct if_clonereq) /* get cloners */
 
 #define	SIOCGIFASYNCMAP _IOWR('i', 124, struct ifreq)	/* get ppp asyncmap */
 #define	SIOCSIFASYNCMAP _IOW('i', 125, struct ifreq)	/* set ppp asyncmap */
@@ -163,6 +164,7 @@
 #define	SIOCGIFKPI	_IOWR('i', 135, struct ifreq) /* get interface kext param */
 
 #define	SIOCGIFWAKEFLAGS _IOWR('i', 136, struct ifreq) /* get interface wake property flags */
+
 
 
 #endif /* !_SYS_SOCKIO_H_ */

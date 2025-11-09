@@ -1,5 +1,5 @@
 /*	CFNumberFormatter.h
-	Copyright (c) 2003-2012, Apple Inc. All rights reserved.
+	Copyright (c) 2003-2013, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFNUMBERFORMATTER__)

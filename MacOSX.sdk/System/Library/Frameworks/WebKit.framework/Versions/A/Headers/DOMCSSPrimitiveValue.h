@@ -62,7 +62,8 @@ enum {
     DOM_CSS_RGBCOLOR = 25,
     DOM_CSS_VW = 26,
     DOM_CSS_VH = 27,
-    DOM_CSS_VMIN = 28
+    DOM_CSS_VMIN = 28,
+    DOM_CSS_VMAX = 29
 };
 
 @interface DOMCSSPrimitiveValue : DOMCSSValue

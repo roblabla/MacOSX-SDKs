@@ -1,5 +1,5 @@
 /*	NSString.h
-	Copyright (c) 1994-2012, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2013, Apple Inc. All rights reserved.
 */
 
 typedef unsigned short unichar;
@@ -252,42 +252,42 @@ typedef NS_OPTIONS(NSUInteger, NSStringEnumerationOptions) {
 
 /* In general creation methods in NSString do not apply to subclassers, as subclassers are assumed to provide their own init methods which create the string in the way the subclass wishes.  Designated initializers of NSString are thus init and initWithCoder:.
 */
-- (id)init;
-- (id)initWithCharactersNoCopy:(unichar *)characters length:(NSUInteger)length freeWhenDone:(BOOL)freeBuffer;	/* "NoCopy" is a hint */
-- (id)initWithCharacters:(const unichar *)characters length:(NSUInteger)length;
-- (id)initWithUTF8String:(const char *)nullTerminatedCString;
-- (id)initWithString:(NSString *)aString;
-- (id)initWithFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(1,2);
-- (id)initWithFormat:(NSString *)format arguments:(va_list)argList NS_FORMAT_FUNCTION(1,0);
-- (id)initWithFormat:(NSString *)format locale:(id)locale, ... NS_FORMAT_FUNCTION(1,3);
-- (id)initWithFormat:(NSString *)format locale:(id)locale arguments:(va_list)argList NS_FORMAT_FUNCTION(1,0);
-- (id)initWithData:(NSData *)data encoding:(NSStringEncoding)encoding;
-- (id)initWithBytes:(const void *)bytes length:(NSUInteger)len encoding:(NSStringEncoding)encoding;
-- (id)initWithBytesNoCopy:(void *)bytes length:(NSUInteger)len encoding:(NSStringEncoding)encoding freeWhenDone:(BOOL)freeBuffer;	/* "NoCopy" is a hint */
+- (instancetype)init;
+- (instancetype)initWithCharactersNoCopy:(unichar *)characters length:(NSUInteger)length freeWhenDone:(BOOL)freeBuffer;	/* "NoCopy" is a hint */
+- (instancetype)initWithCharacters:(const unichar *)characters length:(NSUInteger)length;
+- (instancetype)initWithUTF8String:(const char *)nullTerminatedCString;
+- (instancetype)initWithString:(NSString *)aString;
+- (instancetype)initWithFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(1,2);
+- (instancetype)initWithFormat:(NSString *)format arguments:(va_list)argList NS_FORMAT_FUNCTION(1,0);
+- (instancetype)initWithFormat:(NSString *)format locale:(id)locale, ... NS_FORMAT_FUNCTION(1,3);
+- (instancetype)initWithFormat:(NSString *)format locale:(id)locale arguments:(va_list)argList NS_FORMAT_FUNCTION(1,0);
+- (instancetype)initWithData:(NSData *)data encoding:(NSStringEncoding)encoding;
+- (instancetype)initWithBytes:(const void *)bytes length:(NSUInteger)len encoding:(NSStringEncoding)encoding;
+- (instancetype)initWithBytesNoCopy:(void *)bytes length:(NSUInteger)len encoding:(NSStringEncoding)encoding freeWhenDone:(BOOL)freeBuffer;	/* "NoCopy" is a hint */
 
-+ (id)string;
-+ (id)stringWithString:(NSString *)string;
-+ (id)stringWithCharacters:(const unichar *)characters length:(NSUInteger)length;
-+ (id)stringWithUTF8String:(const char *)nullTerminatedCString;
-+ (id)stringWithFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(1,2);
-+ (id)localizedStringWithFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(1,2);
++ (instancetype)string;
++ (instancetype)stringWithString:(NSString *)string;
++ (instancetype)stringWithCharacters:(const unichar *)characters length:(NSUInteger)length;
++ (instancetype)stringWithUTF8String:(const char *)nullTerminatedCString;
++ (instancetype)stringWithFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(1,2);
++ (instancetype)localizedStringWithFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(1,2);
 
-- (id)initWithCString:(const char *)nullTerminatedCString encoding:(NSStringEncoding)encoding;
-+ (id)stringWithCString:(const char *)cString encoding:(NSStringEncoding)enc;
+- (instancetype)initWithCString:(const char *)nullTerminatedCString encoding:(NSStringEncoding)encoding;
++ (instancetype)stringWithCString:(const char *)cString encoding:(NSStringEncoding)enc;
 
 /* These use the specified encoding.  If nil is returned, the optional error return indicates problem that was encountered (for instance, file system or encoding errors).
 */
-- (id)initWithContentsOfURL:(NSURL *)url encoding:(NSStringEncoding)enc error:(NSError **)error;
-- (id)initWithContentsOfFile:(NSString *)path encoding:(NSStringEncoding)enc error:(NSError **)error;
-+ (id)stringWithContentsOfURL:(NSURL *)url encoding:(NSStringEncoding)enc error:(NSError **)error;
-+ (id)stringWithContentsOfFile:(NSString *)path encoding:(NSStringEncoding)enc error:(NSError **)error;
+- (instancetype)initWithContentsOfURL:(NSURL *)url encoding:(NSStringEncoding)enc error:(NSError **)error;
+- (instancetype)initWithContentsOfFile:(NSString *)path encoding:(NSStringEncoding)enc error:(NSError **)error;
++ (instancetype)stringWithContentsOfURL:(NSURL *)url encoding:(NSStringEncoding)enc error:(NSError **)error;
++ (instancetype)stringWithContentsOfFile:(NSString *)path encoding:(NSStringEncoding)enc error:(NSError **)error;
 
 /* These try to determine the encoding, and return the encoding which was used.  Note that these methods might get "smarter" in subsequent releases of the system, and use additional techniques for recognizing encodings. If nil is returned, the optional error return indicates problem that was encountered (for instance, file system or encoding errors).
 */
-- (id)initWithContentsOfURL:(NSURL *)url usedEncoding:(NSStringEncoding *)enc error:(NSError **)error;
-- (id)initWithContentsOfFile:(NSString *)path usedEncoding:(NSStringEncoding *)enc error:(NSError **)error;
-+ (id)stringWithContentsOfURL:(NSURL *)url usedEncoding:(NSStringEncoding *)enc error:(NSError **)error;
-+ (id)stringWithContentsOfFile:(NSString *)path usedEncoding:(NSStringEncoding *)enc error:(NSError **)error;
+- (instancetype)initWithContentsOfURL:(NSURL *)url usedEncoding:(NSStringEncoding *)enc error:(NSError **)error;
+- (instancetype)initWithContentsOfFile:(NSString *)path usedEncoding:(NSStringEncoding *)enc error:(NSError **)error;
++ (instancetype)stringWithContentsOfURL:(NSURL *)url usedEncoding:(NSStringEncoding *)enc error:(NSError **)error;
++ (instancetype)stringWithContentsOfFile:(NSString *)path usedEncoding:(NSStringEncoding *)enc error:(NSError **)error;
 
 /* Write to specified url or path using the specified encoding.  The optional error return is to indicate file system or encoding errors.
 */

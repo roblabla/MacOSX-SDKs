@@ -3,7 +3,7 @@
 	
 	Contains:	
 
-	Copyright:	© 2006-2010 by Apple Inc., all rights reserved.
+	Copyright:	© 2006-2012 by Apple Inc., all rights reserved.
 */
 
 #if !defined(__IOKIT_IOVIDEODEVICE_H)
@@ -23,20 +23,58 @@ public:
 	virtual bool						init(OSDictionary* properties);
     virtual void						free(void);
 
+/*!
+	@function newUserClient
+	@abstract See the documentation for the IOService method newUserClient.
+*/
 	virtual IOReturn					newUserClient(task_t owningTask, void* securityID,  UInt32 type, OSDictionary* properties, IOUserClient** handler);
 
-// Streams
+/*!
+	@function	getStreamCount
+	@result		Returns the number of streams of the device.
+*/
     virtual int							getStreamCount(void);
+	
+/*!
+	@function	getStream
+	@param		streamIndex
+					The index for which the underlying stream is desired.
+	@result		Returns the number of streams of the device.
+*/
     virtual IOVideoStream*				getStream(UInt32 streamIndex);
     
+/*!
+	@function	startStream
+	@abstract	Start sending data on a stream.
+	@result		Returns kIOReturnSuccess if the stream was successfully started.
+	@discussion	This must be implemented by a subclass.
+*/
     virtual IOReturn					startStream(IOVideoStream* stream);
+
+/*!
+	@function	stopStream
+	@abstract	Stop sending data on a stream.
+	@result		Returns kIOReturnSuccess if the stream was successfully started.
+	@discussion	This must be implemented by a subclass.
+*/
     virtual IOReturn					stopStream(IOVideoStream* stream);
+
+/*!
+	@function	suspendStream
+	@abstract	Temporarily suspend data flow on the stream.
+	@result		Returns kIOReturnSuccess if the stream was successfully suspended.
+	@discussion	This must be implemented by a subclass.
+*/
     virtual IOReturn					suspendStream(IOVideoStream* stream);
     
+/*!
+	@function	setStreamMode
+	@abstract	Sets the mode of the stream, either input or output.
+	@discussion	This must be implemented by a subclass.
+*/
     virtual IOReturn					setStreamMode(IOVideoStream* stream, IOStreamMode mode);
-
     virtual IOReturn					openStream(UInt32 streamIndex);
-    virtual IOReturn					closeStream(UInt32 streamIndex);
+	virtual IOReturn					closeStream(UInt32 streamIndex);
     virtual IOReturn					startStream(UInt32 streamIndex);
     virtual IOReturn					stopStream(UInt32 streamIndex);
     virtual IOReturn					suspendStream(UInt32 streamIndex);

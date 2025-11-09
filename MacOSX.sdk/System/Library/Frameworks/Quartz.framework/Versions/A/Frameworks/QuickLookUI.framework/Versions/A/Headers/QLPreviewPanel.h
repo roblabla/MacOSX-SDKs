@@ -8,8 +8,6 @@
 
 #import <AppKit/AppKit.h>
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
-
 @class QLPreviewPanelReserved;
 
 @protocol QLPreviewPanelDelegate;
@@ -23,6 +21,8 @@
  *      QLPreviewPanel follows the responder chain and adapts to the first responder willing to control it. It uses a data source to
  *      gets its content. QLPreviewPanel can also have a delegate.
  */
+
+NS_CLASS_AVAILABLE_MAC(10_6)
 @interface QLPreviewPanel : NSPanel
 {
 @private
@@ -215,6 +215,3 @@
 - (id)previewPanel:(QLPreviewPanel *)panel transitionImageForPreviewItem:(id <QLPreviewItem>)item contentRect:(NSRect *)contentRect;
 
 @end
-
-#endif
-

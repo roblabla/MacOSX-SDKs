@@ -3,7 +3,7 @@
 
     Contains:   API for communicating with CoreMediaIO hardware
 
-    Copyright:  © 2005-2010 by Apple Inc., all rights reserved.
+    Copyright:  © 2005-2012 by Apple Inc., all rights reserved.
 */
 
 #if !defined(__CMIOHardwareObject_h__)
@@ -31,6 +31,7 @@
 #pragma mark Includes
 
 #include <CoreFoundation/CFBase.h>
+#include <dispatch/dispatch.h>
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -151,6 +152,22 @@ typedef OSStatus
                                     UInt32                          numberAddresses,
                                     const CMIOObjectPropertyAddress addresses[],
                                     void*                           clientData);
+
+
+/*!
+    @typedef        CMIOObjectPropertyListenerBlock
+    @abstract       Clients register an CMIOObjectPropertyListenerBlock with an CMIOObject in order to receive notifications when the properties of the object change.
+    @discussion     Listeners will be called when possibly many properties have changed. Consequently, the implementation of a listener must go through the array of addresses to see what
+                    exactly has changed. Note that the array of addresses will always have at least one address in it for which the listener is signed up to receive notifications about but
+                    may contain addresses for properties for which the listener is not signed up to receive notifications.
+    @param          numberAddresses
+                        The number of elements in the addresses array.
+    @param          addresses
+                        An array of CMIOObjectPropertyAddresses indicating which properties changed.
+*/
+typedef void
+(^CMIOObjectPropertyListenerBlock)( UInt32                          numberAddresses,
+                                    const CMIOObjectPropertyAddress addresses[]);
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #pragma mark CMIOObject Constants
@@ -391,7 +408,51 @@ CMIOObjectRemovePropertyListener(   CMIOObjectID                        objectID
                                     CMIOObjectPropertyListenerProc      listener,
                                     void*                               clientData)                                             AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-    
+/*!
+    @function       CMIOObjectAddPropertyListenerBlock
+    @abstract       Registers the given CMIOObjectPropertyListenerBlock to receive notifications when the given properties change.
+    @param          objectID
+                        The CMIOObject to register the listener with.
+    @param          address
+                        The CMIOObjectPropertyAddresses indicating which property the listener should be notified about.
+    @param          dispatchQueue
+                        The dispatch queue on which the listener block will be dispatched. All listener blocks will be dispatched asynchronously save for those dispatched from the IO context
+                        (of which kCMIODevicePropertyDeviceIsRunning and kCMIODeviceProcessorOverload are the only examples) which will be dispatched synchronously. Note that this dispatch
+                        queue will be retained until a matching call to CMIOObjectRemovePropertyListenerBlock is made. If this value is NULL, then the block will be directly invoked.
+    @param          listener
+                        The CMIOObjectPropertyListenerBlock to call. Note that this block will be Block_copy'd and the reference maintained until a matching call to
+                        CMIOObjectRemovePropertyListenerBlock is made.
+    @result         An OSStatus indicating success or failure.
+*/
+extern OSStatus
+CMIOObjectAddPropertyListenerBlock( CMIOObjectID                        objectID,
+                                    const CMIOObjectPropertyAddress*    address,
+                                    dispatch_queue_t                    dispatchQueue,
+                                    CMIOObjectPropertyListenerBlock     listener)                                           AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
+
+/*!
+    @function       CMIOObjectRemovePropertyListenerBlock
+    @abstract       Unregisters the given CMIOObjectPropertyListenerBlock from receiving notifications when the given properties change.
+    @param          objectID
+                        The CMIOObject to unregister the listener from.
+    @param          numberAddresses
+                        The number of elements in the addresses array.
+    @param          addresses
+                        The CMIOObjectPropertyAddress indicating which property the listener should be removed from.
+    @param          dispatchQueue
+                        The dispatch queue on which the listener block was being dispatched to. 
+    @param          listener
+                        The CMIOObjectPropertyListenerBlock being removed.
+    @result         An OSStatus indicating success or failure.
+*/
+extern OSStatus
+CMIOObjectRemovePropertyListenerBlock(  CMIOObjectID                        objectID,
+                                        const CMIOObjectPropertyAddress*    address,
+                                        dispatch_queue_t                    dispatchQueue,
+                                        CMIOObjectPropertyListenerBlock     listener)                                       AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
+
+
+
 #pragma pack(pop)
     
 #if defined(__cplusplus)

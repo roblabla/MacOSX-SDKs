@@ -54,6 +54,7 @@ enum {
 @property int scrollTop;
 @property(readonly) int scrollWidth;
 @property(readonly) int scrollHeight;
+@property(copy) NSString *className;
 @property(readonly, retain) DOMElement *firstElementChild AVAILABLE_IN_WEBKIT_VERSION_4_0;
 @property(readonly, retain) DOMElement *lastElementChild AVAILABLE_IN_WEBKIT_VERSION_4_0;
 @property(readonly, retain) DOMElement *previousElementSibling AVAILABLE_IN_WEBKIT_VERSION_4_0;

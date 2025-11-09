@@ -15,7 +15,7 @@
 #define __TEXTUTILS__
 
 #ifndef __MACTYPES__
-#include <CarbonCore/MacTypes.h>
+#include <MacTypes.h>
 #endif
 
 #ifndef __NUMBERFORMATTING__

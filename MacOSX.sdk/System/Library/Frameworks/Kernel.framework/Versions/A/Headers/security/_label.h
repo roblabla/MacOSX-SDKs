@@ -68,8 +68,11 @@
  * XXXMAC: This shouldn't be exported to userland, but is because of ucred.h
  * and various other messes.
  */
-
+#if CONFIG_EMBEDDED
+#define	MAC_MAX_SLOTS	2
+#else
 #define	MAC_MAX_SLOTS	7
+#endif
 
 #define	MAC_FLAG_INITIALIZED	0x0000001	/* Is initialized for use. */
 

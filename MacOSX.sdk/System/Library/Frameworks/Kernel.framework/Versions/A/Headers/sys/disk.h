@@ -32,6 +32,7 @@
 #include <stdint.h>
 #include <sys/ioctl.h>
 
+
 /*
  * Definitions
  *
@@ -171,6 +172,8 @@ typedef struct
 #define DKIOCLOCKPHYSICALEXTENTS              _IO('d', 81)
 #define DKIOCGETPHYSICALEXTENT                _IOWR('d', 82, dk_physical_extent_t)
 #define DKIOCUNLOCKPHYSICALEXTENTS            _IO('d', 83)
+#define DKIOCGETMAXPRIORITYCOUNT              _IOR('d', 84, uint32_t)
+
 
 
 #endif	/* _SYS_DISK_H_ */

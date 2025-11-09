@@ -10,6 +10,8 @@ typedef struct CGPDFScanner *CGPDFScannerRef;
 #include <CoreGraphics/CGPDFContentStream.h>
 #include <CoreGraphics/CGPDFOperatorTable.h>
 
+CF_IMPLICIT_BRIDGING_ENABLED
+
 /* Create a scanner. */
 
 CG_EXTERN CGPDFScannerRef CGPDFScannerCreate(CGPDFContentStreamRef cs,
@@ -91,5 +93,7 @@ CG_EXTERN bool CGPDFScannerPopDictionary(CGPDFScannerRef scanner,
 
 CG_EXTERN bool CGPDFScannerPopStream(CGPDFScannerRef scanner,
   CGPDFStreamRef *value) CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif /* CGPDFSCANNER_H_ */

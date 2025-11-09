@@ -3,12 +3,13 @@
  
      Contains:   Public interfaces for LaunchServices.framework
  
-     Copyright:  Copyright 2003-2009 by Apple Inc., all rights reserved.
+     Copyright:  (c) 2003-2012 by Apple Inc. All rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
  
                      http://developer.apple.com/bugreporter/
+
 */
 
 #ifndef __LAUNCHSERVICES__
@@ -44,4 +45,3 @@
 
 
 #endif /* __LAUNCHSERVICES__ */
-

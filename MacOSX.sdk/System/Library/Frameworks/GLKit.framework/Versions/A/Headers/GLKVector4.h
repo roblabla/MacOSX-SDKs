@@ -11,9 +11,6 @@
 #include <stdbool.h>
 #include <math.h>
 
-#if defined(__ARM_NEON__)
-#include <arm_neon.h>
-#endif
 
 #include <GLKit/GLKMathTypes.h>
 
@@ -106,10 +103,7 @@ GLK_INLINE GLKVector4 GLKVector4Make(float x, float y, float z, float w)
 
 GLK_INLINE GLKVector4 GLKVector4MakeWithArray(float values[4])
 {
-#if defined(__ARM_NEON__)
-    float32x4_t v = vld1q_f32(values);
-    return *(GLKVector4 *)&v;
-#elif defined(GLK_SSE3_INTRINSICS)
+#if   defined(GLK_SSE3_INTRINSICS)
     __m128 v = _mm_load_ps(values);
     return *(GLKVector4 *)&v;
 #else
@@ -126,10 +120,7 @@ GLK_INLINE GLKVector4 GLKVector4MakeWithVector3(GLKVector3 vector, float w)
     
 GLK_INLINE GLKVector4 GLKVector4Negate(GLKVector4 vector)
 {
-#if defined(__ARM_NEON__)
-    float32x4_t v = vnegq_f32(*(float32x4_t *)&vector);
-    return *(GLKVector4 *)&v;
-#elif defined(GLK_SSE3_INTRINSICS)
+#if   defined(GLK_SSE3_INTRINSICS)
     __m128 v = _mm_set1_ps(0) - _mm_load_ps(&vector.v[0]);
     return *(GLKVector4 *)&v;
 #else
@@ -140,11 +131,7 @@ GLK_INLINE GLKVector4 GLKVector4Negate(GLKVector4 vector)
 
 GLK_INLINE GLKVector4 GLKVector4Add(GLKVector4 vectorLeft, GLKVector4 vectorRight)
 {
-#if defined(__ARM_NEON__)
-    float32x4_t v = vaddq_f32(*(float32x4_t *)&vectorLeft,
-                              *(float32x4_t *)&vectorRight);
-    return *(GLKVector4 *)&v;
-#elif defined(GLK_SSE3_INTRINSICS)
+#if   defined(GLK_SSE3_INTRINSICS)
     __m128 v = _mm_load_ps(&vectorLeft.v[0]) + _mm_load_ps(&vectorRight.v[0]);
     return *(GLKVector4 *)&v;
 #else
@@ -158,11 +145,7 @@ GLK_INLINE GLKVector4 GLKVector4Add(GLKVector4 vectorLeft, GLKVector4 vectorRigh
 
 GLK_INLINE GLKVector4 GLKVector4Subtract(GLKVector4 vectorLeft, GLKVector4 vectorRight)
 {
-#if defined(__ARM_NEON__)
-    float32x4_t v = vsubq_f32(*(float32x4_t *)&vectorLeft,
-                              *(float32x4_t *)&vectorRight);
-    return *(GLKVector4 *)&v;
-#elif defined(GLK_SSE3_INTRINSICS)
+#if   defined(GLK_SSE3_INTRINSICS)
     __m128 v = _mm_load_ps(&vectorLeft.v[0]) - _mm_load_ps(&vectorRight.v[0]);
     return *(GLKVector4 *)&v;
 #else
@@ -176,11 +159,7 @@ GLK_INLINE GLKVector4 GLKVector4Subtract(GLKVector4 vectorLeft, GLKVector4 vecto
 
 GLK_INLINE GLKVector4 GLKVector4Multiply(GLKVector4 vectorLeft, GLKVector4 vectorRight)
 {
-#if defined(__ARM_NEON__)
-    float32x4_t v = vmulq_f32(*(float32x4_t *)&vectorLeft,
-                              *(float32x4_t *)&vectorRight);
-    return *(GLKVector4 *)&v;
-#elif defined(GLK_SSE3_INTRINSICS)
+#if   defined(GLK_SSE3_INTRINSICS)
     __m128 v = _mm_load_ps(&vectorLeft.v[0]) * _mm_load_ps(&vectorRight.v[0]);
     return *(GLKVector4 *)&v;
 #else
@@ -194,15 +173,7 @@ GLK_INLINE GLKVector4 GLKVector4Multiply(GLKVector4 vectorLeft, GLKVector4 vecto
 
 GLK_INLINE GLKVector4 GLKVector4Divide(GLKVector4 vectorLeft, GLKVector4 vectorRight)
 {
-#if defined(__ARM_NEON__)
-    float32x4_t *vLeft = (float32x4_t *)&vectorLeft;
-    float32x4_t *vRight = (float32x4_t *)&vectorRight;
-    float32x4_t estimate = vrecpeq_f32(*vRight);    
-    estimate = vmulq_f32(vrecpsq_f32(*vRight, estimate), estimate);
-    estimate = vmulq_f32(vrecpsq_f32(*vRight, estimate), estimate);
-    float32x4_t v = vmulq_f32(*vLeft, estimate);
-    return *(GLKVector4 *)&v;
-#elif defined(GLK_SSE3_INTRINSICS)
+#if   defined(GLK_SSE3_INTRINSICS)
     __m128 v = _mm_load_ps(&vectorLeft.v[0]) / _mm_load_ps(&vectorRight.v[0]);
     return *(GLKVector4 *)&v;
 #else
@@ -216,11 +187,7 @@ GLK_INLINE GLKVector4 GLKVector4Divide(GLKVector4 vectorLeft, GLKVector4 vectorR
 
 GLK_INLINE GLKVector4 GLKVector4AddScalar(GLKVector4 vector, float value)
 {
-#if defined(__ARM_NEON__)
-    float32x4_t v = vaddq_f32(*(float32x4_t *)&vector,
-                              vdupq_n_f32((float32_t)value));
-    return *(GLKVector4 *)&v;
-#elif defined(GLK_SSE3_INTRINSICS)
+#if   defined(GLK_SSE3_INTRINSICS)
     __m128 v = _mm_load_ps(&vector.v[0]) + _mm_set1_ps(value);
     return *(GLKVector4 *)&v;
 #else
@@ -234,11 +201,7 @@ GLK_INLINE GLKVector4 GLKVector4AddScalar(GLKVector4 vector, float value)
 
 GLK_INLINE GLKVector4 GLKVector4SubtractScalar(GLKVector4 vector, float value)
 {
-#if defined(__ARM_NEON__)
-    float32x4_t v = vsubq_f32(*(float32x4_t *)&vector,
-                              vdupq_n_f32((float32_t)value));
-    return *(GLKVector4 *)&v;
-#elif defined(GLK_SSE3_INTRINSICS)
+#if   defined(GLK_SSE3_INTRINSICS)
     __m128 v = _mm_load_ps(&vector.v[0]) - _mm_set1_ps(value);
     return *(GLKVector4 *)&v;
 #else
@@ -252,11 +215,7 @@ GLK_INLINE GLKVector4 GLKVector4SubtractScalar(GLKVector4 vector, float value)
 
 GLK_INLINE GLKVector4 GLKVector4MultiplyScalar(GLKVector4 vector, float value)
 {
-#if defined(__ARM_NEON__)
-    float32x4_t v = vmulq_f32(*(float32x4_t *)&vector,
-                              vdupq_n_f32((float32_t)value));
-    return *(GLKVector4 *)&v;
-#elif defined(GLK_SSE3_INTRINSICS)
+#if   defined(GLK_SSE3_INTRINSICS)
     __m128 v = _mm_load_ps(&vector.v[0]) * _mm_set1_ps(value);
     return *(GLKVector4 *)&v;
 #else
@@ -270,14 +229,7 @@ GLK_INLINE GLKVector4 GLKVector4MultiplyScalar(GLKVector4 vector, float value)
 
 GLK_INLINE GLKVector4 GLKVector4DivideScalar(GLKVector4 vector, float value)
 {
-#if defined(__ARM_NEON__)
-    float32x4_t values = vdupq_n_f32((float32_t)value);
-    float32x4_t estimate = vrecpeq_f32(values);    
-    estimate = vmulq_f32(vrecpsq_f32(values, estimate), estimate);
-    estimate = vmulq_f32(vrecpsq_f32(values, estimate), estimate);
-    float32x4_t v = vmulq_f32(*(float32x4_t *)&vector, estimate);
-    return *(GLKVector4 *)&v;
-#elif defined(GLK_SSE3_INTRINSICS)
+#if   defined(GLK_SSE3_INTRINSICS)
     __m128 v = _mm_load_ps(&vector.v[0]) / _mm_set1_ps(value);
     return *(GLKVector4 *)&v;
 #else
@@ -291,11 +243,7 @@ GLK_INLINE GLKVector4 GLKVector4DivideScalar(GLKVector4 vector, float value)
     
 GLK_INLINE GLKVector4 GLKVector4Maximum(GLKVector4 vectorLeft, GLKVector4 vectorRight)
 {
-#if defined(__ARM_NEON__)
-    float32x4_t v = vmaxq_f32(*(float32x4_t *)&vectorLeft,
-                              *(float32x4_t *)&vectorRight);
-    return *(GLKVector4 *)&v;
-#elif defined(GLK_SSE3_INTRINSICS)
+#if   defined(GLK_SSE3_INTRINSICS)
     __m128 v = _mm_max_ps(_mm_load_ps(&vectorLeft.v[0]), _mm_load_ps(&vectorRight.v[0]));
     return *(GLKVector4 *)&v;
 #else
@@ -314,11 +262,7 @@ GLK_INLINE GLKVector4 GLKVector4Maximum(GLKVector4 vectorLeft, GLKVector4 vector
 
 GLK_INLINE GLKVector4 GLKVector4Minimum(GLKVector4 vectorLeft, GLKVector4 vectorRight)
 {
-#if defined(__ARM_NEON__)
-        float32x4_t v = vminq_f32(*(float32x4_t *)&vectorLeft,
-                                  *(float32x4_t *)&vectorRight);
-        return *(GLKVector4 *)&v;
-#elif defined(GLK_SSE3_INTRINSICS)
+#if   defined(GLK_SSE3_INTRINSICS)
     __m128 v = _mm_min_ps(_mm_load_ps(&vectorLeft.v[0]), _mm_load_ps(&vectorRight.v[0]));
     return *(GLKVector4 *)&v;
 #else
@@ -482,13 +426,7 @@ GLK_INLINE GLKVector4 GLKVector4Normalize(GLKVector4 vector)
 
 GLK_INLINE float GLKVector4DotProduct(GLKVector4 vectorLeft, GLKVector4 vectorRight)
 {
-#if defined(__ARM_NEON__)
-    float32x4_t v = vmulq_f32(*(float32x4_t *)&vectorLeft,
-                              *(float32x4_t *)&vectorRight);
-    float32x2_t v2 = vpadd_f32(vget_low_f32(v), vget_high_f32(v));
-    v2 = vpadd_f32(v2, v2);
-    return vget_lane_f32(v2, 0);
-#elif defined(GLK_SSE3_INTRINSICS) 
+#if   defined(GLK_SSE3_INTRINSICS) 
 	const __m128 product = _mm_load_ps(&vectorLeft.v[0]) * _mm_load_ps(&vectorRight.v[0]);
 	const __m128 halfsum = _mm_hadd_ps(product, product);
 	return _mm_cvtss_f32(_mm_hadd_ps(halfsum, halfsum));
@@ -502,13 +440,7 @@ GLK_INLINE float GLKVector4DotProduct(GLKVector4 vectorLeft, GLKVector4 vectorRi
 
 GLK_INLINE float GLKVector4Length(GLKVector4 vector)
 {
-#if defined(__ARM_NEON__)
-    float32x4_t v = vmulq_f32(*(float32x4_t *)&vector,
-                              *(float32x4_t *)&vector);
-    float32x2_t v2 = vpadd_f32(vget_low_f32(v), vget_high_f32(v));
-    v2 = vpadd_f32(v2, v2);
-    return sqrt(vget_lane_f32(v2, 0));
-#elif defined(GLK_SSE3_INTRINSICS) 
+#if   defined(GLK_SSE3_INTRINSICS) 
 	const __m128 q = _mm_load_ps(&vector.v[0]);
 	const __m128 product = q * q;
 	const __m128 halfsum = _mm_hadd_ps(product, product);
@@ -528,13 +460,7 @@ GLK_INLINE float GLKVector4Distance(GLKVector4 vectorStart, GLKVector4 vectorEnd
 
 GLK_INLINE GLKVector4 GLKVector4Lerp(GLKVector4 vectorStart, GLKVector4 vectorEnd, float t)
 {
-#if defined(__ARM_NEON__)
-    float32x4_t vDiff = vsubq_f32(*(float32x4_t *)&vectorEnd,
-                                  *(float32x4_t *)&vectorStart);
-    vDiff = vmulq_f32(vDiff, vdupq_n_f32((float32_t)t));
-    float32x4_t v = vaddq_f32(*(float32x4_t *)&vectorStart, vDiff);
-    return *(GLKVector4 *)&v;
-#elif defined(GLK_SSE3_INTRINSICS)
+#if   defined(GLK_SSE3_INTRINSICS)
 	const __m128 s =  _mm_load_ps(&vectorStart.v[0]);
     const __m128 v = s + (_mm_load_ps(&vectorEnd.v[0]) - s) * _mm_set1_ps(t);
     return *(GLKVector4 *)&v;

@@ -61,7 +61,7 @@ __BEGIN_DECLS
  *
  * @result 0 on success, -1 otherwise.
  */
-__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_8,__IPHONE_2_0,__IPHONE_NA)
+__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_8,__IPHONE_2_0,__IPHONE_6_0)
 int sandbox_init(const char *profile, uint64_t flags, char **errorbuf);
 
 /*
@@ -75,25 +75,25 @@ int sandbox_init(const char *profile, uint64_t flags, char **errorbuf);
  */
 
 /* TCP/IP networking is prohibited. */
-__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_8,__IPHONE_2_0,__IPHONE_NA)
+__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_8,__IPHONE_2_0,__IPHONE_6_0)
 extern const char kSBXProfileNoInternet[];
 
 /* All sockets-based networking is prohibited. */
-__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_8,__IPHONE_2_0,__IPHONE_NA)
+__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_8,__IPHONE_2_0,__IPHONE_6_0)
 extern const char kSBXProfileNoNetwork[];
 
 /* File system writes are prohibited. */
-__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_8,__IPHONE_2_0,__IPHONE_NA)
+__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_8,__IPHONE_2_0,__IPHONE_6_0)
 extern const char kSBXProfileNoWrite[];
 
 /* File system writes are restricted to temporary folders /var/tmp and
  * confstr(_CS_DARWIN_USER_DIR, ...).
  */
-__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_8,__IPHONE_2_0,__IPHONE_NA)
+__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_8,__IPHONE_2_0,__IPHONE_6_0)
 extern const char kSBXProfileNoWriteExceptTemporary[];
 
 /* All operating system services are prohibited. */
-__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_8,__IPHONE_2_0,__IPHONE_NA)
+__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_8,__IPHONE_2_0,__IPHONE_6_0)
 extern const char kSBXProfilePureComputation[];
 
 /*
@@ -105,7 +105,7 @@ extern const char kSBXProfilePureComputation[];
  *
  * @result void
  */
-__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_8,__IPHONE_2_0,__IPHONE_NA)
+__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_8,__IPHONE_2_0,__IPHONE_6_0)
 void sandbox_free_error(char *errorbuf);
 
 __END_DECLS

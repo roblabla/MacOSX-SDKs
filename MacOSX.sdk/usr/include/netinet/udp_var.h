@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2008-2012 Apple Inc. All rights reserved.
+ * Copyright (c) 2008-2013 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -62,15 +62,15 @@
 
 #ifndef _NETINET_UDP_VAR_H_
 #define _NETINET_UDP_VAR_H_
-#include <sys/appleapiopts.h>
 
+#include <sys/appleapiopts.h>
 #include <sys/sysctl.h>
 
 /*
  * UDP kernel structures and variables.
  */
 struct	udpiphdr {
-	struct 	ipovly ui_i;		/* overlaid ip structure */
+	struct	ipovly ui_i;		/* overlaid ip structure */
 	struct	udphdr ui_u;		/* udp header */
 };
 #define	ui_x1		ui_i.ih_x1
@@ -86,24 +86,31 @@ struct	udpiphdr {
 #define ui_prev		ui_i.ih_prev
 
 struct	udpstat {
-				/* input statistics: */
-	u_int32_t	udps_ipackets;		/* total input packets */
-	u_int32_t	udps_hdrops;		/* packet shorter than header */
-	u_int32_t	udps_badsum;		/* checksum error */
-	u_int32_t	udps_badlen;		/* data length larger than packet */
-	u_int32_t	udps_noport;		/* no socket on port */
-	u_int32_t	udps_noportbcast;	/* of above, arrived as broadcast */
-	u_int32_t	udps_fullsock;		/* not delivered, input socket full */
-	u_int32_t	udpps_pcbcachemiss;	/* input packets missing pcb cache */
-	u_int32_t	udpps_pcbhashmiss;	/* input packets not for hashed pcb */
-				/* output statistics: */
-	u_int32_t	udps_opackets;		/* total output packets */
-	u_int32_t	udps_fastout;		/* output packets on fast path */
-#ifndef __APPLE__
-	u_int32_t	udps_nosum;		/* no checksum */
-				/* of no socket on port, arrived as multicast */
-	u_int32_t	udps_noportmcast;
-#endif
+	/* input statistics: */
+	u_int32_t udps_ipackets;	/* total input packets */
+	u_int32_t udps_hdrops;		/* packet shorter than header */
+	u_int32_t udps_badsum;		/* checksum error */
+	u_int32_t udps_badlen;		/* data length larger than packet */
+	u_int32_t udps_noport;		/* no socket on port */
+	u_int32_t udps_noportbcast;	/* of above, arrived as broadcast */
+	u_int32_t udps_fullsock;	/* not delivered, input socket full */
+	u_int32_t udpps_pcbcachemiss;	/* input packets missing pcb cache */
+	u_int32_t udpps_pcbhashmiss;	/* input packets not for hashed pcb */
+	/* output statistics: */
+	u_int32_t udps_opackets;	/* total output packets */
+	u_int32_t udps_fastout;		/* output packets on fast path */
+	u_int32_t udps_nosum;		/* no checksum */
+	u_int32_t udps_noportmcast;	/* of no socket on port, multicast */
+	u_int32_t udps_filtermcast;	/* blocked by multicast filter */
+	/* checksum statistics: */
+	u_int32_t udps_rcv_swcsum;	  /* udp swcksum (inbound), packets */
+	u_int32_t udps_rcv_swcsum_bytes;  /* udp swcksum (inbound), bytes */
+	u_int32_t udps_rcv6_swcsum;	  /* udp6 swcksum (inbound), packets */
+	u_int32_t udps_rcv6_swcsum_bytes; /* udp6 swcksum (inbound), bytes */
+	u_int32_t udps_snd_swcsum;	  /* udp swcksum (outbound), packets */
+	u_int32_t udps_snd_swcsum_bytes;  /* udp swcksum (outbound), bytes */
+	u_int32_t udps_snd6_swcsum;	  /* udp6 swcksum (outbound), packets */
+	u_int32_t udps_snd6_swcsum_bytes; /* udp6 swcksum (outbound), bytes */
 };
 
 /*

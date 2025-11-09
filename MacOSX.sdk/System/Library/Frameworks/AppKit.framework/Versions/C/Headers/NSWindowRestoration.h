@@ -1,7 +1,7 @@
 /*
 	NSWindowRestoration.h
 	Application Kit
-	Copyright (c) 1994-2012, Apple Inc.
+	Copyright (c) 1994-2013, Apple Inc.
 	All rights reserved.
  */
 
@@ -110,6 +110,7 @@ APPKIT_EXTERN NSString * const NSApplicationDidFinishRestoringWindowsNotificatio
 
 @interface NSDocument (NSRestorableState)
 
+#if NS_BLOCKS_AVAILABLE
 /* The following method is called by the default implementation of +[NSDocumentController restoreWindowWithIdentifier:state:completionHandler:] to restore a window that was associated with a document, after that document has been reopened.
  
  The default implementation first checks if the document has window controllers, and if not, it calls -makeWindowControllers.  If there is then exactly one window controller, it invokes the completion handler with its window.  If there is more than one, it searches the receiver's window controllers for a window that matches the given identifier, and then calls the completionHandler with it.  If no window could be found, it invokes the completion handler with a nil window.
@@ -117,6 +118,7 @@ APPKIT_EXTERN NSString * const NSApplicationDidFinishRestoringWindowsNotificatio
 If your document has variable or optional windows, you may override this to create the requested window, and then call the completion handler with it.  This allows you to use the default document reopening behavior, but intervene at the point of creating the windows.  The parameters are the same as in the class method +restoreWindowWithIdentifier:state:completionHandler:. 
 */
 - (void)restoreDocumentWindowWithIdentifier:(NSString *)identifier state:(NSCoder *)state completionHandler:(void (^)(NSWindow *, NSError *))completionHandler NS_AVAILABLE_MAC(10_7);
+#endif
 
 /* NSDocument implements the NSRestorableState methods, even though it itself is not an NSResponder. */
 - (void)encodeRestorableStateWithCoder:(NSCoder *)coder NS_AVAILABLE_MAC(10_7);

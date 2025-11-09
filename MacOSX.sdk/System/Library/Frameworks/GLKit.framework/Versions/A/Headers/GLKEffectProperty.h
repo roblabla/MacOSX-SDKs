@@ -35,7 +35,7 @@
 
 typedef struct GLKEffectPropertyPrv *GLKEffectPropertyPrvPtr;
 
-
+NS_CLASS_AVAILABLE(10_8, 5_0)
 @interface GLKEffectProperty : NSObject 
 {
     @protected

@@ -1,5 +1,5 @@
 /*	NSHashTable.h
-	Copyright (c) 1994-2012, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2013, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSPointerFunctions.h>
@@ -12,7 +12,7 @@
 @class NSArray, NSSet, NSHashTable;
 
 
-/* An NSHashTable is modeled after a set, although, because of its options, is not a set because it can behave differently (for example, if pointer equality is specified two isEqual strings will both be entered).  The major option is to provide for "weak" references that are removed automatically.
+/* An NSHashTable is modeled after a set, although, because of its options, is not a set because it can behave differently (for example, if pointer equality is specified two isEqual strings will both be entered).  The major option is to provide for "weak" references that are removed automatically, but at some indefinite point in the future.
    An NSHashTable can also be configured to operate on arbitrary pointers and not just objects.  We recommend the C function API for "void *" access.  To configure for pointer use, consult and choose the appropriate NSPointerFunctionsOptions or configure or use an NSPointerFunctions object itself for initialization.
 */
 
@@ -42,7 +42,7 @@ NS_CLASS_AVAILABLE(10_5, 6_0)
 + (id)hashTableWithWeakObjects NS_DEPRECATED_MAC(10_5, 10_8);  // GC zeroing, otherwise unsafe unretained
 #endif
 
-+ (id)weakObjectsHashTable NS_AVAILABLE(10_8, 6_0);    // hash table with zeroing weak object references
++ (id)weakObjectsHashTable NS_AVAILABLE(10_8, 6_0); // entries are not necessarily purged right away when the weak object is reclaimed
 
 
 /* return an NSPointerFunctions object reflecting the functions in use.  This is a new autoreleased object that can be subsequently modified and/or used directly in the creation of other pointer "collections". */

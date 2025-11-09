@@ -14,4 +14,6 @@
 #include <HIServices/AXValue.h>
 #include <HIServices/AXTextAttributedString.h>
 
+#define AX_ALLOW_OLD_SECURITY_METHOD 0
+
 #endif // __ACCESSIBILITY__

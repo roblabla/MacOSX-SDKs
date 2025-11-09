@@ -1,7 +1,7 @@
 /*
 	NSNibLoading.h
 	Application Kit
-	Copyright (c) 1994-2012, Apple Inc.
+	Copyright (c) 1994-2013, Apple Inc.
 	All rights reserved.
 */
 
@@ -12,7 +12,7 @@
 @interface NSBundle(NSNibLoading)
 
 - (BOOL)loadNibNamed:(NSString *)nibName owner:(id)owner topLevelObjects:(NSArray **)topLevelObjects NS_AVAILABLE_MAC(10_8);
-    /* Load a nib from this bundle with the specified file name and owner. Upon success, the method returns success or failure. The out-parameter topLevelObjects is populated with the top level objects of the nib. Unlike legacy methods, the objects adhere to the standard cocoa memory management rules; it is necessary to keep a strong reference to them by using IBOutlets or holding a reference to the array to prevent the nib contents from being deallocated.  Outlets to top level objects should be strong (retain) to demonstrate ownership and prevent deallocation. */
+    /* Load a nib from this bundle with the specified file name and owner. Upon success, the method returns YES and the optional out-parameter topLevelObjects is populated with the top level objects of the nib. The objects adhere to the standard Cocoa memory management rules and are autoreleased. IBOutlet properties to top level objects should be strong (retain) to demonstrate ownership and prevent deallocation. Alternatively, one may hold a strong reference to the top level objects array. */
 
 @end
 
@@ -22,7 +22,7 @@
 @end
 
 @interface NSBundle (NSNibLoadingDeprecated)
-+ (BOOL)loadNibFile:(NSString *)fileName externalNameTable:(NSDictionary *)context withZone:(NSZone *)zone; // Deprecated in Mac OS X 10.8
-+ (BOOL)loadNibNamed:(NSString *)nibName owner:(id)owner; // Deprecated in Mac OS X 10.8
-- (BOOL)loadNibFile:(NSString *)fileName externalNameTable:(NSDictionary *)context withZone:(NSZone *)zone; // Deprecated in Mac OS X 10.8
++ (BOOL)loadNibFile:(NSString *)fileName externalNameTable:(NSDictionary *)context withZone:(NSZone *)zone NS_DEPRECATED_MAC(10_0, 10_8); // Deprecated in Mac OS X 10.8
++ (BOOL)loadNibNamed:(NSString *)nibName owner:(id)owner NS_DEPRECATED_MAC(10_0, 10_8); // Deprecated in Mac OS X 10.8
+- (BOOL)loadNibFile:(NSString *)fileName externalNameTable:(NSDictionary *)context withZone:(NSZone *)zone NS_DEPRECATED_MAC(10_0, 10_8); // Deprecated in Mac OS X 10.8
 @end

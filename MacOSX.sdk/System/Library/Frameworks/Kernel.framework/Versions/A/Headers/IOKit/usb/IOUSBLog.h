@@ -24,9 +24,10 @@
 #ifndef _IOKIT_IOUSBLOG_H
 #define _IOKIT_IOUSBLOG_H
 
+#ifdef KERNEL
 #include 	<IOKit/IOService.h>
 #include	<IOKit/IOLib.h>
-
+#endif
 
 #ifdef	__cplusplus
 	extern "C" {
@@ -116,6 +117,7 @@ enum
 	kKernelDebugAnyLevel		= 0
 };
 
+#ifdef KERNEL
 // Function prototypes.
 
 void			KernelDebugSetLevel( KernelDebugLevel inLevel );
@@ -246,4 +248,4 @@ public:
 
 #endif
 #endif
-
+#endif

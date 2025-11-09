@@ -128,7 +128,9 @@ typedef natural_t mach_msg_timeout_t;
 #define MACH_MSGH_BITS_USER             0x8000ffffU
 
 #define	MACH_MSGH_BITS_CIRCULAR		0x40000000	/* internal use only */
-#define	MACH_MSGH_BITS_USED		0xc000ffffU
+#define	MACH_MSGH_BITS_RAISEIMP		0x20000000	/* importance raise, internal use only */
+#define	MACH_MSGH_BITS_IMPHOLDASRT	0x10000000	/* holds assertion alredy, in userland */
+#define	MACH_MSGH_BITS_USED		0xf000ffffU
 
 #define	MACH_MSGH_BITS_PORTS_MASK				\
 		(MACH_MSGH_BITS_REMOTE_MASK|MACH_MSGH_BITS_LOCAL_MASK)
@@ -350,6 +352,7 @@ typedef	unsigned int mach_msg_trailer_type_t;
 #define	MACH_MSG_TRAILER_FORMAT_0	0
 
 typedef	unsigned int mach_msg_trailer_size_t;
+typedef char *mach_msg_trailer_info_t;
 
 typedef struct 
 {
@@ -443,6 +446,7 @@ typedef struct
  * another module may exceed the local modules notion of
  * MAX_TRAILER_SIZE.
  */
+
 typedef mach_msg_mac_trailer_t mach_msg_max_trailer_t;
 #define MAX_TRAILER_SIZE ((mach_msg_size_t)sizeof(mach_msg_max_trailer_t))
 
@@ -566,18 +570,23 @@ typedef integer_t mach_msg_option_t;
 
 #define	MACH_SEND_MSG		0x00000001
 #define	MACH_RCV_MSG		0x00000002
-#define MACH_RCV_LARGE		0x00000004
 
-#define MACH_SEND_TIMEOUT	0x00000010
-#define MACH_SEND_INTERRUPT	0x00000040	/* libmach implements */
+#define MACH_RCV_LARGE		0x00000004	/* report large message sizes */
+#define MACH_RCV_LARGE_IDENTITY	0x00000008	/* identify source of large messages */
+
+#define MACH_SEND_TIMEOUT	0x00000010	/* timeout value applies to send */
+#define MACH_SEND_INTERRUPT	0x00000040	/* don't restart interrupted sends */
 #define MACH_SEND_NOTIFY	0x00000080	/* arm send-possible notify */
-#define MACH_SEND_ALWAYS	0x00010000	/* internal use only */
-#define MACH_SEND_TRAILER	0x00020000	
+#define MACH_SEND_ALWAYS	0x00010000	/* ignore qlimits - kernel only */
+#define MACH_SEND_TRAILER	0x00020000	/* sender-provided trailer */
+#define MACH_SEND_NOIMPORTANCE  0x00040000      /* msg won't carry importance */
+#define MACH_SEND_IMPORTANCE	0x00080000	/* msg carries importance - kernel only */
 
-#define MACH_RCV_TIMEOUT	0x00000100
+
+#define MACH_RCV_TIMEOUT	0x00000100	/* timeout value applies to receive */	
 #define MACH_RCV_NOTIFY		0x00000200	/* reserved - legacy */
-#define MACH_RCV_INTERRUPT	0x00000400	/* libmach implements */
-#define MACH_RCV_OVERWRITE	0x00001000
+#define MACH_RCV_INTERRUPT	0x00000400	/* don't restart interrupted receive */
+#define MACH_RCV_OVERWRITE	0x00001000	/* scatter receive */
 
 /* 
  * NOTE: a 0x00------ RCV mask implies to ask for
@@ -598,9 +607,10 @@ typedef integer_t mach_msg_option_t;
 
 #define MACH_RCV_TRAILER_TYPE(x)     (((x) & 0xf) << 28) 
 #define MACH_RCV_TRAILER_ELEMENTS(x) (((x) & 0xf) << 24)  
-#define MACH_RCV_TRAILER_MASK 	     ((0xff << 24))
+#define MACH_RCV_TRAILER_MASK 	     ((0xf << 24))
 
 #define GET_RCV_ELEMENTS(y) (((y) >> 24) & 0xf)
+
 
 /* 
  * XXXMAC: note that in the case of MACH_RCV_TRAILER_LABELS, 

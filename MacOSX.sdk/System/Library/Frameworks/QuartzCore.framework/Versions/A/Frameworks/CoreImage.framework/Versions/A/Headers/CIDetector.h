@@ -80,3 +80,10 @@ CORE_IMAGE_EXPORT NSString* const CIDetectorMinFeatureSize __OSX_AVAILABLE_START
  still be based on those of the image. */
 CORE_IMAGE_EXPORT NSString *const CIDetectorImageOrientation __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_5_0);
 
+/* The value for this key is a bool NSNumber. If true, facial expressions, such as blinking and closed eyes are extracted */
+CORE_IMAGE_EXPORT NSString *const CIDetectorEyeBlink __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+
+
+/* The value for this key is a bool NSNumber. If true, facial expressions, such as smile are extracted */
+CORE_IMAGE_EXPORT NSString *const CIDetectorSmile __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+

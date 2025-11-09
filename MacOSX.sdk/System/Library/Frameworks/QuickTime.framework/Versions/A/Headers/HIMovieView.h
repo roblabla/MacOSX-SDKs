@@ -3,7 +3,7 @@
  
      Contains:   HIView-based movie playback
  
-     Version:    QuickTime 7.7.1
+     Version:    QuickTime 7.7.3
  
      Copyright:  © 2004-2012 by Apple Inc., all rights reserved.
  
@@ -13,6 +13,14 @@
                      http://developer.apple.com/bugreporter/
  
 */
+
+/*
+  QuickTime has been deprecated in 10.9.
+
+  AVFoundation and AVKit are the frameworks recommended for all new development 
+  involving time-based audiovisual media on OS X.
+*/
+
 #ifndef __HIMOVIEVIEW__
 #define __HIMOVIEVIEW__
 
@@ -73,7 +81,7 @@ enum {
  *          The new optimal bounds.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 (or QuickTime 7.0) and later in QuickTime.framework
+ *    Mac OS X:         in version 10.4 (or QuickTime 7.0) and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        not available
  */
 enum {
@@ -127,7 +135,7 @@ enum {
 };
 
 /*
- *  HIMovieViewCreate()
+ *  HIMovieViewCreate()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Creates an HIMovieView object
@@ -147,7 +155,7 @@ enum {
  *      [out] Points to variable to receive new HIMovieView
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 (or QuickTime 7.0) and later in QuickTime.framework
+ *    Mac OS X:         in version 10.4 (or QuickTime 7.0) and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -155,11 +163,11 @@ extern OSStatus
 HIMovieViewCreate(
   Movie        inMovie,
   OptionBits   inAttributes,
-  HIViewRef *  outMovieView)                                  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  HIViewRef *  outMovieView)                                  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  HIMovieViewGetMovie()
+ *  HIMovieViewGetMovie()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Returns the view's current movie.
@@ -170,16 +178,16 @@ HIMovieViewCreate(
  *      [in]  The HIMovieView
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 (or QuickTime 7.0) and later in QuickTime.framework
+ *    Mac OS X:         in version 10.4 (or QuickTime 7.0) and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
 extern Movie 
-HIMovieViewGetMovie(HIViewRef inView)                         AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+HIMovieViewGetMovie(HIViewRef inView)                         AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  HIMovieViewSetMovie()
+ *  HIMovieViewSetMovie()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Sets the view's current movie.
@@ -193,18 +201,18 @@ HIMovieViewGetMovie(HIViewRef inView)                         AVAILABLE_MAC_OS_X
  *      [in]  The new movie to display
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 (or QuickTime 7.0) and later in QuickTime.framework
+ *    Mac OS X:         in version 10.4 (or QuickTime 7.0) and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
 HIMovieViewSetMovie(
   HIViewRef   inView,
-  Movie       inMovie)                                        AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  Movie       inMovie)                                        AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  HIMovieViewGetAttributes()
+ *  HIMovieViewGetAttributes()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Returns the view's current attributes.
@@ -215,16 +223,16 @@ HIMovieViewSetMovie(
  *      [in]  The HIMovieView
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 (or QuickTime 7.0) and later in QuickTime.framework
+ *    Mac OS X:         in version 10.4 (or QuickTime 7.0) and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
 extern OptionBits 
-HIMovieViewGetAttributes(HIViewRef inView)                    AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+HIMovieViewGetAttributes(HIViewRef inView)                    AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  HIMovieViewChangeAttributes()
+ *  HIMovieViewChangeAttributes()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Changes the views attributes.
@@ -244,7 +252,7 @@ HIMovieViewGetAttributes(HIViewRef inView)                    AVAILABLE_MAC_OS_X
  *      [in]  Attributes to clear
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 (or QuickTime 7.0) and later in QuickTime.framework
+ *    Mac OS X:         in version 10.4 (or QuickTime 7.0) and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -252,11 +260,11 @@ extern OSStatus
 HIMovieViewChangeAttributes(
   HIViewRef    inView,
   OptionBits   inAttributesToSet,
-  OptionBits   inAttributesToClear)                           AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  OptionBits   inAttributesToClear)                           AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  HIMovieViewGetMovieController()
+ *  HIMovieViewGetMovieController()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Returns the view's current movie controller.
@@ -267,16 +275,16 @@ HIMovieViewChangeAttributes(
  *      [in]  The HIMovieView
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 (or QuickTime 7.0) and later in QuickTime.framework
+ *    Mac OS X:         in version 10.4 (or QuickTime 7.0) and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
 extern MovieController 
-HIMovieViewGetMovieController(HIViewRef inView)               AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+HIMovieViewGetMovieController(HIViewRef inView)               AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  HIMovieViewGetControllerBarSize()
+ *  HIMovieViewGetControllerBarSize()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Returns the size of the visible movie controller bar.
@@ -287,16 +295,16 @@ HIMovieViewGetMovieController(HIViewRef inView)               AVAILABLE_MAC_OS_X
  *      [in]  The HIMovieView
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 (or QuickTime 7.0) and later in QuickTime.framework
+ *    Mac OS X:         in version 10.4 (or QuickTime 7.0) and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
 extern HISize 
-HIMovieViewGetControllerBarSize(HIViewRef inView)             AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+HIMovieViewGetControllerBarSize(HIViewRef inView)             AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  HIMovieViewPlay()
+ *  HIMovieViewPlay()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Convenience routine to play the view's current movie.
@@ -310,16 +318,16 @@ HIMovieViewGetControllerBarSize(HIViewRef inView)             AVAILABLE_MAC_OS_X
  *      [in]  The movie view.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 (or QuickTime 7.0) and later in QuickTime.framework
+ *    Mac OS X:         in version 10.4 (or QuickTime 7.0) and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-HIMovieViewPlay(HIViewRef movieView)                          AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+HIMovieViewPlay(HIViewRef movieView)                          AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  HIMovieViewPause()
+ *  HIMovieViewPause()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Convenience routine to pause the view's current movie.
@@ -333,12 +341,12 @@ HIMovieViewPlay(HIViewRef movieView)                          AVAILABLE_MAC_OS_X
  *      [in]  The movie view.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 (or QuickTime 7.0) and later in QuickTime.framework
+ *    Mac OS X:         in version 10.4 (or QuickTime 7.0) and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-HIMovieViewPause(HIViewRef movieView)                         AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+HIMovieViewPause(HIViewRef movieView)                         AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 

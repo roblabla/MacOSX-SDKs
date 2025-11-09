@@ -22,7 +22,7 @@
 
 /******************************************************************************
  *                                                                            *
- *     File:  complex.h	                                                      *
+ *     File:  complex.h                                                       *
  *                                                                            *
  *     Contains: prototypes and macros germane to C99 complex math.           *
  *                                                                            *
@@ -36,11 +36,44 @@
 #undef complex
 #define complex _Complex
 #undef _Complex_I
-/* constant expression of type const float _Complex                           */
+/*  Constant expression of type const float _Complex                          */
 #define _Complex_I (__extension__ 1.0iF)
 #undef I
 #define I _Complex_I
-	
+
+#if (__STDC_VERSION__ > 199901L || __DARWIN_C_LEVEL >= __DARWIN_C_FULL) \
+    && defined __clang__
+
+/*  Complex initializer macros.  These are a C11 feature, but are also provided
+    as an extension in C99 so long as strict POSIX conformance is not
+    requested.  They are available only when building with the llvm-clang
+    compiler, as there is no way to support them with the gcc-4.2 frontend.
+    These may be used for static initialization of complex values, like so:
+ 
+        static const float complex someVariable = CMPLXF(1.0, INFINITY);
+ 
+    they may, of course, be used outside of static contexts as well.          */
+
+#define  CMPLX(__real,__imag) \
+    _Pragma("clang diagnostic push") \
+    _Pragma("clang diagnostic ignored \"-Wcomplex-component-init\"") \
+    (double _Complex){(__real),(__imag)} \
+    _Pragma("clang diagnostic pop")
+
+#define CMPLXF(__real,__imag) \
+    _Pragma("clang diagnostic push") \
+    _Pragma("clang diagnostic ignored \"-Wcomplex-component-init\"") \
+    (float _Complex){(__real),(__imag)} \
+    _Pragma("clang diagnostic pop")
+
+#define CMPLXL(__real,__imag) \
+    _Pragma("clang diagnostic push") \
+    _Pragma("clang diagnostic ignored \"-Wcomplex-component-init\"") \
+    (long double _Complex){(__real),(__imag)} \
+    _Pragma("clang diagnostic pop")
+
+#endif /* End C11 features.                                                   */
+
 __BEGIN_DECLS
 extern float complex cacosf(float complex);
 extern double complex cacos(double complex);

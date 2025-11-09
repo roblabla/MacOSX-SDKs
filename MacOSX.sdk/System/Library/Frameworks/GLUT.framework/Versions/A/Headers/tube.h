@@ -13,6 +13,8 @@
 #ifndef __TUBE_H__
 #define __TUBE_H__
 
+#include <OpenGL/OpenGLAvailability.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -33,7 +35,7 @@ extern "C" {
 #ifndef gleDouble
     #define gleDouble double
 #endif
-typedef gleDouble gleAffine[2][3];
+typedef gleDouble gleAffine[2][3] OPENGL_DEPRECATED(10_0, 10_9);
 
 /* ====================================================== */
 
@@ -88,22 +90,22 @@ typedef gleDouble gleAffine[2][3];
 
 #endif /* GL_32 */
 
-extern int gleGetJoinStyle (void);
-extern void gleSetJoinStyle (int style);	/* bitwise OR of flags */
-extern int gleGetNumSlices(void);
-extern void gleSetNumSlices(int slices);
+extern int gleGetJoinStyle (void) OPENGL_DEPRECATED(10_0, 10_9);
+extern void gleSetJoinStyle (int style) OPENGL_DEPRECATED(10_0, 10_9);	/* bitwise OR of flags */
+extern int gleGetNumSlices(void) OPENGL_DEPRECATED(10_0, 10_9);
+extern void gleSetNumSlices(int slices) OPENGL_DEPRECATED(10_0, 10_9);
 
 /* draw polyclinder, specified as a polyline */
 extern void glePolyCylinder (int npoints,	/* num points in polyline */
                    gleDouble point_array[][3],	/* polyline vertces */
                    float color_array[][3],	/* colors at polyline verts */
-                   gleDouble radius);		/* radius of polycylinder */
+                   gleDouble radius) OPENGL_DEPRECATED(10_0, 10_9);		/* radius of polycylinder */
 
 /* draw polycone, specified as a polyline with radii */
 extern void glePolyCone (int npoints,	 /* numpoints in poly-line */
                    gleDouble point_array[][3],	/* polyline vertices */
                    float color_array[][3],	/* colors at polyline verts */
-                   gleDouble radius_array[]); /* cone radii at polyline verts */
+                   gleDouble radius_array[]) OPENGL_DEPRECATED(10_0, 10_9); /* cone radii at polyline verts */
 
 /* extrude arbitrary 2D contour along arbitrary 3D path */
 extern void gleExtrusion (int ncp,         /* number of contour points */
@@ -112,7 +114,7 @@ extern void gleExtrusion (int ncp,         /* number of contour points */
                 gleDouble up[3],            /* up vector for contour */
                 int npoints,            /* numpoints in poly-line */
                 gleDouble point_array[][3], /* polyline vertices */
-                float color_array[][3]); /* colors at polyline verts */
+                float color_array[][3]) OPENGL_DEPRECATED(10_0, 10_9); /* colors at polyline verts */
 
 /* extrude 2D contour, specifying local rotations (twists) */
 extern void gleTwistExtrusion (int ncp,         /* number of contour points */
@@ -122,7 +124,7 @@ extern void gleTwistExtrusion (int ncp,         /* number of contour points */
                 int npoints,           /* numpoints in poly-line */
                 gleDouble point_array[][3],        /* polyline vertices */
                 float color_array[][3],        /* color at polyline verts */
-                gleDouble twist_array[]);   /* countour twists (in degrees) */
+                gleDouble twist_array[]) OPENGL_DEPRECATED(10_0, 10_9);   /* countour twists (in degrees) */
 
 /* extrude 2D contour, specifying local affine tranformations */
 extern void gleSuperExtrusion (int ncp,  /* number of contour points */
@@ -132,7 +134,7 @@ extern void gleSuperExtrusion (int ncp,  /* number of contour points */
                 int npoints,           /* numpoints in poly-line */
                 gleDouble point_array[][3],        /* polyline vertices */
                 float color_array[][3],        /* color at polyline verts */
-                gleDouble xform_array[][2][3]);   /* 2D contour xforms */
+                gleDouble xform_array[][2][3]) OPENGL_DEPRECATED(10_0, 10_9);   /* 2D contour xforms */
 
 /* spiral moves contour along helical path by parallel transport */
 extern void gleSpiral (int ncp,        /* number of contour points */
@@ -146,7 +148,7 @@ extern void gleSpiral (int ncp,        /* number of contour points */
              gleDouble startXform[2][3], /* starting contour affine xform */
              gleDouble dXformdTheta[2][3], /* tangent change xform per revoln */
              gleDouble startTheta,	/* start angle in x-y plane */
-             gleDouble sweepTheta);	/* degrees to spiral around */
+             gleDouble sweepTheta) OPENGL_DEPRECATED(10_0, 10_9);	/* degrees to spiral around */
 
 /* lathe moves contour along helical path by helically shearing 3D space */
 extern void gleLathe (int ncp,        /* number of contour points */
@@ -160,7 +162,7 @@ extern void gleLathe (int ncp,        /* number of contour points */
              gleDouble startXform[2][3], /* starting contour affine xform */
              gleDouble dXformdTheta[2][3], /* tangent change xform per revoln */
              gleDouble startTheta,	/* start angle in x-y plane */
-             gleDouble sweepTheta);	/* degrees to spiral around */
+             gleDouble sweepTheta) OPENGL_DEPRECATED(10_0, 10_9);	/* degrees to spiral around */
 
 /* similar to spiral, except contour is a circle */
 extern void gleHelicoid (gleDouble rToroid, /* circle contour (torus) radius */
@@ -171,7 +173,7 @@ extern void gleHelicoid (gleDouble rToroid, /* circle contour (torus) radius */
              gleDouble startXform[2][3], /* starting contour affine xform */
              gleDouble dXformdTheta[2][3], /* tangent change xform per revoln */
              gleDouble startTheta,	/* start angle in x-y plane */
-             gleDouble sweepTheta);	/* degrees to spiral around */
+             gleDouble sweepTheta) OPENGL_DEPRECATED(10_0, 10_9);	/* degrees to spiral around */
 
 /* similar to lathe, except contour is a circle */
 extern void gleToroid (gleDouble rToroid, /* circle contour (torus) radius */
@@ -182,7 +184,7 @@ extern void gleToroid (gleDouble rToroid, /* circle contour (torus) radius */
              gleDouble startXform[2][3], /* starting contour affine xform */
              gleDouble dXformdTheta[2][3], /* tangent change xform per revoln */
              gleDouble startTheta,	/* start angle in x-y plane */
-             gleDouble sweepTheta);	/* degrees to spiral around */
+             gleDouble sweepTheta) OPENGL_DEPRECATED(10_0, 10_9);	/* degrees to spiral around */
 
 /* draws a screw shape */
 extern void gleScrew (int ncp,          /* number of contour points */
@@ -191,9 +193,9 @@ extern void gleScrew (int ncp,          /* number of contour points */
              gleDouble up[3],           /* up vector for contour */
              gleDouble startz,          /* start of segment */
              gleDouble endz,            /* end of segment */
-             gleDouble twist);          /* number of rotations */
+             gleDouble twist) OPENGL_DEPRECATED(10_0, 10_9);          /* number of rotations */
 
-extern void gleTextureMode (int mode);
+extern void gleTextureMode (int mode) OPENGL_DEPRECATED(10_0, 10_9);
 
 #ifdef __cplusplus
 }

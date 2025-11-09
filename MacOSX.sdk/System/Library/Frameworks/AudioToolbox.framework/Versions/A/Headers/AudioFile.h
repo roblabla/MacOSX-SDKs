@@ -121,31 +121,34 @@ typedef UInt32			AudioFileTypeID;
     @constant   kAudioFileOperationNotSupportedError 
 		The operation cannot be performed. For example, setting kAudioFilePropertyAudioDataByteCount to increase 
 		the size of the audio data in a file is not a supported operation. Write the data instead.
+    @constant   kAudioFileNotOpenError 
+		The file is closed.
 	@constant   kAudioFileEndOfFileError 
 		End of file.
 	@constant   kAudioFilePositionError 
 		Invalid file position.
-	@constant   kAudioFileNotOpenError 
-		The file is closed.
+	@constant   kAudioFileFileNotFoundError 
+		File not found.
  */
 enum {
-        kAudioFileUnspecifiedError						= 'wht?',
-        kAudioFileUnsupportedFileTypeError 				= 'typ?',
-        kAudioFileUnsupportedDataFormatError 			= 'fmt?',
-        kAudioFileUnsupportedPropertyError 				= 'pty?',
-        kAudioFileBadPropertySizeError 					= '!siz',
-        kAudioFilePermissionsError	 					= 'prm?',
-        kAudioFileNotOptimizedError						= 'optm',
+        kAudioFileUnspecifiedError						= 'wht?',		// 0x7768743F, 2003334207
+        kAudioFileUnsupportedFileTypeError 				= 'typ?',		// 0x7479703F, 1954115647
+        kAudioFileUnsupportedDataFormatError 			= 'fmt?',		// 0x666D743F, 1718449215
+        kAudioFileUnsupportedPropertyError 				= 'pty?',		// 0x7074793F, 1886681407
+        kAudioFileBadPropertySizeError 					= '!siz',		// 0x2173697A,  561211770
+        kAudioFilePermissionsError	 					= 'prm?',		// 0x70726D3F, 1886547263
+        kAudioFileNotOptimizedError						= 'optm',		// 0x6F70746D, 1869640813
         // file format specific error codes
-        kAudioFileInvalidChunkError						= 'chk?',
-        kAudioFileDoesNotAllow64BitDataSizeError		= 'off?',
-        kAudioFileInvalidPacketOffsetError				= 'pck?',
-        kAudioFileInvalidFileError						= 'dta?',
-		kAudioFileOperationNotSupportedError			= 0x6F703F3F, // 'op??', integer used because of trigraph
+        kAudioFileInvalidChunkError						= 'chk?',		// 0x63686B3F, 1667787583
+        kAudioFileDoesNotAllow64BitDataSizeError		= 'off?',		// 0x6F66663F, 1868981823
+        kAudioFileInvalidPacketOffsetError				= 'pck?',		// 0x70636B3F, 1885563711
+        kAudioFileInvalidFileError						= 'dta?',		// 0x6474613F, 1685348671
+		kAudioFileOperationNotSupportedError			= 0x6F703F3F, 	// 'op??', integer used because of trigraph
 		// general file error codes
 		kAudioFileNotOpenError							= -38,
 		kAudioFileEndOfFileError						= -39,
-		kAudioFilePositionError							= -40
+		kAudioFilePositionError							= -40,
+		kAudioFileFileNotFoundError						= -43
 };
 
 /*!
@@ -982,6 +985,10 @@ AudioFileRemoveUserData ( AudioFileID			inAudioFile,
 	@constant	kAudioFilePropertyAlbumArtwork
 					returns a CFDataRef filled with the Album Art. Data will formatted as either JFIF (JPEG) or PNG (PNG) 
 					The caller is responsible for releasing the CFObject.
+    @constant	kAudioFilePropertyAudioTrackCount
+                    a UInt32 that indicates the number of audio tracks contained in the file. (get property only)
+    @constant	kAudioFilePropertyUseAudioTrack
+                    a UInt32 that indicates the number of audio tracks contained in the file. (set property only)
  */
 enum
 {
@@ -1012,7 +1019,9 @@ enum
 	kAudioFilePropertyBitRate				=	'brat',
 	kAudioFilePropertyID3Tag				=	'id3t',
 	kAudioFilePropertySourceBitDepth		=	'sbtd',
-	kAudioFilePropertyAlbumArtwork			=	'aart'
+	kAudioFilePropertyAlbumArtwork			=	'aart',
+    kAudioFilePropertyAudioTrackCount       =   'atct',
+	kAudioFilePropertyUseAudioTrack			=	'uatk'
 };
 
 
@@ -1235,7 +1244,6 @@ AudioFileGetGlobalInfo(			AudioFilePropertyID		inPropertyID,
                         
 #pragma mark - Deprecated
 
-#if !TARGET_OS_IPHONE
 struct FSRef;
 /*!
     @function	AudioFileCreate
@@ -1306,7 +1314,6 @@ AudioFileOpen (	const struct FSRef	*inFileRef,
                 AudioFileTypeID		inFileTypeHint,
                 AudioFileID			*outAudioFile)							__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_6,__IPHONE_NA,__IPHONE_NA);
 
-#endif
 
 
 #if defined(__cplusplus)

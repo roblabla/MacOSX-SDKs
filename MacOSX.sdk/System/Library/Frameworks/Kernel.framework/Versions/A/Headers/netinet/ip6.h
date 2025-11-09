@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2010 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -282,7 +282,7 @@ struct ip6_frag {
  */
 #define IPV6_MAXHLIM	255	/* maximum hoplimit */
 #define IPV6_DEFHLIM	64	/* default hlim */
-#define IPV6_FRAGTTL	120	/* ttl for fragment packets, in slowtimo tick */
+#define IPV6_FRAGTTL	60	/* ttl for fragment packets (seconds) */
 #define IPV6_HLIMDEC	1	/* subtracted when forwarding */
 
 #define IPV6_MMTU	1280	/* minimal MTU and reassembly. 1024 + 256 */

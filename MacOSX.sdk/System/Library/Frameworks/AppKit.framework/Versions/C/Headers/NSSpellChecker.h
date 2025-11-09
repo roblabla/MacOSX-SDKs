@@ -1,7 +1,7 @@
 /*
         NSSpellChecker.h
         Application Kit
-        Copyright (c) 1990-2012, Apple Inc.
+        Copyright (c) 1990-2013, Apple Inc.
         All rights reserved.
 */
 
@@ -148,7 +148,7 @@ APPKIT_EXTERN NSString *NSTextCheckingRegularExpressionsKey NS_AVAILABLE_MAC(10_
 - (void)closeSpellDocumentWithTag:(NSInteger)tag;
 
 /* When a correction is automatically proposed, the user may respond in one of several ways.  Clients may report this to the spell checker so that it can learn from the user's response and adjust future correction behavior accordingly.  The tag, language, word, and correction should match those from the original correction result, so that the spellchecker can match them.  This implies that in order to record responses properly, clients must store the original word and original correction at least from the point at which the user accepts it until the user edits or reverts it. */
-enum {
+typedef NS_ENUM(NSInteger, NSCorrectionResponse) {
     NSCorrectionResponseNone,       // No response was received from the user
     NSCorrectionResponseAccepted,   // The user accepted the correction
     NSCorrectionResponseRejected,   // The user rejected the correction
@@ -156,19 +156,20 @@ enum {
     NSCorrectionResponseEdited,     // After the correction was accepted, the user edited the corrected word (to something other than its original form)
     NSCorrectionResponseReverted    // After the correction was accepted, the user reverted the correction back to the original word
 };
-typedef NSInteger NSCorrectionResponse;
 
 - (void)recordResponse:(NSCorrectionResponse)response toCorrection:(NSString *)correction forWord:(NSString *)word language:(NSString *)language inSpellDocumentWithTag:(NSInteger)tag NS_AVAILABLE_MAC(10_7);
 
 /* Client views may use the NSCorrectionIndicator APIs to display a suitable user interface to indicate a correction intended to be made, and allowing the user to accept or reject it; or once a correction has been made, to indicate the original form, allowing the user to revert back to it; or to display multiple alternatives from which the user may choose one if desired.  The primaryString is the first string displayed, a correction or reversion according to the type of indicator; the alternativeStrings should be additional alternatives, if available.  Only one indicator at a time may be displayed for a given view, and the only thing a client may do with the indicator after displaying it is to dismiss it.  When an indicator is dismissed, whether by user action or by the view, the completion block will be called, with the acceptedString argument being either the replacement string accepted by the user, or nil if the user has not accepted a replacement. */
-enum {
+typedef NS_ENUM(NSInteger, NSCorrectionIndicatorType) {
     NSCorrectionIndicatorTypeDefault = 0,   // The default indicator shows a proposed correction
     NSCorrectionIndicatorTypeReversion,     // Used to offer to revert to the original form after a correction has been made
     NSCorrectionIndicatorTypeGuesses        // Shows multiple alternatives from which the user may choose
 };
-typedef NSInteger NSCorrectionIndicatorType;
 
+#if NS_BLOCKS_AVAILABLE
 - (void)showCorrectionIndicatorOfType:(NSCorrectionIndicatorType)type primaryString:(NSString *)primaryString alternativeStrings:(NSArray *)alternativeStrings forStringInRect:(NSRect)rectOfTypedString view:(NSView *)view completionHandler:(void (^)(NSString *acceptedString))completionBlock NS_AVAILABLE_MAC(10_7);
+#endif
+
 - (void)dismissCorrectionIndicatorForView:(NSView *)view NS_AVAILABLE_MAC(10_7);
 
 
@@ -186,9 +187,11 @@ typedef NSInteger NSCorrectionIndicatorType;
 - (BOOL)hasLearnedWord:(NSString *)word NS_AVAILABLE_MAC(10_5);
 - (void)unlearnWord:(NSString *)word NS_AVAILABLE_MAC(10_5);
 
-/* These methods allow clients to determine the global user preference settings for automatic text replacement and spelling correction.  Text views by default will follow these automatically, but clients may override that by programmatically setting the values on the text view.  These methods are primarily for non-text view clients who wish to keep track of the settings.  Notifications are available (see below) when the settings change. */
+/* These methods allow clients to determine the global user preference settings for automatic text replacement, spelling correction, quote substitution, and dash substitution.  Text views by default will follow these automatically, but clients may override that by programmatically setting the values on the text view.  These methods will be useful for non-text view clients and others who wish to keep track of the settings.  Notifications are available (see below) when the settings change. */
 + (BOOL)isAutomaticTextReplacementEnabled NS_AVAILABLE_MAC(10_7);
 + (BOOL)isAutomaticSpellingCorrectionEnabled NS_AVAILABLE_MAC(10_7);
++ (BOOL)isAutomaticQuoteSubstitutionEnabled NS_AVAILABLE_MAC(10_9);
++ (BOOL)isAutomaticDashSubstitutionEnabled NS_AVAILABLE_MAC(10_9);
 
 /* Use of the following methods is discouraged; ordinarily language identification should be allowed to take place automatically, or else a specific language should be passed in to the methods that take such an argument, if the language is known in advance.  -setLanguage: allows programmatic setting of the language to spell-check in, for compatibility use if other methods are called with no language specified.  -setLanguage: accepts any of the language formats used by NSBundle, and tries to find the closest match among the available languages.  If -setLanguage: has been called, then -language will return that match; otherwise, it will return Multilingual if there is more than one element in -userPreferredLanguages, or the one element in that array if there is only one.  */
 
@@ -200,6 +203,9 @@ typedef NSInteger NSCorrectionIndicatorType;
 /* These notifications are made available via the default notification center when the global user preference settings mentioned above are changed. */
 APPKIT_EXTERN NSString * const NSSpellCheckerDidChangeAutomaticSpellingCorrectionNotification NS_AVAILABLE_MAC(10_7);
 APPKIT_EXTERN NSString * const NSSpellCheckerDidChangeAutomaticTextReplacementNotification NS_AVAILABLE_MAC(10_7);
+APPKIT_EXTERN NSString * const NSSpellCheckerDidChangeAutomaticQuoteSubstitutionNotification NS_AVAILABLE_MAC(10_9);
+APPKIT_EXTERN NSString * const NSSpellCheckerDidChangeAutomaticDashSubstitutionNotification NS_AVAILABLE_MAC(10_9);
+
 
 @interface NSSpellChecker(NSDeprecated)
 

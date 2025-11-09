@@ -10,11 +10,11 @@
 #define __MATH64__
 
 #ifndef __CONDITIONALMACROS__
-#include <CarbonCore/ConditionalMacros.h>
+#include <ConditionalMacros.h>
 #endif
 
 #ifndef __MACTYPES__
-#include <CarbonCore/MacTypes.h>
+#include <MacTypes.h>
 #endif
 
 
@@ -1347,53 +1347,48 @@ SInt64ToUInt64(SInt64 value);
              as a long long.
 */
 
-#if TYPE_LONGLONG 
-
-
-   #if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199409L
-
-      static inline wide  SInt64ToWide ( SInt64 s ) { wide result; result.hi = (SInt32)(((s)>>32)&0xffffffffUL); result.lo = (UInt32)((s)&0xffffffffUL); return result; }
-        static inline SInt64 WideToSInt64 ( wide w ) { SInt64 result = w.hi; result = ( result << 32 ) | ( w.lo ); return result; }
-
-       static inline UnsignedWide  UInt64ToUnsignedWide ( UInt64 u ) { UnsignedWide result; result.hi = (SInt32)(((u)>>32)&0xffffffffUL); result.lo = (UInt32)((u)&0xffffffffUL); return result; }
-        static inline UInt64 UnsignedWideToUInt64 ( UnsignedWide uw ) { UInt64 result = uw.hi; result = ( result << 32 ) | ( uw.lo ); return result; }
-
-
-   #elif defined(__GNUC__)
-
-       static __inline wide    SInt64ToWide ( SInt64 s ) { wide result; result.hi = (SInt32)(((s)>>32)&0xffffffffUL); result.lo = (UInt32)((s)&0xffffffffUL); return result; }
-        static __inline SInt64 WideToSInt64 ( wide w ) { SInt64 result = w.hi; result = ( result << 32 ) | ( w.lo ); return result; }
-
-     static __inline UnsignedWide    UInt64ToUnsignedWide ( UInt64 u ) { UnsignedWide result; result.hi = (SInt32)(((u)>>32)&0xffffffffUL); result.lo = (UInt32)((u)&0xffffffffUL); return result; }
-        static __inline UInt64 UnsignedWideToUInt64 ( UnsignedWide uw ) { UInt64 result = uw.hi ; result = ( result << 32 ) | ( uw.lo ); return result; }
-
-
-   #else
-      //  Although this isn't as efficent as it could be, there's no safe way to do this in a way which complies with both -ansi and -pedantic,
-      //  on all the compilers I know about, so CarbonCore.framework just exports these so folks can link to them.  Only applications built with
-     //  TYPE_LONGLONG defined though should call them, since the ABI is different in those cases.
-      extern wide _SInt64ToWideLL ( SInt64 s );
-      extern SInt64 _WideToSInt64LL ( wide w );
-
-     extern wide _UInt64ToUnsignedWide ( UInt64 u );
-        extern UInt64 _UnsignedWideToUInt64 ( UnsignedWide uw );
-       
-       #define SInt64ToWide(x)         _SInt64ToWide(x)
-       #define WideToSInt64(x)         _WideToSInt64(x)
-       #define UInt64ToUnsignedWide(x) _UInt64ToUnsignedWide(x)
-       #define UnsignedWideToUInt64(x) _UnsignedWideToUInt64(x)
-
-  #endif
-
-
+#if TYPE_LONGLONG
+		
+	#if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199409L
+		
+		static inline wide SInt64ToWide(SInt64 s) { wide result; result.hi = (SInt32)(((UInt64)s >> 32) & 0xffffffffUL); result.lo = (UInt32)((UInt64)s & 0xffffffffUL); return result; }
+		static inline SInt64 WideToSInt64(wide w) { SInt64 result = w.hi; result = (result << 32) | w.lo; return result; }
+		
+		static inline UnsignedWide UInt64ToUnsignedWide(UInt64 u) { UnsignedWide result; result.hi = (UInt32)((u >> 32) & 0xffffffffUL); result.lo = (UInt32)(u & 0xffffffffUL); return result; }
+		static inline UInt64 UnsignedWideToUInt64(UnsignedWide uw) { UInt64 result = uw.hi; result = (result << 32) | uw.lo; return result; }
+		
+	#elif defined(__GNUC__)
+		
+		static __inline wide SInt64ToWide(SInt64 s) { wide result; result.hi = (SInt32)(((UInt64)s >> 32) & 0xffffffffUL); result.lo = (UInt32)((UInt64)s & 0xffffffffUL); return result; }
+		static __inline SInt64 WideToSInt64(wide w) { SInt64 result = w.hi; result = (result << 32) | w.lo; return result; }
+		
+		static __inline UnsignedWide UInt64ToUnsignedWide(UInt64 u) { UnsignedWide result; result.hi = (UInt32)((u >> 32) & 0xffffffffUL); result.lo = (UInt32)(u & 0xffffffffUL); return result; }
+		static __inline UInt64 UnsignedWideToUInt64(UnsignedWide uw) { UInt64 result = uw.hi; result = (result << 32) | uw.lo; return result; }
+		
+	#else
+		//  Although this isn't as efficent as it could be, there's no safe way to do this in a way which complies with both -ansi and -pedantic,
+		//  on all the compilers I know about, so CarbonCore.framework just exports these so folks can link to them.  Only applications built with
+		//  TYPE_LONGLONG defined though should call them, since the ABI is different in those cases.
+		extern wide _SInt64ToWideLL(SInt64 s);
+		extern SInt64 _WideToSInt64LL(wide w);
+		
+		extern wide _UInt64ToUnsignedWide(UInt64 u);
+		extern UInt64 _UnsignedWideToUInt64(UnsignedWide uw);
+			
+		#define SInt64ToWide(x)         _SInt64ToWide(x)
+		#define WideToSInt64(x)         _WideToSInt64(x)
+		#define UInt64ToUnsignedWide(x) _UInt64ToUnsignedWide(x)
+		#define UnsignedWideToUInt64(x) _UnsignedWideToUInt64(x)
+			
+	#endif
 
 #else
-
-   #define SInt64ToWide(x)         (x)
-    #define WideToSInt64(x)         (x)
-    #define UInt64ToUnsignedWide(x) (x)
-    #define UnsignedWideToUInt64(x) (x)
-
+	
+	#define SInt64ToWide(x)         (x)
+	#define WideToSInt64(x)         (x)
+	#define UInt64ToUnsignedWide(x) (x)
+	#define UnsignedWideToUInt64(x) (x)
+	
 #endif
 
 

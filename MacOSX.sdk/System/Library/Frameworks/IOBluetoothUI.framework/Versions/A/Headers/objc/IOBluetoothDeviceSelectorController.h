@@ -215,6 +215,26 @@
 - (NSString *)getTitle;
 
 /*!
+ @method		setHeader:
+ @abstract	Sets the header text that appears in the device selector panel.
+ @discussion	The description text should be localized for best user experience.
+ 
+ NOTE: This method is only available in Mac OS X 10.9 or later.
+ @param		headerText String that appears in the description section of the device selector panel.
+ */
+
+- (void)setHeader:(NSString *)headerText;
+
+/*!
+ @method		getHeader
+ @abstract	Returns the header text that appears in the device selector panel (i.e. what was set in -setHeader:).
+ @discussion	NOTE: This method is only available in Mac OS X 10.9 or later.
+ @result		Returns the header text of the device selector panel.
+ */
+
+- (NSString *)getHeader;
+
+/*!
     @method		setDescriptionText:
 	@abstract	Sets the description text that appears in the device selector panel.
 	@discussion	The description text should be localized for best user experience.
@@ -253,5 +273,26 @@
 */
 
 - (NSString *)getPrompt;
+
+/*!
+ @method		setCancel:
+ @abstract	Sets the title of the default/cancel button in the device selector panel.
+ @discussion	The prompt text should be localized for best user experience.
+ 
+ NOTE: This method is only available in Mac OS X 10.9 or later.
+ @param		prompt String that appears in the default/cancel button in the device selector panel.
+ */
+
+- (void)setCancel:(NSString *)prompt;
+
+/*!
+ @method		getCancel
+ @abstract	Returns the title of the default/cancel button in the device selector panel (i.e. what was set in -setPrompt:).
+ @discussion	NOTE: This method is only available in Mac OS X 10.9 or later.
+ @result		Returns the default cancel button title of the device selector panel.
+ */
+
+- (NSString *)getCancel;
+
 
 @end

@@ -3,7 +3,7 @@
  	
  	Framework:  AVFoundation
  
-	Copyright 2010-2012 Apple Inc. All rights reserved.
+	Copyright 2010-2013 Apple Inc. All rights reserved.
 */
 
 #import <AVFoundation/AVBase.h>
@@ -13,6 +13,7 @@
 #import <QuartzCore/CALayer.h>
 #import <dispatch/dispatch.h>
 
+@class AVMetadataObject;
 @class AVCaptureOutputInternal;
 
 /*!
@@ -64,6 +65,43 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
     connection with the specified mediaType is found, nil is returned.
 */
 - (AVCaptureConnection *)connectionWithMediaType:(NSString *)mediaType NS_AVAILABLE(10_7, 5_0);
+
+/*!
+ @method transformedMetadataObjectForMetadataObject:connection:
+ @abstract
+    Converts an AVMetadataObject's visual properties to the receiver's coordinates.
+
+ @param metadataObject
+    An AVMetadataObject originating from the same AVCaptureInput as the receiver.
+ 
+ @param connection
+    The receiver's connection whose AVCaptureInput matches that of the metadata object to be converted.
+
+ @result
+    An AVMetadataObject whose properties are in output coordinates.
+
+ @discussion
+    AVMetadataObject bounds may be expressed as a rect where {0,0} represents the top left of the picture area,
+    and {1,1} represents the bottom right on an unrotated picture.  Face metadata objects likewise express
+    yaw and roll angles with respect to an unrotated picture.  -transformedMetadataObjectForMetadataObject:connection: 
+	converts the visual properties in the coordinate space of the supplied AVMetadataObject to the coordinate space of 
+    the receiver.  The conversion takes orientation, mirroring, and scaling into consideration.
+    If the provided metadata object originates from an input source other than the preview layer's, nil will be returned.
+ 
+    If an AVCaptureVideoDataOutput instance's connection's videoOrientation or videoMirrored properties are set to
+    non-default values, the output applies the desired mirroring and orientation by physically rotating and or flipping 
+    sample buffers as they pass through it.  AVCaptureStillImageOutput, on the other hand, does not physically rotate its buffers.
+    It attaches an appropriate kCGImagePropertyOrientation number to captured still image buffers (see ImageIO/CGImageProperties.h)
+    indicating how the image should be displayed on playback.  Likewise, AVCaptureMovieFileOutput does not physically
+    apply orientation/mirroring to its sample buffers -- it uses a QuickTime track matrix to indicate how the buffers
+    should be rotated and/or flipped on playback.
+ 
+    transformedMetadataObjectForMetadataObject:connection: alters the visual properties of the provided metadata object 
+    to match the physical rotation / mirroring of the sample buffers provided by the receiver through the indicated 
+    connection.  I.e., for video data output, adjusted metadata object coordinates are rotated/mirrored.  For still image 
+    and movie file output, they are not.
+*/
+- (AVMetadataObject *)transformedMetadataObjectForMetadataObject:(AVMetadataObject *)metadataObject connection:(AVCaptureConnection *)connection NS_AVAILABLE_IOS(6_0);
 
 @end
 
@@ -256,8 +294,6 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 */
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection;
 
-#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
-
 /*!
  @method captureOutput:didDropSampleBuffer:fromConnection:
  @abstract
@@ -272,17 +308,15 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
     The AVCaptureConnection from which the dropped video frame was received.
 
  @discussion
-    Delegates receive this message whenever a late video frame is dropped. This method is called once 
+    Delegates receive this message whenever a video frame is dropped. This method is called once 
     for each dropped frame. The CMSampleBuffer object passed to this delegate method will contain metadata 
     about the dropped video frame, such as its duration and presentation time stamp, but will contain no 
     actual video data. This method will be called on the dispatch queue specified by the output's
     sampleBufferCallbackQueue property. Because this method will be called on the same dispatch queue that is responsible
     for outputting video frames, it must be efficient to prevent further capture performance problems, such as additional
     dropped video frames.
-*/
-- (void)captureOutput:(AVCaptureOutput *)captureOutput didDropSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection NS_AVAILABLE(10_7, NA);
-
-#endif // (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+ */
+- (void)captureOutput:(AVCaptureOutput *)captureOutput didDropSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection NS_AVAILABLE(10_7, 6_0);
 
 @end
 
@@ -1099,7 +1133,8 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 
     On iOS, the only currently supported keys are AVVideoCodecKey and kCVPixelBufferPixelFormatTypeKey. 
     Use -availableImageDataCVPixelFormatTypes and -availableImageDataCodecTypes to determine what 
-    codec keys and pixel formats are supported.
+    codec keys and pixel formats are supported. AVVideoQualityKey is supported on iOS 6.0 and later
+    and may only be used when AVVideoCodecKey is set to AVVideoCodecJPEG.
 */
 @property(nonatomic, copy) NSDictionary *outputSettings;
 
@@ -1227,3 +1262,139 @@ NS_CLASS_AVAILABLE(10_7, NA)
 @end
 
 #endif // (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+
+
+@class AVCaptureMetadataOutputInternal;
+@protocol AVCaptureMetadataOutputObjectsDelegate;
+
+/*!
+ @class AVCaptureMetadataOutput
+ @abstract
+    AVCaptureMetadataOutput is a concrete subclass of AVCaptureOutput that can be used to process metadata objects
+    from an attached connection.
+
+ @discussion
+    Instances of AVCaptureMetadataOutput emit arrays of AVMetadataObject instances (see AVMetadataObject.h), such 
+    as detected faces. Applications can access the metadata objects with the captureOutput:didOutputMetadataObjects:fromConnection: 
+    delegate method.
+*/
+NS_CLASS_AVAILABLE(NA, 6_0)
+@interface AVCaptureMetadataOutput : AVCaptureOutput 
+{
+@private
+	AVCaptureMetadataOutputInternal *_internal;
+}
+
+/*!
+ @method setMetadataObjectsDelegate:queue:
+ @abstract
+    Sets the receiver's delegate that will accept metadata objects and dispatch queue on which the delegate will be
+    called.
+
+ @param objectsDelegate
+    An object conforming to the AVCaptureMetadataOutputObjectsDelegate protocol that will receive metadata objects
+    after they are captured.
+ @param objectsCallbackQueue
+    A dispatch queue on which all delegate methods will be called.
+
+ @discussion
+    When new metadata objects are captured in the receiver's connection, they will be vended to the delegate using the
+    captureOutput:didOutputMetadataObjects:fromConnection: delegate method. All delegate methods will be called on the
+    specified dispatch queue.
+
+    Clients that need to minimize the chances of metadata being dropped should specify a queue on which a sufficiently
+    small amount of processing is performed along with receiving metadata objects.
+
+    A serial dispatch queue must be used to guarantee that metadata objects will be delivered in order.
+    The objectsCallbackQueue parameter may not be NULL, except when setting the objectsDelegate
+    to nil.
+*/
+- (void)setMetadataObjectsDelegate:(id<AVCaptureMetadataOutputObjectsDelegate>)objectsDelegate queue:(dispatch_queue_t)objectsCallbackQueue;
+
+/*!
+ @property metadataObjectsDelegate
+ @abstract
+    The receiver's delegate.
+ 
+ @discussion
+    The value of this property is an object conforming to the AVCaptureMetadataOutputObjectsDelegate protocol that
+    will receive metadata objects after they are captured. The delegate is set using the setMetadataObjectsDelegate:queue:
+    method.
+*/
+@property(nonatomic, readonly) id<AVCaptureMetadataOutputObjectsDelegate> metadataObjectsDelegate;
+
+/*!
+ @property metadataObjectsCallbackQueue
+ @abstract
+    The dispatch queue on which all metadata object delegate methods will be called.
+
+ @discussion
+    The value of this property is a dispatch_queue_t. The queue is set using the setMetadataObjectsDelegate:queue: method.
+*/
+@property(nonatomic, readonly) dispatch_queue_t metadataObjectsCallbackQueue;
+
+/*!
+ @property availableMetadataObjectTypes
+ @abstract
+    Indicates the receiver's supported metadata object types.
+ 
+ @discussion
+    The value of this property is an NSArray of NSStrings corresponding to AVMetadataObjectType strings defined
+    in AVMetadataObject.h -- one for each metadata object type supported by the receiver.  Available 
+    metadata object types are dependent on the capabilities of the AVCaptureInputPort to which this receiver's 
+    AVCaptureConnection is connected.  Clients may specify the types of objects they would like to process
+    by calling setMetadataObjectTypes:.  This property is key-value observable.
+*/
+@property(nonatomic, readonly) NSArray *availableMetadataObjectTypes;
+
+/*!
+ @property metadataObjectTypes
+ @abstract
+    Specifies the types of metadata objects that the receiver should present to the client.
+
+ @discussion
+    AVCaptureMetadataOutput may detect and emit multiple metadata object types.  By default
+    the receiver captures all available metadata objects (see -availableMetadataObjectTypes).  To
+    exclude undesired object types, clients may call -setMetadataObjectTypes: specifying
+    a subset of the types present in -availableMetadataObjectTypes.  -setMetadataObjectTypes:
+    throws an NSInvalidArgumentException if any elements in the array are not present in the
+    -availableMetadataObjectTypes array.
+*/
+@property(nonatomic, copy) NSArray *metadataObjectTypes;
+
+@end
+
+/*!
+ @protocol AVCaptureMetadataOutputObjectsDelegate
+ @abstract
+    Defines an interface for delegates of AVCaptureMetadataOutput to receive emitted objects.
+*/
+@protocol AVCaptureMetadataOutputObjectsDelegate <NSObject>
+
+@optional
+
+/*!
+ @method captureOutput:didOutputMetadataObjects:fromConnection:
+ @abstract
+    Called whenever an AVCaptureMetadataOutput instance emits new objects through a connection.
+
+ @param captureOutput
+    The AVCaptureMetadataOutput instance that emitted the objects.
+ @param metadataObjects
+    An array of AVMetadataObject subclasses (see AVMetadataObject.h).
+ @param connection
+    The AVCaptureConnection through which the objects were emitted.
+
+ @discussion
+    Delegates receive this message whenever the output captures and emits new objects, as specified by
+    its metadataObjectTypes property. Delegates can use the provided objects in conjunction with other APIs
+    for further processing. This method will be called on the dispatch queue specified by the output's
+    metadataObjectsCallbackQueue property. This method may be called frequently, so it must be efficient to 
+    prevent capture performance problems, including dropped metadata objects.
+
+    Clients that need to reference metadata objects outside of the scope of this method must retain them and
+    then release them when they are finished with them.
+*/
+- (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection;
+
+@end

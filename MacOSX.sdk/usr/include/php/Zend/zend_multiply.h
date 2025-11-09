@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | Zend Engine                                                          |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1998-2012 Zend Technologies Ltd. (http://www.zend.com) |
+   | Copyright (c) 1998-2013 Zend Technologies Ltd. (http://www.zend.com) |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.00 of the Zend license,     |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -20,6 +20,18 @@
 /* $Id$ */
 
 #if defined(__i386__) && defined(__GNUC__)
+
+#define ZEND_SIGNED_MULTIPLY_LONG(a, b, lval, dval, usedval) do {	\
+	long __tmpvar; 													\
+	__asm__ ("imul %3,%0\n"											\
+		"adc $0,%1" 												\
+			: "=r"(__tmpvar),"=r"(usedval) 							\
+			: "0"(a), "r"(b), "1"(0));								\
+	if (usedval) (dval) = (double) (a) * (double) (b);				\
+	else (lval) = __tmpvar;											\
+} while (0)
+
+#elif defined(__x86_64__) && defined(__GNUC__)
 
 #define ZEND_SIGNED_MULTIPLY_LONG(a, b, lval, dval, usedval) do {	\
 	long __tmpvar; 													\

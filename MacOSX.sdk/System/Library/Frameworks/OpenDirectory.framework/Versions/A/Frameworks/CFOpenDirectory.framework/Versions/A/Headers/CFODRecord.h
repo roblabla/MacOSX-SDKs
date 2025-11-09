@@ -97,7 +97,7 @@ bool ODRecordSetNodeCredentialsUsingKerberosCache(ODRecordRef record, CFStringRe
     @result     a CFDictionaryRef of the password policies for the supplied record, or NULL if no policy set
 */
 CF_EXPORT
-CFDictionaryRef ODRecordCopyPasswordPolicy(CFAllocatorRef allocator, ODRecordRef record, CFErrorRef *error) __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
+CFDictionaryRef ODRecordCopyPasswordPolicy(CFAllocatorRef allocator, ODRecordRef record, CFErrorRef *error) __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_6, __MAC_10_9, __IPHONE_NA, __IPHONE_NA, "use ODRecordCopyEffectivePolicies");
 
 /*!
     @function   ODRecordVerifyPassword
@@ -229,8 +229,8 @@ bool ODRecordRemoveValue(ODRecordRef record, ODAttributeType attribute, CFTypeRe
     @abstract   Returns the attributes and values in the form of a key-value pair set for this record.
     @discussion Returns the attributes and values in the form of a key-value pair set for this record.  The key is a 
                 CFStringRef or ODAttributeType of the attribute name (e.g., kODAttributeTypeRecordName, etc.) and the 
-				value is an CFArrayRef of either CFDataRef or CFStringRef depending on the type of data.  Binary data will 
-				be returned as CFDataRef.
+                value is an CFArrayRef of either CFDataRef or CFStringRef depending on the type of data.  Binary data will
+                be returned as CFDataRef.
     @param      record an ODRecordRef to use
     @param      attributes a CFArrayRef of attributes.  If an attribute has not been fetched previously, it will be
                 fetched in order to return the value.  If this parameter is NULL then all currently fetched attributes 
@@ -298,8 +298,8 @@ bool ODRecordRemoveMember(ODRecordRef group, ODRecordRef member, CFErrorRef *err
     @function   ODRecordContainsMember
     @abstract   Will use membership APIs to resolve group membership based on Group and Member record combination
     @discussion Will use membership APIs to resolve group membership based on Group and Member record combination.
-				This API does not check attributes values directly, instead uses system APIs to deal with nested
-				memberships.
+                This API does not check attributes values directly, instead uses system APIs to deal with nested
+                memberships.
     @param      group an ODRecordRef of the group to be checked for membership
     @param      member an ODRecordRef of the member to be checked against the group
     @param      error an optional CFErrorRef reference for error details
@@ -307,6 +307,78 @@ bool ODRecordRemoveMember(ODRecordRef group, ODRecordRef member, CFErrorRef *err
 */
 CF_EXPORT
 bool ODRecordContainsMember(ODRecordRef group, ODRecordRef member, CFErrorRef *error) __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
+
+/*!
+    @function   ODRecordCopyPolicies
+    @abstract   This will copy any policies configured for the record.
+    @discussion This will copy any policies configured for the record.
+    @param      record an ODRecordRef to use
+    @param      error an optional CFErrorRef reference for error details
+    @result     a CFDictionaryRef containing all currently configured policies
+*/
+CF_EXPORT
+CFDictionaryRef ODRecordCopyPolicies(ODRecordRef record, CFErrorRef *error) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+
+/*!
+    @function   ODRecordCopyEffectivePolicies
+    @abstract   This will copy the effective policies for the record (merging any node-level policies).
+    @discussion This will copy the effective policies for the record (merging any node-level policies).
+    @param      record an ODRecordRef to use
+    @param      error an optional CFErrorRef reference for error details
+    @result     a CFDictionaryRef containing all currently configured policies (merging any node-level policies)
+*/
+CF_EXPORT
+CFDictionaryRef ODRecordCopyEffectivePolicies(ODRecordRef record, CFErrorRef *error) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+
+/*!
+    @function   ODRecordCopySupportedPolicies
+    @abstract   This will return a dictionary of supported policies.
+    @discussion This will return a dictionary of supported policies, if appropriate, the value will be the maximum value allowed
+                for the policy in question.  For example, if password history is available, it will state how much history is
+                supported.
+    @param      record an ODRecordRef to use
+    @param      error an optional CFErrorRef reference for error details
+    @result     a CFDictionaryRef containing all currently supported policies
+*/
+CF_EXPORT
+CFDictionaryRef ODRecordCopySupportedPolicies(ODRecordRef record, CFErrorRef *error) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+
+/*!
+    @function   ODRecordSetPolicies
+    @abstract   This will set the policy for the record.
+    @discussion This will set the policy for the record.  Policies are evaluated in combination with node-level policies.
+    @param      record an ODRecordRef to use
+    @param      policies a CFDictionary of policies to be set
+    @param      error an optional CFErrorRef reference for error details
+    @result     a bool which signifies if the policy set succeeded, otherwise error is set. 
+*/
+CF_EXPORT
+bool ODRecordSetPolicies(ODRecordRef record, CFDictionaryRef policies, CFErrorRef *error) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+
+/*!
+    @function   ODRecordSetPolicy
+    @abstract   This will set a specific policy setting for the record.
+    @discussion This will set a specific policy setting for the record.
+    @param      record an ODRecordRef to use
+    @param      policy a valid ODPolicyType
+    @param      value a CFTypeRef to be set (should be of appropriate type for the policy)
+    @param      error an optional CFErrorRef reference for error details
+    @result     a bool which signifies if the policy set succeeded, otherwise error is set.
+*/
+CF_EXPORT
+bool ODRecordSetPolicy(ODRecordRef record, ODPolicyType policy, CFTypeRef value, CFErrorRef *error) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+
+/*!
+    @function   ODRecordRemovePolicy
+    @abstract   This will remove a specific policy setting from the record.
+    @discussion This will remove a specific policy setting from the record.
+    @param      record an ODRecordRef to use
+    @param      policy a valid ODPolicyType
+    @param      error an optional CFErrorRef reference for error details
+    @result     a bool which signifies if the policy removal succeeded, otherwise error is set.
+*/
+CF_EXPORT
+bool ODRecordRemovePolicy(ODRecordRef record, ODPolicyType policy, CFErrorRef *error) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
 
 __END_DECLS
 

@@ -271,10 +271,35 @@ typedef void * AsyncRequestID;
  * user will be prompted with a window requesting password.
  *
  * Options can be provided for the session open and the mount itself.
- * If the mount is successful, the path to the mountpoint(s) is
- * returned in mountpoints.
+ * If the mount is successful, the POSIX path to each mountpoint is
+ * returned as a CFStringRef in mountpoints.
  *
- * If the mount succeeds, NetFSMountURLSync returns zero, otherwise non-zero.
+ * If the return value is zero the mount has succeeded.
+ *
+ * A positive non-zero return value represents an errno value
+ * (see /usr/include/sys/errno.h).  For instance, a missing mountpoint
+ * error will be returned as ENOENT (2).
+ *
+ * A negative non-zero return value represents an OSStatus error.
+ * For instance, error -128 is userCanceledErr, returned when a mount
+ * operation is canceled by the user. These OSStatus errors are
+ * extended to include:
+ *
+ *  from this header:
+ *	ENETFSPWDNEEDSCHANGE		-5045
+ *	ENETFSPWDPOLICY			-5046
+ *	ENETFSACCOUNTRESTRICTED		-5999
+ *	ENETFSNOSHARESAVAIL		-5998
+ *	ENETFSNOAUTHMECHSUPP		-5997
+ *	ENETFSNOPROTOVERSSUPP		-5996
+ *
+ *  from <NetAuth/NetAuthErrors.h>
+ *	kNetAuthErrorInternal		-6600
+ *	kNetAuthErrorMountFailed	-6602
+ *	kNetAuthErrorNoSharesAvailable	-6003
+ *	kNetAuthErrorGuestNotSupported	-6004
+ *	kNetAuthErrorAlreadyClosed	-6005
+ *
  */
 int
 NetFSMountURLSync(
@@ -288,8 +313,8 @@ NetFSMountURLSync(
 
 /*
  * This is the block called at completion of NetFSMountURLAsync
- * The block receives the mount status, the request ID that was
- * used for the mount, and an array of mountpoint paths.
+ * The block receives the mount status (described above), the request ID
+ * that was used for the mount, and an array of mountpoint paths.
  */
 typedef	void (^NetFSMountURLBlock)(int status, AsyncRequestID requestID, CFArrayRef mountpoints);
 
@@ -297,11 +322,12 @@ typedef	void (^NetFSMountURLBlock)(int status, AsyncRequestID requestID, CFArray
  * NetFSMountURLAsync is the same as NetFSMountURLSync except it does the
  * mount asynchronously.  If the mount_report block is non-NULL, at
  * the completion of the mount it is submitted to the dispatch queue
- * with the result of the mount, the request ID and an array of mountpoint paths.
+ * with the result of the mount, the request ID and an array of POSIX mountpoint paths.
  * The request ID can be used by NetFSMountURLCancel() to cancel
  * a pending mount request. The NetFSMountURLBlock is not submitted if
- * the request is cancelled. If the mount succeeds the result value
- * is zero - otherwise non-zero.
+ * the request is cancelled.
+ *
+ * The return result is as described above for NetFSMountURLSync().
  */
 int
 NetFSMountURLAsync(
@@ -330,6 +356,7 @@ NetFSMountURLCancel(AsyncRequestID requestID);
  *
  *	kNetFSAllowLoopbackKey			Allow a loopback mount.
  *
+ *	kNAUIOptionKey = UIOption		Suppress authentication dialog UI.
  *
  * The following dictionary keys for mount_options are supported:
  *
@@ -343,12 +370,29 @@ NetFSMountURLCancel(AsyncRequestID requestID);
  *
  *	kNetFSMountAtMountDirKey = true		Mount on the specified mountpath instead of below it.
  *
- *	kNAUIOptionKey = NoUI			Suppress authentication dialog UI.
- *
  * Note that if kNetFSSoftMountKey isn't set, then it's set to TRUE.
  *
  ********************************
  */
+
+/*
+ * The user may enter a hostname in lieu of a full URL.
+ * We need to determine an appropriate protocol for this host
+ * and return a scheme from which a URL can be derived.  For
+ * instance, if we determine that it's an SMB server then we
+ * return "smb" which the caller can use to build a URL:
+ * "smb://hostname".
+ *
+ * We start with a list of likely protocols, e.g. "smb", "afp", "nfs"
+ * and initiate a TCP connection to the port for each protocol. These
+ * connect attempts run in parallel.  Then wait in a select() call to
+ * see which connections are successful, or refused, or do not respond.
+ * There is a preference order, even if a protocol later in the list
+ * responds first, it may lose out if a protocol earlier in the list
+ * responds within the timeout.
+ */
+CFStringRef
+NetFSMountURLProbe(CFStringRef hostname);
 
 #ifdef __cplusplus
 }

@@ -3,7 +3,7 @@
 
     Contains:   AudioQueue Interfaces for the AudioToolbox
 
-    Copyright:  © 2006-2012 by Apple, Inc., all rights reserved.
+    Copyright:   2006-2012 by Apple, Inc., all rights reserved.
 
     Bugs?:      For bug reports, consult the following page on
                 the World Wide Web:
@@ -119,8 +119,8 @@ extern "C" {
                                                     audio queue.
     @constant   kAudioQueueErr_InvalidTapContext    GetTapSourceAudio can only be called from the
                                                     tap's callback.
-	@constant	kAudioQueueErr_InvalidTapType		GetTapQueueTime can only be called on an output queue's
-													tap.
+    @constant   kAudioQueueErr_InvalidTapType       GetTapQueueTime can only be called on an output queue's
+                                                    tap.
     @constant   kAudioQueueErr_RecordUnderrun       During recording, data was lost because there
                                                     was no enqueued buffer into which to store it.
     @constant   kAudioQueueErr_EnqueueDuringReset   During Reset, Stop, or Dispose, it is not
@@ -211,13 +211,11 @@ enum {
         A read-only property whose value is a UInt32 indicating the most recent error (if any)
         encountered by the queue's internal encoding/decoding process.
     @constant   kAudioQueueProperty_EnableTimePitch
-        A read/write property whose value is a UInt32 describing whether there is an AUTimePitch
+        A read/write property whose value is a UInt32 describing whether there is a time/pitch unit
         inserted into the queue's audio signal chain. This property may only be set while
         the queue is stopped.
     @constant   kAudioQueueProperty_TimePitchAlgorithm
         A read/write property whose value is a UInt32 describing the time/pitch algorithm in use.
-        Valid values are kAudioQueueTimePitchAlgorithm_Spectral (expensive but high-quality),
-        and kAudioQueueTimePitchAlgorithm_TimeDomain (less expensive and lower quality).
         This property is only valid while a time/pitch has been inserted, and may only be changed
         when the queue is not running.
     @constant   kAudioQueueProperty_TimePitchBypass
@@ -243,80 +241,32 @@ enum { // typedef UInt32 AudioQueuePropertyID
     kAudioQueueProperty_DecodeBufferSizeFrames  = 'dcbf',       // value is UInt32
     kAudioQueueProperty_ConverterError          = 'qcve',       // value is UInt32
 
-#if !TARGET_OS_IPHONE
     kAudioQueueProperty_EnableTimePitch         = 'q_tp',       // value is UInt32, 0/1
     kAudioQueueProperty_TimePitchAlgorithm      = 'qtpa',       // value is UInt32. See values below.
     kAudioQueueProperty_TimePitchBypass         = 'qtpb',       // value is UInt32, 1=bypassed
-#endif
 };
 
-#if !TARGET_OS_IPHONE
 /*!
     @enum       Time/Pitch algorithms
     @abstract   Constants that identify values of kAudioQueueProperty_TimePitchAlgorithm
+
+    @constant kAudioQueueTimePitchAlgorithm_Spectral
+        Highest quality, most computationally expensive. Suitable for music.
+        Default algorithm on OS X.
+    @constant kAudioQueueTimePitchAlgorithm_TimeDomain
+        Modest quality, less expensive. Suitable for voice.
+    @constant kAudioQueueTimePitchAlgorithm_LowQualityZeroLatency
+        Low quality, very inexpensive. Suitable for brief fast-forward/rewind effects,
+        low quality voice. Default algorithm on iOS.
+	@constant kAudioQueueTimePitchAlgorithm_Varispeed
+		High quality, but pitch varies with rate.
 */
 enum {
     kAudioQueueTimePitchAlgorithm_Spectral      = 'spec',
     kAudioQueueTimePitchAlgorithm_TimeDomain    = 'tido',
-};
-#endif
-
-#if TARGET_OS_IPHONE
-/*
-    @enum Audio Queue Property IDs
-    @asbtract Audio Queue Property IDs (iPhone 3.0 or greater only)
-    
-    @constant   kAudioQueueProperty_HardwareCodecPolicy
-        A UInt32 describing how the audio queue is to choose between a hardware or
-        software version of the codec required for its audio format. Its value is one of
-        the AudioQueueHardwareCodecPolicy constants below.
-        
-        If the chosen codec is not available, or if a hardware codec is chosen and the 
-        AudioSession category does not permit use of hardware codecs, attempts to Prime or Start
-        the queue will fail.
-
-        Use kAudioFormatProperty_Encoders or kAudioFormatProperty_Decoders to determine
-        whether the codec you are interested in using is available in hardware form,
-        software, or both.
-        
-        Changing this property is not permitted while the queue is primed or running. Changing
-        this property at other times may cause any properties set on the codec to be lost.
-        
-        See also the discussion of kAudioFormatProperty_HardwareCodecCapabilities
-        in AudioToolbox/AudioFormat.h.
-*/
-enum {
-    kAudioQueueProperty_HardwareCodecPolicy             = 'aqcp'        // value is UInt32
+	kAudioQueueTimePitchAlgorithm_Varispeed		= 'vspd'
 };
 
-/*!
-    @enum       AudioQueueHardwareCodecPolicy constants
-    @abstract   Values of kAudioQueueProperty_HardwareCodecPolicy (iPhone 3.0 or greater only)
-    
-    @constant kAudioQueueHardwareCodecPolicy_Default
-        If the required codec is available in both hardware and software forms, the audio queue
-        will choose a hardware codec if its AudioSession category permits, software otherwise.
-        If the required codec is only available in one form, that codec is chosen.
-    @constant kAudioQueueHardwareCodecPolicy_UseSoftwareOnly
-        The audio queue will choose a software codec if one is available.
-    @constant kAudioQueueHardwareCodecPolicy_UseHardwareOnly
-        The audio queue will choose a hardware codec if one is available and its use permitted
-        by the AudioSession category.
-    @constant kAudioQueueHardwareCodecPolicy_PreferSoftware
-        The audio queue will choose a software codec if one is available; if not, it will choose a
-        hardware codec if one is available and its use permitted by the AudioSession category.
-    @constant kAudioQueueHardwareCodecPolicy_PreferHardware
-        The audio queue will choose a hardware codec if one is available and its use permitted
-        by the AudioSession category; otherwise, it will choose a software codec if one is available.
-*/
-enum {
-    kAudioQueueHardwareCodecPolicy_Default              = 0,
-    kAudioQueueHardwareCodecPolicy_UseSoftwareOnly      = 1,
-    kAudioQueueHardwareCodecPolicy_UseHardwareOnly      = 2,
-    kAudioQueueHardwareCodecPolicy_PreferSoftware       = 3,
-    kAudioQueueHardwareCodecPolicy_PreferHardware       = 4
-};
-#endif
 
 /*!
     @enum       AudioQueueParameterID
@@ -342,9 +292,9 @@ enum {
         1.0 (the default) indicates that the queue should play at its normal rate. Only
         applicable when the time/pitch processor has been enabled and on Mac OS X 10.6 and higher.
     @constant   kAudioQueueParam_Pitch
-        A value from -2400 to 2400 indicating the number of cents to pitch-shift the queues
+        A value from -2400 to 2400 indicating the number of cents to pitch-shift the queue's
         playback. (1200 cents is one octave.) Only applicable when the time/pitch processor has 
-        been enabled  and on Mac OS X 10.6 and higher.
+        been enabled with the spectral algorithm, and on Mac OS X 10.6 and higher.
     @constant   kAudioQueueParam_VolumeRampTime
         A value indicating the number of seconds over which subsequent volume changes will be
         ramped. For example, to fade out from full unity gain to silence over the course of 1
@@ -357,10 +307,8 @@ enum {
 enum    // typedef UInt32 AudioQueueParameterID;
 {
     kAudioQueueParam_Volume         = 1,
-#if !TARGET_OS_IPHONE
     kAudioQueueParam_PlayRate       = 2,
     kAudioQueueParam_Pitch          = 3,
-#endif
     kAudioQueueParam_VolumeRampTime = 4,
     kAudioQueueParam_Pan            = 13
 };
@@ -1651,7 +1599,7 @@ AudioQueueSetOfflineRenderFormat(   AudioQueueRef           inAQ,
         The output queue from which to obtain output.
     @param      inTimestamp
         The point in time corresponding to the beginning of the output buffer. Only mSampleTime
-        is used.
+        is used. mFlags must include kAudioTimeStampSampleTimeValid.
     @param      ioBuffer
         The buffer into which the queue will render.
     @param      inNumberFrames
@@ -1732,7 +1680,7 @@ AudioQueueProcessingTapNew(         AudioQueueRef                   inAQ,
                                     UInt32 *                        outMaxFrames,
                                     AudioStreamBasicDescription *   outProcessingFormat,
                                     AudioQueueProcessingTapRef *    outAQTap)
-                                        __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_NA);
+                                        __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_6_0);
 
 /*!
     @function   AudioQueueProcessingTapDispose
@@ -1750,7 +1698,7 @@ AudioQueueProcessingTapNew(         AudioQueueRef                   inAQ,
 */
 extern OSStatus 
 AudioQueueProcessingTapDispose(     AudioQueueProcessingTapRef      inAQTap)
-                                        __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_NA);
+                                        __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_6_0);
 
 /*!
     @function   AudioQueueProcessingTapGetSourceAudio
@@ -1792,14 +1740,15 @@ AudioQueueProcessingTapGetSourceAudio(
                                     UInt32 *                        outFlags,
                                     UInt32 *                        outNumberFrames,
                                     AudioBufferList *               ioData)
-                                        __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_NA);
+                                        __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_6_0);
 
 /*!
     @function   AudioQueueProcessingTapGetQueueTime
     @abstract   Used by a processing tap to retrieve the queue's current time.
     @discussion 
         This function may only be called from the processing tap's callback, and only
-        for audio output queues.
+        for audio output queues. It must be called after calling
+        AudioQueueProcessingTapGetSourceAudio.
     
     @param      inAQTap
                     the processing tap
@@ -1819,7 +1768,7 @@ extern OSStatus
 AudioQueueProcessingTapGetQueueTime(    AudioQueueProcessingTapRef  inAQTap,
                                         Float64 *                   outQueueSampleTime,
                                         UInt32 *                    outQueueFrameCount)
-                                        __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
+                                        __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_6_0);
 
 #ifdef __cplusplus
 }

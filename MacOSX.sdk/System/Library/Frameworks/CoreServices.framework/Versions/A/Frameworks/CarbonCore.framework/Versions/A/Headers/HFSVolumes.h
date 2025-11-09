@@ -10,7 +10,7 @@
 #define __HFSVOLUMES__
 
 #ifndef __MACTYPES__
-#include <CarbonCore/MacTypes.h>
+#include <MacTypes.h>
 #endif
 
 #ifndef __FILES__

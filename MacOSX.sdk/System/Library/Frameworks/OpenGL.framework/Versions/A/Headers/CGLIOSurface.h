@@ -77,7 +77,7 @@ typedef struct __IOSurface *IOSurfaceRef;
             
 */
 extern CGLError CGLTexImageIOSurface2D(CGLContextObj ctx, GLenum target, GLenum internal_format,
-						GLsizei width, GLsizei height, GLenum format, GLenum type, IOSurfaceRef ioSurface, GLuint plane) AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+						GLsizei width, GLsizei height, GLenum format, GLenum type, IOSurfaceRef ioSurface, GLuint plane) OPENGL_AVAILABLE(10_6);
 
 /*!
 
@@ -93,12 +93,12 @@ extern CGLError CGLTexImageIOSurface2D(CGLContextObj ctx, GLenum target, GLenum 
     GL_LUMINANCE                    GL_UNSIGNED_SHORT                       GL_LUMINANCE            GL_LUMINANCE16
     GL_LUMINANCE                    GL_UNSIGNED_SHORT                       GL_INTENSITY            GL_INTENSITY16
 
-    GL_BGRA                         GL_UNSIGNED_SHORT_1_5_5_5_REV           GL_RGBA                 GL_RGBA8
-    GL_BGRA                         GL_UNSIGNED_SHORT_4_4_4_4_REV           GL_RGBA                 GL_RGBA8
+    GL_BGRA                         GL_UNSIGNED_SHORT_1_5_5_5_REV           GL_RGBA                 GL_RGB5_A1
+    GL_BGRA                         GL_UNSIGNED_SHORT_4_4_4_4_REV           GL_RGBA                 GL_RGBA4
 
     GL_BGRA                         GL_UNSIGNED_INT_8_8_8_8_REV             GL_RGB                  GL_RGB8
     GL_BGRA                         GL_UNSIGNED_INT_8_8_8_8_REV             GL_RGBA                 GL_RGBA8
-    GL_BGRA                         GL_UNSIGNED_INT_2_10_10_10_REV          GL_RGBA                 GL_RGBA8
+    GL_BGRA                         GL_UNSIGNED_INT_2_10_10_10_REV          GL_RGBA                 GL_RGB10_A2
 
     // "Video" formats
 

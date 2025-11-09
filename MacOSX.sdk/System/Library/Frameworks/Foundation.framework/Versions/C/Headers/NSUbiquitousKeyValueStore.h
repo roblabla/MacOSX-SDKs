@@ -1,5 +1,5 @@
 /*	NSUbiquitousKeyValueStore.h
-	Copyright (c) 2011-2012, Apple Inc. All rights reserved.
+	Copyright (c) 2011-2013, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -14,6 +14,9 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
     id _private3;
     void *_private4;
     void *_reserved[3];
+#if DEPLOYMENT_TARGET_MACOSX
+    BOOL _disabledSuddenTermination;
+#endif
 }
 
 + (NSUbiquitousKeyValueStore *)defaultStore;

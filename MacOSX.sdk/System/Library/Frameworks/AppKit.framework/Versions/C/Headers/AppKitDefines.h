@@ -1,7 +1,7 @@
 /*
 	AppKitDefines.h
 	Application Kit
-	Copyright (c) 1995-2012, Apple Inc.
+	Copyright (c) 1995-2013, Apple Inc.
 	All rights reserved.
 */
 #ifndef _APPKITDEFINES_H
@@ -33,10 +33,12 @@
 
 #ifdef __cplusplus
 #define APPKIT_EXTERN		extern "C"
-#define APPKIT_PRIVATE_EXTERN	__private_extern__
+#define APPKIT_PRIVATE_EXTERN	__attribute__((visibility("hidden"))) extern "C"
+#define APPKIT_PRIVATE          __attribute__((visibility("hidden")))
 #else
 #define APPKIT_EXTERN		extern
-#define APPKIT_PRIVATE_EXTERN	__private_extern__
+#define APPKIT_PRIVATE_EXTERN	__attribute__((visibility("hidden"))) extern
+#define APPKIT_PRIVATE          __attribute__((visibility("hidden")))
 #endif
 
 //

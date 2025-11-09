@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2012 Apple Inc. All rights reserved.
+	Copyright 2010-2013 Apple Inc. All rights reserved.
 
 */
 
@@ -45,6 +45,7 @@
 NS_CLASS_AVAILABLE(10_7, 4_0)
 @interface AVPlayerLayer : CALayer
 {
+@private
 	AVPlayerLayerInternal		*_playerLayer;
 }
 
@@ -79,5 +80,11 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 					This property remains NO for an AVPlayer currentItem whose AVAsset contains no enabled video tracks.
  */
 @property(nonatomic, readonly, getter=isReadyForDisplay) BOOL readyForDisplay;
+
+/*!
+	@property		videoRect
+	@abstract		The current size and position of the video image as displayed within the receiver's bounds.
+ */
+@property (nonatomic, readonly) CGRect videoRect NS_AVAILABLE(10_9, 7_0);
 
 @end

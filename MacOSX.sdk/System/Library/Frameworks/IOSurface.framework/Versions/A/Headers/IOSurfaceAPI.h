@@ -110,7 +110,7 @@ IOSurfaceRef IOSurfaceCreate(CFDictionaryRef properties)
    the same IOSurfaceRef.   If you need to compare two IOSurface objects
    for equality, you must either do so by comparing their IOSurfaceIDs, or by 
    using CFEqual(). */
-IOSurfaceRef IOSurfaceLookup(IOSurfaceID csid)
+IOSurfaceRef IOSurfaceLookup(IOSurfaceID csid) CF_RETURNS_RETAINED
 	IOSFC_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
 
 /* Retrieve the unique IOSurfaceID value for a IOSurface */
@@ -242,17 +242,17 @@ mach_port_t IOSurfaceCreateMachPort(IOSurfaceRef buffer)
 
 /* This call lets you take a mach_port_t created via IOSurfaceCreatePort() and recreate an IOSurfaceRef from it.
    Note: This call does NOT destroy the port. */
-IOSurfaceRef IOSurfaceLookupFromMachPort(mach_port_t port)
+IOSurfaceRef IOSurfaceLookupFromMachPort(mach_port_t port) CF_RETURNS_RETAINED
 	IOSFC_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
 	
 /* This call lets you get an xpc_object_t that holds a reference to the IOSurface.
    Note: Any live XPC objects created from an IOSurfaceRef implicity increase the IOSurface's global use
    count by one until the object is destroyed. */
-xpc_object_t IOSurfaceCreateXPCObject(IOSurfaceRef aSurface)
+xpc_object_t IOSurfaceCreateXPCObject(IOSurfaceRef aSurface) XPC_RETURNS_RETAINED
 	IOSFC_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA);
 
 /* This call lets you take an xpc_object_t created via IOSurfaceCreatePort() and recreate an IOSurfaceRef from it. */
-IOSurfaceRef IOSurfaceLookupFromXPCObject(xpc_object_t xobj)
+IOSurfaceRef IOSurfaceLookupFromXPCObject(xpc_object_t xobj) CF_RETURNS_RETAINED
 	IOSFC_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA);
 
 /* 

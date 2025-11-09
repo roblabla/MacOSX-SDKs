@@ -1,6 +1,6 @@
 /*
 	NSFileWrapper.h
-	Copyright (c) 1995-2012, Apple Inc. All rights reserved.
+	Copyright (c) 1995-2013, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>

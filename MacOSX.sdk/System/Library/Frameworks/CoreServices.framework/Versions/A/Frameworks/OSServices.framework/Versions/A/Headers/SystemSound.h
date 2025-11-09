@@ -1,5 +1,5 @@
 /*
-     File:       OSServices/SystemSoundPriv.h
+     File:       OSServices/SystemSound.h
  
      Contains:   *** DEPRECATED *** SystemSound include file
  
@@ -16,7 +16,7 @@
 #define __SYSTEMSOUND__
 
 #ifndef __MACTYPES__
-#include <CarbonCore/MacTypes.h>
+#include <MacTypes.h>
 #endif
 
 #ifndef __FILES__

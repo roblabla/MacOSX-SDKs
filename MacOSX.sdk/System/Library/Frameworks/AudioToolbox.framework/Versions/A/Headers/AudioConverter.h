@@ -211,12 +211,6 @@ typedef UInt32                          AudioConverterPropertyID;
                     outPropertyData is sizeof(AudioFormatListItem), then only the best format is returned.
                     This property may be used for example to discover all the data formats produced by the AAC_HE2
                     (AAC High Efficiency vers. 2) encoder.
-    @constant   kAudioConverterPropertyDithering
-					A UInt32. Set to a value from the enum of dithering algorithms below. 
-					Zero means no dithering and is the default.
-    @constant   kAudioConverterPropertyDitherBitDepth
-					A UInt32. Dither is applied at this bit depth.
-
 */
 enum // typedef UInt32 AudioConverterPropertyID
 {
@@ -252,28 +246,29 @@ enum // typedef UInt32 AudioConverterPropertyID
     kAudioConverterCurrentInputStreamDescription        = 'acid',
     kAudioConverterPropertySettings                     = 'acps',
     kAudioConverterPropertyBitDepthHint                 = 'acbd',
-    kAudioConverterPropertyFormatList                   = 'flst',
+    kAudioConverterPropertyFormatList                   = 'flst'
+};
+
+
+//=============================================================================
+//  
+//=============================================================================
+
+/*!
+    @enum       Mac OS X AudioConverter Properties
+
+    @constant   kAudioConverterPropertyDithering
+					A UInt32. Set to a value from the enum of dithering algorithms below. 
+					Zero means no dithering and is the default. (Mac OS X only.)
+    @constant   kAudioConverterPropertyDitherBitDepth
+					A UInt32. Dither is applied at this bit depth.  (Mac OS X only.)
+
+*/
+enum // typedef UInt32 AudioConverterPropertyID
+{
 	kAudioConverterPropertyDithering					= 'dith',
 	kAudioConverterPropertyDitherBitDepth				= 'dbit'
 };
-
-#if TARGET_OS_IPHONE
-/*!
-    @enum       AudioConverterPropertyID (iPhone only)
-    @abstract   iPhone-specific properties of an AudioConverter, accessible via AudioConverterGetProperty()
-                and AudioConverterSetProperty().
-    
-    @constant   kAudioConverterPropertyCanResumeFromInterruption
-                    A read-only UInt32 signifying whether the underlying codec supports resumption following
-                    an interruption. If the property is unimplemented (i.e. AudioConverterGetProperty
-                    returns an error), then the codec is not a hardware codec. If the property's value
-                    is 1, then the codec can resume work following an interruption. If the property's
-                    value is 0, then interruptions destroy the codec's state.
-*/  
-enum {
-    kAudioConverterPropertyCanResumeFromInterruption    = 'crfi'
-};
-#endif
 
 /*!
     @enum       Dithering algorithms
@@ -428,27 +423,6 @@ enum
     kAudioConverterErr_OutputSampleRateOutOfRange   = '!osr'
 };
 
-#if TARGET_OS_IPHONE
-/*!
-    @enum       AudioConverter errors (iPhone only)
-    @abstract   iPhone-specific OSStatus results for AudioConverter
-    
-    @constant   kAudioConverterErr_HardwareInUse
-                    Returned from AudioConverterFillComplexBuffer if the underlying hardware codec has
-                    become unavailable, probably due to an interruption. In this case, your application
-                    must stop calling AudioConverterFillComplexBuffer. If the converter can resume from an
-                    interruption (see kAudioConverterPropertyCanResumeFromInterruption), you must
-                    wait for an EndInterruption notification from AudioSession, and call AudioSessionSetActive(true)
-                    before resuming.
-    @constant   kAudioConverterErr_NoHardwarePermission
-                    Returned from AudioConverterNew if the new converter would use a hardware codec
-                    which the application does not have permission to use.
-*/  
-enum {
-    kAudioConverterErr_HardwareInUse 		= 'hwiu',
-    kAudioConverterErr_NoHardwarePermission = 'perm'
-};
-#endif
 
 //=============================================================================
 //  Routines
@@ -692,7 +666,6 @@ typedef OSStatus
                 Produces a buffer of output data from an AudioConverter. The supplied input
                 callback function is called whenever necessary.             
 */
-#if !TARGET_OS_IPHONE
 extern OSStatus
 AudioConverterFillBuffer(   AudioConverterRef               inAudioConverter,
                             AudioConverterInputDataProc     inInputDataProc,
@@ -701,7 +674,6 @@ AudioConverterFillBuffer(   AudioConverterRef               inAudioConverter,
                             void*                           outOutputData)
                             
                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_1,__MAC_10_5, __IPHONE_NA, __IPHONE_NA);
-#endif // !TARGET_OS_IPHONE
 
 //-----------------------------------------------------------------------------
 /*!

@@ -1,6 +1,6 @@
 /* CoreGraphics - CGEvent.h
- * Copyright (c) 2004-2008 Apple Inc.
- * All rights reserved. */
+   Copyright (c) 2004-2013 Apple Inc.
+   All rights reserved. */
 
 #ifndef CGEVENT_H_
 #define CGEVENT_H_
@@ -84,8 +84,8 @@ CG_EXTERN CGEventRef CGEventCreateKeyboardEvent(CGEventSourceRef source,
    using `CGEventSourceSetPixelsPerLine'. */
  
 CG_EXTERN CGEventRef CGEventCreateScrollWheelEvent(CGEventSourceRef source,
-  CGScrollEventUnit units, uint32_t wheelCount, int32_t wheel1,
-  ...) CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+  CGScrollEventUnit units, uint32_t wheelCount, int32_t wheel1, ...)
+  CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 /* Return a copy of `event'. */
 
@@ -223,11 +223,6 @@ CG_EXTERN void CGEventSetDoubleValueField(CGEventRef event,
 
 /* Event taps.
 
-   A function registers an event tap, taking a pointer to the program's tap
-   function and an arbitrary reference to be passed to the tap function, and
-   returning a `CFMachPortRef' the program can add to the appropriate run
-   loop by creating a surce and using `CFRunLoopAddSource'.
-
    Taps may be placed at the point where HIDSystem events enter the server,
    at the point where HIDSystem and remote control events enter a session,
    at the point where events have been annotated to flow to a specific
@@ -239,7 +234,7 @@ CG_EXTERN void CGEventSetDoubleValueField(CGEventRef event,
    may pass an event through unmodified, modify an event, or discard an
    event. When a tap is registered, it identifies the set of events to be
    observed with a mask, and indicates if it is a passive or active event
-   filter. Multiple event type bitmasks may be "OR"ed together.
+   filter. Multiple event type bitmasks may be ORed together.
 
    Taps may only be placed at `kCGHIDEventTap' by a process running as the
    root user. NULL is returned for other users.
@@ -247,11 +242,14 @@ CG_EXTERN void CGEventSetDoubleValueField(CGEventRef event,
    Taps placed at `kCGHIDEventTap', `kCGSessionEventTap',
    `kCGAnnotatedSessionEventTap', or on a specific process may only receive
    key up and down events if access for assistive devices is enabled
-   (Preferences Accessibility panel, Keyboard view) or the caller is
-   enabled for assistive device access, as by `AXMakeProcessTrusted'. If the
-   tap is not permitted to monitor these events when the tap is created,
-   then the appropriate bits in the mask are cleared. If that results in an
-   empty mask, then NULL is returned.
+   (Preferences Accessibility panel, Keyboard view) or the caller is enabled
+   for assistive device access, as by `AXMakeProcessTrusted'. If the tap is
+   not permitted to monitor these events when the tap is created, then the
+   appropriate bits in the mask are cleared. If that results in an empty
+   mask, then NULL is returned.
+
+   An event tap is represented as a `CFMachPortRef'. The event tap may be
+   added to an appropriate run loop by calling `CFRunLoopAddSource'.
 
    Releasing the CFMachPortRef will release the tap.
 

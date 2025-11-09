@@ -57,13 +57,6 @@ typedef int sigjmp_buf[_JBLEN + 1];
  */
 
 
-#define __need_struct_sigcontext
-#include <i386/_structs.h>
-
-typedef struct sigcontext jmp_buf[1];
-#define _JBLEN ((sizeof(struct sigcontext)) / sizeof(int))
-typedef int sigjmp_buf[_JBLEN+1];
-
 #endif
 
 __BEGIN_DECLS

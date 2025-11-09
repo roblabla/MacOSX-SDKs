@@ -1,6 +1,6 @@
 /*	
     NSURLAuthenticationChallenge.h
-    Copyright (c) 2003-2012, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2013, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -62,7 +62,7 @@
     to indicate when it's done.
 */
 
-@interface NSURLAuthenticationChallenge : NSObject <NSCoding>
+@interface NSURLAuthenticationChallenge : NSObject <NSSecureCoding>
 {
 @private
     NSURLAuthenticationChallengeInternal *_internal;

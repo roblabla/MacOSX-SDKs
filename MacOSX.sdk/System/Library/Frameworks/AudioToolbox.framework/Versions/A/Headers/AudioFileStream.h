@@ -232,6 +232,9 @@ enum
 					running average of packets parsed.
 	@constant	kAudioFileStreamProperty_BitRate
 					a UInt32 of the bit rate in bits per second.
+    @constant	kAudioFileStreamProperty_InfoDictionary
+                    a CFDictionary filled with information about the data contained in the stream.
+                    See AudioFile.h for InfoDictionary key strings. Caller is responsible for releasing the CFObject.
 */
 enum
 {
@@ -252,7 +255,8 @@ enum
 	kAudioFileStreamProperty_PacketTableInfo				=	'pnfo',
 	kAudioFileStreamProperty_PacketSizeUpperBound  			=	'pkub',
 	kAudioFileStreamProperty_AverageBytesPerPacket			=	'abpp',
-	kAudioFileStreamProperty_BitRate						=	'brat'
+	kAudioFileStreamProperty_BitRate						=	'brat',
+    kAudioFileStreamProperty_InfoDictionary                 =   'info'
 };
 
 //=============================================================================

@@ -1,7 +1,7 @@
 /*
     NSLevelIndicatorCell.h
     Application Kit
-    Copyright (c) 2004-2012, Apple Inc.
+    Copyright (c) 2004-2013, Apple Inc.
     All rights reserved.
 */
 

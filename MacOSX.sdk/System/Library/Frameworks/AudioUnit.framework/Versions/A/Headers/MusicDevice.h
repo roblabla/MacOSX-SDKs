@@ -3,7 +3,7 @@
  
      Contains:   MusicDevice Interfaces
   
-     Copyright:  © 2000-2011 by Apple, Inc., all rights reserved.
+     Copyright:   2000-2011 by Apple, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -239,7 +239,7 @@ MusicDeviceMIDIEvent(	MusicDeviceComponent	inUnit,
 						UInt32					inStatus,
 						UInt32					inData1,
 						UInt32					inData2,
-						UInt32					inOffsetSampleFrame)				__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
+						UInt32					inOffsetSampleFrame)				__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
 
 /*!
 	@function	MusicDeviceSysEx
@@ -260,7 +260,7 @@ MusicDeviceMIDIEvent(	MusicDeviceComponent	inUnit,
 extern OSStatus
 MusicDeviceSysEx(		MusicDeviceComponent	inUnit,
 						const UInt8 *			inData,
-						UInt32					inLength)							__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
+						UInt32					inLength)							__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
 
 
 /*!
@@ -308,7 +308,7 @@ MusicDeviceStartNote(	MusicDeviceComponent				inUnit,
 						MusicDeviceGroupID					inGroupID,
 						NoteInstanceID *					outNoteInstanceID,
 						UInt32								inOffsetSampleFrame,
-						const MusicDeviceNoteParams *	 	inParams)				__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
+						const MusicDeviceNoteParams *	 	inParams)				__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
 
 /*!
 	@function	MusicDeviceStopNote
@@ -332,7 +332,7 @@ extern OSStatus
 MusicDeviceStopNote(	MusicDeviceComponent	inUnit,
 						MusicDeviceGroupID		inGroupID,
 						NoteInstanceID			inNoteInstanceID,
-						UInt32					inOffsetSampleFrame)				__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
+						UInt32					inOffsetSampleFrame)				__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_5_0);
 
 
 /*!

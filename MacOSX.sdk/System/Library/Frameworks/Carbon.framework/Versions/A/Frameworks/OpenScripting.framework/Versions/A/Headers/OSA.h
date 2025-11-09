@@ -3,7 +3,7 @@
  
      Contains:   Open Scripting Architecture Client Interfaces.
  
-     Version:    OSA-148.3~2
+     Version:    OpenScripting
  
      Copyright:  © 1992-2008 by Apple Inc., all rights reserved
  
@@ -26,7 +26,7 @@
 
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -155,7 +155,7 @@ typedef STACK_UPP_TYPE(OSASendProcPtr)                          OSASendUPP;
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern OSACreateAppleEventUPP
-NewOSACreateAppleEventUPP(OSACreateAppleEventProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewOSACreateAppleEventUPP(OSACreateAppleEventProcPtr userRoutine) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 /*
  *  NewOSASendUPP()
@@ -166,7 +166,7 @@ NewOSACreateAppleEventUPP(OSACreateAppleEventProcPtr userRoutine) AVAILABLE_MAC_
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern OSASendUPP
-NewOSASendUPP(OSASendProcPtr userRoutine)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewOSASendUPP(OSASendProcPtr userRoutine)                     __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 /*
  *  DisposeOSACreateAppleEventUPP()
@@ -177,7 +177,7 @@ NewOSASendUPP(OSASendProcPtr userRoutine)                     AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeOSACreateAppleEventUPP(OSACreateAppleEventUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeOSACreateAppleEventUPP(OSACreateAppleEventUPP userUPP) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 /*
  *  DisposeOSASendUPP()
@@ -188,7 +188,7 @@ DisposeOSACreateAppleEventUPP(OSACreateAppleEventUPP userUPP) AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeOSASendUPP(OSASendUPP userUPP)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeOSASendUPP(OSASendUPP userUPP)                         __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 /*
  *  InvokeOSACreateAppleEventUPP()
@@ -207,7 +207,7 @@ InvokeOSACreateAppleEventUPP(
   SInt32                  transactionID,
   AppleEvent *            result,
   SRefCon                 refCon,
-  OSACreateAppleEventUPP  userUPP)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSACreateAppleEventUPP  userUPP)                            __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 /*
  *  InvokeOSASendUPP()
@@ -227,7 +227,7 @@ InvokeOSASendUPP(
   AEIdleUPP           idleProc,
   AEFilterUPP         filterProc,
   SRefCon             refCon,
-  OSASendUPP          userUPP)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSASendUPP          userUPP)                                __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 #if __MACH__
   #ifdef __cplusplus
@@ -524,7 +524,7 @@ OSALoad(
   ComponentInstance   scriptingComponent,
   const AEDesc *      scriptData,
   SInt32              modeFlags,
-  OSAID *             resultingScriptID)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSAID *             resultingScriptID)                      __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -555,7 +555,7 @@ OSAStore(
   OSAID               scriptID,
   DescType            desiredType,
   SInt32              modeFlags,
-  AEDesc *            resultingScriptData)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AEDesc *            resultingScriptData)                    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -586,7 +586,7 @@ OSAExecute(
   OSAID               compiledScriptID,
   OSAID               contextID,
   SInt32              modeFlags,
-  OSAID *             resultingScriptValueID)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSAID *             resultingScriptValueID)                 __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -629,7 +629,7 @@ OSADisplay(
   OSAID               scriptValueID,
   DescType            desiredType,
   SInt32              modeFlags,
-  AEDesc *            resultingText)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AEDesc *            resultingText)                          __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -670,7 +670,7 @@ OSACopyDisplayString(
   ComponentInstance        scriptingComponent,
   OSAID                    scriptID,
   SInt32                   modeFlags,
-  CFAttributedStringRef *  result)                            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  CFAttributedStringRef *  result)                            __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 
 /* Getting Error Information: */
@@ -687,7 +687,7 @@ OSAScriptError(
   ComponentInstance   scriptingComponent,
   OSType              selector,
   DescType            desiredType,
-  AEDesc *            resultingErrorDescription)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AEDesc *            resultingErrorDescription)              __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -833,7 +833,7 @@ enum {
 extern OSAError 
 OSADispose(
   ComponentInstance   scriptingComponent,
-  OSAID               scriptID)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSAID               scriptID)                               __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -859,7 +859,7 @@ OSASetScriptInfo(
   ComponentInstance   scriptingComponent,
   OSAID               scriptID,
   OSType              selector,
-  long                value)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long                value)                                  __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -885,7 +885,7 @@ OSAGetScriptInfo(
   ComponentInstance   scriptingComponent,
   OSAID               scriptID,
   OSType              selector,
-  long *              result)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *              result)                                 __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -914,7 +914,7 @@ typedef STACK_UPP_TYPE(OSAActiveProcPtr)                        OSAActiveUPP;
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern OSAActiveUPP
-NewOSAActiveUPP(OSAActiveProcPtr userRoutine)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewOSAActiveUPP(OSAActiveProcPtr userRoutine)                 __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 /*
  *  DisposeOSAActiveUPP()
@@ -925,7 +925,7 @@ NewOSAActiveUPP(OSAActiveProcPtr userRoutine)                 AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeOSAActiveUPP(OSAActiveUPP userUPP)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeOSAActiveUPP(OSAActiveUPP userUPP)                     __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 /*
  *  InvokeOSAActiveUPP()
@@ -938,7 +938,7 @@ DisposeOSAActiveUPP(OSAActiveUPP userUPP)                     AVAILABLE_MAC_OS_X
 extern OSErr
 InvokeOSAActiveUPP(
   SRefCon       refCon,
-  OSAActiveUPP  userUPP)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSAActiveUPP  userUPP)                                      __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 #if __MACH__
   #ifdef __cplusplus
@@ -964,7 +964,7 @@ extern OSAError
 OSASetActiveProc(
   ComponentInstance   scriptingComponent,
   OSAActiveUPP        activeProc,
-  SRefCon             refCon)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SRefCon             refCon)                                 __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -987,7 +987,7 @@ extern OSAError
 OSAGetActiveProc(
   ComponentInstance   scriptingComponent,
   OSAActiveUPP *      activeProc,
-  SRefCon *           refCon)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SRefCon *           refCon)                                 __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -1014,7 +1014,7 @@ OSAGetActiveProc(
 extern OSAError 
 OSAScriptingComponentName(
   ComponentInstance   scriptingComponent,
-  AEDesc *            resultingScriptingComponentName)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AEDesc *            resultingScriptingComponentName)        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -1042,7 +1042,7 @@ OSACompile(
   ComponentInstance   scriptingComponent,
   const AEDesc *      sourceData,
   SInt32              modeFlags,
-  OSAID *             previousAndResultingScriptID)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSAID *             previousAndResultingScriptID)           __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -1085,7 +1085,7 @@ extern OSAError
 OSACopyID(
   ComponentInstance   scriptingComponent,
   OSAID               fromID,
-  OSAID *             toID)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSAID *             toID)                                   __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -1111,7 +1111,7 @@ extern OSAError
 OSACopyScript(
   ComponentInstance   scriptingComponent,
   OSAID               fromID,
-  OSAID *             toID)                                   AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+  OSAID *             toID)                                   __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
 
 
 /*
@@ -1143,7 +1143,7 @@ OSAGetSource(
   ComponentInstance   scriptingComponent,
   OSAID               scriptID,
   DescType            desiredType,
-  AEDesc *            resultingSourceData)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AEDesc *            resultingSourceData)                    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -1175,7 +1175,7 @@ OSACopySourceString(
   ComponentInstance        scriptingComponent,
   OSAID                    scriptID,
   SInt32                   modeFlags,
-  CFAttributedStringRef *  result)                            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  CFAttributedStringRef *  result)                            __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 
 /**************************************************************************
@@ -1197,7 +1197,7 @@ OSACoerceFromDesc(
   ComponentInstance   scriptingComponent,
   const AEDesc *      scriptData,
   SInt32              modeFlags,
-  OSAID *             resultingScriptID)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSAID *             resultingScriptID)                      __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -1235,7 +1235,7 @@ OSACoerceToDesc(
   OSAID               scriptID,
   DescType            desiredType,
   SInt32              modeFlags,
-  AEDesc *            result)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AEDesc *            result)                                 __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -1271,7 +1271,7 @@ extern OSAError
 OSASetSendProc(
   ComponentInstance   scriptingComponent,
   OSASendUPP          sendProc,
-  SRefCon             refCon)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SRefCon             refCon)                                 __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -1294,7 +1294,7 @@ extern OSAError
 OSAGetSendProc(
   ComponentInstance   scriptingComponent,
   OSASendUPP *        sendProc,
-  SRefCon *           refCon)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SRefCon *           refCon)                                 __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -1316,7 +1316,7 @@ extern OSAError
 OSASetCreateProc(
   ComponentInstance        scriptingComponent,
   OSACreateAppleEventUPP   createProc,
-  SRefCon                  refCon)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SRefCon                  refCon)                            __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -1339,7 +1339,7 @@ extern OSAError
 OSAGetCreateProc(
   ComponentInstance         scriptingComponent,
   OSACreateAppleEventUPP *  createProc,
-  SRefCon *                 refCon)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SRefCon *                 refCon)                           __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -1360,7 +1360,7 @@ OSAGetCreateProc(
 extern OSAError 
 OSASetDefaultTarget(
   ComponentInstance      scriptingComponent,
-  const AEAddressDesc *  target)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const AEAddressDesc *  target)                              __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -1392,7 +1392,7 @@ OSASetDefaultTarget(
 extern OSAError 
 OSAStartRecording(
   ComponentInstance   scriptingComponent,
-  OSAID *             compiledScriptToModifyID)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSAID *             compiledScriptToModifyID)               __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -1420,7 +1420,7 @@ OSAStartRecording(
 extern OSAError 
 OSAStopRecording(
   ComponentInstance   scriptingComponent,
-  OSAID               compiledScriptID)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSAID               compiledScriptID)                       __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -1453,7 +1453,7 @@ OSALoadExecute(
   const AEDesc *      scriptData,
   OSAID               contextID,
   SInt32              modeFlags,
-  OSAID *             resultingScriptValueID)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSAID *             resultingScriptValueID)                 __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -1494,7 +1494,7 @@ OSACompileExecute(
   const AEDesc *      sourceData,
   OSAID               contextID,
   SInt32              modeFlags,
-  OSAID *             resultingScriptValueID)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSAID *             resultingScriptValueID)                 __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -1535,7 +1535,7 @@ OSADoScript(
   OSAID               contextID,
   DescType            desiredType,
   SInt32              modeFlags,
-  AEDesc *            resultingText)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AEDesc *            resultingText)                          __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -1589,7 +1589,7 @@ OSADoScript(
 extern OSAError 
 OSASetCurrentDialect(
   ComponentInstance   scriptingComponent,
-  short               dialectCode)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short               dialectCode)                            __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -1611,7 +1611,7 @@ OSASetCurrentDialect(
 extern OSAError 
 OSAGetCurrentDialect(
   ComponentInstance   scriptingComponent,
-  short *             resultingDialectCode)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short *             resultingDialectCode)                   __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -1632,7 +1632,7 @@ OSAGetCurrentDialect(
 extern OSAError 
 OSAAvailableDialects(
   ComponentInstance   scriptingComponent,
-  AEDesc *            resultingDialectInfoList)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AEDesc *            resultingDialectInfoList)               __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -1660,7 +1660,7 @@ OSAGetDialectInfo(
   ComponentInstance   scriptingComponent,
   short               dialectCode,
   OSType              selector,
-  AEDesc *            resultingDialectInfo)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AEDesc *            resultingDialectInfo)                   __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -1688,7 +1688,7 @@ OSAGetDialectInfo(
 extern OSAError 
 OSAAvailableDialectCodeList(
   ComponentInstance   scriptingComponent,
-  AEDesc *            resultingDialectCodeList)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AEDesc *            resultingDialectCodeList)               __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -1731,7 +1731,7 @@ extern OSAError
 OSASetResumeDispatchProc(
   ComponentInstance   scriptingComponent,
   AEEventHandlerUPP   resumeDispatchProc,
-  SRefCon             refCon)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SRefCon             refCon)                                 __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -1800,7 +1800,7 @@ extern OSAError
 OSAGetResumeDispatchProc(
   ComponentInstance    scriptingComponent,
   AEEventHandlerUPP *  resumeDispatchProc,
-  SRefCon *            refCon)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SRefCon *            refCon)                                __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -1826,7 +1826,7 @@ OSAExecuteEvent(
   const AppleEvent *  theAppleEvent,
   OSAID               contextID,
   SInt32              modeFlags,
-  OSAID *             resultingScriptValueID)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSAID *             resultingScriptValueID)                 __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -1869,7 +1869,7 @@ OSADoEvent(
   const AppleEvent *  theAppleEvent,
   OSAID               contextID,
   SInt32              modeFlags,
-  AppleEvent *        reply)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AppleEvent *        reply)                                  __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -1915,7 +1915,7 @@ OSAMakeContext(
   ComponentInstance   scriptingComponent,
   const AEDesc *      contextName,
   OSAID               parentContext,
-  OSAID *             resultingContextID)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSAID *             resultingContextID)                     __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -1949,7 +1949,7 @@ OSAGetScriptDataFromURL(
   CFURLRef   scriptURL,
   Boolean *  storable,                  /* can be NULL */
   SInt32     modeFlags,
-  AEDesc *   resultingScriptData)                             AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+  AEDesc *   resultingScriptData)                             __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
 
 
 /*
@@ -1986,7 +1986,7 @@ OSALoadScriptData(
   const AEDesc *      scriptData,
   CFURLRef            fromURL,                  /* can be NULL */
   SInt32              modeFlags,
-  OSAID *             resultingScriptID)                      AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+  OSAID *             resultingScriptID)                      __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
 
 
 /*
@@ -2015,7 +2015,7 @@ OSALoadFile(
   const FSRef *       scriptFile,
   Boolean *           storable,                 /* can be NULL */
   SInt32              modeFlags,
-  OSAID *             resultingScriptID)                      AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  OSAID *             resultingScriptID)                      __OSX_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_NA);
 
 
 /*
@@ -2044,7 +2044,7 @@ OSAStoreFile(
   OSAID               scriptID,
   DescType            desiredType,
   SInt32              modeFlags,
-  const FSRef *       scriptFile)                             AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  const FSRef *       scriptFile)                             __OSX_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_NA);
 
 
 /*
@@ -2070,7 +2070,7 @@ OSALoadExecuteFile(
   const FSRef *       scriptFile,
   OSAID               contextID,
   SInt32              modeFlags,
-  OSAID *             resultingScriptValueID)                 AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  OSAID *             resultingScriptValueID)                 __OSX_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_NA);
 
 
 /*
@@ -2099,7 +2099,7 @@ OSADoScriptFile(
   OSAID               contextID,
   DescType            desiredType,
   SInt32              modeFlags,
-  AEDesc *            resultingText)                          AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  AEDesc *            resultingText)                          __OSX_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_NA);
 
 
 /*

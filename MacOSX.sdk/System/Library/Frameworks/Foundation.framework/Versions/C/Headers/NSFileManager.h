@@ -1,5 +1,5 @@
 /*	NSFileManager.h
-	Copyright (c) 1994-2012, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2013, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -113,7 +113,7 @@ extern NSString * const NSUbiquityIdentityDidChangeNotification NS_AVAILABLE(10_
  */
 - (NSArray *)contentsOfDirectoryAtPath:(NSString *)path error:(NSError **)error NS_AVAILABLE(10_5, 2_0);
 
-/* subpathsOfDirectoryAtPath:error: returns an NSArray of NSStrings represeting the filenames of the items in the specified directory and all its subdirectories recursively. If this method returns 'nil', an NSError will be returned by reference in the 'error' parameter. If the directory contains no items, this method will return the empty array.
+/* subpathsOfDirectoryAtPath:error: returns an NSArray of NSStrings representing the filenames of the items in the specified directory and all its subdirectories recursively. If this method returns 'nil', an NSError will be returned by reference in the 'error' parameter. If the directory contains no items, this method will return the empty array.
  
     This method replaces subpathsAtPath:
  */
@@ -275,7 +275,7 @@ extern NSString * const NSUbiquityIdentityDidChangeNotification NS_AVAILABLE(10_
 
 /* Returns the container directory associated with the specified security application group ID.
  */
-- (NSURL *)containerURLForSecurityApplicationGroupIdentifier:(NSString *)groupIdentifier NS_AVAILABLE_MAC(10_8); // Available in 10.8.3.
+- (NSURL *)containerURLForSecurityApplicationGroupIdentifier:(NSString *)groupIdentifier NS_AVAILABLE(10_8, 7_0); // Available for OS X in 10.8.3.
 
 
 @end

@@ -36,7 +36,6 @@
 @property(copy) NSString *title;
 @property(copy) NSString *lang;
 @property(copy) NSString *dir;
-@property(copy) NSString *className;
 @property int tabIndex;
 @property(copy) NSString *accessKey AVAILABLE_AFTER_WEBKIT_VERSION_5_1;
 @property(copy) NSString *innerHTML;

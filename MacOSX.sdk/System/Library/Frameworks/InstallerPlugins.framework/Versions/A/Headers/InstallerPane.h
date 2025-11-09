@@ -49,18 +49,23 @@ typedef struct InstallerPane_Private InstallerPane_Private;
 
 @interface InstallerPane : NSObject {
 	@private
-		IBOutlet NSView *contentView;
+        NSView *_contentView;
 	
-		IBOutlet NSView *initialKeyView;
-		IBOutlet NSView *firstKeyView;
-		IBOutlet NSView *lastKeyView;
-	
-		IBOutlet InstallerPane	*nextPane;
+        NSView *_initialKeyView;
+        NSView *_firstKeyView;
+        NSView *_lastKeyView;
+
+        InstallerPane *_nextPane;
 		
 		IBOutlet id				parentSection;
 	
 		InstallerPane_Private	*_private;
 }
+@property (nonatomic, retain) IBOutlet NSView *contentView;
+@property (nonatomic, retain) IBOutlet NSView *initialKeyView;
+@property (nonatomic, retain) IBOutlet NSView *firstKeyView;
+@property (nonatomic, retain) IBOutlet NSView *lastKeyView;
+@property (nonatomic, retain) IBOutlet InstallerPane	*nextPane;
 
 /*!
     @method     initWithSection

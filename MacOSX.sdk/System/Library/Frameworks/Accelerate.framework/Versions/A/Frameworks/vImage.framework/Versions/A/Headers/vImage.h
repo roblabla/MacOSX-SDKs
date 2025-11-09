@@ -170,12 +170,6 @@
     vImage will in general never take a lock, or do things that might involve taking a lock, such as allocating
     memory. Functions that may take a lock will be documented as such.  Some functions take temporary buffers 
     as arguments. If you do not provide a temporary buffer, they may call malloc.
-
-    G3 Compatability
-    ----------------
-    These functions all work on machines without a vector unit, such as the G3. vImage will transparently
-    select the best code to use depending on the runtime environment. Thus, on a G4 or later processor with 
-    AltiVec, AltiVec will be used. On earlier processors, optimized scalar code will be used. 
     
     Unused Flag Bits
     ----------------
@@ -198,5 +192,6 @@
 #include <vImage/Morphology.h>
 #include <vImage/BasicImageTypes.h>         /* New for MacOS X.4 and later */
 #include <vImage/Transform.h>               /* New for MacOS X.4 and later */
+#include <vImage/vImage_Utilities.h>
 
 #endif /* VIMAGE_H */

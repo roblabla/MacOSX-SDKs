@@ -198,10 +198,6 @@ typedef UInt32						ExtAudioFilePropertyID;
 						successfully consumed and you must try to write it again.
 */
 enum {
-#if TARGET_OS_IPHONE
-	kExtAudioFileError_CodecUnavailableInputConsumed    = -66559,
-	kExtAudioFileError_CodecUnavailableInputNotConsumed = -66560,
-#endif
 	kExtAudioFileError_InvalidProperty			= -66561,
 	kExtAudioFileError_InvalidPropertySize		= -66562,
 	kExtAudioFileError_NonPCMClientFormat		= -66563,

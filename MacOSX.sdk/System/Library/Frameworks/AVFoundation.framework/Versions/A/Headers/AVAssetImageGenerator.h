@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2012 Apple Inc. All rights reserved.
+	Copyright 2010-2013 Apple Inc. All rights reserved.
 
 */
 
@@ -31,6 +31,7 @@
 @class AVAsset;
 @class AVVideoComposition;
 @class AVAssetImageGeneratorInternal;
+@protocol AVVideoCompositing;
 
 /*!
 	@constant		AVAssetImageGeneratorApertureModeCleanAperture
@@ -65,6 +66,9 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 	AVAssetImageGeneratorInternal		*_priv;
 }
 
+/* Indicates the instance of AVAsset with which the AVAssetImageGenerator was initialized  */ 
+@property (nonatomic, readonly) AVAsset *asset NS_AVAILABLE(10_9, 6_0);
+
 /* Specifies whether or not to apply the track's preferredTransform (see -[AVAssetTrack preferredTransform]) when extracting an image from the asset.
    Default is NO.  Only rotation by 90, 180, or 270 degrees is supported. */
 @property (nonatomic) BOOL appliesPreferredTrackTransform;
@@ -81,6 +85,9 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
    If no videoComposition is specified, only the first enabled video track will be used.
    If a videoComposition is specified, the value of appliesPreferredTrackTransform is ignored. */
 @property (nonatomic, copy) AVVideoComposition *videoComposition;
+
+/* Indicates the custom video compositor instance used, if any */
+@property (nonatomic, readonly) id<AVVideoCompositing> customVideoCompositor NS_AVAILABLE(10_9, 7_0);
 
 /* The actual time of the generated images will be within the range [requestedTime-toleranceBefore, requestedTime+toleranceAfter] and may differ from the requested time for efficiency.
    Pass kCMTimeZero for both toleranceBefore and toleranceAfter to request frame-accurate image generation; this may incur additional decoding delay.

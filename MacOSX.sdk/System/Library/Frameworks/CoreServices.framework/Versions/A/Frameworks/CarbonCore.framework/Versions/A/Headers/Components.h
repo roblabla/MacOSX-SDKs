@@ -15,7 +15,7 @@
 #endif
 
 #ifndef __MACTYPES__
-#include <CarbonCore/MacTypes.h>
+#include <MacTypes.h>
 #endif
 
 #ifndef __MIXEDMODE__
@@ -58,9 +58,9 @@ enum {
 };
 
 enum {
-  cmpThreadSafe                 = 1L << 28, /* component is thread-safe */
-  cmpIsMissing                  = 1L << 29,
-  cmpWantsRegisterMessage       = 1L << 31
+  cmpThreadSafe                 = 1UL << 28, /* component is thread-safe */
+  cmpIsMissing                  = 1UL << 29,
+  cmpWantsRegisterMessage       = 1UL << 31
 };
 
 enum {

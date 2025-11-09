@@ -1,7 +1,9 @@
 /*	NSObject.h
-	Copyright (c) 1994-2012, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2013, Apple Inc. All rights reserved.
 */
 
+#include <TargetConditionals.h>
+#import <objc/NSObject.h>
 #import <Foundation/NSObjCRuntime.h>
 #import <Foundation/NSZone.h>
 
@@ -9,39 +11,6 @@
 @class Protocol;
 
 /***************	Basic protocols		***************/
-
-@protocol NSObject
-
-- (BOOL)isEqual:(id)object;
-- (NSUInteger)hash;
-
-- (Class)superclass;
-- (Class)class;
-- (id)self;
-- (NSZone *)zone NS_AUTOMATED_REFCOUNT_UNAVAILABLE;
-
-- (id)performSelector:(SEL)aSelector;
-- (id)performSelector:(SEL)aSelector withObject:(id)object;
-- (id)performSelector:(SEL)aSelector withObject:(id)object1 withObject:(id)object2;
-
-- (BOOL)isProxy;
-
-- (BOOL)isKindOfClass:(Class)aClass;
-- (BOOL)isMemberOfClass:(Class)aClass;
-- (BOOL)conformsToProtocol:(Protocol *)aProtocol;
-
-- (BOOL)respondsToSelector:(SEL)aSelector;
-
-- (id)retain NS_AUTOMATED_REFCOUNT_UNAVAILABLE;
-- (oneway void)release NS_AUTOMATED_REFCOUNT_UNAVAILABLE;
-- (id)autorelease NS_AUTOMATED_REFCOUNT_UNAVAILABLE;
-- (NSUInteger)retainCount NS_AUTOMATED_REFCOUNT_UNAVAILABLE;
-
-- (NSString *)description;
-@optional
-- (NSString *)debugDescription;
-
-@end
 
 @protocol NSCopying
 
@@ -63,6 +32,8 @@
 @end
 
 // Objects which are safe to be encoded and decoded across privilege boundaries should adopt NSSecureCoding instead of NSCoding. Secure coders (those that respond YES to requiresSecureCoding) will only encode objects that adopt the NSSecureCoding protocol.
+// NOTE: NSSecureCoding guarantees only that an archive contains the classes it claims. It makes no guarantees about the suitability for consumption by the receiver of the decoded content of the archive. Archived objects which  may trigger code evaluation should be validated independently by the consumer of the objects to verify that no malicious code is executed (i.e. by checking key paths, selectors etc. specified in the archive).
+
 @protocol NSSecureCoding <NSCoding>
 @required
 // This method must be return YES on all classes that allow secure coding. Subclasses of classes that adopt NSSecureCoding and override initWithCoder: must also override this method and return YES.
@@ -71,55 +42,6 @@
 @end
 
 /***********	Base class		***********/
-
-NS_ROOT_CLASS
-@interface NSObject <NSObject> {
-    Class	isa;
-}
-
-+ (void)load;
-
-+ (void)initialize;
-- (id)init;
-
-+ (id)new;
-+ (id)allocWithZone:(NSZone *)zone;
-+ (id)alloc;
-- (void)dealloc;
-
-- (void)finalize;
-
-- (id)copy;
-- (id)mutableCopy;
-
-+ (id)copyWithZone:(NSZone *)zone NS_AUTOMATED_REFCOUNT_UNAVAILABLE;
-+ (id)mutableCopyWithZone:(NSZone *)zone NS_AUTOMATED_REFCOUNT_UNAVAILABLE;
-
-+ (Class)superclass;
-+ (Class)class;
-+ (BOOL)instancesRespondToSelector:(SEL)aSelector;
-+ (BOOL)conformsToProtocol:(Protocol *)protocol;
-- (IMP)methodForSelector:(SEL)aSelector;
-+ (IMP)instanceMethodForSelector:(SEL)aSelector;
-- (void)doesNotRecognizeSelector:(SEL)aSelector;
-
-- (id)forwardingTargetForSelector:(SEL)aSelector NS_AVAILABLE(10_5, 2_0);
-- (void)forwardInvocation:(NSInvocation *)anInvocation;
-- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector;
-
-+ (NSMethodSignature *)instanceMethodSignatureForSelector:(SEL)aSelector;
-
-- (BOOL)allowsWeakReference NS_UNAVAILABLE;
-- (BOOL)retainWeakReference NS_UNAVAILABLE;
-
-+ (NSString *)description;
-
-+ (BOOL)isSubclassOfClass:(Class)aClass;
-
-+ (BOOL)resolveClassMethod:(SEL)sel NS_AVAILABLE(10_5, 2_0);
-+ (BOOL)resolveInstanceMethod:(SEL)sel NS_AVAILABLE(10_5, 2_0);
-
-@end
 
 @interface NSObject (NSCoderMethods)
 

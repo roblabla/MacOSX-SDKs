@@ -1,7 +1,7 @@
 /*
 	NSPrintInfo.h
 	Application Kit
-	Copyright (c) 1994-2012, Apple Inc.
+	Copyright (c) 1994-2013, Apple Inc.
 	All rights reserved.
 */
 
@@ -9,15 +9,14 @@
 #import <Foundation/NSObject.h>
 #import <AppKit/AppKitDefines.h>
 
-@class NSMutableDictionary, NSPrinter;
+@class NSMutableDictionary, NSPDFInfo, NSPrinter;
 
 /* Valid values for the NSPrintOrientation attribute.
 */
-enum {
-    NSPortraitOrientation = 0,
-    NSLandscapeOrientation = 1
-};
-typedef NSUInteger NSPrintingOrientation;
+typedef NS_ENUM(NSInteger, NSPaperOrientation) {
+    NSPaperOrientationPortrait = 0,
+    NSPaperOrientationLandscape = 1
+} NS_ENUM_AVAILABLE_MAC(10_9);
 
 /* Valid values for the NSPrintHorizontalPagination and NSPrintVerticalPagination attributes.
 */
@@ -39,7 +38,7 @@ APPKIT_EXTERN NSString *const NSPrintCancelJob;
 */
 APPKIT_EXTERN NSString *const NSPrintPaperName; // an NSString
 APPKIT_EXTERN NSString *const NSPrintPaperSize; // an NSValue containing an NSSize, in points
-APPKIT_EXTERN NSString *const NSPrintOrientation; // an NSNumber containing NSPortraitOrientation or NSLandscapeOrientation
+APPKIT_EXTERN NSString *const NSPrintOrientation; // an NSNumber containing NSPaperOrientationPortrait or NSPaperOrientationLandscape
 APPKIT_EXTERN NSString *const NSPrintScalingFactor; // an NSNumber containing a floating-point percentage
 
 /* Keys for pagination attributes that are recognized by NSPrintInfo.
@@ -100,11 +99,11 @@ APPKIT_EXTERN NSString *const NSPrintHeaderAndFooter; // a boolean NSNumber for 
 */
 - (void)setPaperName:(NSString *)name;
 - (void)setPaperSize:(NSSize)size;
-- (void)setOrientation:(NSPrintingOrientation)orientation;
+- (void)setOrientation:(NSPaperOrientation)orientation;
 - (void)setScalingFactor:(CGFloat)scalingFactor NS_AVAILABLE_MAC(10_6);
 - (NSString *)paperName;
 - (NSSize)paperSize;
-- (NSPrintingOrientation)orientation;
+- (NSPaperOrientation)orientation;
 - (CGFloat)scalingFactor NS_AVAILABLE_MAC(10_6);
 
 /* Set or get the values of the pagination attributes.
@@ -179,6 +178,10 @@ APPKIT_EXTERN NSString *const NSPrintHeaderAndFooter; // a boolean NSNumber for 
 - (void)setSelectionOnly:(BOOL)selectionOnly NS_AVAILABLE_MAC(10_6);
 - (BOOL)isSelectionOnly NS_AVAILABLE_MAC(10_6);
 
+/* Update the receiver with all settings and attributes present in the given NSPDFInfo. Entries in the given NSPDFInfo's attributes dictionary will be copied into the receiver's attributes dictionary ([self dictionary]). If inPDFInfo is the result of an NSPDFPanel with the NSPDFPanelRequestsParentDirectory option enabled, you must first modify inPDFInfo.URL by appending a file name. If inPDFInfo.URL points to a directory, this method will throw an exception.
+*/
+- (void)takeSettingsFromPDFInfo:(NSPDFInfo *)inPDFInfo NS_AVAILABLE_MAC(10_9);
+
 @end
 
 @interface NSPrintInfo(NSDeprecated)
@@ -204,3 +207,11 @@ APPKIT_EXTERN NSString *const NSPrintPaperFeed NS_DEPRECATED_MAC(10_0, 10_2);
 /* A key for an attribute that was deprecated in Mac OS 10.6. You can use NSPrintJobSavingURL instead.
 */
 APPKIT_EXTERN NSString *const NSPrintSavePath;
+
+/* An enum NSPrintOrientation values that was deprecated in OS X 10.9. You can use NSPaperOrientation instead.
+*/
+enum {
+    NSPortraitOrientation = 0,
+    NSLandscapeOrientation = 1
+};
+typedef NSUInteger NSPrintingOrientation;

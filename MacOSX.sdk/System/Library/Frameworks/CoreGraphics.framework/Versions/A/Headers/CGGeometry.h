@@ -8,6 +8,8 @@
 #include <CoreGraphics/CGBase.h>
 #include <CoreFoundation/CFDictionary.h>
 
+CF_IMPLICIT_BRIDGING_ENABLED
+
 /* Points. */
 
 struct CGPoint {
@@ -23,6 +25,16 @@ struct CGSize {
   CGFloat height;
 };
 typedef struct CGSize CGSize;
+
+/* Vectors. */
+
+#define CGVECTOR_DEFINED 1
+
+struct CGVector {
+  CGFloat dx;
+  CGFloat dy;
+};
+typedef struct CGVector CGVector;
 
 /* Rectangles. */
 
@@ -73,6 +85,10 @@ CG_INLINE CGPoint CGPointMake(CGFloat x, CGFloat y);
 /* Make a size from `(width, height)'. */
 
 CG_INLINE CGSize CGSizeMake(CGFloat width, CGFloat height);
+
+/* Make a vector from `(dx, dy)'. */
+
+CG_INLINE CGVector CGVectorMake(CGFloat dx, CGFloat dy);
 
 /* Make a rect from `(x, y; width, height)'. */
 
@@ -264,6 +280,12 @@ CGSizeMake(CGFloat width, CGFloat height)
   CGSize size; size.width = width; size.height = height; return size;
 }
 
+CG_INLINE CGVector
+CGVectorMake(CGFloat dx, CGFloat dy)
+{
+  CGVector vector; vector.dx = dx; vector.dy = dy; return vector;
+}
+
 CG_INLINE CGRect
 CGRectMake(CGFloat x, CGFloat y, CGFloat width, CGFloat height)
 {
@@ -286,5 +308,7 @@ __CGSizeEqualToSize(CGSize size1, CGSize size2)
   return size1.width == size2.width && size1.height == size2.height;
 }
 #define CGSizeEqualToSize __CGSizeEqualToSize
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif /* CGGEOMETRY_H_ */

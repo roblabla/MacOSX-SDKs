@@ -11,7 +11,7 @@
 #define __COLLECTIONS__
 
 #ifndef __MACTYPES__
-#include <CarbonCore/MacTypes.h>
+#include <MacTypes.h>
 #endif
 
 #ifndef __MIXEDMODE__
@@ -96,38 +96,38 @@ enum {
 
 /* attribute masks */
 enum {
-  kCollectionUser0Mask          = 1L << kCollectionUser0Bit,
-  kCollectionUser1Mask          = 1L << kCollectionUser1Bit,
-  kCollectionUser2Mask          = 1L << kCollectionUser2Bit,
-  kCollectionUser3Mask          = 1L << kCollectionUser3Bit,
-  kCollectionUser4Mask          = 1L << kCollectionUser4Bit,
-  kCollectionUser5Mask          = 1L << kCollectionUser5Bit,
-  kCollectionUser6Mask          = 1L << kCollectionUser6Bit,
-  kCollectionUser7Mask          = 1L << kCollectionUser7Bit,
-  kCollectionUser8Mask          = 1L << kCollectionUser8Bit,
-  kCollectionUser9Mask          = 1L << kCollectionUser9Bit,
-  kCollectionUser10Mask         = 1L << kCollectionUser10Bit,
-  kCollectionUser11Mask         = 1L << kCollectionUser11Bit,
-  kCollectionUser12Mask         = 1L << kCollectionUser12Bit,
-  kCollectionUser13Mask         = 1L << kCollectionUser13Bit,
-  kCollectionUser14Mask         = 1L << kCollectionUser14Bit,
-  kCollectionUser15Mask         = 1L << kCollectionUser15Bit,
-  kCollectionReserved0Mask      = 1L << kCollectionReserved0Bit,
-  kCollectionReserved1Mask      = 1L << kCollectionReserved1Bit,
-  kCollectionReserved2Mask      = 1L << kCollectionReserved2Bit,
-  kCollectionReserved3Mask      = 1L << kCollectionReserved3Bit,
-  kCollectionReserved4Mask      = 1L << kCollectionReserved4Bit,
-  kCollectionReserved5Mask      = 1L << kCollectionReserved5Bit,
-  kCollectionReserved6Mask      = 1L << kCollectionReserved6Bit,
-  kCollectionReserved7Mask      = 1L << kCollectionReserved7Bit,
-  kCollectionReserved8Mask      = 1L << kCollectionReserved8Bit,
-  kCollectionReserved9Mask      = 1L << kCollectionReserved9Bit,
-  kCollectionReserved10Mask     = 1L << kCollectionReserved10Bit,
-  kCollectionReserved11Mask     = 1L << kCollectionReserved11Bit,
-  kCollectionReserved12Mask     = 1L << kCollectionReserved12Bit,
-  kCollectionReserved13Mask     = 1L << kCollectionReserved13Bit,
-  kCollectionPersistenceMask    = 1L << kCollectionPersistenceBit,
-  kCollectionLockMask           = 1L << kCollectionLockBit
+  kCollectionUser0Mask          = 1UL << kCollectionUser0Bit,
+  kCollectionUser1Mask          = 1UL << kCollectionUser1Bit,
+  kCollectionUser2Mask          = 1UL << kCollectionUser2Bit,
+  kCollectionUser3Mask          = 1UL << kCollectionUser3Bit,
+  kCollectionUser4Mask          = 1UL << kCollectionUser4Bit,
+  kCollectionUser5Mask          = 1UL << kCollectionUser5Bit,
+  kCollectionUser6Mask          = 1UL << kCollectionUser6Bit,
+  kCollectionUser7Mask          = 1UL << kCollectionUser7Bit,
+  kCollectionUser8Mask          = 1UL << kCollectionUser8Bit,
+  kCollectionUser9Mask          = 1UL << kCollectionUser9Bit,
+  kCollectionUser10Mask         = 1UL << kCollectionUser10Bit,
+  kCollectionUser11Mask         = 1UL << kCollectionUser11Bit,
+  kCollectionUser12Mask         = 1UL << kCollectionUser12Bit,
+  kCollectionUser13Mask         = 1UL << kCollectionUser13Bit,
+  kCollectionUser14Mask         = 1UL << kCollectionUser14Bit,
+  kCollectionUser15Mask         = 1UL << kCollectionUser15Bit,
+  kCollectionReserved0Mask      = 1UL << kCollectionReserved0Bit,
+  kCollectionReserved1Mask      = 1UL << kCollectionReserved1Bit,
+  kCollectionReserved2Mask      = 1UL << kCollectionReserved2Bit,
+  kCollectionReserved3Mask      = 1UL << kCollectionReserved3Bit,
+  kCollectionReserved4Mask      = 1UL << kCollectionReserved4Bit,
+  kCollectionReserved5Mask      = 1UL << kCollectionReserved5Bit,
+  kCollectionReserved6Mask      = 1UL << kCollectionReserved6Bit,
+  kCollectionReserved7Mask      = 1UL << kCollectionReserved7Bit,
+  kCollectionReserved8Mask      = 1UL << kCollectionReserved8Bit,
+  kCollectionReserved9Mask      = 1UL << kCollectionReserved9Bit,
+  kCollectionReserved10Mask     = 1UL << kCollectionReserved10Bit,
+  kCollectionReserved11Mask     = 1UL << kCollectionReserved11Bit,
+  kCollectionReserved12Mask     = 1UL << kCollectionReserved12Bit,
+  kCollectionReserved13Mask     = 1UL << kCollectionReserved13Bit,
+  kCollectionPersistenceMask    = 1UL << kCollectionPersistenceBit,
+  kCollectionLockMask           = 1UL << kCollectionLockBit
 };
 
 

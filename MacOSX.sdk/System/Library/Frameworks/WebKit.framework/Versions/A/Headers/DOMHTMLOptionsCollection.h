@@ -36,10 +36,10 @@
 @property int selectedIndex AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
 @property unsigned length;
 
+- (DOMNode *)namedItem:(NSString *)name;
 - (void)add:(DOMHTMLOptionElement *)option index:(unsigned)index AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
 - (void)remove:(unsigned)index AVAILABLE_IN_WEBKIT_VERSION_4_0;
 - (DOMNode *)item:(unsigned)index;
-- (DOMNode *)namedItem:(NSString *)name;
 @end
 
 #endif

@@ -1,8 +1,8 @@
 /*
-	NSApplication.h
-	Application Kit
-	Copyright (c) 1994-2012, Apple Inc.
-	All rights reserved.
+    NSApplication.h
+    Application Kit
+    Copyright (c) 1994-2013, Apple Inc.
+    All rights reserved.
 */
 
 #import <AppKit/NSResponder.h>
@@ -39,27 +39,32 @@ APPKIT_EXTERN const double NSAppKitVersionNumber;
 #define NSAppKitVersionNumber10_6 1038
 #define NSAppKitVersionNumber10_7 1138
 #define NSAppKitVersionNumber10_7_2 1138.23
+#define NSAppKitVersionNumber10_7_3 1138.32
+#define NSAppKitVersionNumber10_7_4 1138.47
+#define NSAppKitVersionNumber10_8 1187
 
 
 /* Modes passed to NSRunLoop */
 APPKIT_EXTERN NSString *NSModalPanelRunLoopMode;
 APPKIT_EXTERN NSString *NSEventTrackingRunLoopMode;
 
-/* Pre-defined return values for runModalFor: and runModalSession:. The system also reserves all values below these. */
+
+/* Pre-defined return values for -runModalFor: and -runModalSession:. The system also reserves all values below these. Other values can be used. */
 enum {
-    NSRunStoppedResponse			= (-1000),
-    NSRunAbortedResponse			= (-1001),
-    NSRunContinuesResponse		= (-1002)
-};
+    NSModalResponseStop                 = (-1000), // Also used as the default response for sheets
+    NSModalResponseAbort                = (-1001),
+    NSModalResponseContinue             = (-1002), 
+} NS_ENUM_AVAILABLE_MAC(10_9);
+typedef NSInteger NSModalResponse NS_AVAILABLE_MAC(10_9);
+
 
 /* used with NSRunLoop's performSelector:target:argument:order:modes: */
 enum {
     NSUpdateWindowsRunLoopOrdering		= 500000
 };
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
+typedef NS_OPTIONS(NSUInteger, NSApplicationPresentationOptions) {
 /* Flags that comprise an application's presentationOptions */
-enum {
     NSApplicationPresentationDefault                    = 0,
     NSApplicationPresentationAutoHideDock               = (1 <<  0),    // Dock appears when moused to
     NSApplicationPresentationHideDock                   = (1 <<  1),    // Dock is entirely unavailable
@@ -72,18 +77,17 @@ enum {
     NSApplicationPresentationDisableForceQuit           = (1 <<  6),    // Cmd+Opt+Esc panel is disabled
     NSApplicationPresentationDisableSessionTermination  = (1 <<  7),    // PowerKey panel and Restart/Shut Down/Log Out disabled
     NSApplicationPresentationDisableHideApplication     = (1 <<  8),    // Application "Hide" menu item is disabled
-    NSApplicationPresentationDisableMenuBarTransparency = (1 <<  9)     // Menu Bar's transparent appearance is disabled
-};
-#endif
+    NSApplicationPresentationDisableMenuBarTransparency = (1 <<  9),     // Menu Bar's transparent appearance is disabled
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_7
-enum {
-    NSApplicationPresentationFullScreen = (1 << 10),                     // Application is in fullscreen mode
-    NSApplicationPresentationAutoHideToolbar = (1 << 11)                 // Fullscreen window toolbar is detached from window and hides/shows with autoHidden menuBar.  May be used only when both NSApplicationPresentationFullScreen and NSApplicationPresentationAutoHideMenuBar are also set
-};
-#endif
+    NSApplicationPresentationFullScreen NS_ENUM_AVAILABLE_MAC(10_7) = (1 << 10),                     // Application is in fullscreen mode
+    NSApplicationPresentationAutoHideToolbar NS_ENUM_AVAILABLE_MAC(10_7) = (1 << 11)                 // Fullscreen window toolbar is detached from window and hides/shows with autoHidden menuBar.  May be used only when both NSApplicationPresentationFullScreen and NSApplicationPresentationAutoHideMenuBar are also set
+    
+} NS_ENUM_AVAILABLE_MAC(10_6);
 
-typedef NSUInteger NSApplicationPresentationOptions;
+typedef NS_OPTIONS(NSUInteger, NSApplicationOcclusionState) {
+    // If set, at least part of any window owned by this application is visible. If not set, all parts of all windows owned by this application are completely occluded. The menu bar does not count as a window owned by this application, so if only the menu bar is showing then the application is considered not visible. Status items, however, have windows owned by your application. If the status item is present in the menu bar, your application will be considered visible as long as the menu bar is visible.
+    NSApplicationOcclusionStateVisible = 1UL << 1,
+} NS_ENUM_AVAILABLE_MAC(10_9);
 
 APPKIT_EXTERN id NSApp;
 
@@ -109,7 +113,7 @@ typedef struct NSThreadPrivate _NSThreadPrivate;
     short               _running;
     struct __appFlags {
 	unsigned int        _hidden:1;
-	unsigned int        _RESERVED1:1;
+	unsigned int        _appleEventActivationInProgress:1;
 	unsigned int        _active:1;
 	unsigned int        _hasBeenRun:1;
 	unsigned int        _doingUnhide:1;
@@ -135,14 +139,14 @@ typedef struct NSThreadPrivate _NSThreadPrivate;
         unsigned int	    _batchOrdering:1;
         unsigned int        _waitingForTerminationReply:1;
         unsigned int        _windowMoveDisabled:1;
-        unsigned int        _unused:1;
+        unsigned int        _enumeratingMemoryPressureHandlers:1;
         unsigned int        _didTryRestoringPersistentState:1;
-        unsigned int        _contentsHaveInvalidPersistentState:1;
+        unsigned int        _reservedN:1;
         unsigned int        _mightBeSwitching:1;
     }                   _appFlags;
     id                  _mainMenu;
     id                  _appIcon;
-    void*		    _unused;
+    void                *_unused;
     id                  _eventDelegate;
     _NSThreadPrivate     *_threadingSupport;
 }
@@ -189,17 +193,6 @@ typedef NSUInteger NSRequestUserAttentionType;
 - (NSInteger)requestUserAttention:(NSRequestUserAttentionType)requestType;
 - (void)cancelUserAttentionRequest:(NSInteger)request;
 
-/*
-**  Present a sheet on the given window.  When the modal session is ended,
-** the didEndSelector will be invoked in the modalDelegate.  The didEndSelector
-** should have the following signature, and will be invoked when the modal session ends.
-** This method should dismiss the sheet using orderOut:
-** - (void)sheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
-**
-*/
-- (void)beginSheet:(NSWindow *)sheet modalForWindow:(NSWindow *)docWindow modalDelegate:(id)modalDelegate didEndSelector:(SEL)didEndSelector contextInfo:(void *)contextInfo;
-- (void)endSheet:(NSWindow *)sheet;
-- (void)endSheet:(NSWindow *)sheet returnCode:(NSInteger)returnCode;
 
 - (NSEvent *)nextEventMatchingMask:(NSUInteger)mask untilDate:(NSDate *)expiration inMode:(NSString *)mode dequeue:(BOOL)deqFlag;
 - (void)discardEventsMatchingMask:(NSUInteger)mask beforeEvent:(NSEvent *)lastEvent;
@@ -229,7 +222,7 @@ typedef NSUInteger NSRequestUserAttentionType;
  */
 - (NSApplicationActivationPolicy)activationPolicy NS_AVAILABLE_MAC(10_6);
 
-/* Attempts to modify the application's activation policy.  Currently, NSApplicationActivationPolicyNone and NSApplicationActivationPolicyAccessory may be changed to NSApplicationActivationPolicyRegular, but other modifications are not supported.  This returns YES if setting the activation policy is successful, and NO if not.
+/* Attempts to modify the application's activation policy.  In OS X 10.9, any policy may be set; prior to 10.9, the activation policy may be changed to NSApplicationActivationPolicyProhibited or NSApplicationActivationPolicyRegular, but may not be changed to NSApplicationActivationPolicyAccessory.  This returns YES if setting the activation policy is successful, and NO if not.
  */
 - (BOOL)setActivationPolicy:(NSApplicationActivationPolicy)activationPolicy NS_AVAILABLE_MAC(10_6);
 
@@ -270,6 +263,8 @@ typedef NSUInteger NSApplicationDelegateReply;
 /* Returns the set of application presentation options that are currently in effect for the system.  These are the presentation options that have been put into effect by the currently active application.
 */
 - (NSApplicationPresentationOptions)currentSystemPresentationOptions NS_AVAILABLE_MAC(10_6);
+
+- (NSApplicationOcclusionState)occlusionState NS_AVAILABLE_MAC(10_9);
 
 @end
 
@@ -360,7 +355,7 @@ typedef NSUInteger NSApplicationPrintReply;
 - (void)applicationDidUpdate:(NSNotification *)notification;
 - (void)applicationWillTerminate:(NSNotification *)notification;
 - (void)applicationDidChangeScreenParameters:(NSNotification *)notification;
-
+- (void)applicationDidChangeOcclusionState:(NSNotification *)notification NS_AVAILABLE_MAC(10_9);
 @end
 
 @interface NSApplication(NSServicesMenu)
@@ -369,7 +364,8 @@ typedef NSUInteger NSApplicationPrintReply;
 - (void)registerServicesMenuSendTypes:(NSArray *)sendTypes returnTypes:(NSArray *)returnTypes;
 @end
 
-@interface NSObject(NSServicesRequests)
+@protocol NSServicesMenuRequestor <NSObject>
+@optional
 - (BOOL)writeSelectionToPasteboard:(NSPasteboard *)pboard types:(NSArray *)types;
 - (BOOL)readSelectionFromPasteboard:(NSPasteboard *)pboard;
 @end
@@ -435,16 +431,17 @@ typedef NSInteger NSUserInterfaceLayoutDirection;
 - (void)enableRelaunchOnLogin NS_AVAILABLE_MAC(10_7);
 @end
 
-enum {
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_7
+enum {
     NSRemoteNotificationTypeNone    = 0,
     NSRemoteNotificationTypeBadge   = 1 << 0,
-#endif
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_8
     NSRemoteNotificationTypeSound   = 1 << 1,
     NSRemoteNotificationTypeAlert   = 1 << 2,
 #endif
 };
+#endif
+
 typedef NSUInteger NSRemoteNotificationType;
 
 @interface NSApplication (NSRemoteNotifications)
@@ -505,6 +502,10 @@ APPKIT_EXTERN NSString * const NSApplicationLaunchUserNotificationKey NS_AVAILAB
 /* NSApplicationLaunchRemoteNotificationKey is unimplemented.  Please use NSApplicationLaunchUserNotificationKey to get the NSUserNotification object.  The NSUserNotification object has an isRemote property to indicate whether this application was launched as a result of a remote notification */
 APPKIT_EXTERN NSString * const NSApplicationLaunchRemoteNotificationKey NS_DEPRECATED_MAC(10_7, 10_8);
 
+/* Upon receiving this notification, you can query the NSApplication for its occlusion state. Note that this only notifies about changes in the state of the occlusion, not when the occlusion region changes. You can use this notification to increase responsiveness and save power, by halting any expensive calculations that the user can not see. */
+APPKIT_EXTERN NSString * const NSApplicationDidChangeOcclusionStateNotification NS_AVAILABLE_MAC(10_9);
+
+
 /* Deprecated Methods */
 @interface NSApplication (NSDeprecated)
 
@@ -522,5 +523,21 @@ APPKIT_EXTERN NSString * const NSApplicationLaunchRemoteNotificationKey NS_DEPRE
 
 // -application:printFiles: was deprecated in Mac OS 10.4. Implement application:printFiles:withSettings:showPrintPanels: in your application delegate instead.
 - (void)application:(NSApplication *)sender printFiles:(NSArray *)filenames NS_DEPRECATED_MAC(10_3, 10_4);
+
+/* These constants are deprecated in 10.9 and will be formally deprecated in the following release */
+enum {
+    NSRunStoppedResponse		= (-1000), // NSModalResponseStop should be used instead
+    NSRunAbortedResponse		= (-1001), // NSModalResponseAbort should be used instead
+    NSRunContinuesResponse              = (-1002)  // NSModalResponseContinue should be used instead
+};
+
+/* These methods are deprecated in 10.9 and will be formally deprecated in the following release.
+ NSWindow's -beginSheet:completionHandler: and -endSheet:returnCode: should be used instead.
+ NSApplication's -beginSheet:modalForWindow:modalDelegate:didEndSelector:contextInfo: will continue to work as it previously did, leaking contextInfo and failing when there is already an existing sheet.
+ */
+- (void)beginSheet:(NSWindow *)sheet modalForWindow:(NSWindow *)docWindow modalDelegate:(id)modalDelegate didEndSelector:(SEL)didEndSelector contextInfo:(void *)contextInfo;
+- (void)endSheet:(NSWindow *)sheet;
+- (void)endSheet:(NSWindow *)sheet returnCode:(NSInteger)returnCode;
+
 
 @end

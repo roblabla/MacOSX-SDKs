@@ -1,5 +1,5 @@
 /*	NSDate.h
-	Copyright (c) 1994-2012, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2013, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -36,26 +36,26 @@ typedef double NSTimeInterval;
 - (NSString *)descriptionWithLocale:(id)locale;
 
 + (NSTimeInterval)timeIntervalSinceReferenceDate;
-    
+
 @end
 
 @interface NSDate (NSDateCreation)
 
-+ (id)date;
-    
-+ (id)dateWithTimeIntervalSinceNow:(NSTimeInterval)secs;    
-+ (id)dateWithTimeIntervalSinceReferenceDate:(NSTimeInterval)secs;
-+ (id)dateWithTimeIntervalSince1970:(NSTimeInterval)secs;
-+ (id)dateWithTimeInterval:(NSTimeInterval)ti sinceDate:(NSDate *)date;
++ (instancetype)date;
++ (instancetype)dateWithTimeIntervalSinceNow:(NSTimeInterval)secs;
++ (instancetype)dateWithTimeIntervalSinceReferenceDate:(NSTimeInterval)ti;
++ (instancetype)dateWithTimeIntervalSince1970:(NSTimeInterval)secs;
++ (instancetype)dateWithTimeInterval:(NSTimeInterval)secsToBeAdded sinceDate:(NSDate *)date;
 
-+ (id)distantFuture;
-+ (id)distantPast;
++ (id /* NSDate * */)distantFuture;
++ (id /* NSDate * */)distantPast;
 
-- (id)init;
-- (id)initWithTimeIntervalSinceNow:(NSTimeInterval)secs;
-- (id)initWithTimeIntervalSinceReferenceDate:(NSTimeInterval)secsToBeAdded;
-- (id)initWithTimeIntervalSince1970:(NSTimeInterval)ti;
-- (id)initWithTimeInterval:(NSTimeInterval)secsToBeAdded sinceDate:(NSDate *)anotherDate;
+- (instancetype)init;	/* designated initializer */
+- (instancetype)initWithTimeIntervalSinceReferenceDate:(NSTimeInterval)ti;	/* designated initializer */
+
+- (instancetype)initWithTimeIntervalSinceNow:(NSTimeInterval)secs;
+- (instancetype)initWithTimeIntervalSince1970:(NSTimeInterval)secs;
+- (instancetype)initWithTimeInterval:(NSTimeInterval)secsToBeAdded sinceDate:(NSDate *)date;
 
 @end
 

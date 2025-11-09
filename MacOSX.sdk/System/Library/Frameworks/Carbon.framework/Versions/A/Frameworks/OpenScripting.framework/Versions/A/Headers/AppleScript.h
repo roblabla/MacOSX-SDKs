@@ -3,7 +3,7 @@
  
      Contains:   AppleScript Specific Interfaces.
  
-     Version:    OSA-148.3~2
+     Version:    OpenScripting
  
      Copyright:  © 1992-2008 by Apple Computer, Inc., all rights reserved
  
@@ -30,7 +30,7 @@
 
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -101,7 +101,7 @@ ASInit(
   UInt32              maxStackSize,
   UInt32              minHeapSize,
   UInt32              preferredHeapSize,
-  UInt32              maxHeapSize)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32              maxHeapSize)                            __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -145,7 +145,7 @@ enum {
 extern OSAError 
 ASSetSourceStyles(
   ComponentInstance   scriptingComponent,
-  STHandle            sourceStyles)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  STHandle            sourceStyles)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -162,7 +162,7 @@ ASSetSourceStyles(
 extern OSAError 
 ASGetSourceStyles(
   ComponentInstance   scriptingComponent,
-  STHandle *          resultingSourceStyles)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  STHandle *          resultingSourceStyles)                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -197,7 +197,7 @@ ASGetSourceStyles(
 extern OSAError 
 ASCopySourceAttributes(
   ComponentInstance   scriptingComponent,
-  CFArrayRef *        resultingSourceAttributes)              AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  CFArrayRef *        resultingSourceAttributes)              __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 
 /*
@@ -232,7 +232,7 @@ ASCopySourceAttributes(
 extern OSAError 
 ASSetSourceAttributes(
   ComponentInstance   scriptingComponent,
-  CFArrayRef          sourceAttributes)                       AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  CFArrayRef          sourceAttributes)                       __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 
 /*
@@ -257,7 +257,7 @@ extern OSAError
 ASGetSourceStyleNames(
   ComponentInstance   scriptingComponent,
   SInt32              modeFlags,
-  AEDescList *        resultingSourceStyleNamesList)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AEDescList *        resultingSourceStyleNamesList)          __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 

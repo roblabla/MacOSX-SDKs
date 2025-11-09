@@ -10,7 +10,6 @@
 @class AVBMACAddress;
 @class AVBNetworkClient;
 
-@class AVBMMRP;
 @class AVBMVRP;
 @class AVBMSRPDomain;
 @class AVBMSRPListener;
@@ -21,6 +20,8 @@
 
 @class AVB17221AECPInterface;
 @class AVB17221ACMPInterface;
+
+@protocol AVBInterfaceDelegate;
 
 /*!
 	@class		AVBInterface
@@ -37,7 +38,6 @@ NS_CLASS_AVAILABLE(10_8, NA)
 	
 	NSString *_interfaceName;
 	
-	AVBMMRP *_mmrp;
 	AVBMVRP *_mvrp;
 	AVBMSRPDomain *_msrpDomain;
 	AVBMSRPListener *_msrpListener;
@@ -48,6 +48,33 @@ NS_CLASS_AVAILABLE(10_8, NA)
 
 	AVB17221AECPInterface *_aecp;
 	AVB17221ACMPInterface *_acmp;
+	
+	AVBMACAddress *_macAddress;
+	
+	id<AVBInterfaceDelegate> _interfaceDelegate;
+	
+	dispatch_queue_t _networkClientCreationQueue;
+	dispatch_queue_t _mvrpCreationQueue;
+	dispatch_queue_t _msrpDomainCreationQueue;
+	dispatch_queue_t _msrpListenerCreationQueue;
+	dispatch_queue_t _msrpTalkerCreationQueue;
+	dispatch_queue_t _entityDiscoveryCreationQueue;
+	dispatch_queue_t _timeSyncCreationQueue;
+	dispatch_queue_t _aecpCreationQueue;
+	dispatch_queue_t _acmpCreationQueue;
+	
+	dispatch_queue_t _notificationQueue;
+	IONotificationPortRef _notificationPort;
+	
+	io_iterator_t _networkClientIterator;
+	io_iterator_t _mvrpIterator;
+	io_iterator_t _msrpDomainIterator;
+	io_iterator_t _msrpListenerIterator;
+	io_iterator_t _msrpTalkerIterator;
+	io_iterator_t _entityDiscoveryIterator;
+	io_iterator_t _timeSyncIterator;
+	io_iterator_t _aecpIterator;
+	io_iterator_t _acmpIterator;
 }
 
 /*!
@@ -117,5 +144,11 @@ NS_CLASS_AVAILABLE(10_8, NA)
  @result		The GUID which is used by the OS.
  */
 + (uint64_t)myGUID;
+/*!
+ @method		myEntityID
+ @abstract	This method returns the EntityID which is used by the built-in controller functionality of Mac OS X. This is either the FireWire GUID or an EUI64 based on the first found ethernet type interface (may be an ethernet port, USB ethernet adapter, PCI Express adapter or the AirPort card).
+ @result		The EntityID which is used by the OS.
+ */
++ (uint64_t)myEntityID;
 
 @end

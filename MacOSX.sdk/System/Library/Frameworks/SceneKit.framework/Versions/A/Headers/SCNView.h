@@ -1,7 +1,7 @@
 //
 //  SCNView.h
 //
-//  Copyright 2012 Apple Inc. All rights reserved.
+//  Copyright (c) 2012 Apple Inc. All rights reserved.
 //
 
 #import <AppKit/AppKit.h>
@@ -11,7 +11,8 @@
  @class SCNView
  @abstract A SCNView is a subclass of NSView that can display a SCNScene
  */
-SCENEKIT_AVAILABLE(10_7, NA)
+
+SCENEKIT_CLASS_AVAILABLE(10_8, NA)
 @interface SCNView : NSView <SCNSceneRenderer>
 {
 @private

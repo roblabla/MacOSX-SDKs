@@ -35,8 +35,8 @@ DBM_LIBS="  "
 
 APRUTIL_LIBNAME="aprutil-${APRUTIL_MAJOR_VERSION}"
 
-APU_SOURCE_DIR="/SourceCache/apr/apr-29.1/apr-util/apr-util"
-APU_BUILD_DIR="/private/var/tmp/apr/apr-29.1~101/apr-util"
+APU_SOURCE_DIR="/SourceCache/apr/apr-30/apr-util/apr-util"
+APU_BUILD_DIR="/private/var/tmp/apr/apr-30~813/apr-util"
 APR_XML_EXPAT_OLD="@APR_XML_EXPAT_OLD@"
 APU_DB_VERSION="0"
 

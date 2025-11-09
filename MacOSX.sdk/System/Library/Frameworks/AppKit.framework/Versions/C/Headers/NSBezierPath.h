@@ -1,7 +1,7 @@
 /*
         NSBezierPath.h
         Application Kit
-        Copyright (c) 1997-2012, Apple Inc.
+        Copyright (c) 1997-2013, Apple Inc.
         All rights reserved.
 */
 
@@ -57,7 +57,9 @@ typedef NSUInteger NSBezierPathElement;
     void *_path;
     NSInteger _extraSegmentCount;
     NSInteger _extraSegmentMax;
+#if !__LP64__    
     id _private[2];
+#endif
     struct {
         unsigned int _flags:8;
         unsigned int _pathState:2;

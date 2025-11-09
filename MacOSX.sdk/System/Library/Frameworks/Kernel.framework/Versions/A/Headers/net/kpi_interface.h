@@ -1,8 +1,8 @@
 /*
- * Copyright (c) 2004-2012 Apple Inc. All rights reserved.
+ * Copyright (c) 2004-2013 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
- * 
+ *
  * This file contains Original Code and/or Modifications of Original Code
  * as defined in and that are subject to the Apple Public Source License
  * Version 2.0 (the 'License'). You may not use this file except in
@@ -11,10 +11,10 @@
  * unlawful or unlicensed copies of an Apple operating system, or to
  * circumvent, violate, or enable the circumvention or violation of, any
  * terms of an Apple operating system software license agreement.
- * 
+ *
  * Please obtain a copy of the License at
  * http://www.opensource.apple.com/apsl/ and read it before using this file.
- * 
+ *
  * The Original Code and all software distributed under the License are
  * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
@@ -22,7 +22,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
  * Please see the License for the specific language governing rights and
  * limitations under the License.
- * 
+ *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_END@
  */
 /*!
@@ -33,22 +33,19 @@
  */
 
 #ifndef __KPI_INTERFACE__
-#define __KPI_INTERFACE__
+#define	__KPI_INTERFACE__
 
 #include <TargetConditionals.h>
 
 #include <sys/kernel_types.h>
 
 
-#ifndef _SA_FAMILY_T
-#define _SA_FAMILY_T
-typedef __uint8_t		sa_family_t;
-#endif
+#include <sys/_types/_sa_family_t.h>
 
 #if TARGET_OS_EMBEDDED
-	#define KPI_INTERFACE_EMBEDDED 1
+#define	KPI_INTERFACE_EMBEDDED 1
 #else
-	#define KPI_INTERFACE_EMBEDDED 0
+#define	KPI_INTERFACE_EMBEDDED 0
 #endif
 
 struct timeval;
@@ -72,13 +69,12 @@ struct ifnet_demux_desc;
 	@constant IFNET_FAMILY_DISC A DISC interface.
 	@constant IFNET_FAMILY_MDECAP A MDECAP interface.
 	@constant IFNET_FAMILY_GIF A generic tunnel interface.
-	@constant IFNET_FAMILY_FAITH A FAITH (IPv4/IPv6 translation) interface.
+	@constant IFNET_FAMILY_FAITH A FAITH [IPv4/IPv6 translation] interface.
 	@constant IFNET_FAMILY_STF A 6to4 interface.
-	@constant IFNET_FAMILY_FIREWIRE An IEEE 1394 (firewire) interface.
+	@constant IFNET_FAMILY_FIREWIRE An IEEE 1394 [Firewire] interface.
 	@constant IFNET_FAMILY_BOND A virtual bonded interface.
 	@constant IFNET_FAMILY_CELLULAR A cellular interface.
-*/
-
+ */
 enum {
 	IFNET_FAMILY_ANY		= 0,
 	IFNET_FAMILY_LOOPBACK		= 1,
@@ -97,14 +93,16 @@ enum {
 	IFNET_FAMILY_BOND		= 14,
 	IFNET_FAMILY_CELLULAR		= 15
 };
+
 /*!
 	@typedef ifnet_family_t
 	@abstract Storage type for the interface family.
-*/
+ */
 typedef u_int32_t ifnet_family_t;
 
+
 #ifndef BPF_TAP_MODE_T
-#define BPF_TAP_MODE_T
+#define	BPF_TAP_MODE_T
 /*!
 	@enum BPF tap mode
 	@abstract Constants defining interface families.
@@ -170,6 +168,10 @@ typedef u_int32_t protocol_family_t;
                 supported by the interface can be set with "ifnet_set_tso_mtu". To retreive the real MTU
                 for the TCP IPv6 connection the function "mbuf_get_tso_requested" is used by the driver.
 		Note that if TSO is active, all the packets will be flagged for TSO, not just large packets.
+	@constant IFNET_TX_STATUS Driver supports returning a per packet
+		transmission status (pass, fail or other errors) of whether
+		the packet was successfully transmitted on the link, or the
+		transmission was aborted, or transmission failed.
 
 */
 
@@ -187,12 +189,14 @@ enum {
 	IFNET_MULTIPAGES	= 0x00100000,
 	IFNET_TSO_IPV4		= 0x00200000,
 	IFNET_TSO_IPV6		= 0x00400000,
+	IFNET_TX_STATUS		= 0x00800000
 };
 /*!
 	@typedef ifnet_offload_t
 	@abstract Flags indicating the offload support of the interface.
 */
 typedef u_int32_t ifnet_offload_t;
+
 
 /*
  * Callbacks
@@ -317,7 +321,7 @@ typedef void (*ifnet_event_func)(ifnet_t interface, const struct kev_msg *msg);
 		protocol's pre-output function.
 	@param frame_type The frame type as determined by the protocol's
 		pre-output function.
-	@param prepend_len The length of prepended bytes to the mbuf. 
+	@param prepend_len The length of prepended bytes to the mbuf.
 		(ONLY used if KPI_INTERFACE_EMBEDDED is defined to 1)
 	@param postpend_len The length of the postpended bytes to the mbuf.
 		(ONLY used if KPI_INTERFACE_EMBEDDED is defined to 1)
@@ -329,7 +333,8 @@ typedef void (*ifnet_event_func)(ifnet_t interface, const struct kev_msg *msg);
 			the packet will be freed.
  */
 typedef errno_t (*ifnet_framer_func)(ifnet_t interface, mbuf_t *packet,
-	const struct sockaddr *dest, const char *desk_linkaddr, const char *frame_type
+	const struct sockaddr *dest, const char *dest_linkaddr,
+	const char *frame_type
 #if KPI_INTERFACE_EMBEDDED
 	, u_int32_t *prepend_len, u_int32_t *postpend_len
 #endif /* KPI_INTERFACE_EMBEDDED */
@@ -826,14 +831,14 @@ extern errno_t ifnet_detach(ifnet_t interface);
 
 /*!
 	@function ifnet_interface_family_find
-	@discussion Look up the interface family identifier for a string. 
-		If there is no interface family identifier assigned for this string 
+	@discussion Look up the interface family identifier for a string.
+		If there is no interface family identifier assigned for this string
 		a new interface family identifier is created and assigned.
-		It is recommended to use the bundle id of the KEXT as the string 
+		It is recommended to use the bundle id of the KEXT as the string
 		to avoid collisions with other KEXTs.
 		The lookup operation is not optimized so a module should call this
-		function once during startup and cache the interface family identifier. 
-		The interface family identifier for a string will not be re-assigned until 
+		function once during startup and cache the interface family identifier.
+		The interface family identifier for a string will not be re-assigned until
 		the system reboots.
 	@param module_string  A unique string identifying your interface family
 	@param family_id Upon return, a unique interface family identifier for use with
@@ -842,7 +847,7 @@ extern errno_t ifnet_detach(ifnet_t interface);
 	@result 0 on success, otherwise errno error.
 */
 extern errno_t ifnet_interface_family_find(const char *module_string, ifnet_family_t *family_id);
-	
+
 /*
  * Interface manipulation.
  */
@@ -866,10 +871,11 @@ extern const char *ifnet_name(ifnet_t interface);
 /*!
 	@function ifnet_family
 	@discussion Returns the family of the interface.
-	@param interface Interface to retrieve the unit number from.
+	@param interface Interface to retrieve the family from.
 	@result Interface family type.
  */
 extern ifnet_family_t ifnet_family(ifnet_t interface);
+
 
 /*!
 	@function ifnet_unit
@@ -919,8 +925,8 @@ extern u_int16_t ifnet_flags(ifnet_t interface);
 /*!
 	@function ifnet_set_capabilities_supported
 	@discussion Specify the capabilities supported by the interface.
-	@discussion  This function lets you specify which capabilities are supported 
-		by the interface. Typically this function is called by the driver when 
+	@discussion  This function lets you specify which capabilities are supported
+		by the interface. Typically this function is called by the driver when
 		the interface gets attached to the system.
 		The mask allows to control which capability to set or unset.
 		The kernel will effectively take the lock, then set the
@@ -958,16 +964,16 @@ extern u_int32_t ifnet_capabilities_supported(ifnet_t interface);
 		This function is intended to be called by the driver. A kext
 		must not call this function on an interface the kext does not
 		own.
-		
-		Typically this function is called by the driver when the interface is 
-		created to specify which of the supported capabilities are enabled by 
-		default. This function is also meant to be called when the driver handles  
+
+		Typically this function is called by the driver when the interface is
+		created to specify which of the supported capabilities are enabled by
+		default. This function is also meant to be called when the driver handles
 		the interface ioctl SIOCSIFCAP.
-		
-		The driver should call ifnet_set_offlad() to indicate the corresponding  
+
+		The driver should call ifnet_set_offlad() to indicate the corresponding
 		hardware offload bits that will be used by the networking stack.
-		
-		It is an error to enable a capability that is not marked as 
+
+		It is an error to enable a capability that is not marked as
 		supported by the interface.
 	@param interface Interface to set the capabilities on.
 	@param new_caps The value of the capabilities that should be set or unset. These
@@ -995,9 +1001,9 @@ extern u_int32_t ifnet_capabilities_enabled(ifnet_t interface);
 		VLAN. This replaces the if_hwassist flags field. Any flags
 		unrecognized by the stack will not be set.
 
-		Note the system will automatically set the interface capabilities 
-		that correspond to the offload flags modified -- i.e. the driver 
-		does not have to call ifnet_set_capabilities_enabled() and 
+		Note the system will automatically set the interface capabilities
+		that correspond to the offload flags modified -- i.e. the driver
+		does not have to call ifnet_set_capabilities_enabled() and
 		ifnet_set_capabilities_supported().
 	@param interface The interface.
 	@param offload The new set of flags indicating which offload options
@@ -1053,7 +1059,7 @@ enum {
 
 /*!
 	@function ifnet_set_wake_flags
-	@discussion Sets the wake properties of the underlying hardware. These are 
+	@discussion Sets the wake properties of the underlying hardware. These are
 		typically set by the driver.
 	@param interface The interface.
 	@param properties Properties to set or unset.
@@ -1120,7 +1126,7 @@ extern u_int32_t ifnet_get_link_mib_data_length(ifnet_t interface);
 	@discussion Attaches a protocol to an interface.
 	@param interface The interface.
 	@param protocol_family The protocol family being attached
-		(PF_INET/PF_APPLETALK/etc...).
+		(PF_INET/PF_INET6/etc...).
 	@param proto_details Details of the protocol being attached.
 	@result 0 on success otherwise the errno error.
  */
@@ -1135,7 +1141,7 @@ extern errno_t ifnet_attach_protocol(ifnet_t interface,
 	    for packet chains which improve performance.
 	@param interface The interface.
 	@param protocol_family The protocol family being attached
-		(PF_INET/PF_APPLETALK/etc...).
+		(PF_INET/PF_INET6/etc...).
 	@param proto_details Details of the protocol being attached.
 	@result 0 on success otherwise the errno error.
  */
@@ -1522,7 +1528,7 @@ extern errno_t ifnet_set_lladdr(ifnet_t interface, const void *lladdr,
 
 /*!
 	@function ifnet_lladdr_copy_bytes
-	@discussion Copies the bytes of the link-layer address in to the
+	@discussion Copies the bytes of the link-layer address into the
 		specified buffer.
 	@param interface The interface to copy the link-layer address from.
 	@param lladdr The buffer to copy the link-layer address in to.

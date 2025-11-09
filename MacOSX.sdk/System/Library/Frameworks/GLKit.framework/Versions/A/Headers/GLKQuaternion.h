@@ -126,11 +126,7 @@ GLK_INLINE GLKQuaternion GLKQuaternionMakeWithAngleAndVector3Axis(float radians,
     
 GLK_INLINE GLKQuaternion GLKQuaternionAdd(GLKQuaternion quaternionLeft, GLKQuaternion quaternionRight)
 {
-#if defined(__ARM_NEON__)
-    float32x4_t v = vaddq_f32(*(float32x4_t *)&quaternionLeft,
-                              *(float32x4_t *)&quaternionRight);
-    return *(GLKQuaternion *)&v;
-#elif defined(GLK_SSE3_INTRINSICS)
+#if   defined(GLK_SSE3_INTRINSICS)
     __m128 v = _mm_load_ps(&quaternionLeft.q[0]) + _mm_load_ps(&quaternionRight.q[0]);
     return *(GLKQuaternion *)&v;
 #else
@@ -144,11 +140,7 @@ GLK_INLINE GLKQuaternion GLKQuaternionAdd(GLKQuaternion quaternionLeft, GLKQuate
 
 GLK_INLINE GLKQuaternion GLKQuaternionSubtract(GLKQuaternion quaternionLeft, GLKQuaternion quaternionRight)
 {
-#if defined(__ARM_NEON__)
-    float32x4_t v = vsubq_f32(*(float32x4_t *)&quaternionLeft,
-                              *(float32x4_t *)&quaternionRight);
-    return *(GLKQuaternion *)&v;
-#elif defined(GLK_SSE3_INTRINSICS)
+#if   defined(GLK_SSE3_INTRINSICS)
     __m128 v = _mm_load_ps(&quaternionLeft.q[0]) - _mm_load_ps(&quaternionRight.q[0]);
     return *(GLKQuaternion *)&v;
 #else
@@ -216,13 +208,7 @@ GLK_INLINE GLKQuaternion GLKQuaternionMultiply(GLKQuaternion quaternionLeft, GLK
  
 GLK_INLINE float GLKQuaternionLength(GLKQuaternion quaternion)
 {
-#if defined(__ARM_NEON__)
-    float32x4_t v = vmulq_f32(*(float32x4_t *)&quaternion,
-                              *(float32x4_t *)&quaternion);
-    float32x2_t v2 = vpadd_f32(vget_low_f32(v), vget_high_f32(v));
-    v2 = vpadd_f32(v2, v2);
-    return sqrt(vget_lane_f32(v2, 0)); 
-#elif defined(GLK_SSE3_INTRINSICS)
+#if   defined(GLK_SSE3_INTRINSICS)
 	const __m128 q = _mm_load_ps(&quaternion.q[0]);
 	const __m128 product = q * q;
 	const __m128 halfsum = _mm_hadd_ps(product, product);
@@ -237,17 +223,7 @@ GLK_INLINE float GLKQuaternionLength(GLKQuaternion quaternion)
     
 GLK_INLINE GLKQuaternion GLKQuaternionConjugate(GLKQuaternion quaternion)
 {
-#if defined(__ARM_NEON__)
-    float32x4_t *q = (float32x4_t *)&quaternion;
-    
-    uint32_t signBit = 0x80000000;
-    uint32_t zeroBit = 0x0;
-    uint32x4_t mask = vdupq_n_u32(signBit);
-    mask = vsetq_lane_u32(zeroBit, mask, 3);
-    *q = vreinterpretq_f32_u32(veorq_u32(vreinterpretq_u32_f32(*q), mask));
-    
-    return *(GLKQuaternion *)q;
-#elif defined(GLK_SSE3_INTRINSICS)
+#if   defined(GLK_SSE3_INTRINSICS)
     // Multiply first three elements by -1
     const uint32_t signBit = 0x80000000;
     const uint32_t zeroBit = 0x0;
@@ -265,22 +241,7 @@ GLK_INLINE GLKQuaternion GLKQuaternionConjugate(GLKQuaternion quaternion)
     
 GLK_INLINE GLKQuaternion GLKQuaternionInvert(GLKQuaternion quaternion)
 {
-#if defined(__ARM_NEON__)
-    float32x4_t *q = (float32x4_t *)&quaternion;
-    float32x4_t v = vmulq_f32(*q, *q);
-    float32x2_t v2 = vpadd_f32(vget_low_f32(v), vget_high_f32(v));
-    v2 = vpadd_f32(v2, v2);
-    float32_t scale = 1.0f / vget_lane_f32(v2, 0);
-    v = vmulq_f32(*q, vdupq_n_f32(scale));
-    
-    uint32_t signBit = 0x80000000;
-    uint32_t zeroBit = 0x0;
-    uint32x4_t mask = vdupq_n_u32(signBit);
-    mask = vsetq_lane_u32(zeroBit, mask, 3);
-    v = vreinterpretq_f32_u32(veorq_u32(vreinterpretq_u32_f32(v), mask));
-    
-    return *(GLKQuaternion *)&v;
-#elif defined(GLK_SSE3_INTRINSICS)
+#if   defined(GLK_SSE3_INTRINSICS)
 	const __m128 q = _mm_load_ps(&quaternion.q[0]);
     const uint32_t signBit = 0x80000000;
     const uint32_t zeroBit = 0x0;
@@ -303,11 +264,7 @@ GLK_INLINE GLKQuaternion GLKQuaternionInvert(GLKQuaternion quaternion)
 GLK_INLINE GLKQuaternion GLKQuaternionNormalize(GLKQuaternion quaternion)
 {
     float scale = 1.0f / GLKQuaternionLength(quaternion);
-#if defined(__ARM_NEON__)
-    float32x4_t v = vmulq_f32(*(float32x4_t *)&quaternion,
-                              vdupq_n_f32((float32_t)scale));
-    return *(GLKQuaternion *)&v;
-#elif defined(GLK_SSE3_INTRINSICS)
+#if   defined(GLK_SSE3_INTRINSICS)
 	const __m128 q = _mm_load_ps(&quaternion.q[0]);
     __m128 v = q * _mm_set1_ps(scale);
     return *(GLKQuaternion *)&v;

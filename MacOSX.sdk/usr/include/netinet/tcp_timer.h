@@ -69,7 +69,7 @@
 /*
  * Definitions of the TCP timers.
  */
-#define	TCPT_NTIMERS	5
+#define	TCPT_NTIMERS	(TCPT_MAX + 1)	
 
 /* Keep the external definition the same for binary compatibility */
 #define TCPT_NTIMERS_EXT	4
@@ -79,7 +79,12 @@
 #define	TCPT_KEEP	2		/* keep alive */
 #define	TCPT_2MSL	3		/* 2*msl quiet time timer */
 #define	TCPT_DELACK	4		/* delayed ack timer */
+#if MPTCP
+#define TCPT_JACK_RXMT	5		/* retransmit timer for join ack */
+#define TCPT_MAX	5
+#else /* MPTCP */
 #define	TCPT_MAX	4
+#endif /* !MPTCP */
 #define	TCPT_NONE	(TCPT_MAX + 1)	
 
 /*

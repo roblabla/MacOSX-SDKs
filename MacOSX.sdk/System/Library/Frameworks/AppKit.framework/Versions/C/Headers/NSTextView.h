@@ -1,7 +1,7 @@
 /*
         NSTextView.h
         Application Kit
-        Copyright (c) 1994-2012, Apple Inc.
+        Copyright (c) 1994-2013, Apple Inc.
         All rights reserved.
 */
 
@@ -548,7 +548,7 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 // Returns an URL representing the document contents for textAttachment.  The returned NSURL object is utilized by NSTextView for providing default behaviors involving text attachments such as Quick Look and double-clicking.  -[NSTextView quickLookPreviewableItemsInRanges:] uses this method for mapping text attachments to their corresponding document URLs.  NSTextView invokes -[NSWorkspace openURL:] with the URL returned from this method when the delegate has no -textView:doubleClickedOnCell:inRect:atPoint: implementation.
 
 - (NSSharingServicePicker *)textView:(NSTextView *)textView willShowSharingServicePicker:(NSSharingServicePicker *)servicePicker forItems:(NSArray *)items NS_AVAILABLE_MAC(10_8);
-// Delegate only. Returns a sharing service picker created for items right before shown to the screen inside -orderFrontSharingServicePicker: method. The delegate specify a delegate for the NSSharingServicePicker instance. Also, is is allowed to return its own NSSharingServicePicker instance instead.
+// Delegate only. Returns a sharing service picker created for items right before shown to the screen inside -orderFrontSharingServicePicker: method. The delegate specify a delegate for the NSSharingServicePicker instance. Also, it is allowed to return its own NSSharingServicePicker instance instead.
 
 // The following delegate-only methods are deprecated in favor of the more verbose ones above.
 - (BOOL)textView:(NSTextView *)textView clickedOnLink:(id)link;

@@ -3,8 +3,6 @@
  
      Contains:   API and type definitions related to Data Browser.
  
-     Version:    HIToolbox-626.1~1
- 
      Copyright:  © 1999-2008 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on

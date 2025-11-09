@@ -17,6 +17,7 @@
 #ifndef _GLM_H
 #define _GLM_H
 
+#include <OpenGL/OpenGLAvailability.h>
 #include <OpenGL/gl.h>
 
 #ifdef __cplusplus
@@ -74,15 +75,15 @@ extern "C" {
 /*
 ** Function pointer types
 */
-typedef GLvoid *(*GLMPageAllocFunc)(GLsizei size);
-typedef void (*GLMPageFreeFunc)(GLvoid *ptr);
+typedef GLvoid *(*GLMPageAllocFunc)(GLsizei size) OPENGL_DEPRECATED(10_2, 10_9);
+typedef void (*GLMPageFreeFunc)(GLvoid *ptr) OPENGL_DEPRECATED(10_2, 10_9);
 
-typedef void (*GLMZeroFunc)(GLubyte *buffer, GLsizei width, GLsizei height, GLsizei skip);
-typedef void (*GLMCopyFunc)(const GLubyte *src, GLubyte *dst, GLsizei width, GLsizei height, GLsizei src_skip, GLsizei dst_skip);
-typedef void (*GLMSetUByteFunc)(GLubyte *buffer, GLsizei width, GLsizei height, GLsizei skip, GLubyte value);
-typedef void (*GLMSetUShortFunc)(GLushort *buffer, GLsizei width, GLsizei height, GLsizei skip, GLushort value);
-typedef void (*GLMSetUIntFunc)(GLuint *buffer, GLsizei width, GLsizei height, GLsizei skip, GLuint value);
-typedef void (*GLMSetDoubleFunc)(GLdouble *buffer, GLsizei width, GLsizei height, GLsizei skip, GLdouble value);
+typedef void (*GLMZeroFunc)(GLubyte *buffer, GLsizei width, GLsizei height, GLsizei skip) OPENGL_DEPRECATED(10_2, 10_9);
+typedef void (*GLMCopyFunc)(const GLubyte *src, GLubyte *dst, GLsizei width, GLsizei height, GLsizei src_skip, GLsizei dst_skip) OPENGL_DEPRECATED(10_2, 10_9);
+typedef void (*GLMSetUByteFunc)(GLubyte *buffer, GLsizei width, GLsizei height, GLsizei skip, GLubyte value) OPENGL_DEPRECATED(10_2, 10_9);
+typedef void (*GLMSetUShortFunc)(GLushort *buffer, GLsizei width, GLsizei height, GLsizei skip, GLushort value) OPENGL_DEPRECATED(10_2, 10_9);
+typedef void (*GLMSetUIntFunc)(GLuint *buffer, GLsizei width, GLsizei height, GLsizei skip, GLuint value) OPENGL_DEPRECATED(10_2, 10_9);
+typedef void (*GLMSetDoubleFunc)(GLdouble *buffer, GLsizei width, GLsizei height, GLsizei skip, GLdouble value) OPENGL_DEPRECATED(10_2, 10_9);
 	
 typedef union {
 	GLMPageAllocFunc   page_alloc_func;
@@ -94,40 +95,40 @@ typedef union {
 	GLMSetUShortFunc   set_ushort_func;
 	GLMSetUIntFunc     set_uint_func;
 	GLMSetDoubleFunc   set_double_func;
-} GLMfunctions;
+} GLMfunctions OPENGL_DEPRECATED(10_2, 10_9);
 
 /*
 ** Prototypes
 */
-extern void glmSetMode(GLenum mode);
-extern void glmSetFunc(GLenum type, GLMfunctions func);
+extern void glmSetMode(GLenum mode) OPENGL_DEPRECATED(10_2, 10_9);
+extern void glmSetFunc(GLenum type, GLMfunctions func) OPENGL_DEPRECATED(10_2, 10_9);
 
-extern void glmSetInteger(GLenum param, GLint value);
-extern GLint glmGetInteger(GLenum param);
+extern void glmSetInteger(GLenum param, GLint value) OPENGL_DEPRECATED(10_2, 10_9);
+extern GLint glmGetInteger(GLenum param) OPENGL_DEPRECATED(10_2, 10_9);
 
-extern void	glmPageFreeAll(void);
+extern void	glmPageFreeAll(void) OPENGL_DEPRECATED(10_2, 10_9);
 
-extern GLvoid *glmMalloc(GLsizei size);
-extern GLvoid *glmCalloc(GLsizei nmemb, GLsizei size);
-extern GLvoid *glmRealloc(GLvoid *ptr, GLsizei size);
-extern void glmFree(GLvoid *ptr);
+extern GLvoid *glmMalloc(GLsizei size) OPENGL_DEPRECATED(10_2, 10_9);
+extern GLvoid *glmCalloc(GLsizei nmemb, GLsizei size) OPENGL_DEPRECATED(10_2, 10_9);
+extern GLvoid *glmRealloc(GLvoid *ptr, GLsizei size) OPENGL_DEPRECATED(10_2, 10_9);
+extern void glmFree(GLvoid *ptr) OPENGL_DEPRECATED(10_2, 10_9);
 
 /* 16 byte aligned */
-extern GLvoid *glmVecAlloc(GLsizei size);
-extern void glmVecFree(GLvoid *ptr);
+extern GLvoid *glmVecAlloc(GLsizei size) OPENGL_DEPRECATED(10_2, 10_9);
+extern void glmVecFree(GLvoid *ptr) OPENGL_DEPRECATED(10_2, 10_9);
 
 /* 32 byte aligned and 32 byte padded */
-extern GLvoid *glmDCBAlloc(GLsizei size);
-extern void glmDCBFree(GLvoid *ptr);
+extern GLvoid *glmDCBAlloc(GLsizei size) OPENGL_DEPRECATED(10_2, 10_9);
+extern void glmDCBFree(GLvoid *ptr) OPENGL_DEPRECATED(10_2, 10_9);
 
-extern void glmZero(GLubyte *buffer, GLsizei width, GLsizei height, GLsizei rowbytes);
-extern void glmCopy(const GLubyte *src, GLubyte *dst, GLsizei width, GLsizei height, GLsizei src_rowbytes, GLsizei dst_rowbytes);
-extern void glmSetUByte(GLubyte *buffer, GLsizei width, GLsizei height, GLsizei row_elems, GLubyte value);
-extern void glmSetUShort(GLushort *buffer, GLsizei width, GLsizei height, GLsizei row_elems, GLushort value);
-extern void glmSetUInt(GLuint *buffer, GLsizei width, GLsizei height, GLsizei row_elems, GLuint value);
-extern void glmSetDouble(GLdouble *buffer, GLsizei width, GLsizei height, GLsizei row_elems, GLdouble value);
+extern void glmZero(GLubyte *buffer, GLsizei width, GLsizei height, GLsizei rowbytes) OPENGL_DEPRECATED(10_2, 10_9);
+extern void glmCopy(const GLubyte *src, GLubyte *dst, GLsizei width, GLsizei height, GLsizei src_rowbytes, GLsizei dst_rowbytes) OPENGL_DEPRECATED(10_2, 10_9);
+extern void glmSetUByte(GLubyte *buffer, GLsizei width, GLsizei height, GLsizei row_elems, GLubyte value) OPENGL_DEPRECATED(10_2, 10_9);
+extern void glmSetUShort(GLushort *buffer, GLsizei width, GLsizei height, GLsizei row_elems, GLushort value) OPENGL_DEPRECATED(10_2, 10_9);
+extern void glmSetUInt(GLuint *buffer, GLsizei width, GLsizei height, GLsizei row_elems, GLuint value) OPENGL_DEPRECATED(10_2, 10_9);
+extern void glmSetDouble(GLdouble *buffer, GLsizei width, GLsizei height, GLsizei row_elems, GLdouble value) OPENGL_DEPRECATED(10_2, 10_9);
 
-extern GLenum glmGetError(void);
+extern GLenum glmGetError(void) OPENGL_DEPRECATED(10_2, 10_9);
 
 #ifdef __cplusplus
 }

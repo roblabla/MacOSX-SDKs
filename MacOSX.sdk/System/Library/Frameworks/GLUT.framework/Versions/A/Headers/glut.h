@@ -56,7 +56,7 @@ typedef unsigned short wchar_t;
 #endif
 
 #if defined(__APPLE__) || defined(MACOSX)
-#include <AvailabilityMacros.h>
+#include <OpenGL/OpenGLAvailability.h>
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>
 #else
@@ -428,178 +428,174 @@ extern void *glutBitmapHelvetica18;
 #endif
 
 /* GLUT initialization sub-API. */
-extern void APIENTRY glutInit(int *argcp, char **argv);
-extern void APIENTRY glutInitDisplayMode(unsigned int mode);
+extern void APIENTRY glutInit(int *argcp, char **argv) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutInitDisplayMode(unsigned int mode) OPENGL_DEPRECATED(10_0, 10_9);
 #if (GLUT_API_VERSION >= 4 || GLUT_XLIB_IMPLEMENTATION >= 9)
-extern void APIENTRY glutInitDisplayString(const char *string);
+extern void APIENTRY glutInitDisplayString(const char *string) OPENGL_DEPRECATED(10_0, 10_9);
 #endif
-extern void APIENTRY glutInitWindowPosition(int x, int y);
-extern void APIENTRY glutInitWindowSize(int width, int height);
-extern void APIENTRY glutMainLoop(void);
+extern void APIENTRY glutInitWindowPosition(int x, int y) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutInitWindowSize(int width, int height) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutMainLoop(void) OPENGL_DEPRECATED(10_0, 10_9);
 
 /* GLUT window sub-API. */
-extern int APIENTRY glutCreateWindow(const char *title);
-extern int APIENTRY glutCreateSubWindow(int win, int x, int y, int width, int height);
-extern void APIENTRY glutDestroyWindow(int win);
-extern void APIENTRY glutPostRedisplay(void);
+extern int APIENTRY glutCreateWindow(const char *title) OPENGL_DEPRECATED(10_0, 10_9);
+extern int APIENTRY glutCreateSubWindow(int win, int x, int y, int width, int height) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutDestroyWindow(int win) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutPostRedisplay(void) OPENGL_DEPRECATED(10_0, 10_9);
 #if (GLUT_API_VERSION >= 4 || GLUT_XLIB_IMPLEMENTATION >= 11)
-extern void APIENTRY glutPostWindowRedisplay(int win);
+extern void APIENTRY glutPostWindowRedisplay(int win) OPENGL_DEPRECATED(10_0, 10_9);
 #endif
-extern void APIENTRY glutSwapBuffers(void);
-extern int APIENTRY glutGetWindow(void);
-extern void APIENTRY glutSetWindow(int win);
-extern void APIENTRY glutSetWindowTitle(const char *title);
-extern void APIENTRY glutSetIconTitle(const char *title);
-extern void APIENTRY glutPositionWindow(int x, int y);
-extern void APIENTRY glutReshapeWindow(int width, int height);
-extern void APIENTRY glutPopWindow(void);
-extern void APIENTRY glutPushWindow(void);
-extern void APIENTRY glutIconifyWindow(void);
-extern void APIENTRY glutShowWindow(void);
-extern void APIENTRY glutHideWindow(void);
+extern void APIENTRY glutSwapBuffers(void) OPENGL_DEPRECATED(10_0, 10_9);
+extern int APIENTRY glutGetWindow(void) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutSetWindow(int win) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutSetWindowTitle(const char *title) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutSetIconTitle(const char *title) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutPositionWindow(int x, int y) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutReshapeWindow(int width, int height) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutPopWindow(void) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutPushWindow(void) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutIconifyWindow(void) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutShowWindow(void) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutHideWindow(void) OPENGL_DEPRECATED(10_0, 10_9);
 #if (GLUT_API_VERSION >= 3)
-extern void APIENTRY glutFullScreen(void);
-extern void APIENTRY glutSetCursor(int cursor);
+extern void APIENTRY glutFullScreen(void) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutSetCursor(int cursor) OPENGL_DEPRECATED(10_0, 10_9);
 #if (GLUT_API_VERSION >= 4 || GLUT_XLIB_IMPLEMENTATION >= 9)
-extern void APIENTRY glutWarpPointer(int x, int y);
+extern void APIENTRY glutWarpPointer(int x, int y) OPENGL_DEPRECATED(10_0, 10_9);
 #if (GLUT_MACOSX_IMPLEMENTATION >= 1)
 /* surface texturing API Mac OS X specific
 *  Note:
 *	glutSurfaceTexture has been deprecated, use GL_EXT_framebuffer_object
 */
-#ifdef MAC_OS_X_VERSION_10_5
-extern void APIENTRY glutSurfaceTexture (GLenum target, GLenum internalformat, int surfacewin); AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5
-#else
-extern void APIENTRY glutSurfaceTexture (GLenum target, GLenum internalformat, int surfacewin);
-#endif
+extern void APIENTRY glutSurfaceTexture (GLenum target, GLenum internalformat, int surfacewin) OPENGL_DEPRECATED(10_2, 10_5);
 #endif
 #if (GLUT_MACOSX_IMPLEMENTATION >= 2)
 /* Mac OS X specific API */
-extern void APIENTRY glutWMCloseFunc(void (*func)(void));
-extern void APIENTRY glutCheckLoop(void);
+extern void APIENTRY glutWMCloseFunc(void (*func)(void)) OPENGL_DEPRECATED(10_3, 10_9);
+extern void APIENTRY glutCheckLoop(void) OPENGL_DEPRECATED(10_3, 10_9);
 #endif
 #endif
 
 /* GLUT overlay sub-API. */
-extern void APIENTRY glutEstablishOverlay(void);
-extern void APIENTRY glutRemoveOverlay(void);
-extern void APIENTRY glutUseLayer(GLenum layer);
-extern void APIENTRY glutPostOverlayRedisplay(void);
+extern void APIENTRY glutEstablishOverlay(void) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutRemoveOverlay(void) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutUseLayer(GLenum layer) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutPostOverlayRedisplay(void) OPENGL_DEPRECATED(10_0, 10_9);
 #if (GLUT_API_VERSION >= 4 || GLUT_XLIB_IMPLEMENTATION >= 11)
-extern void APIENTRY glutPostWindowOverlayRedisplay(int win);
+extern void APIENTRY glutPostWindowOverlayRedisplay(int win) OPENGL_DEPRECATED(10_0, 10_9);
 #endif
-extern void APIENTRY glutShowOverlay(void);
-extern void APIENTRY glutHideOverlay(void);
+extern void APIENTRY glutShowOverlay(void) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutHideOverlay(void) OPENGL_DEPRECATED(10_0, 10_9);
 #endif
 
 /* GLUT menu sub-API. */
-extern int APIENTRY glutCreateMenu(void (*)(int));
-extern void APIENTRY glutDestroyMenu(int menu);
-extern int APIENTRY glutGetMenu(void);
-extern void APIENTRY glutSetMenu(int menu);
-extern void APIENTRY glutAddMenuEntry(const char *label, int value);
-extern void APIENTRY glutAddSubMenu(const char *label, int submenu);
-extern void APIENTRY glutChangeToMenuEntry(int item, const char *label, int value);
-extern void APIENTRY glutChangeToSubMenu(int item, const char *label, int submenu);
-extern void APIENTRY glutRemoveMenuItem(int item);
-extern void APIENTRY glutAttachMenu(int button);
-extern void APIENTRY glutDetachMenu(int button);
+extern int APIENTRY glutCreateMenu(void (*)(int)) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutDestroyMenu(int menu) OPENGL_DEPRECATED(10_0, 10_9);
+extern int APIENTRY glutGetMenu(void) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutSetMenu(int menu) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutAddMenuEntry(const char *label, int value) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutAddSubMenu(const char *label, int submenu) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutChangeToMenuEntry(int item, const char *label, int value) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutChangeToSubMenu(int item, const char *label, int submenu) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutRemoveMenuItem(int item) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutAttachMenu(int button) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutDetachMenu(int button) OPENGL_DEPRECATED(10_0, 10_9);
 
 /* GLUT window callback sub-API. */
-extern void APIENTRY glutDisplayFunc(void (*func)(void));
-extern void APIENTRY glutReshapeFunc(void (*func)(int width, int height));
-extern void APIENTRY glutKeyboardFunc(void (*func)(unsigned char key, int x, int y));
-extern void APIENTRY glutMouseFunc(void (*func)(int button, int state, int x, int y));
-extern void APIENTRY glutMotionFunc(void (*func)(int x, int y));
-extern void APIENTRY glutPassiveMotionFunc(void (*func)(int x, int y));
-extern void APIENTRY glutEntryFunc(void (*func)(int state));
-extern void APIENTRY glutVisibilityFunc(void (*func)(int state));
-extern void APIENTRY glutIdleFunc(void (*func)(void));
-extern void APIENTRY glutTimerFunc(unsigned int millis, void (*func)(int value), int value);
-extern void APIENTRY glutMenuStateFunc(void (*func)(int state));
+extern void APIENTRY glutDisplayFunc(void (*func)(void)) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutReshapeFunc(void (*func)(int width, int height)) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutKeyboardFunc(void (*func)(unsigned char key, int x, int y)) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutMouseFunc(void (*func)(int button, int state, int x, int y)) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutMotionFunc(void (*func)(int x, int y)) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutPassiveMotionFunc(void (*func)(int x, int y)) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutEntryFunc(void (*func)(int state)) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutVisibilityFunc(void (*func)(int state)) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutIdleFunc(void (*func)(void)) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutTimerFunc(unsigned int millis, void (*func)(int value), int value) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutMenuStateFunc(void (*func)(int state)) OPENGL_DEPRECATED(10_0, 10_9);
 #if (GLUT_API_VERSION >= 2)
-extern void APIENTRY glutSpecialFunc(void (*func)(int key, int x, int y));
-extern void APIENTRY glutSpaceballMotionFunc(void (*func)(int x, int y, int z));
-extern void APIENTRY glutSpaceballRotateFunc(void (*func)(int x, int y, int z));
-extern void APIENTRY glutSpaceballButtonFunc(void (*func)(int button, int state));
-extern void APIENTRY glutButtonBoxFunc(void (*func)(int button, int state));
-extern void APIENTRY glutDialsFunc(void (*func)(int dial, int value));
-extern void APIENTRY glutTabletMotionFunc(void (*func)(int x, int y));
-extern void APIENTRY glutTabletButtonFunc(void (*func)(int button, int state, int x, int y));
+extern void APIENTRY glutSpecialFunc(void (*func)(int key, int x, int y)) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutSpaceballMotionFunc(void (*func)(int x, int y, int z)) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutSpaceballRotateFunc(void (*func)(int x, int y, int z)) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutSpaceballButtonFunc(void (*func)(int button, int state)) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutButtonBoxFunc(void (*func)(int button, int state)) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutDialsFunc(void (*func)(int dial, int value)) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutTabletMotionFunc(void (*func)(int x, int y)) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutTabletButtonFunc(void (*func)(int button, int state, int x, int y)) OPENGL_DEPRECATED(10_0, 10_9);
 #if (GLUT_API_VERSION >= 3)
-extern void APIENTRY glutMenuStatusFunc(void (*func)(int status, int x, int y));
-extern void APIENTRY glutOverlayDisplayFunc(void (*func)(void));
+extern void APIENTRY glutMenuStatusFunc(void (*func)(int status, int x, int y)) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutOverlayDisplayFunc(void (*func)(void)) OPENGL_DEPRECATED(10_0, 10_9);
 #if (GLUT_API_VERSION >= 4 || GLUT_XLIB_IMPLEMENTATION >= 9)
-extern void APIENTRY glutWindowStatusFunc(void (*func)(int state));
+extern void APIENTRY glutWindowStatusFunc(void (*func)(int state)) OPENGL_DEPRECATED(10_0, 10_9);
 #endif
 #if (GLUT_API_VERSION >= 4 || GLUT_XLIB_IMPLEMENTATION >= 13)
-extern void APIENTRY glutKeyboardUpFunc(void (*func)(unsigned char key, int x, int y));
-extern void APIENTRY glutSpecialUpFunc(void (*func)(int key, int x, int y));
-extern void APIENTRY glutJoystickFunc(void (*func)(unsigned int buttonMask, int x, int y, int z), int pollInterval);
+extern void APIENTRY glutKeyboardUpFunc(void (*func)(unsigned char key, int x, int y)) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutSpecialUpFunc(void (*func)(int key, int x, int y)) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutJoystickFunc(void (*func)(unsigned int buttonMask, int x, int y, int z), int pollInterval) OPENGL_DEPRECATED(10_0, 10_9);
 #endif
 #endif
 #endif
 
 /* GLUT color index sub-API. */
-extern void APIENTRY glutSetColor(int, GLfloat red, GLfloat green, GLfloat blue);
-extern GLfloat APIENTRY glutGetColor(int ndx, int component);
-extern void APIENTRY glutCopyColormap(int win);
+extern void APIENTRY glutSetColor(int, GLfloat red, GLfloat green, GLfloat blue) OPENGL_DEPRECATED(10_0, 10_9);
+extern GLfloat APIENTRY glutGetColor(int ndx, int component) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutCopyColormap(int win) OPENGL_DEPRECATED(10_0, 10_9);
 
 /* GLUT state retrieval sub-API. */
-extern int APIENTRY glutGet(GLenum type);
-extern int APIENTRY glutDeviceGet(GLenum type);
+extern int APIENTRY glutGet(GLenum type) OPENGL_DEPRECATED(10_0, 10_9);
+extern int APIENTRY glutDeviceGet(GLenum type) OPENGL_DEPRECATED(10_0, 10_9);
 #if (GLUT_API_VERSION >= 2)
 /* GLUT extension support sub-API */
-extern int APIENTRY glutExtensionSupported(const char *name);
+extern int APIENTRY glutExtensionSupported(const char *name) OPENGL_DEPRECATED(10_0, 10_9);
 #endif
 #if (GLUT_API_VERSION >= 3)
-extern int APIENTRY glutGetModifiers(void);
-extern int APIENTRY glutLayerGet(GLenum type);
+extern int APIENTRY glutGetModifiers(void) OPENGL_DEPRECATED(10_0, 10_9);
+extern int APIENTRY glutLayerGet(GLenum type) OPENGL_DEPRECATED(10_0, 10_9);
 #endif
 #if (GLUT_API_VERSION >= 5)
-extern void * APIENTRY glutGetProcAddress(const char *procName);
+extern void * APIENTRY glutGetProcAddress(const char *procName) OPENGL_DEPRECATED(10_3, 10_9);
 #endif
 
 /* GLUT font sub-API */
-extern void APIENTRY glutBitmapCharacter(void *font, int character);
-extern int APIENTRY glutBitmapWidth(void *font, int character);
-extern void APIENTRY glutStrokeCharacter(void *font, int character);
-extern int APIENTRY glutStrokeWidth(void *font, int character);
+extern void APIENTRY glutBitmapCharacter(void *font, int character) OPENGL_DEPRECATED(10_0, 10_9);
+extern int APIENTRY glutBitmapWidth(void *font, int character) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutStrokeCharacter(void *font, int character) OPENGL_DEPRECATED(10_0, 10_9);
+extern int APIENTRY glutStrokeWidth(void *font, int character) OPENGL_DEPRECATED(10_0, 10_9);
 #if (GLUT_API_VERSION >= 4 || GLUT_XLIB_IMPLEMENTATION >= 9)
-extern int APIENTRY glutBitmapLength(void *font, const unsigned char *string);
-extern int APIENTRY glutStrokeLength(void *font, const unsigned char *string);
+extern int APIENTRY glutBitmapLength(void *font, const unsigned char *string) OPENGL_DEPRECATED(10_0, 10_9);
+extern int APIENTRY glutStrokeLength(void *font, const unsigned char *string) OPENGL_DEPRECATED(10_0, 10_9);
 #endif
 
 /* GLUT pre-built models sub-API */
-extern void APIENTRY glutWireSphere(GLdouble radius, GLint slices, GLint stacks);
-extern void APIENTRY glutSolidSphere(GLdouble radius, GLint slices, GLint stacks);
-extern void APIENTRY glutWireCone(GLdouble base, GLdouble height, GLint slices, GLint stacks);
-extern void APIENTRY glutSolidCone(GLdouble base, GLdouble height, GLint slices, GLint stacks);
-extern void APIENTRY glutWireCube(GLdouble size);
-extern void APIENTRY glutSolidCube(GLdouble size);
-extern void APIENTRY glutWireTorus(GLdouble innerRadius, GLdouble outerRadius, GLint sides, GLint rings);
-extern void APIENTRY glutSolidTorus(GLdouble innerRadius, GLdouble outerRadius, GLint sides, GLint rings);
-extern void APIENTRY glutWireDodecahedron(void);
-extern void APIENTRY glutSolidDodecahedron(void);
-extern void APIENTRY glutWireTeapot(GLdouble size);
-extern void APIENTRY glutSolidTeapot(GLdouble size);
-extern void APIENTRY glutWireOctahedron(void);
-extern void APIENTRY glutSolidOctahedron(void);
-extern void APIENTRY glutWireTetrahedron(void);
-extern void APIENTRY glutSolidTetrahedron(void);
-extern void APIENTRY glutWireIcosahedron(void);
-extern void APIENTRY glutSolidIcosahedron(void);
+extern void APIENTRY glutWireSphere(GLdouble radius, GLint slices, GLint stacks) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutSolidSphere(GLdouble radius, GLint slices, GLint stacks) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutWireCone(GLdouble base, GLdouble height, GLint slices, GLint stacks) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutSolidCone(GLdouble base, GLdouble height, GLint slices, GLint stacks) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutWireCube(GLdouble size) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutSolidCube(GLdouble size) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutWireTorus(GLdouble innerRadius, GLdouble outerRadius, GLint sides, GLint rings) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutSolidTorus(GLdouble innerRadius, GLdouble outerRadius, GLint sides, GLint rings) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutWireDodecahedron(void) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutSolidDodecahedron(void) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutWireTeapot(GLdouble size) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutSolidTeapot(GLdouble size) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutWireOctahedron(void) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutSolidOctahedron(void) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutWireTetrahedron(void) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutSolidTetrahedron(void) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutWireIcosahedron(void) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutSolidIcosahedron(void) OPENGL_DEPRECATED(10_0, 10_9);
 
 #if (GLUT_API_VERSION >= 4 || GLUT_XLIB_IMPLEMENTATION >= 9)
 /* GLUT video resize sub-API. */
-extern int APIENTRY glutVideoResizeGet(GLenum param);
-extern void APIENTRY glutSetupVideoResizing(void);
-extern void APIENTRY glutStopVideoResizing(void);
-extern void APIENTRY glutVideoResize(int x, int y, int width, int height);
-extern void APIENTRY glutVideoPan(int x, int y, int width, int height);
+extern int APIENTRY glutVideoResizeGet(GLenum param) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutSetupVideoResizing(void) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutStopVideoResizing(void) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutVideoResize(int x, int y, int width, int height) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutVideoPan(int x, int y, int width, int height) OPENGL_DEPRECATED(10_0, 10_9);
 
 /* GLUT debugging sub-API. */
-extern void APIENTRY glutReportErrors(void);
+extern void APIENTRY glutReportErrors(void) OPENGL_DEPRECATED(10_0, 10_9);
 #endif
 
 #if (GLUT_API_VERSION >= 4 || GLUT_XLIB_IMPLEMENTATION >= 13)
@@ -615,9 +611,9 @@ extern void APIENTRY glutReportErrors(void);
 #define GLUT_JOYSTICK_BUTTON_C		4
 #define GLUT_JOYSTICK_BUTTON_D		8
 
-extern void APIENTRY glutIgnoreKeyRepeat(int ignore);
-extern void APIENTRY glutSetKeyRepeat(int repeatMode);
-extern void APIENTRY glutForceJoystickFunc(void);
+extern void APIENTRY glutIgnoreKeyRepeat(int ignore) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutSetKeyRepeat(int repeatMode) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutForceJoystickFunc(void) OPENGL_DEPRECATED(10_0, 10_9);
 
 /* GLUT game mode sub-API. */
 /* glutGameModeGet. */
@@ -629,10 +625,10 @@ extern void APIENTRY glutForceJoystickFunc(void);
 #define GLUT_GAME_MODE_REFRESH_RATE     5
 #define GLUT_GAME_MODE_DISPLAY_CHANGED  6
 
-extern void APIENTRY glutGameModeString(const char *string);
-extern int APIENTRY glutEnterGameMode(void);
-extern void APIENTRY glutLeaveGameMode(void);
-extern int APIENTRY glutGameModeGet(GLenum mode);
+extern void APIENTRY glutGameModeString(const char *string) OPENGL_DEPRECATED(10_0, 10_9);
+extern int APIENTRY glutEnterGameMode(void) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY glutLeaveGameMode(void) OPENGL_DEPRECATED(10_0, 10_9);
+extern int APIENTRY glutGameModeGet(GLenum mode) OPENGL_DEPRECATED(10_0, 10_9);
 #endif
 
 #ifdef __cplusplus

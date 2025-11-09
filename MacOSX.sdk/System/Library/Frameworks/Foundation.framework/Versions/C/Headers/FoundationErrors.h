@@ -1,5 +1,5 @@
 /*	FoundationErrors.h
-	Copyright (c) 2004-2012, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2013, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -67,6 +67,13 @@ enum {
     NSXPCConnectionReplyInvalid NS_ENUM_AVAILABLE(10_8, 6_0) = 4101,
     
     NSXPCConnectionErrorMinimum NS_ENUM_AVAILABLE(10_8, 6_0) = 4096,
-    NSXPCConnectionErrorMaximum NS_ENUM_AVAILABLE(10_8, 6_0) = 4224
+    NSXPCConnectionErrorMaximum NS_ENUM_AVAILABLE(10_8, 6_0) = 4224,
+
+    NSUbiquitousFileUnavailableError NS_ENUM_AVAILABLE(10_9, 7_0) = 4353, // NSURLUbiquitousItemDownloadingErrorKey contains an error with this code when the item has not been uploaded to iCloud by the other devices yet
+    NSUbiquitousFileNotUploadedDueToQuotaError NS_ENUM_AVAILABLE(10_9, 7_0) = 4354, // NSURLUbiquitousItemUploadingErrorKey contains an error with this code when the item has not been uploaded to iCloud because it would make the account go over-quota
+    NSUbiquitousFileUbiquityServerNotAvailable NS_ENUM_AVAILABLE(10_9, 7_0) = 4355, // NSURLUbiquitousItemDownloadingErrorKey and NSURLUbiquitousItemUploadingErrorKey contain an error with this code when connecting to the iCloud servers failed
+
+    NSUbiquitousFileErrorMinimum NS_ENUM_AVAILABLE(10_9, 7_0) = 4352,
+    NSUbiquitousFileErrorMaximum NS_ENUM_AVAILABLE(10_9, 7_0) = 4607
 };
 

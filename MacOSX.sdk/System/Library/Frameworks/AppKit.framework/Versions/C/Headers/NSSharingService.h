@@ -1,7 +1,7 @@
 /*
  NSSharingService.h
  Application Kit
- Copyright (c) 2011-2012, Apple Inc.
+ Copyright (c) 2011-2013, Apple Inc.
  All rights reserved.
  */
 
@@ -19,6 +19,8 @@
 APPKIT_EXTERN NSString * const NSSharingServiceNamePostOnFacebook NS_AVAILABLE_MAC(10_8);
 APPKIT_EXTERN NSString * const NSSharingServiceNamePostOnTwitter NS_AVAILABLE_MAC(10_8);
 APPKIT_EXTERN NSString * const NSSharingServiceNamePostOnSinaWeibo NS_AVAILABLE_MAC(10_8);
+APPKIT_EXTERN NSString * const NSSharingServiceNamePostOnTencentWeibo NS_AVAILABLE_MAC(10_9);
+APPKIT_EXTERN NSString * const NSSharingServiceNamePostOnLinkedIn NS_AVAILABLE_MAC(10_9);
 APPKIT_EXTERN NSString * const NSSharingServiceNameComposeEmail NS_AVAILABLE_MAC(10_8);
 APPKIT_EXTERN NSString * const NSSharingServiceNameComposeMessage NS_AVAILABLE_MAC(10_8);
 APPKIT_EXTERN NSString * const NSSharingServiceNameSendViaAirDrop NS_AVAILABLE_MAC(10_8);
@@ -26,6 +28,8 @@ APPKIT_EXTERN NSString * const NSSharingServiceNameAddToSafariReadingList NS_AVA
 APPKIT_EXTERN NSString * const NSSharingServiceNameAddToIPhoto NS_AVAILABLE_MAC(10_8);
 APPKIT_EXTERN NSString * const NSSharingServiceNameAddToAperture NS_AVAILABLE_MAC(10_8);
 APPKIT_EXTERN NSString * const NSSharingServiceNameUseAsTwitterProfileImage NS_AVAILABLE_MAC(10_8);
+APPKIT_EXTERN NSString * const NSSharingServiceNameUseAsFacebookProfileImage NS_AVAILABLE_MAC(10_9);
+APPKIT_EXTERN NSString * const NSSharingServiceNameUseAsLinkedInProfileImage NS_AVAILABLE_MAC(10_9);
 APPKIT_EXTERN NSString * const NSSharingServiceNameUseAsDesktopPicture NS_AVAILABLE_MAC(10_8);
 APPKIT_EXTERN NSString * const NSSharingServiceNamePostImageOnFlickr NS_AVAILABLE_MAC(10_8);
 APPKIT_EXTERN NSString * const NSSharingServiceNamePostVideoOnVimeo NS_AVAILABLE_MAC(10_8);
@@ -44,6 +48,26 @@ NS_CLASS_AVAILABLE(10_8, NA)
 @property (readonly, copy) NSString *title;
 @property (readonly, retain) NSImage *image;
 @property (readonly, retain) NSImage *alternateImage;
+
+/* Title of the service in the Share menu. Can be modified. */
+@property (copy) NSString *menuItemTitle NS_AVAILABLE_MAC(10_9); 
+
+/* These properties are used for configuration of the service. They need to be set when the NSSharingService is created or in sharingService:willShareItems:
+ */
+@property (copy) NSArray *recipients NS_AVAILABLE_MAC(10_9);    // NSArray of NSString objects representing handles (example: email adresses)
+@property (copy) NSString *subject NS_AVAILABLE_MAC(10_9);
+
+/* These read-only properties allow for querying of the shared content:
+ */
+// Message body as string
+@property (readonly, copy) NSString *messageBody NS_AVAILABLE_MAC(10_9);
+// URL to access the post on Facebook, Twitter, Sina Weibo, etc. (also known as permalink)
+@property (readonly, copy) NSURL *permanentLink NS_AVAILABLE_MAC(10_9);
+// Account name used for sending on Twitter or Sina Weibo
+@property (readonly, copy) NSString *accountName NS_AVAILABLE_MAC(10_9);
+// NSArray of NSURL objects representing the file that were shared
+@property (readonly, copy) NSArray *attachmentFileURLs NS_AVAILABLE_MAC(10_9);
+
 
 
 /* Returns a list of NSSharingServices which could share all the provided items together. sharingServicesForItems can be used to build a custom UI, or to populate a contextual NSMenu. 

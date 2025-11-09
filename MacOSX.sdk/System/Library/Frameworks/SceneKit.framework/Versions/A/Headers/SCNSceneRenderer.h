@@ -1,7 +1,7 @@
 //
 //  SCNSceneRenderer.h
 //
-//  Copyright 2012 Apple Inc. All rights reserved.
+//  Copyright (c) 2012-2013 Apple Inc. All rights reserved.
 //
 
 @class SCNScene;
@@ -12,26 +12,28 @@
 /*! @group Hit test options */
 
 /*! If set to YES, returns the first object found. This object is not necessarily the nearest. Defaults to NO. */
-SCENEKIT_EXTERN NSString * const SCNHitTestFirstFoundOnlyKey;
+SCN_EXTERN NSString * const SCNHitTestFirstFoundOnlyKey;
 /*! Determines whether the results should be sorted. If set to YES sorts nearest objects first. Defaults to YES. */
-SCENEKIT_EXTERN NSString * const SCNHitTestSortResultsKey;
+SCN_EXTERN NSString * const SCNHitTestSortResultsKey;
 /*! If set to YES ignores the objects clipped by the zNear/zFar range of the current point of view. Defaults to YES. */
-SCENEKIT_EXTERN NSString * const SCNHitTestClipToZRangeKey;
+SCN_EXTERN NSString * const SCNHitTestClipToZRangeKey;
 /*! If set to YES ignores the faces not facing to the camera. Defaults to YES. */
-SCENEKIT_EXTERN NSString * const SCNHitTestBackFaceCullingKey;
+SCN_EXTERN NSString * const SCNHitTestBackFaceCullingKey;
 /*!  If set to YES only tests the bounding boxes of the 3D objects. Defaults to NO. */
-SCENEKIT_EXTERN NSString * const SCNHitTestBoundingBoxOnlyKey;
+SCN_EXTERN NSString * const SCNHitTestBoundingBoxOnlyKey;
 /*! Determines whether the child nodes are ignored. Defaults to NO. */
-SCENEKIT_EXTERN NSString * const SCNHitTestIgnoreChildNodesKey;
+SCN_EXTERN NSString * const SCNHitTestIgnoreChildNodesKey;
 /*! Specifies the root node to use for the hit test. Defaults to the root node of the scene. */
-SCENEKIT_EXTERN NSString * const SCNHitTestRootNodeKey;
+SCN_EXTERN NSString * const SCNHitTestRootNodeKey;
+/*! Determines whether hidden nodes should be ignored. Defaults to YES. */
+SCN_EXTERN NSString * const SCNHitTestIgnoreHiddenNodesKey SCENEKIT_AVAILABLE(10_9, NA);
 
 
 /*! @class SCNHitTestResult
     @abstract Results returned by the hit test methods.
  */
 
-SCENEKIT_AVAILABLE(10_7, NA)
+SCENEKIT_CLASS_AVAILABLE(10_8, NA)
 @interface SCNHitTestResult : NSObject
 {	
 @private
@@ -67,10 +69,9 @@ SCENEKIT_AVAILABLE(10_7, NA)
 
 
 /*! @protocol SCNSceneRenderer
-    @abstract Protocol adopted by the various renderers (SCNScene, SCNLayer, SCNRenderer)
+    @abstract Protocol adopted by the various renderers (SCNView, SCNLayer, SCNRenderer)
  */
 @protocol SCNSceneRenderer <NSObject>
-
 @required
 
 /*! 
@@ -85,13 +86,38 @@ SCENEKIT_AVAILABLE(10_7, NA)
  */
 @property(nonatomic, assign) id <SCNSceneRendererDelegate> delegate;
 
-/*! 
+/*!
  @method hitTest:options:
  @abstract Returns an array of SCNHitTestResult for each node that contains a specified point.
  @param thePoint A point in the coordinate system of the receiver.
  @param options Optional parameters (see the "Hit test options" group for the available options).
  */
 - (NSArray *)hitTest:(CGPoint)thePoint options:(NSDictionary *)options;
+
+/*!
+ @method isNodeInsideFrustum:withPointOfView:
+ @abstract Test whether node is visible from the specified point of view.
+ @param node The node to test the visibility of.
+ @param pointOfView The point of view used to test the visibility.
+ @discussion Return YES if the node is inside or interest the clipping planes of the point of view. This method doesn't test if 'node' is occluded by another node.
+ */
+- (BOOL)isNodeInsideFrustum:(SCNNode *)node withPointOfView:(SCNNode *)pointOfView SCENEKIT_AVAILABLE(10_9, NA);
+
+/*!
+ @method projectPoint
+ @abstract Projects a point in the world coordinate system using the receiver's current point of view and viewport.
+ @param point The world position to be projected.
+ @discussion A point projected from the near (resp. far) clip plane will have a z component of 0 (resp. 1).
+ */
+- (SCNVector3)projectPoint:(SCNVector3)point SCENEKIT_AVAILABLE(10_9, NA);
+
+/*!
+ @method unprojectPoint
+ @abstract Unprojects a screenspace 2D point with depth info using the receiver's current point of view and viewport.
+ @param point The screenspace position to be unprojected.
+ @discussion A point whose z component is 0 (resp. 1) is unprojected on the near (resp. far) clip plane.
+ */
+- (SCNVector3)unprojectPoint:(SCNVector3)point SCENEKIT_AVAILABLE(10_9, NA);
 
 /*! 
  @property playing
@@ -126,6 +152,22 @@ SCENEKIT_AVAILABLE(10_7, NA)
  @discussion When enabled, the jittering is performed asynchronously and automatically by SCNView and SCNLayer. It is done synchronously by SCNRenderer.
  */
 @property(nonatomic, getter=isJitteringEnabled) BOOL jitteringEnabled;
+
+/*!
+ @method prepareObject:shouldAbortBlock:
+ @abstract Prepare the specified object for drawing.
+ @param object The object to prepare. It can be an instance of SCNScene, SCNNode, SCNGeometry, or SCNMaterial
+ @param block This block will be called repeatedly while the object is prepared. Return YES if you want the operation to abort.
+ @discussion Returns YES if the object was prepared successfully, NO if it was canceled. This method may be triggered from a secondary thread.
+ */
+- (BOOL)prepareObject:(id)object shouldAbortBlock:(BOOL (^)())block SCENEKIT_AVAILABLE(10_9, NA);
+
+/*!
+ @property showsStatistics
+ @abstract Determines whether the receiver should display statistics info like FPS. Defaults to NO.
+ @discussion  When set to YES, statistics are displayed in a overlay on top of the rendered scene.
+ */
+@property(nonatomic) BOOL showsStatistics SCENEKIT_AVAILABLE(10_9, NA);
 
 /*! 
  @property context

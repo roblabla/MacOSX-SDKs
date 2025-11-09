@@ -1,6 +1,6 @@
 /*
 	NSUserScriptTask.h
-	Copyright (c) 2012, Apple Inc. All rights reserved.
+	Copyright (c) 2012-2013, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -33,8 +33,10 @@ NS_CLASS_AVAILABLE(10_8, NA)
 - (NSURL *)scriptURL;
 
 // Execute the script with no input and ignoring any result.  This and the other "execute" methods below may be called at most once on any given instance.  If the script completed normally, the completion handler's "error" parameter will be nil.
+#if NS_BLOCKS_AVAILABLE
 typedef void (^NSUserScriptTaskCompletionHandler)(NSError *error);
 - (void)executeWithCompletionHandler:(NSUserScriptTaskCompletionHandler)handler;
+#endif
 
 @end
 
@@ -50,9 +52,10 @@ NS_CLASS_AVAILABLE(10_8, NA)
 @property (retain) NSFileHandle *standardError;
 
 // Execute the file with the given arguments.  "arguments" is an array of NSStrings.  The arguments do not undergo shell expansion, so you do not need to do special quoting, and shell variables are not resolved.
+#if NS_BLOCKS_AVAILABLE
 typedef void (^NSUserUnixTaskCompletionHandler)(NSError *error);
 - (void)executeWithArguments:(NSArray *)arguments completionHandler:(NSUserUnixTaskCompletionHandler)handler;
-
+#endif
 @end
 
 
@@ -65,8 +68,10 @@ NS_CLASS_AVAILABLE(10_8, NA)
 }
 
 // Execute the AppleScript script by sending it the given Apple event.  Pass nil to execute the script's default "run" handler.
+#if NS_BLOCKS_AVAILABLE
 typedef void (^NSUserAppleScriptTaskCompletionHandler)(NSAppleEventDescriptor *result, NSError *error);
 - (void)executeWithAppleEvent:(NSAppleEventDescriptor *)event completionHandler:(NSUserAppleScriptTaskCompletionHandler)handler;
+#endif
 
 @end
 
@@ -83,7 +88,8 @@ NS_CLASS_AVAILABLE(10_8, NA)
 @property (copy) NSDictionary *variables;
 
 // Execute the Automator workflow, passing it the given input.
+#if NS_BLOCKS_AVAILABLE
 typedef void (^NSUserAutomatorTaskCompletionHandler)(id result, NSError *error);
 - (void)executeWithInput:(id <NSSecureCoding>)input completionHandler:(NSUserAutomatorTaskCompletionHandler)handler;
-
+#endif
 @end

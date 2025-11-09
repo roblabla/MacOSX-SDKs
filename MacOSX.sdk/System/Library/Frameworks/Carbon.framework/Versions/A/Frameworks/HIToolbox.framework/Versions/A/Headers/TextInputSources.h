@@ -1,8 +1,6 @@
 /*
      File:       HIToolbox/TextInputSources.h
  
-     Version:    HIToolbox-626.1~1
- 
      Copyright:  © 2006-2008 Apple Inc. All rights reserved.
  
      Bugs?:      For bug reports, consult the following page on

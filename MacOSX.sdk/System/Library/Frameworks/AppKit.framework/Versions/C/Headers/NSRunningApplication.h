@@ -1,7 +1,7 @@
 /*
 	NSRunningApplication.h
 	Application Kit
-	Copyright (c) 1994-2012, Apple Inc.
+	Copyright (c) 1994-2013, Apple Inc.
 	All rights reserved.
 */
 
@@ -116,7 +116,7 @@ NS_CLASS_AVAILABLE(10_6, NA)
 /* Indicates the URL to the application's executable. */
 @property (readonly) NSURL *executableURL;
 
-/* Indicates the process identifier (pid) of the application.  Do not rely on this for comparing processes.  Use isEqual: instead.  Not all applications have a pid.  Applications without a pid return -1 from this method. */
+/* Indicates the process identifier (pid) of the application.  Do not rely on this for comparing processes.  Use isEqual: instead.  Not all applications have a pid.  Applications without a pid return -1 from this method. This is observable through KVO (an application's pid may change if it is automatically terminated). */
 @property (readonly) pid_t processIdentifier;
 
 /* Indicates the date when the application was launched.  This property is not available for all applications.  Specifically, it is not available for applications that were launched without going through LaunchServices.   */

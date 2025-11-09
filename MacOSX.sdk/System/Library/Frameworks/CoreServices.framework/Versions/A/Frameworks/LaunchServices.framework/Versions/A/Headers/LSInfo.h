@@ -3,13 +3,15 @@
  
      Contains:   Public interfaces for LaunchServices.framework
  
-     Copyright:  Copyright 2001-2009 by Apple Inc., all rights reserved.
+     Copyright:  (c) 2001-2012 by Apple Inc. All rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
  
                      http://developer.apple.com/bugreporter/
+
 */
+
 #ifndef __LSINFO__
 #define __LSINFO__
 
@@ -160,7 +162,7 @@ enum {
  *    LSInit is deprecated. Do not use.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.3
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.3
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
@@ -176,7 +178,7 @@ LSInit(LSInitializeFlags inFlags)                             __OSX_AVAILABLE_BU
  *    LSTerm is deprecated. It does nothing.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.3
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.3
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
@@ -210,7 +212,7 @@ LSTerm(void)                                                  __OSX_AVAILABLE_BU
  *      Information is returned in this structure. Must not be NULL
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
@@ -246,7 +248,7 @@ LSCopyItemInfoForRef(
  *      Information is returned in this structure. Must not be NULL
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
@@ -285,7 +287,7 @@ LSCopyItemInfoForURL(
  *      inNameBuffer does not contain a valid extension.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.1 and later in CoreServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
@@ -320,7 +322,7 @@ LSGetExtensionInfo(
  *      copied. Callers must dispose of the resulting CFString.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.1 and later in CoreServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
@@ -354,7 +356,7 @@ LSCopyDisplayNameForRef(
  *      copied. Callers must dispose of the resulting CFString.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.1 and later in CoreServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
@@ -389,7 +391,7 @@ LSCopyDisplayNameForURL(
  *      True to hide inRef's extension, false to show it.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.1 and later in CoreServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
@@ -424,7 +426,7 @@ LSSetExtensionHiddenForRef(
  *      True to hide inURL's extension, false to show it.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.1 and later in CoreServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
@@ -458,7 +460,7 @@ LSSetExtensionHiddenForURL(
  *      CFStringRef must be released eventually.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
@@ -492,7 +494,7 @@ LSCopyKindStringForRef(
  *      CFStringRef must be released eventually.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
@@ -543,7 +545,7 @@ LSCopyKindStringForURL(
  *      CFStringRef must be released eventually.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.2 and later in CoreServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
@@ -579,7 +581,7 @@ LSCopyKindStringForTypeInfo(
  *      CFStringRef must be released eventually.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.2 and later in CoreServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
@@ -625,7 +627,7 @@ LSCopyKindStringForMIMEType(
  *      RETURNED URL REFERENCE.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
@@ -682,7 +684,7 @@ LSGetApplicationForItem(
  *      RETURNED URL REFERENCE.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
@@ -728,7 +730,7 @@ LSGetApplicationForInfo(
  *      caller.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.2 and later in CoreServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
@@ -776,7 +778,7 @@ LSCopyApplicationForMIMEType(
  *      RETURNED URL REFERENCE.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
@@ -827,7 +829,7 @@ LSGetApplicationForURL(
  *      RETURNED URL REFERENCE.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
@@ -875,7 +877,7 @@ LSFindApplicationForInfo(
  *      Filled in with result. Must not be NULL.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
@@ -923,7 +925,7 @@ LSCanRefAcceptItem(
  *      Filled in with result. Must not be NULL.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
@@ -966,7 +968,7 @@ LSCanURLAcceptURL(
  *    The item's property list info is malformed.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.3 and later in CoreServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
@@ -1005,7 +1007,7 @@ LSRegisterURL(
  *    The item's property list info is malformed.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.3 and later in CoreServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
@@ -1048,7 +1050,7 @@ LSRegisterFSRef(
  *    must eventually release it.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.3 and later in CoreServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
@@ -1133,7 +1135,7 @@ LSCopyApplicationURLsForURL(
  *  kLSItemContentType
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.4 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -1142,7 +1144,7 @@ extern const CFStringRef kLSItemContentType                          __OSX_AVAIL
  *  kLSItemFileType
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.4 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -1151,7 +1153,7 @@ extern const CFStringRef kLSItemFileType                             __OSX_AVAIL
  *  kLSItemFileCreator
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.4 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -1160,7 +1162,7 @@ extern const CFStringRef kLSItemFileCreator                          __OSX_AVAIL
  *  kLSItemExtension
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.4 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -1169,7 +1171,7 @@ extern const CFStringRef kLSItemExtension                            __OSX_AVAIL
  *  kLSItemDisplayName
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.4 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -1178,7 +1180,7 @@ extern const CFStringRef kLSItemDisplayName                          __OSX_AVAIL
  *  kLSItemDisplayKind
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.4 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -1187,7 +1189,7 @@ extern const CFStringRef kLSItemDisplayKind                          __OSX_AVAIL
  *  kLSItemRoleHandlerDisplayName
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.4 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -1196,7 +1198,7 @@ extern const CFStringRef kLSItemRoleHandlerDisplayName               __OSX_AVAIL
  *  kLSItemIsInvisible
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.4 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -1205,7 +1207,7 @@ extern const CFStringRef kLSItemIsInvisible                          __OSX_AVAIL
  *  kLSItemExtensionIsHidden
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.4 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -1214,7 +1216,7 @@ extern const CFStringRef kLSItemExtensionIsHidden                    __OSX_AVAIL
  *  kLSItemQuarantineProperties
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -1251,7 +1253,7 @@ extern const CFStringRef kLSItemQuarantineProperties                 __OSX_AVAIL
  *    does not have the requested attribute.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.4 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -1299,7 +1301,7 @@ LSCopyItemAttribute(
  *    an OSStatus value.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.4 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -1343,7 +1345,7 @@ LSCopyItemAttributes(
  *    attribute is read-only.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -1375,7 +1377,7 @@ LSSetItemAttribute(
  *    Thread safe since version 10.4
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.4 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -1403,7 +1405,7 @@ LSCopyDefaultRoleHandlerForContentType(
  *    Thread safe since version 10.4
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.4 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -1429,7 +1431,7 @@ LSCopyAllRoleHandlersForContentType(
  *    Thread safe since version 10.4
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.4 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -1471,7 +1473,7 @@ enum {
  *    Thread safe since version 10.4
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.4 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -1492,7 +1494,7 @@ LSGetHandlerOptionsForContentType(CFStringRef inContentType)  __OSX_AVAILABLE_ST
  *    Thread safe since version 10.4
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.4 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -1517,7 +1519,7 @@ LSSetHandlerOptionsForContentType(
  *    Thread safe since version 10.4
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.4 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -1542,7 +1544,7 @@ LSCopyDefaultHandlerForURLScheme(CFStringRef inURLScheme)     __OSX_AVAILABLE_ST
  *    Thread safe since version 10.4
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.4 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -1565,7 +1567,7 @@ LSCopyAllHandlersForURLScheme(CFStringRef inURLScheme)        __OSX_AVAILABLE_ST
  *    Thread safe since version 10.4
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.4 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */

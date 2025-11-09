@@ -1,8 +1,8 @@
 /*
- * Copyright (c) 2000-2011 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2012 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
- * 
+ *
  * This file contains Original Code and/or Modifications of Original Code
  * as defined in and that are subject to the Apple Public Source License
  * Version 2.0 (the 'License'). You may not use this file except in
@@ -11,10 +11,10 @@
  * unlawful or unlicensed copies of an Apple operating system, or to
  * circumvent, violate, or enable the circumvention or violation of, any
  * terms of an Apple operating system software license agreement.
- * 
+ *
  * Please obtain a copy of the License at
  * http://www.opensource.apple.com/apsl/ and read it before using this file.
- * 
+ *
  * The Original Code and all software distributed under the License are
  * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
@@ -22,7 +22,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
  * Please see the License for the specific language governing rights and
  * limitations under the License.
- * 
+ *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_END@
  */
 /*
@@ -134,6 +134,9 @@ struct tcphdr {
     (TCPOPT_NOP<<24|TCPOPT_NOP<<16|(ccopt)<<8|TCPOLEN_CC)
 #define	TCPOPT_SIGNATURE		19	/* Keyed MD5: RFC 2385 */
 #define	   TCPOLEN_SIGNATURE		18
+#if MPTCP
+#define	TCPOPT_MULTIPATH  		30
+#endif
 
 /* Option definitions */
 #define TCPOPT_SACK_PERMIT_HDR	\
@@ -162,15 +165,6 @@ struct tcphdr {
  * Setting this to "0" disables the minmss check.
  */
 #define	TCP_MINMSS 216
-
-/*
- * TCP_MINMSSOVERLOAD is defined to be 1000 which should cover any type
- * of interactive TCP session.
- * See tcp_subr.c tcp_minmssoverload SYSCTL declaration and tcp_input.c
- * for more comments.
- * Setting this to "0" disables the minmssoverload check.
- */
-#define	TCP_MINMSSOVERLOAD 1000
 
 /*
  * Default maximum segment size for TCP6.
@@ -207,11 +201,14 @@ struct tcphdr {
 #define TCP_RXT_CONNDROPTIME	0x80	/* time after which tcp retransmissions will be 
 					 * stopped and the connection will be dropped
 					 */
-#define TCP_RXT_FINDROP	0x100	/* when this option is set, drop a connection 
+#define TCP_RXT_FINDROP		0x100	/* when this option is set, drop a connection 
 					 * after retransmitting the FIN 3 times. It will
 					 * prevent holding too many mbufs in socket 
 					 * buffer queues.
 					 */
+#define	TCP_KEEPINTVL		0x101	/* interval between keepalives */
+#define	TCP_KEEPCNT		0x102	/* number of keepalives before close */
+#define	TCP_SENDMOREACKS	0x103	/* always ack every other packet */
 #endif /* (_POSIX_C_SOURCE && !_DARWIN_C_SOURCE) */
 
 #endif

@@ -1,5 +1,24 @@
 /*******************************************************************************
- * Copyright:  (c) 2007-2012 by Apple, Inc., All Rights Reserved.
+ * Copyright (c) 2008 - 2013 The Khronos Group Inc.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a
+ * copy of this software and/or associated documentation files (the
+ * "Materials"), to deal in the Materials without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish,
+ * distribute, sublicense, and/or sell copies of the Materials, and to
+ * permit persons to whom the Materials are furnished to do so, subject to
+ * the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Materials.
+ *
+ * THE MATERIALS ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+ * CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+ * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+ * MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
  ******************************************************************************/
 
 #ifndef __CL_EXT_H
@@ -126,7 +145,6 @@ extern CL_API_ENTRY cl_int CL_API_CALL clSetKernelArgByNameAPPLE(cl_kernel    /*
 #define CL_PROGRAM_NUM_KERNELS_APPLE                      0x10000004    /* Introduced in MacOS X.7.  Returns a cl_uint for number of kernels in program. */
 #define CL_PROGRAM_KERNEL_NAMES_APPLE                     0x10000005    /* Introduced in MacOS X.7.  Returns a ';' delimited char[] containing the names of kernels in program */
 
-
 /* Extension: cl_APPLE_fixed_alpha_channel_orders
  *
  * These selectors may be passed to clCreateImage2D() in the cl_image_format.image_channel_order field.
@@ -155,7 +173,8 @@ extern CL_API_ENTRY cl_int CL_API_CALL clSetKernelArgByNameAPPLE(cl_kernel    /*
  * the CL_RGBA channel layout.
  */
 #define CL_SFIXED14_APPLE                                 0x10000008      /* Introduced in MacOS X.7. */ 
-#define CL_BIASED_HALF_APPLE                              0x10000009      /* Introduced in MacOS X.7. */
+#define CL_BIASED_HALF_APPLE                              0x10000009      /* Introduced in MacOS X.7. */ 
+
 
   
 /* Extension: YUV image support 
@@ -170,52 +189,63 @@ extern CL_API_ENTRY cl_int CL_API_CALL clSetKernelArgByNameAPPLE(cl_kernel    /*
 /* Extension: ABGR and xBGR formats for CoreImage CL-GPU support */
 #define CL_ABGR_APPLE                                     0x10000012
 
+    
 /* Extension: cl_APPLE_fp64_ops
  *
  * This extension if enabled supports double-precision basic arithmetic operations (add, sub, mul, divide and sqrt)
  * This is a subset of the cl_khr_fp64 extension defined in the OpenCL 1.1 and 1.2 specifications.
  * The precision values for these basic operations are the same as defined by the cl_khr_fp64 extension
  */
- 
+
+/* Extension: clCreateCommandQueueWithPropertiesAPPLE
+ * Create a command queue for the specified device. The properties array
+ * specifies a list of command queue property names and their corresponding
+ * values.  Each property name is immediately followed by the corresponding
+ * value.  The list is terminated with 0.
+ *
+ * List of supported properties are:
+ *
+ * CL_QUEUE_PROPERTIES                  cl_command_queue_properties bitfield
+ *                                      ( CL_QUEUE_PROFILING_ENABLE,
+ *                                        CL_QUEUE_OUT_OF_ORDER_EXEC_MODE_ENABLE)
+ *
+ * CL_COMMAND_QUEUE_PRIORITY_APPLE      cl_queue_properties_APPLE
+ *                                      ( CL_COMMAND_QUEUE_PRIORITY_DEFAULT_APPLE,
+ *                                        CL_COMMAND_QUEUE_PRIORITY_BACKGROUND_APPLE )
+ *
+ * These properties may only be used if the cl_APPLE_command_queue_priority is
+ * supported by the device.
+ *
+ * CL_COMMAND_QUEUE_NUM_COMPUTE_UNITS_APPLE int (value can be 1 .. CL_DEVICE_MAX_COMPUTE_UNITS).
+ *
+ * This property may only be used if the
+ * cl_APPLE_command_queue_select_compute_units extension is supported by the
+ * device.
+ */
+#define cl_APPLE_command_queue_priority 1
+#define cl_APPLE_command_queue_select_compute_units 1
   
-/* Extension: clCreateDAGAPPLE
- *
- * Create a DAG object which owns the individual program fragments (DAG nodes)
- * used to create the final kernel. If the context is invalid, returns
- * NULL for the dag.
- */
-typedef struct _cl_dag * cl_dag;
-typedef int              cl_dag_node;
+  typedef intptr_t cl_queue_properties_APPLE;
   
-cl_dag clCreateDAGAPPLE(cl_context c) CL_EXT_SUFFIX__VERSION_1_2;
+  extern CL_API_ENTRY cl_command_queue CL_API_CALL
+  clCreateCommandQueueWithPropertiesAPPLE (cl_context                          /* context */,
+                                           cl_device_id                        /* device */,
+                                           const cl_queue_properties_APPLE *   /* properties */,
+                                           cl_int *                            /* errcode_ret */) CL_EXT_SUFFIX__VERSION_1_2;
+#define CL_QUEUE_PRIORITY_APPLE                           0x10000013
+#define CL_QUEUE_NUM_COMPUTE_UNITS_APPLE                  0x10000014
+#define CL_QUEUE_PRIORITY_BACKGROUND_APPLE                0x10000015
+#define CL_QUEUE_PRIORITY_DEFAULT_APPLE                   0x10000017
 
-/* Extension: clReleaseDAGAPPLE
- * Release a DAG object used to create the final kernel
- */
-void clReleaseDAGAPPLE(cl_dag dag) CL_EXT_SUFFIX__VERSION_1_2;
+/* Application can pass context name in the property list when calling clCreateContext.
+ * This will let us do application specific "stuff" in framework. As an example
+ * CoreImage passes context name "CoreImage" and use it to perform flush right after
+ * clEnqueueNDRangeKernel when CoreImage enqueues a large kernel (in terms of number of global work items)
+ * on weak GPU because we know it improves performance to start large work on weak GPU right away
+*/
+  
+#define CL_OBJECT_NAME_APPLE                               0x10000018
 
-/* Extension: clGetDAGNodeAPPLE
- * For a given function 'f' created with clCreateDAGAPPLE(), set 0 or more
- * arguments from args at their corresponding index in 'arg_indices'.  For 
- * functions:
- *
- * void foo(float4, float4);
- * float4 bar(float4);
- *
- * You can set either the 1st, 2nd, or both inputs to foo() with the output of
- * bar() by passing the bar() cl_dag_node one or more times in args().  
- * Argument indices which are unset by this function are required to be 
- * set by a clSetKernelArg() call on 'f' for each unset argument prior to 
- * clEnqueueNDRangeKernel() on the output of clCreateKernelFromDAGAPPLE().
- */
-cl_dag_node clGetDAGNodeAPPLE(cl_dag d, cl_kernel f, cl_dag_node *args,
-                              unsigned *arg_indices, unsigned nargs) CL_EXT_SUFFIX__VERSION_1_2;
-
-/* Extension:  clCreateKernelFromDAGAPPLE
- * Given a DAG, ask CVMS to create a functional kernel from it.
- */
-cl_kernel clCreateKernelFromDAGAPPLE(cl_dag d, cl_uint n,
-                                     const cl_device_id *list) CL_EXT_SUFFIX__VERSION_1_2;
   
 #ifdef __cplusplus
 }

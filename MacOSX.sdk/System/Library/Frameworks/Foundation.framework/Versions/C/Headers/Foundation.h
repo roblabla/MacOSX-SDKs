@@ -1,5 +1,5 @@
 /*	Foundation.h
-	Copyright (c) 1994-2012, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2013, Apple Inc. All rights reserved.
 */
 
 
@@ -100,10 +100,13 @@
 #import <Foundation/NSFileWrapper.h>
 #import <Foundation/NSLinguisticTagger.h>
 #import <Foundation/NSMetadata.h>
+#import <Foundation/NSMetadataAttributes.h>
 #import <Foundation/NSNetServices.h>
 #import <Foundation/NSPredicate.h>
+#import <Foundation/NSProgress.h>
 #import <Foundation/NSUbiquitousKeyValueStore.h>
 #import <Foundation/NSUndoManager.h>
+#import <Foundation/NSURLSession.h>
 #import <Foundation/NSUUID.h>
 
 #endif

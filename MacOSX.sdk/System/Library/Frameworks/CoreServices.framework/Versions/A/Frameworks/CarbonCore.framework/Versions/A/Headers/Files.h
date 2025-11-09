@@ -11,7 +11,7 @@
 #define __FILES__
 
 #ifndef __MACTYPES__
-#include <CarbonCore/MacTypes.h>
+#include <MacTypes.h>
 #endif
 
 #ifndef __MIXEDMODE__
@@ -54,6 +54,7 @@
 #include <sys/fcntl.h>
 #include <sys/acl.h>
 #include <DiskArbitration/DADisk.h>
+#include <hfs/hfs_unistr.h>
 
 #include <Availability.h>
 
@@ -67,23 +68,27 @@ extern "C" {
 
 #pragma pack(push, 2)
 
-#ifndef _HFSUNISTR255_DEFINED_
-#define _HFSUNISTR255_DEFINED_
-/* HFSUniStr255 is the Unicode equivalent of Str255 */
+/*
+// HFSUniStr255 is the Unicode equivalent of Str255. This struct definition is
+// duplicated in the lower layer header <hfs/hfs_unistr>, so this copy of the
+// struct definition has been commented out, but left here as documentation.
+
 struct HFSUniStr255 {
-  UInt16              length;                 /* number of unicode characters */
-  UniChar             unicode[255];           /* unicode characters */
+  UInt16              length;                 // number of unicode characters
+  UniChar             unicode[255];           // unicode characters
 };
 typedef struct HFSUniStr255             HFSUniStr255;
 typedef const HFSUniStr255 *            ConstHFSUniStr255Param;
-#endif
+*/
+
 #define kFSFileSecurityRemoveACL (acl_t) _FILESEC_REMOVE_ACL
 /*
     File Permissions
 
-    Do not mix and match the following two sets of constants
-    see DTS Technote FL 37 "You Want Permission To Do What?!!"
-    <http://developer.apple.com/technotes/fl/fl_37.html>
+    Do not mix and match the following two sets of File Manager permission
+    constants (original model  and AFP model).
+    See the Retired Technote FL 37 "You Want Permission To Do What?!!"
+    <https://developer.apple.com/legacy/mac/library/#technotes/fl/fl_37.html#//apple_ref/doc/uid/DTS10002463>
     for a detailed discussion of the two separate models
     and how they are related.
 */

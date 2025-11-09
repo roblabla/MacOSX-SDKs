@@ -40,7 +40,7 @@ enum { X = 0, Y = 1, Z = 2 };
 typedef struct _STXY {
 	GLfloat s, t;
 	GLfloat x, y;
-} STXY;
+} STXY OPENGL_DEPRECATED(10_0, 10_9);
 
 typedef struct _SphereMapMesh {
 
@@ -53,7 +53,7 @@ typedef struct _SphereMapMesh {
 	STXY *face;
 	STXY *back;
 
-} SphereMapMesh;
+} SphereMapMesh OPENGL_DEPRECATED(10_0, 10_9);
 
 struct _SphereMap {
 
@@ -92,11 +92,11 @@ struct _SphereMap {
 	/* Application specified callback data. */
 	void *context;
 
-};
+} OPENGL_DEPRECATED(10_0, 10_9);
 
 /* Library internal routines. */
-extern void __smapDrawSphereMapMeshSide(SphereMapMesh *mesh, int side);
-extern void __smapDrawSphereMapMeshBack(SphereMapMesh *mesh);
-extern void __smapValidateSphereMapMesh(SphereMapMesh *mesh);
+extern void __smapDrawSphereMapMeshSide(SphereMapMesh *mesh, int side) OPENGL_DEPRECATED(10_0, 10_9);
+extern void __smapDrawSphereMapMeshBack(SphereMapMesh *mesh) OPENGL_DEPRECATED(10_0, 10_9);
+extern void __smapValidateSphereMapMesh(SphereMapMesh *mesh) OPENGL_DEPRECATED(10_0, 10_9);
 
 #endif /* __glsmapint_h__ */

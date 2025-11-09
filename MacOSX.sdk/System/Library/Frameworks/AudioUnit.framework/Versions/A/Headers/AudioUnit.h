@@ -25,9 +25,7 @@
 	#include <AudioUnit/AudioUnitParameters.h>
 	#include <AudioUnit/MusicDevice.h>
 
-	#if !TARGET_OS_IPHONE	
 		#include <AudioUnit/AudioCodec.h>
-	#endif
 
 #else
 	#include <AudioComponent.h>

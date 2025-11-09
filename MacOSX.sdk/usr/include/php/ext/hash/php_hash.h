@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2012 The PHP Group                                |
+  | Copyright (c) 1997-2013 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -78,8 +78,9 @@ extern const php_hash_ops php_hash_gost_ops;
 extern const php_hash_ops php_hash_adler32_ops;
 extern const php_hash_ops php_hash_crc32_ops;
 extern const php_hash_ops php_hash_crc32b_ops;
-extern const php_hash_ops php_hash_salsa10_ops;
-extern const php_hash_ops php_hash_salsa20_ops;
+extern const php_hash_ops php_hash_fnv132_ops;
+extern const php_hash_ops php_hash_fnv164_ops;
+extern const php_hash_ops php_hash_joaat_ops;
 
 #define PHP_HASH_HAVAL_OPS(p,b)	extern const php_hash_ops php_hash_##p##haval##b##_ops;
 

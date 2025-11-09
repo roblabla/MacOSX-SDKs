@@ -10,7 +10,7 @@
 @class PDFAnnotationInkPrivateVars;
 
 
-@interface PDFAnnotationInk : PDFAnnotation <NSCopying>
+@interface PDFAnnotationInk : PDFAnnotation <NSCopying, NSCoding>
 {
 @private
     PDFAnnotationInkPrivateVars	*_pdfPriv2;

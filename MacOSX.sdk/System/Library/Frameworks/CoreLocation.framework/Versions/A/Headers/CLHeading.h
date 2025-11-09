@@ -71,7 +71,7 @@ NS_CLASS_AVAILABLE(10_7, 3_0)
  *  headingAccuracy
  *  
  *  Discussion:
- *    Represents the maxiumum deviation of where the magnetic heading may differ from the actual geomagnetic heading in degrees. A negative value indicates an invalid heading.
+ *    Represents the maximum deviation of where the magnetic heading may differ from the actual geomagnetic heading in degrees. A negative value indicates an invalid heading.
  */
 @property(readonly, nonatomic) CLLocationDirection headingAccuracy;
 

@@ -24,7 +24,7 @@ enum
 };
 
 
-@interface PDFAnnotationText : PDFAnnotation <NSCopying>
+@interface PDFAnnotationText : PDFAnnotation <NSCopying, NSCoding>
 {
 @private
     PDFAnnotationTextPrivateVars *_pdfPriv2;

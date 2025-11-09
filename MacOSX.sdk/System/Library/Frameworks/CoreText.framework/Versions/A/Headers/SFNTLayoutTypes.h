@@ -9,8 +9,6 @@
 #ifndef __SFNTLAYOUTTYPES__
 #define __SFNTLAYOUTTYPES__
 
-#include <TargetConditionals.h>
-
 #include <MacTypes.h>
 
 #ifdef __cplusplus
@@ -71,6 +69,7 @@ enum {
   kContextualAlternatesType     = 36,
   kLowerCaseType                = 37,
   kUpperCaseType                = 38,
+  kLanguageTagType              = 39,
   kCJKRomanSpacingType          = 103,
   kLastFeatureType              = -1
 };
@@ -1235,6 +1234,38 @@ struct PropLookupSingle {
 };
 typedef struct PropLookupSingle         PropLookupSingle;
 /* --------------------------------------------------------------------------- */
+/* FORMATS FOR TABLE: 'trak' */
+/* CONSTANTS */
+enum {
+  kTRAKTag                      = 0x7472616B, /* 'trak' */
+  kTRAKCurrentVersion           = 0x00010000, /* current version number for 'trak' table */
+  kTRAKUniformFormat            = 0     /*    kTRAKPerGlyphFormat         = 2*/
+};
+
+/* TYPES */
+
+typedef SInt16                          TrakValue;
+struct TrakTableEntry {
+  Fixed               track;
+  UInt16              nameTableIndex;
+  UInt16              sizesOffset;            /* offset to array of TrackingValues */
+};
+typedef struct TrakTableEntry           TrakTableEntry;
+struct TrakTableData {
+  UInt16              nTracks;
+  UInt16              nSizes;
+  UInt32              sizeTableOffset;
+  TrakTableEntry      trakTable[1];
+};
+typedef struct TrakTableData            TrakTableData;
+struct TrakTable {
+  Fixed               version;
+  UInt16              format;
+  UInt16              horizOffset;
+  UInt16              vertOffset;
+};
+typedef struct TrakTable                TrakTable;
+/* --------------------------------------------------------------------------- */
 /* FORMATS FOR TABLE: 'kern' */
 /* CONSTANTS */
 enum {
@@ -1539,20 +1570,6 @@ struct KerxCoordinateAction {
 };
 typedef struct KerxCoordinateAction     KerxCoordinateAction;
 /*
- Kern offset table header.
- The offset table is a trimmed array from firstGlyph to limitGlyph.
- Glyphs outside of this range should get zero for right-hand glyphs
- and the offset of the beginning of the kerning array for left-hand glyphs.
- */
-struct KerxOffsetTable {
-  UInt16              firstGlyph;             /* first glyph in class range */
-  UInt16              nGlyphs;                /* number of glyphs in class range */
-  KerxArrayOffset     offsetTable[1];         /* offset table starts here */
-};
-typedef struct KerxOffsetTable          KerxOffsetTable;
-typedef KerxOffsetTable *               KerxOffsetTablePtr;
-/* Header information for accessing offset tables and kerning array */
-/*
  KerxSimpleArray:
  
  The array is an nXm array of kenring values. Each row in the array
@@ -1565,11 +1582,6 @@ typedef KerxOffsetTable *               KerxOffsetTablePtr;
  adding both offsets to the starting address of the kerning array,
  and fetching the kerning value pointed to.
  */
-/* Kern offset table header. */
-/* The offset table is a trimmed array from firstGlyph to limitGlyph. */
-/* Glyphs outside of this range should get zero for right-hand glyphs */
-/* and the offset of the beginning of the kerning array for left- */
-/* hand glyphs. */
 struct KerxSimpleArrayHeader {
   UInt32              rowWidth;               /* width, in bytes, of a row in the table */
   UInt32              leftOffsetTable;        /* offset to left-hand offset table */
@@ -1629,6 +1641,7 @@ enum {
   kBSLNIdeographicLowBaseline   = 2,
   kBSLNHangingBaseline          = 3,
   kBSLNMathBaseline             = 4,
+  kBSLNIdeographicHighBaseline  = 5,
   kBSLNLastBaseline             = 31,
   kBSLNNumBaselineClasses       = kBSLNLastBaseline + 1,
   kBSLNNoBaseline               = 255,
@@ -1751,17 +1764,38 @@ typedef struct AnchorPoint              AnchorPoint;
 
 struct AnchorPointTable {
   UInt32              nPoints;                /* number of anchor points defined for this glyph */
-  AnchorPoint         points[kVariableLengthArray]; /* the anchor points */
+  AnchorPoint         points[1];              /* first anchor point starts here */
 };
 typedef struct AnchorPointTable         AnchorPointTable;
 
 struct AnkrTable {
-  UInt16              version;                /* 1 */
+  UInt16              version;                /* 0 */
   UInt16              flags;                  /* never leave home without them (see 'Zapf') */
   UInt32              lookupTableOffset;      /* Byte offset to lookup table mapping glyphs to offset into anchor point table */
   UInt32              anchorPointTableOffset; /* Byte offset to start of anchor point table */
 };
 typedef struct AnkrTable                AnkrTable;
+/* --------------------------------------------------------------------------- */
+/* FORMATS FOR TABLE 'ltag' */
+/* CONSTANTS */
+enum {
+  kLTAGCurrentVersion = 1
+};
+
+/* TYPES */
+struct LtagStringRange {
+  UInt16               offset;                /* offset to the beginning of the string */
+  UInt16               length;                /* string length in bytes */
+};
+typedef struct LtagStringRange          LtagStringRange;
+
+struct LtagTable {
+  UInt32              version;                /* 1 */
+  UInt32              flags;                  /* none currently defined */
+  UInt32              numTags;                /* number of language tags which follow */
+  LtagStringRange     tagRange[1];            /* first string range starts here */
+};
+typedef struct LtagTable                LtagTable;
 /* --------------------------------------------------------------------------- */
 
 #pragma pack(pop)

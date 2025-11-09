@@ -1,6 +1,6 @@
 /* CoreAnimation - CAEmitterLayer.h
 
-   Copyright (c) 2007-2008 Apple Inc.
+   Copyright (c) 2007-2012 Apple Inc.
    All rights reserved. */
 
 /* Particle emitter layer.
@@ -119,7 +119,7 @@ CA_EXTERN NSString * const kCAEmitterLayerSurface
 CA_EXTERN NSString * const kCAEmitterLayerVolume
     __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_5_0);
 
-/** `renderOrder' values. **/
+/** `renderMode' values. **/
 
 CA_EXTERN NSString * const kCAEmitterLayerUnordered
     __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_5_0);

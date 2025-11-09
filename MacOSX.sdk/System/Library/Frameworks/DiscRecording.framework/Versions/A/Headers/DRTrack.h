@@ -178,7 +178,6 @@
 */
 - (float) testProductionSpeedForLength:(uint32_t)length;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 /*!
 	@method		estimateLength
 	@abstract	Asks the track producer for a size estimate.
@@ -194,7 +193,6 @@
 	@result		The estimated length of the track.
 */
 - (uint64_t) estimateLength;
-#endif
 
 @end
 
@@ -278,7 +276,6 @@
 */
 @protocol DRTrackDataProduction
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 /*!
 	@method			estimateLengthOfTrack:
 	@abstract		Estimates the size of the track to be burned.
@@ -291,7 +288,6 @@
 					reasonably accurate, and no smaller than the actual size that will be needed.
 */
 - (uint64_t) estimateLengthOfTrack:(DRTrack*)track;
-#endif
 
 /*!
 	@method			prepareTrack:forBurn:toMedia:
@@ -935,12 +931,10 @@ extern NSString* const DRSuppressMacSpecificFiles	AVAILABLE_MAC_OS_X_VERSION_10_
 												of audio data into bytes 0-2351 of the block and an additional 96 bytes of 
 												subchannel data into bytes 2352-2447.
 */
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 enum
 {
 	DRFlagSubchannelDataRequested	= (1 << 1)
 };
-#endif
 
 #if 0
 #pragma mark Subchannel Data Form Properties

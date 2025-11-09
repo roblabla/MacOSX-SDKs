@@ -185,13 +185,13 @@ typedef OSStatus
     @discussion     The AudioSystemObject has one scope, kAudioObjectPropertyScopeGlobal, and only a
                     master element.
     @constant       kAudioHardwarePropertyRunLoop
-                        The CFRunLoopRef the HAL is currently attaching all of it's system
+                        The CFRunLoopRef the HAL is currently attaching all of its system
                         notification handlers to. In 10.6 and later, the HAL will use the process's
                         run loop (as defined by CFRunLoopGetMain()) for this task. Whereas in
-                        previous releases, the HAL created and managed it's own thread for the task.
+                        previous releases, the HAL created and managed its own thread for the task.
                         Clients can set this property to tell the HAL to use a thread of the
                         client's choosing. If the value for this property is set to NULL, the HAL
-                        will return to it's pre-10.6 behavior of creating and managing it's own
+                        will return to its pre-10.6 behavior of creating and managing its own
                         thread for notifications. The caller is responsible for releasing the
                         returned CFObject.
     @constant       kAudioHardwarePropertyDeviceForUID
@@ -199,11 +199,17 @@ typedef OSStatus
                         CFStringRef containing a UID into the AudioDeviceID that refers to the
                         AudioDevice with that UID. This property will return kAudioDeviceUnknown if
                         the given UID does not match any currently available AudioDevice.
+    @constant       kAudioHardwarePropertyPlugInForBundleID
+                        Using an AudioValueTranslation structure, this property translates the input
+                        CFString containing a bundle ID into the AudioObjectID of the AudioPlugIn
+                        that corresponds to it. This property will return kAudioObjectUnkown if the
+                        given bundle ID doesn't match any AudioPlugIns.
 */
 enum
 {
     kAudioHardwarePropertyRunLoop                           = 'rnlp',
-    kAudioHardwarePropertyDeviceForUID                      = 'duid'
+    kAudioHardwarePropertyDeviceForUID                      = 'duid',
+    kAudioHardwarePropertyPlugInForBundleID                 = 'pibi'
 };
 
 /*!
@@ -569,7 +575,7 @@ enum
                         value of 0 means that it doesn't and that all IO is performed in each
                         AudioStream's current physical format. This property is changed indirectly
                         by changing to a format that doesn't support mixing, such as AC-3. (The HAL
-                        now vends it's format information with a flag indicating the mixability in
+                        now vends its format information with a flag indicating the mixability in
                         order to better support devices with streams that are both mixable and non-
                         mixable.)
     @constant       kAudioDevicePropertyStreamFormat
@@ -952,7 +958,7 @@ enum
     @constant       kAudioStreamPropertyPhysicalFormats
                         An array of AudioStreamBasicDescriptions that describe the available data
                         formats for the AudioStream. The physical format refers to the data format
-                        in which the hardware for the owning AudioDevice performs it's IO
+                        in which the hardware for the owning AudioDevice performs its IO
                         transactions.
                         (kAudioStreamPropertyAvailablePhysicalFormats: The new name for this
                         property is much clearer for readers of the API to see what is meant and the
@@ -964,7 +970,7 @@ enum
                         it is supported. AudioStreamBasicDescription fields set to 0 will be ignored
                         in the query, but otherwise values must match exactly. The physical format
                         refers to the data format in which the hardware for the owning AudioDevice
-                        performs it's IO transactions.
+                        performs its IO transactions.
                         (kAudioStreamPropertyAvailablePhysicalFormats: The proper and most robust
                         way to find a format that the AudioStream can support is to get the list of
                         available formats and look through that rather than using this property.)
@@ -972,7 +978,7 @@ enum
                         An AudioStreamBasicDescription is passed in and the AudioStream will modify
                         it to describe the best match, in the AudioDevice's opinion, for the given
                         format. The physical format refers to the data format in which the hardware
-                        for the owning AudioDevice performs it's IO transactions.
+                        for the owning AudioDevice performs its IO transactions.
                         (kAudioStreamPropertyAvailablePhysicalFormats: The proper and most robust
                         way to find a format that the AudioStream can support is to get the list of
                         available formats and look through that rather than using this property.)

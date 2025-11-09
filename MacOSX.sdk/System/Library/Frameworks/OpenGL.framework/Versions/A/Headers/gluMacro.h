@@ -49,7 +49,16 @@
 #define gluScaleImage(format, wIn, hIn, typeIn, dataIn, wOut, hOut, typeOut, dataOut) \
 	gluScaleImageCTX(cgl_ctx, format, wIn, hIn, typeIn, dataIn, wOut, hOut, typeOut, dataOut)
 
+#define gluCylinder(qobj, baseRadiusd, topRadiusd, heightd, slices, stacks) \
+	gluCylinderCTX(cgl_ctx, qobj, baseRadiusd, topRadiusd, heightd, slices, stacks)
+
+#define gluDisk(qobj, innerRadiusd, outerRadiusd, slices, loops) \
+	gluDiskCTX(cgl_ctx, qobj, innerRadiusd, outerRadiusd, slices, loops)
+
+#define gluPartialDisk(qobj, innerRadiusd, outerRadiusd, slices, loops, startAngled, sweepAngled) \
+	gluPartialDiskCTX(cgl_ctx, qobj, innerRadiusd, outerRadiusd, slices, loops, startAngled, sweepAngled)
+
+#define gluSphere(qobj, radiusd, slices, stacks) \
+	gluSphereCTX(cgl_ctx, qobj, radiusd, slices, stacks)
 
 #endif /* _GLUMACRO_H */
-
-

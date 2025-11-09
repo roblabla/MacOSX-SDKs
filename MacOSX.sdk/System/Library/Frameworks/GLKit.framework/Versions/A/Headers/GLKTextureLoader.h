@@ -48,7 +48,6 @@
 /*
  Dictionary keys for texture loader properties
  */
-
 /* 
  GLKTextureLoaderApplyPremultiplication - A boolean NSNumber.
  Non-alpha channels are premultiplied by corresponding alpha channel values.
@@ -76,10 +75,23 @@ GLK_EXTERN NSString *const GLKTextureLoaderOriginBottomLeft NS_AVAILABLE(10_8, 5
  If true, a single channel grayscale image is loaded as GL_ALPHA.
  If false, it will be loaded as GL_LUMINANCE.
  Has no effect on non-grayscale images and on OS X.
- False by default. */
+ False by default. 
+ */
 GLK_EXTERN NSString *const GLKTextureLoaderGrayscaleAsAlpha NS_AVAILABLE_IOS(5_0);
 
- 
+
+/*
+ GLKTextureLoaderSRGB - A boolean NSNumber.
+ If true, the texture will be loaded as sRGB.
+ If false, it will be loaded as linear.
+ False by default.
+ */
+#if TARGET_OS_IPHONE || defined(MAC_OS_X_VERSION_10_9)
+GLK_EXTERN NSString *const GLKTextureLoaderSRGB NS_AVAILABLE(10_9, 7_0);
+#else
+GLK_EXTERN NSString *const GLKTextureLoaderSRGB;
+#endif
+
 /*
  Error domain for GLKTextureLoader
  */
@@ -113,7 +125,8 @@ typedef NS_ENUM(GLuint, GLKTextureLoaderError)
     GLKTextureLoaderErrorUnsupportedOrientation = 14,
     GLKTextureLoaderErrorReorientationFailure = 15,
     GLKTextureLoaderErrorAlphaPremultiplicationFailure = 16,
-    GLKTextureLoaderErrorInvalidEAGLContext = 17
+    GLKTextureLoaderErrorInvalidEAGLContext = 17,
+    GLKTextureLoaderErrorIncompatibleFormatSRGB = 18
 } NS_ENUM_AVAILABLE(10_8, 5_0);
 
 #pragma mark -

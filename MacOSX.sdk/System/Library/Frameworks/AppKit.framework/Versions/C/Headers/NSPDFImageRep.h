@@ -1,7 +1,7 @@
 /*
         NSPDFImageRep.h
         Application Kit
-        Copyright (c) 1999-2012, Apple Inc.
+        Copyright (c) 1999-2013, Apple Inc.
         All rights reserved.
 */
 

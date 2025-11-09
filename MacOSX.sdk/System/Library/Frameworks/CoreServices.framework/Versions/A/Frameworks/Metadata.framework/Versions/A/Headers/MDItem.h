@@ -59,6 +59,7 @@
         #endif
 #endif
 
+CF_IMPLICIT_BRIDGING_ENABLED
 MD_BEGIN_C_DECLS
 
 
@@ -454,7 +455,7 @@ MD_EXPORT CFArrayRef MDItemsCopyAttributes(CFArrayRef items, CFArrayRef names) A
 
 MD_EXPORT const CFStringRef     kMDItemAttributeChangeDate MD_AVAIL;       // CFDate
 MD_EXPORT const CFStringRef     kMDItemContentType MD_AVAIL;               // CFString
-MD_EXPORT const CFStringRef     kMDItemContentTypeTree MD_AVAIL_LEOPARD;   // Array of CFStringRef
+MD_EXPORT const CFStringRef     kMDItemContentTypeTree MD_AVAIL_LEOPARD;   // CFArray of CFStringRef
 MD_EXPORT const CFStringRef     kMDItemKeywords MD_AVAIL;                  // CFArray of CFString
 MD_EXPORT const CFStringRef     kMDItemTitle MD_AVAIL;                     // CFString
 MD_EXPORT const CFStringRef     kMDItemAuthors MD_AVAIL;                   // CFArray of CFString
@@ -468,7 +469,7 @@ MD_EXPORT const CFStringRef     kMDItemCopyright MD_AVAIL;                 // CF
 MD_EXPORT const CFStringRef     kMDItemLastUsedDate MD_AVAIL;              // CFDate
 MD_EXPORT const CFStringRef     kMDItemContentCreationDate MD_AVAIL;       // CFDate
 MD_EXPORT const CFStringRef     kMDItemContentModificationDate MD_AVAIL;   // CFDate
-MD_EXPORT const CFStringRef     kMDItemDateAdded MD_AVAIL;                 // CFDate
+MD_EXPORT const CFStringRef     kMDItemDateAdded AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER; // CFDate
 MD_EXPORT const CFStringRef     kMDItemDurationSeconds MD_AVAIL;           // CFNumber
 MD_EXPORT const CFStringRef     kMDItemContactKeywords MD_AVAIL;           // CFArray of CFString
 MD_EXPORT const CFStringRef     kMDItemVersion MD_AVAIL;                   // CFString
@@ -494,9 +495,9 @@ MD_EXPORT const CFStringRef     kMDItemExposureMode MD_AVAIL;              // CF
 MD_EXPORT const CFStringRef     kMDItemExposureTimeSeconds MD_AVAIL;       // CFNumber
 MD_EXPORT const CFStringRef     kMDItemEXIFVersion MD_AVAIL;               // CFString
 
-MD_EXPORT const CFStringRef kMDItemCameraOwner AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
-MD_EXPORT const CFStringRef kMDItemFocalLength35mm AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
-MD_EXPORT const CFStringRef kMDItemLensModel AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+MD_EXPORT const CFStringRef kMDItemCameraOwner AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;       // CFString
+MD_EXPORT const CFStringRef kMDItemFocalLength35mm AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;   // CFNumber
+MD_EXPORT const CFStringRef kMDItemLensModel AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;         // CFString
 
 MD_EXPORT const CFStringRef     kMDItemEXIFGPSVersion MD_AVAIL_LEOPARD;    // CFString
 MD_EXPORT const CFStringRef     kMDItemAltitude MD_AVAIL_LEOPARD;          // CFNumber
@@ -508,18 +509,18 @@ MD_EXPORT const CFStringRef     kMDItemGPSTrack MD_AVAIL_LEOPARD;          // CF
 MD_EXPORT const CFStringRef     kMDItemImageDirection MD_AVAIL_LEOPARD;    // CFNumber
 MD_EXPORT const CFStringRef     kMDItemNamedLocation AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER; // CFString
 
-MD_EXPORT const CFStringRef kMDItemGPSStatus AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
-MD_EXPORT const CFStringRef kMDItemGPSMeasureMode AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
-MD_EXPORT const CFStringRef kMDItemGPSDOP AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
-MD_EXPORT const CFStringRef kMDItemGPSMapDatum AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
-MD_EXPORT const CFStringRef kMDItemGPSDestLatitude AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
-MD_EXPORT const CFStringRef kMDItemGPSDestLongitude AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
-MD_EXPORT const CFStringRef kMDItemGPSDestBearing AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
-MD_EXPORT const CFStringRef kMDItemGPSDestDistance AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
-MD_EXPORT const CFStringRef kMDItemGPSProcessingMethod AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
-MD_EXPORT const CFStringRef kMDItemGPSAreaInformation AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
-MD_EXPORT const CFStringRef kMDItemGPSDateStamp AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
-MD_EXPORT const CFStringRef kMDItemGPSDifferental AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+MD_EXPORT const CFStringRef kMDItemGPSStatus AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;             // CFString
+MD_EXPORT const CFStringRef kMDItemGPSMeasureMode AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;        // CFString
+MD_EXPORT const CFStringRef kMDItemGPSDOP AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;                // CFNumber
+MD_EXPORT const CFStringRef kMDItemGPSMapDatum AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;           // CFString
+MD_EXPORT const CFStringRef kMDItemGPSDestLatitude AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;       // CFNumber
+MD_EXPORT const CFStringRef kMDItemGPSDestLongitude AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;      // CFNumber
+MD_EXPORT const CFStringRef kMDItemGPSDestBearing AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;        // CFNumber
+MD_EXPORT const CFStringRef kMDItemGPSDestDistance AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;       // CFNumber
+MD_EXPORT const CFStringRef kMDItemGPSProcessingMethod AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;   // CFString
+MD_EXPORT const CFStringRef kMDItemGPSAreaInformation AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;    // CFString
+MD_EXPORT const CFStringRef kMDItemGPSDateStamp AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;          // CFDate
+MD_EXPORT const CFStringRef kMDItemGPSDifferental AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;        // CFNumber
 
 MD_EXPORT const CFStringRef     kMDItemCodecs MD_AVAIL;                    // CFArray of CFString
 MD_EXPORT const CFStringRef     kMDItemMediaTypes MD_AVAIL;                // CFArray of CFString
@@ -530,7 +531,7 @@ MD_EXPORT const CFStringRef     kMDItemAudioBitRate MD_AVAIL;              // CF
 MD_EXPORT const CFStringRef     kMDItemDeliveryType MD_AVAIL;              // CFString
 
 MD_EXPORT const CFStringRef     kMDItemAlbum MD_AVAIL;                     // CFString
-MD_EXPORT const CFStringRef     kMDItemHasAlphaChannel MD_AVAIL;		  // CFBoolean
+MD_EXPORT const CFStringRef     kMDItemHasAlphaChannel MD_AVAIL;		   // CFBoolean
 MD_EXPORT const CFStringRef     kMDItemRedEyeOnOff MD_AVAIL;               // CFBoolean
 MD_EXPORT const CFStringRef     kMDItemMeteringMode MD_AVAIL;              // CFString
 MD_EXPORT const CFStringRef     kMDItemMaxAperture MD_AVAIL;               // CFNumber
@@ -1008,6 +1009,8 @@ MD_BEGIN_C_DECLS
 extern CFDictionaryRef __MDItemCopyAttributesEllipsis1(MDItemRef item, ...) MD_AVAIL;
 MD_END_C_DECLS
 #endif
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif /* MAC_OS_X_VERSION_MAX_ALLOWED */
 

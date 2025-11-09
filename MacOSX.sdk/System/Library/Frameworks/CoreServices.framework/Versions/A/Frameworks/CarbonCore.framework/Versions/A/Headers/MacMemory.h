@@ -11,7 +11,7 @@
 #define __MACMEMORY__
 
 #ifndef __MACTYPES__
-#include <CarbonCore/MacTypes.h>
+#include <MacTypes.h>
 #endif
 
 #ifndef __MIXEDMODE__
@@ -1590,9 +1590,9 @@ HSetState(
 
 #if ! __LP64__
     #if ! NO_BLOCKMOVE_INLINE && ( defined(__cplusplus) || ( defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199901L ) )
-  static inline void BlockMove(const void *srcPtr,void *destPtr,Size byteCount) { if ( byteCount > 0 ) memmove( destPtr, srcPtr, byteCount ); }
+  static inline void BlockMove(const void *srcPtr,void *destPtr,Size byteCount) { if ( byteCount > 0 ) memmove( destPtr, srcPtr, (size_t)byteCount ); }
   #elif ! NO_BLOCKMOVE_INLINE && defined( __GCC__ ) 
- extern __inline__ void BlockMove(const void *srcPtr,void *destPtr,Size byteCount) { if ( byteCount > 0 ) memmove( destPtr, srcPtr, byteCount ); }
+ extern __inline__ void BlockMove(const void *srcPtr,void *destPtr,Size byteCount) { if ( byteCount > 0 ) memmove( destPtr, srcPtr, (size_t)byteCount ); }
   #else
   extern void BlockMove(const void *srcPtr,void *destPtr,Size byteCount);
     #endif
@@ -1600,9 +1600,9 @@ HSetState(
 
 #if ! __LP64__
     #if ! NO_BLOCKMOVE_INLINE && ( defined(__cplusplus) || ( defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199901L ) )
-  static inline void BlockMoveData(const void *srcPtr,void *destPtr,Size byteCount) { if ( byteCount > 0 ) memmove( destPtr, srcPtr, byteCount ); }
+  static inline void BlockMoveData(const void *srcPtr,void *destPtr,Size byteCount) { if ( byteCount > 0 ) memmove( destPtr, srcPtr, (size_t)byteCount ); }
   #elif ! NO_BLOCKMOVE_INLINE && defined( __GCC__ ) 
- extern __inline__ void BlockMoveData(const void *srcPtr,void *destPtr,Size byteCount) { if ( byteCount > 0 ) memmove( destPtr, srcPtr, byteCount ); }
+ extern __inline__ void BlockMoveData(const void *srcPtr,void *destPtr,Size byteCount) { if ( byteCount > 0 ) memmove( destPtr, srcPtr, (size_t)byteCount ); }
   #else
   extern void BlockMoveData(const void *srcPtr,void *destPtr,Size byteCount);
     #endif
@@ -1610,9 +1610,9 @@ HSetState(
 
 #if ! __LP64__
     #if ! NO_BLOCKMOVE_INLINE && ( defined(__cplusplus) || ( defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199901L ) )
-  static inline void BlockMoveUncached(const void *srcPtr,void *destPtr,Size byteCount) { if ( byteCount > 0 ) memmove( destPtr, srcPtr, byteCount ); }
+  static inline void BlockMoveUncached(const void *srcPtr,void *destPtr,Size byteCount) { if ( byteCount > 0 ) memmove( destPtr, srcPtr, (size_t)byteCount ); }
   #elif ! NO_BLOCKMOVE_INLINE && defined( __GCC__ ) 
- extern __inline__ void BlockMoveUncached(const void *srcPtr,void *destPtr,Size byteCount) { if ( byteCount > 0 ) memmove( destPtr, srcPtr, byteCount ); }
+ extern __inline__ void BlockMoveUncached(const void *srcPtr,void *destPtr,Size byteCount) { if ( byteCount > 0 ) memmove( destPtr, srcPtr, (size_t)byteCount ); }
   #else
   extern void BlockMoveUncached(const void *srcPtr,void *destPtr,Size byteCount);
     #endif
@@ -1620,9 +1620,9 @@ HSetState(
 
 #if ! __LP64__
     #if ! NO_BLOCKMOVE_INLINE && ( defined(__cplusplus) || ( defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199901L ) )
-  static inline void BlockMoveDataUncached(const void *srcPtr,void *destPtr,Size byteCount) { if ( byteCount > 0 ) memmove( destPtr, srcPtr, byteCount ); }
+  static inline void BlockMoveDataUncached(const void *srcPtr,void *destPtr,Size byteCount) { if ( byteCount > 0 ) memmove( destPtr, srcPtr, (size_t)byteCount ); }
   #elif ! NO_BLOCKMOVE_INLINE && defined( __GCC__ ) 
- extern __inline__ void BlockMoveDataUncached(const void *srcPtr,void *destPtr,Size byteCount) { if ( byteCount > 0 ) memmove( destPtr, srcPtr, byteCount ); }
+ extern __inline__ void BlockMoveDataUncached(const void *srcPtr,void *destPtr,Size byteCount) { if ( byteCount > 0 ) memmove( destPtr, srcPtr, (size_t)byteCount ); }
   #else
   extern void BlockMoveDataUncached(const void *srcPtr,void *destPtr,Size byteCount);
     #endif
@@ -1630,9 +1630,9 @@ HSetState(
 
 #if ! __LP64__
     #if ! NO_BLOCKMOVE_INLINE && ( defined(__cplusplus) || ( defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199901L ) )
-  static inline void BlockZero(void *destPtr,Size byteCount) { if ( byteCount > 0 ) bzero( destPtr, byteCount ); }
+  static inline void BlockZero(void *destPtr,Size byteCount) { if ( byteCount > 0 ) bzero( destPtr, (size_t)byteCount ); }
    #elif ! NO_BLOCKMOVE_INLINE && defined( __GCC__ ) 
- extern __inline__ void BlockZero(void *destPtr,Size byteCount) { if ( byteCount > 0 ) bzero( destPtr, byteCount ); }
+ extern __inline__ void BlockZero(void *destPtr,Size byteCount) { if ( byteCount > 0 ) bzero( destPtr, (size_t)byteCount ); }
    #else
   extern void BlockZero(void *destPtr,Size byteCount);
    #endif
@@ -1640,9 +1640,9 @@ HSetState(
 
 #if ! __LP64__
     #if ! NO_BLOCKMOVE_INLINE && ( defined(__cplusplus) || ( defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199901L ) )
-  static inline void BlockZeroUncached(void *destPtr,Size byteCount) { if ( byteCount > 0 ) bzero( destPtr, byteCount ); }
+  static inline void BlockZeroUncached(void *destPtr,Size byteCount) { if ( byteCount > 0 ) bzero( destPtr, (size_t)byteCount ); }
    #elif ! NO_BLOCKMOVE_INLINE && defined( __GCC__ ) 
- extern __inline__ void BlockZeroUncached(void *destPtr,Size byteCount) { if ( byteCount > 0 ) bzero( destPtr, byteCount ); }
+ extern __inline__ void BlockZeroUncached(void *destPtr,Size byteCount) { if ( byteCount > 0 ) bzero( destPtr, (size_t)byteCount ); }
    #else
   extern void BlockZeroUncached(void *destPtr,Size byteCount);
    #endif

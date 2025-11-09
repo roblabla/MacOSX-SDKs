@@ -140,6 +140,7 @@ typedef UInt32	IOBluetoothDeviceSearchTypes;
 enum IOBluetoothDeviceSearchTypesBits
 {
     kIOBluetoothDeviceSearchClassic = 1,
+    kIOBluetoothDeviceSearchLE = 2
 };
 
 //===========================================================================================================================
@@ -220,11 +221,14 @@ extern	void	IOBluetoothRemoveIgnoredHIDDevice( IOBluetoothDeviceRef	device );
 	@param		outServiceRecord A pointer to the newly created IOBluetoothSDPServiceRecordRef.  The assigned RFCOMM
 				channel ID can be retrieved from the service record (as can other assigned parameters.)  This value 
 				only gets set if kIOReturnSuccess is returned.  The caller is responsible for releasing the 
-				IOBluetoothSDPServiceRecordRef by calling IOBluetoothObjectRelease() when done.
+				IOBluetoothSDPServiceRecordRef when done.
 	@result		Returns kIOReturnSuccess if successful.
+ 
+ THIS CALL IS DEPRECATED.  PLEASE USE +[IOBluetoothSDPServiceRecord publishedServiceRecordWithDictionary:]
+
 */
 
-extern IOReturn IOBluetoothAddServiceDict(CFDictionaryRef serviceDict, IOBluetoothSDPServiceRecordRef *outServiceRecord);
+extern IOReturn IOBluetoothAddServiceDict(CFDictionaryRef serviceDict, IOBluetoothSDPServiceRecordRef *outServiceRecord) DEPRECATED_IN_MAC_OS_X_VERSION_10_8_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothRemoveServiceWithRecordHandle
@@ -233,9 +237,12 @@ extern IOReturn IOBluetoothAddServiceDict(CFDictionaryRef serviceDict, IOBluetoo
                 IOBluetoothAddServiceDict.
 	@param		serviceRecordHandle The handle of the service to be removed.
 	@result		Returns kIOReturnSuccess if successful.
+ 
+    THIS CALL IS DEPRECATED.  PLEASE USE -[IOBluetoothSDPServiceRecord removeServiceRecord]
+
 */
 
-extern IOReturn IOBluetoothRemoveServiceWithRecordHandle( BluetoothSDPServiceRecordHandle serviceRecordHandle );
+extern IOReturn IOBluetoothRemoveServiceWithRecordHandle( BluetoothSDPServiceRecordHandle serviceRecordHandle ) DEPRECATED_IN_MAC_OS_X_VERSION_10_8_AND_LATER;
 
 
 #if 0
@@ -429,79 +436,25 @@ IOBluetoothUserNotificationRef IOBluetoothRegisterForFilteredRFCOMMChannelOpenNo
 IOBluetoothUserNotificationRef IOBluetoothRFCOMMChannelRegisterForChannelCloseNotification(	IOBluetoothRFCOMMChannelRef inChannel,
                                                                                             IOBluetoothUserNotificationCallback callback,
                                                                                             void * inRefCon );
-
-#if 0
-#pragma mark -
-#pragma mark === SCO Audio ===
-#endif
+        
+/*!
+ @function	IOBluetoothAddSCOAudioDevice
+ @abstract   Creates a persistent audio driver that will route audio data to/from the specified device.
+ @discussion In 10.9 this is not needed and does nothing.
+ @param		device	A paired Bluetooth audio device
+ @param		configDict	Configuration dictionary containing a description of the audio controls to be attached to the driver.  Passing NULL will result in default controls
+ @result		Returns kIOReturnSuccess if the audio driver was successfully created, error if hardware does not support SCO or device is not paired. On 10.9 it will always return kIOReturnSuccess.
+ */
+extern IOReturn IOBluetoothAddSCOAudioDevice( IOBluetoothDeviceRef device, CFDictionaryRef configDict ) DEPRECATED_IN_MAC_OS_X_VERSION_10_8_AND_LATER;
 
 /*!
-    @function	IOBluetoothAddSCOAudioDevice
-    @abstract   Creates a persistent audio driver that will route audio data to/from the specified device.
-    @discussion The Bluetooth device must be paired before it can be added.
-				The Bluetooth hardware must also support SCO connections for devices to be added.
- 
-				When a client attempts to use the audio driver, it will automatically open the baseband connection
-				and the SCO connection if necessary.  Once they are open, it will route audio data to/from the
-				audio system.  The audio driver will continue to exist (even through reboots) until IOBluetoothRemoveAudioDevice
-				is called.
+ @function	IOBluetoothRemoveSCOAudioDevice
+ @abstract   Removes a persistent audio driver for a device that had already been added using IOBluetoothAddAudioDevice(). In 10.9 this is not needed and does nothing.
+ @param		device	Bluetooth audio device to remove
+ @result		Returns kIOReturnSuccess if the audio driver was successfully removed. On 10.9 it will always return kIOReturnSuccess
+ */
+extern IOReturn IOBluetoothRemoveSCOAudioDevice( IOBluetoothDeviceRef device ) DEPRECATED_IN_MAC_OS_X_VERSION_10_8_AND_LATER;
 
-				Currently, the only recognized entry in the configDict is "IOAudioControls".  That entry will be an NSArray of 
-				NSDictionary objects where each dictionary represents a single audio control.  Following is a description of the mandatory
-				and optional entries in each control dictionary.
-
-				Mandatory entries:
-
-					kIOAudioControlTypeKey			= Four-char-code representing the control type (see IOAudioTypes.h)
-														Possible values:
-															kIOAudioControlTypeLevel
-															kIOAudioControlTypeToggle
-															kIOAudioControlTypeSelector
-					kIOAudioControlSubTypeKey		= Four-char-code representing the control subtype.  The value is dependent on the control type.
-													  Following are common subtypes for each control type:
-														kIOAudioControlTypeLevel:
-															kIOAudioLevelControlSubTypeVolume
-														kIOAudioControlTypeToggle:
-															kIOAudioToggleControlSubTypeMute
-														kIOAudioControlTypeSelector:
-															kIOAudioSelectorControlSubTypeOutput
-															kIOAudioSelectorControlSubTypeInput
-					kIOAudioControlUsageKey			= Four-char-code representing the usage of the control (i.e. what part of the I/O chain the control 
-													  affects - input, output, pass-thru, ...) (see IOAudioTypes.h)
-														Possible values:
-															kIOAudioControlUsageOutput
-															kIOAudioControlUsageInput
-															kIOAudioControlUsagePassThru
-					kIOAudioControlChannelIDKey		= channel ID for the channel(s) the control acts on (see IOAudioControl.h and IOAudioTypes.h for more info)
-					kIOAudioControlChannelNameKey	= name for the channel (see IOAudioControl.h and IOAudioDefines.h for more info)
-					kIOAudioControlValueKey			= Initial value of the control - as an NSNumber
-
-				Optional entries:
-					kIOAudioControlIDKey			= Optional developer-defined ID field used to uniquely identify each control.
-
-				Level control-specific entries (see IOAudioDefines.h)
-					kIOAudioLevelControlMinValueKey	= Min value for the range for the level control
-					kIOAudioLevelControlMaxValueKey	= Max value for the range for the level control
-					kIOAudioLevelControlMinDBKey	= Min value in db for the range for the level control.  Value is a fixed-point 16.16 number
-													  represented as an integer in an NSNumber.
-					kIOAudioLevelControlMaxDBKey	= Max value in db for the range for the level control.  Value is a fixed-point 16.16 number
-													  represented as an integer in an NSNumber.
-				
-				For a more detailed description of these attributes and how IOAudioControls work, see the headerdoc for IOAudioControl, IOAudioLevelControl,
-				IOAudioToggleControl and IOAudioSelectorControl in the Kernel.framework.
-	@param		device	A paired Bluetooth audio device
-	@param		configDict	Configuration dictionary containing a description of the audio controls to be attached to the driver.  Passing NULL will result in default controls
-	@result		Returns kIOReturnSuccess if the audio driver was successfully created, error if hardware does not support SCO or device is not paired.
-*/
-extern IOReturn IOBluetoothAddSCOAudioDevice( IOBluetoothDeviceRef device, CFDictionaryRef configDict );
-
-/*!
-    @function	IOBluetoothRemoveSCOAudioDevice
-    @abstract   Removes a persistent audio driver for a device that had already been added using IOBluetoothAddAudioDevice().
-	@param		device	Bluetooth audio device to remove
-	@result		Returns kIOReturnSuccess if the audio driver was successfully removed.
-*/
-extern IOReturn IOBluetoothRemoveSCOAudioDevice( IOBluetoothDeviceRef device );
 
 #ifdef	__cplusplus
 	}

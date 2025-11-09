@@ -1,21 +1,19 @@
 //
 //  SCNParametricGeometry.h
 //
-//  Copyright 2012 Apple Inc. All rights reserved.
+//  Copyright (c) 2012-2013 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
-
 @class SCNGeometry;
-
 
 /*!
  @class SCNPlane
  @abstract SCNPlane represents a rectangle with controllable width and height. The plane has one visible side.
  */
 
-SCENEKIT_AVAILABLE(10_7, NA)
+SCENEKIT_CLASS_AVAILABLE(10_8, NA)
 @interface SCNPlane : SCNGeometry
 {
 @private
@@ -28,7 +26,7 @@ SCENEKIT_AVAILABLE(10_7, NA)
  @param width The width of the plane.
  @param height The height of the plane.
  */
-+ (id)planeWithWidth:(CGFloat)width height:(CGFloat)height;
++ (instancetype)planeWithWidth:(CGFloat)width height:(CGFloat)height;
 
 /*! 
  @property width
@@ -58,6 +56,20 @@ SCENEKIT_AVAILABLE(10_7, NA)
  */
 @property(nonatomic) NSInteger heightSegmentCount;
 
+/*!
+ @property cornerRadius
+ @abstract The corner radius. Animatable.
+ @discussion If the value is strictly less than 0, the geometry is empty. The default value is 0.
+ */
+@property(nonatomic) CGFloat cornerRadius SCENEKIT_AVAILABLE(10_9, NA);
+
+/*!
+ @property cornerSegmentCount
+ @abstract The number of subdivisions for the rounded corners. Animatable.
+ @discussion If the value is less than 1, the behavior is undefined. The default value is 10.
+ */
+@property(nonatomic) NSInteger cornerSegmentCount SCENEKIT_AVAILABLE(10_9, NA);
+
 @end
 
 
@@ -66,7 +78,7 @@ SCENEKIT_AVAILABLE(10_7, NA)
  @abstract SCNBox represents a box with rectangular sides and optional chamfers.
  */
 
-SCENEKIT_AVAILABLE(10_7, NA)
+SCENEKIT_CLASS_AVAILABLE(10_8, NA)
 @interface SCNBox : SCNGeometry
 {
 @private
@@ -81,7 +93,7 @@ SCENEKIT_AVAILABLE(10_7, NA)
  @param length The length of the box.
  @param chamferRadius The chamfer radius of the box.
  */
-+ (id)boxWithWidth:(CGFloat)width height:(CGFloat)height length:(CGFloat)length chamferRadius:(CGFloat)chamferRadius;
++ (instancetype)boxWithWidth:(CGFloat)width height:(CGFloat)height length:(CGFloat)length chamferRadius:(CGFloat)chamferRadius;
 
 /*! 
  @property width
@@ -147,7 +159,7 @@ SCENEKIT_AVAILABLE(10_7, NA)
  @abstract SCNPyramid represents a right pyramid with a rectangular base.
  */
 
-SCENEKIT_AVAILABLE(10_7, NA)
+SCENEKIT_CLASS_AVAILABLE(10_8, NA)
 @interface SCNPyramid : SCNGeometry
 {
 @private
@@ -161,7 +173,7 @@ SCENEKIT_AVAILABLE(10_7, NA)
  @param height The height of the pyramid.
  @param length The length of the pyramid.
  */
-+ (id)pyramidWithWidth:(CGFloat)width height:(CGFloat)height length:(CGFloat)length;
++ (instancetype)pyramidWithWidth:(CGFloat)width height:(CGFloat)height length:(CGFloat)length;
 
 /*! 
  @property width
@@ -213,7 +225,7 @@ SCENEKIT_AVAILABLE(10_7, NA)
  @abstract SCNSphere represents a sphere with controllable radius
  */
 
-SCENEKIT_AVAILABLE(10_7, NA)
+SCENEKIT_CLASS_AVAILABLE(10_8, NA)
 @interface SCNSphere : SCNGeometry
 {
 @private
@@ -225,7 +237,7 @@ SCENEKIT_AVAILABLE(10_7, NA)
  @abstract Creates and returns a sphere with given radius.
  @param radius The radius of the sphere.
  */
-+ (id)sphereWithRadius:(CGFloat)radius;
++ (instancetype)sphereWithRadius:(CGFloat)radius;
 
 /*! 
  @property radius
@@ -256,7 +268,7 @@ SCENEKIT_AVAILABLE(10_7, NA)
  @abstract SCNCylinder represents a cylinder with controllable height and radius.
  */
 
-SCENEKIT_AVAILABLE(10_7, NA)
+SCENEKIT_CLASS_AVAILABLE(10_8, NA)
 @interface SCNCylinder : SCNGeometry
 {
 @private
@@ -269,7 +281,7 @@ SCENEKIT_AVAILABLE(10_7, NA)
  @param radius The radius of the cylinder.
  @param height The height of the cylinder. 
  */
-+ (id)cylinderWithRadius:(CGFloat)radius height:(CGFloat)height;
++ (instancetype)cylinderWithRadius:(CGFloat)radius height:(CGFloat)height;
 
 /*! 
  @property radius
@@ -307,7 +319,7 @@ SCENEKIT_AVAILABLE(10_7, NA)
  @abstract SCNCone represents a cone with controllable height, top radius and bottom radius.
  */
 
-SCENEKIT_AVAILABLE(10_7, NA)
+SCENEKIT_CLASS_AVAILABLE(10_8, NA)
 @interface SCNCone : SCNGeometry
 {
 @private
@@ -321,7 +333,7 @@ SCENEKIT_AVAILABLE(10_7, NA)
  @param bottomRadius The radius at the bottom of the cone.
  @param height The height of the cone.
  */
-+ (id)coneWithTopRadius:(CGFloat)topRadius bottomRadius:(CGFloat)bottomRadius height:(CGFloat)height;
++ (instancetype)coneWithTopRadius:(CGFloat)topRadius bottomRadius:(CGFloat)bottomRadius height:(CGFloat)height;
 
 /*! 
  @property topRadius
@@ -366,7 +378,7 @@ SCENEKIT_AVAILABLE(10_7, NA)
  @abstract SCNTube represents a tube with controllable height, inner radius and outer radius.
  */
 
-SCENEKIT_AVAILABLE(10_7, NA)
+SCENEKIT_CLASS_AVAILABLE(10_8, NA)
 @interface SCNTube : SCNGeometry
 {
 @private
@@ -380,7 +392,7 @@ SCENEKIT_AVAILABLE(10_7, NA)
  @param outerRadius The outer radius of the tube.
  @param height The height of the tube.
  */
-+ (id)tubeWithInnerRadius:(CGFloat)innerRadius outerRadius:(CGFloat)outerRadius height:(CGFloat)height;
++ (instancetype)tubeWithInnerRadius:(CGFloat)innerRadius outerRadius:(CGFloat)outerRadius height:(CGFloat)height;
 
 /*! 
  @property innerRadius
@@ -425,7 +437,7 @@ SCENEKIT_AVAILABLE(10_7, NA)
  @abstract SCNCapsule represents a capsule with controllable height and cap radius.
  */
 
-SCENEKIT_AVAILABLE(10_7, NA)
+SCENEKIT_CLASS_AVAILABLE(10_8, NA)
 @interface SCNCapsule : SCNGeometry
 {
 @private
@@ -438,7 +450,7 @@ SCENEKIT_AVAILABLE(10_7, NA)
  @param capRadius The radius of the capsule.
  @param height The height of the capsule.
  */
-+ (id)capsuleWithCapRadius:(CGFloat)capRadius height:(CGFloat)height;
++ (instancetype)capsuleWithCapRadius:(CGFloat)capRadius height:(CGFloat)height;
 
 /*! 
  @property capRadius
@@ -483,7 +495,7 @@ SCENEKIT_AVAILABLE(10_7, NA)
  @abstract SCNTorus represents a torus with controllable ring radius and pipe radius.
  */
 
-SCENEKIT_AVAILABLE(10_7, NA)
+SCENEKIT_CLASS_AVAILABLE(10_8, NA)
 @interface SCNTorus : SCNGeometry
 {
 @private
@@ -496,7 +508,7 @@ SCENEKIT_AVAILABLE(10_7, NA)
  @param ringRadius The radius of the ring.
  @param pipeRadius The radius of the pipe.
  */
-+ (id)torusWithRingRadius:(CGFloat)ringRadius pipeRadius:(CGFloat)pipeRadius;
++ (instancetype)torusWithRingRadius:(CGFloat)ringRadius pipeRadius:(CGFloat)pipeRadius;
 
 /*! 
  @property ringRadius
@@ -534,7 +546,7 @@ SCENEKIT_AVAILABLE(10_7, NA)
  @abstract SCNFloor represents an infinite plane geometry. 
  */
 
-SCENEKIT_AVAILABLE(10_7, NA)
+SCENEKIT_CLASS_AVAILABLE(10_8, NA)
 @interface SCNFloor : SCNGeometry 
 {
 @private
@@ -546,7 +558,7 @@ SCENEKIT_AVAILABLE(10_7, NA)
  @abstract Creates and returns a floor.
  @discussion A floor is an infinite plane.
  */
-+ (id)floor;
++ (instancetype)floor;
 
 /*! 
  @property reflectivity
@@ -576,7 +588,7 @@ SCENEKIT_AVAILABLE(10_7, NA)
  @abstract SCNText represents a block of text that has been extruded
  */
 
-SCENEKIT_AVAILABLE(10_7, NA)
+SCENEKIT_CLASS_AVAILABLE(10_8, NA)
 @interface SCNText : SCNGeometry 
 {
 @private
@@ -589,7 +601,7 @@ SCENEKIT_AVAILABLE(10_7, NA)
  @param string The text to be represented.
  @param extrusionDepth The extrusion depth.
  */
-+ (id)textWithString:(id)string extrusionDepth:(CGFloat)extrusionDepth;
++ (instancetype)textWithString:(id)string extrusionDepth:(CGFloat)extrusionDepth;
 
 /*! 
  @property extrusionDepth
@@ -607,14 +619,10 @@ SCENEKIT_AVAILABLE(10_7, NA)
 
 /*! 
  @property font
- @abstract The font used to represent the text. (NSFont on OS X / UIFont on iOS)
+ @abstract The font used to represent the text.
  @discussion The font property is only used when the string property is not an NSAttributedString. The default value is Helvetica size 36.
  */
-#if TARGET_OS_IPHONE
-@property(nonatomic, retain) UIFont *font;
-#else
 @property(nonatomic, retain) NSFont *font;
-#endif
 
 /*!
  @property wrapped
@@ -647,7 +655,6 @@ SCENEKIT_AVAILABLE(10_7, NA)
  @property alignmentMode
  @abstract Determines how individual lines of text are horizontally aligned within the bounds.
  @discussion For the text to be aligned you first need to set its bounds, otherwise the text is not aligned. The default value is kCAAlignmentNatural. See alignments in CATextLayer.h.
-
  */
 @property(nonatomic, copy) NSString *alignmentMode;
 
@@ -663,7 +670,83 @@ SCENEKIT_AVAILABLE(10_7, NA)
  @abstract The number of chamfer subdivisions. Animatable.
  @discussion If the value is less than 1, the behavior is undefined. The default value is 10.
  */
-@property(nonatomic) NSInteger chamferSegmentCount;
+@property(nonatomic) NSInteger chamferSegmentCount NS_DEPRECATED(10_8, 10_9, NA, NA);
+
+/*!
+ @property chamferProfile
+ @abstract Describes the profile used to when "chamferRadius" is not nil. When "chamferProfile" is nil we fallback on a path representing a quadrant.
+ @discussion The profile should be a 2D curve beginning at (0,1) and ending at (1,0). The "flatness" property is also used to flatten this path. The default value is nil.
+ */
+@property(nonatomic, copy) NSBezierPath *chamferProfile SCENEKIT_AVAILABLE(10_9, NA);
+
+/*!
+ @property flatness
+ @abstract Specifies the accuracy (or smoothness) with which fonts are rendered.
+ @discussion Smaller numbers give smoother curves at the expense of more computation and heavier geometries in terms of vertices. The default value is 0.6, which yields smooth curves.
+ */
+@property(nonatomic) CGFloat flatness SCENEKIT_AVAILABLE(10_9, NA);
 
 @end
 
+/*!
+ @class SCNShape
+ @abstract SCNShape represents a 2D shape (cubic Bezier spline) than can be extruded.
+ */
+
+typedef NS_ENUM(NSInteger, SCNChamferMode) {
+    SCNChamferModeBoth,
+    SCNChamferModeFront,
+    SCNChamferModeBack
+} NS_ENUM_AVAILABLE(10_9, NA);
+
+SCENEKIT_CLASS_AVAILABLE(10_9, NA)
+@interface SCNShape : SCNGeometry
+{
+@private
+	id _reserved;
+}
+
+/*!
+ @method shapeWithPath:extrusionDepth:
+ @abstract Creates and returns a 3D representation of the given shape with the given extrusion depth.
+ @param path The cubic Bezier spline to extrude.
+ @param extrusionDepth The extrusion depth.
+ */
++ (instancetype)shapeWithPath:(NSBezierPath *)path extrusionDepth:(CGFloat)extrusionDepth;
+
+/*!
+ @property path
+ @abstract The path defining the shape to be rendered.
+ @discussion The path defines the outline of the shape. The path is filled using the even-odd rule. If the path is self-intersecting, the behavior is undefined.
+ */
+@property(nonatomic, copy) NSBezierPath *path;
+
+/*!
+ @property extrusionDepth
+ @abstract The extrusion depth. Animatable.
+ @discussion If the value is 0, we get a mono-sided, 2D version of the shape.
+ */
+@property(nonatomic) CGFloat extrusionDepth;
+
+/*!
+ @property chamferMode
+ @abstract The sides of the text that are chamfered.
+ @discussion The default value is SCNChamferModeBoth.
+ */
+@property(nonatomic) SCNChamferMode chamferMode;
+
+/*!
+ @property chamferRadius
+ @abstract The chamfer radius. Animatable.
+ @discussion Values are clamped to the range [0, extrusionDepth / 2]. The default value is 0.
+ */
+@property(nonatomic) CGFloat chamferRadius;
+
+/*!
+ @property chamferProfile
+ @abstract Describes the profile used to when "chamferRadius" is not nil. When "chamferProfile" is nil we fallback on a path representing a quadrant.
+ @discussion The profile should be a 2D curve beginning at (0,1) and ending at (1,0). The "flatness" property is also used to flatten this path. The default value is nil.
+ */
+@property(nonatomic, copy) NSBezierPath *chamferProfile;
+
+@end

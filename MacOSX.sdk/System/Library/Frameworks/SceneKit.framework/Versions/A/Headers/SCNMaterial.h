@@ -1,12 +1,12 @@
 //
 //  SCNMaterial.h
 //
-//  Copyright 2012 Apple Inc. All rights reserved.
+//  Copyright (c) 2012-2013 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <SceneKit/SCNAnimation.h>
-
+#import <SceneKit/SCNShadable.h>
 
 /*
  Constants for lightingModel
@@ -76,39 +76,38 @@
      <diffuse> — The 'diffuse' property of the SCNMaterial instance
  */
 
-SCENEKIT_EXTERN NSString *const SCNLightingModelPhong SCENEKIT_AVAILABLE(10_7, NA);
-SCENEKIT_EXTERN NSString *const SCNLightingModelBlinn SCENEKIT_AVAILABLE(10_7, NA);
-SCENEKIT_EXTERN NSString *const SCNLightingModelLambert SCENEKIT_AVAILABLE(10_7, NA);
-SCENEKIT_EXTERN NSString *const SCNLightingModelConstant SCENEKIT_AVAILABLE(10_7, NA);
+SCN_EXTERN NSString * const SCNLightingModelPhong;
+SCN_EXTERN NSString * const SCNLightingModelBlinn;
+SCN_EXTERN NSString * const SCNLightingModelLambert;
+SCN_EXTERN NSString * const SCNLightingModelConstant;
 
 //key for setSemantic:forSymbol:options: options
-SCENEKIT_EXTERN NSString *const SCNProgramMappingChannelKey SCENEKIT_AVAILABLE(10_7, NA);  /* This key is optional and may be used in association with the SCNGeometrySourceSemanticTexcoord semantic. It allows to associates a mapping channel from the geometry to a symbol from the program source code. The mapping channel allows to plug programs that work with multiple texture coordinates. The associated value must be a NSNumber(integer) greater than zero. */
+SCN_EXTERN NSString * const SCNProgramMappingChannelKey;  /* This key is optional and may be used in association with the SCNGeometrySourceSemanticTexcoord semantic. It allows to associates a mapping channel from the geometry to a symbol from the program source code. The mapping channel allows to plug programs that work with multiple texture coordinates. The associated value must be a NSNumber(integer) greater than zero. */
 
 //face culling modes
-typedef enum
-{
+typedef NS_ENUM(NSInteger, SCNCullMode) {
 	SCNCullBack  = 0,
 	SCNCullFront = 1,
-} SCNCullMode;
+};
 
 //transparency modes
-typedef enum
-{
+typedef NS_ENUM(NSInteger, SCNTransparencyMode) {
 	SCNTransparencyModeAOne    = 0, 
 	SCNTransparencyModeRGBZero = 1, 
-} SCNTransparencyMode;
+};
 
 @class SCNMaterialProperty;
 @class SCNProgram;
 @protocol SCNProgramDelegate;
+@protocol SCNShadable;
 
 /*!
  @class SCNMaterial
  @abstract A SCNMaterial determines how a geometry is rendered. It encapsulates the colors and textures that define the appearance of 3d geometries.
  */
 
-SCENEKIT_AVAILABLE(10_7, NA)
-@interface SCNMaterial : NSObject <SCNAnimatable, NSCopying>
+SCENEKIT_CLASS_AVAILABLE(10_8, NA)
+@interface SCNMaterial : NSObject <SCNAnimatable, SCNShadable, NSCopying>
 {	
 @private
 	id _reserved;
@@ -118,7 +117,7 @@ SCENEKIT_AVAILABLE(10_7, NA)
  @method material
  @abstract Creates and initialize a material instance.
  */
-+ (SCNMaterial *)material;
++ (instancetype)material;
 
 /*! 
  @property name
@@ -217,7 +216,7 @@ SCENEKIT_AVAILABLE(10_7, NA)
 
 /*! 
  @property transparencyMode
- @abstract Determines the transparency mode of the receiver. See above for the transparency modes. Default to SCNTransparencyModeAOne.
+ @abstract Determines the transparency mode of the receiver. See above for the transparency modes. Defaults to SCNTransparencyModeAOne.
  @discussion SCNTransparencyModeAOne takes the transparency information from the color's alpha channel. The value 1.0 is opaque. 
  SCNTransparencyModeRGBZero takes the transparency information from the color's red, green, and blue channels. The value 0.0 is opaque, with each channel modulated independently. With SCNTransparencyModeRGBZero, the alpha value of the transparent property is ignored.
  */
@@ -235,113 +234,19 @@ SCENEKIT_AVAILABLE(10_7, NA)
  */
 @property(nonatomic) BOOL writesToDepthBuffer;
 
-/*! 
- @property program
- @abstract Specifies a custom program used to render this material.
+/*!
+ @property readsFromDepthBuffer
+ @abstract Determines whether the receiver reads from the depth buffer when rendered. Defaults to YES.
  */
-@property(nonatomic, retain) SCNProgram *program;
-
-@end
-
-/*! @class SCNProgram
-    @abstract A SCNProgram lets you specify custom shaders to use when rendering materials.
- */
-
-SCENEKIT_AVAILABLE(10_7, NA)
-@interface SCNProgram : NSObject <NSCopying>
-{	
-@private
-	id _reserved;
-}
-
-/*! 
- @method program
- @abstract Creates and initialize a program instance.
- */
-+ (SCNProgram *) program;
-
-/*! 
- @property vertexShader
- @abstract Determines the receiver's vertex shader.
- */
-@property(nonatomic, copy) NSString *vertexShader;
-
-/*! 
- @property fragmentShader
- @abstract Determines the receiver's fragment shader.
- */
-@property(nonatomic, copy) NSString *fragmentShader;
-
-/*! 
- @method		setSemantic:forSymbol:
- @abstract		Associates a SceneKit semantic to a symbol. 
- @param			semantic from SceneKit engine to be used.
- @param			symbol from program source code.
- @param        options an optional dictionary. See the available keys above.
- @discussion	Associates semantics handled by SceneKit runtime to a symbol from the program.
-				supported semantics for program attributes are: SCNGeometrySourceSemanticVertex,SCNGeometrySourceSemanticNormal,SCNGeometrySourceSemanticColor,SCNGeometrySourceSemanticTexcoord 
-				and the following for program uniforms: SCNModelViewProjectionTransform,SCNModelViewTransform,SCNModelTransform,SCNViewTransform,SCNProjectionTransform,SCNNormalTransform
- */
-- (void)setSemantic:(NSString*)semantic forSymbol:(NSString*)symbol options:(NSDictionary *)options;
-
-/*! 
- @method semanticForSymbol:
- @abstract retrieves the SceneKit runtime semantic associated to a symbol from the program source code.
- @param symbol from program source code
- */ 
-- (NSString*)semanticForSymbol:(NSString*)symbol;
-
-/*! 
- @property delegate
- @abstract Determines the receiver's delegate
- */
-@property(nonatomic, assign) id <SCNProgramDelegate> delegate;
-
-@end
+@property(nonatomic) BOOL readsFromDepthBuffer SCENEKIT_AVAILABLE(10_9, NA);
 
 /*!
- @protocol SCNProgramDelegate
- @abstract The SCNProgramDelegate protocol declares the methods that an instance of SCNProgram invokes to delegate the binding of parameters.
+ @property fresnelExponent
+ @abstract Specifies the receiver's fresnel exponent value. Defaults to 0.0. Animatable.
+ @discussion The effect of the reflectivity property is modulated by this property. The fresnelExponent changes the exponent of the reflectance. The bigger the exponent, the more concentrated the reflection is around the edges.
  */
-@protocol SCNProgramDelegate <NSObject>
+@property(nonatomic) CGFloat fresnelExponent SCENEKIT_AVAILABLE(10_9, NA);
 
-@optional
-/*! 
- @method program:withID:bindValueForSymbol:atLocation:renderer:
- @abstract Invoked on the delegate to let it bind program values and/or also bind associated graphics resources (such as textures).
- @param program The program to bind values for.
- @param symbol The name of the symbol to bind a value for.
- @param location The location of the symbol within the program object to be modified.
- @param programID The program object.
- @param renderer The renderer that is currently rendering the scene.
- */
-- (BOOL)program:(SCNProgram*)program bindValueForSymbol:(NSString*)symbol atLocation:(unsigned int)location programID:(unsigned int)programID renderer:(SCNRenderer*)renderer;
-
-/*! 
- @method program:withID:bindValueForSymbol:atLocation:renderer:
- @abstract Invoked on the delegate to let it unbind program values and/or also unbind associated graphic resources (such as textures).
- @param program The program to unbind values for.
- @param symbol The name of the symbol to unbind a value for.
- @param location The location of the symbol within the program object to be modified.
- @param programID The program object.
- @param renderer The renderer that is currently rendering the scene.
- */
-- (void)program:(SCNProgram*)program unbindValueForSymbol:(NSString*)symbol atLocation:(unsigned int)location programID:(unsigned int)programID renderer:(SCNRenderer*)renderer;
-
-/*! 
- @method handleError
- @abstract Invoked on the delegate whenever a compilation error occurs.
- @discussion Error domain is SCNErrorDomain.
- @param program The program that generated a compilation error.
- @param error The compilation error.
- */
-- (void)program:(SCNProgram*)program handleError:(NSError*)error;
-
-/*! 
- @method programIsOpaque
- @abstract The delegate should implement this mehod and return NO if the fragments generated by the program are not opaque.
- @param program The queried program.
- */
-- (BOOL)programIsOpaque:(SCNProgram*)program;
 
 @end
+

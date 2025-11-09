@@ -3,8 +3,6 @@
  
      Contains:   Text Services Manager Interfaces.
  
-     Version:    HIToolbox-626.1~1
- 
      Copyright:  © 1991-2008 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
@@ -35,12 +33,6 @@
 #ifndef __CARBONEVENTS__
 #include <HIToolbox/CarbonEvents.h>
 #endif
-
-#ifndef __ATSUNICODE__
-#include <QD/ATSUnicode.h>
-#endif
-
-
 
 #include <AvailabilityMacros.h>
 

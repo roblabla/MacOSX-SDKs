@@ -1,8 +1,8 @@
 /*
- * Copyright (c) 2000-2012 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
- * 
+ *
  * This file contains Original Code and/or Modifications of Original Code
  * as defined in and that are subject to the Apple Public Source License
  * Version 2.0 (the 'License'). You may not use this file except in
@@ -11,10 +11,10 @@
  * unlawful or unlicensed copies of an Apple operating system, or to
  * circumvent, violate, or enable the circumvention or violation of, any
  * terms of an Apple operating system software license agreement.
- * 
+ *
  * Please obtain a copy of the License at
  * http://www.opensource.apple.com/apsl/ and read it before using this file.
- * 
+ *
  * The Original Code and all software distributed under the License are
  * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
@@ -22,13 +22,9 @@
  * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
  * Please see the License for the specific language governing rights and
  * limitations under the License.
- * 
+ *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_END@
  */
-
-/*	$FreeBSD: src/sys/netinet6/nd6.h,v 1.2.2.3 2001/08/13 01:10:49 simokawa Exp $	*/
-/*	$KAME: nd6.h,v 1.55 2001/04/27 15:09:49 itojun Exp $	*/
-
 /*
  * Copyright (C) 1995, 1996, 1997, and 1998 WIDE Project.
  * All rights reserved.
@@ -59,19 +55,19 @@
  */
 
 #ifndef _NETINET6_ND6_H_
-#define _NETINET6_ND6_H_
+#define	_NETINET6_ND6_H_
 #include <sys/appleapiopts.h>
 
 /* see net/route.h, or net/if_inarp.h */
 #ifndef RTF_ANNOUNCE
-#define RTF_ANNOUNCE	RTF_PROTO2
+#define	RTF_ANNOUNCE	RTF_PROTO2
 #endif
 
 #include <sys/queue.h>
 
 
-#define ND6_LLINFO_PURGE	-3
-#define ND6_LLINFO_NOSTATE	-2
+#define	ND6_LLINFO_PURGE	-3
+#define	ND6_LLINFO_NOSTATE	-2
 /*
  * We don't need the WAITDELETE state any more, but we keep the definition
  * in a comment line instead of removing it. This is necessary to avoid
@@ -79,12 +75,12 @@
  * affect backward compatibility with old applications.
  * (20000711 jinmei@kame.net)
  */
-/* #define ND6_LLINFO_WAITDELETE	-1 */
-#define ND6_LLINFO_INCOMPLETE	0
-#define ND6_LLINFO_REACHABLE	1
-#define ND6_LLINFO_STALE	2
-#define ND6_LLINFO_DELAY	3
-#define ND6_LLINFO_PROBE	4
+/* #define	ND6_LLINFO_WAITDELETE	-1 */
+#define	ND6_LLINFO_INCOMPLETE	0
+#define	ND6_LLINFO_REACHABLE	1
+#define	ND6_LLINFO_STALE	2
+#define	ND6_LLINFO_DELAY	3
+#define	ND6_LLINFO_PROBE	4
 
 
 struct nd_ifinfo {
@@ -104,22 +100,22 @@ struct nd_ifinfo {
 };
 
 
-#define ND6_IFF_PERFORMNUD		0x1
-#define ND6_IFF_PROXY_PREFIXES		0x20
-#define ND6_IFF_IGNORE_NA		0x40
+#define	ND6_IFF_PERFORMNUD		0x1
+#define	ND6_IFF_PROXY_PREFIXES		0x20
+#define	ND6_IFF_IGNORE_NA		0x40
 
 struct in6_nbrinfo {
 	char ifname[IFNAMSIZ];	/* if name, e.g. "en0" */
 	struct in6_addr addr;	/* IPv6 address of the neighbor */
-	long	asked;		/* number of queries already sent for this addr */
+	long	asked;		/* # of queries already sent for this addr */
 	int	isrouter;	/* if it acts as a router */
 	int	state;		/* reachability state */
 	int	expire;		/* lifetime for NDP state transition */
 };
 
 
-#define DRLSTSIZ 10
-#define PRLSTSIZ 10
+#define	DRLSTSIZ 10
+#define	PRLSTSIZ 10
 
 struct	in6_drlist {
 	char ifname[IFNAMSIZ];
@@ -206,26 +202,28 @@ struct	in6_ndifreq {
 	u_long ifindex;
 };
 
-#define MAX_RTR_SOLICITATION_DELAY	1	/* 1sec */
-#define RTR_SOLICITATION_INTERVAL	4	/* 4sec */
+#define	MAX_RTR_SOLICITATION_DELAY	1	/* 1sec */
+#define	RTR_SOLICITATION_INTERVAL	4	/* 4sec */
 
 
 /* Prefix status */
-#define NDPRF_ONLINK		0x1
-#define NDPRF_DETACHED		0x2
-#define NDPRF_STATIC		0x100
-#define NDPRF_IFSCOPE		0x1000
-#define NDPRF_PRPROXY		0x2000
+#define	NDPRF_ONLINK		0x1
+#define	NDPRF_DETACHED		0x2
+#define	NDPRF_STATIC		0x100
+#define	NDPRF_IFSCOPE		0x1000
+#define	NDPRF_PRPROXY		0x2000
 
 /* protocol constants */
-#define MAX_RTR_SOLICITATION_DELAY	1	/*1sec*/
-#define RTR_SOLICITATION_INTERVAL	4	/*4sec*/
-#define MAX_RTR_SOLICITATIONS		3
+#define	MAX_RTR_SOLICITATION_DELAY	1	/* 1sec */
+#define	RTR_SOLICITATION_INTERVAL	4	/* 4sec */
+#define	MAX_RTR_SOLICITATIONS		3
 
-#define ND6_INFINITE_LIFETIME		0xffffffff
-#define ND6_MAX_LIFETIME		0x7fffffff
-
-
+#define	ND6_INFINITE_LIFETIME		0xffffffff
+#define	ND6_MAX_LIFETIME		0x7fffffff
 
 
+
+
+
+/* nd6_send.c */
 #endif /* _NETINET6_ND6_H_ */

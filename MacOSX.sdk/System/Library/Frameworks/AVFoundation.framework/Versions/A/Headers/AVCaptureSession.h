@@ -3,12 +3,13 @@
 
 	Framework:  AVFoundation
 
-	Copyright 2010-2012 Apple Inc. All rights reserved.
+	Copyright 2010-2013 Apple Inc. All rights reserved.
 */
 
 #import <AVFoundation/AVBase.h>
 #import <Foundation/Foundation.h>
 #import <CoreMedia/CMFormatDescription.h>
+#import <CoreMedia/CMSync.h>
 
 /*!
  @constant AVCaptureSessionRuntimeErrorNotification
@@ -107,13 +108,12 @@ AVF_EXPORT NSString *const AVCaptureSessionInterruptionEndedNotification NS_AVAI
  @constant AVCaptureVideoOrientationLandscapeLeft
     Indicates that video should be oriented horizontally, home button on the left.
 */
-enum {
+typedef NS_ENUM(NSInteger, AVCaptureVideoOrientation) {
     AVCaptureVideoOrientationPortrait           = 1,
     AVCaptureVideoOrientationPortraitUpsideDown = 2,
     AVCaptureVideoOrientationLandscapeRight     = 3,
     AVCaptureVideoOrientationLandscapeLeft      = 4,
-};
-typedef NSInteger AVCaptureVideoOrientation;
+} NS_AVAILABLE(10_7, 4_0);
 
 /*!
  @constant AVCaptureSessionPresetPhoto
@@ -236,6 +236,8 @@ AVF_EXPORT NSString *const AVCaptureSessionPreset1280x720 NS_AVAILABLE(10_7, 4_0
 */
 AVF_EXPORT NSString *const AVCaptureSessionPreset1920x1080 NS_AVAILABLE(NA, 5_0);
 
+#endif // TARGET_OS_IPHONE
+
 /*!
 @constant AVCaptureSessionPresetiFrame960x540
 @abstract
@@ -246,7 +248,7 @@ AVF_EXPORT NSString *const AVCaptureSessionPreset1920x1080 NS_AVAILABLE(NA, 5_0)
     to achieve 960x540 quality iFrame H.264 video at ~30 Mbits/sec with AAC audio.  QuickTime
     movies captured in iFrame format are optimal for editing applications.
 */
-AVF_EXPORT NSString *const AVCaptureSessionPresetiFrame960x540 NS_AVAILABLE(NA, 5_0);
+AVF_EXPORT NSString *const AVCaptureSessionPresetiFrame960x540 NS_AVAILABLE(10_9, 5_0);
 
 /*!
 @constant AVCaptureSessionPresetiFrame1280x720
@@ -258,9 +260,7 @@ AVF_EXPORT NSString *const AVCaptureSessionPresetiFrame960x540 NS_AVAILABLE(NA, 
     to achieve 1280x720 quality iFrame H.264 video at ~40 Mbits/sec with AAC audio.  QuickTime
     movies captured in iFrame format are optimal for editing applications.
 */
-AVF_EXPORT NSString *const AVCaptureSessionPresetiFrame1280x720 NS_AVAILABLE(NA, 5_0);
-
-#endif // TARGET_OS_IPHONE
+AVF_EXPORT NSString *const AVCaptureSessionPresetiFrame1280x720 NS_AVAILABLE(10_9, 5_0);
 
 @class AVCaptureInput;
 @class AVCaptureOutput;
@@ -596,6 +596,27 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 */
 - (void)stopRunning;
 
+/*!
+ @property masterClock
+ @abstract
+	Provides the master clock being used for output synchronization.
+ @discussion
+	The masterClock is readonly. Use masterClock to synchronize AVCaptureOutput data with external data sources (e.g motion samples). 
+	All capture output sample buffer timestamps are on the masterClock timebase.
+	
+	For example, if you want to reverse synchronize the output timestamps to the original timestamps, you can do the following:
+	In captureOutput:didOutputSampleBuffer:fromConnection:
+ 
+	AVCaptureInputPort *port = [[connection inputPorts] objectAtIndex:0];
+	CMClockRef originalClock = [port clock];
+ 
+	CMTime syncedPTS = CMSampleBufferGetPresentationTime( sampleBuffer );
+	CMTime originalPTS = CMSyncConvertTime( syncedPTS, [session masterClock], originalClock );
+ 
+	This property is key-value observable.
+ */
+@property(nonatomic, readonly) __attribute__((NSObject)) CMClockRef masterClock NS_AVAILABLE(10_9, 7_0);
+
 @end
 
 
@@ -615,13 +636,12 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  @constant AVVideoFieldModeDeinterlace
     Indicates that top and bottom video fields in interlaced content should be deinterlaced.
 */
-enum {
+typedef NS_ENUM(NSInteger, AVVideoFieldMode) {
     AVVideoFieldModeBoth        = 0,
     AVVideoFieldModeTopOnly     = 1,
     AVVideoFieldModeBottomOnly  = 2,
     AVVideoFieldModeDeinterlace = 3,
-};
-typedef NSInteger AVVideoFieldMode;
+} NS_AVAILABLE(10_7, NA);
 
 
 @class AVCaptureAudioChannel;
@@ -780,8 +800,6 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 */
 @property(nonatomic, readonly) AVCaptureOutput *output;
 
-#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
-
 /*!
  @property videoPreviewLayer
  @abstract
@@ -793,9 +811,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
     videoPreviewLayer remains static for the life of the object. Note that a connection can either
     be to an output or a video preview layer, but never to both.
 */
-@property(nonatomic, readonly) AVCaptureVideoPreviewLayer *videoPreviewLayer NS_AVAILABLE(10_7, NA);
-
-#endif // (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+@property(nonatomic, readonly) AVCaptureVideoPreviewLayer *videoPreviewLayer NS_AVAILABLE(10_7, 6_0);
 
 /*!
  @property enabled
@@ -861,8 +877,6 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 */
 @property(nonatomic, getter=isVideoMirrored) BOOL videoMirrored;
 
-#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
-
 /*!
  @property automaticallyAdjustsVideoMirroring
  @abstract
@@ -875,9 +889,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
     depending on the configuration of the session, for example after switching to a different AVCaptureDeviceInput.
     The default value is YES.
 */
-@property (nonatomic) BOOL automaticallyAdjustsVideoMirroring NS_AVAILABLE(10_7, NA);
-
-#endif // (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+@property (nonatomic) BOOL automaticallyAdjustsVideoMirroring NS_AVAILABLE(10_7, 6_0);
 
 /*!
  @property supportsVideoOrientation
@@ -961,8 +973,6 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 */
 @property(nonatomic) CMTime videoMinFrameDuration NS_AVAILABLE(10_7, 5_0);
 
-#if TARGET_OS_IPHONE
-
 /*!
  @property supportsVideoMaxFrameDuration
  @abstract
@@ -973,7 +983,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
     video.  In such connections, the videoMaxFrameDuration property may only be set if
     -isVideoMaxFrameDurationSupported returns YES.
 */
-@property(nonatomic, readonly, getter=isVideoMaxFrameDurationSupported) BOOL supportsVideoMaxFrameDuration NS_AVAILABLE(NA, 5_0);
+@property(nonatomic, readonly, getter=isVideoMaxFrameDurationSupported) BOOL supportsVideoMaxFrameDuration NS_AVAILABLE(10_9, 5_0);
 
 /*!
  @property videoMaxFrameDuration
@@ -986,9 +996,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
     the reciprocal of the minimum frame rate. A value of kCMTimeZero or kCMTimeInvalid indicates an unlimited minimum frame
     rate. The default value is kCMTimeInvalid.
 */
-@property(nonatomic) CMTime videoMaxFrameDuration NS_AVAILABLE(NA, 5_0);
-
-#endif // #if TARGET_OS_IPHONETARGET_OS_IPHONE
+@property(nonatomic) CMTime videoMaxFrameDuration NS_AVAILABLE(10_9, 5_0);
 
 /*!
  @property videoMaxScaleAndCropFactor
@@ -1016,6 +1024,52 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
     is scaled by the factor and center-cropped to its original dimensions.
 */
 @property(nonatomic) CGFloat videoScaleAndCropFactor NS_AVAILABLE_IOS(5_0);
+
+/*!
+ @property supportsVideoStabilization
+ @abstract
+    Indicates whether the connection supports video stabilization.
+ 
+ @discussion
+    This property is only applicable to AVCaptureConnection instances involving video.
+    In such connections, the -enablesVideoStabilizationWhenAvailable property may only be set if
+    -supportsVideoStabilization returns YES.
+*/
+@property(nonatomic, readonly, getter=isVideoStabilizationSupported) BOOL supportsVideoStabilization NS_AVAILABLE_IOS(6_0);
+
+/*!
+ @property videoStabilizationEnabled
+ @abstract
+    Indicates whether stabilization is currently being applied to video flowing through the receiver.
+ 
+ @discussion
+    This property is only applicable to AVCaptureConnection instances involving video.
+    On devices where the video stabilization feature is supported, only a subset of available source 
+    formats and resolutions may be available for stabilization.  The videoStabilizationEnabled 
+    property returns YES if video stabilization is currently in use.  This property is key-value
+    observable.
+*/
+@property(nonatomic, readonly, getter=isVideoStabilizationEnabled) BOOL videoStabilizationEnabled NS_AVAILABLE_IOS(6_0);
+
+/*!
+ @property enablesVideoStabilizationWhenAvailable;
+ @abstract
+    Indicates whether stabilization should be applied to video flowing through the receiver
+    when the feature is available.
+ 
+ @discussion
+    This property is only applicable to AVCaptureConnection instances involving video.
+    On devices where the video stabilization feature is supported, only a subset of available source 
+    formats and resolutions may be available for stabilization.  By setting the
+    enablesVideoStabilizationWhenAvailable property to YES, video flowing through the receiver
+    is stabilized when available.  Enabling video stabilization may introduce additional latency 
+    into the video capture pipeline.  Clients may key-value observe the videoStabilizationEnabled
+    property to know when stabilization is in use or not.  The default value is NO.
+    For apps linked before iOS 6.0, the default value is YES for a video connection attached to an 
+    AVCaptureMovieFileOutput instance.  For apps linked on or after iOS 6.0, the default value is
+    always NO.
+*/
+@property(nonatomic) BOOL enablesVideoStabilizationWhenAvailable NS_AVAILABLE_IOS(6_0);
 
 @end
 

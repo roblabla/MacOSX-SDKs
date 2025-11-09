@@ -1,5 +1,5 @@
 /*	NSRange.h
-	Copyright (c) 1994-2012, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2013, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSValue.h>
@@ -26,7 +26,7 @@ NS_INLINE NSUInteger NSMaxRange(NSRange range) {
 }
 
 NS_INLINE BOOL NSLocationInRange(NSUInteger loc, NSRange range) {
-    return (loc - range.location < range.length);
+    return (!(loc < range.location) && (loc - range.location) < range.length) ? YES : NO;
 }
 
 NS_INLINE BOOL NSEqualRanges(NSRange range1, NSRange range2) {

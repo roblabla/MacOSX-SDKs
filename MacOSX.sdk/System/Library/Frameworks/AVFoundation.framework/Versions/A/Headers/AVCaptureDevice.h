@@ -3,7 +3,7 @@
  
 	Framework:  AVFoundation
  
-	Copyright 2010-2012 Apple Inc. All rights reserved.
+	Copyright 2010-2013 Apple Inc. All rights reserved.
 */
 
 #import <AVFoundation/AVBase.h>
@@ -75,6 +75,7 @@ AVF_EXPORT NSString *const AVCaptureDeviceSubjectAreaDidChangeNotification NS_AV
 NS_CLASS_AVAILABLE(10_7, 4_0)
 @interface AVCaptureDevice : NSObject
 {
+@private
     AVCaptureDeviceInternal *_internal;
 }
 
@@ -182,6 +183,17 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 @property(nonatomic, readonly) NSString *localizedName;
 
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+
+/*!
+ @property manufacturer
+ @abstract
+    The human-readable manufacturer name for the receiver.
+
+ @discussion
+    This property can be used to identify capture devices from a particular manufacturer.  All Apple devices return "Apple Inc.".
+    Devices from third party manufacturers may return an empty string.
+*/
+@property(nonatomic, readonly) NSString *manufacturer NS_AVAILABLE(10_9, NA);
 
 /*!
  @property transportType
@@ -356,6 +368,23 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 @property(nonatomic) CMTime activeVideoMinFrameDuration NS_AVAILABLE(10_7, NA);
 
 /*!
+ @property activeVideoMaxFrameDuration
+ @abstract
+    A property indicating the receiver's current active maximum frame duration (the reciprocal of its min frame rate).
+
+ @discussion
+    An AVCaptureDevice's activeVideoMaxFrameDuration property is the reciprocal of its active
+    minimum frame rate.  To limit the min frame rate of the capture device, clients may
+    set this property to a value supported by the receiver's activeFormat (see AVCaptureDeviceFormat's 
+    videoSupportedFrameRateRanges property).  -setActiveVideoMaxFrameDuration: throws an NSInvalidArgumentException
+    if set to an unsupported value.  -setActiveVideoMaxFrameDuration: throws an NSGenericException 
+    if called without first obtaining exclusive access to the receiver using lockForConfiguration:.
+    Clients can observe automatic changes to the receiver's activeVideoMaxFrameDuration by key value 
+    observing this property.
+*/
+@property(nonatomic) CMTime activeVideoMaxFrameDuration NS_AVAILABLE(10_9, NA);
+
+/*!
  @property inputSources
  @abstract
     An array of AVCaptureDeviceInputSource objects supported by the receiver.
@@ -399,12 +428,11 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  @constant AVCaptureDevicePositionFront
     Indicates that the device is physically located on the front of the system hardware.
 */
-enum {
+typedef NS_ENUM(NSInteger, AVCaptureDevicePosition) {
 	AVCaptureDevicePositionUnspecified         = 0,
 	AVCaptureDevicePositionBack                = 1,
 	AVCaptureDevicePositionFront               = 2
-};
-typedef NSInteger AVCaptureDevicePosition;
+} NS_AVAILABLE(10_7, 4_0);
 
 @interface AVCaptureDevice (AVCaptureDevicePosition)
 
@@ -433,12 +461,11 @@ typedef NSInteger AVCaptureDevicePosition;
  @constant AVCaptureFlashModeAuto
     Indicates that the flash should be used automatically depending on ambient light conditions.
 */
-enum {
+typedef NS_ENUM(NSInteger, AVCaptureFlashMode) {
 	AVCaptureFlashModeOff  = 0,
 	AVCaptureFlashModeOn   = 1,
 	AVCaptureFlashModeAuto = 2
-};
-typedef NSInteger AVCaptureFlashMode;
+} NS_AVAILABLE(10_7, 4_0);
 
 @interface AVCaptureDevice (AVCaptureDeviceFlash)
 
@@ -520,12 +547,19 @@ typedef NSInteger AVCaptureFlashMode;
  @constant AVCaptureTorchModeAuto
     Indicates that the torch should be used automatically depending on ambient light conditions.
 */
-enum {
+typedef NS_ENUM(NSInteger, AVCaptureTorchMode) {
 	AVCaptureTorchModeOff  = 0,
 	AVCaptureTorchModeOn   = 1,
 	AVCaptureTorchModeAuto = 2,
-};
-typedef NSInteger AVCaptureTorchMode;
+} NS_AVAILABLE(10_7, 4_0);
+
+/*!
+  @constant AVCaptureMaxAvailableTorchLevel
+    A special value that may be passed to -setTorchModeWithLevel:error: to set the torch to the
+    maximum level currently available. Under thermal duress, the maximum available torch level
+    may be less than 1.0.
+*/
+extern const float AVCaptureMaxAvailableTorchLevel;
 
 @interface AVCaptureDevice (AVCaptureDeviceTorch)
 
@@ -551,6 +585,19 @@ typedef NSInteger AVCaptureTorchMode;
     overheats and needs to cool off. This property is key-value observable.
 */
 @property(nonatomic, readonly, getter=isTorchAvailable) BOOL torchAvailable NS_AVAILABLE_IOS(5_0);
+
+/*!
+ @property torchActive
+ @abstract
+    Indicates whether the receiver's torch is currently active.
+ 
+ @discussion
+    The value of this property is a BOOL indicating whether the receiver's torch is 
+    currently active. If the current torchMode is AVCaptureTorchModeAuto and isTorchActive
+    is YES, the torch will illuminate once a recording starts (see AVCaptureOutput.h 
+    -startRecordingToOutputFileURL:recordingDelegate:). This property is key-value observable.
+*/
+@property(nonatomic, readonly, getter=isTorchActive) BOOL torchActive NS_AVAILABLE_IOS(6_0);
 
 /*!
  @property torchLevel
@@ -592,6 +639,23 @@ typedef NSInteger AVCaptureTorchMode;
 */
 @property(nonatomic) AVCaptureTorchMode torchMode;
 
+/*!
+ @property setTorchModeOnWithLevel:error:
+ @abstract
+    Sets the current mode of the receiver's torch to AVCaptureTorchModeOn at the specified level.
+
+ @discussion
+    This method sets the torch mode to AVCaptureTorchModeOn at a specified level.  torchLevel must be 
+    a value between 0 and 1, or the special value AVCaptureMaxAvailableTorchLevel.  The specified value
+    may not be available if the iOS device is too hot. This method throws an NSInvalidArgumentException
+    if set to an unsupported level. If the specified level is valid, but unavailable, the method returns
+    NO with AVErrorTorchLevelUnavailable.  -setTorchModeOnWithLevel:error: throws an NSGenericException 
+    if called without first obtaining exclusive access to the receiver using lockForConfiguration:.
+    Clients can observe automatic changes to the receiver's torchMode by key value observing the torchMode 
+    property.
+*/
+- (BOOL)setTorchModeOnWithLevel:(float)torchLevel error:(NSError **)outError NS_AVAILABLE_IOS(6_0);
+
 @end
 
 /*!
@@ -606,12 +670,11 @@ typedef NSInteger AVCaptureTorchMode;
  @constant AVCaptureFocusModeContinuousAutoFocus
     Indicates that the device should automatically focus when needed.
 */
-enum {
+typedef NS_ENUM(NSInteger, AVCaptureFocusMode) {
 	AVCaptureFocusModeLocked              = 0,
 	AVCaptureFocusModeAutoFocus           = 1,
 	AVCaptureFocusModeContinuousAutoFocus = 2,
-};
-typedef NSInteger AVCaptureFocusMode;
+} NS_AVAILABLE(10_7, 4_0);
 
 @interface AVCaptureDevice (AVCaptureDeviceFocus)
 
@@ -661,8 +724,8 @@ typedef NSInteger AVCaptureFocusMode;
 
  @discussion
     The value of this property is a CGPoint that determines the receiver's focus point of interest, if it has one. A
-    value of (0,0) indicates that the camera should focus on the bottom left corner of the image, while a value of (1,1)
-    indicates that it should focus on the top right. The default value is (0.5,0.5).  -setFocusPointOfInterest:
+    value of (0,0) indicates that the camera should focus on the top left corner of the image, while a value of (1,1)
+    indicates that it should focus on the bottom right. The default value is (0.5,0.5).  -setFocusPointOfInterest:
     throws an NSInvalidArgumentException if isFocusPointOfInterestSupported returns NO.  -setFocusPointOfInterest: throws 
     an NSGenericException if called without first obtaining exclusive access to the receiver using lockForConfiguration:.  
     Clients can observe automatic changes to the receiver's focusMode by key value observing this property.  Note that
@@ -699,12 +762,11 @@ typedef NSInteger AVCaptureFocusMode;
  @constant AVCaptureExposureModeContinuousAutoExposure
     Indicates that the device should automatically adjust exposure when needed.
 */
-enum {
+typedef NS_ENUM(NSInteger, AVCaptureExposureMode) {
 	AVCaptureExposureModeLocked					= 0,
 	AVCaptureExposureModeAutoExpose				= 1,
 	AVCaptureExposureModeContinuousAutoExposure	= 2,
-};
-typedef NSInteger AVCaptureExposureMode;
+} NS_AVAILABLE(10_7, 4_0);
 
 @interface AVCaptureDevice (AVCaptureDeviceExposure)
 
@@ -754,8 +816,8 @@ typedef NSInteger AVCaptureExposureMode;
 
  @discussion
     The value of this property is a CGPoint that determines the receiver's exposure point of interest, if it has
-    adjustable exposure. A value of (0,0) indicates that the camera should adjust exposure based on the bottom left
-    corner of the image, while a value of (1,1) indicates that it should adjust exposure based on the top right. The
+    adjustable exposure. A value of (0,0) indicates that the camera should adjust exposure based on the top left
+    corner of the image, while a value of (1,1) indicates that it should adjust exposure based on the bottom right corner. The
     default value is (0.5,0.5). -setExposurePointOfInterest: throws an NSInvalidArgumentException if isExposurePointOfInterestSupported 
     returns NO.  -setExposurePointOfInterest: throws an NSGenericException if called without first obtaining exclusive access 
     to the receiver using lockForConfiguration:.  Clients can observe automatic changes to the receiver's exposureMode 
@@ -792,12 +854,11 @@ typedef NSInteger AVCaptureExposureMode;
  @constant AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance
     Indicates that the device should automatically adjust white balance when needed.
 */
-enum {
+typedef NS_ENUM(NSInteger, AVCaptureWhiteBalanceMode) {
 	AVCaptureWhiteBalanceModeLocked				        = 0,
 	AVCaptureWhiteBalanceModeAutoWhiteBalance	        = 1,
     AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance = 2,
-};
-typedef NSInteger AVCaptureWhiteBalanceMode;
+} NS_AVAILABLE(10_7, 4_0);
 
 @interface AVCaptureDevice (AVCaptureDeviceWhiteBalance)
 
@@ -866,6 +927,52 @@ typedef NSInteger AVCaptureWhiteBalanceMode;
 
 @end
 
+@interface AVCaptureDevice (AVCaptureDeviceLowLightBoost)
+
+/*!
+ @property lowLightBoostSupported
+ @abstract
+    Indicates whether the receiver supports boosting images in low light conditions.
+ 
+ @discussion
+    The receiver's automaticallyEnablesLowLightBoostWhenAvailable property can only be set if this property returns YES.
+*/
+@property(nonatomic, readonly, getter=isLowLightBoostSupported) BOOL lowLightBoostSupported NS_AVAILABLE_IOS(6_0);
+
+/*!
+ @property lowLightBoostEnabled
+ @abstract
+    Indicates whether the receiver's low light boost feature is enabled.
+ 
+ @discussion
+    The value of this property is a BOOL indicating whether the receiver is currently enhancing
+    images to improve quality due to low light conditions. When -isLowLightBoostEnabled returns
+    YES, the receiver has switched into a special mode in which more light can be perceived in images.
+    This property is key-value observable.
+*/
+@property(nonatomic, readonly, getter=isLowLightBoostEnabled) BOOL lowLightBoostEnabled NS_AVAILABLE_IOS(6_0);
+
+/*!
+ @property automaticallyEnablesLowLightBoostWhenAvailable
+ @abstract
+    Indicates whether the receiver should automatically switch to low light boost mode when necessary.
+ 
+ @discussion
+    On a receiver where -isLowLightBoostSupported returns YES, a special low light boost mode may be
+    engaged to improve image quality. When the automaticallyEnablesLowLightBoostWhenAvailable
+    property is set to YES, the receiver switches at its discretion to a special boost mode under
+    low light, and back to normal operation when the scene becomes sufficiently lit.  An AVCaptureDevice that
+    supports this feature may only engage boost mode for certain source formats or resolutions.
+    Clients may observe changes to the lowLightBoostEnabled property to know when the mode has engaged.
+    The switch between normal operation and low light boost mode may drop one or more video frames.
+    The default value is NO. Setting this property throws an NSInvalidArgumentException if -isLowLightBoostSupported
+    returns NO. The receiver must be locked for configuration using lockForConfiguration: before clients
+    can set this method, otherwise an NSGenericException is thrown.
+*/
+@property(nonatomic) BOOL automaticallyEnablesLowLightBoostWhenAvailable NS_AVAILABLE_IOS(6_0);
+
+@end
+
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
 
 typedef float AVCaptureDeviceTransportControlsSpeed; 
@@ -880,11 +987,10 @@ typedef float AVCaptureDeviceTransportControlsSpeed;
  @constant AVCaptureDeviceTransportControlsPlayingMode
     Indicates that the tape transport is threaded through the play head.
 */
-enum {
+typedef NS_ENUM(NSInteger, AVCaptureDeviceTransportControlsPlaybackMode) {
 	AVCaptureDeviceTransportControlsNotPlayingMode      = 0,
 	AVCaptureDeviceTransportControlsPlayingMode         = 1
-};
-typedef NSInteger AVCaptureDeviceTransportControlsPlaybackMode;
+} NS_AVAILABLE(10_7, NA);
 
 @interface AVCaptureDevice (AVCaptureDeviceTransportControls)
 
@@ -971,6 +1077,7 @@ typedef NSInteger AVCaptureDeviceTransportControlsPlaybackMode;
 NS_CLASS_AVAILABLE(10_7, NA)
 @interface AVFrameRateRange : NSObject
 {
+@private
     AVFrameRateRangeInternal *_internal;
 }
 
@@ -1047,6 +1154,7 @@ NS_CLASS_AVAILABLE(10_7, NA)
 NS_CLASS_AVAILABLE(10_7, NA)
 @interface AVCaptureDeviceFormat : NSObject
 {
+@private
     AVCaptureDeviceFormatInternal *_internal;
 }
 
@@ -1105,6 +1213,7 @@ NS_CLASS_AVAILABLE(10_7, NA)
 NS_CLASS_AVAILABLE(10_7, NA)
 @interface AVCaptureDeviceInputSource : NSObject
 {
+@private
     AVCaptureDeviceInputSourceInternal *_internal;
 }
 

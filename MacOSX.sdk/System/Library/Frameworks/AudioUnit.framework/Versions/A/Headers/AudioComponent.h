@@ -243,11 +243,7 @@ typedef struct OpaqueAudioComponent *   AudioComponent;
                     ComponentInstanceRecord *, you should not assume that this will always be
                     compatible and usable with Component Manager calls.
 */
-#if TARGET_OS_IPHONE
-    typedef struct OpaqueAudioComponentInstance *   AudioComponentInstance;
-#else
     typedef struct ComponentInstanceRecord *        AudioComponentInstance;
-#endif
 
 /*!
     @typedef        AudioComponentMethod
@@ -291,11 +287,7 @@ typedef struct AudioComponentPlugInInterface {
     
     @param          inDesc
                         The AudioComponentDescription specifying the component to be instantiated.
-    @result         A pointer to a structure whose first member is a pointer to an
-                    AudioComponentPlugInInterface. Thus the return type could be considered
-                    AudioComponentPlugInInterface **, but since in practice it is never
-                    this basic type, but rather, AudioUnitPlugInInterface, AudioCodecPlugInInterface,
-                    etc., it is declared void * for simplicity.
+    @result         A pointer to a AudioComponentPlugInInterface structure.
 */
 typedef AudioComponentPlugInInterface *  (*AudioComponentFactoryFunction)(const AudioComponentDescription *inDesc);
 
@@ -505,6 +497,7 @@ extern OSStatus
 AudioComponentCopyConfigurationInfo(    AudioComponent      inComponent,
                                         CFDictionaryRef*    outConfigurationInfo)
                                                     __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_NA);
+
 
 #ifdef __cplusplus
 }

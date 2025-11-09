@@ -387,5 +387,5 @@
 extern int bisecting_plane (gleDouble n[3],    /* returned */
                       gleDouble v1[3],  /* input */
                       gleDouble v2[3],  /* input */
-                      gleDouble v3[3]);  /* input */
+                      gleDouble v3[3]) OPENGL_DEPRECATED(10_0, 10_9);  /* input */
 

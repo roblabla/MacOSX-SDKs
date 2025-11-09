@@ -15,7 +15,7 @@
 #define __TEXTCOMMON__
 
 #ifndef __MACTYPES__
-#include <CarbonCore/MacTypes.h>
+#include <MacTypes.h>
 #endif
 
 
@@ -1128,7 +1128,7 @@ UC_INLINE Boolean UCIsSurrogateLowCharacter( UniChar character ) {
  @result The UTF-32 value for the surrogate pair.
 */
 UC_INLINE UnicodeScalarValue UCGetUnicodeScalarValueForSurrogatePair( UniChar surrogateHigh, UniChar surrogateLow ) {
-  return ( ( surrogateHigh - kUCHighSurrogateRangeStart ) << 10 ) + ( surrogateLow - kUCLowSurrogateRangeStart ) + 0x0010000;
+	return ( (UnicodeScalarValue)( surrogateHigh - kUCHighSurrogateRangeStart ) << 10 ) + ( surrogateLow - kUCLowSurrogateRangeStart ) + 0x0010000;
 }
 
 

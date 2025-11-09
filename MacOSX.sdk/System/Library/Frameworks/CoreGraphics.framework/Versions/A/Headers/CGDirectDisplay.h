@@ -116,7 +116,8 @@ CG_EXTERN size_t CGDisplayPixelsHigh(CGDirectDisplayID display)
 CG_EXTERN CFArrayRef CGDisplayCopyAllDisplayModes(CGDirectDisplayID display,
   CFDictionaryRef options) CG_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
 
-CG_EXTERN const CFStringRef kCGDisplayShowDuplicateLowResolutionModes CG_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_N_A);
+CG_EXTERN const CFStringRef kCGDisplayShowDuplicateLowResolutionModes
+  CG_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
 
 /* Return the current mode of the specified display, or NULL if `display'
    is invalid. */
@@ -296,7 +297,7 @@ typedef uint32_t CGCaptureOptions;
 /* Return true if `display' is captured; false otherwise. */
 
 CG_EXTERN boolean_t CGDisplayIsCaptured(CGDirectDisplayID display)
-  CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_9, __IPHONE_NA, __IPHONE_NA);
 
 /* Capture `display' for exclusive use by an application. */
 
@@ -428,14 +429,7 @@ CG_EXTERN CGContextRef CGDisplayGetDrawingContext(CGDirectDisplayID display)
 
 typedef uint32_t CGDisplayCount;
 typedef CGError CGDisplayErr;
-typedef uint32_t CGBeamPosition CG_OBSOLETE;
-typedef uint8_t CGByteValue CG_OBSOLETE;
-typedef int32_t	CGDisplayCoord CG_OBSOLETE;
-typedef int32_t CGMouseDelta CG_OBSOLETE;
-typedef uint32_t CGTableCount CG_OBSOLETE;
 #define CGDisplayNoErr kCGErrorSuccess
-
-typedef struct _CGDirectPaletteRef *CGDirectPaletteRef;
 
 /* These functions are deprecated; do not use them. */
 
@@ -458,14 +452,6 @@ CG_EXTERN CFDictionaryRef CGDisplayBestModeForParametersAndRefreshRate(
     __IPHONE_NA, __IPHONE_NA);
 
 /* Use the CGDisplayMode APIs instead. */
-CG_EXTERN CFDictionaryRef
-  CGDisplayBestModeForParametersAndRefreshRateWithProperty(CGDirectDisplayID
-    display, size_t bitsPerPixel, size_t width, size_t height,
-    CGRefreshRate refreshRate, CFStringRef property, boolean_t *exactMatch)
-    CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_6,
-      __IPHONE_NA, __IPHONE_NA);
-
-/* Use the CGDisplayMode APIs instead. */
 CG_EXTERN CFDictionaryRef CGDisplayCurrentMode(CGDirectDisplayID display)
   CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_6,
     __IPHONE_NA, __IPHONE_NA);
@@ -474,19 +460,5 @@ CG_EXTERN CFDictionaryRef CGDisplayCurrentMode(CGDirectDisplayID display)
 CG_EXTERN CGError CGDisplaySwitchToMode(CGDirectDisplayID display,
   CFDictionaryRef mode) CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_6,
     __IPHONE_NA, __IPHONE_NA);
-
-CG_EXTERN boolean_t CGDisplayCanSetPalette(CGDirectDisplayID display)
-  CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
-
-CG_EXTERN CGError CGDisplaySetPalette(CGDirectDisplayID display,
-  CGDirectPaletteRef palette)
-  CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
-
-CG_EXTERN CGError CGDisplayWaitForBeamPositionOutsideLines(CGDirectDisplayID
-  display, uint32_t upperScanLine, uint32_t lowerScanLine)
-  CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
-
-CG_EXTERN uint32_t CGDisplayBeamPosition(CGDirectDisplayID display)
-  CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 #endif /* CGDIRECTDISPLAY_H_ */

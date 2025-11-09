@@ -19,20 +19,20 @@
 extern void draw_segment_plain (int ncp,       /* number of contour points */
                            gleDouble front_contour[][3],
                            gleDouble back_contour[][3],
-                           int inext, double len);
+                           int inext, double len) OPENGL_DEPRECATED(10_0, 10_9);
 
 extern void draw_segment_color (int ncp,       /* number of contour points */
                            gleDouble front_contour[][3],
                            gleDouble back_contour[][3],
                            float color_last[3],
                            float color_next[3],
-                           int inext, double len);
+                           int inext, double len) OPENGL_DEPRECATED(10_0, 10_9);
 
 extern void draw_segment_edge_n (int ncp,      /* number of contour points */
                            gleDouble front_contour[][3],
                            gleDouble back_contour[][3],
                            double norm_cont[][3],
-                           int inext, double len);
+                           int inext, double len) OPENGL_DEPRECATED(10_0, 10_9);
 
 extern void draw_segment_c_and_edge_n (int ncp,   
                            gleDouble front_contour[][3],
@@ -40,13 +40,13 @@ extern void draw_segment_c_and_edge_n (int ncp,
                            double norm_cont[][3],
                            float color_last[3],
                            float color_next[3],
-                           int inext, double len);
+                           int inext, double len) OPENGL_DEPRECATED(10_0, 10_9);
 
 extern void draw_segment_facet_n (int ncp,     
                            gleDouble front_contour[][3],
                            gleDouble back_contour[][3],
                            double norm_cont[][3],
-                           int inext, double len);
+                           int inext, double len) OPENGL_DEPRECATED(10_0, 10_9);
 
 extern void draw_segment_c_and_facet_n (int ncp,    
                            gleDouble front_contour[][3],
@@ -54,7 +54,7 @@ extern void draw_segment_c_and_facet_n (int ncp,
                            double norm_cont[][3],
                            float color_last[3],
                            float color_next[3],
-                           int inext, double len);
+                           int inext, double len) OPENGL_DEPRECATED(10_0, 10_9);
 
 /* ============================================================ */
 
@@ -63,7 +63,7 @@ extern void draw_binorm_segment_edge_n (int ncp,
                            double back_contour[][3],
                            double front_norm[][3],
                            double back_norm[][3],
-                           int inext, double len);
+                           int inext, double len) OPENGL_DEPRECATED(10_0, 10_9);
 
 extern void draw_binorm_segment_c_and_edge_n (int ncp,   
                            double front_contour[][3],
@@ -72,14 +72,14 @@ extern void draw_binorm_segment_c_and_edge_n (int ncp,
                            double back_norm[][3],
                            float color_last[3],
                            float color_next[3],
-                           int inext, double len);
+                           int inext, double len) OPENGL_DEPRECATED(10_0, 10_9);
 
 extern void draw_binorm_segment_facet_n (int ncp, 
                            double front_contour[][3],
                            double back_contour[][3],
                            double front_norm[][3],
                            double back_norm[][3],
-                           int inext, double len);
+                           int inext, double len) OPENGL_DEPRECATED(10_0, 10_9);
 
 extern void draw_binorm_segment_c_and_facet_n (int ncp,    
                            double front_contour[][3],
@@ -88,11 +88,11 @@ extern void draw_binorm_segment_c_and_facet_n (int ncp,
                            double back_norm[][3],
                            float color_last[3],
                            float color_next[3],
-                           int inext, double len);
+                           int inext, double len) OPENGL_DEPRECATED(10_0, 10_9);
 
 extern void draw_angle_style_back_cap (int ncp,        /* number of contour points */
                            gleDouble bi[3],             /* biscetor */
-                           gleDouble point_array[][3]);  /* polyline */
+                           gleDouble point_array[][3]) OPENGL_DEPRECATED(10_0, 10_9);  /* polyline */
 
 /* -------------------------- end of file -------------------------------- */
 

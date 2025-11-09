@@ -1,5 +1,5 @@
 /*	NSNotification.h
-	Copyright (c) 1994-2012, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2013, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -18,8 +18,12 @@
 
 @interface NSNotification (NSNotificationCreation)
 
-+ (id)notificationWithName:(NSString *)aName object:(id)anObject;
-+ (id)notificationWithName:(NSString *)aName object:(id)anObject userInfo:(NSDictionary *)aUserInfo;
++ (instancetype)notificationWithName:(NSString *)aName object:(id)anObject;
++ (instancetype)notificationWithName:(NSString *)aName object:(id)anObject userInfo:(NSDictionary *)aUserInfo;
+
+- (instancetype)initWithName:(NSString *)name object:(id)object userInfo:(NSDictionary *)userInfo NS_AVAILABLE(10_6, 4_0);	/* designated initializer */
+
+- (id)init;	/* do not invoke; not a valid initializer for this class */
 
 @end
 
@@ -32,8 +36,10 @@
     void *_pad[11];
 }
 
-+ (id)defaultCenter;
-    
++ (instancetype)defaultCenter;
+
+- (instancetype)init;	/* designated initializer */
+
 - (void)addObserver:(id)observer selector:(SEL)aSelector name:(NSString *)aName object:(id)anObject;
 
 - (void)postNotification:(NSNotification *)notification;

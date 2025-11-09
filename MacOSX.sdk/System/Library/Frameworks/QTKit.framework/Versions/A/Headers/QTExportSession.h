@@ -5,6 +5,15 @@
 
 */
 
+/*
+  QTKit has been deprecated in 10.9.
+
+  AVFoundation and AVKit are the frameworks recommended for all new development 
+  involving time-based audiovisual media on OS X.  In order to transition your 
+  project from QTKit to AVFoundation please refer to:
+  "Technical Note TN2300 Transitioning QTKit code to AV Foundation".
+*/
+
 #import <Foundation/Foundation.h>
 
 @class QTMovie, QTExportOptions;
@@ -28,14 +37,14 @@
 	QTExportSessionInternal		*_internal;
 }
 
-@property (assign)		id<QTExportSessionDelegate>	delegate;
-@property (readonly, copy)	QTExportOptions				*exportOptions;
+@property (assign)		id<QTExportSessionDelegate>	delegate AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
+@property (readonly, copy)	QTExportOptions				*exportOptions AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /* These properties are KV Observable */
-@property (readonly) double progress;
-@property (readonly, getter=isRunning) BOOL running;
-@property (readonly, getter=isFinished)	BOOL finished;
-@property (readonly, getter=isCancelled) BOOL cancelled;
+@property (readonly) double progress AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
+@property (readonly, getter=isRunning) BOOL running AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
+@property (readonly, getter=isFinished)	BOOL finished AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
+@property (readonly, getter=isCancelled) BOOL cancelled AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*!
 	@method						initWithMovie:exportOptions:outputURL:error:
@@ -46,7 +55,7 @@
 	@param		outError		If there is an error initializing the QTExportOptions object, an NSError containing the error code will be assingned to outError;
 	@result						Returns the initialized QTExportSession.
 */
-- (id)initWithMovie:(QTMovie *)movie exportOptions:(QTExportOptions *)exportOptions outputURL:(NSURL *)outputURL error:(NSError **)outError;
+- (id)initWithMovie:(QTMovie *)movie exportOptions:(QTExportOptions *)exportOptions outputURL:(NSURL *)outputURL error:(NSError **)outError AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*!
 	@method						run
@@ -54,14 +63,14 @@
 	@discussion					Initiates or resumes an asynchronous export operation and returns immediately.
 								Information regarding progress, success, or failure will be reported to the delegate object.
 */
-- (void)run;
+- (void)run AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*!
 	@method						cancel
 	@abstract					Cancel the execution of an asynchronous export. 
 								Cancels the execution of a running export.  Nas no effect if run has not been called.
 */
-- (void)cancel;
+- (void)cancel AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*!
 	@method						waitUntilFinished:
@@ -70,14 +79,14 @@
 	@param		error			If the export operation fails, describes the reason for failure.
 	@result						Returns YES if the export operation succeeded, otherwise NO.
 */
-- (BOOL)waitUntilFinished:(NSError **)error;
+- (BOOL)waitUntilFinished:(NSError **)error AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*!
 	@method						localizedExportSessionOutputSummary
 	@result						Returns a localized description of the export session intended for end-user display. The description is a human readable text string
 								describing the output container format and the formats of the media streams that it will contain.
 */
-- (NSString *)localizedExportSessionOutputSummary;
+- (NSString *)localizedExportSessionOutputSummary AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 @end
 
@@ -92,7 +101,7 @@
 	@abstract					Delegate method that indicates that the specified export operation has completed successfully.
 	@param		exportSession	A reference to the QTExportSession that's reporting success.
 */
-- (void)exportSessionDidSucceed:(QTExportSession *)exportSession;
+- (void)exportSessionDidSucceed:(QTExportSession *)exportSession AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*!
 	@method						exportSession:didFailWithError:
@@ -100,14 +109,14 @@
 	@param		exportSession	A reference to the QTExportSession that's reporting failure.
 	@param		error			An autoreleased NSError describing the reason for failure.
 */
-- (void)exportSession:(QTExportSession *)exportSession didFailWithError:(NSError *)error;
+- (void)exportSession:(QTExportSession *)exportSession didFailWithError:(NSError *)error AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*!
 	 @method					exportSessionWasCancelled:
 	 @abstract					Delegate method that indicates that the export operation was cancelled by the user. 
 	 @param		exportSession	A reference to the QTExportSession that's reporting failure.
 */
-- (void)exportSessionWasCancelled:(QTExportSession *)exportSession;
+- (void)exportSessionWasCancelled:(QTExportSession *)exportSession AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*!
 	@method						exportSession:didReachProgress:
@@ -115,7 +124,7 @@
 	@param		exportSession	A reference to the QTExportSession that's reporting progress.
 	@param		progress		A double between 0.0 and 1.0 inclusive to indicate the progress of the export operation.
 */
-- (void)exportSession:(QTExportSession *)exportSession didReachProgress:(double)progress;
+- (void)exportSession:(QTExportSession *)exportSession didReachProgress:(double)progress AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 @end
 

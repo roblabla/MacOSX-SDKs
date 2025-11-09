@@ -15,7 +15,7 @@
 #define __TEXTENCODINGPLUGIN__
 
 #ifndef __MACTYPES__
-#include <CarbonCore/MacTypes.h>
+#include <MacTypes.h>
 #endif
 
 #ifndef __TEXTCOMMON__

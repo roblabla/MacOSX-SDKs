@@ -5,6 +5,7 @@
 //  Copyright 2009-2010 Apple Inc. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import <EventKit/EventKitDefines.h>
 #import <EventKit/EKTypes.h>
 
@@ -18,12 +19,31 @@
                     this event and all future events in the pattern.
     @constant       EKSpanThisEvent        Affect this event only.
     @constant       EKSpanFutureEvents     Affect this event and all after it.
- */
+*/
 
 typedef enum {
     EKSpanThisEvent,
     EKSpanFutureEvents
 } EKSpan;
+
+/*!
+    @enum       EKAuthorizationStatus
+    @abstract   This enumerated type is used to indicate the currently granted authorization status for a specific
+                entity type.
+    @constant   EKAuthorizationStatusNotDetermined  The user has not yet made a choice regarding whether this application
+                may access the service.
+    @constant   EKAuthorizationStatusRestricted     This application is not authorized to access the service.
+                The user cannot change this application’s status, possibly due to
+                active restrictions such as parental controls being in place.
+    @constant   EKAuthorizationStatusDenied         The user explicitly denied access to the service for this application.
+    @constant   EKAuthorizationStatusAuthorized     This application is authorized to access the service.
+*/
+typedef NS_ENUM(NSInteger, EKAuthorizationStatus) {
+    EKAuthorizationStatusNotDetermined = 0,
+    EKAuthorizationStatusRestricted,
+    EKAuthorizationStatusDenied,
+    EKAuthorizationStatusAuthorized,
+} __OSX_AVAILABLE_STARTING(__MAC_10_9,__IPHONE_6_0);
 
 typedef void (^EKEventSearchCallback)(EKEvent *event, BOOL *stop);
 
@@ -36,9 +56,15 @@ typedef void (^EKEventSearchCallback)(EKEvent *event, BOOL *stop);
                 Events, Reminders, and Calendar objects retrieved from an event store cannot be used with any other event
                 store. It is generally best to hold onto a long-lived instance of an event store, most
                 likely as a singleton instance in your application.
- */
+*/
 EVENTKIT_CLASS_AVAILABLE(10_8, 4_0)
 @interface EKEventStore : NSObject
+
+/*!
+    @method     authorizationStatusForEntityType:
+    @discussion Returns the authorization status for the given entity type
+*/
++ (EKAuthorizationStatus)authorizationStatusForEntityType:(EKEntityType)entityType __OSX_AVAILABLE_STARTING(__MAC_10_9,__IPHONE_6_0);
 
 /*!
     @method     initWithAccessToEntityTypes:
@@ -47,25 +73,39 @@ EVENTKIT_CLASS_AVAILABLE(10_8, 4_0)
                 program while the user is being asked to grant or deny access. Until access has been granted for an entity
                 type, this event store will not contain any calendars for that entity type, and any attempt to save entities
                 of that entity type will fail. If access is later granted or declined, the event store will broadcast an
-                EKEventStoreChangedNotification. The user will only be prompted the first time access is requested; any
+                EKEventStoreChangedNotification. You can check the current access status for an entity type
+                using +authorizationStatusForEntityType:. The user will only be prompted the first time access is requested; any
                 subsequent instantiations of EKEventStore will use the existing permissions.
-                Note: This is provided for parity with iOS and is not enforced on OS X.
     @param      entityTypes         A bit mask of entity types to which you want access
- */
-- (id)initWithAccessToEntityTypes:(EKEntityMask)entityTypes __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_6_0);
+*/
+- (id)initWithAccessToEntityTypes:(EKEntityMask)entityTypes __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_8,__MAC_10_9,__IPHONE_NA,__IPHONE_NA);
+
 
 /*!
-    @method     init
-    @discussion This is now deprecated in favor of initWithAccessToEntityTypes:.
-                For existing calls to -init, this method is now equivalent to
-                calling -[EKEventStore initWithAccessToEntityTypes:EKEntityMaskEvent].
+        @method     init
  */
-- (id)init __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_NA,__MAC_NA,__IPHONE_4_0,__IPHONE_6_0);
+- (id)init __OSX_AVAILABLE_STARTING(__MAC_10_9,__IPHONE_4_0);
+
+typedef void(^EKEventStoreRequestAccessCompletionHandler)(BOOL granted, NSError *error);
+
+/*!
+    @method     requestAccessToEntityType:completion:
+    @discussion Users are able to grant or deny access to event and reminder data on a per-app basis. To request access to
+                event and/or reminder data, call -requestAccessToEntityType:completion:. This will not block the app while
+                the user is being asked to grant or deny access.
+ 
+                Until access has been granted for an entity type, the event store will not contain any calendars for that
+                entity type, and any attempt to save will fail. The user will only be prompted the first time access is
+                requested; any subsequent instantiations of EKEventStore will use the existing permissions. When the user
+                taps to grant or deny access, the completion handler will be called on an arbitrary queue.
+*/
+- (void)requestAccessToEntityType:(EKEntityType)entityType completion:(EKEventStoreRequestAccessCompletionHandler)completion __OSX_AVAILABLE_STARTING(__MAC_10_9,__IPHONE_6_0);
+
 
 /*!
     @property   eventStoreIdentifier
     @abstract   Returns a unique identifier string representing this calendar store.
- */
+*/
 @property(nonatomic, readonly) NSString *eventStoreIdentifier;
 
 //----------------------------------------------------
@@ -96,13 +136,13 @@ EVENTKIT_CLASS_AVAILABLE(10_8, 4_0)
 
 /*!
     @property   defaultCalendarForNewEvents
-    @abstract   Returns the calendar that events should be added to by default, as set in the Settings application.
+    @abstract   Returns the calendar that events should be added to by default, as set in Calendar.app.
  */
 @property(nonatomic, readonly) EKCalendar *defaultCalendarForNewEvents;
 
 /*!
     @method     defaultCalendarForNewReminders
-    @abstract   Returns the calendar that reminders should be added to by default, as set in the Settings application.
+    @abstract   Returns the calendar that reminders should be added to by default, as set in Reminders.app.
  */
 - (EKCalendar *)defaultCalendarForNewReminders __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_6_0);
 
@@ -132,6 +172,15 @@ EVENTKIT_CLASS_AVAILABLE(10_8, 4_0)
     @discussion This method attempts to delete the given calendar from the calendar database. It
                 returns YES if successful and NO otherwise. Passing a calendar fetched from
                 another EKEventStore instance into this function will raise an exception.
+ 
+                If the calendar supports multiple entity types (allowedEntityTypes), but the user has 
+                not granted you access to all those entity types, then we will delete all of the entity types 
+                for which you have access and remove that entity type from the allowedEntityTypes.
+                For example: If a calendar supports both events and reminders, but you only have access to reminders,
+                we will delete all the reminders and make the calendar only support events.
+ 
+                If you have access to all of its allowedEntityTypes, then it will delete the calendar and
+                all of the events and reminders in the calendar.
  
     @param      calendar    The calendar to delete.
     @param      commit      Pass YES to cause the database to save. You can pass NO to batch multiple
@@ -259,6 +308,10 @@ EVENTKIT_CLASS_AVAILABLE(10_8, 4_0)
     @discussion Creates a simple query predicate to search for events within a certain date range. At present,
                 this will return events in the default time zone ([NSTimeZone defaultTimeZone]).
  
+                For performance reasons, this method will only return events within a four year timespan.
+                If the date range between the startDate and endDate is greater than four years, then it will be shortened 
+                to the first four years.
+ 
     @param      startDate   The start date.
     @param      endDate     The end date.
     @param      calendars   The calendars to search for events in, or nil to search all calendars.
@@ -309,7 +362,7 @@ EVENTKIT_CLASS_AVAILABLE(10_8, 4_0)
                 This only includes reminders which have been committed (e.g. those saved using 
                 saveReminder:commit:NO are not included until commit: is called.)
  */
-- (id)fetchRemindersMatchingPredicate:(NSPredicate *)predicate completion:(void (^)(NSArray *))completion __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_6_0);
+- (id)fetchRemindersMatchingPredicate:(NSPredicate *)predicate completion:(void (^)(NSArray *reminders))completion __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_6_0);
 
 /*!
     @method     cancelFetchRequest:

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004-2010 Apple Inc. All rights reserved.
+ * Copyright (c) 2004-2012 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  *
@@ -172,6 +172,36 @@ typedef struct __aslresponse *aslresponse;
 #define ASL_LOG_DESCRIPTOR_READ  1
 #define ASL_LOG_DESCRIPTOR_WRITE 2
 
+/*! @defineblock Output file message and time formats.
+ * These select internally defined formats for printed log messages for
+ * asl_add_output_file().  Custom message and time formats may also be
+ * used.  These pre-defined formats and custom formats are described in detail
+ * in the syslog(1) manual page.
+ */
+#define ASL_MSG_FMT_RAW "raw"
+#define ASL_MSG_FMT_STD "std"
+#define ASL_MSG_FMT_BSD "bsd"
+#define ASL_MSG_FMT_XML "xml"
+#define ASL_MSG_FMT_MSG "msg"
+
+#define ASL_TIME_FMT_SEC "sec"
+#define ASL_TIME_FMT_UTC "utc"
+#define ASL_TIME_FMT_LCL "lcl"
+
+/*! @defineblock Text Encoding Types
+ * These are used by the library when formatting messages to be written 
+ * to file descriptors associated with an ASL client handle with 
+ * asl_add_output_file().  The syslog(1) manual page describes text encoding
+ * in detail.  ASL_ENCODE_ASL corresponds to the "vis" encoding option
+ * described in the syslog(1) manual.  ASL_ENCODE_XML should be used in
+ * combination with ASL_MSG_FMT_XML to ensure that special XML characters
+ * are correctly encoded.
+ */
+#define ASL_ENCODE_NONE 0
+#define ASL_ENCODE_SAFE 1
+#define ASL_ENCODE_ASL  2
+#define ASL_ENCODE_XML  3
+
 /*!
  * ASL_PREFILTER_LOG is a macro similar to asl_log(), but it first checks
  * if the message will simply be ignored due to local filter settings.
@@ -245,6 +275,8 @@ void asl_close(aslclient asl);
  * Write log messages to the given file descriptor.
  *
  * Log messages will be written to this file as well as to the server.
+ * This is equivalent to calling:
+ * asl_add_output_file(asl, descriptor, ASL_MSG_FMT_STD, ASL_TIME_FMT_LCL, ASL_FILTER_MASK_UPTO(ASL_LEVEL_DEBUG), ASL_ENCODE_SAFE)
  *
  * @param asl
  *    (input) An ASL client handle
@@ -253,6 +285,47 @@ void asl_close(aslclient asl);
  * @result Returns 0 on success, non-zero on failure
 */
 int asl_add_log_file(aslclient asl, int descriptor);
+
+/*!
+ * Write log messages to the given file descriptor.
+ *
+ * Log messages will be written to this file as well as to the server.
+ * This routine extends the basic interface offered by asl_add_log_file(),
+ * allowing control of the format used to write log message written to the file.
+ * control of the time zone used when printing time values, and allowing
+ * individual filtering control for each log file.
+ *
+ * @param asl
+ *    (input) An ASL client handle
+ * @param descriptor
+ *    (input) A file descriptor
+ * @param mfmt
+ *    (input) A character string specifying the message format
+ * @param tfmt
+ *    (input) A character string specifying the time format
+ * @param filter
+ *    (input) A filter value
+ * @param text_encoding
+ *    (input) A text encoding type
+ * @result Returns 0 on success, non-zero on failure
+ */
+int asl_add_output_file(aslclient asl, int descriptor, const char *mfmt, const char *tfmt, int filter, int text_encoding) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+
+/*!
+ * Write log messages to the given file descriptor.
+ *
+ * Sets or changes a filter value for filtering messages written to a file associated
+ * with an ASL client handle using asl_add_output_file() or asl_add_log_file(). 
+ *
+ * @param asl
+ *    (input) An ASL client handle
+ * @param descriptor
+ *    (input) A file descriptor
+ * @param filter
+ *    (input) A filter value
+ * @result Returns the previous filter value
+ */
+int asl_set_output_file_filter(aslclient ac, int fd, int filter) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
 
 /*!
  * Stop writing log messages to the given file descriptor.

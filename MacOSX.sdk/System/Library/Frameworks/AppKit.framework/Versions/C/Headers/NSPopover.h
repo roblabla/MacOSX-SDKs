@@ -1,7 +1,7 @@
 /*
     NSPopover.h
     Application Kit
-    Copyright (c) 2010-2012, Apple Inc.
+    Copyright (c) 2010-2013, Apple Inc.
     All rights reserved.
 */
 
@@ -66,13 +66,19 @@ NS_CLASS_AVAILABLE(10_7, NA)
     NSWindow *_positioningWindow;
     NSPopoverAppearance _appearance;
     NSPopoverBehavior _behavior;
+#if !__LP64__    
     NSRectEdge _unused;
+#endif
     NSRectEdge _preferredEdge;
+#if !__LP64__    
     NSPoint _unused2;
+#endif
     NSSize _contentSize;
     NSRect _positioningRect;
-#if !__OBJC2__
-    id _reserved[3];
+    id _forbiddingViews;
+    id _postCloseBlock;
+#if !__LP64__
+    id _reserved[1];
 #endif
     struct {
         unsigned int animates:1;
@@ -82,7 +88,10 @@ NS_CLASS_AVAILABLE(10_7, NA)
         unsigned int shown:1;
         unsigned int toolbarHidesAnchor:1;
         unsigned int closing:1;
-        unsigned int reserved:25;
+        unsigned int registeredForGeometryInWindowDidChange:1;
+        unsigned int keepTopStable:1;
+        unsigned int inForbiddenRect:1;
+        unsigned int reserved:22;
     } _flags;
 }
 

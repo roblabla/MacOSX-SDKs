@@ -1,19 +1,16 @@
 /*	NSGeometry.h
-	Copyright (c) 1994-2012, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2013, Apple Inc. All rights reserved.
 */
 
 #import <AvailabilityMacros.h>
 #import <Foundation/NSValue.h>
 #import <Foundation/NSCoder.h>
 
-#if (TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)
+#if TARGET_OS_WIN32
+#import <CGCompat.h>
+#else
 #import <CoreGraphics/CGBase.h>
 #import <CoreGraphics/CGGeometry.h>
-#elif TARGET_OS_WIN32
-#import <CGCompat.h>
-#elif TARGET_OS_MAC
-#import <ApplicationServices/../Frameworks/CoreGraphics.framework/Headers/CGBase.h>
-#import <ApplicationServices/../Frameworks/CoreGraphics.framework/Headers/CGGeometry.h>
 #endif
 
 #if __LP64__ || TARGET_OS_EMBEDDED || TARGET_OS_IPHONE || TARGET_OS_WIN32 || NS_BUILD_32_LIKE_64

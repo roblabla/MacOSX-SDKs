@@ -17,14 +17,15 @@ typedef enum /*: NSInteger */ {
     GKGameCenterViewControllerStateChallenges,
 } GKGameCenterViewControllerState;
 
-NS_CLASS_AVAILABLE(10_9, 6_0)
 #if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
+NS_CLASS_AVAILABLE(10_9, 6_0)
 @interface GKGameCenterViewController : UINavigationController
 @end
 #else
 #import <Cocoa/Cocoa.h>
 #import <GameKit/GKDialogController.h>
+NS_CLASS_AVAILABLE(10_9, 6_0)
 @interface GKGameCenterViewController : NSViewController  <GKViewController> {
 	id _internal1,_internal2,_internal3;
     NSInteger _internal4;

@@ -20,4 +20,9 @@
 #include <CoreMedia/CMSimpleQueue.h>
 #include <CoreMedia/CMMemoryPool.h>
 #include <CoreMedia/CMSync.h>
+#include <CoreMedia/CMTextMarkup.h>
+#if TARGET_OS_IPHONE
+#include <CoreMedia/CMAudioClock.h>
+#else
 #include <CoreMedia/CMAudioDeviceClock.h>
+#endif

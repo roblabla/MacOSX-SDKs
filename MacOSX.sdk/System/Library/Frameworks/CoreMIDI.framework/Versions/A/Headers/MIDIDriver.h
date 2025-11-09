@@ -328,7 +328,7 @@ extern "C" {
 extern OSStatus		MIDIDeviceCreate(MIDIDriverRef owner, 
 							CFStringRef name, CFStringRef manufacturer, 
 							CFStringRef model, MIDIDeviceRef *outDevice)
-																__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+																__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 
 /*!
@@ -347,7 +347,7 @@ extern OSStatus		MIDIDeviceCreate(MIDIDriverRef owner,
 						The device to be disposed.
 	@result			An OSStatus result code.
 */
-extern OSStatus		MIDIDeviceDispose(MIDIDeviceRef device)		__OSX_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_NA);
+extern OSStatus		MIDIDeviceDispose(MIDIDeviceRef device)		__OSX_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_4_2);
 
 // ___________________________________________________________________________________________
 //	MIDIDeviceList
@@ -364,7 +364,7 @@ extern OSStatus		MIDIDeviceDispose(MIDIDeviceRef device)		__OSX_AVAILABLE_STARTI
 	@result			The number of devices in the list, or 0 if an error occurred.
 */
 extern ItemCount		MIDIDeviceListGetNumberOfDevices(MIDIDeviceListRef devList)
-																__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+																__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -380,7 +380,7 @@ extern ItemCount		MIDIDeviceListGetNumberOfDevices(MIDIDeviceListRef devList)
 	@result			A reference to a device, or NULL if an error occurred.
 */
 extern MIDIDeviceRef	MIDIDeviceListGetDevice(MIDIDeviceListRef devList, ItemCount index0)
-																__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+																__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -395,7 +395,7 @@ extern MIDIDeviceRef	MIDIDeviceListGetDevice(MIDIDeviceListRef devList, ItemCoun
 	@result			An OSStatus result code.
 */
 extern OSStatus		MIDIDeviceListAddDevice(MIDIDeviceListRef devList, MIDIDeviceRef dev)
-																__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+																__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -408,7 +408,7 @@ extern OSStatus		MIDIDeviceListAddDevice(MIDIDeviceListRef devList, MIDIDeviceRe
 	@result			An OSStatus result code.
 */
 extern OSStatus		MIDIDeviceListDispose(MIDIDeviceListRef devList)
-																__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_NA);
+																__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_4_2);
 
 
 // ___________________________________________________________________________________________
@@ -442,7 +442,7 @@ extern OSStatus		MIDIDeviceListDispose(MIDIDeviceListRef devList)
 	@result			An OSStatus result code.
 */
 extern OSStatus		MIDIEndpointSetRefCons(MIDIEndpointRef endpt,
-					void *ref1, void *ref2)					__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+					void *ref1, void *ref2)					__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -459,7 +459,7 @@ extern OSStatus		MIDIEndpointSetRefCons(MIDIEndpointRef endpt,
 	@result			An OSStatus result code.
 */
 extern OSStatus		MIDIEndpointGetRefCons(MIDIEndpointRef endpt, 
-					void **ref1, void **ref2)				__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+					void **ref1, void **ref2)				__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 // ___________________________________________________________________________________________
 
@@ -483,7 +483,7 @@ extern OSStatus		MIDIEndpointGetRefCons(MIDIEndpointRef endpt,
 
 	@result			The CFRunLoopRef of the server's driver I/O thread.
 */
-extern CFRunLoopRef	MIDIGetDriverIORunLoop()				__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+extern CFRunLoopRef	MIDIGetDriverIORunLoop()				__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -501,7 +501,7 @@ extern CFRunLoopRef	MIDIGetDriverIORunLoop()				__OSX_AVAILABLE_STARTING(__MAC_1
 	@result			The requested device list.
 */
 extern MIDIDeviceListRef	MIDIGetDriverDeviceList(MIDIDriverRef driver)
-															__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_NA);
+															__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_4_2);
 
 //  -----------------------------------------------------------------------------
 /*!

@@ -34,6 +34,47 @@ CSEXTERN CFStringRef kColorSyncProfileURL;         /* com.apple.ColorSync.Profil
 CSEXTERN CFStringRef kColorSyncProfileDescription; /* com.apple.ColorSync.ProfileDescription */
 CSEXTERN CFStringRef kColorSyncProfileMD5Digest;   /* com.apple.ColorSync.ProfileMD5Digest */
 
+CSEXTERN CFStringRef kColorSyncSigAToB0Tag;                       /* 0x41324230L => CFSTR("A2B0")*/
+CSEXTERN CFStringRef kColorSyncSigAToB1Tag;                       /* 0x41324231L => CFSTR("A2B1")*/
+CSEXTERN CFStringRef kColorSyncSigAToB2Tag;                       /* 0x41324232L => CFSTR("A2B2")*/
+CSEXTERN CFStringRef kColorSyncSigBToA0Tag;                       /* 0x42324130L => CFSTR("B2A0")*/
+CSEXTERN CFStringRef kColorSyncSigBToA1Tag;                       /* 0x42324131L => CFSTR("B2A1")*/
+CSEXTERN CFStringRef kColorSyncSigBToA2Tag;                       /* 0x42324132L => CFSTR("B2A2")*/
+CSEXTERN CFStringRef kColorSyncSigCmykData;                       /* 0x434D594BL => CFSTR("CMYK")*/
+CSEXTERN CFStringRef kColorSyncSigGrayData;                       /* 0x47524159L => CFSTR("GRAY")*/
+CSEXTERN CFStringRef kColorSyncSigLabData;                        /* 0x4C616220L => CFSTR("Lab ")*/
+CSEXTERN CFStringRef kColorSyncSigRgbData;                        /* 0x52474220L => CFSTR("RGB ")*/
+CSEXTERN CFStringRef kColorSyncSigXYZData;                        /* 0x58595A20L => CFSTR("XYZ ")*/
+CSEXTERN CFStringRef kColorSyncSigAbstractClass;                  /* 0x61627374L => CFSTR("abst")*/
+CSEXTERN CFStringRef kColorSyncSigBlueTRCTag;                     /* 0x62545243L => CFSTR("bTRC")*/
+CSEXTERN CFStringRef kColorSyncSigBlueColorantTag;                /* 0x6258595AL => CFSTR("bXYZ")*/
+CSEXTERN CFStringRef kColorSyncSigMediaBlackPointTag;             /* 0x626B7074L => CFSTR("bkpt")*/
+CSEXTERN CFStringRef kColorSyncSigCopyrightTag;                   /* 0x63707274L => CFSTR("cprt")*/
+CSEXTERN CFStringRef kColorSyncSigProfileDescriptionTag;          /* 0x64657363L => CFSTR("desc")*/
+CSEXTERN CFStringRef kColorSyncSigDeviceModelDescTag;             /* 0x646D6464L => CFSTR("dmdd")*/
+CSEXTERN CFStringRef kColorSyncSigDeviceMfgDescTag;               /* 0x646D6E64L => CFSTR("dmnd")*/
+CSEXTERN CFStringRef kColorSyncSigGreenTRCTag;                    /* 0x67545243L => CFSTR("gTRC")*/
+CSEXTERN CFStringRef kColorSyncSigGreenColorantTag;               /* 0x6758595AL => CFSTR("gXYZ")*/
+CSEXTERN CFStringRef kColorSyncSigGamutTag;                       /* 0x67616D74L => CFSTR("gamt")*/
+CSEXTERN CFStringRef kColorSyncSigGrayTRCTag;                     /* 0x6B545243L => CFSTR("kTRC")*/
+CSEXTERN CFStringRef kColorSyncSigLinkClass;                      /* 0x6C696E6BL => CFSTR("link")*/
+CSEXTERN CFStringRef kColorSyncSigDisplayClass;                   /* 0x6D6E7472L => CFSTR("mntr")*/
+CSEXTERN CFStringRef kColorSyncSigNamedColor2Tag;                 /* 0x6E636C32L => CFSTR("ncl2")*/
+CSEXTERN CFStringRef kColorSyncSigNamedColorClass;                /* 0x6E6D636CL => CFSTR("nmcl")*/
+CSEXTERN CFStringRef kColorSyncSigPreview0Tag;                    /* 0x70726530L => CFSTR("pre0")*/
+CSEXTERN CFStringRef kColorSyncSigPreview1Tag;                    /* 0x70726531L => CFSTR("pre1")*/
+CSEXTERN CFStringRef kColorSyncSigPreview2Tag;                    /* 0x70726532L => CFSTR("pre2")*/
+CSEXTERN CFStringRef kColorSyncSigOutputClass;                    /* 0x70727472L => CFSTR("prtr")*/
+CSEXTERN CFStringRef kColorSyncSigProfileSequenceDescTag;         /* 0x70736571L => CFSTR("pseq")*/
+CSEXTERN CFStringRef kColorSyncSigRedTRCTag;                      /* 0x72545243L => CFSTR("rTRC")*/
+CSEXTERN CFStringRef kColorSyncSigRedColorantTag;                 /* 0x7258595AL => CFSTR("rXYZ")*/
+CSEXTERN CFStringRef kColorSyncSigInputClass;                     /* 0x73636E72L => CFSTR("scnr")*/
+CSEXTERN CFStringRef kColorSyncSigColorSpaceClass;                /* 0x73706163L => CFSTR("spac")*/
+CSEXTERN CFStringRef kColorSyncSigTechnologyTag;                  /* 0x74656368L => CFSTR("tech")*/
+CSEXTERN CFStringRef kColorSyncSigViewingConditionsTag;           /* 0x76696577L => CFSTR("view")*/
+CSEXTERN CFStringRef kColorSyncSigViewingCondDescTag;             /* 0x76756564L => CFSTR("vued")*/
+CSEXTERN CFStringRef kColorSyncSigMediaWhitePointTag;             /* 0x77747074L => CFSTR("wtpt")*/
+
 CSEXTERN CFTypeID ColorSyncProfileGetTypeID(void);
    /*
     * returns the CFTypeID for ColorSyncProfiles.

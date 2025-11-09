@@ -32,7 +32,6 @@
 	#include "AudioFile.h"
 #endif
 
-
 #if defined(__cplusplus)
 extern "C"
 {
@@ -730,6 +729,8 @@ typedef OSStatus (*SetUserDataFDF)(		void					*inComponentStorage,
 										UInt32					inUserDataSize,
 										const void				*inUserData);
 										
+/* no fast dispatch for kAudioFileRemoveUserDataSelect */
+
 //==================================================================================================
 // Fast Dispatch Function tables. Deprecated. These are no longer used by the implementation.
 //==================================================================================================
@@ -771,6 +772,9 @@ typedef struct AudioFileFDFTableExtended
 
 	ReadPacketDataFDF	mReadPacketDataFDF;
 } AudioFileFDFTableExtended;
+
+#pragma mark -
+#pragma mark Deprecated
 
 /*!
 	@functiongroup Deprecated AFComponent

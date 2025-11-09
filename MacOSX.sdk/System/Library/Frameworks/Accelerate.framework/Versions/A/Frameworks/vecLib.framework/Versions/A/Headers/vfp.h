@@ -1,5 +1,5 @@
-/*  vfp.h (from vecLib-380.6)
- *  Copyright 1999-2012 Apple Inc.  All rights reserved.
+/*  vfp.h (from vecLib-423.32)
+ *  Copyright 1999-2013 Apple Inc.  All rights reserved.
  *
  *  Overview:
  *  vfp.h provides math library operations for SIMD vectors.  These functions
@@ -40,7 +40,7 @@ extern "C" {
  *     --------         ------------------------
  *     vceilf           toward +infinity
  *     vfloorf          toward -infinity
- *     vintf            toward zero
+ *     vtruncf          toward zero
  *     vnintf           to nearest, ties to even
  *
  *  When SSE4.1 code generation is enabled on Intel architectures, single-
@@ -52,13 +52,15 @@ extern "C" {
 #define __VFP_INLINE_ATTR__ __attribute__((__always_inline__, __nodebug__))
 static __inline__ vFloat __VFP_INLINE_ATTR__  vceilf(vFloat __vfp_a) { return _mm_ceil_ps(__vfp_a); }
 static __inline__ vFloat __VFP_INLINE_ATTR__ vfloorf(vFloat __vfp_a) { return _mm_floor_ps(__vfp_a); }
-static __inline__ vFloat __VFP_INLINE_ATTR__   vintf(vFloat __vfp_a) { return _mm_round_ps(__vfp_a, _MM_FROUND_TRUNC); }
+static __inline__ vFloat __VFP_INLINE_ATTR__ vtruncf(vFloat __vfp_a) { return _mm_round_ps(__vfp_a, _MM_FROUND_TRUNC); }
 static __inline__ vFloat __VFP_INLINE_ATTR__  vnintf(vFloat __vfp_a) { return _mm_round_ps(__vfp_a, _MM_FROUND_NINT); }
 #else
-extern vFloat  vceilf(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
-extern vFloat vfloorf(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+extern vFloat  vceilf(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_6_0);
+extern vFloat vfloorf(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_6_0);
+extern vFloat vtruncf(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_6_0);
+extern vFloat  vnintf(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_6_0);
+/*  The legacy name vintf is not available on iOS.  Use vtruncf instead.      */
 extern vFloat   vintf(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
-extern vFloat  vnintf(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 #endif
 
 /*  Exponential and Logarithmic Functions
@@ -69,20 +71,24 @@ extern vFloat  vnintf(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
  *      Function        Lanewise Operation
  *      --------        ----------------------------
  *      vexpf           base-e exponential function.
+ *      vexp2f          base-two exponential function.
  *      vexpm1f         e**x - 1, computed in such a way as to be more
  *                      accurate than calling vexpf and then subtracting 1
  *                      when the argument is close to zero.
  *      vlogf           natural logarithm.
+ *      vlog2f          base-two logarithm.
  *      vlog10f         base-ten logarithm.
  *      vlog1pf         natural logarithm of (1+x), computed in such a way as
  *                      to be more accurate than adding 1 and calling vlogf
  *                      when the argument is close to zero.                   */
  
-extern vFloat   vexpf(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
-extern vFloat vexpm1f(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
-extern vFloat   vlogf(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
-extern vFloat vlog10f(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
-extern vFloat vlog1pf(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+extern vFloat   vexpf(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_6_0);
+extern vFloat  vexp2f(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_6_0);
+extern vFloat vexpm1f(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_6_0);
+extern vFloat   vlogf(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_6_0);
+extern vFloat  vlog2f(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_6_0);
+extern vFloat vlog10f(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_6_0);
+extern vFloat vlog1pf(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_6_0);
  
 /*  Scaling Functions
  *
@@ -98,8 +104,8 @@ extern vFloat vlog1pf(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
  *      vscalbf         efficiently computes x * 2**n, where x is the first
  *                      argument and n is the second.                         */
 
-extern vFloat  vlogbf(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
-extern vFloat vscalbf(vFloat, vSInt32) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+extern vFloat  vlogbf(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_6_0);
+extern vFloat vscalbf(vFloat, vSInt32) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_6_0);
 
 /*  Power Functions
  *  
@@ -109,8 +115,8 @@ extern vFloat vscalbf(vFloat, vSInt32) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IP
  *  argument to the power specified by the second argument, but the second
  *  argument to vipowf is an integer, not a floating-point number.            */
 
-extern vFloat  vpowf(vFloat, vFloat)  __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
-extern vFloat vipowf(vFloat, vSInt32) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+extern vFloat  vpowf(vFloat, vFloat)  __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_6_0);
+extern vFloat vipowf(vFloat, vSInt32) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_6_0);
 
 /*  Trigonometric and Hyperbolic Functions
  *
@@ -127,6 +133,10 @@ extern vFloat vipowf(vFloat, vSInt32) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPH
  *                      specified by the second argument.  This address must
  *                      be a valid pointer and must be 16-byte aligned.
  *      vtanf           tangent of the argument.
+ *
+ *      vsinpif         sine of the argument multiplied by pi.
+ *      vcospif         cosine of the argument multiplied by pi.
+ *      vtanpif         tangent of the argument multiplied by pi.
  *
  *      vasinf          arcsine of the argument, in the range [-pi/2, pi/2].
  *      vacosf          arccosine of the argument, in the range [0, pi].
@@ -146,20 +156,23 @@ extern vFloat vipowf(vFloat, vSInt32) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPH
  *      vacoshf         inverse hyperbolic cosine of the argument.
  *      vatanhf         inverse hyperbolic tangent of the argument.           */
 
-extern vFloat    vsinf(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
-extern vFloat    vcosf(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
-extern vFloat vsincosf(vFloat, vFloat *) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
-extern vFloat    vtanf(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
-extern vFloat   vasinf(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
-extern vFloat   vacosf(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
-extern vFloat   vatanf(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
-extern vFloat  vatan2f(vFloat, vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
-extern vFloat   vsinhf(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
-extern vFloat   vcoshf(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
-extern vFloat   vtanhf(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
-extern vFloat  vasinhf(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
-extern vFloat  vacoshf(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
-extern vFloat  vatanhf(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+extern vFloat    vsinf(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_6_0);
+extern vFloat    vcosf(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_6_0);
+extern vFloat vsincosf(vFloat, vFloat *) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_6_0);
+extern vFloat    vtanf(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_6_0);
+extern vFloat  vsinpif(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_6_0);
+extern vFloat  vcospif(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_6_0);
+extern vFloat  vtanpif(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_6_0);
+extern vFloat   vasinf(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_6_0);
+extern vFloat   vacosf(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_6_0);
+extern vFloat   vatanf(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_6_0);
+extern vFloat  vatan2f(vFloat, vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_6_0);
+extern vFloat   vsinhf(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_6_0);
+extern vFloat   vcoshf(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_6_0);
+extern vFloat   vtanhf(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_6_0);
+extern vFloat  vasinhf(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_6_0);
+extern vFloat  vacoshf(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_6_0);
+extern vFloat  vatanhf(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_6_0);
 
 /*  Arithmetic Functions
  *
@@ -168,10 +181,10 @@ extern vFloat  vatanhf(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA)
  *  of vdivf contains the corresponding lane of the first argument divided by
  *  the corresponding lane of the second argument.                            */
 
-extern vFloat   vrecf(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
-extern vFloat  vsqrtf(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
-extern vFloat vrsqrtf(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
-extern vFloat   vdivf(vFloat, vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+extern vFloat   vrecf(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_6_0);
+extern vFloat  vsqrtf(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_6_0);
+extern vFloat vrsqrtf(vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_6_0);
+extern vFloat   vdivf(vFloat, vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_6_0);
 
 /*  Remainder Functions
  *
@@ -191,9 +204,9 @@ extern vFloat   vdivf(vFloat, vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPH
  *  7 low-order bits of q to the address pointed to by the third argument.
  *  This must be a valid pointer, and must have 16-byte alignment.            */
 
-extern vFloat      vfmodf(vFloat, vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
-extern vFloat vremainderf(vFloat, vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
-extern vFloat    vremquof(vFloat, vFloat, vUInt32 *) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+extern vFloat      vfmodf(vFloat, vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_6_0);
+extern vFloat vremainderf(vFloat, vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_6_0);
+extern vFloat    vremquof(vFloat, vFloat, vUInt32 *) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_6_0);
 
 /*  Floating-point Utility Functions
  *
@@ -202,7 +215,7 @@ extern vFloat    vremquof(vFloat, vFloat, vUInt32 *) __OSX_AVAILABLE_STARTING(__
  *
  *      Function        Lanewise Operation
  *      --------        ----------------------------
- *      vfabf           absolute value
+ *      vfabsf          absolute value
  *      vcopysignf      returns a floating-point value with the magnitude of
  *                      the first operand and the sign of the second operand.
  *      vsignbitf       non-zero if and only if the signbit of the argument is
@@ -216,10 +229,12 @@ extern vFloat    vremquof(vFloat, vFloat, vUInt32 *) __OSX_AVAILABLE_STARTING(__
  *                      FP_INFINITE; if the argument is zero, the result is
  *                      FP_ZERO.  Consult <math.h> for further details.       */
 
-extern vFloat   vcopysignf(vFloat, vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
-extern vUInt32   vsignbitf(vFloat)         __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
-extern vFloat  vnextafterf(vFloat, vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
-extern vUInt32  vclassifyf(vFloat)         __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+extern vFloat       vfabsf(vFloat)         __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_6_0);
+extern vFloat   vcopysignf(vFloat, vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_6_0);
+extern vUInt32   vsignbitf(vFloat)         __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_6_0);
+extern vFloat  vnextafterf(vFloat, vFloat) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_6_0);
+extern vUInt32  vclassifyf(vFloat)         __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_6_0);
+/*  The legacy name vfabf is not available on iOS.  Use vfabsf instead.       */
 extern vFloat        vfabf(vFloat)         __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 /*  Generalized Table Lookup
@@ -230,7 +245,7 @@ extern vFloat        vfabf(vFloat)         __OSX_AVAILABLE_STARTING(__MAC_10_0, 
  *  specified by the second argument.  Note please that the indices are
  *  *signed* 32-bit integers.                                                 */
 
-extern vUInt32 vtablelookup(vSInt32, uint32_t *) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+extern vUInt32 vtablelookup(vSInt32, uint32_t *) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_6_0);
 
 #ifdef __cplusplus
 }

@@ -10,7 +10,7 @@
 @class PDFAnnotationFreeTextPrivateVars;
 
 
-@interface PDFAnnotationFreeText : PDFAnnotation <NSCopying>
+@interface PDFAnnotationFreeText : PDFAnnotation <NSCopying, NSCoding>
 {
 @private
     PDFAnnotationFreeTextPrivateVars *_pdfPriv2;

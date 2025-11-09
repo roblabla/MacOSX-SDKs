@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2012 Apple Inc. All rights reserved.
+	Copyright 2010-2013 Apple Inc. All rights reserved.
 
 */
 
@@ -18,7 +18,7 @@ AVF_EXPORT NSString *const AVMediaTypeText                  NS_AVAILABLE(10_7, 4
 AVF_EXPORT NSString *const AVMediaTypeClosedCaption         NS_AVAILABLE(10_7, 4_0);
 AVF_EXPORT NSString *const AVMediaTypeSubtitle              NS_AVAILABLE(10_7, 4_0);
 AVF_EXPORT NSString *const AVMediaTypeTimecode              NS_AVAILABLE(10_7, 4_0);
-AVF_EXPORT NSString *const AVMediaTypeMetadata              NS_AVAILABLE(10_8, TBD);
+AVF_EXPORT NSString *const AVMediaTypeMetadata              NS_AVAILABLE(10_8, 6_0);
 AVF_EXPORT NSString *const AVMediaTypeMuxed                 NS_AVAILABLE(10_7, 4_0);
 
 
@@ -148,7 +148,7 @@ AVF_EXPORT NSString *const AVMediaCharacteristicDescribesMusicAndSoundForAccessi
 
  Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
 */
-AVF_EXPORT NSString *const AVMediaCharacteristicEasyToRead NS_AVAILABLE(10_8, TBD);
+AVF_EXPORT NSString *const AVMediaCharacteristicEasyToRead NS_AVAILABLE(10_8, 6_0);
 
 /*!
  @constant AVMediaCharacteristicDescribesVideoForAccessibility
@@ -240,10 +240,19 @@ AVF_EXPORT NSString *const AVFileTypeAppleM4A NS_AVAILABLE(10_7, 4_0);
  @constant AVFileType3GPP
  @abstract A UTI for the 3GPP file format.
  @discussion
- The value of this UTI is @"public.3gp".
+ The value of this UTI is @"public.3gpp".
  Files are identified with the .3gp, .3gpp, and .sdv extensions.
  */
 AVF_EXPORT NSString *const AVFileType3GPP NS_AVAILABLE_IOS(4_0);
+
+/*!
+ @constant AVFileType3GPP2
+ @abstract A UTI for the 3GPP file format.
+ @discussion
+ The value of this UTI is @"public.3gpp2".
+ Files are identified with the .3g2, .3gp2 extensions.
+ */
+AVF_EXPORT NSString *const AVFileType3GPP2 NS_AVAILABLE_IOS(7_0);
 
 #endif // TARGET_OS_IPHONE
 
@@ -291,3 +300,34 @@ AVF_EXPORT NSString *const AVFileTypeAIFC NS_AVAILABLE(10_7, 4_0);
  Files are identified with the .amr extension.
  */
 AVF_EXPORT NSString *const AVFileTypeAMR NS_AVAILABLE(10_7, 4_0);
+
+/*!
+ @constant AVFileTypeMPEGLayer3
+ @abstract A UTI for the MPEG layer 3 audio file format.
+ @discussion
+ The value of this UTI is @"public.mp3".
+ Files are identified with the .mp3 extension.
+ */
+AVF_EXPORT NSString *const AVFileTypeMPEGLayer3 NS_AVAILABLE(10_9, 7_0);
+
+/*!
+ @constant AVFileTypeSunAU
+ @abstract A UTI for the Sun/NeXT audio file format.
+ @discussion
+ The value of this UTI is @"public.au-audio".
+ Files are identified with the .au and .snd extensions.
+ */
+AVF_EXPORT NSString *const AVFileTypeSunAU NS_AVAILABLE(10_9, 7_0);
+
+/*!
+ @constant AVFileTypeAC3
+ @abstract A UTI for the AC-3 audio file format.
+ @discussion
+ The value of this UTI is @"public.ac3-audio".
+ Files are identified with the .ac3 extension.
+ */
+AVF_EXPORT NSString *const AVFileTypeAC3 NS_AVAILABLE(10_9, 7_0);
+
+
+
+

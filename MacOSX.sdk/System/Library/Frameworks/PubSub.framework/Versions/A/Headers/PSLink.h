@@ -32,15 +32,15 @@
                     An alternate representation of the current feed (usually an HTML page).
 */
 typedef enum {
-    PSLinkToOther,            // Any other kind not covered by this enumeration
-    PSLinkToRSS,              // RSS feed
-    PSLinkToAtom,             // Atom feed
-    PSLinkToAtomService,      // Atom Publishing Protocol service document
-    PSLinkToFOAF,             // FOAF file (social network data)
-    PSLinkToRSD,              // RSD (really simple discovery) document for locating Blogger API
-    PSLinkToSelf,             // Definitive URL of this very resource
-    PSLinkToAlternate         // Some other alternate representation (usually an HTML page)
-} PSLinkKind;
+    PSLinkToOther NS_ENUM_DEPRECATED(10_5, 10_9, NA, NA),            // Any other kind not covered by this enumeration
+    PSLinkToRSS NS_ENUM_DEPRECATED(10_5, 10_9, NA, NA),              // RSS feed
+    PSLinkToAtom NS_ENUM_DEPRECATED(10_5, 10_9, NA, NA),             // Atom feed
+    PSLinkToAtomService NS_ENUM_DEPRECATED(10_5, 10_9, NA, NA),      // Atom Publishing Protocol service document
+    PSLinkToFOAF NS_ENUM_DEPRECATED(10_5, 10_9, NA, NA),             // FOAF file (social network data)
+    PSLinkToRSD NS_ENUM_DEPRECATED(10_5, 10_9, NA, NA),              // RSD (really simple discovery) document for locating Blogger API
+    PSLinkToSelf NS_ENUM_DEPRECATED(10_5, 10_9, NA, NA),             // Definitive URL of this very resource
+    PSLinkToAlternate NS_ENUM_DEPRECATED(10_5, 10_9, NA, NA)         // Some other alternate representation (usually an HTML page)
+} PSLinkKind NS_ENUM_DEPRECATED(10_5, 10_9, NA, NA);
 
 
 /*!
@@ -61,6 +61,7 @@ typedef enum {
     @seealso 	//apple_ref/doc/uid/TP40004945 Publication Subscription Programming Guide
 */
 
+NS_DEPRECATED(10_5, 10_9, NA, NA)
 @interface PSLink : NSObject
 {
     @private

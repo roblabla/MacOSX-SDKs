@@ -5,6 +5,15 @@
 
 */
 
+/*
+  QTKit has been deprecated in 10.9.
+
+  AVFoundation and AVKit are the frameworks recommended for all new development 
+  involving time-based audiovisual media on OS X.  In order to transition your 
+  project from QTKit to AVFoundation please refer to:
+  "Technical Note TN2300 Transitioning QTKit code to AV Foundation".
+*/
+
 #import <Cocoa/Cocoa.h>
 #import <QTKit/QTKitDefines.h>
 
@@ -12,10 +21,10 @@
 @class QTMovieControllerView;
 @class QTMovieViewInternal;
 
-QTKIT_EXTERN NSString * const QTMovieViewMovieBinding						AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;
-QTKIT_EXTERN NSString * const QTMovieViewControllerVisibleBinding			AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;
-QTKIT_EXTERN NSString * const QTMovieViewPreservesAspectRatioBinding		AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;
-QTKIT_EXTERN NSString * const QTMovieViewFillColorBinding					AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;
+QTKIT_EXTERN NSString * const QTMovieViewMovieBinding						AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+QTKIT_EXTERN NSString * const QTMovieViewControllerVisibleBinding			AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+QTKIT_EXTERN NSString * const QTMovieViewPreservesAspectRatioBinding		AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+QTKIT_EXTERN NSString * const QTMovieViewFillColorBinding					AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 #if __LP64__
 @interface QTMovieView : NSView <NSCoding, NSUserInterfaceValidations>
@@ -47,13 +56,13 @@ QTKIT_EXTERN NSString * const QTMovieViewFillColorBinding					AVAILABLE_QTKIT_VE
 #endif
 }
 
-- (QTMovie *)movie;
-- (void)setMovie:(QTMovie *)movie;
+- (QTMovie *)movie AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+- (void)setMovie:(QTMovie *)movie AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
-- (BOOL)preservesAspectRatio;
-- (void)setPreservesAspectRatio:(BOOL)preservesAspectRatio;
-- (NSColor *)fillColor;
-- (void)setFillColor:(NSColor *)fillColor;
+- (BOOL)preservesAspectRatio AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+- (void)setPreservesAspectRatio:(BOOL)preservesAspectRatio AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+- (NSColor *)fillColor AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+- (void)setFillColor:(NSColor *)fillColor AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
  @method		isControllerVisible
@@ -65,57 +74,57 @@ QTKIT_EXTERN NSString * const QTMovieViewFillColorBinding					AVAILABLE_QTKIT_VE
  				display their own user interface; for those types of content it's possible for -controllerBarHeight to return 0
  				even when -isControllerVisible is YES.
 */
-- (BOOL)isControllerVisible;
-- (void)setControllerVisible:(BOOL)controllerVisible;
-- (void)setShowsResizeIndicator:(BOOL)show;
+- (BOOL)isControllerVisible AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+- (void)setControllerVisible:(BOOL)controllerVisible AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+- (void)setShowsResizeIndicator:(BOOL)show AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 #if QTKIT_VERSION_MAX_ALLOWED >= QTKIT_VERSION_7_2
-- (BOOL)isBackButtonVisible;
-- (void)setBackButtonVisible:(BOOL)state;
-- (BOOL)isCustomButtonVisible;
-- (void)setCustomButtonVisible:(BOOL)state;
-- (BOOL)isHotSpotButtonVisible;
-- (void)setHotSpotButtonVisible:(BOOL)state;
-- (BOOL)areStepButtonsVisible;
-- (void)setStepButtonsVisible:(BOOL)state;
-- (BOOL)isTranslateButtonVisible;
-- (void)setTranslateButtonVisible:(BOOL)state;
-- (BOOL)isVolumeButtonVisible;
-- (void)setVolumeButtonVisible:(BOOL)state;
-- (BOOL)areZoomButtonsVisible;
-- (void)setZoomButtonsVisible:(BOOL)state;
+- (BOOL)isBackButtonVisible AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+- (void)setBackButtonVisible:(BOOL)state AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+- (BOOL)isCustomButtonVisible AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+- (void)setCustomButtonVisible:(BOOL)state AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+- (BOOL)isHotSpotButtonVisible AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+- (void)setHotSpotButtonVisible:(BOOL)state AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+- (BOOL)areStepButtonsVisible AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+- (void)setStepButtonsVisible:(BOOL)state AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+- (BOOL)isTranslateButtonVisible AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+- (void)setTranslateButtonVisible:(BOOL)state AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+- (BOOL)isVolumeButtonVisible AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+- (void)setVolumeButtonVisible:(BOOL)state AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+- (BOOL)areZoomButtonsVisible AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+- (void)setZoomButtonsVisible:(BOOL)state AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 #endif /* QTKIT_VERSION_MAX_ALLOWED >= QTKIT_VERSION_7_2 */ 
 
-- (NSRect)movieBounds;
-- (NSRect)movieControllerBounds;
-- (float)controllerBarHeight;
+- (NSRect)movieBounds AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+- (NSRect)movieControllerBounds AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+- (float)controllerBarHeight AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
-- (IBAction)play:(id)sender;
-- (IBAction)pause:(id)sender;
-- (IBAction)gotoBeginning:(id)sender;
-- (IBAction)gotoEnd:(id)sender;
-- (IBAction)gotoNextSelectionPoint:(id)sender;
-- (IBAction)gotoPreviousSelectionPoint:(id)sender;
-- (IBAction)gotoPosterFrame:(id)sender;
-- (IBAction)stepForward:(id)sender;
-- (IBAction)stepBackward:(id)sender;
+- (IBAction)play:(id)sender AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+- (IBAction)pause:(id)sender AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+- (IBAction)gotoBeginning:(id)sender AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+- (IBAction)gotoEnd:(id)sender AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+- (IBAction)gotoNextSelectionPoint:(id)sender AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+- (IBAction)gotoPreviousSelectionPoint:(id)sender AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+- (IBAction)gotoPosterFrame:(id)sender AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+- (IBAction)stepForward:(id)sender AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+- (IBAction)stepBackward:(id)sender AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
-- (BOOL)isEditable;
-- (void)setEditable:(BOOL)editable;
+- (BOOL)isEditable AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+- (void)setEditable:(BOOL)editable AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
-- (IBAction)cut:(id)sender;
-- (IBAction)copy:(id)sender;
-- (IBAction)paste:(id)sender;
-- (IBAction)selectAll:(id)sender;
-- (IBAction)selectNone:(id)sender;
-- (IBAction)delete:(id)sender;
-- (IBAction)add:(id)sender;
-- (IBAction)addScaled:(id)sender;
-- (IBAction)replace:(id)sender;
-- (IBAction)trim:(id)sender;
+- (IBAction)cut:(id)sender AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+- (IBAction)copy:(id)sender AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+- (IBAction)paste:(id)sender AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+- (IBAction)selectAll:(id)sender AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+- (IBAction)selectNone:(id)sender AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+- (IBAction)delete:(id)sender AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+- (IBAction)add:(id)sender AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+- (IBAction)addScaled:(id)sender AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+- (IBAction)replace:(id)sender AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+- (IBAction)trim:(id)sender AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 #if QTKIT_VERSION_MAX_ALLOWED >= QTKIT_VERSION_7_2
-- (id)delegate;
-- (void)setDelegate:(id)delegate;
+- (id)delegate AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+- (void)setDelegate:(id)delegate AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 #endif /* QTKIT_VERSION_MAX_ALLOWED >= QTKIT_VERSION_7_2 */ 
 
 @end
@@ -123,7 +132,7 @@ QTKIT_EXTERN NSString * const QTMovieViewFillColorBinding					AVAILABLE_QTKIT_VE
 @interface NSObject (QTMovieView_Delegate)
 
 #if (QTKIT_VERSION_MAX_ALLOWED >= QTKIT_VERSION_7_2) && (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4)
-- (CIImage *)view:(QTMovieView *)view willDisplayImage:(CIImage *)image;
+- (CIImage *)view:(QTMovieView *)view willDisplayImage:(CIImage *)image AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 #endif /* (QTKIT_VERSION_MAX_ALLOWED >= QTKIT_VERSION_7_2) && (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4) */
 
 #if (QTKIT_VERSION_MAX_ALLOWED >= QTKIT_VERSION_7_6_3) && (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6)
@@ -135,7 +144,7 @@ QTKIT_EXTERN NSString * const QTMovieViewFillColorBinding					AVAILABLE_QTKIT_VE
 				an application cannot hard link against the QTKit framework.
  */
 
-- (NSMenu *)menuForEventDelegate:(NSEvent *)event;
+- (NSMenu *)menuForEventDelegate:(NSEvent *)event AVAILABLE_QTKIT_VERSION_7_6_3_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 #endif
 
 @end

@@ -93,11 +93,11 @@ APPKIT_EXTERN NSString * const NSSoundPboardType;
 
 /* Set the channel mapping for the sound.  Pass an array of NSNumbers, which maps sound channels to device channels.  Pass -1 to indicate that a particular sound channel should be ignored.  For any channel, instead of an NSNumber, you may also pass an NSArray of NSNumbers to map a single sound channel to multiple device channels.
 */
-- (void)setChannelMapping:(NSArray *)channelMapping NS_AVAILABLE_MAC(10_5);
+- (void)setChannelMapping:(NSArray *)channelMapping NS_DEPRECATED_MAC(10_5, 10_9);
 
 /* Get the channel mapping for the sound.  By default, a stereo sound maps its first and second channels to the left and right device channels, while a mono sound maps its single channel across every device channel.
 */
-- (NSArray *)channelMapping NS_AVAILABLE_MAC(10_5);
+- (NSArray *)channelMapping NS_DEPRECATED_MAC(10_5, 10_9);
 
 
 @end

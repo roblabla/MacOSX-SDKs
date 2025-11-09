@@ -1,7 +1,7 @@
 /*
         NSMenuItem.h
         Application Kit
-        Copyright (c) 1996-2012, Apple Inc.
+        Copyright (c) 1996-2013, Apple Inc.
         All rights reserved.
 */
 
@@ -60,7 +60,7 @@
         unsigned int ignoredForAccessibility:1;
         unsigned int hiddenActiveKE:1;
         unsigned int noRepeatKEs:1;
-        unsigned int RESERVED2:1;
+        unsigned int targetWeak:1;
     } _miFlags;
 }
 

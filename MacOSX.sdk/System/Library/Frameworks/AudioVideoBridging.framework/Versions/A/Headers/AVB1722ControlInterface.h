@@ -40,6 +40,8 @@ NS_CLASS_AVAILABLE(10_8, NA)
 	
 	io_object_t notification;
 	
+	BOOL shouldRemove;
+	
 #ifndef _LP64
 	NSString *interfaceName;
 	AVBInterface *interface;
@@ -61,14 +63,21 @@ NS_CLASS_AVAILABLE(10_8, NA)
 	@result		The initialized receiver.
 	@discussion	This method calls initWithService:onInterfaceNamed: with anInterface.interfaceName.
  */
-- (id)initWithService:(io_object_t)aService onInterface:(AVBInterface *)anInterface;
+- (id)initWithService:(io_object_t)aService onInterface:(AVBInterface *)anInterface NS_DEPRECATED(10_8, 10_9, NA, NA);
 /*!
 	@method		initWithService:onInterfaceNamed:
-	@abstract	Initialize the receiver with the min/max/step/current/default values starting at the valuePtr.
-	@param		valuePtr	On entry this is a pointer to the start of fields to be placed into this value, on exit this has been incremented to the next set of fields.
-	@param		numValues	The number of option values in the memory pointed to by valuePtr.
+	@abstract	Initialize the receiver with the specified service and interface
+	@param		aService	The io_object_t corresponding to the IORegistry entry of the control service on the interface.
+	@param		anInterfaceName	The BSD name of the interface on which to create the object.
 	@result		The initialized receiver.
  */
-- (id)initWithService:(io_object_t)aService onInterfaceNamed:(NSString *)anInterfaceName;
+- (id)initWithService:(io_object_t)aService onInterfaceNamed:(NSString *)anInterfaceName NS_DEPRECATED(10_8, 10_9, NA, NA);
+/*!
+	@method		initWithInterfaceName:
+	@abstract	Initializes the receiver to work with a 1722 control service on the specified interface. The client must have previously be requested to load on the interface.
+	@param		anInterfaceName	The BSD name of the interface on which to create the object.
+	@result		The initialized receiver.
+ */
+- (id)initWithInterfaceName:(NSString *)anInterfaceName NS_AVAILABLE(10_9, NA);
 
 @end

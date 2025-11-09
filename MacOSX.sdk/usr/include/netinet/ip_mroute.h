@@ -187,25 +187,6 @@ struct sioc_vif_req {
 
 
 /*
- * The kernel's multicast forwarding cache entry structure 
- * (A field for the type of service (mfc_tos) is to be added 
- * at a future point)
- */
-struct mfc {
-    struct in_addr  mfc_origin;	 		/* IP origin of mcasts   */
-    struct in_addr  mfc_mcastgrp;  		/* multicast group associated*/
-    vifi_t	    mfc_parent; 		/* incoming vif              */
-    u_char	    mfc_ttls[CONFIG_MAXVIFS]; 		/* forwarding ttls on vifs   */
-    u_int32_t	    mfc_pkt_cnt;		/* pkt count for src-grp     */
-    u_int32_t	    mfc_byte_cnt;		/* byte count for src-grp    */
-    u_int32_t	    mfc_wrong_if;		/* wrong if for src-grp	     */
-    int		    mfc_expire;			/* time to clean entry up    */
-    struct timeval  mfc_last_assert;		/* last time I sent an assert*/
-    struct rtdetq  *mfc_stall;			/* q of packets awaiting mfc */
-    struct mfc     *mfc_next;			/* next mfc entry            */
-};
-
-/*
  * Struct used to communicate from kernel to multicast router
  * note the convenient similarity to an IP packet
  */

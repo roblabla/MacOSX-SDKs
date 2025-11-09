@@ -11,9 +11,9 @@
 extern "C" {
 #endif
 
-typedef struct CGLShareGroupRec	*CGLShareGroupObj;
+typedef struct CGLShareGroupRec	*CGLShareGroupObj OPENGL_AVAILABLE(10_6);
 
-CGLShareGroupObj CGLGetShareGroup(CGLContextObj ctx);
+CGLShareGroupObj CGLGetShareGroup(CGLContextObj ctx) OPENGL_AVAILABLE(10_6);
 
 #ifdef __cplusplus
 }

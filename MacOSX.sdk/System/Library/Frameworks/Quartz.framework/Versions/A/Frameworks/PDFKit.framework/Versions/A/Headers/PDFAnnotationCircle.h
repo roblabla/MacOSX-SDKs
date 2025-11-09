@@ -10,7 +10,7 @@
 @class PDFAnnotationCirclePrivateVars;
 
 
-@interface PDFAnnotationCircle : PDFAnnotation <NSCopying>
+@interface PDFAnnotationCircle : PDFAnnotation <NSCopying/*, NSCoding*/>
 {
 @private
     PDFAnnotationCirclePrivateVars *_pdfPriv2;

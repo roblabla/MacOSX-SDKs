@@ -53,6 +53,13 @@ EVENTKIT_CLASS_AVAILABLE(10_8, 4_0)
 @property(nonatomic, readonly) EKParticipantType participantType;
 
 /*!
+    @property   isCurrentUser
+    @abstract   A boolean indicating whether this participant represents the
+                owner of this account.
+ */
+@property(nonatomic, readonly) BOOL isCurrentUser __OSX_AVAILABLE_STARTING(__MAC_10_9,__IPHONE_6_0);
+
+/*!
     @method     ABPersonInAddressBook
     @abstract   Returns the ABPerson that represents this participant.
     @discussion This method returns the ABPerson that represents this participant,

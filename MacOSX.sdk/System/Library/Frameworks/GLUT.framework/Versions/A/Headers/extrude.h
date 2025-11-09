@@ -44,13 +44,13 @@
 
 extern void up_sanity_check (gleDouble up[3],      /* up vector for contour */
                       int npoints,              /* numpoints in poly-line */
-                      gleDouble point_array[][3]);   /* polyline */
+                      gleDouble point_array[][3]) OPENGL_DEPRECATED(10_0, 10_9);   /* polyline */
 
 
 extern void draw_raw_style_end_cap (int ncp,     /* number of contour points */
                              gleDouble contour[][2],     /* 2D contour */
                              gleDouble zval,             /* where to draw cap */
-                             int frontwards);    /* front or back cap */
+                             int frontwards) OPENGL_DEPRECATED(10_0, 10_9);    /* front or back cap */
 
 extern void draw_round_style_cap_callback (int iloop,
                                   double cap[][3],
@@ -58,11 +58,11 @@ extern void draw_round_style_cap_callback (int iloop,
                                   gleDouble cut_vector[3],
                                   gleDouble bisect_vector[3],
                                   double norms[][3],
-                                  int frontwards);
+                                  int frontwards) OPENGL_DEPRECATED(10_0, 10_9);
 
 extern void draw_angle_style_front_cap (int ncp,
                            gleDouble bi[3],
-                           gleDouble point_array[][3]);
+                           gleDouble point_array[][3]) OPENGL_DEPRECATED(10_0, 10_9);
 
 extern void extrusion_raw_join (int ncp,        /* number of contour points */
                          gleDouble contour[][2],    /* 2D contour */
@@ -71,7 +71,7 @@ extern void extrusion_raw_join (int ncp,        /* number of contour points */
                          int npoints,           /* numpoints in poly-line */
                          gleDouble point_array[][3],        /* polyline */
                          float color_array[][3],        /* color of polyline */
-                         gleDouble xform_array[][2][3]);  /* 2D contour xforms */
+                         gleDouble xform_array[][2][3]) OPENGL_DEPRECATED(10_0, 10_9);  /* 2D contour xforms */
 
 
 extern void extrusion_round_or_cut_join (int ncp, /* number of contour points */
@@ -81,7 +81,7 @@ extern void extrusion_round_or_cut_join (int ncp, /* number of contour points */
                            int npoints,         /* numpoints in poly-line */
                            gleDouble point_array[][3],      /* polyline */
                            float color_array[][3],      /* color of polyline */
-                           gleDouble xform_array[][2][3]);  /* 2D contour xforms */
+                           gleDouble xform_array[][2][3]) OPENGL_DEPRECATED(10_0, 10_9);  /* 2D contour xforms */
 
 
 extern void extrusion_angle_join (int ncp,      /* number of contour points */
@@ -91,6 +91,6 @@ extern void extrusion_angle_join (int ncp,      /* number of contour points */
                            int npoints,         /* numpoints in poly-line */
                            gleDouble point_array[][3],      /* polyline */
                            float color_array[][3],      /* color of polyline */
-                           gleDouble xform_array[][2][3]);  /* 2D contour xforms */
+                           gleDouble xform_array[][2][3]) OPENGL_DEPRECATED(10_0, 10_9);  /* 2D contour xforms */
 
 /* -------------------------- end of file -------------------------------- */

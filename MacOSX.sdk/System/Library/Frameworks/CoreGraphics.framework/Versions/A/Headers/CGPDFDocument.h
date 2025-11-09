@@ -12,6 +12,8 @@ typedef struct CGPDFDocument *CGPDFDocumentRef;
 #include <CoreGraphics/CGPDFPage.h> 
 #include <CoreFoundation/CFURL.h>
 
+CF_IMPLICIT_BRIDGING_ENABLED
+
 /* Create a PDF document, using `provider' to obtain the document's data. */
 
 CG_EXTERN CGPDFDocumentRef CGPDFDocumentCreateWithProvider(CGDataProviderRef
@@ -147,5 +149,7 @@ CG_EXTERN CGRect CGPDFDocumentGetArtBox(CGPDFDocumentRef document, int page)
 CG_EXTERN int CGPDFDocumentGetRotationAngle(CGPDFDocumentRef document,
   int page) CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5,
     __IPHONE_NA, __IPHONE_NA);
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif /* CGPDFDOCUMENT_H_ */

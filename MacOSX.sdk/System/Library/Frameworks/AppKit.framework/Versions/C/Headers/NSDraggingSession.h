@@ -1,7 +1,7 @@
 /*
 	NSDraggingSession.h
 	Application Kit
-	Copyright (c) 2010-2012, Apple Inc.
+	Copyright (c) 2010-2013, Apple Inc.
 	All rights reserved.
 */
 
@@ -16,15 +16,20 @@ NS_CLASS_AVAILABLE(10_7, NA)
 @interface NSDraggingSession : NSObject {
 @private
     void *_private;
+#if !__LP64__
     NSPoint _dragLocation;
+#endif
     NSPoint _offset;
     id<NSDraggingSource> _source;
     id _alternateDragSource;
     id<NSDraggingSource> _filePromiseDragSource;
     NSPasteboard *_pboard;
     NSImage *_compositeImageCache;
+#if !__LP64__
     NSInteger _leaderIndex;
+#endif
     BOOL _animatesOnCancelOrFail;
+#if !__LP64__    
     BOOL _reservedBOOL1;
     BOOL _reservedBOOL2;
     BOOL _reservedBOOL3;
@@ -34,6 +39,7 @@ NS_CLASS_AVAILABLE(10_7, NA)
     BOOL _reservedBOOL7;
     NSInteger _reservedInteger1;
     NSInteger _reservedInteger2;
+#endif
 }
 
 /* Controls the dragging formation when the drag is over the source. The default value is NSDraggingFormationNone. */

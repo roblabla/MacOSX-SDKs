@@ -1,7 +1,7 @@
 /*
 	AppKitErrors.h
 	Application Kit
-	Copyright (c) 2004-2012, Apple Inc.
+	Copyright (c) 2004-2013, Apple Inc.
 	All rights reserved.
 */
 
@@ -28,7 +28,15 @@ enum {
     
     // Inclusive service error range, for checking future error codes
     NSServiceErrorMinimum = 66560,
-    NSServiceErrorMaximum = 66817
+    NSServiceErrorMaximum = 66817,
+    
+    
+    // Sharing Service Error    
+    NSSharingServiceNotConfiguredError = 67072,                // The service is not configured in the Preferences
+    
+    // Inclusive service error range, for checking future error codes
+    NSSharingServiceErrorMinimum = 67072,
+    NSSharingServiceErrorMaximum = 67327
 };
 
 

@@ -3,7 +3,7 @@
 
 	Framework:  CoreMedia
  
-    Copyright 2005-2012 Apple Inc. All rights reserved.
+    Copyright 2005-2013 Apple Inc. All rights reserved.
 
 */
 
@@ -49,10 +49,12 @@ extern "C" {
 	@discussion OSStatus errors returned by CMFormatDescription APIs.
 	@constant	kCMFormatDescriptionError_InvalidParameter Invalid parameter.
 	@constant	kCMFormatDescriptionError_AllocationFailed Returned when an allocation fails.
+	@constant	kCMFormatDescriptionError_ValueNotAvailable Returned when the CMFormatDescription does not carry such a value.
 */
 enum {
 	kCMFormatDescriptionError_InvalidParameter		= -12710,
 	kCMFormatDescriptionError_AllocationFailed		= -12711,
+	kCMFormatDescriptionError_ValueNotAvailable		= -12718,
 };
 
 /*!
@@ -306,7 +308,7 @@ CM_EXPORT
 OSStatus CMAudioFormatDescriptionCreate(
 	CFAllocatorRef allocator,					/*! @param allocator		CFAllocator to be used. Pass kCFAllocatorDefault or NULL to use the default allocator. */
 	const AudioStreamBasicDescription *asbd,	/*! @param asbd				Audio format description (see CoreAudioTypes.h). This information is required. */
-	size_t layoutSize,							/*! @param layoutSize		Size, in bytes, of audio channel layout. 0 if pLayout is NULL. */
+	size_t layoutSize,							/*! @param layoutSize		Size, in bytes, of audio channel layout. 0 if layout is NULL. */
 	const AudioChannelLayout *layout,			/*! @param layout			Audio channel layout (see CoreAudioTypes.h). Can be NULL. */	
 	size_t magicCookieSize,						/*! @param magicCookieSize	Size, in bytes, of magic cookie. 0 if magicCookie is NULL. */
 	const void *magicCookie,					/*! @param magicCookie		Magic cookie. This information is required for some formats, and must be NULL for all others. */
@@ -712,6 +714,7 @@ enum
 	kCMMPEG2VideoProfile_XDCAM_HD422_720p24_CBR50 = 'xd54',
 	kCMMPEG2VideoProfile_XDCAM_HD422_720p25_CBR50 = 'xd55',
 	kCMMPEG2VideoProfile_XDCAM_HD422_720p30_CBR50 = 'xd51',
+	kCMMPEG2VideoProfile_XF = 'xfz1',
 };
 
 CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_TemporalQuality			// CFNumber
@@ -773,6 +776,53 @@ OSStatus CMVideoFormatDescriptionCreateForImageBuffer(
 	CMVideoFormatDescriptionRef *outDesc)	/*! @param outDesc
 											Returned newly-created video CMFormatDescription */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+
+/*!
+	@function	CMVideoFormatDescriptionCreateFromH264ParameterSets
+	@abstract	Creates a format description for a video media stream described by H.264 parameter set NAL units.
+	@discussion	This function parses the dimensions provided by the parameter sets and creates a format description suitable for a raw H.264 stream.
+				The parameter sets data can come from raw NAL units and must have any emulation prevention bytes needed.
+				The supported NAL unit types to be included in the format description are 7 (sequence parameter set), 8 (picture parameter set) and 13 (sequence parameter set extension). At least one sequence parameter set and one picture parameter set must be provided.
+*/
+CM_EXPORT
+OSStatus CMVideoFormatDescriptionCreateFromH264ParameterSets(
+	 CFAllocatorRef allocator,						/*! @param allocator
+													CFAllocator to be used when creating the CMFormatDescription. Pass NULL to use the default allocator. */
+	 size_t parameterSetCount,						/*! @param parameterSetCount
+													The number of parameter sets to include in the format description. This parameter must be greater than two. */
+	 const uint8_t * const * parameterSetPointers,	/*! @param parameterSetPointers
+													Points to a C array containing parameterSetCount pointers to parameter sets. */
+	 const size_t * parameterSetSizes,				/*! @param parameterSetSizes
+													Points to a C array containing the size, in bytes, of each of the parameter sets. */
+	 int NALUnitHeaderLength,						/*! @param NALUnitHeaderLength
+													Size, in bytes, of the NALUnitLength field in an AVC video sample or AVC parameter set sample. Pass 1, 2 or 4. */
+	 CMFormatDescriptionRef *formatDescriptionOut )	/*! @param formatDescriptionOut
+													Returned newly-created video CMFormatDescription */
+							__OSX_AVAILABLE_STARTING(__MAC_10_9,__IPHONE_7_0);
+
+/*!
+	@function	CMVideoFormatDescriptionGetH264ParameterSetAtIndex
+	@abstract	Returns a parameter set contained in a H.264 format description.
+	@discussion	This function parses the AVC decoder configuration record contained in a H.264 video format description and returns the parameter set NAL unit at the given index from it.
+				Both parameterSetPointerOut and parameterSetSizeOut may be NULL, parameterSetCountOut will return the total number of parameter set NAL units contained in the AVC decoder configuration record.
+				The parameter set NAL units returned will already have any emulation prevention bytes needed.
+				The pointer returned in parameterSetPointerOut points to internal memory of videoDesc, and may only be accessed as long as a retain on videoDesc is held.
+*/
+CM_EXPORT
+OSStatus CMVideoFormatDescriptionGetH264ParameterSetAtIndex(
+		CMFormatDescriptionRef videoDesc,			/*! @param videoDesc
+													FormatDescription being interrogated. */
+		size_t parameterSetIndex,					/*! @param parameterSetIndex
+													Index of the parameter set to be returned in parameterSetPointerOut and parameterSetSizeOut. This parameter is ignored if both parameterSetPointerOut and parameterSetSizeOut are NULL. */
+		const uint8_t **parameterSetPointerOut,		/*! @param parameterSetPointerOut
+													Points to a pointer to receive the parameter set. Pass NULL if you do not want this information. */
+		size_t *parameterSetSizeOut,				/*! @param parameterSetSizeOut
+													Points to a size_t to receive the size in bytes of the parameter set. Pass NULL if you do not want this information. */
+		size_t *parameterSetCountOut,				/*! @param parameterSetCountOut
+													Number of parameter sets in the AVC decoder configuration record contained in videoDesc. Pass NULL if you do not want this information. */
+		int *NALUnitHeaderLengthOut )				/*! @param NALUnitHeaderLengthOut
+													Points to an int to receive the size, in bytes, of the NALUnitLength field in an AVC video sample or AVC parameter set sample. Pass NULL if you do not want this information. */
+							__OSX_AVAILABLE_STARTING(__MAC_10_9,__IPHONE_7_0);
 
 #define CMVideoFormatDescriptionGetCodecType(desc)  CMFormatDescriptionGetMediaSubType(desc)
 
@@ -977,6 +1027,7 @@ typedef FourCharCode CMTextFormatType;
 	@constant	kCMTextDisplayFlag_continuousKaraoke	Enables the Continuous Karaoke mode where the range of karaoke highlighting extends to include additional ranges rather than the highlighting moves onto the next range.
 	@constant	kCMTextDisplayFlag_writeTextVertically	Specifies the text to be rendered vertically.
 	@constant	kCMTextDisplayFlag_fillTextRegion	The subtitle display bounds are to be filled with the color specified by kCMTextFormatDescriptionExtension_BackgroundColor.
+	@constant	kCMTextDisplayFlag_obeySubtitleFormatting	Specifies that the subtitle display bounds should be used to determine if the subtitles should be placed near the top or the bottom of the video. Otherwise, subtitles should be placed at the bottom of the video.
 	@constant	kCMTextDisplayFlag_forcedSubtitlesPresent	There are forced subtitles present, e.g., a subtitle which only displays during foreign language sections of the video. Check individual samples to determine what type of subtitle is contained.
 	@constant	kCMTextDisplayFlag_allSubtitlesForced	Treat all subtitle samples as if they contain forced subtitles.
 */
@@ -1074,7 +1125,7 @@ CM_EXPORT const CFStringRef kCMTextFormatDescriptionExtension_DefaultFontName   
 	@function	CMTextFormatDescriptionGetDisplayFlags
 	@abstract	Returns the displayFlags.
 	@discussion
-		These are the flags that control how the text appears.
+		These are the flags that control how the text appears. The function can return kCMFormatDescriptionError_ValueNotAvailable for formats without display flags.
 */
 CM_EXPORT
 OSStatus CMTextFormatDescriptionGetDisplayFlags(
@@ -1088,7 +1139,7 @@ OSStatus CMTextFormatDescriptionGetDisplayFlags(
 	@function	CMTextFormatDescriptionGetJustification
 	@abstract	Returns horizontal and vertical justification.
 	@discussion
-		Values are kCMTextJustification_* constants. 
+		Values are kCMTextJustification_* constants. The function returns kCMFormatDescriptionError_ValueNotAvailable for format descriptions that do not carry text justification.
 */
 CM_EXPORT
 OSStatus CMTextFormatDescriptionGetJustification(
@@ -1104,7 +1155,7 @@ OSStatus CMTextFormatDescriptionGetJustification(
 	@function	CMTextFormatDescriptionGetDefaultTextBox
 	@abstract	Returns the default text box.
 	@discussion
-		Within a text track, text is rendered within a text box.  There is a default text box set, which can be over-ridden by a sample.  
+		Within a text track, text is rendered within a text box.  There is a default text box set, which can be over-ridden by a sample. The function can return kCMFormatDescriptionError_ValueNotAvailable for format descriptions that do not carry a default text box.
 */
 CM_EXPORT
 OSStatus CMTextFormatDescriptionGetDefaultTextBox(
@@ -1127,7 +1178,9 @@ OSStatus CMTextFormatDescriptionGetDefaultTextBox(
 
 /*!
 	@function	CMTextFormatDescriptionGetDefaultStyle
-	@abstract	Returns the default style.
+	@abstract	Returns the default style. 
+	@discussion	
+		The function returns kCMFormatDescriptionError_ValueNotAvailable for format descriptions that do not carry default style information.
 */
 CM_EXPORT
 OSStatus CMTextFormatDescriptionGetDefaultStyle(
@@ -1150,6 +1203,8 @@ OSStatus CMTextFormatDescriptionGetDefaultStyle(
 /*!
 	@function	CMTextFormatDescriptionGetFontName
 	@abstract	Returns the font name for a local font ID.
+	@discussion
+		Some format descriptions carry a mapping from local font IDs to font names. The function returns kCMFormatDescriptionError_ValueNotAvailable for format descriptions that do not carry such a font mapping table.
 */
 CM_EXPORT
 OSStatus CMTextFormatDescriptionGetFontName(

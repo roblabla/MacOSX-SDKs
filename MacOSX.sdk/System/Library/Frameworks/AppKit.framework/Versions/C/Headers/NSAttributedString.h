@@ -1,6 +1,6 @@
 /*
         NSAttributedString.h
-        Copyright (c) 1994-2012, Apple Inc.
+        Copyright (c) 1994-2013, Apple Inc.
         All rights reserved.
 
         This file defines Application Kit extensions to NSAttributedString and NSMutableAttributedString.
@@ -298,8 +298,8 @@ APPKIT_EXTERN NSString *NSFileTypeDocumentOption                NS_AVAILABLE_MAC
 /* Deprecated constants previously used for underline style.
 */
 enum {
-    NSNoUnderlineStyle = 0,
-    NSSingleUnderlineStyle
-};
-APPKIT_EXTERN NSUInteger NSUnderlineStrikethroughMask;
+    NSNoUnderlineStyle = 0,     // NSUnderlineStyleNone should be used instead
+    NSSingleUnderlineStyle      // NSUnderlineStyleSingle should be used instead
+} NS_ENUM_DEPRECATED_MAC(10_0, 10_9);
+APPKIT_EXTERN NSUInteger NSUnderlineStrikethroughMask NS_DEPRECATED_MAC(10_0, 10_9); // NSStrikethroughStyleAttributeName should be used instead
 

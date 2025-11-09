@@ -3,7 +3,7 @@
  
      Contains:   QuickTime Interfaces.
  
-     Version:    QuickTime 7.7.1
+     Version:    QuickTime 7.7.3
  
      Copyright:  © 1990-2012 by Apple Inc., all rights reserved
  
@@ -11,8 +11,15 @@
                  the World Wide Web:
  
                      http://developer.apple.com/bugreporter/
- 
 */
+
+/*
+  QuickTime has been deprecated in 10.9.
+
+  AVFoundation and AVKit are the frameworks recommended for all new development 
+  involving time-based audiovisual media on OS X.
+*/
+
 #ifndef __QTSMOVIE__
 #define __QTSMOVIE__
 
@@ -128,10 +135,10 @@ enum {
     QTS Media Handler functions
 -----------------------------------------*/
 /*
- *  QTSMediaSetInfo()
+ *  QTSMediaSetInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -140,14 +147,14 @@ extern ComponentResult
 QTSMediaSetInfo(
   MediaHandler   mh,
   OSType         inSelector,
-  void *         ioParams)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *         ioParams)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSMediaGetInfo()
+ *  QTSMediaGetInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -156,14 +163,14 @@ extern ComponentResult
 QTSMediaGetInfo(
   MediaHandler   mh,
   OSType         inSelector,
-  void *         ioParams)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *         ioParams)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSMediaSetIndStreamInfo()
+ *  QTSMediaSetIndStreamInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -173,14 +180,14 @@ QTSMediaSetIndStreamInfo(
   MediaHandler   mh,
   SInt32         inIndex,
   OSType         inSelector,
-  void *         ioParams)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *         ioParams)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSMediaGetIndStreamInfo()
+ *  QTSMediaGetIndStreamInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -190,7 +197,7 @@ QTSMediaGetIndStreamInfo(
   MediaHandler   mh,
   SInt32         inIndex,
   OSType         inSelector,
-  void *         ioParams)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *         ioParams)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 

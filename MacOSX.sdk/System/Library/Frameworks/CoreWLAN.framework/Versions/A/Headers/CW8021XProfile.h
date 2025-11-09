@@ -16,6 +16,7 @@
  * @discussion Encapsulates an 802.1X profile providing accessors to various profile properties.  The CW8021XProfile class is
  * deprecated, and will no longer function.
  */
+NS_CLASS_DEPRECATED_MAC(10_6, 10_7)
 @interface CW8021XProfile : NSObject <NSCopying, NSCoding> {
 @private
     NSString *_userDefinedName;
@@ -23,7 +24,7 @@
     NSString *_username;
     NSString *_password;
     BOOL _alwaysPromptForPassword;
-}
+} 
 
 /*!
  * @property

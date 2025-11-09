@@ -1,8 +1,8 @@
 /*
- * Copyright (c) 2008-2011 Apple Inc. All rights reserved.
+ * Copyright (c) 2008-2013 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
- * 
+ *
  * This file contains Original Code and/or Modifications of Original Code
  * as defined in and that are subject to the Apple Public Source License
  * Version 2.0 (the 'License'). You may not use this file except in
@@ -11,10 +11,10 @@
  * unlawful or unlicensed copies of an Apple operating system, or to
  * circumvent, violate, or enable the circumvention or violation of, any
  * terms of an Apple operating system software license agreement.
- * 
+ *
  * Please obtain a copy of the License at
  * http://www.opensource.apple.com/apsl/ and read it before using this file.
- * 
+ *
  * The Original Code and all software distributed under the License are
  * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
@@ -22,7 +22,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
  * Please see the License for the specific language governing rights and
  * limitations under the License.
- * 
+ *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_END@
  */
 /*!
@@ -902,7 +902,8 @@ extern mbuf_flags_t mbuf_flags(const mbuf_t mbuf);
 	@function mbuf_setflags
 	@discussion Sets the set of set flags.
 	@param mbuf The mbuf.
-	@param flags The flags that should be set, all other flags will be cleared.
+	@param flags The flags that should be set, all other flags will be
+		cleared.  Certain flags such as MBUF_EXT cannot be altered.
 	@result 0 upon success otherwise the errno error.
  */
 extern errno_t mbuf_setflags(mbuf_t mbuf, mbuf_flags_t flags);
@@ -912,7 +913,8 @@ extern errno_t mbuf_setflags(mbuf_t mbuf, mbuf_flags_t flags);
 	@discussion Useful for setting or clearing individual flags. Easier
 		than calling mbuf_setflags(m, mbuf_flags(m) | M_FLAG).
 	@param mbuf The mbuf.
-	@param flags The flags that should be set or cleared.
+	@param flags The flags that should be set or cleared.  Certain flags
+		such as MBUF_EXT cannot be altered.
 	@param mask The mask controlling which flags will be modified.
 	@result 0 upon success otherwise the errno error.
  */
@@ -1299,6 +1301,7 @@ extern errno_t mbuf_tag_find(mbuf_t mbuf, mbuf_tag_id_t module_id,
 extern void mbuf_tag_free(mbuf_t mbuf, mbuf_tag_id_t module_id,
     mbuf_tag_type_t type);
 
+
 /* mbuf stats */
 
 /*!
@@ -1339,7 +1342,7 @@ extern mbuf_traffic_class_t mbuf_get_traffic_class(mbuf_t mbuf);
 	@discussion Set the traffic class of an mbuf packet.
 	@param mbuf The mbuf to set the traffic class on.
 	@tc The traffic class
-	@result 0 on success, EINVAL if bad paramater is passed
+	@result 0 on success, EINVAL if bad parameter is passed
 */
 extern errno_t mbuf_set_traffic_class(mbuf_t mbuf, mbuf_traffic_class_t tc);
 

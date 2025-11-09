@@ -22,10 +22,10 @@
 
 #ifdef __cplusplus
 #define COREDATA_EXTERN		extern "C"
-#define COREDATA_PRIVATE_EXTERN	__private_extern__
+#define COREDATA_PRIVATE_EXTERN	__attribute__((visibility("hidden"))) extern "C"
 #else
 #define COREDATA_EXTERN		extern
-#define COREDATA_PRIVATE_EXTERN	__private_extern__
+#define COREDATA_PRIVATE_EXTERN	__attribute__((visibility("hidden"))) extern
 #endif
 
 //
@@ -77,9 +77,12 @@ COREDATA_EXTERN double NSCoreDataVersionNumber;
 #define NSCoreDataVersionNumber10_6		  246.0
 #define NSCoreDataVersionNumber10_6_2	  250.0
 #define NSCoreDataVersionNumber10_6_3	  251.0
-#define NSCoreDataVersionNumber10_7     358.4
-#define NSCoreDataVersionNumber10_7_2   358.12
-#define NSCoreDataVersionNumber10_7_3   358.13
+#define NSCoreDataVersionNumber10_7       358.4
+#define NSCoreDataVersionNumber10_7_2     358.12
+#define NSCoreDataVersionNumber10_7_3     358.13
+#define NSCoreDataVersionNumber10_7_4     358.14
+#define NSCoreDataVersionNumber10_8       407.5
+#define NSCoreDataVersionNumber10_8_2     407.7
 
 #define NSCoreDataVersionNumber_iPhoneOS_3_0		241.0
 #define NSCoreDataVersionNumber_iPhoneOS_3_1		248.0
@@ -90,5 +93,6 @@ COREDATA_EXTERN double NSCoreDataVersionNumber;
 #define NSCoreDataVersionNumber_iPhoneOS_4_3		320.17
 #define NSCoreDataVersionNumber_iPhoneOS_5_0		386.1
 #define NSCoreDataVersionNumber_iPhoneOS_5_1		386.5
+#define NSCoreDataVersionNumber_iPhoneOS_6_0		419.0
 
 #endif // _COREDATADEFINES_H

@@ -1,7 +1,7 @@
 /*
     NSOutlineView.h
     Application Kit
-    Copyright (c) 1997-2012, Apple Inc.
+    Copyright (c) 1997-2013, Apple Inc.
     All rights reserved.
 */
 
@@ -96,27 +96,27 @@ enum { NSOutlineViewDropOnItemIndex = -1 };
 
 @interface NSOutlineView : NSTableView {
   @private
-    NSInteger                                 _numberOfRows;    
+    NSInteger            _numberOfRows;    
     _NSOVRowEntry       *_rowEntryTree;
     NSMapTable          *_itemToEntryMap;
     __strong CFMutableArrayRef _rowEntryArray;
     NSInteger            _firstRowIndexDrawn;
     id                   _autoExpandTimerItem;
-    NSTableColumn                *_outlineTableColumn;
+    NSTableColumn        *_outlineTableColumn;
     BOOL                 _initedRows;
-    BOOL                                 _indentationMarkerInCell;
-    NSInteger                                 _indentationPerLevel;
-    NSButtonCell                       *_outlineCell;
-    NSRect                                 _trackingOutlineFrame;
+    BOOL                  _indentationMarkerInCell;
+    NSInteger            _indentationPerLevel;
+    NSButtonCell         *_outlineCell;
+    NSRect               _trackingOutlineFrame;
     id                   _expandingItem;
-    NSInteger                                 _unused;
-    _OVFlags                                 _ovFlags;
-    id                                                 _ovLock;
+    NSInteger            _numberOfChildrenLimit;
+    _OVFlags             _ovFlags;
+    id                   _ovLock;
     __strong long       *_indentArray;
-    long                                 _originalWidth;
-    id                                                 _expandSet;
-    id                                                 _expandSetToExpandItemsInto;
-    long                                        _indentArraySize;
+    long                 _originalWidth;
+    id                   _expandSet;
+    id                   _expandSetToExpandItemsInto;
+    long                 _indentArraySize;
     NSButtonCell        *_trackingOutlineCell;
     NSInteger            _trackingRow;
     id                   _ovReserved;
@@ -231,6 +231,13 @@ enum { NSOutlineViewDropOnItemIndex = -1 };
 - (void)insertRowsAtIndexes:(NSIndexSet *)indexes withAnimation:(NSTableViewAnimationOptions)animationOptions UNAVAILABLE_ATTRIBUTE;
 - (void)removeRowsAtIndexes:(NSIndexSet *)indexes withAnimation:(NSTableViewAnimationOptions)animationOptions UNAVAILABLE_ATTRIBUTE;
 - (void)moveRowAtIndex:(NSInteger)oldIndex toIndex:(NSInteger)newIndex UNAVAILABLE_ATTRIBUTE;
+
+#pragma mark -
+
+/* Get and set the user interface layout direction. When set to NSUserInterfaceLayoutDirectionRightToLeft, the Outline View will show the disclosure triangle to the right of the cell instead of the left. The default value is NSUserInterfaceLayoutDirectionLeftToRight. This method is available for NSOutlineView on 10.7 and higher.
+ */
+- (NSUserInterfaceLayoutDirection)userInterfaceLayoutDirection NS_AVAILABLE_MAC(10_7);
+- (void)setUserInterfaceLayoutDirection:(NSUserInterfaceLayoutDirection)value NS_AVAILABLE_MAC(10_7);
 
 @end
 
@@ -443,7 +450,18 @@ enum { NSOutlineViewDropOnItemIndex = -1 };
 @end
 
 
-/* Notifications 
+/* The following NSOutlineView*Keys are used by the View Based NSOutlineView to create the "disclosure button" used to collapse and expand items. The NSOutlineView creates these buttons by calling [self makeViewWithIdentifier:owner:] passing in the key as the identifier and the delegate as the owner. Custom NSButtons (or subclasses thereof) can be provided for NSOutlineView to use in the following two ways:
+ 1. makeViewWithIdentifier:owner: can be overridden, and if the identifier is (for instance) NSOutlineViewDisclosureButtonKey, a custom NSButton can be configured and returned. Be sure to set the button.identifier to be NSOutlineViewDisclosureButtonKey.
+ 2. At design time, a button can be added to the outlineview which has this identifier, and it will be unarchived and used as needed.
+ 
+ When a custom button is used, it is important to properly set up the target/action to do something (probably expand or collapse the rowForView: that the sender is located in). Or, one can call super to get the default button, and copy its target/action to get the normal default behavior.
+ 
+ NOTE: These keys are backwards compatible to 10.7, however, the symbol is not exported prior to 10.9 and the regular string value must be used (i.e.: @"NSOutlineViewDisclosureButtonKey").
+ */
+APPKIT_EXTERN NSString *const NSOutlineViewDisclosureButtonKey NS_AVAILABLE_MAC(10_9); // The normal triangle disclosure button
+APPKIT_EXTERN NSString *const NSOutlineViewShowHideButtonKey NS_AVAILABLE_MAC(10_9); // The show/hide button used in "Source Lists"
+
+/* Notifications
 */
 APPKIT_EXTERN NSString *NSOutlineViewSelectionDidChangeNotification;
 APPKIT_EXTERN NSString *NSOutlineViewColumnDidMoveNotification;                                // @"NSOldColumn", @"NSNewColumn"

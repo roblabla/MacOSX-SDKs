@@ -1,7 +1,7 @@
 /*
     NSTouch.h
     Application Kit
-    Copyright (c) 2009-2012, Apple Inc.
+    Copyright (c) 2009-2013, Apple Inc.
     All rights reserved.
 */
 
@@ -37,17 +37,20 @@ NS_CLASS_AVAILABLE(10_6, NA)
     NSPoint _normalizedPosition;
     NSInteger _privateFlags;
     NSView *_view;
+#if ! __LP64__
     id _reserved1;
     id _reserved2;
     id _reserved3;
     id _reserved4;
-    
+#endif
     id _device;
     NSSize  _deviceSize;
+#if ! __LP64__
     id _reserved5;
     id _reserved6;
     id _reserved7;
     id _reserved8;
+#endif
 }
 
 /* Properties of this touch */

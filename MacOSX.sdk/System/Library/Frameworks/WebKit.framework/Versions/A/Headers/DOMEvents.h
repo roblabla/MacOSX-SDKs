@@ -37,5 +37,6 @@
 #import <WebKit/DOMMouseEvent.h>
 #import <WebKit/DOMMutationEvent.h>
 #import <WebKit/DOMOverflowEvent.h>
+#import <WebKit/DOMProgressEvent.h>
 #import <WebKit/DOMUIEvent.h>
 #import <WebKit/DOMWheelEvent.h>

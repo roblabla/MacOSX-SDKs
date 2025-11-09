@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2006 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2012 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -94,6 +94,7 @@
 
 #define I386_PGBYTES		4096		/* bytes per 80386 page */
 #define I386_PGSHIFT		12		/* bitshift for pages */
+
 
 #define	PAGE_SIZE		I386_PGBYTES
 #define	PAGE_SHIFT		I386_PGSHIFT

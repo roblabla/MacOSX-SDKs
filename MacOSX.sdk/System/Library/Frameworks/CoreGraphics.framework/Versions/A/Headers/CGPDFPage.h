@@ -11,6 +11,8 @@ typedef struct CGPDFPage *CGPDFPageRef;
 #include <CoreGraphics/CGPDFDictionary.h> 
 #include <CoreGraphics/CGPDFDocument.h> 
 
+CF_IMPLICIT_BRIDGING_ENABLED
+
 enum CGPDFBox {
   kCGPDFMediaBox = 0,
   kCGPDFCropBox = 1,
@@ -81,5 +83,7 @@ CG_EXTERN CGPDFDictionaryRef CGPDFPageGetDictionary(CGPDFPageRef page)
 
 CG_EXTERN CFTypeID CGPDFPageGetTypeID(void)
   CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif /* CGPDFPAGE_H_ */

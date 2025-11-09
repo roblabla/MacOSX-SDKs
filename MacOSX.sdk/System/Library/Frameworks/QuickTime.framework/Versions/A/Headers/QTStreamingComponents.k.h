@@ -3,7 +3,7 @@
  
      Contains:   QuickTime Interfaces.
  
-     Version:    QuickTime 7.7.1
+     Version:    QuickTime 7.7.3
  
      Copyright:  © 1990-2012 by Apple Inc., all rights reserved
  
@@ -11,8 +11,15 @@
                  the World Wide Web:
  
                      http://developer.apple.com/bugreporter/
- 
 */
+
+/*
+  QuickTime has been deprecated in 10.9.
+
+  AVFoundation and AVKit are the frameworks recommended for all new development 
+  involving time-based audiovisual media on OS X.
+*/
+
 #ifndef __QTSTREAMINGCOMPONENTS_K__
 #define __QTSTREAMINGCOMPONENTS_K__
 

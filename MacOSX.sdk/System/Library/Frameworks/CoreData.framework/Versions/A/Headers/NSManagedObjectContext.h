@@ -115,14 +115,17 @@ NS_CLASS_AVAILABLE(10_4,3_0)
   int32_t _ignoreChangeNotification;
   id _editors;
   id* _debuggingRecords;
-  id _childObjectStores;
-  id _reserved2;
+  id _tombstonedIDs;
+  id _childIDMappings;
 }
 
 - (id)initWithConcurrencyType:(NSManagedObjectContextConcurrencyType)ct NS_AVAILABLE(10_7,  5_0);
 
 #if NS_BLOCKS_AVAILABLE
+/* asynchronously performs the block on the context's queue.  Encapsulates an autorelease pool and a call to processPendingChanges */
 - (void)performBlock:(void (^)())block NS_AVAILABLE(10_7,  5_0);
+
+/* synchronously performs the block on the context's queue.  May safely be called reentrantly.  */
 - (void)performBlockAndWait:(void (^)())block NS_AVAILABLE(10_7,  5_0);
 #endif /* NS_BLOCKS_AVAILABLE */
 

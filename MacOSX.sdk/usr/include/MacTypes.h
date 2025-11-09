@@ -380,7 +380,13 @@ enum {
 
 #define kInvalidID   0
 enum {
-  kVariableLengthArray          = 1
+  kVariableLengthArray  
+#ifdef __has_extension
+   #if __has_extension(enumerator_attributes)
+		__attribute__((deprecated))  
+	#endif
+#endif
+  = 1
 };
 
 enum {

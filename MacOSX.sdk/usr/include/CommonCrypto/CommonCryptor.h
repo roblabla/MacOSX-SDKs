@@ -138,8 +138,12 @@ typedef uint32_t CCOperation;
 /*!
     @enum       CCAlgorithm
     @abstract   Encryption algorithms implemented by this module.
-    
+
     @constant   kCCAlgorithmAES128  Advanced Encryption Standard, 128-bit block
+                                    This is kept for historical reasons.  It's
+                                    preferred now to use kCCAlgorithmAES since
+                                    128-bit blocks are part of the standard.
+    @constant   kCCAlgorithmAES     Advanced Encryption Standard, 128-bit block
     @constant   kCCAlgorithmDES     Data Encryption Standard
     @constant   kCCAlgorithm3DES    Triple-DES, three key, EDE configuration
     @constant   kCCAlgorithmCAST    CAST
@@ -148,7 +152,8 @@ typedef uint32_t CCOperation;
 */
 enum {
     kCCAlgorithmAES128 = 0,
-    kCCAlgorithmDES,        
+    kCCAlgorithmAES = 0,
+    kCCAlgorithmDES,
     kCCAlgorithm3DES,       
     kCCAlgorithmCAST,       
     kCCAlgorithmRC4,
@@ -176,7 +181,9 @@ typedef uint32_t CCOptions;
 /*!
     @enum           Key sizes
     
-    @discussion     Key sizes, in bytes, for supported algorithms. 
+    @discussion     Key sizes, in bytes, for supported algorithms.  Use these
+                    constants to select any keysize variants you wish to use
+                    for algorithms that support them (ie AES-128, AES-192, AES-256)
     
     @constant kCCKeySizeAES128      128 bit AES key size.
     @constant kCCKeySizeAES192      192 bit AES key size.
@@ -306,7 +313,7 @@ CCCryptorStatus CCCryptorCreate(
     size_t keyLength,   
     const void *iv,             /* optional initialization vector */
     CCCryptorRef *cryptorRef)  /* RETURNED */
-__OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+__OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /*!
     @function   CCCryptorCreateFromData
@@ -370,7 +377,7 @@ CCCryptorStatus CCCryptorCreateFromData(
     size_t dataLength,          /* length of data in bytes */
     CCCryptorRef *cryptorRef,   /* RETURNED */
     size_t *dataUsed)           /* optional, RETURNED */
-__OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+__OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /*!
     @function   CCCryptorRelease
@@ -384,7 +391,7 @@ __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 */
 CCCryptorStatus CCCryptorRelease(
     CCCryptorRef cryptorRef)
-__OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+__OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
     
 /*!
     @function   CCCryptorUpdate
@@ -447,7 +454,7 @@ CCCryptorStatus CCCryptorUpdate(
     void *dataOut,              /* data RETURNED here */
     size_t dataOutAvailable,
     size_t *dataOutMoved)       /* number of bytes written */
-__OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+__OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /*!
     @function   CCCryptorFinal
@@ -494,7 +501,7 @@ CCCryptorStatus CCCryptorFinal(
     void *dataOut,
     size_t dataOutAvailable,
     size_t *dataOutMoved)       /* number of bytes written */
-__OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+__OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /*!
     @function   CCCryptorGetOutputLength
@@ -534,7 +541,7 @@ size_t CCCryptorGetOutputLength(
     CCCryptorRef cryptorRef,
     size_t inputLength,
     bool final)
-__OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+__OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
     
 /*!
@@ -559,7 +566,7 @@ __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 CCCryptorStatus CCCryptorReset(
     CCCryptorRef cryptorRef,
     const void *iv)
-    __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+    __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 
 /*!
@@ -638,7 +645,7 @@ CCCryptorStatus CCCrypt(
     void *dataOut,          /* data RETURNED here */
     size_t dataOutAvailable,
     size_t *dataOutMoved)
-    __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+    __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 
 /*!
@@ -686,16 +693,18 @@ enum {
 typedef uint32_t CCPadding;
 
 /*!
-    @enum       Mode options - so far only used for CTR mode
-    @discussion Values used to specify options for modes.
-    
+    @enum       Mode options - Not currently in use.  
+ 
+ @discussion Values used to specify options for modes. This was used for counter
+            mode operations in 10.8, now only Big Endian mode is supported.
+ 
     @constant kCCModeOptionCTR_LE - CTR Mode Little Endian.
     @constant kCCModeOptionCTR_BE - CTR Mode Big Endian.
 */
 
 enum {
-	kCCModeOptionCTR_LE	= 0x0001,
-	kCCModeOptionCTR_BE = 0x0002
+	kCCModeOptionCTR_LE	= 0x0001, // Deprecated in iPhoneOS 6.0 and MacOSX10.9
+	kCCModeOptionCTR_BE = 0x0002  // Deprecated in iPhoneOS 6.0 and MacOSX10.9
 };
 
 typedef uint32_t CCModeOptions;

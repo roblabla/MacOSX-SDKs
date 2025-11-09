@@ -3,7 +3,7 @@
  
      Contains:   AppleScript Generic Component Interfaces.
  
-     Version:    OSA-148.3~2
+     Version:    OpenScripting
  
      Copyright:  © 1992-2008 by Apple Computer, Inc., all rights reserved
  
@@ -26,7 +26,7 @@
 
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -74,7 +74,7 @@ typedef OSAID                           GenericID;
 extern OSAError 
 OSAGetDefaultScriptingComponent(
   ComponentInstance             genericScriptingComponent,
-  ScriptingComponentSelector *  scriptingSubType)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ScriptingComponentSelector *  scriptingSubType)             __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -88,7 +88,7 @@ OSAGetDefaultScriptingComponent(
 extern OSAError 
 OSASetDefaultScriptingComponent(
   ComponentInstance            genericScriptingComponent,
-  ScriptingComponentSelector   scriptingSubType)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ScriptingComponentSelector   scriptingSubType)              __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /* get a scripting component instance from its subtype code */
@@ -104,7 +104,7 @@ extern OSAError
 OSAGetScriptingComponent(
   ComponentInstance            genericScriptingComponent,
   ScriptingComponentSelector   scriptingSubType,
-  ComponentInstance *          scriptingInstance)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ComponentInstance *          scriptingInstance)             __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /* get a scripting component selector (subType) from a stored script */
@@ -120,7 +120,7 @@ extern OSAError
 OSAGetScriptingComponentFromStored(
   ComponentInstance             genericScriptingComponent,
   const AEDesc *                scriptData,
-  ScriptingComponentSelector *  scriptingSubType)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ScriptingComponentSelector *  scriptingSubType)             __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /* get a real component instance and script id from a generic id */
@@ -136,7 +136,7 @@ extern OSAError
 OSAGenericToRealID(
   ComponentInstance    genericScriptingComponent,
   OSAID *              theScriptID,
-  ComponentInstance *  theExactComponent)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ComponentInstance *  theExactComponent)                     __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /* get a generic id from a real component instance and script id */
@@ -152,7 +152,7 @@ extern OSAError
 OSARealToGenericID(
   ComponentInstance   genericScriptingComponent,
   OSAID *             theScriptID,
-  ComponentInstance   theExactComponent)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ComponentInstance   theExactComponent)                      __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 

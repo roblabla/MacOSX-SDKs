@@ -205,13 +205,16 @@ struct extern_proc {
 
 #define P_DIRTY_TRACK                           0x00000001      /* track dirty state */
 #define P_DIRTY_ALLOW_IDLE_EXIT                 0x00000002      /* process can be idle-exited when clean */
-#define P_DIRTY                                 0x00000004      /* process is dirty */
-#define P_DIRTY_SHUTDOWN                        0x00000008      /* process is dirty during shutdown */
-#define P_DIRTY_TERMINATED                      0x00000010      /* process has been marked for termination */
-#define P_DIRTY_BUSY                            0x00000020      /* serialization flag */
+#define P_DIRTY_DEFER                           0x00000004      /* defer initial opt-in to idle-exit */
+#define P_DIRTY                                 0x00000008      /* process is dirty */
+#define P_DIRTY_SHUTDOWN                        0x00000010      /* process is dirty during shutdown */
+#define P_DIRTY_TERMINATED                      0x00000020      /* process has been marked for termination */
+#define P_DIRTY_BUSY                            0x00000040      /* serialization flag */
+#define P_DIRTY_MARKED                          0x00000080      /* marked dirty previously */
+#define P_DIRTY_DEFER_IN_PROGRESS               0x00000100      /* deferral to idle-band in process */
 
-#define P_DIRTY_CAN_IDLE_EXIT                   (P_DIRTY_TRACK | P_DIRTY_ALLOW_IDLE_EXIT)
 #define P_DIRTY_IS_DIRTY                        (P_DIRTY | P_DIRTY_SHUTDOWN)
+#define P_DIRTY_IDLE_EXIT_ENABLED               (P_DIRTY_TRACK|P_DIRTY_ALLOW_IDLE_EXIT)
 
 
 

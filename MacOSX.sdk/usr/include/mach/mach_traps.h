@@ -110,6 +110,15 @@ extern kern_return_t _kernelrpc_mach_vm_protect_trap(
 				vm_prot_t new_protection
 );
 
+extern kern_return_t _kernelrpc_mach_vm_map_trap(
+				mach_port_name_t target,
+				mach_vm_offset_t *address,
+				mach_vm_size_t size,
+				mach_vm_offset_t mask,
+				int flags,
+				vm_prot_t cur_protection
+);
+
 extern kern_return_t _kernelrpc_mach_port_allocate_trap(
 				mach_port_name_t target,
 				mach_port_right_t right,
@@ -157,6 +166,33 @@ extern kern_return_t _kernelrpc_mach_port_extract_member_trap(
 				mach_port_name_t target,
 				mach_port_name_t name,
 				mach_port_name_t pset
+);
+
+extern kern_return_t _kernelrpc_mach_port_construct_trap(
+				mach_port_name_t target,
+				mach_port_options_t *options,
+				uint64_t context,
+				mach_port_name_t *name
+);
+
+extern kern_return_t _kernelrpc_mach_port_destruct_trap(
+				mach_port_name_t target,
+				mach_port_name_t name,
+				mach_port_delta_t srdelta,
+				uint64_t guard
+);
+
+extern kern_return_t _kernelrpc_mach_port_guard_trap(
+				mach_port_name_t target,
+				mach_port_name_t name,
+				uint64_t guard,
+				boolean_t strict
+);
+
+extern kern_return_t _kernelrpc_mach_port_unguard_trap(
+				mach_port_name_t target,
+				mach_port_name_t name,
+				uint64_t guard
 );
 
 extern kern_return_t macx_swapon(

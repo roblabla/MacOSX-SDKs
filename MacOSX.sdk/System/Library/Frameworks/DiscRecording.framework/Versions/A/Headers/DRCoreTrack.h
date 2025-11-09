@@ -738,9 +738,7 @@ enum
 */
 enum
 {
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 	kDRFlagSubchannelDataRequested	= (1 << 1), 
-#endif
 	kDRFlagNoMoreData				= (1 << 0)
 };
 

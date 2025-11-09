@@ -3,7 +3,7 @@
  
      Contains:   AppleScript Debugging Interfaces.
  
-     Version:    OSA-148.3~2
+     Version:    OpenScripting
  
      Copyright:  © 1992-2008 by Apple Computer, Inc., all rights reserved
  
@@ -26,7 +26,7 @@
 
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -84,7 +84,7 @@ OSASetProperty(
   SInt32              modeFlags,
   OSAID               contextID,
   const AEDesc *      variableName,
-  OSAID               scriptValueID)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSAID               scriptValueID)                          __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -101,7 +101,7 @@ OSAGetProperty(
   SInt32              modeFlags,
   OSAID               contextID,
   const AEDesc *      variableName,
-  OSAID *             resultingScriptValueID)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSAID *             resultingScriptValueID)                 __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -117,7 +117,7 @@ OSAGetPropertyNames(
   ComponentInstance   scriptingComponent,
   SInt32              modeFlags,
   OSAID               contextID,
-  AEDescList *        resultingPropertyNames)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AEDescList *        resultingPropertyNames)                 __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -134,7 +134,7 @@ OSASetHandler(
   SInt32              modeFlags,
   OSAID               contextID,
   const AEDesc *      handlerName,
-  OSAID               compiledScriptID)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSAID               compiledScriptID)                       __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -151,7 +151,7 @@ OSAGetHandler(
   SInt32              modeFlags,
   OSAID               contextID,
   const AEDesc *      handlerName,
-  OSAID *             resultingCompiledScriptID)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSAID *             resultingCompiledScriptID)              __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -167,7 +167,7 @@ OSAGetHandlerNames(
   ComponentInstance   scriptingComponent,
   SInt32              modeFlags,
   OSAID               contextID,
-  AEDescList *        resultingHandlerNames)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AEDescList *        resultingHandlerNames)                  __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 #if !__LP64__
@@ -189,7 +189,7 @@ OSAGetAppTerminology(
   FSSpec *            fileSpec,
   short               terminologyID,
   Boolean *           didLaunch,
-  AEDesc *            terminologyList)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  AEDesc *            terminologyList)                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 #endif  /* !__LP64__ */
@@ -212,7 +212,7 @@ OSAGetSysTerminology(
   ComponentInstance   scriptingComponent,
   SInt32              modeFlags,
   short               terminologyID,
-  AEDesc *            terminologyList)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AEDesc *            terminologyList)                        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -242,7 +242,7 @@ extern OSAError
 OSACopyScriptingDefinition(
   const FSRef *  ref,
   SInt32         modeFlags,
-  CFDataRef *    sdef)                                        AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  CFDataRef *    sdef)                                        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 
 /*
@@ -273,7 +273,7 @@ extern OSAError
 OSACopyScriptingDefinitionFromURL(
   CFURLRef     url,
   SInt32       modeFlags,
-  CFDataRef *  sdef)                                          AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  CFDataRef *  sdef)                                          __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 
 
@@ -294,7 +294,7 @@ ASSetProperty(
   ComponentInstance   scriptingComponent,
   OSAID               contextID,
   const AEDesc *      variableName,
-  OSAID               scriptValueID)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSAID               scriptValueID)                          __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -310,7 +310,7 @@ ASGetProperty(
   ComponentInstance   scriptingComponent,
   OSAID               contextID,
   const AEDesc *      variableName,
-  OSAID *             resultingScriptValueID)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSAID *             resultingScriptValueID)                 __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -326,7 +326,7 @@ ASSetHandler(
   ComponentInstance   scriptingComponent,
   OSAID               contextID,
   const AEDesc *      handlerName,
-  OSAID               compiledScriptID)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSAID               compiledScriptID)                       __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -342,7 +342,7 @@ ASGetHandler(
   ComponentInstance   scriptingComponent,
   OSAID               contextID,
   const AEDesc *      handlerName,
-  OSAID *             resultingCompiledScriptID)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSAID *             resultingCompiledScriptID)              __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -359,7 +359,7 @@ ASGetAppTerminology(
   FSSpec *            fileSpec,
   short               terminologID,
   Boolean *           didLaunch,
-  AEDesc *            terminologyList)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AEDesc *            terminologyList)                        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /* Errors:

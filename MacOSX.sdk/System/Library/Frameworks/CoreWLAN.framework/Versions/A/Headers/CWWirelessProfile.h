@@ -17,11 +17,12 @@
  * @abstract CoreWLAN wireless profile.
  * @discussion Encapsulates a stored wireless profile entry.
  */
+NS_CLASS_DEPRECATED_MAC(10_6, 10_7)
 @interface CWWirelessProfile : NSObject <NSCopying, NSCoding> {
 @private
-    CWMutableNetworkProfile *_networkProfile;
+    NSString *_ssid;
+    NSNumber *_securityMode;
 }
-
 
 /*!
  * @property

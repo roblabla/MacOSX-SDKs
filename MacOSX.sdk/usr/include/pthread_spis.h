@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2011 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2012 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  *
@@ -68,6 +68,7 @@ __BEGIN_DECLS
 #define _PTHREAD_MUTEX_POLICY_FIRSTFIT		2
 
 /* sets the mutex policy attributes */
+__OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0)
 int pthread_mutexattr_setpolicy_np(pthread_mutexattr_t *, int );
 
 #endif /* (!_POSIX_C_SOURCE && !_XOPEN_SOURCE) || _DARWIN_C_SOURCE */

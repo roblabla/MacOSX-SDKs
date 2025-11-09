@@ -17,7 +17,7 @@
  * @class
  * @abstract Encapsulates an immutable configuration for an AirPort WLAN interface. 
  */
-@interface CWConfiguration : NSObject <NSCopying, NSMutableCopying, NSCoding> {	
+@interface CWConfiguration : NSObject <NSCopying, NSMutableCopying, NSSecureCoding> {
 @private
 	NSDictionary *_info;
 @protected
@@ -112,54 +112,5 @@
 @property(readwrite, assign) BOOL requireAdministratorForIBSSMode NS_AVAILABLE_MAC(10_7);
 @property(readwrite, assign) BOOL rememberJoinedNetworks NS_AVAILABLE_MAC(10_7);
 @end
-
-#pragma mark -
-@interface CWConfiguration (Deprecated)
-
-/*!
- * @property
- * @abstract Array of stored CWWirelessProfile objects for the given CWConfiguration.
- */
-@property(readwrite, copy) NSSet *rememberedNetworks NS_DEPRECATED_MAC(10_6, 10_7);
-
-/*!
- * @property
- * @abstract Ordered array of CWWirelessProfile objects.
- * @discussion The preferred networks list is a subset of the remembered networks set.  It cannot contain duplicate entries
- * and cannot contain any entries that are not present in the remembered networks set.
- */
-@property(readwrite, copy) NSArray *preferredNetworks NS_DEPRECATED_MAC(10_6, 10_7);
-
-/*!
- * @property
- * @abstract Preference to always remember networks joined.
- */
-@property(readwrite, assign) BOOL alwaysRememberNetworks NS_DEPRECATED_MAC(10_6, 10_7);
-
-/*!
- * @property
- * @abstract Preference to disconnect from the current network upon user logout.
- */
-@property(readwrite, assign) BOOL disconnectOnLogout NS_DEPRECATED_MAC(10_6, 10_7);
-
-/*!
- * @property
- * @abstract Preference to require administrative privileges to change networks.
- */
-@property(readwrite, assign) BOOL requireAdminForNetworkChange NS_DEPRECATED_MAC(10_6, 10_7);
-
-/*!
- * @property
- * @abstract Preference to require administrative privileges to change the CoreWLAN interface power state.
- */
-@property(readwrite, assign) BOOL requireAdminForPowerChange NS_DEPRECATED_MAC(10_6, 10_7);
-
-/*!
- * @property
- * @abstract Preference to require administrative privileges to create computer-to-computer networks.
- */
-@property(readwrite, assign) BOOL requireAdminForIBSSCreation NS_DEPRECATED_MAC(10_6, 10_7);
-@end
-
 
 #endif /* _CORE_WLAN_CONFIGURATION_H_ */

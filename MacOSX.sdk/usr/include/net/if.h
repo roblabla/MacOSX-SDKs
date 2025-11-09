@@ -1,8 +1,8 @@
 /*
- * Copyright (c) 2000-2012 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
- * 
+ *
  * This file contains Original Code and/or Modifications of Original Code
  * as defined in and that are subject to the Apple Public Source License
  * Version 2.0 (the 'License'). You may not use this file except in
@@ -11,10 +11,10 @@
  * unlawful or unlicensed copies of an Apple operating system, or to
  * circumvent, violate, or enable the circumvention or violation of, any
  * terms of an Apple operating system software license agreement.
- * 
+ *
  * Please obtain a copy of the License at
  * http://www.opensource.apple.com/apsl/ and read it before using this file.
- * 
+ *
  * The Original Code and all software distributed under the License are
  * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
@@ -22,7 +22,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
  * Please see the License for the specific language governing rights and
  * limitations under the License.
- * 
+ *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_END@
  */
 /*
@@ -58,7 +58,6 @@
  * SUCH DAMAGE.
  *
  *	@(#)if.h	8.1 (Berkeley) 6/10/93
- * $FreeBSD: src/sys/net/if.h,v 1.58.2.2 2001/07/24 19:10:18 brooks Exp $
  */
 
 #ifndef _NET_IF_H_
@@ -76,36 +75,45 @@
  * events.
  */
 
-#define KEV_DL_SUBCLASS 2
+#define	KEV_DL_SUBCLASS 2
 
-#define KEV_DL_SIFFLAGS				1
-#define KEV_DL_SIFMETRICS			2
-#define KEV_DL_SIFMTU				3
-#define KEV_DL_SIFPHYS				4
-#define KEV_DL_SIFMEDIA				5
-#define KEV_DL_SIFGENERIC			6
-#define KEV_DL_ADDMULTI				7
-#define KEV_DL_DELMULTI				8
-#define KEV_DL_IF_ATTACHED			9
-#define KEV_DL_IF_DETACHING			10
-#define KEV_DL_IF_DETACHED			11
-#define KEV_DL_LINK_OFF				12
-#define KEV_DL_LINK_ON				13
-#define KEV_DL_PROTO_ATTACHED			14
-#define KEV_DL_PROTO_DETACHED			15
-#define KEV_DL_LINK_ADDRESS_CHANGED		16
-#define KEV_DL_WAKEFLAGS_CHANGED		17
-#define KEV_DL_IF_IDLE_ROUTE_REFCNT		18
-#define KEV_DL_IFCAP_CHANGED			19
-#define KEV_DL_LINK_QUALITY_METRIC_CHANGED	20
-#define KEV_DL_NODE_PRESENCE			21
-#define KEV_DL_NODE_ABSENCE			22
-#define KEV_DL_MASTER_ELECTED			23
+#define	KEV_DL_SIFFLAGS				1
+#define	KEV_DL_SIFMETRICS			2
+#define	KEV_DL_SIFMTU				3
+#define	KEV_DL_SIFPHYS				4
+#define	KEV_DL_SIFMEDIA				5
+#define	KEV_DL_SIFGENERIC			6
+#define	KEV_DL_ADDMULTI				7
+#define	KEV_DL_DELMULTI				8
+#define	KEV_DL_IF_ATTACHED			9
+#define	KEV_DL_IF_DETACHING			10
+#define	KEV_DL_IF_DETACHED			11
+#define	KEV_DL_LINK_OFF				12
+#define	KEV_DL_LINK_ON				13
+#define	KEV_DL_PROTO_ATTACHED			14
+#define	KEV_DL_PROTO_DETACHED			15
+#define	KEV_DL_LINK_ADDRESS_CHANGED		16
+#define	KEV_DL_WAKEFLAGS_CHANGED		17
+#define	KEV_DL_IF_IDLE_ROUTE_REFCNT		18
+#define	KEV_DL_IFCAP_CHANGED			19
+#define	KEV_DL_LINK_QUALITY_METRIC_CHANGED	20
+#define	KEV_DL_NODE_PRESENCE			21
+#define	KEV_DL_NODE_ABSENCE			22
+#define	KEV_DL_MASTER_ELECTED			23
+#define	KEV_DL_ISSUES				24
+#define	KEV_DL_IFDELEGATE_CHANGED		25
 
 #include <net/if_var.h>
 #include <sys/types.h>
+#include <sys/socket.h>
 
 #endif
+
+struct if_clonereq {
+	int	ifcr_total;		/* total cloners (out) */
+	int	ifcr_count;		/* room for this many in user buffer */
+	char	*ifcr_buffer;		/* buffer for cloner names */
+};
 
 
 #define	IFF_UP		0x1		/* interface is up */
@@ -113,7 +121,7 @@
 #define	IFF_DEBUG	0x4		/* turn on debugging */
 #define	IFF_LOOPBACK	0x8		/* is a loopback net */
 #define	IFF_POINTOPOINT	0x10		/* interface is point-to-point link */
-#define IFF_NOTRAILERS 0x20		/* obsolete: avoid use of trailers */
+#define	IFF_NOTRAILERS	0x20		/* obsolete: avoid use of trailers */
 #define	IFF_RUNNING	0x40		/* resources allocated */
 #define	IFF_NOARP	0x80		/* no address resolution protocol */
 #define	IFF_PROMISC	0x100		/* receive all packets */
@@ -145,22 +153,23 @@
  *   field.  IFCAP_* and IFNET_* do not match one to one and IFNET_* may be
  *   more detailed or differenciated than IFCAP_*.
  *   IFNET_* hwassist flags have corresponding CSUM_* in sys/mbuf.h
- */         
-#define IFCAP_RXCSUM            0x00001 /* can offload checksum on RX */
-#define IFCAP_TXCSUM            0x00002 /* can offload checksum on TX */
-#define IFCAP_VLAN_MTU          0x00004 /* VLAN-compatible MTU */
-#define IFCAP_VLAN_HWTAGGING    0x00008 /* hardware VLAN tag support */
-#define IFCAP_JUMBO_MTU         0x00010 /* 9000 byte MTU supported */
-#define IFCAP_TSO4              0x00020 /* can do TCP Segmentation Offload */
-#define IFCAP_TSO6              0x00040 /* can do TCP6 Segmentation Offload */
-#define IFCAP_LRO               0x00080 /* can do Large Receive Offload */
-#define IFCAP_AV		0x00100 /* can do 802.1 AV Bridging */
+ */
+#define	IFCAP_RXCSUM		0x00001	/* can offload checksum on RX */
+#define	IFCAP_TXCSUM		0x00002	/* can offload checksum on TX */
+#define	IFCAP_VLAN_MTU		0x00004	/* VLAN-compatible MTU */
+#define	IFCAP_VLAN_HWTAGGING	0x00008	/* hardware VLAN tag support */
+#define	IFCAP_JUMBO_MTU		0x00010	/* 9000 byte MTU supported */
+#define	IFCAP_TSO4		0x00020	/* can do TCP Segmentation Offload */
+#define	IFCAP_TSO6		0x00040	/* can do TCP6 Segmentation Offload */
+#define	IFCAP_LRO		0x00080	/* can do Large Receive Offload */
+#define	IFCAP_AV		0x00100	/* can do 802.1 AV Bridging */
+#define	IFCAP_TXSTATUS		0x00200	/* can return linklevel xmit status */
 
-#define IFCAP_HWCSUM    (IFCAP_RXCSUM | IFCAP_TXCSUM)
-#define IFCAP_TSO       (IFCAP_TSO4 | IFCAP_TSO6)
+#define	IFCAP_HWCSUM	(IFCAP_RXCSUM | IFCAP_TXCSUM)
+#define	IFCAP_TSO	(IFCAP_TSO4 | IFCAP_TSO6)
 
-#define IFCAP_VALID (IFCAP_HWCSUM | IFCAP_TSO | IFCAP_LRO | IFCAP_VLAN_MTU | \
-	IFCAP_VLAN_HWTAGGING | IFCAP_JUMBO_MTU | IFCAP_AV)
+#define	IFCAP_VALID (IFCAP_HWCSUM | IFCAP_TSO | IFCAP_LRO | IFCAP_VLAN_MTU | \
+	IFCAP_VLAN_HWTAGGING | IFCAP_JUMBO_MTU | IFCAP_AV | IFCAP_TXSTATUS)
 
 #define	IFQ_MAXLEN	128
 #define	IFNET_SLOWHZ	1		/* granularity is 1 second */
@@ -170,7 +179,7 @@
  * from sysctl and the routing socket
  */
 struct if_msghdr {
-	unsigned short	ifm_msglen;	/* to skip over non-understood messages */
+	unsigned short	ifm_msglen;	/* to skip non-understood messages */
 	unsigned char	ifm_version;	/* future binary compatability */
 	unsigned char	ifm_type;	/* message type */
 	int		ifm_addrs;	/* like rtm_addrs */
@@ -184,7 +193,7 @@ struct if_msghdr {
  * from sysctl and the routing socket
  */
 struct ifa_msghdr {
-	unsigned short	ifam_msglen;	/* to skip over non-understood messages */
+	unsigned short	ifam_msglen;	/* to skip non-understood messages */
 	unsigned char	ifam_version;	/* future binary compatability */
 	unsigned char	ifam_type;	/* message type */
 	int		ifam_addrs;	/* like rtm_addrs */
@@ -198,7 +207,7 @@ struct ifa_msghdr {
  * from the routing socket
  */
 struct ifma_msghdr {
-	unsigned short	ifmam_msglen;	/* to skip over non-understood messages */
+	unsigned short	ifmam_msglen;	/* to skip non-understood messages */
 	unsigned char	ifmam_version;	/* future binary compatability */
 	unsigned char	ifmam_type;	/* message type */
 	int		ifmam_addrs;	/* like rtm_addrs */
@@ -208,7 +217,7 @@ struct ifma_msghdr {
 
 /*
  * Message format for use in obtaining information about interfaces
- * from sysctl 
+ * from sysctl
  */
 struct if_msghdr2 {
 	u_short	ifm_msglen;	/* to skip over non-understood messages */
@@ -221,7 +230,7 @@ struct if_msghdr2 {
 	int	ifm_snd_maxlen;	/* maximum length of send queue */
 	int	ifm_snd_drops;	/* number of drops in send queue */
 	int	ifm_timer;	/* time until if_watchdog called */
-	struct if_data64	ifm_data;	/* statistics and other data about if */
+	struct if_data64	ifm_data;	/* statistics and other data */
 };
 
 /*
@@ -259,13 +268,13 @@ struct ifdevmtu {
  	user space, a value from SIOCGKEVVENDOR ioctl on a kernel event socket.
  ifk_type - The type. Types are specific to each module id.
  ifk_data - The data. ifk_ptr may be a 64bit pointer for 64 bit processes.
- 
+
  Copying data between user space and kernel space is done using copyin
  and copyout. A process may be running in 64bit mode. In such a case,
  the pointer will be a 64bit pointer, not a 32bit pointer. The following
  sample is a safe way to copy the data in to the kernel from either a
  32bit or 64bit process:
- 
+
  user_addr_t tmp_ptr;
  if (IS_64BIT_PROCESS(current_proc())) {
  	tmp_ptr = CAST_USER_ADDR_T(ifkpi.ifk_data.ifk_ptr64);
@@ -285,8 +294,8 @@ struct ifkpi {
 	} ifk_data;
 };
 
-/* Wake capabilities of a interface */ 
-#define IF_WAKE_ON_MAGIC_PACKET 	0x01
+/* Wake capabilities of a interface */
+#define	IF_WAKE_ON_MAGIC_PACKET 	0x01
 
 
 #pragma pack()
@@ -317,7 +326,7 @@ struct	ifreq {
 		struct	ifkpi	ifru_kpi;
 		u_int32_t ifru_wake_flags;
 		u_int32_t ifru_route_refcnt;
-		int     ifru_cap[2];
+		int	ifru_cap[2];
 	} ifr_ifru;
 #define	ifr_addr	ifr_ifru.ifru_addr	/* address */
 #define	ifr_dstaddr	ifr_ifru.ifru_dstaddr	/* other end of p-to-p link */
@@ -330,22 +339,22 @@ struct	ifreq {
 #endif /* __APPLE__ */
 #define	ifr_metric	ifr_ifru.ifru_metric	/* metric */
 #define	ifr_mtu		ifr_ifru.ifru_mtu	/* mtu */
-#define ifr_phys	ifr_ifru.ifru_phys	/* physical wire */
-#define ifr_media	ifr_ifru.ifru_media	/* physical media */
+#define	ifr_phys	ifr_ifru.ifru_phys	/* physical wire */
+#define	ifr_media	ifr_ifru.ifru_media	/* physical media */
 #define	ifr_data	ifr_ifru.ifru_data	/* for use by interface */
-#define ifr_devmtu	ifr_ifru.ifru_devmtu	
-#define ifr_intval	ifr_ifru.ifru_intval	/* integer value */
-#define ifr_kpi		ifr_ifru.ifru_kpi
-#define ifr_wake_flags	ifr_ifru.ifru_wake_flags /* wake capabilities of devive */
-#define ifr_route_refcnt ifr_ifru.ifru_route_refcnt /* route references on interface */
-#define ifr_reqcap      ifr_ifru.ifru_cap[0]    /* requested capabilities */
-#define ifr_curcap      ifr_ifru.ifru_cap[1]    /* current capabilities */
+#define	ifr_devmtu	ifr_ifru.ifru_devmtu
+#define	ifr_intval	ifr_ifru.ifru_intval	/* integer value */
+#define	ifr_kpi		ifr_ifru.ifru_kpi
+#define	ifr_wake_flags	ifr_ifru.ifru_wake_flags /* wake capabilities */
+#define	ifr_route_refcnt ifr_ifru.ifru_route_refcnt /* route references count */
+#define	ifr_reqcap	ifr_ifru.ifru_cap[0]	/* requested capabilities */
+#define	ifr_curcap	ifr_ifru.ifru_cap[1]	/* current capabilities */
 };
 
 #define	_SIZEOF_ADDR_IFREQ(ifr) \
-	((ifr).ifr_addr.sa_len > sizeof(struct sockaddr) ? \
-	 (sizeof(struct ifreq) - sizeof(struct sockaddr) + \
-	  (ifr).ifr_addr.sa_len) : sizeof(struct ifreq))
+	((ifr).ifr_addr.sa_len > sizeof (struct sockaddr) ? \
+	(sizeof (struct ifreq) - sizeof (struct sockaddr) + \
+	(ifr).ifr_addr.sa_len) : sizeof (struct ifreq))
 
 struct ifaliasreq {
 	char	ifra_name[IFNAMSIZ];		/* if name, e.g. "en0" */
@@ -355,8 +364,8 @@ struct ifaliasreq {
 };
 
 struct rslvmulti_req {
-     struct sockaddr *sa;
-     struct sockaddr **llsa;
+	struct sockaddr *sa;
+	struct sockaddr **llsa;
 };
 
 #pragma pack(4)
@@ -377,19 +386,19 @@ struct ifmediareq {
 
 #pragma pack(4)
 struct  ifdrv {
-	char		ifd_name[IFNAMSIZ];     /* if name, e.g. "en0" */
+	char		ifd_name[IFNAMSIZ];	/* if name, e.g. "en0" */
 	unsigned long	ifd_cmd;
-	size_t		ifd_len;
+	size_t		ifd_len;		/* length of ifd_data buffer */
 	void		*ifd_data;
 };
 #pragma pack()
 
 
-/* 
+/*
  * Structure used to retrieve aux status data from interfaces.
  * Kernel suppliers to this interface should respect the formatting
  * needed by ifconfig(8): each line starts with a TAB and ends with
- * a newline.  The canonical example to copy and paste is in if_tun.c.
+ * a newline.
  */
 
 #define	IFSTATMAX	800		/* 10 lines of text */
@@ -421,9 +430,9 @@ struct	ifconf {
  * DLIL KEV_DL_PROTO_ATTACHED/DETACHED structure
  */
 struct kev_dl_proto_data {
-     struct net_event_data   	link_data;
-     u_int32_t			proto_family;
-     u_int32_t			proto_remaining_count;
+	struct net_event_data   	link_data;
+	u_int32_t			proto_family;
+	u_int32_t			proto_remaining_count;
 };
 
 /*
@@ -433,9 +442,9 @@ struct if_laddrreq {
 	char			iflr_name[IFNAMSIZ];
 	unsigned int		flags;
 #define	IFLR_PREFIX	0x8000  /* in: prefix given  out: kernel fills id */
-	unsigned int		prefixlen;         /* in/out */
-	struct sockaddr_storage	addr;   /* in/out */
-	struct sockaddr_storage	dstaddr; /* out */
+	unsigned int		prefixlen;	/* in/out */
+	struct sockaddr_storage	addr;		/* in/out */
+	struct sockaddr_storage	dstaddr;	/* out */
 };
 
 

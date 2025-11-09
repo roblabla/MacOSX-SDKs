@@ -1,18 +1,28 @@
 /*	NSNumberFormatter.h
-	Copyright (c) 1996-2012, Apple Inc. All rights reserved.
+	Copyright (c) 1996-2013, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSFormatter.h>
 #include <CoreFoundation/CFNumberFormatter.h>
 
-@class NSLocale, NSError, NSMutableDictionary;
+@class NSLocale, NSError, NSMutableDictionary, NSRecursiveLock;
+
+typedef NS_ENUM(NSUInteger, NSNumberFormatterBehavior) {
+    NSNumberFormatterBehaviorDefault = 0,
+#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+    NSNumberFormatterBehavior10_0 = 1000,
+#endif
+    NSNumberFormatterBehavior10_4 = 1040,
+};
 
 @interface NSNumberFormatter : NSFormatter {
 @private
     NSMutableDictionary	*_attributes;
     __strong CFNumberFormatterRef _formatter;
     NSUInteger _counter;
-    void *_reserved[12];
+    NSNumberFormatterBehavior _behavior;
+    NSRecursiveLock *_lock;
+    void *_reserved[10];
 }
 
 // - (id)init; // designated initializer
@@ -35,15 +45,6 @@ typedef NS_ENUM(NSUInteger, NSNumberFormatterStyle) {
     NSNumberFormatterScientificStyle = kCFNumberFormatterScientificStyle,
     NSNumberFormatterSpellOutStyle = kCFNumberFormatterSpellOutStyle
 };
-
-typedef NS_ENUM(NSUInteger, NSNumberFormatterBehavior) {
-    NSNumberFormatterBehaviorDefault = 0,
-#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
-    NSNumberFormatterBehavior10_0 = 1000,
-#endif
-    NSNumberFormatterBehavior10_4 = 1040,
-};
-
 
 + (NSString *)localizedStringFromNumber:(NSNumber *)num numberStyle:(NSNumberFormatterStyle)nstyle NS_AVAILABLE(10_6, 4_0);
 

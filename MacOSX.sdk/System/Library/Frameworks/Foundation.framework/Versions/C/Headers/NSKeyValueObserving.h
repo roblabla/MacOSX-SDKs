@@ -1,6 +1,6 @@
 /*
 	NSKeyValueObserving.h
-	Copyright (c) 2003-2012, Apple Inc.
+	Copyright (c) 2003-2013, Apple Inc.
 	All rights reserved.
 */
 

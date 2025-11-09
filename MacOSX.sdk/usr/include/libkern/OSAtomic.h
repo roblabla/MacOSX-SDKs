@@ -87,6 +87,7 @@ __BEGIN_DECLS
  	storing the result back to that memory location atomically.
  @result Returns the new value.
  */
+__OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0)
 int32_t	OSAtomicAdd32( int32_t __theAmount, volatile int32_t *__theValue );
 
 
@@ -100,12 +101,13 @@ int32_t	OSAtomicAdd32( int32_t __theAmount, volatile int32_t *__theValue );
 	except that it also introduces a barrier.
     @result Returns the new value.
  */
+__OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0)
 int32_t	OSAtomicAdd32Barrier( int32_t __theAmount, volatile int32_t *__theValue );
 
 
 /*! @abstract Atomically increments a 32-bit value.
  */
-__inline static
+__header_always_inline
 int32_t	OSAtomicIncrement32( volatile int32_t *__theValue )
             { return OSAtomicAdd32(  1, __theValue); }
 
@@ -116,12 +118,12 @@ int32_t	OSAtomicIncrement32( volatile int32_t *__theValue )
 	except that it also introduces a barrier.
     @result Returns the new value.
  */
-__inline static
+__header_always_inline
 int32_t	OSAtomicIncrement32Barrier( volatile int32_t *__theValue )
             { return OSAtomicAdd32Barrier(  1, __theValue); }
 
 /*! @abstract Atomically decrements a 32-bit value. */
-__inline static
+__header_always_inline
 int32_t	OSAtomicDecrement32( volatile int32_t *__theValue )
             { return OSAtomicAdd32( -1, __theValue); }
 
@@ -131,7 +133,7 @@ int32_t	OSAtomicDecrement32( volatile int32_t *__theValue )
 	except that it also introduces a barrier.
     @result Returns the new value.
  */
-__inline static
+__header_always_inline
 int32_t	OSAtomicDecrement32Barrier( volatile int32_t *__theValue )
             { return OSAtomicAdd32Barrier( -1, __theValue); }
 
@@ -142,6 +144,7 @@ int32_t	OSAtomicDecrement32Barrier( volatile int32_t *__theValue )
 	value in the memory location referenced by <code>__theValue</code>,
 	storing the result back to that memory location atomically.
  */
+__OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0)
 int64_t	OSAtomicAdd64( int64_t __theAmount, volatile int64_t *__theValue );
 
 
@@ -155,11 +158,12 @@ int64_t	OSAtomicAdd64( int64_t __theAmount, volatile int64_t *__theValue );
 	except that it also introduces a barrier.
     @result Returns the new value.
  */
-int64_t	OSAtomicAdd64Barrier( int64_t __theAmount, volatile int64_t *__theValue ) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_3_2); 
+__OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_3_2)
+int64_t	OSAtomicAdd64Barrier( int64_t __theAmount, volatile int64_t *__theValue );
 
 
 /*! @abstract Atomically increments a 64-bit value. */
-__inline static
+__header_always_inline
 int64_t	OSAtomicIncrement64( volatile int64_t *__theValue )
             { return OSAtomicAdd64(  1, __theValue); }
 
@@ -169,7 +173,7 @@ int64_t	OSAtomicIncrement64( volatile int64_t *__theValue )
 	except that it also introduces a barrier.
     @result Returns the new value.
  */
-__inline static
+__header_always_inline
 int64_t	OSAtomicIncrement64Barrier( volatile int64_t *__theValue )
             { return OSAtomicAdd64Barrier(  1, __theValue); }
 
@@ -180,7 +184,7 @@ int64_t	OSAtomicIncrement64Barrier( volatile int64_t *__theValue )
 	except that it also introduces a barrier.
     @result Returns the new value.
  */
-__inline static
+__header_always_inline
 int64_t	OSAtomicDecrement64( volatile int64_t *__theValue )
             { return OSAtomicAdd64( -1, __theValue); }
 
@@ -191,7 +195,7 @@ int64_t	OSAtomicDecrement64( volatile int64_t *__theValue )
 	except that it also introduces a barrier.
     @result Returns the new value.
  */
-__inline static
+__header_always_inline
 int64_t	OSAtomicDecrement64Barrier( volatile int64_t *__theValue )
             { return OSAtomicAdd64Barrier( -1, __theValue); }
 
@@ -214,6 +218,7 @@ int64_t	OSAtomicDecrement64Barrier( volatile int64_t *__theValue )
 	storing the result back to that memory location atomically.
     @result Returns the new value.
  */
+__OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0)
 int32_t	OSAtomicOr32( uint32_t __theMask, volatile uint32_t *__theValue );
 
 
@@ -227,6 +232,7 @@ int32_t	OSAtomicOr32( uint32_t __theMask, volatile uint32_t *__theValue );
 	except that it also introduces a barrier.
     @result Returns the new value.
  */
+__OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0)
 int32_t	OSAtomicOr32Barrier( uint32_t __theMask, volatile uint32_t *__theValue );
 
 
@@ -237,7 +243,8 @@ int32_t	OSAtomicOr32Barrier( uint32_t __theMask, volatile uint32_t *__theValue )
 	storing the result back to that memory location atomically.
     @result Returns the original value referenced by <code>__theValue</code>.
  */
-int32_t	OSAtomicOr32Orig( uint32_t __theMask, volatile uint32_t *__theValue ) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_3_2);
+__OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_3_2)
+int32_t	OSAtomicOr32Orig( uint32_t __theMask, volatile uint32_t *__theValue );
 
 
 /*! @abstract Atomic bitwise OR of two 32-bit values returning original with barrier.
@@ -250,7 +257,8 @@ int32_t	OSAtomicOr32Orig( uint32_t __theMask, volatile uint32_t *__theValue ) __
 	except that it also introduces a barrier.
     @result Returns the original value referenced by <code>__theValue</code>.
  */
-int32_t	OSAtomicOr32OrigBarrier( uint32_t __theMask, volatile uint32_t *__theValue ) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_3_2);
+__OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_3_2)
+int32_t	OSAtomicOr32OrigBarrier( uint32_t __theMask, volatile uint32_t *__theValue );
 
 
 
@@ -262,7 +270,8 @@ int32_t	OSAtomicOr32OrigBarrier( uint32_t __theMask, volatile uint32_t *__theVal
 	storing the result back to that memory location atomically.
     @result Returns the new value.
  */
-int32_t	OSAtomicAnd32( uint32_t __theMask, volatile uint32_t *__theValue ); 
+__OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0)
+int32_t	OSAtomicAnd32( uint32_t __theMask, volatile uint32_t *__theValue );
 
 
 /*! @abstract Atomic bitwise AND of two 32-bit values with barrier.
@@ -275,6 +284,7 @@ int32_t	OSAtomicAnd32( uint32_t __theMask, volatile uint32_t *__theValue );
 	except that it also introduces a barrier.
     @result Returns the new value.
  */
+__OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0)
 int32_t	OSAtomicAnd32Barrier( uint32_t __theMask, volatile uint32_t *__theValue ); 
 
 
@@ -285,7 +295,8 @@ int32_t	OSAtomicAnd32Barrier( uint32_t __theMask, volatile uint32_t *__theValue 
 	storing the result back to that memory location atomically.
     @result Returns the original value referenced by <code>__theValue</code>.
  */
-int32_t	OSAtomicAnd32Orig( uint32_t __theMask, volatile uint32_t *__theValue ) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_3_2);
+__OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_3_2)
+int32_t	OSAtomicAnd32Orig( uint32_t __theMask, volatile uint32_t *__theValue );
 
 
 /*! @abstract Atomic bitwise AND of two 32-bit values returning original with barrier.
@@ -298,7 +309,8 @@ int32_t	OSAtomicAnd32Orig( uint32_t __theMask, volatile uint32_t *__theValue ) _
 	except that it also introduces a barrier.
     @result Returns the original value referenced by <code>__theValue</code>.
  */
-int32_t	OSAtomicAnd32OrigBarrier( uint32_t __theMask, volatile uint32_t *__theValue ) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_3_2);
+__OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_3_2)
+int32_t	OSAtomicAnd32OrigBarrier( uint32_t __theMask, volatile uint32_t *__theValue );
 
 
 
@@ -310,6 +322,7 @@ int32_t	OSAtomicAnd32OrigBarrier( uint32_t __theMask, volatile uint32_t *__theVa
 	storing the result back to that memory location atomically.
     @result Returns the new value.
  */
+__OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0)
 int32_t	OSAtomicXor32( uint32_t __theMask, volatile uint32_t *__theValue );
 
 
@@ -323,6 +336,7 @@ int32_t	OSAtomicXor32( uint32_t __theMask, volatile uint32_t *__theValue );
 	except that it also introduces a barrier.
     @result Returns the new value.
  */
+__OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0)
 int32_t	OSAtomicXor32Barrier( uint32_t __theMask, volatile uint32_t *__theValue );
 
 
@@ -333,7 +347,8 @@ int32_t	OSAtomicXor32Barrier( uint32_t __theMask, volatile uint32_t *__theValue 
 	storing the result back to that memory location atomically.
     @result Returns the original value referenced by <code>__theValue</code>.
  */
-int32_t	OSAtomicXor32Orig( uint32_t __theMask, volatile uint32_t *__theValue ) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_3_2);
+__OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_3_2)
+int32_t	OSAtomicXor32Orig( uint32_t __theMask, volatile uint32_t *__theValue );
 
 
 /*! @abstract Atomic bitwise XOR of two 32-bit values returning original with barrier.
@@ -346,7 +361,8 @@ int32_t	OSAtomicXor32Orig( uint32_t __theMask, volatile uint32_t *__theValue ) _
 	except that it also introduces a barrier.
     @result Returns the original value referenced by <code>__theValue</code>.
  */
-int32_t	OSAtomicXor32OrigBarrier( uint32_t __theMask, volatile uint32_t *__theValue ) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_3_2);
+__OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_3_2)
+int32_t	OSAtomicXor32OrigBarrier( uint32_t __theMask, volatile uint32_t *__theValue );
  
 
 /*! @group Compare and swap
@@ -363,6 +379,7 @@ int32_t	OSAtomicXor32OrigBarrier( uint32_t __theMask, volatile uint32_t *__theVa
 	that memory location atomically.
     @result Returns TRUE on a match, FALSE otherwise.
  */
+__OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0)
 bool    OSAtomicCompareAndSwap32( int32_t __oldValue, int32_t __newValue, volatile int32_t *__theValue );
 
 
@@ -377,6 +394,7 @@ bool    OSAtomicCompareAndSwap32( int32_t __oldValue, int32_t __newValue, volati
 	except that it also introduces a barrier.
     @result Returns TRUE on a match, FALSE otherwise.
  */
+__OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0)
 bool    OSAtomicCompareAndSwap32Barrier( int32_t __oldValue, int32_t __newValue, volatile int32_t *__theValue );
 
 
@@ -388,7 +406,8 @@ bool    OSAtomicCompareAndSwap32Barrier( int32_t __oldValue, int32_t __newValue,
 	that memory location atomically.
     @result Returns TRUE on a match, FALSE otherwise.
  */
-bool	OSAtomicCompareAndSwapPtr( void *__oldValue, void *__newValue, void * volatile *__theValue ) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
+__OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0)
+bool	OSAtomicCompareAndSwapPtr( void *__oldValue, void *__newValue, void * volatile *__theValue );
 
 
 /*! @abstract Compare and swap pointers with barrier.
@@ -402,7 +421,8 @@ bool	OSAtomicCompareAndSwapPtr( void *__oldValue, void *__newValue, void * volat
 	except that it also introduces a barrier.
     @result Returns TRUE on a match, FALSE otherwise.
  */
-bool	OSAtomicCompareAndSwapPtrBarrier( void *__oldValue, void *__newValue, void * volatile *__theValue ) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
+__OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0)
+bool	OSAtomicCompareAndSwapPtrBarrier( void *__oldValue, void *__newValue, void * volatile *__theValue );
 
 
 /*! @abstract Compare and swap for <code>int</code> values.
@@ -415,7 +435,8 @@ bool	OSAtomicCompareAndSwapPtrBarrier( void *__oldValue, void *__newValue, void 
 	This function is equivalent to {@link OSAtomicCompareAndSwap32}.
     @result Returns TRUE on a match, FALSE otherwise.
  */
-bool	OSAtomicCompareAndSwapInt( int __oldValue, int __newValue, volatile int *__theValue ) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
+__OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0)
+bool	OSAtomicCompareAndSwapInt( int __oldValue, int __newValue, volatile int *__theValue );
 
 
 /*! @abstract Compare and swap for <code>int</code> values.
@@ -431,7 +452,8 @@ bool	OSAtomicCompareAndSwapInt( int __oldValue, int __newValue, volatile int *__
 	This function is equivalent to {@link OSAtomicCompareAndSwap32Barrier}.
     @result Returns TRUE on a match, FALSE otherwise.
  */
-bool	OSAtomicCompareAndSwapIntBarrier( int __oldValue, int __newValue, volatile int *__theValue ) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
+__OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0)
+bool	OSAtomicCompareAndSwapIntBarrier( int __oldValue, int __newValue, volatile int *__theValue );
 
 
 /*! @abstract Compare and swap for <code>long</code> values.
@@ -445,7 +467,8 @@ bool	OSAtomicCompareAndSwapIntBarrier( int __oldValue, int __newValue, volatile 
 	or {@link OSAtomicCompareAndSwap64} on 64-bit architectures.
     @result Returns TRUE on a match, FALSE otherwise.
  */
-bool	OSAtomicCompareAndSwapLong( long __oldValue, long __newValue, volatile long *__theValue ) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
+__OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0)
+bool	OSAtomicCompareAndSwapLong( long __oldValue, long __newValue, volatile long *__theValue );
 
 
 /*! @abstract Compare and swap for <code>long</code> values.
@@ -462,7 +485,8 @@ bool	OSAtomicCompareAndSwapLong( long __oldValue, long __newValue, volatile long
 	or {@link OSAtomicCompareAndSwap64} on 64-bit architectures.
     @result Returns TRUE on a match, FALSE otherwise.
  */
-bool	OSAtomicCompareAndSwapLongBarrier( long __oldValue, long __newValue, volatile long *__theValue ) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
+__OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0)
+bool	OSAtomicCompareAndSwapLongBarrier( long __oldValue, long __newValue, volatile long *__theValue );
 
 
 /*! @abstract Compare and swap for <code>uint64_t</code> values.
@@ -473,6 +497,7 @@ bool	OSAtomicCompareAndSwapLongBarrier( long __oldValue, long __newValue, volati
 	that memory location atomically.
     @result Returns TRUE on a match, FALSE otherwise.
  */
+__OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0)
 bool    OSAtomicCompareAndSwap64( int64_t __oldValue, int64_t __newValue, volatile int64_t *__theValue );
 
 
@@ -487,7 +512,8 @@ bool    OSAtomicCompareAndSwap64( int64_t __oldValue, int64_t __newValue, volati
 	except that it also introduces a barrier.
     @result Returns TRUE on a match, FALSE otherwise.
  */
-bool    OSAtomicCompareAndSwap64Barrier( int64_t __oldValue, int64_t __newValue, volatile int64_t *__theValue ) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_3_2);
+__OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_3_2)
+bool    OSAtomicCompareAndSwap64Barrier( int64_t __oldValue, int64_t __newValue, volatile int64_t *__theValue );
 
 
 /* Test and set.  They return the original value of the bit, and operate on bit (0x80>>(n&7))
@@ -505,6 +531,7 @@ bool    OSAtomicCompareAndSwap64Barrier( int64_t __oldValue, int64_t __newValue,
     @result
 	Returns the original value of the bit being tested.
  */
+__OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0)
 bool    OSAtomicTestAndSet( uint32_t __n, volatile void *__theAddress );
 
 
@@ -523,7 +550,7 @@ bool    OSAtomicTestAndSet( uint32_t __n, volatile void *__theAddress );
     @result
 	Returns the original value of the bit being tested.
  */
-
+__OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0)
 bool    OSAtomicTestAndSetBarrier( uint32_t __n, volatile void *__theAddress );
 
 
@@ -540,6 +567,7 @@ bool    OSAtomicTestAndSetBarrier( uint32_t __n, volatile void *__theAddress );
     @result
 	Returns the original value of the bit being tested.
  */
+__OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0)
 bool    OSAtomicTestAndClear( uint32_t __n, volatile void *__theAddress );
 
 
@@ -558,6 +586,7 @@ bool    OSAtomicTestAndClear( uint32_t __n, volatile void *__theAddress );
     @result
 	Returns the original value of the bit being tested.
  */
+__OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0)
 bool    OSAtomicTestAndClearBarrier( uint32_t __n, volatile void *__theAddress );
  
 
@@ -586,6 +615,7 @@ typedef int32_t OSSpinLock;
 	Returns <code>false</code> if the lock was already held by another thread,
 	<code>true</code> if it took the lock successfully. 
  */
+__OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0)
 bool    OSSpinLockTry( volatile OSSpinLock *__lock );
 
 
@@ -595,10 +625,12 @@ bool    OSSpinLockTry( volatile OSSpinLock *__lock );
         to back off if the lock is held, making it immune to most priority-inversion
 	livelocks.
  */
+__OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0)
 void    OSSpinLockLock( volatile OSSpinLock *__lock );
 
 
 /*! @abstract Unlocks a spinlock */
+__OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0)
 void    OSSpinLockUnlock( volatile OSSpinLock *__lock );
 
 
@@ -648,7 +680,8 @@ typedef volatile struct {
 	<code>stddef.h</code> is the common way to specify the <code>__offset</code>
 	value.
  */
-void  OSAtomicEnqueue( OSQueueHead *__list, void *__new, size_t __offset) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_4_0);
+__OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_4_0)
+void  OSAtomicEnqueue( OSQueueHead *__list, void *__new, size_t __offset);
 
 
 /*! @abstract Dequeue an item from a list.
@@ -670,7 +703,8 @@ void  OSAtomicEnqueue( OSQueueHead *__list, void *__new, size_t __offset) __OSX_
 	Returns the most recently enqueued element, or <code>NULL</code> if the
 	list is empty.  
  */
-void* OSAtomicDequeue( OSQueueHead *__list, size_t __offset) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_4_0);
+__OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_4_0)
+void* OSAtomicDequeue( OSQueueHead *__list, size_t __offset);
 
 #if defined(__x86_64__) || defined(__i386__)
 
@@ -722,7 +756,8 @@ typedef	volatile struct {
 	<code>stddef.h</code> is the common way to specify the <code>__offset</code>
 	value.
  */
-void  OSAtomicFifoEnqueue( OSFifoQueueHead *__list, void *__new, size_t __offset) __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA);
+__OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA)
+void  OSAtomicFifoEnqueue( OSFifoQueueHead *__list, void *__new, size_t __offset);
 
 /*! @abstract Dequeue an item from a list.
     @discussion
@@ -743,7 +778,8 @@ void  OSAtomicFifoEnqueue( OSFifoQueueHead *__list, void *__new, size_t __offset
 	Returns the oldest enqueued element, or <code>NULL</code> if the
 	list is empty.  
  */
-void* OSAtomicFifoDequeue( OSFifoQueueHead *__list, size_t __offset) __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA);
+__OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA)
+void* OSAtomicFifoDequeue( OSFifoQueueHead *__list, size_t __offset);
 
 #endif /* __i386__ || __x86_64__ */
 
@@ -753,6 +789,7 @@ void* OSAtomicFifoDequeue( OSFifoQueueHead *__list, size_t __offset) __OSX_AVAIL
     @discussion
 	This function serves as both a read and write barrier.
  */
+__OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0)
 void    OSMemoryBarrier( void );
 
 __END_DECLS

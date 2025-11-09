@@ -1,7 +1,7 @@
 /*
     NSUserInterfaceItemIdentification.h
     Application Kit
-    Copyright (c) 2006-2012, Apple Inc.
+    Copyright (c) 2006-2013, Apple Inc.
     All rights reserved.
 */
 
@@ -10,7 +10,7 @@
 
 @class NSString;
 
-/* New to Mac OS 10.7 */
+/* Introduced in Mac OS 10.7 */
 @protocol NSUserInterfaceItemIdentification
 @required
 

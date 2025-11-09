@@ -103,6 +103,11 @@ kern_return_t	task_policy_get(
 
 #define TASK_CATEGORY_POLICY		1
 
+#define TASK_SUPPRESSION_POLICY		3
+#define TASK_POLICY_STATE		4
+#define TASK_BASE_QOS_POLICY		8
+#define TASK_OVERRIDE_QOS_POLICY	9
+
 enum task_role {
 	TASK_RENICED = -1,
 	TASK_UNSPECIFIED = 0,
@@ -115,7 +120,7 @@ enum task_role {
 	TASK_DEFAULT_APPLICATION
 };
 
-typedef enum task_role		task_role_t;
+typedef integer_t	task_role_t;
 
 struct task_category_policy {
 	task_role_t		role;
@@ -126,5 +131,52 @@ typedef struct task_category_policy		*task_category_policy_t;
 
 #define TASK_CATEGORY_POLICY_COUNT	((mach_msg_type_number_t) \
 	(sizeof (task_category_policy_data_t) / sizeof (integer_t)))
+
+
+enum task_latency_qos {
+	LATENCY_QOS_TIER_UNSPECIFIED = 0x0,
+	LATENCY_QOS_TIER_0 = ((0xFF<<16) | 1),
+	LATENCY_QOS_TIER_1 = ((0xFF<<16) | 2),
+	LATENCY_QOS_TIER_2 = ((0xFF<<16) | 3),
+	LATENCY_QOS_TIER_3 = ((0xFF<<16) | 4),
+	LATENCY_QOS_TIER_4 = ((0xFF<<16) | 5),
+	LATENCY_QOS_TIER_5 = ((0xFF<<16) | 6)
+};
+typedef integer_t	task_latency_qos_t;
+enum task_throughput_qos {
+	THROUGHPUT_QOS_TIER_UNSPECIFIED = 0x0,
+	THROUGHPUT_QOS_TIER_0 = ((0xFE<<16) | 1),
+	THROUGHPUT_QOS_TIER_1 = ((0xFE<<16) | 2),
+	THROUGHPUT_QOS_TIER_2 = ((0xFE<<16) | 3),
+	THROUGHPUT_QOS_TIER_3 = ((0xFE<<16) | 4),
+	THROUGHPUT_QOS_TIER_4 = ((0xFE<<16) | 5),
+	THROUGHPUT_QOS_TIER_5 = ((0xFE<<16) | 6),
+};
+
+#define LATENCY_QOS_LAUNCH_DEFAULT_TIER LATENCY_QOS_TIER_3
+#define THROUGHPUT_QOS_LAUNCH_DEFAULT_TIER THROUGHPUT_QOS_TIER_3
+
+typedef integer_t	task_throughput_qos_t;
+
+struct task_qos_policy {
+	task_latency_qos_t task_latency_qos_tier;
+	task_throughput_qos_t task_throughput_qos_tier;
+};
+
+typedef struct task_qos_policy *task_qos_policy_t;
+#define TASK_QOS_POLICY_COUNT	((mach_msg_type_number_t) \
+	(sizeof (struct task_qos_policy) / sizeof (integer_t)))
+
+#define PROC_FLAG_DARWINBG           0x8000    /* process in darwin background */
+#define PROC_FLAG_EXT_DARWINBG		 0x10000   /* process in darwin background - external enforcement */
+#define PROC_FLAG_IOS_APPLEDAEMON    0x20000   /* process is apple ios daemon */
+#define PROC_FLAG_IOS_IMPPROMOTION   0x80000   /* process is apple ios daemon */
+#define PROC_FLAG_ADAPTIVE           0x100000  /* Process is adaptive */
+#define PROC_FLAG_ADAPTIVE_IMPORTANT 0x200000  /* Process is adaptive, and is currently important */
+#define PROC_FLAG_IMPORTANCE_DONOR   0x400000  /* Process is marked as an importance donor */
+#define PROC_FLAG_SUPPRESSED         0x800000  /* Process is suppressed */
+#define PROC_FLAG_IOS_APPLICATION	 0x1000000 /* Process is an application */
+
+
 
 #endif	/* _MACH_TASK_POLICY_H_ */

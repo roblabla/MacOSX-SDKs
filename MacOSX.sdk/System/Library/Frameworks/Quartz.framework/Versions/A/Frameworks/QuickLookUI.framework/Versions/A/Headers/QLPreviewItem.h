@@ -7,11 +7,10 @@
 
 #import <Foundation/Foundation.h>
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
-
 /*!
  * @abstract The QLPreviewItem protocol declares the methods that a QLPreviewPanel  instance uses to access the contents of a given item.
  */
+NS_AVAILABLE_MAC(10_6)
 @protocol QLPreviewItem <NSObject>
 
 @required
@@ -43,6 +42,3 @@
  */
 @interface NSURL (QLPreviewConvenienceAdditions) <QLPreviewItem>
 @end
-
-#endif
-

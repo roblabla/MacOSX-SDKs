@@ -10,7 +10,6 @@
 
 #import <Foundation/Foundation.h>
 
-
 /*! @group CoreWLAN Error Codes */
 /*!
  * @enum CWErr
@@ -106,15 +105,16 @@ enum {
 	kCWPHYMode11b		= 2,
 	kCWPHYMode11g		= 3,
 	kCWPHYMode11n		= 4,
+    kCWPHYMode11ac      = 5,
 };
 typedef NSInteger CWPHYMode;
 
 /*!
- * @enum CWOpMode
- * @const kCWOpModeStation Interface is participating in an infrastructure network as a non-AP station.
- * @const kCWOpModeIBSS Interface is participating in an IBSS network.
- * @const kCWOpModeHostAP Interface is participating in an infrastructure network as an access point.
- * @const kCWOpModeMonitorMode Interface is in 802.11 monitor mode.
+ * @enum CWInterfaceMode
+ * @const kCWInterfaceModeNone Interface is not in any mode 
+ * @const kCWInterfaceModeStation Interface is participating in an infrastructure network as a non-AP station.
+ * @const kCWInterfaceModeIBSS Interface is participating in an IBSS network.
+ * @const kCWInterfaceModeHostAP Interface is participating in an infrastructure network as an access point.
  * @discussion CoreWLAN interface operation modes.
  */
 enum {
@@ -174,12 +174,16 @@ typedef NSInteger CWIBSSModeSecurity;
  * @const kCWChannelWidthUnknown Unknown channel width.
  * @const kCWChannelWidth20MHz 20MHz channel width.
  * @const kCWChannelWidth40MHz 40MHz channel width.
+ * @const kCWChannelWidth80MHz 80MHz channel width.
+ * @const kCWChannelWidth160MHz 160MHz channel width.
  * @discussion CoreWLAN channel widths used for CWChannel.
  */
 enum {
-	kCWChannelWidthUnknown	= 0,
-	kCWChannelWidth20MHz	= 1,
-	kCWChannelWidth40MHz	= 2,	
+    kCWChannelWidthUnknown	= 0,
+    kCWChannelWidth20MHz	= 1,
+    kCWChannelWidth40MHz	= 2,
+    kCWChannelWidth80MHz	= 3,
+    kCWChannelWidth160MHz	= 4,
 };
 typedef NSInteger CWChannelWidth;
 
@@ -215,122 +219,18 @@ enum {
 };
 typedef NSUInteger CWCipherKeyFlags;
 
-
-#pragma mark - 
-#pragma mark Legacy
-
 /*!
- * @enum
- * @const kCWError Generic error, no specific error code exists to describe the error condition.
+ * @enum CWKeychainDomain
+ * @const kCWKeychainDomainNone No keychain domain specified.
+ * @const kCWKeychainDomainUser The login (user) keychain domain.
+ * @const kCWKeychainDomainSystem The system keychain domain.
+ * @discussion CoreWLAN keychain domains used in the CWKeychain API.
  */
-enum
-{
-	kCWParamErr							= kCWInvalidParameterErr,
-	kCWNoMemErr							= kCWNoMemoryErr,
-	kCWUknownErr						= kCWUnknownErr,
-	kCWFormatErr						= kCWInvalidFormatErr,
-	kCWAuthAlgUnsupportedErr			= kCWAuthenticationAlgorithmUnsupportedErr,
-	kCWInvalidAuthSeqNumErr				= kCWInvalidAuthenticationSequenceNumberErr,
-	kCWInvalidInfoElementErr			= kCWInvalidInformationElementErr,
-	kCWHTFeaturesNotSupported			= kCWHTFeaturesNotSupportedErr,
-	kCWPCOTransitionTimeNotSupported	= kCWPCOTransitionTimeNotSupportedErr,
-	kCWRefNotBoundErr					= kCWReferenceNotBoundErr,
-	kCWIPCError							= kCWIPCFailureErr,
-	kCWOpNotPermitted					= kCWOperationNotPermittedErr,
-	kCWError							= kCWErr,
+enum {
+    kCWKeychainDomainNone       = 0,
+    kCWKeychainDomainUser       = 1,
+    kCWKeychainDomainSystem     = 2,
 };
-
-/*!
- * @enum CWPHYMode
- * @const kCWPHYMode11A IEEE 802.11a PHY.
- * @const kCWPHYMode11B IEEE 802.11b PHY.
- * @const kCWPHYMode11G IEEE 802.11g PHY.
- * @const kCWPHYMode11N IEEE 802.11n PHY.
- * @discussion CoreWLAN physical layer modes.
- */
-enum
-{
-	kCWPHYMode11A	= 0,
-	kCWPHYMode11B,
-	kCWPHYMode11G,
-	kCWPHYMode11N,
-};
-
-/*!
- * @enum CWOpMode
- * @const kCWOpModeStation Interface is participating in an infrastructure network as a non-AP station.
- * @const kCWOpModeIBSS Interface is participating in an IBSS network.
- * @const kCWOpModeHostAP Interface is participating in an infrastructure network as an access point.
- * @const kCWOpModeMonitorMode Interface is in 802.11 monitor mode.
- * @discussion CoreWLAN interface operation modes.
- */
-enum
-{
-	kCWOpModeStation        = 0,
-	kCWOpModeIBSS,
-	kCWOpModeHostAP,
-    kCWOpModeMonitorMode,
-};
-typedef NSInteger CWOpMode;
-
-/*!
- * @enum CWSecurityMode
- * @const kCWSecurityModeOpen Open System authentication.
- * @const kCWSecurityModeWEP WEP authentication.
- * @const kCWSecurityModeWPA_PSK WPA Personal authentication.
- * @const kCWSecurityModeWPA2_PSK WPA2 Personal authentication.
- * @const kCWSecurityModeWPA_Enterprise WPA Enterprise authentication.
- * @const kCWSecurityModeWPA2_Enterprise WPA2 Enterprise authentication.
- * @const kCWSecurityModeWPS WiFi Protected Setup authentication.
- * @const kCWSecurityModeDynamicWEP Dynamic WEP 802.1X authentication.
- * @discussion CoreWLAN security modes.
- */
-enum
-{
-	kCWSecurityModeOpen	= 0,
-	kCWSecurityModeWEP,
-	kCWSecurityModeWPA_PSK,
-	kCWSecurityModeWPA2_PSK,
-    kCWSecurityModeDynamicWEP,
-	kCWSecurityModeWPA_Enterprise,
-	kCWSecurityModeWPA2_Enterprise,
-	kCWSecurityModeWPS,
-};
-typedef NSInteger CWSecurityMode;
-
-/*!
- * @enum CWInterfaceState
- * @const kCWInterfaceStateInactive CoreWLAN interface is in the initial, inactive state.
- * @const kCWInterfaceStateScanning CoreWLAN interface is scanning.
- * @const kCWInterfaceStateAuthenticating CoreWLAN interface is authenticating.
- * @const kCWInterfaceStateAssociating CoreWLAN interface is associating.
- * @const kCWInterfaceStateRunning CoreWLAN interface is running.
- * @discussion CoreWLAN interface states.
- */
-enum
-{
-	kCWInterfaceStateInactive			= 0,
-	kCWInterfaceStateScanning,
-	kCWInterfaceStateAuthenticating,
-	kCWInterfaceStateAssociating,
-	kCWInterfaceStateRunning
-};
-typedef NSInteger CWInterfaceState;
-
-/*!
- * @enum CWScanType
- * @const kCWScanTypeActive In accordance with the supported channels for the active country code, the interface 
- * will transmit probe request frames and listen for probe responses.
- * @const kCWScanTypePassive The interface will listen for beacon frames on each channel irrespective of country code.
- * @const kCWScanTypeFast The scan will return cached scan results.
- * @discussion CoreWLAN scan types.
- */
-enum
-{
-	kCWScanTypeActive		= 0,
-	kCWScanTypePassive,
-	kCWScanTypeFast
-};
-typedef NSInteger CWScanType;
+typedef NSInteger CWKeychainDomain;
 
 #endif /* _CORE_WLAN_TYPES_H_ */

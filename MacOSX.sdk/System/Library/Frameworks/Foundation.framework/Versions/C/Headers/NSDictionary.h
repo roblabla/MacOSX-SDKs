@@ -1,5 +1,5 @@
 /*	NSDictionary.h
-	Copyright (c) 1994-2012, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2013, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -52,31 +52,33 @@
 
 @interface NSDictionary (NSDictionaryCreation)
 
-+ (id)dictionary;
-+ (id)dictionaryWithObject:(id)object forKey:(id <NSCopying>)key;
++ (instancetype)dictionary;
++ (instancetype)dictionaryWithObject:(id)object forKey:(id <NSCopying>)key;
 #if TARGET_OS_WIN32
-+ (id)dictionaryWithObjects:(const id [])objects forKeys:(const id [])keys count:(NSUInteger)cnt;
++ (instancetype)dictionaryWithObjects:(const id [])objects forKeys:(const id [])keys count:(NSUInteger)cnt;
 #else
-+ (id)dictionaryWithObjects:(const id [])objects forKeys:(const id <NSCopying> [])keys count:(NSUInteger)cnt;
++ (instancetype)dictionaryWithObjects:(const id [])objects forKeys:(const id <NSCopying> [])keys count:(NSUInteger)cnt;
 #endif
-+ (id)dictionaryWithObjectsAndKeys:(id)firstObject, ... NS_REQUIRES_NIL_TERMINATION;
-+ (id)dictionaryWithDictionary:(NSDictionary *)dict;
-+ (id)dictionaryWithObjects:(NSArray *)objects forKeys:(NSArray *)keys;
++ (instancetype)dictionaryWithObjectsAndKeys:(id)firstObject, ... NS_REQUIRES_NIL_TERMINATION;
++ (instancetype)dictionaryWithDictionary:(NSDictionary *)dict;
++ (instancetype)dictionaryWithObjects:(NSArray *)objects forKeys:(NSArray *)keys;
 
+- (instancetype)init;	/* designated initializer */
 #if TARGET_OS_WIN32
-- (id)initWithObjects:(const id [])objects forKeys:(const id [])keys count:(NSUInteger)cnt;
+- (instancetype)initWithObjects:(const id [])objects forKeys:(const id [])keys count:(NSUInteger)cnt;
 #else
-- (id)initWithObjects:(const id [])objects forKeys:(const id <NSCopying> [])keys count:(NSUInteger)cnt;
+- (instancetype)initWithObjects:(const id [])objects forKeys:(const id <NSCopying> [])keys count:(NSUInteger)cnt;	/* designated initializer */
 #endif
-- (id)initWithObjectsAndKeys:(id)firstObject, ... NS_REQUIRES_NIL_TERMINATION;
-- (id)initWithDictionary:(NSDictionary *)otherDictionary;
-- (id)initWithDictionary:(NSDictionary *)otherDictionary copyItems:(BOOL)flag;
-- (id)initWithObjects:(NSArray *)objects forKeys:(NSArray *)keys;
 
-+ (id)dictionaryWithContentsOfFile:(NSString *)path;
-+ (id)dictionaryWithContentsOfURL:(NSURL *)url;
-- (id)initWithContentsOfFile:(NSString *)path;
-- (id)initWithContentsOfURL:(NSURL *)url;
+- (instancetype)initWithObjectsAndKeys:(id)firstObject, ... NS_REQUIRES_NIL_TERMINATION;
+- (instancetype)initWithDictionary:(NSDictionary *)otherDictionary;
+- (instancetype)initWithDictionary:(NSDictionary *)otherDictionary copyItems:(BOOL)flag;
+- (instancetype)initWithObjects:(NSArray *)objects forKeys:(NSArray *)keys;
+
++ (id /* NSDictionary * */)dictionaryWithContentsOfFile:(NSString *)path;
++ (id /* NSDictionary * */)dictionaryWithContentsOfURL:(NSURL *)url;
+- (id /* NSDictionary * */)initWithContentsOfFile:(NSString *)path;
+- (id /* NSDictionary * */)initWithContentsOfURL:(NSURL *)url;
 
 @end
 
@@ -101,8 +103,10 @@
 
 @interface NSMutableDictionary (NSMutableDictionaryCreation)
 
-+ (id)dictionaryWithCapacity:(NSUInteger)numItems;
-- (id)initWithCapacity:(NSUInteger)numItems;
++ (instancetype)dictionaryWithCapacity:(NSUInteger)numItems;
+
+- (instancetype)init;	/* designated initializer */
+- (instancetype)initWithCapacity:(NSUInteger)numItems;	/* designated initializer */
 
 @end
 
@@ -128,6 +132,6 @@
  If keyset is nil, an exception is thrown.
  If keyset is not an object returned by +sharedKeySetForKeys:, an exception is thrown.
  */
-+ (id)dictionaryWithSharedKeySet:(id)keyset NS_AVAILABLE(10_8, 6_0);
++ (id /* NSMutableDictionary * */)dictionaryWithSharedKeySet:(id)keyset NS_AVAILABLE(10_8, 6_0);
 
 @end

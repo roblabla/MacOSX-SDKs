@@ -10,6 +10,8 @@
 #include <CoreGraphics/CGDataConsumer.h>
 #include <CoreFoundation/CFDictionary.h>
 
+CF_IMPLICIT_BRIDGING_ENABLED
+
 /* Create a PDF context, using `consumer' for output. `mediaBox' is the
    default page media bounding box; if NULL, then a default page size is
    used. `auxiliaryInfo' specifies additional information used by the PDF
@@ -281,5 +283,7 @@ CG_EXTERN const CFStringRef kCGPDFXDestinationOutputProfile
 
 CG_EXTERN const CFStringRef kCGPDFContextOutputIntents
   CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif /* CGPDFCONTEXT_H_ */

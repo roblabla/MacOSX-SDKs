@@ -3,13 +3,15 @@
  
      Contains:   Public interfaces for LaunchServices.framework
  
-     Copyright:  Copyright 2003-2009 by Apple Inc., all rights reserved.
+     Copyright:  (c) 2003-2012 by Apple Inc. All rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
  
                      http://developer.apple.com/bugreporter/
+
 */
+
 #ifndef __LSOPEN__
 #define __LSOPEN__
 
@@ -28,7 +30,6 @@
 #ifndef __AE__
 #include <AE/AE.h>
 #endif
-
 
 
 
@@ -121,7 +122,7 @@ typedef struct LSLaunchURLSpec          LSLaunchURLSpec;
  *      launch the document. Can be NULL.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
@@ -161,7 +162,7 @@ LSOpenFSRef(
  *      CALLER MUST EVENTUALLY RELEASE THE RETURNED URL REFERENCE.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
@@ -195,7 +196,7 @@ LSOpenCFURLRef(
  *      launch the document. Can be NULL.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
@@ -231,7 +232,7 @@ LSOpenFromRefSpec(
  *      CALLER MUST EVENTUALLY RELEASE THE RETURNED URL REFERENCE.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
@@ -291,7 +292,7 @@ typedef struct LSApplicationParameters  LSApplicationParameters;
  *    Thread safe since version 10.4
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.4 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -336,7 +337,7 @@ LSOpenApplication(
  *    Thread safe since version 10.4
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.4 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -389,7 +390,7 @@ LSOpenItemsWithRole(
  *    Thread safe since version 10.4
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.4 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */

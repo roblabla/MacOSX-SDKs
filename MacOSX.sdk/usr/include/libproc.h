@@ -28,6 +28,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/mount.h>
+#include <sys/resource.h>
 #include <stdint.h>
 #include <stdbool.h>
 
@@ -98,6 +99,14 @@ int proc_regionfilename(int pid, uint64_t address, void * buffer, uint32_t buffe
 int proc_kmsgbuf(void * buffer, uint32_t buffersize) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
 int proc_pidpath(int pid, void * buffer, uint32_t  buffersize) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
 int proc_libversion(int *major, int * minor) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
+
+/*
+ * Return resource usage information for the given pid, which can be a live process or a zombie.
+ *
+ * Returns 0 on success; or -1 on failure, with errno set to indicate the specific error.
+ */
+int proc_pid_rusage(int pid, int flavor, rusage_info_t *buffer) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+
 /* 
  * A process can use the following api to set its own process control 
  * state on resoure starvation. The argument can have one of the PROC_SETPC_XX values

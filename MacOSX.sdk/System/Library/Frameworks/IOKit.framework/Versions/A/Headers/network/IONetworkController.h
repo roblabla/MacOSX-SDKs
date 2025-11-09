@@ -214,15 +214,19 @@ enum {
         for TCP/IPv4 segmentation offload.
     @constant kIONetworkFeatureTSOIPv6 Set this bit to advertise support
         for TCP/IPv6 segmentation offload.
+    @constant kIONetworkFeatureTransmitCompletionStatus Set this bit to
+        advertise the capability to report per-packet transmit completion status.
+        See <code>IONetworkInterface::reportTransmitCompletionStatus</code>.
 */
 
 enum {
-    kIONetworkFeatureNoBSDWait              = 0x01,
-	kIONetworkFeatureHardwareVlan           = 0x02,
-	kIONetworkFeatureSoftwareVlan           = 0x04,
-	kIONetworkFeatureMultiPages             = 0x08,
-	kIONetworkFeatureTSOIPv4                = 0x10,
-	kIONetworkFeatureTSOIPv6                = 0x20
+    kIONetworkFeatureNoBSDWait                  = 0x01,
+    kIONetworkFeatureHardwareVlan               = 0x02,
+    kIONetworkFeatureSoftwareVlan               = 0x04,
+    kIONetworkFeatureMultiPages                 = 0x08,
+    kIONetworkFeatureTSOIPv4                    = 0x10,
+    kIONetworkFeatureTSOIPv6                    = 0x20,
+    kIONetworkFeatureTransmitCompletionStatus   = 0x40
 };
 
 #endif /* !_IONETWORKCONTROLLER_H */

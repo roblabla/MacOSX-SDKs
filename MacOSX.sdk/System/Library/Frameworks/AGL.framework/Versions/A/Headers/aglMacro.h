@@ -2816,5 +2816,9 @@
 #define glEndConditionalRenderNV() \
 	(*(AGL_MACRO_CONTEXT)->disp.end_conditional_render_NV)(AGL_MACRO_CONTEXT_RENDERER)
 
+/* GL_NV_texture_barrier */
+#define glTextureBarrierNV() \
+	(*(AGL_MACRO_CONTEXT)->disp.texture_barrier_NV)(AGL_MACRO_CONTEXT_RENDERER)
+
 #endif /* _AGLMACRO_H */
 

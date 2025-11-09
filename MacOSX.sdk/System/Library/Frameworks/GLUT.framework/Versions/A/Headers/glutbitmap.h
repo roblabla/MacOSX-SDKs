@@ -16,15 +16,15 @@ typedef struct {
   const GLfloat yorig;
   const GLfloat advance;
   const GLubyte *bitmap;
-} BitmapCharRec, *BitmapCharPtr;
+} BitmapCharRec OPENGL_DEPRECATED(10_0, 10_9), *BitmapCharPtr OPENGL_DEPRECATED(10_0, 10_9);
 
 typedef struct {
   const char *name;
   const int num_chars;
   const int first;
   const BitmapCharRec * const *ch;
-} BitmapFontRec, *BitmapFontPtr;
+} BitmapFontRec OPENGL_DEPRECATED(10_0, 10_9), *BitmapFontPtr OPENGL_DEPRECATED(10_0, 10_9);
 
-typedef void *GLUTbitmapFont;
+typedef void *GLUTbitmapFont OPENGL_DEPRECATED(10_0, 10_9);
 
 #endif /* __glutbitmap_h__ */

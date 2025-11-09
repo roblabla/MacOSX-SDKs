@@ -39,20 +39,9 @@
  * [SPN] Inclusion of the <spawn.h> header may make visible symbols defined
  * in the <sched.h>, <signal.h>, and <sys/types.h> headers.
  */
-#ifndef _PID_T
-typedef __darwin_pid_t		pid_t;
-#define _PID_T
-#endif
-
-#ifndef _SIGSET_T
-#define _SIGSET_T
-typedef __darwin_sigset_t	sigset_t;
-#endif
-
-#ifndef _MODE_T
-typedef __darwin_mode_t		mode_t;
-#define _MODE_T
-#endif 
+#include <sys/_types/_pid_t.h>
+#include <sys/_types/_sigset_t.h>
+#include <sys/_types/_mode_t.h>
 
 /*
  * Opaque types for use with posix_spawn() family functions.  Internals are
@@ -122,10 +111,7 @@ __END_DECLS
 #include <mach/machine.h>
 #include <mach/port.h>
 
-#ifndef _SIZE_T
-typedef __darwin_size_t		size_t;
-#define _SIZE_T
-#endif 
+#include <sys/_types/_size_t.h>
 
 __BEGIN_DECLS
 

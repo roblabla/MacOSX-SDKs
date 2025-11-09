@@ -3,7 +3,16 @@
  
 	Copyright:	(c)2007-2012 by Apple Inc., all rights reserved.
 
- */
+*/
+
+/*
+  QTKit has been deprecated in 10.9.
+
+  AVFoundation and AVKit are the frameworks recommended for all new development 
+  involving time-based audiovisual media on OS X.  In order to transition your 
+  project from QTKit to AVFoundation please refer to:
+  "Technical Note TN2300 Transitioning QTKit code to AV Foundation".
+*/
 
 #import <Foundation/Foundation.h>
 #import <QTKit/QTKitDefines.h>
@@ -29,25 +38,25 @@
 	long								_reserved4;
 }
 
-- (NSDictionary *)pixelBufferAttributes;
-- (void)setPixelBufferAttributes:(NSDictionary *)pixelBufferAttributes;	
+- (NSDictionary *)pixelBufferAttributes AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+- (void)setPixelBufferAttributes:(NSDictionary *)pixelBufferAttributes AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;	
 
 #if !__LP64__
-- (QTVisualContextRef)visualContextForConnection:(QTCaptureConnection *)connection;
-- (void)setVisualContext:(QTVisualContextRef)visualContext forConnection:(QTCaptureConnection *)connection;
+- (QTVisualContextRef)visualContextForConnection:(QTCaptureConnection *)connection AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+- (void)setVisualContext:(QTVisualContextRef)visualContext forConnection:(QTCaptureConnection *)connection AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 #endif
 
-- (id)delegate;
-- (void)setDelegate:(id)delegate;
+- (id)delegate AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+- (void)setDelegate:(id)delegate AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 // To be overridden by subclasses - do not invoke directly
-- (void)outputVideoFrame:(CVImageBufferRef)videoFrame withSampleBuffer:(QTSampleBuffer *)sampleBuffer fromConnection:(QTCaptureConnection *)connection;
+- (void)outputVideoFrame:(CVImageBufferRef)videoFrame withSampleBuffer:(QTSampleBuffer *)sampleBuffer fromConnection:(QTCaptureConnection *)connection AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 @end
 
 @interface NSObject	(QTCaptureVideoPreviewOutput_Delegate)
 
-- (void)captureOutput:(QTCaptureOutput *)captureOutput didOutputVideoFrame:(CVImageBufferRef)videoFrame withSampleBuffer:(QTSampleBuffer *)sampleBuffer fromConnection:(QTCaptureConnection *)connection;
+- (void)captureOutput:(QTCaptureOutput *)captureOutput didOutputVideoFrame:(CVImageBufferRef)videoFrame withSampleBuffer:(QTSampleBuffer *)sampleBuffer fromConnection:(QTCaptureConnection *)connection AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 @end
 

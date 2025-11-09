@@ -3,8 +3,6 @@
  
      Contains:   HIView routines
  
-     Version:    HIToolbox-626.1~1
- 
      Copyright:  © 2001-2008 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
@@ -24,8 +22,8 @@
 #include <HIToolbox/CarbonEvents.h>
 #endif
 
-#ifndef __HISHAPE__
-#include <HIServices/HIShape.h>
+#ifndef __APPLICATIONSERVICES__
+#include <ApplicationServices/ApplicationServices.h>
 #endif
 
 #ifndef __HITHEME__

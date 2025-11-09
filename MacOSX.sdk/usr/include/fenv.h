@@ -119,7 +119,7 @@ enum {
 
 extern const fenv_t _FE_DFL_ENV;
 #define FE_DFL_ENV &_FE_DFL_ENV
-    
+
 /******************************************************************************
  *  x86 definitions of architecture-specific types and macros.                *
  ******************************************************************************/

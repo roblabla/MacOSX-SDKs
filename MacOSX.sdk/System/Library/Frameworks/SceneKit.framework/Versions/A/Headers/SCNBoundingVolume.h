@@ -1,7 +1,7 @@
 //
 //  SCNBoundingVolume.h
 //
-//  Copyright 2012 Apple Inc. All rights reserved.
+//  Copyright (c) 2012-2013 Apple Inc. All rights reserved.
 //
 
 /*!
@@ -11,7 +11,6 @@
  */
 
 @protocol SCNBoundingVolume
-
 @required
 
 /*! 
@@ -29,5 +28,15 @@
  @param radius A pointer to a CGFloat to store the radius of the bounding sphere into.
  */
 - (BOOL)getBoundingSphereCenter:(SCNVector3 *)center radius:(CGFloat *)radius;
+
+
+/*!
+ @method setBoundingBoxMin:max:
+ @abstract Override the receiver bounding box with the min and max vectors provided.
+ @param min A pointer to a SCNVector3 representing the min vertex of the desired bounding box.
+ @param max A pointer to a SCNVector3 representing the max vertex of the desired bounding box.
+ @discussion Passing nil as arguments will recompute the original bounding box of the receiver.
+ */
+- (void)setBoundingBoxMin:(SCNVector3 *)min max:(SCNVector3 *)max SCENEKIT_AVAILABLE(10_9, NA);
 
 @end

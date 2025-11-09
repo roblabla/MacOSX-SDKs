@@ -17,27 +17,25 @@
 # define __has_attribute(x) 0
 #endif
 
-#ifndef __has_extension
-# define __has_extension __has_feature
-#endif
-
-#if !defined(__CT_DEPRECATED_ENUMERATOR)
-# if __has_attribute(deprecated) && __has_extension(enumerator_attributes)
-#  define __CT_DEPRECATED_ENUMERATOR __attribute__((deprecated))
-# else
-#  define __CT_DEPRECATED_ENUMERATOR
-# endif
-#endif
-
 #if defined(CT_BUILDING_CoreText)
-# define CT_AVAILABLE_STARTING(_mac,_iphone)
-# define CT_AVAILABLE_BUT_DEPRECATED(_mac,_macDep,_iphone,_iphoneDep)
-# define CT_DEPRECATED_ENUMERATOR
+# define CT_AVAILABLE(_mac, _ios)
+# define CT_AVAILABLE_MAC(_mac)
+# define CT_AVAILABLE_IOS(_ios)
+# define CT_DEPRECATED(_macIntro, _macDep, _iosIntro, _iosDep)
+# define CT_DEPRECATED_IOS(_iosIntro, _iosDep)
+# define CT_ENUM_DEPRECATED(_macIntro, _macDep, _iosIntro, _iosDep)
 #else /* defined(CT_BUILDING_CoreText) */
 # include <Availability.h>
-# define CT_AVAILABLE_STARTING __OSX_AVAILABLE_STARTING
-# define CT_AVAILABLE_BUT_DEPRECATED __OSX_AVAILABLE_BUT_DEPRECATED
-# define CT_DEPRECATED_ENUMERATOR __CT_DEPRECATED_ENUMERATOR
+# define CT_AVAILABLE(_mac, _ios) __OSX_AVAILABLE_STARTING(__MAC_##_mac, __IPHONE_##_ios)
+# define CT_AVAILABLE_MAC(_mac) __OSX_AVAILABLE_STARTING(__MAC_##_mac, __IPHONE_NA)
+# define CT_AVAILABLE_IOS(_ios) __OSX_AVAILABLE_STARTING(__MAC_NA, __IPHONE_##_ios)
+# define CT_DEPRECATED(_macIntro, _macDep, _iosIntro, _iosDep) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_##_macIntro, __MAC_##_macDep, __IPHONE_##_iosIntro, __IPHONE_##_iosDep)
+# define CT_DEPRECATED_IOS(_iosIntro, _iosDep) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_NA, __MAC_NA, __IPHONE_##_iosIntro, __IPHONE_##_iosDep)
+# if __has_feature(enumerator_attributes) && __has_attribute(availability)
+#  define CT_ENUM_DEPRECATED(_macIntro, _macDep, _iosIntro, _iosDep) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_##_macIntro, __MAC_##_macDep, __IPHONE_##_iosIntro, __IPHONE_##_iosDep)
+# else
+#  define CT_ENUM_DEPRECATED(_macIntro, _macDep, _iosIntro, _iosDep)
+# endif
 #endif /* defined(CT_BUILDING_CoreText) */
 
 #endif

@@ -5,6 +5,15 @@
 
 */
 
+/*
+  QTKit has been deprecated in 10.9.
+
+  AVFoundation and AVKit are the frameworks recommended for all new development 
+  involving time-based audiovisual media on OS X.  In order to transition your 
+  project from QTKit to AVFoundation please refer to:
+  "Technical Note TN2300 Transitioning QTKit code to AV Foundation".
+*/
+
 #import <Foundation/Foundation.h>
 #import <QTKit/QTKitDefines.h>
 

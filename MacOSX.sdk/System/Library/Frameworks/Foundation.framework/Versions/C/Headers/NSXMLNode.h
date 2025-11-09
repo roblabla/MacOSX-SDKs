@@ -1,5 +1,5 @@
 /*	NSXMLNode.h
-	Copyright (c) 2004-2012, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2013, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>

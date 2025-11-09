@@ -3,7 +3,7 @@
 	
 	Framework:  CoreMedia
 	
-    Copyright 2006-2012 Apple Inc. All rights reserved.
+    Copyright 2006-2013 Apple Inc. All rights reserved.
 
 */
 
@@ -29,6 +29,26 @@
 #ifndef AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER
 	#define AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER WEAK_IMPORT_ATTRIBUTE
 #endif
+// Pre-6.0, weak import
+#ifndef __AVAILABILITY_INTERNAL__IPHONE_6_0
+	#define __AVAILABILITY_INTERNAL__IPHONE_6_0 __AVAILABILITY_INTERNAL_WEAK_IMPORT
+#endif
+// Pre-10.9, weak import
+#ifndef __AVAILABILITY_INTERNAL__MAC_10_9
+	#define __AVAILABILITY_INTERNAL__MAC_10_9 __AVAILABILITY_INTERNAL_WEAK_IMPORT
+#endif
+#ifndef AVAILABLE_MAC_OS_X_VERSION_10_9_AND_LATER
+	#define AVAILABLE_MAC_OS_X_VERSION_10_9_AND_LATER WEAK_IMPORT_ATTRIBUTE
+#endif
+// Pre-7.0, weak import
+#ifndef __AVAILABILITY_INTERNAL__IPHONE_7_0
+#define __AVAILABILITY_INTERNAL__IPHONE_7_0 __AVAILABILITY_INTERNAL_WEAK_IMPORT
+#endif
+
+// Deprecations
+#ifndef __AVAILABILITY_INTERNAL__IPHONE_3_0_DEP__IPHONE_7_0
+#define __AVAILABILITY_INTERNAL__IPHONE_3_0_DEP__IPHONE_7_0 WEAK_IMPORT_ATTRIBUTE
+#endif
 
 #include <stdint.h>						// int32_t, etc.
 #include <stddef.h>						// size_t
@@ -53,8 +73,13 @@ extern "C" {
 	#error "specify your platform"
 #endif
 
+#if TARGET_OS_WINDOWS && TARGET_CPU_X86_64
+typedef int64_t CMItemCount;
+typedef int64_t CMItemIndex;
+#else
 typedef signed long	CMItemCount;
 typedef signed long	CMItemIndex;
+#endif
 
 typedef int32_t CMPersistentTrackID;
 enum {

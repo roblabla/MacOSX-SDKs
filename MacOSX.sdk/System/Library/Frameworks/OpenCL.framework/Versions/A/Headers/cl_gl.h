@@ -1,5 +1,5 @@
 /**********************************************************************************
- * Copyright (c) 2011-2012 The Khronos Group Inc.
+ * Copyright (c) 2008-2012 The Khronos Group Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and/or associated documentation files (the
@@ -52,7 +52,7 @@ typedef struct __GLsync *cl_GLsync;
 /* cl_gl_texture_info           */
 #define CL_GL_TEXTURE_TARGET                    0x2004
 #define CL_GL_MIPMAP_LEVEL                      0x2005
-#define CL_GL_NUM_SAMPLES                       0x2006
+#define CL_GL_NUM_SAMPLES                       0x2012
 
 
 extern CL_API_ENTRY cl_mem CL_API_CALL

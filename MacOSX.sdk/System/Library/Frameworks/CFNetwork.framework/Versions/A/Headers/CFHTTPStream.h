@@ -3,7 +3,7 @@
  
 	 Contains:   CoreFoundation Network HTTP streams header
  
-	 Copyright:  Copyright (c) 2001-2008, Apple Inc. All rights reserved.
+	 Copyright:  Copyright (c) 2001-2008 Apple Inc. All rights reserved.
  
 	 Bugs?:	  For bug reports, consult the following page on
 				 the World Wide Web:

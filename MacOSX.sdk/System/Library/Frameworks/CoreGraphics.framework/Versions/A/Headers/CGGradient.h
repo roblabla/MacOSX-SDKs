@@ -19,6 +19,8 @@ typedef uint32_t CGGradientDrawingOptions;
 #include <CoreGraphics/CGColorSpace.h>
 #include <CoreGraphics/CGContext.h>
 
+CF_IMPLICIT_BRIDGING_ENABLED
+
 /* A CGGradient defines a transition between colors. The transition is
    defined over a range from 0 to 1 inclusive. A gradient specifies a color
    at location 0, one at location 1, and possibly additional colors assigned
@@ -82,5 +84,7 @@ CG_EXTERN CGGradientRef CGGradientRetain(CGGradientRef gradient)
 
 CG_EXTERN void CGGradientRelease(CGGradientRef gradient)
   CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif /* CGGRADIENT_H_ */

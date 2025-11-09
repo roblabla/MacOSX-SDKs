@@ -17,7 +17,7 @@
 #ifndef _AGL_H
 #define _AGL_H
 
-#include <AvailabilityMacros.h>
+#include <OpenGL/OpenGLAvailability.h>
 #include <Carbon/Carbon.h>
 #include <OpenGL/gl.h>
 
@@ -36,7 +36,7 @@ extern "C" {
 *  Note:
 *	AGLDevice is a QuickDraw type it has been deprecated, use CGDirectDisplayID
 */
-typedef GDHandle AGLDevice	DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+typedef GDHandle AGLDevice OPENGL_DEPRECATED(10_0, 10_5);
 
 /*
 ** Macintosh drawable type.
@@ -44,15 +44,15 @@ typedef GDHandle AGLDevice	DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 *  Note:
 *	AGLDrawable is a QuickDraw type it has been deprecated. use WindowRef or HIViewRef
 */
-typedef CGrafPtr AGLDrawable	DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+typedef CGrafPtr AGLDrawable OPENGL_DEPRECATED(10_0, 10_5);
 
 /*
 ** AGL opaque data.
 */
-typedef struct __AGLRendererInfoRec  *AGLRendererInfo;
-typedef struct __AGLPixelFormatRec   *AGLPixelFormat;
-typedef struct __AGLContextRec       *AGLContext;
-typedef struct __AGLPBufferRec       *AGLPbuffer;
+typedef struct __AGLRendererInfoRec  *AGLRendererInfo OPENGL_DEPRECATED(10_0, 10_9);
+typedef struct __AGLPixelFormatRec   *AGLPixelFormat OPENGL_DEPRECATED(10_0, 10_9);
+typedef struct __AGLContextRec       *AGLContext OPENGL_DEPRECATED(10_0, 10_9);
+typedef struct __AGLPBufferRec       *AGLPbuffer OPENGL_DEPRECATED(10_0, 10_9);
 
 /************************************************************************/
 
@@ -268,13 +268,13 @@ typedef struct __AGLPBufferRec       *AGLPbuffer;
 *  Note:
 *	aglDevicesOfPixelFormat has been deprecated use aglDisplaysOfPixelFormat
 */
-extern AGLPixelFormat aglChoosePixelFormat(const void *gdevs, GLint ndev, const GLint *attribs);
-extern AGLPixelFormat aglCreatePixelFormat(const GLint *attribs) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern void aglDestroyPixelFormat(AGLPixelFormat pix);
-extern AGLPixelFormat aglNextPixelFormat(AGLPixelFormat pix);
-extern GLboolean aglDescribePixelFormat(AGLPixelFormat pix, GLint attrib, GLint *value);
-extern CGDirectDisplayID *aglDisplaysOfPixelFormat(AGLPixelFormat pix, GLint *ndevs);
-extern GDHandle *aglDevicesOfPixelFormat(AGLPixelFormat pix, GLint *ndevs) DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern AGLPixelFormat aglChoosePixelFormat(const void *gdevs, GLint ndev, const GLint *attribs) OPENGL_DEPRECATED(10_0, 10_9);
+extern AGLPixelFormat aglCreatePixelFormat(const GLint *attribs) OPENGL_DEPRECATED(10_5, 10_9);
+extern void aglDestroyPixelFormat(AGLPixelFormat pix) OPENGL_DEPRECATED(10_0, 10_9);
+extern AGLPixelFormat aglNextPixelFormat(AGLPixelFormat pix) OPENGL_DEPRECATED(10_0, 10_9);
+extern GLboolean aglDescribePixelFormat(AGLPixelFormat pix, GLint attrib, GLint *value) OPENGL_DEPRECATED(10_0, 10_9);
+extern CGDirectDisplayID *aglDisplaysOfPixelFormat(AGLPixelFormat pix, GLint *ndevs) OPENGL_DEPRECATED(10_5, 10_9);
+extern GDHandle *aglDevicesOfPixelFormat(AGLPixelFormat pix, GLint *ndevs)  OPENGL_DEPRECATED(10_0, 10_5);
 
 /*
 ** Renderer information functions
@@ -282,30 +282,26 @@ extern GDHandle *aglDevicesOfPixelFormat(AGLPixelFormat pix, GLint *ndevs) DEPRE
 *  Note:
 *	aglQueryRendererInfo has been deprecated use aglQueryRendererInfoForCGDirectDisplayIDs
 */
-extern AGLRendererInfo aglQueryRendererInfoForCGDirectDisplayIDs(const CGDirectDisplayID *dspIDs, GLint ndev) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern void aglDestroyRendererInfo(AGLRendererInfo rend);
-extern AGLRendererInfo aglNextRendererInfo(AGLRendererInfo rend);
-extern GLboolean aglDescribeRenderer(AGLRendererInfo rend, GLint prop, GLint *value);
-extern AGLRendererInfo aglQueryRendererInfo(const AGLDevice *gdevs, GLint ndev) DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern AGLRendererInfo aglQueryRendererInfoForCGDirectDisplayIDs(const CGDirectDisplayID *dspIDs, GLint ndev)  OPENGL_DEPRECATED(10_5, 10_9);
+extern void aglDestroyRendererInfo(AGLRendererInfo rend) OPENGL_DEPRECATED(10_0, 10_9);
+extern AGLRendererInfo aglNextRendererInfo(AGLRendererInfo rend) OPENGL_DEPRECATED(10_0, 10_9);
+extern GLboolean aglDescribeRenderer(AGLRendererInfo rend, GLint prop, GLint *value) OPENGL_DEPRECATED(10_0, 10_9);
+extern AGLRendererInfo aglQueryRendererInfo(const AGLDevice *gdevs, GLint ndev)  OPENGL_DEPRECATED(10_0, 10_5);
 
 
 /*
 ** Context functions
 */
-extern AGLContext aglCreateContext(AGLPixelFormat pix, AGLContext share);
-extern GLboolean aglDestroyContext(AGLContext ctx);
-#ifdef AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER
-extern GLboolean aglCopyContext(AGLContext src, AGLContext dst, GLuint mask) DEPRECATED_IN_MAC_OS_X_VERSION_10_8_AND_LATER;
-#else
-extern GLboolean aglCopyContext(AGLContext src, AGLContext dst, GLuint mask);
-#endif
-extern GLboolean aglUpdateContext(AGLContext ctx);
+extern AGLContext aglCreateContext(AGLPixelFormat pix, AGLContext share) OPENGL_DEPRECATED(10_0, 10_9);
+extern GLboolean aglDestroyContext(AGLContext ctx) OPENGL_DEPRECATED(10_0, 10_9);
+extern GLboolean aglCopyContext(AGLContext src, AGLContext dst, GLuint mask)  OPENGL_DEPRECATED(10_0, 10_8);
+extern GLboolean aglUpdateContext(AGLContext ctx) OPENGL_DEPRECATED(10_0, 10_9);
 
 /*
 ** Current state functions
 */
-extern GLboolean aglSetCurrentContext(AGLContext ctx);
-extern AGLContext aglGetCurrentContext(void);
+extern GLboolean aglSetCurrentContext(AGLContext ctx) OPENGL_DEPRECATED(10_0, 10_9);
+extern AGLContext aglGetCurrentContext(void) OPENGL_DEPRECATED(10_0, 10_9);
 
 /*
 ** Drawable Functions
@@ -313,64 +309,60 @@ extern AGLContext aglGetCurrentContext(void);
 *  Note:
 *	aglSetDrawable / aglGetDrawable have been deprecated use aglGetWindowRef or aglSetHIViewRef
 */ 
-extern GLboolean aglSetDrawable(AGLContext ctx, AGLDrawable draw) DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern AGLDrawable aglGetDrawable(AGLContext ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern GLboolean aglSetDrawable(AGLContext ctx, AGLDrawable draw) OPENGL_DEPRECATED(10_0, 10_5);
+extern AGLDrawable aglGetDrawable(AGLContext ctx) OPENGL_DEPRECATED(10_0, 10_5);
 
 /*
 ** WindowRef Functions
 */
-extern GLboolean aglSetWindowRef(AGLContext ctx, WindowRef window) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern WindowRef aglGetWindowRef(AGLContext ctx) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern GLboolean aglSetWindowRef(AGLContext ctx, WindowRef window) OPENGL_DEPRECATED(10_5, 10_9);
+extern WindowRef aglGetWindowRef(AGLContext ctx) OPENGL_DEPRECATED(10_5, 10_9);
 
 /*
 ** HIViewRef Functions
 */
-extern GLboolean aglSetHIViewRef(AGLContext ctx, HIViewRef hiview) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern HIViewRef aglGetHIViewRef(AGLContext ctx) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern GLboolean aglSetHIViewRef(AGLContext ctx, HIViewRef hiview) OPENGL_DEPRECATED(10_5, 10_9);
+extern HIViewRef aglGetHIViewRef(AGLContext ctx) OPENGL_DEPRECATED(10_5, 10_9);
 
 /*
 ** OffScreen buffer Function
 */
-#ifdef AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER
-extern GLboolean aglSetOffScreen(AGLContext ctx, GLsizei width, GLsizei height, GLsizei rowbytes, GLvoid *baseaddr) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
-#else
-extern GLboolean aglSetOffScreen(AGLContext ctx, GLsizei width, GLsizei height, GLsizei rowbytes, GLvoid *baseaddr);
-#endif
+extern GLboolean aglSetOffScreen(AGLContext ctx, GLsizei width, GLsizei height, GLsizei rowbytes, GLvoid *baseaddr) OPENGL_DEPRECATED(10_0, 10_7);
 
 /*
 ** FullScreen Function
 */
-extern GLboolean aglSetFullScreen(AGLContext ctx, GLsizei width, GLsizei height, GLsizei freq, GLint device);
+extern GLboolean aglSetFullScreen(AGLContext ctx, GLsizei width, GLsizei height, GLsizei freq, GLint device) OPENGL_DEPRECATED(10_0, 10_6);
 
 /*
 ** Virtual screen functions
 */
-extern GLboolean aglSetVirtualScreen(AGLContext ctx, GLint screen);
-extern GLint aglGetVirtualScreen(AGLContext ctx);
+extern GLboolean aglSetVirtualScreen(AGLContext ctx, GLint screen) OPENGL_DEPRECATED(10_0, 10_9);
+extern GLint aglGetVirtualScreen(AGLContext ctx) OPENGL_DEPRECATED(10_0, 10_9);
 
 /*
 ** Obtain version numbers
 */
-extern void aglGetVersion(GLint *major, GLint *minor);
+extern void aglGetVersion(GLint *major, GLint *minor) OPENGL_DEPRECATED(10_0, 10_9);
 
 /*
 ** Global library options
 */
-extern GLboolean aglConfigure(GLenum pname, GLuint param);
+extern GLboolean aglConfigure(GLenum pname, GLuint param) OPENGL_DEPRECATED(10_0, 10_9);
 
 /*
 ** Swap functions
 */
-extern void aglSwapBuffers(AGLContext ctx);
+extern void aglSwapBuffers(AGLContext ctx) OPENGL_DEPRECATED(10_0, 10_9);
 
 /*
 ** Per context options
 */
-extern GLboolean aglEnable(AGLContext ctx, GLenum pname);
-extern GLboolean aglDisable(AGLContext ctx, GLenum pname);
-extern GLboolean aglIsEnabled(AGLContext ctx, GLenum pname);
-extern GLboolean aglSetInteger(AGLContext ctx, GLenum pname, const GLint *params);
-extern GLboolean aglGetInteger(AGLContext ctx, GLenum pname, GLint *params);
+extern GLboolean aglEnable(AGLContext ctx, GLenum pname) OPENGL_DEPRECATED(10_0, 10_9);
+extern GLboolean aglDisable(AGLContext ctx, GLenum pname) OPENGL_DEPRECATED(10_0, 10_9);
+extern GLboolean aglIsEnabled(AGLContext ctx, GLenum pname) OPENGL_DEPRECATED(10_0, 10_9);
+extern GLboolean aglSetInteger(AGLContext ctx, GLenum pname, const GLint *params) OPENGL_DEPRECATED(10_0, 10_9);
+extern GLboolean aglGetInteger(AGLContext ctx, GLenum pname, GLint *params) OPENGL_DEPRECATED(10_0, 10_9);
 
 /*
 ** Font function
@@ -378,18 +370,18 @@ extern GLboolean aglGetInteger(AGLContext ctx, GLenum pname, GLint *params);
 *  Note:
 *	aglUseFont has been deprecated, no replacement available
 */
-extern GLboolean aglUseFont(AGLContext ctx, GLint fontID, Style face, GLint size, GLint first, GLint count, GLint base) DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern GLboolean aglUseFont(AGLContext ctx, GLint fontID, Style face, GLint size, GLint first, GLint count, GLint base) OPENGL_DEPRECATED(10_0, 10_5);
 
 /*
 ** Error functions
 */
-extern GLenum aglGetError(void);
-extern const GLubyte *aglErrorString(GLenum code);
+extern GLenum aglGetError(void) OPENGL_DEPRECATED(10_0, 10_9);
+extern const GLubyte *aglErrorString(GLenum code) OPENGL_DEPRECATED(10_0, 10_9);
 
 /*
 ** Soft reset function
 */
-extern void aglResetLibrary(void);
+extern void aglResetLibrary(void) OPENGL_DEPRECATED(10_0, 10_9);
 
 /*
 ** Surface texture function
@@ -397,7 +389,7 @@ extern void aglResetLibrary(void);
 *  Note:
 *	aglSurfaceTexture has been deprecated, use GL_EXT_framebuffer_object instead
 */
-extern void aglSurfaceTexture (AGLContext context, GLenum target, GLenum internalformat, AGLContext surfacecontext) DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern void aglSurfaceTexture (AGLContext context, GLenum target, GLenum internalformat, AGLContext surfacecontext)  OPENGL_DEPRECATED(10_2, 10_5);
 
 /*
 ** PBuffer functions
@@ -405,34 +397,22 @@ extern void aglSurfaceTexture (AGLContext context, GLenum target, GLenum interna
 *  Note:
 *	PBuffers have been deprecated, use GL_EXT_framebuffer_object instead
 */
-#ifdef AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER
-extern GLboolean aglCreatePBuffer (GLint width, GLint height, GLenum target, GLenum internalFormat, GLint max_level, AGLPbuffer *pbuffer)    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
-extern GLboolean aglDestroyPBuffer (AGLPbuffer pbuffer)    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
-extern GLboolean aglDescribePBuffer (AGLPbuffer pbuffer, GLint *width, GLint *height, GLenum *target, GLenum *internalFormat, GLint *max_level)    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
-extern GLboolean aglTexImagePBuffer (AGLContext ctx, AGLPbuffer pbuffer, GLint source)    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
-#else
-extern GLboolean aglCreatePBuffer (GLint width, GLint height, GLenum target, GLenum internalFormat, GLint max_level, AGLPbuffer *pbuffer)    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern GLboolean aglDestroyPBuffer (AGLPbuffer pbuffer)    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern GLboolean aglDescribePBuffer (AGLPbuffer pbuffer, GLint *width, GLint *height, GLenum *target, GLenum *internalFormat, GLint *max_level)    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern GLboolean aglTexImagePBuffer (AGLContext ctx, AGLPbuffer pbuffer, GLint source)    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-#endif
+extern GLboolean aglCreatePBuffer (GLint width, GLint height, GLenum target, GLenum internalFormat, GLint max_level, AGLPbuffer *pbuffer) OPENGL_DEPRECATED(10_3, 10_7);
+extern GLboolean aglDestroyPBuffer (AGLPbuffer pbuffer) OPENGL_DEPRECATED(10_3, 10_7);
+extern GLboolean aglDescribePBuffer (AGLPbuffer pbuffer, GLint *width, GLint *height, GLenum *target, GLenum *internalFormat, GLint *max_level) OPENGL_DEPRECATED(10_3, 10_7);
+extern GLboolean aglTexImagePBuffer (AGLContext ctx, AGLPbuffer pbuffer, GLint source) OPENGL_DEPRECATED(10_3, 10_7);
 
 /*
 ** Pbuffer Drawable Functions
 */
-#ifdef AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER
-extern GLboolean aglSetPBuffer (AGLContext ctx, AGLPbuffer pbuffer, GLint face, GLint level, GLint screen)    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
-extern GLboolean aglGetPBuffer (AGLContext ctx, AGLPbuffer *pbuffer, GLint *face, GLint *level, GLint *screen)    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
-#else
-extern GLboolean aglSetPBuffer (AGLContext ctx, AGLPbuffer pbuffer, GLint face, GLint level, GLint screen)    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern GLboolean aglGetPBuffer (AGLContext ctx, AGLPbuffer *pbuffer, GLint *face, GLint *level, GLint *screen)    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-#endif
+extern GLboolean aglSetPBuffer (AGLContext ctx, AGLPbuffer pbuffer, GLint face, GLint level, GLint screen) OPENGL_DEPRECATED(10_3, 10_7);
+extern GLboolean aglGetPBuffer (AGLContext ctx, AGLPbuffer *pbuffer, GLint *face, GLint *level, GLint *screen) OPENGL_DEPRECATED(10_3, 10_7);
 
 /*
 ** CGL functions
 */
-extern GLboolean aglGetCGLContext(AGLContext ctx, void **cgl_ctx) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-extern GLboolean aglGetCGLPixelFormat(AGLPixelFormat pix, void **cgl_pix) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern GLboolean aglGetCGLContext(AGLContext ctx, void **cgl_ctx) OPENGL_DEPRECATED(10_4, 10_9);
+extern GLboolean aglGetCGLPixelFormat(AGLPixelFormat pix, void **cgl_pix) OPENGL_DEPRECATED(10_4, 10_9);
 
 #ifdef __cplusplus
 }

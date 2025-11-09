@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2012 Apple Inc. All rights reserved.
+	Copyright 2010-2013 Apple Inc. All rights reserved.
 
 */
 
@@ -50,6 +50,7 @@
 NS_CLASS_AVAILABLE(10_7, 4_0)
 @interface AVSynchronizedLayer : CALayer
 {
+@private
 	AVSynchronizedLayerInternal		*_syncLayer;
 }
 

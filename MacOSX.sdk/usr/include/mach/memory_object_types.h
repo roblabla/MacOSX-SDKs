@@ -267,6 +267,9 @@ typedef struct memory_object_attr_info	memory_object_attr_info_data_t;
 #define MAP_MEM_NAMED_CREATE	0x020000 /* create extant object      */
 #define MAP_MEM_PURGABLE	0x040000 /* create a purgable VM object */
 #define MAP_MEM_NAMED_REUSE	0x080000 /* reuse provided entry if identical */
+#define MAP_MEM_USE_DATA_ADDR	0x100000 /* preserve address of data, rather than base of page */
+#define MAP_MEM_VM_COPY		0x200000 /* make a copy of a VM range */
+#define MAP_MEM_VM_SHARE	0x400000 /* extract a VM range for remap */
 
 
 #endif	/* _MACH_MEMORY_OBJECT_TYPES_H_ */

@@ -52,7 +52,8 @@ NS_CLASS_AVAILABLE(10_4, 3_0)
         unsigned int entityIsName:1;
         unsigned int refreshesRefetched:1;
         unsigned int propertiesValidated:1;
-        unsigned int _RESERVED:20;
+        unsigned int disableCaching:1;
+        unsigned int _RESERVED:19;
     } _flags;
 }
 

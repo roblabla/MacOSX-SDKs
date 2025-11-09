@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2012 Apple Inc. All rights reserved.
+	Copyright 2010-2013 Apple Inc. All rights reserved.
 
 */
 
@@ -49,5 +49,12 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  @abstract		Indicates whether the track is enabled for presentation during playback.
  */
 @property (nonatomic, assign, getter=isEnabled) BOOL enabled;
+
+/*!
+ @property		currentVideoFrameRate
+ @abstract		If the media type of the assetTrack is AVMediaTypeVideo, indicates the current frame rate of the track as it plays, in units of frames per second. If the item is not playing, or if the media type of the track is not video, the value of this property is 0.
+ @discussion	This property is not observable.
+ */
+@property (nonatomic, readonly) float currentVideoFrameRate NS_AVAILABLE(10_9, TBD);
 
 @end

@@ -1,7 +1,7 @@
 /*
 	NSScreen.h
 	Application Kit
-	Copyright (c) 1994-2012, Apple Inc.
+	Copyright (c) 1994-2013, Apple Inc.
 	All rights reserved.
 */
 
@@ -25,6 +25,10 @@ typedef struct NSScreenAuxiliary NSScreenAuxiliaryOpaque;
 + (NSArray *)screens;		/* All screens; first one is "zero" screen */
 + (NSScreen *)mainScreen;	/* Screen with key window */
 + (NSScreen *)deepestScreen;
+
+/* screensHaveSeparateSpaces returns YES if each screen has its own set of spaces.  This is a system  setting and does not necessarily imply that there are multiple screens, nor that there are multiple spaces on any one screen 
+*/
++ (BOOL)screensHaveSeparateSpaces NS_AVAILABLE_MAC(10_9);
 
 - (NSWindowDepth)depth;
 - (NSRect)frame;

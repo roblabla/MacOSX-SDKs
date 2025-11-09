@@ -1,5 +1,5 @@
 /*	NSIndexSet.h
-	Copyright (c) 2002-2012, Apple Inc. All rights reserved.
+	Copyright (c) 2002-2013, Apple Inc. All rights reserved.
 */
 
 /* Class for managing set of indexes. The set of valid indexes are 0 .. NSNotFound - 1; trying to use indexes outside this range is an error.  NSIndexSet uses NSNotFound as a return value in cases where the queried index doesn't exist in the set; for instance, when you ask firstIndex and there are no indexes; or when you ask for indexGreaterThanIndex: on the last index, and so on.
@@ -45,14 +45,15 @@ To enumerate without doing a call per index, you can use the method getIndexes:m
     } _internal;
 }
 
-+ (id)indexSet;
-+ (id)indexSetWithIndex:(NSUInteger)value;
-+ (id)indexSetWithIndexesInRange:(NSRange)range;
++ (instancetype)indexSet;
++ (instancetype)indexSetWithIndex:(NSUInteger)value;
++ (instancetype)indexSetWithIndexesInRange:(NSRange)range;
 
-- (id)init;
-- (id)initWithIndex:(NSUInteger)value;
-- (id)initWithIndexesInRange:(NSRange)range;   // designated initializer
-- (id)initWithIndexSet:(NSIndexSet *)indexSet;   // designated initializer
+- (instancetype)init;	/* designated initializer */
+- (instancetype)initWithIndexesInRange:(NSRange)range;	/* designated initializer */
+- (instancetype)initWithIndexSet:(NSIndexSet *)indexSet;	/* designated initializer */
+
+- (instancetype)initWithIndex:(NSUInteger)value;
 
 - (BOOL)isEqualToIndexSet:(NSIndexSet *)indexSet;
 

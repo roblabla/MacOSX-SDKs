@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2012 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -86,53 +86,23 @@
 /*
  * Data types.
  */
-#ifndef _GID_T
-typedef __darwin_gid_t		gid_t;
-#define _GID_T
-#endif
 
-#ifndef _OFF_T
-typedef __darwin_off_t		off_t;
-#define _OFF_T
-#endif
-
-#ifndef _PID_T
-typedef __darwin_pid_t		pid_t;
-#define _PID_T
-#endif
-
-#ifndef _SA_FAMILY_T
-#define _SA_FAMILY_T
-typedef __uint8_t		sa_family_t;
-#endif
-
-#ifndef _SOCKLEN_T
-#define _SOCKLEN_T
-typedef	__darwin_socklen_t	socklen_t;
-#endif
+#include <sys/_types/_gid_t.h>
+#include <sys/_types/_off_t.h>
+#include <sys/_types/_pid_t.h>
+#include <sys/_types/_sa_family_t.h>
+#include <sys/_types/_socklen_t.h>
 
 /* XXX Not explicitly defined by POSIX, but function return types are */
-#ifndef _SIZE_T
-#define _SIZE_T
-typedef __darwin_size_t		size_t;
-#endif
+#include <sys/_types/_size_t.h>
  
 /* XXX Not explicitly defined by POSIX, but function return types are */
-#ifndef	_SSIZE_T
-#define	_SSIZE_T
-typedef	__darwin_ssize_t	ssize_t;
-#endif
+#include <sys/_types/_ssize_t.h>
 
 /*
  * [XSI] The iovec structure shall be defined as described in <sys/uio.h>.
  */
-#ifndef _STRUCT_IOVEC
-#define	_STRUCT_IOVEC
-struct iovec {
-	void *   iov_base;	/* [XSI] Base address of I/O memory region */
-	size_t	 iov_len;	/* [XSI] Size of region iov_base points to */
-};
-#endif
+#include <sys/_types/_iovec_t.h>
 
  
 /*
@@ -204,10 +174,6 @@ struct iovec {
 #define	SO_UPCALLCLOSEWAIT	0x1027	/* APPLE: block on close until an upcall returns */
 #endif
 #define SO_LINGER_SEC	0x1080          /* linger on close if data present (in seconds) */
-#define SO_RESTRICTIONS	0x1081	/* APPLE: deny inbound/outbound/both/flag set */
-#define SO_RESTRICT_DENYIN		0x00000001	/* flag for SO_RESTRICTIONS - deny inbound */
-#define SO_RESTRICT_DENYOUT		0x00000002	/* flag for SO_RESTRICTIONS - deny outbound */
-#define SO_RESTRICT_DENYSET		0x80000000	/* flag for SO_RESTRICTIONS - deny has been set */
 #define SO_RANDOMPORT   0x1082  /* APPLE: request local port randomization */
 #define SO_NP_EXTENSIONS	0x1083	/* To turn off some POSIX behavior */
 #endif
@@ -287,10 +253,8 @@ struct so_np_extensions {
 #define	AF_IPX		23		/* Novell Internet Protocol */
 #define	AF_SIP		24		/* Simple Internet Protocol */
 #define pseudo_AF_PIP	25		/* Help Identify PIP packets */
-#ifdef __APPLE__
 /*define pseudo_AF_BLUE	26	   Identify packets for Blue Box - Not used */
 #define AF_NDRV		27		/* Network Driver 'raw' access */
-#endif
 #define	AF_ISDN		28		/* Integrated Services Digital Network*/
 #define	AF_E164		AF_ISDN		/* CCITT E.164 recommendation */
 #define	pseudo_AF_KEY	29		/* Internal key-management function */
@@ -298,26 +262,15 @@ struct so_np_extensions {
 #define	AF_INET6	30		/* IPv6 */
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
 #define	AF_NATM		31		/* native ATM access */
-#ifdef __APPLE__
 #define AF_SYSTEM	32		/* Kernel event messages */
 #define AF_NETBIOS	33		/* NetBIOS */
 #define AF_PPP		34		/* PPP communication protocol */
-#else
-#define	AF_ATM		30		/* ATM */
-#endif
 #define pseudo_AF_HDRCMPLT 35		/* Used by BPF to not rewrite headers
-					 * in interface output routine
-					 */
+					 * in interface output routine */
 #define AF_RESERVED_36	36		/* Reserved for internal usage */
-
-#ifndef __APPLE__
-#define	AF_NETGRAPH	32		/* Netgraph sockets */
-#endif
 #define AF_IEEE80211    37              /* IEEE 802.11 protocol */
-#ifdef __APPLE__
 #define AF_UTUN		38
-#endif
-#define	AF_MAX		39
+#define	AF_MAX		40
 #endif	/* (!_POSIX_C_SOURCE || _DARWIN_C_SOURCE) */
 
 /*
@@ -364,6 +317,7 @@ struct sockaddr_storage {
 	char			__ss_pad2[_SS_PAD2SIZE];
 };
 
+
 /*
  * Protocol families, same as address families for now.
  */
@@ -395,27 +349,16 @@ struct sockaddr_storage {
 #define	PF_IPX		AF_IPX		/* same format as AF_NS */
 #define PF_RTIP		pseudo_AF_RTIP	/* same format as AF_INET */
 #define PF_PIP		pseudo_AF_PIP
-#ifdef __APPLE__
 #define PF_NDRV		AF_NDRV
-#endif
 #define	PF_ISDN		AF_ISDN
 #define	PF_KEY		pseudo_AF_KEY
 #define	PF_INET6	AF_INET6
 #define	PF_NATM		AF_NATM
-#ifdef __APPLE__
 #define PF_SYSTEM	AF_SYSTEM
 #define PF_NETBIOS	AF_NETBIOS
 #define PF_PPP		AF_PPP
 #define PF_RESERVED_36  AF_RESERVED_36
-
-#else
-#define	PF_ATM		AF_ATM
-#define	PF_NETGRAPH	AF_NETGRAPH
-#endif
-
-#ifdef __APPLE__
 #define PF_UTUN		AF_UTUN
-#endif
 #define	PF_MAX		AF_MAX
 
 /*
@@ -583,6 +526,7 @@ struct cmsgcred {
 #define	SCM_CREDS			0x03	/* process creds (struct cmsgcred) */
 #define	SCM_TIMESTAMP_MONOTONIC		0x04	/* timestamp (uint64_t) */ 
 
+
 #endif	/* (!_POSIX_C_SOURCE || _DARWIN_C_SOURCE) */
 
 /*
@@ -605,6 +549,7 @@ struct sf_hdtr {
 
 
 #endif	/* !_POSIX_C_SOURCE */
+
 
 __BEGIN_DECLS
 int	accept(int, struct sockaddr * __restrict, socklen_t * __restrict)

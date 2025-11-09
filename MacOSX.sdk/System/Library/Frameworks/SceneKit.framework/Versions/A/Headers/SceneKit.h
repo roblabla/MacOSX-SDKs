@@ -1,7 +1,7 @@
 //
 //  SceneKit.h
 //
-//  Copyright 2012 Apple Inc. All rights reserved.
+//  Copyright (c) 2012-2013 Apple Inc. All rights reserved.
 //
 
 /*! @framework SceneKit
@@ -19,6 +19,7 @@
 #import <SceneKit/SCNAnimation.h>
 #import <SceneKit/SCNBoundingVolume.h>
 #import <SceneKit/SCNSceneRenderer.h>
+#import <SceneKit/SCNShadable.h>
 
 //renderers
 #import <SceneKit/SCNView.h>
@@ -36,4 +37,8 @@
 #import <SceneKit/SCNGeometry.h>
 #import <SceneKit/SCNParametricGeometry.h>
 #import <SceneKit/SCNTransaction.h>
+#import <SceneKit/SCNMorpher.h>
+#import <SceneKit/SCNSkinner.h>
+#import <SceneKit/SCNConstraint.h>
+#import <SceneKit/SCNLevelOfDetail.h>
 

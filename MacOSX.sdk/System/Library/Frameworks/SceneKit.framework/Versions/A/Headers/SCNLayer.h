@@ -1,19 +1,18 @@
 //
 //  SCNLayer.h
 //
-//  Copyright 2012 Apple Inc. All rights reserved.
+//  Copyright (c) 2012-2013 Apple Inc. All rights reserved.
 //
 
 #import <QuartzCore/QuartzCore.h>
 #import <SceneKit/SCNSceneRenderer.h>
-
 
 /*!
  @class SCNLayer
  @abstract A SCNLayer is a layer that can display a SCNScene. 
  */
 
-SCENEKIT_AVAILABLE(10_7, NA)
+SCENEKIT_CLASS_AVAILABLE(10_8, NA)
 @interface SCNLayer : CAOpenGLLayer  <SCNSceneRenderer>
 {	
 @private

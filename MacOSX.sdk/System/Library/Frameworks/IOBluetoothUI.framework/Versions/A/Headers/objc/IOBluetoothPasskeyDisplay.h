@@ -11,7 +11,8 @@
 typedef enum {
     kBluetoothKeyboardANSIReturn,
 	kBluetoothKeyboardISOReturn,
-    kBluetoothKeyboardJISReturn
+    kBluetoothKeyboardJISReturn,
+    kBluetoothKeyboardNoReturn
 } BluetoothKeyboardReturnType;
 
 @interface IOBluetoothPasskeyDisplay : NSView
@@ -21,36 +22,47 @@ typedef enum {
 	NSImage *					mReturnHighlightImage;
 	IBOutlet NSImageView *		mBackgroundImage;
 	
-	IBOutlet NSTextField *		mPasskeyString;
-	
+	BOOL						usePasskeyNotifications;
+    BOOL						showFeedback;
+    NSString *					passkey;
+    IBOutlet NSTextField *		mPasskeyString;
+    
 	NSMutableArray *			mPasskeyCharacters;
 	NSUInteger					mPasskeyIndex;
     
-    BluetoothKeyboardReturnType returnType;
-    
-	BOOL						mPasskeyIndicatorEnabled;
-    BOOL                        mSSPDevice;
+    NSLayoutConstraint *		backgroundImageConstraint;
+    NSView *centeredView;
 }
 
-@property (retain) NSImage * returnImage;
-@property (retain) NSImage * returnHighlightImage;
+// Private
+@property (assign)	BOOL			usePasskeyNotificaitons;
+@property (copy)	NSString *		passkey;
+@property (retain)	NSImage *		returnImage;
+@property (retain)	NSImage *		returnHighlightImage;
 
-@property (assign) BluetoothKeyboardReturnType returnType;
+@property (assign) IBOutlet NSView *centeredView;
+@property (assign) IBOutlet NSLayoutConstraint *backgroundImageConstraint;
 
+
+// Public
 + (IOBluetoothPasskeyDisplay *) sharedDisplayView;
 
-- (void) setPasskeyString:(NSString *)inString;
+- (void) setPasskey:(NSString *)inString forDevice:(IOBluetoothDevice *)device usingSSP:(BOOL)isSSP;
 
 - (void) advancePasskeyIndicator;
 - (void) retreatPasskeyIndicator;
-
-- (void) resetAll;
 - (void) resetPasskeyIndicator;
-- (void) setPasskeyIndicatorEnabled:(BOOL)inEnabled;
 
-- (void) setupUIForDevice:(IOBluetoothDevice *)device;
 
-- (void) setupUIForSSPDevice:(IOBluetoothDevice *)device;
+
+// Deprecated methods
+- (void) setupUIForDevice:(IOBluetoothDevice *)device DEPRECATED_IN_MAC_OS_X_VERSION_10_8_AND_LATER;
+- (void) setupUIForSSPDevice:(IOBluetoothDevice *)device DEPRECATED_IN_MAC_OS_X_VERSION_10_8_AND_LATER;
+
+// Must be called after setupUIFor(SSP)Device is called
+- (void) setPasskeyString:(NSString *)inString DEPRECATED_IN_MAC_OS_X_VERSION_10_8_AND_LATER;
+- (void) setPasskeyIndicatorEnabled:(BOOL)inEnabled DEPRECATED_IN_MAC_OS_X_VERSION_10_8_AND_LATER;
+- (void) resetAll DEPRECATED_IN_MAC_OS_X_VERSION_10_8_AND_LATER;
 
 @end
 

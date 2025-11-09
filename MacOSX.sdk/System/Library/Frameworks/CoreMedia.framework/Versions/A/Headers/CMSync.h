@@ -3,7 +3,7 @@
  
 	Framework:  CoreMedia
  
-	Copyright 2006-2012 Apple Inc. All rights reserved.
+	Copyright 2006-2013 Apple Inc. All rights reserved.
  
 */
 
@@ -628,6 +628,10 @@ CM_EXPORT const CFStringRef kCMTimebaseNotification_EffectiveRateChanged
 // Posted by a timebase after a discontinuous time jump.
 CM_EXPORT const CFStringRef kCMTimebaseNotification_TimeJumped
 								__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+
+// Payload key for the time at which a change in effective rate or a discontinuous time jump occurred.
+CM_EXPORT const CFStringRef kCMTimebaseNotificationKey_EventTime
+								__OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
 
 #pragma pack(pop)
     

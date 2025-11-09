@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2012 Apple Inc. All rights reserved.
+	Copyright 2010-2013 Apple Inc. All rights reserved.
 
 */
 
@@ -18,6 +18,8 @@
 #else // ! TARGET_OS_IPHONE
 #import <ApplicationServices/../Frameworks/CoreGraphics.framework/Headers/CoreGraphics.h>
 #endif // ! TARGET_OS_IPHONE
+
+@class AVMetadataItemFilter;
 
 /*!
     @class			AVMetadataItem
@@ -112,7 +114,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 				An array of language identifiers in order of preference, each of which is an IETF BCP 47 (RFC 4646) language identifier. Use +[NSLocale preferredLanguages] to obtain the user's list of preferred languages.
  @result		An instance of NSArray containing metadata items of the specified NSArray that match a preferred language, sorted according to the order of preference of the language each matches.
 */
-+ (NSArray *)metadataItemsFromArray:(NSArray *)metadataItems filteredAndSortedAccordingToPreferredLanguages:(NSArray *)preferredLanguages NS_AVAILABLE(10_8, TBD);
++ (NSArray *)metadataItemsFromArray:(NSArray *)metadataItems filteredAndSortedAccordingToPreferredLanguages:(NSArray *)preferredLanguages NS_AVAILABLE(10_8, 6_0);
 
 /*!
 	@method			metadataItemsFromArray:withLocale:
@@ -142,6 +144,17 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 					key and/or keySpace.
 */
 + (NSArray *)metadataItemsFromArray:(NSArray *)metadataItems withKey:(id)key keySpace:(NSString *)keySpace;
+
+/*!
+	@method			metadataItemsFromArray:filteredByMetadataItemFilter:
+	@abstract		Filters an array of AVMetadataItems using the supplied AVMetadataItemFilter.
+	@param			metadataItems
+					An array of AVMetadataItems to be filtered.
+	@param			metadataItemFilter
+					The AVMetadataItemFilter object for filtering the metadataItems.
+	@result			An instance of NSArray containing the metadata items of the target NSArray that have not been removed by metadataItemFilter.
+*/
++ (NSArray *)metadataItemsFromArray:(NSArray *)metadataItems filteredByMetadataItemFilter:(AVMetadataItemFilter *)metadataItemFilter NS_AVAILABLE(10_9, 7_0);
 
 @end
 
@@ -190,6 +203,27 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 	@abstract		Returns an instance of AVMutableMetadataItem.
 */
 + (AVMutableMetadataItem *)metadataItem;
+
+@end
+
+/*!
+    @class			AVMetadataItemFilter
+
+    @abstract		AVMetadataItemFilter is a tool used to filter AVMetadataItems.
+    
+	@discussion		Instances of AVMetadataItemFilter are used to filter AVMetadataItems.  They are opaque, unmodifiable objects, created via AVMetadataItemFilter class methods.
+*/
+
+@class AVMetadataItemFilterInternal;
+
+NS_CLASS_AVAILABLE(10_9, 7_0)
+@interface AVMetadataItemFilter : NSObject {
+@private
+	AVMetadataItemFilterInternal	*_itemFilterInternal;
+}
+
+/* Provides an instance of an AVMetadataItemFilter useful for sharing assets.  Removes many user-identifying metadata items, such as location information, leaving only playback-, copyright- and commercial-related metadata (such as the purchaser's Apple ID), along with metadata either derivable from the media itself or necessary for its proper behavior.  */
++ (AVMetadataItemFilter *)metadataItemFilterForSharing;
 
 @end
 

@@ -22,7 +22,7 @@
 #include <CoreFoundation/CFArray.h>
 #include <CoreFoundation/CFUUID.h>
 
-
+CF_IMPLICIT_BRIDGING_ENABLED
 MD_BEGIN_C_DECLS
 
 /*!
@@ -280,5 +280,5 @@ MD_EXPORT const CFStringRef kMDLabelRemovedNotification
 AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 MD_END_C_DECLS
-
+CF_IMPLICIT_BRIDGING_DISABLED
 #endif

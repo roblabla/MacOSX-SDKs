@@ -22,9 +22,9 @@ NS_CLASS_AVAILABLE(10_8, NA)
 	AVB17221ACMPMessageType messageType;
 	AVB17221ACMPStatusCode status;
 	uint64_t streamID;
-	uint64_t controllerGUID;
-	uint64_t talkerGUID;
-	uint64_t listenerGUID;
+	uint64_t controllerEntityID;
+	uint64_t talkerEntityID;
+	uint64_t listenerEntityID;
 	uint16_t talkerUniqueID;
 	uint16_t listenerUniqueID;
 	uint16_t connectionCount;
@@ -55,17 +55,32 @@ NS_CLASS_AVAILABLE(10_8, NA)
 	@property	controllerGUID
 	@abstract	The controller_guid field of the ACMP message.
  */
-@property (assign) uint64_t controllerGUID;
+@property (assign) uint64_t controllerGUID NS_DEPRECATED(10_8, 10_9, NA, NA);
+/*!
+	@property	controllerGUID
+	@abstract	The controller_entity_id field of the ACMP message.
+ */
+@property (assign) uint64_t controllerEntityID NS_AVAILABLE(10_9, NA);
 /*!
 	@property	talkerGUID
 	@abstract	The talker_guid field of the ACMP message.
  */
-@property (assign) uint64_t talkerGUID;
+@property (assign) uint64_t talkerGUID NS_DEPRECATED(10_8, 10_9, NA, NA);
+/*!
+	@property	talkerEntityID
+	@abstract	The talker_entity_id field of the ACMP message.
+ */
+@property (assign) uint64_t talkerEntityID NS_AVAILABLE(10_9, NA);
 /*!
 	@property	listenerGUID
 	@abstract	The listener_guid field of the ACMP message.
  */
-@property (assign) uint64_t listenerGUID;
+@property (assign) uint64_t listenerGUID NS_DEPRECATED(10_8, 10_9, NA, NA);
+/*!
+	@property	listenerEntityID
+	@abstract	The listener_entity_id field of the ACMP message.
+ */
+@property (assign) uint64_t listenerEntityID NS_AVAILABLE(10_9, NA);
 /*!
 	@property	talkerUniqueID
 	@abstract	The talker_unique_id field of the ACMP message.

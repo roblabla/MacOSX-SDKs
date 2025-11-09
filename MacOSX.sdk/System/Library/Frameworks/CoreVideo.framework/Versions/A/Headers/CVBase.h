@@ -22,7 +22,6 @@
 
 #if TARGET_OS_WIN32
 #pragma warning (disable: 4068)		// ignore unknown pragmas
-#define snprintf sprintf_s
 #endif
 
 #ifndef AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER
@@ -35,6 +34,10 @@
 
 #ifndef __AVAILABILITY_INTERNAL__MAC_10_8
 #define __AVAILABILITY_INTERNAL__MAC_10_8        __AVAILABILITY_INTERNAL_WEAK_IMPORT
+#endif
+
+#ifndef __AVAILABILITY_INTERNAL__MAC_10_9
+#define __AVAILABILITY_INTERNAL__MAC_10_9        __AVAILABILITY_INTERNAL_WEAK_IMPORT
 #endif
 
 #include <CoreFoundation/CFBase.h>

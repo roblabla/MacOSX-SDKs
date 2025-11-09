@@ -30,7 +30,6 @@
 */
 @interface DRBurn (ImageContentCreation)
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 /*!
 	@method			layoutForImageFile:
 	@abstract		Creates a layout capable of burning an image to disc.
@@ -45,6 +44,5 @@
 	@result			An autoreleased layout object
 */
 + (id) layoutForImageFile:(NSString*)path;
-#endif
 
 @end

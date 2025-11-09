@@ -5,10 +5,6 @@
 #warning gl.h and gl3.h are both included.  Compiler will not invoke errors if using removed OpenGL functionality.
 #endif
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /*
 ** License Applicability. Except to the extent portions of this file are
 ** made subject to an alternative license as permitted in the SGI Free
@@ -41,37 +37,14 @@ extern "C" {
 // switches to providing function pointers
 //#define GL_GLEXT_FUNCTION_POINTERS 1
 
-#ifndef __gltypes_h_	
-	
-typedef unsigned int GLenum;
-typedef unsigned char GLboolean;
-typedef unsigned int GLbitfield;
-typedef signed char GLbyte;
-typedef short GLshort;
-typedef int GLint;
-typedef int GLsizei;
-typedef unsigned char GLubyte;
-typedef unsigned short GLushort;
-typedef unsigned int GLuint;
-typedef float GLfloat;
-typedef float GLclampf;
-typedef double GLdouble;
-typedef double GLclampd;
-typedef void GLvoid;
-
-typedef long GLintptr;
-typedef long GLsizeiptr;
-
-	
-#ifndef GL_TYPEDEFS_2_0
-#define GL_TYPEDEFS_2_0
-typedef char GLchar;
-#endif
-
-#endif
+#include <OpenGL/gltypes.h>
 	
 #ifndef GL_GLEXT_LEGACY
 #include <OpenGL/glext.h>
+#endif
+
+#ifdef __cplusplus
+extern "C" {
 #endif
 
 /* For compatibility with OpenGL v1.0 */

@@ -1,5 +1,6 @@
 /*
-Copyright (c) 1999-2004 Apple Computer, Inc.  All rights reserved.
+vForce.h (from vecLib-423.32)
+Copyright 1999-2013 Apple Inc.  All rights reserved.
 
 @APPLE_LICENSE_HEADER_START@
 
@@ -25,17 +26,24 @@ limitations under the License.
 #define __VFORCE_H
 
 #ifdef __cplusplus
-namespace std
-{
-	template<class T> class complex;
-	template<> class complex<float>;
-	template<> class complex<double>;
-}
-typedef std::complex<float> __float_complex_t;
-typedef std::complex<double> __double_complex_t;
+	#include <ciso646>	// Get library version.
+	#if	defined _LIBCPP_VERSION
+		// When using libc++, include <complex>.
+		#include <complex>
+	#else
+		// When not using libc++, try using definition as given in C++ 98.
+		namespace std
+		{
+			template<class T> class complex;
+			template<> class complex<float>;
+			template<> class complex<double>;
+		}
+	#endif
+	typedef std::complex<float> __float_complex_t;
+	typedef std::complex<double> __double_complex_t;
 #else
-typedef _Complex float __float_complex_t;
-typedef _Complex double __double_complex_t;
+	typedef _Complex float __float_complex_t;
+	typedef _Complex double __double_complex_t;
 #endif
 
 #include <math.h>
@@ -45,20 +53,6 @@ extern "C" {
 #endif
 
 #include <Availability.h>
-
-/* 
-When the float versions of the vector functions (vvrecf(), vvdivf(), etc.) are invoked on platforms equipped
-with the AltiVec SIMD unit, they expect that "Java Mode" has been disabled in the AltiVec VSCR register.  By 
-default, Mac OS X starts a process in non-Java mode, which means that the VSCR bit is set to 1.
-"non-Java Mode" entails flushing de-normal vector floating point values to zero.  A process running in "non-Java 
-Mode" enjoys performance advantages when executing AltiVec floating point instructions.
-
-The double versions of the vector functions must be called with the IEEE rounding mode set to round-to-nearest 
-and with exceptions masked off. 
-
-The accuracy of the vector functions is comparable to that of the corresponding scalar functions in libm, though 
-results may not be bit-wise identical. 
-*/
 
 /* Set y[i] to the reciprocal of x[i], for i=0,..,n-1 */
 void vvrecf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0); 
@@ -199,6 +193,10 @@ void vvfabs (double * /* y */, const double * /* x */, const int * /* n */) __OS
 void vvpowf (float * /* z */, const float * /* y */, const float * /* x */, const int *  /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0); 
 void vvpow (double * /* z */, const double * /* y */, const double * /* x */, const int *  /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0); 
 
+/* Set z[i] to pow(x[i],y) for i=0,..,n-1 */
+void vvpowsf (float * /* z */, const float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_6_0);
+void vvpows (double * /* z */, const double * /* y */, const double * /* x */, const int * /* n */)__OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_6_0);
+
 /* Set y[i] to the sine of x[i], for i=0,..,n-1 */
 void vvsinf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0);
 void vvsin (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0);
@@ -298,7 +296,7 @@ void vvfmodf (float * /* z */, const float * /* y */, const float * /* x */, con
  n: number of floating point elements specified by *n
  
  */
-void vvfmod (double * /* z */, double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0);
+void vvfmod (double * /* z */, const double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0);
 	
 /* Set z[i] to the value r such that r = y[i] - N*x[i], where N is the
      integer nearest the exact value of y[i]/x[i].  If there are two
@@ -322,7 +320,7 @@ void vvremainderf (float * /* z */, const float * /* y */, const float * /* x */
  n: number of floating point elements specified by *n
  
  */
-void vvremainder (double * /* z */, double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0); 
+void vvremainder (double * /* z */, const double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0);
 	
 /* Set z[i] to y[i] with its sign changed to x[i]'s, for i=0,..,n-1 */
 void vvcopysignf (float * /* z */, const float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_5_0);
@@ -341,7 +339,7 @@ void vvcopysignf (float * /* z */, const float * /* y */, const float * /* x */,
  n: number of floating point elements specified by *n
  
  */
-void vvcopysign (double * /* z */, double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0);
+void vvcopysign (double * /* z */, const double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0);
 	
 /* Set z[i] to the next machine representable number from y[i] in
      direction x[i], for i=0,..,n-1 */
@@ -361,7 +359,7 @@ void vvnextafterf (float * /* z */, const float * /* y */, const float * /* x */
  n: number of floating point elements specified by *n
  
  */
-void vvnextafter (double * /* z */, double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0);
+void vvnextafter (double * /* z */, const double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0);
 	
 /*
  vvlog2f

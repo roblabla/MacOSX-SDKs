@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2012 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -73,47 +73,12 @@
 #define	_SYS_SOCKETVAR_H_
 
 #include <sys/appleapiopts.h>
-#include <sys/queue.h>			/* for TAILQ macros */
-#include <sys/select.h>			/* for struct selinfo */
-#include <net/kext_net.h>
-#include <sys/ev.h>
 #include <sys/cdefs.h>
-
-/*
- * Hacks to get around compiler complaints
- */
-struct mbuf;
-struct socket_filter_entry;
-struct protosw;
-struct sockif;
-struct sockutil;
-
 
 typedef	u_quad_t so_gen_t;
 
 
 
-/*
- * Socket state bits.
- */
-#define	SS_NOFDREF		0x0001	/* no file table ref any more */
-#define	SS_ISCONNECTED		0x0002	/* socket connected to a peer */
-#define	SS_ISCONNECTING		0x0004	/* in process of connecting to peer */
-#define	SS_ISDISCONNECTING	0x0008	/* in process of disconnecting */
-#define	SS_CANTSENDMORE		0x0010	/* can't send more data to peer */
-#define	SS_CANTRCVMORE		0x0020	/* can't receive more data from peer */
-#define	SS_RCVATMARK		0x0040	/* at mark on input */
-
-#define	SS_PRIV			0x0080	/* privileged for broadcast, raw... */
-#define	SS_NBIO			0x0100	/* non-blocking ops */
-#define	SS_ASYNC		0x0200	/* async i/o notify */
-#define	SS_ISCONFIRMING		0x0400	/* deciding to accept connection req */
-#define	SS_INCOMP		0x0800	/* Unaccepted, incomplete connection */
-#define	SS_COMP			0x1000	/* unaccepted, complete connection */
-#define	SS_ISDISCONNECTED	0x2000	/* socket disconnected from peer */
-#define	SS_DRAINING		0x4000	/* close waiting for blocked system
-					   calls to drain */
-#define	SS_DEFUNCT		0x8000	/* has been fully defunct'd */
 
 #if defined(__LP64__)
 #define	_XSOCKET_PTR(x)		u_int32_t
@@ -138,7 +103,7 @@ struct xsockbuf {
  * Externalized form of struct socket used by the sysctl(3) interface.
  */
 struct	xsocket {
-	u_int32_t		xso_len;		/* length of this structure */
+	u_int32_t		xso_len;	/* length of this structure */
 	_XSOCKET_PTR(struct socket *) xso_so;	/* makes a convenient handle */
 	short			so_type;
 	short			so_options;
@@ -160,10 +125,9 @@ struct	xsocket {
 };
 
 #if !CONFIG_EMBEDDED
-
 struct	xsocket64 {
-	u_int32_t		xso_len;		/* length of this structure */
-	u_int64_t		xso_so;	/* makes a convenient handle */
+	u_int32_t		xso_len;	/* length of this structure */
+	u_int64_t		xso_so;		/* makes a convenient handle */
 	short			so_type;
 	short			so_options;
 	short			so_linger;
@@ -182,11 +146,9 @@ struct	xsocket64 {
 	struct xsockbuf		so_snd;
 	uid_t			so_uid;		/* XXX */
 };
-
 #endif /* !CONFIG_EMBEDDED */
 
 
 #pragma pack()
-
 
 #endif /* !_SYS_SOCKETVAR_H_ */

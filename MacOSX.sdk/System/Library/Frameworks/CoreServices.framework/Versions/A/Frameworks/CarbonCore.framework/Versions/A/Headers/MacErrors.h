@@ -10,7 +10,7 @@
 #define __MACERRORS__
 
 #ifndef __CONDITIONALMACROS__
-#include <CarbonCore/ConditionalMacros.h>
+#include <ConditionalMacros.h>
 #endif
 
 

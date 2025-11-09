@@ -3,13 +3,15 @@
  
      Contains:   String constants for core uniform type identifiers
  
-     Copyright:  2004-2009 by Apple Inc., all rights reserved.
+     Copyright:  (c) 2004-2012 by Apple Inc. All rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
  
                      http://developer.apple.com/bugreporter/
+
 */
+
 #ifndef __UTCORETYPES__
 #define __UTCORETYPES__
 

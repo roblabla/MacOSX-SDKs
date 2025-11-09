@@ -1,9 +1,18 @@
 /*
 	File:		QTCaptureDecompressedVideoOutput.h
  
-	Copyright:	(c)2008-2010 by Apple Inc., all rights reserved.
+	Copyright:	(c)2008-2012 by Apple Inc., all rights reserved.
 
- */
+*/
+
+/*
+  QTKit has been deprecated in 10.9.
+
+  AVFoundation and AVKit are the frameworks recommended for all new development 
+  involving time-based audiovisual media on OS X.  In order to transition your 
+  project from QTKit to AVFoundation please refer to:
+  "Technical Note TN2300 Transitioning QTKit code to AV Foundation".
+*/
 
 #import <Foundation/Foundation.h>
 #import <QTKit/QTKitDefines.h>
@@ -58,7 +67,7 @@
     @result A dictionary containing pixel buffer attributes for buffers output by the reciever. The keys in the dictionary are described in
     CoreVideo/CVPixelBuffer.h. If the return value is nil, then the receiver outputs buffers using the fastest possible pixel buffer attributes.
 */
-- (NSDictionary *)pixelBufferAttributes;
+- (NSDictionary *)pixelBufferAttributes AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
     @method setPixelBufferAttributes:
@@ -76,7 +85,7 @@
     dictionary are described in CoreVideo/CVPixelBuffer.h. If the dictionary is NIL, then the receiver outputs buffers using the fastest possible
     pixel buffer attributes..
 */
-- (void)setPixelBufferAttributes:(NSDictionary *)pixelBufferAttributes;
+- (void)setPixelBufferAttributes:(NSDictionary *)pixelBufferAttributes AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 #if QTKIT_VERSION_MAX_ALLOWED >= QTKIT_VERSION_7_6_3
 
@@ -87,7 +96,7 @@
     the inverse of the maximum frame rate. A value of 0 indicates an unlimited maximum frame rate. The default value is 0.
     @result An NSTimeInterval specifying the minimum interval between video frames. Returns 0 if there is no frame rate limit set.
 */
-- (NSTimeInterval)minimumVideoFrameInterval;
+- (NSTimeInterval)minimumVideoFrameInterval AVAILABLE_QTKIT_VERSION_7_6_3_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
     @method setMinimumVideoFrameInterval:
@@ -97,7 +106,7 @@
     @param minimumVideoFrameInterval An NSTimeInterval specifying the minimum interval between video frames. A value of 0 indicates that there should
     be no frame rate limit.
 */
-- (void)setMinimumVideoFrameInterval:(NSTimeInterval)minimumVideoFrameInterval;
+- (void)setMinimumVideoFrameInterval:(NSTimeInterval)minimumVideoFrameInterval AVAILABLE_QTKIT_VERSION_7_6_3_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
  @method automaticallyDropsLateVideoFrames
@@ -108,7 +117,7 @@
  dropped. The default value is NO.
  @result This method returns YES if the receiver drops late video frames and returns NO otherwise.
  */
-- (BOOL)automaticallyDropsLateVideoFrames;
+- (BOOL)automaticallyDropsLateVideoFrames AVAILABLE_QTKIT_VERSION_7_6_3_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
  @method setAutomaticallyDropsLateVideoFrames:
@@ -119,7 +128,7 @@
  dropped. The default value is NO.
  @param automaticallyDropsLateVideoFrames Whether the receiver should drop late video frames
  */
-- (void)setAutomaticallyDropsLateVideoFrames:(BOOL)automaticallyDropsLateVideoFrames;
+- (void)setAutomaticallyDropsLateVideoFrames:(BOOL)automaticallyDropsLateVideoFrames AVAILABLE_QTKIT_VERSION_7_6_3_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 #endif /* QTKIT_VERSION_MAX_ALLOWED >= QTKIT_VERSION_7_6_3 */
 
@@ -127,13 +136,13 @@
     @method delegate
     @abstract Returns the receiverÕs delegate..
 */
-- (id)delegate;
+- (id)delegate AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
     @method setDelegate:
     @abstract Sets the receiverÕs delegate..
 */
-- (void)setDelegate:(id)delegate;
+- (void)setDelegate:(id)delegate AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
     @method outputVideoFrame:withSampleBuffer:fromConnection:
@@ -146,7 +155,7 @@
     @param sampleBuffer A sample buffer containing additional information about the frame, such as its presentation time.
     @param connection The connection from which the video was received.
 */
-- (void)outputVideoFrame:(CVImageBufferRef)videoFrame withSampleBuffer:(QTSampleBuffer *)sampleBuffer fromConnection:(QTCaptureConnection *)connection;
+- (void)outputVideoFrame:(CVImageBufferRef)videoFrame withSampleBuffer:(QTSampleBuffer *)sampleBuffer fromConnection:(QTCaptureConnection *)connection AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 @end
 
@@ -163,7 +172,7 @@
     @param sampleBuffer A sample buffer containing additional information about the frame, such as its presentation time..
     @param connection The connection from which the video was received.
 */
-- (void)captureOutput:(QTCaptureOutput *)captureOutput didOutputVideoFrame:(CVImageBufferRef)videoFrame withSampleBuffer:(QTSampleBuffer *)sampleBuffer fromConnection:(QTCaptureConnection *)connection;
+- (void)captureOutput:(QTCaptureOutput *)captureOutput didOutputVideoFrame:(CVImageBufferRef)videoFrame withSampleBuffer:(QTSampleBuffer *)sampleBuffer fromConnection:(QTCaptureConnection *)connection AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 #if QTKIT_VERSION_MAX_ALLOWED >= QTKIT_VERSION_7_6_3
 /*!
@@ -181,7 +190,7 @@
     This sample buffer will contain none of the original video data, therefpre its bytesForAllSamples method will return NULL.
     @param connection The connection from which the dropped video frame was received.
 */
-- (void)captureOutput:(QTCaptureOutput *)captureOutput didDropVideoFrameWithSampleBuffer:(QTSampleBuffer *)sampleBuffer fromConnection:(QTCaptureConnection *)connection;
+- (void)captureOutput:(QTCaptureOutput *)captureOutput didDropVideoFrameWithSampleBuffer:(QTSampleBuffer *)sampleBuffer fromConnection:(QTCaptureConnection *)connection AVAILABLE_QTKIT_VERSION_7_6_3_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 #endif /* QTKIT_VERSION_MAX_ALLOWED >= QTKIT_VERSION_7_6_3 */
 
 @end

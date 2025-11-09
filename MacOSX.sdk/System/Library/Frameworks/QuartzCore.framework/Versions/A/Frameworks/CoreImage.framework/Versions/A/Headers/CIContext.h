@@ -78,7 +78,8 @@ CF_RETURNS_RETAINED;
 /* Create a CoreGraphics layer object suitable for creating content for
  * subsequently rendering into this CI context. The 'd' parameter is
  * passed into CGLayerCreate () as the auxiliaryInfo dictionary. */
-- (CGLayerRef)createCGLayerWithSize:(CGSize)size info:(CFDictionaryRef)d;
+- (CGLayerRef)createCGLayerWithSize:(CGSize)size info:(CFDictionaryRef)d
+CF_RETURNS_RETAINED;
 
 /* Render to the given bitmap. Null colorspace means to use the context's
    output colorspace. */

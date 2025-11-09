@@ -3,7 +3,7 @@
  
      Contains:   Data types for Finder AppleEvents
  
-     Version:    OSA-148.3~2
+     Version:    OpenScripting
  
      Copyright:  © 1991-2008 by Apple Computer, Inc., all rights reserved.
  
@@ -26,7 +26,7 @@
 
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once

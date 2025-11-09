@@ -6,7 +6,12 @@
 #define _CGLMACRO_H
 
 #ifdef __gl3_h_
-#error Can not include both gl3.h and CGLMacro.h simultaneously
+#  ifndef __has_feature
+#    define __has_feature(X) 0
+#  endif
+#  if !__has_feature(modules)
+#    error Can not include both gl3.h and CGLMacro.h simultaneously
+#  endif
 #endif
 
 #include <OpenGL/CGLTypes.h>
@@ -2728,6 +2733,23 @@
 #define glGetQueryObjectui64vEXT(id, pname, params) \
 	(*(CGL_MACRO_CONTEXT)->disp.get_query_objectui64v)(CGL_MACRO_CONTEXT_RENDERER, id, pname, params)
 
+/* GL_EXT_debug_label */
+#define glLabelObjectEXT(type, object, length, label) \
+	(*(CGL_MACRO_CONTEXT)->disp.label_object_EXT)(CGL_MACRO_CONTEXT_RENDERER, type, object, length, label)
+
+#define glGetObjectLabelEXT(type, object, bufSize, length, label) \
+	(*(CGL_MACRO_CONTEXT)->disp.get_object_label_EXT)(CGL_MACRO_CONTEXT_RENDERER, type, object, bufSize, length, label)
+
+/* GL_EXT_debug_marker */
+#define glInsertEventMarkerEXT(length, marker) \
+	(*(CGL_MACRO_CONTEXT)->disp.insert_event_marker_EXT)(CGL_MACRO_CONTEXT_RENDERER, length, marker)
+
+#define glPushGroupMarkerEXT(length, marker) \
+	(*(CGL_MACRO_CONTEXT)->disp.push_group_marker_EXT)(CGL_MACRO_CONTEXT_RENDERER, length, marker)
+
+#define glPopGroupMarkerEXT() \
+	(*(CGL_MACRO_CONTEXT)->disp.pop_group_marker_EXT)(CGL_MACRO_CONTEXT_RENDERER)
+
 /*********** APPLE Extensions ***********************************************/
 
 /* GL_APPLE_vertex_program_evaluators */
@@ -2884,6 +2906,10 @@
 
 #define glEndConditionalRenderNV() \
 	(*(CGL_MACRO_CONTEXT)->disp.end_conditional_render_NV)(CGL_MACRO_CONTEXT_RENDERER)
+
+/* GL_NV_texture_barrier */
+#define glTextureBarrierNV() \
+	(*(CGL_MACRO_CONTEXT)->disp.texture_barrier_NV)(CGL_MACRO_CONTEXT_RENDERER)
 
 #endif /* _CGLMACRO_H */
 

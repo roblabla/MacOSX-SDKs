@@ -3,9 +3,9 @@
  
      Contains:   Master include for vecLib framework
  
-     Version:    vecLib-380.6
+     Version:    vecLib-423.32
  
-     Copyright:  © 2000-2012 by Apple Inc., all rights reserved.
+     Copyright:  © 2000-2013 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -139,7 +139,7 @@ typedef __m128                          vFloat;
     #endif /* __GNUC__ */
 #endif  /* defined(__SSE2__) */
 
-#elif defined( __ARM_NEON__ )
+#elif defined __arm__ && defined __ARM_NEON__
 
 	#if !defined ARM_NEON_GCC_COMPATIBILITY  
 

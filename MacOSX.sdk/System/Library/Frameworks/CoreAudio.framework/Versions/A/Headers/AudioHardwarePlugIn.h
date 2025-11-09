@@ -25,9 +25,9 @@
     as many devices of the kind it implements.
 
     The Initialize method is called to allow the plug-in to set itself up. At this time any devices
-    of it's kind and their streams can be presented to the system using
+    of its kind and their streams can be presented to the system using
     AudioHardwareDevicesCreated() and AudioHardwareStreamsCreated(). The plug-in is also responsible
-    for managing it's own notifications, and may install any CFRunLoopSources it needs using
+    for managing its own notifications, and may install any CFRunLoopSources it needs using
     AudioHardwareAddRunLoopSource() at this time as well.
 
     Teardown() is called when the HAL is unloading itself and the plug-in should dispose of any
@@ -879,7 +879,7 @@ extern OSStatus
 AudioObjectCreate(  AudioHardwarePlugInRef  inOwningPlugIn,
                     AudioObjectID           inOwningObjectID,
                     AudioClassID            inClassID,
-                    AudioObjectID*          outAudioObjectID)                                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_2_0, __IPHONE_5_1);
+                    AudioObjectID*          outAudioObjectID)                                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_2_0, __IPHONE_NA);
 
 /*!
     @function       AudioObjectsPublishedAndDied
@@ -908,7 +908,7 @@ AudioObjectsPublishedAndDied(   AudioHardwarePlugInRef  inOwningPlugIn,
                                 UInt32                  inNumberPublishedAudioObjects,
                                 const AudioObjectID     inPublishedAudioObjects[],
                                 UInt32                  inNumberDeadAudioObjects,
-                                const AudioObjectID     inDeadAudioObjects[])                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_2_0, __IPHONE_5_1);
+                                const AudioObjectID     inDeadAudioObjects[])                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_2_0, __IPHONE_NA);
 
 /*!
     @function       AudioObjectPropertiesChanged
@@ -930,7 +930,7 @@ extern OSStatus
 AudioObjectPropertiesChanged(   AudioHardwarePlugInRef              inOwningPlugIn,
                                 AudioObjectID                       inObjectID,
                                 UInt32                              inNumberAddresses,
-                                const AudioObjectPropertyAddress    inAddresses[])                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_2_0, __IPHONE_5_1);
+                                const AudioObjectPropertyAddress    inAddresses[])                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_2_0, __IPHONE_NA);
 
 //==================================================================================================
 #pragma mark    AudioDevice Functions

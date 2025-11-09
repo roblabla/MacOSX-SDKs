@@ -23,8 +23,8 @@ NS_CLASS_AVAILABLE(10_8, NA)
 @private
 	AVB17221AECPMessageType messageType;
 	AVB17221AECPStatusCode status;
-	uint64_t targetGUID;
-	uint64_t controllerGUID;
+	uint64_t targetEntityID;
+	uint64_t controllerEntityID;
 	uint16_t sequenceID;
 	
 	AVBMACAddress *sourceMAC;
@@ -45,12 +45,22 @@ NS_CLASS_AVAILABLE(10_8, NA)
 	@property	targetGUID
 	@abstract	The target_guid field of the AECP message.
  */
-@property (assign) uint64_t targetGUID;
+@property (assign) uint64_t targetGUID NS_DEPRECATED(10_8, 10_9, NA, NA);
+/*!
+	@property	targetEntityID
+	@abstract	The target_entity_id field of the AECP message.
+ */
+@property (assign) uint64_t targetEntityID NS_AVAILABLE(10_9, NA);
 /*!
 	@property	controllerGUID
 	@abstract	The controller_guid field of the AECP message.
  */
-@property (assign) uint64_t controllerGUID;
+@property (assign) uint64_t controllerGUID NS_DEPRECATED(10_8, 10_9, NA, NA);
+/*!
+	@property	controllerEntityID
+	@abstract	The controller_entity_id field of the AECP message.
+ */
+@property (assign) uint64_t controllerEntityID NS_AVAILABLE(10_9, NA);
 /*!
 	@property	sequenceID
 	@abstract	The sequence_id field of the AECP message.
@@ -98,6 +108,12 @@ NS_CLASS_AVAILABLE(10_8, NA)
 	@abstract	The u field of the AECP AEM message.
  */
 @property (assign, getter=isUnsolicited) BOOL unsolicited;
+/*!
+ @property	controllerRequest
+ @abstract	The cr field of the AECP AEM message.
+ */
+@property (assign, getter=isControllerRequest) BOOL controllerRequest NS_AVAILABLE(10_9, NA);
+
 /*!
 	@property	commandSpecificData
 	@abstract	The command_specific_data field of the AECP AEM message.
@@ -177,7 +193,7 @@ NS_CLASS_AVAILABLE(10_8, NA)
 #ifndef _LP64
 {
 @private
-	uint8_t mode;
+	AVB17221AECPAddressAccessTLVMode mode;
 	uint64_t address;
 	NSData *memoryData;
 }
@@ -187,7 +203,7 @@ NS_CLASS_AVAILABLE(10_8, NA)
 	@property	mode
 	@abstract	The mode field of the Address Access TLV.
  */
-@property (assign) uint8_t mode;
+@property (assign) AVB17221AECPAddressAccessTLVMode mode;
 /*!
 	@property	address
 	@abstract	The address field of the Address Access TLV.

@@ -39,17 +39,17 @@ NewAFPURL						(StringPtr 				protocolName,
 								 StringPtr 				userName,
 								 StringPtr 				password,
 								 StringPtr 				volume,
-								 StringPtr 				path);
+								 StringPtr 				path)  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_9, __IPHONE_NA, __IPHONE_NA);
 
 EXTERN_API_C( void )
-DisposeAFPURL					(char *					url);
+DisposeAFPURL					(char *					url)  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_9, __IPHONE_NA, __IPHONE_NA);
 
 
 /*---------------------------------------------------------------------------*/
 /* Parsing an AFP URL: IsAFPURL simply tests the scheme						 */
 /*---------------------------------------------------------------------------*/
 EXTERN_API_C( Boolean )
-IsAFPURL						(const char *					url);
+IsAFPURL						(const char *					url)  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_9, __IPHONE_NA, __IPHONE_NA);
 
 /*---------------------------------------------------------------------------*/
 /* ParseAFPURL parses all the fields of the URL. Any StringPtr can be NULL,	 */
@@ -65,7 +65,7 @@ ParseAFPURL		(const char *					url,
 			StringPtr 				userName,
 			StringPtr 				password,
 			StringPtr 				volume,
-			StringPtr 				path);
+			StringPtr 				path)  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_9, __IPHONE_NA, __IPHONE_NA);
 
 
 /*---------------------------------------------------------------------------*/
@@ -78,7 +78,7 @@ ParseAFPURL		(const char *					url,
 EXTERN_API_C( OSStatus )
 AFPMountURL(const char* inURL,
 			const char* inMountPoint,
-			UInt32 inMountFlags, UInt32 inAltFlags);
+			UInt32 inMountFlags, UInt32 inAltFlags)  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_9, __IPHONE_NA, __IPHONE_NA);
 
 
 /* used to be __cplusplus	*/

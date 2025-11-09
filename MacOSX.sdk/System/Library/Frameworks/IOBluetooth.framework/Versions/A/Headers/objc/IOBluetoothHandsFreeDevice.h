@@ -10,7 +10,7 @@
 #import <IOBluetooth/objc/IOBluetoothHandsFree.h>
 
 @class IOBluetoothDevice;
-@class CAPlayThroughController;
+@class IOBluetoothHandsFreeDeviceExpansion;
 
 /*!
  @header
@@ -19,12 +19,12 @@
  */
 NS_CLASS_AVAILABLE(10_7, NA)
 @interface IOBluetoothHandsFreeDevice : IOBluetoothHandsFree {
-	BOOL							_rejectSCOConnection;
-	int								_ringAttempt;
-	BOOL							_outstandingCommand;
-	NSTimer *						_outstandingCommandTimer;
-	CAPlayThroughController *       _audioPlaythrough;
-	NSMutableArray *				_commandQueue;
+	BOOL									_rejectSCOConnection;
+	int										_ringAttempt;
+	BOOL									_outstandingCommand;
+	NSTimer *								_outstandingCommandTimer;
+	IOBluetoothHandsFreeDeviceExpansion *   _expansion;
+	NSMutableArray *						_commandQueue;
 }
 
 /*!
@@ -261,6 +261,22 @@ NS_CLASS_AVAILABLE(10_7, NA)
  @param			batteryCharge 0-5 where 0 represents a low battery charge.
  */
 - (void)handsFree:(IOBluetoothHandsFreeDevice *)device batteryCharge:(NSNumber *)batteryCharge NS_AVAILABLE_MAC(10_7);
+
+/*!
+ @method		handsFree:incomingCallFrom
+ @discussion	Tells the delegate of an incoming call
+ @param			device The IOBluetoothHandsFreeDevice object
+ @param			number The remote caller's phone number
+ */
+- (void)handsFree:(IOBluetoothHandsFreeDevice *)device incomingCallFrom:(NSString *)number NS_AVAILABLE_MAC(10_7);
+
+/*!
+ @method		handsFree:ringAttempt
+ @discussion	Tells the delegate of a ring alert
+ @param			device The IOBluetoothHandsFreeDevice object
+ @param			ringAttempt The number or ring alerts received
+ */
+- (void)handsFree:(IOBluetoothHandsFreeDevice *)device ringAttempt:(NSNumber *)ringAttempt NS_AVAILABLE_MAC(10_7);
 
 /*!
  @method		handsFree:currentCall

@@ -54,7 +54,6 @@
 
 + (DRTrack*) trackForAudioOfLength:(DRMSF*)length producer:(id)producer;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 /*!
 	@method			trackForAudioFile:
 	@abstract		Creates a DRTrack capable of burning RedBook CD audio from a QuickTime readable file.
@@ -67,7 +66,6 @@
 	@result			An autoreleased DRTrack
 */
 + (DRTrack*) trackForAudioFile:(NSString*)path;
-#endif
 
 @end
 

@@ -1,7 +1,7 @@
 /*
 	NSToolbar.h
 	Application Kit
-	Copyright (c) 2000-2012, Apple Inc.
+	Copyright (c) 2000-2013, Apple Inc.
 	All rights reserved.
 */
 

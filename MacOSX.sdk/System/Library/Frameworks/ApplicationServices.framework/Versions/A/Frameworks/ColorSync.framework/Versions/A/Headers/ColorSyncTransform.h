@@ -189,8 +189,8 @@ CSEXTERN CFStringRef kColorSyncTranformInfo;         /* dictionary with the foll
  *                     one matrix.
  * 2. Parametric:      same as above, except that the returned code fragment consists
  *                     only of parametric curves, matrices and BPC components.
- * 3. Simplified:      Full conversion is collapsed to N input TRCs one
- *                     multi-dimensional table and M output TRCs.
+ * 3. Simplified:      Full conversion is collapsed to one
+ *                     multi-dimensional table with N inputs and M outputs.
  */
  
 CSEXTERN CFStringRef kColorSyncTransformFullConversionData;         /* CFSTR("com.apple.cmm.FullConversion") */
@@ -231,15 +231,16 @@ CSEXTERN CFStringRef kColorSyncConversionChannelID;     /* CFSTR("com.apple.cmm.
 /*
  * Multi-dimensional lookup with interpolation:
  *
- *       represented as CFData containing a Float32 table for N inputs, M outputs 
- *       and P gridPoints in each direction. The dimensioncorresponding to the
+ *       represented as CFData containing a table for N inputs, M outputs 
+ *       and P gridPoints in each direction. The dimension corresponding to the
  *       first input channel varies least rapidly, and the dimension corresponding
  *       to the last input channel varies most rapidly. Each grid point value contains
- *       M Float32 numbers, one for each of output channels (M is the number of outputs).
+ *       M uint16_t numbers, one for each of output channels (M is the number of outputs).
  */
  
 
 CSEXTERN CFStringRef kColorSyncConversion3DLut;      /* CFSTR("com.apple.cmm.3D-LUT") */
+CSEXTERN CFStringRef kColorSyncConversionNDLut;      /* CFSTR("com.apple.cmm.ND-LUT") */
 CSEXTERN CFStringRef kColorSyncConversionInpChan;    /* CFSTR("com.apple.cmm.InputChannels") */
 CSEXTERN CFStringRef kColorSyncConversionOutChan;    /* CFSTR("com.apple.cmm.OutputChannels") */
 
@@ -252,6 +253,7 @@ CSEXTERN CFStringRef kColorSyncConversionOutChan;    /* CFSTR("com.apple.cmm.Out
  
 CSEXTERN CFStringRef kColorSyncConversionBPC;   /* CFSTR("com.apple.cmm.BPC") */
 
+CSEXTERN CFStringRef kColorSyncFixedPointRange; /* CFSTR("com.apple.cmm.FixedPointRange") */
 
 #ifdef __cplusplus
 }

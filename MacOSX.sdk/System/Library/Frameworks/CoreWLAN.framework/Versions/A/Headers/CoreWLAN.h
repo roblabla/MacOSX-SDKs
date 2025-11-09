@@ -25,10 +25,9 @@ extern double CoreWLANFrameworkVersionNumber;
 #import <CoreWLAN/CWNetworkProfile.h>
 #import <CoreWLAN/CWChannel.h>
 
-// Legacy
-#import <CoreWLAN/CWGlobals.h>
-#import <CoreWLAN/CWWirelessProfile.h>
+// Deprecated
 #import <CoreWLAN/CW8021XProfile.h>
+#import <CoreWLAN/CWWirelessProfile.h>
 
 #endif
 

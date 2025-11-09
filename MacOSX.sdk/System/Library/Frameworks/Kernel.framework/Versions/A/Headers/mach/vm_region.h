@@ -117,8 +117,6 @@ typedef struct vm_region_basic_info		 vm_region_basic_info_data_t;
 #define VM_REGION_BASIC_INFO_COUNT ((mach_msg_type_number_t) \
 	(sizeof(vm_region_basic_info_data_t)/sizeof(int)))
 
-#define VM_REGION_EXTENDED_INFO	11
-
 #define SM_COW             1
 #define SM_PRIVATE         2
 #define SM_EMPTY           3
@@ -136,6 +134,10 @@ typedef struct vm_region_basic_info		 vm_region_basic_info_data_t;
  * back.
  */
 
+
+
+
+#define VM_REGION_EXTENDED_INFO	13
 struct vm_region_extended_info {
 	vm_prot_t		protection;
         unsigned int            user_tag;
@@ -147,13 +149,15 @@ struct vm_region_extended_info {
         unsigned short          shadow_depth;
         unsigned char           external_pager;
         unsigned char           share_mode;
+	unsigned int		pages_reusable;
 };
-
 typedef struct vm_region_extended_info		*vm_region_extended_info_t;
 typedef struct vm_region_extended_info		 vm_region_extended_info_data_t;
+#define VM_REGION_EXTENDED_INFO_COUNT			\
+	((mach_msg_type_number_t)			\
+	 (sizeof (vm_region_extended_info_data_t) / sizeof (natural_t)))
 
-#define VM_REGION_EXTENDED_INFO_COUNT	((mach_msg_type_number_t) \
-	(sizeof(vm_region_extended_info_data_t)/sizeof(int)))
+
 
 
 #define VM_REGION_TOP_INFO	12
@@ -169,8 +173,9 @@ struct vm_region_top_info {
 typedef struct vm_region_top_info		*vm_region_top_info_t;
 typedef struct vm_region_top_info		 vm_region_top_info_data_t;
 
-#define VM_REGION_TOP_INFO_COUNT ((mach_msg_type_number_t) \
-	(sizeof(vm_region_top_info_data_t)/sizeof(int)))
+#define VM_REGION_TOP_INFO_COUNT					\
+	((mach_msg_type_number_t)					\
+	 (sizeof(vm_region_top_info_data_t) / sizeof(natural_t)))
 
 
 
@@ -210,15 +215,16 @@ struct vm_region_submap_info {
         unsigned char           share_mode;	/* see enumeration */
 	boolean_t		is_submap;	/* submap vs obj */
 	vm_behavior_t		behavior;	/* access behavior hint */
-	vm32_object_id_t		object_id;	/* obj/map name, not a handle */
+	vm32_object_id_t	object_id;	/* obj/map name, not a handle */
 	unsigned short		user_wired_count; 
 };
 
 typedef struct vm_region_submap_info		*vm_region_submap_info_t;
 typedef struct vm_region_submap_info		 vm_region_submap_info_data_t;
 
-#define VM_REGION_SUBMAP_INFO_COUNT ((mach_msg_type_number_t) \
-	(sizeof(vm_region_submap_info_data_t)/sizeof(int)))
+#define VM_REGION_SUBMAP_INFO_COUNT					\
+	((mach_msg_type_number_t)					\
+	 (sizeof(vm_region_submap_info_data_t) / sizeof(natural_t)))
 
 struct vm_region_submap_info_64 {
 	vm_prot_t		protection;     /* present access protection */
@@ -236,15 +242,29 @@ struct vm_region_submap_info_64 {
         unsigned char           share_mode;	/* see enumeration */
 	boolean_t		is_submap;	/* submap vs obj */
 	vm_behavior_t		behavior;	/* access behavior hint */
-	vm32_object_id_t		object_id;	/* obj/map name, not a handle */
-	unsigned short		user_wired_count; 
+	vm32_object_id_t	object_id;	/* obj/map name, not a handle */
+	unsigned short		user_wired_count;
+	unsigned int		pages_reusable;
 };
 
 typedef struct vm_region_submap_info_64		*vm_region_submap_info_64_t;
 typedef struct vm_region_submap_info_64		 vm_region_submap_info_data_64_t;
 
-#define VM_REGION_SUBMAP_INFO_COUNT_64		((mach_msg_type_number_t) \
-	(sizeof(vm_region_submap_info_data_64_t)/sizeof(int)))
+#define VM_REGION_SUBMAP_INFO_V1_SIZE	\
+	(sizeof (vm_region_submap_info_data_64_t))
+#define VM_REGION_SUBMAP_INFO_V0_SIZE	\
+	(VM_REGION_SUBMAP_INFO_V1_SIZE - \
+	 sizeof (unsigned int) /* pages_reusable */)
+
+#define VM_REGION_SUBMAP_INFO_V1_COUNT_64 \
+	((mach_msg_type_number_t) \
+	 (VM_REGION_SUBMAP_INFO_V1_SIZE / sizeof (natural_t)))
+#define VM_REGION_SUBMAP_INFO_V0_COUNT_64 \
+	((mach_msg_type_number_t) \
+	 (VM_REGION_SUBMAP_INFO_V0_SIZE / sizeof (natural_t)))
+
+/* set this to the latest version */
+#define VM_REGION_SUBMAP_INFO_COUNT_64		VM_REGION_SUBMAP_INFO_V1_COUNT_64
 
 struct vm_region_submap_short_info_64 {
 	vm_prot_t		protection;     /* present access protection */
@@ -258,15 +278,17 @@ struct vm_region_submap_short_info_64 {
         unsigned char           share_mode;	/* see enumeration */
 	boolean_t		is_submap;	/* submap vs obj */
 	vm_behavior_t		behavior;	/* access behavior hint */
-	vm32_object_id_t		object_id;	/* obj/map name, not a handle */
+	vm32_object_id_t	object_id;	/* obj/map name, not a handle */
 	unsigned short		user_wired_count; 
 };
 
 typedef struct vm_region_submap_short_info_64	*vm_region_submap_short_info_64_t;
 typedef struct vm_region_submap_short_info_64	 vm_region_submap_short_info_data_64_t;
 
-#define VM_REGION_SUBMAP_SHORT_INFO_COUNT_64	((mach_msg_type_number_t) \
-	(sizeof(vm_region_submap_short_info_data_64_t)/sizeof(int)))
+#define VM_REGION_SUBMAP_SHORT_INFO_COUNT_64				\
+	((mach_msg_type_number_t)					\
+	 (sizeof (vm_region_submap_short_info_data_64_t) / sizeof (natural_t)))
+
 
 
 struct mach_vm_read_entry {

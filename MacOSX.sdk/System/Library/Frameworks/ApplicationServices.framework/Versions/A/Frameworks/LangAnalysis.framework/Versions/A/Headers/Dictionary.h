@@ -3,7 +3,7 @@
  
      Contains:   Dictionary Manager Interfaces
  
-     Version:    LanguageAnalysis-242~23
+     Version:    LanguageAnalysis-~1
  
      Copyright:  © 1992-2008 by Apple Inc., all rights reserved.
  

@@ -10,7 +10,7 @@
 #define __MACHINEEXCEPTIONS__
 
 #ifndef __MACTYPES__
-#include <CarbonCore/MacTypes.h>
+#include <MacTypes.h>
 #endif
 
 #ifndef __MIXEDMODE__
@@ -19,7 +19,7 @@
 
 
 #if TARGET_CPU_X86 || TARGET_CPU_X86_64
-#include <xmmintrin.h>
+#include <emmintrin.h>
 #endif
 
 

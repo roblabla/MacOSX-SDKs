@@ -1,6 +1,6 @@
 /*	
     NSURLCredential.h
-    Copyright (c) 2003-2012, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2013, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -17,12 +17,16 @@
     @constant NSURLCredentialPersistenceNone This credential won't be saved.
     @constant NSURLCredentialPersistenceForSession This credential will only be stored for this session.
     @constant NSURLCredentialPersistencePermanent This credential will be stored permanently. Note: Whereas in Mac OS X any application can access any credential provided the user gives permission, in iPhone OS an application can access only its own credentials.
+    @constant NSURLCredentialPersistenceSynchronizable This credential will be stored permanently. Additionally, this credential will be distributed to other devices based on the owning AppleID.
+        Note: Whereas in Mac OS X any application can access any credential provided the user gives permission, on iOS an application can 
+        access only its own credentials.
 */
 
 typedef NS_ENUM(NSUInteger, NSURLCredentialPersistence) {
     NSURLCredentialPersistenceNone,
     NSURLCredentialPersistenceForSession,
-    NSURLCredentialPersistencePermanent
+    NSURLCredentialPersistencePermanent,
+    NSURLCredentialPersistenceSynchronizable NS_ENUM_AVAILABLE(10_8, 6_0)
 };
 
 @class NSURLCredentialInternal;
@@ -32,7 +36,7 @@ typedef NS_ENUM(NSUInteger, NSURLCredentialPersistence) {
     @discussion This class is an immutable object representing an authentication credential.  The actual type of the credential is determined by the constructor called in the categories declared below.
 */
 
-@interface NSURLCredential : NSObject <NSCoding, NSCopying>
+@interface NSURLCredential : NSObject <NSSecureCoding, NSCopying>
 {
     @private
     __strong NSURLCredentialInternal *_internal;
@@ -110,17 +114,17 @@ typedef NS_ENUM(NSUInteger, NSURLCredentialPersistence) {
 @interface NSURLCredential(NSClientCertificate)
 
 /*!
-    @method initWithIdentity:certificateArray:persistence:
+    @method initWithIdentity:certificates:persistence:
     @abstract Initialize an NSURLCredential with an identity and array of at least 1 client certificates (SecCertificateRef)
     @param identity a SecIdentityRef object
     @param certArray an array containing at least one SecCertificateRef objects
     @param persistence enum that says to store per session, permanently or not at all
     @result the Initialized NSURLCredential
  */
-- (id)initWithIdentity:(SecIdentityRef)identity certificates:(NSArray *)certArray persistence:(NSURLCredentialPersistence) persistence NS_AVAILABLE(10_6, 3_0);
+- (id)initWithIdentity:(SecIdentityRef)identity certificates:(NSArray *)certArray persistence:(NSURLCredentialPersistence)persistence NS_AVAILABLE(10_6, 3_0);
 
 /*!
-    @method credentialWithCertificateArray:password:persistence:
+    @method credentialWithIdentity:certificates:persistence:
     @abstract Create a new NSURLCredential with an identity and certificate array
     @param identity a SecIdentityRef object
     @param certArray an array containing at least one SecCertificateRef objects
@@ -137,7 +141,7 @@ typedef NS_ENUM(NSUInteger, NSURLCredentialPersistence) {
 - (SecIdentityRef)identity;
 
 /*!
-    @method certificateArray
+    @method certificates
     @abstract Returns an NSArray of SecCertificateRef objects representing the client certificate for this credential, if this credential was created with an identity and certificate.
     @result an NSArray of SecCertificateRef or NULL if this is a username/password credential
  */
@@ -148,14 +152,14 @@ typedef NS_ENUM(NSUInteger, NSURLCredentialPersistence) {
 @interface NSURLCredential(NSServerTrust)
 
 /*!
-    @method initWithTrust:(SecTrustRef) trust
+    @method initWithTrust:
     @abstract Initialize a new NSURLCredential which specifies that the specified trust has been accepted.
     @result the Initialized NSURLCredential
  */
 - (id)initWithTrust:(SecTrustRef)trust NS_AVAILABLE(10_6, 3_0);
 
 /*!
-    @method continueWithHandshakeCredential
+    @method credentialForTrust:
     @abstract Create a new NSURLCredential which specifies that a handshake has been trusted.
     @result The new autoreleased NSURLCredential
  */

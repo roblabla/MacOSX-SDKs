@@ -1,6 +1,6 @@
 /* CoreAnimation - CATiledLayer.h
 
-   Copyright (c) 2006-2007 Apple Inc.
+   Copyright (c) 2006-2012 Apple Inc.
    All rights reserved. */
 
 /* This is a subclass of CALayer providing a way to asynchronously
@@ -41,9 +41,10 @@
 @property size_t levelsOfDetail;
 
 /* The number of magnified levels of detail for this layer. Defaults to
- * zero. Each previous LOD is twice the resolution of the later. E.g.
- * specifying 'levelBias' of two means the layer has two extra levels:
- * 2x and 4x. */
+ * zero. Each previous level of detail is twice the resolution of the
+ * later. E.g. specifying 'levelsOfDetailBias' of two means that the
+ * layer devotes two of its specified levels of detail to
+ * magnification, i.e. 2x and 4x. */
 
 @property size_t levelsOfDetailBias;
 

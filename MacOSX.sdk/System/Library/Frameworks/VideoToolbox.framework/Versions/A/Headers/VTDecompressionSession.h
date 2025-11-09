@@ -3,7 +3,7 @@
 	
 	Framework:  VideoToolbox
  
-    Copyright 2006-2012 Apple Inc. All rights reserved.
+    Copyright 2006-2013 Apple Inc. All rights reserved.
   
 	Video Toolbox client API for decompressing video frames.
 	
@@ -15,6 +15,7 @@
 #define VTDECOMPRESSIONSESSION_H
 
 #include <CoreMedia/CMBase.h>
+#include <VideoToolbox/VTBase.h>
 
 #include <CoreFoundation/CoreFoundation.h>
 #include <CoreVideo/CoreVideo.h>
@@ -120,7 +121,7 @@ VTDecompressionSessionCreate(
 	CFDictionaryRef								videoDecoderSpecification,                /* can be NULL */
 	CFDictionaryRef                             destinationImageBufferAttributes,         /* can be NULL */
 	const VTDecompressionOutputCallbackRecord * outputCallback,
-	VTDecompressionSessionRef *                 decompressionSessionOut) AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
+	VTDecompressionSessionRef *                 decompressionSessionOut) VT_AVAILABLE_STARTING(10_8);
 
 /*!
 	@function	VTDecompressionSessionInvalidate
@@ -133,14 +134,14 @@ VTDecompressionSessionCreate(
     	Calling VTDecompressionSessionInvalidate ensures a deterministic, orderly teardown.
 */
 VT_EXPORT void 
-VTDecompressionSessionInvalidate( VTDecompressionSessionRef session ) AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
+VTDecompressionSessionInvalidate( VTDecompressionSessionRef session ) VT_AVAILABLE_STARTING(10_8);
 
 /*!
 	@function VTDecompressionSessionGetTypeID
 	@abstract Returns the CFTypeID for decompression sessions.  
 */
 VT_EXPORT CFTypeID 
-VTDecompressionSessionGetTypeID(void) AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
+VTDecompressionSessionGetTypeID(void) VT_AVAILABLE_STARTING(10_8);
 
 /*!
 	@function	VTDecompressionSessionDecodeFrame
@@ -175,7 +176,7 @@ VTDecompressionSessionDecodeFrame(
 	CMSampleBufferRef               sampleBuffer,
 	VTDecodeFrameFlags              decodeFlags, // bit 0 is enableAsynchronousDecompression
 	void *                          sourceFrameRefCon,
-	VTDecodeInfoFlags               *infoFlagsOut /* may be NULL */ ) AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
+	VTDecodeInfoFlags               *infoFlagsOut /* may be NULL */ ) VT_AVAILABLE_STARTING(10_8);
 
 /*!
 	@function VTDecompressionSessionFinishDelayedFrames
@@ -189,7 +190,7 @@ VTDecompressionSessionDecodeFrame(
 */
 VT_EXPORT OSStatus
 VTDecompressionSessionFinishDelayedFrames(
-	VTDecompressionSessionRef		session) AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
+	VTDecompressionSessionRef		session) VT_AVAILABLE_STARTING(10_8);
 
 /*!
 	@function VTDecompressionSessionCanAcceptFormatDescription
@@ -202,7 +203,7 @@ VTDecompressionSessionFinishDelayedFrames(
 VT_EXPORT Boolean 
 VTDecompressionSessionCanAcceptFormatDescription( 
 	VTDecompressionSessionRef		session, 
-	CMFormatDescriptionRef			newFormatDesc ) AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
+	CMFormatDescriptionRef			newFormatDesc ) VT_AVAILABLE_STARTING(10_8);
 
 /*!
 	@function VTDecompressionSessionWaitForAsynchronousFrames
@@ -213,7 +214,7 @@ VTDecompressionSessionCanAcceptFormatDescription(
 */
 VT_EXPORT OSStatus
 VTDecompressionSessionWaitForAsynchronousFrames(
-	VTDecompressionSessionRef       session) AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
+	VTDecompressionSessionRef       session) VT_AVAILABLE_STARTING(10_8);
 
 /*!
 	@function	VTDecompressionSessionCopyBlackPixelBuffer
@@ -229,7 +230,7 @@ VTDecompressionSessionWaitForAsynchronousFrames(
 VT_EXPORT OSStatus
 VTDecompressionSessionCopyBlackPixelBuffer(
    VTDecompressionSessionRef		session,
-   CVPixelBufferRef					*pixelBufferOut ) AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
+   CVPixelBufferRef					*pixelBufferOut ) VT_AVAILABLE_STARTING(10_8);
 	
 // See VTSession.h for property access APIs on VTDecompressionSessions.
 // See VTDecompressionProperties.h for standard property keys and values for decompression sessions.

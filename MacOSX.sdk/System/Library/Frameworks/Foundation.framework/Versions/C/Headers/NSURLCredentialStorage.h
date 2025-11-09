@@ -1,6 +1,6 @@
 /*	
     NSURLCredentialStorage.h
-    Copyright (c) 2003-2012, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2013, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -62,12 +62,27 @@
 
 /*!
     @method removeCredential:forProtectionSpace:
-    @abstract Remove the a credential from the set for the specified protection space.
+    @abstract Remove the credential from the set for the specified protection space.
     @param credential The credential to remove.
     @param space The protection space for which a credential should be removed
-    @discussion The credential is removed from both persistent and temporary storage.
+    @discussion The credential is removed from both persistent and temporary storage. A credential that
+    has a persistence policy of NSURLCredentialPersistenceSynchronizable will fail.  
+    See removeCredential:forProtectionSpace:options.
 */
 - (void)removeCredential:(NSURLCredential *)credential forProtectionSpace:(NSURLProtectionSpace *)space;
+
+/*!
+ @method removeCredential:forProtectionSpace:options
+ @abstract Remove the credential from the set for the specified protection space based on options.
+ @param credential The credential to remove.
+ @param space The protection space for which a credential should be removed
+ @param options A dictionary containing options to consider when removing the credential.  This should
+ be used when trying to delete a credential that has the NSURLCredentialPersistenceSynchronizable policy.
+ Please note that when NSURLCredential objects that have a NSURLCredentialPersistenceSynchronizable policy
+ are removed, the credential will be removed on all devices that contain this credential.
+ @discussion The credential is removed from both persistent and temporary storage.
+ */
+- (void)removeCredential:(NSURLCredential *)credential forProtectionSpace:(NSURLProtectionSpace *)space options:(NSDictionary *)options NS_AVAILABLE(10_9, 7_0);
 
 /*!
     @method defaultCredentialForProtectionSpace:
@@ -93,4 +108,14 @@
     the set of stored credentials changes.
 */
 FOUNDATION_EXPORT NSString *const NSURLCredentialStorageChangedNotification;
+
+/*
+ *  NSURLCredentialStorageRemoveSynchronizableCredentials - (NSNumber value)
+ *		A key that indicates either @YES or @NO that credentials which contain the NSURLCredentialPersistenceSynchronizable
+ *		attribute should be removed.  If the key is missing or the value is @NO, then no attempt will be made
+ *		to remove such a credential.
+ */
+FOUNDATION_EXPORT NSString *const NSURLCredentialStorageRemoveSynchronizableCredentials NS_AVAILABLE(10_9, 7_0);
+
+
 

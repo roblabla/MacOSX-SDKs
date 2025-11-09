@@ -1,7 +1,7 @@
 /*
     NSAnimationContext.h
     Application Kit
-    Copyright (c) 2006-2012, Apple Inc.
+    Copyright (c) 2006-2013, Apple Inc.
     All rights reserved.
 */
 
@@ -14,14 +14,18 @@
 NS_CLASS_AVAILABLE(10_5, NA)
 @interface NSAnimationContext : NSObject {
 @private
+#if !__LP64__
     NSTimeInterval _duration;
     id _reserved[4];
     unsigned int _allowsImplicitAnimation:1;
     unsigned int _isImplicitContext:1;
     unsigned int __reserved:30;
-
+#endif
 }
+
+#if NS_BLOCKS_AVAILABLE
 + (void)runAnimationGroup:(void (^)(NSAnimationContext *context))changes completionHandler:(void (^)(void))completionHandler NS_AVAILABLE_MAC(10_7);
+#endif
 
 + (void)beginGrouping;
 + (void)endGrouping;

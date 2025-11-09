@@ -4,7 +4,7 @@
 //
 //  Copyright (c) 2006 Apple. All rights reserved.
 
-
+#import <Foundation/Foundation.h>
 #import <CalendarStore/CalCalendarStore.h>
 #import <CalendarStore/CalCalendar.h>
 #import <CalendarStore/CalCalendarItem.h>

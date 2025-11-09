@@ -45,6 +45,22 @@ typedef enum {
     kCLAuthorizationStatusAuthorized         // User has authorized this application to use location services
 } CLAuthorizationStatus;
 
+/*
+ *	CLActivityType
+ *
+ *  Discussion:
+ *		Enumerates the different possible activity types. This currently
+ *		affects behavior such as the determination of when location updates
+ *		may be automatically paused.
+ */
+enum {
+    CLActivityTypeOther = 1,
+    CLActivityTypeAutomotiveNavigation,	// for automotive navigation
+    CLActivityTypeFitness,				// includes any pedestrian activities
+    CLActivityTypeOtherNavigation 		// for other navigation cases (excluding pedestrian navigation), e.g. navigation for boats, trains, or planes
+};
+typedef NSInteger CLActivityType;
+
 @class CLLocation;
 @class CLHeading;
 @class CLRegion;
@@ -102,9 +118,9 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *  regionMonitoringEnabled
  *  
  *  Discussion:
- *      Determines whether region monitoring services are enabled on the device.
+ *      Deprecated. Use +regionMonitoringAvailable and +authorizationStatus instead.
  */
-+ (BOOL)regionMonitoringEnabled __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_4_0);
++ (BOOL)regionMonitoringEnabled __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_8, __MAC_10_8,__IPHONE_4_0, __IPHONE_6_0);
 
 /*
  *  authorizationStatus
@@ -131,8 +147,20 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *      Allows the application to specify what location will be used for in their app. This
  *      will be displayed along with the standard Location permissions dialogs. This property will need to be
  *      set prior to calling startUpdatingLocation.
+ *
+ *      Deprecated.  Set the purpose string in Info.plist using key NSLocationUsageDescription.
  */
-@property(copy, nonatomic) NSString *purpose __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_3_2);
+@property(copy, nonatomic) NSString *purpose __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_7, __MAC_NA, __IPHONE_3_2, __IPHONE_6_0);
+
+/*
+ *	activityType
+ *
+ *  Discussion:
+ *		Specifies the type of user activity. Currently affects behavior such as
+ *		the determination of when location updates may be automatically paused.
+ *		By default, CLActivityTypeOther is used.
+ */
+@property(assign, nonatomic) CLActivityType activityType __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_6_0);
 
 /*
  *  distanceFilter
@@ -156,6 +184,15 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *      By default, kCLLocationAccuracyBest is used.
  */
 @property(assign, nonatomic) CLLocationAccuracy desiredAccuracy;
+
+/*
+ *	pausesLocationUpdatesAutomatically
+ *
+ *  Discussion:
+ *		Specifies that location updates may automatically be paused when possible.
+ *		By default, this is YES for applications linked against iOS 6.0 or later.
+ */
+@property(assign, nonatomic) BOOL pausesLocationUpdatesAutomatically __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_6_0);
 
 /*
  *  location
@@ -303,7 +340,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *  stopMonitoringForRegion:
  *
  *  Discussion:
- *      Stop monitoring the specified regio n.  It is valid to call stopMonitoringForRegion: for a region that was registered
+ *      Stop monitoring the specified region.  It is valid to call stopMonitoringForRegion: for a region that was registered
  *      for monitoring with a different location manager object, during this or previous launches of your application.
  *
  *      This is done asynchronously and may not be immediately reflected in monitoredRegions.
@@ -322,5 +359,59 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *      This is done asynchronously and may not be immediately reflected in monitoredRegions.
  */
 - (void)startMonitoringForRegion:(CLRegion *)region __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_5_0);
+
+/*
+ *	allowDeferredLocationUpdatesUntilTraveled:timeout:
+ *
+ *	Discussion:
+ *		Indicate that the application will allow the location manager to defer
+ *		location updates until an exit criterion is met. This may allow the
+ *		device to enter a low-power state in which updates are held for later
+ *		delivery. Once an exit condition is met, the location manager will
+ *		continue normal updates until this method is invoked again.
+ *
+ *		Exit conditions, distance and timeout, can be specified using the constants
+ *		CLLocationDistanceMax and CLTimeIntervalMax, respectively, if you are
+ *		trying to achieve an unlimited distance or timeout.
+ *
+ *		The CLLocationManagerDelegate will continue to receive normal updates as
+ *		long as the application remains in the foreground. While the process is
+ *		in the background, the device may be able to enter a low-power state for
+ *		portions of the specified distance and time interval. While in this
+ *		state, locations will be coalesced for later delivery.
+ *
+ *		Location updates will be deferred as much as is reasonable to save
+ *		power. If another process is using location, the device may not enter a
+ *		low-power state and instead updates will continue normally. Deferred
+ *		updates may be interspersed with normal updates if the device exits and
+ *		re-enters a low-power state.
+ *
+ *		All location updates, including deferred updates, will be delivered via
+ *		the delegate callback locationManager:didUpdateLocations:
+ *
+ *		When deferred updates have ended, the manager will invoke the delegate
+ *		callback locationManagerDidFinishDeferredUpdates:withError:. An error
+ *		will be returned if the manager will not defer updates and the exit
+ *		criteria have not been met.
+ */
+- (void)allowDeferredLocationUpdatesUntilTraveled:(CLLocationDistance)distance
+					  timeout:(NSTimeInterval)timeout __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_6_0);
+
+/*
+ *	disallowDeferredLocationUpdates
+ *
+ *	Discussion:
+ *		Disallow deferred location updates if previously enabled. Any outstanding
+ *		updates will be sent and regular location updates will resume.
+ */
+- (void)disallowDeferredLocationUpdates __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_6_0);
+
+/*
+ *  deferredLocationUpdatesAvailable
+ *
+ *  Discussion:
+ *      Returns YES if the device supports deferred location updates, otherwise NO.
+ */
++ (BOOL)deferredLocationUpdatesAvailable __OSX_AVAILABLE_STARTING(__MAC_10_9,__IPHONE_6_0);
 
 @end

@@ -12,18 +12,17 @@
 @protocol QLPreviewItem;
 @class QLPreviewViewReserved;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_7
-enum {
+NS_ENUM_AVAILABLE_MAC(10_7)
+typedef NS_ENUM(NSUInteger, QLPreviewViewStyle) {
     QLPreviewViewStyleNormal = 0,
     QLPreviewViewStyleCompact = 1
 };
-#endif
-typedef NSUInteger QLPreviewViewStyle;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
 /*!
  * @abstract A QLPreviewView shows a preview of an item.
  */
+
+NS_CLASS_AVAILABLE_MAC(10_6)
 @interface QLPreviewView : NSView
 {
 @private
@@ -72,4 +71,3 @@ typedef NSUInteger QLPreviewViewStyle;
 @property BOOL autostarts;
 
 @end
-#endif

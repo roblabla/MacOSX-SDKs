@@ -3,7 +3,7 @@
  
      Contains:   QuickTime VR interfaces
  
-     Version:    QuickTime 7.7.1
+     Version:    QuickTime 7.7.3
  
      Copyright:  © 1997-2012 by Apple Inc., all rights reserved.
  
@@ -11,8 +11,15 @@
                  the World Wide Web:
  
                      http://developer.apple.com/bugreporter/
- 
 */
+
+/*
+  QuickTime has been deprecated in 10.9.
+
+  AVFoundation and AVKit are the frameworks recommended for all new development 
+  involving time-based audiovisual media on OS X.
+*/
+
 #ifndef __QUICKTIMEVR__
 #define __QUICKTIMEVR__
 
@@ -369,120 +376,120 @@ typedef STACK_UPP_TYPE(QTVRMouseOverHotSpotProcPtr)             QTVRMouseOverHot
 typedef STACK_UPP_TYPE(QTVRImagingCompleteProcPtr)              QTVRImagingCompleteUPP;
 typedef STACK_UPP_TYPE(QTVRBackBufferImagingProcPtr)            QTVRBackBufferImagingUPP;
 /*
- *  NewQTVRLeavingNodeUPP()
+ *  NewQTVRLeavingNodeUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern QTVRLeavingNodeUPP
-NewQTVRLeavingNodeUPP(QTVRLeavingNodeProcPtr userRoutine)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewQTVRLeavingNodeUPP(QTVRLeavingNodeProcPtr userRoutine)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  NewQTVREnteringNodeUPP()
+ *  NewQTVREnteringNodeUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern QTVREnteringNodeUPP
-NewQTVREnteringNodeUPP(QTVREnteringNodeProcPtr userRoutine)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewQTVREnteringNodeUPP(QTVREnteringNodeProcPtr userRoutine)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  NewQTVRMouseOverHotSpotUPP()
+ *  NewQTVRMouseOverHotSpotUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern QTVRMouseOverHotSpotUPP
-NewQTVRMouseOverHotSpotUPP(QTVRMouseOverHotSpotProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewQTVRMouseOverHotSpotUPP(QTVRMouseOverHotSpotProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  NewQTVRImagingCompleteUPP()
+ *  NewQTVRImagingCompleteUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern QTVRImagingCompleteUPP
-NewQTVRImagingCompleteUPP(QTVRImagingCompleteProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewQTVRImagingCompleteUPP(QTVRImagingCompleteProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  NewQTVRBackBufferImagingUPP()
+ *  NewQTVRBackBufferImagingUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern QTVRBackBufferImagingUPP
-NewQTVRBackBufferImagingUPP(QTVRBackBufferImagingProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewQTVRBackBufferImagingUPP(QTVRBackBufferImagingProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  DisposeQTVRLeavingNodeUPP()
+ *  DisposeQTVRLeavingNodeUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeQTVRLeavingNodeUPP(QTVRLeavingNodeUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeQTVRLeavingNodeUPP(QTVRLeavingNodeUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  DisposeQTVREnteringNodeUPP()
+ *  DisposeQTVREnteringNodeUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeQTVREnteringNodeUPP(QTVREnteringNodeUPP userUPP)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeQTVREnteringNodeUPP(QTVREnteringNodeUPP userUPP)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  DisposeQTVRMouseOverHotSpotUPP()
+ *  DisposeQTVRMouseOverHotSpotUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeQTVRMouseOverHotSpotUPP(QTVRMouseOverHotSpotUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeQTVRMouseOverHotSpotUPP(QTVRMouseOverHotSpotUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  DisposeQTVRImagingCompleteUPP()
+ *  DisposeQTVRImagingCompleteUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeQTVRImagingCompleteUPP(QTVRImagingCompleteUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeQTVRImagingCompleteUPP(QTVRImagingCompleteUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  DisposeQTVRBackBufferImagingUPP()
+ *  DisposeQTVRBackBufferImagingUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeQTVRBackBufferImagingUPP(QTVRBackBufferImagingUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeQTVRBackBufferImagingUPP(QTVRBackBufferImagingUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  InvokeQTVRLeavingNodeUPP()
+ *  InvokeQTVRLeavingNodeUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -493,13 +500,13 @@ InvokeQTVRLeavingNodeUPP(
   UInt32              toNodeID,
   Boolean *           cancel,
   SInt32              refCon,
-  QTVRLeavingNodeUPP  userUPP)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTVRLeavingNodeUPP  userUPP)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  InvokeQTVREnteringNodeUPP()
+ *  InvokeQTVREnteringNodeUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -508,13 +515,13 @@ InvokeQTVREnteringNodeUPP(
   QTVRInstance         qtvr,
   UInt32               nodeID,
   SInt32               refCon,
-  QTVREnteringNodeUPP  userUPP)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTVREnteringNodeUPP  userUPP)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  InvokeQTVRMouseOverHotSpotUPP()
+ *  InvokeQTVRMouseOverHotSpotUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -524,13 +531,13 @@ InvokeQTVRMouseOverHotSpotUPP(
   UInt32                   hotSpotID,
   UInt32                   flags,
   SInt32                   refCon,
-  QTVRMouseOverHotSpotUPP  userUPP)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTVRMouseOverHotSpotUPP  userUPP)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  InvokeQTVRImagingCompleteUPP()
+ *  InvokeQTVRImagingCompleteUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -538,13 +545,13 @@ extern OSErr
 InvokeQTVRImagingCompleteUPP(
   QTVRInstance            qtvr,
   SInt32                  refCon,
-  QTVRImagingCompleteUPP  userUPP)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTVRImagingCompleteUPP  userUPP)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  InvokeQTVRBackBufferImagingUPP()
+ *  InvokeQTVRBackBufferImagingUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -556,7 +563,7 @@ InvokeQTVRBackBufferImagingUPP(
   UInt32                    flagsIn,
   UInt32 *                  flagsOut,
   SInt32                    refCon,
-  QTVRBackBufferImagingUPP  userUPP)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTVRBackBufferImagingUPP  userUPP)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 #if __MACH__
   #ifdef __cplusplus
@@ -634,32 +641,32 @@ typedef QTVRInterceptRecord *           QTVRInterceptPtr;
 typedef CALLBACK_API( void , QTVRInterceptProcPtr )(QTVRInstance qtvr, QTVRInterceptPtr qtvrMsg, SInt32 refCon, Boolean *cancel);
 typedef STACK_UPP_TYPE(QTVRInterceptProcPtr)                    QTVRInterceptUPP;
 /*
- *  NewQTVRInterceptUPP()
+ *  NewQTVRInterceptUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern QTVRInterceptUPP
-NewQTVRInterceptUPP(QTVRInterceptProcPtr userRoutine)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewQTVRInterceptUPP(QTVRInterceptProcPtr userRoutine)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  DisposeQTVRInterceptUPP()
+ *  DisposeQTVRInterceptUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeQTVRInterceptUPP(QTVRInterceptUPP userUPP)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeQTVRInterceptUPP(QTVRInterceptUPP userUPP)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  InvokeQTVRInterceptUPP()
+ *  InvokeQTVRInterceptUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -669,7 +676,7 @@ InvokeQTVRInterceptUPP(
   QTVRInterceptPtr  qtvrMsg,
   SInt32            refCon,
   Boolean *         cancel,
-  QTVRInterceptUPP  userUPP)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTVRInterceptUPP  userUPP)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 #if __MACH__
   #ifdef __cplusplus
@@ -695,10 +702,10 @@ InvokeQTVRInterceptUPP(
   -------------------------------------------------------------------------------------------------
 */
 /*
- *  QTVRGetQTVRTrack()
+ *  QTVRGetQTVRTrack()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -706,14 +713,14 @@ InvokeQTVRInterceptUPP(
 extern Track 
 QTVRGetQTVRTrack(
   Movie    theMovie,
-  SInt32   index)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32   index)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRGetQTVRInstance()
+ *  QTVRGetQTVRInstance()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -722,7 +729,7 @@ extern OSErr
 QTVRGetQTVRInstance(
   QTVRInstance *    qtvr,
   Track             qtvrTrack,
-  MovieController   mc)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  MovieController   mc)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
@@ -733,10 +740,10 @@ QTVRGetQTVRInstance(
 
 /* QTVRSetViewParameter requires QTVR 5.0 (kQTVRAPIMajorVersion05 + kQTVRAPIMinorVersion00)*/
 /*
- *  QTVRSetViewParameter()
+ *  QTVRSetViewParameter()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 5.0 and later
  *    Windows:          in QTVR.lib 5.0 and later
@@ -746,15 +753,15 @@ QTVRSetViewParameter(
   QTVRInstance   qtvr,
   UInt32         viewParameter,
   void *         value,
-  UInt32         flagsIn)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32         flagsIn)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /* QTVRGetViewParameter requires QTVR 5.0 (kQTVRAPIMajorVersion05 + kQTVRAPIMinorVersion00)*/
 /*
- *  QTVRGetViewParameter()
+ *  QTVRGetViewParameter()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 5.0 and later
  *    Windows:          in QTVR.lib 5.0 and later
@@ -765,14 +772,14 @@ QTVRGetViewParameter(
   UInt32         viewParameter,
   void *         value,
   UInt32         flagsIn,
-  UInt32 *       flagsOut)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32 *       flagsOut)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRSetPanAngle()
+ *  QTVRSetPanAngle()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -780,27 +787,27 @@ QTVRGetViewParameter(
 extern OSErr 
 QTVRSetPanAngle(
   QTVRInstance   qtvr,
-  float          panAngle)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  float          panAngle)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRGetPanAngle()
+ *  QTVRGetPanAngle()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
  */
 extern float 
-QTVRGetPanAngle(QTVRInstance qtvr)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+QTVRGetPanAngle(QTVRInstance qtvr)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRSetTiltAngle()
+ *  QTVRSetTiltAngle()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -808,27 +815,27 @@ QTVRGetPanAngle(QTVRInstance qtvr)                            AVAILABLE_MAC_OS_X
 extern OSErr 
 QTVRSetTiltAngle(
   QTVRInstance   qtvr,
-  float          tiltAngle)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  float          tiltAngle)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRGetTiltAngle()
+ *  QTVRGetTiltAngle()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
  */
 extern float 
-QTVRGetTiltAngle(QTVRInstance qtvr)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+QTVRGetTiltAngle(QTVRInstance qtvr)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRSetFieldOfView()
+ *  QTVRSetFieldOfView()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -836,41 +843,41 @@ QTVRGetTiltAngle(QTVRInstance qtvr)                           AVAILABLE_MAC_OS_X
 extern OSErr 
 QTVRSetFieldOfView(
   QTVRInstance   qtvr,
-  float          fieldOfView)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  float          fieldOfView)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRGetFieldOfView()
+ *  QTVRGetFieldOfView()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
  */
 extern float 
-QTVRGetFieldOfView(QTVRInstance qtvr)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+QTVRGetFieldOfView(QTVRInstance qtvr)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRShowDefaultView()
+ *  QTVRShowDefaultView()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
  */
 extern OSErr 
-QTVRShowDefaultView(QTVRInstance qtvr)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+QTVRShowDefaultView(QTVRInstance qtvr)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /* Object Specific*/
 /*
- *  QTVRSetViewCenter()
+ *  QTVRSetViewCenter()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -878,14 +885,14 @@ QTVRShowDefaultView(QTVRInstance qtvr)                        AVAILABLE_MAC_OS_X
 extern OSErr 
 QTVRSetViewCenter(
   QTVRInstance            qtvr,
-  const QTVRFloatPoint *  viewCenter)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const QTVRFloatPoint *  viewCenter)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRGetViewCenter()
+ *  QTVRGetViewCenter()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -893,14 +900,14 @@ QTVRSetViewCenter(
 extern OSErr 
 QTVRGetViewCenter(
   QTVRInstance      qtvr,
-  QTVRFloatPoint *  viewCenter)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTVRFloatPoint *  viewCenter)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRNudge()
+ *  QTVRNudge()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -908,15 +915,15 @@ QTVRGetViewCenter(
 extern OSErr 
 QTVRNudge(
   QTVRInstance       qtvr,
-  QTVRNudgeControl   direction)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTVRNudgeControl   direction)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /* QTVRInteractionNudge requires QTVR 2.1 (kQTVRAPIMajorVersion02 + kQTVRAPIMinorVersion10)*/
 /*
- *  QTVRInteractionNudge()
+ *  QTVRInteractionNudge()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.1 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -924,7 +931,7 @@ QTVRNudge(
 extern OSErr 
 QTVRInteractionNudge(
   QTVRInstance       qtvr,
-  QTVRNudgeControl   direction)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTVRNudgeControl   direction)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
@@ -934,10 +941,10 @@ QTVRInteractionNudge(
 */
 
 /*
- *  QTVRGetVRWorld()
+ *  QTVRGetVRWorld()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -945,14 +952,14 @@ QTVRInteractionNudge(
 extern OSErr 
 QTVRGetVRWorld(
   QTVRInstance       qtvr,
-  QTAtomContainer *  VRWorld)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTAtomContainer *  VRWorld)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRGetNodeInfo()
+ *  QTVRGetNodeInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -961,14 +968,14 @@ extern OSErr
 QTVRGetNodeInfo(
   QTVRInstance       qtvr,
   UInt32             nodeID,
-  QTAtomContainer *  nodeInfo)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTAtomContainer *  nodeInfo)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRGoToNodeID()
+ *  QTVRGoToNodeID()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -976,27 +983,27 @@ QTVRGetNodeInfo(
 extern OSErr 
 QTVRGoToNodeID(
   QTVRInstance   qtvr,
-  UInt32         nodeID)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32         nodeID)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRGetCurrentNodeID()
+ *  QTVRGetCurrentNodeID()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
  */
 extern UInt32 
-QTVRGetCurrentNodeID(QTVRInstance qtvr)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+QTVRGetCurrentNodeID(QTVRInstance qtvr)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRGetNodeType()
+ *  QTVRGetNodeType()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -1004,7 +1011,7 @@ QTVRGetCurrentNodeID(QTVRInstance qtvr)                       AVAILABLE_MAC_OS_X
 extern OSType 
 QTVRGetNodeType(
   QTVRInstance   qtvr,
-  UInt32         nodeID)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32         nodeID)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
@@ -1014,10 +1021,10 @@ QTVRGetNodeType(
 */
 
 /*
- *  QTVRPtToHotSpotID()
+ *  QTVRPtToHotSpotID()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -1026,15 +1033,15 @@ extern OSErr
 QTVRPtToHotSpotID(
   QTVRInstance   qtvr,
   Point          pt,
-  UInt32 *       hotSpotID)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32 *       hotSpotID)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /* QTVRGetHotSpotType requires QTVR 2.1 (kQTVRAPIMajorVersion02 + kQTVRAPIMinorVersion10)*/
 /*
- *  QTVRGetHotSpotType()
+ *  QTVRGetHotSpotType()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.1 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -1043,14 +1050,14 @@ extern OSErr
 QTVRGetHotSpotType(
   QTVRInstance   qtvr,
   UInt32         hotSpotID,
-  OSType *       hotSpotType)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSType *       hotSpotType)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRTriggerHotSpot()
+ *  QTVRTriggerHotSpot()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -1060,14 +1067,14 @@ QTVRTriggerHotSpot(
   QTVRInstance      qtvr,
   UInt32            hotSpotID,
   QTAtomContainer   nodeInfo,
-  QTAtom            selectedAtom)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTAtom            selectedAtom)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRSetMouseOverHotSpotProc()
+ *  QTVRSetMouseOverHotSpotProc()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -1077,14 +1084,14 @@ QTVRSetMouseOverHotSpotProc(
   QTVRInstance              qtvr,
   QTVRMouseOverHotSpotUPP   mouseOverHotSpotProc,
   SInt32                    refCon,
-  UInt32                    flags)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32                    flags)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVREnableHotSpot()
+ *  QTVREnableHotSpot()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -1094,14 +1101,14 @@ QTVREnableHotSpot(
   QTVRInstance   qtvr,
   UInt32         enableFlag,
   UInt32         hotSpotValue,
-  Boolean        enable)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean        enable)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRGetVisibleHotSpots()
+ *  QTVRGetVisibleHotSpots()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -1109,14 +1116,14 @@ QTVREnableHotSpot(
 extern UInt32 
 QTVRGetVisibleHotSpots(
   QTVRInstance   qtvr,
-  Handle         hotSpots)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle         hotSpots)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRGetHotSpotRegion()
+ *  QTVRGetHotSpotRegion()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -1125,7 +1132,7 @@ extern OSErr
 QTVRGetHotSpotRegion(
   QTVRInstance   qtvr,
   UInt32         hotSpotID,
-  RgnHandle      hotSpotRegion)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  RgnHandle      hotSpotRegion)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
@@ -1135,10 +1142,10 @@ QTVRGetHotSpotRegion(
 */
 
 /*
- *  QTVRSetMouseOverTracking()
+ *  QTVRSetMouseOverTracking()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -1146,27 +1153,27 @@ QTVRGetHotSpotRegion(
 extern OSErr 
 QTVRSetMouseOverTracking(
   QTVRInstance   qtvr,
-  Boolean        enable)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean        enable)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRGetMouseOverTracking()
+ *  QTVRGetMouseOverTracking()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
  */
 extern Boolean 
-QTVRGetMouseOverTracking(QTVRInstance qtvr)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+QTVRGetMouseOverTracking(QTVRInstance qtvr)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRSetMouseDownTracking()
+ *  QTVRSetMouseDownTracking()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -1174,27 +1181,27 @@ QTVRGetMouseOverTracking(QTVRInstance qtvr)                   AVAILABLE_MAC_OS_X
 extern OSErr 
 QTVRSetMouseDownTracking(
   QTVRInstance   qtvr,
-  Boolean        enable)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean        enable)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRGetMouseDownTracking()
+ *  QTVRGetMouseDownTracking()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
  */
 extern Boolean 
-QTVRGetMouseDownTracking(QTVRInstance qtvr)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+QTVRGetMouseDownTracking(QTVRInstance qtvr)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRMouseEnter()
+ *  QTVRMouseEnter()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -1204,14 +1211,14 @@ QTVRMouseEnter(
   QTVRInstance   qtvr,
   Point          pt,
   UInt32 *       hotSpotID,
-  WindowRef      w)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  WindowRef      w)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRMouseWithin()
+ *  QTVRMouseWithin()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -1221,14 +1228,14 @@ QTVRMouseWithin(
   QTVRInstance   qtvr,
   Point          pt,
   UInt32 *       hotSpotID,
-  WindowRef      w)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  WindowRef      w)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRMouseLeave()
+ *  QTVRMouseLeave()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -1237,14 +1244,14 @@ extern OSErr
 QTVRMouseLeave(
   QTVRInstance   qtvr,
   Point          pt,
-  WindowRef      w)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  WindowRef      w)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRMouseDown()
+ *  QTVRMouseDown()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -1256,14 +1263,14 @@ QTVRMouseDown(
   UInt32         when,
   UInt16         modifiers,
   UInt32 *       hotSpotID,
-  WindowRef      w)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  WindowRef      w)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRMouseStillDown()
+ *  QTVRMouseStillDown()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -1273,14 +1280,14 @@ QTVRMouseStillDown(
   QTVRInstance   qtvr,
   Point          pt,
   UInt32 *       hotSpotID,
-  WindowRef      w)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  WindowRef      w)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRMouseUp()
+ *  QTVRMouseUp()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -1290,15 +1297,15 @@ QTVRMouseUp(
   QTVRInstance   qtvr,
   Point          pt,
   UInt32 *       hotSpotID,
-  WindowRef      w)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  WindowRef      w)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /* These require QTVR 2.01 (kQTVRAPIMajorVersion02 + kQTVRAPIMinorVersion01)*/
 /*
- *  QTVRMouseStillDownExtended()
+ *  QTVRMouseStillDownExtended()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0.1 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -1310,14 +1317,14 @@ QTVRMouseStillDownExtended(
   UInt32 *       hotSpotID,
   WindowRef      w,
   UInt32         when,
-  UInt16         modifiers)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt16         modifiers)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRMouseUpExtended()
+ *  QTVRMouseUpExtended()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0.1 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -1329,7 +1336,7 @@ QTVRMouseUpExtended(
   UInt32 *       hotSpotID,
   WindowRef      w,
   UInt32         when,
-  UInt16         modifiers)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt16         modifiers)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
@@ -1339,10 +1346,10 @@ QTVRMouseUpExtended(
 */
 
 /*
- *  QTVRInstallInterceptProc()
+ *  QTVRInstallInterceptProc()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -1353,14 +1360,14 @@ QTVRInstallInterceptProc(
   QTVRProcSelector   selector,
   QTVRInterceptUPP   interceptProc,
   SInt32             refCon,
-  UInt32             flags)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32             flags)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRCallInterceptedProc()
+ *  QTVRCallInterceptedProc()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -1368,7 +1375,7 @@ QTVRInstallInterceptProc(
 extern OSErr 
 QTVRCallInterceptedProc(
   QTVRInstance           qtvr,
-  QTVRInterceptRecord *  qtvrMsg)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTVRInterceptRecord *  qtvrMsg)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
@@ -1378,23 +1385,23 @@ QTVRCallInterceptedProc(
    QTVRGetCurrentMouseMode requires QTRVR 2.1 (kQTVRAPIMajorVersion02 + kQTVRAPIMinorVersion10)
 */
 /*
- *  QTVRGetCurrentMouseMode()
+ *  QTVRGetCurrentMouseMode()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.1 and later
  *    Windows:          in QTVR.lib 2.1 and later
  */
 extern UInt32 
-QTVRGetCurrentMouseMode(QTVRInstance qtvr)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+QTVRGetCurrentMouseMode(QTVRInstance qtvr)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRSetFrameRate()
+ *  QTVRSetFrameRate()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -1402,27 +1409,27 @@ QTVRGetCurrentMouseMode(QTVRInstance qtvr)                    AVAILABLE_MAC_OS_X
 extern OSErr 
 QTVRSetFrameRate(
   QTVRInstance   qtvr,
-  float          rate)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  float          rate)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRGetFrameRate()
+ *  QTVRGetFrameRate()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
  */
 extern float 
-QTVRGetFrameRate(QTVRInstance qtvr)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+QTVRGetFrameRate(QTVRInstance qtvr)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRSetViewRate()
+ *  QTVRSetViewRate()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -1430,27 +1437,27 @@ QTVRGetFrameRate(QTVRInstance qtvr)                           AVAILABLE_MAC_OS_X
 extern OSErr 
 QTVRSetViewRate(
   QTVRInstance   qtvr,
-  float          rate)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  float          rate)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRGetViewRate()
+ *  QTVRGetViewRate()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
  */
 extern float 
-QTVRGetViewRate(QTVRInstance qtvr)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+QTVRGetViewRate(QTVRInstance qtvr)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRSetViewCurrentTime()
+ *  QTVRSetViewCurrentTime()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -1458,33 +1465,33 @@ QTVRGetViewRate(QTVRInstance qtvr)                            AVAILABLE_MAC_OS_X
 extern OSErr 
 QTVRSetViewCurrentTime(
   QTVRInstance   qtvr,
-  TimeValue      time)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TimeValue      time)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRGetViewCurrentTime()
+ *  QTVRGetViewCurrentTime()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
  */
 extern TimeValue 
-QTVRGetViewCurrentTime(QTVRInstance qtvr)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+QTVRGetViewCurrentTime(QTVRInstance qtvr)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRGetCurrentViewDuration()
+ *  QTVRGetCurrentViewDuration()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
  */
 extern TimeValue 
-QTVRGetCurrentViewDuration(QTVRInstance qtvr)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+QTVRGetCurrentViewDuration(QTVRInstance qtvr)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
@@ -1494,10 +1501,10 @@ QTVRGetCurrentViewDuration(QTVRInstance qtvr)                 AVAILABLE_MAC_OS_X
 */
 
 /*
- *  QTVRSetViewState()
+ *  QTVRSetViewState()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -1506,14 +1513,14 @@ extern OSErr
 QTVRSetViewState(
   QTVRInstance        qtvr,
   QTVRViewStateType   viewStateType,
-  UInt16              state)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt16              state)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRGetViewState()
+ *  QTVRGetViewState()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -1522,27 +1529,27 @@ extern OSErr
 QTVRGetViewState(
   QTVRInstance        qtvr,
   QTVRViewStateType   viewStateType,
-  UInt16 *            state)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt16 *            state)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRGetViewStateCount()
+ *  QTVRGetViewStateCount()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
  */
 extern UInt16 
-QTVRGetViewStateCount(QTVRInstance qtvr)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+QTVRGetViewStateCount(QTVRInstance qtvr)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRSetAnimationSetting()
+ *  QTVRSetAnimationSetting()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -1551,14 +1558,14 @@ extern OSErr
 QTVRSetAnimationSetting(
   QTVRInstance                 qtvr,
   QTVRObjectAnimationSetting   setting,
-  Boolean                      enable)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean                      enable)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRGetAnimationSetting()
+ *  QTVRGetAnimationSetting()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -1567,14 +1574,14 @@ extern OSErr
 QTVRGetAnimationSetting(
   QTVRInstance                 qtvr,
   QTVRObjectAnimationSetting   setting,
-  Boolean *                    enable)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *                    enable)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRSetControlSetting()
+ *  QTVRSetControlSetting()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -1583,14 +1590,14 @@ extern OSErr
 QTVRSetControlSetting(
   QTVRInstance         qtvr,
   QTVRControlSetting   setting,
-  Boolean              enable)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean              enable)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRGetControlSetting()
+ *  QTVRGetControlSetting()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -1599,14 +1606,14 @@ extern OSErr
 QTVRGetControlSetting(
   QTVRInstance         qtvr,
   QTVRControlSetting   setting,
-  Boolean *            enable)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *            enable)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVREnableFrameAnimation()
+ *  QTVREnableFrameAnimation()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -1614,27 +1621,27 @@ QTVRGetControlSetting(
 extern OSErr 
 QTVREnableFrameAnimation(
   QTVRInstance   qtvr,
-  Boolean        enable)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean        enable)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRGetFrameAnimation()
+ *  QTVRGetFrameAnimation()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
  */
 extern Boolean 
-QTVRGetFrameAnimation(QTVRInstance qtvr)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+QTVRGetFrameAnimation(QTVRInstance qtvr)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVREnableViewAnimation()
+ *  QTVREnableViewAnimation()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -1642,20 +1649,20 @@ QTVRGetFrameAnimation(QTVRInstance qtvr)                      AVAILABLE_MAC_OS_X
 extern OSErr 
 QTVREnableViewAnimation(
   QTVRInstance   qtvr,
-  Boolean        enable)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean        enable)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRGetViewAnimation()
+ *  QTVRGetViewAnimation()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
  */
 extern Boolean 
-QTVRGetViewAnimation(QTVRInstance qtvr)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+QTVRGetViewAnimation(QTVRInstance qtvr)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 
@@ -1666,10 +1673,10 @@ QTVRGetViewAnimation(QTVRInstance qtvr)                       AVAILABLE_MAC_OS_X
 */
 
 /*
- *  QTVRSetVisible()
+ *  QTVRSetVisible()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -1677,27 +1684,27 @@ QTVRGetViewAnimation(QTVRInstance qtvr)                       AVAILABLE_MAC_OS_X
 extern OSErr 
 QTVRSetVisible(
   QTVRInstance   qtvr,
-  Boolean        visible)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean        visible)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRGetVisible()
+ *  QTVRGetVisible()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
  */
 extern Boolean 
-QTVRGetVisible(QTVRInstance qtvr)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+QTVRGetVisible(QTVRInstance qtvr)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRSetImagingProperty()
+ *  QTVRSetImagingProperty()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -1707,14 +1714,14 @@ QTVRSetImagingProperty(
   QTVRInstance      qtvr,
   QTVRImagingMode   imagingMode,
   UInt32            imagingProperty,
-  SInt32            propertyValue)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32            propertyValue)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRGetImagingProperty()
+ *  QTVRGetImagingProperty()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -1724,14 +1731,14 @@ QTVRGetImagingProperty(
   QTVRInstance      qtvr,
   QTVRImagingMode   imagingMode,
   UInt32            imagingProperty,
-  SInt32 *          propertyValue)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32 *          propertyValue)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRUpdate()
+ *  QTVRUpdate()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -1739,14 +1746,14 @@ QTVRGetImagingProperty(
 extern OSErr 
 QTVRUpdate(
   QTVRInstance      qtvr,
-  QTVRImagingMode   imagingMode)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTVRImagingMode   imagingMode)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRBeginUpdateStream()
+ *  QTVRBeginUpdateStream()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -1754,27 +1761,27 @@ QTVRUpdate(
 extern OSErr 
 QTVRBeginUpdateStream(
   QTVRInstance      qtvr,
-  QTVRImagingMode   imagingMode)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTVRImagingMode   imagingMode)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVREndUpdateStream()
+ *  QTVREndUpdateStream()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
  */
 extern OSErr 
-QTVREndUpdateStream(QTVRInstance qtvr)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+QTVREndUpdateStream(QTVRInstance qtvr)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRSetTransitionProperty()
+ *  QTVRSetTransitionProperty()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -1784,14 +1791,14 @@ QTVRSetTransitionProperty(
   QTVRInstance   qtvr,
   UInt32         transitionType,
   UInt32         transitionProperty,
-  SInt32         transitionValue)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32         transitionValue)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVREnableTransition()
+ *  QTVREnableTransition()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -1800,7 +1807,7 @@ extern OSErr
 QTVREnableTransition(
   QTVRInstance   qtvr,
   UInt32         transitionType,
-  Boolean        enable)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean        enable)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
@@ -1810,10 +1817,10 @@ QTVREnableTransition(
 */
 
 /*
- *  QTVRSetAngularUnits()
+ *  QTVRSetAngularUnits()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -1821,28 +1828,28 @@ QTVREnableTransition(
 extern OSErr 
 QTVRSetAngularUnits(
   QTVRInstance       qtvr,
-  QTVRAngularUnits   units)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTVRAngularUnits   units)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRGetAngularUnits()
+ *  QTVRGetAngularUnits()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
  */
 extern QTVRAngularUnits 
-QTVRGetAngularUnits(QTVRInstance qtvr)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+QTVRGetAngularUnits(QTVRInstance qtvr)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /* Pano specific routines*/
 /*
- *  QTVRPtToAngles()
+ *  QTVRPtToAngles()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -1852,14 +1859,14 @@ QTVRPtToAngles(
   QTVRInstance   qtvr,
   Point          pt,
   float *        panAngle,
-  float *        tiltAngle)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  float *        tiltAngle)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRCoordToAngles()
+ *  QTVRCoordToAngles()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -1869,14 +1876,14 @@ QTVRCoordToAngles(
   QTVRInstance      qtvr,
   QTVRFloatPoint *  coord,
   float *           panAngle,
-  float *           tiltAngle)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  float *           tiltAngle)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRAnglesToCoord()
+ *  QTVRAnglesToCoord()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -1886,15 +1893,15 @@ QTVRAnglesToCoord(
   QTVRInstance      qtvr,
   float             panAngle,
   float             tiltAngle,
-  QTVRFloatPoint *  coord)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTVRFloatPoint *  coord)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /* Object specific routines*/
 /*
- *  QTVRPanToColumn()
+ *  QTVRPanToColumn()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -1902,15 +1909,15 @@ QTVRAnglesToCoord(
 extern short 
 QTVRPanToColumn(
   QTVRInstance   qtvr,
-  float          panAngle)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  float          panAngle)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /* zero based   */
 /*
- *  QTVRColumnToPan()
+ *  QTVRColumnToPan()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -1918,15 +1925,15 @@ QTVRPanToColumn(
 extern float 
 QTVRColumnToPan(
   QTVRInstance   qtvr,
-  short          column)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short          column)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /* zero based   */
 /*
- *  QTVRTiltToRow()
+ *  QTVRTiltToRow()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -1934,15 +1941,15 @@ QTVRColumnToPan(
 extern short 
 QTVRTiltToRow(
   QTVRInstance   qtvr,
-  float          tiltAngle)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  float          tiltAngle)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /* zero based   */
 /*
- *  QTVRRowToTilt()
+ *  QTVRRowToTilt()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -1950,15 +1957,15 @@ QTVRTiltToRow(
 extern float 
 QTVRRowToTilt(
   QTVRInstance   qtvr,
-  short          row)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short          row)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /* zero based               */
 /*
- *  QTVRWrapAndConstrain()
+ *  QTVRWrapAndConstrain()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -1968,7 +1975,7 @@ QTVRWrapAndConstrain(
   QTVRInstance   qtvr,
   short          kind,
   float          value,
-  float *        result)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  float *        result)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 
@@ -1979,10 +1986,10 @@ QTVRWrapAndConstrain(
 */
 
 /*
- *  QTVRSetEnteringNodeProc()
+ *  QTVRSetEnteringNodeProc()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -1992,14 +1999,14 @@ QTVRSetEnteringNodeProc(
   QTVRInstance          qtvr,
   QTVREnteringNodeUPP   enteringNodeProc,
   SInt32                refCon,
-  UInt32                flags)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32                flags)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRSetLeavingNodeProc()
+ *  QTVRSetLeavingNodeProc()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -2009,14 +2016,14 @@ QTVRSetLeavingNodeProc(
   QTVRInstance         qtvr,
   QTVRLeavingNodeUPP   leavingNodeProc,
   SInt32               refCon,
-  UInt32               flags)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32               flags)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRSetInteractionProperty()
+ *  QTVRSetInteractionProperty()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -2025,14 +2032,14 @@ extern OSErr
 QTVRSetInteractionProperty(
   QTVRInstance   qtvr,
   UInt32         property,
-  void *         value)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *         value)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRGetInteractionProperty()
+ *  QTVRGetInteractionProperty()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -2041,14 +2048,14 @@ extern OSErr
 QTVRGetInteractionProperty(
   QTVRInstance   qtvr,
   UInt32         property,
-  void *         value)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *         value)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRReplaceCursor()
+ *  QTVRReplaceCursor()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -2056,7 +2063,7 @@ QTVRGetInteractionProperty(
 extern OSErr 
 QTVRReplaceCursor(
   QTVRInstance        qtvr,
-  QTVRCursorRecord *  cursRecord)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTVRCursorRecord *  cursRecord)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
@@ -2066,10 +2073,10 @@ QTVRReplaceCursor(
 */
 
 /*
- *  QTVRGetViewingLimits()
+ *  QTVRGetViewingLimits()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -2079,27 +2086,27 @@ QTVRGetViewingLimits(
   QTVRInstance   qtvr,
   UInt16         kind,
   float *        minValue,
-  float *        maxValue)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  float *        maxValue)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRGetConstraintStatus()
+ *  QTVRGetConstraintStatus()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
  */
 extern UInt32 
-QTVRGetConstraintStatus(QTVRInstance qtvr)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+QTVRGetConstraintStatus(QTVRInstance qtvr)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRGetConstraints()
+ *  QTVRGetConstraints()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -2109,14 +2116,14 @@ QTVRGetConstraints(
   QTVRInstance   qtvr,
   UInt16         kind,
   float *        minValue,
-  float *        maxValue)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  float *        maxValue)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRSetConstraints()
+ *  QTVRSetConstraints()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -2126,7 +2133,7 @@ QTVRSetConstraints(
   QTVRInstance   qtvr,
   UInt16         kind,
   float          minValue,
-  float          maxValue)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  float          maxValue)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 
@@ -2137,10 +2144,10 @@ QTVRSetConstraints(
 */
 
 /*
- *  QTVRGetAvailableResolutions()
+ *  QTVRGetAvailableResolutions()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -2148,15 +2155,15 @@ QTVRSetConstraints(
 extern OSErr 
 QTVRGetAvailableResolutions(
   QTVRInstance   qtvr,
-  UInt16 *       resolutionsMask)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt16 *       resolutionsMask)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /* These require QTVR 2.1 (kQTVRAPIMajorVersion02 + kQTVRAPIMinorVersion10)*/
 /*
- *  QTVRGetBackBufferMemInfo()
+ *  QTVRGetBackBufferMemInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.1 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -2169,14 +2176,14 @@ QTVRGetBackBufferMemInfo(
   UInt32         cachePixelFormat,
   SInt32 *       minCacheBytes,
   SInt32 *       suggestedCacheBytes,
-  SInt32 *       fullCacheBytes)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32 *       fullCacheBytes)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRGetBackBufferSettings()
+ *  QTVRGetBackBufferSettings()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.1 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -2187,14 +2194,14 @@ QTVRGetBackBufferSettings(
   UInt32 *       geometry,
   UInt16 *       resolution,
   UInt32 *       cachePixelFormat,
-  SInt16 *       cacheSize)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt16 *       cacheSize)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRSetBackBufferPrefs()
+ *  QTVRSetBackBufferPrefs()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.1 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -2205,7 +2212,7 @@ QTVRSetBackBufferPrefs(
   UInt32         geometry,
   UInt16         resolution,
   UInt32         cachePixelFormat,
-  SInt16         cacheSize)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt16         cacheSize)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
@@ -2215,10 +2222,10 @@ QTVRSetBackBufferPrefs(
 */
 
 /*
- *  QTVRSetPrescreenImagingCompleteProc()
+ *  QTVRSetPrescreenImagingCompleteProc()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -2228,14 +2235,14 @@ QTVRSetPrescreenImagingCompleteProc(
   QTVRInstance             qtvr,
   QTVRImagingCompleteUPP   imagingCompleteProc,
   SInt32                   refCon,
-  UInt32                   flags)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32                   flags)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRSetBackBufferImagingProc()
+ *  QTVRSetBackBufferImagingProc()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -2246,14 +2253,14 @@ QTVRSetBackBufferImagingProc(
   QTVRBackBufferImagingUPP   backBufferImagingProc,
   UInt16                     numAreas,
   QTVRAreaOfInterest         areasOfInterest[],
-  SInt32                     refCon)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32                     refCon)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVRRefreshBackBuffer()
+ *  QTVRRefreshBackBuffer()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeVRLib 2.0 and later
  *    Windows:          in QTVR.lib 2.1 and later
@@ -2261,7 +2268,7 @@ QTVRSetBackBufferImagingProc(
 extern OSErr 
 QTVRRefreshBackBuffer(
   QTVRInstance   qtvr,
-  UInt32         flags)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32         flags)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 

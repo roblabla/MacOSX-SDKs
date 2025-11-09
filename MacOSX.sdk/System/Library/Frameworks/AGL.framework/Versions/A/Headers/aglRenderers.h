@@ -39,7 +39,7 @@
 #define AGL_RENDERER_INTEL_X3100_ID         0x00024200
 #define AGL_RENDERER_MESA_3DFX_ID           0x00040000
 
-/* depreciated for Mac OS X, use above instead for specific renderer*/
+/* deprecated for Mac OS X, use above instead for specific renderer*/
 /* AGL_RENDERER_ATI_ID    */ 
 /* AGL_RENDERER_NVIDIA_ID */
 /* AGL_RENDERER_FORMAC_ID */

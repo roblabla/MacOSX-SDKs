@@ -22,8 +22,17 @@
 #define __LATENTSEMANTICMAPPING__
 
 #include <CoreFoundation/CoreFoundation.h>
-#include <CoreServices/CoreServices.h>
+#if TARGET_OS_EMBEDDED || TARGET_IPHONE_SIMULATOR
+#define __DRIVERSERVICES__
+#define __FP__
+#define __MACHINEEXCEPTIONS__
+#define __HFSVOLUMES__
+#define __OSSERVICES__
+#define __WEBSERVICESCORE__
+#else
 #include <Carbon/Carbon.h>
+#endif
+
 #include <stdio.h>
 #include <stdint.h>
 
@@ -132,23 +141,24 @@ void LSMMapSetProperties(LSMMapRef mapref, CFDictionaryRef properties);
  */
 CFDictionaryRef LSMMapGetProperties(LSMMapRef mapref);
 
-/*!	@enum LSM Map properties
- * 	@discussion A CFDictionary of arbitrary properties may be associated.
- *				with an LSM map. The following keys currently
- *			   	are interpreted by LSM, and all other keys starting with LSM...
- *			   	are reserved.
- * @constant kLSMAlgorithmKey 	Algorithm to be used
- * @constant    kLSMAlgorithmDense	Perform an SVD on a dense matrix
- * @constant	kLSMAlgorithmSparse	Perform an SVD on a sparse matrix
- * @constant 	kLSMAlgorithmAuto	Pick appropriate algorithm (default)
- * @constant kLSMPrecisionKey	Precision to be used
- * @constant    kLSMPrecisionSingle	Use float arithmetic (default for dense)
- * @constant    kLSMPrecisionDouble	Use double arithmetic (default for sparse)
- * @constant kLSMDimensionKey	Number of singular values to compute (numeric)
- * @constant kLSMIterationsKey	Number of iterations to compute (numeric)
- * @constant kLSMSweepAgeKey	Number of days between sweeping generations 
- * @constant kLSMSweepCutoffKey	Minimum count to keep entry (numeric)
+/*! @defineblock LSM Map properties
+ *  @discussion A CFDictionary of arbitrary properties may be associated.
+ *                              with an LSM map. The following keys currently
+ *                              are interpreted by LSM, and all other keys starting with LSM...
+ *                              are reserved.
+ * @define kLSMAlgorithmKey   Algorithm to be used
+ * @define kLSMAlgorithmDense      Perform an SVD on a dense matrix
+ * @define kLSMAlgorithmSparse     Perform an SVD on a sparse matrix
+ * @define kLSMAlgorithmAuto       Pick appropriate algorithm (default)
+ * @define kLSMPrecisionKey   Precision to be used
+ * @define kLSMPrecisionSingle     Use float arithmetic (default for dense)
+ * @define kLSMPrecisionDouble     Use double arithmetic (default for sparse)
+ * @define kLSMDimensionKey   Number of singular values to compute (numeric)
+ * @define kLSMIterationsKey  Number of iterations to compute (numeric)
+ * @define kLSMSweepAgeKey    Number of days between sweeping generations
+ * @define kLSMSweepCutoffKey Minimum count to keep entry (numeric)
  */
+    
 #define	kLSMAlgorithmKey	CFSTR("LSMAlgorithm")
 #define kLSMAlgorithmDense	CFSTR("LSMAlgorithmDense")
 #define kLSMAlgorithmSparse	CFSTR("LSMAlgorithmSparse")
@@ -162,6 +172,8 @@ CFDictionaryRef LSMMapGetProperties(LSMMapRef mapref);
 
 #define kLSMSweepAgeKey		CFSTR("LSMSweepAge")
 #define kLSMSweepCutoffKey	CFSTR("LSMSweepCutoff")
+
+/*! @/defineblock */
 
 /*! @function LSMMapStartTraining
  *

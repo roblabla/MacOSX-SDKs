@@ -6,7 +6,7 @@
 #                            | (__| |_| |  _ <| |___
 #                             \___|\___/|_| \_\_____|
 #
-# Copyright (C) 2001 - 2011, Daniel Stenberg, <daniel@haxx.se>, et al.
+# Copyright (C) 2001 - 2012, Daniel Stenberg, <daniel@haxx.se>, et al.
 #
 # This software is licensed as described in the file COPYING, which
 # you should have received as part of this distribution. The terms
@@ -24,6 +24,7 @@
 prefix=/usr
 exec_prefix=/usr
 includedir=/usr/include
+cppflag_curl_staticlib=
 
 usage()
 {
@@ -70,83 +71,83 @@ while test $# -gt 0; do
         ;;
 
     --ca)
-	echo ""
-	;;
+        echo ""
+        ;;
 
     --cc)
-	echo "cc"
-	;;
+        echo "cc"
+        ;;
 
     --prefix)
-	echo "$prefix"
-	;;
+        echo "$prefix"
+        ;;
 
     --feature|--features)
         for feature in SSL IPv6 libz AsynchDNS NTLM NTLM_WB ""; do
             test -n "$feature" && echo "$feature"
         done
-	;;
+        ;;
 
     --protocols)
         for protocol in DICT FILE FTP FTPS GOPHER HTTP HTTPS IMAP IMAPS LDAP LDAPS POP3 POP3S RTSP SMTP SMTPS TELNET TFTP; do
             echo "$protocol"
         done
-	;;
+        ;;
 
     --version)
-	echo libcurl 7.24.0
-	exit 0
-	;;
+        echo libcurl 7.30.0
+        exit 0
+        ;;
 
     --checkfor)
         checkfor=$2
         cmajor=`echo $checkfor | cut -d. -f1`
         cminor=`echo $checkfor | cut -d. -f2`
         # when extracting the patch part we strip off everything after a
-	# dash as that's used for things like version 1.2.3-CVS
-	cpatch=`echo $checkfor | cut -d. -f3 | cut -d- -f1`
+        # dash as that's used for things like version 1.2.3-CVS
+        cpatch=`echo $checkfor | cut -d. -f3 | cut -d- -f1`
         checknum=`echo "$cmajor*256*256 + $cminor*256 + ${cpatch:-0}" | bc`
-        numuppercase=`echo 071800 | tr 'a-f' 'A-F'`
+        numuppercase=`echo 071e00 | tr 'a-f' 'A-F'`
         nownum=`echo "obase=10; ibase=16; $numuppercase" | bc`
 
-	if test "$nownum" -ge "$checknum"; then
-	  # silent success
-	  exit 0
-	else
-	  echo "requested version $checkfor is newer than existing 7.24.0"
-	  exit 1
-	fi
-	;;
+        if test "$nownum" -ge "$checknum"; then
+          # silent success
+          exit 0
+        else
+          echo "requested version $checkfor is newer than existing 7.30.0"
+          exit 1
+        fi
+        ;;
 
     --vernum)
-	echo 071800
-	exit 0
-	;;
+        echo 071e00
+        exit 0
+        ;;
 
     --help)
-	usage 0
-	;;
+        usage 0
+        ;;
 
     --cflags)
-       	echo ""
-       	;;
+        echo ""
+        ;;
 
     --libs)
-	echo -lcurl
-	;;
+        echo -lcurl
+        ;;
 
     --static-libs)
-	echo ""
-	;;
+        echo ""
+        ;;
 
     --configure)
-      echo --disable-static --enable-hidden-symbols --enable-threaded-resolver --with-gssapi
-    ;;
+        echo --disable-static --enable-hidden-symbols --enable-threaded-resolver --with-gssapi --with-darwinssl --without-libssh2
+        ;;
 
     *)
         echo "unknown option: $1"
-	usage 1
-	;;
+        usage 1
+        ;;
     esac
     shift
 done

@@ -1,7 +1,7 @@
 /*
     NSCollectionView.h
     Application Kit
-    Copyright (c) 2005-2012, Apple Inc.
+    Copyright (c) 2005-2013, Apple Inc.
     All rights reserved.
  */
 
@@ -69,7 +69,8 @@ NS_CLASS_AVAILABLE(10_5, NA)
         unsigned int canDisplayItems:1;
         unsigned int animateForDrag:1;
         unsigned int unarchiving:1;
-        unsigned int reserved:19;
+        unsigned int observingScroll:1;
+        unsigned int reserved:18;
     } _cvFlags;
     id _delegate;
     NSMutableArray *_backgroundLayers;

@@ -1,11 +1,24 @@
 /*	NSDateFormatter.h
-	Copyright (c) 1995-2012, Apple Inc. All rights reserved.
+	Copyright (c) 1995-2013, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSFormatter.h>
 #include <CoreFoundation/CFDateFormatter.h>
 
 @class NSLocale, NSDate, NSCalendar, NSTimeZone, NSError, NSArray, NSMutableDictionary;
+
+#if !defined(NS_CALENDAR_ENUM_DEPRECATED)
+#if NS_ENABLE_CALENDAR_DEPRECATIONS
+#define NS_CALENDAR_ENUM_DEPRECATED(A, B, C, D, ...) NS_ENUM_DEPRECATED(A, B, C, D, __VA_ARGS__)
+#define NS_CALENDAR_DEPRECATED(A, B, C, D, ...) NS_DEPRECATED(A, B, C, D, __VA_ARGS__)
+#define NS_CALENDAR_DEPRECATED_MAC(A, B, ...) NS_DEPRECATED_MAC(A, B, __VA_ARGS__)
+#else
+#define NS_CALENDAR_ENUM_DEPRECATED(A, B, C, D, ...) NS_ENUM_AVAILABLE(A, C)
+#define NS_CALENDAR_DEPRECATED(A, B, C, D, ...) NS_AVAILABLE(A, C)
+#define NS_CALENDAR_DEPRECATED_MAC(A, B, ...) NS_AVAILABLE_MAC(A)
+#endif
+#endif
+
 
 @interface NSDateFormatter : NSFormatter {
 @private
@@ -158,8 +171,8 @@ typedef NS_ENUM(NSUInteger, NSDateFormatterBehavior) {
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
 @interface NSDateFormatter (NSDateFormatterCompatibility)
 
-- (id)initWithDateFormat:(NSString *)format allowNaturalLanguage:(BOOL)flag;
-- (BOOL)allowsNaturalLanguage;
+- (id)initWithDateFormat:(NSString *)format allowNaturalLanguage:(BOOL)flag NS_CALENDAR_DEPRECATED_MAC(10_4, 10_9, "Use -setDateFormat: as of OS X 10.9 to set the date format of a 10.0-style date formatter; but expect 10.0-style date formatting to be deprecated in the future as well");
+- (BOOL)allowsNaturalLanguage NS_CALENDAR_DEPRECATED_MAC(10_4, 10_9, "Use -setDateFormat: as of OS X 10.9 to set the date format of a 10.0-style date formatter; but expect 10.0-style date formatting to be deprecated in the future as well");
 
 @end
 #endif

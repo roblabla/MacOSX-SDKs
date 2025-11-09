@@ -35,5 +35,10 @@ FOUNDATION_EXPORT NSString *const ODFrameworkErrorDomain NS_AVAILABLE(10_6, NA);
 #import <OpenDirectory/ODRecord.h>
 #import <OpenDirectory/ODNode.h>
 #import <OpenDirectory/ODQuery.h>
+#import <OpenDirectory/ODConfiguration.h>
+#import <OpenDirectory/ODMappings.h>
+#import <OpenDirectory/ODRecordMap.h>
+#import <OpenDirectory/ODAttributeMap.h>
+#import <OpenDirectory/ODModuleEntry.h>
 
 #endif /* __OBJC__ */

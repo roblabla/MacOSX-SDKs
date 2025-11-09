@@ -3,7 +3,7 @@
  
      Contains:   QuickTime Interfaces.
  
-     Version:    QuickTime 7.7.1
+     Version:    QuickTime 7.7.3
  
      Copyright:  © 1990-2012 by Apple Inc., all rights reserved
  
@@ -11,8 +11,15 @@
                  the World Wide Web:
  
                      http://developer.apple.com/bugreporter/
- 
 */
+
+/*
+  QuickTime has been deprecated in 10.9.
+
+  AVFoundation and AVKit are the frameworks recommended for all new development 
+  involving time-based audiovisual media on OS X.
+*/
+
 #ifndef __QTSTREAMINGCOMPONENTS__
 #define __QTSTREAMINGCOMPONENTS__
 
@@ -80,10 +87,10 @@ struct QTSSourcerInitParams {
 };
 typedef struct QTSSourcerInitParams     QTSSourcerInitParams;
 /*
- *  QTSNewSourcer()
+ *  QTSNewSourcer()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QTStreamLib 5.0 and later
  */
@@ -92,7 +99,7 @@ QTSNewSourcer(
   void *                        params,
   const QTSSourcerInitParams *  inInitParams,
   SInt32                        inFlags,
-  ComponentInstance *           outSourcer)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ComponentInstance *           outSourcer)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /* info selectors for sourcers - get and set */
@@ -281,24 +288,24 @@ enum {
     Stream Sourcer Prototypes
 -----------------------------------------*/
 /*
- *  QTSSourcerInitialize()
+ *  QTSSourcerInitialize()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.1 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   in QTStreamLib 5.0.1 and later
  */
 extern ComponentResult 
 QTSSourcerInitialize(
   QTSSourcer                    inSourcer,
-  const QTSSourcerInitParams *  inInitParams)                 AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  const QTSSourcerInitParams *  inInitParams)                 AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSSourcerIdle()
+ *  QTSSourcerIdle()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QTStreamLib 5.0 and later
  */
@@ -307,14 +314,14 @@ QTSSourcerIdle(
   QTSSourcer           inSourcer,
   const TimeValue64 *  inTime,
   SInt32               inFlags,
-  SInt32 *             outFlags)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32 *             outFlags)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSSourcerSetEnable()
+ *  QTSSourcerSetEnable()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QTStreamLib 5.0 and later
  */
@@ -322,14 +329,14 @@ extern ComponentResult
 QTSSourcerSetEnable(
   QTSSourcer   inSourcer,
   Boolean      inEnableMode,
-  SInt32       inFlags)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32       inFlags)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSSourcerGetEnable()
+ *  QTSSourcerGetEnable()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QTStreamLib 5.0 and later
  */
@@ -337,42 +344,42 @@ extern ComponentResult
 QTSSourcerGetEnable(
   QTSSourcer   inSourcer,
   Boolean *    outEnableMode,
-  SInt32       inFlags)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32       inFlags)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSSourcerSetTimeScale()
+ *  QTSSourcerSetTimeScale()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QTStreamLib 5.0 and later
  */
 extern ComponentResult 
 QTSSourcerSetTimeScale(
   QTSSourcer   inSourcer,
-  TimeScale    inTimeScale)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TimeScale    inTimeScale)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSSourcerGetTimeScale()
+ *  QTSSourcerGetTimeScale()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QTStreamLib 5.0 and later
  */
 extern ComponentResult 
 QTSSourcerGetTimeScale(
   QTSSourcer   inSourcer,
-  TimeScale *  outTimeScale)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TimeScale *  outTimeScale)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSSourcerSetInfo()
+ *  QTSSourcerSetInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QTStreamLib 5.0 and later
  */
@@ -380,14 +387,14 @@ extern ComponentResult
 QTSSourcerSetInfo(
   QTSSourcer   inSourcer,
   OSType       inSelector,
-  void *       ioParams)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *       ioParams)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSSourcerGetInfo()
+ *  QTSSourcerGetInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QTStreamLib 5.0 and later
  */
@@ -395,7 +402,7 @@ extern ComponentResult
 QTSSourcerGetInfo(
   QTSSourcer   inSourcer,
   OSType       inSelector,
-  void *       ioParams)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *       ioParams)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 
@@ -739,10 +746,10 @@ enum {
 
 
 /*
- *  QTSFindReassemblerForPayloadID()
+ *  QTSFindReassemblerForPayloadID()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -751,14 +758,14 @@ extern OSErr
 QTSFindReassemblerForPayloadID(
   UInt8                    inPayloadID,
   RTPPayloadSortRequest *  inSortInfo,
-  QTAtomContainer *        outReassemblerList)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTAtomContainer *        outReassemblerList)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSFindReassemblerForPayloadName()
+ *  QTSFindReassemblerForPayloadName()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -767,7 +774,7 @@ extern OSErr
 QTSFindReassemblerForPayloadName(
   const char *             inPayloadName,
   RTPPayloadSortRequest *  inSortInfo,
-  QTAtomContainer *        outReassemblerList)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTAtomContainer *        outReassemblerList)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*-----------------------------------------
@@ -813,10 +820,10 @@ enum {
 -----------------------------------------*/
 
 /*
- *  RTPRssmInitialize()
+ *  RTPRssmInitialize()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -824,14 +831,14 @@ enum {
 extern ComponentResult 
 RTPRssmInitialize(
   RTPReassembler       rtpr,
-  RTPRssmInitParams *  inInitParams)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  RTPRssmInitParams *  inInitParams)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPRssmHandleNewPacket()
+ *  RTPRssmHandleNewPacket()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -840,14 +847,14 @@ extern ComponentResult
 RTPRssmHandleNewPacket(
   RTPReassembler     rtpr,
   QTSStreamBuffer *  inStreamBuffer,
-  SInt32             inNumWraparounds)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32             inNumWraparounds)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPRssmComputeChunkSize()
+ *  RTPRssmComputeChunkSize()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -857,14 +864,14 @@ RTPRssmComputeChunkSize(
   RTPReassembler   rtpr,
   RTPRssmPacket *  inPacketListHead,
   SInt32           inFlags,
-  UInt32 *         outChunkDataSize)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32 *         outChunkDataSize)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPRssmAdjustPacketParams()
+ *  RTPRssmAdjustPacketParams()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -873,14 +880,14 @@ extern ComponentResult
 RTPRssmAdjustPacketParams(
   RTPReassembler   rtpr,
   RTPRssmPacket *  inPacket,
-  SInt32           inFlags)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32           inFlags)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPRssmCopyDataToChunk()
+ *  RTPRssmCopyDataToChunk()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -891,14 +898,14 @@ RTPRssmCopyDataToChunk(
   RTPRssmPacket *  inPacketListHead,
   UInt32           inMaxChunkDataSize,
   SHChunkRecord *  inChunk,
-  SInt32           inFlags)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32           inFlags)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPRssmSendPacketList()
+ *  RTPRssmSendPacketList()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -908,14 +915,14 @@ RTPRssmSendPacketList(
   RTPReassembler       rtpr,
   RTPRssmPacket *      inPacketListHead,
   const TimeValue64 *  inLastChunkPresentationTime,
-  SInt32               inFlags)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32               inFlags)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPRssmGetTimeScaleFromPacket()
+ *  RTPRssmGetTimeScaleFromPacket()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -924,14 +931,14 @@ extern ComponentResult
 RTPRssmGetTimeScaleFromPacket(
   RTPReassembler     rtpr,
   QTSStreamBuffer *  inStreamBuffer,
-  TimeScale *        outTimeScale)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TimeScale *        outTimeScale)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPRssmSetInfo()
+ *  RTPRssmSetInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -940,14 +947,14 @@ extern ComponentResult
 RTPRssmSetInfo(
   RTPReassembler   rtpr,
   OSType           inSelector,
-  void *           ioParams)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *           ioParams)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPRssmGetInfo()
+ *  RTPRssmGetInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -956,14 +963,14 @@ extern ComponentResult
 RTPRssmGetInfo(
   RTPReassembler   rtpr,
   OSType           inSelector,
-  void *           ioParams)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *           ioParams)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPRssmHasCharacteristic()
+ *  RTPRssmHasCharacteristic()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -972,14 +979,14 @@ extern ComponentResult
 RTPRssmHasCharacteristic(
   RTPReassembler   rtpr,
   OSType           inCharacteristic,
-  Boolean *        outHasIt)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *        outHasIt)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPRssmReset()
+ *  RTPRssmReset()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -987,7 +994,7 @@ RTPRssmHasCharacteristic(
 extern ComponentResult 
 RTPRssmReset(
   RTPReassembler   rtpr,
-  SInt32           inFlags)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32           inFlags)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*-----------------------------------------
@@ -995,10 +1002,10 @@ RTPRssmReset(
 -----------------------------------------*/
 /* ----- setup*/
 /*
- *  RTPRssmSetCapabilities()
+ *  RTPRssmSetCapabilities()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1007,14 +1014,14 @@ extern ComponentResult
 RTPRssmSetCapabilities(
   RTPReassembler   rtpr,
   SInt32           inFlags,
-  SInt32           inFlagsMask)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32           inFlagsMask)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPRssmGetCapabilities()
+ *  RTPRssmGetCapabilities()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1022,14 +1029,14 @@ RTPRssmSetCapabilities(
 extern ComponentResult 
 RTPRssmGetCapabilities(
   RTPReassembler   rtpr,
-  SInt32 *         outFlags)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32 *         outFlags)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPRssmSetPayloadHeaderLength()
+ *  RTPRssmSetPayloadHeaderLength()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1037,14 +1044,14 @@ RTPRssmGetCapabilities(
 extern ComponentResult 
 RTPRssmSetPayloadHeaderLength(
   RTPReassembler   rtpr,
-  UInt32           inPayloadHeaderLength)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32           inPayloadHeaderLength)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPRssmGetPayloadHeaderLength()
+ *  RTPRssmGetPayloadHeaderLength()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1052,14 +1059,14 @@ RTPRssmSetPayloadHeaderLength(
 extern ComponentResult 
 RTPRssmGetPayloadHeaderLength(
   RTPReassembler   rtpr,
-  UInt32 *         outPayloadHeaderLength)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32 *         outPayloadHeaderLength)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPRssmSetTimeScale()
+ *  RTPRssmSetTimeScale()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1067,14 +1074,14 @@ RTPRssmGetPayloadHeaderLength(
 extern ComponentResult 
 RTPRssmSetTimeScale(
   RTPReassembler   rtpr,
-  TimeScale        inSHTimeScale)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TimeScale        inSHTimeScale)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPRssmGetTimeScale()
+ *  RTPRssmGetTimeScale()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1082,14 +1089,14 @@ RTPRssmSetTimeScale(
 extern ComponentResult 
 RTPRssmGetTimeScale(
   RTPReassembler   rtpr,
-  TimeScale *      outSHTimeScale)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TimeScale *      outSHTimeScale)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPRssmNewStreamHandler()
+ *  RTPRssmNewStreamHandler()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1100,14 +1107,14 @@ RTPRssmNewStreamHandler(
   OSType                    inSHType,
   SampleDescriptionHandle   inSampleDescription,
   TimeScale                 inSHTimeScale,
-  ComponentInstance *       outHandler)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ComponentInstance *       outHandler)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPRssmSetStreamHandler()
+ *  RTPRssmSetStreamHandler()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1115,14 +1122,14 @@ RTPRssmNewStreamHandler(
 extern ComponentResult 
 RTPRssmSetStreamHandler(
   RTPReassembler      rtpr,
-  ComponentInstance   inStreamHandler)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ComponentInstance   inStreamHandler)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPRssmGetStreamHandler()
+ *  RTPRssmGetStreamHandler()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1130,28 +1137,28 @@ RTPRssmSetStreamHandler(
 extern ComponentResult 
 RTPRssmGetStreamHandler(
   RTPReassembler       rtpr,
-  ComponentInstance *  outStreamHandler)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ComponentInstance *  outStreamHandler)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 
 /*
- *  RTPRssmSendStreamHandlerChanged()
+ *  RTPRssmSendStreamHandlerChanged()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
  */
 extern ComponentResult 
-RTPRssmSendStreamHandlerChanged(RTPReassembler rtpr)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+RTPRssmSendStreamHandlerChanged(RTPReassembler rtpr)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPRssmSetSampleDescription()
+ *  RTPRssmSetSampleDescription()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1159,15 +1166,15 @@ RTPRssmSendStreamHandlerChanged(RTPReassembler rtpr)          AVAILABLE_MAC_OS_X
 extern ComponentResult 
 RTPRssmSetSampleDescription(
   RTPReassembler            rtpr,
-  SampleDescriptionHandle   inSampleDescription)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SampleDescriptionHandle   inSampleDescription)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /* ----- manually sending chunks*/
 /*
- *  RTPRssmGetChunkAndIncrRefCount()
+ *  RTPRssmGetChunkAndIncrRefCount()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1177,17 +1184,17 @@ RTPRssmGetChunkAndIncrRefCount(
   RTPReassembler       rtpr,
   UInt32               inChunkDataSize,
   const TimeValue64 *  inChunkPresentationTime,
-  SHChunkRecord **     outChunk)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SHChunkRecord **     outChunk)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPRssmGetExtChunkAndIncrRefCount()
+ *  RTPRssmGetExtChunkAndIncrRefCount()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   in QTStreamLib 6.0 and later
- *    Windows:          in qtmlClient.lib 6.0 and later
+ *    Windows:          in QTMLClient.lib 6.0 and later
  */
 extern ComponentResult 
 RTPRssmGetExtChunkAndIncrRefCount(
@@ -1195,14 +1202,14 @@ RTPRssmGetExtChunkAndIncrRefCount(
   UInt32                    inChunkDataSize,
   const TimeValue64 *       inChunkPresentationTime,
   SInt32                    inFlags,
-  SHExtendedChunkRecord **  outChunk)                         AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  SHExtendedChunkRecord **  outChunk)                         AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9	;
 
 
 /*
- *  RTPRssmSendChunkAndDecrRefCount()
+ *  RTPRssmSendChunkAndDecrRefCount()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1211,14 +1218,14 @@ extern ComponentResult
 RTPRssmSendChunkAndDecrRefCount(
   RTPReassembler                  rtpr,
   SHChunkRecord *                 inChunk,
-  const SHServerEditParameters *  inServerEdit)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const SHServerEditParameters *  inServerEdit)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPRssmSendLostChunk()
+ *  RTPRssmSendLostChunk()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1226,14 +1233,14 @@ RTPRssmSendChunkAndDecrRefCount(
 extern ComponentResult 
 RTPRssmSendLostChunk(
   RTPReassembler       rtpr,
-  const TimeValue64 *  inChunkPresentationTime)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const TimeValue64 *  inChunkPresentationTime)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPRssmSendStreamBufferRange()
+ *  RTPRssmSendStreamBufferRange()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1241,14 +1248,14 @@ RTPRssmSendLostChunk(
 extern ComponentResult 
 RTPRssmSendStreamBufferRange(
   RTPReassembler                    rtpr,
-  RTPSendStreamBufferRangeParams *  inParams)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  RTPSendStreamBufferRangeParams *  inParams)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPRssmClearCachedPackets()
+ *  RTPRssmClearCachedPackets()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1256,14 +1263,14 @@ RTPRssmSendStreamBufferRange(
 extern ComponentResult 
 RTPRssmClearCachedPackets(
   RTPReassembler   rtpr,
-  SInt32           inFlags)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32           inFlags)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPRssmFillPacketListParams()
+ *  RTPRssmFillPacketListParams()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1273,14 +1280,14 @@ RTPRssmFillPacketListParams(
   RTPReassembler   rtpr,
   RTPRssmPacket *  inPacketListHead,
   SInt32           inNumWraparounds,
-  SInt32           inFlags)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32           inFlags)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPRssmReleasePacketList()
+ *  RTPRssmReleasePacketList()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1288,14 +1295,14 @@ RTPRssmFillPacketListParams(
 extern ComponentResult 
 RTPRssmReleasePacketList(
   RTPReassembler   rtpr,
-  RTPRssmPacket *  inPacketListHead)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  RTPRssmPacket *  inPacketListHead)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPRssmIncrChunkRefCount()
+ *  RTPRssmIncrChunkRefCount()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1303,14 +1310,14 @@ RTPRssmReleasePacketList(
 extern ComponentResult 
 RTPRssmIncrChunkRefCount(
   RTPReassembler   rtpr,
-  SHChunkRecord *  inChunk)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SHChunkRecord *  inChunk)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPRssmDecrChunkRefCount()
+ *  RTPRssmDecrChunkRefCount()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1318,7 +1325,7 @@ RTPRssmIncrChunkRefCount(
 extern ComponentResult 
 RTPRssmDecrChunkRefCount(
   RTPReassembler   rtpr,
-  SHChunkRecord *  inChunk)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SHChunkRecord *  inChunk)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*============================================================================
@@ -1399,10 +1406,10 @@ enum {
 
 
 /*
- *  QTSFindMediaPacketizer()
+ *  QTSFindMediaPacketizer()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1412,14 +1419,14 @@ QTSFindMediaPacketizer(
   MediaPacketizerRequirementsPtr   inPacketizerinfo,
   SampleDescriptionHandle          inSampleDescription,
   RTPPayloadSortRequestPtr         inSortInfo,
-  QTAtomContainer *                outPacketizerList)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTAtomContainer *                outPacketizerList)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSFindMediaPacketizerForTrack()
+ *  QTSFindMediaPacketizerForTrack()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1429,14 +1436,14 @@ QTSFindMediaPacketizerForTrack(
   Track                      inTrack,
   long                       inSampleDescriptionIndex,
   RTPPayloadSortRequestPtr   inSortInfo,
-  QTAtomContainer *          outPacketizerList)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTAtomContainer *          outPacketizerList)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSFindMediaPacketizerForPayloadID()
+ *  QTSFindMediaPacketizerForPayloadID()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1445,14 +1452,14 @@ extern OSErr
 QTSFindMediaPacketizerForPayloadID(
   long                       payloadID,
   RTPPayloadSortRequestPtr   inSortInfo,
-  QTAtomContainer *          outPacketizerList)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTAtomContainer *          outPacketizerList)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSFindMediaPacketizerForPayloadName()
+ *  QTSFindMediaPacketizerForPayloadName()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1461,7 +1468,7 @@ extern OSErr
 QTSFindMediaPacketizerForPayloadName(
   const char *               payloadName,
   RTPPayloadSortRequestPtr   inSortInfo,
-  QTAtomContainer *          outPacketizerList)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTAtomContainer *          outPacketizerList)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /* flags for RTPMPInitialize*/
@@ -1573,10 +1580,10 @@ enum {
 -----------------------------------------*/
 
 /*
- *  RTPMPInitialize()
+ *  RTPMPInitialize()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1584,15 +1591,15 @@ enum {
 extern ComponentResult 
 RTPMPInitialize(
   RTPMediaPacketizer   rtpm,
-  SInt32               inFlags)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32               inFlags)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /* return noErr if you can handle this media */
 /*
- *  RTPMPPreflightMedia()
+ *  RTPMPPreflightMedia()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1601,7 +1608,7 @@ extern ComponentResult
 RTPMPPreflightMedia(
   RTPMediaPacketizer        rtpm,
   OSType                    inMediaType,
-  SampleDescriptionHandle   inSampleDescription)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SampleDescriptionHandle   inSampleDescription)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
@@ -1609,10 +1616,10 @@ RTPMPPreflightMedia(
    if you're doing time consuming operations
 */
 /*
- *  RTPMPIdle()
+ *  RTPMPIdle()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1621,7 +1628,7 @@ extern ComponentResult
 RTPMPIdle(
   RTPMediaPacketizer   rtpm,
   SInt32               inFlags,
-  SInt32 *             outFlags)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32 *             outFlags)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
@@ -1632,10 +1639,10 @@ RTPMPIdle(
    much cpu time - otherwise do it in idle
 */
 /*
- *  RTPMPSetSampleData()
+ *  RTPMPSetSampleData()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1644,7 +1651,7 @@ extern ComponentResult
 RTPMPSetSampleData(
   RTPMediaPacketizer             rtpm,
   const RTPMPSampleDataParams *  inSampleData,
-  SInt32 *                       outFlags)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32 *                       outFlags)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
@@ -1652,10 +1659,10 @@ RTPMPSetSampleData(
    you set the kRTPMPStillProcessingData flag here and in idle
 */
 /*
- *  RTPMPFlush()
+ *  RTPMPFlush()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1664,7 +1671,7 @@ extern ComponentResult
 RTPMPFlush(
   RTPMediaPacketizer   rtpm,
   SInt32               inFlags,
-  SInt32 *             outFlags)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32 *             outFlags)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
@@ -1674,10 +1681,10 @@ RTPMPFlush(
    state should be the same as if you were just initialized
 */
 /*
- *  RTPMPReset()
+ *  RTPMPReset()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1685,17 +1692,17 @@ RTPMPFlush(
 extern ComponentResult 
 RTPMPReset(
   RTPMediaPacketizer   rtpm,
-  SInt32               inFlags)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32               inFlags)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*-----------------------------------------
     RTP Media Packetizer get / set functions
 -----------------------------------------*/
 /*
- *  RTPMPSetInfo()
+ *  RTPMPSetInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1704,14 +1711,14 @@ extern ComponentResult
 RTPMPSetInfo(
   RTPMediaPacketizer   rtpm,
   OSType               inSelector,
-  const void *         ioParams)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const void *         ioParams)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPMPGetInfo()
+ *  RTPMPGetInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1720,14 +1727,14 @@ extern ComponentResult
 RTPMPGetInfo(
   RTPMediaPacketizer   rtpm,
   OSType               inSelector,
-  void *               ioParams)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *               ioParams)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPMPSetTimeScale()
+ *  RTPMPSetTimeScale()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1735,14 +1742,14 @@ RTPMPGetInfo(
 extern ComponentResult 
 RTPMPSetTimeScale(
   RTPMediaPacketizer   rtpm,
-  TimeScale            inTimeScale)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TimeScale            inTimeScale)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPMPGetTimeScale()
+ *  RTPMPGetTimeScale()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1750,14 +1757,14 @@ RTPMPSetTimeScale(
 extern ComponentResult 
 RTPMPGetTimeScale(
   RTPMediaPacketizer   rtpm,
-  TimeScale *          outTimeScale)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TimeScale *          outTimeScale)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPMPSetTimeBase()
+ *  RTPMPSetTimeBase()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1765,14 +1772,14 @@ RTPMPGetTimeScale(
 extern ComponentResult 
 RTPMPSetTimeBase(
   RTPMediaPacketizer   rtpm,
-  TimeBase             inTimeBase)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TimeBase             inTimeBase)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPMPGetTimeBase()
+ *  RTPMPGetTimeBase()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1780,14 +1787,14 @@ RTPMPSetTimeBase(
 extern ComponentResult 
 RTPMPGetTimeBase(
   RTPMediaPacketizer   rtpm,
-  TimeBase *           outTimeBase)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TimeBase *           outTimeBase)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPMPHasCharacteristic()
+ *  RTPMPHasCharacteristic()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1796,14 +1803,14 @@ extern ComponentResult
 RTPMPHasCharacteristic(
   RTPMediaPacketizer   rtpm,
   OSType               inSelector,
-  Boolean *            outHasIt)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *            outHasIt)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPMPSetPacketBuilder()
+ *  RTPMPSetPacketBuilder()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1811,14 +1818,14 @@ RTPMPHasCharacteristic(
 extern ComponentResult 
 RTPMPSetPacketBuilder(
   RTPMediaPacketizer   rtpm,
-  ComponentInstance    inPacketBuilder)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ComponentInstance    inPacketBuilder)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPMPGetPacketBuilder()
+ *  RTPMPGetPacketBuilder()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1826,14 +1833,14 @@ RTPMPSetPacketBuilder(
 extern ComponentResult 
 RTPMPGetPacketBuilder(
   RTPMediaPacketizer   rtpm,
-  ComponentInstance *  outPacketBuilder)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ComponentInstance *  outPacketBuilder)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPMPSetMediaType()
+ *  RTPMPSetMediaType()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1841,14 +1848,14 @@ RTPMPGetPacketBuilder(
 extern ComponentResult 
 RTPMPSetMediaType(
   RTPMediaPacketizer   rtpm,
-  OSType               inMediaType)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSType               inMediaType)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPMPGetMediaType()
+ *  RTPMPGetMediaType()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1856,15 +1863,15 @@ RTPMPSetMediaType(
 extern ComponentResult 
 RTPMPGetMediaType(
   RTPMediaPacketizer   rtpm,
-  OSType *             outMediaType)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSType *             outMediaType)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /* size is in bytes*/
 /*
- *  RTPMPSetMaxPacketSize()
+ *  RTPMPSetMaxPacketSize()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1872,14 +1879,14 @@ RTPMPGetMediaType(
 extern ComponentResult 
 RTPMPSetMaxPacketSize(
   RTPMediaPacketizer   rtpm,
-  UInt32               inMaxPacketSize)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32               inMaxPacketSize)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPMPGetMaxPacketSize()
+ *  RTPMPGetMaxPacketSize()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1887,15 +1894,15 @@ RTPMPSetMaxPacketSize(
 extern ComponentResult 
 RTPMPGetMaxPacketSize(
   RTPMediaPacketizer   rtpm,
-  UInt32 *             outMaxPacketSize)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32 *             outMaxPacketSize)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /* duration is in milliseconds*/
 /*
- *  RTPMPSetMaxPacketDuration()
+ *  RTPMPSetMaxPacketDuration()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1903,14 +1910,14 @@ RTPMPGetMaxPacketSize(
 extern ComponentResult 
 RTPMPSetMaxPacketDuration(
   RTPMediaPacketizer   rtpm,
-  UInt32               inMaxPacketDuration)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32               inMaxPacketDuration)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPMPGetMaxPacketDuration()
+ *  RTPMPGetMaxPacketDuration()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1918,14 +1925,14 @@ RTPMPSetMaxPacketDuration(
 extern ComponentResult 
 RTPMPGetMaxPacketDuration(
   RTPMediaPacketizer   rtpm,
-  UInt32 *             outMaxPacketDuration)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32 *             outMaxPacketDuration)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPMPDoUserDialog()
+ *  RTPMPDoUserDialog()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1934,14 +1941,14 @@ extern ComponentResult
 RTPMPDoUserDialog(
   RTPMediaPacketizer   rtpm,
   ModalFilterUPP       inFilterUPP,
-  Boolean *            canceled)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *            canceled)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPMPSetSettingsFromAtomContainerAtAtom()
+ *  RTPMPSetSettingsFromAtomContainerAtAtom()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1950,14 +1957,14 @@ extern ComponentResult
 RTPMPSetSettingsFromAtomContainerAtAtom(
   RTPMediaPacketizer   rtpm,
   QTAtomContainer      inContainer,
-  QTAtom               inParentAtom)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTAtom               inParentAtom)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPMPGetSettingsIntoAtomContainerAtAtom()
+ *  RTPMPGetSettingsIntoAtomContainerAtAtom()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1966,14 +1973,14 @@ extern ComponentResult
 RTPMPGetSettingsIntoAtomContainerAtAtom(
   RTPMediaPacketizer   rtpm,
   QTAtomContainer      inOutContainer,
-  QTAtom               inParentAtom)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTAtom               inParentAtom)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPMPGetSettingsAsText()
+ *  RTPMPGetSettingsAsText()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1981,15 +1988,15 @@ RTPMPGetSettingsIntoAtomContainerAtAtom(
 extern ComponentResult 
 RTPMPGetSettingsAsText(
   RTPMediaPacketizer   rtpm,
-  Handle *             text)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle *             text)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 
 /*
- *  RTPMPGetSettings()
+ *  RTPMPGetSettings()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QTStreamLib 5.0 and later
  *    Windows:          in QTSClient.lib 5.0 and later
@@ -1998,14 +2005,14 @@ extern ComponentResult
 RTPMPGetSettings(
   RTPMediaPacketizer   rtpm,
   QTAtomContainer *    outSettings,
-  SInt32               inFlags)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32               inFlags)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPMPSetSettings()
+ *  RTPMPSetSettings()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QTStreamLib 5.0 and later
  *    Windows:          in QTSClient.lib 5.0 and later
@@ -2014,7 +2021,7 @@ extern ComponentResult
 RTPMPSetSettings(
   RTPMediaPacketizer   rtpm,
   QTAtomSpecPtr        inSettings,
-  SInt32               inFlags)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32               inFlags)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*============================================================================
@@ -2079,10 +2086,10 @@ enum {
     RTP Packet Builder functions
 -----------------------------------------*/
 /*
- *  RTPPBBeginPacketGroup()
+ *  RTPPBBeginPacketGroup()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -2092,14 +2099,14 @@ RTPPBBeginPacketGroup(
   RTPPacketBuilder     rtpb,
   SInt32               inFlags,
   UInt32               inTimeStamp,
-  RTPPacketGroupRef *  outPacketGroup)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  RTPPacketGroupRef *  outPacketGroup)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPPBEndPacketGroup()
+ *  RTPPBEndPacketGroup()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -2108,14 +2115,14 @@ extern ComponentResult
 RTPPBEndPacketGroup(
   RTPPacketBuilder    rtpb,
   SInt32              inFlags,
-  RTPPacketGroupRef   inPacketGroup)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  RTPPacketGroupRef   inPacketGroup)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPPBBeginPacket()
+ *  RTPPBBeginPacket()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -2126,14 +2133,14 @@ RTPPBBeginPacket(
   SInt32              inFlags,
   RTPPacketGroupRef   inPacketGroup,
   UInt32              inPacketMediaDataLength,
-  RTPPacketRef *      outPacket)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  RTPPacketRef *      outPacket)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPPBEndPacket()
+ *  RTPPBEndPacket()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -2145,7 +2152,7 @@ RTPPBEndPacket(
   RTPPacketGroupRef   inPacketGroup,
   RTPPacketRef        inPacket,
   UInt32              inTransmissionTimeOffset,
-  UInt32              inDuration)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32              inDuration)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
@@ -2153,10 +2160,10 @@ RTPPBEndPacket(
    pb must return a repeated data ref
 */
 /*
- *  RTPPBAddPacketLiteralData()
+ *  RTPPBAddPacketLiteralData()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -2169,7 +2176,7 @@ RTPPBAddPacketLiteralData(
   RTPPacketRef                inPacket,
   UInt8 *                     inData,
   UInt32                      inDataLength,
-  RTPPacketRepeatedDataRef *  outDataRef)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  RTPPacketRepeatedDataRef *  outDataRef)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
@@ -2177,10 +2184,10 @@ RTPPBAddPacketLiteralData(
    pb must return a repeated data ref
 */
 /*
- *  RTPPBAddPacketSampleData()
+ *  RTPPBAddPacketSampleData()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -2194,7 +2201,7 @@ RTPPBAddPacketSampleData(
   RTPMPSampleDataParams *     inSampleDataParams,
   UInt32                      inSampleOffset,
   UInt32                      inSampleDataLength,
-  RTPPacketRepeatedDataRef *  outDataRef)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  RTPPacketRepeatedDataRef *  outDataRef)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
@@ -2202,10 +2209,10 @@ RTPPBAddPacketSampleData(
    pb must return a repeated data ref
 */
 /*
- *  RTPPBAddPacketSampleData64()
+ *  RTPPBAddPacketSampleData64()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QTStreamLib 5.0 and later
  *    Windows:          in QTSClient.lib 5.0 and later
@@ -2219,7 +2226,7 @@ RTPPBAddPacketSampleData64(
   RTPMPSampleDataParams *     inSampleDataParams,
   const UInt64 *              inSampleOffset,
   UInt32                      inSampleDataLength,
-  RTPPacketRepeatedDataRef *  outDataRef)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  RTPPacketRepeatedDataRef *  outDataRef)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
@@ -2227,10 +2234,10 @@ RTPPBAddPacketSampleData64(
    RTPPBAddPacketLiteralData or RTPPBAddPacketSampleData
 */
 /*
- *  RTPPBAddPacketRepeatedData()
+ *  RTPPBAddPacketRepeatedData()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -2241,15 +2248,15 @@ RTPPBAddPacketRepeatedData(
   SInt32                     inFlags,
   RTPPacketGroupRef          inPacketGroup,
   RTPPacketRef               inPacket,
-  RTPPacketRepeatedDataRef   inDataRef)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  RTPPacketRepeatedDataRef   inDataRef)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /* call when done with repeated data*/
 /*
- *  RTPPBReleaseRepeatedData()
+ *  RTPPBReleaseRepeatedData()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -2257,7 +2264,7 @@ RTPPBAddPacketRepeatedData(
 extern ComponentResult 
 RTPPBReleaseRepeatedData(
   RTPPacketBuilder           rtpb,
-  RTPPacketRepeatedDataRef   inDataRef)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  RTPPacketRepeatedDataRef   inDataRef)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
@@ -2265,10 +2272,10 @@ RTPPBReleaseRepeatedData(
    don't call if you don't care when seq # is used
 */
 /*
- *  RTPPBSetPacketSequenceNumber()
+ *  RTPPBSetPacketSequenceNumber()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -2279,14 +2286,14 @@ RTPPBSetPacketSequenceNumber(
   SInt32              inFlags,
   RTPPacketGroupRef   inPacketGroup,
   RTPPacketRef        inPacket,
-  UInt32              inSequenceNumber)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32              inSequenceNumber)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPPBGetPacketSequenceNumber()
+ *  RTPPBGetPacketSequenceNumber()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -2297,14 +2304,14 @@ RTPPBGetPacketSequenceNumber(
   SInt32              inFlags,
   RTPPacketGroupRef   inPacketGroup,
   RTPPacketRef        inPacket,
-  UInt32 *            outSequenceNumber)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32 *            outSequenceNumber)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPPBSetPacketTimeStampOffset()
+ *  RTPPBSetPacketTimeStampOffset()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QTStreamLib 5.0 and later
  *    Windows:          in QTSClient.lib 5.0 and later
@@ -2315,14 +2322,14 @@ RTPPBSetPacketTimeStampOffset(
   SInt32              inFlags,
   RTPPacketGroupRef   inPacketGroup,
   RTPPacketRef        inPacket,
-  SInt32              inTimeStampOffset)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32              inTimeStampOffset)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPPBGetPacketTimeStampOffset()
+ *  RTPPBGetPacketTimeStampOffset()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QTStreamLib 5.0 and later
  *    Windows:          in QTSClient.lib 5.0 and later
@@ -2333,14 +2340,14 @@ RTPPBGetPacketTimeStampOffset(
   SInt32              inFlags,
   RTPPacketGroupRef   inPacketGroup,
   RTPPacketRef        inPacket,
-  SInt32 *            outTimeStampOffset)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32 *            outTimeStampOffset)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPPBAddRepeatPacket()
+ *  RTPPBAddRepeatPacket()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QTStreamLib 5.0 and later
  *    Windows:          in QTSClient.lib 5.0 and later
@@ -2352,7 +2359,7 @@ RTPPBAddRepeatPacket(
   RTPPacketGroupRef   inPacketGroup,
   RTPPacketRef        inPacket,
   TimeValue           inTransmissionOffset,
-  UInt32              inSequenceNumber)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32              inSequenceNumber)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
@@ -2360,10 +2367,10 @@ RTPPBAddRepeatPacket(
    NOT used for communicating with the media packetizers themselves
 */
 /*
- *  RTPPBSetCallback()
+ *  RTPPBSetCallback()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -2372,14 +2379,14 @@ extern ComponentResult
 RTPPBSetCallback(
   RTPPacketBuilder   rtpb,
   RTPPBCallbackUPP   inCallback,
-  void *             inRefCon)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *             inRefCon)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPPBGetCallback()
+ *  RTPPBGetCallback()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -2388,14 +2395,14 @@ extern ComponentResult
 RTPPBGetCallback(
   RTPPacketBuilder    rtpb,
   RTPPBCallbackUPP *  outCallback,
-  void **             outRefCon)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void **             outRefCon)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPPBSetInfo()
+ *  RTPPBSetInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -2404,14 +2411,14 @@ extern ComponentResult
 RTPPBSetInfo(
   RTPPacketBuilder   rtpb,
   OSType             inSelector,
-  void *             ioParams)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *             ioParams)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPPBGetInfo()
+ *  RTPPBGetInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -2420,14 +2427,14 @@ extern ComponentResult
 RTPPBGetInfo(
   RTPPacketBuilder   rtpb,
   OSType             inSelector,
-  void *             ioParams)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *             ioParams)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  RTPPBGetSampleData()
+ *  RTPPBGetSampleData()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QTStreamLib 5.0 and later
  *    Windows:          in QTSClient.lib 5.0 and later
@@ -2440,60 +2447,60 @@ RTPPBGetSampleData(
   UInt8 *                  outDataBuffer,
   UInt32                   inBytesToRead,
   UInt32 *                 outBytesRead,
-  SInt32 *                 outFlags)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32 *                 outFlags)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 
 /* UPP call backs */
 /*
- *  NewRTPMPDataReleaseUPP()
+ *  NewRTPMPDataReleaseUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern RTPMPDataReleaseUPP
-NewRTPMPDataReleaseUPP(RTPMPDataReleaseProcPtr userRoutine)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewRTPMPDataReleaseUPP(RTPMPDataReleaseProcPtr userRoutine)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  NewRTPPBCallbackUPP()
+ *  NewRTPPBCallbackUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern RTPPBCallbackUPP
-NewRTPPBCallbackUPP(RTPPBCallbackProcPtr userRoutine)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewRTPPBCallbackUPP(RTPPBCallbackProcPtr userRoutine)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  DisposeRTPMPDataReleaseUPP()
+ *  DisposeRTPMPDataReleaseUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeRTPMPDataReleaseUPP(RTPMPDataReleaseUPP userUPP)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeRTPMPDataReleaseUPP(RTPMPDataReleaseUPP userUPP)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  DisposeRTPPBCallbackUPP()
+ *  DisposeRTPPBCallbackUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeRTPPBCallbackUPP(RTPPBCallbackUPP userUPP)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeRTPPBCallbackUPP(RTPPBCallbackUPP userUPP)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  InvokeRTPMPDataReleaseUPP()
+ *  InvokeRTPMPDataReleaseUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -2501,13 +2508,13 @@ extern void
 InvokeRTPMPDataReleaseUPP(
   UInt8 *              inData,
   void *               inRefCon,
-  RTPMPDataReleaseUPP  userUPP)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  RTPMPDataReleaseUPP  userUPP)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  InvokeRTPPBCallbackUPP()
+ *  InvokeRTPPBCallbackUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -2516,7 +2523,7 @@ InvokeRTPPBCallbackUPP(
   OSType            inSelector,
   void *            ioParams,
   void *            inRefCon,
-  RTPPBCallbackUPP  userUPP)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  RTPPBCallbackUPP  userUPP)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 #if __MACH__
   #ifdef __cplusplus

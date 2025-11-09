@@ -118,6 +118,9 @@ extern void		task_deallocate(
 
 extern void		task_name_deallocate(
 					task_name_t		task_name);
+
+extern void		task_suspension_token_deallocate(
+					task_suspension_token_t	token);
 __END_DECLS
 
 #endif	/* _KERN_TASK_H_ */

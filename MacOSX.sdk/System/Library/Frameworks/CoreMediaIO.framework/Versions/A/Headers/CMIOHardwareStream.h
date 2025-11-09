@@ -269,11 +269,11 @@ enum
                         was requested.
                         This property is never settable, and is not present for streams which are unable to produce still images.
     @constant       kCMIOStreamPropertyStillImageFormatDescriptions
-                        An CFArray of CMFormatDescriptionRefs that describe the available still image data formats for the CMIOStream. The client must release the CFArray when done with
+                        A CFArray of CMFormatDescriptionRefs that describe the available still image data formats for the CMIOStream. The client must release the CFArray when done with
                         it. This property is never settable, and is not present for streams which are unable to produce still images.
     @constant       kCMIOStreamPropertyFrameRate
                         A Float64 that indicates the current video frame rate of the CMIOStream. The frame rate might fall below this, but it will not exceed it. This property is only present
-						for muxed or video streams which can determine their rate. 
+                        for muxed or video streams which can determine their rate. 
      @constant       kCMIOStreamPropertyMinimumFrameRate
                         A Float64 that indicates the minumum video frame rate of the CMIOStream. This property is only present for muxed or video streams which can determine their rate and 
                         guarantee a minimum rate.
@@ -283,6 +283,12 @@ enum
                         associated with the full set of available CMFormatDescriptionRefs.
                         If no qualifier is used, the rates of the current format (as reported via kCMIOStreamPropertyFormatDescription) will be returned.
                         If a qualifier is present, it contains the CMFormatDescriptionRef whose frame rates are desired. The description can be one of those obtained by getting the
+                        kCMIOStreamPropertyFormatDescriptions property, or a new CMFormatDescriptionRef can be provided. In the event of the latter, the CMFormatDescriptionEquals()
+                        routine will be used to see if the stream can support the provided CMFormatDescriptionRef. 
+    @constant       kCMIOStreamPropertyFrameRateRanges
+                        An array of AudioValueRanges that contains the minimum and maximum ranges for the video frame rate of the CMIOStream.
+                        If no qualifier is used, the frame rate ranges of the current format (as reported via kCMIOStreamPropertyFormatDescription) will be returned.
+                        If a qualifier is present, it contains the CMFormatDescriptionRef whose frame rate ranges are desired. The description can be one of those obtained by getting the
                         kCMIOStreamPropertyFormatDescriptions property, or a new CMFormatDescriptionRef can be provided. In the event of the latter, the CMFormatDescriptionEquals()
                         routine will be used to see if the stream can support the provided CMFormatDescriptionRef. 
     @constant       kCMIOStreamPropertyNoDataTimeoutInMSec
@@ -307,6 +313,9 @@ enum
     @constant       kCMIOStreamPropertyOutputBuffersRequiredForStartup
                         A UInt32 that allows a client to control how many buffers should be accumulated before actually starting to pass them onto the stream. Default value is to use
                         1/2 of the kCMIOStreamPropertyOutputBufferQueueSize.
+    @constant       kCMIOStreamPropertyOutputBuffersNeededForThrottledPlayback
+                        A UInt32 indicating the minimum number of buffers required for the stream to maintain throttled playback without dropping frames. Interested clients can use this to throttle
+                        the number of buffers in flight to avoid sending out more frames than necessary, thus helping with memory usage and responsiveness.
     @constant       kCMIOStreamPropertyFirstOutputPresentationTimeStamp
                         A CMTime that specifies the presentation timestamp for the first buffer sent to a device; used for startup sync. This property is never settable.
     @constant       kCMIOStreamPropertyEndOfData
@@ -330,44 +339,62 @@ enum
                         A SInt32 value that represents the current cueing status of the deck being controlled. 0 = cueing, 1 = cue complete, -1 = cue failed. This property is never settable.
     @constant       kCMIOStreamPropertyInitialPresentationTimeStampForLinkedAndSyncedAudio
                         A presentation timestamp to be used for a given AudioTimeStamp that was received for audio from the linked and synced CoreAudio audio device that is specified
-                        by kCMIOStreamPropertyLinkedAndSyncedCoreAudioDeviceUID.  The AudioTimeStamp is passed as the qualifier data.  If the DAL device isn't yet read to return a
+                        by kCMIOStreamPropertyLinkedAndSyncedCoreAudioDeviceUID. The AudioTimeStamp is passed as the qualifier data. If the DAL device isn't yet read to return a
                         valid time, it should return kCMTimeInvalid. (CMTime)
     @constant       kCMIOStreamPropertyScheduledOutputNotificationProc
-                        A procedure to be called when the stream determines when a buffer was output.  The procedure and a reference constant are specified by
+                        A procedure to be called when the stream determines when a buffer was output. The procedure and a reference constant are specified by
                         a CMIOStreamScheduledOutputNotificationProcAndRefCon structure.
+    @constant       kCMIOStreamPropertyPreferredFormatDescription
+                        A FigFormatDescriptionRef that describes the preferred format for the CMIOStream. When getting this property, the client must release the FigFormatDescriptionRef when
+                        done with it. Either one of the FigFormatDescriptionRefs obtained by getting the kCMIOStreamPropertyFormatDescriptions property can be used, or a new FigFormatDescriptionRef.
+                        FigFormatDescriptionRef can be provided. In the event of the latter, the FigFormatDescriptionEquals() routine will be used to see if the stream can support the provided
+                        Setting this property is not a guarantee that the CMIOStream will provide data in this format;  when possible, the CMIOStream will examine all of the values specified by
+                        the various clients sharing it, and select the most appropriate configuration. Typically, the value set for this property will only have an effect when the stream is
+                        active (unlike kCMIOStreamPropertyFormatDescription, which takes place immediately). Note that if the client is the device master (set using kCMIODevicePropertyDeviceMaster),
+                        setting the value of this property *will* directly affect the device, as if kCMIOStreamPropertyFormatDescription were used.
+    @constant       kCMIOStreamPropertyPreferredFrameRate
+                        A Float64 that indicates the current preferred video frame rate of the CMIOStream. Setting this property is not a guarantee that the CMIOStream will operate at that
+                        framerate;  when possible, the CMIOStream will examine all of the values specified by the various clients sharing it, and select the most appropriate configuration.
+                        Typically, the value set for this property will only have an effect when the stream is active (unlike kCMIOStreamPropertyFormatDescription, which takes place immediately).
+                        Note that if the client is the device master (set using kCMIODevicePropertyDeviceMaster), setting the value of this property will directly affect the device, as if
+                        kCMIOStreamPropertyFormatDescription were used.
 */
 enum
 {
-    kCMIOStreamPropertyDirection                        = 'sdir',
-    kCMIOStreamPropertyTerminalType                     = 'term',
-    kCMIOStreamPropertyStartingChannel                  = 'schn',
-    kCMIOStreamPropertyLatency                          = 'ltnc',
-    kCMIOStreamPropertyFormatDescription                = 'pft ',
-    kCMIOStreamPropertyFormatDescriptions               = 'pfta',
-    kCMIOStreamPropertyStillImage                       = 'stmg',
-    kCMIOStreamPropertyStillImageFormatDescriptions     = 'stft',
-    kCMIOStreamPropertyFrameRate                        = 'nfrt',
-    kCMIOStreamPropertyMinimumFrameRate                 = 'mfrt',
-    kCMIOStreamPropertyFrameRates                       = 'nfr#',
-    kCMIOStreamPropertyNoDataTimeoutInMSec              = 'pmn1',
-    kCMIOStreamPropertyDeviceSyncTimeoutInMSec          = 'pmn2',
-    kCMIOStreamPropertyNoDataEventCount                 = 'pmn3',
-    kCMIOStreamPropertyOutputBufferUnderrunCount        = 'pmou',
-    kCMIOStreamPropertyOutputBufferRepeatCount          = 'pmor',
-    kCMIOStreamPropertyOutputBufferQueueSize            = 'pmoq',
-    kCMIOStreamPropertyOutputBuffersRequiredForStartup  = 'pmos',
-    kCMIOStreamPropertyFirstOutputPresentationTimeStamp = 'popt',
-    kCMIOStreamPropertyEndOfData                        = 'pmed',
-    kCMIOStreamPropertyClock                            = 'pmcl',
-    kCMIOStreamPropertyCanProcessDeckCommand            = 'pdcd',
-    kCMIOStreamPropertyDeck                             = 'deck',
-    kCMIOStreamPropertyDeckFrameNumber                  = 'tcod',
-    kCMIOStreamPropertyDeckDropness                     = 'drop',
-    kCMIOStreamPropertyDeckThreaded                     = 'thrd',
-    kCMIOStreamPropertyDeckLocal                        = 'locl',
-    kCMIOStreamPropertyDeckCueing                       = 'cuec',
-    kCMIOStreamPropertyInitialPresentationTimeStampForLinkedAndSyncedAudio = 'ipls',
-    kCMIOStreamPropertyScheduledOutputNotificationProc  = 'sonp'
+    kCMIOStreamPropertyDirection                                            = 'sdir',
+    kCMIOStreamPropertyTerminalType                                         = 'term',
+    kCMIOStreamPropertyStartingChannel                                      = 'schn',
+    kCMIOStreamPropertyLatency                                              = 'ltnc',
+    kCMIOStreamPropertyFormatDescription                                    = 'pft ',
+    kCMIOStreamPropertyFormatDescriptions                                   = 'pfta',
+    kCMIOStreamPropertyStillImage                                           = 'stmg',
+    kCMIOStreamPropertyStillImageFormatDescriptions                         = 'stft',
+    kCMIOStreamPropertyFrameRate                                            = 'nfrt',
+    kCMIOStreamPropertyMinimumFrameRate                                     = 'mfrt',
+    kCMIOStreamPropertyFrameRates                                           = 'nfr#',
+    kCMIOStreamPropertyFrameRateRanges                                      = 'frrg',
+    kCMIOStreamPropertyNoDataTimeoutInMSec                                  = 'pmn1',
+    kCMIOStreamPropertyDeviceSyncTimeoutInMSec                              = 'pmn2',
+    kCMIOStreamPropertyNoDataEventCount                                     = 'pmn3',
+    kCMIOStreamPropertyOutputBufferUnderrunCount                            = 'pmou',
+    kCMIOStreamPropertyOutputBufferRepeatCount                              = 'pmor',
+    kCMIOStreamPropertyOutputBufferQueueSize                                = 'pmoq',
+    kCMIOStreamPropertyOutputBuffersRequiredForStartup                      = 'pmos',
+    kCMIOStreamPropertyOutputBuffersNeededForThrottledPlayback               = 'miff',
+    kCMIOStreamPropertyFirstOutputPresentationTimeStamp                     = 'popt',
+    kCMIOStreamPropertyEndOfData                                            = 'pmed',
+    kCMIOStreamPropertyClock                                                = 'pmcl',
+    kCMIOStreamPropertyCanProcessDeckCommand                                = 'pdcd',
+    kCMIOStreamPropertyDeck                                                 = 'deck',
+    kCMIOStreamPropertyDeckFrameNumber                                      = 'tcod',
+    kCMIOStreamPropertyDeckDropness                                         = 'drop',
+    kCMIOStreamPropertyDeckThreaded                                         = 'thrd',
+    kCMIOStreamPropertyDeckLocal                                            = 'locl',
+    kCMIOStreamPropertyDeckCueing                                           = 'cuec',
+    kCMIOStreamPropertyInitialPresentationTimeStampForLinkedAndSyncedAudio  = 'ipls',
+    kCMIOStreamPropertyScheduledOutputNotificationProc                      = 'sonp',
+    kCMIOStreamPropertyPreferredFormatDescription                           = 'prfd',
+    kCMIOStreamPropertyPreferredFrameRate                                   = 'prfr'
 };
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -379,16 +406,18 @@ enum
 
 /*!
     @function       CMIOStreamCopyBufferQueue
-    @abstract       Gets the CMSimpleQueue of the specified CMIOStream.
+    @abstract       Gets the CMSimpleQueue of the specified CMIOStream and registers a 'queue altered' callback function to be invoked when the stream alters the queue.
+                    The stream will only invoke the most recent callback function registered. To unregister the existing callback function, pass NULL as the queueAlteredProc.
     @param          streamID
                         The CMIOStream to create the CMSimpleQueue.
     @param          queueAlteredProc
                         Routine to be invoked when the stream alters the queue for insertions (input streams) and removals (output streams).
+                        Set this value to NULL to unregister any existing callbacks.
     @param          queueAlteredRefCon
                         The client refCon to pass back when the queue altered proc is invoked.
     @param          queue
-                        The CMSimpleQueue to fill (for input streams) or to drain (for output streams). If the call is successful, the client will need to release the queue when
-                        done with it.
+                        The CMSimpleQueue to fill (for input streams) or to drain (for output streams).
+                        If the return value is non-NULL, the client will need to release the queue when done with it.
     @result         An OSStatus indicating success or failure.
 */
 extern OSStatus

@@ -3,7 +3,7 @@
  
      Contains:   ColorSync Calibration API
  
-     Version:    CommonPanels-94~602
+     Version:    CommonPanels-94~674
  
      Copyright:  © 1998-2008 by Apple Computer, Inc., all rights reserved.
  

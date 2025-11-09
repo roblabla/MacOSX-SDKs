@@ -10,6 +10,8 @@ typedef struct CGColorSpace *CGColorSpaceRef;
 #include <CoreGraphics/CGBase.h>
 #include <CoreGraphics/CGDataProvider.h>
 
+CF_IMPLICIT_BRIDGING_ENABLED
+
 /* Color rendering intents. */
 
 enum CGColorRenderingIntent {
@@ -245,6 +247,8 @@ CG_EXTERN void CGColorSpaceGetColorTable(CGColorSpaceRef space, uint8_t *table)
    doesn't have an ICC profile. */
 
 CG_EXTERN CFDataRef CGColorSpaceCopyICCProfile(CGColorSpaceRef space)
-  CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+  CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_6_0);
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif /* CGCOLORSPACE_H_ */

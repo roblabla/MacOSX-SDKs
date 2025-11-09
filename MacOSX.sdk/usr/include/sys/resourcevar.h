@@ -71,9 +71,8 @@
  * (not necessarily resident except when running).
  */
 struct pstats {
-#define	pstat_startzero	p_ru
-	struct	rusage p_ru;		/* stats for this proc */
-	struct	rusage p_cru;		/* (PL) sum of stats for reaped children */
+	struct	rusage            p_ru;		/* stats for this proc */
+	struct	rusage            p_cru;	/* (PL) sum of stats for reaped children */
 
 	struct uprof {			/* profile arguments */
 		struct uprof *pr_next;  /* multiple prof buffers allowed */
@@ -84,9 +83,8 @@ struct pstats {
 		u_int32_t	pr_addr;	/* temp storage for addr until AST */
 		u_int32_t	pr_ticks;	/* temp storage for ticks until AST */
 	} p_prof;
-#define	pstat_endzero	p_start
-
-	struct  timeval p_start;	/* starting time ; compat only */
+	
+	uint64_t ps_start;       	/* starting time ; compat only */
 };
 
 /*

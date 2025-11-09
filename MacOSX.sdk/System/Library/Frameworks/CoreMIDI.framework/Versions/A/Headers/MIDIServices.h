@@ -110,6 +110,8 @@ extern "C" {
 						The requested object does not exist.
 	@constant		kMIDIIDNotUnique
 						Attempt to set a non-unique kMIDIPropertyUniqueID on an object.
+    @constant       kMIDINotPermitted
+	                    The process does not have privileges for the requested operation.						
 */
 enum {
 	kMIDIInvalidClient		= -10830,
@@ -125,7 +127,8 @@ enum {
 	kMIDISetupFormatErr		= -10840,
 	kMIDIWrongThread		= -10841,
 	kMIDIObjectNotFound		= -10842,
-	kMIDIIDNotUnique		= -10843
+	kMIDIIDNotUnique		= -10843,
+	kMIDINotPermitted       = -10844
 };
 
 //=============================================================================
@@ -389,8 +392,9 @@ typedef struct MIDIPacket			MIDIPacket;
 	
 					The MIDIPacketNext macro is especially important when considering that
 					the alignment requirements of MIDIPacket may differ between CPU architectures.
-					On Intel and PowerPC, MIDIPacket is unaligned. 
-					
+					On Intel and PowerPC, MIDIPacket is unaligned. On ARM, MIDIPacket must be
+					4-byte aligned.
+	
 	@field			numPackets
 						The number of MIDIPackets in the list.
 	@field			packet
@@ -573,7 +577,7 @@ typedef struct MIDIIOErrorNotification MIDIIOErrorNotification;
 		A setup editor may allow the user to set the names of both driver-owned and external
 		devices.
 */
-extern const CFStringRef	kMIDIPropertyName					__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+extern const CFStringRef	kMIDIPropertyName					__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 /*!
 	@constant		kMIDIPropertyManufacturer
@@ -586,7 +590,7 @@ extern const CFStringRef	kMIDIPropertyName					__OSX_AVAILABLE_STARTING(__MAC_10
 
 		Creators of virtual endpoints may set this property on their endpoints.
 */
-extern const CFStringRef	kMIDIPropertyManufacturer			__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+extern const CFStringRef	kMIDIPropertyManufacturer			__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 /*!
 	@constant		kMIDIPropertyModel
@@ -599,7 +603,7 @@ extern const CFStringRef	kMIDIPropertyManufacturer			__OSX_AVAILABLE_STARTING(__
 
 		Creators of virtual endpoints may set this property on their endpoints.
 */
-extern const CFStringRef	kMIDIPropertyModel					__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+extern const CFStringRef	kMIDIPropertyModel					__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 /*!
 	@constant		kMIDIPropertyUniqueID
@@ -610,7 +614,7 @@ extern const CFStringRef	kMIDIPropertyModel					__OSX_AVAILABLE_STARTING(__MAC_1
 		this property on their endpoints, though doing so may fail if the chosen ID is not
 		unique.
 */
-extern const CFStringRef	kMIDIPropertyUniqueID				__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+extern const CFStringRef	kMIDIPropertyUniqueID				__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 /*!
 	@constant		kMIDIPropertyDeviceID
@@ -623,7 +627,7 @@ extern const CFStringRef	kMIDIPropertyUniqueID				__OSX_AVAILABLE_STARTING(__MAC
 
 		Setup editors may allow the user to set this property on external devices.
 */
-extern const CFStringRef	kMIDIPropertyDeviceID				__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+extern const CFStringRef	kMIDIPropertyDeviceID				__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 /*!
 	@constant		kMIDIPropertyReceiveChannels
@@ -639,7 +643,7 @@ extern const CFStringRef	kMIDIPropertyDeviceID				__OSX_AVAILABLE_STARTING(__MAC
 
 		Virtual destination may set this property on their endpoints.
 */
-extern const CFStringRef	kMIDIPropertyReceiveChannels		__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+extern const CFStringRef	kMIDIPropertyReceiveChannels		__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 /*!
 	@constant		kMIDIPropertyTransmitChannels
@@ -649,7 +653,7 @@ extern const CFStringRef	kMIDIPropertyReceiveChannels		__OSX_AVAILABLE_STARTING(
 		The value is a bitmap of channels on which the object transmits: 1=ch 1, 2=ch 2, 4=ch 3
 		... 0x8000=ch 16.
 */
-extern const CFStringRef	kMIDIPropertyTransmitChannels		__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+extern const CFStringRef	kMIDIPropertyTransmitChannels		__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
 
 /*!
 	@constant		kMIDIPropertyMaxSysExSpeed
@@ -660,7 +664,7 @@ extern const CFStringRef	kMIDIPropertyTransmitChannels		__OSX_AVAILABLE_STARTING
 		The value is the maximum rate, in bytes/second, at which sysex messages may
 		be sent reliably to this object. (The default value is 3125, as with MIDI 1.0)
 */
-extern const CFStringRef	kMIDIPropertyMaxSysExSpeed			__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+extern const CFStringRef	kMIDIPropertyMaxSysExSpeed			__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 
 /*!
@@ -682,7 +686,7 @@ extern const CFStringRef	kMIDIPropertyMaxSysExSpeed			__OSX_AVAILABLE_STARTING(_
 		time, it receives timestamped messages as soon as they are sent, and must do its own
 		internal scheduling of received events.
 */
-extern const CFStringRef	kMIDIPropertyAdvanceScheduleTimeMuSec	__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+extern const CFStringRef	kMIDIPropertyAdvanceScheduleTimeMuSec	__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 /*!
 	@constant		kMIDIPropertyIsEmbeddedEntity
@@ -691,7 +695,7 @@ extern const CFStringRef	kMIDIPropertyAdvanceScheduleTimeMuSec	__OSX_AVAILABLE_S
 
 		0 if there are external MIDI connectors, 1 if not.
 */
-extern const CFStringRef	kMIDIPropertyIsEmbeddedEntity			__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_NA);
+extern const CFStringRef	kMIDIPropertyIsEmbeddedEntity			__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_4_2);
 
 
 /*!
@@ -702,7 +706,7 @@ extern const CFStringRef	kMIDIPropertyIsEmbeddedEntity			__OSX_AVAILABLE_STARTIN
 		1 if the endpoint broadcasts messages to all of the other endpoints in the device, 0 if
 		not.  Set by the owning driver; should not be touched by other clients.
 */
-extern const CFStringRef	kMIDIPropertyIsBroadcast				__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+extern const CFStringRef	kMIDIPropertyIsBroadcast				__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
 
 /*!
 	@constant		kMIDIPropertySingleRealtimeEntity
@@ -717,7 +721,7 @@ extern const CFStringRef	kMIDIPropertyIsBroadcast				__OSX_AVAILABLE_STARTING(__
 		entity on which incoming realtime messages from the device will appear to have
 		originated from.
 */
-extern const CFStringRef	kMIDIPropertySingleRealtimeEntity		__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+extern const CFStringRef	kMIDIPropertySingleRealtimeEntity		__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
 
 /*!
 	@constant		kMIDIPropertyConnectionUniqueID
@@ -738,7 +742,7 @@ extern const CFStringRef	kMIDIPropertySingleRealtimeEntity		__OSX_AVAILABLE_STAR
 		signifies a MIDI Thru connection to another external device/entity/endpoint (again,
 		it is strongly recommended that it be an endpoint).
 */
-extern const CFStringRef	kMIDIPropertyConnectionUniqueID			__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_NA);
+extern const CFStringRef	kMIDIPropertyConnectionUniqueID			__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_4_2);
 
 
 /*!
@@ -750,7 +754,7 @@ extern const CFStringRef	kMIDIPropertyConnectionUniqueID			__OSX_AVAILABLE_START
 		the device; should not be touched by other clients. Property is inherited from the
 		device by its entities and endpoints.
 */
-extern const CFStringRef	kMIDIPropertyOffline					__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_NA);
+extern const CFStringRef	kMIDIPropertyOffline					__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_4_2);
 
 /*!
 	@constant		kMIDIPropertyPrivate
@@ -761,7 +765,7 @@ extern const CFStringRef	kMIDIPropertyOffline					__OSX_AVAILABLE_STARTING(__MAC
 		but they will still appear in the API; only affects whether the owned endpoints are
 		hidden.
 */
-extern const CFStringRef	kMIDIPropertyPrivate					__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+extern const CFStringRef	kMIDIPropertyPrivate					__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
 
 /*!
 	@constant		kMIDIPropertyDriverOwner
@@ -772,7 +776,7 @@ extern const CFStringRef	kMIDIPropertyPrivate					__OSX_AVAILABLE_STARTING(__MAC
 		not be touched by other clients. Property is inherited from the device by its entities
 		and endpoints.
 */
-extern const CFStringRef	kMIDIPropertyDriverOwner				__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_NA);
+extern const CFStringRef	kMIDIPropertyDriverOwner				__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_4_2);
 
 /*!
 	@constant		kMIDIPropertyFactoryPatchNameFile
@@ -829,7 +833,7 @@ extern const CFStringRef	kMIDIPropertyUserPatchNameFile			__OSX_AVAILABLE_BUT_DE
 		other than the ones they are interested in changing, and to properly structure the
 		dictionary.
 */
-extern const CFStringRef	kMIDIPropertyNameConfiguration			__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+extern const CFStringRef	kMIDIPropertyNameConfiguration			__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
 
 /*!
 	@constant		kMIDIPropertyImage
@@ -843,7 +847,7 @@ extern const CFStringRef	kMIDIPropertyNameConfiguration			__OSX_AVAILABLE_STARTI
 
 		A studio setup editor should allow the user to choose icons for external devices.
 */
-extern const CFStringRef	kMIDIPropertyImage						__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+extern const CFStringRef	kMIDIPropertyImage						__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
 
 /*!
 	@constant		kMIDIPropertyDriverVersion
@@ -852,7 +856,7 @@ extern const CFStringRef	kMIDIPropertyImage						__OSX_AVAILABLE_STARTING(__MAC_
 		driver (only for driver- owned devices).  Drivers need not set this property;
 		applications should not write to it.
 */
-extern const CFStringRef	kMIDIPropertyDriverVersion				__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+extern const CFStringRef	kMIDIPropertyDriverVersion				__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
 
 /*!
 	@constant		kMIDIPropertySupportsGeneralMIDI
@@ -860,7 +864,7 @@ extern const CFStringRef	kMIDIPropertyDriverVersion				__OSX_AVAILABLE_STARTING(
 		device/entity property, integer (0/1). Indicates whether the device or entity implements
 		the General MIDI specification.
 */
-extern const CFStringRef	kMIDIPropertySupportsGeneralMIDI		__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+extern const CFStringRef	kMIDIPropertySupportsGeneralMIDI		__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
 
 /*!
 	@constant		kMIDIPropertySupportsMMC
@@ -868,7 +872,7 @@ extern const CFStringRef	kMIDIPropertySupportsGeneralMIDI		__OSX_AVAILABLE_START
 		device/entity property, integer (0/1). Indicates whether the device or entity implements
 		the MIDI Machine Control portion of the MIDI specification.
 */
-extern const CFStringRef	kMIDIPropertySupportsMMC				__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+extern const CFStringRef	kMIDIPropertySupportsMMC				__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
 
 /*!
 	@constant		kMIDIPropertyCanRoute
@@ -877,7 +881,7 @@ extern const CFStringRef	kMIDIPropertySupportsMMC				__OSX_AVAILABLE_STARTING(__
 		MIDI messages to or from other external MIDI devices (as with MIDI patch bays). This
 		should NOT be set on devices which are controlled by drivers.
 */
-extern const CFStringRef	kMIDIPropertyCanRoute					__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+extern const CFStringRef	kMIDIPropertyCanRoute					__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 /*!
 	@constant		kMIDIPropertyReceivesClock
@@ -885,7 +889,7 @@ extern const CFStringRef	kMIDIPropertyCanRoute					__OSX_AVAILABLE_STARTING(__MA
 		device/entity property, integer (0/1). Indicates whether the device or entity  responds
 		to MIDI beat clock messages.
 */
-extern const CFStringRef	kMIDIPropertyReceivesClock				__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+extern const CFStringRef	kMIDIPropertyReceivesClock				__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
 
 /*!
 	@constant		kMIDIPropertyReceivesMTC
@@ -893,7 +897,7 @@ extern const CFStringRef	kMIDIPropertyReceivesClock				__OSX_AVAILABLE_STARTING(
 		device/entity property, integer (0/1). Indicates whether the device or entity responds
 		to MIDI Time Code messages.
 */
-extern const CFStringRef	kMIDIPropertyReceivesMTC				__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+extern const CFStringRef	kMIDIPropertyReceivesMTC				__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
 
 /*!
 	@constant		kMIDIPropertyReceivesNotes
@@ -901,7 +905,7 @@ extern const CFStringRef	kMIDIPropertyReceivesMTC				__OSX_AVAILABLE_STARTING(__
 		device/entity property, integer (0/1). Indicates whether the device or entity responds
 		to MIDI Note On messages.
 */
-extern const CFStringRef	kMIDIPropertyReceivesNotes				__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+extern const CFStringRef	kMIDIPropertyReceivesNotes				__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
 
 /*!
 	@constant		kMIDIPropertyReceivesProgramChanges
@@ -909,7 +913,7 @@ extern const CFStringRef	kMIDIPropertyReceivesNotes				__OSX_AVAILABLE_STARTING(
 		device/entity property, integer (0/1). Indicates whether the device or entity responds
 		to MIDI program change messages.
 */
-extern const CFStringRef	kMIDIPropertyReceivesProgramChanges		__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+extern const CFStringRef	kMIDIPropertyReceivesProgramChanges		__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
 
 /*!
 	@constant		kMIDIPropertyReceivesBankSelectMSB
@@ -917,7 +921,7 @@ extern const CFStringRef	kMIDIPropertyReceivesProgramChanges		__OSX_AVAILABLE_ST
 		device/entity property, integer (0/1). Indicates whether the device or entity responds
 		to MIDI bank select MSB messages (control 0).
 */
-extern const CFStringRef	kMIDIPropertyReceivesBankSelectMSB		__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+extern const CFStringRef	kMIDIPropertyReceivesBankSelectMSB		__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
 
 /*!
 	@constant		kMIDIPropertyReceivesBankSelectLSB
@@ -925,7 +929,7 @@ extern const CFStringRef	kMIDIPropertyReceivesBankSelectMSB		__OSX_AVAILABLE_STA
 		device/entity property, integer (0/1). Indicates whether the device or entity responds
 		to MIDI bank select LSB messages (control 32).
 */
-extern const CFStringRef	kMIDIPropertyReceivesBankSelectLSB		__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+extern const CFStringRef	kMIDIPropertyReceivesBankSelectLSB		__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
 
 /*!
 	@constant		kMIDIPropertyTransmitsClock
@@ -933,7 +937,7 @@ extern const CFStringRef	kMIDIPropertyReceivesBankSelectLSB		__OSX_AVAILABLE_STA
 		device/entity property, integer (0/1). Indicates whether the device or entity transmits
 		MIDI beat clock messages.
 */
-extern const CFStringRef	kMIDIPropertyTransmitsClock				__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+extern const CFStringRef	kMIDIPropertyTransmitsClock				__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
 
 /*!
 	@constant		kMIDIPropertyTransmitsMTC
@@ -941,7 +945,7 @@ extern const CFStringRef	kMIDIPropertyTransmitsClock				__OSX_AVAILABLE_STARTING
 		device/entity property, integer (0/1). Indicates whether the device or entity transmits
 		MIDI Time Code messages.
 */
-extern const CFStringRef	kMIDIPropertyTransmitsMTC				__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+extern const CFStringRef	kMIDIPropertyTransmitsMTC				__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
 
 /*!
 	@constant		kMIDIPropertyTransmitsNotes
@@ -949,7 +953,7 @@ extern const CFStringRef	kMIDIPropertyTransmitsMTC				__OSX_AVAILABLE_STARTING(_
 		device/entity property, integer (0/1). Indicates whether the device or entity transmits
 		MIDI note messages.
 */
-extern const CFStringRef	kMIDIPropertyTransmitsNotes				__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+extern const CFStringRef	kMIDIPropertyTransmitsNotes				__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
 
 /*!
 	@constant		kMIDIPropertyTransmitsProgramChanges
@@ -957,7 +961,7 @@ extern const CFStringRef	kMIDIPropertyTransmitsNotes				__OSX_AVAILABLE_STARTING
 		device/entity property, integer (0/1). Indicates whether the device or entity transmits
 		MIDI program change messages.
 */
-extern const CFStringRef	kMIDIPropertyTransmitsProgramChanges	__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+extern const CFStringRef	kMIDIPropertyTransmitsProgramChanges	__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
 
 /*!
 	@constant		kMIDIPropertyTransmitsBankSelectMSB
@@ -965,7 +969,7 @@ extern const CFStringRef	kMIDIPropertyTransmitsProgramChanges	__OSX_AVAILABLE_ST
 		device/entity property, integer (0/1). Indicates whether the device or entity transmits
 		MIDI bank select MSB messages (control 0).
 */
-extern const CFStringRef	kMIDIPropertyTransmitsBankSelectMSB		__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+extern const CFStringRef	kMIDIPropertyTransmitsBankSelectMSB		__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
 
 /*!
 	@constant		kMIDIPropertyTransmitsBankSelectLSB
@@ -973,7 +977,7 @@ extern const CFStringRef	kMIDIPropertyTransmitsBankSelectMSB		__OSX_AVAILABLE_ST
 		device/entity property, integer (0/1). Indicates whether the device or entity transmits
 		MIDI bank select LSB messages (control 32).
 */
-extern const CFStringRef	kMIDIPropertyTransmitsBankSelectLSB		__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+extern const CFStringRef	kMIDIPropertyTransmitsBankSelectLSB		__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
 
 /*!
 	@constant		kMIDIPropertyPanDisruptsStereo
@@ -982,7 +986,7 @@ extern const CFStringRef	kMIDIPropertyTransmitsBankSelectLSB		__OSX_AVAILABLE_ST
 		10), when sent to the device or entity, cause undesirable effects when playing stereo
 		sounds (e.g. converting the signal to mono).
 */
-extern const CFStringRef	kMIDIPropertyPanDisruptsStereo			__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+extern const CFStringRef	kMIDIPropertyPanDisruptsStereo			__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
 
 /*!
 	@constant		kMIDIPropertyIsSampler
@@ -990,7 +994,7 @@ extern const CFStringRef	kMIDIPropertyPanDisruptsStereo			__OSX_AVAILABLE_STARTI
 		device/entity property, integer (0/1). Indicates whether the device or entity plays
 		audio samples in response to MIDI note messages.
 */
-extern const CFStringRef	kMIDIPropertyIsSampler					__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+extern const CFStringRef	kMIDIPropertyIsSampler					__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
 
 /*!
 	@constant		kMIDIPropertyIsDrumMachine
@@ -998,7 +1002,7 @@ extern const CFStringRef	kMIDIPropertyIsSampler					__OSX_AVAILABLE_STARTING(__M
 		device/entity property, integer (0/1). Indicates whether the device or entity's sound
 		presets tend to be collections of non-transposable samples (e.g. drum kits).
 */
-extern const CFStringRef	kMIDIPropertyIsDrumMachine				__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+extern const CFStringRef	kMIDIPropertyIsDrumMachine				__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
 
 /*!
 	@constant		kMIDIPropertyIsMixer
@@ -1006,7 +1010,7 @@ extern const CFStringRef	kMIDIPropertyIsDrumMachine				__OSX_AVAILABLE_STARTING(
 		device/entity property, integer (0/1). Indicates whether the device or entity mixes
 		external audio signals, controlled by MIDI messages.
 */
-extern const CFStringRef	kMIDIPropertyIsMixer					__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+extern const CFStringRef	kMIDIPropertyIsMixer					__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
 
 /*!
 	@constant		kMIDIPropertyIsEffectUnit
@@ -1014,7 +1018,7 @@ extern const CFStringRef	kMIDIPropertyIsMixer					__OSX_AVAILABLE_STARTING(__MAC
 		device/entity property, integer (0/1). Indicates whether the device or entity is
 		primarily a MIDI-controlled audio effect unit (i.e. does not generate sound on its own).
 */
-extern const CFStringRef	kMIDIPropertyIsEffectUnit				__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+extern const CFStringRef	kMIDIPropertyIsEffectUnit				__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
 
 /*!
 	@constant		kMIDIPropertyMaxReceiveChannels
@@ -1025,7 +1029,7 @@ extern const CFStringRef	kMIDIPropertyIsEffectUnit				__OSX_AVAILABLE_STARTING(_
 		(fully multitimbral devices). Other values are possible, for example devices which are
 		multi-timbral but have fewer than 16 "parts".
 */
-extern const CFStringRef	kMIDIPropertyMaxReceiveChannels			__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+extern const CFStringRef	kMIDIPropertyMaxReceiveChannels			__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
 
 /*!
 	@constant		kMIDIPropertyMaxTransmitChannels
@@ -1034,7 +1038,7 @@ extern const CFStringRef	kMIDIPropertyMaxReceiveChannels			__OSX_AVAILABLE_START
 		which a device may simultaneously transmit MIDI Channel Messages. Common values are 0, 1
 		and 16.
 */
-extern const CFStringRef	kMIDIPropertyMaxTransmitChannels		__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+extern const CFStringRef	kMIDIPropertyMaxTransmitChannels		__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
 
 /*!
 	@constant		kMIDIPropertyDriverDeviceEditorApp
@@ -1043,7 +1047,7 @@ extern const CFStringRef	kMIDIPropertyMaxTransmitChannels		__OSX_AVAILABLE_START
 		configure this driver-owned devices. Drivers may set this property on their owned
 		devices. Applications must not write to it.
 */
-extern const CFStringRef	kMIDIPropertyDriverDeviceEditorApp		__OSX_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_NA);
+extern const CFStringRef	kMIDIPropertyDriverDeviceEditorApp		__OSX_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_4_2);
 
 /*!
 	@constant		kMIDIPropertySupportsShowControl
@@ -1051,7 +1055,7 @@ extern const CFStringRef	kMIDIPropertyDriverDeviceEditorApp		__OSX_AVAILABLE_STA
 		device/entity property, integer (0/1). Indicates whether the device implements the MIDI
 		Show Control specification.
 */
-extern const CFStringRef	kMIDIPropertySupportsShowControl		__OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+extern const CFStringRef	kMIDIPropertySupportsShowControl		__OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_2);
 
 /*!
 	@constant		kMIDIPropertyDisplayName
@@ -1063,7 +1067,7 @@ extern const CFStringRef	kMIDIPropertySupportsShowControl		__OSX_AVAILABLE_START
 
 		For objects other than endpoints, the display name is the same as the name.
 */
-extern const CFStringRef	kMIDIPropertyDisplayName				__OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+extern const CFStringRef	kMIDIPropertyDisplayName				__OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_2);
 
 //==================================================================================================
 #pragma mark	Clients
@@ -1096,7 +1100,7 @@ extern OSStatus
 MIDIClientCreate(	CFStringRef		name, 
 					MIDINotifyProc	notifyProc, 
 					void *			notifyRefCon, 
-					MIDIClientRef *	outClient )				__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+					MIDIClientRef *	outClient )				__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 
 /*!
@@ -1113,7 +1117,7 @@ MIDIClientCreate(	CFStringRef		name,
 		dispose all MIDIClients when an application terminates.
 */
 extern OSStatus
-MIDIClientDispose(	MIDIClientRef client )					__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+MIDIClientDispose(	MIDIClientRef client )					__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 //==================================================================================================
 #pragma mark	Ports
@@ -1152,7 +1156,7 @@ MIDIInputPortCreate(	MIDIClientRef	client,
 						CFStringRef		portName, 
 						MIDIReadProc	readProc, 
 						void *			refCon, 
-						MIDIPortRef *	outPort )			__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+						MIDIPortRef *	outPort )			__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 /*!
 	@function		MIDIOutputPortCreate
@@ -1180,7 +1184,7 @@ MIDIInputPortCreate(	MIDIClientRef	client,
 extern OSStatus
 MIDIOutputPortCreate(	MIDIClientRef	client, 
 						CFStringRef		portName, 
-						MIDIPortRef *	outPort )			__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+						MIDIPortRef *	outPort )			__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 /*!
 	@function		MIDIPortDispose
@@ -1197,7 +1201,7 @@ MIDIOutputPortCreate(	MIDIClientRef	client,
 		client's ports are automatically disposed at that time.
 */
 extern OSStatus
-MIDIPortDispose(	MIDIPortRef port )						__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+MIDIPortDispose(	MIDIPortRef port )						__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 
 /*!
@@ -1220,7 +1224,7 @@ MIDIPortDispose(	MIDIPortRef port )						__OSX_AVAILABLE_STARTING(__MAC_10_0, __
 extern OSStatus
 MIDIPortConnectSource(	MIDIPortRef		port, 
 						MIDIEndpointRef	source, 
-						void *			connRefCon )		__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+						void *			connRefCon )		__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 
 /*!
@@ -1240,7 +1244,7 @@ MIDIPortConnectSource(	MIDIPortRef		port,
 */
 extern OSStatus
 MIDIPortDisconnectSource(	MIDIPortRef		port, 
-							MIDIEndpointRef	source )		__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+							MIDIEndpointRef	source )		__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 
 //==================================================================================================
@@ -1258,7 +1262,7 @@ MIDIPortDisconnectSource(	MIDIPortRef		port,
 					occurred.
 */
 extern ItemCount
-MIDIGetNumberOfDevices()									__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+MIDIGetNumberOfDevices()									__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 
 /*!
@@ -1288,7 +1292,7 @@ MIDIGetNumberOfDevices()									__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_N
 		entities to locate endpoints.
 */
 extern MIDIDeviceRef
-MIDIGetDevice(	ItemCount deviceIndex0 )					__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+MIDIGetDevice(	ItemCount deviceIndex0 )					__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 /*!
 	@function		MIDIDeviceGetNumberOfEntities
@@ -1302,7 +1306,7 @@ MIDIGetDevice(	ItemCount deviceIndex0 )					__OSX_AVAILABLE_STARTING(__MAC_10_0,
 					error occurred.
 */
 extern ItemCount 
-MIDIDeviceGetNumberOfEntities(	MIDIDeviceRef device )		__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+MIDIDeviceGetNumberOfEntities(	MIDIDeviceRef device )		__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 /*!
 	@function		MIDIDeviceGetEntity
@@ -1319,7 +1323,7 @@ MIDIDeviceGetNumberOfEntities(	MIDIDeviceRef device )		__OSX_AVAILABLE_STARTING(
 */
 extern MIDIEntityRef
 MIDIDeviceGetEntity(	MIDIDeviceRef	device,
-						ItemCount		entityIndex0 )		__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+						ItemCount		entityIndex0 )		__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 //==================================================================================================
 #pragma mark	Entities
@@ -1339,7 +1343,7 @@ MIDIDeviceGetEntity(	MIDIDeviceRef	device,
 					error occurred.
 */
 extern ItemCount
-MIDIEntityGetNumberOfSources(	MIDIEntityRef entity )		__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+MIDIEntityGetNumberOfSources(	MIDIEntityRef entity )		__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 /*!
 	@function		MIDIEntityGetSource
@@ -1356,7 +1360,7 @@ MIDIEntityGetNumberOfSources(	MIDIEntityRef entity )		__OSX_AVAILABLE_STARTING(_
 */
 extern MIDIEndpointRef
 MIDIEntityGetSource(	MIDIEntityRef entity, 
-						ItemCount sourceIndex0 )			__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+						ItemCount sourceIndex0 )			__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 /*!
 	@function		MIDIEntityGetNumberOfDestinations
@@ -1370,7 +1374,7 @@ MIDIEntityGetSource(	MIDIEntityRef entity,
 					if an error occurred.
 */
 extern ItemCount
-MIDIEntityGetNumberOfDestinations(	MIDIEntityRef entity )	__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+MIDIEntityGetNumberOfDestinations(	MIDIEntityRef entity )	__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 /*!
 	@function		MIDIEntityGetDestination
@@ -1387,7 +1391,7 @@ MIDIEntityGetNumberOfDestinations(	MIDIEntityRef entity )	__OSX_AVAILABLE_STARTI
 */
 extern MIDIEndpointRef
 MIDIEntityGetDestination(	MIDIEntityRef	entity,
-							ItemCount		destIndex0 )	__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+							ItemCount		destIndex0 )	__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 /*!
 	@function		MIDIEntityGetDevice
@@ -1401,7 +1405,7 @@ MIDIEntityGetDestination(	MIDIEntityRef	entity,
 */
 extern OSStatus
 MIDIEntityGetDevice(		MIDIEntityRef		inEntity,
-							MIDIDeviceRef *		outDevice)	__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+							MIDIDeviceRef *		outDevice)	__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
 
 //==================================================================================================
 #pragma mark	Endpoints
@@ -1418,7 +1422,7 @@ MIDIEntityGetDevice(		MIDIEntityRef		inEntity,
 					occurred.
 */
 extern ItemCount
-MIDIGetNumberOfSources()									__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+MIDIGetNumberOfSources()									__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 
 /*!
@@ -1432,7 +1436,7 @@ MIDIGetNumberOfSources()									__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_N
 	@result			A reference to a source, or NULL if an error occurred.
 */
 extern MIDIEndpointRef
-MIDIGetSource(	ItemCount sourceIndex0 )					__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+MIDIGetSource(	ItemCount sourceIndex0 )					__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 
 /*!
@@ -1444,7 +1448,7 @@ MIDIGetSource(	ItemCount sourceIndex0 )					__OSX_AVAILABLE_STARTING(__MAC_10_0,
 					occurred.
 */
 extern ItemCount
-MIDIGetNumberOfDestinations()								__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+MIDIGetNumberOfDestinations()								__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 
 /*!
@@ -1458,7 +1462,7 @@ MIDIGetNumberOfDestinations()								__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHO
 	@result			A reference to a destination, or NULL if an error occurred.
 */
 extern MIDIEndpointRef
-MIDIGetDestination(	ItemCount destIndex0 )					__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+MIDIGetDestination(	ItemCount destIndex0 )					__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 /*!
 	@function		MIDIEndpointGetEntity
@@ -1475,7 +1479,7 @@ MIDIGetDestination(	ItemCount destIndex0 )					__OSX_AVAILABLE_STARTING(__MAC_10
 */
 extern OSStatus
 MIDIEndpointGetEntity(		MIDIEndpointRef		inEndpoint,
-							MIDIEntityRef *		outEntity)	__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+							MIDIEntityRef *		outEntity)	__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
 
 /*!
 	@function		MIDIDestinationCreate
@@ -1516,8 +1520,7 @@ MIDIDestinationCreate(	MIDIClientRef 		client,
 						CFStringRef 		name, 
 						MIDIReadProc 		readProc, 
 						void *				refCon,
-						MIDIEndpointRef *	outDest )		__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
-
+						MIDIEndpointRef *	outDest )		__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 /*!
 	@function		MIDISourceCreate
@@ -1548,7 +1551,7 @@ MIDIDestinationCreate(	MIDIClientRef 		client,
 extern OSStatus
 MIDISourceCreate(	MIDIClientRef 		client, 
 					CFStringRef 		name, 
-					MIDIEndpointRef *	outSrc )			__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+					MIDIEndpointRef *	outSrc )			__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 
 /*!
@@ -1562,7 +1565,7 @@ MIDISourceCreate(	MIDIClientRef 		client,
 	@result			An OSStatus result code.
 */
 extern OSStatus
-MIDIEndpointDispose(	MIDIEndpointRef endpt )				__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+MIDIEndpointDispose(	MIDIEndpointRef endpt )				__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 
 //==================================================================================================
@@ -1584,7 +1587,7 @@ MIDIEndpointDispose(	MIDIEndpointRef endpt )				__OSX_AVAILABLE_STARTING(__MAC_1
 		adds them.
 */
 extern ItemCount
-MIDIGetNumberOfExternalDevices()							__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_NA);
+MIDIGetNumberOfExternalDevices()							__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_4_2);
 
 /*!
 	@function		MIDIGetExternalDevice
@@ -1600,7 +1603,7 @@ MIDIGetNumberOfExternalDevices()							__OSX_AVAILABLE_STARTING(__MAC_10_1, __IP
 		Use this to enumerate the external devices in the system.
 */
 extern MIDIDeviceRef
-MIDIGetExternalDevice(	ItemCount deviceIndex0 )			__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_NA);
+MIDIGetExternalDevice(	ItemCount deviceIndex0 )			__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_4_2);
 
 //==================================================================================================
 #pragma mark	Objects and Properties
@@ -1627,7 +1630,7 @@ MIDIGetExternalDevice(	ItemCount deviceIndex0 )			__OSX_AVAILABLE_STARTING(__MAC
 extern OSStatus
 MIDIObjectGetIntegerProperty(	MIDIObjectRef	obj, 
 								CFStringRef		propertyID, 
-								SInt32 *		outValue )	__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+								SInt32 *		outValue )	__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 /*!
 	@function		MIDIObjectSetIntegerProperty
@@ -1648,7 +1651,7 @@ MIDIObjectGetIntegerProperty(	MIDIObjectRef	obj,
 extern OSStatus
 MIDIObjectSetIntegerProperty(	MIDIObjectRef	obj, 
 								CFStringRef		propertyID, 
-								SInt32			value )		__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+								SInt32			value )		__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 /*!
 	@function		MIDIObjectGetStringProperty
@@ -1669,7 +1672,7 @@ MIDIObjectSetIntegerProperty(	MIDIObjectRef	obj,
 extern OSStatus
 MIDIObjectGetStringProperty(	MIDIObjectRef	obj, 
 								CFStringRef		propertyID, 
-								CFStringRef *	str )		__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+								CFStringRef *	str )		__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 /*!
 	@function		MIDIObjectSetStringProperty
@@ -1690,7 +1693,7 @@ MIDIObjectGetStringProperty(	MIDIObjectRef	obj,
 extern OSStatus
 MIDIObjectSetStringProperty(	MIDIObjectRef	obj, 
 								CFStringRef		propertyID,
-								CFStringRef		str )		__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+								CFStringRef		str )		__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 /*!
 	@function		MIDIObjectGetDataProperty
@@ -1712,7 +1715,7 @@ MIDIObjectSetStringProperty(	MIDIObjectRef	obj,
 extern OSStatus
 MIDIObjectGetDataProperty(		MIDIObjectRef	obj, 
 								CFStringRef		propertyID, 
-								CFDataRef *		outData )	__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+								CFDataRef *		outData )	__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 /*!
 	@function		MIDIObjectSetDataProperty
@@ -1733,7 +1736,7 @@ MIDIObjectGetDataProperty(		MIDIObjectRef	obj,
 extern OSStatus
 MIDIObjectSetDataProperty(		MIDIObjectRef	obj, 
 								CFStringRef		propertyID, 
-								CFDataRef		data )		__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+								CFDataRef		data )		__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 /*!
 	@function		MIDIObjectGetDictionaryProperty
@@ -1755,7 +1758,7 @@ extern OSStatus
 MIDIObjectGetDictionaryProperty(	MIDIObjectRef		obj, 
 									CFStringRef			propertyID, 
 									CFDictionaryRef *	outDict )
-															__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+															__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
 
 /*!
 	@function		MIDIObjectSetDictionaryProperty
@@ -1776,7 +1779,7 @@ MIDIObjectGetDictionaryProperty(	MIDIObjectRef		obj,
 extern OSStatus
 MIDIObjectSetDictionaryProperty(MIDIObjectRef	obj, 
 								CFStringRef		propertyID, 
-								CFDictionaryRef	data )		__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+								CFDictionaryRef	data )		__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
 
 /*!
 	@function		MIDIObjectGetProperties
@@ -1802,7 +1805,7 @@ MIDIObjectSetDictionaryProperty(MIDIObjectRef	obj,
 extern OSStatus
 MIDIObjectGetProperties(		MIDIObjectRef 		obj, 
 								CFPropertyListRef *	outProperties,
-								Boolean				deep )	__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_NA);
+								Boolean				deep )	__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_4_2);
 
 /*!
 	@function		MIDIObjectRemoveProperty
@@ -1820,7 +1823,7 @@ MIDIObjectGetProperties(		MIDIObjectRef 		obj,
 extern OSStatus
 MIDIObjectRemoveProperty(		MIDIObjectRef 		obj, 
 								CFStringRef			propertyID )
-															__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+															__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
 
 /*!
 	@function		MIDIObjectFindByUniqueID
@@ -1849,7 +1852,7 @@ MIDIObjectFindByUniqueID(	MIDIUniqueID 		inUniqueID,
 							MIDIObjectRef *		outObject,
 							MIDIObjectType *	outObjectType)
 							
-															__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+															__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
 
 //==================================================================================================
 #pragma mark	MIDI I/O
@@ -1877,7 +1880,7 @@ MIDIObjectFindByUniqueID(	MIDIUniqueID 		inUniqueID,
 extern OSStatus
 MIDISend(	MIDIPortRef 			port, 
 			MIDIEndpointRef 		dest, 
-			const MIDIPacketList *	pktlist )				__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+			const MIDIPacketList *	pktlist )				__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 				
 /*!
 	@function		MIDISendSysex
@@ -1892,7 +1895,7 @@ MIDISend(	MIDIPortRef 			port,
 		request->data must point to a single MIDI system-exclusive message, or portion thereof.
 */
 extern OSStatus 
-MIDISendSysex(	MIDISysexSendRequest *request )				__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+MIDISendSysex(	MIDISysexSendRequest *request )				__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 /*!
 	@function		MIDIReceived
@@ -1917,7 +1920,7 @@ MIDISendSysex(	MIDISysexSendRequest *request )				__OSX_AVAILABLE_STARTING(__MAC
 */
 extern OSStatus 
 MIDIReceived(	MIDIEndpointRef			src, 
-				const MIDIPacketList *	pktlist )			__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+				const MIDIPacketList *	pktlist )			__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 /*!
 	@function		MIDIFlushOutput
@@ -1934,7 +1937,7 @@ MIDIReceived(	MIDIEndpointRef			src,
 		scheduled for future delivery.
 */
 extern OSStatus
-MIDIFlushOutput(	MIDIEndpointRef		dest )				__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_NA);
+MIDIFlushOutput(	MIDIEndpointRef		dest )				__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_4_2);
 
 /*!
 	@function		MIDIRestart
@@ -1947,7 +1950,7 @@ MIDIFlushOutput(	MIDIEndpointRef		dest )				__OSX_AVAILABLE_STARTING(__MAC_10_1,
 	@result			An OSStatus result code.
 */
 extern OSStatus
-MIDIRestart()												__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_NA);
+MIDIRestart()												__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_4_2);
 
 
 
@@ -1977,8 +1980,12 @@ extern MIDIPacket *
 MIDIPacketNext(	MIDIPacket *pkt );
 #endif
 
+#if TARGET_CPU_ARM
+// MIDIPacket must be 4-byte aligned
+#define MIDIPacketNext(pkt)	((MIDIPacket *)(((uintptr_t)(&(pkt)->data[(pkt)->length]) + 3) & ~3))
+#else
 #define MIDIPacketNext(pkt)	((MIDIPacket *)&(pkt)->data[(pkt)->length])
-
+#endif
 
 /*!
 	@function		MIDIPacketListInit
@@ -1991,7 +1998,7 @@ MIDIPacketNext(	MIDIPacket *pkt );
 	@result			A pointer to the first MIDIPacket in the packet list.
 */
 extern MIDIPacket *
-MIDIPacketListInit(	MIDIPacketList *pktlist )				__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+MIDIPacketListInit(	MIDIPacketList *pktlist )				__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 
 /*!
@@ -2028,7 +2035,7 @@ MIDIPacketListAdd(	MIDIPacketList *	pktlist,
 					MIDIPacket *		curPacket,
 					MIDITimeStamp		time,
 					ByteCount			nData,
-					const Byte *		data)			__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+					const Byte *		data)			__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 
 #ifdef __cplusplus

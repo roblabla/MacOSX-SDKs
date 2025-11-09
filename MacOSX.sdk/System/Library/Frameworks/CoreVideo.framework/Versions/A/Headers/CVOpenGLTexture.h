@@ -21,7 +21,7 @@
 #include <CoreVideo/CVImageBuffer.h>
 #include <ApplicationServices/ApplicationServices.h>
 #include <OpenGL/OpenGL.h>
-#include <OpenGL/gl.h>
+#include <OpenGL/gltypes.h>
 #include <stddef.h>
 #include <stdint.h>
 

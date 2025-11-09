@@ -22,57 +22,102 @@ typedef NS_ENUM(uint32_t, AVB17221ADPEntityCapabilities)
 		@constant	AVB17221ADPEntityCapabilitiesDFUMode
 		@abstract	The IEEE P1722.1 entity supports firmware upgrade mode.
 	 */
-	AVB17221ADPEntityCapabilitiesDFUMode								= 0x00000001,
+	AVB17221ADPEntityCapabilitiesDFUMode NS_ENUM_DEPRECATED(10_8, 10_9, NA, NA)				= 0x00000001,
+	/*!
+		@constant	AVB17221ADPEntityCapabilitiesEFUMode
+		@abstract	The IEEE P1722.1 entity supports firmware upgrade mode.
+	 */
+	AVB17221ADPEntityCapabilitiesEFUMode NS_ENUM_AVAILABLE(10_9, NA)						= 0x00000001,
 	/*!
 		@constant	AVB17221ADPEntityCapabilitiesAddressAccessSupported
 		@abstract	The IEEE P1722.1 entity supports using address access commands and responses.
 	 */
-	AVB17221ADPEntityCapabilitiesAddressAccessSupported					= 0x00000002,
+	AVB17221ADPEntityCapabilitiesAddressAccessSupported										= 0x00000002,
 	/*!
 		@constant	AVB17221ADPEntityCapabilitiesGatewayEntity
 		@abstract	The IEEE P1722.1 entity functions as a gateway between AVB and another transport.
 	 */
-	AVB17221ADPEntityCapabilitiesGatewayEntity							= 0x00000004,
+	AVB17221ADPEntityCapabilitiesGatewayEntity												= 0x00000004,
 	/*!
 		@constant	AVB17221ADPEntityCapabilitiesAEMSupported
 		@abstract	The IEEE P1722.1 entity uses IEEE P1722.1 AVDECC Entity Model for enumeration and control."
 	 */
-	AVB17221ADPEntityCapabilitiesAEMSupported							= 0x00000008,
+	AVB17221ADPEntityCapabilitiesAEMSupported												= 0x00000008,
 	/*!
 		@constant	AVB17221ADPEntityCapabilitiesLegacyAVC
 		@abstract	The IEEE P1722.1 entity supports using IEEE 1394 AV/C for enumeration and control."
 	 */
-	AVB17221ADPEntityCapabilitiesLegacyAVC								= 0x00000010,
+	AVB17221ADPEntityCapabilitiesLegacyAVC													= 0x00000010,
 	/*!
 		@constant	AVB17221ADPEntityCapabilitiesAssociationIDSupported
 		@abstract	The IEEE P1722.1 entity supports using the Association ID field.
 	 */
-	AVB17221ADPEntityCapabilitiesAssociationIDSupported					= 0x00000020,
+	AVB17221ADPEntityCapabilitiesAssociationIDSupported										= 0x00000020,
 	/*!
 		@constant	AVB17221ADPEntityCapabilitiesAssociationIDValid
 		@abstract	The IEEE P1722.1 entity has a valid value in the Association ID field.
 	 */
-	AVB17221ADPEntityCapabilitiesAssociationIDValid						= 0x00000040,
+	AVB17221ADPEntityCapabilitiesAssociationIDValid											= 0x00000040,
 	/*!
 		@constant	AVB17221ADPEntityCapabilitiesVendorUniqueSupported
 		@abstract	The IEEE P1722.1 entity supports vendor unique commands and responses.
 	 */
-	AVB17221ADPEntityCapabilitiesVendorUniqueSupported					= 0x00000080,
+	AVB17221ADPEntityCapabilitiesVendorUniqueSupported										= 0x00000080,
 	/*!
 		@constant	AVB17221ADPEntityCapabilitiesClassASupported
 		@abstract	The IEEE P1722.1 entity supports class A streaming.
 	 */
-	AVB17221ADPEntityCapabilitiesClassASupported						= 0x00000100,
+	AVB17221ADPEntityCapabilitiesClassASupported											= 0x00000100,
 	/*!
 		@constant	AVB17221ADPEntityCapabilitiesClassBSupported
 		@abstract	The IEEE P1722.1 entity supports class B streaming.
 	 */
-	AVB17221ADPEntityCapabilitiesClassBSupported						= 0x00000200,
+	AVB17221ADPEntityCapabilitiesClassBSupported											= 0x00000200,
 	/*!
 		@constant	AVB17221ADPEntityCapabilitiesASSupported
 		@abstract	The IEEE P1722.1 entity supports IEEE Std 802.1AS-2011.
 	 */
-	AVB17221ADPEntityCapabilitiesASSupported							= 0x00000400,
+	AVB17221ADPEntityCapabilitiesASSupported NS_ENUM_DEPRECATED(10_8, 10_9, NA, NA)			= 0x00000400,
+	/*!
+		@constant	AVB17221ADPEntityCapabilitiesGPTPSupported
+		@abstract	The IEEE P1722.1 entity supports IEEE Std 802.1AS-2011.
+	 */
+	AVB17221ADPEntityCapabilitiesGPTPSupported NS_ENUM_AVAILABLE(10_9, NA)					= 0x00000400,
+	/*!
+		 @constant	AVB17221ADPEntityCapabilitiesAEMAuthenticationSupported
+		 @abstract	The IEEE P1722.1 entity supports using AEM authentication.
+	 */
+	AVB17221ADPEntityCapabilitiesAEMAuthenticationSupported NS_ENUM_AVAILABLE(10_9, NA)		= 0x00000800,
+	/*!
+		 @constant	AVB17221ADPEntityCapabilitiesAEMAuthenticationRequired
+		 @abstract	The IEEE P1722.1 entity requires a controller to authenticate.
+	 */
+	AVB17221ADPEntityCapabilitiesAEMAuthenticationRequired NS_ENUM_AVAILABLE(10_9, NA)		= 0x00001000,
+	/*!
+		 @constant	AVB17221ADPEntityCapabilitiesAEMPersistentAcquireSupported
+		 @abstract	The IEEE P1722.1 entity supports being persistentlty aquired.
+	 */
+	AVB17221ADPEntityCapabilitiesAEMPersistentAcquireSupported NS_ENUM_AVAILABLE(10_9, NA)	= 0x00002000,
+	/*!
+		 @constant	AVB17221ADPEntityCapabilitiesAEMIdenitifyControlIndexValid
+		 @abstract	The IEEE P1722.1 entity has an idenitfy control and the identify_control_index field contains a valid index.
+	 */
+	AVB17221ADPEntityCapabilitiesAEMIdenitifyControlIndexValid NS_ENUM_AVAILABLE(10_9, NA)	= 0x00004000,
+	/*!
+		 @constant	AVB17221ADPEntityCapabilitiesAEMInterfaceIndexValid
+		 @abstract	The IEEE P1722.1 entity has the interface_index field set to a valid index.
+	 */
+	AVB17221ADPEntityCapabilitiesAEMInterfaceIndexValid NS_ENUM_AVAILABLE(10_9, NA)			= 0x00008000,
+	/*!
+		 @constant	AVB17221ADPEntityCapabilitiesGeneralControllerIgnore
+		 @abstract	The IEEE P1722.1 entity should be ignored by general controllers.
+	 */
+	AVB17221ADPEntityCapabilitiesGeneralControllerIgnore NS_ENUM_AVAILABLE(10_9, NA)		= 0x00010000,
+	/*!
+		 @constant	AVB17221ADPEntityCapabilitiesEntityNotReady
+		 @abstract	The IEEE P1722.1 entity is not ready to be enumerated or connected by a controller.
+	 */
+	AVB17221ADPEntityCapabilitiesEntityNotReady NS_ENUM_AVAILABLE(10_9, NA)					= 0x00020000,
 } NS_ENUM_AVAILABLE(10_8, NA);
 
 //Talker Specific Capabilities
@@ -289,15 +334,15 @@ typedef NS_ENUM(uint8_t, AVB17221AECPStatusCode)
 	AVB17221AECPStatusNotSupported										= 0x0b,
 
 	/*!
-		@constant	AVB17221AECPStatusAddressAccessAddressToLow
+		@constant	AVB17221AECPStatusAddressAccessAddressTooLow
 		@abstract	The IEEE P1722.1 AECP ADDRESS_ACCESS_ADDRESS_TOO_LOW status code.
 	 */
-	AVB17221AECPStatusAddressAccessAddressToLow							= 0x02,
+	AVB17221AECPStatusAddressAccessAddressTooLow						= 0x02,
 	/*!
-		@constant	AVB17221AECPStatusAddressAccessAddressToHigh
+		@constant	AVB17221AECPStatusAddressAccessAddressTooHigh
 		@abstract	The IEEE P1722.1 AECP ADDRESS_ACCESS_ADDRESS_TOO_HIGH status code.
 	 */
-	AVB17221AECPStatusAddressAccessAddressToHigh						= 0x03,
+	AVB17221AECPStatusAddressAccessAddressTooHigh						= 0x03,
 	/*!
 		@constant	AVB17221AECPStatusAddressAccessAddressInvalid
 		@abstract	The IEEE P1722.1 AECP ADDRESS_ACCESS_ADDRESS_INVALID status code.
@@ -398,7 +443,7 @@ typedef NS_ENUM(uint8_t, AVB17221ACMPMessageType)
 		@abstract	The IEEE P1722.1 ACMP GET_TX_CONNECTION_RESPONSE message type.
 	 */
 	AVB17221ACMPMessageTypeGetTXConnectionResponse						= 0xD,
-};
+} NS_ENUM_AVAILABLE(10_8, NA);
 
 typedef NS_ENUM(uint8_t, AVB17221ACMPStatusCode)
 {
@@ -838,6 +883,24 @@ typedef NS_ENUM(uint16_t, AVB17221AEMCommandType)
 } NS_ENUM_AVAILABLE(10_8, NA);
 
 
+typedef NS_ENUM(uint8_t, AVB17221AECPAddressAccessTLVMode)
+{
+	/*!
+	 @constant	AVB17221AECPAddressAccessTLVModeRead
+	 @abstract	The IEEE P1722.1 ACMP SUCCESS status code.
+	 */
+	AVB17221AECPAddressAccessTLVModeRead								= 0x00,
+	/*!
+	 @constant	AVB17221AECPAddressAccessTLVModeWrite
+	 @abstract	The IEEE P1722.1 ACMP LISTENER_UNKNOWN_ID status code.
+	 */
+	AVB17221AECPAddressAccessTLVModeWrite								= 0x01,
+	/*!
+	 @constant	AVB17221AECPAddressAccessTLVModeExecute
+	 @abstract	The IEEE P1722.1 ACMP TALKER_UNKNOWN_ID status code.
+	 */
+	AVB17221AECPAddressAccessTLVModeExecute									= 0x02,
+} NS_ENUM_AVAILABLE(10_9, NA);
 
 /*!
 	@constant	AVBErrorDomain

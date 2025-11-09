@@ -1,8 +1,8 @@
 /*
- * Copyright (c) 2000-2012 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
- * 
+ *
  * This file contains Original Code and/or Modifications of Original Code
  * as defined in and that are subject to the Apple Public Source License
  * Version 2.0 (the 'License'). You may not use this file except in
@@ -11,10 +11,10 @@
  * unlawful or unlicensed copies of an Apple operating system, or to
  * circumvent, violate, or enable the circumvention or violation of, any
  * terms of an Apple operating system software license agreement.
- * 
+ *
  * Please obtain a copy of the License at
  * http://www.opensource.apple.com/apsl/ and read it before using this file.
- * 
+ *
  * The Original Code and all software distributed under the License are
  * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
@@ -22,7 +22,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
  * Please see the License for the specific language governing rights and
  * limitations under the License.
- * 
+ *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_END@
  */
 /*
@@ -81,38 +81,45 @@ struct ipovly {
 	struct	in_addr ih_dst;		/* destination internet address */
 };
 
-#define MAX_IPOPTLEN	40
+#define	MAX_IPOPTLEN	40
 
 struct	ipstat {
-	u_int32_t	ips_total;		/* total packets received */
-	u_int32_t	ips_badsum;		/* checksum bad */
-	u_int32_t	ips_tooshort;		/* packet too short */
-	u_int32_t	ips_toosmall;		/* not enough data */
-	u_int32_t	ips_badhlen;		/* ip header length < data size */
-	u_int32_t	ips_badlen;		/* ip length < ip header length */
-	u_int32_t	ips_fragments;		/* fragments received */
-	u_int32_t	ips_fragdropped;	/* frags dropped (dups, out of space) */
-	u_int32_t	ips_fragtimeout;	/* fragments timed out */
-	u_int32_t	ips_forward;		/* packets forwarded */
-	u_int32_t	ips_fastforward;	/* packets fast forwarded */
-	u_int32_t	ips_cantforward;	/* packets rcvd for unreachable dest */
-	u_int32_t	ips_redirectsent;	/* packets forwarded on same net */
-	u_int32_t	ips_noproto;		/* unknown or unsupported protocol */
-	u_int32_t	ips_delivered;		/* datagrams delivered to upper level*/
-	u_int32_t	ips_localout;		/* total ip packets generated here */
-	u_int32_t	ips_odropped;		/* lost packets due to nobufs, etc. */
-	u_int32_t	ips_reassembled;	/* total packets reassembled ok */
-	u_int32_t	ips_fragmented;		/* datagrams successfully fragmented */
-	u_int32_t	ips_ofragments;		/* output fragments created */
-	u_int32_t	ips_cantfrag;		/* don't fragment flag was set, etc. */
-	u_int32_t	ips_badoptions;		/* error in option processing */
-	u_int32_t	ips_noroute;		/* packets discarded due to no route */
-	u_int32_t	ips_badvers;		/* ip version != 4 */
-	u_int32_t	ips_rawout;		/* total raw ip packets generated */
-	u_int32_t	ips_toolong;		/* ip length > max ip packet size */
-	u_int32_t	ips_notmember;		/* multicasts for unregistered grps */
-	u_int32_t	ips_nogif;		/* no match gif found */
-	u_int32_t	ips_badaddr;		/* invalid address on header */
+	u_int32_t ips_total;		/* total packets received */
+	u_int32_t ips_badsum;		/* checksum bad */
+	u_int32_t ips_tooshort;		/* packet too short */
+	u_int32_t ips_toosmall;		/* not enough data */
+	u_int32_t ips_badhlen;		/* ip header length < data size */
+	u_int32_t ips_badlen;		/* ip length < ip header length */
+	u_int32_t ips_fragments;	/* fragments received */
+	u_int32_t ips_fragdropped;	/* frags dropped (dups, out of space) */
+	u_int32_t ips_fragtimeout;	/* fragments timed out */
+	u_int32_t ips_forward;		/* packets forwarded */
+	u_int32_t ips_fastforward;	/* packets fast forwarded */
+	u_int32_t ips_cantforward;	/* packets rcvd for unreachable dest */
+	u_int32_t ips_redirectsent;	/* packets forwarded on same net */
+	u_int32_t ips_noproto;		/* unknown or unsupported protocol */
+	u_int32_t ips_delivered;	/* datagrams delivered to upper level */
+	u_int32_t ips_localout;		/* total ip packets generated here */
+	u_int32_t ips_odropped;		/* lost packets due to nobufs, etc. */
+	u_int32_t ips_reassembled;	/* total packets reassembled ok */
+	u_int32_t ips_fragmented;	/* datagrams successfully fragmented */
+	u_int32_t ips_ofragments;	/* output fragments created */
+	u_int32_t ips_cantfrag;		/* don't fragment flag was set, etc. */
+	u_int32_t ips_badoptions;	/* error in option processing */
+	u_int32_t ips_noroute;		/* packets discarded due to no route */
+	u_int32_t ips_badvers;		/* ip version != 4 */
+	u_int32_t ips_rawout;		/* total raw ip packets generated */
+	u_int32_t ips_toolong;		/* ip length > max ip packet size */
+	u_int32_t ips_notmember;	/* multicasts for unregistered grps */
+	u_int32_t ips_nogif;		/* no match gif found */
+	u_int32_t ips_badaddr;		/* invalid address on header */
+	u_int32_t ips_pktdropcntrl;	/* pkt dropped, no mbufs for ctl data */
+	u_int32_t ips_rcv_swcsum;	/* ip hdr swcksum (inbound), packets */
+	u_int32_t ips_rcv_swcsum_bytes;	/* ip hdr swcksum (inbound), bytes */
+	u_int32_t ips_snd_swcsum;	/* ip hdr swcksum (outbound), packets */
+	u_int32_t ips_snd_swcsum_bytes;	/* ip hdr swcksum (outbound), bytes */
+	u_int32_t ips_adj;		/* total packets trimmed/adjusted */
+	u_int32_t ips_adj_hwcsum_clr;	/* hwcksum discarded during adj */
 };
 
 struct ip_linklocal_stat {
@@ -121,5 +128,6 @@ struct ip_linklocal_stat {
 	u_int32_t	iplls_out_total;
 	u_int32_t	iplls_out_badttl;
 };
+
 
 #endif /* !_NETINET_IP_VAR_H_ */

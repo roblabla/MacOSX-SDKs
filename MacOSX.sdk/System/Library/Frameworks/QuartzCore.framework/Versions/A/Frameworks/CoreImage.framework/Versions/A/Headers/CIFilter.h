@@ -260,3 +260,27 @@ CORE_IMAGE_CLASS_EXPORT
 + (NSURL *)localizedReferenceDocumentationForFilterName:(NSString *)filterName;
 
 @end
+
+
+/** Methods to serialize arrays of filters to xmp. */
+@interface CIFilter (CIFilterXMPSerialization)
+
+/* Given an array of filters, serialize the filters' parameters
+ into XMP form that is suitable for embedding in to an image.
+ At this time the only filters classes that are serialized
+ are, CIAffineTransform, CICrop, and the filters returned by
+ [CIImage autoAdjustmentFilters].
+ The parameters of other filter classes will not be serialized.
+ */
++ (NSData*)serializedXMPFromFilters:(NSArray *)filters
+                   inputImageExtent:(CGRect)extent
+__OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_6_0);
+
+/* Return an array of CIFilters de-serialized from XMP data.
+ */
++ (NSArray*)filterArrayFromSerializedXMP:(NSData *)xmpData
+                        inputImageExtent:(CGRect)extent
+                                   error:(NSError **)outError
+__OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_6_0);
+
+@end

@@ -17,5 +17,13 @@ typedef enum ACErrorCode {
     ACErrorAccountAlreadyExists,            // Account wasn't added because it already exists.
     ACErrorAccountNotFound,                 // Account wasn't deleted because it could not be found.
     ACErrorPermissionDenied,                // The operation didn't complete because the user denied permission.
-    ACErrorAccessInfoInvalid                // The client's access info dictionary has incorrect or missing values.
+    ACErrorAccessInfoInvalid,               // The client's access info dictionary has incorrect or missing values.
+    ACErrorClientPermissionDenied,          // Your client does not have access to the requested data.
+    ACErrorAccessDeniedByProtectionPolicy,  // Due to the current protection policy in effect, we couldn't fetch a credential
+    ACErrorCredentialNotFound,              // Yo, I tried to find your credential, but it must have run off!
+    ACErrorFetchCredentialFailed,           // Something bad happened on the way to the keychain
+    ACErrorStoreCredentialFailed,           // Unable to store credential
+    ACErrorRemoveCredentialFailed,          // Unable to remove credential
+    ACErrorUpdatingNonexistentAccount,      // Account save failed because the account being updated has been removed.
+    ACErrorInvalidClientBundleID,           // The client making the request does not have a valid bundle ID.
 } ACErrorCode;

@@ -18,36 +18,131 @@ extern "C" {
 
 
 /*
- * vImageMatrixMultiply_*
+ * vImageMatrixMultiply_Planar16S
  *
- *	Multiply the M channels in the src buffers (A,R,G...) by a NxM matrix (a##) to yield N channels in the dest buffer(s)
- *	For ARGB interleaved functions, both M and N must be 4. The pre_bias (ca, cr, cg...) is added to the M input channels
- *	before the matrix is applied. The post_bias (ka, kr, kg...)  is added afterward. 
+ * Transform M source planes to N destination planes by multiplying the
+ * M x N transformation matrix by the source planes.  A pre-bias may
+ * optionally be added to the source planes before the transformation.  A 
+ * post-bias may optionally be added to the resulting destination planes. As 
+ * a final step the destination planes are divided by a given divisor. 
  *
- *                                                                     { a00  a10  a20  ... }
- *		{ A', R', G' ...} = { A + ca, R + cr, G + cg, ... } *  { a01  a11  a21  ... } + { ka, kr, kg, ....}
- *                                                                     { a02  a12  a22  ... }
- *                                                                     { ...  ...  ...  ... }
+ * if (pre_bias)
+ *   { bA, bR, bG, ... } = { A + pre_bias[0], R + pre_bias[1],
+ *                           G + pre_bias[2], ... }
+ * else 
+ *   { bA, bR, bG, ... } = { A, R, G, ... }
  *
- *		A', R', G', ... = result channels stored into dests
- *		A, R, G, ... = input channels from srcs
- *		ca, cr, cg, ... = pre_bias elements corresponding to the input src channels, or zero if pre_bias is NULL
- *		a00, a11, a12, ... = elmenets from the matrix[]
- *		ka, kr, kg, ... = post_bias elements corresponding to the destination dest channels, or zero if post_bias is NULL
  *
- *      For integer code, there is an additional division operation that happens at the end, in effect normalizing
- *      integer matrices. 
- *	The post-bias is added before any clipping, rounding or division. If you pass NULL for the post-bias, the correct 
- *      value for normal rounding will be used:
+ *                                            { a00  a01  a02  ... }
+ * { A', R', G', ...} = { bA, bR, bG, ... } * { a10  a11  a12  ... }
+ *                                            { a20  a21  a22  ... }
+ *                                            { ...  ...  ...  ... }
  *
- *          integer:            divisor/2
- *          floating point:     0.0f 
+ * if (post_bias)
+ *    { A', R', G', ... } += { post_bias[0], post_bias[1], post_bias[2], ... }
+ * else // correct value for normal rounding: divisor/2
+ *    { A', R', G', ... } += { divisor/2, divisor/2, divisor/2, ... }
  *
- *      Be aware that 32 bit signed accumulators are used for integer code. If the sum over any matrix column is larger 
- *      than +- 2**23, then overflow may occur. Generally speaking this will not happen because the matrix elements are 
- *      16 bit integers, so one would need more than 256 source buffers before it is possible to encounter trouble.
+ * { A', R', G', ... } /= divisor
  *
- *      As an example, to convert RGB to YUV, one might use the following formula:
+ * where the values are:
+ * { A', R', ... }	Resulting destination planes (dests).  For a concrete 
+ *					example of the multiply step for one plane:
+ *					A' = bA * a00 + bR * a10 + bG * a20 + ... * ...
+ *
+ * { A, R, ... }    Source planes (srcs).
+ *
+ * { bA, bR, ... }	Pre-biased source planes. (for demonstration only, never
+ *					actually exists)
+ *
+ * a00, a01, ...    Elements in the transformation matrix (matrix).
+ *
+ * pre_bias         Pre-bias values corresponding to the source channels.
+ *					Value is zero when NULL.
+ *
+ * post_bias 		Post-bias values corresponding to the destination channels.
+ *					When NULL, the correct value for normal rounding if used,
+ *					which is divisor/2.
+ *
+ * divisor			Divisor to normalize the destination planes.	
+ *
+ * Operands:
+ * ---------
+ * srcs				A pointer to an array of vImage_Buffer pointers that
+ *					reference the source planes. This array must contain
+ *					src_planes number of vImage_Buffer pointers.
+ *
+ * dests			A pointer to an array of vImage_Buffer pointers that 
+ *					reference where to write the destination planes. Only 
+ *					the image data pointed to by each vImage_Buffer is modified
+ *					(i.e. dests[0]->data), everything else remains unchanged.
+ *					This array must contain dest_planes number of vImage_Buffer
+ *					pointers.
+ *
+ * src_planes		The number of source planes.  Must be less than 256.
+ *
+ * dest_planes		The number of destination planes.  Must be less than 256.
+ *                         
+ * matrix			The row major transformation matrix with dest_planes number 
+ *					of columns and src_planes number of rows.  Be aware that if
+ *					any column of this matrix sums to a value larger than 
+ *					+-65538 this function may silently overflow.
+ *
+ * divisor			Division by this value occurs as the last step, in effect
+ *					normalizing the output planes.
+ *
+ * pre_bias			An optional array of length src_planes consisting of int16_t
+ *					values. Each value will be added to the corresponding
+ *					source plane in srcs.  Pass NULL for no pre_bias.
+ *
+ * post_bias		An optional array of length dest_planes consisting of 
+ *					int16_t values.  Each value will be added to the 
+ *					corresponding destination planes in dests.  The post_bias
+ *					is added before any clipping, rounding or division.  Pass 
+ *					NULL the correct value for for normal rounding (divisor/2).
+ *
+ * flags			The following flags are allowed:
+ *
+ *		kvImageDoNotTile			Turns off internal multithreading. You may
+ * 									wish to do this if you have your own
+ *									multithreading scheme to avoid having the
+ *									two interfere with one another.
+ *
+ * Return Value:
+ * -------------
+ * kvImageInvalidKernelSize			Either src_planes or dest_planes is 0.
+ * kvImageBufferSizeMismatch		All buffers in dests must have the same
+ *									width and height.
+ * kvImageROILargerThanSourceBuffer The destination buffer size (width, or
+ *									height) is larger than the source buffer.
+ * kvImageUnknownFlagsBit			Unexpected flag was passed.		
+ * kvImageNoError					Success!
+ *
+ *
+ * Comments:
+ * ---------
+ * Be aware that 32-bit signed accumulators are used in this operation with no
+ * overflow protection. To avoid the possibility of overflow, limit the sum
+ * of any column in the transformation matrix to values less than +-65536.
+ * 
+ * The 32-bit accumulated results out of 16-bit range (+-32767) will be subject  
+ * clipping before writing to the destination buffer.
+ *
+ * This routine will work in place provided all of the following are true:
+ * src.data == dest.data
+ * src.rowBytes == dest.rowBytes
+ * kvImageDoNotTile is passed
+ *
+ *  Some matrix based color transforms, such as that obtained using kColorSyncConversionMatrix are defined differently.
+ *
+ *      ColorSync:      p' = M1 * p                  M1 = colorsync matrix,  p = input pixel as column vector, p' = output pixel as column vector
+ *         vImage:      p'T = pT * M2                M2 = vImage matrix,T indicates transpose -- vImage pixels are row vectors
+ *
+ *  Given that (A*B)T = BT*AT, it can be shown that M2 = M1T. So, to use the alternative definition here, you need to transpose the matrix.
+ *
+ * Example:
+ * --------
+ * To convert RGB to YUV, one might use the following formula:
  *
  *          Y = ( (  66 * R + 129 * G +  25 * B + 128) >> 8) +  16
  *          U = ( ( -38 * R -  74 * G + 112 * B + 128) >> 8) + 128
@@ -59,27 +154,89 @@ extern "C" {
  *              129     -74     -94
  *               25     112     -18
  *
- *      There is also the >>8 operation and the extra terms to be dealt with. For integer data, you would use a divisor of 
- *      256 to account for the >>8 operation. The divisor is applied last after all other multiplications and additions. 
- *      (For floating point, there is no divisor. Just divide the whole matrix by the divisor if one is needed.) Use the
- *      post bias to handle the +128 and {+16, +128, +128} terms. Since the second set happen after the divisor in the 
- *      formula above, but our post_bias is applied before the divide, you'll need to multiply those biases by the divisor.  
- *      This will give a post_bias of:
+ *		Pass 256 as the divisor to handle the >> 8 operation.  The post_bias
+ *		argument can handle the addition of { 16, 128, 128 }, however because
+ *		this function performs the division last, this array must be scaled by
+ *		the divisor, yielding a post_bias of:
+ *			post_bias = { 16*divisor + divisor/2, 128*divisor + divisor/2, 
+ *									128*divisor + divisor/2}
+ *			post bias = { 4224, 32896, 32896 }
+ */
+    
+vImage_Error vImageMatrixMultiply_Planar16S( const vImage_Buffer *srcs[],
+                                             const vImage_Buffer *dests[],	
+                                             uint32_t    	      src_planes,
+                                             uint32_t    	      dest_planes,
+                                             const int16_t    	  matrix[],
+                                             int32_t              divisor,
+                                             const int16_t	     *pre_bias,	
+                                             const int32_t	     *post_bias,
+                                             vImage_Flags 	      flags )
+    										 VIMAGE_NON_NULL(1,2,5)
+    										 __OSX_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 );
+    
+/*
+ * vImageMatrixMultiply_*
+ *
+ *	Multiply the M channels in the src buffers (A,R,G...) by a NxM matrix (a##) to yield N channels in the dest buffer(s)
+ *	For ARGB interleaved functions, both M and N must be 4. The pre_bias (ca, cr, cg...) is added to the M input channels
+ *	before the matrix is applied. The post_bias (ka, kr, kg...)  is added afterward. 
+ *
+ *                                                             { a00  a10  a20  ... }
+ *		{ A', R', G' ...} = { A + ca, R + cr, G + cg, ... } *  { a01  a11  a21  ... } + { ka, kr, kg, ....}
+ *                                                             { a02  a12  a22  ... }
+ *                                                             { ...  ...  ...  ... }
+ *
+ *		A', R', G', ... = result channels stored into dests
+ *		A, R, G, ... = input channels from srcs
+ *		ca, cr, cg, ... = pre_bias elements corresponding to the input src channels, or zero if pre_bias is NULL
+ *		a00, a11, a12, ... = elmenets from the matrix[]
+ *		ka, kr, kg, ... = post_bias elements corresponding to the destination dest channels, or zero if post_bias is NULL
+ *
+ *  For integer code, there is an additional division operation that happens at the end, in effect normalizing integer matrices. 
+ *  The post-bias is added before any clipping, rounding or division. If you pass NULL for the post-bias, the correct value for 
+ *  normal rounding will be used:
+ *
+ *      integer:            divisor/2
+ *      floating point:     0.0f 
+ *
+ *  Be aware that 32 bit signed accumulators are used for integer code. If the sum over any matrix column is larger 
+ *  than +- 2**23, then overflow may occur. Generally speaking this will not happen because the matrix elements are 
+ *  16 bit integers, so one would need more than 256 source buffers before it is possible to encounter trouble.
+ *
+ *  As an example, to convert RGB to YUV, one might use the following formula:
+ *
+ *          Y = ( (  66 * R + 129 * G +  25 * B + 128) >> 8) +  16
+ *          U = ( ( -38 * R -  74 * G + 112 * B + 128) >> 8) + 128
+ *          V = ( ( 112 * R -  94 * G -  18 * B + 128) >> 8) + 128
+ *
+ *  This translates to a matrix that looks like this:
+ *
+ *               66     -38     112
+ *              129     -74     -94
+ *               25     112     -18
+ *
+ *  There is also the >>8 operation and the extra terms to be dealt with. For integer data, you would use a divisor of 
+ *  256 to account for the >>8 operation. The divisor is applied last after all other multiplications and additions. 
+ *  (For floating point, there is no divisor. Just divide the whole matrix by the divisor if one is needed.) Use the
+ *  post bias to handle the +128 and {+16, +128, +128} terms. Since the second set happen after the divisor in the 
+ *  formula above, but our post_bias is applied before the divide, you'll need to multiply those biases by the divisor.  
+ *  This will give a post_bias of:
  *
  *              {  16 * 256 + 128, 128 * 256 + 128, 128 * 256 + 128 } = { 4224, 32896, 32896 }
  *
- *      Finally, if there is an alpha component, such that you wish to convert ARGB to AYUV, leaving the alpha component
- *      unchanged then add another row and column:
+ *  Finally, if there is an alpha component, such that you wish to convert ARGB to AYUV, leaving the alpha component
+ *  unchanged then add another row and column:
  *
- *          matrix =    divisor      0       0       0
- *                          0        66     -38     112 
- *                          0       129     -74     -94 
- *                          0        25     112     -18 
+ *      matrix =    divisor      0       0       0
+ *                      0        66     -38     112 
+ *                      0       129     -74     -94 
+ *                      0        25     112     -18 
  *
- *          post_bias =     { divisor/2, 4224, 32896, 32896 }
- *          divisor =       256
+ *      post_bias =     { divisor/2, 4224, 32896, 32896 }
+ *      divisor =       256
  *
- *      Integer results out of range of 0...255 will be subject to saturated clipping before writing to the destination buffer.  
+ *  Integer results out of range of 0...255 will be subject to saturated clipping before writing to the destination buffer.
  *
  *
  *	Programming Note:
@@ -95,6 +252,14 @@ extern "C" {
  *  The source and destination buffers may all be different sizes and have different sized rowbytes. The source buffers must 
  *  be at least as large as the dest buffers. In cases where the source buffer is larger than a dest buffer, the portion of the 
  *  source buffer that overlaps the destination buffer when their top left corners are aligned will be used.  
+ *
+ *  Some matrix based color transforms, such as that obtained using kColorSyncConversionMatrix are defined differently.
+ *
+ *      ColorSync:      p' = M1 * p                  M1 = colorsync matrix,  p = input pixel as column vector, p' = output pixel as column vector
+ *         vImage:      p'T = pT * M2                M2 = vImage matrix, T indicates transpose -- vImage pixels are row vectors
+ *
+ *  Given that (A*B)T = BT*AT, we find that M2 = M1T. So, to use the alternatively defined matrix here, you need to transpose the matrix 
+ *  before passing it to vImage.
  */
 
 vImage_Error vImageMatrixMultiply_Planar8(          const vImage_Buffer *srcs[],	//A set of src_planes as a const array of pointers to vImage_Buffer structs that reference vImage_Buffers.
@@ -105,7 +270,7 @@ vImage_Error vImageMatrixMultiply_Planar8(          const vImage_Buffer *srcs[],
                                                     int32_t             divisor,
                                                     const int16_t	*pre_bias,	//A packed array of src_plane int16_t values. NULL is okay
                                                     const int32_t	*post_bias,	//A packed array of dest_plane int32_t values. NULL is okay
-                                                    vImage_Flags 	flags )		__OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 );
+                                                    vImage_Flags 	flags ) VIMAGE_NON_NULL(1,2,5) __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 );
 
 vImage_Error vImageMatrixMultiply_PlanarF(          const vImage_Buffer *srcs[],        //A set of src_planes as a const array of pointers to vImage_Buffer structs that reference vImage_Buffers.
                                                     const vImage_Buffer *dests[],       //A set of src_planes as a const array of pointers to vImage_Buffer structs that reference vImage_Buffers.
@@ -114,7 +279,7 @@ vImage_Error vImageMatrixMultiply_PlanarF(          const vImage_Buffer *srcs[],
                                                     const float		matrix[],		
                                                     const float 	*pre_bias,	//A packed array of float values. NULL is okay
                                                     const float 	*post_bias,	//A packed array of float values. NULL is okay
-                                                    vImage_Flags flags )		__OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 );
+                                                    vImage_Flags flags ) VIMAGE_NON_NULL(1,2,5) __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 );
 
 /*
  * vImageMatrixMultiply_ARGB8888 will also work for other channel orders such as RGBA8888.  The ordering of terms in the matrix, pre_bias and 
@@ -126,7 +291,7 @@ vImage_Error vImageMatrixMultiply_ARGB8888(         const vImage_Buffer *src,
                                                     int32_t             divisor,
                                                     const int16_t	*pre_bias,	//Must be an array of 4 int16_t's. NULL is okay. 
                                                     const int32_t 	*post_bias,	//Must be an array of 4 int32_t's. NULL is okay. 
-                                                    vImage_Flags 	flags )		__OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 );
+                                                    vImage_Flags 	flags ) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 );
 
 /*
  * vImageMatrixMultiply_ARGBFFFF will also work for other channel orders such as RGBAFFFF.  The ordering of terms in the matrix, pre_bias and 
@@ -137,7 +302,7 @@ vImage_Error vImageMatrixMultiply_ARGBFFFF(         const vImage_Buffer *src,
                                                     const float		matrix[4*4],
                                                     const float		*pre_bias,	//Must be an array of 4 floats. NULL is okay. 
                                                     const float		*post_bias,	//Must be an array of 4 floats. NULL is okay. 
-                                                    vImage_Flags 	flags )		__OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 );
+                                                    vImage_Flags 	flags ) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 );
 
 /*
  * The gamma calculation is at the simplest level:
@@ -178,9 +343,14 @@ vImage_Error vImageMatrixMultiply_ARGBFFFF(         const vImage_Buffer *src,
  * restrictions as above for the half precision gamma, but execute in less time. (These fixed exponent gamma curves
  * are present in MacOS X.4, unless otherwise noted below.)
  *
- * vImageGamma_PlanarF will work in place. 
- * vImageGamma_PlanarFToPlanar8 will work in place. 
+ * vImageGamma_PlanarF and vImageGamma_PlanarFToPlanar8 will work in place, provided that the following are true:
+ *      src->data == dest->data
+ *      src->rowBytes >= dest->rowBytes
+ *      if( src->rowBytes > dest->rowBytes ) kvImageDoNotTile must be passed in the flags parameter
+ *
  * vImageGamma_Planar8ToPlanarF will NOT work in place. 
+ *
+ *  For the func
  *
  * These functions will also work for multichannel data, such as RGBAFFFF buffers by adjusting the width of the buffer to 
  * reflect the additional channels. Note that this will cause the alpha channel if there is one to become gamma corrected.
@@ -212,21 +382,155 @@ GammaFunction   vImageCreateGammaFunction(          float           gamma,
 void            vImageDestroyGammaFunction( GammaFunction f )                           __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 );
 
 /* There is a 8 bit lookup table in Conversion.h, if you are looking for a 8bit to 8bit gamma function. */
-vImage_Error    vImageGamma_Planar8toPlanarF(       const vImage_Buffer *src,           
+vImage_Error    vImageGamma_Planar8toPlanarF(       const vImage_Buffer *src,
                                                     const vImage_Buffer *dest,           
                                                     const GammaFunction gamma,
-                                                    vImage_Flags        flags )         __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 );
+                                                    vImage_Flags        flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 );
                                                     
 vImage_Error    vImageGamma_PlanarFtoPlanar8(       const vImage_Buffer *src,           
                                                     const vImage_Buffer *dest,          
                                                     const GammaFunction gamma,
-                                                    vImage_Flags        flags )         __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 );
+                                                    vImage_Flags        flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 );
                                                     
 vImage_Error    vImageGamma_PlanarF(                const vImage_Buffer *src,           
                                                     const vImage_Buffer *dest,          
                                                     const GammaFunction gamma,
-                                                    vImage_Flags        flags )         __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 );
+                                                    vImage_Flags        flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 );
                                         
+/* vImagePiecewiseGamma_Planar8
+ * vImagePiecewiseGamma_Planar8toPlanar16Q12
+ * vImagePiecewiseGamma_Planar8toPlanarF
+ * vImagePiecewiseGamma_Planar16Q12
+ * vImagePiecewiseGamma_Planar16Q12toPlanar8
+ * vImagePiecewiseGamma_PlanarF
+ * vImagePiecewiseGamma_PlanarFtoPlanar8
+ *
+ * The piecewise gamma calculation combines a linear and an exponential (gamma)
+ * curve on two regions of the input interval, separated by a user-supplied
+ * boundary value.  When the input is greater or equal to the boundary value,
+ * the gamma curve is used to generate the output. Otherwise, the linear curve
+ * is used.
+ *
+ * The operation can be described as follows:
+ *
+ *  For each source pixel value x:
+ *    sign = x < 0 ? -1 : 1
+ *    absx = x < 0 ? -x : x
+ *    if absx < cutoff:
+ *      output pixel value = sign * (linearCoeffs[0]*absx + linearCoeffs[1])
+ *    else:
+ *      y = exponentialCoeffs[0]*absx + exponentialCoeffs[1]
+ *      output pixel value = sign * (pow(y, gamma) + exponentialCoeffs[2])
+ *
+ * If y is negative, the result is undefined.
+ *
+ * If the source format is Planar8, we multiply by 1/255.0 to get the "input"
+ * value used in the expression above; if the destination format is Planar8,
+ * we clamp the output value to [0, 1.0], multiply by 255.0 and round to
+ * nearest to get the value stored to the destination buffer.
+ *
+ * If the source format is Planar16Q12, we multiply by 1/4096.0 to get the
+ * input value; we clamp to [-8, 8), multiply by 4096.0, and round to nearest
+ * to get the stored to the destination buffer.
+ *
+ * Regardless of the input or output pixel type, the parameters describing the
+ * piecewise gamma function are 32-bit floats, with the single exception of the
+ * boundary parameter.
+ *
+ *  Operands:
+ *  ---------
+ *      src                 A pointer to a vImage_Buffer that references the source pixels
+ *
+ *      dest                A pointer to a vImage_Buffer that references the destination pixels
+ *
+ *      exponentialCoeffs   An array of three floating point coefficients for the gamma curve
+ *
+ *      gamma               The exponent of a power function for calculating gamma correction
+ *
+ *      linearCoeffs        An array of two floating point coefficients for the linear curve
+ *
+ *      boundary            The boundary value for switching from linear to gamma curve
+ *
+ *      flags               The following flags are allowed:
+ *
+ *          kvImageDoNotTile            Turns off internal multithreading. You may
+ *                                      wish to do this if you have your own
+ *                                      multithreading scheme to avoid having the
+ *                                      two interfere with one another.
+ *
+ *          kvImageGetTempBufferSize    Does no work and returns zero.
+ *
+ *  Return Value:
+ *  -------------
+ *      kvImageNoError                  Success!
+ *      kvImageNullPointerArgument      src, dest, exponentialCoeffs, or linearCoeffs pointer is NULL.
+ *      kvImageBufferSizeMismatch       The destination buffer size (width or
+ *                                      height) is larger than the source buffer.
+ *      kvImageUnknownFlagsBit          An unknown or invalid flag was passed. See flags above.
+ *
+ *  The variants of this routine that have source and dest pixel types of the
+ *  same size (Planar8, Planar16Q12, and PlanarF) operate in place so long as
+ *  the source and dest image scanlines overlap exactly.  The other variants
+ *  (Planar8toPlanar16Q12, Planar8toPlanarF, etc) do not support in-place
+ *  operation.
+ */
+
+vImage_Error vImagePiecewiseGamma_Planar8(const vImage_Buffer *src,
+                                          const vImage_Buffer *dest,
+                                          const float         exponentialCoeffs[3],
+                                          const float         gamma,
+                                          const float         linearCoeffs[2],
+                                          const Pixel_8       boundary,
+                                          vImage_Flags        flags) VIMAGE_NON_NULL(1,2,3,5) __OSX_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 );
+    
+vImage_Error vImagePiecewiseGamma_Planar8toPlanar16Q12(const vImage_Buffer *src,
+                                                       const vImage_Buffer *dest,
+                                                       const float         exponentialCoeffs[3],
+                                                       const float         gamma,
+                                                       const float         linearCoeffs[2],
+                                                       const Pixel_8       boundary,
+                                                       vImage_Flags        flags) VIMAGE_NON_NULL(1,2,3,5) __OSX_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 );
+    
+vImage_Error vImagePiecewiseGamma_Planar16Q12(const vImage_Buffer *src,
+                                              const vImage_Buffer *dest,
+                                              const float         exponentialCoeffs[3],
+                                              const float         gamma,
+                                              const float         linearCoeffs[2],
+                                              const Pixel_16S     boundary,
+                                              vImage_Flags        flags) VIMAGE_NON_NULL(1,2,3,5) __OSX_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 );
+    
+vImage_Error vImagePiecewiseGamma_Planar16Q12toPlanar8(const vImage_Buffer *src,
+                                                       const vImage_Buffer *dest,
+                                                       const float         exponentialCoeffs[3],
+                                                       const float         gamma,
+                                                       const float         linearCoeffs[2],
+                                                       const Pixel_16S     boundary,
+                                                       vImage_Flags        flags) VIMAGE_NON_NULL(1,2,3,5) __OSX_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 );
+    
+vImage_Error vImagePiecewiseGamma_Planar8toPlanarF(const vImage_Buffer *src,
+                                                   const vImage_Buffer *dest,
+                                                   const float         exponentialCoeffs[3],
+                                                   const float         gamma,
+                                                   const float         linearCoeffs[2],
+                                                   const Pixel_8       boundary,
+                                                   vImage_Flags        flags) VIMAGE_NON_NULL(1,2,3,5) __OSX_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 );
+
+vImage_Error vImagePiecewiseGamma_PlanarF(const vImage_Buffer *src,
+                                          const vImage_Buffer *dest,
+                                          const float         exponentialCoeffs[3],
+                                          const float         gamma,
+                                          const float         linearCoeffs[2],
+                                          const float         boundary,
+                                          vImage_Flags        flags) VIMAGE_NON_NULL(1,2,3,5) __OSX_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 );
+    
+vImage_Error vImagePiecewiseGamma_PlanarFtoPlanar8(const vImage_Buffer *src,
+                                                   const vImage_Buffer *dest,
+                                                   const float         exponentialCoeffs[3],
+                                                   const float         gamma,
+                                                   const float         linearCoeffs[2],
+                                                   const float         boundary,
+                                                   vImage_Flags        flags) VIMAGE_NON_NULL(1,2,3,5) __OSX_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 );
+
 /*
  *  vImagePiecewisePolynomial*
  *
@@ -257,6 +561,11 @@ vImage_Error    vImageGamma_PlanarF(                const vImage_Buffer *src,
  *
  *  These functions will also work for multichannel data, such as RGBAFFFF buffers by adjusting the width of the buffer to 
  *  reflect the additional channels. Note that this will cause the alpha channel, if there is one, to become modified like the other channels.
+ *  These will work in place, provided that the following are true:
+ *      src->data == dest->data
+ *      src->rowBytes >= dest->rowBytes
+ *      if( src->rowBytes > dest->rowBytes ) kvImageDoNotTile must be passed in the flags parameter
+
  *
  *  The input parameters are as follows:
  *
@@ -356,7 +665,7 @@ vImage_Error    vImagePiecewisePolynomial_PlanarF(  const vImage_Buffer *src,   
                                                     const float         *boundaries,
                                                     uint32_t            order,
                                                     uint32_t            log2segments,
-                                                    vImage_Flags        flags )     __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 );
+                                                    vImage_Flags        flags ) VIMAGE_NON_NULL(1,2,3,4) __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 );
 
 
 
@@ -366,7 +675,7 @@ vImage_Error    vImagePiecewisePolynomial_Planar8toPlanarF( const vImage_Buffer 
                                                             const float         *boundaries,
                                                             uint32_t            order,
                                                             uint32_t            log2segments,
-                                                            vImage_Flags        flags )     __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 );
+                                                            vImage_Flags        flags ) VIMAGE_NON_NULL(1,2,3,4) __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 );
 
 vImage_Error    vImagePiecewisePolynomial_PlanarFtoPlanar8( const vImage_Buffer *src,       //floating point data
                                                             const vImage_Buffer *dest,      //8-bit data
@@ -374,7 +683,7 @@ vImage_Error    vImagePiecewisePolynomial_PlanarFtoPlanar8( const vImage_Buffer 
                                                             const float         *boundaries,	/*The 0th and Nth terms in the boundaries array are typically 0.0f and 255.0f respectively. Other values may incur additional computational cost. */
                                                             uint32_t            order,
                                                             uint32_t            log2segments,
-                                                            vImage_Flags        flags )     __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 );
+                                                            vImage_Flags        flags ) VIMAGE_NON_NULL(1,2,3,4) __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 );
 
 /*
  *      vImagePiecewiseRational_PlanarF is similar to vImagePiecewisePolynomial_PlanarF
@@ -389,7 +698,7 @@ vImage_Error    vImagePiecewisePolynomial_PlanarFtoPlanar8( const vImage_Buffer 
  *      polynomial has its own set of coefficients and its own polynomial order. The two 
  *      polynomials share the same set of segment boundaries. If the polynomials are split then 
  *      all the top polynomials must be of the same order, and all the bottom polynomials must 
- *      be of the same order. However, regardless of whether the polynomial is split or not, 
+ *      be of the same order. However, regardless of whether the polynomial is split or not,
  *      the top polynomials do not need to be the same order as the bottom polynomials.
  *
  *      This function does not deliver IEEE-754 correct division. The divide does not round per
@@ -406,6 +715,11 @@ vImage_Error    vImagePiecewisePolynomial_PlanarFtoPlanar8( const vImage_Buffer 
  *      width of the buffer to reflect the additional channels. Note that this will cause the alpha channel, 
  *      if there is one, to become modified like the other channels.
  *
+ *      These will work in place, provided that the following are true:
+ *          src->data == dest->data
+ *          src->rowBytes >= dest->rowBytes
+ *          if( src->rowBytes > dest->rowBytes ) kvImageDoNotTile must be passed in the flags parameter
+
  *      Performance Advisory:
  *        Approximate cost of evaluating a rational (in the same units as polynomial above) is:
  *
@@ -431,8 +745,30 @@ vImage_Error    vImagePiecewiseRational_PlanarF(  const vImage_Buffer *src,     
                                                     uint32_t            topOrder,
                                                     uint32_t            bottomOrder,
                                                     uint32_t            log2segments,
-                                                    vImage_Flags        flags )     __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 );
-
+                                                    vImage_Flags        flags ) VIMAGE_NON_NULL(1,2,3,4,5) __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 );
+    
+/*  A simple lookup table:
+ *
+ *          Pixel_16U table[256];
+ *          Pixel_16U result_pixel = table[input_8_bit_pixel];
+ *
+ *  The input is a buffer of 8-bit pixels. The output is a buffer of 16-bit pixels.
+ *
+ *	Note: It is okay to use this to convert Planar8 data to other 16 bit types as well, such as 16S or 16F,
+ *  or ARGB1555 or RGB565 pixels.  Simply use an array of the appropriate type for the lookup table.
+ *
+ *  This function can also work for multichannel data by scaling the width of the image to compensate for the
+ *  additional channels. All channels will use the same table.
+ *
+ *  vImageLookupTable_Planar8ToPlanar16 will not work in place.
+ */
+    
+vImage_Error vImageLookupTable_Planar8toPlanar16(const vImage_Buffer *src,
+                                                 const vImage_Buffer *dest,
+                                                 const Pixel_16U      table[256],
+                                                 vImage_Flags         flags)
+    VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+    
 /*
  *  A simple lookup table:
  *
@@ -446,13 +782,17 @@ vImage_Error    vImagePiecewiseRational_PlanarF(  const vImage_Buffer *src,     
  *
  *  This function can also work for multichannel data by scaling the width of the image to compensate for the 
  *  additional channels. All channels will use the same table.
+ *  
+ *  vImageLookupTable_Planar8ToPlanarF will not work in place.
  */
+    
+vImage_Error vImageLookupTable_Planar8toPlanarF(const vImage_Buffer *src,
+                                                const vImage_Buffer *dest,
+                                                const Pixel_F        table[256],
+                                                vImage_Flags         flags)
+    VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0);
 
-vImage_Error    vImageLookupTable_Planar8toPlanarF(     const vImage_Buffer *src,          /* 8-bit pixels */
-                                                        const vImage_Buffer *dest,         /* floating point pixels */
-                                                        const Pixel_F       table[256],
-                                                        vImage_Flags        flags )         __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 );
-                                                        
+
 /*
  *  A simple lookup table with floating point inputs:
  *
@@ -463,11 +803,59 @@ vImage_Error    vImageLookupTable_Planar8toPlanarF(     const vImage_Buffer *src
  *  The input is a buffer of floating-point pixels. The output is a buffer of 8-bit pixels. 
  *  This function can also work for multichannel data by scaling the width of the image to compensate for the 
  *  additional channels. All channels will use the same table.
+ *
+ *  vImageLookupTable_PlanarFToPlanar8 will work in place, provided that the following are true:
+ *      src->data == dest->data
+ *      src->rowBytes >= dest->rowBytes
+ *      if( src->rowBytes > dest->rowBytes ) kvImageDoNotTile must be passed in the flags parameter
  */
-vImage_Error    vImageLookupTable_PlanarFtoPlanar8(     const vImage_Buffer *src,          /* floating point pixels */
-                                                        const vImage_Buffer *dest,         /* 8-bit pixels */
-                                                        const Pixel_8       table[4096],
-                                                        vImage_Flags        flags )         __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 );
+vImage_Error
+vImageLookupTable_PlanarFtoPlanar8(
+    const vImage_Buffer *src,          /* floating point pixels */
+    const vImage_Buffer *dest,         /* 8-bit pixels */
+    const Pixel_8       table[4096],
+    vImage_Flags        flags )
+    VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 );
+
+
+/*
+ *  vImageLookupTable_8to64U
+ *
+ *  Use a lookup table to remap 0..255 values in the source image to a
+ *  different set of 64-bit unsigned integer values in the destination.
+ *
+ *          uint64_t table[256];
+ *          uint64_t result_pixel = table[ input_8_bit_pixel ];
+ *
+ *      src         A pointer to a vImage_Buffer that references the source pixels
+ *
+ *      dest        A pointer to a vImage_Buffer that references the destination pixels
+ *
+ *      table       A pointer to the lookup table. The table should be an array with 256 elements.
+ *
+ *      flags       The following flags are allowed:
+ *
+ *          kvImageDoNotTile         Turns off internal multithreading. You may
+ *                                   wish to do this if you have your own
+ *                                   multithreading scheme to avoid having the
+ *                                   two interfere with one another.
+ *
+ *  Return Value:
+ *  -------------
+ *      kvImageNoError                  Success!
+ *      kvImageBufferSizeMismatch       Sizes of the src and dest images do not match
+ *      kvImageNullPointerArgument      src, dest or table pointer is NULL.
+ *
+ *  This routine will not work in place.
+ *
+ */
+vImage_Error
+vImageLookupTable_8to64U(
+    const vImage_Buffer *src,
+    const vImage_Buffer *dest,
+    const uint64_t      LUT[256],
+    vImage_Flags flags)
+    VIMAGE_NON_NULL(1,2,3)   __OSX_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 );
 
 
 /*
@@ -499,18 +887,227 @@ vImage_Error    vImageLookupTable_PlanarFtoPlanar8(     const vImage_Buffer *src
  *				If the table is too small or the value of table[ tableEntries ] is infinite or NaN, 
  *				behavior is undefined.
  *
- *  The function will work in place. 
+ *  The function will work in place, provided that the following are true:
+ *      src->data == dest->data
+ *      src->rowBytes >= dest->rowBytes
+ *      if( src->rowBytes > dest->rowBytes ) kvImageDoNotTile must be passed in the flags parameter
+ * 
  *  This function may be used on multichannel images by scaling the width by the number of channels.
  *  The same table will be used for all the channels, including alpha, if there is an alpha channel.
  */
 vImage_Error    vImageInterpolatedLookupTable_PlanarF(  const vImage_Buffer *src,
                                                         const vImage_Buffer *dest,
                                                         const Pixel_F       *table,
-                                                        vImagePixelCount            tableEntries,
+                                                        vImagePixelCount    tableEntries,
                                                         float               maxFloat,
                                                         float               minFloat,
-                                                        vImage_Flags        flags )                     __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 );
+                                                        vImage_Flags        flags ) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 );
 
+    
+/*
+ *  vImageMultidimensionalTable_Create
+ *
+ *  Creates a vImage_MultidimensionalTable for use with vImageMultiDimensionalInterpolatedLookupTable_<fmt>(). The
+ *  input data is a contiguous array of N dimensional samples which define the lookup table grid points.
+ *  The samples have range [0,65535] interpreted as [0, 1.0f]. (Samples have an implict divide by 65535
+ *  in them, like the Planar16U format.)  
+ *
+ *  The vImage_MultidimensionalTable is not a CFType.
+ *
+ *  Example: 
+ *      Suppose the multidimensional table is intended to convert RGB (3 channel) data to CMYK (4 channel).
+ *      In each of the {R, G, B} dimensions, we have 17 samples. The table is then comprised of
+ *      17x17x17=4913 uint16_t[4]'s, each of which contains {C,M,Y,K} for that position. The dimensions
+ *      are iterated in standard C order (row major). In this case, they would be:
+ * 
+ *      {CMYK for  R0G0B0, CMYK for R0G0B1,  CMYK for  R0G0B2, ...  CMYK for  R0G0B16,
+ *       CMYK for  R0G1B0, CMYK for R0G1B1,  CMYK for  R0G1B2, ...  CMYK for  R0G1B16,
+ *       ...
+ *       CMYK for R0G16B0, CMYK for R0G16B1, CMYK for R0G16B2, ...  CMYK for R0G16B16,
+ *       CMYK for  R1G0B0, CMYK for R1G0B1,  CMYK for R1G0B2,  ...  CMYK for R1G0B16,
+ *       ...
+ *       CMYK for R1G16B0, CMYK for R1G16B1, CMYK for R1G16B2,  ...  CMYK for R1G16B16,
+ *       ...
+ *       CMYK for R16G16B0, CMYK for R16G16B1, CMYK for R16G16B2,  ...  CMYK for R16G16B16 }
+ *
+ *  Parameters:
+ *      tableData                   A non-NULL pointer to the data used to build the table
+ *      numSrcChannels              The number of channels in an input pixel
+ *      numDestChannels             The number of channels in an output pixel
+ *      table_entries_per_dimension An array containing the number of table entries for each dimension in numSrcChannels
+ *                                      The entries are in the same order as the channels in the src pixel.
+ *      hint                        An indication of how the table would be used.  Pass either kvImageMDTableHint_16Q12
+ *                                      or kvImageMDTableHint_Float or both. If only one is passed, we will save memory
+ *                                      and time skipping work to set up the table for unused formats.
+ *      flags						The following flags are allowed:
+ *
+ *				kvImageDoNotTile	Turns off internal multithreading. You may
+ * 									wish to do this if you have your own
+ *									multithreading scheme to avoid having the
+ *									two interfere with one another.
+ *      err                         A pointer to a vImage_Error. If err != NULL, on return, the memory pointed to by error
+ *                                      will be overwritten with an appropriate error or kvImageNoError. It is sufficient to 
+ *                                      simply check the LHS return value against NULL to determine whether the function succeeeded.
+ *
+ *  Return value:
+ *      On return a valid vImage_MultidimensionalTable for use with vImageMultiDimensionalInterpolatedLookupTable_<fmt>
+ *      if err is not NULL, the memory it points to will be overwritten with an appropriate error code. The 
+ *      vImage_MultidimensionalTable will contain a copy of the data provided in tableData. It is safe to deallocate
+ *      the input tableData immediately after this call returns.
+ *
+ *       
+ *
+ *  Errors:
+ *      kvImageNoError                Success
+ *      kvImageInvalidParameter       hint must be kvImageMDTableHint_16Q12 or kvImageMDTableHint_Float or both
+ *		kvImageInvalidParameter       numSrcChannels and numDestChannels must be non-zero.
+ *      kvImageNullPointerArgument    tableData and table_entries_per_dimension must not be NULL.
+ *      kvImageUnknownFlagsBit        An illegal or unknown flag was passed to the function.
+ *      kvImageMemoryAllocationError  Can not allocate memory for buffer.
+ *      
+ *  Use vImageMultidimensionalTable_Release to destroy the vImage_MultidimensionalTable when you are done with it. 
+ *  The vImage_MultidimensionalTable may be reused. The table is immutable, thread-safe and may be used by many 
+ *  vImageMultiDimensionalInterpolatedLookupTable_<fmt> calls concurrently so long as care is taken that it is not 
+ *  freed while it is being used. To support multithreaded concurrent access, the table follows standard retain/release 
+ *  semantics. On creation the table has a retain count of 1. When the reference count drops to 0, the table is destroyed.
+ *
+ */
+
+typedef struct vImage_MultidimensionalTableData * vImage_MultidimensionalTable;
+    
+/* Hints to describe use of vImage_MultidimensionalTableData look up table. */
+typedef enum
+{
+    kvImageMDTableHint_16Q12 = 1,           
+    kvImageMDTableHint_Float = 2,
+}vImageMDTableUsageHint;
+    
+vImage_MultidimensionalTable vImageMultidimensionalTable_Create( const uint16_t *tableData,
+                                                                 uint32_t numSrcChannels,
+                                                                 uint32_t numDestChannels,
+                                                                 uint8_t table_entries_per_dimension[],   /* uint8_t[numSrcChannels] */
+                                                                 vImageMDTableUsageHint hint,
+                                                                 vImage_Flags flags,
+                                                                 vImage_Error *err )
+                                                                 VIMAGE_NON_NULL(1,4)
+                                                                 __OSX_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 );
+    
+/*
+ *  vImageMultidimensionalTable_Retain
+ *  vImageMultidimensionalTable_Release
+ *
+ *  A vImage_MultidimensionalTable follows Retain/Release semantics. On creation, the table has  a retain count of 1. 
+ *  If you call vImageMultidimensionalTable_Retain on it, the retain count is incremented. If you call 
+ *  vImageMultidimensionalTable_Release on it, the retain count is decremented. When the retain count reaches 0,
+ *  the object is destroyed. If any vImage function is called on an object whose reference count has already reached 
+ *  0, behavior is undefined.
+ *
+ *  Parameters:
+ *      table       A pointer to vImage_MultidimensionalTableData. If NULL, then nothing happens.
+ *
+ *  Errors:
+ *      kvImageNoError                  Success
+ */
+vImage_Error vImageMultidimensionalTable_Retain( vImage_MultidimensionalTable table ) __OSX_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 );
+vImage_Error vImageMultidimensionalTable_Release( vImage_MultidimensionalTable table ) __OSX_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 );
+    
+/*
+ *  vImageMultiDimensionalLookupTable_PlanarF
+ *
+ *  vImageMultiDimensionalLookupTable_<fmt> uses the input color channel values (treated as a N-dimensional coordinate)
+ *  to index a N-dimensional lookup table to find a new color value, possibly in a new color space. The number of color channels
+ *  in the destination image does not need to match the number of color channels in the source image. The table is created using
+ *  vImageMultidimensionalTable_Create. 
+ *
+ *  In each dimension, the table must be of size (2**K[dimension])+1. The first entry corresponds to 0 and the last to 1.0. The rest
+ *  correspond to steps at 2**-K[dimension]. (K[] is the table_entries_per_dimension[] array in vImageMultidimensionalTable_Create.)
+ *  Thus a 17x17x17 3D lookup table defines the vertices that delineate a grid of 16x16x16 cubes, just as a ruler marked in 16ths of an
+ *  inch has 17 marks between 0 and 1 inch, inclusive. (SI units are usually awkwardly subdivided by powers of 10, rather than powers of 2
+ *  so we avoid them in this example. :-)    The most significant portion of the color channel values are used to index the multidimensional 
+ *  grid. Usually there will be some fractional precision left over.  That is used to do a linear interpolation between nearby gridpoints 
+ *  to find the value at that position. If the vImage_InterpolationMethod is kvImageFullInterpolation, then all 2**N (for N dimensions) 
+ *  nearby gridpoints are considered. If the vImage_InterpolationMethod is kvImageHalfInterpolation, then the {0,0,0...}, {1,1,1...} verticies 
+ *  along the gray axis are considered along with N-1 nearest other vertices. 
+ *
+ *      <insert formula here>
+ *
+ *  Parameters:
+ *
+ *      srcs                    An array of vImage_Buffers that reference the source image planes. The number of
+ *                              such buffers is given by the numSrcChannels parameter passed to vImageMultidimensionalTable_Create.
+ *
+ *      dests                   An array of vImage_Buffers that reference the destination image planes. The number of
+ *                              such buffers is given by the numDestChannels parameter passed to vImageMultidimensionalTable_Create.
+ *
+ *      tempBuffer              May be NULL. If non-NULL, this is a pointer to a region of memory that vImage can use as a 
+ *                              scratch space for storing temporary data. The minimum size of the scratch space is obtained  
+ *                              by calling the function with identical parameters and the kvImageGetTempBufferSize flag.
+ *                              If vImageMultiDimensionalInterpolatedLookupTable_<fmt> can be called from multiple threads
+ *                              simultaneously, the temp buffer must be different (or NULL) for each thread. 
+ *
+ *      table                   A valid table created by vImageMultidimensionalTable_Create
+ *
+ *      method                  either kvImageFullInterpolation or kvImageHalfInterpolation. See description above.
+ *
+ *      flags                   Must be kvImageNoFlags or one or more from this list:
+ *                              
+ *                                  kvImageDoNotTile            turn off internal multithreading. 
+ *                                  kvImageGetTempBufferSize    Return the size of temp buffer. It may return 0. Do nothing.
+ *
+ *  Error Values:
+ *		>= 0                        Minimum temp buffer size, if kvImageGetTempBufferSize was specified.
+ *      kvImageNoError              Success
+ *      kvImageNullPointerArgument  srcs, dests and table may not be NULL
+ *      kvImageUnknownFlagsBit      An illegal or unknown flag was passed to the function.
+ *      kvImageInvalidParameter     An unknown or illegal interpolation method was indicated
+ *      kvImageInvalidParameter     The interpolation method doesn't have a table for the requested data type. 
+ *                                      This happened because an incorrect vImageMDTableUsageHint was passed to
+ *                                      vImageMultidimensionalTable_Create
+ *      kvImageBufferSizeMismatch   Within srcs, all vImage_Buffers must have the same height and width.
+ *									Similarly, within dests, all vImage_Buffers must have the same height and width.
+ *									Otherwise this error is returned.
+ *      kvImageBufferSizeMismatch   The src height and width must be greater than or equal to the destination height
+ *									and width.
+ *
+ */
+
+/* interpolation method for vImageMultiDimensionalInterpolatedLookupTable_<fmt>*/
+typedef enum
+{
+    kvImageNoInterpolation = 0,             /* nearest neighbor. Fast but probably causes banding and will certainly quantize the histogram. */
+    kvImageFullInterpolation = 1,           /* full linear interpolation */
+    kvImageHalfInterpolation = 2            /* partial linear interpolation between vertices on gray axis and N-1 nearest vertices */
+}vImage_InterpolationMethod;
+    
+vImage_Error vImageMultiDimensionalInterpolatedLookupTable_PlanarF( const vImage_Buffer srcs[],
+                                                                    const vImage_Buffer dests[],
+                                                                    void *tempBuffer,
+                                                                    vImage_MultidimensionalTable table,
+                                                                    vImage_InterpolationMethod method,
+                                                                    vImage_Flags flags )
+                                                                    VIMAGE_NON_NULL(1,2,4)
+                                                                    __OSX_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 );
+
+/*
+ *  vImageMultiDimensionalInterpolatedLookupTable_Planar16Q12
+ *
+ *  vImageMultiDimensionalInterpolatedLookupTable_Planar16Q12 is like vImageMultiDimensionalInterpolatedLookupTable_PlanarF
+ *  except that it operates on signed fixed-point data. The 16Q12 format is a signed 16-bit fixed-point value with 12 fractional 
+ *  bits, 3 non-fractional bits and one sign bit. It can represent values in the range (-8,8). However the table always describes 
+ *  a region between [0,1] in each dimension. Values outside this range are clamped to the nearest in-range value by Manhattan 
+ *  distance before indexing the table. See vImageConvert_Planar8to16Q12 and vImageConvert_16Q12toPlanar8 for more on the format.
+ */
+vImage_Error vImageMultiDimensionalInterpolatedLookupTable_Planar16Q12( const vImage_Buffer srcs[],
+                                                                        const vImage_Buffer dests[],
+                                                                        void *tempBuffer,
+                                                                        vImage_MultidimensionalTable table,
+                                                                        vImage_InterpolationMethod method, 
+                                                                        vImage_Flags flags )
+                                                                        VIMAGE_NON_NULL(1,2,4)
+                                                                        __OSX_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 );
+    
+    
+    
 
 #ifdef __cplusplus
 }

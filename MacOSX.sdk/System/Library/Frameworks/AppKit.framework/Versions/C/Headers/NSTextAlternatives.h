@@ -1,7 +1,7 @@
 /*
 	NSTextAlternatives.h
 	Application Kit
-	Copyright (c) 2011-2012, Apple Inc.
+	Copyright (c) 2011-2013, Apple Inc.
 	All rights reserved.
 */
 

@@ -3,14 +3,22 @@
  
      Contains:   URL Access Interfaces.
  
-     Version:    SecurityHI-55002~1072
- 
      Copyright:  © 1994-2008 by Apple Computer, Inc., all rights reserved
  
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
+     Warning:    *** APPLE INTERNAL USE ONLY ***
+                 This file may contain unreleased API's
  
-                     http://developer.apple.com/bugreporter/
+     BuildInfo:  Built by:            khenrickson
+                 On:                  Fri Aug 10 12:01:34 2012
+                 With Interfacer:     3.0d46   (Mac OS X for PowerPC)
+                 From:                URLAccess.i
+                     Revision:        1.3
+                     Dated:           2004/05/10 20:47:29
+                     Last change by:  mortay
+                     Last comment:    merged 3545315 to TOT
+ 
+     Bugs:       Report bugs to Radar component "System Interfaces", "Latest"
+                 List the version information (from above) in the Problem Description.
  
 */
 #ifndef __URLACCESS__

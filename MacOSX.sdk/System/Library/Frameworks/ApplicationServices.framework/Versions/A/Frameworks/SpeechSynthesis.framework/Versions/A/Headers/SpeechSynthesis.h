@@ -1,18 +1,17 @@
 /*
-     File:       SpeechSynthesis/SpeechSynthesis.h
+ File:       SpeechSynthesis/SpeechSynthesis.h
  
-     Contains:   Speech Interfaces.
+ Contains:   Master include for SpeechSynthesis public framework
  
-     Version:    SpeechSynthesis-4.1.12~1
+ Copyright:  Â© 2000-2013 by Apple Inc. All rights reserved.
  
-     Copyright:  © 1989-2008 by Apple Computer, Inc., all rights reserved.
+ Bugs?:      For bug reports, consult the following page on
+ the World Wide Web:
  
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
- 
-                     http://developer.apple.com/bugreporter/
+ http://developer.apple.com/bugreporter/
  
 */
+
 #ifndef __SPEECHSYNTHESIS__
 #define __SPEECHSYNTHESIS__
 
@@ -25,7 +24,6 @@
 #endif
 
 #include <stdint.h>
-
 
 #include <AvailabilityMacros.h>
 
@@ -396,6 +394,28 @@ extern CFStringRef kSpeechOutputToExtAudioFileProperty               AVAILABLE_M
  */
 extern CFStringRef kSpeechOutputToAudioDeviceProperty                AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 /*
+ *  kSpeechOutputToFileDescriptorProperty
+ *
+ *  Availability:
+ *    Mac OS X:         in version 10.9 and later in ApplicationServices.framework
+ */
+extern CFStringRef kSpeechOutputToFileDescriptorProperty            AVAILABLE_MAC_OS_X_VERSION_10_9_AND_LATER;
+/*
+ *  kSpeechAudioOutputFormatProperty
+ *
+ *  Availability:
+ *    Mac OS X:         in version 10.9 and later in ApplicationServices.framework
+ */ 
+extern CFStringRef kSpeechAudioOutputFormatProperty            AVAILABLE_MAC_OS_X_VERSION_10_9_AND_LATER;
+/*
+ *
+ *  kSpeechOutputChannelMapProperty
+ *
+ *  Availability:
+ *    Mac OS X:         in version 10.9 and later in ApplicationServices.framework
+ */
+extern CFStringRef kSpeechOutputChannelMapProperty            AVAILABLE_MAC_OS_X_VERSION_10_9_AND_LATER; 
+/*
  *  kSpeechRefConProperty
  *  
  *  Availability:
@@ -485,6 +505,16 @@ extern CFStringRef kSpeechAudioUnitProperty                          AVAILABLE_M
  *    Non-Carbon CFM:   not available
  */
 extern CFStringRef kSpeechAudioGraphProperty                         AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+/*
+ *  kSpeechSynthExtensionProperty
+ *
+ *  Availability:
+ *    Mac OS X:         in version 10.9 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechSynthExtensionProperty                    AVAILABLE_MAC_OS_X_VERSION_10_9_AND_LATER;
+    
 /* Speaking Modes*/
 /*
  *  kSpeechModeText

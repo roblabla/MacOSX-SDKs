@@ -23,11 +23,11 @@
 @class PSFeedSettings, PSClient;
 
 
-extern NSString* const PSErrorDomain;
+extern NSString* const PSErrorDomain NS_DEPRECATED(10_5, 10_9, NA, NA);
 enum {
-    PSInternalError = 1,                // An internal error occurred
-    PSNotAFeedError                     // Data is not Atom or RSS
-};
+    PSInternalError NS_ENUM_DEPRECATED(10_5, 10_9, NA, NA) = 1,                // An internal error occurred
+    PSNotAFeedError NS_ENUM_DEPRECATED(10_5, 10_9, NA, NA)                     // Data is not Atom or RSS
+} NS_ENUM_DEPRECATED(10_5, 10_9, NA, NA);
 
 
 /*!
@@ -39,10 +39,10 @@ enum {
                 PSAtomType Atom 1.0, as specified by http://www.ietf.org/rfc/rfc4287.txt
 */
 typedef enum {
-    PSUnknownFormat = 0,
-    PSRSSFormat     = 1,
-    PSAtomFormat    = 2,
-} PSFeedFormat;
+    PSUnknownFormat NS_ENUM_DEPRECATED(10_5, 10_9, NA, NA) = 0,
+    PSRSSFormat NS_ENUM_DEPRECATED(10_5, 10_9, NA, NA)     = 1,
+    PSAtomFormat NS_ENUM_DEPRECATED(10_5, 10_9, NA, NA)    = 2,
+} PSFeedFormat NS_ENUM_DEPRECATED(10_5, 10_9, NA, NA);
 
 
 /*!
@@ -66,7 +66,8 @@ typedef enum {
     @seealso 	//apple_ref/doc/uid/TP40004945 Publication Subscription Programming Guide
 */
 
-@interface PSFeed : NSObject 
+NS_DEPRECATED(10_5, 10_9, NA, NA)
+@interface PSFeed : NSObject
 {
     @protected
     id _internal;
@@ -358,17 +359,17 @@ typedef enum {
 
 /* Notification posted by a PSFeed when it begins or ends refreshing.
    (Call -isRefreshing to get its new state.) */
-extern NSString* const PSFeedRefreshingNotification;
+extern NSString* const PSFeedRefreshingNotification NS_DEPRECATED(10_5, 10_9, NA, NA);
 
 
 /* Notification posted by a PSFeed when entries are changed.
    The keys below appear in the userInfo dictionary, and their values are NSArrays of PSEntries,
    except for PSFeedRemovedEntriesKey whose value is an NSArray of entry identifier strings. */
-extern NSString* const PSFeedEntriesChangedNotification;
+extern NSString* const PSFeedEntriesChangedNotification NS_DEPRECATED(10_5, 10_9, NA, NA);
 
-extern NSString* const PSFeedAddedEntriesKey;
-extern NSString* const PSFeedRemovedEntriesKey;
-extern NSString* const PSFeedUpdatedEntriesKey;
-extern NSString* const PSFeedDidChangeEntryFlagsKey;
+extern NSString* const PSFeedAddedEntriesKey NS_DEPRECATED(10_5, 10_9, NA, NA);
+extern NSString* const PSFeedRemovedEntriesKey NS_DEPRECATED(10_5, 10_9, NA, NA);
+extern NSString* const PSFeedUpdatedEntriesKey NS_DEPRECATED(10_5, 10_9, NA, NA);
+extern NSString* const PSFeedDidChangeEntryFlagsKey NS_DEPRECATED(10_5, 10_9, NA, NA);
 
 #endif

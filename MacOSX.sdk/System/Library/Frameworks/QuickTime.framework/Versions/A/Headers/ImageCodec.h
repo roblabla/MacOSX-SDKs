@@ -3,7 +3,7 @@
  
      Contains:   QuickTime Interfaces.
  
-     Version:    QuickTime 7.7.1
+     Version:    QuickTime 7.7.3
  
      Copyright:  © 1990-2012 by Apple Inc., all rights reserved
  
@@ -13,6 +13,14 @@
                      http://developer.apple.com/bugreporter/
  
 */
+
+/*
+  QuickTime has been deprecated in 10.9.
+
+  AVFoundation and AVKit are the frameworks recommended for all new development 
+  involving time-based audiovisual media on OS X.
+*/
+
 #ifndef __IMAGECODEC__
 #define __IMAGECODEC__
 
@@ -382,67 +390,67 @@ typedef CALLBACK_API( void , ImageCodecDrawBandCompleteProcPtr )(void *refcon, C
 typedef STACK_UPP_TYPE(ImageCodecTimeTriggerProcPtr)            ImageCodecTimeTriggerUPP;
 typedef STACK_UPP_TYPE(ImageCodecDrawBandCompleteProcPtr)       ImageCodecDrawBandCompleteUPP;
 /*
- *  NewImageCodecTimeTriggerUPP()
+ *  NewImageCodecTimeTriggerUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ImageCodecTimeTriggerUPP
-NewImageCodecTimeTriggerUPP(ImageCodecTimeTriggerProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewImageCodecTimeTriggerUPP(ImageCodecTimeTriggerProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  NewImageCodecDrawBandCompleteUPP()
+ *  NewImageCodecDrawBandCompleteUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ImageCodecDrawBandCompleteUPP
-NewImageCodecDrawBandCompleteUPP(ImageCodecDrawBandCompleteProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewImageCodecDrawBandCompleteUPP(ImageCodecDrawBandCompleteProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  DisposeImageCodecTimeTriggerUPP()
+ *  DisposeImageCodecTimeTriggerUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeImageCodecTimeTriggerUPP(ImageCodecTimeTriggerUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeImageCodecTimeTriggerUPP(ImageCodecTimeTriggerUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  DisposeImageCodecDrawBandCompleteUPP()
+ *  DisposeImageCodecDrawBandCompleteUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeImageCodecDrawBandCompleteUPP(ImageCodecDrawBandCompleteUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeImageCodecDrawBandCompleteUPP(ImageCodecDrawBandCompleteUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  InvokeImageCodecTimeTriggerUPP()
+ *  InvokeImageCodecTimeTriggerUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
 InvokeImageCodecTimeTriggerUPP(
   void *                    refcon,
-  ImageCodecTimeTriggerUPP  userUPP)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ImageCodecTimeTriggerUPP  userUPP)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  InvokeImageCodecDrawBandCompleteUPP()
+ *  InvokeImageCodecDrawBandCompleteUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -451,7 +459,7 @@ InvokeImageCodecDrawBandCompleteUPP(
   void *                         refcon,
   ComponentResult                drawBandResult,
   UInt32                         drawBandCompleteFlags,
-  ImageCodecDrawBandCompleteUPP  userUPP)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ImageCodecDrawBandCompleteUPP  userUPP)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 #if __MACH__
   #ifdef __cplusplus
@@ -1130,32 +1138,32 @@ typedef struct CleanApertureImageDescriptionExtension CleanApertureImageDescript
 typedef CALLBACK_API( ComponentResult , ImageCodecMPDrawBandProcPtr )(void *refcon, ImageSubCodecDecompressRecord *drp);
 typedef STACK_UPP_TYPE(ImageCodecMPDrawBandProcPtr)             ImageCodecMPDrawBandUPP;
 /*
- *  NewImageCodecMPDrawBandUPP()
+ *  NewImageCodecMPDrawBandUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ImageCodecMPDrawBandUPP
-NewImageCodecMPDrawBandUPP(ImageCodecMPDrawBandProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewImageCodecMPDrawBandUPP(ImageCodecMPDrawBandProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  DisposeImageCodecMPDrawBandUPP()
+ *  DisposeImageCodecMPDrawBandUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeImageCodecMPDrawBandUPP(ImageCodecMPDrawBandUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeImageCodecMPDrawBandUPP(ImageCodecMPDrawBandUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  InvokeImageCodecMPDrawBandUPP()
+ *  InvokeImageCodecMPDrawBandUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -1163,7 +1171,7 @@ extern ComponentResult
 InvokeImageCodecMPDrawBandUPP(
   void *                           refcon,
   ImageSubCodecDecompressRecord *  drp,
-  ImageCodecMPDrawBandUPP          userUPP)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ImageCodecMPDrawBandUPP          userUPP)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 #if __MACH__
   #ifdef __cplusplus
@@ -1185,28 +1193,28 @@ InvokeImageCodecMPDrawBandUPP(
 /*  codec selectors 1024-32767 are available for general use */
 /*  negative selectors are reserved by the Component Manager */
 /*
- *  ImageCodecGetCodecInfo()
+ *  ImageCodecGetCodecInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ImageCodecGetCodecInfo(
   ComponentInstance   ci,
-  CodecInfo *         info)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CodecInfo *         info)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecGetCompressionTime()
+ *  ImageCodecGetCompressionTime()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ImageCodecGetCompressionTime(
@@ -1216,17 +1224,17 @@ ImageCodecGetCompressionTime(
   short               depth,
   CodecQ *            spatialQuality,
   CodecQ *            temporalQuality,
-  unsigned long *     time)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned long *     time)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecGetMaxCompressionSize()
+ *  ImageCodecGetMaxCompressionSize()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ImageCodecGetMaxCompressionSize(
@@ -1235,92 +1243,92 @@ ImageCodecGetMaxCompressionSize(
   const Rect *        srcRect,
   short               depth,
   CodecQ              quality,
-  long *              size)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *              size)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecPreCompress()
+ *  ImageCodecPreCompress()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ImageCodecPreCompress(
   ComponentInstance      ci,
-  CodecCompressParams *  params)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CodecCompressParams *  params)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecBandCompress()
+ *  ImageCodecBandCompress()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ImageCodecBandCompress(
   ComponentInstance      ci,
-  CodecCompressParams *  params)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CodecCompressParams *  params)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecPreDecompress()
+ *  ImageCodecPreDecompress()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ImageCodecPreDecompress(
   ComponentInstance        ci,
-  CodecDecompressParams *  params)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CodecDecompressParams *  params)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecBandDecompress()
+ *  ImageCodecBandDecompress()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ImageCodecBandDecompress(
   ComponentInstance        ci,
-  CodecDecompressParams *  params)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CodecDecompressParams *  params)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecBusy()
+ *  ImageCodecBusy()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ImageCodecBusy(
   ComponentInstance   ci,
-  ImageSequence       seq)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ImageSequence       seq)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecGetCompressedImageSize()
+ *  ImageCodecGetCompressedImageSize()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ImageCodecGetCompressedImageSize(
@@ -1329,17 +1337,17 @@ ImageCodecGetCompressedImageSize(
   Ptr                      data,
   long                     bufferSize,
   ICMDataProcRecordPtr     dataProc,
-  long *                   dataSize)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *                   dataSize)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecGetSimilarity()
+ *  ImageCodecGetSimilarity()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ImageCodecGetSimilarity(
@@ -1348,17 +1356,17 @@ ImageCodecGetSimilarity(
   const Rect *             srcRect,
   ImageDescriptionHandle   desc,
   Ptr                      data,
-  Fixed *                  similarity)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Fixed *                  similarity)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecTrimImage()
+ *  ImageCodecTrimImage()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ImageCodecTrimImage(
@@ -1371,109 +1379,109 @@ ImageCodecTrimImage(
   long                       outBufferSize,
   ICMFlushProcRecordPtr      flushProc,
   Rect *                     trimRect,
-  ICMProgressProcRecordPtr   progressProc)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ICMProgressProcRecordPtr   progressProc)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecRequestSettings()
+ *  ImageCodecRequestSettings()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ImageCodecRequestSettings(
   ComponentInstance   ci,
   Handle              settings,
   Rect *              rp,
-  ModalFilterUPP      filterProc)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ModalFilterUPP      filterProc)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecGetSettings()
+ *  ImageCodecGetSettings()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ImageCodecGetSettings(
   ComponentInstance   ci,
-  Handle              settings)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle              settings)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecSetSettings()
+ *  ImageCodecSetSettings()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ImageCodecSetSettings(
   ComponentInstance   ci,
-  Handle              settings)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle              settings)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecFlush()
+ *  ImageCodecFlush()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
-ImageCodecFlush(ComponentInstance ci)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+ImageCodecFlush(ComponentInstance ci)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecSetTimeCode()
+ *  ImageCodecSetTimeCode()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ImageCodecSetTimeCode(
   ComponentInstance   ci,
   void *              timeCodeFormat,
-  void *              timeCodeTime)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *              timeCodeTime)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecIsImageDescriptionEquivalent()
+ *  ImageCodecIsImageDescriptionEquivalent()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ImageCodecIsImageDescriptionEquivalent(
   ComponentInstance        ci,
   ImageDescriptionHandle   newDesc,
-  Boolean *                equivalent)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *                equivalent)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecNewMemory()
+ *  ImageCodecNewMemory()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ImageCodecNewMemory(
@@ -1482,32 +1490,32 @@ ImageCodecNewMemory(
   Size                   dataSize,
   long                   dataUse,
   ICMMemoryDisposedUPP   memoryGoneProc,
-  void *                 refCon)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *                 refCon)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecDisposeMemory()
+ *  ImageCodecDisposeMemory()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ImageCodecDisposeMemory(
   ComponentInstance   ci,
-  Ptr                 data)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Ptr                 data)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecHitTestData()
+ *  ImageCodecHitTestData()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ImageCodecHitTestData(
@@ -1516,17 +1524,17 @@ ImageCodecHitTestData(
   void *                   data,
   Size                     dataSize,
   Point                    where,
-  Boolean *                hit)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *                hit)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecNewImageBufferMemory()
+ *  ImageCodecNewImageBufferMemory()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ImageCodecNewImageBufferMemory(
@@ -1534,17 +1542,17 @@ ImageCodecNewImageBufferMemory(
   CodecDecompressParams *  params,
   long                     flags,
   ICMMemoryDisposedUPP     memoryGoneProc,
-  void *                   refCon)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *                   refCon)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecExtractAndCombineFields()
+ *  ImageCodecExtractAndCombineFields()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ImageCodecExtractAndCombineFields(
@@ -1558,17 +1566,17 @@ ImageCodecExtractAndCombineFields(
   ImageDescriptionHandle   desc2,
   void *                   outputData,
   long *                   outDataSize,
-  ImageDescriptionHandle   descOut)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ImageDescriptionHandle   descOut)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecGetMaxCompressionSizeWithSources()
+ *  ImageCodecGetMaxCompressionSizeWithSources()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ImageCodecGetMaxCompressionSizeWithSources(
@@ -1578,32 +1586,32 @@ ImageCodecGetMaxCompressionSizeWithSources(
   short                     depth,
   CodecQ                    quality,
   CDSequenceDataSourcePtr   sourceData,
-  long *                    size)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *                    size)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecSetTimeBase()
+ *  ImageCodecSetTimeBase()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ImageCodecSetTimeBase(
   ComponentInstance   ci,
-  void *              base)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *              base)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecSourceChanged()
+ *  ImageCodecSourceChanged()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ImageCodecSourceChanged(
@@ -1611,77 +1619,77 @@ ImageCodecSourceChanged(
   UInt32                    majorSourceChangeSeed,
   UInt32                    minorSourceChangeSeed,
   CDSequenceDataSourcePtr   sourceData,
-  long *                    flagsOut)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *                    flagsOut)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecFlushFrame()
+ *  ImageCodecFlushFrame()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ImageCodecFlushFrame(
   ComponentInstance   ci,
-  UInt32              flags)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32              flags)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecGetSettingsAsText()
+ *  ImageCodecGetSettingsAsText()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ImageCodecGetSettingsAsText(
   ComponentInstance   ci,
-  Handle *            text)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle *            text)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecGetParameterListHandle()
+ *  ImageCodecGetParameterListHandle()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ImageCodecGetParameterListHandle(
   ComponentInstance   ci,
-  Handle *            parameterDescriptionHandle)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle *            parameterDescriptionHandle)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecGetParameterList()
+ *  ImageCodecGetParameterList()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ImageCodecGetParameterList(
   ComponentInstance   ci,
-  QTAtomContainer *   parameterDescription)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTAtomContainer *   parameterDescription)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecCreateStandardParameterDialog()
+ *  ImageCodecCreateStandardParameterDialog()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ImageCodecCreateStandardParameterDialog(
@@ -1691,97 +1699,97 @@ ImageCodecCreateStandardParameterDialog(
   QTParameterDialogOptions   dialogOptions,
   DialogPtr                  existingDialog,
   short                      existingUserItem,
-  QTParameterDialog *        createdDialog)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTParameterDialog *        createdDialog)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecIsStandardParameterDialogEvent()
+ *  ImageCodecIsStandardParameterDialogEvent()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ImageCodecIsStandardParameterDialogEvent(
   ComponentInstance   ci,
   EventRecord *       pEvent,
-  QTParameterDialog   createdDialog)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTParameterDialog   createdDialog)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecDismissStandardParameterDialog()
+ *  ImageCodecDismissStandardParameterDialog()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ImageCodecDismissStandardParameterDialog(
   ComponentInstance   ci,
-  QTParameterDialog   createdDialog)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTParameterDialog   createdDialog)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecStandardParameterDialogDoAction()
+ *  ImageCodecStandardParameterDialogDoAction()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ImageCodecStandardParameterDialogDoAction(
   ComponentInstance   ci,
   QTParameterDialog   createdDialog,
   long                action,
-  void *              params)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *              params)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecNewImageGWorld()
+ *  ImageCodecNewImageGWorld()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ImageCodecNewImageGWorld(
   ComponentInstance        ci,
   CodecDecompressParams *  params,
   GWorldPtr *              newGW,
-  long                     flags)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long                     flags)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecDisposeImageGWorld()
+ *  ImageCodecDisposeImageGWorld()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ImageCodecDisposeImageGWorld(
   ComponentInstance   ci,
-  GWorldPtr           theGW)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  GWorldPtr           theGW)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecHitTestDataWithFlags()
+ *  ImageCodecHitTestDataWithFlags()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ImageCodecHitTestDataWithFlags(
@@ -1791,34 +1799,34 @@ ImageCodecHitTestDataWithFlags(
   Size                     dataSize,
   Point                    where,
   long *                   hit,
-  long                     hitFlags)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long                     hitFlags)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecValidateParameters()
+ *  ImageCodecValidateParameters()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ImageCodecValidateParameters(
   ComponentInstance              ci,
   QTAtomContainer                parameters,
   QTParameterValidationOptions   validationFlags,
-  StringPtr                      errorString)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  StringPtr                      errorString)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecGetBaseMPWorkFunction()
+ *  ImageCodecGetBaseMPWorkFunction()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ImageCodecGetBaseMPWorkFunction(
@@ -1826,157 +1834,157 @@ ImageCodecGetBaseMPWorkFunction(
   ComponentMPWorkFunctionUPP *  workFunction,
   void **                       refCon,
   ImageCodecMPDrawBandUPP       drawProc,
-  void *                        drawProcRefCon)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *                        drawProcRefCon)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecLockBits()
+ *  ImageCodecLockBits()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 (or QuickTime 6.4) and later in QuickTime.framework
+ *    Mac OS X:         in version 10.3 (or QuickTime 6.4) and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
- *    Windows:          in qtmlClient.lib 6.5 and later
+ *    Windows:          in QTMLClient.lib 6.5 and later
  */
 extern ComponentResult 
 ImageCodecLockBits(
   ComponentInstance   ci,
-  CGrafPtr            port)                                   AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  CGrafPtr            port)                                   AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecUnlockBits()
+ *  ImageCodecUnlockBits()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 (or QuickTime 6.4) and later in QuickTime.framework
+ *    Mac OS X:         in version 10.3 (or QuickTime 6.4) and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
- *    Windows:          in qtmlClient.lib 6.5 and later
+ *    Windows:          in QTMLClient.lib 6.5 and later
  */
 extern ComponentResult 
 ImageCodecUnlockBits(
   ComponentInstance   ci,
-  CGrafPtr            port)                                   AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  CGrafPtr            port)                                   AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecRequestGammaLevel()
+ *  ImageCodecRequestGammaLevel()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QuickTimeLib 5.0 and later
- *    Windows:          in qtmlClient.lib 5.0 and later
+ *    Windows:          in QTMLClient.lib 5.0 and later
  */
 extern ComponentResult 
 ImageCodecRequestGammaLevel(
   ComponentInstance   ci,
   Fixed               srcGammaLevel,
   Fixed               dstGammaLevel,
-  long *              codecCanMatch)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *              codecCanMatch)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecGetSourceDataGammaLevel()
+ *  ImageCodecGetSourceDataGammaLevel()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QuickTimeLib 5.0 and later
- *    Windows:          in qtmlClient.lib 5.0 and later
+ *    Windows:          in QTMLClient.lib 5.0 and later
  */
 extern ComponentResult 
 ImageCodecGetSourceDataGammaLevel(
   ComponentInstance   ci,
-  Fixed *             sourceDataGammaLevel)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Fixed *             sourceDataGammaLevel)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /* (Selector 42 skipped) */
 /*
- *  ImageCodecGetDecompressLatency()
+ *  ImageCodecGetDecompressLatency()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QuickTimeLib 5.0 and later
- *    Windows:          in qtmlClient.lib 5.0 and later
+ *    Windows:          in QTMLClient.lib 5.0 and later
  */
 extern ComponentResult 
 ImageCodecGetDecompressLatency(
   ComponentInstance   ci,
-  TimeRecord *        latency)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TimeRecord *        latency)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecMergeFloatingImageOntoWindow()
+ *  ImageCodecMergeFloatingImageOntoWindow()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   in QuickTimeLib 6.0 and later
- *    Windows:          in qtmlClient.lib 6.0 and later
+ *    Windows:          in QTMLClient.lib 6.0 and later
  */
 extern ComponentResult 
 ImageCodecMergeFloatingImageOntoWindow(
   ComponentInstance   ci,
-  UInt32              flags)                                  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  UInt32              flags)                                  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecRemoveFloatingImage()
+ *  ImageCodecRemoveFloatingImage()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   in QuickTimeLib 6.0 and later
- *    Windows:          in qtmlClient.lib 6.0 and later
+ *    Windows:          in QTMLClient.lib 6.0 and later
  */
 extern ComponentResult 
 ImageCodecRemoveFloatingImage(
   ComponentInstance   ci,
-  UInt32              flags)                                  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  UInt32              flags)                                  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecGetDITLForSize()
+ *  ImageCodecGetDITLForSize()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   in QuickTimeLib 6.0 and later
- *    Windows:          in qtmlClient.lib 6.0 and later
+ *    Windows:          in QTMLClient.lib 6.0 and later
  */
 extern ComponentResult 
 ImageCodecGetDITLForSize(
   ComponentInstance   ci,
   Handle *            ditl,
-  Point *             requestedSize)                          AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  Point *             requestedSize)                          AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecDITLInstall()
+ *  ImageCodecDITLInstall()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   in QuickTimeLib 6.0 and later
- *    Windows:          in qtmlClient.lib 6.0 and later
+ *    Windows:          in QTMLClient.lib 6.0 and later
  */
 extern ComponentResult 
 ImageCodecDITLInstall(
   ComponentInstance   ci,
   DialogRef           d,
-  short               itemOffset)                             AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  short               itemOffset)                             AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecDITLEvent()
+ *  ImageCodecDITLEvent()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   in QuickTimeLib 6.0 and later
- *    Windows:          in qtmlClient.lib 6.0 and later
+ *    Windows:          in QTMLClient.lib 6.0 and later
  */
 extern ComponentResult 
 ImageCodecDITLEvent(
@@ -1985,61 +1993,61 @@ ImageCodecDITLEvent(
   short                itemOffset,
   const EventRecord *  theEvent,
   short *              itemHit,
-  Boolean *            handled)                               AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  Boolean *            handled)                               AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecDITLItem()
+ *  ImageCodecDITLItem()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   in QuickTimeLib 6.0 and later
- *    Windows:          in qtmlClient.lib 6.0 and later
+ *    Windows:          in QTMLClient.lib 6.0 and later
  */
 extern ComponentResult 
 ImageCodecDITLItem(
   ComponentInstance   ci,
   DialogRef           d,
   short               itemOffset,
-  short               itemNum)                                AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  short               itemNum)                                AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecDITLRemove()
+ *  ImageCodecDITLRemove()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   in QuickTimeLib 6.0 and later
- *    Windows:          in qtmlClient.lib 6.0 and later
+ *    Windows:          in QTMLClient.lib 6.0 and later
  */
 extern ComponentResult 
 ImageCodecDITLRemove(
   ComponentInstance   ci,
   DialogRef           d,
-  short               itemOffset)                             AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  short               itemOffset)                             AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecDITLValidateInput()
+ *  ImageCodecDITLValidateInput()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   in QuickTimeLib 6.0 and later
- *    Windows:          in qtmlClient.lib 6.0 and later
+ *    Windows:          in QTMLClient.lib 6.0 and later
  */
 extern ComponentResult 
 ImageCodecDITLValidateInput(
   ComponentInstance   ci,
-  Boolean *           ok)                                     AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  Boolean *           ok)                                     AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /* (Selector 52 skipped) */
 /* (Selector 53 skipped) */
 /*
- *  ImageCodecGetPreferredChunkSizeAndAlignment()
+ *  ImageCodecGetPreferredChunkSizeAndAlignment()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Returns the preferences of an image decompressor for the chunking
@@ -2082,7 +2090,7 @@ ImageCodecDITLValidateInput(
  *      0.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 (or QuickTime 7.0) and later in QuickTime.framework
+ *    Mac OS X:         in version 10.4 (or QuickTime 7.0) and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -2093,13 +2101,13 @@ ImageCodecGetPreferredChunkSizeAndAlignment(
   Fixed                    frameRate,
   UInt32                   dataRate,
   long *                   bytesPerChunk,
-  long *                   alignment)                         AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  long *                   alignment)                         AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 
 /* B-Frame Capable Image Compressor Component API */
 /*
- *  ImageCodecPrepareToCompressFrames()
+ *  ImageCodecPrepareToCompressFrames()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Prepares the compressor to receive frames.
@@ -2141,7 +2149,7 @@ ImageCodecGetPreferredChunkSizeAndAlignment(
  *      The ICM will release it.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 (or QuickTime 7.0) and later in QuickTime.framework
+ *    Mac OS X:         in version 10.4 (or QuickTime 7.0) and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -2152,11 +2160,11 @@ ImageCodecPrepareToCompressFrames(
   ICMCompressionSessionOptionsRef   compressionSessionOptions,
   ImageDescriptionHandle            imageDescription,
   void *                            reserved,
-  CFDictionaryRef *                 compressorPixelBufferAttributesOut) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  CFDictionaryRef *                 compressorPixelBufferAttributesOut) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecEncodeFrame()
+ *  ImageCodecEncodeFrame()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Presents the compressor with a frame to encode.
@@ -2186,7 +2194,7 @@ ImageCodecPrepareToCompressFrames(
  *      Reserved; ignore.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 (or QuickTime 7.0) and later in QuickTime.framework
+ *    Mac OS X:         in version 10.4 (or QuickTime 7.0) and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -2194,11 +2202,11 @@ extern ComponentResult
 ImageCodecEncodeFrame(
   ComponentInstance             ci,
   ICMCompressorSourceFrameRef   sourceFrame,
-  UInt32                        flags)                        AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  UInt32                        flags)                        AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecCompleteFrame()
+ *  ImageCodecCompleteFrame()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Directs the compressor to finish with a queued source frame,
@@ -2228,7 +2236,7 @@ ImageCodecEncodeFrame(
  *      Reserved; ignore.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 (or QuickTime 7.0) and later in QuickTime.framework
+ *    Mac OS X:         in version 10.4 (or QuickTime 7.0) and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -2236,11 +2244,11 @@ extern ComponentResult
 ImageCodecCompleteFrame(
   ComponentInstance             ci,
   ICMCompressorSourceFrameRef   sourceFrame,
-  UInt32                        flags)                        AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  UInt32                        flags)                        AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecBeginPass()
+ *  ImageCodecBeginPass()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Notifies the compressor that it should operate in multipass mode
@@ -2273,7 +2281,7 @@ ImageCodecCompleteFrame(
  *      store and retrieve information between passes.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 (or QuickTime 7.0) and later in QuickTime.framework
+ *    Mac OS X:         in version 10.4 (or QuickTime 7.0) and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -2282,11 +2290,11 @@ ImageCodecBeginPass(
   ComponentInstance             ci,
   ICMCompressionPassModeFlags   passModeFlags,
   UInt32                        flags,
-  ICMMultiPassStorageRef        multiPassStorage)             AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  ICMMultiPassStorageRef        multiPassStorage)             AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecEndPass()
+ *  ImageCodecEndPass()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Notifies the compressor that a pass is over.
@@ -2297,16 +2305,16 @@ ImageCodecBeginPass(
  *      Component instance / instance globals.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 (or QuickTime 7.0) and later in QuickTime.framework
+ *    Mac OS X:         in version 10.4 (or QuickTime 7.0) and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
 extern ComponentResult 
-ImageCodecEndPass(ComponentInstance ci)                       AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+ImageCodecEndPass(ComponentInstance ci)                       AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecProcessBetweenPasses()
+ *  ImageCodecProcessBetweenPasses()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Gives the compressor an opportunity to perform processing between
@@ -2347,7 +2355,7 @@ ImageCodecEndPass(ComponentInstance ci)                       AVAILABLE_MAC_OS_X
  *      multipass storage), set kICMCompressionPassMode_NoSourceFrames.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 (or QuickTime 7.0) and later in QuickTime.framework
+ *    Mac OS X:         in version 10.4 (or QuickTime 7.0) and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -2356,7 +2364,7 @@ ImageCodecProcessBetweenPasses(
   ComponentInstance              ci,
   ICMMultiPassStorageRef         multiPassStorage,
   Boolean *                      interpassProcessingDoneOut,
-  ICMCompressionPassModeFlags *  requestedNextPassModeFlagsOut) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  ICMCompressionPassModeFlags *  requestedNextPassModeFlagsOut) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 
@@ -2367,169 +2375,169 @@ ImageCodecProcessBetweenPasses(
 /* (Selector 65 skipped) */
 /* (Selector 66 skipped) */
 /*
- *  ImageCodecPreflight()
+ *  ImageCodecPreflight()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ImageCodecPreflight(
   ComponentInstance        ci,
-  CodecDecompressParams *  params)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CodecDecompressParams *  params)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecInitialize()
+ *  ImageCodecInitialize()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ImageCodecInitialize(
   ComponentInstance                      ci,
-  ImageSubCodecDecompressCapabilities *  cap)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ImageSubCodecDecompressCapabilities *  cap)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecBeginBand()
+ *  ImageCodecBeginBand()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ImageCodecBeginBand(
   ComponentInstance                ci,
   CodecDecompressParams *          params,
   ImageSubCodecDecompressRecord *  drp,
-  long                             flags)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long                             flags)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecDrawBand()
+ *  ImageCodecDrawBand()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ImageCodecDrawBand(
   ComponentInstance                ci,
-  ImageSubCodecDecompressRecord *  drp)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ImageSubCodecDecompressRecord *  drp)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecEndBand()
+ *  ImageCodecEndBand()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ImageCodecEndBand(
   ComponentInstance                ci,
   ImageSubCodecDecompressRecord *  drp,
   OSErr                            result,
-  long                             flags)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long                             flags)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecQueueStarting()
+ *  ImageCodecQueueStarting()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
-ImageCodecQueueStarting(ComponentInstance ci)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+ImageCodecQueueStarting(ComponentInstance ci)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecQueueStopping()
+ *  ImageCodecQueueStopping()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
-ImageCodecQueueStopping(ComponentInstance ci)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+ImageCodecQueueStopping(ComponentInstance ci)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecDroppingFrame()
+ *  ImageCodecDroppingFrame()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ImageCodecDroppingFrame(
   ComponentInstance                      ci,
-  const ImageSubCodecDecompressRecord *  drp)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const ImageSubCodecDecompressRecord *  drp)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecScheduleFrame()
+ *  ImageCodecScheduleFrame()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in QuickTimeLib 4.0 and later
- *    Windows:          in qtmlClient.lib 4.0 and later
+ *    Windows:          in QTMLClient.lib 4.0 and later
  */
 extern ComponentResult 
 ImageCodecScheduleFrame(
   ComponentInstance                      ci,
   const ImageSubCodecDecompressRecord *  drp,
   ImageCodecTimeTriggerUPP               triggerProc,
-  void *                                 triggerProcRefCon)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *                                 triggerProcRefCon)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecCancelTrigger()
+ *  ImageCodecCancelTrigger()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in QuickTimeLib 4.0 and later
- *    Windows:          in qtmlClient.lib 4.0 and later
+ *    Windows:          in QTMLClient.lib 4.0 and later
  */
 extern ComponentResult 
-ImageCodecCancelTrigger(ComponentInstance ci)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+ImageCodecCancelTrigger(ComponentInstance ci)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecDecodeBand()
+ *  ImageCodecDecodeBand()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 (or QuickTime 7.0) and later in QuickTime.framework
+ *    Mac OS X:         in version 10.4 (or QuickTime 7.0) and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
- *    Windows:          in qtmlClient.lib version 10.4 (or QuickTime 7.0) and later
+ *    Windows:          in QTMLClient.lib version 10.4 (or QuickTime 7.0) and later
  */
 extern ComponentResult 
 ImageCodecDecodeBand(
   ComponentInstance                ci,
   ImageSubCodecDecompressRecord *  drp,
-  unsigned long                    flags)                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  unsigned long                    flags)                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 
@@ -2650,13 +2658,13 @@ struct FieldInfoImageDescriptionExtension {
 typedef struct FieldInfoImageDescriptionExtension FieldInfoImageDescriptionExtension;
 
 /*
- *  QTPhotoSetSampling()
+ *  QTPhotoSetSampling()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 QTPhotoSetSampling(
@@ -2666,32 +2674,32 @@ QTPhotoSetSampling(
   short               cbH,
   short               cbV,
   short               crH,
-  short               crV)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short               crV)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTPhotoSetRestartInterval()
+ *  QTPhotoSetRestartInterval()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 QTPhotoSetRestartInterval(
   ComponentInstance   codec,
-  unsigned short      restartInterval)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned short      restartInterval)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTPhotoDefineHuffmanTable()
+ *  QTPhotoDefineHuffmanTable()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 QTPhotoDefineHuffmanTable(
@@ -2699,23 +2707,23 @@ QTPhotoDefineHuffmanTable(
   short               componentNumber,
   Boolean             isDC,
   unsigned char *     lengthCounts,
-  unsigned char *     values)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned char *     values)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTPhotoDefineQuantizationTable()
+ *  QTPhotoDefineQuantizationTable()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 QTPhotoDefineQuantizationTable(
   ComponentInstance   codec,
   short               componentNumber,
-  unsigned char *     table)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned char *     table)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 
@@ -2887,96 +2895,96 @@ typedef struct EffectsFrameParams       EffectsFrameParams;
 typedef EffectsFrameParams *            EffectsFrameParamsPtr;
 
 /*
- *  ImageCodecEffectSetup()
+ *  ImageCodecEffectSetup()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ImageCodecEffectSetup(
   ComponentInstance        effect,
-  CodecDecompressParams *  p)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CodecDecompressParams *  p)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecEffectBegin()
+ *  ImageCodecEffectBegin()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ImageCodecEffectBegin(
   ComponentInstance        effect,
   CodecDecompressParams *  p,
-  EffectsFrameParamsPtr    ePtr)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  EffectsFrameParamsPtr    ePtr)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecEffectRenderFrame()
+ *  ImageCodecEffectRenderFrame()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ImageCodecEffectRenderFrame(
   ComponentInstance       effect,
-  EffectsFrameParamsPtr   p)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  EffectsFrameParamsPtr   p)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecEffectConvertEffectSourceToFormat()
+ *  ImageCodecEffectConvertEffectSourceToFormat()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ImageCodecEffectConvertEffectSourceToFormat(
   ComponentInstance        effect,
   EffectSourcePtr          sourceToConvert,
-  ImageDescriptionHandle   requestedDesc)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ImageDescriptionHandle   requestedDesc)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecEffectCancel()
+ *  ImageCodecEffectCancel()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ImageCodecEffectCancel(
   ComponentInstance       effect,
-  EffectsFrameParamsPtr   p)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  EffectsFrameParamsPtr   p)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecEffectGetSpeed()
+ *  ImageCodecEffectGetSpeed()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ImageCodecEffectGetSpeed(
   ComponentInstance   effect,
   QTAtomContainer     parameters,
-  Fixed *             pFPS)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Fixed *             pFPS)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 
@@ -3140,44 +3148,44 @@ enum {
 
 typedef unsigned long                   SMPTEWipeType;
 /*
- *  ImageCodecEffectPrepareSMPTEFrame()
+ *  ImageCodecEffectPrepareSMPTEFrame()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in QuickTimeLib 4.0 and later
- *    Windows:          in qtmlClient.lib 4.0 and later
+ *    Windows:          in QTMLClient.lib 4.0 and later
  */
 extern ComponentResult 
 ImageCodecEffectPrepareSMPTEFrame(
   ComponentInstance      effect,
   PixMapPtr              destPixMap,
-  SMPTEFrameReference *  returnValue)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SMPTEFrameReference *  returnValue)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecEffectDisposeSMPTEFrame()
+ *  ImageCodecEffectDisposeSMPTEFrame()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in QuickTimeLib 4.0 and later
- *    Windows:          in qtmlClient.lib 4.0 and later
+ *    Windows:          in QTMLClient.lib 4.0 and later
  */
 extern ComponentResult 
 ImageCodecEffectDisposeSMPTEFrame(
   ComponentInstance     effect,
-  SMPTEFrameReference   frameRef)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SMPTEFrameReference   frameRef)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ImageCodecEffectRenderSMPTEFrame()
+ *  ImageCodecEffectRenderSMPTEFrame()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in QuickTimeLib 4.0 and later
- *    Windows:          in qtmlClient.lib 4.0 and later
+ *    Windows:          in QTMLClient.lib 4.0 and later
  */
 extern ComponentResult 
 ImageCodecEffectRenderSMPTEFrame(
@@ -3193,7 +3201,7 @@ ImageCodecEffectRenderSMPTEFrame(
   long                  yRepeat,
   SMPTEFlags            flags,
   Fixed                 penWidth,
-  long                  strokeValue)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long                  strokeValue)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 
@@ -3263,30 +3271,30 @@ enum {
 
 typedef long                            GradientType;
 /*
- *  CurveGetLength()
+ *  CurveGetLength()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 CurveGetLength(
   ComponentInstance   effect,
   gxPaths *           target,
   long                index,
-  wide *              wideLength)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  wide *              wideLength)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  CurveLengthToPoint()
+ *  CurveLengthToPoint()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 CurveLengthToPoint(
@@ -3295,49 +3303,49 @@ CurveLengthToPoint(
   long                index,
   Fixed               length,
   FixedPoint *        location,
-  FixedPoint *        tangent)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  FixedPoint *        tangent)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  CurveNewPath()
+ *  CurveNewPath()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 CurveNewPath(
   ComponentInstance   effect,
-  Handle *            pPath)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle *            pPath)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  CurveCountPointsInPath()
+ *  CurveCountPointsInPath()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 CurveCountPointsInPath(
   ComponentInstance   effect,
   gxPaths *           aPath,
   unsigned long       contourIndex,
-  unsigned long *     pCount)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned long *     pCount)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  CurveGetPathPoint()
+ *  CurveGetPathPoint()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 CurveGetPathPoint(
@@ -3346,17 +3354,17 @@ CurveGetPathPoint(
   unsigned long       contourIndex,
   unsigned long       pointIndex,
   gxPoint *           thePoint,
-  Boolean *           ptIsOnPath)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *           ptIsOnPath)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  CurveInsertPointIntoPath()
+ *  CurveInsertPointIntoPath()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 CurveInsertPointIntoPath(
@@ -3365,17 +3373,17 @@ CurveInsertPointIntoPath(
   Handle              thePath,
   unsigned long       contourIndex,
   unsigned long       pointIndex,
-  Boolean             ptIsOnPath)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean             ptIsOnPath)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  CurveSetPathPoint()
+ *  CurveSetPathPoint()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 CurveSetPathPoint(
@@ -3384,17 +3392,17 @@ CurveSetPathPoint(
   unsigned long       contourIndex,
   unsigned long       pointIndex,
   gxPoint *           thePoint,
-  Boolean             ptIsOnPath)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean             ptIsOnPath)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  CurveGetNearestPathPoint()
+ *  CurveGetNearestPathPoint()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 CurveGetNearestPathPoint(
@@ -3403,17 +3411,17 @@ CurveGetNearestPathPoint(
   FixedPoint *        thePoint,
   unsigned long *     contourIndex,
   unsigned long *     pointIndex,
-  Fixed *             theDelta)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Fixed *             theDelta)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  CurvePathPointToLength()
+ *  CurvePathPointToLength()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 CurvePathPointToLength(
@@ -3422,32 +3430,32 @@ CurvePathPointToLength(
   Fixed               startDist,
   Fixed               endDist,
   FixedPoint *        thePoint,
-  Fixed *             pLength)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Fixed *             pLength)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  CurveCreateVectorStream()
+ *  CurveCreateVectorStream()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 CurveCreateVectorStream(
   ComponentInstance   effect,
-  Handle *            pStream)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle *            pStream)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  CurveAddAtomToVectorStream()
+ *  CurveAddAtomToVectorStream()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 CurveAddAtomToVectorStream(
@@ -3455,48 +3463,48 @@ CurveAddAtomToVectorStream(
   OSType              atomType,
   Size                atomSize,
   void *              pAtomData,
-  Handle              vectorStream)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle              vectorStream)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  CurveAddPathAtomToVectorStream()
+ *  CurveAddPathAtomToVectorStream()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 CurveAddPathAtomToVectorStream(
   ComponentInstance   effect,
   Handle              pathData,
-  Handle              vectorStream)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle              vectorStream)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  CurveAddZeroAtomToVectorStream()
+ *  CurveAddZeroAtomToVectorStream()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 CurveAddZeroAtomToVectorStream(
   ComponentInstance   effect,
-  Handle              vectorStream)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle              vectorStream)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  CurveGetAtomDataFromVectorStream()
+ *  CurveGetAtomDataFromVectorStream()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 CurveGetAtomDataFromVectorStream(
@@ -3504,7 +3512,7 @@ CurveGetAtomDataFromVectorStream(
   Handle              vectorStream,
   long                atomType,
   long *              dataSize,
-  Ptr *               dataPtr)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Ptr *               dataPtr)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 

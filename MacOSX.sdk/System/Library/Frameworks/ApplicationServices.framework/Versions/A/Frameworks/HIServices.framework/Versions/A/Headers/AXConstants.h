@@ -2,8 +2,7 @@
 /*
  *  AXConstants.h
  *
- *  Created by John Louch on Tue Mar 26 2002.
- *  Copyright (c) 2002 Apple Computer, Inc. All rights reserved.
+ *  Copyright (c) 2002, 2012 Apple Inc. All rights reserved.
  *
  */
 

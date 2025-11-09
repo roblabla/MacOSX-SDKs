@@ -202,7 +202,6 @@ AUGraphNodeInfo(	AUGraph						inGraph,
 					AudioUnit *					outAudioUnit)		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 			
 
-#if !TARGET_OS_IPHONE
 #pragma mark -
 #pragma mark Sub Graphs
 /*! 
@@ -250,7 +249,6 @@ AUGraphIsNodeSubGraph(		const AUGraph		inGraph,
 							AUNode				inNode,
 							Boolean*			outFlag)		__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_NA);
 
-#endif // !TARGET_OS_IPHONE
 
 #pragma mark -
 #pragma mark Node Interactions
@@ -658,7 +656,6 @@ AUGraphRemoveRenderNotify(		AUGraph					inGraph,
 #pragma mark -
 #pragma mark Deprecated
 
-#if !TARGET_OS_IPHONE
 struct ComponentDescription;
 /*!
 	@function			AUGraphNewNode
@@ -726,7 +723,6 @@ AUGraphGetNodeConnections(		AUGraph						inGraph,
 								UInt32						*ioNumConnections)	
 																	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3,__MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
-#endif //!TARGET_OS_IPHONE
 
 #if defined(__cplusplus)
 }

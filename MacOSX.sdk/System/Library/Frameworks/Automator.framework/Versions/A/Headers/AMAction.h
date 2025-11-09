@@ -68,17 +68,13 @@ typedef NSUInteger AMLogLevel;
 
 // Operations
 - (id)runWithInput:(id)input fromAction:(AMAction *)anAction error:(NSDictionary **)errorInfo AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED;
-#ifdef AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER
 - (id)runWithInput:(id)input error:(NSError **)error AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
-#endif
 
 - (void)runAsynchronouslyWithInput:(id)input AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 - (void)willFinishRunning AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 - (void)didFinishRunningWithError:(NSDictionary *)errorInfo AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED;
-#ifdef AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER
 - (void)finishRunningWithError:(NSError *)error AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
-#endif
 
 - (id)output AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 - (void)setOutput:(id)theOutput AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
@@ -94,9 +90,7 @@ typedef NSUInteger AMLogLevel;
 - (void)updateParameters;
 - (void)parametersUpdated;
 
-#ifdef AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER
 - (void)logMessageWithLevel:(AMLogLevel)level format:(NSString *)format, ... NS_FORMAT_FUNCTION (2,3) AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
-#endif
 
 - (BOOL)isStopped;
 

@@ -1,7 +1,7 @@
 /*
 	NSTextInputContext.h
 	Application Kit
-	Copyright (c) 2008-2012, Apple Inc.
+	Copyright (c) 2008-2013, Apple Inc.
 	All rights reserved.
 */
 
@@ -49,7 +49,9 @@ NS_CLASS_AVAILABLE(10_6, NA)
 	unsigned int _preflight:1;
 	unsigned int _bindingFound:1;
 
-	unsigned int _reserved:2;
+        unsigned int _unmarkbeforeinsert:1;
+
+	unsigned int _reserved:1;
     } _ticFlags;
 }
 

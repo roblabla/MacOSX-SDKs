@@ -3,7 +3,7 @@
  
 	 Contains:   CoreFoundation Network socket streams header
  
-	 Copyright:  Copyright (c) 2001-2008, Apple Inc. All rights reserved.
+	 Copyright:  Copyright (c) 2001-2008 Apple Inc. All rights reserved.
  
 	 Bugs?:	  For bug reports, consult the following page on
 				 the World Wide Web:
@@ -157,7 +157,20 @@ CFN_EXPORT const CFStringRef kCFHTTPAuthenticationSchemeXMobileMeAuthToken		__OS
  *	CarbonLib:		not available
  *	Non-Carbon CFM:   not available
  */
-CFN_EXPORT const CFStringRef kCFHTTPAuthenticationSchemeKerberos		__OSX_AVAILABLE_STARTING(__MAC_10_5 /* REMINDSMA: 10_7 */,__IPHONE_2_0 /* REMINDSMA: 4_0 */);
+CFN_EXPORT const CFStringRef kCFHTTPAuthenticationSchemeKerberos		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+
+/*
+ *  kCFHTTPAuthenticationSchemeOAuth1
+ *
+ *  Discussion:
+ *	HTTP OAuth 1.0 authentication scheme.
+ *
+ *  Availability:
+ *	Mac OS X:		 in version 10.9 and later in CoreServices.framework
+ *	CarbonLib:		not available
+ *	Non-Carbon CFM:   not available
+ */
+CFN_EXPORT const CFStringRef kCFHTTPAuthenticationSchemeOAuth1		__OSX_AVAILABLE_STARTING(__MAC_10_9,__IPHONE_NA);
 
 	
 /*
@@ -664,7 +677,7 @@ CFHTTPMessageIsHeaderComplete(CFHTTPMessageRef message)	   __OSX_AVAILABLE_START
  *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT CFDataRef 
-CFHTTPMessageCopySerializedMessage(CFHTTPMessageRef request)  __OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_2_0);
+CFHTTPMessageCopySerializedMessage(CFHTTPMessageRef message)  __OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_2_0);
 
 
 /*********************/

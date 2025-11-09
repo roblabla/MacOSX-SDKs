@@ -64,6 +64,11 @@ extern void			clock_get_calendar_microtime(
 						clock_sec_t			*secs,
 						clock_usec_t		*microsecs);
 
+extern void			clock_get_calendar_absolute_and_microtime(
+						clock_sec_t			*secs,
+						clock_usec_t		*microsecs,
+						uint64_t    		*abstime);
+
 extern void			clock_get_calendar_nanotime(
 						clock_sec_t			*secs,
 						clock_nsec_t		*nanosecs);

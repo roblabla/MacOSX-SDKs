@@ -85,13 +85,6 @@ class IOSCSIReducedBlockCommandsDevice : public IOSCSIPrimaryCommandsDevice
 	
 private:
 	
-#if ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED )
-	
-    SCSIReducedBlockCommands *		fSCSIReducedBlockCommandObject;
-    SCSIReducedBlockCommands *		GetSCSIReducedBlockCommandObject ( void );
-	
-#endif	/* ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED ) */
-	
 	static void			AsyncReadWriteComplete ( SCSITaskIdentifier completedTask );
 	
 protected:
@@ -163,15 +156,6 @@ protected:
 									 UInt64					blockCount,
 									 void *					clientData );
 
-#if ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED )
-	
-	// This method will retreive the SCSI Primary Command Set object for
-	// the class.  For subclasses, this will be overridden using a
-	// dynamic cast on the subclasses base command set object.
-	virtual SCSIPrimaryCommands *	GetSCSIPrimaryCommandObject ( void );
-
-#endif	/* ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED ) */
-	
 	// ----- Power Management Support ------
 		
 	// We override this method to set our power states and register ourselves
@@ -218,13 +202,6 @@ protected:
 	virtual void		TerminateDeviceSupport ( void );
 	
 	virtual void 		free ( void );
-	
-#if ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED )
-	
-	virtual bool		CreateCommandSetObjects ( void );
-	virtual void		FreeCommandSetObjects ( void );
-
-#endif	/* ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED ) */
 	
 public:
 	

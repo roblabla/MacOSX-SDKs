@@ -5,6 +5,15 @@
 
 */
 
+/*
+  QTKit has been deprecated in 10.9.
+
+  AVFoundation and AVKit are the frameworks recommended for all new development 
+  involving time-based audiovisual media on OS X.  In order to transition your 
+  project from QTKit to AVFoundation please refer to:
+  "Technical Note TN2300 Transitioning QTKit code to AV Foundation".
+*/
+
 #import <Foundation/Foundation.h>
 #import <QTKit/QTKitDefines.h>
 
@@ -23,11 +32,11 @@
 }
 
 // These methods determine the unique ID of the CoreAudio device being used for audio preview. A unique ID of nil corresponds to the default system output device.
-- (NSString *)outputDeviceUniqueID;
-- (void)setOutputDeviceUniqueID:(NSString *)uniqueID;
+- (NSString *)outputDeviceUniqueID AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+- (void)setOutputDeviceUniqueID:(NSString *)uniqueID AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
-- (float)volume;
-- (void)setVolume:(float)volume;
+- (float)volume AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+- (void)setVolume:(float)volume AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 @end
 

@@ -12,9 +12,6 @@
 #include <stdbool.h>
 #include <math.h>
 
-#if defined(__ARM_NEON__)
-#include <arm_neon.h>
-#endif
 
 #include <GLKit/GLKMathTypes.h>
 #include <GLKit/GLKVector3.h>
@@ -247,16 +244,11 @@ GLK_INLINE GLKMatrix4 GLKMatrix4MakeWithArray(float values[16])
  
 GLK_INLINE GLKMatrix4 GLKMatrix4MakeWithArrayAndTranspose(float values[16])
 {
-#if defined(__ARM_NEON__)
-    float32x4x4_t m = vld4q_f32(values);
-    return *(GLKMatrix4 *)&m;
-#else
     GLKMatrix4 m = { values[0], values[4], values[8], values[12],
                      values[1], values[5], values[9], values[13],
                      values[2], values[6], values[10], values[14],
                      values[3], values[7], values[11], values[15] };
     return m;
-#endif
 }
 
 GLK_INLINE GLKMatrix4 GLKMatrix4MakeWithRows(GLKVector4 row0,
@@ -276,14 +268,7 @@ GLK_INLINE GLKMatrix4 GLKMatrix4MakeWithColumns(GLKVector4 column0,
                                                        GLKVector4 column2,
                                                        GLKVector4 column3)
 {
-#if defined(__ARM_NEON__)
-    float32x4x4_t m;
-    m.val[0] = vld1q_f32(column0.v);
-    m.val[1] = vld1q_f32(column1.v);
-    m.val[2] = vld1q_f32(column2.v);
-    m.val[3] = vld1q_f32(column3.v);
-    return *(GLKMatrix4 *)&m;
-#elif defined(GLK_SSE3_INTRINSICS)
+#if   defined(GLK_SSE3_INTRINSICS)
     GLKMatrix4 m;
     *((__m128*)&m.m[0])  = *(__m128*)&column0;
     *((__m128*)&m.m[4])  = *(__m128*)&column1;
@@ -512,10 +497,7 @@ GLK_INLINE GLKVector4 GLKMatrix4GetRow(GLKMatrix4 matrix, int row)
 
 GLK_INLINE GLKVector4 GLKMatrix4GetColumn(GLKMatrix4 matrix, int column)
 {
-#if defined(__ARM_NEON__)
-    float32x4_t v = vld1q_f32(&(matrix.m[column * 4]));
-    return *(GLKVector4 *)&v;
-#elif defined(GLK_SSE3_INTRINSICS)
+#if   defined(GLK_SSE3_INTRINSICS)
     __m128 v = _mm_load_ps(&matrix.m[column * 4]);
     return *(GLKVector4 *)&v;
 #else
@@ -536,11 +518,7 @@ GLK_INLINE GLKMatrix4 GLKMatrix4SetRow(GLKMatrix4 matrix, int row, GLKVector4 ve
 
 GLK_INLINE GLKMatrix4 GLKMatrix4SetColumn(GLKMatrix4 matrix, int column, GLKVector4 vector)
 {
-#if defined(__ARM_NEON__)
-    float *dst = &(matrix.m[column * 4]);
-    vst1q_f32(dst, vld1q_f32(vector.v));
-    return matrix;
-#elif defined(GLK_SSE3_INTRINSICS)
+#if   defined(GLK_SSE3_INTRINSICS)
     *((__m128*)&matrix.m[column*4]) = *(__m128*)&vector;
     return matrix;
 #else
@@ -555,47 +533,16 @@ GLK_INLINE GLKMatrix4 GLKMatrix4SetColumn(GLKMatrix4 matrix, int column, GLKVect
     
 GLK_INLINE GLKMatrix4 GLKMatrix4Transpose(GLKMatrix4 matrix)
 {
-#if defined(__ARM_NEON__)
-    float32x4x4_t m = vld4q_f32(matrix.m);
-    return *(GLKMatrix4 *)&m;
-#else
     GLKMatrix4 m = { matrix.m[0], matrix.m[4], matrix.m[8], matrix.m[12],
                      matrix.m[1], matrix.m[5], matrix.m[9], matrix.m[13],
                      matrix.m[2], matrix.m[6], matrix.m[10], matrix.m[14],
                      matrix.m[3], matrix.m[7], matrix.m[11], matrix.m[15] };
     return m;
-#endif
 }
 
 GLK_INLINE GLKMatrix4 GLKMatrix4Multiply(GLKMatrix4 matrixLeft, GLKMatrix4 matrixRight)
 {
-#if defined(__ARM_NEON__)
-    float32x4x4_t iMatrixLeft = *(float32x4x4_t *)&matrixLeft;
-    float32x4x4_t iMatrixRight = *(float32x4x4_t *)&matrixRight;
-    float32x4x4_t m;
-
-    m.val[0] = vmulq_n_f32(iMatrixLeft.val[0], vgetq_lane_f32(iMatrixRight.val[0], 0));
-    m.val[1] = vmulq_n_f32(iMatrixLeft.val[0], vgetq_lane_f32(iMatrixRight.val[1], 0));
-    m.val[2] = vmulq_n_f32(iMatrixLeft.val[0], vgetq_lane_f32(iMatrixRight.val[2], 0));
-    m.val[3] = vmulq_n_f32(iMatrixLeft.val[0], vgetq_lane_f32(iMatrixRight.val[3], 0));
-
-    m.val[0] = vmlaq_n_f32(m.val[0], iMatrixLeft.val[1], vgetq_lane_f32(iMatrixRight.val[0], 1));
-    m.val[1] = vmlaq_n_f32(m.val[1], iMatrixLeft.val[1], vgetq_lane_f32(iMatrixRight.val[1], 1));
-    m.val[2] = vmlaq_n_f32(m.val[2], iMatrixLeft.val[1], vgetq_lane_f32(iMatrixRight.val[2], 1));
-    m.val[3] = vmlaq_n_f32(m.val[3], iMatrixLeft.val[1], vgetq_lane_f32(iMatrixRight.val[3], 1));
-
-    m.val[0] = vmlaq_n_f32(m.val[0], iMatrixLeft.val[2], vgetq_lane_f32(iMatrixRight.val[0], 2));
-    m.val[1] = vmlaq_n_f32(m.val[1], iMatrixLeft.val[2], vgetq_lane_f32(iMatrixRight.val[1], 2));
-    m.val[2] = vmlaq_n_f32(m.val[2], iMatrixLeft.val[2], vgetq_lane_f32(iMatrixRight.val[2], 2));
-    m.val[3] = vmlaq_n_f32(m.val[3], iMatrixLeft.val[2], vgetq_lane_f32(iMatrixRight.val[3], 2));
-
-    m.val[0] = vmlaq_n_f32(m.val[0], iMatrixLeft.val[3], vgetq_lane_f32(iMatrixRight.val[0], 3));
-    m.val[1] = vmlaq_n_f32(m.val[1], iMatrixLeft.val[3], vgetq_lane_f32(iMatrixRight.val[1], 3));
-    m.val[2] = vmlaq_n_f32(m.val[2], iMatrixLeft.val[3], vgetq_lane_f32(iMatrixRight.val[2], 3));
-    m.val[3] = vmlaq_n_f32(m.val[3], iMatrixLeft.val[3], vgetq_lane_f32(iMatrixRight.val[3], 3));
-
-    return *(GLKMatrix4 *)&m;
-#elif defined(GLK_SSE3_INTRINSICS)
+#if   defined(GLK_SSE3_INTRINSICS)
     
 	const __m128 l0 = _mm_load_ps(&matrixLeft.m[0]);
 	const __m128 l1 = _mm_load_ps(&matrixLeft.m[4]);
@@ -663,18 +610,7 @@ GLK_INLINE GLKMatrix4 GLKMatrix4Multiply(GLKMatrix4 matrixLeft, GLKMatrix4 matri
  
 GLK_INLINE GLKMatrix4 GLKMatrix4Add(GLKMatrix4 matrixLeft, GLKMatrix4 matrixRight)
 {
-#if defined(__ARM_NEON__)
-    float32x4x4_t iMatrixLeft = *(float32x4x4_t *)&matrixLeft;
-    float32x4x4_t iMatrixRight = *(float32x4x4_t *)&matrixRight;
-    float32x4x4_t m;
-    
-    m.val[0] = vaddq_f32(iMatrixLeft.val[0], iMatrixRight.val[0]);
-    m.val[1] = vaddq_f32(iMatrixLeft.val[1], iMatrixRight.val[1]);
-    m.val[2] = vaddq_f32(iMatrixLeft.val[2], iMatrixRight.val[2]);
-    m.val[3] = vaddq_f32(iMatrixLeft.val[3], iMatrixRight.val[3]);
-    
-    return *(GLKMatrix4 *)&m;
-#elif defined(GLK_SSE3_INTRINSICS)
+#if   defined(GLK_SSE3_INTRINSICS)
     GLKMatrix4 m;
     
     _mm_store_ps(&m.m[0],  _mm_load_ps(&matrixLeft.m[0])  + _mm_load_ps(&matrixRight.m[0]));
@@ -712,18 +648,7 @@ GLK_INLINE GLKMatrix4 GLKMatrix4Add(GLKMatrix4 matrixLeft, GLKMatrix4 matrixRigh
 
 GLK_INLINE GLKMatrix4 GLKMatrix4Subtract(GLKMatrix4 matrixLeft, GLKMatrix4 matrixRight)
 {
-#if defined(__ARM_NEON__)
-    float32x4x4_t iMatrixLeft = *(float32x4x4_t *)&matrixLeft;
-    float32x4x4_t iMatrixRight = *(float32x4x4_t *)&matrixRight;
-    float32x4x4_t m;
-    
-    m.val[0] = vsubq_f32(iMatrixLeft.val[0], iMatrixRight.val[0]);
-    m.val[1] = vsubq_f32(iMatrixLeft.val[1], iMatrixRight.val[1]);
-    m.val[2] = vsubq_f32(iMatrixLeft.val[2], iMatrixRight.val[2]);
-    m.val[3] = vsubq_f32(iMatrixLeft.val[3], iMatrixRight.val[3]);
-    
-    return *(GLKMatrix4 *)&m;
-#elif defined(GLK_SSE3_INTRINSICS)
+#if   defined(GLK_SSE3_INTRINSICS)
     GLKMatrix4 m;
     
     _mm_store_ps(&m.m[0],  _mm_load_ps(&matrixLeft.m[0])  - _mm_load_ps(&matrixRight.m[0]));
@@ -797,17 +722,7 @@ GLK_INLINE GLKMatrix4 GLKMatrix4TranslateWithVector4(GLKMatrix4 matrix, GLKVecto
     
 GLK_INLINE GLKMatrix4 GLKMatrix4Scale(GLKMatrix4 matrix, float sx, float sy, float sz)
 {
-#if defined(__ARM_NEON__)
-    float32x4x4_t iMatrix = *(float32x4x4_t *)&matrix;
-    float32x4x4_t m;
-    
-    m.val[0] = vmulq_n_f32(iMatrix.val[0], (float32_t)sx);
-    m.val[1] = vmulq_n_f32(iMatrix.val[1], (float32_t)sy);
-    m.val[2] = vmulq_n_f32(iMatrix.val[2], (float32_t)sz);
-    m.val[3] = iMatrix.val[3];
-    
-    return *(GLKMatrix4 *)&m;
-#elif defined(GLK_SSE3_INTRINSICS)
+#if   defined(GLK_SSE3_INTRINSICS)
     GLKMatrix4 m;
     
     _mm_store_ps(&m.m[0],  _mm_load_ps(&matrix.m[0])  * _mm_load1_ps(&sx));
@@ -827,17 +742,7 @@ GLK_INLINE GLKMatrix4 GLKMatrix4Scale(GLKMatrix4 matrix, float sx, float sy, flo
 
 GLK_INLINE GLKMatrix4 GLKMatrix4ScaleWithVector3(GLKMatrix4 matrix, GLKVector3 scaleVector)
 {
-#if defined(__ARM_NEON__)
-    float32x4x4_t iMatrix = *(float32x4x4_t *)&matrix;
-    float32x4x4_t m;
-    
-    m.val[0] = vmulq_n_f32(iMatrix.val[0], (float32_t)scaleVector.v[0]);
-    m.val[1] = vmulq_n_f32(iMatrix.val[1], (float32_t)scaleVector.v[1]);
-    m.val[2] = vmulq_n_f32(iMatrix.val[2], (float32_t)scaleVector.v[2]);
-    m.val[3] = iMatrix.val[3];
-    
-    return *(GLKMatrix4 *)&m;
-#elif defined(GLK_SSE3_INTRINSICS)
+#if   defined(GLK_SSE3_INTRINSICS)
     GLKMatrix4 m;
     
     _mm_store_ps(&m.m[0],  _mm_load_ps(&matrix.m[0])  * _mm_load1_ps(&scaleVector.v[0]));
@@ -857,17 +762,7 @@ GLK_INLINE GLKMatrix4 GLKMatrix4ScaleWithVector3(GLKMatrix4 matrix, GLKVector3 s
 
 GLK_INLINE GLKMatrix4 GLKMatrix4ScaleWithVector4(GLKMatrix4 matrix, GLKVector4 scaleVector)
 {
-#if defined(__ARM_NEON__)
-    float32x4x4_t iMatrix = *(float32x4x4_t *)&matrix;
-    float32x4x4_t m;
-    
-    m.val[0] = vmulq_n_f32(iMatrix.val[0], (float32_t)scaleVector.v[0]);
-    m.val[1] = vmulq_n_f32(iMatrix.val[1], (float32_t)scaleVector.v[1]);
-    m.val[2] = vmulq_n_f32(iMatrix.val[2], (float32_t)scaleVector.v[2]);
-    m.val[3] = iMatrix.val[3];
-    
-    return *(GLKMatrix4 *)&m;
-#elif defined(GLK_SSE3_INTRINSICS)
+#if   defined(GLK_SSE3_INTRINSICS)
     GLKMatrix4 m;
     
     _mm_store_ps(&m.m[0],  _mm_load_ps(&matrix.m[0])  * _mm_load1_ps(&scaleVector.v[0]));
@@ -962,22 +857,7 @@ GLK_INLINE void GLKMatrix4MultiplyAndProjectVector3Array(GLKMatrix4 matrix, GLKV
 
 GLK_INLINE GLKVector4 GLKMatrix4MultiplyVector4(GLKMatrix4 matrixLeft, GLKVector4 vectorRight)
 {
-#if defined(__ARM_NEON__)
-    float32x4x4_t iMatrix = *(float32x4x4_t *)&matrixLeft;
-    float32x4_t v;
-    
-    iMatrix.val[0] = vmulq_n_f32(iMatrix.val[0], (float32_t)vectorRight.v[0]);
-    iMatrix.val[1] = vmulq_n_f32(iMatrix.val[1], (float32_t)vectorRight.v[1]);
-    iMatrix.val[2] = vmulq_n_f32(iMatrix.val[2], (float32_t)vectorRight.v[2]);
-    iMatrix.val[3] = vmulq_n_f32(iMatrix.val[3], (float32_t)vectorRight.v[3]);
-    
-    iMatrix.val[0] = vaddq_f32(iMatrix.val[0], iMatrix.val[1]);
-    iMatrix.val[2] = vaddq_f32(iMatrix.val[2], iMatrix.val[3]);
-    
-    v = vaddq_f32(iMatrix.val[0], iMatrix.val[2]);
-    
-    return *(GLKVector4 *)&v;
-#elif defined(GLK_SSE3_INTRINSICS)
+#if   defined(GLK_SSE3_INTRINSICS)
 	const __m128 v = _mm_load_ps(&vectorRight.v[0]);
 
 	const __m128 r = _mm_load_ps(&matrixLeft.m[0])  * _mm_shuffle_ps(v, v, _MM_SHUFFLE(0, 0, 0, 0))

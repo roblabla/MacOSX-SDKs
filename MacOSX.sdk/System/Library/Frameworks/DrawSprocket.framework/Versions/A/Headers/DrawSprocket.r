@@ -3,7 +3,7 @@
  
      Contains:   Games Sprockets: DrawSprocket interfaces
  
-     Version:    DrawSprocket-2.0.87~1001
+     Version:    DrawSprocket-2.0.85~272
  
      Copyright:  © 1999-2008 by Apple Computer, Inc., all rights reserved.
  

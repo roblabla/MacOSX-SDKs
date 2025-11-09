@@ -41,7 +41,7 @@
 @property BOOL checked;
 @property BOOL disabled;
 @property(readonly, retain) DOMHTMLFormElement *form;
-@property(readonly, retain) DOMFileList *files AVAILABLE_IN_WEBKIT_VERSION_4_0;
+@property(retain) DOMFileList *files AVAILABLE_IN_WEBKIT_VERSION_4_0;
 @property BOOL indeterminate AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
 @property int maxLength;
 @property BOOL multiple AVAILABLE_IN_WEBKIT_VERSION_4_0;

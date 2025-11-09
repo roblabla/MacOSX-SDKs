@@ -91,25 +91,16 @@
 
 #include <_types.h>
 #include <Availability.h>
+#include <sys/_types/_size_t.h>
 
 /*********/
 /* types */
 /*********/
 #if __DARWIN_C_LEVEL >= __DARWIN_C_FULL
-#ifndef	__cplusplus
-#ifndef	_WCHAR_T
-#define	_WCHAR_T
-typedef	__darwin_wchar_t	wchar_t;
-#endif	/* _WCHAR_T */
-#endif	/* __cplusplus */
+#include <sys/_types/_wchar_t.h>
 #endif /* __DARWIN_C_LEVEL >= __DARWIN_C_FULL */
 
 typedef __darwin_off_t regoff_t;
-
-#ifndef _SIZE_T
-#define _SIZE_T
-typedef __darwin_size_t	size_t;
-#endif
 
 typedef struct {
 	int re_magic;
@@ -139,14 +130,14 @@ typedef struct {
 #define	REG_NOSPEC	0020	/* Compile turning off all special characters */
 
 #if __MAC_OS_X_VERSION_MIN_REQUIRED  >= __MAC_10_8 \
- || __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_NA
+ || __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_6_0
 #define	REG_LITERAL	REG_NOSPEC
 #endif
 
 #define	REG_PEND	0040	/* Use re_endp as end pointer */
 
 #if __MAC_OS_X_VERSION_MIN_REQUIRED  >= __MAC_10_8 \
- || __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_NA
+ || __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_6_0
 #define	REG_MINIMAL	0100	/* Compile using minimal repetition */
 #define	REG_UNGREEDY	REG_MINIMAL
 #endif
@@ -154,7 +145,7 @@ typedef struct {
 #define	REG_DUMP	0200	/* Unused */
 
 #if __MAC_OS_X_VERSION_MIN_REQUIRED  >= __MAC_10_8 \
- || __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_NA
+ || __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_6_0
 #define	REG_ENHANCED	0400	/* Additional (non-POSIX) features */
 #endif
 #endif /* __DARWIN_C_LEVEL >= __DARWIN_C_FULL */
@@ -200,7 +191,7 @@ typedef struct {
 #define	REG_BACKR	02000	/* force use of backref code */
 
 #if __MAC_OS_X_VERSION_MIN_REQUIRED  >= __MAC_10_8 \
- || __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_NA
+ || __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_6_0
 #define	REG_BACKTRACKING_MATCHER	REG_BACKR
 #endif
 #endif /* __DARWIN_C_LEVEL >= __DARWIN_C_FULL */
@@ -220,20 +211,20 @@ void	regfree(regex_t *);
 
 /* Darwin extensions */
 int	regncomp(regex_t * __restrict, const char * __restrict, size_t, int)
-	    __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
+	    __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
 int	regnexec(const regex_t * __restrict, const char * __restrict, size_t,
 	    size_t, regmatch_t __pmatch[ __restrict], int)
-	    __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
+	    __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
 int	regwcomp(regex_t * __restrict, const wchar_t * __restrict, int)
-	    __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
+	    __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
 int	regwexec(const regex_t * __restrict, const wchar_t * __restrict, size_t,
 	    regmatch_t __pmatch[ __restrict], int)
-	    __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
+	    __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
 int	regwncomp(regex_t * __restrict, const wchar_t * __restrict, size_t, int)
-	    __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
+	    __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
 int	regwnexec(const regex_t * __restrict, const wchar_t * __restrict,
 	    size_t, size_t, regmatch_t __pmatch[ __restrict], int)
-	    __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
+	    __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
 
 #endif /* __DARWIN_C_LEVEL >= __DARWIN_C_FULL */
 __END_DECLS

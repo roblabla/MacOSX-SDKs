@@ -414,7 +414,7 @@ typedef void (*cache_value_make_purgeable_cb_t)(void *value, void *user_data);
  * @field version Attributes version number used for binary compatibility.
  * @field user_data Passed to all callbacks.  May be NULL.
  */
-CACHE_PUBLIC_API struct cache_attributes_s {
+struct CACHE_PUBLIC_API cache_attributes_s {
     uint32_t version;
     cache_key_hash_cb_t key_hash_cb;                               
     cache_key_is_equal_cb_t key_is_equal_cb;                        

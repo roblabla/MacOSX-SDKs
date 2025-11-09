@@ -2,9 +2,9 @@
 	File:  VTCompressionSession.h
 	
 	Framework:  VideoToolbox
- 
-    Copyright 2006-2012 Apple Inc. All rights reserved.
-  
+	
+	Copyright 2006-2013 Apple Inc. All rights reserved.
+	
 	Video Toolbox client API for compressing video frames.
 	
 	Compression sessions convert uncompressed frames in CVImageBuffers 
@@ -15,6 +15,7 @@
 #define VTCOMPRESSIONSESSION_H
 
 #include <CoreMedia/CMBase.h>
+#include <VideoToolbox/VTBase.h>
 
 #include <CoreFoundation/CoreFoundation.h>
 #include <CoreVideo/CoreVideo.h>
@@ -90,7 +91,7 @@ typedef void (*VTCompressionOutputCallback)(
 		The EncoderID CFString may be obtained from the kVTVideoEncoderList_EncoderID entry in
 		the array returned by VTCopyVideoEncoderList.
 */
-VT_EXPORT const CFStringRef kVTVideoEncoderSpecification_EncoderID AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // CFString
+VT_EXPORT const CFStringRef kVTVideoEncoderSpecification_EncoderID VT_AVAILABLE_STARTING(10_8); // CFString
 
 
 /*!
@@ -137,7 +138,7 @@ VTCompressionSessionCreate(
 	CFAllocatorRef								compressedDataAllocator,	/* can be NULL */
 	VTCompressionOutputCallback					outputCallback,
 	void *										outputCallbackRefCon,
-	VTCompressionSessionRef *					compressionSessionOut) AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
+	VTCompressionSessionRef *					compressionSessionOut) VT_AVAILABLE_STARTING(10_8);
 
 /*!
 	@function	VTCompressionSessionInvalidate
@@ -150,14 +151,14 @@ VTCompressionSessionCreate(
     	Calling VTCompressionSessionInvalidate ensures a deterministic, orderly teardown.
 */
 VT_EXPORT void 
-VTCompressionSessionInvalidate( VTCompressionSessionRef session ) AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
+VTCompressionSessionInvalidate( VTCompressionSessionRef session ) VT_AVAILABLE_STARTING(10_8);
 
 /*!
 	@function VTCompressionSessionGetTypeID
 	@abstract Returns the CFTypeID for compression sessions.  
 */
 VT_EXPORT CFTypeID 
-VTCompressionSessionGetTypeID(void) AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
+VTCompressionSessionGetTypeID(void) VT_AVAILABLE_STARTING(10_8);
 
 /*!
 	@function	VTCompressionSessionGetPixelBufferPool
@@ -179,8 +180,24 @@ VTCompressionSessionGetTypeID(void) AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
 */
 VT_EXPORT CVPixelBufferPoolRef 
 VTCompressionSessionGetPixelBufferPool(
-	VTCompressionSessionRef		session ) AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
+	VTCompressionSessionRef		session ) VT_AVAILABLE_STARTING(10_8);
 
+/*!
+	@function	VTCompressionSessionPrepareToEncodeFrames
+	@abstract
+		You can optionally call this function to provide the encoder with an opportunity to perform
+		any necessary resource allocation before it begins encoding frames.
+	@discussion
+		This optional call can be used to provide the encoder an opportunity to allocate
+		any resources necessary before it begins encoding frames.  If this isn't called, any
+		necessary resources will be allocated on the first VTCompressionSessionEncodeFrame call.
+		Extra calls to this function will have no effect.
+	@param	session
+		The compression session.
+*/
+VT_EXPORT OSStatus
+VTCompressionSessionPrepareToEncodeFrames( VTCompressionSessionRef session ) VT_AVAILABLE_STARTING(10_9);
+	
 /*!
 	@function	VTCompressionSessionEncodeFrame
 	@abstract
@@ -221,7 +238,7 @@ VTCompressionSessionEncodeFrame(
 	CMTime						duration, // may be kCMTimeInvalid
 	CFDictionaryRef				frameProperties, // may be NULL
 	void *						sourceFrameRefCon,
-	VTEncodeInfoFlags			*infoFlagsOut /* may be NULL */ ) AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
+	VTEncodeInfoFlags			*infoFlagsOut /* may be NULL */ ) VT_AVAILABLE_STARTING(10_8);
 
 /*!
 	@function VTCompressionSessionCompleteFrames
@@ -235,7 +252,7 @@ VTCompressionSessionEncodeFrame(
 VT_EXPORT OSStatus
 VTCompressionSessionCompleteFrames(
 	VTCompressionSessionRef		session,
-	CMTime						completeUntilPresentationTimeStamp) AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // complete all frames if non-numeric
+	CMTime						completeUntilPresentationTimeStamp) VT_AVAILABLE_STARTING(10_8); // complete all frames if non-numeric
 
 // See VTSession.h for property access APIs on VTCompressionSessions.
 // See VTCompressionProperties.h for standard property keys and values for compression sessions.

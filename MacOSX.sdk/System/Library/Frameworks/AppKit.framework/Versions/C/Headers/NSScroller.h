@@ -1,7 +1,7 @@
 /*
 	NSScroller.h
 	Application Kit
-	Copyright (c) 1994-2012, Apple Inc.
+	Copyright (c) 1994-2013, Apple Inc.
 	All rights reserved.
 */
 
@@ -75,7 +75,8 @@ typedef NSInteger NSScrollerKnobStyle;
         unsigned int knobStyle:2;
         unsigned int sbPaused:1;
         unsigned int isAnimatingKnob:1;
-        unsigned int reserved:15;
+        unsigned int isTrackingMouse:1;
+        unsigned int reserved:14;
     } _sFlags2;
     id _target;
     SEL _action;

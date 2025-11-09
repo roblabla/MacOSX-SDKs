@@ -39,6 +39,15 @@
 					that is not currently set as editable (for instance, by calling appendSelectionFromMovie: on an uneditable movie).
 */
 
+/*
+  QTKit has been deprecated in 10.9.
+
+  AVFoundation and AVKit are the frameworks recommended for all new development 
+  involving time-based audiovisual media on OS X.  In order to transition your 
+  project from QTKit to AVFoundation please refer to:
+  "Technical Note TN2300 Transitioning QTKit code to AV Foundation".
+*/
+
 #import <QTKit/QTKitDefines.h>
 #import <QTKit/QTTime.h>
 #import <QTKit/QTTimeRange.h>
@@ -56,49 +65,49 @@
 @class QTInvalidationSet;
 
 	// pasteboard support
-QTKIT_EXTERN NSString * const QTMoviePasteboardType							AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;
+QTKIT_EXTERN NSString * const QTMoviePasteboardType							AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 	// notifications                                                                                                    description									parameter			parameter type
-QTKIT_EXTERN NSString * const QTMovieEditabilityDidChangeNotification		AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // change in movie editability				-					-
-QTKIT_EXTERN NSString * const QTMovieEditedNotification						AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // edit was done to the movie				-					-
-QTKIT_EXTERN NSString * const QTMovieLoadStateDidChangeNotification			AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // change in movie load state				-					-
-QTKIT_EXTERN NSString * const QTMovieLoopModeDidChangeNotification			AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // change in movie looping mode				-					-
-QTKIT_EXTERN NSString * const QTMovieMessageStringPostedNotification		AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // message string							message				NSString
-QTKIT_EXTERN NSString * const QTMovieRateDidChangeNotification				AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // change in movie rate						rate				NSNumber (float)
-QTKIT_EXTERN NSString * const QTMovieSelectionDidChangeNotification			AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // change in selection start/duration		-					-
-QTKIT_EXTERN NSString * const QTMovieNaturalSizeDidChangeNotification       AVAILABLE_QTKIT_VERSION_7_6_3_AND_LATER;    // change in movie natural size             -                   -
+QTKIT_EXTERN NSString * const QTMovieEditabilityDidChangeNotification		AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // change in movie editability				-					-
+QTKIT_EXTERN NSString * const QTMovieEditedNotification						AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // edit was done to the movie				-					-
+QTKIT_EXTERN NSString * const QTMovieLoadStateDidChangeNotification			AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // change in movie load state				-					-
+QTKIT_EXTERN NSString * const QTMovieLoopModeDidChangeNotification			AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // change in movie looping mode				-					-
+QTKIT_EXTERN NSString * const QTMovieMessageStringPostedNotification		AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // message string							message				NSString
+QTKIT_EXTERN NSString * const QTMovieRateDidChangeNotification				AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // change in movie rate						rate				NSNumber (float)
+QTKIT_EXTERN NSString * const QTMovieSelectionDidChangeNotification			AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // change in selection start/duration		-					-
+QTKIT_EXTERN NSString * const QTMovieNaturalSizeDidChangeNotification       AVAILABLE_QTKIT_VERSION_7_6_3_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;    // change in movie natural size             -                   -
 QTKIT_EXTERN NSString * const QTMovieSizeDidChangeNotification				AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_6_3;
-QTKIT_EXTERN NSString * const QTMovieStatusStringPostedNotification			AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // status string							status				NSString
-QTKIT_EXTERN NSString * const QTMovieTimeDidChangeNotification				AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // goto time occured						-					-
-QTKIT_EXTERN NSString * const QTMovieVolumeDidChangeNotification			AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // change in volume							-					-
-QTKIT_EXTERN NSString * const QTMovieDidEndNotification						AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // movie ended								-					-
-QTKIT_EXTERN NSString * const QTMovieChapterDidChangeNotification			AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // change in current chapter				-					-
-QTKIT_EXTERN NSString * const QTMovieChapterListDidChangeNotification		AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // change in chapter list					-					-
-QTKIT_EXTERN NSString * const QTMovieEnterFullScreenRequestNotification		AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // full screen playback requested			-					-
-QTKIT_EXTERN NSString * const QTMovieExitFullScreenRequestNotification		AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // normal windowed playback requested		-					-
-QTKIT_EXTERN NSString * const QTMovieCloseWindowRequestNotification			AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // window close requested					-					-
-QTKIT_EXTERN NSString * const QTMovieApertureModeDidChangeNotification		AVAILABLE_QTKIT_VERSION_7_2_AND_LATER;      // change in visual aperture mode			-					-
+QTKIT_EXTERN NSString * const QTMovieStatusStringPostedNotification			AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // status string							status				NSString
+QTKIT_EXTERN NSString * const QTMovieTimeDidChangeNotification				AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // goto time occurred						-					-
+QTKIT_EXTERN NSString * const QTMovieVolumeDidChangeNotification			AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // change in volume						-					-
+QTKIT_EXTERN NSString * const QTMovieDidEndNotification						AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // movie ended							-					-
+QTKIT_EXTERN NSString * const QTMovieChapterDidChangeNotification			AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // change in current chapter				-					-
+QTKIT_EXTERN NSString * const QTMovieChapterListDidChangeNotification		AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // change in chapter list					-					-
+QTKIT_EXTERN NSString * const QTMovieEnterFullScreenRequestNotification		AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // full screen playback requested			-					-
+QTKIT_EXTERN NSString * const QTMovieExitFullScreenRequestNotification		AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // normal windowed playback requested		-					-
+QTKIT_EXTERN NSString * const QTMovieCloseWindowRequestNotification			AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // window close requested					-					-
+QTKIT_EXTERN NSString * const QTMovieApertureModeDidChangeNotification		AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // change in visual aperture mode			-					-
 
 	// notification parameters
-QTKIT_EXTERN NSString * const QTMovieMessageNotificationParameter			AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;
-QTKIT_EXTERN NSString * const QTMovieRateDidChangeNotificationParameter		AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;
-QTKIT_EXTERN NSString * const QTMovieStatusFlagsNotificationParameter		AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;
-QTKIT_EXTERN NSString * const QTMovieStatusCodeNotificationParameter		AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;
-QTKIT_EXTERN NSString * const QTMovieStatusStringNotificationParameter		AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;
+QTKIT_EXTERN NSString * const QTMovieMessageNotificationParameter			AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+QTKIT_EXTERN NSString * const QTMovieRateDidChangeNotificationParameter		AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+QTKIT_EXTERN NSString * const QTMovieStatusFlagsNotificationParameter		AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+QTKIT_EXTERN NSString * const QTMovieStatusCodeNotificationParameter		AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+QTKIT_EXTERN NSString * const QTMovieStatusStringNotificationParameter		AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
-QTKIT_EXTERN NSString * const QTMovieTargetIDNotificationParameter			AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;
-QTKIT_EXTERN NSString * const QTMovieTargetNameNotificationParameter		AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;
+QTKIT_EXTERN NSString * const QTMovieTargetIDNotificationParameter			AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+QTKIT_EXTERN NSString * const QTMovieTargetNameNotificationParameter		AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 	// writeToFile: attributes dictionary keys
-QTKIT_EXTERN NSString * const QTMovieExport									AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSNumber (BOOL)
-QTKIT_EXTERN NSString * const QTMovieExportType								AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSNumber (long)
-QTKIT_EXTERN NSString * const QTMovieFlatten								AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSNumber (BOOL)
-QTKIT_EXTERN NSString * const QTMovieExportSettings							AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSData (QTAtomContainer)
-QTKIT_EXTERN NSString * const QTMovieExportManufacturer						AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSNumber (long)
+QTKIT_EXTERN NSString * const QTMovieExport									AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSNumber (BOOL)
+QTKIT_EXTERN NSString * const QTMovieExportType								AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSNumber (long)
+QTKIT_EXTERN NSString * const QTMovieFlatten								AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSNumber (BOOL)
+QTKIT_EXTERN NSString * const QTMovieExportSettings							AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSData (QTAtomContainer)
+QTKIT_EXTERN NSString * const QTMovieExportManufacturer						AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSNumber (long)
 
 	// addImage: attributes dictionary keys
-QTKIT_EXTERN NSString * const QTAddImageCodecType							AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSString
-QTKIT_EXTERN NSString * const QTAddImageCodecQuality						AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSNumber
+QTKIT_EXTERN NSString * const QTAddImageCodecType							AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSString
+QTKIT_EXTERN NSString * const QTAddImageCodecQuality						AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSNumber
 
 	// data locators for movieWithAttributes/initWithAttributes
 /*!
@@ -107,13 +116,13 @@ QTKIT_EXTERN NSString * const QTAddImageCodecQuality						AVAILABLE_QTKIT_VERSIO
 	@discussion		This attribute can be read but not written.
 					This attribute can be read but not written when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */
-QTKIT_EXTERN NSString * const QTMovieDataReferenceAttribute					AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // QTDataReference
-QTKIT_EXTERN NSString * const QTMoviePasteboardAttribute					AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSPasteboard
-QTKIT_EXTERN NSString * const QTMovieDataAttribute							AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSData
+QTKIT_EXTERN NSString * const QTMovieDataReferenceAttribute					AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // QTDataReference
+QTKIT_EXTERN NSString * const QTMoviePasteboardAttribute					AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSPasteboard
+QTKIT_EXTERN NSString * const QTMovieDataAttribute							AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSData
 
 	// movie instantiation options for movieWithAttributes/initWithAttributes
-QTKIT_EXTERN NSString * const QTMovieFileOffsetAttribute					AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSNumber (long long)
-QTKIT_EXTERN NSString * const QTMovieDontInteractWithUserAttribute			AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSNumber (BOOL)
+QTKIT_EXTERN NSString * const QTMovieFileOffsetAttribute					AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSNumber (long long)
+QTKIT_EXTERN NSString * const QTMovieDontInteractWithUserAttribute			AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSNumber (BOOL)
 
 /*!
 	@constant		QTMovieResolveDataRefsAttribute
@@ -122,7 +131,7 @@ QTKIT_EXTERN NSString * const QTMovieDontInteractWithUserAttribute			AVAILABLE_Q
 					at the time that the movie file is opened and a QTMovie object is instantiated. You can prevent that resolution from occurring 
 					by passing an NSNumber wrapping the value NO as the value of this attribute.
  */
-QTKIT_EXTERN NSString * const QTMovieResolveDataRefsAttribute				AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSNumber (BOOL) (default = YES)
+QTKIT_EXTERN NSString * const QTMovieResolveDataRefsAttribute				AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSNumber (BOOL) (default = YES)
 
 /*!
 	@constant		QTMovieAskUnresolvedDataRefsAttribute
@@ -133,7 +142,7 @@ QTKIT_EXTERN NSString * const QTMovieResolveDataRefsAttribute				AVAILABLE_QTKIT
 					containing the referenced data. By setting this attribute to NO, you can prevent that dialog box from being displayed and thereby
 					speed up the movie opening and initialization process.
  */
-QTKIT_EXTERN NSString * const QTMovieAskUnresolvedDataRefsAttribute			AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSNumber (BOOL) (default = YES)
+QTKIT_EXTERN NSString * const QTMovieAskUnresolvedDataRefsAttribute			AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSNumber (BOOL) (default = YES)
 
 /*!
 	@constant		QTMovieOpenAsyncOKAttribute
@@ -145,7 +154,7 @@ QTKIT_EXTERN NSString * const QTMovieAskUnresolvedDataRefsAttribute			AVAILABLE_
 					appropriate threshold before attempting to perform certain operations on the movie. For instance, you cannot export or copy 
 					a QTMovie object until its load state has reached QTMovieLoadStateComplete. 
  */
-QTKIT_EXTERN NSString * const QTMovieOpenAsyncOKAttribute					AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSNumber (BOOL) (default = YES)
+QTKIT_EXTERN NSString * const QTMovieOpenAsyncOKAttribute					AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSNumber (BOOL) (default = YES)
 
 /*!
 	@constant		QTMovieOpenAsyncRequiredAttribute
@@ -155,7 +164,7 @@ QTKIT_EXTERN NSString * const QTMovieOpenAsyncOKAttribute					AVAILABLE_QTKIT_VE
 					and -initWithAttributes:error: must return almost immediately, performing any lengthy operations on another thread. Your application
 					can monitor the movie load state to determine the progress of those operations. 
  */
-QTKIT_EXTERN NSString * const QTMovieOpenAsyncRequiredAttribute				AVAILABLE_QTKIT_VERSION_7_6_3_AND_LATER;	// NSNumber (BOOL) (default = NO)
+QTKIT_EXTERN NSString * const QTMovieOpenAsyncRequiredAttribute				AVAILABLE_QTKIT_VERSION_7_6_3_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;	// NSNumber (BOOL) (default = NO)
 
 /*!
 	@constant		QTMovieOpenForPlaybackAttribute
@@ -168,7 +177,7 @@ QTKIT_EXTERN NSString * const QTMovieOpenAsyncRequiredAttribute				AVAILABLE_QTK
 					This attribute is meaningful only when added to the dictionary passed to -initWithAttributes:error:. In particular, setting this
 					attribute on a QTMovie object that is already open has no effect.
  */
-QTKIT_EXTERN NSString * const QTMovieOpenForPlaybackAttribute				AVAILABLE_QTKIT_VERSION_7_6_3_AND_LATER;	// NSNumber (BOOL) (default = NO)
+QTKIT_EXTERN NSString * const QTMovieOpenForPlaybackAttribute				AVAILABLE_QTKIT_VERSION_7_6_3_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;	// NSNumber (BOOL) (default = NO)
 
 // movie attributes
 /*!
@@ -180,7 +189,7 @@ QTKIT_EXTERN NSString * const QTMovieOpenForPlaybackAttribute				AVAILABLE_QTKIT
 					This attribute can be read and written.
 					This attribute can be read and written when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */
-QTKIT_EXTERN NSString * const QTMovieApertureModeAttribute					AVAILABLE_QTKIT_VERSION_7_2_AND_LATER;      // NSString
+QTKIT_EXTERN NSString * const QTMovieApertureModeAttribute					AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSString
 
 /*!
 	@constant		QTMovieActiveSegmentAttribute
@@ -197,7 +206,7 @@ QTKIT_EXTERN NSString * const QTMovieActiveSegmentAttribute					AVAILABLE_QTKIT_
 	@discussion		This attribute can be read and written.
 					This attribute can be read and written when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */
-QTKIT_EXTERN NSString * const QTMovieAutoAlternatesAttribute				AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSNumber (BOOL)
+QTKIT_EXTERN NSString * const QTMovieAutoAlternatesAttribute				AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSNumber (BOOL)
 
 /*!
 	@constant		QTMovieCopyrightAttribute
@@ -205,7 +214,7 @@ QTKIT_EXTERN NSString * const QTMovieAutoAlternatesAttribute				AVAILABLE_QTKIT_
 	@discussion		This attribute can be read and written.
 					This attribute can be read but not written when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */
-QTKIT_EXTERN NSString * const QTMovieCopyrightAttribute						AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSString
+QTKIT_EXTERN NSString * const QTMovieCopyrightAttribute						AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSString
 
 /*!
 	@constant		QTMovieCreationTimeAttribute
@@ -213,7 +222,7 @@ QTKIT_EXTERN NSString * const QTMovieCopyrightAttribute						AVAILABLE_QTKIT_VER
 	@discussion		This attribute can be read but not written.
 					This attribute can be read but not written when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */
-QTKIT_EXTERN NSString * const QTMovieCreationTimeAttribute					AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSDate
+QTKIT_EXTERN NSString * const QTMovieCreationTimeAttribute					AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSDate
 
 /*!
 	@constant		QTMovieCurrentSizeAttribute
@@ -230,7 +239,7 @@ QTKIT_EXTERN NSString * const QTMovieCurrentSizeAttribute					AVAILABLE_QTKIT_VE
 	@discussion		This attribute can be read and written.
 					This attribute can be read and written when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */
-QTKIT_EXTERN NSString * const QTMovieCurrentTimeAttribute					AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSValue (QTTime)
+QTKIT_EXTERN NSString * const QTMovieCurrentTimeAttribute					AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSValue (QTTime)
 
 /*!
 	@constant		QTMovieDataSizeAttribute
@@ -238,7 +247,7 @@ QTKIT_EXTERN NSString * const QTMovieCurrentTimeAttribute					AVAILABLE_QTKIT_VE
 	@discussion		This attribute can be read but not written.
 					This attribute can be read but not written when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */
-QTKIT_EXTERN NSString * const QTMovieDataSizeAttribute						AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSNumber (long long)
+QTKIT_EXTERN NSString * const QTMovieDataSizeAttribute						AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSNumber (long long)
 
 /*!
 	@constant		QTMovieDelegateAttribute
@@ -246,7 +255,7 @@ QTKIT_EXTERN NSString * const QTMovieDataSizeAttribute						AVAILABLE_QTKIT_VERS
 	@discussion		This attribute can be read and written.
 					This attribute can be read and written when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */
-QTKIT_EXTERN NSString * const QTMovieDelegateAttribute						AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSObject
+QTKIT_EXTERN NSString * const QTMovieDelegateAttribute						AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSObject
 
 /*!
 	@constant		QTMovieDisplayNameAttribute
@@ -256,7 +265,7 @@ QTKIT_EXTERN NSString * const QTMovieDelegateAttribute						AVAILABLE_QTKIT_VERS
 	@discussion		This attribute can be read and written.
 					This attribute can be read but not written when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */
-QTKIT_EXTERN NSString * const QTMovieDisplayNameAttribute					AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSString
+QTKIT_EXTERN NSString * const QTMovieDisplayNameAttribute					AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSString
 
 /*!
 	@constant		QTMovieDurationAttribute
@@ -264,7 +273,7 @@ QTKIT_EXTERN NSString * const QTMovieDisplayNameAttribute					AVAILABLE_QTKIT_VE
 	@discussion		This attribute can be read but not written.
 					This attribute can be read but not written when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */
-QTKIT_EXTERN NSString * const QTMovieDurationAttribute						AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSValue (QTTime)
+QTKIT_EXTERN NSString * const QTMovieDurationAttribute						AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSValue (QTTime)
 
 /*!
 	@constant		QTMovieEditableAttribute
@@ -273,7 +282,7 @@ QTKIT_EXTERN NSString * const QTMovieDurationAttribute						AVAILABLE_QTKIT_VERS
 	@discussion		This attribute can be read and written.
 					This attribute can be read but not written when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */
-QTKIT_EXTERN NSString * const QTMovieEditableAttribute						AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSNumber (BOOL)
+QTKIT_EXTERN NSString * const QTMovieEditableAttribute						AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSNumber (BOOL)
 
 /*!
 	@constant		QTMovieFileNameAttribute
@@ -281,7 +290,7 @@ QTKIT_EXTERN NSString * const QTMovieEditableAttribute						AVAILABLE_QTKIT_VERS
 	@discussion		This attribute can be read but not written.
 					This attribute can be read but not written when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */
-QTKIT_EXTERN NSString * const QTMovieFileNameAttribute						AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSString
+QTKIT_EXTERN NSString * const QTMovieFileNameAttribute						AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSString
 
 /*!
 	@constant		QTMovieHasApertureModeDimensionsAttribute
@@ -291,7 +300,7 @@ QTKIT_EXTERN NSString * const QTMovieFileNameAttribute						AVAILABLE_QTKIT_VERS
 	@discussion		This attribute can be read but not written.
 					This attribute can be read but not written when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */
-QTKIT_EXTERN NSString * const QTMovieHasApertureModeDimensionsAttribute		AVAILABLE_QTKIT_VERSION_7_2_AND_LATER;      // NSNumber (BOOL)
+QTKIT_EXTERN NSString * const QTMovieHasApertureModeDimensionsAttribute		AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSNumber (BOOL)
 
 /*!
 	@constant		QTMovieHasAudioAttribute
@@ -300,7 +309,7 @@ QTKIT_EXTERN NSString * const QTMovieHasApertureModeDimensionsAttribute		AVAILAB
 	@discussion		This attribute can be read but not written.
 					This attribute can be read but not written when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */
-QTKIT_EXTERN NSString * const QTMovieHasAudioAttribute						AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSNumber (BOOL)
+QTKIT_EXTERN NSString * const QTMovieHasAudioAttribute						AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSNumber (BOOL)
 
 /*!
 	@constant		QTMovieHasDurationAttribute
@@ -310,7 +319,7 @@ QTKIT_EXTERN NSString * const QTMovieHasAudioAttribute						AVAILABLE_QTKIT_VERS
 	@discussion		This attribute can be read but not written.
 					This attribute can be read but not written when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */
-QTKIT_EXTERN NSString * const QTMovieHasDurationAttribute					AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSNumber (BOOL)
+QTKIT_EXTERN NSString * const QTMovieHasDurationAttribute					AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSNumber (BOOL)
 
 /*!
 	@constant		QTMovieHasVideoAttribute
@@ -319,7 +328,7 @@ QTKIT_EXTERN NSString * const QTMovieHasDurationAttribute					AVAILABLE_QTKIT_VE
 	@discussion		This attribute can be read but not written.
 					This attribute can be read but not written when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */
-QTKIT_EXTERN NSString * const QTMovieHasVideoAttribute						AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSNumber (BOOL)
+QTKIT_EXTERN NSString * const QTMovieHasVideoAttribute						AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSNumber (BOOL)
 
 /*!
 	@constant		QTMovieIsActiveAttribute
@@ -327,7 +336,7 @@ QTKIT_EXTERN NSString * const QTMovieHasVideoAttribute						AVAILABLE_QTKIT_VERS
 	@discussion		This attribute can be read and written.
 					This attribute can be read and written when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */
-QTKIT_EXTERN NSString * const QTMovieIsActiveAttribute						AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSNumber (BOOL)
+QTKIT_EXTERN NSString * const QTMovieIsActiveAttribute						AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSNumber (BOOL)
 
 /*!
 	@constant		QTMovieIsInteractiveAttribute
@@ -336,7 +345,7 @@ QTKIT_EXTERN NSString * const QTMovieIsActiveAttribute						AVAILABLE_QTKIT_VERS
 	@discussion		This attribute can be read but not written.
 					This attribute can be read but not written when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */
-QTKIT_EXTERN NSString * const QTMovieIsInteractiveAttribute					AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSNumber (BOOL)
+QTKIT_EXTERN NSString * const QTMovieIsInteractiveAttribute					AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSNumber (BOOL)
 
 /*!
 	@constant		QTMovieIsLinearAttribute
@@ -345,7 +354,7 @@ QTKIT_EXTERN NSString * const QTMovieIsInteractiveAttribute					AVAILABLE_QTKIT_
 	@discussion		This attribute can be read but not written.
 					This attribute can be read but not written when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */
-QTKIT_EXTERN NSString * const QTMovieIsLinearAttribute						AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSNumber (BOOL)
+QTKIT_EXTERN NSString * const QTMovieIsLinearAttribute						AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSNumber (BOOL)
 
 /*!
 	@constant		QTMovieIsSteppableAttribute
@@ -354,7 +363,7 @@ QTKIT_EXTERN NSString * const QTMovieIsLinearAttribute						AVAILABLE_QTKIT_VERS
 	@discussion		This attribute can be read but not written.
 					This attribute can be read but not written when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */
-QTKIT_EXTERN NSString * const QTMovieIsSteppableAttribute					AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSNumber (BOOL)
+QTKIT_EXTERN NSString * const QTMovieIsSteppableAttribute					AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSNumber (BOOL)
 
 /*!
 	@constant		QTMovieLoadStateAttribute
@@ -362,7 +371,7 @@ QTKIT_EXTERN NSString * const QTMovieIsSteppableAttribute					AVAILABLE_QTKIT_VE
 	@discussion		This attribute can be read but not written.
 					This attribute can be read but not written when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */
-QTKIT_EXTERN NSString * const QTMovieLoadStateAttribute						AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSNumber (long)
+QTKIT_EXTERN NSString * const QTMovieLoadStateAttribute						AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSNumber (long)
 
 /*!
 	@constant		QTMovieLoadStateErrorAttribute
@@ -370,7 +379,7 @@ QTKIT_EXTERN NSString * const QTMovieLoadStateAttribute						AVAILABLE_QTKIT_VER
 	@discussion		This attribute can be read but not written.
 					This attribute can be read but not written when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */
-QTKIT_EXTERN NSString * const QTMovieLoadStateErrorAttribute				AVAILABLE_QTKIT_VERSION_7_6_3_AND_LATER;    // NSError
+QTKIT_EXTERN NSString * const QTMovieLoadStateErrorAttribute				AVAILABLE_QTKIT_VERSION_7_6_3_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;    // NSError
 
 /*!
 	@constant		QTMovieLoopsAttribute
@@ -379,7 +388,7 @@ QTKIT_EXTERN NSString * const QTMovieLoadStateErrorAttribute				AVAILABLE_QTKIT_
 	@discussion		This attribute can be read and written.
 					This attribute can be read and written when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */
-QTKIT_EXTERN NSString * const QTMovieLoopsAttribute							AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSNumber (BOOL)
+QTKIT_EXTERN NSString * const QTMovieLoopsAttribute							AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSNumber (BOOL)
 
 /*!
 	@constant		QTMovieLoopsBackAndForthAttribute
@@ -391,7 +400,7 @@ QTKIT_EXTERN NSString * const QTMovieLoopsAttribute							AVAILABLE_QTKIT_VERSIO
 					This attribute can be read and written.
 					This attribute can be read and written when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */
-QTKIT_EXTERN NSString * const QTMovieLoopsBackAndForthAttribute				AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSNumber (BOOL)
+QTKIT_EXTERN NSString * const QTMovieLoopsBackAndForthAttribute				AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSNumber (BOOL)
 
 /*!
 	@constant		QTMovieModificationTimeAttribute
@@ -399,7 +408,7 @@ QTKIT_EXTERN NSString * const QTMovieLoopsBackAndForthAttribute				AVAILABLE_QTK
 	@discussion		This attribute can be read but not written.
 					This attribute can be read but not written when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */
-QTKIT_EXTERN NSString * const QTMovieModificationTimeAttribute				AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSDate
+QTKIT_EXTERN NSString * const QTMovieModificationTimeAttribute				AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSDate
 
 /*!
 	@constant		QTMovieMutedAttribute
@@ -408,7 +417,7 @@ QTKIT_EXTERN NSString * const QTMovieModificationTimeAttribute				AVAILABLE_QTKI
 	@discussion		This attribute can be read and written.
 					This attribute can be read and written when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */
-QTKIT_EXTERN NSString * const QTMovieMutedAttribute							AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSNumber (BOOL)
+QTKIT_EXTERN NSString * const QTMovieMutedAttribute							AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSNumber (BOOL)
 
 /*!
 	@constant		QTMovieNaturalSizeAttribute
@@ -416,7 +425,7 @@ QTKIT_EXTERN NSString * const QTMovieMutedAttribute							AVAILABLE_QTKIT_VERSIO
 	@discussion		This attribute can be read but not written.
 					This attribute can be read but not written when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */
-QTKIT_EXTERN NSString * const QTMovieNaturalSizeAttribute					AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSValue (NSSize)
+QTKIT_EXTERN NSString * const QTMovieNaturalSizeAttribute					AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSValue (NSSize)
 
 /*!
 	@constant		QTMoviePlaysAllFramesAttribute
@@ -425,7 +434,7 @@ QTKIT_EXTERN NSString * const QTMovieNaturalSizeAttribute					AVAILABLE_QTKIT_VE
 	@discussion		This attribute can be read and written.
 					This attribute cannot be read or written when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */
-QTKIT_EXTERN NSString * const QTMoviePlaysAllFramesAttribute				AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSNumber (BOOL)
+QTKIT_EXTERN NSString * const QTMoviePlaysAllFramesAttribute				AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSNumber (BOOL)
 
 /*!
 	@constant		QTMoviePlaysSelectionOnlyAttribute
@@ -434,7 +443,7 @@ QTKIT_EXTERN NSString * const QTMoviePlaysAllFramesAttribute				AVAILABLE_QTKIT_
 	@discussion		This attribute can be read and written.
 					This attribute cannot be read or written when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */
-QTKIT_EXTERN NSString * const QTMoviePlaysSelectionOnlyAttribute			AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSNumber (BOOL)
+QTKIT_EXTERN NSString * const QTMoviePlaysSelectionOnlyAttribute			AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSNumber (BOOL)
 
 /*!
 	@constant		QTMoviePosterTimeAttribute
@@ -442,7 +451,7 @@ QTKIT_EXTERN NSString * const QTMoviePlaysSelectionOnlyAttribute			AVAILABLE_QTK
 	@discussion		This attribute can be read and written.
 					This attribute can be read but not written when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */
-QTKIT_EXTERN NSString * const QTMoviePosterTimeAttribute					AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSValue (QTTime)
+QTKIT_EXTERN NSString * const QTMoviePosterTimeAttribute					AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSValue (QTTime)
 
 /*!
 	@constant		QTMoviePreferredMutedAttribute
@@ -451,7 +460,7 @@ QTKIT_EXTERN NSString * const QTMoviePosterTimeAttribute					AVAILABLE_QTKIT_VER
 	@discussion		This attribute can be read and written.
 					This attribute can be read but not written when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */
-QTKIT_EXTERN NSString * const QTMoviePreferredMutedAttribute				AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSNumber (BOOL)
+QTKIT_EXTERN NSString * const QTMoviePreferredMutedAttribute				AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSNumber (BOOL)
 
 /*!
 	@constant		QTMoviePreferredRateAttribute
@@ -459,7 +468,7 @@ QTKIT_EXTERN NSString * const QTMoviePreferredMutedAttribute				AVAILABLE_QTKIT_
 	@discussion		This attribute can be read and written.
 					This attribute can be read but not written when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */
-QTKIT_EXTERN NSString * const QTMoviePreferredRateAttribute					AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSNumber (float)
+QTKIT_EXTERN NSString * const QTMoviePreferredRateAttribute					AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSNumber (float)
 
 /*!
 	@constant		QTMoviePreferredVolumeAttribute
@@ -467,7 +476,7 @@ QTKIT_EXTERN NSString * const QTMoviePreferredRateAttribute					AVAILABLE_QTKIT_
 	@discussion		This attribute can be read and written.
 					This attribute can be read but not written when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */
-QTKIT_EXTERN NSString * const QTMoviePreferredVolumeAttribute				AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSNumber (float)
+QTKIT_EXTERN NSString * const QTMoviePreferredVolumeAttribute				AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSNumber (float)
 
 /*!
 	@constant		QTMoviePreviewModeAttribute
@@ -476,7 +485,7 @@ QTKIT_EXTERN NSString * const QTMoviePreferredVolumeAttribute				AVAILABLE_QTKIT
 	@discussion		This attribute can be read and written.
 					This attribute can be read but not written when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */
-QTKIT_EXTERN NSString * const QTMoviePreviewModeAttribute					AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSNumber (BOOL)
+QTKIT_EXTERN NSString * const QTMoviePreviewModeAttribute					AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSNumber (BOOL)
 
 /*!
 	@constant		QTMoviePreviewRangeAttribute
@@ -484,7 +493,7 @@ QTKIT_EXTERN NSString * const QTMoviePreviewModeAttribute					AVAILABLE_QTKIT_VE
 	@discussion		This attribute can be read and written.
 					This attribute can be read but not written when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */
-QTKIT_EXTERN NSString * const QTMoviePreviewRangeAttribute					AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSValue (QTTimeRange)
+QTKIT_EXTERN NSString * const QTMoviePreviewRangeAttribute					AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSValue (QTTimeRange)
 
 /*!
 	@constant		QTMovieRateAttribute
@@ -492,7 +501,7 @@ QTKIT_EXTERN NSString * const QTMoviePreviewRangeAttribute					AVAILABLE_QTKIT_V
 	@discussion		This attribute can be read and written.
 					This attribute can be read and written when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */
-QTKIT_EXTERN NSString * const QTMovieRateAttribute							AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSNumber (float)
+QTKIT_EXTERN NSString * const QTMovieRateAttribute							AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSNumber (float)
 
 /*!
 	@constant		QTMovieSelectionAttribute
@@ -500,7 +509,7 @@ QTKIT_EXTERN NSString * const QTMovieRateAttribute							AVAILABLE_QTKIT_VERSION
 	@discussion		This attribute can be read and written.
 					This attribute cannot be read or written when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */
-QTKIT_EXTERN NSString * const QTMovieSelectionAttribute						AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSValue (QTTimeRange)
+QTKIT_EXTERN NSString * const QTMovieSelectionAttribute						AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSValue (QTTimeRange)
 
 /*!
 	@constant		QTMovieTimeScaleAttribute
@@ -510,7 +519,7 @@ QTKIT_EXTERN NSString * const QTMovieSelectionAttribute						AVAILABLE_QTKIT_VER
 					Also, you should only increase the time scale value, and you should try to use integer multiples of the existing time scale.
 					This attribute can be read but not written when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */
-QTKIT_EXTERN NSString * const QTMovieTimeScaleAttribute						AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSNumber (long)
+QTKIT_EXTERN NSString * const QTMovieTimeScaleAttribute						AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSNumber (long)
 
 /*!
 	@constant		QTMovieURLAttribute
@@ -518,7 +527,7 @@ QTKIT_EXTERN NSString * const QTMovieTimeScaleAttribute						AVAILABLE_QTKIT_VER
 	@discussion		This attribute can be read but not written.
 					This attribute can be read but not written when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */
-QTKIT_EXTERN NSString * const QTMovieURLAttribute							AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSURL
+QTKIT_EXTERN NSString * const QTMovieURLAttribute							AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSURL
 
 /*!
 	@constant		QTMovieVolumeAttribute
@@ -526,7 +535,7 @@ QTKIT_EXTERN NSString * const QTMovieURLAttribute							AVAILABLE_QTKIT_VERSION_
 	@discussion		This attribute can be read and written.
 					This attribute can be read and written when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */
-QTKIT_EXTERN NSString * const QTMovieVolumeAttribute						AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSNumber (float)
+QTKIT_EXTERN NSString * const QTMovieVolumeAttribute						AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSNumber (float)
 
 /*!
 	@constant		QTMovieRateChangesPreservePitchAttribute
@@ -539,28 +548,28 @@ QTKIT_EXTERN NSString * const QTMovieVolumeAttribute						AVAILABLE_QTKIT_VERSIO
 					This attribute can be read but not written; it must be among the initialization attributes to have any effect.
 					This attribute can be read but not written when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */
-QTKIT_EXTERN NSString * const QTMovieRateChangesPreservePitchAttribute		AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;      // NSNumber (BOOL)
+QTKIT_EXTERN NSString * const QTMovieRateChangesPreservePitchAttribute		AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSNumber (BOOL)
 
 	// aperture modes
-QTKIT_EXTERN NSString * const QTMovieApertureModeClassic					AVAILABLE_QTKIT_VERSION_7_2_AND_LATER;
-QTKIT_EXTERN NSString * const QTMovieApertureModeClean						AVAILABLE_QTKIT_VERSION_7_2_AND_LATER;
-QTKIT_EXTERN NSString * const QTMovieApertureModeProduction					AVAILABLE_QTKIT_VERSION_7_2_AND_LATER;
-QTKIT_EXTERN NSString * const QTMovieApertureModeEncodedPixels				AVAILABLE_QTKIT_VERSION_7_2_AND_LATER;
+QTKIT_EXTERN NSString * const QTMovieApertureModeClassic					AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+QTKIT_EXTERN NSString * const QTMovieApertureModeClean						AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+QTKIT_EXTERN NSString * const QTMovieApertureModeProduction					AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+QTKIT_EXTERN NSString * const QTMovieApertureModeEncodedPixels				AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 	// movie frame image options for frameImageAtTime:withAttributes:error:
-QTKIT_EXTERN NSString * const QTMovieFrameImageSize							AVAILABLE_QTKIT_VERSION_7_2_AND_LATER;      // NSValue (NSSize)
-QTKIT_EXTERN NSString * const QTMovieFrameImageType							AVAILABLE_QTKIT_VERSION_7_2_AND_LATER;      // NSString
-QTKIT_EXTERN NSString * const QTMovieFrameImageTypeNSImage					AVAILABLE_QTKIT_VERSION_7_2_AND_LATER;
-QTKIT_EXTERN NSString * const QTMovieFrameImageTypeCGImageRef				AVAILABLE_QTKIT_VERSION_7_2_AND_LATER;
-QTKIT_EXTERN NSString * const QTMovieFrameImageTypeCIImage					AVAILABLE_QTKIT_VERSION_7_2_AND_LATER;
-QTKIT_EXTERN NSString * const QTMovieFrameImageTypeCVPixelBufferRef			AVAILABLE_QTKIT_VERSION_7_2_AND_LATER;
-QTKIT_EXTERN NSString * const QTMovieFrameImageTypeCVOpenGLTextureRef		AVAILABLE_QTKIT_VERSION_7_2_AND_LATER;
-QTKIT_EXTERN NSString * const QTMovieFrameImageOpenGLContext				AVAILABLE_QTKIT_VERSION_7_2_AND_LATER;      // NSValue (CGLContextObj)
-QTKIT_EXTERN NSString * const QTMovieFrameImagePixelFormat					AVAILABLE_QTKIT_VERSION_7_2_AND_LATER;      // NSValue (CGLPixelFormatObj)
-QTKIT_EXTERN NSString * const QTMovieFrameImageRepresentationsType			AVAILABLE_QTKIT_VERSION_7_2_AND_LATER;      // NSArray of NSString; strings are, e.g., NSBitmapImageRep
-QTKIT_EXTERN NSString * const QTMovieFrameImageDeinterlaceFields			AVAILABLE_QTKIT_VERSION_7_2_AND_LATER;      // NSNumber (BOOL) (default = YES)
-QTKIT_EXTERN NSString * const QTMovieFrameImageHighQuality					AVAILABLE_QTKIT_VERSION_7_2_AND_LATER;      // NSNumber (BOOL) (default = YES)
-QTKIT_EXTERN NSString * const QTMovieFrameImageSingleField					AVAILABLE_QTKIT_VERSION_7_2_AND_LATER;      // NSNumber (BOOL) (default = YES)
+QTKIT_EXTERN NSString * const QTMovieFrameImageSize							AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSValue (NSSize)
+QTKIT_EXTERN NSString * const QTMovieFrameImageType							AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSString
+QTKIT_EXTERN NSString * const QTMovieFrameImageTypeNSImage					AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+QTKIT_EXTERN NSString * const QTMovieFrameImageTypeCGImageRef				AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+QTKIT_EXTERN NSString * const QTMovieFrameImageTypeCIImage					AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+QTKIT_EXTERN NSString * const QTMovieFrameImageTypeCVPixelBufferRef			AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+QTKIT_EXTERN NSString * const QTMovieFrameImageTypeCVOpenGLTextureRef		AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+QTKIT_EXTERN NSString * const QTMovieFrameImageOpenGLContext				AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSValue (CGLContextObj)
+QTKIT_EXTERN NSString * const QTMovieFrameImagePixelFormat					AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSValue (CGLPixelFormatObj)
+QTKIT_EXTERN NSString * const QTMovieFrameImageRepresentationsType			AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSArray of NSString; strings are, e.g., NSBitmapImageRep
+QTKIT_EXTERN NSString * const QTMovieFrameImageDeinterlaceFields			AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSNumber (BOOL) (default = YES)
+QTKIT_EXTERN NSString * const QTMovieFrameImageHighQuality					AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSNumber (BOOL) (default = YES)
+QTKIT_EXTERN NSString * const QTMovieFrameImageSingleField					AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSNumber (BOOL) (default = YES)
 
 /*!
  @constant		QTMovieFrameImageSessionMode
@@ -572,19 +581,19 @@ QTKIT_EXTERN NSString * const QTMovieFrameImageSingleField					AVAILABLE_QTKIT_V
 				given QTMovie object, the caller should follow those session calls with a call where this value is NO; this is
 				a signal to QTMovie to dispose of that cached data.
  */
-QTKIT_EXTERN NSString * const QTMovieFrameImageSessionMode					AVAILABLE_QTKIT_VERSION_7_6_3_AND_LATER;	// NSNumber (BOOL) (default = NO)
+QTKIT_EXTERN NSString * const QTMovieFrameImageSessionMode					AVAILABLE_QTKIT_VERSION_7_6_3_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;	// NSNumber (BOOL) (default = NO)
 
 	// exceptions
-QTKIT_EXTERN NSString * const QTMovieUneditableException					AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;
+QTKIT_EXTERN NSString * const QTMovieUneditableException					AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 QTKIT_EXTERN NSString * const QTDisallowedForInitializationPurposeException					
-																			AVAILABLE_QTKIT_VERSION_7_6_3_AND_LATER;
+																			AVAILABLE_QTKIT_VERSION_7_6_3_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 	// keys for dictionaries in -chapters array
-QTKIT_EXTERN NSString * const QTMovieChapterName							AVAILABLE_QTKIT_VERSION_7_2_AND_LATER;      // NSString
-QTKIT_EXTERN NSString * const QTMovieChapterStartTime						AVAILABLE_QTKIT_VERSION_7_2_AND_LATER;      // NSValue (QTTime)
+QTKIT_EXTERN NSString * const QTMovieChapterName							AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSString
+QTKIT_EXTERN NSString * const QTMovieChapterStartTime						AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // NSValue (QTTime)
 
 	// keys for attributes dictionary in -addChapters
-QTKIT_EXTERN NSString * const QTMovieChapterTargetTrackAttribute			AVAILABLE_QTKIT_VERSION_7_2_AND_LATER;      // QTTrack
+QTKIT_EXTERN NSString * const QTMovieChapterTargetTrackAttribute			AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;      // QTTrack
 
 // constants for movieFileTypes method
 typedef enum {
@@ -638,7 +647,7 @@ typedef NSInteger QTMovieLoadState;
 					This delegate method is not called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 	@result			A BOOL value; a delegate should return YES if it handled this method, NO otherwise.
 */
-	- (BOOL)movie:(QTMovie *)movie linkToURL:(NSURL *)url;			// return YES if delegate handled link-to-URL request
+	- (BOOL)movie:(QTMovie *)movie linkToURL:(NSURL *)url AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;			// return YES if delegate handled link-to-URL request
 
 /*!
 	@method			movieShouldLoadData:
@@ -649,7 +658,7 @@ typedef NSInteger QTMovieLoadState;
 					This delegate method is not called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 	@result			A BOOL value; this value is ignored by QTKit.
 */
-	- (BOOL)movieShouldLoadData:(id)sender;
+	- (BOOL)movieShouldLoadData:(id)sender AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			movieShouldTask:
@@ -660,7 +669,7 @@ typedef NSInteger QTMovieLoadState;
 					This delegate method is not called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 	@result			A BOOL value; a delegate should return YES to cancel the standard movie idle processing, NO otherwise.
 */
-	- (BOOL)movieShouldTask:(id)movie;
+	- (BOOL)movieShouldTask:(id)movie AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			externalMovie:
@@ -674,7 +683,7 @@ typedef NSInteger QTMovieLoadState;
 	@discussion		This delegate method is not called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 	@result			A QTMovie object.
 */
-	- (QTMovie *)externalMovie:(NSDictionary *)dictionary;
+	- (QTMovie *)externalMovie:(NSDictionary *)dictionary AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			movie:shouldContinueOperation:withPhase:atPercent:withAttributes:
@@ -692,7 +701,7 @@ typedef NSInteger QTMovieLoadState;
 	@discussion		This delegate method is not called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 	@result			A BOOL value; a delegate should return YES to continue the lengthy operation, NO to cancel it.
 */
-	- (BOOL)movie:(QTMovie *)movie shouldContinueOperation:(NSString *)op withPhase:(QTMovieOperationPhase)phase atPercent:(NSNumber *)percent withAttributes:(NSDictionary *)attributes;
+	- (BOOL)movie:(QTMovie *)movie shouldContinueOperation:(NSString *)op withPhase:(QTMovieOperationPhase)phase atPercent:(NSNumber *)percent withAttributes:(NSDictionary *)attributes AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 @end
 
 @interface QTMovie : NSObject <NSCoding, NSCopying>
@@ -728,7 +737,7 @@ typedef NSInteger QTMovieLoadState;
 	@discussion		This method can be called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 	@result			A QTTime structure that indicates the duration of the movie.
 */
-- (QTTime)duration;
+- (QTTime)duration AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 @end
 
@@ -741,7 +750,7 @@ typedef NSInteger QTMovieLoadState;
 					An NSPasteboard object.
 	@result			YES if a QTMovie object can be initialized from the specified pasteboard, NO otherwise.
 */
-+ (BOOL)canInitWithPasteboard:(NSPasteboard *)pasteboard;
++ (BOOL)canInitWithPasteboard:(NSPasteboard *)pasteboard AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			canInitWithFile:
@@ -750,7 +759,7 @@ typedef NSInteger QTMovieLoadState;
 					An NSString object that specifies a full pathname to a file.
 	@result			YES if a QTMovie object can be initialized from the specified file, NO otherwise.
 */
-+ (BOOL)canInitWithFile:(NSString *)fileName;
++ (BOOL)canInitWithFile:(NSString *)fileName AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			canInitWithURL:
@@ -759,7 +768,7 @@ typedef NSInteger QTMovieLoadState;
 					An NSURL object.
 	@result			YES if a QTMovie object can be initialized from the specified URL, NO otherwise.
 */
-+ (BOOL)canInitWithURL:(NSURL *)url;
++ (BOOL)canInitWithURL:(NSURL *)url AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			canInitWithDataReference:
@@ -768,7 +777,7 @@ typedef NSInteger QTMovieLoadState;
 					An QTDataReference object.
 	@result			YES if a QTMovie object can be initialized from the specified data reference, NO otherwise.
 */
-+ (BOOL)canInitWithDataReference:(QTDataReference *)dataReference;
++ (BOOL)canInitWithDataReference:(QTDataReference *)dataReference AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			movieFileTypes:
@@ -782,21 +791,21 @@ typedef NSInteger QTMovieLoadState;
 					(for instance, the movie importer for text files).
 	@result			An NSArray object that contains NSString objects indicating supported file types.
 */
-+ (NSArray *)movieFileTypes:(QTMovieFileTypeOptions)types;
++ (NSArray *)movieFileTypes:(QTMovieFileTypeOptions)types AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			movieUnfilteredFileTypes
 	@abstract		Returns an array of file types that can be used to initialize a QTMovie object.
 	@result			An NSArray object that contains NSString objects indicating supported file types.
 */
-+ (NSArray *)movieUnfilteredFileTypes;
++ (NSArray *)movieUnfilteredFileTypes AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			movieUnfilteredPasteboardTypes
 	@abstract		Returns an array of pasteboard types that can be used to initialize a QTMovie object.
 	@result			An NSArray object that contains NSString objects indicating supported pasteboard types.
 */
-+ (NSArray *)movieUnfilteredPasteboardTypes;
++ (NSArray *)movieUnfilteredPasteboardTypes AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 #if QTKIT_VERSION_MAX_ALLOWED >= QTKIT_VERSION_7_2
 /*!
@@ -807,7 +816,7 @@ typedef NSInteger QTMovieLoadState;
 					See the description of +movieFileTypes for more information.
 	@result			An NSArray object that contains NSString objects indicating supported file types.
 */
-+ (NSArray *)movieTypesWithOptions:(QTMovieFileTypeOptions)types;
++ (NSArray *)movieTypesWithOptions:(QTMovieFileTypeOptions)types AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 #endif
 
 /*!
@@ -815,7 +824,7 @@ typedef NSInteger QTMovieLoadState;
 	@abstract		Creates an empty QTMovie object.
 	@result			An empty QTMovie object. This movie contains no playable data.
 */
-+ (id)movie;
++ (id)movie AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			movieWithFile:error:
@@ -826,7 +835,7 @@ typedef NSInteger QTMovieLoadState;
 					A pointer to an NSError object; if a movie cannot be created, an NSError object is returned in this location.
 	@result			An autoreleased QTMovie object.
 */
-+ (id)movieWithFile:(NSString *)fileName error:(NSError **)errorPtr;
++ (id)movieWithFile:(NSString *)fileName error:(NSError **)errorPtr AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			movieWithURL:error:
@@ -837,7 +846,7 @@ typedef NSInteger QTMovieLoadState;
 					A pointer to an NSError object; if a movie cannot be created, an NSError object is returned in this location.
 	@result			An autoreleased QTMovie object.
 */
-+ (id)movieWithURL:(NSURL *)url error:(NSError **)errorPtr;
++ (id)movieWithURL:(NSURL *)url error:(NSError **)errorPtr AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			movieWithDataReference:error:
@@ -848,7 +857,7 @@ typedef NSInteger QTMovieLoadState;
 					A pointer to an NSError object; if a movie cannot be created, an NSError object is returned in this location.
 	@result			An autoreleased QTMovie object.
 */
-+ (id)movieWithDataReference:(QTDataReference *)dataReference error:(NSError **)errorPtr;
++ (id)movieWithDataReference:(QTDataReference *)dataReference error:(NSError **)errorPtr AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			movieWithPasteboard:error:
@@ -860,7 +869,7 @@ typedef NSInteger QTMovieLoadState;
 					A pointer to an NSError object; if a movie cannot be created, an NSError object is returned in this location.
 	@result			An autoreleased QTMovie object.
 */
-+ (id)movieWithPasteboard:(NSPasteboard *)pasteboard error:(NSError **)errorPtr;
++ (id)movieWithPasteboard:(NSPasteboard *)pasteboard error:(NSError **)errorPtr AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			movieWithData:error:
@@ -871,7 +880,7 @@ typedef NSInteger QTMovieLoadState;
 					A pointer to an NSError object; if a movie cannot be created, an NSError object is returned in this location.
 	@result			An autoreleased QTMovie object.
 */
-+ (id)movieWithData:(NSData *)data error:(NSError **)errorPtr;
++ (id)movieWithData:(NSData *)data error:(NSError **)errorPtr AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 #if !__LP64__
 /*!
@@ -891,7 +900,7 @@ typedef NSInteger QTMovieLoadState;
 					A pointer to an NSError object; if a movie cannot be created, an NSError object is returned in this location.
 	@result			An autoreleased QTMovie object.
 */
-+ (id)movieWithQuickTimeMovie:(Movie)movie disposeWhenDone:(BOOL)dispose error:(NSError **)errorPtr;
++ (id)movieWithQuickTimeMovie:(Movie)movie disposeWhenDone:(BOOL)dispose error:(NSError **)errorPtr AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 #endif
 
 /*!
@@ -907,7 +916,7 @@ typedef NSInteger QTMovieLoadState;
 					A pointer to an NSError object; if a movie cannot be created, an NSError object is returned in this location.
 	@result			An autoreleased QTMovie object.
 */
-+ (id)movieWithAttributes:(NSDictionary *)attributes error:(NSError **)errorPtr;
++ (id)movieWithAttributes:(NSDictionary *)attributes error:(NSError **)errorPtr AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			movieNamed:error:
@@ -916,7 +925,7 @@ typedef NSInteger QTMovieLoadState;
 					A pointer to an NSError object; if a movie cannot be created, an NSError object is returned in this location.
 	@result			A QTMovie object.
 */
-+ (id)movieNamed:(NSString *)name error:(NSError **)errorPtr;
++ (id)movieNamed:(NSString *)name error:(NSError **)errorPtr AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			initWithFile:error:
@@ -927,7 +936,7 @@ typedef NSInteger QTMovieLoadState;
 					A pointer to an NSError object; if a movie cannot be created, an NSError object is returned in this location.
 	@result			A QTMovie object.
 */
-- (id)initWithFile:(NSString *)fileName error:(NSError **)errorPtr;
+- (id)initWithFile:(NSString *)fileName error:(NSError **)errorPtr AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			initWithURL:error:
@@ -938,7 +947,7 @@ typedef NSInteger QTMovieLoadState;
 					A pointer to an NSError object; if a movie cannot be created, an NSError object is returned in this location.
 	@result			A QTMovie object.
 */
-- (id)initWithURL:(NSURL *)url error:(NSError **)errorPtr;
+- (id)initWithURL:(NSURL *)url error:(NSError **)errorPtr AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			initWithDataReference:error:
@@ -949,7 +958,7 @@ typedef NSInteger QTMovieLoadState;
 					A pointer to an NSError object; if a movie cannot be created, an NSError object is returned in this location.
 	@result			A QTMovie object.
 */
-- (id)initWithDataReference:(QTDataReference *)dataReference error:(NSError **)errorPtr;
+- (id)initWithDataReference:(QTDataReference *)dataReference error:(NSError **)errorPtr AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			initWithPasteboard:error:
@@ -961,7 +970,7 @@ typedef NSInteger QTMovieLoadState;
 					A pointer to an NSError object; if a movie cannot be created, an NSError object is returned in this location.
 	@result			A QTMovie object.
 */
-- (id)initWithPasteboard:(NSPasteboard *)pasteboard error:(NSError **)errorPtr;
+- (id)initWithPasteboard:(NSPasteboard *)pasteboard error:(NSError **)errorPtr AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			initWithData:error:
@@ -972,7 +981,7 @@ typedef NSInteger QTMovieLoadState;
 					A pointer to an NSError object; if a movie cannot be created, an NSError object is returned in this location.
 	@result			A QTMovie object.
 */
-- (id)initWithData:(NSData *)data error:(NSError **)errorPtr;
+- (id)initWithData:(NSData *)data error:(NSError **)errorPtr AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			initWithMovie:timeRange:error:
@@ -986,7 +995,7 @@ typedef NSInteger QTMovieLoadState;
 					A pointer to an NSError object; if a movie cannot be created, an NSError object is returned in this location.
 	@result			A QTMovie object.
 */
-- (id)initWithMovie:(QTMovie *)movie timeRange:(QTTimeRange)range error:(NSError **)errorPtr;
+- (id)initWithMovie:(QTMovie *)movie timeRange:(QTTimeRange)range error:(NSError **)errorPtr AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 #if !__LP64__
 /*!
@@ -1006,7 +1015,7 @@ typedef NSInteger QTMovieLoadState;
 					A pointer to an NSError object; if a movie cannot be created, an NSError object is returned in this location.
 	@result			A QTMovie object.
 */
-- (id)initWithQuickTimeMovie:(Movie)movie disposeWhenDone:(BOOL)dispose error:(NSError **)errorPtr;
+- (id)initWithQuickTimeMovie:(Movie)movie disposeWhenDone:(BOOL)dispose error:(NSError **)errorPtr AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 #endif
 
 /*!
@@ -1022,7 +1031,7 @@ typedef NSInteger QTMovieLoadState;
 					A pointer to an NSError object; if a movie cannot be created, an NSError object is returned in this location.
 	@result			A QTMovie object.
 */
-- (id)initWithAttributes:(NSDictionary *)attributes error:(NSError **)errorPtr;
+- (id)initWithAttributes:(NSDictionary *)attributes error:(NSError **)errorPtr AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			movieWithTimeRange:error:
@@ -1034,7 +1043,7 @@ typedef NSInteger QTMovieLoadState;
 					A pointer to an NSError object; if a movie cannot be created, an NSError object is returned in this location.
 	@result			A QTMovie object.
 */
-- (id)movieWithTimeRange:(QTTimeRange)range error:(NSError **)errorPtr;
+- (id)movieWithTimeRange:(QTTimeRange)range error:(NSError **)errorPtr AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 #if QTKIT_VERSION_MAX_ALLOWED >= QTKIT_VERSION_7_2
 /*!
@@ -1047,7 +1056,7 @@ typedef NSInteger QTMovieLoadState;
 					A pointer to an NSError object; if the storage container or the QTMovie object cannot be created, an NSError object is returned in this location.
 	@result			A QTMovie object. This object is editable.
 */
-- (id)initToWritableFile:(NSString *)filename error:(NSError **)errorPtr;
+- (id)initToWritableFile:(NSString *)filename error:(NSError **)errorPtr AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			initToWritableData:error:
@@ -1059,7 +1068,7 @@ typedef NSInteger QTMovieLoadState;
 					A pointer to an NSError object; if the storage container or the QTMovie object cannot be created, an NSError object is returned in this location.
 	@result			A QTMovie object. This object is editable.
 */
-- (id)initToWritableData:(NSMutableData *)data error:(NSError **)errorPtr;
+- (id)initToWritableData:(NSMutableData *)data error:(NSError **)errorPtr AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			initToWritableDataReference:error:
@@ -1071,7 +1080,7 @@ typedef NSInteger QTMovieLoadState;
 					A pointer to an NSError object; if the storage container or the QTMovie object cannot be created, an NSError object is returned in this location.
 	@result			A QTMovie object. This object is editable.
 */
-- (id)initToWritableDataReference:(QTDataReference *)dataReference error:(NSError **)errorPtr;
+- (id)initToWritableDataReference:(QTDataReference *)dataReference error:(NSError **)errorPtr AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			invalidate
@@ -1085,7 +1094,7 @@ typedef NSInteger QTMovieLoadState;
 					it should only be called when it is known that the object is no longer needed.
 					This method can be called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 */
-- (void)invalidate;
+- (void)invalidate AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 #endif
 
 @end
@@ -1098,7 +1107,7 @@ typedef NSInteger QTMovieLoadState;
 	@abstract		Returns a dictionary containing the current values of all public attributes of a QTMovie object.
 	@discussion		This method can be called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 */
-- (NSDictionary *)movieAttributes;
+- (NSDictionary *)movieAttributes AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			setMovieAttributes:
@@ -1108,7 +1117,7 @@ typedef NSInteger QTMovieLoadState;
 	@param			attributes
 					An NSDictionary object that specifies the attributes to set and their desired values.
 */
-- (void)setMovieAttributes:(NSDictionary *)attributes;
+- (void)setMovieAttributes:(NSDictionary *)attributes AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			attributeForKey:
@@ -1118,7 +1127,7 @@ typedef NSInteger QTMovieLoadState;
 					An NSString object that specifies the attribute to be read; pass strings like QTMovieTimeScaleAttribute or QTMovieVolumeAttribute.
 	@result			An NSObject that is the value of the specified attribute key.
 */
-- (id)attributeForKey:(NSString *)attributeKey;
+- (id)attributeForKey:(NSString *)attributeKey AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			setAttribute:forKey:
@@ -1130,14 +1139,14 @@ typedef NSInteger QTMovieLoadState;
 	@param			attributeKey
 					An NSString object that specifies the attribute to be written; pass strings like QTMovieTimeScaleAttribute or QTMovieVolumeAttribute.
 */
-- (void)setAttribute:(id)value forKey:(NSString *)attributeKey;
+- (void)setAttribute:(id)value forKey:(NSString *)attributeKey AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			tracks
 	@abstract		Returns an array of QTTrack objects representing the tracks in a QTMovie object.
 	@discussion		This method can be called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 */
-- (NSArray *)tracks;
+- (NSArray *)tracks AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			tracksOfMediaType:
@@ -1146,7 +1155,7 @@ typedef NSInteger QTMovieLoadState;
 	@param			type
 					An NSString object that specifies a media type; pass strings like QTMediaTypeVideo or QTMediaTypeText.
 */
-- (NSArray *)tracksOfMediaType:(NSString *)type;
+- (NSArray *)tracksOfMediaType:(NSString *)type AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 @end
 
@@ -1155,11 +1164,11 @@ typedef NSInteger QTMovieLoadState;
 /*!
 	@method			posterImage
 	@abstract		Returns an NSImage that is the poster image of a QTMovie object.
-	@discussion		This method can be called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
+	@discussion		This method may return nil when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 	@result			An NSImage object representing the movie poster image. If the movie has no visual data at the poster image time,
 					nil is returned.
 */
-- (NSImage *)posterImage;
+- (NSImage *)posterImage AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			currentFrameImage
@@ -1168,7 +1177,7 @@ typedef NSInteger QTMovieLoadState;
 	@result			An NSImage object representing the frame image at the current time. If the movie has no visual data at the
 					current time, nil is returned.
 */
-- (NSImage *)currentFrameImage;
+- (NSImage *)currentFrameImage AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			frameImageAtTime:
@@ -1179,7 +1188,7 @@ typedef NSInteger QTMovieLoadState;
 	@result			An NSImage object representing the frame image at the specified time. If the movie has no visual data at the
 					specified time, nil is returned.
 */
-- (NSImage *)frameImageAtTime:(QTTime)time;
+- (NSImage *)frameImageAtTime:(QTTime)time AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 #if QTKIT_VERSION_MAX_ALLOWED >= QTKIT_VERSION_7_2
 /*!
@@ -1198,7 +1207,7 @@ typedef NSInteger QTMovieLoadState;
 					of the current run loop cycle. However, applications running under garbage collection must call CVPixelBufferRelease on any
 					CVPixelBufferRef returned by this method.
 */
-- (void *)frameImageAtTime:(QTTime)time withAttributes:(NSDictionary *)attributes error:(NSError **)errorPtr;
+- (void *)frameImageAtTime:(QTTime)time withAttributes:(NSDictionary *)attributes error:(NSError **)errorPtr AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 #endif
 
 @end
@@ -1211,7 +1220,7 @@ typedef NSInteger QTMovieLoadState;
 	@discussion		This method cannot be called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 	@result			An NSData object that contains the movie atom data of a movie.
 */
-- (NSData *)movieFormatRepresentation;
+- (NSData *)movieFormatRepresentation AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
  
 /*!
 	@method			writeToFile:withAttributes:
@@ -1228,7 +1237,7 @@ typedef NSInteger QTMovieLoadState;
 	@result			YES if the movie file was successfully created, NO otherwise. NO will also be returned if the load state of the target movie
 					is less than QTMovieLoadStateComplete, in which case no attempt is made to write the QTMovie into a file.
 */
-- (BOOL)writeToFile:(NSString *)fileName withAttributes:(NSDictionary *)attributes;
+- (BOOL)writeToFile:(NSString *)fileName withAttributes:(NSDictionary *)attributes AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 #if QTKIT_VERSION_MAX_ALLOWED >= QTKIT_VERSION_7_2
 /*!
@@ -1248,7 +1257,7 @@ typedef NSInteger QTMovieLoadState;
 	@result			YES if the movie file was successfully created, NO otherwise. NO will also be returned if the load state of the target movie
 					is less than QTMovieLoadStateComplete, in which case no attempt is made to write the QTMovie into a file.
 */
-- (BOOL)writeToFile:(NSString *)fileName withAttributes:(NSDictionary *)attributes error:(NSError **)errorPtr;
+- (BOOL)writeToFile:(NSString *)fileName withAttributes:(NSDictionary *)attributes error:(NSError **)errorPtr AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 #endif
 
 /*!
@@ -1257,7 +1266,7 @@ typedef NSInteger QTMovieLoadState;
 	@discussion		This method cannot be called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 	@result			YES if the movie file can be updated, NO otherwise.
 */
-- (BOOL)canUpdateMovieFile;
+- (BOOL)canUpdateMovieFile AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			updateMovieFile
@@ -1265,7 +1274,7 @@ typedef NSInteger QTMovieLoadState;
 	@discussion		This method cannot be called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 	@result			YES if the update succeeds, NO otherwise.
 */
-- (BOOL)updateMovieFile;
+- (BOOL)updateMovieFile AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 @end
 
@@ -1280,7 +1289,7 @@ typedef NSInteger QTMovieLoadState;
 					or from an extremely slow local device. For movies stored on most local devices, this method has the same effect as the -play method.
 					This method can be called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 */
-- (void)autoplay;
+- (void)autoplay AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_6_3;
 #endif
 
 /*!
@@ -1288,21 +1297,21 @@ typedef NSInteger QTMovieLoadState;
 	@abstract		Starts a QTMovie object playing.
 	@discussion		This method can be called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 */
-- (void)play;
+- (void)play AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			stop
 	@abstract		Stops a QTMovie object playing.
 	@discussion		This method can be called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 */
-- (void)stop;
+- (void)stop AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			currentTime
 	@abstract		Returns the current time of a QTMovie object.
 	@discussion		This method can be called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 */
-- (QTTime)currentTime;
+- (QTTime)currentTime AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			setCurrentTime:
@@ -1311,7 +1320,7 @@ typedef NSInteger QTMovieLoadState;
 	@param			time
 					A QTTime structure that specifies the time to be made the current movie time.
 */
-- (void)setCurrentTime:(QTTime)time;
+- (void)setCurrentTime:(QTTime)time AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			gotoBeginning
@@ -1319,7 +1328,7 @@ typedef NSInteger QTMovieLoadState;
 	@discussion		If the movie is playing, the movie continues playing at the new time.
 					This method can be called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 */
-- (void)gotoBeginning;
+- (void)gotoBeginning AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			gotoEnd
@@ -1327,21 +1336,21 @@ typedef NSInteger QTMovieLoadState;
 	@discussion		If the movie is playing in one of the looping modes, the movie continues playing accordingly; otherwise, it stops.
 					This method can be called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 */
-- (void)gotoEnd;
+- (void)gotoEnd AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			gotoNextSelectionPoint
 	@abstract		Sets the current time of a QTMovie object to the next selection point.
 	@discussion		This method cannot be called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 */
-- (void)gotoNextSelectionPoint;
+- (void)gotoNextSelectionPoint AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			gotoPreviousSelectionPoint
 	@abstract		Sets the current time of a QTMovie object to the previous selection point.
 	@discussion		This method cannot be called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 */
-- (void)gotoPreviousSelectionPoint;
+- (void)gotoPreviousSelectionPoint AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			gotoPosterTime
@@ -1350,21 +1359,21 @@ typedef NSInteger QTMovieLoadState;
 					the movie continues playing at the new time.
 					This method can be called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 */
-- (void)gotoPosterTime;
+- (void)gotoPosterTime AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			stepForward
 	@abstract		Steps a QTMovie object forward one frame.
 	@discussion		This method can be called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 */
-- (void)stepForward;
+- (void)stepForward AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			stepBackward
 	@abstract		Steps a QTMovie object backward one frame.
 	@discussion		This method can be called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 */
-- (void)stepBackward;
+- (void)stepBackward AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 @end
 
@@ -1376,7 +1385,7 @@ typedef NSInteger QTMovieLoadState;
 	@discussion		This method can be called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 	@result			A float value that is the current playback rate.
 */
-- (float)rate;
+- (float)rate AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			setRate:
@@ -1385,14 +1394,14 @@ typedef NSInteger QTMovieLoadState;
 	@param			rate
 					A float value that specifies the desired movie playback rate.
 */
-- (void)setRate:(float)rate;
+- (void)setRate:(float)rate AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			volume
 	@abstract		Returns the current volume of a QTMovie object.
 	@discussion		This method can be called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 */
-- (float)volume;
+- (float)volume AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			setVolume:
@@ -1401,7 +1410,7 @@ typedef NSInteger QTMovieLoadState;
 	@param			volume
 					A float value that specifies the desired movie volume.
 */
-- (void)setVolume:(float)volume;
+- (void)setVolume:(float)volume AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			muted
@@ -1409,7 +1418,7 @@ typedef NSInteger QTMovieLoadState;
 	@discussion		This method can be called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 	@result			YES if the movie is currently muted, NO otherwise.
 */
-- (BOOL)muted;
+- (BOOL)muted AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			setMuted:
@@ -1418,7 +1427,7 @@ typedef NSInteger QTMovieLoadState;
 	@param			mute
 					A BOOL value that indicates the desired muted state of the movie.
 */
-- (void)setMuted:(BOOL)mute;
+- (void)setMuted:(BOOL)mute AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 @end
 
@@ -1429,9 +1438,9 @@ typedef NSInteger QTMovieLoadState;
 	@abstract		Sets the selection of a QTMovie object.
 	@discussion		This method cannot be called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 	@param			selection
-					A QTTimeRange structure that indicates the desried movie selection.
+					A QTTimeRange structure that indicates the desired movie selection.
 */
-- (void)setSelection:(QTTimeRange)selection;
+- (void)setSelection:(QTTimeRange)selection AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			selectionStart
@@ -1439,7 +1448,7 @@ typedef NSInteger QTMovieLoadState;
 	@discussion		This method cannot be called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 	@result			A QTTime structure that indicates the start time of the current selection of a movie.
 */
-- (QTTime)selectionStart;
+- (QTTime)selectionStart AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			selectionEnd
@@ -1447,7 +1456,7 @@ typedef NSInteger QTMovieLoadState;
 	@discussion		This method cannot be called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 	@result			A QTTime structure that indicates the end time of the current selection of a movie.
 */
-- (QTTime)selectionEnd;
+- (QTTime)selectionEnd AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			selectionDuration
@@ -1455,7 +1464,7 @@ typedef NSInteger QTMovieLoadState;
 	@discussion		This method cannot be called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 	@result			A QTTime structure that indicates the duration of the current selection of a movie.
 */
-- (QTTime)selectionDuration;
+- (QTTime)selectionDuration AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 @end
 
@@ -1469,7 +1478,7 @@ typedef NSInteger QTMovieLoadState;
 	@param			movie
 					A QTMovie object. (This may be the same object as the receiver.)
 */
-- (void)replaceSelectionWithSelectionFromMovie:(id)movie;
+- (void)replaceSelectionWithSelectionFromMovie:(id)movie AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			appendSelectionFromMovie:
@@ -1479,7 +1488,7 @@ typedef NSInteger QTMovieLoadState;
 	@param			movie
 					A QTMovie object. (This may be the same object as the receiver.)
 */
-- (void)appendSelectionFromMovie:(id)movie;
+- (void)appendSelectionFromMovie:(id)movie AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			insertSegmentOfMovie:timeRange:atTime:
@@ -1493,7 +1502,7 @@ typedef NSInteger QTMovieLoadState;
 	@param			time
 					A QTTime structure that indicates the time in the target movie at which the copied segment is to be inserted.
 */
-- (void)insertSegmentOfMovie:(QTMovie *)movie timeRange:(QTTimeRange)range atTime:(QTTime)time;
+- (void)insertSegmentOfMovie:(QTMovie *)movie timeRange:(QTTimeRange)range atTime:(QTTime)time AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			insertSegmentOfMovie:fromRange:scaledToRange:
@@ -1507,7 +1516,7 @@ typedef NSInteger QTMovieLoadState;
 	@param			dstRange
 					A QTTimeRange structure that indicates the range in the target movie into which the copied segment is to be inserted.
 */
-- (void)insertSegmentOfMovie:(QTMovie *)movie fromRange:(QTTimeRange)srcRange scaledToRange:(QTTimeRange)dstRange;
+- (void)insertSegmentOfMovie:(QTMovie *)movie fromRange:(QTTimeRange)srcRange scaledToRange:(QTTimeRange)dstRange AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			insertEmptySegmentAt:
@@ -1517,7 +1526,7 @@ typedef NSInteger QTMovieLoadState;
 	@param			range
 					A QTTimeRange structure that indicates the range in the movie at which an empty segment is to be inserted.
 */
-- (void)insertEmptySegmentAt:(QTTimeRange)range;
+- (void)insertEmptySegmentAt:(QTTimeRange)range AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			deleteSegment:
@@ -1527,7 +1536,7 @@ typedef NSInteger QTMovieLoadState;
 	@param			segment
 					A QTTimeRange structure that indicates the segment in the movie to be deleted.
 */
-- (void)deleteSegment:(QTTimeRange)segment;
+- (void)deleteSegment:(QTTimeRange)segment AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			scaleSegment:newDuration:
@@ -1539,7 +1548,7 @@ typedef NSInteger QTMovieLoadState;
 	@param			newDuration
 					A QTTime structure that indicates the desired duration of the segment that is to be scaled.
 */
-- (void)scaleSegment:(QTTimeRange)segment newDuration:(QTTime)newDuration;
+- (void)scaleSegment:(QTTimeRange)segment newDuration:(QTTime)newDuration AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			addImage:forDuration:withAttributes:
@@ -1558,7 +1567,7 @@ typedef NSInteger QTMovieLoadState;
 					which is used as the time scale of the new track, should one need to be created.
 					The default time scale for a new track is 600.
 */
-- (void)addImage:(NSImage *)image forDuration:(QTTime)duration withAttributes:(NSDictionary *)attributes;
+- (void)addImage:(NSImage *)image forDuration:(QTTime)duration withAttributes:(NSDictionary *)attributes AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 #if QTKIT_VERSION_MAX_ALLOWED >= QTKIT_VERSION_7_2
 /*!
@@ -1575,7 +1584,7 @@ typedef NSInteger QTMovieLoadState;
 					A QTTime structure that indicates the time in the target movie at which the copied segment is to be inserted.
 	@result			The QTTrack object into which the copied segment is inserted.
 */
-- (QTTrack *)insertSegmentOfTrack:(QTTrack *)track timeRange:(QTTimeRange)range atTime:(QTTime)time;
+- (QTTrack *)insertSegmentOfTrack:(QTTrack *)track timeRange:(QTTimeRange)range atTime:(QTTime)time AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_6_3;
 
 /*!
 	@method			insertSegmentOfTrack:fromRange:scaledToRange:
@@ -1591,7 +1600,7 @@ typedef NSInteger QTMovieLoadState;
 					A QTTimeRange structure that indicates the range in the target movie at which the copied segment is to be inserted.
 	@result			The QTTrack object into which the copied segment is inserted.
 */
-- (QTTrack *)insertSegmentOfTrack:(QTTrack *)track fromRange:(QTTimeRange)srcRange scaledToRange:(QTTimeRange)dstRange;
+- (QTTrack *)insertSegmentOfTrack:(QTTrack *)track fromRange:(QTTimeRange)srcRange scaledToRange:(QTTimeRange)dstRange AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_6_3;
 
 /*!
 	@method			removeTrack:
@@ -1601,7 +1610,7 @@ typedef NSInteger QTMovieLoadState;
 	@param			track
 					The QTTrack object to be removed.
 */
-- (void)removeTrack:(QTTrack *)track;
+- (void)removeTrack:(QTTrack *)track AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_6_3;
 #endif
 
 #if QTKIT_VERSION_MAX_ALLOWED >= QTKIT_VERSION_7_7
@@ -1618,7 +1627,7 @@ typedef NSInteger QTMovieLoadState;
 					A QTTime structure that indicates the time in the target movie at which the copied segment is to be inserted.
 	@result			The QTTrack object into which the copied segment is inserted; this is an autoreleased object.
 */
-- (QTTrack *)trackByInsertingSegmentOfTrack:(QTTrack *)track timeRange:(QTTimeRange)range atTime:(QTTime)time;
+- (QTTrack *)trackByInsertingSegmentOfTrack:(QTTrack *)track timeRange:(QTTimeRange)range atTime:(QTTime)time AVAILABLE_QTKIT_VERSION_7_7_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			trackByInsertingSegmentOfTrack:fromRange:scaledToRange:
@@ -1633,7 +1642,7 @@ typedef NSInteger QTMovieLoadState;
 					A QTTimeRange structure that indicates the range in the target movie at which the copied segment is to be inserted.
 	@result			The QTTrack object into which the copied segment is inserted; this is an autoreleased object.
 */
-- (QTTrack *)trackByInsertingSegmentOfTrack:(QTTrack *)track fromRange:(QTTimeRange)srcRange scaledToRange:(QTTimeRange)dstRange;
+- (QTTrack *)trackByInsertingSegmentOfTrack:(QTTrack *)track fromRange:(QTTimeRange)srcRange scaledToRange:(QTTimeRange)dstRange AVAILABLE_QTKIT_VERSION_7_7_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 #endif
 
 @end
@@ -1645,7 +1654,7 @@ typedef NSInteger QTMovieLoadState;
 	@abstract		Returns the delegate of a QTMovie object.
 	@discussion		This method can be called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 */
-- (id)delegate;
+- (id)delegate AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			setDelegate:
@@ -1654,7 +1663,7 @@ typedef NSInteger QTMovieLoadState;
 	@param			delegate
 					An object that is to serve as the delegate for the movie.
 */
-- (void)setDelegate:(id)delegate;
+- (void)setDelegate:(id)delegate AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 @end
 
@@ -1668,7 +1677,7 @@ typedef NSInteger QTMovieLoadState;
 					This method cannot be called by 64-bit applications.
 	@result			A QuickTime Movie.
 */
-- (Movie)quickTimeMovie;
+- (Movie)quickTimeMovie AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			quickTimeMovieController
@@ -1677,7 +1686,7 @@ typedef NSInteger QTMovieLoadState;
 					This method cannot be called by 64-bit applications.
 	@result			A QuickTime MovieController.
 */
-- (MovieController)quickTimeMovieController;
+- (MovieController)quickTimeMovieController AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 @end
 #endif
@@ -1697,7 +1706,7 @@ typedef NSInteger QTMovieLoadState;
 					Tracks that do not support aperture modes are not changed.
 					This method cannot be called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 */
-- (void)generateApertureModeDimensions;
+- (void)generateApertureModeDimensions AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			removeApertureModeDimensions
@@ -1706,7 +1715,7 @@ typedef NSInteger QTMovieLoadState;
 					It sets the QTMovieHasApertureModeDimensionsAttribute property to NO.
 					This method cannot be called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 */
-- (void)removeApertureModeDimensions;
+- (void)removeApertureModeDimensions AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 #endif
 
 @end
@@ -1723,7 +1732,7 @@ typedef NSInteger QTMovieLoadState;
 	@param			visualContext
 					A visual context.
 */
-- (void)setVisualContext:(QTVisualContextRef)visualContext;
+- (void)setVisualContext:(QTVisualContextRef)visualContext AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			visualContext
@@ -1731,7 +1740,7 @@ typedef NSInteger QTMovieLoadState;
 	@discussion		This method can be called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 					This method cannot be called by 64-bit applications.
 */
-- (QTVisualContextRef)visualContext;
+- (QTVisualContextRef)visualContext AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 #endif
 #endif
 
@@ -1745,21 +1754,21 @@ typedef NSInteger QTMovieLoadState;
 	@abstract		Performs any QTKit-specific initialization for the current (non-main) thread.
 	@discussion		A call to this method must be paired with a subsequent call to exitQTKitOnThread.
 */
-+ (void)enterQTKitOnThread;
++ (void)enterQTKitOnThread AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			enterQTKitOnThreadDisablingThreadSafetyProtection
 	@abstract		Performs any QTKit-specific initialization for the current (non-main) thread, allowing non-threadsafe components.
 	@discussion		A call to this method must be paired with a subsequent call to exitQTKitOnThread.
 */
-+ (void)enterQTKitOnThreadDisablingThreadSafetyProtection;
++ (void)enterQTKitOnThreadDisablingThreadSafetyProtection AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			exitQTKitOnThread
 	@abstract		Performs any QTKit-specific shut-down for the current (non-main) thread.
 	@discussion		A call to this method must be paired with a previous call to enterQTKitOnThread or enterQTKitOnThreadDisablingThreadSafetyProtection.
 */
-+ (void)exitQTKitOnThread;
++ (void)exitQTKitOnThread AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			attachToCurrentThread
@@ -1767,7 +1776,7 @@ typedef NSInteger QTMovieLoadState;
 	@discussion		This method can be called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 	@result			YES if successful, NO otherwise.
 */
-- (BOOL)attachToCurrentThread;
+- (BOOL)attachToCurrentThread AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			detachFromCurrentThread
@@ -1775,7 +1784,7 @@ typedef NSInteger QTMovieLoadState;
 	@discussion		This method can be called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 	@result			YES if successful, NO otherwise.
 */
-- (BOOL)detachFromCurrentThread;
+- (BOOL)detachFromCurrentThread AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			setIdling:
@@ -1785,7 +1794,7 @@ typedef NSInteger QTMovieLoadState;
 	@param			state
 					A BOOL value that indicates whether to idle the movie (YES) or not (NO).
 */
-- (void)setIdling:(BOOL)state;
+- (void)setIdling:(BOOL)state AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			isIdling
@@ -1795,7 +1804,7 @@ typedef NSInteger QTMovieLoadState;
 					This method cannot be called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 	@result			YES if the movie is idling, NO otherwise.
 */
-- (BOOL)isIdling;
+- (BOOL)isIdling AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 #endif
 
 @end
@@ -1809,7 +1818,7 @@ typedef NSInteger QTMovieLoadState;
 	@discussion		This method can be called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 	@result			YES if the movie has chapters, NO otherwise.
 */
-- (BOOL)hasChapters;
+- (BOOL)hasChapters AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			chapterCount
@@ -1817,7 +1826,7 @@ typedef NSInteger QTMovieLoadState;
 	@discussion		This method can be called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 	@result			The number of chapters in a movie, or 0 if there are no chapters.
 */
-- (NSInteger)chapterCount;
+- (NSInteger)chapterCount AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			chapters
@@ -1827,7 +1836,7 @@ typedef NSInteger QTMovieLoadState;
 					The value for the QTMovieChapterStartTime key is an NSValue object that wraps a QTTime structure that indicates the start time of the chapter.
 					This method can be called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 */
-- (NSArray *)chapters;
+- (NSArray *)chapters AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			addChapters:withAttributes:error:
@@ -1846,7 +1855,7 @@ typedef NSInteger QTMovieLoadState;
 	@param			errorPtr
 					A pointer to an NSError object; if chapters cannot be added to the movie, an NSError object is returned in this location.
 */
-- (void)addChapters:(NSArray *)chapters withAttributes:(NSDictionary *)attributes error:(NSError **)errorPtr;
+- (void)addChapters:(NSArray *)chapters withAttributes:(NSDictionary *)attributes error:(NSError **)errorPtr AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			removeChapters
@@ -1855,7 +1864,7 @@ typedef NSInteger QTMovieLoadState;
 					If the movie is not editable, an exception will be raised.
 	@result			YES if either the QTMovie object has no chapters or the chapters were successfully removed from it; NO if the chapters could not be removed from the receiver.
 */
-- (BOOL)removeChapters;
+- (BOOL)removeChapters AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			startTimeOfChapter:
@@ -1865,7 +1874,7 @@ typedef NSInteger QTMovieLoadState;
 					A 0-based index.
 	@result			A QTTime structure that indicates the start time of the chapter having the specified 0-based index in the list of chapters.
 */
-- (QTTime)startTimeOfChapter:(NSInteger)chapterIndex;		// 0-based index
+- (QTTime)startTimeOfChapter:(NSInteger)chapterIndex AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;		// 0-based index
 
 /*!
 	@method			chapterIndexForTime:
@@ -1874,7 +1883,7 @@ typedef NSInteger QTMovieLoadState;
 	@param			time
 					A QTTime structure that indicates the time in the movie at which to find the current chapter.
 */
-- (NSInteger)chapterIndexForTime:(QTTime)time;				// 0-based index
+- (NSInteger)chapterIndexForTime:(QTTime)time AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;				// 0-based index
 
 #endif
 
@@ -1889,14 +1898,14 @@ typedef NSInteger QTMovieLoadState;
 	@result			An NSArray containing QTMetadataItem objects for each common metadata key for which a value for the current locale is available; may be nil if there is no metadata that's appropriately localized.
 	@discussion		The returned metadata may be tagged with default locale information or with no locale information, if that's the best available choice.
 */
-- (NSArray *)commonMetadata;
+- (NSArray *)commonMetadata AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*!
 	@method			availableMetadataFormats
 	@abstract		Returns an NSArray containing NSString objects representing the metadata formats available to the receiver.
 	@result			An NSArray containing an NSString objects, each of which represents a metadata format that is available to the receiver.
 */
-- (NSArray *)availableMetadataFormats;
+- (NSArray *)availableMetadataFormats AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*!
 	@method			metadataForFormat:
@@ -1905,7 +1914,7 @@ typedef NSInteger QTMovieLoadState;
 					The metadata format for which items are requested.
 	@result			An NSArray containing all QTMetadataItem objects of the receiver that have the specified format; may be nil if there is no metadata of the specified format.
 */
-- (NSArray *)metadataForFormat:(NSString *)format;
+- (NSArray *)metadataForFormat:(NSString *)format AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 #endif
 
 @end

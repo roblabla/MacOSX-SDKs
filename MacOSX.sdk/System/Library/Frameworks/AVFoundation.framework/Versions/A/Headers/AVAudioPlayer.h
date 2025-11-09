@@ -3,22 +3,25 @@
 	
 	Framework:  AVFoundation
 
-	Copyright 2008-2012 Apple Inc. All rights reserved.
+	Copyright 2008-2013 Apple Inc. All rights reserved.
 */
 
 #import <AVFoundation/AVBase.h>
 #import <Foundation/NSObject.h>
+#import <Foundation/NSArray.h>
 #import <Foundation/NSDate.h>  /* for NSTimeInterval */
 #import <AVFoundation/AVAudioSettings.h>
+#import <AudioToolbox/AudioFile.h>
 #import <Availability.h>
 
 @class NSData, NSURL, NSError, NSDictionary;
+@class AVAudioSessionChannelDescription;
 @protocol AVAudioPlayerDelegate;
 
 NS_CLASS_AVAILABLE(10_7, 2_2)
 @interface AVAudioPlayer : NSObject {
 @private
-    __strong void *_impl;
+	id _impl;
 }
 
 /* For all of these init calls, if a return value of nil is given you can check outError to see what the problem was.
@@ -29,11 +32,16 @@ NS_CLASS_AVAILABLE(10_7, 2_2)
 - (id)initWithContentsOfURL:(NSURL *)url error:(NSError **)outError;
 - (id)initWithData:(NSData *)data error:(NSError **)outError;
 
+/* The file type hint is a constant defined in AVMediaFormat.h whose value is a UTI for a file format. e.g. AVFileTypeAIFF. */
+/* Sometimes the type of a file cannot be determined from the data, or it is actually corrupt. The file type hint tells the parser what kind of data to look for so that files which are not self identifying or possibly even corrupt can be successfully parsed. */
+- (id)initWithContentsOfURL:(NSURL *)url fileTypeHint:(NSString*)utiString error:(NSError **)outError NS_AVAILABLE(10_9, 7_0);
+- (id)initWithData:(NSData *)data fileTypeHint:(NSString*)utiString error:(NSError **)outError NS_AVAILABLE(10_9, 7_0);
+
 /* transport control */
 /* methods that return BOOL return YES on success and NO on failure. */
 - (BOOL)prepareToPlay;	/* get ready to play the sound. happens automatically on play. */
 - (BOOL)play;			/* sound is played asynchronously. */
-- (BOOL)playAtTime:(NSTimeInterval)time NS_AVAILABLE(10_7, 4_0); /* play a sound some time in the future. time should be greater than deviceCurrentTime. */
+- (BOOL)playAtTime:(NSTimeInterval)time NS_AVAILABLE(10_7, 4_0); /* play a sound some time in the future. time is an absolute time based on and greater than deviceCurrentTime. */
 - (void)pause;			/* pauses playback, but remains ready to play. */
 - (void)stop;			/* stops playback. no longer ready to play. */
 
@@ -54,8 +62,8 @@ NS_CLASS_AVAILABLE(10_7, 2_2)
 @property float pan NS_AVAILABLE(10_7, 4_0); /* set panning. -1.0 is left, 0.0 is center, 1.0 is right. */
 @property float volume; /* The volume for the sound. The nominal range is from 0.0 to 1.0. */
 
-@property BOOL enableRate NS_AVAILABLE_IOS(5_0); /* You must set enableRate to YES for the rate property to take effect. You must set this before calling prepareToPlay. */
-@property float rate NS_AVAILABLE_IOS(5_0); /* See enableRate. The playback rate for the sound. 1.0 is normal, 0.5 is half speed, 2.0 is double speed. */
+@property BOOL enableRate NS_AVAILABLE(10_8, 5_0); /* You must set enableRate to YES for the rate property to take effect. You must set this before calling prepareToPlay. */
+@property float rate NS_AVAILABLE(10_8, 5_0); /* See enableRate. The playback rate for the sound. 1.0 is normal, 0.5 is half speed, 2.0 is double speed. */
 
 
 /*  If the sound is playing, currentTime is the offset into the sound of the current playback position.  
@@ -84,6 +92,13 @@ Any negative number will loop indefinitely until stopped.
 - (float)peakPowerForChannel:(NSUInteger)channelNumber; /* returns peak power in decibels for a given channel */
 - (float)averagePowerForChannel:(NSUInteger)channelNumber; /* returns average power in decibels for a given channel */
 
+#if TARGET_OS_IPHONE
+/* The channels property lets you assign the output to play to specific channels as described by AVAudioSession's channels property */
+/* This property is nil valued until set. */
+/* The array must have the same number of channels as returned by the numberOfChannels property. */
+@property(nonatomic, copy) NSArray* channelAssignments NS_AVAILABLE(10_9, 7_0); /* Array of AVAudioSessionChannelDescription objects */
+#endif
+
 @end
 
 /* A protocol for delegates of AVAudioPlayer */
@@ -100,12 +115,14 @@ Any negative number will loop indefinitely until stopped.
 /* audioPlayerBeginInterruption: is called when the audio session has been interrupted while the player was playing. The player will have been paused. */
 - (void)audioPlayerBeginInterruption:(AVAudioPlayer *)player;
 
-/* audioPlayerEndInterruption:withFlags: is called when the audio session interruption has ended and this player had been interrupted while playing. */
+/* audioPlayerEndInterruption:withOptions: is called when the audio session interruption has ended and this player had been interrupted while playing. */
 /* Currently the only flag is AVAudioSessionInterruptionFlags_ShouldResume. */
-- (void)audioPlayerEndInterruption:(AVAudioPlayer *)player withFlags:(NSUInteger)flags NS_AVAILABLE_IOS(4_0);
+- (void)audioPlayerEndInterruption:(AVAudioPlayer *)player withOptions:(NSUInteger)flags NS_AVAILABLE_IOS(6_0);
+
+- (void)audioPlayerEndInterruption:(AVAudioPlayer *)player withFlags:(NSUInteger)flags NS_DEPRECATED_IOS(4_0, 6_0);
 
 /* audioPlayerEndInterruption: is called when the preferred method, audioPlayerEndInterruption:withFlags:, is not implemented. */
-- (void)audioPlayerEndInterruption:(AVAudioPlayer *)player;
+- (void)audioPlayerEndInterruption:(AVAudioPlayer *)player NS_DEPRECATED_IOS(2_2, 6_0);
 
 #endif // TARGET_OS_IPHONE
 

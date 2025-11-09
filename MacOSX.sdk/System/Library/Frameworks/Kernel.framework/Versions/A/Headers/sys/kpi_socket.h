@@ -1,8 +1,8 @@
 /*
- * Copyright (c) 2008-2011 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2008-2012 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
- * 
+ *
  * This file contains Original Code and/or Modifications of Original Code
  * as defined in and that are subject to the Apple Public Source License
  * Version 2.0 (the 'License'). You may not use this file except in
@@ -11,10 +11,10 @@
  * unlawful or unlicensed copies of an Apple operating system, or to
  * circumvent, violate, or enable the circumvention or violation of, any
  * terms of an Apple operating system software license agreement.
- * 
+ *
  * Please obtain a copy of the License at
  * http://www.opensource.apple.com/apsl/ and read it before using this file.
- * 
+ *
  * The Original Code and all software distributed under the License are
  * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
@@ -22,7 +22,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
  * Please see the License for the specific language governing rights and
  * limitations under the License.
- * 
+ *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_END@
  */
 /*!
@@ -56,8 +56,8 @@ struct timeval;
 		Calls to your upcall function are not serialized and may be
 		called concurrently from multiple threads in the kernel.
 
-		Your upcall function will be called: 
-		    when there is data more than the low water mark for reading, 
+		Your upcall function will be called:
+		    when there is data more than the low water mark for reading,
 		    or when there is space for a write,
 		    or when there is a connection to accept,
 		    or when a socket is connected,
@@ -68,6 +68,7 @@ struct timeval;
 	@param waitf Indicates whether or not it's safe to block.
 */
 typedef void (*sock_upcall)(socket_t so, void *cookie, int waitf);
+
 
 /*!
 	@function sock_accept

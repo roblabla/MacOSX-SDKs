@@ -3,7 +3,7 @@
  
 	Framework:  VideoToolbox
  
-	Copyright 2012 Apple Inc. All rights reserved.
+	Copyright 2012-2013 Apple Inc. All rights reserved.
  
 */
 
@@ -11,6 +11,7 @@
 #define VTVIDEOENCODERLIST_H
 
 #include <CoreMedia/CMBase.h>
+#include <VideoToolbox/VTBase.h>
 #include <CoreMedia/CMFormatDescription.h>
 
 #if defined(__cplusplus)
@@ -28,14 +29,14 @@ extern "C"
 */
 VT_EXPORT OSStatus VTCopyVideoEncoderList( 
 	CFDictionaryRef options, // pass NULL
-	CFArrayRef *listOfVideoEncodersOut ) AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
+	CFArrayRef *listOfVideoEncodersOut ) VT_AVAILABLE_STARTING(10_8);
 
 // returns CFArray of CFDictionaries with following keys:
-VT_EXPORT const CFStringRef kVTVideoEncoderList_CodecType AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // CFNumber for four-char-code (eg, 'avc1')
-VT_EXPORT const CFStringRef kVTVideoEncoderList_EncoderID AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // CFString, reverse-DNS-style unique identifier for this encoder; may be passed as kVTVideoEncoderSpecification_EncoderID
-VT_EXPORT const CFStringRef kVTVideoEncoderList_CodecName AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // CFString, for display to user (eg, "H.264")
-VT_EXPORT const CFStringRef kVTVideoEncoderList_EncoderName AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // CFString, for display to user (eg, "Apple H.264")
-VT_EXPORT const CFStringRef kVTVideoEncoderList_DisplayName AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // CFString (same as CodecName if there is only one encoder for that format, otherwise same as EncoderName)
+VT_EXPORT const CFStringRef kVTVideoEncoderList_CodecType VT_AVAILABLE_STARTING(10_8); // CFNumber for four-char-code (eg, 'avc1')
+VT_EXPORT const CFStringRef kVTVideoEncoderList_EncoderID VT_AVAILABLE_STARTING(10_8); // CFString, reverse-DNS-style unique identifier for this encoder; may be passed as kVTVideoEncoderSpecification_EncoderID
+VT_EXPORT const CFStringRef kVTVideoEncoderList_CodecName VT_AVAILABLE_STARTING(10_8); // CFString, for display to user (eg, "H.264")
+VT_EXPORT const CFStringRef kVTVideoEncoderList_EncoderName VT_AVAILABLE_STARTING(10_8); // CFString, for display to user (eg, "Apple H.264")
+VT_EXPORT const CFStringRef kVTVideoEncoderList_DisplayName VT_AVAILABLE_STARTING(10_8); // CFString (same as CodecName if there is only one encoder for that format, otherwise same as EncoderName)
 
 
 #pragma pack(pop)

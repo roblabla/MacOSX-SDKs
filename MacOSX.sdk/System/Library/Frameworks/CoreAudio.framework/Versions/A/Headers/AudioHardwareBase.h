@@ -61,7 +61,7 @@ typedef UInt32  AudioClassID;
                     information about an AudioObject.
     @discussion     The property selector specifies the general classification of the property such
                     as volume, stream format, latency, etc. Note that each class has a different set
-                    of selectors. A subclass inherits it's super class's set of selectors, although
+                    of selectors. A subclass inherits its super class's set of selectors, although
                     it may not implement them all.
 */
 typedef UInt32  AudioObjectPropertySelector;
@@ -73,7 +73,7 @@ typedef UInt32  AudioObjectPropertySelector;
                     information about an AudioObject.
     @discussion     The scope specifies the section of the object in which to look for the property,
                     such as input, output, global, etc. Note that each class has a different set of
-                    scopes. A subclass inherits it's superclass's set of scopes.
+                    scopes. A subclass inherits its superclass's set of scopes.
 */
 typedef UInt32  AudioObjectPropertyScope;
 
@@ -290,6 +290,25 @@ enum
                         non-empty, the returned array of AudioObjectIDs will only refer to objects
                         whose class is in the qualifier array or whose is a subclass of one in the
                         qualifier array.
+    @constant       kAudioObjectPropertyIdentify
+                        A UInt32 where a value of one indicates that the object's hardware is
+                        drawing attention to itself, typically by flashing or lighting up its front
+                        panel display. A value of 0 indicates that this function is turned off. This
+                        makes it easy for a user to associate the physical hardware with its
+                        representation in an application. Typically, this property is only supported
+                        by AudioDevices and AudioBoxes.
+    @constant       kAudioObjectPropertySerialNumber
+                        A CFString that contains the human readable serial number for the object.
+                        This property will typically be implemented by AudioBox and AudioDevice
+                        objects. Note that the serial number is not defined to be unique in the same
+                        way that an AudioBox's or AudioDevice's UID propety are defined. This is
+                        purely an informational value. The caller is responsible for releaseing the
+                        returned CFObject.
+    @constant       kAudioObjectPropertyFirmwareVersion
+                        A CFString that contains the human readable firmware version for the object.
+                        This property will typically be implemented by AudioBox and AudioDevice
+                        objects. Note that this is purely an informational value. The caller is
+                        responsible for releaseing the returned CFObject.
 */
 enum
 {
@@ -302,7 +321,10 @@ enum
     kAudioObjectPropertyElementName         = 'lchn',
     kAudioObjectPropertyElementCategoryName = 'lccn',
     kAudioObjectPropertyElementNumberName   = 'lcnn',
-    kAudioObjectPropertyOwnedObjects        = 'ownd'
+    kAudioObjectPropertyOwnedObjects        = 'ownd',
+    kAudioObjectPropertyIdentify            = 'iden',
+    kAudioObjectPropertySerialNumber        = 'snum',
+    kAudioObjectPropertyFirmwareVersion     = 'fwvn'
 };
 
 //==================================================================================================
@@ -341,12 +363,24 @@ enum
                         property's data. Note that an error is not returned if the UID doesn't refer
                         to any AudioDevices. Rather, this property will return kAudioObjectUnknown
                         as the value of the property.
+    @constant       kAudioPlugInPropertyBoxList
+                        An array of AudioObjectIDs that represent all the AudioBox objects currently
+                        provided by the plug-in
+    @constant       kAudioPlugInPropertyTranslateUIDToBox
+                        This property fetches the AudioObjectID that corresponds to the AudioBox
+                        that has the given UID. The UID is passed in via the qualifier as a CFString
+                        while the AudioObjectID for the AudioBox is returned to the caller as the
+                        property's data. Note that an error is not returned if the UID doesn't refer
+                        to any AudioBoxes. Rather, this property will return kAudioObjectUnknown
+                        as the value of the property.
 */
 enum
 {
     kAudioPlugInPropertyBundleID                = 'piid',
     kAudioPlugInPropertyDeviceList              = 'dev#',
-    kAudioPlugInPropertyTranslateUIDToDevice    = 'uidd'
+    kAudioPlugInPropertyTranslateUIDToDevice    = 'uidd',
+    kAudioPlugInPropertyBoxList                 = 'box#',
+    kAudioPlugInPropertyTranslateUIDToBox       = 'uidb'
 };
 
 //==================================================================================================
@@ -391,15 +425,86 @@ enum
                         kAudioObjectUnknown as the value of the property.
     @constant       kAudioTransportManagerPorpertyTransportType
                         A UInt32 whose value indicates how the transport manager's endpoints and 
-						endpoint devices are connected to the CPU. Constants for some of the values
-						for this property can be found in the enum in the AudioDevice Constants
-						section of this file.
+                        endpoint devices are connected to the CPU. Constants for some of the values
+                        for this property can be found in the enum in the AudioDevice Constants
+                        section of this file.
 */
 enum
 {
     kAudioTransportManagerPropertyEndPointList              = 'end#',
     kAudioTransportManagerPropertyTranslateUIDToEndPoint    = 'uide',
-	kAudioTransportManagerPropertyTransportType				= 'tran'
+    kAudioTransportManagerPropertyTransportType             = 'tran'
+};
+
+//==================================================================================================
+#pragma mark -
+#pragma mark AudioBox Constants
+
+/*!
+    @enum           AudioBox Class Constants
+    @abstract       Various constants related to the AudioBox class.
+    @constant       kAudioBoxClassID
+                        The AudioClassID that identifies the AudioBox class.
+*/
+enum
+{
+    kAudioBoxClassID    = 'abox'
+};
+
+//==================================================================================================
+#pragma mark AudioBox Properties
+
+/*!
+    @enum           AudioBox Properties
+    @abstract       AudioObjectPropertySelector values provided by the AudioBox class.
+    @discussion     The AudioBox class is a subclass of the AudioObject class. The class has just
+                    the global scope, kAudioObjectPropertyScopeGlobal, and only a master element.
+                    An AudioBox is a container for other objects (typically AudioDevice objects). An
+                    AudioBox publishes identifying information about itself and can be enabled or
+                    disabled. A box's contents are only available to the system when the box is
+                    enabled.
+    @constant       kAudioBoxPropertyBoxUID
+                        A CFString that contains a persistent identifier for the AudioBox. An
+                        AudioBox's UID is persistent across boots. The content of the UID string is
+                        a black box and may contain information that is unique to a particular
+                        instance of an AudioBox's hardware or unique to the CPU. Therefore they are
+                        not suitable for passing between CPUs or for identifying similar models of
+                        hardware. The caller is responsible for releasing the returned CFObject.
+    @constant       kAudioBoxPropertyTransportType
+                        A UInt32 whose value indicates how the AudioBox is connected to the system.
+                        Constants for some of the values for this property can be found in the enum
+                        in the AudioDevice Constants section of AudioHardwareBase.h
+    @constant       kAudioBoxPropertyHasAudio
+                        A UInt32 where a non-zero value indicates that the box supports audio.
+    @constant       kAudioBoxPropertyHasVideo
+                        A UInt32 where a non-zero value indicates that the box supports video.
+    @constant       kAudioBoxPropertyHasMIDI
+                        A UInt32 where a non-zero value indicates that the box supports MIDI.
+    @constant       kAudioBoxPropertyIsProtected
+                        A UInt32 where a non-zero value indicates that the box requires
+                        authentication to use.
+    @constant       kAudioBoxPropertyAcquired
+                        A UInt32 where a non-zero value indicates that the box's contents are
+                        available to the system.
+    @constant       kAudioBoxPropertyAcquisitionFailed
+                        An OSStatus that indicates the reason for an attempt to acquire a box
+                        failed. Note that this property is primarily used for notifications.
+    @constant       kAudioBoxPropertyDeviceList
+                        An array of AudioObjectIDs that represent all the AudioDevice objects that
+                        came out of the given AudioBox. Note that until a box is enabled, this list
+                        will be empty.
+*/
+enum
+{
+    kAudioBoxPropertyBoxUID             = 'buid',
+    kAudioBoxPropertyTransportType      = 'tran',
+    kAudioBoxPropertyHasAudio           = 'bhau',
+    kAudioBoxPropertyHasVideo           = 'bhvi',
+    kAudioBoxPropertyHasMIDI            = 'bhmi',
+    kAudioBoxPropertyIsProtected        = 'bpro',
+    kAudioBoxPropertyAcquired           = 'bxon',
+    kAudioBoxPropertyAcquisitionFailed  = 'bxof',
+    kAudioBoxPropertyDeviceList         = 'bdv#'
 };
 
 //==================================================================================================
@@ -420,7 +525,7 @@ enum
 /*!
     @enum           Transport Type IDs
     @abstract       Commonly used values for kAudioDevicePropertyTransportType and
-					kAudioTransportManagerPropertyTransportType
+                    kAudioTransportManagerPropertyTransportType
     @constant       kAudioDeviceTransportTypeUnknown
                         The transport type ID returned when a device doesn't provide a transport
                         type.
@@ -744,7 +849,7 @@ enum
 /*!
     @struct         AudioStreamRangedDescription
     @abstract       This structure allows a specific sample rate range to be associated with an
-                    AudioStreamBasicDescription that specifies it's sample rate as
+                    AudioStreamBasicDescription that specifies its sample rate as
                     kAudioStreamAnyRate.
     @discussion     Note that this structure is only used to desicribe the the available formats
                     for a stream. It is not used for the current format.
@@ -869,11 +974,11 @@ enum
     @constant       kAudioStreamPropertyPhysicalFormat
                         An AudioStreamBasicDescription that describes the current data format for
                         the AudioStream. The physical format refers to the data format in which the
-                        hardware for the owning AudioDevice performs it's IO transactions.
+                        hardware for the owning AudioDevice performs its IO transactions.
     @constant       kAudioStreamPropertyAvailablePhysicalFormats
                         An array of AudioStreamRangedDescriptions that describe the available data
                         formats for the AudioStream. The physical format refers to the data format
-                        in which the hardware for the owning AudioDevice performs it's IO
+                        in which the hardware for the owning AudioDevice performs its IO
                         transactions.
 */
 enum

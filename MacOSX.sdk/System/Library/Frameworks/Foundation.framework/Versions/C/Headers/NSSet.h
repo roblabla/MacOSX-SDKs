@@ -1,5 +1,5 @@
 /*	NSSet.h
-	Copyright (c) 1994-2012, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2013, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -47,18 +47,20 @@
 
 @interface NSSet (NSSetCreation)
 
-+ (id)set;
-+ (id)setWithObject:(id)object;
-+ (id)setWithObjects:(const id [])objects count:(NSUInteger)cnt;
-+ (id)setWithObjects:(id)firstObj, ... NS_REQUIRES_NIL_TERMINATION;
-+ (id)setWithSet:(NSSet *)set;
-+ (id)setWithArray:(NSArray *)array;
++ (instancetype)set;
++ (instancetype)setWithObject:(id)object;
++ (instancetype)setWithObjects:(const id [])objects count:(NSUInteger)cnt;
++ (instancetype)setWithObjects:(id)firstObj, ... NS_REQUIRES_NIL_TERMINATION;
++ (instancetype)setWithSet:(NSSet *)set;
++ (instancetype)setWithArray:(NSArray *)array;
 
-- (id)initWithObjects:(const id [])objects count:(NSUInteger)cnt;
-- (id)initWithObjects:(id)firstObj, ... NS_REQUIRES_NIL_TERMINATION;
-- (id)initWithSet:(NSSet *)set;
-- (id)initWithSet:(NSSet *)set copyItems:(BOOL)flag;
-- (id)initWithArray:(NSArray *)array;
+- (instancetype)init;	/* designated initializer */
+- (instancetype)initWithObjects:(const id [])objects count:(NSUInteger)cnt;	/* designated initializer */
+
+- (instancetype)initWithObjects:(id)firstObj, ... NS_REQUIRES_NIL_TERMINATION;
+- (instancetype)initWithSet:(NSSet *)set;
+- (instancetype)initWithSet:(NSSet *)set copyItems:(BOOL)flag;
+- (instancetype)initWithArray:(NSArray *)array;
 
 @end
 
@@ -85,9 +87,11 @@
 
 @interface NSMutableSet (NSMutableSetCreation)
 
-+ (id)setWithCapacity:(NSUInteger)numItems;
-- (id)initWithCapacity:(NSUInteger)numItems;
-    
++ (instancetype)setWithCapacity:(NSUInteger)numItems;
+
+- (instancetype)init;	/* designated initializer */
+- (instancetype)initWithCapacity:(NSUInteger)numItems;	/* designated initializer */
+
 @end
 
 /****************	Counted Set	****************/

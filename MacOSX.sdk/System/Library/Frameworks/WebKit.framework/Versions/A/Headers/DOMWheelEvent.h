@@ -24,28 +24,22 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
  */
 
-#import <WebKit/DOMUIEvent.h>
+#import <WebKit/DOMMouseEvent.h>
 
 #if WEBKIT_VERSION_MAX_ALLOWED >= WEBKIT_VERSION_3_0
 
 @class DOMAbstractView;
 
-@interface DOMWheelEvent : DOMUIEvent
-@property(readonly) int screenX;
-@property(readonly) int screenY;
-@property(readonly) int clientX;
-@property(readonly) int clientY;
-@property(readonly) BOOL ctrlKey;
-@property(readonly) BOOL shiftKey;
-@property(readonly) BOOL altKey;
-@property(readonly) BOOL metaKey;
-@property(readonly) int wheelDelta;
+enum {
+    DOM_DOM_DELTA_PIXEL = 0x00,
+    DOM_DOM_DELTA_LINE = 0x01,
+    DOM_DOM_DELTA_PAGE = 0x02
+};
+
+@interface DOMWheelEvent : DOMMouseEvent
 @property(readonly) int wheelDeltaX AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
 @property(readonly) int wheelDeltaY AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-@property(readonly) int offsetX AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-@property(readonly) int offsetY AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-@property(readonly) int x AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-@property(readonly) int y AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+@property(readonly) int wheelDelta;
 @property(readonly) BOOL isHorizontal;
 
 - (void)initWheelEvent:(int)wheelDeltaX wheelDeltaY:(int)wheelDeltaY view:(DOMAbstractView *)view screenX:(int)screenX screenY:(int)screenY clientX:(int)clientX clientY:(int)clientY ctrlKey:(BOOL)ctrlKey altKey:(BOOL)altKey shiftKey:(BOOL)shiftKey metaKey:(BOOL)metaKey AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;

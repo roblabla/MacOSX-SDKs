@@ -9,7 +9,8 @@ typedef struct CGDataConsumer *CGDataConsumerRef;
 
 #include <CoreGraphics/CGBase.h>
 #include <CoreFoundation/CFURL.h>
-#include <stddef.h>
+
+CF_IMPLICIT_BRIDGING_ENABLED
 
 /* This callback is called to copy `count' bytes from `buffer' to the data
    consumer. */
@@ -65,5 +66,7 @@ CG_EXTERN CGDataConsumerRef CGDataConsumerRetain(CGDataConsumerRef consumer)
 
 CG_EXTERN void CGDataConsumerRelease(CGDataConsumerRef consumer)
     CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif	/* CGDATACONSUMER_H_ */

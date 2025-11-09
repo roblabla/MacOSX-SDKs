@@ -43,7 +43,7 @@
 - (NSString *)getPropertyPriority:(NSString *)propertyName;
 - (void)setProperty:(NSString *)propertyName value:(NSString *)value priority:(NSString *)priority AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
 - (NSString *)item:(unsigned)index;
-- (NSString *)getPropertyShorthand:(NSString *)propertyName AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+- (NSString *)getPropertyShorthand:(NSString *)propertyName AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER_BUT_DEPRECATED;
 - (BOOL)isPropertyImplicit:(NSString *)propertyName AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
 @end
 

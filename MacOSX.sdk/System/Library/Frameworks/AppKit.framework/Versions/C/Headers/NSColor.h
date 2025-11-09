@@ -1,7 +1,7 @@
 /*
 	NSColor.h
 	Application Kit
-	Copyright (c) 1994-2012, Apple Inc.
+	Copyright (c) 1994-2013, Apple Inc.
 	All rights reserved.
 */
 
@@ -77,6 +77,12 @@ Subclassers of NSColor need to implement the methods colorSpaceName, set, the va
 + (NSColor *)colorWithGenericGamma22White:(CGFloat)white alpha:(CGFloat)alpha  NS_AVAILABLE_MAC(10_7);
 + (NSColor *)colorWithSRGBRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue alpha:(CGFloat)alpha  NS_AVAILABLE_MAC(10_7);
 
+
+/* Create NSCustomColorSpace colors that are compatible with sRGB colorspace; these variants are provided for easier reuse of code that uses UIColor on iOS. It's typically better to specify the colorspace explicitly with one of the above methods.
+*/
++ (NSColor *)colorWithWhite:(CGFloat)white alpha:(CGFloat)alpha NS_AVAILABLE_MAC(10_9);
++ (NSColor *)colorWithRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue alpha:(CGFloat)alpha NS_AVAILABLE_MAC(10_9);
++ (NSColor *)colorWithHue:(CGFloat)hue saturation:(CGFloat)saturation brightness:(CGFloat)brightness alpha:(CGFloat)alpha NS_AVAILABLE_MAC(10_9);
 
 
 /* Some convenience methods to create colors in the calibrated color spaces...
@@ -260,7 +266,7 @@ If colorSpace is nil, then the most appropriate color space is used.
 /* Convert to and from CGColorRef.
 */
 + (NSColor *)colorWithCGColor:(CGColorRef)cgColor NS_AVAILABLE_MAC(10_8);   // May return nil
-- (CGColorRef)CGColor NS_AVAILABLE_MAC(10_8);                               // Returns an autoreleased CGColor. This will never be NULL, although the return value may be an approximation in some cases, so there isn't guaranteed round-trip fidelity.
+- (CGColorRef)CGColor NS_RETURNS_INNER_POINTER NS_AVAILABLE_MAC(10_8);      // Returns an autoreleased CGColor. This will never be NULL, although the return value may be an approximation in some cases, so there isn't guaranteed round-trip fidelity.
 
 
 /* Global flag for determining whether an application supports alpha.  This flag is consulted when an application imports alpha (through color dragging, for instance). The value of this flag also determines whether the color panel has an opacity slider. This value is YES by default, indicating that the opacity components of imported colors will be set to 1.0. If an application wants alpha, it can either set the "NSIgnoreAlpha" default to NO or call the set method below.
@@ -285,7 +291,7 @@ This method provides a global approach to removing alpha which might not always 
 
 /* To decode NXColors... Will return nil if the archived color was "invalid" (written out by the kit in a few instances). Otherwise returns autoreleased NSColor. Can't write NSColors as NXColors, so we have no corresponding encode method.
 */
-- (NSColor *)decodeNXColor;
+- (NSColor *)decodeNXColor NS_DEPRECATED_MAC(10_0, 10_9);
 
 @end
 

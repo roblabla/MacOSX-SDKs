@@ -20,4 +20,4 @@ XPC_DEBUGGER_EXCL
 const char *
 xpc_debugger_api_misuse_info(void);
 
-#endif /* __XPC_DEBUG_H__ */
+#endif // __XPC_DEBUG_H__ 

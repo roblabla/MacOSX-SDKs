@@ -3,13 +3,15 @@
  
      Contains:   Icon Utilities and Icon Services Interfaces.
  
-     Copyright:  Copyright 2003-2009 by Apple Inc., all rights reserved.
+     Copyright:  (c) 2003-2012 by Apple Inc. All rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
  
                      http://developer.apple.com/bugreporter/
+
 */
+
 #ifndef __ICONSCORE__
 #define __ICONSCORE__
 
@@ -126,8 +128,10 @@ enum {
   fullTrashIconResource         = kFullTrashIconResource
 };
 
-/* IconRefs are 32-bit values identifying cached icon data. IconRef 0 is invalid.*/
-typedef struct OpaqueIconRef*           IconRef;
+/* IconRefs identify cached icon data. IconRef 0 is invalid.*/
+typedef struct OpaqueIconRef* IconRef;
+
+	
 /*
    IconServices is an efficient mechanism to share icon data amongst multiple 
    clients. It avoids duplication of data; it provides efficient caching, 
@@ -424,7 +428,7 @@ enum {
  *    Thread safe since version 10.2
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in IconServicesLib 8.5 and later
  */
@@ -447,7 +451,7 @@ GetIconRefOwners(
  *    Thread safe since version 10.2
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in IconServicesLib 8.5 and later
  */
@@ -473,7 +477,7 @@ AcquireIconRef(IconRef theIconRef)                            __OSX_AVAILABLE_ST
  *    Thread safe since version 10.2
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in IconServicesLib 8.5 and later
  */
@@ -515,7 +519,7 @@ ReleaseIconRef(IconRef theIconRef)                            __OSX_AVAILABLE_ST
  *    Thread safe since version 10.2
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.5
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in IconServicesLib 8.5 and later
  */
@@ -550,7 +554,7 @@ GetIconRefFromFile(
  *    Thread safe since version 10.2
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in IconServicesLib 8.5 and later
  */
@@ -583,7 +587,7 @@ GetIconRef(
  *    Thread safe since version 10.2
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in IconServicesLib 8.5 and later
  */
@@ -643,7 +647,7 @@ GetIconRefFromFolder(
  *      The output label for the icon/file.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.1 and later in CoreServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
  *    Non-Carbon CFM:   not available
  */
@@ -699,7 +703,7 @@ GetIconRefFromFileInfo(
  *      The output IconRef for the routine.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.3 and later in CoreServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
  *    Non-Carbon CFM:   not available
  */
@@ -739,7 +743,7 @@ GetIconRefFromTypeInfo(
  *      The output IconRef for the routine.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.3 and later in CoreServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
  *    Non-Carbon CFM:   not available
  */
@@ -774,7 +778,7 @@ GetIconRefFromIconFamilyPtr(
  *      The output IconRef for the routine.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.5 and later
  *    Non-Carbon CFM:   not available
  */
@@ -810,7 +814,7 @@ GetIconRefFromComponent(
  *    Thread safe since version 10.2
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in IconServicesLib 8.5 and later
  */
@@ -842,7 +846,7 @@ RegisterIconRefFromIconFamily(
  *    Thread safe since version 10.2
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.5
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in IconServicesLib 8.5 and later
  */
@@ -883,7 +887,7 @@ RegisterIconRefFromResource(
  *      The output IconRef for the routine.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.1 and later in CoreServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
  *    Non-Carbon CFM:   not available
  */
@@ -910,7 +914,7 @@ RegisterIconRefFromFSRef(
  *    Thread safe since version 10.2
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in IconServicesLib 8.5 and later
  */
@@ -941,7 +945,7 @@ UnregisterIconRef(
  *    Thread safe since version 10.2
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in IconServicesLib 8.5 and later
  */
@@ -966,7 +970,7 @@ UpdateIconRef(IconRef theIconRef)                             __OSX_AVAILABLE_ST
  *    Thread safe since version 10.2
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.5
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in IconServicesLib 8.5 and later
  */
@@ -995,7 +999,7 @@ OverrideIconRefFromResource(
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in IconServicesLib 8.5 and later
  */
@@ -1019,7 +1023,7 @@ OverrideIconRef(
  *    Thread safe since version 10.2
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in IconServicesLib 8.5 and later
  */
@@ -1049,7 +1053,7 @@ RemoveIconRefOverride(IconRef theIconRef)                     __OSX_AVAILABLE_ST
  *    Thread safe since version 10.2
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in IconServicesLib 8.5 and later
  */
@@ -1074,7 +1078,7 @@ CompositeIconRef(
  *    Thread safe since version 10.2
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in IconServicesLib 8.5 and later
  */
@@ -1105,7 +1109,7 @@ IsIconRefComposite(
  *    Thread safe since version 10.2
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in IconServicesLib 8.5 and later
  */
@@ -1137,7 +1141,7 @@ IsValidIconRef(IconRef theIconRef)                            __OSX_AVAILABLE_ST
  *      The IconRef to test.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.3 and later in CoreServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
  *    Non-Carbon CFM:   not available
  */
@@ -1170,7 +1174,7 @@ IsDataAvailableInIconRef(
  *    Thread safe since version 10.2
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.3
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in IconServicesLib 8.5 and later
  */
@@ -1196,7 +1200,7 @@ FlushIconRefs(
  *    Thread safe since version 10.2
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.3
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in IconServicesLib 8.5 and later
  */
@@ -1228,7 +1232,7 @@ FlushIconRefsByVolume(SInt16 vRefNum)                         __OSX_AVAILABLE_BU
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in IconServicesLib 8.5 and later
  */
@@ -1252,7 +1256,7 @@ SetCustomIconsEnabled(
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in IconServicesLib 8.5 and later
  */
@@ -1290,7 +1294,7 @@ GetCustomIconsEnabled(
  *    Thread safe since version Jagua
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.5
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in IconServicesLib 9.0 and later
  */
@@ -1316,7 +1320,7 @@ RegisterIconRefFromIconFile(
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.5
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in IconServicesLib 9.0 and later
  */
@@ -1339,7 +1343,7 @@ ReadIconFile(
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework [32-bit only] but deprecated in 10.5
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in IconServicesLib 9.0 and later
  */
@@ -1371,7 +1375,7 @@ WriteIconFile(
  *      The handle for the icon family.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.1 and later in CoreServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
  *    Non-Carbon CFM:   not available
  */

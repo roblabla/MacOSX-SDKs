@@ -221,7 +221,7 @@ extern OSStatus
 MIDIDeviceAddEntity(MIDIDeviceRef device, CFStringRef name, 
 					Boolean embedded, ItemCount numSourceEndpoints,
 					ItemCount numDestinationEndpoints, MIDIEntityRef *newEntity)
-																__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+																__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -240,7 +240,7 @@ MIDIDeviceAddEntity(MIDIDeviceRef device, CFStringRef name,
 */
 extern OSStatus
 MIDIDeviceRemoveEntity(MIDIDeviceRef device, MIDIEntityRef entity)
-																__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_NA);
+																__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_4_2);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -261,7 +261,7 @@ MIDIDeviceRemoveEntity(MIDIDeviceRef device, MIDIEntityRef entity)
 */
 extern OSStatus
 MIDIEntityAddOrRemoveEndpoints(MIDIEntityRef entity, ItemCount numSourceEndpoints,
-					ItemCount numDestinationEndpoints)			__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+					ItemCount numDestinationEndpoints)			__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -278,7 +278,7 @@ MIDIEntityAddOrRemoveEndpoints(MIDIEntityRef entity, ItemCount numSourceEndpoint
 						The device to be added.
 */
 extern OSStatus
-MIDISetupAddDevice(		MIDIDeviceRef device )					__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_NA);
+MIDISetupAddDevice(		MIDIDeviceRef device )					__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_4_2);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -300,7 +300,7 @@ MIDISetupAddDevice(		MIDIDeviceRef device )					__OSX_AVAILABLE_STARTING(__MAC_1
 						The device to be added.
 */
 extern OSStatus
-MIDISetupRemoveDevice(	MIDIDeviceRef device )				__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_NA);
+MIDISetupRemoveDevice(	MIDIDeviceRef device )				__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_4_2);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -314,7 +314,7 @@ MIDISetupRemoveDevice(	MIDIDeviceRef device )				__OSX_AVAILABLE_STARTING(__MAC_
 						The device to be added.
 */
 extern OSStatus
-MIDISetupAddExternalDevice(	MIDIDeviceRef device )			__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_NA);
+MIDISetupAddExternalDevice(	MIDIDeviceRef device )			__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_4_2);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -328,7 +328,7 @@ MIDISetupAddExternalDevice(	MIDIDeviceRef device )			__OSX_AVAILABLE_STARTING(__
 						The device to be removed.
 */
 extern OSStatus
-MIDISetupRemoveExternalDevice( MIDIDeviceRef device )		__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_NA);
+MIDISetupRemoveExternalDevice( MIDIDeviceRef device )		__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_4_2);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -430,7 +430,7 @@ MIDIGetSerialPortDrivers(	CFArrayRef *outDriverNames )	__OSX_AVAILABLE_BUT_DEPRE
 extern OSStatus		
 MIDIExternalDeviceCreate(CFStringRef name, CFStringRef manufacturer, 
 							CFStringRef model, MIDIDeviceRef *outDevice)
-															__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_NA);
+															__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_4_2);
 
 
 #ifdef __cplusplus

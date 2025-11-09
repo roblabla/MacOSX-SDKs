@@ -1,7 +1,7 @@
 /*
     NSUserInterfaceItemSearching.h
     Application Kit
-    Copyright (c) 2008-2012, Apple Inc.
+    Copyright (c) 2008-2013, Apple Inc.
     All rights reserved.
 */
 

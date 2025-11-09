@@ -89,7 +89,7 @@
 #define	B_FUA		0x00000400	/* Write-through disk cache(if supported) */
 #define B_PASSIVE	0x00000800	/* PASSIVE I/Os are ignored by THROTTLE I/O */
 #define	B_IOSTREAMING	0x00001000	/* sequential access pattern detected */
-#define B_THROTTLED_IO	0x00002000	/* low priority I/O */
+#define B_THROTTLED_IO	0x00002000	/* low priority I/O (deprecated) */
 #define B_ENCRYPTED_IO	0x00004000	/* Encrypted I/O */
 #define B_STATICCONTENT 0x00008000	/* Buffer is likely to remain unaltered */
 

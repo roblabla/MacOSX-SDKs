@@ -143,6 +143,17 @@
 
 #define kIOLocation               "IOLocation"
 
+/*! @defined kIONetworkNoBSDAttachKey
+    @abstract kIONetworkNoBSDAttachKey is a property of IONetworkInterface
+        objects. It has an OSBoolean value.
+    @discussion Adding a property with this key and the value kOSBooleanTrue
+        before the interface is published will hold off the BSD attach.
+        When the interface is ready to attach to BSD, remove the property
+        and then re-publish the interface by calling registerService().
+*/
+
+#define kIONetworkNoBSDAttachKey  "IONetworkNoBSDAttach"
+
 /*! @enum InterfaceObjectStates
     @discussion Constants used to encode the state of the interface object.
    @constant kIONetworkInterfaceRegisteredState The interface object has

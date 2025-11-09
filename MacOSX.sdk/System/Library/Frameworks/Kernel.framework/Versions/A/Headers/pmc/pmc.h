@@ -349,9 +349,6 @@ typedef struct pmc_methods {
 /* Prevent older AppleProfileFamily kexts from loading on newer kernels.
  * Alas, C doesn't necessarily have a cleaner way to do the version number concatenation
  */
-#ifndef __OPEN_SOURCE__
-/* rdar://9306871 */
-#endif
 #define PERF_REG_NAME1(a, b) a ## b
 #define PERF_REG_NAME(a, b) PERF_REG_NAME1(a, b)
 #define perf_monitor_register PERF_REG_NAME(perf_monitor_register_, VERSION_MAJOR)

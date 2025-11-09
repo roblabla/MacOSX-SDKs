@@ -1,7 +1,7 @@
 /*
         NSATSTypesetter.h
         Application Kit
-        Copyright (c) 2002-2012, Apple Inc.
+        Copyright (c) 2002-2013, Apple Inc.
         All rights reserved.
 */
 

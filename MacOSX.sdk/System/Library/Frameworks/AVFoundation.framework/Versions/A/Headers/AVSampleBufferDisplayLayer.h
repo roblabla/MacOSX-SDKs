@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2011-2012 Apple Inc. All rights reserved.
+	Copyright 2011-2013 Apple Inc. All rights reserved.
 
 */
 
@@ -21,9 +21,10 @@
 
 @class AVSampleBufferDisplayLayerInternal;
 
-NS_CLASS_AVAILABLE(10_8, TBD)
+NS_CLASS_AVAILABLE(10_8, 6_0)
 @interface AVSampleBufferDisplayLayer : CALayer
 {
+@private
 	AVSampleBufferDisplayLayerInternal		*_sampleBufferDisplayLayerInternal;
 }
 

@@ -72,7 +72,7 @@ EVENTKIT_CLASS_AVAILABLE(10_8, 5_0)
 @property(nonatomic, readonly) BOOL hasNotes  __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_5_0);
 
 // An array of EKParticipant objects
-@property(nonatomic, readonly) NSArray *attendees;
+@property(nonatomic, copy, readonly) NSArray *attendees;
 
 // An array of EKAlarm objects
 @property(nonatomic, copy) NSArray *alarms;

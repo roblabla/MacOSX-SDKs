@@ -1,7 +1,7 @@
 /*
 	NSLayoutConstraint.h
 	Application Kit
-	Copyright (c) 2009-2012, Apple Inc.
+	Copyright (c) 2009-2013, Apple Inc.
 	All rights reserved.
 */
 
@@ -110,10 +110,16 @@ NS_CLASS_AVAILABLE(10_7, NA)
     CGFloat _loweredConstant;
     id _markerAndPositiveExtraVar;
     id _negativeExtraVar;
+#if __OBJC2__
+    uint64_t _layoutConstraintFlags;
+    float _coefficient;
+    NSLayoutPriority _priority;
+#else
     float _coefficient;
     NSLayoutPriority _priority;
     uint64_t _layoutConstraintFlags;
     id _flange;
+#endif
 }
 
 /* Create an array of constraints using an ASCII art-like visual format string.
@@ -156,6 +162,14 @@ APPKIT_EXTERN NSDictionary *_NSDictionaryOfVariableBindings(NSString *commaSepar
 /* Unlike the other properties, the constant may be modified after constraint creation.  Setting the constant on an existing constraint performs much better than removing the constraint and adding a new one that's just like the old but for having a new constant.
  */
 @property CGFloat constant;
+
+@end
+
+@interface NSLayoutConstraint (NSIdentifier)
+
+/* Name a constraint by setting its identifier. The identifier is output in the constraint's description. Identifiers starting with NS are reserved by the system.
+ */
+@property (copy) NSString *identifier;
 
 @end
 

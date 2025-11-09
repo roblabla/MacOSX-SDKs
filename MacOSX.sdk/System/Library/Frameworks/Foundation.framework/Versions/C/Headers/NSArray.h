@@ -1,5 +1,5 @@
 /*	NSArray.h
-	Copyright (c) 1994-2012, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2013, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -34,6 +34,7 @@
 - (NSUInteger)indexOfObjectIdenticalTo:(id)anObject;
 - (NSUInteger)indexOfObjectIdenticalTo:(id)anObject inRange:(NSRange)range;
 - (BOOL)isEqualToArray:(NSArray *)otherArray;
+- (id)firstObject NS_AVAILABLE(10_6, 4_0);
 - (id)lastObject;
 - (NSEnumerator *)objectEnumerator;
 - (NSEnumerator *)reverseObjectEnumerator;
@@ -82,21 +83,23 @@ typedef NS_OPTIONS(NSUInteger, NSBinarySearchingOptions) {
 
 @interface NSArray (NSArrayCreation)
 
-+ (id)array;
-+ (id)arrayWithObject:(id)anObject;
-+ (id)arrayWithObjects:(const id [])objects count:(NSUInteger)cnt;
-+ (id)arrayWithObjects:(id)firstObj, ... NS_REQUIRES_NIL_TERMINATION;
-+ (id)arrayWithArray:(NSArray *)array;
++ (instancetype)array;
++ (instancetype)arrayWithObject:(id)anObject;
++ (instancetype)arrayWithObjects:(const id [])objects count:(NSUInteger)cnt;
++ (instancetype)arrayWithObjects:(id)firstObj, ... NS_REQUIRES_NIL_TERMINATION;
++ (instancetype)arrayWithArray:(NSArray *)array;
 
-- (id)initWithObjects:(const id [])objects count:(NSUInteger)cnt;
-- (id)initWithObjects:(id)firstObj, ... NS_REQUIRES_NIL_TERMINATION;
-- (id)initWithArray:(NSArray *)array;
-- (id)initWithArray:(NSArray *)array copyItems:(BOOL)flag;
+- (instancetype)init;	/* designated initializer */
+- (instancetype)initWithObjects:(const id [])objects count:(NSUInteger)cnt;	/* designated initializer */
 
-+ (id)arrayWithContentsOfFile:(NSString *)path;
-+ (id)arrayWithContentsOfURL:(NSURL *)url;
-- (id)initWithContentsOfFile:(NSString *)path;
-- (id)initWithContentsOfURL:(NSURL *)url;
+- (instancetype)initWithObjects:(id)firstObj, ... NS_REQUIRES_NIL_TERMINATION;
+- (instancetype)initWithArray:(NSArray *)array;
+- (instancetype)initWithArray:(NSArray *)array copyItems:(BOOL)flag;
+
++ (id /* NSArray * */)arrayWithContentsOfFile:(NSString *)path;
++ (id /* NSArray * */)arrayWithContentsOfURL:(NSURL *)url;
+- (id /* NSArray * */)initWithContentsOfFile:(NSString *)path;
+- (id /* NSArray * */)initWithContentsOfURL:(NSURL *)url;
 
 @end
 
@@ -153,8 +156,10 @@ typedef NS_OPTIONS(NSUInteger, NSBinarySearchingOptions) {
 
 @interface NSMutableArray (NSMutableArrayCreation)
 
-+ (id)arrayWithCapacity:(NSUInteger)numItems;
-- (id)initWithCapacity:(NSUInteger)numItems;
++ (instancetype)arrayWithCapacity:(NSUInteger)numItems;
+
+- (instancetype)init;	/* designated initializer */
+- (instancetype)initWithCapacity:(NSUInteger)numItems;	/* designated initializer */
 
 @end
 

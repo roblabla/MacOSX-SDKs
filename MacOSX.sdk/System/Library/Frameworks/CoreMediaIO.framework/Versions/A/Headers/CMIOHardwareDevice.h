@@ -63,7 +63,7 @@ typedef CMIOObjectPropertySelector CMIODevicePropertyID;
 struct CMIODeviceStreamConfiguration
 {
     UInt32  mNumberStreams;
-    UInt32  mNumberChannels[kVariableLengthArray];
+    UInt32  mNumberChannels[];
 };
 typedef struct CMIODeviceStreamConfiguration CMIODeviceStreamConfiguration;
 

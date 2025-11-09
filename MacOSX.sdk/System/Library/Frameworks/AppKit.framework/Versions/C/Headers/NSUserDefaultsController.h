@@ -1,7 +1,7 @@
 /*
 	NSUserDefaultsController.h
 	Application Kit
-	Copyright (c) 2002-2012, Apple Inc.
+	Copyright (c) 2002-2013, Apple Inc.
 	All rights reserved.
  */
 
@@ -12,8 +12,10 @@
 
 @interface NSUserDefaultsController : NSController {
 @private
-	void *_reserved3;
-	void *_reserved4;
+#if !__LP64__    
+    void *_reserved3;
+    void *_reserved4;
+#endif
     NSUserDefaults *_defaults;
     NSMutableDictionary *_valueBuffer;
     NSDictionary *_initialValues;

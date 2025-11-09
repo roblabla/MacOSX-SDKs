@@ -38,10 +38,18 @@ IMAGEIO_EXTERN const CFStringRef kCGImageSourceTypeIdentifierHint  IMAGEIO_AVAIL
  ** and "CGImageSourceCreateImageAtIndex". **/
 
 /* Specifies whether the image should be cached in a decoded form. The
- * value of this key must be a CFBooleanRef; the default value is
- * kCFBooleanFalse. */
+ * value of this key must be a CFBooleanRef.
+ * kCFBooleanFalse indicates no caching, kCFBooleanTrue indicates caching.
+ * For 64-bit architectures, the default is kCFBooleanTrue, for 32-bit the default is kCFBooleanFalse.
+ */
 
 IMAGEIO_EXTERN const CFStringRef kCGImageSourceShouldCache  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+
+/* Specifies whether image decoding and caching should happen at image creation time.
+ * The value of this key must be a CFBooleanRef. The default value is kCFBooleanFalse (image decoding will
+ * happen at rendering time).
+ */
+IMAGEIO_EXTERN const CFStringRef kCGImageSourceShouldCacheImmediately  IMAGEIO_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
 
 /* Specifies whether the image should be returned as a floating
  * point CGImageRef if supported by the file format. Extended
@@ -153,6 +161,11 @@ IMAGEIO_EXTERN CGImageMetadataRef CGImageSourceCopyMetadataAtIndex (CGImageSourc
  * creation options; see the list of keys above for more information. */
 
 IMAGEIO_EXTERN CGImageRef CGImageSourceCreateImageAtIndex(CGImageSourceRef isrc, size_t index, CFDictionaryRef options)  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+
+/* Remove the cached decoded image data for the image at `index' in the image source `isrc'.
+ * The index is zero-based.
+ */
+IMAGEIO_EXTERN void CGImageSourceRemoveCacheAtIndex(CGImageSourceRef isrc, size_t index) IMAGEIO_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
 
 /* Return the thumbnail of the image at `index' in the image source `isrc'.
  * The index is zero-based. The `options' dictionary may be used to request

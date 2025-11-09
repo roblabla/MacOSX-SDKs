@@ -1,5 +1,5 @@
 /* CoreGraphics - CGFont.h
-   Copyright (c) 1999-2009 Apple Inc.
+   Copyright (c) 1999-2012 Apple Inc.
    All rights reserved. */
 
 #ifndef CGFONT_H_
@@ -35,6 +35,8 @@ typedef enum CGFontPostScriptFormat CGFontPostScriptFormat;
 #include <CoreFoundation/CFArray.h>
 #include <CoreFoundation/CFData.h>
 #include <CoreFoundation/CFDictionary.h>
+
+CF_IMPLICIT_BRIDGING_ENABLED
 
 enum {
   /* The maximum allowed value of a CGFontIndex. Always <= USHRT_MAX - 1. */
@@ -288,8 +290,10 @@ CG_EXTERN const CFStringRef kCGFontVariationAxisDefaultValue
 /* Obsolete; don't use these. */
 
 enum {
-  CGGlyphMin = 0,
-  CGGlyphMax = kCGGlyphMax
+  CGGlyphMin __CG_DEPRECATED_ENUMERATOR,
+  CGGlyphMax __CG_DEPRECATED_ENUMERATOR
 };
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif /* CGFONT_H_ */

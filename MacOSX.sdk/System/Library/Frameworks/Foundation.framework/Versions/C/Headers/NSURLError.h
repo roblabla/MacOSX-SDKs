@@ -1,6 +1,6 @@
 /*	
     NSURLError.h
-    Copyright (c) 2003-2012, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2013, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -46,6 +46,24 @@ FOUNDATION_EXPORT NSString * const NSErrorFailingURLStringKey NS_DEPRECATED(10_0
     @abstract The NSError userInfo dictionary key used to store and retrieve the SecTrustRef object representing the state of a failed SSL handshake.
  */
 FOUNDATION_EXPORT NSString * const NSURLErrorFailingURLPeerTrustErrorKey NS_AVAILABLE(10_6, 4_0);
+
+/*!
+    @const NSURLErrorBackgroundTaskCancelledReasonKey
+    @abstract The NSError userInfo dictionary key used to store and retrieve the NSNumber corresponding to the reason why a background
+	NSURLSessionTask was cancelled
+ */
+FOUNDATION_EXPORT NSString * const NSURLErrorBackgroundTaskCancelledReasonKey NS_AVAILABLE(NA, 7_0);
+
+/*!
+    @enum Codes associated with NSURLErrorBackgroundTaskCancelledReasonKey
+    @abstract Constants used by NSError to indicate why a background NSURLSessionTask was cancelled.
+ */
+
+enum
+{
+    NSURLErrorCancelledReasonUserForceQuitApplication =    0,
+    NSURLErrorCancelledReasonBackgroundUpdatesDisabled =   1,
+} NS_ENUM_AVAILABLE(NA, 7_0);
 
 /*!
     @enum NSURL-related Error Codes

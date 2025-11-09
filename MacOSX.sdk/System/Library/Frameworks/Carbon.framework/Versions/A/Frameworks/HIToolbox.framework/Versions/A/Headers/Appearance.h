@@ -3,8 +3,6 @@
  
      Contains:   Appearance Manager Interfaces.
  
-     Version:    HIToolbox-626.1~1
- 
      Copyright:  © 1994-2008 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
@@ -20,12 +18,12 @@
 #include <ApplicationServices/ApplicationServices.h>
 #endif
 
-#ifndef __COLLECTIONS__
-#include <CarbonCore/Collections.h>
+#ifndef __CORESERVICES__
+#include <CoreServices/CoreServices.h>
 #endif
 
-#ifndef __PROCESSES__
-#include <HIServices/Processes.h>
+#ifndef __APPLICATIONSERVICES__
+#include <ApplicationServices/ApplicationServices.h>
 #endif
 
 

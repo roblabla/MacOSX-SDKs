@@ -31,10 +31,26 @@
  *  Discussion:
  *    Invoked when a new location is available. oldLocation may be nil if there is no previous location
  *    available.
+*
+ *    This method is deprecated. If locationManager:didUpdateLocations: is
+ *    implemented, this method will not be called.
  */
 - (void)locationManager:(CLLocationManager *)manager
 	didUpdateToLocation:(CLLocation *)newLocation
-	fromLocation:(CLLocation *)oldLocation;
+		   fromLocation:(CLLocation *)oldLocation __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_6, __MAC_NA, __IPHONE_2_0, __IPHONE_6_0);
+
+/*
+ *  locationManager:didUpdateLocations:
+ *
+ *  Discussion:
+ *    Invoked when new locations are available.  Required for delivery of
+ *    deferred locations.  If implemented, updates will
+ *    not be delivered to locationManager:didUpdateToLocation:fromLocation:
+ *
+ *    locations is an array of CLLocation objects in chronological order.
+ */
+- (void)locationManager:(CLLocationManager *)manager
+	 didUpdateLocations:(NSArray *)locations __OSX_AVAILABLE_STARTING(__MAC_10_9,__IPHONE_6_0);
 
 /*
  *  locationManager:didUpdateHeading:
@@ -46,7 +62,7 @@
        didUpdateHeading:(CLHeading *)newHeading __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_3_0);
 
 /*
- *  locationManager:shouldDisplayHeadingCalibrationForDuration:
+ *  locationManagerShouldDisplayHeadingCalibration:
  *
  *  Discussion:
  *    Invoked when a new heading is available. Return YES to display heading calibration info. The display 
@@ -109,5 +125,34 @@
  */
 - (void)locationManager:(CLLocationManager *)manager
 	didStartMonitoringForRegion:(CLRegion *)region __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_5_0);
+
+/*
+ *  Discussion:
+ *    Invoked when location updates are automatically paused.
+ */
+- (void)locationManagerDidPauseLocationUpdates:(CLLocationManager *)manager __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_6_0);
+
+/*
+ *  Discussion:
+ *    Invoked when location updates are automatically resumed.
+ *
+ *    In the event that your application is terminated while suspended, you will
+ *	  not receive this notification.
+ */
+- (void)locationManagerDidResumeLocationUpdates:(CLLocationManager *)manager __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_6_0);
+
+/*
+ *  locationManager:didFinishDeferredUpdatesWithError:
+ *
+ *  Discussion:
+ *    Invoked when deferred updates will no longer be delivered. Stopping
+ *    location, disallowing deferred updates, and meeting a specified criterion
+ *    are all possible reasons for finishing deferred updates.
+ *
+ *    An error will be returned if deferred updates end before the specified
+ *    criteria are met (see CLError).
+ */
+- (void)locationManager:(CLLocationManager *)manager
+	didFinishDeferredUpdatesWithError:(NSError *)error __OSX_AVAILABLE_STARTING(__MAC_10_9,__IPHONE_6_0);
 
 @end

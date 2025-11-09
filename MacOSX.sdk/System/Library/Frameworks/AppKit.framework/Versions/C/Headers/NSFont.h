@@ -1,7 +1,7 @@
 /*
 	NSFont.h
 	Application Kit
-	Copyright (c) 1994-2012, Apple Inc.
+	Copyright (c) 1994-2013, Apple Inc.
 	All rights reserved.
 */
 
@@ -189,14 +189,14 @@ enum {
     NSAsciiWithDoubleByteEUCGlyphPacking,
     NSTwoByteGlyphPacking,
     NSFourByteGlyphPacking,
-};
+} NS_ENUM_DEPRECATED_MAC(10_0, 10_4);
 
 enum _NSGlyphRelation {
     NSGlyphBelow = 1,
     NSGlyphAbove = 2
-};
+} NS_ENUM_DEPRECATED_MAC(10_0, 10_4);
 #endif /* MAC_OS_X_VERSION_MIN_REQUIRED <= MAC_OS_X_VERSION_10_4 */
-typedef NSUInteger  NSGlyphRelation;
+typedef NSUInteger  NSGlyphRelation NS_DEPRECATED_MAC(10_0, 10_4);
 
 @interface NSFont (NSFontDeprecated)
 + (void)useFont:(NSString *)fontName NS_DEPRECATED_MAC(10_0, 10_4); // This is now automatically handled by Quartz.

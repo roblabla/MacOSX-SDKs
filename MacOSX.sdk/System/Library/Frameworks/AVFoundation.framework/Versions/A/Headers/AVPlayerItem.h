@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2012 Apple Inc. All rights reserved.
+	Copyright 2010-2013 Apple Inc. All rights reserved.
 
 */
 
@@ -43,6 +43,9 @@
 AVF_EXPORT NSString *const AVPlayerItemTimeJumpedNotification			 NS_AVAILABLE(10_7, 5_0);	// the item's current time has changed discontinuously
 AVF_EXPORT NSString *const AVPlayerItemDidPlayToEndTimeNotification      NS_AVAILABLE(10_7, 4_0);   // item has played to its end time
 AVF_EXPORT NSString *const AVPlayerItemFailedToPlayToEndTimeNotification NS_AVAILABLE(10_7, 4_3);   // item has failed to play to its end time
+AVF_EXPORT NSString *const AVPlayerItemPlaybackStalledNotification       NS_AVAILABLE(10_9, 6_0);    // media did not arrive in time to continue playback
+AVF_EXPORT NSString *const AVPlayerItemNewAccessLogEntryNotification	 NS_AVAILABLE(10_9, 6_0);	// a new access log entry has been added
+AVF_EXPORT NSString *const AVPlayerItemNewErrorLogEntryNotification		 NS_AVAILABLE(10_9, 6_0);	// a new error log entry has been added
 
 // notification userInfo key                                                                    type
 AVF_EXPORT NSString *const AVPlayerItemFailedToPlayToEndTimeErrorKey     NS_AVAILABLE(10_7, 4_3);   // NSError
@@ -76,6 +79,7 @@ typedef NSInteger AVPlayerItemStatus;
 @class AVMediaSelectionGroup;
 @class AVMediaSelectionOption;
 @class AVPlayerItemInternal;
+@protocol AVVideoCompositing;
 
 NS_CLASS_AVAILABLE(10_7, 4_0)
 @interface AVPlayerItem : NSObject <NSCopying>
@@ -85,40 +89,65 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 }
 
 /*!
- @method			playerItemWithURL:
+ @method		playerItemWithURL:
  @abstract		Returns an instance of AVPlayerItem for playing a resource at the specified location.
  @param			URL
- @result			An instance of AVPlayerItem.
- @discussion	
+ @result		An instance of AVPlayerItem.
+ @discussion	Equivalent to +playerItemWithAsset:, passing [AVAsset assetWithURL:URL] as the value of asset.
  */
 + (AVPlayerItem *)playerItemWithURL:(NSURL *)URL;
 
 /*!
- @method			playerItemWithAsset:
+ @method		playerItemWithAsset:
  @abstract		Returns an instance of AVPlayerItem for playing an AVAsset.
  @param			asset
- @result			An instance of AVPlayerItem.
- @discussion	
- */
+ @result		An instance of AVPlayerItem.
+ @discussion	Equivalent to +playerItemWithAsset:automaticallyLoadedAssetKeys:, passing @[ @"duration" ] as the value of automaticallyLoadedAssetKeys.
+  */
 + (AVPlayerItem *)playerItemWithAsset:(AVAsset *)asset;
 
 /*!
- @method			initWithURL:
+ @method		playerItemWithAsset:automaticallyLoadedAssetKeys:
+ @abstract		Returns an instance of AVPlayerItem for playing an AVAsset.
+ @param			asset
+ @param			automaticallyLoadedAssetKeys
+ 				An NSArray of NSStrings, each representing a property key defined by AVAsset. See AVAsset.h for property keys, e.g. duration.
+ @result		An instance of AVPlayerItem.
+ @discussion	The value of each key in automaticallyLoadedAssetKeys will be automatically be loaded by the underlying AVAsset before the receiver achieves the status AVPlayerItemStatusReadyToPlay; i.e. when the item is ready to play, the value of -[[AVPlayerItem asset] statusOfValueForKey:error:] will be one of the terminal status values greater than AVKeyValueStatusLoading.
+ 				Exceptions: the asset keys @"playable" and @"compatibleWithSavedPhotosAlbum" are not eligible for automatic loading by AVPlayerItem. You must use -[AVAsset loadValuesAsynchronouslyForKeys:completionHandler:] to load the values of those keys asynchronously.
+ */
++ (AVPlayerItem *)playerItemWithAsset:(AVAsset *)asset automaticallyLoadedAssetKeys:(NSArray *)automaticallyLoadedAssetKeys NS_AVAILABLE(10_9, 7_0);
+
+/*!
+ @method		initWithURL:
  @abstract		Initializes an AVPlayerItem with an NSURL.
  @param			URL
- @result			An instance of AVPlayerItem
- @discussion	
+ @result		An instance of AVPlayerItem
+ @discussion	Equivalent to -initWithAsset:, passing [AVAsset assetWithURL:URL] as the value of asset.
  */
 - (id)initWithURL:(NSURL *)URL;
 
 /*!
- @method			initWithAsset:
+ @method		initWithAsset:
  @abstract		Initializes an AVPlayerItem with an AVAsset.
  @param			asset
- @result			An instance of AVPlayerItem
- @discussion	
+ @result		An instance of AVPlayerItem
+ @discussion	Equivalent to -initWithAsset:automaticallyLoadedAssetKeys:, passing @[ @"duration" ] as the value of automaticallyLoadedAssetKeys.
  */
 - (id)initWithAsset:(AVAsset *)asset;
+
+/*!
+ @method		initWithAsset:automaticallyLoadedAssetKeys:
+ @abstract		Initializes an AVPlayerItem with an AVAsset.
+ @param			asset
+ 				An instance of AVAsset.
+ @param			automaticallyLoadedAssetKeys
+ 				An NSArray of NSStrings, each representing a property key defined by AVAsset. See AVAsset.h for property keys, e.g. duration.
+ @result		An instance of AVPlayerItem
+ @discussion	The value of each key in automaticallyLoadedAssetKeys will be automatically be loaded by the underlying AVAsset before the receiver achieves the status AVPlayerItemStatusReadyToPlay; i.e. when the item is ready to play, the value of -[[AVPlayerItem asset] statusOfValueForKey:error:] will be one of the terminal status values greater than AVKeyValueStatusLoading.
+ 				Exceptions: the asset keys @"playable" and @"compatibleWithSavedPhotosAlbum" are not eligible for automatic loading by AVPlayerItem. You must use -[AVAsset loadValuesAsynchronouslyForKeys:completionHandler:] to load the values of those keys asynchronously.
+ */
+- (id)initWithAsset:(AVAsset *)asset automaticallyLoadedAssetKeys:(NSArray *)automaticallyLoadedAssetKeys NS_AVAILABLE(10_9, 7_0);
 
 /*!
  @property status
@@ -158,6 +187,11 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 /*!
  @property tracks
  @abstract Provides array of AVPlayerItem tracks. Observable (can change dynamically during playback).
+	
+ @discussion
+	The value of this property will accord with the properties of the underlying media resource when the receiver becomes ready to play.
+	Before the underlying media resource has been sufficiently loaded, its value is an empty NSArray. Use key-value observation to obtain
+	a valid array of tracks as soon as it becomes available.
  */
 @property (nonatomic, readonly) NSArray *tracks;
 
@@ -167,6 +201,14 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  
  @discussion
 	This property is observable. The duration of an item can change dynamically during playback.
+	
+	Unless you omit @"duration" from the array of asset keys you pass to +playerItemWithAsset:automaticallyLoadedAssetKeys: or
+	-initWithAsset:automaticallyLoadedAssetKeys:, the value of this property will accord with the properties of the underlying
+	AVAsset and the current state of playback once the receiver becomes ready to play.
+
+	Before the underlying duration has been loaded, the value of this property is kCMTimeIndefinite. Use key-value observation to
+	obtain a valid duration as soon as it becomes available. (Note that the value of duration may remain kCMTimeIndefinite,
+	e.g. for live streams.)
  */
 @property (nonatomic, readonly) CMTime duration NS_AVAILABLE(10_7, 4_3);
 
@@ -178,6 +220,10 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 	Indicates the size at which the visual portion of the item is presented by the player; can be scaled from this 
 	size to fit within the bounds of an AVPlayerLayer via its videoGravity property. Can be scaled arbitarily for presentation
 	via the frame property of an AVPlayerLayer.
+	
+	The value of this property will accord with the properties of the underlying media resource when the receiver becomes ready to play.
+	Before the underlying media resource is sufficiently loaded, its value is CGSizeZero. Use key-value observation to obtain a valid
+	presentationSize as soon as it becomes available. (Note that the value of presentationSize may remain CGSizeZero, e.g. for audio-only items.)
  */
 @property (nonatomic, readonly) CGSize presentationSize;
 
@@ -190,31 +236,41 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  */
 @property (nonatomic, readonly) NSArray *timedMetadata;
 
+/*!
+ @property automaticallyLoadedAssetKeys
+ @abstract An array of property keys defined on AVAsset. The value of each key in the array is automatically loaded while the receiver is being made ready to play.
+ @discussion
+   The value of each key in automaticallyLoadedAssetKeys will be automatically be loaded by the underlying AVAsset before the receiver achieves the status AVPlayerItemStatusReadyToPlay; i.e. when the item is ready to play, the value of -[[AVPlayerItem asset] statusOfValueForKey:error:] will be AVKeyValueStatusLoaded. If loading of any of the values fails, the status of the AVPlayerItem will change instead to AVPlayerItemStatusFailed..
+ */
+@property (nonatomic, readonly) NSArray *automaticallyLoadedAssetKeys NS_AVAILABLE(10_9, 7_0);
+
 @end
 
 
 @interface AVPlayerItem (AVPlayerItemRateAndSteppingSupport)
 
-/* indicates whether the item can be played at rates greater than 1.0 */
+/* For releases of OS X prior to 10.9 and releases of iOS prior to 7.0, indicates whether the item can be played at rates greater than 1.0.
+   Starting with OS X 9.0 and iOS 7.0, all AVPlayerItems with status AVPlayerItemReadyToPlay can be played at rates between 1.0 and 2.0, inclusive, even if canPlayFastForward is NO; for those releases canPlayFastForward indicates whether the item can be played at rates greater than 2.0.
+*/
 @property (nonatomic, readonly) BOOL canPlayFastForward NS_AVAILABLE(10_8, 5_0);
 
 /* indicates whether the item can be played at rates between 0.0 and 1.0 */
-@property (nonatomic, readonly) BOOL canPlaySlowForward NS_AVAILABLE(10_8, TBD);
+@property (nonatomic, readonly) BOOL canPlaySlowForward NS_AVAILABLE(10_8, 6_0);
 
 /* indicates whether the item can be played at rate -1.0 */
-@property (nonatomic, readonly) BOOL canPlayReverse NS_AVAILABLE(10_8, TBD);
+@property (nonatomic, readonly) BOOL canPlayReverse NS_AVAILABLE(10_8, 6_0);
 
 /* indicates whether the item can be played at rates less between 0.0 and -1.0 */
-@property (nonatomic, readonly) BOOL canPlaySlowReverse NS_AVAILABLE(10_8, TBD);
+@property (nonatomic, readonly) BOOL canPlaySlowReverse NS_AVAILABLE(10_8, 6_0);
 
 /* indicates whether the item can be played at rates less than -1.0 */
 @property (nonatomic, readonly) BOOL canPlayFastReverse NS_AVAILABLE(10_8, 5_0);
 
 /* Indicates whether the item supports stepping forward; see -stepByCount:. Once the item has become ready to play, the value of canStepForward does not change even when boundary conditions are reached, such as when the item's currentTime is its end time. */
-@property (nonatomic, readonly) BOOL canStepForward NS_AVAILABLE(10_8, TBD);
+@property (nonatomic, readonly) BOOL canStepForward NS_AVAILABLE(10_8, 6_0);
 
 /* indicates whether the item supports stepping backward; see -stepByCount:. Once the item has become ready to play, the value of canStepBackward does not change even when boundary conditions are reached, such as when the item's currentTime is equal to kCMTimeZero. */
-@property (nonatomic, readonly) BOOL canStepBackward NS_AVAILABLE(10_8, TBD);
+@property (nonatomic, readonly) BOOL canStepBackward NS_AVAILABLE(10_8, 6_0);
 
 @end
 
@@ -312,6 +368,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  @param				time
  @param				toleranceBefore
  @param				toleranceAfter
+ @param				completionHandler
  @discussion		Use this method to seek to a specified time for the item and to be notified when the seek operation is complete.
 					The time seeked to will be within the range [time-toleranceBefore, time+toleranceAfter] and may differ from the specified time for efficiency.
 					Pass kCMTimeZero for both toleranceBefore and toleranceAfter to request sample accurate seeking which may incur additional decoding delay. 
@@ -350,8 +407,24 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 - (BOOL)seekToDate:(NSDate *)date;
 
 /*!
+ @method		seekToDate:completionHandler:
+ @abstract		move playhead to a point corresponding to a particular date, and invokes the specified block when the seek operation has either been completed or been interrupted.
+ @discussion
+   For playback content that is associated with a range of dates, move the
+   playhead to point within that range and invokes the completion handler when the seek operation is complete. 
+   Will fail if the supplied date is outside the range or if the content is not associated with a range of dates.  
+   The completion handler for any prior seek request that is still in process will be invoked immediately with the finished parameter 
+   set to NO. If the new request completes without being interrupted by another seek request or by any other operation, the specified 
+   completion handler will be invoked with the finished parameter set to YES. 
+ @param			date				The new position for the playhead.
+ @param			completionHandler	The block to invoke when seek operation is complete
+ @result		Returns true if the playhead was moved to the supplied date.
+ */
+- (BOOL)seekToDate:(NSDate *)date completionHandler:(void (^)(BOOL finished))completionHandler NS_AVAILABLE(10_9, 6_0);
+
+/*!
  @method		stepByCount:
- @abstract     Moves player's current item's current time forward or backward by the specified number of steps.
+ @abstract		Moves player's current item's current time forward or backward by the specified number of steps.
  @param 		stepCount
    The number of steps by which to move. A positive number results in stepping forward, a negative number in stepping backward.
  @discussion
@@ -364,26 +437,73 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  @abstract		The item's timebase.
  @discussion 
    You can examine the timebase to discover the relationship between the item's time and the master clock used for drift synchronization.
-   This timebase is read-only; you cannot set its time or rate to affect playback.
+   This timebase is read-only; you cannot set its time or rate to affect playback.  The value of this property may change during playback.
  */
-@property (nonatomic, readonly) __attribute__((NSObject)) CMTimebaseRef timebase NS_AVAILABLE(10_8, TBD);
+@property (nonatomic, readonly) __attribute__((NSObject)) CMTimebaseRef timebase NS_AVAILABLE(10_8, 6_0);
 
 @end
 
 
-@interface AVPlayerItem (AVPlayerItemPresentation)
-
-/*!
- @property audioMix
- @abstract Indicates the audio mix parameters to be applied during playback
- */
-@property (nonatomic, copy) AVAudioMix *audioMix;
+@interface AVPlayerItem (AVPlayerItemVisualPresentation)
 
 /*!
  @property videoComposition
  @abstract Indicates the video composition settings to be applied during playback.
  */
 @property (nonatomic, copy) AVVideoComposition *videoComposition;
+
+/*!
+ @property customVideoCompositor
+ @abstract Indicates the custom video compositor instance.
+ @discussion
+ 	This property is nil if there is no video compositor, or if the internal video compositor is in use. This reference can be used to provide
+	extra context to the custom video compositor instance if required.
+ */
+@property (nonatomic, readonly) id<AVVideoCompositing> customVideoCompositor NS_AVAILABLE(10_9, 7_0);
+
+/*!
+ @property seekingWaitsForVideoCompositionRendering
+ @abstract Indicates whether the item's timing follows the displayed video frame when seeking with a video composition
+ @discussion
+   By default, item timing is updated as quickly as possible, not waiting for media at new times to be rendered when seeking or 
+   during normal playback. The latency that occurs, for example, between the completion of a seek operation and the display of a 
+   video frame at a new time is negligible in most situations. However, when video compositions are in use, the processing of 
+   video for any particular time may introduce noticeable latency. Therefore it may be desirable when a video composition is in 
+   use for the item's timing be updated only after the video frame for a time has been displayed. This allows, for instance, an 
+   AVSynchronizedLayer associated with an AVPlayerItem to remain in synchronization with the displayed video and for the 
+   currentTime property to return the time of the displayed video.
+
+   This property has no effect on items for which videoComposition is nil.
+
+ */
+@property (nonatomic) BOOL seekingWaitsForVideoCompositionRendering NS_AVAILABLE(10_9, 6_0);
+
+/*!
+ @property textStyleRules
+ @abstract An array of AVTextStyleRules representing text styling that can be applied to subtitles and other legible media.
+*/
+@property (nonatomic, copy) NSArray *textStyleRules NS_AVAILABLE(10_9, 6_0);
+
+@end
+
+
+@interface AVPlayerItem (AVPlayerItemAudioProcessing)
+
+/*!
+ @property	audioTimePitchAlgorithm
+ @abstract	Indicates the processing algorithm used to manage audio pitch at varying rates and for scaled audio edits.
+ 			Constants for various time pitch algorithms, e.g. AVAudioTimePitchSpectral, are defined in AVAudioProcessingSettings.h.
+ 			The default value on iOS is AVAudioTimePitchAlgorithmLowQualityZeroLatency and on OS X is AVAudioTimePitchAlgorithmSpectral.
+*/
+@property (nonatomic, copy) NSString *audioTimePitchAlgorithm NS_AVAILABLE(10_9, 7_0);
+
+/*!
+ @property audioMix
+ @abstract Indicates the audio mix parameters to be applied during playback
+ @discussion
+   The inputParameters of the AVAudioMix must have trackIDs that correspond to a track of the receiver's asset. Otherwise they will be ignored. (See AVAudioMix.h for the declaration of AVAudioMixInputParameters and AVPlayerItem's asset property.)
+ */
+@property (nonatomic, copy) AVAudioMix *audioMix;
 
 @end
 
@@ -441,6 +561,16 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 - (void)selectMediaOption:(AVMediaSelectionOption *)mediaSelectionOption inMediaSelectionGroup:(AVMediaSelectionGroup *)mediaSelectionGroup NS_AVAILABLE(10_8, 5_0);
 
 /*!
+ @method		selectMediaOptionAutomaticallyInMediaSelectionGroup:
+ @abstract
+    Selects the media option in the specified media selection group that best matches the AVPlayer's current automatic selection criteria. Also allows automatic selection to be re-applied to the specified group subsequently if the relevant criteria are changed.
+ @param 		mediaSelectionGroup		The media selection group, obtained from the receiver's asset, that contains the specified option.
+ @discussion
+   Has no effect unless the appliesMediaSelectionCriteriaAutomatically property of the associated AVPlayer is YES and unless automatic media selection has previously been overridden via -[AVPlayerItem selectMediaOption:inMediaSelectionGroup:].
+ */
+- (void)selectMediaOptionAutomaticallyInMediaSelectionGroup:(AVMediaSelectionGroup *)mediaSelectionGroup NS_AVAILABLE(10_9, 7_0);
+
+/*!
  @method		selectedMediaOptionInMediaSelectionGroup:
  @abstract		Indicates the media selection option that's currently selected from the specified group. May be nil.
  @param 		mediaSelectionGroup		A media selection group obtained from the receiver's asset.
@@ -467,6 +597,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  @abstract		Returns an object that represents a snapshot of the network access log. Can be nil.
  @discussion	An AVPlayerItemAccessLog provides methods to retrieve the network access log in a format suitable for serialization.
  				If nil is returned then there is no logging information currently available for this AVPlayerItem.
+				An AVPlayerItemNewAccessLogEntryNotification will be posted when new logging information becomes available. However, accessLog might already return a non-nil value even before the first notification is posted.
  @result		An autoreleased AVPlayerItemAccessLog instance.
  */
 - (AVPlayerItemAccessLog *)accessLog NS_AVAILABLE(10_7, 4_3);
@@ -497,7 +628,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 				An instance of AVPlayerItemOutput
  */
 
-- (void)addOutput:(AVPlayerItemOutput *)output NS_AVAILABLE(10_8, TBD);
+- (void)addOutput:(AVPlayerItemOutput *)output NS_AVAILABLE(10_8, 6_0);
 
 /*!
  @method		removeOutput:
@@ -506,14 +637,14 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 				An instance of AVPlayerItemOutput
  */
 
-- (void)removeOutput:(AVPlayerItemOutput *)output NS_AVAILABLE(10_8, TBD);
+- (void)removeOutput:(AVPlayerItemOutput *)output NS_AVAILABLE(10_8, 6_0);
 
 /*!
  @property		outputs
  @abstract		The collection of associated outputs.
  */
 
-@property (nonatomic, readonly) NSArray *outputs NS_AVAILABLE(10_8, TBD);
+@property (nonatomic, readonly) NSArray *outputs NS_AVAILABLE(10_8, 6_0);
 
 @end
 
@@ -622,8 +753,19 @@ NS_CLASS_AVAILABLE(10_7, 4_3)
  @abstract		A count of media segments downloaded.
  @discussion	Value is negative if unknown. A count of media segments downloaded from the server to this client. Corresponds to "sc-count".
  				This property is not observable.
+ 				This property is deprecated. Use numberOfMediaRequests instead.
  */
-@property (nonatomic, readonly) NSInteger numberOfSegmentsDownloaded;
+@property (nonatomic, readonly) NSInteger numberOfSegmentsDownloaded NS_DEPRECATED(10_7, 10_9, 4_3, 7_0);
+
+/*!
+ @property		numberOfMediaRequests
+ @abstract		A count of media read requests.
+ @discussion	Value is negative if unknown. A count of media read requests from the server to this client. Corresponds to "sc-count".
+				For HTTP live Streaming, a count of media segments downloaded from the server to this client.
+				For progressive-style HTTP media downloads, a count of HTTP GET (byte-range) requests for the resource.
+ 				This property is not observable. 
+ */
+@property (nonatomic, readonly) NSInteger numberOfMediaRequests NS_AVAILABLE(10_9, 6_0);
 
 /*!
  @property		playbackStartDate
@@ -706,6 +848,14 @@ NS_CLASS_AVAILABLE(10_7, 4_3)
 @property (nonatomic, readonly) long long numberOfBytesTransferred;
 
 /*!
+ @property		transferDuration
+ @abstract		The accumulated duration of active network transfer of bytes. Measured in seconds.
+ @discussion	Value is negative if unknown. Corresponds to "c-transfer-duration".
+				This property is not observable.
+ */
+@property (nonatomic, readonly) NSTimeInterval transferDuration NS_AVAILABLE(10_9, 7_0);
+
+/*!
  @property		observedBitrate
  @abstract		The empirical throughput across all media downloaded. Measured in bits per second.
  @discussion	Value is negative if unknown. Corresponds to "c-observed-bitrate".
@@ -728,6 +878,70 @@ NS_CLASS_AVAILABLE(10_7, 4_3)
  				This property is not observable.
  */
 @property (nonatomic, readonly) NSInteger numberOfDroppedVideoFrames;
+
+/*!
+ @property		startupTime
+ @abstract		The accumulated duration until player item is ready to play. Measured in seconds.
+ @discussion	Value is negative if unknown. Corresponds to "c-startup-time".
+				This property is not observable.
+ */
+@property (nonatomic, readonly) NSTimeInterval startupTime NS_AVAILABLE(10_9, 7_0);
+
+/*!
+ @property		downloadOverdue
+ @abstract		The total number of times the download of the segments took too long.
+ @discussion	Value is negative if unknown. Corresponds to "c-overdue".
+				This property is not observable.
+ */
+@property (nonatomic, readonly) NSInteger downloadOverdue NS_AVAILABLE(10_9, 7_0);
+
+/*!
+ @property		observedMaxBitrate
+ @abstract		Maximum observed segment download bit rate.
+ @discussion	Value is negative if unknown. Corresponds to "c-observed-max-bitrate".
+				This property is not observable.
+ */
+@property (nonatomic, readonly) double observedMaxBitrate NS_AVAILABLE(10_9, 7_0);
+
+/*!
+ @property		observedMinBitrate
+ @abstract		Minimum observed segment download bit rate.
+ @discussion	Value is negative if unknown. Corresponds to "c-observed-min-bitrate".
+				This property is not observable.
+ */
+@property (nonatomic, readonly) double observedMinBitrate NS_AVAILABLE(10_9, 7_0);
+
+/*!
+ @property		observedBitrateStandardDeviation
+ @abstract		Standard deviation of observed segment download bit rates.
+ @discussion	Value is negative if unknown. Corresponds to "c-observed-bitrate-sd".
+				This property is not observable.
+ */
+@property (nonatomic, readonly) double observedBitrateStandardDeviation NS_AVAILABLE(10_9, 7_0);
+
+/*!
+ @property		playbackType
+ @abstract		Playback type (LIVE, VOD, FILE).
+ @discussion	If nil is returned the playback type is unknown. Corresponds to "s-playback-type".
+				This property is not observable.
+ */
+@property (nonatomic, readonly) NSString *playbackType NS_AVAILABLE(10_9, 7_0);
+
+/*!
+ @property		mediaRequestsWWAN
+ @abstract		Number of network read requests over WWAN.
+ @discussion	Value is negative if unknown. Corresponds to "sc-wwan-count".
+				This property is not observable.
+ */
+@property (nonatomic, readonly) NSInteger mediaRequestsWWAN NS_AVAILABLE(10_9, 7_0);
+
+/*!
+ @property		switchBitrate
+ @abstract		Bandwidth that caused us to switch (up or down).
+ @discussion	Value is negative if unknown. Corresponds to "c-switch-bitrate".
+				This property is not observable.
+ */
+@property (nonatomic, readonly) double switchBitrate NS_AVAILABLE(10_9, 7_0);
 
 @end
 

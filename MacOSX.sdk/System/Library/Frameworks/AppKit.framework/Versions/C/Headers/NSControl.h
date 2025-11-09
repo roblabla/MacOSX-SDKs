@@ -1,7 +1,7 @@
 /*
 	NSControl.h
 	Application Kit
-	Copyright (c) 1994-2012, Apple Inc.
+	Copyright (c) 1994-2013, Apple Inc.
 	All rights reserved.
 */
 
@@ -99,6 +99,11 @@
  */
 - (BOOL)allowsExpansionToolTips NS_AVAILABLE_MAC(10_8);
 - (void)setAllowsExpansionToolTips:(BOOL)value NS_AVAILABLE_MAC(10_8);
+
+/* Get and set the user interface layout direction. This method is a cover method for userInterfaceLayoutDirection on NSCell. Some subclasses, such as NSOutlineView, may override this and provide more customized behavior.
+ */
+- (NSUserInterfaceLayoutDirection)userInterfaceLayoutDirection NS_AVAILABLE_MAC(10_8);
+- (void)setUserInterfaceLayoutDirection:(NSUserInterfaceLayoutDirection)value NS_AVAILABLE_MAC(10_8);
 
 @end
 

@@ -2,7 +2,7 @@
  *  CVPixelFormatDescription.h
  *  CoreVideo
  *
- *  Copyright (c) 2004 Apple Computer, Inc. All rights reserved.
+ *  Copyright (c) 2013 Apple Computer, Inc. All rights reserved.
  *
  */
 
@@ -111,7 +111,7 @@ CV_EXPORT const CFStringRef kCVPixelFormatFillExtendedPixelsCallback __OSX_AVAIL
 /* Create a description of a pixel format from a provided OSType */
 CV_EXPORT CFDictionaryRef CVPixelFormatDescriptionCreateWithPixelFormatType(CFAllocatorRef allocator, OSType pixelFormat) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
-/* Get an array containing all known pixel format description dictionaries */
+/* Get a CFArray of CFNumbers containing all known pixel formats as OSTypes */
 CV_EXPORT CFArrayRef CVPixelFormatDescriptionArrayCreateWithAllPixelFormatTypes(CFAllocatorRef allocator) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /* Register a new pixel format with CoreVideo */

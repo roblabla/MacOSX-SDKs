@@ -1,7 +1,7 @@
 //
 //  SCNSceneSource.h
 //
-//  Copyright 2012 Apple Inc. All rights reserved.
+//  Copyright (c) 2012-2013 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -10,27 +10,27 @@
 
 /*! @group Scene source properties */
 /*! File contributors. The values are dictionaries populated with keys documented in the "Contributor dictionary keys" group. */
-SCENEKIT_EXTERN NSString * const SCNSceneSourceAssetContributorsKey;
+SCN_EXTERN NSString * const SCNSceneSourceAssetContributorsKey;
 /*! When the file was created. The value is a NSDate instance. */
-SCENEKIT_EXTERN NSString * const SCNSceneSourceAssetCreatedDateKey;
+SCN_EXTERN NSString * const SCNSceneSourceAssetCreatedDateKey;
 /*! When the file was last modified. The value is a NSDate instance. */
-SCENEKIT_EXTERN NSString * const SCNSceneSourceAssetModifiedDateKey;
+SCN_EXTERN NSString * const SCNSceneSourceAssetModifiedDateKey;
 /*! The up axis of the file. If the file is oriented Y-up, for example, then this is the string \@"0.0 1.0 0.0" */
-SCENEKIT_EXTERN NSString * const SCNSceneSourceAssetUpAxisKey;
+SCN_EXTERN NSString * const SCNSceneSourceAssetUpAxisKey;
 /*! The unit used in the file. The value is a dictionary populated with keys documented in the "Unit dictionary keys" group. */
-SCENEKIT_EXTERN NSString * const SCNSceneSourceAssetUnitKey;
+SCN_EXTERN NSString * const SCNSceneSourceAssetUnitKey;
 
 /*! @group Contributor dictionary keys */
 /*! Authoring tool used to create the file. The corresponding value is an NSString. */
-SCENEKIT_EXTERN NSString * const SCNSceneSourceAssetAuthoringToolKey;
+SCN_EXTERN NSString * const SCNSceneSourceAssetAuthoringToolKey;
 /*! The file's author. The corresponding value is an NSString. */
-SCENEKIT_EXTERN NSString * const SCNSceneSourceAssetAuthorKey;
+SCN_EXTERN NSString * const SCNSceneSourceAssetAuthorKey;
 
 /*! @group Unit dictionary keys */
 /*! The name (NSString) of the unit */
-SCENEKIT_EXTERN NSString * const SCNSceneSourceAssetUnitNameKey;
+SCN_EXTERN NSString * const SCNSceneSourceAssetUnitNameKey;
 /*! A NSNumber encapsulating a floating-point value indicating how many meters the unit is. For example, if the name is \@"centimeter", then this will be 0.01. */
-SCENEKIT_EXTERN NSString * const SCNSceneSourceAssetUnitMeterKey;
+SCN_EXTERN NSString * const SCNSceneSourceAssetUnitMeterKey;
 
 /*! @group Scene loading options */
 
@@ -38,7 +38,7 @@ SCENEKIT_EXTERN NSString * const SCNSceneSourceAssetUnitMeterKey;
 	@abstract Enable to try to guess acceptable normals for the vertices if none are given in the file
     @discussion Use this with a boolean value encapsulated in a NSNumber. The default value is NO.
  */
-SCENEKIT_EXTERN NSString * const SCNSceneSourceCreateNormalsIfAbsentKey;
+SCN_EXTERN NSString * const SCNSceneSourceCreateNormalsIfAbsentKey;
 
 /*!
  @constant SCNSceneSourceCheckConsistencyKey
@@ -49,7 +49,7 @@ SCENEKIT_EXTERN NSString * const SCNSceneSourceCreateNormalsIfAbsentKey;
  If the document doesn't pass the consistency check it is then not loaded and an error is returned.
  This is slower, but for security reasons it should be set to YES if you are not sure the files you load are valid and have not been tampered with. 
  */
-SCENEKIT_EXTERN NSString * const SCNSceneSourceCheckConsistencyKey;
+SCN_EXTERN NSString * const SCNSceneSourceCheckConsistencyKey;
 
 /*!
  @constant SCNSceneSourceFlattenSceneKey
@@ -59,7 +59,7 @@ SCENEKIT_EXTERN NSString * const SCNSceneSourceCheckConsistencyKey;
  SceneKit will attempt to reduce the scene graph by merging the geometries. 
  This option is suitable to preview a 3D scene efficiently and when manipulating the scene graph is not needed.
  */
-SCENEKIT_EXTERN NSString * const SCNSceneSourceFlattenSceneKey;
+SCN_EXTERN NSString * const SCNSceneSourceFlattenSceneKey;
 
 /*!
  @constant SCNSceneSourceUseSafeModeKey
@@ -69,7 +69,7 @@ SCENEKIT_EXTERN NSString * const SCNSceneSourceFlattenSceneKey;
  SceneKit will forbid network accesses, prevent the loading of resources from arbitrary directories, and will not execute
  any code present in the loaded files.
  */
-SCENEKIT_EXTERN NSString * const SCNSceneSourceUseSafeModeKey;
+SCN_EXTERN NSString * const SCNSceneSourceUseSafeModeKey;
 
 /*!
  @constant SCNSceneSourceAssetDirectoryURLsKey
@@ -79,7 +79,7 @@ SCENEKIT_EXTERN NSString * const SCNSceneSourceUseSafeModeKey;
  This is recommended if you want to construct your scene source from a data object, not from an URL,
  and need to load resources whose paths are not absolute.
  */
-SCENEKIT_EXTERN NSString * const SCNSceneSourceAssetDirectoryURLsKey;
+SCN_EXTERN NSString * const SCNSceneSourceAssetDirectoryURLsKey;
 
 /*!
  @constant SCNSceneSourceOverrideAssetURLsKey
@@ -88,7 +88,7 @@ SCENEKIT_EXTERN NSString * const SCNSceneSourceAssetDirectoryURLsKey;
  You can force SceneKit to only search for extern resources within the directories specified by the SCNSceneSourceAssetDirectoryURLsKey key.
  This can be useful to load a file and its resources from a specific bundle for instance.
  */
-SCENEKIT_EXTERN NSString * const SCNSceneSourceOverrideAssetURLsKey;
+SCN_EXTERN NSString * const SCNSceneSourceOverrideAssetURLsKey;
 
 /*!
  @constant SCNSceneSourceStrictConformanceKey
@@ -97,7 +97,7 @@ SCENEKIT_EXTERN NSString * const SCNSceneSourceOverrideAssetURLsKey;
 			 enable additional features and make the rendering as close as possible to the original intent. If you pass YES,
              SceneKit will instead only consider features which are part of the file format specification.
  */
-SCENEKIT_EXTERN NSString * const SCNSceneSourceStrictConformanceKey;
+SCN_EXTERN NSString * const SCNSceneSourceStrictConformanceKey;
 
 /*!
  @constant SCNDetailedErrorsKey
@@ -108,7 +108,7 @@ SCENEKIT_EXTERN NSString * const SCNSceneSourceStrictConformanceKey;
              in their user info dictionary using the other keys (SCNConsistency*) defined in this file.
  */
 
-SCENEKIT_EXTERN NSString * const SCNDetailedErrorsKey;
+SCN_EXTERN NSString * const SCNDetailedErrorsKey;
 
 /*!
  @constant SCNConsistencyElementIDErrorKey
@@ -116,21 +116,21 @@ SCENEKIT_EXTERN NSString * const SCNDetailedErrorsKey;
  @discussion When the element does not have an ID, the ID of the closest parent element which has one is returned.
  */
 
-SCENEKIT_EXTERN NSString * const SCNConsistencyElementIDErrorKey;
+SCN_EXTERN NSString * const SCNConsistencyElementIDErrorKey;
 
 /*!
  @constant SCNConsistencyElementTypeErrorKey
  @abstract For XML-based formats, the tag name of the element where the error occurred.
  */
 
-SCENEKIT_EXTERN NSString * const SCNConsistencyElementTypeErrorKey;
+SCN_EXTERN NSString * const SCNConsistencyElementTypeErrorKey;
 
 /*!
  @constant SCNConsistencyLineNumberErrorKey
  @abstract For text-based formats, the line number where an error occurred.
  */
 
-SCENEKIT_EXTERN NSString * const SCNConsistencyLineNumberErrorKey;
+SCN_EXTERN NSString * const SCNConsistencyLineNumberErrorKey;
 
 /*!
  @enum SCNConsistencyErrorCode
@@ -152,16 +152,15 @@ enum {
  @enum SCNSceneSourceStatus
  @abstract Represents a phase of the loading process.
  @discussion Each of these constants (except SCNSceneSourceStatusError) represents a phase of the loading process. "Parsing" means that the document is being deserialized, "validating" that it's being checked for consistency, "processing" that the resulting object is being loaded. New values might be added to this enumeration to make it more detailed; however the values will always be ordered in the same order as the corresponding phases are executed. */
-typedef enum {
-	SCNSceneSourceStatusError =			-1,
-	SCNSceneSourceStatusParsing =		4,
-	SCNSceneSourceStatusValidating =	8,
-	SCNSceneSourceStatusProcessing =	12,
-	SCNSceneSourceStatusComplete =		16
-} SCNSceneSourceStatus;
+typedef NS_ENUM(NSInteger, SCNSceneSourceStatus) {
+	SCNSceneSourceStatusError      = -1,
+	SCNSceneSourceStatusParsing    = 4,
+	SCNSceneSourceStatusValidating = 8,
+	SCNSceneSourceStatusProcessing = 12,
+	SCNSceneSourceStatusComplete   = 16
+};
 
-
-typedef void (^SCNSceneSourceStatusHandler)(float totalProgress, SCNSceneSourceStatus status, NSError *error, BOOL *stopLoading);
+typedef void (^SCNSceneSourceStatusHandler)(float totalProgress, SCNSceneSourceStatus status, NSError *error, BOOL *stop);
 
 
 /*!
@@ -170,7 +169,7 @@ typedef void (^SCNSceneSourceStatusHandler)(float totalProgress, SCNSceneSourceS
  After creating a SCNSceneSource object for the appropriate source, you can obtain scenes using SCNSceneSource methods.
  */
 
-SCENEKIT_AVAILABLE(10_7, NA)
+SCENEKIT_CLASS_AVAILABLE(10_8, NA)
 @interface SCNSceneSource : NSObject 
 {
 @private
@@ -183,7 +182,7 @@ SCENEKIT_AVAILABLE(10_7, NA)
  @param url The URL to read scenes from.
  @param options An optional dictionary for future extensions. 
  */
-+ (id)sceneSourceWithURL:(NSURL *)url options:(NSDictionary *)options;
++ (instancetype)sceneSourceWithURL:(NSURL *)url options:(NSDictionary *)options;
 
 /*!
  @method sceneSourceWithData:options:
@@ -191,7 +190,7 @@ SCENEKIT_AVAILABLE(10_7, NA)
  @param data The scene data.
  @param options An optional dictionary for future extensions. 
  */
-+ (id)sceneSourceWithData:(NSData *)data options:(NSDictionary *)options;
++ (instancetype)sceneSourceWithData:(NSData *)data options:(NSDictionary *)options;
 
 /*!
  @method initWithURL:options:
@@ -209,7 +208,6 @@ SCENEKIT_AVAILABLE(10_7, NA)
  */
 - (id)initWithData:(NSData *)data options:(NSDictionary *)options;
 
-
 /*!
  @property url
  @abstract The receiver's URL (if any).
@@ -222,7 +220,6 @@ SCENEKIT_AVAILABLE(10_7, NA)
  */
 @property(readonly) NSData *data;
 
-
 /*!
  @method sceneWithOptions:statusHandler:
  @abstract Creates and initializes the scene described in the 3D file with the specified options and lets you monitor the progress.
@@ -231,7 +228,7 @@ SCENEKIT_AVAILABLE(10_7, NA)
                       - The first argument, overallProgress, is a floating-point number between 0 and 1. 0 means the loading process has just started and 1 that it is complete.
 					  - The second argument, status, tells you what the source is currently doing. It takes one of the values in the SCNSceneSourceStatus enum. New values might be added to this enum in the future.
 					  - If status == SCNSceneStatusError, then error will contain more information about the failure, and the method will return nil after having called the block. Otherwise error will be nil.
-					  - Set *stopLoading to YES if you want the source to abort the loading operation.
+					  - Set *stop to YES if you want the source to abort the loading operation.
  */
 - (SCNScene *)sceneWithOptions:(NSDictionary *)options statusHandler:(SCNSceneSourceStatusHandler)statusHandler;
 
@@ -256,7 +253,7 @@ SCENEKIT_AVAILABLE(10_7, NA)
  @method entryWithIdentifier:classType:
  @abstract Returns the instance of "entryClass" found in the receiver's library with the id "uid".
  @param uid The id of the entry to find as specified in the source file
- @param entryClass Specifies the type of the object to be returned. It can be one of the following classes: SCNMaterial, SCNGeometry, SCNScene, SCNNode, CAAnimation, SCNLight, SCNCamera, NSImage
+ @param entryClass Specifies the type of the object to be returned. It can be one of the following classes: SCNMaterial, SCNGeometry, SCNScene, SCNNode, CAAnimation, SCNLight, SCNCamera, SCNSkinner, SCNMorpher, NSImage
  @discussion Returns NULL if the receiver's library doesn't contains such an uid for the specified type.
  */
 - (id)entryWithIdentifier:(NSString *)uid withClass:(Class)entryClass;
@@ -264,8 +261,16 @@ SCENEKIT_AVAILABLE(10_7, NA)
 /*!
  @method identifiersOfEntriesWithClass:
  @abstract Returns the IDs found in the receiver's library for the class "entryClass".
- @param entryClass Specifies the type of the object referenced by the returned IDs. It can be one of the following classes: SCNMaterial, SCNScene, SCNGeometry, SCNNode, CAAnimation, SCNLight, SCNCamera, NSImage
+ @param entryClass Specifies the type of the object referenced by the returned IDs. It can be one of the following classes: SCNMaterial, SCNScene, SCNGeometry, SCNNode, CAAnimation, SCNLight, SCNCamera, SCNSkinner, SCNMorpher, NSImage
  */
 - (NSArray *)identifiersOfEntriesWithClass:(Class)entryClass;
+
+/*!
+ @method entriesPassingTest:
+ @abstract Returns the entries in the receiver's library that pass a test in a given Block.
+ @param predicate The block to apply to entries in the library. The block takes three arguments: "entry" is an entry in the library, "identifier" is the ID of this entry and "stop" is a reference to a Boolean value. The block can set the value to YES to stop further processing of the library. The stop argument is an out-only argument. You should only ever set this Boolean to YES within the Block. The Block returns a Boolean value that indicates whether "entry" passed the test.
+ @discussion The entry is an instance of one of following classes: SCNMaterial, SCNScene, SCNGeometry, SCNNode, CAAnimation, SCNLight, SCNCamera, SCNSkinner, SCNMorpher, NSImage.
+ */
+- (NSArray *)entriesPassingTest:(BOOL (^)(id entry, NSString *identifier, BOOL *stop))predicate SCENEKIT_AVAILABLE(10_9, NA);
 
 @end

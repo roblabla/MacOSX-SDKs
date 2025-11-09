@@ -19,14 +19,6 @@
  * 
  * @APPLE_LICENSE_HEADER_END@
  */
- 
-/******************************************************************************
- *                                                                            *
- * File:  math.h                                                              *
- *                                                                            *
- * Contains: typedefs, prototypes, and macros germane to C99 floating point.  *
- *                                                                            *
- ******************************************************************************/
 
 #ifndef __MATH_H__
 #define __MATH_H__
@@ -44,7 +36,7 @@ __BEGIN_DECLS
  * Floating point data types                                                  *
  ******************************************************************************/
 
-/*  Define float_t and double_t per C standard, ISO/IEC 9899:1999 7.12 2,
+/*  Define float_t and double_t per C standard, ISO/IEC 9899:2011 7.12 2,
     taking advantage of GCC's __FLT_EVAL_METHOD__ (which a compiler may
     define anytime and GCC does) that shadows FLT_EVAL_METHOD (which a
     compiler must define only in float.h).                                    */
@@ -58,21 +50,19 @@ __BEGIN_DECLS
     typedef long double float_t;
     typedef long double double_t;
 #else /* __FLT_EVAL_METHOD__ */
-    #error "Unsupported value of __FLT_EVAL_METHOD__."
+#   error "Unsupported value of __FLT_EVAL_METHOD__."
 #endif /* __FLT_EVAL_METHOD__ */
 
 #if defined(__GNUC__)
-    #define    HUGE_VAL     __builtin_huge_val()
-    #define    HUGE_VALF    __builtin_huge_valf()
-    #define    HUGE_VALL    __builtin_huge_vall()
-    #define    NAN          __builtin_nanf("0x7fc00000") 
-    #define  __MATH_H_ALWAYS_INLINE__ __attribute__ ((__always_inline__))
+#   define    HUGE_VAL     __builtin_huge_val()
+#   define    HUGE_VALF    __builtin_huge_valf()
+#   define    HUGE_VALL    __builtin_huge_vall()
+#   define    NAN          __builtin_nanf("0x7fc00000")
 #else
-    #define    HUGE_VAL     1e500
-    #define    HUGE_VALF    1e50f
-    #define    HUGE_VALL    1e5000L
-    #define    NAN          __nan()
-    #define  __MATH_H_ALWAYS_INLINE__
+#   define    HUGE_VAL     1e500
+#   define    HUGE_VALF    1e50f
+#   define    HUGE_VALL    1e5000L
+#   define    NAN          __nan()
 #endif
 
 #define INFINITY    HUGE_VALF
@@ -88,15 +78,26 @@ __BEGIN_DECLS
 #define FP_SUBNORMAL    5
 #define FP_SUPERNORMAL  6 /* legacy PowerPC support; this is otherwise unused */
 
-/*  fma() *function call* is more costly than equivalent (in-line) multiply
-    and add operations.  For single precision, the cost isn't too bad,
-    because we can fall back on higher precision hardware, with the necessary
-    range to handle infinite precision products. However expect the double
-    and long double fma to be at least an order of magnitude slower than a
-    separate multiply and add.                                                */
-#undef FP_FAST_FMA
-#undef FP_FAST_FMAF
-#undef FP_FAST_FMAL
+#if defined __ARM_VFPV4__
+/*  On these architectures, fma(), fmaf( ), and fmal( ) are generally about as
+    fast as (or faster than) separate multiply and add of the same operands.  */
+#   define FP_FAST_FMA     1
+#   define FP_FAST_FMAF    1
+#   define FP_FAST_FMAL    1
+#elif (defined __i386__ || defined __x86_64__) && defined __FMA__
+/*  When targeting the FMA ISA extension, fma() and fmaf( ) are generally
+    about as fast as (or faster than) separate multiply and add of the same
+    operands, but fmal( ) may be more costly.                                 */
+#   define FP_FAST_FMA     1
+#   define FP_FAST_FMAF    1
+#   undef  FP_FAST_FMAL
+#else
+/*  On these architectures, fma( ), fmaf( ), and fmal( ) function calls are
+    significantly more costly than separate multiply and add operations.      */
+#   undef  FP_FAST_FMA
+#   undef  FP_FAST_FMAF
+#   undef  FP_FAST_FMAL
+#endif
 
 /* The values returned by `ilogb' for 0 and NaN respectively. */
 #define FP_ILOGB0      (-2147483647 - 1)
@@ -122,12 +123,17 @@ extern int __math_errhandling(void);
  *                                                                            *
  ******************************************************************************/
 
-#if (defined __MAC_OS_X_VERSION_MIN_REQUIRED && __MAC_OS_X_VERSION_MIN_REQUIRED < 1080)
-# define __fpclassifyl __fpclassify
-# define __isnormall   __isnormal
-# define __isfinitel   __isfinite
-# define __isinfl      __isinf
-# define __isnanl      __isnan
+#if (defined __MAC_OS_X_VERSION_MIN_REQUIRED && __MAC_OS_X_VERSION_MIN_REQUIRED < 1080) || \
+    (defined __IPHONE_OS_VERSION_MIN_REQUIRED && __IPHONE_OS_VERSION_MIN_REQUIRED < 60000)
+#   if defined __i386__ || defined __x86_64__
+#       define __fpclassifyl __fpclassify
+#       define __isnormall   __isnormal
+#       define __isfinitel   __isfinite
+#       define __isinfl      __isinf
+#       define __isnanl      __isnan
+#   elif defined __arm__
+#       define __fpclassifyd __fpclassify
+#   endif
 #endif
 
 #define fpclassify(x)                                                    \
@@ -139,13 +145,13 @@ extern int __fpclassifyf(float);
 extern int __fpclassifyd(double);
 extern int __fpclassifyl(long double);
 
-#if defined(__GNUC__) && 0 == __FINITE_MATH_ONLY__
-    
-/*  These inline functions will fail to return expected results if unsafe
+#if (defined(__GNUC__) && 0 == __FINITE_MATH_ONLY__) || \
+    (defined __IPHONE_OS_VERSION_MIN_REQUIRED && __IPHONE_OS_VERSION_MIN_REQUIRED < 60000 && defined __arm__)
+/*  These inline functions may fail to return expected results if unsafe
     math optimizations like those enabled by -ffast-math are turned on.
     Thus, (somewhat surprisingly) you only get the fast inline
     implementations if such compiler options are NOT enabled.  This is
-    because the inline functions require the compiler to be adhereing to
+    because the inline functions require the compiler to be adhering to
     the standard in order to work properly; -ffast-math, among other
     things, implies that NaNs don't happen, which allows the compiler to
     optimize away checks like x != x, which might lead to things like
@@ -179,61 +185,61 @@ extern int __fpclassifyl(long double);
     : sizeof(x) == sizeof(double) ? __inline_signbitd((double)(x))       \
                                   : __inline_signbitl((long double)(x)))
 
-static __inline__ int __inline_isfinitef(float) __MATH_H_ALWAYS_INLINE__;
-static __inline__ int __inline_isfinited(double) __MATH_H_ALWAYS_INLINE__;
-static __inline__ int __inline_isfinitel(long double) __MATH_H_ALWAYS_INLINE__;
-static __inline__ int __inline_isinff(float) __MATH_H_ALWAYS_INLINE__;
-static __inline__ int __inline_isinfd(double) __MATH_H_ALWAYS_INLINE__;
-static __inline__ int __inline_isinfl(long double) __MATH_H_ALWAYS_INLINE__;
-static __inline__ int __inline_isnanf(float) __MATH_H_ALWAYS_INLINE__;
-static __inline__ int __inline_isnand(double) __MATH_H_ALWAYS_INLINE__;
-static __inline__ int __inline_isnanl(long double) __MATH_H_ALWAYS_INLINE__;
-static __inline__ int __inline_isnormalf(float) __MATH_H_ALWAYS_INLINE__;
-static __inline__ int __inline_isnormald(double) __MATH_H_ALWAYS_INLINE__;
-static __inline__ int __inline_isnormall(long double) __MATH_H_ALWAYS_INLINE__;
-static __inline__ int __inline_signbitf(float) __MATH_H_ALWAYS_INLINE__;
-static __inline__ int __inline_signbitd(double) __MATH_H_ALWAYS_INLINE__;
-static __inline__ int __inline_signbitl(long double) __MATH_H_ALWAYS_INLINE__;
+__header_always_inline int __inline_isfinitef(float);
+__header_always_inline int __inline_isfinited(double);
+__header_always_inline int __inline_isfinitel(long double);
+__header_always_inline int __inline_isinff(float);
+__header_always_inline int __inline_isinfd(double);
+__header_always_inline int __inline_isinfl(long double);
+__header_always_inline int __inline_isnanf(float);
+__header_always_inline int __inline_isnand(double);
+__header_always_inline int __inline_isnanl(long double);
+__header_always_inline int __inline_isnormalf(float);
+__header_always_inline int __inline_isnormald(double);
+__header_always_inline int __inline_isnormall(long double);
+__header_always_inline int __inline_signbitf(float);
+__header_always_inline int __inline_signbitd(double);
+__header_always_inline int __inline_signbitl(long double);
     
-static __inline__ int __inline_isfinitef(float __x) {
+__header_always_inline int __inline_isfinitef(float __x) {
     return __x == __x && __builtin_fabsf(__x) != __builtin_inff();
 }
-static __inline__ int __inline_isfinited(double __x) {
+__header_always_inline int __inline_isfinited(double __x) {
     return __x == __x && __builtin_fabs(__x) != __builtin_inf();
 }
-static __inline__ int __inline_isfinitel(long double __x) {
+__header_always_inline int __inline_isfinitel(long double __x) {
     return __x == __x && __builtin_fabsl(__x) != __builtin_infl();
 }
-static __inline__ int __inline_isinff(float __x) {
+__header_always_inline int __inline_isinff(float __x) {
     return __builtin_fabsf(__x) == __builtin_inff();
 }
-static __inline__ int __inline_isinfd(double __x) {
+__header_always_inline int __inline_isinfd(double __x) {
     return __builtin_fabs(__x) == __builtin_inf();
 }
-static __inline__ int __inline_isinfl(long double __x) {
+__header_always_inline int __inline_isinfl(long double __x) {
     return __builtin_fabsl(__x) == __builtin_infl();
 }
-static __inline__ int __inline_isnanf(float __x) {
+__header_always_inline int __inline_isnanf(float __x) {
     return __x != __x;
 }
-static __inline__ int __inline_isnand(double __x) {
+__header_always_inline int __inline_isnand(double __x) {
     return __x != __x;
 }
-static __inline__ int __inline_isnanl(long double __x) {
+__header_always_inline int __inline_isnanl(long double __x) {
     return __x != __x;
 }
-static __inline__ int __inline_signbitf(float __x) {
+__header_always_inline int __inline_signbitf(float __x) {
     union { float __f; unsigned int __u; } __u;
     __u.__f = __x;
     return (int)(__u.__u >> 31);
 }
-static __inline__ int __inline_signbitd(double __x) {
+__header_always_inline int __inline_signbitd(double __x) {
     union { double __f; unsigned long long __u; } __u;
     __u.__f = __x;
     return (int)(__u.__u >> 63);
 }
 #if defined __i386__ || defined __x86_64__
-static __inline__ int __inline_signbitl(long double __x) {
+__header_always_inline int __inline_signbitl(long double __x) {
     union {
         long double __ld;
         struct{ unsigned long long __m; unsigned short __sexp; } __p;
@@ -242,26 +248,27 @@ static __inline__ int __inline_signbitl(long double __x) {
     return (int)(__u.__p.__sexp >> 15);
 }
 #else
-static __inline__ int __inline_signbitl(long double __x) {
+__header_always_inline int __inline_signbitl(long double __x) {
     union { long double __f; unsigned long long __u;} __u;
     __u.__f = __x;
     return (int)(__u.__u >> 63);
 }
 #endif
-static __inline__ int __inline_isnormalf(float __x) {
+__header_always_inline int __inline_isnormalf(float __x) {
     return __inline_isfinitef(__x) && __builtin_fabsf(__x) >= __FLT_MIN__;
 }
-static __inline__ int __inline_isnormald(double __x) {
+__header_always_inline int __inline_isnormald(double __x) {
     return __inline_isfinited(__x) && __builtin_fabs(__x) >= __DBL_MIN__;
 }
-static __inline__ int __inline_isnormall(long double __x) {
+__header_always_inline int __inline_isnormall(long double __x) {
     return __inline_isfinitel(__x) && __builtin_fabsl(__x) >= __LDBL_MIN__;
 }
     
 #else /* defined(__GNUC__) && 0 == __FINITE_MATH_ONLY__ */
 
 /*  Implementations making function calls to fall back on when -ffast-math
-    or similar is specified.                                                  */
+    or similar is specified.  These are not available in iOS versions prior
+    to 6.0.  If you need them, you must target that version or later.         */
     
 #define isnormal(x)                                               \
     ( sizeof(x) == sizeof(float)  ? __isnormalf((float)(x))       \
@@ -488,7 +495,7 @@ extern long int lround(double);
 extern long int lroundl(long double);
     
 /*  long long is not part of C90. Make sure you are passing -std=c99 or
-    -std=gnu99 or better if you need these functions returning long longs     */
+    -std=gnu99 or higher if you need these functions returning long longs     */
 #if !(__DARWIN_NO_LONG_LONG)
 extern long long int llrintf(float);
 extern long long int llrint(double);
@@ -554,11 +561,12 @@ extern long double fmal(long double, long double, long double);
 #define islessgreater(x, y) __builtin_islessgreater((x),(y))
 #define isunordered(x, y) __builtin_isunordered((x),(y))
 
-/* Legacy BSD APIs: please use C99 INFINITY and NAN instead.                  */
-extern float __inff(void) __OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
-extern double __inf(void) __OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
-extern long double __infl(void) __OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
-extern float __nan(void) __OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
+/* Legacy BSD API: please use C99 INFINITY macro instead.                     */
+extern float __inff(void) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_9, __IPHONE_NA, __IPHONE_NA);
+extern double __inf(void) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_9, __IPHONE_NA, __IPHONE_NA);
+extern long double __infl(void) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_9, __IPHONE_NA, __IPHONE_NA);
+/* Implementation detail; please use the standard C NAN macro instead.        */
+extern float __nan(void) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 /******************************************************************************
  *  Reentrant variants of lgamma[fl]                                          *
@@ -572,7 +580,87 @@ extern long double lgammal_r(long double, int *) __OSX_AVAILABLE_STARTING(__MAC_
 #endif /* _REENTRANT */
 
 /******************************************************************************
- *  POSIX/UNIX extensions to C99                                              *
+ *  Apple extensions to the C standard                                        *
+ ******************************************************************************/
+
+/*  Because these functions are not specified by any relevant standard, they
+    are prefixed with __, which places them in the implementor's namespace, so
+    they should not conflict with any developer or third-party code.  If they
+    are added to a relevant standard in the future, un-prefixed names may be
+    added to the library and they may be moved out of this section of the
+    header.                                                                   
+ 
+    Because these functions are non-standard, they may not be available on non-
+    Apple platforms.                                                          */
+
+/*  __exp10(x) returns 10**x.  Edge cases match those of exp( ) and exp2( ).  */
+extern float __exp10f(float) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+extern double __exp10(double) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+
+/*  __sincos(x,sinp,cosp) computes the sine and cosine of x with a single
+    function call, storing the sine in the memory pointed to by sinp, and
+    the cosine in the memory pointed to by cosp. Edge cases match those of
+    separate calls to sin( ) and cos( ).                                      */
+__header_always_inline void __sincosf(float __x, float *__sinp, float *__cosp) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+__header_always_inline void __sincos(double __x, double *__sinp, double *__cosp) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+
+/*  __sinpi(x) returns the sine of pi times x; __cospi(x) and __tanpi(x) return
+    the cosine and tangent, respectively.  These functions can produce a more
+    accurate answer than expressions of the form sin(M_PI * x) because they
+    avoid any loss of precision that results from rounding the result of the
+    multiplication M_PI * x.  They may also be significantly more efficient in
+    some cases because the argument reduction for these functions is easier
+    to compute.  Consult the man pages for edge case details.                 */
+extern float __cospif(float) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+extern double __cospi(double) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+extern float __sinpif(float) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+extern double __sinpi(double) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+extern float __tanpif(float) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+extern double __tanpi(double) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+
+/*  __sincospi(x,sinp,cosp) computes the sine and cosine of pi times x with a
+    single function call, storing the sine in the memory pointed to by sinp,
+    and the cosine in the memory pointed to by cosp.  Edge cases match those
+    of separate calls to __sinpi( ) and __cospi( ), and are documented in the
+    man pages.                                                                */
+__header_always_inline void __sincospif(float __x, float *__sinp, float *__cosp) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+__header_always_inline void __sincospi(double __x, double *__sinp, double *__cosp) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+
+/*  Implementation details of __sincos and __sincospi allowing them to return
+    two results while allowing the compiler to optimize away unnecessary load-
+    store traffic.  Although these interfaces are exposed in the math.h header
+    to allow compilers to generate better code, users should call __sincos[f]
+    and __sincospi[f] instead and allow the compiler to emit these calls.     */
+struct __float2 { float __sinval; float __cosval; };
+struct __double2 { double __sinval; double __cosval; };
+
+extern struct __float2 __sincosf_stret(float);
+extern struct __double2 __sincos_stret(double);
+extern struct __float2 __sincospif_stret(float);
+extern struct __double2 __sincospi_stret(double);
+
+__header_always_inline void __sincosf(float __x, float *__sinp, float *__cosp) {
+    const struct __float2 __stret = __sincosf_stret(__x);
+    *__sinp = __stret.__sinval; *__cosp = __stret.__cosval;
+}
+
+__header_always_inline void __sincos(double __x, double *__sinp, double *__cosp) {
+    const struct __double2 __stret = __sincos_stret(__x);
+    *__sinp = __stret.__sinval; *__cosp = __stret.__cosval;
+}
+
+__header_always_inline void __sincospif(float __x, float *__sinp, float *__cosp) {
+    const struct __float2 __stret = __sincospif_stret(__x);
+    *__sinp = __stret.__sinval; *__cosp = __stret.__cosval;
+}
+
+__header_always_inline void __sincospi(double __x, double *__sinp, double *__cosp) {
+    const struct __double2 __stret = __sincospi_stret(__x);
+    *__sinp = __stret.__sinval; *__cosp = __stret.__cosval;
+}
+
+/******************************************************************************
+ *  POSIX/UNIX extensions to the C standard                                   *
  ******************************************************************************/
 
 #if __DARWIN_C_LEVEL >= 199506L
@@ -605,7 +693,7 @@ extern int signgam;
 #endif /* __DARWIN_C_LEVEL >= 199506L */
 
 /******************************************************************************
- *  Legacy BSD extensions to C99                                              *
+ *  Legacy BSD extensions to the C standard                                   *
  ******************************************************************************/
 
 #if __DARWIN_C_LEVEL >= __DARWIN_C_FULL
@@ -620,18 +708,18 @@ extern int signgam;
 #define	TLOSS		5
 #define	PLOSS		6
 
-/* Legacy BSD API: please use C99 lrint() instead.                            */
-extern long int rinttol(double) __OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
-/* Legacy BSD API: please use C99 lround() instead.                           */
-extern long int roundtol(double) __OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
-/* Legacy BSD API: please use C99 remainder() instead.                        */
-extern double drem(double, double) __OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
-/* Legacy BSD API: please use C99 isfinite() instead.                         */
-extern int finite(double) __OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
-/* Legacy BSD API: please use C99 tgamma() instead.                           */
-extern double gamma(double) __OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
+/* Legacy BSD API: please use C99 lrint( ) instead.                           */
+extern long int rinttol(double) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_9, __IPHONE_NA, __IPHONE_NA);
+/* Legacy BSD API: please use C99 lround( ) instead.                          */
+extern long int roundtol(double) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_9, __IPHONE_NA, __IPHONE_NA);
+/* Legacy BSD API: please use C99 remainder( ) instead.                       */
+extern double drem(double, double) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_9, __IPHONE_NA, __IPHONE_NA);
+/* Legacy BSD API: please use C99 isfinite( ) instead.                        */
+extern int finite(double) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_9, __IPHONE_NA, __IPHONE_NA);
+/* Legacy BSD API: please use C99 tgamma( ) instead.                          */
+extern double gamma(double) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_9, __IPHONE_NA, __IPHONE_NA);
 /* Legacy BSD API: please use C99 frexp( ) instead.                           */
-extern double significand(double) __OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
+extern double significand(double) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_9, __IPHONE_NA, __IPHONE_NA);
 
 #if !defined __cplusplus
 struct exception {
@@ -642,7 +730,7 @@ struct exception {
     double retval;
 };
 /* Legacy API: does not do anything useful.                                   */
-extern int matherr(struct exception *) __OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
+extern int matherr(struct exception *) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_9, __IPHONE_NA, __IPHONE_NA);
 #endif /* !defined __cplusplus */
 #endif /* __DARWIN_C_LEVEL >= __DARWIN_C_FULL */
 

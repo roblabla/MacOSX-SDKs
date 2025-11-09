@@ -3,7 +3,7 @@
 	
 	Framework:  VideoToolbox
  
-    Copyright 2007-2012 Apple Inc. All rights reserved.
+    Copyright 2007-2013 Apple Inc. All rights reserved.
   
 	Standard Video Toolbox decompression properties.
 */
@@ -12,6 +12,7 @@
 #define VTDECOMPRESSIONPROPERTIES_H
 
 #include <CoreMedia/CMBase.h>
+#include <VideoToolbox/VTBase.h>
 
 #include <CoreFoundation/CoreFoundation.h>
 
@@ -50,7 +51,7 @@ extern "C"
 		This pixel buffer pool is always compatible with the client's pixel buffer attributes
 		as specified when calling VTDecompressionSessionCreate.
 */
-VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_PixelBufferPool AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // Read-only, CVPixelBufferPool
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_PixelBufferPool VT_AVAILABLE_STARTING(10_8); // Read-only, CVPixelBufferPool
 
 /*!
 	@constant	kVTDecompressionPropertyKey_PixelBufferPoolIsShared
@@ -61,7 +62,31 @@ VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_PixelBufferPool AVAILABL
 		This is false if separate pools are used because the pixel buffer attributes specified 
 		by the video decoder and the client were incompatible.
 */
-VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_PixelBufferPoolIsShared AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // Read-only, CFBoolean
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_PixelBufferPoolIsShared VT_AVAILABLE_STARTING(10_8); // Read-only, CFBoolean
+
+/*!
+	@constant	kVTDecompressionPropertyKey_OutputPoolRequestedMinimumBufferCount
+	@abstract
+		Requests that the VTDecompressionSession use the value provided as a minimum buffer
+		count for its output CVPixelBufferPool, not releasing buffers while the number in
+		use is below this level.
+	@discussion
+		This property effectively requests that the kCVPixelBufferPoolMinimumBufferCountKey key
+		be used for the creation of the output CVPixelBufferPool.
+		
+		For general playback cases, standard CVPixelBufferPool age-out behaviour should be 
+		sufficient and this property should not be needed.  This property should only be used in 
+		unusual playback scenarios where a peak pool level is known, and the potential 
+		memory overhead is an acceptable tradeoff for avoiding possible buffer reallocation.
+		
+		Setting this property to NULL or passing in the value 0 will clear this setting and
+		remove the minimum buffer count.
+		
+		Setting this property while a VTDecompressionSession is in use will result in the 
+		creation of a new CVPixelBufferPool. This will cause new buffers to be allocated, and 
+		existing buffers to be deallocated when they are released.
+*/
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_OutputPoolRequestedMinimumBufferCount VT_AVAILABLE_STARTING(10_9); // Read/Write, CFNumberRef
 
 #pragma mark Asynchronous state
 
@@ -75,7 +100,7 @@ VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_PixelBufferPoolIsShared 
 	@discussion
 		This number may decrease asynchronously as frames are output.
 */
-VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_NumberOfFramesBeingDecoded AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // Read-only, CFNumber. 
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_NumberOfFramesBeingDecoded VT_AVAILABLE_STARTING(10_8); // Read-only, CFNumber. 
 
 /*!
 	@constant	kVTDecompressionPropertyKey_MinOutputPresentationTimeStampOfFramesBeingDecoded
@@ -84,7 +109,7 @@ VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_NumberOfFramesBeingDecod
 	@discussion
 		This may change asynchronously as frames are output.
 */
-VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_MinOutputPresentationTimeStampOfFramesBeingDecoded AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // Read-only, CMTime as CFDictionary.  
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_MinOutputPresentationTimeStampOfFramesBeingDecoded VT_AVAILABLE_STARTING(10_8); // Read-only, CMTime as CFDictionary.  
 
 /*!
 	@constant	kVTDecompressionPropertyKey_MaxOutputPresentationTimeStampOfFramesBeingDecoded
@@ -93,7 +118,7 @@ VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_MinOutputPresentationTim
 	@discussion
 		This may change asynchronously as frames are output.
 */
-VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_MaxOutputPresentationTimeStampOfFramesBeingDecoded AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // Read-only, CMTime as CFDictionary.  
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_MaxOutputPresentationTimeStampOfFramesBeingDecoded VT_AVAILABLE_STARTING(10_8); // Read-only, CMTime as CFDictionary.  
 	
 #pragma mark Content
 
@@ -107,7 +132,54 @@ VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_MaxOutputPresentationTim
 	@discussion
 		This is an optional property for video decoders to implement.
 */
-VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_ContentHasInterframeDependencies AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // Read-only, CFBoolean
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_ContentHasInterframeDependencies VT_AVAILABLE_STARTING(10_8); // Read-only, CFBoolean
+
+#pragma mark Hardware acceleration
+
+/*!
+	@constant	kVTVideoDecoderSpecification_EnableHardwareAcceleratedVideoDecoder
+	@abstract
+		If set to kCFBooleanTrue, the VideoToolbox will use a hardware accelerated video decoder if available.  If set to
+		kCFBooleanFalse, hardware decode will never be used.
+	@discussion
+		This key is set in the decoderSpecification passed in to VTDecompressionSessionCreate.  Set it
+		to kCFBooleanTrue to allow hardware accelerated decode.  To specifically prevent hardware decode,
+		this property can be set to kCFBooleanFalse.
+		This is useful for clients doing realtime decode operations to allow the VideoToolbox
+		to choose the optimal decode path.
+*/
+VT_EXPORT const CFStringRef kVTVideoDecoderSpecification_EnableHardwareAcceleratedVideoDecoder VT_AVAILABLE_STARTING(10_9); // CFBoolean, Optional
+
+/*!
+	@constant	kVTVideoDecoderSpecification_RequireHardwareAcceleratedVideoDecoder
+	@abstract
+		If set to kCFBooleanTrue, the VideoToolbox will try to allocate a hardware accelerated decoder and
+		return an error if that isn't possible.
+		Setting this key automatically implies kVTVideoDecoderSpecification_EnableHardwareAcceleratedVideoDecoder --
+		there is no need to set both and the Enable key does nothing if the Require key is set.
+	@discussion
+		This key is set in the decoderSpecification passed in to VTDecompressionSessionCreate.  Set it
+		to kCFBooleanTrue to require hardware accelerated decode.  If hardware acceleration is not
+		possible, the VTDecompressionSessionCreate call will fail.
+		This key is useful for clients that have their own software decode implementation or
+		those that may want to configure software and hardware decode sessions differently.
+		Hardware acceleration may be unavailable for a number of reasons.  A few common cases are:
+			- the machine does not have hardware acceleration capabilities
+			- the requested decoding format or configuration is not supported
+			- the hardware decode resources on the machine are busy
+*/
+VT_EXPORT const CFStringRef kVTVideoDecoderSpecification_RequireHardwareAcceleratedVideoDecoder VT_AVAILABLE_STARTING(10_9); // CFBoolean, Optional
+
+/*!
+	@constant	kVTDecompressionPropertyKey_UsingHardwareAcceleratedVideoDecoder
+	@abstract
+		If set to kCFBooleanTrue, a hardware accelerated video decoder is being used.
+	@discussion
+		You can query this property using VTSessionCopyProperty after you have enabled hardware
+		accelerated decode using kVTVideoDecoderSpecification_EnableHardwareAcceleratedVideoDecoder
+		to see if a hardware accelerated decoder was selected.
+*/
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_UsingHardwareAcceleratedVideoDecoder VT_AVAILABLE_STARTING(10_9) ; // CFBoolean, Read; assumed false by default
 
 #pragma mark Decoder behavior
 
@@ -121,7 +193,7 @@ VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_ContentHasInterframeDepe
 	@discussion
 		This is an optional property for video decoders to implement.
 */
-VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_ThreadCount AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // Read/write, CFNumber
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_ThreadCount VT_AVAILABLE_STARTING(10_8); // Read/write, CFNumber
 
 // Standard properties about quality of service.
 // By default, a decoder should completely decode every frame at full resolution.
@@ -135,12 +207,12 @@ VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_ThreadCount AVAILABLE_MA
 		This is an optional property for video decoders to implement.
 		Decoders should only accept the modes that they will implement.
 */
-VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_FieldMode AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // Read/write, CFString, one of
-VT_EXPORT const CFStringRef kVTDecompressionProperty_FieldMode_BothFields AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
-VT_EXPORT const CFStringRef kVTDecompressionProperty_FieldMode_TopFieldOnly AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
-VT_EXPORT const CFStringRef kVTDecompressionProperty_FieldMode_BottomFieldOnly AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
-VT_EXPORT const CFStringRef kVTDecompressionProperty_FieldMode_SingleField AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;  // Most appropriate of either TopFieldOnly or BottomFieldOnly
-VT_EXPORT const CFStringRef kVTDecompressionProperty_FieldMode_DeinterlaceFields AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_FieldMode VT_AVAILABLE_STARTING(10_8); // Read/write, CFString, one of
+VT_EXPORT const CFStringRef kVTDecompressionProperty_FieldMode_BothFields VT_AVAILABLE_STARTING(10_8);
+VT_EXPORT const CFStringRef kVTDecompressionProperty_FieldMode_TopFieldOnly VT_AVAILABLE_STARTING(10_8);
+VT_EXPORT const CFStringRef kVTDecompressionProperty_FieldMode_BottomFieldOnly VT_AVAILABLE_STARTING(10_8);
+VT_EXPORT const CFStringRef kVTDecompressionProperty_FieldMode_SingleField VT_AVAILABLE_STARTING(10_8);  // Most appropriate of either TopFieldOnly or BottomFieldOnly
+VT_EXPORT const CFStringRef kVTDecompressionProperty_FieldMode_DeinterlaceFields VT_AVAILABLE_STARTING(10_8);
 
 /*!
 	@constant	kVTDecompressionPropertyKey_DeinterlaceMode
@@ -152,9 +224,9 @@ VT_EXPORT const CFStringRef kVTDecompressionProperty_FieldMode_DeinterlaceFields
 		This property is only applicable if kVTDecompressionPropertyKey_FieldMode 
 		is set to kVTDecompressionProperty_FieldMode_DeinterlaceFields.
 */
-VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_DeinterlaceMode AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;   // Read/write, CFString; only applicable if kVTDecompressionPropertyKey_FieldMode is kVTDecompressionProperty_FieldMode_DeinterlaceFields; supported values may include:
-VT_EXPORT const CFStringRef kVTDecompressionProperty_DeinterlaceMode_VerticalFilter AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;   // apply 0.25-0.50-0.25 vertical filter to individual interlaced frames; default mode
-VT_EXPORT const CFStringRef kVTDecompressionProperty_DeinterlaceMode_Temporal AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;	// apply filter that makes use of a window of multiple frames to generate deinterlaced results, and provides a better result at the expense of a pipeline delay; this mode is only used if kVTDecodeFrame_EnableTemporalProcessing is set, otherwise a non-temporal mode (eg, VerticalFilter) will be used instead
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_DeinterlaceMode VT_AVAILABLE_STARTING(10_8);   // Read/write, CFString; only applicable if kVTDecompressionPropertyKey_FieldMode is kVTDecompressionProperty_FieldMode_DeinterlaceFields; supported values may include:
+VT_EXPORT const CFStringRef kVTDecompressionProperty_DeinterlaceMode_VerticalFilter VT_AVAILABLE_STARTING(10_8);   // apply 0.25-0.50-0.25 vertical filter to individual interlaced frames; default mode
+VT_EXPORT const CFStringRef kVTDecompressionProperty_DeinterlaceMode_Temporal VT_AVAILABLE_STARTING(10_8);	// apply filter that makes use of a window of multiple frames to generate deinterlaced results, and provides a better result at the expense of a pipeline delay; this mode is only used if kVTDecodeFrame_EnableTemporalProcessing is set, otherwise a non-temporal mode (eg, VerticalFilter) will be used instead
 
 /*!
 	@constant	kVTDecompressionPropertyKey_ReducedResolutionDecode
@@ -165,9 +237,9 @@ VT_EXPORT const CFStringRef kVTDecompressionProperty_DeinterlaceMode_Temporal AV
 		Decoders that only support a fixed set of resolutions should pick the smallest resolution 
 		greater than or equal to the requested width x height.
 */
-VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_ReducedResolutionDecode AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // Read/write, CFDictionary containing width and height keys and CFNumber values:
-VT_EXPORT const CFStringRef kVTDecompressionResolutionKey_Width AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // CFNumber
-VT_EXPORT const CFStringRef kVTDecompressionResolutionKey_Height AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // CFNumber
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_ReducedResolutionDecode VT_AVAILABLE_STARTING(10_8); // Read/write, CFDictionary containing width and height keys and CFNumber values:
+VT_EXPORT const CFStringRef kVTDecompressionResolutionKey_Width VT_AVAILABLE_STARTING(10_8); // CFNumber
+VT_EXPORT const CFStringRef kVTDecompressionResolutionKey_Height VT_AVAILABLE_STARTING(10_8); // CFNumber
 
 /*!
 	@constant	kVTDecompressionPropertyKey_ReducedCoefficientDecode
@@ -178,7 +250,7 @@ VT_EXPORT const CFStringRef kVTDecompressionResolutionKey_Height AVAILABLE_MAC_O
 		Only decoders for which such approximations make sense should implement this property.
 		The meaning of the number of coefficients will be decoder-specific.
 */
-VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_ReducedCoefficientDecode AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // Read/write, CFNumber
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_ReducedCoefficientDecode VT_AVAILABLE_STARTING(10_8); // Read/write, CFNumber
 
 /*!
 	@constant	kVTDecompressionPropertyKey_ReducedFrameDelivery
@@ -194,7 +266,7 @@ VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_ReducedCoefficientDecode
 		If the decoder does not support this property directly, but reports that the content has 
 		no interframe dependencies, the video toolbox may step in and perform simple frame dropping.
 */
-VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_ReducedFrameDelivery AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // Read/write, CFNumber in range [0.0,1.0].
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_ReducedFrameDelivery VT_AVAILABLE_STARTING(10_8); // Read/write, CFNumber in range [0.0,1.0].
 
 /*!
 	@constant	kVTDecompressionPropertyKey_OnlyTheseFrames
@@ -206,11 +278,11 @@ VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_ReducedFrameDelivery AVA
 		this property, the ReducedFrameDelivery is the proportion of the frames selected by this property: 
 		0.25 and IFrames would indicate that only one I frame in every four should be delivered.
 */
-VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_OnlyTheseFrames AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // Read/write, CFString, supported values may include:
-VT_EXPORT const CFStringRef kVTDecompressionProperty_OnlyTheseFrames_AllFrames AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
-VT_EXPORT const CFStringRef kVTDecompressionProperty_OnlyTheseFrames_NonDroppableFrames AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
-VT_EXPORT const CFStringRef kVTDecompressionProperty_OnlyTheseFrames_IFrames AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
-VT_EXPORT const CFStringRef kVTDecompressionProperty_OnlyTheseFrames_KeyFrames AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_OnlyTheseFrames VT_AVAILABLE_STARTING(10_8); // Read/write, CFString, supported values may include:
+VT_EXPORT const CFStringRef kVTDecompressionProperty_OnlyTheseFrames_AllFrames VT_AVAILABLE_STARTING(10_8);
+VT_EXPORT const CFStringRef kVTDecompressionProperty_OnlyTheseFrames_NonDroppableFrames VT_AVAILABLE_STARTING(10_8);
+VT_EXPORT const CFStringRef kVTDecompressionProperty_OnlyTheseFrames_IFrames VT_AVAILABLE_STARTING(10_8);
+VT_EXPORT const CFStringRef kVTDecompressionProperty_OnlyTheseFrames_KeyFrames VT_AVAILABLE_STARTING(10_8);
 
 
 /*!
@@ -225,7 +297,7 @@ VT_EXPORT const CFStringRef kVTDecompressionProperty_OnlyTheseFrames_KeyFrames A
 		decreasing qualities of service.  Clients may work their way down these tiers until they are 
 		able to keep up with the frame rate.
 */
-VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_SuggestedQualityOfServiceTiers AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // Read-only, CFArray of CFDictionaries containing property key/value pairs
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_SuggestedQualityOfServiceTiers VT_AVAILABLE_STARTING(10_8); // Read-only, CFArray of CFDictionaries containing property key/value pairs
 
 /*!
 	@constant	kVTDecompressionPropertyKey_SupportedPixelFormatsOrderedByQuality
@@ -236,7 +308,7 @@ VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_SuggestedQualityOfServic
 		This property value is an array containing CFNumbers holding CMPixelFormatType values,
 		ordered by quality from best to worse.
 */
-VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_SupportedPixelFormatsOrderedByQuality AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // Read-only, CFArray[CFNumber(CMPixelFormatType)] ordered best to worst, optional
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_SupportedPixelFormatsOrderedByQuality VT_AVAILABLE_STARTING(10_8); // Read-only, CFArray[CFNumber(CMPixelFormatType)] ordered best to worst, optional
 
 /*!
 	@constant	kVTDecompressionPropertyKey_SupportedPixelFormatsOrderedByPerformance
@@ -247,7 +319,7 @@ VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_SupportedPixelFormatsOrd
 		This property value is an array containing CFNumbers holding CMPixelFormatType values,
 		ordered by speed from fast to slow.
 */
-VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_SupportedPixelFormatsOrderedByPerformance AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // Read-only, CFArray[CFNumber(CMPixelFormatType)] ordered fast to slow, optional
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_SupportedPixelFormatsOrderedByPerformance VT_AVAILABLE_STARTING(10_8); // Read-only, CFArray[CFNumber(CMPixelFormatType)] ordered fast to slow, optional
 
 /*!
 	@constant	kVTDecompressionPropertyKey_PixelFormatsWithReducedResolutionSupport
@@ -257,7 +329,7 @@ VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_SupportedPixelFormatsOrd
 		This is an optional property for video decoders to implement.
 		This property value is an array containing CFNumbers holding CMPixelFormatType values.
 */
-VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_PixelFormatsWithReducedResolutionSupport AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // Read-only, CFArray[CFNumber(CMPixelFormatType)], optional
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_PixelFormatsWithReducedResolutionSupport VT_AVAILABLE_STARTING(10_8); // Read-only, CFArray[CFNumber(CMPixelFormatType)], optional
 
 #pragma mark Post-decompression processing
 
@@ -272,7 +344,7 @@ VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_PixelFormatsWithReducedR
 		This property is implemented by the video toolbox.
 		This property value is a CFDictionary containing properties from VTPixelTransferProperties.h.
 */
-VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_PixelTransferProperties AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // Read/Write, CFDictionary containing properties from VTPixelTransferProperties.h.
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_PixelTransferProperties VT_AVAILABLE_STARTING(10_8); // Read/Write, CFDictionary containing properties from VTPixelTransferProperties.h.
 
 
 #pragma pack(pop)

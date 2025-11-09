@@ -3,7 +3,7 @@
  
      Contains:   Master include for QD private framework
  
-     Version:    Quickdraw-285~150
+     Version:    Quickdraw-291~1
  
      Copyright:  © 1999-2008 by Apple, Inc., all rights reserved.
  
@@ -24,9 +24,6 @@
 #ifndef __COREGRAPHICS__
 #include <CoreGraphics/CoreGraphics.h>
 #endif
-
-
-#include <ColorSync/ColorSyncDeprecated.h>
 
 #ifndef __ATS__
 #include <ATS/ATS.h>

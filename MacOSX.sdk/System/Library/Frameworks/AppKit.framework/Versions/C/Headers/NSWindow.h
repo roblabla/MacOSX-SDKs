@@ -1,7 +1,7 @@
 /*
 	NSWindow.h
 	Application Kit
-	Copyright (c) 1994-2012, Apple Inc.
+	Copyright (c) 1994-2013, Apple Inc.
 	All rights reserved.
 */
 
@@ -15,6 +15,7 @@
 #import <AppKit/NSUserInterfaceValidation.h>
 #import <AppKit/NSUserInterfaceItemIdentification.h>
 #import <AppKit/NSAnimation.h>
+#import <AppKit/NSAppearance.h>
 
 @class NSButton, NSButtonCell, NSColor, NSImage, NSPasteboard, NSScreen;
 @class NSNotification, NSText, NSView, NSMutableSet, NSSet, NSDate;
@@ -45,7 +46,7 @@ enum {
  */
 enum {
     NSUnscaledWindowMask		= 1 << 11
-};
+} NS_ENUM_DEPRECATED_MAC(10_0, 10_9);
 
 /* Specifies a window whose titlebar and toolbar have a unified look - that is, a continuous background
 */
@@ -59,6 +60,12 @@ enum {
     NSFullScreenWindowMask      = 1 << 14
 };
 #endif
+
+// Additional NSModalResponse values
+enum {
+    NSModalResponseOK		= 1,
+    NSModalResponseCancel	= 0
+} NS_ENUM_AVAILABLE_MAC(10_9);
 
 
 /* used with NSRunLoop's performSelector:target:argument:order:modes: */
@@ -141,6 +148,11 @@ enum {
 };
 #endif
 
+typedef NS_OPTIONS(NSUInteger, NSWindowOcclusionState) {
+    // If set, at least part of the window is visible. If not set, the entire window is occluded. Windows with non-rectangular shapes may be completely occluded on screen but still count as visible, if their bounding box falls into a visible region. Windows that are completely transparent may also still count as visible.
+    NSWindowOcclusionStateVisible = 1UL << 1,
+} NS_ENUM_AVAILABLE_MAC(10_9);
+
 typedef NSUInteger NSWindowNumberListOptions;
 
 #define NSNormalWindowLevel              kCGNormalWindowLevel
@@ -178,14 +190,13 @@ enum {
     NSWindowFullScreenButton
 };
 #endif
-
 typedef NSUInteger NSWindowButton;
 
 @class NSWindowAuxiliary;
 @class NSEvent;
 @class NSWindowController;
 
-@interface NSWindow : NSResponder <NSAnimatablePropertyContainer, NSUserInterfaceValidations, NSUserInterfaceItemIdentification>
+@interface NSWindow : NSResponder <NSAnimatablePropertyContainer, NSUserInterfaceValidations, NSUserInterfaceItemIdentification, NSAppearanceCustomization>
 {
     /*All instance variables are private*/
     NSRect              _frame;
@@ -213,7 +224,7 @@ typedef NSUInteger NSWindowButton;
     NSURL		*_representedURL;
     NSSize		*_sizeLimits;
     NSString		*_frameSaveName;
-    NSSet		*_regDragTypes;
+    id                  _reservedWindow2;
     struct __wFlags {
         unsigned int        backing:2;
         unsigned int        visible:1;
@@ -259,7 +270,8 @@ typedef NSUInteger NSWindowButton;
         unsigned int        autodisplay:1;
         unsigned int        tossedFirstEvent:1;
         unsigned int        isImageCache:1;
-        unsigned int        _unused:3;
+        unsigned int        autolayoutEngagedSomewhere:1;
+        unsigned int        _unused:2;
         unsigned int        keyViewSelectionDirection:2;
         unsigned int        defaultButtonCellKETemporarilyDisabled:1;
         unsigned int        defaultButtonCellKEDisabled:1;
@@ -271,7 +283,7 @@ typedef NSUInteger NSWindowButton;
         unsigned int        makingFirstResponderForMouseDown:1;
         unsigned int        needsZoom:1;
         unsigned int 	    sentWindowNeedsDisplayMsg:1;
-        unsigned int        liveResizeActive:1;
+        unsigned int        unused:1;
     }                   _wFlags;
     id			_defaultButtonCell;
     NSView 		*_initialFirstResponder;
@@ -595,8 +607,29 @@ If the url represents a filename or other resource with a known icon, that icon 
 - (id)windowController;
 - (void)setWindowController:(NSWindowController *)windowController;
 
+/*
+ This API presents modal-sheets on this window. It replaces NSApp's -beginSheet:modalForWindow:modalDelegate:didEndSelector:contextInfo:.
+ 
+ If the window already has a presented sheet, it will queue up sheets presented after that. Once the presented sheet is dismissed, the next queued sheet will be presented, and so forth.
+ Critical sheets will skip this queuing process and be immediately presented on top of existing sheets. The presented sheet will be temporarily disabled and be able to be interacted with after the critical sheet is dismissed, and will then continue as normal. Critical sheets should only be used for time-critical or important events, when the presentation of the sheet needs to be guaranteed (Critical Alerts will automatically use this API).
+*/
+#if NS_BLOCKS_AVAILABLE
+- (void)beginSheet:(NSWindow *)sheetWindow completionHandler:(void (^)(NSModalResponse returnCode))handler NS_AVAILABLE_MAC(10_9);
+- (void)beginCriticalSheet:(NSWindow *)sheetWindow completionHandler:(void (^)(NSModalResponse returnCode))handler NS_AVAILABLE_MAC(10_9);
+#endif
+- (void)endSheet:(NSWindow *)sheetWindow NS_AVAILABLE_MAC(10_9);
+- (void)endSheet:(NSWindow *)sheetWindow returnCode:(NSModalResponse)returnCode NS_AVAILABLE_MAC(10_9);
+- (NSArray *)sheets NS_AVAILABLE_MAC(10_9); // An ordered array of the sheets on the window. This consists of the presented sheets in top-to-bottom order, followed by queued sheets in the order they were queued. This does not include nested/sub-sheets.
+- (NSWindow *)attachedSheet; // Returns the top-most sheet if there is one or more sheets, or nil if there is no sheet.
+
 - (BOOL)isSheet;
-- (NSWindow *)attachedSheet;
+/* Returns the window that the sheet is directly attached to. This is based on the logical attachment of the sheet, not appearance.
+ This relationship exists starting when the sheet is begun (using NSApplication's -beginSheet:modalForWindow:modalDelegate:didEndSelector:contextInfo: or NSWindow's -beginSheet:completionHandler:), and ending once it is ordered out.
+ 
+ Returns nil if the window is not a sheet or has no sheet parent.
+ */
+- (NSWindow *)sheetParent NS_AVAILABLE_MAC(10_9);
+
 
 + (NSButton *)standardWindowButton:(NSWindowButton)b forStyleMask:(NSUInteger)styleMask;
 - (NSButton *)standardWindowButton:(NSWindowButton)b;
@@ -635,6 +668,8 @@ If the url represents a filename or other resource with a known icon, that icon 
 /* windowNumberAtPoint:belowWindowWithWindowNumber: returns the number of the frontmost window that would be hit by a mouseDown at the screen location "point".  "windowNum" can be specified to exclude a given window along with all windows above it, and may belong to any application.  If no windows are to be excluded, specify 0 for "windowNum".  The windowNumber returned may correspond to a window in another application.    
 */
 + (NSInteger)windowNumberAtPoint:(NSPoint)point belowWindowWithWindowNumber:(NSInteger)windowNumber NS_AVAILABLE_MAC(10_6);
+
+- (NSWindowOcclusionState)occlusionState NS_AVAILABLE_MAC(10_9);
 
 @end
 
@@ -720,6 +755,12 @@ If the url represents a filename or other resource with a known icon, that icon 
 */
 - (void)window:(NSWindow *)window startCustomAnimationToExitFullScreenWithDuration:(NSTimeInterval)duration NS_AVAILABLE_MAC(10_7);
 
+/* customWindowsToEnterFullScreenForWindow:onScreen: will be called in place of customWindowsToEnterFullScreenForWindow: if both are implemented */
+- (NSArray *)customWindowsToEnterFullScreenForWindow:(NSWindow *)window onScreen:(NSScreen *)screen NS_AVAILABLE_MAC(10_9);
+
+/* window:startCustomAnimationToEnterFullScreenOnScreen:withDuration: will be called in place of window:startCustomAnimationToEnterFullScreenWithDuration: if both are implemented */
+- (void)window:(NSWindow *)window startCustomAnimationToEnterFullScreenOnScreen:(NSScreen *)screen withDuration:(NSTimeInterval)duration NS_AVAILABLE_MAC(10_9);
+
 /* In some cases, the transition to exit fullscreen will fail, due to being in the midst of handling some other animation or user gesture.  We will attempt to minimize these cases, but believe there is a need for failure handling.  This method indicates that there was an error, and the application should clean up any work it may have done to prepare to exit fullscreen.  This message will be sent whether or not the delegate indicated a custom animation by returning non-nil from  customWindowsToExitFullScreenForWindow:.
 */
 - (void)windowDidFailToExitFullScreen:(NSWindow *)window NS_AVAILABLE_MAC(10_7);
@@ -768,7 +809,7 @@ If the url represents a filename or other resource with a known icon, that icon 
 - (void)windowDidEnterVersionBrowser:(NSNotification *)notification   NS_AVAILABLE_MAC(10_7);
 - (void)windowWillExitVersionBrowser:(NSNotification *)notification   NS_AVAILABLE_MAC(10_7);
 - (void)windowDidExitVersionBrowser:(NSNotification *)notification   NS_AVAILABLE_MAC(10_7);
-
+- (void)windowDidChangeOcclusionState:(NSNotification *)notification NS_AVAILABLE_MAC(10_9);
 @end
 
 
@@ -814,3 +855,5 @@ APPKIT_EXTERN NSString * const NSWindowWillEnterVersionBrowserNotification NS_AV
 APPKIT_EXTERN NSString * const NSWindowDidEnterVersionBrowserNotification NS_AVAILABLE_MAC(10_7);
 APPKIT_EXTERN NSString * const NSWindowWillExitVersionBrowserNotification NS_AVAILABLE_MAC(10_7);
 APPKIT_EXTERN NSString * const NSWindowDidExitVersionBrowserNotification NS_AVAILABLE_MAC(10_7);
+/* Upon receiving this notification, you can query the NSWindow for its current occlusion state. Note that this only notifies about changes in the state of the occlusion, not when the occlusion region changes. You can use this notification to increase responsiveness and save power, by halting any expensive calculations that the user can not see. */
+APPKIT_EXTERN NSString * const NSWindowDidChangeOcclusionStateNotification NS_AVAILABLE_MAC(10_9);

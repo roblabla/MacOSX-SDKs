@@ -1,6 +1,6 @@
 /*
         NSTextList.h
-        Copyright (c) 2004-2012, Apple Inc.
+        Copyright (c) 2004-2013, Apple Inc.
         All rights reserved.
 
         Class to represent text lists.

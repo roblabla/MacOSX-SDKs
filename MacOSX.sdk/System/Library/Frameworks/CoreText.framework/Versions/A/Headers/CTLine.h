@@ -21,7 +21,8 @@
 #include <CoreFoundation/CFArray.h>
 #include <CoreFoundation/CFAttributedString.h>
 #include <CoreGraphics/CGContext.h>
-#include <AvailabilityMacros.h>
+
+CF_IMPLICIT_BRIDGING_ENABLED
 
 #if defined(__cplusplus)
 extern "C" {
@@ -99,7 +100,7 @@ typedef CF_ENUM(uint32_t, CTLineTruncationType) {
     @abstract   Returns the CFType of the line object
 */
 
-CFTypeID CTLineGetTypeID( void ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
+CFTypeID CTLineGetTypeID( void ) CT_AVAILABLE(10_5, 3_2);
 
 
 /* --------------------------------------------------------------------------- */
@@ -125,7 +126,7 @@ CFTypeID CTLineGetTypeID( void ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2
 */
 
 CTLineRef CTLineCreateWithAttributedString(
-    CFAttributedStringRef string ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
+    CFAttributedStringRef string ) CT_AVAILABLE(10_5, 3_2);
 
 
 /*!
@@ -161,7 +162,7 @@ CTLineRef CTLineCreateTruncatedLine(
     CTLineRef line,
     double width,
     CTLineTruncationType truncationType,
-    CTLineRef truncationToken ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
+    CTLineRef truncationToken ) CT_AVAILABLE(10_5, 3_2);
 
 
 /*!
@@ -191,7 +192,7 @@ CTLineRef CTLineCreateTruncatedLine(
 CTLineRef CTLineCreateJustifiedLine(
     CTLineRef line,
     CGFloat justificationFactor,
-    double justificationWidth ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
+    double justificationWidth ) CT_AVAILABLE(10_5, 3_2);
 
 
 /* --------------------------------------------------------------------------- */
@@ -212,7 +213,7 @@ CTLineRef CTLineCreateJustifiedLine(
 */
 
 CFIndex CTLineGetGlyphCount(
-    CTLineRef line ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
+    CTLineRef line ) CT_AVAILABLE(10_5, 3_2);
 
 
 /*!
@@ -226,7 +227,7 @@ CFIndex CTLineGetGlyphCount(
 */
 
 CFArrayRef CTLineGetGlyphRuns(
-    CTLineRef line ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
+    CTLineRef line ) CT_AVAILABLE(10_5, 3_2);
 
 
 /*!
@@ -243,7 +244,7 @@ CFArrayRef CTLineGetGlyphRuns(
 */
 
 CFRange CTLineGetStringRange(
-    CTLineRef line ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
+    CTLineRef line ) CT_AVAILABLE(10_5, 3_2);
 
 
 /*!
@@ -270,7 +271,7 @@ CFRange CTLineGetStringRange(
 double CTLineGetPenOffsetForFlush(
     CTLineRef line,
     CGFloat flushFactor,
-    double flushWidth ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
+    double flushWidth ) CT_AVAILABLE(10_5, 3_2);
 
 
 /*!
@@ -292,7 +293,7 @@ double CTLineGetPenOffsetForFlush(
 
 void CTLineDraw(
     CTLineRef line,
-    CGContextRef context ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
+    CGContextRef context ) CT_AVAILABLE(10_5, 3_2);
 
 
 /* --------------------------------------------------------------------------- */
@@ -332,7 +333,7 @@ double CTLineGetTypographicBounds(
     CTLineRef line,
     CGFloat* ascent,
     CGFloat* descent,
-    CGFloat* leading ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
+    CGFloat* leading ) CT_AVAILABLE(10_5, 3_2);
 
 
 /*!
@@ -353,7 +354,7 @@ double CTLineGetTypographicBounds(
 
 CGRect CTLineGetBoundsWithOptions(
     CTLineRef line,
-    CTLineBoundsOptions options ) CT_AVAILABLE_STARTING( __MAC_10_8, __IPHONE_6_0);
+    CTLineBoundsOptions options ) CT_AVAILABLE(10_8, 6_0);
 
 
 /*!
@@ -373,7 +374,7 @@ CGRect CTLineGetBoundsWithOptions(
 */
 
 double CTLineGetTrailingWhitespaceWidth(
-    CTLineRef line ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
+    CTLineRef line ) CT_AVAILABLE(10_5, 3_2);
 
 
 /*!
@@ -391,13 +392,12 @@ double CTLineGetTrailingWhitespaceWidth(
                 The line that you want to calculate the image bounds for.
 
     @param      context
-                The context which the image bounds will be calculated for. This
-                is required because the context could have settings in it that
-                can cause changes in the image bounds.
+                The context which the image bounds will be calculated for or NULL,
+                in which case the bounds are relative to CGPointZero.
 
     @result     A rectangle that tightly encloses the paths of the line's glyphs,
                 which will be translated by the supplied context's text position.
-                If the line or context is invalid, CGRectNull will be returned.
+                If the line is invalid, CGRectNull will be returned.
 
     @seealso    CTLineGetTypographicBounds
     @seealso    CTLineGetBoundsWithOptions
@@ -406,7 +406,7 @@ double CTLineGetTrailingWhitespaceWidth(
 
 CGRect CTLineGetImageBounds(
     CTLineRef line,
-    CGContextRef context ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
+    CGContextRef context ) CT_AVAILABLE(10_5, 3_2);
 
 
 /* --------------------------------------------------------------------------- */
@@ -438,7 +438,7 @@ CGRect CTLineGetImageBounds(
 
 CFIndex CTLineGetStringIndexForPosition(
     CTLineRef line,
-    CGPoint position ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
+    CGPoint position ) CT_AVAILABLE(10_5, 3_2);
 
 
 /*!
@@ -476,11 +476,13 @@ CFIndex CTLineGetStringIndexForPosition(
 CGFloat CTLineGetOffsetForStringIndex(
     CTLineRef line,
     CFIndex charIndex,
-    CGFloat* secondaryOffset ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
+    CGFloat* secondaryOffset ) CT_AVAILABLE(10_5, 3_2);
 
 
 #if defined(__cplusplus)
 }
 #endif
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif

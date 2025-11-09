@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2012 Apple Inc. All rights reserved.
+	Copyright 2010-2013 Apple Inc. All rights reserved.
 */
 
 #import <AVFoundation/AVBase.h>
@@ -11,6 +11,7 @@
 #import <AVFoundation/AVCaptureSession.h>
 #import <AVFoundation/AVAnimation.h>
 
+@class AVMetadataObject;
 @class AVCaptureVideoPreviewLayerInternal;
 
 /*!
@@ -30,6 +31,7 @@
 NS_CLASS_AVAILABLE(10_7, 4_0)
 @interface AVCaptureVideoPreviewLayer : CALayer
 {
+@private
 	AVCaptureVideoPreviewLayerInternal *_internal;
 }
 
@@ -121,6 +123,8 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 */
 - (void)setSessionWithNoConnection:(AVCaptureSession *)session NS_AVAILABLE(10_7, NA);
 
+#endif // (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+
 /*!
  @property connection
  @abstract
@@ -132,9 +136,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
     a connection is formed to the first eligible video AVCaptureInput.  If the receiver 
     is detached from a session, the connection property becomes nil.
 */
-@property (nonatomic, readonly) AVCaptureConnection *connection NS_AVAILABLE(10_7, NA);
-
-#endif // (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+@property (nonatomic, readonly) AVCaptureConnection *connection NS_AVAILABLE(10_7, 6_0);
 
 /*!
  @property videoGravity
@@ -147,6 +149,67 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
     See <AVFoundation/AVAnimation.h> for a description of these options.
 */
 @property (copy) NSString *videoGravity;
+
+/*!
+ @method captureDevicePointOfInterestForPoint:
+ @abstract
+    Converts a point in layer coordinates to a point of interest in the coordinate space of the capture device providing
+    input to the layer.
+
+ @param pointInLayer
+    A CGPoint in layer coordinates.
+
+ @result
+    A CGPoint in the coordinate space of the capture device providing input to the layer.
+
+ @discussion
+    AVCaptureDevice pointOfInterest is expressed as a CGPoint where {0,0} represents the top left of the picture area,
+    and {1,1} represents the bottom right on an unrotated picture.  This convenience method converts a point in 
+    the coordinate space of the receiver to a point of interest in the coordinate space of the AVCaptureDevice providing
+    input to the receiver.  The conversion takes frameSize and videoGravity into consideration.
+*/
+- (CGPoint)captureDevicePointOfInterestForPoint:(CGPoint)pointInLayer NS_AVAILABLE_IOS(6_0);
+
+/*!
+ @method pointForCaptureDevicePointOfInterest:
+ @abstract
+    Converts a point of interest in the coordinate space of the capture device providing
+    input to the layer to a point in layer coordinates.
+
+ @param captureDevicePointOfInterest
+    A CGPoint in the coordinate space of the capture device providing input to the layer.
+
+ @result
+    A CGPoint in layer coordinates.
+
+ @discussion
+    AVCaptureDevice pointOfInterest is expressed as a CGPoint where {0,0} represents the top left of the picture area,
+    and {1,1} represents the bottom right on an unrotated picture.  This convenience method converts a point in 
+    the coordinate space of the AVCaptureDevice providing input to the coordinate space of the receiver.  The conversion 
+    takes frameSize and videoGravity into consideration.
+*/
+- (CGPoint)pointForCaptureDevicePointOfInterest:(CGPoint)captureDevicePointOfInterest NS_AVAILABLE_IOS(6_0);
+
+/*!
+ @method transformedMetadataObjectForMetadataObject:
+ @abstract
+    Converts an AVMetadataObject's visual properties to layer coordinates.
+
+ @param metadataObject
+    An AVMetadataObject originating from the same AVCaptureInput as the preview layer.
+
+ @result
+    An AVMetadataObject whose properties are in layer coordinates.
+
+ @discussion
+    AVMetadataObject bounds may be expressed as a rect where {0,0} represents the top left of the picture area,
+    and {1,1} represents the bottom right on an unrotated picture.  Face metadata objects likewise express
+    yaw and roll angles with respect to an unrotated picture.  -transformedMetadataObjectForMetadataObject: 
+	converts the visual properties in the coordinate space of the supplied AVMetadataObject to the coordinate space of 
+    the receiver.  The conversion takes orientation, mirroring, layer bounds and videoGravity into consideration.
+    If the provided metadata object originates from an input source other than the preview layer's, nil will be returned.
+*/
+- (AVMetadataObject *)transformedMetadataObjectForMetadataObject:(AVMetadataObject *)metadataObject NS_AVAILABLE_IOS(6_0);
 
 #if TARGET_OS_IPHONE
 
@@ -161,7 +224,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
     manipulate the orientation of the receiver.  This property is deprecated.  Use 
     AVCaptureConnection's -isVideoOrientationSupported instead.
 */
-@property (nonatomic, readonly, getter=isOrientationSupported) BOOL orientationSupported NS_AVAILABLE_IOS(4_0);
+@property (nonatomic, readonly, getter=isOrientationSupported) BOOL orientationSupported NS_DEPRECATED_IOS(4_0, 6_0);
 
 /*!
  @property orientation
@@ -174,7 +237,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
     exception will be raised if this requirement is ignored.  This property is deprecated.
     Use AVCaptureConnection's -videoOrientation instead.
 */
-@property (nonatomic) AVCaptureVideoOrientation orientation NS_AVAILABLE_IOS(4_0);
+@property (nonatomic) AVCaptureVideoOrientation orientation NS_DEPRECATED_IOS(4_0, 6_0);
 
 /*!
  @property mirroringSupported
@@ -187,7 +250,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
     on the receiver.  This property is deprecated.  Use AVCaptureConnection's 
     -isVideoMirroringSupported instead.
 */
-@property (nonatomic, readonly, getter=isMirroringSupported) BOOL mirroringSupported NS_AVAILABLE_IOS(4_0);
+@property (nonatomic, readonly, getter=isMirroringSupported) BOOL mirroringSupported NS_DEPRECATED_IOS(4_0, 6_0);
 
 /*!
  @property automaticallyAdjustsMirroring
@@ -202,7 +265,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
     The default value is YES.  This property is deprecated.  Use AVCaptureConnection's
     -automaticallyAdjustsVideoMirroring instead.
 */
-@property (nonatomic) BOOL automaticallyAdjustsMirroring NS_AVAILABLE_IOS(4_0);
+@property (nonatomic) BOOL automaticallyAdjustsMirroring NS_DEPRECATED_IOS(4_0, 6_0);
 
 /*!
  @property mirrored
@@ -218,7 +281,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
     these requirements.  This property is deprecated.  Use AVCaptureConnection's 
     -videoMirrored instead.
 */
-@property (nonatomic, getter=isMirrored) BOOL mirrored NS_AVAILABLE_IOS(4_0);
+@property (nonatomic, getter=isMirrored) BOOL mirrored NS_DEPRECATED_IOS(4_0, 6_0);
 
 #endif // TARGET_OS_IPHONE
 

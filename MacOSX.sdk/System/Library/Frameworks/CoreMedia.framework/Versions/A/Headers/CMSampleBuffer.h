@@ -3,7 +3,7 @@
 	
 	Framework:  CoreMedia
  
-    Copyright 2005-2012 Apple Inc. All rights reserved.
+    Copyright 2005-2013 Apple Inc. All rights reserved.
  
 */
 
@@ -46,11 +46,6 @@
 
 				Objective-C code that may run under garbage collection should NOT use [sbuf retain],
 				or [sbuf release]; these will not have the correct effect.
-
-				Furthermore, if they may run under garbage collection, Objective-C objects that release 
-				instance variable CMSampleBuffer objects during their -finalize methods should set those 
-				object pointers to NULL immediately afterwards, to ensure that method calls received 
-				after -finalize operate safely.
 */
 
 #include <CoreMedia/CMBase.h>
@@ -297,7 +292,7 @@ OSStatus CMAudioSampleBufferCreateWithPacketDescriptions(
 														CMBlockBuffer for the media data. This can be NULL, a CMBlockBuffer with
 														no backing memory, a CMBlockBuffer with backing memory but no data yet,
 														or a CMBlockBuffer that already contains the media data. Only in that
-														last case (or if NULL and numSamples is 0) should dataReady be true. */
+														last case should dataReady be true. */
 	Boolean dataReady,								/*! @param dataReady
 														Indicates whether or not the BlockBuffer already contains the media data. */
 	CMSampleBufferMakeDataReadyCallback makeDataReadyCallback,	
@@ -606,6 +601,26 @@ OSStatus CMSampleBufferGetAudioStreamPacketDescriptionsPtr(
     size_t								  * packetDescriptionsSizeOut )		/*! @param packetDescriptionsSizeOut size in bytes of constant array of AudioStreamPacketDescriptions. May be NULL. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
+/*!
+	@function	CMSampleBufferCopyPCMDataIntoAudioBufferList
+	@abstract	Copies PCM audio data from the given CMSampleBuffer into
+				a pre-populated AudioBufferList. The AudioBufferList must
+				contain the same number of channels and its data buffers
+				must be sized to hold the specified number of frames.
+				This API is	specific to audio format sample buffers, and
+				will return kCMSampleBufferError_InvalidMediaTypeForOperation
+				if called with a non-audio sample buffer. It will return an
+				error if the CMSampleBuffer does not contain PCM audio data
+				or if its dataBuffer is not ready.
+*/
+
+CM_EXPORT
+OSStatus CMSampleBufferCopyPCMDataIntoAudioBufferList(
+	CMSampleBufferRef	sbuf,							/*! @param sbuf Contains PCM audio data to be copied. */
+	int32_t				frameOffset,					/*! @param frameOffset (zero-based) starting frame number to copy from. */
+	int32_t				numFrames,						/*! @param numFrames number of frames to copy */
+	AudioBufferList		*bufferList)					/*! @param  Pre-populated bufferlist */
+							__OSX_AVAILABLE_STARTING(__MAC_10_9,__IPHONE_7_0);
 
 /*!
 	@function	CMSampleBufferSetDataReady
@@ -656,8 +671,7 @@ OSStatus CMSampleBufferMakeDataReady(
 				readiness. If CMSampleBufferMakeDataReady(sbuf) is called, it will do it by making sbufToTrack ready.
 				Example of use: This allows bursting a multi-sample CMSampleBuffer into single-sample CMSampleBuffers
 				before the data is ready. The single-sample CMSampleBuffers will all track the multi-sample
-				CMSampleBuffer's data readiness. ее Sam sez: It would be good if we could implement this in a way that
-				didn't require sbuf1 to retain the whole of sbuf2.
+				CMSampleBuffer's data readiness.
 */
 CM_EXPORT
 OSStatus CMSampleBufferTrackDataReadiness(
@@ -1273,6 +1287,49 @@ CM_EXPORT const CFStringRef kCMSampleBufferAttachmentKey_SampleReferenceByteOffs
 */
 CM_EXPORT const CFStringRef kCMSampleBufferAttachmentKey_GradualDecoderRefresh  // CFNumber, audio decoder refresh count
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_3);
+	
+/*!
+	@constant	kCMSampleBufferAttachmentKey_DroppedFrameReason
+	@abstract	Indicates the reason the current video frame was dropped.
+	@discussion
+		Sample buffers with this attachment contain no image or data buffer.  They mark a dropped video
+		frame.  This attachment identifies the reason for the droppage.
+*/
+CM_EXPORT const CFStringRef kCMSampleBufferAttachmentKey_DroppedFrameReason  // CFString, frame drop reason
+							__OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_6_0);
+
+/*!
+	@constant	kCMSampleBufferDroppedFrameReason_FrameWasLate
+	@abstract	The frame was dropped because it was late
+	@discussion
+		The value of kCMSampleBufferAttachmentKey_DroppedFrameReason if a video capture client has indicated 
+		that late video frames should be dropped and the current frame is late.  This condition is typically
+		caused by the client's processing taking too long.
+*/
+CM_EXPORT const CFStringRef kCMSampleBufferDroppedFrameReason_FrameWasLate
+							__OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_6_0);
+	
+/*!
+	@constant	kCMSampleBufferDroppedFrameReason_OutOfBuffers
+	@abstract	The frame was dropped because the module providing frames is out of buffers
+	@discussion
+		The value of kCMSampleBufferAttachmentKey_DroppedFrameReason if the module providing sample buffers
+		has run out of source buffers.  This condition is typically caused by the client holding onto
+		buffers for too long and can be alleviated by returning buffers to the provider.
+ */
+CM_EXPORT const CFStringRef kCMSampleBufferDroppedFrameReason_OutOfBuffers
+							__OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_6_0);
+	
+/*!
+	@constant	kCMSampleBufferDroppedFrameReason_Discontinuity
+	@abstract	An unknown number of frames were dropped
+	@discussion
+		The value of kCMSampleBufferAttachmentKey_DroppedFrameReason if the module providing sample buffers
+		has experienced a discontinuity, and an unknown number of frames have been lost.  This condition is 
+		typically caused by the system being too busy.
+ */
+CM_EXPORT const CFStringRef kCMSampleBufferDroppedFrameReason_Discontinuity
+							__OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_6_0);
 
 // Use CMAttachmentBearer APIs to set, get, and remove buffer-level attachments on the CMSampleBuffer itself
 

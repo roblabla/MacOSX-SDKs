@@ -8,6 +8,8 @@
 #include <CoreGraphics/CGBase.h>
 #include <CoreGraphics/CGContext.h>
 
+CF_IMPLICIT_BRIDGING_ENABLED
+
 /* The callback for releasing the data supplied to
    `CGBitmapContextCreateWithData'. */
 
@@ -126,5 +128,7 @@ CG_EXTERN CGBitmapInfo CGBitmapContextGetBitmapInfo(CGContextRef context)
 
 CG_EXTERN CGImageRef CGBitmapContextCreateImage(CGContextRef context)
   CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif /* CGBITMAPCONTEXT_H_ */

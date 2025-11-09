@@ -48,6 +48,10 @@ EVENTKIT_EXTERN NSString *const EKErrorDomain __OSX_AVAILABLE_STARTING(__MAC_10_
  @constant   EKErrorCalendarDoesNotAllowReminders    You are trying to add a reminder to a calendar that does not allow reminders.
  @constant   EKErrorSourceDoesNotAllowReminders      You are trying to add a calendar that allows reminders to a source that does not allow them.
  @constant   EKErrorSourceDoesNotAllowEvents         You are trying to add a calendar that allows events to a source that does not allow them.
+ @constant   EKErrorPriorityIsInvalid                You have set an invalid priority for a reminder.  Priorities must be between 0 and 9.
+ @constant   EKErrorInvalidEntityType                This is not a valid EKEntityType
+ @constant   EKErrorProcedureAlarmsNotMutable        Procedure alarms may not be created or modified.
+ @constant   EKErrorEventStoreNotAuthorized          The user has not authorized your application to access their events and/or reminders.
  */
 
 typedef enum EKErrorCode {
@@ -77,6 +81,10 @@ typedef enum EKErrorCode {
     EKErrorCalendarDoesNotAllowReminders,
     EKErrorSourceDoesNotAllowReminders,
     EKErrorSourceDoesNotAllowEvents,
+    EKErrorPriorityIsInvalid,
+    EKErrorInvalidEntityType,
+    EKErrorProcedureAlarmsNotMutable,
+    EKErrorEventStoreNotAuthorized,
     
     EKErrorLast // used internally
 } EKErrorCode;

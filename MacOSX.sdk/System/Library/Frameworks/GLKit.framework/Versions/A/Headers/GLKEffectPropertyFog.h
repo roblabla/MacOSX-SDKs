@@ -31,7 +31,7 @@ typedef NS_ENUM(GLint, GLKFogMode)
       start           0.0
       end             1.0
 */ 
-
+NS_CLASS_AVAILABLE(10_8, 5_0)
 @interface GLKEffectPropertyFog : GLKEffectProperty 
 {
     @private

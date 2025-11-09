@@ -15,7 +15,7 @@
 #define __UNICODEUTILITIES__
 
 #ifndef __MACTYPES__
-#include <CarbonCore/MacTypes.h>
+#include <MacTypes.h>
 #endif
 
 
@@ -319,7 +319,7 @@ enum {
 };
 
 enum {
-  kUCCollateTypeMask            = kUCCollateTypeSourceMask << kUCCollateTypeShiftBits
+  kUCCollateTypeMask            = (UInt32)kUCCollateTypeSourceMask << kUCCollateTypeShiftBits
 };
 
 

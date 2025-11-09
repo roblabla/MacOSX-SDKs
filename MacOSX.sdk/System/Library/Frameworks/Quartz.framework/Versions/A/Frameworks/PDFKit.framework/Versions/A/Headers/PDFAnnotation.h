@@ -10,7 +10,7 @@
 @class PDFAction, PDFBorder, PDFPage, PDFAnnotationPopup, PDFAnnotationPrivateVars;
 
 
-@interface PDFAnnotation : NSObject <NSCopying>
+@interface PDFAnnotation : NSObject <NSCopying, NSCoding>
 {
 @private
     PDFAnnotationPrivateVars *_pdfPriv;

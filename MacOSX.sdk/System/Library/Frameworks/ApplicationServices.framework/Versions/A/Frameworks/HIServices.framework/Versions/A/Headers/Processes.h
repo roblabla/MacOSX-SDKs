@@ -3,9 +3,7 @@
  
      Contains:   Process Manager Interfaces.
  
-     Version:    HIServices-417~96
- 
-     Copyright:  © 1989-2008 by Apple Computer, Inc., all rights reserved
+     Copyright:  ï¿½ 1989-2012 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -135,8 +133,8 @@ enum {
 typedef UInt32 ProcessApplicationTransformState;
 enum {
   kProcessTransformToForegroundApplication = 1,
-  kProcessTransformToBackgroundApplication = 2, /* functional in Mac OS X Barolo and later */
-  kProcessTransformToUIElementApplication = 4 /* functional in Mac OS X Barolo and later */
+  kProcessTransformToBackgroundApplication = 2, /* functional in Mac OS X 10.7 and later */
+  kProcessTransformToUIElementApplication = 4 /* functional in Mac OS X 10.7 and later */
 };
 
 /*
@@ -307,6 +305,11 @@ enum {
 /*
  *  LaunchApplication()
  *  
+ *  DEPRECATED: Use +[NSWorkspace launchApplication:], 
+ *      +[NSWorkspace launchApplicationAtURL:options:configuration:error:]
+ *    or other LaunchServices functions ( LSOpenCFURLRef(),
+ *      LSOpenFromURLSpec() ) to launch applications.
+ *
  *  Mac OS X threading:
  *    Thread safe since version 10.3
  *  
@@ -316,7 +319,7 @@ enum {
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-LaunchApplication(LaunchPBPtr LaunchParams)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+LaunchApplication(LaunchPBPtr LaunchParams)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 #if !__LP64__
@@ -335,6 +338,9 @@ LaunchApplication(LaunchPBPtr LaunchParams)                   AVAILABLE_MAC_OS_X
 /*
  *  [Mac]GetCurrentProcess()
  *  
+ *  DEPRECATED
+ *    Use [ NSRunningApplication currentApplication]
+ *
  *  Discussion:
  *    Return the canonical process serial number to the caller.
  *    
@@ -406,12 +412,16 @@ LaunchApplication(LaunchPBPtr LaunchParams)                   AVAILABLE_MAC_OS_X
     #define MacGetCurrentProcess GetCurrentProcess
 #endif
 extern OSErr 
-MacGetCurrentProcess(ProcessSerialNumber * PSN)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MacGetCurrentProcess(ProcessSerialNumber * PSN)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
  *  GetFrontProcess()
  *  
+ *  DEPRECATED
+ *    Use +[NSWorkspace runningApplications] and look for the entry with
+ *    isActive == YES.
+ *
  *  Mac OS X threading:
  *    Thread safe since version 10.3
  *  
@@ -421,12 +431,15 @@ MacGetCurrentProcess(ProcessSerialNumber * PSN)               AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-GetFrontProcess(ProcessSerialNumber * PSN)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetFrontProcess(ProcessSerialNumber * PSN)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
  *  GetNextProcess()
  *  
+ *  DEPRECATED:
+ *    Use +[NSWorkspace runningApplications:] which returns the full array of all running applications.
+ *
  *  Mac OS X threading:
  *    Thread safe since version 10.3
  *  
@@ -436,12 +449,15 @@ GetFrontProcess(ProcessSerialNumber * PSN)                    AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-GetNextProcess(ProcessSerialNumber * PSN)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetNextProcess(ProcessSerialNumber * PSN)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
  *  GetProcessInformation()
  *  
+ *  DEPRECATED:
+ *    Use NSRunningApplication, which returns most of this information.
+ *
  *  Discussion:
  *    Fill in the provided record with information about the process
  *    with the provided process serial number.
@@ -496,12 +512,15 @@ GetNextProcess(ProcessSerialNumber * PSN)                     AVAILABLE_MAC_OS_X
 extern OSErr 
 GetProcessInformation(
   const ProcessSerialNumber *  PSN,
-  ProcessInfoRec *             info)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ProcessInfoRec *             info)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
  *  ProcessInformationCopyDictionary()
  *  
+ *  Deprecated:
+ *    Use NSRunningApplication, which returns most of this information.
+ *
  *  Discussion:
  *    Return a CFDictionary containing information about the given
  *    process. This is intended to return a superset of the information
@@ -559,12 +578,19 @@ GetProcessInformation(
 extern CFDictionaryRef 
 ProcessInformationCopyDictionary(
   const ProcessSerialNumber *  PSN,
-  UInt32                       infoToReturn)                  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  UInt32                       infoToReturn)                  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
  *  SetFrontProcess()
  *  
+ *  Deprecated:
+ *    To make your own application frontmost, use 
+ *      [[NSApplication sharedApplication] activateIgnoringOtherApps: YES].
+ *    To make another application frontmost, use the activateWithOptions
+ *      method of the appropriate NSRunningApplication object for that
+ *      application.
+ *
  *  Mac OS X threading:
  *    Thread safe since version 10.3
  *  
@@ -574,7 +600,7 @@ ProcessInformationCopyDictionary(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-SetFrontProcess(const ProcessSerialNumber * PSN)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SetFrontProcess(const ProcessSerialNumber * PSN)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 
@@ -597,6 +623,9 @@ enum {
 /*
  *  SetFrontProcessWithOptions()
  *  
+ *  Deprecated:
+ *    See SetFrontProcess().
+ *
  *  Discussion:
  *    Brings a process to the front of the process list and activates
  *    it. This is much like the SetFrontProcess API, though we allow
@@ -628,12 +657,15 @@ enum {
 extern OSStatus 
 SetFrontProcessWithOptions(
   const ProcessSerialNumber *  inProcess,
-  OptionBits                   inOptions)                     AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  OptionBits                   inOptions)                     AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
  *  WakeUpProcess()
  *  
+ *  Deprecated:
+ *    This is not needed on Mac OS X.
+ *
  *  Mac OS X threading:
  *    Thread safe since version 10.3
  *  
@@ -643,12 +675,15 @@ SetFrontProcessWithOptions(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-WakeUpProcess(const ProcessSerialNumber * PSN)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+WakeUpProcess(const ProcessSerialNumber * PSN)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
  *  SameProcess()
  *  
+ *  Deprecated:
+ *    Since ProcessSerialNumber structures are no longer needed, this is no need for a replacement.
+ *
  *  Mac OS X threading:
  *    Thread safe since version 10.3
  *  
@@ -661,12 +696,15 @@ extern OSErr
 SameProcess(
   const ProcessSerialNumber *  PSN1,
   const ProcessSerialNumber *  PSN2,
-  Boolean *                    result)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *                    result)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
  *  ExitToShell()
  *  
+ *  Deprecated:
+ *    Use exit( 0 )
+ *
  *  Discussion:
  *    In general, you need to call ExitToShell only if you want your
  *    application to terminate without reaching the end of its main
@@ -684,14 +722,17 @@ SameProcess(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 #if __GNUC__ > 2 || __GNUC__ == 2 && __GNUC_MINOR__ >= 5
-void ExitToShell( void ) __attribute__ (( __noreturn__ ));
+void ExitToShell( void ) __attribute__ (( __noreturn__ ))   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 #else
-void ExitToShell( void );
+void ExitToShell( void )                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 #endif
 
 /*
  *  KillProcess()
- *  
+ *
+ *  Deprecated:
+ *    Use the terminate method on the NSRunningApplication you want to exit.
+ *
  *  Discussion:
  *    Kills the process with the given process serial number, without
  *    sending it a 'quit' AppleEvent or otherwise allowing it to save
@@ -718,7 +759,7 @@ void ExitToShell( void );
  *    Non-Carbon CFM:   not available
  */
 extern OSErr 
-KillProcess(const ProcessSerialNumber * inProcess)            AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+KillProcess(const ProcessSerialNumber * inProcess)            AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
@@ -740,7 +781,10 @@ KillProcess(const ProcessSerialNumber * inProcess)            AVAILABLE_MAC_OS_X
 
 /*
  *  GetProcessBundleLocation()
- *  
+ *
+ *  Deprecated:
+ *    Use the bundleURL property of the appropriate NSRunningApplication object.
+ *
  *  Summary:
  *    Retrieve the filesystem location of the process bundle, or
  *    executable if unbundled.
@@ -770,12 +814,15 @@ KillProcess(const ProcessSerialNumber * inProcess)            AVAILABLE_MAC_OS_X
 extern OSStatus 
 GetProcessBundleLocation(
   const ProcessSerialNumber *  psn,
-  FSRef *                      location)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  FSRef *                      location)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
  *  CopyProcessName()
- *  
+ *
+ *  Deprecated:
+ *    Use the localizedName property of the appropriate NSRunningApplication object.
+ *
  *  Summary:
  *    Get a copy of the name of a process.
  *  
@@ -808,12 +855,15 @@ GetProcessBundleLocation(
 extern OSStatus 
 CopyProcessName(
   const ProcessSerialNumber *  psn,
-  CFStringRef *                name)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CFStringRef *                name)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
  *  GetProcessPID()
- *  
+ *
+ *  Deprecated:
+ *    Use the processIdentifier property of the appropriate NSRunningApplication object.
+ *
  *  Summary:
  *    Get the UNIX process ID corresponding to a process.
  *  
@@ -842,12 +892,15 @@ CopyProcessName(
 extern OSStatus 
 GetProcessPID(
   const ProcessSerialNumber *  psn,
-  pid_t *                      pid)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  pid_t *                      pid)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
  *  GetProcessForPID()
- *  
+ *
+ *  Deprecated:
+ *   Use +[NSRunningApplication runningApplicationWithProcessIdentifier:].
+ *
  *  Summary:
  *    Get the process serial number corresponding to a UNIX process ID.
  *  
@@ -876,7 +929,7 @@ GetProcessPID(
 extern OSStatus 
 GetProcessForPID(
   pid_t                  pid,
-  ProcessSerialNumber *  psn)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ProcessSerialNumber *  psn)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*************************************************************************
@@ -884,7 +937,10 @@ GetProcessForPID(
  *************************************************************************/
 /*
  *  IsProcessVisible()
- *  
+ *
+ *  Deprecated:
+ *    Use the isHidden property of the appropriate NSRunningApplication object.
+ *
  *  Summary:
  *    Determines whether a particular process is visible or not.
  *  
@@ -906,12 +962,15 @@ GetProcessForPID(
  *    Non-Carbon CFM:   not available
  */
 extern Boolean 
-IsProcessVisible(const ProcessSerialNumber * psn)             AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+IsProcessVisible(const ProcessSerialNumber * psn)             AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
  *  ShowHideProcess()
- *  
+ *
+ *  Deprecated:
+ *    Use the hide or unhide methods of the appropriate NSRunningApplication object.
+ *
  *  Summary:
  *    Hides or shows a given process.
  *  
@@ -940,7 +999,7 @@ IsProcessVisible(const ProcessSerialNumber * psn)             AVAILABLE_MAC_OS_X
 extern OSErr 
 ShowHideProcess(
   const ProcessSerialNumber *  psn,
-  Boolean                      visible)                       AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  Boolean                      visible)                       AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 

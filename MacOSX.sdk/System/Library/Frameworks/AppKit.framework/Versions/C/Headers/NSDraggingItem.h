@@ -1,7 +1,7 @@
 /*
 	NSDraggingItem.h
 	Application Kit
-	Copyright (c) 2010-2012, Apple Inc.
+	Copyright (c) 2010-2013, Apple Inc.
 	All rights reserved.
 */
 
@@ -49,9 +49,13 @@ NS_CLASS_AVAILABLE(10_7, NA)
     id _item;
     NSRect _frame;
     NSArray *_components;
+#if NS_BLOCKS_AVAILABLE
     NSArray *(^_componentsProvider)(void);
+#endif
+#if !__LP64__    
     NSInteger _reserved1;
     NSInteger _reserved2;
+#endif
 }
 
 /* The designated initializer. When creating an NSDraggingItem the pasteboardWriter must implement the NSPasteboardWriting protocol.

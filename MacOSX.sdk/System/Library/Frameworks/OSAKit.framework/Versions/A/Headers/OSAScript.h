@@ -1,6 +1,6 @@
 /*	
     OSAScript.h
-    Copyright (C) 2005, 2009 Apple Inc. All rights reserved.    
+    Copyright (C) 2005, 2009, 2012 Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -87,7 +87,7 @@ typedef enum
 // fromURL: arguments are optional and may be nil. URL arguments may be used to indicate the origin of scripts. In AppleScript, for example, this URL may be used for the value of "path to me", unless you use the OSADontSetScriptLocation storage option.
 // languageInstance: parameters are optional and may be nil, in which case the shared instance of the current default language will be used.
 - (id)initWithSource:(NSString *)source;
-- (id)initWithSource:(NSString *)source language:(OSALanguage *)language DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (id)initWithSource:(NSString *)source language:(OSALanguage *)language;
 - (id)initWithSource:(NSString *)source fromURL:(NSURL *)url languageInstance:(OSALanguageInstance *)instance usingStorageOptions:(OSAStorageOptions)storageOptions AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 - (id)initWithContentsOfURL:(NSURL *)url error:(NSDictionary **)errorInfo;
 - (id)initWithContentsOfURL:(NSURL *)url language:(OSALanguage *)language error:(NSDictionary **)errorInfo DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;

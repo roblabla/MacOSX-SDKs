@@ -18,7 +18,7 @@
     #define QL_EXTERN_C_END
 #endif
 
-#define QUICKLOOK_VERSION 5550
+#define QUICKLOOK_VERSION 6180
 
 #define QL_EXPORT extern
 #define QL_PRIVATE_EXPORT __attribute__((visibility("hidden")))
@@ -26,16 +26,5 @@
 #define QL_NOINLINE __attribute__((noinline))
 #define QL_DEPRECATED __attribute__((deprecated))
 #define QL_FORMAT_ARG(F, A) __attribute__((format(CFString, F, A)))
-
-/*
- * Temporary defines
- */
-#ifndef AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER
-#define AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER 
-#endif
-#ifndef MAC_OS_X_VERSION_10_7
-#define MAC_OS_X_VERSION_10_7 MAC_OS_X_VERSION_10_6
-#endif
-
 
 #endif

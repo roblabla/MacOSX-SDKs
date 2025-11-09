@@ -1,7 +1,7 @@
 /*
 	NSImage.h
 	Application Kit
-	Copyright (c) 1994-2012, Apple Inc.
+	Copyright (c) 1994-2013, Apple Inc.
 	All rights reserved.
 */
 
@@ -85,7 +85,9 @@ typedef NSUInteger NSImageCacheMode;
 - (id)initWithDataIgnoringOrientation:(NSData *)data NS_AVAILABLE_MAC(10_6);
 
 // Note that the block passed to the below method may be invoked whenever and on whatever thread the image itself is drawn on. Care should be taken to ensure that all state accessed within the drawingHandler block is done so in a thread safe manner.
+#if NS_BLOCKS_AVAILABLE
 + (id)imageWithSize:(NSSize)size flipped:(BOOL)drawingHandlerShouldBeCalledWithFlippedContext drawingHandler:(BOOL (^)(NSRect dstRect))drawingHandler NS_AVAILABLE_MAC(10_8);
+#endif
 
 - (void)setSize:(NSSize)aSize;
 - (NSSize)size;
@@ -101,10 +103,16 @@ typedef NSUInteger NSImageCacheMode;
 - (BOOL)matchesOnMultipleResolution;
 - (BOOL)matchesOnlyOnBestFittingAxis NS_AVAILABLE_MAC(10_7); // Available in MacOSX 10.7.4
 - (void)setMatchesOnlyOnBestFittingAxis:(BOOL)flag NS_AVAILABLE_MAC(10_7); // Available in MacOSX 10.7.4
+
 - (void)drawAtPoint:(NSPoint)point fromRect:(NSRect)fromRect operation:(NSCompositingOperation)op fraction:(CGFloat)delta;
 - (void)drawInRect:(NSRect)rect fromRect:(NSRect)fromRect operation:(NSCompositingOperation)op fraction:(CGFloat)delta;
 - (void)drawInRect:(NSRect)dstSpacePortionRect fromRect:(NSRect)srcSpacePortionRect operation:(NSCompositingOperation)op fraction:(CGFloat)requestedAlpha respectFlipped:(BOOL)respectContextIsFlipped hints:(NSDictionary *)hints NS_AVAILABLE_MAC(10_6);
 - (BOOL)drawRepresentation:(NSImageRep *)imageRep inRect:(NSRect)rect;
+
+/* This is exactly equivalent to calling -[image drawInRect:rect fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1 respectFlipped:YES hints:nil].
+ */
+- (void)drawInRect:(NSRect)rect NS_AVAILABLE_MAC(10_9);
+
 - (void)recache;
 - (NSData *)TIFFRepresentation;
 - (NSData *)TIFFRepresentationUsingCompression:(NSTIFFCompression)comp factor:(float)aFloat;

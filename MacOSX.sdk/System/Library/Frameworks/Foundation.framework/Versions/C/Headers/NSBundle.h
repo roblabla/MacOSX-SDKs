@@ -1,5 +1,5 @@
 /*	NSBundle.h
-	Copyright (c) 1994-2012, Apple Inc.  All rights reserved.
+	Copyright (c) 1994-2013, Apple Inc.  All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -14,10 +14,10 @@
     id		        _cfBundle;
     NSUInteger		_reserved2;
     Class		_principalClass;
-    id                  _tmp1;
-    id                  _tmp2;
-    void		*_reserved1;
-    void		*_reserved0;
+    id                  _initialPath;
+    id                  _resolvedPath;
+    id                  _reserved3;
+    id                  _lock;
 }
 
 /* Methods for creating or retrieving bundle instances. */
@@ -53,7 +53,7 @@
 - (NSURL *)sharedSupportURL NS_AVAILABLE(10_6, 4_0);
 - (NSURL *)builtInPlugInsURL NS_AVAILABLE(10_6, 4_0);
 
-- (NSURL *)appStoreReceiptURL NS_AVAILABLE_MAC(10_7);
+- (NSURL *)appStoreReceiptURL NS_AVAILABLE(10_7, 7_0);
 
 - (NSString *)bundlePath;
 - (NSString *)resourcePath;
@@ -99,8 +99,9 @@
 - (Class)principalClass;
 
 /* Methods for dealing with localizations. */
-- (NSArray *)localizations;
-- (NSArray *)preferredLocalizations;
+- (NSArray *)preferredLocalizations;	// a subset of this bundle's localizations, re-ordered into the preferred order for this process's current execution environment; the main bundle's preferred localizations indicate the language (of text) the user is most likely seeing in the UI
+
+- (NSArray *)localizations;		// list of language names this bundle appears to be localized to
 - (NSString *)developmentLocalization;
 
 + (NSArray *)preferredLocalizationsFromArray:(NSArray *)localizationsArray;

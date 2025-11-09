@@ -10,6 +10,8 @@ typedef struct CGAffineTransform CGAffineTransform;
 #include <CoreGraphics/CGBase.h>
 #include <CoreGraphics/CGGeometry.h>
 
+CF_IMPLICIT_BRIDGING_ENABLED
+
 struct CGAffineTransform {
   CGFloat a, b, c, d;
   CGFloat tx, ty;
@@ -139,5 +141,7 @@ __CGSizeApplyAffineTransform(CGSize size, CGAffineTransform t)
   return s;
 }
 #define CGSizeApplyAffineTransform __CGSizeApplyAffineTransform
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif /* CGAFFINETRANSFORM_H_ */

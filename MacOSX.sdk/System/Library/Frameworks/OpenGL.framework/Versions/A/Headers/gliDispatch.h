@@ -1,5 +1,5 @@
 /*
-	Copyright:	(c) 1999-2012 Apple Inc. All rights reserved.
+	Copyright:	(c) 1999-2013 Apple Inc. All rights reserved.
 */
 
 #ifndef _GLIDISPATCH_H
@@ -7,9 +7,6 @@
 
 #include <OpenGL/gltypes.h>
 #include <OpenGL/gliContext.h>
-#if defined(GL_SUPPORT_ES11) || defined(GL_SUPPORT_ES20)
-#include <OpenGL/glOESAdditions.h>
-#endif
 
 #ifdef __cplusplus
 extern "C" {
@@ -587,8 +584,8 @@ typedef struct __GLIFunctionDispatchRec
 	void (*weightuiv_ARB)(GLIContext ctx, GLint size, const GLuint *weights);
 	void (*weight_pointer_ARB)(GLIContext ctx, GLint size, GLenum type, GLsizei stride, const GLvoid *pointer);
 	void (*vertex_blend_ARB)(GLIContext ctx, GLint count);
-	void (*multi_draw_arrays)(GLIContext ctx, GLenum mode, const GLint *first, const GLsizei *count, GLsizei primcount);
-	void (*multi_draw_elements)(GLIContext ctx, GLenum mode, const GLsizei *count, GLenum type, const GLvoid* const *indices, GLsizei primcount);
+	void (*multi_draw_arrays)(GLIContext ctx, GLenum mode, const GLint *first, const GLsizei *count, GLsizei drawcount);
+	void (*multi_draw_elements)(GLIContext ctx, GLenum mode, const GLsizei *count, GLenum type, const GLvoid* const *indices, GLsizei drawcount);
 	void (*window_pos2d) (GLIContext ctx, GLdouble x, GLdouble y);
 	void (*window_pos2dv) (GLIContext ctx, const GLdouble *v);
 	void (*window_pos2f) (GLIContext ctx, GLfloat x, GLfloat y);
@@ -814,14 +811,14 @@ typedef struct __GLIFunctionDispatchRec
 	/* ARB_instanced_arrays */
 	void (*vertex_attrib_divisor) (GLIContext ctx, GLuint index, GLuint divisor);
 	/* ARB_instanced_arrays and ARB_draw_instanced */
-	void (*draw_arrays_instanced)(GLIContext ctx, GLenum mode, GLint first, GLsizei count, GLsizei primcount);
-	void (*draw_elements_instanced)(GLIContext ctx, GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei primcount);
+	void (*draw_arrays_instanced)(GLIContext ctx, GLenum mode, GLint first, GLsizei count, GLsizei instancecount);
+	void (*draw_elements_instanced)(GLIContext ctx, GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei instancecount);
 
 	/* ARB_draw_elements_base_vertex */
 	void (*draw_elements_base_vertex)(GLIContext ctx, GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLint base_vertex);
 	void (*draw_range_elements_base_vertex)(GLIContext ctx, GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const GLvoid *indices, GLint base_vertex);
-	void (*draw_elements_instanced_base_vertex)(GLIContext ctx, GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei primcount, GLint base_vertex);
-	void (*multi_draw_elements_base_vertex)(GLIContext ctx, GLenum mode, const GLsizei *count, GLenum type, const GLvoid* const *indices, GLsizei primcount, const GLint *base_vertex);
+	void (*draw_elements_instanced_base_vertex)(GLIContext ctx, GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei instancecount, GLint base_vertex);
+	void (*multi_draw_elements_base_vertex)(GLIContext ctx, GLenum mode, const GLsizei *count, GLenum type, const GLvoid* const *indices, GLsizei drawcount, const GLint *base_vertex);
 
 	/* ARB_vertex_array_object / OES_vertex_array_object */
 	void (*bind_vertex_array_ARB)(GLIContext ctx, GLuint array);
@@ -1093,6 +1090,12 @@ typedef struct __GLIFunctionDispatchRec
 	void (*tex_storage1D) (GLIContext ctx, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width);
 	void (*tex_storage2D) (GLIContext ctx, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height);
 	void (*tex_storage3D) (GLIContext ctx, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth);
+	
+	/* GL_APPLE_label_process */
+	void (*label_object_with_responsible_process_APPLE) (GLIContext ctx, GLenum type, GLuint name, GLint pid);
+
+	/* GL_NV_texture_barrier */
+	void (*texture_barrier_NV) (GLIContext ctx);
 
 } GLIFunctionDispatch;
 
@@ -1101,4 +1104,3 @@ typedef struct __GLIFunctionDispatchRec
 #endif
 
 #endif /* _GLIDISPATCH_H */
-

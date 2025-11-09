@@ -1,5 +1,5 @@
 /*	NSKeyedArchiver.h
-	Copyright (c) 2001-2012, Apple Inc. All rights reserved.
+	Copyright (c) 2001-2013, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSCoder.h>
@@ -14,6 +14,8 @@
 
 FOUNDATION_EXPORT NSString * const NSInvalidArchiveOperationException;
 FOUNDATION_EXPORT NSString * const NSInvalidUnarchiveOperationException;
+// Archives created using the class method archivedRootDataWithObject used this key for the root object in the hierarchy of encoded objects. The NSKeyedUnarchiver class method unarchiveObjectWithData: will look for this root key as well. You can also use it as the key for the root object in your own archives.
+FOUNDATION_EXPORT NSString * const NSKeyedArchiveRootObjectKey NS_AVAILABLE(10_9, 7_0);
 
 @interface NSKeyedArchiver : NSCoder {
 @private
@@ -67,6 +69,9 @@ FOUNDATION_EXPORT NSString * const NSInvalidUnarchiveOperationException;
 - (void)encodeDouble:(double)realv forKey:(NSString *)key;
 - (void)encodeBytes:(const uint8_t *)bytesp length:(NSUInteger)lenv forKey:(NSString *)key;
 
+// Enables secure coding support on this keyed archiver. You do not need to enable secure coding on the archiver to enable secure coding on the unarchiver. Enabling secure coding on the archiver is a way for you to be sure that all classes that are encoded conform with NSSecureCoding (it will throw an exception if a class which does not NSSecureCoding is archived). Note that the getter is on the superclass, NSCoder. See NSCoder for more information about secure coding.
+- (void)setRequiresSecureCoding:(BOOL)b NS_AVAILABLE(10_8, 6_0);
+
 @end
 
 @interface NSKeyedUnarchiver : NSCoder {
@@ -117,6 +122,9 @@ FOUNDATION_EXPORT NSString * const NSInvalidUnarchiveOperationException;
 - (float)decodeFloatForKey:(NSString *)key;
 - (double)decodeDoubleForKey:(NSString *)key;
 - (const uint8_t *)decodeBytesForKey:(NSString *)key returnedLength:(NSUInteger *)lengthp NS_RETURNS_INNER_POINTER;	// returned bytes immutable, and they go away with the unarchiver, not the containing autorlease pool
+
+// Enables secure coding support on this keyed unarchiver. When enabled, anarchiving a disallowed class throws an exception. Once enabled, attempting to set requiresSecureCoding to NO will throw an exception. This is to prevent classes from selectively turning secure coding off. This is designed to be set once at the top level and remain on. Note that the getter is on the superclass, NSCoder. See NSCoder for more information about secure coding.
+- (void)setRequiresSecureCoding:(BOOL)b NS_AVAILABLE(10_8, 6_0);
 
 @end
 
@@ -173,8 +181,8 @@ FOUNDATION_EXPORT NSString * const NSInvalidUnarchiveOperationException;
 	// Informs the delegate that the object has been decoded.  The delegate
 	// either returns this object or can return a different object to replace
 	// the decoded one.  The object may be nil.  If the delegate returns nil,
-	// nil is the result of decoding the object.  The delegate
-	// may use this to keep track of the decoded objects.
+        // the decoded value will be unchanged (that is, the original object will be
+        // decoded). The delegate may use this to keep track of the decoded objects.
 
 // notification
 - (void)unarchiver:(NSKeyedUnarchiver *)unarchiver willReplaceObject:(id)object withObject:(id)newObject;

@@ -1,7 +1,7 @@
 /*
 	NSCell.h
 	Application Kit
-	Copyright (c) 1994-2012, Apple Inc.
+	Copyright (c) 1994-2013, Apple Inc.
 	All rights reserved.
 */
 
@@ -123,7 +123,8 @@ typedef struct __CFlags {
     unsigned int        invalidObjectValue:1;
     unsigned int        invalidFont:1;
     NSLineBreakMode     lineBreakMode:3;
-    unsigned int        cellReserved1:2;
+    unsigned int        cellReserved1:1;
+    unsigned int        allowsAppearanceEffects:1;
     unsigned int        singleLineMode:1;
     unsigned int        actOnMouseDragged:1;
     unsigned int        isLoaded:1;
@@ -427,8 +428,8 @@ typedef NSInteger NSBackgroundStyle;
 @interface NSCell (NSDeprecated)
 
 enum {
-    NSScaleProportionally = 0, // Deprecated. Use NSScaleProportionallyDown
-    NSScaleToFit,              // Deprecated. Use NSScaleAxesIndependently
+    NSScaleProportionally = 0, // Deprecated. Use NSImageScaleProportionallyDown
+    NSScaleToFit,              // Deprecated. Use NSImageScaleAxesIndependently
     NSScaleNone                // Deprecated. Use NSImageScaleNone
 };
 

@@ -1,6 +1,6 @@
 /*	
     NSURLCache.h
-    Copyright (c) 2003-2012, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2013, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -130,12 +130,7 @@ typedef NSUInteger NSURLCacheStoragePolicy;
     <ul>
     <li>Memory capacity: 4 megabytes (4 * 1024 * 1024 bytes)
     <li>Disk capacity: 20 megabytes (20 * 1024 * 1024 bytes)
-    <li>Disk path: <nobr>(user home directory)/Library/Caches/(current application name)</nobr> 
-        <br>where:
-        <br>user home directory is determined by calling
-        <tt>NSHomeDirectory()</tt>
-        <br>current application name is determined by calling
-        <tt>[[NSProcessInfo processInfo] processName]</tt>
+    <li>Disk path: <nobr>(user home directory)/Library/Caches/(application bundle id)</nobr> 
     </ul>
     <p>Users who do not have special caching requirements or
     constraints should find the default shared cache instance

@@ -48,6 +48,7 @@ typedef unsigned short wchar_t;
 #endif /* _WIN32 */
 
 #include <OpenGL/gl.h>
+#include <OpenGL/OpenGLAvailability.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -58,7 +59,7 @@ typedef enum {
         SMAP_GENERATE_VIEW_MIPMAPS = 0x2,
         SMAP_GENERATE_SMAP_MIPMAPS = 0x4,
         SMAP_GENERATE_MIPMAPS = 0x6  /* both of above */
-} SphereMapFlags;
+} SphereMapFlags OPENGL_DEPRECATED(10_0, 10_9);
 
 /* Cube view enumerants. */
 enum {
@@ -70,65 +71,65 @@ enum {
 	SMAP_BACK = 5
 };
 
-typedef struct _SphereMap SphereMap;
+typedef struct _SphereMap SphereMap OPENGL_DEPRECATED(10_0, 10_9);
 
-extern SphereMap *smapCreateSphereMap(SphereMap *shareSmap);
-extern void smapDestroySphereMap(SphereMap *smap);
+extern SphereMap *smapCreateSphereMap(SphereMap *shareSmap) OPENGL_DEPRECATED(10_0, 10_9);
+extern void smapDestroySphereMap(SphereMap *smap) OPENGL_DEPRECATED(10_0, 10_9);
 
-extern void smapConfigureSphereMapMesh(SphereMap *smap, int steps, int rings, int edgeExtend);
+extern void smapConfigureSphereMapMesh(SphereMap *smap, int steps, int rings, int edgeExtend) OPENGL_DEPRECATED(10_0, 10_9);
 
-extern void smapSetSphereMapTexObj(SphereMap *smap, GLuint texobj);
-extern void smapSetViewTexObj(SphereMap *smap, GLuint texobj);
-extern void smapSetViewTexObjs(SphereMap *smap, GLuint texobjs[6]);
-extern void smapGetSphereMapTexObj(SphereMap *smap, GLuint *texobj);
-extern void smapGetViewTexObj(SphereMap *smap, GLuint *texobj);
-extern void smapGetViewTexObjs(SphereMap *smap, GLuint texobjs[6]);
+extern void smapSetSphereMapTexObj(SphereMap *smap, GLuint texobj) OPENGL_DEPRECATED(10_0, 10_9);
+extern void smapSetViewTexObj(SphereMap *smap, GLuint texobj) OPENGL_DEPRECATED(10_0, 10_9);
+extern void smapSetViewTexObjs(SphereMap *smap, GLuint texobjs[6]) OPENGL_DEPRECATED(10_0, 10_9);
+extern void smapGetSphereMapTexObj(SphereMap *smap, GLuint *texobj) OPENGL_DEPRECATED(10_0, 10_9);
+extern void smapGetViewTexObj(SphereMap *smap, GLuint *texobj) OPENGL_DEPRECATED(10_0, 10_9);
+extern void smapGetViewTexObjs(SphereMap *smap, GLuint texobjs[6]) OPENGL_DEPRECATED(10_0, 10_9);
 
-extern void smapSetFlags(SphereMap *smap, SphereMapFlags flags);
-extern void smapGetFlags(SphereMap *smap, SphereMapFlags *flags);
+extern void smapSetFlags(SphereMap *smap, SphereMapFlags flags) OPENGL_DEPRECATED(10_0, 10_9);
+extern void smapGetFlags(SphereMap *smap, SphereMapFlags *flags) OPENGL_DEPRECATED(10_0, 10_9);
 
-extern void smapSetViewOrigin(SphereMap *smap, GLint x, GLint y);
-extern void smapSetSphereMapOrigin(SphereMap *smap, GLint x, GLint y);
-extern void smapGetViewOrigin(SphereMap *smap, GLint *x, GLint *y);
-extern void smapGetSphereMapOrigin(SphereMap *smap, GLint *x, GLint *y);
+extern void smapSetViewOrigin(SphereMap *smap, GLint x, GLint y) OPENGL_DEPRECATED(10_0, 10_9);
+extern void smapSetSphereMapOrigin(SphereMap *smap, GLint x, GLint y) OPENGL_DEPRECATED(10_0, 10_9);
+extern void smapGetViewOrigin(SphereMap *smap, GLint *x, GLint *y) OPENGL_DEPRECATED(10_0, 10_9);
+extern void smapGetSphereMapOrigin(SphereMap *smap, GLint *x, GLint *y) OPENGL_DEPRECATED(10_0, 10_9);
 
-extern void smapSetEye(SphereMap *smap, GLfloat eyex, GLfloat eyey,	GLfloat eyez);
-extern void smapSetEyeVector(SphereMap *smap, GLfloat *eye);
-extern void smapSetUp(SphereMap *smap, GLfloat upx, GLfloat upy, GLfloat upz);
-extern void smapSetUpVector(SphereMap *smap, GLfloat *up);
-extern void smapSetObject(SphereMap *smap, GLfloat objx, GLfloat objy, GLfloat objz);
-extern void smapSetObjectVector(SphereMap *smap, GLfloat *obj);
-extern void smapGetEye(SphereMap *smap, GLfloat *eyex, GLfloat *eyey, GLfloat *eyez);
-extern void smapGetEyeVector(SphereMap *smap, GLfloat *eye);
-extern void smapGetUp(SphereMap *smap, GLfloat *upx, GLfloat *upy, GLfloat *upz);
-extern void smapGetUpVector(SphereMap *smap, GLfloat *up);
-extern void smapGetObject(SphereMap *smap, GLfloat *objx, GLfloat *objy, GLfloat *objz);
-extern void smapGetObjectVector(SphereMap *smap, GLfloat *obj);
+extern void smapSetEye(SphereMap *smap, GLfloat eyex, GLfloat eyey,	GLfloat eyez) OPENGL_DEPRECATED(10_0, 10_9);
+extern void smapSetEyeVector(SphereMap *smap, GLfloat *eye) OPENGL_DEPRECATED(10_0, 10_9);
+extern void smapSetUp(SphereMap *smap, GLfloat upx, GLfloat upy, GLfloat upz) OPENGL_DEPRECATED(10_0, 10_9);
+extern void smapSetUpVector(SphereMap *smap, GLfloat *up) OPENGL_DEPRECATED(10_0, 10_9);
+extern void smapSetObject(SphereMap *smap, GLfloat objx, GLfloat objy, GLfloat objz) OPENGL_DEPRECATED(10_0, 10_9);
+extern void smapSetObjectVector(SphereMap *smap, GLfloat *obj) OPENGL_DEPRECATED(10_0, 10_9);
+extern void smapGetEye(SphereMap *smap, GLfloat *eyex, GLfloat *eyey, GLfloat *eyez) OPENGL_DEPRECATED(10_0, 10_9);
+extern void smapGetEyeVector(SphereMap *smap, GLfloat *eye) OPENGL_DEPRECATED(10_0, 10_9);
+extern void smapGetUp(SphereMap *smap, GLfloat *upx, GLfloat *upy, GLfloat *upz) OPENGL_DEPRECATED(10_0, 10_9);
+extern void smapGetUpVector(SphereMap *smap, GLfloat *up) OPENGL_DEPRECATED(10_0, 10_9);
+extern void smapGetObject(SphereMap *smap, GLfloat *objx, GLfloat *objy, GLfloat *objz) OPENGL_DEPRECATED(10_0, 10_9);
+extern void smapGetObjectVector(SphereMap *smap, GLfloat *obj) OPENGL_DEPRECATED(10_0, 10_9);
 
-extern void smapSetNearFar(SphereMap *smap, GLfloat viewNear, GLfloat viewFar);
-extern void smapGetNearFar(SphereMap *smap, GLfloat *viewNear, GLfloat *viewFar);
+extern void smapSetNearFar(SphereMap *smap, GLfloat viewNear, GLfloat viewFar) OPENGL_DEPRECATED(10_0, 10_9);
+extern void smapGetNearFar(SphereMap *smap, GLfloat *viewNear, GLfloat *viewFar) OPENGL_DEPRECATED(10_0, 10_9);
 
-extern void smapSetSphereMapTexDim(SphereMap *smap, GLsizei texdim);
-extern void smapSetViewTexDim(SphereMap *smap, GLsizei texdim);
-extern void smapGetSphereMapTexDim(SphereMap *smap, GLsizei *texdim);
-extern void smapGetViewTexDim(SphereMap *smap, GLsizei *texdim);
+extern void smapSetSphereMapTexDim(SphereMap *smap, GLsizei texdim) OPENGL_DEPRECATED(10_0, 10_9);
+extern void smapSetViewTexDim(SphereMap *smap, GLsizei texdim) OPENGL_DEPRECATED(10_0, 10_9);
+extern void smapGetSphereMapTexDim(SphereMap *smap, GLsizei *texdim) OPENGL_DEPRECATED(10_0, 10_9);
+extern void smapGetViewTexDim(SphereMap *smap, GLsizei *texdim) OPENGL_DEPRECATED(10_0, 10_9);
 
-extern void smapSetContextData(SphereMap *smap, void *context);
-extern void smapGetContextData(SphereMap *smap, void **context);
+extern void smapSetContextData(SphereMap *smap, void *context) OPENGL_DEPRECATED(10_0, 10_9);
+extern void smapGetContextData(SphereMap *smap, void **context) OPENGL_DEPRECATED(10_0, 10_9);
 
-extern void smapSetPositionLightsFunc(SphereMap *smap, void (*positionLights)(int view, void *context));
-extern void smapSetDrawViewFunc(SphereMap *smap, void (*drawView)(int view, void *context));
-extern void smapGetPositionLightsFunc(SphereMap *smap, void (**positionLights)(int view, void *context));
-extern void smapGetDrawViewFunc(SphereMap *smap, void (**drawView)(int view, void *context));
+extern void smapSetPositionLightsFunc(SphereMap *smap, void (*positionLights)(int view, void *context)) OPENGL_DEPRECATED(10_0, 10_9);
+extern void smapSetDrawViewFunc(SphereMap *smap, void (*drawView)(int view, void *context)) OPENGL_DEPRECATED(10_0, 10_9);
+extern void smapGetPositionLightsFunc(SphereMap *smap, void (**positionLights)(int view, void *context)) OPENGL_DEPRECATED(10_0, 10_9);
+extern void smapGetDrawViewFunc(SphereMap *smap, void (**drawView)(int view, void *context)) OPENGL_DEPRECATED(10_0, 10_9);
 
-extern void smapGenViewTex(SphereMap *smap, int view);
-extern void smapGenViewTexs(SphereMap *smap);
-extern void smapGenSphereMapFromViewTexs(SphereMap *smap);
-extern void smapGenSphereMap(SphereMap *smap);
-extern void smapGenSphereMapWithOneViewTex(SphereMap *smap);
+extern void smapGenViewTex(SphereMap *smap, int view) OPENGL_DEPRECATED(10_0, 10_9);
+extern void smapGenViewTexs(SphereMap *smap) OPENGL_DEPRECATED(10_0, 10_9);
+extern void smapGenSphereMapFromViewTexs(SphereMap *smap) OPENGL_DEPRECATED(10_0, 10_9);
+extern void smapGenSphereMap(SphereMap *smap) OPENGL_DEPRECATED(10_0, 10_9);
+extern void smapGenSphereMapWithOneViewTex(SphereMap *smap) OPENGL_DEPRECATED(10_0, 10_9);
 
-extern int smapRvecToSt(float rvec[3], float st[2]);
-extern void smapStToRvec(float *st, float *rvec);
+extern int smapRvecToSt(float rvec[3], float st[2]) OPENGL_DEPRECATED(10_0, 10_9);
+extern void smapStToRvec(float *st, float *rvec) OPENGL_DEPRECATED(10_0, 10_9);
 
 #ifdef __cplusplus
 }

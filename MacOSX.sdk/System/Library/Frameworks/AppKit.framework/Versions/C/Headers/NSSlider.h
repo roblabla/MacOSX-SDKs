@@ -1,7 +1,7 @@
 /*
 	NSSlider.h
 	Application Kit
-	Copyright (c) 1994-2012, Apple Inc.
+	Copyright (c) 1994-2013, Apple Inc.
 	All rights reserved.
 */
 
@@ -16,21 +16,22 @@
 - (void)setMaxValue:(double)aDouble;
 - (void)setAltIncrementValue:(double)incValue;
 - (double)altIncrementValue;
-- (void)setTitleCell:(NSCell *)aCell;
-- (id)titleCell;
-- (void)setTitleColor:(NSColor *)newColor;
-- (NSColor *)titleColor;
-- (void)setTitleFont:(NSFont *)fontObj;
-- (NSFont *)titleFont;
-- (NSString *)title;
-- (void)setTitle:(NSString *)aString;
-- (void)setKnobThickness:(CGFloat)aFloat;
 - (CGFloat)knobThickness;
-- (void)setImage:(NSImage *)backgroundImage;
-- (NSImage *)image;
 - (NSInteger)isVertical;
 - (BOOL)acceptsFirstMouse:(NSEvent *)theEvent;
 
+/* These methods have never done anything, and are formally deprecated as of 10.9*/
+- (void)setTitleCell:(NSCell *)aCell NS_DEPRECATED_MAC(10_0, 10_9);
+- (id)titleCell NS_DEPRECATED_MAC(10_0, 10_9);
+- (void)setTitleColor:(NSColor *)newColor NS_DEPRECATED_MAC(10_0, 10_9);
+- (NSColor *)titleColor NS_DEPRECATED_MAC(10_0, 10_9);
+- (void)setTitleFont:(NSFont *)fontObj NS_DEPRECATED_MAC(10_0, 10_9);
+- (NSFont *)titleFont NS_DEPRECATED_MAC(10_0, 10_9);
+- (NSString *)title NS_DEPRECATED_MAC(10_0, 10_9);
+- (void)setTitle:(NSString *)aString NS_DEPRECATED_MAC(10_0, 10_9);
+- (void)setKnobThickness:(CGFloat)aFloat NS_DEPRECATED_MAC(10_0, 10_9);
+- (void)setImage:(NSImage *)backgroundImage NS_DEPRECATED_MAC(10_0, 10_9);
+- (NSImage *)image NS_DEPRECATED_MAC(10_0, 10_9);
 @end
 
 @interface NSSlider(NSTickMarkSupport)

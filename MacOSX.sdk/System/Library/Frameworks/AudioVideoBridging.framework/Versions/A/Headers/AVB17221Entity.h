@@ -31,9 +31,8 @@ NS_CLASS_AVAILABLE(10_8, NA)
 	BOOL localEntity;
 	
 	uint8_t timeToLive;
-	uint64_t guid;
-	uint32_t vendorID;
-	uint32_t modelID;
+	uint64_t entityID;
+	uint64_t entityModelID;
 	AVB17221ADPEntityCapabilities entityCapabilities;
 	uint16_t talkerStreamSources;
 	AVB17221ADPTalkerCapabilities talkerCapabilities;
@@ -41,7 +40,7 @@ NS_CLASS_AVAILABLE(10_8, NA)
 	AVB17221ADPListenerCapabilities listenerCapabilities;
 	AVB17221ADPControllerCapabilities controllerCapabilities;
 	uint32_t availableIndex;
-	uint64_t asGrandmasterID;
+	uint64_t gPTPGrandmasterID;
 	uint64_t associationID;
 	
 	NSArray *macAddresses;
@@ -49,6 +48,12 @@ NS_CLASS_AVAILABLE(10_8, NA)
 	AVB17221EntityDiscovery *entityDiscovery;
 	
 	id<AVB17221EntityPublisher> entityPublisher;
+	
+	uint32_t lastAvailableIndex;
+	
+	uint16_t identifyControlIndex;
+	uint8_t gPTPDomainNumber;
+	uint16_t interfaceIndex;
 #endif
 	
 	io_service_t service;
@@ -71,17 +76,27 @@ NS_CLASS_AVAILABLE(10_8, NA)
 	@property	guid
 	@abstract	The Globally Unique Identifier (entity_guid) of the entity.
  */
-@property (assign) uint64_t guid;
+@property (assign) uint64_t guid NS_DEPRECATED(10_8, 10_9, NA, NA);
+/*!
+	@property	entityID
+	@abstract	The Unique Identifier (entity_id) of the entity.
+ */
+@property (assign) uint64_t entityID NS_AVAILABLE(10_9, NA);
 /*!
 	@property	vendorID
 	@abstract	The vendor_id of the entity.
  */
-@property (assign) uint32_t vendorID;
+@property (assign) uint32_t vendorID NS_DEPRECATED(10_8, 10_9, NA, NA);
 /*!
 	@property	modelID
 	@abstract	The model_id of the entity.
  */
-@property (assign) uint32_t modelID;
+@property (assign) uint32_t modelID NS_DEPRECATED(10_8, 10_9, NA, NA);
+/*!
+	@property	entityModelID
+	@abstract	The Entity Model Unique Identifier (entity_model_id) of the entity.
+ */
+@property (assign) uint64_t entityModelID NS_AVAILABLE(10_9, NA);
 /*!
 	@property	entityCapabilities
 	@abstract	The entity_capabilities of the entity.
@@ -121,7 +136,27 @@ NS_CLASS_AVAILABLE(10_8, NA)
 	@property	asGrandmasterID
 	@abstract	The clock identifier of the IEEE Std 802.1AS-2011 grandmaster of the entity.
  */
-@property (assign) uint64_t asGrandmasterID;
+@property (assign) uint64_t asGrandmasterID NS_DEPRECATED(10_8, 10_9, NA, NA);
+/*!
+	@property	gPTPGrandmasterID
+	@abstract	The clock identifier of the IEEE Std 802.1AS-2011 grandmaster of the entity.
+ */
+@property (assign) uint64_t gPTPGrandmasterID NS_AVAILABLE(10_9, NA);
+/*!
+	@property	gPTPDomainNumber
+	@abstract	The domain number of the IEEE Std 802.1AS-2011 grandmaster of the entity.
+ */
+@property (assign) uint8_t gPTPDomainNumber NS_AVAILABLE(10_9, NA);
+/*!
+	@property	identifyControlIndex
+	@abstract	The descriptor_index of the CONTROL which implements the IDENTIFY for the entity if supported.
+ */
+@property (assign) uint16_t identifyControlIndex NS_AVAILABLE(10_9, NA);
+/*!
+	@property	interfaceIndex
+	@abstract	The descriptor_index of the AVB_INTERFACE descriptor which is associated with this entity.
+ */
+@property (assign) uint16_t interfaceIndex NS_AVAILABLE(10_9, NA);
 /*!
 	@property	associationID
 	@abstract	The association_id of the entity.

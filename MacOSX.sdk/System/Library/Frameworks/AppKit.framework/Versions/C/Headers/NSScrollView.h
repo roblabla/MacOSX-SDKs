@@ -1,7 +1,7 @@
 /*
 	NSScrollView.h
 	Application Kit
-	Copyright (c) 1994-2012, Apple Inc.
+	Copyright (c) 1994-2013, Apple Inc.
 	All rights reserved.
 */
 #import <Foundation/NSDate.h>
@@ -45,9 +45,13 @@ typedef struct __SFlags {
     unsigned int hContentElasticity:2;
     unsigned int predominantAxisScrolling:1;
     unsigned int findBarPosition:2;
-    unsigned int RESERVED:5;
+    unsigned int registeredForWindowWillClose:1;
+    unsigned int unarchiving:1;
+    unsigned int RESERVED:3;
 #else
-    unsigned int RESERVED:5;
+    unsigned int RESERVED:3;
+    unsigned int unarchiving:1;
+    unsigned int registeredForWindowWillClose:1;
     unsigned int findBarPosition:2;
     unsigned int predominantAxisScrolling:1;
     unsigned int hContentElasticity:2;
@@ -202,6 +206,10 @@ typedef struct __SFlags {
 */
 - (void)setMagnification:(CGFloat)magnification centeredAtPoint:(NSPoint)point NS_AVAILABLE_MAC(10_8);
 
+/* Some subviews of the document view do not scroll like the rest of the document. Instead these views appear to float over the document (see NSTableView floating group rows). The following API makes it easier to work with these types of floating views. Note: You are responsible for keeping track of the floating views and removing them via -removeFromSuperview when they should no longer float. A view may only float on one axis at a time.
+*/
+- (void)addFloatingSubview:(NSView *)view forAxis:(NSEventGestureAxis)axis NS_AVAILABLE_MAC(10_9);
+
 @end
 
 /* This notification is sent at the beginning of a magnify gesture. The notification object is the scroll view performing the magnification.
@@ -211,6 +219,22 @@ APPKIT_EXTERN NSString * const NSScrollViewWillStartLiveMagnifyNotification NS_A
 /* This notification is sent at the end of magnify gesture. The notification object is the scroll view view performing the magnification.
 */
 APPKIT_EXTERN NSString * const NSScrollViewDidEndLiveMagnifyNotification NS_AVAILABLE_MAC(10_8);
+
+/* This notification is sent on the main thread at the beginning of user initiated live scroll tracking (gesture scroll or scroller tracking, e.g. thumb dragging).
+ The notification object is the scroll view performing the scroll.
+*/
+APPKIT_EXTERN NSString * const NSScrollViewWillStartLiveScrollNotification NS_AVAILABLE_MAC(10_9);
+
+/* This notification is sent on the main thread after changing the clipview bounds origin due to a user initiated event.
+ Not all user initiated scrolls are bracketed by a willStart/didEnd notification pair (legacy mice).
+ The notification object is the scroll view performing the scroll.
+*/
+APPKIT_EXTERN NSString * const NSScrollViewDidLiveScrollNotification NS_AVAILABLE_MAC(10_9);
+
+/* This notification is sent on the main thread at the end of live scroll tracking.
+ The notification object is the scroll view performing the scroll.
+*/
+APPKIT_EXTERN NSString * const NSScrollViewDidEndLiveScrollNotification NS_AVAILABLE_MAC(10_9);
 
 
 @interface NSScrollView(NSRulerSupport)

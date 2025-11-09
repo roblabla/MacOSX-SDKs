@@ -15,8 +15,8 @@
 #include "tube.h"
 #include "port.h" /* for gleVector */
 
-typedef float gleColor[3];
-typedef double gleTwoVec[2];
+typedef float gleColor[3] OPENGL_DEPRECATED(10_0, 10_9);
+typedef double gleTwoVec[2] OPENGL_DEPRECATED(10_0, 10_9);
 
 typedef struct {
 
@@ -56,10 +56,10 @@ typedef struct {
    void (*save_v3d_gen_texture) (double *, int, int);
    void (*save_end_gen_texture) (void);
 
-} gleGC;
+} gleGC OPENGL_DEPRECATED(10_0, 10_9);
 
-extern gleGC *_gle_gc;
-extern gleGC * gleCreateGC (void);
+extern gleGC *_gle_gc OPENGL_DEPRECATED(10_0, 10_9);
+extern gleGC * gleCreateGC (void) OPENGL_DEPRECATED(10_0, 10_9);
 
 #define INIT_GC() {if (!_gle_gc) _gle_gc = gleCreateGC(); }
 #define extrusion_join_style (_gle_gc->join_style)

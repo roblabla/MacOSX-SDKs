@@ -43,6 +43,36 @@ enum {
 };
 typedef uint32_t CGScrollEventUnit;
 
+/* Constants that specify momentum scroll phases. */
+enum {
+    kCGMomentumScrollPhaseNone = 0,
+    kCGMomentumScrollPhaseBegin = 1,
+    kCGMomentumScrollPhaseContinue = 2,
+    kCGMomentumScrollPhaseEnd = 3
+};
+typedef uint32_t CGMomentumScrollPhase;
+
+/* Constants that specify scroll phases. */
+enum {
+    kCGScrollPhaseBegan = 1,
+    kCGScrollPhaseChanged = 2,
+    kCGScrollPhaseEnded = 4,
+    kCGScrollPhaseCancelled = 8,
+    kCGScrollPhaseMayBegin = 128
+};
+typedef uint32_t CGScrollPhase;
+
+/* Constants that specify gesture phases. */
+enum {
+    kCGGesturePhaseNone = 0,
+    kCGGesturePhaseBegan = 1,
+    kCGGesturePhaseChanged = 2,
+    kCGGesturePhaseEnded = 4,
+    kCGGesturePhaseCancelled = 8,
+    kCGGesturePhaseMayBegin = 128
+};
+typedef uint32_t CGGesturePhase;
+
 /* Constants that indicate the modifier key state at the time an event is
    created, as well as other event-related states.
 
@@ -208,6 +238,8 @@ enum {
     
   /* rdar://11259169 */
   kCGScrollWheelEventScrollCount = 100,
+    
+  kCGScrollWheelEventMomentumPhase = 123,
     
   /* Key to access an integer field that indicates whether the event should
      be ignored by the Inkwell subsystem. If the value is non-zero, the

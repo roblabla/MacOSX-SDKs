@@ -1,5 +1,5 @@
 /*	NSNetServices.h
-        Copyright (c) 2002-2012, Apple Inc. All rights reserved.
+        Copyright (c) 2002-2013 Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -51,10 +51,26 @@ typedef NS_ENUM(NSInteger, NSNetServicesError) {
 
 
 typedef NS_OPTIONS(NSUInteger, NSNetServiceOptions) {
-/* When passed to -publishWithOptions, this suppresses the auto-renaming of an NSNetService in the event of a name collision. The collision is reported to the instance's delegate on the netService:didNotPublish: method.
-*/
-    NSNetServiceNoAutoRename = 1UL << 0
+    /* When passed to -publishWithOptions:, this suppresses the auto-renaming of an
+     * NSNetService in the event of a name collision. The collision is reported to the
+     * instance's delegate on the -netService:didNotPublish: method.
+     */
+    NSNetServiceNoAutoRename = 1UL << 0,
+
+
+    /* When passed to -publishWithOptions:, in addition to publishing the service, a
+     * TCP listener is started for both IPv4 and IPv6 on the port specified by the
+     * NSNetService. If the listening port can't be opened, an error is reported using
+     * -netService:didNotPublish:. Specify a port number of zero to use a random port.
+     * When -netServiceDidPublish: is called, -port will return the actual listening
+     * port number. Since the listener only supports TCP, the publish will fail with
+     * NSNetServicesBadArgumentError if the NSNetService type does not end with "_tcp".
+     * New incoming connections will be delivered in the form of NSStreams via the
+     * -netService:didAcceptConnectionWithInputStream:outputStream: delegate method.
+     */
+    NSNetServiceListenForConnections NS_ENUM_AVAILABLE(10_9, 7_0) = 1UL << 1
 };
+
 
 
 #pragma mark -
@@ -76,32 +92,42 @@ If publish: is called on an NSNetService instance initialized with this method, 
 */
 - (id)initWithDomain:(NSString *)domain type:(NSString *)type name:(NSString *)name;
 
-- (id <NSNetServiceDelegate>)delegate;
-- (void)setDelegate:(id <NSNetServiceDelegate>)delegate;
-
 /* NSNetService instances may be scheduled on NSRunLoops to operate in different modes, or in other threads. It is generally not necessary to schedule NSNetServices in other threads. NSNetServices are scheduled in the current thread's NSRunLoop in the NSDefaultRunLoopMode when they are created.
 */
 - (void)scheduleInRunLoop:(NSRunLoop *)aRunLoop forMode:(NSString *)mode;
 - (void)removeFromRunLoop:(NSRunLoop *)aRunLoop forMode:(NSString *)mode;
 
-/* Returns the domain of the discovered or published service.
-*/
-- (NSString *)domain;
+/* Set a delegate to receive publish, resolve, or monitor events.
+ */
+@property (assign) id <NSNetServiceDelegate> delegate;
 
-/* Returns the type of the discovered or published service.
+/* Initially set to NO. Set to YES to also publish, resolve, or monitor this service over peer to peer Bluetooth and Wi-Fi (if available). Must be set before operation starts.
 */
-- (NSString *)type;
+@property BOOL includesPeerToPeer NS_AVAILABLE(NA, 7_0);
 
 /* Returns the name of the discovered or published service.
 */
-- (NSString *)name;
+@property (readonly, copy) NSString *name;
+
+/* Returns the type of the discovered or published service.
+*/
+@property (readonly, copy) NSString *type;
+
+/* Returns the domain of the discovered or published service.
+*/
+@property (readonly, copy) NSString *domain;
+
+/* Returns the DNS host name of the computer hosting the discovered or published service. If a successful resolve has not yet occurred, this method will return nil.
+*/
+@property (readonly, copy) NSString *hostName;
 
 /* The addresses of the service. This is an NSArray of NSData instances, each of which contains a single struct sockaddr suitable for use with connect(2). In the event that no addresses are resolved for the service or the service has not yet been resolved, an empty NSArray is returned.
 */
-- (NSArray *)addresses;
+@property (readonly, copy) NSArray *addresses;
 
-/* The port of a resolved service. This returns -1 if the service has not been resolved. */
-- (NSInteger)port NS_AVAILABLE(10_5, 2_0);
+/* The port of a resolved service. This returns -1 if the service has not been resolved.
+*/
+@property (readonly) NSInteger port NS_AVAILABLE(10_5, 2_0);
  
 /* Advertises a given service on the network. This method returns immediately. Success or failure is indicated by callbacks to the NSNetService instance's delegate.
  
@@ -118,7 +144,7 @@ If publish: is called on an NSNetService instance initialized with this method, 
 
 /* Attempts to determine at least one address for the NSNetService instance. For applications linked on or after Mac OS X 10.4 "Tiger", this method calls -resolveWithTimeout: with a value of 5.0. Applications linked prior to Mac OS X 10.4 "Tiger" must call -stop on the instance after an appropriate (short) amount of time to avoid causing unnecessary network traffic.
 */
-- (void)resolve NS_DEPRECATED(10_0, 10_4, 2_0, 2_0);
+- (void)resolve NS_DEPRECATED(10_2, 10_4, 2_0, 2_0);
 
 /* Halts a service which is either publishing or resolving.
 */
@@ -131,10 +157,6 @@ If publish: is called on an NSNetService instance initialized with this method, 
 /* Returns an NSData created from the provided dictionary. The keys in the provided dictionary must be NSStrings, and the values must be NSDatas. If the dictionary cannot be converted into an NSData suitable for a TXT record, this method will return nil. For applications linked on or after Mac OS X 10.5, this method will throw an NSInvalidArgumentException if it is passed nil as the argument.
 */
 + (NSData *)dataFromTXTRecordDictionary:(NSDictionary *)txtDictionary;
-
-/* Returns the DNS host name of the computer hosting the discovered or published service. If a successful resolve has not yet occurred, this method will return nil.
-*/
-- (NSString *)hostName;
 
 /* Starts a resolve for the NSNetService instance of the specified duration. If the delegate's -netServiceDidResolveAddress: method is called before the timeout expires, the resolve is successful. If the timeout is reached, the delegate's -netService:didNotResolve: method will be called. The value of the NSNetServicesErrorCode key in the error dictionary will be NSNetServicesTimeoutError.
 */
@@ -174,8 +196,13 @@ If publish: is called on an NSNetService instance initialized with this method, 
 
 - (id)init;
 
-- (id <NSNetServiceBrowserDelegate>)delegate;
-- (void)setDelegate:(id <NSNetServiceBrowserDelegate>)delegate;
+/* Set a delegate to receive discovery events.
+*/
+@property (assign) id <NSNetServiceBrowserDelegate> delegate;
+
+/* Initially set to NO. Set to YES to also browse over peer to peer Bluetooth and Wi-Fi (if available). Must be set before starting to search.
+*/
+@property BOOL includesPeerToPeer NS_AVAILABLE(NA, 7_0);
 
 /* NSNetServiceBrowser instances may be scheduled on NSRunLoops to operate in different modes, or in other threads. It is generally not necessary to schedule NSNetServiceBrowsers in other threads. NSNetServiceBrowsers are scheduled in the current thread's NSRunLoop in the NSDefaultRunLoopMode when they are created.
 */
@@ -236,6 +263,19 @@ If publish: is called on an NSNetService instance initialized with this method, 
 /* Sent to the NSNetService instance's delegate when the instance is being monitored and the instance's TXT record has been updated. The new record is contained in the data parameter.
 */
 - (void)netService:(NSNetService *)sender didUpdateTXTRecordData:(NSData *)data;
+    
+    
+/* Sent to a published NSNetService instance's delegate when a new connection is
+ * received. Before you can communicate with the connecting client, you must -open
+ * and schedule the streams. To reject a connection, just -open both streams and
+ * then immediately -close them.
+ 
+ * To enable TLS on the stream, set the various TLS settings using
+ * kCFStreamPropertySSLSettings before calling -open. You must also specify
+ * kCFBooleanTrue for kCFStreamSSLIsServer in the settings dictionary along with
+ * a valid SecIdentityRef as the first entry of kCFStreamSSLCertificates.
+ */
+- (void)netService:(NSNetService *)sender didAcceptConnectionWithInputStream:(NSInputStream *)inputStream outputStream:(NSOutputStream *)outputStream NS_AVAILABLE(10_9, 7_0);
 
 @end
 
@@ -288,13 +328,13 @@ If publish: is called on an NSNetService instance initialized with this method, 
 
 This method is deprecated on Mac OS X 10.4 "Tiger" and later; use -TXTRecordData instead.
 */
-- (NSString *)protocolSpecificInformation NS_DEPRECATED(10_0, 10_4, 2_0, 2_0);
+- (NSString *)protocolSpecificInformation NS_DEPRECATED(10_2, 10_4, 2_0, 2_0);
 
 /* Sets the TXT record of the NSNetService instance to be the provided string. It is the caller's responsibility to ensure the string is of the appropriate format with the correct encoding.
 
 This method is deprecated on Mac OS X 10.4 "Tiger" and later; use -setTXTRecordData: instead.
 */
-- (void)setProtocolSpecificInformation:(NSString *)specificInformation NS_DEPRECATED(10_0, 10_4, 2_0, 2_0);
+- (void)setProtocolSpecificInformation:(NSString *)specificInformation NS_DEPRECATED(10_2, 10_4, 2_0, 2_0);
 
 @end
 
@@ -304,7 +344,7 @@ This method is deprecated on Mac OS X 10.4 "Tiger" and later; use -setTXTRecordD
 
 This method is deprecated on Mac OS X 10.4 "Tiger" and later; use -searchForBrowsableDomains or -searchForRegistrationDomains instead.
 */
-- (void)searchForAllDomains NS_DEPRECATED(10_0, 10_4, 2_0, 2_0);
+- (void)searchForAllDomains NS_DEPRECATED(10_2, 10_4, 2_0, 2_0);
 
 @end
 

@@ -2,7 +2,7 @@
 //  SCNTransaction.h
 //  SceneKit
 //
-//  Copyright 2012 Apple Inc. All rights reserved.
+//  Copyright (c) 2012 Apple Inc. All rights reserved.
 //
 
 
@@ -12,7 +12,7 @@
  * operations into atomic updates. Every
  * modification to the scene graph requires a transaction to be part of. */
 
- 
+SCENEKIT_CLASS_AVAILABLE(10_8, NA)
 @interface SCNTransaction : NSObject
 
 /* Begin a new transaction for the current thread; nests. */

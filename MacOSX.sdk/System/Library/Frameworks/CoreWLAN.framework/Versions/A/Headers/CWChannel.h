@@ -16,7 +16,7 @@
  * @class
  * @abstract Encapsulates an IEEE 802.11 channel.
  */
-@interface CWChannel : NSObject <NSCopying, NSCoding> {
+@interface CWChannel : NSObject <NSCopying, NSSecureCoding> {
 @private
 	NSDictionary *_info;
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2008-2009 Apple Inc. All rights reserved.
+ * Copyright (c) 2008-2012 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -205,6 +205,8 @@ private:
         OSKext * aKext,
         bool     terminateServicesAndRemovePersonalitiesFlag = false);
 
+    virtual bool isInExcludeList(void);
+
    /* Mkexts.
     */
     static OSReturn readMkextArchive(
@@ -405,13 +407,6 @@ private:
      */
     virtual void               setCPPInitialized(bool initialized=true);
 
-#if __i386__
-   /* Backward compatibility for kmod_get_info() MIG call.
-    */
-    static kern_return_t getKmodInfo(
-        kmod_info_array_t      * kmodList,
-        mach_msg_type_number_t * kmodCount);
-#endif /* __i386__ */
 
 
 #if PRAGMA_MARK
@@ -464,6 +459,10 @@ public:
     static void     setKextdActive(Boolean active = true);
     static void     setDeferredLoadSucceeded(Boolean succeeded = true);
     static void     considerRebuildOfPrelinkedKernel(void);
+    static void     createExcludeListFromBooterData(
+                                            OSDictionary * theDictionary,
+                                            OSCollectionIterator * theIterator);
+    static void     createExcludeListFromPrelinkInfo(OSArray * theInfoArray);
 
     virtual bool    setAutounloadEnabled(bool flag);
 

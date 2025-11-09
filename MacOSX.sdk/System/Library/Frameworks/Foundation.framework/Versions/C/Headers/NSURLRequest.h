@@ -1,6 +1,6 @@
 /*	
     NSURLRequest.h
-    Copyright (c) 2003-2012, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2013, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -172,7 +172,7 @@ typedef NSUInteger NSURLRequestNetworkServiceType;
     which can are used to perform the load of a URL, or as input to the
     NSURLConnection class method which performs synchronous loads.
 */
-@interface NSURLRequest : NSObject <NSCoding, NSCopying, NSMutableCopying>
+@interface NSURLRequest : NSObject <NSSecureCoding, NSCopying, NSMutableCopying>
 {
     @private
     NSURLRequestInternal *_internal;
@@ -190,7 +190,14 @@ typedef NSUInteger NSURLRequestNetworkServiceType;
 */
 + (id)requestWithURL:(NSURL *)URL;
 
-/*! 
+/*
+    @method supportsSecureCoding
+    @abstract Indicates that NSURLRequest implements the NSSecureCoding protocol.
+    @result A BOOL value set to YES.
+*/
++ (BOOL)supportsSecureCoding;
+
+/*!
     @method requestWithURL:cachePolicy:timeoutInterval:
     @abstract Allocates and initializes a NSURLRequest with the given
     URL and cache policy.
@@ -465,9 +472,11 @@ typedef NSUInteger NSURLRequestNetworkServiceType;
 
 /*!
  @method HTTPShouldUsePipelining
- @abstract Reports whether the receiver is not expected to wait for the previous response before transmitting.
- @result YES if the receiver should transmit before the previous response is received. 
- NO if the receiver should wait for the previous response before transmitting.
+ @abstract Reports whether the receiver is not expected to wait for the
+ previous response before transmitting.
+ @result YES if the receiver should transmit before the previous response
+ is received.  NO if the receiver should wait for the previous response
+ before transmitting.
  */
 - (BOOL)HTTPShouldUsePipelining NS_AVAILABLE(10_7, 4_0);
 
@@ -571,13 +580,17 @@ typedef NSUInteger NSURLRequestNetworkServiceType;
  before transmitting.
  @param YES if the receiver should transmit before the previous response is
  received.  NO to wait for the previous response before transmitting.
- @discussion calling this method with a YES value does not guarantee HTTP 
- pipelining behavior. HTTP 1.1 allows the client to send multiple requests to 
- the server without waiting for a response.  
- Though HTTP 1.1 requires support for pipelining, some servers report themselves 
- as being HTTP 1.1 but do not support pipelining.  To maintain compatibility 
- with these servers, requests may have to wait for the previous response before 
- transmitting.
+ @discussion Calling this method with a YES value does not guarantee HTTP 
+ pipelining behavior.  This method may have no effect if an HTTP proxy is
+ configured, or if the HTTP request uses an unsafe request method (e.g., POST
+ requests will not pipeline).  Pipelining behavior also may not begin until
+ the second request on a given TCP connection.  There may be other situations
+ where pipelining does not occur even though YES was set.
+ HTTP 1.1 allows the client to send multiple requests to the server without
+ waiting for a response.  Though HTTP 1.1 requires support for pipelining,
+ some servers report themselves as being HTTP 1.1 but do not support
+ pipelining (disconnecting, sending resources misordered, omitting part of
+ a resource, etc.).
  */
 - (void)setHTTPShouldUsePipelining:(BOOL)shouldUsePipelining NS_AVAILABLE(10_7, 4_0);
 

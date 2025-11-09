@@ -1,7 +1,7 @@
 /*
         NSMenuItemCell.h
         Application Kit
-        Copyright (c) 1997-2012, Apple Inc.
+        Copyright (c) 1997-2013, Apple Inc.
         All rights reserved.
 */
 
@@ -20,7 +20,9 @@
     NSSize _stateImageSize;
     NSSize _imageSize;
     NSSize _titleSize;
+#if ! __LP64__
     NSSize _keyEquivalentSize;
+#endif
     NSSize _size;
     struct __micFlags {
         unsigned int needsSizing:1;

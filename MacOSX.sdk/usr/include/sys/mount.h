@@ -319,10 +319,16 @@ struct vfsidctl {
 #define VFS_CTL_NOLOCKS	0x00010006	/* disable file locking */
 #define VFS_CTL_SADDR	0x00010007	/* get server address */
 #define VFS_CTL_DISC    0x00010008	/* server disconnected */
+#define VFS_CTL_SERVERINFO  0x00010009  /* information about fs server */
 
 struct vfsquery {
 	u_int32_t	vq_flags;
 	u_int32_t	vq_spare[31];
+};
+
+struct vfs_server {
+     int32_t  vs_minutes;                       /* minutes until server goes down. */
+     u_int8_t vs_server_name[MAXHOSTNAMELEN*3]; /* UTF8 server name to display (null terminated) */
 };
 
 /* vfsquery flags */
@@ -336,8 +342,8 @@ struct vfsquery {
 #define VQ_NOTRESPLOCK	0x0080	/* server lockd down */
 #define VQ_UPDATE	0x0100	/* filesystem information has changed */
 #define VQ_VERYLOWDISK	0x0200	/* file system has *very* little disk space left */
-#define VQ_SYNCEVENT	0x0400	/* a sync just happened */
-#define VQ_FLAG0800	0x0800	/* placeholder */
+#define VQ_SYNCEVENT	0x0400	/* a sync just happened (not set by kernel starting Mac OS X 10.9) */
+#define VQ_SERVEREVENT  0x0800  /* server issued notification/warning */
 #define VQ_FLAG1000	0x1000	/* placeholder */
 #define VQ_FLAG2000	0x2000	/* placeholder */
 #define VQ_FLAG4000	0x4000	/* placeholder */

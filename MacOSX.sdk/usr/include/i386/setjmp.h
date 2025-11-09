@@ -56,6 +56,7 @@ typedef int sigjmp_buf[_JBLEN + 1];
  * onstack, mask = 2 ints
  */
 
+
 #define _JBLEN (18)
 typedef int jmp_buf[_JBLEN];
 typedef int sigjmp_buf[_JBLEN + 1];

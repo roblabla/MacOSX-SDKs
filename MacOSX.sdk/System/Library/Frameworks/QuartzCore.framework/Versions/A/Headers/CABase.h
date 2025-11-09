@@ -1,6 +1,6 @@
 /* CoreAnimation - CABase.h
 
-   Copyright (c) 2006-2007 Apple Inc.
+   Copyright (c) 2006-2012 Apple Inc.
    All rights reserved. */
 
 #ifndef CABASE_H
@@ -28,9 +28,9 @@
 #endif
 
 #if !TARGET_OS_IPHONE
-#define CA_OS_VERSION(m, i) (MAC_OS_X_VERSION_MIN_REQUIRED >= (m))
+#define CA_OS_VERSION(m, i) ((m) > 0 && MAC_OS_X_VERSION_MIN_REQUIRED >= (m))
 #else
-#define CA_OS_VERSION(m, i) (__IPHONE_OS_VERSION_MIN_REQUIRED >= (i))
+#define CA_OS_VERSION(m, i) ((i) > 0 && __IPHONE_OS_VERSION_MIN_REQUIRED >= (i))
 #endif
 
 #ifdef __cplusplus

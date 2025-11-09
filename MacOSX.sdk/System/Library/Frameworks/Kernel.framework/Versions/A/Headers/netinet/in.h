@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2012 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -68,15 +68,9 @@
 #include <stdint.h>		/* uint(8|16|32)_t */
 
 
-#ifndef _IN_ADDR_T
-#define _IN_ADDR_T
-typedef	__uint32_t	in_addr_t;	/* base type for internet address */
-#endif
+#include <sys/_types/_in_addr_t.h>
 
-#ifndef _IN_PORT_T
-#define _IN_PORT_T
-typedef	__uint16_t	in_port_t;
-#endif
+#include <sys/_types/_in_port_t.h>
 
 /*
  * POSIX 1003.1-2003
@@ -383,6 +377,7 @@ struct sockaddr_in {
 	char		sin_zero[8];
 };
 
+
 #define INET_ADDRSTRLEN                 16
 
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
@@ -637,19 +632,23 @@ struct in_pktinfo {
 #define	IPCTL_GIF_TTL		16	/* default TTL for gif encap packet */
 #define	IPCTL_MAXID		17
 
-
 #endif	/* (!_POSIX_C_SOURCE || _DARWIN_C_SOURCE) */
-
 
 /* INET6 stuff */
 #define __KAME_NETINET_IN_H_INCLUDED_
 #include <netinet6/in6.h>
 #undef __KAME_NETINET_IN_H_INCLUDED_
 
+
+
 #define MAX_IPv4_STR_LEN	16
 #define MAX_IPv6_STR_LEN	64
 
-extern const char *inet_ntop(int, const void *, char *, socklen_t); /* in libkern */
-
+extern int	 inet_aton(const char *, struct in_addr *); /* in libkern */
+extern char	*inet_ntoa(struct in_addr); /* in libkern */
+extern char	*inet_ntoa_r(struct in_addr ina, char *buf,
+    size_t buflen); /* in libkern */
+extern const char *inet_ntop(int, const void *, char *, socklen_t); /* in libkern*/
+extern int	inet_pton(int af, const char *, void *); /* in libkern */
 
 #endif /* _NETINET_IN_H_ */

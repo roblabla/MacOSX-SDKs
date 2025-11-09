@@ -28,6 +28,9 @@ NS_CLASS_AVAILABLE(10_7, NA)
 // default: 1.  Must be at least 1.
 @property(readonly) NSInteger quantity;
 
+// Application-specific user identifier.  Optional.
+@property(nonatomic, copy, readonly) NSString *applicationUsername;
+
 @end
 
 
@@ -38,6 +41,7 @@ NS_CLASS_AVAILABLE(10_7, NA)
 @property(copy, readwrite) NSString *productIdentifier;
 @property(readwrite) NSInteger quantity;
 @property(copy, readwrite) NSData *requestData;
+@property(nonatomic, copy, readwrite) NSString *applicationUsername;
 
 @end
 

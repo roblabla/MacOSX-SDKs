@@ -16,7 +16,7 @@ NS_CLASS_AVAILABLE(10_5, 3_0)
     NSString *_configurationName;
     NSURL *_url;
     NSDictionary *_options;
-    NSMutableDictionary *_oidFactories;
+    id* _oidFactories;
     id _defaultFaultHandler;
     struct _objectStoreFlags {
         unsigned int isReadOnly:1;

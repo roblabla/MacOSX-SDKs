@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2012 The PHP Group                                |
+   | Copyright (c) 1997-2013 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.01 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -88,6 +88,8 @@ PHP_FUNCTION(date_interval_format);
 PHP_FUNCTION(date_interval_create_from_date_string);
 
 PHP_METHOD(DatePeriod, __construct);
+PHP_METHOD(DatePeriod, __wakeup);
+PHP_METHOD(DatePeriod, __set_state);
 
 /* Options and Configuration */
 PHP_FUNCTION(date_default_timezone_set);
@@ -150,10 +152,11 @@ struct _php_period_obj {
 };
 
 ZEND_BEGIN_MODULE_GLOBALS(date)
-	char      *default_timezone;
-	char      *timezone;
-	HashTable *tzcache;
+	char                    *default_timezone;
+	char                    *timezone;
+	HashTable               *tzcache;
 	timelib_error_container *last_errors;
+	int                     timezone_valid;
 ZEND_END_MODULE_GLOBALS(date)
 
 #ifdef ZTS
@@ -165,7 +168,7 @@ ZEND_END_MODULE_GLOBALS(date)
 /* Backwards compability wrapper */
 PHPAPI signed long php_parse_date(char *string, signed long *now);
 PHPAPI void php_mktime(INTERNAL_FUNCTION_PARAMETERS, int gmt);
-PHPAPI int php_idate(char format, time_t ts, int localtime);
+PHPAPI int php_idate(char format, time_t ts, int localtime TSRMLS_DC);
 #if HAVE_STRFTIME
 #define _php_strftime php_strftime
 PHPAPI void php_strftime(INTERNAL_FUNCTION_PARAMETERS, int gm);

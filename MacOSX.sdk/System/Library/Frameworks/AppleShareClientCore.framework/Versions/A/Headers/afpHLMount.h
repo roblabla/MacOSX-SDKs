@@ -45,21 +45,21 @@ struct mountinfo {
 
 typedef struct mountinfo mountinfo;
 
-int	afp_LLMount(const char* inFullURL, const char* inMountDir, size_t inMaxPath, char* outMountPoint, UInt32 inOptions);
+int	afp_LLMount(const char* inFullURL, const char* inMountDir, size_t inMaxPath, char* outMountPoint, UInt32 inOptions)  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_9, __IPHONE_NA, __IPHONE_NA);
 
 int 	afp_LLMountAuth(const char *inTargetURL, const char *inMountDir, 
 						size_t inMaxPath, char *outMountPoint, const char* inAuthDomain,
 						const char *inUserName, const char *inUAMName,
 						void *authenticator, size_t authenticatorlength,
-						UInt32 inOptions);
+						UInt32 inOptions)  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_9, __IPHONE_NA, __IPHONE_NA);
 
-int	afp_getMountURL(const char* inMountPoint, size_t inMaxURL, char* outMountURL, UInt32 inOptions);
+int	afp_getMountURL(const char* inMountPoint, size_t inMaxURL, char* outMountURL, UInt32 inOptions) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_9, __IPHONE_NA, __IPHONE_NA);
 
-int 	afp_GetURLFromURLRemountInfo(const mountinfo *inRemountinfo, size_t inMaxURLlength, char *outComplete_URL, UInt32 inOptions);
+int 	afp_GetURLFromURLRemountInfo(const mountinfo *inRemountinfo, size_t inMaxURLlength, char *outComplete_URL, UInt32 inOptions)  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_9, __IPHONE_NA, __IPHONE_NA);
 
-int	afp_getmountinfosize(const char* inMountPoint, size_t* outSize, UInt32 inOptions);
+int	afp_getmountinfosize(const char* inMountPoint, size_t* outSize, UInt32 inOptions)  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_9, __IPHONE_NA, __IPHONE_NA);
 
-int	afp_getmountinfo(const char* inMountPoint, size_t inMountInfoMaxSize, mountinfo* outMountInfo, UInt32 inOptions);
+int	afp_getmountinfo(const char* inMountPoint, size_t inMountInfoMaxSize, mountinfo* outMountInfo, UInt32 inOptions) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_9, __IPHONE_NA, __IPHONE_NA);
 
 #ifdef __cplusplus		
 };

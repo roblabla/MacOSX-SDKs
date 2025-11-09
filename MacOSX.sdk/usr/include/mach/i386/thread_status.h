@@ -110,9 +110,10 @@
 #define x86_DEBUG_STATE64		11
 #define x86_DEBUG_STATE			12
 #define THREAD_STATE_NONE		13
-/* 15 and 16 are used for the internal x86_SAVED_STATE flavours */
+/* 14 and 15 are used for the internal x86_SAVED_STATE flavours */
 #define x86_AVX_STATE32			16
 #define x86_AVX_STATE64			17
+#define x86_AVX_STATE			18
 
 
 /*
@@ -142,6 +143,7 @@
 	  (x == x86_DEBUG_STATE)	|| \
 	  (x == x86_AVX_STATE32)	|| \
 	  (x == x86_AVX_STATE64)	|| \
+	  (x == x86_AVX_STATE)		|| \
 	  (x == THREAD_STATE_NONE))
 
 struct x86_state_hdr {
@@ -263,6 +265,14 @@ struct x86_debug_state {
 	} uds;
 };
 
+struct x86_avx_state {
+	x86_state_hdr_t			ash;
+	union {
+		x86_avx_state32_t	as32;
+		x86_avx_state64_t	as64;
+	} ufs;
+};
+
 typedef struct x86_thread_state x86_thread_state_t;
 #define x86_THREAD_STATE_COUNT	((mach_msg_type_number_t) \
 		( sizeof (x86_thread_state_t) / sizeof (int) ))
@@ -279,34 +289,16 @@ typedef struct x86_debug_state x86_debug_state_t;
 #define x86_DEBUG_STATE_COUNT ((mach_msg_type_number_t) \
 		(sizeof(x86_debug_state_t)/sizeof(unsigned int)))
 
+typedef struct x86_avx_state x86_avx_state_t;
+#define x86_AVX_STATE_COUNT ((mach_msg_type_number_t) \
+		(sizeof(x86_avx_state_t)/sizeof(unsigned int)))
+
 /*
  * Machine-independent way for servers and Mach's exception mechanism to
  * choose the most efficient state flavor for exception RPC's:
  */
 #define MACHINE_THREAD_STATE		x86_THREAD_STATE
 #define MACHINE_THREAD_STATE_COUNT	x86_THREAD_STATE_COUNT
-
-/*
- * when reloading the segment registers on
- * a return out of the kernel, we may take
- * a GeneralProtection or SegmentNotPresent
- * fault if one or more of the segment
- * registers in the saved state was improperly
- * specified via an x86_THREAD_STATE32 call
- * the frame we push on top of the existing
- * save area looks like this... we need to
- * carry this as part of the save area
- * in case we get hit so that we have a big
- * enough stack
- */
-struct x86_seg_load_fault32 {
-	uint16_t	trapno;
-	uint16_t	cpu;
-	uint32_t	err;
-	uint32_t	eip;
-	uint32_t	cs;
-	uint32_t	efl;
-};
 
 
 #endif	/* _MACH_I386_THREAD_STATUS_H_ */

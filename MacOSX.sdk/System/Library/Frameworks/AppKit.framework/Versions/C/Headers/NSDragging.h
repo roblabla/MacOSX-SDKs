@@ -1,7 +1,7 @@
 /*
 	NSDragging.h
 	Application Kit
-	Copyright (c) 1994-2012, Apple Inc.
+	Copyright (c) 1994-2013, Apple Inc.
 	All rights reserved.
 */
 
@@ -163,8 +163,6 @@ typedef NSUInteger NSDraggingItemEnumerationOptions;
 - (void)draggedImage:(NSImage *)image endedAt:(NSPoint)screenPoint operation:(NSDragOperation)operation;
 - (void)draggedImage:(NSImage *)image movedTo:(NSPoint)screenPoint;
 - (BOOL)ignoreModifierKeysWhileDragging;
-// -draggedImage:endedAt:deposited: was deprecated in Mac OS 10.1.  Sources should instead implement the NSDraggingSource protocol instead
-- (void)draggedImage:(NSImage *)image endedAt:(NSPoint)screenPoint deposited:(BOOL)flag NS_DEPRECATED_MAC(10_0, 10_1);
 
 // Formally deprecated 
 - (void)draggedImage:(NSImage *)image endedAt:(NSPoint)screenPoint deposited:(BOOL)flag DEPRECATED_IN_MAC_OS_X_VERSION_10_1_AND_LATER;

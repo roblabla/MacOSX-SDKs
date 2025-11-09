@@ -3,7 +3,7 @@
 	
 	Framework:  VideoToolbox
  
-    Copyright 2006-2012 Apple Inc. All rights reserved.
+    Copyright 2006-2013 Apple Inc. All rights reserved.
   
 	Client APIs common to all Video Toolbox session types.
 */
@@ -12,6 +12,7 @@
 #define VTSESSION_H
 
 #include <CoreMedia/CMBase.h>
+#include <VideoToolbox/VTBase.h>
 
 #include <CoreFoundation/CoreFoundation.h>
 #include <VideoToolbox/VTErrors.h>
@@ -50,20 +51,20 @@ typedef CFTypeRef  VTSessionRef;
 VT_EXPORT OSStatus 
 VTSessionCopySupportedPropertyDictionary(
   VTSessionRef       session,
-  CFDictionaryRef    *supportedPropertyDictionaryOut ) AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
+  CFDictionaryRef    *supportedPropertyDictionaryOut ) VT_AVAILABLE_STARTING(10_8);
 
-VT_EXPORT const CFStringRef kVTPropertyTypeKey AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // value is CFStringRef, one of the following:
-	VT_EXPORT const CFStringRef kVTPropertyType_Enumeration AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // value is one of a list of CFStrings
-	VT_EXPORT const CFStringRef kVTPropertyType_Boolean AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // value is a CFBoolean
-	VT_EXPORT const CFStringRef kVTPropertyType_Number AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // value is a CFNumber
-VT_EXPORT const CFStringRef kVTPropertyReadWriteStatusKey AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
-	VT_EXPORT const CFStringRef kVTPropertyReadWriteStatus_ReadOnly AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
-	VT_EXPORT const CFStringRef kVTPropertyReadWriteStatus_ReadWrite AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
-VT_EXPORT const CFStringRef kVTPropertyShouldBeSerializedKey AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // CFBoolean, false by default
-VT_EXPORT const CFStringRef kVTPropertySupportedValueMinimumKey AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // CFNumber
-VT_EXPORT const CFStringRef kVTPropertySupportedValueMaximumKey AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // CFNumber
-VT_EXPORT const CFStringRef kVTPropertySupportedValueListKey AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // CFArray of appropriate values
-VT_EXPORT const CFStringRef kVTPropertyDocumentationKey AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // a CFString for developer eyes only
+VT_EXPORT const CFStringRef kVTPropertyTypeKey VT_AVAILABLE_STARTING(10_8); // value is CFStringRef, one of the following:
+	VT_EXPORT const CFStringRef kVTPropertyType_Enumeration VT_AVAILABLE_STARTING(10_8); // value is one of a list of CFStrings
+	VT_EXPORT const CFStringRef kVTPropertyType_Boolean VT_AVAILABLE_STARTING(10_8); // value is a CFBoolean
+	VT_EXPORT const CFStringRef kVTPropertyType_Number VT_AVAILABLE_STARTING(10_8); // value is a CFNumber
+VT_EXPORT const CFStringRef kVTPropertyReadWriteStatusKey VT_AVAILABLE_STARTING(10_8);
+	VT_EXPORT const CFStringRef kVTPropertyReadWriteStatus_ReadOnly VT_AVAILABLE_STARTING(10_8);
+	VT_EXPORT const CFStringRef kVTPropertyReadWriteStatus_ReadWrite VT_AVAILABLE_STARTING(10_8);
+VT_EXPORT const CFStringRef kVTPropertyShouldBeSerializedKey VT_AVAILABLE_STARTING(10_8); // CFBoolean, false by default
+VT_EXPORT const CFStringRef kVTPropertySupportedValueMinimumKey VT_AVAILABLE_STARTING(10_8); // CFNumber
+VT_EXPORT const CFStringRef kVTPropertySupportedValueMaximumKey VT_AVAILABLE_STARTING(10_8); // CFNumber
+VT_EXPORT const CFStringRef kVTPropertySupportedValueListKey VT_AVAILABLE_STARTING(10_8); // CFArray of appropriate values
+VT_EXPORT const CFStringRef kVTPropertyDocumentationKey VT_AVAILABLE_STARTING(10_8); // a CFString for developer eyes only
 
 
 /*!
@@ -76,7 +77,7 @@ VT_EXPORT OSStatus
 VTSessionSetProperty(
   VTSessionRef       session,
   CFStringRef        propertyKey,
-  CFTypeRef          propertyValue ) AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
+  CFTypeRef          propertyValue ) VT_AVAILABLE_STARTING(10_8);
 
 /*!
 	@function	VTSessionCopyProperty
@@ -105,7 +106,7 @@ VTSessionCopyProperty(
   VTSessionRef       session,
   CFStringRef        propertyKey,
   CFAllocatorRef     allocator,
-  void *             propertyValueOut ) AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
+  void *             propertyValueOut ) VT_AVAILABLE_STARTING(10_8);
 
 /*!
 	@function	VTSessionSetProperties
@@ -116,7 +117,7 @@ VTSessionCopyProperty(
 VT_EXPORT OSStatus 
 VTSessionSetProperties(
   VTSessionRef       session,
-  CFDictionaryRef    propertyDictionary ) AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
+  CFDictionaryRef    propertyDictionary ) VT_AVAILABLE_STARTING(10_8);
 
 /*!
 	@function	VTSessionCopySerializableProperties
@@ -129,7 +130,7 @@ VT_EXPORT OSStatus
 VTSessionCopySerializableProperties(
   VTSessionRef       session,
   CFAllocatorRef     allocator,
-  CFDictionaryRef    *dictionaryOut ) AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
+  CFDictionaryRef    *dictionaryOut ) VT_AVAILABLE_STARTING(10_8);
 
 
 #pragma pack(pop)

@@ -9,6 +9,7 @@
 
 @protocol SBApplicationDelegate;
 
+NS_CLASS_AVAILABLE(10_5, NA)
 @interface SBApplication : SBObject <NSCoding>
 
 - (id) initWithBundleIdentifier:(NSString *)ident;

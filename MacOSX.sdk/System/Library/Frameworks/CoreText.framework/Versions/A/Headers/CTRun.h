@@ -20,7 +20,8 @@
 #include <CoreText/CTDefines.h>
 #include <CoreFoundation/CFDictionary.h>
 #include <CoreGraphics/CGContext.h>
-#include <AvailabilityMacros.h>
+
+CF_IMPLICIT_BRIDGING_ENABLED
 
 #if defined(__cplusplus)
 extern "C" {
@@ -69,7 +70,7 @@ typedef CF_OPTIONS(uint32_t, CTRunStatus)
 	@abstract	Returns the CFType of the run object
 */
 
-CFTypeID CTRunGetTypeID( void ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
+CFTypeID CTRunGetTypeID( void ) CT_AVAILABLE(10_5, 3_2);
 
 
 /* --------------------------------------------------------------------------- */
@@ -89,7 +90,7 @@ CFTypeID CTRunGetTypeID( void ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2)
 */
 
 CFIndex CTRunGetGlyphCount(
-	CTRunRef run ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
+	CTRunRef run ) CT_AVAILABLE(10_5, 3_2);
 
 
 /*!
@@ -110,7 +111,7 @@ CFIndex CTRunGetGlyphCount(
 */
 
 CFDictionaryRef CTRunGetAttributes(
-	CTRunRef run ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
+	CTRunRef run ) CT_AVAILABLE(10_5, 3_2);
 
 
 /*!
@@ -132,7 +133,7 @@ CFDictionaryRef CTRunGetAttributes(
 */
 
 CTRunStatus CTRunGetStatus(
-	CTRunRef run ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
+	CTRunRef run ) CT_AVAILABLE(10_5, 3_2);
 
 
 /*!
@@ -153,7 +154,7 @@ CTRunStatus CTRunGetStatus(
 */
 
 const CGGlyph* CTRunGetGlyphsPtr(
-	CTRunRef run ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
+	CTRunRef run ) CT_AVAILABLE(10_5, 3_2);
 
 
 /*!
@@ -176,7 +177,7 @@ const CGGlyph* CTRunGetGlyphsPtr(
 void CTRunGetGlyphs(
 	CTRunRef run,
 	CFRange range,
-	CGGlyph buffer[] ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
+	CGGlyph buffer[] ) CT_AVAILABLE(10_5, 3_2);
 
 
 /*!
@@ -199,7 +200,7 @@ void CTRunGetGlyphs(
 */
 
 const CGPoint* CTRunGetPositionsPtr(
-	CTRunRef run ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
+	CTRunRef run ) CT_AVAILABLE(10_5, 3_2);
 
 
 /*!
@@ -226,7 +227,7 @@ const CGPoint* CTRunGetPositionsPtr(
 void CTRunGetPositions(
 	CTRunRef run,
 	CFRange range,
-	CGPoint buffer[] ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
+	CGPoint buffer[] ) CT_AVAILABLE(10_5, 3_2);
 
 
 /*!
@@ -251,7 +252,7 @@ void CTRunGetPositions(
 */
 
 const CGSize* CTRunGetAdvancesPtr(
-	CTRunRef run ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
+	CTRunRef run ) CT_AVAILABLE(10_5, 3_2);
 
 
 /*!
@@ -275,7 +276,7 @@ const CGSize* CTRunGetAdvancesPtr(
 void CTRunGetAdvances(
 	CTRunRef run,
 	CFRange range,
-	CGSize buffer[] ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
+	CGSize buffer[] ) CT_AVAILABLE(10_5, 3_2);
 
 
 /*!
@@ -299,7 +300,7 @@ void CTRunGetAdvances(
 */
 
 const CFIndex* CTRunGetStringIndicesPtr(
-	CTRunRef run ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
+	CTRunRef run ) CT_AVAILABLE(10_5, 3_2);
 
 
 /*!
@@ -327,7 +328,7 @@ const CFIndex* CTRunGetStringIndicesPtr(
 void CTRunGetStringIndices(
 	CTRunRef run,
 	CFRange range,
-	CFIndex buffer[] ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
+	CFIndex buffer[] ) CT_AVAILABLE(10_5, 3_2);
 
 
 /*!
@@ -343,7 +344,7 @@ void CTRunGetStringIndices(
 */
 
 CFRange CTRunGetStringRange(
-	CTRunRef run ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
+	CTRunRef run ) CT_AVAILABLE(10_5, 3_2);
 
 
 /*!
@@ -379,7 +380,7 @@ double CTRunGetTypographicBounds(
 	CFRange range,
 	CGFloat* ascent,
 	CGFloat* descent,
-	CGFloat* leading ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
+	CGFloat* leading ) CT_AVAILABLE(10_5, 3_2);
 
 
 /*!
@@ -397,9 +398,8 @@ double CTRunGetTypographicBounds(
 				The run that you want to calculate the image bounds for.
 
 	@param		context
-				The context which the image bounds will be calculated for. This
-				is required because the context could have settings in it that
-				can cause changes in the image bounds.
+				The context which the image bounds will be calculated for or NULL,
+                in which case the bounds are relative to CGPointZero.
 
 	@param		range
 				The portion of the run which to measure. If the length of the
@@ -409,8 +409,8 @@ double CTRunGetTypographicBounds(
 	@result		A rect that tightly encloses the paths of the run's glyphs. The
 				rect origin will match the drawn position of the requested range;
 				that is, it will be translated by the supplied context's text
-				position and the positions of the individual glyphs. If the run,
-				context, or range is invalid, CGRectNull will be returned.
+				position and the positions of the individual glyphs. If the run
+                or range is invalid, CGRectNull will be returned.
 
 	@seealso	CTRunGetTypographicBounds
 */
@@ -418,7 +418,7 @@ double CTRunGetTypographicBounds(
 CGRect CTRunGetImageBounds(
 	CTRunRef run,
 	CGContextRef context,
-	CFRange range ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
+	CFRange range ) CT_AVAILABLE(10_5, 3_2);
 
 
 /*!
@@ -436,7 +436,7 @@ CGRect CTRunGetImageBounds(
 */
 
 CGAffineTransform CTRunGetTextMatrix(
-	CTRunRef run ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
+	CTRunRef run ) CT_AVAILABLE(10_5, 3_2);
 
 
 /*!
@@ -466,11 +466,13 @@ CGAffineTransform CTRunGetTextMatrix(
 void CTRunDraw(
 	CTRunRef run,
 	CGContextRef context,
-	CFRange range ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
+	CFRange range ) CT_AVAILABLE(10_5, 3_2);
 
 
 #if defined(__cplusplus)
 }
 #endif
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif

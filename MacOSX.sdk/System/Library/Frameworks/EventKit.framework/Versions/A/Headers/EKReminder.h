@@ -64,4 +64,13 @@ EVENTKIT_CLASS_AVAILABLE(10_8, 6_0)
  */
 @property(nonatomic, copy) NSDate *completionDate;
 
+/*!
+    @property   priority
+    @abstract   The priority of the reminder.
+    @discussion Priorities run from 1 (highest) to 9 (lowest).  A priority of 0 means no priority.
+                Saving a reminder with any other priority will fail.
+                Per RFC 5545, priorities of 1-4 are considered "high," a priority of 5 is "medium," and priorities of 6-9 are "low."
+ */
+@property(nonatomic) NSUInteger priority;
+
 @end

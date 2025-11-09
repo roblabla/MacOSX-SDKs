@@ -1,7 +1,7 @@
 /*
     NSTableCellView.h
     Application Kit
-    Copyright (c) 2009-2012, Apple Inc.
+    Copyright (c) 2009-2013, Apple Inc.
     All rights reserved.
 */
 
@@ -29,7 +29,7 @@ NS_CLASS_AVAILABLE(10_7, NA)
     NSImageView *_imageView;
 }
 
-/* The 'objectValue' is automatically set by the table when using bindings bindings, or the result from the dataSource method -tableView:objectValueForTableColumn:row:. Key Value Observing (KVO) compliant so user interface elements can be bound to the 'objectValue'. 
+/* The 'objectValue' is automatically set by the table when using bindings, or the result from the dataSource method -tableView:objectValueForTableColumn:row:. Key Value Observing (KVO) compliant so user interface elements can be bound to the 'objectValue'. 
  */
 @property(retain) id objectValue;
 

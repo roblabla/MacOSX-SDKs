@@ -3,7 +3,16 @@
  
 	Copyright:	(c)2008-2012 by Apple Inc., all rights reserved.
 
- */
+*/
+
+/*
+  QTKit has been deprecated in 10.9.
+
+  AVFoundation and AVKit are the frameworks recommended for all new development 
+  involving time-based audiovisual media on OS X.  In order to transition your 
+  project from QTKit to AVFoundation please refer to:
+  "Technical Note TN2300 Transitioning QTKit code to AV Foundation".
+*/
 
 #import <Foundation/Foundation.h>
 #import <QTKit/QTCaptureOutput.h>
@@ -41,13 +50,13 @@
     @method delegate
     @abstract Returns the receiver’s delegate..
 */
-- (id)delegate;
+- (id)delegate AVAILABLE_QTKIT_VERSION_7_6_3_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
     @method setDelegate:
     @abstract Sets the receiver’s delegate..
 */
-- (void)setDelegate:(id)delegate;
+- (void)setDelegate:(id)delegate AVAILABLE_QTKIT_VERSION_7_6_3_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
     @method outputAudioSampleBuffer:fromConnection:
@@ -59,7 +68,7 @@
     @param sampleBuffer A sample buffer containing the audio data and additional information about the buffer, such as its presentation time.
     @param connection The connection from which the audio was received.
 */
-- (void)outputAudioSampleBuffer:(QTSampleBuffer *)sampleBuffer fromConnection:(QTCaptureConnection *)connection;
+- (void)outputAudioSampleBuffer:(QTSampleBuffer *)sampleBuffer fromConnection:(QTCaptureConnection *)connection AVAILABLE_QTKIT_VERSION_7_6_3_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 @end
 
@@ -75,7 +84,7 @@
     @param sampleBuffer A sample buffer containing the audio data and additional information about the buffer, such as its presentation time.
     @param connection The connection from which the audio was received.
 */
-- (void)captureOutput:(QTCaptureOutput *)captureOutput didOutputAudioSampleBuffer:(QTSampleBuffer *)sampleBuffer fromConnection:(QTCaptureConnection *)connection;
+- (void)captureOutput:(QTCaptureOutput *)captureOutput didOutputAudioSampleBuffer:(QTSampleBuffer *)sampleBuffer fromConnection:(QTCaptureConnection *)connection AVAILABLE_QTKIT_VERSION_7_6_3_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 @end
 

@@ -14,7 +14,7 @@ NS_CLASS_AVAILABLE(10_5,3_0)
 @interface NSPropertyMapping : NSObject {
     @private
     void *_reserved;
-    void *_reserved1;
+    NSArray *_transformValidations;
     NSArray *_propertyTransforms;
     NSString *_name;
     NSExpression *_valueExpression;
@@ -23,7 +23,6 @@ NS_CLASS_AVAILABLE(10_5,3_0)
         unsigned int _isInUse:1;
         unsigned int _reservedPropertyMapping:31;
     } _propertyMappingFlags;
-    
 }
 
 /* Returns/sets the name of the property in the destination entity for the mapping.  

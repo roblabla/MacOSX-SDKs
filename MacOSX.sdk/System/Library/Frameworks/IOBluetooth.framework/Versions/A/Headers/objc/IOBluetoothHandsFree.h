@@ -122,7 +122,6 @@ IOBLUETOOTH_EXPORT NSString * const IOBluetoothPDUUserData;					/* PDU's payload
 
 
 @class IOBluetoothRFCOMMChannel;
-@class IOBluetoothSCOAudioDevice;
 @class IOBluetoothHandsFreeExpansion;
 
 @protocol IOBluetoothHandsFreeDelegate;
@@ -137,15 +136,17 @@ IOBLUETOOTH_EXPORT NSString * const IOBluetoothPDUUserData;					/* PDU's payload
  */
 NS_CLASS_AVAILABLE(10_7, NA)
 @interface IOBluetoothHandsFree : NSObject {
-	IOBluetoothRFCOMMChannel *		_rfcommChannel;
+    IOBluetoothRFCOMMChannel *		_rfcommChannel;
 	IOBluetoothUserNotification *	_rfcommChannelNotification;
+    
 	uint32_t						_supportedFeatures;
 	
-	IOBluetoothSCOAudioDevice *		_scoAudioDevice;
+	void *							_reserved1;
+    
 	float							_previousInputVolume;
 	float							_previousOutputVolume;
 	BOOL							_previousOutputMuted;
-
+    
 	IOBluetoothDevice *				_device;
 	BluetoothRFCOMMChannelID		_deviceRFCOMMChannelID;
 	uint32_t						_deviceSupportedFeatures;
@@ -153,13 +154,13 @@ NS_CLASS_AVAILABLE(10_7, NA)
 	uint32_t						_deviceSupportedSMSServices;
 	
 	NSMutableArray *				_statusIndicators;
-	int								_handsFreeSLCState;
+	int								_handsFreeState;
 	IOBluetoothSMSMode				_SMSMode;
 	BOOL							_SMSEnabled;
-	
-	BOOL							_connectSCOAfterSLCConnected;
-	
-	IOBluetoothHandsFreeExpansion *	_reserved;
+    
+    BOOL							_connectSCOAfterSLCConnected;
+
+    IOBluetoothHandsFreeExpansion *	_reserved;
 }
 
 
@@ -176,14 +177,6 @@ NS_CLASS_AVAILABLE(10_7, NA)
  @param			featuresBitmap The features bitmap
  */
 @property (assign)				uint32_t					supportedFeatures NS_AVAILABLE_MAC(10_7);
-
-/*!
- @method		scoAudioDevice
- @abstract		Return the IOBluetoothSCOAudioDevice object.
- @discussion	Returns the IOBluetoothSCOAudioDevice object. This is set on init of the class.
- @result		The IOBluetoothSCOAudioDevice.
- */
-@property (retain, readonly)	IOBluetoothSCOAudioDevice *	scoAudioDevice NS_AVAILABLE_MAC(10_7);
 
 /*!
  @method		inputVolume
@@ -211,7 +204,7 @@ NS_CLASS_AVAILABLE(10_7, NA)
  @discussion	Sets the inputs mute state.
  @param			muted YES if muted; otherwise NO.
  */
-@property (assign, getter=isInputMuted)	BOOL			inputMuted NS_AVAILABLE_MAC(10_7);
+@property (assign, getter=isInputMuted)	BOOL				inputMuted NS_AVAILABLE_MAC(10_7);
 
 /*!
  @method		outputVolume
@@ -427,7 +420,7 @@ NS_CLASS_AVAILABLE(10_7, NA)
  @discussion	Returns the hands free gateway driver ID which is unique based on BT Address.
  @result		The hands free gateway driver ID
  */
-- (NSString *)handsFreeAudioGatewayDriverID NS_AVAILABLE_MAC(10_7);
+- (NSString *)handsFreeAudioGatewayDriverID NS_DEPRECATED_MAC(10_7, 10_8);
 
 /*!
  @method		handsFreeAudioGatewayServiceRecord
@@ -451,7 +444,7 @@ NS_CLASS_AVAILABLE(10_7, NA)
  @discussion	Returns the hands free device driver ID which is unique based on BT Address.
  @result		The hands free device driver ID
  */
-- (NSString *)handsFreeDeviceDriverID NS_AVAILABLE_MAC(10_7);
+- (NSString *)handsFreeDeviceDriverID NS_DEPRECATED_MAC(10_7, 10_8);
 
 /*!
  @method		handsFreeDeviceServiceRecord

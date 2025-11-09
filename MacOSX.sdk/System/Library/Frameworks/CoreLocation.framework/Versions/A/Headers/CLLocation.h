@@ -96,6 +96,22 @@ extern const CLLocationAccuracy kCLLocationAccuracyKilometer;
 extern const CLLocationAccuracy kCLLocationAccuracyThreeKilometers;
 
 /*
+ *  CLLocationDistanceMax
+ *
+ *  Discussion:
+ *  	Used to specify the maximum CLLocationDistance
+ */
+extern const CLLocationDistance CLLocationDistanceMax;
+
+/*
+ *  CLTimeIntervalMax
+ *
+ *  Discussion:
+ *  	Used to specify the maximum NSTimeInterval
+ */
+extern const NSTimeInterval CLTimeIntervalMax;
+
+/*
  *  kCLLocationCoordinate2DInvalid
  *  
  *  Discussion:

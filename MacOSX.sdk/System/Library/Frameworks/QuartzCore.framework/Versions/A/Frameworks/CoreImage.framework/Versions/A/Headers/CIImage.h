@@ -48,6 +48,10 @@ CORE_IMAGE_EXPORT NSString *kCIImageColorSpace;
  */
 CORE_IMAGE_EXPORT NSString *kCIImageProperties __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_5_0);
 
+CORE_IMAGE_EXPORT NSString *kCIImageTextureTarget __OSX_AVAILABLE_STARTING(__MAC_10_9,__IPHONE_NA);
+CORE_IMAGE_EXPORT NSString *kCIImageTextureFormat __OSX_AVAILABLE_STARTING(__MAC_10_9,__IPHONE_NA);
+
+
 /* Creates a new image from the contents of 'image'. */
 + (CIImage *)imageWithCGImage:(CGImageRef)image;
 + (CIImage *)imageWithCGImage:(CGImageRef)image options:(NSDictionary *)d;
@@ -71,6 +75,14 @@ CORE_IMAGE_EXPORT NSString *kCIImageProperties __OSX_AVAILABLE_STARTING(__MAC_10
 + (CIImage *)imageWithTexture:(unsigned int)name size:(CGSize)size
  flipped:(BOOL)flag colorSpace:(CGColorSpaceRef)cs __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_6_0);
 
+/* In the options dictionary you can specify the following:
+ * - The texture target via kCIImageTextureTarget which can be either GL_TEXTURE_2D
+ *   or GL_TEXTURE_RECTANGLE_ARB.
+ * - The texture format via kCIImageTextureFormat which should be a CIFormat
+ */
++ (CIImage *)imageWithTexture:(unsigned int)name size:(CGSize)size
+					  flipped:(BOOL)flag options:(NSDictionary *)options __OSX_AVAILABLE_STARTING(__MAC_10_9,__IPHONE_NA);
+
 + (CIImage *)imageWithContentsOfURL:(NSURL *)url;
 + (CIImage *)imageWithContentsOfURL:(NSURL *)url options:(NSDictionary *)d;
 
@@ -87,10 +99,9 @@ CORE_IMAGE_EXPORT NSString *kCIImageProperties __OSX_AVAILABLE_STARTING(__MAC_10
 + (CIImage *)imageWithCVPixelBuffer:(CVPixelBufferRef)buffer options:(NSDictionary *)dict __OSX_AVAILABLE_STARTING(__MAC_NA, __IPHONE_5_0);
 
 /* Creates a new image from the contents of an IOSurface. */
-+ (CIImage *)imageWithIOSurface:(IOSurfaceRef)surface
-AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-+ (CIImage *)imageWithIOSurface:(IOSurfaceRef)surface options:(NSDictionary *)d
-AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
++ (CIImage *)imageWithIOSurface:(IOSurfaceRef)surface AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
++ (CIImage *)imageWithIOSurface:(IOSurfaceRef)surface options:(NSDictionary *)d AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
 
 /* Return or initialize a new image with an infinite amount of the color
  * 'color'. */
@@ -114,12 +125,16 @@ AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 format:(CIFormat)f colorSpace:(CGColorSpaceRef)c;
 
 - (id)initWithTexture:(unsigned int)name size:(CGSize)size flipped:(BOOL)flag colorSpace:(CGColorSpaceRef)cs __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_6_0);
+- (id)initWithTexture:(unsigned int)name size:(CGSize)size flipped:(BOOL)flag options:(NSDictionary *)options __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
 
 - (id)initWithContentsOfURL:(NSURL *)url;
 - (id)initWithContentsOfURL:(NSURL *)url options:(NSDictionary *)d;
 
 - (id)initWithIOSurface:(IOSurfaceRef)surface __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
 - (id)initWithIOSurface:(IOSurfaceRef)surface options:(NSDictionary *)d __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
+
+// FIXME: SPI for now?
+- (id)initWithIOSurface:(IOSurfaceRef)surface plane:(size_t)plane format:(CIFormat)format options:(NSDictionary *)d /*__OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA)*/;
 
 - (id)initWithCVImageBuffer:(CVImageBufferRef)imageBuffer __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 - (id)initWithCVImageBuffer:(CVImageBufferRef)imageBuffer options:(NSDictionary *)dict __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);

@@ -11,6 +11,8 @@ typedef struct CGColor *CGColorRef;
 #include <CoreGraphics/CGColorSpace.h>
 #include <CoreGraphics/CGPattern.h>
 
+CF_IMPLICIT_BRIDGING_ENABLED
+
 /* Create a color in the color space `space' with color components
    (including alpha) specified by `components'. `space' may be any color
    space except a pattern color space. */
@@ -122,5 +124,7 @@ CG_EXTERN const CFStringRef kCGColorBlack
 
 CG_EXTERN const CFStringRef kCGColorClear
   CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif /* CGCOLOR_H_ */

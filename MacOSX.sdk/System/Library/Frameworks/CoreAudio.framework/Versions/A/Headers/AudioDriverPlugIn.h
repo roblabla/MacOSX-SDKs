@@ -51,7 +51,7 @@ extern "C"
 
 /*!
     @typedef        AudioDriverPlugInDevicePropertyChangedProc
-    @abstract       A plug-in calls this routine to notify the HAL that one of it's device's
+    @abstract       A plug-in calls this routine to notify the HAL that one of its device's
                     properties has changed.
     @discussion     The HAL will notify any listeners on behalf of the plug-in. The pointer to this
                     routine is supplied to the plug-in when it is opened.
@@ -74,7 +74,7 @@ typedef OSStatus
 /*!
     @typedef        AudioDriverPlugInStreamPropertyChangedProc
     @abstract       A plug-in calls this routine to notify the HAL that a property of one of the
-                    streams of one of it's devices has changed.
+                    streams of one of its devices has changed.
     @discussion     The HAL will notify any listeners on behalf of the plug-in. The pointer to this
                     routine is supplied to the plug-in when it is opened.
     @param          inDevice

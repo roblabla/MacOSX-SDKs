@@ -43,10 +43,10 @@
     functions will operate on it as well as the set of properties that can be expected to be
     implemented by the object. The set of available classes for objects is limited to those defined
     here. There are no other classes. The set of classes is arranged in a hierarchy such that one
-    class inherits the properties/routines of it's super class.
+    class inherits the properties/routines of its super class.
     
     The base class for all AudioObjects is the class AudioObject. As such, each AudioObject will 
-    provide basic properties such as it's class, it's human readable name, and the other
+    provide basic properties such as its class, its human readable name, and the other
     AudioObjects it contains. Other important classes include AudioSystemObject, AudioDevice, and
     AudioStream.
     
@@ -64,13 +64,13 @@
     
     AudioDevices contain instances of the AudioStream class. An AudioStream represents a single
     buffer of data for transferring across the user/kernel boundary. As such, AudioStreams are the
-    gatekeepers of format information. Each has it's own format and list of available formats.
+    gatekeepers of format information. Each has its own format and list of available formats.
     AudioStreams can provide data in any format, including encoded formats and non-audio formats. If
     the format is a linear PCM format, the data will always be presented as 32 bit, native endian
     floating point. All conversions to and from the true physical format of the hardware is handled
     by the device's driver.
     
-    Both AudioDevices and AudioStreams can contain instances of the AudioControl class or it's many
+    Both AudioDevices and AudioStreams can contain instances of the AudioControl class or its many
     subclasses. An AudioControl provides properties that describe/manipulate a particular aspect of
     the object such as gain, mute, data source selection, etc. Many common controls are also
     also available as properties on the AudioDevice or AudioStream.
@@ -362,11 +362,9 @@ AudioObjectAddPropertyListener( AudioObjectID                       inObjectID,
                     notifications when the given properties change.
     @param          inObjectID
                         The AudioObject to unregister the listener from.
-    @param          inNumberAddresses
-                        The number of elements in the inAddresses array.
-    @param          inAddresses
-                        The AudioObjectPropertyAddress indicating which property the listener should
-                        be removed from.
+    @param          inAddress
+                        The AudioObjectPropertyAddress indicating from which property the listener
+                        should be removed.
     @param          inListener
                         The AudioObjectPropertyListenerProc being removed.
     @param          inClientData
@@ -408,7 +406,7 @@ extern OSStatus
 AudioObjectAddPropertyListenerBlock(    AudioObjectID                       inObjectID,
                                         const AudioObjectPropertyAddress*   inAddress,
                                         dispatch_queue_t                    inDispatchQueue,
-                                        AudioObjectPropertyListenerBlock    inListener)             __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA);
+                                        AudioObjectPropertyListenerBlock    inListener)             __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_7_0);
 
 /*!
     @function       AudioObjectRemovePropertyListenerBlock
@@ -416,11 +414,9 @@ AudioObjectAddPropertyListenerBlock(    AudioObjectID                       inOb
                     notifications when the given properties change.
     @param          inObjectID
                         The AudioObject to unregister the listener from.
-    @param          inNumberAddresses
-                        The number of elements in the inAddresses array.
-    @param          inAddresses
-                        The AudioObjectPropertyAddress indicating which property the listener should
-                        be removed from.
+    @param          inAddress
+                        The AudioObjectPropertyAddress indicating from which property the listener
+                        should be removed.
     @param          inDispatchQueue
                         The dispatch queue on which the listener block was being dispatched to. 
     @param          inListener
@@ -431,7 +427,7 @@ extern OSStatus
 AudioObjectRemovePropertyListenerBlock( AudioObjectID                       inObjectID,
                                         const AudioObjectPropertyAddress*   inAddress,
                                         dispatch_queue_t                    inDispatchQueue,
-                                        AudioObjectPropertyListenerBlock    inListener)             __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA);
+                                        AudioObjectPropertyListenerBlock    inListener)             __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_7_0);
 
 #endif  //  __BLOCKS__
 
@@ -450,6 +446,29 @@ AudioObjectRemovePropertyListenerBlock( AudioObjectID                       inOb
 enum
 {
     kAudioSystemObjectClassID   = 'asys'
+};
+
+/*!
+    @enum           Power Hints
+    @abstract       The values for kAudioHardwarePropertyPowerHint
+    @discussion     The system obect property, kAudioHardwarePropertyPowerHint, allows a process to
+                    to indicate how aggressive the system can be with optimizations that save power.
+                    Note that the value of this property can be set in an application's info.plist
+                    using the key, "AudioHardwarePowerHint". The values for this key are the strings
+                    that correspond to the values in the enum.
+    @constant       kAudioHardwarePowerHintNone
+                        This is the default value and it indicates that the system will not make any
+                        power optimizations that compromise latency or quality in order to save
+                        power. The info.plist value is "None" or the "AudioHardwarePowerHint" entry
+                        can be ommitted entirely.
+    @constant       kAudioHardwarePowerHintFavorSavingPower
+                        The system will choose to save power even at the expense of latency. The
+                        info.plist value is "Favor Saving Power"
+*/
+enum
+{
+    kAudioHardwarePowerHintNone             = 0,
+    kAudioHardwarePowerHintFavorSavingPower = 1
 };
 
 //==================================================================================================
@@ -482,6 +501,16 @@ enum
                         stereo signals down to mono. Note that the two channels on the device that
                         comprise the stereo signal are defined on the device by
                         kAudioDevicePropertyPreferredChannelsForStereo.
+    @constant       kAudioHardwarePropertyPlugInList
+                        An array of AudioObjectIDs that represent all the AudioPlugIn objects
+                        currently provided by the system
+    @constant       kAudioHardwarePropertyTranslateBundleIDToPlugIn
+                        This property fetches the AudioObjectID that corresponds to the AudioPlugIn
+                        that has the given bundle ID. The bundle ID is passed in via the qualifier
+                        as a CFString while the AudioObjectID for the AudioPlugIn is returned to the
+                        caller as the property's data. Note that an error is not returned if the UID
+                        doesn't refer to any AudioPlugIns. Rather, this property will return
+                        kAudioObjectUnknown as the value of the property.
     @constant       kAudioHardwarePropertyTransportManagerList
                         An array of the AudioObjectIDs for all the AudioTransportManager objects.
     @constant       kAudioHardwarePropertyTranslateBundleIDToTransportManager
@@ -492,6 +521,16 @@ enum
                         that an error is not returned if the bundle ID doesn't refer to any
                         AudioTransportManagers. Rather, this property will return
                         kAudioObjectUnknown as the value of the property.
+    @constant       kAudioHardwarePropertyBoxList
+                        An array of AudioObjectIDs that represent all the AudioBox objects currently
+                        provided by the system.
+    @constant       kAudioHardwarePropertyTranslateUIDToBox
+                        This property fetches the AudioObjectID that corresponds to the AudioBox
+                        that has the given UID. The UID is passed in via the qualifier as a CFString
+                        while the AudioObjectID for the AudioBox is returned to the caller as the
+                        property's data. Note that an error is not returned if the UID doesn't refer
+                        to any AudioBoxes. Rather, this property will return kAudioObjectUnknown
+                        as the value of the property.
     @constant       kAudioHardwarePropertyProcessIsMaster
                         A UInt32 where 1 means that the current process contains the master instance
                         of the HAL. The master instance of the HAL is the only instance in which
@@ -504,7 +543,7 @@ enum
                         the effective user ID of the process. The way it works is that a client will
                         set the value of this property and the HAL will flush all its cached per-
                         user preferences such as the default devices. The value of this property is
-                        a UInt32, but it's value has no currently defined meaning and clients may
+                        a UInt32, but its value has no currently defined meaning and clients may
                         pass any value when setting it to trigger the cache flush.
     @constant       kAudioHardwarePropertyProcessIsAudible
                         A UInt32 where a non-zero value indicates that the audio of the process will
@@ -524,11 +563,6 @@ enum
                         hog mode and 0 means that the HAL should not automatically take hog mode on
                         behalf of the process. Processes that only ever use the default device are
                         the sort of that should set this property's value to 0.
-    @constant       kAudioHardwarePropertyPlugInForBundleID
-                        Using an AudioValueTranslation structure, this property translates the input
-                        CFString containing a bundle ID into the AudioObjectID of the AudioPlugIn
-                        that corresponds to it. This property will return kAudioObjectUnkown if the
-                        given bundle ID doesn't match any AudioPlugIns.
     @constant       kAudioHardwarePropertyUserSessionIsActiveOrHeadless
                         A UInt32 where a value other than 0 indicates that the login session of the
                         user of the process is either an active console session or a headless
@@ -538,6 +572,14 @@ enum
                         clients can be informed when the service has been reset for some reason.
                         When a reset happens, any state the client has , such as cached data or
                         added listeners, must be re-established by the client.
+    @constant       kAudioHardwarePropertyPowerHint
+                        A UInt32 whose values are drawn from the Power Hints enum above. Only those
+                        values are allowed. This property allows a process to indicate how
+                        aggressive the system can be with optimizations that save power. The default
+                        value is kAudioHardwarePowerHintNone. Note that the value of this
+                        property can be set in an application's info.plist using the key,
+                        "AudioHardwarePowerHint". The values for this key are the strings that
+                        correspond to the values in the Power Hints enum.
 */
 enum
 {
@@ -547,8 +589,12 @@ enum
     kAudioHardwarePropertyDefaultSystemOutputDevice             = 'sOut',
     kAudioHardwarePropertyTranslateUIDToDevice                  = 'uidd',
     kAudioHardwarePropertyMixStereoToMono                       = 'stmo',
+    kAudioHardwarePropertyPlugInList                            = 'plg#',
+    kAudioHardwarePropertyTranslateBundleIDToPlugIn             = 'bidp',
     kAudioHardwarePropertyTransportManagerList                  = 'tmg#',
     kAudioHardwarePropertyTranslateBundleIDToTransportManager   = 'tmbi',
+    kAudioHardwarePropertyBoxList                               = 'box#',
+    kAudioHardwarePropertyTranslateUIDToBox                     = 'uidb',
     kAudioHardwarePropertyProcessIsMaster                       = 'mast',
     kAudioHardwarePropertyIsInitingOrExiting                    = 'inot',
     kAudioHardwarePropertyUserIDChanged                         = 'euid',
@@ -556,9 +602,9 @@ enum
     kAudioHardwarePropertySleepingIsAllowed                     = 'slep',
     kAudioHardwarePropertyUnloadingIsAllowed                    = 'unld',
     kAudioHardwarePropertyHogModeIsAllowed                      = 'hogr',
-    kAudioHardwarePropertyPlugInForBundleID                     = 'pibi',
     kAudioHardwarePropertyUserSessionIsActiveOrHeadless         = 'user',
-    kAudioHardwarePropertyServiceRestarted                      = 'srst'
+    kAudioHardwarePropertyServiceRestarted                      = 'srst',
+    kAudioHardwarePropertyPowerHint                             = 'powh'
 };
 
 //==================================================================================================
@@ -589,7 +635,7 @@ AudioHardwareUnload()                                                           
                     the global scope, kAudioObjectPropertyScopeGlobal, and only a master element.
     @constant       kAudioPlugInCreateAggregateDevice
                         This property is used to tell a plug-in to create a new
-                        AudioAggregateDevice. It's value is only read. The qualifier data for this
+                        AudioAggregateDevice. Its value is only read. The qualifier data for this
                         property is a CFDictionary containing a description of the
                         AudioAggregateDevice to create. The keys for the CFDictionary are defined in
                         the AudioAggregateDevice Constants section. The value of the property that
@@ -618,7 +664,7 @@ enum
                     master element.
     @constant       kAudioTransportManagerCreateEndPointDevice
                         This property is used to tell a transport manager to create a new
-                        AudioDevice. It's value is only read. The qualifier data for this
+                        AudioDevice. Its value is only read. The qualifier data for this
                         property is a CFDictionary containing a description of the
                         AudioDevice to create. The standard keys for the CFDictionary are defined in
                         the AudioEndPointDevice Constants section. The value of the property that
@@ -812,7 +858,7 @@ enum
                         loaded successfully. This property only exists for IOAudio-based
                         AudioDevices whose driver has specified a plug-in to load.
     @constant       kAudioDevicePropertyDeviceHasChanged
-                        The type of this property is a UInt32, but it's value has no meaning. This
+                        The type of this property is a UInt32, but its value has no meaning. This
                         property exists so that clients can listen to it and be told when the
                         configuration of the AudioDevice has changed in ways that cannot otherwise
                         be conveyed through other notifications. In response to this notification,
@@ -824,8 +870,14 @@ enum
     @constant       kAudioDeviceProcessorOverload
                         A UInt32 where the value has no meaning. This property exists so that
                         clients can be notified when the AudioDevice detects that an IO cycle has
-                        run past it's deadline. Note that the notification for this property is
+                        run past its deadline. Note that the notification for this property is
                         usually sent from the AudioDevice's IO thread.
+    @constant       kAudioDevicePropertyIOStoppedAbnormally
+                        A UInt32 where the value has no meaning. This property exists so that
+                        clients can be notified when IO on the device has stopped outside of the
+                        normal mechanisms. This typically comes up when IO is stopped after
+                        AudioDeviceStart has returned successfully but prior to the notification for
+                        kAudioDevicePropertyIsRunning being sent.
     @constant       kAudioDevicePropertyHogMode
                         A pid_t indicating the process that currently owns exclusive access to the
                         AudioDevice or a value of -1 indicating that the device is currently
@@ -869,14 +921,14 @@ enum
                         An AudioHardwareIOProcStreamUsage structure which details the stream usage
                         of a given IO proc. If a stream is marked as not being used, the given
                         IOProc will see a corresponding NULL buffer pointer in the AudioBufferList
-                        passed to it's IO proc. Note that the number of streams detailed in the
+                        passed to its IO proc. Note that the number of streams detailed in the
                         AudioHardwareIOProcStreamUsage must include all the streams of that
                         direction on the device. Also, when getting the value of the property, one
                         must fill out the mIOProc field of the AudioHardwareIOProcStreamUsage with
                         the address of the of the IOProc whose stream usage is to be retrieved.
     @constant       kAudioDevicePropertyActualSampleRate
                         A Float64 that indicates the current actual sample rate of the AudioDevice
-                        as measured by it's time stamps.
+                        as measured by its time stamps.
 */
 enum
 {
@@ -884,6 +936,7 @@ enum
     kAudioDevicePropertyDeviceHasChanged                = 'diff',
     kAudioDevicePropertyDeviceIsRunningSomewhere        = 'gone',
     kAudioDeviceProcessorOverload                       = 'over',
+    kAudioDevicePropertyIOStoppedAbnormally             = 'stpd',
     kAudioDevicePropertyHogMode                         = 'oink',
     kAudioDevicePropertyBufferFrameSize                 = 'fsiz',
     kAudioDevicePropertyBufferFrameSizeRange            = 'fsz#',
@@ -1261,7 +1314,7 @@ extern OSStatus
 AudioDeviceCreateIOProcIDWithBlock( AudioDeviceIOProcID*    outIOProcID,
                                     AudioObjectID           inDevice,
                                     dispatch_queue_t        inDispatchQueue,
-                                    AudioDeviceIOBlock      inIOBlock)                              __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA);
+                                    AudioDeviceIOBlock      inIOBlock)                              __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_7_0);
 
 #endif  //  __BLOCKS__
 

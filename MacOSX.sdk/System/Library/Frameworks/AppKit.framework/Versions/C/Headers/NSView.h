@@ -1,10 +1,11 @@
 /*
     NSView.h
     Application Kit
-    Copyright (c) 1994-2012, Apple Inc.
+    Copyright (c) 1994-2013, Apple Inc.
     All rights reserved.
 */
 
+#import <AppKit/NSApplication.h>
 #import <AppKit/NSResponder.h>
 #import <Foundation/NSGeometry.h>
 #import <Foundation/NSRange.h>
@@ -13,11 +14,13 @@
 #import <AppKit/NSAnimation.h>
 #import <AppKit/NSUserInterfaceItemIdentification.h>
 #import <AppKit/NSDragging.h>
+#import <AppKit/NSAppearance.h>
 
 @class NSBitmapImageRep, NSCursor, NSDraggingSession, NSGraphicsContext, NSImage, NSPasteboard, NSScrollView, NSTextInputContext, NSWindow, NSAttributedString;
 @class CIFilter, CALayer, NSDictionary, NSScreen, NSShadow, NSTrackingArea;
 @protocol NSDraggingSource;
 
+// Bitset options for the autoresizingMask
 enum {
     NSViewNotSizable			=  0,
     NSViewMinXMargin			=  1,
@@ -28,30 +31,27 @@ enum {
     NSViewMaxYMargin			= 32
 };
 
-enum {
+typedef NS_ENUM(NSUInteger, NSBorderType) {
     NSNoBorder				= 0,
     NSLineBorder			= 1,
     NSBezelBorder			= 2,
     NSGrooveBorder			= 3
 };
-typedef NSUInteger NSBorderType;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
-enum {
+typedef NS_ENUM(NSInteger, NSViewLayerContentsRedrawPolicy) {
     // Leave the layer's contents alone. Never mark the layer as needing display, or draw the view's contents to the layer
-    NSViewLayerContentsRedrawNever                  = 0,
+    NSViewLayerContentsRedrawNever = 0,
     // Map view -setNeedsDisplay...: activity to the layer, and redraw affected layer parts by invoking the view's -drawRect:, but don't mark the view or layer as needing display when the view's size changes.
-    NSViewLayerContentsRedrawOnSetNeedsDisplay      = 1,
+    NSViewLayerContentsRedrawOnSetNeedsDisplay = 1,
     // Resize the layer and redraw the view to the layer when the view's size changes. If the resize is animated, AppKit will drive the resize animation itself and will do this resize+redraw at each step of the animation. Affected parts of the layer will also be redrawn when the view is marked as needing display. (This mode is a superset of NSViewLayerContentsRedrawOnSetNeedsDisplay.) 
-    NSViewLayerContentsRedrawDuringViewResize       = 2,
+    NSViewLayerContentsRedrawDuringViewResize = 2,
     // Resize the layer and redraw the view to the layer when the view's size changes. This will be done just once at the beginning of a resize animation, not at each frame of the animation. Affected parts of the layer will also be redrawn when the view is marked as needing display. (This mode is a superset of NSViewLayerContentsRedrawOnSetNeedsDisplay.)
-    NSViewLayerContentsRedrawBeforeViewResize       = 3
-};
-#endif
-typedef NSInteger NSViewLayerContentsRedrawPolicy;
+    NSViewLayerContentsRedrawBeforeViewResize = 3,
+    // When a view is resized, the layer contents will be redrawn once and the contents will crossfade from the old value to the new value. Use this in conjunction with the layerContentsPlacement to get a nice crossfade animation for complex layer-backed views that can't correctly update on each step of the animation
+    NSViewLayerContentsRedrawCrossfade NS_ENUM_AVAILABLE_MAC(10_9) = 4
+} NS_ENUM_AVAILABLE_MAC(10_6);
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
-enum {
+typedef NS_ENUM(NSInteger, NSViewLayerContentsPlacement) {
     NSViewLayerContentsPlacementScaleAxesIndependently      =  0,
     NSViewLayerContentsPlacementScaleProportionallyToFit    =  1,
     NSViewLayerContentsPlacementScaleProportionallyToFill   =  2,
@@ -64,57 +64,55 @@ enum {
     NSViewLayerContentsPlacementBottomLeft                  =  9,
     NSViewLayerContentsPlacementLeft                        = 10,
     NSViewLayerContentsPlacementTopLeft                     = 11
-};
-#endif
-typedef NSInteger NSViewLayerContentsPlacement;
+} NS_ENUM_AVAILABLE_MAC(10_6);
 
 typedef struct __VFlags {
 #ifdef __BIG_ENDIAN__
-	unsigned int        rotatedFromBase:1;
-	unsigned int        rotatedOrScaledFromBase:1;
-	unsigned int        autosizing:6;
-	unsigned int        autoresizeSubviews:1;
-	unsigned int        wantsGState:1;
-	unsigned int        needsDisplay:1;
-	unsigned int        validGState:1;
-	unsigned int        newGState:1;
-	unsigned int        noVerticalAutosizing:1;
-	unsigned int        frameChangeNotesSuspended:1;
-	unsigned int        needsFrameChangeNote:1;
-	unsigned int        focusChangeNotesSuspended:1;
-	unsigned int        boundsChangeNotesSuspended:1;
-	unsigned int        needsBoundsChangeNote:1;
-	unsigned int        removingWithoutInvalidation:1;
-	unsigned int        isFlipped:1;
-	unsigned int        needsDisplayForBounds:1;
-	unsigned int        specialArchiving:1;
-	unsigned int        ignoreHitTest:1;
-	unsigned int        retainCount:6;
-	unsigned int        isOpaque:1;
-	unsigned int        aboutToResize:1;
+	unsigned int rotatedFromBase:1;
+	unsigned int rotatedOrScaledFromBase:1;
+	unsigned int autosizing:6;
+	unsigned int autoresizeSubviews:1;
+	unsigned int wantsGState:1;
+	unsigned int needsDisplay:1;
+	unsigned int unused1:2;
+	unsigned int canDrawSubviewsIntoLayer:1;
+	unsigned int frameChangeNotesSuspended:1;
+	unsigned int needsFrameChangeNote:1;
+	unsigned int unused2:1;
+	unsigned int boundsChangeNotesSuspended:1;
+	unsigned int needsBoundsChangeNote:1;
+	unsigned int removingWithoutInvalidation:1;
+	unsigned int isFlipped:1;
+	unsigned int needsDisplayForBounds:1;
+	unsigned int specialArchiving:1;
+	unsigned int ignoreHitTest:1;
+        unsigned int hasNotMessedWithIsFlipped:1;
+	unsigned int unused3:5;
+	unsigned int isOpaque:1;
+	unsigned int aboutToResize:1;
 #else
-	unsigned int        aboutToResize:1;
-	unsigned int        isOpaque:1;
-	unsigned int        retainCount:6;
-	unsigned int        ignoreHitTest:1;
-	unsigned int        specialArchiving:1;
-	unsigned int        needsDisplayForBounds:1;
-	unsigned int        isFlipped:1;
-	unsigned int        removingWithoutInvalidation:1;
-	unsigned int        needsBoundsChangeNote:1;
-	unsigned int        boundsChangeNotesSuspended:1;
-	unsigned int        focusChangeNotesSuspended:1;
-	unsigned int        needsFrameChangeNote:1;
-	unsigned int        frameChangeNotesSuspended:1;
-	unsigned int        noVerticalAutosizing:1;
-	unsigned int        newGState:1;
-	unsigned int        validGState:1;
-	unsigned int        needsDisplay:1;
-	unsigned int        wantsGState:1;
-	unsigned int        autoresizeSubviews:1;
-	unsigned int        autosizing:6;
-	unsigned int        rotatedOrScaledFromBase:1;
-	unsigned int        rotatedFromBase:1;
+	unsigned int aboutToResize:1;
+	unsigned int isOpaque:1;
+	unsigned int unused3:5;
+        unsigned int hasNotMessedWithIsFlipped:1;
+	unsigned int ignoreHitTest:1;
+	unsigned int specialArchiving:1;
+	unsigned int needsDisplayForBounds:1;
+	unsigned int isFlipped:1;
+	unsigned int removingWithoutInvalidation:1;
+	unsigned int needsBoundsChangeNote:1;
+	unsigned int boundsChangeNotesSuspended:1;
+	unsigned int unused2:1;
+	unsigned int needsFrameChangeNote:1;
+	unsigned int frameChangeNotesSuspended:1;
+	unsigned int canDrawSubviewsIntoLayer:1;
+	unsigned int unused1:2;
+	unsigned int needsDisplay:1;
+	unsigned int wantsGState:1;
+	unsigned int autoresizeSubviews:1;
+	unsigned int autosizing:6;
+	unsigned int rotatedOrScaledFromBase:1;
+	unsigned int rotatedFromBase:1;
 #endif
 } _VFlags;
 
@@ -123,7 +121,7 @@ typedef NSInteger NSToolTipTag;
 
 @class _NSViewAuxiliary;
 
-@interface NSView : NSResponder <NSAnimatablePropertyContainer, NSUserInterfaceItemIdentification, NSDraggingDestination>
+@interface NSView : NSResponder <NSAnimatablePropertyContainer, NSUserInterfaceItemIdentification, NSDraggingDestination, NSAppearanceCustomization>
 {
     /* All instance variables are private */
     NSRect              _frame;
@@ -182,6 +180,7 @@ typedef NSInteger NSToolTipTag;
 
 - (void)setPostsFrameChangedNotifications:(BOOL)flag;
 - (BOOL)postsFrameChangedNotifications;
+
 - (void)resizeSubviewsWithOldSize:(NSSize)oldSize;
 - (void)resizeWithOldSuperviewSize:(NSSize)oldSize;
 - (void)setAutoresizesSubviews:(BOOL)flag;
@@ -330,7 +329,7 @@ typedef NSInteger NSToolTipTag;
 
 - (CALayer *)makeBackingLayer NS_AVAILABLE_MAC(10_6);
 
-/* Get and set how the layer should redraw when resizing and redisplaying. Prior to 10.8, the default value was always set to NSViewLayerContentsRedrawDuringViewResize when an AppKit managed layer was created. In 10.8 and higher, the value is initialized to the appropriate thing for each individual AppKit view. Generally, the default value is NSViewLayerContentsRedrawOnSetNeedsDisplay if the view responds YES to -wantsUpdateLayer. On 10.8, these values are not encoded by the view.
+/* Get and set how the layer should redraw when resizing and redisplaying. Prior to 10.8, the default value was always set to NSViewLayerContentsRedrawDuringViewResize when an AppKit managed layer was created. In 10.8 and higher, the value is initialized to the appropriate thing for each individual AppKit view. Generally, the default value is NSViewLayerContentsRedrawOnSetNeedsDisplay if the view responds YES to -wantsUpdateLayer. Otherwise, the value is usually NSViewLayerContentsRedrawDuringViewResize, indicating that the view needs to redraw on each step of an animation via a setFrame: change. On 10.8, the value is not encoded by the view.
 */
 - (NSViewLayerContentsRedrawPolicy)layerContentsRedrawPolicy NS_AVAILABLE_MAC(10_6);
 - (void)setLayerContentsRedrawPolicy:(NSViewLayerContentsRedrawPolicy)newPolicy NS_AVAILABLE_MAC(10_6);
@@ -338,7 +337,7 @@ typedef NSInteger NSToolTipTag;
 - (NSViewLayerContentsPlacement)layerContentsPlacement NS_AVAILABLE_MAC(10_6);
 - (void)setLayerContentsPlacement:(NSViewLayerContentsPlacement)newPlacement NS_AVAILABLE_MAC(10_6);
 
-/* Indicates if this view should be a "Layer Backed View". When layer backed, all subviews will subsequently also have a layer set on them. Contents for a layer are specified in one of two ways: if -wantsUpdateLayer returns YES, then one can directly update the layer's contents (or other properties) in -updateLayer. If -wantsUpdateLayer returns NO, then the layer's contents is filled with whatever is drawn by -drawRect:
+/* Indicates if this view should be a "Layer Backed View". When layer backed, all subviews will subsequently also have a layer set on them (however, wantsLayer will only be YES on views that have had it explicitly set). Contents for a layer are specified in one of two ways: if -wantsUpdateLayer returns YES, then one can directly update the layer's contents (or other properties) in -updateLayer. If -wantsUpdateLayer returns NO, then the layer's contents is filled with whatever is drawn by -drawRect:
  */
 - (void)setWantsLayer:(BOOL)flag NS_AVAILABLE_MAC(10_5);
 - (BOOL)wantsLayer NS_AVAILABLE_MAC(10_5);
@@ -356,8 +355,18 @@ typedef NSInteger NSToolTipTag;
  */
 - (void)updateLayer NS_AVAILABLE_MAC(10_8);
 
+/* When canDrawSubviewsIntoLayer is set to YES, and the view is layer-backed (either explicitly with -wantsLayer=YES, or by having a parent view that is layer-backed), the layer will draw all subviews into this view's layer, and each subview will not get an individual layer (the exception to this is a subview which has wantsLayer explicitly set to YES). This is useful for layer-backing a complex set of views that can not be refactored to take advantage of proper resizing and -wantsUpdateLayer==YES. If canDrawSubviewsIntoLayer is YES, the value returned from wantsUpdateLayer will be ignored, and the layer will always have drawRect: invoked to get the layer's contents. The default value is NO. NOTE: These methods should NOT be overridden, and the setter should always be used.
+ */
+- (void)setCanDrawSubviewsIntoLayer:(BOOL)flag NS_AVAILABLE_MAC(10_9);
+- (BOOL)canDrawSubviewsIntoLayer NS_AVAILABLE_MAC(10_9);
+
 - (void)setAlphaValue:(CGFloat)viewAlpha NS_AVAILABLE_MAC(10_5);
 - (CGFloat)alphaValue NS_AVAILABLE_MAC(10_5);
+
+/* If you have set a custom layer on your view, and it (or one of its sublayers) uses CIFilters, you should set this. You do not need to set this if you are using the backgroundFilters, compositingFilter, or contentFilters properties below. See the release notes for more information.
+ */
+- (void)setLayerUsesCoreImageFilters:(BOOL)usesFilters NS_AVAILABLE_MAC(10_9);
+- (BOOL)layerUsesCoreImageFilters NS_AVAILABLE_MAC(10_9);
 
 - (void)setBackgroundFilters:(NSArray *)filters NS_AVAILABLE_MAC(10_5);
 - (NSArray *)backgroundFilters NS_AVAILABLE_MAC(10_5);
@@ -381,7 +390,8 @@ typedef NSInteger NSToolTipTag;
 */
 - (void)updateTrackingAreas NS_AVAILABLE_MAC(10_5);
 
-
+/* shouldDrawColor is no longer used by AppKit. 
+ */
 - (BOOL)shouldDrawColor;
 
 - (void)setPostsBoundsChangedNotifications:(BOOL)flag;
@@ -399,16 +409,25 @@ typedef NSInteger NSToolTipTag;
 - (void)removeAllToolTips;
 
 /* Live resize support */
-// a view receives viewWillStartLiveResize before the frame is first changed for a live resize
+/* A view receives viewWillStartLiveResize before the frame is first changed for a live resize. It is important to call [super viewWillStartLiveResize] to allow AppKit to do any internal work it needs. */
 - (void)viewWillStartLiveResize;
-// a view receives viewWillEndLiveResize after the frame is last changed for a live resize
+
+/* A view receives viewWillEndLiveResize after the frame is last changed for a live resize. It is important to call [super viewDidEndLiveResize].
+ */
 - (void)viewDidEndLiveResize;
-// inLiveResize can be called from drawRect: to decide between cheap and full drawing
+
+/* inLiveResize can be called at any time to determine if the window is performing a live resize or not. Drawing optimizations can be done when the view is being live-resized.
+ */
 - (BOOL)inLiveResize;
-/* A view that returns YES for -preservesContentDuringLiveResize is responsible for invalidating its own dirty rects during live resize */
+
+/* A view that returns YES for -preservesContentDuringLiveResize is responsible for invalidating its own dirty rects during live resize 
+ */
 - (BOOL)preservesContentDuringLiveResize;
-/* -rectPreservedDuringLiveResize indicates the rect the view previously occupied, in the current coordinate system of the view */
+
+/* -rectPreservedDuringLiveResize indicates the rect the view previously occupied, in the current coordinate system of the view 
+ */
 - (NSRect)rectPreservedDuringLiveResize;
+
 /* On return from -getRectsExposedDuringLiveResize, exposedRects indicates the parts of the view that are newly exposed (at most 4 rects).  *count indicates how many rects are in the exposedRects list */
 - (void)getRectsExposedDuringLiveResize:(NSRect[4])exposedRects count:(NSInteger *)count;
 
@@ -424,6 +443,28 @@ typedef NSInteger NSToolTipTag;
  Return NSZeroRect for the default behavior.
  */
 - (NSRect)rectForSmartMagnificationAtPoint:(NSPoint)location inRect:(NSRect)visibleRect NS_AVAILABLE_MAC(10_8);
+
+/* Get and set the user interface layout direction. By default, a basic NSView may not respect the User Interface Layout Direction that is uniquely set on it, and it is up to the developer and supporting subclasses to correctly implement a Right To Left layout implementation. The default value is set to [NSApp userInterfaceLayoutDirection]. 
+ */
+- (NSUserInterfaceLayoutDirection)userInterfaceLayoutDirection NS_AVAILABLE_MAC(10_8);
+- (void)setUserInterfaceLayoutDirection:(NSUserInterfaceLayoutDirection)value NS_AVAILABLE_MAC(10_8);
+
+/* The View Based NSTableView allows views to be reused. Sometimes it is necessary to prepare a view with some initial state before it is to be reused. This method can be overridden to allow a view to be prepared back to the default state. Override this method to do the preparation. By default, NSView will do some setup, such as setting the view to not be hidden and have a 1.0 alpha. It is important to call super to get this work done. This method was made public in 10.9, but exists back to 10.7.
+ */
+- (void)prepareForReuse NS_AVAILABLE_MAC(10_7);
+
+/* A subclass of any NSScrollView, NSClipView or the NSScrollView's documentView can override this method to verify that its customizations are compatible with 10.9's responsive scrolling behavior. By default, AppKit assumes that a ScrollView is responsive scrolling compatible if it and its clipview and document view do not override certain methods such as -scrollWheel: (See documentation for the expanded list). However, these views may still opt into responsive scrolling if they work with the new scrolling behavior by overriding and returning YES for this method. Likewise, the same set of views may return NO to explicitly opt out of responsive scrolling.
+*/
++ (BOOL)isCompatibleWithResponsiveScrolling NS_AVAILABLE_MAC(10_9);
+
+/* Called by NSView with a 'rect' for a recommended area that should be fully rendered for overdraw. Override this method and bring in additional subviews and pre-cached content for the 'rect' in order to perform responsive scrolling. Calling super may be required for some subclasses (such as NSTableView and NSOutlineView), so in general, super should always be called. To suppress overdraw for a particular view (such as NSTableView), override this method and call [super prepareContentInRect:[self visibleRect]].
+ */
+- (void)prepareContentInRect:(NSRect)rect NS_AVAILABLE_MAC(10_9);
+
+/* The preparedContentRect is the area of the NSView that has full content coverage. In general, this should be called with the area that is filled in fully with views. It should always include the visibleRect. Set this with a value equal to the visibleRect to have overdraw start from the visibleRect and automatically grow larger on idle, as is needed for optimal system performance.
+ */
+@property NSRect preparedContentRect NS_AVAILABLE_MAC(10_9);
+
 
 @end
 
@@ -575,12 +616,21 @@ APPKIT_EXTERN NSString * const NSDefinitionPresentationTypeDictionaryApplication
 
 /* Notifications */
 
+/* Sent when the frame changes for a view. This is only sent if postsFrameChangedNotifications is set to YES.
+ */
 APPKIT_EXTERN NSString *NSViewFrameDidChangeNotification;
 APPKIT_EXTERN NSString *NSViewFocusDidChangeNotification;
+
+/* This notification is sent whenever the views bounds change and the frame does not.  That is, it is sent whenever the view's bounds are translated, scaled or rotated, but NOT when the bounds change as a result of, for example, setFrameSize:.
+ */
 APPKIT_EXTERN NSString *NSViewBoundsDidChangeNotification;
-    // This notification is sent whenever the views bounds change and the frame does not.  That is, it is sent whenever the view's bounds are translated, scaled or rotated, but NOT when the bounds change as a result of, for example, setFrameSize:.
+
+/* This notification is sent whenever an NSView that has an attached NSSurface changes size or changes screens (thus potentially changing graphics hardware drivers.)
+ */
 APPKIT_EXTERN NSString *NSViewGlobalFrameDidChangeNotification;
-    // This notification is sent whenever an NSView that has an attached NSSurface changes size or changes screens (thus potentially changing graphics hardware drivers.)
     
+/* This notification is sent whenever tracking areas should be recalculated for the view.  It is sent after the view receives -updateTrackingAreas.
+ */
 APPKIT_EXTERN NSString *NSViewDidUpdateTrackingAreasNotification NS_AVAILABLE_MAC(10_5);
-    // This notification is sent whenever tracking areas should be recalculated for the view.  It is sent after the view receives -updateTrackingAreas.
+
+

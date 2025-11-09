@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2008 Apple Inc. All rights reserved.
+ * Copyright (c) 2008-2013 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -125,7 +125,7 @@ struct mif6ctl {
 	mifi_t	    mif6c_mifi;	    	/* the index of the mif to be added  */
 	u_char	    mif6c_flags;     	/* MIFF_ flags defined below         */
 	u_short	    mif6c_pifi;		/* the index of the physical IF */
-#if notyet
+#ifdef notyet
 	u_int	    mif6c_rate_limit;    /* max rate           		     */
 #endif
 };
@@ -203,7 +203,6 @@ struct sioc_mif_req6 {
 	u_quad_t ibytes;	/* Input byte count on mif		*/
 	u_quad_t obytes;	/* Output byte count on mif		*/
 };
-
 
 
 #endif /* !_NETINET6_IP6_MROUTE_H_ */

@@ -1,18 +1,19 @@
 /*	
      NSUserNotification.h
-     Copyright (c) 2011-2012, Apple Inc. All rights reserved.
+     Copyright (c) 2011-2013, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
-@class NSString, NSDictionary, NSArray, NSDateComponents, NSDate, NSTimeZone;
+@class NSString, NSDictionary, NSArray, NSDateComponents, NSDate, NSTimeZone, NSImage, NSAttributedString;
 @protocol NSUserNotificationCenterDelegate;
 
 // Used to describe the method in which the user activated the user notification. Alerts can be activated by either clicking on the body of the alert or the action button.
 typedef NS_ENUM(NSInteger, NSUserNotificationActivationType) {
     NSUserNotificationActivationTypeNone = 0,
     NSUserNotificationActivationTypeContentsClicked = 1,
-    NSUserNotificationActivationTypeActionButtonClicked = 2
+    NSUserNotificationActivationTypeActionButtonClicked = 2,
+    NSUserNotificationActivationTypeReplied NS_AVAILABLE(10_9, NA) = 3
 } NS_ENUM_AVAILABLE(10_8, NA);
 
 NS_CLASS_AVAILABLE(10_8, NA)
@@ -68,6 +69,21 @@ NS_CLASS_AVAILABLE(10_8, NA)
 
 // Set this property to a localized string to customize the title of the 'Close' button in an alert-style notification. An empty string will cause the default localized text to be used. A nil value is invalid.
 @property (copy) NSString *otherButtonTitle;
+
+// This identifier is used to uniquely identify a notification. A notification delivered with the same identifier as an existing notification will replace that notification, rather then display a new one.
+@property (copy) NSString *identifier NS_AVAILABLE(10_9, NA);
+
+// NSImage shown in the content of the notification.
+@property (copy) NSImage *contentImage NS_AVAILABLE(10_9, NA);
+
+// Set to YES if the notification has a reply button. The default value is NO. If both this and hasActionButton are YES, the reply button will be shown.
+@property BOOL hasReplyButton NS_AVAILABLE(10_9, NA);
+
+// Optional placeholder for inline reply field.
+@property (copy) NSString *responsePlaceholder NS_AVAILABLE(10_9, NA);
+
+// When a notification has been responded to, the NSUserNotificationCenter delegate didActivateNotification: will be called with the notification with the activationType set to NSUserNotificationActivationTypeReplied and the response set on the response property
+@property (readonly) NSAttributedString *response NS_AVAILABLE(10_9, NA);
 
 @end
 

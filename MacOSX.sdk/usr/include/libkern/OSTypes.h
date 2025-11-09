@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1999-2012 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -25,12 +25,8 @@
  * 
  * @APPLE_OSREFERENCE_LICENSE_HEADER_END@
  */
-/*
- * Copyright (c) 1999 Apple Computer, Inc.  All rights reserved.
- *
- * HISTORY
- *
- */
+
+#include <MacTypes.h>
 
 #ifndef _OS_OSTYPES_H
 #define _OS_OSTYPES_H
@@ -40,66 +36,7 @@
 typedef unsigned int 	   UInt;
 typedef signed int         SInt;
 
-#ifndef __MACTYPES__	/* CF MacTypes.h */
-#ifndef __TYPES__	/* guess... Mac Types.h */
 
-typedef unsigned char 	   UInt8;
-typedef unsigned short 	   UInt16;
-#if __LP64__
-typedef unsigned int       UInt32;
-#else
-typedef unsigned long      UInt32;
-#endif
-typedef unsigned long long UInt64;
-#if		defined(__BIG_ENDIAN__)
-typedef	struct UnsignedWide {
-			UInt32		hi;
-			UInt32		lo;
-}							UnsignedWide;
-#elif		defined(__LITTLE_ENDIAN__)
-typedef	struct UnsignedWide {
-			UInt32		lo;
-			UInt32		hi;
-}							UnsignedWide;
-#else
-#error Unknown endianess.
-#endif
-
-typedef signed char 	   SInt8;
-typedef signed short 	   SInt16;
-#if __LP64__
-typedef signed int         SInt32;
-#else
-typedef signed long        SInt32;
-#endif
-typedef signed long long   SInt64;
-#if		defined(__BIG_ENDIAN__)
-typedef	struct wide {
-			SInt32		hi;
-			UInt32		lo;
-}							wide;
-#elif		defined(__LITTLE_ENDIAN__)
-typedef	struct wide {
-			UInt32		lo;
-			SInt32		hi;
-}							wide;
-#else
-#error Unknown endianess.
-#endif
-
-typedef SInt32				OSStatus;
-
-typedef UnsignedWide		AbsoluteTime;
-
-typedef UInt32				OptionBits;
-
-typedef unsigned char Boolean;
-
-#endif /* __TYPES__ */
-#endif /* __MACTYPES__ */
-
-#if !defined(OS_INLINE)
-#	define OS_INLINE static inline
-#endif
+#include <sys/_types/_os_inline.h>
 
 #endif /* _OS_OSTYPES_H */

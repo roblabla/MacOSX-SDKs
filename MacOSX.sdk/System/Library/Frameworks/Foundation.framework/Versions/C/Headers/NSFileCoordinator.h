@@ -1,6 +1,6 @@
 /*
 	NSFileCoordinator.h
-	Copyright (c) 2010-2012, Apple Inc.
+	Copyright (c) 2010-2013, Apple Inc.
 	All rights reserved.
 */
 
@@ -155,7 +155,7 @@ In most cases it is redundant to pass the same reading or writing options in an 
 
 /*Announce that the item located by a URL is going to be located by another URL.
 
-Support for App Sandbox on OS X. Some applications can rename files while saving them. For example, when a user adds attachments to a rich text document, TextEdit changes the document's extension from .rtf to .rtfd. A sandboxed application like TextEdit must ordinarily prompt the user for approval before renaming a document. You can invoke this method to make your process declare its intent to rename a document without user approval. After the renaming succeeds you must invoke -itemAtURL:didMoveToURL:, with the same arguments, for the process to keep access to the file with its new name and to give up access to any file that appears with the old name. If the renaming fails you should probably not invoke -itemAtURL:willMoveToURL:.
+Support for App Sandbox on OS X. Some applications can rename files while saving them. For example, when a user adds attachments to a rich text document, TextEdit changes the document's extension from .rtf to .rtfd. A sandboxed application like TextEdit must ordinarily prompt the user for approval before renaming a document. You can invoke this method to make your process declare its intent to rename a document without user approval. After the renaming succeeds you must invoke -itemAtURL:didMoveToURL:, with the same arguments, for the process to keep access to the file with its new name and to give up access to any file that appears with the old name. If the renaming fails you should probably not invoke -itemAtURL:didMoveToURL:.
 
 There is no reason to invoke this method from applications that do not use App Sandbox. Invoking it does nothing on iOS.
 */

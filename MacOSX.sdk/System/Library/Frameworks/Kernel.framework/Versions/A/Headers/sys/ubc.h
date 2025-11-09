@@ -38,7 +38,7 @@
 #include <sys/kernel_types.h>
 #include <kern/locks.h>
 #include <mach/memory_object_types.h>
-
+#include <sys/ucred.h>
 
 /* defns for ubc_sync_range() and ubc_msync */
 

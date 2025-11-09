@@ -1,6 +1,6 @@
 /*    
     NSURLConnection.h
-    Copyright (c) 2003-2012, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2013, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -185,7 +185,7 @@
                     still be called.
 
                     connection:willSendRequestForAuthenticationChallenge:
-                    is the preferred (Mac OS X 10.6 and iOS 4.0 or
+                    is the preferred (Mac OS X 10.7 and iOS 5.0 or
                     later) mechanism for responding to authentication
                     challenges.  See
                     <Foundation/NSURLAuthenticationChallenge.h> for
@@ -453,9 +453,9 @@
     @param
          handler   A block which receives the results of the resource load.
  */
-+ (void)sendAsynchronousRequest:(NSURLRequest *)request
++ (void)sendAsynchronousRequest:(NSURLRequest*) request
                           queue:(NSOperationQueue*) queue
-              completionHandler:(void (^)(NSURLResponse*, NSData*, NSError*)) handler NS_AVAILABLE(10_7, 5_0);
+              completionHandler:(void (^)(NSURLResponse* response, NSData* data, NSError* connectionError)) handler NS_AVAILABLE(10_7, 5_0);
            
 @end
                    

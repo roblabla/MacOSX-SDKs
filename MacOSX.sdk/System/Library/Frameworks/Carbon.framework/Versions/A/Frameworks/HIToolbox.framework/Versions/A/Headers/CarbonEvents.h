@@ -3,8 +3,6 @@
  
      Contains:   Carbon Event Manager
  
-     Version:    HIToolbox-626.1~1
- 
      Copyright:  © 1999-2008 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on

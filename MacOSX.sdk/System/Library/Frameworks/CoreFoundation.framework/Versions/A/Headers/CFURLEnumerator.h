@@ -1,6 +1,6 @@
 /*
     CFURLEnumerator.h
-    Copyright (c) 2008-2012, Apple Inc. All rights reserved.
+    Copyright (c) 2008-2013, Apple Inc. All rights reserved.
  */
 
 #if (TARGET_OS_MAC || TARGET_OS_EMBEDDED || TARGET_OS_IPHONE) || CF_BUILDING_CF || NSBUILDINGFOUNDATION

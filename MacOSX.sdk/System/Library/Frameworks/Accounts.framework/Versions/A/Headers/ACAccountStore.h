@@ -8,16 +8,6 @@
 #import <Foundation/Foundation.h>
 #import <Accounts/AccountsDefines.h>
 
-// Options dictionary keys for Facebook access
-ACCOUNTS_EXTERN NSString * const ACFacebookAppIdKey;            // Your Facebook App ID, as it appears on the Facebook website.
-ACCOUNTS_EXTERN NSString * const ACFacebookPermissionsKey;      // An array of of the permissions you're requesting. Optional.
-ACCOUNTS_EXTERN NSString * const ACFacebookAudienceKey;         // Only required when posting permissions are requested.
-
-// Options dictionary values for Facebook access
-ACCOUNTS_EXTERN NSString * const ACFacebookAudienceEveryone;    // Posts from your app are visible to everyone.
-ACCOUNTS_EXTERN NSString * const ACFacebookAudienceFriends;     // Posts are visible only to friends.
-ACCOUNTS_EXTERN NSString * const ACFacebookAudienceOnlyMe;      // Posts are visible to the user only.
-
 typedef NS_ENUM(NSInteger, ACAccountCredentialRenewResult) {
     ACAccountCredentialRenewResultRenewed,  // A new credential was obtained and is now associated with the account.
     ACAccountCredentialRenewResultRejected, // Renewal failed because of a user-initiated action.
@@ -34,6 +24,12 @@ typedef void(^ACAccountStoreCredentialRenewalHandler)(ACAccountCredentialRenewRe
 // The ACAccountStore class provides an interface for accessing and manipulating
 // accounts. You must create an ACAccountStore object to retrieve, add and delete
 // accounts from the Accounts database.
+//
+// IMPORTANT NOTE: You MUST keep the account store around for as long as you have
+// any objects fetched from that store if you expect other 'sub-fetches' to work,
+// most notably being fetching credentials. If you really just want to open the
+// store to grab credentials, just be sure to grab the credential object and then
+// you can release the owning account and store, e.g.
 
 ACCOUNTS_CLASS_AVAILABLE(10_8, 5_0)
 @interface ACAccountStore : NSObject
@@ -65,7 +61,7 @@ ACCOUNTS_CLASS_AVAILABLE(10_8, 5_0)
 // of a particular type in protected operations, for example OAuth signing. The completion handler for 
 // this method is called on an arbitrary queue.
 // Certain account types (such as Facebook) require an options dictionary. A list of the required keys
-// appears at the top of this file. This method will throw an NSInvalidArgumentException if the options
+// appears in ACAccountType.h. This method will throw an NSInvalidArgumentException if the options
 // dictionary is not provided for such account types. Conversely, if the account type does not require
 // an options dictionary, the options parameter must be nil.
 - (void)requestAccessToAccountsWithType:(ACAccountType *)accountType

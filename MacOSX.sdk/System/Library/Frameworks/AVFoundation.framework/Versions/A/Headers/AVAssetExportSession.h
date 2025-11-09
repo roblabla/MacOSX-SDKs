@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2012 Apple Inc. All rights reserved.
+	Copyright 2010-2013 Apple Inc. All rights reserved.
 
 */
 
@@ -56,7 +56,7 @@
 
 #if TARGET_OS_IPHONE
 
-/* These export options can be used to produce QuickTime .mov files with video size appropriate to the device.
+/* These export options can be used to produce movie files with video size appropriate to the device.
 	The export will not scale the video up from a smaller size. The video will be compressed using
 	H.264 and the audio will be compressed using AAC.  */
 
@@ -66,7 +66,7 @@ AVF_EXPORT NSString *const AVAssetExportPresetHighestQuality    NS_AVAILABLE_IOS
 
 #endif // TARGET_OS_IPHONE
 
-/* These export options can be used to produce QuickTime .mov files with the specified video size.
+/* These export options can be used to produce movie files with the specified video size.
 	The export will not scale the video up from a smaller size. The video will be compressed using
 	H.264 and the audio will be compressed using AAC.  Some devices cannot support some sizes. */
 AVF_EXPORT NSString *const AVAssetExportPreset640x480			NS_AVAILABLE(10_7, 4_0);
@@ -105,6 +105,8 @@ AVF_EXPORT NSString *const AVAssetExportPresetAppleProRes422LPCM	NS_AVAILABLE(10
 @class AVAssetExportSessionInternal;
 @class AVAudioMix;
 @class AVVideoComposition;
+@class AVMetadataItemFilter;
+@protocol AVVideoCompositing;
 
 enum {
 	AVAssetExportSessionStatusUnknown,
@@ -140,12 +142,28 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 								A client should pass in an AVAsset that is ready to be exported.
 								In order to ensure that the setup and running of an export operation will succeed using a given preset no significant changes 
 								(such as adding or deleting tracks) should be made to the asset between retrieving compatible identifiers and performing the export operation.
+								This method will access the tracks property of the AVAsset to build the returned NSArray.  To avoid blocking the calling thread, 
+								the tracks property should be loaded using the AVAsynchronousKeyValueLoading protocol before calling this method.
 	@param asset				An AVAsset object that is intended to be exported.
 	@result						An NSArray containing NSString values for the identifiers of compatible export types.  
 								The array is a complete list of the valid identifiers that can be used as arguments to 
 								initWithAsset:presetName: with the specified asset.
 */
 + (NSArray *)exportPresetsCompatibleWithAsset:(AVAsset *)asset;
+
+/*!
+	@method						determineCompatibilityOfExportPreset:withAsset:outputFileType:completionHandler:
+	@abstract					Performs an inspection on the compatibility of an export preset, AVAsset and output file type.  Calls the completion handler with YES if
+								the arguments are compatible; NO otherwise.
+	@discussion					Not all export presets are compatible with all AVAssets and file types.  This method can be used to query compatibility.
+								In order to ensure that the setup and running of an export operation will succeed using a given preset no significant changes 
+								(such as adding or deleting tracks) should be made to the asset between retrieving compatible identifiers and performing the export operation.
+	@param presetName			An NSString specifying the name of the preset template for the export.
+	@param asset				An AVAsset object that is intended to be exported.
+	@param outputFileType		An NSString indicating a file type to check; or nil, to query whether there are any compatible types.
+	@param completionHandler	A block called with the compatibility result.
+ */
++ (void)determineCompatibilityOfExportPreset:(NSString *)presetName withAsset:(AVAsset *)asset outputFileType:(NSString *)outputFileType completionHandler:(void (^)(BOOL compatible))handler NS_AVAILABLE(10_9, 6_0);
 
 /*!
 	@method						exportSessionWithAsset:presetName:
@@ -174,10 +192,13 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 /* Indicates the instance of AVAsset with which the AVExportSession was initialized  */
 @property (nonatomic, retain, readonly) AVAsset *asset NS_AVAILABLE(10_8, 5_0);
 
-/* Indicates the types of files the target can write, using the AVAsset and export preset with which it was initialized */
+/* Indicates the types of files the target can write, according to the preset the target was initialized with.
+   Does not perform an inspection of the AVAsset to determine whether its contents are compatible with the supported file types. If you need to make that determination before initiating the export, use - (void)determineCompatibleFileTypesWithCompletionHandler:(void (^)(NSArray *compatibleFileTypes))handler:. */
 @property (nonatomic, readonly) NSArray *supportedFileTypes;
 
-/* Indicates the type of file to be written by the session; it must be set */
+/* Indicates the type of file to be written by the session.
+   The value of this property must be set before you invoke -exportAsynchronouslyWithCompletionHandler:; otherwise -exportAsynchronouslyWithCompletionHandler: will raise an NSInternalInconsistencyException.
+   Setting the value of this property to a file type that's not among the session's supported file types will result in an NSInvalidArgumentException. See supportedFileTypes. */
 @property (nonatomic, copy) NSString *outputFileType;
 
 /* Indicates the URL of the export session's output. You may use UTTypeCopyPreferredTagWithClass(outputFileType, kUTTagClassFilenameExtension) to obtain an appropriate path extension for the outputFileType you have specified. For more information about UTTypeCopyPreferredTagWithClass and kUTTagClassFilenameExtension, on iOS see <MobileCoreServices/UTType.h> and on Mac OS X see <LaunchServices/UTType.h>.  */
@@ -194,15 +215,15 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 
 #if TARGET_OS_IPHONE
 
-/* indicates the maximum duration that is allowed for export */
+/* Provides an estimate of the maximum duration of exported media that is possible given the source asset, the export preset, and the current value of fileLengthLimit.  The export will not stop when it reaches this maximum duration; set the timeRange property to export only a certain time range.  */
 @property (nonatomic, readonly) CMTime maxDuration;
-
-/* indicates the estimated byte size of exported file */
-@property (nonatomic, readonly) long long estimatedOutputFileLength NS_AVAILABLE_IOS(5_0);
 
 #endif
 
-/* specifies a time range to be exported from the source; the default timeRange of an export session is kCMTimeZero..kCMTimePositiveInfinity, meaning that, pending a possible limit on file length, the full duration of the asset will be exported */
+/* Indicates the estimated byte size of exported file. Returns zero when export preset is AVAssetExportPresetPassthrough or AVAssetExportPresetAppleProRes422LPCM. This property will also return zero if a numeric value (ie. not invalid, indefinite, or infinite) for the timeRange property has not been set. */
+@property (nonatomic, readonly) long long estimatedOutputFileLength NS_AVAILABLE(10_9, 5_0);
+
+/* Specifies a time range to be exported from the source.  The default timeRange of an export session is kCMTimeZero..kCMTimePositiveInfinity, meaning that the full duration of the asset will be exported. */
 @property (nonatomic) CMTimeRange timeRange;
 
 /* Specifies an NSArray of AVMetadataItems that are to be written to the output file by the export session.
@@ -210,19 +231,42 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
    the appropriate metadata keyspace for the output file and written to the output. */
 @property (nonatomic, copy) NSArray *metadata; 
 
+/* Specifies a filter object to be used during export to determine which metadata items should be transferred from the source asset.
+   If the value of this key is nil, no filter will be applied.  This is the default.
+   The filter will not be applied to metadata set with via the metadata property.  To apply the filter to metadata before it is set on the metadata property, see the methods in AVMetadataItem's AVMetadataItemArrayFiltering category. */
+@property (nonatomic, retain) AVMetadataItemFilter *metadataItemFilter NS_AVAILABLE(10_9, 7_0);
+
 #if TARGET_OS_IPHONE
-/* Indicates the maximum number of bytes that the session is allowed to write to the output URL. The export will stop when the output reaches this size regardless of the duration of the source or the value of the timeRange property. */
+/* Indicates the file length that the output of the session should not exceed.  Depending on the content of the source asset, it is possible for the output to slightly exceed the file length limit.  The length of the output file should be tested if you require that a strict limit be observed before making use of the output.  See also maxDuration and timeRange. */
 @property (nonatomic) long long fileLengthLimit; 
 #endif
 
-/* indicates whether non-default audio mixing is enabled for export and supplies the parameters for audio mixing */
+/* Indicates the processing algorithm used to manage audio pitch for scaled audio edits.
+   Constants for various time pitch algorithms, e.g. AVAudioTimePitchAlgorithmSpectral, are defined in AVAudioProcessingSettings.h. An NSInvalidArgumentException will be raised if this property is set to a value other than the constants defined in that file.
+   The default value is AVAudioTimePitchAlgorithmSpectral. */
+@property (nonatomic, copy) NSString *audioTimePitchAlgorithm NS_AVAILABLE(10_9, 7_0);
+
+/* Indicates whether non-default audio mixing is enabled for export and supplies the parameters for audio mixing.  Ignored when export preset is AVAssetExportPresetPassthrough. */
 @property (nonatomic, copy) AVAudioMix *audioMix;
 
-/* indicates whether video composition is enabled for export and supplies the instructions for video composition */
+/* Indicates whether video composition is enabled for export and supplies the instructions for video composition.  Ignored when export preset is AVAssetExportPresetPassthrough. */
 @property (nonatomic, copy) AVVideoComposition *videoComposition;
+
+/* Indicates the custom video compositor instance used, if any */
+@property (nonatomic, readonly) id<AVVideoCompositing>customVideoCompositor NS_AVAILABLE(10_9, 7_0);
 
 /* indicates the movie should be optimized for network use */
 @property (nonatomic) BOOL shouldOptimizeForNetworkUse;
+
+/*!
+	@method						determineCompatibleFileTypesWithCompletionHandler:
+	@abstract					Performs an inspection on the AVAsset and Preset the object was initialized with to determine a list of file types the ExportSession can write.
+	@param						handler
+								Called when the inspection completes with an array of file types the ExportSession can write.  Note that this may have a count of zero.
+	@discussion					This method is different than the supportedFileTypes property in that it performs an inspection of the AVAsset in order to determine its
+								compatibility with each of the session's supported file types.
+*/
+- (void)determineCompatibleFileTypesWithCompletionHandler:(void (^)(NSArray *compatibleFileTypes))handler NS_AVAILABLE(10_9, 6_0);
 
 /*!
 	@method						exportAsynchronouslyWithCompletionHandler:

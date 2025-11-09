@@ -3,7 +3,7 @@
  
      Contains:   Carbon Font Panel package Interfaces.
  
-     Version:    CommonPanels-94~602
+     Version:    CommonPanels-94~674
  
      Copyright:  © 2002-2008 by Apple Computer, Inc., all rights reserved
  

@@ -67,11 +67,11 @@ enum {
 @property(readonly, retain) DOMNode *lastChild;
 @property(readonly, retain) DOMNode *previousSibling;
 @property(readonly, retain) DOMNode *nextSibling;
-@property(readonly, retain) DOMNamedNodeMap *attributes;
 @property(readonly, retain) DOMDocument *ownerDocument;
 @property(readonly, copy) NSString *namespaceURI;
 @property(copy) NSString *prefix;
 @property(readonly, copy) NSString *localName;
+@property(readonly, retain) DOMNamedNodeMap *attributes;
 @property(readonly, copy) NSString *baseURI AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
 @property(copy) NSString *textContent AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
 @property(readonly, retain) DOMElement *parentElement AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;

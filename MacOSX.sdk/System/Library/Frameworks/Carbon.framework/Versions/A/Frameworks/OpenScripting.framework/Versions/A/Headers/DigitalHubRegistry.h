@@ -3,7 +3,7 @@
  
      Contains:   Digital Hub AppleEvents
  
-     Version:    OSA-148.3~2
+     Version:    OpenScripting
  
      Copyright:  © 2002-2008 by Apple Computer, Inc.  All rights reserved
  
@@ -21,7 +21,7 @@
 #endif
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once

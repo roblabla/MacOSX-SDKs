@@ -144,6 +144,7 @@ public:
 
     virtual IOReturn    setProperties( OSObject * );
     virtual bool        serializeProperties( OSSerialize * s ) const;
+    virtual OSObject *  copyProperty( const char * aKey ) const;
 
 /*! @function systemPowerEventOccurred
     @abstract Other drivers may inform IOPMrootDomain of system PM events
@@ -298,7 +299,7 @@ public:
     @result On success, returns a new assertion of type IOPMDriverAssertionID *
 */
     IOReturn releasePMAssertion(IOPMDriverAssertionID releaseAssertion);
-        
+
 private:
     virtual IOReturn    changePowerStateTo( unsigned long ordinal );
     virtual IOReturn    changePowerStateToPriv( unsigned long ordinal );
@@ -308,6 +309,15 @@ private:
     virtual bool        askChangeDown( unsigned long );
     virtual void        tellChangeUp( unsigned long );
     virtual void        tellNoChangeDown( unsigned long );
+    virtual IOReturn configureReport(IOReportChannelList   *channels,
+                                    IOReportConfigureAction action,
+                                    void                    *result,
+                                    void                    *destination);
+    virtual IOReturn updateReport(IOReportChannelList      *channels,
+                                  IOReportUpdateAction     action,
+                                  void                     *result,
+                                  void                     *destination);
+
 };
 
 

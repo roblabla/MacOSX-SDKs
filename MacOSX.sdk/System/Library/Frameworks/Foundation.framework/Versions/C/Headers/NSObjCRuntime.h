@@ -1,8 +1,16 @@
 /*	NSObjCRuntime.h
-	Copyright (c) 1994-2012, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2013, Apple Inc. All rights reserved.
 */
 
 #include <TargetConditionals.h>
+#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || (TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)
+#include <objc/NSObjCRuntime.h>
+#include <stdarg.h>
+#include <stdint.h>
+#include <limits.h>
+#include <AvailabilityMacros.h>
+#include <Availability.h>
+#endif
 
 #if defined(__cplusplus)
 #define FOUNDATION_EXTERN extern "C"
@@ -70,7 +78,11 @@
     #if TARGET_OS_IPHONE
 	#define NS_NONATOMIC_IOSONLY nonatomic
     #else
-	#define NS_NONATOMIC_IOSONLY
+        #if __has_feature(objc_property_explicit_atomic)
+            #define NS_NONATOMIC_IOSONLY atomic
+        #else
+            #define NS_NONATOMIC_IOSONLY
+        #endif
     #endif
 #endif
 
@@ -149,7 +161,7 @@
 #define NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 #endif
 
-// Marks classes that must specify @dynamic or @synthesize for properties in their @implementation (property getters & setters will not be synthesized unless the @sythesize directive is used)
+// Marks classes that must specify @dynamic or @synthesize for properties in their @implementation (property getters & setters will not be synthesized unless the @synthesize directive is used)
 #if __has_attribute(objc_requires_property_definitions)
 #define NS_REQUIRES_PROPERTY_DEFINITIONS __attribute__((objc_requires_property_definitions)) 
 #else
@@ -187,6 +199,18 @@
 #endif
 #endif
 
+#ifndef NS_REQUIRES_SUPER
+#if __has_attribute(objc_requires_super)
+#define NS_REQUIRES_SUPER __attribute__((objc_requires_super))
+#else
+#define NS_REQUIRES_SUPER
+#endif
+#endif
+
+#if !__has_feature(objc_instancetype)
+#undef instancetype
+#define instancetype id
+#endif
 
 #if !defined(NS_UNAVAILABLE)
 #define NS_UNAVAILABLE UNAVAILABLE_ATTRIBUTE
@@ -196,120 +220,54 @@
 #define __unsafe_unretained
 #endif
 
-
+#if TARGET_OS_WIN32
 #import <objc/objc.h>
 #include <stdarg.h>
 #include <stdint.h>
 #include <limits.h>
-#include <AvailabilityMacros.h>
-#include <Availability.h>
-
-// The arguments to these availability macros is a version number, e.g. 10_6, 3_0 or 'NA'
-#if TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)
-
-// These cover cases where NS_DEPRECATED indicates something is available and not deprecated on Mac OS but deprecated on iOS
-#define AVAILABLE_MAC_OS_X_VERSION_NA_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_NA UNAVAILABLE_ATTRIBUTE
-#define AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_NA AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER
-#define AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_NA AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER
-#define AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_NA AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER
-#define AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_NA AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER
-#define AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_NA AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER
-#define AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_NA AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER
-#define AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_NA AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER
-#define AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_NA AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER
-#define AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_NA AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER
-
-// Available on MacOS and iOS
-#define NS_AVAILABLE(_mac, _ios) AVAILABLE_MAC_OS_X_VERSION_##_mac##_AND_LATER
-
-// Available on MacOS only
-#define NS_AVAILABLE_MAC(_mac) AVAILABLE_MAC_OS_X_VERSION_##_mac##_AND_LATER
-
-// Available on iOS only
-#define NS_AVAILABLE_IOS(_ios) UNAVAILABLE_ATTRIBUTE
-
-// Deprecated on either MacOS or iOS, or deprecated on both (check version numbers for details)
-#define NS_DEPRECATED(_macIntro, _macDep, _iosIntro, _iosDep) AVAILABLE_MAC_OS_X_VERSION_##_macIntro##_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_##_macDep
-
-// Deprecated on MacOS, unavailable on iOS
-#define NS_DEPRECATED_MAC(_macIntro, _macDep) AVAILABLE_MAC_OS_X_VERSION_##_macIntro##_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_##_macDep
-
-// Unavailable on MacOS, deprecated on iOS
-#define NS_DEPRECATED_IOS(_iosIntro, _iosDep) UNAVAILABLE_ATTRIBUTE
-
-#ifndef __IPHONE_5_0
-#define __IPHONE_5_0 50000
 #endif
 
-#ifndef __IPHONE_6_0
-#define __IPHONE_6_0 60000
-#endif
+#include <CoreFoundation/CFAvailability.h>
 
-#elif (TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)
+#define NS_AVAILABLE(_mac, _ios) CF_AVAILABLE(_mac, _ios)
+#define NS_AVAILABLE_MAC(_mac) CF_AVAILABLE_MAC(_mac)
+#define NS_AVAILABLE_IOS(_ios) CF_AVAILABLE_IOS(_ios)
 
-#define NS_AVAILABLE(_mac, _ios) __OSX_AVAILABLE_STARTING(__MAC_##_mac, __IPHONE_##_ios)
-#define NS_AVAILABLE_MAC(_mac) __OSX_AVAILABLE_STARTING(__MAC_##_mac, __IPHONE_NA)
-#define NS_AVAILABLE_IOS(_ios) __OSX_AVAILABLE_STARTING(__MAC_NA, __IPHONE_##_ios)
-#define NS_DEPRECATED(_macIntro, _macDep, _iosIntro, _iosDep) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_##_macIntro, __MAC_##_macDep, __IPHONE_##_iosIntro, __IPHONE_##_iosDep)
-#define NS_DEPRECATED_MAC(_macIntro, _macDep) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_##_macIntro, __MAC_##_macDep, __IPHONE_NA, __IPHONE_NA)
-#define NS_DEPRECATED_IOS(_iosIntro, _iosDep) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_NA, __MAC_NA, __IPHONE_##_iosIntro, __IPHONE_##_iosDep)
+#define NS_DEPRECATED(_macIntro, _macDep, _iosIntro, _iosDep, ...) CF_DEPRECATED(_macIntro, _macDep, _iosIntro, _iosDep, __VA_ARGS__)
+#define NS_DEPRECATED_MAC(_macIntro, _macDep, ...) CF_DEPRECATED_MAC(_macIntro, _macDep, __VA_ARGS__)
+#define NS_DEPRECATED_IOS(_iosIntro, _iosDep, ...) CF_DEPRECATED_IOS(_iosIntro, _iosDep, __VA_ARGS__)
 
-#else
+#define NS_ENUM_AVAILABLE(_mac, _ios) CF_ENUM_AVAILABLE(_mac, _ios)
+#define NS_ENUM_AVAILABLE_MAC(_mac) CF_ENUM_AVAILABLE_MAC(_mac)
+#define NS_ENUM_AVAILABLE_IOS(_ios) CF_ENUM_AVAILABLE_IOS(_ios)
 
-#define NS_AVAILABLE(_mac, _ios)
-#define NS_AVAILABLE_MAC(_mac)
-#define NS_AVAILABLE_IOS(_ios)
-#define NS_DEPRECATED(_macIntro, _macDep, _iosIntro, _iosDep)
-#define NS_DEPRECATED_MAC(_macIntro, _macDep)
-#define NS_DEPRECATED_IOS(_iosIntro, _iosDep)
+#define NS_ENUM_DEPRECATED(_macIntro, _macDep, _iosIntro, _iosDep, ...) CF_ENUM_DEPRECATED(_macIntro, _macDep, _iosIntro, _iosDep, __VA_ARGS__)
+#define NS_ENUM_DEPRECATED_MAC(_macIntro, _macDep, ...) CF_ENUM_DEPRECATED_MAC(_macIntro, _macDep, __VA_ARGS__)
+#define NS_ENUM_DEPRECATED_IOS(_iosIntro, _iosDep, ...) CF_ENUM_DEPRECATED_IOS(_iosIntro, _iosDep, __VA_ARGS__)
 
-#endif
+#define NS_AVAILABLE_IPHONE(_ios) CF_AVAILABLE_IOS(_ios)
+#define NS_DEPRECATED_IPHONE(_iosIntro, _iosDep) CF_DEPRECATED_IOS(_iosIntro, _iosDep)
 
-// Older versions of these macro; use IOS versions instead
-#define NS_AVAILABLE_IPHONE(_ios) NS_AVAILABLE_IOS(_ios)
-#define NS_DEPRECATED_IPHONE(_iosIntro, _iosDep) NS_DEPRECATED_IOS(_iosIntro, _iosDep)
+#define NS_ENUM(_type, _name) CF_ENUM(_type, _name)
+#define NS_OPTIONS(_type, _name) CF_OPTIONS(_type, _name)
 
 // This macro is to be used by system frameworks to support the weak linking of classes. Weak linking is supported on iOS 3.1 and Mac OS X 10.6.8 or later.
 #if (__MAC_OS_X_VERSION_MIN_REQUIRED >= __MAC_10_6 || __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_3_1) && \
     ((__has_feature(objc_weak_class) || \
      (defined(__llvm__) && defined(__APPLE_CC__) && (__APPLE_CC__ >= 5658)) || \
      (defined(__APPLE_CC__) && (__APPLE_CC__ >= 5666))))
-#define NS_CLASS_AVAILABLE(_mac, _ios) __attribute__((visibility("default"))) __OSX_AVAILABLE_STARTING(__MAC_##_mac, __IPHONE_##_ios)
+#define NS_CLASS_AVAILABLE(_mac, _ios) __attribute__((visibility("default"))) NS_AVAILABLE(_mac, _ios)
+#define NS_CLASS_DEPRECATED(_mac, _macDep, _ios, _iosDep, ...) __attribute__((visibility("default"))) NS_DEPRECATED(_mac, _macDep, _ios, _iosDep, __VA_ARGS__)
 #else
 // class weak import is not supported
 #define NS_CLASS_AVAILABLE(_mac, _ios)
+#define NS_CLASS_DEPRECATED(_mac, _macDep, _ios, _iosDep, ...)
 #endif
 
 #define NS_CLASS_AVAILABLE_IOS(_ios) NS_CLASS_AVAILABLE(NA, _ios)
 #define NS_CLASS_AVAILABLE_MAC(_mac) NS_CLASS_AVAILABLE(_mac, NA)
-
-#if __has_feature(enumerator_attributes) && __has_attribute(availability)
-#define NS_ENUM_AVAILABLE(_mac, _ios) __OSX_AVAILABLE_STARTING(__MAC_##_mac, __IPHONE_##_ios)
-#define NS_ENUM_AVAILABLE_MAC(_mac) __OSX_AVAILABLE_STARTING(__MAC_##_mac, __IPHONE_NA)
-#define NS_ENUM_AVAILABLE_IOS(_ios) __OSX_AVAILABLE_STARTING(__MAC_NA, __IPHONE_##_ios)
-#define NS_ENUM_DEPRECATED(_macIntro, _macDep, _iosIntro, _iosDep) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_##_macIntro, __MAC_##_macDep, __IPHONE_##_iosIntro, __IPHONE_##_iosDep)
-#define NS_ENUM_DEPRECATED_MAC(_macIntro, _macDep) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_##_macIntro, __MAC_##_macDep, __IPHONE_NA, __IPHONE_NA)
-#define NS_ENUM_DEPRECATED_IOS(_iosIntro, _iosDep) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_NA, __MAC_NA, __IPHONE_##_iosIntro, __IPHONE_##_iosDep)
-#else
-#define NS_ENUM_AVAILABLE(_mac, _ios)
-#define NS_ENUM_AVAILABLE_MAC(_mac)
-#define NS_ENUM_AVAILABLE_IOS(_ios)
-#define NS_ENUM_DEPRECATED(_macIntro, _macDep, _iosIntro, _iosDep)
-#define NS_ENUM_DEPRECATED_MAC(_macIntro, _macDep)
-#define NS_ENUM_DEPRECATED_IOS(_iosIntro, _iosDep)
-#endif
-
-#if (__cplusplus && __cplusplus >= 201103L && (__has_extension(cxx_strong_enums) || __has_feature(objc_fixed_enum))) || (!__cplusplus && __has_feature(objc_fixed_enum))
-#define NS_ENUM(_type, _name) enum _name : _type _name; enum _name : _type
-#if (__cplusplus)
-#define NS_OPTIONS(_type, _name) _type _name; enum : _type
-#else
-#define NS_OPTIONS(_type, _name) enum _name : _type _name; enum _name : _type
-#endif
-#else
-#define NS_ENUM(_type, _name) _type _name; enum
-#define NS_OPTIONS(_type, _name) _type _name; enum
-#endif
+#define NS_CLASS_DEPRECATED_MAC(_macIntro, _macDep, ...) NS_CLASS_DEPRECATED(_macIntro, _macDep, NA, NA, __VA_ARGS__)
+#define NS_CLASS_DEPRECATED_IOS(_iosIntro, _iosDep, ...) NS_CLASS_DEPRECATED(NA, NA, _iosIntro, _iosDep, __VA_ARGS__)
 
 FOUNDATION_EXPORT double NSFoundationVersionNumber;
 
@@ -375,6 +333,11 @@ FOUNDATION_EXPORT double NSFoundationVersionNumber;
 #define NSFoundationVersionNumber10_7_2 833.20
 #define NSFoundationVersionNumber10_7_3 833.24
 #define NSFoundationVersionNumber10_7_4 833.25
+#define NSFoundationVersionNumber10_8 945.00
+#define NSFoundationVersionNumber10_8_1 945.00
+#define NSFoundationVersionNumber10_8_2 945.11
+#define NSFoundationVersionNumber10_8_3 945.16
+#define NSFoundationVersionNumber10_8_4 945.18
 #endif
 
 #if TARGET_OS_IPHONE
@@ -388,23 +351,22 @@ FOUNDATION_EXPORT double NSFoundationVersionNumber;
 #define NSFoundationVersionNumber_iOS_4_1  751.37
 #define NSFoundationVersionNumber_iOS_4_2  751.49
 #define NSFoundationVersionNumber_iOS_4_3  751.49
-#define NSFoundationVersionNumber_iOS_5_0  881
-#define NSFoundationVersionNumber_iOS_5_1  890.1
+#define NSFoundationVersionNumber_iOS_5_0  881.00
+#define NSFoundationVersionNumber_iOS_5_1  890.10
+#define NSFoundationVersionNumber_iOS_6_0  993.00
+#define NSFoundationVersionNumber_iOS_6_1  993.00
 #endif
 
-#if __LP64__ || (TARGET_OS_EMBEDDED && !TARGET_OS_IPHONE) || TARGET_OS_WIN32 || NS_BUILD_32_LIKE_64
+#if TARGET_OS_WIN32
 typedef long NSInteger;
 typedef unsigned long NSUInteger;
-#else
-typedef int NSInteger;
-typedef unsigned int NSUInteger;
-#endif
 
 #define NSIntegerMax    LONG_MAX
 #define NSIntegerMin    LONG_MIN
 #define NSUIntegerMax   ULONG_MAX
 
 #define NSINTEGER_DEFINED 1
+#endif
 
 @class NSString, Protocol;
 
@@ -451,7 +413,30 @@ enum {NSNotFound = NSIntegerMax};
     #define NO	(BOOL)0
 #endif
 
-#if defined(__GNUC__) && !defined(__STRICT_ANSI__)
+#if !defined(NS_SUPPRESS_MIN_MAX_ABS)
+
+#if (defined(__GNUC__) || defined(__clang__)) && !defined(__STRICT_ANSI__)
+
+#if __clang__
+
+#define __NSX_PASTE__(A,B) A##B
+
+#if !defined(MIN)
+    #define __NSMIN_IMPL__(A,B,L) ({ __typeof__(A) __NSX_PASTE__(__a,L) = (A); __typeof__(B) __NSX_PASTE__(__b,L) = (B); (__NSX_PASTE__(__a,L) < __NSX_PASTE__(__b,L)) ? __NSX_PASTE__(__a,L) : __NSX_PASTE__(__b,L); })
+    #define MIN(A,B) __NSMIN_IMPL__(A,B,__COUNTER__)
+#endif
+
+#if !defined(MAX)
+    #define __NSMAX_IMPL__(A,B,L) ({ __typeof__(A) __NSX_PASTE__(__a,L) = (A); __typeof__(B) __NSX_PASTE__(__b,L) = (B); (__NSX_PASTE__(__a,L) < __NSX_PASTE__(__b,L)) ? __NSX_PASTE__(__b,L) : __NSX_PASTE__(__a,L); })
+    #define MAX(A,B) __NSMAX_IMPL__(A,B,__COUNTER__)
+#endif
+
+#if !defined(ABS)
+    #define __NSABS_IMPL__(A,L) ({ __typeof__(A) __NSX_PASTE__(__a,L) = (A); (__NSX_PASTE__(__a,L) < 0) ? - __NSX_PASTE__(__a,L) : __NSX_PASTE__(__a,L); })
+    #define ABS(A) __NSABS_IMPL__(A,__COUNTER__)
+#endif
+
+#else
 
 #if !defined(MIN)
     #define MIN(A,B)	({ __typeof__(A) __a = (A); __typeof__(B) __b = (B); __a < __b ? __a : __b; })
@@ -463,6 +448,8 @@ enum {NSNotFound = NSIntegerMax};
 
 #if !defined(ABS)
     #define ABS(A)	({ __typeof__(A) __a = (A); __a < 0 ? -__a : __a; })
+#endif
+
 #endif
 
 #else
@@ -479,5 +466,7 @@ enum {NSNotFound = NSIntegerMax};
     #define ABS(A)	((A) < 0 ? (-(A)) : (A))
 #endif
 
-#endif	/* __GNUC__ */
+#endif
+
+#endif
 

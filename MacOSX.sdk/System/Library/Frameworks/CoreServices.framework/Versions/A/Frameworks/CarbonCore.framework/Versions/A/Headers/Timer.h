@@ -10,11 +10,11 @@
 #define __TIMER__
 
 #ifndef __CONDITIONALMACROS__
-#include <CarbonCore/ConditionalMacros.h>
+#include <ConditionalMacros.h>
 #endif
 
 #ifndef __MACTYPES__
-#include <CarbonCore/MacTypes.h>
+#include <MacTypes.h>
 #endif
 
 #ifndef __OSUTILS__

@@ -98,10 +98,6 @@ class IOSCSIPrimaryCommandsDevice : public IOSCSIProtocolInterface
 	friend class SCSITaskUserClient;
 	
 private:
-	
-#if ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED )
-	SCSIPrimaryCommands *			fSCSIPrimaryCommandObject;
-#endif
 
 	IOSCSIProtocolInterface *		fProtocolDriver;
 	
@@ -171,30 +167,6 @@ protected:
 	// This flag is set if the device responds to a MODE_SENSE_10 command
 	// with the page code set to 0x1A (Power Conditions Mode Page)
 	bool							fDeviceSupportsPowerConditions;
-	
-	// This method will retreive the SCSI Primary Command Set object for
-	// the class.  For subclasses, this will be overridden using a
-	// dynamic cast on the base command set object of the subclass.
-
-#if ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED )
-	
-	// ------ DEPRECATED API ----------
-	// This should no longer be called by subclasses as the command builder
-	// objects will be removed in a later release.
-	virtual SCSIPrimaryCommands *	GetSCSIPrimaryCommandObject ( void );	
-	
-	// This method is called by the start method to create all the command
-	// objects needed by the class.  For subclasses, this will be overridden
-	// to create its needed command set objects.
-	virtual bool					CreateCommandSetObjects ( void );
-	
-	// This method is called by the free method to free all the command
-	// objects needed by the class.  For subclasses, this will be overridden
-	// to free its needed command set objects.
-	virtual void					FreeCommandSetObjects ( void );
-
-#endif /* ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED ) */
-	
 	
 	// This method is called by the start method to obtain information from
 	// the device with regards to whether it supports the power conditions mode page.
@@ -490,47 +462,6 @@ public:
 	bool 				IsMemoryDescriptorValid (
 							IOMemoryDescriptor * 		dataBuffer,
 							UInt64						requiredSize );
-
-#if ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED )
-	
-	// SCSI Primary command implementations
-	virtual bool		CHANGE_DEFINITION (
-							SCSITaskIdentifier			request,
-							IOMemoryDescriptor *		dataBuffer,
-							SCSICmdField1Bit 			SAVE,
-							SCSICmdField7Bit 			DEFINITION_PARAMETER,
-							SCSICmdField1Byte 			PARAMETER_DATA_LENGTH,
-			 				SCSICmdField1Byte 			CONTROL );
-	  
-	virtual bool		COMPARE (
-							SCSITaskIdentifier			request,
-							IOMemoryDescriptor *		dataBuffer,
-	 						SCSICmdField1Bit 			PAD,
-							SCSICmdField3Byte 			PARAMETER_LIST_LENGTH,
-							SCSICmdField1Byte 			CONTROL );
-			
-	virtual bool		COPY (
-							SCSITaskIdentifier			request,
-   							IOMemoryDescriptor *		dataBuffer,
-							SCSICmdField1Bit 			PAD,
-							SCSICmdField3Byte 			PARAMETER_LIST_LENGTH,
-							SCSICmdField1Byte 			CONTROL );
-	  
-	virtual bool		COPY_AND_VERIFY (
-							SCSITaskIdentifier			request,
-							IOMemoryDescriptor *		dataBuffer,
-							SCSICmdField1Bit 			BYTCHK,
-							SCSICmdField1Bit 			PAD,
-							SCSICmdField3Byte 			PARAMETER_LIST_LENGTH,
-							SCSICmdField1Byte 			CONTROL );
-
-	virtual bool		EXTENDED_COPY (
-							SCSITaskIdentifier			request,
-							IOMemoryDescriptor *		dataBuffer,
-							SCSICmdField4Byte 			PARAMETER_LIST_LENGTH,
-							SCSICmdField1Byte 			CONTROL );
-
-#endif	/* ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED ) */
 	
 	virtual bool		INQUIRY (
 							SCSITaskIdentifier			request,
@@ -653,21 +584,6 @@ public:
 							SCSITaskIdentifier			request,
 							SCSICmdField1Byte 			CONTROL );
 	
-#endif /* !TARGET_OS_EMBEDDED */
-
-#if ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED )
-
-	virtual bool		RELEASE_6 (
-							SCSITaskIdentifier			request,
-							IOMemoryDescriptor *		dataBuffer,
-							SCSICmdField1Bit 			EXTENT,
-							SCSICmdField1Byte 			RESERVATION_IDENTIFICATION,
-							SCSICmdField1Byte 			CONTROL );
-
-#endif	/* ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED ) */
-	
-#if !TARGET_OS_EMBEDDED
-	
 	virtual bool		RELEASE_10 (
 							SCSITaskIdentifier			request,
 							IOMemoryDescriptor *		dataBuffer,
@@ -676,25 +592,6 @@ public:
 							SCSICmdField1Byte 			THIRD_PARTY_DEVICE_ID,
 							SCSICmdField2Byte 			PARAMETER_LIST_LENGTH,
 							SCSICmdField1Byte 			CONTROL );
-	
-#endif /* !TARGET_OS_EMBEDDED */
-
-#if ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED )
-
-	virtual bool		RELEASE_10 (
-							SCSITaskIdentifier			request,
-							IOMemoryDescriptor *		dataBuffer,
-							SCSICmdField1Bit 			THRDPTY,
-							SCSICmdField1Bit 			LONGID,
-							SCSICmdField1Bit 			EXTENT,
-							SCSICmdField1Byte 			RESERVATION_IDENTIFICATION,
-							SCSICmdField1Byte 			THIRD_PARTY_DEVICE_ID,
-							SCSICmdField2Byte 			PARAMETER_LIST_LENGTH,
-							SCSICmdField1Byte 			CONTROL );
-
-#endif	/* ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED ) */
-	
-#if !TARGET_OS_EMBEDDED
 	
 	virtual bool		REPORT_DEVICE_IDENTIFIER ( 
 							SCSITaskIdentifier			request,
@@ -723,22 +620,6 @@ public:
 							IOMemoryDescriptor *		dataBuffer,
 							SCSICmdField1Byte 			CONTROL );
 	
-#endif /* !TARGET_OS_EMBEDDED */
-
-#if ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED )
-
- 	virtual bool		RESERVE_6 (
-							SCSITaskIdentifier			request,
-							IOMemoryDescriptor *		dataBuffer,
-							SCSICmdField1Bit 			EXTENT,
-							SCSICmdField1Byte 			RESERVATION_IDENTIFICATION,
-							SCSICmdField2Byte 			PARAMETER_LIST_LENGTH,
-							SCSICmdField1Byte 			CONTROL );
-
-#endif	/* ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED ) */
-	
-#if !TARGET_OS_EMBEDDED
-	
 	virtual bool		RESERVE_10 (
 							SCSITaskIdentifier			request,
 							IOMemoryDescriptor *		dataBuffer,
@@ -747,25 +628,6 @@ public:
 							SCSICmdField1Byte 			THIRD_PARTY_DEVICE_ID,
 							SCSICmdField2Byte 			PARAMETER_LIST_LENGTH,
 							SCSICmdField1Byte 			CONTROL );
-
-#endif /* !TARGET_OS_EMBEDDED */
-	
-#if ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED )
-
-	virtual bool		RESERVE_10 (
-							SCSITaskIdentifier			request,
-							IOMemoryDescriptor *		dataBuffer,
-							SCSICmdField1Bit 			THRDPTY,
-							SCSICmdField1Bit 			LONGID,
-							SCSICmdField1Bit 			EXTENT,
-							SCSICmdField1Byte 			RESERVATION_IDENTIFICATION,
-							SCSICmdField1Byte 			THIRD_PARTY_DEVICE_ID,
-							SCSICmdField2Byte 			PARAMETER_LIST_LENGTH,
-							SCSICmdField1Byte 			CONTROL );
-
-#endif	/* ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED ) */
-	
-#if !TARGET_OS_EMBEDDED
 	
 	virtual bool		SEND (
 							SCSITaskIdentifier			request,

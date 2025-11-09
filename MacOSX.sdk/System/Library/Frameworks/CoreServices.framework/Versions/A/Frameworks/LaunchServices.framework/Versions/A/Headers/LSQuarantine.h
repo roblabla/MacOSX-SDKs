@@ -3,20 +3,21 @@
  
      Contains:   File quarantine property keys
  
-     Copyright:  Copyright 2003-2009 by Apple Inc., all rights reserved.
+     Copyright:  (c) 2003-2012 by Apple Inc. All rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
  
                      http://developer.apple.com/bugreporter/
+
 */
+
 #ifndef __LSQUARANTINE__
 #define __LSQUARANTINE__
 
 #ifndef __COREFOUNDATION__
 #include <CoreFoundation/CoreFoundation.h>
 #endif
-
 
 
 
@@ -90,7 +91,7 @@
  *  kLSQuarantineAgentNameKey
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -99,7 +100,7 @@ extern const CFStringRef kLSQuarantineAgentNameKey                   __OSX_AVAIL
  *  kLSQuarantineAgentBundleIdentifierKey
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -108,7 +109,7 @@ extern const CFStringRef kLSQuarantineAgentBundleIdentifierKey       __OSX_AVAIL
  *  kLSQuarantineTimeStampKey
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -117,7 +118,7 @@ extern const CFStringRef kLSQuarantineTimeStampKey                   __OSX_AVAIL
  *  kLSQuarantineTypeKey
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -126,7 +127,7 @@ extern const CFStringRef kLSQuarantineTypeKey                        __OSX_AVAIL
  *  kLSQuarantineTypeWebDownload
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -135,7 +136,7 @@ extern const CFStringRef kLSQuarantineTypeWebDownload                __OSX_AVAIL
  *  kLSQuarantineTypeOtherDownload
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -144,7 +145,7 @@ extern const CFStringRef kLSQuarantineTypeOtherDownload              __OSX_AVAIL
  *  kLSQuarantineTypeEmailAttachment
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -153,7 +154,7 @@ extern const CFStringRef kLSQuarantineTypeEmailAttachment            __OSX_AVAIL
  *  kLSQuarantineTypeInstantMessageAttachment
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -162,7 +163,7 @@ extern const CFStringRef kLSQuarantineTypeInstantMessageAttachment   __OSX_AVAIL
  *  kLSQuarantineTypeCalendarEventAttachment
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -171,7 +172,7 @@ extern const CFStringRef kLSQuarantineTypeCalendarEventAttachment    __OSX_AVAIL
  *  kLSQuarantineTypeOtherAttachment
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -180,7 +181,7 @@ extern const CFStringRef kLSQuarantineTypeOtherAttachment            __OSX_AVAIL
  *  kLSQuarantineOriginURLKey
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -189,7 +190,7 @@ extern const CFStringRef kLSQuarantineOriginURLKey                   __OSX_AVAIL
  *  kLSQuarantineDataURLKey
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */

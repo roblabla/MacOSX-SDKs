@@ -1,6 +1,6 @@
 /*
  * SyncServices -- SyncServices.h
- * Copyright (c) 2003, Apple Computer, Inc.  All rights reserved.
+ * Copyright (c) 2003, Apple Computer, Inc.  All rights reserved. 
  */
 
 #import <Foundation/Foundation.h>

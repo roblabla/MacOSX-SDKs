@@ -1,14 +1,15 @@
 /*
 	NSSortDescriptor.h
 	Foundation
-	Copyright (c) 2002-2012, Apple Inc. All rights reserved.
+	Copyright (c) 2002-2013, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSArray.h>
 #import <Foundation/NSSet.h>
+#import <Foundation/NSOrderedSet.h>
 
 
-@interface NSSortDescriptor : NSObject <NSCoding, NSCopying> {
+@interface NSSortDescriptor : NSObject <NSSecureCoding, NSCopying> {
 @private
     NSUInteger _sortDescriptorFlags;
     NSString *_key;
@@ -26,6 +27,8 @@
 - (NSString *)key;
 - (BOOL)ascending;
 - (SEL)selector;
+
+- (void)allowEvaluation NS_AVAILABLE(10_9, 7_0); // Force a sort descriptor which was securely decoded to allow evaluation
 
 #if NS_BLOCKS_AVAILABLE
 + (id)sortDescriptorWithKey:(NSString *)key ascending:(BOOL)ascending comparator:(NSComparator)cmptr NS_AVAILABLE(10_6, 4_0);
@@ -57,3 +60,16 @@
 
 @end
 
+@interface NSOrderedSet (NSKeyValueSorting)
+
+// returns a new array by sorting the objects of the receiver
+- (NSArray *)sortedArrayUsingDescriptors:(NSArray *)sortDescriptors NS_AVAILABLE(10_7, 5_0);
+
+@end
+
+@interface NSMutableOrderedSet (NSKeyValueSorting)
+
+// sorts the ordered set itself
+- (void)sortUsingDescriptors:(NSArray *)sortDescriptors NS_AVAILABLE(10_7, 5_0);
+
+@end

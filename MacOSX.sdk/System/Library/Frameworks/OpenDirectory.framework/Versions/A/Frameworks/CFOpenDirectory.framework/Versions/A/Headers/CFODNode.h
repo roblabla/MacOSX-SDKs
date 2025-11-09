@@ -250,8 +250,98 @@ ODRecordRef ODNodeCopyRecord(ODNodeRef node, ODRecordType recordType, CFStringRe
     @param      error an optional CFErrorRef reference for error details
     @result     a CFDataRef with the result of the operation, otherwise outError can be checked for specific details
 */
-CF_RETURNS_RETAINED CF_EXPORT
+CF_EXPORT CF_RETURNS_RETAINED
 CFDataRef ODNodeCustomCall(ODNodeRef node, CFIndex customCode, CFDataRef data, CFErrorRef *error) __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
+
+/*!
+ * @function ODNodeCustomCall
+ *
+ * @abstract
+ * Sends a named custom function call to a node.
+ *
+ * @discussion
+ * Sends a named custom function call to a node.  Custom functions are defined by the modules that implement them
+ * and the parameter is defined by the module.
+ *
+ * @param node
+ * An ODNodeRef to use
+ *
+ * @param function
+ * A CFStringRef that specifies the name of the function
+ *
+ * @param payload
+ * A CFType appropriate for the custom function.  The type is dictated by the module implementing the function.
+ *
+ * @param error
+ * An optional CFErrorRef reference to receive any errors from the custom function call.
+ *
+ * @result
+ * Returns a CFType appropriate for the function.
+ */
+CF_EXPORT CF_RETURNS_RETAINED
+CFTypeRef
+ODNodeCustomFunction(ODNodeRef node, CFStringRef function, CFTypeRef payload, CFErrorRef *error) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+
+/*!
+    @function   ODNodeCopyPolicies
+    @abstract   This will copy any policies configured for the node.
+    @discussion This will copy any policies configured for the node.
+    @param      node an ODNodeRef to use
+    @param      error an optional CFErrorRef reference for error details
+    @result     a CFDictionaryRef containing all currently set policies
+*/
+CF_EXPORT
+CFDictionaryRef ODNodeCopyPolicies(ODNodeRef node, CFErrorRef *error) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+
+/*!
+    @function   ODNodeCopySupportedPolicies
+    @abstract   This will return a dictionary of supported policies.
+    @discussion This will return a dictionary of supported policies, if appropriate, the value will be the maximum value allowed
+                for the policy in question.  For example, if password history is available, it will state how much history is
+                supported.
+    @param      node an ODNodeRef to use
+    @param      error an optional CFErrorRef reference for error details
+    @result     a CFDictionaryRef containing all currently supported policies.  The values will be the maximum value allowed.
+*/
+CF_EXPORT
+CFDictionaryRef ODNodeCopySupportedPolicies(ODNodeRef node, CFErrorRef *error) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+
+/*!
+    @function   ODNodeSetPolicies
+    @abstract   This will set the policy for the node.
+    @discussion This will set the policy for the node.  Policies are evaluated in combination with record-level policies.
+    @param      node an ODNodeRef to use
+    @param      policies a CFDictionary of policies to be set
+    @param      error an optional CFErrorRef reference for error details
+    @result     a bool which signifies if the policy set succeeded, otherwise error is set. 
+*/
+CF_EXPORT
+bool ODNodeSetPolicies(ODNodeRef node, CFDictionaryRef policies, CFErrorRef *error) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+
+/*!
+    @function   ODNodeSetPolicy
+    @abstract   This will set a specific policy setting for the node.
+    @discussion This will set a specific policy setting for the node.
+    @param      node an ODNodeRef to use
+    @param      policy a valid ODPolicyType
+    @param      value a CFTypeRef to be set (should be of appropriate type for the policy)
+    @param      error an optional CFErrorRef reference for error details
+    @result     a bool which signifies if the policy set succeeded, otherwise error is set.
+*/
+CF_EXPORT
+bool ODNodeSetPolicy(ODNodeRef node, ODPolicyType policyType, CFTypeRef value, CFErrorRef *error) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+
+/*!
+    @function   ODNodeRemovePolicy
+    @abstract   This will remove a specific policy setting from the node.
+    @discussion This will remove a specific policy setting from the node.
+    @param      node an ODNodeRef to use
+    @param      policy a valid ODPolicyType
+    @param      error an optional CFErrorRef reference for error details
+    @result     a bool which signifies if the policy removal succeeded, otherwise error is set.
+*/
+CF_EXPORT
+bool ODNodeRemovePolicy(ODNodeRef node, ODPolicyType policyType, CFErrorRef *error) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
 
 __END_DECLS
 

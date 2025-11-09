@@ -1,7 +1,7 @@
 /*
 	NSDocumentController.h
 	Application Kit
-	Copyright (c) 1997-2012, Apple Inc.
+	Copyright (c) 1997-2013, Apple Inc.
 	All rights reserved.
 */
 
@@ -95,6 +95,7 @@ For backward binary compatibility with Mac OS 10.3 and earlier, the default impl
 */
 - (NSInteger)runModalOpenPanel:(NSOpenPanel *)openPanel forTypes:(NSArray *)types;
 
+#if NS_BLOCKS_AVAILABLE
 /* Present an open panel, which may or may not be application-modal, to the user and, if the user selects one or more files and indicates that they are to be opened, invoke the completion handler with an array of those files' URLs. Invoke the completion handler with nil otherwise. The default implementation of this method invokes -beginOpenPanel:forTypes:completionHandler:. However, for backward binary compatibility, it invokes -runModalOpenPanel:forTypes: instead if you override it in a subclass and not -beginOpenPanel:forTypes:completionHandler:.
 
 If you override -[NSDocumentController openDocument:], you would typically want to invoke this method instead of -beginOpenPanel:forTypes:completionHandler: or -URLsFromRunningOpenPanel directly. You typically would not override this method without calling super.
@@ -106,8 +107,6 @@ If you override -[NSDocumentController openDocument:], you would typically want 
 You typically would not invoke this method directly. You can override it though if you need to customize the open panel before it gets displayed.
 */
 - (void)beginOpenPanel:(NSOpenPanel *)openPanel forTypes:(NSArray *)inTypes completionHandler:(void (^)(NSInteger result))completionHandler NS_AVAILABLE_MAC(10_8);
-
-#if NS_BLOCKS_AVAILABLE
 
 /* Open a document located by a URL, present its user interface if displayDocument is YES, and invoke the passed-in completion handler at some point in the future, perhaps after the method invocation has returned. The completion handler must be invoked on the main thread. If successful, pass the document to the completion handler, and also whether the document was already open or being opened before this method was invoked. If not successful, pass a nil document and an NSError that encapsulates the reason why the document could not be opened.
  
@@ -123,7 +122,7 @@ For backward binary compatibility with Mac OS 10.6 and earlier, the default impl
 */
 - (void)openDocumentWithContentsOfURL:(NSURL *)url display:(BOOL)displayDocument completionHandler:(void (^)(NSDocument *document, BOOL documentWasAlreadyOpen, NSError *error))completionHandler NS_AVAILABLE_MAC(10_7);
 
-#endif
+#endif /* NS_BLOCKS_AVAILABLE */
 
 /* Instantiate a document located by a URL, of a specified type, and return it if successful. If not successful, return nil after setting *outError to an NSError that encapsulates the reason why the document could not be instantiated. The default implementation of this method invokes -documentClassForType: to find out the class of document to instantiate, allocates a document object, and initializes it by sending it an -initWithContentsOfURL:ofType:error: message.
 

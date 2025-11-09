@@ -88,15 +88,18 @@ extern "C" {
 #define kPMPSTraySwitchStr					"com.apple.print.PrintSettings.PMPSTraySwitch"
 #define kPMPSTraySwitchKey					CFSTR( kPMPSTraySwitchStr )					/* CFArray - main & option PPD key for tray switching */
 
-#define kPMTotalBeginPagesStr		    		"com.apple.print.PrintSettings.PMTotalBeginPages"
+#define kPMTotalBeginPagesStr		    	"com.apple.print.PrintSettings.PMTotalBeginPages"
 #define kPMTotalBeginPagesKey		    	CFSTR( kPMTotalBeginPagesStr )			/* CFNumber the total number of times beginpage was called */
 
-#define kPMTotalSidesImagedStr		    		"com.apple.print.PrintSettings.PMTotalSidesImaged"
+#define kPMTotalSidesImagedStr		    	"com.apple.print.PrintSettings.PMTotalSidesImaged"
 #define kPMTotalSidesImagedKey		    	CFSTR( kPMTotalSidesImagedStr )			/* CFNumber the total number of sides that will printed. Does not take into account duplex and collation */
 
-#define kPMFitToPageStr		    	"fit-to-page"
-#define kPMFitToPageKey		    	CFSTR( kPMFitToPageStr )			/* CFString - If CFSTR("true"), orient, scale to fit and/or center each page as appropriate. Default value: CFSTR("false"). */
+#define kPMFitToPageStr						"fit-to-page"
+#define kPMFitToPageKey						CFSTR( kPMFitToPageStr )			/* CFString - If CFSTR("true"), orient, scale to fit and/or center each page as appropriate. Default value: CFSTR("false"). */
   
+#define kPMUseOptionalPINStr	    		"com.apple.print.PrintSettings.PMUseOptionalPIN"
+#define kPMUseOptionalPINKey		    	CFSTR( kPMUseOptionalPINStr )			/* CFBoolean - requires PIN to print */
+
 /* Fax Related */
 #define kPMFaxNumberStr						"phone"
 #define kPMFaxNumberKey		    			CFSTR( kPMFaxNumberStr )			/* CFString - fax number to dial */

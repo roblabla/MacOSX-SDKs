@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -188,6 +188,7 @@
  */
 #define	IFM_AVALID	0x00000001	/* Active bit valid */
 #define	IFM_ACTIVE	0x00000002	/* Interface attached to working net */
+#define	IFM_WAKESAMENET	0x00000004	/* No link transition while asleep */
 
 /*
  * Macros to extract various bits of information from the media word.

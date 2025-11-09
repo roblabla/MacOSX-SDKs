@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2012 Apple Inc. All rights reserved.
+	Copyright 2010-2013 Apple Inc. All rights reserved.
 
 */
 
@@ -204,8 +204,8 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 	@param			track
 					A reference to the AVCompositionTrack to be removed.
 	@discussion
-		If you retain a reference to the removed track, note that its @"composition" key will have the value nil.
-		Its other keys can still be accessed, however, for arbitrary use.
+		If you retain a reference to the removed track, note that its @"composition" key will have the value nil, and
+		the values of its other properties are undefined.
 */
 - (void)removeTrack:(AVCompositionTrack *)track;
 

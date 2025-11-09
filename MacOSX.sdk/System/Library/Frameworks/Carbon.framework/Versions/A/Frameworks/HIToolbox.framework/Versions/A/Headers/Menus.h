@@ -3,8 +3,6 @@
  
      Contains:   Menu Manager Interfaces.
  
-     Version:    HIToolbox-626.1~1
- 
      Copyright:  © 1985-2008 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
@@ -22,10 +20,6 @@
 
 #ifndef __APPEARANCE__
 #include <HIToolbox/Appearance.h>
-#endif
-
-#ifndef __PROCESSES__
-#include <HIServices/Processes.h>
 #endif
 
 #ifndef __CARBONEVENTSCORE__

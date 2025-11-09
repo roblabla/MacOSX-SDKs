@@ -34,35 +34,36 @@
 #include <sys/proc.h>
 #include <sys/param.h>
 
-#define DEFAULT_JETSAM_PRIORITY -100
+#define JETSAM_PRIORITY_REVISION                  2
 
-enum {
-	kMemorystatusFlagsFrontmost =         (1 << 0),
-	kMemorystatusFlagsKilled =            (1 << 1),
-	kMemorystatusFlagsKilledHiwat =       (1 << 2),
- 	kMemorystatusFlagsFrozen     =        (1 << 3),
- 	kMemorystatusFlagsKilledVnodes =      (1 << 4),
- 	kMemorystatusFlagsKilledSwap =        (1 << 5),
-  	kMemorystatusFlagsThawed =            (1 << 6),
-  	kMemorystatusFlagsKilledVM =          (1 << 7),
-	kMemorystatusFlagsSuspForDiagnosis =  (1 << 8),
-	kMemorystatusFlagsActive =            (1 << 9),
-	kMemorystatusFlagsSupportsIdleExit =  (1 << 10),
-	kMemorystatusFlagsDirty =             (1 << 11)
-};
+#define JETSAM_PRIORITY_IDLE                      0
+#define JETSAM_PRIORITY_IDLE_DEFERRED             1
+#define JETSAM_PRIORITY_BACKGROUND_OPPORTUNISTIC  2
+#define JETSAM_PRIORITY_BACKGROUND                3
+#define JETSAM_PRIORITY_MAIL                      4
+#define JETSAM_PRIORITY_PHONE                     5
+#define JETSAM_PRIORITY_UI_SUPPORT                8
+#define JETSAM_PRIORITY_FOREGROUND_SUPPORT        9
+#define JETSAM_PRIORITY_FOREGROUND               10
+#define JETSAM_PRIORITY_AUDIO_AND_ACCESSORY      12
+#define JETSAM_PRIORITY_CONDUCTOR                13
+#define JETSAM_PRIORITY_HOME                     16
+#define JETSAM_PRIORITY_EXECUTIVE                17
+#define JETSAM_PRIORITY_IMPORTANT                18
+#define JETSAM_PRIORITY_CRITICAL                 19
 
-#if TARGET_OS_EMBEDDED || CONFIG_EMBEDDED
+#define JETSAM_PRIORITY_MAX                      21
 
-/*
- * Define Memory Status event subclass.
- * Subclass of KEV_SYSTEM_CLASS
- */
+/* TODO - tune. This should probably be lower priority */
+#define JETSAM_PRIORITY_DEFAULT                  18
+#define JETSAM_PRIORITY_TELEPHONY                19
 
-/*!
-	@defined KEV_MEMORYSTATUS_SUBCLASS
-	@discussion The kernel event subclass for memory status events.
-*/
-#define KEV_MEMORYSTATUS_SUBCLASS        3
+/* Compatibility */
+#define DEFAULT_JETSAM_PRIORITY                  18
+
+#define DEFERRED_IDLE_EXIT_TIME_SECS             10
+
+#define KEV_MEMORYSTATUS_SUBCLASS                 3
 
 enum {
 	kMemorystatusLevelNote = 1,
@@ -81,17 +82,11 @@ enum {
 
 typedef struct memorystatus_priority_entry {
 	pid_t pid;
-	uint32_t flags;
-	int32_t hiwat_pages;
 	int32_t priority;
-	int32_t reserved;
-	int32_t reserved2;
+	uint64_t user_data;
+	int32_t limit;
+	uint32_t state;
 } memorystatus_priority_entry_t;
-
-/*
-** how many processes to snapshot
-*/
-#define kMaxSnapshotEntries 128 
 
 typedef struct memorystatus_kernel_stats {
 	uint32_t free_pages;
@@ -100,6 +95,13 @@ typedef struct memorystatus_kernel_stats {
 	uint32_t throttled_pages;
 	uint32_t purgeable_pages;
 	uint32_t wired_pages;
+	uint32_t speculative_pages;
+	uint32_t filebacked_pages;
+	uint32_t anonymous_pages;
+	uint32_t compressor_pages;
+	uint64_t compressions;
+	uint64_t decompressions;
+	uint64_t total_uncompressed_pages_in_compressor;
 } memorystatus_kernel_stats_t;
 
 /*
@@ -108,12 +110,16 @@ typedef struct memorystatus_kernel_stats {
 */
 
 typedef struct jetsam_snapshot_entry {
-	pid_t pid;
-	char name[MAXCOMLEN+1];
-	int32_t priority;
+	pid_t    pid;
+	char     name[MAXCOMLEN+1];
+	int32_t  priority;
 	uint32_t pages;
-	uint32_t flags;
-	uint8_t uuid[16];
+	uint32_t max_pages;
+	uint32_t state;
+	uint32_t killed;
+	uint64_t user_data;
+	uint8_t  uuid[16];
+	uint32_t fds;
 } memorystatus_jetsam_snapshot_entry_t;
 
 typedef struct jetsam_snapshot {
@@ -121,17 +127,8 @@ typedef struct jetsam_snapshot {
 	uint64_t notification_time;
 	memorystatus_kernel_stats_t stats;
 	size_t entry_count;
-	memorystatus_jetsam_snapshot_entry_t entries[1];
+	memorystatus_jetsam_snapshot_entry_t entries[];
 } memorystatus_jetsam_snapshot_t;
-
-typedef memorystatus_priority_entry_t 		jetsam_priority_entry_t;
-typedef memorystatus_jetsam_snapshot_t 		jetsam_snapshot_t;
-typedef memorystatus_jetsam_snapshot_entry_t 	jetsam_snapshot_entry_t;
-
-#define kMemoryStatusLevelNote 		kMemorystatusLevelNote
-#define kMemoryStatusSnapshotNote	kMemorystatusSnapshotNote
-#define kMemoryStatusFreezeNote		kMemorystatusFreezeNote
-#define kMemoryStatusPressureNote	kMemorystatusPressureNote
 
 typedef struct memorystatus_freeze_entry {
  	int32_t pid;
@@ -139,7 +136,51 @@ typedef struct memorystatus_freeze_entry {
  	uint32_t pages;
 } memorystatus_freeze_entry_t;
 
-#endif /* TARGET_OS_EMBEDDED */
+/* TODO - deprecate; see <rdar://problem/12969599> */
+#define kMaxSnapshotEntries 192
+
+/* State */
+#define kMemorystatusSuspended        0x01
+#define kMemorystatusFrozen           0x02
+#define kMemorystatusWasThawed        0x04
+#define kMemorystatusTracked          0x08
+#define kMemorystatusSupportsIdleExit 0x10
+#define kMemorystatusDirty            0x20
+
+/* Cause */
+enum {
+	kMemorystatusKilled = 1,
+	kMemorystatusKilledHiwat,
+ 	kMemorystatusKilledVnodes,
+  	kMemorystatusKilledVMPageShortage,
+  	kMemorystatusKilledVMThrashing,
+  	kMemorystatusKilledPerProcessLimit,
+	kMemorystatusKilledDiagnostic,
+	kMemorystatusKilledIdleExit
+};
+
+/* Temporary, to prevent the need for a linked submission of ReportCrash */
+/* Remove when <rdar://problem/13210532> has been integrated */
+enum {
+	kMemorystatusKilledVM = kMemorystatusKilledVMPageShortage
+};
+
+/* Memorystatus control */
+#define MEMORYSTATUS_BUFFERSIZE_MAX 65536
+
+
+/* Commands */
+#define MEMORYSTATUS_CMD_GET_PRIORITY_LIST            1
+#define MEMORYSTATUS_CMD_SET_PRIORITY_PROPERTIES      2
+#define MEMORYSTATUS_CMD_GET_JETSAM_SNAPSHOT          3
+#define MEMORYSTATUS_CMD_GET_PRESSURE_STATUS          4
+#define MEMORYSTATUS_CMD_SET_JETSAM_HIGH_WATER_MARK   5 /* TODO: deprecate */
+
+
+typedef struct memorystatus_priority_properties {
+	int32_t  priority;
+	uint64_t user_data;
+} memorystatus_priority_properties_t;
 
 
 #endif /* SYS_MEMORYSTATUS_H */

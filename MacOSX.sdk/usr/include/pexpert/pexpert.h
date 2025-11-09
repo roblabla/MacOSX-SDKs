@@ -30,8 +30,6 @@
 
 #include <sys/cdefs.h>
 
-#include <IOKit/IOInterrupts.h>
-#include <kern/kern_types.h>
 
 __BEGIN_DECLS
 #include <mach/boolean.h>
@@ -42,8 +40,6 @@ __BEGIN_DECLS
 
 typedef void *cpu_id_t;
 
-#if defined(__arm__)
-#endif
 
 void PE_enter_debugger(
 	const char *cause);
@@ -52,20 +48,6 @@ void PE_init_platform(
 	boolean_t vm_initialized, 
 	void *args);
 
-#if defined(__arm__)
-uint32_t PE_get_security_epoch(
-	void);
-uint32_t PE_i_can_has_debugger(
-	uint32_t *);
-
-/*
- * If invoked with NULL first argument, return the max buffer size that can
- * be saved in the second argument
- */
-void PE_save_buffer_to_vram(
-	unsigned char *,
-	unsigned int *);
-#endif
 
 void PE_init_kprintf(
 	boolean_t vm_initialized);
@@ -127,9 +109,6 @@ void PE_register_timebase_callback(timebase_callback_func callback);
 
 void PE_call_timebase_callback(void);
 
-void PE_install_interrupt_handler(
-	void *nub, int source,
-        void *target, IOInterruptHandler handler, void *refCon);
 
 #ifndef _FN_KPRINTF
 #define	_FN_KPRINTF
@@ -294,11 +273,6 @@ extern void pe_init_debug(void);
 
 extern boolean_t PE_imgsrc_mount_supported(void);
 
-#if defined(__arm__)
-typedef void (*perfmon_interrupt_handler_func)(cpu_id_t source);
-extern kern_return_t PE_cpu_perfmon_interrupt_install_handler(perfmon_interrupt_handler_func handler);
-extern void PE_cpu_perfmon_interrupt_enable(cpu_id_t target, boolean_t enable);
-#endif
 
 
 __END_DECLS

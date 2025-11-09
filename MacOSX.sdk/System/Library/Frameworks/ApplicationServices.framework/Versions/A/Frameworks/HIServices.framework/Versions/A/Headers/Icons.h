@@ -3,9 +3,7 @@
  
      Contains:   Icon Utilities and Icon Services Interfaces.
  
-     Version:    HIServices-417~96
- 
-     Copyright:  © 1990-2008 by Apple Computer, Inc. All rights reserved
+     Copyright:  © 1990-2012 by Apple Computer, Inc. All rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

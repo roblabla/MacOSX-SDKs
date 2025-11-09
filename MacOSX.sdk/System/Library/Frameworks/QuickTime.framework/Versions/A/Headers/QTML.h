@@ -3,7 +3,7 @@
  
      Contains:   QuickTime Cross-platform specific interfaces
  
-     Version:    QuickTime 7.7.1
+     Version:    QuickTime 7.7.3
  
      Copyright:  © 1997-2012 by Apple Inc., all rights reserved.
  
@@ -13,6 +13,14 @@
                      http://developer.apple.com/bugreporter/
  
 */
+
+/*
+  QuickTime has been deprecated in 10.9.
+
+  AVFoundation and AVKit are the frameworks recommended for all new development 
+  involving time-based audiovisual media on OS X.
+*/
+
 #ifndef __QTML__
 #define __QTML__
 
@@ -40,16 +48,16 @@ extern "C" {
 #if !__LP64__
 
 /*
- *  QTMLYieldCPU()
+ *  QTMLYieldCPU()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 3.0 and later
  *    Non-Carbon CFM:   not available
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern void 
-QTMLYieldCPU(void)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+QTMLYieldCPU(void)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /* QTMLYieldCPUTime flags*/
@@ -58,18 +66,18 @@ enum {
 };
 
 /*
- *  QTMLYieldCPUTime()
+ *  QTMLYieldCPUTime()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 3.0 and later
  *    Non-Carbon CFM:   not available
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern void 
 QTMLYieldCPUTime(
   long            milliSeconds,
-  unsigned long   flags)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned long   flags)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 typedef struct OpaqueQTMLMutex*         QTMLMutex;
@@ -86,24 +94,24 @@ enum {
 };
 
 /*
- *  InitializeQTML()
+ *  InitializeQTML()   *** DEPRECATED ***
  *  
  *  Availability:
  *    Mac OS X:         not available
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 
 
 /*
- *  TerminateQTML()
+ *  TerminateQTML()   *** DEPRECATED ***
  *  
  *  Availability:
  *    Mac OS X:         not available
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 
 
@@ -116,192 +124,192 @@ enum {
 
 #define kQTMLIsDoubleBuffered "UsesDoubleBuffer"
 /*
- *  CreatePortAssociation()
+ *  CreatePortAssociation()   *** DEPRECATED ***
  *  
  *  Availability:
  *    Mac OS X:         not available
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 
 
 /*
- *  DestroyPortAssociation()
+ *  DestroyPortAssociation()   *** DEPRECATED ***
  *  
  *  Availability:
  *    Mac OS X:         not available
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 
 
 
 /*
- *  QTMLGrabMutex()
+ *  QTMLGrabMutex()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 3.0 and later
  *    Non-Carbon CFM:   not available
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern void 
-QTMLGrabMutex(QTMLMutex mu)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+QTMLGrabMutex(QTMLMutex mu)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTMLTryGrabMutex()
+ *  QTMLTryGrabMutex()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 4.1 and later
  *    Non-Carbon CFM:   not available
- *    Windows:          in qtmlClient.lib 4.1 and later
+ *    Windows:          in QTMLClient.lib 4.1 and later
  */
 extern Boolean 
-QTMLTryGrabMutex(QTMLMutex mu)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+QTMLTryGrabMutex(QTMLMutex mu)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTMLReturnMutex()
+ *  QTMLReturnMutex()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 3.0 and later
  *    Non-Carbon CFM:   not available
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern void 
-QTMLReturnMutex(QTMLMutex mu)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+QTMLReturnMutex(QTMLMutex mu)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTMLCreateMutex()
+ *  QTMLCreateMutex()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 3.0 and later
  *    Non-Carbon CFM:   not available
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern QTMLMutex 
-QTMLCreateMutex(void)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+QTMLCreateMutex(void)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTMLDestroyMutex()
+ *  QTMLDestroyMutex()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 3.0 and later
  *    Non-Carbon CFM:   not available
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern void 
-QTMLDestroyMutex(QTMLMutex mu)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+QTMLDestroyMutex(QTMLMutex mu)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 
 /*
- *  QTMLCreateSyncVar()
+ *  QTMLCreateSyncVar()   *** DEPRECATED ***
  *  
  *  Availability:
  *    Mac OS X:         not available
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 
 
 /*
- *  QTMLDestroySyncVar()
+ *  QTMLDestroySyncVar()   *** DEPRECATED ***
  *  
  *  Availability:
  *    Mac OS X:         not available
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 
 
 /*
- *  QTMLTestAndSetSyncVar()
+ *  QTMLTestAndSetSyncVar()   *** DEPRECATED ***
  *  
  *  Availability:
  *    Mac OS X:         not available
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 
 
 /*
- *  QTMLWaitAndSetSyncVar()
+ *  QTMLWaitAndSetSyncVar()   *** DEPRECATED ***
  *  
  *  Availability:
  *    Mac OS X:         not available
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 
 
 /*
- *  QTMLResetSyncVar()
+ *  QTMLResetSyncVar()   *** DEPRECATED ***
  *  
  *  Availability:
  *    Mac OS X:         not available
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
- *    Windows:          in qtmlClient.lib 3.0 and later
- */
-
-
-
-/*
- *  InitializeQHdr()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- *    Windows:          in qtmlClient.lib 3.0 and later
- */
-
-
-/*
- *  TerminateQHdr()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 
 
 
 /*
- *  QTMLAcquireWindowList()
+ *  InitializeQHdr()   *** DEPRECATED ***
  *  
  *  Availability:
  *    Mac OS X:         not available
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 
 
 /*
- *  QTMLReleaseWindowList()
+ *  TerminateQHdr()   *** DEPRECATED ***
  *  
  *  Availability:
  *    Mac OS X:         not available
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
+ */
+
+
+
+/*
+ *  QTMLAcquireWindowList()   *** DEPRECATED ***
+ *  
+ *  Availability:
+ *    Mac OS X:         not available
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ *    Windows:          in QTMLClient.lib 3.0 and later
+ */
+
+
+/*
+ *  QTMLReleaseWindowList()   *** DEPRECATED ***
+ *  
+ *  Availability:
+ *    Mac OS X:         not available
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 
 
@@ -311,71 +319,71 @@ QTMLDestroyMutex(QTMLMutex mu)                                AVAILABLE_MAC_OS_X
 */
 
 /*
- *  QTMLRegisterInterruptSafeThread()
+ *  QTMLRegisterInterruptSafeThread()   *** DEPRECATED ***
  *  
  *  Availability:
  *    Mac OS X:         not available
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 
 
 /*
- *  QTMLUnregisterInterruptSafeThread()
+ *  QTMLUnregisterInterruptSafeThread()   *** DEPRECATED ***
  *  
  *  Availability:
  *    Mac OS X:         not available
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 
 
 
 /*
- *  NativeEventToMacEvent()
+ *  NativeEventToMacEvent()   *** DEPRECATED ***
  *  
  *  Availability:
  *    Mac OS X:         not available
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 
 
 #if TARGET_OS_WIN32
 /*
- *  WinEventToMacEvent()
+ *  WinEventToMacEvent()   *** DEPRECATED ***
  *  
  *  Availability:
  *    Mac OS X:         not available
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 
 
 #define WinEventToMacEvent  NativeEventToMacEvent
 /*
- *  IsTaskBarVisible()
+ *  IsTaskBarVisible()   *** DEPRECATED ***
  *  
  *  Availability:
  *    Mac OS X:         not available
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 
 
 /*
- *  ShowHideTaskBar()
+ *  ShowHideTaskBar()   *** DEPRECATED ***
  *  
  *  Availability:
  *    Mac OS X:         not available
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 
 
@@ -385,83 +393,83 @@ enum {
 };
 
 /*
- *  QTGetDDObject()
+ *  QTGetDDObject()   *** DEPRECATED ***
  *  
  *  Availability:
  *    Mac OS X:         not available
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 
 
 /*
- *  QTSetDDObject()
+ *  QTSetDDObject()   *** DEPRECATED ***
  *  
  *  Availability:
  *    Mac OS X:         not available
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 
 
 /*
- *  QTSetDDPrimarySurface()
+ *  QTSetDDPrimarySurface()   *** DEPRECATED ***
  *  
  *  Availability:
  *    Mac OS X:         not available
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
- *    Windows:          in qtmlClient.lib 3.0 and later
- */
-
-
-
-/*
- *  QTMLGetVolumeRootPath()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 
 
 
 /*
- *  QTMLSetWindowWndProc()
+ *  QTMLGetVolumeRootPath()   *** DEPRECATED ***
  *  
  *  Availability:
  *    Mac OS X:         not available
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
+ */
+
+
+
+/*
+ *  QTMLSetWindowWndProc()   *** DEPRECATED ***
+ *  
+ *  Availability:
+ *    Mac OS X:         not available
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 
 
 /*
- *  QTMLGetWindowWndProc()
+ *  QTMLGetWindowWndProc()   *** DEPRECATED ***
  *  
  *  Availability:
  *    Mac OS X:         not available
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 
 
 #endif  /* TARGET_OS_WIN32 */
 
 /*
- *  QTMLGetCanonicalPathName()
+ *  QTMLGetCanonicalPathName()   *** DEPRECATED ***
  *  
  *  Availability:
  *    Mac OS X:         not available
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 
 
@@ -475,13 +483,13 @@ enum {
 };
 
 /*
- *  FSSpecToNativePathName()
+ *  FSSpecToNativePathName()   *** DEPRECATED ***
  *  
  *  Availability:
  *    Mac OS X:         not available
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 
 
@@ -490,24 +498,24 @@ enum {
 };
 
 /*
- *  NativePathNameToFSSpec()
+ *  NativePathNameToFSSpec()   *** DEPRECATED ***
  *  
  *  Availability:
  *    Mac OS X:         not available
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 
 
 /*
- *  QTGetAliasInfo()
+ *  QTGetAliasInfo()   *** DEPRECATED ***
  *  
  *  Availability:
  *    Mac OS X:         not available
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
- *    Windows:          in qtmlClient.lib 5.0 and later
+ *    Windows:          in QTMLClient.lib 5.0 and later
  */
 
 

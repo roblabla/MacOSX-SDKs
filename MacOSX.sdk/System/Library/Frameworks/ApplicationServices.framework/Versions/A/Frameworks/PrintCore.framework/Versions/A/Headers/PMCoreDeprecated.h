@@ -330,8 +330,9 @@ PMPaperGetName(
  *      If this function is successful then noErr will be returned and
  *      *'paperInfoList' will be set to a newly created CFArray. Each
  *      element in the array will be a CFDictionary describing the
- *      menu item that needs to be added for the paper size menu. If this
- *      function fails then a non-zero error code will be returned and
+ *      menu item that needs to be added for the paper size menu. 
+ *		Keys for the dictionary are in PMCorePriv.h 
+ *		If this function fails then a non-zero error code will be returned and
  *      *'paperInfoList' will be set to NULL.
  *
  */

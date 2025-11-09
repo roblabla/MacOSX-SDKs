@@ -18,7 +18,7 @@
 
 #include <CoreVideo/CVImageBuffer.h>
 #include <OpenGL/OpenGL.h>
-#include <OpenGL/gl.h>
+#include <OpenGL/gltypes.h>
 
 
 #if defined(__cplusplus)

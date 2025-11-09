@@ -40,11 +40,10 @@ IMSERVICEPLUGIN_EXTERN NSString * const IMAccountSettingUsesSSL;        // NSNum
 //    -[id<IMServicePlugInGroupListSupport> updateSessionProperties:]
 //    -[IMServiceApplication sessionPropertiesChanged:]
 
-enum {
+typedef NS_ENUM(NSInteger, IMSessionAvailability) {
     IMSessionAvailabilityAway,
     IMSessionAvailabilityAvailable
 };
-typedef NSInteger IMSessionAvailability;
 
 IMSERVICEPLUGIN_EXTERN NSString * const IMSessionPropertyAvailability;      // NSNumber of IMSessionAvailabilityStatus
 IMSERVICEPLUGIN_EXTERN NSString * const IMSessionPropertyStatusMessage;     // NSString  - Current status message as plaintext NSString
@@ -55,14 +54,13 @@ IMSERVICEPLUGIN_EXTERN NSString * const IMSessionPropertyIsInvisible;       // N
 #pragma mark -
 #pragma mark Group List Types
 
-enum {
+typedef NS_ENUM(NSUInteger, IMGroupListPermissions) {
     IMGroupListCanReorderGroup   = (1 << 0),
     IMGroupListCanRenameGroup    = (1 << 1),
     IMGroupListCanAddNewMembers  = (1 << 2),
     IMGroupListCanRemoveMembers  = (1 << 3),
     IMGroupListCanReorderMembers = (1 << 4)
 };
-typedef NSUInteger IMGroupListPermissions;
 
 /* Use IMGroupListDefaultGroup for IMGroupListNameKey for ungrouped handles */
 IMSERVICEPLUGIN_EXTERN NSString * const IMGroupListDefaultGroup;
@@ -78,21 +76,18 @@ IMSERVICEPLUGIN_EXTERN NSString * const IMGroupListHandlesKey;              // N
 //  Used by:
 //    -[IMServiceApplication handle:propertiesChanged:]
 
-enum {
+typedef NS_ENUM(NSInteger, IMHandleAvailability) {
     IMHandleAvailabilityUnknown   = -2,
     IMHandleAvailabilityOffline   = -1,
     IMHandleAvailabilityAway      =  0,
     IMHandleAvailabilityAvailable =  1
 };
-typedef NSInteger IMHandleAvailability;
 
-
-enum {
+typedef NS_ENUM(NSInteger, IMHandleAuthorizationStatus) {
     IMHandleAuthorizationStatusAccepted = 0,  // An outgoing authorization request was accepted.  You are now able to see the handle's online status
     IMHandleAuthorizationStatusPending  = 1,  // An outgoing authorization request has been sent to the handle.  "Waiting for authorization"
     IMHandleAuthorizationStatusDeclined = 2   // An outgoing authorization request was declined.                 "Not Authorized"
 };
-typedef NSInteger IMHandleAuthorizationStatus;
 
 
 IMSERVICEPLUGIN_EXTERN NSString * const IMHandlePropertyAvailability;          // NSNumber of IMHandleAvailability

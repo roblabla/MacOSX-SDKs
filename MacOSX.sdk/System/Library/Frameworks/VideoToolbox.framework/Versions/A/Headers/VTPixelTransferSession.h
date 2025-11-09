@@ -3,7 +3,7 @@
 	
 	Framework:  VideoToolbox
  
-    Copyright 2006-2012 Apple Inc. All rights reserved.
+    Copyright 2006-2013 Apple Inc. All rights reserved.
   
 	Video Toolbox client API for transferring images between CVPixelBuffers.
 */
@@ -12,6 +12,7 @@
 #define VTPIXELTRANSFERSESSION_H
 
 #include <CoreMedia/CMBase.h>
+#include <VideoToolbox/VTBase.h>
 
 #include <CoreFoundation/CoreFoundation.h>
 #include <CoreVideo/CoreVideo.h>
@@ -56,7 +57,7 @@ typedef struct OpaqueVTPixelTransferSession*  VTPixelTransferSessionRef;
 VT_EXPORT OSStatus 
 VTPixelTransferSessionCreate(
   CFAllocatorRef                              allocator,                                /* can be NULL */
-  VTPixelTransferSessionRef *                 pixelTransferSessionOut) AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
+  VTPixelTransferSessionRef *                 pixelTransferSessionOut) VT_AVAILABLE_STARTING(10_8);
 
 /*!
 	@function	VTPixelTransferSessionInvalidate
@@ -69,14 +70,14 @@ VTPixelTransferSessionCreate(
     	Calling VTPixelTransferSessionInvalidate ensures a deterministic, orderly teardown.
 */
 VT_EXPORT void 
-VTPixelTransferSessionInvalidate( VTPixelTransferSessionRef session ) AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
+VTPixelTransferSessionInvalidate( VTPixelTransferSessionRef session ) VT_AVAILABLE_STARTING(10_8);
 
 /*!
 	@function VTPixelTransferSessionGetTypeID
 	@abstract Returns the CFTypeID for pixel transfer sessions.  
 */
 VT_EXPORT CFTypeID 
-VTPixelTransferSessionGetTypeID(void) AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
+VTPixelTransferSessionGetTypeID(void) VT_AVAILABLE_STARTING(10_8);
 
 /*!
 	@function	VTPixelTransferSessionTransferImage
@@ -101,7 +102,7 @@ VT_EXPORT OSStatus
 VTPixelTransferSessionTransferImage(
   VTPixelTransferSessionRef       session,
   CVPixelBufferRef                sourceBuffer,
-  CVPixelBufferRef                destinationBuffer) AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
+  CVPixelBufferRef                destinationBuffer) VT_AVAILABLE_STARTING(10_8);
 
 // See VTSession.h for property access APIs on VTPixelTransferSessions.
 // See VTPixelTransferProperties.h for standard property keys and values for pixel transfer sessions.

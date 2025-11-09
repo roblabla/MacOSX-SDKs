@@ -267,7 +267,9 @@ enum {
    * only receiving directory level notifications.  Use this flag with
    * care as it will generate significantly more events than without it.
    */
-  kFSEventStreamCreateFlagFileEvents = 0x00000010
+  kFSEventStreamCreateFlagFileEvents = 0x00000010,
+
+  kFSEventStreamCreateFlagMarkSelf = 0x00000020 
 };
 
 
@@ -396,7 +398,10 @@ enum {
   kFSEventStreamEventFlagItemXattrMod = 0x00008000,
   kFSEventStreamEventFlagItemIsFile = 0x00010000,
   kFSEventStreamEventFlagItemIsDir = 0x00020000,
-  kFSEventStreamEventFlagItemIsSymlink = 0x00040000
+  kFSEventStreamEventFlagItemIsSymlink = 0x00040000,
+
+  kFSEventStreamEventFlagOwnEvent = 0x00080000
+
 };
 
 
@@ -1240,6 +1245,25 @@ FSEventStreamShow(ConstFSEventStreamRef streamRef)            __OSX_AVAILABLE_ST
 extern CFStringRef 
 FSEventStreamCopyDescription(ConstFSEventStreamRef streamRef) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
+
+/*
+ * FSEventStreamSetExclusionPaths()
+ *
+ * Discussion: 
+ *    Sets directories to be filtered from the EventStream.
+ *    A maximum of 8 directories maybe specified.
+ *
+ * Result:
+ *    True if it succeeds, otherwise False if it fails.
+ *     
+ * Availability:
+ *    Mac OS X:         in version 10.9 and later in CoreServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+
+extern Boolean 
+FSEventStreamSetExclusionPaths(FSEventStreamRef streamRef, CFArrayRef pathsToExclude) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
 
 
 #if PRAGMA_ENUM_ALWAYSINT

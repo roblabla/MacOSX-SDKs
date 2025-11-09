@@ -3,7 +3,7 @@
  
      Contains:   QuickTime Interfaces.
  
-     Version:    QuickTime 7.7.1
+     Version:    QuickTime 7.7.3
  
      Copyright:  © 1990-2012 by Apple Inc., all rights reserved
  
@@ -11,8 +11,15 @@
                  the World Wide Web:
  
                      http://developer.apple.com/bugreporter/
- 
 */
+
+/*
+  QuickTime has been deprecated in 10.9.
+
+  AVFoundation and AVKit are the frameworks recommended for all new development 
+  involving time-based audiovisual media on OS X.
+*/
+
 #ifndef __QUICKTIMESTREAMING__
 #define __QUICKTIMESTREAMING__
 
@@ -486,39 +493,39 @@ typedef struct QTSExportParams          QTSExportParams;
 -----------------------------------------*/
 /* all "apps" must call this */
 /*
- *  InitializeQTS()
+ *  InitializeQTS()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
  */
 extern OSErr 
-InitializeQTS(void)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+InitializeQTS(void)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  TerminateQTS()
+ *  TerminateQTS()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
  */
 extern OSErr 
-TerminateQTS(void)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+TerminateQTS(void)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*-----------------------------------------
     Presentation Functions
 -----------------------------------------*/
 /*
- *  QTSNewPresentation()
+ *  QTSNewPresentation()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -526,14 +533,14 @@ TerminateQTS(void)                                            AVAILABLE_MAC_OS_X
 extern OSErr 
 QTSNewPresentation(
   const QTSNewPresentationParams *  inParams,
-  QTSPresentation *                 outPresentation)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTSPresentation *                 outPresentation)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSNewPresentationFromData()
+ *  QTSNewPresentationFromData()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QTStreamLib 5.0 and later
  *    Windows:          in QTSClient.lib 5.0 and later
@@ -544,14 +551,14 @@ QTSNewPresentationFromData(
   const void *           inData,
   const SInt64 *         inDataLength,
   const QTSPresParams *  inPresParams,
-  QTSPresentation *      outPresentation)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTSPresentation *      outPresentation)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSNewPresentationFromFile()
+ *  QTSNewPresentationFromFile()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QTStreamLib 5.0 and later
  *    Windows:          in QTSClient.lib 5.0 and later
@@ -560,14 +567,14 @@ extern OSErr
 QTSNewPresentationFromFile(
   const FSSpec *         inFileSpec,
   const QTSPresParams *  inPresParams,
-  QTSPresentation *      outPresentation)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTSPresentation *      outPresentation)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSNewPresentationFromDataRef()
+ *  QTSNewPresentationFromDataRef()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QTStreamLib 5.0 and later
  *    Windows:          in QTSClient.lib 5.0 and later
@@ -577,14 +584,14 @@ QTSNewPresentationFromDataRef(
   Handle                 inDataRef,
   OSType                 inDataRefType,
   const QTSPresParams *  inPresParams,
-  QTSPresentation *      outPresentation)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTSPresentation *      outPresentation)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSDisposePresentation()
+ *  QTSDisposePresentation()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -592,14 +599,14 @@ QTSNewPresentationFromDataRef(
 extern OSErr 
 QTSDisposePresentation(
   QTSPresentation   inPresentation,
-  SInt32            inFlags)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32            inFlags)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresExport()
+ *  QTSPresExport()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QTStreamLib 5.0 and later
  *    Windows:          in QTSClient.lib 5.0 and later
@@ -608,14 +615,14 @@ extern OSErr
 QTSPresExport(
   QTSPresentation    inPresentation,
   QTSStream          inStream,
-  QTSExportParams *  inExportParams)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTSExportParams *  inExportParams)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresIdle()
+ *  QTSPresIdle()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -623,14 +630,14 @@ QTSPresExport(
 extern void 
 QTSPresIdle(
   QTSPresentation      inPresentation,
-  QTSPresIdleParams *  ioParams)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTSPresIdleParams *  ioParams)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresInvalidateRegion()
+ *  QTSPresInvalidateRegion()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -638,17 +645,17 @@ QTSPresIdle(
 extern OSErr 
 QTSPresInvalidateRegion(
   QTSPresentation   inPresentation,
-  RgnHandle         inRegion)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  RgnHandle         inRegion)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*-----------------------------------------
     Presentation Configuration
 -----------------------------------------*/
 /*
- *  QTSPresSetFlags()
+ *  QTSPresSetFlags()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -657,14 +664,14 @@ extern OSErr
 QTSPresSetFlags(
   QTSPresentation   inPresentation,
   SInt32            inFlags,
-  SInt32            inFlagsMask)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32            inFlagsMask)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresGetFlags()
+ *  QTSPresGetFlags()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -672,14 +679,14 @@ QTSPresSetFlags(
 extern OSErr 
 QTSPresGetFlags(
   QTSPresentation   inPresentation,
-  SInt32 *          outFlags)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32 *          outFlags)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresGetTimeBase()
+ *  QTSPresGetTimeBase()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -687,14 +694,14 @@ QTSPresGetFlags(
 extern OSErr 
 QTSPresGetTimeBase(
   QTSPresentation   inPresentation,
-  TimeBase *        outTimeBase)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TimeBase *        outTimeBase)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresGetTimeScale()
+ *  QTSPresGetTimeScale()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -702,14 +709,14 @@ QTSPresGetTimeBase(
 extern OSErr 
 QTSPresGetTimeScale(
   QTSPresentation   inPresentation,
-  TimeScale *       outTimeScale)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TimeScale *       outTimeScale)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresSetInfo()
+ *  QTSPresSetInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -719,14 +726,14 @@ QTSPresSetInfo(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
   OSType            inSelector,
-  void *            ioParam)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *            ioParam)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresGetInfo()
+ *  QTSPresGetInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -736,14 +743,14 @@ QTSPresGetInfo(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
   OSType            inSelector,
-  void *            ioParam)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *            ioParam)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresHasCharacteristic()
+ *  QTSPresHasCharacteristic()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -753,14 +760,14 @@ QTSPresHasCharacteristic(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
   OSType            inCharacteristic,
-  Boolean *         outHasIt)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *         outHasIt)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresSetNotificationProc()
+ *  QTSPresSetNotificationProc()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -769,14 +776,14 @@ extern OSErr
 QTSPresSetNotificationProc(
   QTSPresentation      inPresentation,
   QTSNotificationUPP   inNotificationProc,
-  void *               inRefCon)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *               inRefCon)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresGetNotificationProc()
+ *  QTSPresGetNotificationProc()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -785,17 +792,17 @@ extern OSErr
 QTSPresGetNotificationProc(
   QTSPresentation       inPresentation,
   QTSNotificationUPP *  outNotificationProc,
-  void **               outRefCon)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void **               outRefCon)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*-----------------------------------------
     Presentation Control
 -----------------------------------------*/
 /*
- *  QTSPresPreview()
+ *  QTSPresPreview()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QTStreamLib 5.0 and later
  */
@@ -805,14 +812,14 @@ QTSPresPreview(
   QTSStream            inStream,
   const TimeValue64 *  inTimeValue,
   Fixed                inRate,
-  SInt32               inFlags)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32               inFlags)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresPreroll()
+ *  QTSPresPreroll()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -823,14 +830,14 @@ QTSPresPreroll(
   QTSStream         inStream,
   UInt32            inTimeValue,
   Fixed             inRate,
-  SInt32            inFlags)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32            inFlags)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresPreroll64()
+ *  QTSPresPreroll64()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.1 and later
  *    Windows:          in QTSClient.lib 4.1 and later
@@ -841,14 +848,14 @@ QTSPresPreroll64(
   QTSStream            inStream,
   const TimeValue64 *  inPrerollTime,
   Fixed                inRate,
-  SInt32               inFlags)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32               inFlags)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresStart()
+ *  QTSPresStart()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -857,14 +864,14 @@ extern OSErr
 QTSPresStart(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
-  SInt32            inFlags)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32            inFlags)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresSkipTo()
+ *  QTSPresSkipTo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -872,14 +879,14 @@ QTSPresStart(
 extern OSErr 
 QTSPresSkipTo(
   QTSPresentation   inPresentation,
-  UInt32            inTimeValue)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32            inTimeValue)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresSkipTo64()
+ *  QTSPresSkipTo64()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.1 and later
  *    Windows:          in QTSClient.lib 4.1 and later
@@ -887,14 +894,14 @@ QTSPresSkipTo(
 extern OSErr 
 QTSPresSkipTo64(
   QTSPresentation      inPresentation,
-  const TimeValue64 *  inTimeValue)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const TimeValue64 *  inTimeValue)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresStop()
+ *  QTSPresStop()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -903,7 +910,7 @@ extern OSErr
 QTSPresStop(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
-  SInt32            inFlags)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32            inFlags)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*============================================================================
@@ -913,10 +920,10 @@ QTSPresStop(
     Stream Functions
 -----------------------------------------*/
 /*
- *  QTSPresNewStream()
+ *  QTSPresNewStream()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -928,14 +935,14 @@ QTSPresNewStream(
   const void *      inData,
   UInt32            inDataLength,
   SInt32            inFlags,
-  QTSStream *       outStream)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTSStream *       outStream)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSDisposeStream()
+ *  QTSDisposeStream()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -943,27 +950,27 @@ QTSPresNewStream(
 extern OSErr 
 QTSDisposeStream(
   QTSStream   inStream,
-  SInt32      inFlags)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32      inFlags)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresGetNumStreams()
+ *  QTSPresGetNumStreams()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
  */
 extern UInt32 
-QTSPresGetNumStreams(QTSPresentation inPresentation)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+QTSPresGetNumStreams(QTSPresentation inPresentation)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresGetIndStream()
+ *  QTSPresGetIndStream()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -971,27 +978,27 @@ QTSPresGetNumStreams(QTSPresentation inPresentation)          AVAILABLE_MAC_OS_X
 extern QTSStream 
 QTSPresGetIndStream(
   QTSPresentation   inPresentation,
-  UInt32            inIndex)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32            inIndex)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSGetStreamPresentation()
+ *  QTSGetStreamPresentation()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
  */
 extern QTSPresentation 
-QTSGetStreamPresentation(QTSStream inStream)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+QTSGetStreamPresentation(QTSStream inStream)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresSetPreferredRate()
+ *  QTSPresSetPreferredRate()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1000,14 +1007,14 @@ extern OSErr
 QTSPresSetPreferredRate(
   QTSPresentation   inPresentation,
   Fixed             inRate,
-  SInt32            inFlags)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32            inFlags)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresGetPreferredRate()
+ *  QTSPresGetPreferredRate()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1015,14 +1022,14 @@ QTSPresSetPreferredRate(
 extern OSErr 
 QTSPresGetPreferredRate(
   QTSPresentation   inPresentation,
-  Fixed *           outRate)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Fixed *           outRate)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresSetEnable()
+ *  QTSPresSetEnable()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1031,14 +1038,14 @@ extern OSErr
 QTSPresSetEnable(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
-  Boolean           inEnableMode)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean           inEnableMode)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresGetEnable()
+ *  QTSPresGetEnable()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1047,14 +1054,14 @@ extern OSErr
 QTSPresGetEnable(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
-  Boolean *         outEnableMode)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *         outEnableMode)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresSetPresenting()
+ *  QTSPresSetPresenting()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1063,14 +1070,14 @@ extern OSErr
 QTSPresSetPresenting(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
-  Boolean           inPresentingMode)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean           inPresentingMode)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresGetPresenting()
+ *  QTSPresGetPresenting()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1079,14 +1086,14 @@ extern OSErr
 QTSPresGetPresenting(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
-  Boolean *         outPresentingMode)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *         outPresentingMode)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresSetActiveSegment()
+ *  QTSPresSetActiveSegment()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.1 and later
  *    Windows:          in QTSClient.lib 4.1 and later
@@ -1096,14 +1103,14 @@ QTSPresSetActiveSegment(
   QTSPresentation      inPresentation,
   QTSStream            inStream,
   const TimeValue64 *  inStartTime,
-  const TimeValue64 *  inDuration)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const TimeValue64 *  inDuration)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresGetActiveSegment()
+ *  QTSPresGetActiveSegment()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.1 and later
  *    Windows:          in QTSClient.lib 4.1 and later
@@ -1113,14 +1120,14 @@ QTSPresGetActiveSegment(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
   TimeValue64 *     outStartTime,
-  TimeValue64 *     outDuration)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TimeValue64 *     outDuration)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresSetPlayHints()
+ *  QTSPresSetPlayHints()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1130,14 +1137,14 @@ QTSPresSetPlayHints(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
   SInt32            inFlags,
-  SInt32            inFlagsMask)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32            inFlagsMask)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresGetPlayHints()
+ *  QTSPresGetPlayHints()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1146,17 +1153,17 @@ extern OSErr
 QTSPresGetPlayHints(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
-  SInt32 *          outFlags)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32 *          outFlags)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*-----------------------------------------
     Stream Spatial Functions
 -----------------------------------------*/
 /*
- *  QTSPresSetGWorld()
+ *  QTSPresSetGWorld()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1166,14 +1173,14 @@ QTSPresSetGWorld(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
   CGrafPtr          inGWorld,
-  GDHandle          inGDHandle)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  GDHandle          inGDHandle)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresGetGWorld()
+ *  QTSPresGetGWorld()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1183,14 +1190,14 @@ QTSPresGetGWorld(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
   CGrafPtr *        outGWorld,
-  GDHandle *        outGDHandle)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  GDHandle *        outGDHandle)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresSetClip()
+ *  QTSPresSetClip()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1199,14 +1206,14 @@ extern OSErr
 QTSPresSetClip(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
-  RgnHandle         inClip)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  RgnHandle         inClip)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresGetClip()
+ *  QTSPresGetClip()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1215,14 +1222,14 @@ extern OSErr
 QTSPresGetClip(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
-  RgnHandle *       outClip)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  RgnHandle *       outClip)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresSetMatrix()
+ *  QTSPresSetMatrix()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1231,14 +1238,14 @@ extern OSErr
 QTSPresSetMatrix(
   QTSPresentation       inPresentation,
   QTSStream             inStream,
-  const MatrixRecord *  inMatrix)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const MatrixRecord *  inMatrix)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresGetMatrix()
+ *  QTSPresGetMatrix()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1247,14 +1254,14 @@ extern OSErr
 QTSPresGetMatrix(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
-  MatrixRecord *    outMatrix)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  MatrixRecord *    outMatrix)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresSetDimensions()
+ *  QTSPresSetDimensions()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1264,14 +1271,14 @@ QTSPresSetDimensions(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
   Fixed             inWidth,
-  Fixed             inHeight)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Fixed             inHeight)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresGetDimensions()
+ *  QTSPresGetDimensions()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1281,14 +1288,14 @@ QTSPresGetDimensions(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
   Fixed *           outWidth,
-  Fixed *           outHeight)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Fixed *           outHeight)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresSetGraphicsMode()
+ *  QTSPresSetGraphicsMode()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1298,14 +1305,14 @@ QTSPresSetGraphicsMode(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
   short             inMode,
-  const RGBColor *  inOpColor)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const RGBColor *  inOpColor)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresGetGraphicsMode()
+ *  QTSPresGetGraphicsMode()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1315,14 +1322,14 @@ QTSPresGetGraphicsMode(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
   short *           outMode,
-  RGBColor *        outOpColor)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  RGBColor *        outOpColor)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresGetPicture()
+ *  QTSPresGetPicture()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1331,14 +1338,14 @@ extern OSErr
 QTSPresGetPicture(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
-  PicHandle *       outPicture)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  PicHandle *       outPicture)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresSetVisualContext()
+ *  QTSPresSetVisualContext()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1347,14 +1354,14 @@ extern OSErr
 QTSPresSetVisualContext(
   QTSPresentation      inPresentation,
   QTSStream            inStream,
-  QTVisualContextRef   inVisualContext)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTVisualContextRef   inVisualContext)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresGetVisualContext()
+ *  QTSPresGetVisualContext()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1363,17 +1370,17 @@ extern OSErr
 QTSPresGetVisualContext(
   QTSPresentation       inPresentation,
   QTSStream             inStream,
-  QTVisualContextRef *  outVisualContext)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTVisualContextRef *  outVisualContext)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*-----------------------------------------
     Stream Sound Functions
 -----------------------------------------*/
 /*
- *  QTSPresSetVolumes()
+ *  QTSPresSetVolumes()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1383,14 +1390,14 @@ QTSPresSetVolumes(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
   short             inLeftVolume,
-  short             inRightVolume)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short             inRightVolume)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresGetVolumes()
+ *  QTSPresGetVolumes()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1400,17 +1407,17 @@ QTSPresGetVolumes(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
   short *           outLeftVolume,
-  short *           outRightVolume)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short *           outRightVolume)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*-----------------------------------------
     Sourcing
 -----------------------------------------*/
 /*
- *  QTSPresGetSettingsAsText()
+ *  QTSPresGetSettingsAsText()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.1 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   in QTStreamLib 5.0.1 and later
  */
@@ -1422,14 +1429,14 @@ QTSPresGetSettingsAsText(
   OSType              inSettingsType,
   Handle *            outText,
   QTSPanelFilterUPP   inPanelFilterProc,
-  void *              inPanelFilterProcRefCon)                AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  void *              inPanelFilterProcRefCon)                AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresSettingsDialog()
+ *  QTSPresSettingsDialog()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QTStreamLib 5.0 and later
  */
@@ -1439,14 +1446,14 @@ QTSPresSettingsDialog(
   QTSStream           inStream,
   SInt32              inFlags,
   QTSModalFilterUPP   inFilterProc,
-  void *              inFilterProcRefCon)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *              inFilterProcRefCon)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresSettingsDialogWithFilters()
+ *  QTSPresSettingsDialogWithFilters()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.1 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   in QTStreamLib 5.0.1 and later
  */
@@ -1458,14 +1465,14 @@ QTSPresSettingsDialogWithFilters(
   QTSModalFilterUPP   inFilterProc,
   void *              inFilterProcRefCon,
   QTSPanelFilterUPP   inPanelFilterProc,
-  void *              inPanelFilterProcRefCon)                AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  void *              inPanelFilterProcRefCon)                AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresSetSettings()
+ *  QTSPresSetSettings()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QTStreamLib 5.0 and later
  */
@@ -1474,14 +1481,14 @@ QTSPresSetSettings(
   QTSPresentation   inPresentation,
   QTSStream         inStream,
   QTAtomSpecPtr     inSettings,
-  SInt32            inFlags)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32            inFlags)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresGetSettings()
+ *  QTSPresGetSettings()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QTStreamLib 5.0 and later
  */
@@ -1490,14 +1497,14 @@ QTSPresGetSettings(
   QTSPresentation    inPresentation,
   QTSStream          inStream,
   QTAtomContainer *  outSettings,
-  SInt32             inFlags)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32             inFlags)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresAddSourcer()
+ *  QTSPresAddSourcer()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QTStreamLib 5.0 and later
  */
@@ -1506,14 +1513,14 @@ QTSPresAddSourcer(
   QTSPresentation     inPresentation,
   QTSStream           inStream,
   ComponentInstance   inSourcer,
-  SInt32              inFlags)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32              inFlags)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresRemoveSourcer()
+ *  QTSPresRemoveSourcer()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QTStreamLib 5.0 and later
  */
@@ -1522,28 +1529,28 @@ QTSPresRemoveSourcer(
   QTSPresentation     inPresentation,
   QTSStream           inStream,
   ComponentInstance   inSourcer,
-  SInt32              inFlags)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32              inFlags)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresGetNumSourcers()
+ *  QTSPresGetNumSourcers()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QTStreamLib 5.0 and later
  */
 extern UInt32 
 QTSPresGetNumSourcers(
   QTSPresentation   inPresentation,
-  QTSStream         inStream)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTSStream         inStream)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPresGetIndSourcer()
+ *  QTSPresGetIndSourcer()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QTStreamLib 5.0 and later
  */
@@ -1552,7 +1559,7 @@ QTSPresGetIndSourcer(
   QTSPresentation      inPresentation,
   QTSStream            inStream,
   UInt32               inIndex,
-  ComponentInstance *  outSourcer)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ComponentInstance *  outSourcer)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*============================================================================
@@ -1564,10 +1571,10 @@ enum {
 };
 
 /*
- *  QTSSetNetworkAppName()
+ *  QTSSetNetworkAppName()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.1 and later
  *    Windows:          in QTSClient.lib 4.1 and later
@@ -1575,14 +1582,14 @@ enum {
 extern OSErr 
 QTSSetNetworkAppName(
   const char *  inAppName,
-  SInt32        inFlags)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32        inFlags)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSGetNetworkAppName()
+ *  QTSGetNetworkAppName()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.1 and later
  *    Windows:          in QTSClient.lib 4.1 and later
@@ -1590,7 +1597,7 @@ QTSSetNetworkAppName(
 extern OSErr 
 QTSGetNetworkAppName(
   SInt32   inFlags,
-  char **  outCStringPtr)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  char **  outCStringPtr)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*-----------------------------------------
@@ -1686,10 +1693,10 @@ enum {
 };
 
 /*
- *  QTSNewStatHelper()
+ *  QTSNewStatHelper()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1700,53 +1707,53 @@ QTSNewStatHelper(
   QTSStream         inStream,
   OSType            inStatType,
   SInt32            inFlags,
-  QTSStatHelper *   outStatHelper)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTSStatHelper *   outStatHelper)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSDisposeStatHelper()
+ *  QTSDisposeStatHelper()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
  */
 extern OSErr 
-QTSDisposeStatHelper(QTSStatHelper inStatHelper)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+QTSDisposeStatHelper(QTSStatHelper inStatHelper)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSStatHelperGetStats()
+ *  QTSStatHelperGetStats()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
  */
 extern OSErr 
-QTSStatHelperGetStats(QTSStatHelper inStatHelper)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+QTSStatHelperGetStats(QTSStatHelper inStatHelper)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSStatHelperResetIter()
+ *  QTSStatHelperResetIter()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
  */
 extern OSErr 
-QTSStatHelperResetIter(QTSStatHelper inStatHelper)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+QTSStatHelperResetIter(QTSStatHelper inStatHelper)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSStatHelperNext()
+ *  QTSStatHelperNext()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1754,28 +1761,28 @@ QTSStatHelperResetIter(QTSStatHelper inStatHelper)            AVAILABLE_MAC_OS_X
 extern Boolean 
 QTSStatHelperNext(
   QTSStatHelper              inStatHelper,
-  QTSStatHelperNextParams *  ioParams)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTSStatHelperNextParams *  ioParams)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSStatHelperGetNumStats()
+ *  QTSStatHelperGetNumStats()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
  */
 extern UInt32 
-QTSStatHelperGetNumStats(QTSStatHelper inStatHelper)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+QTSStatHelperGetNumStats(QTSStatHelper inStatHelper)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /* used by components to put statistics into the atom container */
 /*
- *  QTSGetOrMakeStatAtomForStream()
+ *  QTSGetOrMakeStatAtomForStream()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1784,14 +1791,14 @@ extern OSErr
 QTSGetOrMakeStatAtomForStream(
   QTAtomContainer   inContainer,
   QTSStream         inStream,
-  QTAtom *          outParentAtom)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTAtom *          outParentAtom)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSInsertStatistic()
+ *  QTSInsertStatistic()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1804,14 +1811,14 @@ QTSInsertStatistic(
   void *            inStatData,
   UInt32            inStatDataLength,
   OSType            inStatDataFormat,
-  SInt32            inFlags)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32            inFlags)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSInsertStatisticName()
+ *  QTSInsertStatisticName()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1822,14 +1829,14 @@ QTSInsertStatisticName(
   QTAtom            inParentAtom,
   OSType            inStatType,
   const char *      inStatName,
-  UInt32            inStatNameLength)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32            inStatNameLength)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSInsertStatisticUnits()
+ *  QTSInsertStatisticUnits()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -1841,7 +1848,7 @@ QTSInsertStatisticUnits(
   OSType            inStatType,
   OSType            inUnitsType,
   const char *      inUnitsName,
-  UInt32            inUnitsNameLength)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32            inUnitsNameLength)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*============================================================================
@@ -2042,10 +2049,10 @@ enum {
 };
 
 /*
- *  QTSPrefsAddProxySetting()
+ *  QTSPrefsAddProxySetting()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.1 and later
  *    Windows:          in QTSClient.lib 4.1 and later
@@ -2056,14 +2063,14 @@ QTSPrefsAddProxySetting(
   SInt32   portID,
   UInt32   flags,
   UInt32   seed,
-  Str255   srvrURL)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Str255   srvrURL)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPrefsFindProxyByType()
+ *  QTSPrefsFindProxyByType()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.1 and later
  *    Windows:          in QTSClient.lib 4.1 and later
@@ -2074,14 +2081,14 @@ QTSPrefsFindProxyByType(
   UInt32           flags,
   UInt32           flagsMask,
   QTSProxyPref **  proxyHndl,
-  SInt16 *         count)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt16 *         count)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPrefsAddConnectionSetting()
+ *  QTSPrefsAddConnectionSetting()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.1 and later
  *    Windows:          in QTSClient.lib 4.1 and later
@@ -2091,14 +2098,14 @@ QTSPrefsAddConnectionSetting(
   OSType   protocol,
   SInt32   portID,
   UInt32   flags,
-  UInt32   seed)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32   seed)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPrefsFindConnectionByType()
+ *  QTSPrefsFindConnectionByType()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.1 and later
  *    Windows:          in QTSClient.lib 4.1 and later
@@ -2109,14 +2116,14 @@ QTSPrefsFindConnectionByType(
   UInt32               flags,
   UInt32               flagsMask,
   QTSTransportPref **  connectionHndl,
-  SInt16 *             count)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt16 *             count)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPrefsGetActiveConnection()
+ *  QTSPrefsGetActiveConnection()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.1 and later
  *    Windows:          in QTSClient.lib 4.1 and later
@@ -2124,27 +2131,27 @@ QTSPrefsFindConnectionByType(
 extern OSErr 
 QTSPrefsGetActiveConnection(
   OSType              protocol,
-  QTSTransportPref *  connectInfo)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTSTransportPref *  connectInfo)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPrefsGetNoProxyURLs()
+ *  QTSPrefsGetNoProxyURLs()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.1 and later
  *    Windows:          in QTSClient.lib 4.1 and later
  */
 extern OSErr 
-QTSPrefsGetNoProxyURLs(QTSNoProxyPref ** noProxyHndl)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+QTSPrefsGetNoProxyURLs(QTSNoProxyPref ** noProxyHndl)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPrefsSetNoProxyURLs()
+ *  QTSPrefsSetNoProxyURLs()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.1 and later
  *    Windows:          in QTSClient.lib 4.1 and later
@@ -2153,14 +2160,14 @@ extern OSErr
 QTSPrefsSetNoProxyURLs(
   char *   urls,
   UInt32   flags,
-  UInt32   seed)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32   seed)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPrefsAddProxyUserInfo()
+ *  QTSPrefsAddProxyUserInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.1 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   in QTStreamLib 5.0.1 and later
  *    Windows:          in QTSClient.lib 5.0.1 and later
@@ -2171,14 +2178,14 @@ QTSPrefsAddProxyUserInfo(
   SInt32      flags,
   SInt32      flagsMask,
   StringPtr   username,
-  StringPtr   password)                                       AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  StringPtr   password)                                       AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPrefsFindProxyUserInfoByType()
+ *  QTSPrefsFindProxyUserInfoByType()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.1 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   in QTStreamLib 5.0.1 and later
  *    Windows:          in QTSClient.lib 5.0.1 and later
@@ -2189,14 +2196,14 @@ QTSPrefsFindProxyUserInfoByType(
   SInt32      flags,
   SInt32      flagsMask,
   StringPtr   username,
-  StringPtr   password)                                       AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  StringPtr   password)                                       AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPrefsGetInstantOnSettings()
+ *  QTSPrefsGetInstantOnSettings()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   in QTStreamLib 6.0 and later
  *    Windows:          in QTSClient.lib 6.0 and later
@@ -2204,14 +2211,14 @@ QTSPrefsFindProxyUserInfoByType(
 extern OSErr 
 QTSPrefsGetInstantOnSettings(
   QTSInstantOnPref *  outPref,
-  SInt32              inFlags)                                AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  SInt32              inFlags)                                AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSPrefsSetInstantOnSettings()
+ *  QTSPrefsSetInstantOnSettings()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   in QTStreamLib 6.0 and later
  *    Windows:          in QTSClient.lib 6.0 and later
@@ -2219,7 +2226,7 @@ QTSPrefsGetInstantOnSettings(
 extern OSErr 
 QTSPrefsSetInstantOnSettings(
   QTSInstantOnPref *  inPref,
-  SInt32              inFlags)                                AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  SInt32              inFlags)                                AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 
@@ -2235,10 +2242,10 @@ QTSPrefsSetInstantOnSettings(
 */
 
 /*
- *  QTSNewPtr()
+ *  QTSNewPtr()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -2247,14 +2254,14 @@ extern Ptr
 QTSNewPtr(
   UInt32    inByteCount,
   SInt32    inFlags,
-  SInt32 *  outFlags)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32 *  outFlags)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSNewHandle()
+ *  QTSNewHandle()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -2263,7 +2270,7 @@ extern Handle
 QTSNewHandle(
   UInt32    inByteCount,
   SInt32    inFlags,
-  SInt32 *  outFlags)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32 *  outFlags)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 #define QTSNewPtrClear(_s)      QTSNewPtr((_s), kQTSMemAllocClearMem, NULL)
@@ -2293,10 +2300,10 @@ typedef struct OpaqueQTSMemPtr*         QTSMemPtr;
    but QTSAllocMemPtr currently cannot 
 */
 /*
- *  QTSAllocMemPtr()
+ *  QTSAllocMemPtr()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -2304,14 +2311,14 @@ typedef struct OpaqueQTSMemPtr*         QTSMemPtr;
 extern QTSMemPtr 
 QTSAllocMemPtr(
   UInt32   inByteCount,
-  SInt32   inFlags)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32   inFlags)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSReleaseMemPtr()
+ *  QTSReleaseMemPtr()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -2319,7 +2326,7 @@ QTSAllocMemPtr(
 extern void 
 QTSReleaseMemPtr(
   QTSMemPtr   inMemPtr,
-  SInt32      inFlags)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32      inFlags)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 
@@ -2355,10 +2362,10 @@ enum {
 
 
 /*
- *  QTSNewStreamBuffer()
+ *  QTSNewStreamBuffer()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QTStreamLib 5.0 and later
  *    Windows:          in QTSClient.lib 5.0 and later
@@ -2367,20 +2374,20 @@ extern OSErr
 QTSNewStreamBuffer(
   UInt32              inDataSize,
   SInt32              inFlags,
-  QTSStreamBuffer **  outStreamBuffer)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTSStreamBuffer **  outStreamBuffer)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSFreeMessage()
+ *  QTSFreeMessage()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
  */
 extern void 
-QTSFreeMessage(QTSStreamBuffer * inMessage)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+QTSFreeMessage(QTSStreamBuffer * inMessage)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
@@ -2389,10 +2396,10 @@ QTSFreeMessage(QTSStreamBuffer * inMessage)                   AVAILABLE_MAC_OS_X
     QTSDuplicateMessage never frees the old message
 */
 /*
- *  QTSDuplicateMessage()
+ *  QTSDuplicateMessage()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QTStreamLib 5.0 and later
  *    Windows:          in QTSClient.lib 5.0 and later
@@ -2401,27 +2408,27 @@ extern OSErr
 QTSDuplicateMessage(
   QTSStreamBuffer *   inMessage,
   SInt32              inFlags,
-  QTSStreamBuffer **  outDuplicatedMessage)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTSStreamBuffer **  outDuplicatedMessage)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSMessageLength()
+ *  QTSMessageLength()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
  */
 extern UInt32 
-QTSMessageLength(QTSStreamBuffer * inMessage)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+QTSMessageLength(QTSStreamBuffer * inMessage)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSStreamBufferDataInfo()
+ *  QTSStreamBufferDataInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QTStreamLib 5.0 and later
  *    Windows:          in QTSClient.lib 5.0 and later
@@ -2430,61 +2437,61 @@ extern void
 QTSStreamBufferDataInfo(
   QTSStreamBuffer *  inStreamBuffer,
   unsigned char **   outDataStart,
-  UInt32 *           outDataMaxLength)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32 *           outDataMaxLength)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /* ---- old calls (don't use these)*/
 
 /*
- *  QTSAllocBuffer()
+ *  QTSAllocBuffer()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
  */
 extern QTSStreamBuffer * 
-QTSAllocBuffer(SInt32 inSize)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+QTSAllocBuffer(SInt32 inSize)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSDupMessage()
+ *  QTSDupMessage()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
  */
 extern QTSStreamBuffer * 
-QTSDupMessage(QTSStreamBuffer * inMessage)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+QTSDupMessage(QTSStreamBuffer * inMessage)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSCopyMessage()
+ *  QTSCopyMessage()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
  */
 extern QTSStreamBuffer * 
-QTSCopyMessage(QTSStreamBuffer * inMessage)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+QTSCopyMessage(QTSStreamBuffer * inMessage)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSFlattenMessage()
+ *  QTSFlattenMessage()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
  */
 extern QTSStreamBuffer * 
-QTSFlattenMessage(QTSStreamBuffer * inMessage)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+QTSFlattenMessage(QTSStreamBuffer * inMessage)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 
@@ -2493,10 +2500,10 @@ QTSFlattenMessage(QTSStreamBuffer * inMessage)                AVAILABLE_MAC_OS_X
         Misc
 ============================================================================*/
 /*
- *  QTSGetErrorString()
+ *  QTSGetErrorString()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QTStreamLib 4.0 and later
  *    Windows:          in QTSClient.lib 4.0 and later
@@ -2506,96 +2513,96 @@ QTSGetErrorString(
   SInt32   inErrorCode,
   UInt32   inMaxErrorStringLength,
   char *   outErrorString,
-  SInt32   inFlags)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32   inFlags)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTSInitializeMediaParams()
+ *  QTSInitializeMediaParams()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.1 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   in QTStreamLib 5.0.1 and later
  *    Windows:          in QTSClient.lib 5.0.1 and later
  */
 extern OSErr 
-QTSInitializeMediaParams(QTSMediaParams * inMediaParams)      AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+QTSInitializeMediaParams(QTSMediaParams * inMediaParams)      AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 
 
 /* UPP call backs */
 /*
- *  NewQTSNotificationUPP()
+ *  NewQTSNotificationUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern QTSNotificationUPP
-NewQTSNotificationUPP(QTSNotificationProcPtr userRoutine)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewQTSNotificationUPP(QTSNotificationProcPtr userRoutine)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  NewQTSPanelFilterUPP()
+ *  NewQTSPanelFilterUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.1 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern QTSPanelFilterUPP
-NewQTSPanelFilterUPP(QTSPanelFilterProcPtr userRoutine)       AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+NewQTSPanelFilterUPP(QTSPanelFilterProcPtr userRoutine)       AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  NewQTSModalFilterUPP()
+ *  NewQTSModalFilterUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern QTSModalFilterUPP
-NewQTSModalFilterUPP(QTSModalFilterProcPtr userRoutine)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewQTSModalFilterUPP(QTSModalFilterProcPtr userRoutine)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  DisposeQTSNotificationUPP()
+ *  DisposeQTSNotificationUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeQTSNotificationUPP(QTSNotificationUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeQTSNotificationUPP(QTSNotificationUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  DisposeQTSPanelFilterUPP()
+ *  DisposeQTSPanelFilterUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.1 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeQTSPanelFilterUPP(QTSPanelFilterUPP userUPP)           AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+DisposeQTSPanelFilterUPP(QTSPanelFilterUPP userUPP)           AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  DisposeQTSModalFilterUPP()
+ *  DisposeQTSModalFilterUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeQTSModalFilterUPP(QTSModalFilterUPP userUPP)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeQTSModalFilterUPP(QTSModalFilterUPP userUPP)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  InvokeQTSNotificationUPP()
+ *  InvokeQTSNotificationUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -2605,13 +2612,13 @@ InvokeQTSNotificationUPP(
   OSType              inNotificationType,
   void *              inNotificationParams,
   void *              inRefCon,
-  QTSNotificationUPP  userUPP)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTSNotificationUPP  userUPP)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  InvokeQTSPanelFilterUPP()
+ *  InvokeQTSPanelFilterUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.1 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -2619,13 +2626,13 @@ extern Boolean
 InvokeQTSPanelFilterUPP(
   QTSPanelFilterParams *  inParams,
   void *                  inRefCon,
-  QTSPanelFilterUPP       userUPP)                            AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  QTSPanelFilterUPP       userUPP)                            AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  InvokeQTSModalFilterUPP()
+ *  InvokeQTSModalFilterUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -2635,7 +2642,7 @@ InvokeQTSModalFilterUPP(
   const EventRecord *  inEvent,
   SInt16 *             ioItemHit,
   void *               inRefCon,
-  QTSModalFilterUPP    userUPP)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTSModalFilterUPP    userUPP)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 #if __MACH__
   #ifdef __cplusplus

@@ -6,6 +6,7 @@
 #import <ScriptingBridge/SBObject.h>
 
 
+NS_CLASS_AVAILABLE(10_5, NA)
 @interface SBElementArray : NSMutableArray
 {
 	SBObject *_parent;

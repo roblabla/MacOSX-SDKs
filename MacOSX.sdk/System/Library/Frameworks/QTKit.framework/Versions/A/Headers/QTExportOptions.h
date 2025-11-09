@@ -4,6 +4,16 @@
 	Copyright:	(c)2009-2012 by Apple Inc., all rights reserved.
 
 */
+
+/*
+  QTKit has been deprecated in 10.9.
+
+  AVFoundation and AVKit are the frameworks recommended for all new development 
+  involving time-based audiovisual media on OS X.  In order to transition your 
+  project from QTKit to AVFoundation please refer to:
+  "Technical Note TN2300 Transitioning QTKit code to AV Foundation".
+*/
+
 #import <Foundation/Foundation.h>
 #import <QTKit/QTKitDefines.h>
 #pragma mark Export Options Identifiers
@@ -11,22 +21,22 @@
 
 /* These export options are used to produce files that can be played on the specified Apple devices.
 	The files should have .m4v extensions (or .m4a for exports with audio only sources). */
-QTKIT_EXTERN NSString * const QTExportOptionsAppleM4VCellular;
-QTKIT_EXTERN NSString * const QTExportOptionsAppleM4V480pSD;
-QTKIT_EXTERN NSString * const QTExportOptionsAppleM4ViPod;
-QTKIT_EXTERN NSString * const QTExportOptionsAppleM4VAppleTV;
-QTKIT_EXTERN NSString * const QTExportOptionsAppleM4VWiFi;
-QTKIT_EXTERN NSString * const QTExportOptionsAppleM4V720pHD;
+QTKIT_EXTERN NSString * const QTExportOptionsAppleM4VCellular		AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+QTKIT_EXTERN NSString * const QTExportOptionsAppleM4V480pSD			AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+QTKIT_EXTERN NSString * const QTExportOptionsAppleM4ViPod			AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+QTKIT_EXTERN NSString * const QTExportOptionsAppleM4VAppleTV		AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+QTKIT_EXTERN NSString * const QTExportOptionsAppleM4VWiFi			AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+QTKIT_EXTERN NSString * const QTExportOptionsAppleM4V720pHD			AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /* These export options can be used to produce QuickTime .mov files with the specified video size.
 	The export will not scale the video up from a smaller size. The video will be compressed using
 	H.264 and the audio will be compressed using AAC.  */
-QTKIT_EXTERN NSString * const QTExportOptionsQuickTimeMovie480p;
-QTKIT_EXTERN NSString * const QTExportOptionsQuickTimeMovie720p;
-QTKIT_EXTERN NSString * const QTExportOptionsQuickTimeMovie1080p;
+QTKIT_EXTERN NSString * const QTExportOptionsQuickTimeMovie480p		AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+QTKIT_EXTERN NSString * const QTExportOptionsQuickTimeMovie720p		AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+QTKIT_EXTERN NSString * const QTExportOptionsQuickTimeMovie1080p	AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*  This export option will produce an audio only .m4a file with appropriate gapless playback data */
-QTKIT_EXTERN NSString * const QTExportOptionsAppleM4A;
+QTKIT_EXTERN NSString * const QTExportOptionsAppleM4A				AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 
 /*!
@@ -55,7 +65,7 @@ QTKIT_EXTERN NSString * const QTExportOptionsAppleM4A;
 								compatible with all movies.
 	@result						An NSArray containing the identifiers.
 */
-+ (NSArray *)allExportOptionsIdentifiers;
++ (NSArray *)allExportOptionsIdentifiers AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method						exportOptionsIdentifiersCompatibleWithMovie:
@@ -70,7 +80,7 @@ QTKIT_EXTERN NSString * const QTExportOptionsAppleM4A;
 								The array is a complete list of the valid identifiers that can be used as arguments to 
 								exportOptionsWithIdentifier along with the movie specified.
 */
-+ (NSArray *)exportOptionsIdentifiersCompatibleWithMovie:(QTMovie *)movie;
++ (NSArray *)exportOptionsIdentifiersCompatibleWithMovie:(QTMovie *)movie AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method						localizedNameForExportOptionsIdentifier:
@@ -80,7 +90,7 @@ QTKIT_EXTERN NSString * const QTExportOptionsAppleM4A;
 	@param 		identifier 		An export options identifier.
 	@result						A localized name for the given identifier.
 */
-+ (NSString *)localizedNameForExportOptionsIdentifier:(NSString *)identifier;
++ (NSString *)localizedNameForExportOptionsIdentifier:(NSString *)identifier AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method						exportOptionsWithIdentifier:
@@ -89,19 +99,19 @@ QTKIT_EXTERN NSString * const QTExportOptionsAppleM4A;
 								and the compression options for the output media.
 	@result						Returns the initialized and autoreleased instance of QTExportOptions.
 */
-+ (id)exportOptionsWithIdentifier:(NSString *)identifier;
++ (id)exportOptionsWithIdentifier:(NSString *)identifier AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method						localizedExportOptionsSummary
 	@result						Returns a localized description of the export options intended for end-user display.
  */
-- (NSString *)localizedExportOptionsSummary;
+- (NSString *)localizedExportOptionsSummary AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method						recommendedFileTypesForExportedFile
 	@result						Returns an array of UTI file types as NSStrings that best fit the export described by the QTExportOptions object.  
 								The first entry in the list is the currently recommended choice.
  */
-- (NSArray *)recommendedFileTypesForExportedFile;
+- (NSArray *)recommendedFileTypesForExportedFile AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 @end

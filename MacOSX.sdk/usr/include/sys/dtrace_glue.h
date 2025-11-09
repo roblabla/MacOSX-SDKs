@@ -135,15 +135,13 @@ typedef struct cpu_core {
 
 extern cpu_core_t *cpu_core;
 
-#if defined(__arm__)
-extern unsigned int real_ncpus;
-#endif
+extern unsigned int dtrace_max_cpus;		/* max number of enabled cpus */
+#define NCPU	    dtrace_max_cpus
 
 extern int cpu_number(void); /* From #include <kern/cpu_number.h>. Called from probe context, must blacklist. */
 
 #define	CPU		(&(cpu_list[cpu_number()]))	/* Pointer to current CPU */
 #define	CPU_ON_INTR(cpup) ml_at_interrupt_context() /* always invoked on current cpu */
-#define NCPU	real_ncpus
 
 /*
  * Routines used to register interest in cpu's being added to or removed
@@ -500,25 +498,15 @@ extern void vmem_free(vmem_t *vmp, void *vaddr, size_t size);
  * Atomic
  */
 
-static inline void atomic_add_32( uint32_t *theValue, int32_t theAmount )
+static inline void atomic_add_32( uint32_t *theAddress, int32_t theAmount )
 {
-	(void)OSAddAtomic( theAmount, theValue );
+	(void)OSAddAtomic( theAmount, theAddress );
 }
 
 #if defined(__i386__) || defined(__x86_64__)
-static inline void atomic_add_64( uint64_t *theValue, int64_t theAmount )
+static inline void atomic_add_64( uint64_t *theAddress, int64_t theAmount )
 {
-	(void)OSAddAtomic64( theAmount, (SInt64 *)theValue );
-}
-#elif defined(__arm__)
-static inline void atomic_add_64( uint64_t *theValue, int64_t theAmount )
-{
-	// FIXME
-	// atomic_add_64() is at present only called from fasttrap.c to increment
-	// or decrement a 64bit counter. Narrow to 32bits since arm has
-	// no convenient 64bit atomic op.
-	
-	(void)OSAddAtomic( (int32_t)theAmount, &(((SInt32 *)theValue)[0]));
+	(void)OSAddAtomic64( theAmount, (SInt64 *)theAddress );
 }
 #endif
 
@@ -528,9 +516,6 @@ static inline void atomic_add_64( uint64_t *theValue, int64_t theAmount )
 
 typedef uintptr_t pc_t;
 typedef uintptr_t greg_t; /* For dtrace_impl.h prototype of dtrace_getfp() */
-#if defined(__arm__)
-#define regs arm_saved_state
-#endif
 extern struct regs *find_user_regs( thread_t thread);
 extern vm_offset_t dtrace_get_cpu_int_stack_top(void);
 extern vm_offset_t max_valid_stack_address(void); /* kern/thread.h */

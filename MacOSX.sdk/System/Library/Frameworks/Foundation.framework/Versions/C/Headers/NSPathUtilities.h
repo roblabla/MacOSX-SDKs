@@ -1,5 +1,5 @@
 /*	NSPathUtilities.h
-	Copyright (c) 1994-2012, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2013, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSString.h>
@@ -80,6 +80,7 @@ typedef NS_ENUM(NSUInteger, NSSearchPathDirectory) {
     NSAllApplicationsDirectory = 100,       // all directories where applications can occur
     NSAllLibrariesDirectory = 101,          // all directories where resources can occur
     NSTrashDirectory NS_ENUM_AVAILABLE(10_8, NA) = 102                   // location of Trash directory
+
 };
 
 typedef NS_OPTIONS(NSUInteger, NSSearchPathDomainMask) {

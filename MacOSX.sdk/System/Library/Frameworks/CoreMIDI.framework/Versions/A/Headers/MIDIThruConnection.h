@@ -278,7 +278,7 @@ unmodified thru connection.
 extern void
 MIDIThruConnectionParamsInitialize(
                             MIDIThruConnectionParams *      inConnectionParams )
-                                                                __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+                                                                __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
 
 /*!
     @function   MIDIThruConnectionCreate
@@ -298,7 +298,7 @@ extern OSStatus
 MIDIThruConnectionCreate(   CFStringRef                     inPersistentOwnerID,
                             CFDataRef                       inConnectionParams,
                             MIDIThruConnectionRef *         outConnection )
-                                                                __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+                                                                __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
 
 /*!
     @function   MIDIThruConnectionDispose
@@ -310,7 +310,7 @@ MIDIThruConnectionCreate(   CFStringRef                     inPersistentOwnerID,
 */
 extern OSStatus
 MIDIThruConnectionDispose(  MIDIThruConnectionRef           connection )
-                                                                __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+                                                                __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
 
 /*!
     @function   MIDIThruConnectionGetParams
@@ -327,7 +327,7 @@ MIDIThruConnectionDispose(  MIDIThruConnectionRef           connection )
 extern OSStatus
 MIDIThruConnectionGetParams(MIDIThruConnectionRef           connection,
                             CFDataRef *                     outConnectionParams )
-                                                                __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+                                                                __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
 
 /*!
     @function   MIDIThruConnectionSetParams
@@ -342,7 +342,7 @@ MIDIThruConnectionGetParams(MIDIThruConnectionRef           connection,
 extern OSStatus
 MIDIThruConnectionSetParams(MIDIThruConnectionRef           connection,
                             CFDataRef                       inConnectionParams )
-                                                                __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+                                                                __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
 
 /*!
     @function   MIDIThruConnectionFind
@@ -357,7 +357,7 @@ MIDIThruConnectionSetParams(MIDIThruConnectionRef           connection,
 extern OSStatus
 MIDIThruConnectionFind(     CFStringRef                     inPersistentOwnerID,
                             CFDataRef *                     outConnectionList )
-                                                                __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+                                                                __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_2);
 
 #ifdef __cplusplus
 }

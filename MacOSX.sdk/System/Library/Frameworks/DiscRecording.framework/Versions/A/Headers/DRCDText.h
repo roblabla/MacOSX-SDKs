@@ -115,7 +115,6 @@
 
 
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 @class DRCDTextBlock;
 /* ----------------------------------- */
 /* CD-Text encodings */
@@ -356,7 +355,6 @@ enum
 - (NSStringEncoding) encoding;
 
 @end
-#endif
 
 
 

@@ -114,6 +114,7 @@
  */
 typedef mach_port_t		task_t;
 typedef mach_port_t		task_name_t;
+typedef mach_port_t		task_suspension_token_t;
 typedef mach_port_t		thread_t;
 typedef	mach_port_t		thread_act_t;
 typedef mach_port_t		ipc_space_t;
@@ -220,7 +221,7 @@ typedef natural_t	ledger_item_t;
 #define LEDGER_ITEM_INFINITY	((ledger_item_t) (~0))
 
 typedef int64_t 		ledger_amount_t;
-#define LEDGER_LIMIT_INFINITY ((ledger_amount_t)(((uint64_t)1 << 63) - 1))
+#define LEDGER_LIMIT_INFINITY   ((ledger_amount_t)((1ULL << 63) - 1))
 
 typedef mach_vm_offset_t	*emulation_vector_t;
 typedef char			*user_subsystem_t;

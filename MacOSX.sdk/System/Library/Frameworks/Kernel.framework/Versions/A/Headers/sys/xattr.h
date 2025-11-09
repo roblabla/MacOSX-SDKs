@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004-2010 Apple Inc. All rights reserved.
+ * Copyright (c) 2004-2012 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -55,12 +55,14 @@
 #define	XATTR_RESOURCEFORK_NAME	  "com.apple.ResourceFork"
 
 
+
+
 __BEGIN_DECLS
 int  xattr_protected(const char *);
 int  xattr_validatename(const char *);
 
 /* Maximum extended attribute size supported by VFS */
-#define XATTR_MAXSIZE		(64 * 1024 * 1024)
+#define XATTR_MAXSIZE		INT32_MAX 
 
 
 __END_DECLS

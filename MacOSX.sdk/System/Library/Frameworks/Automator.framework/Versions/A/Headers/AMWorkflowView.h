@@ -34,5 +34,8 @@
 - (BOOL)isEditable;
 - (void)setEditable:(BOOL)flag;
 
+- (AMWorkflowController *)workflowController;
+- (void)setWorkflowController:(AMWorkflowController *)workflowController;
+
 @end
 

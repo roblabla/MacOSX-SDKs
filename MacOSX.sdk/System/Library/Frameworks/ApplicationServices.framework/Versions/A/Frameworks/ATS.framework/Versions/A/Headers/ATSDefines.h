@@ -14,7 +14,7 @@
 # define ATS_DEPRECATED_IN_MAC_OS_X_VERSION(_macDep) // For types
 #elif defined(__has_extension) /* defined(BUILDING_ATS) */
 # if __has_extension(attribute_deprecated_with_message)
-#  define ATS_AVAILABLE_BUT_DEPRECATED_WITH_ADVICE(_mac,_macDep,_deprecationAdvice) __attribute__((deprecated(_deprecationAdvice)))
+#  define ATS_AVAILABLE_BUT_DEPRECATED_WITH_ADVICE(_mac,_macDep,_deprecationAdvice) __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_##_mac,__MAC_##_macDep, __IPHONE_NA, __IPHONE_NA, _deprecationAdvice)
 # endif /*__has_extension(attribute_deprecated_with_message) */
 #endif /* defined(__has_extension)*/ /* defined(BUILDING_ATS) */
 

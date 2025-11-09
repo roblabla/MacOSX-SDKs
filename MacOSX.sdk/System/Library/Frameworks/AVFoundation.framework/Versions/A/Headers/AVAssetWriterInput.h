@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2012 Apple Inc. All rights reserved.
+	Copyright 2010-2013 Apple Inc. All rights reserved.
 
 */
 
@@ -41,18 +41,18 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  @param mediaType
 	The media type of samples that will be accepted by the input. Media types are defined in AVMediaFormat.h.
  @param outputSettings
-	The settings used for encoding the media appended to the output.  See AVAudioSettings.h for AVMediaTypeAudio or AVVideoSettings.h for AVMediaTypeVideo and for more information on how to construct an output settings dictionary.
+	The settings used for encoding the media appended to the output.  See AVAudioSettings.h for AVMediaTypeAudio or AVVideoSettings.h for AVMediaTypeVideo and for more information on how to construct an output settings dictionary.  If you only require simple preset-based output settings, see AVOutputSettingsAssistant.
  @result
 	An instance of AVAssetWriterInput.
 
  @discussion
 	Each new input accepts data for a new track of the AVAssetWriter's output file.  Inputs are added to an asset writer using -[AVAssetWriter addInput:].
 	
-	Passing nil for output settings instructs the input to pass through appended samples, doing no processing before they are written to the output file.  This is useful if, for example, you are appending buffers that are already in a desirable compressed format.  However, passthrough is currently supported only when writing to QuickTime Movie files (i.e. the AVAssetWriter was initialized with AVFileTypeQuickTimeMovie).  For other file types, non-nil output settings must be specified.
+	Passing nil for output settings instructs the input to pass through appended samples, doing no processing before they are written to the output file.  This is useful if, for example, you are appending buffers that are already in a desirable compressed format.  However, if not writing to a QuickTime Movie file (i.e. the AVAssetWriter was initialized with a file type other than AVFileTypeQuickTimeMovie), AVAssetWriter only supports passing through a restricted set of media types and subtypes.  In order to pass through media data to files other than AVFileTypeQuickTimeMovie, a non-NULL format hint must be provided using +assetWriterInputWithMediaType:outputSettings:sourceFormatHint: instead of this method.
  
-	For AVMediaTypeAudio, AVEncoderAudioQualityKey and AVSampleRateConverterAudioQualityKey are not currently supported in the outputSettings dictionary.  When using this method to construct a new instance, an audio settings dictionary must be fully specified, meaning that it must contain AVFormatIDKey, AVSampleRateKey, AVNumberOfChannelsKey, and AVChannelLayoutKey.  For kAudioFormatLinearPCM, all relevant AVLinearPCM*Key keys must be included, and for kAudioFormatAppleLossless, AVEncoderBitDepthHintKey keys must be included.  See +assetWriterInputWithMediaType:outputSettings:sourceFormatHint: for a way to avoid having to specify a value for each of those keys.
+	For AVMediaTypeAudio the following keys are not currently supported in the outputSettings dictionary: AVEncoderAudioQualityKey, AVEncoderAudioQualityForVBRKey, AVSampleRateConverterAudioQualityKey, and AVSampleRateConverterAlgorithmKey.  When using this method to construct a new instance, an audio settings dictionary must be fully specified, meaning that it must contain AVFormatIDKey, AVSampleRateKey, and AVNumberOfChannelsKey.  If no other channel layout information is available, a value of 1 for AVNumberOfChannelsKey will result in mono output and a value of 2 will result in stereo output.  If AVNumberOfChannelsKey specifies a channel count greater than 2, the dictionary must also specify a value for AVChannelLayoutKey.  For kAudioFormatLinearPCM, all relevant AVLinearPCM*Key keys must be included, and for kAudioFormatAppleLossless, AVEncoderBitDepthHintKey keys must be included.  See +assetWriterInputWithMediaType:outputSettings:sourceFormatHint: for a way to avoid having to specify a value for each of those keys.
  
-	For AVMediaTypeVideo, AVAssetWriterInput can only produce compressed output.  This means that the value passed in for outputSettings must follow the rules for compressed video output, as laid out in AVVideoSettings.h.  When using this method to construct a new instance, a video settings dictionary must be fully specified, meaning that it must contain AVVideoCodecKey, AVVideoWidthKey, and AVVideoHeightKey.  See +assetWriterInputWithMediaType:outputSettings:sourceFormatHint: for a way to avoid having to specify a value for each of those keys.  On iOS, the only values currently supported for AVVideoCodecKey are AVVideoCodecH264 and AVVideoCodecJPEG.  AVVideoCodecH264 is not supported on iPhone 3G.  For AVVideoScalingModeKey, the value AVVideoScalingModeFit is not supported.
+	For AVMediaTypeVideo, any output settings dictionary must request a compressed video format.  This means that the value passed in for outputSettings must follow the rules for compressed video output, as laid out in AVVideoSettings.h.  When using this method to construct a new instance, a video settings dictionary must be fully specified, meaning that it must contain AVVideoCodecKey, AVVideoWidthKey, and AVVideoHeightKey.  See +assetWriterInputWithMediaType:outputSettings:sourceFormatHint: for a way to avoid having to specify a value for each of those keys.  On iOS, the only values currently supported for AVVideoCodecKey are AVVideoCodecH264 and AVVideoCodecJPEG.  AVVideoCodecH264 is not supported on iPhone 3G.  For AVVideoScalingModeKey, the value AVVideoScalingModeFit is not supported.
  */
 + (AVAssetWriterInput *)assetWriterInputWithMediaType:(NSString *)mediaType outputSettings:(NSDictionary *)outputSettings;
 
@@ -64,7 +64,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  @param mediaType
 	The media type of samples that will be accepted by the input. Media types are defined in AVMediaFormat.h.
  @param outputSettings
-	The settings used for encoding the media appended to the output.  See AVAudioSettings.h for AVMediaTypeAudio or AVVideoSettings.h for AVMediaTypeVideo and for more information on how to construct an output settings dictionary.
+	The settings used for encoding the media appended to the output.  See AVAudioSettings.h for AVMediaTypeAudio or AVVideoSettings.h for AVMediaTypeVideo and for more information on how to construct an output settings dictionary.  If you only require simple preset-based output settings, see AVOutputSettingsAssistant.
  @param sourceFormatHint
 	A hint about the format of media data that will be appended to the new input.
  @result
@@ -75,7 +75,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  
 	An NSInvalidArgumentException will be thrown if the media type of the format description does not match the media type string passed into this method.
  */
-+ (AVAssetWriterInput *)assetWriterInputWithMediaType:(NSString *)mediaType outputSettings:(NSDictionary *)outputSettings sourceFormatHint:(CMFormatDescriptionRef)sourceFormatHint NS_AVAILABLE(10_8, TBD);
++ (AVAssetWriterInput *)assetWriterInputWithMediaType:(NSString *)mediaType outputSettings:(NSDictionary *)outputSettings sourceFormatHint:(CMFormatDescriptionRef)sourceFormatHint NS_AVAILABLE(10_8, 6_0);
 
 /*!
  @method initWithMediaType:outputSettings:
@@ -85,18 +85,18 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  @param mediaType
 	The media type of samples that will be accepted by the input. Media types are defined in AVMediaFormat.h.
  @param outputSettings
-	The settings used for encoding the media appended to the output.  See AVAudioSettings.h for AVMediaTypeAudio or AVVideoSettings.h for AVMediaTypeVideo and for more information on how to construct an output settings dictionary.
+	The settings used for encoding the media appended to the output.  See AVAudioSettings.h for AVMediaTypeAudio or AVVideoSettings.h for AVMediaTypeVideo and for more information on how to construct an output settings dictionary.  If you only require simple preset-based output settings, see AVOutputSettingsAssistant.
  @result
 	An instance of AVAssetWriterInput.
 
  @discussion
 	Each new input accepts data for a new track of the AVAssetWriter's output file.  Inputs are added to an asset writer using -[AVAssetWriter addInput:].
 	
-	Passing nil for output settings instructs the input to pass through appended samples, doing no processing before they are written to the output file.  This is useful if, for example, you are appending buffers that are already in a desirable compressed format.  However, passthrough is currently supported only when writing to QuickTime Movie files (i.e. the AVAssetWriter was initialized with AVFileTypeQuickTimeMovie).  For other file types, non-nil output settings must be specified.
+	Passing nil for output settings instructs the input to pass through appended samples, doing no processing before they are written to the output file.  This is useful if, for example, you are appending buffers that are already in a desirable compressed format.  However, if not writing to a QuickTime Movie file (i.e. the AVAssetWriter was initialized with a file type other than AVFileTypeQuickTimeMovie), AVAssetWriter only supports passing through a restricted set of media types and subtypes.  In order to pass through media data to files other than AVFileTypeQuickTimeMovie, a non-NULL format hint must be provided using -initWithMediaType:outputSettings:sourceFormatHint: instead of this method.
  
-	For AVMediaTypeAudio, AVEncoderAudioQualityKey and AVSampleRateConverterAudioQualityKey are not currently supported in the outputSettings dictionary.  When using this initializer, an audio settings dictionary must be fully specified, meaning that it must contain AVFormatIDKey, AVSampleRateKey, AVNumberOfChannelsKey, and AVChannelLayoutKey.  For kAudioFormatLinearPCM, all relevant AVLinearPCM*Key keys must be included, and for kAudioFormatAppleLossless, AVEncoderBitDepthHintKey keys must be included.  See -initWithMediaType:outputSettings:sourceFormatHint: for a way to avoid having to specify a value for each of those keys.
+	For AVMediaTypeAudio the following keys are not currently supported in the outputSettings dictionary: AVEncoderAudioQualityKey, AVEncoderAudioQualityForVBRKey, AVSampleRateConverterAudioQualityKey, and AVSampleRateConverterAlgorithmKey.  When using this initializer, an audio settings dictionary must be fully specified, meaning that it must contain AVFormatIDKey, AVSampleRateKey, and AVNumberOfChannelsKey.  If no other channel layout information is available, a value of 1 for AVNumberOfChannelsKey will result in mono output and a value of 2 will result in stereo output.  If AVNumberOfChannelsKey specifies a channel count greater than 2, the dictionary must also specify a value for AVChannelLayoutKey.  For kAudioFormatLinearPCM, all relevant AVLinearPCM*Key keys must be included, and for kAudioFormatAppleLossless, AVEncoderBitDepthHintKey keys must be included.  See -initWithMediaType:outputSettings:sourceFormatHint: for a way to avoid having to specify a value for each of those keys.
  
-	For AVMediaTypeVideo, AVAssetWriterInput can only produce compressed output.  This means that the value passed in for outputSettings must follow the rules for compressed video output, as laid out in AVVideoSettings.h.  When using this initializer, a video settings dictionary must be fully specified, meaning that it must contain AVVideoCodecKey, AVVideoWidthKey, and AVVideoHeightKey.  See -initWithMediaType:outputSettings:sourceFormatHint: for a way to avoid having to specify a value for each of those keys.  On iOS, the only values currently supported for AVVideoCodecKey are AVVideoCodecH264 and AVVideoCodecJPEG.  AVVideoCodecH264 is not supported on iPhone 3G.  For AVVideoScalingModeKey, the value AVVideoScalingModeFit is not supported.
+	For AVMediaTypeVideo, any output settings dictionary must request a compressed video format.  This means that the value passed in for outputSettings must follow the rules for compressed video output, as laid out in AVVideoSettings.h.  When using this initializer, a video settings dictionary must be fully specified, meaning that it must contain AVVideoCodecKey, AVVideoWidthKey, and AVVideoHeightKey.  See -initWithMediaType:outputSettings:sourceFormatHint: for a way to avoid having to specify a value for each of those keys.  On iOS, the only values currently supported for AVVideoCodecKey are AVVideoCodecH264 and AVVideoCodecJPEG.  AVVideoCodecH264 is not supported on iPhone 3G.  For AVVideoScalingModeKey, the value AVVideoScalingModeFit is not supported.
  */
 - (id)initWithMediaType:(NSString *)mediaType outputSettings:(NSDictionary *)outputSettings;
 
@@ -108,7 +108,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  @param mediaType
 	The media type of samples that will be accepted by the input. Media types are defined in AVMediaFormat.h.
  @param outputSettings
-	The settings used for encoding the media appended to the output.  See AVAudioSettings.h for AVMediaTypeAudio or AVVideoSettings.h for AVMediaTypeVideo and for more information on how to construct an output settings dictionary.
+	The settings used for encoding the media appended to the output.  See AVAudioSettings.h for AVMediaTypeAudio or AVVideoSettings.h for AVMediaTypeVideo and for more information on how to construct an output settings dictionary.  If you only require simple preset-based output settings, see AVOutputSettingsAssistant.
  @param sourceFormatHint
 	A hint about the format of media data that will be appended to the new input.
  @result
@@ -119,7 +119,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  
 	An NSInvalidArgumentException will be thrown if the media type of the format description does not match the media type string passed into this method.
  */
-- (id)initWithMediaType:(NSString *)mediaType outputSettings:(NSDictionary *)outputSettings sourceFormatHint:(CMFormatDescriptionRef)sourceFormatHint NS_AVAILABLE(10_8, TBD);
+- (id)initWithMediaType:(NSString *)mediaType outputSettings:(NSDictionary *)outputSettings sourceFormatHint:(CMFormatDescriptionRef)sourceFormatHint NS_AVAILABLE(10_8, 6_0);
 
 /*!
  @property mediaType
@@ -149,7 +149,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  @discussion
 	AVAssetWriterInput may be able to use this hint to fill in missing output settings or perform more upfront validation.  To guarantee successful file writing, clients who specify a format hint should ensure that subsequently-appended media data are of the specified format.
  */
-@property (nonatomic, readonly) __attribute__((NSObject)) CMFormatDescriptionRef sourceFormatHint NS_AVAILABLE(10_8, TBD);
+@property (nonatomic, readonly) __attribute__((NSObject)) CMFormatDescriptionRef sourceFormatHint NS_AVAILABLE(10_8, 6_0);
 
 /*!
  @property metadata
@@ -243,7 +243,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  @param sampleBuffer
 	The CMSampleBuffer to be appended.
  @result
-	A BOOL value indicating success of appending the sample buffer. If a result of NO is returned, AVAssetWriter.error will contain more information about why apending the sample buffer failed. In the event of failure, clients may wish to invoke -[AVAssetWriter finishWriting] in order to save a partially completed asset.
+	A BOOL value indicating success of appending the sample buffer. If a result of NO is returned, clients can check the value of AVAssetWriter.status to determine whether the writing operation completed, failed, or was cancelled.  If the status is AVAssetWriterStatusFailed, AVAsset.error will contain an instance of NSError that describes the failure.
  
  @discussion
 	The timing information in the sample buffer, considered relative to the time passed to -[AVAssetWriter startSessionAtSourceTime:], will be used to determine the timing of those samples in the output file.
@@ -252,13 +252,11 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  
 	If the sample buffer contains audio data and the AVAssetWriterInput was intialized with an outputSettings dictionary then the format must be linear PCM. If the outputSettings dictionary was nil then audio data can be provided in a compressed format, and it will be passed through to the output without any re-compression. Note that advanced formats like AAC will have encoder delay present in their bitstreams. This data is inserted by the encoder and is necessary for proper decoding, but it is not meant to be played back. Clients who provide compressed audio bitstreams must use kCMSampleBufferAttachmentKey_TrimDurationAtStart to mark the encoder delay (generally restricted to the first sample buffer). Packetization can cause there to be extra audio frames in the last packet which are not meant to be played back. These remainder frames should be marked with kCMSampleBufferAttachmentKey_TrimDurationAtEnd. CMSampleBuffers obtained from AVAssetReader will already have the necessary trim attachments. Please see http://developer.apple.com/mac/library/technotes/tn2009/tn2258.html for more information about encoder delay. When attaching trims make sure that the output PTS of the sample buffer is what you expect. For example if you called -[AVAssetWriter startSessionAtSourceTime:kCMTimeZero] and you want your audio to start at time zero in the output file then make sure that the output PTS of the first non-fully trimmed audio sample buffer is kCMTimeZero.
 	
-	If the sample buffer contains a CVPixelBuffer then the choice of pixel format will affect the performance and quality of the encode. Below are some recommendations.
-
-	iOS:
-	For optimal performance the format of the pixel buffer should match one of the native formats supported by the selected video encoder. The H.264 encoder natively supports kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange and kCVPixelFormatType_420YpCbCr8BiPlanarFullRange, which should be used with video and full range input respectively. The JPEG encoder natively supports kCVPixelFormatType_422YpCbCr8FullRange. Pixel buffers not in a natively supported format will be converted internally prior to encoding when possible. Pixel format conversions within the same range (video or full) are generally faster than conversions between different ranges.
+	If the sample buffer contains a CVPixelBuffer then the choice of pixel format will affect the performance and quality of the encode. For optimal performance the format of the pixel buffer should match one of the native formats supported by the selected video encoder. Below are some recommendations:
  
-	Mac OS X:
-	kCVPixelFormatType_422YpCbCr8 is the preferred pixel format for video and is generally the most performant when encoding. If you need to work in the RGB domain then kCVPixelFormatType_32ARGB is recommended. Pixel buffers not in a natively supported format will be converted internally prior to encoding when possible.
+	The H.264 encoder natively supports kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange and kCVPixelFormatType_420YpCbCr8BiPlanarFullRange, which should be used with video and full range input respectively. The JPEG encoder on iOS natively supports kCVPixelFormatType_422YpCbCr8FullRange. For other video codecs on OSX, kCVPixelFormatType_422YpCbCr8 is the preferred pixel format for video and is generally the most performant when encoding. If you need to work in the RGB domain then kCVPixelFormatType_32BGRA is recommended on iOS and kCVPixelFormatType_32ARGB is recommended on OSX.
+
+	Pixel buffers not in a natively supported format will be converted internally prior to encoding when possible. Pixel format conversions within the same range (video or full) are generally faster than conversions between different ranges.
  
 	The ProRes encoders can preserve high bit depth sources, supporting up to 12bits/ch. ProRes 4444 can contain a mathematically lossless alpha channel and it doesn't do any chroma subsampling. This makes ProRes 4444 ideal for quality critical applications. If you are working with 8bit sources ProRes is also a good format to use due to its high image quality. Use either of the recommended pixel formats above. Note that RGB pixel formats by definition have 4:4:4 chroma sampling.
  
@@ -283,7 +281,48 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 @end
 
 
+@interface AVAssetWriterInput (AVAssetWriterInputLanguageProperties)
+
+/*!
+ @property languageCode
+ @abstract
+	Indicates the language to associate with the track corresponding to the receiver, as an ISO 639-2/T language code; can be nil.
+ 
+ @discussion
+	Also see extendedLanguageTag below.
+
+	This property cannot be set after writing on the receiver's AVAssetWriter has started.
+ */
+@property (nonatomic, copy) NSString *languageCode NS_AVAILABLE(10_9, TBD);
+
+/*!
+ @property extendedLanguageTag
+ @abstract
+	Indicates the language tag to associate with the track corresponding to the receiver, as an RFC 4646 language tag; can be nil.
+ 
+ @discussion
+	Extended language tags are normally set only when an ISO 639-2/T language code by itself is ambiguous, as in cases in which media data should be distinguished not only by language but also by the regional dialect in use or the writing system employed.
+
+	This property cannot be set after writing on the receiver's AVAssetWriter has started.	
+ */
+@property (nonatomic, copy) NSString *extendedLanguageTag NS_AVAILABLE(10_9, TBD);
+
+@end
+
+
 @interface AVAssetWriterInput (AVAssetWriterInputPropertiesForVisualCharacteristic)
+
+/*!
+ @property naturalSize
+ @abstract
+	The size specified in the output file as the natural dimensions of the visual media data for display purposes.
+ 
+ @discussion
+	If the default value, CGSizeZero, is specified, the naturalSize of the track corresponding to the receiver is set according to dimensions indicated by the format descriptions that are ultimately written to the output track.
+
+	This property cannot be set after writing on the receiver's AVAssetWriter has started.
+*/
+@property (nonatomic) CGSize naturalSize NS_AVAILABLE(10_9, TBD);
 
 /*!
  @property transform
@@ -300,7 +339,36 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 @end
 
 
+@interface AVAssetWriterInput (AVAssetWriterInputPropertiesForAudibleCharacteristic)
+
+/*!
+ @property preferredVolume
+ @abstract
+	The preferred volume level to be stored in the output file.
+ 
+ @discussion
+	The value for this property should typically be in the range of 0.0 to 1.0.  The default value is 1.0, which is equivalent to a "normal" volume level.
+ 
+	This property cannot be set after writing on the receiver's AVAssetWriter has started.
+ */
+@property (nonatomic) float preferredVolume NS_AVAILABLE(10_9, TBD);
+
+@end
+
+
 @interface AVAssetWriterInput (AVAssetWriterInputFileTypeSpecificProperties)
+
+/*!
+ @property marksOutputTrackAsEnabled
+ @abstract
+	For file types that support enabled and disabled tracks, such as QuickTime Movie files, specifies whether the track corresponding to the receiver should be enabled by default for playback and processing. The default value is YES.
+ 
+ @discussion
+	When an input group is added to an AVAssetWriter (see -[AVAssetWriter addInputGroup:]), the value of marksOutputTrackAsEnabled will automatically be set to YES for the default input and set to NO for all of the other inputs in the group.
+
+	This property cannot be set after writing on the receiver's AVAssetWriter has started.
+ */
+@property (nonatomic) BOOL marksOutputTrackAsEnabled NS_AVAILABLE(10_9, TBD);
 
 /*!
  @property mediaTimeScale
@@ -313,6 +381,43 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 	This property cannot be set after writing has started.
  */
 @property (nonatomic) CMTimeScale mediaTimeScale NS_AVAILABLE(10_7, 4_3);
+
+@end
+
+
+@interface AVAssetWriterInput (AVAssetWriterInputTrackAssociations)
+
+/*!
+ @method canAddTrackAssociationWithTrackOfInput:type:
+ @abstract
+	Tests whether an association between the tracks corresponding to a pair of inputs is valid.
+
+ @param input
+	The instance of AVAssetWriterInput with a corresponding track to associate with track corresponding with the receiver.
+ @param trackAssociationType
+	The type of track association to test. Common track association types, such as AVTrackAssociationTypeTimecode, are defined in AVAssetTrack.h.
+
+ @discussion
+	If the type of association requires tracks of specific media types that don't match the media types of the inputs, or if the output file type does not support track associations, -canAddTrackAssociationWithTrackOfInput:type: will return NO.
+ */
+- (BOOL)canAddTrackAssociationWithTrackOfInput:(AVAssetWriterInput *)input type:(NSString *)trackAssociationType NS_AVAILABLE(10_9, TBD);
+
+/*!
+ @method addTrackAssociationWithTrackOfInput:type:
+ @abstract
+	Associates the track corresponding to the specified input with the track corresponding with the receiver.
+
+ @param input
+	The instance of AVAssetWriterInput with a corresponding track to associate with track corresponding to the receiver.
+ @param trackAssociationType
+	The type of track association to add. Common track association types, such as AVTrackAssociationTypeTimecode, are defined in AVAssetTrack.h.
+
+ @discussion
+	If the type of association requires tracks of specific media types that don't match the media types of the inputs, or if the output file type does not support track associations, an NSInvalidArgumentException is raised.
+
+	Track associations cannot be added after writing on the receiver's AVAssetWriter has started.
+ */
+- (void)addTrackAssociationWithTrackOfInput:(AVAssetWriterInput *)input type:(NSString *)trackAssociationType NS_AVAILABLE(10_9, TBD);
 
 @end
 
@@ -421,17 +526,17 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  @param presentationTime
 	The presentation time for the pixel buffer to be appended.  This time will be considered relative to the time passed to -[AVAssetWriter startSessionAtSourceTime:] to determine the timing of the frame in the output file.
  @result
-	A BOOL value indicating success of appending the pixel buffer. If a result of NO is returned, AVAssetWriter.error will contain more information about why apending the pixel buffer failed. In the event of failure, clients may wish to invoke -[AVAssetWriter finishWriting] in order to save a partially completed asset.
+	A BOOL value indicating success of appending the pixel buffer. If a result of NO is returned, clients can check the value of AVAssetWriter.status to determine whether the writing operation completed, failed, or was cancelled.  If the status is AVAssetWriterStatusFailed, AVAsset.error will contain an instance of NSError that describes the failure.
 
  @discussion
 	The receiver will retain the CVPixelBuffer until it is done with it, and then release it.  Do not modify a CVPixelBuffer or its contents after you have passed it to this method.
 	
-	iOS:
-	For optimal performance the format of the pixel buffer should match one of the native formats supported by the selected video encoder. The H.264 encoder natively supports kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange and kCVPixelFormatType_420YpCbCr8BiPlanarFullRange, which should be used with video and full range input respectively. The JPEG encoder natively supports kCVPixelFormatType_422YpCbCr8FullRange. Pixel buffers not in a natively supported format will be converted internally prior to encoding when possible. Pixel format conversions within the same range (video or full) are generally faster than conversions between different ranges.
+	For optimal performance the format of the pixel buffer should match one of the native formats supported by the selected video encoder. Below are some recommendations:
  
-	Mac OS X:
-	kCVPixelFormatType_422YpCbCr8 is the preferred pixel format for video and is generally the most performant when encoding. If you need to work in the RGB domain then kCVPixelFormatType_32ARGB is recommended. Pixel buffers not in a natively supported format will be converted internally prior to encoding when possible.
- 
+	The H.264 encoder natively supports kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange and kCVPixelFormatType_420YpCbCr8BiPlanarFullRange, which should be used with video and full range input respectively. The JPEG encoder on iOS natively supports kCVPixelFormatType_422YpCbCr8FullRange. For other video codecs on OSX, kCVPixelFormatType_422YpCbCr8 is the preferred pixel format for video and is generally the most performant when encoding. If you need to work in the RGB domain then kCVPixelFormatType_32BGRA is recommended on iOS and kCVPixelFormatType_32ARGB is recommended on OSX.
+
+	Pixel buffers not in a natively supported format will be converted internally prior to encoding when possible. Pixel format conversions within the same range (video or full) are generally faster than conversions between different ranges.
+
 	The ProRes encoders can preserve high bit depth sources, supporting up to 12bits/ch. ProRes 4444 can contain a mathematically lossless alpha channel and it doesn't do any chroma subsampling. This makes ProRes 4444 ideal for quality critical applications. If you are working with 8bit sources ProRes is also a good format to use due to its high image quality. Use either of the recommended pixel formats above. Note that RGB pixel formats by definition have 4:4:4 chroma sampling.
  
  	If you are working with high bit depth sources the following yuv pixel formats are recommended when encoding to ProRes: kCVPixelFormatType_4444AYpCbCr16, kCVPixelFormatType_422YpCbCr16, and kCVPixelFormatType_422YpCbCr10. When working in the RGB domain kCVPixelFormatType_64ARGB is recommended. Scaling and color matching are not currently supported when using AVAssetWriter with any of these high bit depth pixel formats. Please make sure that your track's output settings dictionary specifies the same width and height as the buffers you will be appending. Do not include AVVideoScalingModeKey or AVVideoColorPropertiesKey.

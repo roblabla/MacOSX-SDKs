@@ -1,5 +1,5 @@
 /*	NSXPCConnection.h
-        Copyright (c) 2011-2012, Apple Inc. All rights reserved.
+        Copyright (c) 2011-2013, Apple Inc. All rights reserved.
  */
 
 #import <dispatch/dispatch.h>
@@ -22,7 +22,7 @@
 
 #if NS_BLOCKS_AVAILABLE
 // Returns a proxy object which will invoke the error handling block if an error occurs on the connection. If the message sent to the proxy has a reply handler, then either the error handler or the reply handler will be called exactly once. This proxy object will also conform with the NSXPCProxyCreating protocol.
-- (id)remoteObjectProxyWithErrorHandler:(void (^)(NSError *))handler;
+- (id)remoteObjectProxyWithErrorHandler:(void (^)(NSError *error))handler;
 #endif
 
 @end
@@ -35,16 +35,19 @@ typedef NS_OPTIONS(NSUInteger, NSXPCConnectionOptions) {
     NSXPCConnectionPrivileged = (1 << 12UL)
 } NS_ENUM_AVAILABLE(10_8, 6_0);
 
-// This object is the main configuration mechanism for the communication between two processes.
+// This object is the main configuration mechanism for the communication between two processes. Each NSXPCConnection instance has a private serial queue. This queue is used when sending messages to reply handlers, interruption handlers, and invalidation handlers.
 NS_CLASS_AVAILABLE(10_8, 6_0)
 @interface NSXPCConnection : NSObject <NSXPCProxyCreating> {
 @private
     void *_xconnection;
-    dispatch_queue_t _internalQueue;
+    id _incomingReplyInfo;
     dispatch_queue_t _userQueue;
-    uint64_t _state;
+    uint32_t _state;
+    uint32_t _state2;
+#if NS_BLOCKS_AVAILABLE
     void (^_interruptionHandler)();
     void (^_invalidationHandler)();
+#endif
     id _exportInfo;
     id _replyInfo;
     id _importInfo;
@@ -54,8 +57,8 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
     NSXPCInterface *_remoteObjectInterface;
     NSString *_serviceName;
     NSXPCListenerEndpoint *_endpoint;
-    id _reserved2;
-    id _reserved3;
+    id _eCache;
+    id _dCache;
 }
 
 // Initialize an NSXPCConnection that will connect to the specified service name.
@@ -81,12 +84,12 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
 // Get a proxy for the remote object (that is, the object exported from the other side of this connection). See descriptions in NSXPCProxyCreating for more details.
 - (id)remoteObjectProxy;
 #if NS_BLOCKS_AVAILABLE
-- (id)remoteObjectProxyWithErrorHandler:(void (^)(NSError *))handler;
+- (id)remoteObjectProxyWithErrorHandler:(void (^)(NSError *error))handler;
 
-// The interruption handler will be called if the remote process exits or crashes. It may be possible to re-establish the connection by simply sending another message. The handler will be invoked on the same queue as reply messages and other handlers, and it will always be executed last.
+// The interruption handler will be called if the remote process exits or crashes. It may be possible to re-establish the connection by simply sending another message. The handler will be invoked on the same queue as reply messages and other handlers, and it will always be executed after any error handlers for remote proxies with outstanding requests.
 @property (copy) void (^interruptionHandler)(void);
 
-// The invalidation handler will be called if the connection can not be formed or the connection has terminated and may not be re-established. The handler will be invoked on the same queue as reply messages and other handlers, and it will always be executed last (after the interruption handler, if required). You may not send messages over the connection from within an invalidation handler block.
+// The invalidation handler will be called if the connection can not be formed or the connection has terminated and may not be re-established. The handler will be invoked on the same queue as reply messages and other handlers. It will always be executed last, after any error handlers for remote proxies with outstanding requests. You may not send messages over the connection from within an invalidation handler block.
 @property (copy) void (^invalidationHandler)(void);
 
 #endif
@@ -97,7 +100,7 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
 // Suspend the connection. Suspends must be balanced with resumes before the connection may be invalidated.
 - (void)suspend;
 
-// Invalidate the connection. All outstanding reply blocks, error handling blocks, and invalidation blocks will be called on the message handling queue. The connection must be invalidated before it is deallocated. After a connection is invalidated, no more messages may be sent or received.
+// Invalidate the connection. All outstanding error handling blocks and invalidation blocks will be called on the message handling queue. The connection must be invalidated before it is deallocated. After a connection is invalidated, no more messages may be sent or received.
 - (void)invalidate;
 
 // These attributes describe the security attributes of the connection. They may be used by the listener delegate to accept or reject connections.
@@ -109,13 +112,13 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
 @end
 
 
-
+// Each NSXPCListener instance has a private serial queue. This queue is used when sending the delegate messages.
 NS_CLASS_AVAILABLE(10_8, 6_0)
 @interface NSXPCListener : NSObject {
 @private
     void *_xconnection;
     dispatch_queue_t _userQueue;
-    dispatch_queue_t _internalQueue;
+    void *reserved0;
     id <NSXPCListenerDelegate> _delegate;
     NSString *_serviceName;
     uint64_t _state;
@@ -163,7 +166,7 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
 @interface NSXPCInterface : NSObject {
 @private
     Protocol *_protocol;
-    NSMutableDictionary *_methods;
+    CFMutableDictionaryRef _methods2;
     id _reserved1;
 }
 

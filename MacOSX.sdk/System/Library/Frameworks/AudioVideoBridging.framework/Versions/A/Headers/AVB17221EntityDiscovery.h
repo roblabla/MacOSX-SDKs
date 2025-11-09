@@ -88,17 +88,17 @@ NS_CLASS_AVAILABLE(10_8, NA)
 
 /*!
 	@method		discoverEntities
-	@abstract	Triggers the IEEE P1722.1 ADP service to perform an ENTITY_DISCOVER for all entities (a guid of 0).
+	@abstract	Triggers the IEEE P1722.1 ADP service to perform an ENTITY_DISCOVER for all entities (an entity_id of 0).
 	@result		A boolean indicating if the call succedded.
  */
 - (BOOL)discoverEntities;
 /*!
 	@method		discoverEntity:
 	@abstract	Triggers the IEEE P1722.1 ADP service to perform an ENTITY_DISCOVER for a specified entity.
-	@param		entityGUID	The GUID of the entity to look for.
+	@param		entityID	The entity_id of the entity to look for.
 	@result		A boolean indicating if the call succedded.
  */
-- (BOOL)discoverEntity:(uint64_t)entityGUID;
+- (BOOL)discoverEntity:(uint64_t)entityID;
 
 /*!
 	@method		addLocalEntity:error:
@@ -126,6 +126,16 @@ NS_CLASS_AVAILABLE(10_8, NA)
 	@param		error			If the request couldn't be completed, on return it contains an instance of NSError that describes the reason why.
 	@result		A boolean indicating if the entity was updated.
  */
-- (BOOL)changeEntityWithGUID:(uint64_t)entityGUID toNewASGrandmasterID:(uint64_t)asGrandmasterID error:(NSError **)error;
+- (BOOL)changeEntityWithGUID:(uint64_t)entityGUID toNewASGrandmasterID:(uint64_t)asGrandmasterID error:(NSError **)error NS_DEPRECATED(10_8, 10_9, NA, NA);
+
+/*!
+	@method		changeEntityWithEntityID:toNewGPTPGrandmasterID:
+	@abstract	Change the gptp_grandmaster_id value of the entity when the grandmaster changes.
+	@param		entityID		The entity_id of the entity to change.
+	@param		gPTPGrandmasterID	The new IEEE Std 802.1AS grandmaster ID.
+	@param		error			If the request couldn't be completed, on return it contains an instance of NSError that describes the reason why.
+	@result		A boolean indicating if the entity was updated.
+ */
+- (BOOL)changeEntityWithEntityID:(uint64_t)entityID toNewGPTPGrandmasterID:(uint64_t)gPTPGrandmasterID error:(NSError **)error NS_AVAILABLE(10_9, NA);
 
 @end

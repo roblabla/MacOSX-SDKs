@@ -1,5 +1,5 @@
 /*	NSTextCheckingResult.h
-	Copyright (c) 2008-2012, Apple Inc. All rights reserved.
+	Copyright (c) 2008-2013, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -26,11 +26,12 @@ typedef NS_OPTIONS(uint64_t, NSTextCheckingType) {    // a single type
     NSTextCheckingTypeTransitInformation NS_ENUM_AVAILABLE(10_7, 4_0) = 1ULL << 12            // transit (e.g. flight) info detection
 };
 
-typedef NS_OPTIONS(uint64_t, NSTextCheckingTypes) {   // a combination of types
+enum {
     NSTextCheckingAllSystemTypes    = 0xffffffffULL,        // the first 32 types are reserved
     NSTextCheckingAllCustomTypes    = 0xffffffffULL << 32,  // clients may use the remainder for their own purposes
     NSTextCheckingAllTypes          = (NSTextCheckingAllSystemTypes | NSTextCheckingAllCustomTypes)
 };
+typedef uint64_t NSTextCheckingTypes;   // a combination of types
 
 NS_CLASS_AVAILABLE(10_6, 4_0)
 @interface NSTextCheckingResult : NSObject <NSCopying, NSCoding>
@@ -52,6 +53,7 @@ NS_CLASS_AVAILABLE(10_6, 4_0)
 @property (readonly) NSDictionary *components NS_AVAILABLE(10_7, 4_0);
 @property (readonly) NSURL *URL;
 @property (readonly) NSString *replacementString;
+@property (readonly) NSArray *alternativeStrings NS_AVAILABLE(10_9, 7_0);
 @property (readonly) NSRegularExpression *regularExpression NS_AVAILABLE(10_7, 4_0);
 @property (readonly) NSString *phoneNumber NS_AVAILABLE(10_7, 4_0);
 
@@ -94,6 +96,7 @@ FOUNDATION_EXPORT NSString * const NSTextCheckingFlightKey NS_AVAILABLE(10_7, 4_
 + (NSTextCheckingResult *)dashCheckingResultWithRange:(NSRange)range replacementString:(NSString *)replacementString;
 + (NSTextCheckingResult *)replacementCheckingResultWithRange:(NSRange)range replacementString:(NSString *)replacementString;
 + (NSTextCheckingResult *)correctionCheckingResultWithRange:(NSRange)range replacementString:(NSString *)replacementString;
++ (NSTextCheckingResult *)correctionCheckingResultWithRange:(NSRange)range replacementString:(NSString *)replacementString alternativeStrings:(NSArray *)alternativeStrings     NS_AVAILABLE(10_9, 7_0);
 + (NSTextCheckingResult *)regularExpressionCheckingResultWithRanges:(NSRangePointer)ranges count:(NSUInteger)count regularExpression:(NSRegularExpression *)regularExpression   NS_AVAILABLE(10_7, 4_0);
 + (NSTextCheckingResult *)phoneNumberCheckingResultWithRange:(NSRange)range phoneNumber:(NSString *)phoneNumber             NS_AVAILABLE(10_7, 4_0);
 + (NSTextCheckingResult *)transitInformationCheckingResultWithRange:(NSRange)range components:(NSDictionary *)components    NS_AVAILABLE(10_7, 4_0);

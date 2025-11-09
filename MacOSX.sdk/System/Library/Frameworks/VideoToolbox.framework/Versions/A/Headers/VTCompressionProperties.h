@@ -2,9 +2,9 @@
 	File:  VTCompressionProperties.h
 	
 	Framework:  VideoToolbox
- 
-    Copyright 2007-2012 Apple Inc. All rights reserved.
-  
+	
+	Copyright 2007-2013 Apple Inc. All rights reserved.
+	
 	Standard Video Toolbox compression properties.
 */
 
@@ -12,6 +12,7 @@
 #define VTCOMPRESSIONPROPERTIES_H
 
 #include <CoreMedia/CMBase.h>
+#include <VideoToolbox/VTBase.h>
 
 #include <CoreFoundation/CoreFoundation.h>
 
@@ -49,7 +50,7 @@ extern "C"
 	@discussion
 		This number may decrease asynchronously.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_NumberOfPendingFrames AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // Read-only, CFNumber<int>	
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_NumberOfPendingFrames VT_AVAILABLE_STARTING(10_8); // Read-only, CFNumber<int>	
 	
 /*!
 	@constant	kVTCompressionPropertyKey_PixelBufferPoolIsShared
@@ -60,7 +61,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_NumberOfPendingFrames AVAI
 		This is false if separate pools are used because the video encoder's 
 		and the client's pixel buffer attributes were incompatible.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_PixelBufferPoolIsShared AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // Read-only, CFBoolean
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_PixelBufferPoolIsShared VT_AVAILABLE_STARTING(10_8); // Read-only, CFBoolean
 
 /*!
 	@constant	kVTCompressionPropertyKey_VideoEncoderPixelBufferAttributes
@@ -69,7 +70,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_PixelBufferPoolIsShared AV
 	@discussion
 		You can use these to create a pixel buffer pool for source pixel buffers. 
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_VideoEncoderPixelBufferAttributes AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // Read-only, CFDictionary
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_VideoEncoderPixelBufferAttributes VT_AVAILABLE_STARTING(10_8); // Read-only, CFDictionary
 
 // Standard properties describing content.
 
@@ -95,8 +96,13 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_VideoEncoderPixelBufferAtt
 		frame, 2 indicates that at least every other frame must be a key
 		frame, etc.
 		See also kVTCompressionPropertyKey_AllowTemporalCompression.
+		
+		This key can be set in conjunction with 
+		kVTCompressionPropertyKey_MaxKeyFrameIntervalDuration,
+		and both limits will be enforced - requiring a keyframe every X
+		frames or every Y seconds, whichever comes first.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MaxKeyFrameInterval AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // Read/write, CFNumber<int>, Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MaxKeyFrameInterval VT_AVAILABLE_STARTING(10_8); // Read/write, CFNumber<int>, Optional
 
 /*!
 	@constant	kVTCompressionPropertyKey_MaxKeyFrameIntervalDuration
@@ -105,8 +111,15 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MaxKeyFrameInterval AVAILA
 	@discussion
 		Zero by default, which means no limit.  
 		This property is particularly useful when the frame rate is variable.
+		See kVTCompressionPropertyKey_MaxKeyFrameInterval for more discussion
+		of key frames.
+		
+		This key can be set in conjunction with 
+		kVTCompressionPropertyKey_MaxKeyFrameInterval,
+		and both limits will be enforced - requiring a keyframe every X
+		frames or every Y seconds, whichever comes first.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MaxKeyFrameIntervalDuration AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // Read/write, CFNumber<seconds>, Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MaxKeyFrameIntervalDuration VT_AVAILABLE_STARTING(10_8); // Read/write, CFNumber<seconds>, Optional
 
 
 /*!
@@ -116,7 +129,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MaxKeyFrameIntervalDuratio
 	@discussion
 		True by default.  Set this to false to require key-frame-only compression.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_AllowTemporalCompression AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // Read/Write, CFBoolean, Optional, defaults to true
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_AllowTemporalCompression VT_AVAILABLE_STARTING(10_8); // Read/Write, CFBoolean, Optional, defaults to true
 
 /*!
 	@constant	kVTCompressionPropertyKey_AllowFrameReordering
@@ -129,7 +142,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_AllowTemporalCompression A
 		they were presented to the video encoder (the display order). 
 		True by default.  Set this to false to prevent frame reordering.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_AllowFrameReordering AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // Read/Write, CFBoolean, Optional, defaults to true
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_AllowFrameReordering VT_AVAILABLE_STARTING(10_8); // Read/Write, CFBoolean, Optional, defaults to true
 
 #pragma mark Rate control
 
@@ -145,7 +158,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_AllowFrameReordering AVAIL
 		information is provided for source frames, and that some codecs do
 		not support limiting to specified bit rates.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_AverageBitRate AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // Read/write, CFNumber<SInt32>, Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_AverageBitRate VT_AVAILABLE_STARTING(10_8); // Read/write, CFNumber<SInt32>, Optional
 
 /*!
 	@constant	kVTCompressionPropertyKey_DataRateLimits
@@ -163,7 +176,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_AverageBitRate AVAILABLE_M
 		information is provided for source frames, and that some codecs do
 		not support limiting to specified data rates.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_DataRateLimits AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // Read/write, CFArray[CFNumber], [bytes, seconds, bytes, seconds...], Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_DataRateLimits VT_AVAILABLE_STARTING(10_8); // Read/write, CFArray[CFNumber], [bytes, seconds, bytes, seconds...], Optional
 
 /*!
 	@constant	kVTCompressionPropertyKey_Quality
@@ -176,7 +189,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_DataRateLimits AVAILABLE_M
 		high = 0.75, and 1.0 implies lossless compression for encoders that
 		support it.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_Quality AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // Read/write, CFNumber<Float>, Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_Quality VT_AVAILABLE_STARTING(10_8); // Read/write, CFNumber<Float>, Optional
 
 /*!
 	@constant	kVTCompressionPropertyKey_MoreFramesBeforeStart
@@ -193,7 +206,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_Quality AVAILABLE_MAC_OS_X
 		segments can be concatenated smoothly -- for example, avoiding
 		data rate spikes where segments are joined. 
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MoreFramesBeforeStart AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // Read/write, CFBoolean, Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MoreFramesBeforeStart VT_AVAILABLE_STARTING(10_8); // Read/write, CFBoolean, Optional
 
 /*!
 	@constant	kVTCompressionPropertyKey_MoreFramesAfterEnd
@@ -206,7 +219,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MoreFramesBeforeStart AVAI
 		stand-alone session, or if this session will encode the last
 		segment of a multi-segment compression. By default, false.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MoreFramesAfterEnd AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // Read/write, CFBoolean, Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MoreFramesAfterEnd VT_AVAILABLE_STARTING(10_8); // Read/write, CFBoolean, Optional
 
 #pragma mark Bitstream configuration
 
@@ -218,38 +231,77 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MoreFramesAfterEnd AVAILAB
 		Available profiles and levels vary across formats and between video encoders.
 		Video encoders should use standard keys where available, and follow standard patterns where not.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ProfileLevel AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // Read/write, CFString (enumeration), Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ProfileLevel VT_AVAILABLE_STARTING(10_8); // Read/write, CFString (enumeration), Optional
 
-VT_EXPORT const CFStringRef kVTProfileLevel_H264_Baseline_1_3 AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
-VT_EXPORT const CFStringRef kVTProfileLevel_H264_Baseline_3_0 AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
-VT_EXPORT const CFStringRef kVTProfileLevel_H264_Baseline_3_1 AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
-VT_EXPORT const CFStringRef kVTProfileLevel_H264_Baseline_3_2 AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
-VT_EXPORT const CFStringRef kVTProfileLevel_H264_Baseline_4_1 AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
-VT_EXPORT const CFStringRef kVTProfileLevel_H264_Main_3_0 AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
-VT_EXPORT const CFStringRef kVTProfileLevel_H264_Main_3_1 AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
-VT_EXPORT const CFStringRef kVTProfileLevel_H264_Main_3_2 AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
-VT_EXPORT const CFStringRef kVTProfileLevel_H264_Main_4_0 AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
-VT_EXPORT const CFStringRef kVTProfileLevel_H264_Main_4_1 AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
-VT_EXPORT const CFStringRef kVTProfileLevel_H264_Main_5_0 AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
-VT_EXPORT const CFStringRef kVTProfileLevel_H264_Extended_5_0 AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
-VT_EXPORT const CFStringRef kVTProfileLevel_H264_High_5_0 AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_Baseline_1_3 VT_AVAILABLE_STARTING(10_8);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_Baseline_3_0 VT_AVAILABLE_STARTING(10_8);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_Baseline_3_1 VT_AVAILABLE_STARTING(10_8);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_Baseline_3_2 VT_AVAILABLE_STARTING(10_8);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_Baseline_4_0 VT_AVAILABLE_STARTING(10_9);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_Baseline_4_1 VT_AVAILABLE_STARTING(10_8);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_Baseline_4_2 VT_AVAILABLE_STARTING(10_9);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_Baseline_5_0 VT_AVAILABLE_STARTING(10_9);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_Baseline_5_1 VT_AVAILABLE_STARTING(10_9);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_Baseline_5_2 VT_AVAILABLE_STARTING(10_9);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_Baseline_AutoLevel VT_AVAILABLE_STARTING(10_9);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_Main_3_0 VT_AVAILABLE_STARTING(10_8);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_Main_3_1 VT_AVAILABLE_STARTING(10_8);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_Main_3_2 VT_AVAILABLE_STARTING(10_8);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_Main_4_0 VT_AVAILABLE_STARTING(10_8);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_Main_4_1 VT_AVAILABLE_STARTING(10_8);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_Main_4_2 VT_AVAILABLE_STARTING(10_9);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_Main_5_0 VT_AVAILABLE_STARTING(10_8);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_Main_5_1 VT_AVAILABLE_STARTING(10_9);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_Main_5_2 VT_AVAILABLE_STARTING(10_9);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_Main_AutoLevel VT_AVAILABLE_STARTING(10_9);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_Extended_5_0 VT_AVAILABLE_STARTING(10_8);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_Extended_AutoLevel VT_AVAILABLE_STARTING(10_9);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_High_3_0 VT_AVAILABLE_STARTING(10_9);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_High_3_1 VT_AVAILABLE_STARTING(10_9);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_High_3_2 VT_AVAILABLE_STARTING(10_9);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_High_4_0 VT_AVAILABLE_STARTING(10_9);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_High_4_1 VT_AVAILABLE_STARTING(10_9);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_High_4_2 VT_AVAILABLE_STARTING(10_9);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_High_5_0 VT_AVAILABLE_STARTING(10_8);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_High_5_1 VT_AVAILABLE_STARTING(10_9);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_High_5_2 VT_AVAILABLE_STARTING(10_9);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_High_AutoLevel VT_AVAILABLE_STARTING(10_9);
 
-VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_Simple_L0 AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
-VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_Simple_L1 AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
-VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_Simple_L2 AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
-VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_Simple_L3 AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
-VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_Main_L2 AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
-VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_Main_L3 AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
-VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_Main_L4 AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
-VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_AdvancedSimple_L0 AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
-VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_AdvancedSimple_L1 AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
-VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_AdvancedSimple_L2 AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
-VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_AdvancedSimple_L3 AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
-VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_AdvancedSimple_L4 AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
+VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_Simple_L0 VT_AVAILABLE_STARTING(10_8);
+VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_Simple_L1 VT_AVAILABLE_STARTING(10_8);
+VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_Simple_L2 VT_AVAILABLE_STARTING(10_8);
+VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_Simple_L3 VT_AVAILABLE_STARTING(10_8);
+VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_Main_L2 VT_AVAILABLE_STARTING(10_8);
+VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_Main_L3 VT_AVAILABLE_STARTING(10_8);
+VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_Main_L4 VT_AVAILABLE_STARTING(10_8);
+VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_AdvancedSimple_L0 VT_AVAILABLE_STARTING(10_8);
+VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_AdvancedSimple_L1 VT_AVAILABLE_STARTING(10_8);
+VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_AdvancedSimple_L2 VT_AVAILABLE_STARTING(10_8);
+VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_AdvancedSimple_L3 VT_AVAILABLE_STARTING(10_8);
+VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_AdvancedSimple_L4 VT_AVAILABLE_STARTING(10_8);
 
-VT_EXPORT const CFStringRef kVTProfileLevel_H263_Profile0_Level10 AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
-VT_EXPORT const CFStringRef kVTProfileLevel_H263_Profile0_Level45 AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
-VT_EXPORT const CFStringRef kVTProfileLevel_H263_Profile3_Level45 AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
+VT_EXPORT const CFStringRef kVTProfileLevel_H263_Profile0_Level10 VT_AVAILABLE_STARTING(10_8);
+VT_EXPORT const CFStringRef kVTProfileLevel_H263_Profile0_Level45 VT_AVAILABLE_STARTING(10_8);
+VT_EXPORT const CFStringRef kVTProfileLevel_H263_Profile3_Level45 VT_AVAILABLE_STARTING(10_8);
+
+
+/*!
+	 @constant	kVTCompressionPropertyKey_H264EntropyMode
+	 @abstract
+		The entropy encoding mode for H.264 compression.
+	 @discussion
+		If supported by an H.264 encoder, this property controls whether the encoder should use
+		Context-based Adaptive Variable Length Coding (CAVLC) or Context-based Adaptive Binary Arithmetic Coding (CABAC).
+		CABAC generally gives better compression at the expense of higher computational overhead.
+		The default value is encoder-specific and may change depending on other encoder settings.
+		Care should be taken when using this property -- changes may result in a configuration
+		which is not compatible with a requested Profile and Level.  Results in this case are undefined,
+		and could include encode errors or a non-compliant output stream.
+*/
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_H264EntropyMode VT_AVAILABLE_STARTING(10_9);	// Read/write, CFString, optional
+VT_EXPORT const CFStringRef kVTH264EntropyMode_CAVLC VT_AVAILABLE_STARTING(10_9);
+VT_EXPORT const CFStringRef kVTH264EntropyMode_CABAC VT_AVAILABLE_STARTING(10_9);
+	
 
 /*!
 	@constant	kVTCompressionPropertyKey_Depth
@@ -259,7 +311,7 @@ VT_EXPORT const CFStringRef kVTProfileLevel_H263_Profile3_Level45 AVAILABLE_MAC_
 		This property is only supported by video encoders for formats that are 
 		tied to particular pixel formats (eg, 16-bit RGB, 24-bit RGB).
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_Depth AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // Read/write, CFNumber (CMPixelFormatType), Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_Depth VT_AVAILABLE_STARTING(10_8); // Read/write, CFNumber (CMPixelFormatType), Optional
 
 #pragma mark Runtime restrictions
 
@@ -277,7 +329,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_Depth AVAILABLE_MAC_OS_X_V
 		The default is kVTUnlimitedFrameDelayCount, which sets no limit
 		on the compression window.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MaxFrameDelayCount AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // Read/write, CFNumber, Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MaxFrameDelayCount VT_AVAILABLE_STARTING(10_8); // Read/write, CFNumber, Optional
 enum { kVTUnlimitedFrameDelayCount = -1 };
 	
 /*!
@@ -289,8 +341,19 @@ enum { kVTUnlimitedFrameDelayCount = -1 };
 		slices produced by the encoder, where possible.
 		By default, no limit is specified.  A value of zero implies default behavior.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MaxH264SliceBytes AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // Read/write, CFNumber<SInt32>, Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MaxH264SliceBytes VT_AVAILABLE_STARTING(10_8); // Read/write, CFNumber<SInt32>, Optional
 
+/*!
+	@constant	kVTCompressionPropertyKey_RealTime
+	@abstract
+		Hints the video encoder that compression is, or is not, being performed in real time.
+	@discussion
+		For offline compression, clients may set this property to kCFBooleanFalse, which indicates that 
+		it is OK for the video encoder to work slower than real time in order to produce a better result.
+		For real-time compression, clients may set this property to kCFBooleanTrue to recommend that encoding stay timely.
+		By default, this property is NULL, indicating unknown.  
+*/
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_RealTime VT_AVAILABLE_STARTING(10_9); // Read/write, CFBoolean or NULL, Optional, default NULL
 
 
 #pragma mark Hints
@@ -307,7 +370,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MaxH264SliceBytes AVAILABL
 		The default is 0, which indicates that the number of source frames
 		is not known.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_SourceFrameCount AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // Read/write, CFNumber, Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_SourceFrameCount VT_AVAILABLE_STARTING(10_8); // Read/write, CFNumber, Optional
 
 /*!
 	@constant	kVTCompressionPropertyKey_ExpectedFrameRate
@@ -320,7 +383,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_SourceFrameCount AVAILABLE
 		The actual frame rate will depend on frame durations and may vary. 
 		By default, this is zero, indicating "unknown".
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ExpectedFrameRate AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // Read/write, CFNumber, Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ExpectedFrameRate VT_AVAILABLE_STARTING(10_8); // Read/write, CFNumber, Optional
 
 /*!
 	@constant	kVTCompressionPropertyKey_ExpectedDuration
@@ -329,8 +392,54 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ExpectedFrameRate AVAILABL
 	@discussion
 		By default, this is zero, indicating "unknown".
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ExpectedDuration AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // Read/write, CFNumber(seconds), Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ExpectedDuration VT_AVAILABLE_STARTING(10_8); // Read/write, CFNumber(seconds), Optional
 
+
+#pragma mark Hardware acceleration
+
+/*!
+	@constant	kVTVideoEncoderSpecification_EnableHardwareAcceleratedVideoEncoder
+	@abstract
+		If set to kCFBooleanTrue, use a hardware accelerated video encoder if available.  If set to
+		kCFBooleanFalse, hardware encode will never be used.
+	@discussion
+		This key is set in the encoderSpecification passed in to VTCompressionSessionCreate.  Set it
+		to kCFBooleanTrue to allow hardware accelerated encode.  To specifically prevent hardware encode,
+		this property can be set to kCFBooleanFalse.
+		This is useful for clients doing realtime encode operations to allow the VideoToolbox
+		to choose the optimal encode path.
+*/
+VT_EXPORT const CFStringRef kVTVideoEncoderSpecification_EnableHardwareAcceleratedVideoEncoder VT_AVAILABLE_STARTING(10_9); // CFBoolean, Optional
+
+/*!
+	@constant	kVTVideoEncoderSpecification_RequireHardwareAcceleratedVideoEncoder
+	@abstract
+		If set to kCFBooleanTrue, only use hardware encode and return an error if this isn't possible.
+		Setting this key automatically implies kVTVideoEncoderSpecification_EnableHardwareAcceleratedVideoEncoder -- 
+		there is no need to set both and the Enable key does nothing if the Require key is set.
+	@discussion
+		This key is set in the encoderSpecification passed in to VTCompressionSessionCreate.  Set it
+		to kCFBooleanTrue to require hardware accelerated encode.  If hardware acceleration is not
+		possible, the VTCompressionSessionCreate call will fail.
+		This key is useful for clients that have their own software encode implementation or
+		those that may want to configure software and hardware encode sessions differently.
+		Hardware acceleration may be unavailable for a number of reasons.  A few common cases are:
+			- the machine does not have hardware acceleration capabilities
+			- the requested encoding format or encoding configuration is not supported
+			- the hardware encoding resources on the machine are busy
+*/
+VT_EXPORT const CFStringRef kVTVideoEncoderSpecification_RequireHardwareAcceleratedVideoEncoder VT_AVAILABLE_STARTING(10_9); // CFBoolean, Optional
+
+/*!
+	@constant	kVTCompressionPropertyKey_UsingHardwareAcceleratedVideoEncoder
+	@abstract
+		If set to kCFBooleanTrue, a hardware accelerated video encoder is being used.
+	@discussion
+		You can query this property using VTSessionCopyProperty after you have enabled hardware
+		accelerated encode using kVTVideoEncoderSpecification_EnableHardwareAcceleratedVideoEncoder
+		to see if a hardware accelerated encoder was selected.
+*/
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_UsingHardwareAcceleratedVideoEncoder VT_AVAILABLE_STARTING(10_9); // CFBoolean, Read; assumed false by default
 
 #pragma mark Per-frame configuration
 	
@@ -345,7 +454,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ExpectedDuration AVAILABLE
 		Note that it may not be possible for the encoder to accomodate all
 		requests.
 */
-VT_EXPORT const CFStringRef kVTEncodeFrameOptionKey_ForceKeyFrame AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; //  CFBoolean
+VT_EXPORT const CFStringRef kVTEncodeFrameOptionKey_ForceKeyFrame VT_AVAILABLE_STARTING(10_8); //  CFBoolean
 
 
 #pragma mark Clean aperture and pixel aspect ratio
@@ -361,7 +470,7 @@ VT_EXPORT const CFStringRef kVTEncodeFrameOptionKey_ForceKeyFrame AVAILABLE_MAC_
 		and may affect source frame scaling.
 		NULL is a valid value for this property, meaning that the clean aperture is the full width and height.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_CleanAperture AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // Read/write, CFDictionary (see CMFormatDescription.h), Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_CleanAperture VT_AVAILABLE_STARTING(10_8); // Read/write, CFDictionary (see CMFormatDescription.h), Optional
 
 /*!
 	@constant	kVTCompressionPropertyKey_PixelAspectRatio
@@ -374,7 +483,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_CleanAperture AVAILABLE_MA
 		and may affect source frame scaling.
 		NULL is a valid value for this property, meaning square pixels (1:1).
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_PixelAspectRatio AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // Read/write, CFDictionary (see CMFormatDescription.h), Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_PixelAspectRatio VT_AVAILABLE_STARTING(10_8); // Read/write, CFDictionary (see CMFormatDescription.h), Optional
 
 /*!
 	@constant	kVTCompressionPropertyKey_FieldCount
@@ -385,7 +494,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_PixelAspectRatio AVAILABLE
 		and may affect source frame scaling.
 		NULL is a valid value for this property.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_FieldCount AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // Read/write, CFNumber (see kCMFormatDescriptionExtension_FieldCount), Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_FieldCount VT_AVAILABLE_STARTING(10_8); // Read/write, CFNumber (see kCMFormatDescriptionExtension_FieldCount), Optional
 
 /*!
 	@constant	kVTCompressionPropertyKey_FieldDetail
@@ -398,7 +507,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_FieldCount AVAILABLE_MAC_O
 		and may affect source frame scaling.
 		NULL is a valid value for this property.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_FieldDetail AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // Read/write, CFString (see kCMFormatDescriptionExtension_FieldDetail), Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_FieldDetail VT_AVAILABLE_STARTING(10_8); // Read/write, CFString (see kCMFormatDescriptionExtension_FieldDetail), Optional
 
 /*!
 	@constant	kVTCompressionPropertyKey_AspectRatio16x9
@@ -410,7 +519,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_FieldDetail AVAILABLE_MAC_
 		When true, the picture aspect ratio is 16:9.
 		Either way, a fixed PixelAspectRatio is used (the specific value depends on whether the format is NTSC or PAL).
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_AspectRatio16x9 AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // Read/write, CFBoolean, Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_AspectRatio16x9 VT_AVAILABLE_STARTING(10_8); // Read/write, CFBoolean, Optional
 
 /*!
 	@constant	kVTCompressionPropertyKey_ProgressiveScan
@@ -422,7 +531,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_AspectRatio16x9 AVAILABLE_
 		If true, content is encoded as progressive.
 		The value of this property fixes the FieldCount and FieldDetail properties.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ProgressiveScan AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // Read/write, CFBoolean, Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ProgressiveScan VT_AVAILABLE_STARTING(10_8); // Read/write, CFBoolean, Optional
 
 #pragma mark Color
 
@@ -435,7 +544,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ProgressiveScan AVAILABLE_
 		in those cases this property will be read-only (SetProperty will return kVTPropertyReadOnlyErr).
 		The value will be set on the format description for output sample buffers.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ColorPrimaries AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // Read/write, CFString (see kCMFormatDescriptionExtension_ColorPrimaries), Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ColorPrimaries VT_AVAILABLE_STARTING(10_8); // Read/write, CFString (see kCMFormatDescriptionExtension_ColorPrimaries), Optional
 
 /*!
 	@constant	kVTCompressionPropertyKey_TransferFunction
@@ -446,7 +555,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ColorPrimaries AVAILABLE_M
 		in those cases this property will be read-only (SetProperty will return kVTPropertyReadOnlyErr).
 		The value will be set on the format description for output sample buffers.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_TransferFunction AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // Read/write, CFString (see kCMFormatDescriptionExtension_TransferFunction), Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_TransferFunction VT_AVAILABLE_STARTING(10_8); // Read/write, CFString (see kCMFormatDescriptionExtension_TransferFunction), Optional
 
 /*!
 	@constant	kVTCompressionPropertyKey_YCbCrMatrix
@@ -457,7 +566,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_TransferFunction AVAILABLE
 		in those cases this property will be read-only (SetProperty will return kVTPropertyReadOnlyErr).
 		The value will be set on the format description for output sample buffers.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_YCbCrMatrix AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // Read/write, CFString (see kCMFormatDescriptionExtension_YCbCrMatrix), Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_YCbCrMatrix VT_AVAILABLE_STARTING(10_8); // Read/write, CFString (see kCMFormatDescriptionExtension_YCbCrMatrix), Optional
 
 /*!
 	@constant	kVTCompressionPropertyKey_ICCProfile
@@ -471,7 +580,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_YCbCrMatrix AVAILABLE_MAC_
 		The value will be set on the format description for output sample buffers.
 		NULL can be a valid value for this property.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ICCProfile AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // Read/write, CFData (see kCMFormatDescriptionExtension_ICCProfile), Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ICCProfile VT_AVAILABLE_STARTING(10_8); // Read/write, CFData (see kCMFormatDescriptionExtension_ICCProfile), Optional
 
 #pragma mark Pre-compression processing
 
@@ -487,7 +596,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ICCProfile AVAILABLE_MAC_O
 		Setting this property alone does not necessarily guarantee that a VTPixelTransferSession will be created.
 		See VTPixelTransferProperties.h.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_PixelTransferProperties AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER; // Read/Write, CFDictionary containing properties from VTPixelTransferProperties.h.
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_PixelTransferProperties VT_AVAILABLE_STARTING(10_8); // Read/Write, CFDictionary containing properties from VTPixelTransferProperties.h.
 
 
 #pragma pack(pop)

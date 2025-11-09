@@ -1,7 +1,7 @@
 /*
     NSEvent.h
     Application Kit
-    Copyright (c) 1994-2012, Apple Inc.
+    Copyright (c) 1994-2013, Apple Inc.
     All rights reserved.
 */
 
@@ -418,7 +418,9 @@ typedef NSUInteger NSEventSwipeTrackingOptions;
 
    Valid for Scroll events with a phase of NSEventPhaseBegan or NSEventPhaseChanged
 */
+#if NS_BLOCKS_AVAILABLE
 - (void)trackSwipeEventWithOptions:(NSEventSwipeTrackingOptions)options dampenAmountThresholdMin:(CGFloat)minDampenThreshold max:(CGFloat)maxDampenThreshold usingHandler:(void (^)(CGFloat gestureAmount, NSEventPhase phase, BOOL isComplete, BOOL *stop))trackingHandler NS_AVAILABLE_MAC(10_7);
+#endif
 
 /* used for initial delay and periodic behavior in tracking loops */
 + (void)startPeriodicEventsAfterDelay:(NSTimeInterval)delay withPeriod:(NSTimeInterval)period;

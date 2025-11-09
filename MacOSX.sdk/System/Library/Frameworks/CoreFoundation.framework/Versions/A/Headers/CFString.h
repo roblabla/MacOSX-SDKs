@@ -1,5 +1,5 @@
 /*	CFString.h
-	Copyright (c) 1998-2012, Apple Inc. All rights reserved.
+	Copyright (c) 1998-2013, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFSTRING__)
@@ -681,7 +681,7 @@ CF_EXPORT void CFStringNormalize(CFMutableStringRef theString, CFStringNormaliza
 */
 
 CF_EXPORT
-void CFStringFold(CFMutableStringRef theString, CFOptionFlags theFlags, CFLocaleRef theLocale) CF_AVAILABLE(10_5, 2_0);
+void CFStringFold(CFMutableStringRef theString, CFStringCompareFlags theFlags, CFLocaleRef theLocale) CF_AVAILABLE(10_5, 2_0);
 
 /* Perform string transliteration.  The transformation represented by transform is applied to the given range of string, modifying it in place. Only the specified range will be modified, but the transform may look at portions of the string outside that range for context. NULL range pointer causes the whole string to be transformed. On return, range is modified to reflect the new range corresponding to the original range. reverse indicates that the inverse transform should be used instead, if it exists. If the transform is successful, true is returned; if unsuccessful, false. Reasons for the transform being unsuccessful include an invalid transform identifier, or attempting to reverse an irreversible transform.
 
@@ -773,7 +773,8 @@ CFStringEncoding CFStringGetMostCompatibleMacStringEncoding(CFStringEncoding enc
 typedef struct {
     UniChar buffer[__kCFStringInlineBufferLength];
     CFStringRef theString;
-    const UniChar *directBuffer;
+    const UniChar *directUniCharBuffer;
+    const char *directCStringBuffer;
     CFRange rangeToBuffer;		/* Range in string to buffer */
     CFIndex bufferedRangeStart;		/* Start of range currently buffered (relative to rangeToBuffer.location) */
     CFIndex bufferedRangeEnd;		/* bufferedRangeStart + number of chars actually buffered */
@@ -783,17 +784,15 @@ typedef struct {
 CF_INLINE void CFStringInitInlineBuffer(CFStringRef str, CFStringInlineBuffer *buf, CFRange range) {
     buf->theString = str;
     buf->rangeToBuffer = range;
-    buf->directBuffer = CFStringGetCharactersPtr(str);
+    buf->directCStringBuffer = (buf->directUniCharBuffer = CFStringGetCharactersPtr(str)) ? NULL : CFStringGetCStringPtr(str, kCFStringEncodingASCII);
     buf->bufferedRangeStart = buf->bufferedRangeEnd = 0;
 }
 
 CF_INLINE UniChar CFStringGetCharacterFromInlineBuffer(CFStringInlineBuffer *buf, CFIndex idx) {
-    if (buf->directBuffer) {
-	if (idx < 0 || idx >= buf->rangeToBuffer.length) return 0;
-        return buf->directBuffer[idx + buf->rangeToBuffer.location];
-    }
+    if (idx < 0 || idx >= buf->rangeToBuffer.length) return 0;
+    if (buf->directUniCharBuffer) return buf->directUniCharBuffer[idx + buf->rangeToBuffer.location];
+    if (buf->directCStringBuffer) return (UniChar)(buf->directCStringBuffer[idx + buf->rangeToBuffer.location]);
     if (idx >= buf->bufferedRangeEnd || idx < buf->bufferedRangeStart) {
-	if (idx < 0 || idx >= buf->rangeToBuffer.length) return 0;
 	if ((buf->bufferedRangeStart = idx - 4) < 0) buf->bufferedRangeStart = 0;
 	buf->bufferedRangeEnd = buf->bufferedRangeStart + __kCFStringInlineBufferLength;
 	if (buf->bufferedRangeEnd > buf->rangeToBuffer.length) buf->bufferedRangeEnd = buf->rangeToBuffer.length;
@@ -806,10 +805,10 @@ CF_INLINE UniChar CFStringGetCharacterFromInlineBuffer(CFStringInlineBuffer *buf
 /* If INLINE functions are not available, we do somewhat less powerful macros that work similarly (except be aware that the buf argument is evaluated multiple times).
 */
 #define CFStringInitInlineBuffer(str, buf, range) \
-    do {(buf)->theString = str; (buf)->rangeToBuffer = range; (buf)->directBuffer = CFStringGetCharactersPtr(str);} while (0)
+    do {(buf)->theString = str; (buf)->rangeToBuffer = range; (buf)->directCStringBuffer = ((buf)->directUniCharBuffer = CFStringGetCharactersPtr(str)) ? NULL : CFStringGetCStringPtr(str, kCFStringEncodingASCII);} while (0)
 
 #define CFStringGetCharacterFromInlineBuffer(buf, idx) \
-    (((idx) < 0 || (idx) >= (buf)->rangeToBuffer.length) ? 0 : ((buf)->directBuffer ? (buf)->directBuffer[(idx) + (buf)->rangeToBuffer.location] : CFStringGetCharacterAtIndex((buf)->theString, (idx) + (buf)->rangeToBuffer.location)))
+    (((idx) < 0 || (idx) >= (buf)->rangeToBuffer.length) ? 0 : ((buf)->directUniCharBuffer ? (buf)->directUniCharBuffer[(idx) + (buf)->rangeToBuffer.location] : ((buf)->directCStringBuffer ? (UniChar)((buf)->directCStringBuffer[(idx) + (buf)->rangeToBuffer.location]) : CFStringGetCharacterAtIndex((buf)->theString, (idx) + (buf)->rangeToBuffer.location))))
 
 #endif /* CF_INLINE */
 
@@ -858,7 +857,7 @@ void CFShowStr(CFStringRef str);
 
 /* This function is private and should not be used directly */
 CF_EXPORT
-CFStringRef  __CFStringMakeConstantString(const char *cStr);	/* Private; do not use */
+CFStringRef  __CFStringMakeConstantString(const char *cStr) CF_FORMAT_ARGUMENT(1);	/* Private; do not use */
 
 CF_EXTERN_C_END
 CF_IMPLICIT_BRIDGING_DISABLED

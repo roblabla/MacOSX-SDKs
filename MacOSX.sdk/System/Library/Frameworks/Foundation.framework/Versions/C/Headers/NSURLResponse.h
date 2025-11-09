@@ -1,6 +1,6 @@
 /*	
     NSURLResponse.h
-    Copyright (c) 2003-2012, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2013, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -28,7 +28,7 @@
     NSURLConnection and NSURLConnectionDelegate for more information
     about receiving the content data for a URL load.
 */
-@interface NSURLResponse : NSObject <NSCoding, NSCopying>
+@interface NSURLResponse : NSObject <NSSecureCoding, NSCopying>
 {
     @package
     NSURLResponseInternal *_internal;

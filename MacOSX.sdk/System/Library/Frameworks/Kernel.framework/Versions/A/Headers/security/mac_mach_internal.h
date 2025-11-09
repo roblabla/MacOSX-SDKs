@@ -54,6 +54,8 @@
 #ifndef _SECURITY_MAC_MACH_INTERNAL_H_
 #define _SECURITY_MAC_MACH_INTERNAL_H_
 
+#warning "MAC policy is not KPI, see Technical Q&A QA1574, this header will be removed in next version"
+
 int mac_task_check_service(task_t self, task_t obj, const char *perm);
 void mac_task_label_update_internal(struct label *pl, struct task *t);
 int mac_port_label_compute(struct label *subj, struct label *obj,

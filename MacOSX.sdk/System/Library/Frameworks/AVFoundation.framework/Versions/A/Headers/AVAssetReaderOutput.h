@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-    Copyright 2010-2012 Apple Inc. All rights reserved.
+    Copyright 2010-2013 Apple Inc. All rights reserved.
 
 */
 
@@ -105,15 +105,18 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 	
 	A value of nil for outputSettings configures the output to vend samples in their original format as stored by the specified track.  Initialization will fail if the output settings cannot be used with the specified track.
 	
-	AVAssetReaderTrackOutput can only produce uncompressed output.  For audio output settings, this means that AVFormatIDKey must be kAudioFormatLinearPCM.  For video output settings, this means that the dictionary must follow the rules for uncompressed video output, as laid out in AVVideoSettings.h.  AVAssetReaderTrackOutput does not support the AVAudioSettings.h key AVSampleRateConverterAudioQualityKey or the AVVideoSettings.h key AVVideoScalingModeKey.
+	AVAssetReaderTrackOutput can only produce uncompressed output.  For audio output settings, this means that AVFormatIDKey must be kAudioFormatLinearPCM.  For video output settings, this means that the dictionary must follow the rules for uncompressed video output, as laid out in AVVideoSettings.h.  AVAssetReaderTrackOutput does not support the AVAudioSettings.h key AVSampleRateConverterAudioQualityKey or the following AVVideoSettings.h keys:
+ 
+		AVVideoCleanApertureKey
+		AVVideoPixelAspectRatioKey
+		AVVideoScalingModeKey
+		AVVideoColorPropertiesKey
 	
-	When constructing video output settings the choice of pixel format will affect the performance and quality of the decompression. Below are some recommendations.
-	
-	iOS:
-	For optimal performance when decompressing video the requested pixel format should be one that the decoder supports natively to avoid unnecessary conversions. For H.264 use either kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange, or kCVPixelFormatType_420YpCbCr8BiPlanarFullRange if the video is known to be full range. If you need to work in the RGB domain then kCVPixelFormatType_32BGRA is recommended.
-	
-	Mac OS X:
-	kCVPixelFormatType_422YpCbCr8 is the preferred pixel format for video and is generally the most performant when decoding. If you need to work in the RGB domain then kCVPixelFormatType_32ARGB is recommended.
+	When constructing video output settings the choice of pixel format will affect the performance and quality of the decompression. For optimal performance when decompressing video the requested pixel format should be one that the decoder supports natively to avoid unnecessary conversions. Below are some recommendations:
+
+	For H.264 use kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange, or kCVPixelFormatType_420YpCbCr8BiPlanarFullRange if the video is known to be full range.  For JPEG on iOS, use kCVPixelFormatType_420YpCbCr8BiPlanarFullRange.
+
+	For other codecs on OSX, kCVPixelFormatType_422YpCbCr8 is the preferred pixel format for video and is generally the most performant when decoding. If you need to work in the RGB domain then kCVPixelFormatType_32BGRA is recommended on iOS and kCVPixelFormatType_32ARGB is recommended on OSX.
  
 	ProRes encoded media can contain up to 12bits/ch. If your source is ProRes encoded and you wish to preserve more than 8bits/ch during decompression then use one of the following pixel formats: kCVPixelFormatType_4444AYpCbCr16, kCVPixelFormatType_422YpCbCr16, kCVPixelFormatType_422YpCbCr10, or kCVPixelFormatType_64ARGB.  AVAssetReader does not support scaling with any of these high bit depth pixel formats. If you use them then do not specify kCVPixelBufferWidthKey or kCVPixelBufferHeightKey in your outputSettings dictionary. If you plan to append these sample buffers to an AVAssetWriterInput then note that only the ProRes encoders support these pixel formats.
 
@@ -138,15 +141,18 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 	
 	A value of nil for outputSettings configures the output to vend samples in their original format as stored by the specified track.  Initialization will fail if the output settings cannot be used with the specified track.
 	
-	AVAssetReaderTrackOutput can only produce uncompressed output.  For audio output settings, this means that AVFormatIDKey must be kAudioFormatLinearPCM.  For video output settings, this means that the dictionary must follow the rules for uncompressed video output, as laid out in AVVideoSettings.h.  AVAssetReaderTrackOutput does not support the AVAudioSettings.h key AVSampleRateConverterAudioQualityKey or the AVVideoSettings.h key AVVideoScalingModeKey.
-	
-	When constructing video output settings the choice of pixel format will affect the performance and quality of the decompression. Below are some recommendations.
-	
-	iOS:
-	For optimal performance when decompressing video the requested pixel format should be one that the decoder supports natively to avoid unnecessary conversions. For H.264 use either kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange, or kCVPixelFormatType_420YpCbCr8BiPlanarFullRange if the video is known to be full range. If you need to work in the RGB domain then kCVPixelFormatType_32BGRA is recommended.
-	
-	Mac OS X:
-	kCVPixelFormatType_422YpCbCr8 is the preferred pixel format for video and is generally the most performant when decoding.  If you need to work in the RGB domain then kCVPixelFormatType_32ARGB is recommended.
+	AVAssetReaderTrackOutput can only produce uncompressed output.  For audio output settings, this means that AVFormatIDKey must be kAudioFormatLinearPCM.  For video output settings, this means that the dictionary must follow the rules for uncompressed video output, as laid out in AVVideoSettings.h.  AVAssetReaderTrackOutput does not support the AVAudioSettings.h key AVSampleRateConverterAudioQualityKey or the following AVVideoSettings.h keys:
+ 
+		AVVideoCleanApertureKey
+		AVVideoPixelAspectRatioKey
+		AVVideoScalingModeKey
+		AVVideoColorPropertiesKey
+
+	When constructing video output settings the choice of pixel format will affect the performance and quality of the decompression. For optimal performance when decompressing video the requested pixel format should be one that the decoder supports natively to avoid unnecessary conversions. Below are some recommendations:
+
+	For H.264 use kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange, or kCVPixelFormatType_420YpCbCr8BiPlanarFullRange if the video is known to be full range.  For JPEG on iOS, use kCVPixelFormatType_420YpCbCr8BiPlanarFullRange.
+
+	For other codecs on OSX, kCVPixelFormatType_422YpCbCr8 is the preferred pixel format for video and is generally the most performant when decoding. If you need to work in the RGB domain then kCVPixelFormatType_32BGRA is recommended on iOS and kCVPixelFormatType_32ARGB is recommended on OSX.
  
 	ProRes encoded media can contain up to 12bits/ch. If your source is ProRes encoded and you wish to preserve more than 8bits/ch during decompression then use one of the following pixel formats: kCVPixelFormatType_4444AYpCbCr16, kCVPixelFormatType_422YpCbCr16, kCVPixelFormatType_422YpCbCr10, or kCVPixelFormatType_64ARGB.  AVAssetReader does not support scaling with any of these high bit depth pixel formats. If you use them then do not specify kCVPixelBufferWidthKey or kCVPixelBufferHeightKey in your outputSettings dictionary. If you plan to append these sample buffers to an AVAssetWriterInput then note that only the ProRes encoders support these pixel formats.
 
@@ -173,6 +179,18 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 	The value of this property is an NSDictionary that contains values for keys as specified by either AVAudioSettings.h for audio tracks or AVVideoSettings.h for video tracks.  A value of nil indicates that the receiver will vend samples in their original format as stored in the target track.
  */ 
 @property (nonatomic, readonly) NSDictionary *outputSettings;
+
+/*!
+ @property audioTimePitchAlgorithm
+ @abstract
+	Indicates the processing algorithm used to manage audio pitch for scaled audio edits.
+ 
+ @discussion
+	Constants for various time pitch algorithms, e.g. AVAudioTimePitchAlgorithmSpectral, are defined in AVAudioProcessingSettings.h.  An NSInvalidArgumentException will be raised if this property is set to a value other than the constants defined in that file.
+ 
+	The default value is AVAudioTimePitchAlgorithmSpectral.
+ */
+@property (nonatomic, copy) NSString *audioTimePitchAlgorithm NS_AVAILABLE(10_9, 7_0);
 
 @end
 
@@ -264,6 +282,18 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  */
 @property (nonatomic, copy) AVAudioMix *audioMix;
 
+/*!
+ @property audioTimePitchAlgorithm
+ @abstract
+	Indicates the processing algorithm used to manage audio pitch for scaled audio edits.
+ 
+ @discussion
+	Constants for various time pitch algorithms, e.g. AVAudioTimePitchAlgorithmSpectral, are defined in AVAudioProcessingSettings.h.  An NSInvalidArgumentException will be raised if this property is set to a value other than the constants defined in that file.
+ 
+	The default value is AVAudioTimePitchAlgorithmSpectral.
+ */
+@property (nonatomic, copy) NSString *audioTimePitchAlgorithm NS_AVAILABLE(10_9, 7_0);
+
 @end
 
 
@@ -301,7 +331,12 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  	
 	A value of nil for videoSettings configures the output to return samples in a convenient uncompressed format, with properties determined according to the properties of the specified video tracks.  Initialization will fail if the video settings cannot be used with the specified tracks.
 	
-	AVAssetReaderVideoCompositionOutput can only produce uncompressed output.  This means that the video settings dictionary must follow the rules for uncompressed video output, as laid out in AVVideoSettings.h.  AVVideoScalingModeKey is not supported.
+	AVAssetReaderVideoCompositionOutput can only produce uncompressed output.  This means that the video settings dictionary must follow the rules for uncompressed video output, as laid out in AVVideoSettings.h.  In addition, the following keys are not supported:
+
+		AVVideoCleanApertureKey
+		AVVideoPixelAspectRatioKey
+		AVVideoScalingModeKey
+		AVVideoColorPropertiesKey
  */
 + (AVAssetReaderVideoCompositionOutput *)assetReaderVideoCompositionOutputWithVideoTracks:(NSArray *)videoTracks videoSettings:(NSDictionary *)videoSettings;
 
@@ -321,7 +356,12 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  	
 	A value of nil for videoSettings configures the output to return samples in a convenient uncompressed format, with properties determined according to the properties of the specified video tracks.  Initialization will fail if the video settings cannot be used with the specified tracks.
 	
-	AVAssetReaderVideoCompositionOutput can only produce uncompressed output.  This means that the video settings dictionary must follow the rules for uncompressed video output, as laid out in AVVideoSettings.h.  AVVideoScalingModeKey is not supported.
+	AVAssetReaderVideoCompositionOutput can only produce uncompressed output.  This means that the video settings dictionary must follow the rules for uncompressed video output, as laid out in AVVideoSettings.h.  In addition, the following keys are not supported:
+ 
+		AVVideoCleanApertureKey
+		AVVideoPixelAspectRatioKey
+		AVVideoScalingModeKey
+		AVVideoColorPropertiesKey
  */
 - (id)initWithVideoTracks:(NSArray *)videoTracks videoSettings:(NSDictionary *)videoSettings;
 
@@ -356,5 +396,15 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 	This property cannot be set after reading has started.
  */
 @property (nonatomic, copy) AVVideoComposition *videoComposition;
+
+/*!
+ @property customVideoCompositor
+ @abstract
+ 	Indicates the custom video compositor instance used by the receiver.
+
+ @discussion
+ 	This property is nil if there is no video compositor, or if the internal video compositor is in use.
+ */
+@property (nonatomic, readonly) id<AVVideoCompositing>customVideoCompositor NS_AVAILABLE(10_9, 7_0);
 
 @end

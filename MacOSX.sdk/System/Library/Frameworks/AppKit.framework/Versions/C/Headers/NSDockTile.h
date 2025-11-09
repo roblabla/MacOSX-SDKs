@@ -1,7 +1,7 @@
 /*
 	NSDockTile.h
 	Application Kit
-	Copyright (c) 2006-2012, Apple Inc.
+	Copyright (c) 2006-2013, Apple Inc.
 	All rights reserved.
 */
 

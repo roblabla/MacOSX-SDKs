@@ -14,7 +14,8 @@
 typedef NS_ENUM(NSInteger, SLRequestMethod)  {
     SLRequestMethodGET,
     SLRequestMethodPOST,
-    SLRequestMethodDELETE
+    SLRequestMethodDELETE,
+    SLRequestMethodPUT
 };
 
 

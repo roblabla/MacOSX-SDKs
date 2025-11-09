@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2012 Apple Inc. All rights reserved.
+	Copyright 2010-2013 Apple Inc. All rights reserved.
 
 */
 
@@ -181,5 +181,72 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 	@discussion		Becomes callable without blocking when the key @"availableMetadataFormats" has been loaded
 */
 - (NSArray *)metadataForFormat:(NSString *)format;
+
+@end
+
+
+@interface AVAssetTrack (AVAssetTrackTrackAssociations)
+
+/*
+ @constant		AVTrackAssociationTypeAudioFallback
+ @abstract		Indicates an association between an audio track with another audio track that contains the same content but is typically encoded in a different format that's more widely supported, used to nominate a track that should be used in place of an unsupported track.
+ 
+ @discussion
+	Associations of type AVTrackAssociationTypeAudioFallback are supported only between audio tracks.  This association is not symmetric; when used with -[AVAssetWriterInput addTrackAssociationWithTrackOfInput:type:], the receiver should be an instance of AVAssetWriterInput with a corresponding track that has content that's less widely supported, and the input parameter should be an instance of AVAssetWriterInput with a corresponding track that has content that's more widely supported.
+	
+	Example: Using AVTrackAssociationTypeAudioFallback, a stereo audio track with media subtype kAudioFormatMPEG4AAC could be nominated as the "fallback" for an audio track encoding the same source material but with media subtype kAudioFormatAC3 and a 5.1 channel layout.  This would ensure that all clients are capable of playing back some form of the audio.
+
+ */
+AVF_EXPORT NSString *const AVTrackAssociationTypeAudioFallback NS_AVAILABLE(10_9, TBD);
+
+/*
+ @constant		AVTrackAssociationTypeChapterList
+ @abstract		Indicates an association between a track with another track that contains chapter information.  The track containing chapter information may be a text track, a video track, or a timed metadata track.
+ 
+ @discussion
+	This association is not symmetric; when used with -[AVAssetWriterInput addTrackAssociationWithTrackOfInput:type:], the receiver should be an instance of AVAssetWriterInput with a corresponding track that has renderable content while the input parameter should be an instance of AVAssetWriterInput with a corresponding track that contains chapter metadata.
+ */
+AVF_EXPORT NSString *const AVTrackAssociationTypeChapterList NS_AVAILABLE(10_9, TBD);
+
+/*
+ @constant		AVTrackAssociationTypeForcedSubtitlesOnly
+ @abstract		Indicates an association between a subtitle track typically containing both forced and non-forced subtitles with another subtitle track that contains only forced subtitles, for use when the user indicates that only essential subtitles should be displayed.  When such an association is established, the forced subtitles in both tracks are expected to present the same content in the same language but may have different timing.
+ 
+ @discussion
+	Associations of type AVTrackAssociationTypeForcedSubtitlesOnly are supported only between subtitle tracks.  This association is not symmetric; when used with -[AVAssetWriterInput addTrackAssociationWithTrackOfInput:type:], the receiver should be an instance of AVAssetWriterInput with a corresponding subtitle track that contains non-forced subtitles, and the input parameter should be an instance of AVAssetWriterInput with a corresponding subtitle track that contains forced subtitles only.
+ */
+AVF_EXPORT NSString *const AVTrackAssociationTypeForcedSubtitlesOnly NS_AVAILABLE(10_9, TBD);
+
+/*
+ @constant		AVTrackAssociationTypeSelectionFollower
+ @abstract		Indicates an association between a pair of tracks that specifies that, when the first of the pair is selected, the second of the pair should be considered an appropriate default for selection also.  Example: a subtitle track in the same language as an audio track may be associated with that audio track using AVTrackAssociationTypeSelectionFollower, to indicate that selection of the subtitle track, in the absence of a directive for subtitle selection from the user, can "follow" the selection of the audio track.
+ 
+ @discussion
+	This association is not symmetric; when used with -[AVAssetWriterInput addTrackAssociationWithTrackOfInput:type:], the input parameter should be an instance of AVAssetWriterInput whose selection may depend on the selection of the receiver.  In the example above, the receiver would be the instance of AVAssetWriterInput corresponding with the audio track and the input parameter would be the instance of AVAssetWriterInput corresponding with the subtitle track.
+ */
+AVF_EXPORT NSString *const AVTrackAssociationTypeSelectionFollower NS_AVAILABLE(10_9, TBD);
+
+/*
+ @constant		AVTrackAssociationTypeTimecode
+ @abstract		Indicates an association between a track with another track that contains timecode information.  The track containing timecode information should be a timecode track.
+ 
+ @discussion
+	This association is not symmetric; when used with -[AVAssetWriterInput addTrackAssociationWithTrackOfInput:type:], the receiver should be an instance of AVAssetWriterInput with a corresponding track that may be a video track or an audio track while the input parameter should be an instance of AVAssetWriterInput with a corresponding timecode track.
+ */
+AVF_EXPORT NSString *const AVTrackAssociationTypeTimecode NS_AVAILABLE(10_9, TBD);
+
+/* Provides an NSArray of NSStrings, each representing a type of track association that the receiver has with one or more of the other tracks of the asset (e.g. AVTrackAssociationTypeChapterList, AVTrackAssociationTypeTimecode, etc.).
+   Track association types are defined immediately above. */
+@property (nonatomic, readonly) NSArray *availableTrackAssociationTypes NS_AVAILABLE(10_9, TBD);
+
+/*!
+	@method			associatedTracksOfType:
+	@abstract		Provides an NSArray of AVAssetTracks, one for each track associated with the receiver with the specified type of track association.
+	@param			trackAssociationType
+					The type of track association for which associated tracks are requested.
+	@result			An NSArray containing AVAssetTracks; may be empty if there is no associated tracks of the specified type.
+	@discussion		Becomes callable without blocking when the key @"availableTrackAssociationTypes" has been loaded.
+*/
+- (NSArray *)associatedTracksOfType:(NSString *)trackAssociationType NS_AVAILABLE(10_9, TBD);
 
 @end

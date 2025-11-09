@@ -5,7 +5,7 @@
 					load time. This property usually contains the user client class name and the CFPlugInTypes UUID's but it can contain other properties.
 
 
-	Copyright:	© 2006-2010 by Apple Inc., all rights reserved.
+	Copyright:	© 2006-2012 by Apple Inc., all rights reserved.
 */
 
 #ifndef __IOVIDEODEVICECLIENTINIT_H

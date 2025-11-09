@@ -5,13 +5,15 @@
 #ifndef CGSHADING_H_
 #define CGSHADING_H_
 
+typedef struct CGShading *CGShadingRef;
+
 #include <CoreGraphics/CGBase.h>
 #include <CoreGraphics/CGColorSpace.h>
 #include <CoreGraphics/CGFunction.h>
 #include <CoreGraphics/CGGeometry.h>
 #include <CoreFoundation/CFBase.h>
 
-typedef struct CGShading *CGShadingRef;
+CF_IMPLICIT_BRIDGING_ENABLED
 
 /* Return the CFTypeID for CGShadingRefs. */
 
@@ -68,5 +70,7 @@ CG_EXTERN CGShadingRef CGShadingRetain(CGShadingRef shading)
 
 CG_EXTERN void CGShadingRelease(CGShadingRef shading)
   CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif /* CGSHADING_H_ */

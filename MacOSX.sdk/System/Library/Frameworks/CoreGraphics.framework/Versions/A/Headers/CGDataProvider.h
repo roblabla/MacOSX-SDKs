@@ -11,6 +11,8 @@ typedef struct CGDataProvider *CGDataProviderRef;
 #include <CoreFoundation/CFURL.h>
 #include <sys/types.h>
 
+CF_IMPLICIT_BRIDGING_ENABLED
+
 /* This callback is called to copy `count' bytes from the sequential data
    stream to `buffer'. */
 
@@ -108,7 +110,8 @@ CG_EXTERN CGDataProviderRef CGDataProviderCreateSequential(void *info,
   CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
 
 /* Create a direct-access data provider using `callbacks' to supply `size'
-   bytes of data. `info' is passed to each of the callback functions. */
+   bytes of data. `info' is passed to each of the callback functions.
+   The underlying data must not change for the life of the data provider. */
 
 CG_EXTERN CGDataProviderRef CGDataProviderCreateDirect(void *info, off_t size,
   const CGDataProviderDirectCallbacks *callbacks)
@@ -161,5 +164,7 @@ CG_EXTERN void CGDataProviderRelease(CGDataProviderRef provider)
 
 CG_EXTERN CFDataRef CGDataProviderCopyData(CGDataProviderRef provider)
   CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif /* CGDATAPROVIDER_H_ */

@@ -54,7 +54,7 @@ extern NSString *ABMultiValueIdentifiersErrorKey AVAILABLE_MAC_OS_X_VERSION_10_7
     id                   _reserved4;
     NSMutableDictionary *_tableSchemas;
     NSMutableDictionary *_reserved5 __unused;
-    __strong void		*_converterPort;
+    void                *_converterPort __unused;
     NSTimer             *_inactivityTimer;
     id                   _reserved;
 
@@ -120,7 +120,7 @@ extern NSString *ABMultiValueIdentifiersErrorKey AVAILABLE_MAC_OS_X_VERSION_10_7
     // Returns nil if the record could not be found
 
 - (BOOL)addRecord:(ABRecord *)record error:(NSError**)error AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
-    // Adds a record (ABPerson or ABGroup) to the AddressBook database and stores it in source
+    // Adds a record (ABPerson or ABGroup) to the AddressBook database.
     // Raises if record is nil
     // Returns YES if the addition was successful
     // When returning NO, includes additional information in error when its given value is not nil

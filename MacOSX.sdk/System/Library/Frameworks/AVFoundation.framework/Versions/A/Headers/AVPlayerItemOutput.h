@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2011-2012 Apple Inc. All rights reserved.
+	Copyright 2011-2013 Apple Inc. All rights reserved.
 
 */
 
@@ -34,7 +34,7 @@
 
 @class AVPlayerItemOutputInternal;
 
-NS_CLASS_AVAILABLE(10_8, TBD)
+NS_CLASS_AVAILABLE(10_8, 6_0)
 @interface AVPlayerItemOutput : NSObject
 {
 	@private
@@ -90,7 +90,7 @@ NS_CLASS_AVAILABLE(10_8, TBD)
 	@discussion
 		 Whenever any output is added to an AVPlayerItem that has suppressesPlayerRendering set to YES, the media data supplied to the output will not be rendered by AVPlayer. Other media data associated with the item but not provided to such an output is not affected. For example, if an output of class AVPlayerItemVideoOutput with a value of YES for suppressesPlayerRendering is added to an AVPlayerItem, video media for that item will not be rendered by the AVPlayer, while audio media, subtitle media, and other kinds of media, if present, will be rendered.
 */
-@property (nonatomic, readwrite) BOOL suppressesPlayerRendering NS_AVAILABLE(10_8, TBD);
+@property (nonatomic, readwrite) BOOL suppressesPlayerRendering NS_AVAILABLE(10_8, 6_0);
 
 @end
 
@@ -155,7 +155,7 @@ NS_CLASS_AVAILABLE(10_8, TBD)
 
 @class AVPlayerItemVideoOutputInternal;
 
-NS_CLASS_AVAILABLE(10_8, TBD)
+NS_CLASS_AVAILABLE(10_8, 6_0)
 @interface AVPlayerItemVideoOutput : AVPlayerItemOutput
 {
 @private
@@ -254,7 +254,7 @@ NS_CLASS_AVAILABLE(10_8, TBD)
 		This method is invoked once after the sender is messaged requestNotificationOfMediaDataChangeWithAdvanceInterval:.
   */
 
-- (void)outputMediaDataWillChange:(AVPlayerItemOutput *)sender NS_AVAILABLE(10_8, TBD);
+- (void)outputMediaDataWillChange:(AVPlayerItemOutput *)sender NS_AVAILABLE(10_8, 6_0);
  
  /*!
 	@method			outputSequenceWasFlushed:
@@ -263,7 +263,150 @@ NS_CLASS_AVAILABLE(10_8, TBD)
 		This method is invoked after any seeking and change in playback direction. If you are maintaining any queued future samples, copied previously, you may want to discard these after receiving this message.
   */
 
-- (void)outputSequenceWasFlushed:(AVPlayerItemOutput *)output NS_AVAILABLE(10_8, TBD);
+- (void)outputSequenceWasFlushed:(AVPlayerItemOutput *)output NS_AVAILABLE(10_8, 6_0);
 
 @end
 
+
+@protocol AVPlayerItemLegibleOutputPushDelegate;
+@class AVPlayerItemLegibleOutputInternal;
+
+/*!
+	@class			AVPlayerItemLegibleOutput
+	@abstract		A subclass of AVPlayerItemOutput that can vend media with a legible characteristic as NSAttributedStrings.
+ */
+NS_CLASS_AVAILABLE(10_9, 7_0)
+@interface AVPlayerItemLegibleOutput : AVPlayerItemOutput
+{
+@private
+	AVPlayerItemLegibleOutputInternal *_legibleOutputInternal;
+}
+
+/*!
+	@method			setDelegate:queue:
+	@abstract		Sets the receiver's delegate and a dispatch queue on which the delegate will be called.
+	@param			delegate
+					An object conforming to AVPlayerItemLegibleOutputPushDelegate protocol.
+	@param			delegateQueue
+					A dispatch queue on which all delegate methods will be called.
+	@discussion
+		The delegate is held using a zeroing-weak reference, so it is safe to deallocate the delegate while the receiver still has a reference to it.
+ */
+- (void)setDelegate:(id <AVPlayerItemLegibleOutputPushDelegate>)delegate queue:(dispatch_queue_t)delegateQueue;
+
+/*!
+	@property		delegate
+	@abstract		The receiver's delegate.
+	@discussion
+		The delegate is held using a zeroing-weak reference, so this property will have a value of nil after a delegate that was previously set has been deallocated.
+ */
+@property (nonatomic, readonly) id <AVPlayerItemLegibleOutputPushDelegate> delegate;
+
+/*!
+	@property		delegateQueue
+	@abstract		The dispatch queue where the delegate is messaged.
+ */
+@property (nonatomic, readonly) dispatch_queue_t delegateQueue;
+
+/*!
+	@property		advanceIntervalForDelegateInvocation
+	@abstract		Permits advance invocation of the associated delegate, if any.
+	@discussion
+		If it is possible, an AVPlayerItemLegibleOutput will message its delegate advanceIntervalForDelegateInvocation seconds earlier than otherwise. If the value you provide is large, effectively requesting provision of samples earlier than the AVPlayerItemLegibleOutput is prepared to act on them, the delegate will be invoked as soon as possible.
+ */
+@property (nonatomic, readwrite) NSTimeInterval advanceIntervalForDelegateInvocation;
+
+@end
+
+
+@interface AVPlayerItemLegibleOutput (AVPlayerItemLegibleOutput_NativeRepresentation)
+
+/*!
+	@method			initWithMediaSubtypesForNativeRepresentation:
+	@abstract		Returns an instance of AVPlayerItemLegibleOutput with filtering enabled for AVPlayerItemLegibleOutputPushDelegate's legibleOutput:didOutputAttributedStrings:nativeSampleBuffers:forItemTime:.
+	@param			subtypes
+					NSArray of NSNumber FourCC codes, e.g. @[ [NSNumber numberWithUnsignedInt:'tx3g'] ]
+	@result			An instance of AVPlayerItemLegibleOutput.
+	@discussion
+		Add media subtype FourCC number objects to the subtypes array to elect to receive that type as a CMSampleBuffer instead of an NSAttributedString.  Initializing an AVPlayerItemLegibleOutput using the -init method is equivalent to calling -initWithMediaSubtypesForNativeRepresentation: with an empty array, which means that all legible data, regardless of media subtype, will be delivered using NSAttributedString in a common format.
+ 
+		If a media subtype for which there is no legible data in the current player item is included in the media subtypes array, no error will occur.  AVPlayerItemLegibleOutput will not vend closed caption data as CMSampleBuffers, so it is an error to include 'c608' in the media subtypes array.
+ */	
+- (id)initWithMediaSubtypesForNativeRepresentation:(NSArray *)subtypes;	
+
+@end
+
+
+@interface AVPlayerItemLegibleOutput (AVPlayerItemLegibleOutput_TextStylingResolution)
+
+/*!
+ @constant		AVPlayerItemLegibleOutputTextStylingResolutionDefault
+ @abstract		Specify this level of text styling resolution to receive attributed strings from an AVPlayerItemLegibleOutput that include the same level of styling information that AVFoundation would use itself to render text within an AVPlayerLayer. The text styling will accommodate user-level Media Accessibility settings.
+ */
+AVF_EXPORT NSString *const AVPlayerItemLegibleOutputTextStylingResolutionDefault NS_AVAILABLE(10_9, 7_0);
+
+/*!
+ @constant		AVPlayerItemLegibleOutputTextStylingResolutionSourceAndRulesOnly
+ @abstract		Specify this level of text styling resolution to receive only the styling present in the source media and the styling provided via AVPlayerItem.textStyleRules.
+ @discussion
+	This level of resolution excludes styling provided by the user-level Media Accessibility settings. You would typically use it if you wish to override the styling specified in source media. If you do this, you are strongly encouraged to allow your custom styling in turn to be overriden by user preferences for text styling that are available as Media Accessibility settings.
+ */
+AVF_EXPORT NSString *const AVPlayerItemLegibleOutputTextStylingResolutionSourceAndRulesOnly NS_AVAILABLE(10_9, 7_0);
+
+/*!
+ @property		textStylingResolution
+ @abstract		A string identifier indicating the degree of text styling to be applied to attributed strings vended by the receiver
+ @discussion
+	Valid values are AVPlayerItemLegibleOutputTextStylingResolutionDefault and AVPlayerItemLegibleOutputTextStylingResolutionSourceAndRulesOnly.  An NSInvalidArgumentException is raised if this property is set to any other value.  The default value is AVPlayerItemLegibleOutputTextStylingResolutionDefault, which indicates that attributed strings vended by the receiver will include the same level of styling information that would be used if AVFoundation were rendering the text via AVPlayerLayer.
+ */
+@property (nonatomic, copy) NSString *textStylingResolution;
+
+@end
+
+
+@protocol AVPlayerItemOutputPushDelegate;
+
+/*!
+	@protocol		AVPlayerItemLegibleOutputPushDelegate
+	@abstract		Extends AVPlayerItemOutputPushDelegate to provide additional methods specific to attributed string output.
+ */
+@protocol AVPlayerItemLegibleOutputPushDelegate <AVPlayerItemOutputPushDelegate>
+
+@optional
+
+/*!
+	@method			legibleOutput:didOutputAttributedStrings:nativeSampleBuffers:forItemTime:
+	@abstract		A delegate callback that delivers new textual samples.
+	@param			output
+					The AVPlayerItemLegibleOutput source.
+	@param			strings
+					An NSArray of NSAttributedString, each containing both the run of text and descriptive markup.
+	@param			nativeSamples
+					An NSArray of CMSampleBuffer objects, for media subtypes included in the array passed in to -initWithMediaSubtypesForNativeRepresentation:
+	@param			itemTime
+					The item time at which the strings should be presented.
+	@discussion
+		For each media subtype in the array passed in to -initWithMediaSubtypesForNativeRepresentation:, the delegate will receive sample buffers carrying data in its native format via the nativeSamples parameter, if there is media data of that subtype in the media resource.  For all other media subtypes present in the media resource, the delegate will receive attributed strings in a common format via the strings parameter.  See <CoreMedia/CMTextMarkup.h> for the string attributes that are used in the attributed strings.
+ */
+- (void)legibleOutput:(AVPlayerItemLegibleOutput *)output didOutputAttributedStrings:(NSArray *)strings nativeSampleBuffers:(NSArray *)nativeSamples forItemTime:(CMTime)itemTime NS_AVAILABLE(10_9, 7_0);
+
+@end
+
+
+/*!
+ @protocol		AVPlayerItemOutputPushDelegate
+ @abstract		Defines common delegate methods for objects participating in AVPlayerItemOutput push sample output acquisition.
+ */
+@protocol AVPlayerItemOutputPushDelegate <NSObject>
+
+@optional
+
+/*!
+	@method			outputSequenceWasFlushed:
+	@abstract		A method invoked when the output is commencing a new sequence of media data.
+	@discussion
+		This method is invoked after any seeking and change in playback direction. If you are maintaining any queued future media data, received previously, you may want to discard these after receiving this message.
+ */
+- (void)outputSequenceWasFlushed:(AVPlayerItemOutput *)output;
+
+@end

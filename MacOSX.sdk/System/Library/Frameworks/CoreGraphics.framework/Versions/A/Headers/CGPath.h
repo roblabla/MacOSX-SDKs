@@ -12,6 +12,8 @@ typedef const struct CGPath *CGPathRef;
 #include <CoreGraphics/CGAffineTransform.h>
 #include <CoreFoundation/CFBase.h>
 
+CF_IMPLICIT_BRIDGING_ENABLED
+
 /* Line join styles. */
 
 enum CGLineJoin {
@@ -88,6 +90,33 @@ CG_EXTERN CGPathRef CGPathCreateWithRect(CGRect rect,
 CG_EXTERN CGPathRef CGPathCreateWithEllipseInRect(CGRect rect,
   const CGAffineTransform *transform)
   CG_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0);
+
+/* Return a path representing a rounded rectangle. The rounded rectangle
+   coincides with the edges of `rect'. Each corner is consists of
+   one-quarter of an ellipse with axes equal to `cornerWidth' and
+   `cornerHeight'. The rounded rectangle forms a complete subpath of the
+   path --- that is, it begins with a "move to" and ends with a "close
+   subpath" --- oriented in the clockwise direction. If `transform' is
+   non-NULL, then the path elements representing the rounded rectangle will
+   be transformed by `transform' before they are added to the path. */
+
+CG_EXTERN CGPathRef CGPathCreateWithRoundedRect(CGRect rect,
+  CGFloat cornerWidth, CGFloat cornerHeight,
+  const CGAffineTransform *transform)
+  CG_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+
+/* Add a rounded rectangle to `path'. The rounded rectangle coincides with
+   the edges of `rect'. Each corner is consists of one-quarter of an ellipse
+   with axes equal to `cornerWidth' and `cornerHeight'. The rounded
+   rectangle forms a complete subpath of the path --- that is, it begins
+   with a "move to" and ends with a "close subpath" --- oriented in the
+   clockwise direction. If `transform' is non-NULL, then the path elements
+   representing the rounded rectangle will be transformed by `transform'
+   before they are added to the path. */
+
+CG_EXTERN void CGPathAddRoundedRect(CGMutablePathRef path,
+  const CGAffineTransform *transform, CGRect rect, CGFloat cornerWidth,
+  CGFloat cornerHeight) CG_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
 
 /* Create a dashed path from `path'. The parameters `phase', `lengths', and
    `count' have the same meaning as the corresponding parameters for
@@ -343,5 +372,7 @@ typedef void (*CGPathApplierFunction)(void *info,
 CG_EXTERN void CGPathApply(CGPathRef path, void *info,
   CGPathApplierFunction function)
   CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif /* CGPATH_H_ */

@@ -24,6 +24,13 @@
     kAudioServerPlugInTypeUUID. The plug-in provides an object that conforms to the interface,
     kAudioServerPlugInDriverInterfaceUUID.
     
+    An AudioServerPlugIn can provide the host with information that describes the conditions that
+    must be met to load the plug-in. This is done through plug-in bundle's info.plist in a key named
+    "AudioServerPlugIn_LoadingConditions". The value of this key is a dictionary whose keys describe
+    the loading conditions for the plug-in. Currently, only the key named "IOService Matching" whose
+    value is an array of matching dictionaries. The host will load the plug-in if any of these
+    matching dictionaries match an IOService.
+    
     An AudioServerPlugIn operates in a limited environment. First and foremost, an AudioServerPlugIn
     may not make any calls to the client HAL API in the CoreAudio.framework. This will result in
     undefined (but generally bad) behavior.
@@ -31,9 +38,13 @@
     Further, the host process is sandboxed. As such, an AudioServerPlugIn may only read files in its
     bundle in addition to the system libraries and frameworks. It may not access user documents or
     write to any filesystem locations other than the system's cache and temporary directories as
-    derived through Apple API. Finally, an AudioServerPlugIn may not communicate with other
-    processes on the system. Note that the host provides a means for the plug-in to store and
-    retrieve data from persistent storage.
+    derived through Apple API. The host provides a means for the plug-in to store and retrieve data
+    from persistent storage.
+    
+    An AudioServerPlugIn may communicate with other processes on the system. However, the plug-in
+    must list the name of the mach services to be accessed in the plug-in bundle's info.plist in a
+    key named "AudioServerPlugIn_MachServices". The value of this key is an array of the names of
+    the mach services that need to be accessed.
     
     An AudioServerPlugIn may create user-clients via IOServiceOpen() for standard IOKit objects
     without restriction. However, if a plug-in needs to create a custom user-client, it must list
@@ -66,7 +77,7 @@
     will figure out what changed and restart any outstanding IO.
     
     The host is in control of IO. It tells the plug-in's AudioDevice when to start and when to stop
-    the hardware. The host drives it's timing using the timestamps provided by the AudioDevice's
+    the hardware. The host drives its timing using the timestamps provided by the AudioDevice's
     implementation of GetZeroTimeStamp(). The series of timestamps provides a mapping between the
     device's sample time and mach_absolute_time().
     
@@ -371,13 +382,6 @@ enum
 /*!
     @enum           Clock Smoothing Algorithm Selectors
     @abstract       The valid values for kAudioDevicePropertyClockAlgorithm
-    @constant       kAudioDeviceClockAlgorithmUnclocked
-                        Specifying this value for the clock algorithm informs the Host that the
-                        device does not have a clock of its own. The Host will generate a clock for
-                        this device that will either be at the rate of the master device in an
-                        aggregate device or at the nominal rate when this device is the master. Note
-                        that the Host will not call GetZeroTimeStamp() to get timing information
-                        from a device whose clock algorithm has this value.
     @constant       kAudioDeviceClockAlgorithmRaw
                         When this value for the clock algorithm is specified, the Host will not
                         apply any filtering to the time stamps returned from GetZeroTimeStamp(). The
@@ -390,7 +394,6 @@ enum
 */
 enum
 {
-    kAudioDeviceClockAlgorithmUnclocked = 0,
     kAudioDeviceClockAlgorithmRaw       = 'raww',
     kAudioDeviceClockAlgorithmSimpleIIR = 'iirf'
 };
@@ -416,11 +419,16 @@ enum
                         A UInt32 whose value indicates to the Host what smoothing algorithm to use
                         for a device's clock. The only legal values for this property are specified
                         in the enum below.
+    @constant       kAudioDevicePropertyClockIsStable
+                        A UInt32 where a non-zero value indicates that the device's clock runs at or
+                        very near the nominal rate with only small variations. If this property is
+                        not implemented, it is assumed that the device's clock is stable.
 */
 enum
 {
     kAudioDevicePropertyZeroTimeStampPeriod = 'ring',
-    kAudioDevicePropertyClockAlgorithm      = 'clok'
+    kAudioDevicePropertyClockAlgorithm      = 'clok',
+    kAudioDevicePropertyClockIsStable       = 'cstb'
 };
 
 //==================================================================================================

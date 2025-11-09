@@ -353,7 +353,8 @@ CG_EXTERN uint32_t CGDisplaySerialNumber(CGDirectDisplayID display)
 /* Return the IOKit service port of a display. */
 
 CG_EXTERN io_service_t CGDisplayIOServicePort(CGDirectDisplayID display)
-  CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+  CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_9,
+    __IPHONE_NA, __IPHONE_NA);
 
 /* Return the width and height of a display in millimeters.
 

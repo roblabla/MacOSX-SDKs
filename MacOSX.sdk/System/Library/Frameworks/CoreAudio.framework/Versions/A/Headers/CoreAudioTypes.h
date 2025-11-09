@@ -66,6 +66,12 @@ extern "C"
                         Unimplemented core routine.
     @constant       kAudio_FileNotFoundError 
                         File not found.
+    @constant       kAudio_FilePermissionError
+                        File cannot be opened due to either file, directory, or sandbox permissions.
+    @constant       kAudio_TooManyFilesOpenError
+                        File cannot be opened because too many files are already open.
+    @constant       kAudio_BadFilePathError
+                        File cannot be opened because the specified path is malformed.
     @constant       kAudio_ParamError 
                         Error in user parameter list.
     @constant       kAudio_MemFullError 
@@ -74,10 +80,13 @@ extern "C"
 
 enum 
 {
-    kAudio_UnimplementedError   = -4,
-    kAudio_FileNotFoundError    = -43,
-    kAudio_ParamError           = -50,
-    kAudio_MemFullError         = -108
+    kAudio_UnimplementedError     = -4,
+    kAudio_FileNotFoundError      = -43,
+    kAudio_FilePermissionError    = -54,
+    kAudio_TooManyFilesOpenError  = -42,
+    kAudio_BadFilePathError       = '!pth',	// 0x21707468, 561017960
+    kAudio_ParamError             = -50,
+    kAudio_MemFullError           = -108
 };
       
 //==================================================================================================
@@ -1212,6 +1221,7 @@ enum
     kAudioChannelLayoutTag_AAC_7_0                  = (143<<16) | 7,                       // C L R Ls Rs Rls Rrs
     kAudioChannelLayoutTag_AAC_7_1                  = kAudioChannelLayoutTag_MPEG_7_1_B,   // C Lc Rc L R Ls Rs Lfe
     kAudioChannelLayoutTag_AAC_7_1_B                = (183<<16) | 8,                       // C L R Ls Rs Rls Rrs LFE
+	kAudioChannelLayoutTag_AAC_7_1_C				= (184<<16) | 8,                       // C L R Ls Rs LFE Vhl Vhr
     kAudioChannelLayoutTag_AAC_Octagonal            = (144<<16) | 8,                       // C L R Ls Rs Rls Rrs Cs
 
     kAudioChannelLayoutTag_TMH_10_2_std             = (145<<16) | 16,                      // L R C Vhc Lsd Rsd Ls Rs Vhl Vhr Lw Rw Csd Cs LFE1 LFE2
@@ -1256,8 +1266,7 @@ enum
     kAudioChannelLayoutTag_DTS_8_1_B                = (181<<16) | 9,                        // Lc C Rc L R Ls Cs Rs LFE
     kAudioChannelLayoutTag_DTS_6_1_D                = (182<<16) | 7,                        // C L R Ls Rs LFE Cs
     
-
-    kAudioChannelLayoutTag_DiscreteInOrder          = (147<<16) | 0,                        // needs to be ORed with the actual number of channels  
+    kAudioChannelLayoutTag_DiscreteInOrder          = (147<<16) | 0,                        // needs to be ORed with the actual number of channels
     kAudioChannelLayoutTag_Unknown                  = 0xFFFF0000                            // needs to be ORed with the actual number of channels  
 };
 

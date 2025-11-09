@@ -17,6 +17,15 @@
 					a QTMedia object wraps the underlying QuickTime media (of type Media).
 */
 
+/*
+  QTKit has been deprecated in 10.9.
+
+  AVFoundation and AVKit are the frameworks recommended for all new development 
+  involving time-based audiovisual media on OS X.  In order to transition your 
+  project from QTKit to AVFoundation please refer to:
+  "Technical Note TN2300 Transitioning QTKit code to AV Foundation".
+*/
+
 #import <Foundation/Foundation.h>
 #if !__LP64__
 	#import <QuickTime/QuickTime.h>
@@ -28,182 +37,182 @@
 	@constant		QTMediaTypeVideo
 	@abstract		The media type of a video track.
  */
-QTKIT_EXTERN NSString * const QTMediaTypeVideo								AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;
+QTKIT_EXTERN NSString * const QTMediaTypeVideo								AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@constant		QTMediaTypeSound
 	@abstract		The media type of a sound track.
  */
-QTKIT_EXTERN NSString * const QTMediaTypeSound								AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;
+QTKIT_EXTERN NSString * const QTMediaTypeSound								AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@constant		QTMediaTypeText
 	@abstract		The media type of a text track.
  */
-QTKIT_EXTERN NSString * const QTMediaTypeText								AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;
+QTKIT_EXTERN NSString * const QTMediaTypeText								AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@constant		QTMediaTypeBase
 	@abstract		The media type of a base track.
  */
-QTKIT_EXTERN NSString * const QTMediaTypeBase								AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;
+QTKIT_EXTERN NSString * const QTMediaTypeBase								AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@constant		QTMediaTypeMPEG
 	@abstract		The media type of an MPEG track.
  */
-QTKIT_EXTERN NSString * const QTMediaTypeMPEG								AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;
+QTKIT_EXTERN NSString * const QTMediaTypeMPEG								AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@constant		QTMediaTypeMusic
 	@abstract		The media type of a music track.
  */
-QTKIT_EXTERN NSString * const QTMediaTypeMusic								AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;
+QTKIT_EXTERN NSString * const QTMediaTypeMusic								AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@constant		QTMediaTypeTimeCode
 	@abstract		The media type of a timecode track.
  */
-QTKIT_EXTERN NSString * const QTMediaTypeTimeCode							AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;
+QTKIT_EXTERN NSString * const QTMediaTypeTimeCode							AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@constant		QTMediaTypeSprite
 	@abstract		The media type of a sprite track.
  */
-QTKIT_EXTERN NSString * const QTMediaTypeSprite								AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;
+QTKIT_EXTERN NSString * const QTMediaTypeSprite								AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@constant		QTMediaTypeFlash
 	@abstract		The media type of a Flash track.
  */
-QTKIT_EXTERN NSString * const QTMediaTypeFlash								AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;
+QTKIT_EXTERN NSString * const QTMediaTypeFlash								AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@constant		QTMediaTypeMovie
 	@abstract		The media type of a movie media track.
  */
-QTKIT_EXTERN NSString * const QTMediaTypeMovie								AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;
+QTKIT_EXTERN NSString * const QTMediaTypeMovie								AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@constant		QTMediaTypeTween
 	@abstract		The media type of a tween track.
  */
-QTKIT_EXTERN NSString * const QTMediaTypeTween								AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;
+QTKIT_EXTERN NSString * const QTMediaTypeTween								AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@constant		QTMediaType3D
 	@abstract		The media type of a QuickDraw 3D track.
  */
-QTKIT_EXTERN NSString * const QTMediaType3D									AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;
+QTKIT_EXTERN NSString * const QTMediaType3D									AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@constant		QTMediaTypeSkin
 	@abstract		The media type of a skin track.
  */
-QTKIT_EXTERN NSString * const QTMediaTypeSkin								AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;
+QTKIT_EXTERN NSString * const QTMediaTypeSkin								AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@constant		QTMediaTypeQTVR
 	@abstract		The media type of a QuickTime VR track.
  */
-QTKIT_EXTERN NSString * const QTMediaTypeQTVR								AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;
+QTKIT_EXTERN NSString * const QTMediaTypeQTVR								AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@constant		QTMediaTypeHint
 	@abstract		The media type of a hint track.
  */
-QTKIT_EXTERN NSString * const QTMediaTypeHint								AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;
+QTKIT_EXTERN NSString * const QTMediaTypeHint								AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@constant		QTMediaTypeStream
 	@abstract		The media type of a stream track.
  */
-QTKIT_EXTERN NSString * const QTMediaTypeStream								AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;
+QTKIT_EXTERN NSString * const QTMediaTypeStream								AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@constant		QTMediaTypeMuxed
 	@abstract		The media type of a multiplexed audio and video track.
  */
-QTKIT_EXTERN NSString * const QTMediaTypeMuxed								AVAILABLE_QTKIT_VERSION_7_2_AND_LATER;
+QTKIT_EXTERN NSString * const QTMediaTypeMuxed								AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@constant		QTMediaTypeQuartzComposer
 	@abstract		The media type of a Quartz Composer track.
  */
-QTKIT_EXTERN NSString * const QTMediaTypeQuartzComposer						AVAILABLE_QTKIT_VERSION_7_2_AND_LATER;
+QTKIT_EXTERN NSString * const QTMediaTypeQuartzComposer						AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@constant		QTMediaTypeSubtitle
 	@abstract		The media type of a subtitle track.
  */
-QTKIT_EXTERN NSString * const QTMediaTypeSubtitle							AVAILABLE_QTKIT_VERSION_7_6_3_AND_LATER;
+QTKIT_EXTERN NSString * const QTMediaTypeSubtitle							AVAILABLE_QTKIT_VERSION_7_6_3_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@constant		QTMediaTypeClosedCaption
 	@abstract		The media type of a closed-caption track.
  */
-QTKIT_EXTERN NSString * const QTMediaTypeClosedCaption						AVAILABLE_QTKIT_VERSION_7_6_3_AND_LATER;
+QTKIT_EXTERN NSString * const QTMediaTypeClosedCaption						AVAILABLE_QTKIT_VERSION_7_6_3_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 	// media characteristics
 /*!
 	@constant		QTMediaCharacteristicVisual
 	@abstract		Indicates whether a QTMedia object has visual data.
  */
-QTKIT_EXTERN NSString * const QTMediaCharacteristicVisual					AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;
+QTKIT_EXTERN NSString * const QTMediaCharacteristicVisual					AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@constant		QTMediaCharacteristicAudio
 	@abstract		Indicates whether a QTMedia object has audio data.
  */
-QTKIT_EXTERN NSString * const QTMediaCharacteristicAudio					AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;
+QTKIT_EXTERN NSString * const QTMediaCharacteristicAudio					AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@constant		QTMediaCharacteristicCanSendVideo
 	@abstract		Indicates whether a QTMedia object can send visual data to another track.
  */
-QTKIT_EXTERN NSString * const QTMediaCharacteristicCanSendVideo				AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;
+QTKIT_EXTERN NSString * const QTMediaCharacteristicCanSendVideo				AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@constant		QTMediaCharacteristicProvidesActions
 	@abstract		Indicates whether a QTMedia object has actions.
  */
-QTKIT_EXTERN NSString * const QTMediaCharacteristicProvidesActions			AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;
+QTKIT_EXTERN NSString * const QTMediaCharacteristicProvidesActions			AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@constant		QTMediaCharacteristicNonLinear
 	@abstract		Indicates whether a QTMedia object is non-linear.
  */
-QTKIT_EXTERN NSString * const QTMediaCharacteristicNonLinear				AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;
+QTKIT_EXTERN NSString * const QTMediaCharacteristicNonLinear				AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@constant		QTMediaCharacteristicCanStep
 	@abstract		Indicates whether a QTMedia object can step.
  */
-QTKIT_EXTERN NSString * const QTMediaCharacteristicCanStep					AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;
+QTKIT_EXTERN NSString * const QTMediaCharacteristicCanStep					AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@constant		QTMediaCharacteristicHasNoDuration
 	@abstract		Indicates whether a QTMedia object has no duration.
  */
-QTKIT_EXTERN NSString * const QTMediaCharacteristicHasNoDuration			AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;
+QTKIT_EXTERN NSString * const QTMediaCharacteristicHasNoDuration			AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@constant		QTMediaCharacteristicHasSkinData
 	@abstract		Indicates whether a QTMedia object has skin data.
  */
-QTKIT_EXTERN NSString * const QTMediaCharacteristicHasSkinData				AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;
+QTKIT_EXTERN NSString * const QTMediaCharacteristicHasSkinData				AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@constant		QTMediaCharacteristicProvidesKeyFocus
 	@abstract		Indicates whether key events can be focused at a QTMedia object.
  */
-QTKIT_EXTERN NSString * const QTMediaCharacteristicProvidesKeyFocus			AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;
+QTKIT_EXTERN NSString * const QTMediaCharacteristicProvidesKeyFocus			AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@constant		QTMediaCharacteristicHasVideoFrameRate
 	@abstract		Indicates whether a QTMedia object has a video frame rate.
  */
-QTKIT_EXTERN NSString * const QTMediaCharacteristicHasVideoFrameRate		AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;
+QTKIT_EXTERN NSString * const QTMediaCharacteristicHasVideoFrameRate		AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 	// media attributes
 /*!
@@ -212,7 +221,7 @@ QTKIT_EXTERN NSString * const QTMediaCharacteristicHasVideoFrameRate		AVAILABLE_
 	@discussion		This attribute can be read but not written.
 					This attribute can be read but not written when the movie containing this media has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */
-QTKIT_EXTERN NSString * const QTMediaCreationTimeAttribute					AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;  // NSDate
+QTKIT_EXTERN NSString * const QTMediaCreationTimeAttribute					AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;  // NSDate
 
 /*!
 	@constant		QTMediaDurationAttribute
@@ -220,7 +229,7 @@ QTKIT_EXTERN NSString * const QTMediaCreationTimeAttribute					AVAILABLE_QTKIT_V
 	@discussion		This attribute can be read but not written.
 					This attribute can be read but not written when the movie containing this media has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */
-QTKIT_EXTERN NSString * const QTMediaDurationAttribute						AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;	// NSValue (QTTime)
+QTKIT_EXTERN NSString * const QTMediaDurationAttribute						AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;	// NSValue (QTTime)
 
 /*!
 	@constant		QTMediaModificationTimeAttribute
@@ -228,7 +237,7 @@ QTKIT_EXTERN NSString * const QTMediaDurationAttribute						AVAILABLE_QTKIT_VERS
 	@discussion		This attribute can be read but not written.
 					This attribute can be read but not written when the movie containing this media has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */
-QTKIT_EXTERN NSString * const QTMediaModificationTimeAttribute				AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;	// NSDate
+QTKIT_EXTERN NSString * const QTMediaModificationTimeAttribute				AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;	// NSDate
 
 /*!
 	@constant		QTMediaSampleCountAttribute
@@ -236,7 +245,7 @@ QTKIT_EXTERN NSString * const QTMediaModificationTimeAttribute				AVAILABLE_QTKI
 	@discussion		This attribute can be read but not written.
 					This attribute can be read but not written when the movie containing this media has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */
-QTKIT_EXTERN NSString * const QTMediaSampleCountAttribute					AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;	// NSNumber (long)
+QTKIT_EXTERN NSString * const QTMediaSampleCountAttribute					AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;	// NSNumber (long)
 
 /*!
 	@constant		QTMediaQualityAttribute
@@ -244,7 +253,7 @@ QTKIT_EXTERN NSString * const QTMediaSampleCountAttribute					AVAILABLE_QTKIT_VE
 	@discussion		This attribute can be read and written.
 					This attribute can be read but not written when the movie containing this media has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */
-QTKIT_EXTERN NSString * const QTMediaQualityAttribute						AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;	// NSNumber (short)
+QTKIT_EXTERN NSString * const QTMediaQualityAttribute						AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;	// NSNumber (short)
 
 /*!
 	@constant		QTMediaTimeScaleAttribute
@@ -252,7 +261,7 @@ QTKIT_EXTERN NSString * const QTMediaQualityAttribute						AVAILABLE_QTKIT_VERSI
 	@discussion		This attribute can be read and written.
 					This attribute can be read but not written when the movie containing this media has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */
-QTKIT_EXTERN NSString * const QTMediaTimeScaleAttribute						AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;	// NSNumber (long)
+QTKIT_EXTERN NSString * const QTMediaTimeScaleAttribute						AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;	// NSNumber (long)
 
 /*!
 	@constant		QTMediaTypeAttribute
@@ -260,7 +269,7 @@ QTKIT_EXTERN NSString * const QTMediaTimeScaleAttribute						AVAILABLE_QTKIT_VER
 	@discussion		This attribute can be read but not written.
 					This attribute can be read but not written when the movie containing this media has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */
-QTKIT_EXTERN NSString * const QTMediaTypeAttribute							AVAILABLE_QTKIT_VERSION_7_0_AND_LATER;	// NSString
+QTKIT_EXTERN NSString * const QTMediaTypeAttribute							AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;	// NSString
 
 @class QTMovie;
 @class QTTrack;
@@ -293,7 +302,7 @@ QTKIT_EXTERN NSString * const QTMediaTypeAttribute							AVAILABLE_QTKIT_VERSION
 	@param			errorPtr
 					A pointer to an NSError object; if a QTMedia object cannot be created, an NSError object is returned in this location.
 */
-+ (id)mediaWithQuickTimeMedia:(Media)media error:(NSError **)errorPtr;
++ (id)mediaWithQuickTimeMedia:(Media)media error:(NSError **)errorPtr AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			initWithQuickTimeMedia:error:
@@ -305,7 +314,7 @@ QTKIT_EXTERN NSString * const QTMediaTypeAttribute							AVAILABLE_QTKIT_VERSION
 	@param			errorPtr
 					A pointer to an NSError object; if a QTMedia object cannot be created, an NSError object is returned in this location.
 */
-- (id)initWithQuickTimeMedia:(Media)media error:(NSError **)errorPtr;
+- (id)initWithQuickTimeMedia:(Media)media error:(NSError **)errorPtr AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 #endif
 
 	// parent
@@ -314,7 +323,7 @@ QTKIT_EXTERN NSString * const QTMediaTypeAttribute							AVAILABLE_QTKIT_VERSION
 	@abstract		Returns the QTTrack object associated with a QTMedia object.
 	@discussion		This method can be called when the movie containing this media has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 */
-- (QTTrack *)track;
+- (QTTrack *)track AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 	// attributes
 /*!
@@ -322,7 +331,7 @@ QTKIT_EXTERN NSString * const QTMediaTypeAttribute							AVAILABLE_QTKIT_VERSION
 	@abstract		Returns a dictionary containing the current values of all public attributes of a QTMedia object.
 	@discussion		This method can be called when the movie containing this media has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 */
-- (NSDictionary *)mediaAttributes;
+- (NSDictionary *)mediaAttributes AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			setMediaAttributes:
@@ -332,7 +341,7 @@ QTKIT_EXTERN NSString * const QTMediaTypeAttribute							AVAILABLE_QTKIT_VERSION
 	@param			attributes
 					An NSDictionary object that specifies the attributes to set and their desired values.
 */
-- (void)setMediaAttributes:(NSDictionary *)attributes;
+- (void)setMediaAttributes:(NSDictionary *)attributes AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			attributeForKey:
@@ -341,7 +350,7 @@ QTKIT_EXTERN NSString * const QTMediaTypeAttribute							AVAILABLE_QTKIT_VERSION
 	@param			attributeKey
 					An NSString object that specifies the attribute to be read; pass strings like QTMediaTimeScaleAttribute or QTMediaTypeAttribute.
 */
-- (id)attributeForKey:(NSString *)attributeKey;
+- (id)attributeForKey:(NSString *)attributeKey AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 /*!
 	@method			setAttribute:forKey:
@@ -353,7 +362,7 @@ QTKIT_EXTERN NSString * const QTMediaTypeAttribute							AVAILABLE_QTKIT_VERSION
 	@param			attributeKey
 					An NSString object that specifies the attribute to be written; pass strings like QTMediaTimeScaleAttribute or QTMediaTypeAttribute.
 */
-- (void)setAttribute:(id)value forKey:(NSString *)attributeKey;
+- (void)setAttribute:(id)value forKey:(NSString *)attributeKey AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 	// characteristics
 /*!
@@ -364,7 +373,7 @@ QTKIT_EXTERN NSString * const QTMediaTypeAttribute							AVAILABLE_QTKIT_VERSION
 					An NSString object that specifies the characteristic to be read; pass strings like QTMediaCharacteristicVisual or QTMediaCharacteristicAudio.
 	@result			Returns YES if the QTMedia object has the specified characteristic, NO otherwise. 
 */
-- (BOOL)hasCharacteristic:(NSString *)characteristic;
+- (BOOL)hasCharacteristic:(NSString *)characteristic AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 #if !__LP64__
 	// underlying QT object
@@ -374,7 +383,7 @@ QTKIT_EXTERN NSString * const QTMediaTypeAttribute							AVAILABLE_QTKIT_VERSION
 	@discussion		This method cannot be called when the movie containing this media has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 					In addition, this method cannot be called by 64-bit applications.
 */
-- (Media)quickTimeMedia;
+- (Media)quickTimeMedia AVAILABLE_QTKIT_VERSION_7_0_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 #endif
 
 @end

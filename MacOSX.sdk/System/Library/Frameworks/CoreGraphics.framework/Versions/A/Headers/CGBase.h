@@ -71,11 +71,55 @@
 
 #if !defined(CG_LOCAL)
 # if __CG_HAS_COMPILER_ATTRIBUTE(visibility)
-#  define CG_LOCAL extern __attribute__((visibility("hidden")))
+#  if defined(__cplusplus)
+#   define CG_LOCAL extern "C" __attribute__((visibility("hidden")))
+#  else
+#   define CG_LOCAL extern __attribute__((visibility("hidden")))
+#  endif
 # else
 #  define CG_LOCAL CG_EXTERN
 # endif
 #endif /* !defined(CG_LOCAL) */
+
+/* Definition of `CG_EXTERN_64` */
+
+#if !defined(CG_EXTERN_64)
+# if defined(__LP64__)
+#  define CG_EXTERN_64 CG_EXTERN
+# else /* !defined(__LP64__) */
+#  define CG_EXTERN_64 CG_LOCAL
+# endif /* defined(__LP64__) */
+#endif /* !defined(CG_EXTERN_64) */
+
+/* Definition of `CG_EXTERN_32` */
+
+#if !defined(CG_EXTERN_32)
+# if defined(__LP64__)
+#  define CG_EXTERN_32 CG_LOCAL
+# else /* !defined(__LP64__) */
+#  define CG_EXTERN_32 CG_EXTERN
+# endif /* defined(__LP64__) */
+#endif /* !defined(CG_EXTERN_32) */
+
+/* Definition of `CG_LOCAL_64` */
+
+#if !defined(CG_LOCAL_64)
+# if defined(__LP64__)
+#  define CG_LOCAL_64 CG_LOCAL
+# else /* !defined(__LP64__) */
+#  define CG_LOCAL_64 CG_LOCAL __attribute__((unused))
+# endif /* defined(__LP64__) */
+#endif /* !defined(CG_LOCAL_64) */
+
+/* Definition of `CG_LOCAL_32` */
+
+#if !defined(CG_LOCAL_32)
+# if defined(__LP64__)
+#  define CG_LOCAL_32 CG_LOCAL __attribute__((unused))
+# else /* !defined(__LP64__) */
+#  define CG_LOCAL_32 CG_LOCAL
+# endif /* defined(__LP64__) */
+#endif /* !defined(CG_LOCAL_32) */
 
 /* Definition of `__CG_DEPRECATED'. */
 
@@ -103,10 +147,24 @@
 
 #if !defined(__CG_DEPRECATED_ENUMERATOR)
 # if __CG_HAS_COMPILER_ATTRIBUTE(deprecated)				      \
-   && __CG_HAS_COMPILER_EXTENSION(enumerator_attributes)
+   && __CG_HAS_COMPILER_EXTENSION(enumerator_attributes)		      \
+   && !defined(CG_BUILDING_CG)
 #  define __CG_DEPRECATED_ENUMERATOR __attribute__((deprecated))
 # else
 #  define __CG_DEPRECATED_ENUMERATOR
+# endif
+#endif
+
+/* Definition of `__CG_DEPRECATED_ENUMERATOR_WITH_MSG'. */
+
+#if !defined(__CG_DEPRECATED_ENUMERATOR_WITH_MSG)
+# if __CG_HAS_COMPILER_ATTRIBUTE(deprecated)				      \
+&& __CG_HAS_COMPILER_EXTENSION(attribute_deprecated_with_message) \
+&& __CG_HAS_COMPILER_EXTENSION(enumerator_attributes)		      \
+&& !defined(CG_BUILDING_CG)
+#  define __CG_DEPRECATED_ENUMERATOR_WITH_MSG(msg) __attribute__((deprecated(msg)))
+# else
+#  define __CG_DEPRECATED_ENUMERATOR_WITH_MSG(msg) __CG_DEPRECATED_ENUMERATOR
 # endif
 #endif
 
@@ -119,6 +177,20 @@
 # include <Availability.h>
 # define CG_AVAILABLE_STARTING __OSX_AVAILABLE_STARTING
 # define CG_AVAILABLE_BUT_DEPRECATED __OSX_AVAILABLE_BUT_DEPRECATED
+#endif
+
+/* Definition of `__CG_STATIC_ASSERT'. */
+
+#if !defined(__CG_STATIC_ASSERT)
+# if defined(__cplusplus) && __CG_HAS_COMPILER_EXTENSION(cxx_static_assert)
+#  define __CG_STATIC_ASSERT(constant_expression)			      \
+     static_assert(constant_expression, #constant_expression)
+# elif !defined(__cplusplus) && __CG_HAS_COMPILER_EXTENSION(c_static_assert)
+#  define __CG_STATIC_ASSERT(constant_expression)			      \
+     _Static_assert(constant_expression, #constant_expression)
+# else
+#  define __CG_STATIC_ASSERT(constant_expression)
+# endif
 #endif
 
 /* Definition of `CG_INLINE'. */
@@ -152,7 +224,8 @@
 #if !defined(__CG_FORMAT_PRINTF)
 # if __CG_HAS_COMPILER_ATTRIBUTE(format)
 #  define __CG_FORMAT_PRINTF(FORMAT_STRING, STARTING_ARG)		      \
-     __attribute__((format(printf, FORMAT_STRING, STARTING_ARG)))
+     __attribute__((format(printf, FORMAT_STRING, STARTING_ARG)))	      \
+     __attribute__((nonnull(FORMAT_STRING)))
 # else
 #  define __CG_FORMAT_PRINTF(FORMAT_STRING, STARTING_ARG)
 # endif

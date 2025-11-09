@@ -76,7 +76,7 @@ extern "C" {
 struct                      SSLContext;
 typedef struct SSLContext   *SSLContextRef;
 
-/* Opaque reference to an I/O conection (socket, Endpoint, etc.) */
+/* Opaque reference to an I/O connection (socket, endpoint, etc.) */
 typedef const void *		SSLConnectionRef;
 
 /* SSL Protocol version */
@@ -117,7 +117,20 @@ typedef enum {
      * its certificates allowing the server to verify whether these should be
      * allowed to authenticate.
      */
-    kSSLSessionOptionBreakOnClientAuth
+    kSSLSessionOptionBreakOnClientAuth,
+    /*
+     * Enable/Disable TLS False Start
+     * When enabled, False Start will only be performed if a adequate cipher-suite is
+     * negotiated.
+     */
+    kSSLSessionOptionFalseStart,
+    /*
+     * Enable/Disable 1/n-1 record splitting for BEAST attack mitigation.
+     * When enabled, record splitting will only be performed for TLS 1.0 connections
+     * using a block cipher.
+     */
+    kSSLSessionOptionSendOneByteRecord,
+
 } SSLSessionOption;
 
 /* State of an SSLSession */
@@ -248,13 +261,15 @@ enum {
 	errSSLBadRecordMac			= -9846,	/* bad MAC */
 	errSSLRecordOverflow		= -9847,	/* record overflow */
 	errSSLBadConfiguration		= -9848,	/* configuration error */
-	errSSLLast					= -9849,	/* end of range, to be deleted */
-
+	errSSLUnexpectedRecord      = -9849,	/* unexpected (skipped) record in DTLS */
 };
 
 /* DEPRECATED aliases for errSSLPeerAuthCompleted */
 #define errSSLServerAuthCompleted	errSSLPeerAuthCompleted
 #define errSSLClientAuthCompleted	errSSLPeerAuthCompleted
+
+/* DEPRECATED alias for the end of the error range */
+#define errSSLLast errSSLUnexpectedRecord
 
 typedef enum
 {
@@ -313,7 +328,7 @@ SSLCreateContext(CFAllocatorRef alloc, SSLProtocolSide protocolSide, SSLConnecti
 OSStatus
 SSLNewContext				(Boolean 			isServer,
 							 SSLContextRef 		*contextPtr)	/* RETURNED */
-	__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_9,__IPHONE_NA,__IPHONE_NA);
 
 /*
  * Dispose of a session context.
@@ -327,7 +342,7 @@ SSLNewContext				(Boolean 			isServer,
  */
 OSStatus
 SSLDisposeContext			(SSLContextRef		context)
-	__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_9,__IPHONE_NA,__IPHONE_NA);
 
 #endif /* MAC OS X */
 
@@ -455,7 +470,7 @@ OSStatus
 SSLSetProtocolVersionEnabled (SSLContextRef 	context,
 							 SSLProtocol		protocol,
 							 Boolean			enable)
-	__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_9,__IPHONE_NA,__IPHONE_NA);
 
 /*
  * Obtain a value specified in SSLSetProtocolVersionEnabled.
@@ -471,7 +486,7 @@ OSStatus
 SSLGetProtocolVersionEnabled(SSLContextRef 		context,
 							 SSLProtocol		protocol,
 							 Boolean			*enable)	/* RETURNED */
-	__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_9,__IPHONE_NA,__IPHONE_NA);
 
 /*
  * Get/set SSL protocol version; optional. Default is kSSLProtocolUnknown,
@@ -494,7 +509,7 @@ SSLSetProtocolVersion		(SSLContextRef 		context,
 /*
  * Obtain the protocol version specified in SSLSetProtocolVersion.
  * If SSLSetProtocolVersionEnabled() has been called for this session,
- * SSLGetProtocolVersion() may return paramErr if the protocol enable
+ * SSLGetProtocolVersion() may return errSecParam if the protocol enable
  * state can not be represented by the SSLProtocol enums (e.g.,
  * SSL2 and TLS1 enabled, SSL3 disabled).
  *
@@ -704,7 +719,7 @@ SSLGetEnabledCiphers		(SSLContextRef			context,
 OSStatus
 SSLSetEnableCertVerify		(SSLContextRef 			context,
 							 Boolean				enableVerify)
-	__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_9,__IPHONE_NA,__IPHONE_NA);
 
 /*
  * Check whether peer certificate chain validation is enabled.
@@ -721,7 +736,7 @@ SSLSetEnableCertVerify		(SSLContextRef 			context,
 OSStatus
 SSLGetEnableCertVerify		(SSLContextRef 			context,
 							 Boolean				*enableVerify)	/* RETURNED */
-	__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_9,__IPHONE_NA,__IPHONE_NA);
 
 /*
  * Specify the option of ignoring certificates' "expired" times.
@@ -750,12 +765,12 @@ SSLGetEnableCertVerify		(SSLContextRef 			context,
  *		if (status == errSSLServerAuthCompleted) {
  *			SecTrustRef peerTrust = NULL;
  *			status = SSLCopyPeerTrust(ctx, &peerTrust);
- *			if (status == noErr) {
+ *			if (status == errSecSuccess) {
  *				SecTrustResultType trustResult;
  *				// set flag to allow expired certificates
  *				SecTrustSetOptions(peerTrust, kSecTrustOptionAllowExpired);
  *				status = SecTrustEvaluate(peerTrust, &trustResult);
- *				if (status == noErr) {
+ *				if (status == errSecSuccess) {
  *					// A "proceed" result means the cert is explicitly trusted,
  *					// e.g. "Always Trust" was clicked;
  *					// "Unspecified" means the cert has no explicit trust settings,
@@ -788,7 +803,7 @@ SSLGetEnableCertVerify		(SSLContextRef 			context,
 OSStatus
 SSLSetAllowsExpiredCerts	(SSLContextRef		context,
 							 Boolean			allowsExpired)
-	__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_9,__IPHONE_NA,__IPHONE_NA);
 
 /*
  * Obtain the current value of an SSLContext's "allowExpiredCerts" flag.
@@ -802,7 +817,7 @@ SSLSetAllowsExpiredCerts	(SSLContextRef		context,
 OSStatus
 SSLGetAllowsExpiredCerts	(SSLContextRef		context,
 							 Boolean			*allowsExpired)	/* RETURNED */
-	__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_9,__IPHONE_NA,__IPHONE_NA);
 
 /*
  * Similar to SSLSetAllowsExpiredCerts, SSLSetAllowsExpiredRoots allows the
@@ -830,7 +845,7 @@ SSLGetAllowsExpiredCerts	(SSLContextRef		context,
 OSStatus
 SSLSetAllowsExpiredRoots	(SSLContextRef		context,
 							 Boolean			allowsExpired)
-	__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_9,__IPHONE_NA,__IPHONE_NA);
 
 /*
  * Obtain the current value of an SSLContext's "allow expired roots" flag.
@@ -844,7 +859,7 @@ SSLSetAllowsExpiredRoots	(SSLContextRef		context,
 OSStatus
 SSLGetAllowsExpiredRoots	(SSLContextRef		context,
 							 Boolean			*allowsExpired)	/* RETURNED */
-	__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_9,__IPHONE_NA,__IPHONE_NA);
 
 /*
  * Specify option of allowing for an unknown root cert, i.e., one which
@@ -880,7 +895,7 @@ SSLGetAllowsExpiredRoots	(SSLContextRef		context,
 OSStatus
 SSLSetAllowsAnyRoot			(SSLContextRef		context,
 							 Boolean			anyRoot)
-	__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_9,__IPHONE_NA,__IPHONE_NA);
 
 /*
  * Obtain the current value of an SSLContext's "allow any root" flag.
@@ -894,7 +909,7 @@ SSLSetAllowsAnyRoot			(SSLContextRef		context,
 OSStatus
 SSLGetAllowsAnyRoot			(SSLContextRef		context,
 							 Boolean			*anyRoot) /* RETURNED */
-	__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_9,__IPHONE_NA,__IPHONE_NA);
 
 /*
  * Augment or replace the system's default trusted root certificate set
@@ -928,7 +943,7 @@ OSStatus
 SSLSetTrustedRoots			(SSLContextRef 		context,
 							 CFArrayRef 		trustedRoots,
 							 Boolean 			replaceExisting)
-	__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_9,__IPHONE_NA,__IPHONE_NA);
 
 /*
  * Obtain an array of SecCertificateRefs representing the current
@@ -948,7 +963,7 @@ SSLSetTrustedRoots			(SSLContextRef 		context,
 OSStatus
 SSLCopyTrustedRoots			(SSLContextRef 		context,
 							 CFArrayRef 		*trustedRoots)	/* RETURNED */
-	__OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_9,__IPHONE_NA,__IPHONE_NA);
 
 /*
  * Request peer certificates. Valid anytime, subsequent to a handshake attempt.
@@ -972,7 +987,7 @@ SSLCopyTrustedRoots			(SSLContextRef 		context,
 OSStatus
 SSLCopyPeerCertificates		(SSLContextRef 		context,
 							 CFArrayRef			*certs)		/* RETURNED */
-	__OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_9,__IPHONE_NA,__IPHONE_NA);
 
 #endif /* MAC OS X */
 
@@ -1120,7 +1135,7 @@ SSLAddDistinguishedName		(SSLContextRef 		context,
  * false, the specified certificate(s) will be appended to the existing
  * list of acceptable CAs, if any.
  *
- * Returns paramErr if this is called on a SSLContextRef which
+ * Returns errSecParam if this is called on a SSLContextRef which
  * is configured as a client, or when a session is active.
  *
  * NOTE: this function is currently not available on iOS.
@@ -1214,11 +1229,11 @@ OSStatus SSLGetDiffieHellmanParams	(SSLContextRef			context,
  */
 OSStatus SSLSetRsaBlinding			(SSLContextRef			context,
 									 Boolean				blinding)
-	__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_9,__IPHONE_NA,__IPHONE_NA);
 
 OSStatus SSLGetRsaBlinding			(SSLContextRef			context,
 									 Boolean				*blinding)
-	__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_9,__IPHONE_NA,__IPHONE_NA);
 
 #endif /* MAC OS X */
 

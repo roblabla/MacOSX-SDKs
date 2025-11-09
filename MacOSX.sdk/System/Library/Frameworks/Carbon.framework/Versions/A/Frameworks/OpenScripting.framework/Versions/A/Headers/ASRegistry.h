@@ -3,9 +3,9 @@
  
      Contains:   AppleScript Registry constants.
  
-     Version:    OSA-148.3~2
+     Version:    OpenScripting
  
-     Copyright:  © 1991-2008 by Apple Computer, Inc., all rights reserved
+     Copyright:  ï¿½ 1991-2013 by Apple Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -21,7 +21,7 @@
 #endif
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -101,7 +101,11 @@ enum {
                                         /* event code for the 'error' statement */
   kASErrorEventCode             = 'err ',
   kOSAErrorArgs                 = 'erra',
-  keyAEErrorObject              = 'erob', /* Properties: */
+  keyAEErrorObject              = 'erob', /* event code for the 'use' statement */
+  kASUseEventCode               = 'use ',
+  kASMinimumVersion             = 'minv',
+  kASImporting                  = 'impr',
+  kASExcluding                  = 'impx', /* Properties: */
   pLength                       = 'leng',
   pReverse                      = 'rvse',
   pRest                         = 'rest',
@@ -171,7 +175,10 @@ enum {
   cKeyForm                      = enumKeyForm,
   cScript                       = 'scpt',
   cHandler                      = 'hand',
-  cProcedure                    = 'proc'
+  cProcedure                    = 'proc',
+  cFramework                    = 'frmk',
+  cDynamicLibrary               = 'dylb',
+  cScriptingAddition            = 'osax'
 };
 
 enum {
@@ -218,7 +225,8 @@ enum {
   kASInitializeEventCode        = 'init',
   pASPrintLength                = 'prln',
   pASPrintDepth                 = 'prdp',
-  pASTopLevelScript             = 'ascr'
+  pASTopLevelScript             = 'ascr',
+  pASRequiredImportItems        = 'pimr'
 };
 
 enum {

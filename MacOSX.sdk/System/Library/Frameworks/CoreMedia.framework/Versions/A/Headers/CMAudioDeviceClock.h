@@ -13,7 +13,9 @@
 #include <CoreMedia/CMBase.h>
 #include <CoreMedia/CMSync.h>
 
+#if ! TARGET_OS_IPHONE
 #include <CoreAudio/CoreAudio.h>
+#endif // ! TARGET_OS_IPHONE
 
 #ifdef __cplusplus
 extern "C" {
@@ -35,8 +37,9 @@ CMAudioDeviceClockCreate(
 		CFAllocatorRef allocator,
 		CFStringRef	deviceUID,
 		CMClockRef *clockOut)
-			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
 
+#if ! TARGET_OS_IPHONE
 /*!
 	@function	CMAudioDeviceClockCreateFromAudioDeviceID
 	@abstract	Creates a clock that tracks playback through a particular CoreAudio device.
@@ -87,6 +90,8 @@ CM_EXPORT OSStatus CMAudioDeviceClockGetAudioDevice(
 		AudioDeviceID *deviceIDOut,				// may be NULL
 		Boolean *trackingDefaultDeviceOut)		// may be NULL
 			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
+
+#endif // ! TARGET_OS_IPHONE
 
 #pragma pack(pop)
     

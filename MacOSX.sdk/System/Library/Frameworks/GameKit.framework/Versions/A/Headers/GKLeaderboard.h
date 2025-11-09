@@ -74,4 +74,12 @@ NS_CLASS_AVAILABLE(10_8, 4_1)
 // 3. Leaderboard not present
 + (void)setDefaultLeaderboard:(NSString *)categoryID withCompletionHandler:(void(^)(NSError *error))completionHandler __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_5_0);
 
+#if TARGET_OS_IPHONE
+// Asynchronously load the image. Error will be nil on success.
+- (void)loadImageWithCompletionHandler:(void(^)(UIImage *image, NSError *error))completionHandler;
+#else
+// Asynchronously load the image. Error will be nil on success.
+- (void)loadImageWithCompletionHandler:(void(^)(NSImage *image, NSError *error))completionHandler;
+#endif
+
 @end

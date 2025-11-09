@@ -219,6 +219,7 @@ extern NSString * const kABSocialProfileProperty                    AVAILABLE_MA
         extern NSString * const kABSocialProfileServiceFlickr       AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
         extern NSString * const kABSocialProfileServiceMySpace      AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
         extern NSString * const kABSocialProfileServiceSinaWeibo    AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
+        extern NSString * const kABSocialProfileServiceTencentWeibo AVAILABLE_MAC_OS_X_VERSION_10_9_AND_LATER;
 
 extern NSString * const kABNoteProperty;                   // Note - kABStringProperty
 

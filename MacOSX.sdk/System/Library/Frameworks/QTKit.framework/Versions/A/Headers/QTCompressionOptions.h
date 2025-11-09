@@ -3,7 +3,16 @@
  
 	Copyright:	(c)2007-2012 by Apple Inc., all rights reserved.
  
- */
+*/
+
+/*
+  QTKit has been deprecated in 10.9.
+
+  AVFoundation and AVKit are the frameworks recommended for all new development 
+  involving time-based audiovisual media on OS X.  In order to transition your 
+  project from QTKit to AVFoundation please refer to:
+  "Technical Note TN2300 Transitioning QTKit code to AV Foundation".
+*/
 
 #import <Foundation/Foundation.h>
 #import <QTKit/QTKitDefines.h>
@@ -47,17 +56,17 @@
 }
 
 // This method returns all of the possible identifiers for the given media type that can be used with compressionOptionsWithIdentifier: on the user's system. Media types are defined in QTMedia.h.
-+ (NSArray *)compressionOptionsIdentifiersForMediaType:(NSString *)mediaType;
++ (NSArray *)compressionOptionsIdentifiersForMediaType:(NSString *)mediaType AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 // This method returns a compression options object configured for the given identifier.
-+ (id)compressionOptionsWithIdentifier:(NSString *)identifier;
++ (id)compressionOptionsWithIdentifier:(NSString *)identifier AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
-- (NSString *)mediaType;
+- (NSString *)mediaType AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
-- (NSString *)localizedDisplayName;
-- (NSString *)localizedCompressionOptionsSummary;
+- (NSString *)localizedDisplayName AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+- (NSString *)localizedCompressionOptionsSummary AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
-- (BOOL)isEqualToCompressionOptions:(QTCompressionOptions *)compressionOptions;
+- (BOOL)isEqualToCompressionOptions:(QTCompressionOptions *)compressionOptions AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 @end
 

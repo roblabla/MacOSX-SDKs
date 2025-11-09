@@ -143,6 +143,17 @@
 
 #define kIOLocation               "IOLocation"
 
+/*! @defined kIONetworkNoBSDAttachKey
+    @abstract kIONetworkNoBSDAttachKey is a property of IONetworkInterface
+        objects. It has an OSBoolean value.
+    @discussion Adding a property with this key and the value kOSBooleanTrue
+        before the interface is published will hold off the BSD attach.
+        When the interface is ready to attach to BSD, remove the property
+        and then re-publish the interface by calling registerService().
+*/
+
+#define kIONetworkNoBSDAttachKey  "IONetworkNoBSDAttach"
+
 /*! @enum InterfaceObjectStates
     @discussion Constants used to encode the state of the interface object.
    @constant kIONetworkInterfaceRegisteredState The interface object has
@@ -267,6 +278,7 @@ private:
         int                         eflags;
         int                         addrlen;
         int                         hdrlen;
+        int32_t                     loggingLevel;
         uint32_t                    outputQueueModel;
         IONetworkStats              driverStats;
         IONetworkStats              lastDriverStats;
@@ -319,11 +331,12 @@ private:
     static void     if_input_poll(ifnet_t ifp, uint32_t flags,
                                 uint32_t max_count,
                                 mbuf_t * first_packet, mbuf_t * last_packet,
-                                uint32_t *  cnt, uint32_t * len );
+                                uint32_t *  cnt, uint32_t * len);
     static void     if_input_poll_gated(ifnet_t ifp, uint32_t flags,
                                 uint32_t max_count,
                                 mbuf_t * first_packet, mbuf_t * last_packet,
-                                uint32_t *  cnt, uint32_t * len );
+                                uint32_t *  cnt, uint32_t * len);
+    void            notifyDriver( uint32_t type, void * data );
 
 public:
 

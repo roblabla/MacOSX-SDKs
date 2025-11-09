@@ -10,6 +10,8 @@ typedef struct CGLayer *CGLayerRef;
 #include <CoreGraphics/CGBase.h>
 #include <CoreGraphics/CGContext.h>
 
+CF_IMPLICIT_BRIDGING_ENABLED
+
 /* Create a layer of size `size' relative to the context `context'. The
    value of `size' is specified in default user space (base space) units.
    The parameter `auxiliaryInfo' should be NULL; it is reserved for future
@@ -59,5 +61,7 @@ CG_EXTERN void CGContextDrawLayerAtPoint(CGContextRef context, CGPoint point,
 
 CG_EXTERN CFTypeID CGLayerGetTypeID(void)
     CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif	/* CGLAYER_H_ */

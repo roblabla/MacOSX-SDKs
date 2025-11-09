@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2011-2012 Apple Inc. All rights reserved.
+	Copyright 2011-2013 Apple Inc. All rights reserved.
 
 */
 
@@ -22,6 +22,7 @@
 
 NS_CLASS_AVAILABLE(10_8, 5_0)
 @interface AVMediaSelectionGroup : NSObject <NSCopying> {
+@private
 	AVMediaSelectionGroupInternal	*_mediaSelectionGroup;
 }
 
@@ -81,7 +82,7 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
 				An array of language identifiers in order of preference, each of which is an IETF BCP 47 (RFC 4646) language identifier. Use +[NSLocale preferredLanguages] to obtain the user's list of preferred languages.
  @result		An instance of NSArray containing media selection options of the specified NSArray that match a preferred language, sorted according to the order of preference of the language each matches.
 */
-+ (NSArray *)mediaSelectionOptionsFromArray:(NSArray *)mediaSelectionOptions filteredAndSortedAccordingToPreferredLanguages:(NSArray *)preferredLanguages NS_AVAILABLE(10_8, TBD);
++ (NSArray *)mediaSelectionOptionsFromArray:(NSArray *)mediaSelectionOptions filteredAndSortedAccordingToPreferredLanguages:(NSArray *)preferredLanguages NS_AVAILABLE(10_8, 6_0);
 
 /*!
   @method		mediaSelectionOptionsFromArray:withLocale:
@@ -132,6 +133,7 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
 
 NS_CLASS_AVAILABLE(10_8, 5_0)
 @interface AVMediaSelectionOption : NSObject <NSCopying> {
+@private
 	AVMediaSelectionOptionInternal	*_mediaSelectionOption;
 }
 
@@ -167,6 +169,12 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
  @discussion	If the media data associated with the option cannot be decoded or otherwise rendered, playable is NO.
 */
 @property (nonatomic, readonly, getter=isPlayable) BOOL playable;
+
+/*!
+ @property		extendedLanguageTag
+ @abstract		Indicates the RFC 4646 language tag associated with the option. May be nil.
+ */
+@property (nonatomic, readonly) NSString *extendedLanguageTag NS_AVAILABLE(10_9, 7_0);
 
 /*!
  @property		locale
@@ -239,5 +247,23 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
   @result		A serializable property list that's sufficient to identify the option within its group. For serialization utilities, see NSPropertyList.h.
 */
 - (id)propertyList;
+
+/*!
+  @method		displayNameWithLocale
+  @abstract		Provides an NSString suitable for display.
+  @param		locale
+  				Localize manufactured portions of the string using the specificed locale.
+  @discussion
+   May use this option's common metadata, media characteristics and locale properties in addition to the provided locale to formulate an NSString intended for display.
+*/
+- (NSString *)displayNameWithLocale:(NSLocale *)locale NS_AVAILABLE(10_9, 7_0);
+
+/*!
+  @method		displayName
+  @abstract		Provides an NSString suitable for display using the current system locale.
+  @discussion
+   May use this option's common metadata, media characteristics and locale properties in addition to the current system locale to formulate an NSString intended for display. Equivalent to -[AVMediaSelectionOption displayNameWithLocale:[NSLocale currentLocale]].
+*/
+@property (nonatomic, readonly) NSString *displayName NS_AVAILABLE(10_9, 7_0);
 
 @end

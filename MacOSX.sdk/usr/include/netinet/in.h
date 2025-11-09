@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2012 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -69,15 +69,9 @@
 
 #include <Availability.h>
 
-#ifndef _IN_ADDR_T
-#define _IN_ADDR_T
-typedef	__uint32_t	in_addr_t;	/* base type for internet address */
-#endif
+#include <sys/_types/_in_addr_t.h>
 
-#ifndef _IN_PORT_T
-#define _IN_PORT_T
-typedef	__uint16_t	in_port_t;
-#endif
+#include <sys/_types/_in_port_t.h>
 
 /*
  * POSIX 1003.1-2003
@@ -385,6 +379,7 @@ struct sockaddr_in {
 	char		sin_zero[8];
 };
 
+
 #define INET_ADDRSTRLEN                 16
 
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
@@ -652,9 +647,7 @@ struct in_pktinfo {
 #define	IPCTL_GIF_TTL		16	/* default TTL for gif encap packet */
 #define	IPCTL_MAXID		17
 
-
 #endif	/* (!_POSIX_C_SOURCE || _DARWIN_C_SOURCE) */
-
 
 /* INET6 stuff */
 #define __KAME_NETINET_IN_H_INCLUDED_
@@ -669,5 +662,4 @@ struct sockaddr;
 int        bindresvport_sa(int, struct sockaddr *);
 __END_DECLS
 #endif
-
 #endif /* _NETINET_IN_H_ */

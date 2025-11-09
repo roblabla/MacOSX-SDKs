@@ -18,29 +18,29 @@
     id _contents;
 }
 
-- (id)target;
-- (void)setTarget:(id)anObject;
+- (id)target NS_DEPRECATED_MAC(10_5, 10_9);
+- (void)setTarget:(id)anObject NS_DEPRECATED_MAC(10_5, 10_9);
 
-- (SEL)action;
-- (void)setAction:(SEL)aSelector;
+- (SEL)action NS_DEPRECATED_MAC(10_5, 10_9);
+- (void)setAction:(SEL)aSelector NS_DEPRECATED_MAC(10_5, 10_9);
 
-- (NSInteger)tag;
-- (void)setTag:(NSInteger)anInt;
+- (NSInteger)tag NS_DEPRECATED_MAC(10_5, 10_9);
+- (void)setTag:(NSInteger)anInt NS_DEPRECATED_MAC(10_5, 10_9);
 
-- (BOOL)isEnabled;
-- (void)setEnabled:(BOOL)flag;
+- (BOOL)isEnabled NS_DEPRECATED_MAC(10_5, 10_9);
+- (void)setEnabled:(BOOL)flag NS_DEPRECATED_MAC(10_5, 10_9);
 
-- (NSInteger)integerValue;
-- (void)setIntegerValue:(NSInteger)anInteger;
+- (NSInteger)integerValue NS_DEPRECATED_MAC(10_5, 10_9);
+- (void)setIntegerValue:(NSInteger)anInteger NS_DEPRECATED_MAC(10_5, 10_9);
 
-- (int)intValue;
-- (void)setIntValue:(int)anInt;
+- (int)intValue NS_DEPRECATED_MAC(10_5, 10_9);
+- (void)setIntValue:(int)anInt NS_DEPRECATED_MAC(10_5, 10_9);
 
-- (float)floatValue;
-- (void)setFloatValue:(float)aFloat;
+- (float)floatValue NS_DEPRECATED_MAC(10_5, 10_9);
+- (void)setFloatValue:(float)aFloat NS_DEPRECATED_MAC(10_5, 10_9);
 
-- (double)doubleValue;
-- (void)setDoubleValue:(double)aDouble;
+- (double)doubleValue NS_DEPRECATED_MAC(10_5, 10_9);
+- (void)setDoubleValue:(double)aDouble NS_DEPRECATED_MAC(10_5, 10_9);
 
 @end
 
@@ -48,8 +48,8 @@
 {
 }
 
-- (NSInteger)state;
-- (void)setState:(NSInteger)value;
+- (NSInteger)state NS_DEPRECATED_MAC(10_5, 10_9);
+- (void)setState:(NSInteger)value NS_DEPRECATED_MAC(10_5, 10_9);
 
 @end
 
@@ -60,21 +60,21 @@
  otherwise it is paused.
  @result The IMAVButton.
  */
-+ (IMAVButton *) playPauseButton;
++ (IMAVButton *) playPauseButton NS_DEPRECATED_MAC(10_5, 10_9);
 
 /*! 
  @method forwardButton
  @abstract Returns the forward button used in iChat Theater.
  @result The IMAVButton.
  */
-+ (IMAVButton *) forwardButton;
++ (IMAVButton *) forwardButton NS_DEPRECATED_MAC(10_5, 10_9);
 
 /*! 
  @method backwardButton
  @abstract Returns the backward button used in iChat Theater.
  @result The IMAVButton.
  */
-+ (IMAVButton *) backwardButton;
++ (IMAVButton *) backwardButton NS_DEPRECATED_MAC(10_5, 10_9);
 
 /*! 
  @method muteButton
@@ -82,17 +82,17 @@
  otherwise it is paused.
  @result The IMAVSlider.
  */
-+ (IMAVButton *) muteButton;
++ (IMAVButton *) muteButton NS_DEPRECATED_MAC(10_5, 10_9);
 @end
 
 @interface IMAVSlider : IMAVControl
 {
 }
 
-- (double)minValue;
-- (void)setMinValue:(double)aDouble;
-- (double)maxValue;
-- (void)setMaxValue:(double)aDouble;
+- (double)minValue NS_DEPRECATED_MAC(10_5, 10_9);
+- (void)setMinValue:(double)aDouble NS_DEPRECATED_MAC(10_5, 10_9);
+- (double)maxValue NS_DEPRECATED_MAC(10_5, 10_9);
+- (void)setMaxValue:(double)aDouble NS_DEPRECATED_MAC(10_5, 10_9);
 
 @end
 
@@ -102,7 +102,7 @@
  @abstract Returns the time slider used in iChat Theater.
  @result The IMAVSlider.
  */
-+ (IMAVSlider *) timeSlider;
++ (IMAVSlider *) timeSlider NS_DEPRECATED_MAC(10_5, 10_9);
 @end
 
 @interface IMAVControlBar : NSObject
@@ -114,7 +114,7 @@
  @abstract Returns the controls that have been added to the control bar.
  @result An array of IMAVControls.
  */
-- (NSArray *) controls;
+- (NSArray *) controls NS_DEPRECATED_MAC(10_5, 10_9);
 
 /*! 
  @method addControl:
@@ -122,20 +122,20 @@
  @param control The control to add. Generally this will be one of the 
  StandardControls specified in this header.
  */
-- (void) addControl: (IMAVControl *) control;
+- (void) addControl: (IMAVControl *) control NS_DEPRECATED_MAC(10_5, 10_9);
 
 /*! 
  @method removeControls:
  @abstract Removes the specified control from the control bar.
  @param control The control to remove. 
  */
-- (void) removeControl: (IMAVControl *) control;
+- (void) removeControl: (IMAVControl *) control NS_DEPRECATED_MAC(10_5, 10_9);
 
 /*! 
  @method removeAllControls:
  @abstract Removes all controls from the control bar.
  */
-- (void) removeAllControls;
+- (void) removeAllControls NS_DEPRECATED_MAC(10_5, 10_9);
 
 @end
 

@@ -3,7 +3,7 @@
  
      Contains:   QuickTime Interfaces.
  
-     Version:    QuickTime 7.7.1
+     Version:    QuickTime 7.7.3
  
      Copyright:  © 1990-2012 by Apple Inc., all rights reserved
  
@@ -11,8 +11,15 @@
                  the World Wide Web:
  
                      http://developer.apple.com/bugreporter/
- 
 */
+
+/*
+  QuickTime has been deprecated in 10.9.
+
+  AVFoundation and AVKit are the frameworks recommended for all new development 
+  involving time-based audiovisual media on OS X.
+*/
+
 #ifndef __QUICKTIMECOMPONENTS__
 #define __QUICKTIMECOMPONENTS__
 
@@ -71,60 +78,60 @@ enum {
 #endif
 /** These are Clock procedures **/
 /*
- *  ClockGetTime()
+ *  ClockGetTime()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ClockGetTime(
   ComponentInstance   aClock,
-  TimeRecord *        out)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TimeRecord *        out)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 
 /*
- *  ClockNewCallBack()
+ *  ClockNewCallBack()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern QTCallBack 
 ClockNewCallBack(
   ComponentInstance   aClock,
   TimeBase            tb,
-  short               callBackType)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short               callBackType)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ClockDisposeCallBack()
+ *  ClockDisposeCallBack()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ClockDisposeCallBack(
   ComponentInstance   aClock,
-  QTCallBack          cb)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTCallBack          cb)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ClockCallMeWhen()
+ *  ClockCallMeWhen()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ClockCallMeWhen(
@@ -132,109 +139,109 @@ ClockCallMeWhen(
   QTCallBack          cb,
   long                param1,
   long                param2,
-  long                param3)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long                param3)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ClockCancelCallBack()
+ *  ClockCancelCallBack()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ClockCancelCallBack(
   ComponentInstance   aClock,
-  QTCallBack          cb)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTCallBack          cb)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ClockRateChanged()
+ *  ClockRateChanged()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ClockRateChanged(
   ComponentInstance   aClock,
-  QTCallBack          cb)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTCallBack          cb)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ClockTimeChanged()
+ *  ClockTimeChanged()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ClockTimeChanged(
   ComponentInstance   aClock,
-  QTCallBack          cb)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTCallBack          cb)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ClockSetTimeBase()
+ *  ClockSetTimeBase()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ClockSetTimeBase(
   ComponentInstance   aClock,
-  TimeBase            tb)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TimeBase            tb)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ClockStartStopChanged()
+ *  ClockStartStopChanged()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ClockStartStopChanged(
   ComponentInstance   aClock,
   QTCallBack          cb,
   Boolean             startChanged,
-  Boolean             stopChanged)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean             stopChanged)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ClockGetRate()
+ *  ClockGetRate()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 ClockGetRate(
   ComponentInstance   aClock,
-  Fixed *             rate)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Fixed *             rate)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ClockGetTimesForRateChange()
+ *  ClockGetTimesForRateChange()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 (or QuickTime 6.4) and later in QuickTime.framework
+ *    Mac OS X:         in version 10.3 (or QuickTime 6.4) and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
- *    Windows:          in qtmlClient.lib 6.5 and later
+ *    Windows:          in QTMLClient.lib 6.5 and later
  */
 extern ComponentResult 
 ClockGetTimesForRateChange(
@@ -243,23 +250,23 @@ ClockGetTimesForRateChange(
   Fixed               toRate,
   TimeRecord *        currentTime,
   TimeRecord *        preferredTime,
-  TimeRecord *        safeIncrementForPreferredTime)          AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  TimeRecord *        safeIncrementForPreferredTime)          AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  ClockGetRateChangeConstraints()
+ *  ClockGetRateChangeConstraints()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 (or QuickTime 6.4) and later in QuickTime.framework
+ *    Mac OS X:         in version 10.3 (or QuickTime 6.4) and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
- *    Windows:          in qtmlClient.lib 6.5 and later
+ *    Windows:          in QTMLClient.lib 6.5 and later
  */
 extern ComponentResult 
 ClockGetRateChangeConstraints(
   ComponentInstance   aClock,
   TimeRecord *        minimumDelay,
-  TimeRecord *        maximumDelay)                           AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  TimeRecord *        maximumDelay)                           AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 
@@ -1046,7 +1053,7 @@ struct SCAudioFormatFlagsRestrictions {
 };
 typedef struct SCAudioFormatFlagsRestrictions SCAudioFormatFlagsRestrictions;
 /*
- *  SCAudioInvokeLegacyCodecOptionsDialog()
+ *  SCAudioInvokeLegacyCodecOptionsDialog()   *** DEPRECATED ***
  *  
  *  Discussion:
  *    If kQTSCAudioPropertyID_HasLegacyCodecOptionsDialog is true,
@@ -1063,12 +1070,12 @@ typedef struct SCAudioFormatFlagsRestrictions SCAudioFormatFlagsRestrictions;
  *    ComponentResult
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 (or QuickTime 7.0) and later in QuickTime.framework
+ *    Mac OS X:         in version 10.4 (or QuickTime 7.0) and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
 extern ComponentResult 
-SCAudioInvokeLegacyCodecOptionsDialog(ComponentInstance ci)   AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+SCAudioInvokeLegacyCodecOptionsDialog(ComponentInstance ci)   AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 
@@ -1129,7 +1136,7 @@ typedef CALLBACK_API_C( ComponentResult , SCAudioInputDataProc )(ComponentInstan
 
 
 /*
- *  SCAudioFillBuffer()
+ *  SCAudioFillBuffer()   *** DEPRECATED ***
  *  
  *  Discussion:
  *    Used to pull compressed frames from the StdAudio component in
@@ -1174,7 +1181,7 @@ typedef CALLBACK_API_C( ComponentResult , SCAudioInputDataProc )(ComponentInstan
  *    ComponentResult
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 (or QuickTime 7.1) and later in QuickTime.framework
+ *    Mac OS X:         in version 10.5 (or QuickTime 7.1) and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -1185,12 +1192,12 @@ SCAudioFillBuffer(
   void *                          inInputDataProcRefCon,
   UInt32 *                        ioOutputDataPacketSize,
   AudioBufferList *               outOutputData,
-  AudioStreamPacketDescription *  outPacketDescription)       AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  AudioStreamPacketDescription *  outPacketDescription)       AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 
 /*
- *  SCAudioReset()
+ *  SCAudioReset()   *** DEPRECATED ***
  *  
  *  Discussion:
  *    Used to reset an SCAudio conversion chain, flushing any latency
@@ -1205,12 +1212,12 @@ SCAudioFillBuffer(
  *    ComponentResult
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 (or QuickTime 7.1) and later in QuickTime.framework
+ *    Mac OS X:         in version 10.5 (or QuickTime 7.1) and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
 extern ComponentResult 
-SCAudioReset(ComponentInstance ci)                            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+SCAudioReset(ComponentInstance ci)                            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 
@@ -1219,13 +1226,13 @@ SCAudioReset(ComponentInstance ci)                            AVAILABLE_MAC_OS_X
 #define SCGetCompression(ci, params, where) SCGetCompressionExtended(ci,params,where,0,0,0,0)
 /** These are Progress procedures **/
 /*
- *  SCGetCompressionExtended()
+ *  SCGetCompressionExtended()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SCGetCompressionExtended(
@@ -1235,129 +1242,129 @@ SCGetCompressionExtended(
   SCModalFilterUPP    filterProc,
   SCModalHookUPP      hookProc,
   long                refcon,
-  StringPtr           customName)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  StringPtr           customName)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SCPositionRect()
+ *  SCPositionRect()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SCPositionRect(
   ComponentInstance   ci,
   Rect *              rp,
-  Point *             where)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Point *             where)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SCPositionDialog()
+ *  SCPositionDialog()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SCPositionDialog(
   ComponentInstance   ci,
   short               id,
-  Point *             where)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Point *             where)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SCSetTestImagePictHandle()
+ *  SCSetTestImagePictHandle()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SCSetTestImagePictHandle(
   ComponentInstance   ci,
   PicHandle           testPict,
   Rect *              testRect,
-  short               testFlags)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short               testFlags)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SCSetTestImagePictFile()
+ *  SCSetTestImagePictFile()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SCSetTestImagePictFile(
   ComponentInstance   ci,
   short               testFileRef,
   Rect *              testRect,
-  short               testFlags)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short               testFlags)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SCSetTestImagePixMap()
+ *  SCSetTestImagePixMap()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SCSetTestImagePixMap(
   ComponentInstance   ci,
   PixMapHandle        testPixMap,
   Rect *              testRect,
-  short               testFlags)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short               testFlags)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SCGetBestDeviceRect()
+ *  SCGetBestDeviceRect()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SCGetBestDeviceRect(
   ComponentInstance   ci,
-  Rect *              r)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Rect *              r)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 
 /*
- *  SCRequestImageSettings()
+ *  SCRequestImageSettings()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
-SCRequestImageSettings(ComponentInstance ci)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SCRequestImageSettings(ComponentInstance ci)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SCCompressImage()
+ *  SCCompressImage()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SCCompressImage(
@@ -1365,79 +1372,79 @@ SCCompressImage(
   PixMapHandle              src,
   const Rect *              srcRect,
   ImageDescriptionHandle *  desc,
-  Handle *                  data)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle *                  data)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SCCompressPicture()
+ *  SCCompressPicture()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SCCompressPicture(
   ComponentInstance   ci,
   PicHandle           srcPicture,
-  PicHandle           dstPicture)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  PicHandle           dstPicture)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SCCompressPictureFile()
+ *  SCCompressPictureFile()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SCCompressPictureFile(
   ComponentInstance   ci,
   short               srcRefNum,
-  short               dstRefNum)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short               dstRefNum)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SCRequestSequenceSettings()
+ *  SCRequestSequenceSettings()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
-SCRequestSequenceSettings(ComponentInstance ci)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SCRequestSequenceSettings(ComponentInstance ci)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SCCompressSequenceBegin()
+ *  SCCompressSequenceBegin()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SCCompressSequenceBegin(
   ComponentInstance         ci,
   PixMapHandle              src,
   const Rect *              srcRect,
-  ImageDescriptionHandle *  desc)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ImageDescriptionHandle *  desc)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SCCompressSequenceFrame()
+ *  SCCompressSequenceFrame()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SCCompressSequenceFrame(
@@ -1446,203 +1453,203 @@ SCCompressSequenceFrame(
   const Rect *        srcRect,
   Handle *            data,
   long *              dataSize,
-  short *             notSyncFlag)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short *             notSyncFlag)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SCCompressSequenceEnd()
+ *  SCCompressSequenceEnd()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
-SCCompressSequenceEnd(ComponentInstance ci)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SCCompressSequenceEnd(ComponentInstance ci)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SCDefaultPictHandleSettings()
+ *  SCDefaultPictHandleSettings()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SCDefaultPictHandleSettings(
   ComponentInstance   ci,
   PicHandle           srcPicture,
-  short               motion)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short               motion)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SCDefaultPictFileSettings()
+ *  SCDefaultPictFileSettings()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SCDefaultPictFileSettings(
   ComponentInstance   ci,
   short               srcRef,
-  short               motion)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short               motion)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SCDefaultPixMapSettings()
+ *  SCDefaultPixMapSettings()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SCDefaultPixMapSettings(
   ComponentInstance   ci,
   PixMapHandle        src,
-  short               motion)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short               motion)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SCGetInfo()
+ *  SCGetInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SCGetInfo(
   ComponentInstance   ci,
   OSType              infoType,
-  void *              info)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *              info)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SCSetInfo()
+ *  SCSetInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SCSetInfo(
   ComponentInstance   ci,
   OSType              infoType,
-  void *              info)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *              info)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SCNewGWorld()
+ *  SCNewGWorld()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SCNewGWorld(
   ComponentInstance   ci,
   GWorldPtr *         gwp,
   Rect *              rp,
-  GWorldFlags         flags)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  GWorldFlags         flags)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SCSetCompressFlags()
+ *  SCSetCompressFlags()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SCSetCompressFlags(
   ComponentInstance   ci,
-  long                flags)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long                flags)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SCGetCompressFlags()
+ *  SCGetCompressFlags()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SCGetCompressFlags(
   ComponentInstance   ci,
-  long *              flags)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *              flags)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SCGetSettingsAsText()
+ *  SCGetSettingsAsText()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SCGetSettingsAsText(
   ComponentInstance   ci,
-  Handle *            text)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle *            text)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SCGetSettingsAsAtomContainer()
+ *  SCGetSettingsAsAtomContainer()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SCGetSettingsAsAtomContainer(
   ComponentInstance   ci,
-  QTAtomContainer *   settings)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTAtomContainer *   settings)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SCSetSettingsFromAtomContainer()
+ *  SCSetSettingsFromAtomContainer()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SCSetSettingsFromAtomContainer(
   ComponentInstance   ci,
-  QTAtomContainer     settings)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTAtomContainer     settings)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /* Note: if you're using SCCompressSequenceFrameAsync with a scForceKeyValue setting, you must call SCAsyncIdle occasionally at main task time. */
 /*
- *  SCCompressSequenceFrameAsync()
+ *  SCCompressSequenceFrameAsync()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QuickTimeLib 5.0 and later
- *    Windows:          in qtmlClient.lib 5.0 and later
+ *    Windows:          in QTMLClient.lib 5.0 and later
  */
 extern ComponentResult 
 SCCompressSequenceFrameAsync(
@@ -1652,24 +1659,24 @@ SCCompressSequenceFrameAsync(
   Handle *                     data,
   long *                       dataSize,
   short *                      notSyncFlag,
-  ICMCompletionProcRecordPtr   asyncCompletionProc)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ICMCompletionProcRecordPtr   asyncCompletionProc)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SCAsyncIdle()
+ *  SCAsyncIdle()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QuickTimeLib 5.0 and later
- *    Windows:          in qtmlClient.lib 5.0 and later
+ *    Windows:          in QTMLClient.lib 5.0 and later
  */
 extern ComponentResult 
-SCAsyncIdle(ComponentInstance ci)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SCAsyncIdle(ComponentInstance ci)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SCCopyCompressionSessionOptions()
+ *  SCCopyCompressionSessionOptions()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Retrieve relevant settings in a form of compression session
@@ -1688,14 +1695,14 @@ SCAsyncIdle(ComponentInstance ci)                             AVAILABLE_MAC_OS_X
  *      returned.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 (or QuickTime 7.0) and later in QuickTime.framework
+ *    Mac OS X:         in version 10.4 (or QuickTime 7.0) and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
 extern ComponentResult 
 SCCopyCompressionSessionOptions(
   ComponentInstance                  ci,
-  ICMCompressionSessionOptionsRef *  outOptions)              AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  ICMCompressionSessionOptionsRef *  outOptions)              AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 
@@ -1708,48 +1715,48 @@ enum {
 
 typedef ComponentInstance               TweenerComponent;
 /*
- *  TweenerInitialize()
+ *  TweenerInitialize()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 TweenerInitialize(
   TweenerComponent   tc,
   QTAtomContainer    container,
   QTAtom             tweenAtom,
-  QTAtom             dataAtom)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTAtom             dataAtom)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  TweenerDoTween()
+ *  TweenerDoTween()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 TweenerDoTween(
   TweenerComponent   tc,
-  TweenRecord *      tr)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TweenRecord *      tr)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  TweenerReset()
+ *  TweenerReset()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
-TweenerReset(TweenerComponent tc)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+TweenerReset(TweenerComponent tc)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 
@@ -1836,13 +1843,13 @@ typedef TCTextOptions *                 TCTextOptionsPtr;
 
 typedef SInt64                          TimeCode64Counter;
 /*
- *  TCGetCurrentTimeCode()
+ *  TCGetCurrentTimeCode()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern HandlerError 
 TCGetCurrentTimeCode(
@@ -1850,17 +1857,17 @@ TCGetCurrentTimeCode(
   long *            frameNum,
   TimeCodeDef *     tcdef,
   TimeCodeRecord *  tcrec,
-  UserData *        srcRefH)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UserData *        srcRefH)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  TCGetTimeCodeAtTime()
+ *  TCGetTimeCodeAtTime()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern HandlerError 
 TCGetTimeCodeAtTime(
@@ -1869,156 +1876,156 @@ TCGetTimeCodeAtTime(
   long *            frameNum,
   TimeCodeDef *     tcdef,
   TimeCodeRecord *  tcdata,
-  UserData *        srcRefH)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UserData *        srcRefH)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  TCTimeCodeToString()
+ *  TCTimeCodeToString()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern HandlerError 
 TCTimeCodeToString(
   MediaHandler      mh,
   TimeCodeDef *     tcdef,
   TimeCodeRecord *  tcrec,
-  StringPtr         tcStr)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  StringPtr         tcStr)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  TCTimeCodeToFrameNumber()
+ *  TCTimeCodeToFrameNumber()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern HandlerError 
 TCTimeCodeToFrameNumber(
   MediaHandler      mh,
   TimeCodeDef *     tcdef,
   TimeCodeRecord *  tcrec,
-  long *            frameNumber)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *            frameNumber)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  TCFrameNumberToTimeCode()
+ *  TCFrameNumberToTimeCode()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern HandlerError 
 TCFrameNumberToTimeCode(
   MediaHandler      mh,
   long              frameNumber,
   TimeCodeDef *     tcdef,
-  TimeCodeRecord *  tcrec)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TimeCodeRecord *  tcrec)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  TCGetSourceRef()
+ *  TCGetSourceRef()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern HandlerError 
 TCGetSourceRef(
   MediaHandler                mh,
   TimeCodeDescriptionHandle   tcdH,
-  UserData *                  srefH)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UserData *                  srefH)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  TCSetSourceRef()
+ *  TCSetSourceRef()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern HandlerError 
 TCSetSourceRef(
   MediaHandler                mh,
   TimeCodeDescriptionHandle   tcdH,
-  UserData                    srefH)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UserData                    srefH)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  TCSetTimeCodeFlags()
+ *  TCSetTimeCodeFlags()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern HandlerError 
 TCSetTimeCodeFlags(
   MediaHandler   mh,
   long           flags,
-  long           flagsMask)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long           flagsMask)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  TCGetTimeCodeFlags()
+ *  TCGetTimeCodeFlags()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern HandlerError 
 TCGetTimeCodeFlags(
   MediaHandler   mh,
-  long *         flags)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *         flags)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  TCSetDisplayOptions()
+ *  TCSetDisplayOptions()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern HandlerError 
 TCSetDisplayOptions(
   MediaHandler       mh,
-  TCTextOptionsPtr   textOptions)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TCTextOptionsPtr   textOptions)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  TCGetDisplayOptions()
+ *  TCGetDisplayOptions()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern HandlerError 
 TCGetDisplayOptions(
   MediaHandler       mh,
-  TCTextOptionsPtr   textOptions)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TCTextOptionsPtr   textOptions)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /* The following are the 64-bit TimeCode Media API's*/
 /*
- *  TCGetCurrentFrameAndTimeCodeDef()
+ *  TCGetCurrentFrameAndTimeCodeDef()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Retrieves the frame number and time code format information for
@@ -2036,7 +2043,7 @@ TCGetDisplayOptions(
  *      Pointer to field that receives the time code format information.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 (or QuickTime 7.1) and later in QuickTime.framework
+ *    Mac OS X:         in version 10.5 (or QuickTime 7.1) and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -2044,11 +2051,11 @@ extern HandlerError
 TCGetCurrentFrameAndTimeCodeDef(
   MediaHandler   mh,
   SInt64 *       outFrameNum,
-  TimeCodeDef *  outTCDef)                                    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  TimeCodeDef *  outTCDef)                                    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  TCGetFrameAndTimeCodeDefAtTime()
+ *  TCGetFrameAndTimeCodeDefAtTime()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Retrieves the frame number and time code format information for a
@@ -2071,7 +2078,7 @@ TCGetCurrentFrameAndTimeCodeDef(
  *      Pointer to field that receives the time code format information.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 (or QuickTime 7.1) and later in QuickTime.framework
+ *    Mac OS X:         in version 10.5 (or QuickTime 7.1) and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -2080,11 +2087,11 @@ TCGetFrameAndTimeCodeDefAtTime(
   MediaHandler         mh,
   const TimeValue64 *  mediaTime,
   SInt64 *             outFrameNum,
-  TimeCodeDef *        outTCDef)                              AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  TimeCodeDef *        outTCDef)                              AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  TCTimeCodeTimeToString()
+ *  TCTimeCodeTimeToString()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Converts a time value into a text string in the (-) HH:MM:SS:FF
@@ -2108,7 +2115,7 @@ TCGetFrameAndTimeCodeDefAtTime(
  *      value. Client responsible for disposing string.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 (or QuickTime 7.1) and later in QuickTime.framework
+ *    Mac OS X:         in version 10.5 (or QuickTime 7.1) and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -2117,11 +2124,11 @@ TCTimeCodeTimeToString(
   MediaHandler         mh,
   const TimeCodeDef *  tCDef,
   const SMPTETime *    tCTime,
-  CFStringRef *        outTCStr)                              AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  CFStringRef *        outTCStr)                              AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  TCTimeCodeCounterToString()
+ *  TCTimeCodeCounterToString()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Converts a counter value into a text string.
@@ -2144,7 +2151,7 @@ TCTimeCodeTimeToString(
  *      value. Client reponsible for disposing string.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 (or QuickTime 7.1) and later in QuickTime.framework
+ *    Mac OS X:         in version 10.5 (or QuickTime 7.1) and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -2153,11 +2160,11 @@ TCTimeCodeCounterToString(
   MediaHandler               mh,
   const TimeCodeDef *        tCDef,
   const TimeCode64Counter *  tCCounter,
-  CFStringRef *              outTCStr)                        AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  CFStringRef *              outTCStr)                        AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  TCTimeCodeTimeToFrameNumber()
+ *  TCTimeCodeTimeToFrameNumber()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Converts a time value into its corresponding frame number.
@@ -2180,7 +2187,7 @@ TCTimeCodeCounterToString(
  *      corresponding to the time value in tCTime.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 (or QuickTime 7.1) and later in QuickTime.framework
+ *    Mac OS X:         in version 10.5 (or QuickTime 7.1) and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -2189,11 +2196,11 @@ TCTimeCodeTimeToFrameNumber(
   MediaHandler         mh,
   const TimeCodeDef *  tCDef,
   const SMPTETime *    tCTime,
-  SInt64 *             outFrameNum)                           AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  SInt64 *             outFrameNum)                           AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  TCTimeCodeCounterToFrameNumber()
+ *  TCTimeCodeCounterToFrameNumber()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Converts a counter value into its corresponding frame number.
@@ -2216,7 +2223,7 @@ TCTimeCodeTimeToFrameNumber(
  *      corresponding to the counter value in tCCounter.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 (or QuickTime 7.1) and later in QuickTime.framework
+ *    Mac OS X:         in version 10.5 (or QuickTime 7.1) and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -2225,11 +2232,11 @@ TCTimeCodeCounterToFrameNumber(
   MediaHandler               mh,
   const TimeCodeDef *        tCDef,
   const TimeCode64Counter *  tCCounter,
-  SInt64 *                   outFrameNum)                     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  SInt64 *                   outFrameNum)                     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  TCFrameNumberToTimeCodeTime()
+ *  TCFrameNumberToTimeCodeTime()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Converts a frame number to its corresponding timecode time value.
@@ -2252,7 +2259,7 @@ TCTimeCodeCounterToFrameNumber(
  *      value.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 (or QuickTime 7.1) and later in QuickTime.framework
+ *    Mac OS X:         in version 10.5 (or QuickTime 7.1) and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -2261,11 +2268,11 @@ TCFrameNumberToTimeCodeTime(
   MediaHandler         mh,
   const SInt64 *       frameNumber,
   const TimeCodeDef *  tCDef,
-  SMPTETime *          outTCTime)                             AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  SMPTETime *          outTCTime)                             AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  TCFrameNumberToTimeCodeCounter()
+ *  TCFrameNumberToTimeCodeCounter()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Converts a frame number to its corresponding counter value.
@@ -2288,7 +2295,7 @@ TCFrameNumberToTimeCodeTime(
  *      value.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.5 (or QuickTime 7.1) and later in QuickTime.framework
+ *    Mac OS X:         in version 10.5 (or QuickTime 7.1) and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -2297,7 +2304,7 @@ TCFrameNumberToTimeCodeCounter(
   MediaHandler         mh,
   const SInt64 *       frameNumber,
   const TimeCodeDef *  tCDef,
-  TimeCode64Counter *  outTCCounter)                          AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  TimeCode64Counter *  outTCCounter)                          AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 
@@ -2606,120 +2613,120 @@ typedef STACK_UPP_TYPE(MovieExportGetDataProcPtr)               MovieExportGetDa
 typedef STACK_UPP_TYPE(MovieExportGetPropertyProcPtr)           MovieExportGetPropertyUPP;
 typedef STACK_UPP_TYPE(MovieExportStageReachedCallbackProcPtr)  MovieExportStageReachedCallbackUPP;
 /*
- *  NewSCModalFilterUPP()
+ *  NewSCModalFilterUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern SCModalFilterUPP
-NewSCModalFilterUPP(SCModalFilterProcPtr userRoutine)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewSCModalFilterUPP(SCModalFilterProcPtr userRoutine)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  NewSCModalHookUPP()
+ *  NewSCModalHookUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern SCModalHookUPP
-NewSCModalHookUPP(SCModalHookProcPtr userRoutine)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewSCModalHookUPP(SCModalHookProcPtr userRoutine)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  NewMovieExportGetDataUPP()
+ *  NewMovieExportGetDataUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern MovieExportGetDataUPP
-NewMovieExportGetDataUPP(MovieExportGetDataProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewMovieExportGetDataUPP(MovieExportGetDataProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  NewMovieExportGetPropertyUPP()
+ *  NewMovieExportGetPropertyUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern MovieExportGetPropertyUPP
-NewMovieExportGetPropertyUPP(MovieExportGetPropertyProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewMovieExportGetPropertyUPP(MovieExportGetPropertyProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  NewMovieExportStageReachedCallbackUPP()
+ *  NewMovieExportStageReachedCallbackUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 (or QuickTime 6.4) and later in QuickTime.framework
+ *    Mac OS X:         in version 10.3 (or QuickTime 6.4) and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern MovieExportStageReachedCallbackUPP
-NewMovieExportStageReachedCallbackUPP(MovieExportStageReachedCallbackProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+NewMovieExportStageReachedCallbackUPP(MovieExportStageReachedCallbackProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  DisposeSCModalFilterUPP()
+ *  DisposeSCModalFilterUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeSCModalFilterUPP(SCModalFilterUPP userUPP)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeSCModalFilterUPP(SCModalFilterUPP userUPP)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  DisposeSCModalHookUPP()
+ *  DisposeSCModalHookUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeSCModalHookUPP(SCModalHookUPP userUPP)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeSCModalHookUPP(SCModalHookUPP userUPP)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  DisposeMovieExportGetDataUPP()
+ *  DisposeMovieExportGetDataUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeMovieExportGetDataUPP(MovieExportGetDataUPP userUPP)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeMovieExportGetDataUPP(MovieExportGetDataUPP userUPP)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  DisposeMovieExportGetPropertyUPP()
+ *  DisposeMovieExportGetPropertyUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeMovieExportGetPropertyUPP(MovieExportGetPropertyUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeMovieExportGetPropertyUPP(MovieExportGetPropertyUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  DisposeMovieExportStageReachedCallbackUPP()
+ *  DisposeMovieExportStageReachedCallbackUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 (or QuickTime 6.4) and later in QuickTime.framework
+ *    Mac OS X:         in version 10.3 (or QuickTime 6.4) and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeMovieExportStageReachedCallbackUPP(MovieExportStageReachedCallbackUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+DisposeMovieExportStageReachedCallbackUPP(MovieExportStageReachedCallbackUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  InvokeSCModalFilterUPP()
+ *  InvokeSCModalFilterUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -2729,13 +2736,13 @@ InvokeSCModalFilterUPP(
   EventRecord *     theEvent,
   short *           itemHit,
   long              refcon,
-  SCModalFilterUPP  userUPP)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SCModalFilterUPP  userUPP)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  InvokeSCModalHookUPP()
+ *  InvokeSCModalHookUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -2745,13 +2752,13 @@ InvokeSCModalHookUPP(
   short           itemHit,
   void *          params,
   long            refcon,
-  SCModalHookUPP  userUPP)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SCModalHookUPP  userUPP)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  InvokeMovieExportGetDataUPP()
+ *  InvokeMovieExportGetDataUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -2759,13 +2766,13 @@ extern OSErr
 InvokeMovieExportGetDataUPP(
   void *                      refCon,
   MovieExportGetDataParams *  params,
-  MovieExportGetDataUPP       userUPP)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  MovieExportGetDataUPP       userUPP)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  InvokeMovieExportGetPropertyUPP()
+ *  InvokeMovieExportGetPropertyUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -2775,13 +2782,13 @@ InvokeMovieExportGetPropertyUPP(
   long                       trackID,
   OSType                     propertyType,
   void *                     propertyValue,
-  MovieExportGetPropertyUPP  userUPP)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  MovieExportGetPropertyUPP  userUPP)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  InvokeMovieExportStageReachedCallbackUPP()
+ *  InvokeMovieExportStageReachedCallbackUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 (or QuickTime 6.4) and later in QuickTime.framework
+ *    Mac OS X:         in version 10.3 (or QuickTime 6.4) and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -2793,7 +2800,7 @@ InvokeMovieExportStageReachedCallbackUPP(
   Handle                              inDataRef,
   OSType                              inDataRefType,
   void *                              refCon,
-  MovieExportStageReachedCallbackUPP  userUPP)                AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  MovieExportStageReachedCallbackUPP  userUPP)                AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 #if __MACH__
   #ifdef __cplusplus
@@ -2832,13 +2839,13 @@ InvokeMovieExportStageReachedCallbackUPP(
 #endif
 
 /*
- *  MovieImportHandle()
+ *  MovieImportHandle()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 MovieImportHandle(
@@ -2850,17 +2857,17 @@ MovieImportHandle(
   TimeValue              atTime,
   TimeValue *            addedDuration,
   long                   inFlags,
-  long *                 outFlags)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *                 outFlags)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieImportFile()
+ *  MovieImportFile()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 MovieImportFile(
@@ -2872,221 +2879,221 @@ MovieImportFile(
   TimeValue              atTime,
   TimeValue *            addedDuration,
   long                   inFlags,
-  long *                 outFlags)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *                 outFlags)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieImportSetSampleDuration()
+ *  MovieImportSetSampleDuration()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 MovieImportSetSampleDuration(
   MovieImportComponent   ci,
   TimeValue              duration,
-  TimeScale              scale)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TimeScale              scale)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieImportSetSampleDescription()
+ *  MovieImportSetSampleDescription()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 MovieImportSetSampleDescription(
   MovieImportComponent      ci,
   SampleDescriptionHandle   desc,
-  OSType                    mediaType)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSType                    mediaType)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieImportSetMediaFile()
+ *  MovieImportSetMediaFile()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 MovieImportSetMediaFile(
   MovieImportComponent   ci,
-  AliasHandle            alias)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AliasHandle            alias)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieImportSetDimensions()
+ *  MovieImportSetDimensions()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 MovieImportSetDimensions(
   MovieImportComponent   ci,
   Fixed                  width,
-  Fixed                  height)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Fixed                  height)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieImportSetChunkSize()
+ *  MovieImportSetChunkSize()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 MovieImportSetChunkSize(
   MovieImportComponent   ci,
-  long                   chunkSize)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long                   chunkSize)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieImportSetProgressProc()
+ *  MovieImportSetProgressProc()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 MovieImportSetProgressProc(
   MovieImportComponent   ci,
   MovieProgressUPP       proc,
-  long                   refcon)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long                   refcon)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieImportSetAuxiliaryData()
+ *  MovieImportSetAuxiliaryData()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 MovieImportSetAuxiliaryData(
   MovieImportComponent   ci,
   Handle                 data,
-  OSType                 handleType)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSType                 handleType)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieImportSetFromScrap()
+ *  MovieImportSetFromScrap()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 MovieImportSetFromScrap(
   MovieImportComponent   ci,
-  Boolean                fromScrap)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean                fromScrap)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieImportDoUserDialog()
+ *  MovieImportDoUserDialog()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 MovieImportDoUserDialog(
   MovieImportComponent   ci,
   const FSSpec *         theFile,
   Handle                 theData,
-  Boolean *              canceled)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *              canceled)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieImportSetDuration()
+ *  MovieImportSetDuration()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 MovieImportSetDuration(
   MovieImportComponent   ci,
-  TimeValue              duration)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TimeValue              duration)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieImportGetAuxiliaryDataType()
+ *  MovieImportGetAuxiliaryDataType()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 MovieImportGetAuxiliaryDataType(
   MovieImportComponent   ci,
-  OSType *               auxType)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSType *               auxType)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieImportValidate()
+ *  MovieImportValidate()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 MovieImportValidate(
   MovieImportComponent   ci,
   const FSSpec *         theFile,
   Handle                 theData,
-  Boolean *              valid)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *              valid)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieImportGetFileType()
+ *  MovieImportGetFileType()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 MovieImportGetFileType(
   MovieImportComponent   ci,
-  OSType *               fileType)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSType *               fileType)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieImportDataRef()
+ *  MovieImportDataRef()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 MovieImportDataRef(
@@ -3099,296 +3106,296 @@ MovieImportDataRef(
   TimeValue              atTime,
   TimeValue *            addedDuration,
   long                   inFlags,
-  long *                 outFlags)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *                 outFlags)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieImportGetSampleDescription()
+ *  MovieImportGetSampleDescription()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 MovieImportGetSampleDescription(
   MovieImportComponent       ci,
   SampleDescriptionHandle *  desc,
-  OSType *                   mediaType)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSType *                   mediaType)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieImportGetMIMETypeList()
+ *  MovieImportGetMIMETypeList()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 MovieImportGetMIMETypeList(
   MovieImportComponent   ci,
-  QTAtomContainer *      mimeInfo)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTAtomContainer *      mimeInfo)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieImportSetOffsetAndLimit()
+ *  MovieImportSetOffsetAndLimit()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 MovieImportSetOffsetAndLimit(
   MovieImportComponent   ci,
   unsigned long          offset,
-  unsigned long          limit)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned long          limit)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieImportGetSettingsAsAtomContainer()
+ *  MovieImportGetSettingsAsAtomContainer()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 MovieImportGetSettingsAsAtomContainer(
   MovieImportComponent   ci,
-  QTAtomContainer *      settings)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTAtomContainer *      settings)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieImportSetSettingsFromAtomContainer()
+ *  MovieImportSetSettingsFromAtomContainer()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 MovieImportSetSettingsFromAtomContainer(
   MovieImportComponent   ci,
-  QTAtomContainer        settings)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTAtomContainer        settings)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieImportSetOffsetAndLimit64()
+ *  MovieImportSetOffsetAndLimit64()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in QuickTimeLib 4.0 and later
- *    Windows:          in qtmlClient.lib 4.0 and later
+ *    Windows:          in QTMLClient.lib 4.0 and later
  */
 extern ComponentResult 
 MovieImportSetOffsetAndLimit64(
   MovieImportComponent   ci,
   const wide *           offset,
-  const wide *           limit)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const wide *           limit)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieImportIdle()
+ *  MovieImportIdle()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in QuickTimeLib 4.0 and later
- *    Windows:          in qtmlClient.lib 4.0 and later
+ *    Windows:          in QTMLClient.lib 4.0 and later
  */
 extern ComponentResult 
 MovieImportIdle(
   MovieImportComponent   ci,
   long                   inFlags,
-  long *                 outFlags)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *                 outFlags)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieImportValidateDataRef()
+ *  MovieImportValidateDataRef()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in QuickTimeLib 4.0 and later
- *    Windows:          in qtmlClient.lib 4.0 and later
+ *    Windows:          in QTMLClient.lib 4.0 and later
  */
 extern ComponentResult 
 MovieImportValidateDataRef(
   MovieImportComponent   ci,
   Handle                 dataRef,
   OSType                 dataRefType,
-  UInt8 *                valid)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt8 *                valid)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieImportGetLoadState()
+ *  MovieImportGetLoadState()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeLib 4.1 and later
- *    Windows:          in qtmlClient.lib 4.1 and later
+ *    Windows:          in QTMLClient.lib 4.1 and later
  */
 extern ComponentResult 
 MovieImportGetLoadState(
   MovieImportComponent   ci,
-  long *                 importerLoadState)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *                 importerLoadState)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieImportGetMaxLoadedTime()
+ *  MovieImportGetMaxLoadedTime()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeLib 4.1 and later
- *    Windows:          in qtmlClient.lib 4.1 and later
+ *    Windows:          in QTMLClient.lib 4.1 and later
  */
 extern ComponentResult 
 MovieImportGetMaxLoadedTime(
   MovieImportComponent   ci,
-  TimeValue *            time)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TimeValue *            time)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieImportEstimateCompletionTime()
+ *  MovieImportEstimateCompletionTime()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QuickTimeLib 5.0 and later
- *    Windows:          in qtmlClient.lib 5.0 and later
+ *    Windows:          in QTMLClient.lib 5.0 and later
  */
 extern ComponentResult 
 MovieImportEstimateCompletionTime(
   MovieImportComponent   ci,
-  TimeRecord *           time)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TimeRecord *           time)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieImportSetDontBlock()
+ *  MovieImportSetDontBlock()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QuickTimeLib 5.0 and later
- *    Windows:          in qtmlClient.lib 5.0 and later
+ *    Windows:          in QTMLClient.lib 5.0 and later
  */
 extern ComponentResult 
 MovieImportSetDontBlock(
   MovieImportComponent   ci,
-  Boolean                dontBlock)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean                dontBlock)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieImportGetDontBlock()
+ *  MovieImportGetDontBlock()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QuickTimeLib 5.0 and later
- *    Windows:          in qtmlClient.lib 5.0 and later
+ *    Windows:          in QTMLClient.lib 5.0 and later
  */
 extern ComponentResult 
 MovieImportGetDontBlock(
   MovieImportComponent   ci,
-  Boolean *              willBlock)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *              willBlock)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieImportSetIdleManager()
+ *  MovieImportSetIdleManager()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   in QuickTimeLib 6.0 and later
- *    Windows:          in qtmlClient.lib 6.0 and later
+ *    Windows:          in QTMLClient.lib 6.0 and later
  */
 extern ComponentResult 
 MovieImportSetIdleManager(
   MovieImportComponent   ci,
-  IdleManager            im)                                  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  IdleManager            im)                                  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieImportSetNewMovieFlags()
+ *  MovieImportSetNewMovieFlags()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   in QuickTimeLib 6.0 and later
- *    Windows:          in qtmlClient.lib 6.0 and later
+ *    Windows:          in QTMLClient.lib 6.0 and later
  */
 extern ComponentResult 
 MovieImportSetNewMovieFlags(
   MovieImportComponent   ci,
-  long                   newMovieFlags)                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  long                   newMovieFlags)                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieImportGetDestinationMediaType()
+ *  MovieImportGetDestinationMediaType()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   in QuickTimeLib 6.0 and later
- *    Windows:          in qtmlClient.lib 6.0 and later
+ *    Windows:          in QTMLClient.lib 6.0 and later
  */
 extern ComponentResult 
 MovieImportGetDestinationMediaType(
   MovieImportComponent   ci,
-  OSType *               mediaType)                           AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  OSType *               mediaType)                           AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieImportSetMediaDataRef()
+ *  MovieImportSetMediaDataRef()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 (or QuickTime 6.4) and later in QuickTime.framework
+ *    Mac OS X:         in version 10.3 (or QuickTime 6.4) and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
- *    Windows:          in qtmlClient.lib 6.5 and later
+ *    Windows:          in QTMLClient.lib 6.5 and later
  */
 extern ComponentResult 
 MovieImportSetMediaDataRef(
   MovieImportComponent   ci,
   Handle                 dataRef,
-  OSType                 dataRefType)                         AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  OSType                 dataRefType)                         AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieImportDoUserDialogDataRef()
+ *  MovieImportDoUserDialogDataRef()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 (or QuickTime 6.4) and later in QuickTime.framework
+ *    Mac OS X:         in version 10.3 (or QuickTime 6.4) and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
- *    Windows:          in qtmlClient.lib 6.5 and later
+ *    Windows:          in QTMLClient.lib 6.5 and later
  */
 extern ComponentResult 
 MovieImportDoUserDialogDataRef(
   MovieImportComponent   ci,
   Handle                 dataRef,
   OSType                 dataRefType,
-  Boolean *              canceled)                            AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  Boolean *              canceled)                            AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieExportToHandle()
+ *  MovieExportToHandle()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 MovieExportToHandle(
@@ -3397,17 +3404,17 @@ MovieExportToHandle(
   Movie                  theMovie,
   Track                  onlyThisTrack,
   TimeValue              startTime,
-  TimeValue              duration)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TimeValue              duration)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieExportToFile()
+ *  MovieExportToFile()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 MovieExportToFile(
@@ -3416,65 +3423,65 @@ MovieExportToFile(
   Movie                  theMovie,
   Track                  onlyThisTrack,
   TimeValue              startTime,
-  TimeValue              duration)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TimeValue              duration)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieExportGetAuxiliaryData()
+ *  MovieExportGetAuxiliaryData()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 MovieExportGetAuxiliaryData(
   MovieExportComponent   ci,
   Handle                 dataH,
-  OSType *               handleType)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSType *               handleType)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieExportSetProgressProc()
+ *  MovieExportSetProgressProc()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 MovieExportSetProgressProc(
   MovieExportComponent   ci,
   MovieProgressUPP       proc,
-  long                   refcon)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long                   refcon)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieExportSetSampleDescription()
+ *  MovieExportSetSampleDescription()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 MovieExportSetSampleDescription(
   MovieExportComponent      ci,
   SampleDescriptionHandle   desc,
-  OSType                    mediaType)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSType                    mediaType)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieExportDoUserDialog()
+ *  MovieExportDoUserDialog()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 MovieExportDoUserDialog(
@@ -3483,32 +3490,32 @@ MovieExportDoUserDialog(
   Track                  onlyThisTrack,
   TimeValue              startTime,
   TimeValue              duration,
-  Boolean *              canceled)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *              canceled)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieExportGetCreatorType()
+ *  MovieExportGetCreatorType()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 MovieExportGetCreatorType(
   MovieExportComponent   ci,
-  OSType *               creator)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSType *               creator)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieExportToDataRef()
+ *  MovieExportToDataRef()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 MovieExportToDataRef(
@@ -3518,33 +3525,33 @@ MovieExportToDataRef(
   Movie                  theMovie,
   Track                  onlyThisTrack,
   TimeValue              startTime,
-  TimeValue              duration)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TimeValue              duration)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieExportFromProceduresToDataRef()
+ *  MovieExportFromProceduresToDataRef()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 MovieExportFromProceduresToDataRef(
   MovieExportComponent   ci,
   Handle                 dataRef,
-  OSType                 dataRefType)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSType                 dataRefType)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieExportAddDataSource()
+ *  MovieExportAddDataSource()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 MovieExportAddDataSource(
@@ -3554,115 +3561,115 @@ MovieExportAddDataSource(
   long *                      trackID,
   MovieExportGetPropertyUPP   getPropertyProc,
   MovieExportGetDataUPP       getDataProc,
-  void *                      refCon)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *                      refCon)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieExportValidate()
+ *  MovieExportValidate()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 MovieExportValidate(
   MovieExportComponent   ci,
   Movie                  theMovie,
   Track                  onlyThisTrack,
-  Boolean *              valid)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *              valid)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieExportGetSettingsAsAtomContainer()
+ *  MovieExportGetSettingsAsAtomContainer()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 MovieExportGetSettingsAsAtomContainer(
   MovieExportComponent   ci,
-  QTAtomContainer *      settings)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTAtomContainer *      settings)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieExportSetSettingsFromAtomContainer()
+ *  MovieExportSetSettingsFromAtomContainer()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 MovieExportSetSettingsFromAtomContainer(
   MovieExportComponent   ci,
-  QTAtomContainer        settings)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTAtomContainer        settings)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieExportGetFileNameExtension()
+ *  MovieExportGetFileNameExtension()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 MovieExportGetFileNameExtension(
   MovieExportComponent   ci,
-  OSType *               extension)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSType *               extension)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieExportGetShortFileTypeString()
+ *  MovieExportGetShortFileTypeString()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 MovieExportGetShortFileTypeString(
   MovieExportComponent   ci,
-  Str255                 typeString)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Str255                 typeString)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieExportGetSourceMediaType()
+ *  MovieExportGetSourceMediaType()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 MovieExportGetSourceMediaType(
   MovieExportComponent   ci,
-  OSType *               mediaType)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSType *               mediaType)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieExportSetGetMoviePropertyProc()
+ *  MovieExportSetGetMoviePropertyProc()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in QuickTimeLib 4.0 and later
- *    Windows:          in qtmlClient.lib 4.0 and later
+ *    Windows:          in QTMLClient.lib 4.0 and later
  */
 extern ComponentResult 
 MovieExportSetGetMoviePropertyProc(
   MovieExportComponent        ci,
   MovieExportGetPropertyUPP   getPropertyProc,
-  void *                      refCon)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *                      refCon)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /* Text Export Display Info data structure*/
@@ -3686,119 +3693,119 @@ typedef struct TextDisplayData          TextDisplayData;
 typedef ComponentInstance               TextExportComponent;
 typedef ComponentInstance               GraphicImageMovieImportComponent;
 /*
- *  TextExportGetDisplayData()
+ *  TextExportGetDisplayData()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 TextExportGetDisplayData(
   TextExportComponent   ci,
-  TextDisplayData *     textDisplay)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TextDisplayData *     textDisplay)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  TextExportGetTimeFraction()
+ *  TextExportGetTimeFraction()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 TextExportGetTimeFraction(
   TextExportComponent   ci,
-  long *                movieTimeFraction)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *                movieTimeFraction)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  TextExportSetTimeFraction()
+ *  TextExportSetTimeFraction()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 TextExportSetTimeFraction(
   TextExportComponent   ci,
-  long                  movieTimeFraction)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long                  movieTimeFraction)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  TextExportGetSettings()
+ *  TextExportGetSettings()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 TextExportGetSettings(
   TextExportComponent   ci,
-  long *                setting)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *                setting)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  TextExportSetSettings()
+ *  TextExportSetSettings()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 TextExportSetSettings(
   TextExportComponent   ci,
-  long                  setting)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long                  setting)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 
 /*
- *  MIDIImportGetSettings()
+ *  MIDIImportGetSettings()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 MIDIImportGetSettings(
   TextExportComponent   ci,
-  long *                setting)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *                setting)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MIDIImportSetSettings()
+ *  MIDIImportSetSettings()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 MIDIImportSetSettings(
   TextExportComponent   ci,
-  long                  setting)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long                  setting)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieExportNewGetDataAndPropertiesProcs()
+ *  MovieExportNewGetDataAndPropertiesProcs()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 MovieExportNewGetDataAndPropertiesProcs(
@@ -3811,24 +3818,24 @@ MovieExportNewGetDataAndPropertiesProcs(
   TimeValue                    duration,
   MovieExportGetPropertyUPP *  getPropertyProc,
   MovieExportGetDataUPP *      getDataProc,
-  void **                      refCon)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void **                      refCon)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  MovieExportDisposeGetDataAndPropertiesProcs()
+ *  MovieExportDisposeGetDataAndPropertiesProcs()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 MovieExportDisposeGetDataAndPropertiesProcs(
   MovieExportComponent        ci,
   MovieExportGetPropertyUPP   getPropertyProc,
   MovieExportGetDataUPP       getDataProc,
-  void *                      refCon)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *                      refCon)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 enum {
@@ -3859,33 +3866,33 @@ struct MovieExportStageReachedCallbackProcRecord {
 };
 typedef struct MovieExportStageReachedCallbackProcRecord MovieExportStageReachedCallbackProcRecord;
 /*
- *  GraphicsImageImportSetSequenceEnabled()
+ *  GraphicsImageImportSetSequenceEnabled()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 GraphicsImageImportSetSequenceEnabled(
   GraphicImageMovieImportComponent   ci,
-  Boolean                            enable)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean                            enable)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  GraphicsImageImportGetSequenceEnabled()
+ *  GraphicsImageImportGetSequenceEnabled()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 GraphicsImageImportGetSequenceEnabled(
   GraphicImageMovieImportComponent   ci,
-  Boolean *                          enable)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *                          enable)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 
@@ -3932,30 +3939,30 @@ enum {
 };
 
 /*
- *  PreviewShowData()
+ *  PreviewShowData()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 PreviewShowData(
   pnotComponent   p,
   OSType          dataType,
   Handle          data,
-  const Rect *    inHere)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const Rect *    inHere)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  PreviewMakePreview()
+ *  PreviewMakePreview()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 PreviewMakePreview(
@@ -3963,40 +3970,40 @@ PreviewMakePreview(
   OSType *                   previewType,
   Handle *                   previewResult,
   const FSSpec *             sourceFile,
-  ICMProgressProcRecordPtr   progress)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ICMProgressProcRecordPtr   progress)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  PreviewMakePreviewReference()
+ *  PreviewMakePreviewReference()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 PreviewMakePreviewReference(
   pnotComponent   p,
   OSType *        previewType,
   short *         resID,
-  const FSSpec *  sourceFile)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const FSSpec *  sourceFile)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  PreviewEvent()
+ *  PreviewEvent()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 PreviewEvent(
   pnotComponent   p,
   EventRecord *   e,
-  Boolean *       handledEvent)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *       handledEvent)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 
@@ -4014,13 +4021,13 @@ enum {
 
 /** These are DataCodec procedures **/
 /*
- *  DataCodecDecompress()
+ *  DataCodecDecompress()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 DataCodecDecompress(
@@ -4028,33 +4035,33 @@ DataCodecDecompress(
   void *               srcData,
   UInt32               srcSize,
   void *               dstData,
-  UInt32               dstBufferSize)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32               dstBufferSize)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataCodecGetCompressBufferSize()
+ *  DataCodecGetCompressBufferSize()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 DataCodecGetCompressBufferSize(
   DataCodecComponent   dc,
   UInt32               srcSize,
-  UInt32 *             dstSize)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32 *             dstSize)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataCodecCompress()
+ *  DataCodecCompress()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 DataCodecCompress(
@@ -4064,45 +4071,45 @@ DataCodecCompress(
   void *               dstData,
   UInt32               dstBufferSize,
   UInt32 *             actualDstSize,
-  UInt32 *             decompressSlop)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32 *             decompressSlop)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataCodecBeginInterruptSafe()
+ *  DataCodecBeginInterruptSafe()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 DataCodecBeginInterruptSafe(
   DataCodecComponent   dc,
-  unsigned long        maxSrcSize)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned long        maxSrcSize)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataCodecEndInterruptSafe()
+ *  DataCodecEndInterruptSafe()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
-DataCodecEndInterruptSafe(DataCodecComponent dc)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DataCodecEndInterruptSafe(DataCodecComponent dc)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataCodecDecompressPartial()
+ *  DataCodecDecompressPartial()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 DataCodecDecompressPartial(
@@ -4113,17 +4120,17 @@ DataCodecDecompressPartial(
   void **              next_out,
   unsigned long *      avail_out,
   unsigned long *      total_out,
-  Boolean *            didFinish)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *            didFinish)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataCodecCompressPartial()
+ *  DataCodecCompressPartial()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 DataCodecCompressPartial(
@@ -4135,7 +4142,7 @@ DataCodecCompressPartial(
   unsigned long *      avail_out,
   unsigned long *      total_out,
   Boolean              tryToFinish,
-  Boolean *            didFinish)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *            didFinish)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 
@@ -4228,13 +4235,13 @@ typedef OSType *                        DataHFileTypeOrderingPtr;
 typedef DataHFileTypeOrderingPtr *      DataHFileTypeOrderingHandle;
 
 /*
- *  DataHGetData()
+ *  DataHGetData()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 DataHGetData(
@@ -4242,17 +4249,17 @@ DataHGetData(
   Handle        h,
   long          hOffset,
   long          offset,
-  long          size)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long          size)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHPutData()
+ *  DataHPutData()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 DataHPutData(
@@ -4260,142 +4267,142 @@ DataHPutData(
   Handle        h,
   long          hOffset,
   long *        offset,
-  long          size)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long          size)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHFlushData()
+ *  DataHFlushData()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
-DataHFlushData(DataHandler dh)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DataHFlushData(DataHandler dh)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHOpenForWrite()
+ *  DataHOpenForWrite()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
-DataHOpenForWrite(DataHandler dh)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DataHOpenForWrite(DataHandler dh)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHCloseForWrite()
+ *  DataHCloseForWrite()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
-DataHCloseForWrite(DataHandler dh)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DataHCloseForWrite(DataHandler dh)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 
 /*
- *  DataHOpenForRead()
+ *  DataHOpenForRead()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
-DataHOpenForRead(DataHandler dh)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DataHOpenForRead(DataHandler dh)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHCloseForRead()
+ *  DataHCloseForRead()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
-DataHCloseForRead(DataHandler dh)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DataHCloseForRead(DataHandler dh)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHSetDataRef()
+ *  DataHSetDataRef()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 DataHSetDataRef(
   DataHandler   dh,
-  Handle        dataRef)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle        dataRef)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHGetDataRef()
+ *  DataHGetDataRef()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 DataHGetDataRef(
   DataHandler   dh,
-  Handle *      dataRef)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle *      dataRef)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHCompareDataRef()
+ *  DataHCompareDataRef()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 DataHCompareDataRef(
   DataHandler   dh,
   Handle        dataRef,
-  Boolean *     equal)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *     equal)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHTask()
+ *  DataHTask()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
-DataHTask(DataHandler dh)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DataHTask(DataHandler dh)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHScheduleData()
+ *  DataHScheduleData()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 DataHScheduleData(
@@ -4405,109 +4412,109 @@ DataHScheduleData(
   long                 DataSize,
   long                 RefCon,
   DataHSchedulePtr     scheduleRec,
-  DataHCompletionUPP   CompletionRtn)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DataHCompletionUPP   CompletionRtn)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHFinishData()
+ *  DataHFinishData()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 DataHFinishData(
   DataHandler   dh,
   Ptr           PlaceToPutDataPtr,
-  Boolean       Cancel)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean       Cancel)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHFlushCache()
+ *  DataHFlushCache()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
-DataHFlushCache(DataHandler dh)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DataHFlushCache(DataHandler dh)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHResolveDataRef()
+ *  DataHResolveDataRef()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 DataHResolveDataRef(
   DataHandler   dh,
   Handle        theDataRef,
   Boolean *     wasChanged,
-  Boolean       userInterfaceAllowed)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean       userInterfaceAllowed)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHGetFileSize()
+ *  DataHGetFileSize()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 DataHGetFileSize(
   DataHandler   dh,
-  long *        fileSize)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *        fileSize)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHCanUseDataRef()
+ *  DataHCanUseDataRef()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 DataHCanUseDataRef(
   DataHandler   dh,
   Handle        dataRef,
-  long *        useFlags)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *        useFlags)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHGetVolumeList()
+ *  DataHGetVolumeList()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 DataHGetVolumeList(
   DataHandler        dh,
-  DataHVolumeList *  volumeList)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DataHVolumeList *  volumeList)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHWrite()
+ *  DataHWrite()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 DataHWrite(
@@ -4516,388 +4523,388 @@ DataHWrite(
   long                 offset,
   long                 size,
   DataHCompletionUPP   completion,
-  long                 refCon)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long                 refCon)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHPreextend()
+ *  DataHPreextend()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 DataHPreextend(
   DataHandler      dh,
   unsigned long    maxToAdd,
-  unsigned long *  spaceAdded)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned long *  spaceAdded)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHSetFileSize()
+ *  DataHSetFileSize()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 DataHSetFileSize(
   DataHandler   dh,
-  long          fileSize)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long          fileSize)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHGetFreeSpace()
+ *  DataHGetFreeSpace()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 DataHGetFreeSpace(
   DataHandler      dh,
-  unsigned long *  freeSize)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned long *  freeSize)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHCreateFile()
+ *  DataHCreateFile()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 DataHCreateFile(
   DataHandler   dh,
   OSType        creator,
-  Boolean       deleteExisting)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean       deleteExisting)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHGetPreferredBlockSize()
+ *  DataHGetPreferredBlockSize()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 DataHGetPreferredBlockSize(
   DataHandler   dh,
-  long *        blockSize)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *        blockSize)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHGetDeviceIndex()
+ *  DataHGetDeviceIndex()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 DataHGetDeviceIndex(
   DataHandler   dh,
-  long *        deviceIndex)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *        deviceIndex)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHIsStreamingDataHandler()
+ *  DataHIsStreamingDataHandler()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 DataHIsStreamingDataHandler(
   DataHandler   dh,
-  Boolean *     yes)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *     yes)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHGetDataInBuffer()
+ *  DataHGetDataInBuffer()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 DataHGetDataInBuffer(
   DataHandler   dh,
   long          startOffset,
-  long *        size)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *        size)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHGetScheduleAheadTime()
+ *  DataHGetScheduleAheadTime()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 DataHGetScheduleAheadTime(
   DataHandler   dh,
-  long *        millisecs)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *        millisecs)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHSetCacheSizeLimit()
+ *  DataHSetCacheSizeLimit()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 DataHSetCacheSizeLimit(
   DataHandler   dh,
-  Size          cacheSizeLimit)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Size          cacheSizeLimit)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHGetCacheSizeLimit()
+ *  DataHGetCacheSizeLimit()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 DataHGetCacheSizeLimit(
   DataHandler   dh,
-  Size *        cacheSizeLimit)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Size *        cacheSizeLimit)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHGetMovie()
+ *  DataHGetMovie()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 DataHGetMovie(
   DataHandler   dh,
   Movie *       theMovie,
-  short *       id)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short *       id)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHAddMovie()
+ *  DataHAddMovie()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 DataHAddMovie(
   DataHandler   dh,
   Movie         theMovie,
-  short *       id)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short *       id)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHUpdateMovie()
+ *  DataHUpdateMovie()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 DataHUpdateMovie(
   DataHandler   dh,
   Movie         theMovie,
-  short         id)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short         id)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHDoesBuffer()
+ *  DataHDoesBuffer()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 DataHDoesBuffer(
   DataHandler   dh,
   Boolean *     buffersReads,
-  Boolean *     buffersWrites)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *     buffersWrites)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHGetFileName()
+ *  DataHGetFileName()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 DataHGetFileName(
   DataHandler   dh,
-  Str255        str)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Str255        str)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHGetAvailableFileSize()
+ *  DataHGetAvailableFileSize()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 DataHGetAvailableFileSize(
   DataHandler   dh,
-  long *        fileSize)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *        fileSize)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHGetMacOSFileType()
+ *  DataHGetMacOSFileType()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 DataHGetMacOSFileType(
   DataHandler   dh,
-  OSType *      fileType)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSType *      fileType)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHGetMIMEType()
+ *  DataHGetMIMEType()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 DataHGetMIMEType(
   DataHandler   dh,
-  Str255        mimeType)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Str255        mimeType)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHSetDataRefWithAnchor()
+ *  DataHSetDataRefWithAnchor()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 DataHSetDataRefWithAnchor(
   DataHandler   dh,
   Handle        anchorDataRef,
   OSType        dataRefType,
-  Handle        dataRef)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle        dataRef)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHGetDataRefWithAnchor()
+ *  DataHGetDataRefWithAnchor()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 DataHGetDataRefWithAnchor(
   DataHandler   dh,
   Handle        anchorDataRef,
   OSType        dataRefType,
-  Handle *      dataRef)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle *      dataRef)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHSetMacOSFileType()
+ *  DataHSetMacOSFileType()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 DataHSetMacOSFileType(
   DataHandler   dh,
-  OSType        fileType)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSType        fileType)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHSetTimeBase()
+ *  DataHSetTimeBase()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 DataHSetTimeBase(
   DataHandler   dh,
-  TimeBase      tb)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TimeBase      tb)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHGetInfoFlags()
+ *  DataHGetInfoFlags()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in QuickTimeLib 4.0 and later
- *    Windows:          in qtmlClient.lib 4.0 and later
+ *    Windows:          in QTMLClient.lib 4.0 and later
  */
 extern ComponentResult 
 DataHGetInfoFlags(
   DataHandler   dh,
-  UInt32 *      flags)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32 *      flags)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHScheduleData64()
+ *  DataHScheduleData64()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in QuickTimeLib 4.0 and later
- *    Windows:          in qtmlClient.lib 4.0 and later
+ *    Windows:          in QTMLClient.lib 4.0 and later
  */
 extern ComponentResult 
 DataHScheduleData64(
@@ -4907,17 +4914,17 @@ DataHScheduleData64(
   long                 DataSize,
   long                 RefCon,
   DataHSchedulePtr     scheduleRec,
-  DataHCompletionUPP   CompletionRtn)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DataHCompletionUPP   CompletionRtn)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHWrite64()
+ *  DataHWrite64()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in QuickTimeLib 4.0 and later
- *    Windows:          in qtmlClient.lib 4.0 and later
+ *    Windows:          in QTMLClient.lib 4.0 and later
  */
 extern ComponentResult 
 DataHWrite64(
@@ -4926,95 +4933,95 @@ DataHWrite64(
   const wide *         offset,
   long                 size,
   DataHCompletionUPP   completion,
-  long                 refCon)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long                 refCon)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHGetFileSize64()
+ *  DataHGetFileSize64()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in QuickTimeLib 4.0 and later
- *    Windows:          in qtmlClient.lib 4.0 and later
+ *    Windows:          in QTMLClient.lib 4.0 and later
  */
 extern ComponentResult 
 DataHGetFileSize64(
   DataHandler   dh,
-  wide *        fileSize)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  wide *        fileSize)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHPreextend64()
+ *  DataHPreextend64()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in QuickTimeLib 4.0 and later
- *    Windows:          in qtmlClient.lib 4.0 and later
+ *    Windows:          in QTMLClient.lib 4.0 and later
  */
 extern ComponentResult 
 DataHPreextend64(
   DataHandler   dh,
   const wide *  maxToAdd,
-  wide *        spaceAdded)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  wide *        spaceAdded)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHSetFileSize64()
+ *  DataHSetFileSize64()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in QuickTimeLib 4.0 and later
- *    Windows:          in qtmlClient.lib 4.0 and later
+ *    Windows:          in QTMLClient.lib 4.0 and later
  */
 extern ComponentResult 
 DataHSetFileSize64(
   DataHandler   dh,
-  const wide *  fileSize)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const wide *  fileSize)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHGetFreeSpace64()
+ *  DataHGetFreeSpace64()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in QuickTimeLib 4.0 and later
- *    Windows:          in qtmlClient.lib 4.0 and later
+ *    Windows:          in QTMLClient.lib 4.0 and later
  */
 extern ComponentResult 
 DataHGetFreeSpace64(
   DataHandler   dh,
-  wide *        freeSize)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  wide *        freeSize)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHAppend64()
+ *  DataHAppend64()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in QuickTimeLib 4.0 and later
- *    Windows:          in qtmlClient.lib 4.0 and later
+ *    Windows:          in QTMLClient.lib 4.0 and later
  */
 extern ComponentResult 
 DataHAppend64(
   DataHandler     dh,
   void *          data,
   wide *          fileOffset,
-  unsigned long   size)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned long   size)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHReadAsync()
+ *  DataHReadAsync()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in QuickTimeLib 4.0 and later
- *    Windows:          in qtmlClient.lib 4.0 and later
+ *    Windows:          in QTMLClient.lib 4.0 and later
  */
 extern ComponentResult 
 DataHReadAsync(
@@ -5023,33 +5030,33 @@ DataHReadAsync(
   UInt32               dataSize,
   const wide *         dataOffset,
   DataHCompletionUPP   completion,
-  long                 refCon)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long                 refCon)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHPollRead()
+ *  DataHPollRead()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in QuickTimeLib 4.0 and later
- *    Windows:          in qtmlClient.lib 4.0 and later
+ *    Windows:          in QTMLClient.lib 4.0 and later
  */
 extern ComponentResult 
 DataHPollRead(
   DataHandler   dh,
   void *        dataPtr,
-  UInt32 *      dataSizeSoFar)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32 *      dataSizeSoFar)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHGetDataAvailability()
+ *  DataHGetDataAvailability()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in QuickTimeLib 4.0 and later
- *    Windows:          in qtmlClient.lib 4.0 and later
+ *    Windows:          in QTMLClient.lib 4.0 and later
  */
 extern ComponentResult 
 DataHGetDataAvailability(
@@ -5057,105 +5064,105 @@ DataHGetDataAvailability(
   long          offset,
   long          len,
   long *        missing_offset,
-  long *        missing_len)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *        missing_len)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHGetFileSizeAsync()
+ *  DataHGetFileSizeAsync()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in QuickTimeLib 4.0 and later
- *    Windows:          in qtmlClient.lib 4.0 and later
+ *    Windows:          in QTMLClient.lib 4.0 and later
  */
 extern ComponentResult 
 DataHGetFileSizeAsync(
   DataHandler          dh,
   wide *               fileSize,
   DataHCompletionUPP   completionRtn,
-  long                 refCon)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long                 refCon)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHGetDataRefAsType()
+ *  DataHGetDataRefAsType()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeLib 4.1 and later
- *    Windows:          in qtmlClient.lib 4.1 and later
+ *    Windows:          in QTMLClient.lib 4.1 and later
  */
 extern ComponentResult 
 DataHGetDataRefAsType(
   DataHandler   dh,
   OSType        requestedType,
-  Handle *      dataRef)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle *      dataRef)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHSetDataRefExtension()
+ *  DataHSetDataRefExtension()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeLib 4.1 and later
- *    Windows:          in qtmlClient.lib 4.1 and later
+ *    Windows:          in QTMLClient.lib 4.1 and later
  */
 extern ComponentResult 
 DataHSetDataRefExtension(
   DataHandler   dh,
   Handle        extension,
-  OSType        idType)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSType        idType)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHGetDataRefExtension()
+ *  DataHGetDataRefExtension()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeLib 4.1 and later
- *    Windows:          in qtmlClient.lib 4.1 and later
+ *    Windows:          in QTMLClient.lib 4.1 and later
  */
 extern ComponentResult 
 DataHGetDataRefExtension(
   DataHandler   dh,
   Handle *      extension,
-  OSType        idType)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSType        idType)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHGetMovieWithFlags()
+ *  DataHGetMovieWithFlags()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeLib 4.1 and later
- *    Windows:          in qtmlClient.lib 4.1 and later
+ *    Windows:          in QTMLClient.lib 4.1 and later
  */
 extern ComponentResult 
 DataHGetMovieWithFlags(
   DataHandler   dh,
   Movie *       theMovie,
   short *       id,
-  short         flags)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short         flags)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 
 /*
- *  DataHGetFileTypeOrdering()
+ *  DataHGetFileTypeOrdering()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QuickTimeLib 5.0 and later
- *    Windows:          in qtmlClient.lib 5.0 and later
+ *    Windows:          in QTMLClient.lib 5.0 and later
  */
 extern ComponentResult 
 DataHGetFileTypeOrdering(
   DataHandler                    dh,
-  DataHFileTypeOrderingHandle *  orderingListHandle)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DataHFileTypeOrderingHandle *  orderingListHandle)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /* flags for DataHCreateFileWithFlags*/
@@ -5164,81 +5171,81 @@ enum {
 };
 
 /*
- *  DataHCreateFileWithFlags()
+ *  DataHCreateFileWithFlags()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QuickTimeLib 5.0 and later
- *    Windows:          in qtmlClient.lib 5.0 and later
+ *    Windows:          in QTMLClient.lib 5.0 and later
  */
 extern ComponentResult 
 DataHCreateFileWithFlags(
   DataHandler   dh,
   OSType        creator,
   Boolean       deleteExisting,
-  UInt32        flags)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32        flags)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHGetMIMETypeAsync()
+ *  DataHGetMIMETypeAsync()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QuickTimeLib 5.0 and later
- *    Windows:          in qtmlClient.lib 5.0 and later
+ *    Windows:          in QTMLClient.lib 5.0 and later
  */
 extern ComponentResult 
 DataHGetMIMETypeAsync(
   DataHandler          dh,
   Str255               mimeType,
   DataHCompletionUPP   completionRtn,
-  long                 refCon)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long                 refCon)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHGetInfo()
+ *  DataHGetInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.1 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   in QuickTimeLib 5.0.1 and later
- *    Windows:          in qtmlClient.lib 5.0.1 and later
+ *    Windows:          in QTMLClient.lib 5.0.1 and later
  */
 extern ComponentResult 
 DataHGetInfo(
   DataHandler   dh,
   OSType        what,
-  void *        info)                                         AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  void *        info)                                         AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHSetIdleManager()
+ *  DataHSetIdleManager()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   in QuickTimeLib 6.0 and later
- *    Windows:          in qtmlClient.lib 6.0 and later
+ *    Windows:          in QTMLClient.lib 6.0 and later
  */
 extern ComponentResult 
 DataHSetIdleManager(
   DataHandler   dh,
-  IdleManager   im)                                           AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  IdleManager   im)                                           AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHDeleteFile()
+ *  DataHDeleteFile()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   in QuickTimeLib 6.0 and later
- *    Windows:          in qtmlClient.lib 6.0 and later
+ *    Windows:          in QTMLClient.lib 6.0 and later
  */
 extern ComponentResult 
-DataHDeleteFile(DataHandler dh)                               AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+DataHDeleteFile(DataHandler dh)                               AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 enum {
@@ -5246,18 +5253,18 @@ enum {
 };
 
 /*
- *  DataHSetMovieUsageFlags()
+ *  DataHSetMovieUsageFlags()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   in QuickTimeLib 6.0 and later
- *    Windows:          in qtmlClient.lib 6.0 and later
+ *    Windows:          in QTMLClient.lib 6.0 and later
  */
 extern ComponentResult 
 DataHSetMovieUsageFlags(
   DataHandler   dh,
-  long          flags)                                        AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  long          flags)                                        AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 
@@ -5269,48 +5276,48 @@ enum {
 };
 
 /*
- *  DataHUseTemporaryDataRef()
+ *  DataHUseTemporaryDataRef()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   in QuickTimeLib 6.0 and later
- *    Windows:          in qtmlClient.lib 6.0 and later
+ *    Windows:          in QTMLClient.lib 6.0 and later
  */
 extern ComponentResult 
 DataHUseTemporaryDataRef(
   DataHandler   dh,
-  long          inFlags)                                      AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  long          inFlags)                                      AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHGetTemporaryDataRefCapabilities()
+ *  DataHGetTemporaryDataRefCapabilities()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   in QuickTimeLib 6.0 and later
- *    Windows:          in qtmlClient.lib 6.0 and later
+ *    Windows:          in QTMLClient.lib 6.0 and later
  */
 extern ComponentResult 
 DataHGetTemporaryDataRefCapabilities(
   DataHandler   dh,
-  long *        outUnderstoodFlags)                           AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  long *        outUnderstoodFlags)                           AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHRenameFile()
+ *  DataHRenameFile()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   in QuickTimeLib 6.0 and later
- *    Windows:          in qtmlClient.lib 6.0 and later
+ *    Windows:          in QTMLClient.lib 6.0 and later
  */
 extern ComponentResult 
 DataHRenameFile(
   DataHandler   dh,
-  Handle        newDataRef)                                   AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  Handle        newDataRef)                                   AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /* selector 74 skipped */
@@ -5318,7 +5325,7 @@ DataHRenameFile(
 /* selector 76 skipped */
 /* selector 77 skipped */
 /*
- *  DataHGetAvailableFileSize64()
+ *  DataHGetAvailableFileSize64()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Returns the amount of contiguous data from the start of the file
@@ -5342,18 +5349,18 @@ DataHRenameFile(
  *      reading.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 (or QuickTime 7.0) and later in QuickTime.framework
+ *    Mac OS X:         in version 10.4 (or QuickTime 7.0) and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
 extern ComponentResult 
 DataHGetAvailableFileSize64(
   DataHandler   dh,
-  wide *        fileSize)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  wide *        fileSize)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHGetDataAvailability64()
+ *  DataHGetDataAvailability64()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Checks the availability of the specified range of data and
@@ -5392,7 +5399,7 @@ DataHGetAvailableFileSize64(
  *      available, the length returned is 0.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 (or QuickTime 7.0) and later in QuickTime.framework
+ *    Mac OS X:         in version 10.4 (or QuickTime 7.0) and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -5402,19 +5409,19 @@ DataHGetDataAvailability64(
   const wide *  offset,
   long          len,
   wide *        missing_offset,
-  long *        missing_len)                                  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  long *        missing_len)                                  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /* selector 80 skipped */
 /* selector 81 skipped */
 /*
- *  DataHPlaybackHints()
+ *  DataHPlaybackHints()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 DataHPlaybackHints(
@@ -5422,17 +5429,17 @@ DataHPlaybackHints(
   long            flags,
   unsigned long   minFileOffset,
   unsigned long   maxFileOffset,
-  long            bytesPerSecond)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long            bytesPerSecond)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  DataHPlaybackHints64()
+ *  DataHPlaybackHints64()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeLib 4.1 and later
- *    Windows:          in qtmlClient.lib 4.1 and later
+ *    Windows:          in QTMLClient.lib 4.1 and later
  */
 extern ComponentResult 
 DataHPlaybackHints64(
@@ -5440,7 +5447,7 @@ DataHPlaybackHints64(
   long          flags,
   const wide *  minFileOffset,
   const wide *  maxFileOffset,
-  long          bytesPerSecond)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long          bytesPerSecond)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /* Symbolic constants for DataHGetDataRate*/
@@ -5449,19 +5456,19 @@ enum {
 };
 
 /*
- *  DataHGetDataRate()
+ *  DataHGetDataRate()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QuickTimeLib 5.0 and later
- *    Windows:          in qtmlClient.lib 5.0 and later
+ *    Windows:          in QTMLClient.lib 5.0 and later
  */
 extern ComponentResult 
 DataHGetDataRate(
   DataHandler   dh,
   long          flags,
-  long *        bytesPerSecond)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *        bytesPerSecond)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /* Flags for DataHSetTimeHints*/
@@ -5470,13 +5477,13 @@ enum {
 };
 
 /*
- *  DataHSetTimeHints()
+ *  DataHSetTimeHints()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QuickTimeLib 5.0 and later
- *    Windows:          in qtmlClient.lib 5.0 and later
+ *    Windows:          in QTMLClient.lib 5.0 and later
  */
 extern ComponentResult 
 DataHSetTimeHints(
@@ -5485,7 +5492,7 @@ DataHSetTimeHints(
   long          bandwidthPriority,
   TimeScale     scale,
   TimeValue     minTime,
-  TimeValue     maxTime)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TimeValue     maxTime)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 
@@ -5684,106 +5691,106 @@ enum {
 
 
 /*
- *  VDGetMaxSrcRect()
+ *  VDGetMaxSrcRect()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDGetMaxSrcRect(
   VideoDigitizerComponent   ci,
   short                     inputStd,
-  Rect *                    maxSrcRect)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Rect *                    maxSrcRect)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDGetActiveSrcRect()
+ *  VDGetActiveSrcRect()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDGetActiveSrcRect(
   VideoDigitizerComponent   ci,
   short                     inputStd,
-  Rect *                    activeSrcRect)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Rect *                    activeSrcRect)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDSetDigitizerRect()
+ *  VDSetDigitizerRect()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDSetDigitizerRect(
   VideoDigitizerComponent   ci,
-  Rect *                    digitizerRect)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Rect *                    digitizerRect)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDGetDigitizerRect()
+ *  VDGetDigitizerRect()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDGetDigitizerRect(
   VideoDigitizerComponent   ci,
-  Rect *                    digitizerRect)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Rect *                    digitizerRect)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDGetVBlankRect()
+ *  VDGetVBlankRect()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDGetVBlankRect(
   VideoDigitizerComponent   ci,
   short                     inputStd,
-  Rect *                    vBlankRect)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Rect *                    vBlankRect)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDGetMaskPixMap()
+ *  VDGetMaskPixMap()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDGetMaskPixMap(
   VideoDigitizerComponent   ci,
-  PixMapHandle              maskPixMap)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  PixMapHandle              maskPixMap)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDGetPlayThruDestination()
+ *  VDGetPlayThruDestination()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDGetPlayThruDestination(
@@ -5791,552 +5798,552 @@ VDGetPlayThruDestination(
   PixMapHandle *            dest,
   Rect *                    destRect,
   MatrixRecord *            m,
-  RgnHandle *               mask)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  RgnHandle *               mask)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDUseThisCLUT()
+ *  VDUseThisCLUT()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDUseThisCLUT(
   VideoDigitizerComponent   ci,
-  CTabHandle                colorTableHandle)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CTabHandle                colorTableHandle)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDSetInputGammaValue()
+ *  VDSetInputGammaValue()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDSetInputGammaValue(
   VideoDigitizerComponent   ci,
   Fixed                     channel1,
   Fixed                     channel2,
-  Fixed                     channel3)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Fixed                     channel3)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDGetInputGammaValue()
+ *  VDGetInputGammaValue()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDGetInputGammaValue(
   VideoDigitizerComponent   ci,
   Fixed *                   channel1,
   Fixed *                   channel2,
-  Fixed *                   channel3)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Fixed *                   channel3)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDSetBrightness()
+ *  VDSetBrightness()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDSetBrightness(
   VideoDigitizerComponent   ci,
-  unsigned short *          brightness)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned short *          brightness)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDGetBrightness()
+ *  VDGetBrightness()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDGetBrightness(
   VideoDigitizerComponent   ci,
-  unsigned short *          brightness)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned short *          brightness)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDSetContrast()
+ *  VDSetContrast()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDSetContrast(
   VideoDigitizerComponent   ci,
-  unsigned short *          contrast)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned short *          contrast)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDSetHue()
+ *  VDSetHue()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDSetHue(
   VideoDigitizerComponent   ci,
-  unsigned short *          hue)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned short *          hue)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDSetSharpness()
+ *  VDSetSharpness()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDSetSharpness(
   VideoDigitizerComponent   ci,
-  unsigned short *          sharpness)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned short *          sharpness)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDSetSaturation()
+ *  VDSetSaturation()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDSetSaturation(
   VideoDigitizerComponent   ci,
-  unsigned short *          saturation)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned short *          saturation)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDGetContrast()
+ *  VDGetContrast()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDGetContrast(
   VideoDigitizerComponent   ci,
-  unsigned short *          contrast)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned short *          contrast)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDGetHue()
+ *  VDGetHue()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDGetHue(
   VideoDigitizerComponent   ci,
-  unsigned short *          hue)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned short *          hue)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDGetSharpness()
+ *  VDGetSharpness()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDGetSharpness(
   VideoDigitizerComponent   ci,
-  unsigned short *          sharpness)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned short *          sharpness)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDGetSaturation()
+ *  VDGetSaturation()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDGetSaturation(
   VideoDigitizerComponent   ci,
-  unsigned short *          saturation)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned short *          saturation)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDGrabOneFrame()
+ *  VDGrabOneFrame()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
-VDGrabOneFrame(VideoDigitizerComponent ci)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+VDGrabOneFrame(VideoDigitizerComponent ci)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDGetMaxAuxBuffer()
+ *  VDGetMaxAuxBuffer()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDGetMaxAuxBuffer(
   VideoDigitizerComponent   ci,
   PixMapHandle *            pm,
-  Rect *                    r)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Rect *                    r)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDGetDigitizerInfo()
+ *  VDGetDigitizerInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDGetDigitizerInfo(
   VideoDigitizerComponent   ci,
-  DigitizerInfo *           info)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DigitizerInfo *           info)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDGetCurrentFlags()
+ *  VDGetCurrentFlags()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDGetCurrentFlags(
   VideoDigitizerComponent   ci,
   long *                    inputCurrentFlag,
-  long *                    outputCurrentFlag)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *                    outputCurrentFlag)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDSetKeyColor()
+ *  VDSetKeyColor()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDSetKeyColor(
   VideoDigitizerComponent   ci,
-  long                      index)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long                      index)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDGetKeyColor()
+ *  VDGetKeyColor()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDGetKeyColor(
   VideoDigitizerComponent   ci,
-  long *                    index)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *                    index)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDAddKeyColor()
+ *  VDAddKeyColor()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDAddKeyColor(
   VideoDigitizerComponent   ci,
-  long *                    index)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *                    index)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDGetNextKeyColor()
+ *  VDGetNextKeyColor()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDGetNextKeyColor(
   VideoDigitizerComponent   ci,
-  long                      index)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long                      index)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDSetKeyColorRange()
+ *  VDSetKeyColorRange()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDSetKeyColorRange(
   VideoDigitizerComponent   ci,
   RGBColor *                minRGB,
-  RGBColor *                maxRGB)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  RGBColor *                maxRGB)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDGetKeyColorRange()
+ *  VDGetKeyColorRange()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDGetKeyColorRange(
   VideoDigitizerComponent   ci,
   RGBColor *                minRGB,
-  RGBColor *                maxRGB)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  RGBColor *                maxRGB)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDSetDigitizerUserInterrupt()
+ *  VDSetDigitizerUserInterrupt()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDSetDigitizerUserInterrupt(
   VideoDigitizerComponent   ci,
   long                      flags,
   VdigIntUPP                userInterruptProc,
-  long                      refcon)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long                      refcon)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDSetInputColorSpaceMode()
+ *  VDSetInputColorSpaceMode()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDSetInputColorSpaceMode(
   VideoDigitizerComponent   ci,
-  short                     colorSpaceMode)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short                     colorSpaceMode)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDGetInputColorSpaceMode()
+ *  VDGetInputColorSpaceMode()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDGetInputColorSpaceMode(
   VideoDigitizerComponent   ci,
-  short *                   colorSpaceMode)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short *                   colorSpaceMode)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDSetClipState()
+ *  VDSetClipState()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDSetClipState(
   VideoDigitizerComponent   ci,
-  short                     clipEnable)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short                     clipEnable)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDGetClipState()
+ *  VDGetClipState()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDGetClipState(
   VideoDigitizerComponent   ci,
-  short *                   clipEnable)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short *                   clipEnable)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDSetClipRgn()
+ *  VDSetClipRgn()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDSetClipRgn(
   VideoDigitizerComponent   ci,
-  RgnHandle                 clipRegion)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  RgnHandle                 clipRegion)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDClearClipRgn()
+ *  VDClearClipRgn()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDClearClipRgn(
   VideoDigitizerComponent   ci,
-  RgnHandle                 clipRegion)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  RgnHandle                 clipRegion)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDGetCLUTInUse()
+ *  VDGetCLUTInUse()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDGetCLUTInUse(
   VideoDigitizerComponent   ci,
-  CTabHandle *              colorTableHandle)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CTabHandle *              colorTableHandle)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDSetPLLFilterType()
+ *  VDSetPLLFilterType()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDSetPLLFilterType(
   VideoDigitizerComponent   ci,
-  short                     pllType)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short                     pllType)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDGetPLLFilterType()
+ *  VDGetPLLFilterType()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDGetPLLFilterType(
   VideoDigitizerComponent   ci,
-  short *                   pllType)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short *                   pllType)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDGetMaskandValue()
+ *  VDGetMaskandValue()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDGetMaskandValue(
   VideoDigitizerComponent   ci,
   unsigned short            blendLevel,
   long *                    mask,
-  long *                    value)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *                    value)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDSetMasterBlendLevel()
+ *  VDSetMasterBlendLevel()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDSetMasterBlendLevel(
   VideoDigitizerComponent   ci,
-  unsigned short *          blendLevel)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned short *          blendLevel)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDSetPlayThruDestination()
+ *  VDSetPlayThruDestination()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDSetPlayThruDestination(
@@ -6344,62 +6351,62 @@ VDSetPlayThruDestination(
   PixMapHandle              dest,
   RectPtr                   destRect,
   MatrixRecordPtr           m,
-  RgnHandle                 mask)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  RgnHandle                 mask)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDSetPlayThruOnOff()
+ *  VDSetPlayThruOnOff()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDSetPlayThruOnOff(
   VideoDigitizerComponent   ci,
-  short                     state)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short                     state)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDSetFieldPreference()
+ *  VDSetFieldPreference()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDSetFieldPreference(
   VideoDigitizerComponent   ci,
-  short                     fieldFlag)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short                     fieldFlag)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDGetFieldPreference()
+ *  VDGetFieldPreference()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDGetFieldPreference(
   VideoDigitizerComponent   ci,
-  short *                   fieldFlag)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short *                   fieldFlag)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDPreflightDestination()
+ *  VDPreflightDestination()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDPreflightDestination(
@@ -6407,139 +6414,139 @@ VDPreflightDestination(
   Rect *                    digitizerRect,
   PixMap **                 dest,
   RectPtr                   destRect,
-  MatrixRecordPtr           m)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  MatrixRecordPtr           m)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDPreflightGlobalRect()
+ *  VDPreflightGlobalRect()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDPreflightGlobalRect(
   VideoDigitizerComponent   ci,
   GrafPtr                   theWindow,
-  Rect *                    globalRect)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Rect *                    globalRect)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDSetPlayThruGlobalRect()
+ *  VDSetPlayThruGlobalRect()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDSetPlayThruGlobalRect(
   VideoDigitizerComponent   ci,
   GrafPtr                   theWindow,
-  Rect *                    globalRect)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Rect *                    globalRect)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDSetInputGammaRecord()
+ *  VDSetInputGammaRecord()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDSetInputGammaRecord(
   VideoDigitizerComponent   ci,
-  VDGamRecPtr               inputGammaPtr)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  VDGamRecPtr               inputGammaPtr)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDGetInputGammaRecord()
+ *  VDGetInputGammaRecord()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDGetInputGammaRecord(
   VideoDigitizerComponent   ci,
-  VDGamRecPtr *             inputGammaPtr)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  VDGamRecPtr *             inputGammaPtr)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDSetBlackLevelValue()
+ *  VDSetBlackLevelValue()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDSetBlackLevelValue(
   VideoDigitizerComponent   ci,
-  unsigned short *          blackLevel)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned short *          blackLevel)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDGetBlackLevelValue()
+ *  VDGetBlackLevelValue()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDGetBlackLevelValue(
   VideoDigitizerComponent   ci,
-  unsigned short *          blackLevel)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned short *          blackLevel)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDSetWhiteLevelValue()
+ *  VDSetWhiteLevelValue()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDSetWhiteLevelValue(
   VideoDigitizerComponent   ci,
-  unsigned short *          whiteLevel)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned short *          whiteLevel)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDGetWhiteLevelValue()
+ *  VDGetWhiteLevelValue()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDGetWhiteLevelValue(
   VideoDigitizerComponent   ci,
-  unsigned short *          whiteLevel)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned short *          whiteLevel)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDGetVideoDefaults()
+ *  VDGetVideoDefaults()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDGetVideoDefaults(
@@ -6550,138 +6557,138 @@ VDGetVideoDefaults(
   unsigned short *          hue,
   unsigned short *          saturation,
   unsigned short *          contrast,
-  unsigned short *          sharpness)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned short *          sharpness)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDGetNumberOfInputs()
+ *  VDGetNumberOfInputs()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDGetNumberOfInputs(
   VideoDigitizerComponent   ci,
-  short *                   inputs)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short *                   inputs)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDGetInputFormat()
+ *  VDGetInputFormat()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDGetInputFormat(
   VideoDigitizerComponent   ci,
   short                     input,
-  short *                   format)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short *                   format)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDSetInput()
+ *  VDSetInput()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDSetInput(
   VideoDigitizerComponent   ci,
-  short                     input)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short                     input)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDGetInput()
+ *  VDGetInput()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDGetInput(
   VideoDigitizerComponent   ci,
-  short *                   input)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short *                   input)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDSetInputStandard()
+ *  VDSetInputStandard()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDSetInputStandard(
   VideoDigitizerComponent   ci,
-  short                     inputStandard)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short                     inputStandard)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDSetupBuffers()
+ *  VDSetupBuffers()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDSetupBuffers(
   VideoDigitizerComponent   ci,
-  VdigBufferRecListHandle   bufferList)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  VdigBufferRecListHandle   bufferList)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDGrabOneFrameAsync()
+ *  VDGrabOneFrameAsync()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDGrabOneFrameAsync(
   VideoDigitizerComponent   ci,
-  short                     buffer)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short                     buffer)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDDone()
+ *  VDDone()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDDone(
   VideoDigitizerComponent   ci,
-  short                     buffer)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short                     buffer)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDSetCompression()
+ *  VDSetCompression()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDSetCompression(
@@ -6691,33 +6698,33 @@ VDSetCompression(
   Rect *                    bounds,
   CodecQ                    spatialQuality,
   CodecQ                    temporalQuality,
-  long                      keyFrameRate)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long                      keyFrameRate)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDCompressOneFrameAsync()
+ *  VDCompressOneFrameAsync()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
-VDCompressOneFrameAsync(VideoDigitizerComponent ci)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+VDCompressOneFrameAsync(VideoDigitizerComponent ci)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*    Note that UInt8* queuedFrameCount replaces Boolean* done. 0(==false) still means no frames, and 1(==true) one, 
     but if more than one are available the number should be returned here. The value 2 previously meant more than one frame,
     so some VDIGs may return 2 even if more than 2 are available, and some will still return 1 as they are using the original definition */
 /*
- *  VDCompressDone()
+ *  VDCompressDone()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDCompressDone(
@@ -6726,260 +6733,260 @@ VDCompressDone(
   Ptr *                     theData,
   long *                    dataSize,
   UInt8 *                   similarity,
-  TimeRecord *              t)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TimeRecord *              t)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDReleaseCompressBuffer()
+ *  VDReleaseCompressBuffer()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDReleaseCompressBuffer(
   VideoDigitizerComponent   ci,
-  Ptr                       bufferAddr)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Ptr                       bufferAddr)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDGetImageDescription()
+ *  VDGetImageDescription()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDGetImageDescription(
   VideoDigitizerComponent   ci,
-  ImageDescriptionHandle    desc)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ImageDescriptionHandle    desc)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDResetCompressSequence()
+ *  VDResetCompressSequence()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
-VDResetCompressSequence(VideoDigitizerComponent ci)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+VDResetCompressSequence(VideoDigitizerComponent ci)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDSetCompressionOnOff()
+ *  VDSetCompressionOnOff()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDSetCompressionOnOff(
   VideoDigitizerComponent   ci,
-  Boolean                   state)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean                   state)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDGetCompressionTypes()
+ *  VDGetCompressionTypes()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDGetCompressionTypes(
   VideoDigitizerComponent   ci,
-  VDCompressionListHandle   h)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  VDCompressionListHandle   h)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDSetTimeBase()
+ *  VDSetTimeBase()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDSetTimeBase(
   VideoDigitizerComponent   ci,
-  TimeBase                  t)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TimeBase                  t)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDSetFrameRate()
+ *  VDSetFrameRate()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDSetFrameRate(
   VideoDigitizerComponent   ci,
-  Fixed                     framesPerSecond)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Fixed                     framesPerSecond)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDGetDataRate()
+ *  VDGetDataRate()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDGetDataRate(
   VideoDigitizerComponent   ci,
   long *                    milliSecPerFrame,
   Fixed *                   framesPerSecond,
-  long *                    bytesPerSecond)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *                    bytesPerSecond)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDGetSoundInputDriver()
+ *  VDGetSoundInputDriver()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDGetSoundInputDriver(
   VideoDigitizerComponent   ci,
-  Str255                    soundDriverName)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Str255                    soundDriverName)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDGetDMADepths()
+ *  VDGetDMADepths()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDGetDMADepths(
   VideoDigitizerComponent   ci,
   long *                    depthArray,
-  long *                    preferredDepth)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *                    preferredDepth)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDGetPreferredTimeScale()
+ *  VDGetPreferredTimeScale()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDGetPreferredTimeScale(
   VideoDigitizerComponent   ci,
-  TimeScale *               preferred)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TimeScale *               preferred)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDReleaseAsyncBuffers()
+ *  VDReleaseAsyncBuffers()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
-VDReleaseAsyncBuffers(VideoDigitizerComponent ci)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+VDReleaseAsyncBuffers(VideoDigitizerComponent ci)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /* 83 is reserved for compatibility reasons */
 /*
- *  VDSetDataRate()
+ *  VDSetDataRate()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDSetDataRate(
   VideoDigitizerComponent   ci,
-  long                      bytesPerSecond)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long                      bytesPerSecond)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDGetTimeCode()
+ *  VDGetTimeCode()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDGetTimeCode(
   VideoDigitizerComponent   ci,
   TimeRecord *              atTime,
   void *                    timeCodeFormat,
-  void *                    timeCodeTime)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *                    timeCodeTime)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDUseSafeBuffers()
+ *  VDUseSafeBuffers()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDUseSafeBuffers(
   VideoDigitizerComponent   ci,
-  Boolean                   useSafeBuffers)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean                   useSafeBuffers)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDGetSoundInputSource()
+ *  VDGetSoundInputSource()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDGetSoundInputSource(
   VideoDigitizerComponent   ci,
   long                      videoInput,
-  long *                    soundInput)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *                    soundInput)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDGetCompressionTime()
+ *  VDGetCompressionTime()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDGetCompressionTime(
@@ -6989,85 +6996,85 @@ VDGetCompressionTime(
   Rect *                    srcRect,
   CodecQ *                  spatialQuality,
   CodecQ *                  temporalQuality,
-  unsigned long *           compressTime)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned long *           compressTime)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDSetPreferredPacketSize()
+ *  VDSetPreferredPacketSize()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDSetPreferredPacketSize(
   VideoDigitizerComponent   ci,
-  long                      preferredPacketSizeInBytes)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long                      preferredPacketSizeInBytes)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDSetPreferredImageDimensions()
+ *  VDSetPreferredImageDimensions()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDSetPreferredImageDimensions(
   VideoDigitizerComponent   ci,
   long                      width,
-  long                      height)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long                      height)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDGetPreferredImageDimensions()
+ *  VDGetPreferredImageDimensions()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDGetPreferredImageDimensions(
   VideoDigitizerComponent   ci,
   long *                    width,
-  long *                    height)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *                    height)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDGetInputName()
+ *  VDGetInputName()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDGetInputName(
   VideoDigitizerComponent   ci,
   long                      videoInput,
-  Str255                    name)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Str255                    name)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDSetDestinationPort()
+ *  VDSetDestinationPort()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern VideoDigitizerError 
 VDSetDestinationPort(
   VideoDigitizerComponent   ci,
-  CGrafPtr                  destPort)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CGrafPtr                  destPort)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
@@ -7089,19 +7096,19 @@ enum {
 };
 
 /*
- *  VDGetDeviceNameAndFlags()
+ *  VDGetDeviceNameAndFlags()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   in QuickTimeLib 6.0 and later
- *    Windows:          in qtmlClient.lib 6.0 and later
+ *    Windows:          in QTMLClient.lib 6.0 and later
  */
 extern VideoDigitizerError 
 VDGetDeviceNameAndFlags(
   VideoDigitizerComponent   ci,
   Str255                    outName,
-  UInt32 *                  outNameFlags)                     AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  UInt32 *                  outNameFlags)                     AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 enum {
@@ -7116,18 +7123,18 @@ enum {
 };
 
 /*
- *  VDCaptureStateChanging()
+ *  VDCaptureStateChanging()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   in QuickTimeLib 6.0 and later
- *    Windows:          in qtmlClient.lib 6.0 and later
+ *    Windows:          in QTMLClient.lib 6.0 and later
  */
 extern VideoDigitizerError 
 VDCaptureStateChanging(
   VideoDigitizerComponent   ci,
-  UInt32                    inStateFlags)                     AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  UInt32                    inStateFlags)                     AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
@@ -7139,19 +7146,19 @@ VDCaptureStateChanging(
 */
 
 /*
- *  VDGetUniqueIDs()
+ *  VDGetUniqueIDs()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   in QuickTimeLib 6.0 and later
- *    Windows:          in qtmlClient.lib 6.0 and later
+ *    Windows:          in QTMLClient.lib 6.0 and later
  */
 extern VideoDigitizerError 
 VDGetUniqueIDs(
   VideoDigitizerComponent   ci,
   UInt64 *                  outDeviceID,
-  UInt64 *                  outInputID)                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  UInt64 *                  outInputID)                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
@@ -7161,33 +7168,33 @@ VDGetUniqueIDs(
 */
 
 /*
- *  VDSelectUniqueIDs()
+ *  VDSelectUniqueIDs()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   in QuickTimeLib 6.0 and later
- *    Windows:          in qtmlClient.lib 6.0 and later
+ *    Windows:          in QTMLClient.lib 6.0 and later
  */
 extern VideoDigitizerError 
 VDSelectUniqueIDs(
   VideoDigitizerComponent   ci,
   const UInt64 *            inDeviceID,
-  const UInt64 *            inInputID)                        AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  const UInt64 *            inInputID)                        AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDCopyPreferredAudioDevice()
+ *  VDCopyPreferredAudioDevice()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 (or QuickTime 6.4) and later in QuickTime.framework
+ *    Mac OS X:         in version 10.3 (or QuickTime 6.4) and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
 extern ComponentResult 
 VDCopyPreferredAudioDevice(
   ComponentInstance   vdig,
-  CFStringRef *       outAudioDeviceUID)                      AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  CFStringRef *       outAudioDeviceUID)                      AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 
@@ -7406,52 +7413,52 @@ enum {
    These calls are only valid for video digitizers of subtype vdSubtypeIIDC.
 */
 /*
- *  VDIIDCGetFeatures()
+ *  VDIIDCGetFeatures()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 (or QuickTime 6.4) and later in QuickTime.framework
+ *    Mac OS X:         in version 10.3 (or QuickTime 6.4) and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
 extern VideoDigitizerError 
 VDIIDCGetFeatures(
   VideoDigitizerComponent   ci,
-  QTAtomContainer *         container)                        AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  QTAtomContainer *         container)                        AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDIIDCSetFeatures()
+ *  VDIIDCSetFeatures()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 (or QuickTime 6.4) and later in QuickTime.framework
+ *    Mac OS X:         in version 10.3 (or QuickTime 6.4) and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
 extern VideoDigitizerError 
 VDIIDCSetFeatures(
   VideoDigitizerComponent   ci,
-  QTAtomContainer           container)                        AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  QTAtomContainer           container)                        AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDIIDCGetDefaultFeatures()
+ *  VDIIDCGetDefaultFeatures()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 (or QuickTime 6.4) and later in QuickTime.framework
+ *    Mac OS X:         in version 10.3 (or QuickTime 6.4) and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
 extern VideoDigitizerError 
 VDIIDCGetDefaultFeatures(
   VideoDigitizerComponent   ci,
-  QTAtomContainer *         container)                        AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  QTAtomContainer *         container)                        AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDIIDCGetCSRData()
+ *  VDIIDCGetCSRData()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 (or QuickTime 6.4) and later in QuickTime.framework
+ *    Mac OS X:         in version 10.3 (or QuickTime 6.4) and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -7460,14 +7467,14 @@ VDIIDCGetCSRData(
   VideoDigitizerComponent   ci,
   Boolean                   offsetFromUnitBase,
   UInt32                    offset,
-  UInt32 *                  data)                             AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  UInt32 *                  data)                             AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDIIDCSetCSRData()
+ *  VDIIDCSetCSRData()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 (or QuickTime 6.4) and later in QuickTime.framework
+ *    Mac OS X:         in version 10.3 (or QuickTime 6.4) and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -7476,14 +7483,14 @@ VDIIDCSetCSRData(
   VideoDigitizerComponent   ci,
   Boolean                   offsetFromUnitBase,
   UInt32                    offset,
-  UInt32                    data)                             AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  UInt32                    data)                             AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  VDIIDCGetFeaturesForSpecifier()
+ *  VDIIDCGetFeaturesForSpecifier()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 (or QuickTime 6.4) and later in QuickTime.framework
+ *    Mac OS X:         in version 10.3 (or QuickTime 6.4) and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -7491,7 +7498,7 @@ extern VideoDigitizerError
 VDIIDCGetFeaturesForSpecifier(
   VideoDigitizerComponent   ci,
   OSType                    specifier,
-  QTAtomContainer *         container)                        AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  QTAtomContainer *         container)                        AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 
@@ -7608,13 +7615,13 @@ typedef STACK_UPP_TYPE(CommentHandler)                          CommentHandlerUP
 typedef STACK_UPP_TYPE(CDataHandler)                            CDataHandlerUPP;
 /*  Parses the XML file pointed to by dataRef, returning a XMLDoc parse tree*/
 /*
- *  XMLParseDataRef()
+ *  XMLParseDataRef()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QuickTimeLib 5.0 and later
- *    Windows:          in qtmlClient.lib 5.0 and later
+ *    Windows:          in QTMLClient.lib 5.0 and later
  */
 extern ComponentResult 
 XMLParseDataRef(
@@ -7622,41 +7629,41 @@ XMLParseDataRef(
   Handle              dataRef,
   OSType              dataRefType,
   long                parseFlags,
-  XMLDoc *            document)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  XMLDoc *            document)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*  Parses the XML file pointed to by fileSpec, returning a XMLDoc parse tree*/
 /*
- *  XMLParseFile()
+ *  XMLParseFile()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QuickTimeLib 5.0 and later
- *    Windows:          in qtmlClient.lib 5.0 and later
+ *    Windows:          in QTMLClient.lib 5.0 and later
  */
 extern ComponentResult 
 XMLParseFile(
   ComponentInstance   aParser,
   ConstFSSpecPtr      fileSpec,
   long                parseFlags,
-  XMLDoc *            document)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  XMLDoc *            document)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*  Disposes of a XMLDoc parse tree*/
 /*
- *  XMLParseDisposeXMLDoc()
+ *  XMLParseDisposeXMLDoc()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QuickTimeLib 5.0 and later
- *    Windows:          in qtmlClient.lib 5.0 and later
+ *    Windows:          in QTMLClient.lib 5.0 and later
  */
 extern ComponentResult 
 XMLParseDisposeXMLDoc(
   ComponentInstance   aParser,
-  XMLDoc              document)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  XMLDoc              document)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
@@ -7664,19 +7671,19 @@ XMLParseDisposeXMLDoc(
     file failed to parse properly.
 */
 /*
- *  XMLParseGetDetailedParseError()
+ *  XMLParseGetDetailedParseError()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QuickTimeLib 5.0 and later
- *    Windows:          in qtmlClient.lib 5.0 and later
+ *    Windows:          in QTMLClient.lib 5.0 and later
  */
 extern ComponentResult 
 XMLParseGetDetailedParseError(
   ComponentInstance   aParser,
   long *              errorLine,
-  StringPtr           errDesc)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  StringPtr           errDesc)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
@@ -7685,13 +7692,13 @@ XMLParseGetDetailedParseError(
     Thus, a valid element identifier can never be zero.
 */
 /*
- *  XMLParseAddElement()
+ *  XMLParseAddElement()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QuickTimeLib 5.0 and later
- *    Windows:          in qtmlClient.lib 5.0 and later
+ *    Windows:          in QTMLClient.lib 5.0 and later
  */
 extern ComponentResult 
 XMLParseAddElement(
@@ -7699,7 +7706,7 @@ XMLParseAddElement(
   char *              elementName,
   UInt32              nameSpaceID,
   UInt32 *            elementID,
-  long                elementFlags)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long                elementFlags)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
@@ -7708,13 +7715,13 @@ XMLParseAddElement(
     returned. Thus, a valid attribute identifier can never be zero.
 */
 /*
- *  XMLParseAddAttribute()
+ *  XMLParseAddAttribute()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QuickTimeLib 5.0 and later
- *    Windows:          in qtmlClient.lib 5.0 and later
+ *    Windows:          in QTMLClient.lib 5.0 and later
  */
 extern ComponentResult 
 XMLParseAddAttribute(
@@ -7722,7 +7729,7 @@ XMLParseAddAttribute(
   UInt32              elementID,
   UInt32              nameSpaceID,
   char *              attributeName,
-  UInt32 *            attributeID)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32 *            attributeID)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
@@ -7732,13 +7739,13 @@ XMLParseAddAttribute(
     are generated for those and returned
 */
 /*
- *  XMLParseAddMultipleAttributes()
+ *  XMLParseAddMultipleAttributes()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QuickTimeLib 5.0 and later
- *    Windows:          in qtmlClient.lib 5.0 and later
+ *    Windows:          in QTMLClient.lib 5.0 and later
  */
 extern ComponentResult 
 XMLParseAddMultipleAttributes(
@@ -7746,7 +7753,7 @@ XMLParseAddMultipleAttributes(
   UInt32              elementID,
   UInt32 *            nameSpaceIDs,
   char *              attributeNames,
-  UInt32 *            attributeIDs)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32 *            attributeIDs)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
@@ -7756,13 +7763,13 @@ XMLParseAddMultipleAttributes(
     required to tokenize the particular kind of attribute is passed in attributeValueKindInfo
 */
 /*
- *  XMLParseAddAttributeAndValue()
+ *  XMLParseAddAttributeAndValue()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QuickTimeLib 5.0 and later
- *    Windows:          in qtmlClient.lib 5.0 and later
+ *    Windows:          in QTMLClient.lib 5.0 and later
  */
 extern ComponentResult 
 XMLParseAddAttributeAndValue(
@@ -7772,7 +7779,7 @@ XMLParseAddAttributeAndValue(
   char *              attributeName,
   UInt32 *            attributeID,
   UInt32              attributeValueKind,
-  void *              attributeValueKindInfo)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *              attributeValueKindInfo)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
@@ -7782,13 +7789,13 @@ XMLParseAddAttributeAndValue(
     required to tokenize the particular kind of attributes is passed in attributeValueKindInfos
 */
 /*
- *  XMLParseAddMultipleAttributesAndValues()
+ *  XMLParseAddMultipleAttributesAndValues()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QuickTimeLib 5.0 and later
- *    Windows:          in qtmlClient.lib 5.0 and later
+ *    Windows:          in QTMLClient.lib 5.0 and later
  */
 extern ComponentResult 
 XMLParseAddMultipleAttributesAndValues(
@@ -7798,7 +7805,7 @@ XMLParseAddMultipleAttributesAndValues(
   char *              attributeNames,
   UInt32 *            attributeIDs,
   UInt32 *            attributeValueKinds,
-  void **             attributeValueKindInfos)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void **             attributeValueKindInfos)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
@@ -7806,13 +7813,13 @@ XMLParseAddMultipleAttributesAndValues(
     value, as specified by attributeValueKind and attributeValueKindInfo
 */
 /*
- *  XMLParseAddAttributeValueKind()
+ *  XMLParseAddAttributeValueKind()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QuickTimeLib 5.0 and later
- *    Windows:          in qtmlClient.lib 5.0 and later
+ *    Windows:          in QTMLClient.lib 5.0 and later
  */
 extern ComponentResult 
 XMLParseAddAttributeValueKind(
@@ -7820,7 +7827,7 @@ XMLParseAddAttributeValueKind(
   UInt32              elementID,
   UInt32              attributeID,
   UInt32              attributeValueKind,
-  void *              attributeValueKindInfo)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *              attributeValueKindInfo)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
@@ -7829,180 +7836,180 @@ XMLParseAddAttributeValueKind(
     Thus, a valid nameSpaceID identifier can never be zero.
 */
 /*
- *  XMLParseAddNameSpace()
+ *  XMLParseAddNameSpace()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QuickTimeLib 5.0 and later
- *    Windows:          in qtmlClient.lib 5.0 and later
+ *    Windows:          in QTMLClient.lib 5.0 and later
  */
 extern ComponentResult 
 XMLParseAddNameSpace(
   ComponentInstance   aParser,
   char *              nameSpaceURL,
-  UInt32 *            nameSpaceID)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32 *            nameSpaceID)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*  Specifies the offset and limit for reading from the dataref to be used when parsing*/
 /*
- *  XMLParseSetOffsetAndLimit()
+ *  XMLParseSetOffsetAndLimit()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QuickTimeLib 5.0 and later
- *    Windows:          in qtmlClient.lib 5.0 and later
+ *    Windows:          in QTMLClient.lib 5.0 and later
  */
 extern ComponentResult 
 XMLParseSetOffsetAndLimit(
   ComponentInstance   aParser,
   UInt32              offset,
-  UInt32              limit)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32              limit)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*  Set the event parse refcon*/
 /*
- *  XMLParseSetEventParseRefCon()
+ *  XMLParseSetEventParseRefCon()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QuickTimeLib 5.0 and later
- *    Windows:          in qtmlClient.lib 5.0 and later
+ *    Windows:          in QTMLClient.lib 5.0 and later
  */
 extern ComponentResult 
 XMLParseSetEventParseRefCon(
   ComponentInstance   aParser,
-  long                refcon)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long                refcon)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*  Set the start document handler UPP for event parsing*/
 /*
- *  XMLParseSetStartDocumentHandler()
+ *  XMLParseSetStartDocumentHandler()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QuickTimeLib 5.0 and later
- *    Windows:          in qtmlClient.lib 5.0 and later
+ *    Windows:          in QTMLClient.lib 5.0 and later
  */
 extern ComponentResult 
 XMLParseSetStartDocumentHandler(
   ComponentInstance         aParser,
-  StartDocumentHandlerUPP   startDocument)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  StartDocumentHandlerUPP   startDocument)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*  Set the end document handler UPP for event parsing*/
 /*
- *  XMLParseSetEndDocumentHandler()
+ *  XMLParseSetEndDocumentHandler()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QuickTimeLib 5.0 and later
- *    Windows:          in qtmlClient.lib 5.0 and later
+ *    Windows:          in QTMLClient.lib 5.0 and later
  */
 extern ComponentResult 
 XMLParseSetEndDocumentHandler(
   ComponentInstance       aParser,
-  EndDocumentHandlerUPP   endDocument)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  EndDocumentHandlerUPP   endDocument)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*  Set the start element handler UPP for event parsing*/
 /*
- *  XMLParseSetStartElementHandler()
+ *  XMLParseSetStartElementHandler()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QuickTimeLib 5.0 and later
- *    Windows:          in qtmlClient.lib 5.0 and later
+ *    Windows:          in QTMLClient.lib 5.0 and later
  */
 extern ComponentResult 
 XMLParseSetStartElementHandler(
   ComponentInstance        aParser,
-  StartElementHandlerUPP   startElement)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  StartElementHandlerUPP   startElement)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*  Set the end element handler UPP for event parsing*/
 /*
- *  XMLParseSetEndElementHandler()
+ *  XMLParseSetEndElementHandler()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QuickTimeLib 5.0 and later
- *    Windows:          in qtmlClient.lib 5.0 and later
+ *    Windows:          in QTMLClient.lib 5.0 and later
  */
 extern ComponentResult 
 XMLParseSetEndElementHandler(
   ComponentInstance      aParser,
-  EndElementHandlerUPP   endElement)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  EndElementHandlerUPP   endElement)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*  Set the character data handler UPP for event parsing*/
 /*
- *  XMLParseSetCharDataHandler()
+ *  XMLParseSetCharDataHandler()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QuickTimeLib 5.0 and later
- *    Windows:          in qtmlClient.lib 5.0 and later
+ *    Windows:          in QTMLClient.lib 5.0 and later
  */
 extern ComponentResult 
 XMLParseSetCharDataHandler(
   ComponentInstance    aParser,
-  CharDataHandlerUPP   charData)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CharDataHandlerUPP   charData)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*  Set the preprocess instruction handler UPP for event parsing*/
 /*
- *  XMLParseSetPreprocessInstructionHandler()
+ *  XMLParseSetPreprocessInstructionHandler()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QuickTimeLib 5.0 and later
- *    Windows:          in qtmlClient.lib 5.0 and later
+ *    Windows:          in QTMLClient.lib 5.0 and later
  */
 extern ComponentResult 
 XMLParseSetPreprocessInstructionHandler(
   ComponentInstance                 aParser,
-  PreprocessInstructionHandlerUPP   preprocessInstruction)    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  PreprocessInstructionHandlerUPP   preprocessInstruction)    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*  Set the comment handler UPP for event parsing*/
 /*
- *  XMLParseSetCommentHandler()
+ *  XMLParseSetCommentHandler()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QuickTimeLib 5.0 and later
- *    Windows:          in qtmlClient.lib 5.0 and later
+ *    Windows:          in QTMLClient.lib 5.0 and later
  */
 extern ComponentResult 
 XMLParseSetCommentHandler(
   ComponentInstance   aParser,
-  CommentHandlerUPP   comment)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CommentHandlerUPP   comment)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*  Set the cdata handler UPP for event parsing*/
 /*
- *  XMLParseSetCDataHandler()
+ *  XMLParseSetCDataHandler()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   in QuickTimeLib 6.0 and later
- *    Windows:          in qtmlClient.lib 6.0 and later
+ *    Windows:          in QTMLClient.lib 6.0 and later
  */
 extern ComponentResult 
 XMLParseSetCDataHandler(
   ComponentInstance   aParser,
-  CDataHandlerUPP     cdata)                                  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  CDataHandlerUPP     cdata)                                  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
@@ -8328,290 +8335,290 @@ enum {
 };
 
 /*
- *  SGInitialize()
+ *  SGInitialize()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
-SGInitialize(SeqGrabComponent s)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SGInitialize(SeqGrabComponent s)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGSetDataOutput()
+ *  SGSetDataOutput()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGSetDataOutput(
   SeqGrabComponent   s,
   const FSSpec *     movieFile,
-  long               whereFlags)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long               whereFlags)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetDataOutput()
+ *  SGGetDataOutput()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGetDataOutput(
   SeqGrabComponent   s,
   FSSpec *           movieFile,
-  long *             whereFlags)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *             whereFlags)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGSetGWorld()
+ *  SGSetGWorld()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGSetGWorld(
   SeqGrabComponent   s,
   CGrafPtr           gp,
-  GDHandle           gd)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  GDHandle           gd)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetGWorld()
+ *  SGGetGWorld()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGetGWorld(
   SeqGrabComponent   s,
   CGrafPtr *         gp,
-  GDHandle *         gd)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  GDHandle *         gd)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGNewChannel()
+ *  SGNewChannel()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGNewChannel(
   SeqGrabComponent   s,
   OSType             channelType,
-  SGChannel *        ref)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SGChannel *        ref)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGDisposeChannel()
+ *  SGDisposeChannel()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGDisposeChannel(
   SeqGrabComponent   s,
-  SGChannel          c)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SGChannel          c)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGStartPreview()
+ *  SGStartPreview()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
-SGStartPreview(SeqGrabComponent s)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SGStartPreview(SeqGrabComponent s)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGStartRecord()
+ *  SGStartRecord()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
-SGStartRecord(SeqGrabComponent s)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SGStartRecord(SeqGrabComponent s)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGIdle()
+ *  SGIdle()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
-SGIdle(SeqGrabComponent s)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SGIdle(SeqGrabComponent s)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGStop()
+ *  SGStop()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
-SGStop(SeqGrabComponent s)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SGStop(SeqGrabComponent s)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGPause()
+ *  SGPause()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGPause(
   SeqGrabComponent   s,
-  Byte               pause)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Byte               pause)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGPrepare()
+ *  SGPrepare()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGPrepare(
   SeqGrabComponent   s,
   Boolean            prepareForPreview,
-  Boolean            prepareForRecord)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean            prepareForRecord)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGRelease()
+ *  SGRelease()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
-SGRelease(SeqGrabComponent s)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SGRelease(SeqGrabComponent s)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetMovie()
+ *  SGGetMovie()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern Movie 
-SGGetMovie(SeqGrabComponent s)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SGGetMovie(SeqGrabComponent s)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGSetMaximumRecordTime()
+ *  SGSetMaximumRecordTime()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGSetMaximumRecordTime(
   SeqGrabComponent   s,
-  unsigned long      ticks)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned long      ticks)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetMaximumRecordTime()
+ *  SGGetMaximumRecordTime()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGetMaximumRecordTime(
   SeqGrabComponent   s,
-  unsigned long *    ticks)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned long *    ticks)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetStorageSpaceRemaining()
+ *  SGGetStorageSpaceRemaining()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGetStorageSpaceRemaining(
   SeqGrabComponent   s,
-  unsigned long *    bytes)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned long *    bytes)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetTimeRemaining()
+ *  SGGetTimeRemaining()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGetTimeRemaining(
   SeqGrabComponent   s,
-  long *             ticksLeft)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *             ticksLeft)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGrabPict()
+ *  SGGrabPict()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGrabPict(
@@ -8619,205 +8626,205 @@ SGGrabPict(
   PicHandle *        p,
   const Rect *       bounds,
   short              offscreenDepth,
-  long               grabPictFlags)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long               grabPictFlags)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetLastMovieResID()
+ *  SGGetLastMovieResID()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGetLastMovieResID(
   SeqGrabComponent   s,
-  short *            resID)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short *            resID)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGSetFlags()
+ *  SGSetFlags()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGSetFlags(
   SeqGrabComponent   s,
-  long               sgFlags)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long               sgFlags)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetFlags()
+ *  SGGetFlags()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGetFlags(
   SeqGrabComponent   s,
-  long *             sgFlags)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *             sgFlags)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGSetDataProc()
+ *  SGSetDataProc()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGSetDataProc(
   SeqGrabComponent   s,
   SGDataUPP          proc,
-  long               refCon)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long               refCon)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGNewChannelFromComponent()
+ *  SGNewChannelFromComponent()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGNewChannelFromComponent(
   SeqGrabComponent   s,
   SGChannel *        newChannel,
-  Component          sgChannelComponent)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Component          sgChannelComponent)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGDisposeDeviceList()
+ *  SGDisposeDeviceList()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGDisposeDeviceList(
   SeqGrabComponent   s,
-  SGDeviceList       list)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SGDeviceList       list)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGAppendDeviceListToMenu()
+ *  SGAppendDeviceListToMenu()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGAppendDeviceListToMenu(
   SeqGrabComponent   s,
   SGDeviceList       list,
-  MenuRef            mh)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  MenuRef            mh)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGSetSettings()
+ *  SGSetSettings()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGSetSettings(
   SeqGrabComponent   s,
   UserData           ud,
-  long               flags)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long               flags)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetSettings()
+ *  SGGetSettings()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGetSettings(
   SeqGrabComponent   s,
   UserData *         ud,
-  long               flags)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long               flags)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetIndChannel()
+ *  SGGetIndChannel()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGetIndChannel(
   SeqGrabComponent   s,
   short              index,
   SGChannel *        ref,
-  OSType *           chanType)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSType *           chanType)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGUpdate()
+ *  SGUpdate()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGUpdate(
   SeqGrabComponent   s,
-  RgnHandle          updateRgn)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  RgnHandle          updateRgn)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetPause()
+ *  SGGetPause()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGetPause(
   SeqGrabComponent   s,
-  Byte *             paused)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Byte *             paused)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 typedef const Component *               ConstComponentListPtr;
 /*
- *  SGSettingsDialog()
+ *  SGSettingsDialog()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGSettingsDialog(
@@ -8827,116 +8834,116 @@ SGSettingsDialog(
   ConstComponentListPtr   panelList,
   long                    flags,
   SGModalFilterUPP        proc,
-  long                    procRefNum)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long                    procRefNum)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetAlignmentProc()
+ *  SGGetAlignmentProc()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGetAlignmentProc(
   SeqGrabComponent            s,
-  ICMAlignmentProcRecordPtr   alignmentProc)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ICMAlignmentProcRecordPtr   alignmentProc)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGSetChannelSettings()
+ *  SGSetChannelSettings()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGSetChannelSettings(
   SeqGrabComponent   s,
   SGChannel          c,
   UserData           ud,
-  long               flags)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long               flags)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetChannelSettings()
+ *  SGGetChannelSettings()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGetChannelSettings(
   SeqGrabComponent   s,
   SGChannel          c,
   UserData *         ud,
-  long               flags)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long               flags)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetMode()
+ *  SGGetMode()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGetMode(
   SeqGrabComponent   s,
   Boolean *          previewMode,
-  Boolean *          recordMode)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *          recordMode)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGSetDataRef()
+ *  SGSetDataRef()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGSetDataRef(
   SeqGrabComponent   s,
   Handle             dataRef,
   OSType             dataRefType,
-  long               whereFlags)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long               whereFlags)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetDataRef()
+ *  SGGetDataRef()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGetDataRef(
   SeqGrabComponent   s,
   Handle *           dataRef,
   OSType *           dataRefType,
-  long *             whereFlags)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *             whereFlags)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGNewOutput()
+ *  SGNewOutput()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGNewOutput(
@@ -8944,177 +8951,177 @@ SGNewOutput(
   Handle             dataRef,
   OSType             dataRefType,
   long               whereFlags,
-  SGOutput *         sgOut)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SGOutput *         sgOut)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGDisposeOutput()
+ *  SGDisposeOutput()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGDisposeOutput(
   SeqGrabComponent   s,
-  SGOutput           sgOut)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SGOutput           sgOut)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGSetOutputFlags()
+ *  SGSetOutputFlags()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGSetOutputFlags(
   SeqGrabComponent   s,
   SGOutput           sgOut,
-  long               whereFlags)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long               whereFlags)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGSetChannelOutput()
+ *  SGSetChannelOutput()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGSetChannelOutput(
   SeqGrabComponent   s,
   SGChannel          c,
-  SGOutput           sgOut)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SGOutput           sgOut)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetDataOutputStorageSpaceRemaining()
+ *  SGGetDataOutputStorageSpaceRemaining()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGetDataOutputStorageSpaceRemaining(
   SeqGrabComponent   s,
   SGOutput           sgOut,
-  unsigned long *    space)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned long *    space)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGHandleUpdateEvent()
+ *  SGHandleUpdateEvent()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGHandleUpdateEvent(
   SeqGrabComponent     s,
   const EventRecord *  event,
-  Boolean *            handled)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *            handled)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGSetOutputNextOutput()
+ *  SGSetOutputNextOutput()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGSetOutputNextOutput(
   SeqGrabComponent   s,
   SGOutput           sgOut,
-  SGOutput           nextOut)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SGOutput           nextOut)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetOutputNextOutput()
+ *  SGGetOutputNextOutput()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGetOutputNextOutput(
   SeqGrabComponent   s,
   SGOutput           sgOut,
-  SGOutput *         nextOut)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SGOutput *         nextOut)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGSetOutputMaximumOffset()
+ *  SGSetOutputMaximumOffset()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGSetOutputMaximumOffset(
   SeqGrabComponent   s,
   SGOutput           sgOut,
-  const wide *       maxOffset)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const wide *       maxOffset)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetOutputMaximumOffset()
+ *  SGGetOutputMaximumOffset()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGetOutputMaximumOffset(
   SeqGrabComponent   s,
   SGOutput           sgOut,
-  wide *             maxOffset)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  wide *             maxOffset)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetOutputDataReference()
+ *  SGGetOutputDataReference()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGetOutputDataReference(
   SeqGrabComponent   s,
   SGOutput           sgOut,
   Handle *           dataRef,
-  OSType *           dataRefType)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSType *           dataRefType)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGWriteExtendedMovieData()
+ *  SGWriteExtendedMovieData()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGWriteExtendedMovieData(
@@ -9123,51 +9130,51 @@ SGWriteExtendedMovieData(
   Ptr                p,
   long               len,
   wide *             offset,
-  SGOutput *         sgOut)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SGOutput *         sgOut)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetStorageSpaceRemaining64()
+ *  SGGetStorageSpaceRemaining64()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in QuickTimeLib 4.0 and later
- *    Windows:          in qtmlClient.lib 4.0 and later
+ *    Windows:          in QTMLClient.lib 4.0 and later
  */
 extern ComponentResult 
 SGGetStorageSpaceRemaining64(
   SeqGrabComponent   s,
-  wide *             bytes)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  wide *             bytes)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetDataOutputStorageSpaceRemaining64()
+ *  SGGetDataOutputStorageSpaceRemaining64()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QuickTimeLib 5.0 and later
- *    Windows:          in qtmlClient.lib 5.0 and later
+ *    Windows:          in QTMLClient.lib 5.0 and later
  */
 extern ComponentResult 
 SGGetDataOutputStorageSpaceRemaining64(
   SeqGrabComponent   s,
   SGOutput           sgOut,
-  wide *             space)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  wide *             space)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
     calls from Channel to seqGrab
 */
 /*
- *  SGWriteMovieData()
+ *  SGWriteMovieData()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGWriteMovieData(
@@ -9175,79 +9182,79 @@ SGWriteMovieData(
   SGChannel          c,
   Ptr                p,
   long               len,
-  long *             offset)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *             offset)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGAddFrameReference()
+ *  SGAddFrameReference()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGAddFrameReference(
   SeqGrabComponent      s,
-  SeqGrabFrameInfoPtr   frameInfo)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SeqGrabFrameInfoPtr   frameInfo)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetNextFrameReference()
+ *  SGGetNextFrameReference()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGetNextFrameReference(
   SeqGrabComponent      s,
   SeqGrabFrameInfoPtr   frameInfo,
   TimeValue *           frameDuration,
-  long *                frameNumber)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *                frameNumber)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetTimeBase()
+ *  SGGetTimeBase()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGetTimeBase(
   SeqGrabComponent   s,
-  TimeBase *         tb)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TimeBase *         tb)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGSortDeviceList()
+ *  SGSortDeviceList()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGSortDeviceList(
   SeqGrabComponent   s,
-  SGDeviceList       list)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SGDeviceList       list)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGAddMovieData()
+ *  SGAddMovieData()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGAddMovieData(
@@ -9258,64 +9265,64 @@ SGAddMovieData(
   long *             offset,
   long               chRefCon,
   TimeValue          time,
-  short              writeType)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short              writeType)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGChangedSource()
+ *  SGChangedSource()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGChangedSource(
   SeqGrabComponent   s,
-  SGChannel          c)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SGChannel          c)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGAddExtendedFrameReference()
+ *  SGAddExtendedFrameReference()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGAddExtendedFrameReference(
   SeqGrabComponent              s,
-  SeqGrabExtendedFrameInfoPtr   frameInfo)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SeqGrabExtendedFrameInfoPtr   frameInfo)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetNextExtendedFrameReference()
+ *  SGGetNextExtendedFrameReference()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGetNextExtendedFrameReference(
   SeqGrabComponent              s,
   SeqGrabExtendedFrameInfoPtr   frameInfo,
   TimeValue *                   frameDuration,
-  long *                        frameNumber)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *                        frameNumber)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGAddExtendedMovieData()
+ *  SGAddExtendedMovieData()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGAddExtendedMovieData(
@@ -9327,39 +9334,39 @@ SGAddExtendedMovieData(
   long               chRefCon,
   TimeValue          time,
   short              writeType,
-  SGOutput *         whichOutput)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SGOutput *         whichOutput)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGAddOutputDataRefToMedia()
+ *  SGAddOutputDataRefToMedia()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGAddOutputDataRefToMedia(
   SeqGrabComponent          s,
   SGOutput                  sgOut,
   Media                     theMedia,
-  SampleDescriptionHandle   desc)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SampleDescriptionHandle   desc)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGSetSettingsSummary()
+ *  SGSetSettingsSummary()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   in QuickTimeLib 6.0 and later
- *    Windows:          in qtmlClient.lib 6.0 and later
+ *    Windows:          in QTMLClient.lib 6.0 and later
  */
 extern ComponentResult 
 SGSetSettingsSummary(
   SeqGrabComponent   s,
-  Handle             summaryText)                             AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  Handle             summaryText)                             AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 
@@ -9367,473 +9374,473 @@ SGSetSettingsSummary(
 /*** Sequence Grab CHANNEL Component Stuff ***/
 
 /*
- *  SGSetChannelUsage()
+ *  SGSetChannelUsage()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGSetChannelUsage(
   SGChannel   c,
-  long        usage)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long        usage)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetChannelUsage()
+ *  SGGetChannelUsage()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGetChannelUsage(
   SGChannel   c,
-  long *      usage)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *      usage)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGSetChannelBounds()
+ *  SGSetChannelBounds()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGSetChannelBounds(
   SGChannel     c,
-  const Rect *  bounds)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const Rect *  bounds)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetChannelBounds()
+ *  SGGetChannelBounds()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGetChannelBounds(
   SGChannel   c,
-  Rect *      bounds)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Rect *      bounds)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGSetChannelVolume()
+ *  SGSetChannelVolume()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGSetChannelVolume(
   SGChannel   c,
-  short       volume)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short       volume)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetChannelVolume()
+ *  SGGetChannelVolume()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGetChannelVolume(
   SGChannel   c,
-  short *     volume)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short *     volume)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetChannelInfo()
+ *  SGGetChannelInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGetChannelInfo(
   SGChannel   c,
-  long *      channelInfo)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *      channelInfo)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGSetChannelPlayFlags()
+ *  SGSetChannelPlayFlags()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGSetChannelPlayFlags(
   SGChannel   c,
-  long        playFlags)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long        playFlags)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetChannelPlayFlags()
+ *  SGGetChannelPlayFlags()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGetChannelPlayFlags(
   SGChannel   c,
-  long *      playFlags)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *      playFlags)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGSetChannelMaxFrames()
+ *  SGSetChannelMaxFrames()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGSetChannelMaxFrames(
   SGChannel   c,
-  long        frameCount)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long        frameCount)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetChannelMaxFrames()
+ *  SGGetChannelMaxFrames()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGetChannelMaxFrames(
   SGChannel   c,
-  long *      frameCount)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *      frameCount)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGSetChannelRefCon()
+ *  SGSetChannelRefCon()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGSetChannelRefCon(
   SGChannel   c,
-  long        refCon)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long        refCon)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGSetChannelClip()
+ *  SGSetChannelClip()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGSetChannelClip(
   SGChannel   c,
-  RgnHandle   theClip)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  RgnHandle   theClip)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetChannelClip()
+ *  SGGetChannelClip()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGetChannelClip(
   SGChannel    c,
-  RgnHandle *  theClip)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  RgnHandle *  theClip)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetChannelSampleDescription()
+ *  SGGetChannelSampleDescription()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGetChannelSampleDescription(
   SGChannel   c,
-  Handle      sampleDesc)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle      sampleDesc)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetChannelDeviceList()
+ *  SGGetChannelDeviceList()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGetChannelDeviceList(
   SGChannel       c,
   long            selectionFlags,
-  SGDeviceList *  list)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SGDeviceList *  list)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGSetChannelDevice()
+ *  SGSetChannelDevice()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGSetChannelDevice(
   SGChannel   c,
-  StringPtr   name)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  StringPtr   name)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGSetChannelMatrix()
+ *  SGSetChannelMatrix()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGSetChannelMatrix(
   SGChannel             c,
-  const MatrixRecord *  m)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const MatrixRecord *  m)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetChannelMatrix()
+ *  SGGetChannelMatrix()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGetChannelMatrix(
   SGChannel       c,
-  MatrixRecord *  m)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  MatrixRecord *  m)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetChannelTimeScale()
+ *  SGGetChannelTimeScale()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGetChannelTimeScale(
   SGChannel    c,
-  TimeScale *  scale)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TimeScale *  scale)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGChannelPutPicture()
+ *  SGChannelPutPicture()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
-SGChannelPutPicture(SGChannel c)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SGChannelPutPicture(SGChannel c)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGChannelSetRequestedDataRate()
+ *  SGChannelSetRequestedDataRate()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGChannelSetRequestedDataRate(
   SGChannel   c,
-  long        bytesPerSecond)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long        bytesPerSecond)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGChannelGetRequestedDataRate()
+ *  SGChannelGetRequestedDataRate()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGChannelGetRequestedDataRate(
   SGChannel   c,
-  long *      bytesPerSecond)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *      bytesPerSecond)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGChannelSetDataSourceName()
+ *  SGChannelSetDataSourceName()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGChannelSetDataSourceName(
   SGChannel          c,
   ConstStr255Param   name,
-  ScriptCode         scriptTag)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ScriptCode         scriptTag)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGChannelGetDataSourceName()
+ *  SGChannelGetDataSourceName()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGChannelGetDataSourceName(
   SGChannel     c,
   Str255        name,
-  ScriptCode *  scriptTag)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ScriptCode *  scriptTag)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGChannelSetCodecSettings()
+ *  SGChannelSetCodecSettings()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in QuickTimeLib 4.0 and later
- *    Windows:          in qtmlClient.lib 4.0 and later
+ *    Windows:          in QTMLClient.lib 4.0 and later
  */
 extern ComponentResult 
 SGChannelSetCodecSettings(
   SGChannel   c,
-  Handle      settings)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle      settings)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGChannelGetCodecSettings()
+ *  SGChannelGetCodecSettings()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in QuickTimeLib 4.0 and later
- *    Windows:          in qtmlClient.lib 4.0 and later
+ *    Windows:          in QTMLClient.lib 4.0 and later
  */
 extern ComponentResult 
 SGChannelGetCodecSettings(
   SGChannel   c,
-  Handle *    settings)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle *    settings)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetChannelTimeBase()
+ *  SGGetChannelTimeBase()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in QuickTimeLib 4.0 and later
- *    Windows:          in qtmlClient.lib 4.0 and later
+ *    Windows:          in QTMLClient.lib 4.0 and later
  */
 extern ComponentResult 
 SGGetChannelTimeBase(
   SGChannel   c,
-  TimeBase *  tb)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TimeBase *  tb)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetChannelRefCon()
+ *  SGGetChannelRefCon()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   in QuickTimeLib 6.0 and later
- *    Windows:          in qtmlClient.lib 6.0 and later
+ *    Windows:          in QTMLClient.lib 6.0 and later
  */
 extern ComponentResult 
 SGGetChannelRefCon(
   SGChannel   c,
-  long *      refCon)                                         AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  long *      refCon)                                         AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /* A utility call to find out the current device and input names, instead of having to call GetDeviceList and walk it yourself */
 /*
- *  SGGetChannelDeviceAndInputNames()
+ *  SGGetChannelDeviceAndInputNames()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   in QuickTimeLib 6.0 and later
- *    Windows:          in qtmlClient.lib 6.0 and later
+ *    Windows:          in QTMLClient.lib 6.0 and later
  */
 extern ComponentResult 
 SGGetChannelDeviceAndInputNames(
   SGChannel   c,
   Str255      outDeviceName,
   Str255      outInputName,
-  short *     outInputNumber)                                 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  short *     outInputNumber)                                 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /* A media format independent call for this. Inputs start at 0 here (Sound starts at 1, VDIGs at 0 in direct calls) */
 /*
- *  SGSetChannelDeviceInput()
+ *  SGSetChannelDeviceInput()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   in QuickTimeLib 6.0 and later
- *    Windows:          in qtmlClient.lib 6.0 and later
+ *    Windows:          in QTMLClient.lib 6.0 and later
  */
 extern ComponentResult 
 SGSetChannelDeviceInput(
   SGChannel   c,
-  short       inInputNumber)                                  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  short       inInputNumber)                                  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /* A call to bracket SetSettings related calls, to give downstream components an opportunity to deal with the entire 
@@ -9844,157 +9851,157 @@ enum {
 };
 
 /*
- *  SGSetChannelSettingsStateChanging()
+ *  SGSetChannelSettingsStateChanging()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   in QuickTimeLib 6.0 and later
- *    Windows:          in qtmlClient.lib 6.0 and later
+ *    Windows:          in QTMLClient.lib 6.0 and later
  */
 extern ComponentResult 
 SGSetChannelSettingsStateChanging(
   SGChannel   c,
-  UInt32      inFlags)                                        AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  UInt32      inFlags)                                        AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
     calls from seqGrab to Channel
 */
 /*
- *  SGInitChannel()
+ *  SGInitChannel()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGInitChannel(
   SGChannel          c,
-  SeqGrabComponent   owner)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SeqGrabComponent   owner)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGWriteSamples()
+ *  SGWriteSamples()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGWriteSamples(
   SGChannel     c,
   Movie         m,
-  AliasHandle   theFile)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AliasHandle   theFile)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetDataRate()
+ *  SGGetDataRate()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGetDataRate(
   SGChannel   c,
-  long *      bytesPerSecond)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *      bytesPerSecond)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGAlignChannelRect()
+ *  SGAlignChannelRect()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGAlignChannelRect(
   SGChannel   c,
-  Rect *      r)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Rect *      r)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
     Dorky dialog panel calls
 */
 /*
- *  SGPanelGetDitl()
+ *  SGPanelGetDitl()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGPanelGetDitl(
   SeqGrabComponent   s,
-  Handle *           ditl)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle *           ditl)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGPanelGetTitle()
+ *  SGPanelGetTitle()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGPanelGetTitle(
   SeqGrabComponent   s,
-  Str255             title)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Str255             title)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGPanelCanRun()
+ *  SGPanelCanRun()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGPanelCanRun(
   SeqGrabComponent   s,
-  SGChannel          c)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SGChannel          c)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGPanelInstall()
+ *  SGPanelInstall()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGPanelInstall(
   SeqGrabComponent   s,
   SGChannel          c,
   DialogRef          d,
-  short              itemOffset)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short              itemOffset)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGPanelEvent()
+ *  SGPanelEvent()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGPanelEvent(
@@ -10004,17 +10011,17 @@ SGPanelEvent(
   short                itemOffset,
   const EventRecord *  theEvent,
   short *              itemHit,
-  Boolean *            handled)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *            handled)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGPanelItem()
+ *  SGPanelItem()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGPanelItem(
@@ -10022,119 +10029,119 @@ SGPanelItem(
   SGChannel          c,
   DialogRef          d,
   short              itemOffset,
-  short              itemNum)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short              itemNum)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGPanelRemove()
+ *  SGPanelRemove()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGPanelRemove(
   SeqGrabComponent   s,
   SGChannel          c,
   DialogRef          d,
-  short              itemOffset)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short              itemOffset)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGPanelSetGrabber()
+ *  SGPanelSetGrabber()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGPanelSetGrabber(
   SeqGrabComponent   s,
-  SeqGrabComponent   sg)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SeqGrabComponent   sg)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGPanelSetResFile()
+ *  SGPanelSetResFile()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGPanelSetResFile(
   SeqGrabComponent   s,
-  short              resRef)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short              resRef)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGPanelGetSettings()
+ *  SGPanelGetSettings()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGPanelGetSettings(
   SeqGrabComponent   s,
   SGChannel          c,
   UserData *         ud,
-  long               flags)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long               flags)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGPanelSetSettings()
+ *  SGPanelSetSettings()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGPanelSetSettings(
   SeqGrabComponent   s,
   SGChannel          c,
   UserData           ud,
-  long               flags)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long               flags)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGPanelValidateInput()
+ *  SGPanelValidateInput()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGPanelValidateInput(
   SeqGrabComponent   s,
-  Boolean *          ok)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *          ok)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGPanelSetEventFilter()
+ *  SGPanelSetEventFilter()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGPanelSetEventFilter(
   SeqGrabComponent   s,
   SGModalFilterUPP   proc,
-  long               refCon)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long               refCon)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
@@ -10150,19 +10157,19 @@ enum {
 };
 
 /*
- *  SGPanelGetDITLForSize()
+ *  SGPanelGetDITLForSize()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   in QuickTimeLib 6.0 and later
- *    Windows:          in qtmlClient.lib 6.0 and later
+ *    Windows:          in QTMLClient.lib 6.0 and later
  */
 extern ComponentResult 
 SGPanelGetDITLForSize(
   SeqGrabComponent   s,
   Handle *           ditl,
-  Point *            requestedSize)                           AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  Point *            requestedSize)                           AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*** Sequence Grab VIDEO CHANNEL Component Stuff ***/
@@ -10211,88 +10218,88 @@ struct VideoBottles {
 };
 typedef struct VideoBottles             VideoBottles;
 /*
- *  SGGetSrcVideoBounds()
+ *  SGGetSrcVideoBounds()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGetSrcVideoBounds(
   SGChannel   c,
-  Rect *      r)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Rect *      r)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGSetVideoRect()
+ *  SGSetVideoRect()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGSetVideoRect(
   SGChannel     c,
-  const Rect *  r)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const Rect *  r)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetVideoRect()
+ *  SGGetVideoRect()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGetVideoRect(
   SGChannel   c,
-  Rect *      r)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Rect *      r)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetVideoCompressorType()
+ *  SGGetVideoCompressorType()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGetVideoCompressorType(
   SGChannel   c,
-  OSType *    compressorType)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSType *    compressorType)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGSetVideoCompressorType()
+ *  SGSetVideoCompressorType()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGSetVideoCompressorType(
   SGChannel   c,
-  OSType      compressorType)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSType      compressorType)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGSetVideoCompressor()
+ *  SGSetVideoCompressor()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGSetVideoCompressor(
@@ -10301,17 +10308,17 @@ SGSetVideoCompressor(
   CompressorComponent   compressor,
   CodecQ                spatialQuality,
   CodecQ                temporalQuality,
-  long                  keyFrameRate)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long                  keyFrameRate)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetVideoCompressor()
+ *  SGGetVideoCompressor()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGetVideoCompressor(
@@ -10320,168 +10327,168 @@ SGGetVideoCompressor(
   CompressorComponent *  compressor,
   CodecQ *               spatialQuality,
   CodecQ *               temporalQuality,
-  long *                 keyFrameRate)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *                 keyFrameRate)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetVideoDigitizerComponent()
+ *  SGGetVideoDigitizerComponent()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentInstance 
-SGGetVideoDigitizerComponent(SGChannel c)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SGGetVideoDigitizerComponent(SGChannel c)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGSetVideoDigitizerComponent()
+ *  SGSetVideoDigitizerComponent()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGSetVideoDigitizerComponent(
   SGChannel           c,
-  ComponentInstance   vdig)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ComponentInstance   vdig)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGVideoDigitizerChanged()
+ *  SGVideoDigitizerChanged()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
-SGVideoDigitizerChanged(SGChannel c)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SGVideoDigitizerChanged(SGChannel c)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGSetVideoBottlenecks()
+ *  SGSetVideoBottlenecks()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGSetVideoBottlenecks(
   SGChannel       c,
-  VideoBottles *  vb)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  VideoBottles *  vb)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetVideoBottlenecks()
+ *  SGGetVideoBottlenecks()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGetVideoBottlenecks(
   SGChannel       c,
-  VideoBottles *  vb)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  VideoBottles *  vb)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGrabFrame()
+ *  SGGrabFrame()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGrabFrame(
   SGChannel   c,
-  short       bufferNum)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short       bufferNum)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGrabFrameComplete()
+ *  SGGrabFrameComplete()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGrabFrameComplete(
   SGChannel   c,
   short       bufferNum,
-  Boolean *   done)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *   done)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGDisplayFrame()
+ *  SGDisplayFrame()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGDisplayFrame(
   SGChannel             c,
   short                 bufferNum,
   const MatrixRecord *  mp,
-  RgnHandle             clipRgn)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  RgnHandle             clipRgn)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGCompressFrame()
+ *  SGCompressFrame()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGCompressFrame(
   SGChannel   c,
-  short       bufferNum)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short       bufferNum)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGCompressFrameComplete()
+ *  SGCompressFrameComplete()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGCompressFrameComplete(
   SGChannel         c,
   short             bufferNum,
   Boolean *         done,
-  SGCompressInfo *  ci)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SGCompressInfo *  ci)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGAddFrame()
+ *  SGAddFrame()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGAddFrame(
@@ -10489,66 +10496,66 @@ SGAddFrame(
   short                   bufferNum,
   TimeValue               atTime,
   TimeScale               scale,
-  const SGCompressInfo *  ci)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const SGCompressInfo *  ci)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGTransferFrameForCompress()
+ *  SGTransferFrameForCompress()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGTransferFrameForCompress(
   SGChannel             c,
   short                 bufferNum,
   const MatrixRecord *  mp,
-  RgnHandle             clipRgn)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  RgnHandle             clipRgn)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGSetCompressBuffer()
+ *  SGSetCompressBuffer()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGSetCompressBuffer(
   SGChannel     c,
   short         depth,
-  const Rect *  compressSize)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const Rect *  compressSize)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetCompressBuffer()
+ *  SGGetCompressBuffer()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGetCompressBuffer(
   SGChannel   c,
   short *     depth,
-  Rect *      compressSize)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Rect *      compressSize)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetBufferInfo()
+ *  SGGetBufferInfo()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGetBufferInfo(
@@ -10557,67 +10564,67 @@ SGGetBufferInfo(
   PixMapHandle *  bufferPM,
   Rect *          bufferRect,
   GWorldPtr *     compressBuffer,
-  Rect *          compressBufferRect)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Rect *          compressBufferRect)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGSetUseScreenBuffer()
+ *  SGSetUseScreenBuffer()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGSetUseScreenBuffer(
   SGChannel   c,
-  Boolean     useScreenBuffer)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean     useScreenBuffer)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetUseScreenBuffer()
+ *  SGGetUseScreenBuffer()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGetUseScreenBuffer(
   SGChannel   c,
-  Boolean *   useScreenBuffer)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *   useScreenBuffer)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*    Note that UInt8 *queuedFrameCount replaces Boolean *done. 0(==false) still means no frames, and 1(==true) one, 
     but if more than one are available the number should be returned here. The value 2 previously meant more than one frame,
     so some VDIGs may return 2 even if more than 2 are available, and some will still return 1 as they are using the original definition. */
 /*
- *  SGGrabCompressComplete()
+ *  SGGrabCompressComplete()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGrabCompressComplete(
   SGChannel         c,
   UInt8 *           queuedFrameCount,
   SGCompressInfo *  ci,
-  TimeRecord *      tr)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TimeRecord *      tr)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGDisplayCompress()
+ *  SGDisplayCompress()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGDisplayCompress(
@@ -10625,98 +10632,98 @@ SGDisplayCompress(
   Ptr                      dataPtr,
   ImageDescriptionHandle   desc,
   MatrixRecord *           mp,
-  RgnHandle                clipRgn)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  RgnHandle                clipRgn)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGSetFrameRate()
+ *  SGSetFrameRate()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGSetFrameRate(
   SGChannel   c,
-  Fixed       frameRate)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Fixed       frameRate)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetFrameRate()
+ *  SGGetFrameRate()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGetFrameRate(
   SGChannel   c,
-  Fixed *     frameRate)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Fixed *     frameRate)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 
 /*
- *  SGSetPreferredPacketSize()
+ *  SGSetPreferredPacketSize()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGSetPreferredPacketSize(
   SGChannel   c,
-  long        preferredPacketSizeInBytes)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long        preferredPacketSizeInBytes)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetPreferredPacketSize()
+ *  SGGetPreferredPacketSize()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGetPreferredPacketSize(
   SGChannel   c,
-  long *      preferredPacketSizeInBytes)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *      preferredPacketSizeInBytes)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGSetUserVideoCompressorList()
+ *  SGSetUserVideoCompressorList()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGSetUserVideoCompressorList(
   SGChannel   c,
-  Handle      compressorTypes)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle      compressorTypes)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetUserVideoCompressorList()
+ *  SGGetUserVideoCompressorList()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGetUserVideoCompressorList(
   SGChannel   c,
-  Handle *    compressorTypes)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle *    compressorTypes)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 
@@ -11581,305 +11588,305 @@ typedef struct SGAudioCallbackStruct    SGAudioCallbackStruct;
     Sound stuff
 */
 /*
- *  SGSetSoundInputDriver()
+ *  SGSetSoundInputDriver()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGSetSoundInputDriver(
   SGChannel          c,
-  ConstStr255Param   driverName)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ConstStr255Param   driverName)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetSoundInputDriver()
+ *  SGGetSoundInputDriver()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern long 
-SGGetSoundInputDriver(SGChannel c)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SGGetSoundInputDriver(SGChannel c)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGSoundInputDriverChanged()
+ *  SGSoundInputDriverChanged()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
-SGSoundInputDriverChanged(SGChannel c)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SGSoundInputDriverChanged(SGChannel c)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGSetSoundRecordChunkSize()
+ *  SGSetSoundRecordChunkSize()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGSetSoundRecordChunkSize(
   SGChannel   c,
-  long        seconds)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long        seconds)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetSoundRecordChunkSize()
+ *  SGGetSoundRecordChunkSize()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern long 
-SGGetSoundRecordChunkSize(SGChannel c)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SGGetSoundRecordChunkSize(SGChannel c)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGSetSoundInputRate()
+ *  SGSetSoundInputRate()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGSetSoundInputRate(
   SGChannel   c,
-  Fixed       rate)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Fixed       rate)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetSoundInputRate()
+ *  SGGetSoundInputRate()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern Fixed 
-SGGetSoundInputRate(SGChannel c)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SGGetSoundInputRate(SGChannel c)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGSetSoundInputParameters()
+ *  SGSetSoundInputParameters()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGSetSoundInputParameters(
   SGChannel   c,
   short       sampleSize,
   short       numChannels,
-  OSType      compressionType)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSType      compressionType)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetSoundInputParameters()
+ *  SGGetSoundInputParameters()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGetSoundInputParameters(
   SGChannel   c,
   short *     sampleSize,
   short *     numChannels,
-  OSType *    compressionType)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSType *    compressionType)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGSetAdditionalSoundRates()
+ *  SGSetAdditionalSoundRates()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGSetAdditionalSoundRates(
   SGChannel   c,
-  Handle      rates)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle      rates)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetAdditionalSoundRates()
+ *  SGGetAdditionalSoundRates()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGetAdditionalSoundRates(
   SGChannel   c,
-  Handle *    rates)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle *    rates)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
     Text stuff
 */
 /*
- *  SGSetFontName()
+ *  SGSetFontName()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGSetFontName(
   SGChannel   c,
-  StringPtr   pstr)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  StringPtr   pstr)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGSetFontSize()
+ *  SGSetFontSize()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGSetFontSize(
   SGChannel   c,
-  short       fontSize)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short       fontSize)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGSetTextForeColor()
+ *  SGSetTextForeColor()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGSetTextForeColor(
   SGChannel   c,
-  RGBColor *  theColor)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  RGBColor *  theColor)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGSetTextBackColor()
+ *  SGSetTextBackColor()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGSetTextBackColor(
   SGChannel   c,
-  RGBColor *  theColor)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  RGBColor *  theColor)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGSetJustification()
+ *  SGSetJustification()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGSetJustification(
   SGChannel   c,
-  short       just)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short       just)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGGetTextReturnToSpaceValue()
+ *  SGGetTextReturnToSpaceValue()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGetTextReturnToSpaceValue(
   SGChannel   c,
-  short *     rettospace)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short *     rettospace)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGSetTextReturnToSpaceValue()
+ *  SGSetTextReturnToSpaceValue()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGSetTextReturnToSpaceValue(
   SGChannel   c,
-  short       rettospace)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short       rettospace)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
     Music stuff
 */
 /*
- *  SGGetInstrument()
+ *  SGGetInstrument()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGGetInstrument(
   SGChannel          c,
-  ToneDescription *  td)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ToneDescription *  td)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  SGSetInstrument()
+ *  SGSetInstrument()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 2.5 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 SGSetInstrument(
   SGChannel          c,
-  ToneDescription *  td)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ToneDescription *  td)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 
@@ -11969,759 +11976,759 @@ enum {
 
 /** These are QTVideoOutput procedures **/
 /*
- *  QTVideoOutputGetDisplayModeList()
+ *  QTVideoOutputGetDisplayModeList()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 QTVideoOutputGetDisplayModeList(
   QTVideoOutputComponent   vo,
-  QTAtomContainer *        outputs)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTAtomContainer *        outputs)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVideoOutputGetCurrentClientName()
+ *  QTVideoOutputGetCurrentClientName()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 QTVideoOutputGetCurrentClientName(
   QTVideoOutputComponent   vo,
-  Str255                   str)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Str255                   str)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVideoOutputSetClientName()
+ *  QTVideoOutputSetClientName()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 QTVideoOutputSetClientName(
   QTVideoOutputComponent   vo,
-  ConstStr255Param         str)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ConstStr255Param         str)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVideoOutputGetClientName()
+ *  QTVideoOutputGetClientName()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 QTVideoOutputGetClientName(
   QTVideoOutputComponent   vo,
-  Str255                   str)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Str255                   str)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVideoOutputBegin()
+ *  QTVideoOutputBegin()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
-QTVideoOutputBegin(QTVideoOutputComponent vo)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+QTVideoOutputBegin(QTVideoOutputComponent vo)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVideoOutputEnd()
+ *  QTVideoOutputEnd()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
-QTVideoOutputEnd(QTVideoOutputComponent vo)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+QTVideoOutputEnd(QTVideoOutputComponent vo)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVideoOutputSetDisplayMode()
+ *  QTVideoOutputSetDisplayMode()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 QTVideoOutputSetDisplayMode(
   QTVideoOutputComponent   vo,
-  long                     displayModeID)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long                     displayModeID)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVideoOutputGetDisplayMode()
+ *  QTVideoOutputGetDisplayMode()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 QTVideoOutputGetDisplayMode(
   QTVideoOutputComponent   vo,
-  long *                   displayModeID)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *                   displayModeID)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVideoOutputCustomConfigureDisplay()
+ *  QTVideoOutputCustomConfigureDisplay()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 QTVideoOutputCustomConfigureDisplay(
   QTVideoOutputComponent   vo,
-  ModalFilterUPP           filter)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ModalFilterUPP           filter)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVideoOutputSaveState()
+ *  QTVideoOutputSaveState()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 QTVideoOutputSaveState(
   QTVideoOutputComponent   vo,
-  QTAtomContainer *        state)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTAtomContainer *        state)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVideoOutputRestoreState()
+ *  QTVideoOutputRestoreState()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 QTVideoOutputRestoreState(
   QTVideoOutputComponent   vo,
-  QTAtomContainer          state)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QTAtomContainer          state)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVideoOutputGetGWorld()
+ *  QTVideoOutputGetGWorld()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 QTVideoOutputGetGWorld(
   QTVideoOutputComponent   vo,
-  GWorldPtr *              gw)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  GWorldPtr *              gw)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVideoOutputGetGWorldParameters()
+ *  QTVideoOutputGetGWorldParameters()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 QTVideoOutputGetGWorldParameters(
   QTVideoOutputComponent   vo,
   Ptr *                    baseAddr,
   long *                   rowBytes,
-  CTabHandle *             colorTable)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CTabHandle *             colorTable)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVideoOutputGetIndSoundOutput()
+ *  QTVideoOutputGetIndSoundOutput()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 QTVideoOutputGetIndSoundOutput(
   QTVideoOutputComponent   vo,
   long                     index,
-  Component *              outputComponent)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Component *              outputComponent)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVideoOutputGetClock()
+ *  QTVideoOutputGetClock()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 QTVideoOutputGetClock(
   QTVideoOutputComponent   vo,
-  ComponentInstance *      clock)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ComponentInstance *      clock)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVideoOutputSetEchoPort()
+ *  QTVideoOutputSetEchoPort()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in QuickTimeLib 3.0 and later
- *    Windows:          in qtmlClient.lib 3.0 and later
+ *    Windows:          in QTMLClient.lib 3.0 and later
  */
 extern ComponentResult 
 QTVideoOutputSetEchoPort(
   QTVideoOutputComponent   vo,
-  CGrafPtr                 echoPort)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CGrafPtr                 echoPort)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVideoOutputGetIndImageDecompressor()
+ *  QTVideoOutputGetIndImageDecompressor()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   in QuickTimeLib 5.0 and later
- *    Windows:          in qtmlClient.lib 5.0 and later
+ *    Windows:          in QTMLClient.lib 5.0 and later
  */
 extern ComponentResult 
 QTVideoOutputGetIndImageDecompressor(
   QTVideoOutputComponent   vo,
   long                     index,
-  Component *              codec)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Component *              codec)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVideoOutputBaseSetEchoPort()
+ *  QTVideoOutputBaseSetEchoPort()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   in QuickTimeLib 6.0 and later
- *    Windows:          in qtmlClient.lib 6.0 and later
+ *    Windows:          in QTMLClient.lib 6.0 and later
  */
 extern ComponentResult 
 QTVideoOutputBaseSetEchoPort(
   QTVideoOutputComponent   vo,
-  CGrafPtr                 echoPort)                          AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  CGrafPtr                 echoPort)                          AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /*
- *  QTVideoOutputCopyIndAudioOutputDeviceUID()
+ *  QTVideoOutputCopyIndAudioOutputDeviceUID()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 (or QuickTime 6.4) and later in QuickTime.framework
+ *    Mac OS X:         in version 10.3 (or QuickTime 6.4) and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
- *    Windows:          in qtmlClient.lib 6.5 and later
+ *    Windows:          in QTMLClient.lib 6.5 and later
  */
 extern ComponentResult 
 QTVideoOutputCopyIndAudioOutputDeviceUID(
   QTVideoOutputComponent   vo,
   long                     index,
-  CFStringRef *            audioDeviceUID)                    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  CFStringRef *            audioDeviceUID)                    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 
 /* UPP call backs */
 /*
- *  NewDataHCompletionUPP()
+ *  NewDataHCompletionUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern DataHCompletionUPP
-NewDataHCompletionUPP(DataHCompletionProcPtr userRoutine)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewDataHCompletionUPP(DataHCompletionProcPtr userRoutine)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  NewVdigIntUPP()
+ *  NewVdigIntUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern VdigIntUPP
-NewVdigIntUPP(VdigIntProcPtr userRoutine)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewVdigIntUPP(VdigIntProcPtr userRoutine)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  NewStartDocumentHandlerUPP()
+ *  NewStartDocumentHandlerUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern StartDocumentHandlerUPP
-NewStartDocumentHandlerUPP(StartDocumentHandler userRoutine)  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewStartDocumentHandlerUPP(StartDocumentHandler userRoutine)  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  NewEndDocumentHandlerUPP()
+ *  NewEndDocumentHandlerUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern EndDocumentHandlerUPP
-NewEndDocumentHandlerUPP(EndDocumentHandler userRoutine)      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewEndDocumentHandlerUPP(EndDocumentHandler userRoutine)      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  NewStartElementHandlerUPP()
+ *  NewStartElementHandlerUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern StartElementHandlerUPP
-NewStartElementHandlerUPP(StartElementHandler userRoutine)    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewStartElementHandlerUPP(StartElementHandler userRoutine)    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  NewEndElementHandlerUPP()
+ *  NewEndElementHandlerUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern EndElementHandlerUPP
-NewEndElementHandlerUPP(EndElementHandler userRoutine)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewEndElementHandlerUPP(EndElementHandler userRoutine)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  NewCharDataHandlerUPP()
+ *  NewCharDataHandlerUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern CharDataHandlerUPP
-NewCharDataHandlerUPP(CharDataHandler userRoutine)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewCharDataHandlerUPP(CharDataHandler userRoutine)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  NewPreprocessInstructionHandlerUPP()
+ *  NewPreprocessInstructionHandlerUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern PreprocessInstructionHandlerUPP
-NewPreprocessInstructionHandlerUPP(PreprocessInstructionHandler userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewPreprocessInstructionHandlerUPP(PreprocessInstructionHandler userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  NewCommentHandlerUPP()
+ *  NewCommentHandlerUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern CommentHandlerUPP
-NewCommentHandlerUPP(CommentHandler userRoutine)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewCommentHandlerUPP(CommentHandler userRoutine)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  NewCDataHandlerUPP()
+ *  NewCDataHandlerUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern CDataHandlerUPP
-NewCDataHandlerUPP(CDataHandler userRoutine)                  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+NewCDataHandlerUPP(CDataHandler userRoutine)                  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  NewSGDataUPP()
+ *  NewSGDataUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern SGDataUPP
-NewSGDataUPP(SGDataProcPtr userRoutine)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewSGDataUPP(SGDataProcPtr userRoutine)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  NewSGModalFilterUPP()
+ *  NewSGModalFilterUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern SGModalFilterUPP
-NewSGModalFilterUPP(SGModalFilterProcPtr userRoutine)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewSGModalFilterUPP(SGModalFilterProcPtr userRoutine)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  NewSGGrabBottleUPP()
+ *  NewSGGrabBottleUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern SGGrabBottleUPP
-NewSGGrabBottleUPP(SGGrabBottleProcPtr userRoutine)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewSGGrabBottleUPP(SGGrabBottleProcPtr userRoutine)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  NewSGGrabCompleteBottleUPP()
+ *  NewSGGrabCompleteBottleUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern SGGrabCompleteBottleUPP
-NewSGGrabCompleteBottleUPP(SGGrabCompleteBottleProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewSGGrabCompleteBottleUPP(SGGrabCompleteBottleProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  NewSGDisplayBottleUPP()
+ *  NewSGDisplayBottleUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern SGDisplayBottleUPP
-NewSGDisplayBottleUPP(SGDisplayBottleProcPtr userRoutine)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewSGDisplayBottleUPP(SGDisplayBottleProcPtr userRoutine)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  NewSGCompressBottleUPP()
+ *  NewSGCompressBottleUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern SGCompressBottleUPP
-NewSGCompressBottleUPP(SGCompressBottleProcPtr userRoutine)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewSGCompressBottleUPP(SGCompressBottleProcPtr userRoutine)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  NewSGCompressCompleteBottleUPP()
+ *  NewSGCompressCompleteBottleUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern SGCompressCompleteBottleUPP
-NewSGCompressCompleteBottleUPP(SGCompressCompleteBottleProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewSGCompressCompleteBottleUPP(SGCompressCompleteBottleProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  NewSGAddFrameBottleUPP()
+ *  NewSGAddFrameBottleUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern SGAddFrameBottleUPP
-NewSGAddFrameBottleUPP(SGAddFrameBottleProcPtr userRoutine)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewSGAddFrameBottleUPP(SGAddFrameBottleProcPtr userRoutine)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  NewSGTransferFrameBottleUPP()
+ *  NewSGTransferFrameBottleUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern SGTransferFrameBottleUPP
-NewSGTransferFrameBottleUPP(SGTransferFrameBottleProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewSGTransferFrameBottleUPP(SGTransferFrameBottleProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  NewSGGrabCompressCompleteBottleUPP()
+ *  NewSGGrabCompressCompleteBottleUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern SGGrabCompressCompleteBottleUPP
-NewSGGrabCompressCompleteBottleUPP(SGGrabCompressCompleteBottleProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewSGGrabCompressCompleteBottleUPP(SGGrabCompressCompleteBottleProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  NewSGDisplayCompressBottleUPP()
+ *  NewSGDisplayCompressBottleUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern SGDisplayCompressBottleUPP
-NewSGDisplayCompressBottleUPP(SGDisplayCompressBottleProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewSGDisplayCompressBottleUPP(SGDisplayCompressBottleProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  DisposeDataHCompletionUPP()
+ *  DisposeDataHCompletionUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeDataHCompletionUPP(DataHCompletionUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeDataHCompletionUPP(DataHCompletionUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  DisposeVdigIntUPP()
+ *  DisposeVdigIntUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeVdigIntUPP(VdigIntUPP userUPP)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeVdigIntUPP(VdigIntUPP userUPP)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  DisposeStartDocumentHandlerUPP()
+ *  DisposeStartDocumentHandlerUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeStartDocumentHandlerUPP(StartDocumentHandlerUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeStartDocumentHandlerUPP(StartDocumentHandlerUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  DisposeEndDocumentHandlerUPP()
+ *  DisposeEndDocumentHandlerUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeEndDocumentHandlerUPP(EndDocumentHandlerUPP userUPP)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeEndDocumentHandlerUPP(EndDocumentHandlerUPP userUPP)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  DisposeStartElementHandlerUPP()
+ *  DisposeStartElementHandlerUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeStartElementHandlerUPP(StartElementHandlerUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeStartElementHandlerUPP(StartElementHandlerUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  DisposeEndElementHandlerUPP()
+ *  DisposeEndElementHandlerUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeEndElementHandlerUPP(EndElementHandlerUPP userUPP)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeEndElementHandlerUPP(EndElementHandlerUPP userUPP)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  DisposeCharDataHandlerUPP()
+ *  DisposeCharDataHandlerUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeCharDataHandlerUPP(CharDataHandlerUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeCharDataHandlerUPP(CharDataHandlerUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  DisposePreprocessInstructionHandlerUPP()
+ *  DisposePreprocessInstructionHandlerUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposePreprocessInstructionHandlerUPP(PreprocessInstructionHandlerUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposePreprocessInstructionHandlerUPP(PreprocessInstructionHandlerUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  DisposeCommentHandlerUPP()
+ *  DisposeCommentHandlerUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeCommentHandlerUPP(CommentHandlerUPP userUPP)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeCommentHandlerUPP(CommentHandlerUPP userUPP)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  DisposeCDataHandlerUPP()
+ *  DisposeCDataHandlerUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeCDataHandlerUPP(CDataHandlerUPP userUPP)               AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+DisposeCDataHandlerUPP(CDataHandlerUPP userUPP)               AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  DisposeSGDataUPP()
+ *  DisposeSGDataUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeSGDataUPP(SGDataUPP userUPP)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeSGDataUPP(SGDataUPP userUPP)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  DisposeSGModalFilterUPP()
+ *  DisposeSGModalFilterUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeSGModalFilterUPP(SGModalFilterUPP userUPP)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeSGModalFilterUPP(SGModalFilterUPP userUPP)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  DisposeSGGrabBottleUPP()
+ *  DisposeSGGrabBottleUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeSGGrabBottleUPP(SGGrabBottleUPP userUPP)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeSGGrabBottleUPP(SGGrabBottleUPP userUPP)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  DisposeSGGrabCompleteBottleUPP()
+ *  DisposeSGGrabCompleteBottleUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeSGGrabCompleteBottleUPP(SGGrabCompleteBottleUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeSGGrabCompleteBottleUPP(SGGrabCompleteBottleUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  DisposeSGDisplayBottleUPP()
+ *  DisposeSGDisplayBottleUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeSGDisplayBottleUPP(SGDisplayBottleUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeSGDisplayBottleUPP(SGDisplayBottleUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  DisposeSGCompressBottleUPP()
+ *  DisposeSGCompressBottleUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeSGCompressBottleUPP(SGCompressBottleUPP userUPP)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeSGCompressBottleUPP(SGCompressBottleUPP userUPP)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  DisposeSGCompressCompleteBottleUPP()
+ *  DisposeSGCompressCompleteBottleUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeSGCompressCompleteBottleUPP(SGCompressCompleteBottleUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeSGCompressCompleteBottleUPP(SGCompressCompleteBottleUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  DisposeSGAddFrameBottleUPP()
+ *  DisposeSGAddFrameBottleUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeSGAddFrameBottleUPP(SGAddFrameBottleUPP userUPP)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeSGAddFrameBottleUPP(SGAddFrameBottleUPP userUPP)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  DisposeSGTransferFrameBottleUPP()
+ *  DisposeSGTransferFrameBottleUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeSGTransferFrameBottleUPP(SGTransferFrameBottleUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeSGTransferFrameBottleUPP(SGTransferFrameBottleUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  DisposeSGGrabCompressCompleteBottleUPP()
+ *  DisposeSGGrabCompressCompleteBottleUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeSGGrabCompressCompleteBottleUPP(SGGrabCompressCompleteBottleUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeSGGrabCompressCompleteBottleUPP(SGGrabCompressCompleteBottleUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  DisposeSGDisplayCompressBottleUPP()
+ *  DisposeSGDisplayCompressBottleUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeSGDisplayCompressBottleUPP(SGDisplayCompressBottleUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeSGDisplayCompressBottleUPP(SGDisplayCompressBottleUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  InvokeDataHCompletionUPP()
+ *  InvokeDataHCompletionUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -12730,13 +12737,13 @@ InvokeDataHCompletionUPP(
   Ptr                 request,
   long                refcon,
   OSErr               err,
-  DataHCompletionUPP  userUPP)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DataHCompletionUPP  userUPP)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  InvokeVdigIntUPP()
+ *  InvokeVdigIntUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -12744,39 +12751,39 @@ extern void
 InvokeVdigIntUPP(
   long        flags,
   long        refcon,
-  VdigIntUPP  userUPP)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  VdigIntUPP  userUPP)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  InvokeStartDocumentHandlerUPP()
+ *  InvokeStartDocumentHandlerUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ComponentResult
 InvokeStartDocumentHandlerUPP(
   long                     refcon,
-  StartDocumentHandlerUPP  userUPP)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  StartDocumentHandlerUPP  userUPP)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  InvokeEndDocumentHandlerUPP()
+ *  InvokeEndDocumentHandlerUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ComponentResult
 InvokeEndDocumentHandlerUPP(
   long                   refcon,
-  EndDocumentHandlerUPP  userUPP)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  EndDocumentHandlerUPP  userUPP)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  InvokeStartElementHandlerUPP()
+ *  InvokeStartElementHandlerUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -12785,13 +12792,13 @@ InvokeStartElementHandlerUPP(
   const char *            name,
   const char **           atts,
   long                    refcon,
-  StartElementHandlerUPP  userUPP)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  StartElementHandlerUPP  userUPP)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  InvokeEndElementHandlerUPP()
+ *  InvokeEndElementHandlerUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -12799,13 +12806,13 @@ extern ComponentResult
 InvokeEndElementHandlerUPP(
   const char *          name,
   long                  refcon,
-  EndElementHandlerUPP  userUPP)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  EndElementHandlerUPP  userUPP)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  InvokeCharDataHandlerUPP()
+ *  InvokeCharDataHandlerUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -12813,13 +12820,13 @@ extern ComponentResult
 InvokeCharDataHandlerUPP(
   const char *        charData,
   long                refcon,
-  CharDataHandlerUPP  userUPP)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CharDataHandlerUPP  userUPP)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  InvokePreprocessInstructionHandlerUPP()
+ *  InvokePreprocessInstructionHandlerUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -12828,13 +12835,13 @@ InvokePreprocessInstructionHandlerUPP(
   const char *                     name,
   const char *const                atts[],
   long                             refcon,
-  PreprocessInstructionHandlerUPP  userUPP)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  PreprocessInstructionHandlerUPP  userUPP)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  InvokeCommentHandlerUPP()
+ *  InvokeCommentHandlerUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.3 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -12842,13 +12849,13 @@ extern ComponentResult
 InvokeCommentHandlerUPP(
   const char *       comment,
   long               refcon,
-  CommentHandlerUPP  userUPP)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CommentHandlerUPP  userUPP)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  InvokeCDataHandlerUPP()
+ *  InvokeCDataHandlerUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.2 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -12856,13 +12863,13 @@ extern ComponentResult
 InvokeCDataHandlerUPP(
   const char *     cdata,
   long             refcon,
-  CDataHandlerUPP  userUPP)                                   AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  CDataHandlerUPP  userUPP)                                   AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  InvokeSGDataUPP()
+ *  InvokeSGDataUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -12876,13 +12883,13 @@ InvokeSGDataUPP(
   TimeValue  time,
   short      writeType,
   long       refCon,
-  SGDataUPP  userUPP)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SGDataUPP  userUPP)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  InvokeSGModalFilterUPP()
+ *  InvokeSGModalFilterUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -12892,13 +12899,13 @@ InvokeSGModalFilterUPP(
   const EventRecord *  theEvent,
   short *              itemHit,
   long                 refCon,
-  SGModalFilterUPP     userUPP)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SGModalFilterUPP     userUPP)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  InvokeSGGrabBottleUPP()
+ *  InvokeSGGrabBottleUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -12907,13 +12914,13 @@ InvokeSGGrabBottleUPP(
   SGChannel        c,
   short            bufferNum,
   long             refCon,
-  SGGrabBottleUPP  userUPP)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SGGrabBottleUPP  userUPP)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  InvokeSGGrabCompleteBottleUPP()
+ *  InvokeSGGrabCompleteBottleUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -12923,13 +12930,13 @@ InvokeSGGrabCompleteBottleUPP(
   short                    bufferNum,
   Boolean *                done,
   long                     refCon,
-  SGGrabCompleteBottleUPP  userUPP)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SGGrabCompleteBottleUPP  userUPP)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  InvokeSGDisplayBottleUPP()
+ *  InvokeSGDisplayBottleUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -12940,13 +12947,13 @@ InvokeSGDisplayBottleUPP(
   MatrixRecord *      mp,
   RgnHandle           clipRgn,
   long                refCon,
-  SGDisplayBottleUPP  userUPP)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SGDisplayBottleUPP  userUPP)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  InvokeSGCompressBottleUPP()
+ *  InvokeSGCompressBottleUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -12955,13 +12962,13 @@ InvokeSGCompressBottleUPP(
   SGChannel            c,
   short                bufferNum,
   long                 refCon,
-  SGCompressBottleUPP  userUPP)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SGCompressBottleUPP  userUPP)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  InvokeSGCompressCompleteBottleUPP()
+ *  InvokeSGCompressCompleteBottleUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -12972,13 +12979,13 @@ InvokeSGCompressCompleteBottleUPP(
   Boolean *                    done,
   SGCompressInfo *             ci,
   long                         refCon,
-  SGCompressCompleteBottleUPP  userUPP)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SGCompressCompleteBottleUPP  userUPP)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  InvokeSGAddFrameBottleUPP()
+ *  InvokeSGAddFrameBottleUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -12990,13 +12997,13 @@ InvokeSGAddFrameBottleUPP(
   TimeScale               scale,
   const SGCompressInfo *  ci,
   long                    refCon,
-  SGAddFrameBottleUPP     userUPP)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SGAddFrameBottleUPP     userUPP)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  InvokeSGTransferFrameBottleUPP()
+ *  InvokeSGTransferFrameBottleUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -13007,13 +13014,13 @@ InvokeSGTransferFrameBottleUPP(
   MatrixRecord *            mp,
   RgnHandle                 clipRgn,
   long                      refCon,
-  SGTransferFrameBottleUPP  userUPP)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SGTransferFrameBottleUPP  userUPP)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  InvokeSGGrabCompressCompleteBottleUPP()
+ *  InvokeSGGrabCompressCompleteBottleUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -13024,13 +13031,13 @@ InvokeSGGrabCompressCompleteBottleUPP(
   SGCompressInfo *                 ci,
   TimeRecord *                     t,
   long                             refCon,
-  SGGrabCompressCompleteBottleUPP  userUPP)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SGGrabCompressCompleteBottleUPP  userUPP)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 /*
- *  InvokeSGDisplayCompressBottleUPP()
+ *  InvokeSGDisplayCompressBottleUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in QuickTime.framework
+ *    Mac OS X:         in version 10.0 and later in QuickTime.framework but deprecated in 10.9
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -13042,7 +13049,7 @@ InvokeSGDisplayCompressBottleUPP(
   MatrixRecord *              mp,
   RgnHandle                   clipRgn,
   long                        refCon,
-  SGDisplayCompressBottleUPP  userUPP)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SGDisplayCompressBottleUPP  userUPP)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_9;
 
 #if __MACH__
   #ifdef __cplusplus

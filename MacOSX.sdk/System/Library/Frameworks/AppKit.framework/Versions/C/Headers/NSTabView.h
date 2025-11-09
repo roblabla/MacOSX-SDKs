@@ -1,12 +1,13 @@
 /*
         NSTabView.h
         Application Kit
-        Copyright (c) 2000-2012, Apple Inc.
+        Copyright (c) 2000-2013, Apple Inc.
         All rights reserved.
 */
 
 #import <AppKit/NSView.h>
 #import <AppKit/NSCell.h>
+#import <AppKit/NSLayoutConstraint.h>
 
 @class NSArray, NSFont, NSTabViewItem;
 @protocol NSTabViewDelegate;
@@ -48,6 +49,10 @@ typedef NSUInteger NSTabViewType;
     CGFloat		_tabHeight;			// Cache height of tabs
     NSTabViewItem	*_tabViewItemWithKeyView;	// the tabViewItem with the keyView "outline"
     NSView 		*_originalNextKeyView;		// Original nextKeyView of the tabView. Needed to restore the keyViewLoop.
+#if __LP64__
+    NSLayoutConstraint  *_tabViewMinimumSizeConstraint; // Width constraint for the tab view based on its minimum size
+#endif
+    
     struct __NSTabViewDelegateRespondTo {
         unsigned int shouldSelectTabViewItem:1;
         unsigned int willSelectTabViewItem:1;

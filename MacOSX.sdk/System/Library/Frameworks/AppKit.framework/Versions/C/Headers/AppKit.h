@@ -1,7 +1,7 @@
 /*
 	AppKit.h
 	Application Kit
-	Copyright (c) 1994-2012, Apple Inc.
+	Copyright (c) 1994-2013, Apple Inc.
 	All rights reserved.
 
 	This file is included by all AppKit application source files for easy building.  Using this file is preferred over importing individual files because it will use a precompiled version.
@@ -15,6 +15,7 @@
 #import <AppKit/NSActionCell.h>
 #import <AppKit/NSAlert.h>
 #import <AppKit/NSAnimationContext.h>
+#import <AppKit/NSAppearance.h>
 #import <AppKit/NSAppleScriptExtensions.h>
 #import <AppKit/NSApplication.h>
 #import <AppKit/NSBox.h>
@@ -81,8 +82,11 @@
 #import <AppKit/NSPrintInfo.h>
 #import <AppKit/NSPrintOperation.h>
 #import <AppKit/NSPrintPanel.h>
+#import <AppKit/NSPDFInfo.h>
+#import <AppKit/NSPDFPanel.h>
 #import <AppKit/NSResponder.h>
 #import <AppKit/NSSavePanel.h>
+#import <AppKit/NSMediaLibraryBrowserController.h>
 #import <AppKit/NSScreen.h>
 #import <AppKit/NSScrollView.h>
 #import <AppKit/NSScroller.h>
@@ -92,6 +96,7 @@
 #import <AppKit/NSSlider.h>
 #import <AppKit/NSSliderCell.h>
 #import <AppKit/NSSpellProtocol.h>
+#import <AppKit/NSStackView.h>
 #import <AppKit/NSText.h>
 #import <AppKit/NSTextField.h>
 #import <AppKit/NSTextFieldCell.h>

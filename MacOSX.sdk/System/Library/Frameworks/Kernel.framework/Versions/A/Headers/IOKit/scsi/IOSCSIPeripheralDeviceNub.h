@@ -97,10 +97,6 @@ protected:
 	
 	IOSCSIProtocolInterface *		fProvider;
 
-#if ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED )
-	SCSIPrimaryCommands *			fSCSIPrimaryCommandObject;
-#endif
-
 	UInt8							fDefaultInquiryCount;
 	
 	virtual bool		SendSCSICommand ( 	SCSITaskIdentifier 		request, 

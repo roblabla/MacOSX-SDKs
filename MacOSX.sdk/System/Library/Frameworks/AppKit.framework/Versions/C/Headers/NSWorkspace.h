@@ -1,7 +1,7 @@
 /*
 	NSWorkspace.h
 	Application Kit
-	Copyright (c) 1994-2012, Apple Inc.
+	Copyright (c) 1994-2013, Apple Inc.
 	All rights reserved.
 */
 
@@ -15,6 +15,7 @@
 typedef NSUInteger NSWorkspaceLaunchOptions;
 enum {
      NSWorkspaceLaunchAndPrint =                 0x00000002,
+     NSWorkspaceLaunchWithErrorPresentation    = 0x00000040,
      NSWorkspaceLaunchInhibitingBackgroundOnly = 0x00000080,
      NSWorkspaceLaunchWithoutAddingToRecents   = 0x00000100,
      NSWorkspaceLaunchWithoutActivation        = 0x00000200,
@@ -24,7 +25,6 @@ enum {
      NSWorkspaceLaunchNewInstance              = 0x00080000,
      NSWorkspaceLaunchAndHide                  = 0x00100000,
      NSWorkspaceLaunchAndHideOthers            = 0x00200000,
-     // NSWorkspaceLaunchAndDisplayFailures
      NSWorkspaceLaunchDefault = NSWorkspaceLaunchAsync | 
 NSWorkspaceLaunchAllowingClassicStartup
 };
@@ -42,8 +42,8 @@ enum {
 #if ! __LP64__
     int deviceStatusCount;
     int applicationStatusCount;
-#endif
     id _reservedWorkspace1;
+#endif
 }
 
 /* Get the shared instance of NSWorkspace.  This method will create an instance of NSWorkspace if it has not been created yet.  You should not attempt to instantiate instances of NSWorkspace yourself, and you should not attempt to subclass NSWorkspace. */

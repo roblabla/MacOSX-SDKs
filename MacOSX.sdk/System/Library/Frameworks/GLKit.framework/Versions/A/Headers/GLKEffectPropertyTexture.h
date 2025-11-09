@@ -28,7 +28,7 @@ typedef NS_ENUM(GLint, GLKTextureEnvMode)
 //
 // GLKEffectPropertyTexture simply contains properties to configure GL texture rendering.
 //
-
+NS_CLASS_AVAILABLE(10_8, 5_0)
 @interface GLKEffectPropertyTexture : GLKEffectProperty
 {
     // Texture Enabled

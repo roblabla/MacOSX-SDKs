@@ -3,7 +3,7 @@
  
 	 Contains:   CoreFoundation Network header
  
-	 Copyright:  Copyright (c) 2001-2008, Apple Inc. All rights reserved.
+	 Copyright:  Copyright (c) 2001-2008 Apple Inc. All rights reserved.
  
 	 Bugs?:	  For bug reports, consult the following page on
 				 the World Wide Web:
@@ -18,11 +18,8 @@
 
 
 
-/* Required to build on platforms that do not have MacTypes.h */
-#if !defined(__MACH__)
-	// To pick-up the CALLBACK_API_C definition.
-	#include <ConditionalMacros.h>
-#endif /* __MACH__ */
+// To pick-up the CALLBACK_API_C definition.
+#include <ConditionalMacros.h>
 
 /* Standard incantation for exporting/importing DLL symbols */
 #if defined(__WIN32__)

@@ -56,35 +56,35 @@
 #define GLUT_FCB_TIMER           102  /* GLUTtimerFCB */
 
 /* GLUT Fortran callback function types. */
-typedef void (GLUTCALLBACK *GLUTdisplayFCB) (void);
-typedef void (GLUTCALLBACK *GLUTwmcloseFCB) (void);
-typedef void (GLUTCALLBACK *GLUTreshapeFCB) (int *, int *);
+typedef void (GLUTCALLBACK *GLUTdisplayFCB) (void) OPENGL_DEPRECATED(10_0, 10_9);
+typedef void (GLUTCALLBACK *GLUTwmcloseFCB) (void) OPENGL_DEPRECATED(10_0, 10_9);
+typedef void (GLUTCALLBACK *GLUTreshapeFCB) (int *, int *) OPENGL_DEPRECATED(10_0, 10_9);
 /* NOTE the pressed key is int, not unsigned char for Fortran! */
-typedef void (GLUTCALLBACK *GLUTkeyboardFCB) (int *, int *, int *);
-typedef void (GLUTCALLBACK *GLUTmouseFCB) (int *, int *, int *, int *);
-typedef void (GLUTCALLBACK *GLUTmotionFCB) (int *, int *);
-typedef void (GLUTCALLBACK *GLUTpassiveFCB) (int *, int *);
-typedef void (GLUTCALLBACK *GLUTentryFCB) (int *);
-typedef void (GLUTCALLBACK *GLUTwindowStatusFCB) (int *);
-typedef void (GLUTCALLBACK *GLUTvisibilityFCB) (int *);
-typedef void (GLUTCALLBACK *GLUTspecialFCB) (int *, int *, int *);
-typedef void (GLUTCALLBACK *GLUTbuttonBoxFCB) (int *, int *);
-typedef void (GLUTCALLBACK *GLUTdialsFCB) (int *, int *);
-typedef void (GLUTCALLBACK *GLUTspaceMotionFCB) (int *, int *, int *);
-typedef void (GLUTCALLBACK *GLUTspaceRotateFCB) (int *, int *, int *);
-typedef void (GLUTCALLBACK *GLUTspaceButtonFCB) (int *, int *);
-typedef void (GLUTCALLBACK *GLUTtabletMotionFCB) (int *, int *);
-typedef void (GLUTCALLBACK *GLUTtabletButtonFCB) (int *, int *, int *, int *);
-typedef void (GLUTCALLBACK *GLUTjoystickFCB) (unsigned int *buttonMask, int *x, int *y, int *z);
+typedef void (GLUTCALLBACK *GLUTkeyboardFCB) (int *, int *, int *) OPENGL_DEPRECATED(10_0, 10_9);
+typedef void (GLUTCALLBACK *GLUTmouseFCB) (int *, int *, int *, int *) OPENGL_DEPRECATED(10_0, 10_9);
+typedef void (GLUTCALLBACK *GLUTmotionFCB) (int *, int *) OPENGL_DEPRECATED(10_0, 10_9);
+typedef void (GLUTCALLBACK *GLUTpassiveFCB) (int *, int *) OPENGL_DEPRECATED(10_0, 10_9);
+typedef void (GLUTCALLBACK *GLUTentryFCB) (int *) OPENGL_DEPRECATED(10_0, 10_9);
+typedef void (GLUTCALLBACK *GLUTwindowStatusFCB) (int *) OPENGL_DEPRECATED(10_0, 10_9);
+typedef void (GLUTCALLBACK *GLUTvisibilityFCB) (int *) OPENGL_DEPRECATED(10_0, 10_9);
+typedef void (GLUTCALLBACK *GLUTspecialFCB) (int *, int *, int *) OPENGL_DEPRECATED(10_0, 10_9);
+typedef void (GLUTCALLBACK *GLUTbuttonBoxFCB) (int *, int *) OPENGL_DEPRECATED(10_0, 10_9);
+typedef void (GLUTCALLBACK *GLUTdialsFCB) (int *, int *) OPENGL_DEPRECATED(10_0, 10_9);
+typedef void (GLUTCALLBACK *GLUTspaceMotionFCB) (int *, int *, int *) OPENGL_DEPRECATED(10_0, 10_9);
+typedef void (GLUTCALLBACK *GLUTspaceRotateFCB) (int *, int *, int *) OPENGL_DEPRECATED(10_0, 10_9);
+typedef void (GLUTCALLBACK *GLUTspaceButtonFCB) (int *, int *) OPENGL_DEPRECATED(10_0, 10_9);
+typedef void (GLUTCALLBACK *GLUTtabletMotionFCB) (int *, int *) OPENGL_DEPRECATED(10_0, 10_9);
+typedef void (GLUTCALLBACK *GLUTtabletButtonFCB) (int *, int *, int *, int *) OPENGL_DEPRECATED(10_0, 10_9);
+typedef void (GLUTCALLBACK *GLUTjoystickFCB) (unsigned int *buttonMask, int *x, int *y, int *z) OPENGL_DEPRECATED(10_0, 10_9);
 
-typedef void (GLUTCALLBACK *GLUTselectFCB) (int *);
-typedef void (GLUTCALLBACK *GLUTtimerFCB) (int *);
-typedef void (GLUTCALLBACK *GLUTmenuStateFCB) (int *);  /* DEPRICATED. */
-typedef void (GLUTCALLBACK *GLUTmenuStatusFCB) (int *, int *, int *);
-typedef void (GLUTCALLBACK *GLUTidleFCB) (void);
+typedef void (GLUTCALLBACK *GLUTselectFCB) (int *) OPENGL_DEPRECATED(10_0, 10_9);
+typedef void (GLUTCALLBACK *GLUTtimerFCB) (int *) OPENGL_DEPRECATED(10_0, 10_9);
+typedef void (GLUTCALLBACK *GLUTmenuStateFCB) (int *) OPENGL_DEPRECATED(10_0, 10_9);  /* DEPRECATED. */
+typedef void (GLUTCALLBACK *GLUTmenuStatusFCB) (int *, int *, int *) OPENGL_DEPRECATED(10_0, 10_9);
+typedef void (GLUTCALLBACK *GLUTidleFCB) (void) OPENGL_DEPRECATED(10_0, 10_9);
 
 /* Functions that set and return Fortran callback functions. */
-extern void* APIENTRY __glutGetFCB(int which);
-extern void APIENTRY __glutSetFCB(int which, void *func);
+extern void* APIENTRY __glutGetFCB(int which) OPENGL_DEPRECATED(10_0, 10_9);
+extern void APIENTRY __glutSetFCB(int which, void *func) OPENGL_DEPRECATED(10_0, 10_9);
 
 #endif  /* __glutf90_h__ */

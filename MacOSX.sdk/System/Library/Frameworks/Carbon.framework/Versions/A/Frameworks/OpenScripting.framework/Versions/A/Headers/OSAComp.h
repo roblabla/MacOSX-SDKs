@@ -3,7 +3,7 @@
  
      Contains:   AppleScript Component Implementor's Interfaces.
  
-     Version:    OSA-148.3~2
+     Version:    OpenScripting
  
      Copyright:  © 1992-2008 by Apple Computer, Inc., all rights reserved
  
@@ -21,7 +21,7 @@
 #endif
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -48,7 +48,7 @@ extern "C" {
 extern OSErr 
 OSAGetStorageType(
   AEDataStorage   scriptData,
-  DescType *      dscType)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DescType *      dscType)                                    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -62,7 +62,7 @@ OSAGetStorageType(
 extern OSErr 
 OSAAddStorageType(
   AEDataStorage   scriptData,
-  DescType        dscType)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DescType        dscType)                                    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -74,7 +74,7 @@ OSAAddStorageType(
  *    Non-Carbon CFM:   in AppleScriptLib 1.1 and later
  */
 extern OSErr 
-OSARemoveStorageType(AEDataStorage scriptData)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+OSARemoveStorageType(AEDataStorage scriptData)                __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 

@@ -3,8 +3,6 @@
  
      Contains:   Definition of the progress-display views provided by HIToolbox.
  
-     Version:    HIToolbox-626.1~1
- 
      Copyright:  © 2006-2008 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on

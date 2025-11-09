@@ -3,7 +3,7 @@
  
 	 Contains:   CoreFoundation Network socket streams header
  
-	 Copyright:  Copyright (c) 2001-2008, Apple Inc. All rights reserved.
+	 Copyright:  Copyright (c) 2001-2008 Apple Inc. All rights reserved.
  
 	 Bugs?:	  For bug reports, consult the following page on
 				 the World Wide Web:
@@ -76,7 +76,7 @@ extern "C" {
  * Note that this property is currently only supported on iOS 5.0 and
  * later.
  */
-CFN_EXPORT const CFStringRef kCFStreamPropertySSLContext __OSX_AVAILABLE_STARTING(__MAC_NA, __IPHONE_5_0);
+CFN_EXPORT const CFStringRef kCFStreamPropertySSLContext __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_5_0);
 
 /*
  *  kCFStreamPropertySSLPeerTrust
@@ -299,7 +299,7 @@ CFN_EXPORT const CFStringRef kCFStreamNetworkServiceTypeVoice __OSX_AVAILABLE_ST
  *  Discussion:
  *  Stream property value, for both set and copy operations.
  *  The value is a CFBooleanRef which indicates whether the connection
- *  is allowed to use the build in celluar radios.  A value of kCFBooleanTrue 
+ *  is allowed to use the built-in celluar radios.  A value of kCFBooleanTrue 
  *  disallows use of cellular interfaces.  kCFBooleanFalse (the default)
  *  allows use of cellular interfaces.
  *  
@@ -314,7 +314,7 @@ CFN_EXPORT const CFStringRef kCFStreamPropertyNoCellular __OSX_AVAILABLE_STARTIN
  * It returns kCFBooleanFalse if the stream is conneceted over a non-cellular
  * interface or has not yet established a connection.
  */
-CFN_EXPORT const CFStringRef kCFStreamPropertyConnectionIsCellular __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
+CFN_EXPORT const CFStringRef kCFStreamPropertyConnectionIsCellular __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
 
 /*
  *  kCFStreamErrorDomainWinSock

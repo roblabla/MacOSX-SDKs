@@ -826,6 +826,7 @@ struct vnop_advlock_args {
 	struct flock *a_fl;
 	int a_flags;
 	vfs_context_t a_context;
+	struct timespec *a_timeout;
 };
 
 /*!
@@ -844,6 +845,7 @@ struct vnop_advlock_args {
  @param flags F_FLOCK: use flock() semantics. F_POSIX: use POSIX semantics.  F_WAIT: sleep if necessary.  
  F_PROV: Non-coelesced provisional lock (unused in xnu).
  @param ctx Context to authenticate for advisory locking request.
+ @param timeout Timespec for timeout in case of F_SETLKWTIMEOUT.
  @return 0 for success, or an error code.  
  */
 

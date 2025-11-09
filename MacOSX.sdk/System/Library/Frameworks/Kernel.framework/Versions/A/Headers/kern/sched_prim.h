@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2010 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2012 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -98,10 +98,27 @@ extern wait_result_t	assert_wait_timeout(
 							uint32_t			interval,
 							uint32_t			scale_factor);
 
+/* Assert that the thread intends to wait with an urgency, timeout and leeway */
+extern wait_result_t	assert_wait_timeout_with_leeway(
+							event_t				event,
+							wait_interrupt_t	interruptible,
+							wait_timeout_urgency_t	urgency,
+							uint32_t			interval,
+							uint32_t			leeway,
+							uint32_t			scale_factor);
+
 extern wait_result_t	assert_wait_deadline(
 							event_t				event,
 							wait_interrupt_t	interruptible,
 							uint64_t			deadline);
+
+/* Assert that the thread intends to wait with an urgency, deadline, and leeway */
+extern wait_result_t	assert_wait_deadline_with_leeway(
+							event_t				event,
+							wait_interrupt_t	interruptible,
+							wait_timeout_urgency_t	urgency,
+							uint64_t			deadline,
+							uint64_t			leeway);
 
 /* Wake up thread (or threads) waiting on a particular event */
 extern kern_return_t	thread_wakeup_prim(
@@ -125,7 +142,6 @@ extern kern_return_t    thread_wakeup_prim_internal(
 
 
 extern boolean_t		preemption_enabled(void);
-
 
 
 __END_DECLS

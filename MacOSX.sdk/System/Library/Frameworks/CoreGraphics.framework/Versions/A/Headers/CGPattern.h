@@ -11,6 +11,8 @@ typedef struct CGPattern *CGPatternRef;
 #include <CoreGraphics/CGContext.h>
 #include <CoreFoundation/CFBase.h>
 
+CF_IMPLICIT_BRIDGING_ENABLED
+
 /* kCGPatternTilingNoDistortion: The pattern cell is not distorted when
    painted, however the spacing between pattern cells may vary by as much as
    1 device pixel.
@@ -73,5 +75,7 @@ CG_EXTERN CGPatternRef CGPatternRetain(CGPatternRef pattern)
 
 CG_EXTERN void CGPatternRelease(CGPatternRef pattern)
   CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif /* CGPATTERN_H_ */

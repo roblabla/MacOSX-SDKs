@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2011 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -78,7 +78,7 @@
 
 #define NFS_TICKINTVL	5		/* Desired time for a tick (msec) */
 #define NFS_HZ		(hz / nfs_ticks) /* Ticks/sec */
-__private_extern__ int nfs_ticks;
+extern int nfs_ticks;
 #define	NFS_TIMEO	(1 * NFS_HZ)	/* Default timeout = 1 second */
 #define	NFS_MINTIMEO	(1 * NFS_HZ)	/* Min timeout to use */
 #define	NFS_MAXTIMEO	(60 * NFS_HZ)	/* Max timeout to backoff to */
@@ -179,6 +179,9 @@ __private_extern__ int nfs_ticks;
 #define NFS_MATTR_FS_LOCATIONS		21	/* list of locations for the file system */
 #define NFS_MATTR_MNTFLAGS		22	/* VFS mount flags (MNT_*) */
 #define NFS_MATTR_MNTFROM		23	/* fixed string to use for "f_mntfromname" */
+#define NFS_MATTR_REALM			24	/* Realm to authenticate with */
+#define NFS_MATTR_PRINCIPAL		25	/* GSS principal to authenticate with */
+#define NFS_MATTR_SVCPRINCIPAL		26	/* GSS principal to authenticate to, the server principal */
 
 /* NFS mount flags */
 #define NFS_MFLAG_SOFT			0	/* soft mount (requests fail if unresponsive) */

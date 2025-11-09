@@ -3,7 +3,7 @@
  
 	Framework:  AVFoundation
  
-	Copyright 2010-2012 Apple Inc. All rights reserved.
+	Copyright 2010-2013 Apple Inc. All rights reserved.
  
  */
 
@@ -12,6 +12,7 @@
 #import <CoreMedia/CMBase.h>
 #import <CoreMedia/CMTime.h>
 #import <CoreMedia/CMTimeRange.h>
+#import <MediaToolbox/MTAudioProcessingTap.h>
 
 /*!
  
@@ -86,6 +87,9 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 /* indicates the trackID of the audio track to which the parameters should be applied */
 @property (nonatomic, readonly) CMPersistentTrackID trackID;
 
+/* obtains an audio processing tap on the audio track */
+@property (nonatomic, readonly, retain) __attribute__((NSObject)) MTAudioProcessingTapRef audioTapProcessor NS_AVAILABLE(10_9, 6_0);
+
 /*  
  @method		getVolumeRampForTime:startVolume:endVolume:timeRange:
  @abstract		Obtains the volume ramp that includes the specified time.
@@ -132,6 +136,9 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 
 /* indicates the trackID of the audio track to which the parameters should be applied */
 @property (nonatomic) CMPersistentTrackID trackID;
+
+/* sets an audio processing tap to the audio track */
+@property (nonatomic, retain) __attribute__((NSObject)) MTAudioProcessingTapRef audioTapProcessor NS_AVAILABLE(10_9, 6_0);
 
 /* sets a volume ramp to apply during the specified timeRange */
 - (void)setVolumeRampFromStartVolume:(float)startVolume toEndVolume:(float)endVolume timeRange:(CMTimeRange)timeRange;

@@ -1,5 +1,5 @@
 /*	NSUUID.h
-        Copyright (c) 2011-2012, Apple Inc. All rights reserved.
+        Copyright (c) 2011-2013, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>

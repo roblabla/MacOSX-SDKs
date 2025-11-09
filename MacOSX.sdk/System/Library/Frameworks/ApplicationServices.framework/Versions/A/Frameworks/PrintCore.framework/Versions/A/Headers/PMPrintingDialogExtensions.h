@@ -48,6 +48,7 @@ Define the Kind IDs for Universal and Standard Printing Dialog Extensions.
 #define kPMPDFEffectsPDEKindID			CFSTR("com.apple.print.pde.PDFEffects")
 #define kPMSummaryPanelKindID			CFSTR("com.apple.print.pde.SummaryKind")
 #define kPMUniPrinterPDEKindID			CFSTR("com.apple.print.pde.UniPrinterKind")
+#define kPMJobPINPDEKindID				CFSTR("com.apple.print.pde.jobPIN")
 /* Unimplemented Universal */
 #define kPMPaperSourcePDEKindID         CFSTR("com.apple.print.pde.PaperSourceKind")
 #define kPMPriorityPDEKindID            CFSTR("com.apple.print.pde.PriorityKind")

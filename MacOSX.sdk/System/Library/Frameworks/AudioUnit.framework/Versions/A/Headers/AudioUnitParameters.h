@@ -76,7 +76,6 @@ When displaying to the user information about a parameter, a host application sh
 get the parameter information from the audio unit itself.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
-#if !TARGET_OS_IPHONE
 // Parameters for all Panner AudioUnits
 enum {
         // Global, Linear, 0->1, 1
@@ -95,7 +94,6 @@ enum {
         // Global, Meters, 0.01->1000, 1
 	kPannerParam_RefDistance = 5,	
 };
-#endif // !TARGET_OS_IPHONE
 
 
 
@@ -118,7 +116,6 @@ enum {
 		// Input, rate scaler	0.5 -> 2.0
     k3DMixerParam_PlaybackRate	= 4,
 	
-#if !TARGET_OS_IPHONE
 		// Desktop specific 3D mixer parameters
 
 		// Input, Dry/Wet equal-power blend, %	  0.0 -> 100.0
@@ -153,7 +150,18 @@ enum {
 	k3DMixerParam_PrePeakHoldLevel	= 2000,
 	k3DMixerParam_PostAveragePower	= 3000,
 	k3DMixerParam_PostPeakHoldLevel	= 4000
-#endif
+};
+
+// Reverb parameters applicable to the 3DMixer
+enum {
+		// Global, Hertz, 10.0 -> 20000.0, 800.0
+	kReverbParam_FilterFrequency					= 14,
+
+		// Global, Octaves, 0.05 -> 4.0, 3.0
+	kReverbParam_FilterBandwidth					= 15,
+
+		// Global, Decibels, -18.0 -> +18.0, 0.0
+	kReverbParam_FilterGain							= 16
 };
 
 // Parameters for the AUMultiChannelMixer unit
@@ -175,7 +183,53 @@ enum {
 	kMultiChannelMixerParam_PostPeakHoldLevel	= 4000
 };
 
-// Music Device
+
+// Parameters for the AUMatrixMixer unit
+enum {
+	kMatrixMixerParam_Volume 	= 0,
+	kMatrixMixerParam_Enable 	= 1,
+	
+		// read-only
+	// these report level in dB, as do the other mixers
+	kMatrixMixerParam_PreAveragePower	= 1000,
+	kMatrixMixerParam_PrePeakHoldLevel	= 2000,
+	kMatrixMixerParam_PostAveragePower	= 3000,
+	kMatrixMixerParam_PostPeakHoldLevel	= 4000,
+
+	// these report linear levels - for "expert" use only.
+	kMatrixMixerParam_PreAveragePowerLinear			= 5000,
+	kMatrixMixerParam_PrePeakHoldLevelLinear		= 6000,
+	kMatrixMixerParam_PostAveragePowerLinear		= 7000,
+	kMatrixMixerParam_PostPeakHoldLevelLinear		= 8000
+};
+
+
+// Output Units
+// Parameters for the AudioDeviceOutput, DefaultOutputUnit, and SystemOutputUnit units
+enum {
+		// Global, LinearGain, 0->1, 1
+	kHALOutputParam_Volume 		= 14 
+};
+
+// Parameters for the AUTimePitch, AUTimePitch (offline), AUPitch units
+enum {
+	kTimePitchParam_Rate						= 0,
+	kTimePitchParam_Pitch						= 1,
+	kTimePitchParam_EffectBlend					= 2		// only for the AUPitch unit
+};
+
+// Parameters for AUNewTimePitch
+enum {
+		// Global, rate, 1/32 -> 32.0, 1.0
+	kNewTimePitchParam_Rate							= 0,
+		// Global, Cents, -2400 -> 2400, 1.0
+	kNewTimePitchParam_Pitch						= 1,
+		// Global, generic, 3.0 -> 32.0, 8.0
+	kNewTimePitchParam_Overlap						= 4,
+		// Global, Boolean, 0->1, 1
+	kNewTimePitchParam_EnablePeakLocking			= 6
+};
+
 // Parameters for the AUSampler unit
 enum {
 		// Global, dB, -90->12, 0
@@ -189,34 +243,6 @@ enum {
 
 		// Global, -1.0->1.0, 0
 	kAUSamplerParam_Pan					= 903
-};
-
-// Output Units
-// Parameters for the AudioDeviceOutput, DefaultOutputUnit, and SystemOutputUnit units
-enum {
-		// Global, LinearGain, 0->1, 1
-	kHALOutputParam_Volume 		= 14 
-};
-
-// Parameters for the AUTimePitch, AUTimePitch (offline), AUPitch units
-enum {
-	kTimePitchParam_Rate						= 0,
-#if !TARGET_OS_IPHONE
-	kTimePitchParam_Pitch						= 1,
-	kTimePitchParam_EffectBlend					= 2		// only for the AUPitch unit
-#endif
-};
-
-// Parameters for AUNewTimePitch
-enum {
-		// Global, rate, 1/32 -> 32.0, 1.0
-	kNewTimePitchParam_Rate							= 0,
-		// Global, Cents, -2400 -> 2400, 1.0
-	kNewTimePitchParam_Pitch						= 1,
-		// Global, generic, 3.0 -> 32.0, 8.0
-	kNewTimePitchParam_Overlap						= 4,
-		// Global, Boolean, 0->1, 1
-	kNewTimePitchParam_EnablePeakLocking			= 6
 };
 
 // Effect units
@@ -373,9 +399,143 @@ enum {
 	kDistortionParam_FinalMix = 15
 };
 
+// Parameters for the AUDelay unit
+enum {
+		// Global, EqPow Crossfade, 0->100, 50
+	kDelayParam_WetDryMix 				= 0,
+		
+		// Global, Secs, 0->2, 1
+	kDelayParam_DelayTime				= 1,
+		
+		// Global, Percent, -100->100, 50
+	kDelayParam_Feedback 				= 2,
+		
+		// Global, Hz, 10->(SampleRate/2), 15000
+	kDelayParam_LopassCutoff	 		= 3
+};
+
+// Parameters for the AUNBandEQ unit
+// Note that the parameter IDs listed correspond to band 0 (zero) of the unit. The parameter IDs for
+// higher bands can be obtained by adding the zero-indexed band number to the corresponding band 0
+// parameter ID up to the number of bands minus one, where the number of bands is described by the
+// AUNBandEQ property kAUNBandEQProperty_NumberOfBands. For example, the parameter ID corresponding
+// to the filter type of band 4 would be kAUNBandEQParam_FilterType + 3.
+// kAUNBandEQParam_GlobalsGain is an overall gain and does not have a band.
+enum {
+    // Global, dB, -96->24, 0
+	kAUNBandEQParam_GlobalGain								= 0,
+	
+    // Global, Boolean, 0 or 1, 1
+	kAUNBandEQParam_BypassBand								= 1000,
+	
+    // Global, Indexed, 0->kNumAUNBandEQFilterTypes-1, 0
+	kAUNBandEQParam_FilterType								= 2000,
+	
+    // Global, Hz, 20->(SampleRate/2), 1000
+	kAUNBandEQParam_Frequency								= 3000,
+	
+    // Global, dB, -96->24, 0
+	kAUNBandEQParam_Gain									= 4000,
+	
+    // Global, octaves, 0.05->5.0, 0.5
+	kAUNBandEQParam_Bandwidth								= 5000
+};
+
+/*!
+ @enum			AUNBandEQ filter types
+ @discussion		Constants available as values for the kAUNBandEQParam_FilterType parameter defined above
+ 
+ @constant		kAUNBandEQFilterType_Parametric
+ Parametric filter based on Butterworth analog prototype. Uses parameterization where
+ the bandwidth is specifed as the relationship of the upper bandedge frequency to the
+ lower bandedge frequency in octaves, where the upper and lower bandedge frequencies are
+ the respective frequencies above and below the center frequency at which the gain is
+ equal to half the peak gain.
+ Applicable parameters:
+ - kAUNBandEQParam_Frequency (center frequency)
+ - kAUNBandEQParam_Gain (peak gain)
+ - kAUNBandEQParam_Bandwidth
+ 
+ @constant		kAUNBandEQFilterType_2ndOrderButterworthLowPass
+ Simple Butterworth 2nd order low pass filter
+ Applicable parameters:
+ - kAUNBandEQParam_Frequency (-3 dB cutoff frequency)
+ 
+ @constant		kAUNBandEQFilterType_2ndOrderButterworthHighPass
+ Simple Butterworth 2nd order high pass filter
+ Applicable parameters:
+ - kAUNBandEQParam_Frequency (-3 dB cutoff frequency)
+ 
+ @constant		kAUNBandEQFilterType_ResonantLowPass
+ Low pass filter with resonance support (via bandwidth parameter)
+ Applicable parameters:
+ - kAUNBandEQParam_Frequency (-3 dB cutoff frequency)
+ - kAUNBandEQParam_Bandwidth
+ 
+ @constant		kAUNBandEQFilterType_ResonantHighPass
+ High pass filter with resonance support (via bandwidth parameter)
+ Applicable parameters:
+ - kAUNBandEQParam_Frequency (-3 dB cutoff frequency)
+ - kAUNBandEQParam_Bandwidth
+ 
+ @constant		kAUNBandEQFilterType_BandPass
+ Band pass filter
+ Applicable parameters:
+ - kAUNBandEQParam_Frequency (center frequency)
+ - kAUNBandEQParam_Bandwidth
+ 
+ @constant		kAUNBandEQFilterType_BandStop
+ Band stop filter (aka "notch filter")
+ Applicable parameters:
+ - kAUNBandEQParam_Frequency (center frequency)
+ - kAUNBandEQParam_Bandwidth
+ 
+ @constant		kAUNBandEQFilterType_LowShelf
+ Low shelf filter
+ Applicable parameters:
+ - kAUNBandEQParam_Frequency (center frequency)
+ - kAUNBandEQParam_Gain (shelf gain)
+ 
+ @constant		kAUNBandEQFilterType_HighShelf
+ High shelf filter
+ Applicable parameters:
+ - kAUNBandEQParam_Frequency (center frequency)
+ - kAUNBandEQParam_Gain (shelf gain)
+ 
+ @constant		kAUNBandEQFilterType_ResonantLowShelf
+ Low shelf filter with resonance support (via bandwidth parameter)
+ Applicable parameters:
+ - kAUNBandEQParam_Frequency (center frequency)
+ - kAUNBandEQParam_Gain (shelf gain)
+ - kAUNBandEQParam_Bandwidth
+ 
+ @constant		kAUNBandEQFilterType_ResonantHighShelf
+ High shelf filter with resonance support (via bandwidth parameter)
+ Applicable parameters:
+ - kAUNBandEQParam_Frequency (center frequency)
+ - kAUNBandEQParam_Gain (shelf gain)
+ - kAUNBandEQParam_Bandwidth
+ 
+ */
+enum {
+	kAUNBandEQFilterType_Parametric 						= 0,
+	kAUNBandEQFilterType_2ndOrderButterworthLowPass			= 1,
+	kAUNBandEQFilterType_2ndOrderButterworthHighPass		= 2,
+	kAUNBandEQFilterType_ResonantLowPass					= 3,
+	kAUNBandEQFilterType_ResonantHighPass					= 4,
+	kAUNBandEQFilterType_BandPass							= 5,
+	kAUNBandEQFilterType_BandStop							= 6,
+	kAUNBandEQFilterType_LowShelf							= 7,
+	kAUNBandEQFilterType_HighShelf							= 8,
+	kAUNBandEQFilterType_ResonantLowShelf					= 9,
+	kAUNBandEQFilterType_ResonantHighShelf					= 10,
+	
+	kNumAUNBandEQFilterTypes								= 11
+};
+
+
 #pragma mark Apple Specific - Desktop
 
-#if !TARGET_OS_IPHONE
 
 // Some parameters for the AUGraphicEQ unit
 enum {
@@ -426,30 +586,6 @@ enum {
 
 		// Global, Genr, 0.0 -> 1.0, 0.2
 	kReverbParam_ModulationDepth					= 13,
-
-		// Global, Hertz, 10.0 -> 20000.0, 800.0
-	kReverbParam_FilterFrequency					= 14,
-
-		// Global, Octaves, 0.05 -> 4.0, 3.0
-	kReverbParam_FilterBandwidth					= 15,
-
-		// Global, Decibels, -18.0 -> +18.0, 0.0
-	kReverbParam_FilterGain							= 16
-};
-
-// Parameters for the AUDelay unit
-enum {
-		// Global, EqPow Crossfade, 0->100, 50
-	kDelayParam_WetDryMix 				= 0,
-		
-		// Global, Secs, 0->2, 1
-	kDelayParam_DelayTime				= 1,
-		
-		// Global, Percent, -100->100, 50
-	kDelayParam_Feedback 				= 2,
-		
-		// Global, Hz, 10->(SampleRate/2), 15000
-	kDelayParam_LopassCutoff	 		= 3
 };
 
 // Parameters for the AUMultibandCompressor unit
@@ -561,6 +697,24 @@ enum
 	kMultibandFilter_HighGain		= 14
 };
 
+// Parameters for AURogerBeep
+enum {
+		// Global, dB, -80 -> 0, -6
+	kRogerBeepParam_InGateThreshold = 0,
+		// Global, Milliseconds, 0 -> 1000, 1000
+	kRogerBeepParam_InGateThresholdTime = 1,
+		// Global, dB, -80 -> 0, -6
+	kRogerBeepParam_OutGateThreshold = 2,
+		// Global, Milliseconds, 0 -> 1000, 1000
+	kRogerBeepParam_OutGateThresholdTime = 3,	
+		// Global, indexed, 0 -> 2, 2
+	kRogerBeepParam_Sensitivity = 4,	
+		// Global, indexed, 0 -> 2, 0
+	kRogerBeepParam_RogerType = 5,
+		// Global, dB, -80 -> 20, -6
+	kRogerBeepParam_RogerGain = 6
+};
+
 // Mixer Units
 
 // Parameters for the Stereo Mixer unit
@@ -581,25 +735,6 @@ enum {
 	kStereoMixerParam_PrePeakHoldLevel	= 2000,
 	kStereoMixerParam_PostAveragePower	= 3000,
 	kStereoMixerParam_PostPeakHoldLevel	= 4000
-};
-
-// Parameters for the AUMatrixMixer unit
-enum {
-	kMatrixMixerParam_Volume 	= 0,
-	kMatrixMixerParam_Enable 	= 1,
-	
-		// read-only
-	// these report level in dB, as do the other mixers
-	kMatrixMixerParam_PreAveragePower	= 1000,
-	kMatrixMixerParam_PrePeakHoldLevel	= 2000,
-	kMatrixMixerParam_PostAveragePower	= 3000,
-	kMatrixMixerParam_PostPeakHoldLevel	= 4000,
-
-	// these report linear levels - for "expert" use only.
-	kMatrixMixerParam_PreAveragePowerLinear			= 5000,
-	kMatrixMixerParam_PrePeakHoldLevelLinear		= 6000,
-	kMatrixMixerParam_PostAveragePowerLinear		= 7000,
-	kMatrixMixerParam_PostPeakHoldLevelLinear		= 8000
 };
 
 // Parameters for the AUNetReceive unit
@@ -625,24 +760,6 @@ enum {
 	kAUNetStatus_Underflow = 3,
 	kAUNetStatus_Connecting = 4,
 	kAUNetStatus_Listening = 5
-};
-
-// Parameters for AURogerBeep
-enum {
-		// Global, dB, -80 -> 0, -6
-	kRogerBeepParam_InGateThreshold = 0,
-		// Global, Milliseconds, 0 -> 1000, 1000
-	kRogerBeepParam_InGateThresholdTime = 1,
-		// Global, dB, -80 -> 0, -6
-	kRogerBeepParam_OutGateThreshold = 2,
-		// Global, Milliseconds, 0 -> 1000, 1000
-	kRogerBeepParam_OutGateThresholdTime = 3,	
-		// Global, indexed, 0 -> 2, 2
-	kRogerBeepParam_Sensitivity = 4,	
-		// Global, indexed, 0 -> 2, 0
-	kRogerBeepParam_RogerType = 5,
-		// Global, dB, -80 -> 20, -6
-	kRogerBeepParam_RogerGain = 6
 };
 
 // Music Device
@@ -699,6 +816,19 @@ enum {
 	kRoundTripAACParam_Quality 				= 2,
 	kRoundTripAACParam_CompressedFormatSampleRate = 3
 };
-#endif // !TARGET_OS_IPHONE
+
+// `Analog' AudioUnits
+
+
+// Parameters for the AURandom unit
+enum {
+	kRandomParam_BoundA 			= 0,
+	kRandomParam_BoundB				= 1,
+	kRandomParam_Curve				= 2
+};
+
+
+#pragma mark Apple Specific - iOS
+
 
 #endif //__AudioUnitParameters

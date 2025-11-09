@@ -3,7 +3,7 @@
 
 	Framework:  CoreMedia
  
-    Copyright 2006-2012 Apple Inc. All rights reserved.
+    Copyright 2006-2013 Apple Inc. All rights reserved.
 
 */
 
@@ -77,7 +77,7 @@ CM_EXPORT void	CMRemoveAllAttachments(CMAttachmentBearerRef target) __OSX_AVAILA
     @discussion CMCopyDictionaryOfAttachments is a convenience call that returns all attachments with their corresponding keys in a new CFDictionary that the caller must dispose by calling CFRelease.  Given a CVBufferRef, CMCopyDictionaryOfAttachments is similar to CVBufferGetAttachments, except that CVBufferGetAttachments returns a CFDictionary that may change if attachments are added later.
     @param      allocator  Allocator for the new dictionary; pass kCFAllocatorDefault or NULL to use the default allocator.
     @param      target  Target CMAttachmentBearer.
-    @result     A CFDictionary with all buffer attachments identified by there keys. If no attachment is present, the dictionary is empty.  Returns NULL
+    @result     A CFDictionary with all buffer attachments identified by there keys. If no attachment is present, NULL is returned.  Returns NULL
 		for invalid attachment mode.
 */
 CM_EXPORT CFDictionaryRef CMCopyDictionaryOfAttachments(CFAllocatorRef allocator, CMAttachmentBearerRef target, CMAttachmentMode attachmentMode) __OSX_AVAILABLE_STARTING( __MAC_10_7, __IPHONE_4_0 );

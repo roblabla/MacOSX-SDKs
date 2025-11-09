@@ -1312,7 +1312,7 @@ typedef uint16_t	BluetoothHCIConnectionAcceptTimeout;
 typedef uint16_t	BluetoothHCIPageTimeout;
 enum BluetoothHCITimeoutValues
 {
-	kDefaultPageTimeout			= 0x2000,
+	kDefaultPageTimeout			= 0x2710,
 };
 
 #define		BluetoothGetSlotsFromSeconds( inSeconds )		( (inSeconds/.000625 ) )

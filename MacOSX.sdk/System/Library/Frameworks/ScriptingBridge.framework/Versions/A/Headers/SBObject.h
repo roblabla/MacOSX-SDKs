@@ -8,6 +8,7 @@
 
 @class SBAppContext, SBElementArray;
 
+NS_CLASS_AVAILABLE(10_5, NA)
 @interface SBObject : NSObject <NSCoding>
 {
 	AEDesc _specifier;
@@ -27,7 +28,7 @@
 	// (for most properties), an NSAppleEventDescriptor (for properties of a type with
 	// no Foundation equivalent), or another SBObject (for most elements).
 
-- (NSError *) lastError;
+- (NSError *) lastError NS_AVAILABLE(10_6, NA);
 	// Return the error from the last event this object sent, or nil if it succeeded.
 
 @end

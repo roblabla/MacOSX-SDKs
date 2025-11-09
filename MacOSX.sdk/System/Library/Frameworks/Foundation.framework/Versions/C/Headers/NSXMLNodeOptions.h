@@ -1,5 +1,5 @@
 /*	NSXMLNodeOptions.h
-	Copyright (c) 2004-2012, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2013, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObjCRuntime.h>
@@ -11,6 +11,7 @@
     @constant NSXMLNodeCompactEmptyElement This element should contract when empty, ie &lt;a/>
     @constant NSXMLNodeUseSingleQuotes Use single quotes on this attribute or namespace
     @constant NSXMLNodeUseDoubleQuotes Use double quotes on this attribute or namespace. This is the default.
+    @constant NSXMLNodeNeverEscapeContents When generating a string representation of an XML document, don't escape the reserved characters '<' and '&' in Text nodes
 
     @constant NSXMLNodeOptionsNone Use the default options
     @constant NSXMLNodePreserveAll Turn all preservation options on
@@ -22,6 +23,7 @@
     @constant NSXMLNodePreserveEmptyElements Remember whether an empty element was in expanded or contracted form
     @constant NSXMLNodePreserveQuotes Remember whether an attribute used single or double quotes
     @constant NSXMLNodePreserveWhitespace Preserve non-content whitespace
+    @constant NSXMLNodePromoteSignificantWhitespace When significant whitespace is encountered in the document, create Text nodes representing it rather than removing it. Has no effect if NSXMLNodePreserveWhitespace is also specified
     @constant NSXMLNodePreserveDTD Preserve the DTD until it is modified
     
     @constant NSXMLDocumentTidyHTML Try to change HTML into valid XHTML
@@ -46,6 +48,7 @@ enum {
     NSXMLNodeCompactEmptyElement =  1UL << 2, // <a/>
     NSXMLNodeUseSingleQuotes = 1UL << 3,
     NSXMLNodeUseDoubleQuotes = 1UL << 4,
+    NSXMLNodeNeverEscapeContents = 1UL << 5,
     
     // Tidy
     NSXMLDocumentTidyHTML = 1UL << 9,
@@ -75,7 +78,8 @@ enum {
     NSXMLNodePreserveCDATA = 1UL << 24,
     NSXMLNodePreserveWhitespace = 1UL << 25,
     NSXMLNodePreserveDTD = 1UL << 26,
-    NSXMLNodePreserveCharacterReferences = 1UL << 27,    
+    NSXMLNodePreserveCharacterReferences = 1UL << 27,
+    NSXMLNodePromoteSignificantWhitespace = 1UL << 28,
     NSXMLNodePreserveEmptyElements = 
             (NSXMLNodeExpandEmptyElement | NSXMLNodeCompactEmptyElement),
     NSXMLNodePreserveQuotes = 

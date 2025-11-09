@@ -1,7 +1,7 @@
 /*
 	NSController.h
 	Application Kit
-	Copyright (c) 2002-2012, Apple Inc.
+	Copyright (c) 2002-2013, Apple Inc.
 	All rights reserved.
  */
 
@@ -13,8 +13,10 @@
 
 @interface NSController : NSObject <NSCoding> {
 @private
+#if !__LP64__
     void *_reserved;
     void *_reserved2;
+#endif
     int _specialPurposeType;
     id _bindingAdaptor;
     NSMutableArray *_editors;
@@ -29,7 +31,9 @@
         unsigned int _isEditing:1;
         unsigned int _reservedController:28;
     } _bindingsControllerFlags;
+#if !__LP64__
     NSMutableDictionary *_reservedOther;
+#endif
 @protected    // all instance variables are private
     id _modelObservingTracker;
     id _expectedObservingInfo;

@@ -21,6 +21,8 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 
+@class SFAuthorization;
+
 /*!
     @const      ODSessionProxyAddress
     @abstract   the address to connect to via proxy, used when making the options dictionary
@@ -49,6 +51,8 @@ FOUNDATION_EXPORT NSString *const ODSessionProxyUsername NS_AVAILABLE(10_6, NA);
     @discussion the password to connect with via proxy, used when making the options dictionary
 */
 FOUNDATION_EXPORT NSString *const ODSessionProxyPassword NS_AVAILABLE(10_6, NA);
+
+@class ODConfiguration;
 
 /*!
     @class       ODSession
@@ -107,5 +111,86 @@ FOUNDATION_EXPORT NSString *const ODSessionProxyPassword NS_AVAILABLE(10_6, NA);
                 error details are not needed.
 */
 - (NSArray *)nodeNamesAndReturnError:(NSError **)outError NS_AVAILABLE(10_6, NA);
+
+/*!
+ * @method configurationTemplateNames
+ *
+ * @abstract
+ * Returns a list of names as NSStrings for all available configuration templates.
+ *
+ * @discussion
+ * Returns a list of names as NSStrings for all available configuration templates.  Configuration templates
+ * have pre-configured modules and/or mappings.  Useful for re-using existing configurations
+ * that may change with operating system without changing the actual configuration.
+ */
+- (NSArray *) configurationTemplateNames NS_AVAILABLE_MAC(10_9);
+
+/*!
+ * @method mappingTemplateNames
+ *
+ * @abstract
+ * Returns a list names as NSStrings for all available mapping templates.
+ *
+ * @discussion
+ * Returns a list names as NSStrings for all available mapping templates.  Mapping templates have pre-configured
+ * record/attribute mappings.  Useful if a configuration uses a common layout of mappings for a type of server.
+ */
+- (NSArray *) mappingTemplateNames NS_AVAILABLE_MAC(10_9);
+
+/*!
+ * @method configurationAuthorizationAllowingUserInteraction:
+ *
+ * @abstract
+ * Returns an authorization appropriate for managing configurations.
+ *
+ * @discussion
+ * Returns an authorization appropriate for managing configurations.  If a proxy session is in use this method will return
+ * nil and no error.
+ */
+- (SFAuthorization *)configurationAuthorizationAllowingUserInteraction:(BOOL)allowInteraction error:(NSError **)error NS_AVAILABLE_MAC(10_9);
+
+/*!
+ * @method configurationForNodename:
+ *
+ * @abstract
+ * Reads the configuration for a given nodename.
+ *
+ * @discussion
+ * Reads the configuration for a given nodename.
+ */
+- (ODConfiguration *)configurationForNodename:(NSString *)nodename NS_AVAILABLE_MAC(10_9);
+
+/*!
+ * @method addConfiguration:authorization:error:
+ *
+ * @abstract
+ * Adds a new configuration to the existing ODSession.
+ *
+ * @discussion
+ * Adds a new configuration to the existing ODSession.  An SFAuthorization can be provided if necessary.
+ */
+- (BOOL) addConfiguration:(ODConfiguration *)configuration authorization:(SFAuthorization *)authorization error:(NSError **)error NS_AVAILABLE_MAC(10_9);
+
+/*!
+ * @method deleteConfiguration:authorization:error:
+ *
+ * @abstract
+ * Deletes an existing configuration from the ODSession.
+ *
+ * @discussion
+ * Deletes an existing configuration from the ODSession.  An authorization can be provided if necessary.
+ */
+- (BOOL) deleteConfiguration:(ODConfiguration *)configuration authorization:(SFAuthorization *)authorization error:(NSError **)error NS_AVAILABLE_MAC(10_9);
+
+/*!
+ * @method deleteConfigurationWithNodename:authorization:error:
+ *
+ * @abstract
+ * Deletes an existing configuration from the ODSession.
+ *
+ * @discussion
+ * Deletes an existing configuration from the ODSession.  An authorization can be provided if necessary.
+ */
+- (BOOL) deleteConfigurationWithNodename:(NSString *)nodename authorization:(SFAuthorization *)authorization error:(NSError **)error NS_AVAILABLE_MAC(10_9);
 
 @end

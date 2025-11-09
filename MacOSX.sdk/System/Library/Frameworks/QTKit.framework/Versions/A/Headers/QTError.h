@@ -5,21 +5,30 @@
  
 */
 
+/*
+  QTKit has been deprecated in 10.9.
+
+  AVFoundation and AVKit are the frameworks recommended for all new development 
+  involving time-based audiovisual media on OS X.  In order to transition your 
+  project from QTKit to AVFoundation please refer to:
+  "Technical Note TN2300 Transitioning QTKit code to AV Foundation".
+*/
+
 #import <Foundation/Foundation.h>
 #import <QTKit/QTKitDefines.h>
 
 #if QTKIT_VERSION_MAX_ALLOWED >= QTKIT_VERSION_7_2
 
-QTKIT_EXTERN NSString * const QTKitErrorDomain							AVAILABLE_QTKIT_VERSION_7_2_AND_LATER;
+QTKIT_EXTERN NSString * const QTKitErrorDomain							AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
-QTKIT_EXTERN NSString * const QTErrorCaptureInputKey					AVAILABLE_QTKIT_VERSION_7_2_AND_LATER;
-QTKIT_EXTERN NSString * const QTErrorCaptureOutputKey					AVAILABLE_QTKIT_VERSION_7_2_AND_LATER;
-QTKIT_EXTERN NSString * const QTErrorDeviceKey							AVAILABLE_QTKIT_VERSION_7_2_AND_LATER;
-QTKIT_EXTERN NSString * const QTErrorExcludingDeviceKey					AVAILABLE_QTKIT_VERSION_7_2_AND_LATER;
-QTKIT_EXTERN NSString * const QTErrorTimeKey							AVAILABLE_QTKIT_VERSION_7_6_3_AND_LATER;  // NSValue interpreted as QTTime
-QTKIT_EXTERN NSString * const QTErrorFileSizeKey						AVAILABLE_QTKIT_VERSION_7_6_3_AND_LATER;  // NSNumber interpreted as file size in bytes
+QTKIT_EXTERN NSString * const QTErrorCaptureInputKey					AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+QTKIT_EXTERN NSString * const QTErrorCaptureOutputKey					AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+QTKIT_EXTERN NSString * const QTErrorDeviceKey							AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+QTKIT_EXTERN NSString * const QTErrorExcludingDeviceKey					AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
+QTKIT_EXTERN NSString * const QTErrorTimeKey							AVAILABLE_QTKIT_VERSION_7_6_3_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;  // NSValue interpreted as QTTime
+QTKIT_EXTERN NSString * const QTErrorFileSizeKey						AVAILABLE_QTKIT_VERSION_7_6_3_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;  // NSNumber interpreted as file size in bytes
 QTKIT_EXTERN NSString * const QTErrorRecordingSuccesfullyFinishedKey	AVAILABLE_QTKIT_VERSION_7_2_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7;
-QTKIT_EXTERN NSString * const QTErrorRecordingSuccessfullyFinishedKey	AVAILABLE_QTKIT_VERSION_7_7_AND_LATER;
+QTKIT_EXTERN NSString * const QTErrorRecordingSuccessfullyFinishedKey	AVAILABLE_QTKIT_VERSION_7_7_AND_LATER_BUT_DEPRECATED_IN_QTKIT_VERSION_7_7_3;
 
 enum {
 	QTErrorUnknown                                      = -1,

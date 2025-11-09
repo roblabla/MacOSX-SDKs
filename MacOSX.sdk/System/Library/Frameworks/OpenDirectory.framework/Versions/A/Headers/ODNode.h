@@ -23,6 +23,7 @@
 
 #import <OpenDirectory/OpenDirectory.h>
 
+@class ODConfiguration;
 @class ODRecord;
 
 /*!
@@ -177,5 +178,62 @@
                 optional parameter, nil can be passed if error details are not needed.
 */
 - (NSData *)customCall:(NSInteger)inCustomCode sendData:(NSData *)inSendData error:(NSError **)outError NS_AVAILABLE(10_6, NA);
+
+/*!
+    @method     customFunction:payload:error:
+    @abstract   Sends a custom function call to the node; data is a type specific to the call.
+    @discussion Sends a custom function call to the node; data is a type specific to the call.  'error' is an
+                optional parameter therefore nil can be passed if error details are not needed.  Return type is
+				defined by the custom function requested.
+*/
+- (id)customFunction:(NSString *)function payload:(id)payload error:(NSError **)error NS_AVAILABLE(10_9, NA);
+
+/*!
+ * @method configuration
+ *
+ * @abstract
+ * Returns an ODConfiguration object for the node.
+ *
+ * @discussion
+ * Returns an ODConfiguration object for the node.
+ */
+- (ODConfiguration *)configuration;
+
+/*!
+    @method     policiesAndReturnError:
+    @abstract   This will copy any policies configured for the node.
+    @discussion This will copy any policies configured for the node.
+*/
+- (NSDictionary *)policiesAndReturnError:(NSError **)error __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+
+/*!
+    @function   supportedPoliciesAndReturnError:
+    @abstract   This will return a dictionary of supported policies.
+    @discussion This will return a dictionary of supported policies, if appropriate, the value will be the maximum value allowed
+                for the policy in question.  For example, if password history is available, it will state how much history is
+                supported.
+*/
+- (NSDictionary *)supportedPoliciesAndReturnError:(NSError **)error __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+
+/*!
+    @function   setPolicies:error:
+    @abstract   This will set the policy for the node.
+    @discussion This will set the policy for the node.  Policies are evaluated in combination with record-level policies.
+*/
+- (BOOL)setPolicies:(NSDictionary *)policies error:(NSError **)error __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+
+/*!
+    @function   setPolicy:value:error:
+    @abstract   This will set a specific policy setting for the node.
+    @discussion This will set a specific policy setting for the node.
+*/
+- (BOOL)setPolicy:(ODPolicyType)policy value:(id)value error:(NSError **)error __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+
+/*!
+    @function   removePolicy:value:error:
+    @abstract   This will remove a specific policy setting from the node.
+    @discussion This will remove a specific policy setting from the node.
+*/
+- (BOOL)removePolicy:(ODPolicyType)policy error:(NSError **)error __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
 
 @end

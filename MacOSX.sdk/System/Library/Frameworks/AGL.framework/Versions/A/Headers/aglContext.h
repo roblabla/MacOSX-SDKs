@@ -17,6 +17,7 @@
 #ifndef _AGLCONTEXT_H
 #define _AGLCONTEXT_H
 
+#include <OpenGL/OpenGLAvailability.h>
 #include <OpenGL/gliContext.h>
 #include <OpenGL/gliDispatch.h>
 
@@ -28,7 +29,7 @@ extern "C" {
 /*
 ** Opaque declaration for private AGLContext data.
 */
-typedef struct __AGLPrivateRec *AGLPrivate;
+typedef struct __AGLPrivateRec *AGLPrivate OPENGL_DEPRECATED(10_0, 10_9);
 
 /*
 ** AGLContext structure.
@@ -37,7 +38,7 @@ struct __AGLContextRec {
 	GLIContext           rend;
 	GLIFunctionDispatch  disp;
 	AGLPrivate           priv;
-};
+} OPENGL_DEPRECATED(10_0, 10_9);
 
 
 #ifdef __cplusplus

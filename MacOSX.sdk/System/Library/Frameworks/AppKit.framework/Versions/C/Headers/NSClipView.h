@@ -1,7 +1,7 @@
 /*
 	NSClipView.h
 	Application Kit
-	Copyright (c) 1994-2012, Apple Inc.
+	Copyright (c) 1994-2013, Apple Inc.
 	All rights reserved.
 */
 
@@ -19,7 +19,7 @@
     NSCursor            *_cursor;
     id                  _scrollAnimationHelper;
     struct __cvFlags {
-	unsigned int        isFlipped:1;
+	unsigned int        __unused:1;
 	unsigned int        onlyUncovered:1;
 	unsigned int        reflectScroll:1;
 	unsigned int        usedByCell:1;
@@ -41,7 +41,9 @@
         unsigned int        scrollerKnobFlashSpecifier:2;
         unsigned int        drawsContentShadow:1;
         unsigned int        dontConstrainBoundsChange:1;
-        unsigned int        RESERVED:3;
+        unsigned int        isScrollDueToUserAction:1;
+        unsigned int        hasOverlappingViews:1;
+        unsigned int        RESERVED:1;
     } _cvFlags;
 }
 
@@ -60,9 +62,19 @@
 - (void)setCopiesOnScroll:(BOOL)flag;
 - (BOOL)copiesOnScroll;
 - (BOOL)autoscroll:(NSEvent *)theEvent;
-- (NSPoint)constrainScrollPoint:(NSPoint)newOrigin;
 - (void)scrollToPoint:(NSPoint)newOrigin;
 
+/* This is used to constrain the bounds of the clip view under magnification and scrolling. This also comes with the deprecation of -constrainScrollPoint:. The logic of an existing -constrainScrollPoint: can be moved to -constrainBoundsRect: by adjusting the proposedBound's origin (as opposed to 'newOrigin').
+ 
+ To preserve compatibility, if a subclass overrides -constrainScrollPoint:, the default behavior of -constrainBoundsRect: will be to use that -constrainScrollPoint: to adjust the proposedBound's origin, and to not change the size.
+ */
+- (NSRect)constrainBoundsRect:(NSRect)proposedBounds NS_AVAILABLE_MAC(10_9);
+
+@end
+
+@interface NSClipView(NSDeprecated)
+// -[NSClipView constrainScrollPoint:] will be formally deprecated in an upcoming release. -[NSClipView constrainBoundsRect:] should be used instead.
+- (NSPoint)constrainScrollPoint:(NSPoint)newOrigin;
 @end
 
 @interface NSView(NSClipViewSuperview)

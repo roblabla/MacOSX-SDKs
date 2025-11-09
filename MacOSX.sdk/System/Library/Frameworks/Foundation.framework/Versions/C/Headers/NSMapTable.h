@@ -1,5 +1,5 @@
 /*	NSMapTable.h
-	Copyright (c) 1994-2012, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2013, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSPointerFunctions.h>
@@ -14,7 +14,7 @@
 
 /****************	Class	****************/
 
-/* An NSMapTable is modeled after a dictionary, although, because of its options, is not a dictionary because it will behave differently.  The major option is to have keys and/or values held "weakly" in a manner that entries are removed when one of the objects is reclaimed.  In addition to being held weakly, keys or values may be copied on input or may use pointer identity for equality and hashing.
+/* An NSMapTable is modeled after a dictionary, although, because of its options, is not a dictionary because it will behave differently.  The major option is to have keys and/or values held "weakly" in a manner that entries will be removed at some indefinite point after one of the objects is reclaimed.  In addition to being held weakly, keys or values may be copied on input or may use pointer identity for equality and hashing.
    An NSMapTable can also be configured to operate on arbitrary pointers and not just objects.  We recommend the C function API for "void *" access.  To configure for pointer use, consult and choose the appropriate NSPointerFunction options or configure and use  NSPointerFunctions objects directly for initialization.
 */
 
@@ -46,9 +46,9 @@ NS_CLASS_AVAILABLE(10_5, 6_0)
 #endif
 
 + (id)strongToStrongObjectsMapTable NS_AVAILABLE(10_8, 6_0);
-+ (id)weakToStrongObjectsMapTable NS_AVAILABLE(10_8, 6_0);
++ (id)weakToStrongObjectsMapTable NS_AVAILABLE(10_8, 6_0); // entries are not necessarily purged right away when the weak key is reclaimed
 + (id)strongToWeakObjectsMapTable NS_AVAILABLE(10_8, 6_0);
-+ (id)weakToWeakObjectsMapTable NS_AVAILABLE(10_8, 6_0);
++ (id)weakToWeakObjectsMapTable NS_AVAILABLE(10_8, 6_0); // entries are not necessarily purged right away when the weak key or object is reclaimed
 
 /* return an NSPointerFunctions object reflecting the functions in use.  This is a new autoreleased object that can be subsequently modified and/or used directly in the creation of other pointer "collections". */
 - (NSPointerFunctions *)keyPointerFunctions;

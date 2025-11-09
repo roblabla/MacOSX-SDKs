@@ -1,5 +1,5 @@
 /*	NSCoder.h
-	Copyright (c) 1993-2012, Apple Inc. All rights reserved.
+	Copyright (c) 1993-2013, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>

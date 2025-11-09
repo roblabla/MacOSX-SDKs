@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2012 Apple Inc. All rights reserved.
+	Copyright 2010-2013 Apple Inc. All rights reserved.
 
 */
 
@@ -94,7 +94,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 
 @interface AVAsset (AVAssetAsynchronousLoading)
 
-/*	indicates that the asset provides precise timing. See @"duration" above and AVURLAssetPreferPreciseDurationAndTimingKey below.
+/*	Indicates that the asset provides precise timing. See @"duration" above and AVURLAssetPreferPreciseDurationAndTimingKey below.
 */
 @property (nonatomic, readonly) BOOL providesPreciseDurationAndTiming;
 
@@ -184,6 +184,16 @@ typedef NSUInteger AVAssetReferenceRestrictions;
 */
 - (NSArray *)tracksWithMediaCharacteristic:(NSString *)mediaCharacteristic;
 
+/*!
+ @property trackGroups
+ @abstract
+	All track groups in the receiver.
+ 
+ @discussion
+	The value of this property is an NSArray of AVAssetTrackGroups, each representing a different grouping of tracks in the receiver.
+ */
+@property (nonatomic, readonly) NSArray *trackGroups NS_AVAILABLE(10_9, 7_0);
+
 @end
 
 
@@ -260,7 +270,7 @@ typedef NSUInteger AVAssetReferenceRestrictions;
  Further filtering of the metadata items in AVTimedMetadataGroups according to language can be accomplished using +[AVMetadataItem metadataItemsFromArray:filteredAndSortedAccordingToPreferredLanguages:]; filtering of the metadata items according to locale can be accomplished using +[AVMetadataItem metadataItemsFromArray:withLocale:].
 .
 */
-- (NSArray *)chapterMetadataGroupsBestMatchingPreferredLanguages:(NSArray *)preferredLanguages NS_AVAILABLE(10_8, TBD);
+- (NSArray *)chapterMetadataGroupsBestMatchingPreferredLanguages:(NSArray *)preferredLanguages NS_AVAILABLE(10_8, 6_0);
 
 
 @end
@@ -343,13 +353,11 @@ typedef NSUInteger AVAssetReferenceRestrictions;
 	Indicates whether the asset should be prepared to indicate a precise duration and provide precise random access by time.
 	The value for this key is a boolean NSNumber.
   @discussion
+	If nil is passed as the value of the options parameter to -[AVURLAsset initWithURL:options:], or if a dictionary that lacks a value for the key AVURLAssetPreferPreciseDurationAndTimingKey is passed instead, a default value of NO is assumed. If the asset is intended to be played only, because AVPlayer will support approximate random access by time when full precision isn't available, the default value of NO will suffice.
+	Pass YES if longer loading times are acceptable in cases in which precise timing is required. If the asset is intended to be inserted into an AVMutableComposition, precise random access is typically desirable and the value of YES is recommended.
+	Note that such precision may require additional parsing of the resource in advance of operations that make use of any portion of it, depending on the specifics of its container format. Many container formats provide sufficient summary information for precise timing and do not require additional parsing to prepare for it; QuickTime movie files and MPEG-4 files are examples of such formats. Other formats do not provide sufficient summary information, and precise random access for them is possible only after a preliminary examination of a file's contents.
+	If you pass YES for an asset that you intend to play via an instance of AVPlayerItem and you are prepared for playback to commence before the value of -[AVPlayerItem duration] becomes available, you can omit the key @"duration" from the array of AVAsset keys you pass to -[AVPlayerItem initWithAsset:automaticallyLoadedAssetKeys:] in order to prevent AVPlayerItem from automatically loading the value of duration while the item becomes ready to play.
 	If precise duration and timing is not possible for the timed media resource referenced by the asset's URL, AVAsset.providesPreciseDurationAndTiming will be NO even if precise timing is requested via the use of this key.
-	Pass YES if longer loading times are acceptable in cases in which precise timing is required.
-	Note that such precision may require additional parsing of the resource in advance of operations that make use of any portion of it, depending on the specifics of its container format.
-	Many container formats provide sufficient summary information for precise timing and do not require additional parsing to prepare for it; QuickTime movie files and MPEG-4 files are examples of such formats.
-	Other formats do not provide sufficient summary information, and precise random access for them is possible only after a preliminary examination of a file's contents.
-	If the asset is intended to be played only, because AVPlayer will support approximate random access by time when full precision isn't available, the default value of NO will suffice.
-	If the asset is intended to be inserted into an AVMutableComposition, precise random access is typically desirable and the value of YES is recommended.
 					
 */
 AVF_EXPORT NSString *const AVURLAssetPreferPreciseDurationAndTimingKey NS_AVAILABLE(10_7, 4_0);
@@ -431,6 +439,22 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 /* indicates the URL with which the instance of AVURLAsset was initialized
 */
 @property (nonatomic, readonly, copy) NSURL *URL;
+
+@end
+
+
+@class AVAssetResourceLoader;
+
+@interface AVURLAsset (AVURLAssetURLHandling)
+
+/*!
+ @property resourceLoader
+ @abstract
+    Provides access to an instance of AVAssetResourceLoader, which offers limited control over the handling of URLs that may be loaded in the course of performing operations on the asset, such as playback.
+    The loading of file URLs cannot be mediated via use of AVAssetResourceLoader.
+    Note that copies of an AVAsset will vend the same instance of AVAssetResourceLoader.
+*/
+@property (nonatomic, readonly) AVAssetResourceLoader *resourceLoader NS_AVAILABLE(10_9, 6_0);
 
 @end
 

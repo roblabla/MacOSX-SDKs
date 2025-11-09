@@ -3,9 +3,9 @@
  
      Contains:   AppleScript Registry constants.
  
-     Version:    OSA-148.3~2
+     Version:    OpenScripting
  
-     Copyright:  © 1991-2008 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1991-2013 by Apple Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -80,7 +80,11 @@
 															/*  event code for the 'error' statement  */
 #define kASErrorEventCode 				'err '
 #define kOSAErrorArgs 					'erra'
-#define keyAEErrorObject 				'erob'				/*  Properties:  */
+#define keyAEErrorObject 				'erob'				/* event code for the 'use' statement */
+#define kASUseEventCode					'use '
+#define kASMinimumVersion				'minv'
+#define kASImporting					'impr'
+#define kASExcluding					'impx'				/*  Properties:  */
 #define pLength 						'leng'
 #define pReverse 						'rvse'
 #define pRest 							'rest'
@@ -144,6 +148,9 @@
 #define cScript 						'scpt'
 #define cHandler 						'hand'
 #define cProcedure 						'proc'
+#define cFramework						'frmk'
+#define cDynamicLibrary					'dylb'
+#define cScriptingAddition				'osax'
 
 #define cHandleBreakpoint 				'brak'
 #define cClosure 						'clsr'
@@ -180,6 +187,7 @@
 #define pASPrintLength 					'prln'
 #define pASPrintDepth 					'prdp'
 #define pASTopLevelScript 				'ascr'
+#define pASRequiredImportItems			'pimr'
 
 															/*  Considerations  */
 #define kAECase 						'case'

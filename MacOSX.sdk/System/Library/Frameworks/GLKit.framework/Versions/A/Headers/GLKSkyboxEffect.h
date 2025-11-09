@@ -75,7 +75,7 @@
       [skybox prepareToDraw];
       [skybox draw];
 */
-
+NS_CLASS_AVAILABLE(10_8, 5_0)
 @interface GLKSkyboxEffect : NSObject <GLKNamedEffect>
 {
     @private

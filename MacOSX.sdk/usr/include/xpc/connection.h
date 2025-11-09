@@ -3,11 +3,13 @@
 
 #ifndef __XPC_INDIRECT__
 #error "Please #include <xpc/xpc.h> instead of this file directly."
-/* For HeaderDoc. */
+// For HeaderDoc. 
 #include <xpc/base.h>
-#endif /* __XPC_INDIRECT__ */
+#endif // __XPC_INDIRECT__ 
 
-#ifdef __BLOCKS__
+#ifndef __BLOCKS__
+#error "XPC connections require Blocks support."
+#endif // __BLOCKS__
 
 __BEGIN_DECLS
 
@@ -29,10 +31,10 @@ __BEGIN_DECLS
  * silently disposed of. This error will only be given to peer connections.
  */
 #define XPC_ERROR_CONNECTION_INTERRUPTED \
-		XPC_GLOBAL_OBJECT(_xpc_error_connection_interrupted)
+	XPC_GLOBAL_OBJECT(_xpc_error_connection_interrupted)
 __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0)
 XPC_EXPORT
-struct _xpc_dictionary_s _xpc_error_connection_interrupted;
+const struct _xpc_dictionary_s _xpc_error_connection_interrupted;
 
 /*!
  * @constant XPC_ERROR_CONNECTION_INVALID
@@ -48,10 +50,10 @@ struct _xpc_dictionary_s _xpc_error_connection_interrupted;
  * This error may be given to any type of connection.
  */
 #define XPC_ERROR_CONNECTION_INVALID \
-		XPC_GLOBAL_OBJECT(_xpc_error_connection_invalid)
+	XPC_GLOBAL_OBJECT(_xpc_error_connection_invalid)
 __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0)
 XPC_EXPORT
-struct _xpc_dictionary_s _xpc_error_connection_invalid;
+const struct _xpc_dictionary_s _xpc_error_connection_invalid;
 
 /*!
  * @constant XPC_ERROR_TERMINATION_IMMINENT
@@ -71,10 +73,10 @@ struct _xpc_dictionary_s _xpc_error_connection_invalid;
  * listener or the xpc_main() event handler.
  */
 #define XPC_ERROR_TERMINATION_IMMINENT \
-		XPC_GLOBAL_OBJECT(_xpc_error_termination_imminent)
+	XPC_GLOBAL_OBJECT(_xpc_error_termination_imminent)
 __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0)
 XPC_EXPORT
-struct _xpc_dictionary_s _xpc_error_termination_imminent;
+const struct _xpc_dictionary_s _xpc_error_termination_imminent;
 
 /*!
  * @constant XPC_CONNECTION_MACH_SERVICE_LISTENER
@@ -142,7 +144,7 @@ typedef void (*xpc_finalizer_t)(void *value);
  * a suspended connection.
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0)
-XPC_EXPORT XPC_WARN_RESULT XPC_MALLOC XPC_RETURNS_RETAINED
+XPC_EXPORT XPC_MALLOC XPC_RETURNS_RETAINED XPC_WARN_RESULT
 xpc_connection_t
 xpc_connection_create(const char *name, dispatch_queue_t targetq);
 
@@ -180,7 +182,7 @@ xpc_connection_create(const char *name, dispatch_queue_t targetq);
  * first call to {@link xpc_connection_resume()}.
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0)
-XPC_EXPORT XPC_NONNULL1 XPC_WARN_RESULT XPC_MALLOC XPC_RETURNS_RETAINED
+XPC_EXPORT XPC_MALLOC XPC_RETURNS_RETAINED XPC_WARN_RESULT XPC_NONNULL1
 xpc_connection_t
 xpc_connection_create_mach_service(const char *name, dispatch_queue_t targetq,
 	uint64_t flags);
@@ -203,7 +205,7 @@ xpc_connection_create_mach_service(const char *name, dispatch_queue_t targetq,
  * exits or cancels the listener connection.
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0)
-XPC_EXPORT XPC_NONNULL_ALL XPC_WARN_RESULT XPC_MALLOC XPC_RETURNS_RETAINED
+XPC_EXPORT XPC_MALLOC XPC_RETURNS_RETAINED XPC_WARN_RESULT XPC_NONNULL_ALL
 xpc_connection_t
 xpc_connection_create_from_endpoint(xpc_endpoint_t endpoint);
 
@@ -437,6 +439,11 @@ xpc_connection_send_message(xpc_connection_t connection, xpc_object_t message);
  * immediately. If a connection has been canceled and still has outstanding
  * barriers, those barriers will be invoked as part of the connection's
  * unwinding process.
+ *
+ * It is important to note that a barrier block's execution order is not
+ * guaranteed with respect to other blocks that have been scheduled on the
+ * target queue of the connection. Or said differently,
+ * xpc_connection_send_barrier(3) is not equivalent to dispatch_async(3).
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0)
 XPC_EXPORT XPC_NONNULL_ALL
@@ -695,10 +702,9 @@ xpc_connection_get_context(xpc_connection_t connection);
 __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0)
 XPC_EXPORT XPC_NONNULL1
 void
-xpc_connection_set_finalizer_f(xpc_connection_t connection, xpc_finalizer_t finalizer);
+xpc_connection_set_finalizer_f(xpc_connection_t connection,
+	xpc_finalizer_t finalizer);
 
 __END_DECLS
 
-#endif /* __BLOCKS__ */
-
-#endif /* __XPC_CONNECTION_H__ */
+#endif // __XPC_CONNECTION_H__ 

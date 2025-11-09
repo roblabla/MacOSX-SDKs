@@ -124,7 +124,7 @@ __BEGIN_DECLS
 
 int alphasort(const struct dirent **, const struct dirent **) __DARWIN_INODE64(alphasort);
 
-#if (defined(__MAC_OS_X_VERSION_MIN_REQUIRED) && __MAC_OS_X_VERSION_MIN_REQUIRED < __MAC_10_8) || (defined(__IPHONE_OS_VERSION_MIN_REQUIRED) && __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_NA)
+#if (defined(__MAC_OS_X_VERSION_MIN_REQUIRED) && __MAC_OS_X_VERSION_MIN_REQUIRED < __MAC_10_8) || (defined(__IPHONE_OS_VERSION_MIN_REQUIRED) && __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_6_0)
 #include <errno.h>
 #include <stdlib.h>
 #define dirfd(dirp) ({                         \
@@ -137,7 +137,7 @@ int alphasort(const struct dirent **, const struct dirent **) __DARWIN_INODE64(a
     ret;                                       \
 })
 #else
-int dirfd(DIR *dirp) __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
+int dirfd(DIR *dirp) __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
 #endif
 
 int scandir(const char *, struct dirent ***,

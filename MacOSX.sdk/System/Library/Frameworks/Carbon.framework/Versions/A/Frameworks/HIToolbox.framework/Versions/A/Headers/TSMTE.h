@@ -3,8 +3,6 @@
  
      Contains:   Text Services Manager for TextEdit Interfaces. All TextEdit functions as well all functions in
  
-     Version:    HIToolbox-626.1~1
- 
      Copyright:  © 1991-2008 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on

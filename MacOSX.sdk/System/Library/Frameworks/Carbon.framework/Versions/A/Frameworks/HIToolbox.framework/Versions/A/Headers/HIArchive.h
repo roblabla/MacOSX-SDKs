@@ -3,8 +3,6 @@
  
      Contains:   HIArchive Interfaces.
  
-     Version:    HIToolbox-626.1~1
- 
      Copyright:  © 2004-2008 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on

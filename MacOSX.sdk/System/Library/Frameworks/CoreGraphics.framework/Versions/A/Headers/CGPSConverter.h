@@ -13,6 +13,8 @@ typedef struct CGPSConverter *CGPSConverterRef;
 #include <CoreFoundation/CFDictionary.h>
 #include <CoreFoundation/CFString.h>
 
+CF_IMPLICIT_BRIDGING_ENABLED
+
 /* CGPSConverter callbacks.
  
    `version' is the version number of the structure passed in as a parameter
@@ -98,5 +100,7 @@ CG_EXTERN bool CGPSConverterIsConverting(CGPSConverterRef converter)
 
 CG_EXTERN CFTypeID CGPSConverterGetTypeID(void)
     CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_NA);
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif /* CGPSCONVERTER_H_ */

@@ -5,6 +5,8 @@
 
 #import <IOBluetooth/objc/IOBluetoothHandsFree.h>
 
+@class IOBluetoothHandsFreeAudioGatewayExpansion;
+
 /*!
  @header
  @abstract	APIs for managing a hands free audio gateway
@@ -14,6 +16,8 @@ NS_CLASS_AVAILABLE(10_7, NA)
 @interface IOBluetoothHandsFreeAudioGateway : IOBluetoothHandsFree {
 	BOOL				_indicatorMode;
 	BOOL				_indicatorEventReporting;
+    
+    IOBluetoothHandsFreeAudioGatewayExpansion *	_expansion;
 }
 
 /*!

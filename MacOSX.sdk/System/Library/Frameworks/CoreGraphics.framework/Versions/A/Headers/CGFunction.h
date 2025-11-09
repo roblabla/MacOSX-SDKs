@@ -14,6 +14,8 @@ typedef struct CGFunction *CGFunctionRef;
 #include <CoreGraphics/CGBase.h>
 #include <CoreFoundation/CFBase.h>
 
+CF_IMPLICIT_BRIDGING_ENABLED
+
 /* This callback evaluates a function, using `in' as inputs, and places the
    result in `out'. `info' is the info parameter passed to the CGFunction
    creation functions. */
@@ -88,5 +90,7 @@ CG_EXTERN CGFunctionRef CGFunctionRetain(CGFunctionRef function)
 
 CG_EXTERN void CGFunctionRelease(CGFunctionRef function)
   CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif /* CGFUNCTION_H_ */

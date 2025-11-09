@@ -33,6 +33,7 @@
     @seealso 	//apple_ref/doc/uid/TP40004945 Publication Subscription Programming Guide
 */
 
+NS_DEPRECATED(10_5, 10_9, NA, NA)
 @interface PSEnclosure : NSObject {
     @private
     id _internal;
@@ -81,13 +82,13 @@
 
 
 typedef enum {
-    PSEnclosureDownloadIsIdle,       // A download has not been requested
-    PSEnclosureDownloadIsQueued,     // A download will commence sometime in the future 
-    PSEnclosureDownloadIsActive,     // A download is currently active (check downloadProgress)
-    PSEnclosureDownloadDidFinish,    // A download successfully finish
-    PSEnclosureDownloadDidFail,      // A download failed (check downloadError)
-    PSEnclosureDownloadWasDeleted    // A download finished, but another application or the user removed the result
-} PSEnclosureDownloadState;
+    PSEnclosureDownloadIsIdle NS_ENUM_DEPRECATED(10_5, 10_9, NA, NA),       // A download has not been requested
+    PSEnclosureDownloadIsQueued NS_ENUM_DEPRECATED(10_5, 10_9, NA, NA),     // A download will commence sometime in the future 
+    PSEnclosureDownloadIsActive NS_ENUM_DEPRECATED(10_5, 10_9, NA, NA),     // A download is currently active (check downloadProgress)
+    PSEnclosureDownloadDidFinish NS_ENUM_DEPRECATED(10_5, 10_9, NA, NA),    // A download successfully finish
+    PSEnclosureDownloadDidFail NS_ENUM_DEPRECATED(10_5, 10_9, NA, NA),      // A download failed (check downloadError)
+    PSEnclosureDownloadWasDeleted NS_ENUM_DEPRECATED(10_5, 10_9, NA, NA)    // A download finished, but another application or the user removed the result
+} PSEnclosureDownloadState NS_ENUM_DEPRECATED(10_5, 10_9, NA, NA);
 
 /*
     @method     downloadState
@@ -149,6 +150,6 @@ typedef enum {
 
 @end
 
-extern NSString* const PSEnclosureDownloadStateDidChangeNotification;
+extern NSString* const PSEnclosureDownloadStateDidChangeNotification NS_DEPRECATED(10_5, 10_9, NA, NA);
 
 #endif

@@ -3,9 +3,7 @@
  
      Contains:   Universal Access Interfaces.
  
-     Version:    HIServices-417~96
- 
-     Copyright:  © 2005-2008 by Apple Computer, Inc., all rights reserved.
+     Copyright:  ï¿½ 2005-2012 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -41,6 +39,13 @@ extern "C" {
  *    can tell Universal Access what part of the UI needs focus.
  */
 
+/*!
+	@header UniversalAccess.h
+	@discussion This header file contains functions that give applications the ability to control the zoom focus. Using these functions,
+	an application can tell the Mac OS X Universal Access zoom feature what part of its user interface needs focus.
+	@indexgroup Universal Access
+*/
+
 /*
  *  UAZoomChangeFocusType
  *  
@@ -51,15 +56,24 @@ extern "C" {
  *    The following constants are used to tell Universal Access Zoom
  *    the type of event that is driving the change in the zoom focus.
  */
+ 
+/*!
+	@typedef UAZoomChangeFocusType
+	@abstract Defines the Universal Access zoom change focus type.
+*/
 typedef UInt32 UAZoomChangeFocusType;
-enum {
 
-  /*
-   * Some event would like focus.
+/*!
+	@enum UAZoomFocusTypes
+	@abstract Values that tell the Universal Access zoom feature what type of event is causing the change in zoom focus.
+*/
+
+enum {
+  /*!
+   * An event is requesting focus.
    */
   kUAZoomFocusTypeOther         = 0,
-
-  /*
+  /*!
    * The text insertion point has moved.
    */
   kUAZoomFocusTypeInsertionPoint = 1
@@ -87,6 +101,14 @@ enum {
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
+ 
+/*!
+	@function UAZoomEnabled
+	@abstract Determines if the Universal Access zoom feature is enabled.
+	@result Returns <code>true</code> if the Universal Access zoom feature is on, <code>false</code> if the zoom feature is off or if the user
+	has zoomed all the way out.
+	@availability Available in Mac OS X v10.4 and later (not available in CarbonLib 1.x and not available for nonCarbon CFM).
+*/
 extern Boolean 
 UAZoomEnabled(void)                                           AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
@@ -129,6 +151,20 @@ UAZoomEnabled(void)                                           AVAILABLE_MAC_OS_X
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
+ 
+/*!
+	@function UAZoomChangeFocus
+	@abstract Tells the Universal Access zoom feature where it should focus.
+	@discussion This function tells Universal Access the frame of the element in focus and the
+	part of the element that should be in focus.
+	@param inRect The frame of the element in focus, in global 72-dot-per-inch (dpi) coordinates.
+	@param inHighlightRect The frame of the highlighted part of the element in focus, in global 72 dpi coordinates.  If the whole element is in focus,
+	and not just a smaller part of it, pass the <code>inRect</code> parameter and pass <code>NULL</code> for <code>inHighlightRect</code>.
+	@param inType A value of type @link UAZoomChangeFocusType UAZoomChangeFocusType@/link.
+	@result Returns <code>noErr</code> if there were no problems, if Universal Access Zoom is zoomed all the way out, or if the feature is off;
+	 returns <code>paramErr</code> if <code>inRect</code> is <code>NULL</code> or if <code>inType</code> is out of range. 
+	@availability Available in Mac OS X v10.4 and later (not available in CarbonLib 1.x and not available for nonCarbon CFM).
+*/ 
 extern OSStatus 
 UAZoomChangeFocus(
   const CGRect *          inRect,

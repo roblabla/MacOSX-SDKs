@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2012 Apple Inc. All rights reserved.
+	Copyright 2010-2013 Apple Inc. All rights reserved.
 
 */
 
@@ -162,10 +162,6 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 	@param			item
 	  The AVPlayerItem that will become the player's current item.
 	@discussion
-	  For best results ensure that the tracks property of an AVPlayerItem's AVAsset, if there is one,
-	  has reached the status AVKeyValueStatusLoaded before attempting to replace the current item with it.
-	  See -[AVAsset loadValuesAsynchronouslyForKeys:completionHandler:].
-	  
 	  In all releases of iOS 4, invoking replaceCurrentItemWithPlayerItem: with an AVPlayerItem that's already the receiver's currentItem results in an exception being raised. Starting with iOS 5, it's a no-op.
 */
 - (void)replaceCurrentItemWithPlayerItem:(AVPlayerItem *)item;
@@ -209,6 +205,27 @@ typedef NSInteger AVPlayerActionAtItemEnd;
  @discussion		Returns the current time of the current item. Not key-value observable; use -addPeriodicTimeObserverForInterval:queue:usingBlock: instead.
  */
 - (CMTime)currentTime;
+
+/*!
+ @method			seekToDate:
+ @abstract			Moves the playback cursor.
+ @param				date
+ @discussion		Use this method to seek to a specified time for the current player item.
+					The time seeked to may differ from the specified time for efficiency. For sample accurate seeking see seekToTime:toleranceBefore:toleranceAfter:.
+ */
+- (void)seekToDate:(NSDate *)date;
+
+/*!
+ @method			seekToDate:completionHandler:
+ @abstract			Moves the playback cursor and invokes the specified block when the seek operation has either been completed or been interrupted.
+ @param				date
+ @param				completionHandler
+ @discussion		Use this method to seek to a specified time for the current player item and to be notified when the seek operation is complete.
+					The completion handler for any prior seek request that is still in process will be invoked immediately with the finished parameter 
+					set to NO. If the new request completes without being interrupted by another seek request or by any other operation the specified 
+					completion handler will be invoked with the finished parameter set to YES. 
+ */
+- (void)seekToDate:(NSDate *)date completionHandler:(void (^)(BOOL finished))completionHandler NS_AVAILABLE(10_7, 5_0);
 
 /*!
  @method			seekToTime:
@@ -272,6 +289,8 @@ typedef NSInteger AVPlayerActionAtItemEnd;
 	
 					The current item's timebase is adjusted so that its time will be (or was) itemTime when host time is (or was) hostClockTime.
 					In other words: if hostClockTime is in the past, the timebase's time will be interpolated as though the timebase has been running at the requested rate since that time.  If hostClockTime is in the future, the timebase will immediately start running at the requested rate from an earlier time so that it will reach the requested itemTime at the requested hostClockTime.  (Note that the item's time will not jump backwards, but instead will sit at itemTime until the timebase reaches that time.)
+
+					Note that advanced rate control is not currently supported for HTTP Live Streaming.
 	@param itemTime	The time to start playback from, specified precisely (i.e., with zero tolerance).
 					Pass kCMTimeInvalid to use the current item's current time.
 	@param hostClockTime
@@ -280,7 +299,7 @@ typedef NSInteger AVPlayerActionAtItemEnd;
 					If hostClockTime is kCMTimeInvalid, the rate and time will be set together, but without external synchronization;
 					a host time in the near future will be used, allowing some time for data media loading.
 */
-- (void)setRate:(float)rate time:(CMTime)itemTime atHostTime:(CMTime)hostClockTime NS_AVAILABLE(10_8, TBD);
+- (void)setRate:(float)rate time:(CMTime)itemTime atHostTime:(CMTime)hostClockTime NS_AVAILABLE(10_8, 6_0);
 
 /*!
 	@method			prerollAtRate:completionHandler:
@@ -288,21 +307,23 @@ typedef NSInteger AVPlayerActionAtItemEnd;
 	@discussion		Once the completion handler is called with YES, the player's rate can be set with minimal latency.
 					The completion handler will be called with NO if the preroll is interrupted by a time change or incompatible rate change, or if preroll is not possible for some other reason.
 					Call this method only when the rate is currently zero and only after the AVPlayer's status has become AVPlayerStatusReadyToPlay.
+
+					Note that advanced rate control is not currently supported for HTTP Live Streaming.
 	@param rate		The intended rate for subsequent playback.
 	@param completionHandler
 					The block that will be called when the preroll is either completed or is interrupted.
 */
-- (void)prerollAtRate:(float)rate completionHandler:(void (^)(BOOL finished))completionHandler NS_AVAILABLE(10_8, TBD);
+- (void)prerollAtRate:(float)rate completionHandler:(void (^)(BOOL finished))completionHandler NS_AVAILABLE(10_8, 6_0);
 
 /*!
 	@method			cancelPendingPrerolls
 	@abstract		Cancel any pending preroll requests and invoke the corresponding completion handlers if present.
 	@discussion		Use this method to cancel and release the completion handlers for pending prerolls. The finished parameter of the completion handlers will be set to NO.
 */
-- (void)cancelPendingPrerolls NS_AVAILABLE(10_8, TBD);
+- (void)cancelPendingPrerolls NS_AVAILABLE(10_8, 6_0);
 
 /* NULL by default.  if not NULL, overrides the automatic choice of master clock for item timebases. This is most useful for synchronizing video-only movies with audio played via other means. IMPORTANT: If you specify a master clock other than the appropriate audio device clock, audio may drift out of sync. */
-@property (nonatomic, retain) __attribute__((NSObject)) CMClockRef masterClock NS_AVAILABLE(10_8, NA);
+@property (nonatomic, retain) __attribute__((NSObject)) CMClockRef masterClock NS_AVAILABLE(10_8, 6_0);
 
 @end
 
@@ -328,7 +349,7 @@ typedef NSInteger AVPlayerActionAtItemEnd;
 					than requested. Even so, the player will invoke the block sufficiently often for the client to update indications
 					of the current time appropriately in its end-user interface.
 					Each call to -addPeriodicTimeObserverForInterval:queue:usingBlock: should be paired with a corresponding call to -removeTimeObserver:.
-					Releasing the observer object without a call to -removeTimeObserver will result in undefined behavior.
+					Releasing the observer object without a call to -removeTimeObserver: will result in undefined behavior.
 */
 - (id)addPeriodicTimeObserverForInterval:(CMTime)interval queue:(dispatch_queue_t)queue usingBlock:(void (^)(CMTime time))block;
 
@@ -346,7 +367,7 @@ typedef NSInteger AVPlayerActionAtItemEnd;
 	  An object conforming to the NSObject protocol.  You must retain this returned value as long as you want the time observer to be invoked by the player.
 	  Pass this object to -removeTimeObserver: to cancel time observation.
 	@discussion		Each call to -addPeriodicTimeObserverForInterval:queue:usingBlock: should be paired with a corresponding call to -removeTimeObserver:.
-					Releasing the observer object without a call to -removeTimeObserver will result in undefined behavior.
+					Releasing the observer object without a call to -removeTimeObserver: will result in undefined behavior.
 */
 - (id)addBoundaryTimeObserverForTimes:(NSArray *)times queue:(dispatch_queue_t)queue usingBlock:(void (^)(void))block;
 
@@ -357,9 +378,9 @@ typedef NSInteger AVPlayerActionAtItemEnd;
 	  An object returned by a previous call to -addPeriodicTimeObserverForInterval:queue:usingBlock: or -addBoundaryTimeObserverForTimes:queue:usingBlock:.
 	@discussion		Upon return, the caller is guaranteed that no new time observer blocks will begin executing.  Depending on the calling thread and the queue
 					used to add the time observer, an in-flight block may continue to execute after this method returns.  You can guarantee synchronous time 
-					observer removal by enqueuing the call to -removeTimeObserver on that queue.  Alternatively, call dispatch_sync(queue, ^{}) after 
-					-removeTimeObserver to wait for any in-flight blocks to finish executing.
-					-removeTimeObserver should be used to explicitly cancel each time observer added using -addPeriodicTimeObserverForInterval:queue:usingBlock:
+					observer removal by enqueuing the call to -removeTimeObserver: on that queue.  Alternatively, call dispatch_sync(queue, ^{}) after
+					-removeTimeObserver: to wait for any in-flight blocks to finish executing.
+					-removeTimeObserver: should be used to explicitly cancel each time observer added using -addPeriodicTimeObserverForInterval:queue:usingBlock:
 					and -addBoundaryTimeObserverForTimes:queue:usingBlock:.
 */
 - (void)removeTimeObserver:(id)observer;
@@ -369,15 +390,14 @@ typedef NSInteger AVPlayerActionAtItemEnd;
 
 @interface AVPlayer (AVPlayerMediaControl)
 
-#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+/* Indicates the current audio volume of the player; 0.0 means "silence all audio", 1.0 means "play at the full volume of the current item".
 
-/* indicates the current audio volume of the player; 0.0 means "silence all audio", 1.0 means "play at the full volume of the current item" */
-@property (nonatomic) float volume NS_AVAILABLE(10_7, NA);
+   iOS note: Do not use this property to implement a volume slider for media playback. For that purpose, use MPVolumeView, which is customizable in appearance and provides standard media playback behaviors that users expect.
+   This property is most useful on iOS to control the volume of the AVPlayer relative to other audio output, not for volume control by end users. */
+@property (nonatomic) float volume NS_AVAILABLE(10_7, 7_0);
 
-/* indicates whether or not audio output of the player is muted */
-@property (nonatomic, getter=isMuted) BOOL muted NS_AVAILABLE(10_7, NA);
-
-#endif // (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+/* indicates whether or not audio output of the player is muted. Only affects audio muting for the player instance and not for the device. */
+@property (nonatomic, getter=isMuted) BOOL muted NS_AVAILABLE(10_7, 7_0);
 
 /* indicates whether display of closed captions is enabled */
 @property (nonatomic, getter=isClosedCaptionDisplayEnabled) BOOL closedCaptionDisplayEnabled;
@@ -385,19 +405,118 @@ typedef NSInteger AVPlayerActionAtItemEnd;
 @end
 
 
+@class AVPlayerMediaSelectionCriteria;
+
+@interface AVPlayer (AVPlayerAutomaticMediaSelection)
+
+/* Indicates whether the receiver should apply the current selection criteria automatically to AVPlayerItems.
+ For clients linked against the iOS 7 SDK or later or against the OS X 10.9 SDK or later, the default is YES. For all others, the default is NO.
+
+ By default, AVPlayer applies selection criteria based on system preferences. To override the default criteria for any media selection group, use -[AVPlayer setMediaSelectionCriteria:forMediaCharacteristic:].
+*/
+@property (nonatomic) BOOL appliesMediaSelectionCriteriaAutomatically NS_AVAILABLE(10_9, 7_0);
+
+/*!
+ @method     setMediaSelectionCriteria:forMediaCharacteristic:
+ @abstract   Applies automatic selection criteria for media that has the specified media characteristic.
+ @param      criteria
+   An instance of AVPlayerMediaSelectionCriteria.
+ @param      mediaCharacteristic
+   The media characteristic for which the selection criteria are to be applied. Supported values include AVMediaCharacteristicAudible, AVMediaCharacteristicLegible, and AVMediaCharacteristicVisual.
+ @discussion
+	Criteria will be applied to an AVPlayerItem when:
+		a) It is made ready to play
+		b) Specific media selections are made by -[AVPlayerItem selectMediaOption:inMediaSelectionGroup:] in a different group. The automatic choice in one group may be influenced by a specific selection in another group.
+		c) Underlying system preferences change, e.g. system language, accessibility captions.
+
+   Specific selections made by -[AVPlayerItem selectMediaOption:inMediaSelectionGroup:] within any group will override automatic selection in that group until -[AVPlayerItem selectMediaOptionAutomaticallyInMediaSelectionGroup:] is received.
+*/
+- (void)setMediaSelectionCriteria:(AVPlayerMediaSelectionCriteria *)criteria forMediaCharacteristic:(NSString *)mediaCharacteristic NS_AVAILABLE(10_9, 7_0);
+
+/*!
+ @method     mediaSelectionCriteriaForMediaCharacteristic:
+ @abstract   Returns the automatic selection criteria for media that has the specified media characteristic.
+ @param      mediaCharacteristic
+  The media characteristic for which the selection criteria is to be returned. Supported values include AVMediaCharacteristicAudible, AVMediaCharacteristicLegible, and AVMediaCharacteristicVisual.
+*/
+- (AVPlayerMediaSelectionCriteria *)mediaSelectionCriteriaForMediaCharacteristic:(NSString *)mediaCharacteristic NS_AVAILABLE(10_9, 7_0);
+
+@end
+
+
+@interface AVPlayer (AVPlayerAudioDeviceSupport)
+
+/*!
+ @property audioOutputDeviceUniqueID
+ @abstract
+	Specifies the unique ID of the Core Audio output device used to play audio.
+ @discussion
+	By default, the value of this property is nil, indicating that the default audio output device is used. Otherwise the value of this property is an NSString containing the unique ID of the Core Audio output device to be used for audio output.
+
+	Core Audio's kAudioDevicePropertyDeviceUID is a suitable source of audio output device unique IDs.
+*/
+@property (nonatomic, copy) NSString *audioOutputDeviceUniqueID NS_AVAILABLE_MAC(10_9);
+
+@end
+
+
 #if TARGET_OS_IPHONE
+
+/*
+ @category		
+	AVPlayer (AVPlayerExternalPlaybackSupport)
+ 
+ @abstract
+	Methods for supporting "external playback" of video 
+ 
+ @discussion
+	"External playback" is a mode where video data is sent to an external device such as Apple TV via AirPlay
+	and the mini-connector-based HDMI/VGA adapters for full screen playback at its original fidelity. AirPlay 
+	Video playback is also considered as an "external playback" mode.
+ 
+	In "external screen" mode (also known as mirroring and second display), video data is rendered on the host 
+	device (e.g. iPhone), rendered video is recompressed and transferred to the external device, and the 
+	external device decompresses and displays the video.
+ 
+	AVPlayerExternalPlaybackSupport properties affect AirPlay Video playback and are the replacement for the 
+	deprecated AVPlayerAirPlaySupport properties.
+ 
+	AVPlayerExternalPlaybackSupport properties do not apply to 30-pin-connector-based video output cables and adapters.
+ */
+
+@interface AVPlayer (AVPlayerExternalPlaybackSupport)
+
+/* Indicates whether the player allows switching to "external playback" mode. The default value is YES. */
+@property (nonatomic) BOOL allowsExternalPlayback NS_AVAILABLE_IOS(6_0);
+
+/* Indicates whether the player is currently playing video in "external playback" mode. */
+@property (nonatomic, readonly, getter=isExternalPlaybackActive) BOOL externalPlaybackActive NS_AVAILABLE_IOS(6_0);
+
+/* Indicates whether the player should automatically switch to "external playback" mode while the "external 
+	screen" mode is active in order to play video content and switching back to "external screen" mode as soon 
+	as playback is done. Brief transition may be visible on the external display when automatically switching 
+	between the two modes. The default value is NO. Has no effect if allowsExternalPlayback is NO. */
+@property (nonatomic) BOOL usesExternalPlaybackWhileExternalScreenIsActive NS_AVAILABLE_IOS(6_0);
+
+/* Video gravity strictly for "external playback" mode, one of AVLayerVideoGravity* defined in AVAnimation.h */
+@property (nonatomic, copy) NSString *externalPlaybackVideoGravity NS_AVAILABLE_IOS(6_0);
+
+@end
 
 @interface AVPlayer (AVPlayerAirPlaySupport)
 
-/* Indicates whether the player allows AirPlay video playback. The default value is YES. */
-@property (nonatomic) BOOL allowsAirPlayVideo NS_AVAILABLE_IOS(5_0);
+/* Indicates whether the player allows AirPlay Video playback. The default value is YES. 
+	This property is deprecated. Use AVPlayer's -allowsExternalPlayback instead. */
+@property (nonatomic) BOOL allowsAirPlayVideo NS_DEPRECATED_IOS(5_0, 6_0);
 
-/* Indicates whether the player is currently playing video via AirPlay. */
-@property (nonatomic, readonly, getter=isAirPlayVideoActive) BOOL airPlayVideoActive NS_AVAILABLE_IOS(5_0);
+/* Indicates whether the player is currently playing video via AirPlay. 
+	This property is deprecated. Use AVPlayer's -externalPlaybackActive instead.*/
+@property (nonatomic, readonly, getter=isAirPlayVideoActive) BOOL airPlayVideoActive NS_DEPRECATED_IOS(5_0, 6_0);
 
 /* Indicates whether the player should automatically switch to AirPlay Video while AirPlay Screen is active in order to play video content, switching back to AirPlay Screen as soon as playback is done. 
-   The default value is NO. Has no effect if allowsAirPlayVideo is NO. */
-@property (nonatomic) BOOL usesAirPlayVideoWhileAirPlayScreenIsActive NS_AVAILABLE_IOS(5_0);
+	The default value is NO. Has no effect if allowsAirPlayVideo is NO.
+	This property is deprecated. Use AVPlayer's -usesExternalPlaybackWhileExternalScreenIsActive instead. */
+@property (nonatomic) BOOL usesAirPlayVideoWhileAirPlayScreenIsActive NS_DEPRECATED_IOS(5_0, 6_0);
 
 @end
 
@@ -424,12 +543,11 @@ typedef NSInteger AVPlayerActionAtItemEnd;
 		current item. These requirements are inherent to the content itself and cannot be externally specified.
 		If the current item does not require external protection, the value of this property will be NO.
  */
-@property (nonatomic, readonly) BOOL outputObscuredDueToInsufficientExternalProtection NS_AVAILABLE_IOS(TBD);
+@property (nonatomic, readonly) BOOL outputObscuredDueToInsufficientExternalProtection NS_AVAILABLE_IOS(6_0);
 
 @end
 
 #endif // TARGET_OS_IPHONE
-
 
 /*!
 	@class			AVQueuePlayer
@@ -533,3 +651,5 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 - (void)removeAllItems;
 
 @end
+
+

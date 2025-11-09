@@ -11,37 +11,37 @@ typedef struct CGImage *CGImageRef;
 #include <CoreGraphics/CGDataProvider.h>
 #include <CoreGraphics/CGGeometry.h>
 
-enum CGImageAlphaInfo {
-    kCGImageAlphaNone,               /* For example, RGB. */
-    kCGImageAlphaPremultipliedLast,  /* For example, premultiplied RGBA */
-    kCGImageAlphaPremultipliedFirst, /* For example, premultiplied ARGB */
-    kCGImageAlphaLast,               /* For example, non-premultiplied RGBA */
-    kCGImageAlphaFirst,              /* For example, non-premultiplied ARGB */
-    kCGImageAlphaNoneSkipLast,       /* For example, RBGX. */
-    kCGImageAlphaNoneSkipFirst,      /* For example, XRGB. */
-    kCGImageAlphaOnly                /* No color data, alpha data only */
-};
-typedef enum CGImageAlphaInfo CGImageAlphaInfo;
+CF_IMPLICIT_BRIDGING_ENABLED
 
-enum {
-    kCGBitmapAlphaInfoMask = 0x1F,
-    kCGBitmapFloatComponents = (1 << 8),
-    
-    kCGBitmapByteOrderMask = 0x7000,
-    kCGBitmapByteOrderDefault = (0 << 12),
-    kCGBitmapByteOrder16Little = (1 << 12),
-    kCGBitmapByteOrder32Little = (2 << 12),
-    kCGBitmapByteOrder16Big = (3 << 12),
-    kCGBitmapByteOrder32Big = (4 << 12)
+typedef CF_ENUM(uint32_t, CGImageAlphaInfo) {
+  kCGImageAlphaNone,               /* For example, RGB. */
+  kCGImageAlphaPremultipliedLast,  /* For example, premultiplied RGBA */
+  kCGImageAlphaPremultipliedFirst, /* For example, premultiplied ARGB */
+  kCGImageAlphaLast,               /* For example, non-premultiplied RGBA */
+  kCGImageAlphaFirst,              /* For example, non-premultiplied ARGB */
+  kCGImageAlphaNoneSkipLast,       /* For example, RBGX. */
+  kCGImageAlphaNoneSkipFirst,      /* For example, XRGB. */
+  kCGImageAlphaOnly                /* No color data, alpha data only */
 };
-typedef uint32_t CGBitmapInfo; /* Available in MAC OS X 10.4 & later. */
+
+typedef CF_OPTIONS(uint32_t, CGBitmapInfo) {
+  kCGBitmapAlphaInfoMask = 0x1F,
+  kCGBitmapFloatComponents = (1 << 8),
+    
+  kCGBitmapByteOrderMask = 0x7000,
+  kCGBitmapByteOrderDefault = (0 << 12),
+  kCGBitmapByteOrder16Little = (1 << 12),
+  kCGBitmapByteOrder32Little = (2 << 12),
+  kCGBitmapByteOrder16Big = (3 << 12),
+  kCGBitmapByteOrder32Big = (4 << 12)
+} CF_ENUM_AVAILABLE(10_4, 2_0);
 
 #ifdef __BIG_ENDIAN__
-#define kCGBitmapByteOrder16Host kCGBitmapByteOrder16Big
-#define kCGBitmapByteOrder32Host kCGBitmapByteOrder32Big
+# define kCGBitmapByteOrder16Host kCGBitmapByteOrder16Big
+# define kCGBitmapByteOrder32Host kCGBitmapByteOrder32Big
 #else    /* Little endian. */
-#define kCGBitmapByteOrder16Host kCGBitmapByteOrder16Little
-#define kCGBitmapByteOrder32Host kCGBitmapByteOrder32Little
+# define kCGBitmapByteOrder16Host kCGBitmapByteOrder16Little
+# define kCGBitmapByteOrder32Host kCGBitmapByteOrder32Little
 #endif
 
 /* Return the CFTypeID for CGImageRefs. */
@@ -241,5 +241,7 @@ CG_EXTERN CGColorRenderingIntent CGImageGetRenderingIntent(CGImageRef image)
 
 CG_EXTERN CGBitmapInfo CGImageGetBitmapInfo(CGImageRef image)
     CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif	/* CGIMAGE_H_ */

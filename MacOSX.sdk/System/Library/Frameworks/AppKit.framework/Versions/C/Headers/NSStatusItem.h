@@ -1,12 +1,11 @@
 /*
         NSStatusItem.h
         Application Kit
-        Copyright (c) 1997-2012, Apple Inc.  All rights reserved.
+        Copyright (c) 1997-2013, Apple Inc.  All rights reserved.
         All rights reserved.
 */
 
-#import <Foundation/NSObject.h>
-#import <Foundation/NSGeometry.h>
+#import <Foundation/Foundation.h>
 
 @class NSAttributedString;
 @class NSImage;
@@ -32,12 +31,14 @@
 	unsigned int hidden:1;
 	unsigned int backgroundStyle:4;
 	unsigned int inAdjustLength:1;
-	unsigned int reserved:23;
+        unsigned int pendingReplicantDisplay:1;
+        unsigned int disableImageReplicationCount:4;
+	unsigned int reserved:18;
     }	 _fFlags;
     id		 _statusItemMenu;
-    id		 _fReserved2;
-    id		 _fReserved3;
-    id		 _fReserved4;
+    NSMutableDictionary *_replicants;
+    NSData *_subitemOffsets;
+    NSString *_displayIdentifier;
 }
 
 - (NSStatusBar* )statusBar;

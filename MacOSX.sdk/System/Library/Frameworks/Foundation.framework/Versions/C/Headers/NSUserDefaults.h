@@ -1,5 +1,5 @@
 /*	NSUserDefaults.h
-	Copyright (c) 1994-2012, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2013, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -20,7 +20,8 @@ FOUNDATION_EXPORT NSString * const NSRegistrationDomain;
 + (void)resetStandardUserDefaults;
 
 - (id)init;
-- (id)initWithUser:(NSString *)username;
+- (id)initWithSuiteName:(NSString *)suitename NS_AVAILABLE(10_9, 7_0);
+- (id)initWithUser:(NSString *)username NS_DEPRECATED(10_0, 10_9, 2_0, 7_0);
 
 - (id)objectForKey:(NSString *)defaultName;
 - (void)setObject:(id)value forKey:(NSString *)defaultName;
@@ -55,7 +56,7 @@ FOUNDATION_EXPORT NSString * const NSRegistrationDomain;
 - (void)setVolatileDomain:(NSDictionary *)domain forName:(NSString *)domainName;
 - (void)removeVolatileDomainForName:(NSString *)domainName;
 
-- (NSArray *)persistentDomainNames;
+- (NSArray *)persistentDomainNames NS_DEPRECATED(10_0, 10_9, 2_0, 7_0);
 - (NSDictionary *)persistentDomainForName:(NSString *)domainName;
 - (void)setPersistentDomain:(NSDictionary *)domain forName:(NSString *)domainName;
 - (void)removePersistentDomainForName:(NSString *)domainName;

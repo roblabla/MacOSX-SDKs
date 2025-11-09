@@ -3,8 +3,6 @@
  
      Contains:   Window Manager Interfaces
  
-     Version:    HIToolbox-626.1~1
- 
      Copyright:  © 1997-2008 by Apple Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
@@ -19,10 +17,6 @@
 
 #ifndef __CORESERVICES_R__
 #include <CoreServices/CoreServices.r>
-#endif
-
-#ifndef __COLLECTIONS_R__
-#include <CarbonCore/Collections.r>
 #endif
 
 #define kAlertWindowClass 				1

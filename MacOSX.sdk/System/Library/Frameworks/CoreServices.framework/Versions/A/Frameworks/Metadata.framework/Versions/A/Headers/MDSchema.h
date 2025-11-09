@@ -18,6 +18,7 @@
 #include <CoreFoundation/CFDictionary.h>
 #include <Metadata/MDItem.h>
 
+CF_IMPLICIT_BRIDGING_ENABLED
 MD_BEGIN_C_DECLS
 
 /*!
@@ -90,7 +91,7 @@ MD_EXPORT const CFStringRef  kMDAttributeType MD_AVAIL;           /* Value == ty
 MD_EXPORT const CFStringRef  kMDAttributeMultiValued MD_AVAIL;    /* Value == if multivalued (CFBooleanRef) */
 
 MD_END_C_DECLS
-
+CF_IMPLICIT_BRIDGING_DISABLED
 #endif /* MAC_OS_X_VERSION_MAX_ALLOWED */
 #endif /* __MDSCHEMA__ */
 

@@ -1,5 +1,24 @@
 /*******************************************************************************
- * Copyright:  (c) 2007-2012 by Apple, Inc., All Rights Reserved.
+ * Copyright (c) 2008 - 2012 The Khronos Group Inc.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a
+ * copy of this software and/or associated documentation files (the
+ * "Materials"), to deal in the Materials without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish,
+ * distribute, sublicense, and/or sell copies of the Materials, and to
+ * permit persons to whom the Materials are furnished to do so, subject to
+ * the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Materials.
+ *
+ * THE MATERIALS ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+ * CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+ * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+ * MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
  ******************************************************************************/
 
 #ifndef __OPENCL_CL_GL_EXT_H
@@ -41,7 +60,7 @@ extern "C" {
  * NOTE:  Make sure that appropriate cl_gl.h header file is included separately
  */
 #define CL_CONTEXT_PROPERTY_USE_CGL_SHAREGROUP_APPLE        0x10000000 /* Introduced in Mac OS X 10.6 */
-
+  
 /* Apple extension for retrieving OpenGL context information for a CL context 
  * created via the above method.
  *
@@ -99,6 +118,30 @@ cl_mem clCreateImageFromIOSurface2DAPPLE(cl_context /* context */,
 										 IOSurfaceRef /* iosurface */,
 										 cl_int * /* errcode_ret */) CL_EXT_SUFFIX__VERSION_1_1;
 
+typedef intptr_t cl_iosurface_properties_APPLE;
+  
+/* Specifies the IOSurfaceRef used to create the cl_mem image object. */
+#define CL_IOSURFACE_REF_APPLE                              0x10000019 /* Introduced in Mac OS X 10.9 */
+
+/* Specifies the plane of the IOSurface that the cl_mem should be bound. Default 0 */
+#define CL_IOSURFACE_PLANE_APPLE                            0x1000001a /* Introduced in Mac OS X 10.9 */
+  
+/*
+ * Create a 2D CL image from an IOSurface given a format, optional description, and property list. If
+ * the image_desc argument is NULL, the width and height of the IOSurfaceRef will be used.
+ */
+cl_mem clCreateImageFromIOSurfaceWithPropertiesAPPLE(cl_context /* context */,
+                      cl_mem_flags                    /* flags */,
+                      const cl_image_format *         /* image_format */,
+                      const cl_image_desc *           /* image_desc */,
+                      cl_iosurface_properties_APPLE * /* properties */,
+                      cl_int *                        /* errcode_ret */) CL_EXT_SUFFIX__VERSION_1_2;
+
+/* Query parameter name for clGetImageInfo that returns the IOSurface backing the image (IOSurfaceRef) */
+#define CL_IMAGE_IOSURFACE_APPLE                            0x1000001b /* Introduced in Mac OS X 10.9 */
+  
+/* Query parameter name for clGetImageInfo that returns the plane of the IOSurface backing the image (cl_uint) */
+#define CL_IMAGE_IOSURFACE_PLANE_APPLE                      0x1000001c /* Introduced in Mac OS X 10.9 */
 
 #ifdef __cplusplus
 }

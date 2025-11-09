@@ -26,7 +26,7 @@ typedef function_table_entry   *function_table_t;
 #endif /* AUTOTEST */
 
 #ifndef	task_MSG_COUNT
-#define	task_MSG_COUNT	35
+#define	task_MSG_COUNT	39
 #endif	/* task_MSG_COUNT */
 
 #include <mach/std_types.h>
@@ -524,6 +524,54 @@ kern_return_t task_set_state
 	mach_msg_type_number_t new_stateCnt
 );
 
+/* Routine task_set_phys_footprint_limit */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+kern_return_t task_set_phys_footprint_limit
+(
+	task_t task,
+	int new_limit,
+	int *old_limit
+);
+
+/* Routine task_suspend2 */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+kern_return_t task_suspend2
+(
+	task_t target_task,
+	task_suspension_token_t *suspend_token
+);
+
+/* Routine task_resume2 */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+kern_return_t task_resume2
+(
+	task_suspension_token_t suspend_token
+);
+
+/* Routine task_purgable_info */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+kern_return_t task_purgable_info
+(
+	task_t task,
+	task_purgable_info_t *stats
+);
+
 __END_DECLS
 
 /********************** Caution **************************/
@@ -626,7 +674,7 @@ __END_DECLS
 		NDR_record_t NDR;
 		task_flavor_t flavor;
 		mach_msg_type_number_t task_info_inCnt;
-		integer_t task_info_in[32];
+		integer_t task_info_in[52];
 	} __Request__task_set_info_t;
 #ifdef  __MigPackStructs
 #pragma pack()
@@ -1012,6 +1060,48 @@ __END_DECLS
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		int new_limit;
+	} __Request__task_set_phys_footprint_limit_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__task_suspend2_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__task_resume2_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__task_purgable_info_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Request__task_subsystem__defined */
 
 /* union of all requests */
@@ -1054,6 +1144,10 @@ union __RequestUnion__task_subsystem {
 	__Request__task_set_policy_t Request_task_set_policy;
 	__Request__task_get_state_t Request_task_get_state;
 	__Request__task_set_state_t Request_task_set_state;
+	__Request__task_set_phys_footprint_limit_t Request_task_set_phys_footprint_limit;
+	__Request__task_suspend2_t Request_task_suspend2;
+	__Request__task_resume2_t Request_task_resume2;
+	__Request__task_purgable_info_t Request_task_purgable_info;
 };
 #endif /* !__RequestUnion__task_subsystem__defined */
 /* typedefs for all replies */
@@ -1139,7 +1233,7 @@ union __RequestUnion__task_subsystem {
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 		mach_msg_type_number_t task_info_outCnt;
-		integer_t task_info_out[32];
+		integer_t task_info_out[52];
 	} __Reply__task_info_t;
 #ifdef  __MigPackStructs
 #pragma pack()
@@ -1534,6 +1628,58 @@ union __RequestUnion__task_subsystem {
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		int old_limit;
+	} __Reply__task_set_phys_footprint_limit_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t suspend_token;
+		/* end of the kernel processed data */
+	} __Reply__task_suspend2_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__task_resume2_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		task_purgable_info_t stats;
+	} __Reply__task_purgable_info_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Reply__task_subsystem__defined */
 
 /* union of all replies */
@@ -1576,6 +1722,10 @@ union __ReplyUnion__task_subsystem {
 	__Reply__task_set_policy_t Reply_task_set_policy;
 	__Reply__task_get_state_t Reply_task_get_state;
 	__Reply__task_set_state_t Reply_task_set_state;
+	__Reply__task_set_phys_footprint_limit_t Reply_task_set_phys_footprint_limit;
+	__Reply__task_suspend2_t Reply_task_suspend2;
+	__Reply__task_resume2_t Reply_task_resume2;
+	__Reply__task_purgable_info_t Reply_task_purgable_info;
 };
 #endif /* !__RequestUnion__task_subsystem__defined */
 
@@ -1615,7 +1765,11 @@ union __ReplyUnion__task_subsystem {
     { "task_get_assignment", 3431 },\
     { "task_set_policy", 3432 },\
     { "task_get_state", 3433 },\
-    { "task_set_state", 3434 }
+    { "task_set_state", 3434 },\
+    { "task_set_phys_footprint_limit", 3435 },\
+    { "task_suspend2", 3436 },\
+    { "task_resume2", 3437 },\
+    { "task_purgable_info", 3438 }
 #endif
 
 #ifdef __AfterMigUserHeader

@@ -1,6 +1,6 @@
 /* CoreAnimation - CAShapeLayer.h
 
-   Copyright (c) 2008 Apple Inc.
+   Copyright (c) 2008-2012 Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CALayer.h>

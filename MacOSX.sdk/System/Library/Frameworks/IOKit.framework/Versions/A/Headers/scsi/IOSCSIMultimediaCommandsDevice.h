@@ -211,16 +211,6 @@ class IOSCSIMultimediaCommandsDevice : public IOSCSIPrimaryCommandsDevice
 	OSDeclareAbstractStructors ( IOSCSIMultimediaCommandsDevice )
 	
 private:
-
-#if ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED )
-
-    SCSIMultimediaCommands *	fSCSIMultimediaCommandObject;
-    SCSIMultimediaCommands *	GetSCSIMultimediaCommandObject ( void );
-	
-    SCSIBlockCommands *			fSCSIBlockCommandObject;			/* OBSOLETE */
-    SCSIBlockCommands *			GetSCSIBlockCommandObject ( void );	/* OBSOLETE */
-
-#endif	/* ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED ) */
 	
 	static void		AsyncReadWriteComplete ( SCSITaskIdentifier completedTask );
 	
@@ -235,6 +225,7 @@ protected:
 		bool				fDeviceSupportsAsyncNotification;
 		bool				fDeviceSupportsFastSpindown;
 		UInt8				fCDLoadingMechanism;
+        bool                fDoNotLockMedia;
 	};
     IOSCSIMultimediaCommandsDeviceExpansionData * fIOSCSIMultimediaCommandsDeviceReserved;
 	
@@ -244,15 +235,7 @@ protected:
 	#define fDeviceSupportsAsyncNotification	fIOSCSIMultimediaCommandsDeviceReserved->fDeviceSupportsAsyncNotification
 	#define fDeviceSupportsFastSpindown			fIOSCSIMultimediaCommandsDeviceReserved->fDeviceSupportsFastSpindown
 	#define fCDLoadingMechanism					fIOSCSIMultimediaCommandsDeviceReserved->fCDLoadingMechanism
-	
-#if ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED )
-	
-	// This method will retreive the SCSI Primary Command Set object for
-	// the class.  For subclasses, this will be overridden using a
-	// dynamic cast on the subclasses base command set object.
-	virtual SCSIPrimaryCommands *	GetSCSIPrimaryCommandObject ( void );
-	
-#endif	/* ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED ) */
+    #define fDoNotLockMedia                     fIOSCSIMultimediaCommandsDeviceReserved->fDoNotLockMedia
 	
 	CDFeatures						fSupportedCDFeatures;
 	DVDFeatures						fSupportedDVDFeatures;
@@ -383,13 +366,6 @@ protected:
 	virtual void		TerminateDeviceSupport ( void );
 	
 	virtual void		free ( void );
-	
-#if ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED )
-
-	virtual bool 		CreateCommandSetObjects ( void );
-	virtual void 		FreeCommandSetObjects ( void );
-
-#endif	/* ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED ) */
 
 	virtual IOReturn	VerifyDeviceState ( void );
 
@@ -449,24 +425,6 @@ public:
 	virtual IOReturn	ReadMCN ( CDMCN mcn);
 	
 	virtual IOReturn	ReadTOC ( IOMemoryDescriptor * buffer );
-
-#if ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED )
-	
-	virtual IOReturn	AudioPause ( bool pause );
-	
-	virtual IOReturn	AudioPlay ( CDMSF timeStart, CDMSF timeStop );
-	
-	virtual IOReturn	AudioScan ( CDMSF timeStart, bool reverse );
-	
-	virtual IOReturn	AudioStop ( void );
-	
-	virtual IOReturn	GetAudioStatus ( CDAudioStatus * status );
-	
-	virtual IOReturn	GetAudioVolume ( UInt8 * leftVolume, UInt8 * rightVolume );
-	
-	virtual IOReturn	SetAudioVolume ( UInt8 leftVolume, UInt8 rightVolume );
-
-#endif	/* ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED ) */
 	
 	/* DVD Specific */
 	virtual UInt32			GetMediaType		( void );
@@ -501,40 +459,6 @@ public:
 						SCSICmdField3Bit 			SUBCHANNEL_SELECTION_BITS );
 	
 	SCSICmdField4Byte ConvertMSFToLBA ( SCSICmdField3Byte MSF );
-
-#if ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED )
-
-	// Command methods to access all commands available to MMC based devices.
-	// The BLANK command as defined in section 6.1.1
-	virtual bool BLANK (
-						SCSITaskIdentifier			request,
-		    			SCSICmdField1Bit 			IMMED, 
-						SCSICmdField3Bit 			BLANKING_TYPE, 
-						SCSICmdField4Byte 			START_ADDRESS_TRACK_NUMBER, 
-						SCSICmdField1Byte 			CONTROL );
-
-	// The CLOSE TRACK/SESSION command as defined in section 6.1.2
-    virtual bool CLOSE_TRACK_SESSION (
-						SCSITaskIdentifier			request,
-						SCSICmdField1Bit 			IMMED, 
-						SCSICmdField1Bit 			SESSION, 
-						SCSICmdField1Bit 			TRACK, 
-						SCSICmdField2Byte 			TRACK_NUMBER, 
-						SCSICmdField1Byte 			CONTROL );
-
-	// The FORMAT UNIT command as defined in section 6.1.3
-    virtual bool FORMAT_UNIT (
-						SCSITaskIdentifier			request,
-		    			IOMemoryDescriptor *		dataBuffer,
-		    			IOByteCount					parameterListSize,
-						SCSICmdField1Bit 			FMT_DATA, 
-						SCSICmdField1Bit 			CMP_LIST, 
-						SCSICmdField3Bit 			FORMAT_CODE, 
-						SCSICmdField2Byte 			INTERLEAVE_VALUE, 
-						SCSICmdField1Byte 			CONTROL );
-
-#endif	/* ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED ) */
-	
 	
 	// The GET CONFIGURATION command as defined in section 6.1.4
     virtual bool GET_CONFIGURATION (
@@ -580,55 +504,6 @@ public:
 	   					IOMemoryDescriptor *		dataBuffer,
 						SCSICmdField2Byte 			ALLOCATION_LENGTH, 
 						SCSICmdField1Byte 			CONTROL );
-
-#if ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED )
-
-	// The PAUSE/RESUME command as defined in section 6.1.9
-    virtual bool PAUSE_RESUME (
-						SCSITaskIdentifier			request,
-						SCSICmdField1Bit 			RESUME, 
-						SCSICmdField1Byte 			CONTROL );
-
-	// The PLAY AUDIO (10) command as defined in section 6.1.10
-    virtual bool PLAY_AUDIO_10 (
-						SCSITaskIdentifier			request,
-						SCSICmdField1Bit 			RELADR, 
-						SCSICmdField4Byte 			STARTING_LOGICAL_BLOCK_ADDRESS, 
-						SCSICmdField2Byte 			PLAY_LENGTH, 
-						SCSICmdField1Byte 			CONTROL );
-
-	// The PLAY AUDIO (12) command as defined in section 6.1.11
-    virtual bool PLAY_AUDIO_12 (
-						SCSITaskIdentifier			request,
-						SCSICmdField1Bit 			RELADR, 
-						SCSICmdField4Byte 			STARTING_LOGICAL_BLOCK_ADDRESS, 
-						SCSICmdField4Byte 			PLAY_LENGTH, 
-						SCSICmdField1Byte 			CONTROL );
-
-	// The PLAY AUDIO MSF command as defined in section 6.1.12
-    virtual bool PLAY_AUDIO_MSF (
-						SCSITaskIdentifier			request,
-						SCSICmdField3Byte 			STARTING_MSF, 
-						SCSICmdField3Byte 			ENDING_MSF, 
-						SCSICmdField1Byte 			CONTROL );
-	
-	/*********************** LEGACY COMMAND SUPPORT ***********************/
-	// The PLAY CD command as defined in section 6.1.13
-    virtual bool PLAY_CD (
-						SCSITaskIdentifier			request,
-						SCSICmdField3Bit 			EXPECTED_SECTOR_TYPE,
-						SCSICmdField1Bit 			CMSF,
-						SCSICmdField4Byte 			STARTING_LOGICAL_BLOCK_ADDRESS, 
-						SCSICmdField4Byte 			PLAY_LENGTH_IN_BLOCKS, 
-						SCSICmdField1Bit 			SPEED,
-						SCSICmdField1Bit 			PORT2,
-						SCSICmdField1Bit 			PORT1,
-						SCSICmdField1Bit 			COMPOSITE,
-						SCSICmdField1Bit 			AUDIO,
-						SCSICmdField1Byte 			CONTROL );
-	/*********************** END LEGACY COMMAND SUPPORT *******************/
-
-#endif	/* ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED ) */
 	
 	virtual bool READ_10 (
 						SCSITaskIdentifier			request,
@@ -640,19 +515,6 @@ public:
 						SCSICmdField4Byte 			LOGICAL_BLOCK_ADDRESS, 
 						SCSICmdField2Byte 			TRANSFER_LENGTH, 
 						SCSICmdField1Byte 			CONTROL );
-	
-#if ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED )
-	
-	/*********************** LEGACY COMMAND SUPPORT ***********************/
-	// The READ BUFFER CAPACITY command as defined in section 6.1.14
-    virtual bool READ_BUFFER_CAPACITY (
-						SCSITaskIdentifier			request,
-    					IOMemoryDescriptor *		dataBuffer,
-						SCSICmdField2Byte 			ALLOCATION_LENGTH, 
-						SCSICmdField1Byte 			CONTROL );
-	/*********************** END LEGACY COMMAND SUPPORT *******************/
-	
-#endif	/* ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED ) */
 	
 	// The READ CD command as defined in section 6.1.15
     virtual bool READ_CD (
@@ -718,31 +580,6 @@ public:
 						IOMemoryDescriptor *		dataBuffer,
 						SCSICmdField2Byte 			ALLOCATION_LENGTH, 
 						SCSICmdField1Byte 			CONTROL );
-
-#if ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED )
-	
-	/*********************** LEGACY COMMAND SUPPORT ***********************/
-	// The READ HEADER command as defined in section 6.1.21
-    virtual bool READ_HEADER (
-						SCSITaskIdentifier			request,
-    					IOMemoryDescriptor *		dataBuffer,
-						SCSICmdField1Bit 			MSF,
-						SCSICmdField4Byte 			LOGICAL_BLOCK_ADDRESS,
-						SCSICmdField2Byte 			ALLOCATION_LENGTH, 
-						SCSICmdField1Byte 			CONTROL );
-	/*********************** END LEGACY COMMAND SUPPORT ***********************/
-
-	/*********************** LEGACY COMMAND SUPPORT ***********************/
-	// The READ MASTER CUE command as defined in section 6.1.22
-    virtual bool READ_MASTER_CUE (
-						SCSITaskIdentifier			request,
-   						IOMemoryDescriptor *		dataBuffer,
-						SCSICmdField1Byte 			SHEET_NUMBER, 
-						SCSICmdField3Byte 			ALLOCATION_LENGTH, 
-						SCSICmdField1Byte 			CONTROL );
-	/*********************** END LEGACY COMMAND SUPPORT ***********************/
-
-#endif	/* ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED ) */
 	
 	// The READ SUB-CHANNEL command as defined in section 6.1.23
     virtual bool READ_SUB_CHANNEL (
@@ -774,81 +611,6 @@ public:
 						SCSICmdField2Byte 			ALLOCATION_LENGTH, 
 						SCSICmdField1Byte 			CONTROL );
 
-#if ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED )
-	/*********************** LEGACY COMMAND SUPPORT ***********************/
-	// The REPAIR TRACK command as defined in section 6.1.27
-    virtual bool REPAIR_TRACK (
-						SCSITaskIdentifier			request,
-						SCSICmdField2Byte 			TRACK_NUMBER, 
-						SCSICmdField1Byte 			CONTROL );
-	/*********************** END LEGACY COMMAND SUPPORT ***********************/
-	
-	// The REPORT KEY command as defined in section 6.1.28
-    virtual bool REPORT_KEY (
-						SCSITaskIdentifier			request,
-						IOMemoryDescriptor *		dataBuffer,
-						SCSICmdField4Byte			LOGICAL_BLOCK_ADDRESS,
-						SCSICmdField2Byte 			ALLOCATION_LENGTH, 
-						SCSICmdField2Bit 			AGID,
-						SCSICmdField6Bit 			KEY_FORMAT,
-						SCSICmdField1Byte 			CONTROL );
-	
-	// The RESERVE TRACK command as defined in section 6.1.29
-    virtual bool RESERVE_TRACK (
-						SCSITaskIdentifier			request,
-						SCSICmdField4Byte			RESERVATION_SIZE,
-						SCSICmdField1Byte 			CONTROL );
-	
-	// The SCAN command as defined in section 6.1.30
-    virtual bool SCAN (
-						SCSITaskIdentifier			request,
-						SCSICmdField1Bit 			DIRECT,
-						SCSICmdField1Bit 			RELADR,
-						SCSICmdField4Byte			SCAN_STARTING_ADDRESS_FIELD,
-						SCSICmdField2Bit 			TYPE,
-						SCSICmdField1Byte 			CONTROL );
-
-	// The SEND CUE SHEET command as defined in section 6.1.31
-    virtual bool SEND_CUE_SHEET (
-						SCSITaskIdentifier			request,
-	    				IOMemoryDescriptor *		dataBuffer,
-						SCSICmdField3Byte			CUE_SHEET_SIZE,
-						SCSICmdField1Byte 			CONTROL );
-
-	// The SEND DVD STRUCTURE command as defined in section 6.1.32
-    virtual bool SEND_DVD_STRUCTURE (
-						SCSITaskIdentifier			request,
-	   	 				IOMemoryDescriptor *		dataBuffer,
-						SCSICmdField1Byte			FORMAT,
-						SCSICmdField2Byte 			STRUCTURE_DATA_LENGTH, 
-						SCSICmdField1Byte 			CONTROL );
-
-	// The SEND EVENT command as defined in section 6.1.33
-    virtual bool SEND_EVENT (
-						SCSITaskIdentifier			request,
-	   		 			IOMemoryDescriptor *		dataBuffer,
-						SCSICmdField1Bit 			IMMED, 
-						SCSICmdField2Byte 			PARAMETER_LIST_LENGTH, 
-						SCSICmdField1Byte 			CONTROL );
-	
-	// The SEND KEY command as defined in section 6.1.34
-    virtual bool SEND_KEY (
-						SCSITaskIdentifier			request,
-						IOMemoryDescriptor *		dataBuffer,
-						SCSICmdField2Byte 			PARAMETER_LIST_LENGTH, 
-						SCSICmdField2Bit 			AGID,
-						SCSICmdField6Bit 			KEY_FORMAT,
-						SCSICmdField1Byte 			CONTROL );
-
-	// The SEND OPC INFORMATION command as defined in section 6.1.35
-    virtual bool SEND_OPC_INFORMATION (
-						SCSITaskIdentifier			request,
-	    				IOMemoryDescriptor *		dataBuffer,
-						SCSICmdField1Bit 			DO_OPC, 
-						SCSICmdField2Byte 			PARAMETER_LIST_LENGTH, 
-						SCSICmdField1Byte 			CONTROL );
-#endif	/* ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED ) */
-
 	/*********************** LEGACY COMMAND SUPPORT ***********************/
 	// The SET CD SPEED command as defined in section 6.1.36
     virtual bool SET_CD_SPEED (
@@ -879,15 +641,6 @@ public:
 						SCSICmdField1Bit 			LOEJ, 
 						SCSICmdField1Bit 			START, 
 						SCSICmdField1Byte 			CONTROL );
-
-#if ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED )
-	
-	// The STOP PLAY/SCAN command as defined in section 6.1.39
-    virtual bool STOP_PLAY_SCAN (
-						SCSITaskIdentifier			request,
-						SCSICmdField1Byte 			CONTROL );
-
-#endif	/* ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED ) */
 
 	// The SYNCHRONIZE CACHE command as defined in section 6.1.40
     virtual bool SYNCHRONIZE_CACHE (

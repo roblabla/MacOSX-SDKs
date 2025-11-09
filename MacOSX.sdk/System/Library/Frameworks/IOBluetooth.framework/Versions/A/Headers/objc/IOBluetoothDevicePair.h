@@ -4,6 +4,7 @@
 */
 
 #import <IOKit/IOReturn.h>
+#import <IOBluetooth/Bluetooth.h>
 
 //===========================================================================================================================
 //	Forwards
@@ -26,9 +27,8 @@
 				you are attempting to pair. This is inconsequential to your code, however, as it occurs automatically and
 				does not change the messaging.
 				
-				Once started, the pairing cannot be stopped or cancelled. You can set the delegate to nil to stop receiving
-				messages, but the process will continue behind the scenes until success or failure occurs. This is due to the
-				complex interaction between the all the Bluetooth software components and your code.
+				Once started, the pairing can be stopped. This will set the delegate to nil and then attempt to disconnect
+ 				from the device if already connected.
 */
 
 //===========================================================================================================================
@@ -66,6 +66,13 @@
 */
 
 - (IOReturn)start;
+
+/*!
+ @method		stop
+ @abstract		Stops the current pairing. Removes the delegate and disconnects if device was connected.
+ */
+
+- (void)stop;
 
 /*!
     @method		device
@@ -108,7 +115,7 @@
 //	Delegate methods
 //===========================================================================================================================
 
-@protocol IOBluetoothDevicePairDelegate
+@protocol IOBluetoothDevicePairDelegate <NSObject>
 @optional
 
 /*!
@@ -174,5 +181,16 @@
 */
 
 - (void) devicePairingFinished:(id)sender error:(IOReturn)error;
+
+/*!
+ @method		deviceSimplePairingComplete:status:
+ @abstract	Indicates to the delegate that the pairing object has fully completed the simple pairing process. Can tell the delegate
+ when and error occurred during the attempt to pair with the device.
+ @discussion	The status passed to your delegate could be BluetoothHCIEventStatus, etc. See Bluetooth.h for all the possibilities.
+ @param		sender		The IOBluetoothDevicePair object.
+ @param		status		A simple pairing complete error code.
+ */
+
+- (void) deviceSimplePairingComplete:(id)sender status:(BluetoothHCIEventStatus)status;
 
 @end

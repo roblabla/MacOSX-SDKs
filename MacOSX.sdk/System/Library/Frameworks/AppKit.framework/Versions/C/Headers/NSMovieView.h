@@ -1,6 +1,6 @@
 /*
         NSMovieView.h
-        Copyright (c) 1998-2012, Apple Inc. All rights reserved.
+        Copyright (c) 1998-2013, Apple Inc. All rights reserved.
 */
 
 // Please note that NSMovie and NSMovieView are deprecated. NSMovieView does not exist in 64-bit.

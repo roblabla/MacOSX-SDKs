@@ -1,7 +1,7 @@
 /*
     NSBox.h
     Application Kit
-    Copyright (c) 1994-2012, Apple Inc.
+    Copyright (c) 1994-2013, Apple Inc.
     All rights reserved.
 */
 
@@ -33,7 +33,7 @@ typedef NSUInteger NSBoxType;
 
 @interface NSBox : NSView
 {
-    /*All instance variables are private*/
+    /* All instance variables are private */
     id                  _titleCell;
     id                  _contentView;
     NSSize              _offsets;
@@ -71,36 +71,44 @@ typedef NSUInteger NSBoxType;
 - (NSSize)contentViewMargins;
 - (void)setContentViewMargins:(NSSize)offsetSize;
 - (void)setFrameFromContentFrame:(NSRect)contentFrame;
+
+/* Get and set the content view for the box. Note that subviews added to the NSBox will be really added as subviews of the contentView.
+ */
 - (id)contentView;
 - (void)setContentView:(NSView *)aView;
 
-// Transparent boxes do not draw anything.  Subview drawing is unaffected.  The 'transparent' property corresponds to the binding 'NSTransparentBinding'.
+/* Transparent boxes do not draw anything.  Subview drawing is unaffected.  The 'transparent' property corresponds to the binding 'NSTransparentBinding'.
+ */
 - (BOOL)isTransparent NS_AVAILABLE_MAC(10_5);
 - (void)setTransparent:(BOOL)flag NS_AVAILABLE_MAC(10_5);
 
-@end
-
-@interface NSBox (NSCustomBoxTypeProperties)
-/* These properties only apply to boxes with boxType NSBoxCustom.
+/* For boxType == NSBoxCustom: Get and set the border width of the box. The default value is 1.0.
  */
-
 - (CGFloat)borderWidth NS_AVAILABLE_MAC(10_5);
-- (void)setBorderWidth:(CGFloat)borderWidth NS_AVAILABLE_MAC(10_5);	 // Only meaningful for boxes configured with NSBoxCustom
+- (void)setBorderWidth:(CGFloat)borderWidth NS_AVAILABLE_MAC(10_5);
 
+/* For boxType == NSBoxCustom: Get and set the corner raduis of the box. The default value is 0.0 (no corner raduis).
+ */
 - (CGFloat)cornerRadius NS_AVAILABLE_MAC(10_5);
-- (void)setCornerRadius:(CGFloat)cornerRadius NS_AVAILABLE_MAC(10_5); // Only meaningful for boxes configured with NSBoxCustom
+- (void)setCornerRadius:(CGFloat)cornerRadius NS_AVAILABLE_MAC(10_5);
 
+/* For boxType == NSBoxCustom: Get and set the border color the box. The default value is black with some alpha, and may vary release-to-release.
+ */
 - (NSColor *)borderColor NS_AVAILABLE_MAC(10_5);
-- (void)setBorderColor:(NSColor *)borderColor NS_AVAILABLE_MAC(10_5); // Only meaningful for boxes configured with NSBoxCustom
+- (void)setBorderColor:(NSColor *)borderColor NS_AVAILABLE_MAC(10_5);
 
+/* For boxType == NSBoxCustom: Get and set the fill (background) color the box. The default value is NSColor.clearColor.
+ */
 - (NSColor *)fillColor NS_AVAILABLE_MAC(10_5);
-- (void)setFillColor:(NSColor *)fillColor NS_AVAILABLE_MAC(10_5); // Only meaningful for boxes configured with NSBoxCustom
+- (void)setFillColor:(NSColor *)fillColor NS_AVAILABLE_MAC(10_5);
 
 @end
 
-@interface NSBox(NSKeyboardUI)
+@interface NSBox(NSDeprecated)
+
 /* Mnemonics are deprecated in 10.8. Historically they have not done anything. For compatability, this method still calls setTitle: with the ampersand stripped from it.
  */
 - (void)setTitleWithMnemonic:(NSString *)stringWithAmpersand NS_DEPRECATED_MAC(10_0, 10_8);
+
 @end
 

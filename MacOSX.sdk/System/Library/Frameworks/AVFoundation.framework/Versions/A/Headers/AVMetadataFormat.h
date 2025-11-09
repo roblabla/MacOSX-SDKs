@@ -3,7 +3,7 @@
 
     Framework:  AVFoundation
  
-    Copyright 2010-2012 Apple Inc. All rights reserved.
+    Copyright 2010-2013 Apple Inc. All rights reserved.
 
 */
 
@@ -82,6 +82,11 @@ AVF_EXPORT NSString *const AVMetadataQuickTimeUserDataKeyCredits                
 AVF_EXPORT NSString *const AVMetadataQuickTimeUserDataKeyPhonogramRights                 NS_AVAILABLE(10_7, 4_0);
 AVF_EXPORT NSString *const AVMetadataQuickTimeUserDataKeyTaggedCharacteristic            NS_AVAILABLE(10_8, 5_0);
 
+// ISO UserData
+AVF_EXPORT NSString *const AVMetadataFormatISOUserData									 NS_AVAILABLE(10_9, 7_0);
+AVF_EXPORT NSString *const AVMetadataKeySpaceISOUserData								 NS_AVAILABLE(10_9, 7_0);
+
+// ISO UserData keys (includes 3GPP keys)
 AVF_EXPORT NSString *const AVMetadataISOUserDataKeyCopyright                             NS_AVAILABLE(10_7, 4_0);
 AVF_EXPORT NSString *const AVMetadata3GPUserDataKeyCopyright                             NS_AVAILABLE(10_7, 4_0);
 AVF_EXPORT NSString *const AVMetadata3GPUserDataKeyAuthor                                NS_AVAILABLE(10_7, 4_0);
@@ -91,6 +96,13 @@ AVF_EXPORT NSString *const AVMetadata3GPUserDataKeyRecordingYear                
 AVF_EXPORT NSString *const AVMetadata3GPUserDataKeyLocation                              NS_AVAILABLE(10_7, 4_0);
 AVF_EXPORT NSString *const AVMetadata3GPUserDataKeyTitle                                 NS_AVAILABLE(10_7, 4_0);
 AVF_EXPORT NSString *const AVMetadata3GPUserDataKeyDescription                           NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT NSString *const AVMetadata3GPUserDataKeyCollection                            NS_AVAILABLE(10_9, 7_0);
+AVF_EXPORT NSString *const AVMetadata3GPUserDataKeyUserRating                            NS_AVAILABLE(10_9, 7_0);
+AVF_EXPORT NSString *const AVMetadata3GPUserDataKeyThumbnail                             NS_AVAILABLE(10_9, 7_0);
+AVF_EXPORT NSString *const AVMetadata3GPUserDataKeyAlbumAndTrack                         NS_AVAILABLE(10_9, 7_0);
+AVF_EXPORT NSString *const AVMetadata3GPUserDataKeyKeywordList                          NS_AVAILABLE(10_9, 7_0);
+AVF_EXPORT NSString *const AVMetadata3GPUserDataKeyMediaClassification                   NS_AVAILABLE(10_9, 7_0);
+AVF_EXPORT NSString *const AVMetadata3GPUserDataKeyMediaRating                           NS_AVAILABLE(10_9, 7_0);
 
 // QuickTimeMetadata
 AVF_EXPORT NSString *const AVMetadataFormatQuickTimeMetadata                             NS_AVAILABLE(10_7, 4_0);

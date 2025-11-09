@@ -56,6 +56,7 @@
     @seealso 	//apple_ref/doc/uid/TP40004945 Publication Subscription Programming Guide
 */
 
+NS_DEPRECATED(10_5, 10_9, NA, NA)
 @interface PSFeedSettings : NSObject
 {
     @private

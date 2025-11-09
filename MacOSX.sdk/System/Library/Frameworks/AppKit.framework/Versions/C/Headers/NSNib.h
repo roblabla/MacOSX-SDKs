@@ -1,7 +1,7 @@
 /*
 	NSNib.h
 	Application Kit
-	Copyright (c) 2003-2012, Apple Inc.
+	Copyright (c) 2003-2013, Apple Inc.
 	All rights reserved.
 
 NSNib serves as a wrapper around a single InterfaceBuilder nib.  When an NSNib instance is created from a nib file, all of the data needed to instantiate the nib (the object graph as well as images and sounds that might be in the nib bundle) are read from the disk, however the nib is not instantiated until you call one of the instantiation methods.
@@ -48,24 +48,22 @@ As are all NSObjects, instantiated nib objects are allocated in a memory zone (N
 - (id)initWithNibData:(NSData *)nibData bundle:(NSBundle *)bundle NS_AVAILABLE_MAC(10_8);
 
 // Instantiates objects in the nib file with the specified owner.
-// Upon success, the method returns YES and the topLevelObject out-parameter
-// is optionally an array containing the top level objects of the nib file.
-// Note: Unlike legacy methods, the objects adhere to standard Cocoa memory 
-// management rules; it is necessary to keep a strong reference to the objects
-// or the array to prevent the nib contents from being deallocated. Outlets to
-// top level objects should be strong (retain) to demonstrate ownership and
-// prevent deallocation.
+// Upon success, the method returns YES and the optional out-parameter topLevelObjects is
+// populated with the top level objects of the nib. The objects adhere to the standard
+// Cocoa memory management rules and are autoreleased. IBOutlet properties to top level
+// objects should be strong (retain) to demonstrate ownership and prevent deallocation.
+// Alternatively, one may hold a strong reference to the top level objects array.
 //
 - (BOOL)instantiateWithOwner:(id)owner topLevelObjects:(NSArray **)topLevelObjects NS_AVAILABLE_MAC(10_8);
 
 @end
 
 @interface NSNib (NSDeprecated)
-- (id)initWithContentsOfURL:(NSURL *)nibFileURL; // Deprecated in Mac OS X 10.8
-- (BOOL)instantiateNibWithExternalNameTable:(NSDictionary *)externalNameTable; // Deprecated in Mac OS X 10.8
+- (id)initWithContentsOfURL:(NSURL *)nibFileURL NS_DEPRECATED_MAC(10_0, 10_8); // Deprecated in Mac OS X 10.8
+- (BOOL)instantiateNibWithExternalNameTable:(NSDictionary *)externalNameTable NS_DEPRECATED_MAC(10_0, 10_8); // Deprecated in Mac OS X 10.8
 - (BOOL)instantiateNibWithOwner:(id)owner topLevelObjects:(NSArray **)topLevelObjects NS_DEPRECATED_MAC(10_3, 10_8); // Deprecated in Mac OS X 10.8
 @end
 
 // ** External Name Table Keys **
-APPKIT_EXTERN NSString *NSNibOwner; // Deprecated in Mac OS X 10.8
-APPKIT_EXTERN NSString *NSNibTopLevelObjects; // Deprecated in Mac OS X 10.8
+APPKIT_EXTERN NSString *NSNibOwner NS_DEPRECATED_MAC(10_0, 10_8); // Deprecated in Mac OS X 10.8
+APPKIT_EXTERN NSString *NSNibTopLevelObjects NS_DEPRECATED_MAC(10_0, 10_8); // Deprecated in Mac OS X 10.8

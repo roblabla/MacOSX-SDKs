@@ -21,5 +21,4 @@
 
 
 
-
 #endif /* end of include guard: COREIMAGEDEFINES_H_JUPUTD8M */

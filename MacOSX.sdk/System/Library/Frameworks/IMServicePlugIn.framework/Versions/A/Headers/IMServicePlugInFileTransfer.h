@@ -17,18 +17,18 @@ typedef struct _IMServicePlugInFileTransferInternal IMServicePlugInFileTransferI
 
 + (id) fileTransferWithPath: (NSString *) path
                        type: (NSString *) type 
-                 totalBytes: (unsigned long long) totalBytes;
+                 totalBytes: (uint64_t) totalBytes;
  
 - (id) initWithPath: (NSString *) path
                type: (NSString *) type
-         totalBytes: (unsigned long long) totalBytes;
+         totalBytes: (uint64_t) totalBytes;
 
 @property (readonly) NSString *guid;
 
 @property (readonly) NSString *path;
 @property (readonly) NSString *type;
-@property (readonly) unsigned long long transferredBytes;
-@property (readonly) unsigned long long totalBytes;
+@property (readonly) uint64_t transferredBytes;
+@property (readonly) uint64_t totalBytes;
 
 @property (readonly) IMServicePlugInFileTransferSession *session;
 

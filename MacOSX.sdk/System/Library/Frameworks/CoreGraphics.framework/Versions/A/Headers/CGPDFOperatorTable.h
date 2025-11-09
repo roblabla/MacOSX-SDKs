@@ -9,6 +9,8 @@ typedef struct CGPDFOperatorTable *CGPDFOperatorTableRef;
 
 #include <CoreGraphics/CGPDFScanner.h>
 
+CF_IMPLICIT_BRIDGING_ENABLED
+
 typedef void (*CGPDFOperatorCallback)(CGPDFScannerRef scanner, void *info);
 
 /* Return an empty operator table. */
@@ -31,5 +33,7 @@ CG_EXTERN void CGPDFOperatorTableRelease(CGPDFOperatorTableRef table)
 CG_EXTERN void CGPDFOperatorTableSetCallback(CGPDFOperatorTableRef table,
     const char *name, CGPDFOperatorCallback callback)
     CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif	/* CGPDFOPERATORTABLE_H_ */

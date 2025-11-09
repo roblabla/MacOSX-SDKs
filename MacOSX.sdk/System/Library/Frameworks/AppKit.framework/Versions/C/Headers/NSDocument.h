@@ -1,7 +1,7 @@
 /*
 	NSDocument.h
 	Application Kit
-	Copyright (c) 1997-2012, Apple Inc.
+	Copyright (c) 1997-2013, Apple Inc.
 	All rights reserved.
 */
 
@@ -563,6 +563,7 @@ You can override this method to customize what is done during document duplicati
 */
 - (IBAction)moveDocument:(id)sender NS_AVAILABLE_MAC(10_8);
 
+#if NS_BLOCKS_AVAILABLE
 /* Present a move panel to the user, then try to save the document if the user OKs the panel. When moving is completed, regardless of success, failure, or cancellation, invoke the given block.
 
 The default implementation of this method first makes sure that any editor registered using Cocoa Binding's NSEditorRegistration informal protocol has committed its changes if necessary. Then, if [self fileURL] is non-nil, it creates and presents a move panel. If the user OKs the panel, -moveToURL:completionHandler: is invoked. If a file already exists at the location the user chooses, the user will be asked to choose between replacing that file, renaming the current document, or canceling. If [self fileURL] is nil, then this method will instead invoke [self runModalSavePanelForSaveOperation:NSSaveAsOperation delegate:didSaveSelector:contextInfo:].
@@ -574,6 +575,7 @@ The default implementation of this method first makes sure that any editor regis
 The default implementation of this method does a coordinated move of the file at [self fileURL] to the given URL, replacing any file that may currently exist at that URL, and invokes -setFileURL: if the operation is successful. If [self fileURL] is nil, then this method will instead invoke [self saveToURL:url ofType:[self fileType] forSaveOperation:NSSaveAsOperation completionHandler:aCompletionHandler].
 */
 - (void)moveToURL:(NSURL *)url completionHandler:(void (^)(NSError *))completionHandler NS_AVAILABLE_MAC(10_8);
+#endif /* NS_BLOCKS_AVAILABLE */
 
 #pragma mark *** Locking ***
 
@@ -582,6 +584,7 @@ The default implementation of this method does a coordinated move of the file at
 - (IBAction)lockDocument:(id)sender NS_AVAILABLE_MAC(10_8);
 - (IBAction)unlockDocument:(id)sender NS_AVAILABLE_MAC(10_8);
 
+#if NS_BLOCKS_AVAILABLE
 /* Lock the document to prevent the user from making further modifications. When locking is completed, regardless of success or failure, invoke the given block.
 
 The default implementation of this method first makes sure that any editor registered using Cocoa Binding's NSEditorRegistration informal protocol has committed its changes and immediately autosaves the document. If the autosave completes successfully or isn't necessary, this method invokes [self lockWithCompletionHandler:]. When locking succeeds, -isLocked will begin returning YES. Documents that return nil from [self fileURL] cannot be locked.
@@ -605,6 +608,7 @@ The default implementation of this method invokes [self unlockWithCompletionHand
 The default implementation of this method tries to clear the "user immutable" flag and add write permissions (if necessary) to the file at [self fileURL].
 */
 - (void)unlockWithCompletionHandler:(void (^)(NSError *))completionHandler NS_AVAILABLE_MAC(10_8);
+#endif /* NS_BLOCKS_AVAILABLE */
 
 /* Returns YES when it appears the file at [self fileURL] cannot be written to. The conditions that cause this to return YES are subject to change, but may include the lack of write permissions, the "user immutable" flag, a read-only parent directory or volume, a return value of NO from -checkAutosavingSafetyAndReturnError:. You should not override this method.
 */
@@ -637,7 +641,7 @@ The default implementation of this method creates a page layout panel, invokes [
 - (void)setPrintInfo:(NSPrintInfo *)printInfo;
 - (NSPrintInfo *)printInfo;
 
-/* The action of the File menu's Print... item item in a document-based application. The default implementation of this method merely invokes [self printDocumentWithSettings:[NSDictionary dictionary] showPrintPanel:YES delegate:nil didPrintSelector:NULL contextInfo:NULL].
+/* The action of the File menu's Print... item in a document-based application. The default implementation of this method merely invokes [self printDocumentWithSettings:[NSDictionary dictionary] showPrintPanel:YES delegate:nil didPrintSelector:NULL contextInfo:NULL].
 */
 - (IBAction)printDocument:(id)sender;
 
@@ -646,6 +650,8 @@ The default implementation of this method creates a page layout panel, invokes [
     - (void)document:(NSDocument *)document didPrint:(BOOL)didPrintSuccessfully contextInfo:(void *)contextInfo;
 
 The default implementation of this method first makes sure that any editor registered using Cocoa Bindings' NSEditorRegistration informal protocol has committed its changes, then invokes [self printOperationWithSettings:printSettings error:&anError]. If nil is returned it presents the error to the user in a document-modal panel before messaging the delegate. Otherwise it invokes [thePrintOperation setShowsPrintPanel:showPrintPanel] then [self runModalPrintOperation:thePrintOperation delegate:delegate didRunSelector:didPrintSelector contextInfo:contextInfo].
+
+Starting in OS X 10.6, if the printSettings dictionary has an NSPrintJobDisposition entry whose value is NSPrintSaveJob, while lacking an NSPrintJobSavingURL or NSPrintSavePath entry indicating where the PDF file should be written, then the default implementation of this method will present a save panel asking the user where the PDF file should be saved. Additionally, starting in OS X 10.9, the default implementation of this method will invoke -PDFPrintOperation instead of -printOperationWithSettings:error: in this scenario.
 
 For backward binary compatibility with Mac OS 10.3 and earlier, the default implementation of this method invokes [self printShowingPrintPanel:showPrintPanel] if -printShowingPrintPanel: is overridden. When doing this it uses private functionality to arrange for 1) the print settings to take effect despite the fact that the override of -printShowingPrintPanel: can't possibly know about them, and 2) getting notified when the print operation has been completed, so it can message the delegate at the correct time. Correct messaging of the delegate is necessary for correct handling of the Print Apple event.
 */
@@ -660,6 +666,16 @@ For backward binary compatibility with Mac OS 10.3 and earlier, the default impl
     - (void)document:(NSDocument *)document didRunPrintOperation:(BOOL)didPrintSuccessfully contextInfo:(void *)contextInfo;
 */
 - (void)runModalPrintOperation:(NSPrintOperation *)printOperation delegate:(id)delegate didRunSelector:(SEL)didRunSelector contextInfo:(void *)contextInfo;
+
+#pragma mark *** PDF Creation ***
+
+/* The action of the File menu's Export As PDF... item in a document-based application. The default implementation of this method merely invokes [self printDocumentWithSettings:@{ NSPrintJobDisposition : NSPrintSaveJob } showPrintPanel:NO delegate:nil didPrintSelector:NULL contextInfo:NULL].
+ */
+- (IBAction)saveDocumentToPDF:(id)sender NS_AVAILABLE_MAC(10_9);
+
+/* Create a print operation that can be run to create a PDF representation of the document's current contents, and return it if successful. You typically should not use [self printInfo] when creating this print operation, but you should instead maintain a separate NSPrintInfo instance specifically for creating PDFs. The default implementation of this method simply invokes [self printOperationWithSettings:@{ NSPrintJobDisposition : NSPrintSaveJob } error:NULL], but you are highly encouraged to override it if your document subclass supports creating PDF representations.
+ */
+- (NSPrintOperation *)PDFPrintOperation NS_AVAILABLE_MAC(10_9);
 
 #pragma mark *** Change Management ***
 

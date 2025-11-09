@@ -1,7 +1,7 @@
 /*
 	NSButtonCell.h
 	Application Kit
-	Copyright (c) 1994-2012, Apple Inc.
+	Copyright (c) 1994-2013, Apple Inc.
 	All rights reserved.
 */
 
@@ -9,7 +9,7 @@
 
 @class NSAttributedString, NSFont, NSImage, NSSound;
 
-enum {
+typedef NS_ENUM(NSUInteger, NSButtonType) {
     NSMomentaryLightButton		= 0,	// was NSMomentaryPushButton
     NSPushOnPushOffButton		= 1,
     NSToggleButton			= 2,
@@ -18,18 +18,13 @@ enum {
     NSMomentaryChangeButton		= 5,
     NSOnOffButton			= 6,
     NSMomentaryPushInButton		= 7,	// was NSMomentaryLight
-
     /* These constants were accidentally reversed so that NSMomentaryPushButton lit and
        NSMomentaryLight pushed. These names are now deprecated */
-    
-    NSMomentaryPushButton		= 0,
-    NSMomentaryLight			= 7
-    
+    NSMomentaryPushButton NS_ENUM_DEPRECATED_MAC(10_0, 10_9)    = 0, // NSMomentaryLightButton should be used instead
+    NSMomentaryLight NS_ENUM_DEPRECATED_MAC(10_0, 10_9)         = 7 // NSMomentaryPushInButton should be used instead
 };
-typedef NSUInteger NSButtonType;
 
-enum {
-
+typedef NS_ENUM(NSUInteger, NSBezelStyle) {
     NSRoundedBezelStyle          = 1,
     NSRegularSquareBezelStyle    = 2,
     NSThickSquareBezelStyle      = 3,
@@ -44,17 +39,11 @@ enum {
     NSRoundRectBezelStyle         = 12,
     NSRecessedBezelStyle          = 13,
     NSRoundedDisclosureBezelStyle = 14,
-
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_7
     // The inline bezel style contains a solid round-rect border background. It can be used to create an "unread" indicator in an outline view, or another inline button in a tableview, such as a stop progress button in a download panel. Use text for an unread indicator, and a template image for other buttons.
-    NSInlineBezelStyle = 15,
-#endif
+    NSInlineBezelStyle NS_ENUM_AVAILABLE_MAC(10_7) = 15,
     
-    // This bezel style is obsolete and should not be used.
-    NSSmallIconButtonBezelStyle  = 2
-    
+    NSSmallIconButtonBezelStyle NS_ENUM_DEPRECATED_MAC(10_0, 10_0) = 2 // This bezel style is obsolete and should not be used.
 };
-typedef NSUInteger NSBezelStyle;
 
 typedef struct __BCFlags {
 #ifdef __BIG_ENDIAN__
@@ -189,14 +178,13 @@ typedef struct __BCFlags2 {
 //
 // Weak versus strong is how much contrast exists between
 // the colors used in opposite corners
-enum {
+typedef NS_ENUM(NSUInteger, NSGradientType) {
     NSGradientNone          = 0,
     NSGradientConcaveWeak   = 1,
     NSGradientConcaveStrong = 2,
     NSGradientConvexWeak    = 3,
     NSGradientConvexStrong  = 4
 };
-typedef NSUInteger NSGradientType;
 
 @interface NSButtonCell(NSButtonCellExtensions)
 

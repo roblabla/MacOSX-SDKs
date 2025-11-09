@@ -16,7 +16,7 @@
 #define __KEYCHAINCORE__
 
 #ifndef __MACTYPES__
-#include <CarbonCore/MacTypes.h>
+#include <MacTypes.h>
 #endif
 
 #ifndef __FILES__
@@ -275,7 +275,7 @@ enum {
  *    Non-Carbon CFM:   in KeychainLib 1.0 and later
  */
 extern OSStatus 
-KCGetKeychainManagerVersion(UInt32 * returnVers);
+KCGetKeychainManagerVersion(UInt32 * returnVers)              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_6,__IPHONE_NA,__IPHONE_NA);
 
 
 #if TARGET_RT_MAC_CFM

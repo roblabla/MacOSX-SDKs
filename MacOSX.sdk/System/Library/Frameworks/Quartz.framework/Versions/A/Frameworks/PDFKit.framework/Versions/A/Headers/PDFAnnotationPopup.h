@@ -12,7 +12,7 @@
 @class PDFAnnotationPopupPrivateVars;
 
 
-@interface PDFAnnotationPopup : PDFAnnotation <NSCopying>
+@interface PDFAnnotationPopup : PDFAnnotation <NSCopying, NSCoding>
 {
 @private
     PDFAnnotationPopupPrivateVars	*_pdfPriv2;

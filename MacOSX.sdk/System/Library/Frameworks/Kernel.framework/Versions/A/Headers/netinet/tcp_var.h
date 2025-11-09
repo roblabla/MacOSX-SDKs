@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2012 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -84,7 +84,7 @@ struct name {				\
 
 /* Minimum time quantum within which the timers are coalesced */
 #define TCP_FASTTIMER_QUANTUM   TCP_TIMERHZ	/* fast mode, once every 100ms */
-#define TCP_SLOWTIMER_QUANTUM   TCP_RETRANSHZ / PR_SLOWHZ	/* slow mode, once every 500ms */
+#define TCP_SLOWTIMER_QUANTUM   (TCP_RETRANSHZ/2) /* slow mode, once every 500ms */
 
 #define TCP_RETRANSHZ_TO_USEC 1000
 
@@ -303,6 +303,42 @@ struct	tcpstat {
 	u_int32_t	tcps_lro_twopack;	/* 2 packets coalesced */
 	u_int32_t	tcps_lro_multpack;	/* 3 or 4 pkts coalesced */
 	u_int32_t	tcps_lro_largepack;	/* 5 or more pkts coalesced */
+
+	u_int32_t	tcps_limited_txt;	/* Limited transmit used */
+	u_int32_t	tcps_early_rexmt;	/* Early retransmit used */
+	u_int32_t	tcps_sack_ackadv;	/* Cumulative ack advanced along with sack */
+
+	/* Checksum related stats */
+	u_int32_t	tcps_rcv_swcsum;	/* tcp swcksum (inbound), packets */
+	u_int32_t	tcps_rcv_swcsum_bytes;	/* tcp swcksum (inbound), bytes */
+	u_int32_t	tcps_rcv6_swcsum;	/* tcp6 swcksum (inbound), packets */
+	u_int32_t	tcps_rcv6_swcsum_bytes;	/* tcp6 swcksum (inbound), bytes */
+	u_int32_t	tcps_snd_swcsum;	/* tcp swcksum (outbound), packets */
+	u_int32_t	tcps_snd_swcsum_bytes;	/* tcp swcksum (outbound), bytes */
+	u_int32_t	tcps_snd6_swcsum;	/* tcp6 swcksum (outbound), packets */
+	u_int32_t	tcps_snd6_swcsum_bytes;	/* tcp6 swcksum (outbound), bytes */
+	u_int32_t	tcps_msg_unopkts;	/* unordered packet on TCP msg stream */
+	u_int32_t	tcps_msg_unoappendfail; /* failed to append unordered pkt */
+	u_int32_t	tcps_msg_sndwaithipri; /* send is waiting for high priority data */
+
+	/* MPTCP Related stats */
+	u_int32_t	tcps_invalid_mpcap;	/* Invalid MPTCP capable opts */
+	u_int32_t	tcps_invalid_joins;	/* Invalid MPTCP joins */
+	u_int32_t	tcps_mpcap_fallback;	/* TCP fallback in primary */
+	u_int32_t	tcps_join_fallback;	/* No MPTCP in secondary */
+	u_int32_t	tcps_estab_fallback;	/* DSS option dropped */
+	u_int32_t	tcps_invalid_opt;	/* Catchall error stat */
+	u_int32_t	tcps_mp_outofwin;	/* Packet lies outside the
+						   shared recv window */
+	u_int32_t	tcps_mp_reducedwin;	/* Reduced subflow window */
+	u_int32_t	tcps_mp_badcsum;	/* Bad DSS csum */
+	u_int32_t	tcps_mp_oodata;		/* Out of order data */
+	u_int32_t	tcps_mp_switches;	/* number of subflow switch */
+	u_int32_t	tcps_mp_rcvtotal;	/* number of rcvd packets */
+	u_int32_t	tcps_mp_rcvbytes;	/* number of bytes received */
+	u_int32_t	tcps_mp_sndpacks;	/* number of data packs sent */
+	u_int32_t	tcps_mp_sndbytes;	/* number of bytes sent */
+	u_int32_t	tcps_join_rxmts;	/* join ack retransmits */
 };
 
 struct tcpstat_local {

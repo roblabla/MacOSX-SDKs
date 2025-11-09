@@ -9,10 +9,6 @@
 #ifndef __IMAGECAPTURE__
 #define __IMAGECAPTURE__
 
-#ifndef __ICAAPPLICATION__
-#include <ImageCapture/ICAApplication.h>
-#endif
-
 #ifndef __ICADEVICE__
 #include <ImageCapture/ICADevice.h>
 #endif

@@ -21,7 +21,7 @@ enum
 };
 
 
-@interface PDFBorder : NSObject <NSCopying>
+@interface PDFBorder : NSObject <NSCopying, NSCoding>
 {
 @private
 	PDFBorderPrivateVars *_pdfPriv;
