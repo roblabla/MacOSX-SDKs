@@ -4,10 +4,10 @@
  *	  POSTGRES low-level lock mechanism
  *
  *
- * Portions Copyright (c) 1996-2010, PostgreSQL Global Development Group
+ * Portions Copyright (c) 1996-2011, PostgreSQL Global Development Group
  * Portions Copyright (c) 1994, Regents of the University of California
  *
- * $PostgreSQL: pgsql/src/include/storage/lock.h,v 1.119 2010/02/26 02:01:27 momjian Exp $
+ * src/include/storage/lock.h
  *
  *-------------------------------------------------------------------------
  */
@@ -104,6 +104,8 @@ typedef int LOCKMODE;
  *		are defined in this lock method.  Must be less than MAX_LOCKMODES.
  *
  * transactional -- TRUE if locks are released automatically at xact end.
+ *		(Caution: this flag no longer means what you might think, and it
+ *		will be removed altogether in 9.2.)
  *
  * conflictTab -- this is an array of bitmasks showing lock
  *		mode conflicts.  conflictTab[i] is a mask with the j-th bit
@@ -485,6 +487,7 @@ extern LockAcquireResult LockAcquireExtended(const LOCKTAG *locktag,
 extern bool LockRelease(const LOCKTAG *locktag,
 			LOCKMODE lockmode, bool sessionLock);
 extern void LockReleaseAll(LOCKMETHODID lockmethodid, bool allLocks);
+extern void LockReleaseSession(LOCKMETHODID lockmethodid);
 extern void LockReleaseCurrentOwner(void);
 extern void LockReassignCurrentOwner(void);
 extern VirtualTransactionId *GetLockConflicts(const LOCKTAG *locktag,

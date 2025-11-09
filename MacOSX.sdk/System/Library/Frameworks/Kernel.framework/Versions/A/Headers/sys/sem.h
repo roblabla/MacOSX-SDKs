@@ -76,7 +76,6 @@ typedef __darwin_size_t	size_t;
  * legacy interface there for binary compatibility only.  Currently, we
  * are only forcing this for programs requesting standards conformance.
  */
-#if __DARWIN_UNIX03 || defined(KERNEL)
 #pragma pack(4)
 /*
  * Structure used internally.
@@ -107,9 +106,6 @@ struct __semid_ds_new
 	__int32_t	sem_pad3[4];	/* RESERVED: DO NOT USE! */
 };
 #pragma pack()
-#else	/* !__DARWIN_UNIX03 */
-#define	semid_ds	__semid_ds_old
-#endif	/* __DARWIN_UNIX03 */
 
 #if !__DARWIN_UNIX03
 struct __semid_ds_old {
@@ -163,16 +159,6 @@ struct sembuf {
 
 
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
-
-/*
- * System imposed limit on the value of the third parameter to semop().
- * This is arbitrary, and the standards unfortunately do not provide a
- * way for user applications to retrieve this value (e.g. via sysconf()
- * or from a manifest value in <unistd.h>).  The value shown here is
- * informational, and subject to change in future revisions.
- */
-#define MAX_SOPS	5	/* maximum # of sembuf's per semop call */
-
 
 /*
  * Union used as the fourth argment to semctl() in all cases.  Specific

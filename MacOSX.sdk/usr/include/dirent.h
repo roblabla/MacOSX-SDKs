@@ -63,6 +63,7 @@
  */
 #include <_types.h>
 #include <sys/dirent.h>
+#include <sys/cdefs.h>
 #include <Availability.h>
 
 struct _telldir;		/* forward reference */
@@ -81,11 +82,10 @@ typedef struct {
 	struct _telldir *__dd_td; /* telldir position recording */
 } DIR;
 
-#if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
+#if __DARWIN_C_LEVEL >= __DARWIN_C_FULL
+
 /* definitions for library routines operating on directories. */
 #define	DIRBLKSIZ	1024
-
-#define	dirfd(dirp)	((dirp)->__dd_fd)
 
 /* flags for opendir2 */
 #define DTF_HIDEW	0x0001	/* hide whiteout entries */
@@ -93,19 +93,69 @@ typedef struct {
 #define DTF_REWIND	0x0004	/* rewind after reading union stack */
 #define __DTF_READALL	0x0008	/* everything has been read */
 
-#endif /* (!_POSIX_C_SOURCE || _DARWIN_C_SOURCE) */
+#endif /* __DARWIN_C_LEVEL >= __DARWIN_C_FULL */
 
 #ifndef KERNEL
 
-#include <sys/cdefs.h>
-
 __BEGIN_DECLS
-#if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
-int alphasort(const void *, const void *) __DARWIN_INODE64(alphasort);
-#endif /* not POSIX */
+
 int closedir(DIR *) __DARWIN_ALIAS(closedir);
-#if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
+
+DIR *opendir(const char *) __DARWIN_ALIAS_I(opendir);
+
+struct dirent *readdir(DIR *) __DARWIN_INODE64(readdir);
+int readdir_r(DIR *, struct dirent *, struct dirent **) __DARWIN_INODE64(readdir_r);
+
+void rewinddir(DIR *) __DARWIN_ALIAS_I(rewinddir);
+
+void seekdir(DIR *, long) __DARWIN_ALIAS_I(seekdir);
+
+long telldir(DIR *) __DARWIN_ALIAS_I(telldir);
+
+__END_DECLS
+
+
+/* Additional functionality provided by:
+ * POSIX.1-2008
+ */
+
+#if __DARWIN_C_LEVEL >= 200809L
+__BEGIN_DECLS
+
+int alphasort(const struct dirent **, const struct dirent **) __DARWIN_INODE64(alphasort);
+
+#if (defined(__MAC_OS_X_VERSION_MIN_REQUIRED) && __MAC_OS_X_VERSION_MIN_REQUIRED < __MAC_10_8) || (defined(__IPHONE_OS_VERSION_MIN_REQUIRED) && __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_NA)
+#include <errno.h>
+#include <stdlib.h>
+#define dirfd(dirp) ({                         \
+    DIR *_dirp = (dirp);                       \
+    int ret = -1;                              \
+    if (_dirp == NULL || _dirp->__dd_fd < 0)   \
+        errno = EINVAL;                        \
+    else                                       \
+       ret = _dirp->__dd_fd;                   \
+    ret;                                       \
+})
+#else
+int dirfd(DIR *dirp) __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
+#endif
+
+int scandir(const char *, struct dirent ***,
+    int (*)(const struct dirent *), int (*)(const struct dirent **, const struct dirent **)) __DARWIN_INODE64(scandir);
+#ifdef __BLOCKS__
+int scandir_b(const char *, struct dirent ***,
+    int (^)(const struct dirent *), int (^)(const struct dirent **, const struct dirent **)) __DARWIN_INODE64(scandir_b) __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_3_2);
+#endif /* __BLOCKS__ */
+
+__END_DECLS
+#endif /* __DARWIN_C_LEVEL >= 200809L */
+
+
+#if __DARWIN_C_LEVEL >= __DARWIN_C_FULL
+__BEGIN_DECLS
+
 int getdirentries(int, char *, int, long *)
+
 #if __DARWIN_64_BIT_INO_T
 /*
  * getdirentries() doesn't work when 64-bit inodes is in effect, so we
@@ -116,25 +166,11 @@ int getdirentries(int, char *, int, long *)
 						__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_6, __IPHONE_2_0,__IPHONE_2_0)
 #endif /* __DARWIN_64_BIT_INO_T */
 ;
-#endif /* not POSIX */
-DIR *opendir(const char *) __DARWIN_ALIAS_I(opendir);
-#if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
+
 DIR *__opendir2(const char *, int) __DARWIN_ALIAS_I(__opendir2);
-#endif /* not POSIX */
-struct dirent *readdir(DIR *) __DARWIN_INODE64(readdir);
-int readdir_r(DIR *, struct dirent *, struct dirent **) __DARWIN_INODE64(readdir_r);
-void rewinddir(DIR *) __DARWIN_ALIAS_I(rewinddir);
-#if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
-int scandir(const char *, struct dirent ***,
-    int (*)(struct dirent *), int (*)(const void *, const void *)) __DARWIN_INODE64(scandir);
-#ifdef __BLOCKS__
-int scandir_b(const char *, struct dirent ***,
-    int (^)(struct dirent *), int (^)(const void *, const void *)) __DARWIN_INODE64(scandir_b) __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_3_2);
-#endif /* __BLOCKS__ */
-#endif /* not POSIX */
-void seekdir(DIR *, long) __DARWIN_ALIAS_I(seekdir);
-long telldir(DIR *) __DARWIN_ALIAS_I(telldir);
+
 __END_DECLS
+#endif /* __DARWIN_C_LEVEL >= __DARWIN_C_FULL */
 
 #endif /* !KERNEL */
 

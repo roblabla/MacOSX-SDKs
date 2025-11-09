@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003-2006 Apple Computer, Inc. All Rights Reserved.
+ * Copyright (c) 2003-2006,2008-2010 Apple Inc. All Rights Reserved.
  * 
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -32,10 +32,10 @@
 #ifndef	_SEC_ASN1_CODER_H_
 #define _SEC_ASN1_CODER_H_
 
-#include <Security/cssmtype.h>
-#include <Security/SecBase.h>
-#include <Security/SecAsn1Types.h>
 #include <sys/types.h>
+#include <Security/SecAsn1Types.h>
+#include <TargetConditionals.h>
+#include <Security/SecBase.h> /* error codes */
 
 #ifdef __cplusplus
 extern "C" {
@@ -77,11 +77,11 @@ OSStatus SecAsn1Decode(
 	void					*dest);
 		
 /* 
- * Convenience routine, decode from a CSSM_DATA.
+ * Convenience routine, decode from a SecAsn1Item.
  */
 OSStatus SecAsn1DecodeData(
 	SecAsn1CoderRef			coder,
-	const CSSM_DATA			*src,
+	const SecAsn1Item			*src,
 	const SecAsn1Template 	*templ,	
 	void					*dest);
 
@@ -99,7 +99,7 @@ OSStatus SecAsn1EncodeItem(
 	SecAsn1CoderRef			coder,
 	const void				*src,
 	const SecAsn1Template 	*templates,	
-	CSSM_DATA				*dest);
+	SecAsn1Item				*dest);
 		
 /*
  * Some alloc-related methods which come in handy when using
@@ -121,7 +121,7 @@ void *SecAsn1Malloc(
 /* Allocate item.Data, set item.Length */
 OSStatus SecAsn1AllocItem(
 	SecAsn1CoderRef			coder,
-	CSSM_DATA				*item,
+	SecAsn1Item				*item,
 	size_t					len);
 	
 /* Allocate and copy, various forms */
@@ -129,16 +129,19 @@ OSStatus SecAsn1AllocCopy(
 	SecAsn1CoderRef			coder,
 	const void				*src,		/* memory copied from here */
 	size_t					len,		/* length to allocate & copy */
-	CSSM_DATA				*dest);		/* dest->Data allocated and copied to;
+	SecAsn1Item				*dest);		/* dest->Data allocated and copied to;
 										 *   dest->Length := len */
 	
 OSStatus SecAsn1AllocCopyItem(
 	SecAsn1CoderRef			coder,
-	const CSSM_DATA			*src,		/* src->Length bytes allocated and copied from 
+	const SecAsn1Item			*src,		/* src->Length bytes allocated and copied from 
 										 *   src->Data */
-	CSSM_DATA				*dest);		/* dest->Data allocated and copied to;
+	SecAsn1Item				*dest);		/* dest->Data allocated and copied to;
 										 *   dest->Length := src->Length */
-		
+
+/* Compare two decoded OIDs.  Returns true iff they are equivalent. */
+bool SecAsn1OidCompare(const SecAsn1Oid *oid1, const SecAsn1Oid *oid2);
+
 #ifdef __cplusplus
 }
 #endif

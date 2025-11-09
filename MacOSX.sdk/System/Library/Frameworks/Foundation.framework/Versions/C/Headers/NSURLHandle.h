@@ -1,5 +1,5 @@
 /*	NSURLHandle.h
-	Copyright (c) 1997-2011, Apple Inc. All rights reserved.
+	Copyright (c) 1997-2012, Apple Inc. All rights reserved.
 */
  
 #import <Foundation/NSObject.h>
@@ -31,13 +31,12 @@ FOUNDATION_EXPORT NSString *NSFTPPropertyFTPProxy NS_DEPRECATED(10_3, 10_4, NA, 
 
 
 
-enum {
+typedef NS_ENUM(NSUInteger, NSURLHandleStatus) {
     NSURLHandleNotLoaded = 0,
     NSURLHandleLoadSucceeded,
     NSURLHandleLoadInProgress,
     NSURLHandleLoadFailed
 };
-typedef NSUInteger NSURLHandleStatus;
 
 @protocol NSURLHandleClient
 - (void)URLHandle:(NSURLHandle *)sender resourceDataDidBecomeAvailable:(NSData *)newBytes NS_DEPRECATED(10_0, 10_4, NA, NA);

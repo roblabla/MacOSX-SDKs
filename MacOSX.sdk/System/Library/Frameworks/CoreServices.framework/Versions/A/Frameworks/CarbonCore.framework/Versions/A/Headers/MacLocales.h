@@ -3,9 +3,7 @@
  
      Contains:   Types & prototypes for locale functions
  
-     Version:    CarbonCore-960.18~3
- 
-     Copyright:  © 1998-2008 by Apple Computer, Inc., all rights reserved.
+     Copyright:  Â© 1998-2012 by Apple Inc. All rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -26,7 +24,7 @@
 
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -95,7 +93,7 @@ extern OSStatus
 LocaleRefFromLangOrRegionCode(
   LangCode     lang,
   RegionCode   region,
-  LocaleRef *  locale)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  LocaleRef *  locale)                                        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -109,7 +107,7 @@ LocaleRefFromLangOrRegionCode(
 extern OSStatus 
 LocaleRefFromLocaleString(
   const char   localeString[],
-  LocaleRef *  locale)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  LocaleRef *  locale)                                        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -125,7 +123,7 @@ LocaleRefGetPartString(
   LocaleRef        locale,
   LocalePartMask   partMask,
   ByteCount        maxStringLen,
-  char             partString[])                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  char             partString[])                              __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -168,31 +166,45 @@ extern OSStatus
 LocaleStringToLangAndRegionCodes(
   const char    localeString[],
   LangCode *    lang,
-  RegionCode *  region)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  RegionCode *  region)                                       __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
 /* Enumerate locales for a LocaleOperationClass */
 
 /*
- *  LocaleOperationCountLocales()
+ *  LocaleOperationCountLocales()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFLocaleCopyAvailableLocaleIdentifiers instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    CFLocaleCopyAvailableLocaleIdentifiers instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.8
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in LocalesLib 8.6 and later
  */
 extern OSStatus 
 LocaleOperationCountLocales(
   LocaleOperationClass   opClass,
-  ItemCount *            localeCount)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ItemCount *            localeCount)                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
- *  LocaleOperationGetLocales()
+ *  LocaleOperationGetLocales()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFXxxxx instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    CFLocaleCopyAvailableLocaleIdentifiers instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.8
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in LocalesLib 8.6 and later
  */
@@ -201,16 +213,23 @@ LocaleOperationGetLocales(
   LocaleOperationClass   opClass,
   ItemCount              maxLocaleCount,
   ItemCount *            actualLocaleCount,
-  LocaleAndVariant       localeVariantList[])                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  LocaleAndVariant       localeVariantList[])                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /* Get names for a locale (or a region's language)*/
 
 /*
- *  LocaleGetName()
+ *  LocaleGetName()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFLocaleCopyDisplayNameForPropertyValue instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    CFLocaleCopyDisplayNameForPropertyValue instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.8
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in LocalesLib 8.6 and later
  */
@@ -222,14 +241,21 @@ LocaleGetName(
   LocaleRef                displayLocale,
   UniCharCount             maxNameLen,
   UniCharCount *           actualNameLen,
-  UniChar                  displayName[])                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UniChar                  displayName[])                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
- *  LocaleCountNames()
+ *  LocaleCountNames()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFLocaleCopyAvailableLocaleIdentifiers instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    CFLocaleCopyAvailableLocaleIdentifiers instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.8
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in LocalesLib 8.6 and later
  */
@@ -238,14 +264,23 @@ LocaleCountNames(
   LocaleRef                locale,
   LocaleOperationVariant   opVariant,
   LocaleNameMask           nameMask,
-  ItemCount *              nameCount)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ItemCount *              nameCount)                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
- *  LocaleGetIndName()
+ *  LocaleGetIndName()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    use CFLocaleCopyAvailableLocaleIdentifiers and
+ *    CFLocaleCopyDisplayNameForPropertyValue instead.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use
+ *    CFLocaleCopyAvailableLocaleIdentifiers and
+ *    CFLocaleCopyDisplayNameForPropertyValue instead.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.8
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in LocalesLib 8.6 and later
  */
@@ -258,7 +293,7 @@ LocaleGetIndName(
   UniCharCount             maxNameLen,
   UniCharCount *           actualNameLen,
   UniChar                  displayName[],
-  LocaleRef *              displayLocale)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  LocaleRef *              displayLocale)                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -283,7 +318,7 @@ LocaleGetIndName(
 extern OSStatus 
 LocaleGetRegionLanguageName(
   RegionCode   region,
-  Str255       languageName)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  Str255       languageName)                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -305,7 +340,7 @@ LocaleOperationGetName(
   LocaleRef              displayLocale,
   UniCharCount           maxNameLen,
   UniCharCount *         actualNameLen,
-  UniChar                displayName[])                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UniChar                displayName[])                       __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -319,7 +354,7 @@ LocaleOperationGetName(
 extern OSStatus 
 LocaleOperationCountNames(
   LocaleOperationClass   opClass,
-  ItemCount *            nameCount)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ItemCount *            nameCount)                           __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -337,7 +372,7 @@ LocaleOperationGetIndName(
   UniCharCount           maxNameLen,
   UniCharCount *         actualNameLen,
   UniChar                displayName[],
-  LocaleRef *            displayLocale)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  LocaleRef *            displayLocale)                       __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 

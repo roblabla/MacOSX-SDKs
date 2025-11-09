@@ -1,5 +1,5 @@
 /*	NSNumberFormatter.h
-	Copyright (c) 1996-2011, Apple Inc. All rights reserved.
+	Copyright (c) 1996-2012, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSFormatter.h>
@@ -27,7 +27,7 @@
 - (NSString *)stringFromNumber:(NSNumber *)number;
 - (NSNumber *)numberFromString:(NSString *)string;
 
-enum {
+typedef NS_ENUM(NSUInteger, NSNumberFormatterStyle) {
     NSNumberFormatterNoStyle = kCFNumberFormatterNoStyle,
     NSNumberFormatterDecimalStyle = kCFNumberFormatterDecimalStyle,
     NSNumberFormatterCurrencyStyle = kCFNumberFormatterCurrencyStyle,
@@ -35,16 +35,14 @@ enum {
     NSNumberFormatterScientificStyle = kCFNumberFormatterScientificStyle,
     NSNumberFormatterSpellOutStyle = kCFNumberFormatterSpellOutStyle
 };
-typedef NSUInteger NSNumberFormatterStyle;
 
-enum {
+typedef NS_ENUM(NSUInteger, NSNumberFormatterBehavior) {
     NSNumberFormatterBehaviorDefault = 0,
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
     NSNumberFormatterBehavior10_0 = 1000,
 #endif
     NSNumberFormatterBehavior10_4 = 1040,
 };
-typedef NSUInteger NSNumberFormatterBehavior;
 
 
 + (NSString *)localizedStringFromNumber:(NSNumber *)num numberStyle:(NSNumberFormatterStyle)nstyle NS_AVAILABLE(10_6, 4_0);
@@ -181,15 +179,14 @@ typedef NSUInteger NSNumberFormatterBehavior;
 - (void)setPaddingCharacter:(NSString *)string;
 
 
-enum {
+typedef NS_ENUM(NSUInteger, NSNumberFormatterPadPosition) {
     NSNumberFormatterPadBeforePrefix = kCFNumberFormatterPadBeforePrefix,
     NSNumberFormatterPadAfterPrefix = kCFNumberFormatterPadAfterPrefix,
     NSNumberFormatterPadBeforeSuffix = kCFNumberFormatterPadBeforeSuffix,
     NSNumberFormatterPadAfterSuffix = kCFNumberFormatterPadAfterSuffix
 };
-typedef NSUInteger NSNumberFormatterPadPosition;
 
-enum {
+typedef NS_ENUM(NSUInteger, NSNumberFormatterRoundingMode) {
     NSNumberFormatterRoundCeiling = kCFNumberFormatterRoundCeiling,
     NSNumberFormatterRoundFloor = kCFNumberFormatterRoundFloor,
     NSNumberFormatterRoundDown = kCFNumberFormatterRoundDown,
@@ -198,7 +195,6 @@ enum {
     NSNumberFormatterRoundHalfDown = kCFNumberFormatterRoundHalfDown,
     NSNumberFormatterRoundHalfUp = kCFNumberFormatterRoundHalfUp
 };
-typedef NSUInteger NSNumberFormatterRoundingMode;
 
 
 - (NSNumberFormatterPadPosition)paddingPosition;

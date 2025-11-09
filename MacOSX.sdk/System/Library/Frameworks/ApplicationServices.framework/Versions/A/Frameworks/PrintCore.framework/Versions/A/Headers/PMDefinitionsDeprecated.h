@@ -31,15 +31,8 @@ extern "C" {
 #pragma options align=mac68k
 
 /* Printing objects */
-typedef struct OpaquePMPrintContext*    PMPrintContext;
-typedef struct OpaquePMDialog*          PMDialog;
 enum {
   kSizeOfTPrint                 = 120   /* size of old TPrint record */
-};
-
-// Ticket items cannot be locked in 10.5 and later.
-enum {
-  kPMLocked                     = true
 };
 
 typedef UInt16 PMColorMode;

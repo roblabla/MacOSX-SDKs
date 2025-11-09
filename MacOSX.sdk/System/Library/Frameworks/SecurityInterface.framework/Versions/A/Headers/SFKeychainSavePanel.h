@@ -19,7 +19,7 @@
 	@class SFKeychainSavePanel
     @abstract SFKeychainSavePanel is a panel and sheet interface used to create a keychain using the NSSavePanel UI.
 */
-@interface SFKeychainSavePanel : NSSavePanel 
+@interface SFKeychainSavePanel : NSSavePanel <NSOpenSavePanelDelegate>
 {
 @private
 	/* All instance variables are private */

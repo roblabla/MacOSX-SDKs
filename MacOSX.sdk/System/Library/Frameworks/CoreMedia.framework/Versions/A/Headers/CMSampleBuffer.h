@@ -3,7 +3,7 @@
 	
 	Framework:  CoreMedia
  
-    Copyright 2005-2011 Apple Inc. All rights reserved.
+    Copyright 2005-2012 Apple Inc. All rights reserved.
  
 */
 
@@ -174,69 +174,69 @@ typedef OSStatus (*CMSampleBufferMakeDataReadyCallback)
 				
 				Example of usage for in-display-order video frames:
 <ul>				dataBuffer: contains 7 Motion JPEG frames
-<br>				dataFormatDescription: describes Motion JPEG video
-<br>				numSamples: 7
-<br>				numSampleTimingEntries: 1
-<br>				sampleTimingArray: one entry = {duration = 1001/30000, presentationTimeStamp = 0/30000, decodeTimeStamp = invalid }
-<br>				numSampleSizeEntries: 7
-<br>				sampleSizeArray: {105840, 104456, 103464, 116460, 100412, 94808, 120400}
+<li>				dataFormatDescription: describes Motion JPEG video
+<li>				numSamples: 7
+<li>				numSampleTimingEntries: 1
+<li>				sampleTimingArray: one entry = {duration = 1001/30000, presentationTimeStamp = 0/30000, decodeTimeStamp = invalid }
+<li>				numSampleSizeEntries: 7
+<li>				sampleSizeArray: {105840, 104456, 103464, 116460, 100412, 94808, 120400}
 </ul>
 				Example of usage for out-of-display-order video frames:
 <ul>				dataBuffer: contains 6 H.264 frames in decode order (P2,B0,B1,I5,B3,B4)
-<br>				dataFormatDescription: describes H.264 video
-<br>				numSamples: 6
-<br>				numSampleTimingEntries: 6
-<br>				sampleTimingArray: 6 entries = {
+<li>				dataFormatDescription: describes H.264 video
+<li>				numSamples: 6
+<li>				numSampleTimingEntries: 6
+<li>				sampleTimingArray: 6 entries = {
 <ul>					{duration = 1001/30000, presentationTimeStamp = 12012/30000, decodeTimeStamp = 10010/30000},
-<br>					{duration = 1001/30000, presentationTimeStamp = 10010/30000, decodeTimeStamp = 11011/30000},
-<br>					{duration = 1001/30000, presentationTimeStamp = 11011/30000, decodeTimeStamp = 12012/30000},
-<br>					{duration = 1001/30000, presentationTimeStamp = 15015/30000, decodeTimeStamp = 13013/30000},
-<br>					{duration = 1001/30000, presentationTimeStamp = 13013/30000, decodeTimeStamp = 14014/30000},
-<br>					{duration = 1001/30000, presentationTimeStamp = 14014/30000, decodeTimeStamp = 15015/30000}}
+<li>					{duration = 1001/30000, presentationTimeStamp = 10010/30000, decodeTimeStamp = 11011/30000},
+<li>					{duration = 1001/30000, presentationTimeStamp = 11011/30000, decodeTimeStamp = 12012/30000},
+<li>					{duration = 1001/30000, presentationTimeStamp = 15015/30000, decodeTimeStamp = 13013/30000},
+<li>					{duration = 1001/30000, presentationTimeStamp = 13013/30000, decodeTimeStamp = 14014/30000},
+<li>					{duration = 1001/30000, presentationTimeStamp = 14014/30000, decodeTimeStamp = 15015/30000}}
 </ul>
-<br>				numSampleSizeEntries: 6
-<br>				sampleSizeArray: {10580, 1234, 1364, 75660, 1012, 988}
+<li>				numSampleSizeEntries: 6
+<li>				sampleSizeArray: {10580, 1234, 1364, 75660, 1012, 988}
 </ul>
 				Example of usage for compressed audio:
 <ul>				dataBuffer: contains 24 compressed AAC packets
-<br>				dataFormatDescription: describes 44.1kHz AAC audio
-<br>				numSamples: 24
-<br>				numSampleTimingEntries: 1
-<br>				sampleTimingArray: one entry = {
+<li>				dataFormatDescription: describes 44.1kHz AAC audio
+<li>				numSamples: 24
+<li>				numSampleTimingEntries: 1
+<li>				sampleTimingArray: one entry = {
 <ul>					{duration = 1024/44100, presentationTimeStamp = 0/44100, decodeTimeStamp = invalid }}
 </ul>
-<br>				numSampleSizeEntries: 24
-<br>				sampleSizeArray:
+<li>				numSampleSizeEntries: 24
+<li>				sampleSizeArray:
 <ul>					{191, 183, 208, 213, 202, 206, 209, 206, 204, 192, 202, 277,
-<br>					 282, 240, 209, 194, 193, 197, 196, 198, 168, 199, 171, 194}
+<li>					 282, 240, 209, 194, 193, 197, 196, 198, 168, 199, 171, 194}
 </ul>
 </ul>
 				Example of usage for uncompressed interleaved audio:
 <ul>				dataBuffer: contains 24000 uncompressed interleaved stereo frames, each containing 2 Float32s =
 <ul>					{{L,R},
-<br>					 {L,R},
-<br>					 {L,R}, ...}
+<li>					 {L,R},
+<li>					 {L,R}, ...}
 </ul>
-<br>				dataFormatDescription: describes 48kHz Float32 interleaved audio
-<br>				numSamples: 24000
-<br>				numSampleTimingEntries: 1
-<br>				sampleTimingArray: one entry = {
+<li>				dataFormatDescription: describes 48kHz Float32 interleaved audio
+<li>				numSamples: 24000
+<li>				numSampleTimingEntries: 1
+<li>				sampleTimingArray: one entry = {
 <ul>					{duration = 1/48000, presentationTimeStamp = 0/48000, decodeTimeStamp = invalid }}
 </ul>
-<br>				numSampleSizeEntries: 1
-<br>				sampleSizeArray: {8}
+<li>				numSampleSizeEntries: 1
+<li>				sampleSizeArray: {8}
 </ul>
 				Example of usage for uncompressed non-interleaved audio:
 <ul>				dataBuffer: contains 24000 uncompressed non-interleaved stereo frames, each containing 2 (non-contiguous) Float32s =
 <ul>					{{L,L,L,L,L,...},
-<br>					 {R,R,R,R,R,...}}
+<li>					 {R,R,R,R,R,...}}
 </ul>
-<br>				dataFormatDescription: describes 48kHz Float32 non-interleaved audio
-<br>				numSamples: 24000
-<br>				numSampleTimingEntries: 1
-<br>				sampleTimingArray: one entry = {duration = 1/48000, presentationTimeStamp = 0/48000, decodeTimeStamp = invalid }
-<br>				numSampleSizeEntries: 0
-<br>				sampleSizeArray: NULL (because the samples are not contiguous)
+<li>				dataFormatDescription: describes 48kHz Float32 non-interleaved audio
+<li>				numSamples: 24000
+<li>				numSampleTimingEntries: 1
+<li>				sampleTimingArray: one entry = {duration = 1/48000, presentationTimeStamp = 0/48000, decodeTimeStamp = invalid }
+<li>				numSampleSizeEntries: 0
+<li>				sampleSizeArray: NULL (because the samples are not contiguous)
 </ul>
 */
 CM_EXPORT
@@ -386,7 +386,7 @@ OSStatus CMSampleBufferCreateCopy(
 														Pass kCFAllocatorDefault to use the default allocator. */
 	CMSampleBufferRef sbuf,							/*! @param sbuf
 														CMSampleBuffer being copied. */
-	CMSampleBufferRef *sbufCopyOut)					/*! @param sBufOut
+	CMSampleBufferRef *sbufCopyOut)					/*! @param sbufCopyOut
 														Returned newly created CMSampleBuffer. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
@@ -760,6 +760,8 @@ CM_EXPORT const CFStringRef kCMSampleBufferConduitNotificationParameter_Upcoming
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_3);
 CM_EXPORT const CFStringRef kCMSampleBufferConduitNotificationParameter_MinUpcomingOutputPTS  // payload: CFDictionary(CMTime)
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_3);
+CM_EXPORT const CFStringRef kCMSampleBufferConduitNotificationParameter_MaxUpcomingOutputPTS  // payload: CFDictionary(CMTime)
+							__OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_5_0);
 
 /*!
 	@constant	kCMSampleBufferConsumerNotification_BufferConsumed
@@ -908,8 +910,8 @@ CMTime CMSampleBufferGetOutputDecodeTimeStamp(
 	@discussion	If only one CMSampleTimingInfo struct is returned, it applies to all samples in the buffer.
 				See documentation of CMSampleTimingInfo for details of how a single CMSampleTimingInfo struct can apply to multiple samples.
 				The timingArrayOut must be allocated by the caller, and the number of entries allocated must be passed in timingArrayEntries.
-				If timingArrayOut is NULL, timingArrayEntriesNeededOut will return the required number of entries.  Similarly, if
-				*timingArrayEntriesNeededOut is too small, kCMSampleBufferError_ArrayTooSmall will be returned, and timingArrayEntriesNeededOut
+				If timingArrayOut is NULL, timingArrayEntriesNeededOut will return the required number of entries.  Similarly, 
+				if *timingArrayEntriesNeededOut is too small, kCMSampleBufferError_ArrayTooSmall will be returned, and timingArrayEntriesNeededOut
 				will return the required number of entries. In either case, the caller can then make an appropriately-sized timingArrayOut and call again.
 				For example, the caller might pass the address of a CMSampleTimingInfo struct on the stack (as timingArrayOut), and 1 (as
 				timingArrayEntries). If all samples are describable with a single CMSampleTimingInfo struct (or there is only one sample
@@ -917,7 +919,7 @@ CMTime CMSampleBufferGetOutputDecodeTimeStamp(
 				timingArrayEntriesNeededOut. Only in this case will the caller actually need to allocate an array.
 				
 				If there is no timingInfo in this CMSampleBuffer, kCMSampleBufferError_BufferHasNoSampleTimingInfo will be returned, and
-				*timingArrayEntriesNeededOut will be set to 0.
+				timingArrayEntriesNeededOut will be set to 0.
 */
 CM_EXPORT
 OSStatus CMSampleBufferGetSampleTimingInfoArray(
@@ -938,16 +940,16 @@ OSStatus CMSampleBufferGetSampleTimingInfoArray(
 	@discussion	If only one CMSampleTimingInfo struct is returned, it applies to all samples in the buffer.
 				See documentation of CMSampleTimingInfo for details of how a single CMSampleTimingInfo struct can apply to multiple samples.
 				The timingArrayOut must be allocated by the caller, and the number of entries allocated must be passed in timingArrayEntries.
-				If timingArrayOut is NULL, timingArrayEntriesNeededOut will return the required number of entries.  Similarly, if
-				*timingArrayEntriesNeededOut is too small, kCMSampleBufferError_ArrayTooSmall will be returned, and timingArrayEntriesNeededOut
+				If timingArrayOut is NULL, timingArrayEntriesNeededOut will return the required number of entries.  Similarly,
+				if *timingArrayEntriesNeededOut is too small, kCMSampleBufferError_ArrayTooSmall will be returned, and timingArrayEntriesNeededOut
 				will return the required number of entries. In either case, the caller can then make an appropriately-sized timingArrayOut and call again.
 				For example, the caller might pass the address of a CMSampleTimingInfo struct on the stack (as timingArrayOut), and 1 (as
 				timingArrayEntries). If all samples are describable with a single CMSampleTimingInfo struct (or there is only one sample
 				in the CMSampleBuffer), this call will succeed. If not, it will fail, and will return the number of entries required in
 				timingArrayEntriesNeededOut. Only in this case will the caller actually need to allocate an array.
 				
-				If there is no timingInfo in this CMSampleBuffer, kCMSampleBufferError_BufferHasNoSampleTimingInfo will be returned, and
-				*timingArrayEntriesNeededOut will be set to 0.
+				If there is no timingInfo in this CMSampleBuffer, kCMSampleBufferError_BufferHasNoSampleTimingInfo will be returned,
+				and *timingArrayEntriesNeededOut will be set to 0.
 */
 CM_EXPORT
 OSStatus CMSampleBufferGetOutputSampleTimingInfoArray(
@@ -997,8 +999,8 @@ OSStatus CMSampleBufferGetSampleTimingInfo(
 				need to allocate an array.  0 entries will be returned if the samples in the buffer are non-contiguous (eg. non-interleaved
 				audio, where the channel values for a single sample are scattered through the buffer).
 				
-				If there are no sample sizes in this CMSampleBuffer, kCMSampleBufferError_BufferHasNoSampleSizes will be returned, and
-				*sizeArrayEntriesNeededOut will be set to 0.  This will be true, for example,
+				If there are no sample sizes in this CMSampleBuffer, kCMSampleBufferError_BufferHasNoSampleSizes will be returned,
+				and *sizeArrayEntriesNeededOut will be set to 0.  This will be true, for example,
 				if the samples in the buffer are non-contiguous (eg. non-interleaved audio, where
 				the channel values for a single sample are scattered through the buffer), or if
 				this CMSampleBuffer contains a CVImageBuffer.

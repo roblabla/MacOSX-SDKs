@@ -1,9 +1,9 @@
 /*
-     File:       OT/OpenTransportProviders.h
+     File:       OSServices/OpenTransportProviders.h
  
-     Contains:   This file contains provider-specific definitions for various built-in providers.
+     Contains:   *** DEPRECATED *** This file contains provider-specific definitions for various built-in providers.
  
-     Copyright:  © 1993-2010 by Apple Inc. and Mentat Inc., all rights reserved.
+     Copyright:  (c) 1993-2011 Apple Inc. and Mentat Inc. All rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -11,6 +11,7 @@
                      http://developer.apple.com/bugreporter/
  
 */
+
 #ifndef __OPENTRANSPORTPROVIDERS__
 #define __OPENTRANSPORTPROVIDERS__
 
@@ -20,7 +21,7 @@
 
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -337,7 +338,7 @@ extern void
 OTInitInetAddress(
   InetAddress *  addr,
   InetPort       port,
-  InetHost       host)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  InetHost       host)                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_4,__IPHONE_NA,__IPHONE_NA);
 
 
 /*
@@ -351,7 +352,7 @@ OTInitInetAddress(
 extern OTByteCount 
 OTInitDNSAddress(
   DNSAddress *  addr,
-  char *        str)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  char *        str)                                          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_4,__IPHONE_NA,__IPHONE_NA);
 
 
 /*
@@ -365,7 +366,7 @@ OTInitDNSAddress(
 extern OSStatus 
 OTInetStringToHost(
   const char *  str,
-  InetHost *    host)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  InetHost *    host)                                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_4,__IPHONE_NA,__IPHONE_NA);
 
 
 /*
@@ -379,7 +380,7 @@ OTInetStringToHost(
 extern void 
 OTInetHostToString(
   InetHost   host,
-  char *     str)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  char *     str)                                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_4,__IPHONE_NA,__IPHONE_NA);
 
 
 /*
@@ -393,7 +394,7 @@ OTInetHostToString(
 extern OSStatus 
 OTInetGetInterfaceInfo(
   InetInterfaceInfo *  info,
-  SInt32               val)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  SInt32               val)                                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_4,__IPHONE_NA,__IPHONE_NA);
 
 
 /*
@@ -408,7 +409,7 @@ extern OSStatus
 OTInetGetSecondaryAddresses(
   InetHost *  addr,
   UInt32 *    count,
-  SInt32      val)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  SInt32      val)                                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_4,__IPHONE_NA,__IPHONE_NA);
 
 
 #endif  /* !__LP64__ */
@@ -445,7 +446,7 @@ OTOpenInternetServicesInContext(
   OTConfigurationRef   cfig,
   OTOpenFlags          oflag,
   OSStatus *           err,
-  OTClientContextPtr   clientContext)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  OTClientContextPtr   clientContext)                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_4,__IPHONE_NA,__IPHONE_NA);
 
 
 /*
@@ -462,7 +463,7 @@ OTAsyncOpenInternetServicesInContext(
   OTOpenFlags          oflag,
   OTNotifyUPP          upp,
   void *               contextPtr,
-  OTClientContextPtr   clientContext)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  OTClientContextPtr   clientContext)                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_4,__IPHONE_NA,__IPHONE_NA);
 
 
 #endif  /* !__LP64__ */
@@ -506,7 +507,7 @@ extern OSStatus
 OTInetStringToAddress(
   InetSvcRef      ref,
   char *          name,
-  InetHostInfo *  hinfo)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  InetHostInfo *  hinfo)                                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_4,__IPHONE_NA,__IPHONE_NA);
 
 
 /*
@@ -521,7 +522,7 @@ extern OSStatus
 OTInetAddressToName(
   InetSvcRef       ref,
   InetHost         addr,
-  InetDomainName   name)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  InetDomainName   name)                                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_4,__IPHONE_NA,__IPHONE_NA);
 
 
 /*
@@ -536,7 +537,7 @@ extern OSStatus
 OTInetSysInfo(
   InetSvcRef     ref,
   char *         name,
-  InetSysInfo *  sysinfo)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  InetSysInfo *  sysinfo)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_4,__IPHONE_NA,__IPHONE_NA);
 
 
 /*
@@ -552,7 +553,7 @@ OTInetMailExchange(
   InetSvcRef          ref,
   char *              name,
   UInt16 *            num,
-  InetMailExchange *  mx)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  InetMailExchange *  mx)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_4,__IPHONE_NA,__IPHONE_NA);
 
 
 /*
@@ -573,7 +574,7 @@ OTInetQuery(
   OTByteCount   buflen,
   void **       argv,
   OTByteCount   argvlen,
-  OTFlags       flags)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  OTFlags       flags)                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_4,__IPHONE_NA,__IPHONE_NA);
 
 
 #ifdef __cplusplus
@@ -794,7 +795,7 @@ OTAsyncOpenAppleTalkServicesInContext(
   OTOpenFlags          flags,
   OTNotifyUPP          proc,
   void *               contextPtr,
-  OTClientContextPtr   clientContext)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  OTClientContextPtr   clientContext)                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_4,__IPHONE_NA,__IPHONE_NA);
 
 
 /*
@@ -810,7 +811,7 @@ OTOpenAppleTalkServicesInContext(
   OTConfigurationRef   cfig,
   OTOpenFlags          flags,
   OSStatus *           err,
-  OTClientContextPtr   clientContext)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  OTClientContextPtr   clientContext)                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_4,__IPHONE_NA,__IPHONE_NA);
 
 
 #endif  /* !__LP64__ */
@@ -854,7 +855,7 @@ OTOpenAppleTalkServicesInContext(
 extern OSStatus 
 OTATalkGetMyZone(
   ATSvcRef   ref,
-  TNetbuf *  zone)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  TNetbuf *  zone)                                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_4,__IPHONE_NA,__IPHONE_NA);
 
 
 /*
@@ -872,7 +873,7 @@ OTATalkGetMyZone(
 extern OSStatus 
 OTATalkGetLocalZones(
   ATSvcRef   ref,
-  TNetbuf *  zones)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  TNetbuf *  zones)                                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_4,__IPHONE_NA,__IPHONE_NA);
 
 
 /* Get the list of all zones on the internet specified by the ATSvcRef*/
@@ -887,7 +888,7 @@ OTATalkGetLocalZones(
 extern OSStatus 
 OTATalkGetZoneList(
   ATSvcRef   ref,
-  TNetbuf *  zones)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  TNetbuf *  zones)                                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_4,__IPHONE_NA,__IPHONE_NA);
 
 
 /* Stores an AppleTalkInfo structure into the TNetbuf (see later in this file)*/
@@ -902,7 +903,7 @@ OTATalkGetZoneList(
 extern OSStatus 
 OTATalkGetInfo(
   ATSvcRef   ref,
-  TNetbuf *  info)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  TNetbuf *  info)                                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_4,__IPHONE_NA,__IPHONE_NA);
 
 
 #ifdef __cplusplus
@@ -1060,7 +1061,7 @@ OTInitDDPAddress(
   UInt16        net,
   UInt8         node,
   UInt8         socket,
-  UInt8         ddpType)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  UInt8         ddpType)                                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_4,__IPHONE_NA,__IPHONE_NA);
 
 
 /*
@@ -1074,7 +1075,7 @@ OTInitDDPAddress(
 extern OTByteCount 
 OTInitNBPAddress(
   NBPAddress *  addr,
-  const char *  name)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  const char *  name)                                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_4,__IPHONE_NA,__IPHONE_NA);
 
 
 /*
@@ -1092,7 +1093,7 @@ OTInitDDPNBPAddress(
   UInt16           net,
   UInt8            node,
   UInt8            socket,
-  UInt8            ddpType)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  UInt8            ddpType)                                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_4,__IPHONE_NA,__IPHONE_NA);
 
 
 /* Compare 2 DDP addresses for equality*/
@@ -1107,7 +1108,7 @@ OTInitDDPNBPAddress(
 extern Boolean 
 OTCompareDDPAddresses(
   const DDPAddress *  addr1,
-  const DDPAddress *  addr2)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  const DDPAddress *  addr2)                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_4,__IPHONE_NA,__IPHONE_NA);
 
 
 /* Init an NBPEntity to a NULL name*/
@@ -1120,7 +1121,7 @@ OTCompareDDPAddresses(
  *    Non-Carbon CFM:   not available
  */
 extern void 
-OTInitNBPEntity(NBPEntity * entity)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+OTInitNBPEntity(NBPEntity * entity)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_4,__IPHONE_NA,__IPHONE_NA);
 
 
 /* Get the length an NBPEntity would have when stored as an address*/
@@ -1133,7 +1134,7 @@ OTInitNBPEntity(NBPEntity * entity)                           AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern OTByteCount 
-OTGetNBPEntityLengthAsAddress(const NBPEntity * entity)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+OTGetNBPEntityLengthAsAddress(const NBPEntity * entity)       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_4,__IPHONE_NA,__IPHONE_NA);
 
 
 /* Store an NBPEntity into an address buffer*/
@@ -1148,7 +1149,7 @@ OTGetNBPEntityLengthAsAddress(const NBPEntity * entity)       AVAILABLE_MAC_OS_X
 extern OTByteCount 
 OTSetAddressFromNBPEntity(
   UInt8 *            nameBuf,
-  const NBPEntity *  entity)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  const NBPEntity *  entity)                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_4,__IPHONE_NA,__IPHONE_NA);
 
 
 /* Create an address buffer from a string (use -1 for len to use strlen)*/
@@ -1164,7 +1165,7 @@ extern OTByteCount
 OTSetAddressFromNBPString(
   UInt8 *       addrBuf,
   const char *  name,
-  SInt32        len)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  SInt32        len)                                          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_4,__IPHONE_NA,__IPHONE_NA);
 
 
 /*
@@ -1183,7 +1184,7 @@ extern Boolean
 OTSetNBPEntityFromAddress(
   NBPEntity *    entity,
   const UInt8 *  addrBuf,
-  OTByteCount    len)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  OTByteCount    len)                                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_4,__IPHONE_NA,__IPHONE_NA);
 
 
 /* Routines to set a piece of an NBP entity from a character string*/
@@ -1198,7 +1199,7 @@ OTSetNBPEntityFromAddress(
 extern Boolean 
 OTSetNBPName(
   NBPEntity *   entity,
-  const char *  name)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  const char *  name)                                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_4,__IPHONE_NA,__IPHONE_NA);
 
 
 /*
@@ -1212,7 +1213,7 @@ OTSetNBPName(
 extern Boolean 
 OTSetNBPType(
   NBPEntity *   entity,
-  const char *  typeVal)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  const char *  typeVal)                                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_4,__IPHONE_NA,__IPHONE_NA);
 
 
 /*
@@ -1226,7 +1227,7 @@ OTSetNBPType(
 extern Boolean 
 OTSetNBPZone(
   NBPEntity *   entity,
-  const char *  zone)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  const char *  zone)                                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_4,__IPHONE_NA,__IPHONE_NA);
 
 
 /* Routines to extract pieces of an NBP entity*/
@@ -1241,7 +1242,7 @@ OTSetNBPZone(
 extern void 
 OTExtractNBPName(
   const NBPEntity *  entity,
-  char *             name)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  char *             name)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_4,__IPHONE_NA,__IPHONE_NA);
 
 
 /*
@@ -1255,7 +1256,7 @@ OTExtractNBPName(
 extern void 
 OTExtractNBPType(
   const NBPEntity *  entity,
-  char *             typeVal)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  char *             typeVal)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_4,__IPHONE_NA,__IPHONE_NA);
 
 
 /*
@@ -1269,7 +1270,7 @@ OTExtractNBPType(
 extern void 
 OTExtractNBPZone(
   const NBPEntity *  entity,
-  char *             zone)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  char *             zone)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_4,__IPHONE_NA,__IPHONE_NA);
 
 
 #ifdef __cplusplus

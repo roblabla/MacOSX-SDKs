@@ -3,9 +3,7 @@
  
      Contains:   Text Utilities Interfaces.
  
-     Version:    CarbonCore-960.18~3
- 
-     Copyright:  © 1985-2008 Apple Inc. All rights reserved.
+     Copyright:  Â© 1985-2011 Apple Inc. All rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -34,7 +32,7 @@
 
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -134,7 +132,7 @@ Munger(
   const void *  ptr1,
   long          len1,
   const void *  ptr2,
-  long          len2)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
+  long          len2)                                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_6, __IPHONE_NA, __IPHONE_NA);
 
 
 #if !__LP64__
@@ -154,7 +152,7 @@ Munger(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern StringHandle 
-NewString(ConstStr255Param theString)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+NewString(ConstStr255Param theString)                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -175,7 +173,7 @@ NewString(ConstStr255Param theString)                         AVAILABLE_MAC_OS_X
 extern void 
 SetString(
   StringHandle       theString,
-  ConstStr255Param   strNew)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  ConstStr255Param   strNew)                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -194,7 +192,7 @@ SetString(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern StringHandle 
-GetString(short stringID)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+GetString(short stringID)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 #endif  /* !__LP64__ */
@@ -219,7 +217,7 @@ extern void
 GetIndString(
   Str255   theString,
   short    strListID,
-  short    itemIndex)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  short    itemIndex)                                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 #endif  /* !__LP64__ */
@@ -288,7 +286,7 @@ FindWordBreaks(
   Boolean         leadingEdge,
   BreakTablePtr   breaks,
   OffsetTable     offsets,
-  ScriptCode      script)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  ScriptCode      script)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -310,7 +308,7 @@ extern void
 LowercaseText(
   Ptr          textPtr,
   short        len,
-  ScriptCode   script)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  ScriptCode   script)                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -332,7 +330,7 @@ extern void
 UppercaseText(
   Ptr          textPtr,
   short        len,
-  ScriptCode   script)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  ScriptCode   script)                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -354,7 +352,7 @@ extern void
 StripDiacritics(
   Ptr          textPtr,
   short        len,
-  ScriptCode   script)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  ScriptCode   script)                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -376,7 +374,7 @@ extern void
 UppercaseStripDiacritics(
   Ptr          textPtr,
   short        len,
-  ScriptCode   script)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  ScriptCode   script)                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -397,7 +395,7 @@ extern ScriptRunStatus
 FindScriptRun(
   Ptr     textPtr,
   long    textLen,
-  long *  lenUsed)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  long *  lenUsed)                                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -505,7 +503,7 @@ FindScriptRun(
 extern void 
 UpperString(
   Str255    theString,
-  Boolean   diacSensitive)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  Boolean   diacSensitive)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 #endif  /* !__LP64__ */
@@ -529,7 +527,7 @@ UpperString(
 extern void 
 upperstring(
   char *    theString,
-  Boolean   diacSensitive)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  Boolean   diacSensitive)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 #endif  /* !__LP64__ */
@@ -587,7 +585,7 @@ upperstring(
 extern void 
 c2pstrcpy(
   Str255        dst,
-  const char *  src)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  const char *  src)                                          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -608,7 +606,7 @@ c2pstrcpy(
 extern void 
 p2cstrcpy(
   char *             dst,
-  ConstStr255Param   src)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  ConstStr255Param   src)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -629,7 +627,7 @@ p2cstrcpy(
 extern void 
 CopyPascalStringToC(
   ConstStr255Param   src,
-  char *             dst)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  char *             dst)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -650,7 +648,7 @@ CopyPascalStringToC(
 extern void 
 CopyCStringToPascal(
   const char *  src,
-  Str255        dst)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  Str255        dst)                                          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 #endif  /* !__LP64__ */
@@ -665,7 +663,7 @@ CopyCStringToPascal(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern StringPtr 
-c2pstr(char * aStr)                                           AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED;
+c2pstr(char * aStr)                                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -677,7 +675,7 @@ c2pstr(char * aStr)                                           AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern StringPtr 
-C2PStr(Ptr cString)                                           AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED;
+C2PStr(Ptr cString)                                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -689,7 +687,7 @@ C2PStr(Ptr cString)                                           AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern char * 
-p2cstr(StringPtr aStr)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+p2cstr(StringPtr aStr)                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -701,7 +699,7 @@ p2cstr(StringPtr aStr)                                        AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Ptr 
-P2CStr(StringPtr pString)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+P2CStr(StringPtr pString)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 #endif  /* !__LP64__ */

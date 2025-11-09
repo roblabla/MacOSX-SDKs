@@ -2,16 +2,9 @@
      File:       CarbonCore/MacErrors.h
  
      Contains:   OSErr codes.
+                 The contents of this header file are deprecated.
  
-     Version:    CarbonCore-960.18~3
- 
-     Copyright:  © 1985-2008 by Apple Computer, Inc., all rights reserved
- 
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
- 
-                     http://developer.apple.com/bugreporter/
- 
+     Copyright:  © 1985-2011 by Apple Inc. All rights reserved.
 */
 #ifndef __MACERRORS__
 #define __MACERRORS__
@@ -21,7 +14,7 @@
 #endif
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -3191,7 +3184,7 @@ enum {
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-SysError(short errorCode)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SysError(short errorCode)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 

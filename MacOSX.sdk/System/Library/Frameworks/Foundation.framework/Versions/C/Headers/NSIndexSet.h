@@ -1,5 +1,5 @@
 /*	NSIndexSet.h
-	Copyright (c) 2002-2011, Apple Inc. All rights reserved.
+	Copyright (c) 2002-2012, Apple Inc. All rights reserved.
 */
 
 /* Class for managing set of indexes. The set of valid indexes are 0 .. NSNotFound - 1; trying to use indexes outside this range is an error.  NSIndexSet uses NSNotFound as a return value in cases where the queried index doesn't exist in the set; for instance, when you ask firstIndex and there are no indexes; or when you ask for indexGreaterThanIndex: on the last index, and so on.

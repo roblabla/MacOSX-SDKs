@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2011 Apple Inc. All rights reserved.
+ * Copyright (c) 1998-2012 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -1331,6 +1331,90 @@ Example:
 </pre>
 */
 #define kIOPropertyPortSpeed10GigabitKey				"10 Gigabit"
+
+
+/*!
+ @defined kIOPropertyPortSpeed12GigabitKey
+ @discussion This key defines the value of 12 Gigabit for the key
+ kIOPropertyPortSpeedKey. If the speed of the port is 12 Gigabits
+ per second and is not automatically determined (i.e. the user
+ configured the port to be exactly this speed),
+ this key should be used.
+ 
+ Note: This value can change. It is not a static value.
+ 
+ Requirement: Optional for any interconnect.
+ 
+ Example:
+ <pre>
+ @textblock
+ <dict>
+ <key>Controller Characteristics</key>
+ <dict>
+ <key>Port Speed</key>
+ <string>12 Gigabit</string>
+ </dict>
+ </dict>
+ @/textblock
+ </pre>
+ */
+#define kIOPropertyPortSpeed12GigabitKey				"12 Gigabit"
+
+
+/*!
+ @defined kIOPropertyPortSpeed16GigabitKey
+ @discussion This key defines the value of 16 Gigabit for the key
+ kIOPropertyPortSpeedKey. If the speed of the port is 16 Gigabits
+ per second and is not automatically determined (i.e. the user
+ configured the port to be exactly this speed),
+ this key should be used.
+ 
+ Note: This value can change. It is not a static value.
+ 
+ Requirement: Optional for any interconnect.
+ 
+ Example:
+ <pre>
+ @textblock
+ <dict>
+ <key>Controller Characteristics</key>
+ <dict>
+ <key>Port Speed</key>
+ <string>16 Gigabit</string>
+ </dict>
+ </dict>
+ @/textblock
+ </pre>
+ */
+#define kIOPropertyPortSpeed16GigabitKey				"16 Gigabit"
+
+
+/*!
+ @defined kIOPropertyPortSpeed40GigabitKey
+ @discussion This key defines the value of 40 Gigabit for the key
+ kIOPropertyPortSpeedKey. If the speed of the port is 40 Gigabits
+ per second and is not automatically determined (i.e. the user
+ configured the port to be exactly this speed),
+ this key should be used.
+ 
+ Note: This value can change. It is not a static value.
+ 
+ Requirement: Optional for any interconnect.
+ 
+ Example:
+ <pre>
+ @textblock
+ <dict>
+ <key>Controller Characteristics</key>
+ <dict>
+ <key>Port Speed</key>
+ <string>40 Gigabit</string>
+ </dict>
+ </dict>
+ @/textblock
+ </pre>
+ */
+#define kIOPropertyPortSpeed40GigabitKey				"40 Gigabit"
 
 
 /*!

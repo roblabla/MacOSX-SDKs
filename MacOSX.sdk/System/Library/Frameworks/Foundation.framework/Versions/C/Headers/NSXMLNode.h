@@ -1,5 +1,5 @@
 /*	NSXMLNode.h
-	Copyright (c) 2004-2011, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2012, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -11,7 +11,7 @@
 /*!
     @typedef NSXMLNodeKind
 */
-enum {
+typedef NS_ENUM(NSUInteger, NSXMLNodeKind) {
 	NSXMLInvalidKind = 0,
 	NSXMLDocumentKind,
 	NSXMLElementKind,
@@ -26,7 +26,6 @@ enum {
 	NSXMLElementDeclarationKind,
 	NSXMLNotationDeclarationKind
 };
-typedef NSUInteger NSXMLNodeKind;
 
 // initWithKind options
 //  NSXMLNodeOptionsNone

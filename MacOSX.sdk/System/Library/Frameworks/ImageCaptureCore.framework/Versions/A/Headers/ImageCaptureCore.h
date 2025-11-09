@@ -11,6 +11,7 @@
 
 #pragma once
 
+#import <Foundation/Foundation.h>
 #import <ImageCaptureCore/ICCommonConstants.h>
 #import <ImageCaptureCore/ICDeviceBrowser.h>
 #import <ImageCaptureCore/ICDevice.h>

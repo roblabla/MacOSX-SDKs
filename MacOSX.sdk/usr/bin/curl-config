@@ -6,7 +6,7 @@
 #                            | (__| |_| |  _ <| |___
 #                             \___|\___/|_| \_\_____|
 #
-# Copyright (C) 2001 - 2010, Daniel Stenberg, <daniel@haxx.se>, et al.
+# Copyright (C) 2001 - 2011, Daniel Stenberg, <daniel@haxx.se>, et al.
 #
 # This software is licensed as described in the file COPYING, which
 # you should have received as part of this distribution. The terms
@@ -22,8 +22,8 @@
 ###########################################################################
 
 prefix=/usr
-exec_prefix=${prefix}
-includedir=${prefix}/include
+exec_prefix=/usr
+includedir=/usr/include
 
 usage()
 {
@@ -74,7 +74,7 @@ while test $# -gt 0; do
 	;;
 
     --cc)
-	echo "gcc"
+	echo "cc"
 	;;
 
     --prefix)
@@ -82,7 +82,7 @@ while test $# -gt 0; do
 	;;
 
     --feature|--features)
-        for feature in SSL IPv6 libz AsynchDNS NTLM ""; do
+        for feature in SSL IPv6 libz AsynchDNS NTLM NTLM_WB ""; do
             test -n "$feature" && echo "$feature"
         done
 	;;
@@ -94,7 +94,7 @@ while test $# -gt 0; do
 	;;
 
     --version)
-	echo libcurl 7.21.4
+	echo libcurl 7.24.0
 	exit 0
 	;;
 
@@ -106,20 +106,20 @@ while test $# -gt 0; do
 	# dash as that's used for things like version 1.2.3-CVS
 	cpatch=`echo $checkfor | cut -d. -f3 | cut -d- -f1`
         checknum=`echo "$cmajor*256*256 + $cminor*256 + ${cpatch:-0}" | bc`
-        numuppercase=`echo 071504 | tr 'a-f' 'A-F'`
+        numuppercase=`echo 071800 | tr 'a-f' 'A-F'`
         nownum=`echo "obase=10; ibase=16; $numuppercase" | bc`
 
 	if test "$nownum" -ge "$checknum"; then
 	  # silent success
 	  exit 0
 	else
-	  echo "requested version $checkfor is newer than existing 7.21.4"
+	  echo "requested version $checkfor is newer than existing 7.24.0"
 	  exit 1
 	fi
 	;;
 
     --vernum)
-	echo 071504
+	echo 071800
 	exit 0
 	;;
 
@@ -128,31 +128,19 @@ while test $# -gt 0; do
 	;;
 
     --cflags)
-       	if test "X${prefix}/include" = "X/usr/include"; then
-          echo ""
-        else
-          echo "-I${prefix}/include"
-        fi
+       	echo ""
        	;;
 
     --libs)
-	if test "X${exec_prefix}/lib" != "X/usr/lib" -a "X${exec_prefix}/lib" != "X/usr/lib64"; then
-	   CURLLIBDIR="-L${exec_prefix}/lib "
-	else
-	   CURLLIBDIR=""
-	fi
-	if test "Xyes" = "Xyes"; then
-	  echo ${CURLLIBDIR}-lcurl
-	else
-	  echo ${CURLLIBDIR}-lcurl
-	fi
+	echo -lcurl
 	;;
 
     --static-libs)
+	echo ""
 	;;
 
     --configure)
-      echo " '--prefix=/usr' '--mandir=/usr/share/man' '--infodir=/usr/share/info' '--disable-dependency-tracking' '--with-gssapi' '--enable-hidden-symbols' '--disable-static' '--enable-threaded-resolver' 'CFLAGS=-arch x86_64 -arch i386 -g -Os -pipe ' 'LDFLAGS=-arch x86_64 -arch i386            '"
+      echo --disable-static --enable-hidden-symbols --enable-threaded-resolver --with-gssapi
     ;;
 
     *)

@@ -35,23 +35,23 @@
 @class NSString;
 
 @interface DOMHTMLSelectElement : DOMHTMLElement
-@property(readonly, copy) NSString *type;
-@property int selectedIndex;
-@property(copy) NSString *value;
-@property(readonly) int length;
-@property(readonly, retain) DOMHTMLFormElement *form;
-@property(readonly) BOOL willValidate AVAILABLE_IN_WEBKIT_VERSION_4_0;
-@property(readonly, retain) DOMHTMLOptionsCollection *options;
-@property BOOL disabled;
 @property BOOL autofocus AVAILABLE_IN_WEBKIT_VERSION_4_0;
+@property BOOL disabled;
+@property(readonly, retain) DOMHTMLFormElement *form;
 @property BOOL multiple;
 @property(copy) NSString *name;
 @property int size;
+@property(readonly, copy) NSString *type;
+@property(readonly, retain) DOMHTMLOptionsCollection *options;
+@property(readonly) int length;
+@property int selectedIndex;
+@property(copy) NSString *value;
+@property(readonly) BOOL willValidate AVAILABLE_IN_WEBKIT_VERSION_4_0;
 
-- (void)add:(DOMHTMLElement *)element before:(DOMHTMLElement *)before AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-- (void)remove:(int)index;
 - (DOMNode *)item:(unsigned)index AVAILABLE_IN_WEBKIT_VERSION_4_0;
 - (DOMNode *)namedItem:(NSString *)name AVAILABLE_IN_WEBKIT_VERSION_4_0;
+- (void)add:(DOMHTMLElement *)element before:(DOMHTMLElement *)before AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+- (void)remove:(int)index;
 @end
 
 @interface DOMHTMLSelectElement (DOMHTMLSelectElementDeprecated)

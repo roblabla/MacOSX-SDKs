@@ -38,7 +38,7 @@ CB_EXTERN NSString * const CBUUIDServiceChangedString;
  *      16-bits and 32-bits UUIDs are implicitely pre-filled with the Bluetooth Base UUID.
  *
  */
-NS_CLASS_AVAILABLE(10_7, NA)
+NS_CLASS_AVAILABLE(10_7, 5_0)
 CB_EXTERN_CLASS @interface CBUUID : NSObject <NSCopying>
 {
 @private

@@ -26,12 +26,10 @@
 #ifndef _CSSMCONFIG_H_
 #define _CSSMCONFIG_H_  1
 
+#include <AvailabilityMacros.h>
 #include <TargetConditionals.h>
-#if TARGET_OS_EMBEDDED
 #include <ConditionalMacros.h>
-#else
-#include <CoreServices/../Frameworks/CarbonCore.framework/Headers/ConditionalMacros.h>
-#endif
+
 
 /* #if defined(TARGET_API_MAC_OS8) || defined(TARGET_API_MAC_CARBON) || defined(TARGET_API_MAC_OSX) */
 #if defined(TARGET_OS_MAC)

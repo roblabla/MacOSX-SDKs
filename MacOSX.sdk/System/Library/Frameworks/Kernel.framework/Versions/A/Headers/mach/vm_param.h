@@ -105,8 +105,8 @@
  */
 
 #if 1
-#define atop(x)	((uint32_t)(x) >> PAGE_SHIFT)
-#define ptoa(x)	((uint32_t)(x) << PAGE_SHIFT)
+#define atop(x)	((vm_address_t)(x) >> PAGE_SHIFT)
+#define ptoa(x)	((vm_address_t)(x) << PAGE_SHIFT)
 #else
 #define atop(x) (0UL = 0)
 #define ptoa(x) (0UL = 0)
@@ -233,7 +233,7 @@ extern uint64_t		max_mem;		/* 64-bit size of memory - limited by maxmem */
 
 extern vm_size_t	page_size;
 extern vm_size_t	page_mask;
-extern int			page_shift;
+extern int		page_shift;
 
 /* We need a way to get rid of compiler warnings when we cast from   */
 /* a 64 bit value to an address (which may be 32 bits or 64-bits).   */

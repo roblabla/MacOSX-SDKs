@@ -1,6 +1,6 @@
 /*
         NSMovieView.h
-        Copyright (c) 1998-2011, Apple Inc. All rights reserved.
+        Copyright (c) 1998-2012, Apple Inc. All rights reserved.
 */
 
 // Please note that NSMovie and NSMovieView are deprecated. NSMovieView does not exist in 64-bit.
@@ -45,7 +45,7 @@ typedef struct __MVFlags {
 - (void) setMovie:(NSMovie*)movie NS_DEPRECATED_MAC(10_0, 10_5);
 - (NSMovie*) movie NS_DEPRECATED_MAC(10_0, 10_5);
 
-- (void* /*MovieController*/) movieController NS_DEPRECATED_MAC(10_0, 10_5);
+- (void* /*MovieController*/) movieController NS_RETURNS_INNER_POINTER NS_DEPRECATED_MAC(10_0, 10_5);
 - (NSRect) movieRect NS_DEPRECATED_MAC(10_0, 10_5);
 
     // playing

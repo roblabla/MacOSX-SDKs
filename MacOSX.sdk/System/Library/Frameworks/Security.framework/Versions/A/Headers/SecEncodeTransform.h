@@ -51,8 +51,30 @@ extern const CFStringRef kSecZLibEncoding;
  Returns one of the strings defined in the previous section.
  */
 
-extern const CFStringRef kSecEncodeLineLengthAttribute;
 extern const CFStringRef kSecEncodeTypeAttribute;
+
+
+extern const CFStringRef kSecLineLength64;
+extern const CFStringRef kSecLineLength76;
+	
+/*!
+ @constant kSecEncodeLineLengthAttribute
+ Used with SecTransformSetAttribute to set the length
+ of encoded Base32 or Base64 lines.   Some systems will
+ not decode or otherwise deal with excessively long lines,
+ or may be defined to limit lines to specific lengths
+ (for example RFC1421 - 64, and RFC2045 - 76).
+
+ The LineLengthAttribute may be set to any positive
+ value (via a CFNumberRef) to limit to a specific
+ length (values smaller then X for Base32 or Y for Base64
+ are assume to be X or Y), or to zero for no specific
+ limit.   Either of the string constants kSecLineLength64
+ (RFC1421), or kSecLineLength76 (RFC2045) may be used to
+ set line lengths of 64 or 76 bytes.
+ */
+extern const CFStringRef kSecEncodeLineLengthAttribute;
+
 extern const CFStringRef kSecCompressionRatio;
 
 /*!

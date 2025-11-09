@@ -9,7 +9,7 @@
 
 
 #pragma mark -
-#pragma mark IMServicePlugIn (iChat -> Service Plug-in)
+#pragma mark IMServicePlugIn (Messages -> Service Plug-in)
 #pragma mark -
 
 /*!
@@ -31,7 +31,7 @@
 /*!
     @method     requestGroupList
 
-    @discussion iChat calls this method on the IMServicePlugIn when the user
+    @discussion Messages calls this method on the IMServicePlugIn when the user
                 finishes modifying the group list.
                 
                 After a -requestGroupList is requested, the service plug-in should
@@ -66,7 +66,7 @@
 /*!
     @method     addGroups:
 
-    @discussion iChat calls this method when the user had added one or 
+    @discussion Messages calls this method when the user had added one or 
                 more groups to the group list.
 
     @param      groupNames  An array of NSString objects, corresponding to the
@@ -78,7 +78,7 @@
 /*!
     @method     removeGroups:
 
-    @discussion iChat calls this method when the user had removed one or
+    @discussion Messages calls this method when the user had removed one or
                 more groups from the group list.
 
     @param      groupNames  An array of NSString objects, corresponding to the
@@ -90,7 +90,7 @@
 /*!
     @method     renameGroup:toGroup:
 
-    @discussion iChat calls this method when the user renames a group.
+    @discussion Messages calls this method when the user renames a group.
 
     @param      oldGroupName  The former name of the group
     @param      newGroupName  The new name of the group
@@ -101,10 +101,10 @@
 /*!
     @method     addHandles:toGroup:
 
-    @discussion iChat calls this method when the user adds member handles to a group.
+    @discussion Messages calls this method when the user adds member handles to a group.
 
                 In the event that the user moves a member from one group to
-                another group, iChat will first call this method for the
+                another group, Messages will first call this method for the
                 destination group, and then call -removeHandles:fromGroup:
                 for the source group.
 
@@ -117,10 +117,10 @@
 /*!
     @method     removeHandles:fromGroup:
 
-    @discussion iChat calls this method when the adds member handles to a group.
+    @discussion Messages calls this method when the adds member handles to a group.
 
                 In the event that the user moves a member from one group to
-                another group, iChat will first call -addHandles:toGroup: 
+                another group, Messages will first call -addHandles:toGroup: 
                 for the destination group, and then call this method for
                 the source group.
 
@@ -151,7 +151,7 @@
 /*!
     @method     reorderGroups:
 
-    @discussion iChat calls this method when the user modifies the order of groups.
+    @discussion Messages calls this method when the user modifies the order of groups.
 
     @param      groupNames  An NSArray of NSStrings, corresponding to group names in the new order
 */
@@ -161,7 +161,7 @@
 /*!
     @method     reorderGroups:
 
-    @discussion iChat calls this method when the user modifies the order of handles in a specific group.
+    @discussion Messages calls this method when the user modifies the order of handles in a specific group.
     
     @param      handles    An NSArray of NSStrings, corresponding to handles in the new order
     @param      groupName  The containing group
@@ -193,7 +193,7 @@
 /*!
     @method     sendAuthorizationRequestToHandle:
 
-    @discussion When iChat adds a handle to the group list on a service which requires authorization,
+    @discussion When Messages adds a handle to the group list on a service which requires authorization,
                 it will call -sendAuthorizationRequestToHandle: for each handle after 
                 -addHandles:toGroup:
 
@@ -205,7 +205,7 @@
 /*!
     @method     acceptAuthorizationRequestFromHandle:
 
-    @discussion When the user clicks the "Accept" button on a pending authorization request.  iChat
+    @discussion When the user clicks the "Accept" button on a pending authorization request.  Messages
                 calls this method on the service plug-in
 
     @param      handle     The handle to authorize
@@ -216,7 +216,7 @@
 /*!
     @method     declineAuthorizationRequestFromHandle:
 
-    @discussion When the user clicks the "Decline" button on a pending authorization request.  iChat
+    @discussion When the user clicks the "Decline" button on a pending authorization request.  Messages
                 calls this method on the service plug-in
 
     @param      handle     The handle to not authorize
@@ -237,12 +237,12 @@
                 If implementing this protocol, you must also include "IMServiceCapabilityGroupListHandlePictureSupport"
                 in the "IMServiceCapabilities" key in the Info.plist of your service plug-in.
 
-                iChat uses a caching mechanism for dealing with user pictures.  A unique identifier
+                Messages uses a caching mechanism for dealing with user pictures.  A unique identifier
                 should be provided/calculated for each buddy picture and pass up to the application
                 via the IMHandlePropertyPictureIdentifier handle property via:
                 id<IMServiceApplicationGroupListSupport> plugInDidUpdateProperties:ofHandle:]
                 
-                If iChat does not have the user picture cached, it will request it via:
+                If Messages does not have the user picture cached, it will request it via:
                 id<IMServicePlugInGroupListHandlePictureSupport> requestHandlePictureWithIdentifier:]
                 
                 The service plug-in then fetches the image data and responds with:
@@ -256,7 +256,7 @@
 /*!
     @method     requestPictureForHandle:withIdentifier:
 
-    @discussion iChat calls this method on the IMServicePlugIn instance when it needs the handle picture data
+    @discussion Messages calls this method on the IMServicePlugIn instance when it needs the handle picture data
                 for the specified identifier.
 
                 Once the service plug-in obtains this data, it should call
@@ -275,15 +275,15 @@
 
 
 #pragma mark -
-#pragma mark IMServiceApplication (Service Plug-in -> iChat)
+#pragma mark IMServiceApplication (Service Plug-in -> Messages)
 #pragma mark -
 
 
 /*!
     @protocol   IMServiceApplicationGroupListSupport
 
-    @discussion This protocol is used to pass the group list information up to iChat
-                iChat, and to provide response callbacks to IMServicePlugInInstantMessagingSupport 
+    @discussion This protocol is used to pass the group list information up to Messages
+                Messages, and to provide response callbacks to IMServicePlugInInstantMessagingSupport 
                 methods.
                 
                 IMServicePlugInGroupListSupport and IMServiceApplicationGroupListSupport are
@@ -297,7 +297,7 @@
 /*!
     @method     plug-inDidUpdateGroupList:error:
 
-    @discussion The IMServicePlugIn instance should call this method on iChat in response to 
+    @discussion The IMServicePlugIn instance should call this method on Messages in response to 
                 a downwards -requestGroupList request (which will be called after each user
                 modification of the group list).
 
@@ -326,7 +326,7 @@
 /*!
     @protocol   IMServiceApplicationGroupListAuthorizationSupport
 
-    @discussion This protocol is used to pass authorization requests from the server up to iChat.
+    @discussion This protocol is used to pass authorization requests from the server up to Messages.
                 
                 IMServicePlugInGroupListAuthorizationSupport and IMServiceApplicationGroupListAuthorizationSupport are
                 paired protocols.  If your service plug-in's principal class implements the
@@ -338,13 +338,13 @@
 /*!
     @method     plugInDidReceiveAuthorizationRequestFromHandle:
 
-	@discussion When the IMServicePlugIn instance calls this method on the service application, iChat
+	@discussion When the IMServicePlugIn instance calls this method on the service application, Messages
 	            displays an authorization request window from the specified handle.
 
-	            If the user clicks "Accept" on the window, iChat then calls -acceptAuthorizationRequestFromHandle:
+	            If the user clicks "Accept" on the window, Messages then calls -acceptAuthorizationRequestFromHandle:
 	 			on the service plug-in.
 				
-				If the user clicks "Decline", iChat instead calls -declineAuthorizationRequestFromHandle:
+				If the user clicks "Decline", Messages instead calls -declineAuthorizationRequestFromHandle:
 	            on the service plug-in.
 
 	@param      handle   The handle requesting authorization

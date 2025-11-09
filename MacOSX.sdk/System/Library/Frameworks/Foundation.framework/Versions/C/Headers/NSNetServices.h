@@ -1,5 +1,5 @@
 /*	NSNetServices.h
-        Copyright (c) 2002-2011, Apple Inc. All rights reserved.
+        Copyright (c) 2002-2012, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -13,50 +13,48 @@
 FOUNDATION_EXPORT NSString * const NSNetServicesErrorCode;
 FOUNDATION_EXPORT NSString * const NSNetServicesErrorDomain;
 
-enum {
+typedef NS_ENUM(NSInteger, NSNetServicesError) {
     
 /* An unknown error occured during resolution or publication.
 */
-    NSNetServicesUnknownError = -72000,
+    NSNetServicesUnknownError = -72000L,
     
 /* An NSNetService with the same domain, type and name was already present when the publication request was made.
 */
-    NSNetServicesCollisionError = -72001,
+    NSNetServicesCollisionError = -72001L,
     
 /* The NSNetService was not found when a resolution request was made.
 */
-    NSNetServicesNotFoundError	= -72002,
+    NSNetServicesNotFoundError	= -72002L,
     
 /* A publication or resolution request was sent to an NSNetService instance which was already published or a search request was made of an NSNetServiceBrowser instance which was already searching.
 */
-    NSNetServicesActivityInProgress = -72003,
+    NSNetServicesActivityInProgress = -72003L,
     
 /* An required argument was not provided when initializing the NSNetService instance.
 */
-    NSNetServicesBadArgumentError = -72004,
+    NSNetServicesBadArgumentError = -72004L,
     
 /* The operation being performed by the NSNetService or NSNetServiceBrowser instance was cancelled.
 */
-    NSNetServicesCancelledError = -72005,
+    NSNetServicesCancelledError = -72005L,
     
 /* An invalid argument was provided when initializing the NSNetService instance or starting a search with an NSNetServiceBrowser instance.
 */
-    NSNetServicesInvalidError = -72006,
+    NSNetServicesInvalidError = -72006L,
         
 /* Resolution of an NSNetService instance failed because the timeout was reached.
 */
-    NSNetServicesTimeoutError = -72007,
+    NSNetServicesTimeoutError = -72007L,
     
 };
-typedef NSInteger NSNetServicesError;
 
 
-enum {
+typedef NS_OPTIONS(NSUInteger, NSNetServiceOptions) {
 /* When passed to -publishWithOptions, this suppresses the auto-renaming of an NSNetService in the event of a name collision. The collision is reported to the instance's delegate on the netService:didNotPublish: method.
 */
     NSNetServiceNoAutoRename = 1UL << 0
 };
-typedef NSUInteger NSNetServiceOptions;
 
 
 #pragma mark -
@@ -144,7 +142,7 @@ If publish: is called on an NSNetService instance initialized with this method, 
 
 /* Retrieves streams from the NSNetService instance. The instance's delegate methods are not called. Returns YES if the streams requested are created successfully. Returns NO if or any reason the stream could not be created. If only one stream is desired, pass NULL for the address of the other stream. The streams that are created are not open, and are not scheduled in any run loop for any mode.
 */
-- (BOOL)getInputStream:(NSInputStream **)inputStream outputStream:(NSOutputStream **)outputStream;
+- (BOOL)getInputStream:(out __strong NSInputStream **)inputStream outputStream:(out __strong NSOutputStream **)outputStream;
 
 /* Sets the TXT record of the NSNetService instance that has been or will be published. Pass nil to remove the TXT record from the instance.
 */

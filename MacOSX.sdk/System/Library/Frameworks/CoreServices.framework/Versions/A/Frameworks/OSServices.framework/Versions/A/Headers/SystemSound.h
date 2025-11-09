@@ -1,9 +1,9 @@
 /*
-     File:       OSServices/SystemSound.h
+     File:       OSServices/SystemSoundPriv.h
  
-     Contains:   SystemSound include file
+     Contains:   *** DEPRECATED *** SystemSound include file
  
-     Copyright:  © 2000-2010 by Apple Inc., all rights reserved.
+     Copyright:  (c) 2000-2011 Apple Inc. All rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -11,6 +11,7 @@
                      http://developer.apple.com/bugreporter/
  
 */
+
 #ifndef __SYSTEMSOUND__
 #define __SYSTEMSOUND__
 
@@ -24,7 +25,7 @@
 
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -50,32 +51,32 @@ typedef UInt32                          SystemSoundActionID;
 typedef CALLBACK_API_C( OSStatus , SystemSoundCompletionProcPtr )(SystemSoundActionID actionID, void *userData);
 typedef STACK_UPP_TYPE(SystemSoundCompletionProcPtr)            SystemSoundCompletionUPP;
 /*
- *  NewSystemSoundCompletionUPP()
+ *  NewSystemSoundCompletionUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.3 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern SystemSoundCompletionUPP
-NewSystemSoundCompletionUPP(SystemSoundCompletionProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+NewSystemSoundCompletionUPP(SystemSoundCompletionProcPtr userRoutine) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3,__MAC_10_5,__IPHONE_NA,__IPHONE_NA);
 
 /*
- *  DisposeSystemSoundCompletionUPP()
+ *  DisposeSystemSoundCompletionUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.3 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeSystemSoundCompletionUPP(SystemSoundCompletionUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+DisposeSystemSoundCompletionUPP(SystemSoundCompletionUPP userUPP) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3,__MAC_10_5,__IPHONE_NA,__IPHONE_NA);
 
 /*
- *  InvokeSystemSoundCompletionUPP()
+ *  InvokeSystemSoundCompletionUPP()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.3 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -83,7 +84,7 @@ extern OSStatus
 InvokeSystemSoundCompletionUPP(
   SystemSoundActionID       actionID,
   void *                    userData,
-  SystemSoundCompletionUPP  userUPP)                          AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  SystemSoundCompletionUPP  userUPP)                          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3,__MAC_10_5,__IPHONE_NA,__IPHONE_NA);
 
 #if __MACH__
   #ifdef __cplusplus
@@ -120,7 +121,7 @@ InvokeSystemSoundCompletionUPP(
  *    Non-Carbon CFM:   not available
  */
 extern void 
-AlertSoundPlay(void)                                          AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+AlertSoundPlay(void)                                          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_5,__IPHONE_NA,__IPHONE_NA);
 
 
 /*
@@ -149,7 +150,7 @@ AlertSoundPlay(void)                                          AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern void 
-AlertSoundPlayCustomSound(SystemSoundActionID inAction)       AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+AlertSoundPlayCustomSound(SystemSoundActionID inAction)       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3,__MAC_10_5,__IPHONE_NA,__IPHONE_NA);
 
 
 /*
@@ -179,7 +180,7 @@ AlertSoundPlayCustomSound(SystemSoundActionID inAction)       AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern void 
-SystemSoundPlay(SystemSoundActionID inAction)                 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+SystemSoundPlay(SystemSoundActionID inAction)                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_5,__IPHONE_NA,__IPHONE_NA);
 
 
 /*
@@ -221,7 +222,7 @@ SystemSoundPlay(SystemSoundActionID inAction)                 AVAILABLE_MAC_OS_X
 extern OSStatus 
 SystemSoundGetActionID(
   const FSRef *          userFile,
-  SystemSoundActionID *  outAction)                           AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  SystemSoundActionID *  outAction)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_5,__IPHONE_NA,__IPHONE_NA);
 
 
 /*
@@ -252,7 +253,7 @@ SystemSoundGetActionID(
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-SystemSoundRemoveActionID(SystemSoundActionID inAction)       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+SystemSoundRemoveActionID(SystemSoundActionID inAction)       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_5,__IPHONE_NA,__IPHONE_NA);
 
 
 /*
@@ -305,7 +306,7 @@ SystemSoundSetCompletionRoutine(
   CFRunLoopRef               inRunLoop,
   CFStringRef                inRunLoopMode,
   SystemSoundCompletionUPP   inCompletionRoutine,
-  void *                     inUserData)                      AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  void *                     inUserData)                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3,__MAC_10_5,__IPHONE_NA,__IPHONE_NA);
 
 
 /*
@@ -336,7 +337,7 @@ SystemSoundSetCompletionRoutine(
  *    Non-Carbon CFM:   not available
  */
 extern void 
-SystemSoundRemoveCompletionRoutine(SystemSoundActionID inAction) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+SystemSoundRemoveCompletionRoutine(SystemSoundActionID inAction) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3,__MAC_10_5,__IPHONE_NA,__IPHONE_NA);
 
 
 

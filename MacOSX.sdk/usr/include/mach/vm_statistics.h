@@ -252,10 +252,8 @@ typedef struct vm_extmod_statistics vm_extmod_statistics_data_t;
 #define SUPERPAGE_SIZE_ANY		1
 #define VM_FLAGS_SUPERPAGE_NONE     (SUPERPAGE_NONE     << VM_FLAGS_SUPERPAGE_SHIFT)
 #define VM_FLAGS_SUPERPAGE_SIZE_ANY (SUPERPAGE_SIZE_ANY << VM_FLAGS_SUPERPAGE_SHIFT)
-#if defined(__x86_64__) || !defined(KERNEL)
 #define SUPERPAGE_SIZE_2MB		2
 #define VM_FLAGS_SUPERPAGE_SIZE_2MB (SUPERPAGE_SIZE_2MB<<VM_FLAGS_SUPERPAGE_SHIFT)
-#endif
 
 #define VM_FLAGS_ALIAS_MASK	0xFF000000
 #define VM_GET_FLAGS_ALIAS(flags, alias)			\
@@ -298,12 +296,17 @@ typedef struct vm_extmod_statistics vm_extmod_statistics_data_t;
 #define VM_MEMORY_DYLIB	33
 #define VM_MEMORY_OBJC_DISPATCHERS 34
 
+/* Was a nested pmap (VM_MEMORY_SHARED_PMAP) which has now been unnested */
+#define	VM_MEMORY_UNSHARED_PMAP	35
+
+
 // Placeholders for now -- as we analyze the libraries and find how they
 // use memory, we can make these labels more specific.
 #define VM_MEMORY_APPKIT 40
 #define VM_MEMORY_FOUNDATION 41
 #define VM_MEMORY_COREGRAPHICS 42
-#define VM_MEMORY_CARBON 43
+#define VM_MEMORY_CORESERVICES 43
+#define VM_MEMORY_CARBON VM_MEMORY_CORESERVICES
 #define VM_MEMORY_JAVA 44
 #define VM_MEMORY_ATS 50
 #define VM_MEMORY_LAYERKIT 51
@@ -358,7 +361,7 @@ typedef struct vm_extmod_statistics vm_extmod_statistics_data_t;
 #define VM_MEMORY_COREPROFILE	71
 
 /* assetsd / MobileSlideShow memory */
-#define VM_MEMORY_ASSETSD    72
+#define VM_MEMORY_ASSETSD	72
 
 /* Reserve 240-255 for application */
 #define VM_MEMORY_APPLICATION_SPECIFIC_1 240

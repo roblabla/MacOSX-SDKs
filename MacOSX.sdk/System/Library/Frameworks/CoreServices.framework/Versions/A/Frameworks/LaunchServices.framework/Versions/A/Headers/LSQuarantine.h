@@ -20,7 +20,7 @@
 
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -94,7 +94,7 @@
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kLSQuarantineAgentNameKey                   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef kLSQuarantineAgentNameKey                   __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 /*
  *  kLSQuarantineAgentBundleIdentifierKey
  *  
@@ -103,7 +103,7 @@ extern const CFStringRef kLSQuarantineAgentNameKey                   AVAILABLE_M
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kLSQuarantineAgentBundleIdentifierKey       AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef kLSQuarantineAgentBundleIdentifierKey       __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 /*
  *  kLSQuarantineTimeStampKey
  *  
@@ -112,7 +112,7 @@ extern const CFStringRef kLSQuarantineAgentBundleIdentifierKey       AVAILABLE_M
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kLSQuarantineTimeStampKey                   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef kLSQuarantineTimeStampKey                   __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 /*
  *  kLSQuarantineTypeKey
  *  
@@ -121,7 +121,7 @@ extern const CFStringRef kLSQuarantineTimeStampKey                   AVAILABLE_M
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kLSQuarantineTypeKey                        AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef kLSQuarantineTypeKey                        __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 /*
  *  kLSQuarantineTypeWebDownload
  *  
@@ -130,7 +130,7 @@ extern const CFStringRef kLSQuarantineTypeKey                        AVAILABLE_M
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kLSQuarantineTypeWebDownload                AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef kLSQuarantineTypeWebDownload                __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 /*
  *  kLSQuarantineTypeOtherDownload
  *  
@@ -139,7 +139,7 @@ extern const CFStringRef kLSQuarantineTypeWebDownload                AVAILABLE_M
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kLSQuarantineTypeOtherDownload              AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef kLSQuarantineTypeOtherDownload              __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 /*
  *  kLSQuarantineTypeEmailAttachment
  *  
@@ -148,7 +148,7 @@ extern const CFStringRef kLSQuarantineTypeOtherDownload              AVAILABLE_M
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kLSQuarantineTypeEmailAttachment            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef kLSQuarantineTypeEmailAttachment            __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 /*
  *  kLSQuarantineTypeInstantMessageAttachment
  *  
@@ -157,7 +157,7 @@ extern const CFStringRef kLSQuarantineTypeEmailAttachment            AVAILABLE_M
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kLSQuarantineTypeInstantMessageAttachment   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef kLSQuarantineTypeInstantMessageAttachment   __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 /*
  *  kLSQuarantineTypeCalendarEventAttachment
  *  
@@ -166,7 +166,7 @@ extern const CFStringRef kLSQuarantineTypeInstantMessageAttachment   AVAILABLE_M
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kLSQuarantineTypeCalendarEventAttachment    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef kLSQuarantineTypeCalendarEventAttachment    __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 /*
  *  kLSQuarantineTypeOtherAttachment
  *  
@@ -175,7 +175,7 @@ extern const CFStringRef kLSQuarantineTypeCalendarEventAttachment    AVAILABLE_M
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kLSQuarantineTypeOtherAttachment            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef kLSQuarantineTypeOtherAttachment            __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 /*
  *  kLSQuarantineOriginURLKey
  *  
@@ -184,7 +184,7 @@ extern const CFStringRef kLSQuarantineTypeOtherAttachment            AVAILABLE_M
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kLSQuarantineOriginURLKey                   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef kLSQuarantineOriginURLKey                   __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 /*
  *  kLSQuarantineDataURLKey
  *  
@@ -193,7 +193,7 @@ extern const CFStringRef kLSQuarantineOriginURLKey                   AVAILABLE_M
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kLSQuarantineDataURLKey                     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef kLSQuarantineDataURLKey                     __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 
 #endif /* __LSQUARANTINE__ */

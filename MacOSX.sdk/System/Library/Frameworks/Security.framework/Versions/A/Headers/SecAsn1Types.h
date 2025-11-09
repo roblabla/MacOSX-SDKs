@@ -39,10 +39,40 @@
 #ifndef _SEC_ASN1_TYPES_H_
 #define _SEC_ASN1_TYPES_H_
 
-#include <Security/cssmtype.h>
 #include <CoreFoundation/CFBase.h>		/* Boolean */
 #include <sys/types.h>
 #include <stdint.h>
+
+#include <TargetConditionals.h>
+#if TARGET_OS_EMBEDDED || TARGET_IPHONE_SIMULATOR
+/* @@@ We need something that tells us which platform we are building
+   for that let's us distinguish if we are doing an emulator build. */
+
+typedef struct {
+    size_t Length;
+    uint8_t *Data;
+} SecAsn1Item, SecAsn1Oid;
+
+typedef struct {
+    SecAsn1Oid algorithm;
+    SecAsn1Item parameters;
+} SecAsn1AlgId;
+
+typedef struct {
+    SecAsn1AlgId algorithm;
+    SecAsn1Item subjectPublicKey;
+} SecAsn1PubKeyInfo;
+
+#else
+#include <Security/cssmtype.h>
+#include <Security/x509defs.h>
+
+typedef CSSM_DATA SecAsn1Item;
+typedef CSSM_OID SecAsn1Oid;
+typedef CSSM_X509_ALGORITHM_IDENTIFIER SecAsn1AlgId;
+typedef CSSM_X509_SUBJECT_PUBLIC_KEY_INFO SecAsn1PubKeyInfo;
+
+#endif          
 
 /*
  * An array of these structures defines a BER/DER encoding for an object.

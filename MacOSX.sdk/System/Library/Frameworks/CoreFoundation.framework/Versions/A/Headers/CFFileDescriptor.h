@@ -1,5 +1,5 @@
 /*	CFFileDescriptor.h
-	Copyright (c) 2006-2011, Apple Inc. All rights reserved.
+	Copyright (c) 2006-2012, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFFILEDESCRIPTOR__)

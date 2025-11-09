@@ -1,5 +1,5 @@
 /*	NSExpression.h
-	Copyright (c) 2004-2011, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2012, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -11,26 +11,22 @@
 
 // Expressions are the core of the predicate implementation. When expressionValueWithObject: is called, the expression is evaluated, and a value returned which can then be handled by an operator. Expressions can be anything from constants to method invocations. Scalars should be wrapped in appropriate NSValue classes.
 
-enum {
+typedef NS_ENUM(NSUInteger, NSExpressionType) {
     NSConstantValueExpressionType = 0, // Expression that always returns the same value
     NSEvaluatedObjectExpressionType, // Expression that always returns the parameter object itself
     NSVariableExpressionType, // Expression that always returns whatever is stored at 'variable' in the bindings dictionary
     NSKeyPathExpressionType, // Expression that returns something that can be used as a key path
-    NSFunctionExpressionType // Expression that returns the result of evaluating a symbol
-#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED || __IPHONE_3_0 <=  __IPHONE_OS_VERSION_MAX_ALLOWED
-    ,
-    NSUnionSetExpressionType, // Expression that returns the result of doing a unionSet: on two expressions that evaluate to flat collections (arrays or sets)
-    NSIntersectSetExpressionType, // Expression that returns the result of doing an intersectSet: on two expressions that evaluate to flat collections (arrays or sets)
-    NSMinusSetExpressionType, // Expression that returns the result of doing a minusSet: on two expressions that evaluate to flat collections (arrays or sets)
-    NSSubqueryExpressionType = 13,
-    NSAggregateExpressionType
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */
+    NSFunctionExpressionType, // Expression that returns the result of evaluating a symbol
+    NSUnionSetExpressionType NS_ENUM_AVAILABLE(10_5, 3_0), // Expression that returns the result of doing a unionSet: on two expressions that evaluate to flat collections (arrays or sets)
+    NSIntersectSetExpressionType NS_ENUM_AVAILABLE(10_5, 3_0), // Expression that returns the result of doing an intersectSet: on two expressions that evaluate to flat collections (arrays or sets)
+    NSMinusSetExpressionType NS_ENUM_AVAILABLE(10_5, 3_0), // Expression that returns the result of doing a minusSet: on two expressions that evaluate to flat collections (arrays or sets)
+    NSSubqueryExpressionType NS_ENUM_AVAILABLE(10_5, 3_0) = 13,
+    NSAggregateExpressionType NS_ENUM_AVAILABLE(10_5, 3_0)
 #if NS_BLOCKS_AVAILABLE
     ,
     NSBlockExpressionType = 19
 #endif /* NS_BLOCKS_AVAILABLE */
 };
-typedef NSUInteger NSExpressionType;
 
 NS_CLASS_AVAILABLE(10_4, 3_0)
 @interface NSExpression : NSObject <NSCoding, NSCopying> {

@@ -1,7 +1,7 @@
 /*
 	NSScreen.h
 	Application Kit
-	Copyright (c) 1994-2011, Apple Inc.
+	Copyright (c) 1994-2012, Apple Inc.
 	All rights reserved.
 */
 
@@ -17,7 +17,7 @@ typedef struct NSScreenAuxiliary NSScreenAuxiliaryOpaque;
 /*All instance variables are private*/
 @private
     NSRect _frame;          // cached value, possibly stale
-    NSWindowDepth _depth;   // unused
+    NSWindowDepth _depth;  
     int _screenNumber;
     id _auxiliaryStorage;
 }
@@ -32,7 +32,7 @@ typedef struct NSScreenAuxiliary NSScreenAuxiliaryOpaque;
 - (NSDictionary *)deviceDescription;
 - (NSColorSpace *)colorSpace NS_AVAILABLE_MAC(10_6);
 
-- (const NSWindowDepth *)supportedWindowDepths; /* 0 terminated */
+- (const NSWindowDepth *)supportedWindowDepths NS_RETURNS_INNER_POINTER; /* 0 terminated */
 
 /* Convert to/from the device pixel aligned coordinates sytem of a display 
  */

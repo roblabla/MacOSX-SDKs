@@ -1,7 +1,7 @@
 /*
 	NSFontManager.h
 	Application Kit
-	Copyright (c) 1994-2011, Apple Inc.
+	Copyright (c) 1994-2012, Apple Inc.
 	All rights reserved.
 */
 
@@ -56,6 +56,7 @@ enum {
 };
 typedef NSUInteger NSFontAction;
 
+NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 @interface NSFontManager : NSObject
 {
 /*All instance variables are private*/

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2010 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2012 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -162,7 +162,6 @@
 #define	SIOCGIFKPI	_IOWR('i', 135, struct ifreq) /* get interface kext param */
 
 #define	SIOCGIFWAKEFLAGS _IOWR('i', 136, struct ifreq) /* get interface wake property flags */
-
 
 
 #endif /* !_SYS_SOCKIO_H_ */

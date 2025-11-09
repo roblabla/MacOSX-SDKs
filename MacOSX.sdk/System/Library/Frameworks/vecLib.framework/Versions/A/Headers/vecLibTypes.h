@@ -3,9 +3,9 @@
  
      Contains:   Master include for vecLib framework
  
-     Version:    vecLib-325.4
+     Version:    vecLib-380.6
  
-     Copyright:  © 2000-2011 by Apple Inc., all rights reserved.
+     Copyright:  © 2000-2012 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -140,18 +140,47 @@ typedef __m128                          vFloat;
 #endif  /* defined(__SSE2__) */
 
 #elif defined( __ARM_NEON__ )
-	/* To use these types with intrinsics in arm_neon.h on GCC, #define ARM_NEON_GCC_COMPATIBILITY  */
+
+	#if !defined ARM_NEON_GCC_COMPATIBILITY  
+
+		#define ARM_NEON_GCC_COMPATIBILITY
+
+		#if \
+			defined __ARM_NEON_H && \
+			defined __GNUC__ && \
+			! defined __clang__ && \
+			! defined SQUELCH_VECLIB_WARNINGS_ABOUT_BROKEN_NEON_TYPES
+
+			/*	GCC decided to make neon vector types using something other
+				than basic C types as the underlying element by default. This
+				prevents the below types from being used with the functions in
+				arm_neon.h.  GCC did put in a workaround, however.  Define
+				ARM_NEON_GCC_COMPATIBILITY before including arm_neon.h and then
+				everything will start working as designed. You are getting this
+				warning  because some other header included arm_neon.h without
+				defining ARM_NEON_GCC_COMPATIBILITY before we arrived here. 
+
+				#define SQUELCH_VECLIB_WARNINGS_ABOUT_BROKEN_NEON_TYPES to silence this warning
+			*/
+			#warning "arm_neon.h was included without #define ARM_NEON_GCC_COMPATIBILITY.  Vector types defined in vecLibTypes.h, such as vUInt8, might not work with NEON intrinsics."
+
+		#endif
+
+	#endif	/* !defined ARM_NEON_GCC_COMPATIBILITY */
+
 	#include <arm_neon.h>
-	typedef unsigned char  vUInt8  __attribute__((__vector_size__(16)));
-	typedef signed char    vSInt8  __attribute__((__vector_size__(16)));
-	typedef unsigned short vUInt16 __attribute__((__vector_size__(16)));
-	typedef signed short   vSInt16 __attribute__((__vector_size__(16)));
-	typedef unsigned int   vUInt32 __attribute__((__vector_size__(16)));
-	typedef signed int     vSInt32 __attribute__((__vector_size__(16)));
-	typedef float          vFloat  __attribute__((__vector_size__(16)));
-	typedef double         vDouble __attribute__((__vector_size__(16)));
-	typedef unsigned int   vBool32 __attribute__((__vector_size__(16)));
+	typedef unsigned char  vUInt8  __attribute__((__vector_size__(16), __aligned__(16)));
+	typedef signed char    vSInt8  __attribute__((__vector_size__(16), __aligned__(16)));
+	typedef unsigned short vUInt16 __attribute__((__vector_size__(16), __aligned__(16)));
+	typedef signed short   vSInt16 __attribute__((__vector_size__(16), __aligned__(16)));
+	typedef unsigned int   vUInt32 __attribute__((__vector_size__(16), __aligned__(16)));
+	typedef signed int     vSInt32 __attribute__((__vector_size__(16), __aligned__(16)));
+	typedef float          vFloat  __attribute__((__vector_size__(16), __aligned__(16)));
+	typedef double         vDouble __attribute__((__vector_size__(16), __aligned__(16)));
+	typedef unsigned int   vBool32 __attribute__((__vector_size__(16), __aligned__(16)));
+
 #else
+
 	typedef unsigned char  vUInt8  __attribute__((__vector_size__(16)));
 	typedef signed char    vSInt8  __attribute__((__vector_size__(16)));
 	typedef unsigned short vUInt16 __attribute__((__vector_size__(16)));
@@ -161,7 +190,8 @@ typedef __m128                          vFloat;
 	typedef float          vFloat  __attribute__((__vector_size__(16)));
 	typedef double         vDouble __attribute__((__vector_size__(16)));
 	typedef unsigned int   vBool32 __attribute__((__vector_size__(16)));
-#endif  /*  */
+
+#endif
 
 
 #pragma options align=reset

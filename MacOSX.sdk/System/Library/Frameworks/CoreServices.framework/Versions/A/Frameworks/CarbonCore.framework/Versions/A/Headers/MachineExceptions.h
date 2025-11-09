@@ -2,16 +2,9 @@
      File:       CarbonCore/MachineExceptions.h
  
      Contains:   Processor Exception Handling Interfaces.
+                 The contents of this header file are deprecated.
  
-     Version:    CarbonCore-960.18~3
- 
-     Copyright:  © 1993-2008 by Apple Computer, Inc., all rights reserved.
- 
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
- 
-                     http://developer.apple.com/bugreporter/
- 
+     Copyright:  Â© 1993-2011 by Apple Inc. All rights reserved.
 */
 #ifndef __MACHINEEXCEPTIONS__
 #define __MACHINEEXCEPTIONS__
@@ -30,7 +23,7 @@
 #endif
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -364,7 +357,7 @@ typedef STACK_UPP_TYPE(ExceptionHandlerProcPtr)                 ExceptionHandler
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ExceptionHandlerUPP
-NewExceptionHandlerUPP(ExceptionHandlerProcPtr userRoutine)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewExceptionHandlerUPP(ExceptionHandlerProcPtr userRoutine)   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  DisposeExceptionHandlerUPP()
@@ -375,7 +368,7 @@ NewExceptionHandlerUPP(ExceptionHandlerProcPtr userRoutine)   AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeExceptionHandlerUPP(ExceptionHandlerUPP userUPP)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeExceptionHandlerUPP(ExceptionHandlerUPP userUPP)       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  InvokeExceptionHandlerUPP()
@@ -388,7 +381,7 @@ DisposeExceptionHandlerUPP(ExceptionHandlerUPP userUPP)       AVAILABLE_MAC_OS_X
 extern OSStatus
 InvokeExceptionHandlerUPP(
   ExceptionInformation *  theException,
-  ExceptionHandlerUPP     userUPP)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ExceptionHandlerUPP     userUPP)                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 #if __MACH__
   #ifdef __cplusplus
@@ -421,7 +414,7 @@ typedef ExceptionHandlerTPP             ExceptionHandler;
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern ExceptionHandlerTPP  InstallExceptionHandler(ExceptionHandlerTPP theHandler) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern ExceptionHandlerTPP  InstallExceptionHandler(ExceptionHandlerTPP theHandler) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 

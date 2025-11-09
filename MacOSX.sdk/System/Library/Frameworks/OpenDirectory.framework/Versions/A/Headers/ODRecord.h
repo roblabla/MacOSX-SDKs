@@ -43,7 +43,7 @@
                 ODNode held by an ODRecord will be released when the credentials are changed for the connection
                 associated with the record.  outError is optional parameter, nil can be passed if error details are not needed.
 */
-- (BOOL)setNodeCredentials:(NSString *)inUsername password:(NSString *)inPassword error:(NSError **)outError;
+- (BOOL)setNodeCredentials:(NSString *)inUsername password:(NSString *)inPassword error:(NSError **)outError NS_AVAILABLE(10_6, NA);
 
 /*!
     @method     setNodeCredentialsWithRecordType:authenticationType:authenticationItems:continueItems:context:error:
@@ -56,7 +56,7 @@
 */
 - (BOOL)setNodeCredentialsWithRecordType:(ODRecordType)inRecordType authenticationType:(ODAuthenticationType)inType 
                      authenticationItems:(NSArray *)inItems continueItems:(NSArray **)outItems
-                                 context:(id *)outContext error:(NSError **)outError;
+                                 context:(id *)outContext error:(NSError **)outError NS_AVAILABLE(10_6, NA);
 
 /*!
     @method     setNodeCredentialsUsingKerberosCache:error:
@@ -71,7 +71,7 @@
     @discussion Returns a dictionary containing the password policy for the record if available.  If no policy for record
                 nil will be returned.  outError is optional parameter, nil can be passed if error details are not needed.
 */
-- (NSDictionary *)passwordPolicyAndReturnError:(NSError **)outError;
+- (NSDictionary *)passwordPolicyAndReturnError:(NSError **)outError NS_AVAILABLE(10_6, NA);
 
 /*!
     @method     verifyPassword:error:
@@ -79,7 +79,7 @@
     @discussion Verifies the password provided is valid for the record.  outError is optional parameter, nil can be passed if 
                 error details are not needed.
 */
-- (BOOL)verifyPassword:(NSString *)inPassword error:(NSError **)outError;
+- (BOOL)verifyPassword:(NSString *)inPassword error:(NSError **)outError NS_AVAILABLE(10_6, NA);
 
 /*!
     @method     verifyExtendedWithAuthenticationType:authenticationItems:continueItems:context:error:
@@ -91,7 +91,7 @@
                 parameter, nil can be passed if error details are not needed.
 */
 - (BOOL)verifyExtendedWithAuthenticationType:(ODAuthenticationType)inType authenticationItems:(NSArray *)inItems 
-                               continueItems:(NSArray **)outItems context:(id *)outContext error:(NSError **)outError;
+                               continueItems:(NSArray **)outItems context:(id *)outContext error:(NSError **)outError NS_AVAILABLE(10_6, NA);
 
 /*!
     @method     changePassword:toPassword:error:
@@ -99,7 +99,7 @@
     @discussion Changes the password for a record.  The oldPassword can be nil if password is being set assuming the appropriate
                 privileges are in place.  outError is optional parameter, nil can be passed if error details are not needed.
 */
-- (BOOL)changePassword:(NSString *)oldPassword toPassword:(NSString *)newPassword error:(NSError **)outError;
+- (BOOL)changePassword:(NSString *)oldPassword toPassword:(NSString *)newPassword error:(NSError **)outError NS_AVAILABLE(10_6, NA);
 
 /*!
     @method     synchronizeAndReturnError:
@@ -110,21 +110,21 @@
                 if the node does not do immediate commits.  outError is optional parameter, nil can be passed if error details
                 are not needed.
 */
-- (BOOL)synchronizeAndReturnError:(NSError **)outError;
+- (BOOL)synchronizeAndReturnError:(NSError **)outError NS_AVAILABLE(10_6, NA);
 
 /*!
     @property   recordType
     @abstract   Type of the record.
     @discussion The record type.
 */
-@property (nonatomic, readonly, copy) NSString *recordType;
+@property (nonatomic, readonly, copy) NSString *recordType NS_AVAILABLE(10_6, NA);
 
 /*!
     @property   recordName
     @abstract   Name of the record.
     @discussion This is the official record name.
 */
-@property (nonatomic, readonly, copy) NSString *recordName;
+@property (nonatomic, readonly, copy) NSString *recordName NS_AVAILABLE(10_6, NA);
 
 /*!
     @method     recordDetailsForAttributes:error:
@@ -135,7 +135,7 @@
                 If nil is passed, then all currently retrieved attributes will be returned.  outError is optional parameter, 
                 nil can be passed if error details are not needed.
 */
-- (NSDictionary *)recordDetailsForAttributes:(NSArray *)inAttributes error:(NSError **)outError;
+- (NSDictionary *)recordDetailsForAttributes:(NSArray *)inAttributes error:(NSError **)outError NS_AVAILABLE(10_6, NA);
 
 /*!
     @method     valuesForAttribute:error:
@@ -143,7 +143,7 @@
     @discussion Returns an NSArray of NSString or NSData depending on the type of data.  Binary data will be 
                 returned as NSData.  outError is optional parameter, nil can be passed if error details are not needed.
 */
-- (NSArray *)valuesForAttribute:(ODAttributeType)inAttribute error:(NSError **)outError;
+- (NSArray *)valuesForAttribute:(ODAttributeType)inAttribute error:(NSError **)outError NS_AVAILABLE(10_6, NA);
 
 /*!
 	@method     setValue:forAttribute:error:
@@ -151,7 +151,7 @@
 	@discussion Will take a mixture of NSData or NSString or an NSArray of either type when setting the values of an attribute.
 				outError is optional parameter, nil can be passed if error details are not needed.
 */
-- (BOOL)setValue:(id)inValueOrValues forAttribute:(ODAttributeType)inAttribute error:(NSError **)outError;
+- (BOOL)setValue:(id)inValueOrValues forAttribute:(ODAttributeType)inAttribute error:(NSError **)outError NS_AVAILABLE(10_6, NA);
 
 /*!
     @method     removeValuesForAttribute:error:
@@ -159,7 +159,7 @@
     @discussion Removes all the values for an attribute.  outError is optional parameter, nil can be passed if 
                 error details are not needed.
 */
-- (BOOL)removeValuesForAttribute:(ODAttributeType)inAttribute error:(NSError **)outError;
+- (BOOL)removeValuesForAttribute:(ODAttributeType)inAttribute error:(NSError **)outError NS_AVAILABLE(10_6, NA);
 
 /*!
     @method     addValue:toAttribute:error:
@@ -167,7 +167,7 @@
     @discussion Will add a value to an attribute.  Should be either NSData or NSString type.  outError is optional 
                 parameter, nil can be passed if error details are not needed.
 */
-- (BOOL)addValue:(id)inValue toAttribute:(ODAttributeType)inAttribute error:(NSError **)outError;
+- (BOOL)addValue:(id)inValue toAttribute:(ODAttributeType)inAttribute error:(NSError **)outError NS_AVAILABLE(10_6, NA);
 
 /*!
     @method     removeValue:fromAttribute:error:
@@ -175,7 +175,7 @@
     @discussion Will remove a value from an attribute.  Should be either NSData or NSString type.  outError is optional 
                 parameter, nil can be passed if error details are not needed.
 */
-- (BOOL)removeValue:(id)inValue fromAttribute:(ODAttributeType)inAttribute error:(NSError **)outError;
+- (BOOL)removeValue:(id)inValue fromAttribute:(ODAttributeType)inAttribute error:(NSError **)outError NS_AVAILABLE(10_6, NA);
 
 /*!
     @method     deleteRecordAndReturnError:
@@ -183,7 +183,7 @@
     @discussion Deletes the record from the node and invalidates the record.  The ODRecord should be
                 released after deletion.  outError is optional parameter, nil can be passed if error details are not needed.
 */
-- (BOOL)deleteRecordAndReturnError:(NSError **)outError;
+- (BOOL)deleteRecordAndReturnError:(NSError **)outError NS_AVAILABLE(10_6, NA);
 
 @end
 
@@ -200,7 +200,7 @@
                 a group record.  Additionally, if the member record is not an appropriate type allowed as part of a group
                 an error will be returned.  outError is optional parameter, nil can be passed if error details are not needed.
 */
-- (BOOL)addMemberRecord:(ODRecord *)inRecord error:(NSError **)outError;
+- (BOOL)addMemberRecord:(ODRecord *)inRecord error:(NSError **)outError NS_AVAILABLE(10_6, NA);
 
 /*!
     @method     removeMemberRecord:error:
@@ -209,7 +209,7 @@
                 a group record.  Additionally, if the member record is not an appropriate type allowed as part of a group
                 an error will be returned.  outError is optional parameter, nil can be passed if error details are not needed.
 */
-- (BOOL)removeMemberRecord:(ODRecord *)inRecord error:(NSError **)outError;
+- (BOOL)removeMemberRecord:(ODRecord *)inRecord error:(NSError **)outError NS_AVAILABLE(10_6, NA);
 
 /*!
     @method     isMemberRecord:error:
@@ -218,6 +218,6 @@
                 object is not a group then NO will still be returned.  outError is optional parameter, nil can be passed if 
                 error details are not needed.
 */
-- (BOOL)isMemberRecord:(ODRecord *)inRecord error:(NSError **)outError;
+- (BOOL)isMemberRecord:(ODRecord *)inRecord error:(NSError **)outError NS_AVAILABLE(10_6, NA);
 
 @end

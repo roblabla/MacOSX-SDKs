@@ -19,7 +19,7 @@ vImage_Error
 vImageHistogramCalculation_Planar8( 
 	const vImage_Buffer *src, 
 	vImagePixelCount *histogram, 
-	vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+	vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
 
 vImage_Error 
 vImageHistogramCalculation_PlanarF( 
@@ -28,14 +28,22 @@ vImageHistogramCalculation_PlanarF(
 	unsigned int histogram_entries, 
 	Pixel_F minVal, 
 	Pixel_F maxVal, 
-	vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+	vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
 
+/*
+ *  All four channel histogram functions (i.e. those that support ARGB8888 or ARGBFFFF images) work equally well on four channel images 
+ *  with other channel orderings such as RGBA8888 or BGRAFFFF. The ordering of the histogram will match the channel order of the image. 
+ */
 vImage_Error 
 vImageHistogramCalculation_ARGB8888( 
 	const vImage_Buffer *src, 
 	vImagePixelCount *histogram[4], 
-	vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+	vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
 
+/*
+ *  All four channel histogram functions (i.e. those that support ARGB8888 or ARGBFFFF images) work equally well on four channel images 
+ *  with other channel orderings such as RGBA8888 or BGRAFFFF. The ordering of the histogram will match the channel order of the image. 
+ */
 vImage_Error 
 vImageHistogramCalculation_ARGBFFFF( 
 	const vImage_Buffer *src, 
@@ -43,13 +51,13 @@ vImageHistogramCalculation_ARGBFFFF(
 	unsigned int histogram_entries, 
 	Pixel_F minVal, 
 	Pixel_F maxVal, 
-	vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+	vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
 
 vImage_Error 
 vImageEqualization_Planar8( 
 	const vImage_Buffer *src, 
 	const vImage_Buffer *dest, 
-	vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+	vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
 
 vImage_Error 
 vImageEqualization_PlanarF( 
@@ -59,14 +67,22 @@ vImageEqualization_PlanarF(
 	unsigned int histogram_entries, 
 	Pixel_F minVal, 
 	Pixel_F maxVal, 
-	vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+	vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
 
+/*
+ *  All four channel histogram functions (i.e. those that support ARGB8888 or ARGBFFFF images) work equally well on four channel images 
+ *  with other channel orderings such as RGBA8888 or BGRAFFFF.
+ */
 vImage_Error 
 vImageEqualization_ARGB8888( 
 	const vImage_Buffer *src, 
 	const vImage_Buffer *dest, 
-	vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+	vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
 
+/*
+ *  All four channel histogram functions (i.e. those that support ARGB8888 or ARGBFFFF images) work equally well on four channel images 
+ *  with other channel orderings such as RGBA8888 or BGRAFFFF. 
+ */
 vImage_Error 
 vImageEqualization_ARGBFFFF( 
 	const vImage_Buffer *src, 
@@ -75,14 +91,14 @@ vImageEqualization_ARGBFFFF(
 	unsigned int histogram_entries,  
 	Pixel_F minVal, 
 	Pixel_F maxVal, 
-	vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+	vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
 
 vImage_Error 
 vImageHistogramSpecification_Planar8( 
 	const vImage_Buffer *src, 
 	const vImage_Buffer *dest, 
 	const vImagePixelCount *desired_histogram, 
-	vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+	vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
 
 vImage_Error 
 vImageHistogramSpecification_PlanarF( 
@@ -93,15 +109,23 @@ vImageHistogramSpecification_PlanarF(
 	unsigned int histogram_entries, 
 	Pixel_F minVal, 
 	Pixel_F maxVal, 
-	vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+	vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
 
+/*
+ *  All four channel histogram functions (i.e. those that support ARGB8888 or ARGBFFFF images) work equally well on four channel images 
+ *  with other channel orderings such as RGBA8888 or BGRAFFFF. The ordering of the histogram must match the channel order of the image. 
+ */
 vImage_Error 
 vImageHistogramSpecification_ARGB8888( 
 	const vImage_Buffer *src, 
 	const vImage_Buffer *dest, 
 	const vImagePixelCount *desired_histogram[4], 
-	vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+	vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
 
+/*
+ *  All four channel histogram functions (i.e. those that support ARGB8888 or ARGBFFFF images) work equally well on four channel images 
+ *  with other channel orderings such as RGBA8888 or BGRAFFFF. The ordering of the histogram must match the channel order of the image. 
+ */
 vImage_Error 
 vImageHistogramSpecification_ARGBFFFF( 
 	const vImage_Buffer *src, 
@@ -111,13 +135,13 @@ vImageHistogramSpecification_ARGBFFFF(
 	unsigned int histogram_entries, 
 	Pixel_F minVal, 
 	Pixel_F maxVal, 
-	vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+	vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
 
 vImage_Error 
 vImageContrastStretch_Planar8( 
 	const vImage_Buffer *src, 
 	const vImage_Buffer *dest, 
-	vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+	vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
 
 vImage_Error 
 vImageContrastStretch_PlanarF( 
@@ -127,14 +151,22 @@ vImageContrastStretch_PlanarF(
 	unsigned int histogram_entries, 
 	Pixel_F minVal, 
 	Pixel_F maxVal, 
-	vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+	vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
 
+/*
+ *  All four channel histogram functions (i.e. those that support ARGB8888 or ARGBFFFF images) work equally well on four channel images 
+ *  with other channel orderings such as RGBA8888 or BGRAFFFF.  
+ */
 vImage_Error 
 vImageContrastStretch_ARGB8888( 
 	const vImage_Buffer *src, 
 	const vImage_Buffer *dest, 
-	vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+	vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
 
+/*
+ *  All four channel histogram functions (i.e. those that support ARGB8888 or ARGBFFFF images) work equally well on four channel images 
+ *  with other channel orderings such as RGBA8888 or BGRAFFFF. 
+ */
 vImage_Error 
 vImageContrastStretch_ARGBFFFF( 
 	const vImage_Buffer *src, 
@@ -143,7 +175,7 @@ vImageContrastStretch_ARGBFFFF(
 	unsigned int histogram_entries, 
 	Pixel_F minVal, 
 	Pixel_F maxVal, 
-	vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+	vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
 
 vImage_Error 
 vImageEndsInContrastStretch_Planar8( 
@@ -151,7 +183,7 @@ vImageEndsInContrastStretch_Planar8(
 	const vImage_Buffer *dest, 
 	unsigned int percent_low, 
 	unsigned int percent_high, 
-	vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+	vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
 
 vImage_Error 
 vImageEndsInContrastStretch_PlanarF( 
@@ -163,16 +195,26 @@ vImageEndsInContrastStretch_PlanarF(
 	unsigned int histogram_entries, 
 	Pixel_F minVal, 
 	Pixel_F maxVal, 
-	vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+	vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
 
+/*
+ *  All four channel histogram functions (i.e. those that support ARGB8888 or ARGBFFFF images) work equally well on four channel images 
+ *  with other channel orderings such as RGBA8888 or BGRAFFFF. The ordering of the percent_low and percent_high parameters match the order
+ *  of the channels.
+ */
 vImage_Error 
 vImageEndsInContrastStretch_ARGB8888( 
 	const vImage_Buffer *src, 
 	const vImage_Buffer *dest, 
 	const unsigned int percent_low[4], 
 	const unsigned int percent_high[4], 
-	vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+	vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
 
+/*
+ *  All four channel histogram functions (i.e. those that support ARGB8888 or ARGBFFFF images) work equally well on four channel images 
+ *  with other channel orderings such as RGBA8888 or BGRAFFFF. The ordering of the percent_low and percent_high parameters match the order
+ *  of the channels.
+ */
 vImage_Error 
 vImageEndsInContrastStretch_ARGBFFFF( 
 	const vImage_Buffer *src, 
@@ -183,7 +225,7 @@ vImageEndsInContrastStretch_ARGBFFFF(
 	unsigned int histogram_entries, 
 	Pixel_F minVal, 
 	Pixel_F maxVal, 
-	vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+	vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
 
 /*
  * It is recommended that you use the kvImageGetTempBufferSize flag 

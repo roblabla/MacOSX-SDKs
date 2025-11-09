@@ -198,6 +198,9 @@ typedef struct AudioFormatListItem AudioFormatListItem;
 					the format to ask about. The value is a UInt32 where non-zero means
 					the format is externally framed. Any format which has variable byte sized packets
 					requires AudioStreamPacketDescriptions.
+    @constant   kAudioFormatProperty_FormatIsEncrypted
+                    Returns whether or not a format is encrypted. The specifier is a UInt32 format ID.
+                    The value is a UInt32 where non-zero means the format is encrypted.
     @constant   kAudioFormatProperty_EncodeFormatIDs
 					No specifier needed. Must be set to NULL.
 					Returns an array of UInt32 format IDs for formats that are valid output formats 
@@ -333,6 +336,13 @@ typedef struct AudioFormatListItem AudioFormatListItem;
 					the bitmap is specified, it returns the number of channels represented by that bitmap.
 					If the layout tag is 'kAudioChannelLayoutTag_UseChannelDescriptions' it returns
 						the number of channel descriptions.
+    @constant   kAudioFormatProperty_AreChannelLayoutsEquivalent
+					Returns a UInt32 which is 1 if two layouts are equivalent and 0 if they are not equivalent.
+					In order to be equivalent, the layouts must describe the same channels in the same order.
+					Whether the layout is represented by a bitmap, channel descriptions or a channel layout tag is not significant.
+					The channel coordinates are only significant if the channel label is kAudioChannelLabel_UseCoordinates.
+					The specifier is an array of two pointers to AudioChannelLayout structures. 
+					The value is a pointer to the UInt32 result.
     @constant   kAudioFormatProperty_TagsForNumberOfChannels
 					returns an array of AudioChannelLayoutTags for the number of channels specified.
 					The specifier is a UInt32 number of channels. 
@@ -386,6 +396,7 @@ enum
 	kAudioFormatProperty_FirstPlayableFormatFromList	= 'fpfl',
 	kAudioFormatProperty_FormatIsVBR					= 'fvbr',	
 	kAudioFormatProperty_FormatIsExternallyFramed		= 'fexf',
+	kAudioFormatProperty_FormatIsEncrypted				= 'cryp',
 	kAudioFormatProperty_Encoders						= 'aven',	
 	kAudioFormatProperty_Decoders						= 'avde',
 	kAudioFormatProperty_AvailableEncodeBitRates		= 'aebr',
@@ -402,6 +413,7 @@ enum
 	kAudioFormatProperty_MatrixMixMap					= 'mmap',
     kAudioFormatProperty_ChannelMap						= 'chmp',
 	kAudioFormatProperty_NumberOfChannelsForLayout		= 'nchm',
+	kAudioFormatProperty_AreChannelLayoutsEquivalent	= 'cheq',
 	kAudioFormatProperty_ValidateChannelLayout			= 'vacl',
 	kAudioFormatProperty_ChannelLayoutForTag			= 'cmpl',
 	kAudioFormatProperty_TagForChannelLayout			= 'cmpt',

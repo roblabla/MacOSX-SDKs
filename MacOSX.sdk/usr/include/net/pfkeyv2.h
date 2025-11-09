@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2011 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -409,6 +409,7 @@ struct sadb_sastat {
 #define SADB_X_EXT_PRAND	0x0100	/* random padding for ESP */
 #define SADB_X_EXT_PZERO	0x0200	/* zero padding for ESP */
 #define SADB_X_EXT_PMASK	0x0300	/* mask for padding flag */
+
 
 #if 1
 #define SADB_X_EXT_RAWCPI	0x0080	/* use well known CPI (IPComp) */

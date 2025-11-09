@@ -1,5 +1,5 @@
 /*	NSBundle.h
-	Copyright (c) 1994-2011, Apple Inc.  All rights reserved.
+	Copyright (c) 1994-2012, Apple Inc.  All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -88,7 +88,7 @@
 - (NSArray *)pathsForResourcesOfType:(NSString *)ext inDirectory:(NSString *)subpath forLocalization:(NSString *)localizationName;
 
 /* Method for retrieving localized strings. */
-- (NSString *)localizedStringForKey:(NSString *)key value:(NSString *)value table:(NSString *)tableName;
+- (NSString *)localizedStringForKey:(NSString *)key value:(NSString *)value table:(NSString *)tableName NS_FORMAT_ARGUMENT(1);
 
 /* Methods for obtaining various information about a bundle. */
 - (NSString *)bundleIdentifier;

@@ -149,16 +149,6 @@ typedef struct
 #define DKIOCGETPHYSICALBLOCKSIZE             _IOR('d', 77, uint32_t)
 #define DKIOCGETCOMMANDPOOLSIZE               _IOR('d', 78, uint32_t)
 
-typedef struct
-{
-    uint64_t               offset;
-    uint64_t               length;
-
-    uint8_t                reserved0128[16];       /* reserved, clear to zero */
-} dk_discard_t __attribute__ ((deprecated));
-
-#define DKIOCDISCARD                          _IOW('d', 31, dk_discard_t)
-
 #define DK_FEATURE_FORCE_UNIT_ACCESS          0x00000001
 
 typedef struct
@@ -181,5 +171,6 @@ typedef struct
 #define DKIOCLOCKPHYSICALEXTENTS              _IO('d', 81)
 #define DKIOCGETPHYSICALEXTENT                _IOWR('d', 82, dk_physical_extent_t)
 #define DKIOCUNLOCKPHYSICALEXTENTS            _IO('d', 83)
+
 
 #endif	/* _SYS_DISK_H_ */

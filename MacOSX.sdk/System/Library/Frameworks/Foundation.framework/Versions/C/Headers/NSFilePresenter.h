@@ -1,6 +1,6 @@
 /*
 	NSFilePresenter.h
-	Copyright (c) 2010-2011, Apple Inc.
+	Copyright (c) 2010-2012, Apple Inc.
 	All rights reserved.
 */
 
@@ -31,6 +31,10 @@ For example, NSDocument has a -presentedItemOperationQueue method that returns a
 @property (readonly) NSOperationQueue *presentedItemOperationQueue;
 
 @optional
+
+/* Support for App Sandbox on OS X. Some applications, given a user-selected file, require access to additional files or directories with related names. For example, a movie player might have to automatically load subtitles for a movie that the user opened. By convention, the subtitle file has the same name as the movie, but a different file extension. If the movie player is sandboxed, its use of NSOpenPanel will grant it access to the user-selected movie (the primary item). However, access to the subtitle file (the secondary item) will not be granted by NSOpenPanel. To get access to a secondary item, a process can register an NSFilePresenter for it and unregister the NSFilePresenter once the application is finished accessing it. Each NSFilePresenter of a secondary item must return an NSURL to the primary item on request. You make that happen by providing an implementation of -primaryPresentedItemURL that returns an NSURL for the primary item.
+*/
+@property (readonly) NSURL *primaryPresentedItemURL NS_AVAILABLE(10_8, NA);
 
 #if NS_BLOCKS_AVAILABLE
 

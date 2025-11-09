@@ -1,5 +1,5 @@
 /*	NSOperation.h
-	Copyright (c) 2006-2011, Apple Inc. All rights reserved.
+	Copyright (c) 2006-2012, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -37,14 +37,13 @@ NS_CLASS_AVAILABLE(10_5, 2_0)
 
 - (NSArray *)dependencies;
 
-enum {
-	NSOperationQueuePriorityVeryLow = -8,
-	NSOperationQueuePriorityLow = -4,
+typedef NS_ENUM(NSInteger, NSOperationQueuePriority) {
+	NSOperationQueuePriorityVeryLow = -8L,
+	NSOperationQueuePriorityLow = -4L,
 	NSOperationQueuePriorityNormal = 0,
 	NSOperationQueuePriorityHigh = 4,
 	NSOperationQueuePriorityVeryHigh = 8
 };
-typedef NSInteger NSOperationQueuePriority;
 
 - (NSOperationQueuePriority)queuePriority;
 - (void)setQueuePriority:(NSOperationQueuePriority)p;

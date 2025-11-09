@@ -1,6 +1,6 @@
 /*
         NSAttributedString.h
-        Copyright (c) 1994-2011, Apple Inc.
+        Copyright (c) 1994-2012, Apple Inc.
         All rights reserved.
 
         This file defines Application Kit extensions to NSAttributedString and NSMutableAttributedString.
@@ -57,6 +57,9 @@ APPKIT_EXTERN NSString *NSMarkedClauseSegmentAttributeName;
 /* An NSNumber containing an integer value.  0 means horizontal text.  1 indicates vertical text.  If no value specified, it's interpreted to determine the setting based on higher-level vertical orientation settings such as NSTextLayoutOrientation.  The behavior for any other value is undefined.
  */
 APPKIT_EXTERN NSString *NSVerticalGlyphFormAttributeName NS_AVAILABLE_MAC(10_7);
+
+/* An NSTextAlternatives object.  Used primarily as a temporary attribute, with primaryString equal to the substring for the range to which it is attached, and alternativeStrings representing alternatives for that string that may be presented to the user. */
+APPKIT_EXTERN NSString *NSTextAlternativesAttributeName NS_AVAILABLE_MAC(10_8);
 
 
 /* This defines currently supported values for NSUnderlineStyleAttributeName and NSStrikethroughStyleAttributeName, as of Mac OS X version 10.3.  The style, pattern, and optionally by-word mask are or'd together to produce the value.  The previous constants are still supported, but deprecated (except for NSUnderlineByWordMask); including NSUnderlineStrikethroughMask in the underline style will still produce a strikethrough, but that is deprecated in favor of setting NSStrikethroughStyleAttributeName using the values described here.
@@ -131,6 +134,7 @@ APPKIT_EXTERN NSString *NSHyphenationFactorDocumentAttribute   ;  // @"Hyphenati
 APPKIT_EXTERN NSString *NSDefaultTabIntervalDocumentAttribute  ;  // @"DefaultTabInterval", NSNumber containing floating point value, representing the document-wide default tab stop interval, in points
 APPKIT_EXTERN NSString *NSCharacterEncodingDocumentAttribute   ;  // @"CharacterEncoding", For reading and writing of plain text files, and writing of HTML; NSNumber containing integer specifying NSStringEncoding for the file; default for plain text is the default encoding, default for HTML is UTF-8
 APPKIT_EXTERN NSString *NSFileTypeDocumentAttribute     NS_AVAILABLE_MAC(10_6);  // NSString indicating which document type was used to interpret the document, specified as a UTI; for reading, this is available along with NSDocumentTypeDocumentAttribute, but for writing the two are mutually exclusive
+APPKIT_EXTERN NSString *NSUsesScreenFontsDocumentAttribute     NS_AVAILABLE_MAC(10_8);  // A boolean NSNumber; this attribute corresponds to -[NSLayoutManager usesScreenFonts]; if absent, follows the system default setting
 
 APPKIT_EXTERN NSString *NSTitleDocumentAttribute       ;  // NSString containing document title
 APPKIT_EXTERN NSString *NSCompanyDocumentAttribute     ;  // NSString containing company or organization name

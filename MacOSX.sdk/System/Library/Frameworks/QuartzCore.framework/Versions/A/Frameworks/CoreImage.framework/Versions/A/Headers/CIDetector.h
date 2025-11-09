@@ -1,10 +1,7 @@
-//
-//  CIDetector.h
-//  CoreImage
-//
-//  Created by Daniel Eggert on 1/21/10.
-//  Copyright 2010 Apple Inc. All rights reserved.
-//
+/* CoreImage - CIDetector.h
+ 
+ Copyright (c) 2010 Apple Inc.
+ All rights reserved. */
 
 
 #import "CoreImageDefines.h"
@@ -39,23 +36,47 @@ CORE_IMAGE_CLASS_EXPORT
  The array is sorted by confidence, highest confidence first. */
 - (NSArray *)featuresInImage:(CIImage *)image AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
 
+/** Returns an array of CIFeature instances in the given image.
+ The array is sorted by confidence, highest confidence first. 
+ The options dictionary can contain a CIDetectorImageOrientation key value. */
+- (NSArray *)featuresInImage:(CIImage *)image options:(NSDictionary *)options __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_5_0);
+
 @end
 
 
 
 // Types to be used for +[CIDetector detectorOfType:context:options:]
 
-/** Specifies a detector type for face recognition. */
-CORE_IMAGE_EXPORT NSString* const CIDetectorTypeFace AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+/* Specifies a detector type for face recognition. */
+CORE_IMAGE_EXPORT NSString* const CIDetectorTypeFace __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0);
 
 
-/** The key in the options dictionary used to specify a accuracy / performance tradeoff to be used. */
-CORE_IMAGE_EXPORT NSString* const CIDetectorAccuracy AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+// Options that can be used with +[CIDetector detectorOfType:context:options:]
 
-/** These are values to be used with the CIDetectorAccuracy key when created a CIDetector.
+/* The key in the options dictionary used to specify a accuracy / performance tradeoff to be used. */
+CORE_IMAGE_EXPORT NSString* const CIDetectorAccuracy __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0);
+
+/* These are values to be used with the CIDetectorAccuracy key when created a CIDetector.
  There is a performance / accuracy tradeoff to be made. The default value will work well for most
  situations, but using these the detector will favour performance over accuracy or
  accuracy over performance. */
-CORE_IMAGE_EXPORT NSString* const CIDetectorAccuracyLow AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER; ///< Lower accuracy, higher performance
-CORE_IMAGE_EXPORT NSString* const CIDetectorAccuracyHigh AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER; ///< Lower performance, higher accuracy
+CORE_IMAGE_EXPORT NSString* const CIDetectorAccuracyLow __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0); ///< Lower accuracy, higher performance
+CORE_IMAGE_EXPORT NSString* const CIDetectorAccuracyHigh __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0); ///< Lower performance, higher accuracy
+
+/*The key in the options dictionary used to specify that feature tracking should be used. */
+CORE_IMAGE_EXPORT NSString* const CIDetectorTracking __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
+
+/* The key in the options dictionary used to specify the minimum size that the 
+ detector will recognize as a feature.  The value for this key is an float NSNumber 
+ from 0.0 ... 1.0 that represents a fraction of the minor dimension of the image. */
+CORE_IMAGE_EXPORT NSString* const CIDetectorMinFeatureSize __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
+
+
+// Options that can be used with -[CIDetector featuresInImage:options:]
+
+/* The value for this key is an integer NSNumber from 1..8 such as that
+ found in kCGImagePropertyOrientation.  If present, the detection will be done
+ based on that orientation but the coordinates in the returned features will
+ still be based on those of the image. */
+CORE_IMAGE_EXPORT NSString *const CIDetectorImageOrientation __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_5_0);
 

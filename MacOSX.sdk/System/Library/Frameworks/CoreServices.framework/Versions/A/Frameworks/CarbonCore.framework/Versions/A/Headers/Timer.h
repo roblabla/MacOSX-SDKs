@@ -2,16 +2,9 @@
      File:       CarbonCore/Timer.h
  
      Contains:   Time Manager interfaces.
+                 The contents of this header file are deprecated.
  
-     Version:    CarbonCore-960.18~3
- 
-     Copyright:  © 1985-2008 by Apple Computer, Inc., all rights reserved
- 
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
- 
-                     http://developer.apple.com/bugreporter/
- 
+     Copyright:  Â© 1985-2011 by Apple Inc. All rights reserved.
 */
 #ifndef __TIMER__
 #define __TIMER__
@@ -30,7 +23,7 @@
 
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -54,10 +47,10 @@ extern "C" {
  *  Discussion:
  *    Return a value representing the number of microseconds since some
  *    point in time, usually since the system was booted.  One
- *    microsecond is 1 * 10^-6 seconds, and so there are one million (
- *    1,000,000 ) microseconds per second.  For reference, in one
- *    microsecond light can travel about 850 feet in a vacuum.
- *    
+ *    microsecond is 1 * 10^-6 seconds, and so there are one milMac OS
+ *    X 10.7 ( 1,000,000 ) microseconds per second.  For reference, in
+ *    one microsecond light can travel about 850 feet in a vacuum.
+ *     
  *    Microseconds() doesn't necessarily advance while the computer is
  *    asleep, so it should not be used for long duration timings.
  *  
@@ -72,7 +65,7 @@ extern "C" {
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-Microseconds(UnsignedWide * microTickCount)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+Microseconds(UnsignedWide * microTickCount)                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /****************************************************************************
@@ -139,7 +132,7 @@ struct TMTask {
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-InsTime(QElemPtr tmTaskPtr)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+InsTime(QElemPtr tmTaskPtr)                                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -154,7 +147,7 @@ InsTime(QElemPtr tmTaskPtr)                                   AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-InsXTime(QElemPtr tmTaskPtr)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+InsXTime(QElemPtr tmTaskPtr)                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -171,7 +164,7 @@ InsXTime(QElemPtr tmTaskPtr)                                  AVAILABLE_MAC_OS_X
 extern void 
 PrimeTime(
   QElemPtr   tmTaskPtr,
-  long       count)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  long       count)                                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -186,7 +179,7 @@ PrimeTime(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-RmvTime(QElemPtr tmTaskPtr)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+RmvTime(QElemPtr tmTaskPtr)                                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -226,7 +219,7 @@ RmvTime(QElemPtr tmTaskPtr)                                   AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 9.1 and later
  */
 extern OSErr 
-InstallTimeTask(QElemPtr tmTaskPtr)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+InstallTimeTask(QElemPtr tmTaskPtr)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -276,7 +269,7 @@ InstallTimeTask(QElemPtr tmTaskPtr)                           AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 9.1 and later
  */
 extern OSErr 
-InstallXTimeTask(QElemPtr tmTaskPtr)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+InstallXTimeTask(QElemPtr tmTaskPtr)                          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -341,7 +334,7 @@ InstallXTimeTask(QElemPtr tmTaskPtr)                          AVAILABLE_MAC_OS_X
 extern OSErr 
 PrimeTimeTask(
   QElemPtr   tmTaskPtr,
-  long       count)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  long       count)                                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -389,7 +382,7 @@ PrimeTimeTask(
  *    Non-Carbon CFM:   in InterfaceLib 9.1 and later
  */
 extern OSErr 
-RemoveTimeTask(QElemPtr tmTaskPtr)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+RemoveTimeTask(QElemPtr tmTaskPtr)                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -402,7 +395,7 @@ RemoveTimeTask(QElemPtr tmTaskPtr)                            AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern TimerUPP
-NewTimerUPP(TimerProcPtr userRoutine)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewTimerUPP(TimerProcPtr userRoutine)                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  DisposeTimerUPP()
@@ -413,7 +406,7 @@ NewTimerUPP(TimerProcPtr userRoutine)                         AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeTimerUPP(TimerUPP userUPP)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeTimerUPP(TimerUPP userUPP)                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  InvokeTimerUPP()
@@ -426,7 +419,7 @@ DisposeTimerUPP(TimerUPP userUPP)                             AVAILABLE_MAC_OS_X
 extern void
 InvokeTimerUPP(
   TMTaskPtr  tmTaskPtr,
-  TimerUPP   userUPP)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TimerUPP   userUPP)                                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 #if __MACH__
   #ifdef __cplusplus

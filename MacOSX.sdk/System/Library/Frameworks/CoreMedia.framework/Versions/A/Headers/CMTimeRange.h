@@ -3,7 +3,7 @@
 	
 	Framework:  CoreMedia
  
-    Copyright 2007-2011 Apple Inc. All rights reserved.
+    Copyright 2007-2012 Apple Inc. All rights reserved.
  
 */
 

@@ -1,7 +1,7 @@
 /*
         NSSpellChecker.h
         Application Kit
-        Copyright (c) 1990-2011, Apple Inc.
+        Copyright (c) 1990-2012, Apple Inc.
         All rights reserved.
 */
 
@@ -140,6 +140,9 @@ APPKIT_EXTERN NSString *NSTextCheckingRegularExpressionsKey NS_AVAILABLE_MAC(10_
 
 /* Returns an array of strings, in the order in which they should be presented, representing complete words that the user might be trying to type when starting by typing the partial word at the given range in the given string. */
 - (NSArray *)completionsForPartialWordRange:(NSRange)range inString:(NSString *)string language:(NSString *)language inSpellDocumentWithTag:(NSInteger)tag;
+
+/* Clients who have an NSOrthography from NSTextCheckingTypeOrthography checking and wish to determine a specific language from it for a particular word, for example to pass in to -guessesForWordRange:inString:language:inSpellDocumentWithTag:, -correctionForWordRange:inString:language:inSpellDocumentWithTag:, or -completionsForPartialWordRange:inString:language:inSpellDocumentWithTag:, should use this method to obtain it. */
+- (NSString *)languageForWordRange:(NSRange)range inString:(NSString *)string orthography:(NSOrthography *)orthography NS_AVAILABLE_MAC(10_7);
 
 /* When a document closes, it should notify the NSSpellChecker via closeSpellDocumentWithTag: so that any associated data such as its ignored word list can be cleaned up. */
 - (void)closeSpellDocumentWithTag:(NSInteger)tag;

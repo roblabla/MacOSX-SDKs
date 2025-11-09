@@ -1,15 +1,14 @@
 /*
     NSAttributeDescription.h
     Core Data
-    Copyright (c) 2004-2010 Apple Inc.
+    Copyright (c) 2004-2012 Apple Inc.
     All rights reserved.
 */
 
-#import <Foundation/NSObject.h>
+#import <Foundation/NSArray.h>
 #import <CoreData/NSPropertyDescription.h>
 
 @class NSEntityDescription;
-@class NSString;
 
 // types explicitly distinguish between bit sizes to ensure data store independence of the underlying operating system
  enum {
@@ -72,7 +71,7 @@ NS_CLASS_AVAILABLE(10_4,3_0)
 - (NSString *)valueTransformerName NS_AVAILABLE(10_5,3_0);
 - (void)setValueTransformerName:(NSString *)string NS_AVAILABLE(10_5,3_0);
 
-- (BOOL)allowsExternalBinaryDataStorage NS_AVAILABLE(10_7,NA);
-- (void)setAllowsExternalBinaryDataStorage:(BOOL)flag NS_AVAILABLE(10_7,NA);
+- (BOOL)allowsExternalBinaryDataStorage NS_AVAILABLE(10_7, 5_0);
+- (void)setAllowsExternalBinaryDataStorage:(BOOL)flag NS_AVAILABLE(10_7, 5_0);
 
 @end

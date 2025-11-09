@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright:  (c) 2007-2011 by Apple, Inc., All Rights Reserved.
+ * Copyright:  (c) 2007-2012 by Apple, Inc., All Rights Reserved.
  ******************************************************************************/
 
 #ifndef __OPENCL_CL_GL_EXT_H
@@ -10,6 +10,7 @@ extern "C" {
 #endif
 
 #include <OpenCL/cl_gl.h>
+
 #include <OpenGL/CGLTypes.h>
 #include <OpenGL/CGLDevice.h>
 	

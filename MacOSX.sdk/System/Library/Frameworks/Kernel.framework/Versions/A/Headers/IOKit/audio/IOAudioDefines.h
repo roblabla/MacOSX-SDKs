@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2010 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2012 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  *
@@ -479,8 +479,9 @@
 
 enum
 {
-	kIOAudioEngineGeneralClient    = 0,
-	kIOAudioEngineVoiceClient      = 1
+	kIOAudioEngineGeneralClient		= 0,
+	kIOAudioEngineVoiceClient		= 1,
+	kIOAudioEngineIronWoodClient	= 2					// <rdar://10855829>
 };
 
 #endif

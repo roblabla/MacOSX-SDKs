@@ -1,7 +1,7 @@
 /*
     NSTableView.h
     Application Kit
-    Copyright (c) 1995-2011, Apple Inc.
+    Copyright (c) 1995-2012, Apple Inc.
     All rights reserved.
 */
 
@@ -11,10 +11,8 @@
 #import <AppKit/NSUserInterfaceValidation.h>
 #import <AppKit/NSTextView.h>
 
-@class NSTableHeaderView;
-@class NSTableColumn;
-@class NSMutableArray;
-@class NSIndexSet, NSMutableIndexSet, NSTableRowView;
+@class NSTableHeaderView, NSTableColumn, NSMutableArray, NSDictionary, NSIndexSet, NSMutableIndexSet, NSTableRowView, NSNib;
+
 @protocol NSTableViewDelegate, NSTableViewDataSource;
 
 typedef struct __TvFlags {
@@ -641,6 +639,14 @@ typedef NSUInteger NSTableViewAnimationOptions;
  */
 - (void)moveRowAtIndex:(NSInteger)oldIndex toIndex:(NSInteger)newIndex NS_AVAILABLE_MAC(10_7);
 
+/* View Based TableView: Registers (or associates) the 'nib' with 'identifier' so the table can instantiate views from it when a view with 'identifier' is requested. Generally, this means one calls -makeViewWithIdentifier:'identifier' owner:, and there was no NIB created at design time for this particular table view that could be found. This allows dynamic loading of nibs that can be associated with the table. To remove a previously associated NIB for a given identifier, pass in 'nil' for the nib value.
+ */
+- (void)registerNib:(NSNib *)nib forIdentifier:(NSString *)identifier NS_AVAILABLE_MAC(10_8);
+
+/* View Based TableView: Returns a dictionary of all registered nibs. The keys are the identifier, and the value is the NSNib that is registered.
+ */
+- (NSDictionary *)registeredNibsByIdentifier NS_AVAILABLE_MAC(10_8);
+
 @end
 
 #pragma mark -
@@ -686,7 +692,8 @@ typedef NSUInteger NSTableViewAnimationOptions;
 - (NSString *)tableView:(NSTableView *)tableView toolTipForCell:(NSCell *)cell rect:(NSRectPointer)rect tableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row mouseLocation:(NSPoint)mouseLocation;
 
 /* Optional - Expansion ToolTip support
- Implement this method and return NO to prevent an expansion tooltip from appearing for a particular cell in a given row and tableColumn. See NSCell.h for more information on expansion tool tips. 
+    View Based TableView: This method is not called or used.
+    Cell Based TableView: Implement this method and return NO to prevent an expansion tooltip from appearing for a particular cell in a given row and tableColumn. See NSCell.h for more information on expansion tool tips. 
  */
 - (BOOL)tableView:(NSTableView *)tableView shouldShowCellExpansionForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row NS_AVAILABLE_MAC(10_5);
 

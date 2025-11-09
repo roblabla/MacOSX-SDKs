@@ -1,6 +1,6 @@
 /*
     CFURLEnumerator.h
-    Copyright (c) 2008-2011, Apple Inc. All rights reserved.
+    Copyright (c) 2008-2012, Apple Inc. All rights reserved.
  */
 
 #if (TARGET_OS_MAC || TARGET_OS_EMBEDDED || TARGET_OS_IPHONE) || CF_BUILDING_CF || NSBUILDINGFOUNDATION
@@ -24,7 +24,7 @@ CFTypeID CFURLEnumeratorGetTypeID( void ) CF_AVAILABLE(10_6, 4_0);
 
 
 /* CFURLEnumeratorOptions - Options for controlling enumerator behavior. */
-enum {
+typedef CF_OPTIONS(CFOptionFlags, CFURLEnumeratorOptions) {
     kCFURLEnumeratorDefaultBehavior                 = 0,        /* Use the default behavior for the enumerator. */
     kCFURLEnumeratorDescendRecursively              = 1UL << 0, /* The directory enumerator will recurse ("depth-first") into each subdirectory enumerated */
     kCFURLEnumeratorSkipInvisibles                  = 1UL << 1, /* The directory or volume enumerator skips "hidden" or "invisible" objects */
@@ -34,7 +34,6 @@ enum {
     kCFURLEnumeratorIncludeDirectoriesPostOrder     = 1UL << 5, /* With this option set, a recursive directory enumerator will return directory URLs when CFURLEnumeratorGetNextURL() returns kCFURLEnumeratorDirectoryPostOrderSuccess after all of directory's descendants have been visited (post-order). */
     /* Note: if both kCFURLEnumeratorIncludeDirectoriesPreOrder and kCFURLEnumeratorIncludeDirectoriesPostOrder are used, directories will be seen twice (even empty directories and directories whose descendants are skipped) -- once when kCFURLEnumeratorSuccess is returned and once when kCFURLEnumeratorDirectoryPostOrderSuccess is returned. */
 };
-typedef CFOptionFlags CFURLEnumeratorOptions;
 
 /* CFURLEnumeratorCreateForDirectoryURL - Creates a directory enumerator, flat or recursive. Client specifies the directory URL to enumerate, a bit array of options, and an optional array of property keys to pre-fetch for the found URLs. Specifying pre-fetch properties allows the implementation to optimize device access by using bulk operations when available. Pre-fetching more properties than are actually needed may degrade performance.
 
@@ -57,13 +56,12 @@ CFURLEnumeratorRef CFURLEnumeratorCreateForMountedVolumes( CFAllocatorRef alloc,
 
 
 /* CFURLEnumeratorResult - Results for CFURLEnumeratorGetNextURL */
-enum {
+typedef CF_ENUM(CFIndex, CFURLEnumeratorResult) {
     kCFURLEnumeratorSuccess = 1,                    /* The enumeration was successful. The url output parameter is valid. */
     kCFURLEnumeratorEnd = 2,                        /* The enumeration is complete. */
     kCFURLEnumeratorError = 3,			    /* An error occured during enumeration. The retained error output parameter describes the error. */
     kCFURLEnumeratorDirectoryPostOrderSuccess = 4,  /* The enumeration was successful. The url output parameter is for a directory after all of directory's descendants have been visited (post-order). This result will only be returned for directories when both the kCFURLEnumeratorDescendRecursively and kCFURLEnumeratorIncludeDirectoriesPostOrder options are passed to CFURLEnumeratorCreateForDirectoryURL. */
 };
-typedef CFIndex CFURLEnumeratorResult;
 
 /* CFURLEnumeratorGetNextURL - Advances the enumerator. If kCFURLEnumeratorSuccess is returned, the url output parameter returns the next URL found. If kCFURLEnumeratorError is returned, an error has occured and the error output parameter describes the error. If kCFURLEnumeratorEnd, the enumeration is finished.
 
@@ -103,3 +101,4 @@ CF_EXTERN_C_END
 #endif /* ! __COREFOUNDATION_CFURLENUMERATOR__ */
 
 #endif
+

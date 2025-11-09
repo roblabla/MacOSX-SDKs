@@ -56,6 +56,14 @@ CFTypeID SecTaskGetTypeID(void);
 SecTaskRef SecTaskCreateWithAuditToken(CFAllocatorRef allocator, audit_token_t token);
 
 /*!
+    @function SecTaskCreateFromSelf
+    @abstract Create a SecTask object for the current task.
+    @result The newly created SecTask object or NULL on error.  The caller must
+    CFRelease the returned object.
+*/
+SecTaskRef SecTaskCreateFromSelf(CFAllocatorRef allocator);
+
+/*!
     @function SecTaskCopyValueForEntitlement
     @abstract Returns the value of a single entitlement for the represented 
     task.

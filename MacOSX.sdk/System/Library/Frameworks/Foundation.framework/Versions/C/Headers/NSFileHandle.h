@@ -1,5 +1,5 @@
 /*	NSFileHandle.h
-	Copyright (c) 1995-2011, Apple Inc. All rights reserved.
+	Copyright (c) 1995-2012, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -8,7 +8,7 @@
 
 @class NSString, NSData, NSError;
 
-@interface NSFileHandle : NSObject
+@interface NSFileHandle : NSObject <NSSecureCoding>
 
 - (NSData *)availableData;
 

@@ -1,5 +1,5 @@
 /**********************************************************************************
- * Copyright (c) 2008-2009 The Khronos Group Inc.
+ * Copyright (c) 2008-2010 The Khronos Group Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and/or associated documentation files (the
@@ -21,6 +21,8 @@
  * MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
  **********************************************************************************/
 
+/* $Revision: 11803 $ on $Date: 2010-06-25 10:02:12 -0700 (Fri, 25 Jun 2010) $ */
+
 #ifndef __CL_PLATFORM_H
 #define __CL_PLATFORM_H
 
@@ -33,30 +35,80 @@
 extern "C" {
 #endif
 
-#define CL_API_ENTRY
-#define CL_API_CALL
-#define CL_CALLBACK
+#if defined(_WIN32)
+    #define CL_API_ENTRY
+    #define CL_API_CALL     __stdcall
+    #define CL_CALLBACK     __stdcall
+#else
+    #define CL_API_ENTRY
+    #define CL_API_CALL
+    #define CL_CALLBACK
+#endif
 
 #ifdef __APPLE__
-    #define CL_EXTENSION_WEAK_LINK       __attribute__((weak_import))       
+    #define CL_EXTENSION_WEAK_LINK       __attribute__((weak_import))
     #define CL_API_SUFFIX__VERSION_1_0                  AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER
     #define CL_EXT_SUFFIX__VERSION_1_0                  CL_EXTENSION_WEAK_LINK AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER
-    #ifdef AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER
-        #define CL_API_SUFFIX__VERSION_1_1              AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER
-        #define GCL_API_SUFFIX__VERSION_1_1             AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER
-        #define CL_EXT_SUFFIX__VERSION_1_1              CL_EXTENSION_WEAK_LINK AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER
-        #define CL_EXT_SUFFIX__VERSION_1_0_DEPRECATED   CL_EXTENSION_WEAK_LINK AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7
+    #define CL_API_SUFFIX__VERSION_1_1                  AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER
+    #define GCL_API_SUFFIX__VERSION_1_1                 AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER
+    #define CL_EXT_SUFFIX__VERSION_1_1                  CL_EXTENSION_WEAK_LINK AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER
+    #define CL_EXT_PREFIX__VERSION_1_0_DEPRECATED
+    #define CL_EXT_SUFFIX__VERSION_1_0_DEPRECATED       CL_EXTENSION_WEAK_LINK AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7
+    
+    #ifdef AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER
+        #define CL_API_SUFFIX__VERSION_1_2              AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER
+        #define GCL_API_SUFFIX__VERSION_1_2             AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER
+        #define CL_EXT_SUFFIX__VERSION_1_2              CL_EXTENSION_WEAK_LINK AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER
+        #define CL_EXT_PREFIX__VERSION_1_1_DEPRECATED
+        #define CL_EXT_SUFFIX__VERSION_1_1_DEPRECATED   CL_EXTENSION_WEAK_LINK AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_8
     #else
         #warning  This path should never happen outside of internal operating system development.  AvailabilityMacros do not function correctly here!
-        #define CL_API_SUFFIX__VERSION_1_1              CL_EXTENSION_WEAK_LINK
-        #define GCL_API_SUFFIX__VERSION_1_1             CL_EXTENSION_WEAK_LINK
-        #define CL_EXT_SUFFIX__VERSION_1_1              CL_EXTENSION_WEAK_LINK
-        #define CL_EXT_SUFFIX__VERSION_1_0_DEPRECATED   CL_EXTENSION_WEAK_LINK AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER
+        #define CL_API_SUFFIX__VERSION_1_2              AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER
+        #define GCL_API_SUFFIX__VERSION_1_2             AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER
+        #define CL_EXT_SUFFIX__VERSION_1_2              CL_EXTENSION_WEAK_LINK AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER
+        #define CL_EXT_PREFIX__VERSION_1_1_DEPRECATED
+        #define CL_EXT_SUFFIX__VERSION_1_1_DEPRECATED   CL_EXTENSION_WEAK_LINK AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER
     #endif
 #else
-    #define CL_API_SUFFIX__VERSION_1_0
-    #define CL_API_SUFFIX__VERSION_1_1
-    #define CL_EXTENSION_WEAK_LINK                          
+    #ifdef __GNUC__ 
+        #ifdef CL_USE_DEPRECATED_OPENCL_1_0_APIS
+            #define CL_EXT_SUFFIX__VERSION_1_0_DEPRECATED
+            #define CL_EXT_PREFIX__VERSION_1_0_DEPRECATED    
+        #else
+            #define CL_EXT_SUFFIX__VERSION_1_0_DEPRECATED __attribute__((deprecated))
+            #define CL_EXT_PREFIX__VERSION_1_0_DEPRECATED    
+        #endif
+    
+        #ifdef CL_USE_DEPRECATED_OPENCL_1_1_APIS
+            #define CL_EXT_SUFFIX__VERSION_1_1_DEPRECATED    
+            #define CL_EXT_PREFIX__VERSION_1_0_DEPRECATED    
+        #else
+            #define CL_EXT_SUFFIX__VERSION_1_1_DEPRECATED __attribute__((deprecated))
+            #define CL_EXT_PREFIX__VERSION_1_1_DEPRECATED    
+        #endif
+    #elif _WIN32
+        #ifdef CL_USE_DEPRECATED_OPENCL_1_0_APIS
+            #define CL_EXT_SUFFIX__VERSION_1_0_DEPRECATED    
+            #define CL_EXT_PREFIX__VERSION_1_0_DEPRECATED    
+        #else
+            #define CL_EXT_SUFFIX__VERSION_1_0_DEPRECATED 
+            #define CL_EXT_PREFIX__VERSION_1_0_DEPRECATED __declspec(deprecated)     
+        #endif
+    
+        #ifdef CL_USE_DEPRECATED_OPENCL_1_1_APIS
+            #define CL_EXT_SUFFIX__VERSION_1_1_DEPRECATED    
+            #define CL_EXT_PREFIX__VERSION_1_1_DEPRECATED    
+        #else
+            #define CL_EXT_SUFFIX__VERSION_1_1_DEPRECATED 
+            #define CL_EXT_PREFIX__VERSION_1_1_DEPRECATED ___declspec(deprecated)     
+        #endif
+    #else
+        #define CL_EXT_SUFFIX__VERSION_1_0_DEPRECATED
+        #define CL_EXT_PREFIX__VERSION_1_0_DEPRECATED
+    
+        #define CL_EXT_SUFFIX__VERSION_1_1_DEPRECATED
+        #define CL_EXT_PREFIX__VERSION_1_1_DEPRECATED
+    #endif
 #endif
 
 #if (defined (_WIN32) && defined(_MSC_VER))
@@ -250,9 +302,10 @@ typedef double          cl_double   __attribute__((aligned(8)));
 
 #include <stddef.h>
 
-typedef unsigned int    cl_GLuint;
-typedef int             cl_GLint;
-typedef unsigned int    cl_GLenum;
+/* Mirror types to GL types. Mirror types allow us to avoid deciding which headers to load based on whether we are using GL or GLES here. */
+typedef unsigned int cl_GLuint;
+typedef int          cl_GLint;
+typedef unsigned int cl_GLenum;
 
 /*
  * Vector types 
@@ -293,7 +346,7 @@ typedef unsigned int    cl_GLenum;
     #if defined( __MINGW64__ )
         #include <intrin.h>
     #else
-    #include <xmmintrin.h>
+        #include <xmmintrin.h>
     #endif
     #if defined( __GNUC__ )
         typedef float __cl_float4   __attribute__((vector_size(16)));
@@ -307,7 +360,7 @@ typedef unsigned int    cl_GLenum;
     #if defined( __MINGW64__ )
         #include <intrin.h>
     #else
-    #include <emmintrin.h>
+        #include <emmintrin.h>
     #endif
     #if defined( __GNUC__ )
         typedef cl_uchar    __cl_uchar16    __attribute__((vector_size(16)));
@@ -394,7 +447,7 @@ typedef unsigned int    cl_GLenum;
 
 /* Define alignment keys */
 #if defined( __GNUC__ )
-    #define CL_ALIGNED(_x)      __attribute__ ((aligned(_x)))
+    #define CL_ALIGNED(_x)          __attribute__ ((aligned(_x)))
 #elif defined( _WIN32) && (_MSC_VER)
     /* Alignment keys neutered on windows because MSVC can't swallow function arguments with alignment requirements     */
     /* http://msdn.microsoft.com/en-us/library/373ak2y1%28VS.71%29.aspx                                                 */
@@ -1167,13 +1220,13 @@ typedef union
 /* Macro to facilitate debugging 
  * Usage:
  *   Place CL_PROGRAM_STRING_DEBUG_INFO on the line before the first line of your source. 
- *   The first line ends with:   CL_PROGRAM_STRING_BEGIN \"
+ *   The first line ends with:   CL_PROGRAM_STRING_DEBUG_INFO \"
  *   Each line thereafter of OpenCL C source must end with: \n\
  *   The last line ends in ";
  *
  *   Example:
  *
- *   const char *my_program = CL_PROGRAM_STRING_BEGIN "\
+ *   const char *my_program = CL_PROGRAM_STRING_DEBUG_INFO "\
  *   kernel void foo( int a, float * b )             \n\
  *   {                                               \n\
  *      // my comment                                \n\

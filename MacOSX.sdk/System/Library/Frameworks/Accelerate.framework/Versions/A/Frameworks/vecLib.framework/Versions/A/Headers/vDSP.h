@@ -3,9 +3,9 @@
  
      Contains:   AltiVec DSP Interfaces
  
-     Version:    vecLib-325.4
+     Version:    vecLib-380.6
  
-     Copyright:  � 2000-2011 by Apple Computer, Inc., all rights reserved.
+     Copyright:  � 2000-2012 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -46,8 +46,8 @@ extern "C" {
 	vDSP_Version0 is a major version number.
 	vDSP_Version1 is a minor version number.
 */
-#define	vDSP_Version0	325
-#define	vDSP_Version1	4
+#define	vDSP_Version0	380
+#define	vDSP_Version1	6
 
 
 typedef unsigned long                   vDSP_Length;
@@ -2037,6 +2037,23 @@ vDSP_vssqD(
   vDSP_Stride    __vDSP_strideResult,
   vDSP_Length    __vDSP_size) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
+/* Euclidean distance square, single-precision.*/
+/*
+ *  vDSP_distancesq()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in vecLib.framework
+ *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
+ *    Non-Carbon CFM:   in vecLib 1.0 and later
+ */
+extern void 
+vDSP_distancesq(
+  const float   __vDSP_input1[],
+  vDSP_Stride   __vDSP_stride1,
+  const float   __vDSP_input2[],
+  vDSP_Stride   __vDSP_stride2,
+  float *       __vDSP_result,
+  vDSP_Length   __vDSP_size) __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_5_0);
 
 /* Dot product, single-precision.*/
 /*
@@ -4279,6 +4296,66 @@ vDSP_svesqD(
   vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
+/* Sum of vector elements and sum of vector elements' squares,
+ * single-precision.
+ *
+ * vDSP_sve_svesq()
+ */
+extern void vDSP_sve_svesq(
+	const float  *__vDSP_A,
+	vDSP_Stride   __vDSP_I,
+	float        *__vDSP_Sum,
+	float        *__vDSP_SumOfSquares,
+	vDSP_Length   __vDSP_N)
+	__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
+
+
+/* Sum of vector elements and sum of vector elements' squares,
+ * double-precision.
+ *
+ * vDSP_sve_svesqD()
+ */
+extern void vDSP_sve_svesqD(
+	const double *__vDSP_A,
+	vDSP_Stride   __vDSP_I,
+	double       *__vDSP_Sum,
+	double       *__vDSP_SumOfSquares,
+	vDSP_Length   __vDSP_N)
+	__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
+
+
+/* Normalize elements to zero mean and unit standard deviation,
+ * single-precision.
+ *
+ * vDSP_normalize()
+ */
+extern void vDSP_normalize(
+	const float  *__vDSP_A,
+	vDSP_Stride   __vDSP_IA,
+	float        *__vDSP_C,
+	vDSP_Stride   __vDSP_IC,
+	float        *__vDSP_Mean,
+	float        *__vDSP_StandardDeviation,
+	vDSP_Length   __vDSP_N)
+	__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
+
+
+/* Normalize elements to zero mean and unit standard deviation,
+ * double-precision.
+ *
+ * vDSP_normalize()
+ */
+extern void vDSP_normalizeD(
+	const double *__vDSP_A,
+	vDSP_Stride   __vDSP_IA,
+	double       *__vDSP_C,
+	vDSP_Stride   __vDSP_IC,
+	double       *__vDSP_Mean,
+	double       *__vDSP_StandardDeviation,
+	vDSP_Length   __vDSP_N)
+	__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
+
+
 /* Sum of vector elements' signed squares, single-precision.*/
 /*
  *  vDSP_svs()
@@ -5970,9 +6047,9 @@ vDSP_vmaD(
  */
 extern void 
 vDSP_vmax(
-  float *       __vDSP_A,
+  const float * __vDSP_A,
   vDSP_Stride   __vDSP_I,
-  float *       __vDSP_B,
+  const float * __vDSP_B,
   vDSP_Stride   __vDSP_J,
   float *       __vDSP_C,
   vDSP_Stride   __vDSP_K,
@@ -6050,9 +6127,9 @@ vDSP_vmaxmgD(
  */
 extern void 
 vDSP_vmin(
-  float *       __vDSP_A,
+  const float * __vDSP_A,
   vDSP_Stride   __vDSP_I,
-  float *       __vDSP_B,
+  const float * __vDSP_B,
   vDSP_Stride   __vDSP_J,
   float *       __vDSP_C,
   vDSP_Stride   __vDSP_K,
@@ -7532,11 +7609,11 @@ void vDSP_FFT32_zopv(
 
 		The current sequences of setup, execution, destroy routines are:
 
-			vDSP_DFT_zop_CreateSetup, vDSP_DFT_Execute, vDSP_DestroySetup, or
+			vDSP_DFT_zop_CreateSetup, vDSP_DFT_Execute, vDSP_DFT_DestroySetup;
 
-			vDSP_DFT_zrop_CreateSetup, vDSP_DFT_Execute, vDSP_DestroySetup, or
+			vDSP_DFT_zrop_CreateSetup, vDSP_DFT_Execute, vDSP_DFT_DestroySetup;
 		
-			vDSP_DFT_CreateSetup, vDSP_DFT_zop, vDSP_DestroySetup.
+			vDSP_DFT_CreateSetup, vDSP_DFT_zop, vDSP_DFT_DestroySetup.
 
 		Sharing DFT setups:
 
@@ -7552,7 +7629,7 @@ void vDSP_FFT32_zopv(
 			vDSP_DFT_CreateSetup can only be used with vDSP_DFT_zop and not
 			with vDSP_DFT_Execute.
 
-			vDSP_DestroySetup is used to destroy any DFT setup.
+			vDSP_DFT_DestroySetup is used to destroy any DFT setup.
 
 		History:
 
@@ -7661,7 +7738,7 @@ vDSP_DFT_Setup vDSP_DFT_CreateSetup(vDSP_DFT_Setup __vDSP_Previous,
 		implementation for the requested case.  Currently, the implemented
 		cases are:
 
-			Length = f * 2**n, where f is 3, 5, or 15 and 4 <= n.
+			Length = f * 2**n, where f is 3, 5, or 15 and 3 <= n.
 
 		Additionally, only cases where the array addresses (passed to
 		vDSP_DFT_Execute) are 16-byte aligned are optimized.
@@ -7701,7 +7778,7 @@ vDSP_DFT_Setup vDSP_DFT_CreateSetup(vDSP_DFT_Setup __vDSP_Previous,
 		Performance is good for these cases:
 
 			All addresses are 16-byte aligned, and the length is f * 2**n,
-			where f is 3, 5, or 15 and 4 <= n.
+			where f is 3, 5, or 15 and 3 <= n.
 
 		Performance is extremely slow for all other cases.
 
@@ -7753,7 +7830,7 @@ vDSP_DFT_Setup vDSP_DFT_zop_CreateSetup(vDSP_DFT_Setup __vDSP_Previous,
 		implementation for the requested case.  Currently, the implemented
 		cases are:
 
-			Length = f * 2**n, where f is 3, 5, or 15 and 5 <= n.
+			Length = f * 2**n, where f is 3, 5, or 15 and 4 <= n.
 
 		Additionally, only cases where the array addresses (passed to
 		vDSP_DFT_Execute) are 16-byte aligned are optimized.
@@ -7819,7 +7896,7 @@ vDSP_DFT_Setup vDSP_DFT_zop_CreateSetup(vDSP_DFT_Setup __vDSP_Previous,
 		Performance is good for these cases:
 
 			All addresses are 16-byte aligned, and the length is f * 2**n,
-			where f is 3, 5, or 15 and 5 <= n.
+			where f is 3, 5, or 15 and 4 <= n.
 
 		Performance is extremely slow for all other cases.
 
@@ -7909,7 +7986,7 @@ void vDSP_DFT_DestroySetup(vDSP_DFT_Setup __vDSP_Setup)
 		Performance is good for these cases:
 
 			All addresses are 16-byte aligned, all strides are one, and the
-			length is f * 2**n, where f is 3, 5, or 15 and 4 <= n.
+			length is f * 2**n, where f is 3, 5, or 15 and 3 <= n.
 
 		Performance is extremely slow for all other cases.
 

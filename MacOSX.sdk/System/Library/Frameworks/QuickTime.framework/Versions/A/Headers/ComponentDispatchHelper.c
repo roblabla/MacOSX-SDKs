@@ -1,7 +1,7 @@
 /*
 	File:		ComponentDispatchHelper.c
 
-	Copyright:	© 1995-2010 by Apple Inc., all rights reserved.
+	Copyright:	© 1995-2012 by Apple Inc., all rights reserved.
 
 */
 

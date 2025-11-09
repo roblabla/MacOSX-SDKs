@@ -3,7 +3,7 @@
  
      Contains:   AppleScript Generic Component Interfaces.
  
-     Version:    OSA-143~22
+     Version:    OSA-148.3~2
  
      Copyright:  © 1992-2008 by Apple Computer, Inc., all rights reserved
  
@@ -16,8 +16,8 @@
 #ifndef __OSAGENERIC__
 #define __OSAGENERIC__
 
-#ifndef __APPLICATIONSERVICES__
-#include <ApplicationServices/ApplicationServices.h>
+#ifndef __CORESERVICES__
+#include <CoreServices/CoreServices.h>
 #endif
 
 #ifndef __OSA__

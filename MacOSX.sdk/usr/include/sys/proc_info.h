@@ -638,6 +638,9 @@ struct proc_fileportinfo {
 #define PROC_PIDLISTFILEPORTS		14
 #define PROC_PIDLISTFILEPORTS_SIZE	(sizeof(struct proc_fileportinfo))
 
+#define PROC_PIDTHREADID64INFO		15
+#define PROC_PIDTHREADID64INFO_SIZE	(sizeof(struct proc_threadinfo))
+
 /* Flavors for proc_pidfdinfo */
 
 #define PROC_PIDFDVNODEINFO		1
@@ -686,6 +689,24 @@ struct proc_fileportinfo {
 #define PROC_SELFSET_THREADNAME_SIZE	(MAXTHREADNAMESIZE -1)
 
 #define PROC_SELFSET_VMRSRCOWNER	3
+
+#define PROC_SELFSET_DELAYIDLESLEEP	4
+
+/* used for proc_dirtycontrol */
+#define PROC_DIRTYCONTROL_TRACK         1
+#define PROC_DIRTYCONTROL_SET           2
+#define PROC_DIRTYCONTROL_GET           3
+
+/* proc_track_dirty() flags */
+#define PROC_DIRTY_TRACK                0x1
+#define PROC_DIRTY_ALLOW_IDLE_EXIT      0x2
+
+#define PROC_DIRTY_TRACK_MASK           (PROC_DIRTY_TRACK|PROC_DIRTY_ALLOW_IDLE_EXIT)
+
+/* proc_get_dirty() flags */
+#define PROC_DIRTY_TRACKED              0x1
+#define PROC_DIRTY_ALLOWS_IDLE_EXIT     0x2
+#define PROC_DIRTY_IS_DIRTY             0x4																																																																																																																																																																																																										
 
 
 __END_DECLS

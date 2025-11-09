@@ -139,8 +139,11 @@ enum vtagtype	{
 #define IO_BACKGROUND IO_PASSIVE /* used for backward compatibility.  to be removed after IO_BACKGROUND is no longer
 								  * used by DiskImages in-kernel mode */
 #define	IO_NOAUTH	0x8000		/* No authorization checks. */
-#define IO_NODIRECT    0x10000		/* don't use direct synchronous writes if IO_NOCACHE is specified */
-
+#define IO_NODIRECT     0x10000		/* don't use direct synchronous writes if IO_NOCACHE is specified */
+#define IO_ENCRYPTED	0x20000		/* Retrieve encrypted blocks from the filesystem */
+#define IO_RETURN_ON_THROTTLE	0x40000
+#define IO_SINGLE_WRITER	0x80000
+#define IO_SYSCALL_DISPATCH		0x100000	/* I/O origin is file table syscall */
 
 /*
  * Component Name: this structure describes the pathname
@@ -225,7 +228,7 @@ struct vnode_fsparam {
  * Note that this structure may be extended, but existing fields must not move.
  */
 
-#define VATTR_INIT(v)			do {(v)->va_supported = (v)->va_active = 0ll; (v)->va_vaflags = 0;} while(0)
+#define VATTR_INIT(v)			do {(v)->va_supported = (v)->va_active = 0ll; (v)->va_vaflags = 0; } while(0)
 #define VATTR_SET_ACTIVE(v, a)		((v)->va_active |= VNODE_ATTR_ ## a)
 #define VATTR_SET_SUPPORTED(v, a)	((v)->va_supported |= VNODE_ATTR_ ## a)
 #define VATTR_IS_SUPPORTED(v, a)	((v)->va_supported & VNODE_ATTR_ ## a)
@@ -276,6 +279,8 @@ struct vnode_fsparam {
 #define VNODE_ATTR_va_nchildren		(1LL<<28)       /* 10000000 */
 #define VNODE_ATTR_va_dirlinkcount	(1LL<<29)       /* 20000000 */
 #define VNODE_ATTR_va_addedtime		(1LL<<30)		/* 40000000 */
+#define VNODE_ATTR_va_dataprotect_class		(1LL<<31)		/* 80000000 */
+#define VNODE_ATTR_va_dataprotect_flags		(1LL<<32)		/* 100000000 */
 
 #define VNODE_ATTR_BIT(n)	(VNODE_ATTR_ ## n)
 /*
@@ -296,8 +301,8 @@ struct vnode_fsparam {
 				VNODE_ATTR_BIT(va_name) |		\
 				VNODE_ATTR_BIT(va_type) |		\
 				VNODE_ATTR_BIT(va_nchildren) |		\
-				VNODE_ATTR_BIT(va_dirlinkcount)|		\
-                VNODE_ATTR_BIT(va_addedtime)) 
+				VNODE_ATTR_BIT(va_dirlinkcount) |	\
+				VNODE_ATTR_BIT(va_addedtime)) 
 /*
  * Attributes that can be applied to a new file object.
  */
@@ -313,7 +318,9 @@ struct vnode_fsparam {
 				VNODE_ATTR_BIT(va_encoding) |		\
 				VNODE_ATTR_BIT(va_type) |		\
 				VNODE_ATTR_BIT(va_uuuid) |		\
-				VNODE_ATTR_BIT(va_guuid))
+				VNODE_ATTR_BIT(va_guuid) |		\
+				VNODE_ATTR_BIT(va_dataprotect_class) |	\
+				VNODE_ATTR_BIT(va_dataprotect_flags))
 
 
 struct vnode_attr {
@@ -372,10 +379,13 @@ struct vnode_attr {
 
 	/* add new fields here only */
 	void * 		va_reserved1;
-    struct timespec va_addedtime;	/* timestamp when item was added to parent directory */
-
+	struct timespec va_addedtime;	/* timestamp when item was added to parent directory */
 		
+	/* Data Protection fields */
+	uint32_t va_dataprotect_class;	/* class specified for this file if it didn't exist */
+	uint32_t va_dataprotect_flags;	/* flags from NP open(2) to the filesystem */
 };
+
 
 /*
  * Flags for va_vaflags.
@@ -421,14 +431,15 @@ extern int		vttoif_tab[];
 
 #define	REVOKEALL	0x0001		/* vnop_revoke: revoke all aliases */
 
-/* VNOP_REMOVE: do not delete busy files (Carbon remove file semantics) */
-#define VNODE_REMOVE_NODELETEBUSY  0x0001  
+/* VNOP_REMOVE/unlink flags: */
+#define VNODE_REMOVE_NODELETEBUSY  			0x0001 /* Do not delete busy files (Carbon) */
+#define VNODE_REMOVE_SKIP_NAMESPACE_EVENT	0x0002 /* Do not upcall to userland handlers */
 
 /* VNOP_READDIR flags: */
 #define VNODE_READDIR_EXTENDED    0x0001   /* use extended directory entries */
 #define VNODE_READDIR_REQSEEKOFF  0x0002   /* requires seek offset (cookies) */
 #define VNODE_READDIR_SEEKOFF32   0x0004   /* seek offset values should fit in 32 bits */
-
+#define VNODE_READDIR_NAMEMAX     0x0008   /* For extended readdir, try to limit names to NAME_MAX bytes */
 
 #define	NULLVP	((struct vnode *)NULL)
 

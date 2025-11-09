@@ -2,16 +2,10 @@
      File:       CarbonCore/Components.h
  
      Contains:   Component Manager Interfaces.
+                 The contents of this header file are deprecated.
+                 Use Foundation or CoreFoundation bundles and plugins instead.
  
-     Version:    CarbonCore-960.18~3
- 
-     Copyright:  © 1991-2008 by Apple Computer, Inc., all rights reserved.
- 
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
- 
-                     http://developer.apple.com/bugreporter/
- 
+     Copyright:  Â© 1991-2011 by Apple Inc. All rights reserved.
 */
 #ifndef __COMPONENTS__
 #define __COMPONENTS__
@@ -38,7 +32,7 @@
 
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -285,7 +279,7 @@ enum {
  *    Non-Carbon CFM:   not available
  */
 extern void 
-CSSetComponentsThreadMode(CSComponentsThreadMode mode)        AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+CSSetComponentsThreadMode(CSComponentsThreadMode mode)        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -308,7 +302,7 @@ CSSetComponentsThreadMode(CSComponentsThreadMode mode)        AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern CSComponentsThreadMode 
-CSGetComponentsThreadMode(void)                               AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+CSGetComponentsThreadMode(void)                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 struct ComponentMPWorkFunctionHeaderRecord {
@@ -352,7 +346,7 @@ typedef UniversalProcPtr                ComponentFunctionUPP;
 extern ComponentFunctionUPP 
 NewComponentFunctionUPP(
   ProcPtr        userRoutine,
-  ProcInfoType   procInfo)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ProcInfoType   procInfo)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -372,7 +366,7 @@ NewComponentFunctionUPP(
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void 
-DisposeComponentFunctionUPP(ComponentFunctionUPP userUPP)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeComponentFunctionUPP(ComponentFunctionUPP userUPP)     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -422,7 +416,7 @@ RegisterComponent(
   SInt16                  global,
   Handle                  componentName,
   Handle                  componentInfo,
-  Handle                  componentIcon)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle                  componentIcon)                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -440,7 +434,7 @@ RegisterComponent(
 extern Component 
 RegisterComponentResource(
   ComponentResourceHandle   cr,
-  SInt16                    global)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt16                    global)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -456,7 +450,7 @@ RegisterComponentResource(
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
 extern OSErr 
-UnregisterComponent(Component aComponent)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+UnregisterComponent(Component aComponent)                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -474,7 +468,7 @@ UnregisterComponent(Component aComponent)                     AVAILABLE_MAC_OS_X
 extern Component 
 FindNextComponent(
   Component               aComponent,
-  ComponentDescription *  looking)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ComponentDescription *  looking)                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -490,7 +484,7 @@ FindNextComponent(
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
 extern long 
-CountComponents(ComponentDescription * looking)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+CountComponents(ComponentDescription * looking)               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -511,7 +505,7 @@ GetComponentInfo(
   ComponentDescription *  cd,
   Handle                  componentName,
   Handle                  componentInfo,
-  Handle                  componentIcon)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle                  componentIcon)                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -527,7 +521,7 @@ GetComponentInfo(
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
 extern SInt32 
-GetComponentListModSeed(void)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetComponentListModSeed(void)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -543,7 +537,7 @@ GetComponentListModSeed(void)                                 AVAILABLE_MAC_OS_X
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
 extern SInt32 
-GetComponentTypeModSeed(OSType componentType)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetComponentTypeModSeed(OSType componentType)                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /********************************************************
@@ -564,7 +558,7 @@ GetComponentTypeModSeed(OSType componentType)                 AVAILABLE_MAC_OS_X
 extern OSErr 
 OpenAComponent(
   Component            aComponent,
-  ComponentInstance *  ci)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ComponentInstance *  ci)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -580,7 +574,7 @@ OpenAComponent(
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
 extern ComponentInstance 
-OpenComponent(Component aComponent)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+OpenComponent(Component aComponent)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -596,7 +590,7 @@ OpenComponent(Component aComponent)                           AVAILABLE_MAC_OS_X
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
 extern OSErr 
-CloseComponent(ComponentInstance aComponentInstance)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+CloseComponent(ComponentInstance aComponentInstance)          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -612,7 +606,7 @@ CloseComponent(ComponentInstance aComponentInstance)          AVAILABLE_MAC_OS_X
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
 extern OSErr 
-GetComponentInstanceError(ComponentInstance aComponentInstance) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetComponentInstanceError(ComponentInstance aComponentInstance) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /********************************************************
@@ -631,7 +625,7 @@ GetComponentInstanceError(ComponentInstance aComponentInstance) AVAILABLE_MAC_OS
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
 extern Component 
-ResolveComponentAlias(Component aComponent)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+ResolveComponentAlias(Component aComponent)                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /********************************************************
@@ -654,7 +648,7 @@ GetComponentPublicResource(
   Component   aComponent,
   OSType      resourceType,
   SInt16      resourceID,
-  Handle *    theResource)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle *    theResource)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -676,7 +670,7 @@ GetComponentPublicResourceList(
   ComponentDescription *           cd,
   GetMissingComponentResourceUPP   missingProc,
   void *                           refCon,
-  void *                           atomContainerPtr)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *                           atomContainerPtr)          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -695,7 +689,7 @@ GetComponentPublicIndString(
   Component   aComponent,
   Str255      theString,
   SInt16      strListID,
-  SInt16      index)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt16      index)                                          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /********************************************************
@@ -721,7 +715,7 @@ GetComponentPublicIndString(
 extern void 
 SetComponentInstanceError(
   ComponentInstance   aComponentInstance,
-  OSErr               theError)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSErr               theError)                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -737,7 +731,7 @@ SetComponentInstanceError(
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
 extern long 
-GetComponentRefcon(Component aComponent)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetComponentRefcon(Component aComponent)                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -755,7 +749,7 @@ GetComponentRefcon(Component aComponent)                      AVAILABLE_MAC_OS_X
 extern void 
 SetComponentRefcon(
   Component   aComponent,
-  long        theRefcon)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long        theRefcon)                                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -771,7 +765,7 @@ SetComponentRefcon(
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
 extern ResFileRefNum 
-OpenComponentResFile(Component aComponent)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+OpenComponentResFile(Component aComponent)                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -789,7 +783,7 @@ OpenComponentResFile(Component aComponent)                    AVAILABLE_MAC_OS_X
 extern OSErr 
 OpenAComponentResFile(
   Component        aComponent,
-  ResFileRefNum *  resRef)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ResFileRefNum *  resRef)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -805,7 +799,7 @@ OpenAComponentResFile(
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
 extern OSErr 
-CloseComponentResFile(ResFileRefNum refnum)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+CloseComponentResFile(ResFileRefNum refnum)                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /* Note: GetComponentResource returns a Handle, not a resource.  The caller must dispose it with DisposeHandle. */
@@ -826,7 +820,7 @@ GetComponentResource(
   Component   aComponent,
   OSType      resType,
   SInt16      resID,
-  Handle *    theResource)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle *    theResource)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -846,7 +840,7 @@ GetComponentIndString(
   Component   aComponent,
   Str255      theString,
   SInt16      strListID,
-  SInt16      index)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt16      index)                                          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /********************************************************
@@ -865,7 +859,7 @@ GetComponentIndString(
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
 extern Handle 
-GetComponentInstanceStorage(ComponentInstance aComponentInstance) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetComponentInstanceStorage(ComponentInstance aComponentInstance) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -883,7 +877,7 @@ GetComponentInstanceStorage(ComponentInstance aComponentInstance) AVAILABLE_MAC_
 extern void 
 SetComponentInstanceStorage(
   ComponentInstance   aComponentInstance,
-  Handle              theStorage)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle              theStorage)                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -899,7 +893,7 @@ SetComponentInstanceStorage(
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
 extern long 
-CountComponentInstances(Component aComponent)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+CountComponentInstances(Component aComponent)                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /* useful helper routines for convenient method dispatching */
@@ -917,7 +911,7 @@ CountComponentInstances(Component aComponent)                 AVAILABLE_MAC_OS_X
 extern ComponentResult 
 CallComponentFunction(
   ComponentParameters *  params,
-  ComponentFunctionUPP   func)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ComponentFunctionUPP   func)                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -936,7 +930,7 @@ extern ComponentResult
 CallComponentFunctionWithStorage(
   Handle                 storage,
   ComponentParameters *  params,
-  ComponentFunctionUPP   func)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ComponentFunctionUPP   func)                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -955,7 +949,7 @@ CallComponentFunctionWithStorageProcInfo(
   Handle                 storage,
   ComponentParameters *  params,
   ProcPtr                func,
-  ProcInfoType           funcProcInfo)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ProcInfoType           funcProcInfo)                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -973,7 +967,7 @@ CallComponentFunctionWithStorageProcInfo(
 extern ComponentResult 
 DelegateComponentCall(
   ComponentParameters *  originalParams,
-  ComponentInstance      ci)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ComponentInstance      ci)                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -991,7 +985,7 @@ DelegateComponentCall(
 extern OSErr 
 SetDefaultComponent(
   Component   aComponent,
-  SInt16      flags)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt16      flags)                                          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1009,7 +1003,7 @@ SetDefaultComponent(
 extern ComponentInstance 
 OpenDefaultComponent(
   OSType   componentType,
-  OSType   componentSubType)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSType   componentSubType)                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1028,7 +1022,7 @@ extern OSErr
 OpenADefaultComponent(
   OSType               componentType,
   OSType               componentSubType,
-  ComponentInstance *  ci)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ComponentInstance *  ci)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1046,7 +1040,7 @@ OpenADefaultComponent(
 extern Component 
 CaptureComponent(
   Component   capturedComponent,
-  Component   capturingComponent)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Component   capturingComponent)                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1062,7 +1056,7 @@ CaptureComponent(
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
 extern OSErr 
-UncaptureComponent(Component aComponent)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+UncaptureComponent(Component aComponent)                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1080,7 +1074,7 @@ UncaptureComponent(Component aComponent)                      AVAILABLE_MAC_OS_X
 extern SInt32 
 RegisterComponentResourceFile(
   SInt16   resRefNum,
-  SInt16   global)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt16   global)                                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This call is deprecated. Please use GetIconRefFromComponent() instead.*/
@@ -1100,7 +1094,7 @@ RegisterComponentResourceFile(
 extern OSErr 
 GetComponentIconSuite(
   Component   aComponent,
-  Handle *    iconSuite)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle *    iconSuite)                                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 #endif  /* !__LP64__ */
@@ -1130,7 +1124,7 @@ GetComponentIconSuite(
 extern OSErr 
 RegisterComponentFile(
   const FSSpec *  spec,
-  short           global)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  short           global)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1149,7 +1143,7 @@ RegisterComponentFileEntries(
   const FSSpec *                spec,
   short                         global,
   const ComponentDescription *  toRegister,          /* can be NULL */
-  UInt32                        registerCount)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  UInt32                        registerCount)                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 #endif  /* !__LP64__ */
@@ -1168,7 +1162,7 @@ RegisterComponentFileEntries(
 extern OSErr 
 RegisterComponentFileRef(
   const FSRef *  ref,
-  SInt16         global)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt16         global)                                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1187,7 +1181,7 @@ RegisterComponentFileRefEntries(
   const FSRef *                 ref,
   SInt16                        global,
   const ComponentDescription *  toRegister,          /* can be NULL */
-  UInt32                        registerCount)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32                        registerCount)                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /********************************************************
@@ -1213,7 +1207,7 @@ RegisterComponentFileRefEntries(
 extern ComponentResult 
 ComponentFunctionImplemented(
   ComponentInstance   ci,
-  SInt16              ftnNumber)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  SInt16              ftnNumber)                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1229,7 +1223,7 @@ ComponentFunctionImplemented(
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
 extern ComponentResult 
-GetComponentVersion(ComponentInstance ci)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+GetComponentVersion(ComponentInstance ci)                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1247,7 +1241,7 @@ GetComponentVersion(ComponentInstance ci)                     AVAILABLE_MAC_OS_X
 extern ComponentResult 
 ComponentSetTarget(
   ComponentInstance   ci,
-  ComponentInstance   target)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  ComponentInstance   target)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /* New style names*/
@@ -1269,7 +1263,7 @@ ComponentSetTarget(
 extern ComponentResult 
 CallComponentOpen(
   ComponentInstance   ci,
-  ComponentInstance   self)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ComponentInstance   self)                                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1287,7 +1281,7 @@ CallComponentOpen(
 extern ComponentResult 
 CallComponentClose(
   ComponentInstance   ci,
-  ComponentInstance   self)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ComponentInstance   self)                                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1305,7 +1299,7 @@ CallComponentClose(
 extern ComponentResult 
 CallComponentCanDo(
   ComponentInstance   ci,
-  SInt16              ftnNumber)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt16              ftnNumber)                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1321,7 +1315,7 @@ CallComponentCanDo(
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
 extern ComponentResult 
-CallComponentVersion(ComponentInstance ci)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+CallComponentVersion(ComponentInstance ci)                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1337,7 +1331,7 @@ CallComponentVersion(ComponentInstance ci)                    AVAILABLE_MAC_OS_X
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
 extern ComponentResult 
-CallComponentRegister(ComponentInstance ci)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+CallComponentRegister(ComponentInstance ci)                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1355,7 +1349,7 @@ CallComponentRegister(ComponentInstance ci)                   AVAILABLE_MAC_OS_X
 extern ComponentResult 
 CallComponentTarget(
   ComponentInstance   ci,
-  ComponentInstance   target)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ComponentInstance   target)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1371,7 +1365,7 @@ CallComponentTarget(
  *    Windows:          in qtmlClient.lib 3.0 and later
  */
 extern ComponentResult 
-CallComponentUnregister(ComponentInstance ci)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+CallComponentUnregister(ComponentInstance ci)                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1390,7 +1384,7 @@ extern ComponentResult
 CallComponentGetMPWorkFunction(
   ComponentInstance             ci,
   ComponentMPWorkFunctionUPP *  workFunction,
-  void **                       refCon)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void **                       refCon)                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1409,7 +1403,7 @@ CallComponentGetPublicResource(
   ComponentInstance   ci,
   OSType              resourceType,
   SInt16              resourceID,
-  Handle *            resource)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle *            resource)                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -1429,7 +1423,7 @@ CallComponentGetPublicResource(
  *    Non-Carbon CFM:   not available
  */
 extern ComponentResult 
-CallComponentDispatch(ComponentParameters * cp)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+CallComponentDispatch(ComponentParameters * cp)               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -1443,7 +1437,7 @@ CallComponentDispatch(ComponentParameters * cp)               AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ComponentMPWorkFunctionUPP
-NewComponentMPWorkFunctionUPP(ComponentMPWorkFunctionProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewComponentMPWorkFunctionUPP(ComponentMPWorkFunctionProcPtr userRoutine) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  NewComponentRoutineUPP()
@@ -1454,7 +1448,7 @@ NewComponentMPWorkFunctionUPP(ComponentMPWorkFunctionProcPtr userRoutine) AVAILA
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ComponentRoutineUPP
-NewComponentRoutineUPP(ComponentRoutineProcPtr userRoutine)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewComponentRoutineUPP(ComponentRoutineProcPtr userRoutine)   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  NewGetMissingComponentResourceUPP()
@@ -1465,7 +1459,7 @@ NewComponentRoutineUPP(ComponentRoutineProcPtr userRoutine)   AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern GetMissingComponentResourceUPP
-NewGetMissingComponentResourceUPP(GetMissingComponentResourceProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewGetMissingComponentResourceUPP(GetMissingComponentResourceProcPtr userRoutine) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  DisposeComponentMPWorkFunctionUPP()
@@ -1476,7 +1470,7 @@ NewGetMissingComponentResourceUPP(GetMissingComponentResourceProcPtr userRoutine
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeComponentMPWorkFunctionUPP(ComponentMPWorkFunctionUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeComponentMPWorkFunctionUPP(ComponentMPWorkFunctionUPP userUPP) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  DisposeComponentRoutineUPP()
@@ -1487,7 +1481,7 @@ DisposeComponentMPWorkFunctionUPP(ComponentMPWorkFunctionUPP userUPP) AVAILABLE_
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeComponentRoutineUPP(ComponentRoutineUPP userUPP)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeComponentRoutineUPP(ComponentRoutineUPP userUPP)       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  DisposeGetMissingComponentResourceUPP()
@@ -1498,7 +1492,7 @@ DisposeComponentRoutineUPP(ComponentRoutineUPP userUPP)       AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeGetMissingComponentResourceUPP(GetMissingComponentResourceUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeGetMissingComponentResourceUPP(GetMissingComponentResourceUPP userUPP) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  InvokeComponentMPWorkFunctionUPP()
@@ -1512,7 +1506,7 @@ extern ComponentResult
 InvokeComponentMPWorkFunctionUPP(
   void *                                  globalRefCon,
   ComponentMPWorkFunctionHeaderRecordPtr  header,
-  ComponentMPWorkFunctionUPP              userUPP)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ComponentMPWorkFunctionUPP              userUPP)            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  InvokeComponentRoutineUPP()
@@ -1526,7 +1520,7 @@ extern ComponentResult
 InvokeComponentRoutineUPP(
   ComponentParameters *  cp,
   Handle                 componentStorage,
-  ComponentRoutineUPP    userUPP)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ComponentRoutineUPP    userUPP)                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  InvokeGetMissingComponentResourceUPP()
@@ -1543,7 +1537,7 @@ InvokeGetMissingComponentResourceUPP(
   SInt16                          resID,
   void *                          refCon,
   Handle *                        resource,
-  GetMissingComponentResourceUPP  userUPP)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  GetMissingComponentResourceUPP  userUPP)                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 #if __MACH__
   #ifdef __cplusplus

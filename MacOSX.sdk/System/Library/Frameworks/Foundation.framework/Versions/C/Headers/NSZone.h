@@ -1,5 +1,5 @@
 /*	NSZone.h
-	Copyright (c) 1994-2011, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2012, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObjCRuntime.h>
@@ -54,7 +54,11 @@ FOUNDATION_EXPORT void *__strong NSReallocateCollectable(void *ptr, NSUInteger s
 */
 NS_INLINE NS_RETURNS_RETAINED id NSMakeCollectable(CFTypeRef CF_CONSUMED cf) NS_AUTOMATED_REFCOUNT_UNAVAILABLE;
 NS_INLINE NS_RETURNS_RETAINED id NSMakeCollectable(CFTypeRef CF_CONSUMED cf) {
+#if __has_feature(objc_arc)
+    return nil;
+#else
     return (cf ? (id)CFMakeCollectable(cf) : nil);
+#endif
 }
 
 FOUNDATION_EXPORT NSUInteger NSPageSize(void);
@@ -64,5 +68,5 @@ FOUNDATION_EXPORT NSUInteger NSRoundDownToMultipleOfPageSize(NSUInteger bytes);
 FOUNDATION_EXPORT void *NSAllocateMemoryPages(NSUInteger bytes);
 FOUNDATION_EXPORT void NSDeallocateMemoryPages(void *ptr, NSUInteger bytes);
 FOUNDATION_EXPORT void NSCopyMemoryPages(const void *source, void *dest, NSUInteger bytes);
-FOUNDATION_EXPORT NSUInteger NSRealMemoryAvailable(void);
+FOUNDATION_EXPORT NSUInteger NSRealMemoryAvailable(void) NS_DEPRECATED(10_0, 10_8, 2_0, 6_0); // see NSProcessInfo.h instead
 

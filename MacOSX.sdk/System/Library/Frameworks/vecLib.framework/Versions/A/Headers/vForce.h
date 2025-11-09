@@ -61,28 +61,28 @@ results may not be bit-wise identical.
 */
 
 /* Set y[i] to the reciprocal of x[i], for i=0,..,n-1 */
-void vvrecf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA); 
-void vvrec (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA); 
+void vvrecf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0); 
+void vvrec (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0); 
 
 /* Set z[i] to y[i]/x[i], for i=0,..,n-1 */
-void vvdivf (float * /* z */, const float * /* y */, const float * /* x */, const int *  /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA); 
-void vvdiv (double * /* z */, const double * /* y */, const double * /* x */, const int *  /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA); 
+void vvdivf (float * /* z */, const float * /* y */, const float * /* x */, const int *  /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0); 
+void vvdiv (double * /* z */, const double * /* y */, const double * /* x */, const int *  /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0); 
 
 /* Set y[i] to the square root of x[i], for i=0,..,n-1 */
-void vvsqrtf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA); 
-void vvsqrt (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA); 
+void vvsqrtf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0); 
+void vvsqrt (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0); 
 
 /* Set y[i] to the reciprocal of the square root of x[i], for i=0,..,n-1 */
-void vvrsqrtf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA); 
-void vvrsqrt (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA); 
+void vvrsqrtf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0); 
+void vvrsqrt (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0); 
 
 /* Set y[i] to the exponential function of x[i], for i=0,..,n-1 */
-void vvexpf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA); 
-void vvexp (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA); 
+void vvexpf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0); 
+void vvexp (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0); 
 
 /* Set y[i] to the base-e exponential of x , minus 1 accurately even
    for very small values of x[i], for i=0,..,n-1 */
-void vvexpm1f (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA); 
+void vvexpm1f (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_5_0); 
 /*
  vvexpm1
  
@@ -98,19 +98,19 @@ void vvexpm1f (float * /* y */, const float * /* x */, const int * /* n */) __OS
  n: number of floating point elements specified by *n
  
  */
-void vvexpm1 (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA); 
+void vvexpm1 (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0); 
 	
 /* Set y[i] to the natural logarithm of x[i], for i=0,..,n-1 */
-void vvlogf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA); 
-void vvlog (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA); 
+void vvlogf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0); 
+void vvlog (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0); 
 
 /* Set y[i] to the base 10 logarithm of x[i], for i=0,..,n-1 */
-void vvlog10f (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA); 
-void vvlog10 (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA); 
+void vvlog10f (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0); 
+void vvlog10 (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0); 
 
 /* Set y[i] to the value of log(1+x[i]) accurately even for very small
    values of x[i], for i=0,..,n-1 */
-void vvlog1pf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA); 
+void vvlog1pf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_5_0); 
 /*
  vvlog1p
  
@@ -125,11 +125,11 @@ void vvlog1pf (float * /* y */, const float * /* x */, const int * /* n */) __OS
  n: number of floating point elements specified by *n
  
  */
-void vvlog1p (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA);
+void vvlog1p (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0);
 	
 /* Set y[i] to the the exponent of x[i], represented as a floating-
      point number, for i=0,..,n-1 */
-void vvlogbf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA); 
+void vvlogbf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_5_0); 
 /*
  vvlogb
  
@@ -144,7 +144,7 @@ void vvlogbf (float * /* y */, const float * /* x */, const int * /* n */) __OSX
  n: number of floating point elements specified by *n
  
  */
-void vvlogb (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA);
+void vvlogb (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0);
 	
 /*
  vvfabf
@@ -178,7 +178,7 @@ void vvfabf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_
  n: number of floating point elements specified by *n
  
  */
-void vvfabsf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA); 
+void vvfabsf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0); 
 /*
  vvfabs
  
@@ -193,92 +193,92 @@ void vvfabsf (float * /* y */, const float * /* x */, const int * /* n */) __OSX
  n: number of floating point elements specified by *n
  
  */
-void vvfabs (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA);
+void vvfabs (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0);
 	
 /* Set z[i] to x[i] ** y[i], for i=0,..,n-1 */
-void vvpowf (float * /* z */, const float * /* y */, const float * /* x */, const int *  /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA); 
-void vvpow (double * /* z */, const double * /* y */, const double * /* x */, const int *  /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA); 
+void vvpowf (float * /* z */, const float * /* y */, const float * /* x */, const int *  /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0); 
+void vvpow (double * /* z */, const double * /* y */, const double * /* x */, const int *  /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0); 
 
 /* Set y[i] to the sine of x[i], for i=0,..,n-1 */
-void vvsinf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
-void vvsin (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+void vvsinf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0);
+void vvsin (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0);
 
 /* Set y[i] to the cosine of x[i], for i=0,..,n-1 */
-void vvcosf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
-void vvcos (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+void vvcosf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0);
+void vvcos (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0);
 
 /* Set y[i] to the tangent of x[i], for i=0,..,n-1 */
-void vvtanf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
-void vvtan (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+void vvtanf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0);
+void vvtan (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0);
 
 /* Set y[i] to the arcsine of x[i], for i=0,..,n-1 */
-void vvasinf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
-void vvasin (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+void vvasinf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0);
+void vvasin (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0);
 
 /* Set y[i] to the arccosine of x[i], for i=0,..,n-1 */
-void vvacosf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
-void vvacos (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+void vvacosf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0);
+void vvacos (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0);
 
 /* Set y[i] to the arctangent of x[i], for i=0,..,n-1 */
-void vvatanf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
-void vvatan (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+void vvatanf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0);
+void vvatan (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0);
 
 /* Set z[i] to the arctangent of y[i]/x[i], for i=0,..,n-1 */
-void vvatan2f (float * /* z */, const float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
-void vvatan2 (double * /* z */, const double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+void vvatan2f (float * /* z */, const float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0);
+void vvatan2 (double * /* z */, const double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0);
 
 /* Set z[i] to the sine of x[i] and y[i] to the cosine of x[i], for i=0,..,n-1 */
-void vvsincosf (float * /* z */, float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
-void vvsincos (double * /* z */, double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+void vvsincosf (float * /* z */, float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0);
+void vvsincos (double * /* z */, double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0);
 
 /* Set the real part of C[i] to the cosine of x[i] and the imaginary part of C[i] to the 
    sine of x[i], for i=0,..,n-1 */
-void vvcosisinf (__float_complex_t * /* C */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
-void vvcosisin (__double_complex_t * /* C */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+void vvcosisinf (__float_complex_t * /* C */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0);
+void vvcosisin (__double_complex_t * /* C */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0);
 
 /* Set y[i] to the hyperbolic sine of x[i], for i=0,..,n-1 */
-void vvsinhf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
-void vvsinh (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+void vvsinhf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0);
+void vvsinh (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0);
 
 /* Set y[i] to the hyperbolic cosine of x[i], for i=0,..,n-1 */
-void vvcoshf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
-void vvcosh (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+void vvcoshf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0);
+void vvcosh (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0);
 
 /* Set y[i] to the hyperbolic tangent of x[i], for i=0,..,n-1 */
-void vvtanhf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
-void vvtanh (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+void vvtanhf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0);
+void vvtanh (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0);
 
 /* Set y[i] to the inverse hyperbolic sine of x[i], for i=0,..,n-1 */
-void vvasinhf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
-void vvasinh (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+void vvasinhf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0);
+void vvasinh (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0);
 
 /* Set y[i] to the inverse hyperbolic  cosine of x[i], for i=0,..,n-1 */
-void vvacoshf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
-void vvacosh (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+void vvacoshf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0);
+void vvacosh (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0);
 
 /* Set y[i] to the inverse hyperbolic  tangent of x[i], for i=0,..,n-1 */
-void vvatanhf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
-void vvatanh (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+void vvatanhf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0);
+void vvatanh (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0);
 
 /* Set y[i] to the integer truncation of x[i], for i=0,..,n-1 */
-void vvintf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
-void vvint (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+void vvintf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0);
+void vvint (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0);
 
 /* Set y[i] to the nearest integer to x[i], for i=0,..,n-1 */
-void vvnintf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
-void vvnint (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+void vvnintf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0);
+void vvnint (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0);
 
 /* Set y[i] to the ceiling of x[i], for i=0,..,n-1 */
-void vvceilf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
-void vvceil (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+void vvceilf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0);
+void vvceil (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0);
 
 /* Set y[i] to the floor of x[i], for i=0,..,n-1 */
-void vvfloorf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
-void vvfloor (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+void vvfloorf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0);
+void vvfloor (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0);
 
 /* Set z[i] to the floating-point remainder of y[i]/x[i], for
    i=0,..,n-1 */
-void vvfmodf (float * /* z */, const float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+void vvfmodf (float * /* z */, const float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_5_0);
 /*
  vvfmod
  
@@ -298,13 +298,13 @@ void vvfmodf (float * /* z */, const float * /* y */, const float * /* x */, con
  n: number of floating point elements specified by *n
  
  */
-void vvfmod (double * /* z */, double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA);
+void vvfmod (double * /* z */, double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0);
 	
 /* Set z[i] to the value r such that r = y[i] - N*x[i], where N is the
      integer nearest the exact value of y[i]/x[i].  If there are two
      integers closest to y[i]/x[i], N shall be the even one. If r is
      zero, it is given the same sign as y[i], for i=0,..,n-1 */
-void vvremainderf (float * /* z */, const float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+void vvremainderf (float * /* z */, const float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_5_0);
 /*
  vvremainder
  
@@ -322,10 +322,10 @@ void vvremainderf (float * /* z */, const float * /* y */, const float * /* x */
  n: number of floating point elements specified by *n
  
  */
-void vvremainder (double * /* z */, double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA); 
+void vvremainder (double * /* z */, double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0); 
 	
 /* Set z[i] to y[i] with its sign changed to x[i]'s, for i=0,..,n-1 */
-void vvcopysignf (float * /* z */, const float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+void vvcopysignf (float * /* z */, const float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_5_0);
 /*
  vvcopysign
  
@@ -341,11 +341,11 @@ void vvcopysignf (float * /* z */, const float * /* y */, const float * /* x */,
  n: number of floating point elements specified by *n
  
  */
-void vvcopysign (double * /* z */, double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA);
+void vvcopysign (double * /* z */, double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0);
 	
 /* Set z[i] to the next machine representable number from y[i] in
      direction x[i], for i=0,..,n-1 */
-void vvnextafterf (float * /* z */, const float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+void vvnextafterf (float * /* z */, const float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_5_0);
 /*
  vvnextafter
  
@@ -361,7 +361,7 @@ void vvnextafterf (float * /* z */, const float * /* y */, const float * /* x */
  n: number of floating point elements specified by *n
  
  */
-void vvnextafter (double * /* z */, double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA);
+void vvnextafter (double * /* z */, double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0);
 	
 /*
  vvlog2f
@@ -377,7 +377,7 @@ void vvnextafter (double * /* z */, double * /* y */, const double * /* x */, co
  n: number of floating point elements specified by *n
  
  */
-void vvlog2f (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA); 
+void vvlog2f (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0); 
 /*
  vvlog2
  
@@ -392,7 +392,7 @@ void vvlog2f (float * /* y */, const float * /* x */, const int * /* n */) __OSX
  n: number of floating point elements specified by *n
  
  */
-void vvlog2 (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA); 
+void vvlog2 (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0); 
 
 /*
  vvexp2f
@@ -408,7 +408,7 @@ void vvlog2 (double * /* y */, const double * /* x */, const int * /* n */) __OS
  n: number of floating point elements specified by *n
  
  */
-void vvexp2f (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA); 
+void vvexp2f (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0); 
 /*
  vvexp2
  
@@ -423,7 +423,7 @@ void vvexp2f (float * /* y */, const float * /* x */, const int * /* n */) __OSX
  n: number of floating point elements specified by *n
  
  */
-void vvexp2 (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA); 
+void vvexp2 (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0); 
 
 /*
  vvsinpif
@@ -439,7 +439,7 @@ void vvexp2 (double * /* y */, const double * /* x */, const int * /* n */) __OS
  n: number of floating point elements specified by *n
  
  */
-void vvsinpif (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA); 
+void vvsinpif (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0); 
 /*
  vvsinpi
  
@@ -454,7 +454,7 @@ void vvsinpif (float * /* y */, const float * /* x */, const int * /* n */) __OS
  n: number of floating point elements specified by *n
  
  */
-void vvsinpi (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA); 
+void vvsinpi (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0); 
 
 /*
  vvcospif
@@ -470,7 +470,7 @@ void vvsinpi (double * /* y */, const double * /* x */, const int * /* n */) __O
  n: number of floating point elements specified by *n
  
  */
-void vvcospif (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA); 
+void vvcospif (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0); 
 /*
  vvcospi
  
@@ -485,7 +485,7 @@ void vvcospif (float * /* y */, const float * /* x */, const int * /* n */) __OS
  n: number of floating point elements specified by *n
  
  */
-void vvcospi (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA); 
+void vvcospi (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0); 
 
 /*
  vvtanpif
@@ -501,7 +501,7 @@ void vvcospi (double * /* y */, const double * /* x */, const int * /* n */) __O
  n: number of floating point elements specified by *n
  
  */
-void vvtanpif (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA); 
+void vvtanpif (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0); 
 /*
  vvtanpi
  
@@ -516,7 +516,7 @@ void vvtanpif (float * /* y */, const float * /* x */, const int * /* n */) __OS
  n: number of floating point elements specified by *n
  
  */
-void vvtanpi (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA); 
+void vvtanpi (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0); 
 	
 #ifdef __cplusplus
 }

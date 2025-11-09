@@ -1,7 +1,7 @@
 /*
         NSResponder.h
         Application Kit
-        Copyright (c) 1994-2011, Apple Inc.
+        Copyright (c) 1994-2012, Apple Inc.
         All rights reserved.
 */
 
@@ -48,6 +48,8 @@
 - (void)beginGestureWithEvent:(NSEvent *)event NS_AVAILABLE_MAC(10_5);
 - (void)endGestureWithEvent:(NSEvent *)event NS_AVAILABLE_MAC(10_5);
 
+- (void)smartMagnifyWithEvent:(NSEvent *)event NS_AVAILABLE_MAC(10_8);
+
 
 /* A new set of touches has been recognized. To get the set of touches that began for this view (or descendants of this view): [event touchesMatchingPhase:NSTouchPhaseBegan inView:self]; Note: this is not always the point of contact with the touch device. A touch that transitions from resting to active may be part of a Began set.
 */
@@ -64,6 +66,9 @@
 /* The System has cancelled the tracking of touches for any reason.
 */
 - (void)touchesCancelledWithEvent:(NSEvent *)event NS_AVAILABLE_MAC(10_6);
+
+/* Perform a Quick Look on the content at location in the event. If there are no Quick Look items at the location, call super. Also, see quickLookPreviewItems: further below. */
+- (void)quickLookWithEvent:(NSEvent *)event NS_AVAILABLE_MAC(10_8);
 
 - (void)noResponderFor:(SEL)eventSelector;
 - (BOOL)acceptsFirstResponder;
@@ -93,10 +98,6 @@
 /* This method is used in the process of finding a target for an action method. If this NSResponder instance does not itself respondsToSelector:action, then supplementalTargetForAction:sender: is called. This method should return an object which responds to the action; if this responder does not have a supplemental object that does that, the implementation of this method should call super's supplementalTargetForAction:sender:. NSResponder's implementation returns nil.
 */
 - (id)supplementalTargetForAction:(SEL)action sender:(id)sender NS_AVAILABLE_MAC(10_7);
-@end
-
-@interface NSResponder(NSKeyboardUI)
-- (BOOL)performMnemonic:(NSString *)theString;
 @end
 
 @interface NSResponder (NSStandardKeyBindingMethods)
@@ -243,6 +244,10 @@
 - (void)makeTextWritingDirectionLeftToRight:(id)sender NS_AVAILABLE_MAC(10_6);
 - (void)makeTextWritingDirectionRightToLeft:(id)sender NS_AVAILABLE_MAC(10_6);
 
+   /* Quick Look */
+/* Perform a Quick Look on the text cursor position, selection, or whatever is appropriate for your view. If there are no Quick Look items, then call [[self nextResponder] tryToPerform:_cmd with:sender]; to pass the request up the responder chain. Eventually AppKit will attempt to perform a dictionary look up. Also see quickLookWithEvent: above.
+*/
+- (void)quickLookPreviewItems:(id)sender NS_AVAILABLE_MAC(10_8);
 @end
 
 @interface NSResponder(NSUndoSupport)
@@ -308,3 +313,13 @@ You can override this method to customize the presentation of errors by examinin
 - (void)performTextFinderAction:(id)sender NS_AVAILABLE_MAC(10_7);
 
 @end
+
+
+@interface NSResponder(NSDeprecated)
+
+/* This method is deprecated in 10.8 and higher. Historically it has always returned NO and not done anything on MacOS.
+ */
+- (BOOL)performMnemonic:(NSString *)theString NS_DEPRECATED_MAC(10_0, 10_8);
+
+@end
+

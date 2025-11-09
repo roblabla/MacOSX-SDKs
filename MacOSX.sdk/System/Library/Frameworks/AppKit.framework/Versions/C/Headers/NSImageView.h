@@ -1,18 +1,18 @@
 /*
-	NSImageView.h
-	Application Kit
-	Copyright (c) 1994-2011, Apple Inc.
-	All rights reserved.
+    NSImageView.h
+    Application Kit
+    Copyright (c) 1994-2012, Apple Inc.
+    All rights reserved.
 */
 
 #import <AppKit/NSControl.h>
 #import <AppKit/NSImageCell.h>
 
-@interface NSImageView : NSControl
-{
+@interface NSImageView : NSControl {
     /*All instance variables are private*/
     struct __IVFlags {
-        unsigned int _unused:26;
+        unsigned int _hasImageView:1;
+        unsigned int _unused:25;
         unsigned int _rejectsMultiFileDrops:1;
         unsigned int _compatibleScalingAndAlignment:1;
         unsigned int _reserved:1;
@@ -23,7 +23,6 @@
     id _target;                    // for action messages
     SEL _action;                   // call here after an image drag-drop
 }
-
 
 - (NSImage *)image;
 - (void)setImage:(NSImage *)newImage;

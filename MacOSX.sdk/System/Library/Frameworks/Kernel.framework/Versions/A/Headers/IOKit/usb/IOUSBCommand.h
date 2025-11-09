@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2006 Apple Computer, Inc. All rights reserved.
+ * Copyright © 1998-2012 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -48,10 +48,11 @@ typedef enum {
     CREATE_EP,
     DELETE_EP,
     DEVICE_REQUEST_DESC,				// Device request using descriptor
-	DEVICE_REQUEST_BUFFERCOMMAND		// Device request using a second IOUSBCommand in _bufferCommand
+	DEVICE_REQUEST_BUFFERCOMMAND,		// Device request using a second IOUSBCommand in _bufferCommand
+	INVALID_SELECTOR	=	0xFF,		// For use to invalidate a IOUSBCommand that has been returned
 } usbCommand;
 
-
+#define 	kUSBCommandScratchBuffers	10
 
 /*!
  @class IOUSBCommand
@@ -80,7 +81,7 @@ protected:
     IOByteCount				_dblBufLength;
     UInt32					_noDataTimeout;
     UInt32					_completionTimeout;
-    UInt32					_UIMScratch[10];
+    UInt32					_UIMScratch[kUSBCommandScratchBuffers];
     
     struct ExpansionData
     {
@@ -95,6 +96,8 @@ protected:
 		IODMACommand		*_dmaCommand;							// used to get memory mapping
 		IOUSBCommand		*_bufferUSBCommand;						// points to another IOUSBCommand used for phase 2 of control transactions
 		IOUSBCommand		*_masterUSBCommand;						// points from the bufferUSBCommand back to the parent command
+		UInt32				_streamID;
+		void *				_backTrace[kUSBCommandScratchBuffers];
     };
     ExpansionData * 		_expansionData;
     
@@ -136,7 +139,9 @@ public:
     void					SetTimeStamp(AbsoluteTime timeStamp);
 	void					SetIsSyncTransfer(bool);
 	inline void				SetDMACommand(IODMACommand *dmaCommand)					{ _expansionData->_dmaCommand = dmaCommand; }
+	inline void				SetStreamID(UInt32 streamID)					{ _expansionData->_streamID = streamID; }
 	void					SetBufferUSBCommand(IOUSBCommand *bufferUSBCommand);
+	void					SetBT(UInt32 index, void * value);
 	
 	// Accessors
     usbCommand					GetSelector(void);
@@ -167,6 +172,7 @@ public:
     AbsoluteTime				GetTimeStamp(void);
 	bool						GetIsSyncTransfer(void);
 	inline IODMACommand *		GetDMACommand(void)							{return _expansionData->_dmaCommand; }
+	inline UInt32				GetStreamID(void)							{return _expansionData->_streamID; }
 	inline IOUSBCommand *		GetBufferUSBCommand(void)					{return _expansionData->_bufferUSBCommand; }
 };
 
@@ -197,6 +203,7 @@ protected:
 		IODMACommand *		_dmaCommand;
 		IOUSBIsocCompletion	_uslCompletion;
 		bool				_lowLatency;
+		UInt32				_UIMScratch[kUSBCommandScratchBuffers];
     };
     ExpansionData * 		_expansionData;
 
@@ -220,6 +227,7 @@ public:
     void					SetFrameList(IOUSBIsocFrame *fl)					{_frameList = fl; }
     void					SetStatus(IOReturn stat)							{_status = stat; }
     void					SetUpdateFrequency( UInt32 fr)						{ _expansionData->_updateFrequency = fr; }
+    void 					SetUIMScratch(UInt32 index, UInt32 value)			{ if(index < kUSBCommandScratchBuffers)_expansionData->_UIMScratch[index] = value; }
     void					SetUseTimeStamp(bool useIt)							{ _expansionData->_useTimeStamp= useIt; }
     void					SetTimeStamp(AbsoluteTime timeStamp)				{ _expansionData->_timeStamp= timeStamp; }
  	void					SetIsSyncTransfer(bool isSync)						{ _expansionData->_isSyncTransfer = isSync; }
@@ -239,6 +247,7 @@ public:
     UInt32					GetNumFrames(void)								{ return _numFrames; }
     IOUSBIsocFrame *		GetFrameList(void)								{ return _frameList; }
     UInt32					GetUpdateFrequency(void)						{ return _expansionData->_updateFrequency; }
+    UInt32					GetUIMScratch(UInt32 index)						{ return( (index < kUSBCommandScratchBuffers)?_expansionData->_UIMScratch[index]:0); }
     IOReturn				GetStatus(void)									{ return _status; }
     bool					GetUseTimeStamp(void)							{ return _expansionData->_useTimeStamp; }
     AbsoluteTime			GetTimeStamp(void)								{ return _expansionData->_timeStamp; }

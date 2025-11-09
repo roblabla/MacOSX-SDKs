@@ -1,7 +1,7 @@
 /*
 	NSClipView.h
 	Application Kit
-	Copyright (c) 1994-2011, Apple Inc.
+	Copyright (c) 1994-2012, Apple Inc.
 	All rights reserved.
 */
 
@@ -40,7 +40,8 @@
         unsigned int        showOverlayScrollersForScrollStep:1;
         unsigned int        scrollerKnobFlashSpecifier:2;
         unsigned int        drawsContentShadow:1;
-        unsigned int        RESERVED:4;
+        unsigned int        dontConstrainBoundsChange:1;
+        unsigned int        RESERVED:3;
     } _cvFlags;
 }
 

@@ -59,7 +59,7 @@
 @property CFTimeInterval repeatDuration;
 
 /* When true, the object plays backwards after playing forwards. Defaults
- * to false. */
+ * to NO. */
 
 @property BOOL autoreverses;
 

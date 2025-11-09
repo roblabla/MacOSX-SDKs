@@ -1,15 +1,13 @@
 /*
 	NSFileWrapper.h
-	Copyright (c) 1995-2011, Apple Inc. All rights reserved.
+	Copyright (c) 1995-2012, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
 @class NSData, NSDictionary, NSError, NSURL;
 
-#if MAC_OS_X_VERSION_10_6 <= MAC_OS_X_VERSION_MAX_ALLOWED || __IPHONE_4_0 <= __IPHONE_OS_VERSION_MAX_ALLOWED
-
-enum {
+typedef NS_OPTIONS(NSUInteger, NSFileWrapperReadingOptions) {
     
     /* Whether the contents are read immediately, applied recursively in the case of directory file wrappers. If reading with this option succeeds then subsequent invocations of -fileWrappers, -regularFileContents, -symbolicLinkDestinationURL:, -serializedRepresentation, and, on Mac OS X, -[NSFileWrapper(NSExtensions) icon] sent to the receiver and all its descendant file wrappers won't fail. For performance NSFileWrapper may or may not immediately read the contents of some file packages immediately even when this option is chosen. For example, the contents of bundles (not all file packages are bundles) are immutable to the user so on Mac OS X NSFileWrapper may read the children of such a directory lazily. You can use this option to take a reasonable snapshot of a file or folder for writing later. For example, a Mac OS X application like TextEdit can use this option when creating new file wrappers to represent attachments that the user creates by copying and pasting or dragging and dropping from the Finder to a TextEdit document. You wouldn't use this option when reading a document file package because that would cause unnecessarily bad perfomance. For example, an application wouldn't use this option when creating file wrappers to represent attachments as it's opening a document stored in a file package.
     */
@@ -19,15 +17,9 @@ enum {
     */
     NSFileWrapperReadingWithoutMapping = 1 << 1
 
-};
+} NS_ENUM_AVAILABLE(10_6, 4_0);
 
-#endif
-
-typedef NSUInteger NSFileWrapperReadingOptions;
-
-#if MAC_OS_X_VERSION_10_6 <= MAC_OS_X_VERSION_MAX_ALLOWED || __IPHONE_4_0 <= __IPHONE_OS_VERSION_MAX_ALLOWED
-
-enum {
+typedef NS_OPTIONS(NSUInteger, NSFileWrapperWritingOptions) {
 
     /* Whether writing is done atomically. You can use this option to ensure that when overwriting a file package the overwriting either completely succeeds or completely fails, with no possibility of leaving the file package in an inconsistent state. Because this option causes additional I/O you shouldn't use it unnecessarily. For example, on Mac OS X you wouldn't use this option in an override of -[NSDocument writeToURL:ofType:error:] because NSDocument's implementation of safe saving already does atomic writing.
     */
@@ -37,11 +29,7 @@ enum {
     */
     NSFileWrapperWritingWithNameUpdating = 1 << 1
 
-};
-
-#endif
-
-typedef NSUInteger NSFileWrapperWritingOptions;
+} NS_ENUM_AVAILABLE(10_6, 4_0);
 
 NS_CLASS_AVAILABLE(10_0, 4_0)
 @interface NSFileWrapper : NSObject<NSCoding> {

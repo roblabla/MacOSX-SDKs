@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2006 Apple Computer, Inc. All rights reserved.
+ * Copyright © 1998-2012 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -31,5 +31,5 @@ class IOUSBBus : public IOService
     OSDeclareAbstractStructors(IOUSBBus)
 };
 
-#endif /* ! _IOKIT_IOUSBBUS_H */
+#endif
 

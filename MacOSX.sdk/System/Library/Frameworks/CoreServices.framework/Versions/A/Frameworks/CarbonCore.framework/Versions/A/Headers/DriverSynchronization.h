@@ -2,16 +2,10 @@
      File:       CarbonCore/DriverSynchronization.h
  
      Contains:   Driver Synchronization Interfaces.
+                 The contents of this header file are deprecated.
+                 Use OSAtomic API instead.
  
-     Version:    CarbonCore-960.18~3
- 
-     Copyright:  © 1985-2008 by Apple Computer, Inc., all rights reserved
- 
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
- 
-                     http://developer.apple.com/bugreporter/
- 
+     Copyright:  Â© 1985-2011 by Apple Inc. All rights reserved.
 */
 #ifndef __DRIVERSYNCHRONIZATION__
 #define __DRIVERSYNCHRONIZATION__
@@ -26,7 +20,7 @@
 
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -78,7 +72,7 @@ extern Boolean
 CompareAndSwap(
   UInt32    oldValue,
   UInt32    newValue,
-  UInt32 *  address)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32 *  address)                                          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -127,7 +121,7 @@ CompareAndSwap(
 extern Boolean 
 TestAndClear(
   UInt32   bit,
-  UInt8 *  address)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt8 *  address)                                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -166,7 +160,7 @@ TestAndClear(
 extern Boolean 
 TestAndSet(
   UInt32   bit,
-  UInt8 *  address)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt8 *  address)                                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -199,7 +193,7 @@ TestAndSet(
  *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
 extern SInt8 
-IncrementAtomic8(SInt8 * address)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+IncrementAtomic8(SInt8 * address)                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -232,7 +226,7 @@ IncrementAtomic8(SInt8 * address)                             AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
 extern SInt8 
-DecrementAtomic8(SInt8 * address)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DecrementAtomic8(SInt8 * address)                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -270,7 +264,7 @@ DecrementAtomic8(SInt8 * address)                             AVAILABLE_MAC_OS_X
 extern SInt8 
 AddAtomic8(
   SInt32   amount,
-  SInt8 *  address)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt8 *  address)                                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -309,7 +303,7 @@ AddAtomic8(
 extern UInt8 
 BitAndAtomic8(
   UInt32   mask,
-  UInt8 *  address)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt8 *  address)                                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -348,7 +342,7 @@ BitAndAtomic8(
 extern UInt8 
 BitOrAtomic8(
   UInt32   mask,
-  UInt8 *  address)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt8 *  address)                                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -387,7 +381,7 @@ BitOrAtomic8(
 extern UInt8 
 BitXorAtomic8(
   UInt32   mask,
-  UInt8 *  address)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt8 *  address)                                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -420,7 +414,7 @@ BitXorAtomic8(
  *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
 extern SInt16 
-IncrementAtomic16(SInt16 * address)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+IncrementAtomic16(SInt16 * address)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -453,7 +447,7 @@ IncrementAtomic16(SInt16 * address)                           AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
 extern SInt16 
-DecrementAtomic16(SInt16 * address)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DecrementAtomic16(SInt16 * address)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -491,7 +485,7 @@ DecrementAtomic16(SInt16 * address)                           AVAILABLE_MAC_OS_X
 extern SInt16 
 AddAtomic16(
   SInt32    amount,
-  SInt16 *  address)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt16 *  address)                                          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -530,7 +524,7 @@ AddAtomic16(
 extern UInt16 
 BitAndAtomic16(
   UInt32    mask,
-  UInt16 *  address)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt16 *  address)                                          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -569,7 +563,7 @@ BitAndAtomic16(
 extern UInt16 
 BitOrAtomic16(
   UInt32    mask,
-  UInt16 *  address)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt16 *  address)                                          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -608,7 +602,7 @@ BitOrAtomic16(
 extern UInt16 
 BitXorAtomic16(
   UInt32    mask,
-  UInt16 *  address)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt16 *  address)                                          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -641,7 +635,7 @@ BitXorAtomic16(
  *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
 extern SInt32 
-IncrementAtomic(SInt32 * address)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+IncrementAtomic(SInt32 * address)                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -674,7 +668,7 @@ IncrementAtomic(SInt32 * address)                             AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
 extern SInt32 
-DecrementAtomic(SInt32 * address)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DecrementAtomic(SInt32 * address)                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -712,7 +706,7 @@ DecrementAtomic(SInt32 * address)                             AVAILABLE_MAC_OS_X
 extern SInt32 
 AddAtomic(
   SInt32    amount,
-  SInt32 *  address)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32 *  address)                                          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -751,7 +745,7 @@ AddAtomic(
 extern UInt32 
 BitAndAtomic(
   UInt32    mask,
-  UInt32 *  address)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32 *  address)                                          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -790,7 +784,7 @@ BitAndAtomic(
 extern UInt32 
 BitOrAtomic(
   UInt32    mask,
-  UInt32 *  address)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32 *  address)                                          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -829,7 +823,7 @@ BitOrAtomic(
 extern UInt32 
 BitXorAtomic(
   UInt32    mask,
-  UInt32 *  address)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32 *  address)                                          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 

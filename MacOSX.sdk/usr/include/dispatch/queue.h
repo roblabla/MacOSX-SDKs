@@ -2,19 +2,19 @@
  * Copyright (c) 2008-2011 Apple Inc. All rights reserved.
  *
  * @APPLE_APACHE_LICENSE_HEADER_START@
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * @APPLE_APACHE_LICENSE_HEADER_END@
  */
 
@@ -30,7 +30,7 @@
  * @header
  *
  * Dispatch is an abstract model for expressing concurrency via simple but
- * powerful API. 
+ * powerful API.
  *
  * At the core, dispatch provides serial FIFO queues to which blocks may be
  * submitted. Blocks submitted to these dispatch queues are invoked on a pool
@@ -128,8 +128,8 @@ __BEGIN_DECLS
  *
  * The target queue determines whether the block will be invoked serially or
  * concurrently with respect to other blocks submitted to that same queue.
- * Serial queues are processed concurrently with with respect to each other.
- * 
+ * Serial queues are processed concurrently with respect to each other.
+ *
  * @param queue
  * The target dispatch queue to which the block is submitted.
  * The system will hold a reference on the target queue until the block
@@ -156,7 +156,7 @@ dispatch_async(dispatch_queue_t queue, dispatch_block_t block);
  *
  * @discussion
  * See dispatch_async() for details.
- * 
+ *
  * @param queue
  * The target dispatch queue to which the function is submitted.
  * The system will hold a reference on the target queue until the function
@@ -254,9 +254,9 @@ dispatch_sync_f(dispatch_queue_t queue,
  * @discussion
  * Submits a block to a dispatch queue for multiple invocations. This function
  * waits for the task block to complete before returning. If the target queue
- * is concurrent, the block may be invoked concurrently, and it must therefore 
+ * is concurrent, the block may be invoked concurrently, and it must therefore
  * be reentrant safe.
- * 
+ *
  * Each invocation of the block will be passed the current index of iteration.
  *
  * @param iterations
@@ -274,7 +274,8 @@ dispatch_sync_f(dispatch_queue_t queue,
 __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_4_0)
 DISPATCH_EXPORT DISPATCH_NONNULL_ALL DISPATCH_NOTHROW
 void
-dispatch_apply(size_t iterations, dispatch_queue_t queue, void (^block)(size_t));
+dispatch_apply(size_t iterations, dispatch_queue_t queue,
+		void (^block)(size_t));
 #endif
 
 /*!
@@ -315,7 +316,7 @@ dispatch_apply_f(size_t iterations, dispatch_queue_t queue,
  *
  * @abstract
  * Returns the queue on which the currently executing block is running.
- * 
+ *
  * @discussion
  * Returns the queue on which the currently executing block is running.
  *
@@ -328,6 +329,11 @@ dispatch_apply_f(size_t iterations, dispatch_queue_t queue,
  * The code must not assume that synchronous execution onto a queue is safe
  * from deadlock if that queue is not the one returned by
  * dispatch_get_current_queue().
+ *
+ * When dispatch_get_current_queue() is called on the main thread, it may
+ * or may not return the same value as dispatch_get_main_queue(). Comparing
+ * the two is not a valid way to test whether code is executing on the
+ * main thread.
  *
  * @result
  * Returns the current queue.
@@ -354,7 +360,8 @@ dispatch_get_current_queue(void);
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_4_0)
 DISPATCH_EXPORT struct dispatch_queue_s _dispatch_main_q;
-#define dispatch_get_main_queue() (&_dispatch_main_q)
+#define dispatch_get_main_queue() \
+		DISPATCH_GLOBAL_OBJECT(dispatch_queue_t, _dispatch_main_q)
 
 /*!
  * @typedef dispatch_queue_priority_t
@@ -384,10 +391,10 @@ DISPATCH_EXPORT struct dispatch_queue_s _dispatch_main_q;
  * background status as per setpriority(2) (i.e. disk I/O is throttled and the
  * thread's scheduling priority is set to lowest value).
  */
-#define	DISPATCH_QUEUE_PRIORITY_HIGH 	 2
-#define	DISPATCH_QUEUE_PRIORITY_DEFAULT  0
-#define	DISPATCH_QUEUE_PRIORITY_LOW 	(-2)
-#define	DISPATCH_QUEUE_PRIORITY_BACKGROUND	INT16_MIN
+#define DISPATCH_QUEUE_PRIORITY_HIGH 2
+#define DISPATCH_QUEUE_PRIORITY_DEFAULT 0
+#define DISPATCH_QUEUE_PRIORITY_LOW (-2)
+#define DISPATCH_QUEUE_PRIORITY_BACKGROUND INT16_MIN
 
 typedef long dispatch_queue_priority_t;
 
@@ -415,7 +422,8 @@ typedef long dispatch_queue_priority_t;
 __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_4_0)
 DISPATCH_EXPORT DISPATCH_CONST DISPATCH_WARN_RESULT DISPATCH_NOTHROW
 dispatch_queue_t
-dispatch_get_global_queue(dispatch_queue_priority_t priority, unsigned long flags);
+dispatch_get_global_queue(dispatch_queue_priority_t priority,
+		unsigned long flags);
 
 /*!
  * @const DISPATCH_QUEUE_SERIAL
@@ -428,7 +436,9 @@ dispatch_get_global_queue(dispatch_queue_priority_t priority, unsigned long flag
  * @discussion A dispatch queue that may invoke blocks concurrently and supports
  * barrier blocks submitted with the dispatch barrier API.
  */
-#define DISPATCH_QUEUE_CONCURRENT (&_dispatch_queue_attr_concurrent)
+#define DISPATCH_QUEUE_CONCURRENT \
+		DISPATCH_GLOBAL_OBJECT(dispatch_queue_attr_t, \
+		_dispatch_queue_attr_concurrent)
 __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_3)
 DISPATCH_EXPORT
 struct dispatch_queue_attr_s _dispatch_queue_attr_concurrent;
@@ -468,7 +478,8 @@ struct dispatch_queue_attr_s _dispatch_queue_attr_concurrent;
  * The newly created dispatch queue.
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_4_0)
-DISPATCH_EXPORT DISPATCH_MALLOC DISPATCH_WARN_RESULT DISPATCH_NOTHROW
+DISPATCH_EXPORT DISPATCH_MALLOC DISPATCH_RETURNS_RETAINED DISPATCH_WARN_RESULT
+DISPATCH_NOTHROW
 dispatch_queue_t
 dispatch_queue_create(const char *label, dispatch_queue_attr_t attr);
 
@@ -486,7 +497,8 @@ dispatch_queue_create(const char *label, dispatch_queue_attr_t attr);
  * The label of the queue. The result may be NULL.
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_4_0)
-DISPATCH_EXPORT DISPATCH_NONNULL_ALL DISPATCH_PURE DISPATCH_WARN_RESULT DISPATCH_NOTHROW
+DISPATCH_EXPORT DISPATCH_NONNULL_ALL DISPATCH_PURE DISPATCH_WARN_RESULT
+DISPATCH_NOTHROW
 const char *
 dispatch_queue_get_label(dispatch_queue_t queue);
 
@@ -522,16 +534,19 @@ dispatch_queue_get_label(dispatch_queue_t queue);
  * cancellation handler blocks will be submitted.
  *
  * A dispatch I/O channel's target queue specifies where where its I/O
- * operations are executed.
+ * operations are executed. If the channel's target queue's priority is set to
+ * DISPATCH_QUEUE_PRIORITY_BACKGROUND, then the I/O operations performed by
+ * dispatch_io_read() or dispatch_io_write() on that queue will be
+ * throttled when there is I/O contention.
  *
  * For all other dispatch object types, the only function of the target queue
  * is to determine where an object's finalizer function is invoked.
  *
- * @param       object
+ * @param object
  * The object to modify.
  * The result of passing NULL in this parameter is undefined.
  *
- * @param       queue
+ * @param queue
  * The new target queue for the object. The queue is retained, and the
  * previous target queue, if any, is released.
  * If queue is DISPATCH_TARGET_QUEUE_DEFAULT, set the object's target queue
@@ -799,7 +814,7 @@ dispatch_barrier_sync_f(dispatch_queue_t queue,
  * The destructor function pointer. This may be NULL and is ignored if context
  * is NULL.
  */
-__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_NA)
+__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_5_0)
 DISPATCH_EXPORT DISPATCH_NONNULL1 DISPATCH_NONNULL2 DISPATCH_NOTHROW
 void
 dispatch_queue_set_specific(dispatch_queue_t queue, const void *key,
@@ -828,8 +843,9 @@ dispatch_queue_set_specific(dispatch_queue_t queue, const void *key,
  * @result
  * The context for the specified key or NULL if no context was found.
  */
-__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_NA)
-DISPATCH_EXPORT DISPATCH_NONNULL_ALL DISPATCH_PURE DISPATCH_WARN_RESULT DISPATCH_NOTHROW
+__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_5_0)
+DISPATCH_EXPORT DISPATCH_NONNULL_ALL DISPATCH_PURE DISPATCH_WARN_RESULT
+DISPATCH_NOTHROW
 void *
 dispatch_queue_get_specific(dispatch_queue_t queue, const void *key);
 
@@ -854,8 +870,9 @@ dispatch_queue_get_specific(dispatch_queue_t queue, const void *key);
  * @result
  * The context for the specified key or NULL if no context was found.
  */
-__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_NA)
-DISPATCH_EXPORT DISPATCH_NONNULL_ALL DISPATCH_PURE DISPATCH_WARN_RESULT DISPATCH_NOTHROW
+__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_5_0)
+DISPATCH_EXPORT DISPATCH_NONNULL_ALL DISPATCH_PURE DISPATCH_WARN_RESULT
+DISPATCH_NOTHROW
 void *
 dispatch_get_specific(const void *key);
 

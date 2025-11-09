@@ -37,7 +37,7 @@ typedef NSInteger CBCharacteristicWriteType;
  *      Commands should only be issued when it is connected.
  *
  */
-NS_CLASS_AVAILABLE(10_7, NA)
+NS_CLASS_AVAILABLE(10_7, 5_0)
 CB_EXTERN_CLASS @interface CBPeripheral : NSObject
 {
 @package

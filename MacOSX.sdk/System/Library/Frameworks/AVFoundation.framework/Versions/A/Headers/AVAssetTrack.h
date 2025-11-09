@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010 Apple Inc. All rights reserved.
+	Copyright 2010-2012 Apple Inc. All rights reserved.
 
 */
 
@@ -42,8 +42,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 
 @interface AVAssetTrack (AVAssetTrackBasicPropertiesAndCharacteristics)
 
-/* indicates the media type for this track,
-   from a predefined set of strings, e.g. AVMediaTypeVideo, AVMediaTypeAudio, etc. (see UTI note below) */
+/* indicates the media type for this track, e.g. AVMediaTypeVideo, AVMediaTypeAudio, etc., as defined in AVMediaFormat.h. */
 @property (nonatomic, readonly) NSString *mediaType;
 
 /* provides an array of CMFormatDescriptions
@@ -52,8 +51,11 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
    will provide an array with a count of 1 */
 @property (nonatomic, readonly) NSArray *formatDescriptions;
 
+/* Indicates whether the receiver is playable in the current environment; if YES, an AVPlayerItemTrack of an AVPlayerItem initialized with the receiver's asset can be enabled for playback.  */
+@property (nonatomic, readonly, getter=isPlayable) BOOL playable NS_AVAILABLE(10_8, 5_0);
+
 /* indicates whether the track is enabled according to state stored in its container or construct;
-   note that its presentation state can be changed from this default via AVPlayerItem */
+   note that its presentation state can be changed from this default via AVPlayerItemTrack */
 @property (nonatomic, readonly, getter=isEnabled) BOOL enabled;
 
 /* indicates whether the track references sample data only within its storage container */
@@ -139,10 +141,11 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 
 /*!
 	@method			segmentForTrackTime:
-	@abstract		Supplies the AVAssetTrackSegment from the segments array that corresponds to the specified track time.
+	@abstract		Supplies the AVAssetTrackSegment from the segments array with a target timeRange that either contains the specified track time or is the closest to it among the target timeRanges of the track's segments.
 	@param			trackTime
 					The trackTime for which an AVAssetTrackSegment is requested.
-	@result			An AVAssetTrackSegment; will be nil if the trackTime is out of range
+	@result			An AVAssetTrackSegment.
+	@discussion		If the trackTime does not map to a sample presentation time (e.g. it's outside the track's timeRange), the segment closest in time to the specified trackTime is returned. 
 */
 - (AVAssetTrackSegment *)segmentForTrackTime:(CMTime)trackTime;
 

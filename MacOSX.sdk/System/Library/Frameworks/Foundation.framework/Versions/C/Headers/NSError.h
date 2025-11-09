@@ -1,5 +1,5 @@
 /*	NSError.h
-	Copyright (c) 2003-2011, Apple Inc. All rights reserved.
+	Copyright (c) 2003-2012, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -33,7 +33,7 @@ FOUNDATION_EXPORT NSString *const NSFilePathErrorKey	   ;  // NSString
 
 
 
-@interface NSError : NSObject <NSCopying, NSCoding> {
+@interface NSError : NSObject <NSCopying, NSSecureCoding> {
     @private
     void *_reserved;
     NSInteger _code;

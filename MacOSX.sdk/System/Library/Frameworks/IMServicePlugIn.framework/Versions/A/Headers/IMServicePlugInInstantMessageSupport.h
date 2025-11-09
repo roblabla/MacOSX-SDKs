@@ -11,7 +11,7 @@
 
 
 #pragma mark -
-#pragma mark IMServicePlugIn (iChat -> Service Plug-in)
+#pragma mark IMServicePlugIn (Messages -> Service Plug-in)
 
 /*!
     @protocol   IMServicePlugInInstantMessagingSupport
@@ -21,7 +21,11 @@
 
                 If implementing this protocol, you must also include "IMServiceCapabilityInstantMessagingSupport"
                 in the "IMServiceCapabilities" key in the Info.plist of your service plug-in.
-
+                
+                If your service supports delivery of messages to offline users, you must also include
+                "IMServiceCapabilityOfflineMessagingSupport" in the "IMServiceCapabilities" key in the Info.plist
+                of your service plug-in.
+ 
                 IMServicePlugInInstantMessagingSupport and IMServiceApplicationInstantMessagingSupport are
                 paired protocols.  If your service plug-in's principal class implements the
                 IMServicePlugInInstantMessagingSupport protocol, the IMServiceApplication object handed to your
@@ -33,7 +37,7 @@
 /*!
     @method     userDidStartTypingToHandle:
 
-    @discussion iChat calls this method on the IMServicePlugIn instance when the user starts
+    @discussion Messages calls this method on the IMServicePlugIn instance when the user starts
                 typing a message to a specific handle from the input line.
 
     @param      handle  The handle to which the user has started typing.
@@ -44,7 +48,7 @@
 /*!
     @method     userDidStopTypingToHandle:
 
-    @discussion iChat calls this method on the IMServicePlugIn instance if the user clears the input line
+    @discussion Messages calls this method on the IMServicePlugIn instance if the user clears the input line
                 after typing instead of sending the message.
 
     @param      handle  The handle to which the user started typing, but then cleared the input line.
@@ -55,10 +59,10 @@
 /*!
     @method     sendMessage:toHandle:
 
-    @discussion iChat calls this method on the IMServicePlugIn instance when the user sends a message
+    @discussion Messages calls this method on the IMServicePlugIn instance when the user sends a message
                 to a specific handle.
                 
-                To indicate successful delivery of the message (and have it show up in iChat), the
+                To indicate successful delivery of the message (and have it show up in Messages), the
                 IMServicePlugIn should reflect the message via
                 
                 -[id<IMServiceApplicationInstantMessagingSupport> plug-inDidSendMessage:toHandle:error:]
@@ -74,13 +78,13 @@
 
 
 #pragma mark -
-#pragma mark IMServiceApplication (Service Plug-in -> iChat)
+#pragma mark IMServiceApplication (Service Plug-in -> Messages)
 
 /*!
     @protocol   IMServiceApplicationInstantMessagingSupport
 
     @discussion This protocol is used to pass incoming instant messaging events from the server up to
-                iChat, and to provide response callbacks to IMServicePlugInInstantMessagingSupport 
+                Messages, and to provide response callbacks to IMServicePlugInInstantMessagingSupport 
                 methods.
                 
                 IMServicePlugInInstantMessagingSupport and IMServiceApplicationInstantMessagingSupport are
@@ -94,7 +98,7 @@
 /*!
     @method     handleDidStartTyping:
 
-    @discussion When the IMServicePlugIn instance calls this method on the service application, iChat displays
+    @discussion When the IMServicePlugIn instance calls this method on the service application, Messages displays
                 the "thought bubble" for the specified handle.  
                 
                 A call to -handleDidStopTyping: will clear the thought bubble.
@@ -109,7 +113,7 @@
 /*!
     @method     handleDidStopTyping:
 
-    @discussion When the IMServicePlugIn instance calls this method on the service application, iChat removes
+    @discussion When the IMServicePlugIn instance calls this method on the service application, Messages removes
                 any thought bubble for the specified handle.  
 
     @param      handle   The handle that stopped typing
@@ -120,10 +124,10 @@
 /*!
     @method     plugInDidReceiveMessage:fromHandle:
 
-    @discussion When the IMServicePlugIn instance calls this method on the service application, iChat appends
+    @discussion When the IMServicePlugIn instance calls this method on the service application, Messages appends
                 the message to the active chat with the handle.
                 
-                If no chat is present, iChat displays the message in a notifier window.
+                If no chat is present, Messages displays the message in a notifier window.
 
     @param      message  The incoming message
     @param      handle   The sender of the message
@@ -135,9 +139,9 @@
     @method     plugInDidSendMessage:toHandle:error:
 
     @discussion When the IMServicePlugIn instance calls this method on the service application with a nil
-                error, iChat appends the message to the active chat with the handle.
+                error, Messages appends the message to the active chat with the handle.
     
-                If an error is non-nil, iChat displays an error informing the user that the message
+                If an error is non-nil, Messages displays an error informing the user that the message
                 could not be delivered.
                 
                 This method should be called once in response to every:

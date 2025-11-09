@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2008 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2012 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -76,6 +76,7 @@
 
 #ifndef _NET_BPF_H_
 #define _NET_BPF_H_
+#include <sys/param.h>
 #include <sys/appleapiopts.h>
 #include <sys/types.h>
 #include <sys/time.h>
@@ -174,11 +175,6 @@ struct bpf_hdr {
 	u_short		bh_hdrlen;	/* length of bpf header (this struct
 					   plus alignment padding) */
 };
-/*
- * Because the structure above is not a multiple of 4 bytes, some compilers
- * will insist on inserting padding; hence, sizeof(struct bpf_hdr) won't work.
- * Only the kernel needs to know about it; applications use bh_hdrlen.
- */
 
 /*
  * Data-link level type codes.

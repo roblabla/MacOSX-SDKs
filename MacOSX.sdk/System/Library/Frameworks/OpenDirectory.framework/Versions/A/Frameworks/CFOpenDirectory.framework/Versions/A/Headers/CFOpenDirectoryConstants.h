@@ -79,6 +79,17 @@ enum
 typedef uint32_t ODNodeType;
 
 /*!
+    @const      kODNodeOptionsQuerySkippedSubnode
+    @abstract   Used with nodes that support options.
+    @discussion Passed in an options dictionary where the value is a boolean (kCFBooleanTrue/kCFBooleanFalse).
+                If a node supports the option it will notify the client when a subnode is skipped during queries.
+                Supported options are listed in node details under kODAttributeTypeNodeOptions.  Node may fail to
+                open if unsupported options are used.
+ */
+CF_EXPORT
+const CFStringRef kODNodeOptionsQuerySkippedSubnode __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
+
+/*!
 	@enum   	ODMatchType
 	@abstract   Are types of matching types used for doing searches.  Each type is self explanatory based on the name.
 	@constant	kODMatchAny is used to search for any records (typically passed with nil search value)
@@ -475,6 +486,14 @@ const ODRecordType kODRecordTypeProtocols;
 */
 CF_EXPORT
 const ODRecordType kODRecordTypeQTSServer;
+
+/*!
+    @const		kODRecordTypeQueryInformation
+    @abstract   Special query information record
+    @discussion Specifically to return query information inline such as skipped nodes
+ */
+CF_EXPORT
+const ODRecordType kODRecordTypeQueryInformation;
 
 /*!
     @const		kODRecordTypeRecordTypes
@@ -2307,6 +2326,14 @@ CF_EXPORT
 const ODAttributeType kODAttributeTypeCustomSearchPath;
 
 /*!
+    @const      kODAttributeTypeNodeOptions
+    @abstract   Any extended options supported by the node during creation
+    @discussion Any extended options supported by the node during creation
+ */
+CF_EXPORT
+const ODAttributeType kODAttributeTypeNodeOptions __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA);
+
+/*!
 	@const		kODAttributeTypeAdvertisedServices
 */
 CF_EXPORT
@@ -2667,7 +2694,7 @@ const ODAuthenticationType kODAuthenticationTypeGetEffectivePolicy;
 	@abstract   Used for extraction of global authentication policy.
 	@discussion Used for extraction of global authentication policy. Authentication
 				is not required to get policies. The authenticator name and password
-				fields may be left blank by using eight bytes of zeros.
+				fields are optional.
 
 				Authentication array has following items in order:
 					user name in UTF8 encoding

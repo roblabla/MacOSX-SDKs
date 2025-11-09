@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2002 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2012 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -91,6 +91,12 @@ struct vnode;
 #define	D_TAPE	1
 #define	D_DISK	2
 #define	D_TTY	3
+
+/*
+ * Flags for d_type (squeezed into the top half of d_type).
+ */
+#define	D_TYPEMASK	0xffff
+#define	D_TRACKCLOSE	0x00010000	/* track all closes */
 
 /* 
  * Device switch function types.

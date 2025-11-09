@@ -32,14 +32,14 @@
 @class NSString;
 
 @interface DOMHTMLOptionElement : DOMHTMLElement
-@property(readonly, retain) DOMHTMLFormElement *form;
-@property BOOL defaultSelected;
-@property(readonly, copy) NSString *text;
-@property(readonly) int index;
 @property BOOL disabled;
+@property(readonly, retain) DOMHTMLFormElement *form;
 @property(copy) NSString *label;
+@property BOOL defaultSelected;
 @property BOOL selected;
 @property(copy) NSString *value;
+@property(readonly, copy) NSString *text;
+@property(readonly) int index;
 @end
 
 #endif

@@ -1,9 +1,9 @@
 /*
-     File:       IconStorage.r
+     File:       OSServices/IconStorage.r
  
      Contains:   Services to load and share icon family data.
  
-     Copyright:  © 2000-2010 by Apple Inc., all rights reserved.
+     Copyright:  (c) 2000-2011 Apple Inc. All rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

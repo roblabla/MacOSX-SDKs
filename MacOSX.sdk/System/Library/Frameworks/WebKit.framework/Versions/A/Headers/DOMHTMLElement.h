@@ -38,6 +38,7 @@
 @property(copy) NSString *dir;
 @property(copy) NSString *className;
 @property int tabIndex;
+@property(copy) NSString *accessKey AVAILABLE_AFTER_WEBKIT_VERSION_5_1;
 @property(copy) NSString *innerHTML;
 @property(copy) NSString *innerText;
 @property(copy) NSString *outerHTML;
@@ -46,6 +47,8 @@
 @property(copy) NSString *contentEditable;
 @property(readonly) BOOL isContentEditable;
 @property(readonly, copy) NSString *titleDisplayString AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+
+- (void)click AVAILABLE_AFTER_WEBKIT_VERSION_5_1;
 @end
 
 #endif

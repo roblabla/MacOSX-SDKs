@@ -20,9 +20,19 @@
  * 
  * @APPLE_LICENSE_HEADER_END@
  */
+
+
+/*
+ * This header is deprecated and may be removed in a future release.
+ * Developers who wish to sandbox an app should instead adopt the App Sandbox
+ * feature described in the App Sandbox Design Guide.
+ */
+
+
 #ifndef _SANDBOX_H_
 #define _SANDBOX_H_
 
+#include <Availability.h>
 #include <sys/cdefs.h>
 #include <stdint.h>
 
@@ -51,6 +61,7 @@ __BEGIN_DECLS
  *
  * @result 0 on success, -1 otherwise.
  */
+__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_8,__IPHONE_2_0,__IPHONE_NA)
 int sandbox_init(const char *profile, uint64_t flags, char **errorbuf);
 
 /*
@@ -64,20 +75,25 @@ int sandbox_init(const char *profile, uint64_t flags, char **errorbuf);
  */
 
 /* TCP/IP networking is prohibited. */
+__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_8,__IPHONE_2_0,__IPHONE_NA)
 extern const char kSBXProfileNoInternet[];
 
 /* All sockets-based networking is prohibited. */
+__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_8,__IPHONE_2_0,__IPHONE_NA)
 extern const char kSBXProfileNoNetwork[];
 
 /* File system writes are prohibited. */
+__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_8,__IPHONE_2_0,__IPHONE_NA)
 extern const char kSBXProfileNoWrite[];
 
 /* File system writes are restricted to temporary folders /var/tmp and
  * confstr(_CS_DARWIN_USER_DIR, ...).
  */
+__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_8,__IPHONE_2_0,__IPHONE_NA)
 extern const char kSBXProfileNoWriteExceptTemporary[];
 
 /* All operating system services are prohibited. */
+__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_8,__IPHONE_2_0,__IPHONE_NA)
 extern const char kSBXProfilePureComputation[];
 
 /*
@@ -89,16 +105,8 @@ extern const char kSBXProfilePureComputation[];
  *
  * @result void
  */
+__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_8,__IPHONE_2_0,__IPHONE_NA)
 void sandbox_free_error(char *errorbuf);
-
-
-#ifdef __APPLE_API_PRIVATE
-#ifndef _SANDBOX_INTERNAL_
-#define _SANDBOX_INDIRECT_
-#include <sandbox/private.h>
-#undef _SANDBOX_INDIRECT_
-#endif
-#endif
 
 __END_DECLS
 

@@ -8,6 +8,7 @@
  */
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CLAvailability.h>
 #import <CoreLocation/CLLocation.h>
 
 /*
@@ -55,6 +56,7 @@ typedef enum {
  *  Discussion:
  *    The CLLocationManager object is your entry point to the location service.
  */
+NS_CLASS_AVAILABLE(10_6, 2_0)
 @interface CLLocationManager : NSObject
 {
 @private
@@ -94,7 +96,7 @@ typedef enum {
  *      Determines whether the device supports region monitoring.
  *      If NO, all attempts to monitor regions will fail.
  */
-+ (BOOL)regionMonitoringAvailable __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
++ (BOOL)regionMonitoringAvailable __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_4_0);
 
 /*
  *  regionMonitoringEnabled
@@ -102,7 +104,7 @@ typedef enum {
  *  Discussion:
  *      Determines whether region monitoring services are enabled on the device.
  */
-+ (BOOL)regionMonitoringEnabled __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
++ (BOOL)regionMonitoringEnabled __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_4_0);
 
 /*
  *  authorizationStatus
@@ -156,7 +158,7 @@ typedef enum {
 @property(assign, nonatomic) CLLocationAccuracy desiredAccuracy;
 
 /*
- *  lastLocation
+ *  location
  *  
  *  Discussion:
  *      The last location received. Will be nil until a location has been received.
@@ -177,7 +179,7 @@ typedef enum {
  *  Discussion:
  *      Specifies the minimum amount of change in degrees needed for a heading service update. Client will not
  *      be notified of updates less than the stated filter value. Pass in kCLHeadingFilterNone to be
- *      notified of all updates. By default, kCLHeadingFilterNone is used.
+ *      notified of all updates. By default, 1 degree is used.
  */
 @property(assign, nonatomic) CLLocationDegrees headingFilter __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_3_0);
 
@@ -208,7 +210,7 @@ typedef enum {
  *       Attempts to register a region larger than this will generate a kCLErrorRegionMonitoringFailure.
  *       This value may vary based on the hardware features of the device, as well as on dynamically changing resource constraints.
  */
-@property (readonly, nonatomic) CLLocationDistance maximumRegionMonitoringDistance __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+@property (readonly, nonatomic) CLLocationDistance maximumRegionMonitoringDistance __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_4_0);
 
 /*
  *  monitoredRegions
@@ -218,7 +220,7 @@ typedef enum {
  *       has been instructed to monitor a region, during this or previous launches of your application, it will
  *       be present in this set.
  */
-@property (readonly, nonatomic) NSSet *monitoredRegions __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+@property (readonly, nonatomic) NSSet *monitoredRegions __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_4_0);
 
 /*
  *  startUpdatingLocation
@@ -291,17 +293,34 @@ typedef enum {
  *      capable of providing the precision desired.
  *
  *      If a region with the same identifier is already being monitored for this application, it will be removed from monitoring.
+ *
+ *      This is done asynchronously and may not be immediately reflected in monitoredRegions.
  */
 - (void)startMonitoringForRegion:(CLRegion *)region
-                 desiredAccuracy:(CLLocationAccuracy)accuracy __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+                 desiredAccuracy:(CLLocationAccuracy)accuracy __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_NA, __MAC_NA,__IPHONE_4_0, __IPHONE_6_0);
 		
 /*
- *  stopMonitoringForReason:
+ *  stopMonitoringForRegion:
  *
  *  Discussion:
- *      Stop monitoring the specified region.  It is valid to call stopMonitoringForRegion: for a region that was registered
+ *      Stop monitoring the specified regio n.  It is valid to call stopMonitoringForRegion: for a region that was registered
  *      for monitoring with a different location manager object, during this or previous launches of your application.
+ *
+ *      This is done asynchronously and may not be immediately reflected in monitoredRegions.
  */
-- (void)stopMonitoringForRegion:(CLRegion *)region __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+- (void)stopMonitoringForRegion:(CLRegion *)region __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_4_0);
+
+/*
+ *  startMonitoringForRegion:
+ *
+ *  Discussion:
+ *      Start monitoring the specified region.
+ *
+ *      If a region with the same identifier is already being monitored for this application, it will be removed from monitoring.
+ *      The region monitoring service will prioritize regions by their sizes, favoring smaller regions over larger regions.
+ *
+ *      This is done asynchronously and may not be immediately reflected in monitoredRegions.
+ */
+- (void)startMonitoringForRegion:(CLRegion *)region __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_5_0);
 
 @end

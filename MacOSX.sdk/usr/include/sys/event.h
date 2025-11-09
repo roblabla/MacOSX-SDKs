@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003-2006 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2003-2012 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -73,7 +73,8 @@
 					/* (-11) unused */
 #define EVFILT_VM		(-12)	/* Virtual memory events */
 
-#define EVFILT_SYSCOUNT		12
+
+#define EVFILT_SYSCOUNT		13
 #define EVFILT_THREADMARKER	EVFILT_SYSCOUNT /* Internal use only */
 
 #pragma pack(4)
@@ -221,8 +222,25 @@ struct kevent64_s {
 #define	NOTE_SIGNAL	0x08000000		/* shared with EVFILT_SIGNAL */
 #define	NOTE_EXITSTATUS	0x04000000		/* exit status to be returned, valid for child process only */
 #define	NOTE_RESOURCEEND 0x02000000		/* resource limit reached, resource type returned */
+
+#if CONFIG_EMBEDDED
+/* 0x01000000  is reserved for future use */
+
+/* App states notification */
+#define	NOTE_APPACTIVE		0x00800000	/* app went to active state */
+#define	NOTE_APPBACKGROUND	0x00400000	/* app went to background */
+#define	NOTE_APPNONUI		0x00200000	/* app went to active with no UI */
+#define	NOTE_APPINACTIVE	0x00100000	/* app went to inactive state */
+#define NOTE_APPALLSTATES	0x00f00000
+#endif /* CONFIG_EMBEDDED */
+
 #define	NOTE_PDATAMASK	0x000fffff		/* mask for pid/signal */
 #define	NOTE_PCTRLMASK	(~NOTE_PDATAMASK)
+
+/*
+ * If NOTE_EXITSTATUS is present, provide additional info about exiting process.
+ */
+#define NOTE_EXIT_REPARENTED	0x00080000	/* exited while reparented */
 
 /*
  * data/hint fflags for EVFILT_VM, shared with userspace.
@@ -244,6 +262,7 @@ struct kevent64_s {
 #define NOTE_NSECONDS	0x00000004		/* data is nanoseconds     */
 #define NOTE_ABSOLUTE	0x00000008		/* absolute timeout        */
 						/* ... implicit EV_ONESHOT */
+
 /*
  * data/hint fflags for EVFILT_MACHPORT, shared with userspace.
  *

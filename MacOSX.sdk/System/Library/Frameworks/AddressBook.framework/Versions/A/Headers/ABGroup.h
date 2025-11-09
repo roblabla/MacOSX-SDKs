@@ -20,8 +20,8 @@
 @interface ABGroup : ABRecord
 {
 @private
-    id _groupReserved1;
-    id _groupReserved2;
+    id _groupReserved1 __unused;
+    id _groupReserved2 __unused;
 }
 
 - (NSArray *)members;

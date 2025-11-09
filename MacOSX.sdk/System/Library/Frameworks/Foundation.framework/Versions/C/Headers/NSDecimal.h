@@ -1,5 +1,5 @@
 /*	NSDecimal.h
-	Copyright (c) 1995-2011, Apple Inc. All rights reserved.
+	Copyright (c) 1995-2012, Apple Inc. All rights reserved.
 */
 
 #include <limits.h>
@@ -17,22 +17,20 @@
 // Up       1.2  1.3   1.3   1.4   1.3
 // Bankers  1.2  1.2   1.2   1.4   1.3
 
-enum {
+typedef NS_ENUM(NSUInteger, NSRoundingMode) {
     NSRoundPlain,   // Round up on a tie
     NSRoundDown,    // Always down == truncate
     NSRoundUp,      // Always up
     NSRoundBankers  // on a tie round so last digit is even
 };
-typedef NSUInteger NSRoundingMode;
 
-enum {
+typedef NS_ENUM(NSUInteger, NSCalculationError) {
     NSCalculationNoError = 0,
     NSCalculationLossOfPrecision, // Result lost precision
     NSCalculationUnderflow,       // Result became 0
     NSCalculationOverflow,        // Result exceeds possible representation
     NSCalculationDivideByZero
 };
-typedef NSUInteger NSCalculationError;
 
 #define NSDecimalMaxSize (8)
     // Give a precision of at least 38 decimal digits, 128 binary positions.

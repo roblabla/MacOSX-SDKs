@@ -1,5 +1,5 @@
 /*
-    Copyright:  (c) 1999-2010 Apple Inc. All rights reserved.
+	Copyright:	(c) 1999-2012 Apple Inc. All rights reserved.
 */
 
 #ifndef _CGLMACRO_H
@@ -2728,7 +2728,6 @@
 #define glGetQueryObjectui64vEXT(id, pname, params) \
 	(*(CGL_MACRO_CONTEXT)->disp.get_query_objectui64v)(CGL_MACRO_CONTEXT_RENDERER, id, pname, params)
 
-
 /*********** APPLE Extensions ***********************************************/
 
 /* GL_APPLE_vertex_program_evaluators */
@@ -2869,17 +2868,6 @@
 
 /* GL_ATI_blend_equation_separate */
 #define glBlendEquationSeparateATI glBlendEquationSeparateEXT
-
-/* GL_ATI_pn_triangles */
-#define glPNTrianglesiATI(pname, param) \
-	(*(CGL_MACRO_CONTEXT)->disp.pn_trianglesi_ATI)(CGL_MACRO_CONTEXT_RENDERER, pname, param)
-
-#define glPNTrianglesfATI(pname, param) \
-	(*(CGL_MACRO_CONTEXT)->disp.pn_trianglesf_ATI)(CGL_MACRO_CONTEXT_RENDERER, pname, param)
-
-/* GL_ATIX_pn_triangles */
-#define glPNTrianglesiATIX glPNTrianglesiATI
-#define glPNTrianglesfATIX glPNTrianglesfATI
 
 /*********** NVIDIA Extensions **********************************************/
 

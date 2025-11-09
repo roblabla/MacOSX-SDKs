@@ -20,7 +20,7 @@
  *      Represents a peripheral's service or a service's included service.
  *
  */
-NS_CLASS_AVAILABLE(10_7, NA)
+NS_CLASS_AVAILABLE(10_7, 5_0)
 CB_EXTERN_CLASS @interface CBService : NSObject
 {
 @package

@@ -6,6 +6,8 @@
 //	
 //	Allows the client to access the user's calendars, events, and tasks. Clients can also save changes to an event, task,
 //  or calendar.
+//
+//  The Calendar Store framework is deprecated.  Please use the Event Kit framework instead. 
 
 @class CalCalendar, CalEvent, CalTask;
 
@@ -18,7 +20,7 @@ typedef enum {
     CalSpanThisEvent,
     CalSpanFutureEvents,
     CalSpanAllEvents
-} CalSpan;
+} CalSpan NS_ENUM_DEPRECATED_MAC(10_5, 10_8);
 
 @interface CalCalendarStore : NSObject
 {
@@ -28,7 +30,7 @@ typedef enum {
 
 //  Returns an instance of the calendar store.
 
-+ (CalCalendarStore *)defaultCalendarStore;
++ (CalCalendarStore *)defaultCalendarStore NS_DEPRECATED_MAC(10_5, 10_8);
 
 
 /*  Accessing calendars  */
@@ -39,10 +41,10 @@ typedef enum {
 //
 //  If no calendar data from any version of Mac OS X exists, then this method will create and return two default
 //  calendars, named Home and Work.
-- (NSArray *)calendars;
+- (NSArray *)calendars NS_DEPRECATED_MAC(10_5, 10_8);
 
 //  The calendar associated with the specific UID. If no record with this UID exists, nil is returned.
-- (CalCalendar *)calendarWithUID:(NSString *)UID;
+- (CalCalendar *)calendarWithUID:(NSString *)UID NS_DEPRECATED_MAC(10_5, 10_8);
 
 /*  Writing changes to calendars  */
 
@@ -59,8 +61,8 @@ typedef enum {
 //  Changes made to a CalCalendar are not persisted until that calendar has been passed to saveCalendar. If saveCalendar
 //  is not called, the changes will be lost.
 
-- (BOOL)saveCalendar:(CalCalendar *)calendar error:(NSError **)error;
-- (BOOL)removeCalendar:(CalCalendar *)calendar error:(NSError **)error;
+- (BOOL)saveCalendar:(CalCalendar *)calendar error:(NSError **)error NS_DEPRECATED_MAC(10_5, 10_8);
+- (BOOL)removeCalendar:(CalCalendar *)calendar error:(NSError **)error NS_DEPRECATED_MAC(10_5, 10_8);
 
 
 /*  Accessing events and tasks  */
@@ -78,8 +80,8 @@ typedef enum {
 //  four year timespan. If the date range between the startDate and endDate is greater than four years, then the 
 //  timespan containing recurrences is always the first four years of date range.
 
-- (NSArray *)eventsWithPredicate:(NSPredicate *)predicate;
-- (CalEvent *)eventWithUID:(NSString *)uid occurrence:(NSDate *)date;
+- (NSArray *)eventsWithPredicate:(NSPredicate *)predicate NS_DEPRECATED_MAC(10_5, 10_8);
+- (CalEvent *)eventWithUID:(NSString *)uid occurrence:(NSDate *)date NS_DEPRECATED_MAC(10_5, 10_8);
 
 //  - (NSArray *)tasksWithPredicate:(NSPredicate *)predicate;
 //
@@ -90,8 +92,8 @@ typedef enum {
 //  If the predicate passed to tasksWithPredicate: was not created with one of the class methods included in thsi file, 
 //  nil is returned. If nil is passed as the predicate, an exception will be raised.
 
-- (NSArray *)tasksWithPredicate:(NSPredicate *)predicate;
-- (CalTask *)taskWithUID:(NSString *)uid;
+- (NSArray *)tasksWithPredicate:(NSPredicate *)predicate NS_DEPRECATED_MAC(10_5, 10_8);
+- (CalTask *)taskWithUID:(NSString *)uid NS_DEPRECATED_MAC(10_5, 10_8);
 
 /*  Writing changes to events and tasks  */
 
@@ -112,8 +114,8 @@ typedef enum {
 //  
 //  Applying changes to all events or all future events may cause the UID or the occurrence date of the event to change.
 
-- (BOOL)saveEvent:(CalEvent *)event span:(CalSpan)span error:(NSError **)error;
-- (BOOL)removeEvent:(CalEvent *)event span:(CalSpan)span error:(NSError **)error;
+- (BOOL)saveEvent:(CalEvent *)event span:(CalSpan)span error:(NSError **)error NS_DEPRECATED_MAC(10_5, 10_8);
+- (BOOL)removeEvent:(CalEvent *)event span:(CalSpan)span error:(NSError **)error NS_DEPRECATED_MAC(10_5, 10_8);
 
 //  - (BOOL)saveTask:(CalTask *)task error:(NSError **)error;
 //  - (BOOL)removeTask:(CalTask *)task error:(NSError **)error;
@@ -124,19 +126,19 @@ typedef enum {
 //  Changes made to a CalTask are not persisted until that task has been passed to saveTask. If saveTask is not called, 
 //  the changes will be lost.
 
-- (BOOL)saveTask:(CalTask *)task error:(NSError **)error;
-- (BOOL)removeTask:(CalTask *)task error:(NSError **)error;
+- (BOOL)saveTask:(CalTask *)task error:(NSError **)error NS_DEPRECATED_MAC(10_5, 10_8);
+- (BOOL)removeTask:(CalTask *)task error:(NSError **)error NS_DEPRECATED_MAC(10_5, 10_8);
 
 
 //  A predicate passed to eventsWithPredicate: or tasksWithPredicate: must be returned from one of these methods.
 
-+ (NSPredicate *)eventPredicateWithStartDate:(NSDate *)startDate endDate:(NSDate *)endDate calendars:(NSArray *)calendars;
-+ (NSPredicate *)eventPredicateWithStartDate:(NSDate *)startDate endDate:(NSDate *)endDate UID:(NSString *)UID calendars:(NSArray *)calendars;
++ (NSPredicate *)eventPredicateWithStartDate:(NSDate *)startDate endDate:(NSDate *)endDate calendars:(NSArray *)calendars NS_DEPRECATED_MAC(10_5, 10_8);
++ (NSPredicate *)eventPredicateWithStartDate:(NSDate *)startDate endDate:(NSDate *)endDate UID:(NSString *)UID calendars:(NSArray *)calendars NS_DEPRECATED_MAC(10_5, 10_8);
 
-+ (NSPredicate *)taskPredicateWithCalendars:(NSArray *)calendars; //  This will return all tasks, completed and uncompleted, for a set of calendars
-+ (NSPredicate *)taskPredicateWithUncompletedTasks:(NSArray *)calendars;
-+ (NSPredicate *)taskPredicateWithUncompletedTasksDueBefore:(NSDate *)dueDate calendars:(NSArray *)calendars;
-+ (NSPredicate *)taskPredicateWithTasksCompletedSince:(NSDate *)completedSince calendars:(NSArray *)calendars;
++ (NSPredicate *)taskPredicateWithCalendars:(NSArray *)calendars NS_DEPRECATED_MAC(10_5, 10_8); //  This will return all tasks, completed and uncompleted, for a set of calendars
++ (NSPredicate *)taskPredicateWithUncompletedTasks:(NSArray *)calendars NS_DEPRECATED_MAC(10_5, 10_8);
++ (NSPredicate *)taskPredicateWithUncompletedTasksDueBefore:(NSDate *)dueDate calendars:(NSArray *)calendars NS_DEPRECATED_MAC(10_5, 10_8);
++ (NSPredicate *)taskPredicateWithTasksCompletedSince:(NSDate *)completedSince calendars:(NSArray *)calendars NS_DEPRECATED_MAC(10_5, 10_8);
 
 @end
 
@@ -151,7 +153,7 @@ typedef enum {
 //  more of the following keys may be included: CalInsertedRecordsKey, CalUpdatedRecordsKey, and CalDeletedRecordsKey. 
 //  The values for each of the keys are arrays containing the UIDs of the affected calendar(s).
 
-extern NSString * const CalCalendarsChangedNotification;
+extern NSString * const CalCalendarsChangedNotification NS_DEPRECATED_MAC(10_5, 10_8);
 
 //  CalEventsChangedNotification
 //  This notification will be posted when this process has added, modified, or removed an event. The process ID of the 
@@ -160,7 +162,7 @@ extern NSString * const CalCalendarsChangedNotification;
 //  more of the following keys may be included: CalInsertedRecordsKey, CalUpdatedRecordsKey, and CalDeletedRecordsKey. 
 //  The values for each of the keys are arrays containing the UIDs of the affected event(s).
 
-extern NSString * const CalEventsChangedNotification;
+extern NSString * const CalEventsChangedNotification NS_DEPRECATED_MAC(10_5, 10_8);
 
 //  CalTasksChangedNotification
 //  This notification will be posted when this process has added, modified, or removed a task. The process ID of the 
@@ -169,7 +171,7 @@ extern NSString * const CalEventsChangedNotification;
 //  more of the following keys may be included: CalInsertedRecordsKey, CalUpdatedRecordsKey, and CalDeletedRecordsKey. 
 //  The values for each of the keys are the affected task(s).
 
-extern NSString * const CalTasksChangedNotification;
+extern NSString * const CalTasksChangedNotification NS_DEPRECATED_MAC(10_5, 10_8);
 
 //  CalEventsChangedExternallyNotification, CalTasksChangedExternallyNotification
 //  These notifications are exactly the same as the similarly named ones described above, except that they are only 
@@ -178,9 +180,9 @@ extern NSString * const CalTasksChangedNotification;
 //  externally; for now all modifications to calendars are made externally, and clients should just observe the 
 //  CalCalendarsChangedExternallyNotification.
 
-extern NSString * const CalCalendarsChangedExternallyNotification;
-extern NSString * const CalEventsChangedExternallyNotification;
-extern NSString * const CalTasksChangedExternallyNotification;
+extern NSString * const CalCalendarsChangedExternallyNotification NS_DEPRECATED_MAC(10_5, 10_8);
+extern NSString * const CalEventsChangedExternallyNotification NS_DEPRECATED_MAC(10_5, 10_8);
+extern NSString * const CalTasksChangedExternallyNotification NS_DEPRECATED_MAC(10_5, 10_8);
 
 
 //  CalInsertedRecords, CalUpdatedRecords, CalDeletedRecords
@@ -197,6 +199,6 @@ extern NSString * const CalDeletedRecordsKey;
 //  These constants can be passed as keys to the userInfo dictionary included when any of the above notifications
 //  are posted.
 
-extern NSString * const CalSenderProcessIDKey;
-extern NSString * const CalUserUIDKey;
+extern NSString * const CalSenderProcessIDKey NS_DEPRECATED_MAC(10_5, 10_8);
+extern NSString * const CalUserUIDKey NS_DEPRECATED_MAC(10_5, 10_8);
 

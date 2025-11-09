@@ -87,7 +87,6 @@ typedef	char			io_name_t[128];
 typedef	char			io_string_t[512];	
 typedef char 			io_struct_inband_t[4096];
 
-#if KERNEL
 typedef uint64_t		io_user_scalar_t;
 typedef uint64_t		io_user_reference_t;
 typedef int 			io_scalar_inband_t[16];
@@ -95,21 +94,6 @@ typedef int 			io_scalar_inband_t[16];
 typedef natural_t		io_async_ref_t[8];
 typedef io_user_scalar_t	io_scalar_inband64_t[16];
 typedef io_user_reference_t	io_async_ref64_t[8];
-#elif __LP64__
-typedef uint64_t		io_user_scalar_t;
-typedef uint64_t		io_user_reference_t;
-typedef io_user_scalar_t	io_scalar_inband_t[16];
-typedef io_user_reference_t	io_async_ref_t[8];
-typedef io_user_scalar_t	io_scalar_inband64_t[16];
-typedef io_user_reference_t	io_async_ref64_t[8];
-#else
-typedef int			io_user_scalar_t;
-typedef natural_t		io_user_reference_t;
-typedef io_user_scalar_t	io_scalar_inband_t[16];
-typedef io_user_reference_t	io_async_ref_t[8];
-typedef uint64_t		io_scalar_inband64_t[16];
-typedef uint64_t		io_async_ref64_t[8];
-#endif // __LP64__
 
 #ifdef MACH_KERNEL
 

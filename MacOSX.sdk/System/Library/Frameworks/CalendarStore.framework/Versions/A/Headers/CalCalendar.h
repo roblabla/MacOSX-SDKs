@@ -6,15 +6,17 @@
 //	
 //	This class can be used to get attributes of a calendar, but cannot be used to get the list of events or tasks in a calendar. 
 //	Instead use CalCalendarStore's eventsFromPredicate: and tasksFromPredicate: methods.
+//
+//  The Calendar Store framework is deprecated.  Please use the Event Kit framework instead.
 
 @class NSColor;
 
-extern NSString * const CalCalendarTypeBirthday;
-extern NSString * const CalCalendarTypeCalDAV;
-extern NSString * const CalCalendarTypeLocal;
-extern NSString * const CalCalendarTypeSubscription;
-extern NSString * const CalCalendarTypeIMAP;
-extern NSString * const CalCalendarTypeExchange AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+extern NSString * const CalCalendarTypeBirthday NS_DEPRECATED_MAC(10_5, 10_8);
+extern NSString * const CalCalendarTypeCalDAV NS_DEPRECATED_MAC(10_5, 10_8);
+extern NSString * const CalCalendarTypeLocal NS_DEPRECATED_MAC(10_5, 10_8);
+extern NSString * const CalCalendarTypeSubscription NS_DEPRECATED_MAC(10_5, 10_8);
+extern NSString * const CalCalendarTypeIMAP NS_DEPRECATED_MAC(10_5, 10_8);
+extern NSString * const CalCalendarTypeExchange  NS_DEPRECATED_MAC(10_6, 10_8);
 
 @interface CalCalendar : NSObject <NSCopying>
 {
@@ -31,13 +33,13 @@ extern NSString * const CalCalendarTypeExchange AVAILABLE_MAC_OS_X_VERSION_10_6_
 }
 
 //  All calendars created with this API will be of type CalCalendarTypeLocal
-+ (id)calendar;
++ (id)calendar NS_DEPRECATED_MAC(10_5, 10_8);
 
-@property(copy) NSColor *color;
-@property(copy) NSString *notes;
-@property(copy) NSString *title;
-@property(readonly) NSString *type;
-@property(readonly) NSString *uid;
-@property(readonly) BOOL isEditable;
+@property(copy) NSColor *color NS_DEPRECATED_MAC(10_5, 10_8);
+@property(copy) NSString *notes NS_DEPRECATED_MAC(10_5, 10_8);
+@property(copy) NSString *title NS_DEPRECATED_MAC(10_5, 10_8);
+@property(readonly) NSString *type NS_DEPRECATED_MAC(10_5, 10_8);
+@property(readonly) NSString *uid NS_DEPRECATED_MAC(10_5, 10_8);
+@property(readonly) BOOL isEditable NS_DEPRECATED_MAC(10_5, 10_8);
 
 @end

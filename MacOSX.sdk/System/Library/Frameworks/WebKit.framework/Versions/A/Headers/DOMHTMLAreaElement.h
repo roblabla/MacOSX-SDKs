@@ -32,13 +32,13 @@
 @class NSURL;
 
 @interface DOMHTMLAreaElement : DOMHTMLElement
-@property(copy) NSString *accessKey;
 @property(copy) NSString *alt;
 @property(copy) NSString *coords;
 @property(copy) NSString *href;
 @property BOOL noHref;
 @property(copy) NSString *shape;
 @property(copy) NSString *target;
+@property(copy) NSString *accessKey AVAILABLE_WEBKIT_VERSION_1_3_AND_LATER_BUT_DEPRECATED_AFTER_WEBKIT_VERSION_5_1;
 @property(readonly, copy) NSString *hashName AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
 @property(readonly, copy) NSString *host AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
 @property(readonly, copy) NSString *hostname AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;

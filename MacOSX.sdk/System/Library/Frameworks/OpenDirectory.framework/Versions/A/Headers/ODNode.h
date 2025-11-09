@@ -41,7 +41,7 @@
     @discussion Autoreleased instance of an ODNode with a provided ODSession and ODNodeType.  outError is 
                 optional parameter, nil can be passed if error details are not needed.
 */
-+ (id)nodeWithSession:(ODSession *)inSession type:(ODNodeType)inType error:(NSError **)outError;
++ (id)nodeWithSession:(ODSession *)inSession type:(ODNodeType)inType error:(NSError **)outError NS_AVAILABLE(10_6, NA);
 
 /*!
     @method     nodeWithSession:name:error:
@@ -49,7 +49,7 @@
     @discussion autoreleased instance of an ODNode with a provided ODSession and node name.  outError is 
                 optional parameter, nil can be passed if error details are not needed.
 */
-+ (id)nodeWithSession:(ODSession *)inSession name:(NSString *)inName error:(NSError **)outError;
++ (id)nodeWithSession:(ODSession *)inSession name:(NSString *)inName error:(NSError **)outError NS_AVAILABLE(10_6, NA);
 
 /*!
     @method     initWithSession:type:error:
@@ -57,7 +57,7 @@
     @discussion initialize instance of an ODNode with a provided ODSession and ODNodeType.  outError is 
                 optional parameter, nil can be passed if error details are not needed.
 */
-- (id)initWithSession:(ODSession *)inSession type:(ODNodeType)inType error:(NSError **)outError;
+- (id)initWithSession:(ODSession *)inSession type:(ODNodeType)inType error:(NSError **)outError NS_AVAILABLE(10_6, NA);
 
 /*!
     @method     initWithSession:name:error:
@@ -65,7 +65,7 @@
     @discussion initialize instance of an ODNode with a provided ODSession and node name.  outError is optional
                 parameter, nil can be passed if error details are not needed.
 */
-- (id)initWithSession:(ODSession *)inSession name:(NSString *)inName error:(NSError **)outError;
+- (id)initWithSession:(ODSession *)inSession name:(NSString *)inName error:(NSError **)outError NS_AVAILABLE(10_6, NA);
 
 /*!
     @method     subnodeNamesAndReturnError:
@@ -74,7 +74,7 @@
                 Commonly used with Search policy nodes.  outError is optional parameter, nil can be passed if error
                 details are not needed.
 */
-- (NSArray *)subnodeNamesAndReturnError:(NSError **)outError;
+- (NSArray *)subnodeNamesAndReturnError:(NSError **)outError NS_AVAILABLE(10_6, NA);
 
 /*!
     @method     unreachableSubnodeNamesAndReturnError:
@@ -83,14 +83,14 @@
                 nodes to determine if any nodes are currently unreachable, but may also return other subnodes if the
                 OpenDirectory plugin supports.  outError is optional parameter, nil can be passed if error details are not needed.
 */
-- (NSArray *)unreachableSubnodeNamesAndReturnError:(NSError **)outError;
+- (NSArray *)unreachableSubnodeNamesAndReturnError:(NSError **)outError NS_AVAILABLE(10_6, NA);
 
 /*!
     @property   nodeName
     @abstract   The node name.
     @discussion The node name, corresponding to its path in OpenDirectory.
 */
-@property (nonatomic, readonly, copy) NSString *nodeName;
+@property (nonatomic, readonly, copy) NSString *nodeName NS_AVAILABLE(10_6, NA);
 
 /*!
     @method     nodeDetails:error:
@@ -100,7 +100,7 @@
                 nil can be passed if error details are not needed.
                 
 */
-- (NSDictionary *)nodeDetailsForKeys:(NSArray *)inKeys error:(NSError **)outError;
+- (NSDictionary *)nodeDetailsForKeys:(NSArray *)inKeys error:(NSError **)outError NS_AVAILABLE(10_6, NA);
 
 /*!
     @method     supportedRecordTypesAndReturnError:
@@ -109,7 +109,7 @@
                 then all possible types will be returned.  outError is optional parameter, nil can be passed if error details
                 are not needed.
 */
-- (NSArray *)supportedRecordTypesAndReturnError:(NSError **)outError;
+- (NSArray *)supportedRecordTypesAndReturnError:(NSError **)outError NS_AVAILABLE(10_6, NA);
 
 /*!
     @method     supportedAttributesForRecordType:error:
@@ -118,7 +118,7 @@
                 types are available, then all possible values will be returned instead.  outError is optional parameter,
                 nil can be passed if error details are not needed.
 */
-- (NSArray *)supportedAttributesForRecordType:(ODRecordType)inRecordType error:(NSError **)outError;
+- (NSArray *)supportedAttributesForRecordType:(ODRecordType)inRecordType error:(NSError **)outError NS_AVAILABLE(10_6, NA);
 
 /*!
     @method     setCredentialsWithRecordType:recordName:password:error:
@@ -129,7 +129,7 @@
                 details are not needed.
 */
 - (BOOL)setCredentialsWithRecordType:(ODRecordType)inRecordType recordName:(NSString *)inRecordName password:(NSString *)inPassword
-                               error:(NSError **)outError;
+                               error:(NSError **)outError NS_AVAILABLE(10_6, NA);
 
 /*!
     @method     setCredentialsWithRecordType:authType:authItems:outAuthItems:context:error:
@@ -141,14 +141,14 @@
 */
 - (BOOL)setCredentialsWithRecordType:(ODRecordType)inRecordType authenticationType:(ODAuthenticationType)inType 
                  authenticationItems:(NSArray *)inItems continueItems:(NSArray **)outItems
-                             context:(id *)outContext error:(NSError **)outError;
+                             context:(id *)outContext error:(NSError **)outError NS_AVAILABLE(10_6, NA);
 
 /*!
     @method     setCredentialsUsingKerberosCache:error:
     @abstract   Unsupported method.
     @discussion Unsupported method.
 */
-- (BOOL)setCredentialsUsingKerberosCache:(NSString *)inCacheName error:(NSError **)outError NS_DEPRECATED_MAC(10_6, 10_7);
+- (BOOL)setCredentialsUsingKerberosCache:(NSString *)inCacheName error:(NSError **)outError NS_DEPRECATED_MAC(10_6, 10_7) NS_AVAILABLE(10_6, NA);
 
 /*!
     @method     createRecordWithRecordType:name:attributes:error:
@@ -158,7 +158,7 @@
                 other attributes.  inAttributes is optional, nil can be passed if no other attributes are to be set.
 */
 - (ODRecord *)createRecordWithRecordType:(ODRecordType)inRecordType name:(NSString *)inRecordName 
-                              attributes:(NSDictionary *)inAttributes error:(NSError **)outError;
+                              attributes:(NSDictionary *)inAttributes error:(NSError **)outError NS_AVAILABLE(10_6, NA);
 
 /*!
     @method     recordWithRecordType:name:attributes:error:
@@ -168,7 +168,7 @@
                 to ask for as many attributes that are needed as possible up front.
 */
 - (ODRecord *)recordWithRecordType:(ODRecordType)inRecordType name:(NSString *)inRecordName attributes:(id)inAttributes
-                             error:(NSError **)outError;
+                             error:(NSError **)outError NS_AVAILABLE(10_6, NA);
 
 /*!
     @method     customCall:sendData:error:
@@ -176,6 +176,6 @@
     @discussion Sends a custom code to the node; input and output data formats are specific to the call.  outError is 
                 optional parameter, nil can be passed if error details are not needed.
 */
-- (NSData *)customCall:(NSInteger)inCustomCode sendData:(NSData *)inSendData error:(NSError **)outError;
+- (NSData *)customCall:(NSInteger)inCustomCode sendData:(NSData *)inSendData error:(NSError **)outError NS_AVAILABLE(10_6, NA);
 
 @end

@@ -11,7 +11,7 @@
 
 
 #pragma mark -
-#pragma mark IMServicePlugIn (iChat -> Service Plug-in)
+#pragma mark IMServicePlugIn (Messages -> Service Plug-in)
 
 /*!
     @protocol   IMServicePlugInChatRoomSupport
@@ -34,7 +34,7 @@
 /*!
     @method     joinChatRoom:
 
-    @discussion iChat calls this method on the IMServicePlugIn instance when the user attempts
+    @discussion Messages calls this method on the IMServicePlugIn instance when the user attempts
                 to join a chat room.
                 
                 To indicate success, -plugInDidJoinChatRoom: should be called by the service plug-in on the
@@ -44,7 +44,7 @@
                 To indicate failure, -plugInDidLeaveChatRoom:error: should be called by the service plug-in
                 with a non-nil error.
                 
-                This method may also be called by iChat when the user clicks "Accept" to a chat
+                This method may also be called by Messages when the user clicks "Accept" to a chat
                 room invitation.
                 
     @param      roomName  The name of the room which the user wishes to join.
@@ -55,7 +55,7 @@
 /*!
     @method     leaveChatRoom:
 
-    @discussion iChat calls this method on the IMServicePlugIn instance when the user closes
+    @discussion Messages calls this method on the IMServicePlugIn instance when the user closes
                 the chat room window, or when the service disconnects.
                 
                 The service plug-in should attempt to cleanly leave the chat room, and then
@@ -69,7 +69,7 @@
 /*!
     @method     inviteHandles:toChatRoom:withMessage:
 
-    @discussion iChat calls this method on the IMServicePlugIn instance when the user 
+    @discussion Messages calls this method on the IMServicePlugIn instance when the user 
                 invites handles to a specific chatRoom
 
     @param      handles   The handles to invite.
@@ -82,7 +82,7 @@
 /*!
     @method     sendMessage:toChatRoom:
 
-    @discussion iChat calls this method on the IMServicePlugIn instance when the user sends
+    @discussion Messages calls this method on the IMServicePlugIn instance when the user sends
                 a message to a chat room.
 
                 The service plug-in should use -plugInDidSendMessage:toChatRoom:error: to report 
@@ -104,10 +104,10 @@
 /*!
     @method     declineChatRoomInvitation:
 
-    @discussion iChat calls this method on the IMServicePlugIn instance when the user clicks
+    @discussion Messages calls this method on the IMServicePlugIn instance when the user clicks
                 the "Decline" button of an incoming chat room invitation.
                 
-                This method is always called in response to iChat receiving
+                This method is always called in response to Messages receiving
                 -plugInDidReceiveInvitation:forChatRoom:fromHandle: from the service plug-in.
 
     @param      roomName  The name of the room which the user has declined.
@@ -118,21 +118,21 @@
 
 
 #pragma mark -
-#pragma mark IMServiceApplication (Service Plug-in -> iChat)
+#pragma mark IMServiceApplication (Service Plug-in -> Messages)
 
 @protocol IMServiceApplicationChatRoomSupport <IMServiceApplication>
 
 /*!
     @method     plugInDidReceiveInvitation:forChatRoom:fromHandle:
 
-    @discussion When the IMServicePlugIn instance calls this method on the service application, iChat
+    @discussion When the IMServicePlugIn instance calls this method on the service application, Messages
                 displays an invitation window from the specified handle for the chat room.
 
-                If the user clicks "Accept" on the window, iChat then calls -joinChatRoom: on the
-                service plug-in.  If the user clicks "Decline", iChat calls -declineChatRoomInvitation:
+                If the user clicks "Accept" on the window, Messages then calls -joinChatRoom: on the
+                service plug-in.  If the user clicks "Decline", Messages calls -declineChatRoomInvitation:
                 instead.
 
-    @param      invitation An invitation message.  If nil, iChat uses a default invitation message.
+    @param      invitation An invitation message.  If nil, Messages uses a default invitation message.
     @param      roomName   The name of the chat room.
     @param      handle     The handle of the inviter.
 */
@@ -142,7 +142,7 @@
 /*!
     @method     plugInDidReceiveMessage:forChatRoom:fromHandle:
 
-    @discussion When the IMServicePlugIn instance calls this method on the service application, iChat
+    @discussion When the IMServicePlugIn instance calls this method on the service application, Messages
                 appends the sender and message to the transcript for the specified chat room.
                  
                 This call may be used to indicate successful delivery of a message sent via
@@ -158,7 +158,7 @@
 /*!
     @method     plugInDidReceiveNotice:forChatRoom:
 
-    @discussion When the IMServicePlugIn instance calls this method on the service application, iChat
+    @discussion When the IMServicePlugIn instance calls this method on the service application, Messages
                 appends an information message to the transcript for the specified chat room.
 
                 Since the IMServicePlugIn API does not support chat room properties such as topic,
@@ -174,7 +174,7 @@
 /*!
     @method     plugInDidSendMessage:toChatRoom:error:
 
-    @discussion When the IMServicePlugIn instance calls this method on the service application, iChat
+    @discussion When the IMServicePlugIn instance calls this method on the service application, Messages
                 appends the message to the transcript for the specified chat room.
                  
                 This call may be used to indicate successful delivery of a message sent via
@@ -190,7 +190,7 @@
 /*!
     @method     plugInDidJoinChatRoom:
 
-    @discussion When the IMServicePlugIn instance calls this method on the service application, iChat
+    @discussion When the IMServicePlugIn instance calls this method on the service application, Messages
                 indicates to the user that the specified chat room is now joined and ready to receive
                 messages.
                  

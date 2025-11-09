@@ -305,7 +305,7 @@ extern const NSString*		kIMKCommandClientName;
 /*!
     @method     
     @abstract   Returns a menu of input method specific commands.
-    @discussion This method is called whenever the menu needs to be drawn so that input methods can update the menu to reflect their current state. The returned NSMenu is an autoreleased.
+    @discussion This method is called whenever the menu needs to be drawn so that input methods can update the menu to reflect their current state. The returned NSMenu is an autoreleased object.
 */
 - (NSMenu*)menu;
 

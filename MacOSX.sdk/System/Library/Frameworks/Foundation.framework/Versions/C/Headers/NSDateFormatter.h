@@ -1,5 +1,5 @@
 /*	NSDateFormatter.h
-	Copyright (c) 1995-2011, Apple Inc. All rights reserved.
+	Copyright (c) 1995-2012, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSFormatter.h>
@@ -26,23 +26,21 @@
 - (NSString *)stringFromDate:(NSDate *)date;
 - (NSDate *)dateFromString:(NSString *)string;
 
-enum {    // date and time format styles
+typedef NS_ENUM(NSUInteger, NSDateFormatterStyle) {    // date and time format styles
     NSDateFormatterNoStyle = kCFDateFormatterNoStyle,
     NSDateFormatterShortStyle = kCFDateFormatterShortStyle,
     NSDateFormatterMediumStyle = kCFDateFormatterMediumStyle,
     NSDateFormatterLongStyle = kCFDateFormatterLongStyle,
     NSDateFormatterFullStyle = kCFDateFormatterFullStyle
 };
-typedef NSUInteger NSDateFormatterStyle;
 
-enum {
+typedef NS_ENUM(NSUInteger, NSDateFormatterBehavior) {
     NSDateFormatterBehaviorDefault = 0,
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
     NSDateFormatterBehavior10_0 = 1000,
 #endif
     NSDateFormatterBehavior10_4 = 1040,
 };
-typedef NSUInteger NSDateFormatterBehavior;
 
 
 + (NSString *)localizedStringFromDate:(NSDate *)date dateStyle:(NSDateFormatterStyle)dstyle timeStyle:(NSDateFormatterStyle)tstyle NS_AVAILABLE(10_6, 4_0);

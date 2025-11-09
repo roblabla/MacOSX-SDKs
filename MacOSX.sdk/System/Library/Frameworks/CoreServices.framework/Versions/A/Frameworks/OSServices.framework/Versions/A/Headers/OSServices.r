@@ -1,9 +1,9 @@
 /*
-     File:       OSServices.r
+     File:       OSServices/OSServices.r
  
      Contains:   Master include for OSServices private framework
  
-     Copyright:  © 2000-2010 by Apple Inc., all rights reserved.
+     Copyright:  (c) 2000-2012 Apple Inc. All rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -25,4 +25,3 @@
 
 
 #endif /* __OSSERVICES_R__ */
-

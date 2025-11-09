@@ -7,6 +7,8 @@
 
 #import "QuartzFilter.h"
 
+extern Boolean globalUpdateOK;
+
 @interface QuartzFilterView : NSView
 {
 }

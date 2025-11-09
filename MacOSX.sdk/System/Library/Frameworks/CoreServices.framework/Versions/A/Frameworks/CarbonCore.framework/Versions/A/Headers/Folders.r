@@ -2,16 +2,9 @@
      File:       Folders.r
  
      Contains:   Folder Manager Interfaces.
+                 The contents of this header file are deprecated.
  
-     Version:    CarbonCore-960.18~3
- 
-     Copyright:  © 1995-2008 by Apple Computer, Inc., all rights reserved.
- 
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
- 
-                     http://developer.apple.com/bugreporter/
- 
+     Copyright:  © 1995-2011 by Apple Inc. All rights reserved.
 */
 
 #ifndef __FOLDERS_R__

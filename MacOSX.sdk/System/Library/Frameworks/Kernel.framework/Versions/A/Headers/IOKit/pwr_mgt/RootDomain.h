@@ -30,7 +30,6 @@
 
 #include <IOKit/IOService.h>
 #include <IOKit/pwr_mgt/IOPM.h>
-#include "IOKit/pwr_mgt/IOPMPrivate.h"
 #include <IOKit/IOBufferMemoryDescriptor.h> 
 
 
@@ -299,7 +298,7 @@ public:
     @result On success, returns a new assertion of type IOPMDriverAssertionID *
 */
     IOReturn releasePMAssertion(IOPMDriverAssertionID releaseAssertion);
-
+        
 private:
     virtual IOReturn    changePowerStateTo( unsigned long ordinal );
     virtual IOReturn    changePowerStateToPriv( unsigned long ordinal );

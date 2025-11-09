@@ -4,10 +4,10 @@
  *	  Definitions for planner's internal data structures.
  *
  *
- * Portions Copyright (c) 1996-2010, PostgreSQL Global Development Group
+ * Portions Copyright (c) 1996-2011, PostgreSQL Global Development Group
  * Portions Copyright (c) 1994, Regents of the University of California
  *
- * $PostgreSQL: pgsql/src/include/nodes/relation.h,v 1.187 2010/07/06 19:19:00 momjian Exp $
+ * src/include/nodes/relation.h
  *
  *-------------------------------------------------------------------------
  */
@@ -46,6 +46,20 @@ typedef struct QualCost
 	Cost		per_tuple;		/* per-evaluation cost */
 } QualCost;
 
+/*
+ * Costing aggregate function execution requires these statistics about
+ * the aggregates to be executed by a given Agg node.  Note that transCost
+ * includes the execution costs of the aggregates' input expressions.
+ */
+typedef struct AggClauseCosts
+{
+	int			numAggs;		/* total number of aggregate functions */
+	int			numOrderedAggs; /* number that use DISTINCT or ORDER BY */
+	QualCost	transCost;		/* total per-input-row execution costs */
+	Cost		finalCost;		/* total costs of agg final functions */
+	Size		transitionSpace;	/* space for pass-by-ref transition data */
+} AggClauseCosts;
+
 
 /*----------
  * PlannerGlobal
@@ -75,6 +89,8 @@ typedef struct PlannerGlobal
 	List	   *finalrtable;	/* "flat" rangetable for executor */
 
 	List	   *finalrowmarks;	/* "flat" list of PlanRowMarks */
+
+	List	   *resultRelations;	/* "flat" list of integer RT indexes */
 
 	List	   *relationOids;	/* OIDs of relations the plan depends on */
 
@@ -154,8 +170,6 @@ typedef struct PlannerInfo
 	List	  **join_rel_level; /* lists of join-relation RelOptInfos */
 	int			join_cur_level; /* index of list being extended */
 
-	List	   *resultRelations;	/* integer list of RT indexes, or NIL */
-
 	List	   *init_plans;		/* init SubPlans for query */
 
 	List	   *cte_plan_ids;	/* per-CTE-item list of subplan IDs */
@@ -191,6 +205,8 @@ typedef struct PlannerInfo
 	List	   *distinct_pathkeys;		/* distinctClause pathkeys, if any */
 	List	   *sort_pathkeys;	/* sortClause pathkeys, if any */
 
+	List	   *minmax_aggs;	/* List of MinMaxAggInfos */
+
 	List	   *initial_rels;	/* RelOptInfos we are now trying to join */
 
 	MemoryContext planner_cxt;	/* context holding PlannerInfo */
@@ -198,6 +214,7 @@ typedef struct PlannerInfo
 	double		total_table_pages;		/* # of pages in all tables of query */
 
 	double		tuple_fraction; /* tuple_fraction passed to query_planner */
+	double		limit_tuples;	/* limit_tuples passed to query_planner */
 
 	bool		hasInheritedTarget;		/* true if parse->resultRelation is an
 										 * inheritance child rel */
@@ -210,6 +227,10 @@ typedef struct PlannerInfo
 	/* These fields are used only when hasRecursion is true: */
 	int			wt_param_id;	/* PARAM_EXEC ID for the work table */
 	struct Plan *non_recursive_plan;	/* plan for non-recursive term */
+
+	/* These fields are workspace for createplan.c */
+	Relids		curOuterRels;	/* outer rels above current node */
+	List	   *curOuterParams; /* not-yet-assigned NestLoopParams */
 
 	/* optional private data for join_search_hook, e.g., GEQO */
 	void	   *join_search_private;
@@ -254,9 +275,9 @@ typedef struct PlannerInfo
  * the entire append relation.	The member RTEs are otherrels.	The parent
  * is present in the query join tree but the members are not.  The member
  * RTEs and otherrels are used to plan the scans of the individual tables or
- * subqueries of the append set; then the parent baserel is given an Append
- * plan comprising the best plans for the individual member rels.  (See
- * comments for AppendRelInfo for more information.)
+ * subqueries of the append set; then the parent baserel is given Append
+ * and/or MergeAppend paths comprising the best paths for the individual
+ * member rels.  (See comments for AppendRelInfo for more information.)
  *
  * At one time we also made otherrels to represent join RTEs, for use in
  * handling join alias Vars.  Currently this is not needed because all join
@@ -416,23 +437,19 @@ typedef struct RelOptInfo
  * IndexOptInfo
  *		Per-index information for planning/optimization
  *
- *		Prior to Postgres 7.0, RelOptInfo was used to describe both relations
- *		and indexes, but that created confusion without actually doing anything
- *		useful.  So now we have a separate IndexOptInfo struct for indexes.
+ *		indexkeys[], indexcollations[], opfamily[], and opcintype[]
+ *		each have ncolumns entries.
  *
- *		opfamily[], indexkeys[], opcintype[], fwdsortop[], revsortop[],
- *		and nulls_first[] each have ncolumns entries.
- *		Note: for historical reasons, the opfamily array has an extra entry
- *		that is always zero.  Some code scans until it sees a zero entry,
- *		rather than looking at ncolumns.
+ *		sortopfamily[], reverse_sort[], and nulls_first[] likewise have
+ *		ncolumns entries, if the index is ordered; but if it is unordered,
+ *		those pointers are NULL.
  *
  *		Zeroes in the indexkeys[] array indicate index columns that are
  *		expressions; there is one element in indexprs for each such column.
  *
- *		For an unordered index, the sortop arrays contains zeroes.	Note that
- *		fwdsortop[] and nulls_first[] describe the sort ordering of a forward
- *		indexscan; we can also consider a backward indexscan, which will
- *		generate sort order described by revsortop/!nulls_first.
+ *		For an ordered index, reverse_sort[] and nulls_first[] describe the
+ *		sort ordering of a forward indexscan; we can also consider a backward
+ *		indexscan, which will generate the reverse ordering.
  *
  *		The indexprs and indpred expressions have been run through
  *		prepqual.c and eval_const_expressions() for ease of matching to
@@ -452,11 +469,12 @@ typedef struct IndexOptInfo
 
 	/* index descriptor information */
 	int			ncolumns;		/* number of columns in index */
-	Oid		   *opfamily;		/* OIDs of operator families for columns */
 	int		   *indexkeys;		/* column numbers of index's keys, or 0 */
+	Oid		   *indexcollations;	/* OIDs of collations of index columns */
+	Oid		   *opfamily;		/* OIDs of operator families for columns */
 	Oid		   *opcintype;		/* OIDs of opclass declared input data types */
-	Oid		   *fwdsortop;		/* OIDs of sort operators for each column */
-	Oid		   *revsortop;		/* OIDs of sort operators for backward scan */
+	Oid		   *sortopfamily;	/* OIDs of btree opfamilies, if orderable */
+	bool	   *reverse_sort;	/* is sort order descending? */
 	bool	   *nulls_first;	/* do NULLs come first in the sort order? */
 	Oid			relam;			/* OID of the access method (in pg_am) */
 
@@ -467,12 +485,15 @@ typedef struct IndexOptInfo
 
 	bool		predOK;			/* true if predicate matches query */
 	bool		unique;			/* true if a unique index */
+	bool		hypothetical;	/* true if index doesn't really exist */
+	bool		amcanorderbyop; /* does AM support order by operator result? */
 	bool		amoptionalkey;	/* can query omit key for the first column? */
 	bool		amsearchnulls;	/* can AM search for NULL/NOT NULL entries? */
 	bool		amhasgettuple;	/* does AM have amgettuple interface? */
 	bool		amhasgetbitmap; /* does AM have amgetbitmap interface? */
-	/* added in 9.0.4: */
-	bool		hypothetical;	/* true if index doesn't really exist */
+
+	/* Added at end of struct to avoid ABI breakage in released branches */
+	bool		immediate;		/* is uniqueness enforced immediately? */
 } IndexOptInfo;
 
 
@@ -486,10 +507,13 @@ typedef struct IndexOptInfo
  * require merging two existing EquivalenceClasses.  At the end of the qual
  * distribution process, we have sets of values that are known all transitively
  * equal to each other, where "equal" is according to the rules of the btree
- * operator family(s) shown in ec_opfamilies.  (We restrict an EC to contain
- * only equalities whose operators belong to the same set of opfamilies.  This
- * could probably be relaxed, but for now it's not worth the trouble, since
- * nearly all equality operators belong to only one btree opclass anyway.)
+ * operator family(s) shown in ec_opfamilies, as well as the collation shown
+ * by ec_collation.  (We restrict an EC to contain only equalities whose
+ * operators belong to the same set of opfamilies.	This could probably be
+ * relaxed, but for now it's not worth the trouble, since nearly all equality
+ * operators belong to only one btree opclass anyway.  Similarly, we suppose
+ * that all or none of the input datatypes are collatable, so that a single
+ * collation value is sufficient.)
  *
  * We also use EquivalenceClasses as the base structure for PathKeys, letting
  * us represent knowledge about different sort orderings being equivalent.
@@ -518,6 +542,7 @@ typedef struct EquivalenceClass
 	NodeTag		type;
 
 	List	   *ec_opfamilies;	/* btree operator family OIDs */
+	Oid			ec_collation;	/* collation, if datatypes are collatable */
 	List	   *ec_members;		/* list of EquivalenceMembers */
 	List	   *ec_sources;		/* list of generating RestrictInfos */
 	List	   *ec_derives;		/* list of derived RestrictInfos */
@@ -541,11 +566,18 @@ typedef struct EquivalenceClass
  * EquivalenceMember - one member expression of an EquivalenceClass
  *
  * em_is_child signifies that this element was built by transposing a member
- * for an inheritance parent relation to represent the corresponding expression
- * on an inheritance child.  The element should be ignored for all purposes
- * except constructing inner-indexscan paths for the child relation.  (Other
- * types of join are driven from transposed joininfo-list entries.)  Note
- * that the EC's ec_relids field does NOT include the child relation.
+ * for an appendrel parent relation to represent the corresponding expression
+ * for an appendrel child.  These members are used for determining the
+ * pathkeys of scans on the child relation and for explicitly sorting the
+ * child when necessary to build a MergeAppend path for the whole appendrel
+ * tree.  An em_is_child member has no impact on the properties of the EC as a
+ * whole; in particular the EC's ec_relids field does NOT include the child
+ * relation.  An em_is_child member should never be marked em_is_const nor
+ * cause ec_has_const or ec_has_volatile to be set, either.  Thus, em_is_child
+ * members are not really full-fledged members of the EC, but just reflections
+ * or doppelgangers of real members.  Most operations on EquivalenceClasses
+ * should ignore em_is_child members, and those that don't should test
+ * em_relids to make sure they only consider relevant members.
  *
  * em_datatype is usually the same as exprType(em_expr), but can be
  * different when dealing with a binary-compatible opfamily; in particular
@@ -571,9 +603,10 @@ typedef struct EquivalenceMember
  * represents the primary sort key, the second the first secondary sort key,
  * etc.  The value being sorted is represented by linking to an
  * EquivalenceClass containing that value and including pk_opfamily among its
- * ec_opfamilies.  This is a convenient method because it makes it trivial
- * to detect equivalent and closely-related orderings.	(See optimizer/README
- * for more information.)
+ * ec_opfamilies.  The EquivalenceClass tells which collation to use, too.
+ * This is a convenient method because it makes it trivial to detect
+ * equivalent and closely-related orderings. (See optimizer/README for more
+ * information.)
  *
  * Note: pk_strategy is either BTLessStrategyNumber (for ASC) or
  * BTGreaterStrategyNumber (for DESC).	We assume that all ordering-capable
@@ -632,6 +665,13 @@ typedef struct Path
  * indexable operators appear in 'indexclauses', they are replaced by the
  * derived indexscannable conditions in 'indexquals'.
  *
+ * 'indexorderbys', if not NIL, is a list of ORDER BY expressions that have
+ * been found to be usable as ordering operators for an amcanorderbyop index.
+ * Note that these are not RestrictInfos, just bare expressions, since they
+ * generally won't yield booleans.  The list will match the path's pathkeys.
+ * Also, unlike the case for quals, it's guaranteed that each expression has
+ * the index key on the left side of the operator.
+ *
  * 'isjoininner' is TRUE if the path is a nestloop inner scan (that is,
  * some of the index conditions are join rather than restriction clauses).
  * Note that the path costs will be calculated differently from a plain
@@ -664,6 +704,7 @@ typedef struct IndexPath
 	IndexOptInfo *indexinfo;
 	List	   *indexclauses;
 	List	   *indexquals;
+	List	   *indexorderbys;
 	bool		isjoininner;
 	ScanDirection indexscandir;
 	Cost		indextotalcost;
@@ -738,6 +779,16 @@ typedef struct TidPath
 } TidPath;
 
 /*
+ * ForeignPath represents a scan of a foreign table
+ */
+typedef struct ForeignPath
+{
+	Path		path;
+	/* use struct pointer to avoid including fdwapi.h here */
+	struct FdwPlan *fdwplan;
+} ForeignPath;
+
+/*
  * AppendPath represents an Append plan, ie, successive execution of
  * several member plans.
  *
@@ -754,6 +805,17 @@ typedef struct AppendPath
 
 #define IS_DUMMY_PATH(p) \
 	(IsA((p), AppendPath) && ((AppendPath *) (p))->subpaths == NIL)
+
+/*
+ * MergeAppendPath represents a MergeAppend plan, ie, the merging of sorted
+ * results from several member plans to produce similarly-sorted output.
+ */
+typedef struct MergeAppendPath
+{
+	Path		path;
+	List	   *subpaths;		/* list of component Paths */
+	double		limit_tuples;	/* hard limit on output tuples, or -1 */
+} MergeAppendPath;
 
 /*
  * ResultPath represents use of a Result plan node to compute a variable-free
@@ -1084,6 +1146,7 @@ typedef struct MergeScanSelCache
 {
 	/* Ordering details (cache lookup key) */
 	Oid			opfamily;		/* btree opfamily defining the ordering */
+	Oid			collation;		/* collation for the ordering */
 	int			strategy;		/* sort direction (ASC or DESC) */
 	bool		nulls_first;	/* do NULLs come before normal values? */
 	/* Results */
@@ -1347,19 +1410,45 @@ typedef struct PlaceHolderInfo
 } PlaceHolderInfo;
 
 /*
+ * For each potentially index-optimizable MIN/MAX aggregate function,
+ * root->minmax_aggs stores a MinMaxAggInfo describing it.
+ */
+typedef struct MinMaxAggInfo
+{
+	NodeTag		type;
+
+	Oid			aggfnoid;		/* pg_proc Oid of the aggregate */
+	Oid			aggsortop;		/* Oid of its sort operator */
+	Expr	   *target;			/* expression we are aggregating on */
+	PlannerInfo *subroot;		/* modified "root" for planning the subquery */
+	Path	   *path;			/* access path for subquery */
+	Cost		pathcost;		/* estimated cost to fetch first row */
+	Param	   *param;			/* param for subplan's output */
+} MinMaxAggInfo;
+
+/*
  * glob->paramlist keeps track of the PARAM_EXEC slots that we have decided
  * we need for the query.  At runtime these slots are used to pass values
- * either down into subqueries (for outer references in subqueries) or up out
- * of subqueries (for the results of a subplan).  The n'th entry in the list
- * (n counts from 0) corresponds to Param->paramid = n.
+ * around from one plan node to another.  They can be used to pass values
+ * down into subqueries (for outer references in subqueries), or up out of
+ * subqueries (for the results of a subplan), or from a NestLoop plan node
+ * into its inner relation (when the inner scan is parameterized with values
+ * from the outer relation).  The n'th entry in the list (n counts from 0)
+ * corresponds to Param->paramid = n.
  *
  * Each paramlist item shows the absolute query level it is associated with,
  * where the outermost query is level 1 and nested subqueries have higher
- * numbers.  The item the parameter slot represents can be one of three kinds:
+ * numbers.  The item the parameter slot represents can be one of four kinds:
  *
  * A Var: the slot represents a variable of that level that must be passed
- * down because subqueries have outer references to it.  The varlevelsup
+ * down because subqueries have outer references to it, or must be passed
+ * from a NestLoop node of that level to its inner scan.  The varlevelsup
  * value in the Var will always be zero.
+ *
+ * A PlaceHolderVar: this works much like the Var case, except that the
+ * entry is a PlaceHolderVar node with a contained expression.  The PHV
+ * will have phlevelsup = 0, and the contained expression is adjusted
+ * to match in level.
  *
  * An Aggref (with an expression tree representing its argument): the slot
  * represents an aggregate expression that is an outer reference for some
@@ -1370,14 +1459,20 @@ typedef struct PlaceHolderInfo
  * for that subplan).  The absolute level shown for such items corresponds
  * to the parent query of the subplan.
  *
- * Note: we detect duplicate Var parameters and coalesce them into one slot,
- * but we do not do this for Aggref or Param slots.
+ * Note: we detect duplicate Var and PlaceHolderVar parameters and coalesce
+ * them into one slot, but we do not bother to do this for Aggrefs, and it
+ * would be incorrect to do so for Param slots.  Duplicate detection is
+ * actually *necessary* for NestLoop parameters since it serves to match up
+ * the usage of a Param (in the inner scan) with the assignment of the value
+ * (in the NestLoop node). This might result in the same PARAM_EXEC slot being
+ * used by multiple NestLoop nodes or SubPlan nodes, but no harm is done since
+ * the same value would be assigned anyway.
  */
 typedef struct PlannerParamItem
 {
 	NodeTag		type;
 
-	Node	   *item;			/* the Var, Aggref, or Param */
+	Node	   *item;			/* the Var, PlaceHolderVar, Aggref, or Param */
 	Index		abslevel;		/* its absolute query level */
 } PlannerParamItem;
 

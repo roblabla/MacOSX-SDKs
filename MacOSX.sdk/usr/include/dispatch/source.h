@@ -2,19 +2,19 @@
  * Copyright (c) 2008-2011 Apple Inc. All rights reserved.
  *
  * @APPLE_APACHE_LICENSE_HEADER_START@
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * @APPLE_APACHE_LICENSE_HEADER_END@
  */
 
@@ -190,7 +190,7 @@ const struct dispatch_source_type_s _dispatch_source_type_write;
  * @constant DISPATCH_MACH_SEND_DEAD
  * The receive right corresponding to the given send right was destroyed.
  */
-#define DISPATCH_MACH_SEND_DEAD 0x1
+#define DISPATCH_MACH_SEND_DEAD	0x1
 
 typedef unsigned long dispatch_source_mach_send_flags_t;
 
@@ -211,10 +211,10 @@ typedef unsigned long dispatch_source_mach_send_flags_t;
  * @constant DISPATCH_PROC_SIGNAL
  * A Unix signal was delivered to the process.
  */
-#define	DISPATCH_PROC_EXIT   0x80000000
-#define	DISPATCH_PROC_FORK   0x40000000
-#define	DISPATCH_PROC_EXEC   0x20000000
-#define	DISPATCH_PROC_SIGNAL 0x08000000
+#define DISPATCH_PROC_EXIT		0x80000000
+#define DISPATCH_PROC_FORK		0x40000000
+#define DISPATCH_PROC_EXEC		0x20000000
+#define DISPATCH_PROC_SIGNAL	0x08000000
 
 typedef unsigned long dispatch_source_proc_flags_t;
 
@@ -244,13 +244,13 @@ typedef unsigned long dispatch_source_proc_flags_t;
  * The filesystem object was revoked.
  */
 
-#define	DISPATCH_VNODE_DELETE  0x1
-#define	DISPATCH_VNODE_WRITE   0x2
-#define	DISPATCH_VNODE_EXTEND  0x4
-#define	DISPATCH_VNODE_ATTRIB  0x8
-#define	DISPATCH_VNODE_LINK	   0x10
-#define	DISPATCH_VNODE_RENAME  0x20
-#define	DISPATCH_VNODE_REVOKE  0x40
+#define DISPATCH_VNODE_DELETE	0x1
+#define DISPATCH_VNODE_WRITE	0x2
+#define DISPATCH_VNODE_EXTEND	0x4
+#define DISPATCH_VNODE_ATTRIB	0x8
+#define DISPATCH_VNODE_LINK		0x10
+#define DISPATCH_VNODE_RENAME	0x20
+#define DISPATCH_VNODE_REVOKE	0x40
 
 typedef unsigned long dispatch_source_vnode_flags_t;
 
@@ -288,7 +288,8 @@ __BEGIN_DECLS
  * handler block to the default priority global queue.
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_4_0)
-DISPATCH_EXPORT DISPATCH_MALLOC DISPATCH_WARN_RESULT DISPATCH_NOTHROW
+DISPATCH_EXPORT DISPATCH_MALLOC DISPATCH_RETURNS_RETAINED DISPATCH_WARN_RESULT
+DISPATCH_NOTHROW
 dispatch_source_t
 dispatch_source_create(dispatch_source_type_t type,
 	uintptr_t handle,
@@ -304,7 +305,7 @@ dispatch_source_create(dispatch_source_type_t type,
  * @param source
  * The dispatch source to modify.
  * The result of passing NULL in this parameter is undefined.
- * 
+ *
  * @param handler
  * The event handler block to submit to the source's target queue.
  */
@@ -361,7 +362,7 @@ dispatch_source_set_event_handler_f(dispatch_source_t source,
  * @param source
  * The dispatch source to modify.
  * The result of passing NULL in this parameter is undefined.
- * 
+ *
  * @param handler
  * The cancellation handler block to submit to the source's target queue.
  */
@@ -438,7 +439,8 @@ dispatch_source_cancel(dispatch_source_t source);
  * Non-zero if canceled and zero if not canceled.
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_4_0)
-DISPATCH_EXPORT DISPATCH_NONNULL_ALL DISPATCH_WARN_RESULT DISPATCH_PURE DISPATCH_NOTHROW
+DISPATCH_EXPORT DISPATCH_NONNULL_ALL DISPATCH_WARN_RESULT DISPATCH_PURE
+DISPATCH_NOTHROW
 long
 dispatch_source_testcancel(dispatch_source_t source);
 
@@ -461,13 +463,14 @@ dispatch_source_testcancel(dispatch_source_t source);
  *  DISPATCH_SOURCE_TYPE_MACH_RECV:       mach port (mach_port_t)
  *  DISPATCH_SOURCE_TYPE_PROC:            process identifier (pid_t)
  *  DISPATCH_SOURCE_TYPE_READ:            file descriptor (int)
- *  DISPATCH_SOURCE_TYPE_SIGNAL:          signal number (int) 
+ *  DISPATCH_SOURCE_TYPE_SIGNAL:          signal number (int)
  *  DISPATCH_SOURCE_TYPE_TIMER:           n/a
  *  DISPATCH_SOURCE_TYPE_VNODE:           file descriptor (int)
  *  DISPATCH_SOURCE_TYPE_WRITE:           file descriptor (int)
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_4_0)
-DISPATCH_EXPORT DISPATCH_NONNULL_ALL DISPATCH_WARN_RESULT DISPATCH_PURE DISPATCH_NOTHROW
+DISPATCH_EXPORT DISPATCH_NONNULL_ALL DISPATCH_WARN_RESULT DISPATCH_PURE
+DISPATCH_NOTHROW
 uintptr_t
 dispatch_source_get_handle(dispatch_source_t source);
 
@@ -496,7 +499,8 @@ dispatch_source_get_handle(dispatch_source_t source);
  *  DISPATCH_SOURCE_TYPE_WRITE:           n/a
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_4_0)
-DISPATCH_EXPORT DISPATCH_NONNULL_ALL DISPATCH_WARN_RESULT DISPATCH_PURE DISPATCH_NOTHROW
+DISPATCH_EXPORT DISPATCH_NONNULL_ALL DISPATCH_WARN_RESULT DISPATCH_PURE
+DISPATCH_NOTHROW
 unsigned long
 dispatch_source_get_mask(dispatch_source_t source);
 
@@ -532,7 +536,8 @@ dispatch_source_get_mask(dispatch_source_t source);
  *  DISPATCH_SOURCE_TYPE_WRITE:           estimated buffer space available
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_4_0)
-DISPATCH_EXPORT DISPATCH_NONNULL_ALL DISPATCH_WARN_RESULT DISPATCH_PURE DISPATCH_NOTHROW
+DISPATCH_EXPORT DISPATCH_NONNULL_ALL DISPATCH_WARN_RESULT DISPATCH_PURE
+DISPATCH_NOTHROW
 unsigned long
 dispatch_source_get_data(dispatch_source_t source);
 
@@ -565,15 +570,15 @@ dispatch_source_merge_data(dispatch_source_t source, unsigned long value);
  *
  * @discussion
  * Calling this function has no effect if the timer source has already been
- * canceled. Once this function returns, any pending timer data accumulated 
+ * canceled. Once this function returns, any pending timer data accumulated
  * for the previous timer values has been cleared
- * 
+ *
  * The start time argument also determines which clock will be used for the
  * timer. If the start time is DISPATCH_TIME_NOW or created with
  * dispatch_time() then the timer is based on mach_absolute_time(). Otherwise,
  * if the start time of the timer is created with dispatch_walltime() then the
  * timer is based on gettimeofday(3).
- * 
+ *
  * @param start
  * The start time of the timer. See dispatch_time() and dispatch_walltime()
  * for more information.

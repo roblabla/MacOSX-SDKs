@@ -28,13 +28,13 @@ enum {
     JVMTI_VERSION = 0x30000000 + (1 * 0x10000) + (1 * 0x100) + 102  /* version: 1.1.102 */
 };
 
-JNIEXPORT jint JNICALL 
+JNIEXPORT jint JNICALL __attribute__((deprecated))
 Agent_OnLoad(JavaVM *vm, char *options, void *reserved);
 
-JNIEXPORT jint JNICALL
+JNIEXPORT jint JNICALL __attribute__((deprecated))
 Agent_OnAttach(JavaVM* vm, char* options, void* reserved);
 
-JNIEXPORT void JNICALL 
+JNIEXPORT void JNICALL __attribute__((deprecated))
 Agent_OnUnload(JavaVM *vm);
 
     /* Forward declaration of the environment */

@@ -3,7 +3,7 @@
 
 	Framework:  CoreMedia
  
-    Copyright 2005-2011 Apple Inc. All rights reserved.
+    Copyright 2005-2012 Apple Inc. All rights reserved.
 
 */
 
@@ -71,7 +71,7 @@ typedef const struct opaqueCMFormatDescription *CMFormatDescriptionRef;
 	@constant kCMMediaType_ClosedCaption Closed-caption media
 	@constant kCMMediaType_Subtitle Subtitle media
 	@constant kCMMediaType_TimeCode TimeCode media
-	@constant kCMMediaType_TimedMetadata Timed meta data
+	@constant kCMMediaType_Metadata Metadata media
 */
 enum {
 	kCMMediaType_Video				= 'vide',
@@ -81,7 +81,7 @@ enum {
 	kCMMediaType_ClosedCaption		= 'clcp',
 	kCMMediaType_Subtitle			= 'sbtl',
 	kCMMediaType_TimeCode			= 'tmcd',
-	kCMMediaType_TimedMetadata		= 'tmet'
+	kCMMediaType_Metadata			= 'meta'
 };
 typedef FourCharCode CMMediaType;
 
@@ -482,6 +482,7 @@ typedef CMFormatDescriptionRef CMVideoFormatDescriptionRef;
 /*!
 	@enum CMPixelFormatType
 	@discussion Four-character codes identifying the pixel format. Only some codec types are pixel formats.
+		In general, CoreVideo CVPixelFormatType constants may be used too.
 	@constant	kCMPixelFormat_32ARGB 32-bit ARGB
 	@constant	kCMPixelFormat_32BGRA 32-bit BGRA
 	@constant	kCMPixelFormat_24RGB 24-bit RGB
@@ -633,6 +634,8 @@ CM_EXPORT const CFStringRef kCMFormatDescriptionKey_CleanApertureVerticalOffsetR
 #define kCMFormatDescriptionColorPrimaries_ITU_R_709_2			kCVImageBufferColorPrimaries_ITU_R_709_2		// CFString
 #define kCMFormatDescriptionColorPrimaries_EBU_3213				kCVImageBufferColorPrimaries_EBU_3213			// CFString
 #define kCMFormatDescriptionColorPrimaries_SMPTE_C				kCVImageBufferColorPrimaries_SMPTE_C			// CFString
+CM_EXPORT const CFStringRef kCMFormatDescriptionColorPrimaries_P22												// same as kCVImageBufferColorPrimaries_P22
+							__OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_6_0);
 
 #define kCMFormatDescriptionExtension_TransferFunction			kCVImageBufferTransferFunctionKey				// CFString describing the transfer function. This key can be one of the following values:
 #define kCMFormatDescriptionTransferFunction_ITU_R_709_2		kCVImageBufferTransferFunction_ITU_R_709_2		// CFString
@@ -988,6 +991,7 @@ enum {
     kCMTextDisplayFlag_continuousKaraoke           = 0x00000800,
     kCMTextDisplayFlag_writeTextVertically         = 0x00020000,
     kCMTextDisplayFlag_fillTextRegion              = 0x00040000,
+    kCMTextDisplayFlag_obeySubtitleFormatting      = 0x20000000,
     kCMTextDisplayFlag_forcedSubtitlesPresent      = 0x40000000,
     kCMTextDisplayFlag_allSubtitlesForced          = 0x80000000,
 };
@@ -1157,6 +1161,17 @@ OSStatus CMTextFormatDescriptionGetFontName(
 									Name of the font. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
+#pragma mark CMSubtitleFormatDescription
+	
+enum {
+    kCMSubtitleFormatType_3GText = 'tx3g',
+	kCMSubtitleFormatType_WebVTT = 'wvtt',
+};
+
+typedef FourCharCode CMSubtitleFormatType;
+	
+#define CMSubtitleFormatDescriptionGetFormatType(desc)	CMFormatDescriptionGetMediaSubType(desc)
+
 #pragma mark CMTimeCodeFormatDescription
 
 /*! 
@@ -1275,15 +1290,15 @@ typedef CMFormatDescriptionRef CMMetadataFormatDescriptionRef;
 
 /*!
 	@enum CMMetadataFormatType
-	@discussion The types of TimedMetadata.
-	@constant	kCMTimedMetadataFormatType_ICY	SHOUTCast format kCMMediaType_TimedMetadata.
-	@constant	kCMTimedMetadataFormatType_ID3	ID3 format kCMMediaType_TimedMetadata.
-	@constant	kCMTimedMetadataFormatType_Boxed	CoreMedia format kCMMediaType_TimedMetadata.
+	@discussion The subtypes of Metadata media type.
+	@constant	kCMMetadataFormatType_ICY		SHOUTCast format.
+	@constant	kCMMetadataFormatType_ID3		ID3 format.
+	@constant	kCMMetadataFormatType_Boxed		Boxed format.
 */
 enum {
-	kCMTimedMetadataFormatType_ICY   = 'icy ',
-	kCMTimedMetadataFormatType_ID3   = 'id3 ',
-	kCMTimedMetadataFormatType_Boxed = 'mebx',
+	kCMMetadataFormatType_ICY   = 'icy ',
+	kCMMetadataFormatType_ID3   = 'id3 ',
+	kCMMetadataFormatType_Boxed = 'mebx',
 };
 typedef FourCharCode CMMetadataFormatType;
 

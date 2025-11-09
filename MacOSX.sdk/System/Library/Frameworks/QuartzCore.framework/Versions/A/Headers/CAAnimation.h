@@ -10,7 +10,8 @@
 
 /** The base animation class. **/
 
-@interface CAAnimation : NSObject <NSCoding, NSCopying, CAMediaTiming, CAAction>
+@interface CAAnimation : NSObject
+    <NSCoding, NSCopying, CAMediaTiming, CAAction>
 {
 @private
   void *_attr;
@@ -39,7 +40,7 @@
 @property(retain) id delegate;
 
 /* When true, the animation is removed from the render tree once its
- * active duration has passed. Defaults to true. */
+ * active duration has passed. Defaults to YES. */
 
 @property(getter=isRemovedOnCompletion) BOOL removedOnCompletion;
 
@@ -80,7 +81,7 @@
  * the current presentation value of the property to produce the new
  * presentation value. The addition function is type-dependent, e.g.
  * for affine transforms the two matrices are concatenated. Defaults to
- * false. */
+ * NO. */
 
 @property(getter=isAdditive) BOOL additive;
 
@@ -88,7 +89,7 @@
  * their result. If true then the current value of the animation is the
  * value at the end of the previous repeat cycle, plus the value of the
  * current repeat cycle. If false, the value is simply the value
- * calculated for the current repeat cycle. Defaults to false. */
+ * calculated for the current repeat cycle. Defaults to NO. */
 
 @property(getter=isCumulative) BOOL cumulative;
 

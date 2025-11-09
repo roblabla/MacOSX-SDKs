@@ -3,9 +3,7 @@
  
      Contains:   Low level interfaces for recovering space
  
-     Version:    CarbonCore-960.18~3
- 
-     Copyright:  © 2008 by Apple Computer, Inc.  All rights reserved
+     Copyright:  Â© 2008-2011 by Apple Inc. All rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -30,7 +28,7 @@
 
 #include <dispatch/dispatch.h>
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -124,7 +122,7 @@ CSDiskSpaceStartRecovery(
   CSDiskSpaceRecoveryOptions    options,
   CFUUIDRef *                   outOperationUUID,
   dispatch_queue_t              callbackQueue,
-  CSDiskSpaceRecoveryCallback   callback)                     AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+  CSDiskSpaceRecoveryCallback   callback)                     __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA);
 
 
 
@@ -152,7 +150,7 @@ CSDiskSpaceStartRecovery(
  *    Non-Carbon CFM:   not available
  */
 extern void 
-CSDiskSpaceCancelRecovery(CFUUIDRef operationUUID)            AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+CSDiskSpaceCancelRecovery(CFUUIDRef operationUUID)            __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA);
 
 
 /*
@@ -185,7 +183,7 @@ CSDiskSpaceCancelRecovery(CFUUIDRef operationUUID)            AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern UInt64 
-CSDiskSpaceGetRecoveryEstimate(CFURLRef volumeURL)            AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+CSDiskSpaceGetRecoveryEstimate(CFURLRef volumeURL)            __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA);
 
 
 

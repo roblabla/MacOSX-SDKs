@@ -1,6 +1,6 @@
 /*	
     NSURLRequest.h
-    Copyright (c) 2003-2011, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2012, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -282,6 +282,15 @@ typedef NSUInteger NSURLRequestNetworkServiceType;
  */
 - (NSURLRequestNetworkServiceType)networkServiceType NS_AVAILABLE(10_7, 4_0);
 
+/*! 
+ @method allowsCellularAccess:
+ @abstract returns whether a connection created with this request is allowed to use
+ the built in cellular radios (if present).
+ @result YES if the receiver is allowed to use the built in cellular radios to
+ satify the request, NO otherwise.
+ */
+- (BOOL)allowsCellularAccess  NS_AVAILABLE(10_8, 6_0);
+
 @end
 
 
@@ -372,6 +381,15 @@ typedef NSUInteger NSURLRequestNetworkServiceType;
  of the request.  Most clients should not need to use this method.
  */
 - (void)setNetworkServiceType:(NSURLRequestNetworkServiceType)networkServiceType NS_AVAILABLE(10_7, 4_0);
+
+/*! 
+ @method setAllowsCellularAccess
+ @abstract sets whether a connection created with this request is allowed to use
+ the built in cellular radios (if present).
+ @param allow NO if the receiver should not be allowed to use the built in
+ cellular radios to satisfy the request, YES otherwise.  The default is YES.
+ */
+- (void)setAllowsCellularAccess:(BOOL)allow NS_AVAILABLE(10_8, 6_0);
 
 @end
 

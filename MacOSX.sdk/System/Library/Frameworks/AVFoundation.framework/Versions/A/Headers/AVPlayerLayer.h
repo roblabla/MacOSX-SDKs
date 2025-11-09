@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010 Apple Inc. All rights reserved.
+	Copyright 2010-2012 Apple Inc. All rights reserved.
 
 */
 
@@ -66,8 +66,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 	@abstract		A string defining how the video is displayed within an AVPlayerLayer bounds rect.
 	@discusssion	Options are AVLayerVideoGravityResizeAspect, AVLayerVideoGravityResizeAspectFill 
  					and AVLayerVideoGravityResize. AVLayerVideoGravityResizeAspect is default. 
-                    See <AVFoundation/AVAnimation.h> for a description of these options.
- 					This property is animatable.
+					See <AVFoundation/AVAnimation.h> for a description of these options.
  */
 @property(copy) NSString *videoGravity;
 

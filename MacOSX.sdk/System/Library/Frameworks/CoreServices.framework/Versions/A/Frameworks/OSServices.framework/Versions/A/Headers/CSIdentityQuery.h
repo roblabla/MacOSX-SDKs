@@ -3,7 +3,7 @@
  
      Contains:   Identity Query APIs
  
-     Copyright:  � 2006-2010 by Apple Inc., all rights reserved.
+     Copyright:  (c) 2006-2011 Apple Inc. All rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -11,6 +11,7 @@
                      http://developer.apple.com/bugreporter/
  
 */
+
 #ifndef __CSIDENTITYQUERY__
 #define __CSIDENTITYQUERY__
 
@@ -21,7 +22,7 @@
 
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -308,7 +309,7 @@ CSIdentityQueryCreateForPosixID(
 extern CSIdentityQueryRef 
 CSIdentityQueryCreateForPersistentReference(
   CFAllocatorRef   allocator,
-  CFDataRef        referenceData)                             __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+  CFDataRef        referenceData)                             __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_5_0);
 
 
 

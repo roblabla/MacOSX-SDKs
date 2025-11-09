@@ -1,7 +1,7 @@
 /*
 	NSDocumentController.h
 	Application Kit
-	Copyright (c) 1997-2011, Apple Inc.
+	Copyright (c) 1997-2012, Apple Inc.
 	All rights reserved.
 */
 
@@ -83,7 +83,7 @@ For backward binary compatibility with Mac OS 10.3 and earlier, the default impl
 
 #pragma mark *** Document Opening ***
 
-/* The action of the File menu's Open... item in a document-based application. The default implementation of this method invokes -URLsFromRunningOpenPanel, unless -fileNamesFromRunningOpenPanel is overridden, in which case that method is invoked instead for backward binary compatibility with Mac OS 10.3 and earlier. If something other than nil is returned, it invokes -openDocumentWithContentsOfURL:display:completionHandler: for each URL and, if an error is signaled for any of them, presents the error in an application-modal panel.
+/* The action of the File menu's Open... item in a document-based application. The default implementation of this method invokes -beginOpenPanelWithCompletionHandler:, unless -fileNamesFromRunningOpenPanel is overridden, in which case that method is invoked instead for backward binary compatibility with Mac OS 10.3 and earlier. If an array other than nil is obtained from that call, it invokes -openDocumentWithContentsOfURL:display:completionHandler: for each URL and, if an error is signaled for any of them, presents the error in an application-modal panel.
 */
 - (IBAction)openDocument:(id)sender;
 
@@ -94,6 +94,18 @@ For backward binary compatibility with Mac OS 10.3 and earlier, the default impl
 /* Present the application-modal open panel to the user, specifying a list of UTIs (in Mac OS 10.5), file name extensions, and encoded HFS file types for openable files. Return NSOKButton or NSCancelButton depending on how the user dismisses the panel.
 */
 - (NSInteger)runModalOpenPanel:(NSOpenPanel *)openPanel forTypes:(NSArray *)types;
+
+/* Present an open panel, which may or may not be application-modal, to the user and, if the user selects one or more files and indicates that they are to be opened, invoke the completion handler with an array of those files' URLs. Invoke the completion handler with nil otherwise. The default implementation of this method invokes -beginOpenPanel:forTypes:completionHandler:. However, for backward binary compatibility, it invokes -runModalOpenPanel:forTypes: instead if you override it in a subclass and not -beginOpenPanel:forTypes:completionHandler:.
+
+If you override -[NSDocumentController openDocument:], you would typically want to invoke this method instead of -beginOpenPanel:forTypes:completionHandler: or -URLsFromRunningOpenPanel directly. You typically would not override this method without calling super.
+*/
+- (void)beginOpenPanelWithCompletionHandler:(void (^)(NSArray *))completionHandler NS_AVAILABLE_MAC(10_8);
+
+/* Present an open panel, which may or may not be application-modal, to the user, specifying a list of UTIs for openable files. Invoke the completion handler with NSOKButton or NSCancelButton depending on how the user dismisses the panel.
+
+You typically would not invoke this method directly. You can override it though if you need to customize the open panel before it gets displayed.
+*/
+- (void)beginOpenPanel:(NSOpenPanel *)openPanel forTypes:(NSArray *)inTypes completionHandler:(void (^)(NSInteger result))completionHandler NS_AVAILABLE_MAC(10_8);
 
 #if NS_BLOCKS_AVAILABLE
 

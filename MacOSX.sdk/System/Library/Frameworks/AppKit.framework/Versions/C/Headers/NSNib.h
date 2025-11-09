@@ -1,7 +1,7 @@
 /*
 	NSNib.h
 	Application Kit
-	Copyright (c) 2003-2011, Apple Inc.
+	Copyright (c) 2003-2012, Apple Inc.
 	All rights reserved.
 
 NSNib serves as a wrapper around a single InterfaceBuilder nib.  When an NSNib instance is created from a nib file, all of the data needed to instantiate the nib (the object graph as well as images and sounds that might be in the nib bundle) are read from the disk, however the nib is not instantiated until you call one of the instantiation methods.
@@ -32,52 +32,40 @@ As are all NSObjects, instantiated nib objects are allocated in a memory zone (N
     } _flags;
     NSString *_path;
     id reserved2;
-
 }
 
-// Initializes an instance with the nib file located at nibFileURL.  Since the nib is
-// not associated with a bundle, during nib instantiation, the owner's bundle will
-// be used for its resource map.  If no owner is specified, then the main bundle is used.
-//
-- (id)initWithContentsOfURL:(NSURL *)nibFileURL;
 
 // Initializes an instance with a nib file called nibName in the specified bundle.
 // If bundle is nil, it tries to find the nib in the main bundle.
-// The resulting bundle is used for its resource map during instantiation.
+// The resulting bundle is used for locating resources such as images and localized
+// strings.
 //
 - (id)initWithNibNamed:(NSString *)nibName bundle:(NSBundle *)bundle;
 
-// This is the primitive method to perform instantiations of the nib.
-// A nib may be instantiated multiple times, each time creating a distinct object
-// tree and top level objects.  Furthermore, each instantiation of the nib
-// must have a distict owner instance that will be responsible for the
-// resulting object tree.  The possible defines for the externalNameTable
-// dictionary are:
-//      NSNibOwner = the object that will own the new instance (File's Owner)
-//      NSNibTopLevelObjects = NSMutableArray, if present will be filled with
-//                             the top level objects of the newly instantiated nib.
-// Returns YES if nib was successfully instantiated.
-//
-- (BOOL)instantiateNibWithExternalNameTable:(NSDictionary *)externalNameTable;
+// Initializes an instance with nib data and specified bundle for locating resources
+// such as images and localized strings. If bundle is nil, the main bundle is assumed.
+// 
+- (id)initWithNibData:(NSData *)nibData bundle:(NSBundle *)bundle NS_AVAILABLE_MAC(10_8);
 
-// This is a convenience method that calls the primitive with the specified owner.
-// If topLevelObjects is non-nil, upon return it will point to an array of the
-// new instance's top level objects.
-// Returns YES if nib was successfully instantiated.
+// Instantiates objects in the nib file with the specified owner.
+// Upon success, the method returns YES and the topLevelObject out-parameter
+// is optionally an array containing the top level objects of the nib file.
+// Note: Unlike legacy methods, the objects adhere to standard Cocoa memory 
+// management rules; it is necessary to keep a strong reference to the objects
+// or the array to prevent the nib contents from being deallocated. Outlets to
+// top level objects should be strong (retain) to demonstrate ownership and
+// prevent deallocation.
 //
-- (BOOL)instantiateNibWithOwner:(id)owner topLevelObjects:(NSArray **)topLevelObjects;
+- (BOOL)instantiateWithOwner:(id)owner topLevelObjects:(NSArray **)topLevelObjects NS_AVAILABLE_MAC(10_8);
 
 @end
 
+@interface NSNib (NSDeprecated)
+- (id)initWithContentsOfURL:(NSURL *)nibFileURL; // Deprecated in Mac OS X 10.8
+- (BOOL)instantiateNibWithExternalNameTable:(NSDictionary *)externalNameTable; // Deprecated in Mac OS X 10.8
+- (BOOL)instantiateNibWithOwner:(id)owner topLevelObjects:(NSArray **)topLevelObjects NS_DEPRECATED_MAC(10_3, 10_8); // Deprecated in Mac OS X 10.8
+@end
+
 // ** External Name Table Keys **
-// Note: the actual values of these defines match the
-// older NSBundle nib loading values for backward compatibility.
-
-// This should specify the nib file's owner (required)
-APPKIT_EXTERN NSString *NSNibOwner;
-
-// This should be an NSMutableArray that will be filled with the top level objects
-// of the newly instantiated nib (opional)
-APPKIT_EXTERN NSString *NSNibTopLevelObjects;
-
-
+APPKIT_EXTERN NSString *NSNibOwner; // Deprecated in Mac OS X 10.8
+APPKIT_EXTERN NSString *NSNibTopLevelObjects; // Deprecated in Mac OS X 10.8

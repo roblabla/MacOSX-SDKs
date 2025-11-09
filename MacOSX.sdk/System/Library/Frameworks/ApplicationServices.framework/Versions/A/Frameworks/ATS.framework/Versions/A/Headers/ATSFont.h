@@ -5,7 +5,7 @@
  
      Version:    ATS
  
-     Copyright:  © 2000-2011 by Apple Inc., all rights reserved.
+     Copyright:  ï¿½ 2000-2012 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -22,6 +22,10 @@
 
 #ifndef __COREFOUNDATION__
 #include <CoreFoundation/CoreFoundation.h>
+#endif
+
+#ifndef __ATSDEFINES__
+#include <ATS/ATSDefines.h>
 #endif
 
 #ifndef __ATSTYPES__
@@ -221,7 +225,7 @@ typedef CALLBACK_API_C( void , ATSNotificationCallback )(ATSFontNotificationInfo
  *    Non-Carbon CFM:   not available
  */
 extern ATSGeneration 
-ATSGetGeneration(void)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+ATSGetGeneration(void) ATS_AVAILABLE_BUT_DEPRECATED_WITH_ADVICE(10_0, 10_8, "Register for kCTFontManagerRegisteredFontsChangedNotification notifications");
 
 
 #if !__LP64__
@@ -280,7 +284,7 @@ ATSFontActivateFromFileSpecification(
   ATSFontFormat          iFormat,
   void *                 iReserved,
   ATSOptionFlags         iOptions,
-  ATSFontContainerRef *  oContainer)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  ATSFontContainerRef *  oContainer) ATS_AVAILABLE_BUT_DEPRECATED_WITH_ADVICE(10_0 , 10_5 , "Use CTFontManagerRegisterFontsForURL() or CTFontManagerRegisterFontsForURLs()");
 
 
 #endif  /* !__LP64__ */
@@ -337,7 +341,7 @@ ATSFontActivateFromFileReference(
   ATSFontFormat          iFormat,
   void *                 iRefCon,
   ATSOptionFlags         iOptions,
-  ATSFontContainerRef *  oContainer)                          AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  ATSFontContainerRef *  oContainer) ATS_AVAILABLE_BUT_DEPRECATED_WITH_ADVICE(10_5, 10_8, "Use CTFontManagerRegisterFontsForURL() or CTFontManagerRegisterFontsForURLs()");
 
 
 /*
@@ -359,7 +363,7 @@ ATSFontActivateFromMemory(
   ATSFontFormat          iFormat,
   void *                 iReserved,
   ATSOptionFlags         iOptions,
-  ATSFontContainerRef *  oContainer)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ATSFontContainerRef *  oContainer) ATS_AVAILABLE_BUT_DEPRECATED_WITH_ADVICE(10_0, 10_8, "Use CTFontManagerRegisterFontForData() or CGFontCreateWithDataProvider() w/ CTFontManagerRegisterGraphicsFont()");
 
 
 /*
@@ -377,7 +381,7 @@ extern OSStatus
 ATSFontDeactivate(
   ATSFontContainerRef   iContainer,
   void *                iRefCon,
-  ATSOptionFlags        iOptions)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ATSOptionFlags        iOptions) ATS_AVAILABLE_BUT_DEPRECATED_WITH_ADVICE(10_0, 10_8, "Use CTFontManagerUnregisterFontsForURL() or CTFontManagerUnregisterFontsForURLs()");
 
 
 /*
@@ -429,7 +433,7 @@ ATSFontGetContainerFromFileReference(
   const FSRef *          iFile,
   ATSFontContext         iContext,
   ATSOptionFlags         iOptions,
-  ATSFontContainerRef *  oContainer)                          AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  ATSFontContainerRef *  oContainer) ATS_AVAILABLE_BUT_DEPRECATED_WITH_ADVICE(10_5, 10_8, "Use CTFontCopyAttribute() with kCTFontURLAttribute.");
 
 
 /*
@@ -467,7 +471,7 @@ extern OSStatus
 ATSFontGetContainer(
   ATSFontRef             iFont,
   ATSOptionFlags         iOptions,
-  ATSFontContainerRef *  oContainer)                          AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  ATSFontContainerRef *  oContainer) ATS_AVAILABLE_BUT_DEPRECATED_WITH_ADVICE(10_5, 10_8, "Use CTFontCopyAttribute() with kCTFontURLAttribute.");
 
 
 /*
@@ -505,7 +509,7 @@ extern OSStatus
 ATSFontSetEnabled(
   ATSFontRef       iFont,
   ATSOptionFlags   iOptions,
-  Boolean          iEnabled)                                  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  Boolean          iEnabled) ATS_AVAILABLE_BUT_DEPRECATED_WITH_ADVICE(10_5, 10_8, "Use CTFontManagerEnableFontDescriptors()");
 
 
 /*
@@ -531,7 +535,7 @@ ATSFontSetEnabled(
  *    Non-Carbon CFM:   not available
  */
 extern Boolean 
-ATSFontIsEnabled(ATSFontRef iFont)                            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+ATSFontIsEnabled(ATSFontRef iFont) ATS_AVAILABLE_BUT_DEPRECATED_WITH_ADVICE(10_5, 10_8, "Use CTFontCopyAttribute() with kCTFontEnabledAttribute");
 
 
 /* ----------------------------------------------------------------------------------------- */
@@ -551,7 +555,7 @@ ATSFontIsEnabled(ATSFontRef iFont)                            AVAILABLE_MAC_OS_X
 extern OSStatus 
 ATSFontFamilyApplyFunction(
   ATSFontFamilyApplierFunction   iFunction,
-  void *                         iRefCon)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *                         iRefCon) ATS_AVAILABLE_BUT_DEPRECATED_WITH_ADVICE(10_0, 10_8, "Use CTFontManagerCopyAvailableFontFamilyNames()");
 
 
 /*
@@ -571,7 +575,7 @@ ATSFontFamilyIteratorCreate(
   const ATSFontFilter *    iFilter,          /* can be NULL */
   void *                   iRefCon,
   ATSOptionFlags           iOptions,
-  ATSFontFamilyIterator *  ioIterator)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ATSFontFamilyIterator *  ioIterator) ATS_AVAILABLE_BUT_DEPRECATED_WITH_ADVICE(10_0, 10_8, "Use CTFontManagerCopyAvailableFontFamilyNames()");
 
 
 /*
@@ -586,7 +590,7 @@ ATSFontFamilyIteratorCreate(
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-ATSFontFamilyIteratorRelease(ATSFontFamilyIterator * ioIterator) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+ATSFontFamilyIteratorRelease(ATSFontFamilyIterator * ioIterator) ATS_AVAILABLE_BUT_DEPRECATED(10_0, 10_8);
 
 
 /*
@@ -606,7 +610,7 @@ ATSFontFamilyIteratorReset(
   const ATSFontFilter *    iFilter,          /* can be NULL */
   void *                   iRefCon,
   ATSOptionFlags           iOptions,
-  ATSFontFamilyIterator *  ioIterator)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ATSFontFamilyIterator *  ioIterator)                        ATS_AVAILABLE_BUT_DEPRECATED(10_0, 10_8);
 
 
 /*
@@ -623,7 +627,7 @@ ATSFontFamilyIteratorReset(
 extern OSStatus 
 ATSFontFamilyIteratorNext(
   ATSFontFamilyIterator   iIterator,
-  ATSFontFamilyRef *      oFamily)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ATSFontFamilyRef *      oFamily)                            ATS_AVAILABLE_BUT_DEPRECATED(10_0, 10_8);
 
 
 /*
@@ -640,7 +644,7 @@ ATSFontFamilyIteratorNext(
 extern ATSFontFamilyRef 
 ATSFontFamilyFindFromName(
   CFStringRef      iName,
-  ATSOptionFlags   iOptions)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ATSOptionFlags   iOptions) ATS_AVAILABLE_BUT_DEPRECATED_WITH_ADVICE(10_0, 10_8, "Use CTFontDescriptorCreateMatchingFontDescriptors() with kCTFontFamilyNameAttribute");
 
 
 /*
@@ -655,7 +659,7 @@ ATSFontFamilyFindFromName(
  *    Non-Carbon CFM:   not available
  */
 extern ATSGeneration 
-ATSFontFamilyGetGeneration(ATSFontFamilyRef iFamily)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+ATSFontFamilyGetGeneration(ATSFontFamilyRef iFamily) ATS_AVAILABLE_BUT_DEPRECATED_WITH_ADVICE(10_0, 10_8, "Register for kCTFontManagerRegisteredFontsChangedNotification notifications");
 
 
 /*
@@ -673,7 +677,7 @@ extern OSStatus
 ATSFontFamilyGetName(
   ATSFontFamilyRef   iFamily,
   ATSOptionFlags     iOptions,
-  CFStringRef *      oName)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CFStringRef *      oName) ATS_AVAILABLE_BUT_DEPRECATED_WITH_ADVICE(10_0, 10_8, "Use CTFontCopyFamilyName()");
 
 
 /*
@@ -688,7 +692,7 @@ ATSFontFamilyGetName(
  *    Non-Carbon CFM:   not available
  */
 extern TextEncoding 
-ATSFontFamilyGetEncoding(ATSFontFamilyRef iFamily)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+ATSFontFamilyGetEncoding(ATSFontFamilyRef iFamily) ATS_AVAILABLE_BUT_DEPRECATED_WITH_ADVICE(10_0, 10_8, "Use CTFontGetStringEncoding()");
 
 
 /* ----------------------------------------------------------------------------------------- */
@@ -708,7 +712,8 @@ ATSFontFamilyGetEncoding(ATSFontFamilyRef iFamily)            AVAILABLE_MAC_OS_X
 extern OSStatus 
 ATSFontApplyFunction(
   ATSFontApplierFunction   iFunction,
-  void *                   iRefCon)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *                   iRefCon) ATS_AVAILABLE_BUT_DEPRECATED_WITH_ADVICE(10_0, 10_8, "Use CTFontCollectionCreateFromAvailableFonts()");
+
 
 
 /*
@@ -728,7 +733,7 @@ ATSFontIteratorCreate(
   const ATSFontFilter *  iFilter,          /* can be NULL */
   void *                 iRefCon,
   ATSOptionFlags         iOptions,
-  ATSFontIterator *      ioIterator)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ATSFontIterator *      ioIterator) ATS_AVAILABLE_BUT_DEPRECATED_WITH_ADVICE(10_0, 10_8, "Use CTFontCollectionCreateFromAvailableFonts()");
 
 
 /*
@@ -743,7 +748,7 @@ ATSFontIteratorCreate(
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-ATSFontIteratorRelease(ATSFontIterator * ioIterator)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+ATSFontIteratorRelease(ATSFontIterator * ioIterator)          ATS_AVAILABLE_BUT_DEPRECATED(10_0, 10_8);
 
 
 /*
@@ -763,7 +768,7 @@ ATSFontIteratorReset(
   const ATSFontFilter *  iFilter,          /* can be NULL */
   void *                 iRefCon,
   ATSOptionFlags         iOptions,
-  ATSFontIterator *      ioIterator)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ATSFontIterator *      ioIterator)                          ATS_AVAILABLE_BUT_DEPRECATED(10_0, 10_8);
 
 
 /*
@@ -780,7 +785,7 @@ ATSFontIteratorReset(
 extern OSStatus 
 ATSFontIteratorNext(
   ATSFontIterator   iIterator,
-  ATSFontRef *      oFont)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ATSFontRef *      oFont)                                    ATS_AVAILABLE_BUT_DEPRECATED(10_0, 10_8);
 
 
 /*
@@ -797,7 +802,7 @@ ATSFontIteratorNext(
 extern ATSFontRef 
 ATSFontFindFromName(
   CFStringRef      iName,
-  ATSOptionFlags   iOptions)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ATSOptionFlags   iOptions)  ATS_AVAILABLE_BUT_DEPRECATED_WITH_ADVICE(10_0, 10_8, "Use CTFontCreateWithName()");
 
 
 /*
@@ -814,7 +819,7 @@ ATSFontFindFromName(
 extern ATSFontRef 
 ATSFontFindFromPostScriptName(
   CFStringRef      iName,
-  ATSOptionFlags   iOptions)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ATSOptionFlags   iOptions) ATS_AVAILABLE_BUT_DEPRECATED_WITH_ADVICE(10_0, 10_8, "Use CTFontCreateWithName()");
 
 
 /*
@@ -834,7 +839,7 @@ ATSFontFindFromContainer(
   ATSOptionFlags        iOptions,
   ItemCount             iCount,
   ATSFontRef            ioArray[],
-  ItemCount *           oCount)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ItemCount *           oCount)  ATS_AVAILABLE_BUT_DEPRECATED_WITH_ADVICE(10_0, 10_8, "Use CTFontDescriptorCreateMatchingFontDescriptors() with kCTFontURLAttribute or use CTFontManagerCreateFontDescriptorsFromURL()");
 
 
 /*
@@ -849,7 +854,7 @@ ATSFontFindFromContainer(
  *    Non-Carbon CFM:   not available
  */
 extern ATSGeneration 
-ATSFontGetGeneration(ATSFontRef iFont)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+ATSFontGetGeneration(ATSFontRef iFont) ATS_AVAILABLE_BUT_DEPRECATED_WITH_ADVICE(10_0, 10_8, "Register for kCTFontManagerRegisteredFontsChangedNotification notifications");
 
 
 /*
@@ -867,7 +872,7 @@ extern OSStatus
 ATSFontGetName(
   ATSFontRef       iFont,
   ATSOptionFlags   iOptions,
-  CFStringRef *    oName)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CFStringRef *    oName) ATS_AVAILABLE_BUT_DEPRECATED_WITH_ADVICE(10_0, 10_8, "Use CTFontCopyFullName()");
 
 
 /*
@@ -885,7 +890,7 @@ extern OSStatus
 ATSFontGetPostScriptName(
   ATSFontRef       iFont,
   ATSOptionFlags   iOptions,
-  CFStringRef *    oName)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CFStringRef *    oName) ATS_AVAILABLE_BUT_DEPRECATED_WITH_ADVICE(10_0, 10_8, "Use CTFontCopyPostScriptName()");
 
 
 /*
@@ -904,7 +909,7 @@ ATSFontGetTableDirectory(
   ATSFontRef   iFont,
   ByteCount    iBufferSize,
   void *       ioBuffer,
-  ByteCount *  oSize)             /* can be NULL */           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ByteCount *  oSize)             /* can be NULL */ ATS_AVAILABLE_BUT_DEPRECATED_WITH_ADVICE(10_0, 10_8, "Use CTFontCopyAvailableTables()");
 
 
 /*
@@ -925,7 +930,7 @@ ATSFontGetTable(
   ByteOffset     iOffset,
   ByteCount      iBufferSize,
   void *         ioBuffer,
-  ByteCount *    oSize)             /* can be NULL */         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ByteCount *    oSize)             /* can be NULL */ ATS_AVAILABLE_BUT_DEPRECATED_WITH_ADVICE(10_0, 10_8, "Use CTFontCopyTable()");
 
 
 /*
@@ -943,7 +948,7 @@ extern OSStatus
 ATSFontGetHorizontalMetrics(
   ATSFontRef        iFont,
   ATSOptionFlags    iOptions,
-  ATSFontMetrics *  oMetrics)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ATSFontMetrics *  oMetrics) ATS_AVAILABLE_BUT_DEPRECATED_WITH_ADVICE(10_0, 10_8, "Use CTFontGetXHeight(), CTFontGetAscent(), and friends to find a specific metric.");
 
 
 /*
@@ -961,7 +966,7 @@ extern OSStatus
 ATSFontGetVerticalMetrics(
   ATSFontRef        iFont,
   ATSOptionFlags    iOptions,
-  ATSFontMetrics *  oMetrics)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ATSFontMetrics *  oMetrics) ATS_AVAILABLE_BUT_DEPRECATED_WITH_ADVICE(10_0, 10_8, "Use CTFontGetXHeight(), CTFontGetAscent(), and friends to find a specific metric.");
 
 
 /* ----------------------------------------------------------------------------------------- */
@@ -979,7 +984,7 @@ ATSFontGetVerticalMetrics(
  *    Non-Carbon CFM:   not available
  */
 extern ATSFontFamilyRef 
-ATSFontFamilyFindFromQuickDrawName(ConstStr255Param iName)    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+ATSFontFamilyFindFromQuickDrawName(ConstStr255Param iName) ATS_AVAILABLE_BUT_DEPRECATED_WITH_ADVICE(10_0, 10_8, "Use CTFontCreateWithQuickdrawInstance()");
 
 
 /*
@@ -996,7 +1001,7 @@ ATSFontFamilyFindFromQuickDrawName(ConstStr255Param iName)    AVAILABLE_MAC_OS_X
 extern OSStatus 
 ATSFontFamilyGetQuickDrawName(
   ATSFontFamilyRef   iFamily,
-  Str255             oName)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Str255             oName) ATS_AVAILABLE_BUT_DEPRECATED_WITH_ADVICE(10_0, 10_8, "QuickDraw is deprecated");
 
 
 #if !__LP64__
@@ -1034,7 +1039,7 @@ ATSFontFamilyGetQuickDrawName(
 extern OSStatus 
 ATSFontGetFileSpecification(
   ATSFontRef   iFont,
-  ATSFSSpec *  oFile)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  ATSFSSpec *  oFile)  ATS_AVAILABLE_BUT_DEPRECATED_WITH_ADVICE(10_0, 10_5, "Use CTFontCopyAttribute() with kCTFontURLAttribute.");
 
 
 #endif  /* !__LP64__ */
@@ -1070,7 +1075,7 @@ ATSFontGetFileSpecification(
 extern OSStatus 
 ATSFontGetFileReference(
   ATSFontRef   iFont,
-  FSRef *      oFile)                                         AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  FSRef *      oFile) ATS_AVAILABLE_BUT_DEPRECATED_WITH_ADVICE(10_0, 10_8, "Use CTFontCopyAttribute() with kCTFontURLAttribute.");
 
 
 
@@ -1090,7 +1095,7 @@ ATSFontGetFontFamilyResource(
   ATSFontRef   iFont,
   ByteCount    iBufferSize,
   void *       ioBuffer,
-  ByteCount *  oSize)             /* can be NULL */           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ByteCount *  oSize)             /* can be NULL */  ATS_AVAILABLE_BUT_DEPRECATED_WITH_ADVICE(10_0, 10_8, "QuickDraw is deprecated");
 
 
 
@@ -1128,7 +1133,7 @@ ATSFontGetFontFamilyResource(
 extern OSStatus 
 ATSFontNotify(
   ATSFontNotifyAction   action,
-  void *                info)         /* can be NULL */       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  void *                info)         /* can be NULL */ ATS_AVAILABLE_BUT_DEPRECATED_WITH_ADVICE(10_2, 10_8, "Register for kCTFontManagerRegisteredFontsChangedNotification notifications");
 
 
 
@@ -1175,7 +1180,7 @@ ATSFontNotificationSubscribe(
   ATSNotificationCallback   callback,
   ATSFontNotifyOption       options,
   void *                    iRefcon,                /* can be NULL */
-  ATSFontNotificationRef *  oNotificationRef)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  ATSFontNotificationRef *  oNotificationRef)       /* can be NULL */ ATS_AVAILABLE_BUT_DEPRECATED_WITH_ADVICE(10_2, 10_8, "Register for kCTFontManagerRegisteredFontsChangedNotification notifications");
 
 
 
@@ -1207,7 +1212,7 @@ ATSFontNotificationSubscribe(
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-ATSFontNotificationUnsubscribe(ATSFontNotificationRef notificationRef) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+ATSFontNotificationUnsubscribe(ATSFontNotificationRef notificationRef) ATS_AVAILABLE_BUT_DEPRECATED_WITH_ADVICE(10_2, 10_8, "Unregister for kCTFontManagerRegisteredFontsChangedNotification notifications");
 
 
 
@@ -1335,7 +1340,7 @@ ATSCreateFontQueryRunLoopSource(
   CFIndex                            queryOrder,
   CFIndex                            sourceOrder,
   ATSFontQueryCallback               callout,
-  const ATSFontQuerySourceContext *  context)           /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  const ATSFontQuerySourceContext *  context)           /* can be NULL */ ATS_AVAILABLE_BUT_DEPRECATED_WITH_ADVICE(10_2, 10_8, "Use CTFontManagerCreateFontRequestRunLoopSource()");
 
 
 /* ----------------------------------------------------------------------------------------- */
@@ -1496,7 +1501,7 @@ typedef UInt32                          ATSFontAutoActivationSetting;
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-ATSFontSetGlobalAutoActivationSetting(ATSFontAutoActivationSetting iSetting) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+ATSFontSetGlobalAutoActivationSetting(ATSFontAutoActivationSetting iSetting) ATS_AVAILABLE_BUT_DEPRECATED_WITH_ADVICE(10_5, 10_8, "Use CTFontManagerSetAutoActivationSetting() with kCTFontManagerBundleIdentifier");
 
 
 /*
@@ -1518,7 +1523,7 @@ ATSFontSetGlobalAutoActivationSetting(ATSFontAutoActivationSetting iSetting) AVA
  *    Non-Carbon CFM:   not available
  */
 extern ATSFontAutoActivationSetting 
-ATSFontGetGlobalAutoActivationSetting(void)                   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+ATSFontGetGlobalAutoActivationSetting(void) ATS_AVAILABLE_BUT_DEPRECATED_WITH_ADVICE(10_5, 10_8, "Use CTFontManagerGetAutoActivationSetting() with kCTFontManagerBundleIdentifier");
 
 
 /*
@@ -1561,7 +1566,7 @@ ATSFontGetGlobalAutoActivationSetting(void)                   AVAILABLE_MAC_OS_X
 extern OSStatus 
 ATSFontSetAutoActivationSettingForApplication(
   ATSFontAutoActivationSetting   iSetting,
-  CFURLRef                       iApplicationFileURL)         AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  CFURLRef                       iApplicationFileURL) ATS_AVAILABLE_BUT_DEPRECATED_WITH_ADVICE(10_5, 10_8, "Use CTFontManagerSetAutoActivationSetting()");
 
 
 /*
@@ -1596,7 +1601,7 @@ ATSFontSetAutoActivationSettingForApplication(
  *    Non-Carbon CFM:   not available
  */
 extern ATSFontAutoActivationSetting 
-ATSFontGetAutoActivationSettingForApplication(CFURLRef iApplicationFileURL) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+ATSFontGetAutoActivationSettingForApplication(CFURLRef iApplicationFileURL)  ATS_AVAILABLE_BUT_DEPRECATED_WITH_ADVICE(10_5, 10_8, "Use CTFontManagerGetAutoActivationSetting()");
 
 
 

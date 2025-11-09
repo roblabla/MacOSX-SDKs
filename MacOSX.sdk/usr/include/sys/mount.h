@@ -243,9 +243,10 @@ struct vfsstatfs {
  * External filesystem control flags.
  */
 #define	MNT_UPDATE	0x00010000	/* not a real mount, just an update */
+#define	MNT_NOBLOCK	0x00020000	/* don't block unmount if not responding */
 #define	MNT_RELOAD	0x00040000	/* reload filesystem data */
 #define	MNT_FORCE	0x00080000	/* force unmount or readonly change */
-#define MNT_CMDFLAGS	(MNT_UPDATE|MNT_RELOAD|MNT_FORCE)
+#define MNT_CMDFLAGS	(MNT_UPDATE|MNT_NOBLOCK|MNT_RELOAD|MNT_FORCE)
 
 
 
@@ -317,6 +318,7 @@ struct vfsidctl {
 #define VFS_CTL_TIMEO	0x00010005	/* set timeout for vfs notification */
 #define VFS_CTL_NOLOCKS	0x00010006	/* disable file locking */
 #define VFS_CTL_SADDR	0x00010007	/* get server address */
+#define VFS_CTL_DISC    0x00010008	/* server disconnected */
 
 struct vfsquery {
 	u_int32_t	vq_flags;

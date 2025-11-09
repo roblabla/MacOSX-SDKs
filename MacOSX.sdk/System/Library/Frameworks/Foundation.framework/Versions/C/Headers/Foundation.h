@@ -1,5 +1,5 @@
 /*	Foundation.h
-	Copyright (c) 1994-2011, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2012, Apple Inc. All rights reserved.
 */
 
 
@@ -26,6 +26,7 @@
 #import <Foundation/NSFileHandle.h>
 #import <Foundation/NSFileManager.h>
 #import <Foundation/NSFormatter.h>
+#import <Foundation/NSHashTable.h>
 #import <Foundation/NSHTTPCookie.h>
 #import <Foundation/NSHTTPCookieStorage.h>
 #import <Foundation/NSIndexPath.h>
@@ -37,6 +38,7 @@
 #import <Foundation/NSKeyedArchiver.h>
 #import <Foundation/NSLocale.h>
 #import <Foundation/NSLock.h>
+#import <Foundation/NSMapTable.h>
 #import <Foundation/NSMethodSignature.h>
 #import <Foundation/NSNotification.h>
 #import <Foundation/NSNotificationQueue.h>
@@ -47,6 +49,8 @@
 #import <Foundation/NSOrderedSet.h>
 #import <Foundation/NSOrthography.h>
 #import <Foundation/NSPathUtilities.h>
+#import <Foundation/NSPointerArray.h>
+#import <Foundation/NSPointerFunctions.h>
 #import <Foundation/NSPort.h>
 #import <Foundation/NSProcessInfo.h>
 #import <Foundation/NSPropertyList.h>
@@ -85,6 +89,7 @@
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || (TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)
 
 #import <Foundation/NSAttributedString.h>
+#import <Foundation/NSByteCountFormatter.h>
 #import <Foundation/NSCache.h>
 #import <Foundation/NSComparisonPredicate.h>
 #import <Foundation/NSCompoundPredicate.h>
@@ -93,11 +98,13 @@
 #import <Foundation/NSFilePresenter.h>
 #import <Foundation/NSFileVersion.h>
 #import <Foundation/NSFileWrapper.h>
+#import <Foundation/NSLinguisticTagger.h>
 #import <Foundation/NSMetadata.h>
 #import <Foundation/NSNetServices.h>
 #import <Foundation/NSPredicate.h>
 #import <Foundation/NSUbiquitousKeyValueStore.h>
 #import <Foundation/NSUndoManager.h>
+#import <Foundation/NSUUID.h>
 
 #endif
 
@@ -109,10 +116,6 @@
 #import <Foundation/NSDistantObject.h>
 #import <Foundation/NSDistributedNotificationCenter.h>
 #import <Foundation/NSGeometry.h>
-#import <Foundation/NSHashTable.h>
-#import <Foundation/NSMapTable.h>
-#import <Foundation/NSPointerArray.h>
-#import <Foundation/NSPointerFunctions.h>
 #import <Foundation/NSPortCoder.h>
 #import <Foundation/NSPortMessage.h>
 #import <Foundation/NSPortNameServer.h>
@@ -140,7 +143,6 @@
 #import <Foundation/NSGarbageCollector.h>
 #import <Foundation/NSHFSFileTypes.h>
 #import <Foundation/NSHost.h>
-#import <Foundation/NSLinguisticTagger.h>
 #import <Foundation/NSObjectScripting.h>
 #import <Foundation/NSScriptClassDescription.h>
 #import <Foundation/NSScriptCoercionHandler.h>
@@ -153,5 +155,8 @@
 #import <Foundation/NSScriptSuiteRegistry.h>
 #import <Foundation/NSScriptWhoseTests.h>
 #import <Foundation/NSSpellServer.h>
+#import <Foundation/NSUserNotification.h>
+#import <Foundation/NSUserScriptTask.h>
+#import <Foundation/NSXPCConnection.h>
 
 #endif

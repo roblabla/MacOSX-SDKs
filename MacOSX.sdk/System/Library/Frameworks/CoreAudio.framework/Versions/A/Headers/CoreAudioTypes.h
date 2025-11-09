@@ -149,6 +149,17 @@ struct AudioBufferList
 {
     UInt32      mNumberBuffers;
     AudioBuffer mBuffers[1]; // this is a variable length array of mNumberBuffers elements
+    
+#if defined(__cplusplus) && CA_STRICT
+public:
+    AudioBufferList() {}
+private:
+    //  Copying and assigning a variable length struct is problematic so turn their use into a
+    //  compile time error for eacy spotting.
+    AudioBufferList(const AudioBufferList&);
+    AudioBufferList&    operator=(const AudioBufferList&);
+#endif
+
 };
 typedef struct AudioBufferList  AudioBufferList;
 
@@ -344,6 +355,7 @@ enum
     kAudioFormatMPEG4AAC_LD             = 'aacl',
     kAudioFormatMPEG4AAC_ELD            = 'aace',
     kAudioFormatMPEG4AAC_ELD_SBR        = 'aacf',
+    kAudioFormatMPEG4AAC_ELD_V2         = 'aacg',    
     kAudioFormatMPEG4AAC_HE_V2          = 'aacp',
     kAudioFormatMPEG4AAC_Spatial        = 'aacs',
     kAudioFormatAMR                     = 'samr',
@@ -857,6 +869,17 @@ struct AudioChannelLayout
     UInt32                      mChannelBitmap;
     UInt32                      mNumberChannelDescriptions;
     AudioChannelDescription     mChannelDescriptions[1]; // this is a variable length array of mNumberChannelDescriptions elements
+    
+#if defined(__cplusplus) && CA_STRICT
+public:
+    AudioChannelLayout() {}
+private:
+    //  Copying and assigning a variable length struct is problematic so turn their use into a
+    //  compile time error for eacy spotting.
+    AudioChannelLayout(const AudioChannelLayout&);
+    AudioChannelLayout&         operator=(const AudioChannelLayout&);
+#endif
+
 };
 typedef struct AudioChannelLayout AudioChannelLayout;
 
@@ -1188,6 +1211,7 @@ enum
     kAudioChannelLayoutTag_AAC_6_1                  = (142<<16) | 7,                       // C L R Ls Rs Cs Lfe
     kAudioChannelLayoutTag_AAC_7_0                  = (143<<16) | 7,                       // C L R Ls Rs Rls Rrs
     kAudioChannelLayoutTag_AAC_7_1                  = kAudioChannelLayoutTag_MPEG_7_1_B,   // C Lc Rc L R Ls Rs Lfe
+    kAudioChannelLayoutTag_AAC_7_1_B                = (183<<16) | 8,                       // C L R Ls Rs Rls Rrs LFE
     kAudioChannelLayoutTag_AAC_Octagonal            = (144<<16) | 8,                       // C L R Ls Rs Rls Rrs Cs
 
     kAudioChannelLayoutTag_TMH_10_2_std             = (145<<16) | 16,                      // L R C Vhc Lsd Rsd Ls Rs Vhl Vhr Lw Rw Csd Cs LFE1 LFE2

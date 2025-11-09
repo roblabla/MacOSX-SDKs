@@ -3,7 +3,7 @@
 
     Contains:   API for communicating with CoreMediaIO hardware
 
-    Copyright:  © 2005-2010 by Apple Inc., all rights reserved.
+    Copyright:  Â© 2005-2011 by Apple Inc., all rights reserved.
 */
 
 
@@ -111,7 +111,7 @@ enum
                         A CMIOFeatureControl that controls the white level offset. The units for the control's absolute value are percentage (%).
     @constant       kCMIOHueControlClassID
                         A CMIOFeatureControl that controls the hue offset. Positive values mean counterclockwise, negative values means clockwise on a vector scope. The units for the
-                        control's absolute value are degrees (¡).
+                        control's absolute value are degrees (Â°).
     @constant       kCMIOSaturationControlClassID
                         A CMIOFeatureControl that controls color intensity. For example, at high saturation levels, red appears to be red; at low saturation, red appears as pink. The
                         unit for the control's absolute value is a percentage (%).
@@ -143,17 +143,19 @@ enum
                         A CMIOFeatureControl that controls a focus mechanism. The units for the control's absolute value are meters (m).
     @constant       kCMIOPanControlClassID
                         A CMIOFeatureControl that controls a panning mechanism. Positive values mean clockwise, negative values means counterclockwise. The units for the control's
-                        absolute value are degrees (¡).
+                        absolute value are degrees (Â°).
     @constant       kCMIOTiltControlClassID
                         A CMIOFeatureControl that controls a tilt mechanism. Positive values mean updwards, negative values means downwards. The units for the control's absolute value are
-                        degrees (¡).
+                        degrees (Â°).
     @constant       kCMIOOpticalFilterClassID
-                        A CMIOFeatureControl that controls chagning the optical filter of camera lens function. The units for the control's absolute value are are undefined.
+                        A CMIOFeatureControl that controls chagning the optical filter of camera lens function. The units for the control's absolute value are undefined.
     @constant       kCMIOBacklightCompensationControlClassID
                         A CMIOFeatureControl that controls the amount of backlight compensation to apply. A low number indicates the least amount of backlight compensation. The units for the
-                        control's absolute value are are undefined.
+                        control's absolute value are undefined.
     @constant       kCMIOPowerLineFrequencyControlClassID
                         A CMIOFeatureControl to specify the power line frequency to properly implement anti-flicker processing. The units for the contorl's absolute value are hertz (Hz).
+	@constant		kCMIONoiseReductionControlClassID
+						A CMIOFeatureControl that controls the noise reduction strength. The units for the control's absolute value are undefined.
 */
 enum
 {
@@ -178,9 +180,11 @@ enum
     kCMIOTiltControlClassID                     = 'tilt',
     kCMIOOpticalFilterClassID                   = 'opft',
     kCMIOBacklightCompensationControlClassID    = 'bklt',
-    kCMIOPowerLineFrequencyControlClassID       = 'pwfq'
+    kCMIOPowerLineFrequencyControlClassID       = 'pwfq',
+	kCMIONoiseReductionControlClassID			= 's2nr',
 };
 
+#pragma mark -
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #pragma mark CMIOControl Properties
 
@@ -203,6 +207,7 @@ enum
     kCMIOControlPropertyVariant = 'cvar'
 };
 
+#pragma mark BooleanControl Properties
 /*!
     @enum           CMIOBooleanControl Properties
     @abstract       CMIOObjectPropertySelector values that apply to all CMIOBooleanControls.
@@ -215,6 +220,7 @@ enum
     kCMIOBooleanControlPropertyValue    = 'bcvl'
 };
 
+#pragma mark SelectorControl Properties
 /*!
     @enum           CMIOSelectorControl Properties
     @abstract       CMIOObjectPropertySelector values that apply to all CMIOSelectorControls.
@@ -234,6 +240,7 @@ enum
     kCMIOSelectorControlPropertyItemName        = 'scin'
 };
 
+#pragma mark FeatureControl Properties
 /*!
     @enum           CMIOFeatureControl Properties
     @abstract       CMIOObjectPropertySelector values that apply to all CMIOFeatureControls.
@@ -276,7 +283,49 @@ enum
     kCMIOFeatureControlPropertyConvertAbsoluteToNative  = 'fa2n',
     kCMIOFeatureControlPropertyAbsoluteUnitName         = 'fcun'
 };
-        
+
+#pragma mark ExposureControl Properties
+/*!
+    @enum           CMIOExposureControl Properties
+    @abstract       CMIOObjectPropertySelector values that apply to all CMIOExposureControls.
+    @discussion     CMIOExposureControl is a subclass of CMIOFeatureControl and has only the single scope, kCMIOObjectPropertyScopeGlobal, and only a master element.
+    @constant       kCMIOExposureControlPropertyRegionOfInterest
+                        A CGRect with origin and size coordinates in the 0. to 1. space indicating what portion of the image should be used when auto-exposing.
+    @constant       kCMIOExposureControlPropertyLockThreshold
+                        A Float32 indicating a threshold that is treated as the minimum change (in either direction) that the average Y value of the image needs to stay within for 
+                        the AutoExposure state machine to enter the locked state. A higher number creates more hysteresis.
+    @constant       kCMIOExposureControlPropertyUnlockThreshold
+                        A Float32 indicating a threshold that is treated as the minimum change (in either direction) that the average Y value of the image needs to exceed for the 
+                        AutoExposure state machine to leave the locked state. A higher number creates more hysteresis.
+    @constant       kCMIOExposureControlPropertyTarget
+                        A Float32 indicating the exposure target, which is typically represented as the average Y value of the image that the firmware auto exposure control tries to achieve.
+						Higher numbers indicate a more exposed image.
+	@constant       kCMIOExposureControlPropertyConvergenceSpeed
+						A Float32 indicating how fast an auto exposure converges to the AE target. Higher numbers are faster.
+	@constant		kCMIOExposureControlPropertyStability
+						A Float32 to tune the stability of the autoexposure algorithm, indicating how much flicker will be tolerated prior to adjusting the sensor gain.
+    @constant       kCMIOExposureControlPropertyStable
+                        A Boolean indicating whether the camera has the autoexposure function locked due to sufficient stability. This result is only valid when the autoexposure function
+						has not been disabled.
+    @constant       kCMIOExposureControlPropertyIntegrationTime
+                        A Float32 to limit the maximum integration-time for the sensor, in milliseconds. The maximum integration time is also limited by the framerate. Setting the value to
+						0.0 indicates no limiting is applied.
+    @constant       kCMIOExposureControlPropertyMaximumGain
+                        A Float32 to limit the maximum allowable gain that the autoexposure algorithm will attempt to use. Setting the value to 0.0 indicates no limiting is applied.
+*/
+enum
+{
+    kCMIOExposureControlPropertyRegionOfInterest	= 'eroi',
+    kCMIOExposureControlPropertyLockThreshold		= 'elck',
+    kCMIOExposureControlPropertyUnlockThreshold		= 'eulk',
+    kCMIOExposureControlPropertyTarget				= 'etgt',
+    kCMIOExposureControlPropertyConvergenceSpeed	= 'ecsp',
+	kCMIOExposureControlPropertyStability			= 'esty',
+    kCMIOExposureControlPropertyStable				= 'estb',
+    kCMIOExposureControlPropertyIntegrationTime		= 'eint',
+    kCMIOExposureControlPropertyMaximumGain			= 'emax',
+};
+    
 #pragma pack(pop)
     
 #if defined(__cplusplus)

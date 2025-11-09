@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2008-2011 Apple Inc. All rights reserved.
+ * Copyright (c) 2008-2012 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -415,7 +415,7 @@ extern const struct in6_addr in6addr_linklocal_allv2routers;
 #if 1 /*IPSEC*/
 #define IPV6_IPSEC_POLICY	28 /* struct; get/set security policy */
 #endif /* 1 */
-#define IPV6_FAITH		29 /* bool; accept FAITH'ed connections */
+#define IPV6_FAITH		29 /* deprecated */
 
 #if 1 /*IPV6FIREWALL*/
 #define IPV6_FW_ADD		30 /* add a firewall rule to chain */
@@ -577,7 +577,7 @@ struct ip6_mtuinfo {
 #define IPV6CTL_SOURCECHECK	10	/* verify source route and intf */
 #define IPV6CTL_SOURCECHECK_LOGINT 11	/* minimume logging interval */
 #define IPV6CTL_ACCEPT_RTADV	12
-#define IPV6CTL_KEEPFAITH	13
+#define IPV6CTL_KEEPFAITH	13	/* deprecated */
 #define IPV6CTL_LOG_INTERVAL	14
 #define IPV6CTL_HDRNESTLIMIT	15
 #define IPV6CTL_DAD_COUNT	16

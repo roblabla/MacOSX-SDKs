@@ -36,12 +36,6 @@
 extern "C" {
 #endif
 
-#ifndef PM_USE_SESSION_APIS
-#define PM_USE_SESSION_APIS 1
-#endif  /* !defined(PM_USE_SESSION_APIS) */
-
-#if PM_USE_SESSION_APIS
-
 #pragma mark
 #pragma mark Retain/Release
 #pragma mark
@@ -800,8 +794,6 @@ PMSessionValidatePageFormat(
   PMPageFormat     pageFormat,
   Boolean *        result)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
-#endif  /* PM_USE_SESSION_APIS */
-
 /*
  *  PMCopyPageFormat()
  *  
@@ -1166,7 +1158,6 @@ PMSetScale(
 #pragma mark PrintSettings
 #pragma mark
 
-#if PM_USE_SESSION_APIS
 /*
  *  PMCreatePrintSettings()
  *  
@@ -1223,8 +1214,6 @@ PMSessionValidatePrintSettings(
   PMPrintSession    printSession,
   PMPrintSettings   printSettings,
   Boolean *         result)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-#endif	/* PM_USE_SESSION_APIS */
 
 /*
  *  PMCopyPrintSettings()
@@ -3226,7 +3215,7 @@ PMPrinterPrintWithFile(
  *
  *    sourceFileURL:
  *      A file URL specifying the input file to be converted to printer ready PostScript data. Only file based URLs
- *      are supported.
+ *      are supported. This file is deleted when the conversion is completed.
  *
  *    destinationFileURL:
  *      A file URL specifying the destination file to be created. If the file already exists it will be overwritten. Only

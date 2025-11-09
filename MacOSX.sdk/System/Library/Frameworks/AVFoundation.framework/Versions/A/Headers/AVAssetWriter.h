@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010 Apple Inc. All rights reserved.
+	Copyright 2010-2012 Apple Inc. All rights reserved.
 
 */
 
@@ -18,8 +18,7 @@
 /*!
  @enum AVAssetWriterStatus
  @abstract
-	These constants are returned by the AVAssetWriter status property to indicate whether it can successfully write
-	samples to its output file.
+	These constants are returned by the AVAssetWriter status property to indicate whether it can successfully write samples to its output file.
 
  @constant	 AVAssetWriterStatusUnknown
 	Indicates that the status of the asset writer is not currently known.
@@ -28,11 +27,9 @@
  @constant	 AVAssetWriterStatusCompleted
 	Indicates that the asset writer has successfully written all samples following a call to finishWriting.
  @constant	 AVAssetWriterStatusFailed
-	Indicates that the asset writer can no longer write samples to its output file because of an error. The error is
-	described by the value of the asset writer's error property.
+	Indicates that the asset writer can no longer write samples to its output file because of an error. The error is described by the value of the asset writer's error property.
  @constant	 AVAssetWriterStatusCancelled
-	Indicates that the asset writer can no longer write samples because writing was canceled with the cancelWriting
-	method.
+	Indicates that the asset writer can no longer write samples because writing was canceled with the cancelWriting method.
  */
 enum {
 	AVAssetWriterStatusUnknown = 0,
@@ -51,16 +48,11 @@ typedef NSInteger AVAssetWriterStatus;
 	 AVAssetWriter provides services for writing media data to a new file,
  
  @discussion
-	Instances of AVAssetWriter can write media to new files in formats such as the QuickTime movie file format or the
-	MPEG-4 file format. AVAssetWriter has support for automatic interleaving of media data for multiple concurrent
-	tracks. Source media data can be obtained from instances of AVAssetReader for one or more assets or from other
-	sources outside of AVFoundation.
+	Instances of AVAssetWriter can write media to new files in formats such as the QuickTime movie file format or the MPEG-4 file format. AVAssetWriter has support for automatic interleaving of media data for multiple concurrent tracks. Source media data can be obtained from instances of AVAssetReader for one or more assets or from other sources outside of AVFoundation.
 
-	Instances of AVAssetWriter can re-encode media samples as they are written. Instances of AVAssetWriter can also
-	optionally write metadata collections to the output file.
+	Instances of AVAssetWriter can re-encode media samples as they are written. Instances of AVAssetWriter can also optionally write metadata collections to the output file.
  
-	A single instance of AVAssetWriter can be used once to write to a single file. Clients that wish to write to files
-	multiple times must use a new instance of AVAssetWriter each time.
+	A single instance of AVAssetWriter can be used once to write to a single file. Clients that wish to write to files multiple times must use a new instance of AVAssetWriter each time.
  */
 NS_CLASS_AVAILABLE(10_7, 4_1)
 @interface AVAssetWriter : NSObject
@@ -115,6 +107,8 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  @property outputURL
  @abstract
 	The location of the file for which the instance of AVAssetWriter was initialized for writing.
+ @discussion
+	You may use UTTypeCopyPreferredTagWithClass(outputFileType, kUTTagClassFilenameExtension) to obtain an appropriate path extension for the outputFileType you have specified. For more information about UTTypeCopyPreferredTagWithClass and kUTTagClassFilenameExtension, on iOS see <MobileCoreServices/UTType.h> and on Mac OS X see <LaunchServices/UTType.h>.
  */
 @property (nonatomic, copy, readonly) NSURL *outputURL;
 
@@ -141,10 +135,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 	The status of writing samples to the receiver's output file.
 
  @discussion
-	The value of this property is an AVAssetWriterStatus that indicates whether writing is in progress, has completed
-	successfully, has been canceled, or has failed. Clients of AVAssetWriterInput objects should check the value of this
-	property after appending samples fails to determine why no more samples could be written. This property is thread
-	safe.
+	The value of this property is an AVAssetWriterStatus that indicates whether writing is in progress, has completed successfully, has been canceled, or has failed. Clients of AVAssetWriterInput objects should check the value of this property after appending samples fails to determine why no more samples could be written. This property is thread safe.
  */
 @property (readonly) AVAssetWriterStatus status;
 
@@ -154,9 +145,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 	If the receiver's status is AVAssetWriterStatusFailed, this describes the error that caused the failure.
 
  @discussion
-	The value of this property is an NSError that describes what caused the receiver to no longer be able to write to its
-	output file. If the receiver's status is not AVAssetWriterStatusFailed, the value of this property is nil. This
-	property is thread safe.
+	The value of this property is an NSError that describes what caused the receiver to no longer be able to write to its output file. If the receiver's status is not AVAssetWriterStatusFailed, the value of this property is nil. This property is thread safe.
  */
 @property (readonly) NSError *error;
 
@@ -166,8 +155,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 	A collection of metadata to be written to the receiver's output file.
 
  @discussion
-	The value of this property is an array of AVMetadataItem objects representing the collection of top-level metadata to
-	be written in the output file.
+	The value of this property is an array of AVMetadataItem objects representing the collection of top-level metadata to be written in the output file.
 	
 	This property cannot be set after writing has started.
  */
@@ -179,8 +167,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 	Specifies whether the output file should be written in way that makes it more suitable for playback over a network
  
  @discussion
-	When the value of this property is YES, the output file will be written in such a way that playback can start after
-	only a small amount of the file is downloaded.
+	When the value of this property is YES, the output file will be written in such a way that playback can start after only a small amount of the file is downloaded.
 	
 	This property cannot be set after writing has started.
  */
@@ -191,8 +178,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  @abstract
 	The inputs from which the asset writer receives media data.
  @discussion
-	The value of this property is an NSArray containing concrete instances of AVAssetWriterInput. Inputs can be added to
-	the receiver using the addInput: method.
+	The value of this property is an NSArray containing concrete instances of AVAssetWriterInput. Inputs can be added to the receiver using the addInput: method.
  */
 @property (nonatomic, readonly) NSArray *inputs;
 
@@ -209,12 +195,9 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 	A BOOL indicating whether the given output settings can be used for the given media type.
  
  @discussion
-	This method determines whether the output settings for the specified media type can be used with the receiver's file
-	format. For example, video compression settings that specify H.264 compression are not compatible with file formats
-	that cannot contain H.264-compressed video.
+	This method determines whether the output settings for the specified media type can be used with the receiver's file format. For example, video compression settings that specify H.264 compression are not compatible with file formats that cannot contain H.264-compressed video.
  
-	Attempting to add an output with output settings and a media type for which this method returns NO will cause an
-	exception to be thrown.
+	Attempting to add an input with output settings and a media type for which this method returns NO will cause an exception to be thrown.
 */
 - (BOOL)canApplyOutputSettings:(NSDictionary *)outputSettings forMediaType:(NSString *)mediaType;
 
@@ -229,8 +212,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 	A BOOL indicating whether the input can be added to the receiver.
 
  @discussion
-	An input that accepts media data of a type that is not compatible with the receiver, or with output
-	settings that are not compatible with the receiver, cannot be added.
+	An input that accepts media data of a type that is not compatible with the receiver, or with output settings that are not compatible with the receiver, cannot be added.
  */
 - (BOOL)canAddInput:(AVAssetWriterInput *)input;
 
@@ -243,8 +225,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 	The AVAssetWriterInput object to be added.
 
  @discussion
-	Inputs are created with a media type and output settings. These both must be compatible with the
-	receiver.
+	Inputs are created with a media type and output settings. These both must be compatible with the receiver.
 	
 	Inputs cannot be added after writing has started.
  */
@@ -259,12 +240,11 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 	A BOOL indicating whether writing successfully started.
  
  @discussion
-	This method must be called after all inputs have added and other configuration properties have been set in order to
-	tell the receiver to prepare for writing. After this method is called, clients can start writing sessions using
-	startSessionAtSourceTime: and can write media samples using the methods provided by each of the receiver's inputs.
+	This method must be called after all inputs have been added and other configuration properties have been set in order to tell the receiver to prepare for writing. After this method is called, clients can start writing sessions using startSessionAtSourceTime: and can write media samples using the methods provided by each of the receiver's inputs.
  
-	If writing cannot be started, this method returns NO. Clients can check the values of the status and error properties
-	for more information on why writing could not be started.
+	If writing cannot be started, this method returns NO. Clients can check the values of the status and error properties for more information on why writing could not be started.
+ 
+	On iOS, if the status of an AVAssetWriter is AVAssetWriterStatusWriting when the client app goes into the background, its status will change to AVAssetWriterStatusFailed and appending to any of its inputs will fail.  You may want to use -[UIApplication beginBackgroundTaskWithExpirationHandler:] to avoid being interrupted in the middle of a writing session and to finish writing the data that has already been appended.  For more information about executing code in the background, see the iOS Application Programming Guide.
  */
 - (BOOL)startWriting;
 
@@ -277,21 +257,13 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 	The starting asset time for the sample-writing session, in the timeline of the source samples.
 
  @discussion
-	Sequences of sample data appended to the asset writer inputs are considered to fall within "sample-writing sessions",
-	initiated with this method. Accordingly, this method must be called after writing has started using
-	startWriting but before any sample data is appended to the receiver's inputs.
+	Sequences of sample data appended to the asset writer inputs are considered to fall within "sample-writing sessions", initiated with this method. Accordingly, this method must be called after writing has started using startWriting but before any sample data is appended to the receiver's inputs.
 	
-	Each writing session has a start time which, where allowed by the file format being written, defines the mapping from
-	the timeline of source samples onto the file's timeline. In the case of the QuickTime movie file format, the first
-	session begins at movie time 0, so a sample appended with timestamp T will be played at movie time (T-startTime).
-	Samples with timestamps before startTime will still be added to the output media but will be edited out of the movie.
-	If the earliest buffer for an input is later than startTime, an empty edit will be inserted to preserve
-	synchronization between tracks of the output asset.
+	Each writing session has a start time which, where allowed by the file format being written, defines the mapping from the timeline of source samples onto the file's timeline. In the case of the QuickTime movie file format, the first session begins at movie time 0, so a sample appended with timestamp T will be played at movie time (T-startTime).  Samples with timestamps before startTime will still be added to the output media but will be edited out of the movie. If the earliest buffer for an input is later than startTime, an empty edit will be inserted to preserve synchronization between tracks of the output asset.
 	
 	It is an error to invoke startSessionAtSourceTime: twice in a row without invoking endSessionAtSourceTime: in between.
  
-	NOTE: Multiple sample-writing sessions are currently not supported. It is an error to call startSessionAtSourceTime:
-	a second time after calling endSessionAtSourceTime:
+	NOTE: Multiple sample-writing sessions are currently not supported. It is an error to call startSessionAtSourceTime: a second time after calling endSessionAtSourceTime:.
  */
 - (void)startSessionAtSourceTime:(CMTime)startTime;
 
@@ -306,20 +278,11 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  @discussion
 	Call this method to complete a session started with startSessionAtSourceTime:.
  
-	The endTime defines the moment on the timeline of source samples at which the session ends. In the case of the
-	QuickTime movie file format, each sample-writing session's startTime...endTime pair corresponds to a period of movie
-	time into which the session's samples are inserted. Samples with later timestamps will be still be added to the media
-	but will be edited out of the movie. So if the first session has duration D1 = endTime - startTime, it will be
-	inserted into the movie at movie time 0 through D1; the second session would be inserted into the movie at movie time
-	D1 through D1+D2, etc. It is legal to have a session with no samples; this will cause creation of an empty edit of
-	the prescribed duration.
+	The endTime defines the moment on the timeline of source samples at which the session ends. In the case of the QuickTime movie file format, each sample-writing session's startTime...endTime pair corresponds to a period of movie time into which the session's samples are inserted. Samples with later timestamps will be still be added to the media but will be edited out of the movie. So if the first session has duration D1 = endTime - startTime, it will be inserted into the movie at movie time 0 through D1; the second session would be inserted into the movie at movie time D1 through D1+D2, etc. It is legal to have a session with no samples; this will cause creation of an empty edit of the prescribed duration.
 	
-	It is not mandatory to call endSessionAtSourceTime:; if finishWriting is called without endSessionAtSourceTime:, the
-	session's effective end time will be the latest end timestamp of the session's samples (i.e., no samples will be
-	edited out at the end).
+	It is not mandatory to call endSessionAtSourceTime:; if finishWriting is called without endSessionAtSourceTime:, the session's effective end time will be the latest end timestamp of the session's samples (i.e., no samples will be edited out at the end).
 	
-	NOTE: Multiple sample-writing sessions are currently not supported. It is an error to call startSessionAtSourceTime:
-	a second time after calling endSessionAtSourceTime:
+	NOTE: Multiple sample-writing sessions are currently not supported. It is an error to call startSessionAtSourceTime: a second time after calling endSessionAtSourceTime:.
  */
 - (void)endSessionAtSourceTime:(CMTime)endTime;
 
@@ -329,18 +292,16 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 	Cancels the creation of the output file.
  
  @discussion
-	If the status of the receiver is "failed" or "completed," -cancelWriting is a no-op.  Otherwise, this method will block
-	until writing is canceled.
+	If the status of the receiver is "failed" or "completed," -cancelWriting is a no-op.  Otherwise, this method will block until writing is canceled.
  
 	If an output file was created by the receiver during the writing process, -cancelWriting will delete the file.
 	
-	This method should not be called concurrently with -[AVAssetWriterInput appendSampleBuffer:] or
-	-[AVAssetWriterInputPixelBufferAdaptor appendPixelBuffer:withPresentationTime:].
+	This method should not be called concurrently with -[AVAssetWriterInput appendSampleBuffer:] or -[AVAssetWriterInputPixelBufferAdaptor appendPixelBuffer:withPresentationTime:].
 */
 - (void)cancelWriting;
 
 /*!
- @method finishWriting:
+ @method finishWriting
  @abstract
 	Completes the writing of the output file.
  
@@ -348,14 +309,11 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 	A BOOL indicating whether writing successfully finished.
  
  @discussion
-	This method will block until writing is finished. When this method returns successfully, the file being written by
-	the receiver is complete and ready to use.
+	This method will block until writing is finished. When this method returns successfully, the file being written by the receiver is complete and ready to use.
  
-	If writing cannot be finished, this method returns NO. Clients can check the values of the status and error
-	properties for more information on why writing could not be finished.
+	If writing cannot be finished, this method returns NO. Clients can check the values of the status and error properties for more information on why writing could not be finished.
 	
-	This method should not be called concurrently with -[AVAssetWriterInput appendSampleBuffer:] or
-	-[AVAssetWriterInputPixelBufferAdaptor appendPixelBuffer:withPresentationTime:].
+	This method should not be called concurrently with -[AVAssetWriterInput appendSampleBuffer:] or -[AVAssetWriterInputPixelBufferAdaptor appendPixelBuffer:withPresentationTime:].
 */
 - (BOOL)finishWriting;
 
@@ -370,9 +328,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 	For file types that support movie fragments, specifies the frequency at which movie fragments should be written.
  
  @discussion
-	When movie fragments are used, a partially written asset whose writing is unexpectedly interrupted can be
-	successfully opened and played up to multiples of the specified time interval. The default value of this property is
-	kCMTimeInvalid, which indicates that movie fragments should not be used.
+	When movie fragments are used, a partially written asset whose writing is unexpectedly interrupted can be successfully opened and played up to multiples of the specified time interval. The default value of this property is kCMTimeInvalid, which indicates that movie fragments should not be used.
 
 	This property cannot be set after writing has started.
  */
@@ -381,14 +337,13 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 /*!
  @property movieTimeScale
  @abstract
-	For file types that contain a 'moov' atom, such as QuickTime Movie files, specifies the asset-level time scale to be
-	used. 
+	For file types that contain a 'moov' atom, such as QuickTime Movie files, specifies the asset-level time scale to be used. 
 
  @discussion
 	The default value is 0, which indicates that the receiver should choose a convenient value, if applicable.
  
 	This property cannot be set after writing has started.
  */
-@property (nonatomic) CMTimeScale movieTimeScale;
+@property (nonatomic) CMTimeScale movieTimeScale NS_AVAILABLE(10_7, 4_3);
 
 @end

@@ -1,7 +1,7 @@
 /*
 	NSScrollView.h
 	Application Kit
-	Copyright (c) 1994-2011, Apple Inc.
+	Copyright (c) 1994-2012, Apple Inc.
 	All rights reserved.
 */
 #import <Foundation/NSDate.h>
@@ -179,7 +179,39 @@ typedef struct __SFlags {
 - (BOOL)usesPredominantAxisScrolling NS_AVAILABLE_MAC(10_7);
 - (void)setUsesPredominantAxisScrolling:(BOOL)predominantAxisScrolling NS_AVAILABLE_MAC(10_7);
 
+/* Allow the user to magnify the scrollview. Note: this does not prevent the developer from manually adjusting the magnification value. If magnification exceeds either the maximum or minimum limits for magnification, and allowsMagnification is YES, the scroll view temporarily animates the content magnification just past those limits before returning to them. The default value is NO.
+*/
+@property BOOL allowsMagnification NS_AVAILABLE_MAC(10_8);
+
+/* This value determines how much the content is currently scaled. To animate the magnification, use the object's animator. The default value is 1.0 */
+@property CGFloat magnification NS_AVAILABLE_MAC(10_8);
+
+/* This value determines how large the content can be magnified. It must be greater than or equal to the minimum magnification. The default value is 4.0.
+*/
+@property CGFloat maxMagnification NS_AVAILABLE_MAC(10_8);
+
+/* This value determines how small the content can be magnified. The default value is 0.25.
+*/
+@property CGFloat minMagnification NS_AVAILABLE_MAC(10_8);
+
+/* Magnify content view proportionally such that the entire rect (in content view space) fits centered in the scroll view. The resulting magnification value is clipped to the minMagnification and maxMagnification values. To animate the magnification, use the object's animator.
+*/
+- (void)magnifyToFitRect:(NSRect)rect NS_AVAILABLE_MAC(10_8);
+
+/* Scale the content view such that the passed in point (in content view space) remains at the same screen location once the scaling is completed. The resulting magnification value is clipped to the minMagnification and maxMagnification values. To animate the magnification, use the object's animator.
+*/
+- (void)setMagnification:(CGFloat)magnification centeredAtPoint:(NSPoint)point NS_AVAILABLE_MAC(10_8);
+
 @end
+
+/* This notification is sent at the beginning of a magnify gesture. The notification object is the scroll view performing the magnification.
+*/
+APPKIT_EXTERN NSString * const NSScrollViewWillStartLiveMagnifyNotification NS_AVAILABLE_MAC(10_8);
+
+/* This notification is sent at the end of magnify gesture. The notification object is the scroll view view performing the magnification.
+*/
+APPKIT_EXTERN NSString * const NSScrollViewDidEndLiveMagnifyNotification NS_AVAILABLE_MAC(10_8);
+
 
 @interface NSScrollView(NSRulerSupport)
 

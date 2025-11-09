@@ -2,16 +2,9 @@
      File:       CarbonCore/ToolUtils.h
  
      Contains:   Toolbox Utilities Interfaces.
+                 The contents of this header file are deprecated.
  
-     Version:    CarbonCore-960.18~3
- 
-     Copyright:  © 1990-2008 by Apple Computer, Inc., all rights reserved
- 
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
- 
-                     http://developer.apple.com/bugreporter/
- 
+     Copyright:  © 1990-2011 by Apple Inc. All rights reserved.
 */
 #ifndef __TOOLUTILS__
 #define __TOOLUTILS__
@@ -21,7 +14,7 @@
 #endif
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -78,7 +71,7 @@ extern "C" {
 extern Boolean 
 BitTst(
   const void *  bytePtr,
-  long          bitNum)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long          bitNum)                                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -92,7 +85,7 @@ BitTst(
 extern void 
 BitSet(
   void *  bytePtr,
-  long    bitNum)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long    bitNum)                                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -106,7 +99,7 @@ BitSet(
 extern void 
 BitClr(
   void *  bytePtr,
-  long    bitNum)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long    bitNum)                                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -120,7 +113,7 @@ BitClr(
 extern long 
 BitAnd(
   long   value1,
-  long   value2)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long   value2)                                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -134,7 +127,7 @@ BitAnd(
 extern long 
 BitOr(
   long   value1,
-  long   value2)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long   value2)                                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -148,7 +141,7 @@ BitOr(
 extern long 
 BitXor(
   long   value1,
-  long   value2)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long   value2)                                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -160,7 +153,7 @@ BitXor(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern long 
-BitNot(long value)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+BitNot(long value)                                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -174,7 +167,7 @@ BitNot(long value)                                            AVAILABLE_MAC_OS_X
 extern long 
 BitShift(
   long    value,
-  short   count)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short   count)                                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 #define HiWord(x) ((short)((long)(x) >> 16))

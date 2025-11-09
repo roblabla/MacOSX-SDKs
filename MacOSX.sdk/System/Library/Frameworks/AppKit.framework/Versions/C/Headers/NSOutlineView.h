@@ -1,7 +1,7 @@
 /*
     NSOutlineView.h
     Application Kit
-    Copyright (c) 1997-2011, Apple Inc.
+    Copyright (c) 1997-2012, Apple Inc.
     All rights reserved.
 */
 
@@ -20,71 +20,71 @@
 
 typedef struct __OvFlags {
 #ifdef __BIG_ENDIAN__
-    unsigned int	delegateWillDisplayCell:1;
-    unsigned int	delegateShouldEditTableColumn:1;
-    unsigned int	delegateShouldSelectItem:1;
-    unsigned int	delegateShouldSelectTableColumn:1;
-    unsigned int	delegateSelectionShouldChangeInOutlineView:1;
-    unsigned int	delegateShouldCollapseItem:1;
-    unsigned int	delegateShouldExpandItem:1;
-    unsigned int	autoresizesOutlineColumn:1;
-    unsigned int	autoSaveExpandItems:1;
-    unsigned int	enableExpandNotifications:1;
-    unsigned int	delegateWillDisplayOutlineCell:1;
-    unsigned int	subclassRowForItem:1;
-    unsigned int 	selectionAdjustmentDisabled:1;
-    unsigned int	autoExpandFlashState:1;
-    unsigned int	animateExpandAndCollapse:1;
-    unsigned int        delegateHeightOfRowByItem:1;
-    unsigned int        delayRowEntryFreeDisabled:1;
-    unsigned int        numberOfRowsDataExpandEntered:1;
-    unsigned int        validDataSourceMethods:1;
-    unsigned int        reloadingData:1;
-    unsigned int        dataSourceDraggingEndedAt:1;
-    unsigned int        dataSourceDraggedImageMovedTo:1;
-    unsigned int        delegateShouldShowOutlineCellForItem:1;
-    unsigned int        delegateAutoExpandItem:1;
-    unsigned int        delegateAutoCollapseItem:1;
-    unsigned int        delegateShouldAutoExpandItem:1;
-    unsigned int        flashingEntireRow:1;
-    unsigned int        flashingOutlineCell:1;
-    unsigned int        dontRedisplayOnFrameChange:1;
-    unsigned int        allowAutomaticAnimations:1;
-    unsigned int        dataSourceObjectValueByItem:1;
-    unsigned int	allItemsLoaded:1;
+    unsigned int delegateWillDisplayCell:1;
+    unsigned int delegateShouldEditTableColumn:1;
+    unsigned int delegateShouldSelectItem:1;
+    unsigned int delegateShouldSelectTableColumn:1;
+    unsigned int delegateSelectionShouldChangeInOutlineView:1;
+    unsigned int delegateShouldCollapseItem:1;
+    unsigned int delegateShouldExpandItem:1;
+    unsigned int autoresizesOutlineColumn:1;
+    unsigned int autoSaveExpandItems:1;
+    unsigned int enableExpandNotifications:1;
+    unsigned int delegateWillDisplayOutlineCell:1;
+    unsigned int subclassRowForItem:1;
+    unsigned int selectionAdjustmentDisabled:1;
+    unsigned int autoExpandFlashState:1;
+    unsigned int animateExpandAndCollapse:1;
+    unsigned int delegateHeightOfRowByItem:1;
+    unsigned int delayRowEntryFreeDisabled:1;
+    unsigned int numberOfRowsDataExpandEntered:1;
+    unsigned int validDataSourceMethods:1;
+    unsigned int reloadingData:1;
+    unsigned int dataSourceDraggingEndedAt:1;
+    unsigned int dataSourceDraggedImageMovedTo:1;
+    unsigned int delegateShouldShowOutlineCellForItem:1;
+    unsigned int delegateAutoExpandItem:1;
+    unsigned int delegateAutoCollapseItem:1;
+    unsigned int delegateShouldAutoExpandItem:1;
+    unsigned int flashingEntireRow:1;
+    unsigned int flashingOutlineCell:1;
+    unsigned int dontRedisplayOnFrameChange:1;
+    unsigned int allowAutomaticAnimations:1;
+    unsigned int dataSourceObjectValueByItem:1;
+    unsigned int allItemsLoaded:1;
 #else
-    unsigned int	allItemsLoaded:1;
-    unsigned int        dataSourceObjectValueByItem:1;
-    unsigned int        allowAutomaticAnimations:1;
-    unsigned int        dontRedisplayOnFrameChange:1;
-    unsigned int        flashingOutlineCell:1;
-    unsigned int        flashingEntireRow:1;
-    unsigned int        delegateShouldAutoExpandItem:1;
-    unsigned int        delegateAutoCollapseItem:1;
-    unsigned int        delegateAutoExpandItem:1;
-    unsigned int        delegateShouldShowOutlineCellForItem:1;
-    unsigned int        dataSourceDraggedImageMovedTo:1;
-    unsigned int        dataSourceDraggingEndedAt:1;
-    unsigned int        reloadingData:1;
-    unsigned int        validDataSourceMethods:1;
-    unsigned int        numberOfRowsDataExpandEntered:1;
-    unsigned int        delayRowEntryFreeDisabled:1;
-    unsigned int        delegateHeightOfRowByItem:1;
-    unsigned int	animateExpandAndCollapse:1;
-    unsigned int	autoExpandFlashState:1;
-    unsigned int 	selectionAdjustmentDisabled:1;
-    unsigned int	subclassRowForItem:1;
-    unsigned int	delegateWillDisplayOutlineCell:1;
-    unsigned int	enableExpandNotifications:1;
-    unsigned int	autoSaveExpandItems:1;
-    unsigned int	autoresizesOutlineColumn:1;
-    unsigned int	delegateShouldExpandItem:1;
-    unsigned int	delegateShouldCollapseItem:1;
-    unsigned int	delegateSelectionShouldChangeInOutlineView:1;
-    unsigned int	delegateShouldSelectTableColumn:1;
-    unsigned int	delegateShouldSelectItem:1;
-    unsigned int	delegateShouldEditTableColumn:1;
-    unsigned int	delegateWillDisplayCell:1;
+    unsigned int allItemsLoaded:1;
+    unsigned int dataSourceObjectValueByItem:1;
+    unsigned int allowAutomaticAnimations:1;
+    unsigned int dontRedisplayOnFrameChange:1;
+    unsigned int flashingOutlineCell:1;
+    unsigned int flashingEntireRow:1;
+    unsigned int delegateShouldAutoExpandItem:1;
+    unsigned int delegateAutoCollapseItem:1;
+    unsigned int delegateAutoExpandItem:1;
+    unsigned int delegateShouldShowOutlineCellForItem:1;
+    unsigned int dataSourceDraggedImageMovedTo:1;
+    unsigned int dataSourceDraggingEndedAt:1;
+    unsigned int reloadingData:1;
+    unsigned int validDataSourceMethods:1;
+    unsigned int numberOfRowsDataExpandEntered:1;
+    unsigned int delayRowEntryFreeDisabled:1;
+    unsigned int delegateHeightOfRowByItem:1;
+    unsigned int animateExpandAndCollapse:1;
+    unsigned int autoExpandFlashState:1;
+    unsigned int selectionAdjustmentDisabled:1;
+    unsigned int subclassRowForItem:1;
+    unsigned int delegateWillDisplayOutlineCell:1;
+    unsigned int enableExpandNotifications:1;
+    unsigned int autoSaveExpandItems:1;
+    unsigned int autoresizesOutlineColumn:1;
+    unsigned int delegateShouldExpandItem:1;
+    unsigned int delegateShouldCollapseItem:1;
+    unsigned int delegateSelectionShouldChangeInOutlineView:1;
+    unsigned int delegateShouldSelectTableColumn:1;
+    unsigned int delegateShouldSelectItem:1;
+    unsigned int delegateShouldEditTableColumn:1;
+    unsigned int delegateWillDisplayCell:1;
 #endif
 } _OVFlags;
 
@@ -96,27 +96,27 @@ enum { NSOutlineViewDropOnItemIndex = -1 };
 
 @interface NSOutlineView : NSTableView {
   @private
-    NSInteger		 _numberOfRows;    
+    NSInteger                                 _numberOfRows;    
     _NSOVRowEntry       *_rowEntryTree;
     NSMapTable          *_itemToEntryMap;
     __strong CFMutableArrayRef _rowEntryArray;
     NSInteger            _firstRowIndexDrawn;
     id                   _autoExpandTimerItem;
-    NSTableColumn	*_outlineTableColumn;
+    NSTableColumn                *_outlineTableColumn;
     BOOL                 _initedRows;
-    BOOL		 _indentationMarkerInCell;
-    NSInteger		 _indentationPerLevel;
-    NSButtonCell       	*_outlineCell;
-    NSRect		 _trackingOutlineFrame;
+    BOOL                                 _indentationMarkerInCell;
+    NSInteger                                 _indentationPerLevel;
+    NSButtonCell                       *_outlineCell;
+    NSRect                                 _trackingOutlineFrame;
     id                   _expandingItem;
-    NSInteger		 _unused;
-    _OVFlags		 _ovFlags;
-    id			 _ovLock;
+    NSInteger                                 _unused;
+    _OVFlags                                 _ovFlags;
+    id                                                 _ovLock;
     __strong long       *_indentArray;
-    long		 _originalWidth;
-    id			 _expandSet;
-    id			 _expandSetToExpandItemsInto;
-    long       		 _indentArraySize;
+    long                                 _originalWidth;
+    id                                                 _expandSet;
+    id                                                 _expandSetToExpandItemsInto;
+    long                                        _indentArraySize;
     NSButtonCell        *_trackingOutlineCell;
     NSInteger            _trackingRow;
     id                   _ovReserved;
@@ -446,8 +446,8 @@ enum { NSOutlineViewDropOnItemIndex = -1 };
 /* Notifications 
 */
 APPKIT_EXTERN NSString *NSOutlineViewSelectionDidChangeNotification;
-APPKIT_EXTERN NSString *NSOutlineViewColumnDidMoveNotification;		// @"NSOldColumn", @"NSNewColumn"
-APPKIT_EXTERN NSString *NSOutlineViewColumnDidResizeNotification;	// @"NSTableColumn", @"NSOldWidth"
+APPKIT_EXTERN NSString *NSOutlineViewColumnDidMoveNotification;                                // @"NSOldColumn", @"NSNewColumn"
+APPKIT_EXTERN NSString *NSOutlineViewColumnDidResizeNotification;                // @"NSTableColumn", @"NSOldWidth"
 APPKIT_EXTERN NSString *NSOutlineViewSelectionIsChangingNotification;
 
 

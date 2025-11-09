@@ -50,6 +50,7 @@
 
 #ifdef __APPLE__
 #include <mach/mach.h>		/* audit_token_t */
+#include <Availability.h>
 #endif
 
 /*
@@ -902,7 +903,7 @@ __END_DECLS
 #endif /* !__APPLE__ */
 
 /*
- * Error return codes for audit_set_terminal_id(), audit_write() and its
+ * Error return codes for audit_set_terminal_id_ex(), audit_write() and its
  * brethren.  We have 255 (not including kAUNoErr) to play with.
  *
  * XXXRW: In Apple's bsm-8, these are marked __APPLE_API_PRIVATE.
@@ -997,12 +998,20 @@ int	cannot_audit(int);
 
 __BEGIN_DECLS
 /*
+ * audit_set_terminal_id_ex()
  * audit_set_terminal_id()
  *
- * @summary - audit_set_terminal_id() fills in an au_tid_t struct, which is
- * used in audit session initialization by processes like /usr/bin/login.
+ * @summary - audit_set_terminal_id_ex() fills in an au_tid_addr_t struct,
+ * which is used in audit session initialization by processes like
+ * /usr/bin/login.  audit_set_terminal_id() does the same but for the
+ * au_tid_t structure.  Note that audit_set_terminal_id_ex() is preferred
+ * since it can store longer terminal addresses like those used in IP
+ * version 6.  Neither audit_set_terminal_id() nor audit_set_terminal_id_ex()
+ * should be used if the terminal connection is a remote one and the remote IP
+ * address and port is known, however.  These wrapper functions populate the
+ * au_tid_t or au_tid_addr_t stuctures with local terminal information only.
  *
- * @param tid - A pointer to an au_tid_t struct.
+ * @param tid - A pointer to an au_tid_addr_t or au_tid_t struct.
  *
  * @return - kAUNoErr on success; kAUBadParamErr if tid is NULL, kAUStatErr
  * or kAUSysctlErr if one of the underlying system calls fails (a message
@@ -1010,6 +1019,7 @@ __BEGIN_DECLS
  *
  * XXXRW: In Apple's bsm-8, these are marked __APPLE_API_PRIVATE.
  */
+int	audit_set_terminal_id_ex(au_tid_addr_t *tid);
 int	audit_set_terminal_id(au_tid_t *tid);
 
 /*
@@ -1069,13 +1079,17 @@ int	audit_write(short event_code, token_t *subject, token_t *misctok,
 	    char retval, int errcode);
 
 /*
+ * audit_write_success_ex()
  * audit_write_success()
  *
- * @summary - audit_write_success() records an auditable event that did not
- * encounter an error.  The interface is designed to require as little
- * direct use of the au_to_*() API as possible.  It builds a subject token
- * from the information passed in and uses that to invoke audit_write().
- * A subject, as defined by CAPP, is a process acting on the user's behalf.
+ * @summary - audit_write_success_ex() and audit_write_success() record
+ * an auditable event that did not encounter an error.  The interface is
+ * designed to require as little direct use of the au_to_*() API as possible.
+ * It builds a subject token from the information passed in and uses that to
+ * invoke audit_write(). A subject, as defined by CAPP, is a process acting
+ * on the user's behalf. Preference should be given in using
+ * audit_write_success_ex() since it supports longer addreses such as those
+ * used for IP version 6.
  *
  * If the subject information is the same as the current process, use
  * au_write_success_self().
@@ -1109,6 +1123,10 @@ int	audit_write(short event_code, token_t *subject, token_t *misctok,
  *
  * XXXRW: In Apple's bsm-8, these are marked __APPLE_API_PRIVATE.
  */
+
+int	audit_write_success_ex(short event_code, token_t *misctok, au_id_t auid,
+	    uid_t euid, gid_t egid, uid_t ruid, gid_t rgid, pid_t pid,
+	    au_asid_t sid, au_tid_addr_t *tid);
 int	audit_write_success(short event_code, token_t *misctok, au_id_t auid,
 	    uid_t euid, gid_t egid, uid_t ruid, gid_t rgid, pid_t pid,
 	    au_asid_t sid, au_tid_t *tid);
@@ -1116,7 +1134,7 @@ int	audit_write_success(short event_code, token_t *misctok, au_id_t auid,
 /*
  * audit_write_success_self()
  *
- * @summary - Similar to audit_write_success(), but used when the subject
+ * @summary - Similar to audit_write_success_ex(), but used when the subject
  * (process) is owned and operated by the auditable user him/herself.
  *
  * @param event_code - The code for the event being logged.  This should
@@ -1135,13 +1153,16 @@ int	audit_write_success(short event_code, token_t *misctok, au_id_t auid,
 int	audit_write_success_self(short event_code, token_t *misctok);
 
 /*
+ * audit_write_failure_ex()
  * audit_write_failure()
  *
- * @summary - audit_write_failure() records an auditable event that
- * encountered an error.  The interface is designed to require as little
- * direct use of the au_to_*() API as possible.  It builds a subject token
- * from the information passed in and uses that to invoke audit_write().
- * A subject, as defined by CAPP, is a process acting on the user's behalf.
+ * @summary - audit_write_failure_ex() and audit_write_failure() records an
+ * auditable event that encountered an error.  The interface is designed to
+ * require as little direct use of the au_to_*() API as possible.  It builds
+ * a subject token from the information passed in and uses that to invoke audit
+ * write(). A subject, as defined by CAPP, is a process acting on the user's
+ * behalf. Preference should be given in using audit_write_success_ex() since
+ * it supports longer addreses such as those used for IP version 6.
  *
  * If the subject information is the same as the current process, use
  * au_write_failure_self().
@@ -1178,6 +1199,9 @@ int	audit_write_success_self(short event_code, token_t *misctok);
  *
  * XXXRW: In Apple's bsm-8, these are marked __APPLE_API_PRIVATE.
  */
+int	audit_write_failure_ex(short event_code, char *errmsg, int errret,
+	    au_id_t auid, uid_t euid, gid_t egid, uid_t ruid, gid_t rgid,
+	    pid_t pid, au_asid_t sid, au_tid_addr_t *tid);
 int	audit_write_failure(short event_code, char *errmsg, int errret,
 	    au_id_t auid, uid_t euid, gid_t egid, uid_t ruid, gid_t rgid,
 	    pid_t pid, au_asid_t sid, au_tid_t *tid);
@@ -1207,10 +1231,14 @@ int	audit_write_failure(short event_code, char *errmsg, int errret,
 int	audit_write_failure_self(short event_code, char *errmsg, int errret);
 
 /*
+ * audit_write_failure_na_ex()
  * audit_write_failure_na()
  *
- * @summary - audit_write_failure_na() records errors during login.  Such
- * errors are implicitly non-attributable (i.e., not ascribable to any user).
+ * @summary - audit_write_failure_na_ex()  and audit_write_failure_na() record
+ * errors during login.  Such errors are implicitly non-attributable (i.e., not
+ * ascribable to any user).  Preference should be given in using
+ * audit_write_failure_na_ex() since it supports longer addreses such as those
+ * used for IP version 6.
  *
  * @param event_code - The code for the event being logged.  This should
  * be one of the AUE_ values in /usr/include/bsm/audit_uevents.h.
@@ -1236,6 +1264,8 @@ int	audit_write_failure_self(short event_code, char *errmsg, int errret);
  *
  * XXXRW: In Apple's bsm-8, these are marked __APPLE_API_PRIVATE.
  */
+int	audit_write_failure_na_ex(short event_code, char *errmsg, int errret,
+	    uid_t euid, gid_t egid, pid_t pid, au_tid_addr_t *tid);
 int	audit_write_failure_na(short event_code, char *errmsg, int errret,
 	    uid_t euid, gid_t egid, pid_t pid, au_tid_t *tid);
 
@@ -1243,14 +1273,19 @@ int	audit_write_failure_na(short event_code, char *errmsg, int errret,
 
 #ifdef  __APPLE__
 /*
- * audit_token_to_au32()
+ * audit_token_to_au32()  (NOW DEPRECATED)
  *
  * @summary - Extract information from an audit_token_t, used to identify
  * Mach tasks and senders of Mach messages as subjects to the audit system.
  * audit_tokent_to_au32() is the only method that should be used to parse
  * an audit_token_t, since its internal representation may change over
  * time.  A pointer parameter may be NULL if that information is not
- * needed.
+ * needed.  audit_token_to_au32() has been deprecated because the terminal
+ * ID information is no longer saved in this token.  The last parameter
+ * is actually the process ID version.  The API calls audit_token_to_auid(),
+ * audit_token_to_euid(), audit_token_to_ruid(), audit_token_to_rgid(),
+ * audit_token_to_pid(), audit_token_to_asid(),  and/or
+ * audit_token_to_pidversion() should be used instead.
  *
  * @param atoken - the audit token containing the desired information
  *
@@ -1275,8 +1310,8 @@ int	audit_write_failure_na(short event_code, char *errmsg, int errret,
  * @param asidp - Pointer to an au_asid_t; on return will be set to the
  * task or sender's audit session ID
  *
- * @param tidp - Pointer to an au_tid_t; on return will be set to the task
- * or sender's terminal ID
+ * @param tidp - Pointer to an au_tid_t; on return will be set to the
+ * process ID version and NOT THE SENDER'S TERMINAL ID.
  *
  * XXXRW: In Apple's bsm-8, these are marked __APPLE_API_PRIVATE.
  */
@@ -1290,6 +1325,118 @@ void audit_token_to_au32(
 	pid_t		*pidp,
 	au_asid_t	*asidp,
 	au_tid_t	*tidp);
+
+/*
+ * audit_token_to_auid()
+ *
+ * @summary - Extract the audit user ID from an audit_token_t, used to
+ * identify Mach tasks and senders of Mach messages as subjects of the audit
+ * system.
+ *
+ * @param atoken - The Mach audit token.
+ *
+ * @return - The audit user ID extracted from the Mach audit token.
+ */
+uid_t audit_token_to_auid(audit_token_t atoken)
+	__OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
+
+/*
+ * audit_token_to_euid()
+ *
+ * @summary - Extract the effective user ID from an audit_token_t, used to
+ * identify Mach tasks and senders of Mach messages as subjects of the audit
+ * system.
+ *
+ * @param atoken - The Mach audit token.
+ *
+ * @return - The effective user ID extracted from the Mach audit token.
+ */
+uid_t audit_token_to_euid(audit_token_t atoken)
+	__OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
+
+/*
+ * audit_token_to_egid()
+ *
+ * @summary - Extract the effective group ID from an audit_token_t, used to
+ * identify Mach tasks and senders of Mach messages as subjects of the audit
+ * system.
+ *
+ * @param atoken - The Mach audit token.
+ *
+ * @return - The effective group ID extracted from the Mach audit token.
+ */
+gid_t audit_token_to_egid(audit_token_t atoken)
+	__OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
+
+/*
+ * audit_token_to_ruid()
+ *
+ * @summary - Extract the real user ID from an audit_token_t, used to
+ * identify Mach tasks and senders of Mach messages as subjects of the audit
+ * system.
+ *
+ * @param atoken - The Mach audit token.
+ *
+ * @return - The real user ID extracted from the Mach audit token.
+ */
+uid_t audit_token_to_ruid(audit_token_t atoken)
+	__OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
+
+/*
+ * audit_token_to_rgid()
+ *
+ * @summary - Extract the real group ID from an audit_token_t, used to
+ * identify Mach tasks and senders of Mach messages as subjects of the audit
+ * system.
+ *
+ * @param atoken - The Mach audit token.
+ *
+ * @return - The real group ID extracted from the Mach audit token.
+ */
+gid_t audit_token_to_rgid(audit_token_t atoken)
+	__OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
+
+/*
+ * audit_token_to_pid()
+ *
+ * @summary - Extract the process ID from an audit_token_t, used to
+ * identify Mach tasks and senders of Mach messages as subjects of the audit
+ * system.
+ *
+ * @param atoken - The Mach audit token.
+ *
+ * @return - The process ID extracted from the Mach audit token.
+ */
+pid_t audit_token_to_pid(audit_token_t atoken)
+	__OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
+
+/*
+ * audit_token_to_asid()
+ *
+ * @summary - Extract the audit session ID from an audit_token_t, used to
+ * identify Mach tasks and senders of Mach messages as subjects of the audit
+ * system.
+ *
+ * @param atoken - The Mach audit token.
+ *
+ * @return - The audit session ID extracted from the Mach audit token.
+ */
+au_asid_t audit_token_to_asid(audit_token_t atoken)
+	__OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
+
+/*
+ * audit_token_to_pidversion()
+ *
+ * @summary - Extract the process ID version from an audit_token_t, used to
+ * identify Mach tasks and senders of Mach messages as subjects of the audit
+ * system.
+ *
+ * @param atoken - The Mach audit token.
+ *
+ * @return - The process ID version extracted from the Mach audit token.
+ */
+int audit_token_to_pidversion(audit_token_t atoken)
+	__OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
 #endif /* !__APPLE__ */
 
 /*

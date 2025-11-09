@@ -1,5 +1,5 @@
 /*	CFAttributedString.h
-	Copyright (c) 2004-2011, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2012, Apple Inc. All rights reserved.
 */
 
 /*! @header CFAttributedString
@@ -17,6 +17,7 @@ Attributes are identified by key/value pairs stored in CFDictionaryRefs. Keys mu
 #include <CoreFoundation/CFString.h>
 #include <CoreFoundation/CFDictionary.h>
 
+CF_IMPLICIT_BRIDGING_ENABLED
 CF_EXTERN_C_BEGIN
 
 
@@ -141,6 +142,7 @@ CF_EXPORT void CFAttributedStringEndEditing(CFMutableAttributedStringRef aStr);
 
 
 CF_EXTERN_C_END
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif /* ! __COREFOUNDATION_CFATTRIBUTEDSTRING__ */
 

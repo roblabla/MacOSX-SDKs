@@ -53,6 +53,7 @@ extern "C" {
 	@constant kSecPolicyAppleCodeSigning
 	@constant kSecPolicyMacAppStoreReceipt
 	@constant kSecPolicyAppleIDValidation
+	@constant kSecPolicyAppleTimeStamping
 */
 extern CFTypeRef kSecPolicyAppleX509Basic
     __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA);
@@ -76,6 +77,8 @@ extern CFTypeRef kSecPolicyMacAppStoreReceipt
     __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA);
 extern CFTypeRef kSecPolicyAppleIDValidation
     __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA);
+extern CFTypeRef kSecPolicyAppleTimeStamping
+    __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
 
 /*!
     @enum Policy Value Constants

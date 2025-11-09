@@ -1,8 +1,8 @@
 /*
-	NSView.h
-	Application Kit
-	Copyright (c) 1994-2011, Apple Inc.
-	All rights reserved.
+    NSView.h
+    Application Kit
+    Copyright (c) 1994-2012, Apple Inc.
+    All rights reserved.
 */
 
 #import <AppKit/NSResponder.h>
@@ -38,9 +38,13 @@ typedef NSUInteger NSBorderType;
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
 enum {
+    // Leave the layer's contents alone. Never mark the layer as needing display, or draw the view's contents to the layer
     NSViewLayerContentsRedrawNever                  = 0,
+    // Map view -setNeedsDisplay...: activity to the layer, and redraw affected layer parts by invoking the view's -drawRect:, but don't mark the view or layer as needing display when the view's size changes.
     NSViewLayerContentsRedrawOnSetNeedsDisplay      = 1,
+    // Resize the layer and redraw the view to the layer when the view's size changes. If the resize is animated, AppKit will drive the resize animation itself and will do this resize+redraw at each step of the animation. Affected parts of the layer will also be redrawn when the view is marked as needing display. (This mode is a superset of NSViewLayerContentsRedrawOnSetNeedsDisplay.) 
     NSViewLayerContentsRedrawDuringViewResize       = 2,
+    // Resize the layer and redraw the view to the layer when the view's size changes. This will be done just once at the beginning of a resize animation, not at each frame of the animation. Affected parts of the layer will also be redrawn when the view is marked as needing display. (This mode is a superset of NSViewLayerContentsRedrawOnSetNeedsDisplay.)
     NSViewLayerContentsRedrawBeforeViewResize       = 3
 };
 #endif
@@ -81,22 +85,22 @@ typedef struct __VFlags {
 	unsigned int        boundsChangeNotesSuspended:1;
 	unsigned int        needsBoundsChangeNote:1;
 	unsigned int        removingWithoutInvalidation:1;
-        unsigned int        interfaceStyle0:1;
+	unsigned int        isFlipped:1;
 	unsigned int        needsDisplayForBounds:1;
 	unsigned int        specialArchiving:1;
-	unsigned int        interfaceStyle1:1;
+	unsigned int        ignoreHitTest:1;
 	unsigned int        retainCount:6;
-	unsigned int        retainCountOverMax:1;
+	unsigned int        isOpaque:1;
 	unsigned int        aboutToResize:1;
 #else
 	unsigned int        aboutToResize:1;
-	unsigned int        retainCountOverMax:1;
+	unsigned int        isOpaque:1;
 	unsigned int        retainCount:6;
-	unsigned int        interfaceStyle1:1;
+	unsigned int        ignoreHitTest:1;
 	unsigned int        specialArchiving:1;
 	unsigned int        needsDisplayForBounds:1;
-	unsigned int        interfaceStyle0:1;
-        unsigned int        removingWithoutInvalidation:1;
+	unsigned int        isFlipped:1;
+	unsigned int        removingWithoutInvalidation:1;
 	unsigned int        needsBoundsChangeNote:1;
 	unsigned int        boundsChangeNotesSuspended:1;
 	unsigned int        focusChangeNotesSuspended:1;
@@ -121,28 +125,27 @@ typedef NSInteger NSToolTipTag;
 
 @interface NSView : NSResponder <NSAnimatablePropertyContainer, NSUserInterfaceItemIdentification, NSDraggingDestination>
 {
-    /*All instance variables are private*/
+    /* All instance variables are private */
     NSRect              _frame;
     NSRect              _bounds;
     id                  _superview;
-    id			_subviews;
-    NSWindow            *_window;
+    id                  _subviews;
+    NSWindow           *_window;
     id                  _gState;
     id                  _frameMatrix;
-    id			_drawMatrix;
-    id			_dragTypes;
-    _NSViewAuxiliary	*_viewAuxiliary;
-    _VFlags		_vFlags;
+    CALayer             *_layer;
+    id     	        _dragTypes;
+    _NSViewAuxiliary    *_viewAuxiliary;
+    _VFlags     	_vFlags;
     struct __VFlags2 {
-	unsigned int	nextKeyViewRefCount:14;
-	unsigned int	previousKeyViewRefCount:14;
-	unsigned int	isVisibleRect:1;
-	unsigned int	hasToolTip:1;
-	unsigned int	needsRealLockFocus:1;
-	unsigned int	menuWasSet:1;
+        unsigned int nextKeyViewRefCount:14;
+        unsigned int previousKeyViewRefCount:14;
+        unsigned int isVisibleRect:1;
+        unsigned int hasToolTip:1;
+        unsigned int cachedIsFlipped:1;
+        unsigned int menuWasSet:1;
     } _vFlags2;
 }
-
 
 - (id)initWithFrame:(NSRect)frameRect;
 
@@ -175,6 +178,7 @@ typedef NSInteger NSToolTipTag;
 - (void)removeFromSuperview;
 - (void)replaceSubview:(NSView *)oldView with:(NSView *)newView;
 - (void)removeFromSuperviewWithoutNeedingDisplay;
+- (void)viewDidChangeBackingProperties NS_AVAILABLE_MAC(10_7); // available in 10.7.4
 
 - (void)setPostsFrameChangedNotifications:(BOOL)flag;
 - (BOOL)postsFrameChangedNotifications;
@@ -207,6 +211,9 @@ typedef NSInteger NSToolTipTag;
 - (BOOL)isFlipped;
 - (BOOL)isRotatedFromBase;
 - (BOOL)isRotatedOrScaledFromBase;
+
+/* A hint as to whether or not this view draws its contents completely opaque or not. Opaque content drawing can allow some optimizations to happen. The default value is NO.
+ */
 - (BOOL)isOpaque;
 
 - (NSPoint)convertPoint:(NSPoint)aPoint fromView:(NSView *)aView;
@@ -239,7 +246,7 @@ typedef NSInteger NSToolTipTag;
 - (NSRect)convertRectToLayer:(NSRect)aRect NS_AVAILABLE_MAC(10_7);
 - (NSRect)convertRectFromLayer:(NSRect)aRect NS_AVAILABLE_MAC(10_7);
 
-/* These methods are deprecated on 10.7 and later, and are superceded by the convert*To/FromBacking methods */
+/* These methods are deprecated on 10.7 and later. */
 
 - (NSPoint)convertPointToBase:(NSPoint)aPoint NS_AVAILABLE_MAC(10_5);
 - (NSPoint)convertPointFromBase:(NSPoint)aPoint NS_AVAILABLE_MAC(10_5);
@@ -282,7 +289,7 @@ typedef NSInteger NSToolTipTag;
 
 - (NSInteger)gState;
 - (void)allocateGState;
-- (void)releaseGState;
+- (oneway void)releaseGState;
 - (void)setUpGState;
 - (void)renewGState;
 
@@ -323,17 +330,31 @@ typedef NSInteger NSToolTipTag;
 
 - (CALayer *)makeBackingLayer NS_AVAILABLE_MAC(10_6);
 
+/* Get and set how the layer should redraw when resizing and redisplaying. Prior to 10.8, the default value was always set to NSViewLayerContentsRedrawDuringViewResize when an AppKit managed layer was created. In 10.8 and higher, the value is initialized to the appropriate thing for each individual AppKit view. Generally, the default value is NSViewLayerContentsRedrawOnSetNeedsDisplay if the view responds YES to -wantsUpdateLayer. On 10.8, these values are not encoded by the view.
+*/
 - (NSViewLayerContentsRedrawPolicy)layerContentsRedrawPolicy NS_AVAILABLE_MAC(10_6);
 - (void)setLayerContentsRedrawPolicy:(NSViewLayerContentsRedrawPolicy)newPolicy NS_AVAILABLE_MAC(10_6);
 
 - (NSViewLayerContentsPlacement)layerContentsPlacement NS_AVAILABLE_MAC(10_6);
 - (void)setLayerContentsPlacement:(NSViewLayerContentsPlacement)newPlacement NS_AVAILABLE_MAC(10_6);
 
+/* Indicates if this view should be a "Layer Backed View". When layer backed, all subviews will subsequently also have a layer set on them. Contents for a layer are specified in one of two ways: if -wantsUpdateLayer returns YES, then one can directly update the layer's contents (or other properties) in -updateLayer. If -wantsUpdateLayer returns NO, then the layer's contents is filled with whatever is drawn by -drawRect:
+ */
 - (void)setWantsLayer:(BOOL)flag NS_AVAILABLE_MAC(10_5);
 - (BOOL)wantsLayer NS_AVAILABLE_MAC(10_5);
 
+/* Get and set the CALayer for this view. The layer is not encoded by the view.
+ */
 - (void)setLayer:(CALayer *)newLayer NS_AVAILABLE_MAC(10_5);
 - (CALayer *)layer NS_AVAILABLE_MAC(10_5);
+
+/* Layer Backed Views: Return YES if this view supports directly setting the layer properties (such as the contents and backgroundColor) as opposed to filling in the contents with a drawRect: implementation. Most AppKit controls return YES if there is no subclassing involved that would alter the drawing appearance. It will return NO for views that do have subclassing that AppKit does not know about (such as, overriding drawRect:, or other drawing methods).
+ */
+- (BOOL)wantsUpdateLayer NS_AVAILABLE_MAC(10_8);
+
+/* Layer Backed Views: If the view responds YES to wantsUpdateLayer, then updateLayer will be called as opposed to drawRect:. This method should be used for better performance; it is faster to directly set the layer.contents with a shared image and inform it how to stretch with the layer.contentsCenter property instead of drawing into a context with drawRect:. In general, one should also set the layerContentsRedrawPolicy to an appropriate value in the init method (frequently NSViewLayerContentsRedrawOnSetNeedsDisplay is desired). To signal a refresh of the layer contents, one will then call [view setNeedsDisplay:YES], and -updateLayer will be lazily called when the layer needs its contents. One should not alter geometry or add/remove subviews (or layers) during this method. To add subviews (or layers) use -layout. -layout will stil be called even if autolayout is not enabled, and wantsUpdateLayer returns YES.
+ */
+- (void)updateLayer NS_AVAILABLE_MAC(10_8);
 
 - (void)setAlphaValue:(CGFloat)viewAlpha NS_AVAILABLE_MAC(10_5);
 - (CGFloat)alphaValue NS_AVAILABLE_MAC(10_5);
@@ -395,6 +416,23 @@ typedef NSInteger NSToolTipTag;
 /* Returns NSTextInputContext object for the receiver. Returns nil if the receiver doesn't conform to NSTextInputClient protocol.
  */
 - (NSTextInputContext *)inputContext NS_AVAILABLE_MAC(10_6);
+
+/* Return the complete rect of the most appropriate content grouping at the specified location. For example, if your content is divided into three columns, return the entire rect of the column that contains the location. NSScrollView will attempt to magnify such that the width fits inside the scroll view while remaining within the minMagnification, maxMagnification range.
+ 
+ If your content layout is sub-divided further than one level deep (for example, two boxes that each contain multiple text boxes), then use the visibleRect parameter to determine when to provide the rect of a sub-grouping. Always return a rect for the appropriate grouping. If there is no deeper content grouping, return the rect for the deepest grouping. NSScrollView will determine when to pan, magnify in, and magnify out.
+ 
+ Return NSZeroRect for the default behavior.
+ */
+- (NSRect)rectForSmartMagnificationAtPoint:(NSPoint)location inRect:(NSRect)visibleRect NS_AVAILABLE_MAC(10_8);
+
+@end
+
+@interface NSObject (NSLayerDelegateContentsScaleUpdating)
+
+/* This method can be implemented as an optional CALayer delegate method, for handling resolution changes.  When a window changes its backing resolution, AppKit attempts to automatically update the contentsScale and contents of all CALayers in the window to match the new resolution.  View backing layers are updated automatically.  Any layer whose "contents" property is set to an NSImage will also be updated automatically.  (Basedon the NSImage's available representations, AppKit will select an appropriate bitmapped representation, or rasterize a resolution-independent representation at the appropriate scale factor.)  For all other layers, AppKit will check whether the layer has a delegate that implements this method.  If so, AppKit will send this message to the layer's delegate to ask whether it should automatically update the contentsScale for that layer to match the backingScaleFactor of the window.  If you return YES for a given layer, AppKit will set the layer's contentsScale as proposed, and you must ensure that the layer's contents and other properties are configured appropriately for that new contentsScale.  (If you expressed the layer's "contents" as a CGImage, you may need to provide a different CGImage that's appropriate for the new contentsScale.) Note this method is only invoked when a window's backingScaleFactor changes. You are responsible for setting the initial contentsScale of your layers.
+*/
+- (BOOL)layer:(CALayer *)layer shouldInheritContentsScale:(CGFloat)newScale fromWindow:(NSWindow *)window NS_AVAILABLE_MAC(10_7); // added in 10.7.3
+
 @end
 
 @interface NSObject(NSToolTipOwner)
@@ -402,7 +440,6 @@ typedef NSInteger NSToolTipTag;
 @end
 
 @interface NSView(NSKeyboardUI)
-- (BOOL)performMnemonic:(NSString *)theString;
 - (void)setNextKeyView:(NSView *)next;
 - (NSView *)nextKeyView;
 - (NSView *)previousKeyView;
@@ -526,6 +563,15 @@ APPKIT_EXTERN NSString * const NSDefinitionPresentationTypeDictionaryApplication
 - (BOOL)isDrawingFindIndicator NS_AVAILABLE_MAC(10_7);
 
 @end
+
+@interface NSView(NSDeprecated)
+
+/* This method is deprecated in 10.8 and higher. On MacOS it has historically not done anything.
+ */
+- (BOOL)performMnemonic:(NSString *)theString NS_DEPRECATED_MAC(10_0, 10_8);
+
+@end
+
 
 /* Notifications */
 

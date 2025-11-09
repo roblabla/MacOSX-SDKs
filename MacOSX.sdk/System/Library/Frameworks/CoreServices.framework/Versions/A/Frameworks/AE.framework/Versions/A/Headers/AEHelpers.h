@@ -3,7 +3,7 @@
  
      Contains:   AEPrint, AEBuild and AEStream for Carbon
  
-     Version:    AppleEvents-527.7~1
+    
  
      Copyright:  © 1999-2008 by Apple Computer, Inc., all rights reserved.
  
@@ -34,7 +34,7 @@
 
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -111,7 +111,7 @@ AEBuildDesc(
   AEDesc *        dst,
   AEBuildError *  error,       /* can be NULL */
   const char *    src,
-  ...)                                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ...)                                                        __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 
 /* varargs version of AEBuildDesc*/
@@ -131,7 +131,7 @@ vAEBuildDesc(
   AEDesc *        dst,
   AEBuildError *  error,       /* can be NULL */
   const char *    src,
-  va_list         args)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  va_list         args)                                       __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 
 
@@ -152,7 +152,7 @@ AEBuildParameters(
   AppleEvent *    event,
   AEBuildError *  error,        /* can be NULL */
   const char *    format,
-  ...)                                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ...)                                                        __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 
 /* varargs version of AEBuildParameters*/
@@ -172,7 +172,7 @@ vAEBuildParameters(
   AppleEvent *    event,
   AEBuildError *  error,        /* can be NULL */
   const char *    format,
-  va_list         args)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  va_list         args)                                       __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 
 /* Building an entire Apple event:*/
@@ -199,7 +199,7 @@ AEBuildAppleEvent(
   AppleEvent *    result,
   AEBuildError *  error,               /* can be NULL */
   const char *    paramsFmt,
-  ...)                                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ...)                                                        __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 
 /* varargs version of AEBuildAppleEvent*/
@@ -226,7 +226,7 @@ vAEBuildAppleEvent(
   AppleEvent *    resultEvt,
   AEBuildError *  error,               /* can be NULL */
   const char *    paramsFmt,
-  va_list         args)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  va_list         args)                                       __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 
 /*
@@ -252,7 +252,7 @@ vAEBuildAppleEvent(
 extern OSStatus 
 AEPrintDescToHandle(
   const AEDesc *  desc,
-  Handle *        result)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle *        result)                                     __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 
 /*
@@ -282,7 +282,7 @@ typedef struct OpaqueAEStreamRef*       AEStreamRef;
  *    Non-Carbon CFM:   not available
  */
 extern AEStreamRef 
-AEStreamOpen(void)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+AEStreamOpen(void)                                            __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 
 /*
@@ -304,7 +304,7 @@ AEStreamOpen(void)                                            AVAILABLE_MAC_OS_X
 extern OSStatus 
 AEStreamClose(
   AEStreamRef   ref,
-  AEDesc *      desc)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AEDesc *      desc)                                         __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 
 /*
@@ -325,7 +325,7 @@ AEStreamClose(
 extern OSStatus 
 AEStreamOpenDesc(
   AEStreamRef   ref,
-  DescType      newType)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DescType      newType)                                      __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 
 /* Append data to the previously opened desc.*/
@@ -344,7 +344,7 @@ extern OSStatus
 AEStreamWriteData(
   AEStreamRef   ref,
   const void *  data,
-  Size          length)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Size          length)                                       __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 
 /*
@@ -363,7 +363,7 @@ AEStreamWriteData(
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-AEStreamCloseDesc(AEStreamRef ref)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+AEStreamCloseDesc(AEStreamRef ref)                            __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 
 /* Write data as a desc to the stream*/
@@ -383,7 +383,7 @@ AEStreamWriteDesc(
   AEStreamRef   ref,
   DescType      newType,
   const void *  data,
-  Size          length)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Size          length)                                       __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 
 /* Write an entire desc to the stream*/
@@ -401,7 +401,7 @@ AEStreamWriteDesc(
 extern OSStatus 
 AEStreamWriteAEDesc(
   AEStreamRef     ref,
-  const AEDesc *  desc)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const AEDesc *  desc)                                       __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 
 /*
@@ -420,7 +420,7 @@ AEStreamWriteAEDesc(
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-AEStreamOpenList(AEStreamRef ref)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+AEStreamOpenList(AEStreamRef ref)                             __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 
 /* Finish a list.*/
@@ -436,7 +436,7 @@ AEStreamOpenList(AEStreamRef ref)                             AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-AEStreamCloseList(AEStreamRef ref)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+AEStreamCloseList(AEStreamRef ref)                            __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 
 /*
@@ -457,7 +457,7 @@ AEStreamCloseList(AEStreamRef ref)                            AVAILABLE_MAC_OS_X
 extern OSStatus 
 AEStreamOpenRecord(
   AEStreamRef   ref,
-  DescType      newType)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DescType      newType)                                      __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 
 /* Change the type of a record.*/
@@ -475,7 +475,7 @@ AEStreamOpenRecord(
 extern OSStatus 
 AEStreamSetRecordType(
   AEStreamRef   ref,
-  DescType      newType)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DescType      newType)                                      __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 
 /* Finish a record*/
@@ -491,7 +491,7 @@ AEStreamSetRecordType(
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-AEStreamCloseRecord(AEStreamRef ref)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+AEStreamCloseRecord(AEStreamRef ref)                          __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 
 /*
@@ -515,7 +515,7 @@ AEStreamWriteKeyDesc(
   AEKeyword     key,
   DescType      newType,
   const void *  data,
-  Size          length)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Size          length)                                       __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 
 /*
@@ -537,7 +537,7 @@ extern OSStatus
 AEStreamOpenKeyDesc(
   AEStreamRef   ref,
   AEKeyword     key,
-  DescType      newType)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DescType      newType)                                      __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 
 /* Write a key to the stream - you can follow this with an AEWriteDesc.*/
@@ -555,7 +555,7 @@ AEStreamOpenKeyDesc(
 extern OSStatus 
 AEStreamWriteKey(
   AEStreamRef   ref,
-  AEKeyword     key)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AEKeyword     key)                                          __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 
 /*
@@ -582,7 +582,7 @@ AEStreamCreateEvent(
   const void *   targetData,
   Size           targetLength,
   SInt16         returnID,
-  SInt32         transactionID)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32         transactionID)                               __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 
 /*
@@ -605,7 +605,7 @@ AEStreamCreateEvent(
  *    Non-Carbon CFM:   not available
  */
 extern AEStreamRef 
-AEStreamOpenEvent(AppleEvent * event)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+AEStreamOpenEvent(AppleEvent * event)                         __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 
 /* Mark a keyword as being an optional parameter.*/
@@ -623,7 +623,7 @@ AEStreamOpenEvent(AppleEvent * event)                         AVAILABLE_MAC_OS_X
 extern OSStatus 
 AEStreamOptionalParam(
   AEStreamRef   ref,
-  AEKeyword     key)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AEKeyword     key)                                          __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 
 

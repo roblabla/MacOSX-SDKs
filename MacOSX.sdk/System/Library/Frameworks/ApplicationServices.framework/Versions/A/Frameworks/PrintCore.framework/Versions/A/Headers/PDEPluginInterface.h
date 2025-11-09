@@ -38,7 +38,10 @@
 
 /*!
  * @method		initWithBundle:
- * @abstract	Called once when the PDE plug-in is loaded.
+ * @abstract	Called once when the PDE plug-in is loaded. When using a sandbox
+ *				application, if the PDE plug-in does not declare itself sandbox-compatible, 
+ *				the PDE is loaded to get its name and is then unloaded. The PDE is reloaded when 
+ *				it is selected in the PDE menu or when the user selects the print button.
  *
  * @param theBundle		The plug-in's bundle.
  *

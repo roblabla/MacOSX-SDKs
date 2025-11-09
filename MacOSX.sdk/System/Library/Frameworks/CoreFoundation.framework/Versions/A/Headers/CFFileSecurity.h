@@ -1,6 +1,8 @@
 /*
  *  CFFileSecurity.h
- *  Copyright (c) 2010-2011, Apple Inc. All rights reserved.
+ *  NSFileSecurity and CFFileSecurity are toll-free bridged.
+ *
+ *  Copyright (c) 2010-2012, Apple Inc. All rights reserved.
  */
 
 #if (TARGET_OS_MAC || TARGET_OS_EMBEDDED || TARGET_OS_IPHONE) || CF_BUILDING_CF || NSBUILDINGFOUNDATION
@@ -10,6 +12,7 @@
 
 #include <sys/types.h>
 #include <sys/acl.h>
+#include <sys/fcntl.h>
 #include <CoreFoundation/CFUUID.h>
 
 CF_EXTERN_C_BEGIN
@@ -257,7 +260,31 @@ CF_EXPORT
 Boolean CFFileSecuritySetMode(CFFileSecurityRef fileSec, mode_t mode) CF_AVAILABLE(10_7, 5_0);
 
 
+/* values to pass in the clearPropertyMask to CFFileSecurityClearProperties */
+enum {
+    kCFFileSecurityClearOwner               = 1UL << 0,
+    kCFFileSecurityClearGroup               = 1UL << 1,
+    kCFFileSecurityClearMode                = 1UL << 2,
+    kCFFileSecurityClearOwnerUUID           = 1UL << 3,
+    kCFFileSecurityClearGroupUUID           = 1UL << 4,
+    kCFFileSecurityClearAccessControlList   = 1UL << 5
+};
+
+/*
+ *	This routine clears file security properties in the CFFileSecurity object.
+ *  
+ *	Parameters
+ *		clearPropertyMask
+ *			The file security properties to clear.
+ *	Return Value
+ *		true if the file security properties were successfully cleared; otherwise, false.
+ */
+CF_EXPORT
+Boolean CFFileSecurityClearProperties(CFFileSecurityRef fileSec, CFOptionFlags clearPropertyMask) CF_AVAILABLE(10_8, 6_0);
+
+
 CF_EXTERN_C_END
 
 #endif /* ! __COREFOUNDATION_CFFILESECURITY__ */
 #endif
+

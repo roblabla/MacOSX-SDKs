@@ -1,5 +1,5 @@
 /*
-	Copyright:  (c) 1999-2008 Apple Inc. All rights reserved.
+	Copyright:	(c) 1999-2012 Apple Inc. All rights reserved.
 */
 
 #ifndef _GLIDISPATCH_H
@@ -7,6 +7,9 @@
 
 #include <OpenGL/gltypes.h>
 #include <OpenGL/gliContext.h>
+#if defined(GL_SUPPORT_ES11) || defined(GL_SUPPORT_ES20)
+#include <OpenGL/glOESAdditions.h>
+#endif
 
 #ifdef __cplusplus
 extern "C" {
@@ -458,13 +461,13 @@ typedef struct __GLIFunctionDispatchRec
 	void (*tex_image3D)(GLIContext ctx, GLenum target, GLint level, GLenum internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const GLvoid *pixels);
 	void (*tex_sub_image3D)(GLIContext ctx, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const GLvoid *pixels);
 	void (*copy_tex_sub_image3D)(GLIContext ctx, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height);
-    void (* get_uniform_indices) (GLIContext ctx, GLuint program, GLsizei uniformCount, const GLchar** uniformNames, GLuint* uniformIndices);
-    void (* get_active_uniformsiv) (GLIContext ctx, GLuint program, GLsizei uniformCount, const GLuint* uniformIndices, GLenum pname, GLint* params);
-    void (* get_active_uniform_name) (GLIContext ctx, GLuint program, GLuint uniformIndex, GLsizei bufSize, GLsizei* length, GLchar* uniformName);
-    GLuint (* get_uniform_block_index) (GLIContext ctx, GLuint program, const GLchar* uniformBlockName);
-    void (* get_active_uniform_blockiv) (GLIContext ctx, GLuint program, GLuint uniformBlockIndex, GLenum pname, GLint* params);
-    void (* get_active_uniform_block_name) (GLIContext ctx, GLuint program, GLuint uniformBlockIndex, GLsizei bufSize, GLsizei* length, GLchar* uniformBlockName);
-    void (* uniform_block_binding) (GLIContext ctx, GLuint program, GLuint uniformBlockIndex, GLuint uniformBlockBinding);
+	void (*get_uniform_indices) (GLIContext ctx, GLuint program, GLsizei uniformCount, const GLchar* const *uniformNames, GLuint* uniformIndices);
+	void (*get_active_uniformsiv) (GLIContext ctx, GLuint program, GLsizei uniformCount, const GLuint* uniformIndices, GLenum pname, GLint* params);
+	void (*get_active_uniform_name) (GLIContext ctx, GLuint program, GLuint uniformIndex, GLsizei bufSize, GLsizei* length, GLchar* uniformName);
+	GLuint (*get_uniform_block_index) (GLIContext ctx, GLuint program, const GLchar* uniformBlockName);
+	void (*get_active_uniform_blockiv) (GLIContext ctx, GLuint program, GLuint uniformBlockIndex, GLenum pname, GLint* params);
+	void (*get_active_uniform_block_name) (GLIContext ctx, GLuint program, GLuint uniformBlockIndex, GLsizei bufSize, GLsizei* length, GLchar* uniformBlockName);
+	void (*uniform_block_binding) (GLIContext ctx, GLuint program, GLuint uniformBlockIndex, GLuint uniformBlockBinding);
 	void (*get_combiner_input_parameterfv_NV)(GLIContext ctx, GLenum stage, GLenum portion, GLenum variable, GLenum pname, GLfloat *params);
 	void (*get_combiner_input_parameteriv_NV)(GLIContext ctx, GLenum stage, GLenum portion, GLenum variable, GLenum pname, GLint *params);
 	void (*get_combiner_output_parameterfv_NV)(GLIContext ctx, GLenum stage, GLenum portion, GLenum pname, GLfloat *params);
@@ -585,7 +588,7 @@ typedef struct __GLIFunctionDispatchRec
 	void (*weight_pointer_ARB)(GLIContext ctx, GLint size, GLenum type, GLsizei stride, const GLvoid *pointer);
 	void (*vertex_blend_ARB)(GLIContext ctx, GLint count);
 	void (*multi_draw_arrays)(GLIContext ctx, GLenum mode, const GLint *first, const GLsizei *count, GLsizei primcount);
-	void (*multi_draw_elements)(GLIContext ctx, GLenum mode, const GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount);
+	void (*multi_draw_elements)(GLIContext ctx, GLenum mode, const GLsizei *count, GLenum type, const GLvoid* const *indices, GLsizei primcount);
 	void (*window_pos2d) (GLIContext ctx, GLdouble x, GLdouble y);
 	void (*window_pos2dv) (GLIContext ctx, const GLdouble *v);
 	void (*window_pos2f) (GLIContext ctx, GLfloat x, GLfloat y);
@@ -612,7 +615,7 @@ typedef struct __GLIFunctionDispatchRec
 	GLhandleARB (*get_handle_ARB) (GLIContext ctx, GLenum pname);
 	void (*detach_object_ARB) (GLIContext ctx, GLhandleARB containerObj, GLhandleARB attachedObj);
 	GLhandleARB (*create_shader_object_ARB) (GLIContext ctx, GLenum shaderType);
-	void (*shader_source_ARB) (GLIContext ctx, GLhandleARB shaderObj, GLsizei count, const GLcharARB **string, const GLint *length);
+	void (*shader_source_ARB) (GLIContext ctx, GLhandleARB shaderObj, GLsizei count, const GLcharARB* const *string, const GLint *length);
 	void (*compile_shader_ARB) (GLIContext ctx, GLhandleARB shaderObj);
 	GLhandleARB (*create_program_object_ARB) (GLIContext ctx);
 	void (*attach_object_ARB) (GLIContext ctx, GLhandleARB containerObj, GLhandleARB obj);
@@ -686,7 +689,7 @@ typedef struct __GLIFunctionDispatchRec
 	void (*multi_draw_element_array_APPLE)(GLIContext ctx, GLenum mode, const GLint *first, const GLsizei *count, GLsizei primcount);
 	void (*multi_draw_range_element_array_APPLE)(GLIContext ctx, GLenum mode, GLuint start, GLuint end, const GLint *first, const GLsizei *count, GLsizei primcount);
 
-	/* frame buffer object */
+	/* EXT_framebuffer_object */
 	GLboolean (*is_renderbuffer_EXT) (GLIContext ctx, GLuint renderbuffer);
 	void (*bind_renderbuffer_EXT) (GLIContext ctx, GLenum target, GLuint renderbuffer);
 	void (*delete_renderbuffers_EXT) (GLIContext ctx, GLsizei n, const GLuint *renderbuffers);
@@ -707,7 +710,7 @@ typedef struct __GLIFunctionDispatchRec
 
 	void (*buffer_parameteri_APPLE) (GLIContext ctx, GLenum target, GLenum pname, GLint param);
 	void (*flush_mapped_buffer_range_APPLE) (GLIContext ctx, GLenum target, GLintptr offset, GLsizeiptr size);
-    
+
 	void (*program_env_parameters4fv_EXT)(GLIContext ctx, GLenum target, GLuint index, GLsizei count, const GLfloat *params);
 	void (*program_local_parameters4fv_EXT)(GLIContext ctx, GLenum target, GLuint index, GLsizei count, const GLfloat *params);
 
@@ -715,29 +718,29 @@ typedef struct __GLIFunctionDispatchRec
 	GLenum (*object_unpurgeable_APPLE)(GLIContext ctx, GLenum objectType, GLuint name, GLenum option);
 	void   (*get_object_parameteriv_APPLE) (GLIContext ctx, GLenum objectType, GLuint name, GLenum pname, GLint* params);
 
-	/* geometry shader4 */
+	/* EXT_geometry_shader4 */
 	void (*program_parameteri_EXT)(GLIContext ctx, GLuint program_name, GLenum pname, GLint value);
 	void (*framebuffer_texture_EXT)(GLIContext ctx, GLenum target, GLenum attachment, GLuint texture, GLint level);
 	void (*framebuffer_texture_layer_EXT)(GLIContext ctx, GLenum target, GLenum attachment, GLuint texture, GLint level, GLint layer);
 	void (*framebuffer_texture_face_EXT)(GLIContext ctx, GLenum target, GLenum attachment, GLuint texture, GLint level, GLenum face);
 	
-	/* transform feedback */
+	/* EXT_transform_feedback */
 	void (*bind_buffer_range_EXT)(GLIContext ctx, GLenum target, GLuint index, GLuint buffer, GLintptr offset, GLsizeiptr size);
 	void (*bind_buffer_offset_EXT)(GLIContext ctx, GLenum target, GLuint index, GLuint buffer, GLintptr offset);
 	void (*bind_buffer_base_EXT)(GLIContext ctx, GLenum target, GLuint index, GLuint buffer);
 	void (*begin_transform_feedback_EXT)(GLIContext ctx, GLenum primitiveMode);
 	void (*end_transform_feedback_EXT)(GLIContext ctx);
-	void (*transform_feedback_varyings_EXT)(GLIContext ctx, GLuint program, GLsizei count, const GLchar **varyings, GLenum bufferMode);
+	void (*transform_feedback_varyings_EXT)(GLIContext ctx, GLuint program, GLsizei count, const GLchar* const *varyings, GLenum bufferMode);
 	void (*get_transform_feedback_varying_EXT)(GLIContext ctx, GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLsizei *size, GLenum *type, GLchar *name);
 	void (*get_integer_indexedv_EXT)(GLIContext ctx, GLenum param, GLuint index, GLint *values); 
 	void (*get_boolean_indexedv_EXT)(GLIContext ctx, GLenum param, GLuint index, GLboolean *values);
 
-	/* bindable uniform */
+	/* EXT_bindable_uniform */
 	void (*uniform_buffer_EXT)(GLIContext ctx, GLuint program, GLint location, GLuint buffer);
 	GLint (*get_uniform_buffer_size_EXT)(GLIContext ctx, GLuint program, GLint location);
 	GLintptr (*get_uniform_buffer_offset_EXT)(GLIContext ctx, GLuint program, GLint location);
 
-	/* texture integer */
+	/* EXT_texture_integer */
 	void (*clear_colorIi_EXT) (GLIContext ctx, GLint r, GLint g, GLint b, GLint a );
 	void (*clear_colorIui_EXT) (GLIContext ctx, GLuint r, GLuint g, GLuint b, GLuint a );
 	void (*tex_parameterIiv_EXT)(GLIContext ctx, GLenum target, GLenum pname, GLint *params );
@@ -745,7 +748,7 @@ typedef struct __GLIFunctionDispatchRec
 	void (*get_tex_parameterIiv_EXT) (GLIContext ctx, GLenum target, GLenum pname, GLint *params);
 	void (*get_tex_parameterIuiv_EXT) (GLIContext ctx, GLenum target, GLenum pname, GLuint *params);
 
-	/* gpu shader4 */
+	/* EXT_gpu_shader4 */
 	void (*vertex_attribI1i_EXT)(GLIContext ctx, GLuint index, GLint x);
 	void (*vertex_attribI2i_EXT)(GLIContext ctx, GLuint index, GLint x, GLint y);
 	void (*vertex_attribI3i_EXT)(GLIContext ctx, GLuint index, GLint x, GLint y, GLint z);
@@ -810,7 +813,7 @@ typedef struct __GLIFunctionDispatchRec
 	
 	/* ARB_instanced_arrays */
 	void (*vertex_attrib_divisor) (GLIContext ctx, GLuint index, GLuint divisor);
-	/* ARB_instanced_arrays and EXT_draw_instances */
+	/* ARB_instanced_arrays and ARB_draw_instanced */
 	void (*draw_arrays_instanced)(GLIContext ctx, GLenum mode, GLint first, GLsizei count, GLsizei primcount);
 	void (*draw_elements_instanced)(GLIContext ctx, GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei primcount);
 
@@ -818,7 +821,7 @@ typedef struct __GLIFunctionDispatchRec
 	void (*draw_elements_base_vertex)(GLIContext ctx, GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLint base_vertex);
 	void (*draw_range_elements_base_vertex)(GLIContext ctx, GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const GLvoid *indices, GLint base_vertex);
 	void (*draw_elements_instanced_base_vertex)(GLIContext ctx, GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei primcount, GLint base_vertex);
-	void (*multi_draw_elements_base_vertex)(GLIContext ctx, GLenum mode, const GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount, const GLint *base_vertex);
+	void (*multi_draw_elements_base_vertex)(GLIContext ctx, GLenum mode, const GLsizei *count, GLenum type, const GLvoid* const *indices, GLsizei primcount, const GLint *base_vertex);
 
 	/* ARB_vertex_array_object / OES_vertex_array_object */
 	void (*bind_vertex_array_ARB)(GLIContext ctx, GLuint array);
@@ -837,7 +840,6 @@ typedef struct __GLIFunctionDispatchRec
 	void (*clear_bufferfi)(GLIContext ctx, GLenum buffer, GLint drawbuffer, GLfloat depth, GLint stencil);
 	const GLubyte* (*get_stringi)(GLIContext ctx, GLenum name, GLuint index);
 	
-	
 	/* ARB_sync */
 	GLsync (*fence_sync) (GLIContext ctx, GLenum condition, GLbitfield flags);
 	GLboolean (*is_sync) (GLIContext ctx, GLsync sync);
@@ -847,40 +849,39 @@ typedef struct __GLIFunctionDispatchRec
 	void (*get_integer64v_sync) (GLIContext ctx, GLenum pname, GLint64 *params);
 	void (*get_synciv) (GLIContext ctx, GLsync sync, GLenum pname, GLsizei bufSize, GLsizei *length, GLint *values);
 
-	/* GL_ARB_texture_multisample */
+	/* ARB_texture_multisample */
 	void (*tex_image2D_multisample)(GLIContext ctx, GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations);
 	void (*tex_image3D_multisample)(GLIContext ctx, GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations);
 	void (*get_multisamplefv)(GLIContext ctx, GLenum pname, GLuint index, GLfloat *val);
 	void (*sample_maski)(GLIContext ctx, GLuint index, GLbitfield mask);
 
-    /* GL_ARB_texture_buffer_object (OpenGL 3.1) */
-    void (*tex_buffer)(GLIContext ctx, GLenum target, GLenum internalformat, GLuint buffer);
+	/* ARB_texture_buffer_object */
+	void (*tex_buffer)(GLIContext ctx, GLenum target, GLenum internalformat, GLuint buffer);
 
-    /* GL_ARB_copy_buffer (OpenGL 3.1) */
+	/* ARB_copy_buffer */
 	void (*copy_buffer_sub_data)(GLIContext ctx, GLenum readtarget, GLenum writetarget, GLintptr readoffset, GLintptr writeoffset, GLsizeiptr size);
 
-	/* primitive_restart (OpenGL 3.1) */
+	/* NV_primitive_restart */
 	void (*primitive_restart_index)(GLIContext ctx, GLuint index);
 
 	/* EXT_timer_query */
 	void (*get_query_objecti64v) (GLIContext ctx, GLuint id, GLenum pname, GLint64EXT *params);
 	void (*get_query_objectui64v) (GLIContext ctx, GLuint id, GLenum pname, GLuint64EXT *params);
 
-	/* 3.2 API */
-	/* ARB_map_buffer_range (OpenGL 3.2) */
+	/* ARB_map_buffer_range */
 	GLvoid *(*map_buffer_range) (GLIContext ctx, GLenum target, GLintptr offset, GLsizeiptr length, GLenum access);
 	void (*flush_mapped_buffer_range) (GLIContext ctx, GLenum target, GLintptr offset, GLsizeiptr length);
- 
-	/* ARB_timer_query (OpenGL 3.3) */
+
+	/* ARB_timer_query */
 	void (*query_counter) (GLIContext ctx, GLuint id, GLenum target);
 	void (*get_integer64i_v) (GLIContext ctx, GLenum target, GLuint index, GLint64 *data);
 	void (*get_buffer_parameteri64v)(GLIContext ctx, GLenum target, GLenum pname, GLint64 *params);
-	
-	/* ARB_sampler_object (OpenGL 3.3) */
+
+	/* ARB_sampler_object */
 	void (*gen_samplers) (GLIContext ctx, GLsizei count, GLuint *samplers);
 	void (*delete_samplers) (GLIContext ctx, GLsizei count, const GLuint *samplers);
 	GLboolean (*is_sampler) (GLIContext ctx, GLuint sampler);
-	void (*bind_sampler) (GLIContext ctx, GLenum unit, GLuint sampler);
+	void (*bind_sampler) (GLIContext ctx, GLuint unit, GLuint sampler);
 	void (*sampler_parameteri) (GLIContext ctx, GLuint sampler, GLenum pname, GLint param);
 	void (*sampler_parameteriv) (GLIContext ctx, GLuint sampler, GLenum pname, const GLint *param);
 	void (*sampler_parameterf) (GLIContext ctx, GLuint sampler, GLenum pname, GLfloat param);
@@ -891,7 +892,208 @@ typedef struct __GLIFunctionDispatchRec
 	void (*get_sampler_parameterfv) (GLIContext ctx, GLuint sampler, GLenum pname, GLfloat *params);
 	void (*get_sampler_parameterIiv) (GLIContext ctx, GLuint sampler, GLenum pname, GLint *params);
 	void (*get_sampler_parameterIuiv) (GLIContext ctx, GLuint sampler, GLenum pname, GLuint *params);
- 
+
+	/* EXT_debug_label */
+	void (*label_object_EXT)(GLIContext ctx, GLenum type, GLuint object, GLsizei length, const GLchar *label);
+	void (*get_object_label_EXT)(GLIContext ctx, GLenum type, GLuint object, GLsizei bufSize, GLsizei *length, GLchar *label);
+
+	/* EXT_debug_marker */
+	void (*insert_event_marker_EXT)(GLIContext ctx, GLsizei length, const GLchar *marker);
+	void (*push_group_marker_EXT)(GLIContext ctx, GLsizei length, const GLchar *marker);
+	void (*pop_group_marker_EXT)(GLIContext ctx);
+
+	/* ARB_separate_shader_objects */
+	void (*use_program_stages)(GLIContext ctx, GLuint pipeline, GLbitfield stages, GLuint program);
+	void (*active_shader_program)(GLIContext ctx, GLuint pipeline, GLuint program);
+	GLuint (*create_shader_programv)(GLIContext ctx, GLenum type, GLsizei count, const GLchar* const *strings);
+	void (*bind_program_pipeline)(GLIContext ctx, GLuint pipeline);
+	void (*delete_program_pipelines)(GLIContext ctx, GLsizei n, const GLuint *pipelines);
+	void (*gen_program_pipelines)(GLIContext ctx, GLsizei n, GLuint *pipelines);
+	GLboolean (*is_program_pipeline)(GLIContext ctx, GLuint pipeline);
+	void (*get_program_pipelineiv)(GLIContext ctx, GLuint pipeline, GLenum pname, GLint *params);
+	void (*validate_program_pipeline)(GLIContext ctx, GLuint pipeline);
+	void (*get_program_pipeline_info_log)(GLIContext ctx, GLuint pipeline, GLsizei bufSize, GLsizei *length, GLchar *infoLog);
+	void (*program_uniform1i)(GLIContext ctx, GLuint program, GLint location, GLint x);
+	void (*program_uniform2i)(GLIContext ctx, GLuint program, GLint location, GLint x, GLint y);
+	void (*program_uniform3i)(GLIContext ctx, GLuint program, GLint location, GLint x, GLint y, GLint z);
+	void (*program_uniform4i)(GLIContext ctx, GLuint program, GLint location, GLint x, GLint y, GLint z, GLint w);
+	void (*program_uniform1f)(GLIContext ctx, GLuint program, GLint location, GLfloat x);
+	void (*program_uniform2f)(GLIContext ctx, GLuint program, GLint location, GLfloat x, GLfloat y);
+	void (*program_uniform3f)(GLIContext ctx, GLuint program, GLint location, GLfloat x, GLfloat y, GLfloat z);
+	void (*program_uniform4f)(GLIContext ctx, GLuint program, GLint location, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
+	void (*program_uniform1iv)(GLIContext ctx, GLuint program, GLint location, GLsizei count, const GLint *value);
+	void (*program_uniform2iv)(GLIContext ctx, GLuint program, GLint location, GLsizei count, const GLint *value);
+	void (*program_uniform3iv)(GLIContext ctx, GLuint program, GLint location, GLsizei count, const GLint *value);
+	void (*program_uniform4iv)(GLIContext ctx, GLuint program, GLint location, GLsizei count, const GLint *value);
+	void (*program_uniform1fv)(GLIContext ctx, GLuint program, GLint location, GLsizei count, const GLfloat *value);
+	void (*program_uniform2fv)(GLIContext ctx, GLuint program, GLint location, GLsizei count, const GLfloat *value);
+	void (*program_uniform3fv)(GLIContext ctx, GLuint program, GLint location, GLsizei count, const GLfloat *value);
+	void (*program_uniform4fv)(GLIContext ctx, GLuint program, GLint location, GLsizei count, const GLfloat *value);
+	void (*program_uniform_matrix2fv)(GLIContext ctx, GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+	void (*program_uniform_matrix3fv)(GLIContext ctx, GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+	void (*program_uniform_matrix4fv)(GLIContext ctx, GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+	void (*program_uniform1ui)(GLIContext ctx, GLuint program, GLint location, GLuint x);
+	void (*program_uniform2ui)(GLIContext ctx, GLuint program, GLint location, GLuint x, GLuint y);
+	void (*program_uniform3ui)(GLIContext ctx, GLuint program, GLint location, GLuint x, GLuint y, GLuint z);
+	void (*program_uniform4ui)(GLIContext ctx, GLuint program, GLint location, GLuint x, GLuint y, GLuint z, GLuint w);
+	void (*program_uniform1uiv)(GLIContext ctx, GLuint program, GLint location, GLsizei count, const GLuint *value);
+	void (*program_uniform2uiv)(GLIContext ctx, GLuint program, GLint location, GLsizei count, const GLuint *value);
+	void (*program_uniform3uiv)(GLIContext ctx, GLuint program, GLint location, GLsizei count, const GLuint *value);
+	void (*program_uniform4uiv)(GLIContext ctx, GLuint program, GLint location, GLsizei count, const GLuint *value);
+	void (*program_uniform_matrix2x3fv)(GLIContext ctx, GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+	void (*program_uniform_matrix3x2fv)(GLIContext ctx, GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+	void (*program_uniform_matrix2x4fv)(GLIContext ctx, GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+	void (*program_uniform_matrix4x2fv)(GLIContext ctx, GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+	void (*program_uniform_matrix3x4fv)(GLIContext ctx, GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+	void (*program_uniform_matrix4x3fv)(GLIContext ctx, GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+
+	/* ARB_blend_func_extended */
+	void (*bind_frag_data_location_indexed) (GLIContext ctx, GLuint program, GLuint colorNumber, GLuint index, const GLchar *name);
+	GLint (*get_frag_data_index) (GLIContext ctx, GLuint program, const GLchar *name);
+
+	/* ARB_draw_buffers_blend */
+	void (*blend_func_i) (GLIContext ctx, GLuint buf, GLenum src, GLenum dst);
+	void (*blend_func_separate_i) (GLIContext ctx, GLuint buf, GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha, GLenum dstAlpha);
+	void (*blend_equation_i) (GLIContext ctx, GLuint buf, GLenum mode);
+	void (*blend_equation_separate_i) (GLIContext ctx, GLuint buf, GLenum modeRGB, GLenum modeAlpha);
+
+	/* ARB_shading_language_include */
+	void (*named_string_ARB) (GLIContext ctx, GLenum type, GLint namelen, const GLchar *name, GLint stringlen, const GLchar *string);
+	void (*delete_named_string_ARB) (GLIContext ctx, GLint namelen, const GLchar *name);
+	void (*compile_shader_include_ARB) (GLIContext ctx, GLuint shader, GLsizei count, const GLchar* const *path, const GLint *length);
+	GLboolean (*is_named_string_ARB) (GLIContext ctx, GLint namelen, const GLchar *name);
+	void (*get_named_string_ARB) (GLIContext ctx, GLint namelen, const GLchar *name, GLsizei bufSize, GLint *stringlen, GLchar *string);
+	void (*get_named_string_iv_ARB) (GLIContext ctx, GLint namelen, const GLchar *name, GLenum pname, GLint *params);
+
+	/* ARB_ES2_compatibility */
+	void (*release_shader_compiler)(GLIContext ctx);
+	void (*shader_binary)(GLIContext ctx, GLint n, GLuint *shaders, GLenum binaryformat, const GLvoid *binary, GLint length);
+	void (*get_shader_precision_format)(GLIContext ctx, GLenum shadertype, GLenum precisiontype, GLint *range, GLint *precision);
+	void (*depth_rangef) (GLIContext ctx, GLclampf zNear, GLclampf zFar);
+	void (*clear_depthf) (GLIContext ctx, GLclampf depth);
+
+	/* ARB_vertex_type_2_10_10_10_rev */
+	void (*vertex_attribP1ui) (GLIContext ctx, GLuint index, GLenum type, GLboolean normalized, GLuint value);
+	void (*vertex_attribP2ui) (GLIContext ctx, GLuint index, GLenum type, GLboolean normalized, GLuint value);
+	void (*vertex_attribP3ui) (GLIContext ctx, GLuint index, GLenum type, GLboolean normalized, GLuint value);
+	void (*vertex_attribP4ui) (GLIContext ctx, GLuint index, GLenum type, GLboolean normalized, GLuint value);
+	void (*vertex_attribP1uiv) (GLIContext ctx, GLuint index, GLenum type, GLboolean normalized, const GLuint *value);
+	void (*vertex_attribP2uiv) (GLIContext ctx, GLuint index, GLenum type, GLboolean normalized, const GLuint *value);
+	void (*vertex_attribP3uiv) (GLIContext ctx, GLuint index, GLenum type, GLboolean normalized, const GLuint *value);
+	void (*vertex_attribP4uiv) (GLIContext ctx, GLuint index, GLenum type, GLboolean normalized, const GLuint *value);
+
+	/* ARB_get_program_binary */
+	void (*get_program_binary) (GLIContext ctx, GLuint program, GLsizei bufSize, GLsizei *length, GLenum *binaryFormat, GLvoid *binary);
+	void (*program_binary) (GLIContext ctx, GLuint program, GLenum binaryFormat, const GLvoid *binary, GLsizei length);
+	
+	/* ARB_sample_shading */
+	void (*min_sample_shading) (GLIContext ctx, GLclampf value);
+
+	/* ARB_viewport_array */
+	void (*viewport_arrayv) (GLIContext ctx, GLuint first, GLsizei count, const GLfloat * v);
+	void (*viewport_indexedf) (GLIContext ctx, GLuint index, GLfloat x, GLfloat y, GLfloat w, GLfloat h);
+	void (*viewport_indexedfv) (GLIContext ctx, GLuint index, const GLfloat * v);
+	void (*scissor_arrayv) (GLIContext ctx, GLuint first, GLsizei count, const GLint * v);
+	void (*scissor_indexed) (GLIContext ctx, GLuint index, GLint left, GLint bottom, GLsizei width, GLsizei height);
+	void (*scissor_indexedv) (GLIContext ctx, GLuint index, const GLint * v);
+	void (*depth_range_arrayv) (GLIContext ctx, GLuint first, GLsizei count, const GLclampd * v);
+	void (*depth_range_indexed) (GLIContext ctx, GLuint index, GLclampd n, GLclampd f);
+	void (*get_floati_v) (GLIContext ctx, GLenum target, GLuint index, GLfloat *data);
+	void (*get_doublei_v) (GLIContext ctx, GLenum target, GLuint index, GLdouble *data);
+
+	/* ARB_draw_indirect */
+	void (*draw_arrays_indirect) (GLIContext ctx, GLenum mode, const GLvoid *indirect);
+	void (*draw_elements_indirect) (GLIContext ctx, GLenum mode, GLenum type, const GLvoid *indirect);
+
+	/* ARB_tessellation_shader */
+	void (*patch_parameteri) (GLIContext ctx, GLenum pname, GLint value);
+	void (*patch_parameterfv) (GLIContext ctx, GLenum pname, const GLfloat* values);
+
+	/* ARB_transform_feedback2 */
+	void (*bind_transform_feedback) (GLIContext ctx, GLenum target, GLuint name);
+	void (*gen_transform_feedbacks) (GLIContext ctx, GLsizei n, GLuint* ids);
+	void (*delete_transform_feedbacks) (GLIContext ctx, GLsizei n, const GLuint* ids);
+	void (*pause_transform_feedback) (GLIContext ctx);
+	void (*resume_transform_feedback) (GLIContext ctx);
+	GLboolean (*is_transform_feedback) (GLIContext ctx, GLuint name);
+	void (*draw_transform_feedback) (GLIContext ctx, GLenum mode, GLuint name);
+
+	/* ARB_transform_feedback3 */
+	void (*begin_query_indexed) (GLIContext ctx, GLenum target, GLuint index, GLuint id);
+	void (*end_query_indexed) (GLIContext ctx, GLenum target, GLuint index);
+	void (*get_query_indexediv) (GLIContext ctx, GLenum target, GLuint index, GLenum pname, GLint *params);
+	void (*draw_transform_feedback_stream) (GLIContext ctx, GLenum mode, GLuint name, GLuint stream);
+
+	/* ARB_separate_shader_objects && ARB_gpu_shader_fp64 */
+	void (*program_uniform1d)(GLIContext ctx, GLuint program, GLint location, GLdouble x);
+	void (*program_uniform2d)(GLIContext ctx, GLuint program, GLint location, GLdouble x, GLdouble y);
+	void (*program_uniform3d)(GLIContext ctx, GLuint program, GLint location, GLdouble x, GLdouble y, GLdouble z);
+	void (*program_uniform4d)(GLIContext ctx, GLuint program, GLint location, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
+	void (*program_uniform1dv)(GLIContext ctx, GLuint program, GLint location, GLsizei count, const GLdouble *value);
+	void (*program_uniform2dv)(GLIContext ctx, GLuint program, GLint location, GLsizei count, const GLdouble *value);
+	void (*program_uniform3dv)(GLIContext ctx, GLuint program, GLint location, GLsizei count, const GLdouble *value);
+	void (*program_uniform4dv)(GLIContext ctx, GLuint program, GLint location, GLsizei count, const GLdouble *value);
+	void (*program_uniform_matrix2dv)(GLIContext ctx, GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value);
+	void (*program_uniform_matrix3dv)(GLIContext ctx, GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value);
+	void (*program_uniform_matrix4dv)(GLIContext ctx, GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value);
+	void (*program_uniform_matrix2x3dv)(GLIContext ctx, GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value);
+	void (*program_uniform_matrix3x2dv)(GLIContext ctx, GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value);
+	void (*program_uniform_matrix2x4dv)(GLIContext ctx, GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value);
+	void (*program_uniform_matrix4x2dv)(GLIContext ctx, GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value);
+	void (*program_uniform_matrix3x4dv)(GLIContext ctx, GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value);
+	void (*program_uniform_matrix4x3dv)(GLIContext ctx, GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value);
+
+	/* ARB_gpu_shader_fp64 */
+	void (*uniform1d)(GLIContext ctx, GLint location, GLdouble x);
+	void (*uniform2d)(GLIContext ctx, GLint location, GLdouble x, GLdouble y);
+	void (*uniform3d)(GLIContext ctx, GLint location, GLdouble x, GLdouble y, GLdouble z);
+	void (*uniform4d)(GLIContext ctx, GLint location, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
+	void (*uniform1dv)(GLIContext ctx, GLint location, GLsizei count, const GLdouble *value);
+	void (*uniform2dv)(GLIContext ctx, GLint location, GLsizei count, const GLdouble *value);
+	void (*uniform3dv)(GLIContext ctx, GLint location, GLsizei count, const GLdouble *value);
+	void (*uniform4dv)(GLIContext ctx, GLint location, GLsizei count, const GLdouble *value);
+	void (*uniform_matrix2dv)(GLIContext ctx, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value);
+	void (*uniform_matrix3dv)(GLIContext ctx, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value);
+	void (*uniform_matrix4dv)(GLIContext ctx, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value);
+	void (*uniform_matrix2x3dv)(GLIContext ctx, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value);
+	void (*uniform_matrix3x2dv)(GLIContext ctx, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value);
+	void (*uniform_matrix2x4dv)(GLIContext ctx, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value);
+	void (*uniform_matrix4x2dv)(GLIContext ctx, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value);
+	void (*uniform_matrix3x4dv)(GLIContext ctx, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value);
+	void (*uniform_matrix4x3dv)(GLIContext ctx, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value);
+	void (*get_uniformdv)(GLIContext ctx, GLuint program_obj, GLint location, GLdouble *params);
+	
+	/* ARB_vertex_attrib_64bit */
+	void (*vertex_attribl1d)(GLIContext ctx, GLuint index, GLdouble x);
+	void (*vertex_attribl2d)(GLIContext ctx, GLuint index, GLdouble x, GLdouble y);
+	void (*vertex_attribl3d)(GLIContext ctx, GLuint index, GLdouble x, GLdouble y, GLdouble z);
+	void (*vertex_attribl4d)(GLIContext ctx, GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
+	void (*vertex_attribl1dv)(GLIContext ctx, GLuint index, const GLdouble *v);
+	void (*vertex_attribl2dv)(GLIContext ctx, GLuint index, const GLdouble *v);
+	void (*vertex_attribl3dv)(GLIContext ctx, GLuint index, const GLdouble *v);
+	void (*vertex_attribl4dv)(GLIContext ctx, GLuint index, const GLdouble *v);
+	void (*vertex_attrib_lpointer)(GLIContext ctx, GLuint index, GLint size, GLenum type, GLsizei stride, const void *pointer);
+	void (*get_vertex_attrib_ldv)(GLIContext ctx, GLuint index, GLenum pname, GLdouble *params);
+
+	/* ARB_shader_subroutine */
+	GLint (*get_subroutine_uniform_location)(GLIContext ctx, GLuint program, GLenum shadertype, const GLchar *name);
+	GLuint (*get_subroutine_index)(GLIContext ctx, GLuint program, GLenum shadertype, const GLchar *name);
+	void (*get_active_subroutine_uniformiv)(GLIContext ctx, GLuint program, GLenum shadertype, GLuint index, GLenum pname, GLint *values);
+	void (*get_active_subroutine_uniform_name)(GLIContext ctx, GLuint program, GLenum shadertype, GLuint index, GLsizei bufsize, GLsizei *length, GLchar *name);
+	void (*get_active_subroutine_name)(GLIContext ctx, GLuint program, GLenum shadertype, GLuint index, GLsizei bufsize, GLsizei *length, GLchar *name);
+	void (*uniform_subroutinesuiv)(GLIContext ctx, GLenum shadertype, GLsizei count, const GLuint *indices);
+	void (*get_uniform_subroutineuiv)(GLIContext ctx, GLenum shadertype, GLint location, GLuint *params);
+	void (*get_program_stageiv)(GLIContext ctx, GLuint program, GLenum shadertype, GLenum pname, GLint *values);
+
+
+	/* ARB_internalformat_query */
+	void (*get_internal_formativ) (GLIContext ctx, GLenum target, GLenum internalformat, GLenum pname, GLsizei bufSize, GLint* params);
+
+	/* ARB_texture_storage */
+	void (*tex_storage1D) (GLIContext ctx, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width);
+	void (*tex_storage2D) (GLIContext ctx, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height);
+	void (*tex_storage3D) (GLIContext ctx, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth);
+
 } GLIFunctionDispatch;
 
 #ifdef __cplusplus

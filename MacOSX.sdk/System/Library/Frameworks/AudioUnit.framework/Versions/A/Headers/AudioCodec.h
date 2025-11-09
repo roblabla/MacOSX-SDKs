@@ -418,12 +418,9 @@ enum
 						The property value is between [0 - 0x7F].
 						See also kAudioCodecPropertyQualitySetting
 						Writable if supported.
-	@constant		kAudioCodecPropertyMinimumDelayMode
-						A UInt32 equal 1 sets the encoder, where applicable, in it's lowest possible delay mode. An encoder
-						may prepend zero valued samples to the input signal in order to make additional delays, like e.g.
-						from a filter, coincide on a block boundary. This operation, however, results in an increased
-						encoding/ decoding delay which may be undesired and turned off with this property.
-						Writable if supported.
+    @constant		kAudioCodecPropertyDelayMode
+                        A UInt32 specifying the delay mode. See enum below.                        
+                        Encoders only, writable if supported.
  */
 enum
 {
@@ -452,7 +449,7 @@ enum
 	kAudioCodecPropertyFormatList												= 'acfl',
 	kAudioCodecPropertyBitRateControlMode										= 'acbf',
 	kAudioCodecPropertySoundQualityForVBR										= 'vbrq',
-	kAudioCodecPropertyMinimumDelayMode											= 'mdel'
+	kAudioCodecPropertyDelayMode                                                = 'dmod'
 };
 
 
@@ -538,6 +535,30 @@ enum
 	kAudioCodecBitRateControlMode_LongTermAverage			= 1,
 	kAudioCodecBitRateControlMode_VariableConstrained		= 2,
 	kAudioCodecBitRateControlMode_Variable					= 3,
+};
+
+/*!
+    @enum			AudioCodecDelayMode
+ 
+    @discussion		Constants defining various delay modes to be used with kAudioCodecPropertyDelayMode.
+                    The resulting priming frames are reflected in the kAudioCodecPropertyPrimeInfo property.
+                    Note that for layered streams like aach and aacp, the priming information always refers
+                    to the base layer.
+    @constant		kAudioCodecDelayMode_Compatibility
+                        In compatibility delay mode, the resulting priming corresponds to the default value defined by the
+                        underlying codecs. For aac this number equals 2112 regardless of the sample rate and other settings.
+    @constant		kAudioCodecDelayMode_Minimum
+                        Sets the encoder, where applicable, in it's lowest possible delay mode. Any additional delays, like the one
+                        introduced by filters/sample rate converters etc, aren't compensated by the encoder.
+    @constant		kAudioCodecDelayMode_Optimal
+                        In this mode, the resulting bitstream has the minimum amount of priming necessary for the decoder.
+                        For aac this number is 1024 which corresponds to exactly one packet.
+ */
+enum
+{
+    kAudioCodecDelayMode_Compatibility  = 0,
+    kAudioCodecDelayMode_Minimum        = 1,
+    kAudioCodecDelayMode_Optimal        = 2
 };
 
 /*!
@@ -805,7 +826,7 @@ AudioCodecSetProperty(	AudioCodec				inCodec,
 						An AudioCodec instance
 	@param			inInputFormat
 						Pointer to an input format structure
-	@param			inInputFormat
+	@param			inOutputFormat
 						Pointer to an output format structure
 	@param			inMagicCookie
 						Pointer to the magic cookie
@@ -989,6 +1010,22 @@ typedef OSStatus
 #pragma mark Deprecated Properties
 
 /*!
+    @enum		AudioCodecProperty
+    @deprecated
+ 
+    @constant	kAudioCodecPropertyMinimumDelayMode
+                    A UInt32 equal 1 sets the encoder, where applicable, in it's lowest possible delay mode. An encoder
+                    may prepend zero valued samples to the input signal in order to make additional delays, like e.g.
+                    from a filter, coincide on a block boundary. This operation, however, results in an increased
+                    encoding/ decoding delay which may be undesired and turned off with this property.
+                    Use the kAudioCodecPropertyDelayMode property instead with the value set to kAudioCodecDelayMode_Minimum
+*/
+enum
+{
+	kAudioCodecPropertyMinimumDelayMode                 = 'mdel'
+};
+
+/*!
 	@enum		AudioCodecProperty
 	@deprecated	in version 10.7
 
@@ -1003,12 +1040,11 @@ typedef OSStatus
 					retrieved via this property must be released by the caller.
 
 */
-
 enum
 {
 	kAudioCodecPropertyNameCFString						= 'lnam',
 	kAudioCodecPropertyManufacturerCFString				= 'lmak',
-	kAudioCodecPropertyFormatCFString						= 'lfor'
+	kAudioCodecPropertyFormatCFString					= 'lfor'
 };		
 
 /*!

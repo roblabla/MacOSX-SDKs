@@ -29,7 +29,7 @@ NS_CLASS_AVAILABLE(10_7, NA)
 - (void)addPayment:(SKPayment *)payment;
 
 // Asynchronous.  Will add completed transactions for the current user back to the queue to be re-completed.  User will be asked to authenticate.  Observers will receive 0 or more -paymentQueue:updatedTransactions:, followed by either -paymentQueueRestoreCompletedTransactionsFinished: on success or -paymentQueue:restoreCompletedTransactionsFailedWithError: on failure.  In the case of partial success, some transactions may still be delivered.
-- (void)restoreCompletedTransactions ;
+- (void)restoreCompletedTransactions;
 
 // Asynchronous.  Remove a finished (i.e. failed or completed) transaction from the queue.  Attempting to finish a purchasing transaction will throw an exception.
 - (void)finishTransaction:(SKPaymentTransaction *)transaction;
@@ -40,6 +40,12 @@ NS_CLASS_AVAILABLE(10_7, NA)
 
 // Array of unfinished SKPaymentTransactions.  Only valid while the queue has observers.  Updated asynchronously.
 @property(readonly) NSArray *transactions;
+
+//
+- (void) startDownloads:(NSArray *)downloads;
+- (void) pauseDownloads:(NSArray *)downloads;
+- (void) resumeDownloads:(NSArray *)downloads;
+- (void) cancelDownloads:(NSArray *)downloads;
 
 @end
 
@@ -58,6 +64,9 @@ NS_CLASS_AVAILABLE(10_7, NA)
 
 // Sent when all transactions from the user's purchase history have successfully been added back to the queue.
 - (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue;
+
+// Sent when the download state has changed.
+- (void)paymentQueue:(SKPaymentQueue *)queue updatedDownloads:(NSArray *)downloads;
 
 @end
 

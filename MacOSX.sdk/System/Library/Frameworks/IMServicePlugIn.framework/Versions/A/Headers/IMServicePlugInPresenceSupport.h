@@ -9,7 +9,7 @@
 
 
 #pragma mark -
-#pragma mark IMServicePlugIn (iChat -> Service Plug-in)
+#pragma mark IMServicePlugIn (Messages -> Service Plug-in)
 #pragma mark -
 
 /*!
@@ -31,7 +31,7 @@
 /*!
     @method     updateSessionProperties:
 
-    @discussion iChat calls this method on the IMServicePlugIn instance when the 
+    @discussion Messages calls this method on the IMServicePlugIn instance when the 
                 the user's availability, status message, idle state, or picture
                 changes.
 

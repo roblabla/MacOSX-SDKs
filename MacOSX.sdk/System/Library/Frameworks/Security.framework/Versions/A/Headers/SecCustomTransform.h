@@ -639,27 +639,50 @@ CFErrorRef SecTransformSetTransformAction(SecTransformImplementationRef ref,
                                 SecTransformActionBlock newAction);
 
 /*!
-    @function       SecTranformCustomGetAttribute
-
-    @abstract       Allow a custom transform to get an attribute value
-
-    @param ref      A SecTransformImplementationRef that is bound to an instance
-                    of a custom transform.
-
-    @param attribute
-                    The name or the attribute handle of the attribute whose
-                    value is to be retrieved.
-
-    @param type     The type of data to be retrieved for the attribute.  See the 
-                    discussion on SecTransformMetaAttributeType for details.
-
-    @result         The value of the attribute.
-
-*/
+ @function       SecTranformCustomGetAttribute
+ 
+ @abstract       Allow a custom transform to get an attribute value
+ 
+ @param ref      A SecTransformImplementationRef that is bound to an instance
+ of a custom transform.
+ 
+ @param attribute
+ The name or the attribute handle of the attribute whose
+ value is to be retrieved.
+ 
+ @param type     The type of data to be retrieved for the attribute.  See the 
+ discussion on SecTransformMetaAttributeType for details.
+ 
+ @result         The value of the attribute.
+ 
+ */
 CF_EXPORT
 CFTypeRef SecTranformCustomGetAttribute(SecTransformImplementationRef ref, 
-                                SecTransformStringOrAttributeRef attribute,
-                                SecTransformMetaAttributeType type);
+                                        SecTransformStringOrAttributeRef attribute,
+                                        SecTransformMetaAttributeType type) AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_8;
+
+/*!
+ @function       SecTransformCustomGetAttribute
+ 
+ @abstract       Allow a custom transform to get an attribute value
+ 
+ @param ref      A SecTransformImplementationRef that is bound to an instance
+ of a custom transform.
+ 
+ @param attribute
+ The name or the attribute handle of the attribute whose
+ value is to be retrieved.
+ 
+ @param type     The type of data to be retrieved for the attribute.  See the 
+ discussion on SecTransformMetaAttributeType for details.
+ 
+ @result         The value of the attribute.
+ 
+ */
+CF_EXPORT
+CFTypeRef SecTransformCustomGetAttribute(SecTransformImplementationRef ref, 
+                                        SecTransformStringOrAttributeRef attribute,
+                                        SecTransformMetaAttributeType type) __asm__("_SecTranformCustomGetAttribute");
 
 /*!
     @function       SecTransformCustomSetAttribute

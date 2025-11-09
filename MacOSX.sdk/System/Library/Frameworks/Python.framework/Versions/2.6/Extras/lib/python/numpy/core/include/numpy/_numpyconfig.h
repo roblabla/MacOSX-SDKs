@@ -22,7 +22,7 @@
 #define NPY_USE_C99_FORMATS 1
 #define NPY_VISIBILITY_HIDDEN __attribute__((visibility("hidden")))
 #define NPY_ABI_VERSION 0x01000009
-#define NPY_API_VERSION 0x00000004
+#define NPY_API_VERSION 0x00000006
 
 #ifndef __STDC_FORMAT_MACROS
 #define __STDC_FORMAT_MACROS 1

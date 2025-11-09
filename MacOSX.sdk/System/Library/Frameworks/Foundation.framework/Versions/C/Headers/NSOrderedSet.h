@@ -1,5 +1,5 @@
 /*	NSOrderedSet.h
-	Copyright (c) 2007-2011, Apple Inc. All rights reserved.
+	Copyright (c) 2007-2012, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -12,7 +12,7 @@
 /****************       Immutable Ordered Set   ****************/
 
 NS_CLASS_AVAILABLE(10_7, 5_0)
-@interface NSOrderedSet : NSObject <NSCopying, NSMutableCopying, NSCoding, NSFastEnumeration>
+@interface NSOrderedSet : NSObject <NSCopying, NSMutableCopying, NSSecureCoding, NSFastEnumeration>
 
 - (NSUInteger)count;
 - (id)objectAtIndex:(NSUInteger)idx;
@@ -35,6 +35,8 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
 
 - (BOOL)isSubsetOfOrderedSet:(NSOrderedSet *)other;
 - (BOOL)isSubsetOfSet:(NSSet *)set;
+
+- (id)objectAtIndexedSubscript:(NSUInteger)idx NS_AVAILABLE(10_8, 6_0);
 
 - (NSEnumerator *)objectEnumerator;
 - (NSEnumerator *)reverseObjectEnumerator;
@@ -127,6 +129,7 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
 - (void)insertObjects:(NSArray *)objects atIndexes:(NSIndexSet *)indexes;
 
 - (void)setObject:(id)obj atIndex:(NSUInteger)idx;
+- (void)setObject:(id)obj atIndexedSubscript:(NSUInteger)idx NS_AVAILABLE(10_8, 6_0);
 
 - (void)replaceObjectsInRange:(NSRange)range withObjects:(const id [])objects count:(NSUInteger)count;
 - (void)replaceObjectsAtIndexes:(NSIndexSet *)indexes withObjects:(NSArray *)objects;

@@ -33,15 +33,6 @@
 #define CA_OS_VERSION(m, i) (__IPHONE_OS_VERSION_MIN_REQUIRED >= (i))
 #endif
 
-/* FIXME: Needed until everyone is on Leopard. */
-#ifndef CGFLOAT_DEFINED
-  typedef float CGFloat;
-# define CGFLOAT_MIN FLT_MIN
-# define CGFLOAT_MAX FLT_MAX
-# define CGFLOAT_IS_DOUBLE 0
-# define CGFLOAT_DEFINED 1
-#endif
-
 #ifdef __cplusplus
 # define CA_EXTERN_C_BEGIN extern "C" {
 # define CA_EXTERN_C_END   }

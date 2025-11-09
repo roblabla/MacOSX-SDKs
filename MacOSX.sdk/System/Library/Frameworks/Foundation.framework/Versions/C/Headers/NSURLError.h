@@ -1,6 +1,6 @@
 /*	
     NSURLError.h
-    Copyright (c) 2003-2011, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2012, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -77,9 +77,7 @@ enum
     NSURLErrorFileDoesNotExist = 		kCFURLErrorFileDoesNotExist,
     NSURLErrorFileIsDirectory = 		kCFURLErrorFileIsDirectory,
     NSURLErrorNoPermissionsToReadFile = 	kCFURLErrorNoPermissionsToReadFile,
-#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED || __IPHONE_2_0 <= __IPHONE_OS_VERSION_MAX_ALLOWED
-    NSURLErrorDataLengthExceedsMaximum =	kCFURLErrorDataLengthExceedsMaximum,
-#endif
+    NSURLErrorDataLengthExceedsMaximum NS_ENUM_AVAILABLE(10_5, 2_0) =	kCFURLErrorDataLengthExceedsMaximum,
     
     // SSL errors
     NSURLErrorSecureConnectionFailed = 		kCFURLErrorSecureConnectionFailed,
@@ -101,11 +99,9 @@ enum
     NSURLErrorDownloadDecodingFailedMidStream = kCFURLErrorDownloadDecodingFailedMidStream,
     NSURLErrorDownloadDecodingFailedToComplete =kCFURLErrorDownloadDecodingFailedToComplete,
 
-#if MAC_OS_X_VERSION_10_7 <= MAC_OS_X_VERSION_MAX_ALLOWED
-    NSURLErrorInternationalRoamingOff =         kCFURLErrorInternationalRoamingOff,
-    NSURLErrorCallIsActive =                    kCFURLErrorCallIsActive,
-    NSURLErrorDataNotAllowed =                  kCFURLErrorDataNotAllowed,
-    NSURLErrorRequestBodyStreamExhausted =      kCFURLErrorRequestBodyStreamExhausted,
-#endif
+    NSURLErrorInternationalRoamingOff NS_ENUM_AVAILABLE(10_7, 3_0) =         kCFURLErrorInternationalRoamingOff,
+    NSURLErrorCallIsActive NS_ENUM_AVAILABLE(10_7, 3_0) =                    kCFURLErrorCallIsActive,
+    NSURLErrorDataNotAllowed NS_ENUM_AVAILABLE(10_7, 3_0) =                  kCFURLErrorDataNotAllowed,
+    NSURLErrorRequestBodyStreamExhausted NS_ENUM_AVAILABLE(10_7, 3_0) =      kCFURLErrorRequestBodyStreamExhausted,
 };
 

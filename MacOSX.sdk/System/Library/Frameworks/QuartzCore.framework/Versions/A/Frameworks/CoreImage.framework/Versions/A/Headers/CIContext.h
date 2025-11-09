@@ -41,9 +41,7 @@ CORE_IMAGE_EXPORT NSString * const kCIContextUseSoftwareRenderer AVAILABLE_MAC_O
 						  colorSpace:(CGColorSpaceRef)cs
 							 options:(NSDictionary *)dict AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
-/* DEPRECATED, please use the method above or if you need this
-* for backward capability, make sure that you specify the colorspace
-* in the options dictionary */
+/* DEPRECATED, please use contextWithCGLContext:pixelFormat:colorSpace:options: */
 + (CIContext *)contextWithCGLContext:(CGLContextObj)ctx
 						 pixelFormat:(CGLPixelFormatObj)pf
 							 options:(NSDictionary *)dict
@@ -54,9 +52,10 @@ AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_
 + (CIContext *)contextWithCGContext:(CGContextRef)ctx
 							options:(NSDictionary *)dict;
 
-/* Render the subregion 'src' of 'im' to point 'p' in the context's
- * destination. */
-- (void)drawImage:(CIImage *)im atPoint:(CGPoint)p fromRect:(CGRect)src;
+/* DEPRECATED, please use the drawImage:inRect:fromRect: instead.
+ * Render the subregion 'src' of 'im' to point 'p' in the context's destination. */
+- (void)drawImage:(CIImage *)im atPoint:(CGPoint)p fromRect:(CGRect)src
+AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_8;
 
 /* Render the rectangle 'src' of 'im' to the rectangle 'dest' in the
  * context's destination. */

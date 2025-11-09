@@ -1,5 +1,5 @@
 /*	NSPropertyList.h
-	Copyright (c) 2002-2011, Apple Inc. All rights reserved.
+	Copyright (c) 2002-2012, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -7,19 +7,17 @@
 
 @class NSData, NSString, NSError, NSInputStream, NSOutputStream;
 
-enum {
+typedef NS_OPTIONS(NSUInteger, NSPropertyListMutabilityOptions) {
     NSPropertyListImmutable = kCFPropertyListImmutable,
     NSPropertyListMutableContainers = kCFPropertyListMutableContainers,
     NSPropertyListMutableContainersAndLeaves = kCFPropertyListMutableContainersAndLeaves
 };
-typedef NSUInteger NSPropertyListMutabilityOptions;
 
-enum {
+typedef NS_ENUM(NSUInteger, NSPropertyListFormat) {
     NSPropertyListOpenStepFormat = kCFPropertyListOpenStepFormat,
     NSPropertyListXMLFormat_v1_0 = kCFPropertyListXMLFormat_v1_0,
     NSPropertyListBinaryFormat_v1_0 = kCFPropertyListBinaryFormat_v1_0
 };
-typedef NSUInteger NSPropertyListFormat;
 
 typedef NSUInteger NSPropertyListReadOptions;
 typedef NSUInteger NSPropertyListWriteOptions;

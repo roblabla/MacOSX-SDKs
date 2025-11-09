@@ -32,7 +32,7 @@
 
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -128,7 +128,7 @@ typedef struct LSLaunchURLSpec          LSLaunchURLSpec;
 extern OSStatus 
 LSOpenFSRef(
   const FSRef *  inRef,
-  FSRef *        outLaunchedRef)       /* can be NULL */      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  FSRef *        outLaunchedRef)       /* can be NULL */      __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -168,7 +168,7 @@ LSOpenFSRef(
 extern OSStatus 
 LSOpenCFURLRef(
   CFURLRef    inURL,
-  CFURLRef *  outLaunchedURL)       /* can be NULL */         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CFURLRef *  outLaunchedURL)       /* can be NULL */         __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -202,7 +202,7 @@ LSOpenCFURLRef(
 extern OSStatus 
 LSOpenFromRefSpec(
   const LSLaunchFSRefSpec *  inLaunchSpec,
-  FSRef *                    outLaunchedRef)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  FSRef *                    outLaunchedRef)       /* can be NULL */ __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -238,7 +238,7 @@ LSOpenFromRefSpec(
 extern OSStatus 
 LSOpenFromURLSpec(
   const LSLaunchURLSpec *  inLaunchSpec,
-  CFURLRef *               outLaunchedURL)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CFURLRef *               outLaunchedURL)       /* can be NULL */ __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -298,7 +298,7 @@ typedef struct LSApplicationParameters  LSApplicationParameters;
 extern OSStatus 
 LSOpenApplication(
   const LSApplicationParameters *  appParams,
-  ProcessSerialNumber *            outPSN)          /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  ProcessSerialNumber *            outPSN)          /* can be NULL */ __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 
 
@@ -348,7 +348,7 @@ LSOpenItemsWithRole(
   const AEKeyDesc *                inAEParam,           /* can be NULL */
   const LSApplicationParameters *  inAppParams,         /* can be NULL */
   ProcessSerialNumber *            outPSNs,             /* can be NULL */
-  CFIndex                          inMaxPSNCount)             AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  CFIndex                          inMaxPSNCount)             __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 
 
@@ -400,7 +400,7 @@ LSOpenURLsWithRole(
   const AEKeyDesc *                inAEParam,           /* can be NULL */
   const LSApplicationParameters *  inAppParams,         /* can be NULL */
   ProcessSerialNumber *            outPSNs,             /* can be NULL */
-  CFIndex                          inMaxPSNCount)             AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  CFIndex                          inMaxPSNCount)             __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 
 

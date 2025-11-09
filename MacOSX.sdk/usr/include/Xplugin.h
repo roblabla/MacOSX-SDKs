@@ -34,7 +34,60 @@
 #ifndef XPLUGIN_H
 #define XPLUGIN_H 1
 
-#define XPLUGIN_VERSION 4
+#define XPLUGIN_VERSION 6
+
+#include <Availability.h>
+#if defined(__MAC_OS_X_VERSION_MIN_REQUIRED) && !defined(XPLUGIN_VERSION_MIN_REQUIRED)
+#if __MAC_OS_X_VERSION_MIN_REQUIRED >= 1082
+#define XPLUGIN_VERSION_MIN_REQUIRED 6
+#elif __MAC_OS_X_VERSION_MIN_REQUIRED >= 1080
+#define XPLUGIN_VERSION_MIN_REQUIRED 5
+#elif __MAC_OS_X_VERSION_MIN_REQUIRED >= 1070
+#define XPLUGIN_VERSION_MIN_REQUIRED 4
+#elif __MAC_OS_X_VERSION_MIN_REQUIRED >= 1060
+#define XPLUGIN_VERSION_MIN_REQUIRED 3
+#elif __MAC_OS_X_VERSION_MIN_REQUIRED >= 1050
+#define XPLUGIN_VERSION_MIN_REQUIRED 1
+#else
+#define XPLUGIN_VERSION_MIN_REQUIRED 0
+#endif
+#endif /* __MAC_OS_X_VERSION_MIN_REQUIRED && !XPLUGIN_VERSION_MIN_REQUIRED */
+
+#if XPLUGIN_VERSION_MIN_REQUIRED >= 6 || !defined(XPLUGIN_VERSION_MIN_REQUIRED)
+#define XPLUGIN_VERSION_6
+#else
+#define XPLUGIN_VERSION_6 __attribute__((weak_import))
+#endif
+
+#if XPLUGIN_VERSION_MIN_REQUIRED >= 5 || !defined(XPLUGIN_VERSION_MIN_REQUIRED)
+#define XPLUGIN_VERSION_5
+#else
+#define XPLUGIN_VERSION_5 __attribute__((weak_import))
+#endif
+
+#if XPLUGIN_VERSION_MIN_REQUIRED >= 4 || !defined(XPLUGIN_VERSION_MIN_REQUIRED)
+#define XPLUGIN_VERSION_4
+#else
+#define XPLUGIN_VERSION_4 __attribute__((weak_import))
+#endif
+
+#if XPLUGIN_VERSION_MIN_REQUIRED >= 3 || !defined(XPLUGIN_VERSION_MIN_REQUIRED)
+#define XPLUGIN_VERSION_3
+#else
+#define XPLUGIN_VERSION_3 __attribute__((weak_import))
+#endif
+
+#if XPLUGIN_VERSION_MIN_REQUIRED >= 2 || !defined(XPLUGIN_VERSION_MIN_REQUIRED)
+#define XPLUGIN_VERSION_2
+#else
+#define XPLUGIN_VERSION_2 __attribute__((weak_import))
+#endif
+
+#if XPLUGIN_VERSION_MIN_REQUIRED >= 1 || !defined(XPLUGIN_VERSION_MIN_REQUIRED)
+#define XPLUGIN_VERSION_1
+#else
+#define XPLUGIN_VERSION_1 __attribute__((weak_import))
+#endif
 
 #include <stdint.h>
 
@@ -55,6 +108,7 @@
 typedef unsigned int xp_resource_id;
 typedef xp_resource_id xp_window_id;
 typedef xp_resource_id xp_surface_id;
+typedef unsigned int xp_native_window_id; /* XPLUGIN_VERSION_5 */
 typedef unsigned int xp_client_id;
 typedef unsigned int xp_request_type;
 typedef int xp_error;
@@ -178,9 +232,12 @@ enum xp_window_changes_enum {
     XP_DEPTH			= 1 << 4,
     XP_COLORMAP			= 1 << 5,
     XP_WINDOW_LEVEL		= 1 << 6,
-    XP_ATTACH_TRANSIENT		= 1 << 7,
+    XP_ATTACH_TRANSIENT		= 1 << 7, /* XPLUGIN_VERSION_3 */
 };
 
+/* This stucture may grow with API changes, so don't rely on it remaining
+ * a fixed size.
+ */
 struct xp_window_changes_struct {
     /* XP_ORIGIN */
     int x, y;
@@ -208,7 +265,7 @@ struct xp_window_changes_struct {
     /* XP_WINDOW_LEVEL, window-only */
     int window_level;
 
-    /* XP_ATTACH_TRANSIENT, window-only */
+    /* XP_ATTACH_TRANSIENT, window-only, XPLUGIN_VERSION_3 */
     xp_window_id transient_for;
 };
 
@@ -245,11 +302,16 @@ enum xp_depth_enum {
 /* Options that may be passed to the xp_init () function. */
 
 enum xp_init_options_enum {
-    /* Don't mark that this process can be in the foreground. */
+    /* Don't mark that this process can be in the foreground. 
+     * libGL *MUST* set this, xorg-server *MUST NOT* set this.
+     */
     XP_IN_BACKGROUND		= 1 << 0,
 
     /* Deliver background pointer events to this process. */
     XP_BACKGROUND_EVENTS	= 1 << 1,
+
+    /* Enable support for the xp_dock_ APIs */
+    XP_DOCK_SUPPORT		= 1 << 2,
 };
 
 
@@ -326,14 +388,14 @@ extern xp_error xp_configure_window (xp_window_id id, unsigned int mask,
 /* Returns true if NATIVE-ID is a window created by the plugin library.
    If so and RET-ID is non-null, stores the id of the window in *RET-ID. */
 
-extern xp_bool xp_lookup_native_window (unsigned int native_id,
+extern xp_bool xp_lookup_native_window (xp_native_window_id native_id,
 					xp_window_id *ret_id);
 
 /* If ID names a window created by the plugin library, stores it's native
    window id in *RET-NATIVE-ID. */
 
 extern xp_error xp_get_native_window (xp_window_id id,
-				      unsigned int *ret_native_id);
+				      xp_native_window_id *ret_native_id);
 
 
 /* Locks the rectangle IN-RECT (or, if null, the entire window) of the
@@ -616,9 +678,11 @@ extern unsigned int xp_fill_bytes_threshold, xp_copy_bytes_threshold,
 /* e is an EventRef.  This returns true if the passed event corresponds to a
  * hotkey that the user has enabled.
  */
+XPLUGIN_VERSION_1
 extern xp_bool xp_is_symbolic_hotkey_event(const void *e);
 
 /* Set the state for disabled hotkeys */
+XPLUGIN_VERSION_1
 extern xp_error xp_disable_hot_keys(xp_bool state);
 
 /* Set the ProcessSerialNumber for the application that is going to be our dock
@@ -629,6 +693,86 @@ extern xp_error xp_disable_hot_keys(xp_bool state);
  * namespace polution in the server.
  *
  */
+XPLUGIN_VERSION_2
 extern xp_error xp_set_dock_proxy(uint32_t hi, uint32_t lo);
+
+
+/* Support for dock integration, primarily used by quartz-wm */
+
+#define XP_NULL_NATIVE_WINDOW_ID ((xp_native_window_id)0)
+
+/* Dock location */
+enum xp_dock_orientation_enum {
+    XP_DOCK_ORIENTATION_BOTTOM = 2,
+    XP_DOCK_ORIENTATION_LEFT   = 3,
+    XP_DOCK_ORIENTATION_RIGHT  = 4,
+};
+typedef enum xp_dock_orientation_enum xp_dock_orientation;
+
+XPLUGIN_VERSION_5
+extern xp_dock_orientation xp_dock_get_orientation(void);
+
+XPLUGIN_VERSION_5
+extern xp_box xp_dock_get_rect(void);
+
+/* Window Visibility / Activation */
+XPLUGIN_VERSION_5
+extern xp_error xp_dock_is_window_visible(xp_native_window_id osxwindow_id, xp_bool *is_visible);
+
+XPLUGIN_VERSION_5
+extern xp_error xp_dock_activate_window(xp_native_window_id osxwindow_id);
+
+/* Minimize / Restore */
+XPLUGIN_VERSION_5
+extern xp_error xp_dock_minimize_item_with_title_async(xp_native_window_id osxwindow_id, const char *title);
+
+XPLUGIN_VERSION_5
+extern xp_error xp_dock_restore_item_async(xp_native_window_id osxwindow_id);
+
+XPLUGIN_VERSION_5
+extern xp_error xp_dock_remove_item(xp_native_window_id osxwindow_id);
+
+/* Window dragging */
+XPLUGIN_VERSION_5
+extern xp_error xp_dock_drag_begin(xp_native_window_id osxwindow_id);
+
+XPLUGIN_VERSION_5
+extern xp_error xp_dock_drag_end(xp_native_window_id osxwindow_id);
+
+/* Event handling */
+typedef enum {
+    XP_DOCK_EVENT_RESTORE_ALL_WINDOWS = 1,
+    XP_DOCK_EVENT_RESTORE_WINDOWS     = 2,
+    XP_DOCK_EVENT_SELECT_WINDOWS      = 3,
+    XP_DOCK_EVENT_RESTORE_DONE        = 4,
+    XP_DOCK_EVENT_MINIMIZE_DONE       = 5,
+} xp_dock_event_type;
+
+typedef struct {
+    xp_dock_event_type type;
+
+    /* XP_NULL_NATIVE_WINDOW_ID terminated list of windows affected by this event */
+    xp_native_window_id *windows;
+
+    /* YES if the event was successful (for XP_DOCK_EVENT_RESTORE_DONE and XP_DOCK_EVENT_MINIMIZE_DONE) */
+    xp_bool success;
+} xp_dock_event;
+
+typedef void (*xp_dock_event_handler)(xp_dock_event *event);
+
+XPLUGIN_VERSION_5
+extern void xp_dock_event_set_handler(xp_dock_event_handler new_handler);
+
+/* Cause all X11 windows to be ordered above other application windows
+ * Useful for responding to Dock/cmd-tab
+ */
+XPLUGIN_VERSION_6
+extern xp_error xp_window_bring_all_to_front(void);
+
+/* Return XPLUGIN_VERSION for runtime checks of Xplugin's version
+ * Better late than never...
+ */
+XPLUGIN_VERSION_6
+extern uint32_t xp_api_version(void);
 
 #endif /* XPLUGIN_H */

@@ -4,10 +4,10 @@
  *	  header file for postgres vacuum cleaner and statistics analyzer
  *
  *
- * Portions Copyright (c) 1996-2010, PostgreSQL Global Development Group
+ * Portions Copyright (c) 1996-2011, PostgreSQL Global Development Group
  * Portions Copyright (c) 1994, Regents of the University of California
  *
- * $PostgreSQL: pgsql/src/include/commands/vacuum.h,v 1.89.6.1 2010/08/01 22:38:20 tgl Exp $
+ * src/include/commands/vacuum.h
  *
  *-------------------------------------------------------------------------
  */
@@ -50,6 +50,10 @@
  * the information to be stored in a pg_statistic row for the column.  Be
  * careful to allocate any pointed-to data in anl_context, which will NOT
  * be CurrentMemoryContext when compute_stats is called.
+ *
+ * Note: for the moment, all comparisons done for statistical purposes
+ * should use the database's default collation (DEFAULT_COLLATION_OID).
+ * This might change in some future release.
  *----------
  */
 typedef struct VacAttrStats *VacAttrStatsP;
@@ -64,7 +68,7 @@ typedef struct VacAttrStats
 	 * type-specific typanalyze function.
 	 *
 	 * Note: do not assume that the data being analyzed has the same datatype
-	 * shown in attr, ie do not trust attr->atttypid, attlen, etc.  This is
+	 * shown in attr, ie do not trust attr->atttypid, attlen, etc.	This is
 	 * because some index opclasses store a different type than the underlying
 	 * column/expression.  Instead use attrtypid, attrtypmod, and attrtype for
 	 * information about the datatype being fed to the typanalyze function.
@@ -138,6 +142,10 @@ extern void vacuum(VacuumStmt *vacstmt, Oid relid, bool do_toast,
 extern void vac_open_indexes(Relation relation, LOCKMODE lockmode,
 				 int *nindexes, Relation **Irel);
 extern void vac_close_indexes(int nindexes, Relation *Irel, LOCKMODE lockmode);
+extern double vac_estimate_reltuples(Relation relation, bool is_analyze,
+					   BlockNumber total_pages,
+					   BlockNumber scanned_pages,
+					   double scanned_tuples);
 extern void vac_update_relstats(Relation relation,
 					BlockNumber num_pages,
 					double num_tuples,
@@ -153,10 +161,10 @@ extern void vacuum_delay_point(void);
 
 /* in commands/vacuumlazy.c */
 extern void lazy_vacuum_rel(Relation onerel, VacuumStmt *vacstmt,
-				BufferAccessStrategy bstrategy, bool *scanned_all);
+				BufferAccessStrategy bstrategy);
 
 /* in commands/analyze.c */
 extern void analyze_rel(Oid relid, VacuumStmt *vacstmt,
-			BufferAccessStrategy bstrategy, bool update_reltuples);
+			BufferAccessStrategy bstrategy);
 
 #endif   /* VACUUM_H */

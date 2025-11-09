@@ -13,6 +13,12 @@
 #include "IOKit/pwr_mgt/RootDomain.h"
 
 //===========================================================================================================================
+// Macros
+//===========================================================================================================================
+
+#define kBSKernelMonitor2Notification				'bsk2'
+
+//===========================================================================================================================
 // Forwards
 //===========================================================================================================================
 
@@ -109,8 +115,14 @@ class IOBluetoothHIDDriver : public IOHIDDevice
 		
 		bool					mGotNoDeepSleepAssertionID;
 		
-		uint32_t				mSleepingThreadCount;
-
+        OSString*				disconnectionNotificationString;
+        OSString*				connectionNotificationString;
+        
+		IOTimerEventSource*		deviceConnectTimer;
+		
+		bool					mNeedToDropData;
+		
+		UInt32					mWakeTime;
     };
     ExpansionData	*_expansionData;
 	
@@ -193,6 +205,7 @@ public:
 	virtual IOReturn	interruptChannelOpeningWL( IOBluetoothL2CAPChannel* theChannel );
 
 	// Timeout Handler
+	static	void		deviceConnectTimerFired( OSObject* owner, IOTimerEventSource* sender );
 	static	void		timerFired( OSObject* owner, IOTimerEventSource* sender );
 	virtual void		handleTimeout();
 	
@@ -227,8 +240,10 @@ public:
     OSMetaClassDeclareReservedUsed( IOBluetoothHIDDriver,  6 );
 	virtual void			waitForInterruptChannel( void );
 	
+    OSMetaClassDeclareReservedUsed( IOBluetoothHIDDriver,  7 );
+	virtual void			handleStopWL( IOService *  provider );
 	
-    OSMetaClassDeclareReservedUnused( IOBluetoothHIDDriver,  7 );
+	
     OSMetaClassDeclareReservedUnused( IOBluetoothHIDDriver,  8 );
     OSMetaClassDeclareReservedUnused( IOBluetoothHIDDriver,  9 );
     OSMetaClassDeclareReservedUnused( IOBluetoothHIDDriver, 10 );

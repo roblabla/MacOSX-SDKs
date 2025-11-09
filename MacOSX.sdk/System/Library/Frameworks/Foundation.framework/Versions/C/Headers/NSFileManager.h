@@ -1,5 +1,5 @@
 /*	NSFileManager.h
-	Copyright (c) 1994-2011, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2012, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -15,8 +15,7 @@
 */
 #define NSFoundationVersionWithFileManagerResourceForkSupport 412
 
-#if MAC_OS_X_VERSION_10_6 <= MAC_OS_X_VERSION_MAX_ALLOWED || __IPHONE_4_0 <= __IPHONE_OS_VERSION_MAX_ALLOWED
-enum {
+typedef NS_OPTIONS(NSUInteger, NSVolumeEnumerationOptions) {
     /* The mounted volume enumeration will skip hidden volumes.
      */
     NSVolumeEnumerationSkipHiddenVolumes = 1UL << 1,
@@ -24,12 +23,9 @@ enum {
     /* The mounted volume enumeration will produce file reference URLs rather than path-based URLs.
      */
     NSVolumeEnumerationProduceFileReferenceURLs = 1UL << 2
-};
-#endif
-typedef NSUInteger NSVolumeEnumerationOptions;
+} NS_ENUM_AVAILABLE(10_6, 4_0);
 
-#if MAC_OS_X_VERSION_10_6 <= MAC_OS_X_VERSION_MAX_ALLOWED || __IPHONE_4_0 <= __IPHONE_OS_VERSION_MAX_ALLOWED
-enum {
+typedef NS_OPTIONS(NSUInteger, NSDirectoryEnumerationOptions) {
     /* NSDirectoryEnumerationSkipsSubdirectoryDescendants causes the NSDirectoryEnumerator to perform a shallow enumeration and not descend into directories it encounters.
      */
     NSDirectoryEnumerationSkipsSubdirectoryDescendants = 1UL << 0,
@@ -41,12 +37,9 @@ enum {
     /* NSDirectoryEnumerationSkipsHiddenFiles causes the NSDirectoryEnumerator to not enumerate hidden files.
      */
     NSDirectoryEnumerationSkipsHiddenFiles             = 1UL << 2
-};
-#endif
-typedef NSUInteger NSDirectoryEnumerationOptions;
+} NS_ENUM_AVAILABLE(10_6, 4_0);
 
-#if MAC_OS_X_VERSION_10_6 <= MAC_OS_X_VERSION_MAX_ALLOWED || __IPHONE_4_0 <= __IPHONE_OS_VERSION_MAX_ALLOWED
-enum {
+typedef NS_OPTIONS(NSUInteger, NSFileManagerItemReplacementOptions) {
     /* NSFileManagerItemReplacementUsingNewMetadataOnly causes -replaceItemAtURL:withItemAtURL:backupItemName:options:resultingItemURL:error: to use metadata from the new item only and not to attempt to preserve metadata from the original item.
      */
     NSFileManagerItemReplacementUsingNewMetadataOnly = 1UL << 0,
@@ -54,9 +47,11 @@ enum {
     /* NSFileManagerItemReplacementWithoutDeletingBackupItem causes -replaceItemAtURL:withItemAtURL:backupItemName:options:resultingItemURL:error: to leave the backup item in place after a successful replacement. The default behavior is to remove the item.
      */
      NSFileManagerItemReplacementWithoutDeletingBackupItem = 1UL << 1
-};
-#endif
-typedef NSUInteger NSFileManagerItemReplacementOptions;
+} NS_ENUM_AVAILABLE(10_6, 4_0);
+
+/* Notification sent after the current ubiquity identity has changed.
+*/
+extern NSString * const NSUbiquityIdentityDidChangeNotification NS_AVAILABLE(10_8, 6_0);
 
 @interface NSFileManager : NSObject
 
@@ -155,13 +150,16 @@ typedef NSUInteger NSFileManagerItemReplacementOptions;
 - (BOOL)linkItemAtPath:(NSString *)srcPath toPath:(NSString *)dstPath error:(NSError **)error NS_AVAILABLE(10_5, 2_0);
 - (BOOL)removeItemAtPath:(NSString *)path error:(NSError **)error NS_AVAILABLE(10_5, 2_0);
 
-
 /* These methods are URL-taking equivalents of the four methods above. Their delegate methods are defined in the NSFileManagerFileOperationAdditions category below.
  */
 - (BOOL)copyItemAtURL:(NSURL *)srcURL toURL:(NSURL *)dstURL error:(NSError **)error NS_AVAILABLE(10_6, 4_0);
 - (BOOL)moveItemAtURL:(NSURL *)srcURL toURL:(NSURL *)dstURL error:(NSError **)error NS_AVAILABLE(10_6, 4_0);
 - (BOOL)linkItemAtURL:(NSURL *)srcURL toURL:(NSURL *)dstURL error:(NSError **)error NS_AVAILABLE(10_6, 4_0);
 - (BOOL)removeItemAtURL:(NSURL *)URL error:(NSError **)error NS_AVAILABLE(10_6, 4_0);
+
+/* trashItemAtURL:resultingItemURL:error: returns YES if the item at 'url' was successfully moved to a Trash. Since the operation may require renaming the file to avoid collisions, it also returns by reference the resulting URL that the item was moved to. If this method returns NO, the item was not moved and an NSError will be returned by reference in the 'error' parameter.
+ */
+- (BOOL)trashItemAtURL:(NSURL *)url resultingItemURL:(NSURL **)outResultingURL error:(NSError **)error NS_AVAILABLE_MAC(10_8);
 
 /* The following methods are deprecated on Mac OS X 10.5. Their URL-based and/or error-returning replacements are listed above.
  */
@@ -229,7 +227,7 @@ typedef NSUInteger NSFileManagerItemReplacementOptions;
 
 /* fileSystemRepresentationWithPath: returns an array of characters suitable for passing to lower-level POSIX style APIs. The string is provided in the representation most appropriate for the filesystem in question.
  */
-- (__strong const char *)fileSystemRepresentationWithPath:(NSString *)path;
+- (__strong const char *)fileSystemRepresentationWithPath:(NSString *)path NS_RETURNS_INNER_POINTER;
 
 /* stringWithFileSystemRepresentation:length: returns an NSString created from an array of bytes that are in the filesystem representation.
  */
@@ -269,6 +267,17 @@ typedef NSUInteger NSFileManagerItemReplacementOptions;
  */
 - (NSURL *)URLForPublishingUbiquitousItemAtURL:(NSURL *)url expirationDate:(NSDate **)outDate error:(NSError **)error NS_AVAILABLE(10_7, 5_0);
 
+/* Returns an opaque token that represents the current ubiquity identity. This object can be copied, encoded, or compared with isEqual:. When ubiquity containers are unavailable because the user has disabled them, or when the user is simply not logged in, this method will return nil. The NSUbiquityIdentityDidChangeNotification notification is posted after this value changes.
+
+    If you don't need the container URL and just want to check if ubiquity containers are available you should use this method instead of checking -URLForUbiquityContainerIdentifier:.
+*/
+- (id <NSObject, NSCopying, NSCoding>)ubiquityIdentityToken NS_AVAILABLE(10_8, 6_0);
+
+/* Returns the container directory associated with the specified security application group ID.
+ */
+- (NSURL *)containerURLForSecurityApplicationGroupIdentifier:(NSString *)groupIdentifier NS_AVAILABLE_MAC(10_8); // Available in 10.8.3.
+
+
 @end
 
 /* These delegate methods are for the use of the deprecated handler-taking methods on NSFileManager for copying, moving, linking or deleting files.
@@ -280,8 +289,6 @@ typedef NSUInteger NSFileManagerItemReplacementOptions;
 
 
 @protocol NSFileManagerDelegate <NSObject>
-#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED || __IPHONE_2_0 <= __IPHONE_OS_VERSION_MAX_ALLOWED
-
 @optional
 
 /* fileManager:shouldCopyItemAtPath:toPath: gives the delegate an opportunity to filter the resulting copy. Returning YES from this method will allow the copy to happen. Returning NO from this method causes the item in question to be skipped. If the item skipped was a directory, no children of that directory will be copied, nor will the delegate be notified of those children.
@@ -340,7 +347,6 @@ typedef NSUInteger NSFileManagerItemReplacementOptions;
 - (BOOL)fileManager:(NSFileManager *)fileManager shouldProceedAfterError:(NSError *)error removingItemAtPath:(NSString *)path;
 - (BOOL)fileManager:(NSFileManager *)fileManager shouldProceedAfterError:(NSError *)error removingItemAtURL:(NSURL *)URL NS_AVAILABLE(10_6, 4_0);
 
-#endif
 @end
 
 

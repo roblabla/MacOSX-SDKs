@@ -2,16 +2,9 @@
      File:       CarbonCore/AVLTree.h
  
      Contains:   Interfaces for AVL balanced trees.
+                 The contents of this header file are deprecated.
  
-     Version:    CarbonCore-960.18~3
- 
-     Copyright:  © 1999-2008 by Apple Computer, Inc., all rights reserved.
- 
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
- 
-                     http://developer.apple.com/bugreporter/
- 
+     Copyright:  Â© 1999-2011 by Apple Inc. All rights reserved.
 */
 #ifndef __AVLTREE__
 #define __AVLTREE__
@@ -26,7 +19,7 @@
 
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -280,7 +273,7 @@ typedef STACK_UPP_TYPE(AVLWalkProcPtr)                          AVLWalkUPP;
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern AVLCompareItemsUPP
-NewAVLCompareItemsUPP(AVLCompareItemsProcPtr userRoutine)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+NewAVLCompareItemsUPP(AVLCompareItemsProcPtr userRoutine)     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  NewAVLItemSizeUPP()
@@ -291,7 +284,7 @@ NewAVLCompareItemsUPP(AVLCompareItemsProcPtr userRoutine)     AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern AVLItemSizeUPP
-NewAVLItemSizeUPP(AVLItemSizeProcPtr userRoutine)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+NewAVLItemSizeUPP(AVLItemSizeProcPtr userRoutine)             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  NewAVLDisposeItemUPP()
@@ -302,7 +295,7 @@ NewAVLItemSizeUPP(AVLItemSizeProcPtr userRoutine)             AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern AVLDisposeItemUPP
-NewAVLDisposeItemUPP(AVLDisposeItemProcPtr userRoutine)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+NewAVLDisposeItemUPP(AVLDisposeItemProcPtr userRoutine)       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  NewAVLWalkUPP()
@@ -313,7 +306,7 @@ NewAVLDisposeItemUPP(AVLDisposeItemProcPtr userRoutine)       AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern AVLWalkUPP
-NewAVLWalkUPP(AVLWalkProcPtr userRoutine)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+NewAVLWalkUPP(AVLWalkProcPtr userRoutine)                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  DisposeAVLCompareItemsUPP()
@@ -324,7 +317,7 @@ NewAVLWalkUPP(AVLWalkProcPtr userRoutine)                     AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeAVLCompareItemsUPP(AVLCompareItemsUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+DisposeAVLCompareItemsUPP(AVLCompareItemsUPP userUPP)         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  DisposeAVLItemSizeUPP()
@@ -335,7 +328,7 @@ DisposeAVLCompareItemsUPP(AVLCompareItemsUPP userUPP)         AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeAVLItemSizeUPP(AVLItemSizeUPP userUPP)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+DisposeAVLItemSizeUPP(AVLItemSizeUPP userUPP)                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  DisposeAVLDisposeItemUPP()
@@ -346,7 +339,7 @@ DisposeAVLItemSizeUPP(AVLItemSizeUPP userUPP)                 AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeAVLDisposeItemUPP(AVLDisposeItemUPP userUPP)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+DisposeAVLDisposeItemUPP(AVLDisposeItemUPP userUPP)           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  DisposeAVLWalkUPP()
@@ -357,7 +350,7 @@ DisposeAVLDisposeItemUPP(AVLDisposeItemUPP userUPP)           AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeAVLWalkUPP(AVLWalkUPP userUPP)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+DisposeAVLWalkUPP(AVLWalkUPP userUPP)                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  InvokeAVLCompareItemsUPP()
@@ -373,7 +366,7 @@ InvokeAVLCompareItemsUPP(
   const void *        i1,
   const void *        i2,
   AVLNodeType         nd_typ,
-  AVLCompareItemsUPP  userUPP)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  AVLCompareItemsUPP  userUPP)                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  InvokeAVLItemSizeUPP()
@@ -387,7 +380,7 @@ extern ByteCount
 InvokeAVLItemSizeUPP(
   AVLTreePtr      tree,
   const void *    itemPtr,
-  AVLItemSizeUPP  userUPP)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  AVLItemSizeUPP  userUPP)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  InvokeAVLDisposeItemUPP()
@@ -401,7 +394,7 @@ extern void
 InvokeAVLDisposeItemUPP(
   AVLTreePtr         tree,
   const void *       dataP,
-  AVLDisposeItemUPP  userUPP)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  AVLDisposeItemUPP  userUPP)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  InvokeAVLWalkUPP()
@@ -420,7 +413,7 @@ InvokeAVLWalkUPP(
   UInt32         level,
   SInt32         balance,
   void *         refCon,
-  AVLWalkUPP     userUPP)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  AVLWalkUPP     userUPP)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 #if __MACH__
   #ifdef __cplusplus
@@ -515,7 +508,7 @@ AVLInit(
   AVLItemSizeUPP       sizeItemProc,
   AVLDisposeItemUPP    disposeItemProc,
   void *               refCon,
-  AVLTreePtr *         tree)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  AVLTreePtr *         tree)                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -551,7 +544,7 @@ AVLInit(
 extern OSErr 
 AVLDispose(
   AVLTreePtr *  tree,
-  AVLOrder      order)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  AVLOrder      order)                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -621,7 +614,7 @@ AVLWalk(
   AVLTreePtr   tree,
   AVLWalkUPP   walkProc,
   AVLOrder     order,
-  void *       walkRefCon)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  void *       walkRefCon)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -655,7 +648,7 @@ AVLWalk(
 extern OSErr 
 AVLCount(
   AVLTreePtr   tree,
-  UInt32 *     count)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  UInt32 *     count)                                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -707,7 +700,7 @@ AVLGetIndItem(
   AVLTreePtr   tree,
   UInt32       index,
   void *       dataPtr,
-  ByteCount *  itemSize)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  ByteCount *  itemSize)                                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -747,7 +740,7 @@ AVLGetIndItem(
 extern OSErr 
 AVLInsert(
   AVLTreePtr    tree,
-  const void *  data)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  const void *  data)                                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -801,7 +794,7 @@ AVLRemove(
   AVLTreePtr    tree,
   const void *  key,
   void *        dataPtr,
-  ByteCount *   itemSize)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  ByteCount *   itemSize)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -853,7 +846,7 @@ AVLFind(
   AVLTreePtr    tree,
   const void *  key,
   void *        dataPtr,
-  ByteCount *   itemSize)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  ByteCount *   itemSize)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -887,7 +880,7 @@ AVLFind(
 extern OSErr 
 AVLGetRefcon(
   AVLTreePtr   tree,
-  void **      refCon)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  void **      refCon)                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 #endif  /* !__LP64__ */

@@ -1,5 +1,5 @@
 /*	CFUUID.h
-	Copyright (c) 1999-2011, Apple Inc.  All rights reserved.
+	Copyright (c) 1999-2012, Apple Inc.  All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFUUID__)
@@ -8,6 +8,7 @@
 #include <CoreFoundation/CFBase.h>
 #include <CoreFoundation/CFString.h>
 
+CF_IMPLICIT_BRIDGING_ENABLED
 CF_EXTERN_C_BEGIN
 
 typedef const struct __CFUUID * CFUUIDRef;
@@ -66,6 +67,7 @@ CF_EXPORT
 CFUUIDRef CFUUIDCreateFromUUIDBytes(CFAllocatorRef alloc, CFUUIDBytes bytes);
 
 CF_EXTERN_C_END
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif /* ! __COREFOUNDATION_CFUUID__ */
 

@@ -1,15 +1,12 @@
 /*
     NSEntityMigrationPolicy.h
     Core Data
-    Copyright (c) 2004-2010 Apple Inc.
+    Copyright (c) 2004-2012 Apple Inc.
     All rights reserved.
 */
 
-#import <Availability.h>
-
-#import <Foundation/NSObject.h>
-#import <Foundation/NSError.h>
 #import <Foundation/NSArray.h>
+#import <Foundation/NSError.h>
 
 #import <CoreData/CoreDataDefines.h>
 

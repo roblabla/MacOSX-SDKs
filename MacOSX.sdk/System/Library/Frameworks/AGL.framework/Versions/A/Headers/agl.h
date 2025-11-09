@@ -294,7 +294,11 @@ extern AGLRendererInfo aglQueryRendererInfo(const AGLDevice *gdevs, GLint ndev) 
 */
 extern AGLContext aglCreateContext(AGLPixelFormat pix, AGLContext share);
 extern GLboolean aglDestroyContext(AGLContext ctx);
+#ifdef AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER
+extern GLboolean aglCopyContext(AGLContext src, AGLContext dst, GLuint mask) DEPRECATED_IN_MAC_OS_X_VERSION_10_8_AND_LATER;
+#else
 extern GLboolean aglCopyContext(AGLContext src, AGLContext dst, GLuint mask);
+#endif
 extern GLboolean aglUpdateContext(AGLContext ctx);
 
 /*

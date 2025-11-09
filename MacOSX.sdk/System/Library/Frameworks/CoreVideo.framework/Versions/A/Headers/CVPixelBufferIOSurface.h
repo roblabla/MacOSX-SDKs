@@ -33,6 +33,10 @@ CV_EXPORT const CFStringRef kCVPixelBufferIOSurfaceOpenGLFBOCompatibilityKey AVA
 // Ensures that the CVPixelBuffer's IOSurfaceRef can be displayed in an CoreAnimation CALayer.
 CV_EXPORT const CFStringRef kCVPixelBufferIOSurfaceCoreAnimationCompatibilityKey AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;	// CFBoolean
 
+// Ensures that OpenGLES can create a valid texture object from IOSurface-backed CVPixelBuffers.
+CV_EXPORT const CFStringRef kCVPixelBufferIOSurfaceOpenGLESTextureCompatibilityKey __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_5_0);	// CFBoolean
+// Ensures that OpenGLES can create a valid texture object from IOSurface-backed CVPixelBuffers AND that the resulting texture may be used as a color buffer attachment to a OpenGLES frame buffer object.
+CV_EXPORT const CFStringRef kCVPixelBufferIOSurfaceOpenGLESFBOCompatibilityKey __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_5_0);	// CFBoolean
 
 #if COREVIDEO_SUPPORTS_IOSURFACE
 
@@ -41,7 +45,7 @@ CV_EXPORT const CFStringRef kCVPixelBufferIOSurfaceCoreAnimationCompatibilityKey
 	@abstract   Returns the IOSurface backing the pixel buffer, or NULL if it is not backed by an IOSurface.
 	@param      pixelBuffer Target PixelBuffer.
 */
-CV_EXPORT IOSurfaceRef CVPixelBufferGetIOSurface(CVPixelBufferRef pixelBuffer) AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+CV_EXPORT IOSurfaceRef CVPixelBufferGetIOSurface(CVPixelBufferRef pixelBuffer) __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_4_0);
 
 /*!
     @function   CVPixelBufferCreateWithIOSurface
@@ -62,7 +66,7 @@ CV_EXPORT CVReturn CVPixelBufferCreateWithIOSurface(
 		CFAllocatorRef allocator,
 		IOSurfaceRef surface,
 		CFDictionaryRef pixelBufferAttributes,
-		CVPixelBufferRef *pixelBufferOut) AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+		CVPixelBufferRef *pixelBufferOut) __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_4_0);
 
 #endif // COREVIDEO_SUPPORTS_IOSURFACE
 

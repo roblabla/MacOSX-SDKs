@@ -1,30 +1,26 @@
 /*	NSComparisonPredicate.h
-	Copyright (c) 2004-2011, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2012, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSPredicate.h>
 
 // Flags(s) that can be passed to the factory to indicate that a operator operating on strings should do so in a case insensitive fashion.
-enum {
+typedef NS_OPTIONS(NSUInteger, NSComparisonPredicateOptions) {
     NSCaseInsensitivePredicateOption = 0x01,
     NSDiacriticInsensitivePredicateOption = 0x02,
-#if MAC_OS_X_VERSION_10_6 <= MAC_OS_X_VERSION_MAX_ALLOWED || __IPHONE_4_0 <=  __IPHONE_OS_VERSION_MAX_ALLOWED
-    NSNormalizedPredicateOption = 0x04, /* Indicate that the strings to be compared have been preprocessed; this supersedes other options and is intended as a performance optimization option */
-#endif
+    NSNormalizedPredicateOption NS_ENUM_AVAILABLE(10_6, 4_0) = 0x04, /* Indicate that the strings to be compared have been preprocessed; this supersedes other options and is intended as a performance optimization option */
 };
-typedef NSUInteger NSComparisonPredicateOptions;
 
 // Describes how the operator is modified: can be direct, ALL, or ANY
-enum {
+typedef NS_ENUM(NSUInteger, NSComparisonPredicateModifier) {
     NSDirectPredicateModifier = 0, // Do a direct comparison
     NSAllPredicateModifier, // ALL toMany.x = y
     NSAnyPredicateModifier // ANY toMany.x = y
 };
-typedef NSUInteger NSComparisonPredicateModifier;
 
 
 // Type basic set of operators defined. Most are obvious; NSCustomSelectorPredicateOperatorType allows a developer to create an operator which uses the custom selector specified in the constructor to do the evaluation.
-enum {
+typedef NS_ENUM(NSUInteger, NSPredicateOperatorType) {
     NSLessThanPredicateOperatorType = 0, // compare: returns NSOrderedAscending
     NSLessThanOrEqualToPredicateOperatorType, // compare: returns NSOrderedAscending || NSOrderedSame
     NSGreaterThanPredicateOperatorType, // compare: returns NSOrderedDescending
@@ -36,14 +32,10 @@ enum {
     NSBeginsWithPredicateOperatorType,
     NSEndsWithPredicateOperatorType,
     NSInPredicateOperatorType, // rhs contains lhs returns true
-    NSCustomSelectorPredicateOperatorType
-#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED || __IPHONE_3_0 <=  __IPHONE_OS_VERSION_MAX_ALLOWED
-    ,
-    NSContainsPredicateOperatorType = 99, // lhs contains rhs returns true
-    NSBetweenPredicateOperatorType
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 || __IPHONE_3_0 <=  __IPHONE_OS_VERSION_MAX_ALLOWED*/
+    NSCustomSelectorPredicateOperatorType,
+    NSContainsPredicateOperatorType NS_ENUM_AVAILABLE(10_5, 3_0) = 99, // lhs contains rhs returns true
+    NSBetweenPredicateOperatorType NS_ENUM_AVAILABLE(10_5, 3_0)
 };
-typedef NSUInteger NSPredicateOperatorType;
 
 @class NSPredicateOperator;
 @class NSExpression;

@@ -1,7 +1,7 @@
 /*
 	File:		QTMovie.h
 
-	Copyright:	(c)2004-2010 by Apple Inc., all rights reserved.
+	Copyright:	(c)2004-2012 by Apple Inc., all rights reserved.
 
 */
 /*!

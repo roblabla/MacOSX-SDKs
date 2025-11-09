@@ -1,5 +1,5 @@
 /*	NSLocale.h
-	Copyright (c) 2003-2011, Apple Inc. All rights reserved.
+	Copyright (c) 2003-2012, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -9,7 +9,7 @@
 
 // Toll-free bridged with CFLocaleRef
 
-@interface NSLocale : NSObject <NSCopying, NSCoding>
+@interface NSLocale : NSObject <NSCopying, NSSecureCoding>
 
 - (id)objectForKey:(id)key;
 
@@ -51,14 +51,13 @@
 + (NSString *)localeIdentifierFromWindowsLocaleCode:(uint32_t)lcid NS_AVAILABLE(10_6, 4_0);
 + (uint32_t)windowsLocaleCodeFromLocaleIdentifier:(NSString *)localeIdentifier NS_AVAILABLE(10_6, 4_0);
 
-enum {
+typedef NS_ENUM(NSUInteger, NSLocaleLanguageDirection) {
     NSLocaleLanguageDirectionUnknown = kCFLocaleLanguageDirectionUnknown,
     NSLocaleLanguageDirectionLeftToRight = kCFLocaleLanguageDirectionLeftToRight,
     NSLocaleLanguageDirectionRightToLeft = kCFLocaleLanguageDirectionRightToLeft,
     NSLocaleLanguageDirectionTopToBottom = kCFLocaleLanguageDirectionTopToBottom,
     NSLocaleLanguageDirectionBottomToTop = kCFLocaleLanguageDirectionBottomToTop
 };
-typedef NSUInteger NSLocaleLanguageDirection;
 
 + (NSLocaleLanguageDirection)characterDirectionForLanguage:(NSString *)isoLangCode NS_AVAILABLE(10_6, 4_0);
 + (NSLocaleLanguageDirection)lineDirectionForLanguage:(NSString *)isoLangCode NS_AVAILABLE(10_6, 4_0);

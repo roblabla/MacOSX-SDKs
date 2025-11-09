@@ -41,7 +41,7 @@
 */
 
 OBEXError	IOBluetoothOBEXSessionCreateWithIOBluetoothSDPServiceRecordRef(	IOBluetoothSDPServiceRecordRef	inSDPServiceRef,
-																			OBEXSessionRef *				outSessionRef )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
+																			OBEXSessionRef *				outSessionRef )	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothOBEXSessionCreateWithIOBluetoothDeviceRefAndChannelNumber
@@ -62,7 +62,7 @@ OBEXError	IOBluetoothOBEXSessionCreateWithIOBluetoothSDPServiceRecordRef(	IOBlue
 
 OBEXError	IOBluetoothOBEXSessionCreateWithIOBluetoothDeviceRefAndChannelNumber(	IOBluetoothDeviceRef 		inDeviceRef,
 																					BluetoothRFCOMMChannelID	inChannelID,
-																					OBEXSessionRef *			outSessionRef )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
+																					OBEXSessionRef *			outSessionRef )	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 //---------------------------------------------------------------------------------------------------------------------------
@@ -86,7 +86,7 @@ OBEXError	IOBluetoothOBEXSessionCreateWithIOBluetoothDeviceRefAndChannelNumber(	
 OBEXError	IOBluetoothOBEXSessionCreateWithIncomingIOBluetoothRFCOMMChannel(	IOBluetoothRFCOMMChannelRef		inRFCOMMChannelRef,
 																				OBEXSessionEventCallback		inCallback,
 																				void *							inUserRefCon,
-																				OBEXSessionRef *				outSessionRef )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
+																				OBEXSessionRef *				outSessionRef )	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 typedef	void	(*IOBluetoothOBEXSessionOpenConnectionCallback) ( OBEXSessionRef session, OBEXError status, void * refCon );
@@ -112,7 +112,7 @@ typedef	void	(*IOBluetoothOBEXSessionOpenConnectionCallback) ( OBEXSessionRef se
 
 OBEXError	IOBluetoothOBEXSessionOpenTransportConnection(	OBEXSessionRef									inSessionRef,
 															IOBluetoothOBEXSessionOpenConnectionCallback	inCallback,
-															void *											inUserRefCon	)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
+															void *											inUserRefCon	)	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 #ifdef	__cplusplus
 	}

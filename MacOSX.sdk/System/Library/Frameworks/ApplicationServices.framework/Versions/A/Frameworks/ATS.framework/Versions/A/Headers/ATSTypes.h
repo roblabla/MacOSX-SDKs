@@ -5,7 +5,7 @@
  
      Version:    ATS
  
-     Copyright:  © 1997-2011 by Apple Inc., all rights reserved.
+     Copyright:  Copyright 1997-2012 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -39,13 +39,7 @@ extern "C" {
 #pragma pack(push, 2)
 
 #ifndef CGFLOAT_DEFINED
-#ifdef __LP64__
-typedef double                          CGFloat;
-#else
-typedef float                           CGFloat;
-#endif  /* defined(__LP64__) */
-
-/* For the time being CGFLOAT_DEFINED will also serve to indicate the presence 
+/* For the time being CGFLOAT_DEFINED will serve to indicate the presence 
        of new RefCon types in CoreServices. If new headers and associated typedefs
        are not present then URefCon is declared here.
     */
@@ -263,7 +257,10 @@ typedef OptionBits                      ATSOptionFlags;
 typedef UInt32                          ATSGeneration;
 typedef UInt32                          ATSFontContainerRef;
 typedef UInt32                          ATSFontFamilyRef;
+#ifndef ATSFONTREF_DEFINED
 typedef UInt32                          ATSFontRef;
+#define ATSFONTREF_DEFINED 1
+#endif
 typedef UInt16                          ATSGlyphRef;
 typedef CGFloat                         ATSFontSize;
 typedef UInt32                          ATSFontFormat;

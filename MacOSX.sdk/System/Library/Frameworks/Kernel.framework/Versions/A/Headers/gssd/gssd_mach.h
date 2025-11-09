@@ -29,7 +29,7 @@ typedef function_table_entry   *function_table_t;
 #endif /* AUTOTEST */
 
 #ifndef	gssd_mach_MSG_COUNT
-#define	gssd_mach_MSG_COUNT	7
+#define	gssd_mach_MSG_COUNT	8
 #endif	/* gssd_mach_MSG_COUNT */
 
 #include <mach/std_types.h>
@@ -213,6 +213,20 @@ kern_return_t mach_gss_unhold_cred
 	uint32_t *minor_stat
 );
 
+/* Routine mach_gss_lookup */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+kern_return_t mach_gss_lookup
+(
+	mach_port_t server,
+	uint32_t uid,
+	int32_t asid,
+	mach_port_t *gssd_session_port
+);
+
 __END_DECLS
 
 /********************** Caution **************************/
@@ -386,6 +400,19 @@ __END_DECLS
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		uint32_t uid;
+		int32_t asid;
+	} __Request__mach_gss_lookup_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Request__gssd_mach_subsystem__defined */
 
 /* union of all requests */
@@ -400,6 +427,7 @@ union __RequestUnion__gssd_mach_subsystem {
 	__Request__mach_gss_accept_sec_context_v2_t Request_mach_gss_accept_sec_context_v2;
 	__Request__mach_gss_hold_cred_t Request_mach_gss_hold_cred;
 	__Request__mach_gss_unhold_cred_t Request_mach_gss_unhold_cred;
+	__Request__mach_gss_lookup_t Request_mach_gss_lookup;
 };
 #endif /* !__RequestUnion__gssd_mach_subsystem__defined */
 /* typedefs for all replies */
@@ -549,6 +577,20 @@ union __RequestUnion__gssd_mach_subsystem {
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t gssd_session_port;
+		/* end of the kernel processed data */
+	} __Reply__mach_gss_lookup_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Reply__gssd_mach_subsystem__defined */
 
 /* union of all replies */
@@ -563,6 +605,7 @@ union __ReplyUnion__gssd_mach_subsystem {
 	__Reply__mach_gss_accept_sec_context_v2_t Reply_mach_gss_accept_sec_context_v2;
 	__Reply__mach_gss_hold_cred_t Reply_mach_gss_hold_cred;
 	__Reply__mach_gss_unhold_cred_t Reply_mach_gss_unhold_cred;
+	__Reply__mach_gss_lookup_t Reply_mach_gss_lookup;
 };
 #endif /* !__RequestUnion__gssd_mach_subsystem__defined */
 
@@ -574,7 +617,8 @@ union __ReplyUnion__gssd_mach_subsystem {
     { "mach_gss_init_sec_context_v2", 1002 },\
     { "mach_gss_accept_sec_context_v2", 1003 },\
     { "mach_gss_hold_cred", 1004 },\
-    { "mach_gss_unhold_cred", 1005 }
+    { "mach_gss_unhold_cred", 1005 },\
+    { "mach_gss_lookup", 1006 }
 #endif
 
 #ifdef __AfterMigUserHeader

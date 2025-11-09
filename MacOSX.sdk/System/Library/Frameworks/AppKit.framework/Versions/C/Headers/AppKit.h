@@ -1,7 +1,7 @@
 /*
 	AppKit.h
 	Application Kit
-	Copyright (c) 1994-2011, Apple Inc.
+	Copyright (c) 1994-2012, Apple Inc.
 	All rights reserved.
 
 	This file is included by all AppKit application source files for easy building.  Using this file is preferred over importing individual files because it will use a precompiled version.
@@ -88,6 +88,7 @@
 #import <AppKit/NSScroller.h>
 #import <AppKit/NSSegmentedControl.h>
 #import <AppKit/NSSegmentedCell.h>
+#import <AppKit/NSSharingService.h>
 #import <AppKit/NSSlider.h>
 #import <AppKit/NSSliderCell.h>
 #import <AppKit/NSSpellProtocol.h>
@@ -185,6 +186,7 @@
 #import <AppKit/NSPathCell.h>
 #import <AppKit/NSPathControl.h>
 #import <AppKit/NSPathComponentCell.h>
+#import <AppKit/NSPageController.h>
 #import <AppKit/NSPopover.h>
 #import <AppKit/NSCollectionView.h>
 #import <AppKit/NSTextInputClient.h>
@@ -192,3 +194,4 @@
 #import <AppKit/NSUserInterfaceItemSearching.h>
 #import <AppKit/NSTouch.h>
 #import <AppKit/NSWindowRestoration.h>
+#import <AppKit/NSTextAlternatives.h>

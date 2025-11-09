@@ -32,15 +32,15 @@
 @class NSString;
 
 @interface DOMHTMLFormElement : DOMHTMLElement
-@property(readonly, retain) DOMHTMLCollection *elements;
-@property(readonly) int length;
-@property(copy) NSString *name;
 @property(copy) NSString *acceptCharset;
 @property(copy) NSString *action;
-@property(copy) NSString *encoding AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
 @property(copy) NSString *enctype;
+@property(copy) NSString *encoding AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
 @property(copy) NSString *method;
+@property(copy) NSString *name;
 @property(copy) NSString *target;
+@property(readonly, retain) DOMHTMLCollection *elements;
+@property(readonly) int length;
 
 - (void)submit;
 - (void)reset;

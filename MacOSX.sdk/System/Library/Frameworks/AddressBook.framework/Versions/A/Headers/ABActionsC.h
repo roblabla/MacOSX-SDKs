@@ -18,7 +18,7 @@ extern "C" {
 // --------------------------------------------------------------------------------
 //      Action Support
 // --------------------------------------------------------------------------------
-// This API allows developers to populate AddressBook.app's roll-over menus with custom
+// This API allows developers to populate Contacts.app's roll-over menus with custom
 // entries. Your CFBundle must implement a function named ABActionRegisterCallbacks which
 // will return a pointer to an ABActionCallbacks struct. This struct should be filled out
 // as follows:

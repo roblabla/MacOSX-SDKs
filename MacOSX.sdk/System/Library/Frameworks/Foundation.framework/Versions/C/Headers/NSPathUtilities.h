@@ -1,5 +1,5 @@
 /*	NSPathUtilities.h
-	Copyright (c) 1994-2011, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2012, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSString.h>
@@ -31,7 +31,7 @@
 
 - (NSUInteger)completePathIntoString:(NSString **)outputName caseSensitive:(BOOL)flag matchesIntoArray:(NSArray **)outputArray filterTypes:(NSArray *)filterTypes;
 
-- (__strong const char *)fileSystemRepresentation;
+- (__strong const char *)fileSystemRepresentation NS_RETURNS_INNER_POINTER;
 - (BOOL)getFileSystemRepresentation:(char *)cname maxLength:(NSUInteger)max;
 
 @end
@@ -52,7 +52,7 @@ FOUNDATION_EXPORT NSString *NSTemporaryDirectory(void);
 
 FOUNDATION_EXPORT NSString *NSOpenStepRootDirectory(void);
 
-enum {
+typedef NS_ENUM(NSUInteger, NSSearchPathDirectory) {
     NSApplicationDirectory = 1,             // supported applications (Applications)
     NSDemoApplicationDirectory,             // unsupported applications, demonstration versions (Demos)
     NSDeveloperApplicationDirectory,        // developer applications (Developer/Applications). DEPRECATED - there is no one single Developer directory.
@@ -63,38 +63,32 @@ enum {
     NSDocumentationDirectory,               // documentation (Documentation)
     NSDocumentDirectory,                    // documents (Documents)
     NSCoreServiceDirectory,                 // location of CoreServices directory (System/Library/CoreServices)
-#if MAC_OS_X_VERSION_10_6 <= MAC_OS_X_VERSION_MAX_ALLOWED || __IPHONE_4_0 <= __IPHONE_OS_VERSION_MAX_ALLOWED
-    NSAutosavedInformationDirectory = 11,   // location of autosaved documents (Documents/Autosaved)
-#endif
+    NSAutosavedInformationDirectory NS_ENUM_AVAILABLE(10_6, 4_0) = 11,   // location of autosaved documents (Documents/Autosaved)
     NSDesktopDirectory = 12,                // location of user's desktop
     NSCachesDirectory = 13,                 // location of discardable cache files (Library/Caches)
     NSApplicationSupportDirectory = 14,     // location of application support files (plug-ins, etc) (Library/Application Support)
-#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED || __IPHONE_2_0 <= __IPHONE_OS_VERSION_MAX_ALLOWED
-    NSDownloadsDirectory = 15,              // location of the user's "Downloads" directory
-#endif
-#if MAC_OS_X_VERSION_10_6 <= MAC_OS_X_VERSION_MAX_ALLOWED || __IPHONE_4_0 <= __IPHONE_OS_VERSION_MAX_ALLOWED
-    NSInputMethodsDirectory = 16,           // input methods (Library/Input Methods)
-    NSMoviesDirectory = 17,                 // location of user's Movies directory (~/Movies)
-    NSMusicDirectory = 18,                  // location of user's Music directory (~/Music)
-    NSPicturesDirectory = 19,               // location of user's Pictures directory (~/Pictures)
-    NSPrinterDescriptionDirectory = 20,     // location of system's PPDs directory (Library/Printers/PPDs)
-    NSSharedPublicDirectory = 21,           // location of user's Public sharing directory (~/Public)
-    NSPreferencePanesDirectory = 22,        // location of the PreferencePanes directory for use with System Preferences (Library/PreferencePanes)
-    NSItemReplacementDirectory = 99,	    // For use with NSFileManager's URLForDirectory:inDomain:appropriateForURL:create:error:
-#endif
+    NSDownloadsDirectory NS_ENUM_AVAILABLE(10_5, 2_0) = 15,              // location of the user's "Downloads" directory
+    NSInputMethodsDirectory NS_ENUM_AVAILABLE(10_6, 4_0) = 16,           // input methods (Library/Input Methods)
+    NSMoviesDirectory NS_ENUM_AVAILABLE(10_6, 4_0) = 17,                 // location of user's Movies directory (~/Movies)
+    NSMusicDirectory NS_ENUM_AVAILABLE(10_6, 4_0) = 18,                  // location of user's Music directory (~/Music)
+    NSPicturesDirectory NS_ENUM_AVAILABLE(10_6, 4_0) = 19,               // location of user's Pictures directory (~/Pictures)
+    NSPrinterDescriptionDirectory NS_ENUM_AVAILABLE(10_6, 4_0) = 20,     // location of system's PPDs directory (Library/Printers/PPDs)
+    NSSharedPublicDirectory NS_ENUM_AVAILABLE(10_6, 4_0) = 21,           // location of user's Public sharing directory (~/Public)
+    NSPreferencePanesDirectory NS_ENUM_AVAILABLE(10_6, 4_0) = 22,        // location of the PreferencePanes directory for use with System Preferences (Library/PreferencePanes)
+    NSApplicationScriptsDirectory NS_ENUM_AVAILABLE(10_8, NA) = 23,      // location of the user scripts folder for the calling application (~/Library/Application Scripts/code-signing-id)
+    NSItemReplacementDirectory NS_ENUM_AVAILABLE(10_6, 4_0) = 99,	    // For use with NSFileManager's URLForDirectory:inDomain:appropriateForURL:create:error:
     NSAllApplicationsDirectory = 100,       // all directories where applications can occur
-    NSAllLibrariesDirectory = 101           // all directories where resources can occur
+    NSAllLibrariesDirectory = 101,          // all directories where resources can occur
+    NSTrashDirectory NS_ENUM_AVAILABLE(10_8, NA) = 102                   // location of Trash directory
 };
-typedef NSUInteger NSSearchPathDirectory;
 
-enum {
+typedef NS_OPTIONS(NSUInteger, NSSearchPathDomainMask) {
     NSUserDomainMask = 1,       // user's home directory --- place to install user's personal items (~)
     NSLocalDomainMask = 2,      // local to the current machine --- place to install items available to everyone on this machine (/Library)
     NSNetworkDomainMask = 4,    // publically available location in the local area network --- place to install items available on the network (/Network)
     NSSystemDomainMask = 8,     // provided by Apple, unmodifiable (/System)
     NSAllDomainsMask = 0x0ffff  // all domains: all of the above and future items
 };
-typedef NSUInteger NSSearchPathDomainMask;
 
 FOUNDATION_EXPORT NSArray *NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory directory, NSSearchPathDomainMask domainMask, BOOL expandTilde);
 

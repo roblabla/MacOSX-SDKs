@@ -260,7 +260,7 @@ CSEXTERN void ColorSyncIterateInstalledProfiles (ColorSyncProfileIterateCallback
                                         CFErrorRef*                     error);
    /*
     * callBack - pointer to a client provided function (can be NULL)
-    * seed     - pointer to a cache seed owned by the client
+    * seed     - pointer to a cache seed owned by the client (can be NULL)
     * error    - (optional) pointer to the error that will be returned in case of failure
     *
     */

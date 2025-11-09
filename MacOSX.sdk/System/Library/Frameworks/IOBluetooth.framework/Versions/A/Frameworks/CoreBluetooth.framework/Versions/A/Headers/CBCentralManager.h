@@ -60,7 +60,7 @@ CB_EXTERN NSString * const CBConnectPeripheralOptionNotifyOnDisconnectionKey;	//
  *      Commands should only be issued when its state is CBCentralStatePoweredOn.
  *
  */
-NS_CLASS_AVAILABLE(10_7, NA)
+NS_CLASS_AVAILABLE(10_7, 5_0)
 CB_EXTERN_CLASS @interface CBCentralManager : NSObject
 {
 @package

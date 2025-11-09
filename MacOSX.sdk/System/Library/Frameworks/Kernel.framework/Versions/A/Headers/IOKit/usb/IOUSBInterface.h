@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2007 Apple Inc. All rights reserved.
+ * Copyright © 1998-2007, 2012 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -41,7 +41,11 @@
 class IOUSBInterface : public IOUSBNub
 {
     friend class IOUSBInterfaceUserClientV2;
-    
+    friend class IOUSBInterfaceUserClientV3;
+    friend class IOUSBDevice;
+	friend class IOUSBPipe;
+	friend class IOUSBPipeV2;
+	
     OSDeclareDefaultStructors(IOUSBInterface)
 
 protected:
@@ -63,8 +67,9 @@ protected:
         IOCommandGate		*_gate;
         IOWorkLoop			*_workLoop;
 		bool				_needToClose;
-		IOLock *			_pipeObjLock;											// Lock to synchronize accesses to our pipeObjects
+		IOLock *			_pipeObjLock;				// Deprecated
 		OSSet *				_openClients;
+        UInt32              _RememberedStreams[kUSBMaxPipes];
     };
     ExpansionData * _expansionData;
 
@@ -74,6 +79,17 @@ protected:
     virtual void		SetProperties(void);			// update my property table with the correct properties		
 
     IOReturn 			ResetPipes(void);				// reset all pipes (except pipe zero) (not virtual)
+    IOReturn 			AbortPipesGated(void);			// abort all pipes (except pipe zero) (not virtual)
+    IOReturn 			ClosePipesGated(bool close);	// Abort and close or unlink all pipes (except pipe zero) (not virtual)
+	IOUSBPipe*			FindNextPipeGated(IOUSBPipe *current, IOUSBFindEndpointRequest *request, bool withRetain);
+	IOUSBPipe*			GetPipeObjGated(UInt8 index);
+    IOReturn 			ReopenPipesGated();             // relink all pipes (except pipe zero) (not virtual)
+	void	 			RememberStreamsGated(void);
+	IOReturn	 		RecreateStreamsGated(void);
+    
+    // Return the "Full" MaxPacketSize, given an endpoint descriptor and a pointer to an sscd if there is one
+    // This will multiple the MPS in the ep by the mult and the burst which may or may not be present
+    UInt16              CalculateFullMaxPacketSize(IOUSBEndpointDescriptor *ed, IOUSBSuperSpeedEndpointCompanionDescriptor *sscd);
 	
 public:
 	// static methods
@@ -81,6 +97,14 @@ public:
     static IOReturn				CallSuperOpen(OSObject *target, void *arg0, void *arg1, void *arg2, void *arg3);
     static IOReturn     		CallSuperClose(OSObject *target, void *arg0, void *arg1, void *arg2, void *arg3);
 	static IOReturn 			_ResetPipes(OSObject *target, void *arg0, void *arg1, void *arg2, void *arg3);
+	static IOReturn 			_AbortPipes(OSObject *target, void *arg0, void *arg1, void *arg2, void *arg3);
+	static IOReturn 			_ClosePipes(OSObject *target, void *arg0, void *arg1, void *arg2, void *arg3);
+	static IOReturn 			_FindNextPipe(OSObject *target, void *arg0, void *arg1, void *arg2, void *arg3);
+	static IOReturn 			_GetPipeObj(OSObject *target, void *arg0, void *arg1, void *arg2, void *arg3);
+	static IOReturn 			_ReopenPipes(OSObject *target, void *arg0, void *arg1, void *arg2, void *arg3);
+	static IOReturn 			_RememberStreams(OSObject *target, void *arg0, void *arg1, void *arg2, void *arg3);
+	static IOReturn 			_RecreateStreams(OSObject *target, void *arg0, void *arg1, void *arg2, void *arg3);
+
 	static UInt8 				hex2char( UInt8 digit );
     
 	// IOService methods
@@ -260,11 +284,40 @@ public:
 	 */
 	virtual	IOUSBPipe* FindNextPipe(IOUSBPipe *current, IOUSBFindEndpointRequest *request, bool withRetain);
 
-    OSMetaClassDeclareReservedUnused(IOUSBInterface,  2);
-    OSMetaClassDeclareReservedUnused(IOUSBInterface,  3);
-    OSMetaClassDeclareReservedUnused(IOUSBInterface,  4);
-    OSMetaClassDeclareReservedUnused(IOUSBInterface,  5);
-    OSMetaClassDeclareReservedUnused(IOUSBInterface,  6);
+    OSMetaClassDeclareReservedUsed(IOUSBInterface,  2);
+    /*!
+	 @function RememberStreams.
+	 Make a note of which pipes have streams, so they can be recreated later.
+	 @result returns kIOReturnSuccess if sucessful.
+	 */
+	virtual	IOReturn RememberStreams(void);
+
+    OSMetaClassDeclareReservedUsed(IOUSBInterface,  3);
+    /*!
+	 @function RecreateStreams
+	 Recreate the remembered streams after a device has been reset.
+	 @result returns kIOReturnSuccess if sucessful.
+	 */
+	virtual	IOReturn RecreateStreams(void);
+    
+    OSMetaClassDeclareReservedUsed(IOUSBInterface,  4);
+    virtual void		UnlinkPipes(void);				// delete the UIM endpoint from the pipe
+
+    OSMetaClassDeclareReservedUsed(IOUSBInterface,  5);
+    virtual void	ReopenPipes(void);				// open all pipes in the current interface/alt interface
+
+    OSMetaClassDeclareReservedUsed(IOUSBInterface,  6);
+    /*!
+	 @function GetEndpointPropertiesV3
+	 @abstract Returns the properties of an endpoint, possibly in an alternate interface, including any information from the SuperSpeed Companion Descriptor
+	 @param endpointProperties  Pointer to a IOUSBEndpointProperties structure that upon success will contain the information for the endpoint.  The bVersion field
+	 needs to be initialized with the structure version (see USBEndpointVersion enum in USB.h).  The bAlternateSetting, bEndpointNumber, and bDirection (kUSBIn, kUSBOut) MUST also be filled
+	 in with the values for the desired descriptor.  Not that the bMaxStreams value for Bulk endpoints is the value specified by the bmAttributes field in the SuperSpeed companion descriptor.
+	 @result returns kIOReturnSuccess if the endpoint is found, and kIOUSBEndpointNotFound if it is not.
+	 */
+    virtual IOReturn GetEndpointPropertiesV3(IOUSBEndpointProperties *endpointProperties);
+    
+	
     OSMetaClassDeclareReservedUnused(IOUSBInterface,  7);
     OSMetaClassDeclareReservedUnused(IOUSBInterface,  8);
     OSMetaClassDeclareReservedUnused(IOUSBInterface,  9);
@@ -284,4 +337,4 @@ protected:
     
 };
 
-#endif /* _IOKIT_IOUSBINTERFACE_H */
+#endif

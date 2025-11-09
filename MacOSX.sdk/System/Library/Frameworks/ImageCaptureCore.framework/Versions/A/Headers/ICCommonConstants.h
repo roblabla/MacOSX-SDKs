@@ -11,6 +11,9 @@
 
 #pragma once
 
+#import <Foundation/Foundation.h>
+
+//------------------------------------------------------------------------------------------------------------------------------
 /*!
   @enum ICEXIFOrientationType
   @abstract Type representing EXIF Orientation tag value
@@ -97,6 +100,20 @@ typedef NSUInteger ICEXIFOrientationType;
         A request to delete files was canceled.
     @constant ICReturnDeviceIsPasscodeLocked
         The device is locked with a passcode. Its contents cannot be seen unless it is unlocked.
+    @constant ICReturnDeviceFailedToTakePicture
+        Failed to take a tethered-capture picture on a camera device.
+    @constant ICReturnDeviceSoftwareNotInstalled
+        Failed to open session because software to communicate with the device is not installed.
+    @constant ICReturnDeviceSoftwareIsBeingInstalled
+        Failed to open session because software to communicate with the device is being installed.
+    @constant ICReturnDeviceSoftwareInstallationCompleted
+        Software installation for the device has completed successfully.
+    @constant ICReturnDeviceSoftwareInstallationCanceled
+        Software installation for the device has been canceled.
+    @constant ICReturnDeviceSoftwareInstallationFailed
+        Software installation for the device failed.
+    @constant ICReturnDeviceSoftwareNotAvailable
+        Software for the device is not available from Apple.
 */
 typedef enum ICReturnCode
 {
@@ -122,7 +139,14 @@ typedef enum ICReturnCode
     ICReturnFailedToCompleteSendMessageRequest    = -9940,
     ICReturnDeleteFilesFailed                     = -9941,
     ICReturnDeleteFilesCanceled                   = -9942,
-    ICReturnDeviceIsPasscodeLocked                = -9943
+    ICReturnDeviceIsPasscodeLocked                = -9943,
+    ICReturnDeviceFailedToTakePicture             = -9944,
+    ICReturnDeviceSoftwareNotInstalled            = -9945,
+    ICReturnDeviceSoftwareIsBeingInstalled        = -9946,
+    ICReturnDeviceSoftwareInstallationCompleted   = -9947,
+    ICReturnDeviceSoftwareInstallationCanceled    = -9948,
+    ICReturnDeviceSoftwareInstallationFailed      = -9949,
+    ICReturnDeviceSoftwareNotAvailable            = -9950
 } ICReturnCode;
 
 ////------------------------------------------------------------------------------------------------------------------------------

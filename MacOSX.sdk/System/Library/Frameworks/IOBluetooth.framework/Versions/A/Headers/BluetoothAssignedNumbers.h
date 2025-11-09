@@ -340,16 +340,17 @@ enum
 
 enum
 {
-	kBluetoothL2CAPPSMSDP						= 0x0001, 
-	kBluetoothL2CAPPSMRFCOMM					= 0x0003, 
-	kBluetoothL2CAPPSMTCS_BIN					= 0x0005,	// Telephony Control Specifictation / TCS Binary
-    kBluetoothL2CAPPSMTCS_BIN_Cordless			= 0x0007,	// Telephony Control Specifictation / TCS Binary
+    kBluetoothL2CAPPSMSDP						= 0x0001, 
+    kBluetoothL2CAPPSMRFCOMM					= 0x0003, 
+    kBluetoothL2CAPPSMTCS_BIN					= 0x0005,	// Telephony Control Specifictation / TCS Binary
+    kBluetoothL2CAPPSMTCS_BIN_Cordless		= 0x0007,	// Telephony Control Specifictation / TCS Binary
     kBluetoothL2CAPPSMBNEP						= 0x000F,	// Bluetooth Network Encapsulation Protocol
     kBluetoothL2CAPPSMHIDControl				= 0x0011,	// HID profile - control interface
     kBluetoothL2CAPPSMHIDInterrupt				= 0x0013,	// HID profile - interrupt interface
-    kBluetoothL2CAPPSMAVCTP						= 0x0017,	// Audio/Video Control Transport Protocol
-    kBluetoothL2CAPPSMAVDTP						= 0x0019,	// Audio/Video Distribution Transport Protocol
+    kBluetoothL2CAPPSMAVCTP					= 0x0017,	// Audio/Video Control Transport Protocol
+    kBluetoothL2CAPPSMAVDTP					= 0x0019,	// Audio/Video Distribution Transport Protocol
     kBluetoothL2CAPPSMUID_C_Plane				= 0x001D,	// Unrestricted Digital Information Profile (UDI)
+    kBluetoothL2CAPPSMATT						= 0x001F,	// Attribute Protocol
 	
 	// Range < 0x1000 reserved.
     kBluetoothL2CAPPSMReservedStart				= 0x0001,
@@ -494,22 +495,24 @@ enum SDPAttributeIdentifierCodes
     // PAN
     kBluetoothSDPAttributeIdentifierIPSubnet							= 0x0200,
 
-    // HID																			Required		Type		Section		Notes
-    kBluetoothSDPAttributeIdentifierHIDReleaseNumber					= 0x0200,	// O			uint16		7.11.1
-    kBluetoothSDPAttributeIdentifierHIDParserVersion					= 0x0201,	// M			uint16		-
-    kBluetoothSDPAttributeIdentifierHIDDeviceSubclass					= 0x0202,	// M			uint8		7.11.2		Should match the low order 8 bits of CoD unless a combo device
-    kBluetoothSDPAttributeIdentifierHIDCountryCode						= 0x0203,	// M			uint8		7.11.3
-    kBluetoothSDPAttributeIdentifierHIDVirtualCable						= 0x0204,	// M			bool		7.11.4
-    kBluetoothSDPAttributeIdentifierHIDReconnectInitiate				= 0x0205,	// M			bool		7.11.5
-    kBluetoothSDPAttributeIdentifierHIDDescriptorList					= 0x0206,	// M			sequence	7.11.6		Layout is defined in Section 6.2 of the HID Specification
-    kBluetoothSDPAttributeIdentifierHIDLangIDBaseList					= 0x0207,	// M			sequence	7.11.7
-    kBluetoothSDPAttributeIdentifierHIDSDPDisable						= 0x0208,	// O			bool		7.11.8
-    kBluetoothSDPAttributeIdentifierHIDBatteryPower						= 0x0209,	// O			bool		7.11.9
-    kBluetoothSDPAttributeIdentifierHIDRemoteWake						= 0x020A,	// O			bool		7.11.10
-    kBluetoothSDPAttributeIdentifierHIDProfileVersion					= 0x020B,	// M			uint16		7.11.14
-    kBluetoothSDPAttributeIdentifierHIDSupervisionTimeout				= 0x020C,	// O			uint16		7.11.12		Default to 5 seconds or longer if not defined
-    kBluetoothSDPAttributeIdentifierHIDNormallyConnectable				= 0x020D,	// O			bool		7.11.13
-    kBluetoothSDPAttributeIdentifierHIDBootDevice						= 0x020E,	// M			bool		7.11.11		Only defined for mice and keyboards as of HID 1.0
+    // HID																			Required		Type		Notes
+    kBluetoothSDPAttributeIdentifierHIDReleaseNumber					= 0x0200,	// O			uint16
+    kBluetoothSDPAttributeIdentifierHIDParserVersion					= 0x0201,	// M			uint16
+    kBluetoothSDPAttributeIdentifierHIDDeviceSubclass					= 0x0202,	// M			uint8       Should match the low order 8 bits of CoD unless a combo device
+    kBluetoothSDPAttributeIdentifierHIDCountryCode						= 0x0203,	// M			uint8
+    kBluetoothSDPAttributeIdentifierHIDVirtualCable						= 0x0204,	// M			bool
+    kBluetoothSDPAttributeIdentifierHIDReconnectInitiate				= 0x0205,	// M			bool
+    kBluetoothSDPAttributeIdentifierHIDDescriptorList					= 0x0206,	// M			sequence    Layout is defined in Section 6.2 of the HID Specification
+    kBluetoothSDPAttributeIdentifierHIDLangIDBaseList					= 0x0207,	// M			sequence
+    kBluetoothSDPAttributeIdentifierHIDSDPDisable						= 0x0208,	// O			bool
+    kBluetoothSDPAttributeIdentifierHIDBatteryPower						= 0x0209,	// O			bool
+    kBluetoothSDPAttributeIdentifierHIDRemoteWake						= 0x020A,	// O			bool
+    kBluetoothSDPAttributeIdentifierHIDProfileVersion					= 0x020B,	// M			uint16
+    kBluetoothSDPAttributeIdentifierHIDSupervisionTimeout				= 0x020C,	// O			uint16		Default to 5 seconds or longer if not defined
+    kBluetoothSDPAttributeIdentifierHIDNormallyConnectable				= 0x020D,	// O			bool
+    kBluetoothSDPAttributeIdentifierHIDBootDevice						= 0x020E,	// M			bool		Only defined for mice and keyboards as of HID 1.0
+    kBluetoothSDPAttributeIdentifierHIDSSRHostMaxLatency				= 0x020F,	// O			uint16
+    kBluetoothSDPAttributeIdentifierHIDSSRHostMinTimeout				= 0x0210,	// O			uint16
     
 	kBluetoothSDPAttributeIdentifierServiceVersion						= 0x0300,
 	kBluetoothSDPAttributeIdentifierExternalNetwork						= 0x0301,	// Cordless telephony

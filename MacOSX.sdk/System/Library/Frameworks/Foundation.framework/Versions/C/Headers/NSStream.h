@@ -1,5 +1,5 @@
 /*	NSStream.h
-        Copyright (c) 2003-2011, Apple Inc. All rights reserved
+        Copyright (c) 2003-2012, Apple Inc. All rights reserved
 */
 
 #import <Foundation/NSObject.h>
@@ -7,7 +7,7 @@
 @class NSData, NSDictionary, NSError, NSHost, NSInputStream, NSOutputStream, NSRunLoop, NSString, NSURL;
 @protocol NSStreamDelegate;
 
-enum {
+typedef NS_ENUM(NSUInteger, NSStreamStatus) {
     NSStreamStatusNotOpen = 0,
     NSStreamStatusOpening = 1,
     NSStreamStatusOpen = 2,
@@ -17,9 +17,8 @@ enum {
     NSStreamStatusClosed = 6,
     NSStreamStatusError = 7
 };
-typedef NSUInteger NSStreamStatus;
 
-enum {
+typedef NS_OPTIONS(NSUInteger, NSStreamEvent) {
     NSStreamEventNone = 0,
     NSStreamEventOpenCompleted = 1UL << 0,
     NSStreamEventHasBytesAvailable = 1UL << 1,
@@ -27,7 +26,6 @@ enum {
     NSStreamEventErrorOccurred = 1UL << 3,
     NSStreamEventEndEncountered = 1UL << 4
 };
-typedef NSUInteger NSStreamEvent;
 
 // NSStream is an abstract class encapsulating the common API to NSInputStream and NSOutputStream.
 // Subclassers of NSInputStream and NSOutputStream must also implement these methods.

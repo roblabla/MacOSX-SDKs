@@ -1,5 +1,5 @@
 /*
-	Copyright:	(c) 1999-2008 Apple Inc. All rights reserved.
+	Copyright:	(c) 1999-2012 Apple Inc. All rights reserved.
 */
 
 #ifndef _CGLCURRENT_H

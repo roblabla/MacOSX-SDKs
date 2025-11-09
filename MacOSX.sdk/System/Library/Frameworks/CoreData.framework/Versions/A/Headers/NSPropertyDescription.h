@@ -1,18 +1,15 @@
 /*
     NSPropertyDescription.h
     Core Data
-    Copyright (c) 2004-2010 Apple Inc.
+    Copyright (c) 2004-2012 Apple Inc.
     All rights reserved.
 */
 
-#import <Foundation/NSObject.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
-@class NSArray;
-@class NSDictionary;
 @class NSEntityDescription;
-@class NSMutableArray;
-@class NSMutableDictionary;
-@class NSString;
+@class NSData;
 
 // Properties describe values within a managed object. There are different types of properties, each of them represented by a subclass which encapsulates the specific property behavior.
 NS_CLASS_AVAILABLE(10_4,3_0)

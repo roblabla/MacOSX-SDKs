@@ -28,7 +28,8 @@ __BEGIN_DECLS
  * Messages that do not have reply handlers associated with them will be
  * silently disposed of. This error will only be given to peer connections.
  */
-#define XPC_ERROR_CONNECTION_INTERRUPTED (&_xpc_error_connection_interrupted)
+#define XPC_ERROR_CONNECTION_INTERRUPTED \
+		XPC_GLOBAL_OBJECT(_xpc_error_connection_interrupted)
 __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0)
 XPC_EXPORT
 struct _xpc_dictionary_s _xpc_error_connection_interrupted;
@@ -46,15 +47,16 @@ struct _xpc_dictionary_s _xpc_error_connection_interrupted;
  *
  * This error may be given to any type of connection.
  */
-#define XPC_ERROR_CONNECTION_INVALID (&_xpc_error_connection_invalid)
+#define XPC_ERROR_CONNECTION_INVALID \
+		XPC_GLOBAL_OBJECT(_xpc_error_connection_invalid)
 __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0)
 XPC_EXPORT
 struct _xpc_dictionary_s _xpc_error_connection_invalid;
 
 /*!
  * @constant XPC_ERROR_TERMINATION_IMMINENT
- * This error will be delivered to a peer or listener connection's event handler
- * when the XPC runtime has determined that the program should exit and that all
+ * This error will be delivered to a peer connection's event handler when the
+ * XPC runtime has determined that the program should exit and that all
  * outstanding transactions must be wound down, and no new transactions can be
  * opened.
  *
@@ -66,9 +68,10 @@ struct _xpc_dictionary_s _xpc_error_connection_invalid;
  * canceled shortly thereafter.
  *
  * This error will only be delivered to peer connections received through a
- * listener.
+ * listener or the xpc_main() event handler.
  */
-#define XPC_ERROR_TERMINATION_IMMINENT (&_xpc_error_termination_imminent)
+#define XPC_ERROR_TERMINATION_IMMINENT \
+		XPC_GLOBAL_OBJECT(_xpc_error_termination_imminent)
 __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0)
 XPC_EXPORT
 struct _xpc_dictionary_s _xpc_error_termination_imminent;
@@ -124,7 +127,8 @@ typedef void (*xpc_finalizer_t)(void *value);
  * xpc_connection_set_target_queue().
  *
  * @result
- * A new connection object. 
+ * A new connection object. The caller is responsible for disposing of the
+ * returned object with {@link xpc_release} when it is no longer needed.
  *
  * @discussion
  * This method will succeed even if the named service does not exist. This is
@@ -133,10 +137,12 @@ typedef void (*xpc_finalizer_t)(void *value);
  *
  * XPC connections, like dispatch sources, are returned in a suspended state, so 
  * you must call {@link xpc_connection_resume()} in order to begin receiving
- * events from the connection.
+ * events from the connection. Also like dispatch sources, connections must be
+ * resumed in order to be safely released. It is a programming error to release
+ * a suspended connection.
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0)
-XPC_EXPORT XPC_WARN_RESULT
+XPC_EXPORT XPC_WARN_RESULT XPC_MALLOC XPC_RETURNS_RETAINED
 xpc_connection_t
 xpc_connection_create(const char *name, dispatch_queue_t targetq);
 
@@ -174,7 +180,7 @@ xpc_connection_create(const char *name, dispatch_queue_t targetq);
  * first call to {@link xpc_connection_resume()}.
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0)
-XPC_EXPORT XPC_NONNULL1 XPC_WARN_RESULT
+XPC_EXPORT XPC_NONNULL1 XPC_WARN_RESULT XPC_MALLOC XPC_RETURNS_RETAINED
 xpc_connection_t
 xpc_connection_create_mach_service(const char *name, dispatch_queue_t targetq,
 	uint64_t flags);
@@ -197,7 +203,7 @@ xpc_connection_create_mach_service(const char *name, dispatch_queue_t targetq,
  * exits or cancels the listener connection.
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0)
-XPC_EXPORT XPC_NONNULL1 XPC_WARN_RESULT XPC_MALLOC
+XPC_EXPORT XPC_NONNULL_ALL XPC_WARN_RESULT XPC_MALLOC XPC_RETURNS_RETAINED
 xpc_connection_t
 xpc_connection_create_from_endpoint(xpc_endpoint_t endpoint);
 
@@ -471,7 +477,7 @@ xpc_connection_send_barrier(xpc_connection_t connection,
  * connection's target queue are the same concurrent queue.
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0)
-XPC_EXPORT XPC_NONNULL_ALL
+XPC_EXPORT XPC_NONNULL1 XPC_NONNULL2 XPC_NONNULL4
 void
 xpc_connection_send_message_with_reply(xpc_connection_t connection,
 	xpc_object_t message, dispatch_queue_t replyq, xpc_handler_t handler);
@@ -497,21 +503,21 @@ xpc_connection_send_message_with_reply(xpc_connection_t connection,
  * You are responsible for releasing the returned object.
  *
  * @discussion
- * This API can block the calling thread for an unbounded time depending on the
- * state of the remote connection. It is HIGHLY recommended that you ONLY use it
- * for transitioning existing IPC API away from older, synchronous API models.
+ * This API is primarily for transitional purposes. Its implementation is
+ * conceptually equivalent to calling xpc_connection_send_message_with_reply()
+ * and then immediately blocking the calling thread on a semaphore and
+ * signaling the semaphore from the reply block. 
  *
- * This API has a limited shelf life. It WILL be deprecated as soon as possible.
- *
- * Do NOT call this API from the main queue/main thread.
+ * Be judicious about your use of this API. It can block indefinitely, so if you
+ * are using it to implement an API that can be called from the main thread, you
+ * may wish to consider allowing the API to take a queue and callback block so
+ * that results may be delivered asynchrously if possible.
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0)
-XPC_EXPORT XPC_NONNULL_ALL XPC_WARN_RESULT
+XPC_EXPORT XPC_NONNULL_ALL XPC_WARN_RESULT XPC_RETURNS_RETAINED
 xpc_object_t
 xpc_connection_send_message_with_reply_sync(xpc_connection_t connection,
 	xpc_object_t message);
-
-
 
 /*!
  * @function xpc_connection_cancel
@@ -665,7 +671,7 @@ xpc_connection_set_context(xpc_connection_t connection, void *context);
  * associated with the object.
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0)
-XPC_EXPORT XPC_NONNULL1 XPC_WARN_RESULT
+XPC_EXPORT XPC_NONNULL_ALL XPC_WARN_RESULT
 void *
 xpc_connection_get_context(xpc_connection_t connection);
 

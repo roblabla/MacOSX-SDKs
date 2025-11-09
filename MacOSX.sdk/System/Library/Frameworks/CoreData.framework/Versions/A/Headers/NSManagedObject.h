@@ -1,11 +1,11 @@
 /*
     NSManagedObject.h
     Core Data
-    Copyright (c) 2004-2010 Apple Inc.
+    Copyright (c) 2004-2012 Apple Inc.
     All rights reserved.
 */
 
-#import <Foundation/NSObject.h>
+#import <Foundation/NSArray.h>
 #import <Foundation/NSKeyValueObserving.h>
 
 @class NSDictionary;
@@ -13,7 +13,6 @@
 @class NSError;
 @class NSManagedObjectContext;
 @class NSManagedObjectID;
-@class NSString;
 
 enum {
 	NSSnapshotEventUndoInsertion = 1 << 1,
@@ -26,7 +25,7 @@ enum {
 
 typedef NSUInteger NSSnapshotEventType;
 
-NS_CLASS_AVAILABLE(10_4,3_0)
+NS_CLASS_AVAILABLE(10_4,3_0) NS_REQUIRES_PROPERTY_DEFINITIONS
 @interface NSManagedObject : NSObject {
 @private
     int32_t             _cd_rc;
@@ -59,7 +58,7 @@ NS_CLASS_AVAILABLE(10_4,3_0)
 - (BOOL)isUpdated;
 - (BOOL)isDeleted;
 
-- (BOOL)hasChanges NS_AVAILABLE(10_7,NA);
+- (BOOL)hasChanges NS_AVAILABLE(10_7, 5_0);
 
 // this information is useful in many situations when computations are optional - this can be used to avoid growing the object graph unnecessarily (which allows to control performance as it can avoid time consuming fetches from databases)
 - (BOOL)isFault;    
@@ -126,7 +125,7 @@ NS_CLASS_AVAILABLE(10_4,3_0)
 // returns a dictionary with the keys and (new) values that have been changed since last fetching or saving the object (this is implemented efficiently without firing relationship faults)
 - (NSDictionary *)changedValues;    
 
-- (NSDictionary *)changedValuesForCurrentEvent NS_AVAILABLE(10_7,NA);
+- (NSDictionary *)changedValuesForCurrentEvent NS_AVAILABLE(10_7, 5_0);
 
 // validation - in addition to KVC validation managed objects have hooks to validate their lifecycle state; validation is a critical piece of functionality and the following methods are likely the most commonly overridden methods in custom subclasses
 - (BOOL)validateValue:(id *)value forKey:(NSString *)key error:(NSError **)error;    // KVC

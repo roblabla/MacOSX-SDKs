@@ -1,7 +1,7 @@
 /*
 	NSSearchFieldCell.h
 	Application Kit
-	Copyright (c) 2003-2011, Apple Inc.
+	Copyright (c) 2003-2012, Apple Inc.
 	All rights reserved.
  */
 

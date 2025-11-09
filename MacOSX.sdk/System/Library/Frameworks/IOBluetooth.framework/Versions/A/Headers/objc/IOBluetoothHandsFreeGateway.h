@@ -11,8 +11,6 @@
  */
 
 
-#if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_0
-
 #import <Foundation/Foundation.h>
 #import <IOBluetooth/Bluetooth.h>
 #import <IOBluetooth/objc/IOBluetoothRFCOMMAudioController.h>
@@ -174,12 +172,3 @@ typedef enum IOBluetoothHandsFreeFeatures
 
 
 @end
-
-#endif /* BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_0 */
-
-
-
-
-
-
-

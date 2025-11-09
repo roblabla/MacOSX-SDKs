@@ -56,7 +56,7 @@
 	@discussion	This method allocates and runs the browser window as a modal window waiting for the user to either select a
                         service, or cancel the browser window.  
 */
-+(IOReturn)browseDevices:(IOBluetoothSDPServiceRecord**)outRecord options:(IOBluetoothServiceBrowserControllerOptions)inOptions	DEPRECATED_IN_BLUETOOTH_VERSION_2_0_AND_LATER;
++(IOReturn)browseDevices:(IOBluetoothSDPServiceRecord**)outRecord options:(IOBluetoothServiceBrowserControllerOptions)inOptions	DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -73,7 +73,7 @@
 */
 +(IOReturn)browseDevicesAsSheetForWindow:(IOBluetoothSDPServiceRecord**)outRecord
 								 options:(IOBluetoothServiceBrowserControllerOptions)inOptions
-								  window:(NSWindow*)inWindow	DEPRECATED_IN_BLUETOOTH_VERSION_2_0_AND_LATER;
+								  window:(NSWindow*)inWindow	DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 
 /*!	@method	withServiceBrowserControllerRef:
@@ -100,7 +100,7 @@
                             * kCanceledErr - User canceled.
 	@discussion	This method will run the IOBluetoothServiceBrowserController browser window modally.
 */
--(IOReturn)discover:(IOBluetoothSDPServiceRecord **)outRecord	DEPRECATED_IN_BLUETOOTH_VERSION_2_0_AND_LATER;
+-(IOReturn)discover:(IOBluetoothSDPServiceRecord **)outRecord	DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -114,7 +114,7 @@
                             * kCanceledErr - User canceled.
 	@discussion	This method will run the IOBluetoothServiceBrowserController browser window as a sheet for the window passed to it in sheetWindow.
 */
--(IOReturn)discoverAsSheetForWindow:(NSWindow *)sheetWindow withRecord:(IOBluetoothSDPServiceRecord **)outRecord	DEPRECATED_IN_BLUETOOTH_VERSION_2_0_AND_LATER;
+-(IOReturn)discoverAsSheetForWindow:(NSWindow *)sheetWindow withRecord:(IOBluetoothSDPServiceRecord **)outRecord	DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -132,7 +132,7 @@
                             * kCanceledErr - User canceled.
 	@discussion	This method will run the IOBluetoothServiceBrowserController browser window as a sheet for the window passed to it in sheetWindow.
 */
--(IOReturn)discoverWithDeviceAttributes:(IOBluetoothDeviceSearchAttributes *)deviceAttributes serviceList:(NSArray *)serviceArray serviceRecord:(IOBluetoothSDPServiceRecord**)outRecord	DEPRECATED_IN_BLUETOOTH_VERSION_2_0_AND_LATER;
+-(IOReturn)discoverWithDeviceAttributes:(IOBluetoothDeviceSearchAttributes *)deviceAttributes serviceList:(NSArray *)serviceArray serviceRecord:(IOBluetoothSDPServiceRecord**)outRecord	DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -143,8 +143,6 @@
 	@discussion	This method will set the options for the browser to new values.
 */
 -(void)setOptions:(IOBluetoothServiceBrowserControllerOptions)inOptions;
-
-#if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_1
 
 /*!
     @method		runModal
@@ -331,8 +329,6 @@
 */
 
 - (NSString *)getPrompt;
-
-#endif /* BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_1 */
 
 @end
 

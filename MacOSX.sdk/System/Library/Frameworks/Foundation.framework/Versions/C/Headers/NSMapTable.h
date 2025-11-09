@@ -1,30 +1,36 @@
 /*	NSMapTable.h
-	Copyright (c) 1994-2011, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2012, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSPointerFunctions.h>
 #import <Foundation/NSString.h>
 #import <Foundation/NSEnumerator.h>
 
+#if !defined(__FOUNDATION_NSMAPTABLE__)
+#define __FOUNDATION_NSMAPTABLE__ 1
+
 @class NSArray, NSDictionary, NSMapTable;
 
 
 /****************	Class	****************/
 
-/* An NSMapTable is modeled after a dictionary, although, because of its options, is not a dictionary because it will behave differently.  The major option is to have keys and/or values held "weakly" in a manner that entries are removed when one of the objects is collected under garbage collection.  Under non-GC conditions, the entries must be removed by the programmer explicitly.  In addition to being held weakly, keys or values may be copied on input or may use pointer identity for equality and hashing.
-   An NSMapTable can also be configured to operate on arbitrary pointers and not just objects.  We recommend the C function API for "void *" access.  To configure for pointer use, consult and choose the appropriate NSPointerFunctionsOptions or configure or use  NSPointerFunctions objects directly for initialization.
+/* An NSMapTable is modeled after a dictionary, although, because of its options, is not a dictionary because it will behave differently.  The major option is to have keys and/or values held "weakly" in a manner that entries are removed when one of the objects is reclaimed.  In addition to being held weakly, keys or values may be copied on input or may use pointer identity for equality and hashing.
+   An NSMapTable can also be configured to operate on arbitrary pointers and not just objects.  We recommend the C function API for "void *" access.  To configure for pointer use, consult and choose the appropriate NSPointerFunction options or configure and use  NSPointerFunctions objects directly for initialization.
 */
 
 enum {
-    NSMapTableStrongMemory             = 0, // NSPointerFunctionsStrongMemory
-    NSMapTableZeroingWeakMemory        = NSPointerFunctionsZeroingWeakMemory,
-    NSMapTableCopyIn                   = NSPointerFunctionsCopyIn,
-    NSMapTableObjectPointerPersonality = NSPointerFunctionsObjectPointerPersonality
+    NSMapTableStrongMemory NS_ENUM_AVAILABLE(10_5, 6_0) = 0, // NSPointerFunctionsStrongMemory
+#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || TARGET_OS_WIN32
+    NSMapTableZeroingWeakMemory NS_ENUM_DEPRECATED_MAC(10_5, 10_8) = NSPointerFunctionsZeroingWeakMemory,
+#endif
+    NSMapTableCopyIn NS_ENUM_AVAILABLE(10_5, 6_0) = NSPointerFunctionsCopyIn,
+    NSMapTableObjectPointerPersonality NS_ENUM_AVAILABLE(10_5, 6_0) = NSPointerFunctionsObjectPointerPersonality,
+    NSMapTableWeakMemory NS_ENUM_AVAILABLE(10_8, 6_0) = NSPointerFunctionsWeakMemory
 };
 
 typedef NSUInteger NSMapTableOptions;
 
-NS_CLASS_AVAILABLE(10_5, 2_0)
+NS_CLASS_AVAILABLE(10_5, 6_0)
 @interface NSMapTable : NSObject <NSCopying, NSCoding, NSFastEnumeration>
 
 - (id)initWithKeyOptions:(NSPointerFunctionsOptions)keyOptions valueOptions:(NSPointerFunctionsOptions)valueOptions capacity:(NSUInteger)initialCapacity;
@@ -32,10 +38,17 @@ NS_CLASS_AVAILABLE(10_5, 2_0)
 
 + (id)mapTableWithKeyOptions:(NSPointerFunctionsOptions)keyOptions valueOptions:(NSPointerFunctionsOptions)valueOptions;
 
-+ (id)mapTableWithStrongToStrongObjects;
-+ (id)mapTableWithWeakToStrongObjects;
-+ (id)mapTableWithStrongToWeakObjects;
-+ (id)mapTableWithWeakToWeakObjects;
+#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || TARGET_OS_WIN32
++ (id)mapTableWithStrongToStrongObjects NS_DEPRECATED_MAC(10_5, 10_8);
++ (id)mapTableWithWeakToStrongObjects NS_DEPRECATED_MAC(10_5, 10_8);
++ (id)mapTableWithStrongToWeakObjects NS_DEPRECATED_MAC(10_5, 10_8);
++ (id)mapTableWithWeakToWeakObjects NS_DEPRECATED_MAC(10_5, 10_8);
+#endif
+
++ (id)strongToStrongObjectsMapTable NS_AVAILABLE(10_8, 6_0);
++ (id)weakToStrongObjectsMapTable NS_AVAILABLE(10_8, 6_0);
++ (id)strongToWeakObjectsMapTable NS_AVAILABLE(10_8, 6_0);
++ (id)weakToWeakObjectsMapTable NS_AVAILABLE(10_8, 6_0);
 
 /* return an NSPointerFunctions object reflecting the functions in use.  This is a new autoreleased object that can be subsequently modified and/or used directly in the creation of other pointer "collections". */
 - (NSPointerFunctions *)keyPointerFunctions;
@@ -57,7 +70,7 @@ NS_CLASS_AVAILABLE(10_5, 2_0)
 @end
 
 
-
+#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || TARGET_OS_WIN32
 
 /****************	void * Map table operations	****************/
 
@@ -111,20 +124,32 @@ FOUNDATION_EXPORT NSMapTable *NSCreateMapTable(NSMapTableKeyCallBacks keyCallBac
 
 /****************	Common map table key callbacks	****************/
 
-FOUNDATION_EXPORT const NSMapTableKeyCallBacks NSIntegerMapKeyCallBacks NS_AVAILABLE(10_5, 2_0);
+FOUNDATION_EXPORT const NSMapTableKeyCallBacks NSIntegerMapKeyCallBacks NS_AVAILABLE_MAC(10_5);
 FOUNDATION_EXPORT const NSMapTableKeyCallBacks NSNonOwnedPointerMapKeyCallBacks;
 FOUNDATION_EXPORT const NSMapTableKeyCallBacks NSNonOwnedPointerOrNullMapKeyCallBacks;
 FOUNDATION_EXPORT const NSMapTableKeyCallBacks NSNonRetainedObjectMapKeyCallBacks;
 FOUNDATION_EXPORT const NSMapTableKeyCallBacks NSObjectMapKeyCallBacks;
 FOUNDATION_EXPORT const NSMapTableKeyCallBacks NSOwnedPointerMapKeyCallBacks;
-FOUNDATION_EXPORT const NSMapTableKeyCallBacks NSIntMapKeyCallBacks NS_DEPRECATED(10_0, 10_5, 2_0, 2_0);
+FOUNDATION_EXPORT const NSMapTableKeyCallBacks NSIntMapKeyCallBacks NS_DEPRECATED_MAC(10_0, 10_5);
 
 /****************	Common map table value callbacks	****************/
 
-FOUNDATION_EXPORT const NSMapTableValueCallBacks NSIntegerMapValueCallBacks NS_AVAILABLE(10_5, 2_0);
+FOUNDATION_EXPORT const NSMapTableValueCallBacks NSIntegerMapValueCallBacks NS_AVAILABLE_MAC(10_5);
 FOUNDATION_EXPORT const NSMapTableValueCallBacks NSNonOwnedPointerMapValueCallBacks;
 FOUNDATION_EXPORT const NSMapTableValueCallBacks NSObjectMapValueCallBacks;
 FOUNDATION_EXPORT const NSMapTableValueCallBacks NSNonRetainedObjectMapValueCallBacks;
 FOUNDATION_EXPORT const NSMapTableValueCallBacks NSOwnedPointerMapValueCallBacks;
-FOUNDATION_EXPORT const NSMapTableValueCallBacks NSIntMapValueCallBacks NS_DEPRECATED(10_0, 10_5, 2_0, 2_0);
+FOUNDATION_EXPORT const NSMapTableValueCallBacks NSIntMapValueCallBacks NS_DEPRECATED_MAC(10_0, 10_5);
+
+#else
+
+#if defined(__has_include)
+#if __has_include(<Foundation/NSMapTablePriv.h>)
+#include <Foundation/NSMapTablePriv.h>
+#endif
+#endif
+
+#endif
+
+#endif
 

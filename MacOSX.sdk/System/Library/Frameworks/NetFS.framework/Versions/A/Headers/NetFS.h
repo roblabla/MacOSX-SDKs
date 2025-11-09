@@ -55,6 +55,15 @@ typedef SInt32 netfsError;
 
 #define kNetFSMechTypesSupportedKey	CFSTR("MechTypesSupported")
 
+#ifndef kNAUIOptionKey
+#define kNAUIOptionKey				CFSTR("UIOption")
+
+// UIOption values				CFStringRef
+#define kNAUIOptionNoUI				CFSTR("NoUI")
+#define kNAUIOptionAllowUI			CFSTR("AllowUI")
+#define kNAUIOptionForceUI			CFSTR("ForceUI")
+#endif
+
 /*
  * Dictionary keys for the URL parameters dictionary returned by ParseURL
  * methods and passed as an argument to CreateURL methods.
@@ -221,6 +230,7 @@ typedef SInt32 netfsError;
 //#define kNetFSForceNewSessionKey	CFSTR("ForceNewSession")	/* defined for OpenSession above */
 #define kNetFSMountFlagsKey		CFSTR("MountFlags")
 #define kNetFSAllowSubMountsKey		CFSTR("AllowSubMounts")
+#define kNetFSMountAtMountDirKey	CFSTR("MountAtMountDir")
 
 /*
  * Dictionary keys for the mount information dictionary returned by
@@ -231,6 +241,114 @@ typedef SInt32 netfsError;
 //#define kNetFSMountedByGuestKey	CFSTR("MountedByGuest")		/* defined for OpenSession above */
 //#define kNetFSMountedByKerberosKey	CFSTR("MountedByKerberos")	/* defined for OpenSession above */
 //#define kNetFSMountedMultiUserKey	CFSTR("MountedMultiUser")	/* defined for OpenSession above */
+
+
+/*
+ ********************************
+ *
+ * Public API for NetFS.framework
+ *
+ ********************************
+ */
+typedef void * AsyncRequestID;
+
+/*
+ * Given a URL that refers to a file server, connect to that server
+ * and mount stuff.
+ *
+ * If the URL just specifies a server and you can't just mount the
+ * "root directory" of the server, the user will be prompted with
+ * a window to let them select one or more items to mount from that
+ * server, otherwise whatever item the URL specifies to mount will
+ * be mounted.
+ *
+ * If the mountpath is provided it will be used as the mount point.
+ * If the mountpath is set to NULL, a default mount point will be used.
+ *
+ * If the user and passwd are set, they will override any user name
+ * or password that may be set in the URL. These calls go through the NetAuth agent.
+ * If the URL doesn't specify a password, and one is needed, the
+ * user will be prompted with a window requesting password.
+ *
+ * Options can be provided for the session open and the mount itself.
+ * If the mount is successful, the path to the mountpoint(s) is
+ * returned in mountpoints.
+ *
+ * If the mount succeeds, NetFSMountURLSync returns zero, otherwise non-zero.
+ */
+int
+NetFSMountURLSync(
+	CFURLRef url,				// URL to mount, e.g. nfs://server/path
+	CFURLRef mountpath,			// Path for the mountpoint
+	CFStringRef user,			// Auth user name (overrides URL)
+	CFStringRef passwd, 			// Auth password (overrides URL)
+	CFMutableDictionaryRef open_options,	// Options for session open (see below)
+	CFMutableDictionaryRef mount_options,	// Options for mounting (see below)
+	CFArrayRef *mountpoints);		// Array of mountpoints
+
+/*
+ * This is the block called at completion of NetFSMountURLAsync
+ * The block receives the mount status, the request ID that was
+ * used for the mount, and an array of mountpoint paths.
+ */
+typedef	void (^NetFSMountURLBlock)(int status, AsyncRequestID requestID, CFArrayRef mountpoints);
+
+/*
+ * NetFSMountURLAsync is the same as NetFSMountURLSync except it does the
+ * mount asynchronously.  If the mount_report block is non-NULL, at
+ * the completion of the mount it is submitted to the dispatch queue
+ * with the result of the mount, the request ID and an array of mountpoint paths.
+ * The request ID can be used by NetFSMountURLCancel() to cancel
+ * a pending mount request. The NetFSMountURLBlock is not submitted if
+ * the request is cancelled. If the mount succeeds the result value
+ * is zero - otherwise non-zero.
+ */
+int
+NetFSMountURLAsync(
+	CFURLRef url,				// URL to mount, e.g. nfs://server/path
+	CFURLRef mountpath,			// Path for the mountpoint
+	CFStringRef user,			// Auth user name (overrides URL)
+	CFStringRef passwd, 			// Auth password (overrides URL)
+	CFMutableDictionaryRef open_options,	// Options for session open (see below)
+	CFMutableDictionaryRef mount_options,	// Options for mounting (see below)
+	AsyncRequestID *requestID,		// ID of this pending request (see cancel)
+	dispatch_queue_t dispatchq,		// Dispatch queue for the block
+	NetFSMountURLBlock mount_report);	// Called at mount completion
+
+/*
+ * Cancel a pending async mount request.
+ * The AsyncRequestID is that returned by NetFSMountURLAsync().
+ * The NetFSMountURLBlock is not called.
+ */
+int
+NetFSMountURLCancel(AsyncRequestID requestID);
+
+/*
+ * The following dictionary keys for open_options are supported:
+ *
+ *	kNetFSUseGuestKey:			Login as a guest user.
+ *
+ *	kNetFSAllowLoopbackKey			Allow a loopback mount.
+ *
+ *
+ * The following dictionary keys for mount_options are supported:
+ *
+ *	kNetFSMountFlagsKey = MNT_DONTBROWSE 	No browsable data here (see <sys/mount.h>).
+ *
+ *	kNetFSMountFlagsKey = MNT_RDONLY	A read-only mount (see <sys/mount.h>).
+ *
+ *	kNetFSAllowSubMountsKey = true		Allow a mount from a dir beneath the share point.
+ *
+ *	kNetFSSoftMountKey = true		Mount with "soft" failure semantics.
+ *
+ *	kNetFSMountAtMountDirKey = true		Mount on the specified mountpath instead of below it.
+ *
+ *	kNAUIOptionKey = NoUI			Suppress authentication dialog UI.
+ *
+ * Note that if kNetFSSoftMountKey isn't set, then it's set to TRUE.
+ *
+ ********************************
+ */
 
 #ifdef __cplusplus
 }

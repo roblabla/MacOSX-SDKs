@@ -4,17 +4,19 @@
  *	  prototypes for tablecmds.c.
  *
  *
- * Portions Copyright (c) 1996-2010, PostgreSQL Global Development Group
+ * Portions Copyright (c) 1996-2011, PostgreSQL Global Development Group
  * Portions Copyright (c) 1994, Regents of the University of California
  *
- * $PostgreSQL: pgsql/src/include/commands/tablecmds.h,v 1.46.6.1 2010/08/18 18:35:30 tgl Exp $
+ * src/include/commands/tablecmds.h
  *
  *-------------------------------------------------------------------------
  */
 #ifndef TABLECMDS_H
 #define TABLECMDS_H
 
+#include "access/htup.h"
 #include "nodes/parsenodes.h"
+#include "storage/lock.h"
 #include "utils/relcache.h"
 
 
@@ -24,12 +26,14 @@ extern void RemoveRelations(DropStmt *drop);
 
 extern void AlterTable(AlterTableStmt *stmt);
 
-extern void ATExecChangeOwner(Oid relationOid, Oid newOwnerId, bool recursing);
+extern LOCKMODE AlterTableGetLockLevel(List *cmds);
+
+extern void ATExecChangeOwner(Oid relationOid, Oid newOwnerId, bool recursing, LOCKMODE lockmode);
 
 extern void AlterTableInternal(Oid relid, List *cmds, bool recurse);
 
 extern void AlterTableNamespace(RangeVar *relation, const char *newschema,
-					ObjectType stmttype);
+					ObjectType stmttype, LOCKMODE lockmode);
 
 extern void AlterRelationNamespaceInternal(Relation classRel, Oid relOid,
 							   Oid oldNspOid, Oid newNspOid,
@@ -39,11 +43,7 @@ extern void CheckTableNotInUse(Relation rel, const char *stmt);
 
 extern void ExecuteTruncate(TruncateStmt *stmt);
 
-extern void renameatt(Oid myrelid,
-		  const char *oldattname,
-		  const char *newattname,
-		  bool recurse,
-		  int expected_parents);
+extern void renameatt(Oid myrelid, RenameStmt *stmt);
 
 extern void RenameRelation(Oid myrelid,
 			   const char *newrelname,
@@ -54,12 +54,10 @@ extern void RenameRelationInternal(Oid myrelid,
 					   Oid namespaceId);
 
 extern void find_composite_type_dependencies(Oid typeOid,
-								 const char *origTblName,
+								 Relation origRelation,
 								 const char *origTypeName);
 
-extern AttrNumber *varattnos_map(TupleDesc olddesc, TupleDesc newdesc);
-extern AttrNumber *varattnos_map_schema(TupleDesc old, List *schema);
-extern void change_varattnos_of_a_node(Node *node, const AttrNumber *newattno);
+extern void check_of_type(HeapTuple typetuple);
 
 extern void register_on_commit_action(Oid relid, OnCommitAction action);
 extern void remove_on_commit_action(Oid relid);

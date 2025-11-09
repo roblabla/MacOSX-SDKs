@@ -1,27 +1,3 @@
-/*
- * Copyright (c) 2000 Apple Computer, Inc. All rights reserved.
- *
- * @APPLE_LICENSE_HEADER_START@
- * 
- * This file contains Original Code and/or Modifications of Original Code
- * as defined in and that are subject to the Apple Public Source License
- * Version 2.0 (the 'License'). You may not use this file except in
- * compliance with the License. Please obtain a copy of the License at
- * http://www.opensource.apple.com/apsl/ and read it before using this
- * file.
- * 
- * The Original Code and all software distributed under the License are
- * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
- * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
- * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
- * Please see the License for the specific language governing rights and
- * limitations under the License.
- * 
- * @APPLE_LICENSE_HEADER_END@
- */
-/*	$NetBSD: pwd.h,v 1.11 1997/08/16 13:47:21 lukem Exp $	*/
-
 /*-
  * Copyright (c) 1989, 1993
  *	The Regents of the University of California.  All rights reserved.
@@ -62,6 +38,7 @@
  *
  *	@(#)pwd.h	8.2 (Berkeley) 1/21/94
  */
+/* Portions copyright (c) 2000-2011 Apple Inc. All rights reserved. */
 
 #ifndef _PWD_H_
 #define	_PWD_H_
@@ -137,12 +114,18 @@ struct passwd	*getpwnam(const char *);
 int		 getpwuid_r(uid_t, struct passwd *, char *, size_t, struct passwd **);
 int		 getpwnam_r(const char *, struct passwd *, char *, size_t, struct passwd **);
 struct passwd	*getpwent(void);
-#if (!defined(_POSIX_C_SOURCE) && !defined(_XOPEN_SOURCE)) || defined(_DARWIN_C_SOURCE)
-int		 setpassent(int);
-char 		*user_from_uid(uid_t, int);
-#endif
 void		 setpwent(void);
 void		 endpwent(void);
 __END_DECLS
+
+#if (!defined(_POSIX_C_SOURCE) && !defined(_XOPEN_SOURCE)) || defined(_DARWIN_C_SOURCE)
+#include <uuid/uuid.h>
+__BEGIN_DECLS
+int		 setpassent(int);
+char 		*user_from_uid(uid_t, int);
+struct passwd	*getpwuuid(uuid_t);
+int		 getpwuuid_r(uuid_t, struct passwd *, char *, size_t, struct passwd **);
+__END_DECLS
+#endif
 
 #endif /* !_PWD_H_ */

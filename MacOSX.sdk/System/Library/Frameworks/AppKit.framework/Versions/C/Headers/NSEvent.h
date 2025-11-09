@@ -1,7 +1,7 @@
 /*
     NSEvent.h
     Application Kit
-    Copyright (c) 1994-2011, Apple Inc.
+    Copyright (c) 1994-2012, Apple Inc.
     All rights reserved.
 */
 
@@ -40,15 +40,18 @@ enum {        /* various types of events */
     NSOtherMouseDown            = 25,
     NSOtherMouseUp              = 26,
     NSOtherMouseDragged         = 27,
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
     /* The following event types are available on some hardware on 10.5.2 and later */
-    NSEventTypeGesture          = 29,
-    NSEventTypeMagnify          = 30,
-    NSEventTypeSwipe            = 31,
-    NSEventTypeRotate           = 18,
-    NSEventTypeBeginGesture     = 19,
-    NSEventTypeEndGesture       = 20
+    NSEventTypeGesture NS_ENUM_AVAILABLE_MAC(10_5)       = 29,
+    NSEventTypeMagnify NS_ENUM_AVAILABLE_MAC(10_5)       = 30,
+    NSEventTypeSwipe   NS_ENUM_AVAILABLE_MAC(10_5)       = 31,
+    NSEventTypeRotate  NS_ENUM_AVAILABLE_MAC(10_5)       = 18,
+    NSEventTypeBeginGesture NS_ENUM_AVAILABLE_MAC(10_5)  = 19,
+    NSEventTypeEndGesture NS_ENUM_AVAILABLE_MAC(10_5)    = 20,
+
+#if __LP64__
+    NSEventTypeSmartMagnify NS_ENUM_AVAILABLE_MAC(10_8) = 32,
 #endif
+    NSEventTypeQuickLook NS_ENUM_AVAILABLE_MAC(10_8) = 33
 };
 typedef NSUInteger NSEventType;
 
@@ -88,10 +91,24 @@ enum {                    /* masks for the types of events */
     NSEventMaskBeginGesture     = 1 << NSEventTypeBeginGesture,
     NSEventMaskEndGesture       = 1 << NSEventTypeEndGesture,
 #endif
+    
+#if __LP64__
+    /* Note: You can only use these event masks on 64 bit. In other words, you cannot setup a local, nor global, event monitor for these event types on 32 bit. Also, you cannot search the event que for them (nextEventMatchingMask:...) on 32 bit.
+     */
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_8
+    NSEventMaskSmartMagnify = 1ULL << NSEventTypeSmartMagnify,
+#endif
+#endif
+    
     NSAnyEventMask              = NSUIntegerMax
 };
 
+
+#if __LP64__
+NS_INLINE NSUInteger NSEventMaskFromType(NSEventType type) { return (1UL << type); }
+#else
 NS_INLINE NSUInteger NSEventMaskFromType(NSEventType type) { return (1 << type); }
+#endif
 
 /* Device-independent bits found in event modifier flags */
 enum {
@@ -130,6 +147,7 @@ enum {
     NSEventPhaseChanged     = 0x1 << 2,
     NSEventPhaseEnded       = 0x1 << 3,
     NSEventPhaseCancelled   = 0x1 << 4,
+    NSEventPhaseMayBegin    = 0x1 << 5,
 };
 #endif
 typedef NSUInteger NSEventPhase;
@@ -294,7 +312,7 @@ typedef NSUInteger NSEventSwipeTrackingOptions;
 
 /* these messages are valid for enter and exit events */
 - (NSInteger)trackingNumber;
-- (void *)userData;
+- (void *)userData NS_RETURNS_INNER_POINTER;
 /* -trackingArea returns the NSTrackingArea that generated this event.  It is possible for there to be no trackingArea associated with the event in some cases where the event corresponds to a trackingRect installed with -[NSView addTrackingRect:owner:userData:assumeInside:], in which case nil is returned. */
 - (NSTrackingArea *)trackingArea NS_AVAILABLE_MAC(10_5); 
 
@@ -310,7 +328,7 @@ typedef NSUInteger NSEventSwipeTrackingOptions;
 /* -eventRef and +eventWithEventRef:  are valid for all events */
 /* -eventRef returns an EventRef corresponding to the NSEvent.  The EventRef is retained by the NSEvent, so will be valid as long as the NSEvent is valid, and will be released when the NSEvent is freed.  You can use RetainEvent to extend the lifetime of the EventRef, with a corresponding ReleaseEvent when you are done with it.  If there is no EventRef corresponding to the NSEvent, -eventRef will return NULL.
 */
-- (const void * /* EventRef */)eventRef NS_AVAILABLE_MAC(10_5);
+- (const void * /* EventRef */)eventRef NS_RETURNS_INNER_POINTER NS_AVAILABLE_MAC(10_5);
 /* +eventWithEventRef: returns an autoreleased NSEvent corresponding to the EventRef.  The EventRef is retained by the NSEvent and will be released when the NSEvent is freed.  If there is no NSEvent corresponding to the EventRef, +eventWithEventRef will return nil.
 */
 + (NSEvent *)eventWithEventRef:(const void * /* EventRef */)eventRef NS_AVAILABLE_MAC(10_5);

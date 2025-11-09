@@ -2,16 +2,9 @@
      File:       CarbonCore/LowMem.h
  
      Contains:   Low Memory Accessor Interfaces.
+                 The contents of this header file are deprecated.
  
-     Version:    CarbonCore-960.18~3
- 
-     Copyright:  © 1993-2008 by Apple Computer, Inc., all rights reserved
- 
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
- 
-                     http://developer.apple.com/bugreporter/
- 
+     Copyright:  Â© 1993-2011 by Apple Inc. All rights reserved.
 */
 #ifndef __LOWMEM__
 #define __LOWMEM__
@@ -39,7 +32,7 @@
 
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -121,7 +114,7 @@ extern "C" {
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern Ptr  LMGetMemTop(void)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern Ptr  LMGetMemTop(void)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -132,7 +125,7 @@ extern Ptr  LMGetMemTop(void)                                 AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetMemTop(Ptr value)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern void  LMSetMemTop(Ptr value)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -144,7 +137,7 @@ extern void  LMSetMemTop(Ptr value)                           AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern Ptr  LMGetBufPtr(void)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern Ptr  LMGetBufPtr(void)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -155,7 +148,7 @@ extern Ptr  LMGetBufPtr(void)                                 AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetBufPtr(Ptr value)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern void  LMSetBufPtr(Ptr value)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -167,7 +160,7 @@ extern void  LMSetBufPtr(Ptr value)                           AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern Ptr  LMGetHeapEnd(void)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern Ptr  LMGetHeapEnd(void)                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -178,7 +171,7 @@ extern Ptr  LMGetHeapEnd(void)                                AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetHeapEnd(Ptr value)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern void  LMSetHeapEnd(Ptr value)                          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -189,7 +182,7 @@ extern void  LMSetHeapEnd(Ptr value)                          AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern UInt8  LMGetCPUFlag(void)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern UInt8  LMGetCPUFlag(void)                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -200,7 +193,7 @@ extern UInt8  LMGetCPUFlag(void)                              AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetCPUFlag(UInt8 value)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern void  LMSetCPUFlag(UInt8 value)                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -212,7 +205,7 @@ extern void  LMSetCPUFlag(UInt8 value)                        AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern SInt32  LMGetRndSeed(void)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern SInt32  LMGetRndSeed(void)                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -223,7 +216,7 @@ extern SInt32  LMGetRndSeed(void)                             AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetRndSeed(SInt32 value)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern void  LMSetRndSeed(SInt32 value)                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -235,7 +228,7 @@ extern void  LMSetRndSeed(SInt32 value)                       AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern UInt8  LMGetSEvtEnb(void)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern UInt8  LMGetSEvtEnb(void)                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -246,7 +239,7 @@ extern UInt8  LMGetSEvtEnb(void)                              AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetSEvtEnb(UInt8 value)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern void  LMSetSEvtEnb(UInt8 value)                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 #endif  /* !__LP64__ */
@@ -259,7 +252,7 @@ extern void  LMSetSEvtEnb(UInt8 value)                        AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern SInt16  LMGetBootDrive(void)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern SInt16  LMGetBootDrive(void)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -270,7 +263,7 @@ extern SInt16  LMGetBootDrive(void)                           AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetBootDrive(SInt16 value)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  LMSetBootDrive(SInt16 value)                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -283,7 +276,7 @@ extern void  LMSetBootDrive(SInt16 value)                     AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern UInt8  LMGetSdVolume(void)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern UInt8  LMGetSdVolume(void)                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -294,7 +287,7 @@ extern UInt8  LMGetSdVolume(void)                             AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetSdVolume(UInt8 value)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern void  LMSetSdVolume(UInt8 value)                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -306,7 +299,7 @@ extern void  LMSetSdVolume(UInt8 value)                       AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern Ptr  LMGetSoundPtr(void)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern Ptr  LMGetSoundPtr(void)                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -317,7 +310,7 @@ extern Ptr  LMGetSoundPtr(void)                               AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetSoundPtr(Ptr value)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern void  LMSetSoundPtr(Ptr value)                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -329,7 +322,7 @@ extern void  LMSetSoundPtr(Ptr value)                         AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern Ptr  LMGetSoundBase(void)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern Ptr  LMGetSoundBase(void)                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -340,7 +333,7 @@ extern Ptr  LMGetSoundBase(void)                              AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetSoundBase(Ptr value)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern void  LMSetSoundBase(Ptr value)                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -352,7 +345,7 @@ extern void  LMSetSoundBase(Ptr value)                        AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern UInt8  LMGetSoundLevel(void)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern UInt8  LMGetSoundLevel(void)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -363,7 +356,7 @@ extern UInt8  LMGetSoundLevel(void)                           AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetSoundLevel(UInt8 value)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern void  LMSetSoundLevel(UInt8 value)                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -375,7 +368,7 @@ extern void  LMSetSoundLevel(UInt8 value)                     AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern SInt16  LMGetCurPitch(void)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern SInt16  LMGetCurPitch(void)                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -386,7 +379,7 @@ extern SInt16  LMGetCurPitch(void)                            AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetCurPitch(SInt16 value)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern void  LMSetCurPitch(SInt16 value)                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -584,7 +577,7 @@ extern void  LMSetCurPitch(SInt16 value)                      AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern UInt8  LMGetScrDmpEnb(void)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern UInt8  LMGetScrDmpEnb(void)                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -595,7 +588,7 @@ extern UInt8  LMGetScrDmpEnb(void)                            AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetScrDmpEnb(UInt8 value)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern void  LMSetScrDmpEnb(UInt8 value)                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -607,7 +600,7 @@ extern void  LMSetScrDmpEnb(UInt8 value)                      AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern SInt32  LMGetBufTgFNum(void)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern SInt32  LMGetBufTgFNum(void)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -618,7 +611,7 @@ extern SInt32  LMGetBufTgFNum(void)                           AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetBufTgFNum(SInt32 value)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern void  LMSetBufTgFNum(SInt32 value)                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -630,7 +623,7 @@ extern void  LMSetBufTgFNum(SInt32 value)                     AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern SInt16  LMGetBufTgFFlg(void)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern SInt16  LMGetBufTgFFlg(void)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -641,7 +634,7 @@ extern SInt16  LMGetBufTgFFlg(void)                           AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetBufTgFFlg(SInt16 value)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern void  LMSetBufTgFFlg(SInt16 value)                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -653,7 +646,7 @@ extern void  LMSetBufTgFFlg(SInt16 value)                     AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern SInt16  LMGetBufTgFBkNum(void)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern SInt16  LMGetBufTgFBkNum(void)                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -664,7 +657,7 @@ extern SInt16  LMGetBufTgFBkNum(void)                         AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetBufTgFBkNum(SInt16 value)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern void  LMSetBufTgFBkNum(SInt16 value)                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -676,7 +669,7 @@ extern void  LMSetBufTgFBkNum(SInt16 value)                   AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern SInt32  LMGetBufTgDate(void)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern SInt32  LMGetBufTgDate(void)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -687,7 +680,7 @@ extern SInt32  LMGetBufTgDate(void)                           AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetBufTgDate(SInt32 value)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern void  LMSetBufTgDate(SInt32 value)                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -698,7 +691,7 @@ extern void  LMSetBufTgDate(SInt32 value)                     AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern SInt32  LMGetMinStack(void)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern SInt32  LMGetMinStack(void)                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -709,7 +702,7 @@ extern SInt32  LMGetMinStack(void)                            AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetMinStack(SInt32 value)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern void  LMSetMinStack(SInt32 value)                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -721,7 +714,7 @@ extern void  LMSetMinStack(SInt32 value)                      AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern SInt32  LMGetDefltStack(void)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern SInt32  LMGetDefltStack(void)                          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -732,7 +725,7 @@ extern SInt32  LMGetDefltStack(void)                          AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetDefltStack(SInt32 value)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern void  LMSetDefltStack(SInt32 value)                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -743,7 +736,7 @@ extern void  LMSetDefltStack(SInt32 value)                    AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern Handle  LMGetGZRootHnd(void)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern Handle  LMGetGZRootHnd(void)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -754,7 +747,7 @@ extern Handle  LMGetGZRootHnd(void)                           AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetGZRootHnd(Handle value)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern void  LMSetGZRootHnd(Handle value)                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -766,7 +759,7 @@ extern void  LMSetGZRootHnd(Handle value)                     AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern Handle  LMGetGZMoveHnd(void)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern Handle  LMGetGZMoveHnd(void)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -777,7 +770,7 @@ extern Handle  LMGetGZMoveHnd(void)                           AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetGZMoveHnd(Handle value)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern void  LMSetGZMoveHnd(Handle value)                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -788,7 +781,7 @@ extern void  LMSetGZMoveHnd(Handle value)                     AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern UniversalProcPtr  LMGetToExtFS(void)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern UniversalProcPtr  LMGetToExtFS(void)                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -799,7 +792,7 @@ extern UniversalProcPtr  LMGetToExtFS(void)                   AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetToExtFS(UniversalProcPtr value)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern void  LMSetToExtFS(UniversalProcPtr value)             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -810,7 +803,7 @@ extern void  LMSetToExtFS(UniversalProcPtr value)             AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern UniversalProcPtr  LMGetJStash(void)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern UniversalProcPtr  LMGetJStash(void)                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -821,7 +814,7 @@ extern UniversalProcPtr  LMGetJStash(void)                    AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetJStash(UniversalProcPtr value)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern void  LMSetJStash(UniversalProcPtr value)              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -832,7 +825,7 @@ extern void  LMSetJStash(UniversalProcPtr value)              AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern FSIORefNum  LMGetCurApRefNum(void)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern FSIORefNum  LMGetCurApRefNum(void)                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -843,7 +836,7 @@ extern FSIORefNum  LMGetCurApRefNum(void)                     AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetCurApRefNum(FSIORefNum value)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern void  LMSetCurApRefNum(FSIORefNum value)               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -859,7 +852,7 @@ extern void  LMSetCurApRefNum(FSIORefNum value)               AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern Ptr  LMGetCurStackBase(void)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern Ptr  LMGetCurStackBase(void)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -873,7 +866,7 @@ extern Ptr  LMGetCurStackBase(void)                           AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetCurStackBase(Ptr value)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern void  LMSetCurStackBase(Ptr value)                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -884,7 +877,7 @@ extern void  LMSetCurStackBase(Ptr value)                     AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern SInt16  LMGetCurPageOption(void)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern SInt16  LMGetCurPageOption(void)                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -895,7 +888,7 @@ extern SInt16  LMGetCurPageOption(void)                       AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetCurPageOption(SInt16 value)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern void  LMSetCurPageOption(SInt16 value)                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -908,7 +901,7 @@ extern void  LMSetCurPageOption(SInt16 value)                 AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern SInt16  LMGetPrintErr(void)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern SInt16  LMGetPrintErr(void)                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -919,7 +912,7 @@ extern SInt16  LMGetPrintErr(void)                            AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetPrintErr(SInt16 value)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern void  LMSetPrintErr(SInt16 value)                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 #endif  /* !__LP64__ */
@@ -936,7 +929,7 @@ extern void  LMSetPrintErr(SInt16 value)                      AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern SInt16  LMGetApFontID(void)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern SInt16  LMGetApFontID(void)                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -951,7 +944,7 @@ extern SInt16  LMGetApFontID(void)                            AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetApFontID(SInt16 value)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern void  LMSetApFontID(SInt16 value)                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 #if !__LP64__
@@ -963,7 +956,7 @@ extern void  LMSetApFontID(SInt16 value)                      AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern SInt32  LMGetOneOne(void)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern SInt32  LMGetOneOne(void)                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -974,7 +967,7 @@ extern SInt32  LMGetOneOne(void)                              AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetOneOne(SInt32 value)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern void  LMSetOneOne(SInt32 value)                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -985,7 +978,7 @@ extern void  LMSetOneOne(SInt32 value)                        AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern SInt32  LMGetMinusOne(void)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern SInt32  LMGetMinusOne(void)                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -996,7 +989,7 @@ extern SInt32  LMGetMinusOne(void)                            AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetMinusOne(SInt32 value)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern void  LMSetMinusOne(SInt32 value)                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 #endif  /* !__LP64__ */
@@ -1009,7 +1002,7 @@ extern void  LMSetMinusOne(SInt32 value)                      AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern SInt16  LMGetSysMap(void)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern SInt16  LMGetSysMap(void)                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1020,7 +1013,7 @@ extern SInt16  LMGetSysMap(void)                              AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetSysMap(SInt16 value)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  LMSetSysMap(SInt16 value)                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1031,7 +1024,7 @@ extern void  LMSetSysMap(SInt16 value)                        AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern UInt8  LMGetResLoad(void)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern UInt8  LMGetResLoad(void)                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1042,7 +1035,7 @@ extern UInt8  LMGetResLoad(void)                              AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetResLoad(UInt8 value)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  LMSetResLoad(UInt8 value)                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1053,7 +1046,7 @@ extern void  LMSetResLoad(UInt8 value)                        AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern SInt16  LMGetResErr(void)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern SInt16  LMGetResErr(void)                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1064,7 +1057,7 @@ extern SInt16  LMGetResErr(void)                              AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetResErr(SInt16 value)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  LMSetResErr(SInt16 value)                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1075,7 +1068,7 @@ extern void  LMSetResErr(SInt16 value)                        AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern UInt8  LMGetTmpResLoad(void)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern UInt8  LMGetTmpResLoad(void)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1086,7 +1079,7 @@ extern UInt8  LMGetTmpResLoad(void)                           AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetTmpResLoad(UInt8 value)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  LMSetTmpResLoad(UInt8 value)                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -1098,7 +1091,7 @@ extern void  LMSetTmpResLoad(UInt8 value)                     AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern Ptr  LMGetIntlSpec(void)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern Ptr  LMGetIntlSpec(void)                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1109,7 +1102,7 @@ extern Ptr  LMGetIntlSpec(void)                               AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetIntlSpec(Ptr value)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  LMSetIntlSpec(Ptr value)                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /* LMGetWordRedraw and LMSetWordRedraw moved to TextEdit.h */
@@ -1126,7 +1119,7 @@ extern void  LMSetIntlSpec(Ptr value)                         AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern SInt16  LMGetSysFontFam(void)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern SInt16  LMGetSysFontFam(void)                          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 #endif  /* !__LP64__ */
@@ -1143,7 +1136,7 @@ extern SInt16  LMGetSysFontFam(void)                          AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetSysFontFam(SInt16 value)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern void  LMSetSysFontFam(SInt16 value)                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1158,7 +1151,7 @@ extern void  LMSetSysFontFam(SInt16 value)                    AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern SInt16  LMGetSysFontSize(void)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern SInt16  LMGetSysFontSize(void)                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1173,7 +1166,7 @@ extern SInt16  LMGetSysFontSize(void)                         AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetSysFontSize(SInt16 value)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  LMSetSysFontSize(SInt16 value)                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /**************************************************************************************
@@ -1190,7 +1183,7 @@ extern void  LMSetSysFontSize(SInt16 value)                   AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern StringPtr  LMGetCurApName(void)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern StringPtr  LMGetCurApName(void)                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1201,7 +1194,7 @@ extern StringPtr  LMGetCurApName(void)                        AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetCurApName(ConstStr31Param curApNameValue)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern void  LMSetCurApName(ConstStr31Param curApNameValue)   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1216,7 +1209,7 @@ extern void  LMSetCurApName(ConstStr31Param curApNameValue)   AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern StringPtr  LMGetSysResName(void)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern StringPtr  LMGetSysResName(void)                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1231,7 +1224,7 @@ extern StringPtr  LMGetSysResName(void)                       AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetSysResName(ConstStr15Param sysResNameValue) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern void  LMSetSysResName(ConstStr15Param sysResNameValue) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1248,7 +1241,7 @@ extern void  LMSetSysResName(ConstStr15Param sysResNameValue) AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern StringPtr  LMGetFinderName(void)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern StringPtr  LMGetFinderName(void)                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1263,7 +1256,7 @@ extern StringPtr  LMGetFinderName(void)                       AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetFinderName(ConstStr15Param finderNameValue) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern void  LMSetFinderName(ConstStr15Param finderNameValue) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1280,7 +1273,7 @@ extern void  LMSetFinderName(ConstStr15Param finderNameValue) AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern Ptr  LMGetToolScratch(void)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern Ptr  LMGetToolScratch(void)                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1297,7 +1290,7 @@ extern Ptr  LMGetToolScratch(void)                            AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetToolScratch(const void * toolScratchValue)  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern void  LMSetToolScratch(const void * toolScratchValue)  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /**************************************************************************************
@@ -1314,7 +1307,7 @@ extern void  LMSetToolScratch(const void * toolScratchValue)  AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern UniversalProcPtr  LMGetLvl2DT(short vectorNumber)      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern UniversalProcPtr  LMGetLvl2DT(short vectorNumber)      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1325,7 +1318,7 @@ extern UniversalProcPtr  LMGetLvl2DT(short vectorNumber)      AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern void  LMSetLvl2DT(UniversalProcPtr Lvl2DTValue, short vectorNumber)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern void  LMSetLvl2DT(UniversalProcPtr Lvl2DTValue, short vectorNumber)           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /**************************************************************************************
@@ -1349,7 +1342,7 @@ extern void  LMSetLvl2DT(UniversalProcPtr Lvl2DTValue, short vectorNumber)      
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
-extern Ptr  LMGetHighHeapMark(void)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern Ptr  LMGetHighHeapMark(void)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1360,7 +1353,7 @@ extern Ptr  LMGetHighHeapMark(void)                           AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
-extern void  LMSetHighHeapMark(Ptr value)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern void  LMSetHighHeapMark(Ptr value)                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* accesses "StkLowPt"*/
@@ -1372,7 +1365,7 @@ extern void  LMSetHighHeapMark(Ptr value)                     AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
-extern Ptr  LMGetStackLowPoint(void)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern Ptr  LMGetStackLowPoint(void)                          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1383,7 +1376,7 @@ extern Ptr  LMGetStackLowPoint(void)                          AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
-extern void  LMSetStackLowPoint(Ptr value)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern void  LMSetStackLowPoint(Ptr value)                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* accesses "FmtDefaults"*/
@@ -1395,7 +1388,7 @@ extern void  LMSetStackLowPoint(Ptr value)                    AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
-extern Ptr  LMGetDiskFormatingHFSDefaults(void)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern Ptr  LMGetDiskFormatingHFSDefaults(void)               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1406,7 +1399,7 @@ extern Ptr  LMGetDiskFormatingHFSDefaults(void)               AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
-extern void  LMSetDiskFormatingHFSDefaults(Ptr value)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern void  LMSetDiskFormatingHFSDefaults(Ptr value)         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 

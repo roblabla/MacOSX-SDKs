@@ -1,10 +1,5 @@
 #! /bin/sh
 
-prefix=/usr
-exec_prefix=${prefix}
-includedir=${prefix}/include
-libdir=${exec_prefix}/lib
-
 usage()
 {
     cat <<EOF
@@ -12,8 +7,7 @@ Usage: xml2-config [OPTION]
 
 Known values for OPTION are:
 
-  --prefix=DIR		change libxml prefix [default $prefix]
-  --exec-prefix=DIR	change libxml exec prefix [default $exec_prefix]
+  --prefix		print the install prefix
   --libs		print library linking information
   --cflags		print pre-processor and compiler flags
   --modules		module support enabled
@@ -28,9 +22,6 @@ if test $# -eq 0; then
     usage 1
 fi
 
-cflags=false
-libs=false
-
 while test $# -gt 0; do
     case "$1" in
     -*=*) optarg=`echo "$1" | sed 's/[-_a-zA-Z0-9]*=//'` ;;
@@ -38,72 +29,36 @@ while test $# -gt 0; do
     esac
 
     case "$1" in
-    --prefix=*)
-	prefix=$optarg
-	includedir=$prefix/include
-	libdir=$prefix/lib
-	;;
+    --version)
+        echo 2.7.8
+        exit 0
+    ;;
 
     --prefix)
-	echo $prefix
-	;;
-
-    --exec-prefix=*)
-      exec_prefix=$optarg
-      libdir=$exec_prefix/lib
-      ;;
-
-    --exec-prefix)
-      echo $exec_prefix
-      ;;
-
-    --version)
-	echo 2.7.3
-	exit 0
-	;;
+        echo /usr
+        exit 0
+    ;;
 
     --help)
-	usage 0
-	;;
+        usage 0
+    ;;
 
     --cflags)
-       	echo -I${includedir}/libxml2 
-       	;;
-
-    --libtool-libs)
-	if [ -r ${libdir}/libxml2.la ]
-	then
-	    echo ${libdir}/libxml2.la
-	fi
-        ;;
+        echo -I/usr/include/libxml2
+    ;;
 
     --modules)
-       	echo 1
-       	;;
+        echo 1
+    ;;
 
     --libs)
-        if [ "`uname`" = "Linux" ]
-	then
-	    if [ "-L${libdir}" = "-L/usr/lib" -o "-L${libdir}" = "-L/usr/lib64" ]
-	    then
-		echo -lxml2 -lz -lpthread   -licucore -lm  
-	    else
-		echo -L${libdir} -lxml2 -lz -lpthread   -licucore -lm  
-	    fi
-	else
-	    if [ "`uname`" = "Darwin" -a "-L${libdir}" = "-L/usr/lib" ]
-	    then
-		echo -lxml2 -lz -lpthread   -licucore -lm  
-	    else
-		echo -L${libdir} -lxml2 -lz -lpthread   -licucore -lm  
-	    fi
-	fi
-       	;;
+        echo -lxml2
+    ;;
 
     *)
-	usage
-	exit 1
-	;;
+        usage
+        exit 1
+    ;;
     esac
     shift
 done

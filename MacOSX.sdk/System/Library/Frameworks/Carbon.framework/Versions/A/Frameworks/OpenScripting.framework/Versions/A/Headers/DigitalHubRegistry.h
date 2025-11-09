@@ -3,7 +3,7 @@
  
      Contains:   Digital Hub AppleEvents
  
-     Version:    OSA-143~22
+     Version:    OSA-148.3~2
  
      Copyright:  © 2002-2008 by Apple Computer, Inc.  All rights reserved
  
@@ -16,14 +16,9 @@
 #ifndef __DIGITALHUBREGISTRY__
 #define __DIGITALHUBREGISTRY__
 
-#ifndef __APPLICATIONSERVICES__
-#include <ApplicationServices/ApplicationServices.h>
+#ifndef __CORESERVICES__
+#include <CoreServices/CoreServices.h>
 #endif
-
-#ifndef __AEREGISTRY__
-#include <AE/AERegistry.h>
-#endif
-
 
 
 #include <AvailabilityMacros.h>

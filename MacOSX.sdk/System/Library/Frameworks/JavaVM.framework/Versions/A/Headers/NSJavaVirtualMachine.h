@@ -16,13 +16,13 @@
 
 // Returns the default virtual machine - if necessary, calls alloc + init
 
-+ (id) defaultVirtualMachine;
++ (id) defaultVirtualMachine DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 // Returns a class path.  First checks NSProcessInfo for an environment variable
 // called CLASSPATH and if that doesn't exist, uses NSJavaConfiguration to find
 // the default class path.
 
-+ (NSString *) defaultClassPath;
++ (NSString *) defaultClassPath DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 // Note that any NSThreads spawned after this method returns will automatically 
 // be attached to the virtual machine.  Likewise, it is not necessary to attach
@@ -33,13 +33,13 @@
 // This is most easily done by using the -attachCurrentThread method.
 // Use -detachCurrentThread to detach explicitly attached threads when done.
 
-- initWithClassPath:(NSString *)classPath;
+- initWithClassPath:(NSString *)classPath DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
-- (void) attachCurrentThread;
-- (void) detachCurrentThread;
+- (void) attachCurrentThread DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (void) detachCurrentThread DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
-- (Class)findClass:(NSString *)className;
-- (Class)defineClass:(NSData *)javaClassData withName:(NSString *)className;
+- (Class)findClass:(NSString *)className DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (Class)defineClass:(NSData *)javaClassData withName:(NSString *)className DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 @end
 
@@ -53,9 +53,9 @@
 // rather counter-intuitive format defined by the Java Virtual Machine
 // specification.  Try looking in JavaVM/vm-interface.h for help.
 
-+ (id) newWithSignature:(NSString *)signature, ...;
-+ (id) newWithSignature:(NSString *)signature arguments:(va_list)args;
++ (id) newWithSignature:(NSString *)signature, ... DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
++ (id) newWithSignature:(NSString *)signature arguments:(va_list)args DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 @end
 
-extern NSString *NSInvalidJavaClassException;
+extern NSString *NSInvalidJavaClassException DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;

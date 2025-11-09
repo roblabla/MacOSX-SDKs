@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1999-2010 Apple Inc. All rights reserved.
+ * Copyright (c) 1999-2012 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -38,10 +38,6 @@ enum {
 	BPF_TAP_INPUT_OUTPUT
 };
 
-/* Ethernet specific types */
-#define DLIL_DESC_ETYPE2	4
-#define DLIL_DESC_SAP		5
-#define DLIL_DESC_SNAP		6
 /*
  * DLIL_DESC_ETYPE2 - native_type must point to 2 byte ethernet raw protocol,
  *                    variants.native_type_length must be set to 2
@@ -57,5 +53,9 @@ enum {
  * The length of the protocol data specified at native_type must be set in
  * variants.native_type_length.
  */
+/* Ethernet specific types */
+#define DLIL_DESC_ETYPE2	4
+#define DLIL_DESC_SAP		5
+#define DLIL_DESC_SNAP		6
 
 #endif /* DLIL_H */

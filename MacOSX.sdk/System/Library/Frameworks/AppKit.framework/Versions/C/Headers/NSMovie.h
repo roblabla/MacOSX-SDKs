@@ -1,7 +1,7 @@
 /*
         NSMovie.h
         Application Kit
-        Copyright (c) 2000-2011, Apple Inc.
+        Copyright (c) 2000-2012, Apple Inc.
         All rights reserved.
 */
 
@@ -38,7 +38,7 @@
 - (id) initWithURL:(NSURL*)url byReference:(BOOL)byRef NS_DEPRECATED_MAC(10_0, 10_5);	// When archived, saves ref or contents
 - (id) initWithPasteboard:(NSPasteboard*)pasteboard NS_DEPRECATED_MAC(10_0, 10_5);
 
-- (void*/*Movie*/)QTMovie NS_DEPRECATED_MAC(10_0, 10_5);
+- (void*/*Movie*/)QTMovie NS_RETURNS_INNER_POINTER NS_DEPRECATED_MAC(10_0, 10_5);
 - (NSURL*)URL NS_DEPRECATED_MAC(10_0, 10_5);
 
 + (NSArray*) movieUnfilteredFileTypes NS_DEPRECATED_MAC(10_0, 10_5);

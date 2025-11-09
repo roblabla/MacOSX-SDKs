@@ -3,9 +3,9 @@
  
      Contains:   AppleEvents AEUT resource format Interfaces.
  
-     Version:    AppleEvents-527.7~1
+    
  
-     Copyright:  © 1991-2008 by Apple Computer, Inc., all rights reserved
+     Copyright:  ï¿½ 1991-2008 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

@@ -115,6 +115,13 @@
 @property(readonly)                                             CGImageRef      thumbnailIfAvailable;
 
 /*!
+ @property largeThumbnailIfAvailable
+ @abstract Large thumbnail for the item if one is readily available. If one is not readily available, accessing this property will send a message to the device requesting a thumbnail for the file. The delegate of the device will be notified via method "cameraDevice:didReceiveThumbnailForItem:", if this method is implemented on by the delegate.
+ 
+ */
+@property(readonly)                                             CGImageRef      largeThumbnailIfAvailable;
+
+/*!
     @property metadataIfAvailable
     @abstract ￼Metadata for the file if one is readily available. If one is not readily available, accessing this property will send a message to the device requesting a thumbnail for the file. The delegate of the device will be notified via method "cameraDevice:didReceiveMetadataForItem:", if this method is implemented on by the delegate.
 

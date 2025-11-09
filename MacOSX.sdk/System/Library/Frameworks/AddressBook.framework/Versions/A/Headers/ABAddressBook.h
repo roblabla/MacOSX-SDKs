@@ -27,15 +27,15 @@ extern NSString *ABMultiValueIdentifiersErrorKey AVAILABLE_MAC_OS_X_VERSION_10_7
 // ================================================================
 //      OpenURL support
 // ================================================================
-// An application can open the AddressBook app and select (and edit) a specific
+// An application can open the Contacts app and select (and edit) a specific
 // person by using the -[NSWorkspace openURL:] API.
 //
-// To launch (or bring to front) the Address Book app and select a given person
+// To launch (or bring to front) the Contacts app and select a given person
 //
 // NSString *urlString = [NSString stringWithFormat:@"addressbook://%@", [aPerson uniqueId]];
 // [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:urlString]];
 //
-// To launch (or bring to front) the Address Book app and edit a given person
+// To launch (or bring to front) the Contacts app and edit a given person
 //
 // NSString *urlString = [NSString stringWithFormat:@"addressbook://%@?edit", [aPerson uniqueId]];
 // [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:urlString]];
@@ -49,19 +49,19 @@ extern NSString *ABMultiValueIdentifiersErrorKey AVAILABLE_MAC_OS_X_VERSION_10_7
 @private
     id                   _reserved8;
     
-    void                *_reserved2;
-    void                *_reserved3;
+    void                *_reserved2 __unused;
+    void                *_reserved3 __unused;
     id                   _reserved4;
     NSMutableDictionary *_tableSchemas;
-    NSMutableDictionary *_reserved5;
+    NSMutableDictionary *_reserved5 __unused;
     __strong void		*_converterPort;
     NSTimer             *_inactivityTimer;
     id                   _reserved;
 
     id                   _reserved1;
 	
-    void                *_reserved6;
-    void                *_reserved7;
+    void                *_reserved6 __unused;
+    void                *_reserved7 __unused;
 
     struct __ABBookflags {
         unsigned int     hasUnsavedChanges:1;
@@ -124,7 +124,7 @@ extern NSString *ABMultiValueIdentifiersErrorKey AVAILABLE_MAC_OS_X_VERSION_10_7
     // Raises if record is nil
     // Returns YES if the addition was successful
     // When returning NO, includes additional information in error when its given value is not nil
-    // It is more efficient to use -[ABRecord initWithAddressBook:source:] where possible.
+    // It is more efficient to use -[ABRecord initWithAddressBook:] where possible.
 
 - (BOOL)addRecord:(ABRecord *)record;
     // Adds a record (ABPerson or ABGroup) to the AddressBook database.
@@ -162,7 +162,7 @@ extern NSString *ABMultiValueIdentifiersErrorKey AVAILABLE_MAC_OS_X_VERSION_10_7
     // Returns the default country code for records without specified codes.
 
 - (NSInteger)defaultNameOrdering AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-    // Returns the default name ordering defined by the user in the Address Book preferences.
+    // Returns the default name ordering defined by the user in the Contacts preferences.
     // Possible values: kABFirstNameFirst or kABLastNameFirst
 
 

@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010 Apple Inc. All rights reserved.
+	Copyright 2010-2012 Apple Inc. All rights reserved.
 
 */
 
@@ -104,20 +104,31 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 @interface AVMetadataItem (AVMetadataItemArrayFiltering)
 
 /*!
+ @method		metadataItemsFromArray:filteredAndSortedAccordingToPreferredLanguages:
+ @abstract		Filters an array of AVMetadataItems according to whether their locales match any language identifier in the specified array of preferred languages. The returned array is sorted according to the order of preference of the language each matches.
+ @param			metadataItems
+				An array of AVMetadataItems to be filtered and sorted.
+ @param			preferredLanguages
+				An array of language identifiers in order of preference, each of which is an IETF BCP 47 (RFC 4646) language identifier. Use +[NSLocale preferredLanguages] to obtain the user's list of preferred languages.
+ @result		An instance of NSArray containing metadata items of the specified NSArray that match a preferred language, sorted according to the order of preference of the language each matches.
+*/
++ (NSArray *)metadataItemsFromArray:(NSArray *)metadataItems filteredAndSortedAccordingToPreferredLanguages:(NSArray *)preferredLanguages NS_AVAILABLE(10_8, TBD);
+
+/*!
 	@method			metadataItemsFromArray:withLocale:
 	@abstract		Filters an array of AVMetadataItems according to locale.
-	@param			array
+	@param			metadataItems
 					An array of AVMetadataItems to be filtered by locale.
 	@param			locale
 					The NSLocale that must be matched for a metadata item to be copied to the output array.
 	@result			An instance of NSArray containing the metadata items of the target NSArray that match the specified locale.
 */
-+ (NSArray *)metadataItemsFromArray:(NSArray *)array withLocale:(NSLocale *)locale;
++ (NSArray *)metadataItemsFromArray:(NSArray *)metadataItems withLocale:(NSLocale *)locale;
 
 /*!
 	@method			metadataItemsFromArray:withKey:keySpace:
 	@abstract		Filters an array of AVMetadataItems according to key and/or keySpace.
-	@param			array
+	@param			metadataItems
 					An array of AVMetadataItems to be filtered by key and/or keyspace.
 	@param			key
 					The key that must be matched for a metadata item to be copied to the output array.
@@ -130,7 +141,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 	@result			An instance of NSArray containing the metadata items of the target NSArray that match the specified
 					key and/or keySpace.
 */
-+ (NSArray *)metadataItemsFromArray:(NSArray *)array withKey:(id)key keySpace:(NSString *)keySpace;
++ (NSArray *)metadataItemsFromArray:(NSArray *)metadataItems withKey:(id)key keySpace:(NSString *)keySpace;
 
 @end
 

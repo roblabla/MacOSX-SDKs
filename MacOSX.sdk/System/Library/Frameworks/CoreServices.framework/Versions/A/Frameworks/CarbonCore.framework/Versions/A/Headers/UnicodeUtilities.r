@@ -3,9 +3,7 @@
  
      Contains:   Types, constants, prototypes for Unicode Utilities (Unicode input and text utils)
  
-     Version:    CarbonCore-960.18~3
- 
-     Copyright:  © 1997-2008 by Apple Computer, Inc., all rights reserved.
+     Copyright:  Â© 1997-2011 by Apple Inc. All rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

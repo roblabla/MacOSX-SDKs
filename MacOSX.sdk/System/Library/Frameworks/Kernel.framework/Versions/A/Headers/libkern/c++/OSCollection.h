@@ -230,6 +230,7 @@ public:
     */
     typedef enum {
         kImmutable  = 0x00000001,
+        kSort       = 0x00000002,
         kMASK       = (unsigned) -1
     } _OSCollectionFlags;
 

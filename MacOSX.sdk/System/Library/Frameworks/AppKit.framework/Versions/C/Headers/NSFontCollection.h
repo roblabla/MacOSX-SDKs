@@ -1,7 +1,7 @@
 /*
 	NSFontCollection.h
 	Application Kit
-	Copyright (c) 2010-2011, Apple Inc.
+	Copyright (c) 2010-2012, Apple Inc.
 	All rights reserved.
 */
 

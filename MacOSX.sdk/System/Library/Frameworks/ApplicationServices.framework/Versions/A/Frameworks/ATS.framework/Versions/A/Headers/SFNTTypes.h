@@ -5,7 +5,7 @@
  
      Version:    ATS
  
-     Copyright:  © 1994-2011 by Apple Inc., all rights reserved.
+     Copyright:  © 1994-2012 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -69,7 +69,8 @@ enum {
   kFontISO10646_1993Semantics   = 2,
   kFontUnicodeV2_0BMPOnlySemantics = 3,
   kFontUnicodeV2_0FullCoverageSemantics = 4,
-  kFontUnicodeV4_0VariationSequenceSemantics = 5
+  kFontUnicodeV4_0VariationSequenceSemantics = 5,
+  kFontUnicode_FullRepertoire = 6
 };
 
 enum {

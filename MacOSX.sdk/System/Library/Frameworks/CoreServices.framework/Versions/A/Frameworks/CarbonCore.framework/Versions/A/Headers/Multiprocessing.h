@@ -2,16 +2,9 @@
      File:       CarbonCore/Multiprocessing.h
  
      Contains:   Multiprocessing interfaces
+                 The contents of this header file are deprecated.
  
-     Version:    CarbonCore-960.18~3
- 
-     Copyright:  © 1995-2008 DayStar Digital, Inc.
- 
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
- 
-                     http://developer.apple.com/bugreporter/
- 
+     Copyright:  © 1995-2011 DayStar Digital, Inc.
 */
 
 /*********************************************************************************************
@@ -36,7 +29,7 @@
 
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -290,7 +283,7 @@ enum {
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern ItemCount 
-MPProcessors(void)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+MPProcessors(void)                                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 /* The physical total.*/
@@ -307,7 +300,7 @@ MPProcessors(void)                                            AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern ItemCount 
-MPProcessorsScheduled(void)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+MPProcessorsScheduled(void)                                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 /* Those currently in use.*/
@@ -357,7 +350,7 @@ MPCreateTask(
   void *          terminationParameter1,
   void *          terminationParameter2,
   MPTaskOptions   options,
-  MPTaskID *      task)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  MPTaskID *      task)                                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -376,7 +369,7 @@ MPCreateTask(
 extern OSStatus 
 MPTerminateTask(
   MPTaskID   task,
-  OSStatus   terminationStatus)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  OSStatus   terminationStatus)                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -395,7 +388,7 @@ MPTerminateTask(
 extern OSStatus 
 MPSetTaskWeight(
   MPTaskID       task,
-  MPTaskWeight   weight)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  MPTaskWeight   weight)                                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -412,7 +405,7 @@ MPSetTaskWeight(
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern Boolean 
-MPTaskIsPreemptive(MPTaskID taskID)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+MPTaskIsPreemptive(MPTaskID taskID)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 /* May be kInvalidID.*/
@@ -429,7 +422,7 @@ MPTaskIsPreemptive(MPTaskID taskID)                           AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern void 
-MPExit(OSStatus status)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+MPExit(OSStatus status)                                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -446,7 +439,7 @@ MPExit(OSStatus status)                                       AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern void 
-MPYield(void)                                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+MPYield(void)                                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -463,7 +456,7 @@ MPYield(void)                                                 AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern MPTaskID 
-MPCurrentTaskID(void)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+MPCurrentTaskID(void)                                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -482,7 +475,7 @@ MPCurrentTaskID(void)                                         AVAILABLE_MAC_OS_X
 extern OSStatus 
 MPSetTaskType(
   MPTaskID   task,
-  OSType     taskType)                                        AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  OSType     taskType)                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_1, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -508,7 +501,7 @@ MPSetTaskType(
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern OSStatus 
-MPAllocateTaskStorageIndex(TaskStorageIndex * taskIndex)      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+MPAllocateTaskStorageIndex(TaskStorageIndex * taskIndex)      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -525,7 +518,7 @@ MPAllocateTaskStorageIndex(TaskStorageIndex * taskIndex)      AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern OSStatus 
-MPDeallocateTaskStorageIndex(TaskStorageIndex taskIndex)      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+MPDeallocateTaskStorageIndex(TaskStorageIndex taskIndex)      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -544,7 +537,7 @@ MPDeallocateTaskStorageIndex(TaskStorageIndex taskIndex)      AVAILABLE_MAC_OS_X
 extern OSStatus 
 MPSetTaskStorageValue(
   TaskStorageIndex   taskIndex,
-  TaskStorageValue   value)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  TaskStorageValue   value)                                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -561,7 +554,7 @@ MPSetTaskStorageValue(
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern TaskStorageValue 
-MPGetTaskStorageValue(TaskStorageIndex taskIndex)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+MPGetTaskStorageValue(TaskStorageIndex taskIndex)             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -586,7 +579,7 @@ MPGetTaskStorageValue(TaskStorageIndex taskIndex)             AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern OSStatus 
-MPCreateQueue(MPQueueID * queue)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+MPCreateQueue(MPQueueID * queue)                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -603,7 +596,7 @@ MPCreateQueue(MPQueueID * queue)                              AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern OSStatus 
-MPDeleteQueue(MPQueueID queue)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+MPDeleteQueue(MPQueueID queue)                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -624,7 +617,7 @@ MPNotifyQueue(
   MPQueueID   queue,
   void *      param1,
   void *      param2,
-  void *      param3)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  void *      param3)                                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -646,7 +639,7 @@ MPWaitOnQueue(
   void **     param1,
   void **     param2,
   void **     param3,
-  Duration    timeout)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  Duration    timeout)                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -665,7 +658,7 @@ MPWaitOnQueue(
 extern OSStatus 
 MPSetQueueReserve(
   MPQueueID   queue,
-  ItemCount   count)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  ItemCount   count)                                          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -688,7 +681,7 @@ extern OSStatus
 MPCreateSemaphore(
   MPSemaphoreCount   maximumValue,
   MPSemaphoreCount   initialValue,
-  MPSemaphoreID *    semaphore)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  MPSemaphoreID *    semaphore)                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -705,7 +698,7 @@ MPCreateSemaphore(
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern OSStatus 
-MPDeleteSemaphore(MPSemaphoreID semaphore)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+MPDeleteSemaphore(MPSemaphoreID semaphore)                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -722,7 +715,7 @@ MPDeleteSemaphore(MPSemaphoreID semaphore)                    AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern OSStatus 
-MPSignalSemaphore(MPSemaphoreID semaphore)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+MPSignalSemaphore(MPSemaphoreID semaphore)                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -741,7 +734,7 @@ MPSignalSemaphore(MPSemaphoreID semaphore)                    AVAILABLE_MAC_OS_X
 extern OSStatus 
 MPWaitOnSemaphore(
   MPSemaphoreID   semaphore,
-  Duration        timeout)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  Duration        timeout)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -764,7 +757,7 @@ MPWaitOnSemaphore(
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern OSStatus 
-MPCreateCriticalRegion(MPCriticalRegionID * criticalRegion)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+MPCreateCriticalRegion(MPCriticalRegionID * criticalRegion)   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -781,7 +774,7 @@ MPCreateCriticalRegion(MPCriticalRegionID * criticalRegion)   AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern OSStatus 
-MPDeleteCriticalRegion(MPCriticalRegionID criticalRegion)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+MPDeleteCriticalRegion(MPCriticalRegionID criticalRegion)     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -800,7 +793,7 @@ MPDeleteCriticalRegion(MPCriticalRegionID criticalRegion)     AVAILABLE_MAC_OS_X
 extern OSStatus 
 MPEnterCriticalRegion(
   MPCriticalRegionID   criticalRegion,
-  Duration             timeout)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  Duration             timeout)                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -817,7 +810,7 @@ MPEnterCriticalRegion(
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern OSStatus 
-MPExitCriticalRegion(MPCriticalRegionID criticalRegion)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+MPExitCriticalRegion(MPCriticalRegionID criticalRegion)       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -836,7 +829,7 @@ MPExitCriticalRegion(MPCriticalRegionID criticalRegion)       AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern OSStatus 
-MPCreateEvent(MPEventID * event)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+MPCreateEvent(MPEventID * event)                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -852,7 +845,7 @@ MPCreateEvent(MPEventID * event)                              AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern OSStatus 
-MPDeleteEvent(MPEventID event)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+MPDeleteEvent(MPEventID event)                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -871,7 +864,7 @@ MPDeleteEvent(MPEventID event)                                AVAILABLE_MAC_OS_X
 extern OSStatus 
 MPSetEvent(
   MPEventID      event,
-  MPEventFlags   flags)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  MPEventFlags   flags)                                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -890,7 +883,7 @@ extern OSStatus
 MPWaitForEvent(
   MPEventID       event,
   MPEventFlags *  flags,
-  Duration        timeout)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  Duration        timeout)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -914,7 +907,7 @@ MPWaitForEvent(
  *    Non-Carbon CFM:   in MPLibrary 2.1 and later
  */
 extern OSStatus 
-MPCreateNotification(MPNotificationID * notificationID)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+MPCreateNotification(MPNotificationID * notificationID)       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -931,7 +924,7 @@ MPCreateNotification(MPNotificationID * notificationID)       AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in MPLibrary 2.1 and later
  */
 extern OSStatus 
-MPDeleteNotification(MPNotificationID notificationID)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+MPDeleteNotification(MPNotificationID notificationID)         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -953,7 +946,7 @@ MPModifyNotification(
   MPOpaqueID         anID,
   void *             notifyParam1,
   void *             notifyParam2,
-  void *             notifyParam3)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  void *             notifyParam3)                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -975,7 +968,7 @@ MPModifyNotificationParameters(
   MPOpaqueIDClass    kind,
   void *             notifyParam1,
   void *             notifyParam2,
-  void *             notifyParam3)                            AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  void *             notifyParam3)                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_1, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -992,7 +985,7 @@ MPModifyNotificationParameters(
  *    Non-Carbon CFM:   in MPLibrary 2.1 and later
  */
 extern OSStatus 
-MPCauseNotification(MPNotificationID notificationID)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+MPCauseNotification(MPNotificationID notificationID)          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -1032,7 +1025,7 @@ enum {
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern OSStatus 
-MPDelayUntil(AbsoluteTime * expirationTime)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+MPDelayUntil(AbsoluteTime * expirationTime)                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -1061,7 +1054,7 @@ MPDelayUntil(AbsoluteTime * expirationTime)                   AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern OSStatus 
-MPCreateTimer(MPTimerID * timerID)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+MPCreateTimer(MPTimerID * timerID)                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -1078,7 +1071,7 @@ MPCreateTimer(MPTimerID * timerID)                            AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern OSStatus 
-MPDeleteTimer(MPTimerID timerID)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+MPDeleteTimer(MPTimerID timerID)                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -1100,7 +1093,7 @@ MPSetTimerNotify(
   MPOpaqueID   anID,
   void *       notifyParam1,
   void *       notifyParam2,
-  void *       notifyParam3)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  void *       notifyParam3)                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -1120,7 +1113,7 @@ extern OSStatus
 MPArmTimer(
   MPTimerID       timerID,
   AbsoluteTime *  expirationTime,
-  OptionBits      options)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  OptionBits      options)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -1139,7 +1132,7 @@ MPArmTimer(
 extern OSStatus 
 MPCancelTimer(
   MPTimerID       timerID,
-  AbsoluteTime *  timeRemaining)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  AbsoluteTime *  timeRemaining)                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -1202,7 +1195,7 @@ extern LogicalAddress
 MPAllocateAligned(
   ByteCount    size,
   UInt8        alignment,
-  OptionBits   options)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  OptionBits   options)                                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 /* ! MPAllocateAligned is new in version 2.0.*/
@@ -1219,7 +1212,7 @@ MPAllocateAligned(
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern LogicalAddress 
-MPAllocate(ByteCount size)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+MPAllocate(ByteCount size)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 /* Use MPAllocateAligned instead.*/
@@ -1236,7 +1229,7 @@ MPAllocate(ByteCount size)                                    AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern void 
-MPFree(LogicalAddress object)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+MPFree(LogicalAddress object)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -1253,7 +1246,7 @@ MPFree(LogicalAddress object)                                 AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern ByteCount 
-MPGetAllocatedBlockSize(LogicalAddress object)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+MPGetAllocatedBlockSize(LogicalAddress object)                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -1276,7 +1269,7 @@ extern void
 MPBlockCopy(
   LogicalAddress   source,
   LogicalAddress   destination,
-  ByteCount        size)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  ByteCount        size)                                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -1295,7 +1288,7 @@ MPBlockCopy(
 extern void 
 MPBlockClear(
   LogicalAddress   address,
-  ByteCount        size)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  ByteCount        size)                                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -1315,7 +1308,7 @@ MPBlockClear(
 extern void 
 MPDataToCode(
   LogicalAddress   address,
-  ByteCount        size)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  ByteCount        size)                                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 /* NOTE:    MPDataToCode is not supported for 64-bit applications. Use mprotect(2) instead.*/
@@ -1484,7 +1477,7 @@ typedef struct MPTaskInfo               MPTaskInfo;
 extern OSStatus 
 MPSetExceptionHandler(
   MPTaskID    task,
-  MPQueueID   exceptionQ)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  MPQueueID   exceptionQ)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -1503,7 +1496,7 @@ MPSetExceptionHandler(
 extern OSStatus 
 MPDisposeTaskException(
   MPTaskID     task,
-  OptionBits   action)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  OptionBits   action)                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -1523,7 +1516,7 @@ extern OSStatus
 MPExtractTaskState(
   MPTaskID          task,
   MPTaskStateKind   kind,
-  void *            info)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  void *            info)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -1543,7 +1536,7 @@ extern OSStatus
 MPSetTaskState(
   MPTaskID          task,
   MPTaskStateKind   kind,
-  void *            info)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  void *            info)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -1562,7 +1555,7 @@ MPSetTaskState(
 extern OSStatus 
 MPThrowException(
   MPTaskID          task,
-  MPExceptionKind   kind)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  MPExceptionKind   kind)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -1592,7 +1585,7 @@ enum {
 extern OSStatus 
 MPRegisterDebugger(
   MPQueueID         queue,
-  MPDebuggerLevel   level)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  MPDebuggerLevel   level)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -1609,7 +1602,7 @@ MPRegisterDebugger(
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern OSStatus 
-MPUnregisterDebugger(MPQueueID queue)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+MPUnregisterDebugger(MPQueueID queue)                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -1697,7 +1690,7 @@ extern void *
 MPRemoteCall(
   MPRemoteProcedure   remoteProc,
   void *              parameter,
-  MPRemoteContext     context)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  MPRemoteContext     context)                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1761,7 +1754,7 @@ extern void *
 MPRemoteCallCFM(
   MPRemoteProcedure   remoteProc,
   void *              parameter,
-  MPRemoteContext     context)                                AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  MPRemoteContext     context)                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1840,7 +1833,7 @@ MPRemoteCallCFM(
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern Boolean 
-_MPIsFullyInitialized(void)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+_MPIsFullyInitialized(void)                                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 typedef CALLBACK_API_C( Boolean , MPIsFullyInitializedProc )(void);
@@ -1868,7 +1861,7 @@ _MPLibraryVersion(
   UInt32 *       major,
   UInt32 *       minor,
   UInt32 *       release,
-  UInt32 *       revision)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  UInt32 *       revision)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1938,7 +1931,7 @@ _MPLibraryIsCompatible(
   UInt32        major,
   UInt32        minor,
   UInt32        release,
-  UInt32        revision)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  UInt32        revision)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 

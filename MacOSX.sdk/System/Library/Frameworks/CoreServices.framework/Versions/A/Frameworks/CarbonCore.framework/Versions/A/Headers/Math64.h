@@ -2,16 +2,9 @@
      File:       CarbonCore/Math64.h
  
      Contains:   64-bit integer math Interfaces.
+                 The contents of this header file are deprecated.
  
-     Version:    CarbonCore-960.18~3
- 
-     Copyright:  © 1994-2008 by Apple Computer, Inc., all rights reserved
- 
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
- 
-                     http://developer.apple.com/bugreporter/
- 
+     Copyright:  Â© 1994-2011 by Apple Inc. All rights reserved.
 */
 #ifndef __MATH64__
 #define __MATH64__
@@ -26,7 +19,7 @@
 
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -492,7 +485,7 @@ S64Not(SInt64 value);
 extern SInt32 
 S64Compare(
   SInt64   left,
-  SInt64   right)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt64   right)                                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -1081,7 +1074,7 @@ U64Not(UInt64 value);
 extern SInt32 
 U64Compare(
   UInt64   left,
-  UInt64   right)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt64   right)                                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*

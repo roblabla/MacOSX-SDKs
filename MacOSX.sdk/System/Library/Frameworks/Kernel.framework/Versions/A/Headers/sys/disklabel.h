@@ -359,15 +359,6 @@ struct partinfo {
 
 #endif /* LOCORE */
 
-#if !defined(KERNEL) && !defined(LOCORE)
-
-#include <sys/cdefs.h>
-
-__BEGIN_DECLS
-struct disklabel *getdiskbyname(const char *);
-__END_DECLS
-
-#endif
 
 #endif /* __APPLE_API_OBSOLETE */
 

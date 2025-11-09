@@ -37,7 +37,7 @@
 */
 @protocol ODQueryDelegate <NSObject>
 @required
-- (void)query:(ODQuery *)inQuery foundResults:(NSArray *)inResults error:(NSError *)inError;
+- (void)query:(ODQuery *)inQuery foundResults:(NSArray *)inResults error:(NSError *)inError NS_AVAILABLE(10_6, NA);
 @end
 
 /*!
@@ -62,7 +62,7 @@
 + (ODQuery *)queryWithNode:(ODNode *)inNode forRecordTypes:(id)inRecordTypeOrList attribute:(ODAttributeType)inAttribute
                  matchType:(ODMatchType)inMatchType queryValues:(id)inQueryValueOrList 
           returnAttributes:(id)inReturnAttributeOrList maximumResults:(NSInteger)inMaximumResults
-                     error:(NSError **)outError;
+                     error:(NSError **)outError NS_AVAILABLE(10_6, NA);
 
 /*!
     @method     initWithNode:forRecordTypes:attribute:matchType:queryValues:returnAttributes:maximumResults:error:
@@ -74,7 +74,7 @@
 */
 - (id)initWithNode:(ODNode *)inNode forRecordTypes:(id)inRecordTypeOrList attribute:(ODAttributeType)inAttribute
          matchType:(ODMatchType)inMatchType queryValues:(id)inQueryValueOrList 
-  returnAttributes:(id)inReturnAttributeOrList maximumResults:(NSInteger)inMaximumResults error:(NSError **)outError;
+  returnAttributes:(id)inReturnAttributeOrList maximumResults:(NSInteger)inMaximumResults error:(NSError **)outError NS_AVAILABLE(10_6, NA);
 
 /*!
     @method     resultsAllowingPartial:error:
@@ -84,14 +84,14 @@
                 even if previous calls were made with NO.  outError is optional parameter, nil can be passed if error 
                 details are not needed.
 */
-- (NSArray *)resultsAllowingPartial:(BOOL)inAllowPartialResults error:(NSError **)outError;
+- (NSArray *)resultsAllowingPartial:(BOOL)inAllowPartialResults error:(NSError **)outError NS_AVAILABLE(10_6, NA);
 
 /*!
     @property   delegate
     @abstract   The currently set delegate
     @discussion The query delegate which will receive asynchronous query results.
 */
-@property (nonatomic, readwrite, assign) id <ODQueryDelegate> delegate;
+@property (nonatomic, readwrite, assign) id <ODQueryDelegate> delegate NS_AVAILABLE(10_6, NA);
 
 /*!
     @method     scheduleInRunLoop:forMode:
@@ -99,14 +99,14 @@
     @discussion Adds the query object to the specified NSRunLoop to receive asynchronous results.  A delegate must be set
                 in advance otherwise results may be lost due to the lack of a receiver.
 */
-- (void)scheduleInRunLoop:(NSRunLoop *)inRunLoop forMode:(NSString *)inMode;
+- (void)scheduleInRunLoop:(NSRunLoop *)inRunLoop forMode:(NSString *)inMode NS_AVAILABLE(10_6, NA);
 
 /*!
     @method     removeFromRunLoop:forMode:
     @abstract   Removes the query object from the specified NSRunLoop
     @discussion Removes the query object from the specified NSRunLoop.
 */
-- (void)removeFromRunLoop:(NSRunLoop *)inRunLoop forMode:(NSString *)inMode;
+- (void)removeFromRunLoop:(NSRunLoop *)inRunLoop forMode:(NSString *)inMode NS_AVAILABLE(10_6, NA);
 
 /*!
     @method     synchronize
@@ -116,13 +116,13 @@
                 [inError code] == kODErrorQuerySynchronize and [inError domain] == ODFrameworkErrorDomain, signifying that
                 all existing results should be thrown away in preparation for new results.
 */
-- (void)synchronize;
+- (void)synchronize NS_AVAILABLE(10_6, NA);
 
 /*!
     @property   operationQueue
     @abstract   The NSOperationQueue on which asynchronous results are delivered to the delegate.
     @discussion The NSOperationQueue on which asynchronous results are delivered to the delegate.
  */
-@property (readwrite, retain) NSOperationQueue * operationQueue;
+@property (readwrite, retain) NSOperationQueue * operationQueue NS_AVAILABLE(10_6, NA);
 
 @end

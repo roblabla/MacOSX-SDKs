@@ -1,3 +1,4 @@
+#include <Availability.h>
 /* Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -63,10 +64,10 @@
 #define __attribute__(__x)
 #endif
 #define APR_INLINE
-#define APR_HAS_INLINE		0
+#define APR_HAS_INLINE           0
 #else
 #define APR_INLINE __inline__
-#define APR_HAS_INLINE		1
+#define APR_HAS_INLINE           1
 #endif
 
 #define APR_HAVE_ARPA_INET_H     1
@@ -83,6 +84,7 @@
 #define APR_HAVE_NETINET_SCTP_H  0
 #define APR_HAVE_NETINET_SCTP_UIO_H 0
 #define APR_HAVE_NETINET_TCP_H   1
+#define APR_HAVE_PROCESS_H       0
 #define APR_HAVE_PTHREAD_H       1
 #define APR_HAVE_SEMAPHORE_H     1
 #define APR_HAVE_SIGNAL_H        1
@@ -116,12 +118,48 @@
  */
 
 #if APR_HAVE_WINDOWS_H
-#include <windows.h>
+/* If windows.h was already included, our preferences don't matter.
+ * If not, include a restricted set of windows headers to our tastes.
+ */
+#ifndef _WINDOWS_
+
+#ifndef WIN32_LEAN_AND_MEAN
+#define WIN32_LEAN_AND_MEAN
 #endif
 
-#if APR_HAVE_WINSOCK2_H
-#include <winsock2.h>
+#ifndef _WIN32_WINNT
+/* Restrict the server to a subset of Windows XP header files by default
+ */
+#define _WIN32_WINNT 0x0501
 #endif
+
+#ifndef NOUSER
+#define NOUSER
+#endif
+#ifndef NOMCX
+#define NOMCX
+#endif
+#ifndef NOIME
+#define NOIME
+#endif
+
+#include <windows.h>
+/* 
+ * Add a _very_few_ declarations missing from the restricted set of headers
+ * (If this list becomes extensive, re-enable the required headers above!)
+ * winsock headers were excluded by WIN32_LEAN_AND_MEAN, so include them now
+ */
+#define SW_HIDE             0
+#ifndef _WIN32_WCE
+#include <winsock2.h>
+#include <ws2tcpip.h>
+#include <mswsock.h>
+#else
+#include <winsock.h>
+#endif
+
+#endif /* ndef _WINDOWS_ */
+#endif /* APR_HAVE_WINDOWS_H */
 
 #if APR_HAVE_SYS_TYPES_H
 #include <sys/types.h>
@@ -282,27 +320,19 @@ typedef  int             apr_int32_t;
 typedef  unsigned int    apr_uint32_t;
 
 #ifdef __LP64__
-typedef  long            apr_int64_t;
+#define APR_SIZEOF_VOIDP 8
 #else
-typedef  long long            apr_int64_t;
+#define APR_SIZEOF_VOIDP 4
 #endif
-#ifdef __LP64__
-typedef  unsigned long   apr_uint64_t;
-#else
-typedef  unsigned long long   apr_uint64_t;
-#endif
+
+typedef int64_t apr_int64_t;
+typedef uint64_t apr_uint64_t;
 
 typedef  size_t          apr_size_t;
 typedef  ssize_t         apr_ssize_t;
 typedef  off_t           apr_off_t;
 typedef  socklen_t       apr_socklen_t;
 typedef  ino_t           apr_ino_t;
-
-#ifdef __LP64__
-#define APR_SIZEOF_VOIDP 8
-#else
-#define APR_SIZEOF_VOIDP 4
-#endif
 
 #if APR_SIZEOF_VOIDP == 8
 typedef  apr_uint64_t            apr_uintptr_t;
@@ -400,7 +430,7 @@ typedef  apr_uint32_t            apr_uintptr_t;
  *
  * </PRE>
  */
-#define APR_THREAD_FUNC
+#define APR_THREAD_FUNC       
 
 /**
  * The public APR functions are declared with APR_DECLARE(), so they may
@@ -462,6 +492,7 @@ typedef  apr_uint32_t            apr_uintptr_t;
  * to find the logic for this definition search for "ssize_t_fmt" in
  * configure.in.
  */
+
 #define APR_SSIZE_T_FMT "ld"
 
 /* And APR_SIZE_T_FMT */
@@ -474,21 +505,21 @@ typedef  apr_uint32_t            apr_uintptr_t;
 #define APR_PID_T_FMT "d"
 
 /* And APR_INT64_T_FMT */
-#ifdef __LP64__
+#if defined(__LP64__) && defined(__MAC_OS_X_VERSION_MIN_REQUIRED) && __MAC_OS_X_VERSION_MIN_REQUIRED < 1080
 #define APR_INT64_T_FMT "ld"
 #else
 #define APR_INT64_T_FMT "lld"
 #endif
 
 /* And APR_UINT64_T_FMT */
-#ifdef __LP64__
+#if defined(__LP64__) && defined(__MAC_OS_X_VERSION_MIN_REQUIRED) && __MAC_OS_X_VERSION_MIN_REQUIRED < 1080
 #define APR_UINT64_T_FMT "lu"
 #else
 #define APR_UINT64_T_FMT "llu"
 #endif
 
 /* And APR_UINT64_T_HEX_FMT */
-#ifdef __LP64__
+#if defined(__LP64__) && defined(__MAC_OS_X_VERSION_MIN_REQUIRED) && __MAC_OS_X_VERSION_MIN_REQUIRED < 1080
 #define APR_UINT64_T_HEX_FMT "lx"
 #else
 #define APR_UINT64_T_HEX_FMT "llx"

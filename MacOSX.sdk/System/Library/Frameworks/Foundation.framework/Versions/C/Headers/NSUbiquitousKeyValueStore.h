@@ -1,5 +1,5 @@
 /*	NSUbiquitousKeyValueStore.h
-	Copyright (c) 2011, Apple Inc. All rights reserved.
+	Copyright (c) 2011-2012, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -49,8 +49,9 @@ FOUNDATION_EXPORT NSString * const NSUbiquitousKeyValueStoreChangeReasonKey NS_A
 FOUNDATION_EXPORT NSString * const NSUbiquitousKeyValueStoreChangedKeysKey NS_AVAILABLE(10_7, 5_0);
 
 enum {
-    NSUbiquitousKeyValueStoreServerChange,
-    NSUbiquitousKeyValueStoreInitialSyncChange,
-    NSUbiquitousKeyValueStoreQuotaViolationChange
+    NSUbiquitousKeyValueStoreServerChange NS_ENUM_AVAILABLE(10_7, 5_0),
+    NSUbiquitousKeyValueStoreInitialSyncChange NS_ENUM_AVAILABLE(10_7, 5_0),
+    NSUbiquitousKeyValueStoreQuotaViolationChange NS_ENUM_AVAILABLE(10_7, 5_0),
+    NSUbiquitousKeyValueStoreAccountChange NS_ENUM_AVAILABLE(10_8, 6_0)
 };
 

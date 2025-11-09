@@ -853,6 +853,9 @@ public:
 	
 private:
 	
+	// Method to show that the disk spinning up in spindump stacks
+	void							__DISK_IS_ASLEEP__ ( void ) __attribute__((noinline));
+
 #if !TARGET_OS_EMBEDDED
 	// Space reserved for future expansion.
 	OSMetaClassDeclareReservedUnused ( IOSCSIProtocolInterface,  7 );

@@ -5,7 +5,7 @@
  
      Version:    ATS
  
-     Copyright:  © 1999-2011 by Apple Inc., all rights reserved.
+     Copyright:  © 1999-2012 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

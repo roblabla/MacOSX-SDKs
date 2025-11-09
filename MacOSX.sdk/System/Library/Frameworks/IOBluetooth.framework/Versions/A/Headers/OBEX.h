@@ -66,9 +66,7 @@ enum OBEXErrorCodes
 	kOBEXTimeoutError					= -21855,		// timeout error
 	kOBEXBadRequestError				= -21856,		// bad request error
 	kOBEXCancelledError					= -21857,
-#if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_1_1
 	kOBEXForbiddenError					= -21858,		// operation was not allowed on remote device (wrong permissions, etc.).
-#endif /* BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_1_1 */
 	
 	kOBEXUnauthorizedError				= -21859,		// Unauthorized
 	kOBEXNotAcceptableError				= -21860,		// Not Acceptable
@@ -442,8 +440,6 @@ enum OBEXRealmValues
 	kOBEXRealmUNICODE								= 0xFF,
 };
 
-#if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_1_1
-
 //===========================================================================================================================
 //	OBEXOpCodeSessionValues
 //===========================================================================================================================
@@ -491,8 +487,6 @@ enum OBEXSessionParameterTags
 	kOBEXSessionParameterTagSessionOpcode					= 0x05
 
 };
-
-#endif /* BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_1_1 */
 
 //===========================================================================================================================
 //	OBEXVersions
@@ -845,7 +839,7 @@ typedef	void	(*OBEXSessionEventCallback)	( const OBEXSessionEvent * inEvent );
 				***		This API may be removed any time in the future.
 */
 
-OBEXError	OBEXSessionDelete( OBEXSessionRef inSessionRef )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
+OBEXError	OBEXSessionDelete( OBEXSessionRef inSessionRef )	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function	OBEXSessionHasOpenOBEXConnection
@@ -863,7 +857,7 @@ OBEXError	OBEXSessionDelete( OBEXSessionRef inSessionRef )	DEPRECATED_IN_BLUETOO
 */
 
 OBEXError	OBEXSessionHasOpenOBEXConnection(	OBEXSessionRef	inSessionRef,
-												Boolean *		outIsConnected )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
+												Boolean *		outIsConnected )	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function	OBEXSessionGetMaxPacketLength
@@ -879,7 +873,7 @@ OBEXError	OBEXSessionHasOpenOBEXConnection(	OBEXSessionRef	inSessionRef,
 				***		This API may be removed any time in the future.
 */
 
-OBEXError	OBEXSessionGetMaxPacketLength( OBEXSessionRef inSessionRef, OBEXMaxPacketLength * outLength )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
+OBEXError	OBEXSessionGetMaxPacketLength( OBEXSessionRef inSessionRef, OBEXMaxPacketLength * outLength )	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function	OBEXSessionGetAvailableCommandPayloadLength
@@ -901,7 +895,7 @@ OBEXError	OBEXSessionGetMaxPacketLength( OBEXSessionRef inSessionRef, OBEXMaxPac
 				***		This API may be removed any time in the future.
 */
 
-OBEXError	OBEXSessionGetAvailableCommandPayloadLength( OBEXSessionRef inSessionRef, OBEXOpCode inOpCode, OBEXMaxPacketLength * outLength )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
+OBEXError	OBEXSessionGetAvailableCommandPayloadLength( OBEXSessionRef inSessionRef, OBEXOpCode inOpCode, OBEXMaxPacketLength * outLength )	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function	OBEXSessionGetAvailableCommandPayloadLength
@@ -925,7 +919,7 @@ OBEXError	OBEXSessionGetAvailableCommandPayloadLength( OBEXSessionRef inSessionR
 				***		This API may be removed any time in the future.
 */
 
-OBEXError	OBEXSessionGetAvailableCommandResponsePayloadLength( OBEXSessionRef inSessionRef, OBEXOpCode inOpCode, OBEXMaxPacketLength * outLength )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
+OBEXError	OBEXSessionGetAvailableCommandResponsePayloadLength( OBEXSessionRef inSessionRef, OBEXOpCode inOpCode, OBEXMaxPacketLength * outLength )	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 #if 0
 #pragma mark -
@@ -966,7 +960,7 @@ OBEXError	OBEXSessionConnect(	OBEXSessionRef	inSessionRef,
 								void* 						inOptionalHeaders,
 								size_t						inOptionalHeadersLength,
 								OBEXSessionEventCallback	inCallback,
-								void *						inUserRefCon )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
+								void *						inUserRefCon )	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 											
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function	OBEXSessionDisconnect
@@ -991,7 +985,7 @@ OBEXError	OBEXSessionDisconnect(	OBEXSessionRef					inSessionRef,
 									void*	 						inOptionalHeaders,
 									size_t							inOptionalHeadersLength,
 									OBEXSessionEventCallback		inCallback,
-									void *							inUserRefCon )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
+									void *							inUserRefCon )	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function	OBEXSessionPut
@@ -1023,7 +1017,7 @@ OBEXError	OBEXSessionPut(	OBEXSessionRef					inSessionRef,
 							void* 							inBodyData,
 							size_t							inBodyDataLength,
 							OBEXSessionEventCallback		inCallback,
-							void *							inUserRefCon )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
+							void *							inUserRefCon )	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 										
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function	OBEXSessionGet
@@ -1049,7 +1043,7 @@ OBEXError	OBEXSessionGet(	OBEXSessionRef				inSessionRef,
 							void* 						inHeadersData,
 							size_t						inHeadersDataLength,
 							OBEXSessionEventCallback	inCallback,
-							void*						inUserRefCon )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
+							void*						inUserRefCon )	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 										
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function	OBEXSessionAbort
@@ -1074,7 +1068,7 @@ OBEXError	OBEXSessionAbort(	OBEXSessionRef				inSessionRef,
 								void* 						inOptionalHeaders,
 								size_t						inOptionalHeadersLength,
 								OBEXSessionEventCallback	inCallback,
-								void *						inUserRefcon )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
+								void *						inUserRefcon )	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 											
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function	OBEXSessionSetPath
@@ -1103,7 +1097,7 @@ OBEXError	OBEXSessionSetPath(	OBEXSessionRef				inSessionRef,
 								void* 						inOptionalHeaders,
 								size_t						inOptionalHeadersLength,
 								OBEXSessionEventCallback	inCallback,
-								void*						inUserRefcon )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
+								void*						inUserRefcon )	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 #if 0
 #pragma mark -
@@ -1145,7 +1139,7 @@ OBEXError	OBEXSessionConnectResponse(	OBEXSessionRef						inSessionRef,
 										void* 								inOptionalHeaders,
 										size_t								inOptionalHeadersLength,
 										OBEXSessionEventCallback			inCallback,
-										void *								inUserRefCon )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
+										void *								inUserRefCon )	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function	OBEXSessionDisconnectResponse
@@ -1172,7 +1166,7 @@ OBEXError	OBEXSessionDisconnectResponse(	OBEXSessionRef							inSessionRef,
 											void* 									inOptionalHeaders,
 											size_t									inOptionalHeadersLength,
 											OBEXSessionEventCallback				inCallback,
-											void *									inUserRefCon )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
+											void *									inUserRefCon )	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 											
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function	OBEXSessionGetResponse
@@ -1199,7 +1193,7 @@ OBEXError	OBEXSessionGetResponse(	OBEXSessionRef						inSessionRef,
 									void* 								inOptionalHeaders,
 									size_t								inOptionalHeadersLength,
 									OBEXSessionEventCallback			inCallback,
-									void *								inUserRefCon )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
+									void *								inUserRefCon )	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function	OBEXSessionPutResponse
@@ -1226,7 +1220,7 @@ OBEXError	OBEXSessionPutResponse(	OBEXSessionRef						inSessionRef,
 									void* 								inOptionalHeaders,
 									size_t								inOptionalHeadersLength,
 									OBEXSessionEventCallback			inCallback,
-									void *								inUserRefCon )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
+									void *								inUserRefCon )	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function	OBEXSessionAbortResponse
@@ -1253,7 +1247,7 @@ OBEXError	OBEXSessionAbortResponse(	OBEXSessionRef						inSessionRef,
 										void* 								inOptionalHeaders,
 										size_t								inOptionalHeadersLength,
 										OBEXSessionEventCallback			inCallback,
-										void *								inUserRefCon )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;		
+										void *								inUserRefCon )	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;		
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function	OBEXSessionSetPathResponse
@@ -1280,7 +1274,7 @@ OBEXError	OBEXSessionSetPathResponse(	OBEXSessionRef						inSessionRef,
 										void* 								inOptionalHeaders,
 										size_t								inOptionalHeadersLength,
 										OBEXSessionEventCallback			inCallback,
-										void *								inUserRefCon )	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
+										void *								inUserRefCon )	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function	OBEXSessionSetServerCallback
@@ -1301,7 +1295,7 @@ OBEXError	OBEXSessionSetPathResponse(	OBEXSessionRef						inSessionRef,
 
 OBEXError	OBEXSessionSetServerCallback(	OBEXSessionRef						inSessionRef,
 											OBEXSessionEventCallback			inCallback,
-											void *								inUserRefCon	)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
+											void *								inUserRefCon	)	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 #if 0
@@ -1387,7 +1381,7 @@ CFDataRef	OBEXCreateVCard(	const void *	inFirstName,
 							const void *	inTitle,
 							uint32_t		inTitleLength,
 							const void *	inTitleCharset,
-							uint32_t		inTitleCharsetLength	)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
+							uint32_t		inTitleCharsetLength	)	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function	OBEXCreateVEvent
@@ -1438,7 +1432,7 @@ CFDataRef		OBEXCreateVEvent(	const char *	inCharset,
 								const char *	inLocation,
 								uint32_t		inLocationLength,
 								const char *	inXIRMCLUID,
-								uint32_t		inXIRMCLUIDLength			)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
+								uint32_t		inXIRMCLUIDLength			)	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 

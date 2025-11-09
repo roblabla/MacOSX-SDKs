@@ -4,10 +4,10 @@
  *	  Routines to support inter-object dependencies.
  *
  *
- * Portions Copyright (c) 1996-2010, PostgreSQL Global Development Group
+ * Portions Copyright (c) 1996-2011, PostgreSQL Global Development Group
  * Portions Copyright (c) 1994, Regents of the University of California
  *
- * $PostgreSQL: pgsql/src/include/catalog/dependency.h,v 1.45 2010/04/05 01:09:53 tgl Exp $
+ * src/include/catalog/dependency.h
  *
  *-------------------------------------------------------------------------
  */
@@ -15,6 +15,7 @@
 #define DEPENDENCY_H
 
 #include "nodes/parsenodes.h"	/* for DropBehavior */
+#include "catalog/objectaddress.h"
 
 
 /*
@@ -49,6 +50,12 @@
  * Example: a trigger that's created to enforce a foreign-key constraint
  * is made internally dependent on the constraint's pg_constraint entry.
  *
+ * DEPENDENCY_EXTENSION ('e'): the dependent object is a member of the
+ * extension that is the referenced object.  The dependent object can be
+ * dropped only via DROP EXTENSION on the referenced object.  Functionally
+ * this dependency type acts the same as an internal dependency, but it's
+ * kept separate for clarity and to simplify pg_dump.
+ *
  * DEPENDENCY_PIN ('p'): there is no dependent object; this type of entry
  * is a signal that the system itself depends on the referenced object,
  * and so that object must never be deleted.  Entries of this type are
@@ -63,6 +70,7 @@ typedef enum DependencyType
 	DEPENDENCY_NORMAL = 'n',
 	DEPENDENCY_AUTO = 'a',
 	DEPENDENCY_INTERNAL = 'i',
+	DEPENDENCY_EXTENSION = 'e',
 	DEPENDENCY_PIN = 'p'
 } DependencyType;
 
@@ -100,17 +108,6 @@ typedef enum SharedDependencyType
 	SHARED_DEPENDENCY_INVALID = 0
 } SharedDependencyType;
 
-
-/*
- * The two objects related by a dependency are identified by ObjectAddresses.
- */
-typedef struct ObjectAddress
-{
-	Oid			classId;		/* Class Id from pg_class */
-	Oid			objectId;		/* OID of the object */
-	int32		objectSubId;	/* Subitem within object (eg column), or 0 */
-} ObjectAddress;
-
 /* expansible list of ObjectAddresses (private in dependency.c) */
 typedef struct ObjectAddresses ObjectAddresses;
 
@@ -124,6 +121,7 @@ typedef enum ObjectClass
 	OCLASS_PROC,				/* pg_proc */
 	OCLASS_TYPE,				/* pg_type */
 	OCLASS_CAST,				/* pg_cast */
+	OCLASS_COLLATION,			/* pg_collation */
 	OCLASS_CONSTRAINT,			/* pg_constraint */
 	OCLASS_CONVERSION,			/* pg_conversion */
 	OCLASS_DEFAULT,				/* pg_attrdef */
@@ -148,6 +146,7 @@ typedef enum ObjectClass
 	OCLASS_FOREIGN_SERVER,		/* pg_foreign_server */
 	OCLASS_USER_MAPPING,		/* pg_user_mapping */
 	OCLASS_DEFACL,				/* pg_default_acl */
+	OCLASS_EXTENSION,			/* pg_extension */
 	MAX_OCLASS					/* MUST BE LAST */
 } ObjectClass;
 
@@ -175,6 +174,7 @@ extern void recordDependencyOnSingleRelExpr(const ObjectAddress *depender,
 extern ObjectClass getObjectClass(const ObjectAddress *object);
 
 extern char *getObjectDescription(const ObjectAddress *object);
+extern char *getObjectDescriptionOids(Oid classid, Oid objid);
 
 extern ObjectAddresses *new_object_addresses(void);
 
@@ -201,11 +201,20 @@ extern void recordMultipleDependencies(const ObjectAddress *depender,
 						   int nreferenced,
 						   DependencyType behavior);
 
-extern long deleteDependencyRecordsFor(Oid classId, Oid objectId);
+extern void recordDependencyOnCurrentExtension(const ObjectAddress *object,
+								   bool isReplace);
+
+extern long deleteDependencyRecordsFor(Oid classId, Oid objectId,
+						   bool skipExtensionDeps);
+
+extern long deleteDependencyRecordsForClass(Oid classId, Oid objectId,
+								Oid refclassId, char deptype);
 
 extern long changeDependencyFor(Oid classId, Oid objectId,
 					Oid refClassId, Oid oldRefObjectId,
 					Oid newRefObjectId);
+
+extern Oid	getExtensionOfObject(Oid classId, Oid objectId);
 
 extern bool sequenceIsOwned(Oid seqId, Oid *tableId, int32 *colId);
 

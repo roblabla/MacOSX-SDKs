@@ -1,5 +1,5 @@
 /*	NSGarbageCollector.h
-	Copyright (c) 2006-2011, Apple Inc. All rights reserved.
+	Copyright (c) 2006-2012, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -19,8 +19,8 @@ NS_AUTOMATED_REFCOUNT_UNAVAILABLE
 - (void)collectIfNeeded;
 - (void)collectExhaustively;
 
-- (void)disableCollectorForPointer:(void *)ptr;
-- (void)enableCollectorForPointer:(void *)ptr;
+- (void)disableCollectorForPointer:(const void *)ptr;
+- (void)enableCollectorForPointer:(const void *)ptr;
 
 - (NSZone *)zone;
 

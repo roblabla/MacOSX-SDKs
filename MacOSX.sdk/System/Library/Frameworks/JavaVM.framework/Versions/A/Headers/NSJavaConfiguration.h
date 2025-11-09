@@ -46,16 +46,16 @@
 // This permits per-application, per-user and per-system specifications.
 
 
-extern NSString *NSDefaultJavaVendorKey;
+extern NSString *NSDefaultJavaVendorKey DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
-extern NSString *NSDefaultJavaVMKey;
-extern NSString *NSDefaultJavaCompilerKey;
-extern NSString *NSDefaultJavaClassPathKey;
-extern NSString *NSDefaultJavaLibraryKey;
-extern NSString *NSDefaultJavaDebugLibraryKey;
-extern NSString *NSDefaultObjCJavaLibraryKey;
-extern NSString *NSDefaultObjCJavaDebugLibraryKey;
-extern NSString *NSJavaVMArgumentsKey;
+extern NSString *NSDefaultJavaVMKey DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
+extern NSString *NSDefaultJavaCompilerKey DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
+extern NSString *NSDefaultJavaClassPathKey DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
+extern NSString *NSDefaultJavaLibraryKey DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
+extern NSString *NSDefaultJavaDebugLibraryKey DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
+extern NSString *NSDefaultObjCJavaLibraryKey DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
+extern NSString *NSDefaultObjCJavaDebugLibraryKey DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
+extern NSString *NSJavaVMArgumentsKey DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 @interface NSJavaConfiguration : NSObject
@@ -63,17 +63,17 @@ extern NSString *NSJavaVMArgumentsKey;
     NSString *_vendorName;
 }
 
-+ (NSJavaConfiguration *) defaultConfiguration;
++ (NSJavaConfiguration *) defaultConfiguration DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
-+ (NSJavaConfiguration *) configurationForVendor:(NSString *)vendorName;
-+ (NSArray *) vendorNames;
++ (NSJavaConfiguration *) configurationForVendor:(NSString *)vendorName DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
++ (NSArray *) vendorNames DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
-- init;
-- initWithVendor:(NSString *)vendorName;
-- (NSString *) vendorName;
+- init DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
+- initWithVendor:(NSString *)vendorName DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (NSString *) vendorName DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
-- valueForKey:(NSString *)keyName;
-- valueForKey:(NSString *)keyName expandEnvironmentVariables:(BOOL)flag;
+- valueForKey:(NSString *)keyName DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
+- valueForKey:(NSString *)keyName expandEnvironmentVariables:(BOOL)flag DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 @end
 

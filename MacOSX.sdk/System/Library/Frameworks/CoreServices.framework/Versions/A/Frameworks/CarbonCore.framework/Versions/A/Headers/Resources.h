@@ -2,16 +2,10 @@
      File:       CarbonCore/Resources.h
  
      Contains:   Resource Manager Interfaces.
+                 The contents of this header file are deprecated.
+                 Use Foundation or CoreFoundation bundles instead. 
  
-     Version:    CarbonCore-960.18~3
- 
-     Copyright:  © 1985-2008 by Apple Computer, Inc., all rights reserved
- 
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
- 
-                     http://developer.apple.com/bugreporter/
- 
+     Copyright:  © 1985-2011 by Apple Inc. All rights reserved.
 */
 #ifndef __RESOURCES__
 #define __RESOURCES__
@@ -30,7 +24,7 @@
 
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -99,7 +93,7 @@ typedef STACK_UPP_TYPE(ResErrProcPtr)                           ResErrUPP;
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ResErrUPP
-NewResErrUPP(ResErrProcPtr userRoutine)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewResErrUPP(ResErrProcPtr userRoutine)                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  DisposeResErrUPP()
@@ -110,7 +104,7 @@ NewResErrUPP(ResErrProcPtr userRoutine)                       AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeResErrUPP(ResErrUPP userUPP)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeResErrUPP(ResErrUPP userUPP)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  InvokeResErrUPP()
@@ -123,7 +117,7 @@ DisposeResErrUPP(ResErrUPP userUPP)                           AVAILABLE_MAC_OS_X
 extern void
 InvokeResErrUPP(
   OSErr      thErr,
-  ResErrUPP  userUPP)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ResErrUPP  userUPP)                                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 #if __MACH__
   #ifdef __cplusplus
@@ -151,7 +145,7 @@ typedef CALLBACK_API( OSErr , ResourceEndianFilterPtr )(Handle theResource, Bool
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-CloseResFile(ResFileRefNum refNum)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+CloseResFile(ResFileRefNum refNum)                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -166,7 +160,7 @@ CloseResFile(ResFileRefNum refNum)                            AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-ResError(void)                                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+ResError(void)                                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -181,7 +175,7 @@ ResError(void)                                                AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern ResFileRefNum 
-CurResFile(void)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+CurResFile(void)                                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -196,7 +190,7 @@ CurResFile(void)                                              AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern ResFileRefNum 
-HomeResFile(Handle theResource)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+HomeResFile(Handle theResource)                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -211,7 +205,7 @@ HomeResFile(Handle theResource)                               AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-UseResFile(ResFileRefNum refNum)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+UseResFile(ResFileRefNum refNum)                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -226,7 +220,7 @@ UseResFile(ResFileRefNum refNum)                              AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern ResourceCount 
-CountTypes(void)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+CountTypes(void)                                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -241,7 +235,7 @@ CountTypes(void)                                              AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern ResourceCount 
-Count1Types(void)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+Count1Types(void)                                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -258,7 +252,7 @@ Count1Types(void)                                             AVAILABLE_MAC_OS_X
 extern void 
 GetIndType(
   ResType *       theType,
-  ResourceIndex   itemIndex)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ResourceIndex   itemIndex)                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -275,7 +269,7 @@ GetIndType(
 extern void 
 Get1IndType(
   ResType *       theType,
-  ResourceIndex   itemIndex)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ResourceIndex   itemIndex)                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -290,7 +284,7 @@ Get1IndType(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-SetResLoad(Boolean load)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SetResLoad(Boolean load)                                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -305,7 +299,7 @@ SetResLoad(Boolean load)                                      AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern ResourceCount 
-CountResources(ResType theType)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+CountResources(ResType theType)                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -320,7 +314,7 @@ CountResources(ResType theType)                               AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern ResourceCount 
-Count1Resources(ResType theType)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+Count1Resources(ResType theType)                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -337,7 +331,7 @@ Count1Resources(ResType theType)                              AVAILABLE_MAC_OS_X
 extern Handle 
 GetIndResource(
   ResType         theType,
-  ResourceIndex   itemIndex)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ResourceIndex   itemIndex)                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -354,7 +348,7 @@ GetIndResource(
 extern Handle 
 Get1IndResource(
   ResType         theType,
-  ResourceIndex   itemIndex)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ResourceIndex   itemIndex)                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -371,7 +365,7 @@ Get1IndResource(
 extern Handle 
 GetResource(
   ResType   theType,
-  ResID     theID)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ResID     theID)                                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -388,7 +382,7 @@ GetResource(
 extern Handle 
 Get1Resource(
   ResType   theType,
-  ResID     theID)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ResID     theID)                                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -405,7 +399,7 @@ Get1Resource(
 extern Handle 
 GetNamedResource(
   ResType            theType,
-  ConstStr255Param   name)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ConstStr255Param   name)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -422,7 +416,7 @@ GetNamedResource(
 extern Handle 
 Get1NamedResource(
   ResType            theType,
-  ConstStr255Param   name)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ConstStr255Param   name)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -440,7 +434,7 @@ Get1NamedResource(
     #define MacLoadResource LoadResource
 #endif
 extern void 
-MacLoadResource(Handle theResource)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MacLoadResource(Handle theResource)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -455,7 +449,7 @@ MacLoadResource(Handle theResource)                           AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-ReleaseResource(Handle theResource)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+ReleaseResource(Handle theResource)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -470,7 +464,7 @@ ReleaseResource(Handle theResource)                           AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-DetachResource(Handle theResource)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DetachResource(Handle theResource)                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -485,7 +479,7 @@ DetachResource(Handle theResource)                            AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern ResID 
-UniqueID(ResType theType)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+UniqueID(ResType theType)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -500,7 +494,7 @@ UniqueID(ResType theType)                                     AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern ResID 
-Unique1ID(ResType theType)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+Unique1ID(ResType theType)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -515,7 +509,7 @@ Unique1ID(ResType theType)                                    AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern ResAttributes 
-GetResAttrs(Handle theResource)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetResAttrs(Handle theResource)                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -534,7 +528,7 @@ GetResInfo(
   Handle     theResource,
   ResID *    theID,
   ResType *  theType,
-  Str255     name)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Str255     name)                                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -552,7 +546,7 @@ extern void
 SetResInfo(
   Handle             theResource,
   ResID              theID,
-  ConstStr255Param   name)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ConstStr255Param   name)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -571,7 +565,7 @@ AddResource(
   Handle             theData,
   ResType            theType,
   ResID              theID,
-  ConstStr255Param   name)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ConstStr255Param   name)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -586,7 +580,7 @@ AddResource(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern long 
-GetResourceSizeOnDisk(Handle theResource)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetResourceSizeOnDisk(Handle theResource)                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -601,7 +595,7 @@ GetResourceSizeOnDisk(Handle theResource)                     AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern long 
-GetMaxResourceSize(Handle theResource)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetMaxResourceSize(Handle theResource)                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -618,7 +612,7 @@ GetMaxResourceSize(Handle theResource)                        AVAILABLE_MAC_OS_X
 extern void 
 SetResAttrs(
   Handle          theResource,
-  ResAttributes   attrs)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ResAttributes   attrs)                                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -633,7 +627,7 @@ SetResAttrs(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-ChangedResource(Handle theResource)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+ChangedResource(Handle theResource)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -648,7 +642,7 @@ ChangedResource(Handle theResource)                           AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-RemoveResource(Handle theResource)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+RemoveResource(Handle theResource)                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -663,7 +657,7 @@ RemoveResource(Handle theResource)                            AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-UpdateResFile(ResFileRefNum refNum)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+UpdateResFile(ResFileRefNum refNum)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -678,7 +672,7 @@ UpdateResFile(ResFileRefNum refNum)                           AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-WriteResource(Handle theResource)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+WriteResource(Handle theResource)                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -693,7 +687,7 @@ WriteResource(Handle theResource)                             AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-SetResPurge(Boolean install)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SetResPurge(Boolean install)                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -708,7 +702,7 @@ SetResPurge(Boolean install)                                  AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern ResFileAttributes 
-GetResFileAttrs(ResFileRefNum refNum)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetResFileAttrs(ResFileRefNum refNum)                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -725,7 +719,7 @@ GetResFileAttrs(ResFileRefNum refNum)                         AVAILABLE_MAC_OS_X
 extern void 
 SetResFileAttrs(
   ResFileRefNum       refNum,
-  ResFileAttributes   attrs)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ResFileAttributes   attrs)                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -744,7 +738,7 @@ ReadPartialResource(
   Handle   theResource,
   long     offset,
   void *   buffer,
-  long     count)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long     count)                                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -763,7 +757,7 @@ WritePartialResource(
   Handle        theResource,
   long          offset,
   const void *  buffer,
-  long          count)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long          count)                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -780,7 +774,7 @@ WritePartialResource(
 extern void 
 SetResourceSize(
   Handle   theResource,
-  long     newSize)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long     newSize)                                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -795,7 +789,7 @@ SetResourceSize(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Handle 
-GetNextFOND(Handle fondHandle)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetNextFOND(Handle fondHandle)                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /* QuickTime 3.0*/
@@ -844,7 +838,7 @@ enum {
 extern OSErr 
 InsertResourceFile(
   ResFileRefNum       refNum,
-  RsrcChainLocation   where)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  RsrcChainLocation   where)                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -863,7 +857,7 @@ InsertResourceFile(
  *    Non-Carbon CFM:   not available
  */
 extern OSErr 
-DetachResourceFile(ResFileRefNum refNum)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DetachResourceFile(ResFileRefNum refNum)                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -882,7 +876,7 @@ DetachResourceFile(ResFileRefNum refNum)                      AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern OSErr 
-GetTopResourceFile(ResFileRefNum * refNum)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetTopResourceFile(ResFileRefNum * refNum)                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -905,7 +899,7 @@ GetTopResourceFile(ResFileRefNum * refNum)                    AVAILABLE_MAC_OS_X
 extern OSErr 
 GetNextResourceFile(
   ResFileRefNum    curRefNum,
-  ResFileRefNum *  nextRefNum)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ResFileRefNum *  nextRefNum)                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -922,7 +916,7 @@ GetNextResourceFile(
 extern ResFileRefNum 
 FSOpenResFile(
   const FSRef *  ref,
-  SInt8          permission)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt8          permission)                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -944,7 +938,7 @@ FSCreateResFile(
   FSCatalogInfoBitmap    whichInfo,
   const FSCatalogInfo *  catalogInfo,       /* can be NULL */
   FSRef *                newRef,            /* can be NULL */
-  FSSpecPtr              newSpec)           /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  FSSpecPtr              newSpec)           /* can be NULL */ __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -969,7 +963,7 @@ extern Boolean
 FSResourceFileAlreadyOpen(
   const FSRef *    resourceFileRef,
   Boolean *        inChain,
-  ResFileRefNum *  refNum)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ResFileRefNum *  refNum)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -997,7 +991,7 @@ extern OSErr
 FSOpenOrphanResFile(
   const FSRef *    ref,
   SignedByte       permission,
-  ResFileRefNum *  refNum)                                    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  ResFileRefNum *  refNum)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1061,7 +1055,7 @@ FSCreateResourceFile(
   UniCharCount           forkNameLength,
   const UniChar *        forkName,             /* can be NULL */
   FSRef *                newRef,               /* can be NULL */
-  FSSpecPtr              newSpec)              /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  FSSpecPtr              newSpec)              /* can be NULL */ __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -1105,7 +1099,7 @@ FSCreateResourceFork(
   const FSRef *    ref,
   UniCharCount     forkNameLength,
   const UniChar *  forkName,             /* can be NULL */
-  UInt32           flags)                                     AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  UInt32           flags)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1150,7 +1144,7 @@ FSOpenResourceFile(
   UniCharCount     forkNameLength,
   const UniChar *  forkName,             /* can be NULL */
   SInt8            permissions,
-  ResFileRefNum *  refNum)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ResFileRefNum *  refNum)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -1173,7 +1167,7 @@ extern ResFileRefNum
 OpenRFPerm(
   ConstStr255Param   fileName,
   FSVolumeRefNum     vRefNum,
-  SInt8              permission)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  SInt8              permission)                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /* use FSOpenResourceFile instead*/
@@ -1193,7 +1187,7 @@ HOpenResFile(
   FSVolumeRefNum     vRefNum,
   long               dirID,
   ConstStr255Param   fileName,
-  SInt8              permission)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  SInt8              permission)                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /* use FSCreateResourceFile instead*/
@@ -1212,7 +1206,7 @@ extern void
 HCreateResFile(
   FSVolumeRefNum     vRefNum,
   long               dirID,
-  ConstStr255Param   fileName)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  ConstStr255Param   fileName)                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /* use FSOpenResourceFile instead*/
@@ -1230,7 +1224,7 @@ HCreateResFile(
 extern ResFileRefNum 
 FSpOpenResFile(
   const FSSpec *  spec,
-  SignedByte      permission)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  SignedByte      permission)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /* use FSCreateResourceFile instead*/
@@ -1250,7 +1244,7 @@ FSpCreateResFile(
   const FSSpec *  spec,
   OSType          creator,
   OSType          fileType,
-  ScriptCode      scriptTag)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  ScriptCode      scriptTag)                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /* use FSResourceFileAlreadyOpen instead*/
@@ -1269,7 +1263,7 @@ extern Boolean
 FSpResourceFileAlreadyOpen(
   const FSSpec *   resourceFile,
   Boolean *        inChain,
-  ResFileRefNum *  refNum)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  ResFileRefNum *  refNum)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /* use FSOpenOrphanResFile instead*/
@@ -1288,7 +1282,7 @@ extern OSErr
 FSpOpenOrphanResFile(
   const FSSpec *   spec,
   SignedByte       permission,
-  ResFileRefNum *  refNum)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  ResFileRefNum *  refNum)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 #endif  /* !__LP64__ */

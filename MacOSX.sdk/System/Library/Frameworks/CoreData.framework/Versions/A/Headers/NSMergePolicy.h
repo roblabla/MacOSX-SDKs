@@ -1,12 +1,12 @@
 //
 //  NSMergePolicy.h
 //  Core Data
-//  Copyright (c) 2004-2010 Apple Inc. All rights reserved.
+//  Copyright (c) 2004-2012 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/NSArray.h>
+#import <Foundation/NSError.h>
 #import <CoreData/CoreDataDefines.h>
-#import <Availability.h>
 
 @class NSMergePolicy;
 @class NSManagedObject;
@@ -36,7 +36,7 @@ enum {
 };
 typedef NSUInteger NSMergePolicyType;
 
-NS_CLASS_AVAILABLE(10_7, NA)
+NS_CLASS_AVAILABLE(10_7, 5_0)
 @interface NSMergeConflict : NSObject {
 @private
     id _source;
@@ -74,7 +74,7 @@ NS_CLASS_AVAILABLE(10_7, NA)
 @end
 
 
-NS_CLASS_AVAILABLE(10_7, NA)
+NS_CLASS_AVAILABLE(10_7, 5_0)
 @interface NSMergePolicy : NSObject {
 @private
     NSUInteger _type;
@@ -90,7 +90,6 @@ NS_CLASS_AVAILABLE(10_7, NA)
  * Due to the complexity of merging to-many relationships, this class is designed with the expectation that you call super as the base implemenation.
  */
 - (id)initWithMergeType:(NSMergePolicyType)ty;
-
 
 /*
  * In a subclass, you are strongly encouraged to override initWithMergeType: and customize the results from calling super instead of performing your own actions from scratch.

@@ -27,10 +27,10 @@ typedef struct __ABMultiValue           *ABMutableMultiValueRef;
 // --------------------------------------------------------------------------------
 //	LSOpenCFURLRef support
 // --------------------------------------------------------------------------------
-// An application can open the AddressBook app and select (and edit) a specific
+// An application can open the Contacts app and select (and edit) a specific
 // person by using the LSOpenCFURLRef API.
 //
-// To launch (or bring to front) the Address Book app and select a given person
+// To launch (or bring to front) the Contacts app and select a given person
 //
 // CFStringRef uniqueId = ABRecordCopyUniqueId(aPerson);
 // CFStringRef urlString = CFStringCreateWithFormat(NULL, CFSTR(addressbook://%@), uniqueId);
@@ -40,7 +40,7 @@ typedef struct __ABMultiValue           *ABMutableMultiValueRef;
 // CFRelease(urlRef);
 // CFRelease(urlString);
 //
-// To launch (or bring to front) the Address Book app and edit a given person
+// To launch (or bring to front) the Contacts app and edit a given person
 //
 // CFStringRef uniqueId = ABRecordCopyUniqueId(aPerson);
 // CFStringRef urlString = CFStringCreateWithFormat(NULL, CFSTR(addressbook://%@?edit), uniqueId);

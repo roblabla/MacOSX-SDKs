@@ -32,6 +32,7 @@
 @protocol DOMEventTarget;
 
 enum {
+    DOM_NONE = 0,
     DOM_CAPTURING_PHASE = 1,
     DOM_AT_TARGET = 2,
     DOM_BUBBLING_PHASE = 3

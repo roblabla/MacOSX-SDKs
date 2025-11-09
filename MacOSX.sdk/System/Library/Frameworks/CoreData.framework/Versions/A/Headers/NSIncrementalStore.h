@@ -1,7 +1,7 @@
 /*
  NSIncrementalStore.h
  Core Data
- Copyright (c) 2004-2010 Apple Inc.
+ Copyright (c) 2004-2012 Apple Inc.
  All rights reserved.
  */
 
@@ -12,11 +12,12 @@
 @class NSManagedObjectID;
 @class NSRelationshipDescription;
 @class NSIncrementalStoreNode;
+@class NSEntityDescription;
 
 // Abstract class defining the API through which Core Data communicates with a store. 
 // This API is designed to allow users to create persistent stores which load and save 
 // data incrementally, allowing for the management of large and/or shared datasets.
-NS_CLASS_AVAILABLE(10_7,NA)
+NS_CLASS_AVAILABLE(10_7,5_0)
 @interface NSIncrementalStore : NSPersistentStore {
 	@private
 	NSDictionary *_storeMetadata;

@@ -3,7 +3,7 @@
  
      Contains:   AppleScript Registry constants.
  
-     Version:    OSA-143~22
+     Version:    OSA-148.3~2
  
      Copyright:  © 1991-2008 by Apple Computer, Inc., all rights reserved
  
@@ -16,8 +16,8 @@
 #ifndef __ASREGISTRY__
 #define __ASREGISTRY__
 
-#ifndef __APPLICATIONSERVICES__
-#include <ApplicationServices/ApplicationServices.h>
+#ifndef __CORESERVICES__
+#include <CoreServices/CoreServices.h>
 #endif
 
 

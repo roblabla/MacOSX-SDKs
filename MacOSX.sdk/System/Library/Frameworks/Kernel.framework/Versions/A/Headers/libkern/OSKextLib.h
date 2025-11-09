@@ -333,6 +333,15 @@ __BEGIN_DECLS
  */
 #define kIOPersonalityPublisherKey              "IOPersonalityPublisher"
 
+#if CONFIG_KEC_FIPS
+/*
+ * @define   kAppleTextHashesKey
+ * @abstract A dictionary conataining hashes for corecrypto kext.
+ */
+#define kAppleTextHashesKey                     "AppleTextHashes"
+#endif
+
+
 
 #if PRAGMA_MARK
 /********************************************************************/
@@ -899,6 +908,25 @@ extern const void * gOSKextUnresolved;
  */
 #define OSKextSymbolIsResolved(weak_sym)        \
     (&(weak_sym) != gOSKextUnresolved)
+
+
+#if CONFIG_KEC_FIPS
+
+#if PRAGMA_MARK
+#pragma mark -
+/********************************************************************/
+#pragma mark Kernel External Components for FIPS compliance
+/********************************************************************/
+#endif
+
+// Kernel External Components for FIPS compliance (KEC_FIPS)
+// WARNING - ath_hash is owned by the kernel, do not free
+typedef struct AppleTEXTHash {
+    const int       ath_version;    // version of this structure (value is 1)
+    int             ath_length;     // length of hash data
+    void *          ath_hash;       // hash extracted from AppleTextHashes dict 
+} AppleTEXTHash_t;
+#endif // CONFIG_KEC_FIPS
 
 
 __END_DECLS

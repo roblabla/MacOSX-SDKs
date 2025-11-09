@@ -1,7 +1,7 @@
 /*
 	NSAccessibility.h
 	Application Kit
-	Copyright (c) 2001-2011, Apple Inc.
+	Copyright (c) 2001-2012, Apple Inc.
 	All rights reserved.
 */
 
@@ -272,6 +272,7 @@ APPKIT_EXTERN NSString *const NSAccessibilityHiddenAttribute;		//(NSNumber *) - 
 APPKIT_EXTERN NSString *const NSAccessibilityMainWindowAttribute;	//(id)         - UIElement for the main window.
 APPKIT_EXTERN NSString *const NSAccessibilityFocusedWindowAttribute;	//(id)         - UIElement for the key window.
 APPKIT_EXTERN NSString *const NSAccessibilityFocusedUIElementAttribute;	//(id)         - Currently focused UIElement.
+APPKIT_EXTERN NSString *const NSAccessibilityExtrasMenuBarAttribute NS_AVAILABLE_MAC(10_8);    //(id)         - UIElement for the application extras menu bar.
 
 APPKIT_EXTERN NSString *const NSAccessibilityOrientationAttribute;	//(NSString *) - NSAccessibilityXXXOrientationValue
 APPKIT_EXTERN NSString *const NSAccessibilityVerticalOrientationValue;

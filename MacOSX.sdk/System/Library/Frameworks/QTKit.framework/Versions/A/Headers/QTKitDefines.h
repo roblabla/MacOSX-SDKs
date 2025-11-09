@@ -1,7 +1,7 @@
 /*
 	File:		QTKitDefines.h
 
-	Copyright:	(c)2004-2010 by Apple Inc., all rights reserved.
+	Copyright:	(c)2004-2012 by Apple Inc., all rights reserved.
 
 */
 
@@ -245,24 +245,9 @@
 
 #define QTKIT_HIDDEN __attribute__((visibility("hidden")))
 
-#ifndef NSINTEGER_DEFINED
-
-#if __LP64__ || NS_BUILD_32_LIKE_64
-typedef long NSInteger;
-typedef unsigned long NSUInteger;
-#else
-typedef int NSInteger;
-typedef unsigned int NSUInteger;
-#endif
-
-
-#define NSIntegerMax    LONG_MAX
-#define NSIntegerMin    LONG_MIN
-#define NSUIntegerMax   ULONG_MAX
-
-#define NSINTEGER_DEFINED 1
-
-#endif	/* NSINTEGER_DEFINED */
+#ifdef __OBJC__
+#import <Foundation/NSObjCRuntime.h>
+#endif  /* __OBJC__ */
 
 #if __LP64__
 // constants and data types defined in the 32-bit QuickTime headers that may be required for some QTKit APIs

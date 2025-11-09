@@ -2,10 +2,8 @@
      File:       CoreServices/CoreServices.h
  
      Contains:   Master include for CoreServices (non-UI toolbox)
- 
-     Version:    CoreServices-53~104
- 
-     Copyright:  © 1999-2008 by Apple Computer, Inc., all rights reserved.
+  
+     Copyright:  ï¿½ 1999-2011 by Apple, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -14,8 +12,7 @@
  
 */
 #ifndef __CORESERVICES__
-#define __CORESERVICES__
-
+#define __CORESERVICES__	1
 
 #ifndef __AE__
 #include <AE/AE.h>
@@ -45,8 +42,13 @@
 #include <SearchKit/SearchKit.h>
 #endif
 
+#ifndef __METADATA_METADATA__
 #include <Metadata/Metadata.h>
+#endif
+
+#ifndef __DICTIONARYSERVICES__
 #include <DictionaryServices/DictionaryServices.h>
+#endif
 
 #endif /* __CORESERVICES__ */
 

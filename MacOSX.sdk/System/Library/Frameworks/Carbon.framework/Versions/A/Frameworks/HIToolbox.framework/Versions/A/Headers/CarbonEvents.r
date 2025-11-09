@@ -3,7 +3,7 @@
  
      Contains:   Carbon Event Manager
  
-     Version:    HIToolbox-567.2~1
+     Version:    HIToolbox-626.1~1
  
      Copyright:  © 1999-2008 by Apple Inc., all rights reserved.
  
@@ -71,6 +71,7 @@
 #define kHICommandCheckSpellingAsYouType  'aspc'
 #define kHICommandIgnoreSpelling 		'igsp'
 #define kHICommandLearnWord 			'lrwd'
+#define kHICommandStartDictation 		'sdct'
 
 
 #endif /* __CARBONEVENTS_R__ */

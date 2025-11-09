@@ -1,6 +1,6 @@
 /* 
     NSSimpleHorizontalTypesetter.h
-    Copyright (c) 1993-2011, Apple Inc.
+    Copyright (c) 1993-2012, Apple Inc.
     All rights reserved. 
  
     A concrete class to lay glyphs out in horizontal boxes.
@@ -68,6 +68,7 @@ typedef struct _NSTypesetterGlyphInfo {
 
 /* A concrete class that does simple left-to-right typesetting with some support for non-spacing marks.
 */
+NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 @interface NSSimpleHorizontalTypesetter : NSTypesetter {
 /* These are read-only ivars */
     /* Global Info */
@@ -175,7 +176,7 @@ typedef struct _NSTypesetterGlyphInfo {
 - (NSTextContainer *)currentContainer;
 - (NSParagraphStyle *)currentParagraphStyle;
 - (NSTextStorage *)currentTextStorage;
-- (NSTypesetterGlyphInfo *)baseOfTypesetterGlyphInfo;
+- (NSTypesetterGlyphInfo *)baseOfTypesetterGlyphInfo NS_RETURNS_INNER_POINTER;
 - (NSUInteger)sizeOfTypesetterGlyphInfo;
 - (NSUInteger)capacityOfTypesetterGlyphInfo;
 - (NSUInteger)firstGlyphIndexOfCurrentLineFragment;

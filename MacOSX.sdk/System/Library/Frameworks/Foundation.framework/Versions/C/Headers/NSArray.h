@@ -1,5 +1,5 @@
 /*	NSArray.h
-	Copyright (c) 1994-2011, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2012, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -11,7 +11,7 @@
 
 /****************	Immutable Array		****************/
 
-@interface NSArray : NSObject <NSCopying, NSMutableCopying, NSCoding, NSFastEnumeration>
+@interface NSArray : NSObject <NSCopying, NSMutableCopying, NSSecureCoding, NSFastEnumeration>
 
 - (NSUInteger)count;
 - (id)objectAtIndex:(NSUInteger)index;
@@ -50,6 +50,8 @@
 
 - (NSArray *)objectsAtIndexes:(NSIndexSet *)indexes;
 
+- (id)objectAtIndexedSubscript:(NSUInteger)idx NS_AVAILABLE(10_8, 6_0);
+
 #if NS_BLOCKS_AVAILABLE
 - (void)enumerateObjectsUsingBlock:(void (^)(id obj, NSUInteger idx, BOOL *stop))block NS_AVAILABLE(10_6, 4_0);
 - (void)enumerateObjectsWithOptions:(NSEnumerationOptions)opts usingBlock:(void (^)(id obj, NSUInteger idx, BOOL *stop))block NS_AVAILABLE(10_6, 4_0);
@@ -66,12 +68,11 @@
 - (NSArray *)sortedArrayUsingComparator:(NSComparator)cmptr NS_AVAILABLE(10_6, 4_0);
 - (NSArray *)sortedArrayWithOptions:(NSSortOptions)opts usingComparator:(NSComparator)cmptr NS_AVAILABLE(10_6, 4_0);
 
-enum {
+typedef NS_OPTIONS(NSUInteger, NSBinarySearchingOptions) {
 	NSBinarySearchingFirstEqual = (1UL << 8),
 	NSBinarySearchingLastEqual = (1UL << 9),
 	NSBinarySearchingInsertionIndex = (1UL << 10),
 };
-typedef NSUInteger NSBinarySearchingOptions;
 
 - (NSUInteger)indexOfObject:(id)obj inSortedRange:(NSRange)r options:(NSBinarySearchingOptions)opts usingComparator:(NSComparator)cmp NS_AVAILABLE(10_6, 4_0); // binary search
 
@@ -140,6 +141,8 @@ typedef NSUInteger NSBinarySearchingOptions;
 - (void)insertObjects:(NSArray *)objects atIndexes:(NSIndexSet *)indexes;
 - (void)removeObjectsAtIndexes:(NSIndexSet *)indexes;
 - (void)replaceObjectsAtIndexes:(NSIndexSet *)indexes withObjects:(NSArray *)objects;
+
+- (void)setObject:(id)obj atIndexedSubscript:(NSUInteger)idx NS_AVAILABLE(10_8, 6_0);
 
 #if NS_BLOCKS_AVAILABLE
 - (void)sortUsingComparator:(NSComparator)cmptr NS_AVAILABLE(10_6, 4_0);

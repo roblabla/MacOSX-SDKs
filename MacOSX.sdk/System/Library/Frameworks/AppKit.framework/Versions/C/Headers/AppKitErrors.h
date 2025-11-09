@@ -1,7 +1,7 @@
 /*
 	AppKitErrors.h
 	Application Kit
-	Copyright (c) 2004-2011, Apple Inc.
+	Copyright (c) 2004-2012, Apple Inc.
 	All rights reserved.
 */
 

@@ -1,7 +1,7 @@
 /*
 	NSPrintInfo.h
 	Application Kit
-	Copyright (c) 1994-2011, Apple Inc.
+	Copyright (c) 1994-2012, Apple Inc.
 	All rights reserved.
 */
 
@@ -163,9 +163,9 @@ APPKIT_EXTERN NSString *const NSPrintHeaderAndFooter; // a boolean NSNumber for 
 
 /* Return a Printing Manager PMPrintSession, PMPageFormat, or PMPrintSettings object, respectively. The returned object is always consistent with the state of the NSPrintInfo at the moment the method is invoked, but isn't necessarily updated immediately if other NSPrintInfo methods like -setPaperSize: and -setPaperOrientation: are invoked. The returned object will always be valid (in the Printing Manager sense). If you set any values in the returned PMPageFormat or PMPrintSettings you should afterward invoke -updateFromPMPageFormat or -updateFromPMPrintSettings, respectively. You don't also have to call PMSessionValidatePageFormat() or PMSessionValidatePrintSettings() if you do that. You should not call PMRelease() for the returned object, except of course to balance any calls of PMRetain() you do.
 */
-- (void *)PMPrintSession NS_AVAILABLE_MAC(10_5); // the result should be cast to PMPrintSession
-- (void *)PMPageFormat NS_AVAILABLE_MAC(10_5); // the result should be cast to PMPageFormat
-- (void *)PMPrintSettings NS_AVAILABLE_MAC(10_5); // the result should be cast to PMPrintSettings
+- (void *)PMPrintSession NS_RETURNS_INNER_POINTER NS_AVAILABLE_MAC(10_5); // the result should be cast to PMPrintSession
+- (void *)PMPageFormat NS_RETURNS_INNER_POINTER NS_AVAILABLE_MAC(10_5); // the result should be cast to PMPageFormat
+- (void *)PMPrintSettings NS_RETURNS_INNER_POINTER NS_AVAILABLE_MAC(10_5); // the result should be cast to PMPrintSettings
 
 /* Given that the NSPrintInfo's PMPageFormat or PMPrintSettings has been changed by something other than the NSPrintInfo itself, update the NSPrintInfo to be consistent.
 */

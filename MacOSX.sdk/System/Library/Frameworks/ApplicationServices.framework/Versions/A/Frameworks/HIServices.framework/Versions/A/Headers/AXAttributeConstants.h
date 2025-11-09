@@ -89,7 +89,8 @@
 	kAXMainWindowAttribute
 	kAXFocusedWindowAttribute
 	kAXFocusedUIElementAttribute
-	
+	kAXExtrasMenuBarAttribute
+ 
 	// date/time-specific attributes
 	kAXHourFieldAttribute
 	kAXMinuteFieldAttribute
@@ -906,7 +907,7 @@
 #define kAXMainWindowAttribute				CFSTR("AXMainWindow")
 #define kAXFocusedWindowAttribute			CFSTR("AXFocusedWindow")
 #define kAXFocusedUIElementAttribute			CFSTR("AXFocusedUIElement") 
-
+#define kAXExtrasMenuBarAttribute			CFSTR("AXExtrasMenuBar")
 
 /*
 	kAXHeaderAttribute

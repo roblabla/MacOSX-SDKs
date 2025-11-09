@@ -1,5 +1,5 @@
 /*	CFStringTokenizer.h
-	Copyright (c) 2006-2011, Apple Inc. All rights reserved.
+	Copyright (c) 2006-2012, Apple Inc. All rights reserved.
 */
 
 /*!
@@ -26,6 +26,7 @@
 #include <CoreFoundation/CFLocale.h>
 #include <CoreFoundation/CFString.h>
 
+CF_IMPLICIT_BRIDGING_ENABLED
 CF_EXTERN_C_BEGIN
 
 /*
@@ -92,7 +93,7 @@ enum {
     kCFStringTokenizerAttributeLatinTranscription        = 1UL << 16,
     /* Language in BCP 47 string. Used with kCFStringTokenizerUnitSentence
 	   or kCFStringTokenizerUnitParagraph. */
-    kCFStringTokenizerAttributeLanguage                  = 1UL << 17
+    kCFStringTokenizerAttributeLanguage                  = 1UL << 17,
 };
 
 /*!
@@ -100,7 +101,7 @@ enum {
 	CFStringTokenizerGoToTokenAtIndex / CFStringTokenizerAdvanceToNextToken returns
 	the type of current token.
 */
-enum {
+typedef CF_OPTIONS(CFOptionFlags, CFStringTokenizerTokenType) {
 	/* Have no token. */
     kCFStringTokenizerTokenNone                                      = 0,
     
@@ -124,7 +125,6 @@ enum {
     kCFStringTokenizerTokenHasNonLettersMask                         = 1UL << 4,
     kCFStringTokenizerTokenIsCJWordMask                              = 1UL << 5
 };
-typedef CFOptionFlags CFStringTokenizerTokenType;
 
 /*!
 	@function CFStringTokenizerGetTypeID
@@ -147,10 +147,8 @@ CFTypeID CFStringTokenizerGetTypeID(void) CF_AVAILABLE(10_5, 3_0);
 		string should be tokenized. Optionally specify one or more attribute
 		specifiers to tell the tokenizer to prepare specified attributes when it
 		tokenizes the string.
-	@param locale The locale to specify language or region specific behavior.
-		If the locale is NULL and the unit is not kCFStringTokenizerUnitWord, 
-        default locale will be used.
-        The locale is ignored if the unit is kCFStringTokenizerUnitWord.
+	@param locale The locale to specify language or region specific behavior. Pass
+               NULL if you want tokenizer to identify the locale automatically.
 	@result A reference to the new CFStringTokenizer.
 */
 CF_EXPORT
@@ -262,5 +260,6 @@ CF_EXPORT
 CFIndex CFStringTokenizerGetCurrentSubTokens(CFStringTokenizerRef tokenizer, CFRange *ranges, CFIndex maxRangeLength, CFMutableArrayRef derivedSubTokens) CF_AVAILABLE(10_5, 3_0);
 
 CF_EXTERN_C_END
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif /* ! __COREFOUNDATION_CFSTRINGTOKENIZER__ */

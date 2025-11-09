@@ -1,6 +1,6 @@
 /*	
     NSURLCredential.h
-    Copyright (c) 2003-2011, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2012, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -19,12 +19,11 @@
     @constant NSURLCredentialPersistencePermanent This credential will be stored permanently. Note: Whereas in Mac OS X any application can access any credential provided the user gives permission, in iPhone OS an application can access only its own credentials.
 */
 
-enum {
+typedef NS_ENUM(NSUInteger, NSURLCredentialPersistence) {
     NSURLCredentialPersistenceNone,
     NSURLCredentialPersistenceForSession,
     NSURLCredentialPersistencePermanent
 };
-typedef NSUInteger NSURLCredentialPersistence;
 
 @class NSURLCredentialInternal;
 
@@ -33,7 +32,7 @@ typedef NSUInteger NSURLCredentialPersistence;
     @discussion This class is an immutable object representing an authentication credential.  The actual type of the credential is determined by the constructor called in the categories declared below.
 */
 
-@interface NSURLCredential : NSObject <NSCopying>
+@interface NSURLCredential : NSObject <NSCoding, NSCopying>
 {
     @private
     __strong NSURLCredentialInternal *_internal;

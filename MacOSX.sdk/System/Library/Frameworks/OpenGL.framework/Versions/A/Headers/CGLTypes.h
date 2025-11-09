@@ -1,5 +1,5 @@
 /*
-	Copyright:	(c) 1999-2008 Apple Inc. All rights reserved.
+	Copyright:	(c) 1999-2012 Apple Inc. All rights reserved.
 */
 
 #ifndef _CGLTYPES_H
@@ -26,49 +26,46 @@ typedef enum _CGLPixelFormatAttribute {
 	kCGLPFATripleBuffer       =   3,	/* choose a triple buffered pixel format        */
 	kCGLPFADoubleBuffer       =   5,	/* choose a double buffered pixel format        */
 	kCGLPFAStereo             =   6,	/* stereo buffering supported                   */
-	kCGLPFAAuxBuffers         =   7,	/* number of aux buffers                        */
 	kCGLPFAColorSize          =   8,	/* number of color buffer bits                  */
 	kCGLPFAAlphaSize          =  11,	/* number of alpha component bits               */
 	kCGLPFADepthSize          =  12,	/* number of depth buffer bits                  */
 	kCGLPFAStencilSize        =  13,	/* number of stencil buffer bits                */
-	kCGLPFAAccumSize          =  14,	/* number of accum buffer bits                  */
 	kCGLPFAMinimumPolicy      =  51,	/* never choose smaller buffers than requested  */
 	kCGLPFAMaximumPolicy      =  52,	/* choose largest buffers of type requested     */
-	kCGLPFAOffScreen          =  53,	/* choose an off-screen capable renderer        */
-	kCGLPFAFullScreen         =  54,	/* choose a full-screen capable renderer        */
 	kCGLPFASampleBuffers      =  55,	/* number of multi sample buffers               */
 	kCGLPFASamples            =  56,	/* number of samples per multi sample buffer    */
-	kCGLPFAAuxDepthStencil    =  57,	/* each aux buffer has its own depth stencil    */
 	kCGLPFAColorFloat         =  58,	/* color buffers store floating point pixels    */
 	kCGLPFAMultisample        =  59,	/* choose multisampling                         */
 	kCGLPFASupersample        =  60,	/* choose supersampling                         */
 	kCGLPFASampleAlpha        =  61,	/* request alpha filtering                      */
-
 	kCGLPFARendererID         =  70,	/* request renderer by ID                       */
 	kCGLPFASingleRenderer     =  71,	/* choose a single renderer for all screens     */
 	kCGLPFANoRecovery         =  72,	/* disable all failure recovery systems         */
 	kCGLPFAAccelerated        =  73,	/* choose a hardware accelerated renderer       */
 	kCGLPFAClosestPolicy      =  74,	/* choose the closest color buffer to request   */
 	kCGLPFABackingStore       =  76,	/* back buffer contents are valid after swap    */
-	kCGLPFAWindow             =  80,	/* can be used to render to an onscreen window  */
-	kCGLPFACompliant          =  83,	/* renderer is opengl compliant                 */
+	kCGLPFABackingVolatile    =  77,	/* back buffer contents are volatile after swap */
 	kCGLPFADisplayMask        =  84,	/* mask limiting supported displays             */
-	kCGLPFAPBuffer            =  90,	/* can be used to render to a pbuffer           */
-	kCGLPFARemotePBuffer      =  91,	/* can be used to render offline to a pbuffer   */
 	kCGLPFAAllowOfflineRenderers = 96,	/* show offline renderers in pixel formats      */
 	kCGLPFAAcceleratedCompute =  97,	/* choose a hardware accelerated compute device */
 	kCGLPFAOpenGLProfile      =  99,	/* specify an OpenGL Profile to use             */
+	kCGLPFASupportsAutomaticGraphicsSwitching = 101,	/* responds to display changes  */
 	kCGLPFAVirtualScreenCount = 128,	/* number of virtual screens in this format     */
 
-/*
-	Note: 
-		kCGLPFARobust, kCGLPFAMPSafe and kCGLPFAMultiScreen attributes will be deprecated in 10.5
-		Applications with these attributes will continue to work but these are being
-		deprecated for new applications.
-*/
-	kCGLPFARobust             =  75,	/* renderer does not need failure recovery      */
-	kCGLPFAMPSafe             =  78,	/* renderer is multi-processor safe             */
-	kCGLPFAMultiScreen        =  81		/* single window can span multiple screens      */
+	/* Note: the following attributes are deprecated in Core Profile                    */
+	kCGLPFAAuxBuffers         =   7,	/* number of aux buffers                        */
+	kCGLPFAAccumSize          =  14,	/* number of accum buffer bits                  */
+	kCGLPFAOffScreen          =  53,	/* choose an off-screen capable renderer        */
+	kCGLPFAAuxDepthStencil    =  57,	/* each aux buffer has its own depth stencil    */
+	kCGLPFAWindow             =  80,	/* can be used to render to an onscreen window  */
+	kCGLPFACompliant          =  83,	/* renderer is opengl compliant                 */
+	kCGLPFAPBuffer            =  90,	/* can be used to render to a pbuffer           */
+	kCGLPFARemotePBuffer      =  91,	/* can be used to render offline to a pbuffer   */
+
+	kCGLPFARobust             =  75,	/* *** DEPRECATED in MacOS X 10.5 ***           */
+	kCGLPFAMPSafe             =  78,	/* *** DEPRECATED in MacOS X 10.5 ***           */
+	kCGLPFAMultiScreen        =  81,	/* *** DEPRECATED in MacOS X 10.5 ***           */
+	kCGLPFAFullScreen         =  54,	/* *** DEPRECATED in MacOS X 10.6 ***           */
 } CGLPixelFormatAttribute;
 
 /*
@@ -76,14 +73,10 @@ typedef enum _CGLPixelFormatAttribute {
 */
 typedef enum _CGLRendererProperty {
 	kCGLRPOffScreen              =  53,
-	kCGLRPFullScreen             =  54,
 	kCGLRPRendererID             =  70,
 	kCGLRPAccelerated            =  73,
-	kCGLRPRobust                 =  75,
 	kCGLRPBackingStore           =  76,
-	kCGLRPMPSafe                 =  78,
 	kCGLRPWindow                 =  80,
-	kCGLRPMultiScreen            =  81,
 	kCGLRPCompliant              =  83,
 	kCGLRPDisplayMask            =  84,
 	kCGLRPBufferModes            = 100,	/* a bitfield of supported buffer modes             */
@@ -105,6 +98,11 @@ typedef enum _CGLRendererProperty {
 	kCGLRPAcceleratedCompute     = 130,	/* hardware accelerated compute device              */
 	kCGLRPVideoMemoryMegabytes   = 131,	/* total video memory (in megabytes)                */
 	kCGLRPTextureMemoryMegabytes = 132,	/* video memory useable for textures (in megabytes) */
+
+	kCGLRPRobust                 =  75, /* *** DEPRECATED in MacOS X 10.5 ***               */
+	kCGLRPMPSafe                 =  78, /* *** DEPRECATED in MacOS X 10.5 ***               */
+	kCGLRPMultiScreen            =  81, /* *** DEPRECATED in MacOS X 10.5 ***               */
+	kCGLRPFullScreen             =  54, /* *** DEPRECATED in MacOS X 10.6 ***               */
 } CGLRendererProperty;
 
 /*
@@ -161,9 +159,7 @@ typedef enum _CGLGlobalOption {
 	kCGLGOClearFormatCache = 502,	/* Reset the pixel format cache if true          */
 	kCGLGORetainRenderers  = 503,	/* Whether to retain loaded renderers in memory  */
 	kCGLGOResetLibrary     = 504,	/* *** DEPRECATED in MacOS X 10.4 ***            */
-	                             	/* Do a soft reset of the CGL library if true    */
 	kCGLGOUseErrorHandler  = 505,	/* *** DEPRECATED in MacOS X 10.7 ***            */
-	                             	/* Call the Core Graphics handler on CGL errors  */
 	kCGLGOUseBuildCache    = 506,	/* Enable the function compilation block cache.  */
 	                                /* Off by default.  Must be enabled at startup.  */
 } CGLGlobalOption;

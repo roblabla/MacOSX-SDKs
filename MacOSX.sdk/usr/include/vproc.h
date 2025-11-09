@@ -1,5 +1,3 @@
-#ifndef _VPROC_H_
-#define _VPROC_H_
 /*
  * Copyright (c) 2006 Apple Computer, Inc. All rights reserved.
  *
@@ -19,6 +17,9 @@
  * 
  * @APPLE_APACHE_LICENSE_HEADER_END@
  */
+
+#ifndef __VPROC_H__
+#define __VPROC_H__
 
 #include <sys/cdefs.h>
 #include <sys/types.h>
@@ -167,4 +168,4 @@ vproc_standby_end(vproc_t virtual_proc, vproc_standby_t handle) __OSX_AVAILABLE_
 
 __END_DECLS
 
-#endif
+#endif /* __VPROC_H__ */

@@ -1,7 +1,7 @@
 /*
         NSMenuItem.h
         Application Kit
-        Copyright (c) 1996-2011, Apple Inc.
+        Copyright (c) 1996-2012, Apple Inc.
         All rights reserved.
 */
 

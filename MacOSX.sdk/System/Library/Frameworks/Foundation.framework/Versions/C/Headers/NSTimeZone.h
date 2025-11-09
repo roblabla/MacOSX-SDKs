@@ -1,5 +1,5 @@
 /*	NSTimeZone.h
-	Copyright (c) 1994-2011, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2012, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -7,7 +7,7 @@
 
 @class NSString, NSArray, NSDictionary, NSDate, NSData, NSLocale;
 
-@interface NSTimeZone : NSObject <NSCopying, NSCoding>
+@interface NSTimeZone : NSObject <NSCopying, NSSecureCoding>
 
 - (NSString *)name;
 - (NSData *)data;
@@ -47,7 +47,7 @@
 
 - (BOOL)isEqualToTimeZone:(NSTimeZone *)aTimeZone;
 
-enum {
+typedef NS_ENUM(NSInteger, NSTimeZoneNameStyle) {
 	NSTimeZoneNameStyleStandard,		// Central Standard Time
 	NSTimeZoneNameStyleShortStandard,	// CST
 	NSTimeZoneNameStyleDaylightSaving,	// Central Daylight Time
@@ -55,7 +55,6 @@ enum {
 	NSTimeZoneNameStyleGeneric,		// Central Time
 	NSTimeZoneNameStyleShortGeneric		// CT
 };
-typedef NSInteger NSTimeZoneNameStyle;
 
 - (NSString *)localizedName:(NSTimeZoneNameStyle)style locale:(NSLocale *)locale NS_AVAILABLE(10_5, 2_0);
 

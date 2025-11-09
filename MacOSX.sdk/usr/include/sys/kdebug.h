@@ -88,11 +88,13 @@ __BEGIN_DECLS
 #define DBG_DLIL	        8
 #define DBG_SECURITY		9
 #define DBG_CORESTORAGE		10
+#define DBG_CG         		11
 #define DBG_MISC		20
 #define DBG_DYLD           	31
 #define DBG_QT              	32
 #define DBG_APPS            	33
 #define DBG_LAUNCHD         	34
+#define DBG_PERF                37
 #define DBG_MIG			255
 
 /* **** The Kernel Debug Sub Classes for Mach (DBG_MACH) **** */
@@ -133,12 +135,16 @@ __BEGIN_DECLS
 #define MACH_MOVED              0xb	/* did not use original scheduling decision */
 #define MACH_FAIRSHARE_ENTER    0xc	/* move to fairshare band */
 #define MACH_FAIRSHARE_EXIT     0xd	/* exit fairshare band */
-#define MACH_FAILSAFE		0xe	/* tripped fixed-pri/RT failsafe */
+#define MACH_FAILSAFE           0xe	/* tripped fixed-pri/RT failsafe */
+#define MACH_BLOCK              0xf	/* thread block */
+#define MACH_WAIT		0x10	/* thread wait assertion */
 #define	MACH_GET_URGENCY	0x14	/* Urgency queried by platform */
 #define	MACH_URGENCY		0x15	/* Urgency (RT/BG/NORMAL) communicated
-					 * to platform */
+   					 * to platform
+					 */
 #define	MACH_REDISPATCH		0x16	/* "next thread" thread redispatched */
 #define	MACH_REMOTE_AST		0x17	/* AST signal issued to remote processor */
+
 #define	MACH_SCHED_LPA_BROKEN	0x18	/* last_processor affinity broken in choose_processor */
 
 /* Codes for pmap (DBG_MACH_PMAP) */     
@@ -238,6 +244,8 @@ __BEGIN_DECLS
 #define DBG_DRVINFINIBAND	17	/* Infiniband */
 #define DBG_DRVGRAPHICS		18  /* Graphics */
 #define DBG_DRVSD		19 	/* Secure Digital */
+#define DBG_DRVNAND		20	/* NAND drivers and layers */
+#define DBG_SSD			21	/* SSD */
 
 /* Backwards compatibility */
 #define	DBG_DRVPOINTING		DBG_DRVHID		/* OBSOLETE: Use DBG_DRVHID instead */
@@ -259,6 +267,8 @@ __BEGIN_DECLS
 #define DBG_IOCTL     6       /* ioctl to the disk */
 #define DBG_BOOTCACHE 7       /* bootcache operations */
 #define DBG_HFS       8       /* HFS-specific events; see bsd/hfs/hfs_kdebug.h */
+#define DBG_EXFAT     0xE     /* ExFAT-specific events; see the exfat project */
+#define DBG_MSDOS     0xF     /* FAT-specific events; see the msdosfs project */
 
 /* The Kernel Debug Sub Classes for BSD */
 #define DBG_BSD_PROC		0x01	/* process/signals related */
@@ -280,6 +290,8 @@ __BEGIN_DECLS
 /* The Kernel Debug Sub Classes for DBG_CORESTORAGE */
 #define DBG_CS_IO	0
 
+/* Sub-class codes for CoreGraphics (DBG_CG) are defined in its component. */
+
 /* The Kernel Debug Sub Classes for DBG_MISC */
 #define DBG_EVENT	0x10
 #define	DBG_BUFFER	0x20
@@ -295,9 +307,12 @@ __BEGIN_DECLS
 #define DKIO_PAGING	0x10
 #define DKIO_THROTTLE	0x20
 #define DKIO_PASSIVE	0x40
+#define DKIO_NOCACHE	0x80
 
-/* Codes for Application Sub Classes */
-#define DBG_APP_SAMBA	128
+/* Kernel Debug Sub Classes for Applications (DBG_APPS) */
+#define DBG_APP_LOGINWINDOW     0x03
+#define DBG_APP_SAMBA           0x80
+
 
 /**********************************************************************/
 
@@ -331,6 +346,7 @@ __BEGIN_DECLS
 
 #define PMAP_CODE(code) MACHDBG_CODE(DBG_MACH_PMAP, code)
 
+
 /*   Usage:
 * kernel_debug((KDBG_CODE(DBG_NETWORK, DNET_PROTOCOL, 51) | DBG_FUNC_START), 
 *	offset, 0, 0, 0,0) 
@@ -362,25 +378,71 @@ extern unsigned int kdebug_enable;
 #define KDEBUG_ENABLE_TRACE   0x1
 #define KDEBUG_ENABLE_ENTROPY 0x2
 #define KDEBUG_ENABLE_CHUD    0x4
+#define KDEBUG_ENABLE_PPT     0x8
 
-#if	(!defined(NO_KDEBUG))
+/*
+ * Infer the supported kernel debug event level from config option.
+ * Use (KDEBUG_LEVEL >= KDEBUG_LEVEL_STANDARD) as a guard to protect
+ * unaudited debug code. 
+ */
+#define KDEBUG_LEVEL_NONE     0
+#define KDEBUG_LEVEL_IST      1
+#define KDEBUG_LEVEL_STANDARD 2
+#define KDEBUG_LEVEL_FULL     3
+
+#if NO_KDEBUG
+#define KDEBUG_LEVEL KDEBUG_LEVEL_NONE    
+#elif IST_KDEBUG
+#define KDEBUG_LEVEL KDEBUG_LEVEL_IST
+#elif KDEBUG
+#define KDEBUG_LEVEL KDEBUG_LEVEL_FULL
+#else
+#define KDEBUG_LEVEL KDEBUG_LEVEL_STANDARD
+#endif
+
+#if (KDEBUG_LEVEL >= KDEBUG_LEVEL_STANDARD)
 #define KERNEL_DEBUG_CONSTANT(x,a,b,c,d,e)				\
 do {									\
-	if (kdebug_enable)						\
+	if (kdebug_enable & ~KDEBUG_ENABLE_PPT)						\
         kernel_debug(x,(uintptr_t)a,(uintptr_t)b,(uintptr_t)c,		\
 		       (uintptr_t)d,(uintptr_t)e);			\
 } while(0)
 
 #define KERNEL_DEBUG_CONSTANT1(x,a,b,c,d,e)				\
 do {									\
-	if (kdebug_enable)						\
+	if (kdebug_enable & ~KDEBUG_ENABLE_PPT)						\
         kernel_debug1(x,(uintptr_t)a,(uintptr_t)b,(uintptr_t)c,		\
 			(uintptr_t)d,(uintptr_t)e);			\
 } while(0)
-#else /*!NO_KDEBUG */
+#else /* (KDEBUG_LEVEL >= KDEBUG_LEVEL_STANDARD) */
 #define KERNEL_DEBUG_CONSTANT(x,a,b,c,d,e) do { } while(0)
 #define KERNEL_DEBUG_CONSTANT1(x,a,b,c,d,e) do { } while(0)
+#endif /* (KDEBUG_LEVEL >= KDEBUG_LEVEL_STANDARD) */
 
+/* 
+ * Specify KDEBUG_PPT to indicate that the event belongs to the
+ * limited PPT set.
+ */
+#define KDEBUG_COMMON (KDEBUG_ENABLE_TRACE|KDEBUG_ENABLE_ENTROPY|KDEBUG_ENABLE_CHUD|KDEBUG_ENABLE_PPT)
+#define KDEBUG_TRACE  (KDEBUG_ENABLE_TRACE|KDEBUG_ENABLE_ENTROPY|KDEBUG_ENABLE_CHUD)
+#define KDEBUG_PPT    (KDEBUG_ENABLE_PPT)
+
+/*
+ * KERNEL_DEBUG_CONSTANT_IST events provide an audited subset of
+ * tracepoints for userland system tracing tools.
+ */
+#if (KDEBUG_LEVEL >= KDEBUG_LEVEL_IST)
+#define KERNEL_DEBUG_CONSTANT_IST(type,x,a,b,c,d,e)				\
+do {									\
+	if (kdebug_enable & type)						\
+        kernel_debug(x,(uintptr_t)a,(uintptr_t)b,(uintptr_t)c,		\
+			(uintptr_t)d,(uintptr_t)e);			\
+} while(0)
+#else /* (KDEBUG_LEVEL >= KDEBUG_LEVEL_IST) */
+#define KERNEL_DEBUG_CONSTANT_IST(type,x,a,b,c,d,e) do { } while(0)
+#endif /* (KDEBUG_LEVEL >= KDEBUG_LEVEL_IST) */
+
+#if NO_KDEBUG
 #define __kdebug_constant_only __unused
 #endif
 
@@ -401,27 +463,26 @@ extern void kernel_debug1(
 		uintptr_t arg5);
 
 
-#if	(KDEBUG && (!defined(NO_KDEBUG)))
+#if (KDEBUG_LEVEL >= KDEBUG_LEVEL_FULL)
 #define KERNEL_DEBUG(x,a,b,c,d,e)					\
 do {									\
-	if (kdebug_enable)						\
+	if (kdebug_enable & ~KDEBUG_ENABLE_PPT)				\
         kernel_debug((uint32_t)x,  (uintptr_t)a, (uintptr_t)b,		\
 		     (uintptr_t)c, (uintptr_t)d, (uintptr_t)e);		\
 } while(0)
 
 #define KERNEL_DEBUG1(x,a,b,c,d,e)					\
 do {									\
-	if (kdebug_enable)						\
+	if (kdebug_enable & ~KDEBUG_ENABLE_PPT)				\
         kernel_debug1((uint32_t)x,  (uintptr_t)a, (uintptr_t)b,		\
 		      (uintptr_t)c, (uintptr_t)d, (uintptr_t)e);	\
 } while(0)
-#else
-
+#else /* (KDEBUG_LEVEL >= KDEBUG_LEVEL_FULL) */
 #define KERNEL_DEBUG(x,a,b,c,d,e) do {} while (0)
 #define KERNEL_DEBUG1(x,a,b,c,d,e) do {} while (0)
 
 #define __kdebug_only __unused
-#endif
+#endif /* (KDEBUG_LEVEL >= KDEBUG_LEVEL_FULL) */
 
 
 

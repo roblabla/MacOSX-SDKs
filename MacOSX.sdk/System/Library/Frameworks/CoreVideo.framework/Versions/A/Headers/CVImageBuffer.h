@@ -71,6 +71,7 @@ CV_EXPORT const CFStringRef kCVImageBufferColorPrimariesKey __OSX_AVAILABLE_STAR
 CV_EXPORT const CFStringRef	kCVImageBufferColorPrimaries_ITU_R_709_2 __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_4_0);
 CV_EXPORT const CFStringRef	kCVImageBufferColorPrimaries_EBU_3213 __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_4_0);
 CV_EXPORT const CFStringRef	kCVImageBufferColorPrimaries_SMPTE_C __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_4_0);
+CV_EXPORT const CFStringRef	kCVImageBufferColorPrimaries_P22 __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_6_0);
 
 CV_EXPORT const CFStringRef kCVImageBufferTransferFunctionKey __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_4_0);				// CFString describing the transfer function. This key can be one of the following values
 CV_EXPORT const CFStringRef	kCVImageBufferTransferFunction_ITU_R_709_2 __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_4_0);
@@ -139,6 +140,15 @@ CV_EXPORT CGSize CVImageBufferGetDisplaySize(CVImageBufferRef imageBuffer) __OSX
 */
 CV_EXPORT CGRect CVImageBufferGetCleanRect(CVImageBufferRef imageBuffer) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
+/*!
+    @function   CVImageBufferIsFlipped
+    @abstract   Returns whether the image is flipped vertically or not.
+    @param      CVImageBuffer target
+    @result     True if 0,0 in the texture is upper left, false if 0,0 is lower left.
+*/
+CV_EXPORT Boolean CVImageBufferIsFlipped(CVImageBufferRef imageBuffer) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
+
+
 #if COREVIDEO_SUPPORTS_COLORSPACE
 /*!
     @function   CVImageBufferGetColorSpace
@@ -148,6 +158,22 @@ CV_EXPORT CGRect CVImageBufferGetCleanRect(CVImageBufferRef imageBuffer) __OSX_A
 		Returns NULL if called with a non-CVImageBufferRef type or NULL.
 */
 CV_EXPORT CGColorSpaceRef CVImageBufferGetColorSpace(CVImageBufferRef imageBuffer) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
+
+/*!
+   @function   CVImageBufferCreateColorSpaceFromAttachments
+   @abstract   Attempts to synthesize a CGColorSpace from an image buffer's attachments.
+   @param      attachments A CFDictionary of attachments for an image buffer, obtained using CVBufferGetAttachments().
+   @result     A CGColorSpaceRef representing the color space of the buffer.
+		Returns NULL if the attachments dictionary does not contain the information required to synthesize a CGColorSpace.
+   @discussion
+	To generate a CGColorSpace, the attachments dictionary should include values for either:
+		1. kCVImageBufferICCProfile
+		2. kCVImageBufferColorPrimariesKey, kCVImageBufferTransferFunctionKey, and kCVImageBufferYCbCrMatrixKey (and possibly kCVImageBufferGammaLevelKey)
+	The client is responsible for releasing the CGColorSpaceRef when it is done with it (CGColorSpaceRelease() or CFRelease())
+		
+*/
+CV_EXPORT CGColorSpaceRef CVImageBufferCreateColorSpaceFromAttachments(CFDictionaryRef attachments) __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
+
 #endif
 
 #if defined(__cplusplus)

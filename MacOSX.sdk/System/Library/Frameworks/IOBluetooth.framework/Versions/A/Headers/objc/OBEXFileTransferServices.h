@@ -468,15 +468,12 @@ enum  FTSFileType
 */
 - (void) fileTransferServicesRetrieveFolderListingComplete:(OBEXFileTransferServices*)inServices	error:(OBEXError)inError listing:(NSArray*)inListing;
 
-#if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_0
 /*!
 	 @method		fileTransferServicesFilePreparationComplete:error:
 	 @abstract		The delegate method for receiving information on the preparation of each file to send
 	 @discussion	This method will be called before the transfer operation.
 */
 - (void) fileTransferServicesFilePreparationComplete: (OBEXFileTransferServices*) inServices	error: (OBEXError) inError;
-
-#endif /* BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_0 */
 
 /*!
 	@method			fileTransferServicesSendFileProgress:transferProgress:

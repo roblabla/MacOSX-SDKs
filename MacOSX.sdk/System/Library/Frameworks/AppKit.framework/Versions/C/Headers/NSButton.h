@@ -1,7 +1,7 @@
 /*
 	NSButton.h
 	Application Kit
-	Copyright (c) 1994-2011, Apple Inc.
+	Copyright (c) 1994-2012, Apple Inc.
 	All rights reserved.
 */
 
@@ -41,10 +41,6 @@
 
 @end
 
-@interface NSButton(NSKeyboardUI)
-- (void)setTitleWithMnemonic:(NSString *)stringWithAmpersand;
-@end
-
 @interface NSButton(NSButtonAttributedStringMethods)
 - (NSAttributedString *)attributedTitle;
 - (void)setAttributedTitle:(NSAttributedString *)aString;
@@ -71,5 +67,14 @@
 @interface NSButton (NSButtonSoundExtensions)
 - (void)setSound:(NSSound *)aSound;
 - (NSSound *)sound;
+@end
+
+
+@interface NSButton(NSKeyboardUI)
+
+/* On 10.8, this method still will call setTitle: with the ampersand stripped from stringWithAmpersand, but does nothing else. Use setTitle directly.
+ */
+- (void)setTitleWithMnemonic:(NSString *)stringWithAmpersand NS_DEPRECATED_MAC(10_0, 10_8);
+
 @end
 

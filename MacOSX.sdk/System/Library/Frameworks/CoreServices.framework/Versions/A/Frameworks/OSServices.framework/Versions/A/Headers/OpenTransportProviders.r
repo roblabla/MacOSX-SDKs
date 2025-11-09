@@ -1,9 +1,9 @@
 /*
-     File:       OpenTransportProviders.r
+     File:       OSServices/OpenTransportProviders.r
  
-     Contains:   This file contains provider-specific definitions for various built-in providers.
+     Contains:   *** DEPRECATED *** This file contains provider-specific definitions for various built-in providers.
  
-     Copyright:  © 1993-2010 by Apple Inc. and Mentat Inc., all rights reserved.
+     Copyright:  (c) 1993-2011 Apple Inc. and Mentat Inc. All rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

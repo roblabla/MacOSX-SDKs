@@ -17,6 +17,8 @@
 #define IMSERVICEPLUGIN_EXTERN_CLASS  extern __attribute__((visibility("default")))
 #endif
 
+#import <Foundation/Foundation.h>
+
 #pragma mark -
 #pragma mark Account Settings
 
@@ -125,7 +127,7 @@ IMSERVICEPLUGIN_EXTERN NSString * const IMAttributeBold;                       /
 IMSERVICEPLUGIN_EXTERN NSString * const IMAttributeUnderline;                  // NSNumber  (YES = underline, NO = normal)
 IMSERVICEPLUGIN_EXTERN NSString * const IMAttributeStrikethrough;              // NSNumber  (YES = strikethrough, NO = normal)
 IMSERVICEPLUGIN_EXTERN NSString * const IMAttributeLink;                       // NSURL
-IMSERVICEPLUGIN_EXTERN NSString * const IMAttributePreformatted;               // NSNumber  (YES = preformatted, iChat should not add smileys, URLs, or data detection)
+IMSERVICEPLUGIN_EXTERN NSString * const IMAttributePreformatted;               // NSNumber  (YES = preformatted, Messages should not add smileys, URLs, or data detection)
 IMSERVICEPLUGIN_EXTERN NSString * const IMAttributeBaseWritingDirection;       // NSNumber  (-1 = natural, 0 = left-to-right, 1 = right-to-left)
 
 // All colors specified as NSStrings in hex format (@"#ff0000", @"#fff", @"333", @"12abcd")

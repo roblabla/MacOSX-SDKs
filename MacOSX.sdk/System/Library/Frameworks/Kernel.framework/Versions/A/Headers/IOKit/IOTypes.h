@@ -32,12 +32,7 @@
 #define IOKIT 1
 #endif /* !IOKIT */
 
-#if KERNEL
 #include <IOKit/system.h>
-#else
-#include <mach/message.h>
-#include <mach/vm_types.h>
-#endif
 
 #include <IOKit/IOReturn.h>
 
@@ -65,9 +60,7 @@ extern "C" {
 #endif /* __TYPES__ */
 #endif /* __MACTYPES__ */
 
-#if KERNEL
 #include <libkern/OSBase.h>
-#endif
 
 typedef UInt32		IOOptionBits;
 typedef SInt32		IOFixed;
@@ -193,7 +186,8 @@ enum {
     kIOInhibitCache		= 1,
     kIOWriteThruCache		= 2,
     kIOCopybackCache		= 3,
-    kIOWriteCombineCache	= 4
+    kIOWriteCombineCache	= 4,
+    kIOCopybackInnerCache	= 5
 };
 
 // IOMemory mapping options
@@ -202,11 +196,12 @@ enum {
 
     kIOMapCacheMask		= 0x00000700,
     kIOMapCacheShift		= 8,
-    kIOMapDefaultCache		= kIODefaultCache      << kIOMapCacheShift,
-    kIOMapInhibitCache		= kIOInhibitCache      << kIOMapCacheShift,
-    kIOMapWriteThruCache	= kIOWriteThruCache    << kIOMapCacheShift,
-    kIOMapCopybackCache		= kIOCopybackCache     << kIOMapCacheShift,
-    kIOMapWriteCombineCache	= kIOWriteCombineCache << kIOMapCacheShift,
+    kIOMapDefaultCache		= kIODefaultCache       << kIOMapCacheShift,
+    kIOMapInhibitCache		= kIOInhibitCache       << kIOMapCacheShift,
+    kIOMapWriteThruCache	= kIOWriteThruCache     << kIOMapCacheShift,
+    kIOMapCopybackCache		= kIOCopybackCache      << kIOMapCacheShift,
+    kIOMapWriteCombineCache	= kIOWriteCombineCache  << kIOMapCacheShift,
+    kIOMapCopybackInnerCache	= kIOCopybackInnerCache << kIOMapCacheShift,
 
     kIOMapUserOptionsMask	= 0x00000fff,
 

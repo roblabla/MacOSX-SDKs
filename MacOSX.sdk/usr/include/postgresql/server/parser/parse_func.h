@@ -4,10 +4,10 @@
  *
  *
  *
- * Portions Copyright (c) 1996-2010, PostgreSQL Global Development Group
+ * Portions Copyright (c) 1996-2011, PostgreSQL Global Development Group
  * Portions Copyright (c) 1994, Regents of the University of California
  *
- * $PostgreSQL: pgsql/src/include/parser/parse_func.h,v 1.68.6.1 2010/07/29 23:16:41 tgl Exp $
+ * src/include/parser/parse_func.h
  *
  *-------------------------------------------------------------------------
  */
@@ -28,7 +28,7 @@ typedef struct _InhPaths
 	int			nsupers;		/* number of superclasses */
 	Oid			self;			/* this class */
 	Oid		   *supervec;		/* vector of superclasses */
-} InhPaths;
+}	InhPaths;
 
 /* Result codes for func_get_detail */
 typedef enum
@@ -81,7 +81,5 @@ extern Oid LookupFuncNameTypeNames(List *funcname, List *argtypes,
 						bool noError);
 extern Oid LookupAggNameTypeNames(List *aggname, List *argtypes,
 					   bool noError);
-
-extern void check_pg_get_expr_args(ParseState *pstate, Oid fnoid, List *args);
 
 #endif   /* PARSE_FUNC_H */

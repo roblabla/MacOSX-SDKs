@@ -26,7 +26,7 @@
     @abstract   the address to connect to via proxy, used when making the options dictionary
     @discussion the address to connect to via proxy, used when making the options dictionary
 */
-FOUNDATION_EXPORT NSString *const ODSessionProxyAddress;
+FOUNDATION_EXPORT NSString *const ODSessionProxyAddress NS_AVAILABLE(10_6, NA);
 
 /*!
     @const      ODSessionProxyPort
@@ -34,21 +34,21 @@ FOUNDATION_EXPORT NSString *const ODSessionProxyAddress;
     @discussion the port to connect to via proxy, used when making the options dictionary.  This parameter
                 is optional and should not be passed normally.
 */
-FOUNDATION_EXPORT NSString *const ODSessionProxyPort;
+FOUNDATION_EXPORT NSString *const ODSessionProxyPort NS_AVAILABLE(10_6, NA);
 
 /*!
     @const      ODSessionProxyUsername
     @abstract   the username to connect with via proxy, used when making the options dictionary
     @discussion the username to connect with via proxy, used when making the options dictionary
 */
-FOUNDATION_EXPORT NSString *const ODSessionProxyUsername;
+FOUNDATION_EXPORT NSString *const ODSessionProxyUsername NS_AVAILABLE(10_6, NA);
 
 /*!
     @const      ODSessionProxyPassword
     @abstract   the password to connect with via proxy, used when making the options dictionary
     @discussion the password to connect with via proxy, used when making the options dictionary
 */
-FOUNDATION_EXPORT NSString *const ODSessionProxyPassword;
+FOUNDATION_EXPORT NSString *const ODSessionProxyPassword NS_AVAILABLE(10_6, NA);
 
 /*!
     @class       ODSession
@@ -66,7 +66,7 @@ FOUNDATION_EXPORT NSString *const ODSessionProxyPassword;
     @discussion Returns a shared instance of a local ODSession.  This can be used for most situations unless
                 more control is needed over the session.
 */
-+ (id)defaultSession;
++ (id)defaultSession NS_AVAILABLE(10_6, NA);
 
 /*!
     @method     sessionWithOptions:error:
@@ -82,7 +82,7 @@ FOUNDATION_EXPORT NSString *const ODSessionProxyPassword;
                     ODSessionProxyUsername       NSString(username)
                     ODSessionProxyPassword       NSString(password)
 */
-+ (id)sessionWithOptions:(NSDictionary *)inOptions error:(NSError **)outError;
++ (id)sessionWithOptions:(NSDictionary *)inOptions error:(NSError **)outError NS_AVAILABLE(10_6, NA);
 
 /*!
     @method     initWithOptions:error:
@@ -98,7 +98,7 @@ FOUNDATION_EXPORT NSString *const ODSessionProxyPassword;
                     ODSessionProxyUsername       NSString(username)
                     ODSessionProxyPassword       NSString(password)
 */
-- (id)initWithOptions:(NSDictionary *)inOptions error:(NSError **)outError;
+- (id)initWithOptions:(NSDictionary *)inOptions error:(NSError **)outError NS_AVAILABLE(10_6, NA);
 
 /*!
     @method     nodeNamesAndReturnError:
@@ -106,6 +106,6 @@ FOUNDATION_EXPORT NSString *const ODSessionProxyPassword;
     @discussion Returns the node names that are registered on this ODSession.  outError can be nil if
                 error details are not needed.
 */
-- (NSArray *)nodeNamesAndReturnError:(NSError **)outError;
+- (NSArray *)nodeNamesAndReturnError:(NSError **)outError NS_AVAILABLE(10_6, NA);
 
 @end

@@ -1,19 +1,18 @@
 /*
     NSMigrationManager.h
     Core Data
-    Copyright (c) 2004-2010 Apple Inc.
+    Copyright (c) 2004-2012 Apple Inc.
     All rights reserved.
 */
 
 #import <Foundation/NSArray.h>
 #import <Foundation/NSDictionary.h>
 #import <Foundation/NSError.h>
-#import <Foundation/NSObject.h>
-#import <Foundation/NSString.h>
 
 @class NSEntityDescription;
 @class NSEntityMapping;
 @class NSManagedObjectContext;
+@class NSManagedObject;
 @class NSManagedObjectModel;
 @class NSMappingModel;
 @class NSMigrationContext;
@@ -51,8 +50,8 @@ NS_CLASS_AVAILABLE(10_5, 3_0)
 
 /* Tries to use a store specific migration manager to perform the store migration, note that a store specific migration manager class is not guaranteed to perform any of the migration manager delegate callbacks or update values for the observable properties.  
  Defaults to YES */
-- (void)setUsesStoreSpecificMigrationManager:(BOOL)flag NS_AVAILABLE(10_7, NA); 
-- (BOOL)usesStoreSpecificMigrationManager NS_AVAILABLE(10_7, NA);
+- (void)setUsesStoreSpecificMigrationManager:(BOOL)flag NS_AVAILABLE(10_7, 5_0); 
+- (BOOL)usesStoreSpecificMigrationManager NS_AVAILABLE(10_7,  5_0);
 
 /* Resets the association tables for the migration.  (Note this does NOT reset the source or destination contexts).*/
 - (void)reset;

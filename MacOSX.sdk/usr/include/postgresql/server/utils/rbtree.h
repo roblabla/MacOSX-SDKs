@@ -3,10 +3,10 @@
  * rbtree.h
  *	  interface for PostgreSQL generic Red-Black binary tree package
  *
- * Copyright (c) 2009-2010, PostgreSQL Global Development Group
+ * Copyright (c) 2009-2011, PostgreSQL Global Development Group
  *
  * IDENTIFICATION
- *		$PostgreSQL: pgsql/src/include/utils/rbtree.h,v 1.3.2.1 2010/08/01 02:12:51 tgl Exp $
+ *		src/include/utils/rbtree.h
  *
  *-------------------------------------------------------------------------
  */
@@ -17,13 +17,13 @@
  * RBNode is intended to be used as the first field of a larger struct,
  * whose additional fields carry whatever payload data the caller needs
  * for a tree entry.  (The total size of that larger struct is passed to
- * rb_create.)  RBNode is declared here to support this usage, but
+ * rb_create.)	RBNode is declared here to support this usage, but
  * callers must treat it as an opaque struct.
  */
 typedef struct RBNode
 {
 	char		iteratorState;	/* workspace for iterating through tree */
-	char		color;			/* node's current color, red or black */
+	char color;					/* node's current color, red or black */
 	struct RBNode *left;		/* left child, or RBNIL if none */
 	struct RBNode *right;		/* right child, or RBNIL if none */
 	struct RBNode *parent;		/* parent, or NULL (not RBNIL!) if none */
@@ -63,4 +63,4 @@ extern void rb_delete(RBTree *rb, RBNode *node);
 extern void rb_begin_iterate(RBTree *rb, RBOrderControl ctrl);
 extern RBNode *rb_iterate(RBTree *rb);
 
-#endif /* RBTREE_H */
+#endif   /* RBTREE_H */

@@ -1,30 +1,20 @@
 /*
     NSPersistentStoreCoordinator.h
     Core Data
-    Copyright (c) 2004-2010 Apple Inc.
+    Copyright (c) 2004-2012 Apple Inc.
     All rights reserved.
 */
 
-#import <Foundation/NSObject.h>
+#import <Foundation/NSArray.h>
 #import <Foundation/NSLock.h>
 #import <CoreData/CoreDataDefines.h>
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED < MAC_OS_X_VERSION_10_5
-#ifndef NSPersistentStore
-#define NSPersistentStore NSObject
-#endif
-#endif
-
-@class NSArray;
-@class NSMutableArray;
 @class NSDictionary;
 @class NSError;
 @class NSManagedObjectID;
 @class NSManagedObjectModel;
+@class NSManagedObjectContext;
 @class NSPersistentStore;
-@class NSMutableDictionary;
-@class NSString;
-@class NSURL;
 @class NSPersistentStoreRequest;
 
 // Persistent store types supported by Core Data:
@@ -142,13 +132,13 @@ COREDATA_EXTERN NSString * const NSModelPathKey NS_AVAILABLE(10_6, NA);
 COREDATA_EXTERN NSString * const NSObjectURIKey NS_AVAILABLE(10_6, NA);
 
 /* option indicating that a persistent store has a given name in ubiquity, this option is required for ubiquity to function  */
-COREDATA_EXTERN NSString * const NSPersistentStoreUbiquitousContentNameKey NS_AVAILABLE(10_7, NA);    
+COREDATA_EXTERN NSString * const NSPersistentStoreUbiquitousContentNameKey NS_AVAILABLE(10_7, 5_0);    
 
 /* option indicating the log path to use for ubiquity logs, this option is optional for ubiquity, a default path will be generated for the store if none is provided */
-COREDATA_EXTERN NSString * const NSPersistentStoreUbiquitousContentURLKey NS_AVAILABLE(10_7, NA);
+COREDATA_EXTERN NSString * const NSPersistentStoreUbiquitousContentURLKey NS_AVAILABLE(10_7, 5_0);
 
 /* Notification sent after records are imported from the ubiquity store. The notification is sent with the object set to the NSPersistentStoreCoordinator instance which registered the store. */
-COREDATA_EXTERN NSString * const NSPersistentStoreDidImportUbiquitousContentChangesNotification NS_AVAILABLE(10_7, NA);
+COREDATA_EXTERN NSString * const NSPersistentStoreDidImportUbiquitousContentChangesNotification NS_AVAILABLE(10_7, 5_0);
 
 NS_CLASS_AVAILABLE(10_4, 3_0)
 @interface NSPersistentStoreCoordinator : NSObject <NSLocking> {
@@ -237,7 +227,7 @@ NS_CLASS_AVAILABLE(10_4, 3_0)
    The contents of the array will vary depending on the request type: NSFetchRequest results will be an array of managed objects, managed object IDs, or NSDictionaries;  
    NSSaveChangesRequests will an empty array. User defined requests will return arrays of arrays, where the nested array is the result returned form a single store.
  */
-- (id)executeRequest:(NSPersistentStoreRequest *)request withContext:(NSManagedObjectContext *)context error:(NSError**)error NS_AVAILABLE(10_7, NA);
+- (id)executeRequest:(NSPersistentStoreRequest *)request withContext:(NSManagedObjectContext *)context error:(NSError**)error NS_AVAILABLE(10_7,  5_0);
 
 - (void)lock;
 - (void)unlock;

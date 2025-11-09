@@ -152,10 +152,14 @@ extern "C" {
  GLUT_MACOSX_IMPLEMENTATION=1  glutSurfaceTexture.
 
  GLUT_MACOSX_IMPLEMENTATION=2  glutWMCloseFunc, glutCheckLoop.
-  
+
+ GLUT_MACOSX_IMPLEMENTATION=3  GLUT_NO_RECOVERY.
+
+ GLUT_MACOSX_IMPLEMENTATION=4  GLUT_3_2_CORE_PROFILE.
+
 **/
 #ifndef GLUT_MACOSX_IMPLEMENTATION  /* Allow this to be overriden. */
-#define GLUT_MACOSX_IMPLEMENTATION	2
+#define GLUT_MACOSX_IMPLEMENTATION	4
 #endif
 
 /* Display mode bit masks. */
@@ -167,15 +171,20 @@ extern "C" {
 #define GLUT_ACCUM			4
 #define GLUT_ALPHA			8
 #define GLUT_DEPTH			16
-#define GLUT_STENCIL			32
+#define GLUT_STENCIL		32
 #if (GLUT_API_VERSION >= 2)
-#define GLUT_MULTISAMPLE		128
+#define GLUT_MULTISAMPLE	128
 #define GLUT_STEREO			256
 #endif
 #if (GLUT_API_VERSION >= 3)
-#define GLUT_LUMINANCE			512
+#define GLUT_LUMINANCE		512
 #endif
-#define GLUT_NO_RECOVERY    1024
+#if (GLUT_MACOSX_IMPLEMENTATION >= 3)
+#define GLUT_NO_RECOVERY		1024
+#endif
+#if (GLUT_MACOSX_IMPLEMENTATION >= 4)
+#define GLUT_3_2_CORE_PROFILE	2048
+#endif
 
 /* Mouse buttons. */
 #define GLUT_LEFT_BUTTON		0

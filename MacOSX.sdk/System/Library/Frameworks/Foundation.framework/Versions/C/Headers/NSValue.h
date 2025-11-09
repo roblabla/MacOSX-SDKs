@@ -1,15 +1,15 @@
 /*	NSValue.h
-	Copyright (c) 1994-2011, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2012, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
 @class NSString, NSDictionary;
 
-@interface NSValue : NSObject <NSCopying, NSCoding>
+@interface NSValue : NSObject <NSCopying, NSSecureCoding>
 
 - (void)getValue:(void *)value;
-- (const char *)objCType;
+- (const char *)objCType NS_RETURNS_INNER_POINTER;
 
 @end
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2011 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2012 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -98,13 +98,15 @@ struct nd_ifinfo {
 	u_int8_t chlim;			/* CurHopLimit */
 	u_int8_t receivedra;
 	/* the following 3 members are for privacy extension for addrconf */
-	u_int8_t randomseed0[8]; /* upper 64 bits of MD5 digest */
+	u_int8_t randomseed0[8]; /* upper 64 bits of SHA1 digest */
 	u_int8_t randomseed1[8]; /* lower 64 bits (usually the EUI64 IFID) */
 	u_int8_t randomid[8];	/* current random ID */
 };
 
 
-#define ND6_IFF_PERFORMNUD	0x1
+#define ND6_IFF_PERFORMNUD		0x1
+#define ND6_IFF_PROXY_PREFIXES		0x20
+#define ND6_IFF_IGNORE_NA		0x40
 
 struct in6_nbrinfo {
 	char ifname[IFNAMSIZ];	/* if name, e.g. "en0" */
@@ -211,8 +213,9 @@ struct	in6_ndifreq {
 /* Prefix status */
 #define NDPRF_ONLINK		0x1
 #define NDPRF_DETACHED		0x2
-#define	NDPRF_STATIC		0x100
-#define	NDPRF_IFSCOPE		0x1000
+#define NDPRF_STATIC		0x100
+#define NDPRF_IFSCOPE		0x1000
+#define NDPRF_PRPROXY		0x2000
 
 /* protocol constants */
 #define MAX_RTR_SOLICITATION_DELAY	1	/*1sec*/
@@ -221,6 +224,8 @@ struct	in6_ndifreq {
 
 #define ND6_INFINITE_LIFETIME		0xffffffff
 #define ND6_MAX_LIFETIME		0x7fffffff
+
+
 
 
 #endif /* _NETINET6_ND6_H_ */

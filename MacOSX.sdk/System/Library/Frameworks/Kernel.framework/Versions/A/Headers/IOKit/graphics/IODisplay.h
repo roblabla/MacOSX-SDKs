@@ -94,13 +94,10 @@ private:
     IOIndex     connection;
 
 protected:
-/*! @struct ExpansionData
-    @discussion This structure will be used to expand the capablilties of this class in the future.
-    */    
+/*  Reserved for future use.  (Internal use only)  */
     struct ExpansionData { };
 
-/*! @var reserved
-    Reserved for future use.  (Internal use only)  */
+/*  Reserved for future use.  (Internal use only)  */
     ExpansionData * reserved;
 
 public:
@@ -209,6 +206,7 @@ private:
     static IOReturn _framebufferEvent( OSObject * self, void * ref,
                     IOFramebuffer *framebuffer, IOIndex event, void * info );
 
+	void searchParameterHandlers(IORegistryEntry * entry);
     bool addParameterHandler( IODisplayParameterHandler * parameterHandler );
     bool removeParameterHandler( IODisplayParameterHandler * parameterHandler );
     static bool updateNumber( OSDictionary * params, const OSSymbol * key, SInt32 value );

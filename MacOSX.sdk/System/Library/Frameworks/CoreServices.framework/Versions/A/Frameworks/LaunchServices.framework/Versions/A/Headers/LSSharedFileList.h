@@ -32,7 +32,7 @@
 
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -61,7 +61,7 @@ typedef struct OpaqueLSSharedFileListItemRef*  LSSharedFileListItemRef;
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern CFStringRef kLSSharedFileListFavoriteVolumes                  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern CFStringRef kLSSharedFileListFavoriteVolumes                  __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 
 /*
@@ -72,7 +72,7 @@ extern CFStringRef kLSSharedFileListFavoriteVolumes                  AVAILABLE_M
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern CFStringRef kLSSharedFileListFavoriteItems                    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern CFStringRef kLSSharedFileListFavoriteItems                    __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 
 /*
@@ -83,7 +83,7 @@ extern CFStringRef kLSSharedFileListFavoriteItems                    AVAILABLE_M
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern CFStringRef kLSSharedFileListRecentApplicationItems           AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern CFStringRef kLSSharedFileListRecentApplicationItems           __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 
 /*
@@ -94,7 +94,7 @@ extern CFStringRef kLSSharedFileListRecentApplicationItems           AVAILABLE_M
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern CFStringRef kLSSharedFileListRecentDocumentItems              AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern CFStringRef kLSSharedFileListRecentDocumentItems              __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 
 /*
@@ -105,7 +105,7 @@ extern CFStringRef kLSSharedFileListRecentDocumentItems              AVAILABLE_M
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern CFStringRef kLSSharedFileListRecentServerItems                AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern CFStringRef kLSSharedFileListRecentServerItems                __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 
 /*
@@ -116,7 +116,7 @@ extern CFStringRef kLSSharedFileListRecentServerItems                AVAILABLE_M
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern CFStringRef kLSSharedFileListSessionLoginItems                AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern CFStringRef kLSSharedFileListSessionLoginItems                __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 
 /*
@@ -127,7 +127,7 @@ extern CFStringRef kLSSharedFileListSessionLoginItems                AVAILABLE_M
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern CFStringRef kLSSharedFileListGlobalLoginItems                 AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern CFStringRef kLSSharedFileListGlobalLoginItems                 __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 
 /* LSSharedFileList property keys */
@@ -145,7 +145,7 @@ extern CFStringRef kLSSharedFileListGlobalLoginItems                 AVAILABLE_M
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern CFStringRef kLSSharedFileListRecentItemsMaxAmount             AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern CFStringRef kLSSharedFileListRecentItemsMaxAmount             __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 /*
  *  kLSSharedFileListVolumesComputerVisible
@@ -159,7 +159,7 @@ extern CFStringRef kLSSharedFileListRecentItemsMaxAmount             AVAILABLE_M
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern CFStringRef kLSSharedFileListVolumesComputerVisible           AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern CFStringRef kLSSharedFileListVolumesComputerVisible           __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 /*
  *  kLSSharedFileListVolumesIDiskVisible
@@ -173,7 +173,7 @@ extern CFStringRef kLSSharedFileListVolumesComputerVisible           AVAILABLE_M
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern CFStringRef kLSSharedFileListVolumesIDiskVisible              AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern CFStringRef kLSSharedFileListVolumesIDiskVisible              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  kLSSharedFileListVolumesNetworkVisible
@@ -187,7 +187,7 @@ extern CFStringRef kLSSharedFileListVolumesIDiskVisible              AVAILABLE_M
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern CFStringRef kLSSharedFileListVolumesNetworkVisible            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern CFStringRef kLSSharedFileListVolumesNetworkVisible            __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 /* item default positions */
 
@@ -204,7 +204,7 @@ extern CFStringRef kLSSharedFileListVolumesNetworkVisible            AVAILABLE_M
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern LSSharedFileListItemRef kLSSharedFileListItemBeforeFirst      AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern LSSharedFileListItemRef kLSSharedFileListItemBeforeFirst      __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 /*
  *  kLSSharedFileListItemLast
@@ -218,7 +218,7 @@ extern LSSharedFileListItemRef kLSSharedFileListItemBeforeFirst      AVAILABLE_M
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern LSSharedFileListItemRef kLSSharedFileListItemLast             AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern LSSharedFileListItemRef kLSSharedFileListItemLast             __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 
 /* LSSharedFileListItem property keys */
@@ -235,7 +235,7 @@ extern LSSharedFileListItemRef kLSSharedFileListItemLast             AVAILABLE_M
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern CFStringRef kLSSharedFileListItemHidden                       AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern CFStringRef kLSSharedFileListItemHidden                       __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 /*
  *  kLSSharedFileListLoginItemHidden
  *  
@@ -248,7 +248,7 @@ extern CFStringRef kLSSharedFileListItemHidden                       AVAILABLE_M
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern CFStringRef kLSSharedFileListLoginItemHidden                  AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+extern CFStringRef kLSSharedFileListLoginItemHidden                  __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
 
 /* LSSharedFileListItemResolve flags */
 enum {
@@ -285,7 +285,7 @@ typedef CALLBACK_API_C( void , LSSharedFileListChangedProcPtr )(LSSharedFileList
  *    Non-Carbon CFM:   not available
  */
 extern CFTypeID 
-LSSharedFileListGetTypeID(void)                               AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+LSSharedFileListGetTypeID(void)                               __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 
 /*
@@ -307,7 +307,7 @@ LSSharedFileListGetTypeID(void)                               AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern CFTypeID 
-LSSharedFileListItemGetTypeID(void)                           AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+LSSharedFileListItemGetTypeID(void)                           __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 
 /*
@@ -351,7 +351,7 @@ extern LSSharedFileListRef
 LSSharedFileListCreate(
   CFAllocatorRef   inAllocator,
   CFStringRef      inListType,
-  CFTypeRef        listOptions)                               AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  CFTypeRef        listOptions)                               __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 
 /*
@@ -386,7 +386,7 @@ LSSharedFileListCreate(
 extern OSStatus 
 LSSharedFileListSetAuthorization(
   LSSharedFileListRef   inList,
-  AuthorizationRef      inAuthorization)                      AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  AuthorizationRef      inAuthorization)                      __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 
 /*
@@ -431,7 +431,7 @@ LSSharedFileListAddObserver(
   CFRunLoopRef                     inRunloop,
   CFStringRef                      inRunloopMode,
   LSSharedFileListChangedProcPtr   callback,
-  void *                           context)                   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  void *                           context)                   __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 
 /*
@@ -474,7 +474,7 @@ LSSharedFileListRemoveObserver(
   CFRunLoopRef                     inRunloop,
   CFStringRef                      inRunloopMode,
   LSSharedFileListChangedProcPtr   callback,
-  void *                           context)                   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  void *                           context)                   __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 
 /*
@@ -500,7 +500,7 @@ LSSharedFileListRemoveObserver(
  *    Non-Carbon CFM:   not available
  */
 extern UInt32 
-LSSharedFileListGetSeedValue(LSSharedFileListRef inList)      AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+LSSharedFileListGetSeedValue(LSSharedFileListRef inList)      __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 
 /*
@@ -536,7 +536,7 @@ LSSharedFileListGetSeedValue(LSSharedFileListRef inList)      AVAILABLE_MAC_OS_X
 extern CFTypeRef 
 LSSharedFileListCopyProperty(
   LSSharedFileListRef   inList,
-  CFStringRef           inPropertyName)                       AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  CFStringRef           inPropertyName)                       __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 
 /*
@@ -571,7 +571,7 @@ extern OSStatus
 LSSharedFileListSetProperty(
   LSSharedFileListRef   inList,
   CFStringRef           inPropertyName,
-  CFTypeRef             inPropertyData)                       AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  CFTypeRef             inPropertyData)                       __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 
 /*
@@ -607,7 +607,7 @@ LSSharedFileListSetProperty(
 extern CFArrayRef 
 LSSharedFileListCopySnapshot(
   LSSharedFileListRef   inList,
-  UInt32 *              outSnapshotSeed)                      AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  UInt32 *              outSnapshotSeed)                      __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 
 /*
@@ -669,7 +669,7 @@ LSSharedFileListInsertItemURL(
   IconRef                   inIconRef,
   CFURLRef                  inURL,
   CFDictionaryRef           inPropertiesToSet,
-  CFArrayRef                inPropertiesToClear)              AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  CFArrayRef                inPropertiesToClear)              __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 
 /*
@@ -731,7 +731,7 @@ LSSharedFileListInsertItemFSRef(
   IconRef                   inIconRef,
   const FSRef *             inFSRef,
   CFDictionaryRef           inPropertiesToSet,
-  CFArrayRef                inPropertiesToClear)              AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  CFArrayRef                inPropertiesToClear)              __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 
 /*
@@ -768,7 +768,7 @@ extern OSStatus
 LSSharedFileListItemMove(
   LSSharedFileListRef       inList,
   LSSharedFileListItemRef   inItem,
-  LSSharedFileListItemRef   inMoveAfterItem)                  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  LSSharedFileListItemRef   inMoveAfterItem)                  __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 
 /*
@@ -799,7 +799,7 @@ LSSharedFileListItemMove(
 extern OSStatus 
 LSSharedFileListItemRemove(
   LSSharedFileListRef       inList,
-  LSSharedFileListItemRef   inItem)                           AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  LSSharedFileListItemRef   inItem)                           __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 
 /*
@@ -825,7 +825,7 @@ LSSharedFileListItemRemove(
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-LSSharedFileListRemoveAllItems(LSSharedFileListRef inList)    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+LSSharedFileListRemoveAllItems(LSSharedFileListRef inList)    __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 
 /*
@@ -846,7 +846,7 @@ LSSharedFileListRemoveAllItems(LSSharedFileListRef inList)    AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern UInt32 
-LSSharedFileListItemGetID(LSSharedFileListItemRef inItem)     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+LSSharedFileListItemGetID(LSSharedFileListItemRef inItem)     __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 
 /*
@@ -871,7 +871,7 @@ LSSharedFileListItemGetID(LSSharedFileListItemRef inItem)     AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern IconRef 
-LSSharedFileListItemCopyIconRef(LSSharedFileListItemRef inItem) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+LSSharedFileListItemCopyIconRef(LSSharedFileListItemRef inItem) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 
 /*
@@ -893,7 +893,7 @@ LSSharedFileListItemCopyIconRef(LSSharedFileListItemRef inItem) AVAILABLE_MAC_OS
  *    Non-Carbon CFM:   not available
  */
 extern CFStringRef 
-LSSharedFileListItemCopyDisplayName(LSSharedFileListItemRef inItem) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+LSSharedFileListItemCopyDisplayName(LSSharedFileListItemRef inItem) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 
 /*
@@ -933,7 +933,7 @@ LSSharedFileListItemResolve(
   LSSharedFileListItemRef   inItem,
   UInt32                    inFlags,
   CFURLRef *                outURL,
-  FSRef *                   outRef)                           AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  FSRef *                   outRef)                           __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 
 /*
@@ -957,7 +957,7 @@ LSSharedFileListItemResolve(
 extern CFTypeRef 
 LSSharedFileListItemCopyProperty(
   LSSharedFileListItemRef   inItem,
-  CFStringRef               inPropertyName)                   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  CFStringRef               inPropertyName)                   __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 
 /*
@@ -981,7 +981,7 @@ extern OSStatus
 LSSharedFileListItemSetProperty(
   LSSharedFileListItemRef   inItem,
   CFStringRef               inPropertyName,
-  CFTypeRef                 inPropertyData)                   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  CFTypeRef                 inPropertyData)                   __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 
 

@@ -1,7 +1,7 @@
 /*
 	NSFont.h
 	Application Kit
-	Copyright (c) 1994-2011, Apple Inc.
+	Copyright (c) 1994-2012, Apple Inc.
 	All rights reserved.
 */
 
@@ -44,6 +44,7 @@ enum {
 };
 typedef NSUInteger NSFontRenderingMode;
 
+NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 @interface NSFont : NSObject <NSCopying, NSCoding> {
     /* All instance variables are private */
     NSString *_name;
@@ -105,7 +106,7 @@ typedef NSUInteger NSFontRenderingMode;
 /********* Core font attribute *********/
 - (NSString *)fontName;
 - (CGFloat)pointSize;
-- (const CGFloat *)matrix;
+- (const CGFloat *)matrix NS_RETURNS_INNER_POINTER;
 - (NSString *)familyName;
 - (NSString *)displayName;
 - (NSFontDescriptor *)fontDescriptor;

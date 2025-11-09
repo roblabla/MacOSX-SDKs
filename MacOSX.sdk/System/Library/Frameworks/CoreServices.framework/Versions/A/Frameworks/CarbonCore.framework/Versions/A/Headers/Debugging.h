@@ -2,16 +2,9 @@
      File:       CarbonCore/Debugging.h
  
      Contains:   Macros to handle exceptions and assertions.
+                 The contents of this header file are deprecated.
  
-     Version:    CarbonCore-960.18~3
- 
-     Copyright:  © 1989-2008 by Apple Computer, Inc., all rights reserved.
- 
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
- 
-                     http://developer.apple.com/bugreporter/
- 
+     Copyright:  Â© 1989-2011 by Apple Inc. All rights reserved.
 */
 #ifndef __DEBUGGING__
 #define __DEBUGGING__
@@ -29,7 +22,7 @@
 #endif
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -359,7 +352,7 @@ DebugAssert(
   const char *  errorString,
   const char *  fileName,
   long          lineNumber,
-  void *        value)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *        value)                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -395,7 +388,7 @@ enum {
  *    Non-Carbon CFM:   in DebugLib 1.0 and later
  */
 extern UInt32 
-TaskLevel(void)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+TaskLevel(void)                                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -471,7 +464,7 @@ extern OSStatus
 NewDebugComponent(
   OSType                      componentSignature,
   ConstStr255Param            componentName,
-  DebugComponentCallbackUPP   componentCallback)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DebugComponentCallbackUPP   componentCallback)              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -509,7 +502,7 @@ extern OSStatus
 NewDebugOption(
   OSType             componentSignature,
   SInt32             optionSelectorNum,
-  ConstStr255Param   optionName)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ConstStr255Param   optionName)                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -537,7 +530,7 @@ NewDebugOption(
  *    Non-Carbon CFM:   in DebugLib 1.0 and later
  */
 extern OSStatus 
-DisposeDebugComponent(OSType componentSignature)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeDebugComponent(OSType componentSignature)              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -575,7 +568,7 @@ extern OSStatus
 GetDebugComponentInfo(
   UInt32    itemIndex,
   OSType *  componentSignature,
-  Str255    componentName)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Str255    componentName)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -624,7 +617,7 @@ GetDebugOptionInfo(
   OSType     componentSignature,
   SInt32 *   optionSelectorNum,
   Str255     optionName,
-  Boolean *  optionSetting)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *  optionSetting)                                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -660,7 +653,7 @@ extern OSStatus
 SetDebugOptionValue(
   OSType    componentSignature,
   SInt32    optionSelectorNum,
-  Boolean   newOptionSetting)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean   newOptionSetting)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -727,7 +720,7 @@ typedef STACK_UPP_TYPE(DebugAssertOutputHandlerProcPtr)         DebugAssertOutpu
  *    Non-Carbon CFM:   in DebugLib 1.0 and later
  */
 extern void 
-InstallDebugAssertOutputHandler(DebugAssertOutputHandlerUPP handler) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+InstallDebugAssertOutputHandler(DebugAssertOutputHandlerUPP handler) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -811,7 +804,7 @@ InstallDebugAssertOutputHandler(DebugAssertOutputHandlerUPP handler) AVAILABLE_M
  *    Non-Carbon CFM:   not available
  */
 extern const char * 
-GetMacOSStatusErrorString(OSStatus err)                       AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+GetMacOSStatusErrorString(OSStatus err)                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -852,7 +845,7 @@ GetMacOSStatusErrorString(OSStatus err)                       AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern const char * 
-GetMacOSStatusCommentString(OSStatus err)                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+GetMacOSStatusCommentString(OSStatus err)                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -869,7 +862,7 @@ GetMacOSStatusCommentString(OSStatus err)                     AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern DebugComponentCallbackUPP
-NewDebugComponentCallbackUPP(DebugComponentCallbackProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewDebugComponentCallbackUPP(DebugComponentCallbackProcPtr userRoutine) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  NewDebugAssertOutputHandlerUPP()
@@ -880,7 +873,7 @@ NewDebugComponentCallbackUPP(DebugComponentCallbackProcPtr userRoutine) AVAILABL
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern DebugAssertOutputHandlerUPP
-NewDebugAssertOutputHandlerUPP(DebugAssertOutputHandlerProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewDebugAssertOutputHandlerUPP(DebugAssertOutputHandlerProcPtr userRoutine) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  DisposeDebugComponentCallbackUPP()
@@ -891,7 +884,7 @@ NewDebugAssertOutputHandlerUPP(DebugAssertOutputHandlerProcPtr userRoutine) AVAI
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeDebugComponentCallbackUPP(DebugComponentCallbackUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeDebugComponentCallbackUPP(DebugComponentCallbackUPP userUPP) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  DisposeDebugAssertOutputHandlerUPP()
@@ -902,7 +895,7 @@ DisposeDebugComponentCallbackUPP(DebugComponentCallbackUPP userUPP) AVAILABLE_MA
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeDebugAssertOutputHandlerUPP(DebugAssertOutputHandlerUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeDebugAssertOutputHandlerUPP(DebugAssertOutputHandlerUPP userUPP) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  InvokeDebugComponentCallbackUPP()
@@ -917,7 +910,7 @@ InvokeDebugComponentCallbackUPP(
   SInt32                     optionSelectorNum,
   UInt32                     command,
   Boolean *                  optionSetting,
-  DebugComponentCallbackUPP  userUPP)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DebugComponentCallbackUPP  userUPP)                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  InvokeDebugAssertOutputHandlerUPP()
@@ -938,7 +931,7 @@ InvokeDebugAssertOutputHandlerUPP(
   long                         lineNumber,
   void *                       value,
   ConstStr255Param             outputMsg,
-  DebugAssertOutputHandlerUPP  userUPP)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DebugAssertOutputHandlerUPP  userUPP)                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 #if __MACH__
   #ifdef __cplusplus

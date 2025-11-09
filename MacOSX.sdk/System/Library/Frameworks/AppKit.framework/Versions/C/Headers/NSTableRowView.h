@@ -1,7 +1,7 @@
 /*
     NSTableRowView.h
     Application Kit
-    Copyright (c) 2008-2011, Apple Inc.
+    Copyright (c) 2008-2012, Apple Inc.
     All rights reserved.
 */
 
@@ -39,7 +39,9 @@ NS_CLASS_AVAILABLE(10_7, NA)
     unsigned int _hasCustomGridColor:1;
     unsigned int _usingCachedImageOnly:1;
     unsigned int _gridStyleMask:4;
-    unsigned int _reserved2:15;
+    unsigned int _updatingBackgroundStyle:1;
+    unsigned int _locationNeedsUpdating:1;
+    unsigned int _reserved2:13;
 }
 
 /* The tableView sets the selectionHighlightStyle based on its current value. 
@@ -86,11 +88,11 @@ NS_CLASS_AVAILABLE(10_7, NA)
     -drawDraggingDestinationFeedbackInRect: (only called if targetForDropOperation==YES)
 */
 
-/* Override point to draw a custom background. 'dirtyRect' is the current dirty rect passed from -drawRect:. By default, this method draws the background color or "group row" style look. It will also draw the below look for a drop target if targetForDropOperation is YES.
+/* Override point to draw a custom background. 'dirtyRect' is the current dirty rect passed from -drawRect:. By default, this method draws the background color or "group row" style look. It will also draw the below look for a drop target if targetForDropOperation is YES. It is also recommended to override interiorBackgroundStyle when overriding this method.
  */
 - (void)drawBackgroundInRect:(NSRect)dirtyRect;
 
-/* Override point for drawing the selection. 'dirtyRect' is the current dirty rect passed from -drawRect:. This method is only called if the selection should be drawn. The selection will automatically be alpha-blended if the selection is animating in or out. The default selection drawn is dependent on the selectionHighlightStyle.
+/* Override point for drawing the selection. 'dirtyRect' is the current dirty rect passed from -drawRect:. This method is only called if the selection should be drawn. The selection will automatically be alpha-blended if the selection is animating in or out. The default selection drawn is dependent on the selectionHighlightStyle.  It is also recommended to override interiorBackgroundStyle when overriding this method.
  */
 - (void)drawSelectionInRect:(NSRect)dirtyRect;
 

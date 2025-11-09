@@ -128,10 +128,18 @@ struct kauth_identity_extlookup {
 	u_int32_t	el_member_valid; /* TTL on group lookup result */
 };
 
+struct kauth_cache_sizes {
+	u_int32_t kcs_group_size;
+	u_int32_t kcs_id_size;
+};
+
 #define KAUTH_EXTLOOKUP_REGISTER	(0)
 #define KAUTH_EXTLOOKUP_RESULT		(1<<0)
 #define KAUTH_EXTLOOKUP_WORKER		(1<<1)
 #define	KAUTH_EXTLOOKUP_DEREGISTER	(1<<2)
+#define	KAUTH_GET_CACHE_SIZES		(1<<3)
+#define	KAUTH_SET_CACHE_SIZES		(1<<4)
+#define	KAUTH_CLEAR_CACHES		(1<<5)
 
 
 /*
@@ -272,7 +280,6 @@ __END_DECLS
 /*
  * Generic Access Control Lists.
  */
-#if defined(KERNEL) || defined (_SYS_ACL_H)
 
 typedef u_int32_t kauth_ace_rights_t;
 
@@ -408,7 +415,6 @@ typedef struct kauth_filesec *kauth_filesec_t;
 #define	KAUTH_ENDIAN_HOST	0x00000001	/* set host endianness */
 #define	KAUTH_ENDIAN_DISK	0x00000002	/* set disk endianness */
 
-#endif /* KERNEL || <sys/acl.h> */
 
 
 
@@ -557,7 +563,6 @@ __END_DECLS
 
 /* Actions, also rights bits in an ACE */
 
-#if defined(KERNEL) || defined (_SYS_ACL_H)
 #define KAUTH_VNODE_READ_DATA			(1<<1)
 #define KAUTH_VNODE_LIST_DIRECTORY		KAUTH_VNODE_READ_DATA
 #define KAUTH_VNODE_WRITE_DATA			(1<<2)
@@ -675,7 +680,6 @@ __END_DECLS
 					KAUTH_VNODE_CHECKIMMUTABLE)
 
 
-#endif /* KERNEL || <sys/acl.h> */
 
 #include <sys/lock.h>	/* lck_grp_t */
 

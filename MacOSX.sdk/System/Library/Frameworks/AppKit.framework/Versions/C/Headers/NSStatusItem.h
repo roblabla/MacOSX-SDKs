@@ -1,7 +1,7 @@
 /*
         NSStatusItem.h
         Application Kit
-        Copyright (c) 1997-2011, Apple Inc.  All rights reserved.
+        Copyright (c) 1997-2012, Apple Inc.  All rights reserved.
         All rights reserved.
 */
 

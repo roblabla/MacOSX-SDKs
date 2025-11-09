@@ -1,24 +1,16 @@
 /*
     NSFetchRequest.h
     Core Data
-    Copyright (c) 2004-2010 Apple Inc.
+    Copyright (c) 2004-2012 Apple Inc.
     All rights reserved.
 */
 
 #import <Foundation/NSArray.h>
-
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_7
 #import <CoreData/NSPersistentStoreRequest.h>
-#else 
-#ifndef NSPersistentStoreRequest
-#define NSPersistentStoreRequest NSObject
-#endif
-#endif
 
 @class NSEntityDescription;
 @class NSManagedObjectModel;
 @class NSPredicate;
-@class NSString;
 
 /* Definition of the possible result types a fetch request can return. */
 
@@ -39,9 +31,6 @@ typedef NSUInteger NSFetchRequestResultType;
 NS_CLASS_AVAILABLE(10_4, 3_0)
 @interface NSFetchRequest : NSPersistentStoreRequest <NSCoding> {
 @private
-#if MAC_OS_X_VERSION_MAX_ALLOWED < MAC_OS_X_VERSION_10_7
-	NSArray *_reserved;
-#endif
 	NSArray *_groupByProperties;
 	NSPredicate *_havingPredicate;
 	NSUInteger _offset;
@@ -67,14 +56,14 @@ NS_CLASS_AVAILABLE(10_4, 3_0)
     } _flags;
 }
 
-+ (NSFetchRequest*)fetchRequestWithEntityName:(NSString*)entityName NS_AVAILABLE(10_7, NA);
++ (NSFetchRequest*)fetchRequestWithEntityName:(NSString*)entityName NS_AVAILABLE(10_7, 4_0);
 
 - (id)init;
-- (id)initWithEntityName:(NSString*)entityName NS_AVAILABLE(10_7, NA);
+- (id)initWithEntityName:(NSString*)entityName NS_AVAILABLE(10_7, 4_0);
 
 - (NSEntityDescription *)entity;
 - (void)setEntity:(NSEntityDescription *)entity;
-- (NSString*)entityName NS_AVAILABLE(10_7, NA);
+- (NSString*)entityName NS_AVAILABLE(10_7, 4_0);
 
 - (NSPredicate *)predicate;
 - (void)setPredicate:(NSPredicate *)predicate;
@@ -111,7 +100,6 @@ NS_CLASS_AVAILABLE(10_4, 3_0)
 - (BOOL)returnsObjectsAsFaults NS_AVAILABLE(10_5,3_0);
 - (void)setReturnsObjectsAsFaults:(BOOL)yesNo NS_AVAILABLE(10_5,3_0);
 
-
 /* Returns/sets an array of relationship keypaths to prefetch along with the entity for the request.  The array contains keypath strings in NSKeyValueCoding notation, as you would normally use with valueForKeyPath.  (Prefetching allows Core Data to obtain developer-specified related objects in a single fetch (per entity), rather than incurring subsequent access to the store for each individual record as their faults are tripped.)  Defaults to an empty array (no prefetching.) 
 */
 - (NSArray *)relationshipKeyPathsForPrefetching NS_AVAILABLE(10_5,3_0);
@@ -140,20 +128,20 @@ NS_CLASS_AVAILABLE(10_4, 3_0)
 - (NSUInteger)fetchBatchSize NS_AVAILABLE(10_6, 3_0);
 - (void)setFetchBatchSize:(NSUInteger) bsize NS_AVAILABLE(10_6, 3_0);
 
-- (BOOL)shouldRefreshRefetchedObjects NS_AVAILABLE(10_7, NA);
-- (void)setShouldRefreshRefetchedObjects:(BOOL)flag NS_AVAILABLE(10_7, NA);
+- (BOOL)shouldRefreshRefetchedObjects NS_AVAILABLE(10_7,  5_0);
+- (void)setShouldRefreshRefetchedObjects:(BOOL)flag NS_AVAILABLE(10_7,  5_0);
 
 /* Specifies the way in which data should be grouped before a select statement is run in an SQL database.
  Values passed to propertiesToGroupBy must be NSPropertyDescriptions, NSExpressionDescriptions, or keypath strings; keypaths can not contain 
  any to-many steps. 
  If GROUP BY is used, then you must set the resultsType to NSDictionaryResultsType, and the SELECT values must be literals, aggregates, 
  or columns specified in the GROUP BY. Aggregates will operate on the groups specified in the GROUP BY rather than the whole table. */
-- (NSArray*)propertiesToGroupBy NS_AVAILABLE(10_7, NA); 
-- (void)setPropertiesToGroupBy:(NSArray *)array NS_AVAILABLE(10_7, NA); 
+- (NSArray*)propertiesToGroupBy NS_AVAILABLE(10_7,  5_0); 
+- (void)setPropertiesToGroupBy:(NSArray *)array NS_AVAILABLE(10_7,  5_0); 
 
 /* Specifies a predicate that will be used to filter rows being returned by a query containing a GROUP BY. If a having predicate is
  supplied, it will be run after the GROUP BY.  Specifying a HAVING predicate requires that a GROUP BY also be specified. */
-- (NSPredicate*)havingPredicate NS_AVAILABLE(10_7, NA);
-- (void)setHavingPredicate:(NSPredicate *)predicate NS_AVAILABLE(10_7, NA); 
+- (NSPredicate*)havingPredicate NS_AVAILABLE(10_7,  5_0);
+- (void)setHavingPredicate:(NSPredicate *)predicate NS_AVAILABLE(10_7,  5_0); 
 
 @end

@@ -1,9 +1,9 @@
 /*
-     File:       OpenTransportProtocol.r
+     File:       OSServices/OpenTransportProtocol.r
  
-     Contains:   Definitions likely to be used by low-level protocol stack implementation.
+     Contains:   *** DEPRECATED *** Definitions likely to be used by low-level protocol stack implementation.
  
-     Copyright:  © 1993-2010 by Apple Inc. and Mentat Inc., all rights reserved.
+     Copyright:  (c) 1993-2011 Apple Inc. and Mentat Inc. All rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

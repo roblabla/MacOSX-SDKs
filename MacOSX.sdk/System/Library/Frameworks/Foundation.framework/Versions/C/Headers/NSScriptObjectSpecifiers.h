@@ -1,6 +1,6 @@
 /*
 	NSScriptObjectSpecifiers.h
-	Copyright (c) 1997-2011, Apple Inc. All rights reserved.
+	Copyright (c) 1997-2012, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -19,29 +19,26 @@ enum {
 };
 
 
-enum {
+typedef NS_ENUM(NSUInteger, NSInsertionPosition) {
     NSPositionAfter,
     NSPositionBefore,
     NSPositionBeginning,
     NSPositionEnd,
     NSPositionReplace
 };
-typedef NSUInteger NSInsertionPosition;
 
-enum {
+typedef NS_ENUM(NSUInteger, NSRelativePosition) {
     NSRelativeAfter = 0,
     NSRelativeBefore
 };
-typedef NSUInteger NSRelativePosition;
 
-enum {
+typedef NS_ENUM(NSUInteger, NSWhoseSubelementIdentifier) {
     NSIndexSubelement = 0,
     NSEverySubelement = 1,
     NSMiddleSubelement = 2,
     NSRandomSubelement = 3,
     NSNoSubelement = 4 // Only valid for the end subelement
 };
-typedef NSUInteger NSWhoseSubelementIdentifier;
 
 // This class represents a specifier to a set of objects.  It can be evaluated to return the objects it specifiers.  This abstract superclass is subclassed for each type of specifier.
 // A specifier always accesses a specific property of an object or array of objects.  The object accessed is called the container (or container).  When object specifiers are nested the container[s] are described by the container specifier.  When an object specifier has no container specifier, the container objects must be supplied explicitly.
@@ -94,7 +91,7 @@ typedef NSUInteger NSWhoseSubelementIdentifier;
 - (void)setContainerClassDescription:(NSScriptClassDescription *)classDesc;
 - (NSScriptClassDescription *)keyClassDescription;
 
-- (NSInteger *)indicesOfObjectsByEvaluatingWithContainer:(id)container count:(NSInteger *)count;
+- (NSInteger *)indicesOfObjectsByEvaluatingWithContainer:(id)container count:(NSInteger *)count NS_RETURNS_INNER_POINTER;
     // Returning with count == -1 is shorthand for all indices.
     // count == 0 means no objects match.
 - (id)objectsByEvaluatingWithContainers:(id)containers;

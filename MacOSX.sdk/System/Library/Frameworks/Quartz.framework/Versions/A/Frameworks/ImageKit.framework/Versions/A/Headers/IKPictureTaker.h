@@ -15,11 +15,6 @@
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
 
-#ifndef NSINTEGER_DEFINED
-typedef int NSInteger;
-#endif
-
-
 /*! 
   @class IKPictureTaker
   @abstract An IKPictureTaker object is a panel that allows users to choose and crop an image. It supports browsing of the file system and includes a recents popup-menu. The IKPictureTaker lets the user to crop a choosen image or to take snapshot from a camera like the built-in iSight. 
@@ -126,7 +121,6 @@ typedef int NSInteger;
  *   IKPictureTakerInformationalTextKey		  NSString or NSAttributedString    "Drag Image Here"
  *   IKPictureTakerImageTransformsKey         NSDictionary(serializable)		none
  *   IKPictureTakerOutputImageMaxSizeKey      NSValue(NSSize)				    none
- *   IKPictureTakerCropAreaSizeKey            NSValue(NSSize)				    none
  *   IKPictureTakerShowAddressBookPictureKey  NSNumber(BOOL)					NO
  *   IKPictureTakerShowEmptyPictureKey        NSImage						    nil
  *   IKPictureTakerRemainOpenAfterValidateKey NSNumber(BOOL)					NO
@@ -140,7 +134,6 @@ extern NSString *const IKPictureTakerShowEffectsKey;
 extern NSString *const IKPictureTakerInformationalTextKey;
 extern NSString *const IKPictureTakerImageTransformsKey;
 extern NSString *const IKPictureTakerOutputImageMaxSizeKey;
-extern NSString *const IKPictureTakerCropAreaSizeKey;
 extern NSString *const IKPictureTakerShowAddressBookPictureKey;
 extern NSString *const IKPictureTakerShowEmptyPictureKey;
 

@@ -555,9 +555,9 @@ SecTransformRef SecTransformFindByName(SecGroupTransformRef transform,
 						error parameter if it is not NULL. 						
 */
 
-CF_EXPORT 
+CF_EXPORT CF_RETURNS_RETAINED
 CFTypeRef SecTransformExecute(SecTransformRef transformRef, CFErrorRef* errorRef) 
-						   __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_NA);
+						   __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_NA) CF_RETURNS_RETAINED;
 
 /*!
 	@typedef			SecMessageBlock

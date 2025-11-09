@@ -65,15 +65,37 @@
                 <string>XMPL</string>
                 <key>manufacturer</key>
                 <string>ACME</string>
-                <key>flags</key>   <!-- this key is optional -->
-                <integer>0</integer>
-        
                 <key>name</key>
                 <string>AUExample</string>
                 <key>version</key>
                 <integer>12345</integer>
                 <key>factoryFunction</key>
                 <string>AUExampleFactory</string>
+                
+                <!-- An AudioComponent is sandbox safe -->
+                
+                <key>sandboxSafe</key>
+                <true/>
+                
+                <!-- or it can describe it's resource usage -->
+                
+                <key>resourceUsage</key>
+                <dict>
+                    <key>iokit.user-client</key>
+                    <array>
+                        <string>CustomUserClient1</string>
+                        <string>CustomUserClient2</string>
+                    </array>
+                    <key>mach-lookup.global-name</key>
+                    <array>
+                        <string>MachServiceName1</string>
+                        <string>MachServiceName2</string>
+                    </array>
+                    <key>network.client</key>
+                    <true/>
+                    <key>temporary-exception.files.all.read-write</key>
+                    </true>
+                </dict>
             </dict>
         </array>
 
@@ -82,6 +104,49 @@
     otherwise they must be 32-bit integers.
     
     The "factoryFunction" is the name of a AudioComponentFactoryFunction in the bundle's binary.
+    
+    The "sandboxSafe" key is used to indicate whether or not an AudioComponent can be loaded
+    directly into a sandboxed process. This key is reflected in the componentFlags field of the the
+    AudioComponentDescription for the AudioComponent with the constant, kAudioComponentFlag_SandboxSafe.
+    Note that if this key is not present, it is assumed that the AudioComponent is not sandbox safe.
+    
+    The "resourceUsage" key describes the system resources used by an AudioComponent that is not
+    sandobox safe. The keys for this dictionary are described below. If the "sandboxSafe" key is
+    true, this dictionary should not be included.
+    
+    The "iokit.user-client" key is a "resourceUsage" key that describes the IOKit user-client
+    objects the AudioComponent will open. It is an array of the user-clients' class names.
+    
+    The "mach-lookup.global-name" key is a "resourceUsage" key that describes the mach services the
+    AudioComponent needs to connect to. It is an array of the names of the services. Note that these
+    services can be direct mach services found via bootstrap_look_up() or XPC services found via
+    xpc_connection_create_mach_service().
+    
+    The "network.client" key is a "resourceUsage" key that indicates that the AudioComponent will
+    receive data from the network.
+    
+    The "temporary-exception.files.all.read-write" key is a "resourceUsage" key that indicates that
+    the AudioComponent needs arbitrary access to the file system. This is for backward compatibility
+    for AudioComponents that have not yet adopted the usage of security scope bookmarks and/or the
+    usage of the standard file dialog for discovering, accessing and storing persistent references
+    to files on the file system. In a future OS release, this key will not be supported.
+    
+    Note that a sandbox safe AudioComponent can function correctly in even the most severely
+    sandboxed process. This means that the process will have curtailed or no access to common system
+    resources like the file system, device drivers, the network, and communication with other
+    processes.
+    
+    When instantiating a sandbox unsafe AudioComponent in a sandboxed process, the system evaluates
+    the "resourceUsage" information against the restrictions the process is under. If the
+    "resourceUsage" will not violate those restrictions, the AudioComponent will be instantiated and
+    can be used as normal. Note that the system will set kAudioComponentFlag_SandboxSafe in the
+    AudioComponentDescription in this case.
+    
+    If the "resourceUsage" information includes things that can't be accessed from the process and
+    the process has the entitlement, "com.apple.security.temporary-exception.audio-unit-host", the
+    system will ask the user whether or not it is acceptable for the process to open the unsafe
+    AudioComponent. If the user says yes, the system will suspend the process's sandbox and allow
+    the unsafe AudioComponent to be opened and used.
 */
 
 #include <Availability.h>
@@ -103,10 +168,17 @@
 	will only return this component when performing a specific, non-wildcard search for the
 	component, i.e. with non-zero values of componentType, componentSubType, and
 	componentManufacturer. This can be useful when privately registering a component.
-	Available starting in Mac OS X 10.7.
+	Available starting in Mac OS X 10.7 and iOS 5.0
+	
+	@constant	kAudioComponentFlag_SandboxSafe
+	
+	An AudioComponent sets this bit in it's componentFlags to indicate to the system that the
+	AudioComponent is safe to open in a sandboxed process.
+	Available starting in Mac OS X 10.8.
 */
 enum {
-	kAudioComponentFlag_Unsearchable = 1
+	kAudioComponentFlag_Unsearchable    = 1,
+	kAudioComponentFlag_SandboxSafe     = 2
 };
 
 //=====================================================================================================================
@@ -177,9 +249,30 @@ typedef struct OpaqueAudioComponent *   AudioComponent;
     typedef struct ComponentInstanceRecord *        AudioComponentInstance;
 #endif
 
+/*!
+    @typedef        AudioComponentMethod
+    @abstract       The broad prototype for an audio plugin method
+    @discussion     Every audio plugin will implement a collection of methods that match a particular
+					selector. For example, the AudioUnitInitialize API call is implemented by a
+					plugin implementing the kAudioUnitInitializeSelect selector. Any function implementing
+					an audio plugin selector conforms to the basic pattern where the first argument
+					is a pointer to the plugin instance structure, has 0 or more specific arguments,  
+					and returns an OSStatus.
+*/
 typedef OSStatus (*AudioComponentMethod) (void *self,...);
 
 /*!
+    @struct         AudioComponentPlugInInterface
+    @discussion     A structure used to represent an audio plugin's routines 
+    @field          Open
+                        the function used to open (or create) an audio plugin instance
+    @field          Close
+                        the function used to close (or dispose) an audio plugin instance
+    @field          Lookup
+                        this is used to return a function pointer for a given selector, 
+						or NULL if that selector is not implemented
+    @field          reserved
+                        must be NULL
 */
 typedef struct AudioComponentPlugInInterface {
 	OSStatus						(*Open)(void *self, AudioComponentInstance mInstance);
@@ -366,7 +459,6 @@ AudioComponentInstanceCanDo (   AudioComponentInstance              inInstance,
                                 SInt16                              inSelectorID)
                                                                             __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_3_0);
 
-
 /*!
     @function       AudioComponentRegister
     @abstract       Dynamically registers an AudioComponent within the current process
@@ -376,7 +468,10 @@ AudioComponentInstanceCanDo (   AudioComponentInstance              inInstance,
         the current process.
     
     @param          inDesc
-                        the AudioComponentDescription
+                        The AudioComponentDescription that describes the AudioComponent. Note that
+                        the registrar needs to be sure to set the flag kAudioComponentFlag_SandboxSafe
+                        in the componentFlags field of the AudioComponentDescription to indicate that
+                        the AudioComponent can be loaded directly into a sandboxed process.
     @param          inName
                         the AudioComponent's name
     @param          inVersion
@@ -391,6 +486,24 @@ AudioComponentRegister(     const AudioComponentDescription *   inDesc,
                             CFStringRef                         inName,
                             UInt32                              inVersion,
                             AudioComponentFactoryFunction       inFactory)
+                                                    __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_5_0);
+
+/*!
+    @function       AudioComponentCopyConfigurationInfo
+    @abstract       Fetches the basic configuration info about a given AudioComponent
+    @discussion     Currently, only AudioUnits can supply this information.
+    @param          inComponent
+                        The AudioComponent whose info is being fetched.
+    @param          outConfigurationInfo
+                        On exit, this is CFDictionaryRef that contains information describing the
+                        capabilities of the AudioComoponent. The specific information depends on the
+                        type of AudioComponent. The keys for the dictionary are defined in
+                        AudioUnitProperties.h (or other headers as appropriate for the component type).
+    @result         An OSStatus indicating success or failure.
+*/
+extern OSStatus
+AudioComponentCopyConfigurationInfo(    AudioComponent      inComponent,
+                                        CFDictionaryRef*    outConfigurationInfo)
                                                     __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_NA);
 
 #ifdef __cplusplus

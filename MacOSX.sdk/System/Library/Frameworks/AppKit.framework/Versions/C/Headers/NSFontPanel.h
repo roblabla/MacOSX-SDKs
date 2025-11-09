@@ -1,7 +1,7 @@
 /*
 	NSFontPanel.h
 	Application Kit
-	Copyright (c) 1994-2011, Apple Inc.
+	Copyright (c) 1994-2012, Apple Inc.
 	All rights reserved.
 */
 
@@ -15,6 +15,7 @@
 @end
 
 
+NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 @interface NSFontPanel : NSPanel {
     /*All instance variables are private*/
     NSFontManager *_manager;

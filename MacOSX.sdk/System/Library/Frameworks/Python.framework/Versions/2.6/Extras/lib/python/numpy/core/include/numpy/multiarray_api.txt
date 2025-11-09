@@ -79,12 +79,16 @@ Get pointer to one of correct type for array
 ::
 
   PyObject *
-  PyArray_CastToType(PyArrayObject *mp, PyArray_Descr *at, int fortran)
+  PyArray_CastToType(PyArrayObject *arr, PyArray_Descr *dtype, int
+                     fortran)
 
 For backward compatibility
 
 Cast an array using typecode structure.
 steals reference to at --- cannot be NULL
+
+This function always makes a copy of arr, even if the dtype
+doesn't change.
 
 ::
 
@@ -114,6 +118,9 @@ Check the type coercion rules.
   PyArray_CanCastTo(PyArray_Descr *from, PyArray_Descr *to)
 
 leaves reference count alone --- cannot be NULL
+
+PyArray_CanCastTypeTo is equivalent to this, but adds a 'casting'
+parameter.
 
 ::
 
@@ -253,7 +260,7 @@ as input.
                   min_depth, int max_depth, int flags, PyObject
                   *context)
 
-Does not check for ENSURECOPY and NOTSWAPPED in flags
+Does not check for NPY_ENSURECOPY and NPY_NOTSWAPPED in flags
 Steals a reference to newtype --- which can be NULL
 
 ::
@@ -277,7 +284,8 @@ so it can be used like PyArray_EnsureArray(some_function(...))
 ::
 
   PyObject *
-  PyArray_FromFile(FILE *fp, PyArray_Descr *dtype, intp num, char *sep)
+  PyArray_FromFile(FILE *fp, PyArray_Descr *dtype, npy_intp num, char
+                   *sep)
 
 
 Given a ``FILE *`` pointer ``fp``, and a ``PyArray_Descr``, return an
@@ -300,8 +308,8 @@ necessary is read by this routine.
 ::
 
   PyObject *
-  PyArray_FromString(char *data, intp slen, PyArray_Descr *dtype, intp
-                     num, char *sep)
+  PyArray_FromString(char *data, npy_intp slen, PyArray_Descr
+                     *dtype, npy_intp num, char *sep)
 
 
 Given a pointer to a string ``data``, a string length ``slen``, and
@@ -326,14 +334,14 @@ for whitespace around the separator is added.
 ::
 
   PyObject *
-  PyArray_FromBuffer(PyObject *buf, PyArray_Descr *type, intp
-                     count, intp offset)
+  PyArray_FromBuffer(PyObject *buf, PyArray_Descr *type, npy_intp
+                     count, npy_intp offset)
 
 
 ::
 
   PyObject *
-  PyArray_FromIter(PyObject *obj, PyArray_Descr *dtype, intp count)
+  PyArray_FromIter(PyObject *obj, PyArray_Descr *dtype, npy_intp count)
 
 
 steals a reference to dtype (which cannot be NULL)
@@ -383,25 +391,43 @@ weak-references and no base object.
 ::
 
   int
-  PyArray_MoveInto(PyArrayObject *dest, PyArrayObject *src)
+  PyArray_MoveInto(PyArrayObject *dst, PyArrayObject *src)
 
-Move the memory of one array into another.
+Move the memory of one array into another, allowing for overlapping data.
+
+This is in general a difficult problem to solve efficiently, because
+strides can be negative.  Consider "a = np.arange(3); a[::-1] = a", which
+previously produced the incorrect [0, 1, 0].
+
+Instead of trying to be fancy, we simply check for overlap and make
+a temporary copy when one exists.
+
+Returns 0 on success, negative on failure.
 
 ::
 
   int
-  PyArray_CopyInto(PyArrayObject *dest, PyArrayObject *src)
+  PyArray_CopyInto(PyArrayObject *dst, PyArrayObject *src)
 
 Copy an Array into another array -- memory must not overlap.
+Broadcast to the destination shape if necessary.
+
+Returns 0 on success, -1 on failure.
 
 ::
 
   int
-  PyArray_CopyAnyInto(PyArrayObject *dest, PyArrayObject *src)
+  PyArray_CopyAnyInto(PyArrayObject *dst, PyArrayObject *src)
 
 Copy an Array into another array -- memory must not overlap
 Does not require src and dest to have "broadcastable" shapes
 (only the same number of elements).
+
+TODO: For NumPy 2.0, this could accept an order parameter which
+only allows NPY_CORDER and NPY_FORDER.  Could also rename
+this to CopyAsFlat to make the name more intuitive.
+
+Returns 0 on success, -1 on error.
 
 ::
 
@@ -412,7 +438,7 @@ Does not require src and dest to have "broadcastable" shapes
 ::
 
   PyObject *
-  PyArray_NewCopy(PyArrayObject *m1, NPY_ORDER fortran)
+  PyArray_NewCopy(PyArrayObject *m1, NPY_ORDER order)
 
 Copy an array.
 
@@ -465,8 +491,8 @@ Update Several Flags at once.
 ::
 
   PyObject *
-  PyArray_New(PyTypeObject *subtype, int nd, intp *dims, int
-              type_num, intp *strides, void *data, int itemsize, int
+  PyArray_New(PyTypeObject *subtype, int nd, npy_intp *dims, int
+              type_num, npy_intp *strides, void *data, int itemsize, int
               flags, PyObject *obj)
 
 Generic new array creation routine.
@@ -475,8 +501,8 @@ Generic new array creation routine.
 
   PyObject *
   PyArray_NewFromDescr(PyTypeObject *subtype, PyArray_Descr *descr, int
-                       nd, intp *dims, intp *strides, void *data, int
-                       flags, PyObject *obj)
+                       nd, npy_intp *dims, npy_intp *strides, void
+                       *data, int flags, PyObject *obj)
 
 Generic new array creation routine.
 
@@ -550,8 +576,8 @@ Assumes contiguous
 ::
 
   npy_bool
-  PyArray_CheckStrides(int elsize, int nd, intp numbytes, intp
-                       offset, intp *dims, intp *newstrides)
+  PyArray_CheckStrides(int elsize, int nd, npy_intp numbytes, npy_intp
+                       offset, npy_intp *dims, npy_intp *newstrides)
 
 
 ::
@@ -628,12 +654,22 @@ steals reference to newtype --- acc. NULL
 
 ScalarKind
 
+Returns the scalar kind of a type number, with an
+optional tweak based on the scalar value itself.
+If no scalar is provided, it returns INTPOS_SCALAR
+for both signed and unsigned integers, otherwise
+it checks the sign of any signed integer to choose
+INTNEG_SCALAR when appropriate.
+
 ::
 
   int
   PyArray_CanCoerceScalar(int thistype, int neededtype, NPY_SCALARKIND
                           scalar)
 
+
+Determines whether the data type 'thistype', with
+scalar kind 'scalar', can be coerced into 'neededtype'.
 
 ::
 
@@ -649,6 +685,8 @@ Get New ArrayFlagsObject
   PyArray_CanCastScalar(PyTypeObject *from, PyTypeObject *to)
 
 See if array scalars can be cast.
+
+TODO: For NumPy 2.0, add a NPY_CASTING parameter.
 
 ::
 
@@ -784,7 +822,7 @@ Reshape
 
   PyObject *
   PyArray_Newshape(PyArrayObject *self, PyArray_Dims *newdims, NPY_ORDER
-                   fortran)
+                   order)
 
 New shape for an array
 
@@ -881,6 +919,8 @@ Conjugate
 
 Nonzero
 
+TODO: In NumPy 2.0, should make the iteration order a parameter.
+
 ::
 
   PyObject *
@@ -954,7 +994,7 @@ Flatten
 ::
 
   PyObject *
-  PyArray_Ravel(PyArrayObject *a, NPY_ORDER fortran)
+  PyArray_Ravel(PyArrayObject *a, NPY_ORDER order)
 
 Ravel
 Returns a contiguous array
@@ -962,7 +1002,7 @@ Returns a contiguous array
 ::
 
   npy_intp
-  PyArray_MultiplyList(intp *l1, int n)
+  PyArray_MultiplyList(npy_intp *l1, int n)
 
 Multiply a List
 
@@ -976,21 +1016,21 @@ Multiply a List of ints
 ::
 
   void *
-  PyArray_GetPtr(PyArrayObject *obj, intp*ind)
+  PyArray_GetPtr(PyArrayObject *obj, npy_intp*ind)
 
 Produce a pointer into array
 
 ::
 
   int
-  PyArray_CompareLists(intp *l1, intp *l2, int n)
+  PyArray_CompareLists(npy_intp *l1, npy_intp *l2, int n)
 
 Compare Lists
 
 ::
 
   int
-  PyArray_AsCArray(PyObject **op, void *ptr, intp *dims, int
+  PyArray_AsCArray(PyObject **op, void *ptr, npy_intp *dims, int
                    nd, PyArray_Descr*typedescr)
 
 Simulate a C-array
@@ -1036,7 +1076,7 @@ as you get a new reference to it.
 ::
 
   int
-  PyArray_IntpFromSequence(PyObject *seq, intp *vals, int maxvals)
+  PyArray_IntpFromSequence(PyObject *seq, npy_intp *vals, int maxvals)
 
 PyArray_IntpFromSequence
 Returns the number of dimensions or -1 if an error occurred.
@@ -1075,7 +1115,10 @@ just like inner product but does the swapaxes stuff on the fly
   PyObject *
   PyArray_CopyAndTranspose(PyObject *op)
 
-Fast Copy and Transpose
+Copy and Transpose
+
+Could deprecate this function, as there isn't a speed benefit over
+calling Transpose and then Copy.
 
 ::
 
@@ -1169,7 +1212,7 @@ Convert object to endian
   int
   PyArray_OrderConverter(PyObject *object, NPY_ORDER *val)
 
-Convert an object to FORTRAN / C / ANY
+Convert an object to FORTRAN / C / ANY / KEEP
 
 ::
 
@@ -1183,7 +1226,8 @@ equivalent (same basic kind and same itemsize).
 ::
 
   PyObject *
-  PyArray_Zeros(int nd, intp *dims, PyArray_Descr *type, int fortran)
+  PyArray_Zeros(int nd, npy_intp *dims, PyArray_Descr *type, int
+                fortran)
 
 Zeros
 
@@ -1193,7 +1237,8 @@ accepts NULL type
 ::
 
   PyObject *
-  PyArray_Empty(int nd, intp *dims, PyArray_Descr *type, int fortran)
+  PyArray_Empty(int nd, npy_intp *dims, PyArray_Descr *type, int
+                fortran)
 
 Empty
 
@@ -1293,7 +1338,7 @@ Initialize arrfuncs to NULL
 ::
 
   PyObject *
-  PyArray_IntTupleFromIntp(int len, intp *vals)
+  PyArray_IntTupleFromIntp(int len, npy_intp *vals)
 
 PyArray_IntTupleFromIntp
 
@@ -1321,7 +1366,7 @@ PyArgs_ParseTuple for output arrays
 ::
 
   PyObject *
-  PyArray_BroadcastToShape(PyObject *obj, intp *dims, int nd)
+  PyArray_BroadcastToShape(PyObject *obj, npy_intp *dims, int nd)
 
 Get Iterator broadcast to a particular shape
 
@@ -1382,7 +1427,7 @@ convert 0-d arrays to 1-d arrays
 ::
 
   npy_intp
-  PyArray_OverflowMultiplyList(intp *l1, int n)
+  PyArray_OverflowMultiplyList(npy_intp *l1, int n)
 
 Multiply a List of Non-negative numbers with over-flow detection.
 
@@ -1431,8 +1476,706 @@ correlate(a2, a1), and conjugate the second argument for complex inputs
 ::
 
   PyObject*
-  PyArray_NeighborhoodIterNew(PyArrayIterObject *x, intp *bounds, int
-                              mode, PyArrayObject*fill)
+  PyArray_NeighborhoodIterNew(PyArrayIterObject *x, npy_intp
+                              *bounds, int mode, PyArrayObject*fill)
 
 A Neighborhood Iterator object.
+
+::
+
+  void
+  PyArray_SetDatetimeParseFunction(PyObject *op)
+
+Set the date time print function to be a Python function.
+
+::
+
+  void
+  PyArray_DatetimeToDatetimeStruct(npy_datetime val, NPY_DATETIMEUNIT
+                                   fr, npy_datetimestruct *result)
+
+Fill the datetime struct from the value and resolution unit.
+
+::
+
+  void
+  PyArray_TimedeltaToTimedeltaStruct(npy_timedelta val, NPY_DATETIMEUNIT
+                                     fr, npy_timedeltastruct *result)
+
+Fill the timedelta struct from the timedelta value and resolution unit.
+
+::
+
+  npy_datetime
+  PyArray_DatetimeStructToDatetime(NPY_DATETIMEUNIT
+                                   fr, npy_datetimestruct *d)
+
+Create a datetime value from a filled datetime struct and resolution unit.
+
+::
+
+  npy_datetime
+  PyArray_TimedeltaStructToTimedelta(NPY_DATETIMEUNIT
+                                     fr, npy_timedeltastruct *d)
+
+Create a timdelta value from a filled timedelta struct and resolution unit.
+
+::
+
+  NpyIter *
+  NpyIter_New(PyArrayObject *op, npy_uint32 flags, NPY_ORDER
+              order, NPY_CASTING casting, PyArray_Descr*dtype)
+
+Allocate a new iterator for one array object.
+
+::
+
+  NpyIter *
+  NpyIter_MultiNew(int nop, PyArrayObject **op_in, npy_uint32
+                   flags, NPY_ORDER order, NPY_CASTING
+                   casting, npy_uint32 *op_flags, PyArray_Descr
+                   **op_request_dtypes)
+
+Allocate a new iterator for more than one array object, using
+standard NumPy broadcasting rules and the default buffer size.
+
+::
+
+  NpyIter *
+  NpyIter_AdvancedNew(int nop, PyArrayObject **op_in, npy_uint32
+                      flags, NPY_ORDER order, NPY_CASTING
+                      casting, npy_uint32 *op_flags, PyArray_Descr
+                      **op_request_dtypes, int oa_ndim, int
+                      **op_axes, npy_intp *itershape, npy_intp
+                      buffersize)
+
+Allocate a new iterator for multiple array objects, and advanced
+options for controlling the broadcasting, shape, and buffer size.
+
+::
+
+  NpyIter *
+  NpyIter_Copy(NpyIter *iter)
+
+Makes a copy of the iterator
+
+::
+
+  int
+  NpyIter_Deallocate(NpyIter *iter)
+
+Deallocate an iterator
+
+::
+
+  npy_bool
+  NpyIter_HasDelayedBufAlloc(NpyIter *iter)
+
+Whether the buffer allocation is being delayed
+
+::
+
+  npy_bool
+  NpyIter_HasExternalLoop(NpyIter *iter)
+
+Whether the iterator handles the inner loop
+
+::
+
+  int
+  NpyIter_EnableExternalLoop(NpyIter *iter)
+
+Removes the inner loop handling (so HasExternalLoop returns true)
+
+::
+
+  npy_intp *
+  NpyIter_GetInnerStrideArray(NpyIter *iter)
+
+Get the array of strides for the inner loop (when HasExternalLoop is true)
+
+This function may be safely called without holding the Python GIL.
+
+::
+
+  npy_intp *
+  NpyIter_GetInnerLoopSizePtr(NpyIter *iter)
+
+Get a pointer to the size of the inner loop  (when HasExternalLoop is true)
+
+This function may be safely called without holding the Python GIL.
+
+::
+
+  int
+  NpyIter_Reset(NpyIter *iter, char **errmsg)
+
+Resets the iterator to its initial state
+
+If errmsg is non-NULL, it should point to a variable which will
+receive the error message, and no Python exception will be set.
+This is so that the function can be called from code not holding
+the GIL.
+
+::
+
+  int
+  NpyIter_ResetBasePointers(NpyIter *iter, char **baseptrs, char
+                            **errmsg)
+
+Resets the iterator to its initial state, with new base data pointers
+
+If errmsg is non-NULL, it should point to a variable which will
+receive the error message, and no Python exception will be set.
+This is so that the function can be called from code not holding
+the GIL.
+
+::
+
+  int
+  NpyIter_ResetToIterIndexRange(NpyIter *iter, npy_intp istart, npy_intp
+                                iend, char **errmsg)
+
+Resets the iterator to a new iterator index range
+
+If errmsg is non-NULL, it should point to a variable which will
+receive the error message, and no Python exception will be set.
+This is so that the function can be called from code not holding
+the GIL.
+
+::
+
+  int
+  NpyIter_GetNDim(NpyIter *iter)
+
+Gets the number of dimensions being iterated
+
+::
+
+  int
+  NpyIter_GetNOp(NpyIter *iter)
+
+Gets the number of operands being iterated
+
+::
+
+  NpyIter_IterNextFunc *
+  NpyIter_GetIterNext(NpyIter *iter, char **errmsg)
+
+Compute the specialized iteration function for an iterator
+
+If errmsg is non-NULL, it should point to a variable which will
+receive the error message, and no Python exception will be set.
+This is so that the function can be called from code not holding
+the GIL.
+
+::
+
+  npy_intp
+  NpyIter_GetIterSize(NpyIter *iter)
+
+Gets the number of elements being iterated
+
+::
+
+  void
+  NpyIter_GetIterIndexRange(NpyIter *iter, npy_intp *istart, npy_intp
+                            *iend)
+
+Gets the range of iteration indices being iterated
+
+::
+
+  npy_intp
+  NpyIter_GetIterIndex(NpyIter *iter)
+
+Gets the current iteration index
+
+::
+
+  int
+  NpyIter_GotoIterIndex(NpyIter *iter, npy_intp iterindex)
+
+Sets the iterator position to the specified iterindex,
+which matches the iteration order of the iterator.
+
+Returns NPY_SUCCEED on success, NPY_FAIL on failure.
+
+::
+
+  npy_bool
+  NpyIter_HasMultiIndex(NpyIter *iter)
+
+Whether the iterator is tracking a multi-index
+
+::
+
+  int
+  NpyIter_GetShape(NpyIter *iter, npy_intp *outshape)
+
+Gets the broadcast shape if a multi-index is being tracked by the iterator,
+otherwise gets the shape of the iteration as Fortran-order
+(fastest-changing index first).
+
+The reason Fortran-order is returned when a multi-index
+is not enabled is that this is providing a direct view into how
+the iterator traverses the n-dimensional space. The iterator organizes
+its memory from fastest index to slowest index, and when
+a multi-index is enabled, it uses a permutation to recover the original
+order.
+
+Returns NPY_SUCCEED or NPY_FAIL.
+
+::
+
+  NpyIter_GetMultiIndexFunc *
+  NpyIter_GetGetMultiIndex(NpyIter *iter, char **errmsg)
+
+Compute a specialized get_multi_index function for the iterator
+
+If errmsg is non-NULL, it should point to a variable which will
+receive the error message, and no Python exception will be set.
+This is so that the function can be called from code not holding
+the GIL.
+
+::
+
+  int
+  NpyIter_GotoMultiIndex(NpyIter *iter, npy_intp *multi_index)
+
+Sets the iterator to the specified multi-index, which must have the
+correct number of entries for 'ndim'.  It is only valid
+when NPY_ITER_MULTI_INDEX was passed to the constructor.  This operation
+fails if the multi-index is out of bounds.
+
+Returns NPY_SUCCEED on success, NPY_FAIL on failure.
+
+::
+
+  int
+  NpyIter_RemoveMultiIndex(NpyIter *iter)
+
+Removes multi-index support from an iterator.
+
+Returns NPY_SUCCEED or NPY_FAIL.
+
+::
+
+  npy_bool
+  NpyIter_HasIndex(NpyIter *iter)
+
+Whether the iterator is tracking an index
+
+::
+
+  npy_bool
+  NpyIter_IsBuffered(NpyIter *iter)
+
+Whether the iterator is buffered
+
+::
+
+  npy_bool
+  NpyIter_IsGrowInner(NpyIter *iter)
+
+Whether the inner loop can grow if buffering is unneeded
+
+::
+
+  npy_intp
+  NpyIter_GetBufferSize(NpyIter *iter)
+
+Gets the size of the buffer, or 0 if buffering is not enabled
+
+::
+
+  npy_intp *
+  NpyIter_GetIndexPtr(NpyIter *iter)
+
+Get a pointer to the index, if it is being tracked
+
+::
+
+  int
+  NpyIter_GotoIndex(NpyIter *iter, npy_intp flat_index)
+
+If the iterator is tracking an index, sets the iterator
+to the specified index.
+
+Returns NPY_SUCCEED on success, NPY_FAIL on failure.
+
+::
+
+  char **
+  NpyIter_GetDataPtrArray(NpyIter *iter)
+
+Get the array of data pointers (1 per object being iterated)
+
+This function may be safely called without holding the Python GIL.
+
+::
+
+  PyArray_Descr **
+  NpyIter_GetDescrArray(NpyIter *iter)
+
+Get the array of data type pointers (1 per object being iterated)
+
+::
+
+  PyArrayObject **
+  NpyIter_GetOperandArray(NpyIter *iter)
+
+Get the array of objects being iterated
+
+::
+
+  PyArrayObject *
+  NpyIter_GetIterView(NpyIter *iter, npy_intp i)
+
+Returns a view to the i-th object with the iterator's internal axes
+
+::
+
+  void
+  NpyIter_GetReadFlags(NpyIter *iter, char *outreadflags)
+
+Gets an array of read flags (1 per object being iterated)
+
+::
+
+  void
+  NpyIter_GetWriteFlags(NpyIter *iter, char *outwriteflags)
+
+Gets an array of write flags (1 per object being iterated)
+
+::
+
+  void
+  NpyIter_DebugPrint(NpyIter *iter)
+
+For debugging
+
+::
+
+  npy_bool
+  NpyIter_IterationNeedsAPI(NpyIter *iter)
+
+Whether the iteration loop, and in particular the iternext()
+function, needs API access.  If this is true, the GIL must
+be retained while iterating.
+
+::
+
+  void
+  NpyIter_GetInnerFixedStrideArray(NpyIter *iter, npy_intp *out_strides)
+
+Get an array of strides which are fixed.  Any strides which may
+change during iteration receive the value NPY_MAX_INTP.  Once
+the iterator is ready to iterate, call this to get the strides
+which will always be fixed in the inner loop, then choose optimized
+inner loop functions which take advantage of those fixed strides.
+
+This function may be safely called without holding the Python GIL.
+
+::
+
+  int
+  NpyIter_RemoveAxis(NpyIter *iter, int axis)
+
+Removes an axis from iteration. This requires that NPY_ITER_MULTI_INDEX
+was set for iterator creation, and does not work if buffering is
+enabled. This function also resets the iterator to its initial state.
+
+Returns NPY_SUCCEED or NPY_FAIL.
+
+::
+
+  npy_intp *
+  NpyIter_GetAxisStrideArray(NpyIter *iter, int axis)
+
+Gets the array of strides for the specified axis.
+If the iterator is tracking a multi-index, gets the strides
+for the axis specified, otherwise gets the strides for
+the iteration axis as Fortran order (fastest-changing axis first).
+
+Returns NULL if an error occurs.
+
+::
+
+  npy_bool
+  NpyIter_RequiresBuffering(NpyIter *iter)
+
+Whether the iteration could be done with no buffering.
+
+::
+
+  char **
+  NpyIter_GetInitialDataPtrArray(NpyIter *iter)
+
+Get the array of data pointers (1 per object being iterated),
+directly into the arrays (never pointing to a buffer), for starting
+unbuffered iteration. This always returns the addresses for the
+iterator position as reset to iterator index 0.
+
+These pointers are different from the pointers accepted by
+NpyIter_ResetBasePointers, because the direction along some
+axes may have been reversed, requiring base offsets.
+
+This function may be safely called without holding the Python GIL.
+
+::
+
+  int
+  NpyIter_CreateCompatibleStrides(NpyIter *iter, npy_intp
+                                  itemsize, npy_intp *outstrides)
+
+Builds a set of strides which are the same as the strides of an
+output array created using the NPY_ITER_ALLOCATE flag, where NULL
+was passed for op_axes.  This is for data packed contiguously,
+but not necessarily in C or Fortran order. This should be used
+together with NpyIter_GetShape and NpyIter_GetNDim.
+
+A use case for this function is to match the shape and layout of
+the iterator and tack on one or more dimensions.  For example,
+in order to generate a vector per input value for a numerical gradient,
+you pass in ndim*itemsize for itemsize, then add another dimension to
+the end with size ndim and stride itemsize.  To do the Hessian matrix,
+you do the same thing but add two dimensions, or take advantage of
+the symmetry and pack it into 1 dimension with a particular encoding.
+
+This function may only be called if the iterator is tracking a multi-index
+and if NPY_ITER_DONT_NEGATE_STRIDES was used to prevent an axis from
+being iterated in reverse order.
+
+If an array is created with this method, simply adding 'itemsize'
+for each iteration will traverse the new array matching the
+iterator.
+
+Returns NPY_SUCCEED or NPY_FAIL.
+
+::
+
+  int
+  PyArray_CastingConverter(PyObject *obj, NPY_CASTING *casting)
+
+Convert any Python object, *obj*, to an NPY_CASTING enum.
+TODO: Move elsewhere
+
+::
+
+  npy_intp
+  PyArray_CountNonzero(PyArrayObject *self)
+
+Counts the number of non-zero elements in the array
+
+Returns -1 on error.
+
+::
+
+  PyArray_Descr *
+  PyArray_PromoteTypes(PyArray_Descr *type1, PyArray_Descr *type2)
+
+Produces the smallest size and lowest kind type to which both
+input types can be cast.
+
+::
+
+  PyArray_Descr *
+  PyArray_MinScalarType(PyArrayObject *arr)
+
+If arr is a scalar (has 0 dimensions) with a built-in number data type,
+finds the smallest type size/kind which can still represent its data.
+Otherwise, returns the array's data type.
+
+
+::
+
+  PyArray_Descr *
+  PyArray_ResultType(npy_intp narrs, PyArrayObject **arr, npy_intp
+                     ndtypes, PyArray_Descr **dtypes)
+
+Produces the result type of a bunch of inputs, using the UFunc
+type promotion rules. Use this function when you have a set of
+input arrays, and need to determine an output array dtype.
+
+If all the inputs are scalars (have 0 dimensions) or the maximum "kind"
+of the scalars is greater than the maximum "kind" of the arrays, does
+a regular type promotion.
+
+Otherwise, does a type promotion on the MinScalarType
+of all the inputs.  Data types passed directly are treated as array
+types.
+
+
+::
+
+  npy_bool
+  PyArray_CanCastArrayTo(PyArrayObject *arr, PyArray_Descr
+                         *to, NPY_CASTING casting)
+
+Returns 1 if the array object may be cast to the given data type using
+the casting rule, 0 otherwise.  This differs from PyArray_CanCastTo in
+that it handles scalar arrays (0 dimensions) specially, by checking
+their value.
+
+::
+
+  npy_bool
+  PyArray_CanCastTypeTo(PyArray_Descr *from, PyArray_Descr
+                        *to, NPY_CASTING casting)
+
+Returns true if data of type 'from' may be cast to data of type
+'to' according to the rule 'casting'.
+
+::
+
+  PyArrayObject *
+  PyArray_EinsteinSum(char *subscripts, npy_intp nop, PyArrayObject
+                      **op_in, PyArray_Descr *dtype, NPY_ORDER
+                      order, NPY_CASTING casting, PyArrayObject *out)
+
+This function provides summation of array elements according to
+the Einstein summation convention.  For example:
+- trace(a)        -> einsum("ii", a)
+- transpose(a)    -> einsum("ji", a)
+- multiply(a,b)   -> einsum(",", a, b)
+- inner(a,b)      -> einsum("i,i", a, b)
+- outer(a,b)      -> einsum("i,j", a, b)
+- matvec(a,b)     -> einsum("ij,j", a, b)
+- matmat(a,b)     -> einsum("ij,jk", a, b)
+
+subscripts: The string of subscripts for einstein summation.
+nop:        The number of operands
+op_in:      The array of operands
+dtype:      Either NULL, or the data type to force the calculation as.
+order:      The order for the calculation/the output axes.
+casting:    What kind of casts should be permitted.
+out:        Either NULL, or an array into which the output should be placed.
+
+By default, the labels get placed in alphabetical order
+at the end of the output. So, if c = einsum("i,j", a, b)
+then c[i,j] == a[i]*b[j], but if c = einsum("j,i", a, b)
+then c[i,j] = a[j]*b[i].
+
+Alternatively, you can control the output order or prevent
+an axis from being summed/force an axis to be summed by providing
+indices for the output. This allows us to turn 'trace' into
+'diag', for example.
+- diag(a)         -> einsum("ii->i", a)
+- sum(a, axis=0)  -> einsum("i...->", a)
+
+Subscripts at the beginning and end may be specified by
+putting an ellipsis "..." in the middle.  For example,
+the function einsum("i...i", a) takes the diagonal of
+the first and last dimensions of the operand, and
+einsum("ij...,jk...->ik...") takes the matrix product using
+the first two indices of each operand instead of the last two.
+
+When there is only one operand, no axes being summed, and
+no output parameter, this function returns a view
+into the operand instead of making a copy.
+
+::
+
+  PyObject *
+  PyArray_NewLikeArray(PyArrayObject *prototype, NPY_ORDER
+                       order, PyArray_Descr *dtype, int subok)
+
+Creates a new array with the same shape as the provided one,
+with possible memory layout order and data type changes.
+
+prototype - The array the new one should be like.
+order     - NPY_CORDER - C-contiguous result.
+NPY_FORTRANORDER - Fortran-contiguous result.
+NPY_ANYORDER - Fortran if prototype is Fortran, C otherwise.
+NPY_KEEPORDER - Keeps the axis ordering of prototype.
+dtype     - If not NULL, overrides the data type of the result.
+subok     - If 1, use the prototype's array subtype, otherwise
+always create a base-class array.
+
+NOTE: If dtype is not NULL, steals the dtype reference.
+
+::
+
+  int
+  PyArray_GetArrayParamsFromObject(PyObject *op, PyArray_Descr
+                                   *requested_dtype, npy_bool
+                                   writeable, PyArray_Descr
+                                   **out_dtype, int *out_ndim, npy_intp
+                                   *out_dims, PyArrayObject
+                                   **out_arr, PyObject *context)
+
+Retrieves the array parameters for viewing/converting an arbitrary
+PyObject* to a NumPy array. This allows the "innate type and shape"
+of Python list-of-lists to be discovered without
+actually converting to an array.
+
+In some cases, such as structured arrays and the __array__ interface,
+a data type needs to be used to make sense of the object.  When
+this is needed, provide a Descr for 'requested_dtype', otherwise
+provide NULL. This reference is not stolen. Also, if the requested
+dtype doesn't modify the interpretation of the input, out_dtype will
+still get the "innate" dtype of the object, not the dtype passed
+in 'requested_dtype'.
+
+If writing to the value in 'op' is desired, set the boolean
+'writeable' to 1.  This raises an error when 'op' is a scalar, list
+of lists, or other non-writeable 'op'.
+
+Result: When success (0 return value) is returned, either out_arr
+is filled with a non-NULL PyArrayObject and
+the rest of the parameters are untouched, or out_arr is
+filled with NULL, and the rest of the parameters are
+filled.
+
+Typical usage:
+
+PyArrayObject *arr = NULL;
+PyArray_Descr *dtype = NULL;
+int ndim = 0;
+npy_intp dims[NPY_MAXDIMS];
+
+if (PyArray_GetArrayParamsFromObject(op, NULL, 1, &dtype,
+&ndim, &dims, &arr, NULL) < 0) {
+return NULL;
+}
+if (arr == NULL) {
+... validate/change dtype, validate flags, ndim, etc ...
+// Could make custom strides here too
+arr = PyArray_NewFromDescr(&PyArray_Type, dtype, ndim,
+dims, NULL,
+fortran ? NPY_F_CONTIGUOUS : 0,
+NULL);
+if (arr == NULL) {
+return NULL;
+}
+if (PyArray_CopyObject(arr, op) < 0) {
+Py_DECREF(arr);
+return NULL;
+}
+}
+else {
+... in this case the other parameters weren't filled, just
+validate and possibly copy arr itself ...
+}
+... use arr ...
+
+::
+
+  int
+  PyArray_ConvertClipmodeSequence(PyObject *object, NPY_CLIPMODE
+                                  *modes, int n)
+
+Convert an object to an array of n NPY_CLIPMODE values.
+This is intended to be used in functions where a different mode
+could be applied to each axis, like in ravel_multi_index.
+
+::
+
+  PyObject *
+  PyArray_MatrixProduct2(PyObject *op1, PyObject
+                         *op2, PyArrayObject*out)
+
+Numeric.matrixproduct(a,v,out)
+just like inner product but does the swapaxes stuff on the fly
 

@@ -3,9 +3,9 @@
  
      Contains:   AppleEvents object packing Interfaces.
  
-     Version:    AppleEvents-527.7~1
+    
  
-     Copyright:  © 1991-2008 by Apple Computer, Inc., all rights reserved
+     Copyright:  ï¿½ 1991-2008 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -22,7 +22,7 @@
 
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -47,7 +47,7 @@ extern "C" {
 extern OSErr 
 CreateOffsetDescriptor(
   long      theOffset,
-  AEDesc *  theDescriptor)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AEDesc *  theDescriptor)                                    __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 
 /*
@@ -67,7 +67,7 @@ CreateCompDescriptor(
   AEDesc *   operand1,
   AEDesc *   operand2,
   Boolean    disposeInputs,
-  AEDesc *   theDescriptor)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AEDesc *   theDescriptor)                                   __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 
 /*
@@ -86,7 +86,7 @@ CreateLogicalDescriptor(
   AEDescList *  theLogicalTerms,
   DescType      theLogicOperator,
   Boolean       disposeInputs,
-  AEDesc *      theDescriptor)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AEDesc *      theDescriptor)                                __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 
 
@@ -108,7 +108,7 @@ CreateObjSpecifier(
   DescType   keyForm,
   AEDesc *   keyData,
   Boolean    disposeInputs,
-  AEDesc *   objSpecifier)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AEDesc *   objSpecifier)                                    __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 
 /*
@@ -127,7 +127,7 @@ CreateRangeDescriptor(
   AEDesc *  rangeStart,
   AEDesc *  rangeStop,
   Boolean   disposeInputs,
-  AEDesc *  theDescriptor)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AEDesc *  theDescriptor)                                    __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 
 

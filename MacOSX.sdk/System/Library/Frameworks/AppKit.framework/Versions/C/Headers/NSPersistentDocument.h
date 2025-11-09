@@ -1,13 +1,13 @@
 /*
 	NSPersistentDocument.h
 	Application Kit
-	Copyright (c) 2004-2011, Apple Inc.
+	Copyright (c) 2004-2012, Apple Inc.
 	All rights reserved.
  */
 
 
 #import <AppKit/NSDocument.h>
-@class NSManagedObjectModel, NSManagedObjectContext;
+@class NSManagedObjectModel, NSManagedObjectContext, NSMutableDictionary;
 
 @interface NSPersistentDocument : NSDocument {
 @private
@@ -15,7 +15,7 @@
     NSManagedObjectContext *_managedObjectContext;
     id _store;
     uintptr_t _pDocFlags;
-    void *_reserved2;
+    id _relatedRequestURLs;
     void *_reserved3;
     void *_reserved4;
 }

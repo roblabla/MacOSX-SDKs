@@ -251,7 +251,7 @@ AUListenerCreateWithDispatchQueue(  AUParameterListenerRef *        outListener,
     @discussion 
         Note that only parameter changes issued through AUParameterSet will generate
         notifications to listeners; thus, in most cases, AudioUnit clients should use
-        AUParameterSet in preference to AudioUnitSetParameterValue.
+        AUParameterSet in preference to AudioUnitSetParameter.
 */
 extern OSStatus
 AUListenerCreate(                   AUParameterListenerProc         inProc,

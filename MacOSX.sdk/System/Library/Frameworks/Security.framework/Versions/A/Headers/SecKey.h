@@ -226,9 +226,8 @@ enum
 	@abstract Returns the type identifier of SecKey instances.
 	@result The CFTypeID of SecKey instances.
 */
-CFTypeID SecKeyGetTypeID(void);
-
-
+CFTypeID SecKeyGetTypeID(void)
+	__OSX_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
 
 /*!
 	@function SecKeyCreatePair
@@ -332,8 +331,8 @@ OSStatus SecKeyGetCredentials(
     @discussion If for example key is an RSA key the value returned by 
     this function is the size of the modulus.
  */
-size_t SecKeyGetBlockSize(SecKeyRef key);
-
+size_t SecKeyGetBlockSize(SecKeyRef key)
+	__OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_2_0);
 
 /*!
  @function	SecKeyGenerateSymmetric
@@ -414,9 +413,10 @@ SecKeyRef SecKeyCreateFromData(CFDictionaryRef parameters,
  @function SecKeyGeneratePair
  @abstract Generate a private/public keypair.
  @param parameters A dictionary containing one or more key-value pairs.
- @result On success a CFArrayRef is non-NULL and element 0 is the Private SecKeyRef
- and element 1 is the Public SecKeyRef.  NULL is returned on failure and error is 
- set accordingly.
+ @result A result code. See "Security Error Codes" (SecBase.h). On success,
+ the result code will be errSecSuccess, and the output parameters will
+ contain the public SecKeyRef and private SecKeyRef. It is the caller's
+ responsibility to CFRelease these key references when finished with them.
  
  @discussion In order to generate a keypair the parameters dictionary must
  at least contain the following keys:
@@ -427,17 +427,12 @@ SecKeyRef SecKeyCreateFromData(CFDictionaryRef parameters,
  the requested key size in bits.  Example sizes for RSA keys are:
  512, 768, 1024, 2048.
  
- The values below may be set either in the top-level dictionary or in a
- dictionary that is the value of the kSecPrivateKeyAttrs or
- kSecPublicKeyAttrs key in the top-level dictionary. Setting these
- attributes explicitly will override the defaults below.  See SecItem.h
- for detailed information on these attributes including the types of
- the values.
+ Setting the following attributes explicitly will override the defaults below.
+ See SecItem.h for detailed information on these attributes including the types
+ of the values.
  
  * kSecAttrLabel default NULL
- * kSecAttrIsPermanent if this key is present and has a Boolean
- value of true, the key or key pair will be added to the default
- keychain.
+ * kSecUseKeychain default NULL, which specifies the default keychain
  * kSecAttrApplicationTag default NULL
  * kSecAttrEffectiveKeySize default NULL same as kSecAttrKeySizeInBits
  * kSecAttrCanEncrypt default false for private keys, true for public keys

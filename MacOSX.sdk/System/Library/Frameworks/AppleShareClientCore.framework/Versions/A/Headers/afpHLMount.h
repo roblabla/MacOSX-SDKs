@@ -16,7 +16,7 @@ extern "C" {
 #define		kAFPMountPointProvidedBit	2
 #define		kAFPForceNewSessionBit		3
 #define		kAFPAutomountedBit			4
-#define		kAFPNoNotify				5
+/* #define		kAFPNoNotify				5  No longer used */
 #define		kAFPDontBrowse				6
 #define		kAFPMountAllVols			7
 #define		kAFPSupressKeychainBit		8

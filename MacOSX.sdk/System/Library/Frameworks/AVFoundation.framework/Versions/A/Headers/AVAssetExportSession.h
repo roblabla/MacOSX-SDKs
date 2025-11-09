@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010 Apple Inc. All rights reserved.
+	Copyright 2010-2012 Apple Inc. All rights reserved.
 
 */
 
@@ -60,9 +60,9 @@
 	The export will not scale the video up from a smaller size. The video will be compressed using
 	H.264 and the audio will be compressed using AAC.  */
 
-AVF_EXPORT NSString *const AVAssetExportPresetLowQuality        NS_AVAILABLE_IPHONE(4_0);
-AVF_EXPORT NSString *const AVAssetExportPresetMediumQuality     NS_AVAILABLE_IPHONE(4_0);
-AVF_EXPORT NSString *const AVAssetExportPresetHighestQuality    NS_AVAILABLE_IPHONE(4_0);
+AVF_EXPORT NSString *const AVAssetExportPresetLowQuality        NS_AVAILABLE_IOS(4_0);
+AVF_EXPORT NSString *const AVAssetExportPresetMediumQuality     NS_AVAILABLE_IOS(4_0);
+AVF_EXPORT NSString *const AVAssetExportPresetHighestQuality    NS_AVAILABLE_IOS(4_0);
 
 #endif // TARGET_OS_IPHONE
 
@@ -72,10 +72,7 @@ AVF_EXPORT NSString *const AVAssetExportPresetHighestQuality    NS_AVAILABLE_IPH
 AVF_EXPORT NSString *const AVAssetExportPreset640x480			NS_AVAILABLE(10_7, 4_0);
 AVF_EXPORT NSString *const AVAssetExportPreset960x540   		NS_AVAILABLE(10_7, 4_0);
 AVF_EXPORT NSString *const AVAssetExportPreset1280x720  		NS_AVAILABLE(10_7, 4_0);
-
-#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
-AVF_EXPORT NSString *const AVAssetExportPreset1920x1080			NS_AVAILABLE(10_7, NA);
-#endif // (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+AVF_EXPORT NSString *const AVAssetExportPreset1920x1080			NS_AVAILABLE(10_7, 5_0);
 
 /*  This export option will produce an audio-only .m4a file with appropriate iTunes gapless playback data */
 AVF_EXPORT NSString *const AVAssetExportPresetAppleM4A			NS_AVAILABLE(10_7, 4_0);
@@ -96,6 +93,7 @@ AVF_EXPORT NSString *const AVAssetExportPresetAppleM4V480pSD	NS_AVAILABLE(10_7, 
 AVF_EXPORT NSString *const AVAssetExportPresetAppleM4VAppleTV	NS_AVAILABLE(10_7, NA);
 AVF_EXPORT NSString *const AVAssetExportPresetAppleM4VWiFi		NS_AVAILABLE(10_7, NA);
 AVF_EXPORT NSString *const AVAssetExportPresetAppleM4V720pHD	NS_AVAILABLE(10_7, NA);
+AVF_EXPORT NSString *const AVAssetExportPresetAppleM4V1080pHD	NS_AVAILABLE(10_8, NA);
 
 /* This export option will produce a QuickTime movie with Apple ProRes 422 video and LPCM audio. */
 AVF_EXPORT NSString *const AVAssetExportPresetAppleProRes422LPCM	NS_AVAILABLE(10_7, NA);
@@ -156,7 +154,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 	@param		presetName		An NSString specifying the name of the preset template for the export.
 	@result						An instance of AVAssetExportSession.
 */
-+ (id)exportSessionWithAsset:(AVAsset *)asset presetName:(NSString *)presetName NS_AVAILABLE(10_7, 4_1);
++ (AVAssetExportSession *)exportSessionWithAsset:(AVAsset *)asset presetName:(NSString *)presetName NS_AVAILABLE(10_7, 4_1);
 
 /*!
 	@method						initWithAsset:presetName:
@@ -173,13 +171,16 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 /* Indicates the name of the preset with which the AVExportSession was initialized */
 @property (nonatomic, readonly) NSString *presetName;
 
+/* Indicates the instance of AVAsset with which the AVExportSession was initialized  */
+@property (nonatomic, retain, readonly) AVAsset *asset NS_AVAILABLE(10_8, 5_0);
+
 /* Indicates the types of files the target can write, using the AVAsset and export preset with which it was initialized */
 @property (nonatomic, readonly) NSArray *supportedFileTypes;
 
 /* Indicates the type of file to be written by the session; it must be set */
 @property (nonatomic, copy) NSString *outputFileType;
 
-/* Indicates the URL of the export session's output */
+/* Indicates the URL of the export session's output. You may use UTTypeCopyPreferredTagWithClass(outputFileType, kUTTagClassFilenameExtension) to obtain an appropriate path extension for the outputFileType you have specified. For more information about UTTypeCopyPreferredTagWithClass and kUTTagClassFilenameExtension, on iOS see <MobileCoreServices/UTType.h> and on Mac OS X see <LaunchServices/UTType.h>.  */
 @property (nonatomic, copy) NSURL *outputURL;
 
 /* indicates the status of the export session */
@@ -192,8 +193,13 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 @property (nonatomic, readonly) float progress;
 
 #if TARGET_OS_IPHONE
+
 /* indicates the maximum duration that is allowed for export */
 @property (nonatomic, readonly) CMTime maxDuration;
+
+/* indicates the estimated byte size of exported file */
+@property (nonatomic, readonly) long long estimatedOutputFileLength NS_AVAILABLE_IOS(5_0);
+
 #endif
 
 /* specifies a time range to be exported from the source; the default timeRange of an export session is kCMTimeZero..kCMTimePositiveInfinity, meaning that, pending a possible limit on file length, the full duration of the asset will be exported */

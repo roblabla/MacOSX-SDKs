@@ -1,5 +1,5 @@
 /*	NSXMLParser.h
-        Copyright (c) 2003-2011, Apple Inc. All rights reserved.
+        Copyright (c) 2003-2012, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -131,7 +131,7 @@
 FOUNDATION_EXPORT NSString * const NSXMLParserErrorDomain	NS_AVAILABLE(10_3, 2_0);  // for use with NSError.
 
 // Error reporting
-enum {
+typedef NS_ENUM(NSInteger, NSXMLParserError) {
     NSXMLParserInternalError = 1,
     NSXMLParserOutOfMemoryError = 2,
     NSXMLParserDocumentStartError = 3,
@@ -226,4 +226,3 @@ enum {
     NSXMLParserNoDTDError = 94,
     NSXMLParserDelegateAbortedParseError = 512
 };
-typedef NSInteger NSXMLParserError;

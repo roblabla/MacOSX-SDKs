@@ -6,10 +6,9 @@
 //  All rights reserved.
 //
 
-#import <AppKit/AppKit.h>
-#import "jni.h"
+#import <Cocoa/Cocoa.h>
+#import <JavaVM/jni.h>
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
 @interface JavaFrameView : NSView {
 @private
@@ -30,27 +29,27 @@
 
 /* Specifies any arguments to pass when creating the JavaVM. Each element in the array must be an NSString object, and should follow all conventions for creating a Java VM via JNI.
 */
-+ (void)setJavaStartupOptions:(NSArray *)inStartupOptions;
++ (void)setJavaStartupOptions:(NSArray *)inStartupOptions DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 /* Designated initializer. 
 */
-- (id)initWithFrame:(NSRect)inFrameRect	javaFrameClassName:(NSString *)inClassName;
+- (id)initWithFrame:(NSRect)inFrameRect	javaFrameClassName:(NSString *)inClassName DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 /* Specify the class name to use
 */
-- (void)setJavaFrameClassName:(NSString *)inClassName;
-- (NSString *)javaFrameClassName;
+- (void)setJavaFrameClassName:(NSString *)inClassName DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (NSString *)javaFrameClassName DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 /* Returns a global reference to the Java window embedded in this view.
    Will return NULL if this view is not hosted in a window.
    Will also return NULL if this view is hosted in a window, but creation of the Java object hasn't completed yet.
 */
-- (jobject)javaFrame;
+- (jobject)javaFrame DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 /* See JavaFrameViewDelegate, below. Not retained by view.
 */
-- (void)setDelegate:(id)anObject;
-- (id)delegate;
+- (void)setDelegate:(id)anObject DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (id)delegate DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 @end
 
@@ -58,7 +57,7 @@
 
 /* This notification is posted on the main thread.
 */
-extern NSString *JavaFrameViewDidCreateJavaFrame;
+extern NSString *JavaFrameViewDidCreateJavaFrame DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 /* Delegate interface
 */
@@ -66,8 +65,6 @@ extern NSString *JavaFrameViewDidCreateJavaFrame;
 
 /* NB: this callback will never happen on the AppKit thread.  Do not cache the JNIEnv structure passed to you.
 */
-- (void)javaFrameView:(JavaFrameView *)sender didCreateJavaFrame:(jobject)javaFrame withJNIEnv:(JNIEnv *)theEnv;
+- (void)javaFrameView:(JavaFrameView *)sender didCreateJavaFrame:(jobject)javaFrame withJNIEnv:(JNIEnv *)theEnv DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 @end
-
-#endif   // MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5

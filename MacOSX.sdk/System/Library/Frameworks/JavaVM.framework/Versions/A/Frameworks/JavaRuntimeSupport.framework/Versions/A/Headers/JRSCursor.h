@@ -12,4 +12,5 @@
 + (NSCursor *) javaResizeSECursor;
 + (NSCursor *) javaResizeSWCursor;
 + (NSCursor *) javaMoveCursor;
++ (void) javaSetAllowsCursorSetInBackground:(BOOL)allows;
 @end

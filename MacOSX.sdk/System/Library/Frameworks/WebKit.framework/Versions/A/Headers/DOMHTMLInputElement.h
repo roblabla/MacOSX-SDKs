@@ -34,16 +34,15 @@
 @class NSURL;
 
 @interface DOMHTMLInputElement : DOMHTMLElement
-@property(copy) NSString *defaultValue;
-@property BOOL defaultChecked;
-@property(readonly, retain) DOMHTMLFormElement *form;
 @property(copy) NSString *accept;
-@property(copy) NSString *accessKey;
-@property(copy) NSString *align;
 @property(copy) NSString *alt;
+@property BOOL autofocus AVAILABLE_IN_WEBKIT_VERSION_4_0;
+@property BOOL defaultChecked;
 @property BOOL checked;
 @property BOOL disabled;
-@property BOOL autofocus AVAILABLE_IN_WEBKIT_VERSION_4_0;
+@property(readonly, retain) DOMHTMLFormElement *form;
+@property(readonly, retain) DOMFileList *files AVAILABLE_IN_WEBKIT_VERSION_4_0;
+@property BOOL indeterminate AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
 @property int maxLength;
 @property BOOL multiple AVAILABLE_IN_WEBKIT_VERSION_4_0;
 @property(copy) NSString *name;
@@ -51,19 +50,20 @@
 @property(copy) NSString *size;
 @property(copy) NSString *src;
 @property(copy) NSString *type;
-@property(copy) NSString *useMap;
+@property(copy) NSString *defaultValue;
 @property(copy) NSString *value;
 @property(readonly) BOOL willValidate AVAILABLE_IN_WEBKIT_VERSION_4_0;
-@property BOOL indeterminate AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
 @property int selectionStart AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
 @property int selectionEnd AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+@property(copy) NSString *align;
+@property(copy) NSString *useMap;
+@property(copy) NSString *accessKey AVAILABLE_WEBKIT_VERSION_1_3_AND_LATER_BUT_DEPRECATED_AFTER_WEBKIT_VERSION_5_1;
 @property(readonly, copy) NSString *altDisplayString AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
 @property(readonly, copy) NSURL *absoluteImageURL AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-@property(readonly, retain) DOMFileList *files AVAILABLE_IN_WEBKIT_VERSION_4_0;
 
 - (void)select;
-- (void)click;
 - (void)setSelectionRange:(int)start end:(int)end AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+- (void)click;
 @end
 
 #endif

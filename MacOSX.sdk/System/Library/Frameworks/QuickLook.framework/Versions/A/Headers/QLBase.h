@@ -18,7 +18,7 @@
     #define QL_EXTERN_C_END
 #endif
 
-#define QUICKLOOK_VERSION 5000
+#define QUICKLOOK_VERSION 5550
 
 #define QL_EXPORT extern
 #define QL_PRIVATE_EXPORT __attribute__((visibility("hidden")))

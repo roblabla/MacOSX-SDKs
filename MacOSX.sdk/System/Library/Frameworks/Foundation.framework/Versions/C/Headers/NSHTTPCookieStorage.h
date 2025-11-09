@@ -1,6 +1,6 @@
 /*	
     NSHTTPCookieStorage.h
-    Copyright (c) 2003-2011, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2012, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -19,12 +19,11 @@
     @constant NSHTTPCookieAcceptPolicyOnlyFromMainDocumentDomain Accept cookies
     only from the main document domain
 */
-enum {
+typedef NS_ENUM(NSUInteger, NSHTTPCookieAcceptPolicy) {
     NSHTTPCookieAcceptPolicyAlways,
     NSHTTPCookieAcceptPolicyNever,
     NSHTTPCookieAcceptPolicyOnlyFromMainDocumentDomain
 };
-typedef NSUInteger NSHTTPCookieAcceptPolicy;
 
 
 @class NSHTTPCookieStorageInternal;

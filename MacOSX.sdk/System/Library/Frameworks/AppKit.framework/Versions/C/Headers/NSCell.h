@@ -1,7 +1,7 @@
 /*
 	NSCell.h
 	Application Kit
-	Copyright (c) 1994-2011, Apple Inc.
+	Copyright (c) 1994-2012, Apple Inc.
 	All rights reserved.
 */
 
@@ -19,7 +19,7 @@ enum {
     NSIntType				= 1,
     NSPositiveIntType			= 2,
     NSFloatType				= 3,
-    NSPositiveFloatType			= 4,
+    NSPositiveFloatType		= 4,
     NSDoubleType			= 6,
     NSPositiveDoubleType		= 7
 };
@@ -47,7 +47,7 @@ enum {
     NSCellHasImageHorizontal		= 12,
     NSCellHasImageOnLeftOrBottom	= 13,
     NSCellChangesContents		= 14,
-    NSCellIsInsetButton			= 15,
+    NSCellIsInsetButton		= 15,
     NSCellAllowsMixedState		= 16
 };
 typedef NSUInteger NSCellAttribute;
@@ -132,7 +132,7 @@ typedef struct __CFlags {
     unsigned int        isWhite:1;
     unsigned int        useUserKeyEquivalent:1;
     unsigned int        showsFirstResponder:1;
-    unsigned int	focusRingType:2;
+    unsigned int        focusRingType:2;
     unsigned int        wasSelectable:1;
     unsigned int        hasInvalidObject:1;
     unsigned int        allowsEditingTextAttributes:1;
@@ -145,15 +145,15 @@ typedef struct __CFlags {
     unsigned int        needsHighlightedText:1;
     unsigned int        dontAllowsUndo:1;
     unsigned int        currentlyEditing:1;
-    unsigned int	allowsMixedState:1;
-    unsigned int	inMixedState:1;
+    unsigned int        allowsMixedState:1;
+    unsigned int        inMixedState:1;
     unsigned int        sendsActionOnEndEditing:1;
-    unsigned int	inSendAction:1;
-    unsigned int	menuWasSet:1;
+    unsigned int        inSendAction:1;
+    unsigned int        menuWasSet:1;
     unsigned int        controlTint:3;
     unsigned int        controlSize:2;
-    unsigned int	branchImageDisabled:1;
-    unsigned int	drawingInRevealover:1;
+    unsigned int        branchImageDisabled:1;
+    unsigned int        drawingInRevealover:1;
     unsigned int        needsHighlightedTextHint:1;
 } _CFlags;
 
@@ -206,13 +206,13 @@ typedef struct __CFlags {
 - (BOOL)isBezeled;
 - (void)setBezeled:(BOOL)flag;
 - (BOOL)isScrollable;
-- (void)setScrollable:(BOOL)flag;	/* If YES, sets wraps to NO */
+- (void)setScrollable:(BOOL)flag; /* If YES, sets wraps to NO */
 - (BOOL)isHighlighted;
 - (void)setHighlighted:(BOOL)flag;
 - (NSTextAlignment)alignment;
 - (void)setAlignment:(NSTextAlignment)mode;
 - (BOOL)wraps;
-- (void)setWraps:(BOOL)flag;	/* If YES, sets scrollable to NO */
+- (void)setWraps:(BOOL)flag;     /* If YES, sets scrollable to NO */
 - (NSFont *)font;
 - (void)setFont:(NSFont *)fontObj;
 - (NSString *)keyEquivalent;
@@ -319,10 +319,7 @@ typedef struct __CFlags {
 - (BOOL)acceptsFirstResponder;
 - (void)setShowsFirstResponder:(BOOL)showFR;
 - (BOOL)showsFirstResponder;
-- (void)setMnemonicLocation:(NSUInteger)location;
-- (NSUInteger)mnemonicLocation;
-- (NSString *)mnemonic;
-- (void)setTitleWithMnemonic:(NSString *)stringWithAmpersand;
+
 - (void)performClick:(id)sender;
 
 - (void)setFocusRingType:(NSFocusRingType)focusRingType;
@@ -340,9 +337,9 @@ typedef struct __CFlags {
 - (void)setAttributedStringValue:(NSAttributedString *)obj;
 /* These methods determine whether the user can modify text attributes and import graphics in a rich cell.  Note that whatever these flags are, cells can still contain attributed text if programmatically set. */
 - (BOOL)allowsEditingTextAttributes;
-- (void)setAllowsEditingTextAttributes:(BOOL)flag;	/* If NO, also clears setImportsGraphics: */
+- (void)setAllowsEditingTextAttributes:(BOOL)flag;        /* If NO, also clears setImportsGraphics: */
 - (BOOL)importsGraphics;
-- (void)setImportsGraphics:(BOOL)flag;			/* If YES, also sets setAllowsEditingTextAttributes: */
+- (void)setImportsGraphics:(BOOL)flag;                    /* If YES, also sets setAllowsEditingTextAttributes: */
 @end
 
 @interface NSCell(NSCellMixedState)
@@ -440,6 +437,13 @@ enum {
 - (void)setEntryType:(NSInteger)aType NS_DEPRECATED_MAC(10_0, 10_0);
 - (BOOL)isEntryAcceptable:(NSString *)aString NS_DEPRECATED_MAC(10_0, 10_0);
 - (void)setFloatingPointFormat:(BOOL)autoRange left:(NSUInteger)leftDigits right:(NSUInteger)rightDigits NS_DEPRECATED_MAC(10_0, 10_0);
+
+/* In 10.8 and higher, all the *Mnemonic* methods are deprecated. On MacOS they have typically not been used.
+ */
+- (void)setMnemonicLocation:(NSUInteger)location NS_DEPRECATED_MAC(10_0, 10_8);
+- (NSUInteger)mnemonicLocation NS_DEPRECATED_MAC(10_0, 10_8);
+- (NSString *)mnemonic NS_DEPRECATED_MAC(10_0, 10_8);
+- (void)setTitleWithMnemonic:(NSString *)stringWithAmpersand NS_DEPRECATED_MAC(10_0, 10_8);
 
 @end
 

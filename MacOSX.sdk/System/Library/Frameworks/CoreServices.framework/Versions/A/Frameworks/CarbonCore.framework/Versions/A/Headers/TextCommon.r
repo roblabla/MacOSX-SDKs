@@ -3,9 +3,7 @@
  
      Contains:   TextEncoding-related types and constants, and prototypes for related functions
  
-     Version:    CarbonCore-960.18~3
- 
-     Copyright:  © 1995-2008 Apple Inc. All rights reserved.
+     Copyright:  Â© 1995-2012 Apple Inc. All rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -97,6 +95,7 @@
 #define kTextEncodingUnicodeV5_0 		0x010A
 #define kTextEncodingUnicodeV5_1 		0x010B				/*  No constant for Unicode 5.2, but leave an opening. */
 #define kTextEncodingUnicodeV6_0 		0x010D				/*  Adds many symbols, including emoji support. */
+#define kTextEncodingUnicodeV6_1 		0x010E				/*  Adds emoji variation sequences, properties changes. */
 
 #define kTextEncodingISOLatin1 			0x0201				/*  ISO 8859-1, Western European */
 #define kTextEncodingISOLatin2 			0x0202				/*  ISO 8859-2, Central European */
@@ -157,7 +156,8 @@
 #define kTextEncodingJIS_X0213_MenKuTen  0x0629				/*  JIS X0213 in plane-row-column notation (3 bytes) */
 #define kTextEncodingGB_2312_80 		0x0630
 #define kTextEncodingGBK_95 			0x0631				/*  annex to GB 13000-93; for Windows 95; EUC-CN extended */
-#define kTextEncodingGB_18030_2000 		0x0632
+#define kTextEncodingGB_18030_2000 		0x0632				/*  This is actually implemented as GB_18030_2005 */
+#define kTextEncodingGB_18030_2005 		0x0632
 #define kTextEncodingKSC_5601_87 		0x0640				/*  same as KSC 5601-92 without Johab annex */
 #define kTextEncodingKSC_5601_92_Johab 	0x0641				/*  KSC 5601-92 Johab annex */
 #define kTextEncodingCNS_11643_92_P1 	0x0651				/*  CNS 11643-1992 plane 1 */

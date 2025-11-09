@@ -92,6 +92,7 @@ enum {
 - (BOOL)isDefaultNamespace:(NSString *)namespaceURI AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
 - (NSString *)lookupNamespaceURI:(NSString *)prefix AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
 - (unsigned short)compareDocumentPosition:(DOMNode *)other AVAILABLE_IN_WEBKIT_VERSION_4_0;
+- (BOOL)contains:(DOMNode *)other AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
 @end
 
 @interface DOMNode (DOMNodeDeprecated)

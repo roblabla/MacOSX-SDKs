@@ -1,6 +1,6 @@
 /*
 	NSScriptStandardSuiteCommands.h
-	Copyright (c) 1997-2011, Apple Inc. All rights reserved.
+	Copyright (c) 1997-2012, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSScriptCommand.h>
@@ -10,12 +10,11 @@
 @class NSScriptClassDescription;
 
 
-enum {
+typedef NS_ENUM(NSUInteger, NSSaveOptions) {
     NSSaveOptionsYes = 0,
     NSSaveOptionsNo,
     NSSaveOptionsAsk
 };
-typedef NSUInteger NSSaveOptions;
 
 @interface NSCloneCommand : NSScriptCommand {
     @private

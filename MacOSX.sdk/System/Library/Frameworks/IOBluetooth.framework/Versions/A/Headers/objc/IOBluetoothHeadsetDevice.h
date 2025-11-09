@@ -10,9 +10,6 @@
 
  */
 
-#if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_0
-
-
 #import <Foundation/Foundation.h>
 #import <IOBluetooth/Bluetooth.h>
 #import <IOBluetooth/objc/IOBluetoothRFCOMMAudioController.h>
@@ -120,6 +117,3 @@
 - (BOOL)isHeadsetDevice DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 @end
-
-
-#endif /* BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_0 */

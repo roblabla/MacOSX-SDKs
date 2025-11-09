@@ -1,7 +1,7 @@
 /*
 	NSButtonCell.h
 	Application Kit
-	Copyright (c) 1994-2011, Apple Inc.
+	Copyright (c) 1994-2012, Apple Inc.
 	All rights reserved.
 */
 
@@ -79,13 +79,15 @@ typedef struct __BCFlags {
     unsigned int        doesNotDimImage:1;
     unsigned int        suppressAXValueChangeNote:1;
     unsigned int        isDrawingDisclosure:1;
-    unsigned int        reserved:1;
+    unsigned int        hasTitleTextField:1;
     unsigned int        useButtonImageSource:1;
-    unsigned int        alternateMnemonicLocation:8;
+    unsigned int        isDrawingFocus:1;
+    unsigned int        __reserved:7;
 #else
-    unsigned int        alternateMnemonicLocation:8;
+    unsigned int        __reserved:7;
+    unsigned int        isDrawingFocus:1;
     unsigned int        useButtonImageSource:1;
-    unsigned int        reserved:1;
+    unsigned int        hasTitleTextField:1;
     unsigned int        isDrawingDisclosure:1;
     unsigned int        suppressAXValueChangeNote:1;
     unsigned int        doesNotDimImage:1;
@@ -134,7 +136,7 @@ typedef struct __BCFlags2 {
     NSString	       *_altContents;
     id			_sound;
     NSString	       *_keyEquivalent;
-    _BCFlags2		_bcFlags2; // was _keyEquivalentModifierMask
+    _BCFlags2		_bcFlags2;
     unsigned short	_periodicDelay;
     unsigned short	_periodicInterval;
     _BCFlags            _bcFlags;
@@ -180,14 +182,6 @@ typedef struct __BCFlags2 {
 - (void)drawBezelWithFrame:(NSRect)frame inView:(NSView*)controlView;
 @end
 
-@interface NSButtonCell(NSKeyboardUI)
-- (void)setTitleWithMnemonic:(NSString *)stringWithAmpersand;
-- (void)setAlternateTitleWithMnemonic:(NSString *)stringWithAmpersand;
-- (void)setAlternateMnemonicLocation:(NSUInteger)location;
-- (NSUInteger)alternateMnemonicLocation;
-- (NSString *)alternateMnemonic;
-@end
-
 // NSGradientType :
 //
 // A concave gradient is darkest in the top left corner, 
@@ -205,6 +199,8 @@ enum {
 typedef NSUInteger NSGradientType;
 
 @interface NSButtonCell(NSButtonCellExtensions)
+
+// NOTE: gradientType is not used
 - (NSGradientType)gradientType;
 - (void)setGradientType:(NSGradientType)type;
 
@@ -213,14 +209,14 @@ typedef NSUInteger NSGradientType;
 - (void)setImageDimsWhenDisabled:(BOOL)flag;
 - (BOOL)imageDimsWhenDisabled;
 
-- (void) setShowsBorderOnlyWhileMouseInside:(BOOL)show;
-- (BOOL) showsBorderOnlyWhileMouseInside;
+- (void)setShowsBorderOnlyWhileMouseInside:(BOOL)show;
+- (BOOL)showsBorderOnlyWhileMouseInside;
 
-- (void) mouseEntered:(NSEvent*)event;
-- (void) mouseExited:(NSEvent*)event;
+- (void)mouseEntered:(NSEvent*)event;
+- (void)mouseExited:(NSEvent*)event;
 
-- (NSColor*)backgroundColor;
-- (void)setBackgroundColor:(NSColor*)color;
+- (NSColor *)backgroundColor;
+- (void)setBackgroundColor:(NSColor *)color;
 
 @end
 
@@ -233,7 +229,7 @@ typedef NSUInteger NSGradientType;
 
 @interface NSButtonCell(NSButtonCellBezelStyles)
 
-- (void) setBezelStyle:(NSBezelStyle)bezelStyle;
+- (void)setBezelStyle:(NSBezelStyle)bezelStyle;
 - (NSBezelStyle)bezelStyle;
 
 @end
@@ -241,5 +237,25 @@ typedef NSUInteger NSGradientType;
 @interface NSButtonCell (NSButtonCellSoundExtensions)
 - (void)setSound:(NSSound *)aSound;
 - (NSSound *)sound;
+@end
+
+/* In 10.8 and higher, all the *Mnemonic* methods are deprecated. On MacOS they have typically not been used.
+ */
+@interface NSButtonCell(NSKeyboardUI)
+
+/* On 10.8, these two methods still will call setTitle: (or setAlternateTitle:) with the ampersand stripped from stringWithAmpersand, but does nothing else. Use setTitle directly.
+ */
+- (void)setTitleWithMnemonic:(NSString *)stringWithAmpersand NS_DEPRECATED_MAC(10_0, 10_8);
+- (void)setAlternateTitleWithMnemonic:(NSString *)stringWithAmpersand NS_DEPRECATED_MAC(10_0, 10_8);
+
+/* This method no longer does anything and should not be called.
+ */
+- (void)setAlternateMnemonicLocation:(NSUInteger)location NS_DEPRECATED_MAC(10_0, 10_8);
+
+/* On 10.8, alternateMnemonicLocation now always returns NSNotFound.
+ */
+- (NSUInteger)alternateMnemonicLocation NS_DEPRECATED_MAC(10_0, 10_8);
+
+- (NSString *)alternateMnemonic NS_DEPRECATED_MAC(10_0, 10_8);
 @end
 

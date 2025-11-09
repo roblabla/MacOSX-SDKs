@@ -1,7 +1,7 @@
 /*
 	NSLayoutConstraint.h
 	Application Kit
-	Copyright (c) 2009-2011, Apple Inc.
+	Copyright (c) 2009-2012, Apple Inc.
 	All rights reserved.
 */
 
@@ -103,13 +103,13 @@ NS_CLASS_AVAILABLE(10_7, NA)
 @interface NSLayoutConstraint : NSObject <NSAnimatablePropertyContainer>
 {
     @private
-    NSView *_container;
+    id _container;
     id _firstItem;
     id _secondItem;
     CGFloat _constant;
     CGFloat _loweredConstant;
-    id _marker;
-    id _negativeError;    
+    id _markerAndPositiveExtraVar;
+    id _negativeExtraVar;
     float _coefficient;
     NSLayoutPriority _priority;
     uint64_t _layoutConstraintFlags;
@@ -130,7 +130,7 @@ APPKIT_EXTERN NSDictionary *_NSDictionaryOfVariableBindings(NSString *commaSepar
 /* Create constraints explicitly.  Constraints are of the form "view1.attr1 = view2.attr2 * multiplier + constant" 
  If your equation does not have a second view and attribute, use nil and NSLayoutAttributeNotAnAttribute.
  */
-+(id)constraintWithItem:(id)view1 attribute:(NSLayoutAttribute)attr1 relatedBy:(NSLayoutRelation)relation toItem:(id)view2 attribute:(NSLayoutAttribute)attr2 multiplier:(CGFloat)multiplier constant:(CGFloat)c;
++ (id)constraintWithItem:(id)view1 attribute:(NSLayoutAttribute)attr1 relatedBy:(NSLayoutRelation)relation toItem:(id)view2 attribute:(NSLayoutAttribute)attr2 multiplier:(CGFloat)multiplier constant:(CGFloat)c;
 
 /* If a constraint's priority level is less than NSLayoutPriorityRequired, then it is optional.  Higher priority constraints are met before lower priority constraints.
  Constraint satisfaction is not all or nothing.  If a constraint 'a == b' is optional, that means we will attempt to minimize 'abs(a-b)'.

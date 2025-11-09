@@ -1,7 +1,7 @@
 /*
         NSGraphicsContext.h
         Application Kit
-        Copyright (c) 1997-2011, Apple Inc.
+        Copyright (c) 1997-2012, Apple Inc.
         All rights reserved.
 */
 
@@ -81,7 +81,7 @@ typedef NSUInteger NSImageInterpolation;
 - (void)flushGraphics;
 
 // Platform specific drawing context (usually CGContextRef)
-- (void *)graphicsPort;
+- (void *)graphicsPort NS_RETURNS_INNER_POINTER;
 
 /* Returns the flip state of the receiver.  The state is determined by messaging -isFlipped to the focus view in the context.  If no view has focus, returns NO unless the receiver is instantiated via graphicsContextWithGraphicsPort:drawingToScreen:flipped: with initialFlippedState == YES.
 */

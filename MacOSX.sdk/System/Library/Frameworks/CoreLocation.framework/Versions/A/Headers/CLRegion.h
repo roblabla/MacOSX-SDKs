@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CLLocation.h>
+#import <CoreLocation/CLAvailability.h>
 
 /*
  *  CLRegion
@@ -15,6 +16,7 @@
  *  Discussion:
  *    A geographic area.
  */
+NS_CLASS_AVAILABLE(10_7, 4_0)
 @interface CLRegion : NSObject <NSCopying, NSCoding>
 {
 @private

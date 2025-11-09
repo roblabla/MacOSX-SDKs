@@ -2,16 +2,9 @@
      File:       CarbonCore/MultiprocessingInfo.h
  
      Contains:   Multiprocessing Information interfaces
+                 The contents of this header file are deprecated.
  
-     Version:    CarbonCore-960.18~3
- 
-     Copyright:  © 1995-2008 DayStar Digital, Inc.
- 
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
- 
-                     http://developer.apple.com/bugreporter/
- 
+     Copyright:  © 1995-2011 DayStar Digital, Inc.
 */
 
 /*********************************************************************************************
@@ -40,7 +33,7 @@
 
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -161,7 +154,7 @@ extern "C" {
 extern OSStatus 
 MPGetNextCpuID(
   MPCoherenceID   owningCoherenceID,
-  MPCpuID *       cpuID)                                      AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  MPCpuID *       cpuID)                                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -195,7 +188,7 @@ MPGetNextCpuID(
 extern OSStatus 
 MPGetNextTaskID(
   MPProcessID   owningProcessID,
-  MPTaskID *    taskID)                                       AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  MPTaskID *    taskID)                                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 /*

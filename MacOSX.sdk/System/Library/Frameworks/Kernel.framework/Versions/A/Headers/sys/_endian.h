@@ -112,12 +112,10 @@ __END_DECLS
 #define htonl(x)        ((__uint32_t)(x))
 #define htons(x)        ((__uint16_t)(x))
 
-#if     defined(KERNEL) || (!defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE))
 #define NTOHL(x)        (x)
 #define NTOHS(x)        (x)
 #define HTONL(x)        (x)
 #define HTONS(x)        (x)
-#endif /* defined(KERNEL) || (!defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)) */
 
 #else	/* __DARWIN_BYTE_ORDER == __DARWIN_LITTLE_ENDIAN */
 
@@ -129,11 +127,9 @@ __END_DECLS
 #define ntohl(x)	__DARWIN_OSSwapInt32(x)
 #define htonl(x)	__DARWIN_OSSwapInt32(x)
 
-#if	defined(KERNEL) || (!defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE))
 #define	NTOHL(x)	(x) = ntohl((__uint32_t)x)
 #define	NTOHS(x)	(x) = ntohs((__uint16_t)x)
 #define	HTONL(x)	(x) = htonl((__uint32_t)x)
 #define	HTONS(x)	(x) = htons((__uint16_t)x)
-#endif /* defined(KERNEL) || (!defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)) */
 #endif /* __DARWIN_BYTE_ORDER */
 #endif /* !_SYS__ENDIAN_H_ */

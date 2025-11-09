@@ -3,9 +3,7 @@
  
      Contains:   International Date and Time Interfaces (previously in TextUtils)
  
-     Version:    CarbonCore-960.18~3
- 
-     Copyright:  © 1994-2008 by Apple Computer, Inc., all rights reserved.
+     Copyright:  Â© 1994-2011 by Apple Inc. All rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -34,7 +32,7 @@
 
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -264,7 +262,7 @@ typedef struct TogglePB                 TogglePB;
 extern OSStatus 
 UCConvertUTCDateTimeToCFAbsoluteTime(
   const UTCDateTime *  iUTCDate,
-  CFAbsoluteTime *     oCFTime)                               AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  CFAbsoluteTime *     oCFTime)                               __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 
 /*
@@ -297,7 +295,7 @@ UCConvertUTCDateTimeToCFAbsoluteTime(
 extern OSStatus 
 UCConvertSecondsToCFAbsoluteTime(
   UInt32            iSeconds,
-  CFAbsoluteTime *  oCFTime)                                  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  CFAbsoluteTime *  oCFTime)                                  __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 
 /*
@@ -330,7 +328,7 @@ UCConvertSecondsToCFAbsoluteTime(
 extern OSStatus 
 UCConvertLongDateTimeToCFAbsoluteTime(
   LongDateTime      iLongTime,
-  CFAbsoluteTime *  oCFTime)                                  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  CFAbsoluteTime *  oCFTime)                                  __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 
 /*
@@ -363,7 +361,7 @@ UCConvertLongDateTimeToCFAbsoluteTime(
 extern OSStatus 
 UCConvertCFAbsoluteTimeToUTCDateTime(
   CFAbsoluteTime   iCFTime,
-  UTCDateTime *    oUTCDate)                                  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  UTCDateTime *    oUTCDate)                                  __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 
 /*
@@ -396,7 +394,7 @@ UCConvertCFAbsoluteTimeToUTCDateTime(
 extern OSStatus 
 UCConvertCFAbsoluteTimeToSeconds(
   CFAbsoluteTime   iCFTime,
-  UInt32 *         oSeconds)                                  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  UInt32 *         oSeconds)                                  __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 
 /*
@@ -429,7 +427,7 @@ UCConvertCFAbsoluteTimeToSeconds(
 extern OSStatus 
 UCConvertCFAbsoluteTimeToLongDateTime(
   CFAbsoluteTime   iCFTime,
-  LongDateTime *   oLongDate)                                 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  LongDateTime *   oLongDate)                                 __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 
 #if !__LP64__
@@ -457,7 +455,7 @@ DateString(
   SInt32     dateTime,
   DateForm   longFlag,
   Str255     result,
-  Handle     intlHandle)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
+  Handle     intlHandle)                                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_3, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -480,7 +478,7 @@ TimeString(
   SInt32    dateTime,
   Boolean   wantSeconds,
   Str255    result,
-  Handle    intlHandle)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
+  Handle    intlHandle)                                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_3, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -503,7 +501,7 @@ LongDateString(
   const LongDateTime *  dateTime,
   DateForm              longFlag,
   Str255                result,
-  Handle                intlHandle)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
+  Handle                intlHandle)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_3, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -526,7 +524,7 @@ LongTimeString(
   const LongDateTime *  dateTime,
   Boolean               wantSeconds,
   Str255                result,
-  Handle                intlHandle)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
+  Handle                intlHandle)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_3, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -548,7 +546,7 @@ LongTimeString(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-InitDateCache(DateCachePtr theCache)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
+InitDateCache(DateCachePtr theCache)                          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_3, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -572,7 +570,7 @@ StringToDate(
   SInt32         textLen,
   DateCachePtr   theCache,
   SInt32 *       lengthUsed,
-  LongDateRec *  dateTime)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
+  LongDateRec *  dateTime)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_3, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -596,7 +594,7 @@ StringToTime(
   SInt32         textLen,
   DateCachePtr   theCache,
   SInt32 *       lengthUsed,
-  LongDateRec *  dateTime)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
+  LongDateRec *  dateTime)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_3, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -617,7 +615,7 @@ StringToTime(
 extern void 
 LongDateToSeconds(
   const LongDateRec *  lDate,
-  LongDateTime *       lSecs)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
+  LongDateTime *       lSecs)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_3, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -638,7 +636,7 @@ LongDateToSeconds(
 extern void 
 LongSecondsToDate(
   const LongDateTime *  lSecs,
-  LongDateRec *         lDate)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
+  LongDateRec *         lDate)                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_3, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -662,7 +660,7 @@ ToggleDate(
   LongDateField     field,
   DateDelta         delta,
   short             ch,
-  const TogglePB *  params)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
+  const TogglePB *  params)                                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_3, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -684,7 +682,7 @@ extern short
 ValidDate(
   const LongDateRec *  vDate,
   long                 flags,
-  LongDateTime *       newSecs)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
+  LongDateTime *       newSecs)                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_3, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -703,7 +701,7 @@ ValidDate(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-ReadDateTime(unsigned long * datetime)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
+ReadDateTime(unsigned long * datetime)                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_3, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -722,7 +720,7 @@ ReadDateTime(unsigned long * datetime)                        AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-GetDateTime(unsigned long * secs)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
+GetDateTime(unsigned long * secs)                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_3, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -741,7 +739,7 @@ GetDateTime(unsigned long * secs)                             AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-SetDateTime(unsigned long datetime)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
+SetDateTime(unsigned long datetime)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_3, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -760,7 +758,7 @@ SetDateTime(unsigned long datetime)                           AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-SetTime(const DateTimeRec * d)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
+SetTime(const DateTimeRec * d)                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_3, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -779,7 +777,7 @@ SetTime(const DateTimeRec * d)                                AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-GetTime(DateTimeRec * d)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
+GetTime(DateTimeRec * d)                                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_3, __IPHONE_NA, __IPHONE_NA);
 
 
 #endif  /* !__LP64__ */
@@ -803,7 +801,7 @@ GetTime(DateTimeRec * d)                                      AVAILABLE_MAC_OS_X
 extern void 
 DateToSeconds(
   const DateTimeRec *  d,
-  unsigned long *      secs)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
+  unsigned long *      secs)                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_3, __IPHONE_NA, __IPHONE_NA);
 
 
 #endif  /* !__LP64__ */
@@ -827,7 +825,7 @@ DateToSeconds(
 extern void 
 SecondsToDate(
   unsigned long   secs,
-  DateTimeRec *   d)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
+  DateTimeRec *   d)                                          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_3, __IPHONE_NA, __IPHONE_NA);
 
 
 /*

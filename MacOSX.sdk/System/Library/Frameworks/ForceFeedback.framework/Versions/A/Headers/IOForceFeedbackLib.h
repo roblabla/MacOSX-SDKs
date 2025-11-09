@@ -33,7 +33,7 @@ __BEGIN_DECLS
 #include <CoreFoundation/CFPlugInCOM.h>
 #endif
 
-#include <CoreServices/../Frameworks/CarbonCore.framework/Headers/MacTypes.h>
+#include <MacTypes.h>
 #include <IOKit/IOTypes.h>
 #include <ForceFeedback/ForceFeedback.h>
 

@@ -1,7 +1,7 @@
 /*
 	File:       QTMetadataItem.h
 
-	Copyright:  (c) 2010 by Apple Inc., all rights reserved.
+	Copyright:  (c) 2010-2012 by Apple Inc., all rights reserved.
 
 */
 

@@ -1,7 +1,7 @@
 /*
 	NSToolbarItem.h
 	Application Kit
-	Copyright (c) 2000-2011, Apple Inc.
+	Copyright (c) 2000-2012, Apple Inc.
 	All rights reserved.
 */
 
@@ -156,7 +156,7 @@ enum {
 
 @interface NSObject (NSToolbarItemValidation)
 - (BOOL)validateToolbarItem:(NSToolbarItem *)theItem;
-    /* NSToolbarItemValidation extends the standard validation idea by introducing this new method which is sent to validators for each visible standard NSToolbarItem with a valid target/action pair.  Note: This message is sent from NSToolbarItem's validate method, howevever validate will not send this message for items that have custom views. */
+    /* NSToolbarItemValidation extends the standard validation idea by introducing this new method which is sent to validators for each visible standard NSToolbarItem with a valid target/action pair.  Note: This message is sent from NSToolbarItem's validate method, however validate will not send this message for items that have custom views. */
 
 @end
 

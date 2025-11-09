@@ -1,21 +1,15 @@
 /*	NSTask.h
-	Copyright (c) 1996-2011, Apple Inc. All rights reserved.
+	Copyright (c) 1996-2012, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
 @class NSString, NSArray, NSDictionary;
 
-#if MAC_OS_X_VERSION_10_6 <= MAC_OS_X_VERSION_MAX_ALLOWED
-
-enum {
+typedef NS_ENUM(NSInteger, NSTaskTerminationReason) {
     NSTaskTerminationReasonExit = 1,
     NSTaskTerminationReasonUncaughtSignal = 2
-};
-
-#endif
-
-typedef NSInteger NSTaskTerminationReason;
+} NS_ENUM_AVAILABLE(10_6, NA);
 
 @interface NSTask : NSObject
 

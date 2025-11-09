@@ -3,9 +3,9 @@
  
      Contains:   Master include for ApplicationServices public framework
  
-     Version:    ApplicationServices-41~567
+     Version:    ApplicationServices-master~1
  
-     Copyright:  © 2000-2008 by Apple Computer, Inc., all rights reserved.
+     Copyright:  ï¿½ 2000-2008 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,11 +16,13 @@
 #ifndef __APPLICATIONSERVICES__
 #define __APPLICATIONSERVICES__
 
+#ifndef __AVAILABILITY__
+#include <Availability.h>
+#endif
+
 #ifndef __CORESERVICES__
 #include <CoreServices/CoreServices.h>
 #endif
-
-
 
 #ifndef __ATS__
 #include <ATS/ATS.h>
@@ -50,9 +52,17 @@
 #include <SpeechSynthesis/SpeechSynthesis.h>
 #endif
 
+#ifndef __CORETEXT__
 #include <CoreText/CoreText.h>
+#endif
+
+#ifndef __COLORSYNC__
 #include <ColorSync/ColorSync.h>
+#endif
+
+#ifndef __IMAGEIO__
 #include <ImageIO/ImageIO.h>
+#endif
 
 #endif /* __APPLICATIONSERVICES__ */
 

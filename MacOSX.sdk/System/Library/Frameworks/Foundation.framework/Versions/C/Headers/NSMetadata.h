@@ -1,5 +1,5 @@
 /*	NSMetadata.h
-	Copyright (c) 2004-2011, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2012, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -9,6 +9,7 @@
 @class NSMetadataItem, NSMetadataQueryAttributeValueTuple, NSMetadataQueryResultGroup;
 @protocol NSMetadataQueryDelegate;
 
+NS_CLASS_AVAILABLE(10_4, 5_0)
 @interface NSMetadataQuery : NSObject {
 @private
     NSUInteger _flags;
@@ -98,6 +99,7 @@ FOUNDATION_EXPORT NSString * const NSMetadataQueryUbiquitousDocumentsScope NS_AV
 FOUNDATION_EXPORT NSString * const NSMetadataQueryUbiquitousDataScope NS_AVAILABLE(10_7, 5_0); // application's Ubiquity container, excluding the "Documents" subdirectory
 
 
+NS_CLASS_AVAILABLE(10_4, 5_0)
 @interface NSMetadataItem : NSObject {
 @private
     id _item;
@@ -111,6 +113,7 @@ FOUNDATION_EXPORT NSString * const NSMetadataQueryUbiquitousDataScope NS_AVAILAB
 
 @end
 
+NS_CLASS_AVAILABLE(10_4, 5_0)
 @interface NSMetadataQueryAttributeValueTuple : NSObject {
 @private
     id _attr;
@@ -125,6 +128,7 @@ FOUNDATION_EXPORT NSString * const NSMetadataQueryUbiquitousDataScope NS_AVAILAB
 
 @end
 
+NS_CLASS_AVAILABLE(10_4, 5_0)
 @interface NSMetadataQueryResultGroup : NSObject {
 @private
     id _private[9];

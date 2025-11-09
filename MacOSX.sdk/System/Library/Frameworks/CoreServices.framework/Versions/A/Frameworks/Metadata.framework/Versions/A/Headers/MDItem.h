@@ -964,6 +964,9 @@ MD_EXPORT const CFStringRef    kMDItemSupportFileType AVAILABLE_MAC_OS_X_VERSION
         
         @const kMDItemExecutableArchitectures
         Array of executables architectures the item contains.
+ 
+        @const kMDItemExecutablePlatform
+        Indicates platform required to execute this application.
 
         @const kMDItemApplicationCategories
         Array of categories the item application is a member of.
@@ -989,6 +992,7 @@ MD_EXPORT const CFStringRef    kMDItemLabelUUID AVAILABLE_MAC_OS_X_VERSION_10_7_
 
 MD_EXPORT const CFStringRef    kMDItemIsLikelyJunk AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER; // CFBoolean
 MD_EXPORT const CFStringRef    kMDItemExecutableArchitectures AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER; // CFArray of CFString
+MD_EXPORT const CFStringRef    kMDItemExecutablePlatform AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER; // CFString
 MD_EXPORT const CFStringRef    kMDItemApplicationCategories AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER; // CFArray of CFString
 
 MD_EXPORT const CFStringRef    kMDItemIsApplicationManaged AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER; // CFBoolean

@@ -1,9 +1,9 @@
 /*
      File:       OSServices/WSTypes.h
  
-     Contains:   WebServicesCore Method Invocation API
+     Contains:   *** DEPRECATED *** WebServicesCore Method Invocation API
  
-     Copyright:  © 2002-2010 by Apple Inc., all rights reserved
+     Copyright:  (c) 2002-2011 Apple Inc. All rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -11,6 +11,7 @@
                      http://developer.apple.com/bugreporter/
  
 */
+
 #ifndef __WSTYPES__
 #define __WSTYPES__
 
@@ -30,7 +31,7 @@
     WebServicesCore error codes
  */
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -171,13 +172,13 @@ typedef struct WSClientContext          WSClientContext;
     SOAP 1.1:   <http://www.w3.org/TR/SOAP/>
     SOAP 1.2:   <http://www.w3.org/2002/ws/>
 */
-extern CFStringRef kWSXMLRPCProtocol;
-extern CFStringRef kWSSOAP1999Protocol;
-extern CFStringRef kWSSOAP2001Protocol;
+extern CFStringRef kWSXMLRPCProtocol                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+extern CFStringRef kWSSOAP1999Protocol                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+extern CFStringRef kWSSOAP2001Protocol                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
 
 
 /*
- *  WSGetWSTypeIDFromCFType()
+ *  WSGetWSTypeIDFromCFType()   *** DEPRECATED ***
  *  
  *  Discussion:
  *    Returns the WSTypeID associated with CFTypeRef.  There is not a
@@ -197,16 +198,16 @@ extern CFStringRef kWSSOAP2001Protocol;
  *    matches, eWSUnknownType is returned.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later
+ *    Mac OS X:         in version 10.2 and later but deprecated in 10.8
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
 extern WSTypeID 
-WSGetWSTypeIDFromCFType(CFTypeRef ref);
+WSGetWSTypeIDFromCFType(CFTypeRef ref)                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
 
 
 /*
- *  WSGetCFTypeIDFromWSTypeID()
+ *  WSGetCFTypeIDFromWSTypeID()   *** DEPRECATED ***
  *  
  *  Discussion:
  *    Returns the CFTypeID that is associated with a given WSTypeID. 
@@ -225,12 +226,12 @@ WSGetWSTypeIDFromCFType(CFTypeRef ref);
  *    a CFTypeID, or 0 if not found
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later
+ *    Mac OS X:         in version 10.2 and later but deprecated in 10.8
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
 extern CFTypeID 
-WSGetCFTypeIDFromWSTypeID(WSTypeID typeID);
+WSGetCFTypeIDFromWSTypeID(WSTypeID typeID)                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
 
 
 

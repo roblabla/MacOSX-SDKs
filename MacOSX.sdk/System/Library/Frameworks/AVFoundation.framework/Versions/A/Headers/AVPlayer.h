@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010 Apple Inc. All rights reserved.
+	Copyright 2010-2012 Apple Inc. All rights reserved.
 
 */
 
@@ -32,6 +32,7 @@
 #import <AVFoundation/AVBase.h>
 #import <CoreMedia/CMTime.h>
 #import <CoreMedia/CMTimeRange.h>
+#import <CoreMedia/CMSync.h>
 #import <Foundation/Foundation.h>
 
 @class AVPlayerItem;
@@ -57,31 +58,6 @@ enum {
 	AVPlayerStatusFailed
 };
 typedef NSInteger AVPlayerStatus;
-
-/*!
- @enum AVPlayerActionAtItemEnd
- @abstract
-	These constants are the allowable values of AVPlayer's actionAtItemEnd property.
- 
- @constant	 AVPlayerActionAtItemEndAdvance
-	Indicates that when an AVPlayerItem reaches its end time the player will automatically advance to the next item in its queue.
-	This value is supported only for players of class AVQueuePlayer. An AVPlayer that's not an AVQueuePlayer will raise an NSInvalidArgumentException if an attempt is made to set its actionAtItemEnd to AVPlayerActionAtItemEndAdvance.
- @constant	 AVPlayerActionAtItemEndPause
-	Indicates that when an AVPlayerItem reaches its end time the player will automatically pause (which is to say, the player's
-	rate will automatically be set to 0).
- @constant	 AVPlayerActionAtItemEndNone
-	Indicates that when an AVPlayerItem reaches its end time the player will take no action (which is to say, the player's rate
-	will not change, its currentItem will not change, and its currentTime will continue to be incremented or decremented as time
-	elapses, according to its rate). After this, if the player's actionAtItemEnd is set to a value other than AVPlayerActionAtItemEndNone,
-	the player will immediately take the action appropriate to that value.
-*/
-enum
-{
-    AVPlayerActionAtItemEndAdvance	= 0,
-	AVPlayerActionAtItemEndPause	= 1,
-	AVPlayerActionAtItemEndNone		= 2,
-};
-typedef NSInteger AVPlayerActionAtItemEnd;
 
 NS_CLASS_AVAILABLE(10_7, 4_0)
 @interface AVPlayer : NSObject 
@@ -150,6 +126,82 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  */
 @property (nonatomic, readonly) NSError *error;
 
+@end
+
+
+@interface AVPlayer (AVPlayerPlaybackControl)
+
+/* indicates the current rate of playback; 0.0 means "stopped", 1.0 means "play at the natural rate of the current item" */
+@property (nonatomic) float rate;
+
+/*!
+	@method			play
+	@abstract		Begins playback of the current item.
+	@discussion		Same as setting rate to 1.0.
+*/
+- (void)play;
+
+/*!
+	@method			pause
+	@abstract		Pauses playback.
+	@discussion		Same as setting rate to 0.0.
+*/
+- (void)pause;
+
+@end
+
+
+@interface AVPlayer (AVPlayerItemControl)
+
+/* indicates the current item of the player */
+@property (nonatomic, readonly) AVPlayerItem *currentItem;
+
+/*!
+	@method			replaceCurrentItemWithPlayerItem:
+	@abstract		Replaces the player's current item with the specified player item.
+	@param			item
+	  The AVPlayerItem that will become the player's current item.
+	@discussion
+	  For best results ensure that the tracks property of an AVPlayerItem's AVAsset, if there is one,
+	  has reached the status AVKeyValueStatusLoaded before attempting to replace the current item with it.
+	  See -[AVAsset loadValuesAsynchronouslyForKeys:completionHandler:].
+	  
+	  In all releases of iOS 4, invoking replaceCurrentItemWithPlayerItem: with an AVPlayerItem that's already the receiver's currentItem results in an exception being raised. Starting with iOS 5, it's a no-op.
+*/
+- (void)replaceCurrentItemWithPlayerItem:(AVPlayerItem *)item;
+
+/*!
+ @enum AVPlayerActionAtItemEnd
+ @abstract
+	These constants are the allowable values of AVPlayer's actionAtItemEnd property.
+ 
+ @constant	 AVPlayerActionAtItemEndAdvance
+	Indicates that when an AVPlayerItem reaches its end time the player will automatically advance to the next item in its queue.
+	This value is supported only for players of class AVQueuePlayer. An AVPlayer that's not an AVQueuePlayer will raise an NSInvalidArgumentException if an attempt is made to set its actionAtItemEnd to AVPlayerActionAtItemEndAdvance.
+ @constant	 AVPlayerActionAtItemEndPause
+	Indicates that when an AVPlayerItem reaches its end time the player will automatically pause (which is to say, the player's
+	rate will automatically be set to 0).
+ @constant	 AVPlayerActionAtItemEndNone
+	Indicates that when an AVPlayerItem reaches its end time the player will take no action (which is to say, the player's rate
+	will not change, its currentItem will not change, and its currentTime will continue to be incremented or decremented as time
+	elapses, according to its rate). After this, if the player's actionAtItemEnd is set to a value other than AVPlayerActionAtItemEndNone,
+	the player will immediately take the action appropriate to that value.
+*/
+enum
+{
+    AVPlayerActionAtItemEndAdvance	= 0,
+	AVPlayerActionAtItemEndPause	= 1,
+	AVPlayerActionAtItemEndNone		= 2,
+};
+typedef NSInteger AVPlayerActionAtItemEnd;
+
+/* indicates the action that the player should perform when playback of an item reaches its end time */
+@property (nonatomic) AVPlayerActionAtItemEnd actionAtItemEnd;
+
+@end
+
+
+@interface AVPlayer (AVPlayerTimeControl)
 /*!
  @method			currentTime
  @abstract			Returns the current time of the current item.
@@ -190,7 +242,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 					set to NO. If the new request completes without being interrupted by another seek request or by any other operation the specified 
 					completion handler will be invoked with the finished parameter set to YES. 
  */
-- (void)seekToTime:(CMTime)time completionHandler: (void (^)(BOOL finished))completionHandler;
+- (void)seekToTime:(CMTime)time completionHandler:(void (^)(BOOL finished))completionHandler NS_AVAILABLE(10_7, 5_0);
 
 /*!
  @method			seekToTime:toleranceBefore:toleranceAfter:completionHandler:
@@ -206,63 +258,54 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 					request completes without being interrupted by another seek request or by any other operation the specified completion handler will be invoked with the 
 					finished parameter set to YES.
  */
-- (void)seekToTime:(CMTime)time toleranceBefore:(CMTime)toleranceBefore toleranceAfter:(CMTime)toleranceAfter completionHandler: (void (^)(BOOL finished))completionHandler;
-
-/* indicates the current item of the player */
-@property (nonatomic, readonly) AVPlayerItem *currentItem;
-
-/* indicates the current rate of playback; 0.0 means "stopped", 1.0 means "play at the natural rate of the current item" */
-@property (nonatomic) float rate;
-
-#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
-
-/* indicates the current audio volume of the player; 0.0 means "silence all audio", 1.0 means "play at the full volume of the current item" */
-@property (nonatomic) float volume NS_AVAILABLE(10_7, NA);
-
-/* indicates whether or not audio output of the player is muted */
-@property (nonatomic, getter=isMuted) BOOL muted NS_AVAILABLE(10_7, NA);
-
-#endif // (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
-
-/* indicates the action that the player should perform when playback of an item reaches its end time */
-@property (nonatomic) AVPlayerActionAtItemEnd actionAtItemEnd;
-
-/* indicates whether display of closed captions is enabled */
-@property (nonatomic, getter=isClosedCaptionDisplayEnabled) BOOL closedCaptionDisplayEnabled;
+- (void)seekToTime:(CMTime)time toleranceBefore:(CMTime)toleranceBefore toleranceAfter:(CMTime)toleranceAfter completionHandler:(void (^)(BOOL finished))completionHandler NS_AVAILABLE(10_7, 5_0);
 
 @end
 
-@interface AVPlayer (AVPlayerPlaybackControl)
 
-// convenience methods for controlling playback; results are also achievable by setting properties
-
-/*!
-	@method			play
-	@abstract		Begins playback of the current item.
-	@discussion		Same as setting rate to 1.0.
-*/
-- (void)play;
+@interface AVPlayer (AVPlayerAdvancedRateControl)
 
 /*!
-	@method			pause
-	@abstract		Pauses playback.
-	@discussion		Same as setting rate to 0.0.
+	@method			setRate:time:atHostTime:
+	@abstract		Simultaneously sets the playback rate and the relationship between the current item's current time and host time.
+	@discussion		You can use this function to synchronize playback with an external activity.
+	
+					The current item's timebase is adjusted so that its time will be (or was) itemTime when host time is (or was) hostClockTime.
+					In other words: if hostClockTime is in the past, the timebase's time will be interpolated as though the timebase has been running at the requested rate since that time.  If hostClockTime is in the future, the timebase will immediately start running at the requested rate from an earlier time so that it will reach the requested itemTime at the requested hostClockTime.  (Note that the item's time will not jump backwards, but instead will sit at itemTime until the timebase reaches that time.)
+	@param itemTime	The time to start playback from, specified precisely (i.e., with zero tolerance).
+					Pass kCMTimeInvalid to use the current item's current time.
+	@param hostClockTime
+					The host time at which to start playback.
+					If hostClockTime is specified, the player will not ensure that media data is loaded before the timebase starts moving.
+					If hostClockTime is kCMTimeInvalid, the rate and time will be set together, but without external synchronization;
+					a host time in the near future will be used, allowing some time for data media loading.
 */
-- (void)pause;
+- (void)setRate:(float)rate time:(CMTime)itemTime atHostTime:(CMTime)hostClockTime NS_AVAILABLE(10_8, TBD);
 
 /*!
-	@method			replaceCurrentItemWithPlayerItem:
-	@abstract		Replaces the player's current item with the specified player item.
-	@param			item
-	  The AVPlayerItem that will become the player's current item.
-	@discussion
-	  For best results ensure that the tracks property of an AVPlayerItem's AVAsset, if there is one,
-	  has reached the status AVKeyValueStatusLoaded before attempting to replace the current item with it.
-	  See -[AVAsset loadValuesAsynchronouslyForKeys:completionHandler:].
+	@method			prerollAtRate:completionHandler:
+	@abstract		Begins loading media data to prime the render pipelines for playback from the current time with the given rate.
+	@discussion		Once the completion handler is called with YES, the player's rate can be set with minimal latency.
+					The completion handler will be called with NO if the preroll is interrupted by a time change or incompatible rate change, or if preroll is not possible for some other reason.
+					Call this method only when the rate is currently zero and only after the AVPlayer's status has become AVPlayerStatusReadyToPlay.
+	@param rate		The intended rate for subsequent playback.
+	@param completionHandler
+					The block that will be called when the preroll is either completed or is interrupted.
 */
-- (void)replaceCurrentItemWithPlayerItem:(AVPlayerItem *)item;
+- (void)prerollAtRate:(float)rate completionHandler:(void (^)(BOOL finished))completionHandler NS_AVAILABLE(10_8, TBD);
+
+/*!
+	@method			cancelPendingPrerolls
+	@abstract		Cancel any pending preroll requests and invoke the corresponding completion handlers if present.
+	@discussion		Use this method to cancel and release the completion handlers for pending prerolls. The finished parameter of the completion handlers will be set to NO.
+*/
+- (void)cancelPendingPrerolls NS_AVAILABLE(10_8, TBD);
+
+/* NULL by default.  if not NULL, overrides the automatic choice of master clock for item timebases. This is most useful for synchronizing video-only movies with audio played via other means. IMPORTANT: If you specify a master clock other than the appropriate audio device clock, audio may drift out of sync. */
+@property (nonatomic, retain) __attribute__((NSObject)) CMClockRef masterClock NS_AVAILABLE(10_8, NA);
 
 @end
+
 
 @interface AVPlayer (AVPlayerTimeObservation)
 
@@ -322,6 +365,70 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 - (void)removeTimeObserver:(id)observer;
 
 @end
+
+
+@interface AVPlayer (AVPlayerMediaControl)
+
+#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+
+/* indicates the current audio volume of the player; 0.0 means "silence all audio", 1.0 means "play at the full volume of the current item" */
+@property (nonatomic) float volume NS_AVAILABLE(10_7, NA);
+
+/* indicates whether or not audio output of the player is muted */
+@property (nonatomic, getter=isMuted) BOOL muted NS_AVAILABLE(10_7, NA);
+
+#endif // (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+
+/* indicates whether display of closed captions is enabled */
+@property (nonatomic, getter=isClosedCaptionDisplayEnabled) BOOL closedCaptionDisplayEnabled;
+
+@end
+
+
+#if TARGET_OS_IPHONE
+
+@interface AVPlayer (AVPlayerAirPlaySupport)
+
+/* Indicates whether the player allows AirPlay video playback. The default value is YES. */
+@property (nonatomic) BOOL allowsAirPlayVideo NS_AVAILABLE_IOS(5_0);
+
+/* Indicates whether the player is currently playing video via AirPlay. */
+@property (nonatomic, readonly, getter=isAirPlayVideoActive) BOOL airPlayVideoActive NS_AVAILABLE_IOS(5_0);
+
+/* Indicates whether the player should automatically switch to AirPlay Video while AirPlay Screen is active in order to play video content, switching back to AirPlay Screen as soon as playback is done. 
+   The default value is NO. Has no effect if allowsAirPlayVideo is NO. */
+@property (nonatomic) BOOL usesAirPlayVideoWhileAirPlayScreenIsActive NS_AVAILABLE_IOS(5_0);
+
+@end
+
+/*
+	@category		AVPlayer (AVPlayerProtectedContent)
+	@abstract		Methods supporting protected content.
+*/
+
+@interface AVPlayer (AVPlayerProtectedContent)
+
+/*!
+	@property outputObscuredDueToInsufficientExternalProtection
+	@abstract
+		Whether or not decoded output is being obscured due to insufficient external protection.
+ 
+	@discussion
+		The value of this property indicates whether the player is purposefully obscuring the visual output
+		of the current item because the requirement for an external protection mechanism is not met by the
+		current device configuration. It is highly recommended that clients whose content requires external
+		protection observe this property and set the playback rate to zero and display an appropriate user
+		interface when the value changes to YES. This property is key value observable.
+
+		Note that the value of this property is dependent on the external protection requirements of the
+		current item. These requirements are inherent to the content itself and cannot be externally specified.
+		If the current item does not require external protection, the value of this property will be NO.
+ */
+@property (nonatomic, readonly) BOOL outputObscuredDueToInsufficientExternalProtection NS_AVAILABLE_IOS(TBD);
+
+@end
+
+#endif // TARGET_OS_IPHONE
 
 
 /*!

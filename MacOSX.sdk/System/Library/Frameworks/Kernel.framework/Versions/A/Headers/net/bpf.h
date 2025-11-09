@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2008 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2012 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -76,6 +76,7 @@
 
 #ifndef _NET_BPF_H_
 #define _NET_BPF_H_
+#include <sys/param.h>
 #include <sys/appleapiopts.h>
 #include <sys/types.h>
 #include <sys/time.h>

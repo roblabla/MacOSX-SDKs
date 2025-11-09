@@ -1,5 +1,5 @@
 /*	NSConnection.h
-	Copyright (c) 1989-2011, Apple Inc. All rights reserved.
+	Copyright (c) 1989-2012, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -10,6 +10,7 @@
 @class NSDistantObjectRequest;
 @protocol NSConnectionDelegate;
 
+NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 @interface NSConnection : NSObject {
     @private
     id		receivePort;

@@ -27,8 +27,6 @@
     NSArray *sortedAttributes;
 }
 
-#if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_1_1
-
 /*!
     @method		withServiceDictionary:device:
 	@abstract	Returns an IOBluetoothSDPServiceRecord * with the attributes specified in the provided service dictionary. Provide
@@ -46,8 +44,6 @@
 */
 
 - (id) initWithServiceDictionary:(NSDictionary *)serviceDict device:(IOBluetoothDevice *)device;
-
-#endif /* BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_1_1 */
 
 /*!
     @method		withSDPServiceRecordRef:
@@ -159,8 +155,6 @@
  */
 - (BOOL)matchesUUID16:(BluetoothSDPUUID16)uuid16;
 
-#if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_1
-
 /*!
     @method		matchesUUIDArray:
     @abstract	Returns TRUE if ALL of the UUIDs in the given array is found in the target service.
@@ -188,8 +182,6 @@
     @result		Returns TRUE if any of the UUID arrays match.
 */
 - (BOOL)matchesSearchArray:(NSArray *)searchArray;
-
-#endif /* BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_1 */
 
 /*!
     @method		hasServiceFromArray:

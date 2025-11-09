@@ -1,5 +1,5 @@
 /*	NSObject.h
-	Copyright (c) 1994-2011, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2012, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObjCRuntime.h>
@@ -38,6 +38,8 @@
 - (NSUInteger)retainCount NS_AUTOMATED_REFCOUNT_UNAVAILABLE;
 
 - (NSString *)description;
+@optional
+- (NSString *)debugDescription;
 
 @end
 
@@ -60,8 +62,17 @@
 
 @end
 
+// Objects which are safe to be encoded and decoded across privilege boundaries should adopt NSSecureCoding instead of NSCoding. Secure coders (those that respond YES to requiresSecureCoding) will only encode objects that adopt the NSSecureCoding protocol.
+@protocol NSSecureCoding <NSCoding>
+@required
+// This method must be return YES on all classes that allow secure coding. Subclasses of classes that adopt NSSecureCoding and override initWithCoder: must also override this method and return YES.
+// The Secure Coding Guide should be consulted when writing methods that decode data.
++ (BOOL)supportsSecureCoding;
+@end
+
 /***********	Base class		***********/
 
+NS_ROOT_CLASS
 @interface NSObject <NSObject> {
     Class	isa;
 }
@@ -92,7 +103,7 @@
 + (IMP)instanceMethodForSelector:(SEL)aSelector;
 - (void)doesNotRecognizeSelector:(SEL)aSelector;
 
-- (id)forwardingTargetForSelector:(SEL)aSelector;
+- (id)forwardingTargetForSelector:(SEL)aSelector NS_AVAILABLE(10_5, 2_0);
 - (void)forwardInvocation:(NSInvocation *)anInvocation;
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector;
 
@@ -116,7 +127,7 @@
 + (void)setVersion:(NSInteger)aVersion;
 - (Class)classForCoder;
 - (id)replacementObjectForCoder:(NSCoder *)aCoder;
-- (id)awakeAfterUsingCoder:(NSCoder *)aDecoder;
+- (id)awakeAfterUsingCoder:(NSCoder *)aDecoder NS_REPLACES_RECEIVER;
 
 @end
 
@@ -136,13 +147,11 @@ UNAVAILABLE_ATTRIBUTE
 /***********	Discardable Content		***********/
 
 @protocol NSDiscardableContent
-#if MAC_OS_X_VERSION_10_6 <= MAC_OS_X_VERSION_MAX_ALLOWED || __IPHONE_4_0 <= __IPHONE_OS_VERSION_MAX_ALLOWED
 @required
 - (BOOL)beginContentAccess;
 - (void)endContentAccess;
 - (void)discardContentIfPossible;
 - (BOOL)isContentDiscarded;
-#endif
 @end
 
 @interface NSObject (NSDiscardableContentProxy)
@@ -156,7 +165,7 @@ FOUNDATION_EXPORT id NSAllocateObject(Class aClass, NSUInteger extraBytes, NSZon
 
 FOUNDATION_EXPORT void NSDeallocateObject(id object) NS_AUTOMATED_REFCOUNT_UNAVAILABLE;
 
-FOUNDATION_EXPORT id NSCopyObject(id object, NSUInteger extraBytes, NSZone *zone) NS_AUTOMATED_REFCOUNT_UNAVAILABLE;
+FOUNDATION_EXPORT id NSCopyObject(id object, NSUInteger extraBytes, NSZone *zone) NS_AUTOMATED_REFCOUNT_UNAVAILABLE NS_DEPRECATED(10_0, 10_8, 2_0, 6_0);
 
 FOUNDATION_EXPORT BOOL NSShouldRetainWithZone(id anObject, NSZone *requestedZone) NS_AUTOMATED_REFCOUNT_UNAVAILABLE;
 

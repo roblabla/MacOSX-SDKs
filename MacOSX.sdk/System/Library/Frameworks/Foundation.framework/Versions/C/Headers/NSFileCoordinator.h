@@ -1,16 +1,16 @@
 /*
 	NSFileCoordinator.h
-	Copyright (c) 2010-2011, Apple Inc.
+	Copyright (c) 2010-2012, Apple Inc.
 	All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
-@class NSArray, NSError, NSURL;
+@class NSArray, NSError, NSMutableDictionary, NSURL;
 
 @protocol NSFilePresenter;
 
-enum {
+typedef NS_OPTIONS(NSUInteger, NSFileCoordinatorReadingOptions) {
 
     /* Whether reading does _not_ trigger sending of -savePresentedItemChangesWithCompletionHandler: to certain NSFilePresenters in the system and waiting for those NSFilePresenters to respond. The default behavior during coordinated reading is to send -savePresentedItemChangesWithCompletionHandler: to NSFilePresenters.
     */
@@ -20,11 +20,9 @@ enum {
     */
     NSFileCoordinatorReadingResolvesSymbolicLink = 1 << 1
 
-
 };
-typedef NSUInteger NSFileCoordinatorReadingOptions;
 
-enum {
+typedef NS_OPTIONS(NSUInteger, NSFileCoordinatorWritingOptions) {
 
     /* You can use only one of these writing options at a time. Using none of them indicates that the writing will simply update the item.
     */
@@ -54,7 +52,6 @@ enum {
     NSFileCoordinatorWritingForReplacing = 1 << 3
 
 };
-typedef NSUInteger NSFileCoordinatorWritingOptions;
 
 NS_CLASS_AVAILABLE(10_7, 5_0)
 @interface NSFileCoordinator : NSObject {
@@ -65,7 +62,7 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
     NSURL *_recentFilePresenterURL;
     id _accessClaimIDOrIDs;
     BOOL _isCancelled;
-    id _reserved;
+    NSMutableDictionary *_movedItems;
 }
 
 #pragma mark *** File Presenters ***
@@ -146,7 +143,7 @@ If there are multiple NSFilePresenters involved then the order in which they are
 
 /* Prepare to more efficiently do a large number of invocations of -coordinate... methods, first synchronously messaging and waiting for NSFilePresenters in a variation of what individual invocations of the -coordinate... methods would do, and then, if no error occurs, invoke the passed-in block. The passed-in block must invoke the completion handler passed to it when all of the coordinated reading and writing it does is done. The completion handler block can be invoked on any thread (or from any dispatch queue, if that's how you think of it). This method returns errors in the same manner as the -coordinate... methods.
 
-The -coordinate... methods must use interprocess communication to message instances of NSFileCoordinator and NSFilePresenter in other processes in the system. That is an expense best avoided when reading or writing many files in one operation. Using this method can greatly reduce the amount of interprocess communication required by, for example, a large batched copying or moving of files. You use it by moving all of the invocations of the -coordinate... methods your app will do during a batch operation, or the scheduling of them if the operation's work is done in a multithreaded fashion, into a block and passing that block to an invocation of this method, remembering that the completion handler passed to that block must be invoked when the operation is done. You don't simply pass all URLs that will be passed into invocations of the -coordinate... methods when invoking this method. Instead you pass the top-level files and directories involved in the operation. This method triggers messages to not just NSFilePresenters of those items, but also NSFilePresenters of items contained by those items. For example, when Finder uses this method during a copy operation readingURLs is an array of the URLs of the exact files and folders that the user has selected, even though those folders may contain many files and subfolders for which Finder is going to do coordinated reading, and writingURLs is an array that contains just the URL of the destination folder.
+The -coordinate... methods must use interprocess communication to message instances of NSFileCoordinator and NSFilePresenter in other processes in the system. That is an expense best avoided when reading or writing many files in one operation. Using this method can greatly reduce the amount of interprocess communication required by, for example, a large batched copying or moving of files. You use it by moving all of the invocations of the -coordinate... methods your application will do during a batch operation, or the scheduling of them if the operation's work is done in a multithreaded fashion, into a block and passing that block to an invocation of this method, remembering that the completion handler passed to that block must be invoked when the operation is done. You don't simply pass all URLs that will be passed into invocations of the -coordinate... methods when invoking this method. Instead you pass the top-level files and directories involved in the operation. This method triggers messages to not just NSFilePresenters of those items, but also NSFilePresenters of items contained by those items. For example, when Finder uses this method during a copy operation readingURLs is an array of the URLs of the exact files and folders that the user has selected, even though those folders may contain many files and subfolders for which Finder is going to do coordinated reading, and writingURLs is an array that contains just the URL of the destination folder.
 
 In most cases it is redundant to pass the same reading or writing options in an invocation of this method as are passed to individual invocations of the -coordinate... methods invoked by the block passed to an invocation of this method. For example, when Finder invokes this method during a copy operation it does not pass NSFileCoordinatorReadingWithoutChanges because it is appropriate to trigger the saving of document changes right away, but it does pass it when doing the nested invocations of -coordinate... methods because it is not necessary to trigger saving again, even if the user changes the document before the Finder proceeds far enough to actually copy that document's file.
 */
@@ -156,12 +153,22 @@ In most cases it is redundant to pass the same reading or writing options in an 
 
 #pragma mark *** Renaming and Moving Notification ***
 
+/*Announce that the item located by a URL is going to be located by another URL.
+
+Support for App Sandbox on OS X. Some applications can rename files while saving them. For example, when a user adds attachments to a rich text document, TextEdit changes the document's extension from .rtf to .rtfd. A sandboxed application like TextEdit must ordinarily prompt the user for approval before renaming a document. You can invoke this method to make your process declare its intent to rename a document without user approval. After the renaming succeeds you must invoke -itemAtURL:didMoveToURL:, with the same arguments, for the process to keep access to the file with its new name and to give up access to any file that appears with the old name. If the renaming fails you should probably not invoke -itemAtURL:willMoveToURL:.
+
+There is no reason to invoke this method from applications that do not use App Sandbox. Invoking it does nothing on iOS.
+*/
+- (void)itemAtURL:(NSURL *)oldURL willMoveToURL:(NSURL *)newURL NS_AVAILABLE(10_8, 6_0);
+
 /* Announce that the item located by a URL is now located by another URL.
 
 This triggers the sending of messages to NSFilePresenters that implement the corresponding optional methods, even those in other processes, except the one specified when -initWithFilePresenter: was invoked:
 - -presentedItemDidMoveToURL: is sent to NSFilePresenters of the item.
 - If the item is a directory then -presentedItemDidMoveToURL: is sent to NSFilePresenters of each item contained by it.
 - -presentedSubitemAtURL:didMoveToURL: is sent to NSFilePresenters of each directory that contains the item, unless that method is not implemented but -presentedItemDidChange is, and the directory is actually a file package, in which case -presentedItemDidChange is sent instead.
+
+This also balances invocations of -itemAtURL:willMoveToURL:, as described above.
 
 Useless invocations of this method are harmless, so you don't have to write code that compares NSURLs for equality, which is not straightforward. This method must be invoked from within the block passed to an invocation of -coordinateWritingItemAtURL:options:error:byAccessor: or -coordinateReadingItemAtURL:options:writingItemAtURL:options:error:byAccessor:.
 */

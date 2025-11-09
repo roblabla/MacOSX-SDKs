@@ -1,21 +1,21 @@
 /*
- * Copyright (c) 1998-2006 Apple Computer, Inc. All rights reserved.
+ * Copyright © 1998-2012 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
- * The contents of this file constitute Original Code as defined in and
- * are subject to the Apple Public Source License Version 1.2 (the
- * "License").  You may not use this file except in compliance with the
- * License.  Please obtain a copy of the License at
- * http://www.apple.com/publicsource and read it before using this file.
+ * This file contains Original Code and/or Modifications of Original Code
+ * as defined in and that are subject to the Apple Public Source License
+ * Version 2.0 (the 'License'). You may not use this file except in
+ * compliance with the License. Please obtain a copy of the License at
+ * http://www.opensource.apple.com/apsl/ and read it before using this
+ * file.
  * 
- * This Original Code and all software distributed under the License are
- * distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+ * The Original Code and all software distributed under the License are
+ * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
  * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.  
- * Please see the License for the specific language governing rights and 
- * limitations under the License.
+ * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
+ * Please see the License for the specific language governing rights and
  * 
  * @APPLE_LICENSE_HEADER_END@
  */
@@ -31,6 +31,8 @@
 #include <IOKit/usb/IOUSBControllerV2.h>
 
 class IOUSBInterface;
+
+#define	kAppleUSBSSIsocContinuousFrame		0xFFFFFFFFFFFFFFFEull
 
 /*!
     @class IOUSBPipe
@@ -59,6 +61,9 @@ protected:
 		IOUSBInterface	*			_interface;
 		bool						_crossEndianCompatible;
 		UInt32						_locationID;
+		UInt8						_uasUsageID;
+		UInt8						_usageType;
+		UInt8						_syncType;
     };
     ExpansionData * _expansionData;
     
@@ -67,12 +72,12 @@ protected:
     IOReturn ClosePipe(void);
 	
 public:
-		
-		virtual bool InitToEndpoint(const IOUSBEndpointDescriptor *endpoint, UInt8 speed,
-									USBDeviceAddress address, IOUSBController * controller);
-	
-    // The following 2 methods are obsolete
+    
+    // The following 4 methods are deprecated (replaced by the new IOUSBPipeV2 class)
     //
+    virtual bool InitToEndpoint(const IOUSBEndpointDescriptor *endpoint, UInt8 speed,
+                                USBDeviceAddress address, IOUSBController * controller);
+	
     static IOUSBPipe *ToEndpoint(const IOUSBEndpointDescriptor *endpoint, UInt8 speed,
                                  USBDeviceAddress address, IOUSBController * controller);
 	
@@ -325,7 +330,7 @@ public:
 	 Read from an isochronous endpoint and process the IOUSBLowLatencyIsocFrame fields at 
 	 hardware interrupt time
 	 @param buffer place to put the transferred data
-	 @param frameStart USB frame number of the frame to start transfer
+	 @param frameStart USB frame number of the frame to start transfer. For SuperSpeed Isoc devices, if the frameStart is kAppleUSBSSIsocContinuousFrame, then just continue after the last transfer which was called.
 	 @param numFrames Number of frames to transfer
 	 @param frameList Bytes to transfer, result, and time stamp for each frame
 	 @param completion describes action to take when buffer has been filled
@@ -341,7 +346,7 @@ public:
 	 AVAILABLE ONLY IN VERSION 1.9.2 AND ABOVE
 	 Write to an isochronous endpoint
 	 @param buffer place to get the data to transfer
-	 @param frameStart USB frame number of the frame to start transfer
+	 @param frameStart USB frame number of the frame to start transfer. For SuperSpeed Isoc devices, if the frameStart is kAppleUSBSSIsocContinuousFrame, then just continue after the last transfer which was called.
 	 @param numFrames Number of frames to transfer
 	 @param frameList Pointer to list of frames indicating bytes to transfer and result for each frame
 	 @param completion describes action to take when buffer has been emptied
@@ -374,14 +379,18 @@ public:
 	virtual bool InitToEndpoint(const IOUSBEndpointDescriptor *endpoint, UInt8 speed,
 								USBDeviceAddress address, IOUSBController * controller, IOUSBDevice * device, IOUSBInterface * interface);
 
-    OSMetaClassDeclareReservedUnused(IOUSBPipe,  13);
-    OSMetaClassDeclareReservedUnused(IOUSBPipe,  14);
+    OSMetaClassDeclareReservedUsed(IOUSBPipe,  13);
+	virtual	UInt8	GetUsageType(void);
+	
+    OSMetaClassDeclareReservedUsed(IOUSBPipe,  14);
+	virtual UInt8	GetSyncType(void);
+	
     OSMetaClassDeclareReservedUnused(IOUSBPipe,  15);
     OSMetaClassDeclareReservedUnused(IOUSBPipe,  16);
     OSMetaClassDeclareReservedUnused(IOUSBPipe,  17);
-    OSMetaClassDeclareReservedUnused(IOUSBPipe,  18);
+	OSMetaClassDeclareReservedUnused(IOUSBPipe,  18);
     OSMetaClassDeclareReservedUnused(IOUSBPipe,  19);
 	
 };
 
-#endif /* _IOKIT_IOUSBPIPE_H */
+#endif

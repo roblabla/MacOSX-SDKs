@@ -217,18 +217,16 @@ enum {
 */
 
 enum {
-    kIONetworkFeatureNoBSDWait    = 0x01,
-	kIONetworkFeatureHardwareVlan = 0x02,
-	kIONetworkFeatureSoftwareVlan = 0x04,
-	kIONetworkFeatureMultiPages   = 0x08,
-	kIONetworkFeatureTSOIPv4      = 0x10,
-	kIONetworkFeatureTSOIPv6      = 0x20
+    kIONetworkFeatureNoBSDWait              = 0x01,
+	kIONetworkFeatureHardwareVlan           = 0x02,
+	kIONetworkFeatureSoftwareVlan           = 0x04,
+	kIONetworkFeatureMultiPages             = 0x08,
+	kIONetworkFeatureTSOIPv4                = 0x10,
+	kIONetworkFeatureTSOIPv6                = 0x20
 };
 
-/*
- * Kernel
- */
-#if defined(KERNEL) && defined(__cplusplus)
+#ifdef KERNEL
+#ifdef __cplusplus
 
 #include <IOKit/IOService.h>
 #include <IOKit/IOWorkLoop.h>
@@ -890,7 +888,7 @@ public:
 
     virtual UInt32 releaseFreePackets();
 
-/*! @enum TCP/IPChecksums
+/*! @enum TCP/IP Checksums
     @abstract TCP/IP checksums that may be supported by the
     hardware.
     @constant kChecksumFamilyTCPIP A value that describes the collection
@@ -1244,25 +1242,32 @@ protected:
     virtual IOReturn disable(IONetworkInterface * interface);
 
 /*! @function attachInterface
-    @abstract Attaches a new interface client object.
-    @discussion This method creates a new interface object and attaches it to the
-    controller. The createInterface() method is called to perform
-    the interface allocation and initialization, followed by a call to 
-    configureInterface() to configure it. Subclasses can override those
-    two methods to customize the interface client attached. Drivers will
-    usually call this method from start(), after they are ready to process
-    client requests. Since most drivers will have a single interface
-    client, this method will likely be called only once.
-    @param interface Upon success (return value is true), the
-    interface object will be written to the handle provided.
-    @param doRegister If true, then registerService() is called to register
-    the interface, which will trigger the matching process, and will ultimately
-    cause the interface to become registered with the data link layer.
-    Drivers that wish to delay the registration can set doRegister to false,
-    and call registerService() on the interface object when the controller
-    becomes ready. This allows the driver to attach an interface without
-    making its services available to the rest of the system.
-    @result Returns true on success, false otherwise. 
+    @abstract Attaches a new network interface client object.
+    @discussion This method creates a new network interface object and attaches
+    it as a client of the controller. The <code>createInterface()</code> method
+    is used to allocate and to initialize the interface, followed by a call to
+    <code>configureInterface()</code> to configure the interface. Subclasses
+    may override those two methods to customize the new interface object.
+    Before this method returns, <code>registerService()</code> is called on the
+    interface to start matching, which will ultimately attach the interface
+    to the networking stack.
+    Drivers will typically call this method from their <code>start()</code>
+    method after they are ready to process interface requests. This has the
+    desirable effect of preventing the <code>busyState</code> at the IOService
+    root from becoming zero before the interface object has completed matching,
+    which then holds off the user process that is waiting for I/O Kit to become
+    quiet before assigning BSD names to all interfaces. Drivers that are unable
+    to trigger interface matching synchronously from their <code>start()</code>
+    method should instead call <code>adjustBusy</code> to manually increment
+    the <code>busyState</code>, then followed by a <code>busyState</code> 
+    decrement after attaching and registering the interface, or after a
+    reasonable timeout.
+    @param interface Upon success (return value is <code>true</code>), the
+    pointer to the interface object will be written to the argument provided.
+    @param doRegister If true, start interface matching before returning.
+    Drivers can pass <code>false</code> to postpone interface matching, then
+    register the interface when ready.
+    @result Returns <code>true</code> on success, <code>false</code> otherwise. 
 */
 
     virtual bool attachInterface(IONetworkInterface ** interface,
@@ -1513,7 +1518,6 @@ protected:
     OSMetaClassDeclareReservedUnused( IONetworkController, 31);
 };
 
-#endif /* defined(KERNEL) && defined(__cplusplus) */
-
+#endif /* __cplusplus */
+#endif /* KERNEL */
 #endif /* !_IONETWORKCONTROLLER_H */
-

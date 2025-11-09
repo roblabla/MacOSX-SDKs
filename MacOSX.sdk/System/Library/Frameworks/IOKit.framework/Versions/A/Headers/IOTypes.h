@@ -82,29 +82,16 @@ typedef mach_vm_address_t	IOVirtualAddress;
 typedef vm_address_t		IOVirtualAddress;
 #endif
 
-#if defined(__LP64__) && defined(KERNEL)
-typedef IOByteCount64		IOByteCount;
-#else
 typedef IOByteCount32	 	IOByteCount;
-#endif
 
 typedef IOVirtualAddress    IOLogicalAddress;
 
-#if defined(__LP64__) && defined(KERNEL)
-
-typedef IOPhysicalAddress64	 IOPhysicalAddress;
-typedef IOPhysicalLength64	 IOPhysicalLength;
-#define IOPhysical32( hi, lo )		((UInt64) lo + ((UInt64)(hi) << 32))
-#define IOPhysSize	64
-
-#else
 
 typedef IOPhysicalAddress32	 IOPhysicalAddress;
 typedef IOPhysicalLength32	 IOPhysicalLength;
 #define IOPhysical32( hi, lo )		(lo)
 #define IOPhysSize	32
 
-#endif
 
 
 typedef struct
@@ -181,7 +168,8 @@ enum {
     kIOInhibitCache		= 1,
     kIOWriteThruCache		= 2,
     kIOCopybackCache		= 3,
-    kIOWriteCombineCache	= 4
+    kIOWriteCombineCache	= 4,
+    kIOCopybackInnerCache	= 5
 };
 
 // IOMemory mapping options
@@ -190,11 +178,12 @@ enum {
 
     kIOMapCacheMask		= 0x00000700,
     kIOMapCacheShift		= 8,
-    kIOMapDefaultCache		= kIODefaultCache      << kIOMapCacheShift,
-    kIOMapInhibitCache		= kIOInhibitCache      << kIOMapCacheShift,
-    kIOMapWriteThruCache	= kIOWriteThruCache    << kIOMapCacheShift,
-    kIOMapCopybackCache		= kIOCopybackCache     << kIOMapCacheShift,
-    kIOMapWriteCombineCache	= kIOWriteCombineCache << kIOMapCacheShift,
+    kIOMapDefaultCache		= kIODefaultCache       << kIOMapCacheShift,
+    kIOMapInhibitCache		= kIOInhibitCache       << kIOMapCacheShift,
+    kIOMapWriteThruCache	= kIOWriteThruCache     << kIOMapCacheShift,
+    kIOMapCopybackCache		= kIOCopybackCache      << kIOMapCacheShift,
+    kIOMapWriteCombineCache	= kIOWriteCombineCache  << kIOMapCacheShift,
+    kIOMapCopybackInnerCache	= kIOCopybackInnerCache << kIOMapCacheShift,
 
     kIOMapUserOptionsMask	= 0x00000fff,
 

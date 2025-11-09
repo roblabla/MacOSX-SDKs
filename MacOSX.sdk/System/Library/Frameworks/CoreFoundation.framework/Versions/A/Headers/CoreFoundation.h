@@ -1,5 +1,5 @@
 /*	CoreFoundation.h
-	Copyright (c) 1998-2011, Apple Inc. All rights reserved.
+	Copyright (c) 1998-2012, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_COREFOUNDATION__)
@@ -61,6 +61,7 @@
 #include <CoreFoundation/CFURL.h>
 #include <CoreFoundation/CFURLAccess.h>
 #include <CoreFoundation/CFUUID.h>
+#include <CoreFoundation/CFUtilities.h>
 
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || (TARGET_OS_EMBEDDED || TARGET_OS_IPHONE) || TARGET_OS_WIN32
 #include <CoreFoundation/CFBundle.h>
@@ -79,9 +80,9 @@
 #endif
 
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || (TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)
+#ifndef CF_OPEN_SOURCE
 #include <CoreFoundation/CFFileSecurity.h>
 #include <CoreFoundation/CFMachPort.h>
-#ifndef CF_OPEN_SOURCE
 #include <CoreFoundation/CFStringTokenizer.h>
 #include <CoreFoundation/CFFileDescriptor.h>
 #endif

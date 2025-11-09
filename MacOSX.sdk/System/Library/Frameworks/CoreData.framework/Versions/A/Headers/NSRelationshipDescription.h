@@ -1,7 +1,7 @@
 /*
     NSRelationshipDescription.h
     Core Data
-    Copyright (c) 2004-2010 Apple Inc.
+    Copyright (c) 2004-2012 Apple Inc.
     All rights reserved.
 */
 
@@ -53,7 +53,7 @@ NS_CLASS_AVAILABLE(10_4,3_0)
 // Returns the version hash for the relationship.  This value includes the versionHash information from the NSPropertyDescription superclass, the name of the destination entity and the inverse relationship, and the min and max count.
 - (NSData *)versionHash NS_AVAILABLE(10_5,3_0);
 
-- (void)setOrdered:(BOOL)flag NS_AVAILABLE(10_7, NA); 
-- (BOOL)isOrdered NS_AVAILABLE(10_7, NA);
+- (void)setOrdered:(BOOL)flag NS_AVAILABLE(10_7,  5_0); 
+- (BOOL)isOrdered NS_AVAILABLE(10_7,  5_0);
 
 @end

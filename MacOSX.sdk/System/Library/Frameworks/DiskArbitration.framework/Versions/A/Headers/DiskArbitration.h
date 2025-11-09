@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2011 Apple Inc. All Rights Reserved.
+ * Copyright (c) 1998-2012 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -103,19 +103,19 @@ typedef UInt32 DADiskClaimOptions;
 /*!
  * @enum       DADiskOptions
  * @abstract   Options for DADiskGetOptions() and DADiskSetOptions().
- * @constant   kDADiskOptionEjectUponLogout       Eject the disk upon logout.
- * @constant   kDADiskOptionMountAutomatic        Mount the disk upon appearance.
- * @constant   kDADiskOptionMountAutomaticNoDefer Mount the disk upon appearance, even if no login.
- * @constant   kDADiskOptionPrivate               Hides the disk from callbacks.
+ * @constant   kDADiskOptionEjectUponLogout       Deprecated.  Use DADiskEject() at logout instead.
+ * @constant   kDADiskOptionMountAutomatic        Deprecated.  Use DADiskMountApprovalCallback() instead.
+ * @constant   kDADiskOptionMountAutomaticNoDefer Deprecated.  Use DADiskMount() instead.
+ * @constant   kDADiskOptionPrivate               Deprecated.  Use DADiskMountWithArguments() with "nobrowse" instead.
  */
 
 enum
 {
-    kDADiskOptionDefault               = 0x00000000,
-    kDADiskOptionEjectUponLogout       = 0x00000001,
-    kDADiskOptionMountAutomatic        = 0x00000010,
-    kDADiskOptionMountAutomaticNoDefer = 0x00000020,
-    kDADiskOptionPrivate               = 0x00000100
+    kDADiskOptionDefault                                                  = 0x00000000,
+    kDADiskOptionEjectUponLogout       CF_ENUM_DEPRECATED_MAC(10_3, 10_8) = 0x00000001,
+    kDADiskOptionMountAutomatic        CF_ENUM_DEPRECATED_MAC(10_3, 10_8) = 0x00000010,
+    kDADiskOptionMountAutomaticNoDefer CF_ENUM_DEPRECATED_MAC(10_3, 10_8) = 0x00000020,
+    kDADiskOptionPrivate               CF_ENUM_DEPRECATED_MAC(10_3, 10_8) = 0x00000100
 };
 
 typedef UInt32 DADiskOptions;

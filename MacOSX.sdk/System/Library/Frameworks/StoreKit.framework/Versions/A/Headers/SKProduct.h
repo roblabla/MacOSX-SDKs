@@ -24,4 +24,13 @@ NS_CLASS_AVAILABLE(10_7, NA)
 
 @property(readonly) NSString *productIdentifier;
 
+// YES if the product's assets are hosted by the App Store. NO otherwise. 
+@property(readonly) BOOL downloadable;
+
+// Version string of the product
+@property(readonly) NSString* contentVersion;
+
+// An array of filesizes of the assets associated with the product
+@property(readonly) NSArray* contentLengths;
+
 @end

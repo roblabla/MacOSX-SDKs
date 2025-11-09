@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2011 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2012 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -143,7 +143,9 @@ struct rt_metrics {
 #define RTF_IFSCOPE	0x1000000	/* has valid interface scope */
 #define RTF_CONDEMNED	0x2000000	/* defunct; no longer modifiable */
 #define RTF_IFREF	0x4000000	/* route holds a ref to interface */
-					/* 0x8000000 and up unassigned */
+#define	RTF_PROXY	0x8000000	/* proxying, no interface scope */
+#define	RTF_ROUTER	0x10000000	/* host is a router */
+					/* 0x20000000 and up unassigned */
 
 /*
  * Routing statistics.

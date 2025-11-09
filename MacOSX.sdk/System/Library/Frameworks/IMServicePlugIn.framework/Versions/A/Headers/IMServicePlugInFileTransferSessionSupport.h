@@ -13,7 +13,7 @@
 
 
 #pragma mark -
-#pragma mark IMServicePlugIn (iChat -> Service Plug-in)
+#pragma mark IMServicePlugIn (Messages -> Service Plug-in)
 #pragma mark -
 
 /*!
@@ -30,9 +30,9 @@
                 2) The Service Plug-in creates an IMServicePlugInIncomingFileTransfer instance for each incoming file,
                    and adds them via -[IMServicePlugInIncomingFileTransferSession addIncomingFileTransfer:]
                 3) The Service Plug-in calls -plugInDidReceiveIncomingFileTransferSession:fromHandle on the service application
-                4) iChat displays the "Incoming file transfer" dialog to the user.
-                5) If the user selects "Accept", iChat sends -acceptIncomingFileTransferSession: to the service plug-in
-                   If the user selects "Decline", iChat sends -cancelFileTransferSession: to the service plug-in
+                4) Messages displays the "Incoming file transfer" dialog to the user.
+                5) If the user selects "Accept", Messages sends -acceptIncomingFileTransferSession: to the service plug-in
+                   If the user selects "Decline", Messages sends -cancelFileTransferSession: to the service plug-in
                    
                 If the file transfer is accepted:
                 
@@ -43,8 +43,8 @@
                    with an actual NSError
                    
                 Outgoing File Transfers:
-                1) iChat creates an IMServicePlugInOutgoingFileTransfer instance
-                2) iChat calls -startOutgoingFileTransfer:toHandle: on the service plug-in.
+                1) Messages creates an IMServicePlugInOutgoingFileTransfer instance
+                2) Messages calls -startOutgoingFileTransfer:toHandle: on the service plug-in.
                 3) The service plug-in delivers the file transfer notification to the selected handle
                 4) If the handle accepts the transfer, the service plug-in calls:
                    -plugInDidReceiveAcceptForOutgoingFileTransfer:
@@ -75,7 +75,7 @@
 
 
 #pragma mark -
-#pragma mark IMServiceApplication (Service Plug-in -> iChat)
+#pragma mark IMServiceApplication (Service Plug-in -> Messages)
 #pragma mark -
 
 @protocol IMServiceApplicationFileTransferSessionSupport <IMServiceApplication>

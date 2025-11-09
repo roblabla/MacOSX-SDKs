@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2011 Apple Inc. All rights reserved.
+ * Copyright (c) 1998-2012 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -30,6 +30,7 @@
 #ifndef _IOSTORAGE_H
 #define _IOSTORAGE_H
 
+#include <sys/kernel_types.h>
 #include <IOKit/IOTypes.h>
 
 /*!
@@ -140,6 +141,8 @@ typedef UInt32 IOStorageAccess;
  * Force the request to access the media.
  * @constant kIOStorageOptionIsEncrypted
  * The data is already encrypted.
+ * @constant kIOStorageOptionIsStatic
+ * The data is likely to remain unaltered.
  */
 
 enum
@@ -147,7 +150,8 @@ enum
     kIOStorageOptionNone            = 0x00000000,
     kIOStorageOptionForceUnitAccess = 0x00000001,
     kIOStorageOptionIsEncrypted     = 0x00000010,
-    kIOStorageOptionReserved        = 0xFFFFFFEE
+    kIOStorageOptionIsStatic        = 0x00000020,
+    kIOStorageOptionReserved        = 0xFFFFFFCE
 };
 
 typedef UInt32 IOStorageOptions;
@@ -158,7 +162,7 @@ typedef UInt32 IOStorageOptions;
  * Attributes of read and write storage requests.
  * @field options
  * Options for the request.  See IOStorageOptions.
- * @field reserved
+ * @field bufattr
  * Reserved for future use.  Set to zero.
  */
 
@@ -169,10 +173,17 @@ struct IOStorageAttributes
     UInt32           reserved0032;
     UInt64           reserved0064;
     UInt64           reserved0128;
-    void *           bufattr;
+    bufattr_t        bufattr;
+#if TARGET_OS_EMBEDDED
+    UInt64           adjustedOffset;
+#endif /* TARGET_OS_EMBEDDED */
 #else /* !__LP64__ */
-    void *           bufattr;
+    bufattr_t        bufattr;
+#if TARGET_OS_EMBEDDED
+    UInt64           adjustedOffset;
+#else /* !TARGET_OS_EMBEDDED */
     UInt64           reserved0064;
+#endif /* !TARGET_OS_EMBEDDED */
 #endif /* !__LP64__ */
 };
 

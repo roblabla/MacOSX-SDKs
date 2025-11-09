@@ -1,5 +1,5 @@
 /*	NSPort.h
-	Copyright (c) 1994-2011, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2012, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -88,13 +88,11 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 - (void)setDelegate:(id <NSMachPortDelegate>)anObject;
 - (id <NSMachPortDelegate>)delegate;
 
-#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED || __IPHONE_2_0 <= __IPHONE_OS_VERSION_MAX_ALLOWED
 enum {
     NSMachPortDeallocateNone = 0,
     NSMachPortDeallocateSendRight = (1UL << 0),
     NSMachPortDeallocateReceiveRight = (1UL << 1)
-};
-#endif
+} NS_ENUM_AVAILABLE(10_5, 2_0);
 
 + (NSPort *)portWithMachPort:(uint32_t)machPort options:(NSUInteger)f NS_AVAILABLE(10_5, 2_0);
 - (id)initWithMachPort:(uint32_t)machPort options:(NSUInteger)f NS_AVAILABLE(10_5, 2_0);

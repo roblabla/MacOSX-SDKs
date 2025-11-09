@@ -1,5 +1,5 @@
 /*	NSXMLDocument.h
-	Copyright (c) 2004-2011, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2012, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSXMLNode.h>
@@ -37,13 +37,12 @@
 	@constant NSXMLDocumentHTMLKind Outputs empty tags without a close tag, eg <br>
 	@constant NSXMLDocumentTextKind Output the string value of the document
 */
-enum {
+typedef NS_ENUM(NSUInteger, NSXMLDocumentContentKind) {
 	NSXMLDocumentXMLKind = 0,
 	NSXMLDocumentXHTMLKind,
 	NSXMLDocumentHTMLKind,
 	NSXMLDocumentTextKind
 };
-typedef NSUInteger NSXMLDocumentContentKind;
 
 /*!
     @class NSXMLDocument

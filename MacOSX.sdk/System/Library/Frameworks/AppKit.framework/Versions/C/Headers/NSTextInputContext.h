@@ -1,7 +1,7 @@
 /*
 	NSTextInputContext.h
 	Application Kit
-	Copyright (c) 2008-2011, Apple Inc.
+	Copyright (c) 2008-2012, Apple Inc.
 	All rights reserved.
 */
 
@@ -24,7 +24,9 @@ NS_CLASS_AVAILABLE(10_6, NA)
 
     NSString *_commandCharacters;
 
-    id _reserved[3];
+    NSInteger _documentRefcon;
+
+    id _reserved[2];
     id _auxiliary;
 
     struct {

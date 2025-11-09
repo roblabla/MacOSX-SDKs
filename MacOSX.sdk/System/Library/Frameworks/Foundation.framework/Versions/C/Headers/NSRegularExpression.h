@@ -1,5 +1,5 @@
 /*	NSRegularExpression.h
-	Copyright (c) 2009-2011, Apple Inc. All rights reserved.
+	Copyright (c) 2009-2012, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -11,7 +11,7 @@
 /* NSRegularExpression is a class used to represent and apply regular expressions.  An instance of this class is an immutable representation of a compiled regular expression pattern and various option flags.
 */
 
-enum {
+typedef NS_OPTIONS(NSUInteger, NSRegularExpressionOptions) {
    NSRegularExpressionCaseInsensitive             = 1 << 0,     /* Match letters in the pattern independent of case. */
    NSRegularExpressionAllowCommentsAndWhitespace  = 1 << 1,     /* Ignore whitespace and #-prefixed comments in the pattern. */
    NSRegularExpressionIgnoreMetacharacters        = 1 << 2,     /* Treat the entire pattern as a literal string. */
@@ -20,7 +20,6 @@ enum {
    NSRegularExpressionUseUnixLineSeparators       = 1 << 5,     /* Treat only \n as a line separator (otherwise, all standard line separators are used). */
    NSRegularExpressionUseUnicodeWordBoundaries    = 1 << 6      /* Use Unicode TR#29 to specify word boundaries (otherwise, traditional regular expression word boundaries are used). */
 };
-typedef NSUInteger NSRegularExpressionOptions;
 
 NS_CLASS_AVAILABLE(10_7, 4_0)
 @interface NSRegularExpression : NSObject <NSCopying, NSCoding> {
@@ -49,23 +48,21 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 @end
 
 
-enum {
+typedef NS_OPTIONS(NSUInteger, NSMatchingOptions) {
    NSMatchingReportProgress         = 1 << 0,       /* Call the block periodically during long-running match operations. */
    NSMatchingReportCompletion       = 1 << 1,       /* Call the block once after the completion of any matching. */
    NSMatchingAnchored               = 1 << 2,       /* Limit matches to those at the start of the search range. */
    NSMatchingWithTransparentBounds  = 1 << 3,       /* Allow matching to look beyond the bounds of the search range. */
    NSMatchingWithoutAnchoringBounds = 1 << 4        /* Prevent ^ and $ from automatically matching the beginning and end of the search range. */
 };
-typedef NSUInteger NSMatchingOptions;
 
-enum {
+typedef NS_OPTIONS(NSUInteger, NSMatchingFlags) {
    NSMatchingProgress               = 1 << 0,       /* Set when the block is called to report progress during a long-running match operation. */
    NSMatchingCompleted              = 1 << 1,       /* Set when the block is called after completion of any matching. */
    NSMatchingHitEnd                 = 1 << 2,       /* Set when the current match operation reached the end of the search range. */
    NSMatchingRequiredEnd            = 1 << 3,       /* Set when the current match depended on the location of the end of the search range. */
    NSMatchingInternalError          = 1 << 4        /* Set when matching failed due to an internal error. */
 };
-typedef NSUInteger NSMatchingFlags;
 
 @interface NSRegularExpression (NSMatching)
 

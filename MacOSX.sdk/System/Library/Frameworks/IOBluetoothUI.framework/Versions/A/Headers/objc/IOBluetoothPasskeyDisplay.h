@@ -25,6 +25,9 @@ typedef enum {
 	
 	NSMutableArray *			mPasskeyCharacters;
 	NSUInteger					mPasskeyIndex;
+    
+    BluetoothKeyboardReturnType returnType;
+    
 	BOOL						mPasskeyIndicatorEnabled;
     BOOL                        mSSPDevice;
 }
@@ -32,11 +35,11 @@ typedef enum {
 @property (retain) NSImage * returnImage;
 @property (retain) NSImage * returnHighlightImage;
 
+@property (assign) BluetoothKeyboardReturnType returnType;
+
 + (IOBluetoothPasskeyDisplay *) sharedDisplayView;
 
 - (void) setPasskeyString:(NSString *)inString;
-
-- (void) setReturnType:(BluetoothKeyboardReturnType)inReturnType;
 
 - (void) advancePasskeyIndicator;
 - (void) retreatPasskeyIndicator;

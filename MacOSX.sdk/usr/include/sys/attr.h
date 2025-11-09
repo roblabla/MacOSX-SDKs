@@ -50,8 +50,6 @@
 #define FSOPT_PACK_INVAL_ATTRS	0x00000008
 
 
-
-
 /* we currently aren't anywhere near this amount for a valid
  * fssearchblock.sizeofsearchparams1 or fssearchblock.sizeofsearchparams2
  * but we put a sanity check in to avoid abuse of the value passed in from

@@ -28,7 +28,7 @@ typedef function_table_entry   *function_table_t;
 #endif /* AUTOTEST */
 
 #ifndef	iokit_MSG_COUNT
-#define	iokit_MSG_COUNT	73
+#define	iokit_MSG_COUNT	75
 #endif	/* iokit_MSG_COUNT */
 
 #include <mach/std_types.h>
@@ -490,22 +490,6 @@ kern_return_t io_iterator_is_valid
 (
 	mach_port_t iterator,
 	boolean_t *is_valid
-);
-
-/* Routine io_make_matching */
-#ifdef	mig_external
-mig_external
-#else
-extern
-#endif	/* mig_external */
-kern_return_t io_make_matching
-(
-	mach_port_t master_port,
-	uint32_t of_type,
-	uint32_t options,
-	io_struct_inband_t input,
-	mach_msg_type_number_t inputCnt,
-	io_string_t matching
 );
 
 /* Routine io_catalog_send_data */
@@ -1026,6 +1010,34 @@ kern_return_t io_connect_method_var_output
 	mach_msg_type_number_t *var_outputCnt
 );
 
+/* Routine io_service_get_matching_service */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+kern_return_t io_service_get_matching_service
+(
+	mach_port_t master_port,
+	io_string_t matching,
+	mach_port_t *service
+);
+
+/* Routine io_service_get_matching_service_ool */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+kern_return_t io_service_get_matching_service_ool
+(
+	mach_port_t master_port,
+	io_buf_ptr_t matching,
+	mach_msg_type_number_t matchingCnt,
+	kern_return_t *result,
+	mach_port_t *service
+);
+
 __END_DECLS
 
 /********************** Caution **************************/
@@ -1482,21 +1494,6 @@ __END_DECLS
 	typedef struct {
 		mach_msg_header_t Head;
 	} __Request__io_iterator_is_valid_t;
-#ifdef  __MigPackStructs
-#pragma pack()
-#endif
-
-#ifdef  __MigPackStructs
-#pragma pack(4)
-#endif
-	typedef struct {
-		mach_msg_header_t Head;
-		NDR_record_t NDR;
-		uint32_t of_type;
-		uint32_t options;
-		mach_msg_type_number_t inputCnt;
-		char input[4096];
-	} __Request__io_make_matching_t;
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -2049,6 +2046,36 @@ __END_DECLS
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		mach_msg_type_number_t matchingOffset; /* MiG doesn't use it */
+		mach_msg_type_number_t matchingCnt;
+		char matching[512];
+	} __Request__io_service_get_matching_service_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_ool_descriptor_t matching;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		mach_msg_type_number_t matchingCnt;
+	} __Request__io_service_get_matching_service_ool_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Request__iokit_subsystem__defined */
 
 /* union of all requests */
@@ -2090,7 +2117,6 @@ union __RequestUnion__iokit_subsystem {
 	__Request__io_service_wait_quiet_t Request_io_service_wait_quiet;
 	__Request__io_registry_entry_create_iterator_t Request_io_registry_entry_create_iterator;
 	__Request__io_iterator_is_valid_t Request_io_iterator_is_valid;
-	__Request__io_make_matching_t Request_io_make_matching;
 	__Request__io_catalog_send_data_t Request_io_catalog_send_data;
 	__Request__io_catalog_terminate_t Request_io_catalog_terminate;
 	__Request__io_catalog_get_data_t Request_io_catalog_get_data;
@@ -2124,6 +2150,8 @@ union __RequestUnion__iokit_subsystem {
 	__Request__io_connect_async_method_t Request_io_connect_async_method;
 	__Request__io_registry_entry_get_registry_entry_id_t Request_io_registry_entry_get_registry_entry_id;
 	__Request__io_connect_method_var_output_t Request_io_connect_method_var_output;
+	__Request__io_service_get_matching_service_t Request_io_service_get_matching_service;
+	__Request__io_service_get_matching_service_ool_t Request_io_service_get_matching_service_ool;
 };
 #endif /* !__RequestUnion__iokit_subsystem__defined */
 /* typedefs for all replies */
@@ -2598,21 +2626,6 @@ union __RequestUnion__iokit_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-		mach_msg_type_number_t matchingOffset; /* MiG doesn't use it */
-		mach_msg_type_number_t matchingCnt;
-		char matching[512];
-	} __Reply__io_make_matching_t;
-#ifdef  __MigPackStructs
-#pragma pack()
-#endif
-
-#ifdef  __MigPackStructs
-#pragma pack(4)
-#endif
-	typedef struct {
-		mach_msg_header_t Head;
-		NDR_record_t NDR;
-		kern_return_t RetCode;
 		kern_return_t result;
 	} __Reply__io_catalog_send_data_t;
 #ifdef  __MigPackStructs
@@ -3074,6 +3087,36 @@ union __RequestUnion__iokit_subsystem {
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t service;
+		/* end of the kernel processed data */
+	} __Reply__io_service_get_matching_service_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t service;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		kern_return_t result;
+	} __Reply__io_service_get_matching_service_ool_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Reply__iokit_subsystem__defined */
 
 /* union of all replies */
@@ -3115,7 +3158,6 @@ union __ReplyUnion__iokit_subsystem {
 	__Reply__io_service_wait_quiet_t Reply_io_service_wait_quiet;
 	__Reply__io_registry_entry_create_iterator_t Reply_io_registry_entry_create_iterator;
 	__Reply__io_iterator_is_valid_t Reply_io_iterator_is_valid;
-	__Reply__io_make_matching_t Reply_io_make_matching;
 	__Reply__io_catalog_send_data_t Reply_io_catalog_send_data;
 	__Reply__io_catalog_terminate_t Reply_io_catalog_terminate;
 	__Reply__io_catalog_get_data_t Reply_io_catalog_get_data;
@@ -3149,6 +3191,8 @@ union __ReplyUnion__iokit_subsystem {
 	__Reply__io_connect_async_method_t Reply_io_connect_async_method;
 	__Reply__io_registry_entry_get_registry_entry_id_t Reply_io_registry_entry_get_registry_entry_id;
 	__Reply__io_connect_method_var_output_t Reply_io_connect_method_var_output;
+	__Reply__io_service_get_matching_service_t Reply_io_service_get_matching_service;
+	__Reply__io_service_get_matching_service_ool_t Reply_io_service_get_matching_service_ool;
 };
 #endif /* !__RequestUnion__iokit_subsystem__defined */
 
@@ -3188,7 +3232,6 @@ union __ReplyUnion__iokit_subsystem {
     { "io_service_wait_quiet", 2832 },\
     { "io_registry_entry_create_iterator", 2833 },\
     { "io_iterator_is_valid", 2834 },\
-    { "io_make_matching", 2835 },\
     { "io_catalog_send_data", 2836 },\
     { "io_catalog_terminate", 2837 },\
     { "io_catalog_get_data", 2838 },\
@@ -3221,7 +3264,9 @@ union __ReplyUnion__iokit_subsystem {
     { "io_connect_method", 2865 },\
     { "io_connect_async_method", 2866 },\
     { "io_registry_entry_get_registry_entry_id", 2871 },\
-    { "io_connect_method_var_output", 2872 }
+    { "io_connect_method_var_output", 2872 },\
+    { "io_service_get_matching_service", 2873 },\
+    { "io_service_get_matching_service_ool", 2874 }
 #endif
 
 #ifdef __AfterMigUserHeader

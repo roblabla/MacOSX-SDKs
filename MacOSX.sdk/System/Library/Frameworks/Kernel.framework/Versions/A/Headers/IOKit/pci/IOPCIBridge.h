@@ -33,13 +33,10 @@
 #include <IOKit/IOService.h>
 #include <IOKit/IODeviceMemory.h>
 #include <IOKit/IOFilterInterruptEventSource.h>
+#include <IOKit/pwr_mgt/RootDomain.h>
 #include <IOKit/pci/IOAGPDevice.h>
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-/*!
-    @class IOPCIBridge
-    @abstract   Base class for all PCI bridge drivers.
-*/
 class IOPCIConfigurator;
 class IOPCIDevice;
 
@@ -51,6 +48,10 @@ enum {
     kIOPCIResourceTypeCount          = 4,
 };
 
+/*!
+    @class IOPCIBridge
+    @abstract   Base class for all PCI bridge drivers.
+*/
 
 class IOPCIBridge : public IOService
 {
@@ -262,10 +263,6 @@ protected:
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #define kIOPCIBridgeRegs (32)
-/*!
-    @class IOPCI2PCIBridge
-    @abstract Base class for all PCI-to-PCI bridge drivers.
-*/
 
 class IOPCI2PCIBridge : public IOPCIBridge
 {
@@ -287,6 +284,7 @@ protected:
         IOFilterInterruptEventSource * bridgeInterruptSource;
 		IOTimerEventSource *	    timerProbeES;
 		IOWorkLoop *                workLoop;
+		IOPMDriverAssertionID 		pmAssertion;
         uint32_t                    hotplugCount;
         uint8_t                     presence;
         uint8_t                     waitingLinkEnable;

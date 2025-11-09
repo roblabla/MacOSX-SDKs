@@ -1,9 +1,9 @@
 /*
-     File:       OT/OpenTransportProtocol.h
+     File:       OSServices/OpenTransportProtocol.h
  
-     Contains:   Definitions likely to be used by low-level protocol stack implementation.
+     Contains:   *** DEPRECATED *** Definitions likely to be used by low-level protocol stack implementation.
  
-     Copyright:  © 1993-2010 by Apple Inc. and Mentat Inc., all rights reserved.
+     Copyright:  (c) 1993-2011 Apple Inc. and Mentat Inc. All rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -11,6 +11,7 @@
                      http://developer.apple.com/bugreporter/
  
 */
+
 #ifndef __OPENTRANSPORTPROTOCOL__
 #define __OPENTRANSPORTPROTOCOL__
 
@@ -39,7 +40,7 @@
 #include <stddef.h>
 #endif
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -3189,7 +3190,7 @@ extern long
 OTCreateTimerTaskInContext(
   OTProcessUPP         upp,
   void *               arg,
-  OTClientContextPtr   clientContext)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  OTClientContextPtr   clientContext)                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_4,__IPHONE_NA,__IPHONE_NA);
 
 
 #endif  /* !__LP64__ */
@@ -3214,7 +3215,7 @@ OTCreateTimerTaskInContext(
  *    Non-Carbon CFM:   not available
  */
 extern Boolean 
-OTCancelTimerTask(OTTimerTask timerTask)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+OTCancelTimerTask(OTTimerTask timerTask)                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_4,__IPHONE_NA,__IPHONE_NA);
 
 
 /*
@@ -3226,7 +3227,7 @@ OTCancelTimerTask(OTTimerTask timerTask)                      AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern void 
-OTDestroyTimerTask(OTTimerTask timerTask)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+OTDestroyTimerTask(OTTimerTask timerTask)                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_4,__IPHONE_NA,__IPHONE_NA);
 
 
 /*
@@ -3240,7 +3241,7 @@ OTDestroyTimerTask(OTTimerTask timerTask)                     AVAILABLE_MAC_OS_X
 extern Boolean 
 OTScheduleTimerTask(
   OTTimerTask   timerTask,
-  OTTimeout     milliSeconds)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  OTTimeout     milliSeconds)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_4,__IPHONE_NA,__IPHONE_NA);
 
 
 #endif  /* !__LP64__ */
@@ -3271,7 +3272,7 @@ OTScheduleTimerTask(
  *    Non-Carbon CFM:   in OTUtilityLib 1.0 and later
  */
 extern OTByteCount 
-OTBufferDataSize(OTBuffer * buffer)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+OTBufferDataSize(OTBuffer * buffer)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_4,__IPHONE_NA,__IPHONE_NA);
 
 
 /*
@@ -3286,7 +3287,7 @@ extern Boolean
 OTReadBuffer(
   OTBufferInfo *  buffer,
   void *          dest,
-  OTByteCount *   len)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  OTByteCount *   len)                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_4,__IPHONE_NA,__IPHONE_NA);
 
 
 /*
@@ -3298,7 +3299,7 @@ OTReadBuffer(
  *    Non-Carbon CFM:   in OTUtilityLib 1.0 and later
  */
 extern void 
-OTReleaseBuffer(OTBuffer * buffer)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+OTReleaseBuffer(OTBuffer * buffer)                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_4,__IPHONE_NA,__IPHONE_NA);
 
 
 
@@ -4290,7 +4291,7 @@ extern OTResult
 OTSetFirstClearBit(
   UInt8 *       bitMap,
   OTByteCount   startBit,
-  OTByteCount   numBits)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  OTByteCount   numBits)                                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_4,__IPHONE_NA,__IPHONE_NA);
 
 
 /* Standard clear, set and test bit functions*/
@@ -4305,7 +4306,7 @@ OTSetFirstClearBit(
 extern Boolean 
 OTClearBit(
   UInt8 *       bitMap,
-  OTByteCount   bitNo)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  OTByteCount   bitNo)                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_4,__IPHONE_NA,__IPHONE_NA);
 
 
 /*
@@ -4319,7 +4320,7 @@ OTClearBit(
 extern Boolean 
 OTSetBit(
   UInt8 *       bitMap,
-  OTByteCount   bitNo)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  OTByteCount   bitNo)                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_4,__IPHONE_NA,__IPHONE_NA);
 
 
 /*
@@ -4333,7 +4334,7 @@ OTSetBit(
 extern Boolean 
 OTTestBit(
   UInt8 *       bitMap,
-  OTByteCount   bitNo)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  OTByteCount   bitNo)                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_4,__IPHONE_NA,__IPHONE_NA);
 
 
 /* OTHashList*/

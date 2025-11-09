@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004-2011 Apple Inc. All rights reserved.
+ * Copyright (c) 2004-2012 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -34,11 +34,21 @@
 
 #ifndef __KPI_INTERFACE__
 #define __KPI_INTERFACE__
+
+#include <TargetConditionals.h>
+
 #include <sys/kernel_types.h>
+
 
 #ifndef _SA_FAMILY_T
 #define _SA_FAMILY_T
 typedef __uint8_t		sa_family_t;
+#endif
+
+#if TARGET_OS_EMBEDDED
+	#define KPI_INTERFACE_EMBEDDED 1
+#else
+	#define KPI_INTERFACE_EMBEDDED 0
 #endif
 
 struct timeval;
@@ -81,7 +91,7 @@ enum {
 	IFNET_FAMILY_DISC		= 8,
 	IFNET_FAMILY_MDECAP		= 9,
 	IFNET_FAMILY_GIF		= 10,
-	IFNET_FAMILY_FAITH		= 11,
+	IFNET_FAMILY_FAITH		= 11,	/* deprecated */
 	IFNET_FAMILY_STF		= 12,
 	IFNET_FAMILY_FIREWIRE		= 13,
 	IFNET_FAMILY_BOND		= 14,
@@ -307,6 +317,10 @@ typedef void (*ifnet_event_func)(ifnet_t interface, const struct kev_msg *msg);
 		protocol's pre-output function.
 	@param frame_type The frame type as determined by the protocol's
 		pre-output function.
+	@param prepend_len The length of prepended bytes to the mbuf. 
+		(ONLY used if KPI_INTERFACE_EMBEDDED is defined to 1)
+	@param postpend_len The length of the postpended bytes to the mbuf.
+		(ONLY used if KPI_INTERFACE_EMBEDDED is defined to 1)
 	@result
 		If the result is zero, processing will continue normally.
 		If the result is EJUSTRETURN, processing will stop but the
@@ -315,8 +329,11 @@ typedef void (*ifnet_event_func)(ifnet_t interface, const struct kev_msg *msg);
 			the packet will be freed.
  */
 typedef errno_t (*ifnet_framer_func)(ifnet_t interface, mbuf_t *packet,
-    const struct sockaddr *dest, const char *desk_linkaddr,
-    const char *frame_type);
+	const struct sockaddr *dest, const char *desk_linkaddr, const char *frame_type
+#if KPI_INTERFACE_EMBEDDED
+	, u_int32_t *prepend_len, u_int32_t *postpend_len
+#endif /* KPI_INTERFACE_EMBEDDED */
+	);
 
 /*!
 	@typedef ifnet_add_proto_func
@@ -557,9 +574,9 @@ struct ifnet_stat_increment_param {
 /*!
 	@struct ifnet_init_params
 	@discussion This structure is used to define various properties of
-		the interface when calling ifnet_init. A copy of these values
-		will be stored in the ifnet and can not be modified while the
-		interface is attached.
+		the interface when calling ifnet_allocate. A copy of these
+		values will be stored in the ifnet and cannot be modified
+		while the interface is attached.
 	@field uniqueid An identifier unique to this instance of the
 		interface.
 	@field uniqueid_len The length, in bytes, of the uniqueid.
@@ -614,6 +631,7 @@ struct ifnet_init_params {
 	const void		*broadcast_addr;	/* required for non point-to-point interfaces */
 	u_int32_t		broadcast_len;		/* required for non point-to-point interfaces */
 };
+
 
 /*!
 	@struct ifnet_stats_param
@@ -737,6 +755,7 @@ __BEGIN_DECLS
  */
 extern errno_t ifnet_allocate(const struct ifnet_init_params *init,
     ifnet_t *interface);
+
 
 /*!
 	@function ifnet_reference
@@ -1198,6 +1217,7 @@ extern errno_t ifnet_output_raw(ifnet_t interface,
 extern errno_t ifnet_input(ifnet_t interface, mbuf_t first_packet,
     const struct ifnet_stat_increment_param *stats);
 
+
 /*!
 	@function ifnet_ioctl
 	@discussion Calls the interface's ioctl function with the parameters
@@ -1331,6 +1351,7 @@ extern errno_t ifnet_set_baudrate(ifnet_t interface, u_int64_t baudrate);
 	@result The baudrate.
  */
 extern u_int64_t ifnet_baudrate(ifnet_t interface);
+
 
 /*!
 	@function ifnet_stat_increment

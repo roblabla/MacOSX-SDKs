@@ -2,9 +2,8 @@
     CBIdentityAuthority.h
     Collaboration.framework
   
-    Copyright 2006 Apple Computer. All rights reserved.
+    Copyright (c) 2006-2012 Apple Inc. All rights reserved.
 */
-
 
 #import <Foundation/NSObject.h>
 #import <CoreServices/CoreServices.h>

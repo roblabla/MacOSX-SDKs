@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2011 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2012 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -76,8 +76,9 @@
 
 #include <netinet6/ipsec.h> /* for IPSEC */
 
-typedef	u_quad_t	inp_gen_t;
 
+
+typedef	u_quad_t	inp_gen_t;
 /*
  * PCB with AF_INET6 null bind'ed laddr can receive AF_INET input packet.
  * So, AF_INET6 null laddr is also used as AF_INET null laddr, by utilizing
@@ -275,69 +276,36 @@ struct	xinpgen {
 #define INP_IPV6	0x2
 #define	inp_faddr	inp_dependfaddr.inp46_foreign.ia46_addr4
 #define	inp_laddr	inp_dependladdr.inp46_local.ia46_addr4
-#define	inp_route	inp_dependroute.inp4_route
-#define	inp_ip_tos	inp_depend4.inp4_ip_tos
-#define	inp_options	inp_depend4.inp4_options
-#define	inp_moptions	inp_depend4.inp4_moptions
 #define	in6p_faddr	inp_dependfaddr.inp6_foreign
 #define	in6p_laddr	inp_dependladdr.inp6_local
-#define	in6p_route	inp_dependroute.inp6_route
-#define	in6p_ip6_hlim	inp_depend6.inp6_hlim
-#define	in6p_hops	inp_depend6.inp6_hops	/* default hop limit */
-#define	in6p_ip6_nxt	inp_ip_p
-#define	in6p_flowinfo	inp_flow
-#define	in6p_vflag	inp_vflag
-#define	in6p_options	inp_depend6.inp6_options
-#define	in6p_outputopts	inp_depend6.inp6_outputopts
-#define	in6p_moptions	inp_depend6.inp6_moptions
-#define	in6p_icmp6filt	inp_depend6.inp6_icmp6filt
-#define	in6p_cksum	inp_depend6.inp6_cksum
-#define	in6p_ifindex	inp_depend6.inp6_ifindex
-#define	in6p_flags	inp_flags  /* for KAME src sync over BSD*'s */
-#define	in6p_socket	inp_socket  /* for KAME src sync over BSD*'s */
+
+
 #define	in6p_lport	inp_lport  /* for KAME src sync over BSD*'s */
 #define	in6p_fport	inp_fport  /* for KAME src sync over BSD*'s */
 #define	in6p_ppcb	inp_ppcb  /* for KAME src sync over BSD*'s */
-#define	in6p_state	inp_state
-#define	in6p_wantcnt	inp_wantcnt
-#define	in6p_last_outif	inp_last_outif
+
 
 
 /* flags in inp_flags: */
-#define	INP_RECVOPTS		0x01	/* receive incoming IP options */
-#define	INP_RECVRETOPTS		0x02	/* receive IP options for reply */
-#define	INP_RECVDSTADDR		0x04	/* receive IP dst address */
-#define	INP_HDRINCL		0x08	/* user supplies entire IP header */
-#define	INP_HIGHPORT		0x10	/* user wants "high" port binding */
-#define	INP_LOWPORT		0x20	/* user wants "low" port binding */
 #define	INP_ANONPORT		0x40	/* port chosen for user */
-#define	INP_RECVIF		0x80	/* receive incoming interface */
-#define	INP_MTUDISC		0x100	/* user can do MTU discovery */
-#ifdef __APPLE__
-#define INP_STRIPHDR		0x200	/* Strip headers in raw_ip, for OT support */
-#endif
-#define  INP_FAITH		0x400   /* accept FAITH'ed connections */
 #define  INP_INADDR_ANY 	0x800   /* local address wasn't specified */
 
-#define INP_RECVTTL		0x1000
-#define	INP_UDP_NOCKSUM		0x2000	/* Turn off outbound UDP checksum */
-#define	INP_BOUND_IF		0x4000	/* bind socket to an ifindex */
 
 #define IN6P_IPV6_V6ONLY	0x8000 /* restrict AF_INET6 socket for v6 */
-#define	IN6P_PKTINFO		0x10000 /* receive IP6 dst and I/F */
-#define	IN6P_HOPLIMIT		0x20000 /* receive hoplimit */
-#define	IN6P_HOPOPTS		0x40000 /* receive hop-by-hop options */
-#define	IN6P_DSTOPTS		0x80000 /* receive dst options after rthdr */
-#define	IN6P_RTHDR		0x100000 /* receive routing header */
-#define	IN6P_RTHDRDSTOPTS	0x200000 /* receive dstoptions before rthdr */
-#define	IN6P_TCLASS		0x400000 /* receive traffic class value */
-#define	IN6P_AUTOFLOWLABEL	0x800000 /* attach flowlabel automatically */
-#define	IN6P_BINDV6ONLY		0x1000000 /* do not grab IPv4 traffic */
-#define	IN6P_RFC2292		0x2000000 /* used RFC2292 API on the socket */
-#define	IN6P_MTU		0x4000000 /* receive path MTU */
-#define	INP_PKTINFO		0x8000000 /* receive and send PKTINFO for IPv4 */
 
-#define	INP_NO_IFT_CELLULAR	0x20000000 /* do not use IFT_CELLULAR route */
+
+#define	IN6P_BINDV6ONLY		0x1000000 /* do not grab IPv4 traffic */
+
+
+#define	sotoinpcb(so)	((struct inpcb *)(so)->so_pcb)
+#define	sotoin6pcb(so)	sotoinpcb(so) /* for KAME src sync over BSD*'s */
+
+
+extern int	ipport_hifirstauto;
+extern int	ipport_hilastauto;
+
+struct sysctl_req;
+
 
 
 #endif /* !_NETINET_IN_PCB_H_ */

@@ -1,5 +1,5 @@
 /*	NSDistributedNotificationCenter.h
-	Copyright (c) 1996-2011, Apple Inc. All rights reserved.
+	Copyright (c) 1996-2012, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSNotification.h>
@@ -9,7 +9,7 @@
 FOUNDATION_EXPORT NSString * const NSLocalNotificationCenterType;
 // Distributes notifications to all tasks on the sender's machine.
 
-enum {
+typedef NS_ENUM(NSUInteger, NSNotificationSuspensionBehavior) {
     NSNotificationSuspensionBehaviorDrop = 1,
     // The server will not queue any notifications with this name and object until setSuspended:NO is called.
     NSNotificationSuspensionBehaviorCoalesce = 2,
@@ -21,7 +21,6 @@ enum {
     // any queued notifications.  The effect is somewhat as if setSuspended:NO were first called if the app is suspended, followed by
     // the notification in question being delivered, followed by a transition back to the previous suspended or unsuspended state.
 };
-typedef NSUInteger NSNotificationSuspensionBehavior;
 
 @interface NSDistributedNotificationCenter : NSNotificationCenter
 

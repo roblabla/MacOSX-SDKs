@@ -5,7 +5,7 @@
    +----------------------------------------------------------------------+
    | Zend Engine                                                          |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1998-2011 Zend Technologies Ltd. (http://www.zend.com) |
+   | Copyright (c) 1998-2012 Zend Technologies Ltd. (http://www.zend.com) |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.00 of the Zend license,     |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: acconfig.h 306939 2011-01-01 02:19:59Z felipe $ */
+/* $Id$ */
 
 #ifndef ZEND_API
 
@@ -723,7 +723,7 @@
 #define HAVE_STDINT_H 1
 
 /* Define if you have the <stdio.h> header file.  */
-/* #undef HAVE_STDIO_H */
+#define HAVE_STDIO_H 1
 
 /* Define if you have the <stdlib.h> header file.  */
 #define HAVE_STDLIB_H 1
@@ -798,7 +798,7 @@
 #define HAVE_SYS_TYPES_H 1
 
 /* Define if you have the <sys/uio.h> header file.  */
-/* #undef HAVE_SYS_UIO_H */
+#define HAVE_SYS_UIO_H 1
 
 /* Define if you have the <sys/un.h> header file.  */
 #define HAVE_SYS_UN_H 1
@@ -854,7 +854,7 @@
 /* Define if the target system has /dev/urandom device */
 #define HAVE_DEV_URANDOM 1
 
-/* Suhosin-Patch for PHP */
+/* Suhosin Patch */
 #define SUHOSIN_PATCH 1
 
 /* Whether you have AOLserver */
@@ -969,19 +969,19 @@
 /* #undef HAVE_CLOCK_GETTIME */
 
 /* do we have clock_get_time? */
-/* #undef HAVE_CLOCK_GET_TIME */
+#define HAVE_CLOCK_GET_TIME 1
 
 /* do we have ptrace? */
 /* #undef HAVE_PTRACE */
 
 /* do we have mach_vm_read? */
-/* #undef HAVE_MACH_VM_READ */
+#define HAVE_MACH_VM_READ 1
 
 /* /proc/pid/mem interface */
 /* #undef PROC_MEM_FILE */
 
 /* Define to 1 if gcc supports __sync_bool_compare_and_swap() a.o. */
-/* #undef HAVE_BUILTIN_ATOMIC */
+#define HAVE_BUILTIN_ATOMIC 1
 
 /* do we have TCP_INFO? */
 /* #undef HAVE_LQ_TCP_INFO */
@@ -989,11 +989,35 @@
 /* do we have SO_LISTENQxxx? */
 /* #undef HAVE_LQ_SO_LISTENQ */
 
+/* do we have sysconf? */
+#define HAVE_SYSCONF 1
+
+/* do we have times? */
+#define HAVE_TIMES 1
+
+/* do we have kqueue? */
+#define HAVE_KQUEUE 1
+
+/* do we have port framework? */
+/* #undef HAVE_PORT */
+
+/* do we have /dev/poll? */
+/* #undef HAVE_DEVPOLL */
+
+/* do we have epoll? */
+/* #undef HAVE_EPOLL */
+
+/* do we have poll? */
+#define HAVE_POLL 1
+
+/* do we have select? */
+#define HAVE_SELECT 1
+
 /* fpm user name */
-/* #undef PHP_FPM_USER */
+#define PHP_FPM_USER "nobody"
 
 /* fpm group name */
-/* #undef PHP_FPM_GROUP */
+#define PHP_FPM_GROUP "nobody"
 
 /*   */
 /* #undef WITH_ZEUS */
@@ -1190,6 +1214,9 @@
 /* Define if you have the getaddrinfo function */
 #define HAVE_GETADDRINFO 1
 
+/* Define if you have the __sync_fetch_and_add function */
+#define HAVE_SYNC_FETCH_AND_ADD 1
+
 /* Whether system headers declare timezone */
 #define HAVE_DECLARED_TIMEZONE 1
 
@@ -1296,7 +1323,10 @@
 /* #undef COMPILE_DL_OPENSSL */
 
 /* OpenSSL 0.9.7 or later */
-/* #undef HAVE_DSA_DEFAULT_METHOD */
+#define HAVE_DSA_DEFAULT_METHOD 1
+
+/* OpenSSL 0.9.7 or later */
+#define HAVE_DSA_DEFAULT_METHOD 1
 
 /*   */
 #define HAVE_OPENSSL_EXT 1
@@ -2810,14 +2840,14 @@
 /* Whether to build zip as dynamic module */
 /* #undef COMPILE_DL_ZIP */
 
-/* Whether to build mysqlnd as dynamic module */
-/* #undef COMPILE_DL_MYSQLND */
-
 /* Enable compressed protocol support */
-/* #undef MYSQLND_COMPRESSION_ENABLED */
+#define MYSQLND_COMPRESSION_WANTED 1
 
 /* Enable SSL support */
 #define MYSQLND_SSL_SUPPORTED 1
+
+/* Whether to build mysqlnd as dynamic module */
+/* #undef COMPILE_DL_MYSQLND */
 
 /* Define if int32_t type is present.  */
 #define HAVE_INT32_T 1
@@ -2904,16 +2934,16 @@
 /* #undef PTHREADS */
 
 /* PHP build date */
-#define PHP_BUILD_DATE "2011-09-08"
+#define PHP_BUILD_DATE "2012-12-09"
 
 /* hardcode for each of the cross compiler host */
 #define PHP_OS "Darwin"
 
 /* hardcode for each of the cross compiler host */
-#define PHP_UNAME "Darwin melodie.apple.com 11.0 Darwin Kernel Version 11.0.0: Thu Aug 4 17:20:02 PDT 2011; root:xnu-1699.22.85~5/RELEASE_X86_64 x86_64"
+#define PHP_UNAME "Darwin b1032.apple.com 12.0 Darwin Kernel Version 12.0.0: Sun Jun 24 23:00:16 PDT 2012; root:xnu-2050.7.9~1/RELEASE_X86_64 x86_64"
 
 /* uname -a output */
-#define PHP_UNAME "Darwin melodie.apple.com 11.0 Darwin Kernel Version 11.0.0: Thu Aug 4 17:20:02 PDT 2011; root:xnu-1699.22.85~5/RELEASE_X86_64 x86_64"
+#define PHP_UNAME "Darwin b1032.apple.com 12.0 Darwin Kernel Version 12.0.0: Sun Jun 24 23:00:16 PDT 2012; root:xnu-2050.7.9~1/RELEASE_X86_64 x86_64"
 
 /* uname output */
 #define PHP_OS "Darwin"

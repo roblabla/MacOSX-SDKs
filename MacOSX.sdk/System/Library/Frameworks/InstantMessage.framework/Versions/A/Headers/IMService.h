@@ -5,7 +5,7 @@
 //
 
 /*! @header
- @discussion The IMService API provides a way to integrate a variety of data about a user's iChat connections into your
+ @discussion The IMService API provides a way to integrate a variety of data about a user's Messages connections into your
  application. It provides information on which services the user is connected to (AIM, Jabber, or Bonjour), their online
  screen names, their lists of acquaintances, their current status on a given service (away, idle, available), idle
  times, and other presence-specific details. The API also provides notifications to update your applications when
@@ -97,13 +97,13 @@ extern NSString* IMPersonStatusKey;
 extern NSString* IMPersonStatusMessageKey;
 /*! NSDate of the time, in seconds, since the last user activity. Available if the user's status is idle. */
 extern NSString* IMPersonIdleSinceKey;
-/*! Person's first name. This is a key used directly by Bonjour; however, if a person has an Address Book entry associated with a
+/*! Person's first name. This is a key used directly by Bonjour; however, if a person has an Contacts entry associated with a
  relevant AIM account, this key will reflect the first name of that person. */
 extern NSString* IMPersonFirstNameKey;
-/*! Person's last name. This is a key used directly by Bonjour; however, if a person has an Address Book entry associated with a
+/*! Person's last name. This is a key used directly by Bonjour; however, if a person has an Contacts entry associated with a
  relevant AIM account, this key will reflect the last name of that person. */
 extern NSString* IMPersonLastNameKey;
-/*! Person's e-mail address. This is a key used directly by Bonjour; however, if a person has an Address Book entry associated with a
+/*! Person's e-mail address. This is a key used directly by Bonjour; however, if a person has an Contacts entry associated with a
  relevant AIM account, this key will reflect the first e-mail address of that person. */
 extern NSString* IMPersonEmailKey;
 /*! NSData of the image that should be used for the user's icon. Sent with the IMPersonInfoChangedNotification. */
@@ -129,8 +129,8 @@ extern NSString * const IMCapabilityAudioConference;
 extern NSString * const IMCapabilityVideoConference;
 
 /*! @class IMService
- @abstract An IMService object represents a service available to a user through iChat, such as AIM, Jabber, and Bonjour.
- @discussion Each IMService object represents one service available through iChat. Class methods such as <tt>allServices</tt>
+ @abstract An IMService object represents a service available to a user through Messages, such as AIM, Jabber, and Bonjour.
+ @discussion Each IMService object represents one service available through Messages. Class methods such as <tt>allServices</tt>
  and <tt>serviceWithName:</tt> will return these objects. Each object acts as the liaison to its single service,
  allowing you to access the individual user's global status, the user's list of acquaintances, and other information
  which can be integrated into your application. 
@@ -223,7 +223,7 @@ extern NSString * const IMCapabilityVideoConference;
 /*! 
  @method infoForAllScreenNames   
  @abstract Returns information about all people and all accounts currently logged in to the service. If a person is
- logged in on multiple accounts (determined by the user's Address Book), this method will return the information for
+ logged in on multiple accounts (determined by the user's Contacts), this method will return the information for
  all of the logged-in accounts.
  @result Returns an NSArray of the dictionaries returned by <tt>infoForScreenName:</tt> for all people on all accounts. 
  */
@@ -231,8 +231,8 @@ extern NSString * const IMCapabilityVideoConference;
 /*! 
  @method infoForPreferredScreenNames   
  @abstract Returns information about all people and their primary accounts currently logged in to the service. If a person is
- logged in on multiple accounts (determined by the user's Address Book), this method will only return the information for the
- preferred account. The preferred account is determined by iChat, using a combination of capabilities (video chat capability, audio chat
+ logged in on multiple accounts (determined by the user's Contacts), this method will only return the information for the
+ preferred account. The preferred account is determined by Messages, using a combination of capabilities (video chat capability, audio chat
  capability, and so on), status (available, idle, away), and other user attributes.
  @result  Returns an NSArray of the dictionaries returned by <tt>infoForScreenName:</tt> for all people and is guaranteed to provide only one
  array entry for any logged-in person. 
@@ -240,7 +240,7 @@ extern NSString * const IMCapabilityVideoConference;
 - (NSArray *)infoForPreferredScreenNames;
 /*! 
  @method peopleWithScreenName   
- @abstract Returns the Address Book person objects that correspond to the person with the screenName matched by <i>screenName</i>.
+ @abstract Returns the Contacts person objects that correspond to the person with the screenName matched by <i>screenName</i>.
  @param screenName  An NSString containing the screen name identifier of a person or persons.
  @result Returns an NSArray of ABPerson objects that match the screen name matched by <i>screenName</i>. Can return an empty array or an array with one or more items.
  */
@@ -248,8 +248,8 @@ extern NSString * const IMCapabilityVideoConference;
 /*! 
  @method screenNamesForPerson   
  @abstract Returns a list of valid screen names for any given person.
- @param person An Address Book ABPerson object.
- @result Returns an NSArray of NSStrings that are valid screen names for the person specified by <i>person</i>. See Address Book documentation for 
+ @param person An Contacts ABPerson object.
+ @result Returns an NSArray of NSStrings that are valid screen names for the person specified by <i>person</i>. See Contacts documentation for 
  more information on ABPerson and accessing the user's address book. Can return an empty array or an array with one or more items.
  */
 - (NSArray *)screenNamesForPerson:(ABPerson *)person;

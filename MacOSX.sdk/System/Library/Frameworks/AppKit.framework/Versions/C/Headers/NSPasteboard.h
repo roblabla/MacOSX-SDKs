@@ -1,7 +1,7 @@
 /*
 	NSPasteboard.h
 	Application Kit
-	Copyright (c) 1994-2011, Apple Inc.
+	Copyright (c) 1994-2012, Apple Inc.
 	All rights reserved.
 */
 
@@ -69,7 +69,7 @@ APPKIT_EXTERN NSString *NSDragPboard;
 
 - (NSInteger)changeCount;
 
-- (void)releaseGlobally;
+- (oneway void)releaseGlobally;
 
 
 /* Clears the existing contents of the pasteboard, preparing it for new contents.  This is the first step in providing data on the pasteboard.  Returns the change count of the pasteboard.

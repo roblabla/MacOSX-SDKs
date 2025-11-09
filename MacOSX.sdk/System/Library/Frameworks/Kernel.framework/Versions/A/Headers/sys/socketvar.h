@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2011 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2012 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -120,6 +120,7 @@ typedef	u_quad_t so_gen_t;
 #else
 #define	_XSOCKET_PTR(x)		x
 #endif
+
 
 #pragma pack(4)
 

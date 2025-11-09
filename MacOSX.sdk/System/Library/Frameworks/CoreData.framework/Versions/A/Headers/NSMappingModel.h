@@ -1,13 +1,15 @@
 /*
     NSMappingModel.h
     Core Data
-    Copyright (c) 2004-2010 Apple Inc.
+    Copyright (c) 2004-2012 Apple Inc.
     All rights reserved.
 */
 
-#import <Foundation/NSObject.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 @class NSManagedObjectModel;
+@class NSError;
 
 NS_CLASS_AVAILABLE(10_5,3_0)
 @interface NSMappingModel: NSObject {

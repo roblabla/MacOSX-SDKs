@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2010 Apple Inc. All rights reserved.
+ * Copyright (c) 1998-2011 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -67,6 +67,16 @@ class SCSITask;
 //	Class Declaration
 //-----------------------------------------------------------------------------
 
+/*!
+ @class IOSCSIProtocolServices
+ @superclass IOSCSIProtocolInterface
+ @discussion
+ This class defines the public SCSI Protocol Services Layer API for any class
+ that implements SCSI protocol services. A protocol services layer driver is
+ responsible for taking incoming SCSITaskIdentifier objects and translating
+ them to the native command type for the native protocol interface
+ (e.g. SBP-2 ORB on FireWire).
+ */
 class IOSCSIProtocolServices : public IOSCSIProtocolInterface
 {
 	
@@ -98,254 +108,659 @@ protected:
 		queue_head_t		fAutoSenseQueueHead;
 	};
 	IOSCSIProtocolServicesExpansionData * fIOSCSIProtocolServicesReserved;
+			
+	/*!
+	@function SendSCSICommand
+	@abstract Pure virtual method subclasses must implement in order to send SCSITasks on the wire.
+	@discussion Send a SCSI Command to the device.  If the command was sent to the
+	device and is pending completion, the subclass should return true and
+	return back the kSCSIServiceResponse_Request_In_Process response. 
+	If the command completes immediately with an error, the subclass will
+	return true and return back the appropriate status.
+	If the subclass is currently processing all the commands it can, the
+	subclass will return false and the command will be resent next time
+	CommandCompleted is called.
+	@param request A valid SCSITaskIdentifier representing the command to send on the wire.
+	@param serviceResponse Pointer to a SCSIServiceResponse value returned to the caller.
+	@param taskStatus Pointer to a SCSITaskStatus value returned to the caller.
+	@result False if no more commands can be processed at this time, otherwise true.
+	*/
+	virtual bool	SendSCSICommand ( 	SCSITaskIdentifier 		request, 
+										SCSIServiceResponse *	serviceResponse,
+										SCSITaskStatus *		taskStatus ) = 0;
 	
-	// ---- Protocol transport methods overridden by each subclass ----
-	
-	// Send a SCSI Command to the device.  If the command was sent to the
-	// device and is pending completion, the subclass should return true and
-	// return back the kSCSIServiceResponse_Request_In_Process response. 
-	// If the command completes immediately with an error, the subclass will
-	// return true and return back the appropriate status.
-	// if the subclass is currently processing all the commands it can, the
-	// subclass will return false and the command will be resent next time
-	// CommandCompleted is called.  
-	virtual bool		SendSCSICommand ( 	SCSITaskIdentifier 		request, 
-											SCSIServiceResponse *	serviceResponse,
-											SCSITaskStatus *		taskStatus ) = 0;
-	
+	/*!
+	@function AbortSCSICommand
+	@abstract Pure virtual method subclasses must implement so that SCSITasks may be aborted.
+	@discussion Provides the capability for a caller to request that a particular SCSITask
+	be aborted.
+	@param request A valid SCSITaskIdentifier representing the command to be aborted.
+	@result A valid SCSIServiceResponse.
+	*/
 	virtual SCSIServiceResponse	AbortSCSICommand ( SCSITaskIdentifier request ) = 0;
 	
-	// ---- Command completion notification method ---------
-	// Subclasses will call this inherited method when the command
-	// executed by SendSCSICommand has completed.
-	// The subclasses will return a service response that is derived
-	// from protocol specific status information and as specified in 
-	// the specification for that protocol.
-	// If the service response is kSCSIServiceResponse_TASK_COMPLETE,
-	// the subclass will also return a SCSI status value.
+	/*!
+	@function CommandCompleted
+	@abstract Method subclass calls to complete a SCSITask.
+	@discussion Subclasses will call this inherited method when the command
+	executed by SendSCSICommand has completed.
+	@param request A valid SCSITaskIdentifier indicating the request to complete.
+	@param serviceResponse A valid SCSIServiceResponse value.
+	@param taskStatus A valid SCSITaskStatus value.
+	*/
 	void	CommandCompleted ( 	SCSITaskIdentifier 	request, 
 								SCSIServiceResponse serviceResponse,
 								SCSITaskStatus		taskStatus );
 	
-	// ---- Utility methods for accessing SCSITask attributes ----
-	// Method for retreiving the attribute for a task.
+	/*!
+	@function GetTaskAttribute
+	@abstract Accessor method to retrieve the SCSITaskAttribute associated with the specified request.
+	@discussion Accessor method to retrieve the SCSITaskAttribute associated with the specified request.
+	@param request A valid SCSITaskIdentifier.
+	@result A valid SCSITaskAttribute value.
+	*/
 	SCSITaskAttribute	GetTaskAttribute ( SCSITaskIdentifier request );
 	
+	/*!
+	@function SetTaskState
+	@abstract Accessor method to set the SCSITaskState associated with the specified request.
+	@discussion Accessor method to set the SCSITaskState associated with the specified request.
+	@param request A valid SCSITaskIdentifier.
+	@param newTaskState A valid SCSITaskState value.
+	@result True on success, otherwise false.
+	*/
 	bool			SetTaskState ( 	SCSITaskIdentifier request, 
 									SCSITaskState newTaskState );
+	/*!
+	@function GetTaskState
+	@abstract Accessor method to retrieve the SCSITaskState associated with the specified request.
+	@discussion Accessor method to retrieve the SCSITaskState associated with the specified request.
+	@param request A valid SCSITaskIdentifier.
+	@result A valid SCSITaskState value.
+	*/
 	SCSITaskState	GetTaskState ( 	SCSITaskIdentifier request );
 	
-	UInt8			GetLogicalUnitNumber ( SCSITaskIdentifier request );
-	void			GetLogicalUnitBytes ( SCSITaskIdentifier request, SCSILogicalUnitBytes * lunBytes );
+	/*!
+	@function GetLogicalUnitNumber
+	@abstract Accessor method to retrieve the logical unit number associated with the specified request.
+	@discussion Accessor method to retrieve the logical unit number associated with the specified request.
+	NOTE: This method is deprecated in favor of GetLogicalUnitBytes().
+	@param request A valid SCSITaskIdentifier.
+	@result A valid single-byte LUN value.
+	*/
+	UInt8	GetLogicalUnitNumber ( SCSITaskIdentifier request );
+
+	/*!
+	@function GetLogicalUnitBytes
+	@abstract Accessor method to retrieve the logical unit bytes associated with the specified request.
+	@discussion Accessor method to retrieve the logical unit bytes associated with the specified request.
+	@param request A valid SCSITaskIdentifier.
+	@param lunBytes A pointer to SCSILogicalUnitBytes to be filled in by this method.
+	*/
+	void	GetLogicalUnitBytes ( SCSITaskIdentifier request, SCSILogicalUnitBytes * lunBytes );
 	
-	// Method to determine the size of the command descriptor block.
+	/*!
+	@function GetCommandDescriptorBlockSize
+	@abstract Accessor method to retrieve the Command Descriptor Block size associated with the specified request.
+	@discussion Accessor method to retrieve the Command Descriptor Block size associated with the specified request.
+	@param request A valid SCSITaskIdentifier.
+	@result A valid CDB size (e.g. 6, 10, 12, or 16 bytes).
+	*/
 	UInt8	GetCommandDescriptorBlockSize ( SCSITaskIdentifier request );
 	
-	// This will always return the define max CDB size.  If the Protocol Layer
-	// driver only supports a smaller size CDB, it will have to create a local
-	// SCSICommandDescriptorBlock variable to get the CDB data and then 
-	// transfer the needed bytes from there.
+	/*!
+	@function GetCommandDescriptorBlock
+	@abstract Accessor method to retrieve the Command Descriptor Block associated with the specified request.
+	@discussion Accessor method to retrieve the Command Descriptor Block associated with the specified request.
+	@param request A valid SCSITaskIdentifier.
+	@param cdbData A pointer to SCSICommandDescriptorBlock to be filled in by this method.
+	NOTE: This routine will always fill in 16 bytes, so if the protocol layer driver supports less than this amount
+	it will have to create a local SCSICommandDescriptorBlock variable to get the CDB data.
+	@result True on success, otherwise false.
+	*/
 	bool	GetCommandDescriptorBlock ( SCSITaskIdentifier 				request, 
 										SCSICommandDescriptorBlock * 	cdbData );
 	
-	// Get the transfer direction for the request.
+	/*!
+	@function GetDataTransferDirection
+	@abstract Accessor method to retrieve the data transfer direction associated with the specified request.
+	@discussion Accessor method to retrieve the data transfer direction associated with the specified request.
+	@param request A valid SCSITaskIdentifier.
+	@result The data transfer direction (e.g. kSCSIDataTransfer_NoDataTransfer).
+	*/
 	UInt8	GetDataTransferDirection ( SCSITaskIdentifier request );
 	
+	/*!
+	@function GetRequestedDataTransferCount
+	@abstract Accessor method to retrieve the requested data transfer count associated with the specified request.
+	@discussion Accessor method to retrieve the requested data transfer count associated with the specified request.
+	@param request A valid SCSITaskIdentifier.
+	@result The requested data transfer count.
+	*/
 	UInt64	GetRequestedDataTransferCount ( SCSITaskIdentifier request );
 	
+	/*!
+	@function SetRealizedDataTransferCount
+	@abstract Accessor method to set the realized (actual) data transfer count associated with the specified request.
+	@discussion Accessor method to set the realized (actual) data transfer count associated with the specified request.
+	@param request A valid SCSITaskIdentifier.
+	@param newRealizedDataCount The realized (actual) data count transferred.
+	@result True on success, otherwise false.   
+	*/
 	bool	SetRealizedDataTransferCount ( SCSITaskIdentifier request,
 										   UInt64 newRealizedDataCount );
 	
+	/*!
+	@function GetRealizedDataTransferCount
+	@abstract Accessor method to retrieve the realized data transfer count associated with the specified request.
+	@discussion Accessor method to retrieve the realized data transfer count associated with the specified request.
+	@param request A valid SCSITaskIdentifier.
+	@result The realized data transfer count.
+	*/
 	UInt64	GetRealizedDataTransferCount ( SCSITaskIdentifier request );
 	
+	/*!
+	@function GetDataBuffer
+	@abstract Accessor method to retrieve the data buffer associated with the specified request.
+	@discussion Accessor method to retrieve the data buffer associated with the specified request.
+	@param request A valid SCSITaskIdentifier.
+	@result An IOMemoryDescriptor associated with the request. May be NULL if data transfer
+	direction is kSCSIDataTransfer_NoDataTransfer.
+	*/
 	IOMemoryDescriptor *	GetDataBuffer ( SCSITaskIdentifier request );
 	
+	/*!
+	@function GetDataBufferOffset
+	@abstract Accessor method to retrieve the data buffer offset associated with the specified request.
+	@discussion Accessor method to retrieve the data buffer offset associated with the specified request.
+	@param request A valid SCSITaskIdentifier.
+	@result Offset into the data buffer at which to start the transfer of data.
+	*/
 	UInt64	GetDataBufferOffset ( SCSITaskIdentifier request );
 	
+	/*!
+	@function GetTimeoutDuration
+	@abstract Accessor method to retrieve the timeout duration in milliseconds associated with the specified request.
+	@discussion Accessor method to retrieve the timeout duration in milliseconds associated with the specified request.
+	@param request A valid SCSITaskIdentifier.
+	@result Timeout duration in milliseconds.
+	*/
 	UInt32	GetTimeoutDuration ( SCSITaskIdentifier request );
 	
+	/*!
+	@function GetAutosenseRequestedDataTransferCount
+	@abstract Accessor method to retrieve the requested data transfer count for autosense data
+	associated with the specified request.
+	@discussion Accessor method to retrieve the requested data transfer count for autosense data
+	associated with the specified request.
+	@param request A valid SCSITaskIdentifier.
+	@result The requested autosense data transfer count.
+	*/
 	UInt64	GetAutosenseRequestedDataTransferCount ( SCSITaskIdentifier	request );
 	
-	// Set the auto sense data that was returned for the SCSI Task.
-	// A return value of true indicates that the data was copied to the member 
-	// sense data structure, false indicates that the data could not be copied.
+	/*!
+	@function SetAutoSenseData
+	@abstract Accessor method to set the autosense data. NOTE: This method is deprecated.
+	@discussion Accessor method to set the autosense data. NOTE: This method is deprecated.
+	@param request A valid SCSITaskIdentifier.
+	@param senseData A pointer to a SCSI_Sense_Data structure to be copied. Only
+	sizeof(struct SCSI_Sense_Data) bytes will be copied.
+	@result True if sense data was successfully copied, otherwise false.
+	*/
 	bool	SetAutoSenseData ( SCSITaskIdentifier	request,
-							   SCSI_Sense_Data *	senseData ); // DEPRECATED, use the one on the line below.
+							   SCSI_Sense_Data *	senseData ) __attribute__ ((deprecated));
 	
+	/*!
+	@function SetAutoSenseData
+	@abstract Accessor method to set the autosense data.
+	@discussion Accessor method to set the autosense data.
+	@param request A valid SCSITaskIdentifier.
+	@param senseData A pointer to sense data to be copied.
+	@param senseDataSize Number of bytes to copy.
+	@result True if sense data was successfully copied, otherwise false.
+	*/
 	bool	SetAutoSenseData ( SCSITaskIdentifier	request,
 							   SCSI_Sense_Data *	senseData,
 							   UInt8				senseDataSize );
 	
+	/*!
+	@function EnsureAutosenseDescriptorExists
+	@abstract Internal method, not to be called by subclasses.
+	@discussion Internal method, not to be called by subclasses.
+	@param request A valid SCSITaskIdentifier.
+	*/
 	void	EnsureAutosenseDescriptorExists ( SCSITaskIdentifier request );
 	
+	/*!
+	@function SetProtocolLayerReference
+	@abstract Accessor method to set the protocol layer reference.
+	@discussion Accessor method to set the protocol layer reference.
+	@param request A valid SCSITaskIdentifier.
+	@param newReferenceValue Pointer to reference data.
+	@result True on success, otherwise false.
+	*/
 	bool	SetProtocolLayerReference ( 
 				SCSITaskIdentifier 		request, 
 				void *					newReferenceValue );
+
+	/*!
+	@function GetProtocolLayerReference
+	@abstract Accessor method to retrieve the protocol layer reference.
+	@discussion Accessor method to retrieve the protocol layer reference.
+	@param request A valid SCSITaskIdentifier.
+	@result The protocol layer reference value. May be NULL.
+	*/
 	void *	GetProtocolLayerReference ( SCSITaskIdentifier request );
 	
-	
+	/*!
+	@function SetTaskExecutionMode
+	@abstract Internal method used to set the task execution mode.
+	@discussion Internal method used to set the task execution mode.
+	@param request A valid SCSITaskIdentifier.
+	@param newTaskMode A valid SCSITaskMode value.
+	@result True on success, otherwise false.
+	*/
 	bool	SetTaskExecutionMode (
 				SCSITaskIdentifier 		request, 
 				SCSITaskMode 			newTaskMode );
+
+	/*!
+	@function GetTaskExecutionMode
+	@abstract Internal method used to retrieve the task execution mode.
+	@discussion Internal method used to retrieve the task execution mode.
+	@param request A valid SCSITaskIdentifier.
+	@result A valid SCSITaskMode value.
+	*/
 	SCSITaskMode	GetTaskExecutionMode ( SCSITaskIdentifier request );
 	
-	// ---- Method calls for messaging device connectedness ----
+	/*!
+	@function SendNotification_DeviceRemoved
+	@abstract Method called by subclasses when a device is physically removed from the bus.
+	@discussion Method called by subclasses when a device is physically removed from the bus.
+	*/
 	void 	SendNotification_DeviceRemoved ( void );
 	
+	/*!
+	@function SendNotification_VerifyDeviceState
+	@abstract Method called by subclasses when a device state needs to be re-verified due to some
+	bus condition which may have changed the device state.
+	@discussion Method called by subclasses when a device state needs to be re-verified due to some
+	bus condition which may have changed the device state.
+	*/
 	void 	SendNotification_VerifyDeviceState ( void );   
 	
 	// -- SCSI Task Queue Management Methods --
 	// Following are the commands used to manipulate the queue of pending SCSI Tasks.
 	
-	// Add the SCSI Task to the queue.  The Task's Attribute determines where in
-	// the queue the Task is placed.
+	/*!
+	@function AddSCSITaskToQueue
+	@abstract Internal method called to add a SCSITask to the processing queue.
+	@discussion Internal method called to add a SCSITask to the processing queue.
+	@param request A valid SCSITaskIdentifier.
+	*/
 	void 	AddSCSITaskToQueue ( SCSITaskIdentifier request );
 	
-	// Add the SCSI Task to the head of the queue.  This is used when the task
-	// has been removed from the head of the queue, but the subclass indicates
-	// that it can not yet process this task.
+	/*!
+	@function AddSCSITaskToHeadOfQueue
+	@abstract Internal method called to add a SCSITask to the head of the processing queue.
+	@discussion Internal method called to add a SCSITask to the head of the processing queue.
+	@param request A valid SCSITask pointer.
+	*/
 	void 	AddSCSITaskToHeadOfQueue ( SCSITask * request );
 	
-	// Remove the next SCSI Task for the queue and return it.
+	/*!
+	@function RetrieveNextSCSITaskFromQueue
+	@abstract Internal method called to retrieve the next SCSITask to process.
+	@discussion Internal method called to retrieve the next SCSITask to process.
+	@result A valid SCSITask pointer or NULL if there are no tasks to process.
+	*/
 	SCSITask * RetrieveNextSCSITaskFromQueue ( void );
 	
-	// Check to see if the SCSI Task resides in the queue and abort it if it does.
+	/*!
+	@function AbortSCSITaskFromQueue
+	@abstract Deprecated internal method.
+	@discussion Deprecated internal method.
+	*/
 	bool 	AbortSCSITaskFromQueue ( SCSITask * request );
 	
-	// Methods for sending and completing SCSI tasks
+	/*!
+	@function SendSCSITasksFromQueue
+	@abstract Internal method called to start processing SCSITasks.
+	@discussion Internal method called to start processing SCSITasks. Only one client or workloop
+	thread may process SCSITasks at any point in time. This method coordinates to ensure only one
+	thread does so.
+	*/
 	void	SendSCSITasksFromQueue ( void );
 	
+	/*!
+	@function RejectSCSITasksCurrentlyQueued
+	@abstract Internal method called to reject currently enqueued SCSITasks.
+	@discussion Internal method called to reject currently enqueued SCSITasks. This method is
+	typically called in response to device termination.
+	*/
 	void	RejectSCSITasksCurrentlyQueued ( void );
 	
+	/*!
+	@function ProcessCompletedTask
+	@abstract Internal method called to process completed SCSITasks.
+	@discussion Internal method called to process completed SCSITasks. This method determines if
+	a CHECK_CONDITION has occurred and if sense data was requested and autosense data is not present.
+	If so, it will change the execution mode of the SCSITask and request sense data on behalf of
+	the caller.
+	@param request A valid SCSITaskIdentifier.
+	@param serviceResponse A valid SCSIServiceResponse value.
+	@param taskStatus A valid SCSITaskStatus value.
+	*/
 	void	ProcessCompletedTask ( 	SCSITaskIdentifier 	request, 
 									SCSIServiceResponse serviceResponse,
 									SCSITaskStatus		taskStatus );
-	void	RejectTask ( SCSITaskIdentifier		request );
+	
+	/*!
+	@function RejectTask
+	@abstract Internal method called to reject a particular SCSITask.
+	@discussion Internal method called to reject a particular SCSITask.
+	@param request A valid SCSITaskIdentifier.
+	*/
+	void	RejectTask ( SCSITaskIdentifier	request );
 	
 	// ------ Power Management Support ------
 	
-	// The InitializePowerManagement method is called to initialize power management.
-	// In the protocol services layer, this method calls the protocol interface layer
-	// to initialize power management state variables and then registers the protocol
-	// layer driver with the power manager with two(2) states, ON and OFF.	
+	/*!
+	@function InitializePowerManagement
+	@abstract Subclasses call this method to initialize power management.
+	@discussion Subclasses call this method to initialize power management.
+	In the protocol services layer, this method calls the protocol interface layer
+	to initialize power management state variables and then registers the protocol
+	layer driver with the power manager with two(2) states, ON and OFF. Subclasses may
+	override this behavior.
+	@param provider The provider to be joined to in the power management tree.
+	*/
 	virtual void		InitializePowerManagement ( IOService * provider );
 	
-	// The GetInitialPowerState method is called once, right after InitializePowerManagement()
-	// in order to determine what state the device is initially in at startup time (usually
-	// the highest power mode).
+	/*!
+	@function GetInitialPowerState
+	@abstract This method is called once, right after InitializePowerManagement()
+	in order to determine what state the device is initially in at startup time (usually
+	the highest power mode).
+	@discussion This method is called once, right after InitializePowerManagement()
+	in order to determine what state the device is initially in at startup time (usually
+	the highest power mode).
+	@result The power state the device is currently in.
+	*/
 	virtual UInt32		GetInitialPowerState ( void );
 	
-	// The HandlePowerChange method is pure virtual and is left to each protocol or
-	// application layer driver to implement. It is guaranteed to be called on its
-	// own thread of execution and can make synchronous or asynchronous calls.
+	/*!
+	@function HandlePowerChange
+	@abstract This method is called to handle a power change.
+	@discussion This method is called to handle a power change. It is called from a clean thread
+	context (i.e. new thread, no locks held) and can make synchronous or asynchronous calls.
+	*/
 	virtual void		HandlePowerChange ( void );
 	
-	// The HandleCheckPowerState (void) method is on the serialized side of the command
-	// gate and can change member variables safely without multi-threading issues.
-	// It's main purpose is to call the superclass' HandleCheckPowerState ( UInt32 maxPowerState )
-	// with the max power state the class registered with.
+	/*!
+	@function HandleCheckPowerState
+	@abstract Method called to check if the device is in the correct power state for an I/O.
+	@discussion The HandleCheckPowerState (void) method is on the serialized side of the command
+	gate and can change member variables safely without multi-threading issues. Its main purpose is
+	to call the superclass' HandleCheckPowerState ( UInt32 maxPowerState ) with the max power state
+	with which the class registered.
+	*/
 	virtual void		HandleCheckPowerState ( void );
 	
-	// The TicklePowerManager ( void ) method is called by CheckPowerState and
-	// sends an activity tickle to the power manager so that the idle timer is
-	// reset.
+	/*!
+	@function TicklePowerManager
+	@abstract Internal method. Do not use.
+	@discussion Internal method. Do not use.
+	*/
 	virtual void		TicklePowerManager ( void );
 	
-	// The HandlePowerOff method is called to do any bus specific activity
-	// necessary before shutting down and going to sleep.
+	/*!
+	@function HandlePowerOff
+	@abstract Convenience method for a protocol service driver to handle a power off call (called
+	on the way to sleep).
+	@discussion Convenience method for a protocol service driver to handle a power off call (called
+	on the way to sleep). This method is guaranteed to be called after application layer drivers
+	have been put to sleep.
+	@result A valid IOReturn code.
+	*/
 	virtual IOReturn	HandlePowerOff ( void );
 	
-	// The HandlePowerOn method is called to do any bus specific activity
-	// necessary to recover from power-on/wake from sleep (e.g. bus reset on ATAPI)
+	/*!
+	@function HandlePowerOn
+	@abstract Convenience method for a protocol service driver to handle a power on call (called
+	on the way back up from sleep).
+	@discussion Convenience method for a protocol service driver to handle a power on call (called
+	on the way back up from sleep). Driver should perform any bus specific activity necessary to
+	recover from power-on/wake from sleep (e.g. bus reset on ATAPI). This method is guaranteed to
+	be called before application layer drivers have been awakened.
+	@result A valid IOReturn code.
+	*/
 	virtual IOReturn	HandlePowerOn ( void );
+	
 	
 public:
 	
-    virtual bool    init    ( OSDictionary * dictionary = 0 );
-	virtual bool	start	( IOService * provider );
-	virtual void	free	( void );
+
+	/*!
+	@function init
+    @abstract Standard init method for all IORegistryEntry subclasses.
+    @discussion A registry entry must be initialized with this method before it can be used. A property dictionary may passed and will be retained by this method for use as the registry entry's property table, or an empty one will be created.
+    @param A dictionary that will become the registry entry's property table (retaining it), or zero which will cause an empty property table to be created.
+    @result true on success, or false on a resource failure.
+    */
+	virtual bool	init ( OSDictionary * propTable = 0 );
 	
-	void RegisterSCSITaskCompletionRoutine ( SCSITaskCompletion completion );
+	/*!
+	@function start
+	@abstract During an IOService object's instantiation, starts the IOService object that has been selected to run on the provider.
+	@discussion The <code>start</code> method of an IOService instance is called by its provider when it has been selected (due to its probe score and match category) as the winning client. The client is already attached to the provider when <code>start</code> is called.<br>Implementations of <code>start</code> must call <code>start</code> on their superclass at an appropriate point. If an implementation of <code>start</code> has already called <code>super::start</code> but subsequently determines that it will fail, it must call <code>super::stop</code> to balance the prior call to <code>super::start</code> and prevent reference leaks.
+	@result <code>true</code> if the start was successful; <code>false</code> otherwise (which will cause the instance to be detached and usually freed).
+	*/
+	virtual bool	start ( IOService * provider );
+	
+	
+	/*!
+	@function free
+	@abstract Frees data structures that were allocated during start().
+	@discussion Frees data structures that were allocated during start().
+	*/
+	virtual void	free ( void );
+	
+	/*!
+	@function RegisterSCSITaskCompletionRoutine
+	@abstract Used by IOSCSITargetDevice to register a completion routine.
+	@discussion Used by IOSCSITargetDevice to register a completion routine. Internal use only.
+	@param completion A SCSITaskCompletion routine.
+	*/
+	void	RegisterSCSITaskCompletionRoutine ( SCSITaskCompletion completion );
 	
 	// ------- SCSI Architecture Model Task Management Functions ------
-	// The ExecuteCommand method will take a SCSI Task and transport
-	// it across the physical wire(s) to the device
-	void					ExecuteCommand ( SCSITaskIdentifier	request );
 	
-	// The Task Management function to allow the SCSI Application Layer client to request
-	// that a specific task be aborted.
+	/*!
+	@function ExecuteCommand
+	@abstract ExecuteCommand method will take a SCSI Task and transport it across the physical
+	wire(s) to the device.
+	@discussion ExecuteCommand method will take a SCSI Task and transport it across the physical
+	wire(s) to the device.
+	@param request A valid SCSITaskIdentifier.
+	*/
+	void	ExecuteCommand ( SCSITaskIdentifier	request );
+	
+	/*!
+	@function AbortTask
+	@abstract The Task Management function to allow the SCSI Application Layer client to request
+	that a specific task be aborted.
+	@discussion The Task Management function to allow the SCSI Application Layer client to request
+	that a specific task be aborted.
+	@param theLogicalUnit A logical unit for which to abort a task.
+	@param theTag A valid SCSITaggedTaskIdentifier used to identify which task to abort.
+	@result A valid SCSIServiceResponse.
+	*/
 	SCSIServiceResponse		AbortTask ( UInt8 theLogicalUnit, SCSITaggedTaskIdentifier theTag );
 
-	// The Task Management function to allow the SCSI Application Layer client to request
-	// that a all tasks curerntly in the task set be aborted.
+	/*!
+	@function AbortTaskSet
+	@abstract The Task Management function to allow the SCSI Application Layer client to request
+	that a complete task set be aborted.
+	@discussion The Task Management function to allow the SCSI Application Layer client to request
+	that a complete task set be aborted.
+	@param theLogicalUnit A logical unit for which to abort the task set.
+	@result A valid SCSIServiceResponse.
+	*/
 	SCSIServiceResponse		AbortTaskSet ( UInt8 theLogicalUnit );
 
+	/*!
+	@function ClearACA
+	@abstract The Task Management function to clear an Auto-Contingent Allegiance condition.
+	@discussion The Task Management function to clear an Auto-Contingent Allegiance condition.
+	@param theLogicalUnit A logical unit for which to clear the ACA.
+	@result A valid SCSIServiceResponse.
+	*/
 	SCSIServiceResponse		ClearACA ( UInt8 theLogicalUnit );
 
+	/*!
+	@function ClearTaskSet
+	@abstract The Task Management function to clear a task set.
+	@discussion The Task Management function to clear a task set.
+	@param theLogicalUnit A logical unit for which to clear a task set.
+	@result A valid SCSIServiceResponse.
+	*/
 	SCSIServiceResponse		ClearTaskSet ( UInt8 theLogicalUnit );
     
+	/*!
+	@function LogicalUnitReset
+	@abstract The Task Management function to reset a logical unit.
+	@discussion The Task Management function to reset a logical unit.
+	@param theLogicalUnit A logical unit for which to clear a task set.
+	@result A valid SCSIServiceResponse.
+	*/
 	SCSIServiceResponse		LogicalUnitReset ( UInt8 theLogicalUnit );
 
+	/*!
+	@function TargetReset
+	@abstract The Task Management function to reset a target device.
+	@discussion The Task Management function to reset a target device.
+	@result A valid SCSIServiceResponse.
+	*/
 	SCSIServiceResponse		TargetReset ( void );
 	
     // ************* Obsoleted Member Routine ****************
-    // The AbortCommand method is replaced by the AbortTask Management function and
-    // should no longer be called.
-	virtual SCSIServiceResponse		AbortCommand ( SCSITaskIdentifier	request );
+	/*!
+	@function AbortCommand
+	@abstract Deprecated. Do not use.
+	@discussion Deprecated. Do not use.
+	*/
+	virtual SCSIServiceResponse		AbortCommand ( SCSITaskIdentifier	request ) __attribute__ ((deprecated));
 
 	
 	// ---- Method used for determining protocol or physical interconnect characteristics. ----
-	// The IsProtocolServiceSupported will return true if the specified
-	// feature is supported by the protocol layer.  If the service has a value that must be
-	// returned, it will be returned in the serviceValue output parameter.
+	/*!
+	@function IsProtocolServiceSupported
+	@abstract IsProtocolServiceSupported will return true if the specified
+	feature is supported by the protocol layer.
+	@discussion IsProtocolServiceSupported will return true if the specified
+	feature is supported by the protocol layer.
+	@param feature A valid SCSIProtocolFeature.
+	@param serviceValue A pointer to a value for the protocol feature.
+	@result True if the requested service is supported, otherwise false.
+	*/
 	virtual bool	IsProtocolServiceSupported ( SCSIProtocolFeature feature, void * serviceValue ) = 0;
 
-	// The HandleProtocolServiceFeature instructs the Protocol Services driver to perform the necessary 
-	// tasks for the indicated feature.
+	/*!
+	@function HandleProtocolServiceFeature
+	@abstract HandleProtocolServiceFeature instructs the Protocol Services driver to perform the
+	necessary tasks for the indicated feature.
+	@discussion HandleProtocolServiceFeature instructs the Protocol Services driver to perform the
+	necessary tasks for the indicated feature.
+	@param feature A valid SCSIProtocolFeature.
+	@param serviceValue A pointer to a value for the protocol feature.
+	@result True if successful, otherwise false.
+	*/
 	virtual bool	HandleProtocolServiceFeature ( SCSIProtocolFeature feature, void * serviceValue ) = 0;
-
+	
+	
 protected:
 	
 	// ----- Protocol Services Driver request handlers for Task Management functions -----
-	// These should be abstract so that every Protocol Services Driver would have to
-	// override them, but since they are new member routines, this class will provide
-	// a default implementation.
+
+	/*!
+	@function HandleAbortTask
+	@abstract HandleAbortTask instructs the Protocol Services driver to abort the task.
+	@discussion HandleAbortTask instructs the Protocol Services driver to abort the task.
+	@param theLogicalUnit A valid logical unit number.
+	@param theTag The tag of the command to abort.
+	@result A valid SCSIServiceResponse.
+	*/
     OSMetaClassDeclareReservedUsed ( IOSCSIProtocolServices, 1 );
 	virtual SCSIServiceResponse		HandleAbortTask ( 
 											UInt8 						theLogicalUnit, 
 											SCSITaggedTaskIdentifier 	theTag );
     
+	/*!
+	@function HandleAbortTaskSet
+	@abstract HandleAbortTaskSet instructs the Protocol Services driver to abort the task set.
+	@discussion HandleAbortTaskSet instructs the Protocol Services driver to abort the task set.
+	@param theLogicalUnit A valid logical unit number.
+	@result A valid SCSIServiceResponse.
+	*/
     OSMetaClassDeclareReservedUsed ( IOSCSIProtocolServices, 2 );
 	virtual SCSIServiceResponse		HandleAbortTaskSet ( 
 											UInt8 						theLogicalUnit );
 	
+	/*!
+	@function HandleClearACA
+	@abstract HandleClearACA instructs the Protocol Services driver to clear an auto-contingent allegiance.
+	@discussion HandleClearACA instructs the Protocol Services driver to clear an auto-contingent allegiance.
+	@param theLogicalUnit A valid logical unit number.
+	@result A valid SCSIServiceResponse.
+	*/
     OSMetaClassDeclareReservedUsed ( IOSCSIProtocolServices, 3 );
 	virtual SCSIServiceResponse		HandleClearACA ( 
 											UInt8 						theLogicalUnit );
 	
+	/*!
+	@function HandleClearTaskSet
+	@abstract HandleClearTaskSet instructs the Protocol Services driver to clear the task set.
+	@discussion HandleClearTaskSet instructs the Protocol Services driver to clear the task set.
+	@param theLogicalUnit A valid logical unit number.
+	@result A valid SCSIServiceResponse.
+	*/
     OSMetaClassDeclareReservedUsed ( IOSCSIProtocolServices, 4 );
 	virtual SCSIServiceResponse		HandleClearTaskSet (
 											UInt8 						theLogicalUnit );
 	
+	/*!
+	@function HandleLogicalUnitReset
+	@abstract HandleLogicalUnitReset instructs the Protocol Services driver to reset the logical unit.
+	@discussion HandleLogicalUnitReset instructs the Protocol Services driver to reset the logical unit.
+	@param theLogicalUnit A valid logical unit number.
+	@result A valid SCSIServiceResponse.
+	*/
     OSMetaClassDeclareReservedUsed ( IOSCSIProtocolServices, 5 );
 	virtual SCSIServiceResponse		HandleLogicalUnitReset (
 											UInt8 						theLogicalUnit );
 											
+	/*!
+	@function HandleTargetReset
+	@abstract HandleTargetReset instructs the Protocol Services driver to reset the target.
+	@discussion HandleTargetReset instructs the Protocol Services driver to reset the target.
+	@result A valid SCSIServiceResponse.
+	*/
     OSMetaClassDeclareReservedUsed ( IOSCSIProtocolServices, 6 );
-    // The HandleTargetReset member routine requests that the Protocol Services Driver
-    // perform the necessary steps detailed in the specification that defines the 
-    // protocol the driver represents for the TargetReset management function.
 	virtual SCSIServiceResponse		HandleTargetReset ( void );
 
 #if !TARGET_OS_EMBEDDED
+	/*!
+	@function CreateSCSITargetDevice
+	@abstract Used to create a SCSITargetDevice which will manage logical units.
+	@discussion The CreateSCSITargetDevice member routine will create the appropriate object
+	to represent the Target portion of a SCSI Device. This object is responsible
+	for managing the Target functions of the SCSI Device including the Task Manager and
+	Logical Units.
+	@result True if successful, otherwise false.
+	*/
     OSMetaClassDeclareReservedUsed ( IOSCSIProtocolServices,  7 );
-    // The CreateSCSITargetDevice member routine will create the appropriate object
-    // to represent the Target portion of a SCSI Device.  This object is responsible
-    // for managing the Target functions of the SCSI Device including the Task Manager and
-    // Logical Units.
-    // If the SCSITargetDevice object was successfully created, a true value will be
-    // returned, otherwisw, this will return false.
-	virtual bool					CreateSCSITargetDevice ( void );
+	virtual bool	CreateSCSITargetDevice ( void );
 #endif /* !TARGET_OS_EMBEDDED */
 	
 private:

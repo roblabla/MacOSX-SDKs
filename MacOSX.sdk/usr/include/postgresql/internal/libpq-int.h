@@ -9,10 +9,10 @@
  *	  more likely to break across PostgreSQL releases than code that uses
  *	  only the official API.
  *
- * Portions Copyright (c) 1996-2010, PostgreSQL Global Development Group
+ * Portions Copyright (c) 1996-2011, PostgreSQL Global Development Group
  * Portions Copyright (c) 1994, Regents of the University of California
  *
- * $PostgreSQL: pgsql/src/interfaces/libpq/libpq-int.h,v 1.152.2.1 2010/07/14 17:09:54 tgl Exp $
+ * src/interfaces/libpq/libpq-int.h
  *
  *-------------------------------------------------------------------------
  */
@@ -218,7 +218,8 @@ typedef enum
 	PGASYNC_BUSY,				/* query in progress */
 	PGASYNC_READY,				/* result ready for PQgetResult */
 	PGASYNC_COPY_IN,			/* Copy In data transfer in progress */
-	PGASYNC_COPY_OUT			/* Copy Out data transfer in progress */
+	PGASYNC_COPY_OUT,			/* Copy Out data transfer in progress */
+	PGASYNC_COPY_BOTH			/* Copy In/Out data transfer in progress */
 } PGAsyncStatusType;
 
 /* PGQueryClass tracks which query protocol we are now executing */
@@ -234,6 +235,8 @@ typedef enum
 /* (this is used only for 2.0-protocol connections) */
 typedef enum
 {
+	SETENV_STATE_CLIENT_ENCODING_SEND,	/* About to send an Environment Option */
+	SETENV_STATE_CLIENT_ENCODING_WAIT,	/* Waiting for above send to complete */
 	SETENV_STATE_OPTION_SEND,	/* About to send an Environment Option */
 	SETENV_STATE_OPTION_WAIT,	/* Waiting for above send to complete */
 	SETENV_STATE_QUERY1_SEND,	/* About to send a status query */
@@ -292,6 +295,7 @@ struct pg_conn
 	char	   *pgtty;			/* tty on which the backend messages is
 								 * displayed (OBSOLETE, NOT USED) */
 	char	   *connect_timeout;	/* connection timeout (numeric string) */
+	char	   *client_encoding_initial;		/* encoding to use */
 	char	   *pgoptions;		/* options to start the backend with */
 	char	   *appname;		/* application name */
 	char	   *fbappname;		/* fallback application name */
@@ -310,6 +314,7 @@ struct pg_conn
 	char	   *sslcert;		/* client certificate filename */
 	char	   *sslrootcert;	/* root certificate filename */
 	char	   *sslcrl;			/* certificate revocation list filename */
+	char	   *requirepeer;	/* required peer credentials for local sockets */
 
 #if defined(KRB5) || defined(ENABLE_GSS) || defined(ENABLE_SSPI)
 	char	   *krbsrvname;		/* Kerberos service name */
@@ -332,6 +337,7 @@ struct pg_conn
 	PGTransactionStatusType xactStatus; /* never changes to ACTIVE */
 	PGQueryClass queryclass;
 	char	   *last_query;		/* last SQL command, or NULL if unknown */
+	char		last_sqlstate[6];		/* last reported SQLSTATE */
 	bool		options_valid;	/* true if OK to attempt connection */
 	bool		nonblocking;	/* whether this connection is using nonblock
 								 * sending semantics */
@@ -347,6 +353,8 @@ struct pg_conn
 	SockAddr	raddr;			/* Remote address */
 	ProtocolVersion pversion;	/* FE/BE protocol version in use */
 	int			sversion;		/* server version, e.g. 70401 for 7.4.1 */
+	bool		auth_req_received;		/* true if any type of auth req
+										 * received */
 	bool		password_needed;	/* true if server demanded a password */
 	bool		dot_pgpass_used;	/* true if used .pgpass */
 	bool		sigpipe_so;		/* have we masked SIGPIPE via SO_NOSIGPIPE? */
@@ -397,8 +405,6 @@ struct pg_conn
 								 * attempting normal connection */
 	SSL		   *ssl;			/* SSL status, if have SSL connection */
 	X509	   *peer;			/* X509 cert of server */
-	char		peer_dn[256 + 1];		/* peer distinguished name */
-	char		peer_cn[SM_USER + 1];	/* peer common name */
 #ifdef USE_SSL_ENGINE
 	ENGINE	   *engine;			/* SSL engine, if any */
 #else
@@ -497,7 +503,7 @@ extern PGresult *pqPrepareAsyncResult(PGconn *conn);
 extern void
 pqInternalNotice(const PGNoticeHooks *hooks, const char *fmt,...)
 /* This lets gcc check the format string for consistency. */
-__attribute__((format(printf, 2, 3)));
+__attribute__((format(PG_PRINTF_ATTRIBUTE, 2, 3)));
 extern int	pqAddTuple(PGresult *res, PGresAttValue *tup);
 extern void pqSaveMessageField(PGresult *res, char code,
 				   const char *value);

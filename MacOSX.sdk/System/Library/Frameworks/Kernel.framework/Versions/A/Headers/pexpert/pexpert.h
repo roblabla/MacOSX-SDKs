@@ -42,7 +42,7 @@ __BEGIN_DECLS
 
 typedef void *cpu_id_t;
 
-#ifdef __arm__
+#if defined(__arm__)
 #endif
 
 void PE_enter_debugger(
@@ -52,17 +52,12 @@ void PE_init_platform(
 	boolean_t vm_initialized, 
 	void *args);
 
-#ifdef	__arm__
+#if defined(__arm__)
 uint32_t PE_get_security_epoch(
 	void);
-#endif
-
-#ifdef __arm__
 uint32_t PE_i_can_has_debugger(
 	uint32_t *);
-#endif
 
-#ifdef __arm__
 /*
  * If invoked with NULL first argument, return the max buffer size that can
  * be saved in the second argument
@@ -177,6 +172,13 @@ enum {
     kDebugTypeSerial  = 2 
 };
 
+/*  Scale factor values for PE_Video.v_scale */
+enum {
+   kPEScaleFactorUnknown = 0,
+   kPEScaleFactor1x      = 1,
+   kPEScaleFactor2x      = 2
+};
+
 struct PE_Video {
         unsigned long   v_baseAddr;     /* Base address of video memory */
         unsigned long   v_rowBytes;     /* Number of bytes per pixel row */
@@ -224,17 +226,6 @@ extern int PE_initialize_console(
 
 extern void PE_display_icon( unsigned int flags,
 			     const char * name );
-
-#if !CONFIG_EMBEDDED
-
-extern void
-vc_enable_progressmeter(int new_value);
-extern void
-vc_set_progressmeter(int new_value);
-extern int vc_progress_meter_enable;
-extern int vc_progress_meter_value;
-
-#endif /* !CONFIG_EMBEDDED */
 
 typedef struct PE_state {
 	boolean_t	initialized;
@@ -303,7 +294,7 @@ extern void pe_init_debug(void);
 
 extern boolean_t PE_imgsrc_mount_supported(void);
 
-#ifdef __arm__
+#if defined(__arm__)
 typedef void (*perfmon_interrupt_handler_func)(cpu_id_t source);
 extern kern_return_t PE_cpu_perfmon_interrupt_install_handler(perfmon_interrupt_handler_func handler);
 extern void PE_cpu_perfmon_interrupt_enable(cpu_id_t target, boolean_t enable);

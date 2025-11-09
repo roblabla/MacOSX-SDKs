@@ -1,7 +1,7 @@
 /*
 	NSApplication.h
 	Application Kit
-	Copyright (c) 1994-2011, Apple Inc.
+	Copyright (c) 1994-2012, Apple Inc.
 	All rights reserved.
 */
 
@@ -37,6 +37,8 @@ APPKIT_EXTERN const double NSAppKitVersionNumber;
 #define NSAppKitVersionNumber10_5_2 949.27
 #define NSAppKitVersionNumber10_5_3 949.33
 #define NSAppKitVersionNumber10_6 1038
+#define NSAppKitVersionNumber10_7 1138
+#define NSAppKitVersionNumber10_7_2 1138.23
 
 
 /* Modes passed to NSRunLoop */
@@ -133,10 +135,10 @@ typedef struct NSThreadPrivate _NSThreadPrivate;
         unsigned int	    _batchOrdering:1;
         unsigned int        _waitingForTerminationReply:1;
         unsigned int        _windowMoveDisabled:1;
-        unsigned int        _dontSaveWindowsDuringTerminate:1;
+        unsigned int        _unused:1;
         unsigned int        _didTryRestoringPersistentState:1;
         unsigned int        _contentsHaveInvalidPersistentState:1;
-        unsigned int        _inImplicitFullScreen:1;
+        unsigned int        _mightBeSwitching:1;
     }                   _appFlags;
     id                  _mainMenu;
     id                  _appIcon;
@@ -172,7 +174,7 @@ typedef struct NSThreadPrivate _NSThreadPrivate;
 - (void)stopModalWithCode:(NSInteger)returnCode;
 - (void)abortModal;
 - (NSWindow *)modalWindow;
-- (NSModalSession)beginModalSessionForWindow:(NSWindow *)theWindow;
+- (NSModalSession)beginModalSessionForWindow:(NSWindow *)theWindow NS_RETURNS_INNER_POINTER;
 - (NSInteger)runModalSession:(NSModalSession)session;
 - (void)endModalSession:(NSModalSession)session;
 - (void)terminate:(id)sender;
@@ -433,12 +435,16 @@ typedef NSInteger NSUserInterfaceLayoutDirection;
 - (void)enableRelaunchOnLogin NS_AVAILABLE_MAC(10_7);
 @end
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_7
 enum {
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_7
     NSRemoteNotificationTypeNone    = 0,
-    NSRemoteNotificationTypeBadge   = 1 << 0
-};
+    NSRemoteNotificationTypeBadge   = 1 << 0,
 #endif
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_8
+    NSRemoteNotificationTypeSound   = 1 << 1,
+    NSRemoteNotificationTypeAlert   = 1 << 2,
+#endif
+};
 typedef NSUInteger NSRemoteNotificationType;
 
 @interface NSApplication (NSRemoteNotifications)
@@ -487,11 +493,17 @@ APPKIT_EXTERN NSString *NSApplicationWillTerminateNotification;
 APPKIT_EXTERN NSString *NSApplicationDidChangeScreenParametersNotification;
 
 /* User info keys for NSApplicationDidFinishLaunchingNotification */
-APPKIT_EXTERN NSString * const NSApplicationLaunchRemoteNotificationKey NS_AVAILABLE_MAC(10_7);
 
 /* The following key is present in the userInfo of NSApplicationDidFinishLaunchingNotification.  Its value is an NSNumber containing a bool.  It will be NO if the app was launched to open or print a file, to perform a Service, if the app had saved state that will be restored, or if the app launch was in some other sense not a "default" launch.  Otherwise its value will be YES.
  */
 APPKIT_EXTERN NSString * const NSApplicationLaunchIsDefaultLaunchKey NS_AVAILABLE_MAC(10_7);
+
+/* The following key is present in the userInfo of NSApplicationDidFinishLaunchingNotification. It will be present if your application was launched because a user activated a notification in the Notification Center. Its value is an NSUserNotification object. */
+APPKIT_EXTERN NSString * const NSApplicationLaunchUserNotificationKey NS_AVAILABLE_MAC(10_8);
+
+/* Deprecated Keys for NSApplicationDidFinishLaunchingNotification */
+/* NSApplicationLaunchRemoteNotificationKey is unimplemented.  Please use NSApplicationLaunchUserNotificationKey to get the NSUserNotification object.  The NSUserNotification object has an isRemote property to indicate whether this application was launched as a result of a remote notification */
+APPKIT_EXTERN NSString * const NSApplicationLaunchRemoteNotificationKey NS_DEPRECATED_MAC(10_7, 10_8);
 
 /* Deprecated Methods */
 @interface NSApplication (NSDeprecated)
@@ -506,7 +518,7 @@ APPKIT_EXTERN NSString * const NSApplicationLaunchIsDefaultLaunchKey NS_AVAILABL
  ** beginModalSessionForWindow:relativeToWindow: was deprecated in Mac OS 10.0.
  ** Please use beginSheet:modalForWindow:modalDelegate:didEndSelector:contextInfo:
  */
-- (NSModalSession)beginModalSessionForWindow:(NSWindow *)theWindow relativeToWindow:(NSWindow *)docWindow NS_DEPRECATED_MAC(10_0, 10_0);
+- (NSModalSession)beginModalSessionForWindow:(NSWindow *)theWindow relativeToWindow:(NSWindow *)docWindow NS_RETURNS_INNER_POINTER NS_DEPRECATED_MAC(10_0, 10_0);
 
 // -application:printFiles: was deprecated in Mac OS 10.4. Implement application:printFiles:withSettings:showPrintPanels: in your application delegate instead.
 - (void)application:(NSApplication *)sender printFiles:(NSArray *)filenames NS_DEPRECATED_MAC(10_3, 10_4);

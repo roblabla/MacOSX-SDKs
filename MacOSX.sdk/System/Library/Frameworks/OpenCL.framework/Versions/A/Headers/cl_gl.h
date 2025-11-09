@@ -1,5 +1,5 @@
 /**********************************************************************************
- * Copyright (c) 2008-2009 The Khronos Group Inc.
+ * Copyright (c) 2011-2012 The Khronos Group Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and/or associated documentation files (the
@@ -39,15 +39,20 @@ typedef cl_uint     cl_gl_texture_info;
 typedef cl_uint     cl_gl_platform_info;
 typedef struct __GLsync *cl_GLsync;
 
-/* cl_gl_object_type            */
+/* cl_gl_object_type = 0x2000 - 0x200F enum values are currently taken           */
 #define CL_GL_OBJECT_BUFFER                     0x2000
 #define CL_GL_OBJECT_TEXTURE2D                  0x2001
 #define CL_GL_OBJECT_TEXTURE3D                  0x2002
 #define CL_GL_OBJECT_RENDERBUFFER               0x2003
+#define CL_GL_OBJECT_TEXTURE2D_ARRAY            0x200E
+#define CL_GL_OBJECT_TEXTURE1D                  0x200F
+#define CL_GL_OBJECT_TEXTURE1D_ARRAY            0x2010
+#define CL_GL_OBJECT_TEXTURE_BUFFER             0x2011
 
 /* cl_gl_texture_info           */
 #define CL_GL_TEXTURE_TARGET                    0x2004
 #define CL_GL_MIPMAP_LEVEL                      0x2005
+#define CL_GL_NUM_SAMPLES                       0x2006
 
 
 extern CL_API_ENTRY cl_mem CL_API_CALL
@@ -57,21 +62,13 @@ clCreateFromGLBuffer(cl_context     /* context */,
                      int *          /* errcode_ret */) CL_API_SUFFIX__VERSION_1_0;
 
 extern CL_API_ENTRY cl_mem CL_API_CALL
-clCreateFromGLTexture2D(cl_context      /* context */,
-                        cl_mem_flags    /* flags */,
-                        cl_GLenum       /* target */,
-                        cl_GLint        /* miplevel */,
-                        cl_GLuint       /* texture */,
-                        cl_int *        /* errcode_ret */) CL_API_SUFFIX__VERSION_1_0;
-
-extern CL_API_ENTRY cl_mem CL_API_CALL
-clCreateFromGLTexture3D(cl_context      /* context */,
-                        cl_mem_flags    /* flags */,
-                        cl_GLenum       /* target */,
-                        cl_GLint        /* miplevel */,
-                        cl_GLuint       /* texture */,
-                        cl_int *        /* errcode_ret */) CL_API_SUFFIX__VERSION_1_0;
-
+clCreateFromGLTexture(cl_context      /* context */,
+                      cl_mem_flags    /* flags */,
+                      cl_GLenum       /* target */,
+                      cl_GLint        /* miplevel */,
+                      cl_GLuint       /* texture */,
+                      cl_int *        /* errcode_ret */) CL_API_SUFFIX__VERSION_1_2;
+    
 extern CL_API_ENTRY cl_mem CL_API_CALL
 clCreateFromGLRenderbuffer(cl_context   /* context */,
                            cl_mem_flags /* flags */,
@@ -105,6 +102,25 @@ clEnqueueReleaseGLObjects(cl_command_queue      /* command_queue */,
                           cl_uint               /* num_events_in_wait_list */,
                           const cl_event *      /* event_wait_list */,
                           cl_event *            /* event */) CL_API_SUFFIX__VERSION_1_0;
+
+
+extern CL_API_ENTRY cl_mem CL_API_CALL
+clCreateFromGLTexture2D(cl_context      /* context */,
+                        cl_mem_flags    /* flags */,
+                        cl_GLenum       /* target */,
+                        cl_GLint        /* miplevel */,
+                        cl_GLuint       /* texture */,
+                        cl_int *        /* errcode_ret */) CL_EXT_SUFFIX__VERSION_1_1_DEPRECATED;
+
+extern CL_API_ENTRY cl_mem CL_API_CALL
+clCreateFromGLTexture3D(cl_context      /* context */,
+                        cl_mem_flags    /* flags */,
+                        cl_GLenum       /* target */,
+                        cl_GLint        /* miplevel */,
+                        cl_GLuint       /* texture */,
+                        cl_int *        /* errcode_ret */) CL_EXT_SUFFIX__VERSION_1_1_DEPRECATED;
+    
+    
 #ifdef __cplusplus
 }
 #endif

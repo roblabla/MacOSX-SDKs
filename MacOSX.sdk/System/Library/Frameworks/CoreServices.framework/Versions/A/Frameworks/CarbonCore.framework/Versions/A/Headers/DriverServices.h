@@ -2,16 +2,10 @@
      File:       CarbonCore/DriverServices.h
  
      Contains:   Driver Services Interfaces.
+                 The contents of this header file are deprecated.
+                 Use CFAbsoluteTime or mach time routines instead.
  
-     Version:    CarbonCore-960.18~3
- 
-     Copyright:  © 1985-2008 by Apple Computer, Inc., all rights reserved
- 
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
- 
-                     http://developer.apple.com/bugreporter/
- 
+     Copyright:  Â© 1985-2011 by Apple Inc. All rights reserved.
 */
 #ifndef __DRIVERSERVICES__
 #define __DRIVERSERVICES__
@@ -38,7 +32,7 @@
 
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -73,7 +67,7 @@ typedef UnsignedWide                    Nanoseconds;
  *    Non-Carbon CFM:   in InterfaceLib 8.6 and later
  */
 extern AbsoluteTime 
-UpTime(void)                                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+UpTime(void)                                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -96,7 +90,7 @@ UpTime(void)                                                  AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 8.6 and later
  */
 extern Nanoseconds 
-AbsoluteToNanoseconds(AbsoluteTime absoluteTime)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+AbsoluteToNanoseconds(AbsoluteTime absoluteTime)              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -108,7 +102,7 @@ AbsoluteToNanoseconds(AbsoluteTime absoluteTime)              AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 8.6 and later
  */
 extern Duration 
-AbsoluteToDuration(AbsoluteTime absoluteTime)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+AbsoluteToDuration(AbsoluteTime absoluteTime)                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -120,7 +114,7 @@ AbsoluteToDuration(AbsoluteTime absoluteTime)                 AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 8.6 and later
  */
 extern AbsoluteTime 
-NanosecondsToAbsolute(Nanoseconds nanoseconds)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NanosecondsToAbsolute(Nanoseconds nanoseconds)                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -132,7 +126,7 @@ NanosecondsToAbsolute(Nanoseconds nanoseconds)                AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 8.6 and later
  */
 extern AbsoluteTime 
-DurationToAbsolute(Duration duration)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DurationToAbsolute(Duration duration)                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -146,7 +140,7 @@ DurationToAbsolute(Duration duration)                         AVAILABLE_MAC_OS_X
 extern AbsoluteTime 
 AddAbsoluteToAbsolute(
   AbsoluteTime   absoluteTime1,
-  AbsoluteTime   absoluteTime2)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AbsoluteTime   absoluteTime2)                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -160,7 +154,7 @@ AddAbsoluteToAbsolute(
 extern AbsoluteTime 
 SubAbsoluteFromAbsolute(
   AbsoluteTime   leftAbsoluteTime,
-  AbsoluteTime   rightAbsoluteTime)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AbsoluteTime   rightAbsoluteTime)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -174,7 +168,7 @@ SubAbsoluteFromAbsolute(
 extern AbsoluteTime 
 AddNanosecondsToAbsolute(
   Nanoseconds    nanoseconds,
-  AbsoluteTime   absoluteTime)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AbsoluteTime   absoluteTime)                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -188,7 +182,7 @@ AddNanosecondsToAbsolute(
 extern AbsoluteTime 
 AddDurationToAbsolute(
   Duration       duration,
-  AbsoluteTime   absoluteTime)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AbsoluteTime   absoluteTime)                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -202,7 +196,7 @@ AddDurationToAbsolute(
 extern AbsoluteTime 
 SubNanosecondsFromAbsolute(
   Nanoseconds    nanoseconds,
-  AbsoluteTime   absoluteTime)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AbsoluteTime   absoluteTime)                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -216,7 +210,7 @@ SubNanosecondsFromAbsolute(
 extern AbsoluteTime 
 SubDurationFromAbsolute(
   Duration       duration,
-  AbsoluteTime   absoluteTime)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AbsoluteTime   absoluteTime)                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -230,7 +224,7 @@ SubDurationFromAbsolute(
 extern Nanoseconds 
 AbsoluteDeltaToNanoseconds(
   AbsoluteTime   leftAbsoluteTime,
-  AbsoluteTime   rightAbsoluteTime)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AbsoluteTime   rightAbsoluteTime)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -244,7 +238,7 @@ AbsoluteDeltaToNanoseconds(
 extern Duration 
 AbsoluteDeltaToDuration(
   AbsoluteTime   leftAbsoluteTime,
-  AbsoluteTime   rightAbsoluteTime)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AbsoluteTime   rightAbsoluteTime)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -256,7 +250,7 @@ AbsoluteDeltaToDuration(
  *    Non-Carbon CFM:   in InterfaceLib 8.6 and later
  */
 extern Nanoseconds 
-DurationToNanoseconds(Duration theDuration)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DurationToNanoseconds(Duration theDuration)                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -268,7 +262,7 @@ DurationToNanoseconds(Duration theDuration)                   AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 8.6 and later
  */
 extern Duration 
-NanosecondsToDuration(Nanoseconds theNanoseconds)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NanosecondsToDuration(Nanoseconds theNanoseconds)             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 

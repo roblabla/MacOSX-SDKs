@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010 Apple Inc. All rights reserved.
+	Copyright 2010-2012 Apple Inc. All rights reserved.
 
 */
 
@@ -72,6 +72,9 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 /* provides the array of AVCompositionTracks contained by the composition */
 @property (nonatomic, readonly) NSArray *tracks;
 
+/*	indicates the authored size of the visual portion of the composition */
+@property (nonatomic, readonly) CGSize naturalSize;
+
 @end
 
 
@@ -90,9 +93,9 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 /* provides the array of AVMutableCompositionTracks contained by the composition */
 @property (nonatomic, readonly) NSArray *tracks;
 
-/* indicates the encoded or authored size of the visual portion of the asset
-   if not set, the default behavior is as defined by AVAsset
-   set to CGSizeZero to revert to default behavior */
+/* Indicates the authored size of the visual portion of the asset.
+   If not set, the default behavior is to provide the size of the composition's first video track.
+   Set to CGSizeZero to revert to default behavior. */
 @property (nonatomic) CGSize naturalSize;
 
 /*!
@@ -112,7 +115,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 	@param			timeRange
 					Specifies the timeRange of the asset to be inserted.
 	@param			asset
-					Specifies the asset that contains the tracks that are to be inserted.
+					Specifies the asset that contains the tracks that are to be inserted. Only instances of AVURLAsset are supported.
 	@param			startTime
 					Specifies the time at which the inserted tracks are to be presented by the composition.
 	@param			outError

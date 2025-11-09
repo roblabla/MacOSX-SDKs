@@ -22,6 +22,10 @@
     // Returns an array of ABGroup this person belongs to.
     // Returns an empty array if this person doesn't belong to any groups
 
+- (NSArray *)linkedPeople AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
+    // Returns an array of all linked people, including this person.
+    // Returns an array of only this person if this person is not linked.
+
 @end
 
 // ================================================================================

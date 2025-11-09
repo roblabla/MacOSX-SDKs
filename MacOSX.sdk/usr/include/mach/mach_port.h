@@ -425,7 +425,7 @@ kern_return_t mach_port_get_context
 (
 	ipc_space_t task,
 	mach_port_name_t name,
-	mach_vm_address_t *context
+	mach_port_context_t *context
 );
 
 /* Routine mach_port_set_context */
@@ -438,7 +438,7 @@ kern_return_t mach_port_set_context
 (
 	ipc_space_t task,
 	mach_port_name_t name,
-	mach_vm_address_t context
+	mach_port_context_t context
 );
 
 /* Routine mach_port_kobject */
@@ -845,7 +845,7 @@ __END_DECLS
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		mach_port_name_t name;
-		mach_vm_address_t context;
+		mach_port_context_t context;
 	} __Request__mach_port_set_context_t;
 #ifdef  __MigPackStructs
 #pragma pack()
@@ -1272,7 +1272,7 @@ union __RequestUnion__mach_port_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-		mach_vm_address_t context;
+		mach_port_context_t context;
 	} __Reply__mach_port_get_context_t;
 #ifdef  __MigPackStructs
 #pragma pack()

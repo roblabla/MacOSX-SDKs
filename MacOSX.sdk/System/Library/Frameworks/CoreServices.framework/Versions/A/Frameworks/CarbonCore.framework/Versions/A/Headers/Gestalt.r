@@ -2,16 +2,9 @@
      File:       Gestalt.r
  
      Contains:   Gestalt Interfaces.
+                 The contents of this header file are deprecated.
  
-     Version:    CarbonCore-960.18~3
- 
-     Copyright:  © 1988-2008 by Apple Computer, Inc.  All rights reserved
- 
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
- 
-                     http://developer.apple.com/bugreporter/
- 
+     Copyright:  © 1988-2011 by Apple Inc. All rights reserved.
 */
 
 #ifndef __GESTALT_R__

@@ -1,17 +1,19 @@
 /*
-	Copyright:  (c) 2008 by Apple Computer, Inc., all rights reserved.
+	Copyright:	(c) 2008-2012 Apple Inc. All rights reserved.
 */
 
 #ifndef _CGLIOSURFACE_H
 #define _CGLIOSURFACE_H
 
+#include <AvailabilityMacros.h>
 #include <OpenGL/CGLTypes.h>
-#include <IOSurface/IOSurface.h>
-#include <OpenGL/gl.h>
+#include <OpenGL/gltypes.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+typedef struct __IOSurface *IOSurfaceRef;
 
 /*!
             @function  CGLTexImageIOSurface2D

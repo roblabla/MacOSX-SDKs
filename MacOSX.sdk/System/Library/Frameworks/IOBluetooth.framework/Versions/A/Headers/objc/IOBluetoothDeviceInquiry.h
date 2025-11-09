@@ -38,7 +38,10 @@
 	IOBluetoothDeviceSearchAttributes *_searchAttributes;
 	void *							_deviceAttributes;
 
-	__strong void *					_expansion[4];
+    id                              _mReserved;
+    id                              _mUnused000;
+    id                              _mUnused001;
+    id                              _mUnused002;
 
 	id								_delegate;
 

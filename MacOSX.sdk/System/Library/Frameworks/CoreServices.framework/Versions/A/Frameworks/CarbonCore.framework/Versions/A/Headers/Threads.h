@@ -2,16 +2,9 @@
      File:       CarbonCore/Threads.h
  
      Contains:   Thread Manager Interfaces.
+                 The contents of this header file are deprecated.
  
-     Version:    CarbonCore-960.18~3
- 
-     Copyright:  © 1991-2008 by Apple Computer, Inc., all rights reserved.
- 
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
- 
-                     http://developer.apple.com/bugreporter/
- 
+     Copyright:  Â© 1991-2011 by Apple Inc. All rights reserved.
 */
 #ifndef __THREADS__
 #define __THREADS__
@@ -30,7 +23,7 @@
 
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -136,7 +129,7 @@ typedef STACK_UPP_TYPE(DebuggerThreadSchedulerProcPtr)          DebuggerThreadSc
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ThreadEntryUPP
-NewThreadEntryUPP(ThreadEntryProcPtr userRoutine)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+NewThreadEntryUPP(ThreadEntryProcPtr userRoutine)             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  NewThreadSchedulerUPP()
@@ -147,7 +140,7 @@ NewThreadEntryUPP(ThreadEntryProcPtr userRoutine)             AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ThreadSchedulerUPP
-NewThreadSchedulerUPP(ThreadSchedulerProcPtr userRoutine)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+NewThreadSchedulerUPP(ThreadSchedulerProcPtr userRoutine)     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  NewThreadSwitchUPP()
@@ -158,7 +151,7 @@ NewThreadSchedulerUPP(ThreadSchedulerProcPtr userRoutine)     AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ThreadSwitchUPP
-NewThreadSwitchUPP(ThreadSwitchProcPtr userRoutine)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+NewThreadSwitchUPP(ThreadSwitchProcPtr userRoutine)           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  NewThreadTerminationUPP()
@@ -169,7 +162,7 @@ NewThreadSwitchUPP(ThreadSwitchProcPtr userRoutine)           AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ThreadTerminationUPP
-NewThreadTerminationUPP(ThreadTerminationProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+NewThreadTerminationUPP(ThreadTerminationProcPtr userRoutine) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  NewDebuggerNewThreadUPP()
@@ -180,7 +173,7 @@ NewThreadTerminationUPP(ThreadTerminationProcPtr userRoutine) AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern DebuggerNewThreadUPP
-NewDebuggerNewThreadUPP(DebuggerNewThreadProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+NewDebuggerNewThreadUPP(DebuggerNewThreadProcPtr userRoutine) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  NewDebuggerDisposeThreadUPP()
@@ -191,7 +184,7 @@ NewDebuggerNewThreadUPP(DebuggerNewThreadProcPtr userRoutine) AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern DebuggerDisposeThreadUPP
-NewDebuggerDisposeThreadUPP(DebuggerDisposeThreadProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+NewDebuggerDisposeThreadUPP(DebuggerDisposeThreadProcPtr userRoutine) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  NewDebuggerThreadSchedulerUPP()
@@ -202,7 +195,7 @@ NewDebuggerDisposeThreadUPP(DebuggerDisposeThreadProcPtr userRoutine) AVAILABLE_
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern DebuggerThreadSchedulerUPP
-NewDebuggerThreadSchedulerUPP(DebuggerThreadSchedulerProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+NewDebuggerThreadSchedulerUPP(DebuggerThreadSchedulerProcPtr userRoutine) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  DisposeThreadEntryUPP()
@@ -213,7 +206,7 @@ NewDebuggerThreadSchedulerUPP(DebuggerThreadSchedulerProcPtr userRoutine) AVAILA
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeThreadEntryUPP(ThreadEntryUPP userUPP)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+DisposeThreadEntryUPP(ThreadEntryUPP userUPP)                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  DisposeThreadSchedulerUPP()
@@ -224,7 +217,7 @@ DisposeThreadEntryUPP(ThreadEntryUPP userUPP)                 AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeThreadSchedulerUPP(ThreadSchedulerUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+DisposeThreadSchedulerUPP(ThreadSchedulerUPP userUPP)         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  DisposeThreadSwitchUPP()
@@ -235,7 +228,7 @@ DisposeThreadSchedulerUPP(ThreadSchedulerUPP userUPP)         AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeThreadSwitchUPP(ThreadSwitchUPP userUPP)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+DisposeThreadSwitchUPP(ThreadSwitchUPP userUPP)               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  DisposeThreadTerminationUPP()
@@ -246,7 +239,7 @@ DisposeThreadSwitchUPP(ThreadSwitchUPP userUPP)               AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeThreadTerminationUPP(ThreadTerminationUPP userUPP)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+DisposeThreadTerminationUPP(ThreadTerminationUPP userUPP)     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  DisposeDebuggerNewThreadUPP()
@@ -257,7 +250,7 @@ DisposeThreadTerminationUPP(ThreadTerminationUPP userUPP)     AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeDebuggerNewThreadUPP(DebuggerNewThreadUPP userUPP)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+DisposeDebuggerNewThreadUPP(DebuggerNewThreadUPP userUPP)     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  DisposeDebuggerDisposeThreadUPP()
@@ -268,7 +261,7 @@ DisposeDebuggerNewThreadUPP(DebuggerNewThreadUPP userUPP)     AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeDebuggerDisposeThreadUPP(DebuggerDisposeThreadUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+DisposeDebuggerDisposeThreadUPP(DebuggerDisposeThreadUPP userUPP) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  DisposeDebuggerThreadSchedulerUPP()
@@ -279,7 +272,7 @@ DisposeDebuggerDisposeThreadUPP(DebuggerDisposeThreadUPP userUPP) AVAILABLE_MAC_
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeDebuggerThreadSchedulerUPP(DebuggerThreadSchedulerUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+DisposeDebuggerThreadSchedulerUPP(DebuggerThreadSchedulerUPP userUPP) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  InvokeThreadEntryUPP()
@@ -292,7 +285,7 @@ DisposeDebuggerThreadSchedulerUPP(DebuggerThreadSchedulerUPP userUPP) AVAILABLE_
 extern voidPtr
 InvokeThreadEntryUPP(
   void *          threadParam,
-  ThreadEntryUPP  userUPP)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  ThreadEntryUPP  userUPP)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  InvokeThreadSchedulerUPP()
@@ -305,7 +298,7 @@ InvokeThreadEntryUPP(
 extern ThreadID
 InvokeThreadSchedulerUPP(
   SchedulerInfoRecPtr  schedulerInfo,
-  ThreadSchedulerUPP   userUPP)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  ThreadSchedulerUPP   userUPP)                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  InvokeThreadSwitchUPP()
@@ -319,7 +312,7 @@ extern void
 InvokeThreadSwitchUPP(
   ThreadID         threadBeingSwitched,
   void *           switchProcParam,
-  ThreadSwitchUPP  userUPP)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  ThreadSwitchUPP  userUPP)                                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  InvokeThreadTerminationUPP()
@@ -333,7 +326,7 @@ extern void
 InvokeThreadTerminationUPP(
   ThreadID              threadTerminated,
   void *                terminationProcParam,
-  ThreadTerminationUPP  userUPP)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  ThreadTerminationUPP  userUPP)                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  InvokeDebuggerNewThreadUPP()
@@ -346,7 +339,7 @@ InvokeThreadTerminationUPP(
 extern void
 InvokeDebuggerNewThreadUPP(
   ThreadID              threadCreated,
-  DebuggerNewThreadUPP  userUPP)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  DebuggerNewThreadUPP  userUPP)                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  InvokeDebuggerDisposeThreadUPP()
@@ -359,7 +352,7 @@ InvokeDebuggerNewThreadUPP(
 extern void
 InvokeDebuggerDisposeThreadUPP(
   ThreadID                  threadDeleted,
-  DebuggerDisposeThreadUPP  userUPP)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  DebuggerDisposeThreadUPP  userUPP)                          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  InvokeDebuggerThreadSchedulerUPP()
@@ -372,7 +365,7 @@ InvokeDebuggerDisposeThreadUPP(
 extern ThreadID
 InvokeDebuggerThreadSchedulerUPP(
   SchedulerInfoRecPtr         schedulerInfo,
-  DebuggerThreadSchedulerUPP  userUPP)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  DebuggerThreadSchedulerUPP  userUPP)                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 #if __MACH__
   #ifdef __cplusplus
@@ -455,7 +448,7 @@ NewThread(
   Size             stackSize,
   ThreadOptions    options,
   void **          threadResult,       /* can be NULL */
-  ThreadID *       threadMade)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  ThreadID *       threadMade)                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -467,7 +460,7 @@ NewThread(
  *    Non-Carbon CFM:   in ThreadsLib 1.0 and later
  */
 extern OSErr 
-SetThreadScheduler(ThreadSchedulerTPP threadScheduler)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+SetThreadScheduler(ThreadSchedulerTPP threadScheduler)        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -483,7 +476,7 @@ SetThreadSwitcher(
   ThreadID          thread,
   ThreadSwitchTPP   threadSwitcher,
   void *            switchProcParam,
-  Boolean           inOrOut)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  Boolean           inOrOut)                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -498,7 +491,7 @@ extern OSErr
 SetThreadTerminator(
   ThreadID               thread,
   ThreadTerminationTPP   threadTerminator,
-  void *                 terminationProcParam)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  void *                 terminationProcParam)                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -513,7 +506,7 @@ extern OSErr
 SetDebuggerNotificationProcs(
   DebuggerNewThreadTPP         notifyNewThread,
   DebuggerDisposeThreadTPP     notifyDisposeThread,
-  DebuggerThreadSchedulerTPP   notifyThreadScheduler)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  DebuggerThreadSchedulerTPP   notifyThreadScheduler)         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -528,7 +521,7 @@ extern OSErr
 CreateThreadPool(
   ThreadStyle   threadStyle,
   SInt16        numToCreate,
-  Size          stackSize)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  Size          stackSize)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -542,7 +535,7 @@ CreateThreadPool(
 extern OSErr 
 GetDefaultThreadStackSize(
   ThreadStyle   threadStyle,
-  Size *        stackSize)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  Size *        stackSize)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -556,7 +549,7 @@ GetDefaultThreadStackSize(
 extern OSErr 
 ThreadCurrentStackSpace(
   ThreadID     thread,
-  ByteCount *  freeStack)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  ByteCount *  freeStack)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -571,7 +564,7 @@ extern OSErr
 DisposeThread(
   ThreadID   threadToDump,
   void *     threadResult,
-  Boolean    recycleThread)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  Boolean    recycleThread)                                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -583,7 +576,7 @@ DisposeThread(
  *    Non-Carbon CFM:   in ThreadsLib 1.0 and later
  */
 extern OSErr 
-YieldToThread(ThreadID suggestedThread)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+YieldToThread(ThreadID suggestedThread)                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -595,7 +588,7 @@ YieldToThread(ThreadID suggestedThread)                       AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in ThreadsLib 1.0 and later
  */
 extern OSErr 
-YieldToAnyThread(void)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+YieldToAnyThread(void)                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -610,7 +603,7 @@ YieldToAnyThread(void)                                        AVAILABLE_MAC_OS_X
     #define MacGetCurrentThread GetCurrentThread
 #endif
 extern OSErr 
-MacGetCurrentThread(ThreadID * currentThreadID)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+MacGetCurrentThread(ThreadID * currentThreadID)               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -624,7 +617,7 @@ MacGetCurrentThread(ThreadID * currentThreadID)               AVAILABLE_MAC_OS_X
 extern OSErr 
 GetThreadState(
   ThreadID       threadToGet,
-  ThreadState *  threadState)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  ThreadState *  threadState)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -639,7 +632,7 @@ extern OSErr
 SetThreadState(
   ThreadID      threadToSet,
   ThreadState   newState,
-  ThreadID      suggestedThread)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  ThreadID      suggestedThread)                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -654,7 +647,7 @@ extern OSErr
 SetThreadStateEndCritical(
   ThreadID      threadToSet,
   ThreadState   newState,
-  ThreadID      suggestedThread)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  ThreadID      suggestedThread)                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -666,7 +659,7 @@ SetThreadStateEndCritical(
  *    Non-Carbon CFM:   in ThreadsLib 1.0 and later
  */
 extern OSErr 
-ThreadBeginCritical(void)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+ThreadBeginCritical(void)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -678,7 +671,7 @@ ThreadBeginCritical(void)                                     AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in ThreadsLib 1.0 and later
  */
 extern OSErr 
-ThreadEndCritical(void)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+ThreadEndCritical(void)                                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -690,7 +683,7 @@ ThreadEndCritical(void)                                       AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in ThreadsLib 1.0 and later
  */
 extern OSErr 
-GetThreadCurrentTaskRef(ThreadTaskRef * threadTRef)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+GetThreadCurrentTaskRef(ThreadTaskRef * threadTRef)           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -705,7 +698,7 @@ extern OSErr
 GetThreadStateGivenTaskRef(
   ThreadTaskRef   threadTRef,
   ThreadID        threadToGet,
-  ThreadState *   threadState)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  ThreadState *   threadState)                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -719,7 +712,7 @@ GetThreadStateGivenTaskRef(
 extern OSErr 
 SetThreadReadyGivenTaskRef(
   ThreadTaskRef   threadTRef,
-  ThreadID        threadToSet)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+  ThreadID        threadToSet)                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 #if !__LP64__
@@ -735,7 +728,7 @@ SetThreadReadyGivenTaskRef(
 extern OSErr 
 GetFreeThreadCount(
   ThreadStyle   threadStyle,
-  SInt16 *      freeCount)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
+  SInt16 *      freeCount)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_3, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This routine was never implemented on Mac OS X.*/
@@ -751,7 +744,7 @@ extern OSErr
 GetSpecificFreeThreadCount(
   ThreadStyle   threadStyle,
   Size          stackSize,
-  SInt16 *      freeCount)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
+  SInt16 *      freeCount)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_3, __IPHONE_NA, __IPHONE_NA);
 
 
 #endif  /* !__LP64__ */

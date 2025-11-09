@@ -2,16 +2,10 @@
      File:       CarbonCore/MacMemory.h
  
      Contains:   Memory Manager Interfaces.
+                 The contents of this header file are deprecated.
+                 Use malloc, free, etc instead.
  
-     Version:    CarbonCore-960.18~3
- 
-     Copyright:  © 1985-2008 by Apple Computer, Inc., all rights reserved
- 
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
- 
-                     http://developer.apple.com/bugreporter/
- 
+     Copyright:  © 1985-2011 by Apple Inc. All rights reserved.
 */
 #ifndef __MACMEMORY__
 #define __MACMEMORY__
@@ -27,7 +21,7 @@
 
 #include <strings.h>
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -167,7 +161,7 @@ typedef VolumeVirtualMemoryInfo *       VolumeVirtualMemoryInfoPtr;
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern GrowZoneUPP
-NewGrowZoneUPP(GrowZoneProcPtr userRoutine)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+NewGrowZoneUPP(GrowZoneProcPtr userRoutine)                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  NewPurgeUPP()
@@ -178,7 +172,7 @@ NewGrowZoneUPP(GrowZoneProcPtr userRoutine)                   AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern PurgeUPP
-NewPurgeUPP(PurgeProcPtr userRoutine)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+NewPurgeUPP(PurgeProcPtr userRoutine)                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  NewUserFnUPP()
@@ -189,7 +183,7 @@ NewPurgeUPP(PurgeProcPtr userRoutine)                         AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern UserFnUPP
-NewUserFnUPP(UserFnProcPtr userRoutine)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+NewUserFnUPP(UserFnProcPtr userRoutine)                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  DisposeGrowZoneUPP()
@@ -200,7 +194,7 @@ NewUserFnUPP(UserFnProcPtr userRoutine)                       AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeGrowZoneUPP(GrowZoneUPP userUPP)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+DisposeGrowZoneUPP(GrowZoneUPP userUPP)                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  DisposePurgeUPP()
@@ -211,7 +205,7 @@ DisposeGrowZoneUPP(GrowZoneUPP userUPP)                       AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposePurgeUPP(PurgeUPP userUPP)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+DisposePurgeUPP(PurgeUPP userUPP)                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  DisposeUserFnUPP()
@@ -222,7 +216,7 @@ DisposePurgeUPP(PurgeUPP userUPP)                             AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeUserFnUPP(UserFnUPP userUPP)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+DisposeUserFnUPP(UserFnUPP userUPP)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  InvokeGrowZoneUPP()
@@ -235,7 +229,7 @@ DisposeUserFnUPP(UserFnUPP userUPP)                           AVAILABLE_MAC_OS_X
 extern long
 InvokeGrowZoneUPP(
   Size         cbNeeded,
-  GrowZoneUPP  userUPP)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  GrowZoneUPP  userUPP)                                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  InvokePurgeUPP()
@@ -248,7 +242,7 @@ InvokeGrowZoneUPP(
 extern void
 InvokePurgeUPP(
   Handle    blockToPurge,
-  PurgeUPP  userUPP)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  PurgeUPP  userUPP)                                          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  InvokeUserFnUPP()
@@ -261,7 +255,7 @@ InvokePurgeUPP(
 extern void
 InvokeUserFnUPP(
   void *     parameter,
-  UserFnUPP  userUPP)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  UserFnUPP  userUPP)                                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 #if __MACH__
   #ifdef __cplusplus
@@ -333,7 +327,7 @@ InvokeUserFnUPP(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-MemError(void)                                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MemError(void)                                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -384,7 +378,7 @@ MemError(void)                                                AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern SInt16 
-LMGetMemErr(void)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+LMGetMemErr(void)                                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -411,7 +405,7 @@ LMGetMemErr(void)                                             AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-LMSetMemErr(SInt16 value)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+LMSetMemErr(SInt16 value)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -454,7 +448,7 @@ LMSetMemErr(SInt16 value)                                     AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Handle 
-NewHandle(Size byteCount)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewHandle(Size byteCount)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -496,7 +490,7 @@ NewHandle(Size byteCount)                                     AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Handle 
-NewHandleClear(Size byteCount)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewHandleClear(Size byteCount)                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -535,7 +529,7 @@ NewHandleClear(Size byteCount)                                AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Handle 
-RecoverHandle(Ptr p)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+RecoverHandle(Ptr p)                                          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -571,7 +565,7 @@ RecoverHandle(Ptr p)                                          AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Ptr 
-NewPtr(Size byteCount)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewPtr(Size byteCount)                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -608,7 +602,7 @@ NewPtr(Size byteCount)                                        AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Ptr 
-NewPtrClear(Size byteCount)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewPtrClear(Size byteCount)                                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 #if !__LP64__
@@ -634,7 +628,7 @@ NewPtrClear(Size byteCount)                                   AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern long 
-MaxBlock(void)                                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+MaxBlock(void)                                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -652,7 +646,7 @@ MaxBlock(void)                                                AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern long 
-StackSpace(void)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+StackSpace(void)                                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 #endif  /* !__LP64__ */
@@ -679,7 +673,7 @@ StackSpace(void)                                              AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Handle 
-NewEmptyHandle(void)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewEmptyHandle(void)                                          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -728,7 +722,7 @@ NewEmptyHandle(void)                                          AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-HLock(Handle h)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+HLock(Handle h)                                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -761,7 +755,7 @@ HLock(Handle h)                                               AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-HLockHi(Handle h)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+HLockHi(Handle h)                                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -794,7 +788,7 @@ HLockHi(Handle h)                                             AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-HUnlock(Handle h)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+HUnlock(Handle h)                                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 #if !__LP64__
@@ -836,7 +830,7 @@ HUnlock(Handle h)                                             AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-HPurge(Handle h)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+HPurge(Handle h)                                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -865,7 +859,7 @@ HPurge(Handle h)                                              AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-HNoPurge(Handle h)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+HNoPurge(Handle h)                                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 #endif  /* !__LP64__ */
@@ -920,7 +914,7 @@ HNoPurge(Handle h)                                            AVAILABLE_MAC_OS_X
 extern Handle 
 TempNewHandle(
   Size     logicalSize,
-  OSErr *  resultCode)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSErr *  resultCode)                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 #if !__LP64__
@@ -950,7 +944,7 @@ TempNewHandle(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Size 
-TempMaxMem(Size * grow)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+TempMaxMem(Size * grow)                                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -975,7 +969,7 @@ TempMaxMem(Size * grow)                                       AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern long 
-TempFreeMem(void)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+TempFreeMem(void)                                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -999,7 +993,7 @@ TempFreeMem(void)                                             AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Size 
-CompactMem(Size cbNeeded)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+CompactMem(Size cbNeeded)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1023,7 +1017,7 @@ CompactMem(Size cbNeeded)                                     AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-PurgeMem(Size cbNeeded)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+PurgeMem(Size cbNeeded)                                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1047,7 +1041,7 @@ PurgeMem(Size cbNeeded)                                       AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern long 
-FreeMem(void)                                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+FreeMem(void)                                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1076,7 +1070,7 @@ FreeMem(void)                                                 AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Size 
-MaxMem(Size * grow)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+MaxMem(Size * grow)                                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1103,7 +1097,7 @@ MaxMem(Size * grow)                                           AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-SetGrowZone(GrowZoneUPP growZone)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+SetGrowZone(GrowZoneUPP growZone)                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1125,7 +1119,7 @@ SetGrowZone(GrowZoneUPP growZone)                             AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern GrowZoneUPP 
-GetGrowZone(void)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+GetGrowZone(void)                                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1156,7 +1150,7 @@ GetGrowZone(void)                                             AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-MoveHHi(Handle h)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+MoveHHi(Handle h)                                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 #endif  /* !__LP64__ */
@@ -1191,7 +1185,7 @@ MoveHHi(Handle h)                                             AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-DisposePtr(Ptr p)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposePtr(Ptr p)                                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1224,7 +1218,7 @@ DisposePtr(Ptr p)                                             AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Size 
-GetPtrSize(Ptr p)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetPtrSize(Ptr p)                                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1241,7 +1235,7 @@ GetPtrSize(Ptr p)                                             AVAILABLE_MAC_OS_X
 extern void 
 SetPtrSize(
   Ptr    p,
-  Size   newSize)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Size   newSize)                                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1281,7 +1275,7 @@ SetPtrSize(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-DisposeHandle(Handle h)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeHandle(Handle h)                                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1326,7 +1320,7 @@ DisposeHandle(Handle h)                                       AVAILABLE_MAC_OS_X
 extern void 
 SetHandleSize(
   Handle   h,
-  Size     newSize)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Size     newSize)                                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1359,7 +1353,7 @@ SetHandleSize(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Size 
-GetHandleSize(Handle h)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetHandleSize(Handle h)                                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1403,7 +1397,7 @@ GetHandleSize(Handle h)                                       AVAILABLE_MAC_OS_X
 extern void 
 ReallocateHandle(
   Handle   h,
-  Size     byteCount)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Size     byteCount)                                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1449,7 +1443,7 @@ ReallocateHandle(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-EmptyHandle(Handle h)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+EmptyHandle(Handle h)                                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1467,7 +1461,7 @@ EmptyHandle(Handle h)                                         AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-HSetRBit(Handle h)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+HSetRBit(Handle h)                                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1485,7 +1479,7 @@ HSetRBit(Handle h)                                            AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-HClrRBit(Handle h)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+HClrRBit(Handle h)                                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1541,7 +1535,7 @@ HClrRBit(Handle h)                                            AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern SInt8 
-HGetState(Handle h)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+HGetState(Handle h)                                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1574,7 +1568,7 @@ HGetState(Handle h)                                           AVAILABLE_MAC_OS_X
 extern void 
 HSetState(
   Handle   h,
-  SInt8    flags)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt8    flags)                                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*****************************************************************************
@@ -1697,7 +1691,7 @@ HSetState(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-HandToHand(Handle * theHndl)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+HandToHand(Handle * theHndl)                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1735,7 +1729,7 @@ extern OSErr
 PtrToXHand(
   const void *  srcPtr,
   Handle        dstHndl,
-  long          size)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long          size)                                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1778,7 +1772,7 @@ extern OSErr
 PtrToHand(
   const void *  srcPtr,
   Handle *      dstHndl,
-  long          size)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long          size)                                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1827,7 +1821,7 @@ PtrToHand(
 extern OSErr 
 HandAndHand(
   Handle   hand1,
-  Handle   hand2)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle   hand2)                                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1870,7 +1864,7 @@ extern OSErr
 PtrAndHand(
   const void *  ptr1,
   Handle        hand2,
-  long          size)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long          size)                                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 #if !__LP64__
@@ -1890,7 +1884,7 @@ PtrAndHand(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-MoreMasters(void)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+MoreMasters(void)                                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1914,7 +1908,7 @@ MoreMasters(void)                                             AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern void 
-MoreMasterPointers(UInt32 inCount)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+MoreMasterPointers(UInt32 inCount)                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*  Temporary Memory routines renamed, but obsolete, in System 7.0 and later.  */
@@ -1936,7 +1930,7 @@ MoreMasterPointers(UInt32 inCount)                            AVAILABLE_MAC_OS_X
 extern void 
 TempHLock(
   Handle   h,
-  OSErr *  resultCode)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  OSErr *  resultCode)                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1957,7 +1951,7 @@ TempHLock(
 extern void 
 TempHUnlock(
   Handle   h,
-  OSErr *  resultCode)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  OSErr *  resultCode)                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1978,7 +1972,7 @@ TempHUnlock(
 extern void 
 TempDisposeHandle(
   Handle   h,
-  OSErr *  resultCode)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  OSErr *  resultCode)                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1997,7 +1991,7 @@ TempDisposeHandle(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Ptr 
-TempTopMem(void)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+TempTopMem(void)                                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -2024,7 +2018,7 @@ TempTopMem(void)                                              AVAILABLE_MAC_OS_X
 extern OSErr 
 HoldMemory(
   void *          address,
-  unsigned long   count)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  unsigned long   count)                                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -2045,7 +2039,7 @@ HoldMemory(
 extern OSErr 
 UnholdMemory(
   void *          address,
-  unsigned long   count)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  unsigned long   count)                                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -2074,7 +2068,7 @@ UnholdMemory(
 extern OSErr 
 MakeMemoryResident(
   void *          address,
-  unsigned long   count)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  unsigned long   count)                                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -2103,7 +2097,7 @@ MakeMemoryResident(
 extern OSErr 
 ReleaseMemoryData(
   void *          address,
-  unsigned long   count)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  unsigned long   count)                                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -2132,7 +2126,7 @@ ReleaseMemoryData(
 extern OSErr 
 MakeMemoryNonResident(
   void *          address,
-  unsigned long   count)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  unsigned long   count)                                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -2161,7 +2155,7 @@ MakeMemoryNonResident(
 extern OSErr 
 FlushMemory(
   void *          address,
-  unsigned long   count)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  unsigned long   count)                                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -2180,7 +2174,7 @@ FlushMemory(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Handle 
-GZSaveHnd(void)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+GZSaveHnd(void)                                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -2198,7 +2192,7 @@ GZSaveHnd(void)                                               AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Ptr 
-TopMem(void)                                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+TopMem(void)                                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -2216,7 +2210,7 @@ TopMem(void)                                                  AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-ReserveMem(Size cbNeeded)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+ReserveMem(Size cbNeeded)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -2246,7 +2240,7 @@ ReserveMem(Size cbNeeded)                                     AVAILABLE_MAC_OS_X
 extern void 
 PurgeSpace(
   long *  total,
-  long *  contig)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  long *  contig)                                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -2269,7 +2263,7 @@ PurgeSpace(
  *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
 extern long 
-PurgeSpaceTotal(void)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+PurgeSpaceTotal(void)                                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -2292,7 +2286,7 @@ PurgeSpaceTotal(void)                                         AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
 extern long 
-PurgeSpaceContiguous(void)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+PurgeSpaceContiguous(void)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -2314,7 +2308,7 @@ PurgeSpaceContiguous(void)                                    AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern Boolean 
-CheckAllHeaps(void)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+CheckAllHeaps(void)                                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 #endif  /* !__LP64__ */
@@ -2334,7 +2328,7 @@ CheckAllHeaps(void)                                           AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern Boolean 
-IsHeapValid(void)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+IsHeapValid(void)                                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /* It is invalid to pass a NULL or an empty Handle to IsHandleValid */
@@ -2350,7 +2344,7 @@ IsHeapValid(void)                                             AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern Boolean 
-IsHandleValid(Handle h)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+IsHandleValid(Handle h)                                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /* It is invalid to pass a NULL Pointer to IsPointerValid */
@@ -2366,7 +2360,7 @@ IsHandleValid(Handle h)                                       AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern Boolean 
-IsPointerValid(Ptr p)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+IsPointerValid(Ptr p)                                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 #if !__LP64__
@@ -2403,7 +2397,7 @@ IsPointerValid(Ptr p)                                         AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern THz 
-LMGetSysZone(void)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+LMGetSysZone(void)                                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -2421,7 +2415,7 @@ LMGetSysZone(void)                                            AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-LMSetSysZone(THz value)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+LMSetSysZone(THz value)                                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -2439,7 +2433,7 @@ LMSetSysZone(THz value)                                       AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern THz 
-LMGetApplZone(void)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+LMGetApplZone(void)                                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -2457,7 +2451,7 @@ LMGetApplZone(void)                                           AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-LMSetApplZone(THz value)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+LMSetApplZone(THz value)                                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 

@@ -32,8 +32,6 @@
 
 @interface DOMFile : DOMBlob
 @property(readonly, copy) NSString *name;
-@property(readonly, copy) NSString *fileName;
-@property(readonly) unsigned long long fileSize;
 @end
 
 #endif

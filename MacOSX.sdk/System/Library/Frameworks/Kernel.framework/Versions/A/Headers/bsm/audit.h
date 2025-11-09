@@ -305,25 +305,6 @@ typedef	struct au_evclass_map	au_evclass_map_t;
 /*
  * Audit system calls.
  */
-#if !defined(_KERNEL) && !defined(KERNEL)
-int	audit(const void *, int);
-int	auditon(int, void *, int);
-int	auditctl(const char *);
-int	getauid(au_id_t *);
-int	setauid(const au_id_t *);
-int	getaudit(struct auditinfo *);
-int	setaudit(const struct auditinfo *);
-int	getaudit_addr(struct auditinfo_addr *, int);
-int	setaudit_addr(const struct auditinfo_addr *, int);
-
-#ifdef __APPLE_API_PRIVATE
-#include <mach/port.h>
-mach_port_name_t audit_session_self(void);
-au_asid_t	 audit_session_join(mach_port_name_t port);
-int		 audit_session_port(au_asid_t asid, mach_port_name_t *portname);
-#endif /* __APPLE_API_PRIVATE */
-
-#endif /* defined(_KERNEL) || defined(KERNEL) */
 
 __END_DECLS
 

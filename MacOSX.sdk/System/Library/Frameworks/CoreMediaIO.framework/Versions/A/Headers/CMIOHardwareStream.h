@@ -3,7 +3,7 @@
 
     Contains:   API for communicating with CoreMediaIO hardware
 
-    Copyright:  © 2005-2010 by Apple Inc., all rights reserved.
+    Copyright:  © 2005-2011 by Apple Inc., all rights reserved.
 */
 
 
@@ -26,6 +26,7 @@
 #include <CoreMediaIO/CMIOHardwareObject.h>
 #include <CoreMedia/CMTime.h>
 #include <CoreMedia/CMSimpleQueue.h>
+#include <CoreMedia/CMSampleBuffer.h>
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -271,8 +272,12 @@ enum
                         An CFArray of CMFormatDescriptionRefs that describe the available still image data formats for the CMIOStream. The client must release the CFArray when done with
                         it. This property is never settable, and is not present for streams which are unable to produce still images.
     @constant       kCMIOStreamPropertyFrameRate
-                        A Float64 that indicates the current video frame rate of the CMIOStream. This property is only present for muxed or video streams which can determine their rate. 
-    @constant       kCMIOStreamPropertyFrameRates
+                        A Float64 that indicates the current video frame rate of the CMIOStream. The frame rate might fall below this, but it will not exceed it. This property is only present
+						for muxed or video streams which can determine their rate. 
+     @constant       kCMIOStreamPropertyMinimumFrameRate
+                        A Float64 that indicates the minumum video frame rate of the CMIOStream. This property is only present for muxed or video streams which can determine their rate and 
+                        guarantee a minimum rate.
+   @constant       kCMIOStreamPropertyFrameRates
                         An array of Float64s that indicates the valid values for the video frame rate of the CMIOStream. This property is only present for muxed or video streams which can
                         determine their rate. Moreover, it is limited to the rates that correspond to a single CMFormatDescriptionRef, as opposed to the super set of rates that would be
                         associated with the full set of available CMFormatDescriptionRefs.
@@ -303,7 +308,7 @@ enum
                         A UInt32 that allows a client to control how many buffers should be accumulated before actually starting to pass them onto the stream. Default value is to use
                         1/2 of the kCMIOStreamPropertyOutputBufferQueueSize.
     @constant       kCMIOStreamPropertyFirstOutputPresentationTimeStamp
-                        A CMTime that specifies the presentation timestamp for the first buffer sent to a device;  used for startup sync. This property is never settable.
+                        A CMTime that specifies the presentation timestamp for the first buffer sent to a device; used for startup sync. This property is never settable.
     @constant       kCMIOStreamPropertyEndOfData
                         A UInt32 where a value of 1 means that the stream has reached the end of its data and a value of 0 means that more data is available.
     @constant       kCMIOStreamPropertyClock
@@ -323,6 +328,13 @@ enum
                         A UInt32 value that indicates whether the deck is being controlled locally or remotely. 1 indicates local mode, 0 indicates remote mode. This property is never settable.
     @constant       kCMIOStreamPropertyDeckCueing
                         A SInt32 value that represents the current cueing status of the deck being controlled. 0 = cueing, 1 = cue complete, -1 = cue failed. This property is never settable.
+    @constant       kCMIOStreamPropertyInitialPresentationTimeStampForLinkedAndSyncedAudio
+                        A presentation timestamp to be used for a given AudioTimeStamp that was received for audio from the linked and synced CoreAudio audio device that is specified
+                        by kCMIOStreamPropertyLinkedAndSyncedCoreAudioDeviceUID.  The AudioTimeStamp is passed as the qualifier data.  If the DAL device isn't yet read to return a
+                        valid time, it should return kCMTimeInvalid. (CMTime)
+    @constant       kCMIOStreamPropertyScheduledOutputNotificationProc
+                        A procedure to be called when the stream determines when a buffer was output.  The procedure and a reference constant are specified by
+                        a CMIOStreamScheduledOutputNotificationProcAndRefCon structure.
 */
 enum
 {
@@ -335,6 +347,7 @@ enum
     kCMIOStreamPropertyStillImage                       = 'stmg',
     kCMIOStreamPropertyStillImageFormatDescriptions     = 'stft',
     kCMIOStreamPropertyFrameRate                        = 'nfrt',
+    kCMIOStreamPropertyMinimumFrameRate                 = 'mfrt',
     kCMIOStreamPropertyFrameRates                       = 'nfr#',
     kCMIOStreamPropertyNoDataTimeoutInMSec              = 'pmn1',
     kCMIOStreamPropertyDeviceSyncTimeoutInMSec          = 'pmn2',
@@ -352,7 +365,9 @@ enum
     kCMIOStreamPropertyDeckDropness                     = 'drop',
     kCMIOStreamPropertyDeckThreaded                     = 'thrd',
     kCMIOStreamPropertyDeckLocal                        = 'locl',
-    kCMIOStreamPropertyDeckCueing                       = 'cuec'
+    kCMIOStreamPropertyDeckCueing                       = 'cuec',
+    kCMIOStreamPropertyInitialPresentationTimeStampForLinkedAndSyncedAudio = 'ipls',
+    kCMIOStreamPropertyScheduledOutputNotificationProc  = 'sonp'
 };
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -447,7 +462,7 @@ CMIOStreamDeckCueTo(    CMIOStreamID    streamID,
     @param          numberOfEventsForRateSmoothing
                         The number of events to use for rate smoothing; must be > 0.
     @param          numberOfAveragesForRateSmoothing
-                        The number of averages used for rate smoothing;  if 0, the CA HAL smoothing algorithm is used.
+                        The number of averages used for rate smoothing; if 0, the CA HAL smoothing algorithm is used.
     @param          clock
                         Receives the created clock. When the clock is no longer needed, CMIOStreamClockInvalidate should be called, followed by CFRelease.
     @result         An OSStatus indicating success or failure.
@@ -460,20 +475,6 @@ CMIOStreamClockCreate(  CFAllocatorRef  allocator,
                         UInt32          numberOfEventsForRateSmoothing,
                         UInt32          numberOfAveragesForRateSmoothing,
                         CFTypeRef*      clock)                                                                                            AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
-
-
-/*!
-    @function       CMIOStreamClockInvalidate
-    @abstract       Indicates that a clock is no longer valid.
-    @discussion     Since a CMIO Stream Clock is a reference counted object, it may be retained by clients for longer than its valid (for example, the device is stopped). When a device is no
-                    longer going to be posting events for a clock, it needs to call this routine, followed by CFRelease. After this point, any clients that query the clock for the current
-                    time will get kCMTimeInvalid.
-    @param          clock
-                        The CMIO Stream Clock returned by CMIOStreamClockCreate.
-    @result         An OSStatus indicating success or failure.
-*/
-extern OSStatus
-CMIOStreamClockInvalidate(CFTypeRef clock)                                                                                                AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 
 /*!
@@ -500,6 +501,19 @@ CMIOStreamClockPostTimingEvent( CMTime      eventTime,
 
 
 /*!
+    @function       CMIOStreamClockInvalidate
+    @abstract       Indicates that a clock is no longer valid.
+    @discussion     Since a CMIO Stream Clock is a reference counted object, it may be retained by clients for longer than its valid (for example, the device is stopped). When a device is no
+                    longer going to be posting events for a clock, it needs to call this routine, followed by CFRelease. After this point, any clients that query the clock for the current
+                    time will get kCMTimeInvalid.
+    @param          clock
+                        The CMIO Stream Clock returned by CMIOStreamClockCreate.
+    @result         An OSStatus indicating success or failure.
+*/
+extern OSStatus
+CMIOStreamClockInvalidate(CFTypeRef clock)                                                                                                AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+
+/*!
     @function       CMIOStreamClockConvertHostTimeToDeviceTime
     @abstract       Converts a host time value to the equivalent time on a device's clock.
     @param          hostTime
@@ -511,7 +525,40 @@ CMIOStreamClockPostTimingEvent( CMTime      eventTime,
 extern CMTime
 CMIOStreamClockConvertHostTimeToDeviceTime( UInt64      hostTime,
                                             CFTypeRef   clock)                                                                            AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
-    
+
+
+/*!
+    @typedef    CMIOStreamScheduledOutputNotificationProc
+    @discussion Callback used to notify a client when a buffer was output.
+*/
+/*!
+    @typedef        CMIOStreamScheduledOutputNotificationProc
+    @abstract       Clients register a CMIOStreamScheduledOutputNotificationProc using kCMIOStreamPropertyScheduledOutputNotificationProc.
+                    The procedure is called when the stream determines when a particular buffer was output.
+    @param          sequenceNumberOfBufferThatWasOutput
+                        The sequence number of the buffer that was output
+    @param          outputHostTime
+                        The host time that buffer was output
+    @param          scheduledOutputNotificationRefCon
+                        A pointer to client data, established when the proc was registered using kCMIOStreamPropertyScheduledOutputNotificationProc
+*/
+typedef void (*CMIOStreamScheduledOutputNotificationProc)(UInt64 sequenceNumberOfBufferThatWasOutput, UInt64 outputHostTime, void* scheduledOutputNotificationRefCon);
+
+
+/*!
+    @struct     CMIOStreamScheduledOutputNotificationProcAndRefCon
+    @discussion The payload for kCMIOStreamPropertyScheduledOutputNotificationProc.
+    @field      scheduledOutputNotificationProc
+                    The procedure to call when a buffer was output
+    @field      scheduledOutputNotificationRefCon
+                    A pointer to client data that will be passed to the scheduledOutputNotificationProc
+*/
+struct CMIOStreamScheduledOutputNotificationProcAndRefCon {
+    CMIOStreamScheduledOutputNotificationProc   scheduledOutputNotificationProc;
+    void*                                       scheduledOutputNotificationRefCon;
+};
+typedef struct CMIOStreamScheduledOutputNotificationProcAndRefCon CMIOStreamScheduledOutputNotificationProcAndRefCon;
+
 #pragma pack(pop)
     
 #if defined(__cplusplus)

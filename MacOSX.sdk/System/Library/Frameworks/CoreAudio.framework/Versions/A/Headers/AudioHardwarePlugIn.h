@@ -43,6 +43,8 @@
     will take care of calling all the appropriate listeners.
     
     Note that only version 4 or later plug-ins will be loaded into 64 bit processes.
+    
+    Starting in 10.8, this kind of HAL plug-in is deprecated.
 */
 
 //==================================================================================================
@@ -270,7 +272,7 @@ struct  AudioHardwarePlugInInterface
     OSStatus
     (*DeviceStart)( AudioHardwarePlugInRef  inSelf,
                     AudioDeviceID           inDevice,
-                    AudioDeviceIOProcID		inProc);
+                    AudioDeviceIOProcID     inProc);
 
 /*!
     @method         DeviceStop
@@ -286,7 +288,7 @@ struct  AudioHardwarePlugInInterface
     OSStatus
     (*DeviceStop)(  AudioHardwarePlugInRef  inSelf,
                     AudioDeviceID           inDevice,
-                    AudioDeviceIOProcID		inProc);
+                    AudioDeviceIOProcID     inProc);
 
 /*!
     @method         DeviceRead
@@ -572,7 +574,7 @@ struct  AudioHardwarePlugInInterface
     OSStatus
     (*DeviceStartAtTime)(   AudioHardwarePlugInRef  inSelf,
                             AudioDeviceID           inDevice,
-                            AudioDeviceIOProcID		inProc,
+                            AudioDeviceIOProcID     inProc,
                             AudioTimeStamp*         ioRequestedStartTime,
                             UInt32                  inFlags);
 
@@ -877,7 +879,7 @@ extern OSStatus
 AudioObjectCreate(  AudioHardwarePlugInRef  inOwningPlugIn,
                     AudioObjectID           inOwningObjectID,
                     AudioClassID            inClassID,
-                    AudioObjectID*          outAudioObjectID)                                       __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
+                    AudioObjectID*          outAudioObjectID)                                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_2_0, __IPHONE_5_1);
 
 /*!
     @function       AudioObjectsPublishedAndDied
@@ -906,7 +908,7 @@ AudioObjectsPublishedAndDied(   AudioHardwarePlugInRef  inOwningPlugIn,
                                 UInt32                  inNumberPublishedAudioObjects,
                                 const AudioObjectID     inPublishedAudioObjects[],
                                 UInt32                  inNumberDeadAudioObjects,
-                                const AudioObjectID     inDeadAudioObjects[])                       __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
+                                const AudioObjectID     inDeadAudioObjects[])                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_2_0, __IPHONE_5_1);
 
 /*!
     @function       AudioObjectPropertiesChanged
@@ -928,7 +930,7 @@ extern OSStatus
 AudioObjectPropertiesChanged(   AudioHardwarePlugInRef              inOwningPlugIn,
                                 AudioObjectID                       inObjectID,
                                 UInt32                              inNumberAddresses,
-                                const AudioObjectPropertyAddress    inAddresses[])                  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
+                                const AudioObjectPropertyAddress    inAddresses[])                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_2_0, __IPHONE_5_1);
 
 //==================================================================================================
 #pragma mark    AudioDevice Functions

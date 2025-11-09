@@ -1,7 +1,7 @@
 /*
 	NSControl.h
 	Application Kit
-	Copyright (c) 1994-2011, Apple Inc.
+	Copyright (c) 1994-2012, Apple Inc.
 	All rights reserved.
 */
 
@@ -16,13 +16,17 @@
     NSInteger	_tag;
     id		_cell;
     struct __conFlags {
-        unsigned int        enabled:1;
-        unsigned int        ignoreMultiClick:1;
-        unsigned int        calcSize:1;
-        unsigned int        drawingAncestor:1;
-        unsigned int	    ibReserved:1;
-        unsigned int        updateCellFocus:1;
-        unsigned int        reserved:26;
+        unsigned int enabled:1;
+        unsigned int ignoreMultiClick:1;
+        unsigned int calcSize:1;
+        unsigned int drawingAncestor:1;
+        unsigned int ibReserved:1;
+        unsigned int updateCellFocus:1;
+        unsigned int allowsLogicalLayoutDirection:1;
+        unsigned int asmlwidth:1;
+        unsigned int hsmlwidth:1;
+        unsigned int dontValidate:1;
+        unsigned int reserved:22;
     } _conFlags;
 }
 
@@ -90,6 +94,12 @@
 - (void)setIntegerValue:(NSInteger)anInteger NS_AVAILABLE_MAC(10_5);
 - (void)takeIntegerValueFrom:(id)sender NS_AVAILABLE_MAC(10_5);
 
+/* Gets and sets the ability for expansion tool tips to be shown or not. Expansion tooltips are automatically shown when the cell can not show the full content. This is controlled by the NSCell API expansionFrameWithFrame:inView: and is drawn by drawWithExpansionFrame:inView:. The default value is NO.
+    This value is encoded along with the control. In general, it is recommended to turn this on for NSTextFields in a View Based NSTableView.
+ */
+- (BOOL)allowsExpansionToolTips NS_AVAILABLE_MAC(10_8);
+- (void)setAllowsExpansionToolTips:(BOOL)value NS_AVAILABLE_MAC(10_8);
+
 @end
 
 @interface NSControl(NSKeyboardUI)
@@ -123,7 +133,7 @@
 - (NSArray *)control:(NSControl *)control textView:(NSTextView *)textView completions:(NSArray *)words forPartialWordRange:(NSRange)charRange indexOfSelectedItem:(NSInteger *)index;
 @end
 
-								// userInfo keys:
+                                                                    // userInfo keys:
 APPKIT_EXTERN NSString *NSControlTextDidBeginEditingNotification;	//	@"NSFieldEditor"
 APPKIT_EXTERN NSString *NSControlTextDidEndEditingNotification;	//	@"NSFieldEditor"
 APPKIT_EXTERN NSString *NSControlTextDidChangeNotification;		//	@"NSFieldEditor"

@@ -31,7 +31,7 @@
 
 #if defined (__i386__) || defined(__x86_64__)
 #include "mach/i386/asm.h"
-#elif defined (__arm__)
+#elif defined (__arm__) 
 #include "mach/arm/asm.h"
 #else
 #error architecture not supported

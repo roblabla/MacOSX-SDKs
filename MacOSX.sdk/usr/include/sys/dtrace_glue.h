@@ -517,6 +517,7 @@ static inline void atomic_add_64( uint64_t *theValue, int64_t theAmount )
 	// atomic_add_64() is at present only called from fasttrap.c to increment
 	// or decrement a 64bit counter. Narrow to 32bits since arm has
 	// no convenient 64bit atomic op.
+	
 	(void)OSAddAtomic( (int32_t)theAmount, &(((SInt32 *)theValue)[0]));
 }
 #endif
@@ -527,7 +528,7 @@ static inline void atomic_add_64( uint64_t *theValue, int64_t theAmount )
 
 typedef uintptr_t pc_t;
 typedef uintptr_t greg_t; /* For dtrace_impl.h prototype of dtrace_getfp() */
-#ifdef __arm__
+#if defined(__arm__)
 #define regs arm_saved_state
 #endif
 extern struct regs *find_user_regs( thread_t thread);

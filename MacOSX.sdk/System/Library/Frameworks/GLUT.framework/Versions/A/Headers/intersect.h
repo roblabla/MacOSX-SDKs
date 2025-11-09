@@ -5,7 +5,7 @@
  * 
  * HISTORY:
  * Written by Linas Vepstas, August 1991
- * Updated to correctly handle degenerate cases, Linas,  February 1993 
+ * Updated to correctly handle degenerate cases, Linas,  February 1993
  */
 
 #include <math.h>
@@ -69,7 +69,7 @@
  * then the intersection is "in front of" p1, and if t<0, then the
  * intersection is "behind" p2. Unfortunately, as the intersecting plane
  * and the line become parallel, t wraps through infinity -- i.e. t can
- * become so large that t becomes "greater than infinity" and comes back 
+ * become so large that t becomes "greater than infinity" and comes back
  * as a negative number (i.e. winding number hopped by one unit).  We 
  * have no way of detecting this situation without adding gazzillions 
  * of lines of code of topological algebra to detect the winding number;

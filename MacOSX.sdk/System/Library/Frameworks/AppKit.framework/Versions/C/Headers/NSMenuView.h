@@ -1,7 +1,7 @@
 /*
         NSMenuView.h
         Application Kit
-        Copyright (c) 1997-2011, Apple Inc.
+        Copyright (c) 1997-2012, Apple Inc.
         All rights reserved.
 */
 
@@ -15,6 +15,7 @@
 #import <AppKit/NSMenuItemCell.h>
 @class NSScreen;
 
+NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 @interface NSMenuView : NSView {
     /*All instance variables are private*/
     @private

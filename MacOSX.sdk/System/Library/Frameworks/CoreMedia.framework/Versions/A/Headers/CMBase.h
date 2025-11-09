@@ -3,7 +3,7 @@
 	
 	Framework:  CoreMedia
 	
-    Copyright 2006-2011 Apple Inc. All rights reserved.
+    Copyright 2006-2012 Apple Inc. All rights reserved.
 
 */
 
@@ -12,6 +12,7 @@
 
 #include <TargetConditionals.h>
 #include <Availability.h>
+#include <AvailabilityMacros.h>
 
 // Pre-10.7, weak import
 #ifndef __AVAILABILITY_INTERNAL__MAC_10_7
@@ -20,6 +21,13 @@
 // Pre-4.3, weak import
 #ifndef __AVAILABILITY_INTERNAL__IPHONE_4_3
 	#define __AVAILABILITY_INTERNAL__IPHONE_4_3 __AVAILABILITY_INTERNAL_WEAK_IMPORT
+#endif
+// Pre-10.8, weak import
+#ifndef __AVAILABILITY_INTERNAL__MAC_10_8
+	#define __AVAILABILITY_INTERNAL__MAC_10_8 __AVAILABILITY_INTERNAL_WEAK_IMPORT
+#endif
+#ifndef AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER
+	#define AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER WEAK_IMPORT_ATTRIBUTE
 #endif
 
 #include <stdint.h>						// int32_t, etc.

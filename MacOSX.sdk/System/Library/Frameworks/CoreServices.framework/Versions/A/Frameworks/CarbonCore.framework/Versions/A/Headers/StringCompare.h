@@ -2,16 +2,9 @@
      File:       CarbonCore/StringCompare.h
  
      Contains:   Public interfaces for String Comparison and related operations
+                 The contents of this header file are deprecated.
  
-     Version:    CarbonCore-960.18~3
- 
-     Copyright:  © 1985-2008 by Apple Inc., all rights reserved.
- 
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
- 
-                     http://developer.apple.com/bugreporter/
- 
+     Copyright:  Â© 1985-2011 by Apple Inc., all rights reserved.
 */
 #ifndef __STRINGCOMPARE__
 #define __STRINGCOMPARE__
@@ -33,7 +26,7 @@
 #endif
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -121,7 +114,7 @@ extern short
 MacReplaceText(
   Handle   baseText,
   Handle   substitutionText,
-  Str15    key)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  Str15    key)                                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -142,7 +135,7 @@ MacReplaceText(
 extern short 
 ScriptOrder(
   ScriptCode   script1,
-  ScriptCode   script2)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  ScriptCode   script2)                                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -167,7 +160,7 @@ extern short
 MacCompareString(
   ConstStr255Param   aStr,
   ConstStr255Param   bStr,
-  Handle             itl2Handle)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  Handle             itl2Handle)                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -189,7 +182,7 @@ extern short
 IdenticalString(
   ConstStr255Param   aStr,
   ConstStr255Param   bStr,
-  Handle             itl2Handle)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  Handle             itl2Handle)                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -214,7 +207,7 @@ StringOrder(
   ScriptCode         aScript,
   ScriptCode         bScript,
   LangCode           aLang,
-  LangCode           bLang)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  LangCode           bLang)                                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -238,7 +231,7 @@ CompareText(
   const void *  bPtr,
   short         aLen,
   short         bLen,
-  Handle        itl2Handle)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  Handle        itl2Handle)                                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -262,7 +255,7 @@ IdenticalText(
   const void *  bPtr,
   short         aLen,
   short         bLen,
-  Handle        itl2Handle)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  Handle        itl2Handle)                                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -289,7 +282,7 @@ TextOrder(
   ScriptCode    aScript,
   ScriptCode    bScript,
   LangCode      aLang,
-  LangCode      bLang)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  LangCode      bLang)                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -310,7 +303,7 @@ TextOrder(
 extern short 
 LanguageOrder(
   LangCode   language1,
-  LangCode   language2)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  LangCode   language2)                                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -531,7 +524,7 @@ RelString(
   ConstStr255Param   str1,
   ConstStr255Param   str2,
   Boolean            caseSensitive,
-  Boolean            diacSensitive)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  Boolean            diacSensitive)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -554,7 +547,7 @@ EqualString(
   ConstStr255Param   str1,
   ConstStr255Param   str2,
   Boolean            caseSensitive,
-  Boolean            diacSensitive)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  Boolean            diacSensitive)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 #endif  /* !__LP64__ */
@@ -580,7 +573,7 @@ relstring(
   const char *  str1,
   const char *  str2,
   Boolean       caseSensitive,
-  Boolean       diacSensitive)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  Boolean       diacSensitive)                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*

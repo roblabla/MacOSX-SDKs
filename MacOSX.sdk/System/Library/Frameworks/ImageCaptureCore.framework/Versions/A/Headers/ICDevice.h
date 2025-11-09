@@ -208,6 +208,13 @@ extern NSString *const ICButtonTypeTransfer;
 extern NSString *const ICStatusNotificationKey;
 
 /*!
+    @const      ICStatusCodeKey
+    @abstract   ICStatusCodeKey
+    @discussion One of values defined in ICReturnCode.
+*/
+extern NSString *const ICStatusCodeKey;
+
+/*!
     @const      ICLocalizedStatusNotificationKey
     @abstract   ICLocalizedStatusNotificationKey
     @discussion Key for a localized notification string.
@@ -518,7 +525,6 @@ extern NSString *const ICDeviceCanEjectOrDisconnect;
   @abstract Eject the media if permitted by the device, or disconnect from a remote device.
 */
 - (void)requestEjectOrDisconnect;
-
 @end
 
 //------------------------------------------------------------------------------------------------------------------------------

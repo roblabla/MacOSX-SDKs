@@ -19,7 +19,7 @@
     @abstract SFCertificatePanel is a panel and sheet interface that displays one or more certificates.
 */
 
-@interface SFCertificatePanel : NSPanel
+@interface SFCertificatePanel : NSPanel <NSSplitViewDelegate>
 {
 @private
 	/* All instance variables are private */

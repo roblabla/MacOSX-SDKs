@@ -1,5 +1,5 @@
 /*	NSSet.h
-	Copyright (c) 1994-2011, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2012, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -9,7 +9,7 @@
 
 /****************	Immutable Set	****************/
 
-@interface NSSet : NSObject <NSCopying, NSMutableCopying, NSCoding, NSFastEnumeration>
+@interface NSSet : NSObject <NSCopying, NSMutableCopying, NSSecureCoding, NSFastEnumeration>
 
 - (NSUInteger)count;
 - (id)member:(id)object;
@@ -49,12 +49,12 @@
 
 + (id)set;
 + (id)setWithObject:(id)object;
-+ (id)setWithObjects:(const id *)objects count:(NSUInteger)cnt;
++ (id)setWithObjects:(const id [])objects count:(NSUInteger)cnt;
 + (id)setWithObjects:(id)firstObj, ... NS_REQUIRES_NIL_TERMINATION;
 + (id)setWithSet:(NSSet *)set;
 + (id)setWithArray:(NSArray *)array;
 
-- (id)initWithObjects:(const id *)objects count:(NSUInteger)cnt;
+- (id)initWithObjects:(const id [])objects count:(NSUInteger)cnt;
 - (id)initWithObjects:(id)firstObj, ... NS_REQUIRES_NIL_TERMINATION;
 - (id)initWithSet:(NSSet *)set;
 - (id)initWithSet:(NSSet *)set copyItems:(BOOL)flag;

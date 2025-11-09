@@ -1,7 +1,7 @@
 /*
     NSAnimation.h
     Application Kit
-    Copyright (c) 2004-2011, Apple Inc.
+    Copyright (c) 2004-2012, Apple Inc.
     All rights reserved.
 */
 
@@ -29,8 +29,8 @@ typedef NSUInteger NSAnimationBlockingMode;
 
 typedef float NSAnimationProgress;
 
-extern NSString* NSAnimationProgressMarkNotification;   // has single entry in user info dictionary
-extern NSString*    NSAnimationProgressMark;		    // NSNumber(float) with NSAnimationProgress
+extern NSString *NSAnimationProgressMarkNotification;   // has single entry in user info dictionary
+extern NSString *NSAnimationProgressMark;		   // NSNumber(float) with NSAnimationProgress
 
 @interface NSAnimation : NSObject <NSCopying, NSCoding> {
   @private
@@ -38,11 +38,11 @@ extern NSString*    NSAnimationProgressMark;		    // NSNumber(float) with NSAnim
     NSAnimationProgress  _currentProgress;
     float                 _framesPerSecond;
     id                   _delegate;
-    NSTimer*             _timer;
+    NSTimer             *_timer;
     NSTimeInterval       _startTime;
-    NSMutableArray*      _progressMarks;
-    NSAnimation*	 _startAnimation;
-    NSAnimation*	 _stopAnimation;
+    NSMutableArray      *_progressMarks;
+    NSAnimation         *_startAnimation;
+    NSAnimation         *_stopAnimation;
     int                  _nextProgressMark;
     struct __aFlags {
 	unsigned int delegateAnimationShouldStart:1;
@@ -91,8 +91,8 @@ extern NSString*    NSAnimationProgressMark;		    // NSNumber(float) with NSAnim
 - (void)setDelegate:(id <NSAnimationDelegate>)delegate;
 - (id <NSAnimationDelegate>)delegate;
 
-- (NSArray*)progressMarks;
-- (void)setProgressMarks:(NSArray*)progressMarks;
+- (NSArray *)progressMarks;
+- (void)setProgressMarks:(NSArray *)progressMarks;
 
 - (void)addProgressMark:(NSAnimationProgress)progressMark;
 - (void)removeProgressMark:(NSAnimationProgress)progressMark;
@@ -103,7 +103,7 @@ extern NSString*    NSAnimationProgressMark;		    // NSNumber(float) with NSAnim
 - (void)clearStartAnimation;
 - (void)clearStopAnimation;
 
-- (NSArray*)runLoopModesForAnimating;
+- (NSArray *)runLoopModesForAnimating;
 
 @end
 
@@ -162,7 +162,7 @@ It's perfectly valid to set a new value for a property for which an animation is
 /* An animatable property container's optional "animations" dictionary maps NSString keys to CAAnimation values. When an occurrence matching the key fires for the view, -animationForKey: first looks in this dictionary for an animation to execute in response. Typically, the key will name a property of the object whose value has just changed, but it may instead specify a special event trigger (NSAnimationTriggerOrderIn or NSAnimationTiggerOrderOut).
 */
 - (NSDictionary *)animations;
-- (void)setAnimations:(NSDictionary *)dict;
+- (void)setAnimations:(NSDictionary *)animations;
 
 /* When the occurrence specified by "key" fires for an object, this method is consulted to find the animation, if any, that should be performed in response. Like its counterpart, -[CALayer actionForKey:], this method is a funnel point that defines the order in which the search for an animation proceeds, and is not one that clients would typically need to override. It first checks the receiver's "animations" dictionary, then falls back to  +defaultAnimationForKey: for the receiver's class.
 */

@@ -34,7 +34,7 @@ typedef NSUInteger CBCharacteristicProperties;
  *      Represents a service's characteristic.
  *
  */
-NS_CLASS_AVAILABLE(10_7, NA)
+NS_CLASS_AVAILABLE(10_7, 5_0)
 CB_EXTERN_CLASS @interface CBCharacteristic : NSObject
 {
 @package

@@ -1,7 +1,7 @@
 /*
         NSTabView.h
         Application Kit
-        Copyright (c) 2000-2011, Apple Inc.
+        Copyright (c) 2000-2012, Apple Inc.
         All rights reserved.
 */
 
@@ -64,7 +64,8 @@ typedef NSUInteger NSTabViewType;
         unsigned int wiringInteriorLastKeyView:1;
         unsigned int originalNextKeyViewChanged:1;
 	unsigned int liveResizeSkippedResetToolTips:1;
-        unsigned int reserved:22;
+        unsigned int subviewsAddedForTabs:1;
+        unsigned int reserved:21;
     } _flags;
     NSTabViewItem 	*_focusedTabViewItem;			
     void		*_tabViewUnused2;

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2011 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2012 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -78,28 +78,33 @@
 
 #define KEV_DL_SUBCLASS 2
 
-#define KEV_DL_SIFFLAGS	    1
-#define KEV_DL_SIFMETRICS   2
-#define KEV_DL_SIFMTU	    3
-#define KEV_DL_SIFPHYS	    4
-#define KEV_DL_SIFMEDIA	    5
-#define KEV_DL_SIFGENERIC   6
-#define KEV_DL_ADDMULTI	    7
-#define KEV_DL_DELMULTI	    8
-#define KEV_DL_IF_ATTACHED  9
-#define KEV_DL_IF_DETACHING 10
-#define KEV_DL_IF_DETACHED  11
-#define KEV_DL_LINK_OFF	    12
-#define KEV_DL_LINK_ON	    13
-#define KEV_DL_PROTO_ATTACHED	14
-#define KEV_DL_PROTO_DETACHED	15
-#define KEV_DL_LINK_ADDRESS_CHANGED	16
-#define KEV_DL_WAKEFLAGS_CHANGED	17
-#define KEV_DL_IF_IDLE_ROUTE_REFCNT	18
-#define KEV_DL_IFCAP_CHANGED		19
+#define KEV_DL_SIFFLAGS				1
+#define KEV_DL_SIFMETRICS			2
+#define KEV_DL_SIFMTU				3
+#define KEV_DL_SIFPHYS				4
+#define KEV_DL_SIFMEDIA				5
+#define KEV_DL_SIFGENERIC			6
+#define KEV_DL_ADDMULTI				7
+#define KEV_DL_DELMULTI				8
+#define KEV_DL_IF_ATTACHED			9
+#define KEV_DL_IF_DETACHING			10
+#define KEV_DL_IF_DETACHED			11
+#define KEV_DL_LINK_OFF				12
+#define KEV_DL_LINK_ON				13
+#define KEV_DL_PROTO_ATTACHED			14
+#define KEV_DL_PROTO_DETACHED			15
+#define KEV_DL_LINK_ADDRESS_CHANGED		16
+#define KEV_DL_WAKEFLAGS_CHANGED		17
+#define KEV_DL_IF_IDLE_ROUTE_REFCNT		18
+#define KEV_DL_IFCAP_CHANGED			19
+#define KEV_DL_LINK_QUALITY_METRIC_CHANGED	20
+#define KEV_DL_NODE_PRESENCE			21
+#define KEV_DL_NODE_ABSENCE			22
+#define KEV_DL_MASTER_ELECTED			23
 
 #include <net/if_var.h>
 #include <sys/types.h>
+
 #endif
 
 
@@ -120,6 +125,7 @@
 #define	IFF_LINK2	0x4000		/* per link layer defined bit */
 #define	IFF_ALTPHYS	IFF_LINK2	/* use alternate physical connection */
 #define	IFF_MULTICAST	0x8000		/* supports multicast */
+
 
 
 /*
@@ -156,7 +162,7 @@
 #define IFCAP_VALID (IFCAP_HWCSUM | IFCAP_TSO | IFCAP_LRO | IFCAP_VLAN_MTU | \
 	IFCAP_VLAN_HWTAGGING | IFCAP_JUMBO_MTU | IFCAP_AV)
 
-#define	IFQ_MAXLEN	50
+#define	IFQ_MAXLEN	128
 #define	IFNET_SLOWHZ	1		/* granularity is 1 second */
 
 /*
@@ -305,7 +311,7 @@ struct	ifreq {
 		int	ifru_mtu;
 		int	ifru_phys;
 		int	ifru_media;
-		int 	ifru_intval;
+		int	ifru_intval;
 		caddr_t	ifru_data;
 		struct	ifdevmtu ifru_devmtu;
 		struct	ifkpi	ifru_kpi;
@@ -431,6 +437,7 @@ struct if_laddrreq {
 	struct sockaddr_storage	addr;   /* in/out */
 	struct sockaddr_storage	dstaddr; /* out */
 };
+
 
 #endif /* (_POSIX_C_SOURCE && !_DARWIN_C_SOURCE) */
 

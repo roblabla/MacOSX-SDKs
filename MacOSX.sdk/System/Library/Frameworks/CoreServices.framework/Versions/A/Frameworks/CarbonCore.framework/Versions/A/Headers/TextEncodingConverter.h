@@ -3,9 +3,7 @@
  
      Contains:   Text Encoding Conversion Interfaces.
  
-     Version:    CarbonCore-960.18~3
- 
-     Copyright:  © 1994-2008 Apple Inc. All rights reserved.
+     Copyright:  Â© 1994-2011 Apple Inc. All rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -30,7 +28,7 @@
 
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -126,7 +124,7 @@ enum {
  *    Non-Carbon CFM:   in TextEncodingConverter 1.1 and later
  */
 extern OSStatus 
-TECCountAvailableTextEncodings(ItemCount * numberEncodings)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+TECCountAvailableTextEncodings(ItemCount * numberEncodings)   __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /* fill in an array of type TextEncoding passed in by the user with types of encodings the current configuration of the encoder can handle. */
@@ -142,7 +140,7 @@ extern OSStatus
 TECGetAvailableTextEncodings(
   TextEncoding   availableEncodings[],
   ItemCount      maxAvailableEncodings,
-  ItemCount *    actualAvailableEncodings)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ItemCount *    actualAvailableEncodings)                    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /* return number of from-to encoding conversion pairs supported  */
@@ -155,7 +153,7 @@ TECGetAvailableTextEncodings(
  *    Non-Carbon CFM:   in TextEncodingConverter 1.2 and later
  */
 extern OSStatus 
-TECCountDirectTextEncodingConversions(ItemCount * numberOfEncodings) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+TECCountDirectTextEncodingConversions(ItemCount * numberOfEncodings) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /* fill in an array of type TextEncodingPair passed in by the user with types of encoding pairs the current configuration of the encoder can handle. */
@@ -171,7 +169,7 @@ extern OSStatus
 TECGetDirectTextEncodingConversions(
   TECConversionInfo   availableConversions[],
   ItemCount           maxAvailableConversions,
-  ItemCount *         actualAvailableConversions)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ItemCount *         actualAvailableConversions)             __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /* return number of encodings a given encoding can be converter into */
@@ -186,7 +184,7 @@ TECGetDirectTextEncodingConversions(
 extern OSStatus 
 TECCountDestinationTextEncodings(
   TextEncoding   inputEncoding,
-  ItemCount *    numberOfEncodings)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ItemCount *    numberOfEncodings)                           __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /* fill in an array of type TextEncodingPair passed in by the user with types of encodings pairs the current configuration of the encoder can handle. */
@@ -203,7 +201,7 @@ TECGetDestinationTextEncodings(
   TextEncoding   inputEncoding,
   TextEncoding   destinationEncodings[],
   ItemCount      maxDestinationEncodings,
-  ItemCount *    actualDestinationEncodings)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ItemCount *    actualDestinationEncodings)                  __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /* get info about a text encoding */
@@ -218,7 +216,7 @@ TECGetDestinationTextEncodings(
 extern OSStatus 
 TECGetTextEncodingInternetName(
   TextEncoding   textEncoding,
-  Str255         encodingName)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Str255         encodingName)                                __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -232,7 +230,7 @@ TECGetTextEncodingInternetName(
 extern OSStatus 
 TECGetTextEncodingFromInternetName(
   TextEncoding *     textEncoding,
-  ConstStr255Param   encodingName)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ConstStr255Param   encodingName)                            __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /* create/dispose converters */
@@ -248,7 +246,7 @@ extern OSStatus
 TECCreateConverter(
   TECObjectRef *  newEncodingConverter,
   TextEncoding    inputEncoding,
-  TextEncoding    outputEncoding)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TextEncoding    outputEncoding)                             __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -263,7 +261,7 @@ extern OSStatus
 TECCreateConverterFromPath(
   TECObjectRef *       newEncodingConverter,
   const TextEncoding   inPath[],
-  ItemCount            inEncodings)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ItemCount            inEncodings)                           __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -275,7 +273,7 @@ TECCreateConverterFromPath(
  *    Non-Carbon CFM:   in TextEncodingConverter 1.1 and later
  */
 extern OSStatus 
-TECDisposeConverter(TECObjectRef newEncodingConverter)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+TECDisposeConverter(TECObjectRef newEncodingConverter)        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /* convert text encodings */
@@ -288,7 +286,7 @@ TECDisposeConverter(TECObjectRef newEncodingConverter)        AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in TextEncodingConverter 1.2 and later
  */
 extern OSStatus 
-TECClearConverterContextInfo(TECObjectRef encodingConverter)  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+TECClearConverterContextInfo(TECObjectRef encodingConverter)  __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -307,7 +305,7 @@ TECConvertText(
   ByteCount *    actualInputLength,
   TextPtr        outputBuffer,
   ByteCount      outputBufferLength,
-  ByteCount *    actualOutputLength)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ByteCount *    actualOutputLength)                          __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -323,7 +321,7 @@ TECFlushText(
   TECObjectRef   encodingConverter,
   TextPtr        outputBuffer,
   ByteCount      outputBufferLength,
-  ByteCount *    actualOutputLength)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ByteCount *    actualOutputLength)                          __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /* one-to-many routines */
@@ -338,7 +336,7 @@ TECFlushText(
 extern OSStatus 
 TECCountSubTextEncodings(
   TextEncoding   inputEncoding,
-  ItemCount *    numberOfEncodings)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ItemCount *    numberOfEncodings)                           __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -354,7 +352,7 @@ TECGetSubTextEncodings(
   TextEncoding   inputEncoding,
   TextEncoding   subEncodings[],
   ItemCount      maxSubEncodings,
-  ItemCount *    actualSubEncodings)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ItemCount *    actualSubEncodings)                          __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -382,7 +380,7 @@ extern OSStatus
 TECGetEncodingList(
   TECObjectRef   encodingConverter,
   ItemCount *    numEncodings,
-  Handle *       encodingList)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle *       encodingList)                                __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -398,7 +396,7 @@ TECCreateOneToManyConverter(
   TECObjectRef *       newEncodingConverter,
   TextEncoding         inputEncoding,
   ItemCount            numOutputEncodings,
-  const TextEncoding   outputEncodings[])                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const TextEncoding   outputEncodings[])                     __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -420,7 +418,7 @@ TECConvertTextToMultipleEncodings(
   ByteCount *       actualOutputLength,
   TextEncodingRun   outEncodingsBuffer[],
   ItemCount         maxOutEncodingRuns,
-  ItemCount *       actualOutEncodingRuns)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ItemCount *       actualOutEncodingRuns)                    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -439,7 +437,7 @@ TECFlushMultipleEncodings(
   ByteCount *       actualOutputLength,
   TextEncodingRun   outEncodingsBuffer[],
   ItemCount         maxOutEncodingRuns,
-  ItemCount *       actualOutEncodingRuns)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ItemCount *       actualOutEncodingRuns)                    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /* international internet info */
@@ -454,7 +452,7 @@ TECFlushMultipleEncodings(
 extern OSStatus 
 TECCountWebTextEncodings(
   RegionCode   locale,
-  ItemCount *  numberEncodings)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ItemCount *  numberEncodings)                               __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -470,7 +468,7 @@ TECGetWebTextEncodings(
   RegionCode     locale,
   TextEncoding   availableEncodings[],
   ItemCount      maxAvailableEncodings,
-  ItemCount *    actualAvailableEncodings)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ItemCount *    actualAvailableEncodings)                    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -484,7 +482,7 @@ TECGetWebTextEncodings(
 extern OSStatus 
 TECCountMailTextEncodings(
   RegionCode   locale,
-  ItemCount *  numberEncodings)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ItemCount *  numberEncodings)                               __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -500,7 +498,7 @@ TECGetMailTextEncodings(
   RegionCode     locale,
   TextEncoding   availableEncodings[],
   ItemCount      maxAvailableEncodings,
-  ItemCount *    actualAvailableEncodings)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ItemCount *    actualAvailableEncodings)                    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /* examine text encodings */
@@ -513,7 +511,7 @@ TECGetMailTextEncodings(
  *    Non-Carbon CFM:   in TextEncodingConverter 1.2 and later
  */
 extern OSStatus 
-TECCountAvailableSniffers(ItemCount * numberOfEncodings)      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+TECCountAvailableSniffers(ItemCount * numberOfEncodings)      __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -528,7 +526,7 @@ extern OSStatus
 TECGetAvailableSniffers(
   TextEncoding   availableSniffers[],
   ItemCount      maxAvailableSniffers,
-  ItemCount *    actualAvailableSniffers)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ItemCount *    actualAvailableSniffers)                     __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -543,7 +541,7 @@ extern OSStatus
 TECCreateSniffer(
   TECSnifferObjectRef *  encodingSniffer,
   const TextEncoding     testEncodings[],
-  ItemCount              numTextEncodings)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ItemCount              numTextEncodings)                    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -564,7 +562,7 @@ TECSniffTextEncoding(
   ItemCount             numErrsArray[],
   ItemCount             maxErrs,
   ItemCount             numFeaturesArray[],
-  ItemCount             maxFeatures)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ItemCount             maxFeatures)                          __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -576,7 +574,7 @@ TECSniffTextEncoding(
  *    Non-Carbon CFM:   in TextEncodingConverter 1.2 and later
  */
 extern OSStatus 
-TECDisposeSniffer(TECSnifferObjectRef encodingSniffer)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+TECDisposeSniffer(TECSnifferObjectRef encodingSniffer)        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -588,7 +586,7 @@ TECDisposeSniffer(TECSnifferObjectRef encodingSniffer)        AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in TextEncodingConverter 1.2 and later
  */
 extern OSStatus 
-TECClearSnifferContextInfo(TECSnifferObjectRef encodingSniffer) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+TECClearSnifferContextInfo(TECSnifferObjectRef encodingSniffer) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -636,7 +634,7 @@ TECClearSnifferContextInfo(TECSnifferObjectRef encodingSniffer) AVAILABLE_MAC_OS
 extern OSStatus 
 TECSetBasicOptions(
   TECObjectRef   encodingConverter,
-  OptionBits     controlFlags)                                AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  OptionBits     controlFlags)                                __OSX_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_NA);
 
 
 /* Map TextEncoding values to/from IANA charset names and/or MIB enums, with usage control */
@@ -689,7 +687,7 @@ TECCopyTextEncodingInternetNameAndMIB(
   TextEncoding               textEncoding,
   TECInternetNameUsageMask   usage,
   CFStringRef *              encodingNamePtr,       /* can be NULL */
-  SInt32 *                   mibEnumPtr)            /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  SInt32 *                   mibEnumPtr)            /* can be NULL */ __OSX_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_NA);
 
 
 /*
@@ -723,7 +721,7 @@ TECGetTextEncodingFromInternetNameOrMIB(
   TextEncoding *             textEncodingPtr,
   TECInternetNameUsageMask   usage,
   CFStringRef                encodingName,
-  SInt32                     mibEnum)                         AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  SInt32                     mibEnum)                         __OSX_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_NA);
 
 
 

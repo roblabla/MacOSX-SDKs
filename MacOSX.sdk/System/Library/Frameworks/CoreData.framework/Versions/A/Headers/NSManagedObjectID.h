@@ -1,17 +1,11 @@
 /*
     NSManagedObjectID.h
     Core Data
-    Copyright (c) 2004-2010 Apple Inc.
+    Copyright (c) 2004-2012 Apple Inc.
     All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
-
-#if MAC_OS_X_VERSION_MAX_ALLOWED < MAC_OS_X_VERSION_10_5
-#ifndef NSPersistentStore
-#define NSPersistentStore NSObject
-#endif
-#endif
 
 @class NSPersistentStore;
 @class NSEntityDescription;

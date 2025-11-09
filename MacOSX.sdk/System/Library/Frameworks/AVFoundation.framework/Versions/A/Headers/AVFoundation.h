@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2008-2010 Apple Inc. All rights reserved.
+	Copyright 2008-2012 Apple Inc. All rights reserved.
 
 	To report bugs, go to:  http://developer.apple.com/bugreporter/
 
@@ -32,10 +32,12 @@
 #import <AVFoundation/AVCompositionTrackSegment.h>
 #import <AVFoundation/AVError.h>
 #import <AVFoundation/AVMediaFormat.h>
+#import <AVFoundation/AVMediaSelectionGroup.h>
 #import <AVFoundation/AVMetadataFormat.h>
 #import <AVFoundation/AVMetadataItem.h>
 #import <AVFoundation/AVPlayer.h>
 #import <AVFoundation/AVPlayerItem.h>
+#import <AVFoundation/AVPlayerItemOutput.h>
 #import <AVFoundation/AVPlayerItemTrack.h>
 #import <AVFoundation/AVPlayerLayer.h>
 #import <AVFoundation/AVSynchronizedLayer.h>
@@ -59,4 +61,5 @@
 
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
 #import <AVFoundation/AVPlayerItemProtectedContentAdditions.h>
+#import <AVFoundation/AVSampleBufferDisplayLayer.h>
 #endif

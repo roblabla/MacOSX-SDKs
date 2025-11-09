@@ -265,7 +265,7 @@ typedef struct jawt {
  * Get the AWT native structure.  This function returns JNI_FALSE if
  * an error occurs.
  */
-_JNI_IMPORT_OR_EXPORT_
+_JNI_IMPORT_OR_EXPORT_ __attribute__((deprecated))
 jboolean JNICALL JAWT_GetAWT(JNIEnv* env, JAWT* awt);
 
 #define JAWT_VERSION_1_3 0x00010003

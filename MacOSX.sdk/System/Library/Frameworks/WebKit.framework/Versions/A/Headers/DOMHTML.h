@@ -56,7 +56,6 @@
 #import <WebKit/DOMHTMLIFrameElement.h>
 #import <WebKit/DOMHTMLImageElement.h>
 #import <WebKit/DOMHTMLInputElement.h>
-#import <WebKit/DOMHTMLIsIndexElement.h>
 #import <WebKit/DOMHTMLLIElement.h>
 #import <WebKit/DOMHTMLLabelElement.h>
 #import <WebKit/DOMHTMLLegendElement.h>

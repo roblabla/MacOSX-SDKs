@@ -3,7 +3,7 @@
 	
 	Framework:  CoreMedia
 
-    Copyright 2010-2011 Apple Inc. All rights reserved.
+    Copyright 2010-2012 Apple Inc. All rights reserved.
     
 	To report bugs, go to:  http://developer.apple.com/bugreporter/
 
@@ -18,3 +18,6 @@
 #include <CoreMedia/CMBlockBuffer.h>
 #include <CoreMedia/CMSampleBuffer.h>
 #include <CoreMedia/CMSimpleQueue.h>
+#include <CoreMedia/CMMemoryPool.h>
+#include <CoreMedia/CMSync.h>
+#include <CoreMedia/CMAudioDeviceClock.h>

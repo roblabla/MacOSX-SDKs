@@ -1,5 +1,5 @@
 //******************************************************************************
-// Copyright:  (c) 2010-2011 by Apple, Inc., All Rights Reserved.
+// Copyright:  (c) 2010-2012 by Apple, Inc., All Rights Reserved.
 //*****************************************************************************/
 
 #ifndef __GRANDCL_PRIV_H
@@ -9,7 +9,7 @@
 extern "C" {
 #endif
 
-#include <OpenCL/cl.h>
+#include <OpenCL/opencl.h>
 
 // Internal type used to map blocks to kernels
 typedef struct {

@@ -1,5 +1,5 @@
 /*	NSCompoundPredicate.h
-	Copyright (c) 2004-2011, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2012, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSPredicate.h>
@@ -8,12 +8,11 @@
 
 // Compound predicates are predicates which act on the results of evaluating other operators. We provide the basic boolean operators: AND, OR, and NOT.
 
-enum {
+typedef NS_ENUM(NSUInteger, NSCompoundPredicateType) {
     NSNotPredicateType = 0, 
     NSAndPredicateType,
     NSOrPredicateType,
 };
-typedef NSUInteger NSCompoundPredicateType;
 
 NS_CLASS_AVAILABLE(10_4, 3_0)
 @interface NSCompoundPredicate : NSPredicate {

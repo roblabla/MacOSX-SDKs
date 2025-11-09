@@ -254,6 +254,7 @@ struct	in6_ifreq {
 		int	ifru_flags;
 		int	ifru_flags6;
 		int	ifru_metric;
+		int	ifru_intval;
 		caddr_t	ifru_data;
 		struct in6_addrlifetime ifru_lifetime;
 		struct in6_ifstat ifru_stat;
@@ -468,9 +469,14 @@ struct kev_in6_data {
 					 */
 #define IN6_IFF_AUTOCONF	0x40	/* autoconfigurable address. */
 #define IN6_IFF_TEMPORARY	0x80	/* temporary (anonymous) address. */
+#define IN6_IFF_DYNAMIC		0x100	/* assigned by DHCPv6 service */
+#define IN6_IFF_OPTIMISTIC	0x200	/* optimistic DAD, i.e. RFC 4429 */
 #define IN6_IFF_NOPFX		0x8000	/* skip kernel prefix management.
 					 * XXX: this should be temporary.
 					 */
+
+/* Duplicate Address Detection [DAD] in progress. */
+#define IN6_IFF_DADPROGRESS	(IN6_IFF_TENTATIVE|IN6_IFF_OPTIMISTIC)
 
 /* do not input/output */
 #define IN6_IFF_NOTREADY (IN6_IFF_TENTATIVE|IN6_IFF_DUPLICATED)

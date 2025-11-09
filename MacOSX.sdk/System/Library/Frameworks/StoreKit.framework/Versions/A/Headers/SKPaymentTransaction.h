@@ -39,6 +39,10 @@ NS_CLASS_AVAILABLE(10_7, NA)
 // The unique server-provided identifier.  Only valid if state is SKPaymentTransactionStatePurchased or SKPaymentTransactionStateRestored.
 @property(readonly) NSString *transactionIdentifier;
 
+// Array of SKDownload objects
+// Only valid if state is SKPaymentTransactionStatePurchased or SKPaymentTransactionStateRestored.
+@property(readonly) NSArray *downloads;
+
 @property(readonly) SKPaymentTransactionState transactionState;
 
 @end

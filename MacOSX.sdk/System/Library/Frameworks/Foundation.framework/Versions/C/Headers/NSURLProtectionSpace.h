@@ -1,6 +1,6 @@
 /*	
     NSURLProtectionSpace.h
-    Copyright (c) 2003-2011, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2012, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -109,7 +109,7 @@ FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodServerTrust NS_AVAIL
     @discussion This class represents a protection space requiring authentication.
 */
 
-@interface NSURLProtectionSpace : NSObject <NSCopying>
+@interface NSURLProtectionSpace : NSObject <NSCoding, NSCopying>
 {
 @private
     NSURLProtectionSpaceInternal *_internal;

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2011 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2012 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -286,14 +286,40 @@ struct	tcpstat {
 
 	/* SACK related stats */
 	u_int32_t	tcps_sack_recovery_episode; /* SACK recovery episodes */
-	u_int32_t  tcps_sack_rexmits;	    /* SACK rexmit segments   */
-	u_int32_t  tcps_sack_rexmit_bytes;	    /* SACK rexmit bytes      */
-	u_int32_t  tcps_sack_rcv_blocks;	    /* SACK blocks (options) received */
-	u_int32_t  tcps_sack_send_blocks;	    /* SACK blocks (options) sent     */
-	u_int32_t  tcps_sack_sboverflow;	    /* SACK sendblock overflow   */
+	u_int32_t 	tcps_sack_rexmits;	    /* SACK rexmit segments   */
+	u_int32_t 	tcps_sack_rexmit_bytes;	    /* SACK rexmit bytes      */
+	u_int32_t 	tcps_sack_rcv_blocks;	    /* SACK blocks (options) received */
+	u_int32_t 	tcps_sack_send_blocks;	    /* SACK blocks (options) sent     */
+	u_int32_t 	tcps_sack_sboverflow;	    /* SACK sendblock overflow   */
 
 	u_int32_t	tcps_bg_rcvtotal;	/* total background packets received */
 	u_int32_t	tcps_rxtfindrop;	/* drop conn after retransmitting FIN */
+	u_int32_t	tcps_fcholdpacket;	/* packets withheld because of flow control */
+
+	/* LRO related stats */
+	u_int32_t	tcps_coalesced_pack;	/* number of coalesced packets */
+	u_int32_t	tcps_flowtbl_full;	/* times flow table was full */
+	u_int32_t	tcps_flowtbl_collision;	/* collisions in flow tbl */
+	u_int32_t	tcps_lro_twopack;	/* 2 packets coalesced */
+	u_int32_t	tcps_lro_multpack;	/* 3 or 4 pkts coalesced */
+	u_int32_t	tcps_lro_largepack;	/* 5 or more pkts coalesced */
+};
+
+struct tcpstat_local {
+	u_int64_t badformat;
+	u_int64_t unspecv6;
+	u_int64_t synfin;
+	u_int64_t badformatipsec;
+	u_int64_t noconnnolist;
+	u_int64_t noconnlist;
+	u_int64_t listbadsyn;
+	u_int64_t icmp6unreach;
+	u_int64_t deprecate6;
+	u_int64_t ooopacket;
+	u_int64_t rstinsynrcv;
+	u_int64_t dospacket;
+	u_int64_t cleanup;
+	u_int64_t synwindow;
 };
 
 #pragma pack(4)

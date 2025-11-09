@@ -4,10 +4,10 @@
  *	  definitions for executor state nodes
  *
  *
- * Portions Copyright (c) 1996-2010, PostgreSQL Global Development Group
+ * Portions Copyright (c) 1996-2011, PostgreSQL Global Development Group
  * Portions Copyright (c) 1994, Regents of the University of California
  *
- * $PostgreSQL: pgsql/src/include/nodes/execnodes.h,v 1.219.4.1 2010/07/28 04:50:58 tgl Exp $
+ * src/include/nodes/execnodes.h
  *
  *-------------------------------------------------------------------------
  */
@@ -346,7 +346,7 @@ typedef struct EState
 	/* If query can insert/delete tuples, the command ID to mark them with */
 	CommandId	es_output_cid;
 
-	/* Info about target table for insert/update/delete queries: */
+	/* Info about target table(s) for insert/update/delete queries: */
 	ResultRelInfo *es_result_relations; /* array of ResultRelInfos */
 	int			es_num_result_relations;		/* length of array */
 	ResultRelInfo *es_result_relation_info;		/* currently active array elt */
@@ -354,7 +354,7 @@ typedef struct EState
 	/* Stuff used for firing triggers: */
 	List	   *es_trig_target_relations;		/* trigger-only ResultRelInfos */
 	TupleTableSlot *es_trig_tuple_slot; /* for trigger output tuples */
-	TupleTableSlot *es_trig_oldtup_slot;		/* for trigger old tuples */
+	TupleTableSlot *es_trig_oldtup_slot;		/* for TriggerEnabled */
 
 	/* Parameter info: */
 	ParamListInfo es_param_list_info;	/* values of external params */
@@ -370,13 +370,17 @@ typedef struct EState
 	uint32		es_processed;	/* # of tuples processed */
 	Oid			es_lastoid;		/* last oid processed (by INSERT) */
 
+	int			es_top_eflags;	/* eflags passed to ExecutorStart */
 	int			es_instrument;	/* OR of InstrumentOption flags */
 	bool		es_select_into; /* true if doing SELECT INTO */
 	bool		es_into_oids;	/* true to generate OIDs in SELECT INTO */
+	bool		es_finished;	/* true when ExecutorFinish is done */
 
 	List	   *es_exprcontexts;	/* List of ExprContexts within EState */
 
 	List	   *es_subplanstates;		/* List of PlanState for SubPlans */
+
+	List	   *es_auxmodifytables;		/* List of secondary ModifyTableStates */
 
 	/*
 	 * this ExprContext is for per-output-tuple operations, such as constraint
@@ -397,6 +401,12 @@ typedef struct EState
 	HeapTuple  *es_epqTuple;	/* array of EPQ substitute tuples */
 	bool	   *es_epqTupleSet; /* true if EPQ tuple is provided */
 	bool	   *es_epqScanDone; /* true if EPQ tuple has been fetched */
+
+	/*
+	 * this field added at end of struct to avoid post-release ABI breakage in
+	 * existing release branches.  It'll be in a more logical place in 9.2.
+	 */
+	TupleTableSlot *es_trig_newtup_slot;		/* for TriggerEnabled */
 } EState;
 
 
@@ -485,7 +495,7 @@ typedef struct TupleHashTableData
 	TupleTableSlot *inputslot;	/* current input tuple's slot */
 	FmgrInfo   *in_hash_funcs;	/* hash functions for input datatype(s) */
 	FmgrInfo   *cur_eq_funcs;	/* equality functions for input vs. table */
-} TupleHashTableData;
+}	TupleHashTableData;
 
 typedef HASH_SEQ_STATUS TupleHashIterator;
 
@@ -558,6 +568,17 @@ typedef struct GenericExprState
 	ExprState	xprstate;
 	ExprState  *arg;			/* state of my child node */
 } GenericExprState;
+
+/* ----------------
+ *		WholeRowVarExprState node
+ * ----------------
+ */
+typedef struct WholeRowVarExprState
+{
+	ExprState	xprstate;
+	struct PlanState *parent;	/* parent PlanState, or NULL if none */
+	JunkFilter *wrv_junkFilter; /* JunkFilter to remove resjunk cols */
+} WholeRowVarExprState;
 
 /* ----------------
  *		AggrefExprState node
@@ -639,13 +660,11 @@ typedef struct FuncExprState
 										 * NULL */
 
 	/*
-	 * We need to store argument values across calls when evaluating a SRF
-	 * that uses value-per-call mode.
-	 *
-	 * setArgsValid is true when we are evaluating a set-valued function and
-	 * we are in the middle of a call series; we want to pass the same
-	 * argument values to the function again (and again, until it returns
-	 * ExprEndResult).
+	 * setArgsValid is true when we are evaluating a set-returning function
+	 * that uses value-per-call mode and we are in the middle of a call
+	 * series; we want to pass the same argument values to the function again
+	 * (and again, until it returns ExprEndResult).  This indicates that
+	 * fcinfo_data already contains valid argument data.
 	 */
 	bool		setArgsValid;
 
@@ -665,10 +684,11 @@ typedef struct FuncExprState
 	bool		shutdown_reg;	/* a shutdown callback is registered */
 
 	/*
-	 * Current argument data for a set-valued function; contains valid data
-	 * only if setArgsValid is true.
+	 * Call parameter structure for the function.  This has been initialized
+	 * (by InitFunctionCallInfoData) if func.fn_oid is valid.  It also saves
+	 * argument values between calls, when setArgsValid is true.
 	 */
-	FunctionCallInfoData setArgs;
+	FunctionCallInfoData fcinfo_data;
 } FuncExprState;
 
 /* ----------------
@@ -708,6 +728,7 @@ typedef struct SubPlanState
 	ExprState  *testexpr;		/* state of combining expression */
 	List	   *args;			/* states of argument expression(s) */
 	HeapTuple	curTuple;		/* copy of most recent tuple from subplan */
+	Datum		curArray;		/* most recent array from ARRAY() subplan */
 	/* these are used when hashing the subselect's output: */
 	ProjectionInfo *projLeft;	/* for projecting lefthand exprs */
 	ProjectionInfo *projRight;	/* for projecting subselect output */
@@ -715,7 +736,7 @@ typedef struct SubPlanState
 	TupleHashTable hashnulls;	/* hash table for rows with null(s) */
 	bool		havehashrows;	/* TRUE if hashtable is not empty */
 	bool		havenullrows;	/* TRUE if hashnulls is not empty */
-	MemoryContext hashtablecxt;	/* memory context containing hash tables */
+	MemoryContext hashtablecxt; /* memory context containing hash tables */
 	MemoryContext hashtempcxt;	/* temp memory context for hash tables */
 	ExprContext *innerecontext; /* econtext for computing inner tuples */
 	AttrNumber *keyColIdx;		/* control data for hash tables */
@@ -861,6 +882,7 @@ typedef struct RowCompareExprState
 	List	   *largs;			/* the left-hand input arguments */
 	List	   *rargs;			/* the right-hand input arguments */
 	FmgrInfo   *funcs;			/* array of comparison function info */
+	Oid		   *collations;		/* array of collations to use */
 } RowCompareExprState;
 
 /* ----------------
@@ -998,7 +1020,7 @@ typedef struct PlanState
 } PlanState;
 
 /* ----------------
- *	these are are defined to avoid confusion problems with "left"
+ *	these are defined to avoid confusion problems with "left"
  *	and "right" and "inner" and "outer".  The convention is that
  *	the "left" plan is the "outer" plan and the "right" plan is
  *	the inner plan, but these make the code more readable.
@@ -1042,10 +1064,13 @@ typedef struct ResultState
 typedef struct ModifyTableState
 {
 	PlanState	ps;				/* its first field is NodeTag */
-	CmdType		operation;
+	CmdType		operation;		/* INSERT, UPDATE, or DELETE */
+	bool		canSetTag;		/* do we set the command tag/es_processed? */
+	bool		mt_done;		/* are we done? */
 	PlanState **mt_plans;		/* subplans (one per target rel) */
 	int			mt_nplans;		/* number of plans in the array */
 	int			mt_whichplan;	/* which one is being executed (0..n-1) */
+	ResultRelInfo *resultRelInfo;		/* per-subplan target relations */
 	List	  **mt_arowmarks;	/* per-subplan ExecAuxRowMark lists */
 	EPQState	mt_epqstate;	/* for evaluating EvalPlanQual rechecks */
 	bool		fireBSTriggers; /* do we need to fire stmt triggers? */
@@ -1065,6 +1090,33 @@ typedef struct AppendState
 	int			as_nplans;
 	int			as_whichplan;
 } AppendState;
+
+/* ----------------
+ *	 MergeAppendState information
+ *
+ *		nplans			how many plans are in the array
+ *		nkeys			number of sort key columns
+ *		scankeys		sort keys in ScanKey representation
+ *		slots			current output tuple of each subplan
+ *		heap			heap of active tuples (represented as array indexes)
+ *		heap_size		number of active heap entries
+ *		initialized		true if we have fetched first tuple from each subplan
+ *		last_slot		last subplan fetched from (which must be re-called)
+ * ----------------
+ */
+typedef struct MergeAppendState
+{
+	PlanState	ps;				/* its first field is NodeTag */
+	PlanState **mergeplans;		/* array of PlanStates for my inputs */
+	int			ms_nplans;
+	int			ms_nkeys;
+	ScanKey		ms_scankeys;	/* array of length ms_nkeys */
+	TupleTableSlot **ms_slots;	/* array of length ms_nplans */
+	int		   *ms_heap;		/* array of length ms_nplans */
+	int			ms_heap_size;	/* current active length of ms_heap[] */
+	bool		ms_initialized; /* are subplans started? */
+	int			ms_last_slot;	/* last subplan slot we returned from */
+} MergeAppendState;
 
 /* ----------------
  *	 RecursiveUnionState information
@@ -1173,10 +1225,12 @@ typedef struct
  *	 IndexScanState information
  *
  *		indexqualorig	   execution state for indexqualorig expressions
- *		ScanKeys		   Skey structures to scan index rel
- *		NumScanKeys		   number of Skey structs
+ *		ScanKeys		   Skey structures for index quals
+ *		NumScanKeys		   number of ScanKeys
+ *		OrderByKeys		   Skey structures for index ordering operators
+ *		NumOrderByKeys	   number of OrderByKeys
  *		RuntimeKeys		   info about Skeys that must be evaluated at runtime
- *		NumRuntimeKeys	   number of RuntimeKeys structs
+ *		NumRuntimeKeys	   number of RuntimeKeys
  *		RuntimeKeysReady   true if runtime Skeys have been computed
  *		RuntimeContext	   expr context for evaling runtime Skeys
  *		RelationDesc	   index relation descriptor
@@ -1189,6 +1243,8 @@ typedef struct IndexScanState
 	List	   *indexqualorig;
 	ScanKey		iss_ScanKeys;
 	int			iss_NumScanKeys;
+	ScanKey		iss_OrderByKeys;
+	int			iss_NumOrderByKeys;
 	IndexRuntimeKeyInfo *iss_RuntimeKeys;
 	int			iss_NumRuntimeKeys;
 	bool		iss_RuntimeKeysReady;
@@ -1201,12 +1257,12 @@ typedef struct IndexScanState
  *	 BitmapIndexScanState information
  *
  *		result			   bitmap to return output into, or NULL
- *		ScanKeys		   Skey structures to scan index rel
- *		NumScanKeys		   number of Skey structs
+ *		ScanKeys		   Skey structures for index quals
+ *		NumScanKeys		   number of ScanKeys
  *		RuntimeKeys		   info about Skeys that must be evaluated at runtime
- *		NumRuntimeKeys	   number of RuntimeKeys structs
+ *		NumRuntimeKeys	   number of RuntimeKeys
  *		ArrayKeys		   info about Skeys that come from ScalarArrayOpExprs
- *		NumArrayKeys	   number of ArrayKeys structs
+ *		NumArrayKeys	   number of ArrayKeys
  *		RuntimeKeysReady   true if runtime Skeys have been computed
  *		RuntimeContext	   expr context for evaling runtime Skeys
  *		RelationDesc	   index relation descriptor
@@ -1373,6 +1429,20 @@ typedef struct WorkTableScanState
 	RecursiveUnionState *rustate;
 } WorkTableScanState;
 
+/* ----------------
+ *	 ForeignScanState information
+ *
+ *		ForeignScan nodes are used to scan foreign-data tables.
+ * ----------------
+ */
+typedef struct ForeignScanState
+{
+	ScanState	ss;				/* its first field is NodeTag */
+	/* use struct pointer to avoid including fdwapi.h here */
+	struct FdwRoutine *fdwroutine;
+	void	   *fdw_state;		/* foreign-data wrapper can keep state here */
+} ForeignScanState;
+
 /* ----------------------------------------------------------------
  *				 Join State Information
  * ----------------------------------------------------------------
@@ -1412,7 +1482,7 @@ typedef struct NestLoopState
  *
  *		NumClauses		   number of mergejoinable join clauses
  *		Clauses			   info for each mergejoinable clause
- *		JoinState		   current "state" of join.  see execdefs.h
+ *		JoinState		   current state of ExecMergeJoin state machine
  *		ExtraMarks		   true to issue extra Mark operations on inner scan
  *		ConstFalseJoin	   true if we have a constant-false joinqual
  *		FillOuter		   true if should emit unjoined outer tuples anyway
@@ -1455,6 +1525,10 @@ typedef struct MergeJoinState
 /* ----------------
  *	 HashJoinState information
  *
+ *		hashclauses				original form of the hashjoin condition
+ *		hj_OuterHashKeys		the outer hash keys in the hashjoin condition
+ *		hj_InnerHashKeys		the inner hash keys in the hashjoin condition
+ *		hj_HashOperators		the join operators in the hashjoin condition
  *		hj_HashTable			hash table for the hashjoin
  *								(NULL if table not built yet)
  *		hj_CurHashValue			hash value for current outer tuple
@@ -1464,14 +1538,12 @@ typedef struct MergeJoinState
  *								tuple, or NULL if starting search
  *								(hj_CurXXX variables are undefined if
  *								OuterTupleSlot is empty!)
- *		hj_OuterHashKeys		the outer hash keys in the hashjoin condition
- *		hj_InnerHashKeys		the inner hash keys in the hashjoin condition
- *		hj_HashOperators		the join operators in the hashjoin condition
  *		hj_OuterTupleSlot		tuple slot for outer tuples
- *		hj_HashTupleSlot		tuple slot for hashed tuples
- *		hj_NullInnerTupleSlot	prepared null tuple for left outer joins
+ *		hj_HashTupleSlot		tuple slot for inner (hashed) tuples
+ *		hj_NullOuterTupleSlot	prepared null tuple for right/full outer joins
+ *		hj_NullInnerTupleSlot	prepared null tuple for left/full outer joins
  *		hj_FirstOuterTupleSlot	first tuple retrieved from outer plan
- *		hj_NeedNewOuter			true if need new outer tuple on next call
+ *		hj_JoinState			current state of ExecHashJoin state machine
  *		hj_MatchedOuter			true if found a join match for current outer
  *		hj_OuterNotEmpty		true if outer relation known not empty
  * ----------------
@@ -1485,19 +1557,20 @@ typedef struct HashJoinState
 {
 	JoinState	js;				/* its first field is NodeTag */
 	List	   *hashclauses;	/* list of ExprState nodes */
+	List	   *hj_OuterHashKeys;		/* list of ExprState nodes */
+	List	   *hj_InnerHashKeys;		/* list of ExprState nodes */
+	List	   *hj_HashOperators;		/* list of operator OIDs */
 	HashJoinTable hj_HashTable;
 	uint32		hj_CurHashValue;
 	int			hj_CurBucketNo;
 	int			hj_CurSkewBucketNo;
 	HashJoinTuple hj_CurTuple;
-	List	   *hj_OuterHashKeys;		/* list of ExprState nodes */
-	List	   *hj_InnerHashKeys;		/* list of ExprState nodes */
-	List	   *hj_HashOperators;		/* list of operator OIDs */
 	TupleTableSlot *hj_OuterTupleSlot;
 	TupleTableSlot *hj_HashTupleSlot;
+	TupleTableSlot *hj_NullOuterTupleSlot;
 	TupleTableSlot *hj_NullInnerTupleSlot;
 	TupleTableSlot *hj_FirstOuterTupleSlot;
-	bool		hj_NeedNewOuter;
+	int			hj_JoinState;
 	bool		hj_MatchedOuter;
 	bool		hj_OuterNotEmpty;
 } HashJoinState;

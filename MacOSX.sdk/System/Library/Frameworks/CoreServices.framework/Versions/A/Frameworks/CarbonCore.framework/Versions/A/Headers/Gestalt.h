@@ -2,16 +2,10 @@
      File:       CarbonCore/Gestalt.h
  
      Contains:   Gestalt Interfaces.
+                 The contents of this header file are deprecated.
+                 Use sysctl(3) instead.
  
-     Version:    CarbonCore-960.18~3
- 
-     Copyright:  © 1988-2008 by Apple Computer, Inc.  All rights reserved
- 
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
- 
-                     http://developer.apple.com/bugreporter/
- 
+     Copyright:  © 1988-2011 by Apple Inc. All rights reserved.
 */
 #ifndef __GESTALT__
 #define __GESTALT__
@@ -26,7 +20,7 @@
 
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -128,7 +122,7 @@ typedef STACK_UPP_TYPE(SelectorFunctionProcPtr)                 SelectorFunction
 extern OSErr 
 Gestalt(
   OSType    selector,
-  SInt32 *  response)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32 *  response)                                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 #if !__LP64__
@@ -175,7 +169,7 @@ extern OSErr
 ReplaceGestalt(
   OSType                 selector,
   SelectorFunctionUPP    gestaltFunction,
-  SelectorFunctionUPP *  oldGestaltFunction)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
+  SelectorFunctionUPP *  oldGestaltFunction)                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_3, __IPHONE_NA, __IPHONE_NA);
 
 
 #endif  /* !__LP64__ */
@@ -232,7 +226,7 @@ ReplaceGestalt(
 extern OSErr 
 NewGestalt(
   OSType                selector,
-  SelectorFunctionUPP   gestaltFunction)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
+  SelectorFunctionUPP   gestaltFunction)                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_3, __IPHONE_NA, __IPHONE_NA);
 
 
 #endif  /* !__LP64__ */
@@ -279,7 +273,7 @@ NewGestalt(
 extern OSErr 
 NewGestaltValue(
   OSType   selector,
-  SInt32   newValue)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32   newValue)                                          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -319,7 +313,7 @@ NewGestaltValue(
 extern OSErr 
 ReplaceGestaltValue(
   OSType   selector,
-  SInt32   replacementValue)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32   replacementValue)                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -358,7 +352,7 @@ ReplaceGestaltValue(
 extern OSErr 
 SetGestaltValue(
   OSType   selector,
-  SInt32   newValue)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32   newValue)                                          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -391,7 +385,7 @@ SetGestaltValue(
  *    Non-Carbon CFM:   in InterfaceLib 7.5 and later
  */
 extern OSErr 
-DeleteGestaltValue(OSType selector)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DeleteGestaltValue(OSType selector)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -404,7 +398,7 @@ DeleteGestaltValue(OSType selector)                           AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern SelectorFunctionUPP
-NewSelectorFunctionUPP(SelectorFunctionProcPtr userRoutine)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewSelectorFunctionUPP(SelectorFunctionProcPtr userRoutine)   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  DisposeSelectorFunctionUPP()
@@ -415,7 +409,7 @@ NewSelectorFunctionUPP(SelectorFunctionProcPtr userRoutine)   AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeSelectorFunctionUPP(SelectorFunctionUPP userUPP)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeSelectorFunctionUPP(SelectorFunctionUPP userUPP)       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  InvokeSelectorFunctionUPP()
@@ -429,7 +423,7 @@ extern OSErr
 InvokeSelectorFunctionUPP(
   OSType               selector,
   SInt32 *             response,
-  SelectorFunctionUPP  userUPP)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SelectorFunctionUPP  userUPP)                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 #if __MACH__
   #ifdef __cplusplus

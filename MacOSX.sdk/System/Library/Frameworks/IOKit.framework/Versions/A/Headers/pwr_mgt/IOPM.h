@@ -245,7 +245,7 @@ enum {
  *  false       == Retain FV key when going to standby mode
  *  not present == Retain FV key when going to standby mode
  */
-#define kIOPMDestroyFVKeyOnStandbyKey            "DestroyFVKeyOnStandby"
+#define kIOPMDestroyFVKeyOnStandbyKey       "DestroyFVKeyOnStandby"
 
 /*******************************************************************************
  *
@@ -288,7 +288,15 @@ enum {
      */
     kIOPMDriverAssertionPreventDisplaySleepBit      = 0x40,
 
-    kIOPMDriverAssertionReservedBit7                = 0x80
+    /*! kIOPMDriverAssertionReservedBit7
+     * Reserved for storage family.
+     */
+    kIOPMDriverAssertionReservedBit7                = 0x80,
+
+    /*! kIOPMDriverAssertionMagicPacketWakeEnabledBit
+     * When set, driver is informing PM that magic packet wake is enabled.
+     */
+    kIOPMDriverAssertionMagicPacketWakeEnabledBit   = 0x100
 };
 
  /* kIOPMAssertionsDriverKey
@@ -296,7 +304,7 @@ enum {
   * a bitfield describing the aggregate PM assertion levels.
   * Example: A value of 0 indicates that no driver has asserted anything.
   * Or, a value of <link>kIOPMDriverAssertionCPUBit</link>
-  *   indicates that a driver (or drivers) have asserted a need fro CPU and video.
+  *   indicates that a driver (or drivers) have asserted a need for CPU and video.
   */
 #define kIOPMAssertionsDriverKey            "DriverPMAssertions"
 
@@ -305,7 +313,7 @@ enum {
   * a bitfield describing the aggregate PM assertion levels.
   * Example: A value of 0 indicates that no driver has asserted anything.
   * Or, a value of <link>kIOPMDriverAssertionCPUBit</link>
-  *   indicates that a driver (or drivers) have asserted a need fro CPU and video.
+  *   indicates that a driver (or drivers) have asserted a need for CPU and video.
   */
 #define kIOPMAssertionsDriverDetailedKey    "DriverPMAssertionsDetailed"
 
@@ -408,6 +416,13 @@ enum {
 #define kIOPMMessageDriverAssertionsChanged  \
                 iokit_family_msg(sub_iokit_powermanagement, 0x150)
 
+/*! kIOPMMessageDarkWakeThermalEmergency
+ * Sent when machine becomes unsustainably warm in DarkWake.
+ * Kernel PM might choose to put the machine back to sleep right after.
+ */
+#define kIOPMMessageDarkWakeThermalEmergency \
+                iokit_family_msg(sub_iokit_powermanagement, 0x160)
+
 /*******************************************************************************
  *
  * Power commands issued to root domain
@@ -429,7 +444,8 @@ enum {
   kIOPMEnableClamshell          = (1<<7),  // sleep on clamshell closure
   kIOPMProcessorSpeedChange     = (1<<8),  // change the processor speed
   kIOPMOverTemp                 = (1<<9),  // system dangerously hot
-  kIOPMClamshellOpened          = (1<<10)  // clamshell was opened
+  kIOPMClamshellOpened          = (1<<10), // clamshell was opened
+  kIOPMDWOverTemp               = (1<<11)  // DarkWake thermal limits exceeded.
 };
 
 
@@ -665,6 +681,7 @@ enum {
 // Maintenance wake calendar.
 #define kIOPMSettingMaintenanceWakeCalendarKey      "MaintenanceWakeCalendarDate"
 
+
 struct IOPMCalendarStruct {
     UInt32      year;
     UInt8       month;
@@ -672,6 +689,7 @@ struct IOPMCalendarStruct {
     UInt8       hour;
     UInt8       minute;
     UInt8       second;
+    UInt8       selector;
 };
 typedef struct IOPMCalendarStruct IOPMCalendarStruct;
 
@@ -741,25 +759,6 @@ enum {
 // Internal power management data structures
 // **********************************************
 
-#if KERNEL && __cplusplus
-class IOService;
-
-enum {
-    kIOPowerEmergencyLevel = 1000
-};
-
-enum {
-    kIOPMSubclassPolicy,
-    kIOPMSuperclassPolicy1
-};
-
-struct stateChangeNote {
-    IOPMPowerFlags    stateFlags;
-    unsigned long    stateNum;
-    void *         powerRef;
-};
-typedef struct stateChangeNote stateChangeNote;
-
 struct IOPowerStateChangeNotification {
     void *        powerRef;
     unsigned long    returnValue;
@@ -768,7 +767,6 @@ struct IOPowerStateChangeNotification {
 };
 typedef struct IOPowerStateChangeNotification IOPowerStateChangeNotification;
 typedef IOPowerStateChangeNotification sleepWakeNote;
-#endif /* KERNEL && __cplusplus */
 
 /*! @struct IOPMSystemCapabilityChangeParameters
     @abstract A structure describing a system capability change.

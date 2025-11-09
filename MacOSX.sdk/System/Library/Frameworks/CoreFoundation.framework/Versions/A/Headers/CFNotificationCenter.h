@@ -1,5 +1,5 @@
 /*	CFNotificationCenter.h
-	Copyright (c) 1998-2011, Apple Inc. All rights reserved.
+	Copyright (c) 1998-2012, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFNOTIFICATIONCENTER__)
@@ -14,7 +14,7 @@ typedef struct __CFNotificationCenter * CFNotificationCenterRef;
 
 typedef void (*CFNotificationCallback)(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo);
 
-enum {
+typedef CF_ENUM(CFIndex, CFNotificationSuspensionBehavior) {
     CFNotificationSuspensionBehaviorDrop = 1,
         // The server will not queue any notifications with this name and object while the process/app is in the background.
     CFNotificationSuspensionBehaviorCoalesce = 2,
@@ -24,14 +24,14 @@ enum {
     CFNotificationSuspensionBehaviorDeliverImmediately = 4
         // The server will deliver notifications matching this registration whether or not the process is in the background.  When a notification with this suspension behavior is matched, it has the effect of first flushing any queued notifications.
 };
-typedef CFIndex CFNotificationSuspensionBehavior;
 
 CF_EXPORT CFTypeID CFNotificationCenterGetTypeID(void);
 
 CF_EXPORT CFNotificationCenterRef CFNotificationCenterGetLocalCenter(void);
 
+#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || TARGET_OS_WIN32
 CF_EXPORT CFNotificationCenterRef CFNotificationCenterGetDistributedCenter(void);
-// Note that distributed notifications are not posted or received in the iOS Simulator.
+#endif
 
 CF_EXPORT CFNotificationCenterRef CFNotificationCenterGetDarwinNotifyCenter(void);
 // The Darwin Notify Center is based on the <notify.h> API.
@@ -60,10 +60,7 @@ CF_EXPORT void CFNotificationCenterPostNotification(CFNotificationCenterRef cent
 
 enum {
     kCFNotificationDeliverImmediately = (1UL << 0),
-#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || TARGET_OS_WIN32
-    // no multiple sessions on iOS
     kCFNotificationPostToAllSessions = (1UL << 1)
-#endif
 };
 
 CF_EXPORT void CFNotificationCenterPostNotificationWithOptions(CFNotificationCenterRef center, CFStringRef name, const void *object, CFDictionaryRef userInfo, CFOptionFlags options);

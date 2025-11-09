@@ -21,7 +21,11 @@
 // String value associated with text field.
 - (NSString *) stringValue;
 - (void) setStringValue: (NSString *) value;
+// Attributed string associated with text field ( font / fontColor)
+- (NSAttributedString*) attributedStringValue;
+- (void) setAttributedStringValue: (NSAttributedString*) value;
 
+ 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
 - (NSColor *) backgroundColor;

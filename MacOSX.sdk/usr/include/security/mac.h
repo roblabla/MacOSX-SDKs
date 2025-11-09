@@ -131,7 +131,8 @@ typedef struct mac	*mac_t;
 #define MAC_PROC_CHECK_SUSPEND   		0
 #define MAC_PROC_CHECK_RESUME    		1
 #define MAC_PROC_CHECK_HIBERNATE 		2
-#define MAC_PROC_CHECK_SHUTDOWN_SOCKETS	3
+#define MAC_PROC_CHECK_SHUTDOWN_SOCKETS		3
+#define MAC_PROC_CHECK_PIDBIND			4
 
 /*
  * Location of the userland MAC framework configuration file.  mac.conf

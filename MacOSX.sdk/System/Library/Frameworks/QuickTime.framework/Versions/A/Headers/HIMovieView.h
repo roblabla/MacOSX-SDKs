@@ -5,7 +5,7 @@
  
      Version:    QuickTime 7.7.1
  
-     Copyright:  © 2004-2010 by Apple Inc., all rights reserved.
+     Copyright:  © 2004-2012 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -15,10 +15,6 @@
 */
 #ifndef __HIMOVIEVIEW__
 #define __HIMOVIEVIEW__
-
-#ifndef __HIVIEW__
-#include <HIToolbox/HIView.h>
-#endif
 
 #ifndef __MOVIES__
 #include <QuickTime/Movies.h>

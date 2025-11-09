@@ -15,7 +15,7 @@
  * A new endpoint object. 
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0)
-XPC_EXPORT XPC_NONNULL1 XPC_WARN_RESULT
+XPC_EXPORT XPC_NONNULL1 XPC_WARN_RESULT XPC_MALLOC XPC_RETURNS_RETAINED
 xpc_endpoint_t
 xpc_endpoint_create(xpc_connection_t connection);
 

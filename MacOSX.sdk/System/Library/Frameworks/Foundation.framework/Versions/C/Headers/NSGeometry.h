@@ -1,5 +1,5 @@
 /*	NSGeometry.h
-	Copyright (c) 1994-2011, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2012, Apple Inc. All rights reserved.
 */
 
 #import <AvailabilityMacros.h>
@@ -77,7 +77,7 @@ typedef enum {
 
 #endif
 
-enum {
+typedef NS_OPTIONS(unsigned long long, NSAlignmentOptions) {
     NSAlignMinXInward   = 1ULL << 0,
     NSAlignMinYInward   = 1ULL << 1,
     NSAlignMaxXInward   = 1ULL << 2,
@@ -106,7 +106,6 @@ enum {
     NSAlignAllEdgesOutward = NSAlignMinXOutward|NSAlignMaxXOutward|NSAlignMinYOutward|NSAlignMaxYOutward,
     NSAlignAllEdgesNearest = NSAlignMinXNearest|NSAlignMaxXNearest|NSAlignMinYNearest|NSAlignMaxYNearest,
 };
-typedef unsigned long long NSAlignmentOptions;
 
 @class NSString;
 

@@ -6,8 +6,8 @@
  *
  */
 
-#import <Availability.h>
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CLAvailability.h>
 
 /*
  *  CLLocationDegrees
@@ -133,6 +133,7 @@ CLLocationCoordinate2D CLLocationCoordinate2DMake(CLLocationDegrees latitude, CL
  *  Discussion:
  *    Represents a geographical coordinate along with accuracy and timestamp information.
  */
+NS_CLASS_AVAILABLE(10_6, 2_0)
 @interface CLLocation : NSObject <NSCopying, NSCoding>
 {
 @private

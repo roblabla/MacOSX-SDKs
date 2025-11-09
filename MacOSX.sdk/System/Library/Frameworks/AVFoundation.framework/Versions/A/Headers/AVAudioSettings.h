@@ -3,7 +3,7 @@
 	
 	Framework:  AVFoundation
 	
-	Copyright 2008-2010 Apple Inc. All rights reserved.
+	Copyright 2008-2012 Apple Inc. All rights reserved.
 */
 
 #import <AVFoundation/AVBase.h>

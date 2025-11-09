@@ -62,7 +62,7 @@
  *    CLLocationManager instance with a non-nil delegate that implements this method.
  */
 - (void)locationManager:(CLLocationManager *)manager
-	didEnterRegion:(CLRegion *)region __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+	didEnterRegion:(CLRegion *)region __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_4_0);
 
 /*
  *  locationManager:didExitRegion:
@@ -72,7 +72,7 @@
  *    CLLocationManager instance with a non-nil delegate that implements this method.
  */
 - (void)locationManager:(CLLocationManager *)manager
-	didExitRegion:(CLRegion *)region __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+	didExitRegion:(CLRegion *)region __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_4_0);
 
 /*
  *  locationManager:didFailWithError:
@@ -91,7 +91,7 @@
  */
 - (void)locationManager:(CLLocationManager *)manager
 	monitoringDidFailForRegion:(CLRegion *)region
-	withError:(NSError *)error __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+	withError:(NSError *)error __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_4_0);
 
 /*
  *  locationManager:didChangeAuthorizationStatus:
@@ -100,5 +100,14 @@
  *    Invoked when the authorization status changes for this application.
  */
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_2);
+
+/*
+ *  locationManager:didStartMonitoringForRegion:
+ *  
+ *  Discussion:
+ *    Invoked when a monitoring for a region started successfully.
+ */
+- (void)locationManager:(CLLocationManager *)manager
+	didStartMonitoringForRegion:(CLRegion *)region __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_5_0);
 
 @end

@@ -3,9 +3,9 @@
  * walreceiver.h
  *	  Exports from replication/walreceiverfuncs.c.
  *
- * Portions Copyright (c) 2010-2010, PostgreSQL Global Development Group
+ * Portions Copyright (c) 2010-2011, PostgreSQL Global Development Group
  *
- * $PostgreSQL: pgsql/src/include/replication/walreceiver.h,v 1.11.2.1 2010/09/13 10:14:30 heikki Exp $
+ * src/include/replication/walreceiver.h
  *
  *-------------------------------------------------------------------------
  */
@@ -17,6 +17,8 @@
 #include "pgtime.h"
 
 extern bool am_walreceiver;
+extern int	wal_receiver_status_interval;
+extern bool hot_standby_feedback;
 
 /*
  * MAXCONNINFO: maximum size of a connection string.
@@ -50,11 +52,17 @@ typedef struct
 	pg_time_t	startTime;
 
 	/*
+	 * receiveStart is the first byte position that will be received. When
+	 * startup process starts the walreceiver, it sets receiveStart to the
+	 * point where it wants the streaming to begin.
+	 */
+	XLogRecPtr	receiveStart;
+
+	/*
 	 * receivedUpto-1 is the last byte position that has already been
-	 * received.  When startup process starts the walreceiver, it sets
-	 * receivedUpto to the point where it wants the streaming to begin. After
-	 * that, walreceiver updates this whenever it flushes the received WAL to
-	 * disk.
+	 * received.  At the first startup of walreceiver, receivedUpto is set to
+	 * receiveStart. After that, walreceiver updates this whenever it flushes
+	 * the received WAL to disk.
 	 */
 	XLogRecPtr	receivedUpto;
 
@@ -83,6 +91,9 @@ extern PGDLLIMPORT walrcv_connect_type walrcv_connect;
 typedef bool (*walrcv_receive_type) (int timeout, unsigned char *type,
 												 char **buffer, int *len);
 extern PGDLLIMPORT walrcv_receive_type walrcv_receive;
+
+typedef void (*walrcv_send_type) (const char *buffer, int nbytes);
+extern PGDLLIMPORT walrcv_send_type walrcv_send;
 
 typedef void (*walrcv_disconnect_type) (void);
 extern PGDLLIMPORT walrcv_disconnect_type walrcv_disconnect;

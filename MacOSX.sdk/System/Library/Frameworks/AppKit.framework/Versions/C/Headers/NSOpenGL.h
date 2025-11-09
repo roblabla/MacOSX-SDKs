@@ -1,7 +1,7 @@
 /*
         NSOpenGL.h
         Application Kit
-        Copyright (c) 2000-2011, Apple Inc.
+        Copyright (c) 2000-2012, Apple Inc.
         All rights reserved.
 */
 
@@ -130,7 +130,7 @@ typedef struct _CGLPixelFormatObject NSOpenGLPixelFormatAuxiliary;
 - (void)getValues:(GLint *)vals forAttribute:(NSOpenGLPixelFormatAttribute)attrib forVirtualScreen:(GLint)screen;
 - (GLint)numberOfVirtualScreens;
 
-- (void *)CGLPixelFormatObj;
+- (void *)CGLPixelFormatObj NS_RETURNS_INNER_POINTER;
 
 @end
 
@@ -158,7 +158,7 @@ typedef struct _CGLPixelFormatObject NSOpenGLPixelFormatAuxiliary;
 */
 - (id)initWithTextureTarget:(GLenum)target textureInternalFormat:(GLenum)format textureMaxMipMapLevel:(GLint)maxLevel pixelsWide:(GLsizei)pixelsWide pixelsHigh:(GLsizei)pixelsHigh;
 - (id)initWithCGLPBufferObj:(void *)pbuffer NS_AVAILABLE_MAC(10_6);
-- (void *)CGLPBufferObj NS_AVAILABLE_MAC(10_6);
+- (void *)CGLPBufferObj NS_RETURNS_INNER_POINTER NS_AVAILABLE_MAC(10_6);
 - (GLsizei)pixelsWide;
 - (GLsizei)pixelsHigh;
 - (GLenum)textureTarget;
@@ -245,7 +245,7 @@ typedef struct _CGLContextObject NSOpenGLContextAuxiliary;
 - (void)createTexture:(GLenum)target fromView:(NSView *)view internalFormat:(GLenum)format;
 
 
-- (void *)CGLContextObj;
+- (void *)CGLContextObj NS_RETURNS_INNER_POINTER;
 
 /*
 ** NOTE: PBuffers have been Deprecated as of 10.7.  Use GL_EXT_framebuffer_object instead.

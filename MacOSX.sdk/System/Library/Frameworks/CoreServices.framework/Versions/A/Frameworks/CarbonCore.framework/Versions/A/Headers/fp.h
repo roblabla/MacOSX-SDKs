@@ -2,16 +2,10 @@
      File:       CarbonCore/fp.h
  
      Contains:   FPCE Floating-Point Definitions and Declarations.
+                 The contents of this header file are deprecated.
+                 Use math.h instead.
  
-     Version:    CarbonCore-960.18~3
- 
-     Copyright:  © 1987-2008 by Apple Computer, Inc., all rights reserved.
- 
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
- 
-                     http://developer.apple.com/bugreporter/
- 
+     Copyright:  © 1987-2011 by Apple Inc. All rights reserved.
 */
 #ifndef __FP__
 #define __FP__
@@ -42,7 +36,7 @@
 ********************************************************************************/
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -1194,7 +1188,7 @@ extern double_t  fmin(double_t x, double_t y);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MathLib 1.0 and later
  */
-extern const double_t pi                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern const double_t pi                                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 /********************************************************************************
 *                                                                               *
 *                              Non NCEG extensions                              *
@@ -1223,7 +1217,7 @@ extern const double_t pi                                             AVAILABLE_M
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MathLib 1.0 and later
  */
-extern double  compound(double rate, double periods)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern double  compound(double rate, double periods)                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1234,7 +1228,7 @@ extern double  compound(double rate, double periods)                        AVAI
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MathLib 1.0 and later
  */
-extern double  annuity(double rate, double periods)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern double  annuity(double rate, double periods)                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -1255,7 +1249,7 @@ extern double  annuity(double rate, double periods)                         AVAI
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MathLib 1.0 and later
  */
-extern double_t  randomx(double_t * x)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern double_t  randomx(double_t * x)                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -1281,7 +1275,7 @@ enum {
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MathLib 1.0 and later
  */
-extern relop  relation(double_t x, double_t y)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern relop  relation(double_t x, double_t y)                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 #endif /* !defined(__MWERKS__) || !defined(__cmath__) */
@@ -1345,7 +1339,7 @@ typedef struct decform decform;
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MathLib 1.0 and later
  */
-extern void  num2dec(const decform *f, double_t x, decimal *d)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  num2dec(const decform *f, double_t x, decimal *d)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1356,7 +1350,7 @@ extern void  num2dec(const decform *f, double_t x, decimal *d)                  
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MathLib 1.0 and later
  */
-extern double_t  dec2num(const decimal * d)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern double_t  dec2num(const decimal * d)                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1367,7 +1361,7 @@ extern double_t  dec2num(const decimal * d)                   AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MathLib 1.0 and later
  */
-extern void  dec2str(const decform *f, const decimal *d, char *s)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  dec2str(const decform *f, const decimal *d, char *s)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1378,7 +1372,7 @@ extern void  dec2str(const decform *f, const decimal *d, char *s)               
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MathLib 1.0 and later
  */
-extern void  str2dec(const char *s, short *ix, decimal *d, short *vp)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  str2dec(const char *s, short *ix, decimal *d, short *vp)                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1389,7 +1383,7 @@ extern void  str2dec(const char *s, short *ix, decimal *d, short *vp)           
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MathLib 1.0 and later
  */
-extern float  dec2f(const decimal * d)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern float  dec2f(const decimal * d)                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1400,7 +1394,7 @@ extern float  dec2f(const decimal * d)                        AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MathLib 1.0 and later
  */
-extern short  dec2s(const decimal * d)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern short  dec2s(const decimal * d)                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1411,7 +1405,7 @@ extern short  dec2s(const decimal * d)                        AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MathLib 1.0 and later
  */
-extern long  dec2l(const decimal * d)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern long  dec2l(const decimal * d)                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 #endif  /* !defined(__NOEXTENSIONS__) */
@@ -2377,7 +2371,7 @@ extern long double  dec2numl(const decimal * d);
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MathLib 2.0 and later
  */
-extern double  x80tod(const extended80 * x80)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern double  x80tod(const extended80 * x80)                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -2388,7 +2382,7 @@ extern double  x80tod(const extended80 * x80)                 AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MathLib 2.0 and later
  */
-extern void  dtox80(const double *x, extended80 *x80)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  dtox80(const double *x, extended80 *x80)                                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 

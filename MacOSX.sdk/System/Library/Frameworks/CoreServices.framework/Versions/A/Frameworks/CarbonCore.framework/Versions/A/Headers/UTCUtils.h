@@ -3,9 +3,7 @@
  
      Contains:   Interface for UTC to Local Time conversion and 64 Bit Clock routines
  
-     Version:    CarbonCore-960.18~3
- 
-     Copyright:  © 1999-2008 by Apple Inc., all rights reserved.
+     Copyright:  Â© 1999-2011 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -26,7 +24,7 @@
 
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -83,7 +81,7 @@ typedef LocalDateTimePtr *              LocalDateTimeHandle;
 extern OSStatus 
 ConvertLocalTimeToUTC(
   UInt32    localSeconds,
-  UInt32 *  utcSeconds)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  UInt32 *  utcSeconds)                                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -107,7 +105,7 @@ ConvertLocalTimeToUTC(
 extern OSStatus 
 ConvertUTCToLocalTime(
   UInt32    utcSeconds,
-  UInt32 *  localSeconds)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  UInt32 *  localSeconds)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* 64 bit clock conversion routines */
@@ -132,7 +130,7 @@ ConvertUTCToLocalTime(
 extern OSStatus 
 ConvertUTCToLocalDateTime(
   const UTCDateTime *  utcDateTime,
-  LocalDateTime *      localDateTime)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  LocalDateTime *      localDateTime)                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -156,7 +154,7 @@ ConvertUTCToLocalDateTime(
 extern OSStatus 
 ConvertLocalToUTCDateTime(
   const LocalDateTime *  localDateTime,
-  UTCDateTime *          utcDateTime)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  UTCDateTime *          utcDateTime)                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* Getter and Setter Clock routines using 64 Bit values */
@@ -178,7 +176,7 @@ ConvertLocalToUTCDateTime(
 extern OSStatus 
 GetUTCDateTime(
   UTCDateTime *  utcDateTime,
-  OptionBits     options)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  OptionBits     options)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -199,7 +197,7 @@ GetUTCDateTime(
 extern OSStatus 
 SetUTCDateTime(
   const UTCDateTime *  utcDateTime,
-  OptionBits           options)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  OptionBits           options)                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -220,7 +218,7 @@ SetUTCDateTime(
 extern OSStatus 
 GetLocalDateTime(
   LocalDateTime *  localDateTime,
-  OptionBits       options)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  OptionBits       options)                                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -240,7 +238,7 @@ GetLocalDateTime(
 extern OSStatus 
 SetLocalDateTime(
   const LocalDateTime *  localDateTime,
-  OptionBits             options)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  OptionBits             options)                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 #endif  /* !__LP64__ */

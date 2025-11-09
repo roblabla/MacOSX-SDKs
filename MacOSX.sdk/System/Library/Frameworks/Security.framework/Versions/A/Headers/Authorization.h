@@ -31,11 +31,7 @@
 #define _SECURITY_AUTHORIZATION_H_
 
 #include <TargetConditionals.h>
-#if TARGET_OS_EMBEDDED
 #include <MacTypes.h>
-#else
-#include <CoreServices/../Frameworks/CarbonCore.framework/Headers/MacTypes.h>
-#endif
 #include <Availability.h>
 
 #include <stdio.h>

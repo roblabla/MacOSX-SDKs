@@ -3,10 +3,10 @@
  * timestamp.h
  *	  Definitions for the SQL92 "timestamp" and "interval" types.
  *
- * Portions Copyright (c) 1996-2010, PostgreSQL Global Development Group
+ * Portions Copyright (c) 1996-2011, PostgreSQL Global Development Group
  * Portions Copyright (c) 1994, Regents of the University of California
  *
- * $PostgreSQL: pgsql/src/include/utils/timestamp.h,v 1.82 2010/01/02 16:58:10 momjian Exp $
+ * src/include/utils/timestamp.h
  *
  *-------------------------------------------------------------------------
  */
@@ -99,6 +99,16 @@ typedef struct
 #define USECS_PER_MINUTE INT64CONST(60000000)
 #define USECS_PER_SEC	INT64CONST(1000000)
 #endif
+
+/*
+ * We allow numeric timezone offsets up to 15:59:59 either way from Greenwich.
+ * Currently, the record holders for wackiest offsets in actual use are zones
+ * Asia/Manila, at -15:56:00 until 1844, and America/Metlakatla, at +15:13:42
+ * until 1867.  If we were to reject such values we would fail to dump and
+ * restore old timestamptz values with these zone settings.
+ */
+#define MAX_TZDISP_HOUR		15				/* maximum allowed hour part */
+#define TZDISP_LIMIT		((MAX_TZDISP_HOUR + 1) * SECS_PER_HOUR)
 
 /*
  * Macros for fmgr-callable functions.

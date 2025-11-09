@@ -174,6 +174,9 @@
 /* Define to 1 if your compiler understands __FUNCTION__. */
 /* #undef HAVE_FUNCNAME__FUNCTION */
 
+/* Define to 1 if you have __sync_lock_test_and_set(int *) and friends. */
+#define HAVE_GCC_INT_ATOMICS 1
+
 /* Define to 1 if you have the `getaddrinfo' function. */
 #define HAVE_GETADDRINFO 1
 
@@ -288,9 +291,6 @@
 /* Define to 1 if you have the `crypto' library (-lcrypto). */
 #define HAVE_LIBCRYPTO 1
 
-/* Define to 1 if you have the `eay32' library (-leay32). */
-/* #undef HAVE_LIBEAY32 */
-
 /* Define to 1 if you have the `ldap' library (-lldap). */
 #define HAVE_LIBLDAP 1
 
@@ -306,11 +306,11 @@
 /* Define if you have a function readline library */
 #define HAVE_LIBREADLINE 1
 
+/* Define to 1 if you have the `selinux' library (-lselinux). */
+/* #undef HAVE_LIBSELINUX */
+
 /* Define to 1 if you have the `ssl' library (-lssl). */
 #define HAVE_LIBSSL 1
-
-/* Define to 1 if you have the `ssleay32' library (-lssleay32). */
-/* #undef HAVE_LIBSSLEAY32 */
 
 /* Define to 1 if you have the `wldap32' library (-lwldap32). */
 /* #undef HAVE_LIBWLDAP32 */
@@ -328,6 +328,9 @@
    */
 /* #undef HAVE_LL_CONSTANTS */
 
+/* Define to 1 if the system has the type `locale_t'. */
+#define HAVE_LOCALE_T 1
+
 /* Define to 1 if `long int' works and is 64 bits. */
 #define HAVE_LONG_INT_64 1
 
@@ -342,6 +345,9 @@
 
 /* Define to 1 if you have the <memory.h> header file. */
 #define HAVE_MEMORY_H 1
+
+/* Define to 1 if the system has the type `MINIDUMP_TYPE'. */
+/* #undef HAVE_MINIDUMP_TYPE */
 
 /* Define to 1 if you have the <netinet/in.h> header file. */
 #define HAVE_NETINET_IN_H 1
@@ -497,9 +503,6 @@
 /* Define to 1 if the system has the type `struct cmsgcred'. */
 /* #undef HAVE_STRUCT_CMSGCRED */
 
-/* Define to 1 if the system has the type `struct fcred'. */
-/* #undef HAVE_STRUCT_FCRED */
-
 /* Define to 1 if the system has the type `struct option'. */
 #define HAVE_STRUCT_OPTION 1
 
@@ -523,9 +526,6 @@
 
 /* Define to 1 if the system has the type `struct sockaddr_un'. */
 #define HAVE_STRUCT_SOCKADDR_UN 1
-
-/* Define to 1 if the system has the type `struct sockcred'. */
-/* #undef HAVE_STRUCT_SOCKCRED */
 
 /* Define to 1 if `tm_zone' is member of `struct tm'. */
 #define HAVE_STRUCT_TM_TM_ZONE 1
@@ -583,6 +583,9 @@
 
 /* Define to 1 if you have the <sys/types.h> header file. */
 #define HAVE_SYS_TYPES_H 1
+
+/* Define to 1 if you have the <sys/ucred.h> header file. */
+#define HAVE_SYS_UCRED_H 1
 
 /* Define to 1 if you have the <sys/un.h> header file. */
 #define HAVE_SYS_UN_H 1
@@ -648,6 +651,9 @@
 /* Define to 1 if you have the `wcstombs' function. */
 #define HAVE_WCSTOMBS 1
 
+/* Define to 1 if you have the `wcstombs_l' function. */
+#define HAVE_WCSTOMBS_L 1
+
 /* Define to 1 if you have the <wctype.h> header file. */
 #define HAVE_WCTYPE_H 1
 
@@ -659,6 +665,9 @@
 
 /* Define to build with Kerberos 5 support. (--with-krb5) */
 #define KRB5 1
+
+/* Define to 1 if `locale_t' requires <xlocale.h>. */
+#define LOCALE_T_IN_XLOCALE 1
 
 /* Define as the maximum alignment requirement of any C data type. */
 #define MAXIMUM_ALIGNOF 8
@@ -673,29 +682,29 @@
 #define PACKAGE_NAME "PostgreSQL"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "PostgreSQL 9.0.4"
+#define PACKAGE_STRING "PostgreSQL 9.1.5"
 
 /* Define to the one symbol short name of this package. */
 #define PACKAGE_TARNAME "postgresql"
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION "9.0.4"
+#define PACKAGE_VERSION "9.1.5"
 
 /* Define to the name of the default PostgreSQL service principal in Kerberos.
    (--with-krb-srvnam=NAME) */
 #define PG_KRB_SRVNAM "postgres"
 
 /* PostgreSQL major version as a string */
-#define PG_MAJORVERSION "9.0"
+#define PG_MAJORVERSION "9.1"
 
 /* PostgreSQL version as a string */
-#define PG_VERSION "9.0.4"
+#define PG_VERSION "9.1.5"
 
 /* PostgreSQL version as a number */
-#define PG_VERSION_NUM 90004
+#define PG_VERSION_NUM 90105
 
 /* A string containing the version number, platform, and C compiler */
-#define PG_VERSION_STR "PostgreSQL 9.0.4 on x86_64-apple-darwin11.0, compiled by GCC i686-apple-darwin11-llvm-gcc-4.2 (GCC) 4.2.1 (Based on Apple Inc. build 5658) (LLVM build 2335.15.00), 64-bit"
+#define PG_VERSION_STR "PostgreSQL 9.1.5 on x86_64-apple-darwin12.0, compiled by Apple clang version 4.0 (tags/Apple/clang-418.0.60) (based on LLVM 3.1svn), 64-bit"
 
 /* Define to 1 to allow profiling output to be saved separately for each
    process. */

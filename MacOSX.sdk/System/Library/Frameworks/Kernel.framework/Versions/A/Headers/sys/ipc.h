@@ -113,7 +113,6 @@ typedef	__int32_t	key_t;
  * legacy interface there for binary compatibility only.  Currently, we
  * are only forcing this for programs requesting standards conformance.
  */
-#if __DARWIN_UNIX03 || defined(KERNEL)
 /*
  * [XSI] Information used in determining permission to perform an IPC
  * operation
@@ -129,9 +128,6 @@ struct ipc_perm
 	key_t		_key;		/* Reserved for internal use */
 };
 #define	__ipc_perm_new	ipc_perm
-#else	/* !__DARWIN_UNIX03 */
-#define	ipc_perm	__ipc_perm_old
-#endif	/* !__DARWIN_UNIX03 */
 
 #if !__DARWIN_UNIX03
 /*

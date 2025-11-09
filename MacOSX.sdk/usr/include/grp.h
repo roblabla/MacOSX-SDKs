@@ -1,25 +1,3 @@
-/*
- * Copyright (c) 2000 Apple Computer, Inc. All rights reserved.
- *
- * @APPLE_LICENSE_HEADER_START@
- * 
- * This file contains Original Code and/or Modifications of Original Code
- * as defined in and that are subject to the Apple Public Source License
- * Version 2.0 (the 'License'). You may not use this file except in
- * compliance with the License. Please obtain a copy of the License at
- * http://www.opensource.apple.com/apsl/ and read it before using this
- * file.
- * 
- * The Original Code and all software distributed under the License are
- * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
- * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
- * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
- * Please see the License for the specific language governing rights and
- * limitations under the License.
- * 
- * @APPLE_LICENSE_HEADER_END@
- */
 /*-
  * Copyright (c) 1989, 1993
  *	The Regents of the University of California.  All rights reserved.
@@ -59,6 +37,7 @@
  *
  *	@(#)grp.h	8.2 (Berkeley) 1/21/94
  */
+/* Portions copyright (c) 2000-2011 Apple Inc. All rights reserved. */ 
 
 #ifndef _GRP_H_
 #define	_GRP_H_
@@ -104,14 +83,22 @@ int getgrnam_r(const char *, struct group *, char *, size_t, struct group **);
 struct group *getgrent(void);
 void setgrent(void);
 void endgrent(void);
+__END_DECLS
 
-#if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
-#if !defined(_XOPEN_SOURCE) || defined(_DARWIN_C_SOURCE)
+#if (!defined(_POSIX_C_SOURCE) && !defined(_XOPEN_SOURCE)) || defined(_DARWIN_C_SOURCE)
+#include <uuid/uuid.h>
+__BEGIN_DECLS
 char *group_from_gid(gid_t, int);
+struct group *getgruuid(uuid_t);
+int getgruuid_r(uuid_t, struct group *, char *, size_t, struct group **);
+__END_DECLS
 #endif
+
+#if !defined(_XOPEN_SOURCE) || defined(_DARWIN_C_SOURCE)
+__BEGIN_DECLS
 void setgrfile(const char *);
 int setgroupent(int);
-#endif
 __END_DECLS
+#endif
 
 #endif /* !_GRP_H_ */

@@ -23,7 +23,7 @@
 /* Called before attempting to render the frame for layer time 't'.
  * When non-null 'ts' describes the display timestamp associated with
  * layer time 't'. If the method returns false, the frame is skipped. The
- * default implementation always returns true. */
+ * default implementation always returns YES. */
 
 - (BOOL)canDrawInCGLContext:(CGLContextObj)ctx
     pixelFormat:(CGLPixelFormatObj)pf forLayerTime:(CFTimeInterval)t

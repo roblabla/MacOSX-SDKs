@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2010 Apple Inc. All Rights Reserved.
+ * Copyright (c) 2000-2011 Apple Inc. All Rights Reserved.
  * 
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -21,6 +21,7 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 
+/* CDSA */
 #include <Security/cssmconfig.h>
 #include <Security/cssmapple.h>
 #include <Security/certextensions.h>
@@ -47,6 +48,7 @@
 #include <Security/oidscrl.h>
 #include <Security/x509defs.h>
 
+/* Security */
 #include <Security/SecBase.h>
 #include <Security/SecAccess.h>
 #include <Security/SecACL.h>
@@ -65,15 +67,24 @@
 #include <Security/SecTrustedApplication.h>
 #include <Security/SecTrustSettings.h>
 #include <Security/SecImportExport.h>
-#include <Security/SecStaticCode.h>
 
+/* Code Signing */
+#include <Security/SecStaticCode.h>
+#include <Security/SecCode.h>
+#include <Security/SecCodeHost.h>
+#include <Security/SecRequirement.h>
+#include <Security/SecTask.h>
+
+/* Authorization */
 #include <Security/Authorization.h>
 #include <Security/AuthorizationTags.h>
 #include <Security/AuthorizationDB.h>
 
+/* CMS */
 #include <Security/CMSDecoder.h>
 #include <Security/CMSEncoder.h>
 
+/* Secure Transport */
 #include <Security/CipherSuite.h>
 #include <Security/SecureTransport.h>
 

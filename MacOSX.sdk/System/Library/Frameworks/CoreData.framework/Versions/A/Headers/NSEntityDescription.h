@@ -1,20 +1,18 @@
 /*
     NSEntityDescription.h
     Core Data
-    Copyright (c) 2004-2010 Apple Inc.
+    Copyright (c) 2004-2012 Apple Inc.
     All rights reserved.
 */
 
-#import <Foundation/NSObject.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <Foundation/NSRange.h>
 
-@class NSArray;
-@class NSDictionary;
 @class NSManagedObjectModel;
-@class NSMutableDictionary;
-@class NSString;
 @class NSManagedObjectContext;
 @class NSManagedObject;
+@class NSData;
 
 // Entities describe the "types" of objects available.
 NS_CLASS_AVAILABLE(10_4,3_0)
@@ -98,5 +96,12 @@ NS_CLASS_AVAILABLE(10_4,3_0)
 
 - (NSString *)renamingIdentifier NS_AVAILABLE(10_6,3_0);
 - (void)setRenamingIdentifier:(NSString *)value NS_AVAILABLE(10_6,3_0);
+
+/* Returns/sets the set of compound indices for the entity. Returns/takes an array of arrays, each of which contains one or more NSPropertyDescription or NSString instances (strings must be the names of properties of the entity on which the index is created).
+    This value does not form part of the entity's version hash, and may be ignored by stores which do not natively support compound
+    indexes.
+ */
+- (NSArray *)compoundIndexes NS_AVAILABLE(10_7,5_0);
+- (void)setCompoundIndexes:(NSArray *)value NS_AVAILABLE(10_7,5_0);
 
 @end

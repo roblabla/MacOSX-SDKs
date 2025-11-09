@@ -3,7 +3,7 @@
 	
 	Framework:  CoreMedia
  
-    Copyright 2005-2011 Apple Inc. All rights reserved.
+    Copyright 2005-2012 Apple Inc. All rights reserved.
  
 */
 
@@ -206,7 +206,7 @@ CMTime CMTimeMake(
 CM_EXPORT 
 CMTime CMTimeMakeWithEpoch(
 				int64_t value,		/*! @param value Initializes the value field of the resulting CMTime. */
-				int32_t timescale,	/*! @param scale Initializes the scale field of the resulting CMTime. */
+				int32_t timescale,	/*! @param timescale Initializes the scale field of the resulting CMTime. */
 				int64_t epoch)		/*! @param epoch Initializes the epoch field of the resulting CMTime. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 				
@@ -310,9 +310,9 @@ CMTime CMTimeConvertScale(
 				If the operands are valid, but just one operand is infinite, the result will be similarly
 				infinite. If the operands are valid, and both are infinite, the results will be as follows:
 <ul>			+infinity + +infinity == +infinity
-<br>			-infinity + -infinity == -infinity
-<br>			+infinity + -infinity == invalid
-<br>			-infinity + +infinity == invalid
+<li>			-infinity + -infinity == -infinity
+<li>			+infinity + -infinity == invalid
+<li>			-infinity + +infinity == invalid
 </ul>
 				If the operands are valid, not infinite, and either or both is indefinite, the result
 				will be indefinite. 								
@@ -356,9 +356,9 @@ CMTime CMTimeAdd(
 				If the operands are valid, but just one operand is infinite, the result will be similarly
 				infinite. If the operands are valid, and both are infinite, the results will be as follows:
 <ul>			+infinity - +infinity == invalid
-<br>			-infinity - -infinity == invalid
-<br>			+infinity - -infinity == +infinity
-<br>			-infinity - +infinity == -infinity
+<li>			-infinity - -infinity == invalid
+<li>			+infinity - -infinity == +infinity
+<li>			-infinity - +infinity == -infinity
 </ul>
 				If the operands are valid, not infinite, and either or both is indefinite, the result
 				will be indefinite. 								

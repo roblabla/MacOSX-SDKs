@@ -1,7 +1,7 @@
 /*
         NSWindowScripting.h
         AppKit Framework
-        Copyright (c) 1997-2011, Apple Inc.
+        Copyright (c) 1997-2012, Apple Inc.
         All rights reserved.
 */
 

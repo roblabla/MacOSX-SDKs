@@ -1,7 +1,7 @@
 /*
         NSOpenGLLayer.h
         Application Kit
-        Copyright (c) 2008-2011, Apple Inc.
+        Copyright (c) 2008-2012, Apple Inc.
         All rights reserved.
 */
 

@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | Zend Engine                                                          |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1998-2011 Zend Technologies Ltd. (http://www.zend.com) |
+   | Copyright (c) 1998-2012 Zend Technologies Ltd. (http://www.zend.com) |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.00 of the Zend license,     |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: zend_modules.h 306939 2011-01-01 02:19:59Z felipe $ */
+/* $Id$ */
 
 #ifndef MODULES_H
 #define MODULES_H
@@ -112,6 +112,8 @@ struct _zend_module_entry {
 #define ZEND_MOD_REQUIRED(name)		ZEND_MOD_REQUIRED_EX(name, NULL, NULL)
 #define ZEND_MOD_CONFLICTS(name)	ZEND_MOD_CONFLICTS_EX(name, NULL, NULL)
 #define ZEND_MOD_OPTIONAL(name)		ZEND_MOD_OPTIONAL_EX(name, NULL, NULL)
+
+#define ZEND_MOD_END { NULL, NULL, NULL, 0 }
 
 struct _zend_module_dep {
 	const char *name;		/* module name */

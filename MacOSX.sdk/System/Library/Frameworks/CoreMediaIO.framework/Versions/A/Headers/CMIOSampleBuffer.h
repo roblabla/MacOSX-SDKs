@@ -4,7 +4,7 @@
      Contains:   Routines/constants/etc. used to create CoreMedia Sample Buffers for use in
 				 CMIO graphs.
 
-     Copyright:  (c) 2006-2010 by Apple Inc., all rights reserved.
+     Copyright:  (c) 2006-2011 by Apple Inc., all rights reserved.
 */
 
 /*!
@@ -82,32 +82,33 @@ enum
 	kCMIOSampleBufferNoDiscontinuities							= 0,			/*! @constant kCMIOSampleBufferNoDiscontinuities							no discontinuities. */
 	
 	kCMIOSampleBufferDiscontinuityFlag_UnknownDiscontinuity		= (1L << 0),	/*! @constant kCMIOSampleBufferDiscontinuityFlag_UnknownDiscontinuity		0x00000001  data was lost for unknown reasons. */
-	kCMIOSampleBufferDiscontinuityFlag_TimecodeDiscontinuity		= (1L << 1),	/*! @constant kCMIOSampleBufferDiscontinuityFlag_TimecodeDiscontinuity	0x00000002  a break in timecode was detected. */
+	kCMIOSampleBufferDiscontinuityFlag_TimecodeDiscontinuity	= (1L << 1),	/*! @constant kCMIOSampleBufferDiscontinuityFlag_TimecodeDiscontinuity		0x00000002  a break in timecode was detected. */
 	kCMIOSampleBufferDiscontinuityFlag_PacketError				= (1L << 2),	/*! @constant kCMIOSampleBufferDiscontinuityFlag_PacketError				0x00000004  a packet error occurred. */
 	kCMIOSampleBufferDiscontinuityFlag_StreamDiscontinuity		= (1L << 3),	/*! @constant kCMIOSampleBufferDiscontinuityFlag_StreamDiscontinuity		0x00000008  detected in the stream. */
-	kCMIOSampleBufferDiscontinuityFlag_MalformedData				= (1L << 4),	/*! @constant kCMIOSampleBufferDiscontinuityFlag_MalformedData			0x00000010  bad data was received. */
-	kCMIOSampleBufferDiscontinuityFlag_DataWasFlushed				= (1L << 5),	/*! @constant kCMIOSampleBufferDiscontinuityFlag_DataWasFlushed			0x00000020  data was flushed before read by graph. */
-	kCMIOSampleBufferDiscontinuityFlag_DataWasDropped				= (1L << 6),	/*! @constant kCMIOSampleBufferDiscontinuityFlag_DataWasDropped			0x00000040  a unit did not pull on its input fast enough. */
-	kCMIOSampleBufferDiscontinuityFlag_BufferOverrun				= (1L << 7),	/*! @constant kCMIOSampleBufferDiscontinuityFlag_BufferOverrun			0x00000080  a unit ran out of buffer space. */
-	kCMIOSampleBufferDiscontinuityFlag_DiscontinuityInDTS			= (1L << 8),	/*! @constant kCMIOSampleBufferDiscontinuityFlag_DiscontinuityInDTS		0x00000100  detected a break in adjacent DTS values. */
-	kCMIOSampleBufferDiscontinuityFlag_RelatedToDiscontinuity		= (1L << 9),	/*! @constant kCMIOSampleBufferDiscontinuityFlag_RelatedToDiscontinuity	0x00000200  this buffer is OK, but a related buffer
+	kCMIOSampleBufferDiscontinuityFlag_MalformedData			= (1L << 4),	/*! @constant kCMIOSampleBufferDiscontinuityFlag_MalformedData				0x00000010  bad data was received. */
+	kCMIOSampleBufferDiscontinuityFlag_DataWasFlushed			= (1L << 5),	/*! @constant kCMIOSampleBufferDiscontinuityFlag_DataWasFlushed				0x00000020  data was flushed before read by graph. */
+	kCMIOSampleBufferDiscontinuityFlag_DataWasDropped			= (1L << 6),	/*! @constant kCMIOSampleBufferDiscontinuityFlag_DataWasDropped				0x00000040  a unit did not pull on its input fast enough. */
+	kCMIOSampleBufferDiscontinuityFlag_BufferOverrun			= (1L << 7),	/*! @constant kCMIOSampleBufferDiscontinuityFlag_BufferOverrun				0x00000080  a unit ran out of buffer space. */
+	kCMIOSampleBufferDiscontinuityFlag_DiscontinuityInDTS		= (1L << 8),	/*! @constant kCMIOSampleBufferDiscontinuityFlag_DiscontinuityInDTS			0x00000100  detected a break in adjacent DTS values. */
+	kCMIOSampleBufferDiscontinuityFlag_RelatedToDiscontinuity	= (1L << 9),	/*! @constant kCMIOSampleBufferDiscontinuityFlag_RelatedToDiscontinuity		0x00000200  this buffer is OK, but a related buffer
 																																								(as in another picture in the same MPEG-2
 																																								GOP) exhibits a discontinuity. */
 	kCMIOSampleBufferDiscontinuityFlag_ClientSyncDiscontinuity	= (1L << 10),	/*! @constant kCMIOSampleBufferDiscontinuityFlag_ClientSyncDiscontinuity	0x00000400  a client forced a discontinuity, typically
 																																								as a way of syncronizing the graph to
 																																								a known state. */
-	kCMIOSampleBufferDiscontinuityFlag_TrickPlay					= (1L << 11),	/*! @constant kCMIOSampleBufferDiscontinuityFlag_TrickPlay				0x00000800  trick-play buffer. */
+	kCMIOSampleBufferDiscontinuityFlag_TrickPlay				= (1L << 11),	/*! @constant kCMIOSampleBufferDiscontinuityFlag_TrickPlay					0x00000800  trick-play buffer. */
 	kCMIOSampleBufferDiscontinuityFlag_NoDataMarker				= (1L << 12),	/*! @constant kCMIOSampleBufferDiscontinuityFlag_NoDataMarker				0x00001000  this is a dummy buffer that is sent through the
 																																								the graph if the source has no data (for example
 																																								an HDV camera running on empty tape). */
-	kCMIOSampleBufferDiscontinuityFlag_DataFormatChanged			= (1L << 13),	/*! @constant kCMIOSampleBufferDiscontinuityFlag_DataFormatChanged		0x00002000  data format changed. */
-	kCMIOSampleBufferDiscontinuityFlag_TimingReferenceJumped		= (1L << 14),	/*! @constant kCMIOSampleBufferDiscontinuityFlag_TimingReferenceJumped	0x00004000  the timing reference used to synchronize the buffer jumped. */
+	kCMIOSampleBufferDiscontinuityFlag_DataFormatChanged		= (1L << 13),	/*! @constant kCMIOSampleBufferDiscontinuityFlag_DataFormatChanged			0x00002000  data format changed. */
+	kCMIOSampleBufferDiscontinuityFlag_TimingReferenceJumped	= (1L << 14),	/*! @constant kCMIOSampleBufferDiscontinuityFlag_TimingReferenceJumped		0x00004000  the timing reference used to synchronize the buffer jumped. */
 	kCMIOSampleBufferDiscontinuityFlag_DurationWasExtended		= (1L << 15),	/*! @constant kCMIOSampleBufferDiscontinuityFlag_DurationWasExtended		0x00008000  the unit experience a buffer overrun but was able to accomodate for it
 																																								by increasing the duration of known good media;  this is a "soft"
 																																								discontinuity, much like kCMIOSampleBufferDiscontinuityFlag_TimecodeDiscontinuity,
 																																								meaning that the stream isn't necessarily broken, but clients might want to force
 																																								capture of all media. */
-	kCMIOSampleBufferDiscontinuityFlag_SleepWakeCycle				= (1L << 16),	/*! @constant kCMIOSampleBufferDiscontinuityFlag_SleepWakeCycle			0x00010000  the buffer was received during a sleep/wake cycle. */
+	kCMIOSampleBufferDiscontinuityFlag_SleepWakeCycle			= (1L << 16),	/*! @constant kCMIOSampleBufferDiscontinuityFlag_SleepWakeCycle				0x00010000  the buffer was received during a sleep/wake cycle. */
+	kCMIOSampleBufferDiscontinuityFlag_CodecSettingsChanged		= (1L << 17),	/*! @constant kCMIOSampleBufferDiscontinuityFlag_CodecSettingsChanged		0x00020000  the buffer has no data and is used to mark a change in format. */
 };
 
 /*!
@@ -279,6 +280,64 @@ extern CFStringRef kCMIOSampleBufferAttachmentKey_PulldownCadenceInfo;
 				is available for the current video frame.
 */
 extern CFStringRef kCMIOSampleBufferAttachmentKey_ClosedCaptionSampleBuffer;
+
+/*!
+	@const		kCMIOSampleBufferAttachmentKey_ClientSequenceID
+	@discussion	A CF obect.  Attached to buffers output from units that
+				support kCMIOUnitProperty_ClientSequenceID.
+*/
+extern CFStringRef kCMIOSampleBufferAttachmentKey_ClientSequenceID;
+
+/*!
+	@const		kCMIOSampleBufferAttachmentKey_MouseAndKeyboardModifiers
+	@discussion	A CFDictionary. Screen capture buffers will have this
+				attachment so that clients can have some information
+				as to the approximate state of the mouse and keyboard
+				modifiers when the screen was captured.  The following
+				keys will be present in the buffer:
+				
+					kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_CursorPositionX
+					kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_CursorPositionY
+					kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_MouseButtonState
+					kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_KeyboardModifiers
+*/
+extern CFStringRef kCMIOSampleBufferAttachmentKey_MouseAndKeyboardModifiers;
+
+/*!
+	@const		kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_CursorPositionX
+	@discussion	Used to look up a CFNumber from the CFDictionary specified by
+				kCMIOSampleBufferAttachmentKey_MouseAndKeyModifiers.  It specifies
+				the approximate X coordinate of the mouse when the screen was
+				captured.
+*/
+extern CFStringRef kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_CursorPositionX;
+
+/*!
+	@const		kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_CursorPositionY
+	@discussion	Used to look up a CFNumber from the CFDictionary specified by
+				kCMIOSampleBufferAttachmentKey_MouseAndKeyModifiers.  It specifies
+				the approximate Y coordinate of the mouse when the screen was
+				captured.
+*/
+extern CFStringRef kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_CursorPositionY;
+
+/*!
+	@const		kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_MouseButtonState
+	@discussion	Used to look up a CFNumber from the CFDictionary specified by
+				kCMIOSampleBufferAttachmentKey_MouseAndKeyModifiers.  It specifies
+				the approximate state of the mouse buttons when the screen was
+				captured.
+*/
+extern CFStringRef kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_MouseButtonState;
+
+/*!
+	@const		kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_KeyboardModifiers
+	@discussion	Used to look up a CFNumber from the CFDictionary specified by
+				kCMIOSampleBufferAttachmentKey_MouseAndKeyModifiers.  It specifies
+				the approximate state of the keyboard modifiers when the screen was
+				captured.
+*/
+extern CFStringRef kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_KeyboardModifiers;
 
 //=============================================================================
 //	Constants that specify marker buffers

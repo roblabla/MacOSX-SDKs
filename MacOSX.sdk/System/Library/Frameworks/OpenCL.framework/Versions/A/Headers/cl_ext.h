@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright:  (c) 2007-2009 by Apple, Inc., All Rights Reserved.
+ * Copyright:  (c) 2007-2012 by Apple, Inc., All Rights Reserved.
  ******************************************************************************/
 
 #ifndef __CL_EXT_H
@@ -116,7 +116,7 @@ extern CL_API_ENTRY cl_int CL_API_CALL clSetKernelArgsVaListAPPLE(cl_kernel /* k
 extern CL_API_ENTRY cl_int CL_API_CALL clSetKernelArgByNameAPPLE(cl_kernel    /* kernel */,                                         
                                                                  const char * /* arg_name */,
                                                                  size_t       /* arg_size */,
-                                                                 const void * /* arg_value */) CL_API_SUFFIX__VERSION_1_1;
+                                                                 const void * /* arg_value */) CL_EXT_SUFFIX__VERSION_1_1;
 
 /* Extension: cl_APPLE_query_kernel_names
  * 
@@ -144,7 +144,7 @@ extern CL_API_ENTRY cl_int CL_API_CALL clSetKernelArgByNameAPPLE(cl_kernel    /*
  * This selector may be passed to clCreateImage2D() in the cl_image_format.image_channel_data_type field.
  * It defines a biased signed 1.14 fixed point storage format, with range [-1, 3). The conversion from
  * float to this fixed point format is defined as follows:
- * 
+ *
  *      ushort float_to_sfixed14( float x ){
  *          int i = convert_int_sat_rte( x * 0x1.0p14f );         // scale [-1, 3.0) to [-16384, 3*16384), round to nearest integer
  *          i = add_sat( i, 0x4000 );                             // apply bias, to convert to [0, 65535) range
@@ -154,8 +154,10 @@ extern CL_API_ENTRY cl_int CL_API_CALL clSetKernelArgByNameAPPLE(cl_kernel    /*
  * The inverse conversion is the reverse process. The formats are currently only available on the CPU with
  * the CL_RGBA channel layout.
  */
-#define CL_SFIXED14_APPLE                                 0x10000008      /* Introduced in MacOS X.7. */
+#define CL_SFIXED14_APPLE                                 0x10000008      /* Introduced in MacOS X.7. */ 
+#define CL_BIASED_HALF_APPLE                              0x10000009      /* Introduced in MacOS X.7. */
 
+  
 /* Extension: YUV image support 
  * 
  * These formats can only be used when creating images from YUV 4:2:2 IOSurface, using the
@@ -164,7 +166,57 @@ extern CL_API_ENTRY cl_int CL_API_CALL clSetKernelArgByNameAPPLE(cl_kernel    /*
  */
 #define CL_YCbYCr_APPLE                                   0x10000010      /* Introduced in MacOS X.7. */
 #define CL_CbYCrY_APPLE                                   0x10000011      /* Introduced in MacOS X.7. */
+  
+/* Extension: ABGR and xBGR formats for CoreImage CL-GPU support */
+#define CL_ABGR_APPLE                                     0x10000012
+
+/* Extension: cl_APPLE_fp64_ops
+ *
+ * This extension if enabled supports double-precision basic arithmetic operations (add, sub, mul, divide and sqrt)
+ * This is a subset of the cl_khr_fp64 extension defined in the OpenCL 1.1 and 1.2 specifications.
+ * The precision values for these basic operations are the same as defined by the cl_khr_fp64 extension
+ */
  
+  
+/* Extension: clCreateDAGAPPLE
+ *
+ * Create a DAG object which owns the individual program fragments (DAG nodes)
+ * used to create the final kernel. If the context is invalid, returns
+ * NULL for the dag.
+ */
+typedef struct _cl_dag * cl_dag;
+typedef int              cl_dag_node;
+  
+cl_dag clCreateDAGAPPLE(cl_context c) CL_EXT_SUFFIX__VERSION_1_2;
+
+/* Extension: clReleaseDAGAPPLE
+ * Release a DAG object used to create the final kernel
+ */
+void clReleaseDAGAPPLE(cl_dag dag) CL_EXT_SUFFIX__VERSION_1_2;
+
+/* Extension: clGetDAGNodeAPPLE
+ * For a given function 'f' created with clCreateDAGAPPLE(), set 0 or more
+ * arguments from args at their corresponding index in 'arg_indices'.  For 
+ * functions:
+ *
+ * void foo(float4, float4);
+ * float4 bar(float4);
+ *
+ * You can set either the 1st, 2nd, or both inputs to foo() with the output of
+ * bar() by passing the bar() cl_dag_node one or more times in args().  
+ * Argument indices which are unset by this function are required to be 
+ * set by a clSetKernelArg() call on 'f' for each unset argument prior to 
+ * clEnqueueNDRangeKernel() on the output of clCreateKernelFromDAGAPPLE().
+ */
+cl_dag_node clGetDAGNodeAPPLE(cl_dag d, cl_kernel f, cl_dag_node *args,
+                              unsigned *arg_indices, unsigned nargs) CL_EXT_SUFFIX__VERSION_1_2;
+
+/* Extension:  clCreateKernelFromDAGAPPLE
+ * Given a DAG, ask CVMS to create a functional kernel from it.
+ */
+cl_kernel clCreateKernelFromDAGAPPLE(cl_dag d, cl_uint n,
+                                     const cl_device_id *list) CL_EXT_SUFFIX__VERSION_1_2;
+  
 #ifdef __cplusplus
 }
 #endif

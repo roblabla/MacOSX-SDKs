@@ -1,7 +1,7 @@
 /*
     NSSavePanel.h
     Application Kit
-    Copyright (c) 1994-2011, Apple Inc.
+    Copyright (c) 1994-2012, Apple Inc.
     All rights reserved.
 */
 
@@ -9,14 +9,13 @@
 #import <AppKit/NSPanel.h>
 
 @class NSBox, NSMutableArray, NSTextField, NSTextView, NSView, NSURL, NSProgressIndicator, NSControl;
-@protocol NSNavFileBrowser, NSNavLocationPopup;
 @protocol NSOpenSavePanelDelegate;
 
 /* Return codes from the open/save panel.
  */
 enum {
     NSFileHandlingPanelCancelButton	= NSCancelButton,
-    NSFileHandlingPanelOKButton		= NSOKButton,
+    NSFileHandlingPanelOKButton	= NSOKButton,
 };
 
 typedef struct __SPFlags {
@@ -39,7 +38,10 @@ typedef struct __SPFlags {
     unsigned int delegate_selectionDidChange:1;
     unsigned int delegate_didChangeToDirectory:1;
     unsigned int calledWindowOrderedIn:1;
-    unsigned int reserved:13;
+    unsigned int appCentric:1;
+    unsigned int disableBottomControls:1;
+    unsigned int accessoryViewDisclosed:1;
+    unsigned int reserved:10;
 } _SPFlags;
 
 @class NSSavePanelAuxiliary;
@@ -47,7 +49,7 @@ typedef struct __SPFlags {
 @interface NSSavePanel : NSPanel {
 @protected
     // All instance variables should be considered private
-    NSView<NSNavFileBrowser> *_navView;
+    NSView *__navView;
     NSView  *_accessoryView;
     NSArray *_allowedFileTypes;
     NSString *_validatedPosixName;
@@ -61,7 +63,7 @@ typedef struct __SPFlags {
     IBOutlet NSTextField  *_nameFieldLabel;
     IBOutlet NSButton     *_expansionButton;
     IBOutlet NSView       *_directoryPopUpContainer;
-    IBOutlet NSControl<NSNavLocationPopup> *_directoryPopUp;
+    IBOutlet NSControl    *_directoryPopUp;
     IBOutlet NSTextField  *_directoryPopUpLabel;
     IBOutlet NSBox        *_navViewContainer;
     IBOutlet NSBox        *_accessoryViewContainer;
@@ -70,7 +72,7 @@ typedef struct __SPFlags {
     IBOutlet NSButton     *_newFolderButton;
     IBOutlet NSButton     *_cancelButton;
     IBOutlet NSButton     *_okButton;
-    
+
     id _filepathInputController; // Unused
     id _reservedID;
 

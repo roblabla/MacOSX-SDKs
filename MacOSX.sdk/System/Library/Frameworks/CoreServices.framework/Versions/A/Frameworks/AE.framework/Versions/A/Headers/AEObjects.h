@@ -3,9 +3,9 @@
  
      Contains:   Object Support Library Interfaces.
  
-     Version:    AppleEvents-527.7~1
+    
  
-     Copyright:  © 1991-2008 by Apple Computer, Inc., all rights reserved
+     Copyright:  ï¿½ 1991-2008 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -26,7 +26,7 @@
 
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -169,7 +169,7 @@ typedef STACK_UPP_TYPE(OSLAdjustMarksProcPtr)                   OSLAdjustMarksUP
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern OSLAccessorUPP
-NewOSLAccessorUPP(OSLAccessorProcPtr userRoutine)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewOSLAccessorUPP(OSLAccessorProcPtr userRoutine)             __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 /*
  *  NewOSLCompareUPP()
@@ -180,7 +180,7 @@ NewOSLAccessorUPP(OSLAccessorProcPtr userRoutine)             AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern OSLCompareUPP
-NewOSLCompareUPP(OSLCompareProcPtr userRoutine)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewOSLCompareUPP(OSLCompareProcPtr userRoutine)               __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 /*
  *  NewOSLCountUPP()
@@ -191,7 +191,7 @@ NewOSLCompareUPP(OSLCompareProcPtr userRoutine)               AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern OSLCountUPP
-NewOSLCountUPP(OSLCountProcPtr userRoutine)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewOSLCountUPP(OSLCountProcPtr userRoutine)                   __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 /*
  *  NewOSLDisposeTokenUPP()
@@ -202,7 +202,7 @@ NewOSLCountUPP(OSLCountProcPtr userRoutine)                   AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern OSLDisposeTokenUPP
-NewOSLDisposeTokenUPP(OSLDisposeTokenProcPtr userRoutine)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewOSLDisposeTokenUPP(OSLDisposeTokenProcPtr userRoutine)     __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 /*
  *  NewOSLGetMarkTokenUPP()
@@ -213,7 +213,7 @@ NewOSLDisposeTokenUPP(OSLDisposeTokenProcPtr userRoutine)     AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern OSLGetMarkTokenUPP
-NewOSLGetMarkTokenUPP(OSLGetMarkTokenProcPtr userRoutine)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewOSLGetMarkTokenUPP(OSLGetMarkTokenProcPtr userRoutine)     __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 /*
  *  NewOSLGetErrDescUPP()
@@ -224,7 +224,7 @@ NewOSLGetMarkTokenUPP(OSLGetMarkTokenProcPtr userRoutine)     AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern OSLGetErrDescUPP
-NewOSLGetErrDescUPP(OSLGetErrDescProcPtr userRoutine)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewOSLGetErrDescUPP(OSLGetErrDescProcPtr userRoutine)         __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 /*
  *  NewOSLMarkUPP()
@@ -235,7 +235,7 @@ NewOSLGetErrDescUPP(OSLGetErrDescProcPtr userRoutine)         AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern OSLMarkUPP
-NewOSLMarkUPP(OSLMarkProcPtr userRoutine)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewOSLMarkUPP(OSLMarkProcPtr userRoutine)                     __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 /*
  *  NewOSLAdjustMarksUPP()
@@ -246,7 +246,7 @@ NewOSLMarkUPP(OSLMarkProcPtr userRoutine)                     AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern OSLAdjustMarksUPP
-NewOSLAdjustMarksUPP(OSLAdjustMarksProcPtr userRoutine)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewOSLAdjustMarksUPP(OSLAdjustMarksProcPtr userRoutine)       __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 /*
  *  DisposeOSLAccessorUPP()
@@ -257,7 +257,7 @@ NewOSLAdjustMarksUPP(OSLAdjustMarksProcPtr userRoutine)       AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeOSLAccessorUPP(OSLAccessorUPP userUPP)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeOSLAccessorUPP(OSLAccessorUPP userUPP)                 __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 /*
  *  DisposeOSLCompareUPP()
@@ -268,7 +268,7 @@ DisposeOSLAccessorUPP(OSLAccessorUPP userUPP)                 AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeOSLCompareUPP(OSLCompareUPP userUPP)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeOSLCompareUPP(OSLCompareUPP userUPP)                   __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 /*
  *  DisposeOSLCountUPP()
@@ -279,7 +279,7 @@ DisposeOSLCompareUPP(OSLCompareUPP userUPP)                   AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeOSLCountUPP(OSLCountUPP userUPP)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeOSLCountUPP(OSLCountUPP userUPP)                       __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 /*
  *  DisposeOSLDisposeTokenUPP()
@@ -290,7 +290,7 @@ DisposeOSLCountUPP(OSLCountUPP userUPP)                       AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeOSLDisposeTokenUPP(OSLDisposeTokenUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeOSLDisposeTokenUPP(OSLDisposeTokenUPP userUPP)         __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 /*
  *  DisposeOSLGetMarkTokenUPP()
@@ -301,7 +301,7 @@ DisposeOSLDisposeTokenUPP(OSLDisposeTokenUPP userUPP)         AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeOSLGetMarkTokenUPP(OSLGetMarkTokenUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeOSLGetMarkTokenUPP(OSLGetMarkTokenUPP userUPP)         __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 /*
  *  DisposeOSLGetErrDescUPP()
@@ -312,7 +312,7 @@ DisposeOSLGetMarkTokenUPP(OSLGetMarkTokenUPP userUPP)         AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeOSLGetErrDescUPP(OSLGetErrDescUPP userUPP)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeOSLGetErrDescUPP(OSLGetErrDescUPP userUPP)             __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 /*
  *  DisposeOSLMarkUPP()
@@ -323,7 +323,7 @@ DisposeOSLGetErrDescUPP(OSLGetErrDescUPP userUPP)             AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeOSLMarkUPP(OSLMarkUPP userUPP)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeOSLMarkUPP(OSLMarkUPP userUPP)                         __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 /*
  *  DisposeOSLAdjustMarksUPP()
@@ -334,7 +334,7 @@ DisposeOSLMarkUPP(OSLMarkUPP userUPP)                         AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeOSLAdjustMarksUPP(OSLAdjustMarksUPP userUPP)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeOSLAdjustMarksUPP(OSLAdjustMarksUPP userUPP)           __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 /*
  *  InvokeOSLAccessorUPP()
@@ -353,7 +353,7 @@ InvokeOSLAccessorUPP(
   const AEDesc *  selectionData,
   AEDesc *        value,
   SRefCon         accessorRefcon,
-  OSLAccessorUPP  userUPP)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSLAccessorUPP  userUPP)                                    __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 /*
  *  InvokeOSLCompareUPP()
@@ -369,7 +369,7 @@ InvokeOSLCompareUPP(
   const AEDesc *  obj1,
   const AEDesc *  obj2,
   Boolean *       result,
-  OSLCompareUPP   userUPP)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSLCompareUPP   userUPP)                                    __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 /*
  *  InvokeOSLCountUPP()
@@ -385,7 +385,7 @@ InvokeOSLCountUPP(
   DescType        containerClass,
   const AEDesc *  container,
   long *          result,
-  OSLCountUPP     userUPP)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSLCountUPP     userUPP)                                    __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 /*
  *  InvokeOSLDisposeTokenUPP()
@@ -398,7 +398,7 @@ InvokeOSLCountUPP(
 extern OSErr
 InvokeOSLDisposeTokenUPP(
   AEDesc *            unneededToken,
-  OSLDisposeTokenUPP  userUPP)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSLDisposeTokenUPP  userUPP)                                __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 /*
  *  InvokeOSLGetMarkTokenUPP()
@@ -413,7 +413,7 @@ InvokeOSLGetMarkTokenUPP(
   const AEDesc *      dContainerToken,
   DescType            containerClass,
   AEDesc *            result,
-  OSLGetMarkTokenUPP  userUPP)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSLGetMarkTokenUPP  userUPP)                                __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 /*
  *  InvokeOSLGetErrDescUPP()
@@ -426,7 +426,7 @@ InvokeOSLGetMarkTokenUPP(
 extern OSErr
 InvokeOSLGetErrDescUPP(
   AEDesc **         appDescPtr,
-  OSLGetErrDescUPP  userUPP)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSLGetErrDescUPP  userUPP)                                  __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 /*
  *  InvokeOSLMarkUPP()
@@ -441,7 +441,7 @@ InvokeOSLMarkUPP(
   const AEDesc *  dToken,
   const AEDesc *  markToken,
   long            index,
-  OSLMarkUPP      userUPP)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSLMarkUPP      userUPP)                                    __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 /*
  *  InvokeOSLAdjustMarksUPP()
@@ -456,7 +456,7 @@ InvokeOSLAdjustMarksUPP(
   long               newStart,
   long               newStop,
   const AEDesc *     markToken,
-  OSLAdjustMarksUPP  userUPP)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSLAdjustMarksUPP  userUPP)                                 __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 #if __MACH__
   #ifdef __cplusplus
@@ -527,7 +527,7 @@ InvokeOSLAdjustMarksUPP(
  *    Non-Carbon CFM:   in ObjectSupportLib 1.0 and later
  */
 extern OSErr 
-AEObjectInit(void)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+AEObjectInit(void)                                            __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 
 /* Not done by inline, but by direct linking into code.  It sets up the pack
@@ -551,7 +551,7 @@ AESetObjectCallbacks(
   OSLGetMarkTokenUPP   myGetMarkTokenProc,
   OSLMarkUPP           myMarkProc,
   OSLAdjustMarksUPP    myAdjustMarksProc,
-  OSLGetErrDescUPP     myGetErrDescProcPtr)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSLGetErrDescUPP     myGetErrDescProcPtr)                   __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 
 /*
@@ -569,7 +569,7 @@ extern OSErr
 AEResolve(
   const AEDesc *  objectSpecifier,
   short           callbackFlags,
-  AEDesc *        theToken)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AEDesc *        theToken)                                   __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 
 /*
@@ -589,7 +589,7 @@ AEInstallObjectAccessor(
   DescType         containerType,
   OSLAccessorUPP   theAccessor,
   SRefCon          accessorRefcon,
-  Boolean          isSysHandler)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean          isSysHandler)                              __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 
 /*
@@ -608,7 +608,7 @@ AERemoveObjectAccessor(
   DescType         desiredClass,
   DescType         containerType,
   OSLAccessorUPP   theAccessor,
-  Boolean          isSysHandler)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean          isSysHandler)                              __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 
 /*
@@ -628,7 +628,7 @@ AEGetObjectAccessor(
   DescType          containerType,
   OSLAccessorUPP *  accessor,
   SRefCon *         accessorRefcon,
-  Boolean           isSysHandler)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean           isSysHandler)                             __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 
 /*
@@ -643,7 +643,7 @@ AEGetObjectAccessor(
  *    Non-Carbon CFM:   in ObjectSupportLib 1.0 and later
  */
 extern OSErr 
-AEDisposeToken(AEDesc * theToken)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+AEDisposeToken(AEDesc * theToken)                             __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 
 /*
@@ -664,7 +664,7 @@ AECallObjectAccessor(
   DescType        containerClass,
   DescType        keyForm,
   const AEDesc *  keyData,
-  AEDesc *        token)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AEDesc *        token)                                      __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 
 

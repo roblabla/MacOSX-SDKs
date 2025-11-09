@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2006 Apple Computer, Inc. All rights reserved.
+ * Copyright © 1998-2012 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -46,6 +46,7 @@ enum {
 	kUSBDeviceUserClientRequestExtraPower,
 	kUSBDeviceUserClientReturnExtraPower,
 	kUSBDeviceUserClientGetExtraPowerAllocated,
+	kUSBDeviceUserClientGetBandwidthAvailableForDevice,
     kIOUSBLibDeviceUserClientNumCommands
     };
 
@@ -78,8 +79,18 @@ enum {
     kUSBInterfaceUserClientLowLatencyReadIsochPipe,
     kUSBInterfaceUserClientLowLatencyWriteIsochPipe,
 	kUSBInterfaceUserClientGetConfigDescriptor,
-    kIOUSBLibInterfaceUserClientNumCommands
-    };
+	kUSBInterfaceUserClientGetPipePropertiesV2,
+	kUSBInterfaceUserClientGetPipePropertiesV3,
+	kUSBInterfaceUserClientGetEndpointPropertiesV3,
+    kIOUSBLibInterfaceUserClientNumCommands,
+	kUSBInterfaceUserClientSupportsStreams = kIOUSBLibInterfaceUserClientNumCommands,
+	kUSBInterfaceUserClientCreateStreams,
+	kUSBInterfaceUserClientGetConfiguredStreams,
+	kUSBInterfaceUserClientReadStreamsPipe,
+	kUSBInterfaceUserClientWriteStreamsPipe,
+	kUSBInterfaceUserClientAbortStreamsPipe,
+	kIOUSBLibInterfaceUserClientV3NumCommands
+   };
 
 
 #if KERNEL
@@ -138,7 +149,7 @@ public:
     virtual bool		MergeDictionaryIntoDictionary(OSDictionary *  sourceDictionary,  OSDictionary *  targetDictionary);
 };
 
-#endif // KERNEL
+#endif
 
-#endif /* ! _IOKIT_IOUSBUSERCLIENT_H */
+#endif
 

@@ -6,8 +6,6 @@
 #import <Foundation/Foundation.h>
 #import <IOBluetooth/Bluetooth.h>
 
-#if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_0
-
 //===========================================================================================================================
 //	Forward Declarations
 //===========================================================================================================================
@@ -36,7 +34,10 @@
 	NSTimer *					_timerClassOfDeviceSetting;
 	void *						_eventListener;
 
-	void *__strong				_expansion[4];
+    id                          _mReserved;
+    id                          _mUnused000;
+    id                          _mUnused001;
+    id                          _mUnused002;
 }
 
 @property(assign) id delegate;
@@ -63,7 +64,7 @@
 	@result		Returns the current class of device value.
 */
 
-- (BluetoothClassOfDevice)classOfDevice DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (BluetoothClassOfDevice)classOfDevice;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@method		setClassOfDevice:forTimeInterval:
@@ -73,16 +74,7 @@
 	@result		Returns the whether setting the class of device value was successful. 0 if success, error code otherwise.
 */
 
-- (IOReturn)setClassOfDevice:(BluetoothClassOfDevice)classOfDevice		forTimeInterval:(NSTimeInterval)seconds DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
-
-//---------------------------------------------------------------------------------------------------------------------------
-/*!	@method		getAddress
-	@abstract	Gets the HCI controller's Bluetooth address.
-	@param		sender			Pointer to a BluetoothDeviceAddress structure.
-	@result		Returns error, if there was one.
-*/
-
-- (IOReturn)getAddress:(BluetoothDeviceAddress*)ioDeviceAddress DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (IOReturn)setClassOfDevice:(BluetoothClassOfDevice)classOfDevice		forTimeInterval:(NSTimeInterval)seconds;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@method		addressAsString
@@ -93,44 +85,12 @@
 - (NSString *)addressAsString;
 
 //---------------------------------------------------------------------------------------------------------------------------
-/*!	@method		getSupportedFeatures
-	@abstract	Get the HCI controller's supported features. See Bluetooth.h for a list of flags.
-	@result		Returns error, if there was one.
-*/
-
-- (IOReturn)getSupportedFeatures:(BluetoothHCISupportedFeatures*)features DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
-
-//---------------------------------------------------------------------------------------------------------------------------
 /*!	@method		nameAsString
  @abstract	Gets the "friendly" name of HCI controller.
  @result		Returns NSString with the device name, nil if there is not one or it cannot be read.
  */
 
 - (NSString *)nameAsString;
-
-//---------------------------------------------------------------------------------------------------------------------------
-/*!	@method		name
-	@abstract	Gets the "friendly" name of HCI controller.
-	@result		Returns NSString with the device name, nil if there is not one or it cannot be read.
-*/
-
-- (NSString *)name DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
-
-//---------------------------------------------------------------------------------------------------------------------------
-/*!	@method		readRSSIForDevice
-	@abstract	Gets the RSSI value for a (Connected) Bluetooth device.
-	@result		Returns noErr if the command was successfully sent to the hardware. Results will be returned on the delegate method -readRSSIForDeviceComplete.
-*/
-
-- (IOReturn)readRSSIForDevice:(IOBluetoothDevice*)device DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
-
-//---------------------------------------------------------------------------------------------------------------------------
-/*!	@method		readLinkQualityForDevice
-	@abstract	Gets the link quality value for a (Connected) Bluetooth device.
-	@result		Returns noErr if the command was successfully sent to the hardware. Results will be returned on the delegate method -readLinkQualityForDeviceComplete.
-*/
-
-- (IOReturn)readLinkQualityForDevice:(IOBluetoothDevice*)device DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 @end
 
@@ -151,15 +111,6 @@
 */
 
 @interface NSObject( IOBluetoothHostControllerDelegate )
-
-//---------------------------------------------------------------------------------------------------------------------------
-/*!	@method			controllerClassOfDeviceReverted
-	@discussion 	This delegate gets invoked when the Class of Device has been changed
-					with the -setClassOfDevice:forTimeInterval: method, and the specified time interval expires.
-	@param			sender			Controller object that sent this delegate message.
-*/
-
-- (void)	controllerClassOfDeviceReverted:(id)sender;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@method			readRSSIForDeviceComplete:device:info:error:
@@ -185,6 +136,3 @@
 
 extern NSString * const IOBluetoothHostControllerPoweredOnNotification;
 extern NSString * const IOBluetoothHostControllerPoweredOffNotification;
-
-#endif /* BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_0 */
-

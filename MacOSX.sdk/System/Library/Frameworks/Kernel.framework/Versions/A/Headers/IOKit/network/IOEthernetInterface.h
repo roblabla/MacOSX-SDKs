@@ -64,10 +64,8 @@
 #define kIOMulticastAddressList       "IOMulticastAddressList"
 #define kIOMulticastFilterData        kIOMulticastAddressList    
 
-/*
- * Kernel
- */
-#if defined(KERNEL) && defined(__cplusplus)
+#ifdef KERNEL
+#ifdef __cplusplus
 
 #include <IOKit/network/IONetworkInterface.h>
 #include <IOKit/network/IOEthernetController.h>
@@ -98,10 +96,11 @@ private:
     bool             _controllerLostPower;  // true if controller is unusable
 
     struct ExpansionData { 
-		UInt32      altMTU;                 // track the physical mtu of controller
-		UInt32      publishedFeatureID;     // id for published wake packet
+        UInt32      altMTU;                 // track the physical mtu of controller
+        UInt32      publishedFeatureID;     // id for published wake packet
         uint32_t    supportedWakeFilters;   // bitmask of supported wake filters
         OSNumber *  disabledWakeFilters;    // OSNumber of disabled wake filters
+        uint64_t    wompEnabledAssertionID;
 	};
     /*! @var reserved
         Reserved for future use.  (Internal use only)  */
@@ -136,7 +135,7 @@ private:
     int syncSIOCGIFDEVMTU(IONetworkController * ctr, struct ifreq * ifr);
     int syncSIOCSIFLLADDR(IONetworkController * ctr, const char * lladdr, int len);
 	void _fixupVlanPacket(mbuf_t, u_int16_t, int);
-    void reportInterfaceWakeFlags(void);
+    void reportInterfaceWakeFlags(IONetworkController * ctr);
 
     static void handleEthernetInputEvent(thread_call_param_t param0, thread_call_param_t param1);
     static int performGatedCommand(void *, void *, void *, void *, void *);
@@ -167,22 +166,6 @@ public:
 */
 
     virtual const char * getNamePrefix() const;
-
-/*! @function setProperties
-    @abstract Handles a request to set Ethernet interface properties from
-    kernel or non-kernel clients. 
-    @discussion For non-kernel clients, the preferred
-    access mechanism is through a user client connection.
-    @param properties An OSDictionary containing a collection of
-    properties.
-    @result Returns kIOReturnUnsupported if the interface did not
-    recognize any of the properties provided. Otherwise, the return
-    code will be kIOReturnSuccess to indicate no errors, or an
-    IOReturn error code to indicate that an error occurred while
-    handling one of the properties. 
-*/
-
-    virtual IOReturn setProperties( OSObject * properties );
 
 protected:
 
@@ -323,6 +306,6 @@ public:
     OSMetaClassDeclareReservedUnused( IOEthernetInterface, 15);
 };
 
-#endif /* defined(KERNEL) && defined(__cplusplus) */
-
+#endif /* __cplusplus */
+#endif /* KERNEL */
 #endif /* !_IOETHERNETINTERFACE_H */

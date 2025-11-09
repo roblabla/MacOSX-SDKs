@@ -1,16 +1,17 @@
 /*
- File:       OSServices/CSIdentityBase.h
+     File:       OSServices/CSIdentityBase.h
  
- Contains:   CSIdentity APIs
+     Contains:   CSIdentity APIs
  
- Copyright:  � 2006-2010 by Apple Inc., all rights reserved.
+     Copyright:  (c) 2006-2011 Apple Inc. All rights reserved.
  
- Bugs?:      For bug reports, consult the following page on
- the World Wide Web:
+     Bugs?:      For bug reports, consult the following page on
+                 the World Wide Web:
  
- http://developer.apple.com/bugreporter/
+                     http://developer.apple.com/bugreporter/
  
- */
+*/
+
 #ifndef __CSIDENTITYBASE__
 #define __CSIDENTITYBASE__
 
@@ -22,7 +23,7 @@
 #include <Security/SecBase.h>
 #endif
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -47,7 +48,7 @@ extern "C" {
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kCSIdentityErrorDomain							__OSX_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_5_0 ); 
+extern const CFStringRef kCSIdentityErrorDomain							__OSX_AVAILABLE_STARTING( __MAC_10_5,__IPHONE_5_0 ); 
 
 /*
  *  CSIdentity error codes
@@ -96,13 +97,7 @@ enum {
 	/*
 	 * The Posix name is aleady assigned to another identity
 	 */
-	kCSIdentityDuplicatePosixNameErr = -8,
-	
-	/*
-	 *	The given account does not exist 
-	 */
-	kCSIdentityUnknownAccountErr = -9,
-	
+	kCSIdentityDuplicatePosixNameErr = -8,	
 };
 	
 #pragma pack(pop)

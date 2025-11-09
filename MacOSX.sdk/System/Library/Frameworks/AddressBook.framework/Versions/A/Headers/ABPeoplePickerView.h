@@ -21,16 +21,16 @@ typedef enum {
 
 @interface ABPeoplePickerView : NSView {
 @private
-    id _reserved1;
-    id _reserved2;
-    id _reserved3;
-    id _reserved4;
-    id _reserved5;
-    SEL    _reserved6;
-    SEL    _reserved7;
-    id _reserved8;
-    id _reserved9;
-    id _reserved10;
+    id _reserved1 __unused;
+    id _reserved2 __unused;
+    id _reserved3 __unused;
+    id _reserved4 __unused;
+    id _reserved5 __unused;
+    SEL    _reserved6 __unused;
+    SEL    _reserved7 __unused;
+    id _reserved8 __unused;
+    id _reserved9 __unused;
+    id _reserved10 __unused;
 }
 
 /*
@@ -88,7 +88,8 @@ typedef enum {
 // returned if the All group is selected.
 @property (readonly) NSArray* selectedGroups;
 
-// Returns names column selection as an array of ABGroup or ABPerson objects.
+// Returns names column selection as an array of ABGroup or ABPerson objects. When unified contacts are selected,
+// returns every ABPerson that owns a selected value.
 @property (readonly) NSArray* selectedRecords;
 
 // This method returns an array of selected multi-value identifiers. Returns nil if the displayed

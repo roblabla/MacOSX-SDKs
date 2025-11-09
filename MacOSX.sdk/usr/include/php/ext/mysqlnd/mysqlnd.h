@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 2006-2011 The PHP Group                                |
+  | Copyright (c) 2006-2012 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -17,16 +17,17 @@
   |          Ulf Wendel <uwendel@mysql.com>                              |
   +----------------------------------------------------------------------+
 */
-/* $Id: mysqlnd.h 308673 2011-02-25 13:11:49Z andrey $ */
+/* $Id: 65fe78e70ce53d27a6cd578597722950e490b0d0 $ */
 
 #ifndef MYSQLND_H
 #define MYSQLND_H
 
-#define MYSQLND_VERSION "mysqlnd 5.0.8-dev - 20102224 - $Revision: 308673 $"
+#define MYSQLND_VERSION "mysqlnd 5.0.8-dev - 20102224 - $Id: 65fe78e70ce53d27a6cd578597722950e490b0d0 $"
 #define MYSQLND_VERSION_ID 50008
 
 /* This forces inlining of some accessor functions */
 #define MYSQLND_USE_OPTIMISATIONS 0
+#define AUTOCOMMIT_TX_COMMIT_ROLLBACK
 
 #define MYSQLND_STRING_TO_INT_CONVERSION
 /*
@@ -48,6 +49,10 @@
 #define MYSQLND_DBG_ENABLED 1
 #else
 #define MYSQLND_DBG_ENABLED 0
+#endif
+
+#if defined(MYSQLND_COMPRESSION_WANTED) && defined(HAVE_ZLIB)
+#define MYSQLND_COMPRESSION_ENABLED 1
 #endif
 
 #ifdef ZTS

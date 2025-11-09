@@ -56,11 +56,11 @@ typedef enum CBLAS_SIDE CBLAS_SIDE;
  */
 extern float 
 SDOT(
-  const int *    N,
-  const float *  X,
-  const int *    incX,
-  const float *  Y,
-  const int *    incY)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const int *    /* N */,
+  const float *  /* X */,
+  const int *    /* incX */,
+  const float *  /* Y */,
+  const int *    /* incY */)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -73,9 +73,9 @@ SDOT(
  */
 extern float 
 SNRM2(
-  const int *    N,
-  const float *  X,
-  const int *    incX)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const int *    /* N */,
+  const float *  /* X */,
+  const int *    /* incX */)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -88,9 +88,9 @@ SNRM2(
  */
 extern float 
 SASUM(
-  const int *    N,
-  const float *  X,
-  const int *    incX)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const int *    /* N */,
+  const float *  /* X */,
+  const int *    /* incX */)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -103,9 +103,9 @@ SASUM(
  */
 extern int 
 ISAMAX(
-  const int *    N,
-  const float *  X,
-  const int *    incX)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const int *    /* N */,
+  const float *  /* X */,
+  const int *    /* incX */)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -118,11 +118,11 @@ ISAMAX(
  */
 extern void 
 SSWAP(
-  const int *  N,
-  float *      X,
-  const int *  incX,
-  float *      Y,
-  const int *  incY)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const int *    /* N */,
+  const float *  /* X */,
+  const int *    /* incX */,
+  float *        /* Y */,
+  const int *    /* incY */)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -135,11 +135,11 @@ SSWAP(
  */
 extern void 
 SCOPY(
-  const int *    N,
-  const float *  X,
-  const int *    incX,
-  float *        Y,
-  const int *    incY)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const int *    /* N */,
+  const float *  /* X */,
+  const int *    /* incX */,
+  float *        /* Y */,
+  const int *    /* incY */)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -152,12 +152,12 @@ SCOPY(
  */
 extern void 
 SAXPY(
-  const int *    N,
-  const float *  alpha,
-  const float *  X,
-  const int *    incX,
-  float *        Y,
-  const int *    incY)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const int *    /* N */,
+  const float *  /* alpha */,
+  const float *  /* X */,
+  const int *    /* incX */,
+  float *        /* Y */,
+  const int *    /* incY */)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -170,13 +170,13 @@ SAXPY(
  */
 extern void 
 SROT(
-  const int *    N,
-  float *        X,
-  const int *    incX,
-  float *        Y,
-  const int *    incY,
-  const float *  c,
-  const float *  s)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const int *    /* N */,
+  float *        /* X */,
+  const int *    /* incX */,
+  float *        /* Y */,
+  const int *    /* incY */,
+  const float *  /* c */,
+  const float *  /* s */)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -189,10 +189,10 @@ SROT(
  */
 extern void 
 SSCAL(
-  const int *    N,
-  const float *  alpha,
-  float *        X,
-  const int *    incX)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const int *    /* N */,
+  const float *  /* alpha */,
+  float *        /* X */,
+  const int *    /* incX */)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -205,17 +205,17 @@ SSCAL(
  */
 extern void 
 SGEMV(
-  const char *   transA,
-  const int *    M,
-  const int *    N,
-  const float *  alpha,
-  const float *  A,
-  const int *    lda,
-  const float *  X,
-  const int *    incX,
-  const float *  beta,
-  float *        Y,
-  const int *    incY)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const char *   /* transA */,
+  const int *    /* M */,
+  const int *    /* N */,
+  const float *  /* alpha */,
+  const float *  /* A */,
+  const int *    /* lda */,
+  const float *  /* X */,
+  const int *    /* incX */,
+  const float *  /* beta */,
+  float *        /* Y */,
+  const int *    /* incY */)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -228,19 +228,19 @@ SGEMV(
  */
 extern void 
 SGEMM(
-  const char *   transA,
-  const char *   transB,
-  const int *    M,
-  const int *    N,
-  const int *    K,
-  const float *  alpha,
-  const float *  A,
-  const int *    lda,
-  const float *  B,
-  const int *    ldb,
-  const float *  beta,
-  float *        C,
-  const int *    ldc)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const char *   /* transA */,
+  const char *   /* transB */,
+  const int *    /* M */,
+  const int *    /* N */,
+  const int *    /* K */,
+  const float *  /* alpha */,
+  const float *  /* A */,
+  const int *    /* lda */,
+  const float *  /* B */,
+  const int *    /* ldb */,
+  const float *  /* beta */,
+  float *        /* C */,
+  const int *    /* ldc */)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* ==========================================================================================================================*/

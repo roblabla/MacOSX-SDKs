@@ -3,7 +3,7 @@
  
      Contains:   Speech Interfaces.
  
-     Version:    SpeechSynthesis-4.0.74~1
+     Version:    SpeechSynthesis-4.1.12~1
  
      Copyright:  © 1989-2008 by Apple Computer, Inc., all rights reserved.
  
@@ -850,7 +850,7 @@ typedef STACK_UPP_TYPE(SpeechWordProcPtr)                       SpeechWordUPP;
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern SpeechTextDoneUPP
-NewSpeechTextDoneUPP(SpeechTextDoneProcPtr userRoutine)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewSpeechTextDoneUPP(SpeechTextDoneProcPtr userRoutine)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_8;
 
 /*
  *  NewSpeechDoneUPP()
@@ -861,7 +861,7 @@ NewSpeechTextDoneUPP(SpeechTextDoneProcPtr userRoutine)       AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern SpeechDoneUPP
-NewSpeechDoneUPP(SpeechDoneProcPtr userRoutine)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewSpeechDoneUPP(SpeechDoneProcPtr userRoutine)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_8;
 
 /*
  *  NewSpeechSyncUPP()
@@ -872,7 +872,7 @@ NewSpeechDoneUPP(SpeechDoneProcPtr userRoutine)               AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern SpeechSyncUPP
-NewSpeechSyncUPP(SpeechSyncProcPtr userRoutine)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewSpeechSyncUPP(SpeechSyncProcPtr userRoutine)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_8;
 
 /*
  *  NewSpeechErrorUPP()
@@ -883,7 +883,7 @@ NewSpeechSyncUPP(SpeechSyncProcPtr userRoutine)               AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern SpeechErrorUPP
-NewSpeechErrorUPP(SpeechErrorProcPtr userRoutine)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewSpeechErrorUPP(SpeechErrorProcPtr userRoutine)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_8;
 
 /*
  *  NewSpeechPhonemeUPP()
@@ -894,7 +894,7 @@ NewSpeechErrorUPP(SpeechErrorProcPtr userRoutine)             AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern SpeechPhonemeUPP
-NewSpeechPhonemeUPP(SpeechPhonemeProcPtr userRoutine)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewSpeechPhonemeUPP(SpeechPhonemeProcPtr userRoutine)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_8;
 
 /*
  *  NewSpeechWordUPP()
@@ -905,7 +905,7 @@ NewSpeechPhonemeUPP(SpeechPhonemeProcPtr userRoutine)         AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern SpeechWordUPP
-NewSpeechWordUPP(SpeechWordProcPtr userRoutine)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewSpeechWordUPP(SpeechWordProcPtr userRoutine)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_8;
 
 /*
  *  DisposeSpeechTextDoneUPP()
@@ -916,7 +916,7 @@ NewSpeechWordUPP(SpeechWordProcPtr userRoutine)               AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeSpeechTextDoneUPP(SpeechTextDoneUPP userUPP)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeSpeechTextDoneUPP(SpeechTextDoneUPP userUPP)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_8;
 
 /*
  *  DisposeSpeechDoneUPP()
@@ -927,7 +927,7 @@ DisposeSpeechTextDoneUPP(SpeechTextDoneUPP userUPP)           AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeSpeechDoneUPP(SpeechDoneUPP userUPP)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeSpeechDoneUPP(SpeechDoneUPP userUPP)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_8;
 
 /*
  *  DisposeSpeechSyncUPP()
@@ -938,7 +938,7 @@ DisposeSpeechDoneUPP(SpeechDoneUPP userUPP)                   AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeSpeechSyncUPP(SpeechSyncUPP userUPP)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeSpeechSyncUPP(SpeechSyncUPP userUPP)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_8;
 
 /*
  *  DisposeSpeechErrorUPP()
@@ -949,7 +949,7 @@ DisposeSpeechSyncUPP(SpeechSyncUPP userUPP)                   AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeSpeechErrorUPP(SpeechErrorUPP userUPP)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeSpeechErrorUPP(SpeechErrorUPP userUPP)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_8;
 
 /*
  *  DisposeSpeechPhonemeUPP()
@@ -960,7 +960,7 @@ DisposeSpeechErrorUPP(SpeechErrorUPP userUPP)                 AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeSpeechPhonemeUPP(SpeechPhonemeUPP userUPP)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeSpeechPhonemeUPP(SpeechPhonemeUPP userUPP)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_8;
 
 /*
  *  DisposeSpeechWordUPP()
@@ -971,7 +971,7 @@ DisposeSpeechPhonemeUPP(SpeechPhonemeUPP userUPP)             AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeSpeechWordUPP(SpeechWordUPP userUPP)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeSpeechWordUPP(SpeechWordUPP userUPP)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_8;
 
 /*
  *  InvokeSpeechTextDoneUPP()
@@ -988,7 +988,7 @@ InvokeSpeechTextDoneUPP(
   const void **      nextBuf,
   unsigned long *    byteLen,
   SInt32 *           controlFlags,
-  SpeechTextDoneUPP  userUPP)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SpeechTextDoneUPP  userUPP)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_8;
 
 /*
  *  InvokeSpeechDoneUPP()
@@ -1002,7 +1002,7 @@ extern void
 InvokeSpeechDoneUPP(
   SpeechChannel  chan,
   SRefCon        refCon,
-  SpeechDoneUPP  userUPP)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SpeechDoneUPP  userUPP)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_8;
 
 /*
  *  InvokeSpeechSyncUPP()
@@ -1017,7 +1017,7 @@ InvokeSpeechSyncUPP(
   SpeechChannel  chan,
   SRefCon        refCon,
   OSType         syncMessage,
-  SpeechSyncUPP  userUPP)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SpeechSyncUPP  userUPP)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_8;
 
 /*
  *  InvokeSpeechErrorUPP()
@@ -1033,7 +1033,7 @@ InvokeSpeechErrorUPP(
   SRefCon         refCon,
   OSErr           theError,
   long            bytePos,
-  SpeechErrorUPP  userUPP)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SpeechErrorUPP  userUPP)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_8;
 
 /*
  *  InvokeSpeechPhonemeUPP()
@@ -1048,7 +1048,7 @@ InvokeSpeechPhonemeUPP(
   SpeechChannel     chan,
   SRefCon           refCon,
   SInt16            phonemeOpcode,
-  SpeechPhonemeUPP  userUPP)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SpeechPhonemeUPP  userUPP)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_8;
 
 /*
  *  InvokeSpeechWordUPP()
@@ -1064,7 +1064,7 @@ InvokeSpeechWordUPP(
   SRefCon        refCon,
   unsigned long  wordPos,
   UInt16         wordLen,
-  SpeechWordUPP  userUPP)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SpeechWordUPP  userUPP)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_8;
 
 #if __MACH__
   #ifdef __cplusplus
@@ -1221,22 +1221,28 @@ DisposeSpeechChannel(SpeechChannel chan)                      AVAILABLE_MAC_OS_X
 
 
 /*
- *  SpeakString()
+ *  SpeakString()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use SpeakCFString instead
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.8
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SpeechLib 1.0 and later
  */
 extern OSErr 
-SpeakString(ConstStr255Param textToBeSpoken)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SpeakString(ConstStr255Param textToBeSpoken)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_8;
 
 
 /*
- *  SpeakText()
+ *  SpeakText()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use SpeakCFString instead
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.8
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SpeechLib 1.0 and later
  */
@@ -1244,14 +1250,17 @@ extern OSErr
 SpeakText(
   SpeechChannel   chan,
   const void *    textBuf,
-  unsigned long   textBytes)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned long   textBytes)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_8;
 
 
 /*
- *  SpeakBuffer()
+ *  SpeakBuffer()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use SpeakCFString instead
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.8
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SpeechLib 1.0 and later
  */
@@ -1260,7 +1269,7 @@ SpeakBuffer(
   SpeechChannel   chan,
   const void *    textBuf,
   unsigned long   textBytes,
-  SInt32          controlFlags)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32          controlFlags)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_8;
 
 
 /*
@@ -1396,10 +1405,13 @@ GetSpeechPitch(
 
 
 /*
- *  SetSpeechInfo()
+ *  SetSpeechInfo()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use SetSpeechProperty instead
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.8
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SpeechLib 1.0 and later
  */
@@ -1407,14 +1419,17 @@ extern OSErr
 SetSpeechInfo(
   SpeechChannel   chan,
   OSType          selector,
-  const void *    speechInfo)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const void *    speechInfo)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_8;
 
 
 /*
- *  GetSpeechInfo()
+ *  GetSpeechInfo()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CopySpeechProperty instead
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.8
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SpeechLib 1.0 and later
  */
@@ -1422,14 +1437,17 @@ extern OSErr
 GetSpeechInfo(
   SpeechChannel   chan,
   OSType          selector,
-  void *          speechInfo)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *          speechInfo)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_8;
 
 
 /*
- *  TextToPhonemes()
+ *  TextToPhonemes()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CopyPhonemesFromText instead
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.8
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SpeechLib 1.0 and later
  */
@@ -1439,21 +1457,24 @@ TextToPhonemes(
   const void *    textBuf,
   unsigned long   textBytes,
   Handle          phonemeBuf,
-  long *          phonemeBytes)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *          phonemeBytes)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_8;
 
 
 /*
- *  UseDictionary()
+ *  UseDictionary()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use UseSpeechDictionary instead
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.8
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SpeechLib 1.0 and later
  */
 extern OSErr 
 UseDictionary(
   SpeechChannel   chan,
-  Handle          dictionary)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle          dictionary)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_8;
 
 
 /* Replaces SpeakBuffer*/

@@ -1,6 +1,6 @@
 /*
     File:		IOBluetoothL2CAPChannel.h
-    Copyright:	(c) 2010 by Apple, Inc. All rights reserved.
+    Copyright:	(c) 2012 by Apple, Inc. All rights reserved.
 */
  
 #import <Foundation/Foundation.h>
@@ -11,6 +11,45 @@
 #import <IOBluetooth/IOBluetoothUserLib.h>
 #import <IOBluetooth/objc/IOBluetoothDevice.h>
 #import <IOBluetooth/objc/IOBluetoothObject.h>
+
+
+#if 0
+#pragma mark -
+#pragma mark === L2CAP ===
+#endif
+
+//===========================================================================================================================
+// The following is left in for legacy reasons only. Please ignore.
+//===========================================================================================================================
+
+typedef enum IOBluetoothL2CAPChannelEventType {
+	kIOBluetoothL2CAPChannelEventTypeData					=	0x0001,
+	kIOBluetoothL2CAPChannelEventTypeOpenComplete			=	0x0002,
+	kIOBluetoothL2CAPChannelEventTypeClosed					=	0x0003,
+	kIOBluetoothL2CAPChannelEventTypeReconfigured			=	0x0004,
+	kIOBluetoothL2CAPChannelEventTypeWriteComplete			=	0x0005,
+	kIOBluetoothL2CAPChannelEventTypeQueueSpaceAvailable	=	0x0006
+} IOBluetoothL2CAPChannelEventType;
+
+typedef struct IOBluetoothL2CAPChannelDataBlock
+{
+	void 	*dataPtr;
+	size_t	dataSize;
+} IOBluetoothL2CAPChannelDataBlock;
+
+typedef struct IOBluetoothL2CAPChannelEvent {
+	IOBluetoothL2CAPChannelEventType	eventType;
+	union
+	{
+		IOBluetoothL2CAPChannelDataBlock	data;
+		void*								writeRefCon;
+		UInt8								padding[32];
+	} u;
+	IOReturn							status;
+} IOBluetoothL2CAPChannelEvent;
+
+typedef void (*IOBluetoothL2CAPChannelIncomingDataListener)(IOBluetoothL2CAPChannelRef l2capChannel, void *data, UInt16 length, void *refCon);
+typedef void (*IOBluetoothL2CAPChannelIncomingEventListener)(IOBluetoothL2CAPChannelRef l2capChannel, void *refCon, IOBluetoothL2CAPChannelEvent *event);
 
 
 //--------------------------------------------------------------------------------------------------------------------------
@@ -55,7 +94,7 @@
 	BOOL										mIsClosed;
     IOBluetoothObjectID							mObjectID;
     
-    __strong void								*_mReserved;
+    id                                          _mReserved;
 }
 
 /*!
@@ -322,8 +361,8 @@ extern NSString * const IOBluetoothL2CAPChannelTerminatedNotification;
 
 @interface NSObject( IOBluetoothL2CAPChannelDeprecated )
 
-- (IOReturn)registerIncomingDataListener:(IOBluetoothL2CAPChannelIncomingDataListener)listener refCon:(void *)refCon DEPRECATED_IN_BLUETOOTH_VERSION_2_0_AND_LATER;
-- (IOReturn)write:(void *)data length:(UInt16)length DEPRECATED_IN_BLUETOOTH_VERSION_2_0_AND_LATER;
+- (IOReturn)registerIncomingDataListener:(IOBluetoothL2CAPChannelIncomingDataListener)listener refCon:(void *)refCon DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (IOReturn)write:(void *)data length:(UInt16)length DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 + (IOBluetoothL2CAPChannel *)withL2CAPChannelRef:(IOBluetoothL2CAPChannelRef)l2capChannelRef DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 - (IOBluetoothL2CAPChannelRef)getL2CAPChannelRef DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 

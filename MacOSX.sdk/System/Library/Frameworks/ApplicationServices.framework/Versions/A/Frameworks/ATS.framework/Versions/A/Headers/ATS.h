@@ -5,7 +5,7 @@
  
      Version:    ATS
  
-     Copyright:  © 1999-2011 by Apple Inc., all rights reserved.
+     Copyright:  (c) 1999-2012 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -20,6 +20,9 @@
 #include <CoreServices/CoreServices.h>
 #endif
 
+#ifndef __ATSDEFINES__
+#include <ATS/ATSDefines.h>
+#endif
 
 #ifndef __ATSLAYOUTTYPES__
 #include <ATS/ATSLayoutTypes.h>
@@ -31,10 +34,6 @@
 
 #ifndef __ATSTYPES__
 #include <ATS/ATSTypes.h>
-#endif
-
-#ifndef __SCALERSTREAMTYPES__
-#include <ATS/ScalerStreamTypes.h>
 #endif
 
 #ifndef __SFNTLAYOUTTYPES__

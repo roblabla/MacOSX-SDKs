@@ -1,9 +1,9 @@
 /*
-     File:       OpenTransport.r
+     File:       OSServices/OpenTransport.r
  
-     Contains:   Open Transport client interface file.
+     Contains:   *** DEPRECATED *** Open Transport client interface file.
  
-     Copyright:  © 1985-2010 by Apple Inc., all rights reserved
+     Copyright:  (c) 1985-2011 Apple Inc. All rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

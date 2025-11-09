@@ -84,9 +84,9 @@ QL_EXPORT CGImageRef QLThumbnailCopyImage(QLThumbnailRef thumbnail) AVAILABLE_MA
  @function QLThumbnailGetContentRect
  @abstract Returns the the effective rect within the thumbnail image representing the
            content of the document. In icon mode, this is the part of the image without
-           all the image decorations..
+           all the image decorations.
  @param thumbnail The thumbnail to compute.
- @result The content rect of the thumbnail.
+ @result The content rect of the thumbnail expressed in pixel coordinates.
  */
 QL_EXPORT CGRect QLThumbnailGetContentRect(QLThumbnailRef thumbnail) AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 

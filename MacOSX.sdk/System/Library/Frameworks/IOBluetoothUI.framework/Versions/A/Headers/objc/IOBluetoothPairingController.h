@@ -54,8 +54,6 @@
 */
 - (IOBluetoothPairingControllerRef)getPairingControllerRef DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-#if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_1
-
 /*!
     @method		runModal
 	@abstract	Runs the pairing panel in a modal session to allow the user to select a Bluetooth device.
@@ -235,7 +233,5 @@
 */
 
 - (NSString *)getPrompt;
-
-#endif /* BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_1 */
 
 @end

@@ -2,16 +2,10 @@
      File:       CarbonCore/Folders.h
  
      Contains:   Folder Manager Interfaces.
+                 The contents of this header file are deprecated.
+                 Use NSFileManager instead.
  
-     Version:    CarbonCore-960.18~3
- 
-     Copyright:  © 1995-2008 by Apple Computer, Inc., all rights reserved.
- 
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
- 
-                     http://developer.apple.com/bugreporter/
- 
+     Copyright:  © 1995-2011 by Apple Inc. All rights reserved.
 */
 #ifndef __FOLDERS__
 #define __FOLDERS__
@@ -30,7 +24,7 @@
 
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -180,7 +174,7 @@ FindFolder(
   OSType            folderType,
   Boolean           createFolder,
   FSVolumeRefNum *  foundVRefNum,
-  SInt32 *          foundDirID)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32 *          foundDirID)                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -219,7 +213,7 @@ FindFolder(
 extern OSErr 
 ReleaseFolder(
   FSVolumeRefNum   vRefNum,
-  OSType           folderType)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
+  OSType           folderType)                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_3, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -293,7 +287,7 @@ FSFindFolder(
   FSVolumeRefNum   vRefNum,
   OSType           folderType,
   Boolean          createFolder,
-  FSRef *          foundRef)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  FSRef *          foundRef)                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*//*/
@@ -704,7 +698,7 @@ AddFolderDescriptor(
   OSType                  badgeSignature,
   OSType                  badgeType,
   ConstStrFileNameParam   name,
-  Boolean                 replaceFlag)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean                 replaceFlag)                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -751,7 +745,7 @@ extern OSErr
 GetFolderTypes(
   UInt32        requestedTypeCount,
   UInt32 *      totalTypeCount,
-  FolderType *  theTypes)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  FolderType *  theTypes)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -776,7 +770,7 @@ GetFolderTypes(
  *    Non-Carbon CFM:   in FoldersLib 1.0 and later
  */
 extern OSErr 
-RemoveFolderDescriptor(FolderType foldType)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+RemoveFolderDescriptor(FolderType foldType)                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -826,7 +820,7 @@ GetFolderNameUnicode(
   FSVolumeRefNum    vRefNum,
   OSType            foldType,
   FSVolumeRefNum *  foundVRefNum,
-  HFSUniStr255 *    name)                                     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  HFSUniStr255 *    name)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -871,7 +865,7 @@ GetFolderNameUnicode(
 extern OSErr 
 InvalidateFolderDescriptorCache(
   FSVolumeRefNum   vRefNum,
-  SInt32           dirID)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32           dirID)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -917,7 +911,7 @@ extern OSErr
 IdentifyFolder(
   FSVolumeRefNum   vRefNum,
   SInt32           dirID,
-  FolderType *     foldType)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  FolderType *     foldType)                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -974,7 +968,7 @@ FSDetermineIfRefIsEnclosedByFolder(
   FSVolumeRefNum   domainOrVRefNum,
   OSType           folderType,
   const FSRef *    inRef,
-  Boolean *        outResult)                                 AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  Boolean *        outResult)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1037,7 +1031,7 @@ DetermineIfPathIsEnclosedByFolder(
   OSType           folderType,
   const UInt8 *    utf8Path,
   Boolean          pathIsRealPath,
-  Boolean *        outResult)                                 AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  Boolean *        outResult)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 #if !__LP64__
@@ -1131,7 +1125,7 @@ FindFolderExtended(
   UInt32            flags,
   void *            data,
   FSVolumeRefNum *  foundVRefNum,
-  SInt32 *          foundDirID)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
+  SInt32 *          foundDirID)                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_3, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1213,7 +1207,7 @@ FSFindFolderExtended(
   Boolean          createFolder,
   UInt32           flags,
   void *           data,
-  FSRef *          foundRef)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
+  FSRef *          foundRef)                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_3, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1256,7 +1250,7 @@ extern OSErr
 GetFolderDescriptor(
   FolderType    foldType,
   Size          descSize,
-  FolderDesc *  foldDesc)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
+  FolderDesc *  foldDesc)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_3, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1308,7 +1302,7 @@ GetFolderName(
   FSVolumeRefNum    vRefNum,
   OSType            foldType,
   FSVolumeRefNum *  foundVRefNum,
-  StrFileName       name)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  StrFileName       name)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1365,7 +1359,7 @@ AddFolderRouting(
   FolderType     routeFromFolder,
   FolderType     routeToFolder,
   RoutingFlags   flags,
-  Boolean        replaceFlag)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  Boolean        replaceFlag)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1405,7 +1399,7 @@ AddFolderRouting(
 extern OSErr 
 RemoveFolderRouting(
   OSType       fileType,
-  FolderType   routeFromFolder)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  FolderType   routeFromFolder)                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1459,7 +1453,7 @@ FindFolderRouting(
   OSType          fileType,
   FolderType      routeFromFolder,
   FolderType *    routeToFolder,
-  RoutingFlags *  flags)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  RoutingFlags *  flags)                                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1513,7 +1507,7 @@ GetFolderRoutings(
   UInt32           requestedRoutingCount,
   UInt32 *         totalRoutingCount,
   Size             routingSize,
-  FolderRouting *  theRoutings)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  FolderRouting *  theRoutings)                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1572,7 +1566,7 @@ FSpDetermineIfSpecIsEnclosedByFolder(
   FSVolumeRefNum   domainOrVRefNum,
   OSType           folderType,
   const FSSpec *   inSpec,
-  Boolean *        outResult)                                 AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  Boolean *        outResult)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 #endif  /* !__LP64__ */
@@ -1588,7 +1582,7 @@ typedef STACK_UPP_TYPE(FolderManagerNotificationProcPtr)        FolderManagerNot
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern FolderManagerNotificationUPP
-NewFolderManagerNotificationUPP(FolderManagerNotificationProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewFolderManagerNotificationUPP(FolderManagerNotificationProcPtr userRoutine) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  DisposeFolderManagerNotificationUPP()
@@ -1599,7 +1593,7 @@ NewFolderManagerNotificationUPP(FolderManagerNotificationProcPtr userRoutine) AV
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeFolderManagerNotificationUPP(FolderManagerNotificationUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeFolderManagerNotificationUPP(FolderManagerNotificationUPP userUPP) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  InvokeFolderManagerNotificationUPP()
@@ -1614,7 +1608,7 @@ InvokeFolderManagerNotificationUPP(
   OSType                        message,
   void *                        arg,
   void *                        userRefCon,
-  FolderManagerNotificationUPP  userUPP)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  FolderManagerNotificationUPP  userUPP)                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 #if __MACH__
   #ifdef __cplusplus
@@ -1658,7 +1652,7 @@ extern OSErr
 FolderManagerRegisterNotificationProc(
   FolderManagerNotificationUPP   notificationProc,
   void *                         refCon,
-  UInt32                         options)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
+  UInt32                         options)                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_3, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1687,7 +1681,7 @@ FolderManagerRegisterNotificationProc(
 extern OSErr 
 FolderManagerUnregisterNotificationProc(
   FolderManagerNotificationUPP   notificationProc,
-  void *                         refCon)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
+  void *                         refCon)                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_3, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1719,7 +1713,7 @@ extern OSStatus
 FolderManagerRegisterCallNotificationProcs(
   OSType   message,
   void *   arg,
-  UInt32   options)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
+  UInt32   options)                                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_3, __IPHONE_NA, __IPHONE_NA);
 
 
 

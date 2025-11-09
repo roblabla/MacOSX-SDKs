@@ -5,6 +5,8 @@
 //  Copyright 2006 Apple Computer, Inc. All rights reserved.
 //  
 //  This class allows the client to access data about a specific CalTask.
+//
+//  The Calendar Store framework is deprecated.  Please use the Event Kit framework instead.
 
 
 #import <CalendarStore/CalCalendarItem.h>
@@ -23,7 +25,7 @@ enum {
     CalPriorityLow      = 9
 };
 
-typedef NSUInteger CalPriority ;
+typedef NSUInteger CalPriority;
 
 @interface CalTask : CalCalendarItem {
     @private
@@ -35,13 +37,13 @@ typedef NSUInteger CalPriority ;
 //  The calendar property must be set before calling saveTask on a new task
 + (id)task;
 
-@property(copy) NSDate *dueDate;
-@property CalPriority priority;
+@property(copy) NSDate *dueDate NS_DEPRECATED_MAC(10_5, 10_8);
+@property CalPriority priority NS_DEPRECATED_MAC(10_5, 10_8);
 
 //  These two properties are inextricably linked.  Setting isCompleted to be YES, will set the completedDate to be now,
 //  and setting any completedDate will change isCompleted to be YES. Similarly, setting isCompleted to be NO will set
 //  the completedDate to be nil, and setting the completedDate changes isCompleted to NO.
-@property BOOL isCompleted;
-@property(copy) NSDate *completedDate;
+@property BOOL isCompleted NS_DEPRECATED_MAC(10_5, 10_8);
+@property(copy) NSDate *completedDate NS_DEPRECATED_MAC(10_5, 10_8);
 
 @end

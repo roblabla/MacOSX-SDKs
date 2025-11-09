@@ -1,5 +1,5 @@
 /*	NSTextCheckingResult.h
-	Copyright (c) 2008-2011, Apple Inc. All rights reserved.
+	Copyright (c) 2008-2012, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -10,7 +10,7 @@
 
 /* NSTextCheckingResult is a class used to describe items located by text checking.  Each of these objects represents something that has been found during checking--a misspelled word, a sentence with grammatical issues, a detected URL, a straight quote to be replaced with curly quotes, and so forth. */
 
-enum {
+typedef NS_OPTIONS(uint64_t, NSTextCheckingType) {    // a single type
     NSTextCheckingTypeOrthography           = 1ULL << 0,            // language identification
     NSTextCheckingTypeSpelling              = 1ULL << 1,            // spell checking
     NSTextCheckingTypeGrammar               = 1ULL << 2,            // grammar checking
@@ -20,22 +20,17 @@ enum {
     NSTextCheckingTypeQuote                 = 1ULL << 6,            // smart quotes
     NSTextCheckingTypeDash                  = 1ULL << 7,            // smart dashes
     NSTextCheckingTypeReplacement           = 1ULL << 8,            // fixed replacements, such as copyright symbol for (c)
-    NSTextCheckingTypeCorrection            = 1ULL << 9             // autocorrection
-#if MAC_OS_X_VERSION_10_7 <= MAC_OS_X_VERSION_MAX_ALLOWED || __IPHONE_4_0 <= __IPHONE_OS_VERSION_MAX_ALLOWED
-    ,
-    NSTextCheckingTypeRegularExpression     = 1ULL << 10,           // regular expression matches
-    NSTextCheckingTypePhoneNumber           = 1ULL << 11,           // phone number detection
-    NSTextCheckingTypeTransitInformation    = 1ULL << 12            // transit (e.g. flight) info detection
-#endif /* MAC_OS_X_VERSION_10_7 <= MAC_OS_X_VERSION_MAX_ALLOWED || __IPHONE_4_0 <= __IPHONE_OS_VERSION_MAX_ALLOWED */
+    NSTextCheckingTypeCorrection            = 1ULL << 9,            // autocorrection
+    NSTextCheckingTypeRegularExpression NS_ENUM_AVAILABLE(10_7, 4_0)  = 1ULL << 10,           // regular expression matches
+    NSTextCheckingTypePhoneNumber NS_ENUM_AVAILABLE(10_7, 4_0)        = 1ULL << 11,           // phone number detection
+    NSTextCheckingTypeTransitInformation NS_ENUM_AVAILABLE(10_7, 4_0) = 1ULL << 12            // transit (e.g. flight) info detection
 };
-typedef uint64_t NSTextCheckingType;    // a single type
 
-enum {
+typedef NS_OPTIONS(uint64_t, NSTextCheckingTypes) {   // a combination of types
     NSTextCheckingAllSystemTypes    = 0xffffffffULL,        // the first 32 types are reserved
     NSTextCheckingAllCustomTypes    = 0xffffffffULL << 32,  // clients may use the remainder for their own purposes
     NSTextCheckingAllTypes          = (NSTextCheckingAllSystemTypes | NSTextCheckingAllCustomTypes)
 };
-typedef uint64_t NSTextCheckingTypes;   // a combination of types
 
 NS_CLASS_AVAILABLE(10_6, 4_0)
 @interface NSTextCheckingResult : NSObject <NSCopying, NSCoding>

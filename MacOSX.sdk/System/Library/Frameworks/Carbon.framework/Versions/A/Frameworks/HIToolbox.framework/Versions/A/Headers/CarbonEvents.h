@@ -3,7 +3,7 @@
  
      Contains:   Carbon Event Manager
  
-     Version:    HIToolbox-567.2~1
+     Version:    HIToolbox-626.1~1
  
      Copyright:  © 1999-2008 by Apple Inc., all rights reserved.
  
@@ -11846,7 +11846,20 @@ enum {
    * checking has been enabled in MLTE or an HITextView then this
    * command is handled automatically.
    */
-  kHICommandLearnWord           = 'lrwd'
+  kHICommandLearnWord           = 'lrwd',
+
+  /*
+   * Starts listening to spoken dictation. A menu item with this
+   * command ID is inserted automatically into the Edit menu. An
+   * application may choose to insert its own menu item with this
+   * command ID at a custom location in the Edit menu, if appropriate.
+   * By default, the menu item is always enabled. An application that
+   * has its own text editing engine should look for this command ID in
+   * its kEventCommandUpdateStatus event handler and enable or disable
+   * the menu item appropriately according to keyboard focus. Available
+   * in Mac OS X 10.8 and later.
+   */
+  kHICommandStartDictation      = 'sdct'
 };
 
 

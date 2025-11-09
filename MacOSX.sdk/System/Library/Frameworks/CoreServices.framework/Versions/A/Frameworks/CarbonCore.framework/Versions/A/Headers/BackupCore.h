@@ -3,9 +3,7 @@
  
      Contains:   Backup low level Interfaces.
  
-     Version:    CarbonCore-960.18~3
- 
-     Copyright:  © 2006-2008 by Apple Computer, Inc.  All rights reserved
+     Copyright:  Â© 2006-2011 by Apple Inc. All rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -22,7 +20,7 @@
 
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -67,7 +65,7 @@ extern OSStatus
 CSBackupSetItemExcluded(
   CFURLRef   item,
   Boolean    exclude,
-  Boolean    excludeByPath)                                   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  Boolean    excludeByPath)                                   __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 
 /*
@@ -101,7 +99,7 @@ CSBackupSetItemExcluded(
 extern Boolean 
 CSBackupIsItemExcluded(
   CFURLRef   item,
-  Boolean *  excludeByPath)                                   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  Boolean *  excludeByPath)                                   __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 
 

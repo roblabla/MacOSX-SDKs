@@ -1,7 +1,7 @@
 /*
 	NSColorSpace.h
 	Application Kit
-	Copyright (c) 2004-2011, Apple Inc.
+	Copyright (c) 2004-2012, Apple Inc.
 	All rights reserved.
 */
 
@@ -27,6 +27,7 @@ enum {
 typedef NSInteger NSColorSpaceModel;
 
 
+NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 @interface NSColorSpace : NSObject <NSCoding> {
     id _profile;
     struct {
@@ -39,14 +40,15 @@ typedef NSInteger NSColorSpaceModel;
 #endif
     } _flags;
     void *__cgColorSpace;
-    void *_reserved[5];    
+    void *__cgColorTransform;
+    void *_reserved[4];
 }
 
 - (id)initWithICCProfileData:(NSData *)iccData;
 - (NSData *)ICCProfileData;
 
 - (id)initWithColorSyncProfile:(void * /* ColorSyncProfileRef */)prof;
-- (void * /* ColorSyncProfileRef */)colorSyncProfile;
+- (void * /* ColorSyncProfileRef */)colorSyncProfile NS_RETURNS_INNER_POINTER;
 
 /* Create NSColorSpace from a CGColorSpace.  Might return nil if the CGColorSpace is one not supported by NSColorSpace. Internally the NSColorSpace might retain or create a new copy of the provided CGColorSpace; do not rely on pointer equality of the CGColorSpace provided to this function, when later queried. Archiving, for instance, might not persist the pointer equality/identity of the CGColorSpace.
 */

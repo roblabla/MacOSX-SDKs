@@ -531,8 +531,7 @@ UTTypeCopyDeclaringBundleURL(CFStringRef inUTI)               __OSX_AVAILABLE_ST
  *      the OSType value to encode
  *  
  *  Result:
- *    a new CFString representing the OSType, or NULL if the argument
- *    is 0 or '????'
+ *    a new CFString representing the OSType
  */
 extern CFStringRef 
 UTCreateStringForOSType(OSType inOSType)                      __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_NA);

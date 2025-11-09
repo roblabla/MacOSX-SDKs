@@ -6,7 +6,7 @@
 
 /*! @header
     @discussion The IMAVManager API allows clients to share audio and video content through conferences
-                with other buddies in iChat AV.
+                with other buddies in Messages AV.
 */
 
 #import <Foundation/Foundation.h>
@@ -19,7 +19,7 @@
 
 /*! @group Notifications */
 
-/*! Received from IMService's custom notification center. Posted when iChat AV's input state has changed. This notification
+/*! Received from IMService's custom notification center. Posted when Messages AV's input state has changed. This notification
     is relevant to the shared IMAVManager instance. The user information dictionary will not contain keys. Clients should call
     <tt>state</tt> to get the new state. */
 extern NSString * const IMAVManagerStateChangedNotification;
@@ -37,19 +37,19 @@ extern NSString * const IMAVManagerURLToShareChangedNotification;
                     <tt>IMAVPending</tt> indicates that frame callbacks will not be made, e.g. when a conference has not yet connected.
                     Clients may wish to defer certain actions until the state becomes <tt>IMAVRunning</tt>.
     @constant   IMAVInactive
-                    Indicates that audio and video may not be sent to iChat AV, because the user has not chosen to begin a session.
+                    Indicates that audio and video may not be sent to Messages AV, because the user has not chosen to begin a session.
     @constant   IMAVRequested
-                    Indicates that the user has selected this client to begin iChat Theater. Clients should call
+                    Indicates that the user has selected this client to begin Messages Theater. Clients should call
                     <tt>-[IMAVManager URLToShare]</tt> and open the corresponding file. Once opened, call
                     <tt>-[IMAVManager start]</tt> to begin the session.
     @constant   IMAVShuttingDown
-                    Indicates that the IMAVManager is disconnecting from iChat AV, after a call to <tt>-stop</tt>.
+                    Indicates that the IMAVManager is disconnecting from Messages AV, after a call to <tt>-stop</tt>.
     @constant   IMAVStartingUp
-                    Indicates that the IMAVManager is connecting to iChat AV, after a call to <tt>-start</tt>.
+                    Indicates that the IMAVManager is connecting to Messages AV, after a call to <tt>-start</tt>.
     @constant   IMAVPending
-                    Indicates that the IMAVManager is connected to iChat AV and ready to provide audio and video data, but
+                    Indicates that the IMAVManager is connected to Messages AV and ready to provide audio and video data, but
                     an AV chat is not currently running. No video frame call-backs will be made. If a client calls <tt>-start</tt>
-                    before the user has connected an AV chat, the IMAVManager will go into this state. Once iChat AV begins a
+                    before the user has connected an AV chat, the IMAVManager will go into this state. Once Messages AV begins a
                     conference, the state will change to <tt>IMAVRunning</tt>.
     @constant   IMAVRunning
                     Indicates that the client will receive video frame call-backs and that audio should be played into the specified
@@ -67,7 +67,7 @@ enum {
 typedef NSUInteger IMAVManagerState;
 
 /*! @enum       IMVideoOptimizationOptions
-    @abstract       These constants describe the content the video data source will provide to iChat to allow for optimization of
+    @abstract       These constants describe the content the video data source will provide to Messages to allow for optimization of
                     CPU and bandwidth usage.
     @constant   IMVideoOptimizationDefault
                     Indicates the default setting: shared video is played alongside the user's local video, and the video is full-motion.
@@ -85,9 +85,9 @@ enum {
 typedef NSUInteger IMVideoOptimizationOptions;
 
 /*! @class IMAVManager
-    @abstract A shared object which manages the state and configuration of auxiliary audio/video input to iChat AV.
+    @abstract A shared object which manages the state and configuration of auxiliary audio/video input to Messages AV.
     @discussion The IMAVManager allows clients to provide audio and/or video to a running
-                conference in iChat AV. Video is provided by supplying a delegate to receive periodic
+                conference in Messages AV. Video is provided by supplying a delegate to receive periodic
                 callbacks for individual frames, and audio is provided through an audio device and
                 channel. The state of the shared IMAVManager allows clients to configure
                 UI appropriately.
@@ -104,7 +104,7 @@ typedef NSUInteger IMVideoOptimizationOptions;
 /*! 
     @method state
     @abstract Returns the current state of the receiver.
-    @result The current IMAVManagerState, as updated by iChat AV. See "Constants" in this document for possible values.
+    @result The current IMAVManagerState, as updated by Messages AV. See "Constants" in this document for possible values.
 */
 - (IMAVManagerState) state;
 
@@ -117,7 +117,7 @@ typedef NSUInteger IMVideoOptimizationOptions;
 
 /*!
     @method setVideoDataSource:
-    @abstract Sets the object which will provide video data to iChat AV. The delegate must implement appropriate methods described
+    @abstract Sets the object which will provide video data to Messages AV. The delegate must implement appropriate methods described
               in the <tt>IMVideoDataSource</tt> informal protocol.
     @param dataSource Object to receive the callback methods. <tt>nil</tt> removes the data source. This object is not retained.
                       Any NSView (or subclass) may be used as well, providing basic functionality without the need for clients
@@ -188,16 +188,16 @@ typedef NSUInteger IMVideoOptimizationOptions;
 
 /*! 
     @method start
-    @abstract Requests to send audio and/or video iChat AV. Clients must have previously called <tt>setVideoDataSource:</tt>
+    @abstract Requests to send audio and/or video Messages AV. Clients must have previously called <tt>setVideoDataSource:</tt>
               to send video, and <tt>setNumberOfAudioChannels:</tt> with a value greater than zero to send audio. The state will
               change to <tt>IMAVStartingUp</tt>, and then either to <tt>IMAVPending</tt> or <tt>IMAVRunning</tt>, depending on
-              whether or not there is an active conference in iChat AV.
+              whether or not there is an active conference in Messages AV.
 */
 - (void) start;
 
 /*! 
     @method stop
-    @abstract Stops sending audio and/or video to iChat AV.
+    @abstract Stops sending audio and/or video to Messages AV.
 */
 - (void) stop;
 
@@ -207,7 +207,7 @@ typedef NSUInteger IMVideoOptimizationOptions;
 /*!
     @protocol IMVideoDataSource
     @abstract An informal protocol to be adopted by objects passed to <tt>-[IMAVManager setVideoDataSource:]</tt>.
-    @discussion The video data source provides frames to iChat for use in a running conference.
+    @discussion The video data source provides frames to Messages for use in a running conference.
                 The data source must either implement both <tt>getPixelBufferPixelFormat:</tt> and
                 <tt>renderIntoPixelBuffer:forTime:</tt>, or both <tt>getOpenGLBufferContext:pixelFormat:</tt> and
                 <tt>renderIntoOpenGLBuffer:onScreen:forTime:</tt>, based on whether CVPixelBuffers or
@@ -224,7 +224,7 @@ typedef NSUInteger IMVideoOptimizationOptions;
 
 /*! 
     @method renderIntoPixelBuffer:forTime:
-    @abstract Called for each frame to be sent to iChat. This method will not be called on the main thread.
+    @abstract Called for each frame to be sent to Messages. This method will not be called on the main thread.
     @param buffer The pixel buffer to fill. The dimensions can vary: use <tt>CVPixelBufferGetWidth()</tt> and <tt>CVPixelBufferGetHeight()</tt> every time.
     @param timeStamp The frame time for which the buffer should be rendered.
     @result Return <tt>YES</tt> if the buffer was successfully filled with new frame data. Return <tt>NO</tt> if nothing has changed or an error was encountered.
@@ -241,7 +241,7 @@ typedef NSUInteger IMVideoOptimizationOptions;
 
 /*! 
     @method renderIntoOpenGLBuffer:onScreen:forTime:
-    @abstract Called for each frame to be sent to iChat. This method will not be called on the main thread.
+    @abstract Called for each frame to be sent to Messages. This method will not be called on the main thread.
     @param buffer The OpenGL buffer to fill. The receiver should call <tt>CVOpenGLBufferAttach()</tt>, then render.
     @param screenInOut The recommended virtual screen number to pass to <tt>CVOpenGLBufferAttach()</tt> for maximum efficiency. The
                        delegate may use a different screen number, but must write that value back into <i>screenInOut</i> before returning.

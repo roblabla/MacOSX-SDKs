@@ -28,14 +28,10 @@
 
 #if WEBKIT_VERSION_MAX_ALLOWED >= WEBKIT_VERSION_LATEST
 
-@class NSString;
-
 @interface DOMProgressEvent : DOMEvent
 @property(readonly) BOOL lengthComputable;
 @property(readonly) unsigned long long loaded;
 @property(readonly) unsigned long long total;
-
-- (void)initProgressEvent:(NSString *)typeArg canBubbleArg:(BOOL)canBubbleArg cancelableArg:(BOOL)cancelableArg lengthComputableArg:(BOOL)lengthComputableArg loadedArg:(unsigned long long)loadedArg totalArg:(unsigned long long)totalArg;
 @end
 
 #endif

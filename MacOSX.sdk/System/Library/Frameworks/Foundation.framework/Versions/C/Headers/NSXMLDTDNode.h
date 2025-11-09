@@ -1,5 +1,5 @@
 /*	NSXMLDTDNode.h
-	Copyright (c) 2004-2011, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2012, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSXMLNode.h>
@@ -9,7 +9,7 @@
     @typedef NSXMLDTDNodeKind
 	@abstract The subkind of a DTD node kind.
 */
-enum {
+typedef NS_ENUM(NSUInteger, NSXMLDTDNodeKind) {
 	NSXMLEntityGeneralKind = 1,
 	NSXMLEntityParsedKind,
 	NSXMLEntityUnparsedKind,
@@ -33,7 +33,6 @@ enum {
 	NSXMLElementDeclarationMixedKind,
 	NSXMLElementDeclarationElementKind
 };
-typedef NSUInteger NSXMLDTDNodeKind;
 
 /*!
     @class NSXMLDTDNode

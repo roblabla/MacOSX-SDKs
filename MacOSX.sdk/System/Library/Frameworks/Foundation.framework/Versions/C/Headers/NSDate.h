@@ -1,5 +1,5 @@
 /*	NSDate.h
-	Copyright (c) 1994-2011, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2012, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -12,7 +12,7 @@ typedef double NSTimeInterval;
 
 #define NSTimeIntervalSince1970  978307200.0
 
-@interface NSDate : NSObject <NSCopying, NSCoding>
+@interface NSDate : NSObject <NSCopying, NSSecureCoding>
 
 - (NSTimeInterval)timeIntervalSinceReferenceDate;
 

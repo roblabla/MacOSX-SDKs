@@ -3,9 +3,7 @@
  
      Contains:   Types, constants, and prototypes for Unicode Converter
  
-     Version:    CarbonCore-960.18~3
- 
-     Copyright:  © 1994-2008 Apple Inc. All rights reserved.
+     Copyright:  © 1994-2011 Apple Inc. All rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -30,7 +28,7 @@
 
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -192,7 +190,7 @@ typedef STACK_UPP_TYPE(UnicodeToTextFallbackProcPtr)            UnicodeToTextFal
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern UnicodeToTextFallbackUPP
-NewUnicodeToTextFallbackUPP(UnicodeToTextFallbackProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewUnicodeToTextFallbackUPP(UnicodeToTextFallbackProcPtr userRoutine) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 /*
  *  DisposeUnicodeToTextFallbackUPP()
@@ -203,7 +201,7 @@ NewUnicodeToTextFallbackUPP(UnicodeToTextFallbackProcPtr userRoutine) AVAILABLE_
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeUnicodeToTextFallbackUPP(UnicodeToTextFallbackUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeUnicodeToTextFallbackUPP(UnicodeToTextFallbackUPP userUPP) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 /*
  *  InvokeUnicodeToTextFallbackUPP()
@@ -223,7 +221,7 @@ InvokeUnicodeToTextFallbackUPP(
   ByteCount *               oDestConvLen,
   LogicalAddress            iInfoPtr,
   ConstUnicodeMappingPtr    iUnicodeMappingPtr,
-  UnicodeToTextFallbackUPP  userUPP)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UnicodeToTextFallbackUPP  userUPP)                          __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 #if __MACH__
   #ifdef __cplusplus
@@ -249,7 +247,7 @@ InvokeUnicodeToTextFallbackUPP(
 extern OSStatus 
 CreateTextToUnicodeInfo(
   ConstUnicodeMappingPtr   iUnicodeMapping,
-  TextToUnicodeInfo *      oTextToUnicodeInfo)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TextToUnicodeInfo *      oTextToUnicodeInfo)                __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -263,7 +261,7 @@ CreateTextToUnicodeInfo(
 extern OSStatus 
 CreateTextToUnicodeInfoByEncoding(
   TextEncoding         iEncoding,
-  TextToUnicodeInfo *  oTextToUnicodeInfo)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TextToUnicodeInfo *  oTextToUnicodeInfo)                    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -277,7 +275,7 @@ CreateTextToUnicodeInfoByEncoding(
 extern OSStatus 
 CreateUnicodeToTextInfo(
   ConstUnicodeMappingPtr   iUnicodeMapping,
-  UnicodeToTextInfo *      oUnicodeToTextInfo)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UnicodeToTextInfo *      oUnicodeToTextInfo)                __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -291,7 +289,7 @@ CreateUnicodeToTextInfo(
 extern OSStatus 
 CreateUnicodeToTextInfoByEncoding(
   TextEncoding         iEncoding,
-  UnicodeToTextInfo *  oUnicodeToTextInfo)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UnicodeToTextInfo *  oUnicodeToTextInfo)                    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -306,7 +304,7 @@ extern OSStatus
 CreateUnicodeToTextRunInfo(
   ItemCount               iNumberOfMappings,
   const UnicodeMapping    iUnicodeMappings[],
-  UnicodeToTextRunInfo *  oUnicodeToTextInfo)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UnicodeToTextRunInfo *  oUnicodeToTextInfo)                 __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -321,7 +319,7 @@ extern OSStatus
 CreateUnicodeToTextRunInfoByEncoding(
   ItemCount               iNumberOfEncodings,
   const TextEncoding      iEncodings[],
-  UnicodeToTextRunInfo *  oUnicodeToTextInfo)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UnicodeToTextRunInfo *  oUnicodeToTextInfo)                 __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -336,7 +334,7 @@ extern OSStatus
 CreateUnicodeToTextRunInfoByScriptCode(
   ItemCount               iNumberOfScriptCodes,
   const ScriptCode        iScripts[],
-  UnicodeToTextRunInfo *  oUnicodeToTextInfo)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UnicodeToTextRunInfo *  oUnicodeToTextInfo)                 __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /* Change the TextToUnicodeInfo to another mapping. */
@@ -351,7 +349,7 @@ CreateUnicodeToTextRunInfoByScriptCode(
 extern OSStatus 
 ChangeTextToUnicodeInfo(
   TextToUnicodeInfo        ioTextToUnicodeInfo,
-  ConstUnicodeMappingPtr   iUnicodeMapping)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ConstUnicodeMappingPtr   iUnicodeMapping)                   __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /* Change the UnicodeToTextInfo to another mapping. */
@@ -366,7 +364,7 @@ ChangeTextToUnicodeInfo(
 extern OSStatus 
 ChangeUnicodeToTextInfo(
   UnicodeToTextInfo        ioUnicodeToTextInfo,
-  ConstUnicodeMappingPtr   iUnicodeMapping)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ConstUnicodeMappingPtr   iUnicodeMapping)                   __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -379,7 +377,7 @@ ChangeUnicodeToTextInfo(
  *    Non-Carbon CFM:   in UnicodeConverter 1.1 and later
  */
 extern OSStatus 
-DisposeTextToUnicodeInfo(TextToUnicodeInfo * ioTextToUnicodeInfo) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeTextToUnicodeInfo(TextToUnicodeInfo * ioTextToUnicodeInfo) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -391,7 +389,7 @@ DisposeTextToUnicodeInfo(TextToUnicodeInfo * ioTextToUnicodeInfo) AVAILABLE_MAC_
  *    Non-Carbon CFM:   in UnicodeConverter 1.1 and later
  */
 extern OSStatus 
-DisposeUnicodeToTextInfo(UnicodeToTextInfo * ioUnicodeToTextInfo) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeUnicodeToTextInfo(UnicodeToTextInfo * ioUnicodeToTextInfo) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -403,7 +401,7 @@ DisposeUnicodeToTextInfo(UnicodeToTextInfo * ioUnicodeToTextInfo) AVAILABLE_MAC_
  *    Non-Carbon CFM:   in UnicodeConverter 1.1 and later
  */
 extern OSStatus 
-DisposeUnicodeToTextRunInfo(UnicodeToTextRunInfo * ioUnicodeToTextRunInfo) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeUnicodeToTextRunInfo(UnicodeToTextRunInfo * ioUnicodeToTextRunInfo) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -427,7 +425,7 @@ ConvertFromTextToUnicode(
   ByteCount             iOutputBufLen,
   ByteCount *           oSourceRead,
   ByteCount *           oUnicodeLen,
-  UniChar               oUnicodeStr[])                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UniChar               oUnicodeStr[])                        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -451,7 +449,7 @@ ConvertFromUnicodeToText(
   ByteCount           iOutputBufLen,
   ByteCount *         oInputRead,
   ByteCount *         oOutputLen,
-  LogicalAddress      oOutputStr)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  LogicalAddress      oOutputStr)                             __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -478,7 +476,7 @@ ConvertFromUnicodeToTextRun(
   LogicalAddress         oOutputStr,
   ItemCount              iEncodingRunBufLen,
   ItemCount *            oEncodingRunOutLen,
-  TextEncodingRun        oEncodingRuns[])                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TextEncodingRun        oEncodingRuns[])                     __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -505,7 +503,7 @@ ConvertFromUnicodeToScriptCodeRun(
   LogicalAddress         oOutputStr,
   ItemCount              iScriptRunBufLen,
   ItemCount *            oScriptRunOutLen,
-  ScriptCodeRun          oScriptCodeRuns[])                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ScriptCodeRun          oScriptCodeRuns[])                   __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /* Truncate a multibyte string at a safe place. */
@@ -523,7 +521,7 @@ TruncateForTextToUnicode(
   ByteCount                iSourceLen,
   ConstLogicalAddress      iSourceStr,
   ByteCount                iMaxLen,
-  ByteCount *              oTruncatedLen)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ByteCount *              oTruncatedLen)                     __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /* Truncate a Unicode string at a safe place. */
@@ -542,7 +540,7 @@ TruncateForUnicodeToText(
   const UniChar            iSourceStr[],
   OptionBits               iControlFlags,
   ByteCount                iMaxLen,
-  ByteCount *              oTruncatedLen)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ByteCount *              oTruncatedLen)                     __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /* Convert a Pascal string to Unicode string. */
@@ -560,7 +558,7 @@ ConvertFromPStringToUnicode(
   ConstStr255Param    iPascalStr,
   ByteCount           iOutputBufLen,
   ByteCount *         oUnicodeLen,
-  UniChar             oUnicodeStr[])                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UniChar             oUnicodeStr[])                          __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /* Convert a Unicode string to Pascal string. */
@@ -577,7 +575,7 @@ ConvertFromUnicodeToPString(
   UnicodeToTextInfo   iUnicodeToTextInfo,
   ByteCount           iUnicodeLen,
   const UniChar       iUnicodeStr[],
-  Str255              oPascalStr)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Str255              oPascalStr)                             __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /* Count the available conversion mappings. */
@@ -593,7 +591,7 @@ extern OSStatus
 CountUnicodeMappings(
   OptionBits               iFilter,
   ConstUnicodeMappingPtr   iFindMapping,
-  ItemCount *              oActualCount)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ItemCount *              oActualCount)                      __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /* Get a list of the available conversion mappings. */
@@ -611,7 +609,7 @@ QueryUnicodeMappings(
   ConstUnicodeMappingPtr   iFindMapping,
   ItemCount                iMaxCount,
   ItemCount *              oActualCount,
-  UnicodeMapping           oReturnedMappings[])               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UnicodeMapping           oReturnedMappings[])               __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /* Setup the fallback handler for converting Unicode To Text. */
@@ -628,7 +626,7 @@ SetFallbackUnicodeToText(
   UnicodeToTextInfo          iUnicodeToTextInfo,
   UnicodeToTextFallbackUPP   iFallback,
   OptionBits                 iControlFlags,
-  LogicalAddress             iInfoPtr)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  LogicalAddress             iInfoPtr)                        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /* Setup the fallback handler for converting Unicode To TextRuns. */
@@ -645,7 +643,7 @@ SetFallbackUnicodeToTextRun(
   UnicodeToTextRunInfo       iUnicodeToTextRunInfo,
   UnicodeToTextFallbackUPP   iFallback,
   OptionBits                 iControlFlags,
-  LogicalAddress             iInfoPtr)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  LogicalAddress             iInfoPtr)                        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /* Re-initialize all state information kept by the context objects. */
@@ -658,7 +656,7 @@ SetFallbackUnicodeToTextRun(
  *    Non-Carbon CFM:   in UnicodeConverter 1.3 and later
  */
 extern OSStatus 
-ResetTextToUnicodeInfo(TextToUnicodeInfo ioTextToUnicodeInfo) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+ResetTextToUnicodeInfo(TextToUnicodeInfo ioTextToUnicodeInfo) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /* Re-initialize all state information kept by the context objects. */
@@ -671,7 +669,7 @@ ResetTextToUnicodeInfo(TextToUnicodeInfo ioTextToUnicodeInfo) AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in UnicodeConverter 1.1 and later
  */
 extern OSStatus 
-ResetUnicodeToTextInfo(UnicodeToTextInfo ioUnicodeToTextInfo) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+ResetUnicodeToTextInfo(UnicodeToTextInfo ioUnicodeToTextInfo) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /* Re-initialize all state information kept by the context objects in TextRun conversions. */
@@ -684,7 +682,7 @@ ResetUnicodeToTextInfo(UnicodeToTextInfo ioUnicodeToTextInfo) AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in UnicodeConverter 1.1 and later
  */
 extern OSStatus 
-ResetUnicodeToTextRunInfo(UnicodeToTextRunInfo ioUnicodeToTextRunInfo) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+ResetUnicodeToTextRunInfo(UnicodeToTextRunInfo ioUnicodeToTextRunInfo) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 

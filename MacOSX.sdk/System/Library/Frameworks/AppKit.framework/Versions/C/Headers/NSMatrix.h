@@ -1,7 +1,7 @@
 /*
 	NSMatrix.h
 	Application Kit
-	Copyright (c) 1994-2011, Apple Inc.
+	Copyright (c) 1994-2012, Apple Inc.
 	All rights reserved.
 */
 
@@ -51,9 +51,13 @@ typedef struct __MFlags {
     unsigned int        browserOptimizationsEnabled:1;
     unsigned int        drawingContextMenuHighlight:1;
     unsigned int	drawingContextMenuHighlightOnAllSelectedRows:1;
-    unsigned int	reservedMatrix:4;
+    unsigned int      autorecalculatesCellSize:1;
+    unsigned int       cellSizeNeedsAutorecalc:1;
+    unsigned int	reservedMatrix:2;
 #else
-    unsigned int	reservedMatrix:4;
+    unsigned int	reservedMatrix:2;
+    unsigned int       cellSizeNeedsAutorecalc:1;
+    unsigned int      autorecalculatesCellSize:1;
     unsigned int	drawingContextMenuHighlightOnAllSelectedRows:1;
     unsigned int        drawingContextMenuHighlight:1;
     unsigned int        browserOptimizationsEnabled:1;
@@ -204,6 +208,14 @@ typedef struct __MFlags {
 - (void)resetCursorRects;
 - (void)setToolTip:(NSString *)toolTipString forCell:(NSCell *)cell;
 - (NSString *)toolTipForCell:(NSCell *)cell;
+
+/* Determine whether the receiver autorecalculates its cellSize. The default is NO. If set to YES, then the receiver will adjust its cellSize to accommodate its largest cell. Changing the cellSize does not directly affect the frame of the receiver; however it does affect the intrinsic content size, which may cause the receiver to resize under autolayout. 
+ 
+   The default is NO. When using autolayout, you typically want this to be set to YES.
+ */
+- (void)setAutorecalculatesCellSize:(BOOL)flag NS_AVAILABLE_MAC(10_8);
+- (BOOL)autorecalculatesCellSize NS_AVAILABLE_MAC(10_8);
+
 @end
 
 @interface NSMatrix(NSKeyboardUI)

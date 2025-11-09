@@ -1,8 +1,8 @@
 /*
-	NSBox.h
-	Application Kit
-	Copyright (c) 1994-2011, Apple Inc.
-	All rights reserved.
+    NSBox.h
+    Application Kit
+    Copyright (c) 1994-2012, Apple Inc.
+    All rights reserved.
 */
 
 #import <AppKit/NSView.h>
@@ -40,17 +40,18 @@ typedef NSUInteger NSBoxType;
     NSRect              _borderRect;
     NSRect              _titleRect;
     struct __bFlags {
-	NSBorderType	borderType:2;
-	NSTitlePosition	titlePosition:3;
-	unsigned int	backgroundTransparent:1;
-        unsigned int	orientation:2;
-        unsigned int	needsTile:1;
-        unsigned int	transparent:1;
-        unsigned int	colorAltInterpretation:1;
-        unsigned int	boxType:3;
-        unsigned int	_RESERVED:18;
+        NSBorderType borderType:2;
+        NSTitlePosition titlePosition:3;
+        unsigned int backgroundTransparent:1;
+        unsigned int orientation:2;
+        unsigned int needsTile:1;
+        unsigned int transparent:1;
+        unsigned int colorAltInterpretation:1;
+        unsigned int boxType:3;
+        unsigned int useSuperAddSubview:1;
+        unsigned int _RESERVED:17;
     } _bFlags;
-    id			_unused;
+    id _unused;
 }
 
 - (NSBorderType)borderType;
@@ -79,24 +80,27 @@ typedef NSUInteger NSBoxType;
 
 @end
 
-@interface NSBox(NSKeyboardUI)
-- (void)setTitleWithMnemonic:(NSString *)stringWithAmpersand;
-@end
-
 @interface NSBox (NSCustomBoxTypeProperties)
 /* These properties only apply to boxes with boxType NSBoxCustom.
  */
 
 - (CGFloat)borderWidth NS_AVAILABLE_MAC(10_5);
-- (void)setBorderWidth:(CGFloat)borderWidth NS_AVAILABLE_MAC(10_5);	// Only meaningful for boxes configured with NSBoxCustom
+- (void)setBorderWidth:(CGFloat)borderWidth NS_AVAILABLE_MAC(10_5);	 // Only meaningful for boxes configured with NSBoxCustom
 
 - (CGFloat)cornerRadius NS_AVAILABLE_MAC(10_5);
-- (void)setCornerRadius:(CGFloat)cornerRadius NS_AVAILABLE_MAC(10_5);	// Only meaningful for boxes configured with NSBoxCustom
+- (void)setCornerRadius:(CGFloat)cornerRadius NS_AVAILABLE_MAC(10_5); // Only meaningful for boxes configured with NSBoxCustom
 
 - (NSColor *)borderColor NS_AVAILABLE_MAC(10_5);
-- (void)setBorderColor:(NSColor *)borderColor NS_AVAILABLE_MAC(10_5);	// Only meaningful for boxes configured with NSBoxCustom
+- (void)setBorderColor:(NSColor *)borderColor NS_AVAILABLE_MAC(10_5); // Only meaningful for boxes configured with NSBoxCustom
 
 - (NSColor *)fillColor NS_AVAILABLE_MAC(10_5);
-- (void)setFillColor:(NSColor *)fillColor NS_AVAILABLE_MAC(10_5);	// Only meaningful for boxes configured with NSBoxCustom
+- (void)setFillColor:(NSColor *)fillColor NS_AVAILABLE_MAC(10_5); // Only meaningful for boxes configured with NSBoxCustom
 
 @end
+
+@interface NSBox(NSKeyboardUI)
+/* Mnemonics are deprecated in 10.8. Historically they have not done anything. For compatability, this method still calls setTitle: with the ampersand stripped from it.
+ */
+- (void)setTitleWithMnemonic:(NSString *)stringWithAmpersand NS_DEPRECATED_MAC(10_0, 10_8);
+@end
+

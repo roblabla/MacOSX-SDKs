@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2006 Apple Computer, Inc. All rights reserved.
+ * Copyright © 1998-2012 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -289,4 +289,4 @@ public:
     OSMetaClassDeclareReservedUnused(IOUSBHIDDriver, 19);
 };
 
-#endif	// IOUSBHIDDRIVER_H
+#endif

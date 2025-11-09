@@ -287,14 +287,14 @@ typedef NSInteger CWOpMode;
  */
 enum
 {
-	kCWSecurityModeOpen                 = 0,
+	kCWSecurityModeOpen	= 0,
 	kCWSecurityModeWEP,
 	kCWSecurityModeWPA_PSK,
 	kCWSecurityModeWPA2_PSK,
     kCWSecurityModeDynamicWEP,
 	kCWSecurityModeWPA_Enterprise,
 	kCWSecurityModeWPA2_Enterprise,
-    kCWSecurityModeWPS,
+	kCWSecurityModeWPS,
 };
 typedef NSInteger CWSecurityMode;
 

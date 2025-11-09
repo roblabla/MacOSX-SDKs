@@ -2,16 +2,10 @@
      File:       CarbonCore/Files.h
  
      Contains:   File Manager Interfaces.
+                 The contents of this header file are deprecated.
+                 Use Foundation, CoreFoundation, DiskArbitration, POSIX/BSD, etc. API instead.
  
-     Version:    CarbonCore-960.18~3
- 
-     Copyright:  © 1985-2008 Apple, Inc. All rights reserved
- 
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
- 
-                     http://developer.apple.com/bugreporter/
- 
+     Copyright:  © 1985-2011 Apple, Inc. All rights reserved
 */
 #ifndef __FILES__
 #define __FILES__
@@ -61,7 +55,7 @@
 #include <sys/acl.h>
 #include <DiskArbitration/DADisk.h>
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -1733,7 +1727,7 @@ enum {
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern IOCompletionUPP
-NewIOCompletionUPP(IOCompletionProcPtr userRoutine)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewIOCompletionUPP(IOCompletionProcPtr userRoutine)           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  DisposeIOCompletionUPP()
@@ -1744,7 +1738,7 @@ NewIOCompletionUPP(IOCompletionProcPtr userRoutine)           AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeIOCompletionUPP(IOCompletionUPP userUPP)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeIOCompletionUPP(IOCompletionUPP userUPP)               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  InvokeIOCompletionUPP()
@@ -1757,7 +1751,7 @@ DisposeIOCompletionUPP(IOCompletionUPP userUPP)               AVAILABLE_MAC_OS_X
 extern void
 InvokeIOCompletionUPP(
   ParmBlkPtr       paramBlock,
-  IOCompletionUPP  userUPP)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  IOCompletionUPP  userUPP)                                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 #if __MACH__
   #ifdef __cplusplus
@@ -1795,7 +1789,7 @@ InvokeIOCompletionUPP(
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  FSMakeFSRefUnicode(const FSRef *parentRef, UniCharCount nameLength, const UniChar *name, TextEncoding textEncodingHint, FSRef *newRef) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  FSMakeFSRefUnicode(const FSRef *parentRef, UniCharCount nameLength, const UniChar *name, TextEncoding textEncodingHint, FSRef *newRef) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1809,7 +1803,7 @@ extern OSErr  FSMakeFSRefUnicode(const FSRef *parentRef, UniCharCount nameLength
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  PBMakeFSRefUnicodeSync(FSRefParam * paramBlock) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  PBMakeFSRefUnicodeSync(FSRefParam * paramBlock) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1823,7 +1817,7 @@ extern OSErr  PBMakeFSRefUnicodeSync(FSRefParam * paramBlock) AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern void  PBMakeFSRefUnicodeAsync(FSRefParam * paramBlock) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  PBMakeFSRefUnicodeAsync(FSRefParam * paramBlock) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -1848,7 +1842,7 @@ extern void  PBMakeFSRefUnicodeAsync(FSRefParam * paramBlock) AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  FSCompareFSRefs(const FSRef *ref1, const FSRef *ref2)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  FSCompareFSRefs(const FSRef *ref1, const FSRef *ref2)                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1862,7 +1856,7 @@ extern OSErr  FSCompareFSRefs(const FSRef *ref1, const FSRef *ref2)             
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  PBCompareFSRefsSync(FSRefParam * paramBlock)    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  PBCompareFSRefsSync(FSRefParam * paramBlock)    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1876,7 +1870,7 @@ extern OSErr  PBCompareFSRefsSync(FSRefParam * paramBlock)    AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern void  PBCompareFSRefsAsync(FSRefParam * paramBlock)    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  PBCompareFSRefsAsync(FSRefParam * paramBlock)    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -1905,7 +1899,7 @@ extern void  PBCompareFSRefsAsync(FSRefParam * paramBlock)    AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  FSCreateFileUnicode(const FSRef *parentRef, UniCharCount nameLength, const UniChar *name, FSCatalogInfoBitmap whichInfo, const FSCatalogInfo *catalogInfo, FSRef *newRef, FSSpecPtr newSpec) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  FSCreateFileUnicode(const FSRef *parentRef, UniCharCount nameLength, const UniChar *name, FSCatalogInfoBitmap whichInfo, const FSCatalogInfo *catalogInfo, FSRef *newRef, FSSpecPtr newSpec) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1919,7 +1913,7 @@ extern OSErr  FSCreateFileUnicode(const FSRef *parentRef, UniCharCount nameLengt
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  PBCreateFileUnicodeSync(FSRefParam * paramBlock) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  PBCreateFileUnicodeSync(FSRefParam * paramBlock) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1933,7 +1927,7 @@ extern OSErr  PBCreateFileUnicodeSync(FSRefParam * paramBlock) AVAILABLE_MAC_OS_
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern void  PBCreateFileUnicodeAsync(FSRefParam * paramBlock) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  PBCreateFileUnicodeAsync(FSRefParam * paramBlock) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -1963,7 +1957,7 @@ extern void  PBCreateFileUnicodeAsync(FSRefParam * paramBlock) AVAILABLE_MAC_OS_
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  FSCreateDirectoryUnicode(const FSRef *parentRef, UniCharCount nameLength, const UniChar *name, FSCatalogInfoBitmap whichInfo, const FSCatalogInfo *catalogInfo, FSRef *newRef, FSSpecPtr newSpec, UInt32 *newDirID) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  FSCreateDirectoryUnicode(const FSRef *parentRef, UniCharCount nameLength, const UniChar *name, FSCatalogInfoBitmap whichInfo, const FSCatalogInfo *catalogInfo, FSRef *newRef, FSSpecPtr newSpec, UInt32 *newDirID) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1977,7 +1971,7 @@ extern OSErr  FSCreateDirectoryUnicode(const FSRef *parentRef, UniCharCount name
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  PBCreateDirectoryUnicodeSync(FSRefParam * paramBlock) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  PBCreateDirectoryUnicodeSync(FSRefParam * paramBlock) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1991,7 +1985,7 @@ extern OSErr  PBCreateDirectoryUnicodeSync(FSRefParam * paramBlock) AVAILABLE_MA
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern void  PBCreateDirectoryUnicodeAsync(FSRefParam * paramBlock) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  PBCreateDirectoryUnicodeAsync(FSRefParam * paramBlock) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -2013,7 +2007,7 @@ extern void  PBCreateDirectoryUnicodeAsync(FSRefParam * paramBlock) AVAILABLE_MA
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  FSDeleteObject(const FSRef * ref)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  FSDeleteObject(const FSRef * ref)               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -2027,7 +2021,7 @@ extern OSErr  FSDeleteObject(const FSRef * ref)               AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  PBDeleteObjectSync(FSRefParam * paramBlock)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  PBDeleteObjectSync(FSRefParam * paramBlock)     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -2041,7 +2035,7 @@ extern OSErr  PBDeleteObjectSync(FSRefParam * paramBlock)     AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern void  PBDeleteObjectAsync(FSRefParam * paramBlock)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  PBDeleteObjectAsync(FSRefParam * paramBlock)     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -2064,7 +2058,7 @@ extern void  PBDeleteObjectAsync(FSRefParam * paramBlock)     AVAILABLE_MAC_OS_X
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern OSErr  FSUnlinkObject(const FSRef * ref)               AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern OSErr  FSUnlinkObject(const FSRef * ref)               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -2078,7 +2072,7 @@ extern OSErr  FSUnlinkObject(const FSRef * ref)               AVAILABLE_MAC_OS_X
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern OSErr  PBUnlinkObjectSync(FSRefParam * paramBlock)     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern OSErr  PBUnlinkObjectSync(FSRefParam * paramBlock)     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -2092,7 +2086,7 @@ extern OSErr  PBUnlinkObjectSync(FSRefParam * paramBlock)     AVAILABLE_MAC_OS_X
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern void  PBUnlinkObjectAsync(FSRefParam * paramBlock)     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern void  PBUnlinkObjectAsync(FSRefParam * paramBlock)     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -2121,7 +2115,7 @@ extern void  PBUnlinkObjectAsync(FSRefParam * paramBlock)     AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  FSMoveObject(const FSRef *ref, const FSRef *destDirectory, FSRef *newRef)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  FSMoveObject(const FSRef *ref, const FSRef *destDirectory, FSRef *newRef)        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -2135,7 +2129,7 @@ extern OSErr  FSMoveObject(const FSRef *ref, const FSRef *destDirectory, FSRef *
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  PBMoveObjectSync(FSRefParam * paramBlock)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  PBMoveObjectSync(FSRefParam * paramBlock)       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -2149,7 +2143,7 @@ extern OSErr  PBMoveObjectSync(FSRefParam * paramBlock)       AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern void  PBMoveObjectAsync(FSRefParam * paramBlock)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  PBMoveObjectAsync(FSRefParam * paramBlock)       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -2172,7 +2166,7 @@ extern void  PBMoveObjectAsync(FSRefParam * paramBlock)       AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  FSExchangeObjects(const FSRef *ref, const FSRef *destRef)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  FSExchangeObjects(const FSRef *ref, const FSRef *destRef)                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -2186,7 +2180,7 @@ extern OSErr  FSExchangeObjects(const FSRef *ref, const FSRef *destRef)         
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  PBExchangeObjectsSync(FSRefParam * paramBlock)  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  PBExchangeObjectsSync(FSRefParam * paramBlock)  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -2200,7 +2194,7 @@ extern OSErr  PBExchangeObjectsSync(FSRefParam * paramBlock)  AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern void  PBExchangeObjectsAsync(FSRefParam * paramBlock)  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  PBExchangeObjectsAsync(FSRefParam * paramBlock)  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -2414,7 +2408,7 @@ enum {
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSReplaceObject(const FSRef *originalObject, const FSRef *replacementObject, CFStringRef newName, CFStringRef temporaryName, const FSRef *temporaryDirectory, OptionBits flags, FSRef *resultObject) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern OSStatus  FSReplaceObject(const FSRef *originalObject, const FSRef *replacementObject, CFStringRef newName, CFStringRef temporaryName, const FSRef *temporaryDirectory, OptionBits flags, FSRef *resultObject) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -2462,7 +2456,7 @@ extern OSStatus  FSReplaceObject(const FSRef *originalObject, const FSRef *repla
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSPathReplaceObject(const char *originalObjectPath, const char *replacementObjectPath, CFStringRef newName, CFStringRef temporaryName, const char *temporaryDirectoryPath, OptionBits flags) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern OSStatus  FSPathReplaceObject(const char *originalObjectPath, const char *replacementObjectPath, CFStringRef newName, CFStringRef temporaryName, const char *temporaryDirectoryPath, OptionBits flags) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -2494,7 +2488,7 @@ extern OSStatus  FSPathReplaceObject(const char *originalObjectPath, const char 
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSGetTemporaryDirectoryForReplaceObject(const FSRef *originalObject, FSRef *temporaryDirectory, OptionBits flags) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern OSStatus  FSGetTemporaryDirectoryForReplaceObject(const FSRef *originalObject, FSRef *temporaryDirectory, OptionBits flags) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -2530,7 +2524,7 @@ extern OSStatus  FSGetTemporaryDirectoryForReplaceObject(const FSRef *originalOb
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSPathGetTemporaryDirectoryForReplaceObject(const char *originalObjectPath, char *temporaryDirectoryPath, UInt32 maxPathSize, OptionBits flags) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern OSStatus  FSPathGetTemporaryDirectoryForReplaceObject(const char *originalObjectPath, char *temporaryDirectoryPath, UInt32 maxPathSize, OptionBits flags) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -2561,7 +2555,7 @@ extern OSStatus  FSPathGetTemporaryDirectoryForReplaceObject(const char *origina
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  FSRenameUnicode(const FSRef *ref, UniCharCount nameLength, const UniChar *name, TextEncoding textEncodingHint, FSRef *newRef) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  FSRenameUnicode(const FSRef *ref, UniCharCount nameLength, const UniChar *name, TextEncoding textEncodingHint, FSRef *newRef) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -2575,7 +2569,7 @@ extern OSErr  FSRenameUnicode(const FSRef *ref, UniCharCount nameLength, const U
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  PBRenameUnicodeSync(FSRefParam * paramBlock)    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  PBRenameUnicodeSync(FSRefParam * paramBlock)    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -2589,7 +2583,7 @@ extern OSErr  PBRenameUnicodeSync(FSRefParam * paramBlock)    AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern void  PBRenameUnicodeAsync(FSRefParam * paramBlock)    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  PBRenameUnicodeAsync(FSRefParam * paramBlock)    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -2618,7 +2612,7 @@ extern void  PBRenameUnicodeAsync(FSRefParam * paramBlock)    AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  FSGetCatalogInfo(const FSRef *ref, FSCatalogInfoBitmap whichInfo, FSCatalogInfo *catalogInfo, HFSUniStr255 *outName, FSSpecPtr fsSpec, FSRef *parentRef) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  FSGetCatalogInfo(const FSRef *ref, FSCatalogInfoBitmap whichInfo, FSCatalogInfo *catalogInfo, HFSUniStr255 *outName, FSSpecPtr fsSpec, FSRef *parentRef) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -2632,7 +2626,7 @@ extern OSErr  FSGetCatalogInfo(const FSRef *ref, FSCatalogInfoBitmap whichInfo, 
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  PBGetCatalogInfoSync(FSRefParam * paramBlock)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  PBGetCatalogInfoSync(FSRefParam * paramBlock)   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -2646,7 +2640,7 @@ extern OSErr  PBGetCatalogInfoSync(FSRefParam * paramBlock)   AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern void  PBGetCatalogInfoAsync(FSRefParam * paramBlock)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  PBGetCatalogInfoAsync(FSRefParam * paramBlock)   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -2688,7 +2682,7 @@ extern void  PBGetCatalogInfoAsync(FSRefParam * paramBlock)   AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  FSSetCatalogInfo(const FSRef *ref, FSCatalogInfoBitmap whichInfo, const FSCatalogInfo *catalogInfo)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  FSSetCatalogInfo(const FSRef *ref, FSCatalogInfoBitmap whichInfo, const FSCatalogInfo *catalogInfo)   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -2710,7 +2704,7 @@ extern OSErr  FSSetCatalogInfo(const FSRef *ref, FSCatalogInfoBitmap whichInfo, 
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  PBSetCatalogInfoSync(FSRefParam * paramBlock)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  PBSetCatalogInfoSync(FSRefParam * paramBlock)   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -2732,7 +2726,7 @@ extern OSErr  PBSetCatalogInfoSync(FSRefParam * paramBlock)   AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern void  PBSetCatalogInfoAsync(FSRefParam * paramBlock)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  PBSetCatalogInfoAsync(FSRefParam * paramBlock)   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -2759,7 +2753,7 @@ extern void  PBSetCatalogInfoAsync(FSRefParam * paramBlock)   AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  FSOpenIterator(const FSRef *container, FSIteratorFlags iteratorFlags, FSIterator *iterator) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  FSOpenIterator(const FSRef *container, FSIteratorFlags iteratorFlags, FSIterator *iterator) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -2773,7 +2767,7 @@ extern OSErr  FSOpenIterator(const FSRef *container, FSIteratorFlags iteratorFla
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  PBOpenIteratorSync(FSCatalogBulkParam * paramBlock) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  PBOpenIteratorSync(FSCatalogBulkParam * paramBlock) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -2787,7 +2781,7 @@ extern OSErr  PBOpenIteratorSync(FSCatalogBulkParam * paramBlock) AVAILABLE_MAC_
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern void  PBOpenIteratorAsync(FSCatalogBulkParam * paramBlock) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  PBOpenIteratorAsync(FSCatalogBulkParam * paramBlock) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -2809,7 +2803,7 @@ extern void  PBOpenIteratorAsync(FSCatalogBulkParam * paramBlock) AVAILABLE_MAC_
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  FSCloseIterator(FSIterator iterator)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  FSCloseIterator(FSIterator iterator)            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -2823,7 +2817,7 @@ extern OSErr  FSCloseIterator(FSIterator iterator)            AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  PBCloseIteratorSync(FSCatalogBulkParam * paramBlock) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  PBCloseIteratorSync(FSCatalogBulkParam * paramBlock) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -2837,7 +2831,7 @@ extern OSErr  PBCloseIteratorSync(FSCatalogBulkParam * paramBlock) AVAILABLE_MAC
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern void  PBCloseIteratorAsync(FSCatalogBulkParam * paramBlock) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  PBCloseIteratorAsync(FSCatalogBulkParam * paramBlock) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -2870,7 +2864,7 @@ extern void  PBCloseIteratorAsync(FSCatalogBulkParam * paramBlock) AVAILABLE_MAC
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  FSGetCatalogInfoBulk(FSIterator iterator, ItemCount maximumObjects, ItemCount *actualObjects, Boolean *containerChanged, FSCatalogInfoBitmap whichInfo, FSCatalogInfo *catalogInfos, FSRef *refs, FSSpecPtr specs, HFSUniStr255 *names) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  FSGetCatalogInfoBulk(FSIterator iterator, ItemCount maximumObjects, ItemCount *actualObjects, Boolean *containerChanged, FSCatalogInfoBitmap whichInfo, FSCatalogInfo *catalogInfos, FSRef *refs, FSSpecPtr specs, HFSUniStr255 *names) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -2884,7 +2878,7 @@ extern OSErr  FSGetCatalogInfoBulk(FSIterator iterator, ItemCount maximumObjects
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  PBGetCatalogInfoBulkSync(FSCatalogBulkParam * paramBlock) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  PBGetCatalogInfoBulkSync(FSCatalogBulkParam * paramBlock) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -2898,7 +2892,7 @@ extern OSErr  PBGetCatalogInfoBulkSync(FSCatalogBulkParam * paramBlock) AVAILABL
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern void  PBGetCatalogInfoBulkAsync(FSCatalogBulkParam * paramBlock) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  PBGetCatalogInfoBulkAsync(FSCatalogBulkParam * paramBlock) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -2934,7 +2928,7 @@ extern void  PBGetCatalogInfoBulkAsync(FSCatalogBulkParam * paramBlock) AVAILABL
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  FSCatalogSearch(FSIterator iterator, const FSSearchParams *searchCriteria, ItemCount maximumObjects, ItemCount *actualObjects, Boolean *containerChanged, FSCatalogInfoBitmap whichInfo, FSCatalogInfo *catalogInfos, FSRef *refs, FSSpecPtr specs, HFSUniStr255 *names) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  FSCatalogSearch(FSIterator iterator, const FSSearchParams *searchCriteria, ItemCount maximumObjects, ItemCount *actualObjects, Boolean *containerChanged, FSCatalogInfoBitmap whichInfo, FSCatalogInfo *catalogInfos, FSRef *refs, FSSpecPtr specs, HFSUniStr255 *names) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -2948,7 +2942,7 @@ extern OSErr  FSCatalogSearch(FSIterator iterator, const FSSearchParams *searchC
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  PBCatalogSearchSync(FSCatalogBulkParam * paramBlock) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  PBCatalogSearchSync(FSCatalogBulkParam * paramBlock) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -2962,7 +2956,7 @@ extern OSErr  PBCatalogSearchSync(FSCatalogBulkParam * paramBlock) AVAILABLE_MAC
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern void  PBCatalogSearchAsync(FSCatalogBulkParam * paramBlock) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  PBCatalogSearchAsync(FSCatalogBulkParam * paramBlock) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -2994,7 +2988,7 @@ extern void  PBCatalogSearchAsync(FSCatalogBulkParam * paramBlock) AVAILABLE_MAC
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSCreateFileAndOpenForkUnicode(const FSRef *parentRef, UniCharCount nameLength, const UniChar *name, FSCatalogInfoBitmap whichInfo, const FSCatalogInfo *catalogInfo, UniCharCount forkNameLength, const UniChar *forkName, SInt8 permissions, FSIORefNum *forkRefNum, FSRef *newRef) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern OSStatus  FSCreateFileAndOpenForkUnicode(const FSRef *parentRef, UniCharCount nameLength, const UniChar *name, FSCatalogInfoBitmap whichInfo, const FSCatalogInfo *catalogInfo, UniCharCount forkNameLength, const UniChar *forkName, SInt8 permissions, FSIORefNum *forkRefNum, FSRef *newRef) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -3008,7 +3002,7 @@ extern OSStatus  FSCreateFileAndOpenForkUnicode(const FSRef *parentRef, UniCharC
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  PBCreateFileAndOpenForkUnicodeSync(FSRefForkIOParamPtr paramBlock) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern OSStatus  PBCreateFileAndOpenForkUnicodeSync(FSRefForkIOParamPtr paramBlock) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -3022,7 +3016,7 @@ extern OSStatus  PBCreateFileAndOpenForkUnicodeSync(FSRefForkIOParamPtr paramBlo
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
-extern void  PBCreateFileAndOpenForkUnicodeAsync(FSRefForkIOParamPtr paramBlock) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern void  PBCreateFileAndOpenForkUnicodeAsync(FSRefForkIOParamPtr paramBlock) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -3045,7 +3039,7 @@ extern void  PBCreateFileAndOpenForkUnicodeAsync(FSRefForkIOParamPtr paramBlock)
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  FSCreateFork(const FSRef *ref, UniCharCount forkNameLength, const UniChar *forkName)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  FSCreateFork(const FSRef *ref, UniCharCount forkNameLength, const UniChar *forkName)     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -3059,7 +3053,7 @@ extern OSErr  FSCreateFork(const FSRef *ref, UniCharCount forkNameLength, const 
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  PBCreateForkSync(FSForkIOParam * paramBlock)    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  PBCreateForkSync(FSForkIOParam * paramBlock)    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -3073,7 +3067,7 @@ extern OSErr  PBCreateForkSync(FSForkIOParam * paramBlock)    AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern void  PBCreateForkAsync(FSForkIOParam * paramBlock)    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  PBCreateForkAsync(FSForkIOParam * paramBlock)    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -3097,7 +3091,7 @@ extern void  PBCreateForkAsync(FSForkIOParam * paramBlock)    AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  FSDeleteFork(const FSRef *ref, UniCharCount forkNameLength, const UniChar *forkName)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  FSDeleteFork(const FSRef *ref, UniCharCount forkNameLength, const UniChar *forkName)     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -3111,7 +3105,7 @@ extern OSErr  FSDeleteFork(const FSRef *ref, UniCharCount forkNameLength, const 
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  PBDeleteForkSync(FSForkIOParam * paramBlock)    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  PBDeleteForkSync(FSForkIOParam * paramBlock)    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -3125,7 +3119,7 @@ extern OSErr  PBDeleteForkSync(FSForkIOParam * paramBlock)    AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern void  PBDeleteForkAsync(FSForkIOParam * paramBlock)    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  PBDeleteForkAsync(FSForkIOParam * paramBlock)    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -3153,7 +3147,7 @@ extern void  PBDeleteForkAsync(FSForkIOParam * paramBlock)    AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  FSIterateForks(const FSRef *ref, CatPositionRec *forkIterator, HFSUniStr255 *forkName, SInt64 *forkSize, UInt64 *forkPhysicalSize) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  FSIterateForks(const FSRef *ref, CatPositionRec *forkIterator, HFSUniStr255 *forkName, SInt64 *forkSize, UInt64 *forkPhysicalSize) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -3167,7 +3161,7 @@ extern OSErr  FSIterateForks(const FSRef *ref, CatPositionRec *forkIterator, HFS
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  PBIterateForksSync(FSForkIOParam * paramBlock)  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  PBIterateForksSync(FSForkIOParam * paramBlock)  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -3181,7 +3175,7 @@ extern OSErr  PBIterateForksSync(FSForkIOParam * paramBlock)  AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern void  PBIterateForksAsync(FSForkIOParam * paramBlock)  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  PBIterateForksAsync(FSForkIOParam * paramBlock)  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -3210,7 +3204,7 @@ extern void  PBIterateForksAsync(FSForkIOParam * paramBlock)  AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  FSOpenFork(const FSRef *ref, UniCharCount forkNameLength, const UniChar *forkName, SInt8 permissions, FSIORefNum *forkRefNum) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  FSOpenFork(const FSRef *ref, UniCharCount forkNameLength, const UniChar *forkName, SInt8 permissions, FSIORefNum *forkRefNum) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -3224,7 +3218,7 @@ extern OSErr  FSOpenFork(const FSRef *ref, UniCharCount forkNameLength, const Un
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  PBOpenForkSync(FSForkIOParam * paramBlock)      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  PBOpenForkSync(FSForkIOParam * paramBlock)      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -3238,7 +3232,7 @@ extern OSErr  PBOpenForkSync(FSForkIOParam * paramBlock)      AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern void  PBOpenForkAsync(FSForkIOParam * paramBlock)      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  PBOpenForkAsync(FSForkIOParam * paramBlock)      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -3266,7 +3260,7 @@ extern void  PBOpenForkAsync(FSForkIOParam * paramBlock)      AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  FSReadFork(FSIORefNum forkRefNum, UInt16 positionMode, SInt64 positionOffset, ByteCount requestCount, void *buffer, ByteCount *actualCount) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  FSReadFork(FSIORefNum forkRefNum, UInt16 positionMode, SInt64 positionOffset, ByteCount requestCount, void *buffer, ByteCount *actualCount) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -3280,7 +3274,7 @@ extern OSErr  FSReadFork(FSIORefNum forkRefNum, UInt16 positionMode, SInt64 posi
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  PBReadForkSync(FSForkIOParam * paramBlock)      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  PBReadForkSync(FSForkIOParam * paramBlock)      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -3294,7 +3288,7 @@ extern OSErr  PBReadForkSync(FSForkIOParam * paramBlock)      AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern void  PBReadForkAsync(FSForkIOParam * paramBlock)      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  PBReadForkAsync(FSForkIOParam * paramBlock)      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -3322,7 +3316,7 @@ extern void  PBReadForkAsync(FSForkIOParam * paramBlock)      AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  FSWriteFork(FSIORefNum forkRefNum, UInt16 positionMode, SInt64 positionOffset, ByteCount requestCount, const void *buffer, ByteCount *actualCount) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  FSWriteFork(FSIORefNum forkRefNum, UInt16 positionMode, SInt64 positionOffset, ByteCount requestCount, const void *buffer, ByteCount *actualCount) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -3336,7 +3330,7 @@ extern OSErr  FSWriteFork(FSIORefNum forkRefNum, UInt16 positionMode, SInt64 pos
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  PBWriteForkSync(FSForkIOParam * paramBlock)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  PBWriteForkSync(FSForkIOParam * paramBlock)     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -3350,7 +3344,7 @@ extern OSErr  PBWriteForkSync(FSForkIOParam * paramBlock)     AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern void  PBWriteForkAsync(FSForkIOParam * paramBlock)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  PBWriteForkAsync(FSForkIOParam * paramBlock)     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -3374,7 +3368,7 @@ extern void  PBWriteForkAsync(FSForkIOParam * paramBlock)     AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  FSGetForkPosition(FSIORefNum forkRefNum, SInt64 *position)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  FSGetForkPosition(FSIORefNum forkRefNum, SInt64 *position)         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -3388,7 +3382,7 @@ extern OSErr  FSGetForkPosition(FSIORefNum forkRefNum, SInt64 *position)        
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  PBGetForkPositionSync(FSForkIOParam * paramBlock) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  PBGetForkPositionSync(FSForkIOParam * paramBlock) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -3402,7 +3396,7 @@ extern OSErr  PBGetForkPositionSync(FSForkIOParam * paramBlock) AVAILABLE_MAC_OS
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern void  PBGetForkPositionAsync(FSForkIOParam * paramBlock) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  PBGetForkPositionAsync(FSForkIOParam * paramBlock) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -3427,7 +3421,7 @@ extern void  PBGetForkPositionAsync(FSForkIOParam * paramBlock) AVAILABLE_MAC_OS
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  FSSetForkPosition(FSIORefNum forkRefNum, UInt16 positionMode, SInt64 positionOffset) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  FSSetForkPosition(FSIORefNum forkRefNum, UInt16 positionMode, SInt64 positionOffset) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -3441,7 +3435,7 @@ extern OSErr  FSSetForkPosition(FSIORefNum forkRefNum, UInt16 positionMode, SInt
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  PBSetForkPositionSync(FSForkIOParam * paramBlock) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  PBSetForkPositionSync(FSForkIOParam * paramBlock) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -3455,7 +3449,7 @@ extern OSErr  PBSetForkPositionSync(FSForkIOParam * paramBlock) AVAILABLE_MAC_OS
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern void  PBSetForkPositionAsync(FSForkIOParam * paramBlock) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  PBSetForkPositionAsync(FSForkIOParam * paramBlock) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -3478,7 +3472,7 @@ extern void  PBSetForkPositionAsync(FSForkIOParam * paramBlock) AVAILABLE_MAC_OS
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  FSGetForkSize(FSIORefNum forkRefNum, SInt64 *forkSize)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  FSGetForkSize(FSIORefNum forkRefNum, SInt64 *forkSize)             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -3492,7 +3486,7 @@ extern OSErr  FSGetForkSize(FSIORefNum forkRefNum, SInt64 *forkSize)            
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  PBGetForkSizeSync(FSForkIOParam * paramBlock)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  PBGetForkSizeSync(FSForkIOParam * paramBlock)   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -3506,7 +3500,7 @@ extern OSErr  PBGetForkSizeSync(FSForkIOParam * paramBlock)   AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern void  PBGetForkSizeAsync(FSForkIOParam * paramBlock)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  PBGetForkSizeAsync(FSForkIOParam * paramBlock)   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -3531,7 +3525,7 @@ extern void  PBGetForkSizeAsync(FSForkIOParam * paramBlock)   AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  FSSetForkSize(FSIORefNum forkRefNum, UInt16 positionMode, SInt64 positionOffset) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  FSSetForkSize(FSIORefNum forkRefNum, UInt16 positionMode, SInt64 positionOffset) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -3545,7 +3539,7 @@ extern OSErr  FSSetForkSize(FSIORefNum forkRefNum, UInt16 positionMode, SInt64 p
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  PBSetForkSizeSync(FSForkIOParam * paramBlock)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  PBSetForkSizeSync(FSForkIOParam * paramBlock)   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -3559,7 +3553,7 @@ extern OSErr  PBSetForkSizeSync(FSForkIOParam * paramBlock)   AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern void  PBSetForkSizeAsync(FSForkIOParam * paramBlock)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  PBSetForkSizeAsync(FSForkIOParam * paramBlock)   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -3599,7 +3593,7 @@ extern void  PBSetForkSizeAsync(FSForkIOParam * paramBlock)   AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  FSAllocateFork(FSIORefNum forkRefNum, FSAllocationFlags flags, UInt16 positionMode, SInt64 positionOffset, UInt64 requestCount, UInt64 *actualCount) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  FSAllocateFork(FSIORefNum forkRefNum, FSAllocationFlags flags, UInt16 positionMode, SInt64 positionOffset, UInt64 requestCount, UInt64 *actualCount) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -3613,7 +3607,7 @@ extern OSErr  FSAllocateFork(FSIORefNum forkRefNum, FSAllocationFlags flags, UIn
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  PBAllocateForkSync(FSForkIOParam * paramBlock)  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  PBAllocateForkSync(FSForkIOParam * paramBlock)  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -3627,7 +3621,7 @@ extern OSErr  PBAllocateForkSync(FSForkIOParam * paramBlock)  AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern void  PBAllocateForkAsync(FSForkIOParam * paramBlock)  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  PBAllocateForkAsync(FSForkIOParam * paramBlock)  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -3650,7 +3644,7 @@ extern void  PBAllocateForkAsync(FSForkIOParam * paramBlock)  AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  FSFlushFork(FSIORefNum forkRefNum)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  FSFlushFork(FSIORefNum forkRefNum)              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -3664,7 +3658,7 @@ extern OSErr  FSFlushFork(FSIORefNum forkRefNum)              AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  PBFlushForkSync(FSForkIOParam * paramBlock)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  PBFlushForkSync(FSForkIOParam * paramBlock)     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -3678,7 +3672,7 @@ extern OSErr  PBFlushForkSync(FSForkIOParam * paramBlock)     AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern void  PBFlushForkAsync(FSForkIOParam * paramBlock)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  PBFlushForkAsync(FSForkIOParam * paramBlock)     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -3701,7 +3695,7 @@ extern void  PBFlushForkAsync(FSForkIOParam * paramBlock)     AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  FSCloseFork(FSIORefNum forkRefNum)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  FSCloseFork(FSIORefNum forkRefNum)              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -3715,7 +3709,7 @@ extern OSErr  FSCloseFork(FSIORefNum forkRefNum)              AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  PBCloseForkSync(FSForkIOParam * paramBlock)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  PBCloseForkSync(FSForkIOParam * paramBlock)     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -3729,7 +3723,7 @@ extern OSErr  PBCloseForkSync(FSForkIOParam * paramBlock)     AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern void  PBCloseForkAsync(FSForkIOParam * paramBlock)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  PBCloseForkAsync(FSForkIOParam * paramBlock)     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -3767,7 +3761,7 @@ extern void  PBCloseForkAsync(FSForkIOParam * paramBlock)     AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  FSGetForkCBInfo(FSIORefNum desiredRefNum, FSVolumeRefNum volume, short *iterator, FSIORefNum *actualRefNum, FSForkInfo *forkInfo, FSRef *ref, HFSUniStr255 *outForkName) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  FSGetForkCBInfo(FSIORefNum desiredRefNum, FSVolumeRefNum volume, short *iterator, FSIORefNum *actualRefNum, FSForkInfo *forkInfo, FSRef *ref, HFSUniStr255 *outForkName) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -3781,7 +3775,7 @@ extern OSErr  FSGetForkCBInfo(FSIORefNum desiredRefNum, FSVolumeRefNum volume, s
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  PBGetForkCBInfoSync(FSForkCBInfoParam * paramBlock) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  PBGetForkCBInfoSync(FSForkCBInfoParam * paramBlock) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -3795,7 +3789,7 @@ extern OSErr  PBGetForkCBInfoSync(FSForkCBInfoParam * paramBlock) AVAILABLE_MAC_
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern void  PBGetForkCBInfoAsync(FSForkCBInfoParam * paramBlock) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  PBGetForkCBInfoAsync(FSForkCBInfoParam * paramBlock) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -3821,7 +3815,7 @@ extern void  PBGetForkCBInfoAsync(FSForkCBInfoParam * paramBlock) AVAILABLE_MAC_
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSLockRange(FSIORefNum forkRefNum, UInt16 positionMode, SInt64 positionOffset, UInt64 requestCount, UInt64 *rangeStart) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern OSStatus  FSLockRange(FSIORefNum forkRefNum, UInt16 positionMode, SInt64 positionOffset, UInt64 requestCount, UInt64 *rangeStart) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -3835,7 +3829,7 @@ extern OSStatus  FSLockRange(FSIORefNum forkRefNum, UInt16 positionMode, SInt64 
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  PBXLockRangeSync(FSRangeLockParamPtr paramBlock) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern OSStatus  PBXLockRangeSync(FSRangeLockParamPtr paramBlock) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -3849,7 +3843,7 @@ extern OSStatus  PBXLockRangeSync(FSRangeLockParamPtr paramBlock) AVAILABLE_MAC_
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  PBXLockRangeAsync(FSRangeLockParamPtr paramBlock) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern OSStatus  PBXLockRangeAsync(FSRangeLockParamPtr paramBlock) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -3875,7 +3869,7 @@ extern OSStatus  PBXLockRangeAsync(FSRangeLockParamPtr paramBlock) AVAILABLE_MAC
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSUnlockRange(FSIORefNum forkRefNum, UInt16 positionMode, SInt64 positionOffset, UInt64 requestCount, UInt64 *rangeStart) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern OSStatus  FSUnlockRange(FSIORefNum forkRefNum, UInt16 positionMode, SInt64 positionOffset, UInt64 requestCount, UInt64 *rangeStart) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -3889,7 +3883,7 @@ extern OSStatus  FSUnlockRange(FSIORefNum forkRefNum, UInt16 positionMode, SInt6
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  PBXUnlockRangeSync(FSRangeLockParamPtr paramBlock) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern OSStatus  PBXUnlockRangeSync(FSRangeLockParamPtr paramBlock) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -3903,7 +3897,7 @@ extern OSStatus  PBXUnlockRangeSync(FSRangeLockParamPtr paramBlock) AVAILABLE_MA
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  PBXUnlockRangeAsync(FSRangeLockParamPtr paramBlock) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern OSStatus  PBXUnlockRangeAsync(FSRangeLockParamPtr paramBlock) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -3934,7 +3928,7 @@ extern OSStatus  PBXUnlockRangeAsync(FSRangeLockParamPtr paramBlock) AVAILABLE_M
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  FSGetVolumeInfo(FSVolumeRefNum volume, ItemCount volumeIndex, FSVolumeRefNum *actualVolume, FSVolumeInfoBitmap whichInfo, FSVolumeInfo *info, HFSUniStr255 *volumeName, FSRef *rootDirectory) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  FSGetVolumeInfo(FSVolumeRefNum volume, ItemCount volumeIndex, FSVolumeRefNum *actualVolume, FSVolumeInfoBitmap whichInfo, FSVolumeInfo *info, HFSUniStr255 *volumeName, FSRef *rootDirectory) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -3948,7 +3942,7 @@ extern OSErr  FSGetVolumeInfo(FSVolumeRefNum volume, ItemCount volumeIndex, FSVo
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  PBGetVolumeInfoSync(FSVolumeInfoParam * paramBlock) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  PBGetVolumeInfoSync(FSVolumeInfoParam * paramBlock) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -3962,7 +3956,7 @@ extern OSErr  PBGetVolumeInfoSync(FSVolumeInfoParam * paramBlock) AVAILABLE_MAC_
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern void  PBGetVolumeInfoAsync(FSVolumeInfoParam * paramBlock) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  PBGetVolumeInfoAsync(FSVolumeInfoParam * paramBlock) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -3989,7 +3983,7 @@ extern void  PBGetVolumeInfoAsync(FSVolumeInfoParam * paramBlock) AVAILABLE_MAC_
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  FSSetVolumeInfo(FSVolumeRefNum volume, FSVolumeInfoBitmap whichInfo, const FSVolumeInfo *info)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  FSSetVolumeInfo(FSVolumeRefNum volume, FSVolumeInfoBitmap whichInfo, const FSVolumeInfo *info)        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -4003,7 +3997,7 @@ extern OSErr  FSSetVolumeInfo(FSVolumeRefNum volume, FSVolumeInfoBitmap whichInf
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  PBSetVolumeInfoSync(FSVolumeInfoParam * paramBlock) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  PBSetVolumeInfoSync(FSVolumeInfoParam * paramBlock) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -4017,7 +4011,7 @@ extern OSErr  PBSetVolumeInfoSync(FSVolumeInfoParam * paramBlock) AVAILABLE_MAC_
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern void  PBSetVolumeInfoAsync(FSVolumeInfoParam * paramBlock) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern void  PBSetVolumeInfoAsync(FSVolumeInfoParam * paramBlock) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -4035,7 +4029,7 @@ extern void  PBSetVolumeInfoAsync(FSVolumeInfoParam * paramBlock) AVAILABLE_MAC_
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  FSGetDataForkName(HFSUniStr255 * dataForkName)  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  FSGetDataForkName(HFSUniStr255 * dataForkName)  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -4054,7 +4048,7 @@ extern OSErr  FSGetDataForkName(HFSUniStr255 * dataForkName)  AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  FSGetResourceForkName(HFSUniStr255 * resourceForkName) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSErr  FSGetResourceForkName(HFSUniStr255 * resourceForkName) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -4084,7 +4078,7 @@ extern OSErr  FSGetResourceForkName(HFSUniStr255 * resourceForkName) AVAILABLE_M
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSRefMakePath(const FSRef *ref, UInt8 *path, UInt32 pathBufferSize)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSStatus  FSRefMakePath(const FSRef *ref, UInt8 *path, UInt32 pathBufferSize)     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -4113,7 +4107,7 @@ extern OSStatus  FSRefMakePath(const FSRef *ref, UInt8 *path, UInt32 pathBufferS
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSPathMakeRef(const UInt8 *path, FSRef *ref, Boolean *isDirectory)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSStatus  FSPathMakeRef(const UInt8 *path, FSRef *ref, Boolean *isDirectory)        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -4158,7 +4152,7 @@ enum {
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSPathMakeRefWithOptions(const UInt8 *path, OptionBits options, FSRef *ref, Boolean *isDirectory) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern OSStatus  FSPathMakeRefWithOptions(const UInt8 *path, OptionBits options, FSRef *ref, Boolean *isDirectory) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -4182,7 +4176,7 @@ extern OSStatus  FSPathMakeRefWithOptions(const UInt8 *path, OptionBits options,
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
-extern Boolean  FSIsFSRefValid(const FSRef * ref)             AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern Boolean  FSIsFSRefValid(const FSRef * ref)             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -4236,7 +4230,7 @@ enum {
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FNNotify(const FSRef *ref, FNMessage message, OptionBits flags)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSStatus  FNNotify(const FSRef *ref, FNMessage message, OptionBits flags)                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -4265,7 +4259,7 @@ extern OSStatus  FNNotify(const FSRef *ref, FNMessage message, OptionBits flags)
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FNNotifyByPath(const UInt8 *path, FNMessage message, OptionBits flags)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSStatus  FNNotifyByPath(const UInt8 *path, FNMessage message, OptionBits flags)         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -4293,7 +4287,7 @@ extern OSStatus  FNNotifyByPath(const UInt8 *path, FNMessage message, OptionBits
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FNNotifyAll(FNMessage message, OptionBits flags)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSStatus  FNNotifyAll(FNMessage message, OptionBits flags)                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -4366,7 +4360,7 @@ typedef STACK_UPP_TYPE(FNSubscriptionProcPtr)                   FNSubscriptionUP
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern FNSubscriptionUPP
-NewFNSubscriptionUPP(FNSubscriptionProcPtr userRoutine)       AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+NewFNSubscriptionUPP(FNSubscriptionProcPtr userRoutine)       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_1, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  DisposeFNSubscriptionUPP()
@@ -4377,7 +4371,7 @@ NewFNSubscriptionUPP(FNSubscriptionProcPtr userRoutine)       AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeFNSubscriptionUPP(FNSubscriptionUPP userUPP)           AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+DisposeFNSubscriptionUPP(FNSubscriptionUPP userUPP)           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_1, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  InvokeFNSubscriptionUPP()
@@ -4393,7 +4387,7 @@ InvokeFNSubscriptionUPP(
   OptionBits         flags,
   void *             refcon,
   FNSubscriptionRef  subscription,
-  FNSubscriptionUPP  userUPP)                                 AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  FNSubscriptionUPP  userUPP)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_1, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 #if __MACH__
   #ifdef __cplusplus
@@ -4439,7 +4433,7 @@ InvokeFNSubscriptionUPP(
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FNSubscribe(const FSRef *directoryRef, FNSubscriptionUPP callback, void *refcon, OptionBits flags, FNSubscriptionRef *subscription) AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+extern OSStatus  FNSubscribe(const FSRef *directoryRef, FNSubscriptionUPP callback, void *refcon, OptionBits flags, FNSubscriptionRef *subscription) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_1, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -4474,7 +4468,7 @@ extern OSStatus  FNSubscribe(const FSRef *directoryRef, FNSubscriptionUPP callba
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FNSubscribeByPath(const UInt8 *directoryPath, FNSubscriptionUPP callback, void *refcon, OptionBits flags, FNSubscriptionRef *subscription) AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+extern OSStatus  FNSubscribeByPath(const UInt8 *directoryPath, FNSubscriptionUPP callback, void *refcon, OptionBits flags, FNSubscriptionRef *subscription) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_1, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -4497,7 +4491,7 @@ extern OSStatus  FNSubscribeByPath(const UInt8 *directoryPath, FNSubscriptionUPP
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FNUnsubscribe(FNSubscriptionRef subscription) AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+extern OSStatus  FNUnsubscribe(FNSubscriptionRef subscription) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_1, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -4527,7 +4521,7 @@ extern OSStatus  FNUnsubscribe(FNSubscriptionRef subscription) AVAILABLE_MAC_OS_
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FNGetDirectoryForSubscription(FNSubscriptionRef subscription, FSRef *ref) AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+extern OSStatus  FNGetDirectoryForSubscription(FNSubscriptionRef subscription, FSRef *ref) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_1, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -4561,7 +4555,7 @@ typedef STACK_UPP_TYPE(FSVolumeEjectProcPtr)                    FSVolumeEjectUPP
  *    Non-Carbon CFM:   not available
  */
 extern FSVolumeMountUPP
-NewFSVolumeMountUPP(FSVolumeMountProcPtr userRoutine)         AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+NewFSVolumeMountUPP(FSVolumeMountProcPtr userRoutine)         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  NewFSVolumeUnmountUPP()
@@ -4572,7 +4566,7 @@ NewFSVolumeMountUPP(FSVolumeMountProcPtr userRoutine)         AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern FSVolumeUnmountUPP
-NewFSVolumeUnmountUPP(FSVolumeUnmountProcPtr userRoutine)     AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+NewFSVolumeUnmountUPP(FSVolumeUnmountProcPtr userRoutine)     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  NewFSVolumeEjectUPP()
@@ -4583,7 +4577,7 @@ NewFSVolumeUnmountUPP(FSVolumeUnmountProcPtr userRoutine)     AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern FSVolumeEjectUPP
-NewFSVolumeEjectUPP(FSVolumeEjectProcPtr userRoutine)         AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+NewFSVolumeEjectUPP(FSVolumeEjectProcPtr userRoutine)         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  DisposeFSVolumeMountUPP()
@@ -4594,7 +4588,7 @@ NewFSVolumeEjectUPP(FSVolumeEjectProcPtr userRoutine)         AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern void
-DisposeFSVolumeMountUPP(FSVolumeMountUPP userUPP)             AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+DisposeFSVolumeMountUPP(FSVolumeMountUPP userUPP)             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  DisposeFSVolumeUnmountUPP()
@@ -4605,7 +4599,7 @@ DisposeFSVolumeMountUPP(FSVolumeMountUPP userUPP)             AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern void
-DisposeFSVolumeUnmountUPP(FSVolumeUnmountUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+DisposeFSVolumeUnmountUPP(FSVolumeUnmountUPP userUPP)         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  DisposeFSVolumeEjectUPP()
@@ -4616,7 +4610,7 @@ DisposeFSVolumeUnmountUPP(FSVolumeUnmountUPP userUPP)         AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern void
-DisposeFSVolumeEjectUPP(FSVolumeEjectUPP userUPP)             AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+DisposeFSVolumeEjectUPP(FSVolumeEjectUPP userUPP)             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  InvokeFSVolumeMountUPP()
@@ -4632,7 +4626,7 @@ InvokeFSVolumeMountUPP(
   void *             clientData,
   OSStatus           err,
   FSVolumeRefNum     mountedVolumeRefNum,
-  FSVolumeMountUPP   userUPP)                                 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  FSVolumeMountUPP   userUPP)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  InvokeFSVolumeUnmountUPP()
@@ -4649,7 +4643,7 @@ InvokeFSVolumeUnmountUPP(
   OSStatus            err,
   FSVolumeRefNum      volumeRefNum,
   pid_t               dissenter,
-  FSVolumeUnmountUPP  userUPP)                                AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  FSVolumeUnmountUPP  userUPP)                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  InvokeFSVolumeEjectUPP()
@@ -4666,7 +4660,7 @@ InvokeFSVolumeEjectUPP(
   OSStatus           err,
   FSVolumeRefNum     volumeRefNum,
   pid_t              dissenter,
-  FSVolumeEjectUPP   userUPP)                                 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  FSVolumeEjectUPP   userUPP)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 #if __MACH__
   #ifdef __cplusplus
@@ -4794,7 +4788,7 @@ enum {
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSCreateVolumeOperation(FSVolumeOperation * volumeOp) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+extern OSStatus  FSCreateVolumeOperation(FSVolumeOperation * volumeOp) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -4817,7 +4811,7 @@ extern OSStatus  FSCreateVolumeOperation(FSVolumeOperation * volumeOp) AVAILABLE
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSDisposeVolumeOperation(FSVolumeOperation volumeOp) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+extern OSStatus  FSDisposeVolumeOperation(FSVolumeOperation volumeOp) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -4850,7 +4844,7 @@ extern OSStatus  FSDisposeVolumeOperation(FSVolumeOperation volumeOp) AVAILABLE_
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSMountLocalVolumeSync(CFStringRef diskID, CFURLRef mountDir, FSVolumeRefNum *mountedVolumeRefNum, OptionBits flags) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+extern OSStatus  FSMountLocalVolumeSync(CFStringRef diskID, CFURLRef mountDir, FSVolumeRefNum *mountedVolumeRefNum, OptionBits flags) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -4898,7 +4892,7 @@ extern OSStatus  FSMountLocalVolumeSync(CFStringRef diskID, CFURLRef mountDir, F
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSMountLocalVolumeAsync(CFStringRef diskID, CFURLRef mountDir, FSVolumeOperation volumeOp, void *clientData, OptionBits flags, FSVolumeMountUPP callback, CFRunLoopRef runloop, CFStringRef runloopMode) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+extern OSStatus  FSMountLocalVolumeAsync(CFStringRef diskID, CFURLRef mountDir, FSVolumeOperation volumeOp, void *clientData, OptionBits flags, FSVolumeMountUPP callback, CFRunLoopRef runloop, CFStringRef runloopMode) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -4941,7 +4935,7 @@ extern OSStatus  FSMountLocalVolumeAsync(CFStringRef diskID, CFURLRef mountDir, 
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSMountServerVolumeSync(CFURLRef url, CFURLRef mountDir, CFStringRef user, CFStringRef password, FSVolumeRefNum *mountedVolumeRefNum, OptionBits flags) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+extern OSStatus  FSMountServerVolumeSync(CFURLRef url, CFURLRef mountDir, CFStringRef user, CFStringRef password, FSVolumeRefNum *mountedVolumeRefNum, OptionBits flags) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -4999,7 +4993,7 @@ extern OSStatus  FSMountServerVolumeSync(CFURLRef url, CFURLRef mountDir, CFStri
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSMountServerVolumeAsync(CFURLRef url, CFURLRef mountDir, CFStringRef user, CFStringRef password, FSVolumeOperation volumeOp, void *clientData, OptionBits flags, FSVolumeMountUPP callback, CFRunLoopRef runloop, CFStringRef runloopMode) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+extern OSStatus  FSMountServerVolumeAsync(CFURLRef url, CFURLRef mountDir, CFStringRef user, CFStringRef password, FSVolumeOperation volumeOp, void *clientData, OptionBits flags, FSVolumeMountUPP callback, CFRunLoopRef runloop, CFStringRef runloopMode) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -5042,7 +5036,7 @@ extern OSStatus  FSMountServerVolumeAsync(CFURLRef url, CFURLRef mountDir, CFStr
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSGetAsyncMountStatus(FSVolumeOperation volumeOp, FSMountStatus *status, OSStatus *volumeOpStatus, FSVolumeRefNum *mountedVolumeRefNum, void **clientData) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+extern OSStatus  FSGetAsyncMountStatus(FSVolumeOperation volumeOp, FSMountStatus *status, OSStatus *volumeOpStatus, FSVolumeRefNum *mountedVolumeRefNum, void **clientData) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -5075,7 +5069,7 @@ extern OSStatus  FSGetAsyncMountStatus(FSVolumeOperation volumeOp, FSMountStatus
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSUnmountVolumeSync(FSVolumeRefNum vRefNum, OptionBits flags, pid_t *dissenter) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+extern OSStatus  FSUnmountVolumeSync(FSVolumeRefNum vRefNum, OptionBits flags, pid_t *dissenter) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -5119,7 +5113,7 @@ extern OSStatus  FSUnmountVolumeSync(FSVolumeRefNum vRefNum, OptionBits flags, p
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSUnmountVolumeAsync(FSVolumeRefNum vRefNum, OptionBits flags, FSVolumeOperation volumeOp, void *clientData, FSVolumeUnmountUPP callback, CFRunLoopRef runloop, CFStringRef runloopMode) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+extern OSStatus  FSUnmountVolumeAsync(FSVolumeRefNum vRefNum, OptionBits flags, FSVolumeOperation volumeOp, void *clientData, FSVolumeUnmountUPP callback, CFRunLoopRef runloop, CFStringRef runloopMode) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -5161,7 +5155,7 @@ extern OSStatus  FSUnmountVolumeAsync(FSVolumeRefNum vRefNum, OptionBits flags, 
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSGetAsyncUnmountStatus(FSVolumeOperation volumeOp, FSUnmountStatus *status, OSStatus *volumeOpStatus, FSVolumeRefNum *volumeRefNum, pid_t *dissenter, void **clientData) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+extern OSStatus  FSGetAsyncUnmountStatus(FSVolumeOperation volumeOp, FSUnmountStatus *status, OSStatus *volumeOpStatus, FSVolumeRefNum *volumeRefNum, pid_t *dissenter, void **clientData) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -5185,7 +5179,7 @@ extern OSStatus  FSGetAsyncUnmountStatus(FSVolumeOperation volumeOp, FSUnmountSt
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSCancelVolumeOperation(FSVolumeOperation volumeOp) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+extern OSStatus  FSCancelVolumeOperation(FSVolumeOperation volumeOp) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -5218,7 +5212,7 @@ extern OSStatus  FSCancelVolumeOperation(FSVolumeOperation volumeOp) AVAILABLE_M
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSEjectVolumeSync(FSVolumeRefNum vRefNum, OptionBits flags, pid_t *dissenter) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+extern OSStatus  FSEjectVolumeSync(FSVolumeRefNum vRefNum, OptionBits flags, pid_t *dissenter) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -5262,7 +5256,7 @@ extern OSStatus  FSEjectVolumeSync(FSVolumeRefNum vRefNum, OptionBits flags, pid
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSEjectVolumeAsync(FSVolumeRefNum vRefNum, OptionBits flags, FSVolumeOperation volumeOp, void *clientData, FSVolumeEjectUPP callback, CFRunLoopRef runloop, CFStringRef runloopMode) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+extern OSStatus  FSEjectVolumeAsync(FSVolumeRefNum vRefNum, OptionBits flags, FSVolumeOperation volumeOp, void *clientData, FSVolumeEjectUPP callback, CFRunLoopRef runloop, CFStringRef runloopMode) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -5304,7 +5298,7 @@ extern OSStatus  FSEjectVolumeAsync(FSVolumeRefNum vRefNum, OptionBits flags, FS
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSGetAsyncEjectStatus(FSVolumeOperation volumeOp, FSEjectStatus *status, OSStatus *volumeOpStatus, FSVolumeRefNum *volumeRefNum, pid_t *dissenter, void **clientData) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+extern OSStatus  FSGetAsyncEjectStatus(FSVolumeOperation volumeOp, FSEjectStatus *status, OSStatus *volumeOpStatus, FSVolumeRefNum *volumeRefNum, pid_t *dissenter, void **clientData) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -5331,7 +5325,7 @@ extern OSStatus  FSGetAsyncEjectStatus(FSVolumeOperation volumeOp, FSEjectStatus
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSCopyDiskIDForVolume(FSVolumeRefNum vRefNum, CFStringRef *diskID)       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+extern OSStatus  FSCopyDiskIDForVolume(FSVolumeRefNum vRefNum, CFStringRef *diskID)       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -5357,7 +5351,7 @@ extern OSStatus  FSCopyDiskIDForVolume(FSVolumeRefNum vRefNum, CFStringRef *disk
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSCopyURLForVolume(FSVolumeRefNum vRefNum, CFURLRef *url)             AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern OSStatus  FSCopyURLForVolume(FSVolumeRefNum vRefNum, CFURLRef *url)             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -5382,7 +5376,7 @@ extern OSStatus  FSCopyURLForVolume(FSVolumeRefNum vRefNum, CFURLRef *url)      
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSGetVolumeForDiskID(CFStringRef diskID, FSVolumeRefNum *vRefNum)        AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern OSStatus  FSGetVolumeForDiskID(CFStringRef diskID, FSVolumeRefNum *vRefNum)        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -5390,7 +5384,7 @@ extern OSStatus  FSGetVolumeForDiskID(CFStringRef diskID, FSVolumeRefNum *vRefNu
  *  
  *  Discussion:
  *    This routine returns a copy of the diskID for the passed in
- *    volume.  The caller is responsible for releasing the CFString
+ *    volume.  The caller is responsible for releasing the DADisk
  *    later.
  *  
  *  Mac OS X threading:
@@ -5409,7 +5403,7 @@ extern OSStatus  FSGetVolumeForDiskID(CFStringRef diskID, FSVolumeRefNum *vRefNu
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSCopyDADiskForVolume(FSVolumeRefNum vRefNum, DADiskRef *disk)         AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern OSStatus  FSCopyDADiskForVolume(FSVolumeRefNum vRefNum, DADiskRef *disk)         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -5435,7 +5429,7 @@ extern OSStatus  FSCopyDADiskForVolume(FSVolumeRefNum vRefNum, DADiskRef *disk) 
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSGetVolumeForDADisk(DADiskRef disk, FSVolumeRefNum *vRefNum)          AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern OSStatus  FSGetVolumeForDADisk(DADiskRef disk, FSVolumeRefNum *vRefNum)          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /* File Operation routines*/
@@ -5656,7 +5650,7 @@ enum {
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kFSOperationTotalBytesKey                   AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern const CFStringRef kFSOperationTotalBytesKey                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 /*
  *  kFSOperationBytesCompleteKey
  *  
@@ -5672,7 +5666,7 @@ extern const CFStringRef kFSOperationTotalBytesKey                   AVAILABLE_M
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kFSOperationBytesCompleteKey                AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern const CFStringRef kFSOperationBytesCompleteKey                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 /*
  *  kFSOperationBytesRemainingKey
  *  
@@ -5688,7 +5682,7 @@ extern const CFStringRef kFSOperationBytesCompleteKey                AVAILABLE_M
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kFSOperationBytesRemainingKey               AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern const CFStringRef kFSOperationBytesRemainingKey               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 /*
  *  kFSOperationTotalObjectsKey
  *  
@@ -5704,7 +5698,7 @@ extern const CFStringRef kFSOperationBytesRemainingKey               AVAILABLE_M
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kFSOperationTotalObjectsKey                 AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern const CFStringRef kFSOperationTotalObjectsKey                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 /*
  *  kFSOperationObjectsCompleteKey
  *  
@@ -5720,7 +5714,7 @@ extern const CFStringRef kFSOperationTotalObjectsKey                 AVAILABLE_M
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kFSOperationObjectsCompleteKey              AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern const CFStringRef kFSOperationObjectsCompleteKey              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 /*
  *  kFSOperationObjectsRemainingKey
  *  
@@ -5736,7 +5730,7 @@ extern const CFStringRef kFSOperationObjectsCompleteKey              AVAILABLE_M
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kFSOperationObjectsRemainingKey             AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern const CFStringRef kFSOperationObjectsRemainingKey             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 /*
  *  kFSOperationTotalUserVisibleObjectsKey
  *  
@@ -5754,7 +5748,7 @@ extern const CFStringRef kFSOperationObjectsRemainingKey             AVAILABLE_M
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kFSOperationTotalUserVisibleObjectsKey      AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern const CFStringRef kFSOperationTotalUserVisibleObjectsKey      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 /*
  *  kFSOperationUserVisibleObjectsCompleteKey
  *  
@@ -5772,7 +5766,7 @@ extern const CFStringRef kFSOperationTotalUserVisibleObjectsKey      AVAILABLE_M
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kFSOperationUserVisibleObjectsCompleteKey   AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern const CFStringRef kFSOperationUserVisibleObjectsCompleteKey   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 /*
  *  kFSOperationUserVisibleObjectsRemainingKey
  *  
@@ -5790,7 +5784,7 @@ extern const CFStringRef kFSOperationUserVisibleObjectsCompleteKey   AVAILABLE_M
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kFSOperationUserVisibleObjectsRemainingKey  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern const CFStringRef kFSOperationUserVisibleObjectsRemainingKey  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 /*
  *  kFSOperationThroughputKey
  *  
@@ -5804,7 +5798,7 @@ extern const CFStringRef kFSOperationUserVisibleObjectsRemainingKey  AVAILABLE_M
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kFSOperationThroughputKey                   AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern const CFStringRef kFSOperationThroughputKey                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 /*
  *  FSCopyObjectSync()
  *  
@@ -5840,7 +5834,7 @@ extern const CFStringRef kFSOperationThroughputKey                   AVAILABLE_M
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSCopyObjectSync(const FSRef *source, const FSRef *destDir, CFStringRef destName, FSRef *target, OptionBits options) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern OSStatus  FSCopyObjectSync(const FSRef *source, const FSRef *destDir, CFStringRef destName, FSRef *target, OptionBits options) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -5883,7 +5877,7 @@ extern OSStatus  FSCopyObjectSync(const FSRef *source, const FSRef *destDir, CFS
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSMoveObjectSync(const FSRef *source, const FSRef *destDir, CFStringRef destName, FSRef *target, OptionBits options) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern OSStatus  FSMoveObjectSync(const FSRef *source, const FSRef *destDir, CFStringRef destName, FSRef *target, OptionBits options) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -5917,7 +5911,7 @@ extern OSStatus  FSMoveObjectSync(const FSRef *source, const FSRef *destDir, CFS
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSMoveObjectToTrashSync(const FSRef *source, FSRef *target, OptionBits options) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern OSStatus  FSMoveObjectToTrashSync(const FSRef *source, FSRef *target, OptionBits options) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -5956,7 +5950,7 @@ extern OSStatus  FSMoveObjectToTrashSync(const FSRef *source, FSRef *target, Opt
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSPathCopyObjectSync(const char *sourcePath, const char *destDirPath, CFStringRef destName, char **targetPath, OptionBits options) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern OSStatus  FSPathCopyObjectSync(const char *sourcePath, const char *destDirPath, CFStringRef destName, char **targetPath, OptionBits options) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -6000,7 +5994,7 @@ extern OSStatus  FSPathCopyObjectSync(const char *sourcePath, const char *destDi
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSPathMoveObjectSync(const char *sourcePath, const char *destDirPath, CFStringRef destName, char **targetPath, OptionBits options) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern OSStatus  FSPathMoveObjectSync(const char *sourcePath, const char *destDirPath, CFStringRef destName, char **targetPath, OptionBits options) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -6035,7 +6029,7 @@ extern OSStatus  FSPathMoveObjectSync(const char *sourcePath, const char *destDi
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSPathMoveObjectToTrashSync(const char *sourcePath, char **targetPath, OptionBits options) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern OSStatus  FSPathMoveObjectToTrashSync(const char *sourcePath, char **targetPath, OptionBits options) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -6055,7 +6049,7 @@ extern OSStatus  FSPathMoveObjectToTrashSync(const char *sourcePath, char **targ
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern CFTypeID  FSFileOperationGetTypeID(void)               AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern CFTypeID  FSFileOperationGetTypeID(void)               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -6082,7 +6076,7 @@ extern CFTypeID  FSFileOperationGetTypeID(void)               AVAILABLE_MAC_OS_X
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern FSFileOperationRef  FSFileOperationCreate(CFAllocatorRef alloc) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern FSFileOperationRef  FSFileOperationCreate(CFAllocatorRef alloc) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -6114,7 +6108,7 @@ extern FSFileOperationRef  FSFileOperationCreate(CFAllocatorRef alloc) AVAILABLE
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSFileOperationScheduleWithRunLoop(FSFileOperationRef fileOp, CFRunLoopRef runLoop, CFStringRef runLoopMode) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern OSStatus  FSFileOperationScheduleWithRunLoop(FSFileOperationRef fileOp, CFRunLoopRef runLoop, CFStringRef runLoopMode) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -6145,7 +6139,7 @@ extern OSStatus  FSFileOperationScheduleWithRunLoop(FSFileOperationRef fileOp, C
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSFileOperationUnscheduleFromRunLoop(FSFileOperationRef fileOp, CFRunLoopRef runLoop, CFStringRef runLoopMode) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern OSStatus  FSFileOperationUnscheduleFromRunLoop(FSFileOperationRef fileOp, CFRunLoopRef runLoop, CFStringRef runLoopMode) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -6198,7 +6192,7 @@ extern OSStatus  FSFileOperationUnscheduleFromRunLoop(FSFileOperationRef fileOp,
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSCopyObjectAsync(FSFileOperationRef fileOp, const FSRef *source, const FSRef *destDir, CFStringRef destName, OptionBits flags, FSFileOperationStatusProcPtr callback, CFTimeInterval statusChangeInterval, FSFileOperationClientContext *clientContext) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern OSStatus  FSCopyObjectAsync(FSFileOperationRef fileOp, const FSRef *source, const FSRef *destDir, CFStringRef destName, OptionBits flags, FSFileOperationStatusProcPtr callback, CFTimeInterval statusChangeInterval, FSFileOperationClientContext *clientContext) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -6254,7 +6248,7 @@ extern OSStatus  FSCopyObjectAsync(FSFileOperationRef fileOp, const FSRef *sourc
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSMoveObjectAsync(FSFileOperationRef fileOp, const FSRef *source, const FSRef *destDir, CFStringRef destName, OptionBits flags, FSFileOperationStatusProcPtr callback, CFTimeInterval statusChangeInterval, FSFileOperationClientContext *clientContext) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern OSStatus  FSMoveObjectAsync(FSFileOperationRef fileOp, const FSRef *source, const FSRef *destDir, CFStringRef destName, OptionBits flags, FSFileOperationStatusProcPtr callback, CFTimeInterval statusChangeInterval, FSFileOperationClientContext *clientContext) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -6303,7 +6297,7 @@ extern OSStatus  FSMoveObjectAsync(FSFileOperationRef fileOp, const FSRef *sourc
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSMoveObjectToTrashAsync(FSFileOperationRef fileOp, const FSRef *source, OptionBits flags, FSFileOperationStatusProcPtr callback, CFTimeInterval statusChangeInterval, FSFileOperationClientContext *clientContext) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern OSStatus  FSMoveObjectToTrashAsync(FSFileOperationRef fileOp, const FSRef *source, OptionBits flags, FSFileOperationStatusProcPtr callback, CFTimeInterval statusChangeInterval, FSFileOperationClientContext *clientContext) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -6356,7 +6350,7 @@ extern OSStatus  FSMoveObjectToTrashAsync(FSFileOperationRef fileOp, const FSRef
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSPathCopyObjectAsync(FSFileOperationRef fileOp, const char *sourcePath, const char *destDirPath, CFStringRef destName, OptionBits flags, FSPathFileOperationStatusProcPtr callback, CFTimeInterval statusChangeInterval, FSFileOperationClientContext *clientContext) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern OSStatus  FSPathCopyObjectAsync(FSFileOperationRef fileOp, const char *sourcePath, const char *destDirPath, CFStringRef destName, OptionBits flags, FSPathFileOperationStatusProcPtr callback, CFTimeInterval statusChangeInterval, FSFileOperationClientContext *clientContext) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -6412,7 +6406,7 @@ extern OSStatus  FSPathCopyObjectAsync(FSFileOperationRef fileOp, const char *so
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSPathMoveObjectAsync(FSFileOperationRef fileOp, const char *sourcePath, const char *destDirPath, CFStringRef destName, OptionBits flags, FSPathFileOperationStatusProcPtr callback, CFTimeInterval statusChangeInterval, FSFileOperationClientContext *clientContext) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern OSStatus  FSPathMoveObjectAsync(FSFileOperationRef fileOp, const char *sourcePath, const char *destDirPath, CFStringRef destName, OptionBits flags, FSPathFileOperationStatusProcPtr callback, CFTimeInterval statusChangeInterval, FSFileOperationClientContext *clientContext) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -6462,7 +6456,7 @@ extern OSStatus  FSPathMoveObjectAsync(FSFileOperationRef fileOp, const char *so
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSPathMoveObjectToTrashAsync(FSFileOperationRef fileOp, const char *sourcePath, OptionBits flags, FSPathFileOperationStatusProcPtr callback, CFTimeInterval statusChangeInterval, FSFileOperationClientContext *clientContext) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern OSStatus  FSPathMoveObjectToTrashAsync(FSFileOperationRef fileOp, const char *sourcePath, OptionBits flags, FSPathFileOperationStatusProcPtr callback, CFTimeInterval statusChangeInterval, FSFileOperationClientContext *clientContext) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -6485,7 +6479,7 @@ extern OSStatus  FSPathMoveObjectToTrashAsync(FSFileOperationRef fileOp, const c
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSFileOperationCancel(FSFileOperationRef fileOp) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern OSStatus  FSFileOperationCancel(FSFileOperationRef fileOp) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -6529,7 +6523,7 @@ extern OSStatus  FSFileOperationCancel(FSFileOperationRef fileOp) AVAILABLE_MAC_
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSFileOperationCopyStatus(FSFileOperationRef fileOp, FSRef *currentItem, FSFileOperationStage *stage, OSStatus *error, CFDictionaryRef *statusDictionary, void **info) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern OSStatus  FSFileOperationCopyStatus(FSFileOperationRef fileOp, FSRef *currentItem, FSFileOperationStage *stage, OSStatus *error, CFDictionaryRef *statusDictionary, void **info) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -6574,7 +6568,7 @@ extern OSStatus  FSFileOperationCopyStatus(FSFileOperationRef fileOp, FSRef *cur
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSPathFileOperationCopyStatus(FSFileOperationRef fileOp, char **currentItem, FSFileOperationStage *stage, OSStatus *error, CFDictionaryRef *statusDictionary, void **info) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern OSStatus  FSPathFileOperationCopyStatus(FSFileOperationRef fileOp, char **currentItem, FSFileOperationStage *stage, OSStatus *error, CFDictionaryRef *statusDictionary, void **info) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /* String conversion functions*/
@@ -6603,7 +6597,7 @@ extern OSStatus  FSPathFileOperationCopyStatus(FSFileOperationRef fileOp, char *
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern CFStringRef  FSCreateStringFromHFSUniStr(CFAllocatorRef alloc, const HFSUniStr255 *uniStr) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern CFStringRef  FSCreateStringFromHFSUniStr(CFAllocatorRef alloc, const HFSUniStr255 *uniStr) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -6629,7 +6623,7 @@ extern CFStringRef  FSCreateStringFromHFSUniStr(CFAllocatorRef alloc, const HFSU
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSGetHFSUniStrFromString(CFStringRef theString, HFSUniStr255 *uniStr)  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern OSStatus  FSGetHFSUniStrFromString(CFStringRef theString, HFSUniStr255 *uniStr)  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /* ACL support*/
@@ -6651,7 +6645,7 @@ extern OSStatus  FSGetHFSUniStrFromString(CFStringRef theString, HFSUniStr255 *u
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern CFTypeID  FSFileSecurityGetTypeID(void)                AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern CFTypeID  FSFileSecurityGetTypeID(void)                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -6678,7 +6672,7 @@ extern CFTypeID  FSFileSecurityGetTypeID(void)                AVAILABLE_MAC_OS_X
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern FSFileSecurityRef  FSFileSecurityCreate(CFAllocatorRef alloc) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern FSFileSecurityRef  FSFileSecurityCreate(CFAllocatorRef alloc) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -6692,7 +6686,7 @@ extern FSFileSecurityRef  FSFileSecurityCreate(CFAllocatorRef alloc) AVAILABLE_M
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern FSFileSecurityRef  FSFileSecurityCreateWithFSPermissionInfo(CFAllocatorRef alloc, const FSPermissionInfo *permissions) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern FSFileSecurityRef  FSFileSecurityCreateWithFSPermissionInfo(CFAllocatorRef alloc, const FSPermissionInfo *permissions) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -6706,7 +6700,7 @@ extern FSFileSecurityRef  FSFileSecurityCreateWithFSPermissionInfo(CFAllocatorRe
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern FSFileSecurityRef  FSFileSecurityRefCreateCopy(CFAllocatorRef alloc, FSFileSecurityRef fileSec) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern FSFileSecurityRef  FSFileSecurityRefCreateCopy(CFAllocatorRef alloc, FSFileSecurityRef fileSec) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /* get and set properties*/
@@ -6737,7 +6731,7 @@ extern FSFileSecurityRef  FSFileSecurityRefCreateCopy(CFAllocatorRef alloc, FSFi
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSFileSecurityGetOwnerUUID(FSFileSecurityRef fileSec, CFUUIDBytes *owner)   AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern OSStatus  FSFileSecurityGetOwnerUUID(FSFileSecurityRef fileSec, CFUUIDBytes *owner)   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -6764,7 +6758,7 @@ extern OSStatus  FSFileSecurityGetOwnerUUID(FSFileSecurityRef fileSec, CFUUIDByt
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSFileSecuritySetOwnerUUID(FSFileSecurityRef fileSec, const CFUUIDBytes *owner)   AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern OSStatus  FSFileSecuritySetOwnerUUID(FSFileSecurityRef fileSec, const CFUUIDBytes *owner)   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -6793,7 +6787,7 @@ extern OSStatus  FSFileSecuritySetOwnerUUID(FSFileSecurityRef fileSec, const CFU
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSFileSecurityGetGroupUUID(FSFileSecurityRef fileSec, CFUUIDBytes *group)   AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern OSStatus  FSFileSecurityGetGroupUUID(FSFileSecurityRef fileSec, CFUUIDBytes *group)   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -6820,7 +6814,7 @@ extern OSStatus  FSFileSecurityGetGroupUUID(FSFileSecurityRef fileSec, CFUUIDByt
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSFileSecuritySetGroupUUID(FSFileSecurityRef fileSec, const CFUUIDBytes *group)   AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern OSStatus  FSFileSecuritySetGroupUUID(FSFileSecurityRef fileSec, const CFUUIDBytes *group)   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -6851,7 +6845,7 @@ extern OSStatus  FSFileSecuritySetGroupUUID(FSFileSecurityRef fileSec, const CFU
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSFileSecurityCopyAccessControlList(FSFileSecurityRef fileSec, acl_t *accessControlList) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern OSStatus  FSFileSecurityCopyAccessControlList(FSFileSecurityRef fileSec, acl_t *accessControlList) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -6881,7 +6875,7 @@ extern OSStatus  FSFileSecurityCopyAccessControlList(FSFileSecurityRef fileSec, 
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSFileSecuritySetAccessControlList(FSFileSecurityRef fileSec, acl_t accessControlList) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern OSStatus  FSFileSecuritySetAccessControlList(FSFileSecurityRef fileSec, acl_t accessControlList) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -6910,7 +6904,7 @@ extern OSStatus  FSFileSecuritySetAccessControlList(FSFileSecurityRef fileSec, a
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSFileSecurityGetOwner(FSFileSecurityRef fileSec, UInt32 *owner)       AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern OSStatus  FSFileSecurityGetOwner(FSFileSecurityRef fileSec, UInt32 *owner)       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -6936,7 +6930,7 @@ extern OSStatus  FSFileSecurityGetOwner(FSFileSecurityRef fileSec, UInt32 *owner
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSFileSecuritySetOwner(FSFileSecurityRef fileSec, UInt32 owner)       AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern OSStatus  FSFileSecuritySetOwner(FSFileSecurityRef fileSec, UInt32 owner)       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -6964,7 +6958,7 @@ extern OSStatus  FSFileSecuritySetOwner(FSFileSecurityRef fileSec, UInt32 owner)
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSFileSecurityGetGroup(FSFileSecurityRef fileSec, UInt32 *group)       AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern OSStatus  FSFileSecurityGetGroup(FSFileSecurityRef fileSec, UInt32 *group)       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -6990,7 +6984,7 @@ extern OSStatus  FSFileSecurityGetGroup(FSFileSecurityRef fileSec, UInt32 *group
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSFileSecuritySetGroup(FSFileSecurityRef fileSec, UInt32 group)       AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern OSStatus  FSFileSecuritySetGroup(FSFileSecurityRef fileSec, UInt32 group)       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -7018,7 +7012,7 @@ extern OSStatus  FSFileSecuritySetGroup(FSFileSecurityRef fileSec, UInt32 group)
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSFileSecurityGetMode(FSFileSecurityRef fileSec, UInt16 *mode)         AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern OSStatus  FSFileSecurityGetMode(FSFileSecurityRef fileSec, UInt16 *mode)         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -7044,7 +7038,7 @@ extern OSStatus  FSFileSecurityGetMode(FSFileSecurityRef fileSec, UInt16 *mode) 
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSFileSecuritySetMode(FSFileSecurityRef fileSec, UInt16 mode)         AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern OSStatus  FSFileSecuritySetMode(FSFileSecurityRef fileSec, UInt16 mode)         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -7245,7 +7239,7 @@ enum {
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSGetVolumeParms(FSVolumeRefNum volume, GetVolParmsInfoBuffer *buffer, ByteCount bufferSize) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern OSStatus  FSGetVolumeParms(FSVolumeRefNum volume, GetVolParmsInfoBuffer *buffer, ByteCount bufferSize) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*  VolumeMount */
@@ -7272,7 +7266,7 @@ extern OSStatus  FSGetVolumeParms(FSVolumeRefNum volume, GetVolParmsInfoBuffer *
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSGetVolumeMountInfoSize(FSVolumeRefNum volume, ByteCount *size)       AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern OSStatus  FSGetVolumeMountInfoSize(FSVolumeRefNum volume, ByteCount *size)       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -7306,7 +7300,7 @@ extern OSStatus  FSGetVolumeMountInfoSize(FSVolumeRefNum volume, ByteCount *size
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSGetVolumeMountInfo(FSVolumeRefNum volume, BytePtr buffer, ByteCount bufferSize, ByteCount *actualSize) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern OSStatus  FSGetVolumeMountInfo(FSVolumeRefNum volume, BytePtr buffer, ByteCount bufferSize, ByteCount *actualSize) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -7332,7 +7326,7 @@ extern OSStatus  FSGetVolumeMountInfo(FSVolumeRefNum volume, BytePtr buffer, Byt
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSVolumeMount(BytePtr buffer, FSVolumeRefNum *mountedVolume)         AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern OSStatus  FSVolumeMount(BytePtr buffer, FSVolumeRefNum *mountedVolume)         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*  Volume flushing */
@@ -7347,7 +7341,7 @@ extern OSStatus  FSVolumeMount(BytePtr buffer, FSVolumeRefNum *mountedVolume)   
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSFlushVolume(FSVolumeRefNum vRefNum)        AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern OSStatus  FSFlushVolume(FSVolumeRefNum vRefNum)        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -7361,7 +7355,7 @@ extern OSStatus  FSFlushVolume(FSVolumeRefNum vRefNum)        AVAILABLE_MAC_OS_X
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  PBFlushVolumeSync(FSRefParamPtr paramBlock)  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern OSStatus  PBFlushVolumeSync(FSRefParamPtr paramBlock)  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -7375,7 +7369,7 @@ extern OSStatus  PBFlushVolumeSync(FSRefParamPtr paramBlock)  AVAILABLE_MAC_OS_X
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  PBFlushVolumeAsync(FSRefParamPtr paramBlock) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern OSStatus  PBFlushVolumeAsync(FSRefParamPtr paramBlock) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /* CopyFile */
@@ -7402,7 +7396,7 @@ extern OSStatus  PBFlushVolumeAsync(FSRefParamPtr paramBlock) AVAILABLE_MAC_OS_X
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  PBFSCopyFileSync(FSRefParamPtr paramBlock)   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern OSStatus  PBFSCopyFileSync(FSRefParamPtr paramBlock)   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -7416,7 +7410,7 @@ extern OSStatus  PBFSCopyFileSync(FSRefParamPtr paramBlock)   AVAILABLE_MAC_OS_X
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  PBFSCopyFileAsync(FSRefParamPtr paramBlock)  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern OSStatus  PBFSCopyFileAsync(FSRefParamPtr paramBlock)  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /* Node ID Resolution */
@@ -7446,7 +7440,7 @@ extern OSStatus  PBFSCopyFileAsync(FSRefParamPtr paramBlock)  AVAILABLE_MAC_OS_X
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSResolveNodeID(FSVolumeRefNum volume, UInt32 nodeID, FSRefPtr newRef)      AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern OSStatus  FSResolveNodeID(FSVolumeRefNum volume, UInt32 nodeID, FSRefPtr newRef)      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -7467,7 +7461,7 @@ extern OSStatus  FSResolveNodeID(FSVolumeRefNum volume, UInt32 nodeID, FSRefPtr 
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  PBFSResolveNodeIDSync(FSRefParamPtr paramBlock) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern OSStatus  PBFSResolveNodeIDSync(FSRefParamPtr paramBlock) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -7481,7 +7475,7 @@ extern OSStatus  PBFSResolveNodeIDSync(FSRefParamPtr paramBlock) AVAILABLE_MAC_O
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  PBFSResolveNodeIDAsync(FSRefParamPtr paramBlock) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern OSStatus  PBFSResolveNodeIDAsync(FSRefParamPtr paramBlock) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /* Calls beyond this point are deprecated*/
@@ -7510,7 +7504,7 @@ extern OSStatus  PBFSResolveNodeIDAsync(FSRefParamPtr paramBlock) AVAILABLE_MAC_
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  FSpMakeFSRef(const FSSpec *source, FSRef *newRef)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern OSErr  FSpMakeFSRef(const FSSpec *source, FSRef *newRef)                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.5. Use PBMakeFSRefUnicodeSync instead.*/
@@ -7525,7 +7519,7 @@ extern OSErr  FSpMakeFSRef(const FSSpec *source, FSRef *newRef)                 
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  PBMakeFSRefSync(FSRefParam * paramBlock)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern OSErr  PBMakeFSRefSync(FSRefParam * paramBlock)        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.5. Use PBMakeFSRefUnicodeAsync instead.*/
@@ -7540,7 +7534,7 @@ extern OSErr  PBMakeFSRefSync(FSRefParam * paramBlock)        AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern void  PBMakeFSRefAsync(FSRefParam * paramBlock)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern void  PBMakeFSRefAsync(FSRefParam * paramBlock)        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.5. Use PBCloseForkSync instead.*/
@@ -7552,7 +7546,7 @@ extern void  PBMakeFSRefAsync(FSRefParam * paramBlock)        AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBCloseSync(ParmBlkPtr paramBlock)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern OSErr  PBCloseSync(ParmBlkPtr paramBlock)              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.5. Use PBCloseForkAsync instead.*/
@@ -7564,7 +7558,7 @@ extern OSErr  PBCloseSync(ParmBlkPtr paramBlock)              AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBCloseAsync(ParmBlkPtr paramBlock)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern OSErr  PBCloseAsync(ParmBlkPtr paramBlock)             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.5. Use PBReadForkSync instead.*/
@@ -7576,7 +7570,7 @@ extern OSErr  PBCloseAsync(ParmBlkPtr paramBlock)             AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBReadSync(ParmBlkPtr paramBlock)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern OSErr  PBReadSync(ParmBlkPtr paramBlock)               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.5. Use PBReadForkAsync instead.*/
@@ -7588,7 +7582,7 @@ extern OSErr  PBReadSync(ParmBlkPtr paramBlock)               AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBReadAsync(ParmBlkPtr paramBlock)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern OSErr  PBReadAsync(ParmBlkPtr paramBlock)              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.5. Use PBWriteForkSync instead.*/
@@ -7600,7 +7594,7 @@ extern OSErr  PBReadAsync(ParmBlkPtr paramBlock)              AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBWriteSync(ParmBlkPtr paramBlock)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern OSErr  PBWriteSync(ParmBlkPtr paramBlock)              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.5. Use PBWriteForkAsync instead.*/
@@ -7612,7 +7606,7 @@ extern OSErr  PBWriteSync(ParmBlkPtr paramBlock)              AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBWriteAsync(ParmBlkPtr paramBlock)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern OSErr  PBWriteAsync(ParmBlkPtr paramBlock)             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.5. It was never implemented on OS X.*/
@@ -7624,7 +7618,7 @@ extern OSErr  PBWriteAsync(ParmBlkPtr paramBlock)             AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 9.0 and later
  */
-extern OSErr  PBWaitIOComplete(ParmBlkPtr paramBlock, Duration timeout)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern OSErr  PBWaitIOComplete(ParmBlkPtr paramBlock, Duration timeout)           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*  Volume Characteristics */
@@ -7640,7 +7634,7 @@ extern OSErr  PBWaitIOComplete(ParmBlkPtr paramBlock, Duration timeout)         
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHGetVolParmsSync(HParmBlkPtr paramBlock)      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern OSErr  PBHGetVolParmsSync(HParmBlkPtr paramBlock)      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.5. Use FSGetVolumeParms instead.*/
@@ -7655,7 +7649,7 @@ extern OSErr  PBHGetVolParmsSync(HParmBlkPtr paramBlock)      AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHGetVolParmsAsync(HParmBlkPtr paramBlock)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern OSErr  PBHGetVolParmsAsync(HParmBlkPtr paramBlock)     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*  VolumeMount */
@@ -7671,7 +7665,7 @@ extern OSErr  PBHGetVolParmsAsync(HParmBlkPtr paramBlock)     AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBGetVolMountInfoSize(ParmBlkPtr paramBlock)    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern OSErr  PBGetVolMountInfoSize(ParmBlkPtr paramBlock)    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.5. Use FSGetVolumeMountInfo instead.*/
@@ -7686,7 +7680,7 @@ extern OSErr  PBGetVolMountInfoSize(ParmBlkPtr paramBlock)    AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBGetVolMountInfo(ParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern OSErr  PBGetVolMountInfo(ParmBlkPtr paramBlock)        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.5. Use FSVolumeMount instead.*/
@@ -7698,7 +7692,7 @@ extern OSErr  PBGetVolMountInfo(ParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBVolumeMount(ParmBlkPtr paramBlock)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern OSErr  PBVolumeMount(ParmBlkPtr paramBlock)            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*  Volume flushing */
@@ -7714,7 +7708,7 @@ extern OSErr  PBVolumeMount(ParmBlkPtr paramBlock)            AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  FlushVol(ConstStr63Param volName, FSVolumeRefNum vRefNum)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern OSErr  FlushVol(ConstStr63Param volName, FSVolumeRefNum vRefNum)                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.5. Use PBFlushVolumeSync instead.*/
@@ -7729,7 +7723,7 @@ extern OSErr  FlushVol(ConstStr63Param volName, FSVolumeRefNum vRefNum)         
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBFlushVolSync(ParmBlkPtr paramBlock)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern OSErr  PBFlushVolSync(ParmBlkPtr paramBlock)           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.5. Use PBFlushVolumeAsync instead.*/
@@ -7744,7 +7738,7 @@ extern OSErr  PBFlushVolSync(ParmBlkPtr paramBlock)           AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBFlushVolAsync(ParmBlkPtr paramBlock)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern OSErr  PBFlushVolAsync(ParmBlkPtr paramBlock)          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.5.*/
@@ -7759,7 +7753,7 @@ extern OSErr  PBFlushVolAsync(ParmBlkPtr paramBlock)          AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHOpenDenySync(HParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern OSErr  PBHOpenDenySync(HParmBlkPtr paramBlock)         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.5.*/
@@ -7774,7 +7768,7 @@ extern OSErr  PBHOpenDenySync(HParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHOpenDenyAsync(HParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern OSErr  PBHOpenDenyAsync(HParmBlkPtr paramBlock)        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.5.*/
@@ -7789,7 +7783,7 @@ extern OSErr  PBHOpenDenyAsync(HParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHOpenRFDenySync(HParmBlkPtr paramBlock)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern OSErr  PBHOpenRFDenySync(HParmBlkPtr paramBlock)       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.5.*/
@@ -7804,7 +7798,7 @@ extern OSErr  PBHOpenRFDenySync(HParmBlkPtr paramBlock)       AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHOpenRFDenyAsync(HParmBlkPtr paramBlock)      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern OSErr  PBHOpenRFDenyAsync(HParmBlkPtr paramBlock)      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.5. Use FSGetCatalogInfo instead.*/
@@ -7819,7 +7813,7 @@ extern OSErr  PBHOpenRFDenyAsync(HParmBlkPtr paramBlock)      AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHGetDirAccessSync(HParmBlkPtr paramBlock)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern OSErr  PBHGetDirAccessSync(HParmBlkPtr paramBlock)     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.5. Use FSGetCatalogInfo instead.*/
@@ -7834,7 +7828,7 @@ extern OSErr  PBHGetDirAccessSync(HParmBlkPtr paramBlock)     AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHGetDirAccessAsync(HParmBlkPtr paramBlock)    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern OSErr  PBHGetDirAccessAsync(HParmBlkPtr paramBlock)    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.5. Use FSSetCatalogInfo instead.*/
@@ -7849,7 +7843,7 @@ extern OSErr  PBHGetDirAccessAsync(HParmBlkPtr paramBlock)    AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHSetDirAccessSync(HParmBlkPtr paramBlock)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern OSErr  PBHSetDirAccessSync(HParmBlkPtr paramBlock)     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.5. Use FSSetCatalogInfo instead.*/
@@ -7864,7 +7858,7 @@ extern OSErr  PBHSetDirAccessSync(HParmBlkPtr paramBlock)     AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHSetDirAccessAsync(HParmBlkPtr paramBlock)    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern OSErr  PBHSetDirAccessAsync(HParmBlkPtr paramBlock)    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.5. See getpwnam() and getpwuid().*/
@@ -7879,7 +7873,7 @@ extern OSErr  PBHSetDirAccessAsync(HParmBlkPtr paramBlock)    AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHMapIDSync(HParmBlkPtr paramBlock)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern OSErr  PBHMapIDSync(HParmBlkPtr paramBlock)            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.5. See getpwnam() and getpwuid().*/
@@ -7894,7 +7888,7 @@ extern OSErr  PBHMapIDSync(HParmBlkPtr paramBlock)            AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHMapIDAsync(HParmBlkPtr paramBlock)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern OSErr  PBHMapIDAsync(HParmBlkPtr paramBlock)           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.5. See getpwnam() and getpwuid().*/
@@ -7909,7 +7903,7 @@ extern OSErr  PBHMapIDAsync(HParmBlkPtr paramBlock)           AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHMapNameSync(HParmBlkPtr paramBlock)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern OSErr  PBHMapNameSync(HParmBlkPtr paramBlock)          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.5. See getpwnam() and getpwuid().*/
@@ -7924,7 +7918,7 @@ extern OSErr  PBHMapNameSync(HParmBlkPtr paramBlock)          AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHMapNameAsync(HParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern OSErr  PBHMapNameAsync(HParmBlkPtr paramBlock)         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.5. Use PBFSCopyFileSync instead.*/
@@ -7939,7 +7933,7 @@ extern OSErr  PBHMapNameAsync(HParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHCopyFileSync(HParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern OSErr  PBHCopyFileSync(HParmBlkPtr paramBlock)         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.5. Use PBFSCopyFileAsync instead.*/
@@ -7954,7 +7948,7 @@ extern OSErr  PBHCopyFileSync(HParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHCopyFileAsync(HParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern OSErr  PBHCopyFileAsync(HParmBlkPtr paramBlock)        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.5. Use FSGetCatalogInfo to get the node id.*/
@@ -7969,7 +7963,7 @@ extern OSErr  PBHCopyFileAsync(HParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBCreateFileIDRefSync(HParmBlkPtr paramBlock)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern OSErr  PBCreateFileIDRefSync(HParmBlkPtr paramBlock)   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.5. Use FSGetCatalogInfo to get the node id.*/
@@ -7984,7 +7978,7 @@ extern OSErr  PBCreateFileIDRefSync(HParmBlkPtr paramBlock)   AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBCreateFileIDRefAsync(HParmBlkPtr paramBlock)  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern OSErr  PBCreateFileIDRefAsync(HParmBlkPtr paramBlock)  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.5. Use FSGetCatalogInfo to get the node id.*/
@@ -7999,7 +7993,7 @@ extern OSErr  PBCreateFileIDRefAsync(HParmBlkPtr paramBlock)  AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBResolveFileIDRefSync(HParmBlkPtr paramBlock)  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern OSErr  PBResolveFileIDRefSync(HParmBlkPtr paramBlock)  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.5. Use FSGetCatalogInfo to get the node id.*/
@@ -8014,7 +8008,7 @@ extern OSErr  PBResolveFileIDRefSync(HParmBlkPtr paramBlock)  AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBResolveFileIDRefAsync(HParmBlkPtr paramBlock) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern OSErr  PBResolveFileIDRefAsync(HParmBlkPtr paramBlock) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.5. It is obsolete and has no replacement.*/
@@ -8029,7 +8023,7 @@ extern OSErr  PBResolveFileIDRefAsync(HParmBlkPtr paramBlock) AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDeleteFileIDRefSync(HParmBlkPtr paramBlock)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern OSErr  PBDeleteFileIDRefSync(HParmBlkPtr paramBlock)   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.5. It is obsolete and has no replacement.*/
@@ -8044,7 +8038,7 @@ extern OSErr  PBDeleteFileIDRefSync(HParmBlkPtr paramBlock)   AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDeleteFileIDRefAsync(HParmBlkPtr paramBlock)  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+extern OSErr  PBDeleteFileIDRefAsync(HParmBlkPtr paramBlock)  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSGetVolumeInfo instead.*/
@@ -8059,7 +8053,7 @@ extern OSErr  PBDeleteFileIDRefAsync(HParmBlkPtr paramBlock)  AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
-extern OSErr  PBXGetVolInfoSync(XVolumeParamPtr paramBlock)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBXGetVolInfoSync(XVolumeParamPtr paramBlock)   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSGetVolumeInfo instead.*/
@@ -8074,7 +8068,7 @@ extern OSErr  PBXGetVolInfoSync(XVolumeParamPtr paramBlock)   AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
-extern OSErr  PBXGetVolInfoAsync(XVolumeParamPtr paramBlock)  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBXGetVolInfoAsync(XVolumeParamPtr paramBlock)  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBAllocateForkSync instead.*/
@@ -8089,7 +8083,7 @@ extern OSErr  PBXGetVolInfoAsync(XVolumeParamPtr paramBlock)  AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBAllocateSync(ParmBlkPtr paramBlock)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBAllocateSync(ParmBlkPtr paramBlock)           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBAllocateForkAsync instead.*/
@@ -8104,7 +8098,7 @@ extern OSErr  PBAllocateSync(ParmBlkPtr paramBlock)           AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBAllocateAsync(ParmBlkPtr paramBlock)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBAllocateAsync(ParmBlkPtr paramBlock)          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBGetForkSizeSync instead.*/
@@ -8119,7 +8113,7 @@ extern OSErr  PBAllocateAsync(ParmBlkPtr paramBlock)          AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBGetEOFSync(ParmBlkPtr paramBlock)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBGetEOFSync(ParmBlkPtr paramBlock)             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBGetForkSizeAsync instead.*/
@@ -8134,7 +8128,7 @@ extern OSErr  PBGetEOFSync(ParmBlkPtr paramBlock)             AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBGetEOFAsync(ParmBlkPtr paramBlock)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBGetEOFAsync(ParmBlkPtr paramBlock)            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBSetForkSizeSync instead.*/
@@ -8149,7 +8143,7 @@ extern OSErr  PBGetEOFAsync(ParmBlkPtr paramBlock)            AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBSetEOFSync(ParmBlkPtr paramBlock)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBSetEOFSync(ParmBlkPtr paramBlock)             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBSetForkSizeAsync instead.*/
@@ -8164,7 +8158,7 @@ extern OSErr  PBSetEOFSync(ParmBlkPtr paramBlock)             AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBSetEOFAsync(ParmBlkPtr paramBlock)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBSetEOFAsync(ParmBlkPtr paramBlock)            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBGetForkPositionSync instead.*/
@@ -8179,7 +8173,7 @@ extern OSErr  PBSetEOFAsync(ParmBlkPtr paramBlock)            AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBGetFPosSync(ParmBlkPtr paramBlock)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBGetFPosSync(ParmBlkPtr paramBlock)            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBGetForkPositionAsync instead.*/
@@ -8194,7 +8188,7 @@ extern OSErr  PBGetFPosSync(ParmBlkPtr paramBlock)            AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBGetFPosAsync(ParmBlkPtr paramBlock)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBGetFPosAsync(ParmBlkPtr paramBlock)           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBSetForkPositionSync instead.*/
@@ -8209,7 +8203,7 @@ extern OSErr  PBGetFPosAsync(ParmBlkPtr paramBlock)           AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBSetFPosSync(ParmBlkPtr paramBlock)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBSetFPosSync(ParmBlkPtr paramBlock)            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBSetForkPositionAsync instead.*/
@@ -8224,7 +8218,7 @@ extern OSErr  PBSetFPosSync(ParmBlkPtr paramBlock)            AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBSetFPosAsync(ParmBlkPtr paramBlock)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBSetFPosAsync(ParmBlkPtr paramBlock)           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBFlushForkSync instead.*/
@@ -8239,7 +8233,7 @@ extern OSErr  PBSetFPosAsync(ParmBlkPtr paramBlock)           AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBFlushFileSync(ParmBlkPtr paramBlock)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBFlushFileSync(ParmBlkPtr paramBlock)          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBFlushForkAsync instead.*/
@@ -8254,7 +8248,7 @@ extern OSErr  PBFlushFileSync(ParmBlkPtr paramBlock)          AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBFlushFileAsync(ParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBFlushFileAsync(ParmBlkPtr paramBlock)         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSEjectVolumeSync instead.*/
@@ -8269,7 +8263,7 @@ extern OSErr  PBFlushFileAsync(ParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBUnmountVol(ParmBlkPtr paramBlock)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBUnmountVol(ParmBlkPtr paramBlock)             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBCatalogSearchSync instead.*/
@@ -8284,7 +8278,7 @@ extern OSErr  PBUnmountVol(ParmBlkPtr paramBlock)             AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBCatSearchSync(CSParamPtr paramBlock)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBCatSearchSync(CSParamPtr paramBlock)          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBCatalogSearchAsync instead.*/
@@ -8299,7 +8293,7 @@ extern OSErr  PBCatSearchSync(CSParamPtr paramBlock)          AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBCatSearchAsync(CSParamPtr paramBlock)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBCatSearchAsync(CSParamPtr paramBlock)         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSEjectVolumeSync instead.*/
@@ -8317,7 +8311,7 @@ extern OSErr  PBCatSearchAsync(CSParamPtr paramBlock)         AVAILABLE_MAC_OS_X
 extern OSErr 
 UnmountVol(
   ConstStr63Param   volName,       /* can be NULL */
-  FSVolumeRefNum    vRefNum)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  FSVolumeRefNum    vRefNum)                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. The routines which use the default volume concept have been deprecated.*/
@@ -8336,7 +8330,7 @@ extern OSErr
 HSetVol(
   ConstStr63Param   volName,       /* can be NULL */
   FSVolumeRefNum    vRefNum,
-  SInt32            dirID)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  SInt32            dirID)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* AddDrive() was moved to Devices.h*/
@@ -8354,7 +8348,7 @@ HSetVol(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-FSClose(FSIORefNum refNum)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+FSClose(FSIORefNum refNum)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSReadFork instead.*/
@@ -8373,7 +8367,7 @@ extern OSErr
 FSRead(
   FSIORefNum   refNum,
   SInt32 *     count,
-  void *       buffPtr)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  void *       buffPtr)                                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSWriteFork instead.*/
@@ -8392,7 +8386,7 @@ extern OSErr
 FSWrite(
   FSIORefNum    refNum,
   SInt32 *      count,
-  const void *  buffPtr)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  const void *  buffPtr)                                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSAllocateFork instead.*/
@@ -8410,7 +8404,7 @@ FSWrite(
 extern OSErr 
 Allocate(
   FSIORefNum   refNum,
-  SInt32 *     count)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  SInt32 *     count)                                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSGetForkSize instead.*/
@@ -8428,7 +8422,7 @@ Allocate(
 extern OSErr 
 GetEOF(
   FSIORefNum   refNum,
-  SInt32 *     logEOF)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  SInt32 *     logEOF)                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSSetForkSize instead.*/
@@ -8446,7 +8440,7 @@ GetEOF(
 extern OSErr 
 SetEOF(
   FSIORefNum   refNum,
-  SInt32       logEOF)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  SInt32       logEOF)                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSGetForkPosition instead.*/
@@ -8464,7 +8458,7 @@ SetEOF(
 extern OSErr 
 GetFPos(
   FSIORefNum   refNum,
-  SInt32 *     filePos)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  SInt32 *     filePos)                                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSSetForkPosition instead.*/
@@ -8483,7 +8477,7 @@ extern OSErr
 SetFPos(
   FSIORefNum   refNum,
   SInt16       posMode,
-  SInt32       posOff)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  SInt32       posOff)                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSGetCatalogInfo instead.*/
@@ -8501,7 +8495,7 @@ SetFPos(
 extern OSErr 
 GetVRefNum(
   FSIORefNum        fileRefNum,
-  FSVolumeRefNum *  vRefNum)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  FSVolumeRefNum *  vRefNum)                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBXLockRangeSync or FSLockRange instead.*/
@@ -8517,7 +8511,7 @@ GetVRefNum(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-PBLockRangeSync(ParmBlkPtr paramBlock)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+PBLockRangeSync(ParmBlkPtr paramBlock)                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBXLockRangeAsync instead.*/
@@ -8533,7 +8527,7 @@ PBLockRangeSync(ParmBlkPtr paramBlock)                        AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-PBLockRangeAsync(ParmBlkPtr paramBlock)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+PBLockRangeAsync(ParmBlkPtr paramBlock)                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBXUnlockRangeSync or FSUnlockRange instead.*/
@@ -8549,7 +8543,7 @@ PBLockRangeAsync(ParmBlkPtr paramBlock)                       AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-PBUnlockRangeSync(ParmBlkPtr paramBlock)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+PBUnlockRangeSync(ParmBlkPtr paramBlock)                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBXUnlockRangeAsync instead.*/
@@ -8565,7 +8559,7 @@ PBUnlockRangeSync(ParmBlkPtr paramBlock)                      AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-PBUnlockRangeAsync(ParmBlkPtr paramBlock)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+PBUnlockRangeAsync(ParmBlkPtr paramBlock)                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. The routines which use the default volume concept have been deprecated.*/
@@ -8580,7 +8574,7 @@ PBUnlockRangeAsync(ParmBlkPtr paramBlock)                     AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHSetVolSync(WDPBPtr paramBlock)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBHSetVolSync(WDPBPtr paramBlock)               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. The routines which use the default volume concept have been deprecated.*/
@@ -8595,7 +8589,7 @@ extern OSErr  PBHSetVolSync(WDPBPtr paramBlock)               AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHSetVolAsync(WDPBPtr paramBlock)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBHSetVolAsync(WDPBPtr paramBlock)              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. The routines which use the default volume concept have been deprecated.*/
@@ -8610,7 +8604,7 @@ extern OSErr  PBHSetVolAsync(WDPBPtr paramBlock)              AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHGetVolSync(WDPBPtr paramBlock)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBHGetVolSync(WDPBPtr paramBlock)               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. The routines which use the default volume concept have been deprecated.*/
@@ -8625,7 +8619,7 @@ extern OSErr  PBHGetVolSync(WDPBPtr paramBlock)               AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHGetVolAsync(WDPBPtr paramBlock)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBHGetVolAsync(WDPBPtr paramBlock)              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBMoveObjectSync instead.*/
@@ -8640,7 +8634,7 @@ extern OSErr  PBHGetVolAsync(WDPBPtr paramBlock)              AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBCatMoveSync(CMovePBPtr paramBlock)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBCatMoveSync(CMovePBPtr paramBlock)            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBMoveObjectAsync instead.*/
@@ -8655,7 +8649,7 @@ extern OSErr  PBCatMoveSync(CMovePBPtr paramBlock)            AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBCatMoveAsync(CMovePBPtr paramBlock)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBCatMoveAsync(CMovePBPtr paramBlock)           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBCreateDirectoryUnicodeSync instead.*/
@@ -8670,7 +8664,7 @@ extern OSErr  PBCatMoveAsync(CMovePBPtr paramBlock)           AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDirCreateSync(HParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBDirCreateSync(HParmBlkPtr paramBlock)         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBCreateDirectoryUnicodeAsync instead.*/
@@ -8685,7 +8679,7 @@ extern OSErr  PBDirCreateSync(HParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDirCreateAsync(HParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBDirCreateAsync(HParmBlkPtr paramBlock)        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBGetForkCBInfoSync instead.*/
@@ -8700,7 +8694,7 @@ extern OSErr  PBDirCreateAsync(HParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBGetFCBInfoSync(FCBPBPtr paramBlock)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBGetFCBInfoSync(FCBPBPtr paramBlock)           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBGetForkCBInfoAsync instead.*/
@@ -8715,7 +8709,7 @@ extern OSErr  PBGetFCBInfoSync(FCBPBPtr paramBlock)           AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBGetFCBInfoAsync(FCBPBPtr paramBlock)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBGetFCBInfoAsync(FCBPBPtr paramBlock)          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBGetCatalogInfoSync instead.*/
@@ -8730,7 +8724,7 @@ extern OSErr  PBGetFCBInfoAsync(FCBPBPtr paramBlock)          AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBGetCatInfoSync(CInfoPBPtr paramBlock)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBGetCatInfoSync(CInfoPBPtr paramBlock)         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBGetCatalogInfoAsync instead.*/
@@ -8745,7 +8739,7 @@ extern OSErr  PBGetCatInfoSync(CInfoPBPtr paramBlock)         AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBGetCatInfoAsync(CInfoPBPtr paramBlock)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBGetCatInfoAsync(CInfoPBPtr paramBlock)        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBSetCatalogInfoSync instead.*/
@@ -8760,7 +8754,7 @@ extern OSErr  PBGetCatInfoAsync(CInfoPBPtr paramBlock)        AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBSetCatInfoSync(CInfoPBPtr paramBlock)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBSetCatInfoSync(CInfoPBPtr paramBlock)         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBSetCatalogInfoAsync instead.*/
@@ -8775,7 +8769,7 @@ extern OSErr  PBSetCatInfoSync(CInfoPBPtr paramBlock)         AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBSetCatInfoAsync(CInfoPBPtr paramBlock)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBSetCatInfoAsync(CInfoPBPtr paramBlock)        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBAllocateForkSync instead.*/
@@ -8790,7 +8784,7 @@ extern OSErr  PBSetCatInfoAsync(CInfoPBPtr paramBlock)        AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBAllocContigSync(ParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBAllocContigSync(ParmBlkPtr paramBlock)        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBAllocateForkAsync instead.*/
@@ -8805,7 +8799,7 @@ extern OSErr  PBAllocContigSync(ParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBAllocContigAsync(ParmBlkPtr paramBlock)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBAllocContigAsync(ParmBlkPtr paramBlock)       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBSetVolumeInfoSync instead.*/
@@ -8820,7 +8814,7 @@ extern OSErr  PBAllocContigAsync(ParmBlkPtr paramBlock)       AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBSetVInfoSync(HParmBlkPtr paramBlock)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBSetVInfoSync(HParmBlkPtr paramBlock)          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBSetVolumeInfoAsync instead.*/
@@ -8835,7 +8829,7 @@ extern OSErr  PBSetVInfoSync(HParmBlkPtr paramBlock)          AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBSetVInfoAsync(HParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBSetVInfoAsync(HParmBlkPtr paramBlock)         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBGetVolumeInfoSync instead.*/
@@ -8850,7 +8844,7 @@ extern OSErr  PBSetVInfoAsync(HParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHGetVInfoSync(HParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBHGetVInfoSync(HParmBlkPtr paramBlock)         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBGetVolumeInfoAsync instead.*/
@@ -8865,7 +8859,7 @@ extern OSErr  PBHGetVInfoSync(HParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHGetVInfoAsync(HParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBHGetVInfoAsync(HParmBlkPtr paramBlock)        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBOpenForkSync instead.*/
@@ -8880,7 +8874,7 @@ extern OSErr  PBHGetVInfoAsync(HParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHOpenSync(HParmBlkPtr paramBlock)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBHOpenSync(HParmBlkPtr paramBlock)             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBOpenForkAsync instead.*/
@@ -8895,7 +8889,7 @@ extern OSErr  PBHOpenSync(HParmBlkPtr paramBlock)             AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHOpenAsync(HParmBlkPtr paramBlock)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBHOpenAsync(HParmBlkPtr paramBlock)            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBOpenForkSync instead.*/
@@ -8910,7 +8904,7 @@ extern OSErr  PBHOpenAsync(HParmBlkPtr paramBlock)            AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHOpenRFSync(HParmBlkPtr paramBlock)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBHOpenRFSync(HParmBlkPtr paramBlock)           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBOpenForkAsync instead.*/
@@ -8925,7 +8919,7 @@ extern OSErr  PBHOpenRFSync(HParmBlkPtr paramBlock)           AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHOpenRFAsync(HParmBlkPtr paramBlock)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBHOpenRFAsync(HParmBlkPtr paramBlock)          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBOpenForkSync instead.*/
@@ -8940,7 +8934,7 @@ extern OSErr  PBHOpenRFAsync(HParmBlkPtr paramBlock)          AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHOpenDFSync(HParmBlkPtr paramBlock)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBHOpenDFSync(HParmBlkPtr paramBlock)           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBOpenForkAsync instead.*/
@@ -8955,7 +8949,7 @@ extern OSErr  PBHOpenDFSync(HParmBlkPtr paramBlock)           AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHOpenDFAsync(HParmBlkPtr paramBlock)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBHOpenDFAsync(HParmBlkPtr paramBlock)          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBCreateFileUnicodeSync instead.*/
@@ -8970,7 +8964,7 @@ extern OSErr  PBHOpenDFAsync(HParmBlkPtr paramBlock)          AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHCreateSync(HParmBlkPtr paramBlock)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBHCreateSync(HParmBlkPtr paramBlock)           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBCreateFileUnicodeAsync instead.*/
@@ -8985,7 +8979,7 @@ extern OSErr  PBHCreateSync(HParmBlkPtr paramBlock)           AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHCreateAsync(HParmBlkPtr paramBlock)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBHCreateAsync(HParmBlkPtr paramBlock)          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBDeleteObjectSync instead.*/
@@ -9000,7 +8994,7 @@ extern OSErr  PBHCreateAsync(HParmBlkPtr paramBlock)          AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHDeleteSync(HParmBlkPtr paramBlock)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBHDeleteSync(HParmBlkPtr paramBlock)           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBDeleteObjectAsync instead.*/
@@ -9015,7 +9009,7 @@ extern OSErr  PBHDeleteSync(HParmBlkPtr paramBlock)           AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHDeleteAsync(HParmBlkPtr paramBlock)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBHDeleteAsync(HParmBlkPtr paramBlock)          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBRenameUnicodeSync instead.*/
@@ -9030,7 +9024,7 @@ extern OSErr  PBHDeleteAsync(HParmBlkPtr paramBlock)          AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHRenameSync(HParmBlkPtr paramBlock)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBHRenameSync(HParmBlkPtr paramBlock)           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBRenameUnicodeAsync instead.*/
@@ -9045,7 +9039,7 @@ extern OSErr  PBHRenameSync(HParmBlkPtr paramBlock)           AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHRenameAsync(HParmBlkPtr paramBlock)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBHRenameAsync(HParmBlkPtr paramBlock)          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBSetCatalogInfoSync instead.*/
@@ -9060,7 +9054,7 @@ extern OSErr  PBHRenameAsync(HParmBlkPtr paramBlock)          AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHRstFLockSync(HParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBHRstFLockSync(HParmBlkPtr paramBlock)         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBSetCatalogInfoAsync instead.*/
@@ -9075,7 +9069,7 @@ extern OSErr  PBHRstFLockSync(HParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHRstFLockAsync(HParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBHRstFLockAsync(HParmBlkPtr paramBlock)        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBSetCatalogInfoSync instead.*/
@@ -9090,7 +9084,7 @@ extern OSErr  PBHRstFLockAsync(HParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHSetFLockSync(HParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBHSetFLockSync(HParmBlkPtr paramBlock)         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBSetCatalogInfoAsync instead.*/
@@ -9105,7 +9099,7 @@ extern OSErr  PBHSetFLockSync(HParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHSetFLockAsync(HParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBHSetFLockAsync(HParmBlkPtr paramBlock)        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBGetCatalogInfoSync instead.*/
@@ -9120,7 +9114,7 @@ extern OSErr  PBHSetFLockAsync(HParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHGetFInfoSync(HParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBHGetFInfoSync(HParmBlkPtr paramBlock)         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBGetCatalogInfoAsync instead.*/
@@ -9135,7 +9129,7 @@ extern OSErr  PBHGetFInfoSync(HParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHGetFInfoAsync(HParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBHGetFInfoAsync(HParmBlkPtr paramBlock)        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBSetCatalogInfoSync instead.*/
@@ -9150,7 +9144,7 @@ extern OSErr  PBHGetFInfoAsync(HParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHSetFInfoSync(HParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBHSetFInfoSync(HParmBlkPtr paramBlock)         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBSetCatalogInfoAsync instead.*/
@@ -9165,7 +9159,7 @@ extern OSErr  PBHSetFInfoSync(HParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHSetFInfoAsync(HParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBHSetFInfoAsync(HParmBlkPtr paramBlock)        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBMakeFSRefUnicodeSync instead.*/
@@ -9180,7 +9174,7 @@ extern OSErr  PBHSetFInfoAsync(HParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBMakeFSSpecSync(HParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBMakeFSSpecSync(HParmBlkPtr paramBlock)        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBMakeFSRefUnicodeAsync instead.*/
@@ -9195,7 +9189,7 @@ extern OSErr  PBMakeFSSpecSync(HParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBMakeFSSpecAsync(HParmBlkPtr paramBlock)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBMakeFSSpecAsync(HParmBlkPtr paramBlock)       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. The routines which use the default volume concept have been deprecated.*/
@@ -9214,7 +9208,7 @@ extern OSErr
 HGetVol(
   StringPtr         volName,
   FSVolumeRefNum *  vRefNum,
-  SInt32 *          dirID)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  SInt32 *          dirID)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSOpenFork instead.*/
@@ -9235,7 +9229,7 @@ HOpen(
   SInt32             dirID,
   ConstStr255Param   fileName,
   SInt8              permission,
-  FSIORefNum *       refNum)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  FSIORefNum *       refNum)                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSOpenFork instead.*/
@@ -9256,7 +9250,7 @@ HOpenDF(
   SInt32             dirID,
   ConstStr255Param   fileName,
   SInt8              permission,
-  FSIORefNum *       refNum)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  FSIORefNum *       refNum)                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSOpenFork instead.*/
@@ -9277,7 +9271,7 @@ HOpenRF(
   SInt32             dirID,
   ConstStr255Param   fileName,
   SInt8              permission,
-  FSIORefNum *       refNum)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  FSIORefNum *       refNum)                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSAllocateFork instead.*/
@@ -9295,7 +9289,7 @@ HOpenRF(
 extern OSErr 
 AllocContig(
   FSVolumeRefNum   refNum,
-  SInt32 *         count)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  SInt32 *         count)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSCreateFileUnicode instead.*/
@@ -9316,7 +9310,7 @@ HCreate(
   SInt32             dirID,
   ConstStr255Param   fileName,
   OSType             creator,
-  OSType             fileType)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  OSType             fileType)                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSCreateDirectoryUnicode instead.*/
@@ -9336,7 +9330,7 @@ DirCreate(
   FSVolumeRefNum     vRefNum,
   SInt32             parentDirID,
   ConstStr255Param   directoryName,
-  SInt32 *           createdDirID)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  SInt32 *           createdDirID)                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSDeleteObject instead.*/
@@ -9355,7 +9349,7 @@ extern OSErr
 HDelete(
   FSVolumeRefNum     vRefNum,
   SInt32             dirID,
-  ConstStr255Param   fileName)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  ConstStr255Param   fileName)                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSGetCatalogInfo instead.*/
@@ -9375,7 +9369,7 @@ HGetFInfo(
   FSVolumeRefNum     vRefNum,
   SInt32             dirID,
   ConstStr255Param   fileName,
-  FInfo *            fndrInfo)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  FInfo *            fndrInfo)                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSSetCatalogInfo instead.*/
@@ -9395,7 +9389,7 @@ HSetFInfo(
   FSVolumeRefNum     vRefNum,
   SInt32             dirID,
   ConstStr255Param   fileName,
-  const FInfo *      fndrInfo)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  const FInfo *      fndrInfo)                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSSetCatalogInfo instead.*/
@@ -9414,7 +9408,7 @@ extern OSErr
 HSetFLock(
   FSVolumeRefNum     vRefNum,
   SInt32             dirID,
-  ConstStr255Param   fileName)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  ConstStr255Param   fileName)                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSSetCatalogInfo instead.*/
@@ -9433,7 +9427,7 @@ extern OSErr
 HRstFLock(
   FSVolumeRefNum     vRefNum,
   SInt32             dirID,
-  ConstStr255Param   fileName)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  ConstStr255Param   fileName)                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSRenameUnicode instead.*/
@@ -9453,7 +9447,7 @@ HRename(
   FSVolumeRefNum     vRefNum,
   SInt32             dirID,
   ConstStr255Param   oldName,
-  ConstStr255Param   newName)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  ConstStr255Param   newName)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSMoveObject instead.*/
@@ -9474,7 +9468,7 @@ CatMove(
   SInt32             dirID,
   ConstStr255Param   oldName,
   SInt32             newDirID,
-  ConstStr255Param   newName)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  ConstStr255Param   newName)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. It was never implemented on OS X.*/
@@ -9489,7 +9483,7 @@ CatMove(
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHGetLogInInfoSync(HParmBlkPtr paramBlock)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBHGetLogInInfoSync(HParmBlkPtr paramBlock)     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. It was never implemented on OS X.*/
@@ -9504,7 +9498,7 @@ extern OSErr  PBHGetLogInInfoSync(HParmBlkPtr paramBlock)     AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHGetLogInInfoAsync(HParmBlkPtr paramBlock)    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBHGetLogInInfoAsync(HParmBlkPtr paramBlock)    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -9522,7 +9516,7 @@ extern OSErr  PBHGetLogInInfoAsync(HParmBlkPtr paramBlock)    AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHMoveRenameSync(HParmBlkPtr paramBlock)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBHMoveRenameSync(HParmBlkPtr paramBlock)       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -9540,7 +9534,7 @@ extern OSErr  PBHMoveRenameSync(HParmBlkPtr paramBlock)       AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBHMoveRenameAsync(HParmBlkPtr paramBlock)      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBHMoveRenameAsync(HParmBlkPtr paramBlock)      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. It was never implemented on OS X.*/
@@ -9555,7 +9549,7 @@ extern OSErr  PBHMoveRenameAsync(HParmBlkPtr paramBlock)      AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
-extern OSErr  PBGetXCatInfoSync(XCInfoPBPtr paramBlock)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBGetXCatInfoSync(XCInfoPBPtr paramBlock)       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. It was never implemented on OS X.*/
@@ -9570,7 +9564,7 @@ extern OSErr  PBGetXCatInfoSync(XCInfoPBPtr paramBlock)       AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
-extern OSErr  PBGetXCatInfoAsync(XCInfoPBPtr paramBlock)      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBGetXCatInfoAsync(XCInfoPBPtr paramBlock)      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBExchangeObjectsSync instead.*/
@@ -9585,7 +9579,7 @@ extern OSErr  PBGetXCatInfoAsync(XCInfoPBPtr paramBlock)      AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBExchangeFilesSync(HParmBlkPtr paramBlock)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBExchangeFilesSync(HParmBlkPtr paramBlock)     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use PBExchangeObjectsAsync instead.*/
@@ -9600,7 +9594,7 @@ extern OSErr  PBExchangeFilesSync(HParmBlkPtr paramBlock)     AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBExchangeFilesAsync(HParmBlkPtr paramBlock)    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBExchangeFilesAsync(HParmBlkPtr paramBlock)    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. It was never implemented on OS X.*/
@@ -9615,7 +9609,7 @@ extern OSErr  PBExchangeFilesAsync(HParmBlkPtr paramBlock)    AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBGetForeignPrivsSync(HParmBlkPtr paramBlock)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBGetForeignPrivsSync(HParmBlkPtr paramBlock)   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. It was never implemented on OS X.*/
@@ -9630,7 +9624,7 @@ extern OSErr  PBGetForeignPrivsSync(HParmBlkPtr paramBlock)   AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBGetForeignPrivsAsync(HParmBlkPtr paramBlock)  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBGetForeignPrivsAsync(HParmBlkPtr paramBlock)  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. It was never implemented on OS X.*/
@@ -9645,7 +9639,7 @@ extern OSErr  PBGetForeignPrivsAsync(HParmBlkPtr paramBlock)  AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBSetForeignPrivsSync(HParmBlkPtr paramBlock)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBSetForeignPrivsSync(HParmBlkPtr paramBlock)   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. It was never implemented on OS X.*/
@@ -9660,7 +9654,7 @@ extern OSErr  PBSetForeignPrivsSync(HParmBlkPtr paramBlock)   AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBSetForeignPrivsAsync(HParmBlkPtr paramBlock)  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBSetForeignPrivsAsync(HParmBlkPtr paramBlock)  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*  Desktop Manager  */
@@ -9692,7 +9686,7 @@ enum {
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTGetPath(DTPBPtr paramBlock)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBDTGetPath(DTPBPtr paramBlock)                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -9706,7 +9700,7 @@ extern OSErr  PBDTGetPath(DTPBPtr paramBlock)                 AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTCloseDown(DTPBPtr paramBlock)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBDTCloseDown(DTPBPtr paramBlock)               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -9720,7 +9714,7 @@ extern OSErr  PBDTCloseDown(DTPBPtr paramBlock)               AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTAddIconSync(DTPBPtr paramBlock)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBDTAddIconSync(DTPBPtr paramBlock)             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -9734,7 +9728,7 @@ extern OSErr  PBDTAddIconSync(DTPBPtr paramBlock)             AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTAddIconAsync(DTPBPtr paramBlock)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBDTAddIconAsync(DTPBPtr paramBlock)            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -9748,7 +9742,7 @@ extern OSErr  PBDTAddIconAsync(DTPBPtr paramBlock)            AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTGetIconSync(DTPBPtr paramBlock)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBDTGetIconSync(DTPBPtr paramBlock)             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -9762,7 +9756,7 @@ extern OSErr  PBDTGetIconSync(DTPBPtr paramBlock)             AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTGetIconAsync(DTPBPtr paramBlock)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBDTGetIconAsync(DTPBPtr paramBlock)            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -9776,7 +9770,7 @@ extern OSErr  PBDTGetIconAsync(DTPBPtr paramBlock)            AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTGetIconInfoSync(DTPBPtr paramBlock)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBDTGetIconInfoSync(DTPBPtr paramBlock)         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -9790,7 +9784,7 @@ extern OSErr  PBDTGetIconInfoSync(DTPBPtr paramBlock)         AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTGetIconInfoAsync(DTPBPtr paramBlock)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBDTGetIconInfoAsync(DTPBPtr paramBlock)        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -9804,7 +9798,7 @@ extern OSErr  PBDTGetIconInfoAsync(DTPBPtr paramBlock)        AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTAddAPPLSync(DTPBPtr paramBlock)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBDTAddAPPLSync(DTPBPtr paramBlock)             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -9818,7 +9812,7 @@ extern OSErr  PBDTAddAPPLSync(DTPBPtr paramBlock)             AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTAddAPPLAsync(DTPBPtr paramBlock)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBDTAddAPPLAsync(DTPBPtr paramBlock)            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -9832,7 +9826,7 @@ extern OSErr  PBDTAddAPPLAsync(DTPBPtr paramBlock)            AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTRemoveAPPLSync(DTPBPtr paramBlock)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBDTRemoveAPPLSync(DTPBPtr paramBlock)          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -9846,7 +9840,7 @@ extern OSErr  PBDTRemoveAPPLSync(DTPBPtr paramBlock)          AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTRemoveAPPLAsync(DTPBPtr paramBlock)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBDTRemoveAPPLAsync(DTPBPtr paramBlock)         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -9860,7 +9854,7 @@ extern OSErr  PBDTRemoveAPPLAsync(DTPBPtr paramBlock)         AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTGetAPPLSync(DTPBPtr paramBlock)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBDTGetAPPLSync(DTPBPtr paramBlock)             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -9874,7 +9868,7 @@ extern OSErr  PBDTGetAPPLSync(DTPBPtr paramBlock)             AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTGetAPPLAsync(DTPBPtr paramBlock)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBDTGetAPPLAsync(DTPBPtr paramBlock)            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -9888,7 +9882,7 @@ extern OSErr  PBDTGetAPPLAsync(DTPBPtr paramBlock)            AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTSetCommentSync(DTPBPtr paramBlock)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBDTSetCommentSync(DTPBPtr paramBlock)          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -9902,7 +9896,7 @@ extern OSErr  PBDTSetCommentSync(DTPBPtr paramBlock)          AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTSetCommentAsync(DTPBPtr paramBlock)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBDTSetCommentAsync(DTPBPtr paramBlock)         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -9916,7 +9910,7 @@ extern OSErr  PBDTSetCommentAsync(DTPBPtr paramBlock)         AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTRemoveCommentSync(DTPBPtr paramBlock)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBDTRemoveCommentSync(DTPBPtr paramBlock)       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -9930,7 +9924,7 @@ extern OSErr  PBDTRemoveCommentSync(DTPBPtr paramBlock)       AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTRemoveCommentAsync(DTPBPtr paramBlock)      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBDTRemoveCommentAsync(DTPBPtr paramBlock)      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -9944,7 +9938,7 @@ extern OSErr  PBDTRemoveCommentAsync(DTPBPtr paramBlock)      AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTGetCommentSync(DTPBPtr paramBlock)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBDTGetCommentSync(DTPBPtr paramBlock)          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -9958,7 +9952,7 @@ extern OSErr  PBDTGetCommentSync(DTPBPtr paramBlock)          AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTGetCommentAsync(DTPBPtr paramBlock)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBDTGetCommentAsync(DTPBPtr paramBlock)         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -9972,7 +9966,7 @@ extern OSErr  PBDTGetCommentAsync(DTPBPtr paramBlock)         AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTFlushSync(DTPBPtr paramBlock)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBDTFlushSync(DTPBPtr paramBlock)               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -9986,7 +9980,7 @@ extern OSErr  PBDTFlushSync(DTPBPtr paramBlock)               AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTFlushAsync(DTPBPtr paramBlock)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBDTFlushAsync(DTPBPtr paramBlock)              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -10000,7 +9994,7 @@ extern OSErr  PBDTFlushAsync(DTPBPtr paramBlock)              AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTResetSync(DTPBPtr paramBlock)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBDTResetSync(DTPBPtr paramBlock)               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -10014,7 +10008,7 @@ extern OSErr  PBDTResetSync(DTPBPtr paramBlock)               AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTResetAsync(DTPBPtr paramBlock)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBDTResetAsync(DTPBPtr paramBlock)              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -10028,7 +10022,7 @@ extern OSErr  PBDTResetAsync(DTPBPtr paramBlock)              AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTGetInfoSync(DTPBPtr paramBlock)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBDTGetInfoSync(DTPBPtr paramBlock)             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -10042,7 +10036,7 @@ extern OSErr  PBDTGetInfoSync(DTPBPtr paramBlock)             AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTGetInfoAsync(DTPBPtr paramBlock)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBDTGetInfoAsync(DTPBPtr paramBlock)            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -10056,7 +10050,7 @@ extern OSErr  PBDTGetInfoAsync(DTPBPtr paramBlock)            AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTOpenInform(DTPBPtr paramBlock)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBDTOpenInform(DTPBPtr paramBlock)              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -10070,7 +10064,7 @@ extern OSErr  PBDTOpenInform(DTPBPtr paramBlock)              AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTDeleteSync(DTPBPtr paramBlock)              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBDTDeleteSync(DTPBPtr paramBlock)              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -10084,7 +10078,7 @@ extern OSErr  PBDTDeleteSync(DTPBPtr paramBlock)              AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBDTDeleteAsync(DTPBPtr paramBlock)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBDTDeleteAsync(DTPBPtr paramBlock)             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*  FSp traps  */
@@ -10105,7 +10099,7 @@ FSMakeFSSpec(
   FSVolumeRefNum     vRefNum,
   SInt32             dirID,
   ConstStr255Param   fileName,
-  FSSpec *           spec)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  FSSpec *           spec)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSOpenFork instead.*/
@@ -10124,7 +10118,7 @@ extern OSErr
 FSpOpenDF(
   const FSSpec *  spec,
   SInt8           permission,
-  FSIORefNum *    refNum)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  FSIORefNum *    refNum)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSOpenFork instead.*/
@@ -10143,7 +10137,7 @@ extern OSErr
 FSpOpenRF(
   const FSSpec *  spec,
   SInt8           permission,
-  FSIORefNum *    refNum)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  FSIORefNum *    refNum)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSCreateFileUnicode instead.*/
@@ -10163,7 +10157,7 @@ FSpCreate(
   const FSSpec *  spec,
   OSType          creator,
   OSType          fileType,
-  ScriptCode      scriptTag)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  ScriptCode      scriptTag)                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSCreateDirectoryUnicode instead.*/
@@ -10182,7 +10176,7 @@ extern OSErr
 FSpDirCreate(
   const FSSpec *  spec,
   ScriptCode      scriptTag,
-  SInt32 *        createdDirID)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  SInt32 *        createdDirID)                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSDeleteObject instead.*/
@@ -10198,7 +10192,7 @@ FSpDirCreate(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-FSpDelete(const FSSpec * spec)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+FSpDelete(const FSSpec * spec)                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSGetCatalogInfo instead.*/
@@ -10216,7 +10210,7 @@ FSpDelete(const FSSpec * spec)                                AVAILABLE_MAC_OS_X
 extern OSErr 
 FSpGetFInfo(
   const FSSpec *  spec,
-  FInfo *         fndrInfo)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  FInfo *         fndrInfo)                                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSSetCatalogInfo instead.*/
@@ -10234,7 +10228,7 @@ FSpGetFInfo(
 extern OSErr 
 FSpSetFInfo(
   const FSSpec *  spec,
-  const FInfo *   fndrInfo)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  const FInfo *   fndrInfo)                                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSSetCatalogInfo instead.*/
@@ -10250,7 +10244,7 @@ FSpSetFInfo(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-FSpSetFLock(const FSSpec * spec)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+FSpSetFLock(const FSSpec * spec)                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSSetCatalogInfo instead.*/
@@ -10266,7 +10260,7 @@ FSpSetFLock(const FSSpec * spec)                              AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-FSpRstFLock(const FSSpec * spec)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+FSpRstFLock(const FSSpec * spec)                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSRenameUnicode instead.*/
@@ -10284,7 +10278,7 @@ FSpRstFLock(const FSSpec * spec)                              AVAILABLE_MAC_OS_X
 extern OSErr 
 FSpRename(
   const FSSpec *     spec,
-  ConstStr255Param   newName)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  ConstStr255Param   newName)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSMoveObject instead.*/
@@ -10302,7 +10296,7 @@ FSpRename(
 extern OSErr 
 FSpCatMove(
   const FSSpec *  source,
-  const FSSpec *  dest)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  const FSSpec *  dest)                                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. Use FSExchangeObjects instead.*/
@@ -10320,7 +10314,7 @@ FSpCatMove(
 extern OSErr 
 FSpExchangeFiles(
   const FSSpec *  source,
-  const FSSpec *  dest)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  const FSSpec *  dest)                                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -10336,7 +10330,7 @@ FSpExchangeFiles(
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBShareSync(HParmBlkPtr paramBlock)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBShareSync(HParmBlkPtr paramBlock)             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. It was never implemented on OS X.*/
@@ -10351,7 +10345,7 @@ extern OSErr  PBShareSync(HParmBlkPtr paramBlock)             AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBShareAsync(HParmBlkPtr paramBlock)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBShareAsync(HParmBlkPtr paramBlock)            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. It was never implemented on OS X.*/
@@ -10366,7 +10360,7 @@ extern OSErr  PBShareAsync(HParmBlkPtr paramBlock)            AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBUnshareSync(HParmBlkPtr paramBlock)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBUnshareSync(HParmBlkPtr paramBlock)           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. It was never implemented on OS X.*/
@@ -10381,7 +10375,7 @@ extern OSErr  PBUnshareSync(HParmBlkPtr paramBlock)           AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBUnshareAsync(HParmBlkPtr paramBlock)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBUnshareAsync(HParmBlkPtr paramBlock)          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. It was never implemented on OS X.*/
@@ -10396,7 +10390,7 @@ extern OSErr  PBUnshareAsync(HParmBlkPtr paramBlock)          AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBGetUGEntrySync(HParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBGetUGEntrySync(HParmBlkPtr paramBlock)        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* This function is deprecated in Mac OS X 10.4. It was never implemented on OS X.*/
@@ -10411,7 +10405,7 @@ extern OSErr  PBGetUGEntrySync(HParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern OSErr  PBGetUGEntryAsync(HParmBlkPtr paramBlock)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern OSErr  PBGetUGEntryAsync(HParmBlkPtr paramBlock)       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 #endif  /* !__LP64__ */

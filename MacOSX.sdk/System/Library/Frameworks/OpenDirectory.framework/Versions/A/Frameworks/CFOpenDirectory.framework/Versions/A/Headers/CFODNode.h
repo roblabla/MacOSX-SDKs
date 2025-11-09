@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009 Apple Inc. All rights reserved.
+ * Copyright (c) 2009-2012 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -250,7 +250,7 @@ ODRecordRef ODNodeCopyRecord(ODNodeRef node, ODRecordType recordType, CFStringRe
     @param      error an optional CFErrorRef reference for error details
     @result     a CFDataRef with the result of the operation, otherwise outError can be checked for specific details
 */
-CF_EXPORT
+CF_RETURNS_RETAINED CF_EXPORT
 CFDataRef ODNodeCustomCall(ODNodeRef node, CFIndex customCode, CFDataRef data, CFErrorRef *error) __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
 
 __END_DECLS

@@ -76,7 +76,8 @@
 #include <sys/cdefs.h>
 #include <sys/types.h>
 #include <mach/vm_param.h>
-#if __arm__
+
+#if defined(__arm__)
 #include <arm/arch.h> /* for _ARM_ARCH_* */
 #endif
 

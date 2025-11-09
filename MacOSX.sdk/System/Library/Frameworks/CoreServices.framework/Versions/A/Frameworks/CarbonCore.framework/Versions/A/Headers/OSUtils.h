@@ -2,16 +2,9 @@
      File:       CarbonCore/OSUtils.h
  
      Contains:   OS Utilities Interfaces.
+                 The contents of this header file are deprecated.
  
-     Version:    CarbonCore-960.18~3
- 
-     Copyright:  © 1985-2008 by Apple Computer, Inc., all rights reserved
- 
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
- 
-                     http://developer.apple.com/bugreporter/
- 
+     Copyright:  © 1985-2011 by Apple Inc. All rights reserved.
 */
 #ifndef __OSUTILS__
 #define __OSUTILS__
@@ -39,7 +32,7 @@
 #endif
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -173,7 +166,7 @@ typedef struct MachineLocation MachineLocation;
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Boolean 
-IsMetric(void)                                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+IsMetric(void)                                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -202,7 +195,7 @@ IsMetric(void)                                                AVAILABLE_MAC_OS_X
 extern void 
 Delay(
   unsigned long    numTicks,
-  unsigned long *  finalTicks)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned long *  finalTicks)                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -237,7 +230,7 @@ Delay(
 extern void 
 Enqueue(
   QElemPtr   qElement,
-  QHdrPtr    qHeader)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QHdrPtr    qHeader)                                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -271,7 +264,7 @@ Enqueue(
 extern OSErr 
 Dequeue(
   QElemPtr   qElement,
-  QHdrPtr    qHeader)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  QHdrPtr    qHeader)                                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -310,7 +303,7 @@ Dequeue(
 extern void 
 MakeDataExecutable(
   void *          baseAddress,
-  unsigned long   length)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned long   length)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 #endif  /* !__LP64__ */
@@ -361,7 +354,7 @@ MakeDataExecutable(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-ReadLocation(MachineLocation * loc)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+ReadLocation(MachineLocation * loc)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -397,7 +390,7 @@ ReadLocation(MachineLocation * loc)                           AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern UInt32 
-TickCount(void)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+TickCount(void)                                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -425,7 +418,7 @@ TickCount(void)                                               AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern CFStringRef 
-CSCopyUserName(Boolean useShortName)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+CSCopyUserName(Boolean useShortName)                          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -448,7 +441,7 @@ CSCopyUserName(Boolean useShortName)                          AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern CFStringRef 
-CSCopyMachineName(void)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+CSCopyMachineName(void)                                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 enum {
@@ -501,7 +494,7 @@ typedef void *                          SysPPtr;
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern SysPPtr 
-GetSysPPtr(void)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+GetSysPPtr(void)                                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -524,7 +517,7 @@ typedef STACK_UPP_TYPE(DeferredTaskProcPtr)                     DeferredTaskUPP;
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern DeferredTaskUPP
-NewDeferredTaskUPP(DeferredTaskProcPtr userRoutine)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewDeferredTaskUPP(DeferredTaskProcPtr userRoutine)           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  DisposeDeferredTaskUPP()
@@ -535,7 +528,7 @@ NewDeferredTaskUPP(DeferredTaskProcPtr userRoutine)           AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeDeferredTaskUPP(DeferredTaskUPP userUPP)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeDeferredTaskUPP(DeferredTaskUPP userUPP)               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  InvokeDeferredTaskUPP()
@@ -548,7 +541,7 @@ DisposeDeferredTaskUPP(DeferredTaskUPP userUPP)               AVAILABLE_MAC_OS_X
 extern void
 InvokeDeferredTaskUPP(
   long             dtParam,
-  DeferredTaskUPP  userUPP)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DeferredTaskUPP  userUPP)                                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 #if __MACH__
   #ifdef __cplusplus
@@ -593,7 +586,7 @@ typedef DeferredTask *                  DeferredTaskPtr;
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-DTInstall(DeferredTaskPtr dtTaskPtr)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+DTInstall(DeferredTaskPtr dtTaskPtr)                          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -616,7 +609,7 @@ DTInstall(DeferredTaskPtr dtTaskPtr)                          AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern OSErr 
-DTUninstall(DeferredTaskPtr dtTaskPtr)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+DTUninstall(DeferredTaskPtr dtTaskPtr)                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -634,7 +627,7 @@ DTUninstall(DeferredTaskPtr dtTaskPtr)                        AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern long 
-SetCurrentA5(void)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+SetCurrentA5(void)                                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -652,7 +645,7 @@ SetCurrentA5(void)                                            AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern long 
-SetA5(long newA5)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+SetA5(long newA5)                                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -671,7 +664,7 @@ SetA5(long newA5)                                             AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-InitUtil(void)                                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
+InitUtil(void)                                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_3, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -690,7 +683,7 @@ InitUtil(void)                                                AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-WriteParam(void)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+WriteParam(void)                                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -710,7 +703,7 @@ WriteParam(void)                                              AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-WriteLocation(const MachineLocation * loc)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
+WriteLocation(const MachineLocation * loc)                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_1, __IPHONE_NA, __IPHONE_NA);
 
 
 #endif  /* !__LP64__ */

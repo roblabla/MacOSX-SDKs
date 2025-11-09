@@ -3,7 +3,7 @@
 
     Contains:   API for communicating with CoreMediaIO hardware
 
-    Copyright:  © 2005-2010 by Apple Inc., all rights reserved.
+    Copyright:  © 2005-2011 by Apple Inc., all rights reserved.
 */
 
 
@@ -450,6 +450,16 @@ enum
                         For example, the user might close the FireWire iSight's privacy iris or close the clamshell on a Mac Book or Mac Book Pro. While suspended the device still responds
                         to all requests just as if it was active, but the stream(s) will not provide/accept any data.
                         This property is never settable.
+    @constant       kCMIODevicePropertyLinkedAndSyncedCoreAudioDeviceUID
+                        Identical to kCMIODevicePropertyLinkedCoreAudioDeviceUID, except that it only returns a UID if the linked CoreAudio device shares the same hardware clock (CFStringRef)
+    @constant       kCMIODevicePropertyIIDCInitialUnitSpace
+                        A UInt32 which specifies the initial unit space for IIDC cameras as described in "IIDC 1394-based Digital Camera Specification Version 1.31" (1394 Trade Association
+						Document 2003017)." This property is never settable.
+    @constant       kCMIODevicePropertyIIDCCSRData
+						A UInt32 which provides access to control and status registers for IIDC cameras. The qualifier contains a UInt32 that specifies the register to access.
+						If the register's offset is relative to the initial unit space, then the qualifier should be the value returned by kCMIODevicePropertyIIDCInitialUnitSpace + offset.
+						If the register's offset is relative to the initial register space, then the qualifier should be $F0000000 + offset.
+						Changes in this property never result in a property changed notification.
 */
 enum
 {
@@ -476,7 +486,10 @@ enum
     kCMIODevicePropertyCanProcessRS422Command       = 'r422',
     kCMIODevicePropertyLinkedCoreAudioDeviceUID     = 'plud',
     kCMIODevicePropertyVideoDigitizerComponents     = 'vdig', 
-    kCMIODevicePropertySuspendedByUser              = 'sbyu'
+    kCMIODevicePropertySuspendedByUser              = 'sbyu',
+    kCMIODevicePropertyLinkedAndSyncedCoreAudioDeviceUID	= 'plsd',
+    kCMIODevicePropertyIIDCInitialUnitSpace			= 'iuns',
+    kCMIODevicePropertyIIDCCSRData					= 'csrd'
 };
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

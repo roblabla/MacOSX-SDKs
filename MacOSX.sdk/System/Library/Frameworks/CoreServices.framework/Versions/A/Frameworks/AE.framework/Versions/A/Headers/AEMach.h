@@ -3,9 +3,9 @@
  
      Contains:   AppleEvent over mach_msg interfaces
  
-     Version:    AppleEvents-527.7~1
+    
  
-     Copyright:  © 2000-2008 by Apple Computer, Inc., all rights reserved.
+     Copyright:  ï¿½ 2000-2008 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -35,7 +35,7 @@ extern "C" {
 #endif
 #endif
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -110,7 +110,7 @@ enum {
  *    Non-Carbon CFM:   not available
  */
 extern mach_port_t 
-AEGetRegisteredMachPort(void)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+AEGetRegisteredMachPort(void)                                 __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 
 /*
@@ -152,7 +152,7 @@ extern OSStatus
 AEDecodeMessage(
   mach_msg_header_t *  header,
   AppleEvent *         event,
-  AppleEvent *         reply)        /* can be NULL */        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AppleEvent *         reply)        /* can be NULL */        __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 
 /*
@@ -177,7 +177,7 @@ AEDecodeMessage(
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-AEProcessMessage(mach_msg_header_t * header)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+AEProcessMessage(mach_msg_header_t * header)                  __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 
 /*
@@ -217,7 +217,7 @@ AESendMessage(
   const AppleEvent *  event,
   AppleEvent *        reply,                /* can be NULL */
   AESendMode          sendMode,
-  long                timeOutInTicks)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long                timeOutInTicks)                         __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 
 

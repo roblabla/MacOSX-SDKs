@@ -2,19 +2,19 @@
  * Copyright (c) 2008-2011 Apple Inc. All rights reserved.
  *
  * @APPLE_APACHE_LICENSE_HEADER_START@
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * @APPLE_APACHE_LICENSE_HEADER_END@
  */
 
@@ -40,7 +40,7 @@ __BEGIN_DECLS
  *
  * @abstract
  * Creates new group with which blocks may be associated.
- * 
+ *
  * @discussion
  * This function creates a new group with which blocks may be associated.
  * The dispatch group may be used to wait for the completion of the blocks it
@@ -50,7 +50,8 @@ __BEGIN_DECLS
  * The newly created group, or NULL on failure.
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_4_0)
-DISPATCH_EXPORT DISPATCH_MALLOC DISPATCH_WARN_RESULT DISPATCH_NOTHROW
+DISPATCH_EXPORT DISPATCH_MALLOC DISPATCH_RETURNS_RETAINED DISPATCH_WARN_RESULT
+DISPATCH_NOTHROW
 dispatch_group_t
 dispatch_group_create(void);
 
@@ -113,7 +114,8 @@ dispatch_group_async(dispatch_group_t group,
  * dispatch_group_async_f().
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_4_0)
-DISPATCH_EXPORT DISPATCH_NONNULL1 DISPATCH_NONNULL2 DISPATCH_NONNULL4 DISPATCH_NOTHROW
+DISPATCH_EXPORT DISPATCH_NONNULL1 DISPATCH_NONNULL2 DISPATCH_NONNULL4
+DISPATCH_NOTHROW
 void
 dispatch_group_async_f(dispatch_group_t group,
 	dispatch_queue_t queue,
@@ -173,7 +175,7 @@ dispatch_group_wait(dispatch_group_t group, dispatch_time_t timeout);
  *
  * If no blocks are associated with the dispatch group (i.e. the group is empty)
  * then the notification block will be submitted immediately.
- * 
+ *
  * The group will be empty at the time the notification block is submitted to
  * the target queue. The group may either be released with dispatch_release()
  * or reused for additional operations.
@@ -222,7 +224,8 @@ dispatch_group_notify(dispatch_group_t group,
  * dispatch_group_notify_f().
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_4_0)
-DISPATCH_EXPORT DISPATCH_NONNULL1 DISPATCH_NONNULL2 DISPATCH_NONNULL4 DISPATCH_NOTHROW
+DISPATCH_EXPORT DISPATCH_NONNULL1 DISPATCH_NONNULL2 DISPATCH_NONNULL4
+DISPATCH_NOTHROW
 void
 dispatch_group_notify_f(dispatch_group_t group,
 	dispatch_queue_t queue,

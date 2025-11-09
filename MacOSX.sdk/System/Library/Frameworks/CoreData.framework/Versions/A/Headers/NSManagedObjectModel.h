@@ -1,19 +1,17 @@
 /*
     NSManagedObjectModel.h
     Core Data
-    Copyright (c) 2004-2010 Apple Inc.
+    Copyright (c) 2004-2012 Apple Inc.
     All rights reserved.
 */
 
-#import <Foundation/NSObject.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
-@class NSArray;
-@class NSDictionary;
 @class NSEntityDescription;
 @class NSFetchRequest;
-@class NSMutableDictionary;
-@class NSString;
-@class NSURL;
+@class NSSet;
+@class NSData;
 
 // Models describe object graphs to be managed. Models (and their entities/properties/fetch request templates) are editable until they are used by a persistent store coordinator, allowing developers to create/modify them dynamically. However, once a model is being used, it MUST NOT be changed. When the persistent store coordinator first fetches data using a model, it will become uneditable. Any attempt to mutate a model or any of its subobjects after that point will cause an exception to be thrown. If you need to modify a model that is in use, create a copy, modify the copy, and then discard the objects with the old model.
 NS_CLASS_AVAILABLE(10_4,3_0)

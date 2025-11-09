@@ -58,7 +58,7 @@ typedef struct vImage_AffineTransform
 /*
  *  vImage_CGAffineTransform is a convenience type to match CGAffineTransform 
  */
-#if defined( MAC_OS_X_VERSION_10_6 ) && VIMAGE_AFFINETRANSFORM_DOUBLE_IS_AVAILABLE       /* Interfaces that use this are only available on MacOS X.6 and later */
+#if VIMAGE_AFFINETRANSFORM_DOUBLE_IS_AVAILABLE       /* Interfaces that use this are only available on MacOS X.6 and later */
     #define VIMAGE_CGAFFINETRANSFORM_IS_AVAILABLE			1
     #if defined( __LP64__ )
         typedef    vImage_AffineTransform_Double    vImage_CGAffineTransform;
@@ -73,10 +73,11 @@ typedef uint32_t    vImage_Flags;       /* You must set all undefined flags bits
 
 /* Pixel data types */
 typedef uint8_t     Pixel_8;            /* 8 bit planar pixel value                                                                     */
+typedef uint16_t    Pixel_16U;          /* 16 bit unsigned planar pixel value. Typical range [0,65535], but most functions are agnostic */
 typedef float       Pixel_F;            /* floating point planar pixel value                                                            */
 typedef uint8_t     Pixel_8888[4];      /* ARGB interleaved (8 bit/channel) pixel value. uint8_t[4] = { alpha, red, green, blue }       */
 typedef float       Pixel_FFFF[4];      /* ARGB interleaved (floating point) pixel value. float[4] = { alpha, red, green, blue }        */
-
+    
 typedef void*       ResamplingFilter;
 typedef void*       GammaFunction;
 
@@ -100,14 +101,14 @@ enum
 enum
 {
     kvImageNoFlags                      =    0,
-    kvImageLeaveAlphaUnchanged          =    1,     /* Operate on red, green and blue channels only. Alpha is copied from source to destination. For Interleaved formats only. __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA )*/
-    kvImageCopyInPlace                  =    2,     /* Copy edge pixels. Convolution Only. __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA )*/
-    kvImageBackgroundColorFill          =    4,     /* Use the background color for missing pixels. __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA )*/
-    kvImageEdgeExtend                   =    8,     /* Extend border data elements. (For 3D LUTs, extend the table.) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA )*/
-    kvImageDoNotTile                    =   16,     /* Pass to turn off internal tiling. Use this if you want to do your own tiling, or to use the Min/Max filters in place. __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA )*/
-    kvImageHighQualityResampling        =   32,     /* Use a higher quality, slower resampling filter for Geometry operations (shear, scale, rotate, affine transform, etc.) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA )*/
-    kvImageTruncateKernel               =   64,     /* Use only the part of the kernel that overlaps the image. For integer kernels, real_divisor = divisor * (sum of used kernel elements) / (sum of kernel elements). This should preserve image brightness at the edges. Convolution only. __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_NA ) */
-    kvImageGetTempBufferSize            =  128,     /* The function will return the number of bytes required for the temp buffer. If this value is negative, it is an error, per standard usage.  __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_NA ) */
+    kvImageLeaveAlphaUnchanged          =    1,     /* Operate on red, green and blue channels only. Alpha is copied from source to destination. For Interleaved formats only. __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 )*/
+    kvImageCopyInPlace                  =    2,     /* Copy edge pixels. Convolution Only. __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 )*/
+    kvImageBackgroundColorFill          =    4,     /* Use the background color for missing pixels. __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 )*/
+    kvImageEdgeExtend                   =    8,     /* Extend border data elements. (For 3D LUTs, extend the table.) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 )*/
+    kvImageDoNotTile                    =   16,     /* Pass to turn off internal tiling. Use this if you want to do your own tiling, or to use the Min/Max filters in place. __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 )*/
+    kvImageHighQualityResampling        =   32,     /* Use a higher quality, slower resampling filter for Geometry operations (shear, scale, rotate, affine transform, etc.) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 )*/
+    kvImageTruncateKernel               =   64,     /* Use only the part of the kernel that overlaps the image. For integer kernels, real_divisor = divisor * (sum of used kernel elements) / (sum of kernel elements). This should preserve image brightness at the edges. Convolution only. __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 ) */
+    kvImageGetTempBufferSize            =  128,     /* The function will return the number of bytes required for the temp buffer. If this value is negative, it is an error, per standard usage.  __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 ) */
 };
 
 

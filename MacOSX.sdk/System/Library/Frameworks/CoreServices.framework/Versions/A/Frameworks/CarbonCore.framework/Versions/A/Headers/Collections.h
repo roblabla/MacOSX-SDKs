@@ -2,16 +2,10 @@
      File:       CarbonCore/Collections.h
  
      Contains:   Collection Manager Interfaces
+                 The contents of this header file are deprecated.
+                 Use Foundation or CoreFoundation collection objects instead.
  
-     Version:    CarbonCore-960.18~3
- 
-     Copyright:  © 1989-2008 by Apple Computer, Inc., all rights reserved
- 
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
- 
-                     http://developer.apple.com/bugreporter/
- 
+     Copyright:  Â© 1989-2011 by Apple Inc. All rights reserved.
 */
 #ifndef __COLLECTIONS__
 #define __COLLECTIONS__
@@ -26,7 +20,7 @@
 
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -157,7 +151,7 @@ typedef STACK_UPP_TYPE(CollectionExceptionProcPtr)              CollectionExcept
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern CollectionFlattenUPP
-NewCollectionFlattenUPP(CollectionFlattenProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewCollectionFlattenUPP(CollectionFlattenProcPtr userRoutine) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  NewCollectionExceptionUPP()
@@ -168,7 +162,7 @@ NewCollectionFlattenUPP(CollectionFlattenProcPtr userRoutine) AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern CollectionExceptionUPP
-NewCollectionExceptionUPP(CollectionExceptionProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewCollectionExceptionUPP(CollectionExceptionProcPtr userRoutine) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  DisposeCollectionFlattenUPP()
@@ -179,7 +173,7 @@ NewCollectionExceptionUPP(CollectionExceptionProcPtr userRoutine) AVAILABLE_MAC_
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeCollectionFlattenUPP(CollectionFlattenUPP userUPP)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeCollectionFlattenUPP(CollectionFlattenUPP userUPP)     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  DisposeCollectionExceptionUPP()
@@ -190,7 +184,7 @@ DisposeCollectionFlattenUPP(CollectionFlattenUPP userUPP)     AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeCollectionExceptionUPP(CollectionExceptionUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeCollectionExceptionUPP(CollectionExceptionUPP userUPP) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  InvokeCollectionFlattenUPP()
@@ -205,7 +199,7 @@ InvokeCollectionFlattenUPP(
   SInt32                size,
   void *                data,
   void *                refCon,
-  CollectionFlattenUPP  userUPP)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CollectionFlattenUPP  userUPP)                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  InvokeCollectionExceptionUPP()
@@ -219,7 +213,7 @@ extern OSErr
 InvokeCollectionExceptionUPP(
   Collection              c,
   OSErr                   status,
-  CollectionExceptionUPP  userUPP)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CollectionExceptionUPP  userUPP)                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 #if __MACH__
   #ifdef __cplusplus
@@ -251,7 +245,7 @@ InvokeCollectionExceptionUPP(
  *    Non-Carbon CFM:   in CollectionsLib 1.0 and later
  */
 extern Collection 
-NewCollection(void)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewCollection(void)                                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -264,7 +258,7 @@ NewCollection(void)                                           AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in CollectionsLib 1.0 and later
  */
 extern void 
-DisposeCollection(Collection c)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeCollection(Collection c)                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -277,7 +271,7 @@ DisposeCollection(Collection c)                               AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in CollectionsLib 1.0 and later
  */
 extern Collection 
-CloneCollection(Collection c)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+CloneCollection(Collection c)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -290,7 +284,7 @@ CloneCollection(Collection c)                                 AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in CollectionsLib 1.0 and later
  */
 extern SInt32 
-CountCollectionOwners(Collection c)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+CountCollectionOwners(Collection c)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -303,7 +297,7 @@ CountCollectionOwners(Collection c)                           AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-RetainCollection(Collection c)                                AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+RetainCollection(Collection c)                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_1, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -316,7 +310,7 @@ RetainCollection(Collection c)                                AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-ReleaseCollection(Collection c)                               AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+ReleaseCollection(Collection c)                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_1, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -329,7 +323,7 @@ ReleaseCollection(Collection c)                               AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern ItemCount 
-GetCollectionRetainCount(Collection c)                        AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+GetCollectionRetainCount(Collection c)                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_1, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -344,7 +338,7 @@ GetCollectionRetainCount(Collection c)                        AVAILABLE_MAC_OS_X
 extern Collection 
 CopyCollection(
   Collection   srcCollection,
-  Collection   dstCollection)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Collection   dstCollection)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -357,7 +351,7 @@ CopyCollection(
  *    Non-Carbon CFM:   in CollectionsLib 1.0 and later
  */
 extern SInt32 
-GetCollectionDefaultAttributes(Collection c)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetCollectionDefaultAttributes(Collection c)                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -373,7 +367,7 @@ extern void
 SetCollectionDefaultAttributes(
   Collection   c,
   SInt32       whichAttributes,
-  SInt32       newAttributes)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32       newAttributes)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -386,7 +380,7 @@ SetCollectionDefaultAttributes(
  *    Non-Carbon CFM:   in CollectionsLib 1.0 and later
  */
 extern SInt32 
-CountCollectionItems(Collection c)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+CountCollectionItems(Collection c)                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -404,7 +398,7 @@ AddCollectionItem(
   CollectionTag   tag,
   SInt32          id,
   SInt32          itemSize,
-  const void *    itemData)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const void *    itemData)                                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -422,7 +416,7 @@ GetCollectionItem(
   CollectionTag   tag,
   SInt32          id,
   SInt32 *        itemSize,
-  void *          itemData)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *          itemData)                                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -438,7 +432,7 @@ extern OSErr
 RemoveCollectionItem(
   Collection      c,
   CollectionTag   tag,
-  SInt32          id)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32          id)                                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -456,7 +450,7 @@ SetCollectionItemInfo(
   CollectionTag   tag,
   SInt32          id,
   SInt32          whichAttributes,
-  SInt32          newAttributes)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32          newAttributes)                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -475,7 +469,7 @@ GetCollectionItemInfo(
   SInt32          id,
   SInt32 *        itemIndex,
   SInt32 *        itemSize,
-  SInt32 *        attributes)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32 *        attributes)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -492,7 +486,7 @@ ReplaceIndexedCollectionItem(
   Collection    c,
   SInt32        itemIndex,
   SInt32        itemSize,
-  const void *  itemData)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const void *  itemData)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -509,7 +503,7 @@ GetIndexedCollectionItem(
   Collection   c,
   SInt32       itemIndex,
   SInt32 *     itemSize,
-  void *       itemData)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *       itemData)                                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -524,7 +518,7 @@ GetIndexedCollectionItem(
 extern OSErr 
 RemoveIndexedCollectionItem(
   Collection   c,
-  SInt32       itemIndex)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32       itemIndex)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -541,7 +535,7 @@ SetIndexedCollectionItemInfo(
   Collection   c,
   SInt32       itemIndex,
   SInt32       whichAttributes,
-  SInt32       newAttributes)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32       newAttributes)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -560,7 +554,7 @@ GetIndexedCollectionItemInfo(
   CollectionTag *  tag,
   SInt32 *         id,
   SInt32 *         itemSize,
-  SInt32 *         attributes)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32 *         attributes)                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -575,7 +569,7 @@ GetIndexedCollectionItemInfo(
 extern Boolean 
 CollectionTagExists(
   Collection      c,
-  CollectionTag   tag)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CollectionTag   tag)                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -588,7 +582,7 @@ CollectionTagExists(
  *    Non-Carbon CFM:   in CollectionsLib 1.0 and later
  */
 extern SInt32 
-CountCollectionTags(Collection c)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+CountCollectionTags(Collection c)                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -604,7 +598,7 @@ extern OSErr
 GetIndexedCollectionTag(
   Collection       c,
   SInt32           tagIndex,
-  CollectionTag *  tag)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CollectionTag *  tag)                                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -619,7 +613,7 @@ GetIndexedCollectionTag(
 extern SInt32 
 CountTaggedCollectionItems(
   Collection      c,
-  CollectionTag   tag)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CollectionTag   tag)                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -637,7 +631,7 @@ GetTaggedCollectionItem(
   CollectionTag   tag,
   SInt32          whichItem,
   SInt32 *        itemSize,
-  void *          itemData)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *          itemData)                                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -657,7 +651,7 @@ GetTaggedCollectionItemInfo(
   SInt32 *        id,
   SInt32 *        itemIndex,
   SInt32 *        itemSize,
-  SInt32 *        attributes)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32 *        attributes)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -673,7 +667,7 @@ extern void
 PurgeCollection(
   Collection   c,
   SInt32       whichAttributes,
-  SInt32       matchingAttributes)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32       matchingAttributes)                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -688,7 +682,7 @@ PurgeCollection(
 extern void 
 PurgeCollectionTag(
   Collection      c,
-  CollectionTag   tag)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CollectionTag   tag)                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -701,7 +695,7 @@ PurgeCollectionTag(
  *    Non-Carbon CFM:   in CollectionsLib 1.0 and later
  */
 extern void 
-EmptyCollection(Collection c)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+EmptyCollection(Collection c)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -716,7 +710,7 @@ extern OSErr
 FlattenCollection(
   Collection             c,
   CollectionFlattenUPP   flattenProc,
-  void *                 refCon)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *                 refCon)                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -734,7 +728,7 @@ FlattenPartialCollection(
   CollectionFlattenUPP   flattenProc,
   void *                 refCon,
   SInt32                 whichAttributes,
-  SInt32                 matchingAttributes)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32                 matchingAttributes)                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -750,7 +744,7 @@ extern OSErr
 UnflattenCollection(
   Collection             c,
   CollectionFlattenUPP   flattenProc,
-  void *                 refCon)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *                 refCon)                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -763,7 +757,7 @@ UnflattenCollection(
  *    Non-Carbon CFM:   in CollectionsLib 1.0 and later
  */
 extern CollectionExceptionUPP 
-GetCollectionExceptionProc(Collection c)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetCollectionExceptionProc(Collection c)                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -778,7 +772,7 @@ GetCollectionExceptionProc(Collection c)                      AVAILABLE_MAC_OS_X
 extern void 
 SetCollectionExceptionProc(
   Collection               c,
-  CollectionExceptionUPP   exceptionProc)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CollectionExceptionUPP   exceptionProc)                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -791,7 +785,7 @@ SetCollectionExceptionProc(
  *    Non-Carbon CFM:   in CollectionsLib 1.0 and later
  */
 extern Collection 
-GetNewCollection(SInt16 collectionID)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetNewCollection(SInt16 collectionID)                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -811,7 +805,7 @@ AddCollectionItemHdl(
   Collection      aCollection,
   CollectionTag   tag,
   SInt32          id,
-  Handle          itemData)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle          itemData)                                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -828,7 +822,7 @@ GetCollectionItemHdl(
   Collection      aCollection,
   CollectionTag   tag,
   SInt32          id,
-  Handle          itemData)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle          itemData)                                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -844,7 +838,7 @@ extern OSErr
 ReplaceIndexedCollectionItemHdl(
   Collection   aCollection,
   SInt32       itemIndex,
-  Handle       itemData)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle       itemData)                                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -860,7 +854,7 @@ extern OSErr
 GetIndexedCollectionItemHdl(
   Collection   aCollection,
   SInt32       itemIndex,
-  Handle       itemData)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle       itemData)                                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -875,7 +869,7 @@ GetIndexedCollectionItemHdl(
 extern OSErr 
 FlattenCollectionToHdl(
   Collection   aCollection,
-  Handle       flattened)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle       flattened)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -890,7 +884,7 @@ FlattenCollectionToHdl(
 extern OSErr 
 UnflattenCollectionFromHdl(
   Collection   aCollection,
-  Handle       flattened)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle       flattened)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 

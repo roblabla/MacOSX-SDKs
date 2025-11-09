@@ -149,6 +149,7 @@ CSEXTERN CFStringRef kColorSyncConvertQuality;
 
 /* Conversion options */
 CSEXTERN CFStringRef kColorSyncConvertThreadCount; /* applies to large amounts of data; 0 for number of CPUs */
+CSEXTERN CFStringRef kColorSyncConvertUseVectorUnit; /* applies to large amounts of data; CFBooleanRef value; default true*/
 
 /* Public keys for copying transform properties */
 
@@ -246,7 +247,7 @@ CSEXTERN CFStringRef kColorSyncConversionOutChan;    /* CFSTR("com.apple.cmm.Out
  * Black Point Compensation: represented as an CFArray of CFNumbers (Float32)
  *
  * 1. Scaling in Luminance: CFArray containing two numbers.
- * 2. Sc aling inn XYZ: CFArray containing six numbers.
+ * 2. Scaling in XYZ: CFArray containing six numbers.
  */
  
 CSEXTERN CFStringRef kColorSyncConversionBPC;   /* CFSTR("com.apple.cmm.BPC") */

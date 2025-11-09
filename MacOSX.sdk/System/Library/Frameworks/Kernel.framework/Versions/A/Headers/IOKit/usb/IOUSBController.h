@@ -1,20 +1,21 @@
 /*
- * Copyright (c) 1998-2010 Apple Computer, Inc. All rights reserved.
+ * Copyright © 1998-2012 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
- * The contents of this file constitute Original Code as defined in and
- * are subject to the Apple Public Source License Version 1.2 (the
- * "License").  You may not use this file except in compliance with the
- * License.  Please obtain a copy of the License at
- * http://www.apple.com/publicsource and read it before using this file.
+ * This file contains Original Code and/or Modifications of Original Code
+ * as defined in and that are subject to the Apple Public Source License
+ * Version 2.0 (the 'License'). You may not use this file except in
+ * compliance with the License. Please obtain a copy of the License at
+ * http://www.opensource.apple.com/apsl/ and read it before using this
+ * file.
  * 
- * This Original Code and all software distributed under the License are
- * distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+ * The Original Code and all software distributed under the License are
+ * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
  * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.  
- * Please see the License for the specific language governing rights and 
+ * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
+ * Please see the License for the specific language governing rights and
  * limitations under the License.
  * 
  * @APPLE_LICENSE_HEADER_END@
@@ -80,12 +81,27 @@ enum
 	kErrataUHCISupportsResumeDetectOnConnect	= (1 << 21),	// UHCI controller will generate a ResumeDetect interrupt while in Global Suspend if a device is plugged in
 	kErrataDontUseCompanionController			= (1 << 22),	// For systems which will end up being EHCI only
 	kErrataIgnoreRootHubPowerClearFeature		= (1 << 23),	// MCP89 - don't power off the root hub ports
-	kErrataDisablePCIeLinkOnSleep				= (1 << 24)		// some controllers require us to do some extra work in the PCIe bridge on sleep.. we just set a property
+	kErrataDisablePCIeLinkOnSleep				= (1 << 24),	// some controllers require us to do some extra work in the PCIe bridge on sleep.. we just set a property
+                                                                // bit 25 is available again
+    kErrataEHCIUseRLvalue                       = (1 << 26)     // we want to program Control and Bulk QHs with the RL on some controllers
 };
 
 enum
 {
     kUSBWatchdogTimeoutMS = 1000
+};
+
+
+// Here are some constants which really need to be moved to IOPCIFamily
+// This is a Power Management Register Block (section 3.2 of the PCI Power Management Spec)
+enum 
+{
+	kPCIPMRegBlockCapID = 0,		// Capability ID
+	kPCIPMRegBlockNext  = 1,		// NextItemPtr
+	kPCIPMRegBlockPMC	= 2,		// Power Management Capabilities
+	kPCIPMRegBlockPMCSR = 4,		// Power Management Control/Status Register
+	kPCIPMRegBlock_BSE	= 6,		// PMCSR Bridge Support Extensions
+	kPCIPMRegBlockData	= 7			// Data
 };
 
 
@@ -173,6 +189,7 @@ class IOUSBController : public IOUSBBus
     friend class IOUSBControllerV2;
     friend class IOUSBControllerV3;
     friend class AppleUSBHub;
+	friend class IOUSBRootHubDevice;
 
 protected:
 
@@ -197,13 +214,14 @@ protected:
         UInt32				_currentSizeOfIsocCommandPool;
         UInt8				_controllerSpeed;					// Controller speed, passed down for splits
         thread_call_t		_terminatePCCardThread;				// Obsolete
-        bool				_addressPending[128];
+        bool				_addressPending[kUSBMaxDevices+2];
 		SInt32				_activeIsochTransfers;				// isochronous transfers in the queue
 		IOService			*_provider;							// common name for our provider
 		bool				_controllerCanSleep;				// true iff the controller is able to support sleep/wake
 		bool				_needToClose;
 		UInt32				_isochMaxBusStall;					// value (in ns) of the maximum PCI bus stall allowed for Isoch.
 		SInt32				_activeInterruptTransfers;			// interrupt transfers in the queue
+		IOUSBRootHubDevice	*_rootHubDeviceSS;
     };
     ExpansionData *_expansionData;
 	
@@ -211,12 +229,16 @@ protected:
     //
 
 public:
+	static volatile UInt32	gExternalNonSSPortsUsingExtraCurrent;
+
     virtual bool 		init( OSDictionary *  propTable );
     virtual bool 		start( IOService *  provider );
     virtual void 		stop( IOService * provider );
     virtual bool 		finalize(IOOptionBits options);
     virtual IOReturn 	message( UInt32 type, IOService * provider,  void * argument = 0 );
     virtual bool		didTerminate( IOService * provider, IOOptionBits options, bool * defer );
+	
+    void 				ReturnUSBCommand( IOUSBCommand *  command );
 	
 protected:
 		
@@ -569,15 +591,15 @@ public:
         @field number Endpoint number
 	@field direction Endpoint direction: kUSBOut, kUSBIn, kUSBAnyDirn
 	@field transferType Type of endpoint: kUSBControl, kUSBIsoc, kUSBBulk, kUSBInterrupt
-	@field maxPacketSize Maximum packet size for endpoint
+	@field maxPacketSize Maximum packet size for endpoint, which will include the multiplier for HS High Bandwidth endpoints
 	@field interval Polling interval in milliseconds (only relevent for Interrupt endpoints)
     */
     struct Endpoint {
         IOUSBEndpointDescriptor	*	descriptor;
         UInt8 				number;
-        UInt8				direction;	// in, out
+        UInt8				direction;		// in, out
         UInt8				transferType;	// cntrl, bulk, isoc, int
-        UInt16				maxPacketSize;
+        UInt16				maxPacketSize;	// MPS (includes the multiplier for HS High Bandwidth Isoch endpoints)
         UInt8				interval;
     };
 
@@ -1091,10 +1113,22 @@ protected:
 	IOACPIPlatformDevice *			CopyACPIDevice( IORegistryEntry * device );
 	bool							DumpUSBACPI( IORegistryEntry * acpiDevice );
 	bool							IsPortInternal( IORegistryEntry * provider, UInt32 portnum, UInt32 locationID );
+    bool                            GetInternalHubErrataBits(IORegistryEntry* provider, UInt32 portnum, UInt32 locationID, UInt32 *errataBits);
+    bool                            IsControllerMuxed( IORegistryEntry * provider, UInt32 locationID );
+#ifndef __OPEN_SOURCE__
+    bool                            IsPortMuxed(IORegistryEntry * provider, UInt32 portnum, UInt32 locationID, char *muxName);
+#endif
+	UInt8							GetControllerSpeed() { return (_expansionData ? _expansionData->_controllerSpeed : 255); }
 	
 private:
 	bool							HasExpressCard( IORegistryEntry * acpiDevice, UInt32 * portnum );
 	bool							CheckACPIUPCTable( IORegistryEntry * acpiDevice, UInt32 portnum, UInt32 locationID );
+#ifndef __OPEN_SOURCE__
+    bool                            CheckACPIUPCTableForMuxedMethods( IORegistryEntry * acpiDevice, UInt32 portnum, UInt32 locationID, char* muxName );
+#endif
+    bool                            CheckACPIUPCTableForInternalHubErrataBits( IORegistryEntry* acpiDevice, UInt32 portnum, UInt32 locationID, UInt32* errataBits );
+	int 							calculateUSBDepth(UInt32 locationID);
+	int 							calculateACPIDepth(int hubUSBDepth);
 };
 
 //================================================================================================
@@ -1114,5 +1148,5 @@ public:
 	IOLock *lock;
 };
 
-#endif /* ! _IOKIT_IOUSBCONTROLLER_H */
+#endif
 

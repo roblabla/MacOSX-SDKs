@@ -14,7 +14,7 @@
 // ================================================================
 //	Action Support
 // ================================================================
-// This API allows developers to populate Address Book.app's roll-over menus with custom
+// This API allows developers to populate Contacts.app's roll-over menus with custom
 // entries. Your NSBundle must implement actionProperty:, titleForPerson:identifier: and
 // performActionForPerson:identifier:.
 //

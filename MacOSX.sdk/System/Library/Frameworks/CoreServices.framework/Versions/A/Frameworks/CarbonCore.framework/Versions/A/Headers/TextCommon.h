@@ -3,9 +3,7 @@
  
      Contains:   TextEncoding-related types and constants, and prototypes for related functions
  
-     Version:    CarbonCore-960.18~3
- 
-     Copyright:  © 1995-2008 Apple Inc. All rights reserved.
+     Copyright:  © 1995-2012 Apple Inc. All rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -22,7 +20,7 @@
 
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -170,7 +168,8 @@ enum {
   kTextEncodingUnicodeV4_0      = 0x0108,
   kTextEncodingUnicodeV5_0      = 0x010A,
   kTextEncodingUnicodeV5_1      = 0x010B, /* No constant for Unicode 5.2, but leave an opening.*/
-  kTextEncodingUnicodeV6_0      = 0x010D /* Adds many symbols, including emoji support.*/
+  kTextEncodingUnicodeV6_0      = 0x010D, /* Adds many symbols, including emoji support.*/
+  kTextEncodingUnicodeV6_1      = 0x010E  /* Adds emoji variation sequences, properties changes.*/
 };
 
 /* ISO 8-bit and 7-bit encodings begin at 0x200*/
@@ -240,7 +239,8 @@ enum {
   kTextEncodingJIS_X0213_MenKuTen = 0x0629, /* JIS X0213 in plane-row-column notation (3 bytes)*/
   kTextEncodingGB_2312_80       = 0x0630,
   kTextEncodingGBK_95           = 0x0631, /* annex to GB 13000-93; for Windows 95; EUC-CN extended*/
-  kTextEncodingGB_18030_2000    = 0x0632,
+  kTextEncodingGB_18030_2000    = 0x0632, /* This is actually implemented as GB_18030_2005*/
+  kTextEncodingGB_18030_2005    = 0x0632,
   kTextEncodingKSC_5601_87      = 0x0640, /* same as KSC 5601-92 without Johab annex*/
   kTextEncodingKSC_5601_92_Johab = 0x0641, /* KSC 5601-92 Johab annex*/
   kTextEncodingCNS_11643_92_P1  = 0x0651, /* CNS 11643-1992 plane 1*/
@@ -819,7 +819,7 @@ extern TextEncoding
 CreateTextEncoding(
   TextEncodingBase      encodingBase,
   TextEncodingVariant   encodingVariant,
-  TextEncodingFormat    encodingFormat)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TextEncodingFormat    encodingFormat)                       __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -831,7 +831,7 @@ CreateTextEncoding(
  *    Non-Carbon CFM:   in TextCommon 1.1 and later
  */
 extern TextEncodingBase 
-GetTextEncodingBase(TextEncoding encoding)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetTextEncodingBase(TextEncoding encoding)                    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -843,7 +843,7 @@ GetTextEncodingBase(TextEncoding encoding)                    AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in TextCommon 1.1 and later
  */
 extern TextEncodingVariant 
-GetTextEncodingVariant(TextEncoding encoding)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetTextEncodingVariant(TextEncoding encoding)                 __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -855,7 +855,7 @@ GetTextEncodingVariant(TextEncoding encoding)                 AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in TextCommon 1.1 and later
  */
 extern TextEncodingFormat 
-GetTextEncodingFormat(TextEncoding encoding)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetTextEncodingFormat(TextEncoding encoding)                  __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -867,7 +867,7 @@ GetTextEncodingFormat(TextEncoding encoding)                  AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in TextCommon 1.1 and later
  */
 extern TextEncoding 
-ResolveDefaultTextEncoding(TextEncoding encoding)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+ResolveDefaultTextEncoding(TextEncoding encoding)             __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -888,7 +888,7 @@ GetTextEncodingName(
   ByteCount *                oNameLength,
   RegionCode *               oActualRegion,            /* can be NULL */
   TextEncoding *             oActualEncoding,          /* can be NULL */
-  TextPtr                    oEncodingName)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TextPtr                    oEncodingName)                   __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -900,7 +900,7 @@ GetTextEncodingName(
  *    Non-Carbon CFM:   in TextCommon 1.2.1 and later
  */
 extern OSStatus 
-TECGetInfo(TECInfoHandle * tecInfo)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+TECGetInfo(TECInfoHandle * tecInfo)                           __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -918,7 +918,7 @@ UpgradeScriptInfoToTextEncoding(
   LangCode           iTextLanguageID,
   RegionCode         iRegionID,
   ConstStr255Param   iTextFontname,
-  TextEncoding *     oEncoding)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TextEncoding *     oEncoding)                               __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -934,7 +934,7 @@ RevertTextEncodingToScriptInfo(
   TextEncoding   iEncoding,
   ScriptCode *   oTextScriptID,
   LangCode *     oTextLanguageID,       /* can be NULL */
-  Str255         oTextFontname)         /* can be NULL */     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Str255         oTextFontname)         /* can be NULL */     __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -987,7 +987,7 @@ GetTextEncodingFromScriptInfo(
   ScriptCode      iTextScriptID,
   LangCode        iTextLanguageID,
   RegionCode      iTextRegionID,
-  TextEncoding *  oEncoding)                                  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  TextEncoding *  oEncoding)                                  __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 
 /*
@@ -1035,7 +1035,7 @@ extern OSStatus
 GetScriptInfoFromTextEncoding(
   TextEncoding   iEncoding,
   ScriptCode *   oTextScriptID,
-  LangCode *     oTextLanguageID)       /* can be NULL */     AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  LangCode *     oTextLanguageID)       /* can be NULL */     __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 
 
@@ -1051,7 +1051,7 @@ extern OSStatus
 NearestMacTextEncodings(
   TextEncoding    generalEncoding,
   TextEncoding *  bestMacEncoding,
-  TextEncoding *  alternateMacEncoding)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TextEncoding *  alternateMacEncoding)                       __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -1067,7 +1067,7 @@ UCGetCharProperty(
   const UniChar *        charPtr,
   UniCharCount           textLength,
   UCCharPropertyType     propType,
-  UCCharPropertyValue *  propValue)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UCCharPropertyValue *  propValue)                           __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 

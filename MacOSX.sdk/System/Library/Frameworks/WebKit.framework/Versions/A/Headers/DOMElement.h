@@ -79,7 +79,6 @@ enum {
 - (void)focus AVAILABLE_IN_WEBKIT_VERSION_4_0;
 - (void)blur AVAILABLE_IN_WEBKIT_VERSION_4_0;
 - (void)scrollIntoView:(BOOL)alignWithTop AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-- (BOOL)contains:(DOMElement *)element AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
 - (void)scrollIntoViewIfNeeded:(BOOL)centerIfNeeded AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
 - (void)scrollByLines:(int)lines AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
 - (void)scrollByPages:(int)pages AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;

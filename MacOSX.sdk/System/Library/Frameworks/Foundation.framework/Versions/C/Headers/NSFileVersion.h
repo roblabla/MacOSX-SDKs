@@ -1,6 +1,6 @@
 /*
 	NSFileVersion.h
-	Copyright (c) 2010-2011, Apple Inc.
+	Copyright (c) 2010-2012, Apple Inc.
 	All rights reserved.
 */
 
@@ -8,23 +8,21 @@
 
 @class NSArray, NSDate, NSDictionary, NSError, NSString, NSURL;
 
-enum {
+typedef NS_OPTIONS(NSUInteger, NSFileVersionAddingOptions) {
 
     /* Whether +addVersionOfItemAtURL:withContentsOfURL:options:error: can move the new version contents file into the version store instead of copying it. Moving is much faster. See the comment for -temporaryDirectoryURLForNewVersionOfItemAtURL: for an example of when this useful.
     */
     NSFileVersionAddingByMoving = 1 << 0
 
 };
-typedef NSUInteger NSFileVersionAddingOptions;
 
-enum {
+typedef NS_OPTIONS(NSUInteger, NSFileVersionReplacingOptions) {
 
     /* Whether -replaceItemAtURL:options:error: must move the version's contents out of the version store instead of copying it. This is useful when you want to promote a version's contents to a separate file. You wouldn't use this to restore a version of a file.
     */
     NSFileVersionReplacingByMoving = 1 << 0
 
 };
-typedef NSUInteger NSFileVersionReplacingOptions;
 
 /* Instances of NSFileVersion for the same version of the same file are equal, and instances of NSFileVersion for different versions of the same file are not equal, but the equality of NSFileVersions for different files is undefined. Repeated invocations of the methods that return NSFileVersions do not necessarily return the exact same instance of NSFileVersion.
 */
@@ -41,6 +39,7 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
     NSString *_localizedComputerName;
     NSDate *_modificationDate;
     BOOL _isResolved;
+    BOOL _contentsURLIsAccessed;
     id _reserved1;
     id _reserved2;
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2010 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2011 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -73,7 +73,6 @@
 #include <sys/uio.h>
 #include <sys/vm.h>		/* XXX */
 #include <sys/sysctl.h>
-
 
 
 /*

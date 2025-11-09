@@ -27,13 +27,13 @@
 	#include <AudioToolbox/AUGraph.h>
 	#include <AudioToolbox/AudioConverter.h>
 	#include <AudioToolbox/ExtendedAudioFile.h>
+	#include <AudioToolbox/MusicPlayer.h>
+	#include <AudioToolbox/CAFFile.h>
 	#if !TARGET_OS_IPHONE
 		#include <AudioToolbox/AudioFileComponent.h>
 		#include <AudioToolbox/AudioUnitUtilities.h>
 		#include <AudioToolbox/AUMIDIController.h>
-		#include <AudioToolbox/CAFFile.h>
 		#include <AudioToolbox/CoreAudioClock.h>
-		#include <AudioToolbox/MusicPlayer.h>
 	#endif
 #else
 	#include <AudioConverter.h>

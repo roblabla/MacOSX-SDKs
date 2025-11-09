@@ -1,5 +1,5 @@
 /*	NSData.h
-	Copyright (c) 1994-2011, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2012, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -10,56 +10,45 @@
 
 /****************	Read/Write Options	****************/
 
-enum {
+typedef NS_OPTIONS(NSUInteger, NSDataReadingOptions) {
     NSDataReadingMappedIfSafe =   1UL << 0,	// Hint to map the file in if possible and safe
     NSDataReadingUncached = 1UL << 1,	// Hint to get the file not to be cached in the kernel
-#if MAC_OS_X_VERSION_10_7 <= MAC_OS_X_VERSION_MAX_ALLOWED || __IPHONE_5_0 <= __IPHONE_OS_VERSION_MAX_ALLOWED
-    NSDataReadingMappedAlways = 1UL << 3,	// Hint to map the file in if possible. This takes precedence over NSDataReadingMappedIfSafe if both are given.
-#endif
-};
-typedef NSUInteger NSDataReadingOptions;
-
-enum {	                          
-    NSDataWritingAtomic = 1UL << 0,	// Hint to use auxiliary file when saving; equivalent to atomically:YES
+    NSDataReadingMappedAlways NS_ENUM_AVAILABLE(10_7, 5_0) = 1UL << 3,	// Hint to map the file in if possible. This takes precedence over NSDataReadingMappedIfSafe if both are given.
     
-#if __IPHONE_4_0 <= __IPHONE_OS_VERSION_MAX_ALLOWED
-    NSDataWritingFileProtectionNone                                 = 0x10000000,
-    NSDataWritingFileProtectionComplete                             = 0x20000000,
-#if __IPHONE_5_0 <= __IPHONE_OS_VERSION_MAX_ALLOWED
-    NSDataWritingFileProtectionCompleteUnlessOpen                   = 0x30000000,
-    NSDataWritingFileProtectionCompleteUntilFirstUserAuthentication = 0x40000000,
-#endif
-    NSDataWritingFileProtectionMask                                 = 0xf0000000
-#endif
-};
-typedef NSUInteger NSDataWritingOptions;
-
-
-enum {	// Options with old names for NSData reading methods. Please stop using these old names.
+    // Options with old names for NSData reading methods. Please stop using these old names.
     NSDataReadingMapped = NSDataReadingMappedIfSafe,	// Deprecated name for NSDataReadingMappedIfSafe
     NSMappedRead = NSDataReadingMapped,			// Deprecated name for NSDataReadingMapped
     NSUncachedRead = NSDataReadingUncached		// Deprecated name for NSDataReadingUncached
 };
 
-enum {	// Options with old names for NSData writing methods. Please stop using these old names.
+typedef NS_OPTIONS(NSUInteger, NSDataWritingOptions) {
+    NSDataWritingAtomic = 1UL << 0,	// Hint to use auxiliary file when saving; equivalent to atomically:YES
+    NSDataWritingWithoutOverwriting NS_ENUM_AVAILABLE(10_8, 6_0) = 1UL << 1, // Hint to return prevent overwriting an existing file. Cannot be combined with NSDataWritingAtomic.
+
+    NSDataWritingFileProtectionNone NS_ENUM_AVAILABLE_IOS(4_0)                                  = 0x10000000,
+    NSDataWritingFileProtectionComplete NS_ENUM_AVAILABLE_IOS(4_0)                              = 0x20000000,
+    NSDataWritingFileProtectionCompleteUnlessOpen NS_ENUM_AVAILABLE_IOS(5_0)                    = 0x30000000,
+    NSDataWritingFileProtectionCompleteUntilFirstUserAuthentication NS_ENUM_AVAILABLE_IOS(5_0)  = 0x40000000,
+    NSDataWritingFileProtectionMask NS_ENUM_AVAILABLE_IOS(4_0)                                  = 0xf0000000,
+
+    // Options with old names for NSData writing methods. Please stop using these old names.
     NSAtomicWrite = NSDataWritingAtomic	    // Deprecated name for NSDataWritingAtomic
 };
 
+
 /****************	Data Search Options	****************/
-#if MAC_OS_X_VERSION_10_6 <= MAC_OS_X_VERSION_MAX_ALLOWED || __IPHONE_4_0 <= __IPHONE_OS_VERSION_MAX_ALLOWED
-enum {
+
+typedef NS_OPTIONS(NSUInteger, NSDataSearchOptions) {
     NSDataSearchBackwards = 1UL << 0,
     NSDataSearchAnchored = 1UL << 1
-};
-#endif
-typedef NSUInteger NSDataSearchOptions;
+} NS_ENUM_AVAILABLE(10_6, 4_0);
 
 /****************	Immutable Data		****************/
 
-@interface NSData : NSObject <NSCopying, NSMutableCopying, NSCoding>
+@interface NSData : NSObject <NSCopying, NSMutableCopying, NSSecureCoding>
 
 - (NSUInteger)length;
-- (const void *)bytes;
+- (const void *)bytes NS_RETURNS_INNER_POINTER;
 
 @end
 
@@ -117,7 +106,7 @@ typedef NSUInteger NSDataSearchOptions;
 
 @interface NSMutableData : NSData
 
-- (void *)mutableBytes;
+- (void *)mutableBytes NS_RETURNS_INNER_POINTER;
 - (void)setLength:(NSUInteger)length;
 
 @end

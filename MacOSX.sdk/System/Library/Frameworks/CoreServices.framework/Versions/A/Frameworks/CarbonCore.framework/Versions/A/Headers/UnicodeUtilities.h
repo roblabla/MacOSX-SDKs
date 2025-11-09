@@ -3,9 +3,7 @@
  
      Contains:   Types, constants, prototypes for Unicode Utilities (Unicode input and text utils)
  
-     Version:    CarbonCore-960.18~3
- 
-     Copyright:  © 1997-2008 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1997-2011 by Apple Inc. All rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -39,7 +37,7 @@
 
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -393,7 +391,7 @@ typedef STACK_UPP_TYPE(IndexToUCStringProcPtr)                  IndexToUCStringU
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern IndexToUCStringUPP
-NewIndexToUCStringUPP(IndexToUCStringProcPtr userRoutine)     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+NewIndexToUCStringUPP(IndexToUCStringProcPtr userRoutine)     __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /*
  *  DisposeIndexToUCStringUPP()
@@ -404,7 +402,7 @@ NewIndexToUCStringUPP(IndexToUCStringProcPtr userRoutine)     AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeIndexToUCStringUPP(IndexToUCStringUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+DisposeIndexToUCStringUPP(IndexToUCStringUPP userUPP)         __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /*
  *  InvokeIndexToUCStringUPP()
@@ -421,7 +419,7 @@ InvokeIndexToUCStringUPP(
   void *                 refcon,
   CFStringRef *          outString,
   UCTypeSelectOptions *  tsOptions,
-  IndexToUCStringUPP     userUPP)                             AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  IndexToUCStringUPP     userUPP)                             __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 #if __MACH__
   #ifdef __cplusplus
@@ -533,7 +531,7 @@ UCKeyTranslate(
   UInt32 *                  deadKeyState,
   UniCharCount              maxStringLength,
   UniCharCount *            actualStringLength,
-  UniChar                   unicodeString[])                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UniChar                   unicodeString[])                  __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /* Standard collation functions*/
@@ -551,7 +549,7 @@ UCCreateCollator(
   LocaleRef                locale,
   LocaleOperationVariant   opVariant,
   UCCollateOptions         options,
-  CollatorRef *            collatorRef)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CollatorRef *            collatorRef)                       __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -569,7 +567,7 @@ UCGetCollationKey(
   UniCharCount       textLength,
   ItemCount          maxKeySize,
   ItemCount *        actualKeySize,
-  UCCollationValue   collationKey[])                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UCCollationValue   collationKey[])                          __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -587,7 +585,7 @@ UCCompareCollationKeys(
   const UCCollationValue *  key2Ptr,
   ItemCount                 key2Length,
   Boolean *                 equivalent,
-  SInt32 *                  order)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32 *                  order)                            __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -606,7 +604,7 @@ UCCompareText(
   const UniChar *  text2Ptr,
   UniCharCount     text2Length,
   Boolean *        equivalent,
-  SInt32 *         order)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32 *         order)                                     __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -618,7 +616,7 @@ UCCompareText(
  *    Non-Carbon CFM:   in UnicodeUtilitiesLib 8.6 and later
  */
 extern OSStatus 
-UCDisposeCollator(CollatorRef * collatorRef)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+UCDisposeCollator(CollatorRef * collatorRef)                  __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /* Simple collation using default locale*/
@@ -639,7 +637,7 @@ UCCompareTextDefault(
   const UniChar *    text2Ptr,
   UniCharCount       text2Length,
   Boolean *          equivalent,
-  SInt32 *           order)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32 *           order)                                   __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -661,7 +659,7 @@ UCCompareTextNoLocale(
   const UniChar *    text2Ptr,
   UniCharCount       text2Length,
   Boolean *          equivalent,
-  SInt32 *           order)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32 *           order)                                   __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -705,7 +703,7 @@ UCCreateTextBreakLocator(
   LocaleRef                locale,
   LocaleOperationVariant   opVariant,
   UCTextBreakType          breakTypes,
-  TextBreakLocatorRef *    breakRef)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
+  TextBreakLocatorRef *    breakRef)                          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_6, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -729,7 +727,7 @@ UCFindTextBreak(
   const UniChar *       textPtr,
   UniCharCount          textLength,
   UniCharArrayOffset    startOffset,
-  UniCharArrayOffset *  breakOffset)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
+  UniCharArrayOffset *  breakOffset)                          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_6, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -746,7 +744,7 @@ UCFindTextBreak(
  *    Non-Carbon CFM:   in UnicodeUtilitiesLib 9.0 and later
  */
 extern OSStatus 
-UCDisposeTextBreakLocator(TextBreakLocatorRef * breakRef)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
+UCDisposeTextBreakLocator(TextBreakLocatorRef * breakRef)     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_6, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -795,7 +793,7 @@ UCTypeSelectCreateSelector(
   LocaleRef                locale,            /* can be NULL */
   LocaleOperationVariant   opVariant,
   UCCollateOptions         options,
-  UCTypeSelectRef *        newSelector)                       AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  UCTypeSelectRef *        newSelector)                       __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 
 
@@ -820,7 +818,7 @@ UCTypeSelectCreateSelector(
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-UCTypeSelectFlushSelectorData(UCTypeSelectRef ref)            AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+UCTypeSelectFlushSelectorData(UCTypeSelectRef ref)            __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 
 
@@ -847,7 +845,7 @@ UCTypeSelectFlushSelectorData(UCTypeSelectRef ref)            AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-UCTypeSelectReleaseSelector(UCTypeSelectRef * ref)            AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+UCTypeSelectReleaseSelector(UCTypeSelectRef * ref)            __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 
 
@@ -888,7 +886,7 @@ extern Boolean
 UCTypeSelectWouldResetBuffer(
   UCTypeSelectRef   inRef,
   CFStringRef       inText,            /* can be NULL */
-  double            inEventTime)                              AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  double            inEventTime)                              __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 
 
@@ -941,7 +939,7 @@ UCTypeSelectAddKeyToSelector(
   UCTypeSelectRef   inRef,
   CFStringRef       inText,
   double            inEventTime,
-  Boolean *         updateFlag)                               AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  Boolean *         updateFlag)                               __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 
 
@@ -988,7 +986,7 @@ extern OSStatus
 UCTypeSelectCompare(
   UCTypeSelectRef              ref,
   CFStringRef                  inText,
-  UCTypeSelectCompareResult *  result)                        AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  UCTypeSelectCompareResult *  result)                        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 
 
@@ -1057,7 +1055,7 @@ UCTypeSelectFindItem(
   void *               listDataPtr,       /* can be NULL */
   void *               refcon,            /* can be NULL */
   IndexToUCStringUPP   userUPP,
-  UInt32 *             closestItem)                           AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  UInt32 *             closestItem)                           __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 
 
@@ -1154,7 +1152,7 @@ UCTypeSelectWalkList(
   void *               listDataPtr,       /* can be NULL */
   void *               refcon,            /* can be NULL */
   IndexToUCStringUPP   userUPP,
-  UInt32 *             closestItem)                           AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  UInt32 *             closestItem)                           __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 
 

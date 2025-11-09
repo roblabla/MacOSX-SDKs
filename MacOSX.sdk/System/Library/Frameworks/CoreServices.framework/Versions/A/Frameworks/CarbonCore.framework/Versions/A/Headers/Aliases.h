@@ -2,16 +2,10 @@
      File:       CarbonCore/Aliases.h
  
      Contains:   Alias Manager Interfaces.
+                 The contents of this header file are deprecated.
+                 Use Foundation or CoreFoundation URL Bookmarks instead.
  
-     Version:    CarbonCore-960.18~3
- 
-     Copyright:  © 1989-2008 by Apple Computer, Inc., all rights reserved
- 
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
- 
-                     http://developer.apple.com/bugreporter/
- 
+     Copyright:  Â© 1989-2011 by Apple Inc. All rights reserved.
 */
 #ifndef __ALIASES__
 #define __ALIASES__
@@ -26,7 +20,7 @@
 
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -133,8 +127,7 @@ typedef STACK_UPP_TYPE(AliasFilterProcPtr)                      AliasFilterUPP;
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern AliasFilterUPP
-NewAliasFilterUPP(AliasFilterProcPtr userRoutine)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
+NewAliasFilterUPP(AliasFilterProcPtr userRoutine)             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 /*
  *  DisposeAliasFilterUPP()
  *  
@@ -144,7 +137,7 @@ NewAliasFilterUPP(AliasFilterProcPtr userRoutine)             AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeAliasFilterUPP(AliasFilterUPP userUPP)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeAliasFilterUPP(AliasFilterUPP userUPP)                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 /*
  *  InvokeAliasFilterUPP()
@@ -159,7 +152,7 @@ InvokeAliasFilterUPP(
   CInfoPBPtr      cpbPtr,
   Boolean *       quitFlag,
   Ptr             myDataPtr,
-  AliasFilterUPP  userUPP)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AliasFilterUPP  userUPP)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 #if __MACH__
   #ifdef __cplusplus
@@ -191,7 +184,7 @@ extern OSErr
 FSNewAlias(
   const FSRef *  fromFile,       /* can be NULL */
   const FSRef *  target,
-  AliasHandle *  inAlias)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AliasHandle *  inAlias)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -208,7 +201,7 @@ FSNewAlias(
 extern OSErr 
 FSNewAliasMinimal(
   const FSRef *  target,
-  AliasHandle *  inAlias)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AliasHandle *  inAlias)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -226,7 +219,7 @@ extern OSErr
 FSIsAliasFile(
   const FSRef *  fileRef,
   Boolean *      aliasFileFlag,
-  Boolean *      folderFlag)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *      folderFlag)                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -247,7 +240,7 @@ FSResolveAliasWithMountFlags(
   AliasHandle     inAlias,
   FSRef *         target,
   Boolean *       wasChanged,
-  unsigned long   mountFlags)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned long   mountFlags)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -267,7 +260,7 @@ FSResolveAlias(
   const FSRef *  fromFile,         /* can be NULL */
   AliasHandle    alias,
   FSRef *        target,
-  Boolean *      wasChanged)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *      wasChanged)                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -288,7 +281,7 @@ FSResolveAliasFileWithMountFlags(
   Boolean         resolveAliasChains,
   Boolean *       targetIsFolder,
   Boolean *       wasAliased,
-  unsigned long   mountFlags)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  unsigned long   mountFlags)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -308,7 +301,7 @@ FSResolveAliasFile(
   FSRef *    theRef,
   Boolean    resolveAliasChains,
   Boolean *  targetIsFolder,
-  Boolean *  wasAliased)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *  wasAliased)                                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -329,7 +322,7 @@ FSFollowFinderAlias(
   AliasHandle   alias,
   Boolean       logon,
   FSRef *       target,
-  Boolean *     wasChanged)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *     wasChanged)                                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -348,7 +341,7 @@ FSUpdateAlias(
   const FSRef *  fromFile,         /* can be NULL */
   const FSRef *  target,
   AliasHandle    alias,
-  Boolean *      wasChanged)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *      wasChanged)                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -399,7 +392,7 @@ FSNewAliasUnicode(
   UniCharCount     targetNameLength,
   const UniChar *  targetName,
   AliasHandle *    inAlias,
-  Boolean *        isDirectory)            /* can be NULL */  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  Boolean *        isDirectory)            /* can be NULL */  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -444,7 +437,7 @@ FSNewAliasMinimalUnicode(
   UniCharCount     targetNameLength,
   const UniChar *  targetName,
   AliasHandle *    inAlias,
-  Boolean *        isDirectory)            /* can be NULL */  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  Boolean *        isDirectory)            /* can be NULL */  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -490,7 +483,7 @@ FSNewAliasFromPath(
   const char *   targetPath,
   OptionBits     flags,
   AliasHandle *  inAlias,
-  Boolean *      isDirectory)        /* can be NULL */        AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  Boolean *      isDirectory)        /* can be NULL */        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -517,7 +510,7 @@ FSMatchAliasBulk(
   FSRef *                aliasList,
   Boolean *              needsUpdate,
   FSAliasFilterProcPtr   aliasFilter,       /* can be NULL */
-  void *                 yourDataPtr)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  void *                 yourDataPtr)       /* can be NULL */ __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -567,7 +560,7 @@ FSCopyAliasInfo(
   HFSUniStr255 *       volumeName,       /* can be NULL */
   CFStringRef *        pathString,       /* can be NULL */
   FSAliasInfoBitmap *  whichInfo,        /* can be NULL */
-  FSAliasInfo *        info)             /* can be NULL */    AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  FSAliasInfo *        info)             /* can be NULL */    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -596,7 +589,7 @@ FSCopyAliasInfo(
  *    Non-Carbon CFM:   not available
  */
 extern Size 
-GetAliasSize(AliasHandle alias)                               AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+GetAliasSize(AliasHandle alias)                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -623,7 +616,7 @@ GetAliasSize(AliasHandle alias)                               AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern OSType 
-GetAliasUserType(AliasHandle alias)                           AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+GetAliasUserType(AliasHandle alias)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -652,7 +645,7 @@ GetAliasUserType(AliasHandle alias)                           AVAILABLE_MAC_OS_X
 extern void 
 SetAliasUserType(
   AliasHandle   alias,
-  OSType        userType)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  OSType        userType)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -679,7 +672,7 @@ SetAliasUserType(
  *    Non-Carbon CFM:   not available
  */
 extern Size 
-GetAliasSizeFromPtr(const AliasRecord * alias)                AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+GetAliasSizeFromPtr(const AliasRecord * alias)                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -706,7 +699,7 @@ GetAliasSizeFromPtr(const AliasRecord * alias)                AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern OSType 
-GetAliasUserTypeFromPtr(const AliasRecord * alias)            AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+GetAliasUserTypeFromPtr(const AliasRecord * alias)            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -735,7 +728,7 @@ GetAliasUserTypeFromPtr(const AliasRecord * alias)            AVAILABLE_MAC_OS_X
 extern void 
 SetAliasUserTypeWithPtr(
   AliasPtr   alias,
-  OSType     userType)                                        AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  OSType     userType)                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /* Functions beyond this point are deprecated*/
@@ -768,7 +761,7 @@ FSMatchAlias(
   FSRef *          aliasList,
   Boolean *        needsUpdate,
   AliasFilterUPP   aliasFilter,
-  void *           yourDataPtr)                               AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  void *           yourDataPtr)                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -797,7 +790,7 @@ FSMatchAliasNoUI(
   FSRef *          aliasList,
   Boolean *        needsUpdate,
   AliasFilterUPP   aliasFilter,
-  void *           yourDataPtr)                               AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  void *           yourDataPtr)                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -829,7 +822,7 @@ extern OSErr
 NewAlias(
   const FSSpec *  fromFile,       /* can be NULL */
   const FSSpec *  target,
-  AliasHandle *   alias)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  AliasHandle *   alias)                                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -861,7 +854,7 @@ NewAlias(
 extern OSErr 
 NewAliasMinimal(
   const FSSpec *  target,
-  AliasHandle *   alias)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  AliasHandle *   alias)                                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -896,7 +889,7 @@ NewAliasMinimalFromFullPath(
   const void *      fullPath,
   ConstStr32Param   zoneName,
   ConstStr31Param   serverName,
-  AliasHandle *     alias)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  AliasHandle *     alias)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -922,7 +915,7 @@ ResolveAlias(
   const FSSpec *  fromFile,         /* can be NULL */
   AliasHandle     alias,
   FSSpec *        target,
-  Boolean *       wasChanged)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  Boolean *       wasChanged)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -950,7 +943,7 @@ extern OSErr
 GetAliasInfo(
   AliasHandle     alias,
   AliasInfoType   itemIndex,
-  Str63           theString)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
+  Str63           theString)                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_3, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -975,7 +968,7 @@ extern OSErr
 IsAliasFile(
   const FSSpec *  fileFSSpec,
   Boolean *       aliasFileFlag,
-  Boolean *       folderFlag)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  Boolean *       folderFlag)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1004,7 +997,7 @@ ResolveAliasWithMountFlags(
   AliasHandle     alias,
   FSSpec *        target,
   Boolean *       wasChanged,
-  unsigned long   mountFlags)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  unsigned long   mountFlags)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1032,7 +1025,7 @@ ResolveAliasFile(
   FSSpec *   theSpec,
   Boolean    resolveAliasChains,
   Boolean *  targetIsFolder,
-  Boolean *  wasAliased)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  Boolean *  wasAliased)                                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /* Deprecated: Use FSResolveAliasFileWithMountFlags instead*/
@@ -1053,7 +1046,7 @@ ResolveAliasFileWithMountFlags(
   Boolean         resolveAliasChains,
   Boolean *       targetIsFolder,
   Boolean *       wasAliased,
-  unsigned long   mountFlags)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  unsigned long   mountFlags)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /* Deprecated:  Use FSFollowFinderAlias instead*/
@@ -1074,7 +1067,7 @@ FollowFinderAlias(
   AliasHandle     alias,
   Boolean         logon,
   FSSpec *        target,
-  Boolean *       wasChanged)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  Boolean *       wasChanged)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /* 
@@ -1104,7 +1097,7 @@ UpdateAlias(
   const FSSpec *  fromFile,         /* can be NULL */
   const FSSpec *  target,
   AliasHandle     alias,
-  Boolean *       wasChanged)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  Boolean *       wasChanged)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -1135,7 +1128,7 @@ MatchAlias(
   FSSpecArrayPtr   aliasList,
   Boolean *        needsUpdate,
   AliasFilterUPP   aliasFilter,
-  void *           yourDataPtr)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  void *           yourDataPtr)                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -1165,7 +1158,7 @@ ResolveAliasFileWithMountFlagsNoUI(
   Boolean         resolveAliasChains,
   Boolean *       targetIsFolder,
   Boolean *       wasAliased,
-  unsigned long   mountFlags)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  unsigned long   mountFlags)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -1194,7 +1187,7 @@ MatchAliasNoUI(
   FSSpecArrayPtr   aliasList,
   Boolean *        needsUpdate,
   AliasFilterUPP   aliasFilter,
-  void *           yourDataPtr)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  void *           yourDataPtr)                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 

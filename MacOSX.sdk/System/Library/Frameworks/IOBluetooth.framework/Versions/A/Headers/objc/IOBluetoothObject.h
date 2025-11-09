@@ -2,15 +2,14 @@
 //  IOBluetoothObject.h
 //  IOBluetoothFamily
 //
-//  Created by Eric Brown on Tue Jun 11 2002.
-//  Copyright (c) 2002 Apple Inc. All rights reserved.
+//  Copyright (c) 2002-2012 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
 #import <IOKit/IOKitLib.h>
 
-@interface IOBluetoothObject : NSObject
+@interface IOBluetoothObject : NSObject <NSCopying>
 {
     io_service_t		mIOService;
     io_connect_t		mIOConnection;

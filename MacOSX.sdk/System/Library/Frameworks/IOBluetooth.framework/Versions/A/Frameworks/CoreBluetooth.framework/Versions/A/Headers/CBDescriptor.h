@@ -20,7 +20,7 @@
  *      Represents a characteristic's descriptor.
  *
  */
-NS_CLASS_AVAILABLE(10_7, NA)
+NS_CLASS_AVAILABLE(10_7, 5_0)
 CB_EXTERN_CLASS @interface CBDescriptor : NSObject
 {
 @package

@@ -26,7 +26,7 @@ typedef function_table_entry   *function_table_t;
 #endif /* AUTOTEST */
 
 #ifndef	mach_host_MSG_COUNT
-#define	mach_host_MSG_COUNT	21
+#define	mach_host_MSG_COUNT	22
 #endif	/* mach_host_MSG_COUNT */
 
 #include <mach/std_types.h>
@@ -159,7 +159,7 @@ extern
 #endif	/* mig_external */
 kern_return_t host_zone_info
 (
-	host_t host,
+	host_priv_t host,
 	zone_name_array_t *names,
 	mach_msg_type_number_t *namesCnt,
 	zone_info_array_t *info,
@@ -173,19 +173,6 @@ mig_external
 extern
 #endif	/* mig_external */
 kern_return_t host_virtual_physical_table_info
-(
-	host_t host,
-	hash_info_bucket_array_t *info,
-	mach_msg_type_number_t *infoCnt
-);
-
-/* Routine host_ipc_hash_info */
-#ifdef	mig_external
-mig_external
-#else
-extern
-#endif	/* mig_external */
-kern_return_t host_ipc_hash_info
 (
 	host_t host,
 	hash_info_bucket_array_t *info,
@@ -295,11 +282,22 @@ extern
 #endif	/* mig_external */
 kern_return_t mach_zone_info
 (
-	host_t host,
+	host_priv_t host,
 	mach_zone_name_array_t *names,
 	mach_msg_type_number_t *namesCnt,
 	mach_zone_info_array_t *info,
 	mach_msg_type_number_t *infoCnt
+);
+
+/* Routine mach_zone_force_gc */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+kern_return_t mach_zone_force_gc
+(
+	host_t host
 );
 
 __END_DECLS
@@ -440,16 +438,6 @@ __END_DECLS
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
-	} __Request__host_ipc_hash_info_t;
-#ifdef  __MigPackStructs
-#pragma pack()
-#endif
-
-#ifdef  __MigPackStructs
-#pragma pack(4)
-#endif
-	typedef struct {
-		mach_msg_header_t Head;
 	} __Request__processor_set_default_t;
 #ifdef  __MigPackStructs
 #pragma pack()
@@ -544,6 +532,16 @@ __END_DECLS
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__mach_zone_force_gc_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Request__mach_host_subsystem__defined */
 
 /* union of all requests */
@@ -561,7 +559,6 @@ union __RequestUnion__mach_host_subsystem {
 	__Request__kmod_get_info_t Request_kmod_get_info;
 	__Request__host_zone_info_t Request_host_zone_info;
 	__Request__host_virtual_physical_table_info_t Request_host_virtual_physical_table_info;
-	__Request__host_ipc_hash_info_t Request_host_ipc_hash_info;
 	__Request__processor_set_default_t Request_processor_set_default;
 	__Request__processor_set_create_t Request_processor_set_create;
 	__Request__mach_memory_object_memory_entry_64_t Request_mach_memory_object_memory_entry_64;
@@ -570,6 +567,7 @@ union __RequestUnion__mach_host_subsystem {
 	__Request__host_lockgroup_info_t Request_host_lockgroup_info;
 	__Request__host_statistics64_t Request_host_statistics64;
 	__Request__mach_zone_info_t Request_mach_zone_info;
+	__Request__mach_zone_force_gc_t Request_mach_zone_force_gc;
 };
 #endif /* !__RequestUnion__mach_host_subsystem__defined */
 /* typedefs for all replies */
@@ -735,22 +733,6 @@ union __RequestUnion__mach_host_subsystem {
 		mach_msg_header_t Head;
 		/* start of the kernel processed data */
 		mach_msg_body_t msgh_body;
-		mach_msg_ool_descriptor_t info;
-		/* end of the kernel processed data */
-		NDR_record_t NDR;
-		mach_msg_type_number_t infoCnt;
-	} __Reply__host_ipc_hash_info_t;
-#ifdef  __MigPackStructs
-#pragma pack()
-#endif
-
-#ifdef  __MigPackStructs
-#pragma pack(4)
-#endif
-	typedef struct {
-		mach_msg_header_t Head;
-		/* start of the kernel processed data */
-		mach_msg_body_t msgh_body;
 		mach_msg_port_descriptor_t default_set;
 		/* end of the kernel processed data */
 	} __Reply__processor_set_default_t;
@@ -860,6 +842,18 @@ union __RequestUnion__mach_host_subsystem {
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__mach_zone_force_gc_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Reply__mach_host_subsystem__defined */
 
 /* union of all replies */
@@ -877,7 +871,6 @@ union __ReplyUnion__mach_host_subsystem {
 	__Reply__kmod_get_info_t Reply_kmod_get_info;
 	__Reply__host_zone_info_t Reply_host_zone_info;
 	__Reply__host_virtual_physical_table_info_t Reply_host_virtual_physical_table_info;
-	__Reply__host_ipc_hash_info_t Reply_host_ipc_hash_info;
 	__Reply__processor_set_default_t Reply_processor_set_default;
 	__Reply__processor_set_create_t Reply_processor_set_create;
 	__Reply__mach_memory_object_memory_entry_64_t Reply_mach_memory_object_memory_entry_64;
@@ -886,6 +879,7 @@ union __ReplyUnion__mach_host_subsystem {
 	__Reply__host_lockgroup_info_t Reply_host_lockgroup_info;
 	__Reply__host_statistics64_t Reply_host_statistics64;
 	__Reply__mach_zone_info_t Reply_mach_zone_info;
+	__Reply__mach_zone_force_gc_t Reply_mach_zone_force_gc;
 };
 #endif /* !__RequestUnion__mach_host_subsystem__defined */
 
@@ -901,7 +895,6 @@ union __ReplyUnion__mach_host_subsystem {
     { "kmod_get_info", 207 },\
     { "host_zone_info", 208 },\
     { "host_virtual_physical_table_info", 209 },\
-    { "host_ipc_hash_info", 210 },\
     { "processor_set_default", 213 },\
     { "processor_set_create", 214 },\
     { "mach_memory_object_memory_entry_64", 215 },\
@@ -909,7 +902,8 @@ union __ReplyUnion__mach_host_subsystem {
     { "host_request_notification", 217 },\
     { "host_lockgroup_info", 218 },\
     { "host_statistics64", 219 },\
-    { "mach_zone_info", 220 }
+    { "mach_zone_info", 220 },\
+    { "mach_zone_force_gc", 221 }
 #endif
 
 #ifdef __AfterMigUserHeader

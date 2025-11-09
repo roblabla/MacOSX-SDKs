@@ -3,7 +3,7 @@
  
      Contains:   HIView routines
  
-     Version:    HIToolbox-567.2~1
+     Version:    HIToolbox-626.1~1
  
      Copyright:  © 2001-2008 by Apple Computer, Inc., all rights reserved.
  
@@ -4818,6 +4818,26 @@ HIViewChangeAttributes(
   OptionBits   inAttrsToClear)                                AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
+#endif  /* !__LP64__ */
+
+
+/*
+ *  Summary:
+ *    Option bits for use with HIViewCreateOffscreenImage.
+ */
+enum {
+
+  /*
+   * Requests that the offscreen image should use the resolution of the
+   * window's backing store. If the window is using crisp HiDPI mode,
+   * the image size will therefore be equal to the view bounds
+   * multiplied by the result of HIWindowGetBackingScaleFactor on the
+   * view's window. Available in Mac OS X 10.8 and later.
+   */
+  kHIViewOffscreenImageUseWindowBackingResolution = 1 << 0
+};
+
+#if !__LP64__
 /*
  *  HIViewCreateOffscreenImage()
  *  
@@ -4841,7 +4861,9 @@ HIViewChangeAttributes(
  *      The view you wish to create an image of.
  *    
  *    inOptions:
- *      Options. Currently you must pass 0.
+ *      Options. In Mac OS X 10.8 and later, you may pass
+ *      kHIViewOffscreenImageUseWindowBackingResolution. Otherwise this
+ *      parameter must be 0.
  *    
  *    outFrame:
  *      The frame of the view within the resultant image. It is in the

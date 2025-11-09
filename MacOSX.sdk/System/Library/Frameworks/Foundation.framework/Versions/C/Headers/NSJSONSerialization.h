@@ -1,23 +1,21 @@
 /*	
     NSJSONSerialization.h
-    Copyright (c) 2009-2011, Apple Inc. All rights reserved.
+    Copyright (c) 2009-2012, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
 @class NSError, NSOutputStream, NSInputStream, NSData;
 
-enum {
+typedef NS_OPTIONS(NSUInteger, NSJSONReadingOptions) {
     NSJSONReadingMutableContainers = (1UL << 0),
     NSJSONReadingMutableLeaves = (1UL << 1),
     NSJSONReadingAllowFragments = (1UL << 2)
 };
-typedef NSUInteger NSJSONReadingOptions;
 
-enum {
+typedef NS_OPTIONS(NSUInteger, NSJSONWritingOptions) {
     NSJSONWritingPrettyPrinted = (1UL << 0)
 };
-typedef NSUInteger NSJSONWritingOptions;
 
 /* A class for converting JSON to Foundation objects and converting Foundation objects to JSON.
    

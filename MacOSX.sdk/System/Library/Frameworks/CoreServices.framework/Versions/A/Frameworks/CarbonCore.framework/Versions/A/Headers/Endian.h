@@ -2,16 +2,10 @@
      File:       CarbonCore/Endian.h
  
      Contains:   Endian swapping utilties
+                 The contents of this header file are deprecated.
+                 Use CFByteOrder API instead.
  
-     Version:    CarbonCore-960.18~3
- 
-     Copyright:  © 1997-2008 by Apple Computer, Inc., all rights reserved
- 
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
- 
-                     http://developer.apple.com/bugreporter/
- 
+     Copyright:  © 1997-2011 by Apple Inc. All rights reserved.
 */
 #ifndef __ENDIAN__
 #define __ENDIAN__
@@ -26,7 +20,7 @@
 
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -36,6 +30,10 @@
 extern "C" {
 #endif
 
+#ifdef __GNUC__
+#include <libkern/OSByteOrder.h>
+#endif
+	
 #pragma pack(push, 2)
 
 /*
@@ -81,8 +79,6 @@ extern "C" {
  Otherwise, use the macros.
 */
 #ifdef __GNUC__
-
-#include <libkern/OSByteOrder.h>
 
 /*
   Implement low level Å_Swap functions.
@@ -147,7 +143,7 @@ extern "C" {
  *    Non-Carbon CFM:   not available
  */
 extern UInt64 
-Endian64_Swap(UInt64 value)                                   AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+Endian64_Swap(UInt64 value)                                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 #endif
@@ -395,7 +391,7 @@ CoreEndianInstallFlipper(
   OSType               dataDomain,
   OSType               dataType,
   CoreEndianFlipProc   proc,
-  void *               refcon)           /* can be NULL */    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  void *               refcon)           /* can be NULL */    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -435,7 +431,7 @@ CoreEndianGetFlipper(
   OSType                dataDomain,
   OSType                dataType,
   CoreEndianFlipProc *  proc,
-  void **               refcon)                               AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  void **               refcon)                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -485,7 +481,7 @@ CoreEndianFlipData(
   SInt16      id,
   void *      data,
   ByteCount   dataLen,
-  Boolean     currentlyNative)                                AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  Boolean     currentlyNative)                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 #endif  /* TARGET_API_MAC_OSX */

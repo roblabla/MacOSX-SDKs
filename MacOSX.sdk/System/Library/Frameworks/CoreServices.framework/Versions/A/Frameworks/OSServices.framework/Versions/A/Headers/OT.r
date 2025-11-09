@@ -1,9 +1,9 @@
 /*
-     File:       OT.r
+     File:       OSServices/OT.r
  
-     Contains:   Master include for OT private framework
+     Contains:   *** DEPRECATED *** Master include for OT private framework
  
-     Copyright:  © 1999-2010 by Apple Inc., all rights reserved.
+     Copyright:  (c) 1999-2011 Apple Inc. All rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

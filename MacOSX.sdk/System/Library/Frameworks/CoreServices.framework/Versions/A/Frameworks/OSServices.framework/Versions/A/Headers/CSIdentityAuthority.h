@@ -3,7 +3,7 @@
  
      Contains:   CSIdentityAuthority APIs
  
-     Copyright:  � 2006-2010 by Apple Inc., all rights reserved.
+     Copyright:  (c) 2006-2011 Apple Inc. All rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -11,6 +11,7 @@
                      http://developer.apple.com/bugreporter/
  
 */
+
 #ifndef __CSIDENTITYAUTHORITY__
 #define __CSIDENTITYAUTHORITY__
 
@@ -20,7 +21,7 @@
 
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once

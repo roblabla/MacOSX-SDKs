@@ -22,7 +22,7 @@
 #endif
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -431,7 +431,7 @@ enum {
 extern OSErr 
 GetIconRefOwners(
   IconRef   theIconRef,
-  UInt16 *  owners)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt16 *  owners)                                           __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -452,7 +452,7 @@ GetIconRefOwners(
  *    Non-Carbon CFM:   in IconServicesLib 8.5 and later
  */
 extern OSErr 
-AcquireIconRef(IconRef theIconRef)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+AcquireIconRef(IconRef theIconRef)                            __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -478,7 +478,7 @@ AcquireIconRef(IconRef theIconRef)                            AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in IconServicesLib 8.5 and later
  */
 extern OSErr 
-ReleaseIconRef(IconRef theIconRef)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+ReleaseIconRef(IconRef theIconRef)                            __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -523,7 +523,7 @@ extern OSErr
 GetIconRefFromFile(
   const FSSpec *  theFile,
   IconRef *       theIconRef,
-  SInt16 *        theLabel)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  SInt16 *        theLabel)                                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -559,7 +559,7 @@ GetIconRef(
   SInt16     vRefNum,
   OSType     creator,
   OSType     iconType,
-  IconRef *  theIconRef)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  IconRef *  theIconRef)                                      __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -594,7 +594,7 @@ GetIconRefFromFolder(
   SInt32     folderID,
   SInt8      attributes,
   SInt8      accessPrivileges,
-  IconRef *  theIconRef)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  IconRef *  theIconRef)                                      __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /* GetIconRefFromFileInfo*/
@@ -656,7 +656,7 @@ GetIconRefFromFileInfo(
   const FSCatalogInfo *    inCatalogInfo,          /* can be NULL */
   IconServicesUsageFlags   inUsageFlags,
   IconRef *                outIconRef,
-  SInt16 *                 outLabel)               /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  SInt16 *                 outLabel)               /* can be NULL */ __OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_NA);
 
 
 /* GetIconRefFromTypeInfo*/
@@ -710,7 +710,7 @@ GetIconRefFromTypeInfo(
   CFStringRef              inExtension,
   CFStringRef              inMIMEType,
   IconServicesUsageFlags   inUsageFlags,
-  IconRef *                outIconRef)                        AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  IconRef *                outIconRef)                        __OSX_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_NA);
 
 
 
@@ -747,7 +747,7 @@ extern OSStatus
 GetIconRefFromIconFamilyPtr(
   const IconFamilyResource *  inIconFamilyPtr,
   Size                        inSize,
-  IconRef *                   outIconRef)                     AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  IconRef *                   outIconRef)                     __OSX_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_NA);
 
 
 /* GetIconRefFromComponent*/
@@ -781,7 +781,7 @@ GetIconRefFromIconFamilyPtr(
 extern OSStatus 
 GetIconRefFromComponent(
   Component   inComponent,
-  IconRef *   outIconRef)                                     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  IconRef *   outIconRef)                                     __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 
 /*
@@ -819,7 +819,7 @@ RegisterIconRefFromIconFamily(
   OSType             creator,
   OSType             iconType,
   IconFamilyHandle   iconFamily,
-  IconRef *          theIconRef)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  IconRef *          theIconRef)                              __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -852,7 +852,7 @@ RegisterIconRefFromResource(
   OSType          iconType,
   const FSSpec *  resourceFile,
   SInt16          resourceID,
-  IconRef *       theIconRef)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  IconRef *       theIconRef)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /* RegisterIconRefFromFSRef*/
@@ -892,7 +892,7 @@ RegisterIconRefFromFSRef(
   OSType         creator,
   OSType         iconType,
   const FSRef *  iconFile,
-  IconRef *      theIconRef)                                  AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  IconRef *      theIconRef)                                  __OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_NA);
 
 
 /*
@@ -917,7 +917,7 @@ RegisterIconRefFromFSRef(
 extern OSErr 
 UnregisterIconRef(
   OSType   creator,
-  OSType   iconType)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSType   iconType)                                          __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -946,7 +946,7 @@ UnregisterIconRef(
  *    Non-Carbon CFM:   in IconServicesLib 8.5 and later
  */
 extern OSErr 
-UpdateIconRef(IconRef theIconRef)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+UpdateIconRef(IconRef theIconRef)                             __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -974,7 +974,7 @@ extern OSErr
 OverrideIconRefFromResource(
   IconRef         theIconRef,
   const FSSpec *  resourceFile,
-  SInt16          resourceID)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  SInt16          resourceID)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -1002,7 +1002,7 @@ OverrideIconRefFromResource(
 extern OSErr 
 OverrideIconRef(
   IconRef   oldIconRef,
-  IconRef   newIconRef)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  IconRef   newIconRef)                                       __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -1024,7 +1024,7 @@ OverrideIconRef(
  *    Non-Carbon CFM:   in IconServicesLib 8.5 and later
  */
 extern OSErr 
-RemoveIconRefOverride(IconRef theIconRef)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+RemoveIconRefOverride(IconRef theIconRef)                     __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -1057,7 +1057,7 @@ extern OSErr
 CompositeIconRef(
   IconRef    backgroundIconRef,
   IconRef    foregroundIconRef,
-  IconRef *  compositeIconRef)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  IconRef *  compositeIconRef)                                __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -1082,7 +1082,7 @@ extern OSErr
 IsIconRefComposite(
   IconRef    compositeIconRef,
   IconRef *  backgroundIconRef,
-  IconRef *  foregroundIconRef)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  IconRef *  foregroundIconRef)                               __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -1110,7 +1110,7 @@ IsIconRefComposite(
  *    Non-Carbon CFM:   in IconServicesLib 8.5 and later
  */
 extern Boolean 
-IsValidIconRef(IconRef theIconRef)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+IsValidIconRef(IconRef theIconRef)                            __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -1144,7 +1144,7 @@ IsValidIconRef(IconRef theIconRef)                            AVAILABLE_MAC_OS_X
 extern Boolean 
 IsDataAvailableInIconRef(
   OSType    inIconKind,
-  IconRef   inIconRef)                                        AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  IconRef   inIconRef)                                        __OSX_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_NA);
 
 
 /*
@@ -1177,7 +1177,7 @@ IsDataAvailableInIconRef(
 extern OSErr 
 FlushIconRefs(
   OSType   creator,
-  OSType   iconType)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
+  OSType   iconType)                                          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_3, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -1201,7 +1201,7 @@ FlushIconRefs(
  *    Non-Carbon CFM:   in IconServicesLib 8.5 and later
  */
 extern OSErr 
-FlushIconRefsByVolume(SInt16 vRefNum)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
+FlushIconRefsByVolume(SInt16 vRefNum)                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_3, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -1235,7 +1235,7 @@ FlushIconRefsByVolume(SInt16 vRefNum)                         AVAILABLE_MAC_OS_X
 extern OSErr 
 SetCustomIconsEnabled(
   SInt16    vRefNum,
-  Boolean   enableCustomIcons)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean   enableCustomIcons)                                __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -1259,7 +1259,7 @@ SetCustomIconsEnabled(
 extern OSErr 
 GetCustomIconsEnabled(
   SInt16     vRefNum,
-  Boolean *  customIconsEnabled)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *  customIconsEnabled)                              __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -1299,7 +1299,7 @@ RegisterIconRefFromIconFile(
   OSType          creator,
   OSType          iconType,
   const FSSpec *  iconFile,
-  IconRef *       theIconRef)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  IconRef *       theIconRef)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -1323,7 +1323,7 @@ RegisterIconRefFromIconFile(
 extern OSErr 
 ReadIconFile(
   const FSSpec *      iconFile,
-  IconFamilyHandle *  iconFamily)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  IconFamilyHandle *  iconFamily)                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -1346,7 +1346,7 @@ ReadIconFile(
 extern OSErr 
 WriteIconFile(
   IconFamilyHandle   iconFamily,
-  const FSSpec *     iconFile)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  const FSSpec *     iconFile)                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -1378,7 +1378,7 @@ WriteIconFile(
 extern OSStatus 
 ReadIconFromFSRef(
   const FSRef *       ref,
-  IconFamilyHandle *  iconFamily)                             AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  IconFamilyHandle *  iconFamily)                             __OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_NA);
 
 
 

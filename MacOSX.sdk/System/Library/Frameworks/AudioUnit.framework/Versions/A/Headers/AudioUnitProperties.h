@@ -736,6 +736,7 @@ enum
 	kAudioUnitProperty_Latency						= 12,
 	kAudioUnitProperty_SupportedNumChannels			= 13,
 	kAudioUnitProperty_MaximumFramesPerSlice		= 14,
+	kAudioUnitProperty_ParameterValueStrings		= 16,
 	kAudioUnitProperty_AudioChannelLayout			= 19,  
 	kAudioUnitProperty_TailTime						= 20,
 	kAudioUnitProperty_BypassEffect					= 21,
@@ -754,7 +755,6 @@ enum
 	,
 	kAudioUnitProperty_FastDispatch					= 5,
 	kAudioUnitProperty_SetExternalBuffer			= 15,
-	kAudioUnitProperty_ParameterValueStrings		= 16,
 	kAudioUnitProperty_GetUIComponentList			= 18,
 	kAudioUnitProperty_ContextName					= 25,
 	kAudioUnitProperty_HostCallbacks				= 27,
@@ -1353,6 +1353,46 @@ typedef struct AudioUnitParameterValueFromString {
 } AudioUnitParameterValueFromString;
 
 #endif //!TARGET_OS_IPHONE
+
+//=====================================================================================================================
+#pragma mark - Configuration Info Keys
+
+//	These strings are used as keys to the dictionary of configuration info returned by
+//	AudioComponentGetConfiguationInfo(). Informaton about them is presented inline with the
+//	declaration.
+
+/*!
+	@define		kAudioUnitConfigurationInfo_HasCustomView
+	@discussion	This is a boolean value that indicates whether or not the AU has a custom view
+*/
+#define kAudioUnitConfigurationInfo_HasCustomView	"HasCustomView"
+
+/*!
+	@define		kAudioUnitConfigurationInfo_ChannelConfigurations
+	@discussion	This is an array of pairs of values where each item in the array is an array of two
+				numbers and is the equivalent of an AUChannelInfo. If the AudioUnit is an effect and
+				it doesn't implement kAudioUnitProperty_SupportedNumChannels, the array will contain
+				only the single entry, { -1, -1}. If the AudioUnit is an instrument or a generator
+				and doesn't implement kAudioUnitProperty_SupportedNumChannels, the array will be
+				empty and means that the AU's initial state is all that is supported.
+*/
+#define kAudioUnitConfigurationInfo_ChannelConfigurations	"ChannelConfigurations"
+
+/*!
+	@define		kAudioUnitConfigurationInfo_InitialInputs
+	@discussion	An array of numbers whose size is equal to the number of input buses posessed by the
+				AU. Each number in the array represents the number of channels for the corresponding
+				bus.
+*/
+#define kAudioUnitConfigurationInfo_InitialInputs	"InitialInputs"
+
+/*!
+	@define		kAudioUnitConfigurationInfo_InitialOutputs
+	@discussion	An array of numbers whose size is equal to the number of output buses posessed by
+				the AU. Each number in the array represents the number of channels for the
+				corresponding bus.
+*/
+#define kAudioUnitConfigurationInfo_InitialOutputs	"InitialOutputs"
 
 //=====================================================================================================================
 #pragma mark - Output Unit
@@ -2050,79 +2090,52 @@ typedef struct AudioOutputUnitStartAtTimeParams {
 	@discussion			Scope: Global
 						Value Type: UInt32
 						Access: read/write
-							Enable automatic gain control on the processed signal. On by default.
+							Enable automatic gain control on the processed microphone/uplink 
+                            signal. On by default.
  
-	 @constant		kAUVoiceIOProperty_VoiceProcessingQuality
-	 @discussion		Scope: Global
-						Value Type: UInt32
-						Access: read/write
-							Sets the quality of the voice processing unit. Quality values are comprised
-							between 0 (lowest) and 127 (highest).
-	 
 	 @constant		kAUVoiceIOProperty_MuteOutput
 	 @discussion		Scope: Global
 						Value Type: UInt32
 						Access: read/write
 							Mutes the output of the voice processing unit. 
 							0 (default) = muting off. 1 = mute output.  
- 
-	 @constant		kAUVoiceIOProperty_MaximumNumberPackets
-	 @discussion		Scope: Output
-						Value Type: UInt32
-						Access: read
-							The maximum number of packets that will be produced by the voice processing
-							unit on any single given call to AudioUnitRender / AudioUnitComplexRender.
-
-	 @constant		kAUVoiceIOProperty_MaximumOutputPacketByteSize
-	 @discussion		Scope: Output
-						Value Type: UInt32
-						Access: read
-							The maximum size in bytes of a packet produced by the voice processing unit.
-
-	 @constant		kAUVoiceIOProperty_MaximumMetadataByteSize
-	 @discussion		Scope: Output
-						Value Type: UInt32
-						Access: read
-							The maximum size in bytes of the metadata associated with a single packet
-							produced by the voice processing unit.
- 
-	@constant		kAUVoiceIOProperty_RequestMetadata
-	@discussion			Scope: Global
-						Value Type: UInt32
-						Access: read/write
-							Enable metadata processing and voice activity detection.
-							0 (default) = disable metadata processing; 1 = enable metadata processing
-
-	 @constant		kAUVoiceIOProperty_DisableVP
-	 @discussion		Scope: Global
-						Value Type: UInt32
-						Access: read/write
-							Disable voice processing. When disabled, no echo processing is done on the
-							microphone input. Different from bypass voice processing in that bypassing
-							maintains the echo processing latency whereas disabling does not. 
-							0 (default)=enable voice processing; 1=disable voice processing.
-	 
-	@constant		kAUVoiceIOProperty_MaximumRenderFrameSize
-	@discussion			Scope: Output
-						Value Type: UInt32
-						Access: read/write
-							The maximum number of frames that the voice processing unit will provide
-							to the client on a call to render. Applicable only to the input element.
-							If the client sets this property, it should get the value of the property
-							post-initialization to determine the actual value.
 */
-
 enum {
 	kAUVoiceIOProperty_BypassVoiceProcessing		= 2100,
 	kAUVoiceIOProperty_VoiceProcessingEnableAGC		= 2101,
-	kAUVoiceIOProperty_VoiceProcessingQuality		= 2103,
-	kAUVoiceIOProperty_MuteOutput					= 2104,
-	kAUVoiceIOProperty_MaximumNumberPackets			= 2110,
-	kAUVoiceIOProperty_MaximumOutputPacketByteSize	= 2111,
-	kAUVoiceIOProperty_MaximumMetadataByteSize		= 2112,
-	kAUVoiceIOProperty_RequestMetadata				= 2113,
-	kAUVoiceIOProperty_DisableVP					= 2114,
-	kAUVoiceIOProperty_MaximumRenderFrameSize		= 2115
+	kAUVoiceIOProperty_MuteOutput					= 2104
+};
+
+#pragma mark - AUVoiceProcessing unit deprecated properties
+/*!
+ @enum           Apple Voice Processing Property IDs that are being deprecated
+ @abstract       The collection of property IDs for Apple voice processing units that are
+ 				 being deprecated.
+ 
+ @constant		kAUVoiceIOProperty_VoiceProcessingQuality
+ @discussion		Scope: Global
+                    Value Type: UInt32
+                    Access: read/write
+                DEPRECATED. Sets the quality of the voice processing unit. Quality values
+                are comprised between 0 (lowest) and 127 (highest).
+ */
+enum {
+	kAUVoiceIOProperty_VoiceProcessingQuality		= 2103, // deprecated
+
+};
+
+/*!
+ @enum         Apple Voice Processing AudioUnit Error IDs
+ @abstract     These are the various error IDs returned by Voice Processing audio unit.
+ 
+ @constant     kAUVoiceIOErr_UnexpectedNumberOfInputChannels
+               This error indicates that an unexpected number of input channels was encountered during initialization of voice processing audio unit
+
+*/
+
+enum {
+    
+    kAUVoiceIOErr_UnexpectedNumberOfInputChannels     = -66784,
 };
 
 //=====================================================================================================================
@@ -2139,9 +2152,12 @@ enum {
 						Enable or disable metering on a particular scope/element
 
 	@constant		kAudioUnitProperty_MatrixLevels
-	@discussion			Scope:			Global
+	@discussion			This property can be used for both the AUMatrixMixer and AUMultiChannelMixer.
+	
+						AUMatrixMixer
+						Scope:			Global
 						Value Type:		Float32 array
-						Access:			Read
+						Access:			read/write
 						
 						This property is used to retrieve the entire state of a matrix mixer. The size required is
 						the number of (input  channels + 1) * (output channels + 1) - see _MatrixDimensions
@@ -2152,6 +2168,16 @@ enum {
 						Input volumes are stored in the last column (volumes[0][2] for the first input channel,  volumes[1][2] for the second)
 						Output volumes are stored in the last row (volumes [2][0] and [2][1])
 						Cross point volumes are stored at their expected locations ([0][1], etc)
+						
+						AUMultiChannelMixer
+						Scope:			Input
+						Value Type:		Float32 array
+						Access:			read/write
+						
+						Gets/sets the matrix levels for one input element. This allows arbitrary mixing configurations
+						from all input channels to all output channels.
+						The size required is the number of (input channels) * (output channels).
+						The matrix stores only the crosspoint gains, there are no overall input or output channel gains.
 						
 	@constant		kAudioUnitProperty_MatrixDimensions
 	@discussion			Scope:			Global
@@ -2756,11 +2782,11 @@ enum {
 	@discussion		The AUSampler audio unit lets a client create an editable, interactive
 					sampler synthesizer instrument.
  
-	@constant		kAUSamplerProperty_LoadPresetFromBank
+	@constant		kAUSamplerProperty_LoadInstrument
 	@discussion			Scope:			Global
-						Value Type:		AUSamplerBankPresetData
+						Value Type:		AUSamplerInstrumentData
 						Access:			Write
-							Load a preset from an external DLS or Soundfont2 bank file.
+							Load an instrument from an external DLS or Soundfont2 bank file, or from other file formats.
  
 	@constant		kAUSamplerProperty_LoadAudioFiles
 	@discussion			Scope:			Global
@@ -2771,32 +2797,78 @@ enum {
  */
 enum {
 	// range (4100->4999)
-	kAUSamplerProperty_LoadPresetFromBank			= 4100,
+	kAUSamplerProperty_LoadInstrument				= 4102,
 	kAUSamplerProperty_LoadAudioFiles				= 4101
 };
 
 /*
-	@struct			AUSamplerBankPresetData
-	@abstract		Used for loading a preset from an external bank file (i.e. DLS or SoundFont).  
-					The property accepts an AUSamplerBankPresetData struct. The fields of this struct represent values for MIDI controllers 0 and 32 
-					and the MIDI present change message that would be sent to a GM2-compatible synth for program changes.
-					Use the provided constants (kAUSampler_DefaultMelodicBankMSB , kAUSampler_DefaultPercussionBankMSB) to designate 
-					melodic or percussion banks per the GM2 specification (GM-compatible DLS or Soundfont banks).
-					For custom non-GM-compatible DLS and Soundfont banks, use the actual MSB/LSB values associated with the desired preset.
+	@struct			AUSamplerInstrumentData
+	@abstract		Used for loading an instrument from either an external bank file (i.e. DLS or SoundFont), an Apple
+ 					.aupreset, a Logic or GarageBand EXS24 sampler instrument, or creating a new default instrument from
+ 					a single audio file.  The path to the bank or instrument file is specified in the fileURL field.
+ 					The instrumentType field distinguishes between the instrument types.  The remaining fields of this
+ 					struct are used only for the kInstrumentType_DLSPreset and kInstrumentType_SF2Preset types to
+ 					identify the particular bank and preset IDs for the instrument you wish to load from the bank.
+ 					They represent values for MIDI controllers 0 and 32 and the MIDI present change message that would be
+ 					sent to a GM2-compatible synth for program changes.  Use the provided constants
+ 					(kAUSampler_DefaultMelodicBankMSB,  kAUSampler_DefaultPercussionBankMSB) to designate  melodic or
+ 					percussion banks per the GM2 specification (GM-compatible DLS or Soundfont banks).  For custom
+ 					non-GM-compatible DLS and Soundfont banks, use the actual MSB/LSB values associated with the desired preset.
 
-	@field			bankURL
-						The URL of the path to the bank file.   Caller is responsible for releasing the provided CFURLRef.
+	@field			fileURL
+						The URL of the path to the bank or instrument file.   Caller is responsible for releasing the
+ 						provided CFURLRef.
+	@field			instrumentType
+						The type of instrument being loaded or created.  For example, use kInstrumentType_DLSPreset to load an
+ 						instrument from a DLS bank file.
 	@field			bankMSB
-						The most significant byte value for a particular bank variation within that file.  Range is 0 to 127.  
-						Use kAUSampler_DefaultMelodicBankMSB by default.
+						For the preset instruments, the most significant byte value for a particular bank variation within that
+ 						file.  Range is 0 to 127.  Use kAUSampler_DefaultMelodicBankMSB by default.
 	@field			bankLSB
-						The least significant byte value for a particular bank variation within that file.  Range is 0 to 127.
-						Use kAUSampler_DefaultBankLSB by default.
+						For the preset instruments, the least significant byte value for a particular bank variation within that
+ 						file.  Range is 0 to 127.  Use kAUSampler_DefaultBankLSB by default.
 	@field			presetID
-						The numeric ID of a particular preset within that bank to load.  Range is 0 to 127.
-	@field			reserved
-						Reserved for future use
+						For the preset instruments, the numeric ID of a particular preset within that bank to load.
+ 						Range is 0 to 127.
  */
+
+typedef struct AUSamplerInstrumentData {
+	CFURLRef				fileURL;
+	UInt8					instrumentType;
+	UInt8					bankMSB;
+	UInt8					bankLSB;
+	UInt8					presetID;
+} AUSamplerInstrumentData;
+
+/*
+	@enum			InstrumentTypes
+	@abstract		Values to specify the type of instrument being loaded.
+
+	@constant		kInstrumentType_DLSPreset
+	@discussion			A preset from a DLS bank file.  Bank MSB, LSB and preset ID must be specified.
+ 
+	@constant		kInstrumentType_SF2Preset
+	@discussion			A preset from a SoundFont2 bank file.  Bank MSB, LSB and preset ID must be specified.
+ 
+	@constant		kInstrumentType_AUPreset
+	@discussion			A native Apple .aupreset file created using the AUSampler's custom view.
+ 
+	@constant		kInstrumentType_Audiofile
+	@discussion			An audio file which will be used to create a default instrument with that file as its sole sample.
+	
+ 	@constant		kInstrumentType_EXS24
+	@discussion			A Logic or GarageBand sampler instrument.
+
+ */
+
+enum
+{
+	kInstrumentType_DLSPreset	= 1,
+	kInstrumentType_SF2Preset	= kInstrumentType_DLSPreset,
+	kInstrumentType_AUPreset	= 2,
+	kInstrumentType_Audiofile	= 3,
+	kInstrumentType_EXS24		= 4
+};
 
 enum 
 {
@@ -2804,14 +2876,6 @@ enum
 	kAUSampler_DefaultMelodicBankMSB	=	0x79,
 	kAUSampler_DefaultBankLSB			=	0x00
 };
-
-typedef struct AUSamplerBankPresetData {
-	CFURLRef				bankURL;
-	UInt8					bankMSB;
-	UInt8					bankLSB;
-	UInt8					presetID;
-	UInt8					reserved;
-} AUSamplerBankPresetData;
 
 
 //=====================================================================================================================
@@ -3109,11 +3173,6 @@ enum {
 	kAudioUnitProperty_SpeakerConfiguration			= 3001
 };
 
-	// Deprecated.  Use kAUSamplerProperty_LoadPresetFromBank
-enum {
-	kAUSamplerProperty_BankAndPreset				= 4100
-};
-	
 	// Deprecated in favor of the newer AudioChannelLayout
 	// structure and its supporting property.
 enum {
@@ -3122,6 +3181,22 @@ enum {
 	kSpeakerConfiguration_Quad			 			= 2,
 	kSpeakerConfiguration_5_0						= 3,
 	kSpeakerConfiguration_5_1				 		= kSpeakerConfiguration_5_0
+};
+
+// Deprecated in favor of the newer AUSamplerInstrumentData
+// structure and its supporting property.
+
+typedef struct AUSamplerBankPresetData {
+	CFURLRef				bankURL;
+	UInt8					bankMSB;
+	UInt8					bankLSB;
+	UInt8					presetID;
+	UInt8					reserved;
+} AUSamplerBankPresetData;
+
+enum
+{
+	kAUSamplerProperty_LoadPresetFromBank			= 4100,
 };
 
 

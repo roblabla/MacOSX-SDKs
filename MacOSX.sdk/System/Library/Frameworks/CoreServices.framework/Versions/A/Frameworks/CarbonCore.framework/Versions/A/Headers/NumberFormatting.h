@@ -3,9 +3,7 @@
  
      Contains:   Utilites for formatting numbers
  
-     Version:    CarbonCore-960.18~3
- 
-     Copyright:  © 1996-2008 by Apple Inc., all rights reserved.
+     Copyright:  Â© 1996-2012 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -31,7 +29,7 @@
 
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -114,17 +112,26 @@ typedef FVector                         TripleInt[3];
 
 
 /*
- *  numtostring()
+ *  numtostring()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Depending on requirements, use CFStringCreateWithFormat / CFStringAppendFormat,
+ *    CFNumberFormatterCreate + CFNumberFormatterCreateStringWithNumber, etc.
+ *  
+ *  Discussion:
+ *    This function is no longer recommended. Please use alternates such as
+ *    (depending on requirements) CFStringCreateWithFormat / CFStringAppendFormat,
+ *    CFNumberFormatterCreate + CFNumberFormatterCreateStringWithNumber, etc.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.4 and later in CoreServices.framework but deprecated in 10.8
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
 numtostring(
   long    theNum,
-  char *  theString)                                          AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  char *  theString)                                          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 #if !__LP64__
@@ -146,7 +153,7 @@ numtostring(
 extern void 
 StringToNum(
   ConstStr255Param   theString,
-  long *             theNum)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  long *             theNum)                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -167,7 +174,7 @@ StringToNum(
 extern void 
 NumToString(
   long     theNum,
-  Str255   theString)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  Str255   theString)                                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 #endif  /* !__LP64__ */
@@ -193,7 +200,7 @@ ExtendedToString(
   const extended80 *       x,
   const NumFormatString *  myCanonical,
   const NumberParts *      partsTable,
-  Str255                   outString)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  Str255                   outString)                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -216,7 +223,7 @@ StringToExtended(
   ConstStr255Param         source,
   const NumFormatString *  myCanonical,
   const NumberParts *      partsTable,
-  extended80 *             x)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  extended80 *             x)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -238,7 +245,7 @@ extern FormatStatus
 StringToFormatRec(
   ConstStr255Param     inString,
   const NumberParts *  partsTable,
-  NumFormatString *    outString)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  NumFormatString *    outString)                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -261,7 +268,7 @@ FormatRecToString(
   const NumFormatString *  myCanonical,
   const NumberParts *      partsTable,
   Str255                   outString,
-  TripleInt                positions)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  TripleInt                positions)                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 

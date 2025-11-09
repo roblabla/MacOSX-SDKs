@@ -65,7 +65,7 @@
 
 /* When true the particles are rendered as if they directly inhabit the
  * three dimensional coordinate space of the layer's superlayer, rather
- * than being flattened into the layer's plane first. Defaults to false.
+ * than being flattened into the layer's plane first. Defaults to NO.
  * If true, the effect of the `filters', `backgroundFilters' and shadow-
  * related properties of the layer is undefined. */
 
@@ -96,38 +96,38 @@
 /** `emitterShape' values. **/
 
 CA_EXTERN NSString * const kCAEmitterLayerPoint
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_NA);
+    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_5_0);
 CA_EXTERN NSString * const kCAEmitterLayerLine
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_NA);
+    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_5_0);
 CA_EXTERN NSString * const kCAEmitterLayerRectangle
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_NA);
+    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_5_0);
 CA_EXTERN NSString * const kCAEmitterLayerCuboid
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_NA);
+    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_5_0);
 CA_EXTERN NSString * const kCAEmitterLayerCircle
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_NA);
+    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_5_0);
 CA_EXTERN NSString * const kCAEmitterLayerSphere
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_NA);
+    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_5_0);
 
 /** `emitterMode' values. **/
 
 CA_EXTERN NSString * const kCAEmitterLayerPoints
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_NA);
+    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_5_0);
 CA_EXTERN NSString * const kCAEmitterLayerOutline
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_NA);
+    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_5_0);
 CA_EXTERN NSString * const kCAEmitterLayerSurface
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_NA);
+    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_5_0);
 CA_EXTERN NSString * const kCAEmitterLayerVolume
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_NA);
+    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_5_0);
 
 /** `renderOrder' values. **/
 
 CA_EXTERN NSString * const kCAEmitterLayerUnordered
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_NA);
+    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_5_0);
 CA_EXTERN NSString * const kCAEmitterLayerOldestFirst
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_NA);
+    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_5_0);
 CA_EXTERN NSString * const kCAEmitterLayerOldestLast
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_NA);
+    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_5_0);
 CA_EXTERN NSString * const kCAEmitterLayerBackToFront
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_NA);
+    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_5_0);
 CA_EXTERN NSString * const kCAEmitterLayerAdditive
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_NA);
+    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_5_0);

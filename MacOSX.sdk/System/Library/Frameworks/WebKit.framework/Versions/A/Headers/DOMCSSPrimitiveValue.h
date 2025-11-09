@@ -59,7 +59,10 @@ enum {
     DOM_CSS_ATTR = 22,
     DOM_CSS_COUNTER = 23,
     DOM_CSS_RECT = 24,
-    DOM_CSS_RGBCOLOR = 25
+    DOM_CSS_RGBCOLOR = 25,
+    DOM_CSS_VW = 26,
+    DOM_CSS_VH = 27,
+    DOM_CSS_VMIN = 28
 };
 
 @interface DOMCSSPrimitiveValue : DOMCSSValue

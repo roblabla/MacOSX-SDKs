@@ -1,7 +1,7 @@
 /*
  NSSaveChangesRequest.h
  Core Data
- Copyright (c) 2004-2010 Apple Inc.
+ Copyright (c) 2004-2012 Apple Inc.
  All rights reserved.
  */
 
@@ -10,7 +10,7 @@
 
 @class NSPersistentStoreRequest;
 
-NS_CLASS_AVAILABLE(10_7,NA)
+NS_CLASS_AVAILABLE(10_7,5_0)
 @interface NSSaveChangesRequest : NSPersistentStoreRequest {
 @private
     NSSet *_insertedObjects;

@@ -253,6 +253,7 @@ typedef struct memory_object_attr_info	memory_object_attr_info_data_t;
 #define MAP_MEM_WTHRU		3
 #define MAP_MEM_WCOMB		4	/* Write combining mode */
 					/* aka store gather     */
+#define MAP_MEM_INNERWBACK	5
 
 #define GET_MAP_MEM(flags)	\
 	((((unsigned int)(flags)) >> 24) & 0xFF)

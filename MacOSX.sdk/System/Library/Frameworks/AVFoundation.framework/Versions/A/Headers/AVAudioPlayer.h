@@ -3,7 +3,7 @@
 	
 	Framework:  AVFoundation
 
-	Copyright 2008-2010 Apple Inc. All rights reserved.
+	Copyright 2008-2012 Apple Inc. All rights reserved.
 */
 
 #import <AVFoundation/AVBase.h>
@@ -54,6 +54,10 @@ NS_CLASS_AVAILABLE(10_7, 2_2)
 @property float pan NS_AVAILABLE(10_7, 4_0); /* set panning. -1.0 is left, 0.0 is center, 1.0 is right. */
 @property float volume; /* The volume for the sound. The nominal range is from 0.0 to 1.0. */
 
+@property BOOL enableRate NS_AVAILABLE_IOS(5_0); /* You must set enableRate to YES for the rate property to take effect. You must set this before calling prepareToPlay. */
+@property float rate NS_AVAILABLE_IOS(5_0); /* See enableRate. The playback rate for the sound. 1.0 is normal, 0.5 is half speed, 2.0 is double speed. */
+
+
 /*  If the sound is playing, currentTime is the offset into the sound of the current playback position.  
 If the sound is not playing, currentTime is the offset into the sound where playing would start. */
 @property NSTimeInterval currentTime;
@@ -98,7 +102,7 @@ Any negative number will loop indefinitely until stopped.
 
 /* audioPlayerEndInterruption:withFlags: is called when the audio session interruption has ended and this player had been interrupted while playing. */
 /* Currently the only flag is AVAudioSessionInterruptionFlags_ShouldResume. */
-- (void)audioPlayerEndInterruption:(AVAudioPlayer *)player withFlags:(NSUInteger)flags NS_AVAILABLE_IPHONE(4_0);
+- (void)audioPlayerEndInterruption:(AVAudioPlayer *)player withFlags:(NSUInteger)flags NS_AVAILABLE_IOS(4_0);
 
 /* audioPlayerEndInterruption: is called when the preferred method, audioPlayerEndInterruption:withFlags:, is not implemented. */
 - (void)audioPlayerEndInterruption:(AVAudioPlayer *)player;

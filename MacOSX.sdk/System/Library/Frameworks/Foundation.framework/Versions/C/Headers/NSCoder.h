@@ -1,10 +1,10 @@
 /*	NSCoder.h
-	Copyright (c) 1993-2011, Apple Inc. All rights reserved.
+	Copyright (c) 1993-2012, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
-@class NSString, NSData;
+@class NSString, NSData, NSSet;
 
 @interface NSCoder : NSObject
 
@@ -30,7 +30,7 @@
 - (id)decodeObject;
 - (void)decodeValuesOfObjCTypes:(const char *)types, ...;
 - (void)decodeArrayOfObjCType:(const char *)itemType count:(NSUInteger)count at:(void *)array;
-- (void *)decodeBytesWithReturnedLength:(NSUInteger *)lengthp;
+- (void *)decodeBytesWithReturnedLength:(NSUInteger *)lengthp NS_RETURNS_INNER_POINTER;
 
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
 - (void)encodePropertyList:(id)aPropertyList;
@@ -62,10 +62,25 @@
 - (int64_t)decodeInt64ForKey:(NSString *)key;
 - (float)decodeFloatForKey:(NSString *)key;
 - (double)decodeDoubleForKey:(NSString *)key;
-- (const uint8_t *)decodeBytesForKey:(NSString *)key returnedLength:(NSUInteger *)lengthp;   // returned bytes immutable!
+- (const uint8_t *)decodeBytesForKey:(NSString *)key returnedLength:(NSUInteger *)lengthp NS_RETURNS_INNER_POINTER;   // returned bytes immutable!
 
 - (void)encodeInteger:(NSInteger)intv forKey:(NSString *)key NS_AVAILABLE(10_5, 2_0);
 - (NSInteger)decodeIntegerForKey:(NSString *)key NS_AVAILABLE(10_5, 2_0);
+
+// Returns YES if this coder requires secure coding. Secure coders check a list of allowed classes before decoding objects, and all objects must implement NSSecureCoding.
+- (BOOL)requiresSecureCoding NS_AVAILABLE(10_8, 6_0);
+
+// Specify what the expected class of the allocated object is. If the coder responds YES to -requiresSecureCoding, then an exception will be thrown if the class to be decoded does not implement NSSecureCoding or is not isKindOfClass: of the argument. If the coder responds NO to -requiresSecureCoding, then the class argument is ignored and no check of the class of the decoded object is performed, exactly as if decodeObjectForKey: had been called.
+- (id)decodeObjectOfClass:(Class)aClass forKey:(NSString *)key NS_AVAILABLE(10_8, 6_0);
+
+// The class of the object may be any class in the provided NSSet, or a subclass of any class in the set. Otherwise, the behavior is the same as -decodeObjectOfClass:forKey:.
+- (id)decodeObjectOfClasses:(NSSet *)classes forKey:(NSString *)key NS_AVAILABLE(10_8, 6_0);
+
+// Calls -decodeObjectOfClasses:forKey: with a set allowing only property list types.
+- (id)decodePropertyListForKey:(NSString *)key NS_AVAILABLE(10_8, 6_0);
+
+// Get the current set of allowed classes.
+- (NSSet *)allowedClasses NS_AVAILABLE(10_8, 6_0);
 
 @end
 

@@ -1,9 +1,9 @@
 /*
-     File:       SecurityCore.r
+     File:       OSServices/SecurityCore.r
  
-     Contains:   Master include for SecurityCore private framework
+     Contains:   *** DEPRECATED *** Master include for SecurityCore private framework
  
-     Copyright:  © 2000-2010 by Apple Inc., all rights reserved.
+     Copyright:  (c) 2000-2011 Apple Inc. All rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -21,4 +21,3 @@
 
 
 #endif /* __SECURITYCORE_R__ */
-

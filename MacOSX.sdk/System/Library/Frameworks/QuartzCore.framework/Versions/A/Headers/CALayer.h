@@ -27,10 +27,10 @@ enum CAAutoresizingMask
 
 enum CAEdgeAntialiasingMask
 {
-  kCALayerLeftEdge	= 1U << 0,
-  kCALayerRightEdge	= 1U << 1,
-  kCALayerBottomEdge	= 1U << 2,
-  kCALayerTopEdge	= 1U << 3,
+  kCALayerLeftEdge	= 1U << 0,	/* Minimum X edge. */
+  kCALayerRightEdge	= 1U << 1,	/* Maximum X edge. */
+  kCALayerBottomEdge	= 1U << 2,	/* Minimum Y edge. */
+  kCALayerTopEdge	= 1U << 3,	/* Maximum Y edge. */
 };
 
 /** The base layer class. **/
@@ -127,7 +127,7 @@ enum CAEdgeAntialiasingMask
 
 /* Called by the object's implementation of -encodeWithCoder:, returns
  * false if the named property should not be archived. The base
- * implementation returns true. Subclasses should call super for
+ * implementation returns YES. Subclasses should call super for
  * unknown properties. */
 
 - (BOOL)shouldArchiveValueForKey:(NSString *)key;
@@ -179,20 +179,20 @@ enum CAEdgeAntialiasingMask
 @property CGRect frame;
 
 /* When true the layer and its sublayers are not displayed. Defaults to
- * false. Animatable. */
+ * NO. Animatable. */
 
 @property(getter=isHidden) BOOL hidden;
 
 /* When false layers facing away from the viewer are hidden from view.
- * Defaults to true. Animatable. */
+ * Defaults to YES. Animatable. */
 
 @property(getter=isDoubleSided) BOOL doubleSided;
 
 /* Whether or not the geometry of the layer (and its sublayers) is
- * flipped vertically. Defaults to false. Note that even when geometry
- * is flipped, image orientation remains the same (i.e. a CGImageRef
+ * flipped vertically. Defaults to NO. Note that even when geometry is
+ * flipped, image orientation remains the same (i.e. a CGImageRef
  * stored in the `contents' property will display the same with both
- * flipped=false and flipped=true, assuming no transform on the layer). */
+ * flipped=NO and flipped=YES, assuming no transform on the layer). */
 
 @property(getter=isGeometryFlipped) BOOL geometryFlipped;
 
@@ -270,7 +270,7 @@ enum CAEdgeAntialiasingMask
 /* When true an implicit mask matching the layer bounds is applied to
  * the layer (including the effects of the `cornerRadius' property). If
  * both `mask' and `masksToBounds' are non-nil the two masks are
- * multiplied to get the actual mask values. Defaults to false.
+ * multiplied to get the actual mask values. Defaults to NO.
  * Animatable. */
 
 @property BOOL masksToBounds;
@@ -321,7 +321,8 @@ enum CAEdgeAntialiasingMask
  * bounds rect. Options are `center', `top', `bottom', `left',
  * `right', `topLeft', `topRight', `bottomLeft', `bottomRight',
  * `resize', `resizeAspect', `resizeAspectFill'. The default value is
- * `resize'. */
+ * `resize'. Note that "bottom" always means "Minimum Y" and "top"
+ * always means "Maximum Y". */
 
 @property(copy) NSString *contentsGravity;
 
@@ -371,7 +372,7 @@ enum CAEdgeAntialiasingMask
 @property float minificationFilterBias;
 
 /* A hint marking that the layer contents provided by -drawInContext:
- * is completely opaque. Defaults to false. Note that this does not affect
+ * is completely opaque. Defaults to NO. Note that this does not affect
  * the interpretation of the `contents' property directly. */
 
 @property(getter=isOpaque) BOOL opaque;
@@ -398,9 +399,18 @@ enum CAEdgeAntialiasingMask
 - (void)displayIfNeeded;
 
 /* When true -setNeedsDisplay will automatically be called when the
- * bounds of the layer changes. Default value is false. */
+ * bounds of the layer changes. Default value is NO. */
 
 @property BOOL needsDisplayOnBoundsChange;
+
+/* When true, the CGContext object passed to the -drawInContext: method
+ * may queue the drawing commands submitted to it, such that they will
+ * be executed later (i.e. asynchronously to the execution of the
+ * -drawInContext: method). This may allow the layer to complete its
+ * drawing operations sooner than when executing synchronously. The
+ * default value is NO. */
+
+@property BOOL drawsAsynchronously;
 
 /* Called via the -display method when the `contents' property is being
  * updated. Default implementation does nothing. The context may be

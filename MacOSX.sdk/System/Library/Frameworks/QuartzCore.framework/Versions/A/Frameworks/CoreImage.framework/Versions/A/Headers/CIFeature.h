@@ -1,10 +1,7 @@
-//
-//  CIFeature.h
-//  CoreImage
-//
-//  Created by Daniel Eggert on 1/21/10.
-//  Copyright 2010 Apple Inc. All rights reserved.
-//
+/* CoreImage - CIFeature.h
+ 
+ Copyright (c) 2010 Apple Computer, Inc.
+ All rights reserved. */
 
 #import <Foundation/Foundation.h>
 
@@ -23,16 +20,28 @@ CORE_IMAGE_CLASS_EXPORT
 @end
 
 
-
 /** Specifies the type of a feature that is a face. */
 CORE_IMAGE_EXPORT NSString* const CIFeatureTypeFace;
-
 
 
 /** A face feature found by a CIDetector.
  All positions are relative to the original image. */
 CORE_IMAGE_CLASS_EXPORT
-@interface CIFaceFeature : CIFeature {}
+@interface CIFaceFeature : CIFeature
+{
+	CGRect bounds;
+	BOOL hasLeftEyePosition;
+	CGPoint leftEyePosition;
+	BOOL hasRightEyePosition;
+	CGPoint rightEyePosition;
+	BOOL hasMouthPosition;
+	CGPoint mouthPosition;
+
+	BOOL hasTrackingID;
+	int trackingID;
+	BOOL hasTrackingFrameCount;
+	int trackingFrameCount;
+}
 
 @property (readonly, assign) BOOL hasLeftEyePosition;
 @property (readonly, assign) CGPoint leftEyePosition;
@@ -40,6 +49,11 @@ CORE_IMAGE_CLASS_EXPORT
 @property (readonly, assign) CGPoint rightEyePosition;
 @property (readonly, assign) BOOL hasMouthPosition;
 @property (readonly, assign) CGPoint mouthPosition;
+
+@property (readonly, assign) BOOL hasTrackingID;
+@property (readonly, assign) int trackingID;
+@property (readonly, assign) BOOL hasTrackingFrameCount;
+@property (readonly, assign) int trackingFrameCount;
 
 @end
 

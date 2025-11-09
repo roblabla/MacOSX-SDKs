@@ -755,7 +755,7 @@ typedef enum {
 
 
 /*!
- @function MDQuerySetOptionSortFlagsForAttribute
+ @function MDQuerySetSortOptionFlagsForAttribute
  Sets the sort flags for a query.
  @param query The query for which the sort flags is to be set.
  @param fieldName The attribute name for which sort option flags are to be set.  
@@ -1150,25 +1150,5 @@ typedef enum {
     kMDQueryReverseSortOrderFlag    = (1<<0),
 } MDQuerySortOptionFlags;
 
-
-/*!
- @function MDQuerySetOptionSortFlagsForAttribute
- Sets the sort flags for a query.
- @param query The query for which the sort flags is to be set.
- @param fieldName The attribute name for which sort option flags are to be set.  
-  The attribute name must have been part of the sortingFlags when the query was created.
- @param flags A uint32_t containing MDQuerySortOptionFlags to be applied to the attibute
- @result A boolean, true on success, false on failure.
- */
-MD_EXPORT Boolean MDQuerySetOptionSortFlagsForAttribute(MDQueryRef query, CFStringRef fieldName, uint32_t flags) AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
-
-/*!
- @function MDQueryGetSortOptionFlagsForAttribute
- Gets the sort option flags for a sorting attribute.
- @param query The query for which fetch sort option flags.
- @param fieldName The attribute name for which sort option flags are to be fetched.  
- @result A uint32_t, with MDQuerySortOptionFlags set for the attribute.
- */
-MD_EXPORT uint32_t MDQueryGetSortOptionFlagsForAttribute(MDQueryRef query, CFStringRef fieldName) AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 #endif

@@ -2,16 +2,9 @@
      File:       ConditionalMacros.r
  
      Contains:   Set up for compiler independent conditionals
+                 The contents of this header file are deprecated.
  
-     Version:    CarbonCore-960.18~3
- 
-     Copyright:  © 1993-2008 by Apple Computer, Inc., all rights reserved
- 
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
- 
-                     http://developer.apple.com/bugreporter/
- 
+     Copyright:  © 1993-2011 by Apple Inc. All rights reserved.
 */
 
 #ifndef __CONDITIONALMACROS_R__
@@ -80,7 +73,7 @@
 
     #if Environ_OS_Win32
        /*
-         Rez.exe resource compiler for Win32 from QuickTime 3.0, Apple Computer, Inc.    
+         Rez.exe resource compiler for Win32 from QuickTime 3.0, Apple Inc.    
        */
      #define TARGET_OS_MAC               0
       #define TARGET_OS_WIN32             1
@@ -96,7 +89,7 @@
     
    #elif Environ_OS_Unix
       /*
-         Rez resource compiler for unix from QuickTime 3.0, Apple Computer, Inc. 
+         Rez resource compiler for unix from QuickTime 3.0, Apple Inc. 
        */
      #define TARGET_OS_MAC               1
       #define TARGET_OS_WIN32             0
@@ -112,7 +105,7 @@
     
    #else
       /*
-         Rez resource compiler for MacOS from QuickTime 3.0, Apple Computer, Inc.    
+         Rez resource compiler for MacOS from QuickTime 3.0, Apple Inc.    
        */
      #define TARGET_OS_MAC               1
       #define TARGET_OS_WIN32             0
@@ -129,7 +122,7 @@
     
 #else
  /*
-     Rez resource compiler for MacOS, Apple Computer, Inc.   
+     Rez resource compiler for MacOS, Apple Inc.   
    */
  #define TARGET_OS_MAC               1
   #define TARGET_OS_WIN32             0

@@ -366,13 +366,6 @@ public:
     virtual bool isEqualTo(const OSMetaClassBase * anObject) const;
 
 
-   /* OSRuntime only INTERNAL API - DO NOT USE */
-   /* Not to be included in headerdoc. */
-    // xx-review: this should be removed from the symbol set.
-    static void checkForPageUnload(
-        void * startAddr,
-        void * endAddr);
-
 
     OSMetaClassDeclareReservedUnused(OSSymbol, 0);
     OSMetaClassDeclareReservedUnused(OSSymbol, 1);

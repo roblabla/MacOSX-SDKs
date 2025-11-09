@@ -1,6 +1,6 @@
 /*
 	NSAppleEventDescriptor.h
-	Copyright (c) 1997-2011, Apple Inc. All rights reserved.
+	Copyright (c) 1997-2012, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -8,7 +8,7 @@
 
 @class NSData;
 
-@interface NSAppleEventDescriptor : NSObject<NSCopying> {
+@interface NSAppleEventDescriptor : NSObject<NSCopying, NSSecureCoding> {
     @private
     AEDesc _desc;
     BOOL _hasValidDesc;
@@ -47,7 +47,7 @@
 - (id)initRecordDescriptor;
 
 // Return a pointer to the AEDesc that is encapsulated by the object.
-- (const AEDesc *)aeDesc;
+- (const AEDesc *)aeDesc NS_RETURNS_INNER_POINTER;
 
 // Get the four-character type code or the data from a fully-initialized descriptor.
 - (DescType)descriptorType;

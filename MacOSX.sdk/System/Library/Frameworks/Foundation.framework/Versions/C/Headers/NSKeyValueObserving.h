@@ -1,6 +1,6 @@
 /*
 	NSKeyValueObserving.h
-	Copyright (c) 2003-2011, Apple Inc.
+	Copyright (c) 2003-2012, Apple Inc.
 	All rights reserved.
 */
 
@@ -13,49 +13,42 @@
 
 /* Options for use with -addObserver:forKeyPath:options:context: and -addObserver:toObjectsAtIndexes:forKeyPath:options:context:.
 */
-enum {
+typedef NS_OPTIONS(NSUInteger, NSKeyValueObservingOptions) {
 
     /* Whether the change dictionaries sent in notifications should contain NSKeyValueChangeNewKey and NSKeyValueChangeOldKey entries, respectively.
     */
     NSKeyValueObservingOptionNew = 0x01,
     NSKeyValueObservingOptionOld = 0x02,
 
-#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED || __IPHONE_2_0 <= __IPHONE_OS_VERSION_MAX_ALLOWED
-
     /* Whether a notification should be sent to the observer immediately, before the observer registration method even returns. The change dictionary in the notification will always contain an NSKeyValueChangeNewKey entry if NSKeyValueObservingOptionNew is also specified but will never contain an NSKeyValueChangeOldKey entry. (In an initial notification the current value of the observed property may be old, but it's new to the observer.) You can use this option instead of explicitly invoking, at the same time, code that is also invoked by the observer's -observeValueForKeyPath:ofObject:change:context: method. When this option is used with -addObserver:toObjectsAtIndexes:forKeyPath:options:context: a notification will be sent for each indexed object to which the observer is being added.
     */
-    NSKeyValueObservingOptionInitial = 0x04,
+    NSKeyValueObservingOptionInitial NS_ENUM_AVAILABLE(10_5, 2_0) = 0x04,
 
     /* Whether separate notifications should be sent to the observer before and after each change, instead of a single notification after the change. The change dictionary in a notification sent before a change always contains an NSKeyValueChangeNotificationIsPriorKey entry whose value is [NSNumber numberWithBool:YES], but never contains an NSKeyValueChangeNewKey entry. You can use this option when the observer's own KVO-compliance requires it to invoke one of the -willChange... methods for one of its own properties, and the value of that property depends on the value of the observed object's property. (In that situation it's too late to easily invoke -willChange... properly in response to receiving an -observeValueForKeyPath:ofObject:change:context: message after the change.)
 
 When this option is specified, the change dictionary in a notification sent after a change contains the same entries that it would contain if this option were not specified, except for ordered unique to-many relationships represented by NSOrderedSets.  For those, for NSKeyValueChangeInsertion and NSKeyValueChangeReplacement changes, the change dictionary for a will-change notification contains an NSKeyValueChangeIndexesKey (and NSKeyValueChangeOldKey in the case of Replacement where the NSKeyValueObservingOptionOld option was specified at registration time) which give the indexes (and objects) which *may* be changed by the operation.  The second notification, after the change, contains entries reporting what did actually change.  For NSKeyValueChangeRemoval changes, removals by index are precise.
     */
-    NSKeyValueObservingOptionPrior = 0x08
-
-#endif
+    NSKeyValueObservingOptionPrior NS_ENUM_AVAILABLE(10_5, 2_0) = 0x08
 
 };
-typedef NSUInteger NSKeyValueObservingOptions;
 
 /* Possible values in the NSKeyValueChangeKindKey entry in change dictionaries. See the comments for -observeValueForKeyPath:ofObject:change:context: for more information.
 */
-enum {
+typedef NS_OPTIONS(NSUInteger, NSKeyValueChange) {
     NSKeyValueChangeSetting = 1,
     NSKeyValueChangeInsertion = 2,
     NSKeyValueChangeRemoval = 3,
     NSKeyValueChangeReplacement = 4
 };
-typedef NSUInteger NSKeyValueChange;
 
 /* Possible kinds of set mutation for use with -willChangeValueForKey:withSetMutation:usingObjects: and -didChangeValueForKey:withSetMutation:usingObjects:. Their semantics correspond exactly to NSMutableSet's -unionSet:, -minusSet:, -intersectSet:, and -setSet: method, respectively.
 */
-enum {
+typedef NS_OPTIONS(NSUInteger, NSKeyValueSetMutationKind) {
     NSKeyValueUnionSetMutation = 1,
     NSKeyValueMinusSetMutation = 2,
     NSKeyValueIntersectSetMutation = 3,
     NSKeyValueSetSetMutation = 4
 };
-typedef NSUInteger NSKeyValueSetMutationKind;
 
 /* Keys for entries in change dictionaries. See the comments for -observeValueForKeyPath:ofObject:change:context: for more information.
 */
@@ -188,7 +181,7 @@ You can't really override this method when you add a computed property to an exi
 /* Take or return a pointer that identifies information about all of the observers that are registered with the receiver, the options that were used at registration-time, etc. The default implementation of these methods store observation info in a global dictionary keyed by the receivers' pointers. For improved performance, you can override these methods to store the opaque data pointer in an instance variable. Overrides of these methods must not attempt to send Objective-C messages to the passed-in observation info, including -retain and -release.
 */
 - (void)setObservationInfo:(void *)observationInfo;
-- (void *)observationInfo;
+- (void *)observationInfo NS_RETURNS_INNER_POINTER;
 
 @end
 

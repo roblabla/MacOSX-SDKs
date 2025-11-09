@@ -85,12 +85,7 @@ typedef struct pmc_config *pmc_config_t;
  * to the IORegistry (this way only usable PMCs and Perf Monitors will be shown.)
  ****************************************************************************/
 
-/*!typedef
- * @abstract A pointer to a method that returns whether or not the given performance monitor driver supports context switched counters
- * @param pm A registered performance monitor driver object (see <link>perf_monitor_register</link>).
- * @result TRUE if the driver supports context switching, FALSE otherwise.
- */
-typedef boolean_t (*perfmon_supports_context_switch_method_t)(perf_monitor_object_t pm);
+typedef kern_return_t (*perfmon_get_accessible_cores_method_t)(pmc_object_t pmc, uint32_t **cores, size_t *coreCt);
 
 /*!typedef
  * @abstract A pointer to a method that enables a set of counters.
@@ -109,7 +104,14 @@ typedef kern_return_t (*perfmon_enable_counters_method_t)(perf_monitor_object_t 
  */
 typedef kern_return_t (*perfmon_disable_counters_method_t)(perf_monitor_object_t pm, pmc_object_t *pmcs, uint32_t pmcCount);
 
-#define MACH_PERFMON_METHODS_VERSION 0
+typedef void (*perfmon_on_idle_method_t)(perf_monitor_object_t pm);
+typedef void (*perfmon_on_idle_exit_method_t)(perf_monitor_object_t pm);
+
+#define MACH_PERFMON_METHODS_VERSION 1
+
+#define PERFMON_FLAG_SUPPORTS_CONTEXT_SWITCHING     0x1
+#define PERFMON_FLAG_REQUIRES_IDLE_NOTIFICATIONS    0x2
+#define PERFMON_FLAG_ALWAYS_ACTIVE                  0x4
 
 /*!struct perf_monitor_methods
  * @abstract A set of method pointers to be used when interacting with a performance monitor object
@@ -119,12 +121,16 @@ typedef kern_return_t (*perfmon_disable_counters_method_t)(perf_monitor_object_t
 typedef struct perf_monitor_methods {
 	uint32_t perf_monitor_methods_version;	// Always set to MACH_PERFMON_METHODS_VERSION when writing driver kexts
 	
-	// All methods are required.
-	perfmon_supports_context_switch_method_t supports_context_switching;
+	uint32_t flags;
+
+	perfmon_get_accessible_cores_method_t accessible_cores;
+
 	perfmon_enable_counters_method_t enable_counters;
 	perfmon_disable_counters_method_t disable_counters;
-}perf_monitor_methods_t;
 
+	perfmon_on_idle_method_t on_idle;
+    perfmon_on_idle_exit_method_t on_idle_exit;
+} perf_monitor_methods_t;
 
 /****************************************************************************
  * Method types for performance counter registration
@@ -233,7 +239,8 @@ typedef boolean_t (*pmc_is_accessible_from_logical_core_method_t)(pmc_object_t p
 
 /*!typedef 
  * @abstract A pointer to a method that returns an array of the logical cores from which a PMC can be accessed.
- * @discussion A pointer to a method that returns an array of the logical cores from which a PMC can be accessed. Resulting array of cores should not be released by xnu.
+ * @discussion A pointer to a method that returns an array of the logical cores from which a PMC can be accessed. 
+ * Resulting array of cores should not be released by xnu.
  * Implementations of this method type must be safe to call at interrupt context.
  * @param pmc A valid pmc object
  * @param cores A value-returned array of logical cores that can access the given PMC.
@@ -311,7 +318,7 @@ typedef struct pmc_methods {
 	pmc_enable_method_t enable;
 	pmc_open_method_t open;
 	pmc_close_method_t close;
-}pmc_methods_t;
+} pmc_methods_t;
 
 /*
  * Kext interface Methods
@@ -417,8 +424,14 @@ typedef struct perf_monitor {
 	// reference counted
 	uint32_t useCount;
 	
-	// link to other perf monitors
+	uint32_t reservedCounters;
+    
+	// A value of -1 here indicates independence from a particular core
+	int cpu;
+	
+	// links to other perf monitors
 	queue_chain_t link;
+	queue_chain_t cpu_link;
 }*perf_monitor_t;
 
 /*!struct pmc
@@ -557,14 +570,17 @@ void pmc_free_config(pmc_t pmc, pmc_config_t config);
 
 /*!fn
  * @abstract Setup the configuration
- * @discussion Configurations for counter are architecture-neutral key-value pairs (8bit key, 64bit value).  Meanings of the keys and values are defined by the driver-writer and are listed in XML form available for interrogation via the CoreProfile framework. This method is not interrupt safe.
+ * @discussion Configurations for counter are architecture-neutral key-value pairs (8bit key, 64bit value). Meanings of the keys and values are defined
+ * by the driver-writer and are listed in XML form available for interrogation via the CoreProfile framework. This method is not interrupt safe.
  * @result KERN_SUCCESS on success. 
  */
 kern_return_t pmc_config_set_value(pmc_t pmc, pmc_config_t config, uint8_t id, uint64_t value);
 
 /*!fn
  * @abstract Interrupt Threshold Setup
- * @discussion In order to configure a PMC to use PMI (cause an interrupt after so-many events occur), use this method, and provide a function to be called after the interrupt occurs, along with a reference context. PMC Threshold handler methods will have the pmc that generated the interrupt as the first argument when the interrupt handler is invoked, and the given  @refCon (which may be NULL) as the second.  This method is not interrupt safe.
+ * @discussion In order to configure a PMC to use PMI (cause an interrupt after so-many events occur), use this method, and provide a function to be
+ * called after the interrupt occurs, along with a reference context. PMC Threshold handler methods will have the pmc that generated the interrupt as 
+ * the first argument when the interrupt handler is invoked, and the given  @refCon (which may be NULL) as the second. This method is not interrupt safe.
  */
 kern_return_t pmc_config_set_interrupt_threshold(pmc_t pmc, pmc_config_t config, uint64_t threshold, pmc_interrupt_method_t method, void *refCon);
 
@@ -586,7 +602,8 @@ void pmc_free_pmc_list(pmc_t *pmcs, size_t pmcCount);
 
 /*!fn
  * @abstract Finds pmcs by partial string matching.
- * @discussion This method returns a list of pmcs (similar to <link>pmc_get_pmc_list</link>) whose names match the given string up to it's length.  For example, searching for "ia32" would return pmcs "ia32gp0" and "ia32gp1". Results should be released by the caller using <link>pmc_free_pmc_list</link>
+ * @discussion This method returns a list of pmcs (similar to <link>pmc_get_pmc_list</link>) whose names match the given string up to it's length.  
+ * For example, searching for "ia32" would return pmcs "ia32gp0" and "ia32gp1". Results should be released by the caller using <link>pmc_free_pmc_list</link>
  * @param name Partial string to search for.
  * @param pmcs Storage for the resultant pmc_t array pointer.
  * @param pmcCount Storage for the resultant count of pmc_t's.
@@ -602,20 +619,13 @@ const char *pmc_get_name(pmc_t pmc);
 
 /*!fn
  * @abstract Returns a list of logical cores from which the given pmc can be read from or written to.
- * @discussion This method can return a NULL list with count of 0 -- this indicates any core can read the given pmc. This method does not allocate the list, therefore callers should take care not to mutate or free the resultant list. This method is interrupt safe.
+ * @discussion This method can return a NULL list with count of 0 -- this indicates any core can read the given pmc. This method does not allocate the list, 
+ * therefore callers should take care not to mutate or free the resultant list. This method is interrupt safe.
  * @param pmc The PMC for which to return the cores that can read/write it.
  * @param logicalCores Storage for the pointer to the list.
  * @param logicalCoreCt Value-return number of elements in the returned list.  0 indicates all cores can read/write the given pmc.
  */
 kern_return_t pmc_get_accessible_core_list(pmc_t pmc, uint32_t **logicalCores, size_t *logicalCoreCt);
-
-/*!fn
- * @abstract Returns TRUE if the given logical core can read/write the given PMC.
- * @discussion This method is interrupt safe.
- * @param pmc The PMC to test
- * @param logicalCore The core from which to test.
- */
-boolean_t pmc_accessible_from_core(pmc_t pmc, uint32_t logicalCore);
 
 /* 
  * BEGIN PMC Reservations
@@ -626,7 +636,9 @@ boolean_t pmc_accessible_from_core(pmc_t pmc, uint32_t logicalCore);
 
 /*!fn
  * @abstract Reserve a PMC for System-wide counting.
- * @discussion This method will attempt to reserve the given pmc at system-scope. It will configure the given pmc to count the event indicated by the given configuration object. This method consumes the given configuration object if the return value is KERN_SUCCESS - any other return value indicates the caller should free the configuration object via <link>pmc_free_config</link>. This method is not interrupt safe.
+ * @discussion This method will attempt to reserve the given pmc at system-scope. It will configure the given pmc to count the event indicated by the given 
+ * configuration object. This method consumes the given configuration object if the return value is KERN_SUCCESS - any other return value indicates the caller 
+ * should free the configuration object via <link>pmc_free_config</link>. This method is not interrupt safe.
  * @param pmc The PMC to reserve.
  * @param config The configuration object to use with the given pmc.
  * @param reservation A value-return reservation object to be used in pmc_reservation_* methods.
@@ -641,7 +653,8 @@ kern_return_t pmc_reserve(pmc_t pmc, pmc_config_t config, pmc_reservation_t *res
 
 /*!fn
  * @abstract Reserve a PMC for task-wide counting.
- * @discussion This method will attempt to reserve the given pmc for task-wide counting. The resulting reservation will only count when the task is running on one of the logical cores that can read the given pmc. The semantics of this method are the same as <link>pmc_reserve</link> in all other respects.
+ * @discussion This method will attempt to reserve the given pmc for task-wide counting. The resulting reservation will only count when the task is running 
+ * on one of the logical cores that can read the given pmc. The semantics of this method are the same as <link>pmc_reserve</link> in all other respects.
  * @param pmc The PMC to reserve
  * @param config The configuration object to use.
  * @param task The task for which to enable the counter.
@@ -652,7 +665,8 @@ kern_return_t pmc_reserve_task(pmc_t pmc, pmc_config_t config, task_t task, pmc_
 
 /*!fn
  * @abstract Reserve a PMC for thread-wide counting.
- * @discussion This method will attempt to reserve the given pmc for thread-wide counting. The resulting reservation will only count when the thread is running on one of the logical cores that can read the given pmc. The semantics of this method are the same as <link>pmc_reserve_task</link> in all other respects.
+ * @discussion This method will attempt to reserve the given pmc for thread-wide counting. The resulting reservation will only count when the thread is 
+ * running on one of the logical cores that can read the given pmc. The semantics of this method are the same as <link>pmc_reserve_task</link> in all other respects.
  * @param pmc The PMC to reserve
  * @param config The configuration object to use.
  * @param thread The thread for which to enable the counter.
@@ -663,21 +677,28 @@ kern_return_t pmc_reserve_thread(pmc_t pmc, pmc_config_t config, thread_t thread
 
 /*!fn
  * @abstract Start counting
- * @discussion This method instructs the given reservation to start counting as soon as possible. If the reservation is for a thread (or task) other than the current thread, or for a pmc that is not accessible from the current logical core, the reservation will start counting the next time the thread (or task) runs on a logical core than can access the pmc. This method is interrupt safe. If this method is called from outside of interrupt context, it may block.
+ * @discussion This method instructs the given reservation to start counting as soon as possible. If the reservation is for a thread (or task) other than the 
+ * current thread, or for a pmc that is not accessible from the current logical core, the reservation will start counting the next time the thread (or task) 
+ * runs on a logical core than can access the pmc. This method is interrupt safe. If this method is called from outside of interrupt context, it may block.
  * @param reservation The reservation to start counting
  */
 kern_return_t pmc_reservation_start(pmc_reservation_t reservation);
 
 /*!fn
  * @abstract Stop counting
- * @discussion This method instructs the given reservation to stop counting as soon as possible. If the reservation is for a thread (or task) other than the current thread, or for a pmc that is not accessible from the current logical core, the reservation will stop counting the next time the thread (or task) ceases to run on a logical core than can access the pmc. This method is interrupt safe. If called form outside of interrupt context, this method may block.
+ * @discussion This method instructs the given reservation to stop counting as soon as possible. If the reservation is for a thread (or task) other than the 
+ * current thread, or for a pmc that is not accessible from the current logical core, the reservation will stop counting the next time the thread (or task) c
+ * eases to run on a logical core than can access the pmc. This method is interrupt safe. If called form outside of interrupt context, this method may block.
  * @param reservation The reservation to stop counting
  */
 kern_return_t pmc_reservation_stop(pmc_reservation_t reservation);
 
 /*!fn
  * @abstract Read the counter value
- * @discussion This method will read the event count associated with the given reservation. If the pmc is currently on hardware, and the caller is currently executing in a context that both a) matches the reservation's context, and b) can access the reservation's pmc directly, the value will be read directly from the hardware.  Otherwise, the value stored in the reservation is returned. This method is interrupt safe. If the caller is calling from outside of interrupt context, this method may block.
+ * @discussion This method will read the event count associated with the given reservation. If the pmc is currently on hardware, and the caller is currently ]
+ * executing in a context that both a) matches the reservation's context, and b) can access the reservation's pmc directly, the value will be read directly 
+ * from the hardware.  Otherwise, the value stored in the reservation is returned. This method is interrupt safe. If the caller is calling from outside of 
+ * interrupt context, this method may block.
  * @param reservation The reservation whose value to read.
  * @param value Value-return event count
  */
@@ -685,7 +706,10 @@ kern_return_t pmc_reservation_read(pmc_reservation_t reservation, uint64_t *valu
 
 /*!fn
  * @abstract Write the counter value
- * @discussion This method will write the event count associated with the given reservation. If the pmc is currently on hardware, and the caller is currently executing in a context that both a) matches the reservation's context, and b) can access the reservation's pmc directly, the value will be written directly to the hardware.  Otherwise, the value stored in the reservation is overwritten. This method is interrupt safe. If the caller is calling from outside of interrupt context, this method may block.
+ * @discussion This method will write the event count associated with the given reservation. If the pmc is currently on hardware, and the caller is currently 
+ * executing in a context that both a) matches the reservation's context, and b) can access the reservation's pmc directly, the value will be written directly 
+ * to the hardware. Otherwise, the value stored in the reservation is overwritten. This method is interrupt safe. If the caller is calling from outside of 
+ * interrupt context, this method may block.
  * @param reservation The reservation to write.
  * @param value The event count to write
  */
@@ -693,7 +717,8 @@ kern_return_t pmc_reservation_write(pmc_reservation_t reservation, uint64_t valu
 
 /*!fn
  * @abstract Free a reservation and all associated resources.
- * @discussion This method will free the resources associated with the given reservation and release the associated PMC back to general availability. If the reservation is currently counting, it will be stopped prior to release. This method is not interrupt safe.
+ * @discussion This method will free the resources associated with the given reservation and release the associated PMC back to general availability. 
+ * If the reservation is currently counting, it will be stopped prior to release. This method is not interrupt safe.
  * @param reservation The reservation to free
  */
 kern_return_t pmc_reservation_free(pmc_reservation_t reservation);

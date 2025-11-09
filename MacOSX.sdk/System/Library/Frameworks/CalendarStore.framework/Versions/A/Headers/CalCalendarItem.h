@@ -6,6 +6,8 @@
 //
 //  This class and its subclasses should be used to get information about CalEvent and CalTasks. Accessors for 
 //  properties common to both of these classes are included here.
+//
+//  The Calendar Store framework is deprecated.  Please use the Event Kit framework instead.
 
 @class CalAlarm;
 @class CalCalendar;
@@ -23,22 +25,22 @@
     NSArray *_alarms;
 }
 
-- (BOOL)hasAlarm;
-- (NSDate *)nextAlarmDate;
+- (BOOL)hasAlarm NS_DEPRECATED_MAC(10_5, 10_8);
+- (NSDate *)nextAlarmDate NS_DEPRECATED_MAC(10_5, 10_8);
 
-@property(retain) CalCalendar *calendar;
-@property(copy) NSString *notes;
-@property(copy) NSURL *url;
-@property(copy) NSString *title;
+@property(retain) CalCalendar *calendar NS_DEPRECATED_MAC(10_5, 10_8);
+@property(copy) NSString *notes NS_DEPRECATED_MAC(10_5, 10_8);
+@property(copy) NSURL *url NS_DEPRECATED_MAC(10_5, 10_8);
+@property(copy) NSString *title NS_DEPRECATED_MAC(10_5, 10_8);
 
-@property(copy, readonly) NSString *uid;
-@property(copy, readonly) NSDate *dateStamp;
+@property(copy, readonly) NSString *uid NS_DEPRECATED_MAC(10_5, 10_8);
+@property(copy, readonly) NSDate *dateStamp NS_DEPRECATED_MAC(10_5, 10_8);
 
-@property(copy) NSArray *alarms;                // An array of CalAlarms
+@property(copy) NSArray *alarms NS_DEPRECATED_MAC(10_5, 10_8);                // An array of CalAlarms
 
-- (void) addAlarm:(CalAlarm *)alarm;
-- (void) addAlarms:(NSArray *)alarms;
-- (void) removeAlarm:(CalAlarm *)alarm;
-- (void) removeAlarms:(NSArray *)alarms;
+- (void) addAlarm:(CalAlarm *)alarm NS_DEPRECATED_MAC(10_5, 10_8);
+- (void) addAlarms:(NSArray *)alarms NS_DEPRECATED_MAC(10_5, 10_8);
+- (void) removeAlarm:(CalAlarm *)alarm NS_DEPRECATED_MAC(10_5, 10_8);
+- (void) removeAlarms:(NSArray *)alarms NS_DEPRECATED_MAC(10_5, 10_8);
 
 @end

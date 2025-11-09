@@ -1,7 +1,7 @@
 /*
 	NSColor.h
 	Application Kit
-	Copyright (c) 1994-2011, Apple Inc.
+	Copyright (c) 1994-2012, Apple Inc.
 	All rights reserved.
 */
 
@@ -25,7 +25,7 @@ Alpha component defines opacity on devices which support it (1.0 == full opacity
 
 It's illegal to ask a color for components that are not defined for its colorspace. If you need to ask a color for a certain set of components (for instance, you need to know the RGB components of a color you got from the color panel), you should first convert the color to the appropriate colorspace using colorUsingColorSpace:, or the appropriate named colorspace using  colorUsingColorSpaceName:.  If the color is already in the specified colorspace, you get the same color back; otherwise you get a conversion which is usually lossy or is correct only for the current device. You might also get back nil if the specified conversion cannot be done.
 
-Subclassers of NSColor need to implement the methods colorSpaceName, set, the various methods which return the components for that color space, and the NSCoding protocol. Some other methods such as colorWithAlphaComponent:, isEqual:, colorUsingColorSpaceName:device: may also be implemented if they make sense for the colorspace. If isEqual: is overridden, so should hash (because if [a isEqual:b] then [a hash] == [b hash]). Mutable subclassers (if any) should also implement copyWithZone: to a true copy.
+Subclassers of NSColor need to implement the methods colorSpaceName, set, the various methods which return the components for that color space, and the NSCoding protocol. Some other methods such as colorWithAlphaComponent:, isEqual:, colorUsingColorSpaceName:device:, and CGColor may also be implemented if they make sense for the colorspace. If isEqual: is overridden, so should hash (because if [a isEqual:b] then [a hash] == [b hash]). Mutable subclassers (if any) should also implement copyWithZone: to a true copy.
 */
 
 #import <Foundation/NSObject.h>
@@ -113,8 +113,9 @@ Subclassers of NSColor need to implement the methods colorSpaceName, set, the va
 + (NSColor *)selectedTextColor;			// Selected document text
 + (NSColor *)selectedTextBackgroundColor;	// Selected document text background
 + (NSColor *)gridColor;				// Grids in controls
-+ (NSColor *)keyboardFocusIndicatorColor;	// Keyboard focus ring around controls
++ (NSColor *)keyboardFocusIndicatorColor;// Keyboard focus ring around controls
 + (NSColor *)windowBackgroundColor;		// Background fill for window contents
++ (NSColor *)underPageBackgroundColor NS_AVAILABLE_MAC(10_8);   // Background areas revealed behind views
 
 + (NSColor *)scrollBarColor;			// Scroll bar slot color
 + (NSColor *)knobColor;     			// Knob face color for controls
@@ -245,6 +246,7 @@ If colorSpace is nil, then the most appropriate color space is used.
 + (NSColor *)colorFromPasteboard:(NSPasteboard *)pasteBoard;
 - (void)writeToPasteboard:(NSPasteboard *)pasteBoard;
 
+
 /* Pattern methods. Note that colorWithPatternImage: mistakenly returns a non-autoreleased color in 10.1.x and earlier. This has been fixed in (NSAppKitVersionNumber >= NSAppKitVersionNumberWithPatternColorLeakFix), for apps linked post-10.1.x.
 */
 + (NSColor *)colorWithPatternImage:(NSImage*)image;
@@ -253,6 +255,12 @@ If colorSpace is nil, then the most appropriate color space is used.
 /* Draws the color and adorns it to indicate the type of color. Used by colorwells, swatches, and other UI objects that need to display colors. Implementation in NSColor simply draws the color (with an indication of transparency if the color isn't fully opaque); subclassers can draw more stuff as they see fit.
 */
 - (void)drawSwatchInRect:(NSRect)rect;
+
+
+/* Convert to and from CGColorRef.
+*/
++ (NSColor *)colorWithCGColor:(CGColorRef)cgColor NS_AVAILABLE_MAC(10_8);   // May return nil
+- (CGColorRef)CGColor NS_AVAILABLE_MAC(10_8);                               // Returns an autoreleased CGColor. This will never be NULL, although the return value may be an approximation in some cases, so there isn't guaranteed round-trip fidelity.
 
 
 /* Global flag for determining whether an application supports alpha.  This flag is consulted when an application imports alpha (through color dragging, for instance). The value of this flag also determines whether the color panel has an opacity slider. This value is YES by default, indicating that the opacity components of imported colors will be set to 1.0. If an application wants alpha, it can either set the "NSIgnoreAlpha" default to NO or call the set method below.

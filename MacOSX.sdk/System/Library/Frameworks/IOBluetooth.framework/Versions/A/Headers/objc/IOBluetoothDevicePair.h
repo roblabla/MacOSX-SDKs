@@ -5,8 +5,6 @@
 
 #import <IOKit/IOReturn.h>
 
-#if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_1_1
-
 //===========================================================================================================================
 //	Forwards
 //===========================================================================================================================
@@ -47,7 +45,7 @@
 	BOOL						_SDPQueryComplete;
 	IOReturn					_connectionCompleteStatus;
 	uint32_t					_totalAttempts;
-	__strong void *				_expansion;
+	id                          _expansion;
 }
 
 @property(assign) id delegate;
@@ -178,6 +176,3 @@
 - (void) devicePairingFinished:(id)sender error:(IOReturn)error;
 
 @end
-
-#endif /* BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_1_1 */
-

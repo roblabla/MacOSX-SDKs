@@ -327,6 +327,15 @@ __BEGIN_DECLS
  */
 #define kIOPersonalityPublisherKey              "IOPersonalityPublisher"
 
+#if CONFIG_KEC_FIPS
+/*
+ * @define   kAppleTextHashesKey
+ * @abstract A dictionary conataining hashes for corecrypto kext.
+ */
+#define kAppleTextHashesKey                     "AppleTextHashes"
+#endif
+
+
 
 #if PRAGMA_MARK
 /********************************************************************/

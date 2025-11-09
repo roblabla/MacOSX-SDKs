@@ -3,9 +3,9 @@
  
      Contains:   AppleEvent Package Interfaces.
  
-     Version:    AppleEvents-527.7~1
+    
  
-     Copyright:  © 1989-2008 by Apple Computer, Inc., all rights reserved
+     Copyright:  ï¿½ 1989-2008 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -34,7 +34,7 @@
 
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -102,8 +102,17 @@ enum {
   kAERemoteProcess              = 4
 };
 
+	
+#if __MAC_OS_X_VERSION_MIN_REQUIRED >= 1080
+	enum {
+		errAETargetAddressNotPermitted	 = 	-1742,	/* Mac OS X 10.8 and later, the target of an AppleEvent is not accessible to this process, perhaps due to sandboxing */
+		errAEEventNotPermitted = -1743,			/* Mac OS X 10.8 and later, the target of the AppleEvent does not allow this sender to execute this event */
+	};
+#endif
+	
+	
 /**************************************************************************
-  These calls are used to set up and modify the event dispatch table.
+  These calls are used to set up and modify the event dispatch table.D
 **************************************************************************/
 /*
  *  AEInstallEventHandler()
@@ -122,7 +131,7 @@ AEInstallEventHandler(
   AEEventID           theAEEventID,
   AEEventHandlerUPP   handler,
   SRefCon             handlerRefcon,
-  Boolean             isSysHandler)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean             isSysHandler)                           __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 
 /*
@@ -141,7 +150,7 @@ AERemoveEventHandler(
   AEEventClass        theAEEventClass,
   AEEventID           theAEEventID,
   AEEventHandlerUPP   handler,
-  Boolean             isSysHandler)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean             isSysHandler)                           __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 
 /*
@@ -161,7 +170,7 @@ AEGetEventHandler(
   AEEventID            theAEEventID,
   AEEventHandlerUPP *  handler,
   SRefCon *            handlerRefcon,
-  Boolean              isSysHandler)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean              isSysHandler)                          __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 
 
@@ -185,7 +194,7 @@ extern OSErr
 AEInstallSpecialHandler(
   AEKeyword           functionClass,
   AEEventHandlerUPP   handler,
-  Boolean             isSysHandler)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean             isSysHandler)                           __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 
 /*
@@ -203,7 +212,7 @@ extern OSErr
 AERemoveSpecialHandler(
   AEKeyword           functionClass,
   AEEventHandlerUPP   handler,
-  Boolean             isSysHandler)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean             isSysHandler)                           __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 
 /*
@@ -221,7 +230,7 @@ extern OSErr
 AEGetSpecialHandler(
   AEKeyword            functionClass,
   AEEventHandlerUPP *  handler,
-  Boolean              isSysHandler)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean              isSysHandler)                          __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 
 
@@ -245,7 +254,7 @@ AEGetSpecialHandler(
 extern OSErr 
 AEManagerInfo(
   AEKeyword   keyWord,
-  long *      result)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *      result)                                         __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
 
 
 
@@ -282,7 +291,7 @@ AEManagerInfo(
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kAERemoteProcessURLKey                      AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern const CFStringRef kAERemoteProcessURLKey                      __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
 /*
  *  kAERemoteProcessNameKey
  *  
@@ -295,7 +304,7 @@ extern const CFStringRef kAERemoteProcessURLKey                      AVAILABLE_M
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kAERemoteProcessNameKey                     AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern const CFStringRef kAERemoteProcessNameKey                     __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
 /*
  *  kAERemoteProcessUserIDKey
  *  
@@ -308,7 +317,7 @@ extern const CFStringRef kAERemoteProcessNameKey                     AVAILABLE_M
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kAERemoteProcessUserIDKey                   AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern const CFStringRef kAERemoteProcessUserIDKey                   __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
 /*
  *  kAERemoteProcessProcessIDKey
  *  
@@ -321,7 +330,7 @@ extern const CFStringRef kAERemoteProcessUserIDKey                   AVAILABLE_M
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kAERemoteProcessProcessIDKey                AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern const CFStringRef kAERemoteProcessProcessIDKey                __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
 
 /*
  *  AERemoteProcessResolverContext
@@ -406,7 +415,7 @@ typedef struct AERemoteProcessResolver*  AERemoteProcessResolverRef;
 extern AERemoteProcessResolverRef 
 AECreateRemoteProcessResolver(
   CFAllocatorRef   allocator,
-  CFURLRef         url)                                       AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  CFURLRef         url)                                       __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
 
 
 /*
@@ -431,7 +440,7 @@ AECreateRemoteProcessResolver(
  *    Non-Carbon CFM:   not available
  */
 extern void 
-AEDisposeRemoteProcessResolver(AERemoteProcessResolverRef ref) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+AEDisposeRemoteProcessResolver(AERemoteProcessResolverRef ref) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
 
 
 /*
@@ -474,7 +483,7 @@ AEDisposeRemoteProcessResolver(AERemoteProcessResolverRef ref) AVAILABLE_MAC_OS_
 extern CFArrayRef 
 AERemoteProcessResolverGetProcesses(
   AERemoteProcessResolverRef   ref,
-  CFStreamError *              outError)                      AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  CFStreamError *              outError)                      __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
 
 
 
@@ -532,7 +541,7 @@ AERemoteProcessResolverScheduleWithRunLoop(
   CFRunLoopRef                            runLoop,
   CFStringRef                             runLoopMode,
   AERemoteProcessResolverCallback         callback,
-  const AERemoteProcessResolverContext *  ctx)               /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  const AERemoteProcessResolverContext *  ctx)               /* can be NULL */ __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
 
 
 

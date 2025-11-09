@@ -29,7 +29,7 @@
 
 #if __OBJC__
 
-FOUNDATION_EXPORT NSString *const ODFrameworkErrorDomain;
+FOUNDATION_EXPORT NSString *const ODFrameworkErrorDomain NS_AVAILABLE(10_6, NA);
 
 #import <OpenDirectory/ODSession.h>
 #import <OpenDirectory/ODRecord.h>

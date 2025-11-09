@@ -2,16 +2,9 @@
      File:       CarbonCore/PLStringFuncs.h
  
      Contains:   Pascal string manipulation routines that parallel ANSI C string.h
+                 The contents of this header file are deprecated.
  
-     Version:    CarbonCore-960.18~3
- 
-     Copyright:  © 1999-2008 by Apple Computer, Inc., all rights reserved.
- 
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
- 
-                     http://developer.apple.com/bugreporter/
- 
+     Copyright:  Â© 1999-2011 by Apple Inc. All rights reserved.
 */
 #ifndef __PLSTRINGFUNCS__
 #define __PLSTRINGFUNCS__
@@ -22,7 +15,7 @@
 
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -75,7 +68,7 @@ extern "C" {
 extern short 
 PLstrcmp(
   ConstStr255Param   str1,
-  ConstStr255Param   str2)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  ConstStr255Param   str2)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -128,7 +121,7 @@ extern short
 PLstrncmp(
   ConstStr255Param   str1,
   ConstStr255Param   str2,
-  short              num)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  short              num)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -170,7 +163,7 @@ PLstrncmp(
 extern StringPtr 
 PLstrcpy(
   StringPtr          dest,
-  ConstStr255Param   source)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  ConstStr255Param   source)                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -220,7 +213,7 @@ extern StringPtr
 PLstrncpy(
   StringPtr          dest,
   ConstStr255Param   source,
-  short              num)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  short              num)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -266,7 +259,7 @@ PLstrncpy(
 extern StringPtr 
 PLstrcat(
   StringPtr          str,
-  ConstStr255Param   append)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  ConstStr255Param   append)                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -317,7 +310,7 @@ extern StringPtr
 PLstrncat(
   StringPtr          str1,
   ConstStr255Param   append,
-  short              num)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  short              num)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -359,7 +352,7 @@ PLstrncat(
 extern Ptr 
 PLstrchr(
   ConstStr255Param   str1,
-  short              ch1)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  short              ch1)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -401,7 +394,7 @@ PLstrchr(
 extern Ptr 
 PLstrrchr(
   ConstStr255Param   str1,
-  short              ch1)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  short              ch1)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -445,7 +438,7 @@ PLstrrchr(
 extern Ptr 
 PLstrpbrk(
   ConstStr255Param   str1,
-  ConstStr255Param   charSet)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  ConstStr255Param   charSet)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -491,7 +484,7 @@ PLstrpbrk(
 extern short 
 PLstrspn(
   ConstStr255Param   str1,
-  ConstStr255Param   charSet)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  ConstStr255Param   charSet)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 
@@ -535,7 +528,7 @@ PLstrspn(
 extern Ptr 
 PLstrstr(
   ConstStr255Param   str1,
-  ConstStr255Param   searchStr)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  ConstStr255Param   searchStr)                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -570,7 +563,7 @@ PLstrstr(
  *    Non-Carbon CFM:   not available
  */
 extern short 
-PLstrlen(ConstStr255Param str)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+PLstrlen(ConstStr255Param str)                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -615,7 +608,7 @@ PLstrlen(ConstStr255Param str)                                AVAILABLE_MAC_OS_X
 extern short 
 PLpos(
   ConstStr255Param   str1,
-  ConstStr255Param   searchStr)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  ConstStr255Param   searchStr)                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
 

@@ -1,7 +1,7 @@
 /*
 	NSBitmapImageRep.h
 	Application Kit
-	Copyright (c) 1994-2011, Apple Inc.
+	Copyright (c) 1994-2012, Apple Inc.
 	All rights reserved.
 */
 
@@ -101,7 +101,7 @@ APPKIT_EXTERN NSString* NSImageFallbackBackgroundColor  NS_AVAILABLE_MAC(10_5); 
 + (id)imageRepWithData:(NSData *)data;	/* Convenience of initWithData: */
 - (id)initWithData:(NSData *)data;
 
-- (unsigned char *)bitmapData;
+- (unsigned char *)bitmapData NS_RETURNS_INNER_POINTER;
 - (void)getBitmapDataPlanes:(unsigned char **)data;
 - (BOOL)isPlanar;
 - (NSInteger)samplesPerPixel;

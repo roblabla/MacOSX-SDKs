@@ -1,5 +1,5 @@
-#ifndef _BOOTSTRAP_H_
-#define _BOOTSTRAP_H_
+#ifndef __BOOTSTRAP_H__
+#define __BOOTSTRAP_H__
 /*
  * Copyright (c) 1999-2005 Apple Computer, Inc. All rights reserved.
  *
@@ -355,4 +355,4 @@ const char *bootstrap_strerror(kern_return_t r) __attribute__((__nothrow__, __pu
 
 __END_DECLS
 
-#endif
+#endif /* __BOOTSTRAP_H__ */

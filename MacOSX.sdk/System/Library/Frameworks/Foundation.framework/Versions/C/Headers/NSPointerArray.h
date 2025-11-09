@@ -1,6 +1,6 @@
 /*
  *  NSPointerArray.h
- *  Copyright (c) 2005-2011, Apple Inc. All rights reserved.
+ *  Copyright (c) 2005-2012, Apple Inc. All rights reserved.
  *
  */
  
@@ -15,13 +15,13 @@
    A PointerArray acts like a traditional array that slides elements on insertion or deletion.
    Unlike traditional arrays, it holds NULLs, which can be inserted or extracted (and contribute to count).
    Also unlike traditional arrays, the 'count' of the array may be set directly.
-   Under Garbage Collection and using a zeroingWeakMemory configuration, NULLs will appear when elements are collected.
+   Using NSPointerFunctionsWeakMemory object references will turn to NULL on last release (or when collected under GC).
 
    The copying and archiving protocols are applicable only when NSPointerArray is configured for Object uses.
    The fast enumeration protocol (supporting the for..in statement) will yield NULLs if present.  It is defined for all types of pointers although the language syntax doesn't directly support this.
 */
 
-NS_CLASS_AVAILABLE(10_5, NA)
+NS_CLASS_AVAILABLE(10_5, 6_0)
 @interface NSPointerArray : NSObject <NSFastEnumeration, NSCopying, NSCoding>
 // construction
 - initWithOptions:(NSPointerFunctionsOptions)options;
@@ -50,13 +50,16 @@ NS_CLASS_AVAILABLE(10_5, NA)
 @end
 
 
-
-
-@interface NSPointerArray (NSArrayConveniences)  
+@interface NSPointerArray (NSPointerArrayConveniences)  
 
 // construction
-+ pointerArrayWithStrongObjects; // strong objects
-+ pointerArrayWithWeakObjects; // weak objects
+#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
++ pointerArrayWithStrongObjects NS_DEPRECATED_MAC(10_5, 10_8); // strong objects
++ pointerArrayWithWeakObjects NS_DEPRECATED_MAC(10_5, 10_8); // weak objects
+#endif
+
++ (id)strongObjectsPointerArray NS_AVAILABLE(10_8, 6_0);
++ (id)weakObjectsPointerArray NS_AVAILABLE(10_8, 6_0);
 
 - (NSArray *)allObjects;
 

@@ -18,4 +18,3 @@
 /* Define to 1 to build client libraries as thread-safe code.
  *    (--enable-thread-safety) */
 #define ENABLE_THREAD_SAFETY 1
-

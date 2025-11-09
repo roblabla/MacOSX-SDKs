@@ -283,21 +283,6 @@ kern_return_t host_swap_exception_ports
 	exception_flavor_array_t old_flavors
 );
 
-/* Routine host_load_symbol_table */
-#ifdef	mig_external
-mig_external
-#else
-extern
-#endif	/* mig_external */
-kern_return_t host_load_symbol_table
-(
-	host_priv_t host,
-	task_t task,
-	symtab_name_t name,
-	vm_offset_t symtab,
-	mach_msg_type_number_t symtabCnt
-);
-
 /* Routine mach_vm_wire */
 #ifdef	mig_external
 mig_external
@@ -676,26 +661,6 @@ __END_DECLS
 		/* start of the kernel processed data */
 		mach_msg_body_t msgh_body;
 		mach_msg_port_descriptor_t task;
-		mach_msg_ool_descriptor_t symtab;
-		/* end of the kernel processed data */
-		NDR_record_t NDR;
-		mach_msg_type_number_t nameOffset; /* MiG doesn't use it */
-		mach_msg_type_number_t nameCnt;
-		char name[32];
-		mach_msg_type_number_t symtabCnt;
-	} __Request__host_load_symbol_table_t;
-#ifdef  __MigPackStructs
-#pragma pack()
-#endif
-
-#ifdef  __MigPackStructs
-#pragma pack(4)
-#endif
-	typedef struct {
-		mach_msg_header_t Head;
-		/* start of the kernel processed data */
-		mach_msg_body_t msgh_body;
-		mach_msg_port_descriptor_t task;
 		/* end of the kernel processed data */
 		NDR_record_t NDR;
 		mach_vm_address_t address;
@@ -818,7 +783,6 @@ union __RequestUnion__host_priv_subsystem {
 	__Request__host_set_exception_ports_t Request_host_set_exception_ports;
 	__Request__host_get_exception_ports_t Request_host_get_exception_ports;
 	__Request__host_swap_exception_ports_t Request_host_swap_exception_ports;
-	__Request__host_load_symbol_table_t Request_host_load_symbol_table;
 	__Request__mach_vm_wire_t Request_mach_vm_wire;
 	__Request__host_processor_sets_t Request_host_processor_sets;
 	__Request__host_processor_set_priv_t Request_host_processor_set_priv;
@@ -1080,18 +1044,6 @@ union __RequestUnion__host_priv_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__host_load_symbol_table_t;
-#ifdef  __MigPackStructs
-#pragma pack()
-#endif
-
-#ifdef  __MigPackStructs
-#pragma pack(4)
-#endif
-	typedef struct {
-		mach_msg_header_t Head;
-		NDR_record_t NDR;
-		kern_return_t RetCode;
 	} __Reply__mach_vm_wire_t;
 #ifdef  __MigPackStructs
 #pragma pack()
@@ -1221,7 +1173,6 @@ union __ReplyUnion__host_priv_subsystem {
 	__Reply__host_set_exception_ports_t Reply_host_set_exception_ports;
 	__Reply__host_get_exception_ports_t Reply_host_get_exception_ports;
 	__Reply__host_swap_exception_ports_t Reply_host_swap_exception_ports;
-	__Reply__host_load_symbol_table_t Reply_host_load_symbol_table;
 	__Reply__mach_vm_wire_t Reply_mach_vm_wire;
 	__Reply__host_processor_sets_t Reply_host_processor_sets;
 	__Reply__host_processor_set_priv_t Reply_host_processor_set_priv;
@@ -1252,7 +1203,6 @@ union __ReplyUnion__host_priv_subsystem {
     { "host_set_exception_ports", 414 },\
     { "host_get_exception_ports", 415 },\
     { "host_swap_exception_ports", 416 },\
-    { "host_load_symbol_table", 417 },\
     { "mach_vm_wire", 418 },\
     { "host_processor_sets", 419 },\
     { "host_processor_set_priv", 420 },\

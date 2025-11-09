@@ -1,7 +1,7 @@
 //-----------------------------------------------------------------------------
 //      File:           ForceFeedbackConstants.h
 //      Contains:       Public constants for Force Feedback technology.
-//      Copyright:      © 2002-2003 by Apple Computer, Inc. All rights reserved.
+//      Copyright:      ï¿½ 2002-2003 by Apple Computer, Inc. All rights reserved.
 //
 //-----------------------------------------------------------------------------
 
@@ -99,8 +99,8 @@ typedef LONG* LPLONG;
     
 // E559C464-C5CD-11D6-8A1C-00039353BD00
 /*!
-    @defined kFFEffectType_Sine_ID
-    @discussion UUID for a sine wave effect type
+    @defined kFFEffectType_Triangle_ID
+    @discussion UUID for a triangle wave effect type
  */
 #define kFFEffectType_Triangle_ID CFUUIDGetConstantUUIDWithBytes(NULL, 		\
     0xE5, 0x59, 0xC4, 0x64, 0xC5, 0xCD, 0x11, 0xD6, 				\

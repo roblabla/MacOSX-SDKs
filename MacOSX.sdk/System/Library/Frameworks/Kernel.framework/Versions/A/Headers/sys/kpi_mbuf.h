@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2008-2010 Apple Inc. All rights reserved.
+ * Copyright (c) 2008-2011 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -1320,7 +1320,7 @@ extern void mbuf_stats(struct mbuf_stat *stats);
 	@constant MBUF_TC_VO Interactive voice, constant bit rate, lowest latency.
 */
 typedef enum {
-	MBUF_TC_BE 		= 0,
+	MBUF_TC_BE		= 0,
 	MBUF_TC_BK		= 1,
 	MBUF_TC_VI		= 2,
 	MBUF_TC_VO		= 3
@@ -1338,10 +1338,20 @@ extern mbuf_traffic_class_t mbuf_get_traffic_class(mbuf_t mbuf);
 	@function mbuf_set_traffic_class
 	@discussion Set the traffic class of an mbuf packet.
 	@param mbuf The mbuf to set the traffic class on.
-	@ac The traffic class
+	@tc The traffic class
 	@result 0 on success, EINVAL if bad paramater is passed
 */
 extern errno_t mbuf_set_traffic_class(mbuf_t mbuf, mbuf_traffic_class_t tc);
+
+/*!
+	@function mbuf_is_traffic_class_privileged
+	@discussion Returns the privileged status of the traffic class
+		of the packet specified by the mbuf.
+	@param mbuf The mbuf to retrieve the status from.
+	@result Non-zero if privileged, 0 otherwise.
+ */
+extern int mbuf_is_traffic_class_privileged(mbuf_t mbuf);
+
 
 /* IF_QUEUE interaction */
 

@@ -440,9 +440,13 @@ enum
                     interruption (see kAudioConverterPropertyCanResumeFromInterruption), you must
                     wait for an EndInterruption notification from AudioSession, and call AudioSessionSetActive(true)
                     before resuming.
+    @constant   kAudioConverterErr_NoHardwarePermission
+                    Returned from AudioConverterNew if the new converter would use a hardware codec
+                    which the application does not have permission to use.
 */  
 enum {
-    kAudioConverterErr_HardwareInUse = 'hwiu'
+    kAudioConverterErr_HardwareInUse 		= 'hwiu',
+    kAudioConverterErr_NoHardwarePermission = 'perm'
 };
 #endif
 
@@ -564,7 +568,7 @@ AudioConverterReset(    AudioConverterRef   inAudioConverter)                   
     @param      inPropertyID
                     The property to query.
     @param      outSize
-                    If non-null, on exit, the size of the property value in bytes.
+                    If non-null, on exit, the maximum size of the property value in bytes.
     @param      outWritable
                     If non-null, on exit, indicates whether the property value is writable.
     @result     An OSStatus result code.
@@ -847,7 +851,7 @@ AudioConverterConvertComplexBuffer( AudioConverterRef               inAudioConve
                                     UInt32                          inNumberPCMFrames,
                                     const AudioBufferList *         inInputData,
                                     AudioBufferList *               outOutputData)
-                                                                                __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_NA);
+                                                                                __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_5_0);
 
 #if defined(__cplusplus)
 }

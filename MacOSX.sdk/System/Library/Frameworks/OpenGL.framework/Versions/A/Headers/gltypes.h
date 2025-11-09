@@ -1,6 +1,6 @@
 /*
- Copyright:  (c) 2010 Apple Inc. All rights reserved.
- */
+	Copyright:	(c) 2010-2012 Apple Inc. All rights reserved.
+*/
 
 #ifndef __gltypes_h_
 #define __gltypes_h_
@@ -57,11 +57,12 @@ typedef unsigned short GLushort;
 typedef unsigned int GLuint;
 typedef float GLfloat;
 typedef float GLclampf;
-typedef double GLdouble;
-typedef double GLclampd;
 typedef void GLvoid;
 #endif
-
+#if !(defined __gl_h_ || defined __gl3_h_)
+typedef double GLdouble;
+typedef double GLclampd;
+#endif
 
 #ifndef __gl3_h_
 
@@ -88,6 +89,9 @@ typedef struct __GLsync *GLsync;
 
 #endif
 
+#if !(defined GL_ARB_ES2_compatibility)
+typedef int GLfixed;
+#endif
 
 #ifndef GL_ARB_half_float_pixel
 typedef unsigned short GLhalfARB;

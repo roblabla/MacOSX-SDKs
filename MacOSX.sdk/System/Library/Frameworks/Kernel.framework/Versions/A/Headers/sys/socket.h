@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2011 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2012 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -170,9 +170,10 @@ struct iovec {
 #else
 #define SO_DONTTRUNC	0x2000		/* APPLE: Retain unread data */
 					/*  (ATOMIC proto) */
-#define SO_WANTMORE		0x4000		/* APPLE: Give hint when more data ready */
+#define SO_WANTMORE	0x4000		/* APPLE: Give hint when more data ready */
 #define SO_WANTOOBFLAG	0x8000		/* APPLE: Want OOB in MSG_FLAG on receive */
-#endif
+
+#endif  /* (!__APPLE__) */
 #endif	/* (!_POSIX_C_SOURCE || _DARWIN_C_SOURCE) */
 
 /*
@@ -312,7 +313,10 @@ struct so_np_extensions {
 #define	AF_NETGRAPH	32		/* Netgraph sockets */
 #endif
 #define AF_IEEE80211    37              /* IEEE 802.11 protocol */
-#define	AF_MAX		38
+#ifdef __APPLE__
+#define AF_UTUN		38
+#endif
+#define	AF_MAX		39
 #endif	/* (!_POSIX_C_SOURCE || _DARWIN_C_SOURCE) */
 
 /*
@@ -408,6 +412,9 @@ struct sockaddr_storage {
 #define	PF_NETGRAPH	AF_NETGRAPH
 #endif
 
+#ifdef __APPLE__
+#define PF_UTUN		AF_UTUN
+#endif
 #define	PF_MAX		AF_MAX
 
 /*

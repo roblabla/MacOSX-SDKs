@@ -1,7 +1,7 @@
 /*
         NSTextView.h
         Application Kit
-        Copyright (c) 1994-2011, Apple Inc.
+        Copyright (c) 1994-2012, Apple Inc.
         All rights reserved.
 */
 
@@ -27,6 +27,7 @@
 @class NSUndoManager;
 @class NSParagraphStyle;
 @class NSOrthography;
+@class NSSharingServicePicker;
 @protocol NSTextViewDelegate;
 
 /* Values for NSSelectionGranularity */
@@ -49,6 +50,7 @@ typedef NSUInteger NSSelectionAffinity;
 */
 APPKIT_EXTERN NSString *NSAllRomanInputSourcesLocaleIdentifier NS_AVAILABLE_MAC(10_5);
 
+NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 @interface NSTextView : NSText <NSTextInput, NSUserInterfaceValidations, NSTextInputClient, NSTextLayoutOrientationProvider, NSDraggingSource>
 
 /**************************** Initializing ****************************/
@@ -466,6 +468,12 @@ APPKIT_EXTERN NSString *NSAllRomanInputSourcesLocaleIdentifier NS_AVAILABLE_MAC(
 // Notifies QLPreviewPanel for possible status changes with the data source or controller.  Typically invoked from selection changes. 
 @end
 
+@interface NSTextView (NSTextView_SharingService)
+/*************************** NSSharingService support ***************************/
+- (IBAction)orderFrontSharingServicePicker:(id)sender NS_AVAILABLE_MAC(10_8);
+// Creates a new instance of NSSharingServicePicker based on the current selection & shows to the screen. The items passed to the NSSharingServicePicker initializer are determined using -itemsForSharingServiceInRanges:. When the current selection is 0 length, the whole document is passed to the method.
+@end
+
 @interface NSTextView (NSDeprecated)
 - (void)toggleBaseWritingDirection:(id)sender;
     // toggleBaseWritingDirection: will be deprecated in favor of the new NSResponder methods makeBaseWritingDirectionNatural:, makeBaseWritingDirectionLeftToRight:, and makeBaseWritingDirectionRightToLeft:, which NSTextView now implements.
@@ -539,6 +547,8 @@ APPKIT_EXTERN NSString *NSAllRomanInputSourcesLocaleIdentifier NS_AVAILABLE_MAC(
 - (NSURL *)textView:(NSTextView *)textView URLForContentsOfTextAttachment:(NSTextAttachment *)textAttachment atIndex:(NSUInteger)charIndex NS_AVAILABLE_MAC(10_7);
 // Returns an URL representing the document contents for textAttachment.  The returned NSURL object is utilized by NSTextView for providing default behaviors involving text attachments such as Quick Look and double-clicking.  -[NSTextView quickLookPreviewableItemsInRanges:] uses this method for mapping text attachments to their corresponding document URLs.  NSTextView invokes -[NSWorkspace openURL:] with the URL returned from this method when the delegate has no -textView:doubleClickedOnCell:inRect:atPoint: implementation.
 
+- (NSSharingServicePicker *)textView:(NSTextView *)textView willShowSharingServicePicker:(NSSharingServicePicker *)servicePicker forItems:(NSArray *)items NS_AVAILABLE_MAC(10_8);
+// Delegate only. Returns a sharing service picker created for items right before shown to the screen inside -orderFrontSharingServicePicker: method. The delegate specify a delegate for the NSSharingServicePicker instance. Also, is is allowed to return its own NSSharingServicePicker instance instead.
 
 // The following delegate-only methods are deprecated in favor of the more verbose ones above.
 - (BOOL)textView:(NSTextView *)textView clickedOnLink:(id)link;

@@ -1,5 +1,5 @@
 /*	CFNumberFormatter.h
-	Copyright (c) 2003-2011, Apple Inc. All rights reserved.
+	Copyright (c) 2003-2012, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFNUMBERFORMATTER__)
@@ -18,7 +18,7 @@ typedef struct __CFNumberFormatter *CFNumberFormatterRef;
 CF_EXPORT
 CFTypeID CFNumberFormatterGetTypeID(void);
 
-enum {	// number format styles
+typedef CF_ENUM(CFIndex, CFNumberFormatterStyle) {	// number format styles
 	kCFNumberFormatterNoStyle = 0,
 	kCFNumberFormatterDecimalStyle = 1,
 	kCFNumberFormatterCurrencyStyle = 2,
@@ -26,7 +26,6 @@ enum {	// number format styles
 	kCFNumberFormatterScientificStyle = 4,
 	kCFNumberFormatterSpellOutStyle = 5
 };
-typedef CFIndex CFNumberFormatterStyle;
 
 
 CF_EXPORT
@@ -49,7 +48,7 @@ void CFNumberFormatterSetFormat(CFNumberFormatterRef formatter, CFStringRef form
 	// Set the format description string of the number formatter.  This
 	// overrides the style settings.  The format of the format string
 	// is as defined by the ICU library, and is similar to that found
-	// in Microsoft Excel and NSNumberFormatter (and Java I believe).
+	// in Microsoft Excel and NSNumberFormatter.
 	// The number formatter starts with a default format string defined
 	// by the style argument with which it was created.
 
@@ -63,10 +62,9 @@ CFStringRef CFNumberFormatterCreateStringWithValue(CFAllocatorRef allocator, CFN
 	// using the current state of the number formatter.
 
 
-enum {
+typedef CF_OPTIONS(CFOptionFlags, CFNumberFormatterOptionFlags) {
     kCFNumberFormatterParseIntegersOnly = 1	/* only parse integers */
 };
-typedef CFOptionFlags CFNumberFormatterOptionFlags;
 
 CF_EXPORT
 CFNumberRef CFNumberFormatterCreateNumberFromString(CFAllocatorRef allocator, CFNumberFormatterRef formatter, CFStringRef string, CFRange *rangep, CFOptionFlags options);
@@ -131,7 +129,7 @@ CF_EXPORT const CFStringRef kCFNumberFormatterUseSignificantDigits CF_AVAILABLE(
 CF_EXPORT const CFStringRef kCFNumberFormatterMinSignificantDigits CF_AVAILABLE(10_5, 2_0);	// CFNumber
 CF_EXPORT const CFStringRef kCFNumberFormatterMaxSignificantDigits CF_AVAILABLE(10_5, 2_0);	// CFNumber
 
-enum {
+typedef CF_ENUM(CFIndex, CFNumberFormatterRoundingMode) {
     kCFNumberFormatterRoundCeiling = 0,
     kCFNumberFormatterRoundFloor = 1,
     kCFNumberFormatterRoundDown = 2,
@@ -140,15 +138,13 @@ enum {
     kCFNumberFormatterRoundHalfDown = 5,
     kCFNumberFormatterRoundHalfUp = 6
 };
-typedef CFIndex CFNumberFormatterRoundingMode;
 
-enum {
+typedef CF_ENUM(CFIndex, CFNumberFormatterPadPosition) {
     kCFNumberFormatterPadBeforePrefix = 0,
     kCFNumberFormatterPadAfterPrefix = 1,
     kCFNumberFormatterPadBeforeSuffix = 2,
     kCFNumberFormatterPadAfterSuffix = 3
 };
-typedef CFIndex CFNumberFormatterPadPosition;
 
 
 CF_EXPORT

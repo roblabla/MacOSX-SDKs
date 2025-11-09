@@ -600,6 +600,160 @@ NPY_NO_EXPORT PyObject * PyArray_Correlate2 \
        (PyObject *, PyObject *, int);
 NPY_NO_EXPORT PyObject* PyArray_NeighborhoodIterNew \
        (PyArrayIterObject *, npy_intp *, int, PyArrayObject*);
+#ifdef NPY_ENABLE_SEPARATE_COMPILATION
+    extern NPY_NO_EXPORT PyTypeObject PyTimeIntegerArrType_Type;
+#else
+    NPY_NO_EXPORT PyTypeObject PyTimeIntegerArrType_Type;
+#endif
+
+#ifdef NPY_ENABLE_SEPARATE_COMPILATION
+    extern NPY_NO_EXPORT PyTypeObject PyDatetimeArrType_Type;
+#else
+    NPY_NO_EXPORT PyTypeObject PyDatetimeArrType_Type;
+#endif
+
+#ifdef NPY_ENABLE_SEPARATE_COMPILATION
+    extern NPY_NO_EXPORT PyTypeObject PyTimedeltaArrType_Type;
+#else
+    NPY_NO_EXPORT PyTypeObject PyTimedeltaArrType_Type;
+#endif
+
+#ifdef NPY_ENABLE_SEPARATE_COMPILATION
+    extern NPY_NO_EXPORT PyTypeObject PyHalfArrType_Type;
+#else
+    NPY_NO_EXPORT PyTypeObject PyHalfArrType_Type;
+#endif
+
+#ifdef NPY_ENABLE_SEPARATE_COMPILATION
+    extern NPY_NO_EXPORT PyTypeObject NpyIter_Type;
+#else
+    NPY_NO_EXPORT PyTypeObject NpyIter_Type;
+#endif
+
+NPY_NO_EXPORT void PyArray_SetDatetimeParseFunction \
+       (PyObject *);
+NPY_NO_EXPORT void PyArray_DatetimeToDatetimeStruct \
+       (npy_datetime, NPY_DATETIMEUNIT, npy_datetimestruct *);
+NPY_NO_EXPORT void PyArray_TimedeltaToTimedeltaStruct \
+       (npy_timedelta, NPY_DATETIMEUNIT, npy_timedeltastruct *);
+NPY_NO_EXPORT npy_datetime PyArray_DatetimeStructToDatetime \
+       (NPY_DATETIMEUNIT, npy_datetimestruct *);
+NPY_NO_EXPORT npy_datetime PyArray_TimedeltaStructToTimedelta \
+       (NPY_DATETIMEUNIT, npy_timedeltastruct *);
+NPY_NO_EXPORT NpyIter * NpyIter_New \
+       (PyArrayObject *, npy_uint32, NPY_ORDER, NPY_CASTING, PyArray_Descr*);
+NPY_NO_EXPORT NpyIter * NpyIter_MultiNew \
+       (int, PyArrayObject **, npy_uint32, NPY_ORDER, NPY_CASTING, npy_uint32 *, PyArray_Descr **);
+NPY_NO_EXPORT NpyIter * NpyIter_AdvancedNew \
+       (int, PyArrayObject **, npy_uint32, NPY_ORDER, NPY_CASTING, npy_uint32 *, PyArray_Descr **, int, int **, npy_intp *, npy_intp);
+NPY_NO_EXPORT NpyIter * NpyIter_Copy \
+       (NpyIter *);
+NPY_NO_EXPORT int NpyIter_Deallocate \
+       (NpyIter *);
+NPY_NO_EXPORT npy_bool NpyIter_HasDelayedBufAlloc \
+       (NpyIter *);
+NPY_NO_EXPORT npy_bool NpyIter_HasExternalLoop \
+       (NpyIter *);
+NPY_NO_EXPORT int NpyIter_EnableExternalLoop \
+       (NpyIter *);
+NPY_NO_EXPORT npy_intp * NpyIter_GetInnerStrideArray \
+       (NpyIter *);
+NPY_NO_EXPORT npy_intp * NpyIter_GetInnerLoopSizePtr \
+       (NpyIter *);
+NPY_NO_EXPORT int NpyIter_Reset \
+       (NpyIter *, char **);
+NPY_NO_EXPORT int NpyIter_ResetBasePointers \
+       (NpyIter *, char **, char **);
+NPY_NO_EXPORT int NpyIter_ResetToIterIndexRange \
+       (NpyIter *, npy_intp, npy_intp, char **);
+NPY_NO_EXPORT int NpyIter_GetNDim \
+       (NpyIter *);
+NPY_NO_EXPORT int NpyIter_GetNOp \
+       (NpyIter *);
+NPY_NO_EXPORT NpyIter_IterNextFunc * NpyIter_GetIterNext \
+       (NpyIter *, char **);
+NPY_NO_EXPORT npy_intp NpyIter_GetIterSize \
+       (NpyIter *);
+NPY_NO_EXPORT void NpyIter_GetIterIndexRange \
+       (NpyIter *, npy_intp *, npy_intp *);
+NPY_NO_EXPORT npy_intp NpyIter_GetIterIndex \
+       (NpyIter *);
+NPY_NO_EXPORT int NpyIter_GotoIterIndex \
+       (NpyIter *, npy_intp);
+NPY_NO_EXPORT npy_bool NpyIter_HasMultiIndex \
+       (NpyIter *);
+NPY_NO_EXPORT int NpyIter_GetShape \
+       (NpyIter *, npy_intp *);
+NPY_NO_EXPORT NpyIter_GetMultiIndexFunc * NpyIter_GetGetMultiIndex \
+       (NpyIter *, char **);
+NPY_NO_EXPORT int NpyIter_GotoMultiIndex \
+       (NpyIter *, npy_intp *);
+NPY_NO_EXPORT int NpyIter_RemoveMultiIndex \
+       (NpyIter *);
+NPY_NO_EXPORT npy_bool NpyIter_HasIndex \
+       (NpyIter *);
+NPY_NO_EXPORT npy_bool NpyIter_IsBuffered \
+       (NpyIter *);
+NPY_NO_EXPORT npy_bool NpyIter_IsGrowInner \
+       (NpyIter *);
+NPY_NO_EXPORT npy_intp NpyIter_GetBufferSize \
+       (NpyIter *);
+NPY_NO_EXPORT npy_intp * NpyIter_GetIndexPtr \
+       (NpyIter *);
+NPY_NO_EXPORT int NpyIter_GotoIndex \
+       (NpyIter *, npy_intp);
+NPY_NO_EXPORT char ** NpyIter_GetDataPtrArray \
+       (NpyIter *);
+NPY_NO_EXPORT PyArray_Descr ** NpyIter_GetDescrArray \
+       (NpyIter *);
+NPY_NO_EXPORT PyArrayObject ** NpyIter_GetOperandArray \
+       (NpyIter *);
+NPY_NO_EXPORT PyArrayObject * NpyIter_GetIterView \
+       (NpyIter *, npy_intp);
+NPY_NO_EXPORT void NpyIter_GetReadFlags \
+       (NpyIter *, char *);
+NPY_NO_EXPORT void NpyIter_GetWriteFlags \
+       (NpyIter *, char *);
+NPY_NO_EXPORT void NpyIter_DebugPrint \
+       (NpyIter *);
+NPY_NO_EXPORT npy_bool NpyIter_IterationNeedsAPI \
+       (NpyIter *);
+NPY_NO_EXPORT void NpyIter_GetInnerFixedStrideArray \
+       (NpyIter *, npy_intp *);
+NPY_NO_EXPORT int NpyIter_RemoveAxis \
+       (NpyIter *, int);
+NPY_NO_EXPORT npy_intp * NpyIter_GetAxisStrideArray \
+       (NpyIter *, int);
+NPY_NO_EXPORT npy_bool NpyIter_RequiresBuffering \
+       (NpyIter *);
+NPY_NO_EXPORT char ** NpyIter_GetInitialDataPtrArray \
+       (NpyIter *);
+NPY_NO_EXPORT int NpyIter_CreateCompatibleStrides \
+       (NpyIter *, npy_intp, npy_intp *);
+NPY_NO_EXPORT int PyArray_CastingConverter \
+       (PyObject *, NPY_CASTING *);
+NPY_NO_EXPORT npy_intp PyArray_CountNonzero \
+       (PyArrayObject *);
+NPY_NO_EXPORT PyArray_Descr * PyArray_PromoteTypes \
+       (PyArray_Descr *, PyArray_Descr *);
+NPY_NO_EXPORT PyArray_Descr * PyArray_MinScalarType \
+       (PyArrayObject *);
+NPY_NO_EXPORT PyArray_Descr * PyArray_ResultType \
+       (npy_intp, PyArrayObject **, npy_intp, PyArray_Descr **);
+NPY_NO_EXPORT npy_bool PyArray_CanCastArrayTo \
+       (PyArrayObject *, PyArray_Descr *, NPY_CASTING);
+NPY_NO_EXPORT npy_bool PyArray_CanCastTypeTo \
+       (PyArray_Descr *, PyArray_Descr *, NPY_CASTING);
+NPY_NO_EXPORT PyArrayObject * PyArray_EinsteinSum \
+       (char *, npy_intp, PyArrayObject **, PyArray_Descr *, NPY_ORDER, NPY_CASTING, PyArrayObject *);
+NPY_NO_EXPORT PyObject * PyArray_NewLikeArray \
+       (PyArrayObject *, NPY_ORDER, PyArray_Descr *, int);
+NPY_NO_EXPORT int PyArray_GetArrayParamsFromObject \
+       (PyObject *, PyArray_Descr *, npy_bool, PyArray_Descr **, int *, npy_intp *, PyArrayObject **, PyObject *);
+NPY_NO_EXPORT int PyArray_ConvertClipmodeSequence \
+       (PyObject *, NPY_CLIPMODE *, int);
+NPY_NO_EXPORT PyObject * PyArray_MatrixProduct2 \
+       (PyObject *, PyObject *, PyArrayObject*);
 
 #else
 
@@ -1181,6 +1335,197 @@ static void **PyArray_API=NULL;
 #define PyArray_NeighborhoodIterNew \
         (*(PyObject* (*)(PyArrayIterObject *, npy_intp *, int, PyArrayObject*)) \
          PyArray_API[213])
+#define PyTimeIntegerArrType_Type (*(PyTypeObject *)PyArray_API[214])
+#define PyDatetimeArrType_Type (*(PyTypeObject *)PyArray_API[215])
+#define PyTimedeltaArrType_Type (*(PyTypeObject *)PyArray_API[216])
+#define PyHalfArrType_Type (*(PyTypeObject *)PyArray_API[217])
+#define NpyIter_Type (*(PyTypeObject *)PyArray_API[218])
+#define PyArray_SetDatetimeParseFunction \
+        (*(void (*)(PyObject *)) \
+         PyArray_API[219])
+#define PyArray_DatetimeToDatetimeStruct \
+        (*(void (*)(npy_datetime, NPY_DATETIMEUNIT, npy_datetimestruct *)) \
+         PyArray_API[220])
+#define PyArray_TimedeltaToTimedeltaStruct \
+        (*(void (*)(npy_timedelta, NPY_DATETIMEUNIT, npy_timedeltastruct *)) \
+         PyArray_API[221])
+#define PyArray_DatetimeStructToDatetime \
+        (*(npy_datetime (*)(NPY_DATETIMEUNIT, npy_datetimestruct *)) \
+         PyArray_API[222])
+#define PyArray_TimedeltaStructToTimedelta \
+        (*(npy_datetime (*)(NPY_DATETIMEUNIT, npy_timedeltastruct *)) \
+         PyArray_API[223])
+#define NpyIter_New \
+        (*(NpyIter * (*)(PyArrayObject *, npy_uint32, NPY_ORDER, NPY_CASTING, PyArray_Descr*)) \
+         PyArray_API[224])
+#define NpyIter_MultiNew \
+        (*(NpyIter * (*)(int, PyArrayObject **, npy_uint32, NPY_ORDER, NPY_CASTING, npy_uint32 *, PyArray_Descr **)) \
+         PyArray_API[225])
+#define NpyIter_AdvancedNew \
+        (*(NpyIter * (*)(int, PyArrayObject **, npy_uint32, NPY_ORDER, NPY_CASTING, npy_uint32 *, PyArray_Descr **, int, int **, npy_intp *, npy_intp)) \
+         PyArray_API[226])
+#define NpyIter_Copy \
+        (*(NpyIter * (*)(NpyIter *)) \
+         PyArray_API[227])
+#define NpyIter_Deallocate \
+        (*(int (*)(NpyIter *)) \
+         PyArray_API[228])
+#define NpyIter_HasDelayedBufAlloc \
+        (*(npy_bool (*)(NpyIter *)) \
+         PyArray_API[229])
+#define NpyIter_HasExternalLoop \
+        (*(npy_bool (*)(NpyIter *)) \
+         PyArray_API[230])
+#define NpyIter_EnableExternalLoop \
+        (*(int (*)(NpyIter *)) \
+         PyArray_API[231])
+#define NpyIter_GetInnerStrideArray \
+        (*(npy_intp * (*)(NpyIter *)) \
+         PyArray_API[232])
+#define NpyIter_GetInnerLoopSizePtr \
+        (*(npy_intp * (*)(NpyIter *)) \
+         PyArray_API[233])
+#define NpyIter_Reset \
+        (*(int (*)(NpyIter *, char **)) \
+         PyArray_API[234])
+#define NpyIter_ResetBasePointers \
+        (*(int (*)(NpyIter *, char **, char **)) \
+         PyArray_API[235])
+#define NpyIter_ResetToIterIndexRange \
+        (*(int (*)(NpyIter *, npy_intp, npy_intp, char **)) \
+         PyArray_API[236])
+#define NpyIter_GetNDim \
+        (*(int (*)(NpyIter *)) \
+         PyArray_API[237])
+#define NpyIter_GetNOp \
+        (*(int (*)(NpyIter *)) \
+         PyArray_API[238])
+#define NpyIter_GetIterNext \
+        (*(NpyIter_IterNextFunc * (*)(NpyIter *, char **)) \
+         PyArray_API[239])
+#define NpyIter_GetIterSize \
+        (*(npy_intp (*)(NpyIter *)) \
+         PyArray_API[240])
+#define NpyIter_GetIterIndexRange \
+        (*(void (*)(NpyIter *, npy_intp *, npy_intp *)) \
+         PyArray_API[241])
+#define NpyIter_GetIterIndex \
+        (*(npy_intp (*)(NpyIter *)) \
+         PyArray_API[242])
+#define NpyIter_GotoIterIndex \
+        (*(int (*)(NpyIter *, npy_intp)) \
+         PyArray_API[243])
+#define NpyIter_HasMultiIndex \
+        (*(npy_bool (*)(NpyIter *)) \
+         PyArray_API[244])
+#define NpyIter_GetShape \
+        (*(int (*)(NpyIter *, npy_intp *)) \
+         PyArray_API[245])
+#define NpyIter_GetGetMultiIndex \
+        (*(NpyIter_GetMultiIndexFunc * (*)(NpyIter *, char **)) \
+         PyArray_API[246])
+#define NpyIter_GotoMultiIndex \
+        (*(int (*)(NpyIter *, npy_intp *)) \
+         PyArray_API[247])
+#define NpyIter_RemoveMultiIndex \
+        (*(int (*)(NpyIter *)) \
+         PyArray_API[248])
+#define NpyIter_HasIndex \
+        (*(npy_bool (*)(NpyIter *)) \
+         PyArray_API[249])
+#define NpyIter_IsBuffered \
+        (*(npy_bool (*)(NpyIter *)) \
+         PyArray_API[250])
+#define NpyIter_IsGrowInner \
+        (*(npy_bool (*)(NpyIter *)) \
+         PyArray_API[251])
+#define NpyIter_GetBufferSize \
+        (*(npy_intp (*)(NpyIter *)) \
+         PyArray_API[252])
+#define NpyIter_GetIndexPtr \
+        (*(npy_intp * (*)(NpyIter *)) \
+         PyArray_API[253])
+#define NpyIter_GotoIndex \
+        (*(int (*)(NpyIter *, npy_intp)) \
+         PyArray_API[254])
+#define NpyIter_GetDataPtrArray \
+        (*(char ** (*)(NpyIter *)) \
+         PyArray_API[255])
+#define NpyIter_GetDescrArray \
+        (*(PyArray_Descr ** (*)(NpyIter *)) \
+         PyArray_API[256])
+#define NpyIter_GetOperandArray \
+        (*(PyArrayObject ** (*)(NpyIter *)) \
+         PyArray_API[257])
+#define NpyIter_GetIterView \
+        (*(PyArrayObject * (*)(NpyIter *, npy_intp)) \
+         PyArray_API[258])
+#define NpyIter_GetReadFlags \
+        (*(void (*)(NpyIter *, char *)) \
+         PyArray_API[259])
+#define NpyIter_GetWriteFlags \
+        (*(void (*)(NpyIter *, char *)) \
+         PyArray_API[260])
+#define NpyIter_DebugPrint \
+        (*(void (*)(NpyIter *)) \
+         PyArray_API[261])
+#define NpyIter_IterationNeedsAPI \
+        (*(npy_bool (*)(NpyIter *)) \
+         PyArray_API[262])
+#define NpyIter_GetInnerFixedStrideArray \
+        (*(void (*)(NpyIter *, npy_intp *)) \
+         PyArray_API[263])
+#define NpyIter_RemoveAxis \
+        (*(int (*)(NpyIter *, int)) \
+         PyArray_API[264])
+#define NpyIter_GetAxisStrideArray \
+        (*(npy_intp * (*)(NpyIter *, int)) \
+         PyArray_API[265])
+#define NpyIter_RequiresBuffering \
+        (*(npy_bool (*)(NpyIter *)) \
+         PyArray_API[266])
+#define NpyIter_GetInitialDataPtrArray \
+        (*(char ** (*)(NpyIter *)) \
+         PyArray_API[267])
+#define NpyIter_CreateCompatibleStrides \
+        (*(int (*)(NpyIter *, npy_intp, npy_intp *)) \
+         PyArray_API[268])
+#define PyArray_CastingConverter \
+        (*(int (*)(PyObject *, NPY_CASTING *)) \
+         PyArray_API[269])
+#define PyArray_CountNonzero \
+        (*(npy_intp (*)(PyArrayObject *)) \
+         PyArray_API[270])
+#define PyArray_PromoteTypes \
+        (*(PyArray_Descr * (*)(PyArray_Descr *, PyArray_Descr *)) \
+         PyArray_API[271])
+#define PyArray_MinScalarType \
+        (*(PyArray_Descr * (*)(PyArrayObject *)) \
+         PyArray_API[272])
+#define PyArray_ResultType \
+        (*(PyArray_Descr * (*)(npy_intp, PyArrayObject **, npy_intp, PyArray_Descr **)) \
+         PyArray_API[273])
+#define PyArray_CanCastArrayTo \
+        (*(npy_bool (*)(PyArrayObject *, PyArray_Descr *, NPY_CASTING)) \
+         PyArray_API[274])
+#define PyArray_CanCastTypeTo \
+        (*(npy_bool (*)(PyArray_Descr *, PyArray_Descr *, NPY_CASTING)) \
+         PyArray_API[275])
+#define PyArray_EinsteinSum \
+        (*(PyArrayObject * (*)(char *, npy_intp, PyArrayObject **, PyArray_Descr *, NPY_ORDER, NPY_CASTING, PyArrayObject *)) \
+         PyArray_API[276])
+#define PyArray_NewLikeArray \
+        (*(PyObject * (*)(PyArrayObject *, NPY_ORDER, PyArray_Descr *, int)) \
+         PyArray_API[277])
+#define PyArray_GetArrayParamsFromObject \
+        (*(int (*)(PyObject *, PyArray_Descr *, npy_bool, PyArray_Descr **, int *, npy_intp *, PyArrayObject **, PyObject *)) \
+         PyArray_API[278])
+#define PyArray_ConvertClipmodeSequence \
+        (*(int (*)(PyObject *, NPY_CLIPMODE *, int)) \
+         PyArray_API[279])
+#define PyArray_MatrixProduct2 \
+        (*(PyObject * (*)(PyObject *, PyObject *, PyArrayObject*)) \
+         PyArray_API[280])
 
 #if !defined(NO_IMPORT_ARRAY) && !defined(NO_IMPORT)
 static int

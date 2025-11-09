@@ -123,6 +123,7 @@ IOBLUETOOTH_EXPORT NSString * const IOBluetoothPDUUserData;					/* PDU's payload
 
 @class IOBluetoothRFCOMMChannel;
 @class IOBluetoothSCOAudioDevice;
+@class IOBluetoothHandsFreeExpansion;
 
 @protocol IOBluetoothHandsFreeDelegate;
 
@@ -158,7 +159,7 @@ NS_CLASS_AVAILABLE(10_7, NA)
 	
 	BOOL							_connectSCOAfterSLCConnected;
 	
-	id <IOBluetoothHandsFreeDelegate>	_delegate;
+	IOBluetoothHandsFreeExpansion *	_reserved;
 }
 
 

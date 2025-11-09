@@ -2,16 +2,9 @@
      File:       CarbonCore/FixMath.h
  
      Contains:   Fixed Math Interfaces.
+                 The contents of this header file are deprecated.
  
-     Version:    CarbonCore-960.18~3
- 
-     Copyright:  © 1985-2008 by Apple Computer, Inc., all rights reserved
- 
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
- 
-                     http://developer.apple.com/bugreporter/
- 
+     Copyright:  Â© 1985-2011 by Apple Inc. All rights reserved.
 */
 #ifndef __FIXMATH__
 #define __FIXMATH__
@@ -22,7 +15,7 @@
 
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -130,7 +123,7 @@ extern "C" {
 extern Fixed 
 FixRatio(
   short   numer,
-  short   denom)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short   denom)                                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -144,7 +137,7 @@ FixRatio(
 extern Fixed 
 FixMul(
   Fixed   a,
-  Fixed   b)                                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Fixed   b)                                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -156,7 +149,7 @@ FixMul(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern short 
-FixRound(Fixed x)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+FixRound(Fixed x)                                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -168,7 +161,7 @@ FixRound(Fixed x)                                             AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Fract 
-Fix2Frac(Fixed x)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+Fix2Frac(Fixed x)                                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -180,7 +173,7 @@ Fix2Frac(Fixed x)                                             AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern SInt32 
-Fix2Long(Fixed x)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+Fix2Long(Fixed x)                                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -192,7 +185,7 @@ Fix2Long(Fixed x)                                             AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Fixed 
-Long2Fix(SInt32 x)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+Long2Fix(SInt32 x)                                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -204,7 +197,7 @@ Long2Fix(SInt32 x)                                            AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Fixed 
-Frac2Fix(Fract x)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+Frac2Fix(Fract x)                                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -218,7 +211,7 @@ Frac2Fix(Fract x)                                             AVAILABLE_MAC_OS_X
 extern Fract 
 FracMul(
   Fract   x,
-  Fract   y)                                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Fract   y)                                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -232,7 +225,7 @@ FracMul(
 extern Fixed 
 FixDiv(
   Fixed   x,
-  Fixed   y)                                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Fixed   y)                                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -246,7 +239,7 @@ FixDiv(
 extern Fract 
 FracDiv(
   Fract   x,
-  Fract   y)                                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Fract   y)                                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -258,7 +251,7 @@ FracDiv(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Fract 
-FracSqrt(Fract x)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+FracSqrt(Fract x)                                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -270,7 +263,7 @@ FracSqrt(Fract x)                                             AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Fract 
-FracSin(Fixed x)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+FracSin(Fixed x)                                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -282,7 +275,7 @@ FracSin(Fixed x)                                              AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Fract 
-FracCos(Fixed x)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+FracCos(Fixed x)                                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -296,7 +289,7 @@ FracCos(Fixed x)                                              AVAILABLE_MAC_OS_X
 extern Fixed 
 FixATan2(
   SInt32   x,
-  SInt32   y)                                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32   y)                                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -317,7 +310,7 @@ FixATan2(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern double 
-Frac2X(Fract x)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+Frac2X(Fract x)                                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -329,7 +322,7 @@ Frac2X(Fract x)                                               AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern double 
-Fix2X(Fixed x)                                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+Fix2X(Fixed x)                                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -341,7 +334,7 @@ Fix2X(Fixed x)                                                AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Fixed 
-X2Fix(double x)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+X2Fix(double x)                                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -353,7 +346,7 @@ X2Fix(double x)                                               AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Fract 
-X2Frac(double x)                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+X2Frac(double x)                                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -379,7 +372,7 @@ X2Frac(double x)                                              AVAILABLE_MAC_OS_X
 extern short 
 WideCompare(
   const wide *  target,
-  const wide *  source)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const wide *  source)                                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -408,7 +401,7 @@ WideCompare(
 extern wide * 
 WideAdd(
   wide *        target,
-  const wide *  source)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const wide *  source)                                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -437,7 +430,7 @@ WideAdd(
 extern wide * 
 WideSubtract(
   wide *        target,
-  const wide *  source)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const wide *  source)                                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -460,7 +453,7 @@ WideSubtract(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern wide * 
-WideNegate(wide * target)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+WideNegate(wide * target)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -487,7 +480,7 @@ WideNegate(wide * target)                                     AVAILABLE_MAC_OS_X
 extern wide * 
 WideShift(
   wide *   target,
-  SInt32   shift)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32   shift)                                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -511,7 +504,7 @@ WideShift(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern UInt32 
-WideSquareRoot(const wide * source)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+WideSquareRoot(const wide * source)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -542,7 +535,7 @@ extern wide *
 WideMultiply(
   SInt32   multiplicand,
   SInt32   multiplier,
-  wide *   target)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  wide *   target)                                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -581,7 +574,7 @@ extern SInt32
 WideDivide(
   const wide *  dividend,
   SInt32        divisor,
-  SInt32 *      remainder)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32 *      remainder)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -616,7 +609,7 @@ extern wide *
 WideWideDivide(
   wide *    dividend,
   SInt32    divisor,
-  SInt32 *  remainder)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32 *  remainder)                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -646,7 +639,7 @@ WideWideDivide(
 extern wide * 
 WideBitShift(
   wide *   target,
-  SInt32   shift)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32   shift)                                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -661,7 +654,7 @@ extern UnsignedFixed
 UnsignedFixedMulDiv(
   UnsignedFixed   value,
   UnsignedFixed   multiplier,
-  UnsignedFixed   divisor)                                    AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  UnsignedFixed   divisor)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
 
 

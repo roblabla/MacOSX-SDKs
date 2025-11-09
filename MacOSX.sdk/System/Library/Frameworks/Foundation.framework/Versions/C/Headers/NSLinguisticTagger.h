@@ -1,5 +1,5 @@
 /*	NSLinguisticTagger.h
-	Copyright (c) 2009-2011, Apple Inc. All rights reserved.
+	Copyright (c) 2009-2012, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -60,14 +60,13 @@ FOUNDATION_EXPORT NSString *const NSLinguisticTagOrganizationName NS_AVAILABLE(1
 */
 
 /* Options arguments of type NSLinguisticTaggerOptions may include the following flags, which allow clients interested only in certain general types of tokens to specify that tokens of other types should be omitted from the returned results. */
-enum {
+typedef NS_OPTIONS(NSUInteger, NSLinguisticTaggerOptions) {   /* Any combination of options from the enumeration. */
     NSLinguisticTaggerOmitWords         = 1 << 0,       /* Omit tokens of type NSLinguisticTagWord. */
     NSLinguisticTaggerOmitPunctuation   = 1 << 1,       /* Omit tokens of type NSLinguisticTagPunctuation. */
     NSLinguisticTaggerOmitWhitespace    = 1 << 2,       /* Omit tokens of type NSLinguisticTagWhitespace. */
     NSLinguisticTaggerOmitOther         = 1 << 3,       /* Omit tokens of type NSLinguisticTagOther. */
     NSLinguisticTaggerJoinNames         = 1 << 4        /* Join tokens of tag scheme NSLinguisticTagSchemeNameType. */
 };   
-typedef NSUInteger NSLinguisticTaggerOptions;   /* Any combination of options from the above enumeration. */
 
 NS_CLASS_AVAILABLE(10_7, 5_0)
 @interface NSLinguisticTagger : NSObject {

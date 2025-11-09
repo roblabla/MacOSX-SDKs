@@ -1,6 +1,6 @@
 /*
 	NSScriptSuiteRegistry.h
-	Copyright (c) 1997-2011, Apple Inc.
+	Copyright (c) 1997-2012, Apple Inc.
 	All rights reserved.
 */
 
@@ -11,7 +11,9 @@
 @interface NSScriptSuiteRegistry : NSObject {
     @private
     BOOL _isLoadingSDEFFiles;
-    char _reserved1[3];
+    BOOL _isLoadingSecurityOverride;
+    BOOL _hasLoadedIntrinsics;
+    char _reserved1[1];
     NSMutableSet *_seenBundles;
     NSMutableArray *_suiteDescriptionsBeingCollected;
     NSScriptClassDescription *_classDescriptionNeedingRegistration;

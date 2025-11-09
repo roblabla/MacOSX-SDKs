@@ -1,15 +1,15 @@
 /*
- * Copyright (c) 2006-2010 Apple Inc. All Rights Reserved.
- * 
+ * Copyright (c) 2006-2010,2012 Apple Inc. All Rights Reserved.
+ *
  * @APPLE_LICENSE_HEADER_START@
- * 
+ *
  * This file contains Original Code and/or Modifications of Original Code
  * as defined in and that are subject to the Apple Public Source License
  * Version 2.0 (the 'License'). You may not use this file except in
  * compliance with the License. Please obtain a copy of the License at
  * http://www.opensource.apple.com/apsl/ and read it before using this
  * file.
- * 
+ *
  * The Original Code and all software distributed under the License are
  * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
@@ -17,7 +17,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
  * Please see the License for the specific language governing rights and
  * limitations under the License.
- * 
+ *
  * @APPLE_LICENSE_HEADER_END@
  */
 
@@ -38,7 +38,7 @@
 #if defined(__cplusplus)
 extern "C" {
 #endif
-	
+
 /*!
 	 @enum Class Key Constant
 	 @discussion Predefined key constant used to get or set item class values in
@@ -79,7 +79,7 @@ extern const CFTypeRef kSecClassIdentity
 	 @discussion Predefined item attribute keys used to get or set values in a
 	 dictionary. Not all attributes apply to each item class. The table
 	 below lists the currently defined attributes for each item class:
-	 
+
 	 kSecClassGenericPassword item attributes:
 	 kSecAttrAccess
 	 kSecAttrCreationDate
@@ -94,7 +94,7 @@ extern const CFTypeRef kSecClassIdentity
 	 kSecAttrAccount
 	 kSecAttrService
 	 kSecAttrGeneric
-	 
+
 	 kSecClassInternetPassword item attributes:
 	 kSecAttrAccess
 	 kSecAttrCreationDate
@@ -113,7 +113,7 @@ extern const CFTypeRef kSecClassIdentity
 	 kSecAttrAuthenticationType
 	 kSecAttrPort
 	 kSecAttrPath
-	 
+
 	 kSecClassCertificate item attributes:
 	 kSecAttrCertificateType
 	 kSecAttrCertificateEncoding
@@ -123,7 +123,7 @@ extern const CFTypeRef kSecClassIdentity
 	 kSecAttrSerialNumber
 	 kSecAttrSubjectKeyID
 	 kSecAttrPublicKeyHash
-	 
+
 	 kSecClassKey item attributes:
 	 kSecAttrAccess
 	 kSecAttrKeyClass
@@ -144,7 +144,7 @@ extern const CFTypeRef kSecClassIdentity
 	 kSecAttrCanVerify
 	 kSecAttrCanWrap
 	 kSecAttrCanUnwrap
-	 
+
 	 Note that the attributes kSecAttrCan* describe attributes of the
 	 key itself at relatively high level. Some of these attributes are
 	 mathematical -- for example, a DSA key cannot encrypt. Others are
@@ -152,12 +152,12 @@ extern const CFTypeRef kSecClassIdentity
 	 hygiene to use an RSA key either for encryption or signing but not
 	 both. Compare these to the certificate-level policy values in
 	 SecPolicy.h.
-	 
+
 	 kSecClassIdentity item attributes:
 	 Since an identity is the combination of a private key and a
 	 certificate, this class shares attributes of both kSecClassKey and
 	 kSecClassCertificate.
-	 
+
     @constant kSecAttrAccess Specifies a dictionary key whose value
 	 is a SecAccessRef describing the access control settings for this item.
 	 @constant kSecAttrCreationDate (read-only) Specifies a dictionary key whose
@@ -404,7 +404,7 @@ extern const CFTypeRef kSecAttrCanWrap
 	__OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_2_0);
 extern const CFTypeRef kSecAttrCanUnwrap
 	__OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_2_0);
-	
+
 /*!
 	 @enum kSecAttrProtocol Value Constants
 	 @discussion Predefined item attribute constants used to get or set values
@@ -504,7 +504,7 @@ extern const CFTypeRef kSecAttrProtocolIRCS
 	__OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_2_0);
 extern const CFTypeRef kSecAttrProtocolPOP3S
 	__OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_2_0);
-	
+
 /*!
 	 @enum kSecAttrAuthenticationType Value Constants
 	 @discussion Predefined item attribute constants used to get or set values
@@ -535,7 +535,7 @@ extern const CFTypeRef kSecAttrAuthenticationTypeHTMLForm
 	__OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_2_0);
 extern const CFTypeRef kSecAttrAuthenticationTypeDefault
 	__OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_2_0);
-	
+
 /*!
 	 @enum kSecAttrKeyClass Value Constants
 	 @discussion Predefined item attribute constants used to get or set values
@@ -551,7 +551,7 @@ extern const CFTypeRef kSecAttrKeyClassPrivate
 	__OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_2_0);
 extern const CFTypeRef kSecAttrKeyClassSymmetric
 	__OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_2_0);
-	
+
 /*!
 	 @enum kSecAttrKeyType Value Constants
 	 @discussion Predefined item attribute constants used to get or set values
@@ -584,7 +584,7 @@ extern const CFTypeRef kSecAttrKeyTypeCAST
 	__OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA);
 extern const CFTypeRef kSecAttrKeyTypeECDSA
 	__OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA);
-    
+
 /*!
 	 @enum kSecAttrPRF Value Constants
 	 @discussion Predefined item attribute constants used to specify the PRF
@@ -605,7 +605,7 @@ extern const CFTypeRef kSecAttrPRFHmacAlgSHA384
 	__OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA);
 extern const CFTypeRef kSecAttrPRFHmacAlgSHA512
   	__OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA);
- 
+
 /*!
 	 @enum Search Constants
 	 @discussion Predefined search constants used to set values in a query
@@ -622,7 +622,7 @@ extern const CFTypeRef kSecAttrPRFHmacAlgSHA512
 	 CFArray of SecKeychainRef items. If provided, the search will be limited
 	 to the keychains contained in this list.
 	 @constant kSecMatchIssuers Specifies a dictionary key whose value is a
-	 CFArray of X.500 names (of type CFDataRef). If provided, returned 
+	 CFArray of X.500 names (of type CFDataRef). If provided, returned
 	 certificates or identities will be limited to those whose
 	 certificate chain contains one of the issuers provided in this list.
 	 @constant kSecMatchEmailAddressIfPresent Specifies a dictionary key whose
@@ -704,8 +704,8 @@ extern const CFTypeRef kSecMatchLimitOne
 	__OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_2_0);
 extern const CFTypeRef kSecMatchLimitAll
 	__OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_2_0);
-	
-	
+
+
 /*!
 	 @enum Return Type Key Constants
 	 @discussion Predefined return type keys used to set values in a dictionary.
@@ -741,13 +741,13 @@ extern const CFTypeRef kSecReturnRef
 extern const CFTypeRef kSecReturnPersistentRef
 	__OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_2_0);
 
-	
+
 /*!
 	 @enum Value Type Key Constants
 	 @discussion Predefined value type keys used to pass values in a dictionary.
 	 You can specify zero or more of these types depending on the function
 	 you are calling.  For SecItemCopyMatching or SecItemAdd these are
-	 used as keys in the results dictionary. 
+	 used as keys in the results dictionary.
 	 @constant kSecValueData Specifies a dictionary key whose value is of type
 	 CFDataRef.  For keys and password items, data is secret (encrypted)
 	 and may require the user to enter a password for access.
@@ -765,8 +765,8 @@ extern const CFTypeRef kSecValueRef
 	__OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_2_0);
 extern const CFTypeRef kSecValuePersistentRef
 	__OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_2_0);
-	
-	
+
+
 /*!
 	 @enum Other Constants
 	 @discussion Predefined constants used to set values in a dictionary.
@@ -799,9 +799,9 @@ extern const CFTypeRef kSecUseKeychain
 	 @result A result code. See "Security Error Codes" (SecBase.h).
 	 @discussion Attributes defining a search are specified by adding key/value
 	 pairs to the query dictionary.
-	 
+
 	 A typical query consists of:
-	 
+
 	 * a kSecClass key, whose value is a constant from the Class
 	 Constants section that specifies the class of item(s) to be searched
 	 * one or more keys from the "Attribute Key Constants" section, whose value
@@ -810,9 +810,9 @@ extern const CFTypeRef kSecUseKeychain
 	 used to further refine the search
 	 * a key from the "Return Type Key Constants" section, specifying the type of
 	 results desired
-	 
+
 	 Result types are specified as follows:
-	 
+
 	 * To obtain the data of a matching item (CFDataRef), specify
 	 kSecReturnData with a value of kCFBooleanTrue.
 	 * To obtain the attributes of a matching item (CFDictionaryRef), specify
@@ -826,17 +826,17 @@ extern const CFTypeRef kSecUseKeychain
 	 on disk or passed between processes.
 	 * If more than one of these result types is specified, the result is
 	 returned as a CFDictionaryRef containing all the requested data.
-	 
+
 	 By default, this function returns only the first match found. To obtain
 	 more than one matching item at a time, specify kSecMatchLimit with a value
 	 greater than 1. The result will be a CFArrayRef containing up to that
 	 number of matching items; the items' types are described above.
-	 
+
 	 To filter a provided list of items down to those matching the query,
 	 specify a kSecMatchItemList whose value is a CFArray of SecKeychainItemRef,
 	 SecKeyRef, SecCertificateRef, or SecIdentityRef items. The objects in the
 	 provided array must be of the same type.
-	 
+
 	 To convert from persistent item references to normal item references,
 	 specify a kSecMatchItemList whose value is a CFArray containing one or
 	 more CFDataRef elements (the persistent reference), and a kSecReturnRef
@@ -845,7 +845,7 @@ extern const CFTypeRef kSecUseKeychain
 */
 OSStatus SecItemCopyMatching(CFDictionaryRef query, CFTypeRef *result)
 	__OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_2_0);
-	
+
 /*!
 	 @function SecItemAdd
 	 @abstract Add one or more items to a keychain.
@@ -864,9 +864,9 @@ OSStatus SecItemCopyMatching(CFDictionaryRef query, CFTypeRef *result)
 	 This is currently only supported for non password items.  To add an item
 	 to a particular keychain, supply kSecUseKeychain with a SecKeychainRef as
 	 its value.
-	 
+
 	 Result types are specified as follows:
-	 
+
 	 * To obtain the data of the added item (CFDataRef), specify
 	 kSecReturnData with a value of kCFBooleanTrue.
 	 * To obtain all the attributes of the added item (CFDictionaryRef),
@@ -884,7 +884,7 @@ OSStatus SecItemCopyMatching(CFDictionaryRef query, CFTypeRef *result)
 */
 OSStatus SecItemAdd(CFDictionaryRef attributes, CFTypeRef *result)
 	__OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_2_0);
-	
+
 /*!
 	 @function SecItemUpdate
 	 @abstract Modify zero or more items which match a search query.
@@ -914,10 +914,10 @@ OSStatus SecItemUpdate(CFDictionaryRef query, CFDictionaryRef attributesToUpdate
 	 @result A result code.  See "Security Error Codes" (SecBase.h).
 	 @discussion Attributes defining a search are specified by adding key/value
 	 pairs to the query dictionary.
-	 
+
 	 By default, this function deletes all items matching the specified query.
 	 You can change this behavior by specifying one of the follow keys:
-	 
+
 	 * To delete an item identified by a transient reference, specify
 	 kSecMatchItemList with a reference returned by using the kSecReturnRef
 	 key in a previous call to SecItemCopyMatching or SecItemAdd.

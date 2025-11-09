@@ -91,6 +91,8 @@
 #define	B_IOSTREAMING	0x00001000	/* sequential access pattern detected */
 #define B_THROTTLED_IO	0x00002000	/* low priority I/O */
 #define B_ENCRYPTED_IO	0x00004000	/* Encrypted I/O */
+#define B_STATICCONTENT 0x00008000	/* Buffer is likely to remain unaltered */
+
 /*
  * make sure to check when adding flags that
  * that the new flags don't overlap the definitions
@@ -1025,6 +1027,29 @@ uint32_t	buf_redundancy_flags(buf_t);
  */
 void	buf_set_redundancy_flags(buf_t, uint32_t);
 
+/*!
+ @function buf_attr
+ @abstract Gets the attributes for this buf.
+ @param bp Buffer whose attributes to get.
+ @return bufattr_t.
+ */
+bufattr_t buf_attr(buf_t);
+
+/*!
+ @function buf_markstatic
+ @abstract Mark a buffer as being likely to contain static data.
+ @param bp Buffer to mark.
+ @return void.
+ */
+ void buf_markstatic(buf_t);
+
+/*!
+ @function buf_static
+ @abstract Check if a buffer contains static data.
+ @param bp Buffer to test.
+ @return Nonzero if buffer has static data, 0 otherwise.
+ */
+int	buf_static(buf_t);
 
 
 __END_DECLS

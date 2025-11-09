@@ -1,9 +1,9 @@
 /*
-     File:       OT/OT.h
+     File:       OSServices/OT.h
  
-     Contains:   Master include for OT private framework
+     Contains:   *** DEPRECATED *** Master include for OT private framework
  
-     Copyright:  © 1999-2010 by Apple Inc., all rights reserved.
+     Copyright:  (c) 1999-2011 Apple Inc. All rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -11,6 +11,7 @@
                      http://developer.apple.com/bugreporter/
  
 */
+
 #ifndef __OT__
 #define __OT__
 

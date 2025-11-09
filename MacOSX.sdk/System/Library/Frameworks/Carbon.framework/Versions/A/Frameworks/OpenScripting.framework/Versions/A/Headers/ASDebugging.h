@@ -3,7 +3,7 @@
  
      Contains:   AppleScript Debugging Interfaces.
  
-     Version:    OSA-143~22
+     Version:    OSA-148.3~2
  
      Copyright:  © 1992-2008 by Apple Computer, Inc., all rights reserved
  
@@ -20,8 +20,8 @@
 #include <CoreServices/CoreServices.h>
 #endif
 
-#ifndef __APPLESCRIPT__
-#include <OpenScripting/AppleScript.h>
+#ifndef __OSA__
+#include <OpenScripting/OSA.h>
 #endif
 
 

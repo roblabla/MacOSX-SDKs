@@ -1,7 +1,7 @@
 /*
 	CoreDataErrors.h
 	Core Data
-    Copyright (c) 2004-2010 Apple Inc.
+    Copyright (c) 2004-2012 Apple Inc.
 	All rights reserved.
  */
 
@@ -23,7 +23,7 @@ COREDATA_EXTERN NSString * const NSValidationValueErrorKey NS_AVAILABLE(10_4,3_0
 COREDATA_EXTERN NSString * const NSAffectedStoresErrorKey NS_AVAILABLE(10_4,3_0);      // stores prompting an error
 COREDATA_EXTERN NSString * const NSAffectedObjectsErrorKey NS_AVAILABLE(10_4,3_0);     // objects prompting an error
 
-COREDATA_EXTERN NSString * const NSPersistentStoreSaveConflictsErrorKey NS_AVAILABLE(10_7,NA);     // key in NSError's userInfo specifying the NSArray of NSMergeConflict
+COREDATA_EXTERN NSString * const NSPersistentStoreSaveConflictsErrorKey NS_AVAILABLE(10_7, 5_0);     // key in NSError's userInfo specifying the NSArray of NSMergeConflict
 
 COREDATA_EXTERN NSString * const NSSQLiteErrorDomain NS_AVAILABLE(10_5,3_0);           // Predefined domain for SQLite errors, value of "code" will correspond to preexisting values in SQLite.
 
@@ -62,7 +62,7 @@ enum {
     NSPersistentStoreOpenError                       = 134080, // an error occured while attempting to open the persistent store
     NSPersistentStoreTimeoutError                    = 134090, // failed to connect to the persistent store within the specified timeout (see NSPersistentStoreTimeoutOption)
 	NSPersistentStoreUnsupportedRequestTypeError	 = 134091, // an NSPersistentStore subclass was passed an NSPersistentStoreRequest that it did not understand
-
+    
     NSPersistentStoreIncompatibleVersionHashError    = 134100, // entity version hashes incompatible with data model
     NSMigrationError                                 = 134110, // general migration error
     NSMigrationCancelledError                        = 134120, // migration failed due to manual cancellation

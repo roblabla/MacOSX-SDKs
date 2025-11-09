@@ -5,7 +5,7 @@
  
      Version:    ATS
  
-     Copyright:  © 1994-2011 by Apple Inc., all rights reserved.
+     Copyright:  © 1994-2012 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -34,8 +34,8 @@
 /*
     The following values can be used to set run feature values. Note that unless the
     feature is defaulted differently in different fonts, the zero value for the
-    selectors represents the default value.  Check the following URL site for further info:
-    "http://fonts.apple.com/Registry"
+    selectors represents the default value. Consult the following URL for further info:
+    <http://developer.apple.com/fonts/registry/>
 */
 
 
@@ -47,7 +47,7 @@ enum {
   kAllTypographicFeaturesType   = 0,
   kLigaturesType                = 1,
   kCursiveConnectionType        = 2,
-  kLetterCaseType               = 3,
+  kLetterCaseType               = 3,    /* deprecated - use kLowerCaseType or kUpperCaseType instead */
   kVerticalSubstitutionType     = 4,
   kLinguisticRearrangementType  = 5,
   kNumberSpacingType            = 6,
@@ -75,6 +75,12 @@ enum {
   kIdeographicAlternativesType  = 30,
   kCJKVerticalRomanPlacementType = 31,
   kItalicCJKRomanType           = 32,
+  kCaseSensitiveLayoutType      = 33,
+  kAlternateKanaType            = 34,
+  kStylisticAlternativesType    = 35,
+  kContextualAlternatesType     = 36,
+  kLowerCaseType                = 37,
+  kUpperCaseType                = 38,
   kCJKRomanSpacingType          = 103,
   kLastFeatureType              = -1
 };
@@ -113,7 +119,11 @@ enum {
   kAbbrevSquaredLigaturesOnSelector = 14,
   kAbbrevSquaredLigaturesOffSelector = 15,
   kSymbolLigaturesOnSelector    = 16,
-  kSymbolLigaturesOffSelector   = 17
+  kSymbolLigaturesOffSelector   = 17,
+  kContextualLigaturesOnSelector = 18,
+  kContextualLigaturesOffSelector = 19,
+  kHistoricalLigaturesOnSelector = 20,
+  kHistoricalLigaturesOffSelector = 21
 };
 
 
@@ -133,12 +143,12 @@ enum {
  *    Selectors for feature type kLetterCaseType
  */
 enum {
-  kUpperAndLowerCaseSelector    = 0,
-  kAllCapsSelector              = 1,
-  kAllLowerCaseSelector         = 2,
-  kSmallCapsSelector            = 3,
-  kInitialCapsSelector          = 4,
-  kInitialCapsAndSmallCapsSelector = 5
+  kUpperAndLowerCaseSelector    = 0,    /* deprecated */
+  kAllCapsSelector              = 1,    /* deprecated */
+  kAllLowerCaseSelector         = 2,    /* deprecated */
+  kSmallCapsSelector            = 3,    /* deprecated */
+  kInitialCapsSelector          = 4,    /* deprecated */
+  kInitialCapsAndSmallCapsSelector = 5  /* deprecated */
 };
 
 
@@ -211,7 +221,8 @@ enum {
   kNormalPositionSelector       = 0,
   kSuperiorsSelector            = 1,
   kInferiorsSelector            = 2,
-  kOrdinalsSelector             = 3
+  kOrdinalsSelector             = 3,
+  kScientificInferiorsSelector  = 4
 };
 
 
@@ -270,7 +281,9 @@ enum {
   kInequalityLigaturesOnSelector = 6,
   kInequalityLigaturesOffSelector = 7,
   kExponentsOnSelector          = 8,
-  kExponentsOffSelector         = 9
+  kExponentsOffSelector         = 9,
+  kMathematicalGreekOnSelector  = 10,
+  kMathematicalGreekOffSelector = 11
 };
 
 
@@ -340,7 +353,11 @@ enum {
   kTraditionalAltThreeSelector  = 7,
   kTraditionalAltFourSelector   = 8,
   kTraditionalAltFiveSelector   = 9,
-  kExpertCharactersSelector     = 10
+  kExpertCharactersSelector     = 10,
+  kJIS2004CharactersSelector    = 11,
+  kHojoCharactersSelector       = 12,
+  kNLCCharactersSelector        = 13,
+  kTraditionalNamesCharactersSelector = 14
 };
 
 
@@ -361,7 +378,11 @@ enum {
 enum {
   kProportionalTextSelector     = 0,
   kMonospacedTextSelector       = 1,
-  kHalfWidthTextSelector        = 2
+  kHalfWidthTextSelector        = 2,
+  kThirdWidthTextSelector       = 3,
+  kQuarterWidthTextSelector     = 4,
+  kAltProportionalTextSelector  = 5,
+  kAltHalfWidthTextSelector     = 6
 };
 
 
@@ -496,6 +517,115 @@ enum {
   kCJKItalicRomanSelector       = 1,    /* deprecated - use kCJKItalicRomanOnSelector instead */
   kCJKItalicRomanOnSelector     = 2,
   kCJKItalicRomanOffSelector    = 3
+};
+
+
+/*
+ *  Summary:
+ *    Selectors for feature type kCaseSensitiveLayoutType
+ */
+enum {
+  kCaseSensitiveLayoutOnSelector = 0,
+  kCaseSensitiveLayoutOffSelector = 1,
+  kCaseSensitiveSpacingOnSelector = 2,
+  kCaseSensitiveSpacingOffSelector = 3
+};
+
+
+/*
+ *  Summary:
+ *    Selectors for feature type kAlternateKanaType
+ */
+enum {
+  kAlternateHorizKanaOnSelector = 0,
+  kAlternateHorizKanaOffSelector = 1,
+  kAlternateVertKanaOnSelector  = 2,
+  kAlternateVertKanaOffSelector = 3
+};
+
+
+/*
+ *  Summary:
+ *    Selectors for feature type kStylisticAlternativesType
+ */
+enum {
+  kNoStylisticAlternatesSelector = 0,
+  kStylisticAltOneOnSelector    = 2,
+  kStylisticAltOneOffSelector   = 3,
+  kStylisticAltTwoOnSelector    = 4,
+  kStylisticAltTwoOffSelector   = 5,
+  kStylisticAltThreeOnSelector  = 6,
+  kStylisticAltThreeOffSelector = 7,
+  kStylisticAltFourOnSelector   = 8,
+  kStylisticAltFourOffSelector  = 9,
+  kStylisticAltFiveOnSelector   = 10,
+  kStylisticAltFiveOffSelector  = 11,
+  kStylisticAltSixOnSelector    = 12,
+  kStylisticAltSixOffSelector   = 13,
+  kStylisticAltSevenOnSelector  = 14,
+  kStylisticAltSevenOffSelector = 15,
+  kStylisticAltEightOnSelector  = 16,
+  kStylisticAltEightOffSelector = 17,
+  kStylisticAltNineOnSelector   = 18,
+  kStylisticAltNineOffSelector  = 19,
+  kStylisticAltTenOnSelector    = 20,
+  kStylisticAltTenOffSelector   = 21,
+  kStylisticAltElevenOnSelector = 22,
+  kStylisticAltElevenOffSelector = 23,
+  kStylisticAltTwelveOnSelector = 24,
+  kStylisticAltTwelveOffSelector = 25,
+  kStylisticAltThirteenOnSelector = 26,
+  kStylisticAltThirteenOffSelector = 27,
+  kStylisticAltFourteenOnSelector = 28,
+  kStylisticAltFourteenOffSelector = 29,
+  kStylisticAltFifteenOnSelector = 30,
+  kStylisticAltFifteenOffSelector = 31,
+  kStylisticAltSixteenOnSelector = 32,
+  kStylisticAltSixteenOffSelector = 33,
+  kStylisticAltSeventeenOnSelector = 34,
+  kStylisticAltSeventeenOffSelector = 35,
+  kStylisticAltEighteenOnSelector = 36,
+  kStylisticAltEighteenOffSelector = 37,
+  kStylisticAltNineteenOnSelector = 38,
+  kStylisticAltNineteenOffSelector = 39,
+  kStylisticAltTwentyOnSelector = 40,
+  kStylisticAltTwentyOffSelector = 41
+};
+
+
+/*
+ *  Summary:
+ *    Selectors for feature type kContextualAlternatesType
+ */
+enum {
+  kContextualAlternatesOnSelector = 0,
+  kContextualAlternatesOffSelector = 1,
+  kSwashAlternatesOnSelector    = 2,
+  kSwashAlternatesOffSelector   = 3,
+  kContextualSwashAlternatesOnSelector = 4,
+  kContextualSwashAlternatesOffSelector = 5
+};
+
+
+/*
+ *  Summary:
+ *    Selectors for feature type kLowerCaseType
+ */
+enum {
+  kDefaultLowerCaseSelector     = 0,
+  kLowerCaseSmallCapsSelector   = 1,
+  kLowerCasePetiteCapsSelector  = 2
+};
+
+
+/*
+ *  Summary:
+ *    Selectors for feature type kUpperCaseType
+ */
+enum {
+  kDefaultUpperCaseSelector     = 0,
+  kUpperCaseSmallCapsSelector   = 1,
+  kUpperCasePetiteCapsSelector  = 2
 };
 
 
@@ -1356,8 +1486,12 @@ enum {
 
 /* Flags in KerxControlPointHeader */
 enum {
-  kKERXUsesCoordinates          = (int)0x80000000, /* Actions have control point coordinates */
-  kKERXActionOffsetMask         = 0x7FFFFFFF /* Mask to extract offset to action table */
+  kKERXActionTypeMask           = (3U << 30), /* Mask to extract action type */
+  kKERXActionTypeControlPoints  = (0U << 30), /* Actions have control point numbers */
+  kKERXActionTypeAnchorPoints   = (1U << 30), /* Actions have anchor point numbers */
+  kKERXActionTypeCoordinates    = (2U << 30), /* Actions have control point coordinates */
+  kKERXUnusedFlags              = 0x3F000000, /* Unused, must be zero */
+  kKERXActionOffsetMask         = 0x00FFFFFF, /* Mask to extract offset to action table */
 };
 
 /* TYPES */
@@ -1434,6 +1568,11 @@ struct KerxControlPointAction {
   UInt16              currControlPoint;
 };
 typedef struct KerxControlPointAction   KerxControlPointAction;
+struct KerxAnchorPointAction {
+  UInt16              markAnchorPoint;
+  UInt16              currAnchorPoint;
+};
+typedef struct KerxAnchorPointAction   KerxAnchorPointAction;
 struct KerxCoordinateAction {
   UInt16              markX;
   UInt16              markY;
@@ -1637,6 +1776,33 @@ struct ROTAGlyphEntry {                       /* lookup data for ROTA table */
   SInt16              VBaselineOffset;        /* x offset to the rotated vertical baseline */
 };
 typedef struct ROTAGlyphEntry           ROTAGlyphEntry;
+/* --------------------------------------------------------------------------- */
+/* FORMATS FOR TABLE 'ankr' */
+/* CONSTANTS */
+enum {
+  kANKRCurrentVersion = 0
+};
+
+/* TYPES */
+struct AnchorPoint {
+  SInt16               x;                     /* x coordinate of anchor point */
+  SInt16               y;                     /* y coordinate of anchor point */
+};
+typedef struct AnchorPoint              AnchorPoint;
+
+struct AnchorPointTable {
+  UInt32              nPoints;                /* number of anchor points defined for this glyph */
+  AnchorPoint         points[1];              /* first anchor point starts here */
+};
+typedef struct AnchorPointTable         AnchorPointTable;
+
+struct AnkrTable {
+  UInt16              version;                /* 1 */
+  UInt16              flags;                  /* never leave home without them (see 'Zapf') */
+  UInt32              lookupTableOffset;      /* Byte offset to lookup table mapping glyphs to offset into anchor point table */
+  UInt32              anchorPointTableOffset; /* Byte offset to start of anchor point table */
+};
+typedef struct AnkrTable                AnkrTable;
 /* --------------------------------------------------------------------------- */
 
 #pragma pack(pop)

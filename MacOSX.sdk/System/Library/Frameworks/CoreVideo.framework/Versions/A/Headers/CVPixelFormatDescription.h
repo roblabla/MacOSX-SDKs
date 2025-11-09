@@ -94,6 +94,7 @@ CV_EXPORT const CFStringRef kCVPixelFormatQDCompatibility __OSX_AVAILABLE_STARTI
 CV_EXPORT const CFStringRef kCVPixelFormatCGBitmapContextCompatibility __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 CV_EXPORT const CFStringRef kCVPixelFormatCGImageCompatibility __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 CV_EXPORT const CFStringRef kCVPixelFormatOpenGLCompatibility __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
+CV_EXPORT const CFStringRef kCVPixelFormatOpenGLESCompatibility __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_5_0);
 
 /* This callback routine implements code to handle the functionality of CVPixelBufferFillExtendedPixels.  
    For custom pixel formats where you will never need to use that call, this is not required. */

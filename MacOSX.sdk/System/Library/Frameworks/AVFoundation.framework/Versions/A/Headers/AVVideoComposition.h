@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010 Apple Inc. All rights reserved.
+	Copyright 2010-2012 Apple Inc. All rights reserved.
 
 */
 
@@ -360,5 +360,72 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 @interface AVAsset (AVAssetVideoCompositionUtility)
 
 - (CMPersistentTrackID)unusedTrackID;
+
+@end
+
+
+@protocol AVVideoCompositionValidationHandling;
+
+@interface AVVideoComposition (AVVideoCompositionValidation)
+
+/*!
+ @method		isValidForAsset:timeRange:validationDelegate:
+ @abstract
+   Indicates whether the timeRanges of the receiver's instructions conform to the requirements described for them immediately above (in connection with the instructions property) and also whether all of the layer instructions have a value for trackID that corresponds either to a track of the specified asset or to the receiver's animationTool. 
+ @param			asset
+    Pass a reference to an AVAsset if you wish to validate the timeRanges of the instructions against the duration of the asset and the trackIDs of the layer instructions against the asset's tracks. Pass nil to skip that validation.
+ @param			timeRange
+   A CMTimeRange.  Only those instuctions with timeRanges that overlap with the specified timeRange will be validated. To validate all instructions that may be used for playback or other processing, regardless of timeRange, pass CMTimeRangeMake(kCMTimeZero, kCMTimePositiveInfinity).
+ @param			validationDelegate
+   Indicates an object implementing the AVVideoCompositionValidationHandling protocol to receive information about troublesome portions of a video composition during processing of -isValidForAsset:. May be nil.
+@discussion
+   In the course of validation, the receiver will invoke its validationDelegate with reference to any trouble spots in the video composition.
+   An exception will be raised if the delegate modifies the receiver's array of instructions or the array of layerInstructions of any AVVideoCompositionInstruction contained therein during validation.
+*/
+- (BOOL)isValidForAsset:(AVAsset *)asset timeRange:(CMTimeRange)timeRange validationDelegate:(id<AVVideoCompositionValidationHandling>)validationDelegate NS_AVAILABLE(10_8, 5_0);
+
+@end
+
+@protocol AVVideoCompositionValidationHandling <NSObject>
+
+@optional
+
+/*!
+ @method		videoComposition:shouldContinueValidatingAfterFindingInvalidValueForKey:
+ @abstract
+   Invoked by an instance of AVVideoComposition when validating an instance of AVVideoComposition, to report a key that has an invalid value.
+ @result
+   An indication of whether the AVVideoComposition should continue validation in order to report additional problems that may exist.
+*/
+- (BOOL)videoComposition:(AVVideoComposition *)videoComposition shouldContinueValidatingAfterFindingInvalidValueForKey:(NSString *)key NS_AVAILABLE(10_8, 5_0);
+
+/*!
+ @method		videoComposition:shouldContinueValidatingAfterFindingEmptyTimeRange:
+ @abstract
+   Invoked by an instance of AVVideoComposition when validating an instance of AVVideoComposition, to report a timeRange that has no corresponding video composition instruction.
+ @result
+   An indication of whether the AVVideoComposition should continue validation in order to report additional problems that may exist.
+*/
+- (BOOL)videoComposition:(AVVideoComposition *)videoComposition shouldContinueValidatingAfterFindingEmptyTimeRange:(CMTimeRange)timeRange NS_AVAILABLE(10_8, 5_0);
+
+/*!
+ @method		videoComposition:shouldContinueValidatingAfterFindingInvalidTimeRangeInInstruction:
+ @abstract
+   Invoked by an instance of AVVideoComposition when validating an instance of AVVideoComposition, to report a video composition instruction with a timeRange that's invalid, that overlaps with the timeRange of a prior instruction, or that contains times earlier than the timeRange of a prior instruction.
+ @discussion
+   Use CMTIMERANGE_IS_INVALID, defined in CMTimeRange.h, to test whether the timeRange itself is invalid. Refer to headerdoc for AVVideoComposition.instructions for a discussion of how timeRanges for instructions must be formulated.
+ @result
+   An indication of whether the AVVideoComposition should continue validation in order to report additional problems that may exist.
+*/
+- (BOOL)videoComposition:(AVVideoComposition *)videoComposition shouldContinueValidatingAfterFindingInvalidTimeRangeInInstruction:(AVVideoCompositionInstruction *)videoCompositionInstruction NS_AVAILABLE(10_8, 5_0);
+
+/*!
+ @method		videoComposition:shouldContinueValidatingAfterFindingInvalidTrackIDInInstruction:layerInstruction:asset:
+ @abstract
+   Invoked by an instance of AVVideoComposition when validating an instance of AVVideoComposition, to report a video composition layer instruction with a trackID that does not correspond either to the trackID used for the composition's animationTool or to a track of the asset specified in -[AVVideoComposition isValidForAsset:timeRange:delegate:].
+ @result
+   An indication of whether the AVVideoComposition should continue validation in order to report additional problems that may exist.
+*/
+- (BOOL)videoComposition:(AVVideoComposition *)videoComposition shouldContinueValidatingAfterFindingInvalidTrackIDInInstruction:(AVVideoCompositionInstruction *)videoCompositionInstruction layerInstruction:(AVVideoCompositionLayerInstruction *)layerInstruction asset:(AVAsset *)asset NS_AVAILABLE(10_8, 5_0);
 
 @end

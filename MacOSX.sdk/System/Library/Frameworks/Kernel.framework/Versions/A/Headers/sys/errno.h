@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2002 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2012 Apple, Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -133,17 +133,6 @@
 #define	ESOCKTNOSUPPORT	44		/* Socket type not supported */
 #endif
 #define ENOTSUP		45		/* Operation not supported */
-#if !__DARWIN_UNIX03 && !defined(KERNEL)
-/*
- * This is the same for binary and source copmpatability, unless compiling
- * the kernel itself, or compiling __DARWIN_UNIX03; if compiling for the
- * kernel, the correct value will be returned.  If compiling non-POSIX
- * source, the kernel return value will be converted by a stub in libc, and
- * if compiling source with __DARWIN_UNIX03, the conversion in libc is not
- * done, and the caller gets the expected (discrete) value.
- */
-#define	EOPNOTSUPP	 ENOTSUP	/* Operation not supported on socket */
-#endif /* !__DARWIN_UNIX03 && !KERNEL */
 
 #if __DARWIN_C_LEVEL >= __DARWIN_C_FULL
 #define	EPFNOSUPPORT	46		/* Protocol family not supported */
@@ -237,10 +226,8 @@
 #define	EPROTO		100		/* Protocol error */
 #define ETIME		101		/* STREAM ioctl timeout */
 
-#if __DARWIN_UNIX03 || defined(KERNEL)
 /* This value is only discrete when compiling __DARWIN_UNIX03, or KERNEL */
 #define	EOPNOTSUPP	102		/* Operation not supported on socket */
-#endif /* __DARWIN_UNIX03 || KERNEL */
 
 #define ENOPOLICY	103		/* No such policy registered */
 
@@ -250,13 +237,13 @@
 #endif
 
 #if __DARWIN_C_LEVEL >= __DARWIN_C_FULL
-#define	ELAST		105		/* Must be equal largest errno */
+#define	EQFULL		106		/* Interface output queue is full */
+#define	ELAST		106		/* Must be equal largest errno */
 #endif
 
 /* pseudo-errors returned inside kernel to modify return to process */
 #define	ERESTART	(-1)		/* restart syscall */
 #define	EJUSTRETURN	(-2)		/* don't modify regs, just return */
 
-/* -5 and -6 are reserved for kernel internal use */
-
+/* -5, -6 and -7 and -106 are reserved for kernel internal use */
 #endif /* _SYS_ERRNO_H_ */

@@ -1,9 +1,9 @@
 /*
      File:       OSServices/WSProtocolHandler.h
  
-     Contains:   WebServicesCore Method implementation API
+     Contains:   *** DEPRECATED *** WebServicesCore Method implementation API
  
-     Copyright:  © 2002-2010 by Apple Inc., all rights reserved
+     Copyright:  (c) 2002-2011 Apple Inc. All rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -11,6 +11,7 @@
                      http://developer.apple.com/bugreporter/
  
 */
+
 #ifndef __WSPROTOCOLHANDLER__
 #define __WSPROTOCOLHANDLER__
 
@@ -30,7 +31,7 @@
     WSProtocolHandler
 */
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -59,23 +60,25 @@ extern "C" {
  *    through a set of external properties.
  */
 typedef struct OpaqueWSProtocolHandlerRef*  WSProtocolHandlerRef;
+
+
 /*
- *  WSProtocolHandlerGetTypeID()
+ *  WSProtocolHandlerGetTypeID()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 and later
+ *    Mac OS X:         in version 10.3 and later but deprecated in 10.8
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
 extern CFTypeID 
-WSProtocolHandlerGetTypeID(void);
+WSProtocolHandlerGetTypeID(void)                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
 
 
 /*
- *  WSProtocolHandlerCreate()
+ *  WSProtocolHandlerCreate()   *** DEPRECATED ***
  *  
  *  Discussion:
  *    Creates a WSProtocolHandlerRef for use in translating an XML
@@ -98,20 +101,20 @@ WSProtocolHandlerGetTypeID(void);
  *    a WSProtocolHandlerRef, NULL if a parse error occured.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 and later
+ *    Mac OS X:         in version 10.3 and later but deprecated in 10.8
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
 extern WSProtocolHandlerRef 
 WSProtocolHandlerCreate(
   CFAllocatorRef   allocator,
-  CFStringRef      protocol);
+  CFStringRef      protocol)                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
 
 
 
 
 /*
- *  WSProtocolHandlerCopyRequestDictionary()
+ *  WSProtocolHandlerCopyRequestDictionary()   *** DEPRECATED ***
  *  
  *  Discussion:
  *    Parse an incoming XML document for the method name and
@@ -140,19 +143,19 @@ WSProtocolHandlerCreate(
  *    a CFDictionary
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 and later
+ *    Mac OS X:         in version 10.3 and later but deprecated in 10.8
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
 extern CFDictionaryRef 
 WSProtocolHandlerCopyRequestDictionary(
   WSProtocolHandlerRef   ref,
-  CFDataRef              data);
+  CFDataRef              data)                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
 
 
 
 /*
- *  WSProtocolHandlerCopyReplyDictionary()
+ *  WSProtocolHandlerCopyReplyDictionary()   *** DEPRECATED ***
  *  
  *  Discussion:
  *    Parse an incoming XML document as if it were the reply of a
@@ -180,7 +183,7 @@ WSProtocolHandlerCopyRequestDictionary(
  *    a CFDictionary
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 and later
+ *    Mac OS X:         in version 10.3 and later but deprecated in 10.8
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -188,11 +191,11 @@ extern CFDictionaryRef
 WSProtocolHandlerCopyReplyDictionary(
   WSProtocolHandlerRef   ref,
   CFStringRef            methodName,
-  CFDataRef              data);
+  CFDataRef              data)                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
 
 
 /*
- *  WSProtocolHandlerCopyReplyDocument()
+ *  WSProtocolHandlerCopyReplyDocument()   *** DEPRECATED ***
  *  
  *  Discussion:
  *    Creates a Reply XML document for a given WSProtocolHandler and
@@ -218,7 +221,7 @@ WSProtocolHandlerCopyReplyDictionary(
  *    a CFDataRef containing the XML response
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 and later
+ *    Mac OS X:         in version 10.3 and later but deprecated in 10.8
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -226,11 +229,11 @@ extern CFDataRef
 WSProtocolHandlerCopyReplyDocument(
   WSProtocolHandlerRef   ref,
   CFDictionaryRef        methodContext,
-  CFTypeRef              resultValue);
+  CFTypeRef              resultValue)                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
 
 
 /*
- *  WSProtocolHandlerCopyFaultDocument()
+ *  WSProtocolHandlerCopyFaultDocument()   *** DEPRECATED ***
  *  
  *  Discussion:
  *    Creates a Fault XML response for a given WSProtocolHandler and
@@ -256,7 +259,7 @@ WSProtocolHandlerCopyReplyDocument(
  *    a CFDataRef containing the XML fault
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 and later
+ *    Mac OS X:         in version 10.3 and later but deprecated in 10.8
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -264,11 +267,11 @@ extern CFDataRef
 WSProtocolHandlerCopyFaultDocument(
   WSProtocolHandlerRef   ref,
   CFDictionaryRef        methodContext,
-  CFDictionaryRef        faultDict);
+  CFDictionaryRef        faultDict)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
 
 
 /*
- *  WSProtocolHandlerCopyRequestDocument()
+ *  WSProtocolHandlerCopyRequestDocument()   *** DEPRECATED ***
  *  
  *  Discussion:
  *    Creates an XML request for a given WSProtocolHandler and
@@ -300,7 +303,7 @@ WSProtocolHandlerCopyFaultDocument(
  *    a CFDataRef
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 and later
+ *    Mac OS X:         in version 10.3 and later but deprecated in 10.8
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -310,12 +313,12 @@ WSProtocolHandlerCopyRequestDocument(
   CFStringRef            methodName,
   CFDictionaryRef        methodParams,
   CFArrayRef             methodParamOrder,
-  CFDictionaryRef        methodExtras);
+  CFDictionaryRef        methodExtras)                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
 
 
 
 /*
- *  WSProtocolHandlerCopyProperty()
+ *  WSProtocolHandlerCopyProperty()   *** DEPRECATED ***
  *  
  *  Discussion:
  *    returns a property from a protocol handler.  If the result is
@@ -338,18 +341,18 @@ WSProtocolHandlerCopyRequestDocument(
  *    not specified.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 and later
+ *    Mac OS X:         in version 10.3 and later but deprecated in 10.8
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
 extern CFTypeRef 
 WSProtocolHandlerCopyProperty(
   WSProtocolHandlerRef   ref,
-  CFStringRef            propertyName);
+  CFStringRef            propertyName)                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
 
 
 /*
- *  WSProtocolHandlerSetProperty()
+ *  WSProtocolHandlerSetProperty()   *** DEPRECATED ***
  *  
  *  Discussion:
  *    Sets a property to a method implementation.
@@ -369,7 +372,7 @@ WSProtocolHandlerCopyProperty(
  *      the value to set in the method implementation
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 and later
+ *    Mac OS X:         in version 10.3 and later but deprecated in 10.8
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -377,7 +380,7 @@ extern void
 WSProtocolHandlerSetProperty(
   WSProtocolHandlerRef   ref,
   CFStringRef            propertyName,
-  CFTypeRef              propertyValue);
+  CFTypeRef              propertyValue)                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
 
 
 /*
@@ -417,8 +420,11 @@ WSProtocolHandlerSetProperty(
  *    will release the string.
  */
 typedef CALLBACK_API( CFStringRef , WSProtocolHandlerSerializationProcPtr )(WSProtocolHandlerRef protocol, CFTypeRef obj, void *info);
+
+	
+	
 /*
- *  WSProtocolHandlerSetSerializationOverride()
+ *  WSProtocolHandlerSetSerializationOverride()   *** DEPRECATED ***
  *  
  *  Discussion:
  *    Specifies a callback which will be called to produce the XML that
@@ -445,7 +451,7 @@ typedef CALLBACK_API( CFStringRef , WSProtocolHandlerSerializationProcPtr )(WSPr
  *      a pointer to a WSClientContext.  The structure will be copied.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 and later
+ *    Mac OS X:         in version 10.3 and later but deprecated in 10.8
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -454,7 +460,7 @@ WSProtocolHandlerSetSerializationOverride(
   WSProtocolHandlerRef                    protocol,
   CFTypeID                                objType,
   WSProtocolHandlerSerializationProcPtr   serializationProc,
-  WSClientContext *                       context);
+  WSClientContext *                       context)            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
 
 
 
@@ -490,8 +496,11 @@ WSProtocolHandlerSetSerializationOverride(
  *    the default deserializers to act.
  */
 typedef CALLBACK_API( CFTypeRef , WSProtocolHandlerDeserializationProcPtr )(WSProtocolHandlerRef protocol, CFXMLTreeRef msgRoot, CFXMLTreeRef deserializeRoot, void *info);
+
+	
+	
 /*
- *  WSProtocolHandlerSetDeserializationOverride()
+ *  WSProtocolHandlerSetDeserializationOverride()   *** DEPRECATED ***
  *  
  *  Discussion:
  *    Specifies a callback to be made when parsing an XML method
@@ -522,7 +531,7 @@ typedef CALLBACK_API( CFTypeRef , WSProtocolHandlerDeserializationProcPtr )(WSPr
  *      a pointer to a WSClientContext.  The structure will be copied.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.3 and later
+ *    Mac OS X:         in version 10.3 and later but deprecated in 10.8
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -532,7 +541,7 @@ WSProtocolHandlerSetDeserializationOverride(
   CFStringRef                               typeNamespace,
   CFStringRef                               typeName,
   WSProtocolHandlerDeserializationProcPtr   deserializationProc,
-  WSClientContext *                         context);
+  WSClientContext *                         context)          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
 
 
 

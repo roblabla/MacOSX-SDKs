@@ -23,12 +23,11 @@ Numpy Ufunc C-API
 
   int
   PyUFunc_GenericFunction(PyUFuncObject *self, PyObject *args, PyObject
-                          *kwds, PyArrayObject **mps)
+                          *kwds, PyArrayObject **op)
 
 
 This generic function is called with the ufunc object, the arguments to it,
-and an array of (pointers to) PyArrayObjects which are NULL.  The
-arguments are parsed and placed in mps in construct_loop (construct_arrays)
+and an array of (pointers to) PyArrayObjects which are NULL.
 
 ::
 
@@ -169,6 +168,9 @@ arguments are parsed and placed in mps in construct_loop (construct_arrays)
                       **errobj)
 
 
+On return, if errobj is populated with a non-NULL value, the caller
+owns a new reference to errobj.
+
 ::
 
   int
@@ -219,5 +221,45 @@ arguments are parsed and placed in mps in construct_loop (construct_arrays)
 
   int
   PyUFunc_SetUsesArraysAsData(void **data, size_t i)
+
+
+::
+
+  void
+  PyUFunc_e_e(char **args, intp *dimensions, intp *steps, void *func)
+
+
+::
+
+  void
+  PyUFunc_e_e_As_f_f(char **args, intp *dimensions, intp *steps, void
+                     *func)
+
+
+::
+
+  void
+  PyUFunc_e_e_As_d_d(char **args, intp *dimensions, intp *steps, void
+                     *func)
+
+
+::
+
+  void
+  PyUFunc_ee_e(char **args, intp *dimensions, intp *steps, void *func)
+
+
+::
+
+  void
+  PyUFunc_ee_e_As_ff_f(char **args, intp *dimensions, intp *steps, void
+                       *func)
+
+
+::
+
+  void
+  PyUFunc_ee_e_As_dd_d(char **args, intp *dimensions, intp *steps, void
+                       *func)
 
 

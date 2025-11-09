@@ -1,7 +1,7 @@
 /*
  NSPersistentStoreRequest.h
  Core Data
- Copyright (c) 2004-2010 Apple Inc.
+ Copyright (c) 2004-2012 Apple Inc.
  All rights reserved.
  */
 
@@ -14,7 +14,7 @@ enum {
 
 typedef NSUInteger NSPersistentStoreRequestType;
 
-NS_CLASS_AVAILABLE(10_7, NA)
+NS_CLASS_AVAILABLE(10_7, 5_0)
 @interface NSPersistentStoreRequest : NSObject <NSCopying> {
 	@private
 	NSArray *_affectedStores;

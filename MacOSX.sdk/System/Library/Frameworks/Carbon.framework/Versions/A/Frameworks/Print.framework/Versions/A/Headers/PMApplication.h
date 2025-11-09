@@ -34,10 +34,6 @@
 extern "C" {
 #endif
 
-#ifndef PM_USE_SESSION_APIS
-#define PM_USE_SESSION_APIS 1
-#endif  /* !defined(PM_USE_SESSION_APIS) */
-
 #pragma mark
 #pragma mark Callbacks
 #pragma mark
@@ -95,7 +91,6 @@ InvokePMSheetDoneUPP(
 #pragma mark Print Loop
 #pragma mark
 
-#if PM_USE_SESSION_APIS
 /* Print loop */
 /*
  *  PMSessionBeginCGDocument()
@@ -317,7 +312,6 @@ PMSessionEnablePrinterPresets(
 extern OSStatus 
 PMSessionDisablePrinterPresets(PMPrintSession session)        AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
-#endif  /* PM_USE_SESSION_APIS */
 
 #ifdef __cplusplus
 }

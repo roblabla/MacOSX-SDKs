@@ -2,19 +2,11 @@
      File:       CarbonCore/CodeFragments.h
  
      Contains:   Public Code Fragment Manager Interfaces.
+                 The contents of this header file are deprecated.
  
-     Version:    CarbonCore-960.18~3
- 
-     Copyright:  © 1992-2008 by Apple Computer, Inc., all rights reserved.
- 
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
- 
-                     http://developer.apple.com/bugreporter/
- 
+     Copyright:  © 1992-2011 by Apple Inc. All rights reserved.
 */
 /*
-   ¥
    ===========================================================================================
    The Code Fragment Manager API
    =============================
@@ -44,7 +36,7 @@
 
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -319,7 +311,7 @@ GetSharedLibrary(
   CFragLoadOptions     options,
   CFragConnectionID *  connID,
   Ptr *                mainAddr,
-  Str255               errMessage)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  Str255               errMessage)                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -342,7 +334,7 @@ GetDiskFragment(
   CFragLoadOptions     options,
   CFragConnectionID *  connID,           /* can be NULL */
   Ptr *                mainAddr,         /* can be NULL */
-  Str255               errMessage)       /* can be NULL */    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  Str255               errMessage)       /* can be NULL */    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -364,7 +356,7 @@ GetMemFragment(
   CFragLoadOptions     options,
   CFragConnectionID *  connID,           /* can be NULL */
   Ptr *                mainAddr,         /* can be NULL */
-  Str255               errMessage)       /* can be NULL */    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  Str255               errMessage)       /* can be NULL */    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -379,7 +371,7 @@ GetMemFragment(
  *    Non-Carbon CFM:   in CFragManager 1.0 and later
  */
 extern OSErr 
-CloseConnection(CFragConnectionID * connID)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+CloseConnection(CFragConnectionID * connID)                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -398,7 +390,7 @@ FindSymbol(
   CFragConnectionID   connID,
   ConstStr255Param    symName,
   Ptr *               symAddr,        /* can be NULL */
-  CFragSymbolClass *  symClass)       /* can be NULL */       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  CFragSymbolClass *  symClass)       /* can be NULL */       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -415,7 +407,7 @@ FindSymbol(
 extern OSErr 
 CountSymbols(
   CFragConnectionID   connID,
-  long *              symCount)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  long *              symCount)                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -435,7 +427,7 @@ GetIndSymbol(
   long                symIndex,
   Str255              symName,        /* can be NULL */
   Ptr *               symAddr,        /* can be NULL */
-  CFragSymbolClass *  symClass)       /* can be NULL */       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  CFragSymbolClass *  symClass)       /* can be NULL */       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 /*
@@ -548,7 +540,7 @@ typedef CALLBACK_API_C( void , CFragTermProcedure )(void);
  *    Non-Carbon CFM:   not available
  */
 extern OSErr 
-ConvertBundlePreLocator(CFragSystem7LocatorPtr initBlockLocator) AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+ConvertBundlePreLocator(CFragSystem7LocatorPtr initBlockLocator) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_1, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
 
 

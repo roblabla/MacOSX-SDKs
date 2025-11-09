@@ -135,7 +135,6 @@ typedef unsigned short	shmatt_t;
  * legacy interface there for binary compatibility only.  Currently, we
  * are only forcing this for programs requesting standards conformance.
  */
-#if __DARWIN_UNIX03 || defined(KERNEL)
 /*
  * Structure used internally.
  * 
@@ -162,9 +161,6 @@ struct __shmid_ds_new
 	time_t		shm_ctime;	/* [XSI] Time of last shmctl() change */
 	void		*shm_internal;	/* reserved for kernel use */
 };
-#else	/* !__DARWIN_UNIX03 */
-#define	shmid_ds	__shmid_ds_old
-#endif	/* !__DARWIN_UNIX03 */
 
 #if !__DARWIN_UNIX03
 struct __shmid_ds_old {

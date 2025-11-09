@@ -247,7 +247,7 @@ struct ctlname {
 #define KERN_PROCARGS		38
                              /* 39 was KERN_PCSAMPLES... now deprecated */
 #define KERN_NETBOOT		40	/* int: are we netbooted? 1=yes,0=no */
-#define	KERN_PANICINFO		41	/* node: panic UI information */
+#define	KERN_PANICINFO		41	/* node: panic UI information (deprecated) */
 #define	KERN_SYSV		42	/* node: System V IPC information */
 #define KERN_AFFINITY		43	/* xxx */
 #define KERN_TRANSLATE	   	44	/* xxx */
@@ -289,9 +289,6 @@ struct ctlname {
  * sysctl(8) to pick up your changes.
  */
 
-#if COUNT_SYSCALLS && defined(KERNEL) 
-#define	KERN_COUNT_SYSCALLS (KERN_OSTYPE + 1000)	/* keep called count for each bsd syscall */
-#endif
 
 #if defined(__LP64__)
 #define	KERN_USRSTACK KERN_USRSTACK64
@@ -336,11 +333,15 @@ struct ctlname {
 #define KERN_KDGETENTROPY       16
 #define KERN_KDWRITETR		17
 #define KERN_KDWRITEMAP		18
+#define KERN_KDENABLE_BG_TRACE	19
+#define KERN_KDDISABLE_BG_TRACE	20
+#define KERN_KDSET_TYPEFILTER   22
 
-
-/* KERN_PANICINFO types */
+/* KERN_PANICINFO types (deprecated) */
 #define	KERN_PANICINFO_MAXSIZE	1	/* quad: panic UI image size limit */
 #define	KERN_PANICINFO_IMAGE	2	/* panic UI in 8-bit kraw format */
+#define KERN_PANICINFO_TEST 	4	/* Allow the panic UI to be tested by root without causing a panic */
+#define KERN_PANICINFO_NOROOT_TEST	5	/* Allow the noroot UI to be tested by root */
 
 #define CTL_KERN_NAMES { \
 	{ 0, 0 }, \
@@ -384,7 +385,7 @@ struct ctlname {
 	{ "procargs",CTLTYPE_STRUCT },\
         { "dummy", CTLTYPE_INT },		/* deprecated pcsamples */ \
 	{ "netboot", CTLTYPE_INT }, \
-	{ "panicinfo", CTLTYPE_NODE }, \
+	{ "panicinfo", CTLTYPE_NODE }, /* deprecated: panicinfo */	\
 	{ "sysv", CTLTYPE_NODE }, \
 	{ "dummy", CTLTYPE_INT }, \
 	{ "dummy", CTLTYPE_INT }, \

@@ -32,6 +32,7 @@
 #include <Security/SecBase.h>
 #include <Security/cssmapple.h>
 #include <CoreFoundation/CFArray.h>
+#include <libkern/OSByteOrder.h>
 
 #if defined(__cplusplus)
 extern "C" {
@@ -91,8 +92,7 @@ typedef FourCharCode SecAuthenticationType;
 	@constant kSecAuthenticationTypeAny Specifies that any authentication type is acceptable. When performing a search, use this constant to avoid constraining your search results to a particular authentication type.
 */
 #ifdef __LITTLE_ENDIAN__
-#define AUTH_TYPE_FIX_(x) \
-        ((x >> 24) | ((x >> 8) & 0xff00) | ((x << 8) & 0xff0000) | (x & 0xff) << 24)
+#define AUTH_TYPE_FIX_(x) OSSwapConstInt32(x)
 #else
 #define AUTH_TYPE_FIX_(x) (x)
 #endif

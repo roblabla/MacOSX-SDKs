@@ -1,7 +1,7 @@
 /*
         NSLayoutManager.h
         Application Kit
-        Copyright (c) 1994-2011, Apple Inc.
+        Copyright (c) 1994-2012, Apple Inc.
         All rights reserved.
 */
 
@@ -98,7 +98,7 @@ typedef NSInteger NSTextLayoutOrientation;
     NSRunStorage *_fragmentRuns;
     NSRunStorage *_glyphLocations;
     NSRunStorage *_glyphRotationRuns;
-    
+
     NSRect _extraLineFragmentRect;
     NSRect _extraLineFragmentUsedRect;
     NSTextContainer *_extraLineFragmentContainer;
@@ -448,8 +448,8 @@ typedef NSInteger NSTextLayoutOrientation;
 - (NSRange)rangeOfNominallySpacedGlyphsContainingIndex:(NSUInteger)glyphIndex;
     // Returns the range including the first glyph from glyphIndex on back that has a location set and up to, but not including the next glyph that has a location set.
     
-- (NSRectArray)rectArrayForCharacterRange:(NSRange)charRange withinSelectedCharacterRange:(NSRange)selCharRange inTextContainer:(NSTextContainer *)container rectCount:(NSUInteger *)rectCount;
-- (NSRectArray)rectArrayForGlyphRange:(NSRange)glyphRange withinSelectedGlyphRange:(NSRange)selGlyphRange inTextContainer:(NSTextContainer *)container rectCount:(NSUInteger *)rectCount;
+- (NSRectArray)rectArrayForCharacterRange:(NSRange)charRange withinSelectedCharacterRange:(NSRange)selCharRange inTextContainer:(NSTextContainer *)container rectCount:(NSUInteger *)rectCount NS_RETURNS_INNER_POINTER;
+- (NSRectArray)rectArrayForGlyphRange:(NSRange)glyphRange withinSelectedGlyphRange:(NSRange)selGlyphRange inTextContainer:(NSTextContainer *)container rectCount:(NSUInteger *)rectCount NS_RETURNS_INNER_POINTER;
     // Returns an array of NSRects and the number of rects by reference which define the region in container that encloses the given range.  If a selected range is given in the second argument, the rectangles returned will be correct for drawing the selection.  Selection rectangles are generally more complicated than enclosing rectangles and supplying a selected range is the clue these methods use to determine whether to go to the trouble of doing this special work. 
     // If the caller is interested in this more from an enclosing point of view rather than a selection point of view, pass {NSNotFound, 0} as the selected range.  This method will do the minimum amount of work required to answer the question.  The resulting array is owned by the layoutManager and will be reused when either of these two methods OR -boundingRectForGlyphRange:inTextContainer: is called.  Note that one of these methods may be called indirectly.  The upshot is that if you aren't going to use the rects right away, you should copy them to another location.  These rects are always in container coordinates.
 

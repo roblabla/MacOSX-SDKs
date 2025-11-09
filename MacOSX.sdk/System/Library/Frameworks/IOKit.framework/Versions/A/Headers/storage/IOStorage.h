@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2011 Apple Inc. All rights reserved.
+ * Copyright (c) 1998-2012 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -30,6 +30,7 @@
 #ifndef _IOSTORAGE_H
 #define _IOSTORAGE_H
 
+#include <sys/kernel_types.h>
 #include <IOKit/IOTypes.h>
 
 /*!

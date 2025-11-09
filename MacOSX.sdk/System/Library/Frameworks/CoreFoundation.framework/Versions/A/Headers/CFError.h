@@ -1,5 +1,5 @@
 /*	CFError.h
-	Copyright (c) 2006-2011, Apple Inc. All rights reserved.
+	Copyright (c) 2006-2012, Apple Inc. All rights reserved.
 */
 
 /*!
@@ -33,6 +33,7 @@
 #include <CoreFoundation/CFString.h>
 #include <CoreFoundation/CFDictionary.h>
 
+CF_IMPLICIT_BRIDGING_ENABLED
 CF_EXTERN_C_BEGIN
 
 /*!
@@ -167,6 +168,7 @@ CFStringRef CFErrorCopyRecoverySuggestion(CFErrorRef err) CF_AVAILABLE(10_5, 2_0
 
 
 CF_EXTERN_C_END
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif /* ! __COREFOUNDATION_CFERROR__ */
 

@@ -1,169 +1,33 @@
 /*
- * Copyright (c) 1998-2007 Apple Inc. All rights reserved.
+ * Copyright © 1998-2007 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
- * The contents of this file constitute Original Code as defined in and
- * are subject to the Apple Public Source License Version 1.2 (the
- * "License").  You may not use this file except in compliance with the
- * License.  Please obtain a copy of the License at
- * http://www.apple.com/publicsource and read it before using this file.
+ * This file contains Original Code and/or Modifications of Original Code
+ * as defined in and that are subject to the Apple Public Source License
+ * Version 2.0 (the 'License'). You may not use this file except in
+ * compliance with the License. Please obtain a copy of the License at
+ * http://www.opensource.apple.com/apsl/ and read it before using this
+ * file.
  * 
- * This Original Code and all software distributed under the License are
- * distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+ * The Original Code and all software distributed under the License are
+ * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
  * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.  
- * Please see the License for the specific language governing rights and 
+ * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
+ * Please see the License for the specific language governing rights and
  * limitations under the License.
  * 
  * @APPLE_LICENSE_HEADER_END@
  */
 
-#ifndef __OPEN_SOURCE__
-/*
- *
- *	$Log: IOUSBDevice.h,v $
- *	Revision 1.68  2010/12/21 21:31:19  rhoads
- *	roll in 8673433, 8774469, 8775377
- *
- *	Revision 1.67.118.1  2010/12/20 00:35:14  arulchan
- *	call DeviceRequest GetDeviceStatus GetConfiguration APIs via gate
- *
- *	Revision 1.67  2010/08/30 20:41:22  rhoads
- *	roll in 8312279
- *
- *	Revision 1.66.58.1  2010/08/27 17:11:34  nano
- *	8312279:  Make ReEnumerateDevice be asynchronous again -- this will allow us to work with drivers that call the API from start where the device will be busy when reenumreate tryies to terminate it
- *
- *	Revision 1.66  2010/07/07 18:26:41  rhoads
- *	committing a multitude of bugs which comprised 415.3.9
- *
- *	Revision 1.65.236.4  2010/06/05 01:40:13  arulchan
- *	move reset and reenumerate behind a gate
- *
- *	Revision 1.65.236.3  2010/05/27 22:16:59  arulchan
- *	IOUSBDevice cleanup take 2
- *
- *	Revision 1.65.236.2  2010/05/26 17:30:25  arulchan
- *	IOUSBDevice cleanup take 1
- *
- *	Revision 1.65.236.1  2010/05/25 18:37:44  arulchan
- *	Merge with PR-6606167-Ebony
- *
- *	Revision 1.65  2009/10/18 20:20:37  nano
- *	Bring in fixes in 390.4.0 QL:  7310698 7301024 7307079 and 7310698
- *
- *	Revision 1.64.32.4  2009/10/15 21:17:43  nano
- *	If OverrideAtLocationID does not see a override property, return true
- *	
- *	Revision 1.64.32.3.2.1  2009/10/15 21:36:27  nano
- *	If OverrideAtLocationID does not see a override property, return true
- *	
- *	Revision 1.64.32.3  2009/10/14 19:16:15  nano
- *	Minor name changes
- *	
- *	Revision 1.64.32.2  2009/10/14 19:05:21  nano
- *	7284477 7293893 Simplify scheme to decide whether we want to override a property for a hub at a particular ID for a particular MacModel.  Added a IOUSBDevice API that tells us if we are in the right model and locationID to override a property
- *	
- *	Revision 1.64.32.1  2009/10/08 19:55:56  nano
- *	rdar://7284477 Allow us to overide the config descriptor of a 2514 hub on a K23F
- *	
- *	Revision 1.64  2009/09/08 12:28:45  nano
- *	<rdar://problem/7195788> IOUSBDevice headerdoc comment problem - GetNumConfigs name is wrong, should be GetNumConfigurations
- *	
- *	Revision 1.63  2009/05/07 19:43:09  nano
- *	Move our SnowLeopard branch to TOT
- *	
- *	Revision 1.57.84.6  2009/03/13 22:45:11  nano
- *	Bring in branches to fix 6676089 6675858 6567987 6490273
- *	
- *	Revision 1.57.84.5.4.1  2009/03/11 20:01:56  nano
- *	rdar://6567987  Do not let a Reset or a ReEnumerate through while the other is executing.
- *	
- *	Revision 1.57.84.5  2009/02/26 13:44:32  nano
- *	Bring in rdar://6536090&6586312 to SL branch
- *	
- *	Revision 1.57.84.4.10.1  2009/02/25 00:51:06  rhoads
- *	change the mechanism of getConfigLock so as to prevent a deadlock
- *	
- *	Revision 1.57.84.4  2009/02/13 15:57:33  rhoads
- *	roll in rdars: 6213394, 6489431, 6513000, 6515115, 6535200, 6567783
- *	
- *	Revision 1.57.84.3.48.3  2009/02/11 19:19:08  rhoads
- *	add back an expansionData variable to preserve binary compatibility
- *	
- *	Revision 1.57.84.3.48.2  2009/02/11 03:05:56  arulchan
- *	more ::SuspendDevice changes
- *	
- *	Revision 1.57.84.3.48.1  2009/01/23 21:34:15  arulchan
- *	fix for rdar://6213394
- *	
- *	Revision 1.57.84.3  2008/06/16 21:31:16  nano
- *	Bring in changes from Foxhound 320.2.17
- *	
- *	Revision 1.57.84.2  2008/04/22 22:38:01  nano
- *	Bring in changes from Foxhound-320.2.9
- *	
- *	Revision 1.60.28.2  2008/05/22 17:36:18  nano
- *	Fix the reporting of the internal bit for GetDeviceInformation
- *	
- *	Revision 1.60.28.1  2008/05/21 17:51:43  nano
- *	<rdar://problem/5952635> GetDeviceInformation needs some fixes
- *	
- *	Revision 1.60  2008/04/18 22:03:28  nano
- *	Bring in fix for rdar://5874560
- *	
- *	Revision 1.59.4.1  2008/04/18 21:55:55  nano
- *	<rdar://problem/5874560> Need API to know how much extra power has been allocated
- *	
- *	Revision 1.59  2008/04/17 16:56:57  nano
- *	Bring in branches for rdar://5867990 & rdar://5768343
- *	
- *	Revision 1.58.4.1  2008/04/16 20:26:13  nano
- *	<rdar://problem/5867990> Add API to allocate sleep current, as well as making sure that we return any extra power if our client dies or our device is terminated without returning it
- *	
- *	Revision 1.58  2008/04/14 16:08:38  nano
- *	Add new APIs for high power and for GetDeviceInformation.
- *	
- *	Revision 1.57.126.2  2008/04/13 05:25:40  nano
- *	Call into PolicyMaker for the GetPortInformation
- *	
- *	Revision 1.57.126.1  2008/04/11 22:25:44  nano
- *	Initial work on new user-client APIs and new IOUSBDevice APIs to return port state information and manage extra power requests, as well as groundwork for calling the policy maker directly from the IOUSBDevice
- *	
- *	Revision 1.57  2007/08/07 20:30:36  rhoads
- *	rolled in a few branches to TOT
- *	
- *	Revision 1.56.92.1  2007/08/07 03:43:34  nano
- *	Bring in more changes for M89 suppport -- like actually use the dang power if the properties are available
- *	
- *	Revision 1.56  2007/03/06 12:23:41  rhoads
- *	roll in 5024412, 5035829, and 5039670
- *	
- *	Revision 1.55.30.1  2007/02/27 16:08:33  rhoads
- *	some fine tuning of our IOService overrides, including not overriding willTerminate and didTerminate (5024412)
- *	
- *	Revision 1.55  2007/01/19 17:58:48  rhoads
- *	roll in branches for a leopard build
- *	
- *	Revision 1.54.30.1  2007/01/17 16:37:02  rhoads
- *	remove the IOUSBDevice::attach method which is not really useful
- *	
- *	Revision 1.54  2006/10/06 04:42:01  rhoads
- *	roll in branches 4727961, 4758404, 4759810, 4760274, and 4762769
- *	
- *	Revision 1.53.4.1  2006/10/04 16:03:57  rhoads
- *	better IOUSBHubDevice design
- *	
- */
-#endif
 
 #ifndef _IOKIT_IOUSBDEVICE_H
 #define _IOKIT_IOUSBDEVICE_H
 
 #include <IOKit/usb/IOUSBNub.h>
 #include <IOKit/usb/IOUSBPipe.h>
+#include <IOKit/usb/IOUSBPipeV2.h>
 #include <IOKit/IOBufferMemoryDescriptor.h>
 #include <IOKit/IOWorkLoop.h>
 #include <IOKit/IOCommandGate.h>
@@ -200,7 +64,10 @@ class IOUSBDevice : public IOUSBNub
     friend class IOUSBControllerV2;
     friend class IOUSBInterface;
     friend class IOUSBPipe;
-   
+	friend class IOUSBInterfaceUserClientV2;
+	friend class IOUSBInterfaceUserClientV3;
+	friend class IOUSBDeviceUserClientV2;
+
     OSDeclareDefaultStructors(IOUSBDevice)
 
 protected:
@@ -257,7 +124,14 @@ protected:
 		UInt32					_locationID;
 		IOLock*					_interfaceArrayLock;
 	    OSArray*				_interfaceArray;
-    };	
+		UInt32					_standardUSBPortPower;				// Largest amount of current that this port can provide (e.g. 500mA for USB2.0, 900mA for USB3.0)
+		bool					_usingExtra400mAforUSB3;
+		UInt32					_wakeRevocablePowerAllocated;		// how much extra "revocable" power during wake did we already give our client
+		UInt32					_wakeUSB3PowerAllocated;			// how much extra "USB3" power during wake did we already give our client
+		bool					_attachedToEnclosureAndUsingExtraWakePower;
+		bool					_deviceIsOnThunderbolt;					// Will be set if all our upstream hubs are on Thunderbolt
+
+    };
     ExpansionData * _expansionData;
 
     const IOUSBConfigurationDescriptor *FindConfig(UInt8 configValue, UInt8 *configIndex=0);
@@ -556,13 +430,7 @@ public:
     virtual void	DisplayUserNotification(UInt32 notificationType);
     
     OSMetaClassDeclareReservedUsed(IOUSBDevice,  5);
-	/*!
-        @function MakePipe
-	 @abstract build a pipe on a given endpoint
-	 @param ep A description of the endpoint
-	 @param interface The IOUSBInterface object requesting the pipe
-	 returns the desired IOUSBPipe object
-	 */
+	// Deprecated but needed for binary compatibility
     virtual IOUSBPipe*	MakePipe(const IOUSBEndpointDescriptor *ep, IOUSBInterface *interface);
     
 	
@@ -633,10 +501,51 @@ public:
 	 */
 	virtual	bool			DoLocationOverrideAndModelMatch();
 	
-    OSMetaClassDeclareReservedUnused(IOUSBDevice,  13);
-    OSMetaClassDeclareReservedUnused(IOUSBDevice,  14);
-    OSMetaClassDeclareReservedUnused(IOUSBDevice,  15);
-    OSMetaClassDeclareReservedUnused(IOUSBDevice,  16);
+    OSMetaClassDeclareReservedUsed(IOUSBDevice,  13);
+    /*!
+	 @function SetConfiguration
+	 Do a USB SetConfiguration call to the device. The caller must have the device open() in order to 
+	 actually cause a configuration change. If the device is currently configured, all IOUSBInterface objects
+	 associated with the device are freed. After the new configuration has been set, all of its IOUSBInterface objects are
+	 instantiated automatically.
+	 @param forClient The client requesting the configuration change
+	 @param configValue The desired configuration value.
+	 @param startInterfaceMatching A boolean specifying whether IOKit should begin the process of finding
+	 @param issueRemoteWakeup A boolean specifying whether we should issue the SetFeature(kUSBFeatureDeviceRemoteWakeup) immediately after setting the configuration, before loading any drivers.
+	 matching drivers for the new IOUSBInterface objects.
+	 */
+    virtual IOReturn SetConfiguration(IOService *forClient, UInt8 configValue, bool startInterfaceMatching, bool issueRemoteWakeup);
+    
+    OSMetaClassDeclareReservedUsed(IOUSBDevice,  14);
+    /*!
+	 @function		OpenOrCloseAllInterfacePipes		
+	 @abstract		Iterates over all interfaces and either opens all the pipes, or closes them all		
+	 @param			open, if true pipes are opened, else closed
+	 */
+	virtual void OpenOrCloseAllInterfacePipes(bool open);
+	
+	
+	
+	
+    OSMetaClassDeclareReservedUsed(IOUSBDevice,  15);
+	/*!
+	 @function MakePipe
+	 @abstract build a pipe on a given endpoint
+	 @param ep A description of the endpoint
+	 @param sscd The SuperSpeed Companion Descriptor, if any (NULL if none)
+	 @param interface The IOUSBInterface object requesting the pipe
+	 returns the desired IOUSBPipe object
+	 */
+    virtual IOUSBPipeV2*	MakePipe(const IOUSBEndpointDescriptor *ep, IOUSBSuperSpeedEndpointCompanionDescriptor *sscd, IOUSBInterface *interface);
+
+    OSMetaClassDeclareReservedUsed(IOUSBDevice,  16);
+    /*!
+	 @function SetAddress
+	 @param 	Sets the bus address of the device
+	 */
+    virtual void 			SetAddress(USBDeviceAddress address);
+    
+
     OSMetaClassDeclareReservedUnused(IOUSBDevice,  17);
     OSMetaClassDeclareReservedUnused(IOUSBDevice,  18);
     OSMetaClassDeclareReservedUnused(IOUSBDevice,  19);
@@ -677,4 +586,4 @@ private:
 
 };
 
-#endif /* _IOKIT_IOUSBDEVICE_H */
+#endif

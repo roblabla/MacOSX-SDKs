@@ -1,13 +1,14 @@
 /*
         NSATSTypesetter.h
         Application Kit
-        Copyright (c) 2002-2011, Apple Inc.
+        Copyright (c) 2002-2012, Apple Inc.
         All rights reserved.
 */
 
 #import <AppKit/NSTypesetter.h>
 #import <AppKit/NSParagraphStyle.h>
 
+NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 @interface NSATSTypesetter : NSTypesetter {
 /* Ivars used for primitive typesetting */
     NSAttributedString *attributedString; // The text backing-store (usually NSTextStorage)

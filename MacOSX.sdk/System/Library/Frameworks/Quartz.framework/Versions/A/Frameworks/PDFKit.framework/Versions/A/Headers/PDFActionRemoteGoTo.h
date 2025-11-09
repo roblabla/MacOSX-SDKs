@@ -6,7 +6,6 @@
 #import <AppKit/AppKit.h>
 #import <PDFKit/PDFAction.h>
 
-
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
 @class PDFActionRemoteGoToPrivateVars;

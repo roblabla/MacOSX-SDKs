@@ -1,11 +1,12 @@
 /*
 	NSSplitView.h
 	Application Kit
-	Copyright (c) 1994-2011, Apple Inc.
+	Copyright (c) 1994-2012, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/NSView.h>
+#import <AppKit/NSLayoutConstraint.h>
 
 @class NSNotification;
 @protocol NSSplitViewDelegate;
@@ -84,6 +85,12 @@ typedef NSInteger NSSplitViewDividerStyle;
 */
 - (void)setPosition:(CGFloat)position ofDividerAtIndex:(NSInteger)dividerIndex NS_AVAILABLE_MAC(10_5);
 
+/* Sets the priority under which split view subviews hold their widths (for a vertical split view) or height (for a horizontal split view). The view with the lowest priority will be the first to take on additional width if the split view grows or shrinks. The default is NSLayoutPriorityDefaultLow. 
+ 
+   There is no reason to use the default, but you should use priorities less than NSLayoutPriorityDragThatCannotResizeWindow (490)
+ */
+- (NSLayoutPriority)holdingPriorityForSubviewAtIndex:(NSInteger)subviewIndex NS_AVAILABLE_MAC(10_8);
+- (void)setHoldingPriority:(NSLayoutPriority)priority forSubviewAtIndex:(NSInteger)subviewIndex NS_AVAILABLE_MAC(10_8);
 
 @end
 

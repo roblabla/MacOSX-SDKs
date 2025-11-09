@@ -113,7 +113,6 @@ typedef unsigned long		msglen_t;
  * legacy interface there for binary compatibility only.  Currently, we
  * are only forcing this for programs requesting standards conformance.
  */
-#if __DARWIN_UNIX03 || defined(KERNEL)
 #pragma pack(4)
 /*
  * Structure used internally.
@@ -151,9 +150,6 @@ struct __msqid_ds_new
 	__int32_t	msg_pad4[4];	/* RESERVED: DO NOT USE */
 };
 #pragma pack()
-#else	/* !__DARWIN_UNIX03 */
-#define	msqid_ds	__msqid_ds_old
-#endif	/* !__DARWIN_UNIX03 */
 
 #if !__DARWIN_UNIX03
 struct __msqid_ds_old {

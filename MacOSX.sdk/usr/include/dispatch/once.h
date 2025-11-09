@@ -2,19 +2,19 @@
  * Copyright (c) 2008-2010 Apple Inc. All rights reserved.
  *
  * @APPLE_APACHE_LICENSE_HEADER_START@
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * @APPLE_APACHE_LICENSE_HEADER_END@
  */
 
@@ -75,11 +75,14 @@ _dispatch_once(dispatch_once_t *predicate, dispatch_block_t block)
 __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_4_0)
 DISPATCH_EXPORT DISPATCH_NONNULL1 DISPATCH_NONNULL3 DISPATCH_NOTHROW
 void
-dispatch_once_f(dispatch_once_t *predicate, void *context, dispatch_function_t function);
+dispatch_once_f(dispatch_once_t *predicate, void *context,
+		dispatch_function_t function);
 
-DISPATCH_INLINE DISPATCH_ALWAYS_INLINE DISPATCH_NONNULL1 DISPATCH_NONNULL3 DISPATCH_NOTHROW
+DISPATCH_INLINE DISPATCH_ALWAYS_INLINE DISPATCH_NONNULL1 DISPATCH_NONNULL3
+DISPATCH_NOTHROW
 void
-_dispatch_once_f(dispatch_once_t *predicate, void *context, dispatch_function_t function)
+_dispatch_once_f(dispatch_once_t *predicate, void *context,
+		dispatch_function_t function)
 {
 	if (DISPATCH_EXPECT(*predicate, ~0l) != ~0l) {
 		dispatch_once_f(predicate, context, function);

@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010 Apple Inc. All rights reserved.
+	Copyright 2010-2012 Apple Inc. All rights reserved.
 
 */
 
@@ -30,6 +30,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreMedia/CMTime.h>
 #import <CoreMedia/CMTimeRange.h>
+#import <CoreMedia/CMSync.h>
 #if TARGET_OS_IPHONE
 #import <CoreGraphics/CGGeometry.h>
 #else // ! TARGET_OS_IPHONE
@@ -39,7 +40,7 @@
 /* Note that NSNotifications posted by AVPlayerItem may be posted on a different thread from the one on which the observer was registered. */
 
 // notifications                                                                                description
-AVF_EXPORT NSString *const AVPlayerItemTimeJumpedNotification			 NS_AVAILABLE(10_7, 4_3);	// the item's current time has changed discontinuously
+AVF_EXPORT NSString *const AVPlayerItemTimeJumpedNotification			 NS_AVAILABLE(10_7, 5_0);	// the item's current time has changed discontinuously
 AVF_EXPORT NSString *const AVPlayerItemDidPlayToEndTimeNotification      NS_AVAILABLE(10_7, 4_0);   // item has played to its end time
 AVF_EXPORT NSString *const AVPlayerItemFailedToPlayToEndTimeNotification NS_AVAILABLE(10_7, 4_3);   // item has failed to play to its end time
 
@@ -72,6 +73,8 @@ typedef NSInteger AVPlayerItemStatus;
 @class AVAssetTrack;
 @class AVAudioMix;
 @class AVVideoComposition;
+@class AVMediaSelectionGroup;
+@class AVMediaSelectionOption;
 @class AVPlayerItemInternal;
 
 NS_CLASS_AVAILABLE(10_7, 4_0)
@@ -141,73 +144,10 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  */
 @property (nonatomic, readonly) NSError *error;
 
-/*!
- @method			currentTime
- @abstract			Returns the current time of the item.
- @result			A CMTime
- @discussion		Returns the current time of the item.
- */
-- (CMTime)currentTime;
+@end
 
-/*!
- @method			seekToTime:
- @abstract			Moves the playback cursor.
- @param				time
- @discussion		Use this method to seek to a specified time for the item.
-					The time seeked to may differ from the specified time for efficiency. For sample accurate seeking see seekToTime:toleranceBefore:toleranceAfter:.
- */
-- (void)seekToTime:(CMTime)time;
 
-/*!
- @method			seekToTime:completionHandler:
- @abstract			Moves the playback cursor and invokes the specified block when the seek operation has either been completed or been interrupted.
- @param				time
- @param				completionHandler
- @discussion		Use this method to seek to a specified time for the item and to be notified when the seek operation is complete.
- 					The completion handler for any prior seek request that is still in process will be invoked immediately with the finished parameter 
- 					set to NO. If the new request completes without being interrupted by another seek request or by any other operation the specified 
- 					completion handler will be invoked with the finished parameter set to YES. 
- */
-- (void)seekToTime:(CMTime)time completionHandler: (void (^)(BOOL finished))completionHandler;
-
-/*!
- @method			seekToTime:toleranceBefore:toleranceAfter:
- @abstract			Moves the playback cursor within a specified time bound.
- @param				time
- @param				toleranceBefore
- @param				toleranceAfter
- @discussion		Use this method to seek to a specified time for the item.
-					The time seeked to will be within the range [time-toleranceBefore, time+toleranceAfter] and may differ from the specified time for efficiency.
-					Pass kCMTimeZero for both toleranceBefore and toleranceAfter to request sample accurate seeking which may incur additional decoding delay. 
-					Messaging this method with beforeTolerance:kCMTimePositiveInfinity and afterTolerance:kCMTimePositiveInfinity is the same as messaging seekToTime: directly.
-					Seeking is constrained by the collection of seekable time ranges. If you seek to a time outside all of the seekable ranges the seek will result in a currentTime
-					within the seekable ranges.
- */
-- (void)seekToTime:(CMTime)time toleranceBefore:(CMTime)toleranceBefore toleranceAfter:(CMTime)toleranceAfter;
-
-/*!
- @method			seekToTime:toleranceBefore:toleranceAfter:completionHandler:
- @abstract			Moves the playback cursor within a specified time bound and invokes the specified block when the seek operation has either been completed or been interrupted.
- @param				time
- @param				toleranceBefore
- @param				toleranceAfter
- @discussion		Use this method to seek to a specified time for the item and to be notified when the seek operation is complete.
-					The time seeked to will be within the range [time-toleranceBefore, time+toleranceAfter] and may differ from the specified time for efficiency.
-					Pass kCMTimeZero for both toleranceBefore and toleranceAfter to request sample accurate seeking which may incur additional decoding delay. 
-					Messaging this method with beforeTolerance:kCMTimePositiveInfinity and afterTolerance:kCMTimePositiveInfinity is the same as messaging seekToTime: directly.
-					The completion handler for any prior seek request that is still in process will be invoked immediately with the finished parameter set to NO. If the new 
-					request completes without being interrupted by another seek request or by any other operation the specified completion handler will be invoked with the 
-					finished parameter set to YES.
- */
-- (void)seekToTime:(CMTime)time toleranceBefore:(CMTime)toleranceBefore toleranceAfter:(CMTime)toleranceAfter completionHandler: (void (^)(BOOL finished))completionHandler;
-
-/*!
- @method			cancelPendingSeeks
- @abstract			Cancel any pending seek requests and invoke the corresponding completion handlers if present.
- @discussion		Use this method to cancel and release the completion handlers of pending seeks. The finished parameter of the completion handlers will
- 					be set to NO.
- */
-- (void)cancelPendingSeeks;
+@interface AVPlayerItem (AVPlayerItemInspection)
 
 /*!
  @property asset
@@ -242,6 +182,54 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 @property (nonatomic, readonly) CGSize presentationSize;
 
 /*!
+ @property timedMetadata
+ @abstract Provides an NSArray of AVMetadataItems representing the timed metadata encountered most recently within the media as it plays. May be nil.
+ @discussion
+   Notifications of changes are available via key-value observation.
+   As an optimization for playback, AVPlayerItem may omit the processing of timed metadata when no observer of this property is registered. Therefore, when no such observer is registered, the value of the timedMetadata property may remain nil regardless of the contents of the underlying media.
+ */
+@property (nonatomic, readonly) NSArray *timedMetadata;
+
+@end
+
+
+@interface AVPlayerItem (AVPlayerItemRateAndSteppingSupport)
+
+/* indicates whether the item can be played at rates greater than 1.0 */
+@property (nonatomic, readonly) BOOL canPlayFastForward NS_AVAILABLE(10_8, 5_0);
+
+/* indicates whether the item can be played at rates between 0.0 and 1.0 */
+@property (nonatomic, readonly) BOOL canPlaySlowForward NS_AVAILABLE(10_8, TBD);
+
+/* indicates whether the item can be played at rate -1.0 */
+@property (nonatomic, readonly) BOOL canPlayReverse NS_AVAILABLE(10_8, TBD);
+
+/* indicates whether the item can be played at rates less between 0.0 and -1.0 */
+@property (nonatomic, readonly) BOOL canPlaySlowReverse NS_AVAILABLE(10_8, TBD);
+
+/* indicates whether the item can be played at rates less than -1.0 */
+@property (nonatomic, readonly) BOOL canPlayFastReverse NS_AVAILABLE(10_8, 5_0);
+
+/* Indicates whether the item supports stepping forward; see -stepByCount:. Once the item has become ready to play, the value of canStepForward does not change even when boundary conditions are reached, such as when the item's currentTime is its end time. */
+@property (nonatomic, readonly) BOOL canStepForward NS_AVAILABLE(10_8, TBD);
+
+/* indicates whether the item supports stepping backward; see -stepByCount:. Once the item has become ready to play, the value of canStepBackward does not change even when boundary conditions are reached, such as when the item's currentTime is equal to kCMTimeZero. */
+@property (nonatomic, readonly) BOOL canStepBackward NS_AVAILABLE(10_8, TBD);
+
+@end
+
+
+@interface AVPlayerItem (AVPlayerItemTimeControl)
+
+/*!
+ @method			currentTime
+ @abstract			Returns the current time of the item.
+ @result			A CMTime
+ @discussion		Returns the current time of the item.
+ */
+- (CMTime)currentTime;
+
+/*!
  @property forwardPlaybackEndTime
  @abstract
 	The end time for forward playback.
@@ -250,11 +238,13 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 	Specifies the time at which playback should end when the playback rate is positive (see AVPlayer's rate property).
 	The default value is kCMTimeInvalid, which indicates that no end time for forward playback is specified.
 	In this case, the effective end time for forward playback is the receiver's duration.
+	
+	When the end time is reached, the receiver will post AVPlayerItemDidPlayToEndTimeNotification and the AVPlayer will take
+	the action indicated by the value of its actionAtItemEnd property (see AVPlayerActionAtItemEnd in AVPlayer.h). 
 
 	The value of this property has no effect on playback when the rate is negative.
-*/
+ */
 @property (nonatomic) CMTime forwardPlaybackEndTime;
-
 
 /*!
  @property reversePlaybackEndTime
@@ -266,31 +256,79 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 	The default value is kCMTimeInvalid, which indicates that no end time for reverse playback is specified.
 	In this case, the effective end time for reverse playback is kCMTimeZero.
 
+	When the end time is reached, the receiver will post AVPlayerItemDidPlayToEndTimeNotification and the AVPlayer will take
+	the action indicated by the value of its actionAtItemEnd property (see AVPlayerActionAtItemEnd in AVPlayer.h). 
+
 	The value of this property has no effect on playback when the rate is positive.
  */
 @property (nonatomic) CMTime reversePlaybackEndTime;
 
 /*!
- @property audioMix
- @abstract Indicates the audio mix parameters to be applied during playback
+ @property seekableTimeRanges
+ @abstract This property provides a collection of time ranges that the player item can seek to. The ranges provided might be discontinous.
+ @discussion Returns an NSArray of NSValues containing CMTimeRanges.
  */
-@property (nonatomic, copy) AVAudioMix *audioMix;
+@property (nonatomic, readonly) NSArray *seekableTimeRanges;
 
 /*!
- @property videoComposition
- @abstract Indicates the video composition settings to be applied during playback.
+ @method			seekToTime:
+ @abstract			Moves the playback cursor.
+ @param				time
+ @discussion		Use this method to seek to a specified time for the item.
+					The time seeked to may differ from the specified time for efficiency. For sample accurate seeking see seekToTime:toleranceBefore:toleranceAfter:.
  */
-@property (nonatomic, copy) AVVideoComposition *videoComposition;
+- (void)seekToTime:(CMTime)time;
 
 /*!
- @method		stepByCount:
- @abstract      Moves player's current item's current time forward or backward by the specified number of steps.
- @param 		stepCount
-   The number of steps by which to move. A positive number results in stepping forward, a negative number in stepping backward.
- @discussion
-   The size of each step depends on the enabled AVPlayerItemTracks of the AVPlayerItem. 
+ @method			seekToTime:completionHandler:
+ @abstract			Moves the playback cursor and invokes the specified block when the seek operation has either been completed or been interrupted.
+ @param				time
+ @param				completionHandler
+ @discussion		Use this method to seek to a specified time for the item and to be notified when the seek operation is complete.
+ 					The completion handler for any prior seek request that is still in process will be invoked immediately with the finished parameter 
+ 					set to NO. If the new request completes without being interrupted by another seek request or by any other operation the specified 
+ 					completion handler will be invoked with the finished parameter set to YES. 
  */
-- (void)stepByCount:(NSInteger)stepCount;
+- (void)seekToTime:(CMTime)time completionHandler:(void (^)(BOOL finished))completionHandler NS_AVAILABLE(10_7, 5_0);
+
+/*!
+ @method			seekToTime:toleranceBefore:toleranceAfter:
+ @abstract			Moves the playback cursor within a specified time bound.
+ @param				time
+ @param				toleranceBefore
+ @param				toleranceAfter
+ @discussion		Use this method to seek to a specified time for the item.
+					The time seeked to will be within the range [time-toleranceBefore, time+toleranceAfter] and may differ from the specified time for efficiency.
+					Pass kCMTimeZero for both toleranceBefore and toleranceAfter to request sample accurate seeking which may incur additional decoding delay. 
+					Messaging this method with beforeTolerance:kCMTimePositiveInfinity and afterTolerance:kCMTimePositiveInfinity is the same as messaging seekToTime: directly.
+					Seeking is constrained by the collection of seekable time ranges. If you seek to a time outside all of the seekable ranges the seek will result in a currentTime
+					within the seekable ranges.
+ */
+- (void)seekToTime:(CMTime)time toleranceBefore:(CMTime)toleranceBefore toleranceAfter:(CMTime)toleranceAfter;
+
+/*!
+ @method			seekToTime:toleranceBefore:toleranceAfter:completionHandler:
+ @abstract			Moves the playback cursor within a specified time bound and invokes the specified block when the seek operation has either been completed or been interrupted.
+ @param				time
+ @param				toleranceBefore
+ @param				toleranceAfter
+ @discussion		Use this method to seek to a specified time for the item and to be notified when the seek operation is complete.
+					The time seeked to will be within the range [time-toleranceBefore, time+toleranceAfter] and may differ from the specified time for efficiency.
+					Pass kCMTimeZero for both toleranceBefore and toleranceAfter to request sample accurate seeking which may incur additional decoding delay. 
+					Messaging this method with beforeTolerance:kCMTimePositiveInfinity and afterTolerance:kCMTimePositiveInfinity is the same as messaging seekToTime: directly.
+					The completion handler for any prior seek request that is still in process will be invoked immediately with the finished parameter set to NO. If the new 
+					request completes without being interrupted by another seek request or by any other operation the specified completion handler will be invoked with the 
+					finished parameter set to YES.
+ */
+- (void)seekToTime:(CMTime)time toleranceBefore:(CMTime)toleranceBefore toleranceAfter:(CMTime)toleranceAfter completionHandler:(void (^)(BOOL finished))completionHandler NS_AVAILABLE(10_7, 5_0);
+
+/*!
+ @method			cancelPendingSeeks
+ @abstract			Cancel any pending seek requests and invoke the corresponding completion handlers if present.
+ @discussion		Use this method to cancel and release the completion handlers of pending seeks. The finished parameter of the completion handlers will
+ 					be set to NO.
+ */
+- (void)cancelPendingSeeks NS_AVAILABLE(10_7, 5_0);
 
 /*!
 	@method	currentDate
@@ -310,6 +348,54 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  @result		Returns true if the playhead was moved to the supplied date.
  */
 - (BOOL)seekToDate:(NSDate *)date;
+
+/*!
+ @method		stepByCount:
+ @abstract     Moves player's current item's current time forward or backward by the specified number of steps.
+ @param 		stepCount
+   The number of steps by which to move. A positive number results in stepping forward, a negative number in stepping backward.
+ @discussion
+   The size of each step depends on the enabled AVPlayerItemTracks of the AVPlayerItem. 
+ */
+- (void)stepByCount:(NSInteger)stepCount;
+
+/*!
+ @property		timebase
+ @abstract		The item's timebase.
+ @discussion 
+   You can examine the timebase to discover the relationship between the item's time and the master clock used for drift synchronization.
+   This timebase is read-only; you cannot set its time or rate to affect playback.
+ */
+@property (nonatomic, readonly) __attribute__((NSObject)) CMTimebaseRef timebase NS_AVAILABLE(10_8, TBD);
+
+@end
+
+
+@interface AVPlayerItem (AVPlayerItemPresentation)
+
+/*!
+ @property audioMix
+ @abstract Indicates the audio mix parameters to be applied during playback
+ */
+@property (nonatomic, copy) AVAudioMix *audioMix;
+
+/*!
+ @property videoComposition
+ @abstract Indicates the video composition settings to be applied during playback.
+ */
+@property (nonatomic, copy) AVVideoComposition *videoComposition;
+
+@end
+
+
+@interface AVPlayerItem (AVPlayerItemPlayability)
+
+/*!
+ @property loadedTimeRanges
+ @abstract This property provides a collection of time ranges for which the player has the media data readily available. The ranges provided might be discontinous.
+ @discussion Returns an NSArray of NSValues containing CMTimeRanges.
+ */
+@property (nonatomic, readonly) NSArray *loadedTimeRanges;
 
 /*!
  @property playbackLikelyToKeepUp
@@ -335,28 +421,37 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 /* indicates that playback has consumed all buffered media and that playback will stall or end */
 @property (nonatomic, readonly, getter=isPlaybackBufferEmpty) BOOL playbackBufferEmpty;
 
-/*!
- @property seekableTimeRanges
- @abstract This property provides a collection of time ranges that the player item can seek to. The ranges provided might be discontinous.
- @discussion Returns an NSArray of NSValues containing CMTimeRanges.
- */
-@property (nonatomic, readonly) NSArray *seekableTimeRanges;
+@end
+
+
+@interface AVPlayerItem (AVPlayerItemMediaSelection) 
 
 /*!
- @property loadedTimeRanges
- @abstract This property provides a collection of time ranges for which the player has the media data readily available. The ranges provided might be discontinous.
- @discussion Returns an NSArray of NSValues containing CMTimeRanges.
+ @method		selectMediaOption:inMediaSelectionGroup:
+ @abstract
+   Selects the media option described by the specified instance of AVMediaSelectionOption in the specified AVMediaSelectionGroup and deselects all other options in that group.
+ @param 		mediaSelectionOption	The option to select.
+ @param 		mediaSelectionGroup		The media selection group, obtained from the receiver's asset, that contains the specified option.
+ @discussion
+   If the specified media selection option isn't a member of the specified media selection group, no change in presentation state will result.
+   If the value of the property allowsEmptySelection of the AVMediaSelectionGroup is YES, you can pass nil for mediaSelectionOption to deselect
+   all media selection options in the group.
+   Note that if multiple options within a group meet your criteria for selection according to locale or other considerations, and if these options are otherwise indistinguishable to you according to media characteristics that are meaningful for your application, content is typically authored so that the first available option that meets your criteria is appropriate for selection.
  */
-@property (nonatomic, readonly) NSArray *loadedTimeRanges;
+- (void)selectMediaOption:(AVMediaSelectionOption *)mediaSelectionOption inMediaSelectionGroup:(AVMediaSelectionGroup *)mediaSelectionGroup NS_AVAILABLE(10_8, 5_0);
 
 /*!
- @property timedMetadata
- @discussion The timed metadata played most recently by the media stream.
- @abstract Returns an NSArray of AVMetadataItem.
+ @method		selectedMediaOptionInMediaSelectionGroup:
+ @abstract		Indicates the media selection option that's currently selected from the specified group. May be nil.
+ @param 		mediaSelectionGroup		A media selection group obtained from the receiver's asset.
+ @result		An instance of AVMediaSelectionOption that describes the currently selection option in the group.
+ @discussion
+   If the value of the property allowsEmptySelection of the AVMediaSelectionGroup is YES, the currently selected option in the group may be nil.
  */
-@property (nonatomic, readonly) NSArray *timedMetadata;
+- (AVMediaSelectionOption *)selectedMediaOptionInMediaSelectionGroup:(AVMediaSelectionGroup *)mediaSelectionGroup NS_AVAILABLE(10_8, 5_0);
 
 @end
+
 
 @class AVPlayerItemAccessLog;
 @class AVPlayerItemErrorLog;
@@ -384,6 +479,41 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  @result		An autoreleased AVPlayerItemErrorLog instance.
  */
 - (AVPlayerItemErrorLog *)errorLog NS_AVAILABLE(10_7, 4_3); 
+
+@end
+
+@class AVPlayerItemOutput;
+
+@interface AVPlayerItem (AVPlayerItemOutputs)
+
+/*!
+ @method		addOutput:
+ @abstract		Adds the specified instance of AVPlayerItemOutput to the receiver's collection of outputs.
+ @discussion	
+	The class of AVPlayerItemOutput provided dictates the data structure that decoded samples are vended in. 
+ 
+ 	When an AVPlayerItemOutput is associated with an AVPlayerItem, samples are provided for a media type in accordance with the rules for mixing, composition, or exclusion that the AVPlayer honors among multiple enabled tracks of that media type for its own rendering purposes. For example, video media will be composed according to the instructions provided via AVPlayerItem.videoComposition, if present. Audio media will be mixed according to the parameters provided via AVPlayerItem.audioMix, if present.
+ @param			output
+				An instance of AVPlayerItemOutput
+ */
+
+- (void)addOutput:(AVPlayerItemOutput *)output NS_AVAILABLE(10_8, TBD);
+
+/*!
+ @method		removeOutput:
+ @abstract		Removes the specified instance of AVPlayerItemOutput from the receiver's collection of outputs.
+ @param			output
+				An instance of AVPlayerItemOutput
+ */
+
+- (void)removeOutput:(AVPlayerItemOutput *)output NS_AVAILABLE(10_8, TBD);
+
+/*!
+ @property		outputs
+ @abstract		The collection of associated outputs.
+ */
+
+@property (nonatomic, readonly) NSArray *outputs NS_AVAILABLE(10_8, TBD);
 
 @end
 

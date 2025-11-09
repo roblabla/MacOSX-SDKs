@@ -168,6 +168,16 @@ typedef __darwin_pid_t	pid_t;
 #define	O_CLOEXEC	0x1000000	/* implicitly set FD_CLOEXEC */
 #endif
 
+#define FENCRYPTED	0x2000000
+
+#define FSINGLE_WRITER	0x4000000       /* fcntl(F_SINGLE_WRITER, 1) */
+
+/* Data Protection Flags */
+#if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
+#define O_DP_GETRAWENCRYPTED	0x0001
+#endif
+
+
 /* convert from open() flags to/from fflags; convert O_RD/WR to FREAD/FWRITE */
 #define	FFLAGS(oflags)	((oflags) + 1)
 #define	OFLAGS(fflags)	((fflags) - 1)
@@ -252,12 +262,24 @@ typedef __darwin_pid_t	pid_t;
 
 #define	F_GETLKPID		66		/* get record locking information, per-process */
 
+/* See F_DUPFD_CLOEXEC below for 67 */
+
 
 #define F_SETBACKINGSTORE	70	/* Mark the file as being the backing store for another filesystem */
 #define F_GETPATH_MTMINFO	71 	/* return the full path of the FD, but error in specific mtmd circumstances */
 
+/* 72 is free.  It used to be F_GETENCRYPTEDDATA, which is now removed. */
+
 #define F_SETNOSIGPIPE		73	/* No SIGPIPE generated on EPIPE */
 #define F_GETNOSIGPIPE		74	/* Status of SIGPIPE for this fd */
+
+#define F_TRANSCODEKEY		75 	/* For some cases, we need to rewrap the key for AKS/MKB */
+
+#define F_SINGLE_WRITER		76	/* file being written to a by single writer... if throttling enabled, writes */
+                                        /* may be broken into smaller chunks with throttling in between */
+
+#define F_GETPROTECTIONLEVEL	77	/* Get the protection version number for this filesystem */
+
 
 // FS-specific fcntl()'s numbers begin at 0x00010000 and go up
 #define FCNTL_FS_SPECIFIC_BASE  0x00010000
@@ -278,8 +300,9 @@ typedef __darwin_pid_t	pid_t;
 #define	F_WAIT		0x010		/* Wait until lock is granted */
 #define	F_FLOCK		0x020	 	/* Use flock(2) semantics for lock */
 #define	F_POSIX		0x040	 	/* Use POSIX semantics for lock */
-#define	F_PROV		0x080		/* Non-coelesced provisional lock */
+#define	F_PROV		0x080		/* Non-coalesced provisional lock */
 #define F_WAKE1_SAFE    0x100           /* its safe to only wake one waiter */
+#define	F_ABORT		0x200		/* lock attempt aborted (force umount) */
 
 /*
  * [XSI] The values used for l_whence shall be defined as described
@@ -362,7 +385,6 @@ struct flock {
 	short	l_type;		/* lock type: read/write, etc. */
 	short	l_whence;	/* type of l_start */
 };
-
 
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
 /*
