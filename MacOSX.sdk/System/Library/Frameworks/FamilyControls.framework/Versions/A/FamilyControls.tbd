@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/FamilyControls.framework/Versions/A/FamilyControls'
-current-version: 1112
+current-version: 1131
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -129,8 +129,9 @@ exports:
                        '_$s14FamilyControls10UsageStoreC4open4fromy10Foundation3URLV_tKFTq', 
                        '_$s14FamilyControls10UsageStoreC4save2toy10Foundation3URLV_tKFTj', 
                        '_$s14FamilyControls10UsageStoreC4save2toy10Foundation3URLV_tKFTq', 
+                       '_$s14FamilyControls10UsageStoreC5first5whereSS3key_AA0C10ItemRecordV5valuetSgSbSSAF_AhIt_tKXE_tKF', 
                        '_$s14FamilyControls10UsageStoreC5index5afterSD5IndexVySSAA0C10ItemRecordV_GAJ_tF', 
-                       '_$s14FamilyControls10UsageStoreC8contains5whereS2bSS3key_AA0C10ItemRecordV5valuet_tKXE_tKF', 
+                       '_$s14FamilyControls10UsageStoreC6sharedACvgZ', '_$s14FamilyControls10UsageStoreC8contains5whereS2bSS3key_AA0C10ItemRecordV5valuet_tKXE_tKF', 
                        '_$s14FamilyControls10UsageStoreC8endIndexSD0F0VySSAA0C10ItemRecordV_Gvg', 
                        '_$s14FamilyControls10UsageStoreC8endIndexSD0F0VySSAA0C10ItemRecordV_GvpMV', 
                        '_$s14FamilyControls10UsageStoreC9removeAllyyF', '_$s14FamilyControls10UsageStoreCACycfC', 
@@ -447,6 +448,7 @@ exports:
                        '_$s14FamilyControls9LocationsV06familyB5Store10Foundation3URLVvpMV', 
                        '_$s14FamilyControls9LocationsV06familyB7KeyData10Foundation3URLVvg', 
                        '_$s14FamilyControls9LocationsV06familyB7KeyData10Foundation3URLVvpMV', 
+                       '_$s14FamilyControls9LocationsV28screenTimeDataVaultDirectory10Foundation3URLVyFZ', 
                        '_$s14FamilyControls9LocationsVAA9LocatableAAMc', '_$s14FamilyControls9LocationsVAA9LocatableAAWP', 
                        '_$s14FamilyControls9LocationsVMa', '_$s14FamilyControls9LocationsVMn', 
                        '_$s14FamilyControls9LocationsVN', '_$s14FamilyControls9TokenTypeO8rawValueACSgSi_tcfC', 

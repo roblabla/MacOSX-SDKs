@@ -41,9 +41,6 @@ CS_TVOS_UNAVAILABLE
 //Apps can set a default protection class for items in their entitlements.  You can alternately create an instance with a custom protection class to use on iOS.  It should be one of NSFileProtectionComplete, NSFileProtectionCompleteUnlessOpen, or NSFileProtectionCompleteUntilFirstUserAuthentication.
 - (instancetype)initWithName:(NSString *)name protectionClass:(nullable NSFileProtectionType)protectionClass;
 
-//Apps can set a default protection class for items in their entitlements.  You can alternately create an instance with a custom protection class to use on iOS.  It should be one of NSFileProtectionComplete, NSFileProtectionCompleteUnlessOpen, or NSFileProtectionCompleteUntilFirstUserAuthentication. You can also specify bundleIdentifier and options with type of CSIndexJobOptions in case of test purpose.
-- (instancetype)initWithName:(NSString *)name  protectionClass:(nullable NSFileProtectionType)protectionClass  bundleIdentifier:(NSString *)bundleIdentifier options:(NSInteger)options;
-
 // Call this method to add or update items in the index.
 // Completion handlers will be called once the data has been journaled by the index.  If the completion handler returns an error, the client should retry, as it was not journaled correctly.
 // reindexSearchableItemsWithIdentifiers will be called if the journaling completed successfully but the data was not able to be indexed for some reason.

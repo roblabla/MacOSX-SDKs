@@ -61,8 +61,9 @@ exports:
                        _SCRemoteQueue_StopSenderQueue, _SCRemoteQueue_UpdateReceiverQueue, 
                        _SCStreamErrorDomain, _SCStreamFrameInfoBoundingRect, _SCStreamFrameInfoContentRect, 
                        _SCStreamFrameInfoContentScale, _SCStreamFrameInfoDirtyRects, 
-                       _SCStreamFrameInfoDisplayTime, _SCStreamFrameInfoScaleFactor, 
-                       _SCStreamFrameInfoScreenRect, _SCStreamFrameInfoStatus, _SCStream_UpdateLatency ]
+                       _SCStreamFrameInfoDisplayTime, _SCStreamFrameInfoPresenterOverlayContentRect, 
+                       _SCStreamFrameInfoScaleFactor, _SCStreamFrameInfoScreenRect, 
+                       _SCStreamFrameInfoStatus, _SCStream_UpdateLatency ]
     objc-classes:    [ RPFeatureFlagUtility, RPHardwareUtility, RPReportingAgent, 
                        SCCompositeConfiguration, SCContentFilter, SCContentFilterAppsAndWindowsPinnedToDisplayInformation, 
                        SCContentFilterDesktopIndependentWindowInformation, SCContentFilterDisplayInformation, 

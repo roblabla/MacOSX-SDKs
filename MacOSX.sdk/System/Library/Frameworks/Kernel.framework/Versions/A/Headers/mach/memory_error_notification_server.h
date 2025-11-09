@@ -81,9 +81,7 @@ MIG_SERVER_ROUTINE
 kern_return_t memory_error_notification
 (
 	mach_port_t memory_error_port,
-	uint64_t physical_address,
-	uint32_t ecc_flags,
-	uint32_t ce_count,
+	ecc_event_t event,
 	audit_token_t atoken
 );
 
@@ -141,9 +139,7 @@ extern const struct memory_error_notification_subsystem {
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
-		uint64_t physical_address;
-		uint32_t ecc_flags;
-		uint32_t ce_count;
+		ecc_event_t event;
 	} __Request__memory_error_notification_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack(pop)

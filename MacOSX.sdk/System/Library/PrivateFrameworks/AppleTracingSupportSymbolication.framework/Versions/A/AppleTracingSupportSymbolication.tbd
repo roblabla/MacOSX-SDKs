@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AppleTracingSupportSymbolication.framework/Versions/A/AppleTracingSupportSymbolication'
-current-version: 38
+current-version: 38.2
 exports:
   - targets:         [ x86_64-macos ]
     weak-symbols:    [ __ZTINSt3__110__function6__baseIFvPK8__CFDataEEE, __ZTINSt3__117bad_function_callE, 

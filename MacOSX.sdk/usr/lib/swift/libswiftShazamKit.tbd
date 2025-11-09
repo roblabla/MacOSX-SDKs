@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/swift/libswiftShazamKit.dylib'
-current-version: 236
+current-version: 236.12
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -38,8 +38,11 @@ exports:
                        '_$s9ShazamKit16SHManagedSessionCMn', '_$s9ShazamKit16SHManagedSessionCMo', 
                        '_$s9ShazamKit16SHManagedSessionCMu', '_$s9ShazamKit16SHManagedSessionCN', 
                        '_$s9ShazamKit16SHManagedSessionCfD', '_$s9ShazamKit16SHManagedSessionCfd', 
-                       '_$s9ShazamKit9SHLibraryC11Observation10ObservableAAMc', '_$s9ShazamKit9SHLibraryC11removeItemsyySaySo11SHMediaItemCGYaKF', 
+                       '_$s9ShazamKit9SHLibraryC10isUpdatingSbvg', '_$s9ShazamKit9SHLibraryC10isUpdatingSbvpMV', 
+                       '_$s9ShazamKit9SHLibraryC11Observation10ObservableAAMc', '_$s9ShazamKit9SHLibraryC11isEncryptedSbvg', 
+                       '_$s9ShazamKit9SHLibraryC11isEncryptedSbvpMV', '_$s9ShazamKit9SHLibraryC11removeItemsyySaySo11SHMediaItemCGYaKF', 
                        '_$s9ShazamKit9SHLibraryC11removeItemsyySaySo11SHMediaItemCGYaKFTu', 
+                       '_$s9ShazamKit9SHLibraryC20localizedAttribution3forSSSgSo11SHMediaItemC_tFZ', 
                        '_$s9ShazamKit9SHLibraryC5itemsSaySo11SHMediaItemCGvg', '_$s9ShazamKit9SHLibraryC5itemsSaySo11SHMediaItemCGvpMV', 
                        '_$s9ShazamKit9SHLibraryC7defaultACvgZ', '_$s9ShazamKit9SHLibraryC8addItemsyySaySo11SHMediaItemCGYaKF', 
                        '_$s9ShazamKit9SHLibraryC8addItemsyySaySo11SHMediaItemCGYaKFTu', 

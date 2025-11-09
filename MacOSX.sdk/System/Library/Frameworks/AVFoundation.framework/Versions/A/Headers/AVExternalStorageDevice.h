@@ -173,9 +173,9 @@ AV_INIT_UNAVAILABLE
 	Returns the singleton instance of the external storage device discovery session.
 
  @discussion
-	There is only one external storage device discovery session for each host device which can be accessed using this method.
+	There is only one external storage device discovery session for each host device which can be accessed using this method. Will return nil if the device doesn't support external storage devices.
  */
-@property(class, readonly) AVExternalStorageDeviceDiscoverySession *sharedSession;
+@property(class, readonly, nullable) AVExternalStorageDeviceDiscoverySession *sharedSession;
 
 /*!
  @property externalStorageDevices

@@ -137,6 +137,16 @@ SR_EXTERN API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos
  */
 @property (nonatomic, readonly, strong) NSDate *timestamp;
 
+/*!
+ * @property timeSinceAudioStart
+ * @brief The number of seconds since the start of the audio stream
+ *
+ * @discussion
+ * When an audio stream like a phone call starts, \c SRSpeechMetrics samples are collected
+ * periodically. This field can be used to determine where each sample falls in the audio stream
+ */
+@property (nonatomic, readonly, assign) NSTimeInterval timeSinceAudioStart API_AVAILABLE(ios(17.2)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos, macos);
+
 @property (nonatomic, nullable, readonly, strong) SRAudioLevel *audioLevel;
 @property (nonatomic, nullable, readonly, strong) SFSpeechRecognitionResult *speechRecognition;
 @property (nonatomic, nullable, readonly, strong) SNClassificationResult *soundClassification;

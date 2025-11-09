@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.9 (swiftlang-5.9.0.123.203 clang-1500.0.37.1)
-// swift-module-flags: -target x86_64-apple-ios17.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name ProximityReader
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 120.51
+// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.11 clang-1500.1.0.2.2)
+// swift-module-flags: -target x86_64-apple-ios17.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name ProximityReader
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 122.3
 import Contacts
 import CryptoKit
 import Foundation
@@ -272,12 +272,16 @@ extension ProximityReader.MobileDriversLicenseDataRequest {
     public static let portrait: ProximityReader.MobileDriversLicenseDataRequest.Element
     public static let age: ProximityReader.MobileDriversLicenseDataRequest.Element
     public static let dateOfBirth: ProximityReader.MobileDriversLicenseDataRequest.Element
+    @available(iOS 17.2, *)
+    public static let sex: ProximityReader.MobileDriversLicenseDataRequest.Element
     public static let address: ProximityReader.MobileDriversLicenseDataRequest.Element
     public static let issuingAuthority: ProximityReader.MobileDriversLicenseDataRequest.Element
     public static let drivingPrivileges: ProximityReader.MobileDriversLicenseDataRequest.Element
     public static let documentNumber: ProximityReader.MobileDriversLicenseDataRequest.Element
     public static let documentIssueDate: ProximityReader.MobileDriversLicenseDataRequest.Element
     public static let documentExpirationDate: ProximityReader.MobileDriversLicenseDataRequest.Element
+    @available(iOS 17.2, *)
+    public static let documentDHSComplianceStatus: ProximityReader.MobileDriversLicenseDataRequest.Element
     public static func ageAtLeast(_ age: Swift.Int) -> ProximityReader.MobileDriversLicenseDataRequest.Element
     public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: ProximityReader.MobileDriversLicenseDataRequest.Element, b: ProximityReader.MobileDriversLicenseDataRequest.Element) -> Swift.Bool
@@ -360,6 +364,50 @@ public enum MobileDocumentReaderError : Foundation.LocalizedError {
     get
   }
 }
+@available(iOS 17.2, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension ProximityReader.MobileDriversLicenseDataRequest.Response.DocumentElements {
+  @available(iOS 17.2, *)
+  public enum DHSComplianceStatus : Swift.Hashable, Swift.Sendable {
+    case compliant
+    case noncompliant
+    public static func == (a: ProximityReader.MobileDriversLicenseDataRequest.Response.DocumentElements.DHSComplianceStatus, b: ProximityReader.MobileDriversLicenseDataRequest.Response.DocumentElements.DHSComplianceStatus) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+}
+@available(iOS 17.2, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension ProximityReader.MobileDriversLicenseDataRequest.Response.DocumentElements {
+  @available(iOS 17.2, *)
+  public enum Sex : Swift.Hashable, Swift.Sendable {
+    case female
+    case male
+    case notApplicable
+    case notSpecified
+    case unknown
+    public static func == (a: ProximityReader.MobileDriversLicenseDataRequest.Response.DocumentElements.Sex, b: ProximityReader.MobileDriversLicenseDataRequest.Response.DocumentElements.Sex) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+}
+@available(iOS 17.2, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension ProximityReader.MobileDriversLicenseDataRequest.Response.DocumentElements.Sex {
+  public var localizedName: Swift.String {
+    get
+  }
+}
 @available(iOS 15.4, macCatalyst 17.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
@@ -397,12 +445,16 @@ extension ProximityReader.MobileDriversLicenseRawDataRequest {
     public static let portrait: ProximityReader.MobileDriversLicenseRawDataRequest.Element
     public static let age: ProximityReader.MobileDriversLicenseRawDataRequest.Element
     public static let dateOfBirth: ProximityReader.MobileDriversLicenseRawDataRequest.Element
+    @available(iOS 17.2, *)
+    public static let sex: ProximityReader.MobileDriversLicenseRawDataRequest.Element
     public static let address: ProximityReader.MobileDriversLicenseRawDataRequest.Element
     public static let issuingAuthority: ProximityReader.MobileDriversLicenseRawDataRequest.Element
     public static let drivingPrivileges: ProximityReader.MobileDriversLicenseRawDataRequest.Element
     public static let documentNumber: ProximityReader.MobileDriversLicenseRawDataRequest.Element
     public static let documentIssueDate: ProximityReader.MobileDriversLicenseRawDataRequest.Element
     public static let documentExpirationDate: ProximityReader.MobileDriversLicenseRawDataRequest.Element
+    @available(iOS 17.2, *)
+    public static let documentDHSComplianceStatus: ProximityReader.MobileDriversLicenseRawDataRequest.Element
     public static func ageAtLeast(_ age: Swift.Int) -> ProximityReader.MobileDriversLicenseRawDataRequest.Element
     public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: ProximityReader.MobileDriversLicenseRawDataRequest.Element, b: ProximityReader.MobileDriversLicenseRawDataRequest.Element) -> Swift.Bool
@@ -818,6 +870,8 @@ extension ProximityReader.MobileDriversLicenseDataRequest.Response {
     public let ageAtLeastElements: [Swift.Int : Swift.Bool]
     public let age: Swift.Int?
     public let dateOfBirth: Foundation.DateComponents?
+    @available(iOS 17.2, *)
+    public let sex: ProximityReader.MobileDriversLicenseDataRequest.Response.DocumentElements.Sex?
     public var address: Contacts.CNPostalAddress? {
       get
     }
@@ -827,6 +881,8 @@ extension ProximityReader.MobileDriversLicenseDataRequest.Response {
     public let documentNumber: Swift.String?
     public let documentIssueDate: Foundation.DateComponents?
     public let documentExpirationDate: Foundation.DateComponents?
+    @available(iOS 17.2, *)
+    public let documentDHSComplianceStatus: ProximityReader.MobileDriversLicenseDataRequest.Response.DocumentElements.DHSComplianceStatus?
     public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: ProximityReader.MobileDriversLicenseDataRequest.Response.DocumentElements, b: ProximityReader.MobileDriversLicenseDataRequest.Response.DocumentElements) -> Swift.Bool
     public var hashValue: Swift.Int {

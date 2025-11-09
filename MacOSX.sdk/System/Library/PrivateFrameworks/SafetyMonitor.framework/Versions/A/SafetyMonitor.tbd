@@ -49,7 +49,6 @@ exports:
                        '_$s13SafetyMonitor27SMTapToRadarManagerInternalCACycfc', 
                        '_$s13SafetyMonitor27SMTapToRadarManagerInternalCMa', '_$s13SafetyMonitor27SMTapToRadarManagerInternalCMn', 
                        '_$s13SafetyMonitor27SMTapToRadarManagerInternalCN', '_$s13SafetyMonitor27SMTapToRadarManagerInternalCfD', 
-                       '_$sSo10CLLocationC13SafetyMonitorE24setAssumedReferenceFrameyyF', 
                        '_$sSo9CNContactC13SafetyMonitorE13localizedNameSSvg', '_$sSo9CNContactC13SafetyMonitorE13localizedNameSSvpMV', 
                        _RTCommonCalculateBoundingBox, _RTCommonCalculateDistance, 
                        _RTCommonCalculateDistanceHighPrecision, _RTCommonConvertGeodeticToLocalFrame, 

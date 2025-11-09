@@ -30,7 +30,8 @@ typedef NS_ENUM(NSInteger, MPMovieScalingMode) {
     MPMovieScalingModeAspectFit,  // Uniform scale until one dimension fits
     MPMovieScalingModeAspectFill, // Uniform scale until the movie fills the visible bounds. One dimension may have clipped contents
     MPMovieScalingModeFill        // Non-uniform scale. Both render dimensions will exactly match the visible bounds
-} MP_UNAVAILABLE(tvos);
+} MP_UNAVAILABLE(tvos)
+API_UNAVAILABLE(visionos);
 
 typedef NS_ENUM(NSInteger, MPMoviePlaybackState) {
     MPMoviePlaybackStateStopped,
@@ -39,19 +40,22 @@ typedef NS_ENUM(NSInteger, MPMoviePlaybackState) {
     MPMoviePlaybackStateInterrupted,
     MPMoviePlaybackStateSeekingForward,
     MPMoviePlaybackStateSeekingBackward
-} MP_UNAVAILABLE(tvos);
+} MP_UNAVAILABLE(tvos)
+API_UNAVAILABLE(visionos);
 
 typedef NS_OPTIONS(NSUInteger, MPMovieLoadState) {
     MPMovieLoadStateUnknown        = 0,
     MPMovieLoadStatePlayable       = 1 << 0,
     MPMovieLoadStatePlaythroughOK  = 1 << 1, // Playback will be automatically started in this state when shouldAutoplay is YES
     MPMovieLoadStateStalled        = 1 << 2, // Playback will be automatically paused in this state, if started
-} MP_UNAVAILABLE(tvos);
+} MP_UNAVAILABLE(tvos)
+API_UNAVAILABLE(visionos);
 
 typedef NS_ENUM(NSInteger, MPMovieRepeatMode) {
     MPMovieRepeatModeNone,
     MPMovieRepeatModeOne
-} MP_UNAVAILABLE(tvos);
+} MP_UNAVAILABLE(tvos)
+API_UNAVAILABLE(visionos);
 
 typedef NS_ENUM(NSInteger, MPMovieControlStyle) {
     MPMovieControlStyleNone,       // No controls
@@ -59,13 +63,15 @@ typedef NS_ENUM(NSInteger, MPMovieControlStyle) {
     MPMovieControlStyleFullscreen, // Controls for fullscreen playback
     
     MPMovieControlStyleDefault = MPMovieControlStyleEmbedded
-} MP_UNAVAILABLE(tvos);
+} MP_UNAVAILABLE(tvos)
+API_UNAVAILABLE(visionos);
 
 typedef NS_ENUM(NSInteger, MPMovieFinishReason) {
     MPMovieFinishReasonPlaybackEnded,
     MPMovieFinishReasonPlaybackError,
     MPMovieFinishReasonUserExited
-} MP_UNAVAILABLE(tvos);
+} MP_UNAVAILABLE(tvos)
+API_UNAVAILABLE(visionos);
 
 // -----------------------------------------------------------------------------
 // Movie Property Types
@@ -74,13 +80,15 @@ typedef NS_OPTIONS(NSUInteger, MPMovieMediaTypeMask) {
     MPMovieMediaTypeMaskNone  = 0,
     MPMovieMediaTypeMaskVideo = 1 << 0,
     MPMovieMediaTypeMaskAudio = 1 << 1
-} MP_UNAVAILABLE(tvos);
+} MP_UNAVAILABLE(tvos)
+API_UNAVAILABLE(visionos);
 
 typedef NS_ENUM(NSInteger, MPMovieSourceType) {
     MPMovieSourceTypeUnknown,
     MPMovieSourceTypeFile,     // Local or progressively downloaded network content
     MPMovieSourceTypeStreaming // Live or on-demand streaming content
-} MP_UNAVAILABLE(tvos);
+} MP_UNAVAILABLE(tvos)
+API_UNAVAILABLE(visionos);
 
 // -----------------------------------------------------------------------------
 // Movie Player
@@ -88,6 +96,7 @@ typedef NS_ENUM(NSInteger, MPMovieSourceType) {
 // See MPMediaPlayback.h for the playback methods.
 
 MP_UNAVAILABLE(tvos)
+API_UNAVAILABLE(visionos)
 @interface MPMoviePlayerController : NSObject <MPMediaPlayback>
 
 - (instancetype)initWithContentURL:(NSURL *)url NS_DESIGNATED_INITIALIZER;
@@ -161,45 +170,45 @@ MP_UNAVAILABLE(tvos)
 // Movie Player Notifications
 
 // Posted when the scaling mode changes.
-MP_EXTERN NSString * const MPMoviePlayerScalingModeDidChangeNotification;
+MP_EXTERN NSString * const MPMoviePlayerScalingModeDidChangeNotification API_UNAVAILABLE(visionos);
 
 // Posted when movie playback ends or a user exits playback.
-MP_EXTERN NSString * const MPMoviePlayerPlaybackDidFinishNotification;
+MP_EXTERN NSString * const MPMoviePlayerPlaybackDidFinishNotification API_UNAVAILABLE(visionos);
 
-MP_EXTERN NSString * const MPMoviePlayerPlaybackDidFinishReasonUserInfoKey; // NSNumber (MPMovieFinishReason)
+MP_EXTERN NSString * const MPMoviePlayerPlaybackDidFinishReasonUserInfoKey API_UNAVAILABLE(visionos); // NSNumber (MPMovieFinishReason)
 
 // Posted when the playback state changes, either programatically or by the user.
-MP_EXTERN NSString * const MPMoviePlayerPlaybackStateDidChangeNotification;
+MP_EXTERN NSString * const MPMoviePlayerPlaybackStateDidChangeNotification API_UNAVAILABLE(visionos);
 
 // Posted when the network load state changes.
-MP_EXTERN NSString * const MPMoviePlayerLoadStateDidChangeNotification;
+MP_EXTERN NSString * const MPMoviePlayerLoadStateDidChangeNotification API_UNAVAILABLE(visionos);
 
 // Posted when the currently playing movie changes.
-MP_EXTERN NSString * const MPMoviePlayerNowPlayingMovieDidChangeNotification;
+MP_EXTERN NSString * const MPMoviePlayerNowPlayingMovieDidChangeNotification API_UNAVAILABLE(visionos);
 
 // Posted when the movie player enters or exits fullscreen mode.
-MP_EXTERN NSString * const MPMoviePlayerWillEnterFullscreenNotification;
-MP_EXTERN NSString * const MPMoviePlayerDidEnterFullscreenNotification;
-MP_EXTERN NSString * const MPMoviePlayerWillExitFullscreenNotification;
-MP_EXTERN NSString * const MPMoviePlayerDidExitFullscreenNotification;
-MP_EXTERN NSString * const MPMoviePlayerFullscreenAnimationDurationUserInfoKey; // NSNumber of double (NSTimeInterval)
-MP_EXTERN NSString * const MPMoviePlayerFullscreenAnimationCurveUserInfoKey;     // NSNumber of NSUInteger (UIViewAnimationCurve)
+MP_EXTERN NSString * const MPMoviePlayerWillEnterFullscreenNotification API_UNAVAILABLE(visionos);
+MP_EXTERN NSString * const MPMoviePlayerDidEnterFullscreenNotification API_UNAVAILABLE(visionos);
+MP_EXTERN NSString * const MPMoviePlayerWillExitFullscreenNotification API_UNAVAILABLE(visionos);
+MP_EXTERN NSString * const MPMoviePlayerDidExitFullscreenNotification API_UNAVAILABLE(visionos);
+MP_EXTERN NSString * const MPMoviePlayerFullscreenAnimationDurationUserInfoKey API_UNAVAILABLE(visionos); // NSNumber of double (NSTimeInterval)
+MP_EXTERN NSString * const MPMoviePlayerFullscreenAnimationCurveUserInfoKey API_UNAVAILABLE(visionos);     // NSNumber of NSUInteger (UIViewAnimationCurve)
 
 // Posted when the movie player begins or ends playing video via AirPlay.
-MP_EXTERN NSString * const MPMoviePlayerIsAirPlayVideoActiveDidChangeNotification;
+MP_EXTERN NSString * const MPMoviePlayerIsAirPlayVideoActiveDidChangeNotification API_UNAVAILABLE(visionos);
 
 // Posted when the ready for display state changes.
-MP_EXTERN NSString * const MPMoviePlayerReadyForDisplayDidChangeNotification MP_DEPRECATED("Use AVPlayerViewController in AVKit.", ios(6.0, 9.0));
+MP_EXTERN NSString * const MPMoviePlayerReadyForDisplayDidChangeNotification MP_DEPRECATED("Use AVPlayerViewController in AVKit.", ios(6.0, 9.0)) API_UNAVAILABLE(visionos);
 
 // -----------------------------------------------------------------------------
 // Movie Property Notifications
 
 // Calling -prepareToPlay on the movie player will begin determining movie properties asynchronously.
 // These notifications are posted when the associated movie property becomes available.
-MP_EXTERN NSString * const MPMovieMediaTypesAvailableNotification;
-MP_EXTERN NSString * const MPMovieSourceTypeAvailableNotification; // Posted if the movieSourceType is MPMovieSourceTypeUnknown when preparing for playback.
-MP_EXTERN NSString * const MPMovieDurationAvailableNotification;
-MP_EXTERN NSString * const MPMovieNaturalSizeAvailableNotification;
+MP_EXTERN NSString * const MPMovieMediaTypesAvailableNotification API_UNAVAILABLE(visionos);
+MP_EXTERN NSString * const MPMovieSourceTypeAvailableNotification API_UNAVAILABLE(visionos); // Posted if the movieSourceType is MPMovieSourceTypeUnknown when preparing for playback.
+MP_EXTERN NSString * const MPMovieDurationAvailableNotification API_UNAVAILABLE(visionos);
+MP_EXTERN NSString * const MPMovieNaturalSizeAvailableNotification API_UNAVAILABLE(visionos);
 
 // -----------------------------------------------------------------------------
 // Thumbnails
@@ -207,9 +216,11 @@ MP_EXTERN NSString * const MPMovieNaturalSizeAvailableNotification;
 typedef NS_ENUM(NSInteger, MPMovieTimeOption) {
     MPMovieTimeOptionNearestKeyFrame,
     MPMovieTimeOptionExact
-} MP_UNAVAILABLE(tvos);
+} MP_UNAVAILABLE(tvos)
+API_UNAVAILABLE(visionos);
 
 MP_UNAVAILABLE(tvos)
+API_UNAVAILABLE(visionos)
 @interface MPMoviePlayerController (MPMoviePlayerThumbnailGeneration)
 
 // Returns a thumbnail at the given time.
@@ -226,24 +237,26 @@ MP_UNAVAILABLE(tvos)
 @end
 
 // Posted when each thumbnail image request is completed.
-MP_EXTERN NSString * const MPMoviePlayerThumbnailImageRequestDidFinishNotification;
-MP_EXTERN NSString * const MPMoviePlayerThumbnailImageKey; // UIImage, may be nil if an error occurred.
-MP_EXTERN NSString * const MPMoviePlayerThumbnailTimeKey; // NSNumber (double)
-MP_EXTERN NSString * const MPMoviePlayerThumbnailErrorKey; // NSError
+MP_EXTERN NSString * const MPMoviePlayerThumbnailImageRequestDidFinishNotification API_UNAVAILABLE(visionos);
+MP_EXTERN NSString * const MPMoviePlayerThumbnailImageKey API_UNAVAILABLE(visionos); // UIImage, may be nil if an error occurred.
+MP_EXTERN NSString * const MPMoviePlayerThumbnailTimeKey API_UNAVAILABLE(visionos); // NSNumber (double)
+MP_EXTERN NSString * const MPMoviePlayerThumbnailErrorKey API_UNAVAILABLE(visionos); // NSError
 
 // -----------------------------------------------------------------------------
 // Timed Metadata
 
 MP_UNAVAILABLE(tvos)
+API_UNAVAILABLE(visionos)
 @interface MPMoviePlayerController (MPMoviePlayerTimedMetadataAdditions)
 
 // Returns an array of the most recent MPTimedMetadata objects provided by the media stream.
-@property (nonatomic, readonly) NSArray *timedMetadata MP_DEPRECATED("Use AVPlayerViewController in AVKit.", ios(4.0, 9.0));
+@property (nonatomic, readonly) NSArray *timedMetadata MP_DEPRECATED("Use AVPlayerViewController in AVKit.", ios(4.0, 9.0)) API_UNAVAILABLE(visionos);
 
 @end
 
 MP_DEPRECATED("Use AVFoundation.", ios(4.0, 9.0))
 MP_UNAVAILABLE(tvos)
+API_UNAVAILABLE(visionos)
 @interface MPTimedMetadata : NSObject
 
 // A key which identifies a piece of timed metadata.
@@ -264,19 +277,20 @@ MP_UNAVAILABLE(tvos)
 @end
 
 // Posted when new timed metadata arrives.
-MP_EXTERN NSString * const MPMoviePlayerTimedMetadataUpdatedNotification MP_DEPRECATED("Use AVFoundation.", ios(4.0, 9.0));
-MP_EXTERN NSString * const MPMoviePlayerTimedMetadataUserInfoKey MP_DEPRECATED("Use AVFoundation.", ios(4.0, 9.0));       // NSDictionary of the most recent MPTimedMetadata objects.
+MP_EXTERN NSString * const MPMoviePlayerTimedMetadataUpdatedNotification MP_DEPRECATED("Use AVFoundation.", ios(4.0, 9.0)) API_UNAVAILABLE(visionos);
+MP_EXTERN NSString * const MPMoviePlayerTimedMetadataUserInfoKey MP_DEPRECATED("Use AVFoundation.", ios(4.0, 9.0)) API_UNAVAILABLE(visionos);       // NSDictionary of the most recent MPTimedMetadata objects.
 
 // Additional dictionary keys for use with the 'allMetadata' property. All keys are optional.
-MP_EXTERN NSString * const MPMoviePlayerTimedMetadataKeyName MP_DEPRECATED("Use AVFoundation.", ios(4.0, 9.0));           // NSString
-MP_EXTERN NSString * const MPMoviePlayerTimedMetadataKeyInfo MP_DEPRECATED("Use AVFoundation.", ios(4.0, 9.0));           // NSString
-MP_EXTERN NSString * const MPMoviePlayerTimedMetadataKeyMIMEType MP_DEPRECATED("Use AVFoundation.", ios(4.0, 9.0));       // NSString
-MP_EXTERN NSString * const MPMoviePlayerTimedMetadataKeyDataType MP_DEPRECATED("Use AVFoundation.", ios(4.0, 9.0));       // NSString
-MP_EXTERN NSString * const MPMoviePlayerTimedMetadataKeyLanguageCode MP_DEPRECATED("Use AVFoundation.", ios(4.0, 9.0));   // NSString (ISO 639-2)
+MP_EXTERN NSString * const MPMoviePlayerTimedMetadataKeyName MP_DEPRECATED("Use AVFoundation.", ios(4.0, 9.0)) API_UNAVAILABLE(visionos);           // NSString
+MP_EXTERN NSString * const MPMoviePlayerTimedMetadataKeyInfo MP_DEPRECATED("Use AVFoundation.", ios(4.0, 9.0)) API_UNAVAILABLE(visionos);           // NSString
+MP_EXTERN NSString * const MPMoviePlayerTimedMetadataKeyMIMEType MP_DEPRECATED("Use AVFoundation.", ios(4.0, 9.0)) API_UNAVAILABLE(visionos);       // NSString
+MP_EXTERN NSString * const MPMoviePlayerTimedMetadataKeyDataType MP_DEPRECATED("Use AVFoundation.", ios(4.0, 9.0)) API_UNAVAILABLE(visionos);       // NSString
+MP_EXTERN NSString * const MPMoviePlayerTimedMetadataKeyLanguageCode MP_DEPRECATED("Use AVFoundation.", ios(4.0, 9.0)) API_UNAVAILABLE(visionos);   // NSString (ISO 639-2)
 
 // -----------------------------------------------------------------------------
 
 MP_UNAVAILABLE(tvos)
+API_UNAVAILABLE(visionos)
 @interface MPMoviePlayerController (MPMovieLogging)
 
 // Returns an object that represents a snapshot of the network access log. Can be nil.
@@ -293,6 +307,7 @@ MP_UNAVAILABLE(tvos)
 
 MP_DEPRECATED("Use AVFoundation.", ios(4.3, 9.0))
 MP_UNAVAILABLE(tvos)
+API_UNAVAILABLE(visionos)
 @interface MPMovieAccessLog : NSObject <NSCopying>
 
 // Returns the webserver access log into a textual format that conforms to the W3C Extended Log File Format for web server log files.
@@ -312,6 +327,7 @@ MP_UNAVAILABLE(tvos)
 
 MP_DEPRECATED("Use AVFoundation.", ios(4.3, 9.0))
 MP_UNAVAILABLE(tvos)
+API_UNAVAILABLE(visionos)
 @interface MPMovieErrorLog : NSObject <NSCopying>
 
 // Returns the webserver error log into a textual format that conforms to the W3C Extended Log File Format for web server log files.
@@ -331,6 +347,7 @@ MP_UNAVAILABLE(tvos)
 
 MP_DEPRECATED("Use AVFoundation.", ios(4.3, 9.0))
 MP_UNAVAILABLE(tvos)
+API_UNAVAILABLE(visionos)
 @interface MPMovieAccessLogEvent : NSObject <NSCopying>
 
 // A count of media segments downloaded from the server to this client.
@@ -382,6 +399,7 @@ MP_UNAVAILABLE(tvos)
 
 MP_DEPRECATED("Use AVFoundation.", ios(4.3, 9.0))
 MP_UNAVAILABLE(tvos)
+API_UNAVAILABLE(visionos)
 @interface MPMovieErrorLogEvent : NSObject <NSCopying>
 
 // The date and time when the error occured.
@@ -411,11 +429,12 @@ MP_UNAVAILABLE(tvos)
 // Deprecated methods and properties
 // These will be removed in a future release of iOS
 MP_UNAVAILABLE(tvos)
+API_UNAVAILABLE(visionos)
 @interface MPMoviePlayerController (MPMoviePlayerDeprecated)
 
 // Indicates if the movie player should inherit the application's audio session instead of creating a new session (which would interrupt the application's session).
 // Defaults to YES. Setting this property during playback will not take effect until playback is stopped and started again.
-@property (nonatomic) BOOL useApplicationAudioSession MP_DEPRECATED("Use AVPlayerViewController in AVKit.", ios(6.0, 9.0));
+@property (nonatomic) BOOL useApplicationAudioSession MP_DEPRECATED("Use AVPlayerViewController in AVKit.", ios(6.0, 9.0)) API_UNAVAILABLE(visionos);
 
 @end
 

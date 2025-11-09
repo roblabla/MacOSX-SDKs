@@ -21,11 +21,11 @@ API_AVAILABLE(ios(14.0), visionos(1.0)) API_UNAVAILABLE(macos, watchos) __TVOS_P
 + (instancetype)new NS_UNAVAILABLE;
 
 /// Adds an animation that will be synchronized with an overlay's presentation/dismissal.
-- (void)addAnimationBlock:(void (^)(void))block NS_SWIFT_NAME(addAnimation(_:));
+- (void)addAnimationBlock:(void (^)(void))block NS_SWIFT_NAME(addAnimation(_:)) API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos,watchos,visionos) __TVOS_PROHIBITED;
 
-@property (nonatomic, readonly) CGRect startFrame;
+@property (nonatomic, readonly) CGRect startFrame API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos,watchos,visionos) __TVOS_PROHIBITED;
 
-@property (nonatomic, readonly) CGRect endFrame;
+@property (nonatomic, readonly) CGRect endFrame API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos,watchos,visionos) __TVOS_PROHIBITED;
 
 @end
 

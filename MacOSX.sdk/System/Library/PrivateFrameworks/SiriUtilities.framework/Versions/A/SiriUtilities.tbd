@@ -878,7 +878,11 @@ exports:
                        '_$s13SiriUtilities15InteractionTypeOMa', '_$s13SiriUtilities15InteractionTypeOMn', 
                        '_$s13SiriUtilities15InteractionTypeON', '_$s13SiriUtilities15InteractionTypeOSHAAMc', 
                        '_$s13SiriUtilities15InteractionTypeOSQAAMc', '_$s13SiriUtilities15InteractionTypeOSYAAMc', 
-                       '_$s13SiriUtilities15TypeInformationV04baseC0AA0C10IdentifierVvg', 
+                       '_$s13SiriUtilities15TailSpinManagerO06createcD4File8fileName05suiteI07options10completionySS_SSSDys11AnyHashableVypGSgySb_SSSgtctFZ', 
+                       '_$s13SiriUtilities15TailSpinManagerO06deletecD5Files9suiteNameySS_tFZ', 
+                       '_$s13SiriUtilities15TailSpinManagerO24tailspinDefaultDirectorySSvgZ', 
+                       '_$s13SiriUtilities15TailSpinManagerOMa', '_$s13SiriUtilities15TailSpinManagerOMn', 
+                       '_$s13SiriUtilities15TailSpinManagerON', '_$s13SiriUtilities15TypeInformationV04baseC0AA0C10IdentifierVvg', 
                        '_$s13SiriUtilities15TypeInformationV04baseC0AA0C10IdentifierVvpMV', 
                        '_$s13SiriUtilities15TypeInformationV08originalC0AA0C10IdentifierVvg', 
                        '_$s13SiriUtilities15TypeInformationV08originalC0AA0C10IdentifierVvpMV', 
@@ -1716,5 +1720,6 @@ exports:
                        '_$ss17CodingUserInfoKeyV13SiriUtilitiesE22catalogPackageInflatorABvau', 
                        '_$ss17CodingUserInfoKeyV13SiriUtilitiesE22catalogPackageInflatorABvgZ', 
                        '_$ss17CodingUserInfoKeyV13SiriUtilitiesE22catalogPackageInflatorABvpZ' ]
-    objc-classes:    [ SUCurrentProcess, SUIdleTracker, SUIdleTrackerActivity, SUNetworkReachability ]
+    objc-classes:    [ SUCurrentProcess, SUIdleTracker, SUIdleTrackerActivity, SUNetworkReachability, 
+                       TailSpinHelper ]
 ...

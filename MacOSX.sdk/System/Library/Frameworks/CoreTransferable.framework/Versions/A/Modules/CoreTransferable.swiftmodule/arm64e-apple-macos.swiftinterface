@@ -1,9 +1,10 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.9 (swiftlang-5.9.0.123.203 clang-1500.0.37.1)
-// swift-module-flags: -target arm64e-apple-macos14.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -library-level api -library-level api -module-name CoreTransferable
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 1.2
+// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.11 clang-1500.1.0.2.2)
+// swift-module-flags: -target arm64e-apple-macos14.2 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -library-level api -library-level api -module-name CoreTransferable
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 1.2.3
 import Combine
 @_exported import CoreTransferable
+import Foundation
 import Swift
 import UniformTypeIdentifiers
 import _Concurrency
@@ -158,15 +159,25 @@ public struct ProxyRepresentation<Item, ProxyRepresentation> : CoreTransferable.
   public init(exporting: @escaping @Sendable (Item) throws -> ProxyRepresentation)
   #endif
   #if compiler(>=5.3) && $AsyncAwait && $Sendable
-  @available(iOS 16.1, macOS 13.0, tvOS 16.1, watchOS 9.1, *)
+  @available(iOS, introduced: 16.1, deprecated: 17.0, message: "A synchronous exporter should be used instead.")
+  @available(macOS, introduced: 13.0, deprecated: 14.0, message: "A synchronous exporter should be used instead.")
+  @available(tvOS, introduced: 16.1, deprecated: 17.0, message: "A synchronous exporter should be used instead.")
+  @available(watchOS, introduced: 9.1, deprecated: 10.0, message: "A synchronous exporter should be used instead.")
   public init(exporting: @escaping @Sendable (Item) async throws -> ProxyRepresentation)
   #endif
   #if compiler(>=5.3) && $Sendable
   public init(exporting: @escaping @Sendable (Item) throws -> ProxyRepresentation, importing: @escaping @Sendable (ProxyRepresentation) throws -> Item)
   #endif
   #if compiler(>=5.3) && $AsyncAwait && $Sendable
-  @available(iOS 16.1, macOS 13.0, tvOS 16.1, watchOS 9.1, *)
+  @available(iOS, introduced: 16.1, deprecated: 17.0, message: "A synchronous exporter should be used instead.")
+  @available(macOS, introduced: 13.0, deprecated: 14.0, message: "A synchronous exporter should be used instead.")
+  @available(tvOS, introduced: 16.1, deprecated: 17.0, message: "A synchronous exporter should be used instead.")
+  @available(watchOS, introduced: 9.1, deprecated: 10.0, message: "A synchronous exporter should be used instead.")
   public init(exporting: @escaping @Sendable (Item) async throws -> ProxyRepresentation, importing: @escaping @Sendable (ProxyRepresentation) async throws -> Item)
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  @available(iOS 17.2, macOS 14.2, tvOS 17.2, watchOS 10.2, *)
+  public init(exporting: @escaping @Sendable (Item) throws -> ProxyRepresentation, importing: @escaping @Sendable (ProxyRepresentation) async throws -> Item)
   #endif
   public typealias Body = Swift.Never
 }

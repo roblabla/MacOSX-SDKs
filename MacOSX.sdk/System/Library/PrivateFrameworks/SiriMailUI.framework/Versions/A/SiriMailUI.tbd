@@ -222,10 +222,10 @@ exports:
                        '_$s10SiriMailUI31DisambiguateRecipientsDataModelVN', '_$s10SiriMailUI31DisambiguateRecipientsDataModelVSEAAMc', 
                        '_$s10SiriMailUI31DisambiguateRecipientsDataModelVSeAAMc', 
                        '_$s10SiriMailUI6LoggerO04siriB02osABVvau', '_$s10SiriMailUI6LoggerO04siriB02osABVvgZ', 
-                       '_$s10SiriMailUI6LoggerO04siriB02osABVvpZ', '_$s10SiriMailUI6LoggerOMa', 
-                       '_$s10SiriMailUI6LoggerOMn', '_$s10SiriMailUI6LoggerON', '_$s16EncoreXPCService11ServiceNameV10SiriMailUIE4mailACvau', 
+                       '_$s10SiriMailUI6LoggerO04siriB02osABVvpZ', '_$s10SiriMailUI6LoggerO11logAndCrash_4file4lines5NeverOSS_s12StaticStringVSutFZ', 
+                       '_$s10SiriMailUI6LoggerOMa', '_$s10SiriMailUI6LoggerOMn', 
+                       '_$s10SiriMailUI6LoggerON', '_$s16EncoreXPCService11ServiceNameV10SiriMailUIE4mailACvau', 
                        '_$s16EncoreXPCService11ServiceNameV10SiriMailUIE4mailACvgZ', 
                        '_$s16EncoreXPCService11ServiceNameV10SiriMailUIE4mailACvpZ', 
-                       '_$sSq10SiriMailUISlRzlE12isNilOrEmptySbvg', '_$sSq10SiriMailUISlRzlE12isNilOrEmptySbvpMV', 
                        _SiriMailUIVersionNumber, _SiriMailUIVersionString ]
 ...

@@ -7,7 +7,6 @@
 
 #import <PassKit/PKPaymentSummaryItem.h>
 
-
 #ifndef __PKINSTANTFUNDSOUTFEESUMMARYITEM_H__
 #define __PKINSTANTFUNDSOUTFEESUMMARYITEM_H__
 
@@ -22,7 +21,6 @@ API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(macos, watchos, tvos)
 NS_ASSUME_NONNULL_END
 
 #endif // __PKINSTANTFUNDSOUTFEESUMMARYITEM_H__
-
 
 #else
 #import <TargetConditionals.h>

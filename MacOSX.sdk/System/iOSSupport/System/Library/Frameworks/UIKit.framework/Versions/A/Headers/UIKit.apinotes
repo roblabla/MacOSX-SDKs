@@ -994,6 +994,8 @@ Classes:
   - Name: 'systemTraitsAffectingImageLookup'
     PropertyKind: Class
     SwiftPrivate: true
+  - Name: 'typesettingLanguage'
+    SwiftPrivate: true
   Methods:
   - Selector: 'performAsCurrentTraitCollection:'
     MethodKind: Instance
@@ -1036,6 +1038,9 @@ Classes:
     SwiftPrivate: true
   - Selector: 'changedTraitsFromTraitCollection:'
     MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'traitCollectionWithTypesettingLanguage:'
+    MethodKind: Class
     SwiftPrivate: true
 - Name: UIFontPickerViewControllerConfiguration
   SwiftName: UIFontPickerViewController.Configuration
@@ -1216,8 +1221,6 @@ Classes:
   - Name: tagIdentifier
     PropertyKind: Instance
     SwiftPrivate: true
-- Name: UITextItemContentType
-  SwiftPrivate: true
 - Name: UITextItemMenuPreview
   SwiftPrivate: true
 - Name: UITextItemMenuConfiguration
@@ -2007,6 +2010,8 @@ Tags:
   SwiftName: UIScene.ActivationState
 - Name: UIWindowSceneDismissalAnimation
   SwiftName: UIWindowScene.DismissalAnimation
+- Name: UITextItemContentType
+  SwiftPrivate: true
 Typedefs:
 - Name: NSTextListMarkerFormat
   SwiftName: NSTextList.MarkerFormat

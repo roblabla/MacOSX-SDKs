@@ -17,12 +17,3 @@
 #import <Speech/SFTranscription.h>
 #import <Speech/SFTranscriptionSegment.h>
 #import <Speech/SFVoiceAnalytics.h>
-
-// For interoperability within Apple Inc.
-#import <Speech/SFAnalysisContext_Private.h>
-#import <Speech/SFEARResultType_Private.h>
-#import <Speech/SFInputSequencer_Private.h>
-#import <Speech/SFSpeechAnalyzerOutputWrapper_Private.h>
-#import <Speech/SFSpeechAnalyzer_Private.h>
-#import <Speech/SFTranscriptionOptions_Private.h>
-#import <Speech/SFTranscriptionResultAttributeOptions_Private.h>

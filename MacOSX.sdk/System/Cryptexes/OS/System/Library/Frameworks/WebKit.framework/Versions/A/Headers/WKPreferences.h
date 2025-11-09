@@ -89,13 +89,13 @@ typedef NS_ENUM(NSInteger, WKInactiveSchedulingPolicy) {
     WKInactiveSchedulingPolicySuspend,
     WKInactiveSchedulingPolicyThrottle,
     WKInactiveSchedulingPolicyNone
-} NS_SWIFT_NAME(WKPreferences.InactiveSchedulingPolicy) API_AVAILABLE(macos(14.0), ios(NA));
+} NS_SWIFT_NAME(WKPreferences.InactiveSchedulingPolicy) API_AVAILABLE(macos(14.0), ios(17.0));
 
 /*! @abstract Specify the scheduling policy for the web view when it is inactive
  and detached from the view hierarchy. Web views are not considered idle when playing media or loading web pages.
  A suspended web view will pause JavaScript execution and page layout.
  */
-@property (nonatomic) WKInactiveSchedulingPolicy inactiveSchedulingPolicy API_AVAILABLE(macos(14.0), ios(NA));
+@property (nonatomic) WKInactiveSchedulingPolicy inactiveSchedulingPolicy API_AVAILABLE(macos(14.0), ios(17.0));
 
 @end
 

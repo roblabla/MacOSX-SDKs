@@ -204,7 +204,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
     @param          timeRange
                     Specifies the timeRange of the asset to be inserted.
     @param          asset
-                    Specifies the asset that contains the tracks that are to be inserted. Only instances of AVURLAsset and AVComposition are supported (AVComposition starting in MacOS X 10.10 and iOS 8.0).
+                    Specifies the asset that contains the tracks that are to be inserted. Only instances of AVURLAsset and AVComposition are supported (AVComposition starting in macOS 10.10 and iOS 8.0).
     @param          startTime
                     Specifies the time at which the inserted tracks are to be presented by the composition.
     @param          outError
@@ -225,7 +225,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 	@param          timeRange
 					Specifies the timeRange of the asset to be inserted.
 	@param          asset
-					Specifies the asset that contains the tracks that are to be inserted. Only instances of AVURLAsset and AVComposition are supported (AVComposition starting in MacOS X 10.10 and iOS 8.0).
+					Specifies the asset that contains the tracks that are to be inserted. Only instances of AVURLAsset and AVComposition are supported (AVComposition starting in macOS 10.10 and iOS 8.0).
 	@param          startTime
 					Specifies the time at which the inserted tracks are to be presented by the composition.
 	@param          completionHandler

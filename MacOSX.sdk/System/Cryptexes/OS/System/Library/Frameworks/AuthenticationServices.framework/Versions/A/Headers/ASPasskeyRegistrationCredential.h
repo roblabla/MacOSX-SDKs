@@ -19,7 +19,7 @@ AS_EXTERN API_AVAILABLE(ios(17.0), macos(14.0)) API_UNAVAILABLE(tvos, watchos)
 /*! @abstract Initializes an ASPasskeyRegistrationCredential object.
  @param relyingParty the relying party identifier associated with this passkey.
  @param clientDataHash the JSON encoded client data for this registration result.
- @param rawID the raw credential identifier of this passkey.
+ @param credentialID The unique identifier for this passkey.
  @param attestationObject the attestation object for this passkey registration result.
  */
 - (instancetype)initWithRelyingParty:(NSString *)relyingParty clientDataHash:(NSData *)clientDataHash credentialID:(NSData *)credentialID attestationObject:(NSData *)attestationObject;
@@ -27,7 +27,7 @@ AS_EXTERN API_AVAILABLE(ios(17.0), macos(14.0)) API_UNAVAILABLE(tvos, watchos)
 /*! @abstract Creates and initializes an ASPasskeyRegistrationCredential object.
  @param relyingParty the relying party identifier associated with this passkey.
  @param clientDataHash the JSON encoded client data for this registration result.
- @param rawID the raw credential identifier of this passkey.
+ @param credentialID The unique identifier for this passkey.
  @param attestationObject the attestation object for this passkey registration result.
  */
 + (instancetype)credentialWithRelyingParty:(NSString *)relyingParty clientDataHash:(NSData *)clientDataHash credentialID:(NSData *)credentialID attestationObject:(NSData *)attestationObject;

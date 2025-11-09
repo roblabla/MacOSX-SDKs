@@ -201,6 +201,8 @@ exports:
                        '_$s21SiriTimeAlarmInternal06CreateC6IntentC14repeatScheduleSayAA0c6RepeatH0CGSgvpMV', 
                        '_$s21SiriTimeAlarmInternal06CreateC6IntentC18isMeridianInferredSo8NSNumberCSgvpMV', 
                        '_$s21SiriTimeAlarmInternal06CreateC6IntentC23relativeOffsetInMinutesSo8NSNumberCSgvpMV', 
+                       '_$s21SiriTimeAlarmInternal06CreateC6IntentC27eligibleForTimerReformationSbvg', 
+                       '_$s21SiriTimeAlarmInternal06CreateC6IntentC27eligibleForTimerReformationSbvpMV', 
                        '_$s21SiriTimeAlarmInternal06CreateC6IntentC28shouldSkipDefaultSchemaCheckSbyFZ', 
                        '_$s21SiriTimeAlarmInternal06CreateC6IntentC4time10Foundation14DateComponentsVSgvpMV', 
                        '_$s21SiriTimeAlarmInternal06CreateC6IntentC5coderACSgSo7NSCoderC_tcfC', 

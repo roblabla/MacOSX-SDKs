@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.9 (swiftlang-5.9.0.123.203 clang-1500.0.37.1)
-// swift-module-flags: -target x86_64-apple-ios17.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -module-name AppIntents
-// swift-module-flags-ignorable: -target-min-inlining-version min -enable-bare-slash-regex -user-module-version 174.22.1
+// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.11 clang-1500.1.0.2.2)
+// swift-module-flags: -target x86_64-apple-ios17.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -module-name AppIntents
+// swift-module-flags-ignorable: -target-min-inlining-version min -enable-bare-slash-regex -user-module-version 146.60.7.0.3
 @_exported import AppIntents
 import CoreGraphics
 import CoreLocation
@@ -13,6 +13,10 @@ import UniformTypeIdentifiers
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
+@available(macOS 14.2, iOS 17.2, watchOS 10.2, tvOS 17.2, *)
+extension AppIntents.IntentParameter where Value.ValueType == AppIntents.StringSearchCriteria {
+  convenience public init(title: Foundation.LocalizedStringResource, description: Foundation.LocalizedStringResource? = nil, requestValueDialog: AppIntents.IntentDialog? = nil, inputConnectionBehavior: _const AppIntents.InputConnectionBehavior = .default)
+}
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public struct IntentFile : Swift.Sendable {
   public var data: Foundation.Data {
@@ -1235,7 +1239,7 @@ public struct RelevantContext {
   public static func date(_ exact: Foundation.Date) -> AppIntents.RelevantContext
   public static func date(from: Foundation.Date, to: Foundation.Date) -> AppIntents.RelevantContext
   @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
-  @available(xrOS, unavailable)
+  @available(visionOS, unavailable)
   public static func location(_ exact: CoreLocation.CLRegion) -> AppIntents.RelevantContext
   public static func location(inferred: AppIntents.RelevantContext.InferredLocation) -> AppIntents.RelevantContext
   public struct InferredLocation {
@@ -2152,6 +2156,25 @@ public struct _TransientAppEntityQuery<Entity> : AppIntents.EntityQuery where En
   public typealias DefaultValue = Swift.Array<Entity>.Result
   public typealias Result = [Entity]
 }
+@available(macOS 14.2, iOS 17.2, watchOS 10.2, tvOS 17.2, *)
+extension AppIntents.StringSearchCriteria {
+  public static var defaultResolverSpecification: some AppIntents.ResolverSpecification {
+    get
+  }
+}
+@available(macOS 14.2, iOS 17.2, watchOS 10.2, tvOS 17.2, *)
+public struct StringSearchCriteriaFromStringResolverSpecificification : AppIntents.Resolver {
+  #if compiler(>=5.3) && $AsyncAwait
+  public func resolve(from input: Swift.String, context: AppIntents.IntentParameterContext<AppIntents.StringSearchCriteria>) async throws -> AppIntents.StringSearchCriteria?
+  #endif
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: AppIntents.StringSearchCriteriaFromStringResolverSpecificification, b: AppIntents.StringSearchCriteriaFromStringResolverSpecificification) -> Swift.Bool
+  public typealias Input = Swift.String
+  public typealias Output = AppIntents.StringSearchCriteria
+  public var hashValue: Swift.Int {
+    get
+  }
+}
 @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
 public struct AppShortcutOptionsCollection<Provider> : AppIntents.AppShortcutOptionsCollectionProtocol where Provider : AppIntents.DynamicOptionsProvider {
   public let dynamicOptionsProvider: Provider
@@ -2842,6 +2865,16 @@ public protocol PredictableIntent : AppIntents.AppIntent {
 public protocol IntentPredictionConfiguration {
   associatedtype Intent : AppIntents.AppIntent
 }
+@available(macOS 14.2, iOS 17.2, watchOS 10.2, tvOS 17.2, *)
+public protocol SearchCriteria : AppIntents._IntentValue, Swift.Hashable, Swift.Sendable {
+  associatedtype SearchScopes = Swift.Void
+}
+@available(macOS 14.2, iOS 17.2, watchOS 10.2, tvOS 17.2, *)
+extension AppIntents.ShowInAppSearchResultsIntent where Self.Criteria.SearchScopes == () {
+  public static var searchScopes: Swift.Void {
+    get
+  }
+}
 @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
 public protocol EnumerableEntityQuery : AppIntents.EntityQuery {
   #if compiler(>=5.3) && $AsyncAwait
@@ -3231,6 +3264,87 @@ extension AppIntents.IntentParameter where Value.ValueType == AppIntents.IntentC
   convenience public init<Spec>(title: Foundation.LocalizedStringResource, description: Foundation.LocalizedStringResource? = nil, currencyCodes: _const [Swift.String] = [], inclusiveRange: _const AppIntents.IntentParameter<Value>.InclusiveRange<Foundation.Decimal>? = nil, requestValueDialog: AppIntents.IntentDialog? = nil, inputConnectionBehavior: _const AppIntents.InputConnectionBehavior = .default, @AppIntents.ResolverSpecificationBuilder<Value.UnwrappedType> resolvers: @escaping () -> Spec) where Spec : AppIntents.ResolverSpecification
   convenience public init<OptionsProvider>(title: Foundation.LocalizedStringResource, description: Foundation.LocalizedStringResource? = nil, currencyCodes: _const [Swift.String] = [], inclusiveRange: _const AppIntents.IntentParameter<Value>.InclusiveRange<Foundation.Decimal>? = nil, requestValueDialog: AppIntents.IntentDialog? = nil, inputConnectionBehavior: _const AppIntents.InputConnectionBehavior = .default, optionsProvider: OptionsProvider) where OptionsProvider : AppIntents.DynamicOptionsProvider, OptionsProvider.DefaultValue.ValueType == AppIntents.IntentCurrencyAmount
   convenience public init<Spec, OptionsProvider>(title: Foundation.LocalizedStringResource, description: Foundation.LocalizedStringResource? = nil, currencyCodes: _const [Swift.String] = [], inclusiveRange: _const AppIntents.IntentParameter<Value>.InclusiveRange<Foundation.Decimal>? = nil, requestValueDialog: AppIntents.IntentDialog? = nil, inputConnectionBehavior: _const AppIntents.InputConnectionBehavior = .default, optionsProvider: OptionsProvider, @AppIntents.ResolverSpecificationBuilder<Value.UnwrappedType> resolvers: @escaping () -> Spec) where Spec : AppIntents.ResolverSpecification, OptionsProvider : AppIntents.DynamicOptionsProvider, OptionsProvider.DefaultValue.ValueType == AppIntents.IntentCurrencyAmount
+}
+@available(macOS 14.2, iOS 17.2, watchOS 10.2, tvOS 17.2, *)
+public enum StringSearchScope : Swift.String, AppIntents.AppEnum {
+  case general
+  case movies
+  case tv
+  case freeformVideo
+  public static var typeDisplayRepresentation: AppIntents.TypeDisplayRepresentation
+  public static var caseDisplayRepresentations: [AppIntents.StringSearchScope : AppIntents.DisplayRepresentation]
+  public init?(rawValue: Swift.String)
+  public typealias AllCases = [AppIntents.StringSearchScope]
+  public typealias RawValue = Swift.String
+  public typealias Specification = @_opaqueReturnTypeOf("$s10AppIntents0A4EnumPAAE28defaultResolverSpecificationQrvpZ", 0) __<AppIntents.StringSearchScope>
+  public typealias UnwrappedType = AppIntents.StringSearchScope
+  public typealias ValueType = AppIntents.StringSearchScope
+  public static var allCases: [AppIntents.StringSearchScope] {
+    get
+  }
+  public var rawValue: Swift.String {
+    get
+  }
+}
+@available(macOS 14.2, iOS 17.2, watchOS 10.2, tvOS 17.2, *)
+@available(watchOS, unavailable)
+public enum VideoCategory : Swift.String, AppIntents.AppEnum {
+  case movies
+  case tv
+  case freeform
+  public static var typeDisplayRepresentation: AppIntents.TypeDisplayRepresentation
+  public static var caseDisplayRepresentations: [AppIntents.VideoCategory : AppIntents.DisplayRepresentation]
+  public init?(rawValue: Swift.String)
+  public typealias AllCases = [AppIntents.VideoCategory]
+  public typealias RawValue = Swift.String
+  public typealias Specification = @_opaqueReturnTypeOf("$s10AppIntents0A4EnumPAAE28defaultResolverSpecificationQrvpZ", 0) __<AppIntents.VideoCategory>
+  public typealias UnwrappedType = AppIntents.VideoCategory
+  public typealias ValueType = AppIntents.VideoCategory
+  public static var allCases: [AppIntents.VideoCategory] {
+    get
+  }
+  public var rawValue: Swift.String {
+    get
+  }
+}
+@available(macOS 14.2, iOS 17.2, watchOS 10.2, tvOS 17.2, *)
+public struct StringSearchCriteria : AppIntents.SearchCriteria {
+  public typealias SearchScopes = [AppIntents.StringSearchScope]
+  public var term: Swift.String
+  public init(term: Swift.String)
+  public static func == (a: AppIntents.StringSearchCriteria, b: AppIntents.StringSearchCriteria) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public typealias Specification = @_opaqueReturnTypeOf("$s10AppIntents20StringSearchCriteriaV28defaultResolverSpecificationQrvpZ", 0) __
+  public typealias UnwrappedType = AppIntents.StringSearchCriteria
+  public typealias ValueType = AppIntents.StringSearchCriteria
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@available(macOS 14.2, iOS 17.2, watchOS 10.2, tvOS 17.2, *)
+public protocol ShowInAppSearchResultsIntent : AppIntents.SystemIntent {
+  associatedtype Criteria : AppIntents.SearchCriteria
+  static var searchScopes: Self.Criteria.SearchScopes { get }
+  var criteria: Self.Criteria { get set }
+}
+@available(macOS 14.2, iOS 17.2, watchOS 10.2, tvOS 17.2, *)
+extension AppIntents.ShowInAppSearchResultsIntent {
+  public static var openAppWhenRun: Swift.Bool {
+    get
+  }
+}
+@available(macOS 14.2, iOS 17.2, tvOS 17.2, *)
+@available(watchOS, unavailable)
+public protocol PlayVideoIntent : AppIntents.SystemIntent {
+  static var supportedCategories: [AppIntents.VideoCategory] { get }
+  var term: Swift.String { get set }
+}
+@available(macOS 14.2, iOS 17.2, tvOS 17.2, *)
+@available(watchOS, unavailable)
+extension AppIntents.PlayVideoIntent {
+  public static var openAppWhenRun: Swift.Bool {
+    get
+  }
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension AppIntents.ParameterSummaryCaseBuilder {

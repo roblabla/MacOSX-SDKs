@@ -745,9 +745,9 @@ typedef NS_ENUM(NSInteger,UIPreviewActionStyle) {
     UIPreviewActionStyleDefault=0,
     UIPreviewActionStyleSelected,
     UIPreviewActionStyleDestructive,
-} API_AVAILABLE(ios(9.0));
+} API_DEPRECATED("Please use UIContextMenuInteraction.", ios(9.0, 17.1));
 
-UIKIT_EXTERN API_AVAILABLE(ios(9.0)) API_DEPRECATED("Please use UIContextMenuInteraction.", ios(9.0, 13.0)) API_UNAVAILABLE(visionos) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_DEPRECATED("Please use UIContextMenuInteraction.", ios(9.0, 13.0)) API_UNAVAILABLE(visionos) NS_SWIFT_UI_ACTOR
 @interface UIPreviewAction : NSObject <NSCopying,UIPreviewActionItem>
 
 @property(nonatomic, copy, readonly) void (^handler)(id<UIPreviewActionItem> action, UIViewController *previewViewController);
@@ -756,7 +756,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(9.0)) API_DEPRECATED("Please use UIContextMenuInt
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(9.0)) API_DEPRECATED("Please use UIContextMenuInteraction.", ios(9.0, 13.0)) API_UNAVAILABLE(visionos) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_DEPRECATED("Please use UIContextMenuInteraction.", ios(9.0, 13.0)) API_UNAVAILABLE(visionos) NS_SWIFT_UI_ACTOR
 @interface UIPreviewActionGroup : NSObject <NSCopying,UIPreviewActionItem>
 + (instancetype)actionGroupWithTitle:(NSString *)title style:(UIPreviewActionStyle)style actions:(NSArray<UIPreviewAction *> *)actions;
 @end

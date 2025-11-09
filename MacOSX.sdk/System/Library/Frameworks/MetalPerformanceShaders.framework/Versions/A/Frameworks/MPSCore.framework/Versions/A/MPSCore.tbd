@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSCore.framework/Versions/A/MPSCore'
-current-version: 127.0.19
+current-version: 127.1.3
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -24,8 +24,8 @@ exports:
                        _MPSGetUShortDivisorMagicNumber, _MPSGetvImageFunction, _MPSGetvecLibFunction, 
                        _MPSImageBatchIncrementReadCount, _MPSImageBatchIterate, _MPSImageBatchResourceSize, 
                        _MPSImageBatchSynchronize, _MPSImageFeatureChannelFormatGetName, 
-                       _MPSIsTextureTwiddled, _MPSNewBufferForTexture, _MPSRectNoClip, 
-                       _MPSReturnGetName, _MPSReturnTemporaryBufferToCommandBufferCache, 
+                       _MPSIsReducedPrecision, _MPSIsTextureTwiddled, _MPSNewBufferForTexture, 
+                       _MPSRectNoClip, _MPSReturnGetName, _MPSReturnTemporaryBufferToCommandBufferCache, 
                        _MPSReturnTemporaryTextureToCommandBufferCache, _MPSSeparatePassDimensions, 
                        _MPSSetDeviceOptionsSPI, _MPSStateBatchIncrementReadCount, 
                        _MPSStateBatchResourceSize, _MPSStateBatchSynchronize, __Z16dataTypeToString11MPSDataType, 

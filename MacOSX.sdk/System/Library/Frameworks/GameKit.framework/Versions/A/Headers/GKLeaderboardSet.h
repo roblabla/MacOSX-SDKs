@@ -42,7 +42,7 @@ NS_CLASS_AVAILABLE(10_10, 7_0) __WATCHOS_AVAILABLE(3_0)
 /// Possible reasons for error:
 /// 1. Communications problem
 /// 2. Unauthenticated player
-- (void)loadLeaderboardsWithCompletionHandler:(void(^__nullable)(NSArray<GKLeaderboard *> * __nullable leaderboards, NSError * __nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("-loadLeaderboardsWithHandler:.", ios(7.0, 14.0), tvos(9.0, 14.0), macosx(10.10, 11.0), watchos(3.0, 7.0));
+- (void)loadLeaderboardsWithCompletionHandler:(void(^__nullable)(NSArray<GKLeaderboard *> * __nullable leaderboards, NSError * __nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("-loadLeaderboardsWithHandler:.", ios(7.0, 14.0), tvos(9.0, 14.0), macos(10.10, 11.0), watchos(3.0, 7.0));
 
 @end
 NS_ASSUME_NONNULL_END

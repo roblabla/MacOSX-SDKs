@@ -379,7 +379,7 @@ typedef NS_ENUM(NSUInteger, AVAudioSessionRouteChangeReason) {
 typedef NS_OPTIONS(NSUInteger, AVAudioSessionCategoryOptions) {
     AVAudioSessionCategoryOptionMixWithOthers            = 0x1,
     AVAudioSessionCategoryOptionDuckOthers               = 0x2,
-    AVAudioSessionCategoryOptionAllowBluetooth API_UNAVAILABLE(tvos, watchos, macos) = 0x4,
+    AVAudioSessionCategoryOptionAllowBluetooth API_AVAILABLE(tvos(17.0)) API_UNAVAILABLE(watchos, macos) = 0x4,
     AVAudioSessionCategoryOptionDefaultToSpeaker API_UNAVAILABLE(tvos, watchos, macos) = 0x8,
     AVAudioSessionCategoryOptionInterruptSpokenAudioAndMixWithOthers API_AVAILABLE(ios(9.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos) = 0x11,
     AVAudioSessionCategoryOptionAllowBluetoothA2DP API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0)) API_UNAVAILABLE(macos) = 0x20,
@@ -605,6 +605,35 @@ typedef NS_ENUM(NSUInteger, AVAudioSessionRecordPermission) {
 	AVAudioSessionRecordPermissionDenied API_DEPRECATED_WITH_REPLACEMENT("AVAudioApplicationRecordPermissionDenied", ios(8.0, 17.0), watchos(4.0, 10.0)) API_UNAVAILABLE(macos, tvos) = 'deny',
 	AVAudioSessionRecordPermissionGranted API_DEPRECATED_WITH_REPLACEMENT("AVAudioApplicationRecordPermissionGranted", ios(8.0, 17.0), watchos(4.0, 10.0)) API_UNAVAILABLE(macos, tvos) = 'grnt'
 };
+
+/*!
+	@enum AVAudioSessionRenderingMode
+	@var  AVAudioSessionRenderingModeNotApplicable
+	@var  AVAudioSessionRenderingModeMonoStereo
+	@var  AVAudioSessionRenderingModeSurround
+	@var  AVAudioSessionRenderingModeSpatialAudio
+	@var  AVAudioSessionRenderingModeDolbyAudio
+	@var  AVAudioSessionRenderingModeDolbyAtmos
+*/
+typedef NS_ENUM(NSInteger, AVAudioSessionRenderingMode) {
+	/// Default Mode when no asset is loaded or playing
+	AVAudioSessionRenderingModeNotApplicable           = 0,
+ 
+	/// Default mode for non multi-channel cases
+	AVAudioSessionRenderingModeMonoStereo              = 1,
+ 
+	/// Default mode for multi-channel cases that do not fall into the modes below
+	AVAudioSessionRenderingModeSurround                = 2,
+
+	/// Fallback mode if provided content is Dolby variant but hardware capabilities don't support it
+	AVAudioSessionRenderingModeSpatialAudio            = 3,
+	
+	/// Dolby Audio mode
+	AVAudioSessionRenderingModeDolbyAudio              = 4,
+	
+	/// Dolby Atmos mode
+	AVAudioSessionRenderingModeDolbyAtmos              = 5,
+} NS_SWIFT_NAME(AVAudioSession.RenderingMode);
 
 #endif // AudioSession_AVAudioSessionTypes_h
 #else

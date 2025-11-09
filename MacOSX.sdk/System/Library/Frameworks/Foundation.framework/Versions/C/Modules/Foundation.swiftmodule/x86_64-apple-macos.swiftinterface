@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.9 (swiftlang-5.9.0.123.203 clang-1500.0.37.1)
-// swift-module-flags: -target x86_64-apple-macos14.0 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftFoundation -swift-version 5 -enforce-exclusivity=unchecked -O -library-level api -module-name Foundation
-// swift-module-flags-ignorable: -enable-experimental-feature Macros -enable-experimental-feature VariadicGenerics -enable-bare-slash-regex -user-module-version 2048.1.403
+// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.11 clang-1500.1.0.2.2)
+// swift-module-flags: -target x86_64-apple-macos14.2 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftFoundation -swift-version 5 -enforce-exclusivity=unchecked -O -library-level api -module-name Foundation
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 2202
 import Combine
 import CoreFoundation
 import Darwin
@@ -6464,7 +6464,7 @@ public struct Calendar : Swift.Hashable, Swift.Equatable, Swift.Sendable {
     case nanosecond
     case calendar
     case timeZone
-    @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
+    @available(macOS 14, iOS 17, tvOS 17, watchOS 10, *)
     case isLeapMonth
     public static func == (a: Foundation.Calendar.Component, b: Foundation.Calendar.Component) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
@@ -13351,6 +13351,7 @@ final internal class __DataStorage : @unchecked Swift.Sendable {
         let offsetPointer = UnsafeRawBufferPointer(start: _bytes?.advanced(by: range.lowerBound - _offset), count: Swift.min(range.upperBound - range.lowerBound, _length))
         UnsafeMutableRawBufferPointer(start: pointer, count: range.upperBound - range.lowerBound).copyMemory(from: offsetPointer)
     }
+  @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
   @usableFromInline
   final internal func replaceBytes(in range_: Swift.Range<Swift.Int>, with replacementBytes: Swift.UnsafeRawPointer?, length replacementLength: Swift.Int)
   @usableFromInline
@@ -13630,7 +13631,19 @@ final internal class __DataStorage : @unchecked Swift.Sendable {
             assert(endIndex + buffer.count < HalfInt.max)
             ensureUniqueReference()
             let upperbound = storage.length + storage._offset
-            storage.replaceBytes(in: range.upperBound ..< upperbound, with: buffer.baseAddress, length: buffer.count)
+            if #available(macOS 14, iOS 17, watchOS 10, tvOS 17, *) {
+                storage.replaceBytes(
+                    in: range.upperBound ..< upperbound,
+                    with: buffer.baseAddress,
+                    length: buffer.count)
+            } else {
+                storage.replaceBytes(
+                    in: NSRange(
+                        location: range.upperBound,
+                        length: storage.length - (range.upperBound - storage._offset)),
+                    with: buffer.baseAddress,
+                    length: buffer.count)
+            }
             slice = slice.lowerBound..<HalfInt(Int(slice.upperBound) + buffer.count)
         }
     @inlinable internal subscript(index: Foundation.Data.Index) -> Swift.UInt8 {
@@ -13666,7 +13679,14 @@ final internal class __DataStorage : @unchecked Swift.Sendable {
 
             ensureUniqueReference()
             let upper = range.upperBound
-            storage.replaceBytes(in: subrange, with: bytes, length: cnt)
+            if #available(macOS 14, iOS 17, watchOS 10, tvOS 17, *) {
+                storage.replaceBytes(in: subrange, with: bytes, length: cnt)
+            } else {
+                let nsRange = NSRange(
+                    location: subrange.lowerBound,
+                    length: subrange.upperBound - subrange.lowerBound)
+                storage.replaceBytes(in: nsRange, with: bytes, length: cnt)
+            }
             let resultingUpper = upper - (subrange.upperBound - subrange.lowerBound) + cnt
             slice = slice.lowerBound..<HalfInt(resultingUpper)
         }
@@ -13789,7 +13809,19 @@ final internal class __DataStorage : @unchecked Swift.Sendable {
     @inlinable internal mutating func append(contentsOf buffer: Swift.UnsafeRawBufferPointer) {
             ensureUniqueReference()
             let upperbound = storage.length + storage._offset
-            storage.replaceBytes(in: range.upperBound ..< upperbound, with: buffer.baseAddress, length: buffer.count)
+            if #available(macOS 14, iOS 17, watchOS 10, tvOS 17, *) {
+                storage.replaceBytes(
+                    in: range.upperBound ..< upperbound,
+                    with: buffer.baseAddress,
+                    length: buffer.count)
+            } else {
+                storage.replaceBytes(
+                    in: NSRange(
+                        location: range.upperBound,
+                        length: storage.length - (range.upperBound - storage._offset)),
+                    with: buffer.baseAddress,
+                    length: buffer.count)
+            }
             slice.range = slice.range.lowerBound..<slice.range.upperBound + buffer.count
         }
     @inlinable internal subscript(index: Foundation.Data.Index) -> Swift.UInt8 {
@@ -13821,7 +13853,14 @@ final internal class __DataStorage : @unchecked Swift.Sendable {
 
             ensureUniqueReference()
             let upper = range.upperBound
-            storage.replaceBytes(in: subrange, with: bytes, length: cnt)
+            if #available(macOS 14, iOS 17, watchOS 10, tvOS 17, *) {
+                storage.replaceBytes(in: subrange, with: bytes, length: cnt)
+            } else {
+                let nsRange = NSRange(
+                    location: subrange.lowerBound,
+                    length: subrange.upperBound - subrange.lowerBound)
+                storage.replaceBytes(in: nsRange, with: bytes, length: cnt)
+            }
             let resultingUpper = upper - (subrange.upperBound - subrange.lowerBound) + cnt
             slice.range = slice.range.lowerBound..<resultingUpper
         }

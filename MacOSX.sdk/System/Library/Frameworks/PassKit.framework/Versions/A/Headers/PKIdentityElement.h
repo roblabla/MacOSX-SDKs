@@ -41,6 +41,11 @@ API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos, watchos, tvos)
 /// document, if applicable.
 @property (class, nonatomic, readonly) PKIdentityElement *documentExpirationDateElement;
 
+/// The document's DHS (U.S. Department of Homeland Security) compliance status.
+///
+/// This is also known as the document's "REAL ID status".
+@property (class, nonatomic, readonly) PKIdentityElement *documentDHSComplianceStatusElement API_AVAILABLE(ios(17.2));
+
 /// The doument's number, as defined by the document's issuing authority.
 @property (class, nonatomic, readonly) PKIdentityElement *documentNumberElement;
 
@@ -52,6 +57,9 @@ API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos, watchos, tvos)
 
 /// The user's date of birth.
 @property (class, nonatomic, readonly) PKIdentityElement *dateOfBirthElement;
+
+/// The user's sex.
+@property (class, nonatomic, readonly) PKIdentityElement *sexElement API_AVAILABLE(ios(17.2));
 
 /// Boolean indicating whether the user's age is at least the given age.
 /// For example, ageThresholdElementWithAge:21 will return true if the user is at least 21 years old.

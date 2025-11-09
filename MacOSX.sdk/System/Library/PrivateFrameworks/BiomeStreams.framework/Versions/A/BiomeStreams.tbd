@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/BiomeStreams.framework/Versions/A/BiomeStreams'
-current-version: 123.1.9
+current-version: 123.2.7
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
@@ -107,13 +107,16 @@ exports:
                        '_$s12BiomeStreams13StoreSequenceVyxG0aD00a5AsyncD0AAMc', 
                        '_$s12BiomeStreams15ReadWriteStreamMp', '_$s12BiomeStreams15ReadWriteStreamPAA030TimeBasedBookmarkablePublisherE0Tb', 
                        '_$s12BiomeStreams15ReadWriteStreamPAA06SourceE0Tb', '_$s12BiomeStreams15ReadWriteStreamTL', 
-                       '_$s12BiomeStreams16DatabaseResourceMp', '_$s12BiomeStreams16DatabaseResourceP27materializedViewDefinitionsSayAA012MaterializedF10DefinitionVGvgZTj', 
+                       '_$s12BiomeStreams16DatabaseResourceMp', '_$s12BiomeStreams16DatabaseResourceP03sqlC07useCaseSo13BMSQLDatabaseCSS_tKFZTj', 
+                       '_$s12BiomeStreams16DatabaseResourceP03sqlC07useCaseSo13BMSQLDatabaseCSS_tKFZTq', 
+                       '_$s12BiomeStreams16DatabaseResourceP27materializedViewDefinitionsSayAA012MaterializedF10DefinitionVGvgZTj', 
                        '_$s12BiomeStreams16DatabaseResourceP27materializedViewDefinitionsSayAA012MaterializedF10DefinitionVGvgZTq', 
                        '_$s12BiomeStreams16DatabaseResourceP8database7useCaseAA11SQLDatabaseVSS_tKFZTj', 
                        '_$s12BiomeStreams16DatabaseResourceP8database7useCaseAA11SQLDatabaseVSS_tKFZTq', 
                        '_$s12BiomeStreams16DatabaseResourceP9attribute2to5blockySS_yyKXEtKFZTj', 
                        '_$s12BiomeStreams16DatabaseResourceP9attribute2to5blockySS_yyKXEtKFZTq', 
-                       '_$s12BiomeStreams16DatabaseResourcePAA04DataD0Tb', '_$s12BiomeStreams16DatabaseResourcePAAE8database7useCaseAA11SQLDatabaseVSS_tKFZ', 
+                       '_$s12BiomeStreams16DatabaseResourcePAA04DataD0Tb', '_$s12BiomeStreams16DatabaseResourcePAAE03sqlC07useCaseSo13BMSQLDatabaseCSS_tKFZ', 
+                       '_$s12BiomeStreams16DatabaseResourcePAAE8database7useCaseAA11SQLDatabaseVSS_tKFZ', 
                        '_$s12BiomeStreams16DatabaseResourceTL', '_$s12BiomeStreams16SQLDatabaseErrorO11descriptionSSvg', 
                        '_$s12BiomeStreams16SQLDatabaseErrorO11descriptionSSvpMV', 
                        '_$s12BiomeStreams16SQLDatabaseErrorO15failedToExecuteyACSS_SStcACmFWC', 

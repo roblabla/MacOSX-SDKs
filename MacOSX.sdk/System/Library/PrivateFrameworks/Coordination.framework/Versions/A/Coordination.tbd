@@ -15,6 +15,7 @@ exports:
                        _COAlarmSiriContextTargetReferenceForMemento, _COAlarmSiriContextTargetReferenceKey, 
                        _COClusterActivityGroup, _COClusterDynamicGroup, _COClusterHome, 
                        _COClusterPair, _COClusterRoleMonitorServiceName, _COCoordinationErrorDomain, 
+                       _COCoordinationServiceDefaultsFastFoldEnabled, _COCoordinationServiceDefaultsIPDiffingEnabled, 
                        _COMessageChannelDuplicateSessionConsumerKey, _COMessageChannelDuplicateSessionProducerKey, 
                        _COMessageChannelErrorDomain, _COMessageChannelFailedRequestHandlerErrorKey, 
                        _COMessageChannelUnknownClassErrorKey, _COMessageSessionDuplicateSessionConsumerKey, 
@@ -40,10 +41,10 @@ exports:
                        _COTimerSiriContextTargetReferenceForMemento, _COTimerSiriContextTargetReferenceKey ]
     objc-classes:    [ COAlarmManager, COCapabilityManager, COCluster, COClusterConfiguration, 
                        COClusterMember, COClusterMemberRoleSnapshot, COClusterRealm, 
-                       COClusterRole, COClusterRoleMonitor, COFeatureStatus, COHomeKitAccessoryMemento, 
-                       COKeyPath, COMessageChannel, COMessageChannelRequest, COMessageChannelResponse, 
-                       COMessageSession, COMessageSessionConsumer, COMessageSessionManagementRequest, 
-                       COMessageSessionManagementResponse, COMessageSessionNotice, 
-                       COMessageSessionProducer, COMessageSessionRequest, COMessageSessionResponse, 
-                       COStateManager, COTimerManager ]
+                       COClusterRole, COClusterRoleMonitor, CODefaults, COFeatureStatus, 
+                       COHomeKitAccessoryMemento, COKeyPath, COMessageChannel, COMessageChannelRequest, 
+                       COMessageChannelResponse, COMessageSession, COMessageSessionConsumer, 
+                       COMessageSessionManagementRequest, COMessageSessionManagementResponse, 
+                       COMessageSessionNotice, COMessageSessionProducer, COMessageSessionRequest, 
+                       COMessageSessionResponse, COStateManager, COTimerManager ]
 ...

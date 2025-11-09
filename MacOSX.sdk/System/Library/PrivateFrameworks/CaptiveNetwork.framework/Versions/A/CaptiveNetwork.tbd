@@ -43,6 +43,7 @@ exports:
                        _kCNSWebsheetInfoPropertySSID, _kCNSWebsheetInfoPropertyURL, 
                        _kCNSWhitelistedCaptiveNetworkProbeDateProperty, _kCNStateAPIState, 
                        _kCNStateAuthReply, _kCNStateBusy, _kCNStateDisabled, _kCNStateKey, 
-                       _kCNStateRedirect, _kCNStateStage, _kCNStateURL, _kCNStateWaitingOnUI, 
-                       _kCNUserInteractionRequirementNotifyKey, _kCNWebSheetOptionsRedirectURLType ]
+                       _kCNStateRedirect, _kCNStateStage, _kCNStateTokenAuthResult, 
+                       _kCNStateURL, _kCNStateWaitingOnUI, _kCNUserInteractionRequirementNotifyKey, 
+                       _kCNWebSheetOptionsRedirectURLType ]
 ...

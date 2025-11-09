@@ -98,6 +98,7 @@ exports:
                        _CP_ProfileInstalledFromUserApprovedManagementService, _CP_ProfileInstalledFromUserEnrollmentMDM, 
                        _CP_ProfileSpecKeyIsDeviceProfile, _CP_ProfileSpecKeyProfileIdentifier, 
                        _CP_ProfilesAreInstalledHintFlagFileLocation, _CP_ProfilesIconPath, 
+                       _CP_ProvisioningProfilesAreInstalled, _CP_ProvisioningProfilesAreInstalledHintFlagFileLocation, 
                        _CP_ReadSecureSettingsForDevice, _CP_ReadSecureSettingsForUser, 
                        _CP_RemoteDesktopStatus, _CP_RemoteManagementCheckIn, _CP_RemoteManagementFetchDataAtURL, 
                        _CP_RemoteManagementGetSystemMDMProperty, _CP_RemoteManagementGetUserMDMProperty, 

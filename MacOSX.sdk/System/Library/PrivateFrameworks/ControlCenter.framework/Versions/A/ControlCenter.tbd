@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ControlCenter.framework/Versions/A/ControlCenter'
-current-version: 444.1.100
+current-version: 444.22
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -95,6 +95,7 @@ exports:
                        '_$s13ControlCenter0aB27ModulePreferencesControllerC6domain4keysAcA0D0V6DomainV_xtcSTRzSS7ElementRtzlufc', 
                        '_$s13ControlCenter0aB27ModulePreferencesControllerC6domain4keysAcA0D0V6DomainV_xtcSTRzSY7ElementRpzSSAJ_8RawValueRTzlufC', 
                        '_$s13ControlCenter0aB27ModulePreferencesControllerC6domain4keysAcA0D0V6DomainV_xtcSTRzSY7ElementRpzSSAJ_8RawValueRTzlufc', 
+                       '_$s13ControlCenter0aB27ModulePreferencesControllerC9forceShow10identifierSbSS_tFZ', 
                        '_$s13ControlCenter0aB27ModulePreferencesControllerCMa', '_$s13ControlCenter0aB27ModulePreferencesControllerCMm', 
                        '_$s13ControlCenter0aB27ModulePreferencesControllerCMn', '_$s13ControlCenter0aB27ModulePreferencesControllerCN', 
                        '_$s13ControlCenter0aB27ModulePreferencesControllerCfD', '_$s13ControlCenter0aB27ModulePreferencesControllerCfd', 

@@ -188,7 +188,7 @@ exports:
                        '_$s8PeopleUI0A15WidgetConstantsO19phoneGradientColor105SwiftB05ColorVvgZ', 
                        '_$s8PeopleUI0A15WidgetConstantsO19phoneGradientColor205SwiftB05ColorVvgZ', 
                        '_$s8PeopleUI0A15WidgetConstantsO20maxContactAvatarSizeSo6CGSizeVvgZ', 
-                       '_$s8PeopleUI0A15WidgetConstantsO20widgetBackgroudColor05SwiftB00G0VvgZ', 
+                       '_$s8PeopleUI0A15WidgetConstantsO21widgetBackgroundColor05SwiftB00G0VvgZ', 
                        '_$s8PeopleUI0A15WidgetConstantsO22avatarAndStatusSpacing12CoreGraphics7CGFloatVvgZ', 
                        '_$s8PeopleUI0A15WidgetConstantsO22locationGradientColor105SwiftB05ColorVvgZ', 
                        '_$s8PeopleUI0A15WidgetConstantsO22locationGradientColor205SwiftB05ColorVvgZ', 

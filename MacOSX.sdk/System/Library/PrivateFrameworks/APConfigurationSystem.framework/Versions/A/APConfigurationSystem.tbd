@@ -18,8 +18,11 @@ exports:
                        _kAPConfigurationSystemPlistFile, _kAPDaemonBundleID, _kConfigSystemMaxCappingPollValue, 
                        _kDefaultConfigSystemPollValue, _kJSONExtension, _kPlistExtension ]
     objc-classes:    [ APCSAgeSensitiveNoise, APCSAgeSensitiveThreshold, APCSConfiguration, 
-                       APCSPolicyAppleSubscriptions, APClientMetricsConfig, APConfiguration, 
-                       APConfigurationCache, APConfigurationDecompressor, APConfigurationMediator, 
-                       APConfigurationMigrator, APConfigurationResponseHandler, APECDiagnosticPurposeConfig, 
-                       APECJourneyPurposeConfig, APECSettingsConfig ]
+                       APCSIntegrityReport, APCSPolicyAppleSubscriptions, APCSReports, 
+                       APClientMetricsConfig, APConfiguration, APConfigurationCache, 
+                       APConfigurationDecompressor, APConfigurationMediator, APConfigurationMigrator, 
+                       APConfigurationResponseHandler, APECDiagnosticPurposeConfig, 
+                       APECJourneyPurposeConfig, APECObservabilityConfig, APECObservabilityPurposeConfig, 
+                       APECReportsPurposeConfig, APECSettingsConfig, APVersionData, 
+                       APVersionHelper, APVersionTestData ]
 ...

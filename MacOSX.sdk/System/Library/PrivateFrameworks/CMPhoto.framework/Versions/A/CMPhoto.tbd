@@ -141,6 +141,7 @@ exports:
                        _CMPhotoGetCPUCount, _CMPhotoGetDestinationPixelFormatFromOptions, 
                        _CMPhotoGetHEVCProfileForPixelFormat, _CMPhotoGetImageType, 
                        _CMPhotoGetPreferredDNGTileSizeForImageSize, _CMPhotoGetPreferredHEIFTileSizeForImageSize, 
+                       _CMPhotoInterchangeCompactDecode, _CMPhotoInterchangeCompactEncode, 
                        _CMPhotoIs400EncodeAvailable, _CMPhotoIs422EncodeAvailable, 
                        _CMPhotoIs444EncodeAvailable, _CMPhotoIsPixelFormatSupportedByAVC, 
                        _CMPhotoIsPixelFormatSupportedByHEVC, _CMPhotoIsPixelFormatSupportedBySLIM, 
@@ -395,6 +396,7 @@ exports:
                        _kCMPhotoTranscodePayload_SourceReference_DecodeOptions, _kCMPhotoTranscodePayload_SourceReference_MainIndex, 
                        _kCMPhotoTranscodePayload_SourceReference_SubIndex, _kCMPhotoTranscodePayload_SourceReference_Type, 
                        _kFigPhotoSurfacePoolDefault, _kFigPhotoSurfacePoolOneShot ]
+    objc-classes:    [ CMPhotoInterchangeCompactMetal ]
   - targets:         [ arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CMPhotoJPEGAddMPDataToJPEG, _CMPhotoJPEGCachedConnectionCreateJPEGSbufFromBuffer, 
                        _CMPhotoJPEGCalculateOutputDimensions, _CMPhotoJPEGCopyMPDataFromJPEG, 

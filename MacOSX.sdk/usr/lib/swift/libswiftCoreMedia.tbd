@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/swift/libswiftCoreMedia.dylib'
-current-version: 3045.79.1
+current-version: 3090.15.4
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -253,6 +253,9 @@ exports:
                        '_$sSa9CoreMediaAA14CMTaggedBufferVRszlE06taggedD5GroupSayACGSo0cdF3Refa_tcfC', 
                        '_$sSa9CoreMediaAA14CMTaggedBufferVRszlE06taggedD5GroupSo0cdF3Refavg', 
                        '_$sSa9CoreMediaAA14CMTaggedBufferVRszlE06taggedD5GroupSo0cdF3RefavpMV', 
+                       '_$sSa9CoreMediaAA5CMTagCRszlE13tagCollectionSayACGSo0cE3Refa_tcfC', 
+                       '_$sSa9CoreMediaAA5CMTagCRszlE13tagCollectionSo0cE3Refavg', 
+                       '_$sSa9CoreMediaAA5CMTagCRszlE13tagCollectionSo0cE3RefavpMV', 
                        '_$sSo10CMClockRefa9CoreMedia14CMSyncProtocolACMc', '_$sSo10CMClockRefa9CoreMedia14CMSyncProtocolACWP', 
                        '_$sSo10CMClockRefa9CoreMedia33_CMAudioDeviceClockInitTrampolineACMc', 
                        '_$sSo10CMClockRefa9CoreMedia33_CMAudioDeviceClockInitTrampolineACWP', 

@@ -186,10 +186,11 @@ exports:
                        '_$s7DockKit0A9AccessoryCs28CustomDebugStringConvertibleAAMc', 
                        '_$s7DockKit0aB5ErrorO12notConnectedyA2CmFWC', '_$s7DockKit0aB5ErrorO12notSupportedyA2CmFWC', 
                        '_$s7DockKit0aB5ErrorO14noSubjectFoundyA2CmFWC', '_$s7DockKit0aB5ErrorO15frameRateTooLowyA2CmFWC', 
-                       '_$s7DockKit0aB5ErrorO16cameraTCCMissingyA2CmFWC', '_$s7DockKit0aB5ErrorO16invalidParameteryA2CmFWC', 
-                       '_$s7DockKit0aB5ErrorO20notSupportedByDeviceyA2CmFWC', '_$s7DockKit0aB5ErrorO2eeoiySbAC_ACtFZ', 
-                       '_$s7DockKit0aB5ErrorO4hash4intoys6HasherVz_tF', '_$s7DockKit0aB5ErrorO9hashValueSivg', 
-                       '_$s7DockKit0aB5ErrorO9hashValueSivpMV', '_$s7DockKit0aB5ErrorOMa', 
-                       '_$s7DockKit0aB5ErrorOMn', '_$s7DockKit0aB5ErrorON', '_$s7DockKit0aB5ErrorOSHAAMc', 
-                       '_$s7DockKit0aB5ErrorOSQAAMc', '_$s7DockKit0aB5ErrorOs0C0AAMc' ]
+                       '_$s7DockKit0aB5ErrorO16cameraTCCMissingyA2CmFWC', '_$s7DockKit0aB5ErrorO16frameRateTooHighyA2CmFWC', 
+                       '_$s7DockKit0aB5ErrorO16invalidParameteryA2CmFWC', '_$s7DockKit0aB5ErrorO20notSupportedByDeviceyA2CmFWC', 
+                       '_$s7DockKit0aB5ErrorO2eeoiySbAC_ACtFZ', '_$s7DockKit0aB5ErrorO4hash4intoys6HasherVz_tF', 
+                       '_$s7DockKit0aB5ErrorO9hashValueSivg', '_$s7DockKit0aB5ErrorO9hashValueSivpMV', 
+                       '_$s7DockKit0aB5ErrorOMa', '_$s7DockKit0aB5ErrorOMn', '_$s7DockKit0aB5ErrorON', 
+                       '_$s7DockKit0aB5ErrorOSHAAMc', '_$s7DockKit0aB5ErrorOSQAAMc', 
+                       '_$s7DockKit0aB5ErrorOs0C0AAMc' ]
 ...

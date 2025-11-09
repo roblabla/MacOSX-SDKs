@@ -25,7 +25,8 @@ exports:
                        _SHMediaItemSignatureAlignments, _SHMediaItemSpeedSkew, _SHMediaItemStaticLyricLines, 
                        _SHMediaItemSubtitle, _SHMediaItemSyncedLyricsSnippet, _SHMediaItemTimeRanges, 
                        _SHMediaItemTimeRangesSwift, _SHMediaItemTitle, _SHMediaItemVideoURL, 
-                       _SHMediaItemWebURL, _SHMediaLibraryErrorDomain, _SHMediaLibraryRemoteChangeNotification, 
+                       _SHMediaItemWebURL, _SHMediaLibraryAccountChangeNotification, 
+                       _SHMediaLibraryErrorDomain, _SHMediaLibraryRemoteChangeNotification, 
                        _SHMediaLibrarySyncStartConditionInitialFetch, _SHMediaLibrarySyncStartConditionInitialUpload, 
                        _SHMediaLibrarySyncStartConditionMigration, _SHMediaLibrarySyncStartConditionRemotePush, 
                        _SHMediaLibrarySyncStartConditionUserAction, _SHNotificationKeySessionError, 
@@ -53,7 +54,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ShazamCore.framework/Versions/A/ShazamCore'
-current-version: 236
+current-version: 236.12
 compatibility-version: 0
 swift-abi-version: 7
 exports:

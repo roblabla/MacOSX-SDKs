@@ -13,7 +13,7 @@ _DC_EXPORT
 API_AVAILABLE(ios(11.0), macos(10.15), tvos(11.0), watchos(9.0))
 /// A representation of a device that provides a unique, authenticated token.
 ///
-/// Use the shared instance of the ``DeviceCheck/DCDevice`` class to generate a
+/// Use the shared instance of the `DCDevice` class to generate a
 /// token that identifies a device. Call the
 /// ``DeviceCheck/DCDevice/generateTokenWithCompletionHandler:`` method to get
 /// the token, and then send it to your server:
@@ -36,7 +36,7 @@ API_AVAILABLE(ios(11.0), macos(10.15), tvos(11.0), watchos(9.0))
 /// communicates the results to your app. For more information about server-side
 /// procedures, see <doc:accessing-and-modifying-per-device-data>.
 ///
-/// - Note: To use the ``DeviceCheck/DCDevice`` class, your app must have an app
+/// - Note: To use the `DCDevice` class, your app must have an app
 /// ID that you register on the [Apple
 /// Developer](https://developer.apple.com/account/) website.
 ///
@@ -63,15 +63,10 @@ API_AVAILABLE(ios(11.0), macos(10.15), tvos(11.0), watchos(9.0))
 /// >  ```swift
 /// > func generateToken() async throws -> Data
 /// > ```
-/// >
-/// >
 /// >  For example:
-/// >
 /// >  ```swift
 /// > let token = try await generateToken()
 /// > ```
-/// >
-/// >
 /// >  For information about concurrency and asynchronous code in Swift, see <doc://com.apple.documentation/documentation/swift/calling-objective-c-apis-asynchronously>.
 ///
 /// Your server uses the generated token in its requests to get or set the
@@ -86,8 +81,8 @@ API_AVAILABLE(ios(11.0), macos(10.15), tvos(11.0), watchos(9.0))
 ///
 /// - Parameters:
 ///   - completion: A completion block that includes the following parameters:
-///   - token: An ephemeral token that identifies the current device.
-///   - error: The error that occurred, if any.
+///     - `token`:  An ephemeral token that identifies the current device.
+///     - `error`: The error that occurred, if any.
 - (void)generateTokenWithCompletionHandler:(void(^)(NSData * _Nullable token, NSError * _Nullable error))completion;
 
 @end

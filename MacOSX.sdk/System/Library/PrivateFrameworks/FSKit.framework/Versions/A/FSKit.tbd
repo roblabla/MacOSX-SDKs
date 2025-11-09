@@ -20,11 +20,11 @@ exports:
     objc-classes:    [ FSAuditToken, FSBlockDeviceResource, FSClient, FSFileDataBuffer, 
                        FSFileSystem, FSIOKitNotificationHandler, FSItem, FSItemAttributes, 
                        FSItemGetAttributesRequest, FSItemPair, FSItemSetAttributesRequest, 
-                       FSKitConstants, FSListener, FSMessageConnection, FSMessageReceiver, 
-                       FSMessageReceiverDelegate, FSModuleConnector, FSModuleExtension, 
-                       FSModuleHost, FSMutableFileDataBuffer, FSPathURLResource, 
-                       FSProbeResult, FSResource, FSResourceManager, FSServerURLResource, 
-                       FSSimpleFileSystem, FSSimpleItem, FSTaskDescription, FSTaskOption, 
-                       FSTaskOptionsBundle, FSTaskProgress, FSTaskProgressConnector, 
+                       FSKitConstants, FSKitDiskArbHelper, FSListener, FSMessageConnection, 
+                       FSMessageReceiver, FSMessageReceiverDelegate, FSModuleConnector, 
+                       FSModuleExtension, FSModuleHost, FSMutableFileDataBuffer, 
+                       FSPathURLResource, FSProbeResult, FSResource, FSResourceManager, 
+                       FSServerURLResource, FSSimpleFileSystem, FSSimpleItem, FSTaskDescription, 
+                       FSTaskOption, FSTaskOptionsBundle, FSTaskProgress, FSTaskProgressConnector, 
                        FSTaskProgressUpdater, FSVolume, FSWorkQueue, _TtC5FSKit10FSKitUtils ]
 ...

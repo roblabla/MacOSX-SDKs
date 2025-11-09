@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ContactsUICore.framework/Versions/A/ContactsUICore'
-current-version: 3494.1
+current-version: 3505
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -74,13 +74,13 @@ exports:
                        CNUIPRLikenessProvider, CNUIPRLikenessResolver, CNUIPRLikenessResolverOptions, 
                        CNUIPassKitWrapper, CNUIPlaceholderProviderFactory, CNUIRTTUtilities, 
                        CNUIRemotePhotoFutures, CNUIRenderedLikenessCacheEntry, CNUISnowglobeUtilities, 
-                       CNUIUserActionCacheKeyGenerator, CNUIUserActionContext, CNUIUserActionDisambiguationModelFinalizer, 
-                       CNUIUserActionDisambiguationModeler, CNUIUserActionDisambiguationViewDataSource, 
-                       CNUIUserActionDiscoveringEnvironment, CNUIUserActionExtensionURLOpener, 
-                       CNUIUserActionItem, CNUIUserActionItemComparator, CNUIUserActionItemList, 
-                       CNUIUserActionListDataSource, CNUIUserActionListModel, CNUIUserActionListModelCache, 
-                       CNUIUserActionRanking, CNUIUserActionTarget, CNUIUserActionTargetDiscovering, 
-                       CNUIUserActionTargetDiscoveringObservableCancelationToken, 
+                       CNUIStaticIdentity, CNUIUserActionCacheKeyGenerator, CNUIUserActionContext, 
+                       CNUIUserActionDisambiguationModelFinalizer, CNUIUserActionDisambiguationModeler, 
+                       CNUIUserActionDisambiguationViewDataSource, CNUIUserActionDiscoveringEnvironment, 
+                       CNUIUserActionExtensionURLOpener, CNUIUserActionItem, CNUIUserActionItemComparator, 
+                       CNUIUserActionItemList, CNUIUserActionListDataSource, CNUIUserActionListModel, 
+                       CNUIUserActionListModelCache, CNUIUserActionRanking, CNUIUserActionTarget, 
+                       CNUIUserActionTargetDiscovering, CNUIUserActionTargetDiscoveringObservableCancelationToken, 
                        CNUIUserActionTargetDiscoveringReplaySubject, CNUIUserActionTargetDiscoveringReplaySubjectPair, 
                        CNUIUserActionTargetDiscoveryCache, CNUIUserActionWorkspaceURLOpener, 
                        CNUIUserActivityManager, CNUIUserActivityRestorer, TestCNUIIDSHandleAvailability, 

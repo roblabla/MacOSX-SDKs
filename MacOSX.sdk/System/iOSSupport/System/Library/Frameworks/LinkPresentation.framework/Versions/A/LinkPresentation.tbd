@@ -2,14 +2,15 @@
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/LinkPresentation.framework/Versions/A/LinkPresentation'
-current-version: 235.2
+current-version: 240.3.4
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _LPErrorDomain, _LPLinkMetadataTypeIdentifier, _LPLogChannelFetching, 
-                       _LPLogChannelPlugin, _LPLogChannelSerialization, _LPLogChannelSnapshotGenerator, 
-                       _LPLogChannelTranscoding, _LPLogChannelUI, _LPLogChannelVideo, 
-                       _LPYouTubePlayerErrorDomain, _nameForSizeClass, _nameForStyle, 
-                       _performForEachSizeClass, _performForEachStyle ]
+                       _LPLogChannelFilesystem, _LPLogChannelPlugin, _LPLogChannelSerialization, 
+                       _LPLogChannelSnapshotGenerator, _LPLogChannelTranscoding, 
+                       _LPLogChannelUI, _LPLogChannelVideo, _LPYouTubePlayerErrorDomain, 
+                       _nameForSizeClass, _nameForStyle, _performForEachSizeClass, 
+                       _performForEachStyle ]
     objc-classes:    [ LPARAsset, LPARAssetAttachmentSubstitute, LPARAssetMetadata, 
                        LPARAssetProperties, LPAppLinkPresentationProperties, LPAppStoreStoryMetadata, 
                        LPAppearanceDependentValue, LPAppleMusicTVShowMetadata, LPAppleNewsMetadata, 
@@ -18,15 +19,15 @@ exports:
                        LPAudio, LPAudioMetadata, LPAudioProperties, LPBusinessChatMetadata, 
                        LPButtonAction, LPCaptionBarPresentationProperties, LPCaptionButtonCollapsedPresentationProperties, 
                        LPCaptionButtonPresentationProperties, LPCaptionPresentationProperties, 
-                       LPCaptionRowPresentationProperties, LPEvent, LPEventTimeline, 
-                       LPFaceTimeInviteMetadata, LPFileMetadata, LPGameCenterInvitationMetadata, 
-                       LPIconMetadata, LPImage, LPImageAttachmentSubstitute, LPImageMetadata, 
-                       LPImagePresentationProperties, LPImageProperties, LPInlineMediaPlaybackInformation, 
-                       LPLinkMetadata, LPLinkMetadataObserver, LPLinkMetadataPresentationTransformer, 
-                       LPLinkMetadataPreviewTransformer, LPLinkMetadataSharedWithYouTransformer, 
-                       LPLinkMetadataStatusTransformer, LPLinkMetadataStoreTransformer, 
-                       LPLinkRendererSizeClassParameters, LPLinkSnapshotConfiguration, 
-                       LPLinkSnapshotGenerator, LPLinkSnapshotGeneratorServiceDelegate, 
+                       LPCaptionRowPresentationProperties, LPCollaborationFooterPresentationProperties, 
+                       LPEvent, LPEventTimeline, LPFaceTimeInviteMetadata, LPFileMetadata, 
+                       LPGameCenterInvitationMetadata, LPIconMetadata, LPImage, LPImageAttachmentSubstitute, 
+                       LPImageMetadata, LPImagePresentationProperties, LPImageProperties, 
+                       LPInlineMediaPlaybackInformation, LPLinkMetadata, LPLinkMetadataObserver, 
+                       LPLinkMetadataPresentationTransformer, LPLinkMetadataPreviewTransformer, 
+                       LPLinkMetadataSharedWithYouTransformer, LPLinkMetadataStatusTransformer, 
+                       LPLinkMetadataStoreTransformer, LPLinkRendererSizeClassParameters, 
+                       LPLinkSnapshotConfiguration, LPLinkSnapshotGenerator, LPLinkSnapshotGeneratorServiceDelegate, 
                        LPLinkView, LPLyricExcerptMetadata, LPMIMETypeRegistry, LPMapCollectionMetadata, 
                        LPMapCollectionPublisherMetadata, LPMapMetadata, LPMessagesPayload, 
                        LPMetadataProvider, LPMultipleMetadataPresentationTransformer, 

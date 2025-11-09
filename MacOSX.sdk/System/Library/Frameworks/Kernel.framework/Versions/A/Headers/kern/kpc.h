@@ -151,6 +151,7 @@ extern int kpc_threads_counting;
 extern void kpc_thread_ast_handler( thread_t thread );
 
 
+
 /* acquire/release the counters used by the Power Manager */
 extern int kpc_force_all_ctrs( task_t task, int val );
 extern int kpc_get_force_all_ctrs( void );
@@ -252,6 +253,7 @@ struct kpc_config_remote {
 	uint32_t classes;
 	kpc_config_t *configv;
 	uint64_t pmc_mask;
+	bool allow_list;
 };
 
 /* handler for mp operations */

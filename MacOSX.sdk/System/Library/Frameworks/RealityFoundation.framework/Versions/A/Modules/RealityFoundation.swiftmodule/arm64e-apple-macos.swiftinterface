@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.9 (swiftlang-5.9.0.123.203 clang-1500.0.37.1)
-// swift-module-flags: -target arm64e-apple-macos14.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-concurrency -module-name RealityFoundation
+// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.11 clang-1500.1.0.2.2)
+// swift-module-flags: -target arm64e-apple-macos14.2 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-concurrency -module-name RealityFoundation
 // swift-module-flags-ignorable: -enable-experimental-feature ModuleInterfaceExportAs -enable-bare-slash-regex -user-module-version 225.613.1
 import AVFAudio
 import AVFoundation
@@ -54,7 +54,7 @@ extension RealityFoundation.Entity {
   }
 }
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 @_originallyDefinedIn(module: "RealityKit", macOS 12.0)
 @_originallyDefinedIn(module: "RealityKit", iOS 15.0)
 @_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
@@ -1553,7 +1553,7 @@ extension RealityFoundation.AudioPlaybackController {
     set
   }
   @_Concurrency.MainActor(unsafe) public func fade(to gain: RealityFoundation.AudioPlaybackController.Decibel, duration: Foundation.TimeInterval)
-  @available(xrOS, unavailable)
+  @available(visionOS, unavailable)
   @_Concurrency.MainActor(unsafe) public var reverbSendLevel: RealityFoundation.AudioPlaybackController.Decibel {
     get
     set
@@ -2645,7 +2645,7 @@ extension RealityFoundation.RETransform {
   }
 }
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 @_originallyDefinedIn(module: "RealityKit", macOS 12.0)
 @_originallyDefinedIn(module: "RealityKit", iOS 15.0)
 @_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
@@ -3182,7 +3182,7 @@ extension RealityFoundation.PhysicallyBasedMaterial {
     public var texture: RealityFoundation.PhysicallyBasedMaterial.Texture?
     public static let __defaultTexture: RealityFoundation.TextureResource
     public static let textureSemantic: RealityFoundation.TextureResource.Semantic
-    @available(xrOS, unavailable)
+    @available(visionOS, unavailable)
     public init(_ value: RealityFoundation.CustomMaterial.BaseColor)
   }
   @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
@@ -3195,7 +3195,7 @@ extension RealityFoundation.PhysicallyBasedMaterial {
     public static let textureSemantic: RealityFoundation.TextureResource.Semantic
     public init(scale: Swift.Float = 1.0, texture: RealityFoundation.PhysicallyBasedMaterial.Texture? = nil)
     public init(floatLiteral value: Swift.Float)
-    @available(xrOS, unavailable)
+    @available(visionOS, unavailable)
     public init(_ value: RealityFoundation.CustomMaterial.Metallic)
     public typealias FloatLiteralType = Swift.Float
   }
@@ -3209,7 +3209,7 @@ extension RealityFoundation.PhysicallyBasedMaterial {
     public static let textureSemantic: RealityFoundation.TextureResource.Semantic
     public init(scale: Swift.Float = 1.0, texture: RealityFoundation.PhysicallyBasedMaterial.Texture? = nil)
     public init(floatLiteral value: Swift.Float)
-    @available(xrOS, unavailable)
+    @available(visionOS, unavailable)
     public init(_ value: RealityFoundation.CustomMaterial.Roughness)
     public typealias FloatLiteralType = Swift.Float
   }
@@ -3221,7 +3221,7 @@ extension RealityFoundation.PhysicallyBasedMaterial {
     public var texture: RealityFoundation.PhysicallyBasedMaterial.Texture?
     public static let __defaultTexture: RealityFoundation.TextureResource
     public static let textureSemantic: RealityFoundation.TextureResource.Semantic
-    @available(xrOS, unavailable)
+    @available(visionOS, unavailable)
     public init(_ value: RealityFoundation.CustomMaterial.EmissiveColor)
   }
   @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
@@ -3234,7 +3234,7 @@ extension RealityFoundation.PhysicallyBasedMaterial {
     public static let textureSemantic: RealityFoundation.TextureResource.Semantic
     public init(scale: Swift.Float = 1.0, texture: RealityFoundation.PhysicallyBasedMaterial.Texture? = nil)
     public init(floatLiteral value: Swift.Float)
-    @available(xrOS, unavailable)
+    @available(visionOS, unavailable)
     public init(_ value: RealityFoundation.CustomMaterial.Specular)
     public typealias FloatLiteralType = Swift.Float
   }
@@ -3242,7 +3242,7 @@ extension RealityFoundation.PhysicallyBasedMaterial {
   public enum Blending {
     case opaque
     case transparent(opacity: RealityFoundation.PhysicallyBasedMaterial.Opacity)
-    @available(xrOS, unavailable)
+    @available(visionOS, unavailable)
     public init(blending value: RealityFoundation.CustomMaterial.Blending)
   }
   @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
@@ -3256,7 +3256,7 @@ extension RealityFoundation.PhysicallyBasedMaterial {
     }
     public init(scale: Swift.Float = 1.0, texture: RealityFoundation.PhysicallyBasedMaterial.Texture? = nil)
     public init(floatLiteral value: Swift.Float)
-    @available(xrOS, unavailable)
+    @available(visionOS, unavailable)
     public init(_ value: RealityFoundation.CustomMaterial.Opacity)
     public typealias FloatLiteralType = Swift.Float
   }
@@ -3270,7 +3270,7 @@ extension RealityFoundation.PhysicallyBasedMaterial {
     public static let textureSemantic: RealityFoundation.TextureResource.Semantic
     public init(scale: Swift.Float = 1.0, texture: RealityFoundation.PhysicallyBasedMaterial.Texture? = nil)
     public init(floatLiteral value: Swift.Float)
-    @available(xrOS, unavailable)
+    @available(visionOS, unavailable)
     public init(_ value: RealityFoundation.CustomMaterial.Clearcoat)
     public typealias FloatLiteralType = Swift.Float
   }
@@ -3284,7 +3284,7 @@ extension RealityFoundation.PhysicallyBasedMaterial {
     public static let textureSemantic: RealityFoundation.TextureResource.Semantic
     public init(scale: Swift.Float = 1.0, texture: RealityFoundation.PhysicallyBasedMaterial.Texture? = nil)
     public init(floatLiteral value: Swift.Float)
-    @available(xrOS, unavailable)
+    @available(visionOS, unavailable)
     public init(_ value: RealityFoundation.CustomMaterial.ClearcoatRoughness)
     public typealias FloatLiteralType = Swift.Float
   }
@@ -3295,7 +3295,7 @@ extension RealityFoundation.PhysicallyBasedMaterial {
     public static let __defaultTexture: RealityFoundation.TextureResource
     public static let textureSemantic: RealityFoundation.TextureResource.Semantic
     public init(texture: RealityFoundation.PhysicallyBasedMaterial.Texture? = nil)
-    @available(xrOS, unavailable)
+    @available(visionOS, unavailable)
     public init(_ value: RealityFoundation.CustomMaterial.Normal)
   }
   @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
@@ -3305,7 +3305,7 @@ extension RealityFoundation.PhysicallyBasedMaterial {
     public static let __defaultTexture: RealityFoundation.TextureResource
     public static let textureSemantic: RealityFoundation.TextureResource.Semantic
     public init(texture: RealityFoundation.PhysicallyBasedMaterial.Texture? = nil)
-    @available(xrOS, unavailable)
+    @available(visionOS, unavailable)
     public init(_ value: RealityFoundation.CustomMaterial.AmbientOcclusion)
   }
   @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
@@ -3363,7 +3363,7 @@ extension RealityFoundation.PhysicallyBasedMaterial {
   @objc deinit
 }
 @_inheritsConvenienceInitializers @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 @_originallyDefinedIn(module: "RealityKit", macOS 12.0)
 @_originallyDefinedIn(module: "RealityKit", iOS 15.0)
 @_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
@@ -3374,7 +3374,7 @@ extension RealityFoundation.PhysicallyBasedMaterial {
   @objc deinit
 }
 @_inheritsConvenienceInitializers @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 @_originallyDefinedIn(module: "RealityKit", macOS 12.0)
 @_originallyDefinedIn(module: "RealityKit", iOS 15.0)
 @_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
@@ -3385,7 +3385,7 @@ extension RealityFoundation.PhysicallyBasedMaterial {
   @objc deinit
 }
 @_inheritsConvenienceInitializers @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 @_originallyDefinedIn(module: "RealityKit", macOS 12.0)
 @_originallyDefinedIn(module: "RealityKit", iOS 15.0)
 @_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
@@ -3417,7 +3417,7 @@ extension RealityFoundation.PhysicallyBasedMaterial {
   @objc deinit
 }
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 @_originallyDefinedIn(module: "RealityKit", macOS 12.0)
 @_originallyDefinedIn(module: "RealityKit", iOS 15.0)
 @_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
@@ -3794,7 +3794,7 @@ extension RealityFoundation.__Downsampling {
 @_originallyDefinedIn(module: "RealityKit", iOS 15.0)
 @_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
 @preconcurrency @_Concurrency.MainActor public class VideoPlaybackController {
-  @available(xrOS, unavailable)
+  @available(visionOS, unavailable)
   @_Concurrency.MainActor(unsafe) public var audioInputMode: RealityFoundation.AudioResource.InputMode {
     get
     set
@@ -3802,7 +3802,7 @@ extension RealityFoundation.__Downsampling {
   @objc deinit
 }
 @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 extension RealityFoundation.VideoPlaybackController {
   @_Concurrency.MainActor(unsafe) public var reverbSendLevel: RealityFoundation.AudioPlaybackController.Decibel {
     get
@@ -4778,14 +4778,14 @@ extension RealityFoundation.Entity.ChildCollection.IndexingIterator : Swift.Iter
   public mutating func next() -> Elements.Element?
 }
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 @_originallyDefinedIn(module: "RealityKit", macOS 12.0)
 @_originallyDefinedIn(module: "RealityKit", iOS 15.0)
 @_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
 @preconcurrency @_Concurrency.MainActor public protocol HasDirectionalLight : RealityFoundation.HasTransform {
 }
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 @_originallyDefinedIn(module: "RealityKit", macOS 12.0)
 @_originallyDefinedIn(module: "RealityKit", iOS 15.0)
 @_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
@@ -5782,7 +5782,7 @@ public class __RKEmphasisBaseAnimation {
   @objc deinit
 }
 @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 public enum CustomMaterialError : Swift.Error {
   case geometryModifierFunctionNotFound
   case surfaceShaderFunctionNotFound
@@ -5800,7 +5800,7 @@ public protocol MaterialFunction {
   var __linkSPI: Swift.Bool { get }
 }
 @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 public struct CustomMaterial : RealityFoundation.Material {
   @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
   public struct GeometryModifier : RealityFoundation.MaterialFunction {
@@ -5994,14 +5994,14 @@ public struct MaterialParameters {
   @_Concurrency.MainActor(unsafe) public static func generate(staticFriction: Swift.Float, dynamicFriction: Swift.Float, restitution: Swift.Float) -> RealityFoundation.PhysicsMaterialResource
 }
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 @_originallyDefinedIn(module: "RealityKit", macOS 12.0)
 @_originallyDefinedIn(module: "RealityKit", iOS 15.0)
 @_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
 @preconcurrency @_Concurrency.MainActor public protocol HasSpotLight : RealityFoundation.HasTransform {
 }
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 @_originallyDefinedIn(module: "RealityKit", macOS 12.0)
 @_originallyDefinedIn(module: "RealityKit", iOS 15.0)
 @_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
@@ -6597,7 +6597,7 @@ public struct __EntityInfoComponent : RealityFoundation.Component, Swift.Codable
   public static func __load(from buffer: Swift.UnsafeRawPointer, offset: Swift.Int) -> any RealityFoundation.Component
 }
 @_hasMissingDesignatedInitializers @available(iOS 17.0, macOS 12.0, macCatalyst 15.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 public class PhotogrammetrySession {
   convenience public init(input: Foundation.URL, configuration: RealityFoundation.PhotogrammetrySession.Configuration = Configuration()) throws
   convenience public init<S>(input: S, configuration: RealityFoundation.PhotogrammetrySession.Configuration = Configuration()) throws where S : Swift.Sequence, S.Element == RealityFoundation.PhotogrammetrySample
@@ -6853,7 +6853,7 @@ public class PhotogrammetrySession {
   @objc deinit
 }
 @available(iOS 17.0, macOS 13.0, macCatalyst 16.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 public struct OrientedBoundingBox : Swift.Hashable {
   public var orientation: simd.simd_quatf
   public var boundingBox: RealityFoundation.BoundingBox
@@ -6868,7 +6868,7 @@ public struct OrientedBoundingBox : Swift.Hashable {
   }
 }
 @available(iOS 17.0, macOS 12.0, macCatalyst 15.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 public struct PhotogrammetrySample : Swift.Identifiable {
   public let id: Swift.Int
   public let image: CoreVideo.CVPixelBuffer
@@ -6894,14 +6894,14 @@ extension RealityFoundation.PhotogrammetrySession : Swift.Identifiable {
   public typealias ID = Foundation.UUID
 }
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 @_originallyDefinedIn(module: "RealityKit", macOS 12.0)
 @_originallyDefinedIn(module: "RealityKit", iOS 15.0)
 @_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
 @preconcurrency @_Concurrency.MainActor public protocol HasPointLight : RealityFoundation.HasTransform {
 }
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 @_originallyDefinedIn(module: "RealityKit", macOS 12.0)
 @_originallyDefinedIn(module: "RealityKit", iOS 15.0)
 @_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
@@ -7726,7 +7726,7 @@ public class AudioResource : RealityFoundation.Resource {
     get
   }
   @objc deinit
-  @available(xrOS, unavailable)
+  @available(visionOS, unavailable)
   public enum InputMode {
     case nonSpatial
     case spatial
@@ -7737,7 +7737,7 @@ public class AudioResource : RealityFoundation.Resource {
       get
     }
   }
-  @available(xrOS, unavailable)
+  @available(visionOS, unavailable)
   public var inputMode: RealityFoundation.AudioResource.InputMode {
     get
     set
@@ -7767,7 +7767,7 @@ public class AudioFileResource : RealityFoundation.AudioResource {
   @objc deinit
 }
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 @_originallyDefinedIn(module: "RealityKit", macOS 12.0)
 @_originallyDefinedIn(module: "RealityKit", iOS 15.0)
 @_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
@@ -7776,7 +7776,7 @@ extension RealityFoundation.AudioFileResource {
   public static func load(contentsOf url: Foundation.URL, withName resourceName: Swift.String? = nil, inputMode: RealityFoundation.AudioResource.InputMode = .spatial, loadingStrategy: RealityFoundation.AudioFileResource.LoadingStrategy = .preload, shouldLoop: Swift.Bool = false) throws -> RealityFoundation.AudioFileResource
 }
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 @_originallyDefinedIn(module: "RealityKit", macOS 12.0)
 @_originallyDefinedIn(module: "RealityKit", iOS 15.0)
 @_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
@@ -8378,7 +8378,7 @@ extension RealityFoundation.__RKEntityProximityTrigger.ExitType : Swift.Hashable
 @_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
 extension RealityFoundation.__RKEntityProximityTrigger.ExitType : Swift.RawRepresentable {}
 @available(iOS 17.0, macOS 12.0, macCatalyst 15.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 extension RealityFoundation.PhotogrammetrySession.Request.Detail : Swift.RawRepresentable {}
 @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
 extension RealityFoundation.MeshBuffers.Rate : Swift.Equatable {}
@@ -8438,16 +8438,16 @@ extension RealityFoundation.Entity.ComponentSet : Swift.Sendable {}
 @_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
 extension RealityFoundation.AnimationPlaybackController : Swift.Sendable {}
 @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 extension RealityFoundation.CustomMaterialError : Swift.Equatable {}
 @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 extension RealityFoundation.CustomMaterialError : Swift.Hashable {}
 @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 extension RealityFoundation.CustomMaterial.LightingModel : Swift.Equatable {}
 @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 extension RealityFoundation.CustomMaterial.LightingModel : Swift.Hashable {}
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
 @_originallyDefinedIn(module: "RealityKit", macOS 12.0)
@@ -8460,25 +8460,25 @@ extension RealityFoundation.__SceneResource : Swift.Sendable {}
 @_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
 extension RealityFoundation.BoundingBox : Swift.Sendable {}
 @available(iOS 17.0, macOS 12.0, macCatalyst 15.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 extension RealityFoundation.PhotogrammetrySession.Configuration.SampleOrdering : Swift.Equatable {}
 @available(iOS 17.0, macOS 12.0, macCatalyst 15.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 extension RealityFoundation.PhotogrammetrySession.Configuration.SampleOrdering : Swift.Hashable {}
 @available(iOS 17.0, macOS 12.0, macCatalyst 15.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 extension RealityFoundation.PhotogrammetrySession.Configuration.FeatureSensitivity : Swift.Equatable {}
 @available(iOS 17.0, macOS 12.0, macCatalyst 15.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 extension RealityFoundation.PhotogrammetrySession.Configuration.FeatureSensitivity : Swift.Hashable {}
 @available(iOS 17.0, macOS 14.0, macCatalyst 17.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 extension RealityFoundation.PhotogrammetrySession.Configuration.CustomDetailSpecification.TextureDimension : Swift.RawRepresentable {}
 @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 extension RealityFoundation.PhotogrammetrySession.Output.ProcessingStage : Swift.Equatable {}
 @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 extension RealityFoundation.PhotogrammetrySession.Output.ProcessingStage : Swift.Hashable {}
 @available(macOS 13.0, iOS 16.0, macCatalyst 16.0, *)
 @_originallyDefinedIn(module: "RealityKit", macOS 13.0)
@@ -8553,13 +8553,13 @@ extension RealityFoundation.CollisionComponent.Mode : Swift.Hashable {}
 @_originallyDefinedIn(module: "RealityKit", macOS 12.0)
 @_originallyDefinedIn(module: "RealityKit", iOS 15.0)
 @_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 extension RealityFoundation.AudioResource.InputMode : Swift.Equatable {}
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
 @_originallyDefinedIn(module: "RealityKit", macOS 12.0)
 @_originallyDefinedIn(module: "RealityKit", iOS 15.0)
 @_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 extension RealityFoundation.AudioResource.InputMode : Swift.Hashable {}
 @available(macOS 11.0, iOS 14.0, macCatalyst 14.0, *)
 @_originallyDefinedIn(module: "RealityKit", macOS 12.0)

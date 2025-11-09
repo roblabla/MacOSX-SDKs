@@ -348,9 +348,9 @@ The built-in SmarCard reader driver is prefered by the System and it is possible
 sudo defaults write /Library/Preferences/com.apple.security.smartcard useIFDCCID -bool yes
 .Ed
 .Pp
-To disable using alternative frequency and baud-rate by setting the global preference
+To enable using alternative frequency and baud-rate by setting the global preference
 .Bd -literal -offset indent
-sudo defaults write /Library/Preferences/com.apple.security.smartcard AllowAlternativeFiDi -bool no
+sudo defaults write /Library/Preferences/com.apple.security.smartcard AllowAlternativeFiDi -bool YES
 .Ed
 .Pp
 .Sh SMART CARD APDU LOGGING

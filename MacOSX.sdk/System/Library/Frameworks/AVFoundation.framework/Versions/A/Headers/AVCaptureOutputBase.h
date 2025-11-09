@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 
     Concrete AVCaptureOutput instances can be added to an AVCaptureSession using the -[AVCaptureSession addOutput:] and -[AVCaptureSession addOutputWithNoConnections:] methods.
  */
-API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVCaptureOutput : NSObject
 {
 @private
@@ -48,7 +48,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     The value of this property is an NSArray of AVCaptureConnection objects, each describing the mapping between the receiver and the AVCaptureInputPorts of one or more AVCaptureInputs.
  */
-@property(nonatomic, readonly) NSArray<AVCaptureConnection *> *connections;
+@property(nonatomic, readonly) NSArray<AVCaptureConnection *> *connections API_UNAVAILABLE(visionos);
 
 /*!
  @method connectionWithMediaType:
@@ -61,7 +61,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     This convenience method returns the first AVCaptureConnection in the receiver's connections array that has an AVCaptureInputPort of the specified mediaType. If no connection with the specified mediaType is found, nil is returned.
  */
-- (nullable AVCaptureConnection *)connectionWithMediaType:(AVMediaType)mediaType API_AVAILABLE(ios(5.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos);
+- (nullable AVCaptureConnection *)connectionWithMediaType:(AVMediaType)mediaType API_AVAILABLE(ios(5.0), macCatalyst(14.0), tvos(17.0), visionos(1.0));
 
 /*!
  @method transformedMetadataObjectForMetadataObject:connection:
@@ -136,7 +136,7 @@ typedef NS_ENUM(NSInteger, AVCaptureOutputDataDroppedReason) {
     AVCaptureOutputDataDroppedReasonLateData      = 1,
     AVCaptureOutputDataDroppedReasonOutOfBuffers  = 2,
     AVCaptureOutputDataDroppedReasonDiscontinuity = 3,
-} API_AVAILABLE(macos(10.15), ios(11.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+} API_AVAILABLE(macos(10.15), ios(11.0), macCatalyst(14.0), tvos(17.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 NS_ASSUME_NONNULL_END
 

@@ -87,13 +87,14 @@ exports:
                        _kITLibraryRestrictionRestrictMusicVideos, _kITLibraryRestrictionRestrictTVShows, 
                        _kITLibraryRestrictionTVShowsLimit ]
     objc-classes:    [ AMPMPPlayerClient, AMPMPPlayerControllerNowPlaying, AMPMPPlayerControllerNowPlayingTimeSnapshot, 
-                       ITLibAlbum, ITLibArtist, ITLibArtwork, ITLibGenre, ITLibMediaEntity, 
-                       ITLibMediaItem, ITLibMediaItemVideoInfo, ITLibModelAlbumKind, 
-                       ITLibModelArtistKind, ITLibModelGenreKind, ITLibModelKind, 
-                       ITLibModelPlaylistKind, ITLibModelSongKind, ITLibPlaylist, 
-                       ITLibPodcastFeed, ITLibRequest, ITLibRequestContainer, ITLibRequestPropertyFilter, 
-                       ITLibRequestSortDescriptor, ITLibResponse, ITLibSearchRequest, 
-                       ITLibSearchResponse, ITLibSearchScope, ITLibrary ]
+                       ITLibAlbum, ITLibArtist, ITLibArtwork, ITLibGenre, ITLibIdentifierSet, 
+                       ITLibMediaEntity, ITLibMediaItem, ITLibMediaItemVideoInfo, 
+                       ITLibModelAlbumKind, ITLibModelArtistKind, ITLibModelGenreKind, 
+                       ITLibModelKind, ITLibModelPlaylistKind, ITLibModelSongKind, 
+                       ITLibPlaylist, ITLibPodcastFeed, ITLibRequest, ITLibRequestContainer, 
+                       ITLibRequestPropertyFilter, ITLibRequestSortDescriptor, ITLibResponse, 
+                       ITLibSearchRequest, ITLibSearchResponse, ITLibSearchScope, 
+                       ITLibrary ]
     objc-ivars:      [ ITLibAlbum._albumArtist, ITLibAlbum._compilation, ITLibAlbum._discCount, 
                        ITLibAlbum._discNumber, ITLibAlbum._gapless, ITLibAlbum._persistentID, 
                        ITLibAlbum._rating, ITLibAlbum._ratingComputed, ITLibAlbum._sortAlbumArtist, 

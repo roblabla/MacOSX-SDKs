@@ -17,7 +17,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NS_ENUM(NSInteger, UIImagePickerControllerSourceType) {
     UIImagePickerControllerSourceTypePhotoLibrary API_DEPRECATED("Will be removed in a future release, use PHPicker.", ios(2, API_TO_BE_DEPRECATED), visionos(1.0, API_TO_BE_DEPRECATED)),
-    UIImagePickerControllerSourceTypeCamera,
+    UIImagePickerControllerSourceTypeCamera API_UNAVAILABLE(visionos),
     UIImagePickerControllerSourceTypeSavedPhotosAlbum API_DEPRECATED("Will be removed in a future release, use PHPicker.", ios(2, API_TO_BE_DEPRECATED), visionos(1.0, API_TO_BE_DEPRECATED)),
 } API_UNAVAILABLE(tvos);
 
@@ -28,23 +28,23 @@ typedef NS_ENUM(NSInteger, UIImagePickerControllerQualityType) {
     UIImagePickerControllerQualityType640x480 API_AVAILABLE(ios(4.0)) = 3,    // VGA quality
     UIImagePickerControllerQualityTypeIFrame1280x720 API_AVAILABLE(ios(5.0)) = 4,
     UIImagePickerControllerQualityTypeIFrame960x540 API_AVAILABLE(ios(5.0)) = 5,
-} API_UNAVAILABLE(tvos);
+} API_UNAVAILABLE(tvos, visionos);
 
 typedef NS_ENUM(NSInteger, UIImagePickerControllerCameraCaptureMode) {
     UIImagePickerControllerCameraCaptureModePhoto,
     UIImagePickerControllerCameraCaptureModeVideo
-} API_UNAVAILABLE(tvos);
+} API_UNAVAILABLE(tvos, visionos);
 
 typedef NS_ENUM(NSInteger, UIImagePickerControllerCameraDevice) {
     UIImagePickerControllerCameraDeviceRear,
     UIImagePickerControllerCameraDeviceFront
-} API_UNAVAILABLE(tvos);
+} API_UNAVAILABLE(tvos, visionos);
 
 typedef NS_ENUM(NSInteger, UIImagePickerControllerCameraFlashMode) {
     UIImagePickerControllerCameraFlashModeOff  = -1,
     UIImagePickerControllerCameraFlashModeAuto = 0,
     UIImagePickerControllerCameraFlashModeOn   = 1
-} API_UNAVAILABLE(tvos);
+} API_UNAVAILABLE(tvos, visionos);
 
 typedef NS_ENUM(NSInteger, UIImagePickerControllerImageURLExportPreset) {
     UIImagePickerControllerImageURLExportPresetCompatible = 0,
@@ -71,9 +71,9 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 + (BOOL)isSourceTypeAvailable:(UIImagePickerControllerSourceType)sourceType;                 // returns YES if source is available (i.e. camera present)
 + (nullable NSArray<NSString *> *)availableMediaTypesForSourceType:(UIImagePickerControllerSourceType)sourceType; // returns array of available media types (i.e. kUTTypeImage)
 
-+ (BOOL)isCameraDeviceAvailable:(UIImagePickerControllerCameraDevice)cameraDevice                   API_AVAILABLE(ios(4.0)); // returns YES if camera device is available 
-+ (BOOL)isFlashAvailableForCameraDevice:(UIImagePickerControllerCameraDevice)cameraDevice           API_AVAILABLE(ios(4.0)); // returns YES if camera device supports flash and torch.
-+ (nullable NSArray<NSNumber *> *)availableCaptureModesForCameraDevice:(UIImagePickerControllerCameraDevice)cameraDevice API_AVAILABLE(ios(4.0)); // returns array of NSNumbers (UIImagePickerControllerCameraCaptureMode)
++ (BOOL)isCameraDeviceAvailable:(UIImagePickerControllerCameraDevice)cameraDevice                   API_UNAVAILABLE(visionos) API_AVAILABLE(ios(4.0)); // returns YES if camera device is available
++ (BOOL)isFlashAvailableForCameraDevice:(UIImagePickerControllerCameraDevice)cameraDevice           API_UNAVAILABLE(visionos) API_AVAILABLE(ios(4.0)); // returns YES if camera device supports flash and torch.
++ (nullable NSArray<NSNumber *> *)availableCaptureModesForCameraDevice:(UIImagePickerControllerCameraDevice)cameraDevice API_UNAVAILABLE(visionos) API_AVAILABLE(ios(4.0)); // returns array of NSNumbers (UIImagePickerControllerCameraCaptureMode)
 
 @property(nullable,nonatomic,weak)      id <UINavigationControllerDelegate, UIImagePickerControllerDelegate> delegate;
 
@@ -85,26 +85,26 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 @property(nonatomic)           UIImagePickerControllerImageURLExportPreset imageExportPreset API_DEPRECATED("Will be removed in a future release, use PHPicker.", ios(11.0, API_TO_BE_DEPRECATED), visionos(1.0, API_TO_BE_DEPRECATED));  // default value is UIImagePickerControllerImageExportPresetCompatible.
 
 // video properties apply only if mediaTypes includes kUTTypeMovie
-@property(nonatomic)           NSTimeInterval                        videoMaximumDuration API_AVAILABLE(ios(3.1)); // default value is 10 minutes.
-@property(nonatomic)           UIImagePickerControllerQualityType    videoQuality API_AVAILABLE(ios(3.1));         // default value is UIImagePickerControllerQualityTypeMedium. If the cameraDevice does not support the videoQuality, it will use the default value.
+@property(nonatomic)           NSTimeInterval                        videoMaximumDuration API_AVAILABLE(ios(3.1)) API_UNAVAILABLE(visionos); // default value is 10 minutes.
+@property(nonatomic)           UIImagePickerControllerQualityType    videoQuality API_AVAILABLE(ios(3.1)) API_UNAVAILABLE(visionos);         // default value is UIImagePickerControllerQualityTypeMedium. If the cameraDevice does not support the videoQuality, it will use the default value.
 @property(nonatomic, copy)     NSString                              *videoExportPreset API_DEPRECATED("Will be removed in a future release, use PHPicker.", ios(11.0, API_TO_BE_DEPRECATED), visionos(1.0, API_TO_BE_DEPRECATED));  // videoExportPreset can be used to specify the transcoding quality for videos (via a AVAssetExportPreset* string). If the value is nil (the default) then the transcodeQuality is determined by videoQuality instead. Not valid if the source type is UIImagePickerControllerSourceTypeCamera
 
 
 // camera additions available only if sourceType is UIImagePickerControllerSourceTypeCamera.
-@property(nonatomic)           BOOL                                  showsCameraControls API_AVAILABLE(ios(3.1));   // set to NO to hide all standard camera UI. default is YES
-@property(nullable, nonatomic,strong) __kindof UIView                *cameraOverlayView  API_AVAILABLE(ios(3.1));   // set a view to overlay the preview view.
-@property(nonatomic)           CGAffineTransform                     cameraViewTransform API_AVAILABLE(ios(3.1));   // set the transform of the preview view.
+@property(nonatomic)           BOOL                                  showsCameraControls API_AVAILABLE(ios(3.1)) API_UNAVAILABLE(visionos);   // set to NO to hide all standard camera UI. default is YES
+@property(nullable, nonatomic,strong) __kindof UIView                *cameraOverlayView  API_AVAILABLE(ios(3.1)) API_UNAVAILABLE(visionos);   // set a view to overlay the preview view.
+@property(nonatomic)           CGAffineTransform                     cameraViewTransform API_AVAILABLE(ios(3.1)) API_UNAVAILABLE(visionos);   // set the transform of the preview view.
 
-- (void)takePicture API_AVAILABLE(ios(3.1));                                                   
+- (void)takePicture API_AVAILABLE(ios(3.1)) API_UNAVAILABLE(visionos);
 // programmatically initiates still image capture. ignored if image capture is in-flight.
 // clients can initiate additional captures after receiving -imagePickerController:didFinishPickingMediaWithInfo: delegate callback
 
-- (BOOL)startVideoCapture API_AVAILABLE(ios(4.0));
-- (void)stopVideoCapture  API_AVAILABLE(ios(4.0));
+- (BOOL)startVideoCapture API_AVAILABLE(ios(4.0)) API_UNAVAILABLE(visionos);
+- (void)stopVideoCapture  API_AVAILABLE(ios(4.0)) API_UNAVAILABLE(visionos);
 
-@property(nonatomic) UIImagePickerControllerCameraCaptureMode cameraCaptureMode API_AVAILABLE(ios(4.0)); // default is UIImagePickerControllerCameraCaptureModePhoto
-@property(nonatomic) UIImagePickerControllerCameraDevice      cameraDevice      API_AVAILABLE(ios(4.0)); // default is UIImagePickerControllerCameraDeviceRear
-@property(nonatomic) UIImagePickerControllerCameraFlashMode   cameraFlashMode   API_AVAILABLE(ios(4.0)); // default is UIImagePickerControllerCameraFlashModeAuto. 
+@property(nonatomic) UIImagePickerControllerCameraCaptureMode cameraCaptureMode API_UNAVAILABLE(visionos) API_AVAILABLE(ios(4.0)); // default is UIImagePickerControllerCameraCaptureModePhoto
+@property(nonatomic) UIImagePickerControllerCameraDevice      cameraDevice      API_UNAVAILABLE(visionos) API_AVAILABLE(ios(4.0)); // default is UIImagePickerControllerCameraDeviceRear
+@property(nonatomic) UIImagePickerControllerCameraFlashMode   cameraFlashMode   API_UNAVAILABLE(visionos) API_AVAILABLE(ios(4.0)); // default is UIImagePickerControllerCameraFlashModeAuto.
 // cameraFlashMode controls the still-image flash when cameraCaptureMode is Photo. cameraFlashMode controls the video torch when cameraCaptureMode is Video.
 
 @end

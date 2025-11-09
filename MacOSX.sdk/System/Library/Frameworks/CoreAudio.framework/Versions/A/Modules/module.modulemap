@@ -15,6 +15,8 @@ framework module CoreAudio
 	{
 		header "AudioHardware.h"
 		header "AudioHardwareBase.h"
+		header "AudioHardwareTapping.h"
+		header "CATapDescription.h"
 		textual header "AudioHardwareDeprecated.h"
 		export *
 	}

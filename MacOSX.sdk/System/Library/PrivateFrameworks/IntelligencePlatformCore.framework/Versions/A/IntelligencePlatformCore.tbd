@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/IntelligencePlatformCore.framework/Versions/A/IntelligencePlatformCore'
-current-version: 75.0.2
+current-version: 75.3.6
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -1034,6 +1034,8 @@ exports:
                        '_$s24IntelligencePlatformCore13ConfigurationV12isKTSEnabledSbvg', 
                        '_$s24IntelligencePlatformCore13ConfigurationV12isKTSEnabledSbvpMV', 
                        '_$s24IntelligencePlatformCore13ConfigurationV13isFlagEnabledySbAA17OptionConvertible_pF', 
+                       '_$s24IntelligencePlatformCore13ConfigurationV17isPowerLogEnabledSbvg', 
+                       '_$s24IntelligencePlatformCore13ConfigurationV17isPowerLogEnabledSbvpMV', 
                        '_$s24IntelligencePlatformCore13ConfigurationV19isAllSourcesEnabledSbvg', 
                        '_$s24IntelligencePlatformCore13ConfigurationV19isAllSourcesEnabledSbvpMV', 
                        '_$s24IntelligencePlatformCore13ConfigurationV21intelligenceplatformdACvgZ', 
@@ -4086,6 +4088,7 @@ exports:
                        '_$s24IntelligencePlatformCore7OptionsV28enableGlobalKnowledgeServiceACvgZ', 
                        '_$s24IntelligencePlatformCore7OptionsV29assetRegistryBackendInProcessACvgZ', 
                        '_$s24IntelligencePlatformCore7OptionsV29enableLifeEventAllDataSourcesACvgZ', 
+                       '_$s24IntelligencePlatformCore7OptionsV29enablePowerLogInstrumentationACvgZ', 
                        '_$s24IntelligencePlatformCore7OptionsV31enableGlobalKnowledgePrototypesACvgZ', 
                        '_$s24IntelligencePlatformCore7OptionsV32enableLongitudinalDataCollectionACvgZ', 
                        '_$s24IntelligencePlatformCore7OptionsV32inferenceSupportBackendInProcessACvgZ', 
@@ -4144,6 +4147,7 @@ exports:
                        '_$s24IntelligencePlatformCore8FeaturesO11FeatureFlagO7features12StaticStringVvpMV', 
                        '_$s24IntelligencePlatformCore8FeaturesO11FeatureFlagO8allCasesSayAEGvgZ', 
                        '_$s24IntelligencePlatformCore8FeaturesO11FeatureFlagO8asOptionAA7OptionsVyF', 
+                       '_$s24IntelligencePlatformCore8FeaturesO11FeatureFlagO8powerLogyA2EmFWC', 
                        '_$s24IntelligencePlatformCore8FeaturesO11FeatureFlagO8rawValueAESgSS_tcfC', 
                        '_$s24IntelligencePlatformCore8FeaturesO11FeatureFlagO8rawValueSSvg', 
                        '_$s24IntelligencePlatformCore8FeaturesO11FeatureFlagO8rawValueSSvpMV', 
@@ -4169,6 +4173,14 @@ exports:
                        '_$s24IntelligencePlatformCore8PipelineC11StatusStoreVN', 
                        '_$s24IntelligencePlatformCore8PipelineC14runDeltaUpdate6reason6sourceySo23GDPipelineRunningReasonV_AA6SourceVtYaKF', 
                        '_$s24IntelligencePlatformCore8PipelineC14runDeltaUpdate6reason6sourceySo23GDPipelineRunningReasonV_AA6SourceVtYaKFTu', 
+                       '_$s24IntelligencePlatformCore8PipelineC17runCNContactDelta6reasonySo23GDPipelineRunningReasonV_tYaKF', 
+                       '_$s24IntelligencePlatformCore8PipelineC17runCNContactDelta6reasonySo23GDPipelineRunningReasonV_tYaKFTu', 
+                       '_$s24IntelligencePlatformCore8PipelineC18runAppleMusicDelta6reasonySo23GDPipelineRunningReasonV_tYaKF', 
+                       '_$s24IntelligencePlatformCore8PipelineC18runAppleMusicDelta6reasonySo23GDPipelineRunningReasonV_tYaKFTu', 
+                       '_$s24IntelligencePlatformCore8PipelineC18runLifeEventsDelta6reasonySo23GDPipelineRunningReasonV_tYaKF', 
+                       '_$s24IntelligencePlatformCore8PipelineC18runLifeEventsDelta6reasonySo23GDPipelineRunningReasonV_tYaKFTu', 
+                       '_$s24IntelligencePlatformCore8PipelineC21runEntityTaggingDelta6reasonySo23GDPipelineRunningReasonV_tYaKF', 
+                       '_$s24IntelligencePlatformCore8PipelineC21runEntityTaggingDelta6reasonySo23GDPipelineRunningReasonV_tYaKFTu', 
                        '_$s24IntelligencePlatformCore8PipelineCMa', '_$s24IntelligencePlatformCore8PipelineCMm', 
                        '_$s24IntelligencePlatformCore8PipelineCMn', '_$s24IntelligencePlatformCore8PipelineCMo', 
                        '_$s24IntelligencePlatformCore8PipelineCMu', '_$s24IntelligencePlatformCore8PipelineCN', 

@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.9 (swiftlang-5.9.0.123.203 clang-1500.0.37.1)
-// swift-module-flags: -target x86_64-apple-ios17.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name _MapKit_SwiftUI
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 2417.20.7.28.1
+// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.11 clang-1500.1.0.2.2)
+// swift-module-flags: -target x86_64-apple-ios17.2-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name _MapKit_SwiftUI
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 2417.22.9.28.10
 import CoreLocation
 import Foundation
 @_exported import MapKit
@@ -70,31 +70,6 @@ public struct EmptyMapContent : _MapKit_SwiftUI.MapContent {
   public init()
   public static func _makeMapContent(content: SwiftUI._GraphValue<_MapKit_SwiftUI.EmptyMapContent>, inputs: _MapKit_SwiftUI._MapContentInputs) -> _MapKit_SwiftUI._MapContentOutputs
   public typealias Body = Swift.Never
-}
-@available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
-@_functionBuilder public struct MapContentBuilder {
-  @_alwaysEmitIntoClient public static func buildExpression<Content>(_ content: Content) -> Content where Content : _MapKit_SwiftUI.MapContent {
-       content
-    }
-  @_alwaysEmitIntoClient public static func buildBlock() -> _MapKit_SwiftUI.EmptyMapContent {
-        EmptyMapContent()
-    }
-  @_alwaysEmitIntoClient public static func buildBlock<C>(_ content: C) -> C where C : _MapKit_SwiftUI.MapContent {
-        content
-    }
-  @_alwaysEmitIntoClient public static func buildIf<Content>(_ content: Content?) -> Content? where Content : _MapKit_SwiftUI.MapContent {
-        content
-    }
-  @_alwaysEmitIntoClient public static func buildEither<TrueContent, FalseContent>(first: TrueContent) -> _MapKit_SwiftUI._ConditionalMapContent<TrueContent, FalseContent> where TrueContent : _MapKit_SwiftUI.MapContent, FalseContent : _MapKit_SwiftUI.MapContent {
-        _ConditionalMapContent(trueContent: first, falseType: FalseContent.self)
-    }
-  @_alwaysEmitIntoClient public static func buildEither<TrueContent, FalseContent>(second: FalseContent) -> _MapKit_SwiftUI._ConditionalMapContent<TrueContent, FalseContent> where TrueContent : _MapKit_SwiftUI.MapContent, FalseContent : _MapKit_SwiftUI.MapContent {
-        _ConditionalMapContent(falseContent: second, trueType: TrueContent.self)
-    }
-  @_alwaysEmitIntoClient public static func buildLimitedAvailability<Content>(_ content: Content) -> some _MapKit_SwiftUI.MapContent where Content : _MapKit_SwiftUI.MapContent {
-        content
-    }
-  
 }
 @available(iOS, introduced: 14.0, deprecated: 17.0, message: "Use Map initializers that take a `position` parameter along with\nMapCameraPosition.userLocation to configure the user location\ntracking behavior.")
 @available(macOS, introduced: 11.0, deprecated: 14.0, message: "Use Map initializers that take a `position` parameter along with\nMapCameraPosition.userLocation to configure the user location\ntracking behavior.")
@@ -743,58 +718,34 @@ extension _MapKit_SwiftUI.MapPolyline : _MapKit_SwiftUI.MapContent {
   public typealias Body = Swift.Never
 }
 @available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
-extension _MapKit_SwiftUI.MapContentBuilder {
-  @_alwaysEmitIntoClient public static func buildBlock<C0, C1>(_ c0: C0, _ c1: C1) -> _MapKit_SwiftUI.TupleMapContent<(C0, C1)> where C0 : _MapKit_SwiftUI.MapContent, C1 : _MapKit_SwiftUI.MapContent {
-        return .init((c0, c1))
+@_functionBuilder public struct MapContentBuilder {
+  @_alwaysEmitIntoClient public static func buildExpression<Content>(_ content: Content) -> Content where Content : _MapKit_SwiftUI.MapContent {
+       content
     }
-}
-@available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
-extension _MapKit_SwiftUI.MapContentBuilder {
-  @_alwaysEmitIntoClient public static func buildBlock<C0, C1, C2>(_ c0: C0, _ c1: C1, _ c2: C2) -> _MapKit_SwiftUI.TupleMapContent<(C0, C1, C2)> where C0 : _MapKit_SwiftUI.MapContent, C1 : _MapKit_SwiftUI.MapContent, C2 : _MapKit_SwiftUI.MapContent {
-        return .init((c0, c1, c2))
+  @_alwaysEmitIntoClient public static func buildBlock() -> _MapKit_SwiftUI.EmptyMapContent {
+        EmptyMapContent()
     }
-}
-@available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
-extension _MapKit_SwiftUI.MapContentBuilder {
-  @_alwaysEmitIntoClient public static func buildBlock<C0, C1, C2, C3>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3) -> _MapKit_SwiftUI.TupleMapContent<(C0, C1, C2, C3)> where C0 : _MapKit_SwiftUI.MapContent, C1 : _MapKit_SwiftUI.MapContent, C2 : _MapKit_SwiftUI.MapContent, C3 : _MapKit_SwiftUI.MapContent {
-        return .init((c0, c1, c2, c3))
+  @_alwaysEmitIntoClient public static func buildBlock<C>(_ content: C) -> C where C : _MapKit_SwiftUI.MapContent {
+        content
     }
-}
-@available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
-extension _MapKit_SwiftUI.MapContentBuilder {
-  @_alwaysEmitIntoClient public static func buildBlock<C0, C1, C2, C3, C4>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4) -> _MapKit_SwiftUI.TupleMapContent<(C0, C1, C2, C3, C4)> where C0 : _MapKit_SwiftUI.MapContent, C1 : _MapKit_SwiftUI.MapContent, C2 : _MapKit_SwiftUI.MapContent, C3 : _MapKit_SwiftUI.MapContent, C4 : _MapKit_SwiftUI.MapContent {
-        return .init((c0, c1, c2, c3, c4))
+  @_alwaysEmitIntoClient public static func buildIf<Content>(_ content: Content?) -> Content? where Content : _MapKit_SwiftUI.MapContent {
+        content
     }
-}
-@available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
-extension _MapKit_SwiftUI.MapContentBuilder {
-  @_alwaysEmitIntoClient public static func buildBlock<C0, C1, C2, C3, C4, C5>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5) -> _MapKit_SwiftUI.TupleMapContent<(C0, C1, C2, C3, C4, C5)> where C0 : _MapKit_SwiftUI.MapContent, C1 : _MapKit_SwiftUI.MapContent, C2 : _MapKit_SwiftUI.MapContent, C3 : _MapKit_SwiftUI.MapContent, C4 : _MapKit_SwiftUI.MapContent, C5 : _MapKit_SwiftUI.MapContent {
-        return .init((c0, c1, c2, c3, c4, c5))
+  @_alwaysEmitIntoClient public static func buildEither<TrueContent, FalseContent>(first: TrueContent) -> _MapKit_SwiftUI._ConditionalMapContent<TrueContent, FalseContent> where TrueContent : _MapKit_SwiftUI.MapContent, FalseContent : _MapKit_SwiftUI.MapContent {
+        _ConditionalMapContent(trueContent: first, falseType: FalseContent.self)
     }
-}
-@available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
-extension _MapKit_SwiftUI.MapContentBuilder {
-  @_alwaysEmitIntoClient public static func buildBlock<C0, C1, C2, C3, C4, C5, C6>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6) -> _MapKit_SwiftUI.TupleMapContent<(C0, C1, C2, C3, C4, C5, C6)> where C0 : _MapKit_SwiftUI.MapContent, C1 : _MapKit_SwiftUI.MapContent, C2 : _MapKit_SwiftUI.MapContent, C3 : _MapKit_SwiftUI.MapContent, C4 : _MapKit_SwiftUI.MapContent, C5 : _MapKit_SwiftUI.MapContent, C6 : _MapKit_SwiftUI.MapContent {
-        return .init((c0, c1, c2, c3, c4, c5, c6))
+  @_alwaysEmitIntoClient public static func buildEither<TrueContent, FalseContent>(second: FalseContent) -> _MapKit_SwiftUI._ConditionalMapContent<TrueContent, FalseContent> where TrueContent : _MapKit_SwiftUI.MapContent, FalseContent : _MapKit_SwiftUI.MapContent {
+        _ConditionalMapContent(falseContent: second, trueType: TrueContent.self)
     }
-}
-@available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
-extension _MapKit_SwiftUI.MapContentBuilder {
-  @_alwaysEmitIntoClient public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7) -> _MapKit_SwiftUI.TupleMapContent<(C0, C1, C2, C3, C4, C5, C6, C7)> where C0 : _MapKit_SwiftUI.MapContent, C1 : _MapKit_SwiftUI.MapContent, C2 : _MapKit_SwiftUI.MapContent, C3 : _MapKit_SwiftUI.MapContent, C4 : _MapKit_SwiftUI.MapContent, C5 : _MapKit_SwiftUI.MapContent, C6 : _MapKit_SwiftUI.MapContent, C7 : _MapKit_SwiftUI.MapContent {
-        return .init((c0, c1, c2, c3, c4, c5, c6, c7))
+  @_alwaysEmitIntoClient public static func buildLimitedAvailability<Content>(_ content: Content) -> some _MapKit_SwiftUI.MapContent where Content : _MapKit_SwiftUI.MapContent {
+        content
     }
-}
-@available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
-extension _MapKit_SwiftUI.MapContentBuilder {
-  @_alwaysEmitIntoClient public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7, C8>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8) -> _MapKit_SwiftUI.TupleMapContent<(C0, C1, C2, C3, C4, C5, C6, C7, C8)> where C0 : _MapKit_SwiftUI.MapContent, C1 : _MapKit_SwiftUI.MapContent, C2 : _MapKit_SwiftUI.MapContent, C3 : _MapKit_SwiftUI.MapContent, C4 : _MapKit_SwiftUI.MapContent, C5 : _MapKit_SwiftUI.MapContent, C6 : _MapKit_SwiftUI.MapContent, C7 : _MapKit_SwiftUI.MapContent, C8 : _MapKit_SwiftUI.MapContent {
-        return .init((c0, c1, c2, c3, c4, c5, c6, c7, c8))
+  
+  #if compiler(>=5.3) && $ParameterPacks
+  @_disfavoredOverload @_alwaysEmitIntoClient public static func buildBlock<each Content>(_ content: repeat each Content) -> _MapKit_SwiftUI.TupleMapContent<(repeat each Content)> where repeat each Content : _MapKit_SwiftUI.MapContent {
+        TupleMapContent((repeat each content))
     }
-}
-@available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
-extension _MapKit_SwiftUI.MapContentBuilder {
-  @_alwaysEmitIntoClient public static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7, C8, C9>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8, _ c9: C9) -> _MapKit_SwiftUI.TupleMapContent<(C0, C1, C2, C3, C4, C5, C6, C7, C8, C9)> where C0 : _MapKit_SwiftUI.MapContent, C1 : _MapKit_SwiftUI.MapContent, C2 : _MapKit_SwiftUI.MapContent, C3 : _MapKit_SwiftUI.MapContent, C4 : _MapKit_SwiftUI.MapContent, C5 : _MapKit_SwiftUI.MapContent, C6 : _MapKit_SwiftUI.MapContent, C7 : _MapKit_SwiftUI.MapContent, C8 : _MapKit_SwiftUI.MapContent, C9 : _MapKit_SwiftUI.MapContent {
-        return .init((c0, c1, c2, c3, c4, c5, c6, c7, c8, c9))
-    }
+  #endif
 }
 @available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 extension SwiftUI.View {

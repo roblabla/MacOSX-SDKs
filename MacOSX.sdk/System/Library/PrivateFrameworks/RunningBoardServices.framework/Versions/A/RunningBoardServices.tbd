@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/RunningBoardServices.framework/Versions/A/RunningBoardServices'
-current-version: 858.0.9
+current-version: 858.60.5
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -28,16 +28,17 @@ exports:
                        _RBSDeserializeStringFromXPCDictionaryWithKey, _RBSDictionaryForKey, 
                        _RBSDispatchAsyncWithQoS, _RBSDispatchQueueAssert, _RBSEndowmentDecode, 
                        _RBSEndowmentEncode, _RBSEndowmentRootEnvironment, _RBSExecutablePathForBundlePath, 
-                       _RBSExecutablePathForPID, _RBSInvalidRealAuditToken, _RBSIsBinaryCatalystOriOS, 
-                       _RBSLaunchRequestErrorExitContextKey, _RBSMachAbsoluteTime, 
-                       _RBSMachPortIsType, _RBSMachPortType, _RBSMemoryLimitActive, 
-                       _RBSMemoryLimitInactive, _RBSNumberForKey, _RBSPIDExists, 
-                       _RBSPIDIsBeingDebugged, _RBSPathForCurrentUserDirectory, _RBSPathForSystemDirectory, 
-                       _RBSPreventLaunchStateIsPrevented, _RBSProcessStateAssertionDomainNames, 
-                       _RBSProcessStateAssertionExplanation, _RBSProcessStateAssertionReason, 
-                       _RBSProcessStateAssertionRunningReason, _RBSProcessTimeLimitationNone, 
-                       _RBSRealAuditTokenValid, _RBSRequestErrorDomain, _RBSResourceViolationServiceName, 
-                       _RBSRoleFromDarwinRole, _RBSSandboxCanAccessMachService, _RBSSerializeCFValueToXPCDictionaryWithKey, 
+                       _RBSExecutablePathForPID, _RBSExtensionPointFromBundleDict, 
+                       _RBSInvalidRealAuditToken, _RBSIsBinaryCatalystOriOS, _RBSLaunchRequestErrorExitContextKey, 
+                       _RBSMachAbsoluteTime, _RBSMachPortIsType, _RBSMachPortType, 
+                       _RBSMemoryLimitActive, _RBSMemoryLimitInactive, _RBSNumberForKey, 
+                       _RBSPIDExists, _RBSPIDIsBeingDebugged, _RBSPathForCurrentUserDirectory, 
+                       _RBSPathForSystemDirectory, _RBSPreventLaunchStateIsPrevented, 
+                       _RBSProcessStateAssertionDomainNames, _RBSProcessStateAssertionExplanation, 
+                       _RBSProcessStateAssertionReason, _RBSProcessStateAssertionRunningReason, 
+                       _RBSProcessTimeLimitationNone, _RBSRealAuditTokenValid, _RBSRequestErrorDomain, 
+                       _RBSResourceViolationServiceName, _RBSRoleFromDarwinRole, 
+                       _RBSSandboxCanAccessMachService, _RBSSerializeCFValueToXPCDictionaryWithKey, 
                        _RBSSerializeDataToXPCDictionaryWithKey, _RBSSerializeDoubleToXPCDictionaryWithKey, 
                        _RBSSerializeNSSecureEncodableObjectToXPCDictionaryWithKey, 
                        _RBSSerializeStringToXPCDictionaryWithKey, _RBSServiceErrorDomain, 

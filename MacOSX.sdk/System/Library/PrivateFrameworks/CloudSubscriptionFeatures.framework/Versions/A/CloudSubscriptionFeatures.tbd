@@ -129,6 +129,7 @@ exports:
                        '_$sSo13FeatureStatusVSE25CloudSubscriptionFeaturesMc', '_$sSo13FeatureStatusVSe25CloudSubscriptionFeaturesMc', 
                        '_$sSo13FeatureStatusVs23CustomStringConvertible25CloudSubscriptionFeaturesMc', 
                        '_$sSo17CSFFeatureManagerC25CloudSubscriptionFeaturesE02isC10SubscriberSbyFZ', 
+                       '_$sSo17CSFFeatureManagerC25CloudSubscriptionFeaturesE11expireCache8defaults6domainySo14NSUserDefaultsC_SStFZ', 
                        '_$sSo17CSFFeatureManagerC25CloudSubscriptionFeaturesE14requestFeature2id10completionySS_ySo0cG6ObjectCSg_s5Error_pSgtctFZ', 
                        '_$sSo17CSFFeatureManagerC25CloudSubscriptionFeaturesE14requestFeature2id10completionySS_ys6ResultOyAC0cG0Cs5Error_pGctFZ', 
                        '_$sSo17CSFFeatureManagerC25CloudSubscriptionFeaturesE21getFeatureEligibility03forG6WithId06bundleK010completionySS_SSySb_s5Error_pSgtctFZ', 

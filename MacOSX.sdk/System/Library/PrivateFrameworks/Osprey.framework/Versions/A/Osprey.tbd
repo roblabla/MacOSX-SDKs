@@ -6,7 +6,8 @@ exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     objc-classes:    [ OspreyChannel, OspreyConnectionConfiguration, OspreyConnectionMetrics, 
                        OspreyConnectionPool, OspreyConnectionPreferences, OspreyGRPCStreamingContext, 
-                       OspreyKeychain, OspreyMessageProducer, OspreyMethodCall, OspreyMutableRequest, 
-                       OspreyPreferences, OspreyRequest, OspreyService, OspreyServiceConfiguration, 
+                       OspreyKeychain, OspreyMescalSession, OspreyMessageProducer, 
+                       OspreyMethodCall, OspreyMutableRequest, OspreyPreferences, 
+                       OspreyRequest, OspreyService, OspreyServiceConfiguration, 
                        OspreyUnaryMethodCall ]
 ...

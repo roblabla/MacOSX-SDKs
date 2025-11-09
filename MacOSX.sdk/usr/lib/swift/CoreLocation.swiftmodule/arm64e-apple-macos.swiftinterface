@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.9 (swiftlang-5.9.0.123.203 clang-1500.0.37.1)
-// swift-module-flags: -target arm64e-apple-macos14.0 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreLocation -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name CoreLocation
+// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.11 clang-1500.1.0.2.2)
+// swift-module-flags: -target arm64e-apple-macos14.2 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreLocation -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name CoreLocation
 // swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 36
 @_exported import CoreLocation
 import Foundation
@@ -13,7 +13,7 @@ import os
 @available(iOS 13.0, macOS 10.15, *)
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 extension CoreLocation.CLBeaconIdentityConstraint {
   public var major: Swift.UInt16? {
     get
@@ -102,7 +102,7 @@ extension CoreLocation.CLMonitor {
 }
 #endif
 extension CoreLocation.CLError {
-  @available(xrOS, unavailable)
+  @available(visionOS, unavailable)
   public var alternateRegion: CoreLocation.CLRegion? {
     get
   }

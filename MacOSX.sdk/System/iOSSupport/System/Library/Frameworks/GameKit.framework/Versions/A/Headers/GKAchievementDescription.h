@@ -46,14 +46,14 @@ NS_ASSUME_NONNULL_END
 #if TARGET_OS_IPHONE
 
 // Image for completed achievement. Not valid until loadImage: has completed. Deprecated -- use loadImageWithCompletionHandler: instead.
-@property(nonatomic, retain, readonly, nullable) UIImage *image API_DEPRECATED_WITH_REPLACEMENT("-loadImageWithCompletionHandler:", ios(4.1,7.0), macos(10.8,10.10));
+@property(nonatomic, retain, readonly, nullable) UIImage *image API_DEPRECATED_WITH_REPLACEMENT("-loadImageWithCompletionHandler:", ios(4.1,7.0), macos(10.8,10.10), tvos(9.0,17.2));
 
 // Asynchronously load the image. Error will be nil on success.
 - (void)loadImageWithCompletionHandler:(void(^ __nullable)(UIImage * __nullable image, NSError * __nullable error))completionHandler;
 #else
 
 // Image for completed achievement. Not valid until loadImage: has completed. Deprecated -- use loadImageWithCompletionHandler: instead.
-@property(atomic, retain, readonly, nullable) NSImage *image __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_8, __MAC_NA, __IPHONE_4_1, __IPHONE_7_0);
+@property(atomic, retain, readonly, nullable) NSImage *image API_DEPRECATED_WITH_REPLACEMENT("-loadImageWithCompletionHandler:", macos(10.8,14.2));
 
 // Asynchronously load the image. Error will be nil on success.
 - (void)loadImageWithCompletionHandler:(void(^ __nullable)(NSImage * __nullable image, NSError * __nullable error))completionHandler;

@@ -71,6 +71,8 @@ exports:
                        __ZN6H11ANE12H11ANEDevice26ANE_RemovePersistentClientEv, __ZN6H11ANE12H11ANEDevice27ANE_ProgramMemoryMapRequestEP27H11ANEMemoryMapParamsStructb, 
                        __ZN6H11ANE12H11ANEDevice27ANE_ProgramOutputSetEnqueueEP35H11ANEBufferSetEnqueueRequestStruct, 
                        __ZN6H11ANE12H11ANEDevice27ANE_SetThrottlingPercentageEj, 
+                       __ZN6H11ANE12H11ANEDevice28ANE_ExclaveReadPropertyValueEjPj, 
+                       __ZN6H11ANE12H11ANEDevice29ANE_ExclaveWritePropertyValueEjj, 
                        __ZN6H11ANE12H11ANEDevice29ANE_FWSharedEventDoorbellRingEv, 
                        __ZN6H11ANE12H11ANEDevice29ANE_FlushInactiveDARTMappingsEv, 
                        __ZN6H11ANE12H11ANEDevice29ANE_ProgramMemoryUnMapRequestEP27H11ANEMemoryMapParamsStruct, 

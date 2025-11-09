@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/CoreSuggestionsUI.framework/Versions/A/CoreSuggestionsUI'
-current-version: 1226.0.1
+current-version: 1226.2.2
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -167,6 +167,8 @@ exports:
                        '_$s17CoreSuggestionsUI19SGContactSuggestionC18suggestionSubtitleSSSgyFTq', 
                        '_$s17CoreSuggestionsUI19SGContactSuggestionC20suggestionCategoryIdSSyFTj', 
                        '_$s17CoreSuggestionsUI19SGContactSuggestionC20suggestionCategoryIdSSyFTq', 
+                       '_$s17CoreSuggestionsUI19SGContactSuggestionC22suggestionIconSFSymbolSSSgyFTj', 
+                       '_$s17CoreSuggestionsUI19SGContactSuggestionC22suggestionIconSFSymbolSSSgyFTq', 
                        '_$s17CoreSuggestionsUI19SGContactSuggestionC23suggestionCategoryImageSo7NSImageCyFTj', 
                        '_$s17CoreSuggestionsUI19SGContactSuggestionC23suggestionCategoryImageSo7NSImageCyFTq', 
                        '_$s17CoreSuggestionsUI19SGContactSuggestionC23suggestionCategoryTitle8forItemsSSSaySo12SGSuggestion_pG_tFTj', 
@@ -181,6 +183,8 @@ exports:
                        '_$s17CoreSuggestionsUI19SGContactSuggestionC26suggestionActionButtonTypeSo08SGBannerghI0VyFTq', 
                        '_$s17CoreSuggestionsUI19SGContactSuggestionC26suggestionCategorySubtitle8forItemsSSSgSaySo12SGSuggestion_pG_tFTj', 
                        '_$s17CoreSuggestionsUI19SGContactSuggestionC26suggestionCategorySubtitle8forItemsSSSgSaySo12SGSuggestion_pG_tFTq', 
+                       '_$s17CoreSuggestionsUI19SGContactSuggestionC30suggestionCategoryIconSFSymbolSSSgyFTj', 
+                       '_$s17CoreSuggestionsUI19SGContactSuggestionC30suggestionCategoryIconSFSymbolSSSgyFTq', 
                        '_$s17CoreSuggestionsUI19SGContactSuggestionC32suggestionCategoryLocalizedCount7ofItemsSSSaySo12SGSuggestion_pG_tFTj', 
                        '_$s17CoreSuggestionsUI19SGContactSuggestionC32suggestionCategoryLocalizedCount7ofItemsSSSaySo12SGSuggestion_pG_tFTq', 
                        '_$s17CoreSuggestionsUI19SGContactSuggestionC34suggestionCategoryActionButtonTypeSo08SGBannerhiJ0VyFTj', 
@@ -402,6 +406,6 @@ exports:
                        _TtC17CoreSuggestionsUI22SGWalletPassSuggestion, _TtC17CoreSuggestionsUI23SGWalletOrderSuggestion, 
                        _TtC17CoreSuggestionsUI26SGBannerContentHostingView ]
     objc-ivars:      [ SGEventSuggestionBase._calendarImage, SGEventSuggestionBase._eventKitEvent, 
-                       SGEventSuggestionBase._realtimeEvent, SGFoundInSuggestionGuardedData._mailService, 
-                       SGFoundInSuggestionGuardedData._messageService ]
+                       SGEventSuggestionBase._realtimeEvent, SGEventSuggestionBase.bannerForVisionDevice, 
+                       SGFoundInSuggestionGuardedData._mailService, SGFoundInSuggestionGuardedData._messageService ]
 ...

@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.9 (swiftlang-5.9.0.123.203 clang-1500.0.37.1)
+// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.11 clang-1500.1.0.2.2)
 // swift-module-flags: -target x86_64-apple-ios17.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-experimental-concurrency -enable-experimental-concurrency -library-level api -module-name TipKit
-// swift-module-flags-ignorable: -target-min-inlining-version min -enable-bare-slash-regex -user-module-version 55
+// swift-module-flags-ignorable: -target-min-inlining-version min -enable-bare-slash-regex -user-module-version 55.2.3
 import Foundation
 import Observation
 import Swift
@@ -14,7 +14,7 @@ infix operator ++ : DefaultPrecedence
 infix operator +- : DefaultPrecedence
 infix operator -- : DefaultPrecedence
 infix operator -+ : DefaultPrecedence
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 extension TipKit.Tips.Event {
   @dynamicMemberLookup public struct Donation : Swift.Codable, Swift.Sendable {
     public let date: Foundation.Date
@@ -25,20 +25,20 @@ extension TipKit.Tips.Event {
     public init(from decoder: any Swift.Decoder) throws
   }
 }
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 extension Swift.Sequence {
   public func donatedWithin<DonationInfo>(_ timeRange: TipKit.Tips.DonationTimeRange) -> [Self.Element] where DonationInfo : Swift.Decodable, DonationInfo : Swift.Encodable, DonationInfo : Swift.Sendable, Self.Element == TipKit.Tips.Event<DonationInfo>.Donation
   public func largestSubset<DonationInfo, Value>(groupedBy keyPath: Swift.KeyPath<DonationInfo, Value>) -> [Self.Element] where DonationInfo : Swift.Decodable, DonationInfo : Swift.Encodable, DonationInfo : Swift.Sendable, Value : Swift.Hashable, Self.Element == TipKit.Tips.Event<DonationInfo>.Donation
   public func smallestSubset<DonationInfo, Value>(groupedBy keyPath: Swift.KeyPath<DonationInfo, Value>) -> [Self.Element] where DonationInfo : Swift.Decodable, DonationInfo : Swift.Encodable, DonationInfo : Swift.Sendable, Value : Swift.Hashable, Self.Element == TipKit.Tips.Event<DonationInfo>.Donation
 }
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 extension TipKit.Tips {
   public struct EmptyDonation : Swift.Codable, Swift.Sendable {
     public func encode(to encoder: any Swift.Encoder) throws
     public init(from decoder: any Swift.Decoder) throws
   }
 }
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 extension TipKit.Tips {
   public struct DonationTimeRange : Swift.Hashable, Swift.Codable, Swift.Sendable {
     public static var minute: TipKit.Tips.DonationTimeRange {
@@ -66,7 +66,7 @@ extension TipKit.Tips {
     public init(from decoder: any Swift.Decoder) throws
   }
 }
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 extension TipKit.Tips {
   public struct Event<DonationInfo> : Swift.Identifiable, Swift.Sendable where DonationInfo : Swift.Decodable, DonationInfo : Swift.Encodable, DonationInfo : Swift.Sendable {
     public var id: Swift.String {
@@ -80,7 +80,7 @@ extension TipKit.Tips {
     public typealias ID = Swift.String
   }
 }
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 extension TipKit.Tips.Event {
   #if compiler(>=5.3) && $AsyncAwait
   public func donate() async where DonationInfo == TipKit.Tips.EmptyDonation
@@ -96,33 +96,33 @@ extension TipKit.Tips.Event {
   #endif
 }
 #if compiler(>=5.3) && $PrimaryAssociatedTypes2
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 @_documentation(visibility: private) public protocol EventPredicateExpression<Output> : Foundation.PredicateExpression {
 }
 #else
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 @_documentation(visibility: private) public protocol EventPredicateExpression : Foundation.PredicateExpression {
 }
 #endif
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 @_documentation(visibility: private) extension Foundation.PredicateExpressions.Equal : TipKit.EventPredicateExpression where LHS : TipKit.EventPredicateExpression, RHS : TipKit.EventPredicateExpression {
 }
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 @_documentation(visibility: private) extension Foundation.PredicateExpressions.NotEqual : TipKit.EventPredicateExpression where LHS : TipKit.EventPredicateExpression, RHS : TipKit.EventPredicateExpression {
 }
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 @_documentation(visibility: private) extension Foundation.PredicateExpressions.Comparison : TipKit.EventPredicateExpression where LHS : TipKit.EventPredicateExpression, RHS : TipKit.EventPredicateExpression {
 }
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 @_documentation(visibility: private) extension Foundation.PredicateExpressions.KeyPath : TipKit.EventPredicateExpression where Root : TipKit.EventPredicateExpression {
 }
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 @_documentation(visibility: private) extension Foundation.PredicateExpressions.Value : TipKit.EventPredicateExpression {
 }
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 @_documentation(visibility: private) extension Foundation.PredicateExpressions.Variable : TipKit.EventPredicateExpression {
 }
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 @_documentation(visibility: private) extension Foundation.PredicateExpressions {
   public struct DonationFilter<DonationInfo, Value, Input> : TipKit.EventPredicateExpression, Swift.Sendable where DonationInfo : Swift.Decodable, DonationInfo : Swift.Encodable, DonationInfo : Swift.Sendable, Value : Swift.Decodable, Value : Swift.Encodable, Value : Swift.Sendable, Input : Swift.Sendable, Input : TipKit.EventPredicateExpression, Input.Output == [TipKit.Tips.Event<DonationInfo>.Donation] {
     public func evaluate(_ bindings: Foundation.PredicateBindings) throws -> [TipKit.Tips.Event<DonationInfo>.Donation]
@@ -130,7 +130,7 @@ extension TipKit.Tips.Event {
   }
   public static func build_DonationFilter<DonationInfo, Input, Value>(_ input: Input, keyPath: Swift.KeyPath<DonationInfo, Value>, op: Foundation.PredicateExpressions.DonationFilterOperator, value: Value) -> Foundation.PredicateExpressions.DonationFilter<DonationInfo, Value, Input> where DonationInfo : Swift.Decodable, DonationInfo : Swift.Encodable, DonationInfo : Swift.Sendable, Input : Swift.Sendable, Input : TipKit.EventPredicateExpression, Value : Swift.Decodable, Value : Swift.Encodable, Value : Swift.Sendable, Input.Output == [TipKit.Tips.Event<DonationInfo>.Donation]
 }
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 @_documentation(visibility: private) extension Foundation.PredicateExpressions {
   public struct DonatedWithin<DonationInfo, Input> : TipKit.EventPredicateExpression, Swift.Sendable where DonationInfo : Swift.Decodable, DonationInfo : Swift.Encodable, DonationInfo : Swift.Sendable, Input : Swift.Sendable, Input : TipKit.EventPredicateExpression, Input.Output == [TipKit.Tips.Event<DonationInfo>.Donation] {
     public func evaluate(_ bindings: Foundation.PredicateBindings) throws -> [TipKit.Tips.Event<DonationInfo>.Donation]
@@ -138,7 +138,7 @@ extension TipKit.Tips.Event {
   }
   public static func build_donatedWithin<DonationInfo, Input>(_ input: Input, _ timeRange: TipKit.Tips.DonationTimeRange) -> Foundation.PredicateExpressions.DonatedWithin<DonationInfo, Input> where DonationInfo : Swift.Decodable, DonationInfo : Swift.Encodable, DonationInfo : Swift.Sendable, Input : Swift.Sendable, Input : TipKit.EventPredicateExpression, Input.Output == [TipKit.Tips.Event<DonationInfo>.Donation]
 }
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 @_documentation(visibility: private) extension Foundation.PredicateExpressions {
   public struct LargestSubset<DonationInfo, Value, Input> : TipKit.EventPredicateExpression, Swift.Sendable where DonationInfo : Swift.Decodable, DonationInfo : Swift.Encodable, DonationInfo : Swift.Sendable, Value : Swift.Decodable, Value : Swift.Encodable, Value : Swift.Hashable, Value : Swift.Sendable, Input : Swift.Sendable, Input : TipKit.EventPredicateExpression, Input.Output == [TipKit.Tips.Event<DonationInfo>.Donation] {
     public func evaluate(_ bindings: Foundation.PredicateBindings) throws -> [TipKit.Tips.Event<DonationInfo>.Donation]
@@ -146,7 +146,7 @@ extension TipKit.Tips.Event {
   }
   public static func build_largestSubset<DonationInfo, Input, Value>(_ input: Input, groupedBy keyPath: Swift.KeyPath<DonationInfo, Value>) -> Foundation.PredicateExpressions.LargestSubset<DonationInfo, Value, Input> where DonationInfo : Swift.Decodable, DonationInfo : Swift.Encodable, DonationInfo : Swift.Sendable, Input : Swift.Sendable, Input : TipKit.EventPredicateExpression, Value : Swift.Decodable, Value : Swift.Encodable, Value : Swift.Hashable, Value : Swift.Sendable, Input.Output == [TipKit.Tips.Event<DonationInfo>.Donation]
 }
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 @_documentation(visibility: private) extension Foundation.PredicateExpressions {
   public struct SmallestSubset<DonationInfo, Value, Input> : TipKit.EventPredicateExpression, Swift.Sendable where DonationInfo : Swift.Decodable, DonationInfo : Swift.Encodable, DonationInfo : Swift.Sendable, Value : Swift.Decodable, Value : Swift.Encodable, Value : Swift.Hashable, Value : Swift.Sendable, Input : Swift.Sendable, Input : TipKit.EventPredicateExpression, Input.Output == [TipKit.Tips.Event<DonationInfo>.Donation] {
     public func evaluate(_ bindings: Foundation.PredicateBindings) throws -> [TipKit.Tips.Event<DonationInfo>.Donation]
@@ -154,7 +154,7 @@ extension TipKit.Tips.Event {
   }
   public static func build_smallestSubset<DonationInfo, Input, Value>(_ input: Input, groupedBy keyPath: Swift.KeyPath<DonationInfo, Value>) -> Foundation.PredicateExpressions.SmallestSubset<DonationInfo, Value, Input> where DonationInfo : Swift.Decodable, DonationInfo : Swift.Encodable, DonationInfo : Swift.Sendable, Input : Swift.Sendable, Input : TipKit.EventPredicateExpression, Value : Swift.Decodable, Value : Swift.Encodable, Value : Swift.Hashable, Value : Swift.Sendable, Input.Output == [TipKit.Tips.Event<DonationInfo>.Donation]
 }
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 @_documentation(visibility: private) extension Foundation.PredicateExpressions {
   public enum DonationFilterOperator : Swift.Codable, Swift.Sendable {
     case equal
@@ -172,13 +172,13 @@ extension TipKit.Tips.Event {
     public init(from decoder: any Swift.Decoder) throws
   }
 }
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 public struct MiniTipViewStyle : TipKit.TipViewStyle {
   public func makeBody(configuration: TipKit.MiniTipViewStyle.Configuration) -> some SwiftUI.View
   
   public typealias Body = @_opaqueReturnTypeOf("$s6TipKit04MiniA9ViewStyleV8makeBody13configurationQrAA0adE13ConfigurationV_tF", 0) __
 }
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 extension TipKit.TipViewStyle where Self == TipKit.MiniTipViewStyle {
   public static var miniTip: TipKit.MiniTipViewStyle {
     get
@@ -187,7 +187,7 @@ extension TipKit.TipViewStyle where Self == TipKit.MiniTipViewStyle {
 @available(*, unavailable)
 extension TipKit.MiniTipViewStyle : Swift.Sendable {
 }
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 extension TipKit.Tips {
   public struct Parameter<Value> : Swift.Identifiable, Swift.Sendable where Value : Swift.Decodable, Value : Swift.Encodable, Value : Swift.Sendable {
     public var id: Swift.String {
@@ -202,22 +202,22 @@ extension TipKit.Tips {
     public typealias ID = Swift.String
   }
 }
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 extension TipKit.Tips.ParameterOption {
   public static var transient: TipKit.Tips.ParameterOption {
     get
   }
 }
 #if compiler(>=5.3) && $Macros && $AttachedMacros
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 @_documentation(visibility: private) @attached(accessor, names: named(get), named(set)) @attached(peer, names: prefixed(`$`)) public macro Parameter(_ options: TipKit.Tips.ParameterOption...) = #externalMacro(module: "TipKitMacros", type: "ParameterMacro")
 #endif
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 extension TipKit.Tips {
   public struct ParameterOption : Swift.Sendable {
   }
 }
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 extension TipKit.Tips {
   public struct Rule : Swift.Sendable {
     public init<Donation>(_ event: TipKit.Tips.Event<Donation>, _ eventBuilder: (Foundation.PredicateExpressions.Variable<TipKit.Tips.Event<Donation>>) -> any TipKit.EventPredicateExpression<Swift.Bool>) where Donation : Swift.Decodable, Donation : Swift.Encodable, Donation : Swift.Sendable
@@ -225,14 +225,14 @@ extension TipKit.Tips {
   }
 }
 #if compiler(>=5.3) && $Macros && $FreestandingExpressionMacros
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 @_documentation(visibility: private) @freestanding(expression) public macro Rule<Donation>(_ event: TipKit.Tips.Event<Donation>, _ body: (TipKit.Tips.Event<Donation>) -> Swift.Bool) -> TipKit.Tips.Rule = #externalMacro(module: "TipKitMacros", type: "EventRuleMacro") where Donation : Swift.Decodable, Donation : Swift.Encodable, Donation : Swift.Sendable
 #endif
 #if compiler(>=5.3) && $Macros && $FreestandingExpressionMacros
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 @_documentation(visibility: private) @freestanding(expression) public macro Rule<Value>(_ parameter: TipKit.Tips.Parameter<Value>, _ body: (Value) -> Swift.Bool) -> TipKit.Tips.Rule = #externalMacro(module: "TipKitMacros", type: "ParameterRuleMacro") where Value : Swift.Decodable, Value : Swift.Encodable, Value : Swift.Sendable
 #endif
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 extension TipKit.Tips {
   @_functionBuilder public struct RuleBuilder {
     public static func buildBlock() -> [TipKit.Tips.Rule]
@@ -251,7 +251,7 @@ extension TipKit.Tips {
 @available(*, unavailable)
 extension TipKit.Tips.RuleBuilder : Swift.Sendable {
 }
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 @_typeEraser(AnyTip) public protocol Tip : Swift.Identifiable, Swift.Sendable {
   var id: Swift.String { get }
   var title: SwiftUI.Text { get }
@@ -261,7 +261,7 @@ extension TipKit.Tips.RuleBuilder : Swift.Sendable {
   @TipKit.Tips.RuleBuilder var rules: [Self.Rule] { get }
   @TipKit.Tips.OptionsBuilder var options: [any TipKit.TipOption] { get }
 }
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 extension TipKit.Tip {
   public var status: Self.Status {
     get
@@ -278,11 +278,11 @@ extension TipKit.Tip {
   }
   #endif
 }
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 extension TipKit.Tip {
   public func invalidate(reason: Self.InvalidationReason)
 }
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 extension TipKit.Tip {
   @_documentation(visibility: private) public var id: Swift.String {
     get
@@ -303,7 +303,7 @@ extension TipKit.Tip {
     get
   }
 }
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 extension TipKit.Tips {
   public struct Action : Swift.Identifiable {
     public let id: Swift.String
@@ -324,7 +324,7 @@ extension TipKit.Tips {
 @available(*, unavailable)
 extension TipKit.Tips.Action : Swift.Sendable {
 }
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 extension TipKit.Tips {
   @_functionBuilder public struct ActionBuilder {
     @inlinable public static func buildExpression(_ element: TipKit.Tips.Action) -> [TipKit.Tips.Action] {
@@ -364,7 +364,7 @@ extension TipKit.Tips {
 @available(*, unavailable)
 extension TipKit.Tips.ActionBuilder : Swift.Sendable {
 }
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 public struct AnyTip : TipKit.Tip {
   @_documentation(visibility: private) public var id: Swift.String {
     get
@@ -391,10 +391,22 @@ public struct AnyTip : TipKit.Tip {
   @_documentation(visibility: private) public init(erasing tip: some Tip)
   public typealias ID = Swift.String
 }
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 public protocol TipOption : Swift.Sendable {
 }
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
+extension TipKit.Tips {
+  public struct IgnoresDisplayFrequency : TipKit.TipOption {
+    public init(_ ignoresDisplayFrequency: Swift.Bool)
+  }
+}
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
+extension TipKit.Tips {
+  public struct MaxDisplayCount : TipKit.TipOption {
+    public init(_ maxDisplayCount: Swift.Int)
+  }
+}
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 extension TipKit.Tips {
   @_functionBuilder public struct OptionsBuilder {
     public static func buildExpression(_ child: some TipOption) -> some TipKit.TipOption
@@ -422,22 +434,10 @@ extension TipKit.Tips {
     public static func buildFinalResult(_ component: some TipOption) -> [any TipKit.TipOption]
   }
 }
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
-extension TipKit.Tips {
-  public struct IgnoresDisplayFrequency : TipKit.TipOption {
-    public init(_ ignoresDisplayFrequency: Swift.Bool)
-  }
-}
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
-extension TipKit.Tips {
-  public struct MaxDisplayCount : TipKit.TipOption {
-    public init(_ maxDisplayCount: Swift.Int)
-  }
-}
 @available(*, unavailable)
 extension TipKit.Tips.OptionsBuilder : Swift.Sendable {
 }
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 extension TipKit.Tips {
   public enum Status : Swift.Hashable, Swift.Sendable {
     case pending
@@ -450,7 +450,7 @@ extension TipKit.Tips {
     }
   }
 }
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 extension TipKit.Tips {
   public enum InvalidationReason : Swift.Hashable, Swift.Sendable {
     case actionPerformed
@@ -463,7 +463,7 @@ extension TipKit.Tips {
     }
   }
 }
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 extension TipKit.Tip {
   public typealias Status = TipKit.Tips.Status
   public typealias InvalidationReason = TipKit.Tips.InvalidationReason
@@ -474,7 +474,7 @@ extension TipKit.Tip {
   public typealias IgnoresDisplayFrequency = TipKit.Tips.IgnoresDisplayFrequency
   public typealias MaxDisplayCount = TipKit.Tips.MaxDisplayCount
 }
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 public struct TipKitError : Swift.Error, Foundation.LocalizedError, Swift.Hashable {
   public var description: Swift.String {
     get
@@ -488,13 +488,13 @@ public struct TipKitError : Swift.Error, Foundation.LocalizedError, Swift.Hashab
     get
   }
 }
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 extension TipKit.TipKitError {
   public static let invalidPredicateValueType: TipKit.TipKitError
   public static let missingGroupContainerEntitlements: TipKit.TipKitError
   public static let tipsDatastoreAlreadyConfigured: TipKit.TipKitError
 }
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 public struct TipView<Content> : SwiftUI.View where Content : TipKit.Tip {
   @_Concurrency.MainActor(unsafe) public var body: some SwiftUI.View {
     get
@@ -505,7 +505,7 @@ public struct TipView<Content> : SwiftUI.View where Content : TipKit.Tip {
 @available(*, unavailable)
 extension TipKit.TipView : Swift.Sendable {
 }
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 extension SwiftUI.View {
   public func tipImageSize(_ size: CoreFoundation.CGSize) -> some SwiftUI.View
   
@@ -514,22 +514,36 @@ extension SwiftUI.View {
   public func tipBackground(_ style: some ShapeStyle) -> some SwiftUI.View
   
 }
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+extension SwiftUI.View {
+  @available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.1, visionOS 1.0, *)
+  @available(watchOS, unavailable)
+  public func popoverTip<Content>(_ tip: Content, arrowEdge: SwiftUI.Edge = .top, action: @escaping (TipKit.Tips.Action) -> Swift.Void = { _ in }) -> some SwiftUI.View where Content : TipKit.Tip
+  
+  @available(tvOS 17.0, *)
+  @available(iOS, unavailable)
+  @available(macCatalyst, unavailable)
+  @available(macOS, unavailable)
+  @available(visionOS, unavailable)
+  @available(watchOS, unavailable)
+  @_disfavoredOverload public func popoverTip<Content>(_ tip: Content, arrowEdge: SwiftUI.Edge = .top) -> some SwiftUI.View where Content : TipKit.Tip
+  
+}
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 public protocol TipViewStyle {
   typealias Configuration = TipKit.TipViewStyleConfiguration
   associatedtype Body : SwiftUI.View
   @SwiftUI.ViewBuilder func makeBody(configuration: Self.Configuration) -> Self.Body
 }
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 extension SwiftUI.View {
   public func tipViewStyle(_ style: some TipViewStyle) -> some SwiftUI.View
   
 }
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 public struct TipViewStyleConfiguration {
   public let tip: any TipKit.Tip
 }
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 extension TipKit.TipViewStyleConfiguration {
   public var image: SwiftUI.Image? {
     get
@@ -547,11 +561,12 @@ extension TipKit.TipViewStyleConfiguration {
 @available(*, unavailable)
 extension TipKit.TipViewStyleConfiguration : Swift.Sendable {
 }
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 @frozen public enum Tips {
   public static func configure(_ configuration: [TipKit.Tips.ConfigurationOption] = []) throws
 }
 @available(watchOS, unavailable, introduced: 10.0)
+@available(visionOS, unavailable, introduced: 1.0)
 @available(tvOS, unavailable, introduced: 17.0)
 @available(macCatalyst, unavailable, introduced: 17.0)
 @available(iOS, unavailable, introduced: 17.0)
@@ -559,12 +574,12 @@ extension TipKit.TipViewStyleConfiguration : Swift.Sendable {
 @available(*, unavailable)
 extension TipKit.Tips : @unchecked Swift.Sendable {
 }
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 extension TipKit.Tips {
   public struct ConfigurationOption : Swift.Sendable {
   }
 }
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 extension TipKit.Tips.ConfigurationOption {
   public static func displayFrequency(_ displayFrequency: TipKit.Tips.ConfigurationOption.DisplayFrequency) -> TipKit.Tips.ConfigurationOption
   public struct DisplayFrequency : Swift.Equatable, Swift.Sendable {
@@ -586,7 +601,7 @@ extension TipKit.Tips.ConfigurationOption {
     public static func == (a: TipKit.Tips.ConfigurationOption.DisplayFrequency, b: TipKit.Tips.ConfigurationOption.DisplayFrequency) -> Swift.Bool
   }
 }
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 extension TipKit.Tips.ConfigurationOption {
   public static func datastoreLocation(_ storeLocation: TipKit.Tips.ConfigurationOption.DatastoreLocation) -> TipKit.Tips.ConfigurationOption
   public struct DatastoreLocation : Swift.Equatable, Swift.Sendable {
@@ -598,7 +613,7 @@ extension TipKit.Tips.ConfigurationOption {
     public static func == (a: TipKit.Tips.ConfigurationOption.DatastoreLocation, b: TipKit.Tips.ConfigurationOption.DatastoreLocation) -> Swift.Bool
   }
 }
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 extension TipKit.Tips {
   public static func resetDatastore() throws
   public static func showAllTipsForTesting()
@@ -606,7 +621,7 @@ extension TipKit.Tips {
   public static func hideAllTipsForTesting()
   public static func hideTipsForTesting(_ tips: [any TipKit.Tip.Type])
 }
-@objc @_inheritsConvenienceInitializers @available(iOS 17.0, macCatalyst 17.0, *)
+@objc @_inheritsConvenienceInitializers @available(iOS 17.0, macCatalyst 17.0, visionOS 1.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -634,7 +649,7 @@ extension TipKit.Tips {
   @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
 }
-@objc @_inheritsConvenienceInitializers @available(iOS 17.0, macCatalyst 17.0, *)
+@objc @_inheritsConvenienceInitializers @available(iOS 17.0, macCatalyst 17.0, visionOS 1.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -662,7 +677,7 @@ extension TipKit.Tips {
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc deinit
 }
-@objc @_inheritsConvenienceInitializers @available(iOS 17.0, macCatalyst 17.0, *)
+@objc @_inheritsConvenienceInitializers @available(iOS 17.0, macCatalyst 17.0, visionOS 1.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -698,7 +713,7 @@ extension TipKit.Tips {
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc deinit
 }
-@objc @available(iOS 17.0, macCatalyst 17.0, *)
+@objc @available(iOS 17.0, macCatalyst 17.0, visionOS 1.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -724,32 +739,7 @@ extension TipKit.Tips {
   @_documentation(visibility: private) @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc deinit
 }
-@available(iOS 17.0, macCatalyst 17.0, tvOS 17.0, *)
-extension SwiftUI.View {
-  @available(iOS 17.0, macCatalyst 17.0, *)
-  @available(macOS, unavailable)
-  @available(tvOS, unavailable)
-  @available(watchOS, unavailable)
-  public func popoverTip<Content>(_ tip: Content, arrowEdge: SwiftUI.Edge = .top, action: @escaping (TipKit.Tips.Action) -> Swift.Void = { _ in }) -> some SwiftUI.View where Content : TipKit.Tip
-  
-  @available(tvOS 17.0, *)
-  @available(iOS, unavailable)
-  @available(macCatalyst, unavailable)
-  @available(macOS, unavailable)
-  @available(watchOS, unavailable)
-  @available(xrOS, unavailable)
-  public func popoverTip<Content>(_ tip: Content, arrowEdge: SwiftUI.Edge = .top) -> some SwiftUI.View where Content : TipKit.Tip
-  
-}
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
-extension UIKit.UIColor {
-  @inlinable internal var color: SwiftUI.Color {
-    get {
-        Color(uiColor: self)
-    }
-  }
-}
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 extension Foundation.PredicateExpressions.DonationFilterOperator : Swift.Equatable {}
-@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS 14.0, iOS 17.0, macCatalyst 17.0, tvOS 17.0, visionOS 1.0, watchOS 10.0, *)
 extension Foundation.PredicateExpressions.DonationFilterOperator : Swift.Hashable {}

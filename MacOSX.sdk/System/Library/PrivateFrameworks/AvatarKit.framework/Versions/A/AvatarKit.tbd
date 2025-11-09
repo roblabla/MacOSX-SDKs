@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AvatarKit.framework/Versions/A/AvatarKit'
-current-version: 342
+current-version: 342.208
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AVTAnimojiThumbnailCameraKey, _AVTAnimojiThumbnailLargeSizeKey, 
@@ -18,7 +18,6 @@ exports:
                        _AVTFramingModeMouth, _AVTFramingModeNose, _AVTFramingModeOutfit, 
                        _AVTFramingModeProsthesisLeft, _AVTFramingModeProsthesisRight, 
                        _AVTFramingModeRightEye, _AVTFramingModeSideburns, _AVTFramingModeTongue, 
-                       _AVTIdentifierOfUpgradedColorPresetForAssetPresetIdentifier, 
                        _AVTInitializeShaderCache, _AVTLocalizedEditorString, _AVTLocalizedPaletteString, 
                        _AVTLocalizedPresetPairString, _AVTLocalizedPresetString, 
                        _AVTLocalizedStickerName, _AVTMakeColorPresetLocalizableKey, 
@@ -38,10 +37,9 @@ exports:
                        _AVTSnapshotMemojiThirdColorPresetSubstitutions, _AVTSnapshotNoCopy, 
                        _AVTSnapshotPose, _AVTSnapshotPoseAnimation, _AVTSnapshotRateKey, 
                        _AVTSnapshotShaderCollectorNeverCopyKey, _AVTSnapshotSizeKey, 
-                       _AVTSnapshotUpscaleKey, _AVTUpgradeColorPresetIdentifierIfNeeded, 
-                       _AVTUpgradePairedPresetCategoriesIfNeeded, _AVTUpgradePresetIdentifierIfNeeded, 
-                       _AVTViewSnapshotDisableSuperSamplingFactorKey, _kAVTBodyPosePackMemojiEditor, 
-                       _kAVTStickerPackAllStickers, _kAVTStickerPackDefault, _kAVTStickerPackDefaultPrerelease, 
+                       _AVTSnapshotUpscaleKey, _AVTViewSnapshotDisableSuperSamplingFactorKey, 
+                       _kAVTBodyPosePackMemojiEditor, _kAVTStickerPackAllStickers, 
+                       _kAVTStickerPackDefault, _kAVTStickerPackDefaultPrerelease, 
                        _kAVTStickerPackMemojiEditor, _kAVTStickerPackMemojiEditorThumbnails, 
                        _kAVTStickerPackMemojiEditor_Poses, _kAVTStickerPackPoses, 
                        _kAVTStickerPackPosesPrerelease, _kAVTStickerPackPrerelease ]

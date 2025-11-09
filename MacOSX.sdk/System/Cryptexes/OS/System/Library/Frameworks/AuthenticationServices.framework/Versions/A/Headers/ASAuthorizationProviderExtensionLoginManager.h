@@ -109,10 +109,10 @@ API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, watchos, tvos)
 
 
 /// @abstract Creates new Encryption, and Signing keys for the device or user.  The old keys will be destroyed.
-- (void)resetDeviceKeys;
+- (void)resetDeviceKeys API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /// @abstract Creates new Encryption, Signing, and Secure Enclave keys for the user.  The old keys will be destroyed.
-- (void)resetUserSecureEnclaveKey;
+- (void)resetUserSecureEnclaveKey API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*! @abstract Asks authorization service to show extension view controller for registration. If the controller cannot be shown an error is returned.  This is only valid during registration.

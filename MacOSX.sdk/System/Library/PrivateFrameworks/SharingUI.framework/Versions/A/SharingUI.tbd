@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SharingUI.framework/Versions/A/SharingUI'
-current-version: 1936.10.1
+current-version: 1936.30.51
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -49,7 +49,8 @@ exports:
                        '_$s9SharingUI23SFUIContactIconProviderCN', '_$s9SharingUI23SFUIContactIconProviderCfD', 
                        '_$sSo33SFUIPeopleSuggestionImageProviderC9SharingUIE17previewCornerIcon3forSo7NSImageCSS_tYaKF', 
                        '_$sSo33SFUIPeopleSuggestionImageProviderC9SharingUIE17previewCornerIcon3forSo7NSImageCSS_tYaKFTu', 
-                       _SFCreateThumbnailImage, _SFScreenScale ]
+                       _SFCreateThumbnailImage, _SFScreenScale, _SFUILinkMetadataSerializationForLocalLowFidelityUseOnly, 
+                       _SFUILinkMetadataSerializationForLocalUseOnly ]
     objc-classes:    [ SFUIAvatarImageRenderer, SFUIAvatarImageRenderingScope, SFUIImageProvider, 
                        SFUILoadedMetadataCollection, SFUIPeopleSuggestionImageProvider, 
                        SFUITTRReporter, _TtC9SharingUI23SFUIContactIconProvider ]

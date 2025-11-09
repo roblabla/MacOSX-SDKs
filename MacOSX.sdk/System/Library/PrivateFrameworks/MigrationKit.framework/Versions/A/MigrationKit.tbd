@@ -23,5 +23,6 @@ exports:
                        '_$s12MigrationKit11PairingCodeCN', '_$s12MigrationKit11PairingCodeCfD', 
                        '_$s12MigrationKit11PairingCodeCfd', _MigrationKitVersionNumber, 
                        _MigrationKitVersionString ]
-    objc-classes:    [ MKAPIServer, MKClient, MKContext, MKImportContext ]
+    objc-classes:    [ MKAPIServer, MKClient, MKContext, MKCrypto, MKHex, MKImportContext, 
+                       MKSRPServer ]
 ...

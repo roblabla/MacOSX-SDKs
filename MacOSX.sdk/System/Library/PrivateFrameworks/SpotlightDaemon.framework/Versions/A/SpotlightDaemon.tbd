@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SpotlightDaemon.framework/Versions/A/SpotlightDaemon'
-current-version: 2268.10
+current-version: 2274.10
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _BulkDeleteAttributes, _CSEnablePrivacyRedact, _CSIndexAgentMachServiceName, 
@@ -45,8 +45,8 @@ exports:
                        _SPBucketSet ]
     objc-ivars:      [ SDTrace._items, SPConcreteCoreSpotlightIndexer._cancelPtr, 
                        SPConcreteCoreSpotlightIndexer._checkedInClients, SPConcreteCoreSpotlightIndexer._createCount, 
-                       SPConcreteCoreSpotlightIndexer._knownClients, SPConcreteCoreSpotlightIndexer._lastPreheat, 
-                       SPConcreteCoreSpotlightIndexer._lastTTLPass, SPConcreteCoreSpotlightIndexer._maintenanceOperations, 
+                       SPConcreteCoreSpotlightIndexer._lastPreheat, SPConcreteCoreSpotlightIndexer._lastTTLPass, 
+                       SPConcreteCoreSpotlightIndexer._maintenanceOperations, SPConcreteCoreSpotlightIndexer._readOnly, 
                        SPConcreteCoreSpotlightIndexer._reindexAllDelegateBundleIDs, 
                        SPConcreteCoreSpotlightIndexer._scheduledStringsCleanup, _SPBucketSet._members ]
   - targets:         [ arm64-macos, arm64e-macos ]

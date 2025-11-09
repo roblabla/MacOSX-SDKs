@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/TipKit.framework/Versions/A/TipKit'
-current-version: 55
+current-version: 55.2.3
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
@@ -422,8 +422,7 @@ exports:
                        '_$s7SwiftUI4ViewP6TipKitE15tipCornerRadius_11antialiasedQr12CoreGraphics7CGFloatV_SbtFQOMQ', 
                        '_$s9ImageView6TipKit0C7ContentPTl', '_$sST6TipKitE13donatedWithinySayAA4TipsO5EventV8DonationVy_qd___GGAD0G9TimeRangeVSeRd__SERd__s8SendableRd__AI7ElementRtzlF', 
                        '_$sST6TipKitE13largestSubset9groupedBySayAA4TipsO5EventV8DonationVy_qd___GGs7KeyPathCyqd__qd_0_G_tSeRd__SERd__s8SendableRd__SHRd_0_AJ7ElementRtzr0_lF', 
-                       '_$sST6TipKitE14smallestSubset9groupedBySayAA4TipsO5EventV8DonationVy_qd___GGs7KeyPathCyqd__qd_0_G_tSeRd__SERd__s8SendableRd__SHRd_0_AJ7ElementRtzr0_lF', 
-                       '_$sSo7UIColorC6TipKitE5color7SwiftUI5ColorVvg', '_$sSo7UIColorC6TipKitE5color7SwiftUI5ColorVvpMV' ]
+                       '_$sST6TipKitE14smallestSubset9groupedBySayAA4TipsO5EventV8DonationVy_qd___GGs7KeyPathCyqd__qd_0_G_tSeRd__SERd__s8SendableRd__SHRd_0_AJ7ElementRtzr0_lF' ]
     objc-classes:    [ _TtC6TipKit23TipUICollectionViewCell, _TtC6TipKit26TipUIPopoverViewController, 
                        _TtC6TipKit27TipUICollectionReusableView, _TtC6TipKit9TipUIView ]
 ...

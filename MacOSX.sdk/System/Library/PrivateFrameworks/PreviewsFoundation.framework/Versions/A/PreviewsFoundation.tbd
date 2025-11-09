@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/PreviewsFoundation.framework/Versions/A/PreviewsFoundation'
-current-version: 21.0.58
+current-version: 21.20.7
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -526,7 +526,7 @@ exports:
                        '_$s18PreviewsFoundation12TimeoutTimerMp', '_$s18PreviewsFoundation12TimeoutTimerTL', 
                        '_$s18PreviewsFoundation12assertUnwrap_8callsitexSgAD_AA8CallsiteVtlF', 
                        '_$s18PreviewsFoundation12assertUnwrap_9dsoHandle4file4line6column8functionxSgAH_SVs12StaticStringVS2uAJtlF', 
-                       '_$s18PreviewsFoundation13AnyComparableV1loiySbAC_ACtFZ', 
+                       '_$s18PreviewsFoundation12isAutomationSbvg', '_$s18PreviewsFoundation13AnyComparableV1loiySbAC_ACtFZ', 
                        '_$s18PreviewsFoundation13AnyComparableV23__derived_struct_equalsySbAC_ACtFZ', 
                        '_$s18PreviewsFoundation13AnyComparableV4baseypvg', '_$s18PreviewsFoundation13AnyComparableV4baseypvpMV', 
                        '_$s18PreviewsFoundation13AnyComparableVMa', '_$s18PreviewsFoundation13AnyComparableVMn', 
@@ -553,7 +553,7 @@ exports:
                        '_$s18PreviewsFoundation13ExecutionLaneV3anyACvau', '_$s18PreviewsFoundation13ExecutionLaneV3anyACvgZ', 
                        '_$s18PreviewsFoundation13ExecutionLaneV3anyACvpZ', '_$s18PreviewsFoundation13ExecutionLaneV4mainACvau', 
                        '_$s18PreviewsFoundation13ExecutionLaneV4mainACvgZ', '_$s18PreviewsFoundation13ExecutionLaneV4mainACvpZ', 
-                       '_$s18PreviewsFoundation13ExecutionLaneV5queue5label3qosACSS_8Dispatch0H3QoSVtFZ', 
+                       '_$s18PreviewsFoundation13ExecutionLaneV5queue5label3qos10attributes6targetACSS_8Dispatch0J3QoSVSo012OS_dispatch_E0CAIE10AttributesVAMSgtFZ', 
                        '_$s18PreviewsFoundation13ExecutionLaneV7executeyyyycF', '_$s18PreviewsFoundation13ExecutionLaneVMa', 
                        '_$s18PreviewsFoundation13ExecutionLaneVMn', '_$s18PreviewsFoundation13ExecutionLaneVN', 
                        '_$s18PreviewsFoundation13IOPowerSourceC012notificationD033_8F6E2C702C921C25D40C944BB2A1B891LLSo09CFRunLoopD3RefaSgvpfi', 

@@ -19,6 +19,8 @@ exports:
                        '_$s18LiveSpeechServices0aB7ServiceC13phraseTextKeySSvpMV', 
                        '_$s18LiveSpeechServices0aB7ServiceC15favoritePhrasesSaySDyS2SGGvg', 
                        '_$s18LiveSpeechServices0aB7ServiceC15favoritePhrasesSaySDyS2SGGvpMV', 
+                       '_$s18LiveSpeechServices0aB7ServiceC16phraseInputIDKeySSvg', 
+                       '_$s18LiveSpeechServices0aB7ServiceC16phraseInputIDKeySSvpMV', 
                        '_$s18LiveSpeechServices0aB7ServiceC17addFavoritePhraseyySDyS2SGF', 
                        '_$s18LiveSpeechServices0aB7ServiceC17phraseShortcutKeySSvg', 
                        '_$s18LiveSpeechServices0aB7ServiceC17phraseShortcutKeySSvpMV', 

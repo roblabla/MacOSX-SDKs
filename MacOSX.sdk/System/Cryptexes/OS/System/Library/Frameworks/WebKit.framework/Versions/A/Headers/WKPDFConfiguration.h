@@ -41,7 +41,7 @@ WK_EXTERN API_AVAILABLE(macos(10.15.4), ios(13.4))
 /*! @abstract A Boolean value indicating whether the PDF should allow transparent backgrounds.
  @discussion The default value is `NO`.
  */
-@property (nonatomic) BOOL allowTransparentBackground API_AVAILABLE(macos(14.0), ios(NA));
+@property (nonatomic) BOOL allowTransparentBackground API_AVAILABLE(macos(14.0), ios(17.0));
 
 @end
 

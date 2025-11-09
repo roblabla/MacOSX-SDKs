@@ -1224,6 +1224,24 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_StereoCameraBaseline API_A
 
 VT_EXPORT const CFStringRef kVTCompressionPropertyKey_HorizontalDisparityAdjustment API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos);	// CFNumber(int32), see kCMFormatDescriptionExtension_HorizontalDisparityAdjustment
 
+/*!
+    @constant    kVTCompressionPropertyKey_HasLeftStereoEyeView
+    @abstract
+        Specifies the value of kCMFormatDescriptionExtension_HasLeftStereoEyeView.
+    @discussion
+        The value will be set on the format description for output samples and may affect the decoded frame presentation.
+ */
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_HasLeftStereoEyeView API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos);  // CFBoolean, see kCMFormatDescriptionExtension_HasLeftStereoEyeView
+
+/*!
+    @constant    kVTCompressionPropertyKey_HasRightStereoEyeView
+    @abstract
+        Specifies the value of kCMFormatDescriptionExtension_HasRightStereoEyeView.
+    @discussion
+        The value will be set on the format description for output samples and may affect the decoded frame presentation.
+ */
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_HasRightStereoEyeView API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos);  // CFBoolean, see kCMFormatDescriptionExtension_HasRightStereoEyeView
+
 	
 CM_ASSUME_NONNULL_END
 

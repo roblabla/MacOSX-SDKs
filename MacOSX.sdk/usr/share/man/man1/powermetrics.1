@@ -108,6 +108,8 @@ Show QOS times aggregated by process. Per thread information is not available.
 Show per-process energy impact number. This number is a rough proxy for the total energy the process uses, including CPU, GPU, disk io and networking. The weighting of each is platform specific. Enabling this implicitly enables sampling of all the above per-process statistics.
 .It Fl Fl show-process-samp-norm
 Show CPU time normailzed by the sample window, rather than the process start time. For example a process that launched 1 second before the end of a 5 second sample window and ran continuously until the end of the window will show up as 200 ms/s here and 1000 ms/s in the regular column.
+.It Fl Fl show-process-ipc
+Show per-process Instructions and cycles on ARM machines. Use with --show-process-amp to show cluster stats.
 .It Fl Fl show-all
 Enables all samplers and displays all the available information for each sampler.
 .El
@@ -187,7 +189,7 @@ The thermal sampler displays the current thermal pressure the system is under. T
 .Pp
 .Em SFI
 .Pp
-The sfi sampler shows system wide selective forced idle statistics. Selective forced idle is a mechanism the operating system uses to limit system power while minimizing user impact, by throttling certain threads on the system. Each thread belongs to an SFI class, and this sampler displays how much each SFI class is currently being throttled. These are instantaneous values taken at the end of the sample window, and do not necessarily reflect the values at other times in the window. To get SFI wait time statistics on a per process basis use --show-process-wait-times.
+The sfi sampler shows system wide selective forced idle statistics. Selective forced idle is a mechanism the operating system uses to limit system power while minimizing user impact, by throttling certain threads on the system. Each thread belongs to an SFI class, and this sampler displays how much each SFI class is currently being throttled or empty if none of them is throttled. These are instantaneous values taken at the end of the sample window, and do not necessarily reflect the values at other times in the window. To get SFI wait time statistics on a per process basis use --show-process-wait-times.
 .Pp
 .Sh KNOWN ISSUES
 Changes in system time and sleep/wake can cause minor inaccuracies in reported cpu time.

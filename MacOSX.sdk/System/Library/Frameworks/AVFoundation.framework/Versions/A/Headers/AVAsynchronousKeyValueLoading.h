@@ -32,7 +32,7 @@ typedef NS_ENUM(NSInteger, AVKeyValueStatus) {
 			1. First, determine whether the value for a given key is available using statusOfValueForKey:error:.
 			2. If a value has not been loaded yet, you can ask for to load one or more values and be notified when they become available using loadValuesAsynchronouslyForKeys:completionHandler:.
 		
-		Even for use cases that may typically support ready access to some keys (such as for assets initialized with URLs for files in the local filesystem), slow I/O may require AVAsset to block before returning their values. Although blocking may be acceptable for OS X API clients in cases where assets are being prepared on background threads or in operation queues, in all cases in which blocking should be avoided you should use loadValuesAsynchronouslyForKeys:completionHandler:. For iOS clients, blocking to obtain the value of a key synchronously is never recommended under any circumstances.
+		Even for use cases that may typically support ready access to some keys (such as for assets initialized with URLs for files in the local filesystem), slow I/O may require AVAsset to block before returning their values. Although blocking may be acceptable for macOS API clients in cases where assets are being prepared on background threads or in operation queues, in all cases in which blocking should be avoided you should use loadValuesAsynchronouslyForKeys:completionHandler:. For clients of platforms other than macOS, blocking to obtain the value of a key synchronously is never recommended under any circumstances.
 */
 @protocol AVAsynchronousKeyValueLoading
 @required
@@ -52,7 +52,7 @@ typedef NS_ENUM(NSInteger, AVKeyValueStatus) {
 
     Blocking that may occur when calling the getter for any key should therefore be avoided in the general case by loading values for all keys of interest via -loadValuesAsynchronouslyForKeys:completionHandler: and testing the availability of the requested values before fetching them by calling getters.
       
-    The sole exception to this general rule is in usage on Mac OS X on the desktop, where it may be acceptable to block in cases in which the client is preparing objects for use on background threads or in operation queues. On iOS, values should always be loaded asynchronously prior to calling getters for the values, in any usage scenario.
+    The sole exception to this general rule is in usage on macOS on the desktop, where it may be acceptable to block in cases in which the client is preparing objects for use on background threads or in operation queues. On platforms other than macOS, values should always be loaded asynchronously prior to calling getters for the values, in any usage scenario.
 */
 - (AVKeyValueStatus)statusOfValueForKey:(NSString *)key error:(NSError * _Nullable * _Nullable)outError AVF_DEPRECATED_FOR_SWIFT_ONLY("Use status(of:) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
 

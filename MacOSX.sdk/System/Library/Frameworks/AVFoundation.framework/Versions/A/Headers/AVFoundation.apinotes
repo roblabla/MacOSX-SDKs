@@ -413,6 +413,8 @@ Classes:
   Properties:
   - Name: 'outputObscuredDueToInsufficientExternalProtection'
     SwiftName: isOutputObscuredDueToInsufficientExternalProtection
+- Name: AVPlayerVideoOutputConfiguration
+  SwiftName: AVPlayerVideoOutput.Configuration
 - Name: AVSampleBufferDisplayLayer
   Properties:
   - Name: 'outputObscuredDueToInsufficientExternalProtection'
@@ -634,7 +636,7 @@ Classes:
   Methods:
   - Selector: 'coordinateRateChangeToRate:options:'
     SwiftName: coordinateRateChange(to:options:)
-    MethodKind: Instance    
+    MethodKind: Instance
 Protocols:
 - Name: AVCaptureAudioDataOutputSampleBufferDelegate
   Methods:

@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.9 (swiftlang-5.9.0.123.203 clang-1500.0.37.1)
-// swift-module-flags: -target arm64e-apple-macos14.0 -enable-objc-interop -autolink-force-load -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -module-name CloudKit
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 2100.171
+// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.11 clang-1500.1.0.2.2)
+// swift-module-flags: -target arm64e-apple-macos14.2 -enable-objc-interop -autolink-force-load -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -module-name CloudKit
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 2130.14.1
 import AVFoundation
 @_exported import CloudKit
 import CoreTransferable
@@ -57,7 +57,7 @@ extension CloudKit.CKSyncEngineDelegate {
 }
 @available(macOS 14.0, macCatalyst 17.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
 extension CloudKit.CKSyncEngine {
-  public struct Configuration {
+  public struct Configuration : Swift.Sendable {
     public var database: CloudKit.CKDatabase
     public var stateSerialization: CloudKit.CKSyncEngine.State.Serialization?
     public var delegate: any CloudKit.CKSyncEngineDelegate {
@@ -128,6 +128,8 @@ extension CloudKit.CKSyncEngine.Event {
     }
   }
   public struct WillFetchChanges : Swift.Sendable {
+    @available(macOS 14.2, macCatalyst 17.2, iOS 17.2, tvOS 17.2, watchOS 10.2, *)
+    public let context: CloudKit.CKSyncEngine.FetchChangesContext
   }
   public struct WillFetchRecordZoneChanges : Swift.Sendable {
     public let zoneID: CloudKit.CKRecordZone.ID
@@ -137,6 +139,8 @@ extension CloudKit.CKSyncEngine.Event {
     public let error: CloudKit.CKError?
   }
   public struct DidFetchChanges : Swift.Sendable {
+    @available(macOS 14.2, macCatalyst 17.2, iOS 17.2, tvOS 17.2, watchOS 10.2, *)
+    public let context: CloudKit.CKSyncEngine.FetchChangesContext
   }
   public struct WillSendChanges : Swift.Sendable {
     public let context: CloudKit.CKSyncEngine.SendChangesContext
@@ -409,6 +413,13 @@ extension CloudKit.CKSyncEngine.SendChangesContext : Swift.CustomStringConvertib
     get
   }
 }
+@available(macOS 14.2, macCatalyst 17.2, iOS 17.2, tvOS 17.2, watchOS 10.2, *)
+extension CloudKit.CKSyncEngine.FetchChangesContext : Swift.CustomStringConvertible {
+  @available(macOS 14.2, macCatalyst 17.2, iOS 17.2, tvOS 17.2, watchOS 10.2, *)
+  public var description: Swift.String {
+    get
+  }
+}
 @available(macOS 14.0, macCatalyst 17.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
 extension CloudKit.CKSyncEngine.SyncReason : Swift.CustomStringConvertible {
   public var description: Swift.String {
@@ -432,14 +443,14 @@ extension CloudKit.CKSyncEngine.FetchChangesOptions.Scope : Swift.CustomStringCo
 @available(iOS, introduced: 10.0, deprecated: 17.0, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
 @available(tvOS, introduced: 10.0, deprecated: 17.0, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
 @available(watchOS, introduced: 3.0, deprecated: 10.0, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
-@available(xrOS, deprecated, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
+@available(visionOS, deprecated, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
 @nonobjc extension CloudKit.CKDiscoverUserIdentitiesOperation {
   @available(macOS, introduced: 12.0, deprecated: 14.0, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
   @available(macCatalyst, introduced: 15.0, deprecated: 17.0, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
   @available(iOS, introduced: 15.0, deprecated: 17.0, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
   @available(tvOS, introduced: 15.0, deprecated: 17.0, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
   @available(watchOS, introduced: 8.0, deprecated: 10.0, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
-  @available(xrOS, deprecated, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
+  @available(visionOS, deprecated, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
   public var discoverUserIdentitiesResultBlock: ((_ operationResult: Swift.Result<Swift.Void, any Swift.Error>) -> Swift.Void)? {
     get
     set
@@ -469,7 +480,7 @@ extension Foundation.NSItemProvider {
   @available(iOS, introduced: 8.0, deprecated: 10.0)
   @available(tvOS, introduced: 9.0, deprecated: 10.0)
   @available(watchOS, introduced: 3.0, deprecated: 3.0)
-  @available(xrOS, deprecated)
+  @available(visionOS, deprecated)
   @_alwaysEmitIntoClient @_disfavoredOverload convenience public init(zoneName: Swift.String = CKRecordZone.ID.defaultZoneName, ownerName: Swift.String? = CKOwnerDefaultName) {
         self.init(__zoneName: zoneName, ownerName: ownerName ?? CKOwnerDefaultName)
     }
@@ -755,7 +766,7 @@ extension CloudKit.CKContainer {
   @available(iOS, introduced: 15.0, deprecated: 17.0, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
   @available(tvOS, introduced: 15.0, deprecated: 17.0, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
   @available(watchOS, introduced: 8.0, deprecated: 10.0, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
-  @available(xrOS, deprecated, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
+  @available(visionOS, deprecated, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
   @preconcurrency public func discoverUserIdentities(forEmailAddresses emails: [Swift.String], completionHandler: @escaping @Sendable (Swift.Result<[Swift.String : CloudKit.CKUserIdentity], any Swift.Error>) -> Swift.Void)
   #endif
   #if compiler(>=5.3) && $AsyncAwait
@@ -764,7 +775,7 @@ extension CloudKit.CKContainer {
   @available(iOS, introduced: 15.0, deprecated: 17.0, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
   @available(tvOS, introduced: 15.0, deprecated: 17.0, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
   @available(watchOS, introduced: 8.0, deprecated: 10.0, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
-  @available(xrOS, deprecated, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
+  @available(visionOS, deprecated, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
   public func userIdentities(forEmailAddresses emails: [Swift.String]) async throws -> [Swift.String : CloudKit.CKUserIdentity]
   #endif
   #if compiler(>=5.3) && $Sendable
@@ -773,7 +784,7 @@ extension CloudKit.CKContainer {
   @available(iOS, introduced: 15.0, deprecated: 17.0, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
   @available(tvOS, introduced: 15.0, deprecated: 17.0, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
   @available(watchOS, introduced: 8.0, deprecated: 10.0, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
-  @available(xrOS, deprecated, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
+  @available(visionOS, deprecated, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
   @preconcurrency public func discoverUserIdentities(forPhoneNumbers phoneNumbers: [Swift.String], completionHandler: @escaping @Sendable (Swift.Result<[Swift.String : CloudKit.CKUserIdentity], any Swift.Error>) -> Swift.Void)
   #endif
   #if compiler(>=5.3) && $AsyncAwait
@@ -782,7 +793,7 @@ extension CloudKit.CKContainer {
   @available(iOS, introduced: 15.0, deprecated: 17.0, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
   @available(tvOS, introduced: 15.0, deprecated: 17.0, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
   @available(watchOS, introduced: 8.0, deprecated: 10.0, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
-  @available(xrOS, deprecated, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
+  @available(visionOS, deprecated, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
   public func userIdentities(forPhoneNumbers phoneNumbers: [Swift.String]) async throws -> [Swift.String : CloudKit.CKUserIdentity]
   #endif
   #if compiler(>=5.3) && $Sendable
@@ -791,7 +802,7 @@ extension CloudKit.CKContainer {
   @available(iOS, introduced: 15.0, deprecated: 17.0, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
   @available(tvOS, introduced: 15.0, deprecated: 17.0, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
   @available(watchOS, introduced: 8.0, deprecated: 10.0, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
-  @available(xrOS, deprecated, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
+  @available(visionOS, deprecated, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
   @preconcurrency public func discoverUserIdentities(forUserRecordIDs userRecordIDs: [CloudKit.CKRecord.ID], completionHandler: @escaping @Sendable (Swift.Result<[CloudKit.CKRecord.ID : CloudKit.CKUserIdentity], any Swift.Error>) -> Swift.Void)
   #endif
   #if compiler(>=5.3) && $AsyncAwait
@@ -800,7 +811,7 @@ extension CloudKit.CKContainer {
   @available(iOS, introduced: 15.0, deprecated: 17.0, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
   @available(tvOS, introduced: 15.0, deprecated: 17.0, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
   @available(watchOS, introduced: 8.0, deprecated: 10.0, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
-  @available(xrOS, deprecated, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
+  @available(visionOS, deprecated, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
   public func userIdentities(forUserRecordIDs userRecordIDs: [CloudKit.CKRecord.ID]) async throws -> [CloudKit.CKRecord.ID : CloudKit.CKUserIdentity]
   #endif
   #if compiler(>=5.3) && $Sendable
@@ -854,7 +865,7 @@ extension CloudKit.CKContainer {
     @available(iOS, deprecated, introduced: 8.0, message: "renamed to CKContainer.ApplicationPermissions")
     @available(tvOS, deprecated, introduced: 9.0, message: "renamed to CKContainer.ApplicationPermissions")
     @available(watchOS, deprecated, introduced: 3.0, message: "renamed to CKContainer.ApplicationPermissions")
-    @available(xrOS, deprecated, message: "renamed to CKContainer.ApplicationPermissions")
+    @available(visionOS, deprecated, message: "renamed to CKContainer.ApplicationPermissions")
     public typealias Permissions = CloudKit.CKContainer.ApplicationPermissions
     @available(swift 4.2)
     @available(macOS, deprecated, introduced: 10.10, message: "renamed to CKContainer.ApplicationPermissionStatus")
@@ -862,7 +873,7 @@ extension CloudKit.CKContainer {
     @available(iOS, deprecated, introduced: 8.0, message: "renamed to CKContainer.ApplicationPermissionStatus")
     @available(tvOS, deprecated, introduced: 9.0, message: "renamed to CKContainer.ApplicationPermissionStatus")
     @available(watchOS, deprecated, introduced: 3.0, message: "renamed to CKContainer.ApplicationPermissionStatus")
-    @available(xrOS, deprecated, message: "renamed to CKContainer.ApplicationPermissionStatus")
+    @available(visionOS, deprecated, message: "renamed to CKContainer.ApplicationPermissionStatus")
     public typealias PermissionStatus = CloudKit.CKContainer.ApplicationPermissionStatus
     @available(swift 4.2)
     @available(macOS, deprecated, introduced: 10.10, message: "renamed to CKContainer.ApplicationPermissionBlock")
@@ -870,7 +881,7 @@ extension CloudKit.CKContainer {
     @available(iOS, deprecated, introduced: 8.0, message: "renamed to CKContainer.ApplicationPermissionBlock")
     @available(tvOS, deprecated, introduced: 9.0, message: "renamed to CKContainer.ApplicationPermissionBlock")
     @available(watchOS, deprecated, introduced: 3.0, message: "renamed to CKContainer.ApplicationPermissionBlock")
-    @available(xrOS, deprecated, message: "renamed to CKContainer.ApplicationPermissionBlock")
+    @available(visionOS, deprecated, message: "renamed to CKContainer.ApplicationPermissionBlock")
     public typealias PermissionBlock = CloudKit.CKContainer.ApplicationPermissionBlock
   }
 }
@@ -880,7 +891,7 @@ extension CloudKit.CKContainer {
 @available(iOS, deprecated, introduced: 8.0, message: "renamed to CKContainer.ApplicationPermissions")
 @available(tvOS, deprecated, introduced: 9.0, message: "renamed to CKContainer.ApplicationPermissions")
 @available(watchOS, deprecated, introduced: 3.0, message: "renamed to CKContainer.ApplicationPermissions")
-@available(xrOS, deprecated, message: "renamed to CKContainer.ApplicationPermissions")
+@available(visionOS, deprecated, message: "renamed to CKContainer.ApplicationPermissions")
 public typealias CKContainer_Application_Permissions = CloudKit.CKContainer.ApplicationPermissions
 @available(swift 4.2)
 @available(macOS, deprecated, introduced: 10.10, message: "renamed to CKContainer.ApplicationPermissionStatus")
@@ -888,7 +899,7 @@ public typealias CKContainer_Application_Permissions = CloudKit.CKContainer.Appl
 @available(iOS, deprecated, introduced: 8.0, message: "renamed to CKContainer.ApplicationPermissionStatus")
 @available(tvOS, deprecated, introduced: 9.0, message: "renamed to CKContainer.ApplicationPermissionStatus")
 @available(watchOS, deprecated, introduced: 3.0, message: "renamed to CKContainer.ApplicationPermissionStatus")
-@available(xrOS, deprecated, message: "renamed to CKContainer.ApplicationPermissionStatus")
+@available(visionOS, deprecated, message: "renamed to CKContainer.ApplicationPermissionStatus")
 public typealias CKContainer_Application_PermissionStatus = CloudKit.CKContainer.ApplicationPermissionStatus
 @available(swift 4.2)
 @available(macOS, deprecated, introduced: 10.10, message: "renamed to CKContainer.ApplicationPermissionBlock")
@@ -896,7 +907,7 @@ public typealias CKContainer_Application_PermissionStatus = CloudKit.CKContainer
 @available(iOS, deprecated, introduced: 8.0, message: "renamed to CKContainer.ApplicationPermissionBlock")
 @available(tvOS, deprecated, introduced: 9.0, message: "renamed to CKContainer.ApplicationPermissionBlock")
 @available(watchOS, deprecated, introduced: 3.0, message: "renamed to CKContainer.ApplicationPermissionBlock")
-@available(xrOS, deprecated, message: "renamed to CKContainer.ApplicationPermissionBlock")
+@available(visionOS, deprecated, message: "renamed to CKContainer.ApplicationPermissionBlock")
 public typealias CKContainer_Application_PermissionBlock = CloudKit.CKContainer.ApplicationPermissionBlock
 @available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
 @nonobjc extension CloudKit.CKRecord.Reference {
@@ -906,7 +917,7 @@ public typealias CKContainer_Application_PermissionBlock = CloudKit.CKContainer.
   @available(iOS, deprecated, introduced: 8.0, message: "renamed to CKRecord.ReferenceAction")
   @available(tvOS, deprecated, introduced: 9.0, message: "renamed to CKRecord.ReferenceAction")
   @available(watchOS, deprecated, introduced: 3.0, message: "renamed to CKRecord.ReferenceAction")
-  @available(xrOS, deprecated, message: "renamed to CKRecord.ReferenceAction")
+  @available(visionOS, deprecated, message: "renamed to CKRecord.ReferenceAction")
   public typealias Action = CloudKit.CKRecord.ReferenceAction
 }
 @available(swift 4.2)
@@ -915,7 +926,7 @@ public typealias CKContainer_Application_PermissionBlock = CloudKit.CKContainer.
 @available(iOS, deprecated, introduced: 8.0, message: "renamed to CKRecord.ReferenceAction")
 @available(tvOS, deprecated, introduced: 9.0, message: "renamed to CKRecord.ReferenceAction")
 @available(watchOS, deprecated, introduced: 3.0, message: "renamed to CKRecord.ReferenceAction")
-@available(xrOS, deprecated, message: "renamed to CKRecord.ReferenceAction")
+@available(visionOS, deprecated, message: "renamed to CKRecord.ReferenceAction")
 public typealias CKRecord_Reference_Action = CloudKit.CKRecord.ReferenceAction
 @available(macOS 10.10, macCatalyst 8.0, iOS 8.0, tvOS 9.0, watchOS 3.0, *)
 @nonobjc extension CloudKit.CKFetchRecordsOperation {
@@ -976,7 +987,7 @@ public struct CKShareTransferRepresentation<Item> : CoreTransferable.TransferRep
   @available(iOS, introduced: 15.0, deprecated: 15.0, message: "renamed to records(matching:inZoneWith:desiredKeys:resultsLimit:)")
   @available(tvOS, introduced: 15.0, deprecated: 15.0, message: "renamed to records(matching:inZoneWith:desiredKeys:resultsLimit:)")
   @available(watchOS, introduced: 8.0, deprecated: 8.0, message: "renamed to records(matching:inZoneWith:desiredKeys:resultsLimit:)")
-  @available(xrOS, deprecated, message: "renamed to records(matching:inZoneWith:desiredKeys:resultsLimit:)")
+  @available(visionOS, deprecated, message: "renamed to records(matching:inZoneWith:desiredKeys:resultsLimit:)")
   public func records(matching query: CloudKit.CKQuery, inZoneWith zoneID: CloudKit.CKRecordZone.ID?) async throws -> [CloudKit.CKRecord]
   #endif
 }
@@ -1105,7 +1116,7 @@ extension CloudKit.CKDatabase {
       @available(iOS, introduced: 15.0, deprecated: 17.0, message: "now surfaced as Reason.purged")
       @available(tvOS, introduced: 15.0, deprecated: 17.0, message: "now surfaced as Reason.purged")
       @available(watchOS, introduced: 8.0, deprecated: 10.0, message: "now surfaced as Reason.purged")
-      @available(xrOS, deprecated, message: "now surfaced as Reason.purged")
+      @available(visionOS, deprecated, message: "now surfaced as Reason.purged")
       public var purged: Swift.Bool {
         get
       }
@@ -1187,7 +1198,7 @@ extension CloudKit.CKDatabase.RecordZoneChange.Modification : Swift.Sendable {
   @available(iOS, introduced: 10.0, deprecated: 10.0, message: "Provide an explicit CKSubscription.ID at CKSubscription-init time")
   @available(tvOS, introduced: 10.0, deprecated: 10.0, message: "Provide an explicit CKSubscription.ID at CKSubscription-init time")
   @available(watchOS, introduced: 6.0, deprecated: 6.0, message: "Provide an explicit CKSubscription.ID at CKSubscription-init time")
-  @available(xrOS, deprecated, message: "Provide an explicit CKSubscription.ID at CKSubscription-init time")
+  @available(visionOS, deprecated, message: "Provide an explicit CKSubscription.ID at CKSubscription-init time")
   @_alwaysEmitIntoClient convenience public init(recordType: CloudKit.CKRecord.RecordType, predicate: Foundation.NSPredicate, options querySubscriptionOptions: CloudKit.CKQuerySubscription.Options = [.firesOnRecordCreation, .firesOnRecordUpdate, .firesOnRecordDeletion]) {
         self.init(__recordType: recordType, predicate: predicate, subscriptionID: UUID().uuidString, options: querySubscriptionOptions)
     }
@@ -1224,7 +1235,7 @@ extension CloudKit.CKDatabase.RecordZoneChange.Modification : Swift.Sendable {
   @available(iOS, introduced: 8.0, deprecated: 15.0, message: "Use modifySubscriptionsResultBlock instead")
   @available(tvOS, introduced: 9.0, deprecated: 15.0, message: "Use modifySubscriptionsResultBlock instead")
   @available(watchOS, introduced: 6.0, deprecated: 8.0, message: "Use modifySubscriptionsResultBlock instead")
-  @available(xrOS, deprecated, message: "Use modifySubscriptionsResultBlock instead")
+  @available(visionOS, deprecated, message: "Use modifySubscriptionsResultBlock instead")
   public var modifySubscriptionsCompletionBlock: ((_ savedSubscriptions: [CloudKit.CKSubscription]?, _ deletedSubscriptionIDs: [CloudKit.CKSubscription.ID]?, _ operationError: (any Swift.Error)?) -> Swift.Void)? {
     get
     set
@@ -1256,14 +1267,14 @@ extension CloudKit.CKQuery : @unchecked Swift.Sendable {
 @available(macCatalyst, introduced: 10.0, deprecated: 17.0, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
 @available(iOS, introduced: 10.0, deprecated: 17.0, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
 @available(watchOS, introduced: 3.0, deprecated: 10.0, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
-@available(xrOS, deprecated, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
+@available(visionOS, deprecated, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
 @available(tvOS, unavailable)
 @nonobjc extension CloudKit.CKDiscoverAllUserIdentitiesOperation {
   @available(macOS, introduced: 12.0, deprecated: 14.0, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
   @available(macCatalyst, introduced: 15.0, deprecated: 17.0, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
   @available(iOS, introduced: 15.0, deprecated: 17.0, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
   @available(watchOS, introduced: 8.0, deprecated: 10.0, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
-  @available(xrOS, deprecated, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
+  @available(visionOS, deprecated, message: "No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.")
   public var discoverAllUserIdentitiesResultBlock: ((_ operationResult: Swift.Result<Swift.Void, any Swift.Error>) -> Swift.Void)? {
     get
     set
@@ -1328,7 +1339,7 @@ extension CloudKit.CKQuery : @unchecked Swift.Sendable {
   @available(iOS, introduced: 8.0, deprecated: 15.0, message: "Use fetchSubscriptionsResultBlock instead")
   @available(tvOS, introduced: 9.0, deprecated: 15.0, message: "Use fetchSubscriptionsResultBlock instead")
   @available(watchOS, introduced: 6.0, deprecated: 8.0, message: "Use fetchSubscriptionsResultBlock instead")
-  @available(xrOS, deprecated, message: "Use fetchSubscriptionsResultBlock instead")
+  @available(visionOS, deprecated, message: "Use fetchSubscriptionsResultBlock instead")
   public var fetchSubscriptionCompletionBlock: ((_ subscriptionsBySubscriptionID: [CloudKit.CKSubscription.ID : CloudKit.CKSubscription]?, _ operationError: (any Swift.Error)?) -> Swift.Void)? {
     get
     set
@@ -1391,7 +1402,7 @@ extension CloudKit.CKQuery : @unchecked Swift.Sendable {
   @available(iOS, deprecated, introduced: 10.0, message: "renamed to CKShare.ParticipantAcceptanceStatus")
   @available(tvOS, deprecated, introduced: 10.0, message: "renamed to CKShare.ParticipantAcceptanceStatus")
   @available(watchOS, deprecated, introduced: 3.0, message: "renamed to CKShare.ParticipantAcceptanceStatus")
-  @available(xrOS, deprecated, message: "renamed to CKShare.ParticipantAcceptanceStatus")
+  @available(visionOS, deprecated, message: "renamed to CKShare.ParticipantAcceptanceStatus")
   public typealias AcceptanceStatus = CloudKit.CKShare.ParticipantAcceptanceStatus
   @available(swift 4.2)
   @available(macOS, deprecated, introduced: 10.12, message: "renamed to CKShare.ParticipantPermission")
@@ -1399,7 +1410,7 @@ extension CloudKit.CKQuery : @unchecked Swift.Sendable {
   @available(iOS, deprecated, introduced: 10.0, message: "renamed to CKShare.ParticipantPermission")
   @available(tvOS, deprecated, introduced: 10.0, message: "renamed to CKShare.ParticipantPermission")
   @available(watchOS, deprecated, introduced: 3.0, message: "renamed to CKShare.ParticipantPermission")
-  @available(xrOS, deprecated, message: "renamed to CKShare.ParticipantPermission")
+  @available(visionOS, deprecated, message: "renamed to CKShare.ParticipantPermission")
   public typealias Permission = CloudKit.CKShare.ParticipantPermission
   @available(swift 4.2)
   @available(macOS, deprecated, introduced: 10.14, message: "renamed to CKShare.ParticipantRole")
@@ -1407,7 +1418,7 @@ extension CloudKit.CKQuery : @unchecked Swift.Sendable {
   @available(iOS, deprecated, introduced: 12.0, message: "renamed to CKShare.ParticipantRole")
   @available(tvOS, deprecated, introduced: 12.0, message: "renamed to CKShare.ParticipantRole")
   @available(watchOS, deprecated, introduced: 5.0, message: "renamed to CKShare.ParticipantRole")
-  @available(xrOS, deprecated, message: "renamed to CKShare.ParticipantRole")
+  @available(visionOS, deprecated, message: "renamed to CKShare.ParticipantRole")
   public typealias Role = CloudKit.CKShare.ParticipantRole
   @available(swift 4.2)
   @available(macOS, deprecated, introduced: 10.12, message: "renamed to CKShare.ParticipantType")
@@ -1415,7 +1426,7 @@ extension CloudKit.CKQuery : @unchecked Swift.Sendable {
   @available(iOS, deprecated, introduced: 10.0, message: "renamed to CKShare.ParticipantType")
   @available(tvOS, deprecated, introduced: 10.0, message: "renamed to CKShare.ParticipantType")
   @available(watchOS, deprecated, introduced: 3.0, message: "renamed to CKShare.ParticipantType")
-  @available(xrOS, deprecated, message: "renamed to CKShare.ParticipantType")
+  @available(visionOS, deprecated, message: "renamed to CKShare.ParticipantType")
   public typealias ParticipantType = CloudKit.CKShare.ParticipantType
 }
 @available(macOS 14.0, macCatalyst 17.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
@@ -1427,7 +1438,7 @@ extension CloudKit.CKQuery : @unchecked Swift.Sendable {
 @available(iOS, deprecated, introduced: 10.0, message: "renamed to CKShare.ParticipantAcceptanceStatus")
 @available(tvOS, deprecated, introduced: 10.0, message: "renamed to CKShare.ParticipantAcceptanceStatus")
 @available(watchOS, deprecated, introduced: 3.0, message: "renamed to CKShare.ParticipantAcceptanceStatus")
-@available(xrOS, deprecated, message: "renamed to CKShare.ParticipantAcceptanceStatus")
+@available(visionOS, deprecated, message: "renamed to CKShare.ParticipantAcceptanceStatus")
 public typealias CKShare_Participant_AcceptanceStatus = CloudKit.CKShare.ParticipantAcceptanceStatus
 @available(swift 4.2)
 @available(macOS, deprecated, introduced: 10.12, message: "renamed to CKShare.ParticipantPermission")
@@ -1435,7 +1446,7 @@ public typealias CKShare_Participant_AcceptanceStatus = CloudKit.CKShare.Partici
 @available(iOS, deprecated, introduced: 10.0, message: "renamed to CKShare.ParticipantPermission")
 @available(tvOS, deprecated, introduced: 10.0, message: "renamed to CKShare.ParticipantPermission")
 @available(watchOS, deprecated, introduced: 3.0, message: "renamed to CKShare.ParticipantPermission")
-@available(xrOS, deprecated, message: "renamed to CKShare.ParticipantPermission")
+@available(visionOS, deprecated, message: "renamed to CKShare.ParticipantPermission")
 public typealias CKShare_Participant_Permission = CloudKit.CKShare.ParticipantPermission
 @available(swift 4.2)
 @available(macOS, deprecated, introduced: 10.14, message: "renamed to CKShare.ParticipantRole")
@@ -1443,7 +1454,7 @@ public typealias CKShare_Participant_Permission = CloudKit.CKShare.ParticipantPe
 @available(iOS, deprecated, introduced: 12.0, message: "renamed to CKShare.ParticipantRole")
 @available(tvOS, deprecated, introduced: 12.0, message: "renamed to CKShare.ParticipantRole")
 @available(watchOS, deprecated, introduced: 5.0, message: "renamed to CKShare.ParticipantRole")
-@available(xrOS, deprecated, message: "renamed to CKShare.ParticipantRole")
+@available(visionOS, deprecated, message: "renamed to CKShare.ParticipantRole")
 public typealias CKShare_Participant_Role = CloudKit.CKShare.ParticipantRole
 @available(swift 4.2)
 @available(macOS, deprecated, introduced: 10.12, message: "renamed to CKShare.ParticipantType")
@@ -1451,7 +1462,7 @@ public typealias CKShare_Participant_Role = CloudKit.CKShare.ParticipantRole
 @available(iOS, deprecated, introduced: 10.0, message: "renamed to CKShare.ParticipantType")
 @available(tvOS, deprecated, introduced: 10.0, message: "renamed to CKShare.ParticipantType")
 @available(watchOS, deprecated, introduced: 3.0, message: "renamed to CKShare.ParticipantType")
-@available(xrOS, deprecated, message: "renamed to CKShare.ParticipantType")
+@available(visionOS, deprecated, message: "renamed to CKShare.ParticipantType")
 public typealias CKShare_Participant_ParticipantType = CloudKit.CKShare.ParticipantType
 @available(macOS 10.12, macCatalyst 10.0, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
 @nonobjc extension CloudKit.CKAcceptSharesOperation {

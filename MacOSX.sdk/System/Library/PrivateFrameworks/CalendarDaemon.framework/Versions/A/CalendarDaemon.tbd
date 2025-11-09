@@ -39,13 +39,14 @@ exports:
                        CADPredicate, CADPropertyFilter, CADPropertySearchPredicate, 
                        CADRespondedEventsPredicate, CADRouteHypothesis, CADSequenceToken, 
                        CADServer, CADSpotlightIndexer, CADSpotlightServerModule, 
-                       CADStatCollectionContext, CADStatCollector, CADStatsCalendars, 
-                       CADStatsCallback, CADStatsEvents, CADStatsOccurrences, CADStatsPreferences, 
-                       CADStatsStores, CADSubscribedCalendarEventsPredicate, CADSyntheticRouteHypothesizerCache, 
-                       CADTravelEventsPredicate, CADUnacknowledgedEventsPredicate, 
-                       CADUnalertedEventsPredicate, CADUpNextEventsPredicate, CADUpcomingEventsPredicate, 
-                       CADXPCImplementation, CADXPCProxyHelper, CalDAVLogScrubber, 
-                       ClientConnection, ClientIdentity, EKAlarmOccurrence, EKMasterEventsPredicate, 
+                       CADStatCollectionContext, CADStatCollector, CADStateDumpModule, 
+                       CADStatsCalendars, CADStatsCallback, CADStatsEvents, CADStatsOccurrences, 
+                       CADStatsPreferences, CADStatsStores, CADSubscribedCalendarEventsPredicate, 
+                       CADSyntheticRouteHypothesizerCache, CADTravelEventsPredicate, 
+                       CADUnacknowledgedEventsPredicate, CADUnalertedEventsPredicate, 
+                       CADUpNextEventsPredicate, CADUpcomingEventsPredicate, CADXPCImplementation, 
+                       CADXPCProxyHelper, CalDAVTrafficLogScrubber, ClientConnection, 
+                       ClientIdentity, EKAlarmOccurrence, EKMasterEventsPredicate, 
                        EKPredicate, EKScheduleAgentClientEventsPredicate ]
     objc-ivars:      [ CADXPCImplementation._conn, EKPredicate._timeZone, EKPredicate._uuid ]
 ...

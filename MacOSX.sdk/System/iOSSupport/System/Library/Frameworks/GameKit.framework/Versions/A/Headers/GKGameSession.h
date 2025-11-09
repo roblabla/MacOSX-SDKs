@@ -17,7 +17,7 @@ typedef NS_ENUM(NSInteger, GKTransportType) {
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_DEPRECATED("For real-time matches, use GKMatchmakerViewController. For turn-based matches, use GKTurnBasedMatchmakerViewController.", ios(10.0, 12.0), tvos(10.0, 12.0), macosx(10.12, 10.14)) API_UNAVAILABLE(watchos)
+API_DEPRECATED("For real-time matches, use GKMatchmakerViewController. For turn-based matches, use GKTurnBasedMatchmakerViewController.", ios(10.0, 12.0), tvos(10.0, 12.0), macos(10.12, 10.14)) API_UNAVAILABLE(watchos)
 @interface GKGameSession : NSObject
 #if !__OBJC2__
 {

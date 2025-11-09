@@ -12,7 +12,6 @@ exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _STSAddForcedReconfigurationCallback, _STSCreateFlavorN, _STSRegisterSpatializer, 
-                       _STSRemoveForcedReconfigurationCallback, _STSSetAudioUnitSetPropertyOverride, 
-                       _STSSetRoomConfigurationDictionary, _STSSetSoundStageParameters, 
-                       _STSTrackedLabelCount, _STSUnregisterSpatializer ]
+                       _STSRemoveForcedReconfigurationCallback, _STSSetRoomConfigurationDictionary, 
+                       _STSSetSoundStageParameters, _STSTrackedLabelCount, _STSUnregisterSpatializer ]
 ...

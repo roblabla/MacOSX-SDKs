@@ -42,7 +42,7 @@ Deny by calling -denyConnectionFromPeer:
 @class GKVoiceChatService;
 
 //All clients will need to implement this protocol
-API_DEPRECATED_WITH_REPLACEMENT("GKVoiceChat", ios(3.0,7.0), macos(10.8,10.10)) __TVOS_UNAVAILABLE
+API_DEPRECATED_WITH_REPLACEMENT("GKVoiceChat", ios(3.0,7.0), macos(10.6,10.8)) __TVOS_UNAVAILABLE
 @protocol GKVoiceChatClient <NSObject>
 
 @required

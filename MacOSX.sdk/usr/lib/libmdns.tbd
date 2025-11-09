@@ -54,6 +54,7 @@ exports:
                        _mdns_dns_service_set_context, _mdns_dns_service_set_context_finalizer, 
                        _mdns_doh_relay_create, _mdns_doh_relay_set_host_and_port, 
                        _mdns_doh_relay_set_request_uri_path, _mdns_domain_name_create, 
+                       _mdns_domain_name_equal, _mdns_domain_name_get_presentation, 
                        _mdns_dot_relay_create, _mdns_equal, _mdns_free_context_finalizer, 
                        _mdns_interface_monitor_activate, _mdns_interface_monitor_create, 
                        _mdns_interface_monitor_get_interface_index, _mdns_interface_monitor_has_ipv4_connectivity, 

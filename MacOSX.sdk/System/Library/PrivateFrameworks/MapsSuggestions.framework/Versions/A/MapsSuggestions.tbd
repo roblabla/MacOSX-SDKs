@@ -562,7 +562,7 @@ exports:
                        _GEOConfigMapsSuggestionsUnknownFilterEnabled, _GEOConfigMapsSuggestionsUpdateAllSourcesDeferTimeInterval, 
                        _GEOConfigMapsSuggestionsUseFlightLookupAirport, _GEOConfigMapsSuggestionsUseFlightLookupGate, 
                        _GEOConfigMapsSuggestionsUseFlightLookupTerminal, _GEOConfigMapsSuggestionsUserPreferenceTypeIsTransitWeight, 
-                       _GEOConfigMapsSuggestionsVehicleSetupResumeRouteDeduperEnabled, 
+                       _GEOConfigMapsSuggestionsVehicleBluetoothFeelerEnabled, _GEOConfigMapsSuggestionsVehicleSetupResumeRouteDeduperEnabled, 
                        _GEOConfigMapsSuggestionsVerboseLogging, _GEOConfigMapsSuggestionsVirtualGarageExpirationOverflowInSeconds, 
                        _GEOConfigMapsSuggestionsVirtualGarageImproverEnabled, _GEOConfigMapsSuggestionsVirtualGarageInitialWeight, 
                        _GEOConfigMapsSuggestionsVirtualGarageSinkRank, _GEOConfigMapsSuggestionsVirtualGarageSourceEnabled, 

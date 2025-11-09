@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/Translation.framework/Versions/A/Translation'
-current-version: 248.2
+current-version: 252.9.1
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -14,9 +14,9 @@ exports:
                        __LTOfflineStateString, __LTTextTranslationServiceXPCInterface, 
                        __LTTranslationErrorDomain, __LTTranslationModelTaskString, 
                        __LTTranslationServiceDelegateXPCInterface, __LTTranslationServiceXPCInterface, 
-                       _kLTDebugForceLowWordConfidenceASRKey, _kLTDebugUseQuickSessionTimeoutKey, 
-                       _kLTRateLimitingMaximumDynamicContentRequestsKey, _kLTRateLimitingMaximumPageLoadRequestsKey, 
-                       _kLTUnknownLanguageCode ]
+                       _kLTDebugForceLowConfidenceLIDKey, _kLTDebugForceLowWordConfidenceASRKey, 
+                       _kLTDebugUseQuickSessionTimeoutKey, _kLTRateLimitingMaximumDynamicContentRequestsKey, 
+                       _kLTRateLimitingMaximumPageLoadRequestsKey, _kLTUnknownLanguageCode ]
     objc-classes:    [ _LTAlignment, _LTAssetProgress, _LTBatchTextTranslationRequest, 
                        _LTCombinedRouteParagraphTranslationRequest, _LTCombinedTranslationResult, 
                        _LTDirectedEdge, _LTDisambiguableResult, _LTDisambiguableSentence, 

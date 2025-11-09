@@ -246,7 +246,7 @@ exports:
                        _kSSRVoiceProfileProductType, _kSSRVoiceProfilePruningCookie, 
                        _kSSRVoiceProfileRecordPayloadAllowedKey, _kSSRVoiceProfileSWVersion, 
                        _kSSRVoiceProfileUserName, _kVTUIRemoteRecordGibraltarDeviceId ]
-    objc-classes:    [ CSFAudioStreamBasicDescriptionFactory, CSMil2BnnsUtils, CSOnDeviceCompilationHandler, 
+    objc-classes:    [ CSFAudioStreamBasicDescriptionFactory, CSOnDeviceCompilationHandler, 
                        CSOnDeviceCompilationUtils, CSVTUIASRGrammars, CSVTUIAudioRecorder, 
                        CSVTUIAudioRecorderRemoteDeviceContext, CSVTUIAudioSessionRecorder, 
                        CSVTUIEndpointAnalyzer, CSVTUIKeywordDetector, CSVTUIRegularExpressionMatcher, 
@@ -285,5 +285,5 @@ exports:
                        CSVTUITrainingSession._speechRecognitionRequest, CSVTUITrainingSession._speechRecognitionTask, 
                        CSVTUITrainingSession._speechRecognizer, CSVTUITrainingSession._status, 
                        CSVTUITrainingSession._trainingCompletion, CSVTUITrainingSession._trainingCompletionWithResult, 
-                       CSVTUITrainingSession._utteranceId ]
+                       CSVTUITrainingSession._utteranceId, CSVTUITrainingSession._vtAssetConfigVersion ]
 ...

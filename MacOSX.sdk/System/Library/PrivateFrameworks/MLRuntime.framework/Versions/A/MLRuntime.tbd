@@ -8,11 +8,11 @@ exports:
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _MLRSanitizeError, _MLRuntimeVersionNumber, _MLRuntimeVersionString, 
                        _kMLRTrialTaskMinInterval ]
-    objc-classes:    [ MLRBMLTSchedulingPolicy, MLRExtensionPrincipalClass, MLRExtensionRemoteContext, 
-                       MLRExtensionService_Subsystem, MLRInternalBMLTTask, MLRInternalTrialTask, 
-                       MLRInternalTrialTaskResult, MLROnDemandConnectionHandler, 
-                       MLROnDemandPlugin, MLRSandboxExtensionRequest, MLRServiceClient, 
-                       MLRTask, MLRTaskAttachments, MLRTaskParameters, MLRTaskResult, 
-                       MLRTrialDediscoRecipe, MLRTrialDediscoTaskResult, MLRTrialTask, 
-                       MLRTrialTaskResult, MLRTrialTaskSchedulingPolicy ]
+    objc-classes:    [ MLRBMLTSchedulingPolicy, MLRDonationManager, MLRExtensionPrincipalClass, 
+                       MLRExtensionRemoteContext, MLRExtensionService_Subsystem, 
+                       MLRInternalBMLTTask, MLRInternalTrialTask, MLRInternalTrialTaskResult, 
+                       MLROnDemandConnectionHandler, MLROnDemandPlugin, MLRSandboxExtensionRequest, 
+                       MLRServiceClient, MLRTask, MLRTaskAttachments, MLRTaskParameters, 
+                       MLRTaskResult, MLRTrialDediscoRecipe, MLRTrialDediscoTaskResult, 
+                       MLRTrialTask, MLRTrialTaskResult, MLRTrialTaskSchedulingPolicy ]
 ...

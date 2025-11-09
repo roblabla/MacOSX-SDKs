@@ -900,6 +900,21 @@ CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_HorizontalFieldOfView	
 							API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
 
 /*!
+	@constant    kCMFormatDescriptionExtension_LogTransferFunction
+		Indicates that the transfer function or gamma of the content is a log format and identifies the specific log curve.
+	@discussion
+		The value is a CFString holding fully specified reverse DNS identifier.
+		Content captured in Apple Log will have this key set to kCMFormatDescriptionLogTransferFunction_AppleLog.
+	@constant    kCMFormatDescriptionLogTransferFunction_AppleLog
+		Indicates the Apple Log identifier.
+	@discussion
+		You can download the Apple Log Profile White Paper from the Apple Developer Downloads website.
+*/
+CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_LogTransferFunction API_AVAILABLE(macos(14.2), ios(17.2), tvos(17.2), watchos(10.2), visionos(1.1));
+CM_EXPORT const CFStringRef kCMFormatDescriptionLogTransferFunction_AppleLog					// same as kCVImageBufferLogTransferFunction_AppleLog
+							API_AVAILABLE(macos(14.2), ios(17.2), tvos(17.2), watchos(10.2), visionos(1.1));
+
+/*!
 	@constant    kCMFormatDescriptionExtension_HeroEye
 	@abstract 
         Indicates which of the two eyes should be used as the primary when rendering in 2D. It is usually perpendicular to the target image surface.
@@ -934,6 +949,33 @@ CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_StereoCameraBaseline A
     This property is optional and should only be specified if a disparity adjustment including 0 is known.
  */
 CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_HorizontalDisparityAdjustment API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos);     // CFNumber(int32) from -10000 to 10000 for the uniform range [-1.0...1.0]
+
+/*!
+	@constant kCMFormatDescriptionExtension_HasLeftStereoEyeView
+	@abstract
+		Indicates the stereo left eye is present in video frames.
+	@discussion
+	The value is a CFBoolean holding presence of left eye view in the stream.
+*/
+CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_HasLeftStereoEyeView API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos);  // CFBoolean
+
+/*!
+	@constant kCMFormatDescriptionExtension_HasRightStereoEyeView
+	@abstract
+		Indicates the stereo right eye is present in video frames.
+	@discussion
+	The value is a CFBoolean holding presence of right eye view in the stream.
+*/
+CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_HasRightStereoEyeView API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos); // CFBoolean
+
+/*!
+	@constant kCMFormatDescriptionExtension_HasAdditionalViews
+	@abstract
+		Indicates that one or more additional views may be present beyond stereo left and stereo right eyes (e.g,. a “centerline” view).
+	@discussion
+	The value is a CFBoolean holding presence of additional eye views in the stream.
+*/
+CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_HasAdditionalViews API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos);    // CFBoolean
 
 CM_ASSUME_NONNULL_END
 

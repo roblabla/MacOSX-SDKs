@@ -17,14 +17,14 @@ AS_EXTERN API_AVAILABLE(ios(17.0), macos(14.0)) API_UNAVAILABLE(tvos, watchos)
 @interface ASPasskeyAssertionCredential : NSObject <ASAuthorizationCredential>
 
 /*! @abstract Initializes an ASPasskeyCredential object.
- @param user the user.
+ @param userHandle The identifier for the account the passkey is associated with.
  @param relyingParty the relying party.
  @param signature the signature for the assertion challenge.
  */
 - (instancetype)initWithUserHandle:(NSData *)userHandle relyingParty:(NSString *)relyingParty signature:(NSData *)signature clientDataHash:(NSData *)clientDataHash authenticatorData:(NSData *)authenticatorData credentialID:(NSData *)credentialID;
 
 /*! @abstract Creates and initializes a new ASPasskeyCredential object.
- @param user the user.
+ @param userHandle The identifier for the account the passkey is associated with.
  @param relyingParty the relying party.
  @param signature the signature for the assertion challenge.
  */

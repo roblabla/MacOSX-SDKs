@@ -86,6 +86,11 @@ NS_CLASS_AVAILABLE(10_8, 4_1)
 /// An invited player has accepted a hosted invite.  Apps should connect through the hosting server and then update the player's connected state (using setConnected:forHostedPlayer:)
 - (void)matchmakerViewController:(GKMatchmakerViewController *)viewController hostedPlayerDidAccept:(GKPlayer *)player NS_AVAILABLE(10_10, 8_0);
 
+/// The game should provide `GKMatchProperties` for the `GKPlayer` that has been invited.
+/// If implemented, this function must call `completionHandler`: failing to do so will hang matchmaking.
+- (void)matchmakerViewController:(GKMatchmakerViewController *)viewController
+  getMatchPropertiesForRecipient:(GKPlayer *)recipient
+           withCompletionHandler:(void(^)(GKMatchProperties *recipientProperties))completionHandler API_AVAILABLE(ios(17.2), macos(14.2), tvos(17.2));
 
 /*** These protocol methods are obsoleted. They will never be invoked and their implementation does nothing***/
 - (void)matchmakerViewController:(GKMatchmakerViewController *)viewController didFindPlayers:(NSArray<NSString *> *)playerIDs API_DEPRECATED_WITH_REPLACEMENT("-matchmakerViewController:didFindHostedPlayers:", ios(4.1,8.0), macos(10.8,10.10)) API_UNAVAILABLE(tvos);

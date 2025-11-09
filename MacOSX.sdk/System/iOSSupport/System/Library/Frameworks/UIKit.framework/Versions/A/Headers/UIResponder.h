@@ -133,18 +133,18 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 
 // Called and presented when object becomes first responder.  Goes up the responder chain.
 @property (nullable, nonatomic, readonly, strong) __kindof UIView *inputView API_AVAILABLE(ios(3.2));
-@property (nullable, nonatomic, readonly, strong) __kindof UIView *inputAccessoryView API_AVAILABLE(ios(3.2));
+@property (nullable, nonatomic, readonly, strong) __kindof UIView *inputAccessoryView API_AVAILABLE(ios(3.2)) API_UNAVAILABLE(visionos);
 
 /// This method is for clients that wish to put buttons on the Shortcuts Bar, shown on top of the keyboard.
 /// You may modify the returned inputAssistantItem to add to or replace the existing items on the bar.
 /// Modifications made to the returned UITextInputAssistantItem are reflected automatically.
 /// This method should not be overridden. Goes up the responder chain.
-@property (nonnull, nonatomic, readonly, strong) UITextInputAssistantItem *inputAssistantItem API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
+@property (nonnull, nonatomic, readonly, strong) UITextInputAssistantItem *inputAssistantItem API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos) API_UNAVAILABLE(visionos);
 
 // For viewController equivalents of -inputView and -inputAccessoryView
 // Called and presented when object becomes first responder.  Goes up the responder chain.
 @property (nullable, nonatomic, readonly, strong) UIInputViewController *inputViewController API_AVAILABLE(ios(8.0));
-@property (nullable, nonatomic, readonly, strong) UIInputViewController *inputAccessoryViewController API_AVAILABLE(ios(8.0));
+@property (nullable, nonatomic, readonly, strong) UIInputViewController *inputAccessoryViewController API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(visionos);
 
 /* When queried, returns the current UITextInputMode, from which the keyboard language can be determined.
  * When overridden it should return a previously-queried UITextInputMode object, which will attempt to be

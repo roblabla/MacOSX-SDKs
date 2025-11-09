@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/swift/libswiftCoreAudio.dylib'
-current-version: 5
+current-version: 6
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -91,6 +91,22 @@ exports:
                        '_$sSR9CoreAudioEySRyxGSo0B6BufferVcfC', '_$sSo11AudioBufferV04CoreA0E_16numberOfChannelsABSryxG_SitclufC', 
                        '_$sSo15AudioBufferListV04CoreA0E11sizeInBytes14maximumBuffersS2i_tFZ', 
                        '_$sSo15AudioBufferListV04CoreA0E8allocate14maximumBuffersAC013UnsafeMutableabC7PointerVSi_tFZ', 
+                       '_$sSo16CATapDescriptionC9CoreAudioE22monoMixdownOfProcessesABSays6UInt32VG_tcfC', 
+                       '_$sSo16CATapDescriptionC9CoreAudioE22monoMixdownOfProcessesABSays6UInt32VG_tcfc', 
+                       '_$sSo16CATapDescriptionC9CoreAudioE24stereoMixdownOfProcessesABSays6UInt32VG_tcfC', 
+                       '_$sSo16CATapDescriptionC9CoreAudioE24stereoMixdownOfProcessesABSays6UInt32VG_tcfc', 
+                       '_$sSo16CATapDescriptionC9CoreAudioE32monoGlobalTapButExcludeProcessesABSays6UInt32VG_tcfC', 
+                       '_$sSo16CATapDescriptionC9CoreAudioE32monoGlobalTapButExcludeProcessesABSays6UInt32VG_tcfc', 
+                       '_$sSo16CATapDescriptionC9CoreAudioE34stereoGlobalTapButExcludeProcessesABSays6UInt32VG_tcfC', 
+                       '_$sSo16CATapDescriptionC9CoreAudioE34stereoGlobalTapButExcludeProcessesABSays6UInt32VG_tcfc', 
+                       '_$sSo16CATapDescriptionC9CoreAudioE6streamSuSgvM', '_$sSo16CATapDescriptionC9CoreAudioE6streamSuSgvg', 
+                       '_$sSo16CATapDescriptionC9CoreAudioE6streamSuSgvpMV', '_$sSo16CATapDescriptionC9CoreAudioE6streamSuSgvs', 
+                       '_$sSo16CATapDescriptionC9CoreAudioE9processes9deviceUID6streamABSays6UInt32VG_SSSutcfC', 
+                       '_$sSo16CATapDescriptionC9CoreAudioE9processes9deviceUID6streamABSays6UInt32VG_SSSutcfc', 
+                       '_$sSo16CATapDescriptionC9CoreAudioE9processesSays6UInt32VGvM', 
+                       '_$sSo16CATapDescriptionC9CoreAudioE9processesSays6UInt32VGvg', 
+                       '_$sSo16CATapDescriptionC9CoreAudioE9processesSays6UInt32VGvpMV', 
+                       '_$sSo16CATapDescriptionC9CoreAudioE9processesSays6UInt32VGvs', 
                        '_$sSo18AudioChannelLayoutV04CoreA0E11sizeInBytes19maximumDescriptionsS2i_tFZ', 
                        '_$sSo18AudioChannelLayoutV04CoreA0E13UnsafePointerV06unsafeF0SPyABGvM', 
                        '_$sSo18AudioChannelLayoutV04CoreA0E13UnsafePointerV06unsafeF0SPyABGvg', 

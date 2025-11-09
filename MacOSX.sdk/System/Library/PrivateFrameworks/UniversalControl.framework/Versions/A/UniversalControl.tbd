@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/UniversalControl.framework/Versions/A/UniversalControl'
-current-version: 139
+current-version: 140.2.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -1562,6 +1562,10 @@ exports:
                        '_$s8HIDUtils20HIDServicePropertiesV23scrollAccelerationTable10Foundation4DataVSgvg', 
                        '_$s8HIDUtils20HIDServicePropertiesV23scrollAccelerationTable10Foundation4DataVSgvpMV', 
                        '_$s8HIDUtils20HIDServicePropertiesV23scrollAccelerationTable10Foundation4DataVSgvs', 
+                       '_$s8HIDUtils20HIDServicePropertiesV23universalControlBuiltInSbSgvM', 
+                       '_$s8HIDUtils20HIDServicePropertiesV23universalControlBuiltInSbSgvg', 
+                       '_$s8HIDUtils20HIDServicePropertiesV23universalControlBuiltInSbSgvpMV', 
+                       '_$s8HIDUtils20HIDServicePropertiesV23universalControlBuiltInSbSgvs', 
                        '_$s8HIDUtils20HIDServicePropertiesV24dictionaryRepresentationSDySSypGvg', 
                        '_$s8HIDUtils20HIDServicePropertiesV24dictionaryRepresentationSDySSypGvpMV', 
                        '_$s8HIDUtils20HIDServicePropertiesV24pointerAccelerationTable10Foundation4DataVSgvM', 
@@ -1693,6 +1697,7 @@ exports:
                        '_$s8HIDUtils21HIDServicePropertyKeyV23mouseScrollAccelerationACvgZ', 
                        '_$s8HIDUtils21HIDServicePropertyKeyV23pointerAccelerationTypeACvgZ', 
                        '_$s8HIDUtils21HIDServicePropertyKeyV23scrollAccelerationTableACvgZ', 
+                       '_$s8HIDUtils21HIDServicePropertyKeyV23universalControlBuiltInACvgZ', 
                        '_$s8HIDUtils21HIDServicePropertyKeyV24pointerAccelerationTableACvgZ', 
                        '_$s8HIDUtils21HIDServicePropertyKeyV24supportsGestureScrollingACvgZ', 
                        '_$s8HIDUtils21HIDServicePropertyKeyV24userDeviceCreateInactiveACvgZ', 
@@ -1732,7 +1737,8 @@ exports:
                        '_$s8HIDUtils25HIDAccelerationTableEntryV6pointsSayAA0B5PointVGvpMV', 
                        '_$s8HIDUtils25HIDAccelerationTableEntryV6pointsSayAA0B5PointVGvs', 
                        '_$s8HIDUtils25HIDAccelerationTableEntryVMa', '_$s8HIDUtils25HIDAccelerationTableEntryVMn', 
-                       '_$s8HIDUtils25HIDAccelerationTableEntryVN', '_$s8HIDUtils36HIDUniversalControlMatchedServiceKeySSvg', 
+                       '_$s8HIDUtils25HIDAccelerationTableEntryVN', '_$s8HIDUtils29HIDUniversalControlBuiltInKeySSvg', 
+                       '_$s8HIDUtils36HIDUniversalControlMatchedServiceKeySSvg', 
                        '_$s8HIDUtils36HIDUniversalControlVirtualServiceKeySSvg', 
                        '_$s8HIDUtils7HIDTimeV11descriptionSSvg', '_$s8HIDUtils7HIDTimeV11descriptionSSvpMV', 
                        '_$s8HIDUtils7HIDTimeV11nanosecondsACSd_tcfC', '_$s8HIDUtils7HIDTimeV11nanosecondsACs6UInt64V_tcfC', 

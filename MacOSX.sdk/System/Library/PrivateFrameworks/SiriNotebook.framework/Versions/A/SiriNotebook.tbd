@@ -14,6 +14,8 @@ exports:
                        '_$s12SiriNotebook0B14FeatureManagerV13isNLv4EnabledSbvpMV', 
                        '_$s12SiriNotebook0B14FeatureManagerV20isCorrectionsEnabledSbvg', 
                        '_$s12SiriNotebook0B14FeatureManagerV20isCorrectionsEnabledSbvpMV', 
+                       '_$s12SiriNotebook0B14FeatureManagerV24isGroceryListTypeEnabledSbvg', 
+                       '_$s12SiriNotebook0B14FeatureManagerV24isGroceryListTypeEnabledSbvpMV', 
                        '_$s12SiriNotebook0B14FeatureManagerV26isResponseFrameworkEnabledSbvg', 
                        '_$s12SiriNotebook0B14FeatureManagerV26isResponseFrameworkEnabledSbvpMV', 
                        '_$s12SiriNotebook0B14FeatureManagerV27isReadingFlowOnModesEnabledSbvg', 

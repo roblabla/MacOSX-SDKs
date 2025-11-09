@@ -1,7 +1,7 @@
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos ]
-install-name:    '/AppleInternal/Library/BuildRoots/a9508cce-41b1-11ee-b8b0-7a03568b17ac/Library/Caches/com.apple.xbs/Sources/GPUDriversIntel/Common/lib/CLPlugin/igc/libCLVMIGCPlugin.dylib'
+install-name:    '/AppleInternal/Library/BuildRoots/e8b6f73d-81af-11ee-9d58-6aecfccc70fe/Library/Caches/com.apple.xbs/Sources/GPUDriversIntel/Common/lib/CLPlugin/igc/libCLVMIGCPlugin.dylib'
 exports:
   - targets:         [ x86_64-macos ]
     symbols:         [ _cvmsPluginElementBuild, _cvmsPluginServiceInitialize, _cvmsPluginServiceTerminate ]

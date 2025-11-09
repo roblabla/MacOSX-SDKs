@@ -17,22 +17,6 @@ exports:
                        '_$s12JoinRequests0A15RequestProviderOMa', '_$s12JoinRequests0A15RequestProviderOMn', 
                        '_$s12JoinRequests0A15RequestProviderON', '_$s12JoinRequests0A15RequestProviderOSHAAMc', 
                        '_$s12JoinRequests0A15RequestProviderOSQAAMc', '_$s12JoinRequests0A15RequestProviderOSYAAMc', 
-                       '_$s12JoinRequests0A22RequestPseudonymParamsV23expiryDurationInSecondsSdvg', 
-                       '_$s12JoinRequests0A22RequestPseudonymParamsV23expiryDurationInSecondsSdvpMV', 
-                       '_$s12JoinRequests0A22RequestPseudonymParamsV9featureID23expiryDurationInSecondsACSS_SdtcfC', 
-                       '_$s12JoinRequests0A22RequestPseudonymParamsV9featureIDSSvg', 
-                       '_$s12JoinRequests0A22RequestPseudonymParamsV9featureIDSSvpMV', 
-                       '_$s12JoinRequests0A22RequestPseudonymParamsVMa', '_$s12JoinRequests0A22RequestPseudonymParamsVMn', 
-                       '_$s12JoinRequests0A22RequestPseudonymParamsVN', '_$s12JoinRequests0aB10ControllerC33provisionPseudonymForLocalAccount6paramsSSAA0a7RequestE6ParamsV_tYaKF', 
-                       '_$s12JoinRequests0aB10ControllerC33provisionPseudonymForLocalAccount6paramsSSAA0a7RequestE6ParamsV_tYaKFTq', 
-                       '_$s12JoinRequests0aB10ControllerC33provisionPseudonymForLocalAccount6paramsSSAA0a7RequestE6ParamsV_tYaKFTu', 
-                       '_$s12JoinRequests0aB10ControllerC7serviceAcA18IDSServiceProtocol_p_tcfC', 
-                       '_$s12JoinRequests0aB10ControllerC7serviceAcA18IDSServiceProtocol_p_tcfCTq', 
-                       '_$s12JoinRequests0aB10ControllerC7serviceAcA18IDSServiceProtocol_p_tcfc', 
-                       '_$s12JoinRequests0aB10ControllerC8providerAcA0A15RequestProviderO_tcfC', 
-                       '_$s12JoinRequests0aB10ControllerCACycfC', '_$s12JoinRequests0aB10ControllerCACycfc', 
-                       '_$s12JoinRequests0aB10ControllerCMa', '_$s12JoinRequests0aB10ControllerCMn', 
-                       '_$s12JoinRequests0aB10ControllerCN', '_$s12JoinRequests0aB10ControllerCfD', 
                        '_$s12JoinRequests16OwnerCredentialsC13publicKeyData10Foundation0G0VSgvg', 
                        '_$s12JoinRequests16OwnerCredentialsC13publicKeyData10Foundation0G0VSgvgTq', 
                        '_$s12JoinRequests16OwnerCredentialsC13publicKeyData10Foundation0G0VSgvpMV', 
@@ -119,5 +103,4 @@ exports:
                        '_$sSo10IDSServiceC12JoinRequests0A8ProtocolACMc', '_$sSo10IDSServiceC12JoinRequests0A8ProtocolACWP', 
                        '_$ss26DefaultStringInterpolationV12JoinRequestsE06appendC0yyxSglF', 
                        _JoinRequestsVersionNumber, _JoinRequestsVersionString ]
-    objc-classes:    [ _TtC12JoinRequests22JoinRequestsController ]
 ...

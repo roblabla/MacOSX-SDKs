@@ -2,14 +2,14 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/WebKit.framework/Versions/A/Frameworks/WebCore.framework/Versions/A/Frameworks/libANGLE-shared.dylib'
-current-version: 616.1.27
+current-version: 617.1.17
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ WebCore, WebCoreTestSupport ]
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _ANGLEGetDisplayPlatform, _ANGLEResetDisplayPlatform, _EGL_BindAPI, 
-                       _EGL_BindTexImage, _EGL_ChooseConfig, _EGL_ClientWaitSync, 
+    symbols:         [ _ANGLEGetDisplayPlatform, _ANGLEResetDisplayPlatform, _EGL_AcquireExternalContextANGLE, 
+                       _EGL_BindAPI, _EGL_BindTexImage, _EGL_ChooseConfig, _EGL_ClientWaitSync, 
                        _EGL_ClientWaitSyncKHR, _EGL_CopyBuffers, _EGL_CopyMetalSharedEventANGLE, 
                        _EGL_CreateContext, _EGL_CreateDeviceANGLE, _EGL_CreateImage, 
                        _EGL_CreateImageKHR, _EGL_CreateNativeClientBufferANDROID, 
@@ -40,25 +40,25 @@ exports:
                        _EGL_QueryStreamKHR, _EGL_QueryStreamu64KHR, _EGL_QueryString, 
                        _EGL_QueryStringiANGLE, _EGL_QuerySurface, _EGL_QuerySurface64KHR, 
                        _EGL_QuerySurfacePointerANGLE, _EGL_ReacquireHighPowerGPUANGLE, 
-                       _EGL_ReleaseDeviceANGLE, _EGL_ReleaseHighPowerGPUANGLE, _EGL_ReleaseTexImage, 
-                       _EGL_ReleaseThread, _EGL_SetBlobCacheFuncsANDROID, _EGL_SetDamageRegionKHR, 
-                       _EGL_SignalSyncKHR, _EGL_StreamAttribKHR, _EGL_StreamConsumerAcquireKHR, 
-                       _EGL_StreamConsumerGLTextureExternalAttribsNV, _EGL_StreamConsumerGLTextureExternalKHR, 
-                       _EGL_StreamConsumerReleaseKHR, _EGL_StreamPostD3DTextureANGLE, 
-                       _EGL_SurfaceAttrib, _EGL_SwapBuffers, _EGL_SwapBuffersWithDamageKHR, 
-                       _EGL_SwapBuffersWithFrameTokenANGLE, _EGL_SwapInterval, _EGL_Terminate, 
-                       _EGL_UnlockSurfaceKHR, _EGL_WaitClient, _EGL_WaitGL, _EGL_WaitNative, 
-                       _EGL_WaitSync, _EGL_WaitSyncKHR, _EGL_WaitUntilWorkScheduledANGLE, 
-                       _GL_AcquireTexturesANGLE, _GL_ActiveShaderProgram, _GL_ActiveShaderProgramEXT, 
-                       _GL_ActiveTexture, _GL_AlphaFunc, _GL_AlphaFuncx, _GL_AttachShader, 
-                       _GL_BeginPerfMonitorAMD, _GL_BeginPixelLocalStorageANGLE, 
-                       _GL_BeginQuery, _GL_BeginQueryEXT, _GL_BeginTransformFeedback, 
-                       _GL_BindAttribLocation, _GL_BindBuffer, _GL_BindBufferBase, 
-                       _GL_BindBufferRange, _GL_BindFragDataLocationEXT, _GL_BindFragDataLocationIndexedEXT, 
-                       _GL_BindFramebuffer, _GL_BindFramebufferOES, _GL_BindImageTexture, 
-                       _GL_BindProgramPipeline, _GL_BindProgramPipelineEXT, _GL_BindRenderbuffer, 
-                       _GL_BindRenderbufferOES, _GL_BindSampler, _GL_BindTexture, 
-                       _GL_BindTransformFeedback, _GL_BindUniformLocationCHROMIUM, 
+                       _EGL_ReleaseDeviceANGLE, _EGL_ReleaseExternalContextANGLE, 
+                       _EGL_ReleaseHighPowerGPUANGLE, _EGL_ReleaseTexImage, _EGL_ReleaseThread, 
+                       _EGL_SetBlobCacheFuncsANDROID, _EGL_SetDamageRegionKHR, _EGL_SignalSyncKHR, 
+                       _EGL_StreamAttribKHR, _EGL_StreamConsumerAcquireKHR, _EGL_StreamConsumerGLTextureExternalAttribsNV, 
+                       _EGL_StreamConsumerGLTextureExternalKHR, _EGL_StreamConsumerReleaseKHR, 
+                       _EGL_StreamPostD3DTextureANGLE, _EGL_SurfaceAttrib, _EGL_SwapBuffers, 
+                       _EGL_SwapBuffersWithDamageKHR, _EGL_SwapBuffersWithFrameTokenANGLE, 
+                       _EGL_SwapInterval, _EGL_Terminate, _EGL_UnlockSurfaceKHR, 
+                       _EGL_WaitClient, _EGL_WaitGL, _EGL_WaitNative, _EGL_WaitSync, 
+                       _EGL_WaitSyncKHR, _EGL_WaitUntilWorkScheduledANGLE, _GL_AcquireTexturesANGLE, 
+                       _GL_ActiveShaderProgram, _GL_ActiveShaderProgramEXT, _GL_ActiveTexture, 
+                       _GL_AlphaFunc, _GL_AlphaFuncx, _GL_AttachShader, _GL_BeginPerfMonitorAMD, 
+                       _GL_BeginPixelLocalStorageANGLE, _GL_BeginQuery, _GL_BeginQueryEXT, 
+                       _GL_BeginTransformFeedback, _GL_BindAttribLocation, _GL_BindBuffer, 
+                       _GL_BindBufferBase, _GL_BindBufferRange, _GL_BindFragDataLocationEXT, 
+                       _GL_BindFragDataLocationIndexedEXT, _GL_BindFramebuffer, _GL_BindFramebufferOES, 
+                       _GL_BindImageTexture, _GL_BindProgramPipeline, _GL_BindProgramPipelineEXT, 
+                       _GL_BindRenderbuffer, _GL_BindRenderbufferOES, _GL_BindSampler, 
+                       _GL_BindTexture, _GL_BindTransformFeedback, _GL_BindUniformLocationCHROMIUM, 
                        _GL_BindVertexArray, _GL_BindVertexArrayOES, _GL_BindVertexBuffer, 
                        _GL_BlendBarrier, _GL_BlendBarrierKHR, _GL_BlendColor, _GL_BlendEquation, 
                        _GL_BlendEquationSeparate, _GL_BlendEquationSeparatei, _GL_BlendEquationSeparateiEXT, 

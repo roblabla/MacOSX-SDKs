@@ -9,7 +9,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// GKScore represents a score in the leaderboards.
-API_DEPRECATED_WITH_REPLACEMENT("GKLeaderboardScore", ios(4.1, 14.0), tvos(9.0, 14.0), macosx(10.8, 11.0), watchos(3.0, 7.0))
+API_DEPRECATED_WITH_REPLACEMENT("GKLeaderboardScore", ios(4.1, 14.0), tvos(9.0, 14.0), macos(10.8, 11.0), watchos(3.0, 7.0))
 @interface GKScore : NSObject <NSCoding, NSSecureCoding>
 
 /// Initialize the score with the local player and current date.

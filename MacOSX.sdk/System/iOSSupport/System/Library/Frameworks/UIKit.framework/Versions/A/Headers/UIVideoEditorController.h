@@ -24,7 +24,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(3.1)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 
 @property(nonatomic, copy)     NSString                              *videoPath;
 @property(nonatomic)           NSTimeInterval                        videoMaximumDuration; // default value is 10 minutes. set to 0 to specify no maximum duration.
-@property(nonatomic)           UIImagePickerControllerQualityType    videoQuality;         // default value is UIImagePickerControllerQualityTypeMedium
+@property(nonatomic)           UIImagePickerControllerQualityType    videoQuality API_UNAVAILABLE(visionos);         // default value is UIImagePickerControllerQualityTypeMedium
 
 @end
 

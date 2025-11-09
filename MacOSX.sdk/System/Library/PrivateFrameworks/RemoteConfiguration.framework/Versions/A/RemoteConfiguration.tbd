@@ -3,7 +3,6 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/RemoteConfiguration.framework/Versions/A/RemoteConfiguration'
-current-version: 184.0.1
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -47,9 +46,8 @@ exports:
                        _RCErrorHTTPStatusCodeKey, _RCErrorHTTPURLKey, _RCErrorOfflineReasonKey, 
                        _RCErrorOperationClassNameKey, _RCErrorOperationIDKey, _RCErrorRetryAfterKey, 
                        _RCErrorRetryWithHigherPriorityKey, _RCErrorWrapperErrorsKey, 
-                       _RCFractionalPart, _RCGeneralDeviceString, _RCGenerateOperationID, 
-                       _RCHandleOperationCancellation, _RCHandleOperationTimeout, 
-                       _RCHigherRelativePriority, _RCInferRelativePriorityFromQualityOfService, 
+                       _RCFractionalPart, _RCGenerateOperationID, _RCHandleOperationCancellation, 
+                       _RCHandleOperationTimeout, _RCHigherRelativePriority, _RCInferRelativePriorityFromQualityOfService, 
                        _RCJSONArrayValue, _RCJSONBoolValue, _RCJSONDictionaryValue, 
                        _RCJSONDoubleValue, _RCJSONIntegerValue, _RCJSONStringValue, 
                        _RCLogSubsystemIdentifier, _RCMillisecondsToSeconds, _RCMix, 

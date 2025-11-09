@@ -420,8 +420,7 @@ kern_return_t mach_vm_deferred_reclamation_buffer_init
 (
 	task_t target_task,
 	mach_vm_offset_t address,
-	mach_vm_size_t size,
-	mach_vm_address_t indices
+	mach_vm_size_t size
 );
 
 /* Routine mach_vm_deferred_reclamation_buffer_synchronize */
@@ -829,7 +828,6 @@ __END_DECLS
 		NDR_record_t NDR;
 		mach_vm_offset_t address;
 		mach_vm_size_t size;
-		mach_vm_address_t indices;
 	} __Request__mach_vm_deferred_reclamation_buffer_init_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack(pop)

@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.9 (swiftlang-5.9.0.123.203 clang-1500.0.37.1)
-// swift-module-flags: -target x86_64-apple-macos14.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name GroupActivities
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 118.100.1.1.2
+// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.11 clang-1500.1.0.2.2)
+// swift-module-flags: -target x86_64-apple-macos14.2 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name GroupActivities
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 118.300.81
 import AVFoundation
 import CloudKit
 import Combine
@@ -57,7 +57,7 @@ final public class GroupSession<ActivityType> : Combine.ObservableObject where A
   final public var localParticipant: GroupActivities.Participant {
     get
   }
-  @available(iOS 17, macOS 14, tvOS 17, xrOS 1, *)
+  @available(iOS 17, macOS 14, tvOS 17, visionOS 1, *)
   @available(watchOS, unavailable)
   final public let sceneSessionIdentifier: Swift.String?
   @objc deinit
@@ -75,7 +75,7 @@ extension GroupActivities.GroupSession : Swift.CustomStringConvertible {
     get
   }
 }
-@available(xrOS 1.0, *)
+@available(visionOS 1.0, *)
 @available(iOS, unavailable)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
@@ -85,7 +85,7 @@ public struct SpatialTemplatePreference : Swift.CustomStringConvertible {
     get
   }
 }
-@available(xrOS 1.0, *)
+@available(visionOS 1.0, *)
 @available(iOS, unavailable)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
@@ -297,7 +297,7 @@ extension GroupActivities.Participant : Swift.CustomStringConvertible {
     get
   }
 }
-@available(xrOS 1.0, *)
+@available(visionOS 1.0, *)
 @available(iOS, unavailable)
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
@@ -308,7 +308,7 @@ extension GroupActivities.SystemCoordinator {
     public static func == (a: GroupActivities.SystemCoordinator.ParticipantState, b: GroupActivities.SystemCoordinator.ParticipantState) -> Swift.Bool
   }
 }
-@available(xrOS 1.0, *)
+@available(visionOS 1.0, *)
 @available(iOS, unavailable)
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
@@ -469,19 +469,19 @@ extension GroupActivities.GroupSession {
   }
   #endif
 }
-@available(iOS 17, macOS 14, tvOS 17, xrOS 1, *)
+@available(iOS 17, macOS 14, tvOS 17, visionOS 1, *)
 @available(watchOS, unavailable)
 public struct SceneAssociationBehavior : Swift.Equatable {
   public static func == (a: GroupActivities.SceneAssociationBehavior, b: GroupActivities.SceneAssociationBehavior) -> Swift.Bool
 }
-@available(iOS 17, macOS 14, tvOS 17, xrOS 1, *)
+@available(iOS 17, macOS 14, tvOS 17, visionOS 1, *)
 @available(watchOS, unavailable)
 extension GroupActivities.SceneAssociationBehavior {
   public static let `default`: GroupActivities.SceneAssociationBehavior
   public static func content(_ contentIdentifier: Swift.String) -> GroupActivities.SceneAssociationBehavior
   public static let none: GroupActivities.SceneAssociationBehavior
 }
-@available(xrOS 1.0, *)
+@available(visionOS 1.0, *)
 @available(iOS, unavailable)
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
@@ -493,7 +493,7 @@ extension GroupActivities.GroupSession {
   }
   #endif
 }
-@_hasMissingDesignatedInitializers @available(xrOS 1.0, *)
+@_hasMissingDesignatedInitializers @available(visionOS 1.0, *)
 @available(iOS, unavailable)
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
@@ -562,7 +562,7 @@ public struct GroupActivityMetadata : Swift.Equatable {
   public var fallbackURL: Foundation.URL?
   public var preferredBroadcastOptions: GroupActivities.BroadcastOptions
   public var supportsContinuationOnTV: Swift.Bool
-  @available(iOS 17, macOS 14, tvOS 17, xrOS 1, *)
+  @available(iOS 17, macOS 14, tvOS 17, visionOS 1, *)
   @available(watchOS, unavailable)
   public var sceneAssociationBehavior: GroupActivities.SceneAssociationBehavior
   public init()

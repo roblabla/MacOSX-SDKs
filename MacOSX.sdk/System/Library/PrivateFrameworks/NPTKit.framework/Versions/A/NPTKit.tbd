@@ -16,5 +16,5 @@ exports:
                        NPTPerformanceTest, NPTPerformanceTestConfiguration, NPTPing, 
                        NPTPingResult, NPTResults, NPTSpeedMetric, NPTSystemCollector, 
                        NPTTaskMetrics, NPTUpload, NPTUploadDataStream, NPTVPNCollector, 
-                       NPTWiFiCollector, Ping, SimplePing ]
+                       NPTWiFiCollector, Ping, SDLogger, SimplePing, SpeedDClient ]
 ...

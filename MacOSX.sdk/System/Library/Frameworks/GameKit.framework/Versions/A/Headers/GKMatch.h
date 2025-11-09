@@ -14,7 +14,7 @@
 typedef NS_ENUM(NSInteger, GKMatchSendDataMode) {
     GKMatchSendDataReliable,         /// a.s.a.p. but requires fragmentation and reassembly for large messages, may stall if network congestion occurs
     GKMatchSendDataUnreliable        /// Preferred method. Best effort and immediate, but no guarantees of delivery or order; will not stall.
-};
+} __WATCHOS_PROHIBITED;
 
 typedef NS_ENUM(NSInteger, GKPlayerConnectionState) {
     GKPlayerStateUnknown,       /// initial player state
@@ -30,6 +30,8 @@ NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_PROHIBITED
 @property(nonatomic, readonly) NSArray<GKPlayer *> *players NS_AVAILABLE(10_10, 8_0);    /// all the GKPlayers in the match
 @property(nonatomic, nullable, weak) id<GKMatchDelegate> delegate;
 @property(nonatomic, readonly) NSUInteger expectedPlayerCount;
+@property(nonatomic, nullable, readonly) GKMatchProperties *properties API_AVAILABLE(ios(17.2), macos(14.2), tvos(17.2));
+@property(nonatomic, nullable, readonly) NSDictionary<GKPlayer *, GKMatchProperties *> *playerProperties API_AVAILABLE(ios(17.2), macos(14.2), watchos(10.2), tvos(17.2));
 
 /// Asynchronously send data to one or more GKPlayers. Returns YES if delivery started, NO if unable to start sending and error will be set.
 - (BOOL)sendData:(NSData *)data toPlayers:(NSArray<GKPlayer *> *)players dataMode:(GKMatchSendDataMode)mode error:(NSError * __nullable * __nullable)error NS_AVAILABLE(10_10, 8_0);

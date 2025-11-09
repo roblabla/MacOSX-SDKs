@@ -8,8 +8,7 @@ reexported-libraries:
     libraries:       [ '/System/Library/PrivateFrameworks/SensitiveContentAnalysisUI.framework/Versions/A/SensitiveContentAnalysisUI' ]
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _USUICurrentInterventionType, _USUIIsRunningInMacCatalyst, 
-                       _UserSafetyUIVersionNumber, _UserSafetyUIVersionString ]
+    symbols:         [ _UserSafetyUIVersionNumber, _UserSafetyUIVersionString ]
     objc-classes:    [ USUIContactParentsHelper, USUIInterventionScreenAction, USUIInterventionScreenBullet, 
                        USUIInterventionScreenModel, USUIMoreHelpMenuAction, USUIMoreHelpMenuModel ]
 --- !tapi-tbd

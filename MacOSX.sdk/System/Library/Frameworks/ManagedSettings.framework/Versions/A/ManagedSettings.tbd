@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/ManagedSettings.framework/Versions/A/ManagedSettings'
-current-version: 125
+current-version: 140
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -1250,7 +1250,6 @@ exports:
                        '_$s15ManagedSettings9LocationsV20dataVersionDirectory10Foundation3URLVvpMV', 
                        '_$s15ManagedSettings9LocationsV26persistenceRecordStorePath10Foundation3URLVvg', 
                        '_$s15ManagedSettings9LocationsV26persistenceRecordStorePath10Foundation3URLVvpMV', 
-                       '_$s15ManagedSettings9LocationsV28screenTimeDataVaultDirectory10Foundation3URLVyFZ', 
                        '_$s15ManagedSettings9LocationsV31persistenceRecordStoreDirectory10Foundation3URLVvg', 
                        '_$s15ManagedSettings9LocationsV31persistenceRecordStoreDirectory10Foundation3URLVvpMV', 
                        '_$s15ManagedSettings9LocationsVAA9LocatableAAMc', '_$s15ManagedSettings9LocationsVAA9LocatableAAWP', 

@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// `SBElementArray` is subclass of `NSMutableArray` that manages collections of
 /// related
-/// <doc://com.apple.documentation/documentation/scriptingbridge/sbobject>
+/// ``SBObject``
 /// objects. For example, when you ask the Finder for a list of disks, or ask
 /// iTunes for a list of playlists, you get the result back as an
 /// `SBElementArray` containing Scripting Bridge objects representing those
@@ -39,7 +39,7 @@ API_AVAILABLE(macos(10.5), macCatalyst(13.0))
 /// Returns the object in the array with the given name.
 ///
 /// This method is provided as an alternative
-/// to<doc://com.apple.documentation/documentation/foundation/nsarray/1417555-objectatindex>
+/// to <doc://com.apple.documentation/documentation/foundation/nsarray/1417555-objectatindex>
 /// for applications where a name is available instead of (or in addition to) an
 /// index. A name is generally more stable than an index. For example, it is
 /// typically more useful to identify a mailbox in Mail by its name than by its

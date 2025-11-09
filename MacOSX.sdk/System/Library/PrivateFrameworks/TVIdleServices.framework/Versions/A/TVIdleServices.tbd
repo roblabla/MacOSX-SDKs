@@ -34,11 +34,11 @@ exports:
                        TVISAerialStore, TVISAerialSubcategory, TVISAerialSubcategoryEntity, 
                        TVISAerialUserEntity, TVISAnalytics, TVISAssetServiceManager, 
                        TVISCacheDeleteInfo, TVISCacheDeleteManager, TVISCacheDeletePurgeableItem, 
-                       TVISConnectionListener, TVISFileManager, TVISHTTPRequester, 
-                       TVISIndexSetMuxer, TVISLogging, TVISPersistentContainer, TVISPreferencesUtility, 
-                       TVISReachabilityMonitor, TVISReflectedMatrix, TVISResources, 
-                       TVISScreenSaverConfiguration, TVISScreenSaverService, TVISScreenSaverServiceController, 
-                       TVISScreenSaverServiceProxy, TVISServiceConfigurationUtility, 
-                       TVISServiceConnection, TVISSettingsOption, TVISSettingsToggleOption, 
-                       TVISSnapshotLogger, TVISStore, TVISUntarUtility ]
+                       TVISConnectionListener, TVISDownloadableAsset, TVISFileManager, 
+                       TVISHTTPRequester, TVISIndexSetMuxer, TVISLogging, TVISPersistentContainer, 
+                       TVISPreferencesUtility, TVISReachabilityMonitor, TVISReflectedMatrix, 
+                       TVISResources, TVISScreenSaverConfiguration, TVISScreenSaverService, 
+                       TVISScreenSaverServiceController, TVISScreenSaverServiceProxy, 
+                       TVISServiceConfigurationUtility, TVISServiceConnection, TVISSettingsOption, 
+                       TVISSettingsToggleOption, TVISSnapshotLogger, TVISStore, TVISUntarUtility ]
 ...

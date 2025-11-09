@@ -47,6 +47,7 @@ VZ_EXPORT API_AVAILABLE(macos(12.0))
  @abstract Directory share. Defines how host resources are exposed to the guest virtual machine.
  @see VZSingleDirectoryShare
  @see VZMultipleDirectoryShare
+ @see VZLinuxRosettaDirectoryShare
  */
 @property (nullable, strong) VZDirectoryShare *share;
 

@@ -69,7 +69,7 @@ AVF_EXPORT NSString *const AVCaptureDeviceSubjectAreaDidChangeNotification API_A
  
     Instances of AVCaptureDevice can be used to provide media data to an AVCaptureSession by creating an AVCaptureDeviceInput with the device and adding that to the capture session.
  */
-API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVCaptureDevice : NSObject
 {
 @private
@@ -89,7 +89,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     This method returns an array of AVCaptureDevice instances for input devices currently connected and available for capture. The returned array contains all devices that are available at the time the method is called. Applications should observe AVCaptureDeviceWasConnectedNotification and AVCaptureDeviceWasDisconnectedNotification to be notified when the list of available devices has changed.
  */
-+ (NSArray<AVCaptureDevice *> *)devices API_DEPRECATED("Use AVCaptureDeviceDiscoverySession instead.", ios(4.0, 10.0), macos(10.7, 10.15), visionos(1.0, 1.0)) API_UNAVAILABLE(tvos);
++ (NSArray<AVCaptureDevice *> *)devices API_DEPRECATED("Use AVCaptureDeviceDiscoverySession instead.", ios(4.0, 10.0), macos(10.7, 10.15)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 
 /*!
  @method devicesWithMediaType:
@@ -104,7 +104,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     This method returns an array of AVCaptureDevice instances for input devices currently connected and available for capture that provide media of the given type. Media type constants are defined in AVMediaFormat.h. The returned array contains all devices that are available at the time the method is called. Applications should observe AVCaptureDeviceWasConnectedNotification and AVCaptureDeviceWasDisconnectedNotification to be notified when the list of available devices has changed.
  */
-+ (NSArray<AVCaptureDevice *> *)devicesWithMediaType:(AVMediaType)mediaType API_DEPRECATED("Use AVCaptureDeviceDiscoverySession instead.", ios(4.0, 10.0), macos(10.7, 10.15), visionos(1.0, 1.0)) API_UNAVAILABLE(tvos);
++ (NSArray<AVCaptureDevice *> *)devicesWithMediaType:(AVMediaType)mediaType API_DEPRECATED("Use AVCaptureDeviceDiscoverySession instead.", ios(4.0, 10.0), macos(10.7, 10.15)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 
 /*!
  @method defaultDeviceWithMediaType:
@@ -119,7 +119,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     This method returns the default device of the given media type currently available on the system. For example, for AVMediaTypeVideo, this method will return the built in camera that is primarily used for capture and recording. Media type constants are defined in AVMediaFormat.h.
  */
-+ (nullable AVCaptureDevice *)defaultDeviceWithMediaType:(AVMediaType)mediaType;
++ (nullable AVCaptureDevice *)defaultDeviceWithMediaType:(AVMediaType)mediaType API_UNAVAILABLE(visionos);
 
 /*!
  @method deviceWithUniqueID:
@@ -134,7 +134,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     Every available capture device has a unique ID that persists on one system across device connections and disconnections, application restarts, and reboots of the system itself. This method can be used to recall or track the status of a specific device whose unique ID has previously been saved.
  */
-+ (nullable AVCaptureDevice *)deviceWithUniqueID:(NSString *)deviceUniqueID;
++ (nullable AVCaptureDevice *)deviceWithUniqueID:(NSString *)deviceUniqueID API_UNAVAILABLE(visionos);
 
 /*!
  @property uniqueID
@@ -154,7 +154,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     The value of this property is an identifier unique to all devices of the same model. The value is persistent across device connections and disconnections, and across different systems. For example, the model ID of the camera built in to two identical iPhone models will be the same even though they are different physical devices.
  */
-@property(nonatomic, readonly) NSString *modelID;
+@property(nonatomic, readonly) NSString *modelID API_UNAVAILABLE(visionos);
 
 /*!
  @property localizedName
@@ -239,7 +239,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     An AVCaptureSession instance can be associated with a preset that configures its inputs and outputs to fulfill common use cases. This method can be used to determine if the receiver can be used in a capture session with the given preset. Presets are defined in AVCaptureSession.h.
  */
-- (BOOL)supportsAVCaptureSessionPreset:(AVCaptureSessionPreset)preset;
+- (BOOL)supportsAVCaptureSessionPreset:(AVCaptureSessionPreset)preset API_UNAVAILABLE(visionos);
 
 /*!
  @property connected
@@ -249,7 +249,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     The value of this property is a BOOL indicating whether the device represented by the receiver is connected and available for use as a capture device. Clients can key value observe the value of this property to be notified when a device is no longer available. When the value of this property becomes NO for a given instance, it will not become YES again. If the same physical device again becomes available to the system, it will be represented using a new instance of AVCaptureDevice.
  */
-@property(nonatomic, readonly, getter=isConnected) BOOL connected;
+@property(nonatomic, readonly, getter=isConnected) BOOL connected API_UNAVAILABLE(visionos);
 
 /*!
  @property inUseByAnotherApplication
@@ -289,7 +289,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     This property can be used to enumerate the formats natively supported by the receiver. The capture device's activeFormat property may be set to one of the formats in this array. Clients can observe automatic changes to the receiver's formats by key value observing this property.
  */
-@property(nonatomic, readonly) NSArray<AVCaptureDeviceFormat *> *formats API_AVAILABLE(ios(7.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos);
+@property(nonatomic, readonly) NSArray<AVCaptureDeviceFormat *> *formats API_AVAILABLE(ios(7.0), macCatalyst(14.0), tvos(17.0), visionos(1.0));
 
 /*!
  @property activeFormat
@@ -320,7 +320,7 @@ AV_INIT_UNAVAILABLE
  
     Note that when configuring a session to use an active format intended for high resolution still photography and applying one or more of the following operations to an AVCaptureVideoDataOutput, the system may not meet the target framerate: zoom, orientation changes, format conversion.
  */
-@property(nonatomic, retain) AVCaptureDeviceFormat *activeFormat API_AVAILABLE(ios(7.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos);
+@property(nonatomic, retain) AVCaptureDeviceFormat *activeFormat API_AVAILABLE(ios(7.0), macCatalyst(14.0), tvos(17.0), visionos(1.0));
 
 /*!
  @property activeVideoMinFrameDuration
@@ -343,7 +343,7 @@ AV_INIT_UNAVAILABLE
  
     When exposureMode is AVCaptureExposureModeCustom, setting the activeVideoMinFrameDuration affects max frame rate, but not exposureDuration. You may use setExposureModeCustomWithDuration:ISO:completionHandler: to set a shorter exposureDuration than your activeVideoMinFrameDuration, if desired.
  */
-@property(nonatomic) CMTime activeVideoMinFrameDuration API_AVAILABLE(ios(7.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos);
+@property(nonatomic) CMTime activeVideoMinFrameDuration API_AVAILABLE(ios(7.0), macCatalyst(14.0), tvos(17.0), visionos(1.0));
 
 /*!
  @property activeVideoMaxFrameDuration
@@ -366,7 +366,7 @@ AV_INIT_UNAVAILABLE
  
     When exposureMode is AVCaptureExposureModeCustom, frame rate and exposure duration are interrelated. If you call setExposureModeCustomWithDuration:ISO:completionHandler: with an exposureDuration longer than the current activeVideoMaxFrameDuration, the activeVideoMaxFrameDuration will be lengthened to accommodate the longer exposure time. Setting a shorter exposure duration does not automatically change the activeVideoMinFrameDuration or activeVideoMaxFrameDuration. To explicitly increase the frame rate in custom exposure mode, you must set the activeVideoMaxFrameDuration to a shorter value. If your new max frame duration is shorter than the current exposureDuration, the exposureDuration will shorten as well to accommodate the new frame rate.
  */
-@property(nonatomic) CMTime activeVideoMaxFrameDuration API_AVAILABLE(macos(10.9), ios(7.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos);
+@property(nonatomic) CMTime activeVideoMaxFrameDuration API_AVAILABLE(macos(10.9), ios(7.0), macCatalyst(14.0), tvos(17.0), visionos(1.0));
 
 /*!
  @property inputSources
@@ -407,10 +407,10 @@ typedef NS_ENUM(NSInteger, AVCaptureDevicePosition) {
     AVCaptureDevicePositionUnspecified = 0,
     AVCaptureDevicePositionBack        = 1,
     AVCaptureDevicePositionFront       = 2,
-} API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+} API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 
-API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVCaptureDevice (AVCaptureDevicePosition)
 
 /*!
@@ -641,7 +641,7 @@ API_AVAILABLE(macos(13.0), ios(17.0), macCatalyst(16.0), tvos(17.0)) API_UNAVAIL
 
     If the application wishes to offer users a fully manual camera selection mode in addition to automatic camera selection, it is recommended to call setUserPreferredCamera: each time the user makes a camera selection, but ignore key-value observer updates to systemPreferredCamera while in manual selection mode.
 */
-@property(class, readonly, nullable) AVCaptureDevice *systemPreferredCamera API_AVAILABLE(macos(13.0), ios(17.0), macCatalyst(16.0), tvos(17.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+@property(class, readonly, nullable) AVCaptureDevice *systemPreferredCamera API_AVAILABLE(macos(13.0), ios(17.0), macCatalyst(16.0), tvos(17.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -1866,10 +1866,10 @@ typedef NS_ENUM(NSInteger, AVAuthorizationStatus) {
     AVAuthorizationStatusRestricted    = 1,
     AVAuthorizationStatusDenied        = 2,
     AVAuthorizationStatusAuthorized    = 3,
-} API_AVAILABLE(macos(10.14), ios(7.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+} API_AVAILABLE(macos(10.14), ios(7.0), macCatalyst(14.0), tvos(17.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 
-API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVCaptureDevice (AVCaptureDeviceAuthorization)
 
 /*!
@@ -1885,7 +1885,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILA
  @discussion
     This method returns the AVAuthorizationStatus of the client for accessing the underlying hardware supporting the media type. Media type constants are defined in AVMediaFormat.h. If any media type other than AVMediaTypeVideo or AVMediaTypeAudio is supplied, an NSInvalidArgumentException will be thrown. If the status is AVAuthorizationStatusNotDetermined, you may use the +requestAccessForMediaType:completionHandler: method to request access by prompting the user.
  */
-+ (AVAuthorizationStatus)authorizationStatusForMediaType:(AVMediaType)mediaType API_AVAILABLE(macos(10.14), ios(7.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos);
++ (AVAuthorizationStatus)authorizationStatusForMediaType:(AVMediaType)mediaType API_AVAILABLE(macos(10.14), ios(7.0), macCatalyst(14.0), tvos(17.0), visionos(1.0));
 
 /*!
  @method requestAccessForMediaType:completionHandler:
@@ -1908,7 +1908,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILA
 
     The completion handler is called on an arbitrary dispatch queue. It is the client's responsibility to ensure that any UIKit-related updates are called on the main queue or main thread as a result.
  */
-+ (void)requestAccessForMediaType:(AVMediaType)mediaType completionHandler:(void (^)(BOOL granted))handler API_AVAILABLE(macos(10.14), ios(7.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos);
++ (void)requestAccessForMediaType:(AVMediaType)mediaType completionHandler:(void (^)(BOOL granted))handler API_AVAILABLE(macos(10.14), ios(7.0), macCatalyst(14.0), tvos(17.0), visionos(1.0));
 
 @end
 
@@ -2619,7 +2619,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     An AVCaptureDevice exposes an array of formats, and its current activeFormat may be queried. The payload for the formats property is an array of AVCaptureDeviceFormat objects and the activeFormat property payload is an AVCaptureDeviceFormat. AVCaptureDeviceFormat wraps a CMFormatDescription and expresses a range of valid video frame rates as an NSArray of AVFrameRateRange objects. AVFrameRateRange expresses min and max frame rate as a rate in frames per second and duration (CMTime). An AVFrameRateRange object is immutable. Its values do not change for the life of the object.
  */
-API_AVAILABLE(macos(10.7), ios(7.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.7), ios(7.0), macCatalyst(14.0), tvos(17.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVFrameRateRange : NSObject
 {
 @private
@@ -2670,6 +2670,52 @@ AV_INIT_UNAVAILABLE
 
 @end
 
+
+#pragma mark - AVZoomRange
+
+/*!
+ @class AVZoomRange
+ @abstract
+    An AVZoomRange expresses an inclusive range of supported zoom factors.
+ 
+ @discussion
+    This is used by features that have requirements on zoom factors falling within certain ranges.
+ */
+API_AVAILABLE(macos(14.2), ios(17.2), macCatalyst(17.2), tvos(17.2)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos) NS_REFINED_FOR_SWIFT
+@interface AVZoomRange : NSObject
+
+AV_INIT_UNAVAILABLE
+
+/*!
+@property minZoomFactor
+@abstract
+    A CGFloat indicating the minimum zoom factor supported by this range.
+*/
+@property(nonatomic, readonly) CGFloat minZoomFactor;
+
+/*!
+@property maxZoomFactor
+@abstract
+    A CGFloat indicating the maximum zoom factor supported by this range.
+ */
+@property(nonatomic, readonly) CGFloat maxZoomFactor;
+
+/*!
+@method containsZoomFactor:
+@abstract
+    Tests if a given zoom factor is within the zoom range.
+ 
+@param zoomFactor
+    The zoom factor to test.
+@result
+    Returns YES if the given zoom factor is within the zoom range, NO otherwise.
+ 
+@discussion
+     Note that the zoom ranges are inclusive.
+ */
+- (BOOL)containsZoomFactor:(CGFloat)zoomFactor;
+
+@end
 
 
 /*!
@@ -2731,7 +2777,7 @@ typedef NS_ENUM(NSInteger, AVCaptureAutoFocusSystem) {
  @discussion
     An AVCaptureDevice exposes an array of formats, and its current activeFormat may be queried. The payload for the formats property is an array of AVCaptureDeviceFormat objects and the activeFormat property payload is an AVCaptureDeviceFormat. AVCaptureDeviceFormat is a thin wrapper around a CMFormatDescription, and can carry associated device format information that doesn't go in a CMFormatDescription, such as min and max frame rate. An AVCaptureDeviceFormat object is immutable. Its values do not change for the life of the object.
  */
-API_AVAILABLE(macos(10.7), ios(7.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.7), ios(7.0), macCatalyst(14.0), tvos(17.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVCaptureDeviceFormat : NSObject
 {
 @private
@@ -2778,7 +2824,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     videoFieldOfView is a float value indicating the receiver's field of view in degrees. If field of view is unknown, a value of 0 is returned.
  */
-@property(nonatomic, readonly) float videoFieldOfView API_UNAVAILABLE(macos);
+@property(nonatomic, readonly) float videoFieldOfView API_UNAVAILABLE(macos, visionos);
 
 /*!
  @property videoBinned
@@ -2788,7 +2834,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     videoBinned is a BOOL indicating whether the format is a binned format. Binning is a pixel-combining process which can result in greater low light sensitivity at the cost of reduced resolution.
  */
-@property(nonatomic, readonly, getter=isVideoBinned) BOOL videoBinned API_UNAVAILABLE(macos);
+@property(nonatomic, readonly, getter=isVideoBinned) BOOL videoBinned API_UNAVAILABLE(macos, visionos);
 
 /*!
  @method isVideoStabilizationModeSupported
@@ -2821,7 +2867,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     If the device's videoZoomFactor property is assigned a larger value, an NSRangeException will be thrown. A maximum zoom factor of 1 indicates no zoom is available.
  */
-@property(nonatomic, readonly) CGFloat videoMaxZoomFactor API_UNAVAILABLE(macos);
+@property(nonatomic, readonly) CGFloat videoMaxZoomFactor API_UNAVAILABLE(macos, visionos);
 
 /*!
  @property videoZoomFactorUpscaleThreshold
@@ -2831,7 +2877,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     In some cases the image sensor's dimensions are larger than the dimensions reported by the video AVCaptureDeviceFormat. As long as the sensor crop is larger than the reported dimensions of the AVCaptureDeviceFormat, the image will be downscaled. Setting videoZoomFactor to the value of videoZoomFactorUpscalingThreshold will provide a center crop of the sensor image data without any scaling. If a greater zoom factor is used, then the sensor data will be upscaled to the device format's dimensions.
  */
-@property(nonatomic, readonly) CGFloat videoZoomFactorUpscaleThreshold API_UNAVAILABLE(macos);
+@property(nonatomic, readonly) CGFloat videoZoomFactorUpscaleThreshold API_UNAVAILABLE(macos, visionos);
 
 /*!
  @property minExposureDuration
@@ -2968,14 +3014,37 @@ AV_INIT_UNAVAILABLE
 /*!
  @property supportedVideoZoomFactorsForDepthDataDelivery
  @abstract
-    Indicates the sorted zoom factors available for the AVCaptureDevice's videoZoomFactor property when delivering depth data to one or more outputs.
- 
- @discussion
-    Virtual devices support limited zoom factors when delivering depth data to any output. If this device format has no -supportedDepthDataFormats, this property returns an empty array.
+    A deprecated property. Please use supportedVideoZoomRangesForDepthDataDelivery
  */
-@property(nonatomic, readonly) NSArray<NSNumber *> *supportedVideoZoomFactorsForDepthDataDelivery API_DEPRECATED_WITH_REPLACEMENT("supportedVideoZoomRangesForDepthDataDelivery", ios(16.0, 17.0), macCatalyst(16.0, 17.0), tvos(17.0, 18.0)) API_UNAVAILABLE(macos, visionos) API_UNAVAILABLE(watchos) NS_REFINED_FOR_SWIFT;
+@property(nonatomic, readonly) NSArray<NSNumber *> *supportedVideoZoomFactorsForDepthDataDelivery API_DEPRECATED_WITH_REPLACEMENT("supportedVideoZoomRangesForDepthDataDelivery", ios(16.0, 17.2), macCatalyst(16.0, 17.2), tvos(17.0, 17.2)) API_UNAVAILABLE(macos, visionos) API_UNAVAILABLE(watchos) NS_REFINED_FOR_SWIFT;
 
+/*!
+@property supportedVideoZoomRangesForDepthDataDelivery
+@abstract
+    This property returns the zoom ranges within which depth data can be delivered.
 
+@discussion
+    Virtual devices support limited zoom ranges when delivering depth data to any output. If this device format has no -supportedDepthDataFormats, this property returns an empty array.
+    The presence of one or more ranges where the min and max zoom factors are not equal means that "continuous zoom" with depth is supported.
+    For example:
+    a) ranges: @[ [2..2], [4..4] ]
+        only zoom factors 2 and 4 are allowed to be set when depthDataDelivery is enabled. Any other zoom factor results in an exception.
+    b) ranges: @[ [2..5] ]
+        depthDataDelivery is supported with zoom factors [2..5]. Zoom factors outside of this range may be set, but will result in loss of depthDataDeliery. Whenever zoom is set back to a value within the range of [2..5], depthDataDelivery will resume.
+ 
+    When depth data delivery is enabled, the effective videoZoomFactorUpscaleThreshold will be 1.0, meaning that all zoom factors that are not native zoom factors (see AVCaptureDevice.virtualDeviceSwitchOverVideoZoomFactors and AVCaptureDevice.secondaryNativeResolutionZoomFactors) result in digital upscaling.
+ */
+@property(nonatomic, readonly) NSArray<AVZoomRange *> *supportedVideoZoomRangesForDepthDataDelivery API_AVAILABLE(macos(14.2), ios(17.2), macCatalyst(17.2), tvos(17.2)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos) NS_REFINED_FOR_SWIFT;
+
+/*!
+@property zoomFactorsOutsideOfVideoZoomRangesForDepthDeliverySupported
+@abstract
+    This property returns whether the format supports zoom factors outside of the supportedVideoZoomFactorRangesForDepthDataDelivery.
+
+@discussion
+    When a zoom factor outside of the supportedVideoZoomFactorRangesForDepthDataDelivery is set, depth data delivery will be suspended until a zoom factor within the supportedVideoZoomFactorRangesForDepthDataDelivery is set.
+ */
+@property(nonatomic, readonly) BOOL zoomFactorsOutsideOfVideoZoomRangesForDepthDeliverySupported API_AVAILABLE(macos(14.2), ios(17.2), macCatalyst(17.2), tvos(17.2)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
 
 /*!
  @property supportedDepthDataFormats

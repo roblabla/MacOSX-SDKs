@@ -5,8 +5,8 @@ install-name:    '/System/iOSSupport/System/Library/Frameworks/SafariServices.fr
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _SFAuthenticationErrorDomain, _SFContentBlockerErrorDomain, 
-                       _SFErrorDomain, _SFExtensionMessageKey, _SSReadingListErrorDomain, 
-                       __SFDeviceRegionCodeIsChina, __SFDeviceRegionCodeIsRussia, 
+                       _SFErrorDomain, _SFExtensionMessageKey, _SFExtensionProfileKey, 
+                       _SSReadingListErrorDomain, __SFDeviceRegionCodeIsChina, __SFDeviceRegionCodeIsRussia, 
                        __SFPreferredLanguagesIncludesAnyLanguage, __SFPrivateSearchEngineStringDefaultsKey, 
                        __SFReaderExtractorErrorDomain, __SFReaderPageGroupIdentifier, 
                        __SFReaderURLScheme, __SFSafariResourceScheme, __SFSearchEngineControllerDefaultSearchEngineDidChangeNotification, 
@@ -20,6 +20,5 @@ exports:
                        _SFFormMetadataController, _SFReaderController, _SFReaderCustomProtocols, 
                        _SFReaderExtractedData, _SFReaderExtractor, _SFReaderWebProcessPlugInPageController, 
                        _SFSearchEngineController, _SFSearchEngineInfo, _SFSyntheticClickContext, 
-                       _SFWebClipMetadataFetcher, _SFWebProcessPlugIn, _SFWebProcessPlugInReaderEnabledPageController, 
-                       _SFWebProcessSharingLinkExtractor ]
+                       _SFWebClipMetadataFetcher, _SFWebProcessPlugIn, _SFWebProcessPlugInReaderEnabledPageController ]
 ...

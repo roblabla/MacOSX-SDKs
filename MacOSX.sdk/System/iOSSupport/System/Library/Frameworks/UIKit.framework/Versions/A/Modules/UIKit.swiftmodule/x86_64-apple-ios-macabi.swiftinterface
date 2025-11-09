@@ -1,13 +1,14 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.9 (swiftlang-5.9.0.123.203 clang-1500.0.37.1)
-// swift-module-flags: -target x86_64-apple-ios17.0-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftUIKit -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-abi-name UIKit -module-name UIKit
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 7082.1.409
+// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.11 clang-1500.1.0.2.2)
+// swift-module-flags: -target x86_64-apple-ios17.2-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftUIKit -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-abi-name UIKit -module-name UIKit
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 7209.1.401
 @_exported import Accessibility
 @_exported import CoreGraphics
 import DataDetection
 @_exported import DeveloperToolsSupport
 import Dispatch
 import Foundation
+import QuartzCore
 import Swift
 import Symbols
 @_exported import UIKit
@@ -568,7 +569,7 @@ extension UIKit.UIMutableTraits {
     set
   }
 }
-@available(iOS 17.0, tvOS 17.0, xrOS 1.0, *)
+@available(iOS 17.0, tvOS 17.0, visionOS 1.0, *)
 public struct UITraitSceneCaptureState : UIKit.UITraitDefinition {
   public static let defaultValue: UISceneCaptureState
   public static let name: Swift.String
@@ -578,7 +579,7 @@ public struct UITraitSceneCaptureState : UIKit.UITraitDefinition {
   public static let _isPrivate: Swift.Bool
   public typealias Value = UISceneCaptureState
 }
-@available(iOS 17.0, tvOS 17.0, xrOS 1.0, *)
+@available(iOS 17.0, tvOS 17.0, visionOS 1.0, *)
 extension UIKit.UIMutableTraits {
   public var sceneCaptureState: UISceneCaptureState {
     get
@@ -788,7 +789,7 @@ public struct UICellAccessory {
   }
   public let accessoryType: UIKit.UICellAccessory.AccessoryType
 }
-@available(iOS 17.0, xrOS 1.0, *)
+@available(iOS 17.0, visionOS 1.0, *)
 @available(tvOS, unavailable)
 public struct UIShape : UIKit.UIShapeProvider {
   public static var rect: UIKit.UIShape {
@@ -808,7 +809,7 @@ public struct UIShape : UIKit.UIShapeProvider {
   public init(_ provider: some UIShapeProvider)
   public static func == (a: UIKit.UIShape, b: UIKit.UIShape) -> Swift.Bool
 }
-@available(iOS 17.0, xrOS 1.0, *)
+@available(iOS 17.0, visionOS 1.0, *)
 @available(tvOS, unavailable)
 extension UIKit.UIShape {
   public struct ResolutionContext {
@@ -837,14 +838,14 @@ extension UIKit.UIShape.Resolved : Swift.Sendable {
 @available(*, unavailable)
 extension UIKit.UIShape.ResolutionContext : Swift.Sendable {
 }
-@available(iOS 17.0, xrOS 1.0, *)
+@available(iOS 17.0, visionOS 1.0, *)
 @available(tvOS, unavailable)
 public protocol UIShapeProvider : Swift.Equatable {
   func resolve(in context: Self.Context) -> Self.Resolved
   typealias Context = UIKit.UIShape.ResolutionContext
   typealias Resolved = UIKit.UIShape.Resolved
 }
-@available(iOS 17.0, xrOS 1.0, *)
+@available(iOS 17.0, visionOS 1.0, *)
 @available(tvOS, unavailable)
 extension UICornerCurve : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
@@ -854,7 +855,7 @@ extension UICornerCurve : Swift.CustomStringConvertible, Swift.CustomDebugString
     get
   }
 }
-@available(iOS 17.0, xrOS 1.0, *)
+@available(iOS 17.0, visionOS 1.0, *)
 @available(tvOS, unavailable)
 extension UIKit.UIShape : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
@@ -864,7 +865,7 @@ extension UIKit.UIShape : Swift.CustomStringConvertible, Swift.CustomDebugString
     get
   }
 }
-@available(iOS 17.0, xrOS 1.0, *)
+@available(iOS 17.0, visionOS 1.0, *)
 @available(tvOS, unavailable)
 extension UIKit.UIShape.Resolved : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
@@ -1426,7 +1427,7 @@ extension UIKit.UIListContentConfiguration : Swift.CustomStringConvertible, Swif
   }
 }
 @available(tvOS, unavailable)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 extension UISheetPresentationController.Detent {
   @available(iOS 16.0, *)
   @_Concurrency.MainActor(unsafe) public static func custom(identifier: UISheetPresentationController.Detent.Identifier? = nil, resolver: @escaping (_ context: any UISheetPresentationControllerDetentResolutionContext) -> CoreFoundation.CGFloat?) -> UISheetPresentationController.Detent
@@ -1436,7 +1437,7 @@ extension UISheetPresentationController.Detent {
 @available(tvOS, unavailable)
 extension UISheetPresentationController {
   @available(iOS 15.0, *)
-  @available(xrOS, unavailable)
+  @available(visionOS, unavailable)
   @_Concurrency.MainActor(unsafe) public var preferredCornerRadius: CoreFoundation.CGFloat? {
     get
     set
@@ -1460,7 +1461,7 @@ extension Foundation.IndexPath {
 }
 extension Foundation.URLResourceValues {
   @available(iOS, introduced: 8.0, deprecated: 15.0, message: "Use the QuickLookThumbnailing framework and extension point instead")
-  @available(xrOS, introduced: 1.0, deprecated: 1.0, message: "Use the QuickLookThumbnailing framework and extension point instead")
+  @available(visionOS, introduced: 1.0, deprecated: 1.0, message: "Use the QuickLookThumbnailing framework and extension point instead")
   public var thumbnailDictionary: [Foundation.URLThumbnailDictionaryItem : UIImage]? {
     get
   }
@@ -1583,13 +1584,13 @@ extension UICollectionView {
   public struct CellRegistration<Cell, Item> where Cell : UICollectionViewCell {
     public typealias Handler = (_ cell: Cell, _ indexPath: Foundation.IndexPath, _ itemIdentifier: Item) -> Swift.Void
     public init(handler: @escaping UICollectionView.CellRegistration<Cell, Item>.Handler)
-    @available(xrOS, introduced: 1.0, deprecated: 1.0, message: "Loading Interface Builder products will not be supported in a future version of visionOS.")
+    @available(visionOS, introduced: 1.0, deprecated: 1.0, message: "Loading Interface Builder products will not be supported in a future version of visionOS.")
     public init(cellNib: UINib, handler: @escaping UICollectionView.CellRegistration<Cell, Item>.Handler)
   }
   public struct SupplementaryRegistration<Supplementary> where Supplementary : UICollectionReusableView {
     public typealias Handler = (_ supplementaryView: Supplementary, _ elementKind: Swift.String, _ indexPath: Foundation.IndexPath) -> Swift.Void
     public init(elementKind: Swift.String, handler: @escaping UICollectionView.SupplementaryRegistration<Supplementary>.Handler)
-    @available(xrOS, introduced: 1.0, deprecated: 1.0, message: "Loading Interface Builder products will not be supported in a future version of visionOS.")
+    @available(visionOS, introduced: 1.0, deprecated: 1.0, message: "Loading Interface Builder products will not be supported in a future version of visionOS.")
     public init(supplementaryNib: UINib, elementKind: Swift.String, handler: @escaping UICollectionView.SupplementaryRegistration<Supplementary>.Handler)
   }
   @_Concurrency.MainActor(unsafe) public func dequeueConfiguredReusableCell<Cell, Item>(using registration: UICollectionView.CellRegistration<Cell, Item>, for indexPath: Foundation.IndexPath, item: Item?) -> Cell where Cell : UICollectionViewCell
@@ -1672,7 +1673,7 @@ extension UIPasteboard {
 }
 extension UIPasteboard {
   @available(iOS, introduced: 14.0, deprecated: 15.0)
-  @available(xrOS, introduced: 1.0, deprecated: 1.0)
+  @available(visionOS, introduced: 1.0, deprecated: 1.0)
   public func detectPatterns(for patterns: Swift.Set<UIPasteboard.DetectionPattern>, completionHandler: @escaping (Swift.Result<Swift.Set<UIPasteboard.DetectionPattern>, any Swift.Error>) -> ())
   @available(iOS 15.0, *)
   public func detectPatterns(for keyPaths: Swift.Set<Swift.PartialKeyPath<UIPasteboard.DetectedValues>>, completionHandler: @escaping (Swift.Result<Swift.Set<Swift.PartialKeyPath<UIPasteboard.DetectedValues>>, any Swift.Error>) -> ())
@@ -1681,7 +1682,7 @@ extension UIPasteboard {
   public func detectedPatterns(for keyPaths: Swift.Set<Swift.PartialKeyPath<UIPasteboard.DetectedValues>>) async throws -> Swift.Set<Swift.PartialKeyPath<UIPasteboard.DetectedValues>>
   #endif
   @available(iOS, introduced: 14.0, deprecated: 15.0)
-  @available(xrOS, introduced: 1.0, deprecated: 1.0)
+  @available(visionOS, introduced: 1.0, deprecated: 1.0)
   public func detectPatterns(for patterns: Swift.Set<UIPasteboard.DetectionPattern>, inItemSet itemSet: Foundation.IndexSet?, completionHandler: @escaping (Swift.Result<[Swift.Set<UIPasteboard.DetectionPattern>], any Swift.Error>) -> ())
   @available(iOS 15.0, *)
   public func detectPatterns(for keyPaths: Swift.Set<Swift.PartialKeyPath<UIPasteboard.DetectedValues>>, inItemSet itemSet: Foundation.IndexSet?, completionHandler: @escaping (Swift.Result<[Swift.Set<Swift.PartialKeyPath<UIPasteboard.DetectedValues>>], any Swift.Error>) -> ())
@@ -1690,7 +1691,7 @@ extension UIPasteboard {
   public func detectedPatterns(for keyPaths: Swift.Set<Swift.PartialKeyPath<UIPasteboard.DetectedValues>>, inItemSet itemSet: Foundation.IndexSet?) async throws -> [Swift.Set<Swift.PartialKeyPath<UIPasteboard.DetectedValues>>]
   #endif
   @available(iOS, introduced: 14.0, deprecated: 15.0)
-  @available(xrOS, introduced: 1.0, deprecated: 1.0)
+  @available(visionOS, introduced: 1.0, deprecated: 1.0)
   public func detectValues(for patterns: Swift.Set<UIPasteboard.DetectionPattern>, completionHandler: @escaping (Swift.Result<[UIPasteboard.DetectionPattern : Any], any Swift.Error>) -> ())
   @available(iOS 15.0, *)
   public func detectValues(for keyPaths: Swift.Set<Swift.PartialKeyPath<UIPasteboard.DetectedValues>>, completionHandler: @escaping (Swift.Result<UIPasteboard.DetectedValues, any Swift.Error>) -> ())
@@ -1699,7 +1700,7 @@ extension UIPasteboard {
   public func detectedValues(for keyPaths: Swift.Set<Swift.PartialKeyPath<UIPasteboard.DetectedValues>>) async throws -> UIPasteboard.DetectedValues
   #endif
   @available(iOS, introduced: 14.0, deprecated: 15.0)
-  @available(xrOS, introduced: 1.0, deprecated: 1.0)
+  @available(visionOS, introduced: 1.0, deprecated: 1.0)
   public func detectValues(for patterns: Swift.Set<UIPasteboard.DetectionPattern>, inItemSet itemSet: Foundation.IndexSet?, completionHandler: @escaping (Swift.Result<[[UIPasteboard.DetectionPattern : Any]], any Swift.Error>) -> ())
   @available(iOS 15.0, *)
   public func detectValues(for keyPaths: Swift.Set<Swift.PartialKeyPath<UIPasteboard.DetectedValues>>, inItemSet itemSet: Foundation.IndexSet?, completionHandler: @escaping (Swift.Result<[UIPasteboard.DetectedValues], any Swift.Error>) -> ())
@@ -2184,26 +2185,26 @@ extension UIKit.UITextSearching {
 extension UITextSearchingFindSession {
   @_Concurrency.MainActor(unsafe) convenience public init<SearchableObject>(searchableObject: SearchableObject) where SearchableObject : UIKit.UITextSearching
 }
-@available(iOS 17.0, xrOS 1.0, *)
+@available(iOS 17.0, visionOS 1.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public protocol UIHoverEffect {
   func _resolve(in context: UIKit._UIHoverEffectResolutionContext) -> UIKit._UIResolvedHoverEffect
   func _makeBridgedEffect() -> any __UIHoverEffect
 }
-@available(iOS 17.0, xrOS 1.0, *)
+@available(iOS 17.0, visionOS 1.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct _UIHoverEffectResolutionContext {
 }
-@available(iOS 17.0, xrOS 1.0, *)
+@available(iOS 17.0, visionOS 1.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct _UIResolvedHoverEffect : UIKit.UIHoverEffect {
   public func _resolve(in context: UIKit._UIHoverEffectResolutionContext) -> UIKit._UIResolvedHoverEffect
   public func _makeBridgedEffect() -> any __UIHoverEffect
 }
-@available(iOS 17.0, xrOS 1.0, *)
+@available(iOS 17.0, visionOS 1.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct UIHoverHighlightEffect : UIKit.UIHoverEffect {
@@ -2211,7 +2212,7 @@ public struct UIHoverHighlightEffect : UIKit.UIHoverEffect {
   public func _resolve(in context: UIKit._UIHoverEffectResolutionContext) -> UIKit._UIResolvedHoverEffect
   public func _makeBridgedEffect() -> any __UIHoverEffect
 }
-@available(iOS 17.0, xrOS 1.0, *)
+@available(iOS 17.0, visionOS 1.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension UIKit.UIHoverEffect where Self == UIKit.UIHoverHighlightEffect {
@@ -2219,7 +2220,7 @@ extension UIKit.UIHoverEffect where Self == UIKit.UIHoverHighlightEffect {
     get
   }
 }
-@available(iOS 17.0, xrOS 1.0, *)
+@available(iOS 17.0, visionOS 1.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct UIHoverLiftEffect : UIKit.UIHoverEffect {
@@ -2227,7 +2228,7 @@ public struct UIHoverLiftEffect : UIKit.UIHoverEffect {
   public func _resolve(in context: UIKit._UIHoverEffectResolutionContext) -> UIKit._UIResolvedHoverEffect
   public func _makeBridgedEffect() -> any __UIHoverEffect
 }
-@available(iOS 17.0, xrOS 1.0, *)
+@available(iOS 17.0, visionOS 1.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension UIKit.UIHoverEffect where Self == UIKit.UIHoverLiftEffect {
@@ -2235,7 +2236,7 @@ extension UIKit.UIHoverEffect where Self == UIKit.UIHoverLiftEffect {
     get
   }
 }
-@available(iOS 17.0, xrOS 1.0, *)
+@available(iOS 17.0, visionOS 1.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct UIHoverAutomaticEffect : UIKit.UIHoverEffect {
@@ -2243,7 +2244,7 @@ public struct UIHoverAutomaticEffect : UIKit.UIHoverEffect {
   public func _resolve(in context: UIKit._UIHoverEffectResolutionContext) -> UIKit._UIResolvedHoverEffect
   public func _makeBridgedEffect() -> any __UIHoverEffect
 }
-@available(iOS 17.0, xrOS 1.0, *)
+@available(iOS 17.0, visionOS 1.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension UIKit.UIHoverEffect where Self == UIKit.UIHoverAutomaticEffect {
@@ -2251,7 +2252,7 @@ extension UIKit.UIHoverEffect where Self == UIKit.UIHoverAutomaticEffect {
     get
   }
 }
-@available(iOS 17.0, xrOS 1.0, *)
+@available(iOS 17.0, visionOS 1.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension UIKit.UIPointerEffect : UIKit.UIHoverEffect {
@@ -3041,7 +3042,7 @@ public struct UIWindowSceneStandardPlacement : UIKit.UIWindowScenePlacement {
 extension UIKit.UIWindowScenePlacement where Self == UIKit.UIWindowSceneStandardPlacement {
   public static func standard() -> Self
 }
-@available(iOS 17.0, xrOS 1.0, *)
+@available(iOS 17.0, visionOS 1.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension UIHoverStyle {
@@ -3152,12 +3153,12 @@ public func UIInterfaceOrientationIsPortrait(_ orientation: UIInterfaceOrientati
 @available(swift, obsoleted: 4.2, renamed: "getter:UIInterfaceOrientation.isLandscape(self:)")
 public func UIInterfaceOrientationIsLandscape(_ orientation: UIInterfaceOrientation) -> Swift.Bool
 @available(iOS, introduced: 2.0, deprecated: 8.3, message: "UIActionSheet is deprecated. Use UIAlertController with a preferredStyle of UIAlertControllerStyleActionSheet instead")
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 extension UIActionSheet {
   @_Concurrency.MainActor(unsafe) convenience public init(title: Swift.String?, delegate: (any UIActionSheetDelegate)?, cancelButtonTitle: Swift.String?, destructiveButtonTitle: Swift.String?, otherButtonTitles firstButtonTitle: Swift.String, _ moreButtonTitles: Swift.String...)
 }
 @available(iOS, introduced: 2.0, deprecated: 9.0, message: "UIAlertView is deprecated. Use UIAlertController with a preferredStyle of UIAlertControllerStyleAlert instead")
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 extension UIAlertView {
   @_Concurrency.MainActor(unsafe) convenience public init(title: Swift.String, message: Swift.String, delegate: (any UIAlertViewDelegate)?, cancelButtonTitle: Swift.String?, otherButtonTitles firstButtonTitle: Swift.String, _ moreButtonTitles: Swift.String...)
 }

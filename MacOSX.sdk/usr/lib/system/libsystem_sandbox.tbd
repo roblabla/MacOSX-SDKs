@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/system/libsystem_sandbox.dylib'
-current-version: 2169.0.12
+current-version: 2169.60.10
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -36,7 +36,8 @@ exports:
                        _rootless_verify_trusted_by_self_token, _sandbox_builtin_query, 
                        _sandbox_check, _sandbox_check_bulk, _sandbox_check_by_audit_token, 
                        _sandbox_check_by_reference, _sandbox_check_by_uniqueid, _sandbox_check_message_filter_integer, 
-                       _sandbox_check_message_filter_string, _sandbox_check_protected_app_container, 
+                       _sandbox_check_message_filter_string, _sandbox_check_process_signal_target, 
+                       _sandbox_check_protected_app_container, _sandbox_check_self_signal_target, 
                        _sandbox_consume_extension, _sandbox_consume_fs_extension, 
                        _sandbox_consume_mach_extension, _sandbox_container_path_for_audit_token, 
                        _sandbox_container_path_for_pid, _sandbox_enable_root_translation, 

@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/WallpaperFoundation.framework/Versions/A/WallpaperFoundation'
-current-version: 95.1.108
+current-version: 95.18
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -307,19 +307,7 @@ exports:
                        '_$s19WallpaperFoundation21ComputedRampIntervalsV9intervalsSaySdGvpMV', 
                        '_$s19WallpaperFoundation21ComputedRampIntervalsVMa', '_$s19WallpaperFoundation21ComputedRampIntervalsVMn', 
                        '_$s19WallpaperFoundation21ComputedRampIntervalsVN', '_$s19WallpaperFoundation23CGDisplayGetScaleFactory12CoreGraphics7CGFloatVs6UInt32VKF', 
-                       '_$s19WallpaperFoundation23CoreGraphicsErrorDomainSSvg', '_$s19WallpaperFoundation23ThingamajigFeatureFlagsV0dE00dE3KeyAAMc', 
-                       '_$s19WallpaperFoundation23ThingamajigFeatureFlagsV10LockScreenACvgZ', 
-                       '_$s19WallpaperFoundation23ThingamajigFeatureFlagsV6domains12StaticStringVvg', 
-                       '_$s19WallpaperFoundation23ThingamajigFeatureFlagsV6domains12StaticStringVvgZ', 
-                       '_$s19WallpaperFoundation23ThingamajigFeatureFlagsV6domains12StaticStringVvpMV', 
-                       '_$s19WallpaperFoundation23ThingamajigFeatureFlagsV7AerialsACvgZ', 
-                       '_$s19WallpaperFoundation23ThingamajigFeatureFlagsV7WidgetsACvgZ', 
-                       '_$s19WallpaperFoundation23ThingamajigFeatureFlagsV7features12StaticStringVvg', 
-                       '_$s19WallpaperFoundation23ThingamajigFeatureFlagsV7features12StaticStringVvpMV', 
-                       '_$s19WallpaperFoundation23ThingamajigFeatureFlagsV9isEnabledSbvg', 
-                       '_$s19WallpaperFoundation23ThingamajigFeatureFlagsV9isEnabledSbvpMV', 
-                       '_$s19WallpaperFoundation23ThingamajigFeatureFlagsVMa', '_$s19WallpaperFoundation23ThingamajigFeatureFlagsVMn', 
-                       '_$s19WallpaperFoundation23ThingamajigFeatureFlagsVN', '_$s19WallpaperFoundation24SystemAppearanceObserverC0cD0O2eeoiySbAE_AEtFZ', 
+                       '_$s19WallpaperFoundation23CoreGraphicsErrorDomainSSvg', '_$s19WallpaperFoundation24SystemAppearanceObserverC0cD0O2eeoiySbAE_AEtFZ', 
                        '_$s19WallpaperFoundation24SystemAppearanceObserverC0cD0O4hash4intoys6HasherVz_tF', 
                        '_$s19WallpaperFoundation24SystemAppearanceObserverC0cD0O9hashValueSivg', 
                        '_$s19WallpaperFoundation24SystemAppearanceObserverC0cD0O9hashValueSivpMV', 
@@ -464,10 +452,13 @@ exports:
                        '_$s19WallpaperFoundation8GradientV6encode0B04DataVyKF', '_$s19WallpaperFoundation8GradientV6encode2toys7Encoder_p_tKF', 
                        '_$s19WallpaperFoundation8GradientVMa', '_$s19WallpaperFoundation8GradientVMn', 
                        '_$s19WallpaperFoundation8GradientVN', '_$s19WallpaperFoundation8GradientVSEAAMc', 
-                       '_$s19WallpaperFoundation8GradientVSeAAMc', '_$s19WallpaperFoundation8WatchdogC4stop11descriptionySS_tFTj', 
+                       '_$s19WallpaperFoundation8GradientVSeAAMc', '_$s19WallpaperFoundation8WatchdogC0C6ResultOMa', 
+                       '_$s19WallpaperFoundation8WatchdogC0C6ResultOMn', '_$s19WallpaperFoundation8WatchdogC4stop11descriptionySS_tFTj', 
                        '_$s19WallpaperFoundation8WatchdogC4stop11descriptionySS_tFTq', 
                        '_$s19WallpaperFoundation8WatchdogC5start11descriptionySS_tFTj', 
                        '_$s19WallpaperFoundation8WatchdogC5start11descriptionySS_tFTq', 
+                       '_$s19WallpaperFoundation8WatchdogC7perform11withTimeout9operationAC0C6ResultOy_xGs8DurationV_xyYaKctYalFZ', 
+                       '_$s19WallpaperFoundation8WatchdogC7perform11withTimeout9operationAC0C6ResultOy_xGs8DurationV_xyYaKctYalFZTu', 
                        '_$s19WallpaperFoundation8WatchdogC7timeout5label11failureCaseACs8DurationV_SSySS_SStctcfC', 
                        '_$s19WallpaperFoundation8WatchdogC7timeout5label11failureCaseACs8DurationV_SSySS_SStctcfCTj', 
                        '_$s19WallpaperFoundation8WatchdogC7timeout5label11failureCaseACs8DurationV_SSySS_SStctcfCTq', 
@@ -514,7 +505,6 @@ exports:
                        '_$sSo20DesktopPictureChangeV19WallpaperFoundationE11stringValueABSgSSSg_tcfC', 
                        '_$sSo20DesktopPictureChangeV19WallpaperFoundationE11stringValueSSSgvg', 
                        '_$sSo20DesktopPictureChangeV19WallpaperFoundationE11stringValueSSSgvpMV', 
-                       '_$sSo20NSNotificationCenterC19WallpaperFoundationE13notifications5namedScSy0D012NotificationVGSaySo0A4NameaG_tF', 
                        '_$sSo20OS_dispatch_workloopC19WallpaperFoundationE0C05label8priority8qosClassABSS_SiSo0H8_class_tatFZ', 
                        '_$sSo23DesktopPicturePlacementV19WallpaperFoundationE11stringValueABSS_tcfC', 
                        '_$sSo23DesktopPicturePlacementV19WallpaperFoundationE11stringValueSSvg', 

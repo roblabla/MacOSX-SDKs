@@ -177,5 +177,5 @@ exports:
                        PLXPCRelay, PLXPCResponderOperatorComposition, PPSCollectionOperator, 
                        PPSCoreStorage, PPSCoreUtilities, PPSEntryDefinition, PPSEntryKey, 
                        PPSFlatStorage, PPSSQLStorage, PPSStorage, PowerlogCore, RbdcConverterHelper, 
-                       SignpostReaderHelper, uarpRbdcClient ]
+                       SignpostReaderHelper ]
 ...

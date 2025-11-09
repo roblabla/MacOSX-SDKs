@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/AuthenticationServices.framework/Versions/A/AuthenticationServices'
-current-version: 616.1.27
+current-version: 617.1.17
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -158,7 +158,7 @@ exports:
                        _ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorTransportBluetooth, 
                        _ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorTransportNFC, 
                        _ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorTransportUSB, 
-                       _ASAvatarImageSizeForGroupMemberCell, _ASCredentialIdentityStoreErrorDomain, 
+                       _ASAvatarImageSizeForGroupMemberCell, _ASCellHeight, _ASCredentialIdentityStoreErrorDomain, 
                        _ASExtensionErrorDomain, _ASPasswordManagerIconBundlePath, 
                        _ASWebAuthenticationSessionErrorDomain, _ASWebAuthenticationSessionWebBrowserSupportCapabilitiesKey, 
                        _ASWebAuthenticationSessionWebBrowserSupportCapabilityIsSupportedKey, 
@@ -187,13 +187,24 @@ exports:
                        ASAuthorizationSingleSignOnCredential, ASAuthorizationSingleSignOnProvider, 
                        ASAuthorizationSingleSignOnRequest, ASAuthorizationViewController, 
                        ASAuthorizationWebBrowserPlatformPublicKeyCredential, ASAuthorizationWebBrowserPublicKeyCredentialManager, 
-                       ASCredentialIdentityStore, ASCredentialIdentityStoreState, 
-                       ASCredentialProviderExtensionContext, ASCredentialProviderViewController, 
-                       ASCredentialServiceIdentifier, ASPasskeyAssertionCredential, 
+                       ASBarButtonItem, ASCredentialIdentityStore, ASCredentialIdentityStoreState, 
+                       ASCredentialPickerPaneViewController, ASCredentialProviderExtensionContext, 
+                       ASCredentialProviderViewController, ASCredentialRequestBasicPaneViewController, 
+                       ASCredentialRequestButton, ASCredentialRequestButtonContinue, 
+                       ASCredentialRequestCABLEClientViewController, ASCredentialRequestCABLEConnectingViewController, 
+                       ASCredentialRequestConfirmButtonSubPane, ASCredentialRequestContainerViewController, 
+                       ASCredentialRequestEnableBluetoothViewController, ASCredentialRequestEnableICloudKeychainViewController, 
+                       ASCredentialRequestIconGenerator, ASCredentialRequestImageSubPane, 
+                       ASCredentialRequestInfoLabelSubPane, ASCredentialRequestLoginChoiceCell, 
+                       ASCredentialRequestPaneContext, ASCredentialRequestPaneViewController, 
+                       ASCredentialRequestSecondaryButton, ASCredentialRequestSecurityKeyStringUtilities, 
+                       ASCredentialRequestSubPane, ASCredentialServiceIdentifier, 
+                       ASNavigationController, ASNavigationItem, ASPasskeyAssertionCredential, 
                        ASPasskeyCredentialIdentity, ASPasskeyCredentialRequest, ASPasskeyCredentialRequestParameters, 
-                       ASPasskeyRegistrationCredential, ASPasswordCredential, ASPasswordCredentialIdentity, 
-                       ASPasswordCredentialRequest, ASPublicKeyCredentialClientData, 
-                       ASSettingsHelper, ASWebAuthenticationSession, ASWebAuthenticationSessionRequest, 
+                       ASPasskeyRegistrationCredential, ASPasswordAuthenticationPaneViewController, 
+                       ASPasswordCredential, ASPasswordCredentialIdentity, ASPasswordCredentialRequest, 
+                       ASPublicKeyCredentialClientData, ASSettingsHelper, ASViewServiceInterfaceUtilities, 
+                       ASWebAuthenticationSession, ASWebAuthenticationSessionRequest, 
                        ASWebAuthenticationSessionRequestClient, ASWebAuthenticationSessionWebBrowserSessionManager, 
                        _ASAccountManagerTipContent, _ASAccountManagerTipManager, 
                        _ASAccountSharingGroupInvitationContent, _ASAccountSharingGroupMemberData, 

@@ -13,9 +13,10 @@ exports:
                        SKSetupAppleIDSignInServer, SKSetupBase, SKSetupCaptiveNetworkJoinClient, 
                        SKSetupCaptiveNetworkJoinServer, SKSetupClient, SKSetupFieldDiagnosticsClient, 
                        SKSetupFieldDiagnosticsServer, SKSetupMacSetupClient, SKSetupMacSetupServer, 
-                       SKSetupSIMTransferClient, SKSetupSIMTransferServer, SKSetupServer, 
-                       SKStepBasicConfigClient, SKStepBasicConfigServer, SKStepWiFiPreflight, 
-                       SKStepWiFiSetupClient, SKStepWiFiSetupServer, SKStepWiFiSetupServerCW ]
+                       SKSetupOSUpdateClient, SKSetupOSUpdateServer, SKSetupSIMTransferClient, 
+                       SKSetupSIMTransferServer, SKSetupServer, SKStepBasicConfigClient, 
+                       SKStepBasicConfigServer, SKStepWiFiPreflight, SKStepWiFiSetupClient, 
+                       SKStepWiFiSetupServer, SKStepWiFiSetupServerCW ]
     objc-ivars:      [ SKSetupBase._activateCalled, SKSetupBase._authTagOverride, 
                        SKSetupBase._bluetoothUseCase, SKSetupBase._controlFlags, 
                        SKSetupBase._dispatchQueue, SKSetupBase._invalidateCalled, 

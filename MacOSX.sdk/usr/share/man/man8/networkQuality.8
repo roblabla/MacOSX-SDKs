@@ -7,9 +7,9 @@
 .Nd Network quality testing tool
 .Sh SYNOPSIS
 .Nm
-.Op Fl chksv          \" [-chkpsv]
+.Op Fl cdhksuv          \" [-chkpsv]
 .Op Fl C Ar configuration URL \" [-C configuration URL]
-.Op Fl f Ar force HTTP version \" [-f h1,h2,h3]
+.Op Fl f Ar protocol selection \" [-f h1,h2,h3]
 .Op Fl I Ar interface \" [-I interface]
 .Op Fl r Ar host \" [-r host]
 .Op Fl S Ar port \" [-S port]
@@ -60,6 +60,8 @@ with option -C. Note that the certificate is self-signed and thus option -k need
 to be used on the client-instance.
 .It Fl c
 Produce computer-readable output.
+.It Fl d
+Do not run a download test (implies -s)
 .It Fl h
 Show help
 .It Fl k
@@ -68,6 +70,8 @@ Disable verification of the server identity via TLS.
 Use iCloud Private Relay.
 .It Fl s
 Run tests sequentially instead of parallel upload/download.
+.It Fl u
+Do not run an upload test (implies -s)
 .It Fl v
 Verbose output.
 .El                      \" Ends the list

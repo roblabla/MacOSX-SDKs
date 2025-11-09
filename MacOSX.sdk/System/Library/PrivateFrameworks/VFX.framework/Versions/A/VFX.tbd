@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/VFX.framework/Versions/A/VFX'
-current-version: 166.4
+current-version: 174.40.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -23,7 +23,8 @@ exports:
                        '_$s3VFX10VFXRESceneC12commandQueue5model7optionsACSo010MTLCommandD0_p_AcA8VFXSceneC11LoadOptionsCtcfCTq', 
                        '_$s3VFX10VFXRESceneC12commandQueue5model7optionsACSo010MTLCommandD0_p_AcA8VFXSceneC11LoadOptionsCtcfc', 
                        '_$s3VFX10VFXRESceneC12neededModelsSaySSGyKFTj', '_$s3VFX10VFXRESceneC12neededModelsSaySSGyKFTq', 
-                       '_$s3VFX10VFXRESceneC16copyBindingValue10objectName07bindingG06action18storageGetterBlockySS_SSAA0D10CopyActionOSvs5Int32VctFTj', 
+                       '_$s3VFX10VFXRESceneC13drawCallCountSivgTj', '_$s3VFX10VFXRESceneC13drawCallCountSivgTq', 
+                       '_$s3VFX10VFXRESceneC13drawCallCountSivpMV', '_$s3VFX10VFXRESceneC16copyBindingValue10objectName07bindingG06action18storageGetterBlockySS_SSAA0D10CopyActionOSvs5Int32VctFTj', 
                        '_$s3VFX10VFXRESceneC16copyBindingValue10objectName07bindingG06action18storageGetterBlockySS_SSAA0D10CopyActionOSvs5Int32VctFTq', 
                        '_$s3VFX10VFXRESceneC16peerTaskIdentitys6UInt32VvMTj', '_$s3VFX10VFXRESceneC16peerTaskIdentitys6UInt32VvMTq', 
                        '_$s3VFX10VFXRESceneC16peerTaskIdentitys6UInt32VvgTj', '_$s3VFX10VFXRESceneC16peerTaskIdentitys6UInt32VvgTq', 

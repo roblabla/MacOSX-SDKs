@@ -33,7 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion
     Concrete instances of AVCaptureInput representing input sources such as cameras can be added to instances of AVCaptureSession using the -[AVCaptureSession addInput:] method. An AVCaptureInput vends one or more streams of media data. For example, input devices can provide both audio and video data. Each media stream provided by an input is represented by an AVCaptureInputPort object. Within a capture session, connections are made between AVCaptureInput instances and AVCaptureOutput instances via AVCaptureConnection objects that define the mapping between a set of AVCaptureInputPort objects and a single AVCaptureOutput.
  */
-API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVCaptureInput : NSObject
 {
 @private
@@ -50,7 +50,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     The value of this property is an array of AVCaptureInputPort objects, each exposing an interface to a single stream of media data provided by an input.
  */
-@property(nonatomic, readonly) NSArray<AVCaptureInputPort *> *ports;
+@property(nonatomic, readonly) NSArray<AVCaptureInputPort *> *ports API_UNAVAILABLE(visionos);
 
 @end
 
@@ -177,7 +177,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     Instances of AVCaptureDeviceInput are input sources for AVCaptureSession that provide media data from devices connected to the system, represented by instances of AVCaptureDevice.
  */
-API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVCaptureDeviceInput : AVCaptureInput
 {
 @private
@@ -199,7 +199,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILA
  @discussion
     This method returns an instance of AVCaptureDeviceInput that can be used to capture data from an AVCaptureDevice in an AVCaptureSession. This method attempts to open the device for capture, taking exclusive control of it if necessary. If the device cannot be opened because it is no longer available or because it is in use, for example, this method returns nil, and the optional outError parameter points to an NSError describing the problem.
  */
-+ (nullable instancetype)deviceInputWithDevice:(AVCaptureDevice *)device error:(NSError * _Nullable * _Nullable)outError;
++ (nullable instancetype)deviceInputWithDevice:(AVCaptureDevice *)device error:(NSError * _Nullable * _Nullable)outError API_UNAVAILABLE(visionos);
 
 /*!
  @method initWithDevice:error:

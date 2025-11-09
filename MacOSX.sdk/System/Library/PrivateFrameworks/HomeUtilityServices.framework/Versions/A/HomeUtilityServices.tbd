@@ -7,8 +7,7 @@ swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ '_$s10Foundation10URLRequestV19HomeUtilityServicesE19setBasicAuthHeadersyyF', 
-                       '_$s19HomeUtilityServices0bC0C03getB11InformationySDySSypGSgSSYaKFZ', 
+    symbols:         [ '_$s19HomeUtilityServices0bC0C03getB11InformationySDySSypGSgSSYaKFZ', 
                        '_$s19HomeUtilityServices0bC0C03getB11InformationySDySSypGSgSSYaKFZTu', 
                        '_$s19HomeUtilityServices0bC0C27searchUtilitiesNearLocationySaySDySSypGGSgSo10CLLocationCYaKFZ', 
                        '_$s19HomeUtilityServices0bC0C27searchUtilitiesNearLocationySaySDySSypGGSgSo10CLLocationCYaKFZTu', 

@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CoreMotion.framework/Versions/A/CoreMotion'
-current-version: 2886.3.3
+current-version: 2890.4.12
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
@@ -146,7 +146,8 @@ exports:
                        _CMPedometerDataArray, _CMPedometerDataObject, _CMPedometerEntryCount, 
                        _CMPedometerEventKey, _CMPedometerFetchRemoteCalibrations, 
                        _CMPedometerSpeedSum, _CMPedometerStartTime, _CMPedometerStopTime, 
-                       _CMPredictedWalkDistanceResetDateKey, _CMProxPDPObject, _CMReturnCode, 
+                       _CMPerceivedExertionData, _CMPredictedWalkDistanceResetDateKey, 
+                       _CMProxPDPObject, _CMReturnCode, _CMSafetyAnomalyPropertiesKey, 
                        _CMSedentaryTimerAlarmDataKey, _CMSedentaryTimerAutoRescheduleKey, 
                        _CMSedentaryTimerErrorMessageKey, _CMSedentaryTimerIsArmedKey, 
                        _CMSedentaryTimerPeriodIntervalKey, _CMSedentaryTimerReminderIntervalKey, 
@@ -227,11 +228,11 @@ exports:
                        CMAnomalyMessenger, CMAttitude, CMAudioAccessoryManager, CMAudioAccessoryUsageManager, 
                        CMBatchedSensorManager, CMCalorieData, CMCalorieUserInfo, 
                        CMCalorieUtils, CMCameraBodyMetrics, CMCameraFitnessMachineSample, 
-                       CMCameraWorkoutEvent, CMCameraWorkoutSession, CMCatherineFeeder, 
-                       CMContextConfigurationManager, CMDeviceMotion, CMDeviceMotionLite, 
-                       CMDistributedSensingManager, CMDyskineticSymptomResult, CMElevation, 
-                       CMElevationData, CMExerciseMinute, CMExerciseMinuteData, CMFacePose, 
-                       CMFitnessMachine, CMFitnessMachineData, CMFitnessMachineWorkout, 
+                       CMCameraWorkoutEvent, CMCameraWorkoutSession, CMCatherineData, 
+                       CMCatherineFeeder, CMContextConfigurationManager, CMDeviceMotion, 
+                       CMDeviceMotionLite, CMDistributedSensingManager, CMDyskineticSymptomResult, 
+                       CMElevation, CMElevationData, CMExerciseMinute, CMExerciseMinuteData, 
+                       CMFacePose, CMFitnessMachine, CMFitnessMachineData, CMFitnessMachineWorkout, 
                        CMFitnessPlusWorkout, CMFitnessShared, CMGenericWorkout, CMGestureManager, 
                        CMGyroData, CMGyroDataArray, CMHeadphoneMotionManager, CMHealthTracker, 
                        CMHeartRateData, CMHighFrequencyHeartRateData, CMIndoorOutdoorManager, 
@@ -242,12 +243,13 @@ exports:
                        CMMotionUtils, CMNatalieData, CMNatalimeter, CMOdometer, CMOdometerData, 
                        CMOdometry, CMOdometryManager, CMOnBodyStatus, CMOnBodyStatusManager, 
                        CMPedestrianFenceManager, CMPedometer, CMPedometerBin, CMPedometerData, 
-                       CMPedometerEvent, CMPose, CMProxPDP, CMProxPDPManager, CMRecordedAccelerometerData, 
-                       CMRecordedGyroData, CMRecordedPressureData, CMRecordedRotationRateData, 
-                       CMRotationRateData, CMRunningMetricsManager, CMSWOLFSummary, 
-                       CMSedentaryTimer, CMSedentaryTimerData, CMSensorDataList, 
-                       CMSensorRecorder, CMSignificantElevationSample, CMSkeletonCollection, 
-                       CMSkiData, CMSkiTracker, CMSleepData, CMSleepTracker, CMStepCounter, 
+                       CMPedometerEvent, CMPerceivedExertionScore, CMPose, CMProxPDP, 
+                       CMProxPDPManager, CMRecordedAccelerometerData, CMRecordedGyroData, 
+                       CMRecordedPressureData, CMRecordedRotationRateData, CMRotationRateData, 
+                       CMRunningMetricsManager, CMSWOLFSummary, CMSedentaryTimer, 
+                       CMSedentaryTimerData, CMSensorDataList, CMSensorRecorder, 
+                       CMSignificantElevationSample, CMSkeletonCollection, CMSkiData, 
+                       CMSkiTracker, CMSleepData, CMSleepTracker, CMStepCounter, 
                        CMStrideCalibrationData, CMStrideCalibrationEntry, CMStrideCalibrationEntryArray, 
                        CMStrideCalibrationEntryInternal, CMStrideCalibrationHistory, 
                        CMSuppressionEvent, CMSwimData, CMSwimTracker, CMSwimWorkout, 

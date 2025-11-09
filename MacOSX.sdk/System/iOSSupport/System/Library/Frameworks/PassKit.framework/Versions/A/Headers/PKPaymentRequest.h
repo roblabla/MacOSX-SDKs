@@ -32,8 +32,8 @@ typedef NS_OPTIONS(NSUInteger, PKMerchantCapability) {
     PKMerchantCapability3DS             NS_SWIFT_NAME(threeDSecure)                                  = 1UL << 0,   // Merchant supports 3DS
     PKMerchantCapabilityEMV             NS_SWIFT_NAME(emv)                                           = 1UL << 1,   // Merchant supports EMV
     PKMerchantCapabilityCredit          NS_SWIFT_NAME(credit)          NS_ENUM_AVAILABLE(11_0, 9_0) = 1UL << 2,   // Merchant supports credit
-    PKMerchantCapabilityDebit           NS_SWIFT_NAME(debit)           NS_ENUM_AVAILABLE(11_0, 9_0) = 1UL << 3    // Merchant supports debit
-    , PKMerchantCapabilityInstantFundsOut NS_SWIFT_NAME(instantFundsOut) NS_ENUM_AVAILABLE(14_0, 17_0) = 1UL << 7    // Merchant supports instant funds out
+    PKMerchantCapabilityDebit           NS_SWIFT_NAME(debit)           NS_ENUM_AVAILABLE(11_0, 9_0) = 1UL << 3,   // Merchant supports debit
+    PKMerchantCapabilityInstantFundsOut NS_SWIFT_NAME(instantFundsOut) NS_ENUM_AVAILABLE(14_0, 17_0) = 1UL << 7    // Merchant supports instant funds out
     // There are more PKMerchantCapability constants defined in PKPaymentRequest_Private.h; beware of conflicting values when adding new public cases
 } API_AVAILABLE(macos(11.0), ios(8.0), watchos(3.0));
 

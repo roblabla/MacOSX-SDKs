@@ -40,7 +40,7 @@ exports:
                        _AFTextContentTypeTelephoneNationalNumber, _AFTextContentTypeTelephoneNumber, 
                        _AFTextContentTypeURL, _AFTextContentTypeUsername, _AutoFillCoreVersionNumber, 
                        _AutoFillCoreVersionString ]
-    objc-classes:    [ AFCredentialManager, AFLocalizationManager, AFSuggestion, 
-                       AFSuggestionGenerationManager ]
+    objc-classes:    [ AFCredentialManager, AFInsertionManager, AFLocalizationManager, 
+                       AFSuggestion, AFSuggestionGenerationManager ]
     objc-ivars:      [ AFLocalizationManager._localeIdentifier ]
 ...

@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/PhotosUI.framework/Versions/A/PhotosUI'
-current-version: 608.2.113
+current-version: 621.0.100
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
@@ -621,7 +621,9 @@ exports:
                        _PUPhotoPickerOriginalIrisVideoFilePathSandboxExtensionToken, 
                        _PUPhotoPickerReferencePath, _PUPhotoPickerResizeTargetMaxDimension, 
                        _PUPhotoPickerSavingOptions, _PUPickerFilterAvailableClasses, 
-                       _PUPickerItemProviderUserInfoLocalIdentifierKey, __PHPickerSourceTypeMax, 
+                       _PUPickerItemProviderUserInfoAcceptableCropRectKey, _PUPickerItemProviderUserInfoLocalIdentifierKey, 
+                       _PUPickerItemProviderUserInfoNormalizedFaceAreaRectKey, _PUPickerItemProviderUserInfoPixelSizeKey, 
+                       _PUPickerItemProviderUserInfoPreferredCropRectKey, __PHPickerSourceTypeMax, 
                        __PHPickerSourceTypeMin, '__swift_FORCE_LOAD_$_swiftPhotosUI' ]
     objc-classes:    [ PHEditingExtensionContext, PHLimitedLibraryPicker, PHLivePhotoView, 
                        PHPickerConfiguration, PHPickerFilter, PHPickerResult, PHPickerUpdateConfiguration, 
@@ -636,5 +638,6 @@ exports:
                        PUPickerLivePhotoWithPossibleMotionEffectSuggestion, PUPickerOtherFilter, 
                        PUPickerSearchBasedSuggestion, PUPickerSuggestionAll, PUPickerSuggestionAvailableClasses, 
                        PUPickerUnavailableViewController, PUPickerWallpaperSuggestion, 
-                       _PHPickerCollectionConfiguration, _PHPickerSuggestionGroup ]
+                       _PHPickerCollectionConfiguration, _PHPickerResultMetadata, 
+                       _PHPickerSuggestionGroup ]
 ...

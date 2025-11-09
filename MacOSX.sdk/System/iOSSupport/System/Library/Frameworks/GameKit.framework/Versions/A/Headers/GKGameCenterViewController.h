@@ -66,10 +66,10 @@ NS_CLASS_AVAILABLE(10_9, 6_0)
 
 @interface GKGameCenterViewController (Deprecated)
 
-@property (assign, NS_NONATOMIC_IOSONLY) GKGameCenterViewControllerState viewState API_DEPRECATED_WITH_REPLACEMENT("-initWithState:", ios(6.0, 14.0), tvos(9.0, 14.0), macosx(10.9, 11.0));
-@property (nonatomic, assign) GKLeaderboardTimeScope leaderboardTimeScope API_DEPRECATED_WITH_REPLACEMENT("-initWithLeaderboard:", ios(4.1, 14.0), macosx(10.8, 11.0)) __TVOS_UNAVAILABLE;
-@property (nonatomic, nullable, strong) NSString *leaderboardIdentifier API_DEPRECATED_WITH_REPLACEMENT("-initWithLeaderboard:", ios(7.0, 14.0), tvos(9.0, 14.0), macosx(10.10, 11.0));
-@property (nonatomic, nullable, strong) NSString *leaderboardCategory API_DEPRECATED_WITH_REPLACEMENT("-initWithLeaderboard:", ios(4.1,7.0), macos(10.8,10.10)) __TVOS_UNAVAILABLE;
+@property (assign, NS_NONATOMIC_IOSONLY) GKGameCenterViewControllerState viewState API_DEPRECATED_WITH_REPLACEMENT("-initWithState:", ios(6.0, 14.0), tvos(9.0, 14.0), macos(10.9, 11.0));
+@property (nonatomic, assign) GKLeaderboardTimeScope leaderboardTimeScope API_DEPRECATED_WITH_REPLACEMENT("-initWithLeaderboard:playerScope:", ios(4.1, 14.0), macos(10.8, 11.0)) __TVOS_UNAVAILABLE;
+@property (nonatomic, nullable, strong) NSString *leaderboardIdentifier API_DEPRECATED_WITH_REPLACEMENT("-initWithLeaderboard:playerScope:", ios(7.0, 14.0), tvos(9.0, 14.0), macos(10.10, 11.0));
+@property (nonatomic, nullable, strong) NSString *leaderboardCategory API_DEPRECATED_WITH_REPLACEMENT("-initWithLeaderboard:playerScope:", ios(4.1,7.0), macos(10.8,10.10)) __TVOS_UNAVAILABLE;
 
 @end
 

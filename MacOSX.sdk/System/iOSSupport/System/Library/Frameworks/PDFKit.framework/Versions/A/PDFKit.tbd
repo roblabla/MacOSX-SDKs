@@ -4,12 +4,14 @@ targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/PDFKit.framework/Versions/A/PDFKit'
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
-    symbols:         [ _PDFAnnotationHighlightingModeInvert, _PDFAnnotationHighlightingModeNone, 
-                       _PDFAnnotationHighlightingModeOutline, _PDFAnnotationHighlightingModePush, 
-                       _PDFAnnotationKeyAction, _PDFAnnotationKeyAdditionalActions, 
-                       _PDFAnnotationKeyAppearanceDictionary, _PDFAnnotationKeyAppearanceState, 
-                       _PDFAnnotationKeyBorder, _PDFAnnotationKeyBorderStyle, _PDFAnnotationKeyColor, 
-                       _PDFAnnotationKeyContents, _PDFAnnotationKeyDate, _PDFAnnotationKeyDefaultAppearance, 
+    symbols:         [ _PDFActionAddNote, _PDFActionHighlight, _PDFActionRemoveMarkup, 
+                       _PDFActionRemoveNote, _PDFAnnotationHighlightingModeInvert, 
+                       _PDFAnnotationHighlightingModeNone, _PDFAnnotationHighlightingModeOutline, 
+                       _PDFAnnotationHighlightingModePush, _PDFAnnotationKeyAction, 
+                       _PDFAnnotationKeyAdditionalActions, _PDFAnnotationKeyAppearanceDictionary, 
+                       _PDFAnnotationKeyAppearanceState, _PDFAnnotationKeyBorder, 
+                       _PDFAnnotationKeyBorderStyle, _PDFAnnotationKeyColor, _PDFAnnotationKeyContents, 
+                       _PDFAnnotationKeyDate, _PDFAnnotationKeyDefaultAppearance, 
                        _PDFAnnotationKeyDestination, _PDFAnnotationKeyFlags, _PDFAnnotationKeyHighlightingMode, 
                        _PDFAnnotationKeyIconName, _PDFAnnotationKeyInklist, _PDFAnnotationKeyIntentType, 
                        _PDFAnnotationKeyInteriorColor, _PDFAnnotationKeyLineEndingStyles, 

@@ -34,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger, WKCookiePolicy) {
     WKCookiePolicyAllow,
     WKCookiePolicyDisallow,
-} NS_SWIFT_NAME(WKHTTPCookieStore.CookiePolicy) API_AVAILABLE(macos(14.0), ios(NA));
+} NS_SWIFT_NAME(WKHTTPCookieStore.CookiePolicy) API_AVAILABLE(macos(14.0), ios(17.0));
 
 API_AVAILABLE(macos(10.13), ios(11.0))
 @protocol WKHTTPCookieStoreObserver <NSObject>
@@ -82,12 +82,12 @@ WK_EXTERN API_AVAILABLE(macos(10.13), ios(11.0))
   @param policy A value indicating whether cookies are allowed. The default value is WKCookiePolicyAllow.
   @param completionHandler A block to invoke once the cookie policy has been set.
   */
-- (void)setCookiePolicy:(WKCookiePolicy)policy completionHandler:(nullable void (^)(void))completionHandler API_AVAILABLE(macos(14.0), ios(NA));
+- (void)setCookiePolicy:(WKCookiePolicy)policy completionHandler:(nullable void (^)(void))completionHandler API_AVAILABLE(macos(14.0), ios(17.0));
 
 /*! @abstract Get whether cookies are allowed.
  @param completionHandler A block to invoke with the value of whether cookies are allowed.
  */
-- (void)getCookiePolicy:(void (^)(WKCookiePolicy))completionHandler WK_SWIFT_ASYNC_NAME(getter:cookiePolicy()) API_AVAILABLE(macos(14.0), ios(NA));
+- (void)getCookiePolicy:(void (^)(WKCookiePolicy))completionHandler WK_SWIFT_ASYNC_NAME(getter:cookiePolicy()) API_AVAILABLE(macos(14.0), ios(17.0));
 
 @end
 

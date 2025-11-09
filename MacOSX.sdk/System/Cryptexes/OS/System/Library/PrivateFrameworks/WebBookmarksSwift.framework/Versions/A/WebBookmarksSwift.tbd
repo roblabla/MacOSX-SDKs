@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/WebBookmarksSwift.framework/Versions/A/WebBookmarksSwift'
-current-version: 616.1.27
+current-version: 617.1.17
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -17,6 +17,13 @@ exports:
                        '_$s17WebBookmarksSwift18AsyncBufferedQueueCfD', '_$s17WebBookmarksSwift18AsyncBufferedQueueCfd', 
                        '_$s17WebBookmarksSwift18AsyncBufferedQueueCyxGSciAAMc', '_$s17WebBookmarksSwift27CKShareGroupSessionProviderC11localMember0E10Activities0I0_pSgvg', 
                        '_$s17WebBookmarksSwift27CKShareGroupSessionProviderC11localMember0E10Activities0I0_pSgvpMV', 
+                       '_$s17WebBookmarksSwift27CKShareGroupSessionProviderC12presenceInfo7Combine19CurrentValueSubjectCy0E10Activities08PresencefI0Vs5NeverOGvMTj', 
+                       '_$s17WebBookmarksSwift27CKShareGroupSessionProviderC12presenceInfo7Combine19CurrentValueSubjectCy0E10Activities08PresencefI0Vs5NeverOGvMTq', 
+                       '_$s17WebBookmarksSwift27CKShareGroupSessionProviderC12presenceInfo7Combine19CurrentValueSubjectCy0E10Activities08PresencefI0Vs5NeverOGvgTj', 
+                       '_$s17WebBookmarksSwift27CKShareGroupSessionProviderC12presenceInfo7Combine19CurrentValueSubjectCy0E10Activities08PresencefI0Vs5NeverOGvgTq', 
+                       '_$s17WebBookmarksSwift27CKShareGroupSessionProviderC12presenceInfo7Combine19CurrentValueSubjectCy0E10Activities08PresencefI0Vs5NeverOGvpMV', 
+                       '_$s17WebBookmarksSwift27CKShareGroupSessionProviderC12presenceInfo7Combine19CurrentValueSubjectCy0E10Activities08PresencefI0Vs5NeverOGvsTj', 
+                       '_$s17WebBookmarksSwift27CKShareGroupSessionProviderC12presenceInfo7Combine19CurrentValueSubjectCy0E10Activities08PresencefI0Vs5NeverOGvsTq', 
                        '_$s17WebBookmarksSwift27CKShareGroupSessionProviderC2id8activity5shareACyxGSS_xSo0D0CtKcfC', 
                        '_$s17WebBookmarksSwift27CKShareGroupSessionProviderC2id8activity5shareACyxGSS_xSo0D0CtKcfCTj', 
                        '_$s17WebBookmarksSwift27CKShareGroupSessionProviderC2id8activity5shareACyxGSS_xSo0D0CtKcfCTq', 
@@ -57,6 +64,7 @@ exports:
                        '_$s17WebBookmarksSwift27CKShareGroupSessionProviderCMu', 
                        '_$s17WebBookmarksSwift27CKShareGroupSessionProviderCfD', 
                        '_$s17WebBookmarksSwift27CKShareGroupSessionProviderCfd', 
+                       '_$s17WebBookmarksSwift27CKShareGroupSessionProviderCyxG0E10Activities08PresenceefG0AAMc', 
                        '_$s17WebBookmarksSwift27CKShareGroupSessionProviderCyxG0E10Activities0efG0AAMc', 
                        '_$s17WebBookmarksSwift27CKShareGroupSessionProviderCyxGs12IdentifiableAAMc', 
                        '_$s17WebBookmarksSwift30ParticipantPresenceCoordinatorC011moveCurrentD05toTab02inJ5Group20withDeviceIdentifierySSSg_AHSStF', 

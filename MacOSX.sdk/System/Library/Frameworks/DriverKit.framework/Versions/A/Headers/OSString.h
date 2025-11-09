@@ -1,4 +1,4 @@
-/* iig(DriverKit-324.0.10) generated from OSString.iig */
+/* iig(DriverKit-324.60.3) generated from OSString.iig */
 
 /* OSString.iig:1-40 */
 /*

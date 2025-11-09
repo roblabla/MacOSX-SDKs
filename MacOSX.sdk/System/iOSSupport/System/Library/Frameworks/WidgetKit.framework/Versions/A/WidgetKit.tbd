@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/WidgetKit.framework/Versions/A/WidgetKit'
-current-version: 401.1.255
+current-version: 402.22
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
@@ -389,6 +389,10 @@ exports:
                        '_$s9WidgetKit0A12ViewMetadataV25containsPrivacyRedactionsSbvg', 
                        '_$s9WidgetKit0A12ViewMetadataV25containsPrivacyRedactionsSbvpMV', 
                        '_$s9WidgetKit0A12ViewMetadataV25containsPrivacyRedactionsSbvs', 
+                       '_$s9WidgetKit0A12ViewMetadataV27containsInteractiveControlsSbvM', 
+                       '_$s9WidgetKit0A12ViewMetadataV27containsInteractiveControlsSbvg', 
+                       '_$s9WidgetKit0A12ViewMetadataV27containsInteractiveControlsSbvpMV', 
+                       '_$s9WidgetKit0A12ViewMetadataV27containsInteractiveControlsSbvs', 
                        '_$s9WidgetKit0A12ViewMetadataV3url10Foundation3URLVSgvM', 
                        '_$s9WidgetKit0A12ViewMetadataV3url10Foundation3URLVSgvg', 
                        '_$s9WidgetKit0A12ViewMetadataV3url10Foundation3URLVSgvpMV', 

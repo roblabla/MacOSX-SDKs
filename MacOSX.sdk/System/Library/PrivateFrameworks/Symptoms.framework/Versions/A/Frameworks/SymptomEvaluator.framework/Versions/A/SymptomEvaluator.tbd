@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/Symptoms.framework/Versions/A/Frameworks/SymptomEvaluator.framework/Versions/A/SymptomEvaluator'
-current-version: 1848.0.5
+current-version: 1848.60.8
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AlgosPackScore, _AlgosUnpackScore, _CLIPS_BASEBAND_MAV_MODULE, 
@@ -25,8 +25,9 @@ exports:
                        _CTShimSubscriptionInfoUserDataPreferred, _CTShimSubscriptionNRServingCellType, 
                        _CTShimSubscriptionPreferredRATSelection, _CTShimSubscriptionRATSelectionIsNR, 
                        _CTShimSubscriptionRATSelectionMask, _CTShimSubscriptionSupports5G, 
-                       _CTShimSubscriptions, _activate_symptom_evaluator_handling, 
-                       _activeTraceTargets, _apparentTime, _boottime_secs, _client_transactions_release, 
+                       _CTShimSubscriptionWiFiEnableMmWaveSisOutrank, _CTShimSubscriptions, 
+                       _activate_symptom_evaluator_handling, _activeTraceTargets, 
+                       _apparentTime, _boottime_secs, _client_transactions_release, 
                        _configure_analytics_launchpad_for_helper, _configure_symptom_evaluator_handling, 
                        _configure_symptom_logging, _dateStringMillisecondsFromReferenceInterval, 
                        _dateStringMillisecondsFromTimeInterval, _dispatch_with_apparent_delay, 

@@ -118,7 +118,7 @@ GK_EXTERN NSNotificationName GKPlayerAuthenticationDidChangeNotificationName NS_
 - (void)loadDefaultLeaderboardCategoryIDWithCompletionHandler:(void(^__nullable)(NSString * __nullable categoryID, NSError * __nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("-loadDefaultLeaderboardIdentifierWithCompletionHandler:", ios(6.0,7.0), macos(10.8,10.10)) __TVOS_UNAVAILABLE;
 - (void)authenticateWithCompletionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("-authenticateHandler", ios(4.1,6.0), macos(10.8,10.8)) __TVOS_UNAVAILABLE;
 
-- (void)loadFriendPlayersWithCompletionHandler:(void(^__nullable)(NSArray<GKPlayer *> * __nullable friendPlayers, NSError * __nullable error))completionHandler NS_DEPRECATED(10_10, 10_11, 8_0, 10_0);
+- (void)loadFriendPlayersWithCompletionHandler:(void(^__nullable)(NSArray<GKPlayer *> * __nullable friendPlayers, NSError * __nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("-loadFriends:", ios(8.0,10.0), macos(10.10,10.11));
 
 
 /** Generates a signature allowing 3rd party server to authenticate the GKLocalPlayer
@@ -126,13 +126,13 @@ GK_EXTERN NSNotificationName GKPlayerAuthenticationDidChangeNotificationName NS_
     1. Communications problem
     2. Unauthenticated player
  */
-- (void)generateIdentityVerificationSignatureWithCompletionHandler:(void (^__nullable)(NSURL * __nullable publicKeyUrl, NSData * __nullable signature, NSData * __nullable salt, uint64_t timestamp, NSError * __nullable error))completionHandler  API_DEPRECATED_WITH_REPLACEMENT("-fetchItemsForIdentityVerificationSignature:completionHandler:", ios(7.0, 13.5), tvos(9.0, 13.4.8), macosx(10.10, 10.15.5), watchos(3.0,6.5));
+- (void)generateIdentityVerificationSignatureWithCompletionHandler:(void (^__nullable)(NSURL * __nullable publicKeyUrl, NSData * __nullable signature, NSData * __nullable salt, uint64_t timestamp, NSError * __nullable error))completionHandler  API_DEPRECATED_WITH_REPLACEMENT("-fetchItemsForIdentityVerificationSignature:completionHandler:", ios(7.0, 13.5), tvos(9.0, 13.4.8), macos(10.10, 10.15.5), watchos(3.0,6.5));
 @end
 NS_ASSUME_NONNULL_END
 
 @interface GKLocalPlayer (Obsoleted)
 /** This method is obsolete. It will never be invoked and its implementation does nothing***/
-- (void)loadFriendsWithCompletionHandler:(void(^__nullable)(NSArray<NSString *> * __nullable friendIDs, NSError * __nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("-loadRecentPlayersWithCompletionHandler:", ios(4.1,8.0), macos(10.8,10.10)) __TVOS_UNAVAILABLE NS_SWIFT_NAME(loadFriendsObsoleted(completionHandler:));;
+- (void)loadFriendsWithCompletionHandler:(void(^__nullable)(NSArray<NSString *> * __nullable friendIDs, NSError * __nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("-loadFriends:", ios(4.1,8.0), macos(10.8,10.10)) __TVOS_UNAVAILABLE NS_SWIFT_NAME(loadFriendsObsoleted(completionHandler:));;
 
 /** This property is obsolete. ***/
 @property(nonatomic, readonly, nullable, retain) NSArray<NSString *> *friends API_DEPRECATED_WITH_REPLACEMENT("-loadFriendPlayersWithCompletionHandler:", ios(4.1,8.0), macos(10.8,10.10)) __TVOS_UNAVAILABLE; // Array of player identifiers of friends for the local player. Not valid until loadFriendsWithCompletionHandler: has completed.

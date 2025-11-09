@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/TipKit.framework/Versions/A/TipKit'
-current-version: 55
+current-version: 55.2.3
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -356,6 +356,8 @@ exports:
                        '_$s7SwiftUI4ViewP6TipKitE03tipC5StyleyQrqd__AD0dcG0Rd__lFQOMQ', 
                        '_$s7SwiftUI4ViewP6TipKitE07popoverD0_9arrowEdge6actionQrqd___AA0H0OyAD4TipsO6ActionVctAD0D0Rd__lF', 
                        '_$s7SwiftUI4ViewP6TipKitE07popoverD0_9arrowEdge6actionQrqd___AA0H0OyAD4TipsO6ActionVctAD0D0Rd__lFQOMQ', 
+                       '_$s7SwiftUI4ViewP6TipKitE07popoverD0_9arrowEdgeQrqd___AA0H0OtAD0D0Rd__lF', 
+                       '_$s7SwiftUI4ViewP6TipKitE07popoverD0_9arrowEdgeQrqd___AA0H0OtAD0D0Rd__lFQOMQ', 
                        '_$s7SwiftUI4ViewP6TipKitE12tipImageSizeyQrSo6CGSizeVF', '_$s7SwiftUI4ViewP6TipKitE12tipImageSizeyQrSo6CGSizeVFQOMQ', 
                        '_$s7SwiftUI4ViewP6TipKitE13tipBackgroundyQrqd__AA10ShapeStyleRd__lF', 
                        '_$s7SwiftUI4ViewP6TipKitE13tipBackgroundyQrqd__AA10ShapeStyleRd__lFQOMQ', 
@@ -363,7 +365,6 @@ exports:
                        '_$s7SwiftUI4ViewP6TipKitE15tipCornerRadius_11antialiasedQr12CoreGraphics7CGFloatV_SbtFQOMQ', 
                        '_$s9ImageView6TipKit0C7ContentPTl', '_$sST6TipKitE13donatedWithinySayAA4TipsO5EventV8DonationVy_qd___GGAD0G9TimeRangeVSeRd__SERd__s8SendableRd__AI7ElementRtzlF', 
                        '_$sST6TipKitE13largestSubset9groupedBySayAA4TipsO5EventV8DonationVy_qd___GGs7KeyPathCyqd__qd_0_G_tSeRd__SERd__s8SendableRd__SHRd_0_AJ7ElementRtzr0_lF', 
-                       '_$sST6TipKitE14smallestSubset9groupedBySayAA4TipsO5EventV8DonationVy_qd___GGs7KeyPathCyqd__qd_0_G_tSeRd__SERd__s8SendableRd__SHRd_0_AJ7ElementRtzr0_lF', 
-                       '_$sSo7NSColorC6TipKitE5color7SwiftUI5ColorVvg', '_$sSo7NSColorC6TipKitE5color7SwiftUI5ColorVvpMV' ]
+                       '_$sST6TipKitE14smallestSubset9groupedBySayAA4TipsO5EventV8DonationVy_qd___GGs7KeyPathCyqd__qd_0_G_tSeRd__SERd__s8SendableRd__SHRd_0_AJ7ElementRtzr0_lF' ]
     objc-classes:    [ _TtC6TipKit12TipNSPopover, _TtC6TipKit9TipNSView ]
 ...

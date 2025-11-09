@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/swift/libswiftAVFoundation.dylib'
-current-version: 2180.79.1
+current-version: 2220.14.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -120,6 +120,8 @@ exports:
                        '_$sSC7AVErrorLeV12AVFoundationE9mediaTypeSo07AVMediaD0aSgvg', 
                        '_$sSC7AVErrorLeV12AVFoundationE9mediaTypeSo07AVMediaD0aSgvpMV', 
                        '_$sSC7AVErrorLeV12AVFoundationE9processIDSiSgvg', '_$sSC7AVErrorLeV12AVFoundationE9processIDSiSgvpMV', 
+                       '_$sSa12AVFoundation9CoreMedia5CMTagCRszlE24monoscopicForVideoOutputSayADGyFZ', 
+                       '_$sSa12AVFoundation9CoreMedia5CMTagCRszlE26stereoscopicForVideoOutputSayADGyFZ', 
                        '_$sSo11CMTimeRangea12AVFoundationE19_bridgeToObjectiveCSo7NSValueCyF', 
                        '_$sSo11CMTimeRangea12AVFoundationE26_forceBridgeFromObjectiveC_6resultySo7NSValueC_ABSgztFZ', 
                        '_$sSo11CMTimeRangea12AVFoundationE34_conditionallyBridgeFromObjectiveC_6resultSbSo7NSValueC_ABSgztFZ', 
@@ -156,6 +158,7 @@ exports:
                        '_$sSo16AVMutableCaptionC12AVFoundationE7setRuby_2inySo09AVCaptionE0C_So8_NSRangeVtF', 
                        '_$sSo18AVVideoCompositionC12AVFoundationE24sourceSampleDataTrackIDsSays5Int32VGvg', 
                        '_$sSo18AVVideoCompositionC12AVFoundationE24sourceSampleDataTrackIDsSays5Int32VGvpMV', 
+                       '_$sSo19AVPlayerVideoOutputC12AVFoundationE13taggedBuffers11forHostTimeSay9CoreMedia14CMTaggedBufferVG0eM5Group_So6CMTimea012presentationI0So0abC13ConfigurationC06activeQ0tSgAL_tF', 
                        '_$sSo20AVCapturePhotoOutputC12AVFoundationE012availableRawB16PixelFormatTypesSays6UInt32VGvg', 
                        '_$sSo20AVCapturePhotoOutputC12AVFoundationE012availableRawB16PixelFormatTypesSays6UInt32VGvpMV', 
                        '_$sSo20AVCapturePhotoOutputC12AVFoundationE012supportedRawB16PixelFormatTypes3forSaySo8NSNumberCGSo10AVFileTypea_tF', 
@@ -189,6 +192,8 @@ exports:
                        '_$sSo21AVCaptureDeviceFormatC12AVFoundationE27supportedMaxPhotoDimensionsSaySo07CMVideoH0aGvpMV', 
                        '_$sSo21AVCaptureDeviceFormatC12AVFoundationE36secondaryNativeResolutionZoomFactorsSay12CoreGraphics7CGFloatVGvg', 
                        '_$sSo21AVCaptureDeviceFormatC12AVFoundationE36secondaryNativeResolutionZoomFactorsSay12CoreGraphics7CGFloatVGvpMV', 
+                       '_$sSo21AVCaptureDeviceFormatC12AVFoundationE44supportedVideoZoomRangesForDepthDataDeliverySaySNy12CoreGraphics7CGFloatVGGvg', 
+                       '_$sSo21AVCaptureDeviceFormatC12AVFoundationE44supportedVideoZoomRangesForDepthDataDeliverySaySNy12CoreGraphics7CGFloatVGGvpMV', 
                        '_$sSo21AVCaptureDeviceFormatC12AVFoundationE45supportedVideoZoomFactorsForDepthDataDeliverySay12CoreGraphics7CGFloatVGvg', 
                        '_$sSo21AVCaptureDeviceFormatC12AVFoundationE45supportedVideoZoomFactorsForDepthDataDeliverySay12CoreGraphics7CGFloatVGvpMV', 
                        '_$sSo22AVCapturePhotoSettingsC12AVFoundationE016availablePreviewB16PixelFormatTypesSays6UInt32VGvg', 
@@ -201,6 +206,11 @@ exports:
                        '_$sSo25AVPlayerInterstitialEventC12AVFoundationE11primaryItem10identifier4date13templateItems12restrictions16resumptionOffset12playoutLimit21userDefinedAttributesABSo0aF0C_SSSg10Foundation4DateVSayAMGSo0abC12RestrictionsVSo6CMTimeaAVSDySSypGtcfc', 
                        '_$sSo25AVPlayerInterstitialEventC12AVFoundationE11primaryItem10identifier4time13templateItems12restrictions16resumptionOffset12playoutLimit21userDefinedAttributesABSo0aF0C_SSSgSo6CMTimeaSayAMGSo0abC12RestrictionsVA2PSDySSypGtcfC', 
                        '_$sSo25AVPlayerInterstitialEventC12AVFoundationE11primaryItem10identifier4time13templateItems12restrictions16resumptionOffset12playoutLimit21userDefinedAttributesABSo0aF0C_SSSgSo6CMTimeaSayAMGSo0abC12RestrictionsVA2PSDySSypGtcfc', 
+                       '_$sSo26AVVideoOutputSpecificationC12AVFoundationE03setB21PixelBufferAttributes_3forySDySSypGSg_Say9CoreMedia5CMTagCGtF', 
+                       '_$sSo26AVVideoOutputSpecificationC12AVFoundationE14tagCollectionsABSaySay9CoreMedia5CMTagCGG_tcfC', 
+                       '_$sSo26AVVideoOutputSpecificationC12AVFoundationE14tagCollectionsABSaySay9CoreMedia5CMTagCGG_tcfc', 
+                       '_$sSo26AVVideoOutputSpecificationC12AVFoundationE23preferredTagCollectionsSaySay9CoreMedia5CMTagCGGvg', 
+                       '_$sSo26AVVideoOutputSpecificationC12AVFoundationE23preferredTagCollectionsSaySay9CoreMedia5CMTagCGGvpMV', 
                        '_$sSo29AVAssetVariantAudioAttributesC12AVFoundationE9formatIDsSays6UInt32VGvg', 
                        '_$sSo29AVAssetVariantAudioAttributesC12AVFoundationE9formatIDsSays6UInt32VGvpMV', 
                        '_$sSo29AVAssetVariantVideoAttributesC12AVFoundationE10codecTypesSays6UInt32VGvg', 
@@ -224,6 +234,8 @@ exports:
                        '_$sSo29AVAsynchronousKeyValueLoadingP12AVFoundationE4loadyqd___qd_0_tAC15AVAsyncPropertyCyxqd__G_AFyxqd_0_GtYaKr0_lF', 
                        '_$sSo29AVAsynchronousKeyValueLoadingP12AVFoundationE4loadyqd___qd_0_tAC15AVAsyncPropertyCyxqd__G_AFyxqd_0_GtYaKr0_lFTu', 
                        '_$sSo29AVAsynchronousKeyValueLoadingP12AVFoundationE6status2ofAC15AVAsyncPropertyC6StatusOyxqd___GAGyxqd__G_tlF', 
+                       '_$sSo32AVPlayerVideoOutputConfigurationC12AVFoundationE22dataChannelDescriptionSaySay9CoreMedia5CMTagCGGvg', 
+                       '_$sSo32AVPlayerVideoOutputConfigurationC12AVFoundationE22dataChannelDescriptionSaySay9CoreMedia5CMTagCGGvpMV', 
                        '_$sSo35AVMetadataMachineReadableCodeObjectC12AVFoundationE7cornersSaySo7CGPointVGvg', 
                        '_$sSo35AVMetadataMachineReadableCodeObjectC12AVFoundationE7cornersSaySo7CGPointVGvpMV', 
                        '_$sSo37AVAsynchronousVideoCompositionRequestC12AVFoundationE24sourceSampleDataTrackIDsSays5Int32VGvg', 

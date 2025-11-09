@@ -63,7 +63,7 @@ typedef NS_ENUM(NSInteger, UITableViewRowActionStyle) {
     UITableViewRowActionStyleDefault = 0,
     UITableViewRowActionStyleDestructive = UITableViewRowActionStyleDefault,
     UITableViewRowActionStyleNormal
-} API_DEPRECATED("Use UIContextualAction and related APIs instead.", ios(8.0, 13.0)) API_UNAVAILABLE(tvos);
+} API_DEPRECATED("Use UIContextualAction and related APIs instead.", ios(8.0, 13.0), visionos(1.0, 1.0)) API_UNAVAILABLE(tvos);
 
 UIKIT_EXTERN API_DEPRECATED("Use UIContextualAction and related APIs instead.", ios(8.0, 13.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 @interface UITableViewRowAction : NSObject <NSCopying>

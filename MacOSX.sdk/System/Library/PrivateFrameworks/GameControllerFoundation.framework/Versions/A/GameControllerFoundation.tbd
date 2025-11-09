@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/GameControllerFoundation.framework/Versions/A/GameControllerFoundation'
-current-version: 11.0.24
+current-version: 11.2.3
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -57,11 +57,13 @@ exports:
                        _GCFLOC_SWITCH_BUTTON_OPTIONS, _GCFLOC_SWITCH_BUTTON_RIGHT_THUMBSTICK, 
                        _GCFLOC_SWITCH_BUTTON_X, _GCFLOC_SWITCH_BUTTON_Y, _GCFLOC_SWITCH_DIRECTION_PAD, 
                        _GCFLOC_SWITCH_LEFT_SHOULDER, _GCFLOC_SWITCH_LEFT_THUMBSTICK, 
-                       _GCFLOC_SWITCH_LEFT_TRIGGER, _GCFLOC_SWITCH_RIGHT_SHOULDER, 
-                       _GCFLOC_SWITCH_RIGHT_THUMBSTICK, _GCFLOC_SWITCH_RIGHT_TRIGGER, 
-                       _GCFLOC_XBOX_BUTTON_A, _GCFLOC_XBOX_BUTTON_B, _GCFLOC_XBOX_BUTTON_HOME, 
-                       _GCFLOC_XBOX_BUTTON_LEFT_THUMBSTICK, _GCFLOC_XBOX_BUTTON_MENU, 
-                       _GCFLOC_XBOX_BUTTON_OPTIONS, _GCFLOC_XBOX_BUTTON_PADDLE_1, 
+                       _GCFLOC_SWITCH_LEFT_TRIGGER, _GCFLOC_SWITCH_N64_CONTROL_PAD, 
+                       _GCFLOC_SWITCH_N64_C_BUTTONS, _GCFLOC_SWITCH_N64_START_BUTTON, 
+                       _GCFLOC_SWITCH_N64_THUMBSTICK, _GCFLOC_SWITCH_N64_Z_BUTTON, 
+                       _GCFLOC_SWITCH_RIGHT_SHOULDER, _GCFLOC_SWITCH_RIGHT_THUMBSTICK, 
+                       _GCFLOC_SWITCH_RIGHT_TRIGGER, _GCFLOC_XBOX_BUTTON_A, _GCFLOC_XBOX_BUTTON_B, 
+                       _GCFLOC_XBOX_BUTTON_HOME, _GCFLOC_XBOX_BUTTON_LEFT_THUMBSTICK, 
+                       _GCFLOC_XBOX_BUTTON_MENU, _GCFLOC_XBOX_BUTTON_OPTIONS, _GCFLOC_XBOX_BUTTON_PADDLE_1, 
                        _GCFLOC_XBOX_BUTTON_PADDLE_2, _GCFLOC_XBOX_BUTTON_PADDLE_3, 
                        _GCFLOC_XBOX_BUTTON_PADDLE_4, _GCFLOC_XBOX_BUTTON_RIGHT_THUMBSTICK, 
                        _GCFLOC_XBOX_BUTTON_X, _GCFLOC_XBOX_BUTTON_Y, _GCFLOC_XBOX_DIRECTION_PAD, 
@@ -99,6 +101,7 @@ exports:
                        GCGenericDeviceDataBitTestExpressionModel, GCGenericDeviceDataBitTestExpressionModelBuilder, 
                        GCGenericDeviceDataClampExpressionModel, GCGenericDeviceDataClampExpressionModelBuilder, 
                        GCGenericDeviceDataConstantExpressionModel, GCGenericDeviceDataConstantExpressionModelBuilder, 
+                       GCGenericDeviceDataElementExistsExpressionModel, GCGenericDeviceDataElementExistsExpressionModelBuilder, 
                        GCGenericDeviceDataInputElementAttributeExpressionModel, GCGenericDeviceDataInputElementAttributeExpressionModelBuilder, 
                        GCGenericDeviceDataInputElementValueExpressionModel, GCGenericDeviceDataInputElementValueExpressionModelBuilder, 
                        GCGenericDeviceDataInterpolateExpressionModel, GCGenericDeviceDataInterpolateExpressionModelBuilder, 
@@ -107,6 +110,8 @@ exports:
                        GCGenericDeviceDataRumbleMotorValueExpressionModel, GCGenericDeviceDataRumbleMotorValueExpressionModelBuilder, 
                        GCGenericDeviceDataSDLHatFunctionExpressionModel, GCGenericDeviceDataSDLHatFunctionExpressionModelBuilder, 
                        GCGenericDeviceDriverModel, GCGenericDeviceDriverModelBuilder, 
+                       GCGenericDeviceDriverPropertiesModel, GCGenericDeviceDriverPropertiesModelBuilder, 
+                       GCGenericDeviceDriverPropertyModel, GCGenericDeviceDriverPropertyModelBuilder, 
                        GCGenericDeviceElementModel, GCGenericDeviceElementModelBuilder, 
                        GCGenericDeviceInputEventDriverModel, GCGenericDeviceInputEventDriverModelBuilder, 
                        GCGenericDeviceInputGamepadEventFieldModel, GCGenericDeviceInputGamepadEventFieldModelBuilder, 

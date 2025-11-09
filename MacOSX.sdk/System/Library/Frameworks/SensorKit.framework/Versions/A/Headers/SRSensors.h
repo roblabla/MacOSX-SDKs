@@ -189,7 +189,7 @@ SR_EXTERN SRSensor const SRSensorKeyboardMetrics API_AVAILABLE(ios(14.0)) API_UN
  * @/textblock
  * This steam does not store any raw audio nor any audio or data from other parties.
  *
- * Fetches from this stream return objects of type SFSpeechRecognitionResult as defined in the Speech framework.
+ * Fetches from this stream return objects of type \c SRSpeechMetrics
  */
 SR_EXTERN SRSensor const SRSensorSiriSpeechMetrics API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, macos, visionos) API_UNAVAILABLE(tvos);
 
@@ -208,7 +208,7 @@ SR_EXTERN SRSensor const SRSensorSiriSpeechMetrics API_AVAILABLE(ios(15.0)) API_
  *
  * This steam does not store any raw audio nor any audio or data from other parties.
  *
- * Fetches from this stream return objects of type SFSpeechRecognitionResult as defined in the Speech framework.
+ * Fetches from this stream return objects of type \c SRSpeechMetrics
  */
 SR_EXTERN SRSensor const SRSensorTelephonySpeechMetrics API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, macos, visionos) API_UNAVAILABLE(tvos);
 

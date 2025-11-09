@@ -20,7 +20,6 @@
 #import <NetworkExtension/NEDNSProxyProviderProtocol.h>
 #import <NetworkExtension/NEDNSSettings.h>
 #import <NetworkExtension/NEDNSSettingsManager.h>
-#import <NetworkExtension/NEFailureHandlerProvider.h>
 #import <NetworkExtension/NEFilterControlProvider.h>
 #import <NetworkExtension/NEFilterDataProvider.h>
 #import <NetworkExtension/NEFilterFlow.h>

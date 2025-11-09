@@ -32,6 +32,8 @@
 .br
 .Ev MTL_SHADER_VALIDATION_THREADGROUP_MEMORY
 .br
+.Ev MTL_SHADER_VALIDATION_RESOURCE_USAGE
+.br
 .Ev MTL_SHADER_VALIDATION_COMPILER_INLINING
 .br
 .Ev MTL_SHADER_VALIDATION_FAIL_MODE
@@ -158,6 +160,16 @@ The result of accessing invalid threadgroup memory on the GPU will be undefined.
 .sp
 If this value is set to any non-zero value, shader validation will instrument
 all threadgroup memory accesses and result of accessing invalid memory is determined by
+.Ev MTL_SHADER_VALIDATION_FAIL_MODE
+.It Sy MTL_SHADER_VALIDATION_RESOURCE_USAGE
+.br
+Defaults to 1
+.br
+Setting this value to "0" will disable instrumentation of resource usage.
+The result of accessing resources that are not resident on the GPU will be undefined.
+.sp
+If this value is set to any non-zero value, shader validation will instrument
+all resource accesses to check resource usage. It will detect missing calls to useResource and useHeap on resources used by the GPU. The result of accessing invalid memory is determined by
 .Ev MTL_SHADER_VALIDATION_FAIL_MODE
 .It Sy MTL_SHADER_VALIDATION_STACK_OVERFLOW
 .br

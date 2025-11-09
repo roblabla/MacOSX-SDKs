@@ -121,7 +121,7 @@ API_AVAILABLE(ios(4.0))
 
 /// @property   message
 /// @abstract   This property sets the initial interactive message.
-@property (nonatomic, nullable, copy) MSMessage *message API_AVAILABLE(ios(10.0));
+@property (nonatomic, nullable, copy) MSMessage *message API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(visionos);
 
 /// @method     addAttachmentURL:withAlternateFilename:
 /// @abstract   Returns <tt>YES</tt>if the attachment at the specified URL was added to the composition successfully.

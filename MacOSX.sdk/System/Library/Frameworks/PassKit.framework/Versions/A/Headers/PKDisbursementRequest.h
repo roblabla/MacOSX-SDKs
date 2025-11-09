@@ -5,7 +5,6 @@
 //  Copyright © 2019 Apple, Inc. All rights reserved.
 //
 
-
 #import <Foundation/Foundation.h>
 #import <PassKit/PKPaymentRequest.h>
 
@@ -73,7 +72,6 @@ API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(macos, tvos, watchos)
 @end
 
 NS_ASSUME_NONNULL_END
-
 
 #else
 #import <TargetConditionals.h>

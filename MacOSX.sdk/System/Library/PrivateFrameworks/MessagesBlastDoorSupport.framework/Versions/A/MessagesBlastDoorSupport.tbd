@@ -3,13 +3,6 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/MessagesBlastDoorSupport.framework/Versions/A/MessagesBlastDoorSupport'
 swift-abi-version: 7
-allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    clients:         [ CopresenceCore, FaceTimeMessageStore, FaceTimeMessageStoreTests, 
-                       IMDaemonCore, IMDaemonCoreEmbeddedTests, IMSharedUtilities, 
-                       IMTranscoderAgent, MediaAnalysis, MessagesBlastDoorTester, 
-                       callservicesd, callservicesdTests, com.apple.photos.ImageConversionService, 
-                       com.apple.photos.VideoConversionService, facetimemessagestored ]
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s24MessagesBlastDoorSupport0abC9InterfaceC11getMetadata20forAnimatedImageWith8maxCount13resultHandlery10Foundation3URLV_SiySo8NSObjectCSg_s5Error_pSgtctFTj', 

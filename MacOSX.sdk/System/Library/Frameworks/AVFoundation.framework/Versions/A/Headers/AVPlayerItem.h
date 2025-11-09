@@ -198,6 +198,7 @@ NS_SWIFT_UI_ACTOR
 @class AVPlayerItemTrack;
 @class AVMetadataItem;
 
+
 @interface AVPlayerItem (AVPlayerItemInspection)
 
 /*!
@@ -273,8 +274,8 @@ NS_SWIFT_UI_ACTOR
 
 @interface AVPlayerItem (AVPlayerItemRateAndSteppingSupport)
 
-/* For releases of OS X prior to 10.9 and releases of iOS prior to 7.0, indicates whether the item can be played at rates greater than 1.0.
-   Starting with OS X 10.9 and iOS 7.0, all AVPlayerItems with status AVPlayerItemReadyToPlay can be played at rates between 1.0 and 2.0, inclusive, even if canPlayFastForward is NO; for those releases canPlayFastForward indicates whether the item can be played at rates greater than 2.0.
+/* For releases of macOS prior to 10.9 and releases of iOS prior to 7.0, indicates whether the item can be played at rates greater than 1.0.
+   Starting with macOS 10.9 and iOS 7.0, all AVPlayerItems with status AVPlayerItemReadyToPlay can be played at rates between 1.0 and 2.0, inclusive, even if canPlayFastForward is NO; for those releases canPlayFastForward indicates whether the item can be played at rates greater than 2.0.
 */
 @property (readonly) BOOL canPlayFastForward API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0));
 
@@ -625,7 +626,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
  @discussion
 	For live streaming content, the player item may need to use extra networking and power resources to keep playback state up to date when paused.  For example, when this property is set to YES, the seekableTimeRanges property will be periodically updated to reflect the current state of the live stream.
  
-	For clients linked on or after OS X 10.11 or iOS 9.0, the default value is NO.  To minimize power usage, avoid setting this property to YES when you do not need playback state to stay up to date while paused.
+	For clients linked on or after macOS 10.11 or iOS 9.0, the default value is NO.  To minimize power usage, avoid setting this property to YES when you do not need playback state to stay up to date while paused.
  */
 @property (assign) BOOL canUseNetworkResourcesForLiveStreamingWhilePaused API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0));
 
@@ -1334,6 +1335,13 @@ AV_INIT_UNAVAILABLE
  				This property is not observable.
  */
 @property (nonatomic, readonly, nullable) NSString *errorComment;
+
+ /*
+ @property		allHTTPResponseHeaderFields
+ @abstract		The HTTP header fields returned by the server, if an HTTP response was received as part of this error.
+ @discussion	See -[NSHTTPURLResponse allHeaderFields] for more information.
+ */
+ @property (nonatomic, readonly, nullable) NSDictionary <NSString *, NSString *> *allHTTPResponseHeaderFields API_AVAILABLE(macos(14.2), ios(17.2), tvos(17.2), watchos(10.2));
 
 @end
 

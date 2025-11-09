@@ -52,7 +52,7 @@ API_AVAILABLE(macos(10.14), ios(10.0), watchos(3.0), tvos(10.0))
 @end
 
 // UNLocationNotificationTrigger can be scheduled on the device to notify when the user enters or leaves a geographic region. The identifier on CLRegion must be unique. Scheduling multiple UNNotificationRequests with different regions containing the same identifier will result in undefined behavior. The number of UNLocationNotificationTriggers that may be scheduled by an application at any one time is limited by the system. Applications must have "when-in-use" authorization through CoreLocation. See the CoreLocation documentation for more information.
-API_AVAILABLE(ios(10.0), watchos(3.0)) API_UNAVAILABLE(macos, tvos, macCatalyst)
+API_AVAILABLE(ios(10.0), watchos(3.0)) API_UNAVAILABLE(macos, tvos, macCatalyst, visionos)
 @interface UNLocationNotificationTrigger : UNNotificationTrigger
 
 @property (NS_NONATOMIC_IOSONLY, readonly, copy) CLRegion *region;

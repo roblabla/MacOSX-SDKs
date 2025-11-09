@@ -14,6 +14,7 @@
 
 @class PKPaymentPass;
 @class PKSecureElementPass;
+@class PKPassRelevancyDates;
 
 #if TARGET_OS_IPHONE
 @class UIImage;

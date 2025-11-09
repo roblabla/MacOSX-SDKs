@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 // Forward declarations
 @class NSError, NSString, NSNumber;
-
+@class AVAudioChannelLayout;
 
 // =================================================================================================
 #pragma mark-- iOS/tvOS/watchOS AVAudioSession interface --
@@ -171,6 +171,10 @@ API_AVAILABLE(ios(3.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos)
  */
 - (BOOL)setPrefersNoInterruptionsFromSystemAlerts:(BOOL)inValue error:(NSError**)outError API_AVAILABLE(ios(14.5), watchos(7.3), tvos(14.5)) API_UNAVAILABLE(macos);
 @property (readonly, nonatomic) BOOL prefersNoInterruptionsFromSystemAlerts API_AVAILABLE(ios(14.5), watchos(7.3), tvos(14.5)) API_UNAVAILABLE(macos);
+
+/// Get the currently resolved rendering mode to badge content appropriately.
+/// Clients should use this property to determine what to badge content as.
+@property(readonly) AVAudioSessionRenderingMode renderingMode API_AVAILABLE(ios(17.2), tvos(17.2)) API_UNAVAILABLE(watchos, macos, visionos);
 
 @end
 
@@ -340,6 +344,12 @@ API_AVAILABLE(ios(3.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos)
 
 /// The current hardware IO buffer duration in seconds.
 @property (readonly) NSTimeInterval IOBufferDuration API_AVAILABLE(ios(6.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);
+
+/// Get an array of channel layouts that the current route supports.
+/// This property is only supported when the output is routed to ports of type AVAudioSessionPortCarAudio
+/// Otherwise, an empty array will be returned. Note that this will return an empty array if session is inactive.
+/// Clients should listen to AVAudioSessionRenderingCapabilitiesChangeNotification to be notified when this changes.
+@property(readonly) NSArray<AVAudioChannelLayout*>* supportedOutputChannelLayouts API_AVAILABLE(ios(17.2), tvos(17.2)) API_UNAVAILABLE(watchos, macos, visionos);
 
 @end
 
@@ -604,6 +614,14 @@ OS_EXPORT NSNotificationName const  AVAudioSessionSilenceSecondaryAudioHintNotif
 */
 OS_EXPORT NSNotificationName const  AVAudioSessionSpatialPlaybackCapabilitiesChangedNotification API_AVAILABLE(ios(15.0), watchos(8.0), tvos(15.0)) API_UNAVAILABLE(macos) NS_SWIFT_NAME(AVAudioSession.spatialPlaybackCapabilitiesChangedNotification);
 
+/// Notification sent to registered listeners when the resolved rendering mode changes.
+OS_EXPORT NSNotificationName const  AVAudioSessionRenderingModeChangeNotification API_AVAILABLE(ios(17.2), tvos(17.2)) API_UNAVAILABLE(watchos, macos, visionos) NS_SWIFT_NAME(AVAudioSession.renderingModeChangeNotification);
+
+/*!
+	 @brief Notification sent to registered listeners when the rendering capabilities change.
+ */
+OS_EXPORT NSNotificationName const AVAudioSessionRenderingCapabilitiesChangeNotification API_AVAILABLE(ios(17.2), tvos(17.2)) API_UNAVAILABLE(watchos, macos, visionos) NS_SWIFT_NAME(AVAudioSession.renderingCapabilitiesChangeNotification);
+
 #pragma mark-- Keys for NSNotification userInfo dictionaries --
 
 /// keys for AVAudioSessionSpatialPlaybackCapabilitiesChangedNotification
@@ -644,6 +662,10 @@ OS_EXPORT NSString *const AVAudioSessionRouteChangePreviousRouteKey API_AVAILABL
 /// keys for AVAudioSessionSilenceSecondaryAudioHintNotification
 /// value is an NSNumber representing an AVAudioSessionSilenceSecondaryAudioHintType
 OS_EXPORT NSString *const AVAudioSessionSilenceSecondaryAudioHintTypeKey API_AVAILABLE(ios(8.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);
+
+/// keys for AVAudioSessionRenderingModeChangeNotification
+/// Contains a payload of NSInteger representing the new resolved rendering mode
+OS_EXPORT NSString *const AVAudioSessionRenderingModeNewRenderingModeKey API_AVAILABLE(ios(17.2), tvos(17.2)) API_UNAVAILABLE(watchos, macos, visionos);
 
 NS_ASSUME_NONNULL_END
 

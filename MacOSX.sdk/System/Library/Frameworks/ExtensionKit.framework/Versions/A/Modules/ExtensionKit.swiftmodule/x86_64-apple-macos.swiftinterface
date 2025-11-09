@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.9 (swiftlang-5.9.0.123.203 clang-1500.0.37.1)
-// swift-module-flags: -target x86_64-apple-macos14.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name ExtensionKit
+// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.11 clang-1500.1.0.2.2)
+// swift-module-flags: -target x86_64-apple-macos14.2 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name ExtensionKit
 // swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 141.2
 import ExtensionFoundation
 @_exported import ExtensionKit
@@ -17,13 +17,13 @@ import os
 @available(iOS, unavailable)
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 extension ExtensionKit.EXHostViewController {
   @available(macOS 13.0, *)
   @available(iOS, unavailable)
   @available(watchOS, unavailable)
   @available(tvOS, unavailable)
-  @available(xrOS, unavailable)
+  @available(visionOS, unavailable)
   public struct Configuration {
     public var appExtension: ExtensionFoundation.AppExtensionIdentity
     public var sceneID: Swift.String
@@ -33,7 +33,7 @@ extension ExtensionKit.EXHostViewController {
   @available(iOS, unavailable)
   @available(watchOS, unavailable)
   @available(tvOS, unavailable)
-  @available(xrOS, unavailable)
+  @available(visionOS, unavailable)
   @_Concurrency.MainActor(unsafe) public var configuration: ExtensionKit.EXHostViewController.Configuration? {
     get
     set

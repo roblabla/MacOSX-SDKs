@@ -49,18 +49,18 @@ API_AVAILABLE(macos(11.0), ios(14.0), tvos(15.0), watchos(9.0))
 /// A Boolean value that indicates whether a particular device provides the App
 /// Attest service.
 ///
-/// Not all device types support the App Attest service, so check for support
-/// before using the service.
-///
-/// If you read ``DeviceCheck/DCAppAttestService/supported`` from an app running
-/// on a Mac device, the value is
-/// <doc://com.apple.documentation/documentation/objectivec/no>. This includes
-/// Mac Catalyst apps, and iOS or iPadOS apps running on Apple silicon.
+/// > Important: Not all device types support the App Attest service, so check
+/// > for support before using the service.
+/// >
+/// > If you read ``DeviceCheck/DCAppAttestService/supported`` from an app running
+/// > on a Mac device, the value is
+/// > <doc://com.apple.documentation/documentation/swift/false>. This includes
+/// > Mac Catalyst apps, and iOS or iPadOS apps running on Apple silicon.
 ///
 /// If you read ``DeviceCheck/DCAppAttestService/supported`` from within an app
 /// extension, the value might be
-/// <doc://com.apple.documentation/documentation/objectivec/yes> or
-/// <doc://com.apple.documentation/documentation/objectivec/no>, depending on
+/// <doc://com.apple.documentation/documentation/swift/true> or
+/// <doc://com.apple.documentation/documentation/swift/false>, depending on
 /// the extension type. However, most extensions don’t support App Attest. The
 /// ``DeviceCheck/DCAppAttestService/generateKeyWithCompletionHandler:`` method
 /// fails when you call it from an app extension, regardless of the value of
@@ -81,15 +81,10 @@ API_AVAILABLE(macos(11.0), ios(14.0), tvos(15.0), watchos(9.0))
 /// > ```swift
 /// > func generateKey() async throws -> String
 /// > ```
-/// >
-/// >
 /// > For example:
-/// >
 /// > ```swift
 /// > let keyIdentifier = try await generateKey()
 /// > ```
-/// >
-/// >
 /// > For information about concurrency and asynchronous code in Swift, see <doc://com.apple.documentation/documentation/swift/calling-objective-c-apis-asynchronously>.
 /// 
 /// Call this method to request the creation of a secure, unattested key pair on
@@ -116,13 +111,23 @@ API_AVAILABLE(macos(11.0), ios(14.0), tvos(15.0), watchos(9.0))
 /// - Parameters:
 ///   - completionHandler: A closure that the method calls upon completion with
 /// the following parameters:
-///   - keyId:  An identifier that you use to refer to the key. The framework securely
+///     - `keyId`:  An identifier that you use to refer to the key. The framework securely
 /// stores the key in the Secure Enclave.
-///   - error:  A ``DeviceCheck/DCError-swift.struct`` instance that indicates the
+///     - `error`:  A ``DeviceCheck/DCError-swift.struct`` instance that indicates the
 /// reason for failure, or `nil` on success.
 - (void)generateKeyWithCompletionHandler:(void (^)(NSString * _Nullable keyId, NSError * _Nullable error))completionHandler;
 
 /// Asks Apple to attest to the validity of a generated cryptographic key.
+///
+/// > Concurrency Note: You can call this method from synchronous code using a completion handler,
+/// > as shown on this page, or you can call it as an asynchronous method that has the
+/// > following declaration:
+/// >
+/// > ```swift
+/// > func attestKey(_ keyId: String, clientDataHash: Data) async throws -> Data
+/// > ```
+/// >
+/// > For information about concurrency and asynchronous code in Swift, see <doc://com.apple.documentation/documentation/swift/calling-objective-c-apis-asynchronously>.
 ///
 /// This method asks Apple to attest to the validity of a key that you
 /// previously generated with a call to the
@@ -166,14 +171,24 @@ API_AVAILABLE(macos(11.0), ios(14.0), tvos(15.0), watchos(9.0))
 /// embeds a challenge from your server.
 ///   - completionHandler: A closure that the method calls upon completion with
 /// the following parameters:
-///   - attestationObject: A statement from Apple about the validity of the key
-/// associated with `keyId`. Send this to your server for processing. - term
-///   - error: A ``DeviceCheck/DCError-swift.struct`` instance that indicates the reason for
+///     - `attestationObject`: A statement from Apple about the validity of the key
+/// associated with `keyId`. Send this to your server for processing.
+///     - `error`: A ``DeviceCheck/DCError-swift.struct`` instance that indicates the reason for
 /// failure, or `nil` on success.
 - (void)attestKey:(NSString *)keyId clientDataHash:(NSData *)clientDataHash completionHandler:(void (^)(NSData * _Nullable attestationObject, NSError * _Nullable error))completionHandler;
 
 /// Creates a block of data that demonstrates the legitimacy of an instance of
 /// your app running on a device.
+///
+/// > Concurrency Note: You can call this method from synchronous code using a completion handler,
+/// > as shown on this page, or you can call it as an asynchronous method that has the
+/// > following declaration:
+/// >
+/// > ```swift
+/// > func generateAssertion(_ keyId: String, clientDataHash: Data) async throws -> Data
+/// > ```
+/// >
+/// > For information about concurrency and asynchronous code in Swift, see <doc://com.apple.documentation/documentation/swift/calling-objective-c-apis-asynchronously>.
 ///
 /// After generating a key with the
 /// ``DeviceCheck/DCAppAttestService/generateKeyWithCompletionHandler:`` method
@@ -199,9 +214,8 @@ API_AVAILABLE(macos(11.0), ios(14.0), tvos(15.0), watchos(9.0))
 /// represents the client data to be signed with the attested private key.
 ///   - completionHandler: A closure that the method calls upon completion with
 /// the following parameters:
-///   - assertionObject: A data structure that you send to your server for processing.
-///   - error : A ``DeviceCheck/DCError-swift.struct`` instance that indicates the reason
-/// for failure, or `nil` on success.
+///     - `assertionObject`: A data structure that you send to your server for processing.
+///     - `error` : A ``DeviceCheck/DCError-swift.struct`` instance that indicates the reason for failure, or `nil` on success.
 - (void)generateAssertion:(NSString *)keyId clientDataHash:(NSData *)clientDataHash completionHandler:(void (^)(NSData * _Nullable assertionObject, NSError * _Nullable error))completionHandler;
 
 @end

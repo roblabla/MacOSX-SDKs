@@ -71,7 +71,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 /// Use this method to modify the contents of the Unified Content Bar, shown on top of the keyboard when search is engaged.
 /// You may modify the returned inputAssistantItem to add to or replace the existing items on the bar.
 /// Modifications made to the returned UITextInputAssistantItem are reflected automatically.
-@property (nonatomic, readonly, strong) UITextInputAssistantItem *inputAssistantItem API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly, strong) UITextInputAssistantItem *inputAssistantItem API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos) API_UNAVAILABLE(visionos);
 
 /*
  The behavior of tintColor for bars has changed on iOS 7.0. It no longer affects the bar's background
@@ -111,7 +111,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 
 /* Allow placement of an input accessory view to the keyboard for the search bar
  */
-@property (nullable, nonatomic, readwrite, strong) UIView *inputAccessoryView;
+@property (nullable, nonatomic, readwrite, strong) UIView *inputAccessoryView API_UNAVAILABLE(visionos);
 
 /// When set to false, user interaction will be prevented and the search bar will take on a disabled appearance
 /// If the search bar is associated with a UINavigationItem with `UINavigationItemSearchBarPlacementInline`,

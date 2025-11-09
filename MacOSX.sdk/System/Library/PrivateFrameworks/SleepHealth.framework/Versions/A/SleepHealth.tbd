@@ -8,5 +8,5 @@ exports:
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _HDSleepHealthDaemonPluginServerInterface, _HKSHHealthDaemonPluginIdentifier, 
                        _HKSHSleepDurationGoalLeeway, _HKSleepHealthStoreInterface ]
-    objc-classes:    [ HKSHGoalProgress, HKSHGoalProgressEngine, HKSleepHealthStore ]
+    objc-classes:    [ HKSHSleepMetrics, HKSHSleepMetricsEngine, HKSleepHealthStore ]
 ...

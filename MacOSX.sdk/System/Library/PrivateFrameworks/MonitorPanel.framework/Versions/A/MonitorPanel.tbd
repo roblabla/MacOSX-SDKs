@@ -13,7 +13,8 @@ exports:
                        _kMPDisplaysReconfigureNotification, _kMPDisplaysWillReconfigureNotification, 
                        _kMPFamilyKey, _kMPMajorOrderKey, _kMPMinorOrderKey, _kMPNibNameKey, 
                        _kMPTypeKey ]
-    objc-classes:    [ MPDisplay, MPDisplayMgr, MPDisplayMode, MPDisplayPreset, MonitorPanel ]
+    objc-classes:    [ MPDisplay, MPDisplayEnclosurePreview, MPDisplayMgr, MPDisplayMode, 
+                       MPDisplayPreset, MonitorPanel ]
     objc-ivars:      [ MonitorPanel._bundle, MonitorPanel._controller, MonitorPanel._displayID, 
                        MonitorPanel._view ]
 ...

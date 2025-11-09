@@ -8,8 +8,8 @@ compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ _NIAlgorithmConvergenceStatusReasonDescription, _NIAlgorithmConvergenceStatusReasonDescription_Private, 
-                       _NIAlgorithmConvergenceStatusReasonInsufficientHorizontalSweep, 
+    symbols:         [ _NIARLightEstimateNotAvailable, _NIAlgorithmConvergenceStatusReasonDescription, 
+                       _NIAlgorithmConvergenceStatusReasonDescription_Private, _NIAlgorithmConvergenceStatusReasonInsufficientHorizontalSweep, 
                        _NIAlgorithmConvergenceStatusReasonInsufficientLighting, _NIAlgorithmConvergenceStatusReasonInsufficientMovement, 
                        _NIAlgorithmConvergenceStatusReasonInsufficientSignalStrength, 
                        _NIAlgorithmConvergenceStatusReasonInsufficientVerticalSweep, 
@@ -23,9 +23,10 @@ exports:
                        _NINearbyObjectRangeBiasEstimateNotAvailable, _NINearbyObjectRangeUncertaintyNotAvailable, 
                        _NINearbyObjectRemoteTxAntennaMaskNotAvailable, _NINearbyObjectRxStatusNotAvailable, 
                        _NINearbyObjectSignalStrengthNotAvailable, _NINearbyObjectSignalStrengthNotAvailable_Private, 
-                       _NINearbyObjectWorldTransformNotAvailable, _NINearbyObjectWorldTransformNotAvailable_Private, 
-                       _NINotifySystemShutdownWithReason, _NITruthTagLabelKey, _NITruthTagSourceClientApp, 
-                       _NITruthTagSourceDirectUserInput, _NITruthTagSourceKey, _kNISystemShutdownCompletionTimeoutSeconds ]
+                       _NINearbyObjectWorldPositionNotAvailable, _NINearbyObjectWorldTransformNotAvailable, 
+                       _NINearbyObjectWorldTransformNotAvailable_Private, _NINotifySystemShutdownWithReason, 
+                       _NITruthTagLabelKey, _NITruthTagSourceClientApp, _NITruthTagSourceDirectUserInput, 
+                       _NITruthTagSourceKey, _kNISystemShutdownCompletionTimeoutSeconds ]
     objc-classes:    [ NIAlgorithmConvergence, NIAlgorithmConvergenceState, NIBluetoothSample, 
                        NICarKeyConfiguration, NICarKeyEventNotifier, NIConfiguration, 
                        NIDevicePresenceConfiguration, NIDevicePresenceNotifier, NIDiscoveryToken, 

@@ -750,6 +750,7 @@ exports:
                        '_$s19SiriWellnessIntents33GetAcitivitySummaryIntentResponseC12backingStoreACSgSo011_INPBIntentH0CSg_tcfc', 
                        '_$s19SiriWellnessIntents33GetAcitivitySummaryIntentResponseC13appleMoveTimeSdvpMV', 
                        '_$s19SiriWellnessIntents33GetAcitivitySummaryIntentResponseC15appleStandHoursSdvpMV', 
+                       '_$s19SiriWellnessIntents33GetAcitivitySummaryIntentResponseC16isWheelchairUserSo8NSNumberCSgvpMV', 
                        '_$s19SiriWellnessIntents33GetAcitivitySummaryIntentResponseC16propertiesByNameACSgSDySSypGSg_tcfC', 
                        '_$s19SiriWellnessIntents33GetAcitivitySummaryIntentResponseC16propertiesByNameACSgSDySSypGSg_tcfc', 
                        '_$s19SiriWellnessIntents33GetAcitivitySummaryIntentResponseC17appleExerciseTimeSdvpMV', 

@@ -71,7 +71,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) API_UNAVAILABLE(visionos) NS_SWIFT_UI_ACTOR
 @property(nonatomic,readonly) UIEdgeInsets overscanCompensationInsets API_AVAILABLE(ios(9.0));  // The amount that should be inset to avoid clipping
 
 @property(nullable, nonatomic,readonly,strong) UIScreen *mirroredScreen API_AVAILABLE(ios(4.3));          // The screen being mirrored by the receiver. nil if mirroring is disabled or unsupported. Moving a UIWindow to this screen will disable mirroring
-@property(nonatomic,readonly,getter=isCaptured) BOOL captured API_AVAILABLE(ios(11.0)); // True if this screen is being captured (e.g. recorded, AirPlayed, mirrored, etc.)
+@property(nonatomic,readonly,getter=isCaptured) BOOL captured API_DEPRECATED("Use the sceneCaptureState in UITraitCollection instead.", ios(11.0, API_TO_BE_DEPRECATED)); // True if this screen is being captured (e.g. recorded, AirPlayed, mirrored, etc.)
 
 @property(nonatomic) CGFloat brightness API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(tvos);        // 0 .. 1.0, where 1.0 is maximum brightness. Only supported by main screen.
 @property(nonatomic) BOOL wantsSoftwareDimming API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(tvos); // Default is NO. If YES, brightness levels lower than that of which the hardware is capable are emulated in software, if necessary. Having enabled may entail performance cost.

@@ -7,7 +7,7 @@ allowable-clients:
     clients:         [ Carousel, ControlCenter, CoverSheet, FocusSettingsUI, FocusUI, 
                        FocusUIModule, NanoSettings, NanoSettingsGlance, PosterBoard, 
                        SUIAKit, SUIATPTests, SUIMacTests, SUIWatchTests, SpringBoard, 
-                       SpringBoardFramework ]
+                       SpringBoardFramework, SpringBoardIntents ]
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _FCLogActivities, _FCRegisterLogging, _FocusVersionNumber, 

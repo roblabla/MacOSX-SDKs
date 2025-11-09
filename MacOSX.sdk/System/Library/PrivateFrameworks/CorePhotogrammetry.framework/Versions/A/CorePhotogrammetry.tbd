@@ -2,8 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/CorePhotogrammetry.framework/Versions/A/CorePhotogrammetry'
-current-version: 2.46.6
-compatibility-version: 2.46.6
+current-version: 2.47.2
+compatibility-version: 2.47.2
 exports:
   - targets:         [ x86_64-macos ]
     weak-symbols:    [ __ZTIFvvE, __ZTIN5boost9container12out_of_rangeE, __ZTIN5boost9container9exceptionE, 

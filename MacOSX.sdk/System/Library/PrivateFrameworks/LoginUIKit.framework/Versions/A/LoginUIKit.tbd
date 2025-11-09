@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/LoginUIKit.framework/Versions/A/LoginUIKit'
-current-version: 354.2
+current-version: 357.2.1
 swift-abi-version: 7
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -105,10 +105,11 @@ exports:
                        _LUIPrefsShowOtherUserKey, _LUISetRecentUsers, _LUISortUsersByRecency, 
                        _LUISortedUserListByRecency, _LUISpinnerDictionary, _LUIStipViewHighlightTopBuffer, 
                        _LUITimePressed, _LUIToggleInfo, _LUITransitionDictionaryForDisplay, 
-                       _LUIUserIconPressed, _LUIUsesLargeDateAndTime, _PrintKeyViewLoopBeginningAtView, 
-                       _RemoteProviderInterface, _TRMPortErrorDomain, __CanDebug, 
-                       _gMinScreenOrigin, _getLUIAVTViewClass, _kAdminUserName, _kContinuityServiceProvider, 
-                       _kExtraProgressSpace, _kFalseShell, _kFindMyMacUser, _kLUIAttributeTypeAdminUser, 
+                       _LUIUserAttributesChanged, _LUIUserIconPressed, _LUIUsesLargeDateAndTime, 
+                       _PrintKeyViewLoopBeginningAtView, _RemoteProviderInterface, 
+                       _TRMPortErrorDomain, __CanDebug, _gMinScreenOrigin, _getLUIAVTViewClass, 
+                       _kAdminUserName, _kContinuityServiceProvider, _kExtraProgressSpace, 
+                       _kFalseShell, _kFindMyMacUser, _kLUIAttributeTypeAdminUser, 
                        _kLUIAttributeTypeAvatarInfo, _kLUIAttributeTypeOtherUser, 
                        _kLUIFlagAuthenticationService, _kLUIFlagBattery, _kLUIFlagDesktopPicture, 
                        _kLUIFlagGeneric, _kLUIFlagInputMethod, _kLUIFlagPasswordPolicy, 
@@ -226,7 +227,7 @@ exports:
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/LoginUIKit.framework/Versions/A/Frameworks/LoginUICore.framework/Versions/A/LoginUICore'
-current-version: 354.2
+current-version: 357.2.1
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _LUI2CButtonBack, _LUI2CButtonLogin, _LUICAvatarMask, _LUICAvatarOverlay, 

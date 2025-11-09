@@ -224,6 +224,20 @@ typedef union {
 #define CPU_PART_EVEREST            0x41
 
 
+/* H15 Ibiza e-Core */
+#define CPU_PART_ECORE_IBIZA        0x42
+
+/* H15 Ibiza p-Core */
+#define CPU_PART_PCORE_IBIZA        0x43
+
+
+
+/* H15 Palma e-Core. */
+#define CPU_PART_ECORE_PALMA 0x48
+
+/* H15 Palma p-Core. */
+#define CPU_PART_PCORE_PALMA 0x49
+
 
 
 /* H15 Coll e-Core. */
@@ -232,6 +246,13 @@ typedef union {
 /* H15 Coll p-Core. */
 #define CPU_PART_PCORE_COLL    0x51
 
+
+
+/* H15 Lobos e-Core. */
+#define CPU_PART_ECORE_LOBOS 0x44
+
+/* H15 Lobos p-Core. */
+#define CPU_PART_PCORE_LOBOS 0x45
 
 
 /* M11 e-Core */

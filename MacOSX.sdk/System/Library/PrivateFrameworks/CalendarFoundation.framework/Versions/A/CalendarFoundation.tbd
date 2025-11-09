@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CalendarFoundation.framework/Versions/A/CalendarFoundation'
-current-version: 1547
+current-version: 1547.1.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -65,7 +65,8 @@ exports:
                        _CalAnalyticsSendEventLazy, _CalAnalyticsTimeIntervalFromMachTimes, 
                        _CalAppNameForBundleID, _CalApproximateContinuousTime, _CalBooleanAsString, 
                        _CalCFTimeZoneCopyCalTimeZone, _CalCachedObjectForKeyWithCalculateBlock, 
-                       _CalColorStringRepresentation, _CalColorsAreAlmostEqual, _CalContactsProviderHistoryToken, 
+                       _CalChronometryTodayChangedNotification, _CalColorStringRepresentation, 
+                       _CalColorsAreAlmostEqual, _CalContactsProviderHistoryToken, 
                        _CalContinuousIntervalToNSTimeInterval, _CalContinuousTime, 
                        _CalConvertNSIntegerToNSUInteger, _CalConvertNSUIntegerToNSInteger, 
                        _CalCopyCalendar, _CalCopyDefaultTimeZone, _CalCopyDefaultTimeZoneSetting, 

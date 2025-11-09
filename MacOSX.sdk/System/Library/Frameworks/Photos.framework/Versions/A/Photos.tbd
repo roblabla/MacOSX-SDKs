@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/Photos.framework/Versions/A/Photos'
-current-version: 608.2.113
+current-version: 621.0.100
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -266,9 +266,9 @@ exports:
                        _PHStringForMemoryMood, _PHStringFromAuthorizationStatus, 
                        _PHSuggestionFeaturedStateStringWithFeaturedState, _PHSuggestionNotificationStateStringWithNotificationState, 
                        _PHSuggestionStateStringWithState, _PHSuggestionStringWithSubtype, 
-                       _PHSuggestionStringWithType, _PHSuggestionWallpaperShuffleMaximumCountPerDay, 
-                       _PHUniformTypeConformsToResourceType, _PHUniformTypesForResourceType, 
-                       _PHUpdatedLocalIdentifiersKey, _PHUserFeedbackDomain, _PHUserFeedbackScoreThresholdAcceptable, 
+                       _PHSuggestionStringWithType, _PHUniformTypeConformsToResourceType, 
+                       _PHUniformTypesForResourceType, _PHUpdatedLocalIdentifiersKey, 
+                       _PHUserFeedbackDomain, _PHUserFeedbackScoreThresholdAcceptable, 
                        _PHUserFeedbackScoreThresholdNotRecommended, _PHUserFeedbackScoreThresholdRecommended, 
                        _PHUserFeedbackScoreThresholdUnacceptable, _PHVideoComplementVisibilityStateHasFullEditingSupport, 
                        _PHVideoComplementVisibilityStateIsEvaluated, _PHVideoComplementVisibilityStateIsExplicit, 
@@ -317,14 +317,14 @@ exports:
                        PHBatchFetchingArray, PHBatchPerformChanges, PHCPAnalyticsCachedPropertyProvider, 
                        PHCPAnalyticsMediaPropertyProvider, PHCachingImageManager, 
                        PHCameraSmartSharingIdentity, PHCameraSmartSharingMetadata, 
-                       PHChange, PHChangeBuilder, PHChangeRequest, PHChangeRequestHelper, 
-                       PHChangeValidationController, PHClientLinkedAgainst, PHCloudIdentifier, 
-                       PHCloudIdentifierMapping, PHCloudSharedAlbum, PHCloudSharedAlbumChangeRequest, 
-                       PHCloudSharedAlbumDeleteRequest, PHCloudSharedAlbumInvitationRecord, 
-                       PHCollection, PHCollectionList, PHCollectionListAncestryContext, 
-                       PHCollectionListChangeRequest, PHCollectionListReference, 
-                       PHCollectionReference, PHCompositeMediaResult, PHConcurrentMapTable, 
-                       PHContentEditingInput, PHContentEditingInputRequestOptions, 
+                       PHChange, PHChangeBuilder, PHChangeHandlingDebugEvent, PHChangeHandlingDebugger, 
+                       PHChangeRequest, PHChangeRequestHelper, PHChangeValidationController, 
+                       PHClientLinkedAgainst, PHCloudIdentifier, PHCloudIdentifierMapping, 
+                       PHCloudSharedAlbum, PHCloudSharedAlbumChangeRequest, PHCloudSharedAlbumDeleteRequest, 
+                       PHCloudSharedAlbumInvitationRecord, PHCollection, PHCollectionList, 
+                       PHCollectionListAncestryContext, PHCollectionListChangeRequest, 
+                       PHCollectionListReference, PHCollectionReference, PHCompositeMediaResult, 
+                       PHConcurrentMapTable, PHContentEditingInput, PHContentEditingInputRequestOptions, 
                        PHContentEditingInputResult, PHContentEditingOutput, PHContentEditingOutputRequestOptions, 
                        PHDetectionTrait, PHDuplicateDetection, PHEntityKeyMap, PHFace, 
                        PHFaceChangeRequest, PHFaceClusteringProperties, PHFaceCrop, 
@@ -373,11 +373,10 @@ exports:
                        PHShareParticipant, PHShareParticipantChangeRequest, PHShareParticipantDeleteRequest, 
                        PHSingleMediaRequestContext, PHSmartAlbumChangeRequest, PHSuggestion, 
                        PHSuggestionChangeRequest, PHSuggestionDeleteRequest, PHSuggestionMessageContext, 
-                       PHSuggestionWallpaperShuffleUtilities, PHTextFeature, PHThumbnailAsset, 
-                       PHUserFeedback, PHUserFeedbackCalculator, PHUserFeedbackDataCache, 
-                       PHUserFeedbackImportantPerson, PHValidator, PHVideoRequestBehaviorSpec, 
-                       PHVideoRequestOptions, PHVideoResult, PHVideoXPCRequest, PHVisionAnalysisUtilities, 
-                       PHWallpaperAsset ]
+                       PHTextFeature, PHThumbnailAsset, PHUserFeedback, PHUserFeedbackCalculator, 
+                       PHUserFeedbackDataCache, PHUserFeedbackImportantPerson, PHValidator, 
+                       PHVideoRequestBehaviorSpec, PHVideoRequestOptions, PHVideoResult, 
+                       PHVideoXPCRequest, PHVisionAnalysisUtilities, PHWallpaperAsset ]
     objc-ivars:      [ PHAssetPropertySet._asset, PHChangeRequest._helper, PHCompositeMediaResult._imageProperties, 
                        PHCompositeMediaResult._mutableInfo, PHImportAsset._source, 
                        PHImportAsset._strongSource, PHImportDeviceAsset._cameraFile, 

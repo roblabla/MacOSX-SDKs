@@ -57,6 +57,7 @@
 #import <AVFoundation/AVOutputSettingsAssistant.h>
 #import <AVFoundation/AVPlaybackCoordinator.h>
 #import <AVFoundation/AVPlayer.h>
+#import <AVFoundation/AVPlayerOutput.h>
 #import <AVFoundation/AVPlayerItem.h>
 #import <AVFoundation/AVPlayerItemMediaDataCollector.h>
 #import <AVFoundation/AVPlayerItemOutput.h>

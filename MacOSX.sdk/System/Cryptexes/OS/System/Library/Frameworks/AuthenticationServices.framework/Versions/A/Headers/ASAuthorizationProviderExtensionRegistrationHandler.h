@@ -75,7 +75,6 @@ API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, watchos, tvos)
  @param loginManager The login manager used to interface with Platform SSO.
  @param options The request options that apply to the request.
  @param completion The completion to call to continue device registration.
- @param result Return the result of the registration.
  */
 - (void)beginDeviceRegistrationUsingLoginManager:(ASAuthorizationProviderExtensionLoginManager *)loginManager options:(ASAuthorizationProviderExtensionRequestOptions)options completion:(void (^)(ASAuthorizationProviderExtensionRegistrationResult result))completion NS_SWIFT_NAME(beginDeviceRegistration(loginManager:options:completion:));
 
@@ -83,10 +82,9 @@ API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, watchos, tvos)
  @abstract This initiates user registration process for the user and the extension.
  @param loginManager The login manager used to interface with Platform SSO.
  @param userName The username for the user registration.
- @param method The authentication method to be used for the user.
+ @param authenticationMethod The authentication method to be used for the user.
  @param options The request options that apply to the request.
  @param completion The completion to call to continue user registration.
- @param result Return the result of the registration.
  */
 - (void)beginUserRegistrationUsingLoginManager:(ASAuthorizationProviderExtensionLoginManager *)loginManager userName:(nullable NSString *)userName authenticationMethod:(ASAuthorizationProviderExtensionAuthenticationMethod)authenticationMethod options:(ASAuthorizationProviderExtensionRequestOptions)options completion:(void (^)(ASAuthorizationProviderExtensionRegistrationResult result))completion NS_SWIFT_NAME(beginUserRegistration(loginManager:userName:method:options:completion:));
 

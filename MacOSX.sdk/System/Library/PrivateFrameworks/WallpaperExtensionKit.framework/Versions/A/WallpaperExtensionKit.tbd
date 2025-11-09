@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/WallpaperExtensionKit.framework/Versions/A/WallpaperExtensionKit'
-current-version: 95.1.108
+current-version: 95.18
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -213,11 +213,11 @@ exports:
                        '_$s21WallpaperExtensionKit0aB5ErrorO07invalidD0yA2CmFWC', 
                        '_$s21WallpaperExtensionKit0aB5ErrorO17extensionNotFoundyA2CmFWC', 
                        '_$s21WallpaperExtensionKit0aB5ErrorO2eeoiySbAC_ACtFZ', '_$s21WallpaperExtensionKit0aB5ErrorO4hash4intoys6HasherVz_tF', 
-                       '_$s21WallpaperExtensionKit0aB5ErrorO9hashValueSivg', '_$s21WallpaperExtensionKit0aB5ErrorO9hashValueSivpMV', 
-                       '_$s21WallpaperExtensionKit0aB5ErrorOMa', '_$s21WallpaperExtensionKit0aB5ErrorOMn', 
-                       '_$s21WallpaperExtensionKit0aB5ErrorON', '_$s21WallpaperExtensionKit0aB5ErrorOSHAAMc', 
-                       '_$s21WallpaperExtensionKit0aB5ErrorOSQAAMc', '_$s21WallpaperExtensionKit0aB5ErrorOs0D0AAMc', 
-                       '_$s21WallpaperExtensionKit0aB5ProxyC07acquireaD07request4hostAA0aD0CAA0A15CreationRequestV_AA0A4Host_ptYaKF', 
+                       '_$s21WallpaperExtensionKit0aB5ErrorO8timedoutyA2CmFWC', '_$s21WallpaperExtensionKit0aB5ErrorO9hashValueSivg', 
+                       '_$s21WallpaperExtensionKit0aB5ErrorO9hashValueSivpMV', '_$s21WallpaperExtensionKit0aB5ErrorOMa', 
+                       '_$s21WallpaperExtensionKit0aB5ErrorOMn', '_$s21WallpaperExtensionKit0aB5ErrorON', 
+                       '_$s21WallpaperExtensionKit0aB5ErrorOSHAAMc', '_$s21WallpaperExtensionKit0aB5ErrorOSQAAMc', 
+                       '_$s21WallpaperExtensionKit0aB5ErrorOs0D0AAMc', '_$s21WallpaperExtensionKit0aB5ProxyC07acquireaD07request4hostAA0aD0CAA0A15CreationRequestV_AA0A4Host_ptYaKF', 
                        '_$s21WallpaperExtensionKit0aB5ProxyC07acquireaD07request4hostAA0aD0CAA0A15CreationRequestV_AA0A4Host_ptYaKFTu', 
                        '_$s21WallpaperExtensionKit0aB5ProxyC15unownedExecutorScevg', 
                        '_$s21WallpaperExtensionKit0aB5ProxyC15unownedExecutorScevpMV', 

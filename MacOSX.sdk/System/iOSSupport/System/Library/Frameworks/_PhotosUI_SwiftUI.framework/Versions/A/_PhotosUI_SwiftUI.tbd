@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/_PhotosUI_SwiftUI.framework/Versions/A/_PhotosUI_SwiftUI'
-current-version: 608.2.113
+current-version: 621.0.100
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
@@ -36,9 +36,7 @@ exports:
                        '_$s015_PhotosUI_SwiftB00A10PickerItemVSQAAMc', '_$s015_PhotosUI_SwiftB00A11PickerStyleV12presentationACvgZ', 
                        '_$s015_PhotosUI_SwiftB00A11PickerStyleV2eeoiySbAC_ACtFZ', 
                        '_$s015_PhotosUI_SwiftB00A11PickerStyleV4hash4intoys6HasherVz_tF', 
-                       '_$s015_PhotosUI_SwiftB00A11PickerStyleV6inlineACvMZ', '_$s015_PhotosUI_SwiftB00A11PickerStyleV6inlineACvgZ', 
-                       '_$s015_PhotosUI_SwiftB00A11PickerStyleV6inlineACvsZ', '_$s015_PhotosUI_SwiftB00A11PickerStyleV7compactACvMZ', 
-                       '_$s015_PhotosUI_SwiftB00A11PickerStyleV7compactACvgZ', '_$s015_PhotosUI_SwiftB00A11PickerStyleV7compactACvsZ', 
+                       '_$s015_PhotosUI_SwiftB00A11PickerStyleV6inlineACvgZ', '_$s015_PhotosUI_SwiftB00A11PickerStyleV7compactACvgZ', 
                        '_$s015_PhotosUI_SwiftB00A11PickerStyleV9hashValueSivg', '_$s015_PhotosUI_SwiftB00A11PickerStyleV9hashValueSivpMV', 
                        '_$s015_PhotosUI_SwiftB00A11PickerStyleVMa', '_$s015_PhotosUI_SwiftB00A11PickerStyleVMn', 
                        '_$s015_PhotosUI_SwiftB00A11PickerStyleVN', '_$s015_PhotosUI_SwiftB00A11PickerStyleVSHAAMc', 

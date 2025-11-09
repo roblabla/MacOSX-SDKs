@@ -8,7 +8,7 @@
 #import <MediaPlayer/MediaPlayerDefines.h>
 #import <Foundation/Foundation.h>
 
-MP_UNAVAILABLE_BEGIN(tvos, watchos, macos)
+MP_UNAVAILABLE_BEGIN(tvos, watchos, macos, visionos)
 
 MP_EXTERN void MPVolumeSettingsAlertShow(void)
     MP_DEPRECATED("Use MPVolumeView to present volume controls.", ios(2.0, 11.3));

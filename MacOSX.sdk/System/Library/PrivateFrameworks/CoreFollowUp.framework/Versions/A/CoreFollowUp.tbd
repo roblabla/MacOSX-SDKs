@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/CoreFollowUp.framework/Versions/A/CoreFollowUp'
-current-version: 237
+current-version: 243
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -249,7 +249,8 @@ exports:
                        _FLNotificationOptionKeepOnLockscreen, _FLNotificationOptionLockscreen, 
                        _FLNotificationOptionNotificationCenter, _FLNotificationOptionSpringboardAlert, 
                        _FLNotificationOptionSpringboardAlertActionOnly, _FLUserInfoPropertyAbsoluteFormatKey, 
-                       _FLUserInfoPropertyAdjustExpirationToMidnightKey, _FLUserInfoPropertyDontDisplayDate, 
+                       _FLUserInfoPropertyAdjustExpirationToMidnightKey, _FLUserInfoPropertyCoalescedGroupFooterText, 
+                       _FLUserInfoPropertyCoalescedLongerTitle, _FLUserInfoPropertyDontDisplayDate, 
                        _FLUserInfoPropertyRelativeIsCeilingKey, _FLUserInfoPropertyRelativePluralDaysFormatKey, 
                        _FLUserInfoPropertyRelativeSingleDayKey, _FLUserInfoPropertyRelativeZeroDayKey, 
                        _FLUserInfoPropertySettingsExtensionIDToLoad, __FLLogSystem, 

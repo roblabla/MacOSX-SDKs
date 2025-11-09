@@ -65,7 +65,6 @@ typedef NS_ENUM(NSInteger, SCPresenterOverlayAlertSetting) {
  @abstract SCStreamTypeWindow window stream
  @constant SCStreamTypeDisplay display stream
 */
-// To be deprecated, will use SCShareableContentStyle
 typedef NS_ENUM(NSInteger, SCStreamType) {
     SCStreamTypeWindow,
     SCStreamTypeDisplay
@@ -84,10 +83,9 @@ typedef NS_ENUM(NSInteger, SCCaptureResolutionType) {
 API_AVAILABLE(macos(12.3))
 @interface SCContentFilter : NSObject
 /*!
- @abstract streamType type of stream
- */
-// To be deprecated
-@property(nonatomic, readonly) SCStreamType streamType;
+  @abstract streamType type of stream
+*/
+@property(nonatomic, readonly) SCStreamType streamType API_DEPRECATED("Use style instead", macos(14.0, 14.2));
 
 /*!
  @abstract style of stream
@@ -102,6 +100,12 @@ API_AVAILABLE(macos(12.3))
  @abstract Size and location of content in points
  */
 @property (nonatomic, readonly) CGRect contentRect;
+
+/*!
+ @abstract To include menu bar as part of the capture. This property has no effect for the desktop independent window filter. For content filters created with initWithDisplay:excluding, the default value is YES. Display excluding content filters contains the desktop and dock. For content filters created with initWithDisplay:including, the default value is NO. Display including content filters do not contain the desktop and dock
+ */
+@property(nonatomic, assign) BOOL includeMenuBar API_AVAILABLE(macos(14.2));
+
 /*!
  @abstract initWithDesktopIndependentWindow:
  @param window the independent SCWindow you wish to capture
@@ -113,7 +117,7 @@ API_AVAILABLE(macos(12.3))
  @abstract initWithDisplay:excludingWindows
  @param display the SCDisplay you wish to capture
  @param excluded the SCWindow(s) you wish to exclude from the passed in SCDisplay
- @discussion this method will create a SCContentFilter that captures the SCDisplay, excluding the passed in excluded SCWindow(s)
+ @discussion This method will create a SCContentFilter that captures the SCDisplay, excluding the passed in excluded SCWindow(s). The desktop background and dock will be included with this content filter.
 */
 - (instancetype)initWithDisplay:(SCDisplay *)display excludingWindows:(NSArray<SCWindow *>*)excluded;
 
@@ -121,7 +125,7 @@ API_AVAILABLE(macos(12.3))
  @abstract initWithDisplay:includingWindows
  @param display the SCDisplay you wish to capture
  @param includedWindows a set of SCWindows you wish to capture
- @discussion this method will create a SCContentFilter that captures a group of SCWindows
+ @discussion This method will create a SCContentFilter that captures a group of SCWindows. The desktop background and dock will be excluded with this content filter.
 */
 - (instancetype)initWithDisplay:(SCDisplay *)display includingWindows:(NSArray<SCWindow *>*)includedWindows;
 
@@ -130,7 +134,7 @@ API_AVAILABLE(macos(12.3))
  @param display the SCDisplay you wish to capture
  @param applications the NSSet of SCRunningApplications that you wish to capture
  @param exceptingWindows the NSSet of SCWindows that you wish to be an exception to the filter
- @discussion This method creates a SCContentFilter that captures all windows owned by the passed in SCRunningApplications. Any windows that are an exception to the filter will not be shown if their owning application is in the provided list and will be shown otherwise.
+ @discussion This method creates a SCContentFilter that captures all windows owned by the passed in SCRunningApplications. Any windows that are an exception to the filter will not be shown if their owning application is in the provided list and will be shown otherwise. The desktop background and dock will be excluded with this content filter.
 */
 - (instancetype)initWithDisplay:(SCDisplay *)display includingApplications:(NSArray<SCRunningApplication *>*)applications exceptingWindows:(NSArray<SCWindow *>*)exceptingWindows;
 
@@ -139,7 +143,7 @@ API_AVAILABLE(macos(12.3))
  @param display the SCDisplay you wish to capture
  @param applications the NSSet of SCRunningApplications that you do not wish to capture
  @param exceptingWindows the NSSet of SCWindows that you wish to be an exception to the filter
- @discussion This method creates a SCContentFilter that captures all windows not owned by the passed in SCRunningApplications. Any windows that are an exception to the filter will be shown if their owning application is in the provided list and will not be shown otherwise.
+ @discussion This method creates a SCContentFilter that captures all windows not owned by the passed in SCRunningApplications. Any windows that are an exception to the filter will be shown if their owning application is in the provided list and will not be shown otherwise. The desktop background and dock will be included with this content filter.
 */
 - (instancetype)initWithDisplay:(SCDisplay *)display excludingApplications:(NSArray<SCRunningApplication *>*)applications exceptingWindows:(NSArray<SCWindow *>*)exceptingWindows;
 
@@ -287,6 +291,11 @@ API_AVAILABLE(macos(12.3))
  */
 @property(nonatomic, assign) SCPresenterOverlayAlertSetting presenterOverlayPrivacyAlertSetting API_AVAILABLE(macos(14.0));
 
+/*!
+ @abstract SCStreamProperty to show the child windows in display bound windows and applications sharing.  Child windows are included by default.
+ */
+@property(nonatomic, assign) BOOL includeChildWindows API_AVAILABLE(macos(14.2));
+
 @end
 
 /*!
@@ -345,6 +354,13 @@ extern SCStreamFrameInfo const SCStreamFrameInfoScreenRect API_AVAILABLE(macos(1
  @abstract The key for the CFDictionary attached to the CMSampleBuffer for the bounding rect associated with the frame. Bounding rect is the size and location of smallest bounding box containing all captured windows in points and in surface coordinates.
  */
 extern SCStreamFrameInfo const SCStreamFrameInfoBoundingRect API_AVAILABLE(macos(14.0));
+
+/*!
+ @key SCStreamFrameInfoPresenterOverlayContentRect
+ @abstract The key for the CFDictionary attached to the CMSampleBuffer for the content rect associated with the frame while in presenter overlay.  In presenter overlay small, this content rect is the size and location of smallest bounding box containing all captured windows plus small overlay window in points and in surface coordinates.
+ In presenter overlay large, this content rect is the size and location of shared content in points and in surface coordinates.
+ */
+extern SCStreamFrameInfo const SCStreamFrameInfoPresenterOverlayContentRect API_AVAILABLE(macos(14.2));
 
 @protocol SCStreamOutput;
 API_AVAILABLE(macos(12.3))

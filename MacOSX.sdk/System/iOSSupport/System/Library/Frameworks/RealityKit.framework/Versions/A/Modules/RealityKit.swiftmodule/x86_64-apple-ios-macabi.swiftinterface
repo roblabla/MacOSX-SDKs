@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.9 (swiftlang-5.9.0.123.203 clang-1500.0.37.1)
+// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.11 clang-1500.1.0.2.2)
 // swift-module-flags: -target x86_64-apple-ios17.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-concurrency -module-name RealityKit
 // swift-module-flags-ignorable: -enable-experimental-feature ModuleInterfaceExportAs -enable-bare-slash-regex -user-module-version 225.613.1
 import ARKit
@@ -17,7 +17,7 @@ import _StringProcessing
 import _SwiftConcurrencyShims
 import simd
 @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 extension RealityKit.ARView {
   @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
   public struct PostProcessContext {
@@ -43,7 +43,7 @@ extension RealityKit.ARView {
   }
 }
 @objc @_inheritsConvenienceInitializers @available(macOS 10.15, iOS 13.0, macCatalyst 14.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 @_Concurrency.MainActor(unsafe) open class EntityTranslationGestureRecognizer : UIKit.UIGestureRecognizer, RealityKit.EntityGestureRecognizer {
   @_Concurrency.MainActor(unsafe) public var entity: (any RealityFoundation.HasCollision)? {
     get
@@ -63,7 +63,7 @@ extension RealityKit.ARView {
   @objc deinit
 }
 @objc @_inheritsConvenienceInitializers @available(macOS 10.15, iOS 13.0, macCatalyst 14.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 @_Concurrency.MainActor(unsafe) open class EntityScaleGestureRecognizer : UIKit.UIPinchGestureRecognizer, RealityKit.EntityGestureRecognizer {
   @_Concurrency.MainActor(unsafe) public var entity: (any RealityFoundation.HasCollision)? {
     get
@@ -74,7 +74,7 @@ extension RealityKit.ARView {
   @_Concurrency.MainActor(unsafe) @objc override dynamic public init(target: Any?, action: ObjectiveC.Selector?)
   @objc deinit
 }
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 extension RealityKit.ARView {
   @_Concurrency.MainActor(unsafe) @objc override dynamic open func didMoveToWindow()
 }
@@ -209,7 +209,7 @@ extension simd.simd_float4x4 {
     }
 }
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 extension RealityKit.ARView {
   public struct Environment {
     public typealias Color = UIKit.UIColor
@@ -283,7 +283,7 @@ extension RealityKit.ARView {
   }
 }
 @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 extension RealityKit.ARView.Environment.Reverb : Swift.Equatable, Swift.Hashable {
   public static func == (a: RealityKit.ARView.Environment.Reverb, b: RealityKit.ARView.Environment.Reverb) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
@@ -292,7 +292,7 @@ extension RealityKit.ARView.Environment.Reverb : Swift.Equatable, Swift.Hashable
   }
 }
 @available(macOS 13.0, iOS 16.0, macCatalyst 16.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 extension RealityKit.ARView.Environment.Reverb.Preset : Swift.CaseIterable {
   public typealias AllCases = [RealityKit.ARView.Environment.Reverb.Preset]
   public static var allCases: [RealityKit.ARView.Environment.Reverb.Preset] {
@@ -300,7 +300,7 @@ extension RealityKit.ARView.Environment.Reverb.Preset : Swift.CaseIterable {
   }
 }
 @objc @_inheritsConvenienceInitializers @available(macOS 10.15, iOS 13.0, macCatalyst 14.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 @_Concurrency.MainActor(unsafe) open class EntityRotationGestureRecognizer : UIKit.UIRotationGestureRecognizer, RealityKit.EntityGestureRecognizer {
   @_Concurrency.MainActor(unsafe) public var entity: (any RealityFoundation.HasCollision)? {
     get
@@ -352,7 +352,7 @@ extension RealityFoundation.PointLightComponent {
   public init(color: RealityFoundation.PointLightComponent.Color = .white, intensity: Swift.Float = 26963.76, attenuationRadius: Swift.Float = 10.0)
 }
 @available(macOS 10.15, iOS 13.0, macCatalyst 14.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 extension RealityKit.ARView {
   public struct RenderOptions : Swift.OptionSet {
     public static let disableCameraGrain: RealityKit.ARView.RenderOptions
@@ -400,7 +400,7 @@ extension RealityKit.ARView {
   }
 }
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 extension RealityKit.ARView {
   @_Concurrency.MainActor(unsafe) public func project(_ point: Swift.SIMD3<Swift.Float>) -> CoreFoundation.CGPoint?
   @_Concurrency.MainActor(unsafe) public func unproject(_ point: CoreFoundation.CGPoint, viewport: CoreFoundation.CGRect) -> Swift.SIMD3<Swift.Float>?
@@ -565,7 +565,7 @@ extension RealityKit.__ARViewDelegatePrivate {
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
 public typealias ARViewBase = UIKit.UIView
 @objc @_inheritsConvenienceInitializers @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 @_Concurrency.MainActor(unsafe) open class ARView : RealityKit.ARViewBase {
   @_Concurrency.MainActor(unsafe) public var __services: RealityFoundation.__ServiceLocator {
     get
@@ -741,7 +741,7 @@ public class MultipeerConnectivityService : RealityFoundation.SynchronizationSer
 @available(macOS 10.15.4, iOS 13.4, macCatalyst 13.4, *)
 extension RealityFoundation.Entity {
   @_Concurrency.MainActor(unsafe) public func __accessibilityWrappers(rootEntityWrapper: RealityKit.__EntityAccessibilityWrapper? = nil) -> [RealityKit.__EntityAccessibilityWrapper]
-  @available(xrOS, unavailable)
+  @available(visionOS, unavailable)
   @_Concurrency.MainActor(unsafe) public func __calculateScreenBoundingRect(in arView: RealityKit.ARView) -> CoreFoundation.CGRect
 }
 @objc @_hasMissingDesignatedInitializers @available(macOS 10.15.4, iOS 13.4, macCatalyst 13.4, *)
@@ -749,7 +749,7 @@ public class __EntityAccessibilityWrapper : ObjectiveC.NSObject {
   @objc deinit
 }
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 extension RealityKit.ARView {
   @_Concurrency.MainActor(unsafe) public var physicsOrigin: RealityFoundation.Entity? {
     get
@@ -817,7 +817,7 @@ extension RealityFoundation.PhysicallyBasedMaterial.SheenColor {
   }
 }
 @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 extension RealityFoundation.CustomMaterial.BaseColor {
   public init(tint: UIKit.UIColor = .white, texture: RealityFoundation.CustomMaterial.Texture? = nil)
   public var tint: UIKit.UIColor {
@@ -826,7 +826,7 @@ extension RealityFoundation.CustomMaterial.BaseColor {
   }
 }
 @available(macOS 12.0, iOS 15.0, macCatalyst 15.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 extension RealityFoundation.CustomMaterial.EmissiveColor {
   public init(color: UIKit.UIColor = .black, texture: RealityFoundation.CustomMaterial.Texture? = nil)
   public var color: UIKit.UIColor {
@@ -845,7 +845,7 @@ public enum MaterialColorParameter : Swift._ExpressibleByColorLiteral, Swift.Has
     get
   }
 }
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 extension RealityKit.ARView : ARKit.ARSessionProviding {
   @_Concurrency.MainActor(unsafe) @objc dynamic public var session: ARKit.ARSession {
     @objc get
@@ -913,7 +913,7 @@ extension RealityKit.ARView {
   @_Concurrency.MainActor(unsafe) public func __removeOcclusionEntity(for faceAnchor: ARKit.ARFaceAnchor)
 }
 @available(macCatalyst 14.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 extension RealityKit.ARView {
   public struct EntityGestures : Swift.OptionSet {
     public let rawValue: Swift.Int
@@ -930,17 +930,17 @@ extension RealityKit.ARView {
   @_Concurrency.MainActor(unsafe) public func installGestures(_ gestures: RealityKit.ARView.EntityGestures = .all, for entity: any RealityFoundation.HasCollision) -> [any RealityKit.EntityGestureRecognizer]
 }
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 extension RealityKit.ARView.Environment.Reverb.Preset : Swift.Equatable {}
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 extension RealityKit.ARView.Environment.Reverb.Preset : Swift.Hashable {}
 @available(macOS 10.15, iOS 13.0, macCatalyst 14.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 @available(*, deprecated, message: "Use RenderOptions instead")
 extension RealityKit.ARView.__RenderQuality : Swift.Equatable {}
 @available(macOS 10.15, iOS 13.0, macCatalyst 14.0, *)
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 @available(*, deprecated, message: "Use RenderOptions instead")
 extension RealityKit.ARView.__RenderQuality : Swift.Hashable {}
 @available(macOS 10.15, iOS 13.0, macCatalyst 13.0, *)
@@ -958,7 +958,7 @@ extension RealityKit.RotationOrder : Swift.Hashable {}
 @_originallyDefinedIn(module: "RealityKit", iOS 15.0)
 @_originallyDefinedIn(module: "RealityKit", macCatalyst 15.0)
 extension RealityKit.RotationOrder : Swift.RawRepresentable {}
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 extension RealityKit.ARView.CameraMode : Swift.Equatable {}
-@available(xrOS, unavailable)
+@available(visionOS, unavailable)
 extension RealityKit.ARView.CameraMode : Swift.Hashable {}

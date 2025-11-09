@@ -69,7 +69,7 @@ AVF_EXPORT NSString *const AVVideoHeightKey /* NSNumber (encoded pixels) */					
  @discussion
 	The value for this key is an NSDictionary containing AVVideoPixelAspectRatio*Key keys.  If no value is specified for this key, the default value for the codec is used.  Usually this is 1:1, meaning square pixels.
  
-	Note that prior to OS X 10.9 and iOS 7.0, this key could only be specified as part of the dictionary given for AVVideoCompressionPropertiesKey.  As of OS X 10.9 and iOS 7.0, the top level of an AVVideoSettings dictionary is the preferred place to specify this key.
+	Note that prior to macOS 10.9 and iOS 7.0, this key could only be specified as part of the dictionary given for AVVideoCompressionPropertiesKey.  As of macOS 10.9 and iOS 7.0, the top level of an AVVideoSettings dictionary is the preferred place to specify this key.
 */
 AVF_EXPORT NSString *const AVVideoPixelAspectRatioKey										API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 	AVF_EXPORT NSString *const AVVideoPixelAspectRatioHorizontalSpacingKey /* NSNumber */	API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos);
@@ -83,7 +83,7 @@ AVF_EXPORT NSString *const AVVideoPixelAspectRatioKey										API_AVAILABLE(mac
  
 	If no clean aperture region is specified, the entire frame will be displayed during playback.
  
-	Note that prior to OS X 10.9 and iOS 7.0, this key could only be specified as part of the dictionary given for AVVideoCompressionPropertiesKey.  As of OS X 10.9 and iOS 7.0, the top level of an AVVideoSettings dictionary is the preferred place to specify this key.
+	Note that prior to macOS 10.9 and iOS 7.0, this key could only be specified as part of the dictionary given for AVVideoCompressionPropertiesKey.  As of macOS 10.9 and iOS 7.0, the top level of an AVVideoSettings dictionary is the preferred place to specify this key.
 */
 AVF_EXPORT NSString *const AVVideoCleanApertureKey											API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 	AVF_EXPORT NSString *const AVVideoCleanApertureWidthKey /* NSNumber */					API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos);
@@ -264,7 +264,7 @@ AVF_EXPORT NSString *const AVVideoCompressionPropertiesKey /* NSDictionary */   
  
  Most keys can only be used for certain decoders.  Look at individual keys for details.
  */
-AVF_EXPORT NSString *const AVVideoDecompressionPropertiesKey /* NSDictionary */   API_AVAILABLE(macos(10.13)) API_UNAVAILABLE(ios, tvos, watchos);
+AVF_EXPORT NSString *const AVVideoDecompressionPropertiesKey /* NSDictionary */   API_AVAILABLE(macos(10.13), ios(17.0)) API_UNAVAILABLE(tvos, watchos);
 
 /*!
 	@constant AVVideoEncoderSpecificationKey

@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/EventKit.framework/Versions/A/EventKit'
-current-version: 1870.0.1
+current-version: 1870.2.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -58,15 +58,15 @@ exports:
                        _EKEventStore_DistributedNotification_AutomaticGeocodingAllowedChanged, 
                        _EKEventSuggestedEventSavedFromSyncKey, _EKFeatureSetDidChangeNotification, 
                        _EKHasAlarmsPropertyId, _EKHasRecurrenceRulesPropertyId, _EKICSImportErrorDomain, 
-                       _EKInvitationNotificationsDisabledKey, _EKParticipantStatusToCalAttendeeStatus, 
-                       _EKPreferences_Notification_AlertInviteeDeclines, _EKPreferences_Notification_DeselectedCalendarIdentifiers, 
+                       _EKParticipantStatusToCalAttendeeStatus, _EKPreferences_Notification_AlertInviteeDeclines, 
+                       _EKPreferences_Notification_DeselectedCalendarIdentifiers, 
                        _EKPreferences_Notification_DeselectedCalendarSyncHashes, 
                        _EKPreferences_Notification_Refiring_Reminder_Alarms_Enabled, 
                        _EKPreferences_Notification_SelectedCalendarIdentifiers, _EKPreferences_Notification_UnselectedCalendarIdentifiersForFocusMode, 
                        _EKPriorityPropertyId, _EKRecurrenceRulesPropertyId, _EKRedaction, 
-                       _EKReminderModifiedNotification, _EKSharedCalendarNotificationsDisabledKey, 
-                       _EKStorageUsageAttachmentsKey, _EKStorageUsageEventsKey, _EKTitlePropertyId, 
-                       _EKTravelEngineLogHandle, _EKTravelEngineLogInitialize, _EKTravelEngineThrottleLogHandle, 
+                       _EKReminderModifiedNotification, _EKStorageUsageAttachmentsKey, 
+                       _EKStorageUsageEventsKey, _EKTitlePropertyId, _EKTravelEngineLogHandle, 
+                       _EKTravelEngineLogInitialize, _EKTravelEngineThrottleLogHandle, 
                        _EKTravelLookupErrorDomain, _EKUUIDPropertyId, _EKUtils_AdjustedAttendeeAddress, 
                        _EKViewModelAccountDisplayOrderKey, _EKViewModelChangedNotification, 
                        _EKViewModelDisabledCalendarsKey, _EKVirtualConferenceErrorResultKey, 

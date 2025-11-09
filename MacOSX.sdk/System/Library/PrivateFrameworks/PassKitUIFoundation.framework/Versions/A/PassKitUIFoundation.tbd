@@ -16,7 +16,7 @@ exports:
                        PKPaymentSetupAssistantCredential, PKPaymentSetupAssistantProvisioningContext, 
                        PKPeerPayment3DCharacter, PKPeerPayment3DScene, PKPeerPayment3DStore, 
                        PKPeerPayment3DTextView, PKPhoneGlyphLayer, PKRenderLoop, 
-                       PKTextureLoadDescriptor, PKTextureLoader, PKTexturedCardRenderer, 
-                       PKTexturedCardView, PKUISpringAnimationFactory ]
+                       PKSpotlightCardView, PKTextureLoadDescriptor, PKTextureLoader, 
+                       PKTexturedCardRenderer, PKTexturedCardView, PKUISpringAnimationFactory ]
     objc-ivars:      [ PKRenderLoop._delegate, PKRenderLoop._drawing, PKRenderLoop._invalidated ]
 ...

@@ -1297,7 +1297,7 @@ exports:
                        AMSUIAccountMessageViewController, AMSUIActionContext, AMSUIActionRunner, 
                        AMSUIAddFundsViewController, AMSUIAgeVerificationTask, AMSUIAlertDialogTask, 
                        AMSUIAppearance, AMSUIAssetLoader, AMSUIAuthKitUpdateTask, 
-                       AMSUIAuthenticateTask, AMSUIAutomaticDownloadKindsSetTask, 
+                       AMSUIAuthenticateTask, AMSUIAuthenticateTaskCoordinator, AMSUIAutomaticDownloadKindsSetTask, 
                        AMSUIBannerAppearance, AMSUIBannerMessageViewController, AMSUIBaseMessageViewController, 
                        AMSUIBubbleTipAppearance, AMSUIBubbleTipInlineAnchorInfo, 
                        AMSUIBubbleTipViewController, AMSUIBundleViewController, AMSUICGRectHelper, 

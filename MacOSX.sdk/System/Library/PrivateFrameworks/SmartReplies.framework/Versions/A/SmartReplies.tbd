@@ -395,6 +395,7 @@ exports:
                        '_$s12SmartReplies07SRSmartB17SuggestionRequestC24concatenatedReceivedTextSSvpMV', 
                        '_$s12SmartReplies07SRSmartB17SuggestionRequestC24concatenatedReceivedTextSSvsTj', 
                        '_$s12SmartReplies07SRSmartB17SuggestionRequestC24concatenatedReceivedTextSSvsTq', 
+                       '_$s12SmartReplies07SRSmartB17SuggestionRequestC24hasValidReceivedMessagesSbyF', 
                        '_$s12SmartReplies07SRSmartB17SuggestionRequestC25receivedMessagesAsStringsSaySSGSgyF', 
                        '_$s12SmartReplies07SRSmartB17SuggestionRequestC26includesDynamicSuggestionsSbvMTj', 
                        '_$s12SmartReplies07SRSmartB17SuggestionRequestC26includesDynamicSuggestionsSbvMTq', 

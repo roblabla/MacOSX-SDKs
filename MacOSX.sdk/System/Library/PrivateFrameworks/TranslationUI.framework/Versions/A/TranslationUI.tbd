@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/TranslationUI.framework/Versions/A/TranslationUI'
-current-version: 248.2
+current-version: 252.9.1
 compatibility-version: 0
 swift-abi-version: 7
 exports:
@@ -28,6 +28,8 @@ exports:
                        '_$s10Foundation6LocaleV13TranslationUIE5isRTLSbyF', '_$s10Foundation6LocaleV13TranslationUIE8fallback3forA2C_tFZ', 
                        '_$s10Foundation6LocaleV13TranslationUIE9isChineseSbvg', '_$s10Foundation6LocaleV13TranslationUIE9isChineseSbvpMV', 
                        '_$s10Foundation6LocaleV13TranslationUIE9ltCurrentACvgZ', 
+                       '_$s10Foundation6LocaleV8LanguageV13TranslationUIE5isRTLSbvg', 
+                       '_$s10Foundation6LocaleV8LanguageV13TranslationUIE5isRTLSbvpMV', 
                        '_$s13TranslationUI04TextA7ServiceO18detectSourceLocaleySayAA0C5ModelVGAGYaFZ', 
                        '_$s13TranslationUI04TextA7ServiceO18detectSourceLocaleySayAA0C5ModelVGAGYaFZTu', 
                        '_$s13TranslationUI04TextA7ServiceO20validateTargetLocaleySayAA0C5ModelVGAGYaFZ', 

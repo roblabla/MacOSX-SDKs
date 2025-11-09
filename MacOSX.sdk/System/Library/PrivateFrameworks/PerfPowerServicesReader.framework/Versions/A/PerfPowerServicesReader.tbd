@@ -415,9 +415,9 @@ exports:
                        PPSSQLiteTimeIntervalSetIngester, PPSSQLiteTimeSeriesIngester, 
                        PPSSampleRecipeHandler, PPSTimeInterval, PPSTimeIntervalCoalescePolicy, 
                        PPSTimeIntervalSet, PPSTimeIntervalSetGenerator, PPSTimeSeries, 
-                       PPSTimeSeriesRequest, PPSTimestampConverter, PPSValueConverter, 
-                       PPSVersioningUtilities, PerfPowerServicesReaderHelper, _PPSSQLiteComparisonPredicateIfNull, 
-                       _PPSSQLiteComparisonPredicateLikeWithEscape ]
+                       PPSTimeSeriesRequest, PPSTimestampConverter, PPSTimestampConverterRegistry, 
+                       PPSValueConverter, PPSVersioningUtilities, PerfPowerServicesReaderHelper, 
+                       _PPSSQLiteComparisonPredicateIfNull, _PPSSQLiteComparisonPredicateLikeWithEscape ]
     objc-ivars:      [ PPSSQLitePropertyPredicate._property, PPSTimeSeries._events, 
                        PPSTimeSeries._isSorted, PPSTimeSeries._sortHint ]
     weak-symbols:    [ __ZGVN5boost13serialization9singletonINS0_25extended_type_info_typeidIN3pps18Histogram_InternalEEEE10m_instanceE, 

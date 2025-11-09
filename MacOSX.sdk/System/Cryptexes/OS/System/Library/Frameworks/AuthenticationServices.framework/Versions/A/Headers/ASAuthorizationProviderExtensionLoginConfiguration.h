@@ -182,7 +182,7 @@ API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, watchos, tvos)
 /*!
  @abstract Additional authorization scopes.
  */
-@property (nonatomic, nullable, copy) NSString *additionalAuthorizationScopes;
+@property (nonatomic, nullable, copy) NSString *additionalAuthorizationScopes API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*!
@@ -199,7 +199,7 @@ API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, watchos, tvos)
 /*!
  @abstract The request parameter name for the JWT.  The default is "assertion".
  */
-@property (nonatomic, nullable, copy) NSString *customRequestJWTParameterName;
+@property (nonatomic, nullable, copy) NSString *customRequestJWTParameterName API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*!
@@ -227,17 +227,17 @@ API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, watchos, tvos)
 /*!
  @abstract The claim name for the user unique identifier in the id token. Defaults to "sub".
  */
-@property (nonatomic, nullable, copy) NSString *uniqueIdentifierClaimName;
+@property (nonatomic, nullable, copy) NSString *uniqueIdentifierClaimName API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  @abstract The claim name for group membership request.
  */
-@property (nonatomic, nullable, copy) NSString *groupRequestClaimName;
+@property (nonatomic, nullable, copy) NSString *groupRequestClaimName API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  @abstract The claim name for group responses in the id_token.
  */
-@property (nonatomic, nullable, copy) NSString *groupResponseClaimName;
+@property (nonatomic, nullable, copy) NSString *groupResponseClaimName API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*!

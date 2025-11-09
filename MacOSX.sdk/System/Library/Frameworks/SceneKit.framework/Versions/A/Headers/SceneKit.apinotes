@@ -23,20 +23,6 @@ Functions:
   Availability: nonswift
   AvailabilityMsg: "Use 'SCNVector4.init(float4)' instead"
 
-Protocols:
-# The below are methods for which overlays provide better implementations
-- Name: SCNBoundingVolume
-  Methods:
-  - Selector: 'getBoundingBoxMin:max:'
-    SwiftPrivate: true
-    MethodKind: Instance
-  - Selector: 'setBoundingBoxMin:max:'
-    SwiftPrivate: true
-    MethodKind: Instance
-  - Selector: 'getBoundingSphereCenter:radius:'
-    SwiftPrivate: true
-    MethodKind: Instance
-
 #
 # New wrapper types will be made for these typedefs, and we want to nest them
 #
@@ -194,6 +180,18 @@ Protocols:
   - Selector: 'handleUnbindingOfSymbol:usingBlock:'
     MethodKind: Instance
     SwiftName: handleUnbinding(ofSymbol:handler:)
+# The below are methods for which overlays provide better implementations
+- Name: SCNBoundingVolume
+  Methods:
+  - Selector: 'getBoundingBoxMin:max:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'setBoundingBoxMin:max:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'getBoundingSphereCenter:radius:'
+    SwiftPrivate: true
+    MethodKind: Instance
 
 Classes:
 - Name: SCNAction

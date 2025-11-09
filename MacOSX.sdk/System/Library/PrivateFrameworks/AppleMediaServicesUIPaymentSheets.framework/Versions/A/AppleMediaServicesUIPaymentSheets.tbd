@@ -53,6 +53,7 @@ exports:
                        '_$s33AppleMediaServicesUIPaymentSheets29AMSUIPaymentSheetViewProviderCMu', 
                        '_$s33AppleMediaServicesUIPaymentSheets29AMSUIPaymentSheetViewProviderCN', 
                        '_$s33AppleMediaServicesUIPaymentSheets29AMSUIPaymentSheetViewProviderCfD', 
+                       '_$s7SwiftUI5ColorV33AppleMediaServicesUIPaymentSheetsE06borderC0ACvgZ', 
                        _AppleMediaServicesUIPaymentSheetsVersionNumber, _AppleMediaServicesUIPaymentSheetsVersionString ]
     objc-classes:    [ _TtC33AppleMediaServicesUIPaymentSheets29AMSUIPaymentSheetViewProvider ]
 ...

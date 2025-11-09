@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/DeviceActivity.framework/Versions/A/DeviceActivity'
-current-version: 322
+current-version: 324
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -372,7 +372,17 @@ exports:
                        '_$s14DeviceActivity0aB12DataLocatingPAAE18cloudUserDirectory11userAltDSID10Foundation3URLVSS_tF', 
                        '_$s14DeviceActivity0aB12DataLocatingPAAE20localFirstWeekdayURL10Foundation0H0Vvg', 
                        '_$s14DeviceActivity0aB12DataLocatingPAAE20localFirstWeekdayURL10Foundation0H0VvpMV', 
-                       '_$s14DeviceActivity0aB12DataLocatingTL', '_$s14DeviceActivity0aB13DataLocationsV13baseDirectory10Foundation3URLVvg', 
+                       '_$s14DeviceActivity0aB12DataLocatingTL', '_$s14DeviceActivity0aB13AuthorizationC12isAuthorizedSbvgZ', 
+                       '_$s14DeviceActivity0aB13AuthorizationC12isAuthorizedySbSSFZ', 
+                       '_$s14DeviceActivity0aB13AuthorizationC12isOverriddenSbvMZ', 
+                       '_$s14DeviceActivity0aB13AuthorizationC12isOverriddenSbvgZ', 
+                       '_$s14DeviceActivity0aB13AuthorizationC12isOverriddenSbvsZ', 
+                       '_$s14DeviceActivity0aB13AuthorizationC14sharingEnabledSbvgZ', 
+                       '_$s14DeviceActivity0aB13AuthorizationC27authorizedClientIdentifiersSaySSGvgZ', 
+                       '_$s14DeviceActivity0aB13AuthorizationCACycfC', '_$s14DeviceActivity0aB13AuthorizationCACycfc', 
+                       '_$s14DeviceActivity0aB13AuthorizationCMa', '_$s14DeviceActivity0aB13AuthorizationCMn', 
+                       '_$s14DeviceActivity0aB13AuthorizationCMo', '_$s14DeviceActivity0aB13AuthorizationCN', 
+                       '_$s14DeviceActivity0aB13AuthorizationCfD', '_$s14DeviceActivity0aB13DataLocationsV13baseDirectory10Foundation3URLVvg', 
                        '_$s14DeviceActivity0aB13DataLocationsV13baseDirectory10Foundation3URLVvpMV', 
                        '_$s14DeviceActivity0aB13DataLocationsVAA0abC8LocatingAAMc', 
                        '_$s14DeviceActivity0aB13DataLocationsVAA0abC8LocatingAAWP', 
@@ -787,5 +797,6 @@ exports:
                        '_$sSo18NSNotificationNamea14DeviceActivityE18intervalEndWarningABvgZ', 
                        '_$sSo18NSNotificationNamea14DeviceActivityE20intervalStartWarningABvgZ', 
                        '_$sSo18NSNotificationNamea14DeviceActivityE21eventThresholdWarningABvgZ' ]
-    objc-classes:    [ _TtC14DeviceActivity21DeviceActivityMonitor, _TtC14DeviceActivity7Feature ]
+    objc-classes:    [ _TtC14DeviceActivity21DeviceActivityMonitor, _TtC14DeviceActivity27DeviceActivityAuthorization, 
+                       _TtC14DeviceActivity7Feature ]
 ...

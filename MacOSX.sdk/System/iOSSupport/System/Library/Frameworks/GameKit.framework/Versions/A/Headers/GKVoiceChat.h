@@ -8,7 +8,7 @@ typedef NS_ENUM(NSInteger, GKVoiceChatPlayerState) {
     GKVoiceChatPlayerSpeaking,
     GKVoiceChatPlayerSilent,
     GKVoiceChatPlayerConnecting
-};
+} __WATCHOS_PROHIBITED;
 
 @class GKPlayer;
 

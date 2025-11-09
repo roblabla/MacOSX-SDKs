@@ -118,6 +118,7 @@
 #import <UIKit/UIFocusDebugger.h>
 #import <UIKit/UIFocusMovementHint.h>
 #import <UIKit/UIHoverEffect.h>
+#import <UIKit/UIHoverEffectLayer.h>
 #import <UIKit/UIHoverStyle.h>
 #import <UIKit/UIShape.h>
 #import <UIKit/UIHoverGestureRecognizer.h>
@@ -305,9 +306,6 @@
 #import <UIKit/UIWindowSceneGeometryPreferencesMac.h>
 #import <UIKit/UIWindowSceneGeometryPreferencesIOS.h>
 #import <UIKit/UIWindowSceneGeometryPreferencesVision.h>
-#if __has_include(<UIKit/UIWindowSceneGeometryPreferencesReality.h>)
-#import <UIKit/UIWindowSceneGeometryPreferencesReality.h>
-#endif
 #import <UIKit/UIWindowScenePlacement.h>
 #import <UIKit/UIWindowSceneStandardPlacement.h>
 #import <UIKit/UIWindowSceneProminentPlacement.h>

@@ -86,14 +86,14 @@ WK_EXTERN API_AVAILABLE(macos(10.11), ios(9.0))
 /*! @abstract Get identifier for a data store.
  @discussion Returns nil for default and non-persistent data store .
  */
-@property (nonatomic, readonly, nullable) NSUUID *identifier API_AVAILABLE(macos(14.0), ios(NA));
+@property (nonatomic, readonly, nullable) NSUUID *identifier API_AVAILABLE(macos(14.0), ios(17.0));
 
 /*! @abstract Get a persistent data store.
  @param identifier An identifier that is used to uniquely identify the data store.
  @discussion If a data store with this identifier does not exist yet, it will be created. Throws exception if identifier
  is 0.
 */
-+ (WKWebsiteDataStore *)dataStoreForIdentifier:(NSUUID *)identifier API_AVAILABLE(macos(14.0), ios(NA));
++ (WKWebsiteDataStore *)dataStoreForIdentifier:(NSUUID *)identifier API_AVAILABLE(macos(14.0), ios(17.0));
 
 /*! @abstract Delete a persistent data store.
  @param identifier An identifier that is used to uniquely identify the data store.
@@ -101,13 +101,13 @@ WK_EXTERN API_AVAILABLE(macos(10.11), ios(9.0))
  @discussion This should be called when the data store is not used any more. Returns error if removal fails
  to complete. WKWebView using the data store must be released before removal.
 */
-+ (void)removeDataStoreForIdentifier:(NSUUID *)identifier completionHandler:(void(^)(NSError * _Nullable))completionHandler API_AVAILABLE(macos(14.0), ios(NA));
++ (void)removeDataStoreForIdentifier:(NSUUID *)identifier completionHandler:(void(^)(NSError * _Nullable))completionHandler API_AVAILABLE(macos(14.0), ios(17.0));
 
 /*! @abstract Fetch all data stores identifiers.
  @param completionHandler A block to invoke with an array of identifiers when the operation completes.
  @discussion Default or non-persistent data store do not have an identifier.
 */
-+ (void)fetchAllDataStoreIdentifiers:(void(^)(NSArray<NSUUID *> *))completionHandler WK_SWIFT_ASYNC_NAME(getter:allDataStoreIdentifiers()) API_AVAILABLE(macos(14.0), ios(NA));
++ (void)fetchAllDataStoreIdentifiers:(void(^)(NSArray<NSUUID *> *))completionHandler WK_SWIFT_ASYNC_NAME(getter:allDataStoreIdentifiers()) API_AVAILABLE(macos(14.0), ios(17.0));
 
 #if ((TARGET_OS_OSX && __MAC_OS_X_VERSION_MAX_ALLOWED >= 140000) \
     || ((TARGET_OS_IOS || TARGET_OS_MACCATALYST) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 170000) \
@@ -117,7 +117,11 @@ WK_EXTERN API_AVAILABLE(macos(10.11), ios(9.0))
  @discussion Changing the proxy configurations might interupt current networking operations in any WKWebView that use this WKWebsiteDataStore,
  so it is encouraged to finish setting the proxy configurations before starting any page loads.
 */
+#if defined(OS_OBJECT_USE_OBJC) && OS_OBJECT_USE_OBJC
 @property (nullable, nonatomic, copy) NSArray<nw_proxy_config_t> *proxyConfigurations NS_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0));
+#else
+@property (nullable, nonatomic, copy) NSArray *proxyConfigurations NS_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0));
+#endif
 #endif
 
 @end

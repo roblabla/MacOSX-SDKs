@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/Virtualization.framework/Versions/A/Virtualization'
-current-version: 162.3
+current-version: 162.7.3
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos ]
@@ -78,7 +78,7 @@ exports:
                        _VZVirtioGenericDeviceSpecificConfiguration, _VZVirtioInputDeviceSpecificConfiguration, 
                        _VZVirtioMouseInputDeviceConfiguration, _VZVirtioQueue, _VZVirtioQueueElement, 
                        _VZVirtioSoundDevice, _VZVirtualMachineConfigurationDecoder, 
-                       _VZVirtualMachineConfigurationEncoder ]
+                       _VZVirtualMachineConfigurationEncoder, _VZVirtualMachineSaveOptions ]
   - targets:         [ arm64-macos, arm64e-macos ]
     symbols:         [ '_$sSo16VZMacOSInstallerC14VirtualizationE7install17completionHandleryys6ResultOyyts5Error_pGc_tF', 
                        '_$sSo19VZMacOSRestoreImageC14VirtualizationE20fetchLatestSupported17completionHandleryys6ResultOyABs5Error_pGc_tFZ', 

@@ -300,10 +300,11 @@ exports:
                        iCloudFMIPAuthenticateRequest, iCloudFMIPAuthenticateResponse, 
                        iCloudFollowUpActionHandler, iCloudFollowUpSuggestion, iCloudFreeformService, 
                        iCloudHandleFLUI, iCloudHomeService, iCloudLinkButton, iCloudLocHelper, 
-                       iCloudNameFormatter, iCloudNewsService, iCloudPaymentVerificationController, 
-                       iCloudPurchaseStorageController, iCloudRequester, iCloudSettingsSyncService, 
-                       iCloudSiriService, iCloudStocksService, iCloudTouchBarController, 
-                       iCloudUtilities, iCloudWalletService ]
+                       iCloudMessagesService, iCloudNameFormatter, iCloudNewsService, 
+                       iCloudPaymentVerificationController, iCloudPurchaseStorageController, 
+                       iCloudRequester, iCloudSettingsSyncService, iCloudSiriService, 
+                       iCloudStocksService, iCloudTouchBarController, iCloudUtilities, 
+                       iCloudWalletService ]
     objc-ivars:      [ AOSUIAccountContactsTableRowLoader._contactRow, CastlePlugin._accountDetailsController, 
                        CastlePlugin._accountDetailsControllerNew, CastlePlugin._accountList, 
                        CastlePlugin._authenticationResults, CastlePlugin._mainWindow, 

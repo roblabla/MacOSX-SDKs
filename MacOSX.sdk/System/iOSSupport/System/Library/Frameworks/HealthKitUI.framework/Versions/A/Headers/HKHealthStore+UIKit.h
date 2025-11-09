@@ -2,7 +2,6 @@
 //  HKHealthStore+UIKit.h
 //  HealthKit
 //
-//  Created by Srishti Gupta on 1/25/23.
 //  Copyright © 2023 Apple. All rights reserved.
 //
 
@@ -13,6 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+#if __has_include(<UIKit/UIView.h>)
 @interface HKHealthStore (UIKit)
 
 /*!
@@ -23,5 +23,5 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak, nullable) UIViewController *authorizationViewControllerPresenter API_AVAILABLE(ios(17.0));
 
 @end
-
+#endif
 NS_ASSUME_NONNULL_END

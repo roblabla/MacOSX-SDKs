@@ -214,7 +214,7 @@ API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0)) API_UNAVAILABLE(watchos)
 	The default CIContext has the following properties:
 
 		- iOS: Device RGB color space
-		- OS X: sRGB color space
+		- macOS: sRGB color space
  
 	Example usage:
 
@@ -253,7 +253,7 @@ API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0)) API_UNAVAILABLE(watchos)
 	The default CIContext has the following properties:
 
 		- iOS: Device RGB color space
-		- OS X: sRGB color space
+		- macOS: sRGB color space
  
 	Example usage:
 
@@ -505,7 +505,7 @@ API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 	The default CIContext has the following properties:
 
 		- iOS: Device RGB color space
-		- OS X: sRGB color space
+		- macOS: sRGB color space
  
 	Example usage:
 
@@ -542,7 +542,7 @@ API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 	The default CIContext has the following properties:
 
 		- iOS: Device RGB color space
-		- OS X: sRGB color space
+		- macOS: sRGB color space
  
 	Example usage:
 

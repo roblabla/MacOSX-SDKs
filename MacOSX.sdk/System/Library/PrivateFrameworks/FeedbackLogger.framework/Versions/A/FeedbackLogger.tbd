@@ -6,11 +6,12 @@ install-name:    '/System/Library/PrivateFrameworks/FeedbackLogger.framework/Ver
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ _FLErrorDomain, _FLGetBootSessionUUID, _FLSignpostLoggingInit, 
-                       _FLUploadHeadersKey, _FLUploadImmediately, _FL_LOG_SIGNPOSTS, 
-                       _FeedbackLoggerVersionNumber, _FeedbackLoggerVersionString, 
+    symbols:         [ _FLErrorDomain, _FLGetBootSessionUUID, _FLMachServiceName, 
+                       _FLSignpostLoggingInit, _FLUploadHeadersKey, _FLUploadImmediately, 
+                       _FL_LOG_SIGNPOSTS, _FeedbackLoggerVersionNumber, _FeedbackLoggerVersionString, 
                        _flLogForObject, _kMaxBatchContinuesDuration, _tryGetDataProperty, 
                        _tryGetDateProperty, _tryGetTextProperty ]
-    objc-classes:    [ BatchMetadata, FLLogger, FLLoggingContext, FLSQLiteDatabaseConnection, 
-                       FLSQLitePersistence, FeedbackLoggerFBFClient, UploadRecord ]
+    objc-classes:    [ BatchMetadata, FLContainerStorePathManager, FLLogger, FLLoggingContext, 
+                       FLSQLiteDatabaseConnection, FLSQLitePersistence, FeedbackLoggerFBFClient, 
+                       UploadRecord ]
 ...

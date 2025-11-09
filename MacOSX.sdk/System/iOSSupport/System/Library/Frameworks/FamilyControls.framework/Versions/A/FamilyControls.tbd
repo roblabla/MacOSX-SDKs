@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/FamilyControls.framework/Versions/A/FamilyControls'
-current-version: 1112
+current-version: 1131
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
@@ -187,8 +187,9 @@ exports:
                        '_$s14FamilyControls10UsageStoreC4open4fromy10Foundation3URLV_tKFTq', 
                        '_$s14FamilyControls10UsageStoreC4save2toy10Foundation3URLV_tKFTj', 
                        '_$s14FamilyControls10UsageStoreC4save2toy10Foundation3URLV_tKFTq', 
+                       '_$s14FamilyControls10UsageStoreC5first5whereSS3key_AA0C10ItemRecordV5valuetSgSbSSAF_AhIt_tKXE_tKF', 
                        '_$s14FamilyControls10UsageStoreC5index5afterSD5IndexVySSAA0C10ItemRecordV_GAJ_tF', 
-                       '_$s14FamilyControls10UsageStoreC8contains5whereS2bSS3key_AA0C10ItemRecordV5valuet_tKXE_tKF', 
+                       '_$s14FamilyControls10UsageStoreC6sharedACvgZ', '_$s14FamilyControls10UsageStoreC8contains5whereS2bSS3key_AA0C10ItemRecordV5valuet_tKXE_tKF', 
                        '_$s14FamilyControls10UsageStoreC8endIndexSD0F0VySSAA0C10ItemRecordV_Gvg', 
                        '_$s14FamilyControls10UsageStoreC8endIndexSD0F0VySSAA0C10ItemRecordV_GvpMV', 
                        '_$s14FamilyControls10UsageStoreC9removeAllyyF', '_$s14FamilyControls10UsageStoreCACycfC', 

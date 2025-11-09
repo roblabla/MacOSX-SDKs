@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/AuthenticationServicesCore.framework/Versions/A/AuthenticationServicesCore'
-current-version: 616.1.27
+current-version: 617.1.17
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -230,10 +230,10 @@ exports:
                        _ASAuthenticationRequestPublicWebBrowserEntitlement, _ASCAgentBundleIdentifier, 
                        _ASCAgentServiceName, _ASCAuthorizationErrorDomain, _ASCAuthorizationPresentationContextDataKey, 
                        _ASCAuthorizationPresenterClientEntitlementName, _ASFIDOAuthenticatorAttachmentCrossPlatform, 
-                       _ASFIDOAuthenticatorAttachmentPlatform, _ASKeychainSyncStatusMayHaveChangedNotification, 
-                       _ASPasskeyTCCService, _ASViewServiceClientEntitlement, _ASViewServiceProcess, 
-                       _ascCredentialRequestTypesAllPasskey, _ascCredentialRequestTypesAllPublicKey, 
-                       _authenticationServicesViewServiceBundleIdentifier, _descriptionForErrorCode ]
+                       _ASFIDOAuthenticatorAttachmentPlatform, _ASPasskeyTCCService, 
+                       _ASViewServiceClientEntitlement, _ASViewServiceProcess, _ascCredentialRequestTypesAllPasskey, 
+                       _ascCredentialRequestTypesAllPublicKey, _authenticationServicesViewServiceBundleIdentifier, 
+                       _descriptionForErrorCode ]
     objc-classes:    [ ASAgentAutoFillListener, ASAuthorizationRemoteViewController, 
                        ASCABLELoginChoice, ASCAgent, ASCAgentInterface, ASCAgentListener, 
                        ASCAgentProxy, ASCAppleIDCredential, ASCAppleIDLoginChoice, 

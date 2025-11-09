@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/WidgetObservation.framework/Versions/A/WidgetObservation'
-current-version: 1341.1.101
+current-version: 1341.13
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -20,7 +20,8 @@ exports:
                        '_$s17WidgetObservation08WOWidgetB10ControllerCMo', '_$s17WidgetObservation08WOWidgetB10ControllerCN', 
                        '_$s17WidgetObservation08WOWidgetB10ControllerCfD', '_$s17WidgetObservation0A0V2id10Foundation4UUIDVvM', 
                        '_$s17WidgetObservation0A0V2id10Foundation4UUIDVvg', '_$s17WidgetObservation0A0V2id10Foundation4UUIDVvpMV', 
-                       '_$s17WidgetObservation0A0V2id10Foundation4UUIDVvs', '_$s17WidgetObservation0A0V2id7display5frameAC10Foundation4UUIDV_AISo6CGRectVtcfC', 
+                       '_$s17WidgetObservation0A0V2id10Foundation4UUIDVvs', '_$s17WidgetObservation0A0V2id5frameAC10Foundation4UUIDV_So6CGRectVtcfC', 
+                       '_$s17WidgetObservation0A0V2id7display5frameAC10Foundation4UUIDV_AISo6CGRectVtcfC', 
                        '_$s17WidgetObservation0A0V4fromACs7Decoder_p_tKcfC', '_$s17WidgetObservation0A0V5frameSo6CGRectVvM', 
                        '_$s17WidgetObservation0A0V5frameSo6CGRectVvg', '_$s17WidgetObservation0A0V5frameSo6CGRectVvpMV', 
                        '_$s17WidgetObservation0A0V5frameSo6CGRectVvs', '_$s17WidgetObservation0A0V6encode2toys7Encoder_p_tKF', 
@@ -30,7 +31,8 @@ exports:
                        '_$s17WidgetObservation0A0V7display10Foundation4UUIDVvs', 
                        '_$s17WidgetObservation0A0VMa', '_$s17WidgetObservation0A0VMn', 
                        '_$s17WidgetObservation0A0VN', '_$s17WidgetObservation0A0VSEAAMc', 
-                       '_$s17WidgetObservation0A0VSeAAMc', '_$s17WidgetObservation0A17PositionPublisherC12showAddSheetyyF', 
+                       '_$s17WidgetObservation0A0VSeAAMc', '_$s17WidgetObservation0A17PositionPublisherC011significantA6ChangeyyF', 
+                       '_$s17WidgetObservation0A17PositionPublisherC12showAddSheetyyF', 
                        '_$s17WidgetObservation0A17PositionPublisherC15widgetDidChangeyyAA0aG0OF', 
                        '_$s17WidgetObservation0A17PositionPublisherC16widgetsDidChangeyySayAA0aG0OGF', 
                        '_$s17WidgetObservation0A17PositionPublisherC24widgetDragStateDidChange10isDraggingySb_tF', 

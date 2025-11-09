@@ -15,5 +15,5 @@ exports:
                        _kIREventNameMedia, _kIRServiceLogPrefixKey ]
     objc-classes:    [ IRAppleTVControlEvent, IRCandidate, IRCandidateResult, IRConfiguration, 
                        IRContext, IREvent, IRMediaEvent, IRNode, IRServiceParameters, 
-                       IRServiceToken, IRSession ]
+                       IRServiceToken, IRSession, IRSessionSpotOnLocationParameters ]
 ...

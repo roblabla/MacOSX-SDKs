@@ -2,21 +2,19 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/XOJIT.framework/Versions/A/XOJIT'
-current-version: 17
+current-version: 19
+compatibility-version: 0
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s5XOJIT9XOJITShimC17fromXPCConnection0C17OOPJITLinkageTypeACSo13OS_xpc_object_p_s5Int32VtcfC', 
-                       '_$s5XOJIT9XOJITShimC17fromXPCConnection0C17OOPJITLinkageTypeACSo13OS_xpc_object_p_s5Int32VtcfCTq', 
-                       '_$s5XOJIT9XOJITShimC17fromXPCConnection0C17OOPJITLinkageTypeACSo13OS_xpc_object_p_s5Int32Vtcfc', 
-                       '_$s5XOJIT9XOJITShimC17fromXPCConnectionACSo13OS_xpc_object_p_tcfC', 
-                       '_$s5XOJIT9XOJITShimC17fromXPCConnectionACSo13OS_xpc_object_p_tcfCTq', 
-                       '_$s5XOJIT9XOJITShimC17fromXPCConnectionACSo13OS_xpc_object_p_tcfc', 
-                       '_$s5XOJIT9XOJITShimC3add3ptr4sizeSbSPys5UInt8VG_SitF', '_$s5XOJIT9XOJITShimC3add3ptr4sizeSbSPys5UInt8VG_SitFTq', 
-                       '_$s5XOJIT9XOJITShimC6lookup10symbolNames6UInt64VSS_tF', '_$s5XOJIT9XOJITShimC6lookup10symbolNames6UInt64VSS_tFTq', 
-                       '_$s5XOJIT9XOJITShimCACycfC', '_$s5XOJIT9XOJITShimCACycfc', 
-                       '_$s5XOJIT9XOJITShimCMa', '_$s5XOJIT9XOJITShimCMn', '_$s5XOJIT9XOJITShimCN', 
-                       '_$s5XOJIT9XOJITShimCfD', '_$s5XOJITAAC10LookupKindO21__derived_enum_equalsySbAD_ADtFZ', 
+    symbols:         [ '_$s5XOJIT12MemoryBufferC10identifier8fromFileACSS_SStKcfC', 
+                       '_$s5XOJIT12MemoryBufferC10identifier8fromFileACSS_SStKcfCTq', 
+                       '_$s5XOJIT12MemoryBufferC10identifier8fromFileACSS_SStKcfc', 
+                       '_$s5XOJIT12MemoryBufferC3ref33_F558153C24CEF1022F1549E0164AA5DALLs13OpaquePointerVSgvpfi', 
+                       '_$s5XOJIT12MemoryBufferC8fromFileACSS_tKcfC', '_$s5XOJIT12MemoryBufferCMa', 
+                       '_$s5XOJIT12MemoryBufferCMm', '_$s5XOJIT12MemoryBufferCMn', 
+                       '_$s5XOJIT12MemoryBufferCN', '_$s5XOJIT12MemoryBufferCfD', 
+                       '_$s5XOJIT12MemoryBufferCfd', '_$s5XOJITAAC10LookupKindO21__derived_enum_equalsySbAD_ADtFZ', 
                        '_$s5XOJITAAC10LookupKindO4hash4intoys6HasherVz_tF', '_$s5XOJITAAC10LookupKindO9hashValueSivg', 
                        '_$s5XOJITAAC10LookupKindO9hashValueSivpMV', '_$s5XOJITAAC10LookupKindOMa', 
                        '_$s5XOJITAAC10LookupKindOMn', '_$s5XOJITAAC10LookupKindON', 
@@ -63,10 +61,11 @@ exports:
                        '_$s5XOJITAAC18JITEvaluatedSymbolV7addressAB16JITTargetAddressVvs', 
                        '_$s5XOJITAAC18JITEvaluatedSymbolVMa', '_$s5XOJITAAC18JITEvaluatedSymbolVMn', 
                        '_$s5XOJITAAC18JITEvaluatedSymbolVN', '_$s5XOJITAAC18JITEvaluatedSymbolVSQAAMc', 
-                       '_$s5XOJITAAC18ObjectLinkingLayerV3add6object4name2toy10Foundation4DataV_SSSgAB8JITDylibVtKF', 
+                       '_$s5XOJITAAC18ObjectLinkingLayerV11linkArchive7archive4intoyAA12MemoryBufferC_AB8JITDylibVtKF', 
+                       '_$s5XOJITAAC18ObjectLinkingLayerV3add6object2toyAA12MemoryBufferC_AB8JITDylibVtKF', 
                        '_$s5XOJITAAC18ObjectLinkingLayerV3add6object4name2toySW_SSSgAB8JITDylibVtKF', 
                        '_$s5XOJITAAC18ObjectLinkingLayerVMa', '_$s5XOJITAAC18ObjectLinkingLayerVMn', 
-                       '_$s5XOJITAAC18ObjectLinkingLayerVN', '_$s5XOJITAAC18ReplacementManagerC07addWithB06object4name2toy10Foundation4DataV_SSSgAB8JITDylibVtKF', 
+                       '_$s5XOJITAAC18ObjectLinkingLayerVN', '_$s5XOJITAAC18ReplacementManagerC07addWithB06object2toyAA12MemoryBufferC_AB8JITDylibVtKF', 
                        '_$s5XOJITAAC18ReplacementManagerC07addWithB06object4name2toySW_SSSgAB8JITDylibVtKF', 
                        '_$s5XOJITAAC18ReplacementManagerC19applyPendingUpdates2toyAB8JITDylibV_tKF', 
                        '_$s5XOJITAAC18ReplacementManagerCMa', '_$s5XOJITAAC18ReplacementManagerCMm', 
@@ -89,7 +88,6 @@ exports:
                        '_$s5XOJITAAC9loadDylibyAB0C6HandleVSSKF', '_$s5XOJITAACAByKcfC', 
                        '_$s5XOJITAACAByKcfCTq', '_$s5XOJITAACAByKcfc', '_$s5XOJITAACMa', 
                        '_$s5XOJITAACMm', '_$s5XOJITAACMn', '_$s5XOJITAACN', '_$s5XOJITAACfD', 
-                       '_$s5XOJITAACfd', _xojit_create_from_xpc_connection, _xojit_create_from_xpc_connection_and_oopjit_linkage_type, 
-                       _xojit_destroy, _xojit_load_object, _xojit_lookup_symbols ]
-    objc-classes:    [ _TtC5XOJIT9XOJITShim ]
+                       '_$s5XOJITAACfd', _XOJIT_Error_ToMessage, _XOJIT_MemoryBuffer_CreateWithIdentifierFromPath, 
+                       _XOJIT_MemoryBuffer_Destroy ]
 ...

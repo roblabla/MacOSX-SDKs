@@ -82,7 +82,7 @@ exports:
                        __ZN17ASDIntervalFilterD0Ev, __ZN17ASDIntervalFilterD1Ev, 
                        __ZN17ASDIntervalFilterD2Ev, __ZN18ASDDSPStreamHelper13processOutputEjPK28AudioServerPlugInIOCycleInfoPvS3_j, 
                        __ZN18ASDDSPStreamHelper16resumeProcessingEv, __ZN18ASDDSPStreamHelper17suspendProcessingEv, 
-                       __ZN18ASDDSPStreamHelper18validateGraphAudioEP17ASDDSPGraphHelperPK24CAStreamBasicDescriptionS4_, 
+                       __ZN18ASDDSPStreamHelper18setBypassGraphModeEb, __ZN18ASDDSPStreamHelper18validateGraphAudioEP17ASDDSPGraphHelperPK24CAStreamBasicDescriptionS4_, 
                        __ZN18ASDDSPStreamHelper26allocateStreamingResourcesEj, __ZN18ASDDSPStreamHelper27setGraphAudioValidationModeE36ASDDSPStreamGraphAudioValidationMode, 
                        __ZN18ASDDSPStreamHelper28deallocateStreamingResourcesEv, 
                        __ZN18ASDDSPStreamHelper8writeMixEjPK28AudioServerPlugInIOCycleInfoPvS3_j, 

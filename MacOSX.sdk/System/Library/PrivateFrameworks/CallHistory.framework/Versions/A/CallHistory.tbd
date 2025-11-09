@@ -33,8 +33,8 @@ exports:
                        _kCHLimitMediaTypeKey, _kCHLimitServiceProviderKey, _kCHLimitStartDateKey, 
                        _kCHLimitTTYTypeKey, _kCHServiceProviderFaceTime, _kCHServiceProviderTelephony, 
                        _kCHTimerIncomingKey, _kCHTimerLifetimeKey, _kCHTimerOutgoingKey, 
-                       _kCallDBDirName, _kCallDBMLogDomain, _kCallDBPropertiesEntity, 
-                       _kCallDBSharedUtilDomain, _kCallHistoryCallRecordInsertedNotification, 
+                       _kCallDBDirName, _kCallDBMLogDomain, _kCallDBManagerDataStoreType, 
+                       _kCallDBPropertiesEntity, _kCallDBSharedUtilDomain, _kCallHistoryCallRecordInsertedNotification, 
                        _kCallHistoryDBName, _kCallHistoryDataStoreExtension, _kCallHistoryDatabaseChangedNotification, 
                        _kCallHistoryDatabaseInitializedKey, _kCallHistoryDatabasePluginUpdateNotification, 
                        _kCallHistoryDatabaseRemoteUpdateReadNotification, _kCallHistoryObjectModelResourceExtension, 
@@ -50,14 +50,13 @@ exports:
     objc-classes:    [ CHCallInteractionManager, CHConfiguration, CHConfigurationAggregator, 
                        CHContactProvider, CHDelegateController, CHDelegateManager, 
                        CHDeviceDataSource, CHDeviceObserver, CHFeatureFlags, CHHandle, 
-                       CHLocalization, CHLogServer, CHLogger, CHManager, CHPhoneNumber, 
-                       CHPluginHelper, CHRecentCall, CHSynchronizable, CHSynchronizedLoggable, 
-                       CHTransaction, CHUserConfiguration, CallDBManager, CallDBManagerServer, 
-                       CallHistoryDBClientHandle, CallHistoryDBHandle, DBManager, 
-                       DBMigrationResult, DeserializedTransaction ]
-    objc-ivars:      [ CallHistoryDBClientHandle._observerCallTimersRef, CallHistoryDBClientHandle.dbStoreHandle, 
-                       CallHistoryDBHandle._dataStoreAddedRef, CallHistoryDBHandle._moveCallRecordsFromTempStoreRef, 
-                       CallHistoryDBHandle._observerCallDBPropRef, CallHistoryDBHandle._observerCallRecordRef, 
-                       CallHistoryDBHandle.callDBManager, CallHistoryDBHandle.fCallDBPropertiesContext, 
-                       CallHistoryDBHandle.fCallRecordContext ]
+                       CHLocalization, CHLogServer, CHLogger, CHManager, CHPersistentContainer, 
+                       CHPhoneNumber, CHPluginHelper, CHRecentCall, CHSynchronizable, 
+                       CHSynchronizedLoggable, CHTransaction, CHUserConfiguration, 
+                       CallDBManager, CallDBManagerServer, CallHistoryDBClientHandle, 
+                       CallHistoryDBHandle, DBManager, DBMigrationResult, DeserializedTransaction ]
+    objc-ivars:      [ CallHistoryDBClientHandle._observerCallTimersRef, CallHistoryDBHandle._dataStoreAddedRef, 
+                       CallHistoryDBHandle._moveCallRecordsFromTempStoreRef, CallHistoryDBHandle._observerCallDBPropRef, 
+                       CallHistoryDBHandle._observerCallRecordRef, CallHistoryDBHandle.callDBManager, 
+                       CallHistoryDBHandle.fCallDBPropertiesContext, CallHistoryDBHandle.fCallRecordContext ]
 ...

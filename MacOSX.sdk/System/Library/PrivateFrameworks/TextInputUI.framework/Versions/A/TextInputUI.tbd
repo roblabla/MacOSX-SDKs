@@ -20,7 +20,8 @@ exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _TUIDictationActionKey, _TUIDictationLanguageButtonPressedAction, 
                        _TUIDictationLanguageKey, _TUIDictationLanguageSelectedAction, 
-                       _TUIDictationMicButtonPressedAction ]
+                       _TUIDictationMicButtonPressedAction, _kCursorAccessoryCornerRadius, 
+                       _kIconSize, _kIndicatorSize ]
     objc-classes:    [ TUICapslockAccessory, TUICursorAccessory, TUICursorAccessoryAssertionController, 
                        TUIDictationAccessory, TUIInputModeAccessory, TUIInputModeSwitcherAccessory, 
                        TUIKeyboardInputModeIconRenderer, TUIKeyboardInputModeIconRendererConfiguration, 

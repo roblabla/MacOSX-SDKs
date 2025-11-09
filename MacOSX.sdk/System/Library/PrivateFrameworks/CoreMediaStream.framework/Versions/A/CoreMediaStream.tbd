@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CoreMediaStream.framework/Versions/A/CoreMediaStream'
-current-version: 608.2.113
+current-version: 621.0.100
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -131,9 +131,9 @@ exports:
                        _kMSASServerSideConfigVersionKey, _kMSASServerSideConfigVideoDerivativesKey, 
                        _kMSASSetFocusAlbumFn, _kMSASSetIsUIForegroundFn, _kMSASSharingRelationshipGUIDKey, 
                        _kMSASSharingRelationshipKey, _kMSASSharingRelationshipsKey, 
-                       _kMSASStabilizedIdleStateDidChangeNotification, _kMSASStateMachineErrorDomain, 
-                       _kMSASSubscriberErrorDomain, _kMSASSuccessfulAssetCollectionsKey, 
-                       _kMSASURLExpirationKey, _kMSASUpdateAlbumFlagsKey, _kMSArchiverUtilitiesErrorDomain, 
+                       _kMSASStateMachineErrorDomain, _kMSASSubscriberErrorDomain, 
+                       _kMSASSuccessfulAssetCollectionsKey, _kMSASURLExpirationKey, 
+                       _kMSASUpdateAlbumFlagsKey, _kMSArchiverUtilitiesErrorDomain, 
                        _kMSAssetMediaAssetTypeKey, _kMSAssetMetadataAssetFileTransferUUID, 
                        _kMSAssetMetadataAssetTypeFlagsKey, _kMSAssetMetadataAssetTypeFullSizeDerivative, 
                        _kMSAssetMetadataAssetTypeKey, _kMSAssetMetadataAssetTypeNominalSizeDerivative, 
