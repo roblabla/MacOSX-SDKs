@@ -146,6 +146,6 @@ typedef int wait_timeout_urgency_t;
 #define TIMEOUT_URGENCY_LEEWAY		0x20		/* don't ignore provided leeway value */
 
 #define TIMEOUT_URGENCY_FIRST_AVAIL	0x40		/* first available bit outside of urgency mask/leeway */
-
+#define	TIMEOUT_URGENCY_RATELIMITED	0x80
 
 #endif	/* _KERN_KERN_TYPES_H_ */

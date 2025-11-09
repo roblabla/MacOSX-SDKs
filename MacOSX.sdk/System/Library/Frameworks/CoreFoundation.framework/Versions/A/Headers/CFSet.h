@@ -1,5 +1,5 @@
 /*	CFSet.h
-	Copyright (c) 1998-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1998-2014, Apple Inc. All rights reserved.
 */
 /*!
         @header CFSet
@@ -122,13 +122,13 @@ typedef void (*CFSetApplierFunction)(const void *value, void *context);
         @typedef CFSetRef
 	This is the type of a reference to immutable CFSets.
 */
-typedef const struct __CFSet * CFSetRef;
+typedef const struct CF_BRIDGED_TYPE(NSSet) __CFSet * CFSetRef;
 
 /*!
         @typedef CFMutableSetRef
 	This is the type of a reference to mutable CFSets.
 */
-typedef struct __CFSet * CFMutableSetRef;
+typedef struct CF_BRIDGED_MUTABLE_TYPE(NSMutableSet) __CFSet * CFMutableSetRef;
 
 /*!
         @function CFSetGetTypeID

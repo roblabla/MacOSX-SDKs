@@ -2,7 +2,7 @@
  *  CTFontManagerErrors.h
  *  CoreText
  *
- *  Copyright (c) 2008-2012 Apple Inc. All rights reserved.
+ *  Copyright (c) 2008-2013 Apple Inc. All rights reserved.
  *
  */
 
@@ -38,21 +38,13 @@ extern const CFStringRef kCTFontManagerErrorFontURLsKey CT_AVAILABLE(10_6, 3_2);
                 The file does not exist at the specified URL.
     @constant   kCTFontManagerErrorInsufficientPermissions
                 Cannot access the file due to insufficient permissions.
-    @constant   kCTFontManagerErrorUnrecognizedFileFormat
+    @constant   kCTFontManagerErrorUnrecognizedFormat
                 The file is not a recognized or supported font file format.
     @constant   kCTFontManagerErrorInvalidFontData
                 The file contains invalid font data that could cause system problems.
     @constant   kCTFontManagerErrorAlreadyRegistered
                 The file has already been registered in the specified scope.
 */
-enum {
-    kCTFontManagerErrorFileNotFound             = 101,
-    kCTFontManagerErrorInsufficientPermissions  = 102,
-    kCTFontManagerErrorUnrecognizedFormat       = 103,
-    kCTFontManagerErrorInvalidFontData          = 104,
-    kCTFontManagerErrorAlreadyRegistered        = 105,
-};
-
 /*!
     @enum
     @abstract   Font un-registration errors
@@ -64,13 +56,16 @@ enum {
     @constant   kCTFontManagerErrorSystemRequired
                 The file is required by the system and cannot be unregistered.
 */
-enum {
+typedef CF_ENUM(CFIndex, CTFontManagerError) {
+    kCTFontManagerErrorFileNotFound             = 101,
+    kCTFontManagerErrorInsufficientPermissions  = 102,
+    kCTFontManagerErrorUnrecognizedFormat       = 103,
+    kCTFontManagerErrorInvalidFontData          = 104,
+    kCTFontManagerErrorAlreadyRegistered        = 105,
     kCTFontManagerErrorNotRegistered            = 201,
     kCTFontManagerErrorInUse                    = 202,
-    kCTFontManagerErrorSystemRequired           = 202,
+    kCTFontManagerErrorSystemRequired           = 203,
 };
-
-typedef CFIndex CTFontManagerError;
 
 #if defined(__cplusplus)
 }

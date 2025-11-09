@@ -73,6 +73,7 @@ AVF_EXPORT NSString *const AVAssetExportPreset640x480			NS_AVAILABLE(10_7, 4_0);
 AVF_EXPORT NSString *const AVAssetExportPreset960x540   		NS_AVAILABLE(10_7, 4_0);
 AVF_EXPORT NSString *const AVAssetExportPreset1280x720  		NS_AVAILABLE(10_7, 4_0);
 AVF_EXPORT NSString *const AVAssetExportPreset1920x1080			NS_AVAILABLE(10_7, 5_0);
+AVF_EXPORT NSString *const AVAssetExportPreset3840x2160			NS_AVAILABLE(10_10, NA);
 
 /*  This export option will produce an audio-only .m4a file with appropriate iTunes gapless playback data */
 AVF_EXPORT NSString *const AVAssetExportPresetAppleM4A			NS_AVAILABLE(10_7, 4_0);
@@ -108,7 +109,7 @@ AVF_EXPORT NSString *const AVAssetExportPresetAppleProRes422LPCM	NS_AVAILABLE(10
 @class AVMetadataItemFilter;
 @protocol AVVideoCompositing;
 
-enum {
+typedef NS_ENUM(NSInteger, AVAssetExportSessionStatus) {
 	AVAssetExportSessionStatusUnknown,
     AVAssetExportSessionStatusWaiting,
     AVAssetExportSessionStatusExporting,
@@ -116,7 +117,6 @@ enum {
     AVAssetExportSessionStatusFailed,
     AVAssetExportSessionStatusCancelled
 };
-typedef NSInteger AVAssetExportSessionStatus;
 
 NS_CLASS_AVAILABLE(10_7, 4_0)
 @interface AVAssetExportSession : NSObject
@@ -171,6 +171,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 	@param		asset			An AVAsset object that is intended to be exported.
 	@param		presetName		An NSString specifying the name of the preset template for the export.
 	@result						An instance of AVAssetExportSession.
+	@discussion					If the specified asset belongs to a mutable subclass of AVAsset, AVMutableComposition or AVMutableMovie, the results of any export-related operation are undefined if you mutate the asset after the operation commences. These operations include but are not limited to: 1) testing the compatibility of export presets with the asset, 2) calculating the maximum duration or estimated length of the output file, and 3) the export operation itself.
 */
 + (AVAssetExportSession *)exportSessionWithAsset:(AVAsset *)asset presetName:(NSString *)presetName NS_AVAILABLE(10_7, 4_1);
 
@@ -180,8 +181,9 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 	@param		asset			An AVAsset object that is intended to be exported.
 	@param		presetName		An NSString specifying the name of the preset template for the export.
 	@result						Returns the initialized AVAssetExportSession.
+	@discussion					If the specified asset belongs to a mutable subclass of AVAsset, AVMutableComposition or AVMutableMovie, the results of any export-related operation are undefined if you mutate the asset after the operation commences. These operations include but are not limited to: 1) testing the compatibility of export presets with the asset, 2) calculating the maximum duration or estimated length of the output file, and 3) the export operation itself.
 */
-- (id)initWithAsset:(AVAsset *)asset presetName:(NSString *)presetName;
+- (instancetype)initWithAsset:(AVAsset *)asset presetName:(NSString *)presetName;
 
 
 /* These properties are key-value observable unless documented otherwise */
@@ -257,6 +259,34 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 
 /* indicates the movie should be optimized for network use */
 @property (nonatomic) BOOL shouldOptimizeForNetworkUse;
+
+/*!
+	@property	canPerformMultiplePassesOverSourceMediaData
+	@abstract
+		Determines whether the export session can perform multiple passes over the source media to achieve better results.
+ 
+	@discussion
+		When the value for this property is YES, the export session can produce higher quality results at the expense of longer export times.  Setting this property to YES may also require the export session to write temporary data to disk during the export.  To control the location of temporary data, use the property directoryForTemporaryFiles.
+ 
+		The default value is NO.  Not all export session configurations can benefit from performing multiple passes over the source media.  In these cases, setting this property to YES has no effect.
+
+		This property cannot be set after the export has started.
+*/
+@property (nonatomic) BOOL canPerformMultiplePassesOverSourceMediaData NS_AVAILABLE(10_10, 8_0);
+
+/*!
+	@property directoryForTemporaryFiles
+	@abstract 
+		Specifies a directory that is suitable for containing temporary files generated during the export process
+ 
+	@discussion
+		AVAssetExportSession may need to write temporary files when configured in certain ways, such as when canPerformMultiplePassesOverSourceMediaData is set to YES.  This property can be used to control where in the filesystem those temporary files are created.  All temporary files will be deleted when the export is completed, is canceled, or fails.
+ 
+		When the value of this property is nil, the export session will choose a suitable location when writing temporary files.  The default value is nil.
+	
+		This property cannot be set after the export has started.  The export will fail if the URL points to a location that is not a directory, does not exist, is not on the local file system, or if a file cannot be created in this directory (for example, due to insufficient permissions or sandboxing restrictions).
+*/
+@property (nonatomic, copy) NSURL *directoryForTemporaryFiles NS_AVAILABLE(10_10, 8_0);
 
 /*!
 	@method						determineCompatibleFileTypesWithCompletionHandler:

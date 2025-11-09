@@ -1,7 +1,7 @@
 /*
         NSMenuItemCell.h
         Application Kit
-        Copyright (c) 1997-2013, Apple Inc.
+        Copyright (c) 1997-2014, Apple Inc.
         All rights reserved.
 */
 
@@ -34,25 +34,22 @@
     } _micFlags;
 }
 
-- (void)setMenuItem:(NSMenuItem *)item;
-- (NSMenuItem *)menuItem;
+@property (strong) NSMenuItem *menuItem;
 
 #if ! __LP64__
 - (void)setMenuView:(NSMenuView *)menuView;
 - (NSMenuView *)menuView;
 #endif
 
-- (void)setNeedsSizing:(BOOL)flag;
-- (BOOL)needsSizing;
+@property BOOL needsSizing;
 - (void)calcSize;
 
-- (void)setNeedsDisplay:(BOOL)flag;
-- (BOOL)needsDisplay;
+@property BOOL needsDisplay;
 
-- (CGFloat)stateImageWidth;
-- (CGFloat)imageWidth;
-- (CGFloat)titleWidth;
-- (CGFloat)keyEquivalentWidth;
+@property (readonly) CGFloat stateImageWidth;
+@property (readonly) CGFloat imageWidth;
+@property (readonly) CGFloat titleWidth;
+@property (readonly) CGFloat keyEquivalentWidth;
 
 - (NSRect)stateImageRectForBounds:(NSRect)cellFrame;
 - (NSRect)titleRectForBounds:(NSRect)cellFrame;
@@ -65,6 +62,6 @@
 - (void)drawKeyEquivalentWithFrame:(NSRect)cellFrame inView:(NSView *)controlView;
 - (void)drawBorderAndBackgroundWithFrame:(NSRect)cellFrame inView:(NSView *)controlView;
 
-- (NSInteger)tag;
+@property (readonly) NSInteger tag;
 
 @end

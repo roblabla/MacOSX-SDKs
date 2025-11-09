@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2002-2013 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -119,7 +119,71 @@ enum {
 
 extern const fenv_t _FE_DFL_ENV;
 #define FE_DFL_ENV &_FE_DFL_ENV
+    
+/******************************************************************************
+ *  ARM64 definitions of architecture-specific types and macros.              *
+ ******************************************************************************/
+    
+#elif defined __arm64__
+    
+typedef struct {
+    unsigned long long      __fpsr;
+    unsigned long long      __fpcr;
+} fenv_t;
+    
+typedef unsigned short fexcept_t;
+    
+#define FE_INEXACT          0x0010
+#define FE_UNDERFLOW        0x0008
+#define FE_OVERFLOW         0x0004
+#define FE_DIVBYZERO        0x0002
+#define FE_INVALID          0x0001
+/*  FE_FLUSHTOZERO
+    An ARM-specific flag that is raised when a denormal is flushed to zero.
+    This is also called the "input denormal exception"                        */
+#define FE_FLUSHTOZERO      0x0080 
+#define FE_ALL_EXCEPT       0x009f
+    
+#define FE_TONEAREST        0x00000000
+#define FE_UPWARD           0x00400000
+#define FE_DOWNWARD         0x00800000
+#define FE_TOWARDZERO       0x00C00000
+    
+/*  Masks for values that may be controlled in the FPCR.  Modifying any other
+    bits invokes undefined behavior.                                          */
+enum {
+    __fpcr_trap_invalid   = 0x00000100,
+    __fpcr_trap_divbyzero = 0x00000200,
+    __fpcr_trap_overflow  = 0x00000400,
+    __fpcr_trap_underflow = 0x00000800,
+    __fpcr_trap_inexact   = 0x00001000,
+    __fpcr_trap_denormal  = 0x00008000,
+    __fpcr_flush_to_zero  = 0x01000000,
+};
 
+/*  Mask for the QC bit of the FPSR                                           */
+enum { __fpsr_saturation  = 0x08000000 };
+    
+extern const fenv_t _FE_DFL_ENV;
+#define FE_DFL_ENV &_FE_DFL_ENV
+
+/*  FE_DFL_DISABLE_DENORMS_ENV
+ 
+    A pointer to a fenv_t object with the default floating-point state modified
+    to set the FZ (flush to zero) bit in the FPCR.  When using this environment
+    denormals encountered by floating-point calculations will be treated as
+    zero.  Denormal results of floating-point operations will also be treated
+    as zero.  This calculation mode is not IEEE-754 compliant, but it may
+    prevent lengthy stalls that occur in code that encounters denormals.  It is
+    suggested that you do not use this mode unless you have established that
+    denormals are the source of measurable performance problems.
+ 
+    Note that the math library, and other system libraries, are not guaranteed
+    to do the right thing if called in this mode.  Edge cases may be incorrect.
+    Use at your own risk.                                                     */
+extern const fenv_t _FE_DFL_DISABLE_DENORMS_ENV;
+#define FE_DFL_DISABLE_DENORMS_ENV &_FE_DFL_DISABLE_DENORMS_ENV
+    
 /******************************************************************************
  *  x86 definitions of architecture-specific types and macros.                *
  ******************************************************************************/

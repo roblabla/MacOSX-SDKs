@@ -71,6 +71,8 @@
 #include <mach/message.h>
 #include <mach/port.h>
 
+
+
 /*
  * IO buffer - out-of-line array of characters.
  */
@@ -103,29 +105,12 @@ typedef uint64_t		io_scalar_inband64_t[16];
 typedef uint64_t		io_async_ref64_t[8];
 #endif // __LP64__
 
-#ifdef MACH_KERNEL
-
-typedef struct IOObject * io_object_t;
-typedef io_object_t io_connect_t;
-
-extern void iokit_remove_reference( io_object_t	obj );
-
-extern io_object_t iokit_lookup_object_port( ipc_port_t port );
-extern io_connect_t iokit_lookup_connect_port( ipc_port_t port );
-
-extern ipc_port_t iokit_make_object_port( io_object_t obj );
-extern ipc_port_t iokit_make_connect_port( io_connect_t obj );
-
-extern boolean_t iokit_notify( mach_msg_header_t *msg );
-
-#else
 
 #ifndef	__IOKIT_PORTS_DEFINED__
 #define __IOKIT_PORTS_DEFINED__
 typedef mach_port_t	io_object_t;
 #endif	/* __IOKIT_PORTS_DEFINED__ */
 
-#endif  /* MACH_KERNEL */
 
 #endif  /* IOKIT */
 

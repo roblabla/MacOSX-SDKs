@@ -1,5 +1,5 @@
 /*	NSXMLElement.h
-	Copyright (c) 2004-2013, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSXMLNode.h>
@@ -29,25 +29,27 @@
     @method initWithName:
     @abstract Returns an element <tt>&lt;name>&lt;/name></tt>.
 */
-- (id)initWithName:(NSString *)name;
+- (instancetype)initWithName:(NSString *)name;
 
 /*!
     @method initWithName:URI:
     @abstract Returns an element whose full QName is specified.
 */
-- (id)initWithName:(NSString *)name URI:(NSString *)URI; //primitive
+- (instancetype)initWithName:(NSString *)name URI:(NSString *)URI NS_DESIGNATED_INITIALIZER; //primitive
 
 /*!
     @method initWithName:stringValue:
     @abstract Returns an element with a single text node child <tt>&lt;name>string&lt;/name></tt>.
 */
-- (id)initWithName:(NSString *)name stringValue:(NSString *)string;
+- (instancetype)initWithName:(NSString *)name stringValue:(NSString *)string;
 
 /*!
     @method initWithXMLString:error:
     @abstract Returns an element created from a string. Parse errors are collected in <tt>error</tt>.
 */
-- (id)initWithXMLString:(NSString *)string error:(NSError **)error;
+- (instancetype)initWithXMLString:(NSString *)string error:(NSError **)error NS_DESIGNATED_INITIALIZER;
+
+- (instancetype)initWithKind:(NSXMLNodeKind)kind options:(NSUInteger)options;
 
 #if 0
 #pragma mark --- Elements by name ---
@@ -82,22 +84,16 @@
 - (void)removeAttributeForName:(NSString *)name; //primitive
 
 /*!
-    @method setAttributes:
+    @method setAttributes
     @abstract Set the attributes. In the case of duplicate names, the first attribute with the name is used.
 */
-- (void)setAttributes:(NSArray *)attributes; //primitive
+@property (copy) NSArray *attributes;
 
 /*!
  @method setAttributesWithDictionary:
  @abstract Set the attributes based on a name-value dictionary.
  */
 - (void)setAttributesWithDictionary:(NSDictionary *)attributes;
-
-/*!
-    @method attributes
-    @abstract The attributes.
-*/
-- (NSArray *)attributes; //primitive
 
 /*!
     @method attributeForName:
@@ -128,16 +124,10 @@
 - (void)removeNamespaceForPrefix:(NSString *)name; //primitive
 
 /*!
-    @method setNamespaces:
+    @method namespaces
     @abstract Set the namespaces. In the case of duplicate names, the first namespace with the name is used.
 */
-- (void)setNamespaces:(NSArray *)namespaces; //primitive
-
-/*!
-    @method setNamespaces:
-    @abstract The namespaces.
-*/
-- (NSArray *)namespaces; //primitive
+@property (copy) NSArray *namespaces; //primitive
 
 /*!
     @method namespaceForPrefix:

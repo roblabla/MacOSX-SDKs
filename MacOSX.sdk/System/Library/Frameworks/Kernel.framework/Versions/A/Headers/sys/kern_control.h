@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2004, 2012 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2004, 2012-2014 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -135,13 +135,14 @@ struct ctl_info {
 	@field sc_reserved Reserved, must be set to zero.
 */
 struct sockaddr_ctl {
-    u_char		sc_len;		/* depends on size of bundle ID string */
-    u_char		sc_family;	/* AF_SYSTEM */
+    u_char	sc_len;		/* depends on size of bundle ID string */
+    u_char	sc_family;	/* AF_SYSTEM */
     u_int16_t 	ss_sysaddr;	/* AF_SYS_KERNCONTROL */
     u_int32_t	sc_id; 		/* Controller unique identifier  */
     u_int32_t 	sc_unit;	/* Developer private unit number */
     u_int32_t 	sc_reserved[5];
 };
+
 
 
 #include <sys/kpi_mbuf.h>
@@ -192,12 +193,14 @@ typedef void * kern_ctl_ref;
     	the client after all of the data has been enqueued.
 */
 #define CTL_DATA_NOWAKEUP	0x1
+
 /*!
 	@defined CTL_DATA_EOR
     @discussion The CTL_DATA_EOR flag can be used for the enqueue
     	data and enqueue mbuf functions to mark the end of a record.
 */
 #define CTL_DATA_EOR		0x2
+
 
 __BEGIN_DECLS
 
@@ -434,6 +437,22 @@ ctl_enqueuembuf(kern_ctl_ref kctlref, u_int32_t unit, mbuf_t m, u_int32_t flags)
  */
 errno_t 
 ctl_getenqueuespace(kern_ctl_ref kctlref, u_int32_t unit, size_t *space);
+
+/*!
+ @function ctl_getenqueuereadable
+ @discussion Retrieve the difference between enqueued bytes and
+	low-water mark for the socket receive buffer.
+ @param kctlref The control reference of the kernel control.
+ @param unit The unit number of the kernel control instance.
+ @param u_int32_t The address at which to return the current difference
+	between the low-water mark for the socket and the number of bytes
+	enqueued. 0 indicates that the socket is readable by the client
+	(the number of bytes in the buffer is above the low-water mark).
+ @result 0 - Success; the difference is returned to caller.
+ EINVAL - Invalid parameters.
+ */
+errno_t
+ctl_getenqueuereadable(kern_ctl_ref kctlref, u_int32_t unit, u_int32_t *difference);
 
 
 __END_DECLS

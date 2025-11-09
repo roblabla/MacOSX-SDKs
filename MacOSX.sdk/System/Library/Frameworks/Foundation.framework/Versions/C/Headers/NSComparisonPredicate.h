@@ -1,5 +1,5 @@
 /*	NSComparisonPredicate.h
-	Copyright (c) 2004-2013, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSPredicate.h>
@@ -51,18 +51,18 @@ NS_CLASS_AVAILABLE(10_4, 3_0)
     NSExpression *_rhs;
 }
 
-+ (NSPredicate *)predicateWithLeftExpression:(NSExpression *)lhs rightExpression:(NSExpression *)rhs modifier:(NSComparisonPredicateModifier)modifier type:(NSPredicateOperatorType)type options:(NSComparisonPredicateOptions)options;
-+ (NSPredicate *)predicateWithLeftExpression:(NSExpression *)lhs rightExpression:(NSExpression *)rhs customSelector:(SEL)selector;
++ (NSComparisonPredicate *)predicateWithLeftExpression:(NSExpression *)lhs rightExpression:(NSExpression *)rhs modifier:(NSComparisonPredicateModifier)modifier type:(NSPredicateOperatorType)type options:(NSComparisonPredicateOptions)options;
++ (NSComparisonPredicate *)predicateWithLeftExpression:(NSExpression *)lhs rightExpression:(NSExpression *)rhs customSelector:(SEL)selector;
 
-- (id)initWithLeftExpression:(NSExpression *)lhs rightExpression:(NSExpression *)rhs modifier:(NSComparisonPredicateModifier)modifier type:(NSPredicateOperatorType)type options:(NSComparisonPredicateOptions)options;
-- (id)initWithLeftExpression:(NSExpression *)lhs rightExpression:(NSExpression *)rhs customSelector:(SEL)selector;
+- (instancetype)initWithLeftExpression:(NSExpression *)lhs rightExpression:(NSExpression *)rhs modifier:(NSComparisonPredicateModifier)modifier type:(NSPredicateOperatorType)type options:(NSComparisonPredicateOptions)options;
+- (instancetype)initWithLeftExpression:(NSExpression *)lhs rightExpression:(NSExpression *)rhs customSelector:(SEL)selector;
 
-- (NSPredicateOperatorType)predicateOperatorType;
-- (NSComparisonPredicateModifier)comparisonPredicateModifier;
-- (NSExpression *)leftExpression;
-- (NSExpression *)rightExpression;
-- (SEL)customSelector;
-- (NSComparisonPredicateOptions)options;
+@property (readonly) NSPredicateOperatorType predicateOperatorType;
+@property (readonly) NSComparisonPredicateModifier comparisonPredicateModifier;
+@property (readonly, retain) NSExpression *leftExpression;
+@property (readonly, retain) NSExpression *rightExpression;
+@property (readonly) SEL customSelector;
+@property (readonly) NSComparisonPredicateOptions options;
 
 @end
 

@@ -77,6 +77,7 @@
 #include <sys/param.h>
 #include <sys/event.h>
 #include <sys/kernel_types.h>
+#include <uuid/uuid.h>
 #include <mach/boolean.h>
 
 
@@ -150,6 +151,7 @@ pid_t proc_selfpgrpid(void);
  @return pgrpid for "p".
  */
 pid_t proc_pgrpid(proc_t);
+
 
 
 

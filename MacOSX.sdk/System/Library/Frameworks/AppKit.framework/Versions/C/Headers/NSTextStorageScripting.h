@@ -1,7 +1,7 @@
 /*
         NSTextStorageScripting.h
         AppKit Framework
-        Copyright (c) 1997-2013, Apple Inc.
+        Copyright (c) 1997-2014, Apple Inc.
         All rights reserved.
 */
 
@@ -9,22 +9,16 @@
 
 @interface NSTextStorage (Scripting)
 
-- (NSArray *)attributeRuns;
-- (void)setAttributeRuns:(NSArray *)attributeRuns;
+@property (copy) NSArray *attributeRuns;
 
-- (NSArray *)paragraphs;
-- (void)setParagraphs:(NSArray *)paragraphs;
+@property (copy) NSArray *paragraphs;
 
-- (NSArray *)words;
-- (void)setWords:(NSArray *)words;
+@property (copy) NSArray *words;
 
-- (NSArray *)characters;
-- (void)setCharacters:(NSArray *)characters;
+@property (copy) NSArray *characters;
 
-- (NSFont *)font;
-- (void)setFont:(NSFont *)font;
+@property (strong) NSFont *font;
 
-- (NSColor *)foregroundColor;
-- (void)setForegroundColor:(NSColor *)color;
+@property (strong) NSColor *foregroundColor;
 
 @end

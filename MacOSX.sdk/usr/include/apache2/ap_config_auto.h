@@ -1,11 +1,11 @@
 /* include/ap_config_auto.h.  Generated from ap_config_auto.h.in by configure.  */
 /* include/ap_config_auto.h.in.  Generated from configure.in by autoheader.  */
 
-/* Location of the source for the current MPM */
-#define APACHE_MPM_DIR "server/mpm/prefork"
-
 /* SuExec root directory */
 /* #undef AP_DOC_ROOT */
+
+/* Enable DTrace probes */
+/* #undef AP_ENABLE_DTRACE */
 
 /* Allow modules to run hook after a fatal exception */
 /* #undef AP_ENABLE_EXCEPTION_HOOK */
@@ -15,6 +15,9 @@
 
 /* Minimum allowed GID */
 /* #undef AP_GID_MIN */
+
+/* Enable the APR hook probes capability, reading from ap_hook_probes.h */
+/* #undef AP_HOOK_PROBES_ENABLED */
 
 /* User allowed to call SuExec */
 /* #undef AP_HTTPD_USER */
@@ -53,20 +56,35 @@
 /* Define if distcache support is enabled */
 /* #undef HAVE_DISTCACHE */
 
+/* Define to 1 if you have the <distcache/dc_client.h> header file. */
+/* #undef HAVE_DISTCACHE_DC_CLIENT_H */
+
 /* Define to 1 if you have the `ENGINE_init' function. */
 #define HAVE_ENGINE_INIT 1
 
 /* Define to 1 if you have the `ENGINE_load_builtin_engines' function. */
 #define HAVE_ENGINE_LOAD_BUILTIN_ENGINES 1
 
+/* Define to 1 if you have the `epoll_create' function. */
+/* #undef HAVE_EPOLL_CREATE */
+
+/* Define to 1 if you have the `fopen64' function. */
+/* #undef HAVE_FOPEN64 */
+
 /* Define to 1 if you have the `getgrnam' function. */
 #define HAVE_GETGRNAM 1
+
+/* Define to 1 if you have the `getloadavg' function. */
+#define HAVE_GETLOADAVG 1
 
 /* Define to 1 if you have the `getpgid' function. */
 #define HAVE_GETPGID 1
 
 /* Define to 1 if you have the `getpwnam' function. */
 #define HAVE_GETPWNAM 1
+
+/* Define if you have gettid() */
+/* #undef HAVE_GETTID */
 
 /* Define if struct tm has a tm_gmtoff field */
 #define HAVE_GMTOFF 1
@@ -83,26 +101,29 @@
 /* Define to 1 if you have the `killpg' function. */
 #define HAVE_KILLPG 1
 
+/* Define to 1 if you have the `kqueue' function. */
+#define HAVE_KQUEUE 1
+
 /* Define to 1 if you have the <limits.h> header file. */
 #define HAVE_LIMITS_H 1
 
 /* Define to 1 if you have the <memory.h> header file. */
 #define HAVE_MEMORY_H 1
 
-/* Define if SSL is supported using OpenSSL */
+/* Define if OpenSSL is available */
 #define HAVE_OPENSSL 1
 
 /* Define to 1 if you have the <openssl/engine.h> header file. */
 #define HAVE_OPENSSL_ENGINE_H 1
 
-/* Define to 1 if you have the <openssl/opensslv.h> header file. */
-#define HAVE_OPENSSL_OPENSSLV_H 1
-
-/* Define to 1 if you have the <openssl/ssl.h> header file. */
-#define HAVE_OPENSSL_SSL_H 1
+/* Define to 1 if you have the `port_create' function. */
+/* #undef HAVE_PORT_CREATE */
 
 /* Define to 1 if you have the `prctl' function. */
 /* #undef HAVE_PRCTL */
+
+/* Define to 1 if you have the <priv.h> header file. */
+/* #undef HAVE_PRIV_H */
 
 /* Define to 1 if you have the `pthread_kill' function. */
 /* #undef HAVE_PTHREAD_KILL */
@@ -113,26 +134,11 @@
 /* Define to 1 if you have the `setsid' function. */
 #define HAVE_SETSID 1
 
-/* Define if SSL is supported using SSL-C */
-/* #undef HAVE_SSLC */
-
-/* Define to 1 if you have the <sslc.h> header file. */
-/* #undef HAVE_SSLC_H */
-
-/* Define to 1 if you have the `SSLC_library_version' function. */
-/* #undef HAVE_SSLC_LIBRARY_VERSION */
-
 /* Define to 1 if you have the `SSLeay_version' function. */
 #define HAVE_SSLEAY_VERSION 1
 
 /* Define to 1 if you have the `SSL_CTX_new' function. */
 #define HAVE_SSL_CTX_NEW 1
-
-/* Define to 1 if you have the `SSL_set_cert_store' function. */
-/* #undef HAVE_SSL_SET_CERT_STORE */
-
-/* Define to 1 if you have the `SSL_set_state' function. */
-/* #undef HAVE_SSL_SET_STATE */
 
 /* Define to 1 if you have the <stdint.h> header file. */
 #define HAVE_STDINT_H 1
@@ -152,6 +158,9 @@
 /* Define to 1 if you have the <sys/ipc.h> header file. */
 #define HAVE_SYS_IPC_H 1
 
+/* Define to 1 if you have the <sys/loadavg.h> header file. */
+/* #undef HAVE_SYS_LOADAVG_H */
+
 /* Define to 1 if you have the <sys/prctl.h> header file. */
 /* #undef HAVE_SYS_PRCTL_H */
 
@@ -160,6 +169,9 @@
 
 /* Define to 1 if you have the <sys/resource.h> header file. */
 #define HAVE_SYS_RESOURCE_H 1
+
+/* Define to 1 if you have the <sys/sdt.h> header file. */
+#define HAVE_SYS_SDT_H 1
 
 /* Define to 1 if you have the <sys/sem.h> header file. */
 #define HAVE_SYS_SEM_H 1

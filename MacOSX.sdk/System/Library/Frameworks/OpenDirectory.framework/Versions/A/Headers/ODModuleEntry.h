@@ -60,7 +60,7 @@ NS_CLASS_AVAILABLE(10_9, NA)
  * @discussion
  * Creates a new module entry with a given name and service.
  */
-+ (id)moduleEntryWithName:(NSString *)name xpcServiceName:(NSString *)xpcServiceName NS_AVAILABLE_MAC(10_9);
++ (instancetype)moduleEntryWithName:(NSString *)name xpcServiceName:(NSString *)xpcServiceName NS_AVAILABLE_MAC(10_9);
 
 /*!
  * @method setOption:value:

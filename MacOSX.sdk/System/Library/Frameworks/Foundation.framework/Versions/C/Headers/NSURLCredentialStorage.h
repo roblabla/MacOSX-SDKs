@@ -1,6 +1,6 @@
 /*	
     NSURLCredentialStorage.h
-    Copyright (c) 2003-2013, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2014, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -11,6 +11,7 @@
 @class NSString;
 @class NSURLCredential;
 @class NSURLProtectionSpace;
+@class NSURLSessionTask;
 
 @class NSURLCredentialStorageInternal;
 
@@ -47,7 +48,7 @@
     and the values are dictionaries, in which the keys are usernames
     and the values are NSURLCredentials
 */
-- (NSDictionary *)allCredentials;
+@property (readonly, copy) NSDictionary *allCredentials;
 
 /*!
     @method setCredential:forProtectionSpace:
@@ -100,6 +101,14 @@
 */
 - (void)setDefaultCredential:(NSURLCredential *)credential forProtectionSpace:(NSURLProtectionSpace *)space;
 
+@end
+
+@interface NSURLCredentialStorage (NSURLSessionTaskAdditions)
+- (void)getCredentialsForProtectionSpace:(NSURLProtectionSpace *)protectionSpace task:(NSURLSessionTask *)task completionHandler:(void (^) (NSDictionary *credentials))completionHandler NS_AVAILABLE(10_10, 8_0);
+- (void)setCredential:(NSURLCredential *)credential forProtectionSpace:(NSURLProtectionSpace *)protectionSpace task:(NSURLSessionTask *)task NS_AVAILABLE(10_10, 8_0);
+- (void)removeCredential:(NSURLCredential *)credential forProtectionSpace:(NSURLProtectionSpace *)protectionSpace options:(NSDictionary *)options task:(NSURLSessionTask *)task NS_AVAILABLE(10_10, 8_0);
+- (void)getDefaultCredentialForProtectionSpace:(NSURLProtectionSpace *)space task:(NSURLSessionTask *)task completionHandler:(void (^) (NSURLCredential *credential))completionHandler NS_AVAILABLE(10_10, 8_0);
+- (void)setDefaultCredential:(NSURLCredential *)credential forProtectionSpace:(NSURLProtectionSpace *)protectionSpace task:(NSURLSessionTask *)task NS_AVAILABLE(10_10, 8_0);
 @end
 
 /*!

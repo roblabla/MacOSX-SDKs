@@ -1,6 +1,6 @@
 /* CoreImage - CIContext.h
 
-   Copyright (c) 2004 Apple Computer, Inc.
+   Copyright (c) 2004 Apple, Inc.
    All rights reserved. */
 
 #import <CoreImage/CIImage.h>
@@ -51,6 +51,20 @@ AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_
  * into the CG context 'ctx'. */
 + (CIContext *)contextWithCGContext:(CGContextRef)ctx
 							options:(NSDictionary *)dict;
+
+/* Not all GPUs will be driving a display. If they are offline we can still use them
+ * to do work with Core Image. This method returns the number of offline GPUs which
+ * can be used for this purpose */
++(unsigned int)offlineGPUCount AVAILABLE_MAC_OS_X_VERSION_10_10_AND_LATER;
+
+/* These two methods lets you create a CIContext based on an offline gpu index.
+ * The first method takes only the GPU index as a parameter, the second, takes
+ * an optional colorspace, options dictionary and a CGLContext which can be
+ * shared with other GL resources.
+ */
++(CIContext *)contextForOfflineGPUAtIndex:(unsigned int)index AVAILABLE_MAC_OS_X_VERSION_10_10_AND_LATER;
++(CIContext *)contextForOfflineGPUAtIndex:(unsigned int)index colorSpace:(CGColorSpaceRef)colorSpace options:(NSDictionary *)options sharedContext:(CGLContextObj)sharedContext AVAILABLE_MAC_OS_X_VERSION_10_10_AND_LATER;
+
 
 /* DEPRECATED, please use the drawImage:inRect:fromRect: instead.
  * Render the subregion 'src' of 'im' to point 'p' in the context's destination. */

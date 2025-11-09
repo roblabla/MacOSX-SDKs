@@ -820,8 +820,7 @@ typedef NS_ENUM(NSInteger, AVCaptureExposureMode) {
     corner of the image, while a value of (1,1) indicates that it should adjust exposure based on the bottom right corner. The
     default value is (0.5,0.5). -setExposurePointOfInterest: throws an NSInvalidArgumentException if isExposurePointOfInterestSupported 
     returns NO.  -setExposurePointOfInterest: throws an NSGenericException if called without first obtaining exclusive access 
-    to the receiver using lockForConfiguration:.  Clients can observe automatic changes to the receiver's exposureMode 
-    by key value observing this property.  Note that setting exposurePointOfInterest alone does not initiate an exposure 
+    to the receiver using lockForConfiguration:.  Note that setting exposurePointOfInterest alone does not initiate an exposure
     operation.  After setting exposurePointOfInterest, call -setExposureMode: to apply the new point of interest.
 */
 @property(nonatomic) CGPoint exposurePointOfInterest;

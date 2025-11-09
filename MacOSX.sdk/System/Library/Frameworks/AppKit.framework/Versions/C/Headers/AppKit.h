@@ -1,7 +1,7 @@
 /*
 	AppKit.h
 	Application Kit
-	Copyright (c) 1994-2013, Apple Inc.
+	Copyright (c) 1994-2014, Apple Inc.
 	All rights reserved.
 
 	This file is included by all AppKit application source files for easy building.  Using this file is preferred over importing individual files because it will use a precompiled version.
@@ -61,6 +61,12 @@
 #import <AppKit/NSHelpManager.h>
 #import <AppKit/NSGradient.h>
 #import <AppKit/NSGraphics.h>
+#import <AppKit/NSGestureRecognizer.h>
+#import <AppKit/NSClickGestureRecognizer.h>
+#import <AppKit/NSPanGestureRecognizer.h>
+#import <AppKit/NSPressGestureRecognizer.h>
+#import <AppKit/NSMagnificationGestureRecognizer.h>
+#import <AppKit/NSRotationGestureRecognizer.h>
 #import <AppKit/NSImage.h>
 #import <AppKit/NSImageCell.h>
 #import <AppKit/NSImageRep.h>
@@ -73,6 +79,7 @@
 #import <AppKit/NSSpeechSynthesizer.h>
 #import <AppKit/NSSpellChecker.h>
 #import <AppKit/NSSplitView.h>
+#import <AppKit/NSSplitViewController.h>
 #import <AppKit/NSOpenPanel.h>
 #import <AppKit/NSPageLayout.h>
 #import <AppKit/NSPanel.h>
@@ -104,6 +111,7 @@
 #import <AppKit/NSTokenField.h>
 #import <AppKit/NSTokenFieldCell.h>
 #import <AppKit/NSTrackingArea.h>
+#import <AppKit/NSUserActivity.h>
 #import <AppKit/NSView.h>
 #import <AppKit/NSViewController.h>
 #import <AppKit/NSWindow.h>
@@ -136,6 +144,7 @@
 #import <AppKit/NSNibDeclarations.h>
 #import <AppKit/NSProgressIndicator.h>
 #import <AppKit/NSTabView.h>
+#import <AppKit/NSTabViewController.h>
 #import <AppKit/NSTabViewItem.h>
 #import <AppKit/NSMenuView.h>
 #import <AppKit/NSMenuItemCell.h>
@@ -144,6 +153,7 @@
 #import <AppKit/NSBezierPath.h>
 #import <AppKit/NSPICTImageRep.h>
 #import <AppKit/NSStatusBar.h>
+#import <AppKit/NSStatusBarButton.h>
 #import <AppKit/NSStatusItem.h>
 #import <AppKit/NSSound.h>
 #import <AppKit/NSMovie.h>
@@ -191,6 +201,7 @@
 #import <AppKit/NSPathCell.h>
 #import <AppKit/NSPathControl.h>
 #import <AppKit/NSPathComponentCell.h>
+#import <AppKit/NSPathControlItem.h>
 #import <AppKit/NSPageController.h>
 #import <AppKit/NSPopover.h>
 #import <AppKit/NSCollectionView.h>
@@ -200,3 +211,8 @@
 #import <AppKit/NSTouch.h>
 #import <AppKit/NSWindowRestoration.h>
 #import <AppKit/NSTextAlternatives.h>
+#import <AppKit/NSStoryboard.h>
+#import <AppKit/NSStoryboardSegue.h>
+#import <AppKit/NSVisualEffectView.h>
+#import <AppKit/NSItemProvider.h>
+#import <AppKit/NSTitlebarAccessoryViewController.h>

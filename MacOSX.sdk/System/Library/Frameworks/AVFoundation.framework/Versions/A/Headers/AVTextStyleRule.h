@@ -72,7 +72,7 @@ NS_CLASS_AVAILABLE(10_9, 6_0)
  @result		An instance of AVTextStyleRule
  @discussion	Equivalent to invoking -initWithTextMarkupAttributes:textSelector: with a value of nil for textSelector.
 */
-- (id)initWithTextMarkupAttributes:(NSDictionary *)textMarkupAttributes;
+- (instancetype)initWithTextMarkupAttributes:(NSDictionary *)textMarkupAttributes;
 
 /*!
  @method		initWithTextMarkupAttributes:textSelector:
@@ -83,7 +83,7 @@ NS_CLASS_AVAILABLE(10_9, 6_0)
 				An identifier for the range or ranges of text to which the attributes should be applied. Eligible identifiers are determined by the format and content of the legible media. A value of nil indicates that the textMarkupAttributes should be applied as default styles for all text unless overridden by content markup or other applicable text selectors.
  @result		An instance of AVTextStyleRule
 */
-- (id)initWithTextMarkupAttributes:(NSDictionary *)textMarkupAttributes textSelector:(NSString *)textSelector;
+- (instancetype)initWithTextMarkupAttributes:(NSDictionary *)textMarkupAttributes textSelector:(NSString *)textSelector;
 
 /*!
  @property		textMarkupAttributes

@@ -1,10 +1,10 @@
-framework module Tcl [system] {
+framework module Tcl [extern_c] [system] {
   umbrella header "tcl.h"
 
   export *
   module * { export * }
 
-  module private {
+  module Private {
     requires excluded
     umbrella "Headers/tcl-private"
   }

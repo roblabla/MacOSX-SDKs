@@ -1,6 +1,6 @@
 /*
 	NSUserScriptTask.h
-	Copyright (c) 2012-2013, Apple Inc. All rights reserved.
+	Copyright (c) 2012-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -29,14 +29,13 @@ NS_CLASS_AVAILABLE(10_8, NA)
 }
 
 // Initialize given a URL for a script file.  The returned object will be of one of the specific sub-classes below, or nil if the file does not appear to match any of the known types.  (If used from a sub-class, the result will be of that class, or nil.)
-- (id)initWithURL:(NSURL *)url error:(NSError **)error;
-- (NSURL *)scriptURL;
+- (instancetype)initWithURL:(NSURL *)url error:(NSError **)error NS_DESIGNATED_INITIALIZER;
+
+@property (readonly, copy) NSURL *scriptURL;
 
 // Execute the script with no input and ignoring any result.  This and the other "execute" methods below may be called at most once on any given instance.  If the script completed normally, the completion handler's "error" parameter will be nil.
-#if NS_BLOCKS_AVAILABLE
 typedef void (^NSUserScriptTaskCompletionHandler)(NSError *error);
 - (void)executeWithCompletionHandler:(NSUserScriptTaskCompletionHandler)handler;
-#endif
 
 @end
 
@@ -52,10 +51,9 @@ NS_CLASS_AVAILABLE(10_8, NA)
 @property (retain) NSFileHandle *standardError;
 
 // Execute the file with the given arguments.  "arguments" is an array of NSStrings.  The arguments do not undergo shell expansion, so you do not need to do special quoting, and shell variables are not resolved.
-#if NS_BLOCKS_AVAILABLE
 typedef void (^NSUserUnixTaskCompletionHandler)(NSError *error);
 - (void)executeWithArguments:(NSArray *)arguments completionHandler:(NSUserUnixTaskCompletionHandler)handler;
-#endif
+
 @end
 
 
@@ -68,10 +66,8 @@ NS_CLASS_AVAILABLE(10_8, NA)
 }
 
 // Execute the AppleScript script by sending it the given Apple event.  Pass nil to execute the script's default "run" handler.
-#if NS_BLOCKS_AVAILABLE
 typedef void (^NSUserAppleScriptTaskCompletionHandler)(NSAppleEventDescriptor *result, NSError *error);
 - (void)executeWithAppleEvent:(NSAppleEventDescriptor *)event completionHandler:(NSUserAppleScriptTaskCompletionHandler)handler;
-#endif
 
 @end
 
@@ -88,8 +84,7 @@ NS_CLASS_AVAILABLE(10_8, NA)
 @property (copy) NSDictionary *variables;
 
 // Execute the Automator workflow, passing it the given input.
-#if NS_BLOCKS_AVAILABLE
 typedef void (^NSUserAutomatorTaskCompletionHandler)(id result, NSError *error);
 - (void)executeWithInput:(id <NSSecureCoding>)input completionHandler:(NSUserAutomatorTaskCompletionHandler)handler;
-#endif
+
 @end

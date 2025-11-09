@@ -1,5 +1,5 @@
 /*	NSExpression.h
-	Copyright (c) 2004-2013, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -22,11 +22,8 @@ typedef NS_ENUM(NSUInteger, NSExpressionType) {
     NSMinusSetExpressionType NS_ENUM_AVAILABLE(10_5, 3_0), // Expression that returns the result of doing a minusSet: on two expressions that evaluate to flat collections (arrays or sets)
     NSSubqueryExpressionType NS_ENUM_AVAILABLE(10_5, 3_0) = 13,
     NSAggregateExpressionType NS_ENUM_AVAILABLE(10_5, 3_0) = 14,
-    NSAnyKeyExpressionType NS_ENUM_AVAILABLE(10_9, 7_0) = 15
-#if NS_BLOCKS_AVAILABLE
-    ,
+    NSAnyKeyExpressionType NS_ENUM_AVAILABLE(10_9, 7_0) = 15,
     NSBlockExpressionType = 19
-#endif /* NS_BLOCKS_AVAILABLE */
 };
 
 NS_CLASS_AVAILABLE(10_4, 3_0)
@@ -99,29 +96,25 @@ NS_CLASS_AVAILABLE(10_4, 3_0)
 + (NSExpression *)expressionForFunction:(NSExpression *)target selectorName:(NSString *)name arguments:(NSArray *)parameters NS_AVAILABLE(10_5, 3_0);    // Expression that invokes the selector on target with parameters. Will throw at runtime if target does not implement selector or if parameters are wrong.
 + (NSExpression *)expressionForAnyKey NS_AVAILABLE(10_9, 7_0);
 
-#if NS_BLOCKS_AVAILABLE
 + (NSExpression *)expressionForBlock:(id (^)(id evaluatedObject, NSArray *expressions, NSMutableDictionary *context))block arguments:(NSArray *)arguments NS_AVAILABLE(10_6, 4_0); // Expression that invokes the block with the parameters; note that block expressions are not encodable or representable as parseable strings.
-#endif
 
-- (id)initWithExpressionType:(NSExpressionType)type;    // designated initializer
+- (instancetype)initWithExpressionType:(NSExpressionType)type;    // designated initializer
 
 // accessors for individual parameters - raise if not applicable
-- (NSExpressionType)expressionType;
-- (id)constantValue;
-- (NSString *)keyPath;
-- (NSString *)function;
-- (NSString *)variable;
-- (NSExpression *)operand;    // the object on which the selector will be invoked (the result of evaluating a key path or one of the defined functions)
-- (NSArray *)arguments;    // array of expressions which will be passed as parameters during invocation of the selector on the operand of a function expression
+@property (readonly) NSExpressionType expressionType;
+@property (readonly, retain) id constantValue;
+@property (readonly, copy) NSString *keyPath;
+@property (readonly, copy) NSString *function;
+@property (readonly, copy) NSString *variable;
+@property (readonly, copy) NSExpression *operand;    // the object on which the selector will be invoked (the result of evaluating a key path or one of the defined functions)
+@property (readonly, copy) NSArray *arguments;    // array of expressions which will be passed as parameters during invocation of the selector on the operand of a function expression
 
-- (id)collection NS_AVAILABLE(10_5, 3_0);
-- (NSPredicate *)predicate NS_AVAILABLE(10_5, 3_0);
-- (NSExpression *)leftExpression NS_AVAILABLE(10_5, 3_0); // expression which represents the left side of a set expression
-- (NSExpression *)rightExpression NS_AVAILABLE(10_5, 3_0); // expression which represents the right side of a set expression
+@property (readonly, retain) id collection NS_AVAILABLE(10_5, 3_0);
+@property (readonly, copy) NSPredicate *predicate NS_AVAILABLE(10_5, 3_0);
+@property (readonly, copy) NSExpression *leftExpression NS_AVAILABLE(10_5, 3_0); // expression which represents the left side of a set expression
+@property (readonly, copy) NSExpression *rightExpression NS_AVAILABLE(10_5, 3_0); // expression which represents the right side of a set expression
 
-#if NS_BLOCKS_AVAILABLE
-- (id (^)(id, NSArray *, NSMutableDictionary *))expressionBlock NS_AVAILABLE(10_6, 4_0);
-#endif /* NS_BLOCKS_AVAILABLE */
+@property (readonly, copy) id (^expressionBlock)(id, NSArray *, NSMutableDictionary *) NS_AVAILABLE(10_6, 4_0);
 
 // evaluate the expression using the object and bindings- note that context is mutable here and can be used by expressions to store temporary state for one predicate evaluation
 - (id)expressionValueWithObject:(id)object context:(NSMutableDictionary *)context;

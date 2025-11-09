@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2010 Apple Inc. All Rights Reserved.
+ * Copyright (c) 2006-2014 Apple Inc. All Rights Reserved.
  * 
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -413,6 +413,7 @@ extern const CFStringRef kSecCodeInfoRequirements;	/* Requirement */
 extern const CFStringRef kSecCodeInfoRequirementData; /* Requirement */
 extern const CFStringRef kSecCodeInfoSource;		/* generic */
 extern const CFStringRef kSecCodeInfoStatus;		/* Dynamic */
+extern const CFStringRef kSecCodeInfoTeamIdentifier; /* Signing */
 extern const CFStringRef kSecCodeInfoTime;			/* Signing */
 extern const CFStringRef kSecCodeInfoTimestamp;		/* Signing */
 extern const CFStringRef kSecCodeInfoTrust;			/* Signing */

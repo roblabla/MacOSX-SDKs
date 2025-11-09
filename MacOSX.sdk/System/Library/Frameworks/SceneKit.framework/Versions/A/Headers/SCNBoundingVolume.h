@@ -1,7 +1,7 @@
 //
 //  SCNBoundingVolume.h
 //
-//  Copyright (c) 2012-2013 Apple Inc. All rights reserved.
+//  Copyright (c) 2012-2014 Apple Inc. All rights reserved.
 //
 
 /*!
@@ -10,7 +10,7 @@
  @discussion You can currently use this protocol to get the bounding boxes of nodes and geometries.
  */
 
-@protocol SCNBoundingVolume
+@protocol SCNBoundingVolume <NSObject>
 @required
 
 /*! 
@@ -37,6 +37,6 @@
  @param max A pointer to a SCNVector3 representing the max vertex of the desired bounding box.
  @discussion Passing nil as arguments will recompute the original bounding box of the receiver.
  */
-- (void)setBoundingBoxMin:(SCNVector3 *)min max:(SCNVector3 *)max SCENEKIT_AVAILABLE(10_9, NA);
+- (void)setBoundingBoxMin:(SCNVector3 *)min max:(SCNVector3 *)max SCENEKIT_AVAILABLE(10_9, 8_0);
 
 @end

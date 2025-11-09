@@ -8,6 +8,8 @@
 #include <ImageIO/ImageIOBase.h>
 #include <CoreFoundation/CoreFoundation.h>
 
+CF_IMPLICIT_BRIDGING_ENABLED
+
 /*!
  * @header CGImageMetadata.h
  * @abstract Implements access to image metadata
@@ -53,7 +55,7 @@ typedef struct CGImageMetadata *CGMutableImageMetadataRef;
  * @function CGImageMetadataCreateMutable
  * @abstract Creates an empty CGMutableImageMetadataRef
  */
-IMAGEIO_EXTERN CGMutableImageMetadataRef CGImageMetadataCreateMutable(void) IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
+IMAGEIO_EXTERN CGMutableImageMetadataRef CGImageMetadataCreateMutable(void) IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_7_0);
 
 /*!
  * @function CGImageMetadataCreateMutableCopy
@@ -62,7 +64,7 @@ IMAGEIO_EXTERN CGMutableImageMetadataRef CGImageMetadataCreateMutable(void) IMAG
  * from CGImageSourceCopyMetadataAtIndex) you must first make a copy.
  * This function makes a deep copy of all CGImageMetadataTags and their values.
  */
-IMAGEIO_EXTERN CGMutableImageMetadataRef CGImageMetadataCreateMutableCopy(CGImageMetadataRef metadata) IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
+IMAGEIO_EXTERN CGMutableImageMetadataRef CGImageMetadataCreateMutableCopy(CGImageMetadataRef metadata) IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_7_0);
 
 // ****************************************************************************
 // CGImageMetadataTag - an individual metadata tag, encapsulating an EXIF tag, 
@@ -84,7 +86,7 @@ typedef struct CGImageMetadataTag *CGImageMetadataTagRef;
  * @abstract Gets the type identifier for the CGImageMetadataTag opaque type
  * @return the type identifier for the CGImageMetadataTagGetTypeID opaque type
  */
-IMAGEIO_EXTERN CFTypeID CGImageMetadataTagGetTypeID(void) IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
+IMAGEIO_EXTERN CFTypeID CGImageMetadataTagGetTypeID(void) IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_7_0);
 
 
 // ****************************************************************************
@@ -101,15 +103,15 @@ IMAGEIO_EXTERN CFTypeID CGImageMetadataTagGetTypeID(void) IMAGEIO_AVAILABLE_STAR
 // CGImageMetadataRegisterNamespaceForPrefix.
 
 // Public, common namespaces.
-IMAGEIO_EXTERN const CFStringRef  kCGImageMetadataNamespaceExif IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
-IMAGEIO_EXTERN const CFStringRef  kCGImageMetadataNamespaceExifAux IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
-IMAGEIO_EXTERN const CFStringRef  kCGImageMetadataNamespaceExifEX IMAGEIO_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
-IMAGEIO_EXTERN const CFStringRef  kCGImageMetadataNamespaceDublinCore IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
-IMAGEIO_EXTERN const CFStringRef  kCGImageMetadataNamespaceIPTCCore IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
-IMAGEIO_EXTERN const CFStringRef  kCGImageMetadataNamespacePhotoshop IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
-IMAGEIO_EXTERN const CFStringRef  kCGImageMetadataNamespaceTIFF IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
-IMAGEIO_EXTERN const CFStringRef  kCGImageMetadataNamespaceXMPBasic IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
-IMAGEIO_EXTERN const CFStringRef  kCGImageMetadataNamespaceXMPRights IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
+IMAGEIO_EXTERN const CFStringRef  kCGImageMetadataNamespaceExif IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_7_0);
+IMAGEIO_EXTERN const CFStringRef  kCGImageMetadataNamespaceExifAux IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_7_0);
+IMAGEIO_EXTERN const CFStringRef  kCGImageMetadataNamespaceExifEX IMAGEIO_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+IMAGEIO_EXTERN const CFStringRef  kCGImageMetadataNamespaceDublinCore IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_7_0);
+IMAGEIO_EXTERN const CFStringRef  kCGImageMetadataNamespaceIPTCCore IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_7_0);
+IMAGEIO_EXTERN const CFStringRef  kCGImageMetadataNamespacePhotoshop IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_7_0);
+IMAGEIO_EXTERN const CFStringRef  kCGImageMetadataNamespaceTIFF IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_7_0);
+IMAGEIO_EXTERN const CFStringRef  kCGImageMetadataNamespaceXMPBasic IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_7_0);
+IMAGEIO_EXTERN const CFStringRef  kCGImageMetadataNamespaceXMPRights IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_7_0);
 
 // All metadata tags must contain a prefix. For the public namespaces defined
 // above, no prefix is required - ImageIO will use appropriate defaults.  For 
@@ -119,15 +121,15 @@ IMAGEIO_EXTERN const CFStringRef  kCGImageMetadataNamespaceXMPRights IMAGEIO_AVA
 // (example - "exif:Flash").
 
 // Public, common prefixes.
-IMAGEIO_EXTERN const CFStringRef  kCGImageMetadataPrefixExif IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
-IMAGEIO_EXTERN const CFStringRef  kCGImageMetadataPrefixExifAux IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
-IMAGEIO_EXTERN const CFStringRef  kCGImageMetadataPrefixExifEX IMAGEIO_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
-IMAGEIO_EXTERN const CFStringRef  kCGImageMetadataPrefixDublinCore IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
-IMAGEIO_EXTERN const CFStringRef  kCGImageMetadataPrefixIPTCCore IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
-IMAGEIO_EXTERN const CFStringRef  kCGImageMetadataPrefixPhotoshop IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
-IMAGEIO_EXTERN const CFStringRef  kCGImageMetadataPrefixTIFF IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
-IMAGEIO_EXTERN const CFStringRef  kCGImageMetadataPrefixXMPBasic IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
-IMAGEIO_EXTERN const CFStringRef  kCGImageMetadataPrefixXMPRights IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
+IMAGEIO_EXTERN const CFStringRef  kCGImageMetadataPrefixExif IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_7_0);
+IMAGEIO_EXTERN const CFStringRef  kCGImageMetadataPrefixExifAux IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_7_0);
+IMAGEIO_EXTERN const CFStringRef  kCGImageMetadataPrefixExifEX IMAGEIO_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+IMAGEIO_EXTERN const CFStringRef  kCGImageMetadataPrefixDublinCore IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_7_0);
+IMAGEIO_EXTERN const CFStringRef  kCGImageMetadataPrefixIPTCCore IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_7_0);
+IMAGEIO_EXTERN const CFStringRef  kCGImageMetadataPrefixPhotoshop IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_7_0);
+IMAGEIO_EXTERN const CFStringRef  kCGImageMetadataPrefixTIFF IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_7_0);
+IMAGEIO_EXTERN const CFStringRef  kCGImageMetadataPrefixXMPBasic IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_7_0);
+IMAGEIO_EXTERN const CFStringRef  kCGImageMetadataPrefixXMPRights IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_7_0);
 
 // Metadata value type constants.
 /*!
@@ -207,7 +209,7 @@ CGImageMetadataTagCreate (CFStringRef xmlns,
                           CFStringRef prefix, 
                           CFStringRef name,
                           CGImageMetadataType type,
-                          CFTypeRef value) IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
+                          CFTypeRef value) IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_7_0);
 
 // ****************************************************************************
 // Getting attributes of a CGImageMetadataTag
@@ -217,19 +219,19 @@ CGImageMetadataTagCreate (CFStringRef xmlns,
  * @function CGImageMetadataTagCopyNamespace 
  * @abstract Returns a copy of the tag's namespace
  */
-IMAGEIO_EXTERN CFStringRef CGImageMetadataTagCopyNamespace(CGImageMetadataTagRef tag) IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
+IMAGEIO_EXTERN CFStringRef CGImageMetadataTagCopyNamespace(CGImageMetadataTagRef tag) IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_7_0);
 
 /*!
  * @function CGImageMetadataTagCopyPrefix 
  * @abstract Returns a copy of the tag's prefix
  */
-IMAGEIO_EXTERN CFStringRef CGImageMetadataTagCopyPrefix(CGImageMetadataTagRef tag) IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
+IMAGEIO_EXTERN CFStringRef CGImageMetadataTagCopyPrefix(CGImageMetadataTagRef tag) IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_7_0);
 
 /*!
  * @function CGImageMetadataTagCopyName 
  * @abstract Returns a copy of the tag's name
  */
-IMAGEIO_EXTERN CFStringRef CGImageMetadataTagCopyName(CGImageMetadataTagRef tag) IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
+IMAGEIO_EXTERN CFStringRef CGImageMetadataTagCopyName(CGImageMetadataTagRef tag) IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_7_0);
 
 /*!
  * @function CGImageMetadataTagCopyValue 
@@ -241,7 +243,7 @@ IMAGEIO_EXTERN CFStringRef CGImageMetadataTagCopyName(CGImageMetadataTagRef tag)
  * to create a new tag followed by CGImageMetadataSetTagWithPath, or use 
  * CGImageMetadataSetValueWithPath to mutate a metadata value. 
  */
-IMAGEIO_EXTERN CFTypeRef CGImageMetadataTagCopyValue(CGImageMetadataTagRef tag) IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
+IMAGEIO_EXTERN CFTypeRef CGImageMetadataTagCopyValue(CGImageMetadataTagRef tag) IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_7_0);
 
 /*!
  * @function CGImageMetadataTagGetType
@@ -249,7 +251,7 @@ IMAGEIO_EXTERN CFTypeRef CGImageMetadataTagCopyValue(CGImageMetadataTagRef tag) 
  * @return Returns a CGImageMetadataType constant for the CGImageMetadataTag.
  * This is primarily used to determine how to interpret the tag's value.
  */
-IMAGEIO_EXTERN CGImageMetadataType CGImageMetadataTagGetType(CGImageMetadataTagRef tag) IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
+IMAGEIO_EXTERN CGImageMetadataType CGImageMetadataTagGetType(CGImageMetadataTagRef tag) IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_7_0);
 
 /*!
  * @function CGImageMetadataTagCopyQualifiers
@@ -262,7 +264,7 @@ IMAGEIO_EXTERN CGImageMetadataType CGImageMetadataTagGetType(CGImageMetadataTagR
  * CGImageMetadataTags. Returns NULL if the tag does not have any qualifiers. 
  * The copy is shallow, the qualifiers are not deep copied.
  */
-IMAGEIO_EXTERN CFArrayRef CGImageMetadataTagCopyQualifiers(CGImageMetadataTagRef tag) IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
+IMAGEIO_EXTERN CFArrayRef CGImageMetadataTagCopyQualifiers(CGImageMetadataTagRef tag) IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_7_0);
 
 
 // ****************************************************************************
@@ -277,7 +279,7 @@ IMAGEIO_EXTERN CFArrayRef CGImageMetadataTagCopyQualifiers(CGImageMetadataTagRef
  * @return Returns an array with a shallow copy of all top-level 
  * CGImageMetadataTagRefs in a CGImageMetadataRef.
  */
-IMAGEIO_EXTERN CFArrayRef CGImageMetadataCopyTags(CGImageMetadataRef metadata) IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
+IMAGEIO_EXTERN CFArrayRef CGImageMetadataCopyTags(CGImageMetadataRef metadata) IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_7_0);
 
 /*!
  * @function CGImageMetadataCopyTagWithPath
@@ -330,7 +332,7 @@ IMAGEIO_EXTERN CFArrayRef CGImageMetadataCopyTags(CGImageMetadataRef metadata) I
  * value must be followed by a CGImageMetadataSetTagWithPath to commit the 
  * change to the metadata container.
  */
-IMAGEIO_EXTERN CGImageMetadataTagRef CGImageMetadataCopyTagWithPath(CGImageMetadataRef metadata, CGImageMetadataTagRef parent, CFStringRef path) IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
+IMAGEIO_EXTERN CGImageMetadataTagRef CGImageMetadataCopyTagWithPath(CGImageMetadataRef metadata, CGImageMetadataTagRef parent, CFStringRef path) IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_7_0);
 
 /*!
  * @function CGImageMetadataCopyStringValueWithPath
@@ -349,7 +351,7 @@ IMAGEIO_EXTERN CGImageMetadataTagRef CGImageMetadataCopyTagWithPath(CGImageMetad
  * For AlternateText tags, the element with the "x-default" language qualifier 
  * will be returned. For other types, NULL will be returned.
  */
-IMAGEIO_EXTERN CFStringRef CGImageMetadataCopyStringValueWithPath(CGImageMetadataRef metadata, CGImageMetadataTagRef parent, CFStringRef path) IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
+IMAGEIO_EXTERN CFStringRef CGImageMetadataCopyStringValueWithPath(CGImageMetadataRef metadata, CGImageMetadataTagRef parent, CFStringRef path) IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_7_0);
 
 // ****************************************************************************
 // Functions for modifying a CGMutableImageMetadataRef
@@ -367,7 +369,7 @@ IMAGEIO_EXTERN CFStringRef CGImageMetadataCopyStringValueWithPath(CGImageMetadat
  * @return Returns true if successful. Returns false and sets 'err' if an error 
  * or conflict occurs.
  */
-IMAGEIO_EXTERN bool CGImageMetadataRegisterNamespaceForPrefix(CGMutableImageMetadataRef metadata, CFStringRef xmlns, CFStringRef prefix, CFErrorRef* err) IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
+IMAGEIO_EXTERN bool CGImageMetadataRegisterNamespaceForPrefix(CGMutableImageMetadataRef metadata, CFStringRef xmlns, CFStringRef prefix, CFErrorRef* err) IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_7_0);
 
 /*!
  * @function CGImageMetadataSetTagWithPath
@@ -403,7 +405,7 @@ IMAGEIO_EXTERN bool CGImageMetadataRegisterNamespaceForPrefix(CGMutableImageMeta
  * will be retained.
  * @return Returns true if successful, false otherwise.
  */
-IMAGEIO_EXTERN bool CGImageMetadataSetTagWithPath(CGMutableImageMetadataRef metadata, CGImageMetadataTagRef parent, CFStringRef path, CGImageMetadataTagRef tag) IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
+IMAGEIO_EXTERN bool CGImageMetadataSetTagWithPath(CGMutableImageMetadataRef metadata, CGImageMetadataTagRef parent, CFStringRef path, CGImageMetadataTagRef tag) IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_7_0);
 
 /*!
  * @function CGImageMetadataSetValueWithPath
@@ -443,7 +445,7 @@ IMAGEIO_EXTERN bool CGImageMetadataSetTagWithPath(CGMutableImageMetadataRef meta
  * CGImageMetadataTagCreate @/link.
  * @return Returns true if successful, false otherwise.
  */
-IMAGEIO_EXTERN bool CGImageMetadataSetValueWithPath(CGMutableImageMetadataRef metadata, CGImageMetadataTagRef parent, CFStringRef path, CFTypeRef value) IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
+IMAGEIO_EXTERN bool CGImageMetadataSetValueWithPath(CGMutableImageMetadataRef metadata, CGImageMetadataTagRef parent, CFStringRef path, CFTypeRef value) IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_7_0);
 
 /*!
  * @function CGImageMetadataRemoveTagWithPath
@@ -463,7 +465,7 @@ IMAGEIO_EXTERN bool CGImageMetadataSetValueWithPath(CGMutableImageMetadataRef me
  */
 IMAGEIO_EXTERN bool CGImageMetadataRemoveTagWithPath(CGMutableImageMetadataRef metadata, 
                                       CGImageMetadataTagRef parent,
-                                      CFStringRef path) IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
+                                      CFStringRef path) IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_7_0);
 
 
 #ifdef __BLOCKS__
@@ -504,14 +506,14 @@ typedef bool(^CGImageMetadataTagBlock)(CFStringRef path, CGImageMetadataTagRef t
 IMAGEIO_EXTERN void CGImageMetadataEnumerateTagsUsingBlock(CGImageMetadataRef metadata,
                                             CFStringRef rootPath,
                                             CFDictionaryRef options,
-                                            CGImageMetadataTagBlock block) IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
+                                            CGImageMetadataTagBlock block) IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_7_0);
 #endif
 
 // A key for the 'options' of CGImageMetadataEnumerateTagsUsingBlock. If present,
 // the value should be a CFBoolean. If true, tags will be enumerated recursively,
 // if false, only the direct children of 'rootPath' will be enumerated. 
 // The default is non-recursive.
-IMAGEIO_EXTERN const CFStringRef kCGImageMetadataEnumerateRecursively IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
+IMAGEIO_EXTERN const CFStringRef kCGImageMetadataEnumerateRecursively IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_7_0);
 
 
 // ****************************************************************************
@@ -550,7 +552,7 @@ IMAGEIO_EXTERN const CFStringRef kCGImageMetadataEnumerateRecursively IMAGEIO_AV
  * property could not be found.
  */
 IMAGEIO_EXTERN CGImageMetadataTagRef 
-CGImageMetadataCopyTagMatchingImageProperty(CGImageMetadataRef metadata, CFStringRef dictionaryName, CFStringRef propertyName) IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
+CGImageMetadataCopyTagMatchingImageProperty(CGImageMetadataRef metadata, CFStringRef dictionaryName, CFStringRef propertyName) IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_7_0);
 
 /*!
  * @function CGImageMetadataSetValueMatchingImageProperty
@@ -581,7 +583,7 @@ CGImageMetadataCopyTagMatchingImageProperty(CGImageMetadataRef metadata, CFStrin
 IMAGEIO_EXTERN bool CGImageMetadataSetValueMatchingImageProperty(CGMutableImageMetadataRef metadata,
                                                   CFStringRef dictionaryName,
                                                   CFStringRef propertyName,
-                                                  CFTypeRef value) IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
+                                                  CFTypeRef value) IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_7_0);
 
 
 // ****************************************************************************
@@ -603,7 +605,7 @@ IMAGEIO_EXTERN bool CGImageMetadataSetValueMatchingImageProperty(CGMutableImageM
  * NULL if an error occurred. 
  */
 IMAGEIO_EXTERN CFDataRef CGImageMetadataCreateXMPData (CGImageMetadataRef metadata, 
-                                        CFDictionaryRef options) IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
+                                        CFDictionaryRef options) IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_7_0);
 
 /*!
  * @function CGImageMetadataCreateFromXMPData
@@ -614,7 +616,7 @@ IMAGEIO_EXTERN CFDataRef CGImageMetadataCreateXMPData (CGImageMetadataRef metada
  * @param data The XMP data.
  * @return Returns a collection of CGImageMetadata tags. Returns NULL if an error occurred. 
  */
-IMAGEIO_EXTERN CGImageMetadataRef CGImageMetadataCreateFromXMPData (CFDataRef data) IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
+IMAGEIO_EXTERN CGImageMetadataRef CGImageMetadataCreateFromXMPData (CFDataRef data) IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_7_0);
 
 /*!
  *  @constant kCFErrorDomainCGImageMetadata
@@ -634,5 +636,7 @@ typedef enum CGImageMetadataErrors {
     kCGImageMetadataErrorConflictingArguments = 3,
     kCGImageMetadataErrorPrefixConflict = 4,
 } CGImageMetadataErrors;
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif // CGIMAGEMETADATA_H_

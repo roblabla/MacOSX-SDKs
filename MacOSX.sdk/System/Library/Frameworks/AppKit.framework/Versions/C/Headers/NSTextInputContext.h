@@ -1,7 +1,7 @@
 /*
 	NSTextInputContext.h
 	Application Kit
-	Copyright (c) 2008-2013, Apple Inc.
+	Copyright (c) 2008-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -31,7 +31,7 @@ NS_CLASS_AVAILABLE(10_6, NA)
 
     struct {
 	unsigned int _acceptsGlyphInfo:1;
-        unsigned int _secureInput:1;
+	unsigned int _secureInput:1;
 
 	unsigned int _attributedString:1;
 	unsigned int _fractionOfDistance:1;
@@ -49,9 +49,8 @@ NS_CLASS_AVAILABLE(10_6, NA)
 	unsigned int _preflight:1;
 	unsigned int _bindingFound:1;
 
-        unsigned int _unmarkbeforeinsert:1;
-
-	unsigned int _reserved:1;
+	unsigned int _unmarkbeforeinsert:1;
+	unsigned int _completionHandlingClient:1;
     } _ticFlags;
 }
 
@@ -61,7 +60,7 @@ NS_CLASS_AVAILABLE(10_6, NA)
 
 /* The designated initializer.
  */
-- (id)initWithClient:(id <NSTextInputClient>)theClient;
+- (instancetype)initWithClient:(id <NSTextInputClient>)theClient;
 
 /**** Properties *****/
 /* Returns the owner of this input context. The owner, typically an NSView, retains its NSTextInputContext instance. NSTextInputContext doesn't retain its client.

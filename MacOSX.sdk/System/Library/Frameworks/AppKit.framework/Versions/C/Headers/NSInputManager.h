@@ -1,7 +1,7 @@
 /*
 	NSInputManager.h
 	Application Kit
-	Copyright (c) 1994-2013, Apple Inc.
+	Copyright (c) 1994-2014, Apple Inc.
 	All rights reserved.
  */
 
@@ -15,43 +15,44 @@
  */
 @protocol NSTextInput
 
-- (void) insertText:(id)aString; // instead of keyDown: aString can be NSString or NSAttributedString
-- (void) doCommandBySelector:(SEL)aSelector;
+- (void) insertText:(id)aString NS_DEPRECATED_MAC(10_0, 10_6); // instead of keyDown: aString can be NSString or NSAttributedString
+- (void) doCommandBySelector:(SEL)aSelector NS_DEPRECATED_MAC(10_0, 10_6);
 	// setMarkedText: cannot take a nil first argument. aString can be NSString or NSAttributedString
-- (void) setMarkedText:(id)aString selectedRange:(NSRange)selRange;
+- (void) setMarkedText:(id)aString selectedRange:(NSRange)selRange NS_DEPRECATED_MAC(10_0, 10_6);
 
-- (void) unmarkText;
-- (BOOL) hasMarkedText;
-- (NSInteger) conversationIdentifier;
+- (void) unmarkText NS_DEPRECATED_MAC(10_0, 10_6);
+- (BOOL) hasMarkedText NS_DEPRECATED_MAC(10_0, 10_6);
+- (NSInteger) conversationIdentifier NS_DEPRECATED_MAC(10_0, 10_6);
 
 /* Returns attributed string at the range.  This allows input mangers to query any range in backing-store.  May return nil.
 */
-- (NSAttributedString *) attributedSubstringFromRange:(NSRange)theRange;
+- (NSAttributedString *) attributedSubstringFromRange:(NSRange)theRange NS_DEPRECATED_MAC(10_0, 10_6);
 
 /* This method returns the range for marked region.  If hasMarkedText == false, it'll return NSNotFound location & 0 length range.
 */
-- (NSRange) markedRange;
+- (NSRange) markedRange NS_DEPRECATED_MAC(10_0, 10_6);
 
 /* This method returns the range for selected region.  Just like markedRange method, its location field contains char index from the text beginning.
 */
-- (NSRange) selectedRange;
+- (NSRange) selectedRange NS_DEPRECATED_MAC(10_0, 10_6);
 
 /* This method returns the first frame of rects for theRange in screen coordindate system.
 */
-- (NSRect) firstRectForCharacterRange:(NSRange)theRange;
+- (NSRect) firstRectForCharacterRange:(NSRange)theRange NS_DEPRECATED_MAC(10_0, 10_6);
 
 /* This method returns the index for character that is nearest to thePoint.  thPoint is in screen coordinate system.
 */
-- (NSUInteger)characterIndexForPoint:(NSPoint)thePoint;
+- (NSUInteger)characterIndexForPoint:(NSPoint)thePoint NS_DEPRECATED_MAC(10_0, 10_6);
 
 /* This method is the key to attribute extension.  We could add new attributes through this method. NSInputServer examines the return value of this method & constructs appropriate attributed string.
 */
-- (NSArray*) validAttributesForMarkedText;
+- (NSArray*) validAttributesForMarkedText NS_DEPRECATED_MAC(10_0, 10_6);
 
 @end
 
 /* NSInputManager is deprecated in Mac OS X 10.6. Use NSTextInputContext instead. 
  */
+NS_CLASS_DEPRECATED_MAC(10_0, 10_6, "Use NSTextInputContext instead")
 @interface NSInputManager : NSObject <NSTextInput> {
 /*All instance variables are private*/
 @private
@@ -74,12 +75,12 @@
 
 /* The "current input manager" is the one that is receiving input events at the time this method is called.  It may change out from under you, so don't cache the return value.
 */
-+ (NSInputManager *) currentInputManager;
++ (NSInputManager *) currentInputManager NS_DEPRECATED_MAC(10_0, 10_6);
 
 /* Cycle through list of input managers. Called from NSKeyBindingManager via doCommandBySelector:.
 */
-+ (void)cycleToNextInputLanguage:(id)sender;
-+ (void)cycleToNextInputServerInLanguage:(id)sender;
++ (void)cycleToNextInputLanguage:(id)sender NS_DEPRECATED_MAC(10_0, 10_6);
++ (void)cycleToNextInputServerInLanguage:(id)sender NS_DEPRECATED_MAC(10_0, 10_6);
 
 - (NSInputManager *) initWithName:(NSString *)inputServerName host:(NSString *)hostName NS_DEPRECATED_MAC(10_0, 10_6);
 
@@ -88,8 +89,8 @@
 /* These messages are sent by Views that conform to the NSTextInput protocol TO the Current Input Manager when things happen via user or programmatic action.  E.g., when the mouse moves outside the marked range, send markedTextWillBeAbandoned:.  If the user selects some new text or moves the mouse within the marked region, send markedTextSelectionChanged:.  Not all input manager/server combinations will allow all changes, but abandoning of the marked region cannot be aborted.
 */ 
 
-- (void) markedTextAbandoned:(id)cli; /* send after abandoning */
-- (void) markedTextSelectionChanged:(NSRange)newSel client:(id)cli; /* send after changing */
+- (void) markedTextAbandoned:(id)cli NS_DEPRECATED_MAC(10_0, 10_6); /* send after abandoning */
+- (void) markedTextSelectionChanged:(NSRange)newSel client:(id)cli NS_DEPRECATED_MAC(10_0, 10_6); /* send after changing */
 
 /* This corresponds to a server method for input managers that demand to do their own interepretation of command keys as long as they're active.  This will typically be called by a key binder to find out whether it shouldn't just pass along strings.
 */
@@ -103,9 +104,9 @@
 
 /* If corresponding input server wants to handle mouse events within marked region, this should return YES.  In that case, handleMouseEvent is sent. Otherwiese, mouse events are handled by first responder.
 */
-- (BOOL) wantsToHandleMouseEvents;
+- (BOOL) wantsToHandleMouseEvents NS_DEPRECATED_MAC(10_0, 10_6);
 
-- (BOOL) handleMouseEvent:(NSEvent*)theMouseEvent;
+- (BOOL) handleMouseEvent:(NSEvent*)theMouseEvent NS_DEPRECATED_MAC(10_0, 10_6);
 
 /* This should return YES when the input method (language) prefers to delay text change notification 'till the input is actually committed.
 */

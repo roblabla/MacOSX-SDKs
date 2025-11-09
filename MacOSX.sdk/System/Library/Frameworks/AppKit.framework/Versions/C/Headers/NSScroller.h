@@ -1,29 +1,28 @@
 /*
 	NSScroller.h
 	Application Kit
-	Copyright (c) 1994-2013, Apple Inc.
+	Copyright (c) 1994-2014, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/NSControl.h>
 #import <AppKit/NSCell.h>
 
-enum {
+/* deprecated in 10.7; this enum is no longer needed */
+typedef NS_ENUM(NSUInteger, NSScrollArrowPosition) {
     NSScrollerArrowsMaxEnd		= 0,	/* previously deprecated */
     NSScrollerArrowsMinEnd		= 1,	/* previously deprecated */
     NSScrollerArrowsDefaultSetting	= 0,
     NSScrollerArrowsNone	       	= 2
 };
-typedef NSUInteger NSScrollArrowPosition;       /* deprecated in 10.7; this enum is no longer needed */
 
-enum {
+typedef NS_ENUM(NSUInteger, NSUsableScrollerParts) {
     NSNoScrollerParts			= 0,
     NSOnlyScrollerArrows		= 1,    /* deprecated in 10.7 */
     NSAllScrollerParts			= 2
 };
-typedef NSUInteger NSUsableScrollerParts;
 
-enum {
+typedef NS_ENUM(NSUInteger, NSScrollerPart) {
     NSScrollerNoPart			= 0,
     NSScrollerDecrementPage		= 1,
     NSScrollerKnob			= 2,
@@ -32,30 +31,23 @@ enum {
     NSScrollerIncrementLine	 	= 5,    /* deprecated in 10.7 */
     NSScrollerKnobSlot			= 6
 };
-typedef NSUInteger NSScrollerPart;
 
-enum {
+/* deprecated in 10.7; this enum is no longer needed */
+typedef NS_ENUM(NSUInteger, NSScrollerArrow) {
     NSScrollerIncrementArrow		= 0,
     NSScrollerDecrementArrow		= 1
 };
-typedef NSUInteger NSScrollerArrow;             /* deprecated in 10.7; this enum is no longer needed */
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_7
-enum {
+typedef NS_ENUM(NSInteger, NSScrollerStyle) {
     NSScrollerStyleLegacy       = 0,
     NSScrollerStyleOverlay      = 1
-};
-#endif
-typedef NSInteger NSScrollerStyle;
+} NS_ENUM_AVAILABLE_MAC(10_7);
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_7
-enum {
+typedef NS_ENUM(NSInteger, NSScrollerKnobStyle) {
     NSScrollerKnobStyleDefault  = 0,    // dark with light border; good against any background
     NSScrollerKnobStyleDark     = 1,    // dark; good against a light background
     NSScrollerKnobStyleLight    = 2     // light; good against a dark background
-};
-#endif
-typedef NSInteger NSScrollerKnobStyle;
+} NS_ENUM_AVAILABLE_MAC(10_7);
 
 @interface NSScroller : NSControl
 {
@@ -78,8 +70,8 @@ typedef NSInteger NSScrollerKnobStyle;
         unsigned int isTrackingMouse:1;
         unsigned int reserved:14;
     } _sFlags2;
-    id _target;
-    SEL _action;
+    id _reserved;
+    SEL _reserved2;
     struct _sFlags {
         unsigned int            isHoriz:1;
         NSScrollArrowPosition   arrowsLoc:2;
@@ -121,11 +113,11 @@ When it opts in in this manner, an NSScroller subclass certifies that:
 
 /* Returns the with for scrollers of the receiving class, given the specified controlSize and assuming a scrollerStyle of NSScrollerStyleLegacy.  This method should be considered deprecated; use +scrollerWidthForControlSize:scrollerStyle: instead.
 */
-+ (CGFloat)scrollerWidthForControlSize:(NSControlSize)controlSize; /* deprecated in 10.7 */
++ (CGFloat)scrollerWidthForControlSize:(NSControlSize)controlSize NS_DEPRECATED_MAC(10_0, 10_7, "Use +scrollerWidthForControlSize:scrollerStyle: instead");
 
-/* Returns the width for scrollers of the receiving class, assuming a controlSize NSRegularControlSize, and a scrollerStyle of NSScrollerStyleLecgacy.  This method should be considered deprecated; use +scrollerWidthForControlSize:scrollerStyle: instead.
+/* Returns the width for scrollers of the receiving class, assuming a controlSize NSRegularControlSize, and a scrollerStyle of NSScrollerStyleLegacy.  This method should be considered deprecated; use +scrollerWidthForControlSize:scrollerStyle: instead.
 */
-+ (CGFloat)scrollerWidth; /* deprecated in 10.7 */
++ (CGFloat)scrollerWidth NS_DEPRECATED_MAC(10_0, 10_7, "Use +scrollerWidthForControlSize:scrollerStyle: instead");
 
 /* Returns the style of scrollers that applications should use wherever possible.  This value is determined by the Appearance preference panel's "Show scroll bars" setting for the current user, and -- when the user's prefernce is set to "Automatically based on input device" -- by the set of built-in and connected pointing devices and the user's scroll capability preference settings for them.  The preferredScrollerStyle will therefore change over time, and applications should be prepared to adapt their user interfaces to the new scroller style if needed.  In most cases, the updating is automatic: When the preferredScrollerStyle changes, AppKit notifies all NSScrollView instances, sending -setScrollerStyle: to each with the new style, which causees each NSScrollView to automatically re-tile (update its layout) to adapt to the new scroller style.  Some NSScrollView instances may refuse the new scroller style setting if they cannot accommodate it for compatibility reasons (presence of accessory views or legacy scroller subclasses prevent use of Overlay scrollers), but most instances will switch to the specified new preferredScrollerStyle.  Clients that wish to be notified of changes to +preferredScrollerStyle's return value can subscribe to NSPreferredScrollerStyleDidChangeNotification (declared below).
 */
@@ -133,24 +125,19 @@ When it opts in in this manner, an NSScroller subclass certifies that:
 
 /* Accessors for scroller's style.  For a scroller that's managed by an NSScrollView, the setter is automatically invoked by the ScrollView with the appropriate setting, according to the user's Appearance preference settings and possibly what pointing device(s) are present.
 */
-- (NSScrollerStyle)scrollerStyle NS_AVAILABLE_MAC(10_7);
-- (void)setScrollerStyle:(NSScrollerStyle)newScrollerStyle NS_AVAILABLE_MAC(10_7);
+@property NSScrollerStyle scrollerStyle NS_AVAILABLE_MAC(10_7);
 
 /* Accessors for the scroller's knob style.  The value of this property does not affect Legacy scrollers.  NSScrollerKnobStyleDefault is appropriate for a wide range of content, but in some cases choosing an alternative knob style may enhance visibility of the scroller knob atop some kinds of content.
 */
-- (NSScrollerKnobStyle)knobStyle NS_AVAILABLE_MAC(10_7);
-- (void)setKnobStyle:(NSScrollerKnobStyle)newKnobStyle NS_AVAILABLE_MAC(10_7);
+@property NSScrollerKnobStyle knobStyle NS_AVAILABLE_MAC(10_7);
 
 - (void)drawParts NS_DEPRECATED_MAC(10_0, 10_7);                    // not invoked on any OS X version
 - (NSRect)rectForPart:(NSScrollerPart)partCode;
 - (void)checkSpaceForParts;
-- (NSUsableScrollerParts)usableParts;
-- (void)setArrowsPosition:(NSScrollArrowPosition)where;             // has no effect on 10.7
-- (NSScrollArrowPosition)arrowsPosition;                            // has no effect on 10.7
-- (void)setControlTint:(NSControlTint)controlTint;                  // has no effect on 10.7
-- (NSControlTint)controlTint;                                       // has no effect on 10.7
-- (void)setControlSize:(NSControlSize)controlSize;
-- (NSControlSize)controlSize;
+@property (readonly) NSUsableScrollerParts usableParts;
+@property NSScrollArrowPosition arrowsPosition;                            // has no effect on 10.7
+@property NSControlTint controlTint;                                       // has no effect on 10.7
+@property NSControlSize controlSize;
 - (void)drawArrow:(NSScrollerArrow)whichArrow highlight:(BOOL)flag; // normally not invoked on 10.7, because -rectForPart: is empty for NSScrollerDecrementLine and NSScrollerIncrementLine
 - (void)drawKnob;
 - (void)drawKnobSlotInRect:(NSRect)slotRect highlight:(BOOL)flag;
@@ -158,8 +145,8 @@ When it opts in in this manner, an NSScroller subclass certifies that:
 - (NSScrollerPart)testPart:(NSPoint)thePoint;
 - (void)trackKnob:(NSEvent *)theEvent;
 - (void)trackScrollButtons:(NSEvent *)theEvent;                     // not invoked on 10.7
-- (NSScrollerPart)hitPart;
-- (CGFloat)knobProportion;
+@property (readonly) NSScrollerPart hitPart;
+@property CGFloat knobProportion;
 - (void)setKnobProportion:(CGFloat)proportion NS_AVAILABLE_MAC(10_5);
 
 @end

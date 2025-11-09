@@ -1,29 +1,36 @@
-.Dd June 10, 2003
+.Dd April 24, 2014
 .Dt OSASCRIPT 1
 .Os "Mac OS X"
 .Sh NAME
 .Nm osascript
-.Nd execute AppleScripts and other OSA language scripts
+.Nd execute OSA scripts
+.Pq AppleScript, JavaScript, etc.
 .Sh SYNOPSIS
 .Nm osascript
 .Bk -words
 .Op Fl l Ar language
+.Op Fl i
 .Op Fl s Ar flags
 .Op Fl e Ar statement | Ar programfile
 .Op Ar argument ...
 .Ek
 .Sh DESCRIPTION
 .Nm
-executes the given script.
-It was designed for use with AppleScript, but will work with any Open
-Scripting Architecture
-.Pq Tn OSA
-language.  To get a list of the
+executes the given
+.Tn OSA
+script, which may be plain text or a compiled script
+.Pq Li .scpt
+created by Script Editor or
+.Xr osacompile 1 .
+By default,
+.Nm
+treats plain text as AppleScript, but you can change this using the
+.Fl l
+option.
+To get a list of the
 .Tn OSA
 languages installed on your system, use
 .Xr osalang 1 .
-For documentation on AppleScript itself, see
-.Aq Pa http://www.apple.com/applescript .
 .Pp
 .Nm
 will look for the script in one of the following three places:
@@ -46,7 +53,7 @@ for the script name.
 Any arguments following the script will be passed as a list of strings
 to the direct parameter of the
 .Dq run
-handler.  For example:
+handler.  For example, in AppleScript:
 .Pp
 .Bd -literal -offset indent -compact
 .Em a.scpt:
@@ -70,13 +77,23 @@ list.  Multiple
 .Fl e
 options may be given to build up a multi-line script.  Because
 most scripts use characters that are special to many shell programs
-(e.g., AppleScript uses single and double quote marks,
+(for example, AppleScript uses single and double quote marks,
 .Dq \&( ,
 .Dq \&) ,
 and
 .Dq * ) ,
 the statement will have to be correctly quoted and escaped to get it
 past the shell intact.
+.It Fl i
+Interactive mode:
+.Nm
+will prompt for one line at a time, and print the result, if
+applicable, after each line.  Any script supplied as a command argument
+using
+.Fl e
+or
+.Ar programfile
+will be loaded, but not executed, before starting the interactive prompt.
 .It Fl l Ar language
 Override the language for any plain text files.  Normally, plain text
 files are compiled as AppleScript.
@@ -137,7 +154,8 @@ matching, from other diagnostic output, which you don't.
 .El
 .Sh SEE ALSO
 .Xr osacompile 1 ,
-.Xr osalang 1
+.Xr osalang 1 ,
+.%B AppleScript Language Guide
 .Sh HISTORY
 .Nm
 in Mac OS X 10.0 would translate

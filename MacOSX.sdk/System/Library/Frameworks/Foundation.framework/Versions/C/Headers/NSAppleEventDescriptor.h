@@ -1,6 +1,6 @@
 /*
 	NSAppleEventDescriptor.h
-	Copyright (c) 1997-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1997-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -37,36 +37,36 @@
 + (NSAppleEventDescriptor *)recordDescriptor;
 
 // The designated initializer.  The initialized object takes ownership of the passed-in AEDesc, and will call AEDisposeDesc() on it at deallocation time.
-- (id)initWithAEDescNoCopy:(const AEDesc *)aeDesc;
+- (instancetype)initWithAEDescNoCopy:(const AEDesc *)aeDesc NS_DESIGNATED_INITIALIZER;
 
 // Other initializers.
-- (id)initWithDescriptorType:(DescType)descriptorType bytes:(const void *)bytes length:(NSUInteger)byteCount;
-- (id)initWithDescriptorType:(DescType)descriptorType data:(NSData *)data;
-- (id)initWithEventClass:(AEEventClass)eventClass eventID:(AEEventID)eventID targetDescriptor:(NSAppleEventDescriptor *)targetDescriptor returnID:(AEReturnID)returnID transactionID:(AETransactionID)transactionID;
-- (id)initListDescriptor;
-- (id)initRecordDescriptor;
+- (instancetype)initWithDescriptorType:(DescType)descriptorType bytes:(const void *)bytes length:(NSUInteger)byteCount;
+- (instancetype)initWithDescriptorType:(DescType)descriptorType data:(NSData *)data;
+- (instancetype)initWithEventClass:(AEEventClass)eventClass eventID:(AEEventID)eventID targetDescriptor:(NSAppleEventDescriptor *)targetDescriptor returnID:(AEReturnID)returnID transactionID:(AETransactionID)transactionID;
+- (instancetype)initListDescriptor;
+- (instancetype)initRecordDescriptor;
 
 // Return a pointer to the AEDesc that is encapsulated by the object.
-- (const AEDesc *)aeDesc NS_RETURNS_INNER_POINTER;
+@property (readonly) const AEDesc *aeDesc NS_RETURNS_INNER_POINTER;
 
 // Get the four-character type code or the data from a fully-initialized descriptor.
-- (DescType)descriptorType;
-- (NSData *)data;
+@property (readonly) DescType descriptorType;
+@property (readonly, copy) NSData *data;
 
 // Return the contents of a descriptor, after coercing the descriptor's contents to typeBoolean, typeEnumerated, typeSInt32, or typeType, respectively.
-- (Boolean)booleanValue;
-- (OSType)enumCodeValue;
-- (SInt32)int32Value;
-- (OSType)typeCodeValue;
+@property (readonly) Boolean booleanValue;
+@property (readonly) OSType enumCodeValue;
+@property (readonly) SInt32 int32Value;
+@property (readonly) OSType typeCodeValue;
 
 // Return the contents of a descriptor as a string, after coercing the descriptor's contents to typeUnicodeText.
-- (NSString *)stringValue;
+@property (readonly, copy) NSString *stringValue;
 
 // Accessors for an event descriptor.
-- (AEEventClass)eventClass;
-- (AEEventID)eventID;
-- (AEReturnID)returnID;
-- (AETransactionID)transactionID;
+@property (readonly) AEEventClass eventClass;
+@property (readonly) AEEventID eventID;
+@property (readonly) AEReturnID returnID;
+@property (readonly) AETransactionID transactionID;
 
 // Set, retrieve, or remove parameter descriptors inside an event descriptor.
 - (void)setParamDescriptor:(NSAppleEventDescriptor *)descriptor forKeyword:(AEKeyword)keyword;
@@ -78,7 +78,7 @@
 - (NSAppleEventDescriptor *)attributeDescriptorForKeyword:(AEKeyword)keyword;
 
 // Return the number of items inside a list or record descriptor.
-- (NSInteger)numberOfItems;
+@property (readonly) NSInteger numberOfItems;
 
 // Set, retrieve, or remove indexed descriptors inside a list or record descriptor.
 - (void)insertDescriptor:(NSAppleEventDescriptor *)descriptor atIndex:(NSInteger)index;

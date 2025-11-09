@@ -174,7 +174,7 @@ unsigned long
 unsigned long long
 	 strtoull(const char *, char **, int);
 #endif /* !__DARWIN_NO_LONG_LONG */
-int	 system(const char *) __DARWIN_ALIAS_C(system);
+int	 system(const char *) __DARWIN_ALIAS_C(system) __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0,__MAC_NA,__IPHONE_2_0,__IPHONE_8_0, "Use posix_spawn APIs instead.");
 size_t	 wcstombs(char * __restrict, const wchar_t * __restrict, size_t);
 int	 wctomb(char *, wchar_t);
 

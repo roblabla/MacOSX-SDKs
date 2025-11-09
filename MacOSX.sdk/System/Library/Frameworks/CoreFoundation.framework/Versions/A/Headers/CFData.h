@@ -1,5 +1,5 @@
 /*	CFData.h
-	Copyright (c) 1998-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1998-2014, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFDATA__)
@@ -10,8 +10,8 @@
 CF_IMPLICIT_BRIDGING_ENABLED
 CF_EXTERN_C_BEGIN
     
-typedef const struct __CFData * CFDataRef;
-typedef struct __CFData * CFMutableDataRef;
+typedef const struct CF_BRIDGED_TYPE(NSData) __CFData * CFDataRef;
+typedef struct CF_BRIDGED_MUTABLE_TYPE(NSMutableData) __CFData * CFMutableDataRef;
 
 CF_EXPORT
 CFTypeID CFDataGetTypeID(void);

@@ -1,7 +1,7 @@
 /*
 	NSNibConnector.h
 	Application Kit
-	Copyright (c) 1994-2013, Apple Inc.
+	Copyright (c) 1994-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -14,12 +14,9 @@
     id _destination;	/* The destination of the connection. */
     NSString *_label;	/* The label of the connection. */
 }
-- (id)source;
-- (void)setSource:(id)source;
-- (id)destination;
-- (void)setDestination:(id)destination;
-- (NSString *)label;
-- (void)setLabel:(NSString *)label;
+@property (assign) id source;
+@property (assign) id destination;
+@property (copy) NSString *label;
 - (void)replaceObject:(id)oldObject withObject:(id)newObject;
 - (void)establishConnection;
 @end

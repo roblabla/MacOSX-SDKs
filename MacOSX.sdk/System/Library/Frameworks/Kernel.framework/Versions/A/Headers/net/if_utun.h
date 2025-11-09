@@ -48,6 +48,8 @@
 
 
 #define UTUN_OPT_SET_DELEGATE_INTERFACE			15      /* set the delegate interface (char[]) */
+#define UTUN_OPT_MAX_PENDING_PACKETS			16      /* the number of packets that can be waiting to be read
+															from the control socket at a time */
 
 /*
  * Flags for by UTUN_OPT_FLAGS 

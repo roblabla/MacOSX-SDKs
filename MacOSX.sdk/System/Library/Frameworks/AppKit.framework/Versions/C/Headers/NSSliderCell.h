@@ -1,31 +1,31 @@
 /*
 	NSSliderCell.h
 	Application Kit
-	Copyright (c) 1994-2013, Apple Inc.
+	Copyright (c) 1994-2014, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/NSActionCell.h>
 
-enum {
+typedef NS_ENUM(NSUInteger, NSTickMarkPosition) {
     NSTickMarkBelow = 0,
     NSTickMarkAbove = 1,
     NSTickMarkLeft  = NSTickMarkAbove,
     NSTickMarkRight = NSTickMarkBelow
 };
-typedef NSUInteger NSTickMarkPosition;
 
-enum {
+typedef NS_ENUM(NSUInteger, NSSliderType) {
     NSLinearSlider   = 0,
     NSCircularSlider = 1
 };
-typedef NSUInteger NSSliderType;
 
 @interface NSSliderCell : NSActionCell
 {
     /*All instance variables are private*/
-    int     _reserved[3];
-    int     _numberOfTickMarks;
+    id       _sliderCellPrivateData;
+    CGFloat  _previousValue;
+    CGFloat  _knobOffset;
+    int      _numberOfTickMarks;
     double	_altIncValue;
     double	_value;
     double	_maxValue;
@@ -40,26 +40,26 @@ typedef NSUInteger NSSliderType;
         unsigned int tickMarkPosition:1;
         unsigned int sliderType:2;
         unsigned int drawing:1;
-        unsigned int reserved2:23;
+        unsigned int snappedToTickMark:1;
+        unsigned int snappedToPreviousValue:1;
+        unsigned int snappedToDefaultValue:1;
+        unsigned int snappingAllowed:1;
+        unsigned int reserved2:19;
     } _scFlags;
 }
 
 + (BOOL)prefersTrackingUntilMouseUp;
 
-- (double)minValue;
-- (void)setMinValue:(double)aDouble;
-- (double)maxValue;
-- (void)setMaxValue:(double)aDouble;
-- (void)setAltIncrementValue:(double)incValue;
-- (double)altIncrementValue;
+@property double minValue;
+@property double maxValue;
+@property double altIncrementValue;
 
-- (void) setSliderType:(NSSliderType)sliderType;
-- (NSSliderType)sliderType;
-- (NSInteger)isVertical;
+@property NSSliderType sliderType;
+@property (getter=isVertical, readonly) NSInteger vertical;
 
-- (NSRect)trackRect;
+@property (readonly) NSRect trackRect;
 
-- (CGFloat)knobThickness;
+@property (readonly) CGFloat knobThickness;
 - (NSRect)knobRectFlipped:(BOOL)flipped;
 - (void)drawKnob:(NSRect)knobRect;
 - (void)drawKnob;
@@ -82,19 +82,16 @@ typedef NSUInteger NSSliderType;
 
 // For setting and retrieving the number of tick marks on a slider.
 //   0 indicates no tick marks are present, which is the default
-- (void)setNumberOfTickMarks:(NSInteger)count;
-- (NSInteger)numberOfTickMarks;
+@property NSInteger numberOfTickMarks;
 
 // For setting and retrieving the position tick marks will be displayed in.
 //   This has no effect if numberOfTickMarks is 0.
-- (void)setTickMarkPosition:(NSTickMarkPosition)position;
-- (NSTickMarkPosition)tickMarkPosition;
+@property NSTickMarkPosition tickMarkPosition;
 
 // For setting and retrieving whether values on the slider can be anything
 //   the slider normally allows, or only values that correspond to a tick mark.
 //   This has no effect if numberOfTickMarks is 0.
-- (void)setAllowsTickMarkValuesOnly:(BOOL)yorn;
-- (BOOL)allowsTickMarkValuesOnly;
+@property BOOL allowsTickMarkValuesOnly;
 
 // Determine the slider value for a particular tick mark.
 //   An NSRangeException will be raised if the index is invalid.

@@ -15,8 +15,8 @@ EVENTKIT_CLASS_AVAILABLE(10_8, 6_0)
 
 + (EKStructuredLocation *)locationWithTitle:(NSString *)title;
 
-@property(nonatomic, retain) NSString     *title;
-@property(nonatomic, retain) CLLocation   *geoLocation;
+@property(nonatomic, strong) NSString     *title;
+@property(nonatomic, strong) CLLocation   *geoLocation;
 @property(nonatomic) double                radius; // 0 = use default, unit is meters
 
 @end

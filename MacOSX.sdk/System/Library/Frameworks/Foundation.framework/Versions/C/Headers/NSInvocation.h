@@ -1,5 +1,5 @@
 /*	NSInvocation.h
-	Copyright (c) 1994-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -19,16 +19,13 @@
 
 + (NSInvocation *)invocationWithMethodSignature:(NSMethodSignature *)sig;
 
-- (NSMethodSignature *)methodSignature;
+@property (readonly, retain) NSMethodSignature *methodSignature;
 
 - (void)retainArguments;
-- (BOOL)argumentsRetained;
+@property (readonly) BOOL argumentsRetained;
 
-- (id)target;
-- (void)setTarget:(id)target;
-
-- (SEL)selector;
-- (void)setSelector:(SEL)selector;
+@property (assign) id target;
+@property SEL selector;
 
 - (void)getReturnValue:(void *)retLoc;
 - (void)setReturnValue:(void *)retLoc;

@@ -1,11 +1,12 @@
 //
 //  SCNSceneRenderer.h
 //
-//  Copyright (c) 2012-2013 Apple Inc. All rights reserved.
+//  Copyright (c) 2012-2014 Apple Inc. All rights reserved.
 //
 
 @class SCNScene;
 @class SCNNode;
+@class SKScene;
 @protocol SCNSceneRendererDelegate;
 
 
@@ -26,14 +27,13 @@ SCN_EXTERN NSString * const SCNHitTestIgnoreChildNodesKey;
 /*! Specifies the root node to use for the hit test. Defaults to the root node of the scene. */
 SCN_EXTERN NSString * const SCNHitTestRootNodeKey;
 /*! Determines whether hidden nodes should be ignored. Defaults to YES. */
-SCN_EXTERN NSString * const SCNHitTestIgnoreHiddenNodesKey SCENEKIT_AVAILABLE(10_9, NA);
-
+SCN_EXTERN NSString * const SCNHitTestIgnoreHiddenNodesKey SCENEKIT_AVAILABLE(10_9, 8_0);
 
 /*! @class SCNHitTestResult
     @abstract Results returned by the hit test methods.
  */
 
-SCENEKIT_CLASS_AVAILABLE(10_8, NA)
+SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
 @interface SCNHitTestResult : NSObject
 {	
 @private
@@ -41,7 +41,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, NA)
 }
 
 /*! The node hit. */
-@property(nonatomic, readonly) SCNNode*      node;
+@property(nonatomic, readonly) SCNNode      *node;
 /*! Index of the geometry hit. */
 @property(nonatomic, readonly) NSInteger     geometryIndex;
 /*! Index of the face hit. */
@@ -55,7 +55,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, NA)
 /*! Intersection normal in the world coordinate system. */
 @property(nonatomic, readonly) SCNVector3    worldNormal;
 /*! World transform of the node intersected. */
-@property(nonatomic, readonly) CATransform3D modelTransform;
+@property(nonatomic, readonly) SCNMatrix4    modelTransform;
 
 /*! 
  @method textureCoordinatesWithMappingChannel:
@@ -74,11 +74,18 @@ SCENEKIT_CLASS_AVAILABLE(10_8, NA)
 @protocol SCNSceneRenderer <NSObject>
 @required
 
-/*! 
- @property currentTime
- @abstract Specifies the current time to display the scene.
+/*!
+ @property scene
+ @abstract Specifies the scene of the receiver.
  */
-@property(nonatomic) NSTimeInterval currentTime;
+@property(nonatomic, retain) SCNScene *scene;
+
+/*!
+ @property sceneTime
+ @abstract Specifies the current "scene time" to display the scene.
+ @discussion The scene time only affect scene time based animations (see SCNAnimation.h "usesSceneTimeBase" and SCNSceneSource.h "SCNSceneSourceAnimationImportPolicyKey" for how to create scene time based animations). Scene time based animations and this property are typically used by tools and viewer to ease seeking in time while previewing a scene.
+ */
+@property(nonatomic) NSTimeInterval sceneTime SCENEKIT_AVAILABLE(10_10, 8_0);
 
 /*! 
  @property delegate
@@ -101,7 +108,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, NA)
  @param pointOfView The point of view used to test the visibility.
  @discussion Return YES if the node is inside or interest the clipping planes of the point of view. This method doesn't test if 'node' is occluded by another node.
  */
-- (BOOL)isNodeInsideFrustum:(SCNNode *)node withPointOfView:(SCNNode *)pointOfView SCENEKIT_AVAILABLE(10_9, NA);
+- (BOOL)isNodeInsideFrustum:(SCNNode *)node withPointOfView:(SCNNode *)pointOfView SCENEKIT_AVAILABLE(10_9, 8_0);
 
 /*!
  @method projectPoint
@@ -109,7 +116,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, NA)
  @param point The world position to be projected.
  @discussion A point projected from the near (resp. far) clip plane will have a z component of 0 (resp. 1).
  */
-- (SCNVector3)projectPoint:(SCNVector3)point SCENEKIT_AVAILABLE(10_9, NA);
+- (SCNVector3)projectPoint:(SCNVector3)point SCENEKIT_AVAILABLE(10_9, 8_0);
 
 /*!
  @method unprojectPoint
@@ -117,7 +124,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, NA)
  @param point The screenspace position to be unprojected.
  @discussion A point whose z component is 0 (resp. 1) is unprojected on the near (resp. far) clip plane.
  */
-- (SCNVector3)unprojectPoint:(SCNVector3)point SCENEKIT_AVAILABLE(10_9, NA);
+- (SCNVector3)unprojectPoint:(SCNVector3)point SCENEKIT_AVAILABLE(10_9, 8_0);
 
 /*! 
  @property playing
@@ -158,22 +165,47 @@ SCENEKIT_CLASS_AVAILABLE(10_8, NA)
  @abstract Prepare the specified object for drawing.
  @param object The object to prepare. It can be an instance of SCNScene, SCNNode, SCNGeometry, or SCNMaterial
  @param block This block will be called repeatedly while the object is prepared. Return YES if you want the operation to abort.
- @discussion Returns YES if the object was prepared successfully, NO if it was canceled. This method may be triggered from a secondary thread.
+ @discussion Returns YES if the object was prepared successfully, NO if it was canceled. This method may be triggered from a secondary thread. This method is observable using NSProgress.
  */
-- (BOOL)prepareObject:(id)object shouldAbortBlock:(BOOL (^)())block SCENEKIT_AVAILABLE(10_9, NA);
+- (BOOL)prepareObject:(id)object shouldAbortBlock:(BOOL (^)())block SCENEKIT_AVAILABLE(10_9, 8_0);
+
+/*!
+ @method prepareObjects:withCompletionHandler:
+ @abstract Prepare the specified objects for drawing on the background.
+ @param objects The objects to prepare. It can be one or more instances of SCNScene, SCNNode, SCNGeometry, or SCNMaterial
+ @param completionHandler This block will be called when all objects has been prepared, or on failure.
+ @discussion This method is observable using NSProgress.
+ */
+- (void)prepareObjects:(NSArray *)objects withCompletionHandler:(void (^)(BOOL success))completionHandler SCENEKIT_AVAILABLE(10_10, 8_0);
+
 
 /*!
  @property showsStatistics
  @abstract Determines whether the receiver should display statistics info like FPS. Defaults to NO.
  @discussion  When set to YES, statistics are displayed in a overlay on top of the rendered scene.
  */
-@property(nonatomic) BOOL showsStatistics SCENEKIT_AVAILABLE(10_9, NA);
+@property(nonatomic) BOOL showsStatistics SCENEKIT_AVAILABLE(10_9, 8_0);
 
-/*! 
+/*!
+ @property overlaySKScene
+ @abstract Specifies the overlay of the receiver as a SpriteKit scene instance. Defaults to nil.
+ */
+@property(nonatomic, retain) SKScene *overlaySKScene SCENEKIT_AVAILABLE(10_10, 8_0);
+
+/*!
  @property context
- @abstract A Core OpenGL render context that is used as the render target (usually a CGLContextObj).
+ @abstract A Core OpenGL render context that is used as the render target (a CGLContextObj on OS X, an EAGLContext on iOS).
  */
 @property(nonatomic, readonly) void *context;
+
+#pragma mark Deprecated
+
+/*!
+ @property currentTime
+ @abstract Specifies the current time to display the scene.
+ @discussion Deprecated, use "sceneTime" instead.
+ */
+@property(nonatomic) NSTimeInterval currentTime NS_DEPRECATED(10_8, 10_10, NA, NA);
 
 @end
 
@@ -190,24 +222,51 @@ SCENEKIT_CLASS_AVAILABLE(10_8, NA)
 
 @optional
 
-/*! 
+/*!
+ @method renderer:updateAtTime:
+ @abstract Implement this to perform per-frame game logic. Called exactly once per frame before any animation and actions are evaluated and any physics are simulated.
+ @param aRenderer The renderer that will render the scene.
+ @param time The time at which to update the scene.
+ @discussion All modifications done within this method don't go through the transaction model, they are directly applied on the presentation tree.
+ */
+- (void)renderer:(id <SCNSceneRenderer>)aRenderer updateAtTime:(NSTimeInterval)time SCENEKIT_AVAILABLE(10_10, 8_0);
+
+/*!
+ @method renderer:didApplyAnimationsAtTime:
+ @abstract Invoked on the delegate once the scene renderer did apply the animations.
+ @param aRenderer The renderer that did render the scene.
+ @param time The time at which the animations were applied.
+ @discussion All modifications done within this method don't go through the transaction model, they are directly applied on the presentation tree.
+ */
+- (void)renderer:(id <SCNSceneRenderer>)aRenderer didApplyAnimationsAtTime:(NSTimeInterval)time SCENEKIT_AVAILABLE(10_10, 8_0);
+
+/*!
+ @method renderer:didSimulatePhysicsAtTime:
+ @abstract Invoked on the delegate once the scene renderer did simulate the physics.
+ @param aRenderer The renderer that did render the scene.
+ @param time The time at which the physics were simulated.
+ @discussion All modifications done within this method don't go through the transaction model, they are directly applied on the presentation tree.
+ */
+- (void)renderer:(id <SCNSceneRenderer>)aRenderer didSimulatePhysicsAtTime:(NSTimeInterval)time SCENEKIT_AVAILABLE(10_10, 8_0);
+
+/*!
  @method renderer:willRenderScene:atTime:
- @abstract Invoked on the delegate before the scene renderer renders the scene.
+ @abstract Invoked on the delegate before the scene renderer renders the scene. At this point the openGL context and the destination framebuffer are bound.
  @param aRenderer The renderer that will render the scene.
  @param scene The scene to be rendered.
  @param time The time at which the scene is to be rendered.
+ @discussion Starting in 10.10 all modifications done within this method don't go through the transaction model, they are directly applied on the presentation tree.
  */
 - (void)renderer:(id <SCNSceneRenderer>)aRenderer willRenderScene:(SCNScene *)scene atTime:(NSTimeInterval)time;
 
-/*! 
+/*!
  @method renderer:didRenderScene:atTime:
  @abstract Invoked on the delegate once the scene renderer did render the scene.
  @param aRenderer The renderer that did render the scene.
  @param scene The rendered scene.
  @param time The time at which the scene was rendered.
+ @discussion Starting in 10.10 all modifications done within this method don't go through the transaction model, they are directly applied on the presentation tree.
  */
 - (void)renderer:(id <SCNSceneRenderer>)aRenderer didRenderScene:(SCNScene *)scene atTime:(NSTimeInterval)time;
 
 @end
-
-

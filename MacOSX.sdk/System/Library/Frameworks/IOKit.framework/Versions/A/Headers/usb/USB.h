@@ -1,5 +1,5 @@
 /*
- * Copyright © 1998-2013 Apple Inc. All rights reserved.
+ * Copyright © 1998-2014 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -75,33 +75,47 @@ extern "C" {
     @discussion 
     */
     enum {
-    kUSBDeviceIDShift = 7,
-    kUSBMaxDevices = 128,
-    kUSBMaxDevice = kUSBMaxDevices-1,
-    kUSBDeviceIDMask = 0x7f,
-
-    kUSBPipeIDMask = 0xf,
-    kUSBMaxPipes = 32,	// In and Out pipes can have same pipe number.
-
-    kUSBInterfaceIDShift = 8,
-    kUSBMaxInterfaces = 1 << kUSBInterfaceIDShift,
-    kUSBInterfaceIDMask = kUSBMaxInterfaces-1,
-
-    kUSBEndPtShift = 7,
-    kUSBDeviceMask = ((1 << kUSBEndPtShift) -1),
-
-    kUSBNoPipeIdx = -1,
+		kUSBDeviceIDShift = 7,
+		kUSBMaxDevices = 128,
+		kUSBMaxDevice = kUSBMaxDevices-1,
+		kUSBDeviceIDMask = 0x7f,
+        kUSBTooManyDevicesAddress = 0xfffe,
+		
+		kUSBPipeIDMask = 0xf,
+		kUSBMaxPipes = 32,	// In and Out pipes can have same pipe number.
+		
+		kUSBInterfaceIDShift = 8,
+		kUSBMaxInterfaces = 1 << kUSBInterfaceIDShift,
+		kUSBInterfaceIDMask = kUSBMaxInterfaces-1,
+		
+		kUSBEndPtShift = 7,
+		kUSBDeviceMask = ((1 << kUSBEndPtShift) -1),
+		
+		kUSBNoPipeIdx = -1,
         
-   // Constants for streams
-    kUSBStream0 = 0,
-    kUSBMaxStream = 65533,
-    kUSBPRimeStream = 0xfffe,
-    kUSBNoStream = 0xffff,
-    kUSBAllStreams = 0xffffffff
-};
+#ifndef __OPEN_SOURCE__
+        // In order to ameliorate the effects of PCI Pause on drivers that do not subscribe to the USB Notifications for it, we have decided to sleep threads that come into the UIM
+        // while we are in PCI Pause.  We will wake those threads up after the root hub drivers are back ON.  However, we needed a way to detect that an I/O was coming from user space.
+        // One way to solve that would be to power manage the user client and do the sleep/wake there, but that was a big undertaking.  Another way is for the user client to somehow
+        // let the UIM know through some APIs.  We decided on a quick way by using bits that are part of the API to communicate that the request is coming from user space.  For device
+        // requests we use the wLenDone field, a 32-bit quantity, but whose maximum value is only 16 bits.  Same goes for the streamID of bulk requests.  Those bits are set by the user
+        // client and cleared by the controller after checking them.  If they are set and PCI Pause is active, we will sleep that request.
+#endif
+		kUSBUCRequestWithoutUSBNotificationMask = (1 << 30),
+		kUSBEndpointTransferTypeUCMask			= (1 << 7),
+		
+		// Constants for streams
+		kUSBStream0 					= 0,
+		kUSBMaxStream 					= 65533,
+		kUSBPRimeStream 				= 0xfffe,
+		kUSBNoStream 					= 0xffff,
+		kUSBAllStreams 					= 0xffffffff, 		// Obsolete, use kUSBStreamIDAllStreamsMask
+		kUSBStreamIDMask				= 0xffff,
+		kUSBStreamIDAllStreamsMask		= (1 << 31)
+	};
 
 /*!
-@enum bRequest Shifts and Masks 
+@enum bRequest Shifts and Masks
 @discussion These are used to create the macro to encode the bRequest filed of a Device Request
 */
 enum {
@@ -380,9 +394,9 @@ typedef struct IOUSBLowLatencyIsocCompletion {
 #define kIOUSBStreamsNotSupported							iokit_usb_err(0x44)                                 // 0xe0004044  The request cannot be completed because the XHCI controller does not support streams
 #define kIOUSBInvalidSSEndpoint								iokit_usb_err(0x43)									// 0xe0004043  An endpoint found in a SuperSpeed device is invalid (usually because there is no Endpoint Companion Descriptor)
 #define kIOUSBTooManyTransactionsPending                    iokit_usb_err(0x42)                                 // 0xe0004042  The transaction cannot be submitted because it would exceed the allowed number of pending transactions
-        
+    
 /*!
-@defined IOUSBFamily hardware error codes
+@definedblock IOUSBFamily hardware error codes
 @discussion These errors are returned by the OHCI controller.  The # in parenthesis (xx) corresponds to the OHCI Completion Code.
 For the following Completion codes, we return a generic IOKit error instead of a USB specific error.  
 <tt>
@@ -407,7 +421,7 @@ Completion Code         Error Returned              Description
 #define kIOUSBDataToggleErr     iokit_usb_err(0x03)		// 0xe0004003 Pipe stall, Bad data toggle
 #define kIOUSBBitstufErr        iokit_usb_err(0x02)		// 0xe0004002 Pipe stall, bitstuffing
 #define kIOUSBCRCErr            iokit_usb_err(0x01)		// 0xe0004001 Pipe stall, bad CRC
-/*! @/defineblock */
+/*! @/definedblock */
 
 
 /*!
@@ -440,6 +454,9 @@ Completion Code         Error Returned              Description
 #define kIOUSBMessageDeviceCountExceeded			iokit_usb_msg(0x1a)		// 0xe000401a  Message sent by a hub when a device cannot be enumerated because the USB controller ran out of resources
 #define kIOUSBMessageHubPortDeviceDisconnected      iokit_usb_msg(0x1b)		// 0xe000401b  Message sent by a built-in hub when a device was disconnected
 #define kIOUSBMessageUnsupportedConfiguration		iokit_usb_msg(0x1c)     // 0xe000401c  Message sent to the clients of the device when a device is not supported in the current configuration.  The message argument contains the locationID of the device
+#define kIOUSBMessageHubCountExceeded               iokit_usb_err(0x1d)     // 0xe000401d  Message sent when a 6th hub was plugged in and was not enumerated, as the USB spec only support 5 hubs in a chain
+#define kIOUSBMessageTDMLowBattery                  iokit_usb_err(0x1e)     // 0xe000401e  Message sent when when an attached TDM system battery is running low.
+    
 /*! @/defineblock */
 
     
@@ -1203,7 +1220,11 @@ enum {
     kUSBGangOverCurrentNotificationType         = 3,
     kUSBiOSDeviceNotEnoughPowerNotificationType = 4,
     kUSBNotEnoughPowerNoACNotificationType      = 5,
-    kUSBUnsupportedNotificationType             = 6
+    kUSBDeviceCountExceededNotificationType     = 6,
+    kUSBEndpointCountExceededNotificationType   = 7,
+    kUSBUnsupportedNotificationType             = 8,
+    kUSBHubCountExceededNotificationType        = 9,
+    kUSBTDMLowBatteryType                       = 10
 };
 
 /*!
@@ -1217,6 +1238,8 @@ enum {
 #define kUSBProductIDMask						"idProductMask"
 #define kUSBProductIdsArrayName					"idProductArray"
 #define kUSBPreferredConfiguration				"Preferred Configuration"
+#define kUSBPreferredInterface                  "Preferred Interface"
+#define kUSBPreferredInterfacePriority          "priority"
 #define kUSBSuspendPort							"kSuspendPort"
 #define kUSBExpressCardCantWake					"ExpressCardCantWake"
 #define kUSBControllerNeedsContiguousMemoryForIsoch	"Need contiguous memory for isoch"
@@ -1225,16 +1248,24 @@ enum {
 #define kUSBOutOfSpecMPSOK						"Out of spec MPS OK"
 #define kConfigurationDescriptorOverride		"ConfigurationDescriptorOverride"
 #define kOverrideIfAtLocationID					"OverrideIfAtLocationID"
+#define kOverrideAllowLowPower                  "kOverrideAllowLowPower"
 /*! @/defineblock */
 
 /*!
 @enum USBReEnumerateOptions
  @discussion Options used when calling ReEnumerateDevice. 
  @constant	kUSBAddExtraResetTimeBit	Setting this bit will cause the Hub driver to wait 100ms before addressing the device after the reset following the re-enumeration.
+ @constant	kUSBReEnumerateCaptureDeviceBit	Setting this bit will terminate any drivers attached to an IOUSBInterface for the device and to the IOUSBDevice itself.  It will not terminate
+ any drivers attached to a Mass Storage Class IOUSBInterface.  A client needs to have the appropriate permissions in order to specify this bit.  See IOUSBLib.h
+ @constant	kUSBReEnumerateReleaseDeviceBit	Setting this bit will return return any device that was captured back to the OS.  The driver for the IOUSBDevice will be loaded.  A client needs to have the appropriate permissions in order to specify this bit.  See IOUSBLib.h
  */
 typedef enum {
-    kUSBAddExtraResetTimeBit 		= 31,
-    kUSBAddExtraResetTimeMask		= ( 1 << kUSBAddExtraResetTimeBit)
+    kUSBAddExtraResetTimeBit            = 31,
+    kUSBReEnumerateCaptureDeviceBit     = 30,
+    kUSBReEnumerateReleaseDeviceBit     = 29,
+    kUSBAddExtraResetTimeMask           = ( 1 << kUSBAddExtraResetTimeBit),
+    kUSBReEnumerateCaptureDeviceMask    = ( 1 << kUSBReEnumerateCaptureDeviceBit),
+    kUSBReEnumerateReleaseDeviceMask    = ( 1 << kUSBReEnumerateReleaseDeviceBit)
 } USBReEnumerateOptions;
 
 /*!
@@ -1254,7 +1285,7 @@ typedef enum {
  @constant  kUSBInformationRootHubisBuiltIn				If this is a root hub simulation and it's built into the enclosure, this bit is set.  If it's on an expansion card, it will be cleared
  @constant  kUSBInformationDeviceIsRemote				This device is "attached" to the controller through a remote connection
  @constant  kUSBInformationDeviceIsAttachedToEnclosure	The hub port to which the USB device is connected has a USB connector on the enclosure
- @constant  kUSBInformationDeviceIsOnThunderbolt		The USB device is downstream of a controller that is attached through Thunderbolt
+ @constant  kUSBInformationDeviceIsOnThunderboltBit		The USB device is downstream of a controller that is attached through Thunderbolt
  
  */
 	typedef enum {
@@ -1348,10 +1379,12 @@ typedef enum {
 #define kAppleRevocableExtraCurrent			"AAPL,revocable-extra-current"
 #define kAppleExternalSuperSpeedPorts		"AAPL,ExternalSSPorts"
 #define kAppleUnconnectedSuperSpeedPorts	"AAPL,UnconnectedSSPorts"
+#define kAppleAcpiRootHubDepth				"AAPL,root-hub-depth"
 
 #define kAppleStandardPortCurrentInSleep	"AAPL,standard-port-current-in-sleep"
 
 #define kAppleInternalUSBDevice				"AAPL,device-internal"
+#define kAppleExternalConnectorBitmap       "AAPL,ExternalConnectorBitmap"
 #define kUSBBusID							"AAPL,bus-id"
 	
 	// Deprecated Names and/or values
@@ -1359,6 +1392,7 @@ typedef enum {
 #define kAppleCurrentInSleep				"AAPL,current-in-sleep"
 #define kApplePortCurrentInSleep			"AAPL,port-current-in-sleep"
 
+#define kOverrideAttachedToCPU              "kOverrideAttachedToCPU"
 
 // UPC definitions from ACPI Rev 4.0
 typedef enum {
@@ -1389,17 +1423,19 @@ enum {
 
 enum {
 	kXHCISSRootHubAddress	= kUSBMaxDevices,
-	kXHCIUSB2RootHubAddress = kUSBMaxDevices+1
+	kXHCIUSB2RootHubAddress = kUSBMaxDevices+1,
+    kSuperSpeedBusBitMask   = 0x01000000
 };
     
 #define ISROOTHUB(a) ((a == kXHCISSRootHubAddress) || (a == kXHCIUSB2RootHubAddress))
 
 // values (in nanoseconds) which are sent to requireMaxBusStall as appropriate
-#define kThunderboltMaxBusStall          25000
 #define kEHCIIsochMaxBusStall            25000
 #define kXHCIIsochMaxBusStall            25000
 #define kOHCIIsochMaxBusStall            25000
 #define kUHCIIsochMaxBusStall            10000
+#define kMaxBusStall10uS                 10000
+#define kMaxBusStall25uS                 25000
 
 #ifdef __cplusplus
 }       

@@ -1,5 +1,5 @@
 /*	NSKeyedArchiver.h
-	Copyright (c) 2001-2013, Apple Inc. All rights reserved.
+	Copyright (c) 2001-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSCoder.h>
@@ -41,13 +41,11 @@ FOUNDATION_EXPORT NSString * const NSKeyedArchiveRootObjectKey NS_AVAILABLE(10_9
 + (NSData *)archivedDataWithRootObject:(id)rootObject;
 + (BOOL)archiveRootObject:(id)rootObject toFile:(NSString *)path;
 
-- (id)initForWritingWithMutableData:(NSMutableData *)data;
+- (instancetype)initForWritingWithMutableData:(NSMutableData *)data;
 
-- (void)setDelegate:(id <NSKeyedArchiverDelegate>)delegate;
-- (id <NSKeyedArchiverDelegate>)delegate;
+@property (assign) id <NSKeyedArchiverDelegate> delegate;
 
-- (void)setOutputFormat:(NSPropertyListFormat)format;
-- (NSPropertyListFormat)outputFormat;
+@property NSPropertyListFormat outputFormat;
 
 - (void)finishEncoding;
 
@@ -97,10 +95,9 @@ FOUNDATION_EXPORT NSString * const NSKeyedArchiveRootObjectKey NS_AVAILABLE(10_9
 + (id)unarchiveObjectWithData:(NSData *)data;
 + (id)unarchiveObjectWithFile:(NSString *)path;
 
-- (id)initForReadingWithData:(NSData *)data;
+- (instancetype)initForReadingWithData:(NSData *)data;
 
-- (void)setDelegate:(id <NSKeyedUnarchiverDelegate>)delegate;
-- (id <NSKeyedUnarchiverDelegate>)delegate;
+@property (assign) id <NSKeyedUnarchiverDelegate> delegate;
 
 - (void)finishDecoding;
 
@@ -201,7 +198,7 @@ FOUNDATION_EXPORT NSString * const NSKeyedArchiveRootObjectKey NS_AVAILABLE(10_9
 
 @interface NSObject (NSKeyedArchiverObjectSubstitution)
 
-- (Class)classForKeyedArchiver;
+@property (readonly) Class classForKeyedArchiver;
 	// Implemented by classes to substitute a new class for instances during
 	// encoding.  The object will be encoded as if it were a member of the
 	// returned class.  The results of this method are overridden by the archiver

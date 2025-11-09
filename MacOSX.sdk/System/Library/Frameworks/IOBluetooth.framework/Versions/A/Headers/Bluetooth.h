@@ -52,8 +52,12 @@ typedef uint8_t		BluetoothReasonCode;
 typedef uint8_t		BluetoothEncryptionEnable;
 enum
 {
-	kBluetoothEncryptionEnableOff 	= 0x00, 
-	kBluetoothEncryptionEnableOn	= 0x01
+	kBluetoothEncryptionEnableOff           = 0x00,
+	kBluetoothEncryptionEnableOn            = 0x01,
+    
+    kBluetoothEncryptionEnableBREDRE0       = 0x01,
+    kBluetoothEncryptionEnableLEAESCCM      = 0x01,
+    kBluetoothEncryptionEnableBREDRAESCCM   = 0x02
 };
 
 typedef uint8_t		BluetoothKeyFlag;
@@ -359,6 +363,9 @@ enum
 	kBluetoothL2CAPChannelSecurityManager		= 0x0006,
 	// Range 0x0003 to 0x003F reserved for future use.
 	kBluetoothL2CAPChannelReservedStart			= 0x0007,
+    kBluetoothL2CAPChannelLEAP					= 0x002A,
+    kBluetoothL2CAPChannelLEAS					= 0x002B,
+	kBluetoothL2CAPChannelMagnet				= 0x003A, // Magnet
     kBluetoothL2CAPChannelReservedEnd			= 0x003F,
     
     // Range 0x0040 to 0xFFFF are dynamically allocated.
@@ -398,6 +405,9 @@ typedef enum
 	kBluetoothL2CAPCommandCodeMoveChannelConfirmationResponse	= 0x11,
 	kBluetoothL2CAPCommandCodeConnectionParameterUpdateRequest	= 0x12,
 	kBluetoothL2CAPCommandCodeConnectionParameterUpdateResponse	= 0x13,
+	kBluetoothL2CAPCommandCodeLECreditBasedConnectionRequest    = 0x14,
+	kBluetoothL2CAPCommandCodeLECreditBasedConnectionResponse	= 0x15,
+	kBluetoothL2CAPCommandCodeLEFlowControlCredit               = 0x16,
 } BluetoothL2CAPCommandCode;
 
 // Command Reject
@@ -582,22 +592,25 @@ enum BluetoothLESecurityManagerKeyDistributionFormat
 		
 typedef enum
 {
-	kBluetoothLESecurityManagerCommandCodeReserved					= 0x00,
-	kBluetoothLESecurityManagerCommandCodePairingRequest            = 0x01,
-	kBluetoothLESecurityManagerCommandCodePairingResponse           = 0x02,
-	kBluetoothLESecurityManagerCommandCodePairingConfirm            = 0x03,
-	kBluetoothLESecurityManagerCommandCodePairingRandom				= 0x04,
-	kBluetoothLESecurityManagerCommandCodePairingFailed				= 0x05,
-	kBluetoothLESecurityManagerCommandCodeEncryptionInfo            = 0x06,
-	kBluetoothLESecurityManagerCommandCodeMasterIdentification      = 0x07,
-	kBluetoothLESecurityManagerCommandCodeIdentityInfo				= 0x08,
-	kBluetoothLESecurityManagerCommandCodeIdentityAddressInfo       = 0x09,
-	kBluetoothLESecurityManagerCommandCodeSigningInfo				= 0x0A,
-	kBluetoothLESecurityManagerCommandCodeSecurityRequest			= 0x0B,
-	
+	kBluetoothLESecurityManagerCommandCodeReserved                      = 0x00,
+	kBluetoothLESecurityManagerCommandCodePairingRequest                = 0x01,
+	kBluetoothLESecurityManagerCommandCodePairingResponse               = 0x02,
+	kBluetoothLESecurityManagerCommandCodePairingConfirm                = 0x03,
+	kBluetoothLESecurityManagerCommandCodePairingRandom                 = 0x04,
+	kBluetoothLESecurityManagerCommandCodePairingFailed                 = 0x05,
+	kBluetoothLESecurityManagerCommandCodeEncryptionInfo                = 0x06,
+	kBluetoothLESecurityManagerCommandCodeMasterIdentification          = 0x07,
+	kBluetoothLESecurityManagerCommandCodeIdentityInfo                  = 0x08,
+	kBluetoothLESecurityManagerCommandCodeIdentityAddressInfo           = 0x09,
+	kBluetoothLESecurityManagerCommandCodeSigningInfo                   = 0x0A,
+    kBluetoothLESecurityManagerCommandCodeSecurityRequest               = 0x0B,
+    kBluetoothLESecurityManagerCommandCodePairingPublicKey              = 0x0C,
+    kBluetoothLESecurityManagerCommandCodePairingDHKeyCheck             = 0x0D,
+    kBluetoothLESecurityManagerCommandCodePairingKeypressNotification	= 0x0E,
+    
 	// 0x0C - 0xFF reserved
-	kBluetoothLESecurityManagerCommandCodeReservedStart				= 0x0C,
-	kBluetoothLESecurityManagerCommandCodeReservedEnd				= 0xFF
+	kBluetoothLESecurityManagerCommandCodeReservedStart                 = 0x0C,
+	kBluetoothLESecurityManagerCommandCodeReservedEnd                   = 0xFF
 } BluetoothLESecurityManagerCommandCode;
 
 typedef enum
@@ -656,8 +669,10 @@ typedef enum
 	kBluetoothLESecurityManagerReasonCodeCommandNotSupported                = 0x07,
 	kBluetoothLESecurityManagerReasonCodeUnspecifiedReason                  = 0x08,
 	kBluetoothLESecurityManagerReasonCodeRepeatedAttempts                   = 0x09,
-	kBluetoothLESecurityManagerReasonCodeInvalidParameters                  = 0x0A,
-	kBluetoothLESecurityManagerReasonCodeReservedStart						= 0x0B,
+    kBluetoothLESecurityManagerReasonCodeInvalidParameters                  = 0x0A,
+    kBluetoothLESecurityManagerReasonCodeDHKeyCheckFailed                   = 0x0B,
+    kBluetoothLESecurityManagerReasonCodeNumericComparisonFailed            = 0x0C,
+	kBluetoothLESecurityManagerReasonCodeReservedStart						= 0x0D,
 	kBluetoothLESecurityManagerReasonCodeReservedEnd						= 0xFF,
 } BluetoothLESecurityManagerPairingFailedReasonCode;
 
@@ -1471,7 +1486,7 @@ struct BluetoothHCIAutomaticFlushTimeoutInfo
 	BluetoothHCIAutomaticFlushTimeout	timeout;
 };
 
-#define	kInfoStringMaxLength		25
+#define	kInfoStringMaxLength		35
 typedef struct	BluetoothTransportInfo 		BluetoothTransportInfo;
 typedef 		BluetoothTransportInfo*		BluetoothTransportInfoPtr;
 struct			BluetoothTransportInfo
@@ -1490,9 +1505,10 @@ struct			BluetoothTransportInfo
 
 enum BluetoothTransportTypes
 {
-	kBluetoothTransportTypeUSB				= 0x01,
-	kBluetoothTransportTypePCCard			= 0x02,
-	kBluetoothTransportTypePCICard			= 0x03
+	kBluetoothTransportTypeUSB		= 0x01,
+	kBluetoothTransportTypePCCard	= 0x02,
+	kBluetoothTransportTypePCICard	= 0x03,
+	kBluetoothTransportTypeUART		= 0x04
 };
 
 // Inquiries
@@ -2069,7 +2085,16 @@ struct			BluetoothHCIEventLEConnectionCompleteResults
 	uint16_t									supervisionTimeout;
 	uint8_t										masterClockAccuracy;
 } __attribute__((packed));		
-		
+	
+typedef struct	BluetoothHCIEventLEConnectionUpdateCompleteResults		BluetoothHCIEventLEConnectionUpdateCompleteResults;
+struct			BluetoothHCIEventLEConnectionUpdateCompleteResults
+{
+    BluetoothConnectionHandle					connectionHandle;
+    uint16_t									connInterval;
+    uint16_t									connLatency;
+    uint16_t									supervisionTimeout;
+} __attribute__((packed));
+        
 typedef struct	BluetoothHCIEventDisconnectionCompleteResults		BluetoothHCIEventDisconnectionCompleteResults;
 struct			BluetoothHCIEventDisconnectionCompleteResults
 {
@@ -2568,6 +2593,49 @@ typedef uint8_t		BluetoothSDPDataElementTypeDescriptor;
 typedef uint8_t		BluetoothSDPDataElementSizeDescriptor;
 
 typedef uint16_t	BluetoothSDPServiceAttributeID;
+
+#if 0
+#pragma mark -
+#pragma mark === LE ===
+#endif
+        
+typedef enum {
+    BluetoothLEScanTypePassive	= 0x00,
+    BluetoothLEScanTypeActive	= 0x01
+} BluetoothLEScanType;
+
+typedef enum {
+    BluetoothLEAddressTypePublic	= 0x00,
+    BluetoothLEAddressTypeRandom	= 0x01
+} BluetoothLEAddressType;
+        
+typedef enum {
+    BluetoothLEScanFilterNone		= 0x00,
+    BluetoothLEScanFilterWhitelist	= 0x01
+} BluetoothLEScanFilter;
+        
+typedef enum {
+    BluetoothLEScanDisable	= 0x00,
+    BluetoothLEScanEnable	= 0x01
+} BluetoothLEScan;
+		
+typedef enum {
+	BluetoothLEConnectionIntervalMin	= 0x06,
+	BluetoothLEConnectionIntervalMax	= 0x0C80
+} BluetoothLEConnectionInterval;
+		
+typedef enum {
+    BluetoothLEScanDuplicateFilterDisable	= 0x00,
+    BluetoothLEScanDuplicateFilterEnable	= 0x01,
+} BluetoothLEScanDuplicateFilter;
+        
+typedef enum {
+    BluetoothLEAdvertisingTypeConnectableUndirected		= 0x00,
+    BluetoothLEAdvertisingTypeConnectableDirected		= 0x01,
+    BluetoothLEAdvertisingTypeDiscoverableUndirected	= 0x02,
+    BluetoothLEAdvertisingTypeNonConnectableUndirected	= 0x03,
+    BluetoothLEAdvertisingTypeScanResponse				= 0x04
+} BluetoothLEAdvertisingType;
 
 #ifdef	__cplusplus
 	}

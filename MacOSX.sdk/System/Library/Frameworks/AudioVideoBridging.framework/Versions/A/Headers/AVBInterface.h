@@ -2,7 +2,7 @@
 //  AVBInterface.h
 //  AudioVideoBridging
 //
-//  Copyright 2010-2012 Apple Inc. All rights reserved.
+//  Copyright (c) 2010-2014 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -20,6 +20,8 @@
 
 @class AVB17221AECPInterface;
 @class AVB17221ACMPInterface;
+
+@class AVB1722MAAP;
 
 @protocol AVBInterfaceDelegate;
 
@@ -49,6 +51,8 @@ NS_CLASS_AVAILABLE(10_8, NA)
 	AVB17221AECPInterface *_aecp;
 	AVB17221ACMPInterface *_acmp;
 	
+	AVB1722MAAP *_maap;
+	
 	AVBMACAddress *_macAddress;
 	
 	id<AVBInterfaceDelegate> _interfaceDelegate;
@@ -62,6 +66,7 @@ NS_CLASS_AVAILABLE(10_8, NA)
 	dispatch_queue_t _timeSyncCreationQueue;
 	dispatch_queue_t _aecpCreationQueue;
 	dispatch_queue_t _acmpCreationQueue;
+	dispatch_queue_t _maapCreationQueue;
 	
 	dispatch_queue_t _notificationQueue;
 	IONotificationPortRef _notificationPort;
@@ -75,6 +80,9 @@ NS_CLASS_AVAILABLE(10_8, NA)
 	io_iterator_t _timeSyncIterator;
 	io_iterator_t _aecpIterator;
 	io_iterator_t _acmpIterator;
+	io_iterator_t _maapIterator;
+	
+	NSMutableArray *_virtualEntities;
 }
 
 /*!
@@ -85,18 +93,18 @@ NS_CLASS_AVAILABLE(10_8, NA)
 
 /*!
 	@property	entityDiscovery
-	@abstract	The IEEE P1722.1 entity discovery for the interface.
+	@abstract	The IEEE Std 1722.1™-2013 entity discovery for the interface.
  */
 @property (retain, readonly) AVB17221EntityDiscovery *entityDiscovery;
 
 /*!
 	@property	aecp
-	@abstract	The IEEE P1722.1 AECP interface for the interface.
+	@abstract	The IEEE Std 1722.1™-2013 AECP interface for the interface.
  */
 @property (retain, readonly) AVB17221AECPInterface *aecp;
 /*!
 	@property	acmp
-	@abstract	The IEEE P1722.1 ACMP interface for the interface.
+	@abstract	The IEEE Std 1722.1™-2013 ACMP interface for the interface.
  */
 @property (retain, readonly) AVB17221ACMPInterface *acmp;
 
@@ -136,7 +144,7 @@ NS_CLASS_AVAILABLE(10_8, NA)
 	@param		anInterfaceName	The BSD name of the interface.
 	@result		The initialized receiver.
  */
-- (id)initWithInterfaceName:(NSString *)anInterfaceName;
+- (instancetype)initWithInterfaceName:(NSString *)anInterfaceName;
 
 /*!
  @method		myGUID

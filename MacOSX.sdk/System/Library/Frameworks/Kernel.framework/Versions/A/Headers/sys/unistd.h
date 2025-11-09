@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2010 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -172,5 +172,6 @@ struct accessx_descriptor {
 
 /* configurable system strings */
 #define	_CS_PATH		 1
+
 
 #endif /* !_SYS_UNISTD_H_ */

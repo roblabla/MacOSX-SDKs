@@ -3,7 +3,7 @@
  
      Contains:   TextEncoding-related types and constants, and prototypes for related functions
  
-     Copyright:  © 1995-2012 Apple Inc. All rights reserved.
+     Copyright:  © 1995-2013 Apple Inc. All rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -169,7 +169,8 @@ enum {
   kTextEncodingUnicodeV5_0      = 0x010A,
   kTextEncodingUnicodeV5_1      = 0x010B, /* No constant for Unicode 5.2, but leave an opening.*/
   kTextEncodingUnicodeV6_0      = 0x010D, /* Adds many symbols, including emoji support.*/
-  kTextEncodingUnicodeV6_1      = 0x010E  /* Adds emoji variation sequences, properties changes.*/
+  kTextEncodingUnicodeV6_1      = 0x010E, /* Adds emoji variation sequences, properties changes.*/
+  kTextEncodingUnicodeV6_3      = 0x0110  /* Adds new bidi controls.*/
 };
 
 /* ISO 8-bit and 7-bit encodings begin at 0x200*/
@@ -796,7 +797,12 @@ enum {
   kUCBidiCatRightLeftOverride   = 16,   /* RLO    Right-to-Left Override*/
   kUCBidiCatPopDirectionalFormat = 17,  /* PDF    Pop Directional Format*/
   kUCBidiCatNonSpacingMark      = 18,   /* NSM    Non-Spacing Mark*/
-  kUCBidiCatBoundaryNeutral     = 19    /* BN Boundary Neutral*/
+  kUCBidiCatBoundaryNeutral     = 19,   /* BN Boundary Neutral*/
+                                        /* New categories for Unicode 6.3*/
+  kUCBidiCatLeftRightIsolate    = 20,   /* LRI    Left-to-Right Isolate*/
+  kUCBidiCatRightLeftIsolate    = 21,   /* RLI    Right-to-Left Isolate*/
+  kUCBidiCatFirstStrongIsolate  = 22,   /* FSI    First Strong Isolate*/
+  kUCBidiCatPopDirectionalIsolate = 23  /* PDI    Pop Directional Isolate*/
 };
 
 

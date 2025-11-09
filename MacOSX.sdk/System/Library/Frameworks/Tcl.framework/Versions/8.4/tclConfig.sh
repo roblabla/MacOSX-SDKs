@@ -18,7 +18,7 @@ TCL_MINOR_VERSION='4'
 TCL_PATCH_LEVEL='.19'
 
 # C compiler to use for compilation.
-TCL_CC='/Applications/Xcode.app/Contents/Developer/Toolchains/OSX10.9.xctoolchain/usr/bin/cc'
+TCL_CC='/usr/bin/cc'
 
 # -D flags for use with the C compiler.
 TCL_DEFS=' -DNO_VALUES_H=1 -DHAVE_LIMITS_H=1 -DHAVE_UNISTD_H=1 -DHAVE_SYS_PARAM_H=1 -DUSE_THREAD_ALLOC=1 -D_REENTRANT=1 -D_THREAD_SAFE=1 -DHAVE_PTHREAD_ATTR_SETSTACKSIZE=1 -DHAVE_PTHREAD_ATFORK=1 -DTCL_THREADS=1 -DHAVE_COREFOUNDATION=1 -DMAC_OSX_TCL=1 -DTCL_WIDE_INT_IS_LONG=1 -DHAVE_GETCWD=1 -DHAVE_OPENDIR=1 -DHAVE_STRSTR=1 -DHAVE_STRTOL=1 -DHAVE_STRTOLL=1 -DHAVE_STRTOULL=1 -DHAVE_TMPNAM=1 -DHAVE_WAITPID=1 -DHAVE_GETPWUID_R_5=1 -DHAVE_GETPWUID_R=1 -DHAVE_GETPWNAM_R_5=1 -DHAVE_GETPWNAM_R=1 -DHAVE_GETGRGID_R_5=1 -DHAVE_GETGRGID_R=1 -DHAVE_GETGRNAM_R_5=1 -DHAVE_GETGRNAM_R=1 -DHAVE_MTSAFE_GETHOSTBYNAME=1 -DHAVE_MTSAFE_GETHOSTBYADDR=1 -DHAVE_SYS_TIME_H=1 -DTIME_WITH_SYS_TIME=1 -DHAVE_TM_ZONE=1 -DHAVE_GMTIME_R=1 -DHAVE_LOCALTIME_R=1 -DHAVE_TM_GMTOFF=1 -DHAVE_TIMEZONE_VAR=1 -DHAVE_ST_BLKSIZE=1 -DSTDC_HEADERS=1 -DHAVE_SIGNED_CHAR=1 -DHAVE_LANGINFO=1 -DHAVE_COPYFILE_H=1 -DHAVE_COPYFILE=1 -DHAVE_LIBKERN_OSATOMIC_H=1 -DHAVE_OSSPINLOCKLOCK=1 -DHAVE_PTHREAD_ATFORK=1 -DUSE_VFORK=1 -DTCL_DEFAULT_ENCODING=\"utf-8\" -DTCL_LOAD_FROM_MEMORY=1 -DHAVE_AVAILABILITYMACROS_H=1 -DHAVE_WEAK_IMPORT=1 -DHAVE_FTS=1 -DHAVE_SYS_IOCTL_H=1 -DHAVE_SYS_FILIO_H=1 -DUSE_DTRACE=1 -DTCL_FRAMEWORK=1 '
@@ -111,7 +111,7 @@ TCL_LIB_FLAG='-framework Tcl'
 
 # String to pass to linker to pick up the Tcl library from its
 # build directory.
-TCL_BUILD_LIB_SPEC='-F/private/var/tmp/tcl/tcl-102~340/OBJROOT1/tcl84/Deployment -framework Tcl'
+TCL_BUILD_LIB_SPEC='-F/BinaryCache/tcl/tcl-105~540/Objects/OBJROOT1/tcl84/Deployment -framework Tcl'
 
 # String to pass to linker to pick up the Tcl library from its
 # installed directory.
@@ -146,7 +146,7 @@ TCL_UNSHARED_LIB_SUFFIX='${VERSION}${DBGX}.a'
 # different place than the directory containing the source files, this
 # points to the location of the sources, not the location where Tcl was
 # compiled.
-TCL_SRC_DIR='/SourceCache/tcl/tcl-102/tcl84/tcl'
+TCL_SRC_DIR='/SourceCache/tcl/tcl-105/tcl84/tcl'
 
 # List of standard directories in which to look for packages during
 # "package require" commands.  Contains the "prefix" directory plus also
@@ -164,14 +164,14 @@ TCL_STUB_LIB_FLAG='-ltclstub8.4${TCL_DBGX}'
 
 # String to pass to linker to pick up the Tcl stub library from its
 # build directory.
-TCL_BUILD_STUB_LIB_SPEC='-L/private/var/tmp/tcl/tcl-102~340/OBJROOT1/tcl84/Deployment -ltclstub8.4${TCL_DBGX}'
+TCL_BUILD_STUB_LIB_SPEC='-L/BinaryCache/tcl/tcl-105~540/Objects/OBJROOT1/tcl84/Deployment -ltclstub8.4${TCL_DBGX}'
 
 # String to pass to linker to pick up the Tcl stub library from its
 # installed directory.
 TCL_STUB_LIB_SPEC='-L/System/Library/Frameworks/Tcl.framework/Versions/8.4 -ltclstub8.4${TCL_DBGX}'
 
 # Path to the Tcl stub library in the build directory.
-TCL_BUILD_STUB_LIB_PATH='/private/var/tmp/tcl/tcl-102~340/OBJROOT1/tcl84/Deployment/libtclstub8.4${TCL_DBGX}.a'
+TCL_BUILD_STUB_LIB_PATH='/BinaryCache/tcl/tcl-105~540/Objects/OBJROOT1/tcl84/Deployment/libtclstub8.4${TCL_DBGX}.a'
 
 # Path to the Tcl stub library in the install directory.
 TCL_STUB_LIB_PATH='/System/Library/Frameworks/Tcl.framework/Versions/8.4/libtclstub8.4${TCL_DBGX}.a'

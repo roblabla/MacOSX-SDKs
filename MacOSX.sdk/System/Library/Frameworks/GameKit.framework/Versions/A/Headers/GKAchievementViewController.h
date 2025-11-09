@@ -1,29 +1,31 @@
-/*
- *  GKAchievementViewController.h
- *  GameKit
- *
- *  Copyright 2010 Apple Inc. All rights reserved.
- */
+//
+//  GKAchievementViewController.h
+//  Game Center
+//
+//  Copyright 2010-2015 Apple Inc. All rights reserved.
+//
 
 #if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
-#import <GameKit/GKGameCenterViewController.h>
 #else
 #import <AppKit/AppKit.h>
 #endif
+#import <GameKit/GKGameCenterViewController.h>
 
 @protocol GKAchievementViewControllerDelegate;
 
 // View controller that provides the standard user interface for achievements. Present modally from the top view controller.
 #if TARGET_OS_IPHONE
-NS_CLASS_AVAILABLE(NA, 4_1)
+// View controller that provides the standard user interface for achievements. Present modally from the top view controller.
+NS_DEPRECATED(10_8, 10_10, 4_1, 7_0, "Use GKGameCenterViewController instead")
 @interface GKAchievementViewController : GKGameCenterViewController
 @end
 #else
-#include <GameKit/GKDialogController.h>
-NS_CLASS_AVAILABLE(10_8, NA)
-@interface GKAchievementViewController : NSViewController <GKViewController> {
-	id _internal1,_internal2,_internal3,_internal4;
+#import <GameKit/GKDialogController.h>
+NS_CLASS_AVAILABLE(10_8, 10_10)
+@interface GKAchievementViewController : GKGameCenterViewController
+{
+    id<GKAchievementViewControllerDelegate> _achievementDelegate;
 }
 @end
 #endif
@@ -33,7 +35,8 @@ NS_CLASS_AVAILABLE(10_8, NA)
 @end
 
 // Optional delegate
-@protocol GKAchievementViewControllerDelegate
+NS_DEPRECATED(10_8, 10_10, 4_1, 7_0, "Use GKGameCenterViewController instead")
+@protocol GKAchievementViewControllerDelegate <NSObject>
 @required
 // The achievement view has finished
 - (void)achievementViewControllerDidFinish:(GKAchievementViewController *)viewController;

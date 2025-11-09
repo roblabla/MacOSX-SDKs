@@ -32,7 +32,7 @@
     @result Returns the new IOBluetoothSDPUUID object or nil on failure.
 */
 
-+ (IOBluetoothSDPUUID *)uuidWithBytes:(const void *)bytes length:(unsigned)length;
++ (instancetype)uuidWithBytes:(const void *)bytes length:(unsigned)length;
 
 /*!
     @method uuidWithData:
@@ -42,7 +42,7 @@
     @result Returns the new IOBluetoothSDPUUID object or nil on failure.
 */
 
-+ (IOBluetoothSDPUUID *)uuidWithData:(NSData *)data;
++ (instancetype)uuidWithData:(NSData *)data;
 
 /*!
     @method uuid16:
@@ -51,7 +51,7 @@
     @result Returns the new IOBluetoothSDPUUID object.
 */
 
-+ (IOBluetoothSDPUUID *)uuid16:(BluetoothSDPUUID16)uuid16;
++ (instancetype)uuid16:(BluetoothSDPUUID16)uuid16;
 
 /*!
     @method uuid32:
@@ -60,14 +60,14 @@
     @result Returns the new IOBluetoothSDPUUID object.
 */
 
-+ (IOBluetoothSDPUUID *)uuid32:(BluetoothSDPUUID32)uuid32;
++ (instancetype)uuid32:(BluetoothSDPUUID32)uuid32;
 
 /*!	@method	withSDPUUIDRef:
 	@abstract	Method call to convert an IOBluetoothSDPUUIDRef into an IOBluetoothSDPUUID *.
         @param	sdpUUIDRef IOBluetoothSDPUUIDRef for which an IOBluetoothSDPUUID * is desired.
 	@result		Returns the IOBluetoothSDPUUID * for the given IOBluetoothSDPUUIDRef.
 */
-+ (IOBluetoothSDPUUID *)withSDPUUIDRef:(IOBluetoothSDPUUIDRef)sdpUUIDRef DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
++ (instancetype)withSDPUUIDRef:(IOBluetoothSDPUUIDRef)sdpUUIDRef DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
     @method initWithUUID16:
@@ -76,7 +76,7 @@
     @result Returns self.
 */
 
-- (id)initWithUUID16:(BluetoothSDPUUID16)uuid16;
+- (instancetype)initWithUUID16:(BluetoothSDPUUID16)uuid16;
 
 /*!
     @method initWithUUID32:
@@ -85,7 +85,7 @@
     @result Returns self.
 */
 
-- (id)initWithUUID32:(BluetoothSDPUUID32)uuid32;
+- (instancetype)initWithUUID32:(BluetoothSDPUUID32)uuid32;
 
 /*!	@method	getSDPUUIDRef
 	@abstract	Returns an IOBluetoothSDPUUIDRef representation of the target IOBluetoothSDPUUID object.
@@ -105,7 +105,7 @@
             is possible to do so.  Otherwise, nil is returned.
 */
 
-- (IOBluetoothSDPUUID *)getUUIDWithLength:(unsigned)newLength;
+- (instancetype)getUUIDWithLength:(unsigned)newLength;
 
 /*!
     @method isEqualToUUID:

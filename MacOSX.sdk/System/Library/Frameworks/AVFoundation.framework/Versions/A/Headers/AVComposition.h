@@ -3,53 +3,53 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2013 Apple Inc. All rights reserved.
+	Copyright 2010-2014 Apple Inc. All rights reserved.
 
 */
 
 /*!
     @class			AVComposition
 
-    @abstract		An AVComposition combines media data from multiple local file-based sources in a custom temporal arrangement,
-    				in order to present or process media data from multiple sources together. All local file-based audiovisual 
+    @abstract		An AVComposition combines media data from multiple local file-based sources in a custom temporal arrangement, in order to present or process media data from multiple sources together. All local file-based audiovisual
     				assets are eligible to be combined, regardless of container type.
 	
-	@discussion		At its top-level, AVComposition is a collection of tracks, each presenting media of a specific media type,
-					e.g. audio or video, according to a timeline. Each track is represented by an instance of AVCompositionTrack.
+	@discussion		At its top-level, AVComposition is a collection of tracks, each presenting media of a specific media type, e.g. audio or video, according to a timeline. Each track is represented by an instance of AVCompositionTrack.
 
-					Each track is comprised of an array of track segments, each of which present a portion of the media data
-					stored in a source container, specified by URL, a track identifier, and a time mapping, as represented by
+					Each track is comprised of an array of track segments, each of which present a portion of the media data stored in a source container, specified by URL, a track identifier, and a time mapping, as represented by
 					an instance of AVCompositionTrackSegment.
-					The URL specifies the source container, and the track identifier indicates the track of the source container
-					to be presented.
-					The time mapping specifies the temporal range of the source track that's to be presented and also specifies
-					the temporal range of its presentation in the composition track. If the durations of the source and destination
-					ranges of the time mapping are the same, the media data for the segment will be presented at its natural rate.
-					Otherwise, the segment will be presented at a rate equal to the ratio source.duration / target.duration.
 					
-					The track segments of a track are available via AVCompositionTrack's trackSegment property, an array of
-					AVCompositionTrackSegment. The collection of tracks with media type information for each, and each with its
-					array of track segments (URL, track identifier, and time mapping), form a complete low-level representation
-					of a composition.
-					This representation can be written out by clients in any convenient form, and subsequently the
-					composition can be reconstituted by instantiating a new AVMutableComposition with AVMutableCompositionTracks
-					of the appropriate media type, each with its trackSegment property set according to the stored array of
-					URL, track identifier, and time mapping.
+					The URL specifies the source container, and the track identifier indicates the track of the source container to be presented.
 					
-					A higher-level interface for constructing compositions is also presented by AVMutableComposition
-					and AVMutableCompositionTrack, offering insertion, removal, and scaling operations without direct
-					manipulation of the trackSegment arrays of composition tracks. This interface makes use of higher-level
-					constructs such as AVAsset and AVAssetTrack, allowing the client to make use of the same references to
-					candidate sources that it would have created in order to inspect or preview them prior to inclusion
-					in a composition.
+					The time mapping specifies the temporal range of the source track that's to be presented and also specifies the temporal range of its presentation in the composition track. If the durations of the source and destination
+					ranges of the time mapping are the same, the media data for the segment will be presented at its natural rate. Otherwise, the segment will be presented at a rate equal to the ratio source.duration / target.duration.
+					
+					The track segments of a track are available via AVCompositionTrack's trackSegment property, an array of AVCompositionTrackSegment. The collection of tracks with media type information for each, and each with its
+					array of track segments (URL, track identifier, and time mapping), form a complete low-level representation of a composition.
 
-					Implementation note: to make an immutable snapshot of a mutable composition for playback or inspection --
+					This representation can be written out by clients in any convenient form, and subsequently the composition can be reconstituted by instantiating a new AVMutableComposition with AVMutableCompositionTracks
+					of the appropriate media type, each with its trackSegment property set according to the stored array of URL, track identifier, and time mapping.
 					
-					// myMutableComposition is a mutable composition; the client wants to inspect and play it in its current state
-					AVComposition *immutableSnapshotOfMyComposition = [myMutableComposition copy];
+					A higher-level interface for constructing compositions is also presented by AVMutableComposition and AVMutableCompositionTrack, offering insertion, removal, and scaling operations without direct
+					manipulation of the trackSegment arrays of composition tracks. This interface makes use of higher-level constructs such as AVAsset and AVAssetTrack, allowing the client to make use of the same references to
+					candidate sources that it would have created in order to inspect or preview them prior to inclusion in a composition.
+
+					Immutable Snapshots
+
+						To make an immutable snapshot of a mutable composition for playback or inspection:
+					
+						// myMutableComposition is a mutable composition; the client wants to inspect and play it in its current state
+						AVComposition *immutableSnapshotOfMyComposition = [myMutableComposition copy];
 				
-					// inspect and play at will, e.g.
-					AVPlayerItem *playerItemForSnapshottedComposition = [[AVPlayerItem alloc] initWithAsset:immutableSnapshotOfMyComposition];
+						// inspect and play at will, e.g.
+						AVPlayerItem *playerItemForSnapshottedComposition = [[AVPlayerItem alloc] initWithAsset:immutableSnapshotOfMyComposition];
+
+					Compositing Of Video Tracks
+
+						During playback or other processing, such as export, without the use of an AVVideoComposition only the first enabled video track will be processed. Other video tracks are effectively ignored. To control the compositing of multiple enabled video tracks, you must create and configure an instance of AVVideoComposition and set it as the value of the videoComposition property of the AVFoundation object you’re using to control processing, such as an AVPlayerItem or AVAssetExportSession.
+
+					Mixing Of Audio Tracks
+
+						During playback or other processing, without the use of an AVAudioMix all of the asset’s enabled audio tracks are mixed together at equal levels. To control the mixing of enabled audio tracks, you must create and configure an instance of AVAudioMix and set it as the value of the audioMix property of the AVFoundation object you’re using to control processing, such as an AVPlayerItem or AVAssetExportSession.
 */
 
 #import <AVFoundation/AVBase.h>
@@ -115,22 +115,18 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 	@param			timeRange
 					Specifies the timeRange of the asset to be inserted.
 	@param			asset
-					Specifies the asset that contains the tracks that are to be inserted. Only instances of AVURLAsset are supported.
+					Specifies the asset that contains the tracks that are to be inserted. Only instances of AVURLAsset and AVComposition are supported (AVComposition starting in MacOS X 10.10 and iOS 8.0).
 	@param			startTime
 					Specifies the time at which the inserted tracks are to be presented by the composition.
 	@param			outError
-					Describes failures that may be reported to the user, e.g. the asset
-					that was selected for insertion in the composition is restricted by copy-protection.
+					Describes failures that may be reported to the user, e.g. the asset that was selected for insertion in the composition is restricted by copy-protection.
 	@result			A BOOL value indicating the success of the insertion.
 	@discussion	
-		You provide a reference to an AVAsset and the timeRange within it that you want to insert.  
-		You specify the start time in the destination composition at which the timeRange should be inserted.
+		You provide a reference to an AVAsset and the timeRange within it that you want to insert. You specify the start time in the destination composition at which the timeRange should be inserted.
 		
-		This method may add new tracks to ensure that all tracks of the asset are represented 
-		in the inserted timeRange.
+		This method may add new tracks to ensure that all tracks of the asset are represented in the inserted timeRange.
 		
-		Note that the media data for the inserted timeRange will be presented at its natural duration and rate. It can be
-		scaled to a different duration and presented at a different rate via -scaleTimeRange:toDuration:.
+		Note that the media data for the inserted timeRange will be presented at its natural duration and rate. It can be scaled to a different duration and presented at a different rate via -scaleTimeRange:toDuration:.
 		
 		Existing content at the specified startTime will be pushed out by the duration of timeRange. 
 */

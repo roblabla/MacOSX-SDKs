@@ -29,6 +29,11 @@
 #include <IOKit/usb/IOUSBControllerListElement.h>
 #include <IOKit/usb/IOUSBController.h>
 
+// These are the values returned in GetLowLatencyOptionsAndPhysicalMask
+
+#define kLowLatencyUSBDefaultOptionBits						0							// by default we don't need contiguous memory
+#define kLowLatencyUSB32bitPhysicalMask						0x00000000FFFFF000ULL		// 32 bit memory aligned on a 4K boundary (default)
+#define kLowLatencyUSB64bitPhysicalMask						0xFFFFFFFFFFFFF000ULL		// 64 bit memory aligned on a 4K boundary
 
 
 /*!

@@ -1,5 +1,5 @@
 /*	NSDistributedLock.h
-	Copyright (c) 1995-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1995-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -13,12 +13,13 @@
 
 + (NSDistributedLock *)lockWithPath:(NSString *)path;  
 
-- (id)initWithPath:(NSString *)path;
+- (instancetype)init NS_UNAVAILABLE;
+- (instancetype)initWithPath:(NSString *)path NS_DESIGNATED_INITIALIZER;
 
 - (BOOL)tryLock;
 - (void)unlock;
 - (void)breakLock;
-- (NSDate *)lockDate;
+@property (readonly, copy) NSDate *lockDate;
 
 @end
 

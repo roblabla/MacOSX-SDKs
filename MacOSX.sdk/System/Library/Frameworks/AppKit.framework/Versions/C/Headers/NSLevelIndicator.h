@@ -1,7 +1,7 @@
 /*
     NSLevelIndicatorCell.h
     Application Kit
-    Copyright (c) 2004-2013, Apple Inc.
+    Copyright (c) 2004-2014, Apple Inc.
     All rights reserved.
 */
 
@@ -12,26 +12,21 @@
 @interface NSLevelIndicator : NSControl {
 }
 
-- (double)minValue;
-- (void)setMinValue:(double)minValue;
+@property NSLevelIndicatorStyle levelIndicatorStyle NS_AVAILABLE_MAC(10_10);
 
-- (double)maxValue;
-- (void)setMaxValue:(double)maxValue;
+@property double minValue;
 
-- (double)warningValue;
-- (void)setWarningValue:(double)warningValue;
+@property double maxValue;
 
-- (double)criticalValue;
-- (void)setCriticalValue:(double)criticalValue;
+@property double warningValue;
 
-- (NSTickMarkPosition)tickMarkPosition;
-- (void)setTickMarkPosition:(NSTickMarkPosition)position;
+@property double criticalValue;
 
-- (NSInteger)numberOfTickMarks;
-- (void)setNumberOfTickMarks:(NSInteger)count;
+@property NSTickMarkPosition tickMarkPosition;
 
-- (NSInteger)numberOfMajorTickMarks;
-- (void)setNumberOfMajorTickMarks:(NSInteger)count;
+@property NSInteger numberOfTickMarks;
+
+@property NSInteger numberOfMajorTickMarks;
 
 - (double)tickMarkValueAtIndex:(NSInteger)index;
 - (NSRect)rectOfTickMarkAtIndex:(NSInteger)index;

@@ -46,10 +46,9 @@ typedef struct CGRect CGRect;
 
 /* Rectangle edges. */
 
-enum CGRectEdge {
+typedef CF_ENUM(uint32_t, CGRectEdge) {
   CGRectMinXEdge, CGRectMinYEdge, CGRectMaxXEdge, CGRectMaxYEdge
 };
-typedef enum CGRectEdge CGRectEdge;
 
 /* The "zero" point -- equivalent to CGPointMake(0, 0). */ 
 

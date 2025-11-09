@@ -1,5 +1,5 @@
 /*	NSNetServices.h
-        Copyright (c) 2002-2013 Apple Inc. All rights reserved.
+        Copyright (c) 2002-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -84,13 +84,13 @@ typedef NS_OPTIONS(NSUInteger, NSNetServiceOptions) {
 
 /* This is the initializer for publishing. You should use this initializer if you are going to announce the availability of a service on the network. To publish a service in all available domains, pass the empty string as the domain.
 */
-- (id)initWithDomain:(NSString *)domain type:(NSString *)type name:(NSString *)name port:(int)port;
+- (instancetype)initWithDomain:(NSString *)domain type:(NSString *)type name:(NSString *)name port:(int)port;
 
 /* This is the initializer for resolution. If you know the domain, type and name of the service for which you wish to discover addresses, you should initialize an NSNetService instance using this method and call resolve: on the result. If you wish to connect to this service immediately, you should call getInputStream:getOutputStream: on the result and forego the resolution step entirely.
 
 If publish: is called on an NSNetService instance initialized with this method, an NSNetServicesBadArgumentError will be sent in the error dictionary to the delegate's netService:didNotPublish: method.
 */
-- (id)initWithDomain:(NSString *)domain type:(NSString *)type name:(NSString *)name;
+- (instancetype)initWithDomain:(NSString *)domain type:(NSString *)type name:(NSString *)name;
 
 /* NSNetService instances may be scheduled on NSRunLoops to operate in different modes, or in other threads. It is generally not necessary to schedule NSNetServices in other threads. NSNetServices are scheduled in the current thread's NSRunLoop in the NSDefaultRunLoopMode when they are created.
 */
@@ -103,7 +103,7 @@ If publish: is called on an NSNetService instance initialized with this method, 
 
 /* Initially set to NO. Set to YES to also publish, resolve, or monitor this service over peer to peer Bluetooth and Wi-Fi (if available). Must be set before operation starts.
 */
-@property BOOL includesPeerToPeer NS_AVAILABLE(NA, 7_0);
+@property BOOL includesPeerToPeer NS_AVAILABLE(10_10, 7_0);
 
 /* Returns the name of the discovered or published service.
 */
@@ -194,7 +194,7 @@ If publish: is called on an NSNetService instance initialized with this method, 
     void * _reserved;
 }
 
-- (id)init;
+- (instancetype)init;
 
 /* Set a delegate to receive discovery events.
 */
@@ -202,7 +202,7 @@ If publish: is called on an NSNetService instance initialized with this method, 
 
 /* Initially set to NO. Set to YES to also browse over peer to peer Bluetooth and Wi-Fi (if available). Must be set before starting to search.
 */
-@property BOOL includesPeerToPeer NS_AVAILABLE(NA, 7_0);
+@property BOOL includesPeerToPeer NS_AVAILABLE(10_10, 7_0);
 
 /* NSNetServiceBrowser instances may be scheduled on NSRunLoops to operate in different modes, or in other threads. It is generally not necessary to schedule NSNetServiceBrowsers in other threads. NSNetServiceBrowsers are scheduled in the current thread's NSRunLoop in the NSDefaultRunLoopMode when they are created.
 */

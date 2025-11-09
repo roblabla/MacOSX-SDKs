@@ -1,5 +1,5 @@
 /*
- * Copyright © 1998-2012 Apple Inc.  All rights reserved.
+ * Copyright © 1998-2014 Apple Inc.  All rights reserved.
  * 
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -75,6 +75,7 @@ class IOUSBCompositeDriver : public IOService
     
     static IOReturn         CompositeDriverInterestHandler(  void * target, void * refCon, UInt32 messageType, IOService * provider,  void * messageArgument, vm_size_t argSize );
     
+    
 public:
         
 		// IOService Methods
@@ -91,13 +92,19 @@ public:
     virtual bool            ConfigureDevice();
     virtual IOReturn        ReConfigureDevice();
     /*!
-		@function SetConfiguration
+     @function SetConfiguration
      @abstract Call IOUSBDevice to do a SetConfiguration call to the device.
      @param configValue The desired configuration value.
      @param startInterfaceMatching A boolean specifying whether IOKit should begin the process of finding
      matching drivers for the new IOUSBInterface objects.
      */
     virtual IOReturn SetConfiguration(UInt8 configValue, bool startInterfaceMatching=true);
+    
+    // Helper methods
+    const IOUSBConfigurationDescriptor *    GetConfigDescriptor (UInt8 configIndex);
+    IOReturn                                FindConfigIndexFromPreferredConfiguration(UInt8 *pConfigIndex, bool *pFound);
+    IOReturn                                FindConfigIndexFromPreferredInterface(UInt8 *pConfigIndex, bool *pFound);
+    IOReturn                                FindConfigIndexFromPowerRequirements(UInt8 *pConfigIndex, bool *pFound);
     
     // Getters
     //
@@ -112,10 +119,28 @@ public:
      @param provider The provider as passed into the start method.
      */
     OSMetaClassDeclareReservedUsed(IOUSBCompositeDriver,  0);
-    virtual IOReturn ConfigureDevicePowerManagement( IOService * provider );
+    virtual IOReturn 	ConfigureDevicePowerManagement( IOService * provider );
 
     
-    OSMetaClassDeclareReservedUnused(IOUSBCompositeDriver,  1);
+    /*!
+     @function FindPreferredConfiguration
+     @abstract Called when an IOUSBDevice has more than one Configuration Descriptor. This method will decide which Configuration Descriptor is the preferred one.
+     @discussion The default implementation will pick a preferred configuration as follows:
+                    1) If either the plist for the subclass of IOUSBCompositeDriver or the IOUSBDevice itself contains a "Preferred Configuration" property, then the number contained in that property will be
+                        used to attempt to match a bConfigurationValue in one of the configuration descriptors
+                    2) If there is a plist array entry called "Preferred Interfaces", then the IOUSBCompositeDriver will look through that array for a set of dictionaries with the following fields:
+                                "bInterfaceClass"  - [required] value specifying an Interface Descriptor class
+                                "bInterfaceSubClass" - [optional] value specifying an Interface Descriptor subclass
+                                "bInterfaceProtocol"  - [optional] value specifying an Interface Descriptor protocol
+                                "priority" - [required] value from 1 to 10 indicating a priority for this dictionary
+                        the IOUSBCompositeDriver will search through all configurations available in the device, and if it finds a configuration descriptor which contains an interface descriptor which matches one of the provided dictionaries, it will make that configuration descriptor the preferred configuration. lower values of "priority" will match first
+                    3) If neither 1 or 2 results in a preferred configuration, then the first highest power configuration descriptor for which the port has sufficient power will be the preferred descriptor
+     @param preferredConfig A pointer to a UInt8 which will hold the index of the preferred configuration descriptor (Not the bConfigurationValue!)
+     @result kIOReturnSuccess if a preferred configuration could be determined, otherwise an error.
+     */
+    OSMetaClassDeclareReservedUsed(IOUSBCompositeDriver,  1);
+	virtual IOReturn		FindPreferredConfiguration(UInt8 *pPreferredConfigIndex);
+
     OSMetaClassDeclareReservedUnused(IOUSBCompositeDriver,  2);
     OSMetaClassDeclareReservedUnused(IOUSBCompositeDriver,  3);
     OSMetaClassDeclareReservedUnused(IOUSBCompositeDriver,  4);

@@ -11,10 +11,10 @@
  *    notice, this list of conditions and the following disclaimer in the
  *    documentation and/or other materials provided with the distribution.
  *
- * THIS SOFTWARE IS PROVIDED BY APPLE COMPUTER, INC. ``AS IS'' AND ANY
+ * THIS SOFTWARE IS PROVIDED BY APPLE INC. ``AS IS'' AND ANY
  * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL APPLE COMPUTER, INC. OR
+ * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL APPLE INC. OR
  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
@@ -26,27 +26,24 @@
 
 #import <WebKit/DOMObject.h>
 
-#if WEBKIT_VERSION_MAX_ALLOWED >= WEBKIT_VERSION_1_3
-
 @class DOMCSSStyleSheet;
 @class DOMDocument;
 @class DOMDocumentType;
 @class DOMHTMLDocument;
 @class NSString;
 
+NS_CLASS_AVAILABLE_MAC(10_4)
 @interface DOMImplementation : DOMObject
-- (BOOL)hasFeature:(NSString *)feature version:(NSString *)version AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-- (DOMDocumentType *)createDocumentType:(NSString *)qualifiedName publicId:(NSString *)publicId systemId:(NSString *)systemId AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-- (DOMDocument *)createDocument:(NSString *)namespaceURI qualifiedName:(NSString *)qualifiedName doctype:(DOMDocumentType *)doctype AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-- (DOMCSSStyleSheet *)createCSSStyleSheet:(NSString *)title media:(NSString *)media AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-- (DOMHTMLDocument *)createHTMLDocument:(NSString *)title AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+- (BOOL)hasFeature:(NSString *)feature version:(NSString *)version NS_AVAILABLE_MAC(10_5);
+- (DOMDocumentType *)createDocumentType:(NSString *)qualifiedName publicId:(NSString *)publicId systemId:(NSString *)systemId NS_AVAILABLE_MAC(10_5);
+- (DOMDocument *)createDocument:(NSString *)namespaceURI qualifiedName:(NSString *)qualifiedName doctype:(DOMDocumentType *)doctype NS_AVAILABLE_MAC(10_5);
+- (DOMCSSStyleSheet *)createCSSStyleSheet:(NSString *)title media:(NSString *)media NS_AVAILABLE_MAC(10_5);
+- (DOMHTMLDocument *)createHTMLDocument:(NSString *)title NS_AVAILABLE_MAC(10_5);
 @end
 
 @interface DOMImplementation (DOMImplementationDeprecated)
-- (BOOL)hasFeature:(NSString *)feature :(NSString *)version AVAILABLE_WEBKIT_VERSION_1_3_AND_LATER_BUT_DEPRECATED_IN_WEBKIT_VERSION_3_0;
-- (DOMDocumentType *)createDocumentType:(NSString *)qualifiedName :(NSString *)publicId :(NSString *)systemId AVAILABLE_WEBKIT_VERSION_1_3_AND_LATER_BUT_DEPRECATED_IN_WEBKIT_VERSION_3_0;
-- (DOMDocument *)createDocument:(NSString *)namespaceURI :(NSString *)qualifiedName :(DOMDocumentType *)doctype AVAILABLE_WEBKIT_VERSION_1_3_AND_LATER_BUT_DEPRECATED_IN_WEBKIT_VERSION_3_0;
-- (DOMCSSStyleSheet *)createCSSStyleSheet:(NSString *)title :(NSString *)media AVAILABLE_WEBKIT_VERSION_1_3_AND_LATER_BUT_DEPRECATED_IN_WEBKIT_VERSION_3_0;
+- (BOOL)hasFeature:(NSString *)feature :(NSString *)version NS_DEPRECATED_MAC(10_4, 10_5);
+- (DOMDocumentType *)createDocumentType:(NSString *)qualifiedName :(NSString *)publicId :(NSString *)systemId NS_DEPRECATED_MAC(10_4, 10_5);
+- (DOMDocument *)createDocument:(NSString *)namespaceURI :(NSString *)qualifiedName :(DOMDocumentType *)doctype NS_DEPRECATED_MAC(10_4, 10_5);
+- (DOMCSSStyleSheet *)createCSSStyleSheet:(NSString *)title :(NSString *)media NS_DEPRECATED_MAC(10_4, 10_5);
 @end
-
-#endif

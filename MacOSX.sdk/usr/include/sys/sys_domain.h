@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2005, 2012 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2005, 2012, 2014 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -30,7 +30,6 @@
 #ifndef _SYSTEM_DOMAIN_H_
 #define _SYSTEM_DOMAIN_H_
 
-
 #include <sys/appleapiopts.h>
 #include <sys/cdefs.h>
 #include <sys/types.h>
@@ -44,10 +43,9 @@
 #define AF_SYS_CONTROL		2	/* corresponding sub address type */
 
 /* System family socket address */
-struct sockaddr_sys
-{
-	u_char	ss_len;				/* sizeof(struct sockaddr_sys) */
-	u_char	ss_family;			/* AF_SYSTEM */
+struct sockaddr_sys {
+	u_char		ss_len;		/* sizeof(struct sockaddr_sys) */
+	u_char		ss_family;	/* AF_SYSTEM */
 	u_int16_t 	ss_sysaddr; 	/* protocol address in AF_SYSTEM */
 	u_int32_t 	ss_reserved[7]; /* reserved to the protocol use */
 };

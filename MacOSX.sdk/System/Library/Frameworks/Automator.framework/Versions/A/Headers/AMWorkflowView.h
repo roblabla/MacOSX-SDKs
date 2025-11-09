@@ -1,6 +1,6 @@
 /*	
     AMWorkflowView.h
-    Copyright (C) 2005-2006 Apple Computer, Inc. All rights reserved.    
+    Copyright (C) 2005-2006, 2014 Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -11,13 +11,13 @@
 @class AMWorkflow;
 @class AMWorkflowController;
 
-@interface AMWorkflowView : NSView {	
+@interface AMWorkflowView : NSView {
 @private
 	AMWorkflowController *_workflowController;
 	NSMutableArray *_actionViewControllers;
 	NSArray *_draggedActionViews;
 	NSString *_messageString;
-	NSBezierPath *_messagePath;
+	id _unused;
 	id _variablesEditorController;
 	AM_UNUSED_FOR_ANALYZER id _showWhenRunController;
 	struct __AMWorkflowViewFlags {
@@ -31,11 +31,9 @@
 	id _future[4];
 }
 
-- (BOOL)isEditable;
-- (void)setEditable:(BOOL)flag;
+@property (getter=isEditable) BOOL editable;
 
-- (AMWorkflowController *)workflowController;
-- (void)setWorkflowController:(AMWorkflowController *)workflowController;
+@property (strong) AMWorkflowController *workflowController;
 
 @end
 

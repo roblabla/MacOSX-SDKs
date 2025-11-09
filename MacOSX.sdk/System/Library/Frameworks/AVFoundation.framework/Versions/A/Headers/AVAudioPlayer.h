@@ -29,13 +29,13 @@ NS_CLASS_AVAILABLE(10_7, 2_2)
 */
 
 /* all data must be in the form of an audio file understood by CoreAudio */
-- (id)initWithContentsOfURL:(NSURL *)url error:(NSError **)outError;
-- (id)initWithData:(NSData *)data error:(NSError **)outError;
+- (instancetype)initWithContentsOfURL:(NSURL *)url error:(NSError **)outError;
+- (instancetype)initWithData:(NSData *)data error:(NSError **)outError;
 
 /* The file type hint is a constant defined in AVMediaFormat.h whose value is a UTI for a file format. e.g. AVFileTypeAIFF. */
 /* Sometimes the type of a file cannot be determined from the data, or it is actually corrupt. The file type hint tells the parser what kind of data to look for so that files which are not self identifying or possibly even corrupt can be successfully parsed. */
-- (id)initWithContentsOfURL:(NSURL *)url fileTypeHint:(NSString*)utiString error:(NSError **)outError NS_AVAILABLE(10_9, 7_0);
-- (id)initWithData:(NSData *)data fileTypeHint:(NSString*)utiString error:(NSError **)outError NS_AVAILABLE(10_9, 7_0);
+- (instancetype)initWithContentsOfURL:(NSURL *)url fileTypeHint:(NSString *)utiString error:(NSError **)outError NS_AVAILABLE(10_9, 7_0);
+- (instancetype)initWithData:(NSData *)data fileTypeHint:(NSString *)utiString error:(NSError **)outError NS_AVAILABLE(10_9, 7_0);
 
 /* transport control */
 /* methods that return BOOL return YES on success and NO on failure. */
@@ -96,7 +96,7 @@ Any negative number will loop indefinitely until stopped.
 /* The channels property lets you assign the output to play to specific channels as described by AVAudioSession's channels property */
 /* This property is nil valued until set. */
 /* The array must have the same number of channels as returned by the numberOfChannels property. */
-@property(nonatomic, copy) NSArray* channelAssignments NS_AVAILABLE(10_9, 7_0); /* Array of AVAudioSessionChannelDescription objects */
+@property(nonatomic, copy) NSArray *channelAssignments NS_AVAILABLE(10_9, 7_0); /* Array of AVAudioSessionChannelDescription objects */
 #endif
 
 @end
@@ -112,12 +112,14 @@ Any negative number will loop indefinitely until stopped.
 
 #if TARGET_OS_IPHONE
 
+/* AVAudioPlayer INTERRUPTION NOTIFICATIONS ARE DEPRECATED - Use AVAudioSession instead. */
+
 /* audioPlayerBeginInterruption: is called when the audio session has been interrupted while the player was playing. The player will have been paused. */
-- (void)audioPlayerBeginInterruption:(AVAudioPlayer *)player;
+- (void)audioPlayerBeginInterruption:(AVAudioPlayer *)player NS_DEPRECATED_IOS(2_2, 8_0);
 
 /* audioPlayerEndInterruption:withOptions: is called when the audio session interruption has ended and this player had been interrupted while playing. */
 /* Currently the only flag is AVAudioSessionInterruptionFlags_ShouldResume. */
-- (void)audioPlayerEndInterruption:(AVAudioPlayer *)player withOptions:(NSUInteger)flags NS_AVAILABLE_IOS(6_0);
+- (void)audioPlayerEndInterruption:(AVAudioPlayer *)player withOptions:(NSUInteger)flags NS_DEPRECATED_IOS(6_0, 8_0);
 
 - (void)audioPlayerEndInterruption:(AVAudioPlayer *)player withFlags:(NSUInteger)flags NS_DEPRECATED_IOS(4_0, 6_0);
 

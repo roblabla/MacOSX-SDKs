@@ -41,6 +41,7 @@
 #include <net/route.h>
 #include <netinet/in.h>
 #include <netinet/tcp.h>
+#include <mach/machine.h>
 
 __BEGIN_DECLS
 
@@ -708,16 +709,19 @@ struct proc_fileportinfo {
 #define PROC_DIRTYCONTROL_TRACK         1
 #define PROC_DIRTYCONTROL_SET           2
 #define PROC_DIRTYCONTROL_GET           3
+#define PROC_DIRTYCONTROL_CLEAR         4
 
 /* proc_track_dirty() flags */
 #define PROC_DIRTY_TRACK                0x1
 #define PROC_DIRTY_ALLOW_IDLE_EXIT      0x2
 #define PROC_DIRTY_DEFER                0x4
+#define PROC_DIRTY_LAUNCH_IN_PROGRESS   0x8
 
 /* proc_get_dirty() flags */
 #define PROC_DIRTY_TRACKED              0x1
 #define PROC_DIRTY_ALLOWS_IDLE_EXIT     0x2
 #define PROC_DIRTY_IS_DIRTY             0x4
+#define PROC_DIRTY_LAUNCH_IS_IN_PROGRESS   0x8
 
 
 

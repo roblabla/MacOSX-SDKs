@@ -48,12 +48,12 @@ SK_EXPORT @interface SKTransition : NSObject
 /**
  Pause the incoming Scene during the transition, defaults to YES.
  */
-@property (SK_NONATOMIC_IOSONLY) BOOL pausesIncomingScene;
+@property (nonatomic) BOOL pausesIncomingScene;
 
 /**
  Pause the outgoing Scene during the transition, defaults to YES.
  */
-@property (SK_NONATOMIC_IOSONLY) BOOL pausesOutgoingScene;
+@property (nonatomic) BOOL pausesOutgoingScene;
 
 
 @end

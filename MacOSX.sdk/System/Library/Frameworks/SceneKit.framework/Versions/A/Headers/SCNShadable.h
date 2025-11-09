@@ -1,7 +1,7 @@
 //
 //  SCNShadable.h
 //
-//  Copyright (c) 2013 Apple Inc. All rights reserved.
+//  Copyright (c) 2013-2014 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -26,7 +26,7 @@ typedef void (^SCNBindingBlock)(unsigned int programID, unsigned int location, S
  @protocol SCNShadable
  @abstract The SCNShadable protocol defines an object that is rendered with shaders. 
  */
-@protocol SCNShadable
+@protocol SCNShadable <NSObject>
 @optional
 
 /*!
@@ -40,9 +40,9 @@ typedef void (^SCNBindingBlock)(unsigned int programID, unsigned int location, S
     | uniform float myGrayAmount = 3.0;
     |
     | // Optional global function definitions
-    | // float mySin(float t) {
-    | //   return sin(t);
-    | // }
+    | float mySin(float t) {
+    |    return sin(t);
+    | }
     |
     | [#pragma transparent | opaque]
     | [#pragma body]
@@ -63,7 +63,7 @@ typedef void (^SCNBindingBlock)(unsigned int programID, unsigned int location, S
     Forces the rendering to be opaque. It then ignores the alpha component of the fragment.
  
  The SCNGeometry and SCNMaterial classes are key-value coding compliant classes, which means that you can set values for arbitrary keys. Even if the key `myAmplitude` is not a declared property of the class, you can still set a value for it.
- Declaring a `myAmplitude` uniform in the shader modifier makes Scene Kit observe the reveiver's `myAmplitude` key. Any change to that key will make Scene Kit bind the uniform with the new value.
+ Declaring a `myAmplitude` uniform in the shader modifier makes SceneKit observe the reveiver's `myAmplitude` key. Any change to that key will make SceneKit bind the uniform with the new value.
  
  Custom uniforms can be animated using explicit animations.
  
@@ -77,14 +77,16 @@ typedef void (^SCNBindingBlock)(unsigned int programID, unsigned int location, S
    vec2          | CGPoint
    vec3          | SCNVector3
    vec4          | SCNVector4
-   mat4, mat44   | CATransform3D
+   mat4, mat44   | SCNMatrix4
+   sampler2D     | SCNMaterialProperty
+   samplerCube   | SCNMaterialProperty (with a cube map)
  
- The following prefixes are reserved by Scene Kit and should not be used in custom names:
+ The following prefixes are reserved by SceneKit and should not be used in custom names:
     u_
     a_
     v_
  
- Scene Kit declares the following built-in uniforms:
+ SceneKit declares the following built-in uniforms:
     float u_time;                               // The current time, in seconds
     -------------------------------------------------------------------------------------
     mat4  u_modelTransform                      // See SCNModelTransform
@@ -100,9 +102,9 @@ typedef void (^SCNBindingBlock)(unsigned int programID, unsigned int location, S
     mat4  u_inverseModelViewTransform           // The inverse matrix of u_modelViewTransform
     mat4  u_inverseModelViewProjectionTransform // The inverse matrix of u_modelViewProjectionTransform
     -------------------------------------------------------------------------------------
-    mat32 u_boundingBox;                        // The bounding box of the current geometry, in model space, u_boundingBox[0].xyz and u_boundingBox[1].xyz being respectively the minimum and maximum corner of the box.
+    mat2x3 u_boundingBox;                       // The bounding box of the current geometry, in model space, u_boundingBox[0].xyz and u_boundingBox[1].xyz being respectively the minimum and maximum corner of the box.
  
- Shader modifiers can be used to tweak Scene Kit rendering by adding custom code at the following entry points:
+ Shader modifiers can be used to tweak SceneKit rendering by adding custom code at the following entry points:
     1. SCNShaderModifierEntryPointGeometry
     2. SCNShaderModifierEntryPointSurface
     3. SCNShaderModifierEntryPointLightingModel
@@ -110,7 +112,7 @@ typedef void (^SCNBindingBlock)(unsigned int programID, unsigned int location, S
  See below for a detailed explanation of these entry points and the context they provide.
  
  */
-@property(nonatomic, copy) NSDictionary *shaderModifiers SCENEKIT_AVAILABLE(10_9, NA);
+@property(nonatomic, copy) NSDictionary *shaderModifiers SCENEKIT_AVAILABLE(10_9, 8_0);
 
 /*!
  @property program
@@ -121,11 +123,11 @@ typedef void (^SCNBindingBlock)(unsigned int programID, unsigned int location, S
 
 /*!
  @method handleBindingOfSymbol:usingBlock:
- @abstract Sets the block to call at render time to bind the value for the pecfied symbol of the receiver's SCNProgram. This method has no effect for symbols declared in shader modifiers.
+ @abstract Sets the block to call at render time to bind the value for the specified symbol of the receiver's SCNProgram. This method has no effect for symbols declared in shader modifiers.
  @param symbol The name of the symbol to bind a value for.
  @param block The block to call to bind the specified symbol.
  */
-- (void)handleBindingOfSymbol:(NSString *)symbol usingBlock:(SCNBindingBlock)block SCENEKIT_AVAILABLE(10_9, NA);
+- (void)handleBindingOfSymbol:(NSString *)symbol usingBlock:(SCNBindingBlock)block SCENEKIT_AVAILABLE(10_9, 8_0);
 
 /*!
  @method handleUnbindingOfSymbol:usingBlock:
@@ -133,18 +135,25 @@ typedef void (^SCNBindingBlock)(unsigned int programID, unsigned int location, S
  @param symbol The name of the symbol to unbind.
  @param block The block to call to unbind the specified symbol.
  */
-- (void)handleUnbindingOfSymbol:(NSString *)symbol usingBlock:(SCNBindingBlock)block SCENEKIT_AVAILABLE(10_9, NA);
+- (void)handleUnbindingOfSymbol:(NSString *)symbol usingBlock:(SCNBindingBlock)block SCENEKIT_AVAILABLE(10_9, 8_0);
 
 @end
 
+
+/*!
+ @group Semantic options
+ @abstract Valid keys for the option parameter of setSemantic:forSymbol:options:
+ */
+
+SCN_EXTERN NSString * const SCNProgramMappingChannelKey;  /* This key is optional and may be used in association with the SCNGeometrySourceSemanticTexcoord semantic. It allows to associate a mapping channel from the geometry to a symbol from the program source code. The mapping channel allows to plug programs that work with multiple texture coordinates. The associated value must be a NSNumber(integer) greater than zero. */
 
 /*!
  @class SCNProgram
  @abstract A SCNProgram lets you specify custom shaders to use when rendering materials.
  */
 
-SCENEKIT_CLASS_AVAILABLE(10_8, NA)
-@interface SCNProgram : NSObject <NSCopying>
+SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
+@interface SCNProgram : NSObject <NSCopying, NSSecureCoding>
 {
 @private
 	id _reserved;
@@ -169,23 +178,43 @@ SCENEKIT_CLASS_AVAILABLE(10_8, NA)
 @property(nonatomic, copy) NSString *fragmentShader;
 
 /*!
- @method		setSemantic:forSymbol:
- @abstract		Associates a SceneKit semantic to a symbol.
- @param			semantic from SceneKit engine to be used.
- @param			symbol from program source code.
- @param         options an optional dictionary. See the available keys above.
- @discussion	Associates semantics handled by SceneKit runtime to a symbol from the program.
- Supported semantics for program attributes are:
- SCNGeometrySourceSemanticVertex (vec4), SCNGeometrySourceSemanticNormal (vec4), SCNGeometrySourceSemanticColor (vec4), SCNGeometrySourceSemanticTexcoord (vec2)
- and the following for program uniforms:
- SCNModelViewProjectionTransform, SCNModelViewTransform, SCNModelTransform, SCNViewTransform, SCNProjectionTransform, SCNNormalTransform
+ @property tessellationControlShader
+ @abstract Determines the receiver's tessellation control shader. Tessellation shaders require OpenGL Core Profile.
+ */
+@property(nonatomic, copy) NSString *tessellationControlShader SCENEKIT_AVAILABLE(10_10, NA);
+
+/*!
+ @property tessellationEvaluationShader
+ @abstract Determines the receiver's tessellation evaluation shader. Tessellation shaders require OpenGL Core Profile.
+ */
+@property(nonatomic, copy) NSString *tessellationEvaluationShader SCENEKIT_AVAILABLE(10_10, NA);
+
+/*!
+ @property geometryShader
+ @abstract Determines the receiver's geometry shader. Geometry shaders require OpenGL Core Profile.
+ */
+@property(nonatomic, copy) NSString *geometryShader SCENEKIT_AVAILABLE(10_10, NA);
+
+/*!
+ @property opaque
+ @abstract Determines the receiver's fragment are opaque or not. Defaults to YES.
+ */
+@property (nonatomic, getter=isOpaque) BOOL opaque SCENEKIT_AVAILABLE(10_10, 8_0);
+
+/*!
+ @method setSemantic:forSymbol:options:
+ @abstract Associates a SceneKit semantic to a symbol.
+ @param semantic The SceneKit semantic to associate to the specified symbol.
+ @param symbol A symbol from the program source code.
+ @param options An optional dictionary. See the 'Semantic options' above.
+ @discussion Associates semantics handled by the SceneKit runtime to a symbol from the program. Supported semantics are listed in SCNGeometry.h and SCNNode.h.
  */
 - (void)setSemantic:(NSString *)semantic forSymbol:(NSString *)symbol options:(NSDictionary *)options;
 
 /*!
  @method semanticForSymbol:
- @abstract retrieves the SceneKit runtime semantic associated to a symbol from the program source code.
- @param symbol from program source code
+ @abstract Retrieves the SceneKit semantic associated to a symbol from the program source code.
+ @param symbol A symbol from the program source code.
  */
 - (NSString *)semanticForSymbol:(NSString *)symbol;
 
@@ -196,6 +225,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, NA)
 @property(nonatomic, assign) id <SCNProgramDelegate> delegate;
 
 @end
+
 
 /*!
  @protocol SCNProgramDelegate
@@ -213,7 +243,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, NA)
  @param programID The program object.
  @param renderer The renderer that is currently rendering the scene.
  */
-- (BOOL)program:(SCNProgram *)program bindValueForSymbol:(NSString *)symbol atLocation:(unsigned int)location programID:(unsigned int)programID renderer:(SCNRenderer *)renderer;
+- (BOOL)program:(SCNProgram *)program bindValueForSymbol:(NSString *)symbol atLocation:(unsigned int)location programID:(unsigned int)programID renderer:(SCNRenderer *)renderer NS_DEPRECATED(10_8, 10_10, NA, NA);
 
 /*!
  @method program:withID:bindValueForSymbol:atLocation:renderer:
@@ -224,7 +254,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, NA)
  @param programID The program object.
  @param renderer The renderer that is currently rendering the scene.
  */
-- (void)program:(SCNProgram *)program unbindValueForSymbol:(NSString *)symbol atLocation:(unsigned int)location programID:(unsigned int)programID renderer:(SCNRenderer *)renderer;
+- (void)program:(SCNProgram *)program unbindValueForSymbol:(NSString *)symbol atLocation:(unsigned int)location programID:(unsigned int)programID renderer:(SCNRenderer *)renderer NS_DEPRECATED(10_8, 10_10, NA, NA);
 
 /*!
  @method handleError
@@ -239,11 +269,11 @@ SCENEKIT_CLASS_AVAILABLE(10_8, NA)
  @method programIsOpaque
  @abstract The delegate should implement this mehod and return NO if the fragments generated by the program are not opaque.
  @param program The queried program.
+ @discussion This is deprecated. Use SCNProgram's opaque property instead.
  */
-- (BOOL)programIsOpaque:(SCNProgram *)program;
+- (BOOL)programIsOpaque:(SCNProgram *)program NS_DEPRECATED(10_8, 10_10, NA, NA);
 
 @end
-
 
 
 /*!
@@ -258,9 +288,10 @@ SCENEKIT_CLASS_AVAILABLE(10_8, NA)
  Structures available from the this entry point:
  
  | struct SCNShaderGeometry {
- |    vec3 position;
+ |    vec4 position;
  |    vec3 normal;
  |    vec4 tangent;
+ |    vec4 color;
  |    vec2 texcoords[kSCNTexcoordCount];
  | } _geometry;
  | 
@@ -276,10 +307,10 @@ SCENEKIT_CLASS_AVAILABLE(10_8, NA)
  Example: Simple sinusoidal deformation
  
     uniform float Amplitude = 0.1
-    _geometry.position += _geometry.normal * (Amplitude*_geometry.position.y*_geometry.position.x) * sin(1.0 * u_time);
+    _geometry.position.xyz += _geometry.normal * (Amplitude*_geometry.position.y*_geometry.position.x) * sin(1.0 * u_time);
  
  */
-SCN_EXTERN NSString * const SCNShaderModifierEntryPointGeometry SCENEKIT_AVAILABLE(10_9, NA);
+SCN_EXTERN NSString * const SCNShaderModifierEntryPointGeometry SCENEKIT_AVAILABLE(10_9, 8_0);
 
 
 /*! @constant SCNShaderModifierEntryPointSurface 
@@ -314,7 +345,9 @@ SCN_EXTERN NSString * const SCNShaderModifierEntryPointGeometry SCENEKIT_AVAILAB
  | Stages: Fragment shader only
  
  All geometric fields are in view space.
- All the other properties will be colors (texture have already been sampled at this stage) or floats.
+ All the other properties will be colors (texture have already been sampled at this stage) or floats. You can however do an extra sampling of standard textures if you want.
+ In this case the naming pattern is u_<property>Texture. For example u_diffuseTexture or u_reflectiveTexture. Note that you have to be sure that the material do have a texture 
+ set for this property, otherwise you'll trigger a shader compilation error.
  
  Example: Procedural black and white stripes
  
@@ -329,7 +362,7 @@ SCN_EXTERN NSString * const SCNShaderModifierEntryPointGeometry SCENEKIT_AVAILAB
     _surface.diffuse = mix(vec4(1.0), vec4(0.0), f1);
  
 */
-SCN_EXTERN NSString * const SCNShaderModifierEntryPointSurface SCENEKIT_AVAILABLE(10_9, NA);
+SCN_EXTERN NSString * const SCNShaderModifierEntryPointSurface SCENEKIT_AVAILABLE(10_9, 8_0);
 
 
 /*! @constant SCNShaderModifierEntryPointLightingModel 
@@ -338,10 +371,10 @@ SCN_EXTERN NSString * const SCNShaderModifierEntryPointSurface SCENEKIT_AVAILABL
  
  Structures available from the this entry point:
  
- | SCNShaderModifierEntryPointSurface
+ | All the structures available from the SCNShaderModifierEntryPointSurface entry point
  |
  | Access: ReadOnly
- | Stages: Vertex and fragment shaders
+ | Stages: Vertex shader and fragment shader
  
  | struct SCNShaderLightingContribution {
  |    vec3 ambient;
@@ -369,7 +402,7 @@ SCN_EXTERN NSString * const SCNShaderModifierEntryPointSurface SCENEKIT_AVAILABL
     dotProduct = max(0.0, pow(max(0.0, dot(_surface.normal, halfVector)), _surface.shininess));
     _lightingContribution.specular += (dotProduct * _light.intensity.rgb);
 */
-SCN_EXTERN NSString * const SCNShaderModifierEntryPointLightingModel SCENEKIT_AVAILABLE(10_9, NA);
+SCN_EXTERN NSString * const SCNShaderModifierEntryPointLightingModel SCENEKIT_AVAILABLE(10_9, 8_0);
 
 
 /*! @constant SCNShaderModifierEntryPointFragment
@@ -378,7 +411,7 @@ SCN_EXTERN NSString * const SCNShaderModifierEntryPointLightingModel SCENEKIT_AV
  
  Structures available from the this entry point:
  
- | SCNShaderModifierEntryPointSurface
+ | All the structures available from the SCNShaderModifierEntryPointSurface entry point
  |
  | Access: ReadOnly
  | Stages: Fragment shader only
@@ -394,5 +427,5 @@ SCN_EXTERN NSString * const SCNShaderModifierEntryPointLightingModel SCENEKIT_AV
  
     _output.color.rgb = vec3(1.0) - _output.color.rgb;
  */
-SCN_EXTERN NSString * const SCNShaderModifierEntryPointFragment SCENEKIT_AVAILABLE(10_9, NA);
+SCN_EXTERN NSString * const SCNShaderModifierEntryPointFragment SCENEKIT_AVAILABLE(10_9, 8_0);
 

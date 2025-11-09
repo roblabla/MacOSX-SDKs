@@ -1,6 +1,6 @@
 /* CoreAnimation - CAConstraintLayoutManager.h
 
-   Copyright (c) 2006-2012 Apple Inc.
+   Copyright (c) 2006-2014, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CALayer.h>
@@ -24,7 +24,7 @@
  * each layer. The special name "superlayer" should be used to refer to
  * the layer's superlayer. */
 
-enum _CAConstraintAttribute
+typedef NS_ENUM (int, CAConstraintAttribute)
 {
   kCAConstraintMinX,
   kCAConstraintMidX,
@@ -35,8 +35,6 @@ enum _CAConstraintAttribute
   kCAConstraintMaxY,
   kCAConstraintHeight,
 };
-
-typedef int CAConstraintAttribute;
 
 @class CAConstraint;
 

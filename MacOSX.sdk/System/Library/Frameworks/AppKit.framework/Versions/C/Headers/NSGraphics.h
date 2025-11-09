@@ -1,7 +1,7 @@
 /*
 	NSGraphics.h
 	Application Kit
-	Copyright (c) 1994-2013, Apple Inc.
+	Copyright (c) 1994-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -13,66 +13,84 @@
 /*=== CONSTANTS ===*/
 /* operation types for composite operators */
 /* Constants moved from dpsOpenStep.h */
-enum {
-    NSCompositeClear		= 0,
-    NSCompositeCopy		= 1,
-    NSCompositeSourceOver	= 2,
-    NSCompositeSourceIn		= 3,
-    NSCompositeSourceOut	= 4,
-    NSCompositeSourceAtop	= 5,
-    NSCompositeDestinationOver	= 6,
-    NSCompositeDestinationIn	= 7,
-    NSCompositeDestinationOut	= 8,
-    NSCompositeDestinationAtop	= 9,
-    NSCompositeXOR		= 10,
-    NSCompositePlusDarker	= 11,
-    NSCompositeHighlight	= 12,
-    NSCompositePlusLighter	= 13
+typedef NS_ENUM(NSUInteger, NSCompositingOperation) {
+    /* Porter-Duff compositing operations */
+    /* http://www.w3.org/TR/2014/CR-compositing-1-20140220/#porterduffcompositingoperators */
+    NSCompositeClear,		
+    NSCompositeCopy,		
+    NSCompositeSourceOver,	
+    NSCompositeSourceIn,	
+    NSCompositeSourceOut,	
+    NSCompositeSourceAtop,	
+    NSCompositeDestinationOver,	
+    NSCompositeDestinationIn,	
+    NSCompositeDestinationOut,	
+    NSCompositeDestinationAtop,	
+    NSCompositeXOR,		
+    NSCompositePlusDarker,
+    NSCompositeHighlight	NS_DEPRECATED_MAC(10_0, 10_0, "Use NSCompositeSourceOver instead"),
+    NSCompositePlusLighter,
+    
+    /* Separable blend-modes */
+    /* http://www.w3.org/TR/2014/CR-compositing-1-20140220/#blendingseparable */
+    NSCompositeMultiply		NS_AVAILABLE_MAC(10_10),
+    NSCompositeScreen		NS_AVAILABLE_MAC(10_10),
+    NSCompositeOverlay		NS_AVAILABLE_MAC(10_10),
+    NSCompositeDarken		NS_AVAILABLE_MAC(10_10),
+    NSCompositeLighten		NS_AVAILABLE_MAC(10_10),
+    NSCompositeColorDodge	NS_AVAILABLE_MAC(10_10),
+    NSCompositeColorBurn	NS_AVAILABLE_MAC(10_10),
+    NSCompositeSoftLight	NS_AVAILABLE_MAC(10_10),
+    NSCompositeHardLight	NS_AVAILABLE_MAC(10_10),
+    NSCompositeDifference	NS_AVAILABLE_MAC(10_10),
+    NSCompositeExclusion	NS_AVAILABLE_MAC(10_10),
+    
+    /* Non-separable blend-modes */
+    /* http://www.w3.org/TR/2014/CR-compositing-1-20140220/#blendingnonseparable */
+    NSCompositeHue		NS_AVAILABLE_MAC(10_10),
+    NSCompositeSaturation	NS_AVAILABLE_MAC(10_10),
+    NSCompositeColor		NS_AVAILABLE_MAC(10_10),
+    NSCompositeLuminosity	NS_AVAILABLE_MAC(10_10),
 };
-typedef NSUInteger NSCompositingOperation;
+
 
 /* types of window backing store */
-enum {
+typedef NS_ENUM(NSUInteger, NSBackingStoreType) {
     NSBackingStoreRetained	 = 0,
     NSBackingStoreNonretained	 = 1,
     NSBackingStoreBuffered	 = 2
 };
-typedef NSUInteger NSBackingStoreType;
 
 /* ways to order windows */
-enum {
+typedef NS_ENUM(NSInteger, NSWindowOrderingMode) {
     NSWindowAbove		 =  1,
     NSWindowBelow		 = -1,
     NSWindowOut			 =  0
 };
-typedef NSInteger NSWindowOrderingMode;
 
 /* order in which to draw focus ring - above or below graphic or just draw ring */
-enum {
+typedef NS_ENUM(NSUInteger, NSFocusRingPlacement) {
     NSFocusRingOnly	 = 0,
     NSFocusRingBelow	 = 1,
     NSFocusRingAbove	 = 2
 };
-typedef NSUInteger NSFocusRingPlacement;
 
-/* used by NSView and NSCell to configure if and how the control should draw its focus ring */ 
-enum {
+/* used by NSView and NSCell to configure if and how the control should draw its focus ring */
+typedef NS_ENUM(NSUInteger, NSFocusRingType) {
     NSFocusRingTypeDefault = 0,
     NSFocusRingTypeNone = 1,
     NSFocusRingTypeExterior = 2
 };
-typedef NSUInteger NSFocusRingType;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-enum {
+
+// values interchangeable with CGColorRenderingIntent values
+typedef NS_ENUM(NSInteger, NSColorRenderingIntent) {
     NSColorRenderingIntentDefault, //  = kCGRenderingIntentDefault,
     NSColorRenderingIntentAbsoluteColorimetric, //  = kCGRenderingIntentAbsoluteColorimetric,
     NSColorRenderingIntentRelativeColorimetric, //  = kCGRenderingIntentRelativeColorimetric,
     NSColorRenderingIntentPerceptual, // = kCGRenderingIntentPerceptual,
     NSColorRenderingIntentSaturation // = kCGRenderingIntentSaturation
-};
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */
-typedef NSInteger NSColorRenderingIntent;  // values interchangeable with CGColorRenderingIntent values
+} NS_ENUM_AVAILABLE_MAC(10_5);
 
 
 /* Predefined colorspace names.
@@ -98,13 +116,11 @@ On Mac OS X 10.5 and earlier, use NSBestDepth() to compute window depths. NSBest
 
 On Mac OS X 10.6 and later, you can pass one of the explicit bit depths below to -[NSWindow setDepthLimit:].  NSWindowDepthTwentyfourBitRGB is the default.
 */
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
 enum {
     NSWindowDepthTwentyfourBitRGB = 0x208,
     NSWindowDepthSixtyfourBitRGB = 0x210,
     NSWindowDepthOnehundredtwentyeightBitRGB = 0x220
-};
-#endif
+} NS_ENUM_AVAILABLE_MAC(10_6);
 
 typedef int NSWindowDepth;
 
@@ -157,12 +173,12 @@ APPKIT_EXTERN void NSDrawButton(NSRect aRect, NSRect clipRect);
 APPKIT_EXTERN void NSEraseRect(NSRect aRect);
 APPKIT_EXTERN NSColor *NSReadPixel(NSPoint passedPoint);
 APPKIT_EXTERN void NSDrawBitmap(NSRect rect, NSInteger width, NSInteger height, NSInteger bps, NSInteger spp, NSInteger bpp, NSInteger bpr, BOOL isPlanar, BOOL hasAlpha, NSString *colorSpaceName, const unsigned char *const data[5]);
-APPKIT_EXTERN void NSCopyBits(NSInteger srcGState, NSRect srcRect, NSPoint destPoint);
-APPKIT_EXTERN void NSHighlightRect(NSRect aRect);
+
+APPKIT_EXTERN void NSHighlightRect(NSRect aRect) NS_DEPRECATED_MAC(10_0, 10_0);
 APPKIT_EXTERN void NSBeep(void);
 
 /* gets performance stats about window server memory usage */
-APPKIT_EXTERN NSInteger NSGetWindowServerMemory(NSInteger context, NSInteger *virtualMemory, NSInteger *windowBackingMemory, NSString **windowDumpString);
+APPKIT_EXTERN NSInteger NSGetWindowServerMemory(NSInteger context, NSInteger *virtualMemory, NSInteger *windowBackingMemory, NSString **windowDumpString); // Deprecated; doesn't return anything useful (as of 10.0)
 
 APPKIT_EXTERN NSRect NSDrawColorTiledRects(NSRect boundsRect, NSRect clipRect, const NSRectEdge *sides, NSColor **colors, NSInteger count);
 APPKIT_EXTERN void NSDrawDarkBezel(NSRect aRect, NSRect clipRect);
@@ -196,7 +212,7 @@ APPKIT_EXTERN void NSEnableScreenUpdates(void);
 ** 	- (void)animationEffectDidEnd:(void *)contextInfo;
 */
 
-enum {
+typedef NS_ENUM(NSUInteger, NSAnimationEffect) {
 	// The default effect used to indicate removal of an item from a collection, 
 	// such as toolbar (indicates removal, without destroying the underlying data).
 	NSAnimationEffectDisappearingItemDefault = 0,
@@ -204,14 +220,15 @@ enum {
 	// An effect showing a puff of smoke.
 	NSAnimationEffectPoof = 10
 };
-typedef NSUInteger NSAnimationEffect;
 
 APPKIT_EXTERN void NSShowAnimationEffect(NSAnimationEffect animationEffect, NSPoint centerLocation, NSSize size, id animationDelegate, SEL didEndSelector, void *contextInfo);
 
-
 /* NSCountWindows, NSWindowList, NSCountWindowsForContext, and NSWindowListForContext are deprecated on Mac OS 10.6 and later.  Use +[NSWindow windowNumbersWithOptions:] instead */
-APPKIT_EXTERN void NSCountWindows(NSInteger *count);
-APPKIT_EXTERN void NSWindowList(NSInteger size, NSInteger list[]);
-APPKIT_EXTERN void NSCountWindowsForContext(NSInteger context, NSInteger *count);
-APPKIT_EXTERN void NSWindowListForContext(NSInteger context, NSInteger size, NSInteger list[]);
+APPKIT_EXTERN void NSCountWindows(NSInteger *count) NS_DEPRECATED_MAC(10_0, 10_6, "Use +[Window windowNumbersWithOptions:] instead");
+APPKIT_EXTERN void NSWindowList(NSInteger size, NSInteger list[]) NS_DEPRECATED_MAC(10_0, 10_6, "Use +[Window windowNumbersWithOptions:] instead");
+APPKIT_EXTERN void NSCountWindowsForContext(NSInteger context, NSInteger *count) NS_DEPRECATED_MAC(10_0, 10_6, "Use +[Window windowNumbersWithOptions:] instead");
+APPKIT_EXTERN void NSWindowListForContext(NSInteger context, NSInteger size, NSInteger list[]) NS_DEPRECATED_MAC(10_0, 10_6, "Use +[Window windowNumbersWithOptions:] instead");
+/* This method does nothing, and is deprecated */
+APPKIT_EXTERN void NSCopyBits(NSInteger srcGState, NSRect srcRect, NSPoint destPoint) NS_DEPRECATED_MAC(10_0, 10_10);
+
 

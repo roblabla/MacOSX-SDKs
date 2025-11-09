@@ -1,6 +1,6 @@
 /* CoreAnimation - CARenderer.h
 
-   Copyright (c) 2007-2012 Apple Inc.
+   Copyright (c) 2007-2014, Apple Inc.
    All rights reserved. */
 
 /* This class lets an application manually drive the rendering of a
@@ -49,7 +49,7 @@
 
 /* The root layer associated with the renderer. */
 
-@property(retain) CALayer *layer;
+@property(strong) CALayer *layer;
 
 /* The bounds rect of the render target. */
 

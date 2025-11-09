@@ -220,21 +220,6 @@ struct	uio;
 #endif /* (!_POSIX_C_SOURCE || _DARWIN_C_SOURCE) */
 #endif /* __ASSEMBLER__ */
 
-#ifndef __POSIX_LIB__
-
-#include <sys/_types/_pthread_attr_t.h>
-#include <sys/_types/_pthread_cond_t.h>
-#include <sys/_types/_pthread_condattr_t.h>
-#include <sys/_types/_pthread_mutex_t.h>
-#include <sys/_types/_pthread_mutexattr_t.h>
-#include <sys/_types/_pthread_once_t.h>
-#include <sys/_types/_pthread_rwlock_t.h>
-#include <sys/_types/_pthread_rwlockattr_t.h>
-#include <sys/_types/_pthread_t.h>
-
-#endif /* __POSIX_LIB__ */
-
-#include <sys/_types/_pthread_key_t.h>
 
 /* statvfs and fstatvfs */
 

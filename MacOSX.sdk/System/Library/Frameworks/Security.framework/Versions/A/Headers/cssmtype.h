@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1999-2002,2004 Apple Computer, Inc. All Rights Reserved.
+ * Copyright (c) 1999-2002,2004,2011,2014 Apple Inc. All Rights Reserved.
  * 
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -1220,7 +1220,7 @@ typedef struct cssm_csp_operational_statistics {
 /* Indicates that the statistical value can not be revealed or is not
    relevant for a CSP */
 enum {
-	CSSM_VALUE_NOT_AVAILABLE =		(uint32)(~0)
+	CSSM_VALUE_NOT_AVAILABLE =		-1
 };
 
 typedef struct cssm_pkcs5_pbkdf1_params {

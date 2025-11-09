@@ -1,5 +1,5 @@
 /*	NSRegularExpression.h
-	Copyright (c) 2009-2013, Apple Inc. All rights reserved.
+	Copyright (c) 2009-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -35,9 +35,9 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 /* An instance of NSRegularExpression is created from a regular expression pattern and a set of options.  If the pattern is invalid, nil will be returned and an NSError will be returned by reference.  The pattern syntax currently supported is that specified by ICU.
 */
 + (NSRegularExpression *)regularExpressionWithPattern:(NSString *)pattern options:(NSRegularExpressionOptions)options error:(NSError **)error;
-- (id)initWithPattern:(NSString *)pattern options:(NSRegularExpressionOptions)options error:(NSError **)error;
+- (instancetype)initWithPattern:(NSString *)pattern options:(NSRegularExpressionOptions)options error:(NSError **)error NS_DESIGNATED_INITIALIZER;
 
-@property (readonly) NSString *pattern;
+@property (readonly, copy) NSString *pattern;
 @property (readonly) NSRegularExpressionOptions options;
 @property (readonly) NSUInteger numberOfCaptureGroups;
 
@@ -69,9 +69,7 @@ typedef NS_OPTIONS(NSUInteger, NSMatchingFlags) {
 /* The fundamental matching method on NSRegularExpression is a block iterator.  There are several additional convenience methods, for returning all matches at once, the number of matches, the first match, or the range of the first match.  Each match is specified by an instance of NSTextCheckingResult (of type NSTextCheckingTypeRegularExpression) in which the overall match range is given by the range property (equivalent to rangeAtIndex:0) and any capture group ranges are given by rangeAtIndex: for indexes from 1 to numberOfCaptureGroups.  {NSNotFound, 0} is used if a particular capture group does not participate in the match.
 */
 
-#if NS_BLOCKS_AVAILABLE
 - (void)enumerateMatchesInString:(NSString *)string options:(NSMatchingOptions)options range:(NSRange)range usingBlock:(void (^)(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop))block;
-#endif /* NS_BLOCKS_AVAILABLE */
 
 - (NSArray *)matchesInString:(NSString *)string options:(NSMatchingOptions)options range:(NSRange)range;
 - (NSUInteger)numberOfMatchesInString:(NSString *)string options:(NSMatchingOptions)options range:(NSRange)range;
@@ -116,7 +114,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 /* NSDataDetector is a specialized subclass of NSRegularExpression.  Instead of finding matches to regular expression patterns, it matches items identified by Data Detectors, such as dates, addresses, and URLs.  The checkingTypes argument should contain one or more of the types NSTextCheckingTypeDate, NSTextCheckingTypeAddress, NSTextCheckingTypeLink, NSTextCheckingTypePhoneNumber, and NSTextCheckingTypeTransitInformation.  The NSTextCheckingResult instances returned will be of the appropriate types from that list.
 */
 + (NSDataDetector *)dataDetectorWithTypes:(NSTextCheckingTypes)checkingTypes error:(NSError **)error;
-- (id)initWithTypes:(NSTextCheckingTypes)checkingTypes error:(NSError **)error;
+- (instancetype)initWithTypes:(NSTextCheckingTypes)checkingTypes error:(NSError **)error NS_DESIGNATED_INITIALIZER;
 
 @property (readonly) NSTextCheckingTypes checkingTypes;
 

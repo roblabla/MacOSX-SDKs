@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2012 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2014 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -76,8 +76,14 @@
 /*
  * Vnode types.  VNON means no type.
  */
-enum vtype	{ VNON, VREG, VDIR, VBLK, VCHR, VLNK, VSOCK, VFIFO, VBAD, VSTR,
-			  VCPLX };
+enum vtype	{ 
+	/* 0 */
+	VNON, 
+	/* 1 - 5 */
+	VREG, VDIR, VBLK, VCHR, VLNK, 
+	/* 6 - 10 */
+	VSOCK, VFIFO, VBAD, VSTR, VCPLX 
+};
 
 /*
  * Vnode tag types.
@@ -85,10 +91,21 @@ enum vtype	{ VNON, VREG, VDIR, VBLK, VCHR, VLNK, VSOCK, VFIFO, VBAD, VSTR,
  * and should NEVER be inspected by the kernel.
  */
 enum vtagtype	{
-	VT_NON, VT_UFS, VT_NFS, VT_MFS, VT_MSDOSFS, VT_LFS, VT_LOFS, VT_FDESC,
-	VT_PORTAL, VT_NULL, VT_UMAP, VT_KERNFS, VT_PROCFS, VT_AFS, VT_ISOFS,
-	VT_UNION, VT_HFS, VT_ZFS, VT_DEVFS, VT_WEBDAV, VT_UDF, VT_AFP,
-	VT_CDDA, VT_CIFS, VT_OTHER};
+	/* 0 */
+	VT_NON,
+	/* 1 reserved, overlaps with (CTL_VFS, VFS_NUMMNTOPS) */
+	VT_UFS,
+	/* 2 - 5 */
+	VT_NFS, VT_MFS, VT_MSDOSFS, VT_LFS,
+	/* 6 - 10 */
+	VT_LOFS, VT_FDESC, VT_PORTAL, VT_NULL, VT_UMAP, 
+	/* 11 - 15 */
+	VT_KERNFS, VT_PROCFS, VT_AFS, VT_ISOFS, VT_MOCKFS,
+	/* 16 - 20 */
+	VT_HFS, VT_ZFS, VT_DEVFS, VT_WEBDAV, VT_UDF, 
+	/* 21 - 24 */
+	VT_AFP, VT_CDDA, VT_CIFS, VT_OTHER
+};
 
 
 /*

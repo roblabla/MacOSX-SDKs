@@ -1,5 +1,5 @@
 /*	CFLocale.h
-	Copyright (c) 2002-2013, Apple Inc. All rights reserved.
+	Copyright (c) 2002-2014, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFLOCALE__)
@@ -12,7 +12,7 @@
 CF_IMPLICIT_BRIDGING_ENABLED
 CF_EXTERN_C_BEGIN
 
-typedef const struct __CFLocale *CFLocaleRef;
+typedef const struct CF_BRIDGED_TYPE(NSLocale) __CFLocale *CFLocaleRef;
 
 CF_EXPORT
 CFTypeID CFLocaleGetTypeID(void);
@@ -183,6 +183,8 @@ CF_EXPORT const CFStringRef kCFRepublicOfChinaCalendar CF_AVAILABLE(10_6, 4_0);
 CF_EXPORT const CFStringRef kCFPersianCalendar CF_AVAILABLE(10_6, 4_0);
 CF_EXPORT const CFStringRef kCFIndianCalendar CF_AVAILABLE(10_6, 4_0);
 CF_EXPORT const CFStringRef kCFISO8601Calendar CF_AVAILABLE(10_6, 4_0);
+CF_EXPORT const CFStringRef kCFIslamicTabularCalendar CF_AVAILABLE(10_10, 8_0);
+CF_EXPORT const CFStringRef kCFIslamicUmmAlQuraCalendar CF_AVAILABLE(10_10, 8_0);
 
 CF_EXTERN_C_END
 CF_IMPLICIT_BRIDGING_DISABLED

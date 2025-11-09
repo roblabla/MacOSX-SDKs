@@ -1,7 +1,7 @@
 /*
 	NSCachedImageRep.h
 	Application Kit
-	Copyright (c) 1994-2013, Apple Inc.
+	Copyright (c) 1994-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -11,6 +11,7 @@
 @class NSWindow;
 
 // this entire class is deprecated.  Please see the 10.6 AppKit release notes for more information.
+NS_CLASS_DEPRECATED_MAC(10_0, 10_6)
 @interface NSCachedImageRep : NSImageRep {
     /*All instance variables are private*/
     NSPoint _origin;

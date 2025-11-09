@@ -1,5 +1,5 @@
 /* CoreGraphics - CGColorSpace.h
-   Copyright (c) 1999-2009 Apple Inc.
+   Copyright (c) 1999-2013 Apple Inc.
    All rights reserved. */
 
 #ifndef CGCOLORSPACE_H_

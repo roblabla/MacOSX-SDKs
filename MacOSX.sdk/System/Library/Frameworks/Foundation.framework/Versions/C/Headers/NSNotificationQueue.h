@@ -1,5 +1,5 @@
 /*	NSNotificationQueue.h
-	Copyright (c) 1994-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -27,9 +27,9 @@ typedef NS_ENUM(NSUInteger, NSNotificationCoalescing) {
     id		_idleObs;
 }
 
-+ (id)defaultQueue;
++ (NSNotificationQueue *)defaultQueue;
 
-- (id)initWithNotificationCenter:(NSNotificationCenter *)notificationCenter;
+- (instancetype)initWithNotificationCenter:(NSNotificationCenter *)notificationCenter NS_DESIGNATED_INITIALIZER;
 
 - (void)enqueueNotification:(NSNotification *)notification postingStyle:(NSPostingStyle)postingStyle;
 - (void)enqueueNotification:(NSNotification *)notification postingStyle:(NSPostingStyle)postingStyle coalesceMask:(NSUInteger)coalesceMask forModes:(NSArray *)modes;

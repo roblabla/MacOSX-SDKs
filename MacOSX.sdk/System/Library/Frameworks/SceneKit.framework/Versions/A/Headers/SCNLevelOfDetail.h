@@ -1,7 +1,7 @@
 //
 //  SCNLevelOfDetail.h
 //
-//  Copyright (c) 2013 Apple Inc. All rights reserved.
+//  Copyright (c) 2013-2014 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -11,15 +11,15 @@
  @class SCNLevelOfDetail
  @abstract SCNLevelOfDetail represents a level of detail of a geometry.
  */
-SCENEKIT_CLASS_AVAILABLE(10_9, NA)
-@interface SCNLevelOfDetail : NSObject <NSCopying>
+SCENEKIT_CLASS_AVAILABLE(10_9, 8_0)
+@interface SCNLevelOfDetail : NSObject <NSCopying, NSSecureCoding>
 {
 @private
 	id _reserved;
 }
 
 /*!
- @method levelOfDetailWithGeometry:withSurfaceCoverage:
+ @method levelOfDetailWithGeometry:screenSpaceRadius:
  @abstract This is a convenience method to create a level of detail with a coverage radius threshold mode.
  @param geometry The geometry for this level of detail. nil is supported and indicates that no geometry should be rendered for this level of detail.
  @param radius The maximum radius in screen-space that this level of detail is suitable for. The coverage radius is calculated from the projected bounding sphere and expressed in pixels.

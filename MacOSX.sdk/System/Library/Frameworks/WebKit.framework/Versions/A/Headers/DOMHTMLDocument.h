@@ -11,10 +11,10 @@
  *    notice, this list of conditions and the following disclaimer in the
  *    documentation and/or other materials provided with the distribution.
  *
- * THIS SOFTWARE IS PROVIDED BY APPLE COMPUTER, INC. ``AS IS'' AND ANY
+ * THIS SOFTWARE IS PROVIDED BY APPLE INC. ``AS IS'' AND ANY
  * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL APPLE COMPUTER, INC. OR
+ * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL APPLE INC. OR
  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
@@ -26,36 +26,30 @@
 
 #import <WebKit/DOMDocument.h>
 
-#if WEBKIT_VERSION_MAX_ALLOWED >= WEBKIT_VERSION_1_3
-
-@class DOMElement;
 @class DOMHTMLCollection;
 @class NSString;
 
+NS_CLASS_AVAILABLE_MAC(10_4)
 @interface DOMHTMLDocument : DOMDocument
-@property(readonly, retain) DOMHTMLCollection *embeds AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-@property(readonly, retain) DOMHTMLCollection *plugins AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-@property(readonly, retain) DOMHTMLCollection *scripts AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-@property(readonly) int width AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-@property(readonly) int height AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-@property(copy) NSString *dir AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-@property(copy) NSString *designMode AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-@property(readonly, copy) NSString *compatMode AVAILABLE_IN_WEBKIT_VERSION_4_0;
-@property(readonly, retain) DOMElement *activeElement AVAILABLE_IN_WEBKIT_VERSION_4_0;
-@property(copy) NSString *bgColor AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-@property(copy) NSString *fgColor AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-@property(copy) NSString *alinkColor AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-@property(copy) NSString *linkColor AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-@property(copy) NSString *vlinkColor AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+@property (readonly, strong) DOMHTMLCollection *embeds NS_AVAILABLE_MAC(10_5);
+@property (readonly, strong) DOMHTMLCollection *plugins NS_AVAILABLE_MAC(10_5);
+@property (readonly, strong) DOMHTMLCollection *scripts NS_AVAILABLE_MAC(10_5);
+@property (readonly) int width NS_AVAILABLE_MAC(10_5);
+@property (readonly) int height NS_AVAILABLE_MAC(10_5);
+@property (copy) NSString *dir NS_AVAILABLE_MAC(10_5);
+@property (copy) NSString *designMode NS_AVAILABLE_MAC(10_5);
+@property (readonly, copy) NSString *compatMode NS_AVAILABLE_MAC(10_6);
+@property (copy) NSString *bgColor NS_AVAILABLE_MAC(10_5);
+@property (copy) NSString *fgColor NS_AVAILABLE_MAC(10_5);
+@property (copy) NSString *alinkColor NS_AVAILABLE_MAC(10_5);
+@property (copy) NSString *linkColor NS_AVAILABLE_MAC(10_5);
+@property (copy) NSString *vlinkColor NS_AVAILABLE_MAC(10_5);
 
 - (void)open;
 - (void)close;
 - (void)write:(NSString *)text;
 - (void)writeln:(NSString *)text;
-- (void)clear AVAILABLE_IN_WEBKIT_VERSION_4_0;
-- (void)captureEvents AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-- (void)releaseEvents AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-- (BOOL)hasFocus AVAILABLE_IN_WEBKIT_VERSION_4_0;
+- (void)clear NS_AVAILABLE_MAC(10_6);
+- (void)captureEvents NS_AVAILABLE_MAC(10_5);
+- (void)releaseEvents NS_AVAILABLE_MAC(10_5);
 @end
-
-#endif

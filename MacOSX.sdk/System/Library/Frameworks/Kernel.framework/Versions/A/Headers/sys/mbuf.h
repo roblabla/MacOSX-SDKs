@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1999-2013 Apple Inc. All rights reserved.
+ * Copyright (c) 1999-2014 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -166,6 +166,7 @@ typedef struct mb_class_stat {
 	u_int64_t	mbcl_purge_cnt;	/* # of purges so far */
 	u_int64_t	mbcl_fail_cnt;	/* # of allocation failures */
 	u_int32_t	mbcl_ctotal;	/* total only for this class */
+	u_int32_t	mbcl_release_cnt; /* amount of memory returned */
 	/*
 	 * Cache layer statistics
 	 */
@@ -174,7 +175,8 @@ typedef struct mb_class_stat {
 	u_int32_t	mbcl_mc_waiter_cnt;  /* # waiters on the cache */
 	u_int32_t	mbcl_mc_wretry_cnt;  /* # of wait retries */
 	u_int32_t	mbcl_mc_nwretry_cnt; /* # of no-wait retry attempts */
-	u_int64_t	mbcl_reserved[4];    /* for future use */
+	u_int32_t	mbcl_peak_reported; /* last usage peak reported */
+	u_int32_t	mbcl_reserved[7];    /* for future use */
 } mb_class_stat_t;
 
 #define	MCS_DISABLED	0	/* cache is permanently disabled */

@@ -66,7 +66,7 @@ NS_CLASS_AVAILABLE(10_9, NA)
  * @discussion
  * Returns an initialized and autoreleased ODMappings object.
  */
-+ (id)mappings;
++ (instancetype)mappings;
 
 /*!
  * @method recordType:

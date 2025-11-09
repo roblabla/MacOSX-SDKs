@@ -1,7 +1,7 @@
 /*
 	NSFontManager.h
 	Application Kit
-	Copyright (c) 1994-2013, Apple Inc.
+	Copyright (c) 1994-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -10,8 +10,6 @@
 
 @class NSArray, NSDictionary, NSFont, NSFontPanel, NSMenu, NSFontDescriptor;
 
-typedef NSUInteger NSFontTraitMask;
-
 /*
  * Font Traits
  *
@@ -19,8 +17,7 @@ typedef NSUInteger NSFontTraitMask;
  * to a given font, the harder it will be to map it to some other family.
  * Some traits are mutually exclusive such as NSExpanded and NSCondensed.
  */
-
-enum {
+typedef NS_OPTIONS(NSUInteger, NSFontTraitMask) {
     NSItalicFontMask			= 0x00000001,
     NSBoldFontMask			= 0x00000002,
     NSUnboldFontMask			= 0x00000004,
@@ -36,15 +33,14 @@ enum {
 };
 
 
-
-enum {
-   NSFontCollectionApplicationOnlyMask = 1 << 0  
+typedef NS_OPTIONS(NSUInteger, NSFontCollectionOptions) {
+   NSFontCollectionApplicationOnlyMask = 1 << 0
 };
 
 
 /* And these "actions" are really tag values in Font Menu cells which send any of the action messages listed above.  Normally, they're pre-defined in the font panel.
  */
-enum {
+typedef NS_ENUM(NSUInteger, NSFontAction) {
     NSNoFontChangeAction		= 0,
     NSViaPanelFontAction		= 1,
     NSAddTraitFontAction		= 2,
@@ -54,7 +50,6 @@ enum {
     NSLighterFontAction			= 6,
     NSRemoveTraitFontAction		= 7
 };
-typedef NSUInteger NSFontAction;
 
 NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 @interface NSFontManager : NSObject
@@ -84,8 +79,8 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 + (void)setFontManagerFactory:(Class)factoryId;
 + (NSFontManager *)sharedFontManager;
 
-- (BOOL)isMultiple;
-- (NSFont *)selectedFont;
+@property (getter=isMultiple, readonly) BOOL multiple;
+@property (readonly, strong) NSFont *selectedFont;
 - (void)setSelectedFont:(NSFont *)fontObj isMultiple:(BOOL)flag;
 - (void)setFontMenu:(NSMenu *)newMenu;
 - (NSMenu *)fontMenu:(BOOL)create;
@@ -96,8 +91,8 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 
 /* Three methods for supporting app font management.  The fonts and names used/returned by these functions are the same as those used by the NSFontPanel.  The third method below takes as input a name as returned by "availableFontFamilies" and returns an NSArray of NSArrays.  The elements of the "inner" arrays are: (0) the font's name, (1) non-family part of the name as used by NSFontPanel, (2) an NSNumber indicating the weight, and (3) an NSNumber indicating the traits.
 */
-- (NSArray *)availableFonts;
-- (NSArray *)availableFontFamilies;
+@property (readonly, copy) NSArray *availableFonts;
+@property (readonly, copy) NSArray *availableFontFamilies;
 - (NSArray *)availableMembersOfFontFamily:(NSString *)fam;
 
 - (NSFont *)convertFont:(NSFont *)fontObj;
@@ -107,13 +102,10 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 - (NSFont *)convertFont:(NSFont *)fontObj toHaveTrait:(NSFontTraitMask)trait;
 - (NSFont *)convertFont:(NSFont *)fontObj toNotHaveTrait:(NSFontTraitMask)trait;
 - (NSFont *)convertWeight:(BOOL)upFlag ofFont:(NSFont *)fontObj;
-- (BOOL)isEnabled;
-- (void)setEnabled:(BOOL)flag;
-- (SEL)action;
-- (void)setAction:(SEL)aSelector;
-- (BOOL)sendAction;
-- (void)setDelegate:(id)anObject;
-- (id)delegate;
+@property (getter=isEnabled) BOOL enabled;
+@property SEL action;
+@property (readonly) BOOL sendAction;
+@property (assign) id delegate;
 
 - (NSString *) localizedNameForFamily:(NSString *)family face:(NSString *)faceKey;
 
@@ -122,9 +114,9 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 
 - (NSArray *)availableFontNamesMatchingFontDescriptor:(NSFontDescriptor *)descriptor;
 
-- (NSArray *)collectionNames;
+@property (readonly, copy) NSArray *collectionNames;
 - (NSArray *)fontDescriptorsInCollection:(NSString *)collectionNames;
-- (BOOL)addCollection:(NSString *)collectionName options:(NSInteger)collectionOptions;
+- (BOOL)addCollection:(NSString *)collectionName options:(NSFontCollectionOptions)collectionOptions;
 - (BOOL)removeCollection:(NSString *)collectionName;
 
 - (void)addFontDescriptors:(NSArray *)descriptors  toCollection:(NSString *)collectionName;
@@ -132,14 +124,13 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 
 /* Returns the current font action used by -convertFont:. This method is intended to be invoked to query the font conversion action while the action message (usually -changeFont:) is being invoked.
  */
-- (NSFontAction)currentFontAction NS_AVAILABLE_MAC(10_5);
+@property (readonly) NSFontAction currentFontAction NS_AVAILABLE_MAC(10_5);
 
 /* Converts fontTraits to a new traits mask value just as -convertFont:. This method is intended to be invoked to query the font traits while the action message (usually -changeFont:) is being invoked when the current font action is either NSAddTraitFontAction or NSRemoveTraitFontAction.
  */
 - (NSFontTraitMask)convertFontTraits:(NSFontTraitMask)traits NS_AVAILABLE_MAC(10_5);
 
-- (void)setTarget:(id)aTarget NS_AVAILABLE_MAC(10_5);
-- (id)target NS_AVAILABLE_MAC(10_5);
+@property (weak) id target NS_AVAILABLE_MAC(10_5);
 
 @end
 

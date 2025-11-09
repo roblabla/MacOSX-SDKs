@@ -2,7 +2,7 @@
 //  MKOverlayRenderer.h
 //  MapKit
 //
-//  Copyright (c) 2010-2013, Apple Inc. All rights reserved.
+//  Copyright (c) 2010-2014, Apple Inc. All rights reserved.
 //
 
 #import <MapKit/MKFoundation.h>
@@ -12,7 +12,7 @@
 MK_CLASS_AVAILABLE(10_9, 7_0)
 @interface MKOverlayRenderer : NSObject
 
-- (id)initWithOverlay:(id <MKOverlay>)overlay;
+- (instancetype)initWithOverlay:(id <MKOverlay>)overlay NS_DESIGNATED_INITIALIZER;
 
 @property (nonatomic, readonly) id <MKOverlay> overlay;
 

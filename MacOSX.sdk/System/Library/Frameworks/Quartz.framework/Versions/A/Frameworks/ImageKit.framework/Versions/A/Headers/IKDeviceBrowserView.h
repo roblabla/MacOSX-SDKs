@@ -38,13 +38,12 @@
 @end
 
 
-enum 
+typedef NS_ENUM(NSInteger, IKDeviceBrowserViewDisplayMode)
 {
     IKDeviceBrowserViewDisplayModeTable,
     IKDeviceBrowserViewDisplayModeOutline,
     IKDeviceBrowserViewDisplayModeIcon
 };
-typedef NSInteger IKDeviceBrowserViewDisplayMode;
 
 
 /*! 

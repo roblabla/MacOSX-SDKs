@@ -13,6 +13,16 @@
 extern "C" {
 #endif
 
+#if !defined(__CS_HAS_COMPILER_ATTRIBUTE)
+    #if defined(__has_attribute)
+        #define __CS_HAS_COMPILER_ATTRIBUTE(attribute) __has_attribute(attribute)
+    #elif defined(__GNUC__) && __GNUC__ >= 4
+        #define __CS_HAS_COMPILER_ATTRIBUTE(attribute) (1)
+    #else
+        #define __CS_HAS_COMPILER_ATTRIBUTE(attribute) (0)
+    #endif
+#endif
+    
 #if !defined(CSEXTERN)
     #if defined(_MSC_VER)
         #if defined(CG_BUILDING_CG)
@@ -38,13 +48,17 @@ extern "C" {
 #endif
 
 #if !defined(CSEXTERN_PRIVATE)
-#  if defined(__GNUC__)
-#    define CSEXTERN_PRIVATE __private_extern__
-#  else /* !defined(__GNUC__) */
-#    define CSEXTERN_PRIVATE CSEXTERN
-#  endif /* !defined(__GNUC__) */
+    #if __CS_HAS_COMPILER_ATTRIBUTE(visibility)
+        #if defined(__cplusplus)
+            #define CSEXTERN_PRIVATE extern "C" __attribute__((visibility("hidden")))
+        #else
+            #define CSEXTERN_PRIVATE extern __attribute__((visibility("hidden")))
+        #endif
+    #else
+        #define CSEXTERN_PRIVATE CSEXTERN
+    #endif
 #endif /* !defined(CSEXTERN_PRIVATE) */
-
+    
 #ifdef __cplusplus
 }
 #endif

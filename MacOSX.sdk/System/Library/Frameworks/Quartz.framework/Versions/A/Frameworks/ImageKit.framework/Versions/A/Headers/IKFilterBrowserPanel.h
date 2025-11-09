@@ -1,12 +1,12 @@
 /* IKFilterBrowserPanel 
 
 
-   Copyright (c) 2006 Apple Computer, Inc.
+   Copyright (c) 2006 Apple Inc.
    All rights reserved. */
 
 /*!
     @header IKFilterBrowserPanel
-	@copyright 2006 Apple Computer, Inc. All rights reserved.
+	@copyright 2006 Apple Inc. All rights reserved.
 	@availability Coming to a Leopard installation near you
     @abstract   IKFilterBrowserPanel provides a filter browser in form of a panel, sheet or view.
     @discussion The IKFilterBrowser is modeled close to common AppKit behavior like the NSOpenPanel. It allows you to display the browser in a separate panel, a modal dialog, a sheet or you can just retireve the view to insert it into your own UI.

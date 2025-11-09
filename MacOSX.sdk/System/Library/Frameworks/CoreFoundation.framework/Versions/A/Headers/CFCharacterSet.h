@@ -1,5 +1,5 @@
 /*	CFCharacterSet.h
-	Copyright (c) 1999-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1999-2014, Apple Inc. All rights reserved.
 */
 
 /*!
@@ -41,13 +41,13 @@ CF_EXTERN_C_BEGIN
 	@typedef CFCharacterSetRef
 	This is the type of a reference to immutable CFCharacterSets.
 */
-typedef const struct __CFCharacterSet * CFCharacterSetRef;
+typedef const struct CF_BRIDGED_TYPE(NSCharacterSet) __CFCharacterSet * CFCharacterSetRef;
 
 /*!
 	@typedef CFMutableCharacterSetRef
 	This is the type of a reference to mutable CFMutableCharacterSets.
 */
-typedef struct __CFCharacterSet * CFMutableCharacterSetRef;
+typedef struct CF_BRIDGED_MUTABLE_TYPE(NSMutableCharacterSet) __CFCharacterSet * CFMutableCharacterSetRef;
 
 /*!
 	@typedef CFCharacterSetPredefinedSet

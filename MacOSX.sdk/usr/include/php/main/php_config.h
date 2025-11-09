@@ -130,6 +130,9 @@
 /* Whether to build odbc as dynamic module */
 /* #undef COMPILE_DL_ODBC */
 
+/* Whether to build opcache as dynamic module */
+#define COMPILE_DL_OPCACHE 1
+
 /* Whether to build openssl as dynamic module */
 /* #undef COMPILE_DL_OPENSSL */
 
@@ -328,7 +331,7 @@
 #define DBA_INIFILE 1
 
 /* */
-/* #undef DBA_NDBM */
+#define DBA_NDBM 1
 
 /* */
 /* #undef DBA_QDBM */
@@ -352,7 +355,7 @@
 /* #undef ENABLE_CHROOT_FUNC */
 
 /* */
-#define ENABLE_GD_TTF 1
+/* #undef ENABLE_GD_TTF */
 
 /* */
 /* #undef ENCHANT_VERSION_STRING */
@@ -371,6 +374,9 @@
 
 /* */
 /* #undef HAVE_ADABAS */
+
+/* Whether you have AI_V4MAPPED */
+#define HAVE_AI_V4MAPPED 1
 
 /* whether the compiler supports __alignof__ */
 #define HAVE_ALIGNOF 1
@@ -512,9 +518,6 @@
 /* */
 /* #undef HAVE_CODBC */
 
-/* */
-#define HAVE_COLORCLOSESTHWB 1
-
 /* Whether you have a Continuity Server */
 /* #undef HAVE_CONTINUITY */
 
@@ -557,9 +560,6 @@
 /* Have cURL with SSL support */
 #define HAVE_CURL_SSL 1
 
-/* */
-#define HAVE_CURL_VERSION_INFO 1
-
 /* Define to 1 if you have the `cuserid' function. */
 /* #undef HAVE_CUSERID */
 
@@ -571,6 +571,9 @@
 
 /* */
 /* #undef HAVE_DCNGETTEXT */
+
+/* Define if the compiler supports Decimal32/64/128 types. */
+/* #undef HAVE_DECIMAL_FP_SUPPORT */
 
 /* Whether system headers declare timezone */
 #define HAVE_DECLARED_TIMEZONE 1
@@ -663,6 +666,12 @@
 /* Define to 1 if you have the `flock' function. */
 #define HAVE_FLOCK 1
 
+/* Struct flock is BSD-type */
+#define HAVE_FLOCK_BSD /**/
+
+/* Struct flock is Linux-type */
+/* #undef HAVE_FLOCK_LINUX */
+
 /* Define to 1 if you have the `floorf' function. */
 #define HAVE_FLOORF 1
 
@@ -712,76 +721,22 @@
 #define HAVE_GCVT 1
 
 /* */
-#define HAVE_GDIMAGECOLORRESOLVE 1
-
-/* */
 #define HAVE_GD_BUNDLED 1
 
 /* */
-/* #undef HAVE_GD_CACHE_CREATE */
+#define HAVE_GD_CACHE_CREATE 1
 
 /* */
-#define HAVE_GD_DYNAMIC_CTX_EX 1
-
-/* */
-#define HAVE_GD_FONTCACHESHUTDOWN 1
-
-/* */
-#define HAVE_GD_FONTMUTEX 1
-
-/* */
-/* #undef HAVE_GD_FREEFONTCACHE */
-
-/* */
-#define HAVE_GD_GD2 1
-
-/* */
-#define HAVE_GD_GIF_CREATE 1
-
-/* */
-#define HAVE_GD_GIF_CTX 1
-
-/* */
-#define HAVE_GD_GIF_READ 1
-
-/* */
-#define HAVE_GD_IMAGEELLIPSE 1
-
-/* */
-#define HAVE_GD_IMAGESETBRUSH 1
-
-/* */
-#define HAVE_GD_IMAGESETTILE 1
-
-/* */
-/* #undef HAVE_GD_IMAGE_CONVOLUTION */
-
-/* */
-/* #undef HAVE_GD_IMAGE_PIXELATE */
+/* #undef HAVE_GD_FREETYPE */
 
 /* */
 #define HAVE_GD_JPG 1
 
 /* */
-#define HAVE_GD_PNG 1
-
-/* */
-#define HAVE_GD_STRINGFT 1
-
-/* */
-#define HAVE_GD_STRINGFTEX 1
-
-/* */
-/* #undef HAVE_GD_STRINGTTF */
-
-/* */
-#define HAVE_GD_WBMP 1
+/* #undef HAVE_GD_PNG */
 
 /* */
 /* #undef HAVE_GD_WEBP */
-
-/* */
-#define HAVE_GD_XBM 1
 
 /* */
 /* #undef HAVE_GD_XPM */
@@ -994,7 +949,7 @@
 /* #undef HAVE_ISQL_H */
 
 /* whether to enable JavaScript Object Serialization support */
-#define HAVE_JSON 1
+#define HAVE_JSON 1 
 
 /* Define to 1 if you have the `kill' function. */
 #define HAVE_KILL 1
@@ -1048,22 +1003,10 @@
 /* #undef HAVE_LIBEXPAT */
 
 /* */
-#define HAVE_LIBFREETYPE 1
+/* #undef HAVE_LIBFREETYPE */
 
 /* */
-#define HAVE_LIBGD 1
-
-/* */
-#define HAVE_LIBGD13 1
-
-/* */
-#define HAVE_LIBGD15 1
-
-/* */
-#define HAVE_LIBGD20 1
-
-/* */
-#define HAVE_LIBGD204 1
+/* #undef HAVE_LIBGD */
 
 /* */
 /* #undef HAVE_LIBICONV */
@@ -1202,6 +1145,9 @@
 /* Define to 1 if you have the <monetary.h> header file. */
 #define HAVE_MONETARY_H 1
 
+/* Define if you have mprotect() function */
+#define HAVE_MPROTECT 1
+
 /* Define to 1 if you have the `mremap' function. */
 /* #undef HAVE_MREMAP */
 
@@ -1303,6 +1249,12 @@
 
 /* */
 /* #undef HAVE_ORALDAP_10 */
+
+/* */
+/* #undef HAVE_ORALDAP_11 */
+
+/* */
+/* #undef HAVE_ORALDAP_12 */
 
 /* Whether struct _zend_object_value is packed */
 #define HAVE_PACKED_OBJECT_VALUE 0
@@ -1442,6 +1394,9 @@
 /* */
 /* #undef HAVE_PSPELL */
 
+/* Define to 1 if the PS_STRINGS thing exists. */
+/* #undef HAVE_PS_STRINGS */
+
 /* do we have ptrace? */
 /* #undef HAVE_PTRACE */
 
@@ -1549,6 +1504,21 @@
 
 /* */
 #define HAVE_SHMOP 1
+
+/* Define if you have SysV IPC SHM support */
+#define HAVE_SHM_IPC 1
+
+/* Define if you have mmap(MAP_ANON) SHM support */
+#define HAVE_SHM_MMAP_ANON 1
+
+/* Define if you have mmap() SHM support */
+#define HAVE_SHM_MMAP_FILE 1
+
+/* Define if you have POSIX mmap() SHM support */
+#define HAVE_SHM_MMAP_POSIX 1
+
+/* Define if you have mmap("/dev/zero") SHM support */
+/* #undef HAVE_SHM_MMAP_ZERO */
 
 /* Define to 1 if you have the `shutdown' function. */
 #define HAVE_SHUTDOWN 1
@@ -1760,16 +1730,16 @@
 /* whether you have struct flock */
 #define HAVE_STRUCT_FLOCK 1
 
-/* Define to 1 if `st_blksize' is member of `struct stat'. */
+/* Define to 1 if `st_blksize' is a member of `struct stat'. */
 #define HAVE_STRUCT_STAT_ST_BLKSIZE 1
 
-/* Define to 1 if `st_blocks' is member of `struct stat'. */
+/* Define to 1 if `st_blocks' is a member of `struct stat'. */
 #define HAVE_STRUCT_STAT_ST_BLOCKS 1
 
-/* Define to 1 if `st_rdev' is member of `struct stat'. */
+/* Define to 1 if `st_rdev' is a member of `struct stat'. */
 #define HAVE_STRUCT_STAT_ST_RDEV 1
 
-/* Define to 1 if `tm_zone' is member of `struct tm'. */
+/* Define to 1 if `tm_zone' is a member of `struct tm'. */
 #define HAVE_STRUCT_TM_TM_ZONE 1
 
 /* Define to 1 if your `struct stat' has `st_blksize'. Deprecated, use
@@ -1854,6 +1824,9 @@
 
 /* Define to 1 if you have the <sys/poll.h> header file. */
 #define HAVE_SYS_POLL_H 1
+
+/* Define to 1 if you have the <sys/pstat.h> header file. */
+/* #undef HAVE_SYS_PSTAT_H */
 
 /* Define to 1 if you have the <sys/resource.h> header file. */
 #define HAVE_SYS_RESOURCE_H 1
@@ -2097,14 +2070,17 @@
 /* Enable compressed protocol support */
 #define MYSQLND_COMPRESSION_WANTED 1
 
-/* Enable SSL support */
+/* Enable mysqlnd code that uses OpenSSL directly */
+#define MYSQLND_HAVE_SSL 1
+
+/* Enable core mysqlnd SSL code */
 #define MYSQLND_SSL_SUPPORTED 1
 
 /* Whether mysqlnd is enabled */
 #define MYSQL_USE_MYSQLND 1
 
 /* */
-/* #undef NDBM_INCLUDE_FILE */
+#define NDBM_INCLUDE_FILE "/usr/include/ndbm.h"
 
 /* */
 /* #undef NEUTRINO */
@@ -2123,6 +2099,9 @@
 
 /* Define to the one symbol short name of this package. */
 #define PACKAGE_TARNAME ""
+
+/* Define to the home page for this package. */
+#define PACKAGE_URL ""
 
 /* Define to the version of this package. */
 #define PACKAGE_VERSION ""
@@ -2146,13 +2125,10 @@
 #define PHP_BLOWFISH_CRYPT 1
 
 /* PHP build date */
-#define PHP_BUILD_DATE "2013-08-18"
+#define PHP_BUILD_DATE "2015-02-25"
 
 /* Define if your system has fork/vfork/CreateProcess */
 #define PHP_CAN_SUPPORT_PROC_OPEN 1
-
-/* */
-/* #undef PHP_CURL_URL_WRAPPERS */
 
 /* Whether the system supports extended DES salt */
 #define PHP_EXT_DES_CRYPT 1
@@ -2224,7 +2200,7 @@
 #define PHP_STD_DES_CRYPT 1
 
 /* uname -a output */
-#define PHP_UNAME "Darwin jackson.apple.com 13.0 Darwin Kernel Version 13.0.0: Tue Jul 30 20:52:22 PDT 2013; root:xnu-2422.1.53~3/RELEASE_X86_64 x86_64"
+#define PHP_UNAME "Darwin osx202.apple.com 14.0 Darwin Kernel Version 14.0.0: Fri Sep 19 00:26:44 PDT 2014; root:xnu-2782.1.97~2/DEVELOPMENT_X86_64 x86_64"
 
 /* Whether PHP has to use its own crypt_r for blowfish, des and ext des */
 #define PHP_USE_PHP_CRYPT_R 1
@@ -2322,7 +2298,7 @@
 /* #undef TSRM_ST */
 
 /* */
-#define UNDEF_THREADS_HACK 
+#define UNDEF_THREADS_HACK /**/
 
 /* */
 /* #undef UNIXWARE */
@@ -2338,6 +2314,28 @@
 
 /* Define if cross-process locking is required by accept() */
 /* #undef USE_LOCKING */
+
+/* Enable extensions on AIX 3, Interix.  */
+#ifndef _ALL_SOURCE
+# define _ALL_SOURCE 1
+#endif
+/* Enable GNU extensions on systems that have them.  */
+#ifndef _GNU_SOURCE
+# define _GNU_SOURCE 1
+#endif
+/* Enable threading extensions on Solaris.  */
+#ifndef _POSIX_PTHREAD_SEMANTICS
+# define _POSIX_PTHREAD_SEMANTICS 1
+#endif
+/* Enable extensions on HP NonStop.  */
+#ifndef _TANDEM_SOURCE
+# define _TANDEM_SOURCE 1
+#endif
+/* Enable general extensions on Solaris.  */
+#ifndef __EXTENSIONS__
+# define __EXTENSIONS__ 1
+#endif
+
 
 /* */
 /* #undef USE_TRANSFER_TABLES */
@@ -2375,12 +2373,15 @@
 /* */
 /* #undef ZTS */
 
-/* Define to 1 if on AIX 3.
-   System headers sometimes define this.
-   We just want to avoid a redefinition error message.  */
-#ifndef _ALL_SOURCE
-/* # undef _ALL_SOURCE */
-#endif
+/* Define to 1 if on MINIX. */
+/* #undef _MINIX */
+
+/* Define to 2 if the system does not provide POSIX.1 features except with
+   this defined. */
+/* #undef _POSIX_1_SOURCE */
+
+/* Define to 1 if you need to in order for `stat' and other things to work. */
+/* #undef _POSIX_SOURCE */
 
 /* Define to empty if `const' does not conform to ANSI C. */
 /* #undef const */

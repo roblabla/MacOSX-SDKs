@@ -16,6 +16,17 @@
 #import <CoreMedia/CMTime.h>
 #import <CoreMedia/CMTimeRange.h>
 
+/*!
+	@class		AVVideoComposition
+ 
+	@abstract	An AVVideoComposition object represents an immutable video composition.
+ 
+	@discussion	
+		A video composition describes, for any time in the aggregate time range of its instructions, the number and IDs of video tracks that are to be used in order to produce a composed video frame corresponding to that time. When AVFoundation's built-in video compositor is used, the instructions an AVVideoComposition contain can specify a spatial transformation, an opacity value, and a cropping rectangle for each video source, and these can vary over time via simple linear ramping functions.
+ 
+		A client can implement their own custom video compositor by implementing the AVVideoCompositing protocol; a custom video compositor is provided with pixel buffers for each of its video sources during playback and other operations and can perform arbitrary graphical operations on them in order to produce visual output.
+*/
+
 @class AVVideoCompositionCoreAnimationTool;
 @class AVVideoCompositionInternal;
 
@@ -73,6 +84,11 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 
 @end
 
+/*!
+	@class		AVMutableVideoComposition
+ 
+	@abstract	The AVMutableVideoComposition class is a mutable subclass of AVVideoComposition.
+*/
 
 @class AVMutableVideoCompositionInternal;
 
@@ -137,6 +153,14 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 
 @end
 
+/*!
+	@class		AVVideoCompositionInstruction
+ 
+	@abstract	An AVVideoCompositionInstruction object represents an operation to be performed by a compositor.
+ 
+	@discussion
+		An AVVideoComposition object maintains an array of instructions to perform its composition.
+*/
 
 
 @class AVVideoCompositionInstructionInternal;
@@ -175,6 +199,14 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 
 @end
 
+/*!
+	@class		AVMutableVideoCompositionInstruction
+ 
+	@abstract	An AVMutableVideoCompositionInstruction object represents an operation to be performed by a compositor.
+ 
+	@discussion
+		An AVVideoComposition object maintains an array of instructions to perform its composition.
+*/
 
 @class AVMutableVideoCompositionInstructionInternal;
 
@@ -212,6 +244,11 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 
 @end
 
+/*!
+	@class		AVVideoCompositionLayerInstruction
+ 
+	@abstract	An AVVideoCompositionLayerInstruction object represents the transform, opacity, and cropping ramps to apply to a given track.
+*/
 
 @class AVVideoCompositionLayerInstructionInternal;
 
@@ -277,6 +314,11 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 
 @end
 
+/*!
+	@class		AVMutableVideoCompositionLayerInstruction
+ 
+	@abstract	AVMutableVideoCompositionLayerInstruction is a mutable subclass of AVVideoCompositionLayerInstruction that is used to modify the transform, cropping, and opacity ramps to apply to a given track in a composition.
+*/
 
 @class AVMutableVideoCompositionLayerInstructionInternal;
 

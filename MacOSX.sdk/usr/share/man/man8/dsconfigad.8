@@ -124,7 +124,7 @@ CN=Computers,DC=domain,DC=ads,DC=demo,DC=com
 By default packet encryption is allowed but not required, but can be required or disabled (for example if debugging a problem).  This ensures that the data to/from the server is encrypted and signed guaranteeing the content was not tampered with and cannot be seen by other computers on the network.
 .It Fl packetsign Ar allow | Ar disable | Ar require
 By default packet signing is allowed but not required, but can be required or disabled (for example if debugging a problem).  This ensures that the data to/from the server is not tampered with by another computer before received it is received.
-It Fl passinterval Ar value
+.It Fl passinterval Ar value
 Set how often the computer trust account password should be changed (default 14).
 .It Fl password Ar password
 Password to use in conjunction with the specified username.  If this is not specified, you will be prompted for entry.  Note that using this option has a security risk due to a small window where the password could be captured from running process list.  Consider using the prompting mechanism to ensure passwords are not exposed unexpectedly.

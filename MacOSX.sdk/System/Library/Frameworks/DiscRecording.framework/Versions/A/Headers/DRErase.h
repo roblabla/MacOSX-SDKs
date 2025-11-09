@@ -31,37 +31,37 @@
 
 				Here's an example that shows you how to use this class:
 				
-				<code>
-				- (void) doErase																							<br/>
-				{																											<br/>
-					DRDevice*       device;																					<br/>
-					DRErase*        erase;																					<br/>
+				<pre>@textblock
+				- (void) doErase
+				{
+					DRDevice*       device;
+					DRErase*        erase;
 				
-					<i>...determine correct device to erase...</i>															<br/>
+					// Determine correct device to erase...
+ 
+					erase = [[DRErase alloc] initWithDevice:device];
 					
-					erase = [[DRErase alloc] initWithDevice:device];														<br/>
+					// we'll do a quick erase. It's typically all that's needed.
+					[erase setEraseType:DREraseTypeQuick];
 					
-					// we'll do a quick erase. It's typically all that's needed.											<br/>
-					[erase setEraseType:DREraseTypeQuick];																	<br/>
-					
-					// register to receive notification about the erase status.												<br/>
-					[[DRNotificationCenter currentRunLoopCenter] addObserver:self											<br/>
-																	selector:&#x40;selector(eraseNotification:)				<br/>
-																		name:DREraseStatusChangedNotification 				<br/>
-																	  object:erase];										<br/>
+					// register to receive notification about the erase status.
+					[[DRNotificationCenter currentRunLoopCenter] addObserver:self
+																	selector:&#x40;selector(eraseNotification:)
+																		name:DREraseStatusChangedNotification
+																	  object:erase];
 								   
-					 // start the erase                            															<br/>
-					 [erase start];																							<br/>
+					 // start the erase
+					 [erase start];
 				}
 				
-				- (void) eraseNotification:(NSNotification*)notification													<br/>
-				{																											<br/>
-					DRErase*        erase = [notification object];															<br/>
-					NSDictionary*   status = [notification userInfo];														<br/>
+				- (void) eraseNotification:(NSNotification*)notification
+				{
+					DRErase*        erase = [notification object];
+					NSDictionary*   status = [notification userInfo];
 					
-					<i>...do what you wish with the notification...</i>														<br/>
+					// Do what you wish with the notification...
 				}
-				</code>
+				@/textblock</pre>
 */
 #import <Foundation/Foundation.h>
 
@@ -87,37 +87,37 @@
 
 				Here's an example that shows you how to use this class:
 				
-				<code>
-				- (void) doErase																							<br/>
-				{																											<br/>
-					DRDevice*       device;																					<br/>
-					DRErase*        erase;																					<br/>
+				<pre>@textblock
+				- (void) doErase																							
+				{
+					DRDevice*       device;
+					DRErase*        erase;
 				
-					<i>...determine correct device to erase...</i>															<br/>
+					// Determine correct device to erase...
 					
-					erase = [[DRErase alloc] initWithDevice:device];														<br/>
+					erase = [[DRErase alloc] initWithDevice:device];
 					
-					// we'll do a quick erase. It's typically all that's needed.											<br/>
-					[erase setEraseType:DREraseTypeQuick];																	<br/>
+					// we'll do a quick erase. It's typically all that's needed.
+					[erase setEraseType:DREraseTypeQuick];
 					
-					// register to receive notification about the erase status.												<br/>
-					[[DRNotificationCenter currentRunLoopCenter] addObserver:self											<br/>
-																	selector:&#x40;selector(eraseNotification:)				<br/>
-																		name:DREraseStatusChangedNotification 				<br/>
-																	  object:erase];										<br/>
+					// register to receive notification about the erase status.
+					[[DRNotificationCenter currentRunLoopCenter] addObserver:self
+																	selector:&#x40;selector(eraseNotification:)
+																		name:DREraseStatusChangedNotification
+																	  object:erase];
 								   
-					 // start the erase                            															<br/>
-					 [erase start];																							<br/>
+					 // start the erase
+					 [erase start];
 				}
 				
-				- (void) eraseNotification:(NSNotification*)notification													<br/>
-				{																											<br/>
-					DRErase*        erase = [notification object];															<br/>
-					NSDictionary*   status = [notification userInfo];														<br/>
+				- (void) eraseNotification:(NSNotification*)notification
+				{
+					DRErase*        erase = [notification object];
+					NSDictionary*   status = [notification userInfo];
 					
-					<i>...do what you wish with the notification...</i>														<br/>
+					// Do what you wish with the notification...
 				}
-				</code>
+				@/textblock</pre>
 */
 @interface DRErase : NSObject 
 { 

@@ -2,7 +2,7 @@
 //  AVB17221AECPInterface.h
 //  AudioVideoBridging
 //
-//  Copyright 2011-2012 Apple Inc. All rights reserved.
+//  Copyright (c) 2011-2014 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -45,15 +45,15 @@
  @typedef	AVB17221AECPInterfaceCompletion:
  @abstract	The prototype for the completion handler block for AECP command messages.
  */
-typedef void (^AVB17221AECPInterfaceCompletion)(NSError *, AVB17221AECPMessage *);
+typedef void (^AVB17221AECPInterfaceCompletion)(NSError *e, AVB17221AECPMessage *m);
 
 @class AVBInterface;
 @class AVBMACAddress;
 
 /*!
 	@class		AVB17221AECPInterface
-	@abstract	AVB17221AECPInterface is a concrete subclass of AVB1722ControlInterface providing the access to the IEEE P1722.1 AVDECC Enumeration and Control Protocol interface.
-	@discussion	AVB17221AECPInterface is a concrete subclass of AVB1722ControlInterface providing the access to the IEEE P1722.1 AVDECC Enumeration and Control Protocol (AECP) interface.
+	@abstract	AVB17221AECPInterface is a concrete subclass of AVB1722ControlInterface providing the access to the IEEE Std 1722.1™-2013 AVDECC Enumeration and Control Protocol interface.
+	@discussion	AVB17221AECPInterface is a concrete subclass of AVB1722ControlInterface providing the access to the IEEE Std 1722.1™-2013 AVDECC Enumeration and Control Protocol (AECP) interface.
 				It provides callbacks per entity EntityID via a handler object implementing the AVB17221AECPClient protocol. AVB17221AECPInterface objects
 				are typically not created directly but are created indirectly and accessed via the aecp property of the AVBInterface object.
  */
@@ -75,6 +75,7 @@ NS_CLASS_AVAILABLE(10_8, NA)
 	id<AVB17221AECPClient> _monitorModeDelegate;
 	
 	NSMutableArray *pendingAEMResponses;
+	NSMutableArray *pendingAAResponses;
 }
 
 

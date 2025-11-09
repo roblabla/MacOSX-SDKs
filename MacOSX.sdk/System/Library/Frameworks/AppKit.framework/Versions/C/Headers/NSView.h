@@ -1,7 +1,7 @@
 /*
     NSView.h
     Application Kit
-    Copyright (c) 1994-2013, Apple Inc.
+    Copyright (c) 1994-2014, Apple Inc.
     All rights reserved.
 */
 
@@ -16,12 +16,12 @@
 #import <AppKit/NSDragging.h>
 #import <AppKit/NSAppearance.h>
 
-@class NSBitmapImageRep, NSCursor, NSDraggingSession, NSGraphicsContext, NSImage, NSPasteboard, NSScrollView, NSTextInputContext, NSWindow, NSAttributedString;
+@class NSBitmapImageRep, NSCursor, NSDraggingSession, NSGestureRecognizer, NSGraphicsContext, NSImage, NSPasteboard, NSScrollView, NSTextInputContext, NSWindow, NSAttributedString;
 @class CIFilter, CALayer, NSDictionary, NSScreen, NSShadow, NSTrackingArea;
 @protocol NSDraggingSource;
 
 // Bitset options for the autoresizingMask
-enum {
+typedef NS_OPTIONS(NSUInteger, NSAutoresizingMaskOptions) {
     NSViewNotSizable			=  0,
     NSViewMinXMargin			=  1,
     NSViewWidthSizable			=  2,
@@ -74,7 +74,7 @@ typedef struct __VFlags {
 	unsigned int autoresizeSubviews:1;
 	unsigned int wantsGState:1;
 	unsigned int needsDisplay:1;
-	unsigned int unused1:2;
+	unsigned int allowsVibrancy:2;
 	unsigned int canDrawSubviewsIntoLayer:1;
 	unsigned int frameChangeNotesSuspended:1;
 	unsigned int needsFrameChangeNote:1;
@@ -106,7 +106,7 @@ typedef struct __VFlags {
 	unsigned int needsFrameChangeNote:1;
 	unsigned int frameChangeNotesSuspended:1;
 	unsigned int canDrawSubviewsIntoLayer:1;
-	unsigned int unused1:2;
+	unsigned int allowsVibrancy:2;
 	unsigned int needsDisplay:1;
 	unsigned int wantsGState:1;
 	unsigned int autoresizeSubviews:1;
@@ -121,7 +121,7 @@ typedef NSInteger NSToolTipTag;
 
 @class _NSViewAuxiliary;
 
-@interface NSView : NSResponder <NSAnimatablePropertyContainer, NSUserInterfaceItemIdentification, NSDraggingDestination, NSAppearanceCustomization>
+@interface NSView : NSResponder <NSAnimatablePropertyContainer, NSUserInterfaceItemIdentification, NSDraggingDestination, NSAppearanceCustomization, NSAccessibilityElement, NSAccessibility>
 {
     /* All instance variables are private */
     NSRect              _frame;
@@ -129,7 +129,7 @@ typedef NSInteger NSToolTipTag;
     id                  _superview;
     id                  _subviews;
     NSWindow           *_window;
-    id                  _gState;
+    id                  _unused_was_gState;
     id                  _frameMatrix;
     CALayer             *_layer;
     id     	        _dragTypes;
@@ -145,21 +145,21 @@ typedef NSInteger NSToolTipTag;
     } _vFlags2;
 }
 
-- (id)initWithFrame:(NSRect)frameRect;
+- (instancetype)initWithFrame:(NSRect)frameRect NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 
-- (NSWindow *)window;
-- (NSView *)superview;
-- (NSArray *)subviews;
+@property (readonly, assign) NSWindow *window;
+@property (readonly, assign) NSView *superview;
+@property (copy) NSArray *subviews;
 - (BOOL)isDescendantOf:(NSView *)aView;
 - (NSView *)ancestorSharedWithView:(NSView *)aView;
-- (NSView *)opaqueAncestor;
-- (void)setHidden:(BOOL)flag;
-- (BOOL)isHidden;
-- (BOOL)isHiddenOrHasHiddenAncestor;
+@property (readonly, assign) NSView *opaqueAncestor;
+@property (getter=isHidden) BOOL hidden;
+@property (getter=isHiddenOrHasHiddenAncestor, readonly) BOOL hiddenOrHasHiddenAncestor;
 
 - (void)getRectsBeingDrawn:(const NSRect **)rects count:(NSInteger *)count;
 - (BOOL)needsToDrawRect:(NSRect)aRect;
-- (BOOL)wantsDefaultClipping;
+@property (readonly) BOOL wantsDefaultClipping;
 - (void)viewDidHide NS_AVAILABLE_MAC(10_5);
 - (void)viewDidUnhide NS_AVAILABLE_MAC(10_5);
 
@@ -167,53 +167,50 @@ typedef NSInteger NSToolTipTag;
 - (void)addSubview:(NSView *)aView;
 - (void)addSubview:(NSView *)aView positioned:(NSWindowOrderingMode)place relativeTo:(NSView *)otherView;
 - (void)sortSubviewsUsingFunction:(NSComparisonResult (*)(id, id, void *))compare context:(void *)context;
+
+/* NOTE: In general, it is good practice to call 'super' for the viewWill* and viewDid* methods. Some AppKit subclasses, such as NSTableView, depend on this behavior, and calling super is required for things to work properly.
+ */
 - (void)viewWillMoveToWindow:(NSWindow *)newWindow;
 - (void)viewDidMoveToWindow;
 - (void)viewWillMoveToSuperview:(NSView *)newSuperview;
 - (void)viewDidMoveToSuperview;
+
 - (void)didAddSubview:(NSView *)subview;
 - (void)willRemoveSubview:(NSView *)subview;
+
 - (void)removeFromSuperview;
 - (void)replaceSubview:(NSView *)oldView with:(NSView *)newView;
 - (void)removeFromSuperviewWithoutNeedingDisplay;
 - (void)viewDidChangeBackingProperties NS_AVAILABLE_MAC(10_7); // available in 10.7.4
 
-- (void)setPostsFrameChangedNotifications:(BOOL)flag;
-- (BOOL)postsFrameChangedNotifications;
+@property BOOL postsFrameChangedNotifications;
 
 - (void)resizeSubviewsWithOldSize:(NSSize)oldSize;
 - (void)resizeWithOldSuperviewSize:(NSSize)oldSize;
-- (void)setAutoresizesSubviews:(BOOL)flag;
-- (BOOL)autoresizesSubviews;
-- (void)setAutoresizingMask:(NSUInteger)mask;
-- (NSUInteger)autoresizingMask;
+@property BOOL autoresizesSubviews;
+@property NSAutoresizingMaskOptions autoresizingMask;
 
 - (void)setFrameOrigin:(NSPoint)newOrigin;
 - (void)setFrameSize:(NSSize)newSize;
-- (void)setFrame:(NSRect)frameRect;
-- (NSRect)frame;
-- (void)setFrameRotation:(CGFloat)angle;
-- (CGFloat)frameRotation;
-- (void)setFrameCenterRotation:(CGFloat)angle NS_AVAILABLE_MAC(10_5);
-- (CGFloat)frameCenterRotation NS_AVAILABLE_MAC(10_5);
+@property NSRect frame;
+@property CGFloat frameRotation;
+@property CGFloat frameCenterRotation NS_AVAILABLE_MAC(10_5);
 
 - (void)setBoundsOrigin:(NSPoint)newOrigin;
 - (void)setBoundsSize:(NSSize)newSize;
-- (void)setBoundsRotation:(CGFloat)angle;
-- (CGFloat)boundsRotation;
+@property CGFloat boundsRotation;
 - (void)translateOriginToPoint:(NSPoint)translation;
 - (void)scaleUnitSquareToSize:(NSSize)newUnitSize;
 - (void)rotateByAngle:(CGFloat)angle;
-- (void)setBounds:(NSRect)aRect;
-- (NSRect)bounds;
+@property NSRect bounds;
 
-- (BOOL)isFlipped;
-- (BOOL)isRotatedFromBase;
-- (BOOL)isRotatedOrScaledFromBase;
+@property (getter=isFlipped, readonly) BOOL flipped;
+@property (getter=isRotatedFromBase, readonly) BOOL rotatedFromBase;
+@property (getter=isRotatedOrScaledFromBase, readonly) BOOL rotatedOrScaledFromBase;
 
 /* A hint as to whether or not this view draws its contents completely opaque or not. Opaque content drawing can allow some optimizations to happen. The default value is NO.
  */
-- (BOOL)isOpaque;
+@property (getter=isOpaque, readonly) BOOL opaque;
 
 - (NSPoint)convertPoint:(NSPoint)aPoint fromView:(NSView *)aView;
 - (NSPoint)convertPoint:(NSPoint)aPoint toView:(NSView *)aView;
@@ -247,30 +244,28 @@ typedef NSInteger NSToolTipTag;
 
 /* These methods are deprecated on 10.7 and later. */
 
-- (NSPoint)convertPointToBase:(NSPoint)aPoint NS_AVAILABLE_MAC(10_5);
-- (NSPoint)convertPointFromBase:(NSPoint)aPoint NS_AVAILABLE_MAC(10_5);
-- (NSSize)convertSizeToBase:(NSSize)aSize NS_AVAILABLE_MAC(10_5);
-- (NSSize)convertSizeFromBase:(NSSize)aSize NS_AVAILABLE_MAC(10_5);
-- (NSRect)convertRectToBase:(NSRect)aRect NS_AVAILABLE_MAC(10_5);
-- (NSRect)convertRectFromBase:(NSRect)aRect NS_AVAILABLE_MAC(10_5);
+- (NSPoint)convertPointToBase:(NSPoint)aPoint NS_DEPRECATED_MAC(10_5, 10_7);
+- (NSPoint)convertPointFromBase:(NSPoint)aPoint NS_DEPRECATED_MAC(10_5, 10_7);
+- (NSSize)convertSizeToBase:(NSSize)aSize NS_DEPRECATED_MAC(10_5, 10_7);
+- (NSSize)convertSizeFromBase:(NSSize)aSize NS_DEPRECATED_MAC(10_5, 10_7);
+- (NSRect)convertRectToBase:(NSRect)aRect  NS_DEPRECATED_MAC(10_5, 10_7);
+- (NSRect)convertRectFromBase:(NSRect)aRect  NS_DEPRECATED_MAC(10_5, 10_7);
 
 /* Reports whether AppKit may invoke the view's -drawRect: method on a background thread, where it would otherwise be invoked on the main thread.  Defaults to NO.
 */
-- (BOOL)canDrawConcurrently NS_AVAILABLE_MAC(10_6);
+@property BOOL canDrawConcurrently NS_AVAILABLE_MAC(10_6);
 
 /* Sets whether AppKit may invoke the view's -drawRect: method on a background thread, where it would otherwise be invoked on the main thread.  Defaults to NO for most kinds of views.  May be set to YES to enable threaded drawing for a particular view instance.  The view's window must also have its "allowsConcurrentViewDrawing" property set to YES (the default) for threading of view drawing to actually take place. */
-- (void)setCanDrawConcurrently:(BOOL)flag NS_AVAILABLE_MAC(10_6);
 
-- (BOOL)canDraw;
-- (void)setNeedsDisplay:(BOOL)flag;
+@property (readonly) BOOL canDraw;
 - (void)setNeedsDisplayInRect:(NSRect)invalidRect;
-- (BOOL)needsDisplay;
+@property BOOL needsDisplay;
 - (void)lockFocus;
 - (void)unlockFocus;
 - (BOOL)lockFocusIfCanDraw;
 - (BOOL)lockFocusIfCanDrawInContext:(NSGraphicsContext *)context;
 + (NSView *)focusView;
-- (NSRect)visibleRect;
+@property (readonly) NSRect visibleRect;
 
 - (void)display;
 - (void)displayIfNeeded;
@@ -286,12 +281,6 @@ typedef NSInteger NSToolTipTag;
 - (void)cacheDisplayInRect:(NSRect)rect toBitmapImageRep:(NSBitmapImageRep *)bitmapImageRep;
 - (void)viewWillDraw NS_AVAILABLE_MAC(10_5);
 
-- (NSInteger)gState;
-- (void)allocateGState;
-- (oneway void)releaseGState;
-- (void)setUpGState;
-- (void)renewGState;
-
 - (void)scrollPoint:(NSPoint)aPoint;
 - (BOOL)scrollRectToVisible:(NSRect)aRect;
 - (BOOL)autoscroll:(NSEvent *)theEvent;
@@ -302,22 +291,20 @@ typedef NSInteger NSToolTipTag;
 - (NSView *)hitTest:(NSPoint)aPoint;
 - (BOOL)mouse:(NSPoint)aPoint inRect:(NSRect)aRect;
 - (id)viewWithTag:(NSInteger)aTag;
-- (NSInteger)tag;
+@property (readonly) NSInteger tag;
 - (BOOL)performKeyEquivalent:(NSEvent *)theEvent;
 - (BOOL)acceptsFirstMouse:(NSEvent *)theEvent;
 - (BOOL)shouldDelayWindowOrderingForEvent:(NSEvent *)theEvent;
-- (BOOL)needsPanelToBecomeKey;
-- (BOOL)mouseDownCanMoveWindow;
+@property (readonly) BOOL needsPanelToBecomeKey;
+@property (readonly) BOOL mouseDownCanMoveWindow;
 
 /* By default, views do not accept touch events
 */
-- (void)setAcceptsTouchEvents:(BOOL)flag NS_AVAILABLE_MAC(10_6);
-- (BOOL)acceptsTouchEvents NS_AVAILABLE_MAC(10_6);
+@property BOOL acceptsTouchEvents NS_AVAILABLE_MAC(10_6);
 
 /* In some cases, the user may rest a thumb or other touch on the device. By default, these touches are not delivered and are not included in the event's set of touches. Touches may transition in and out of resting at any time. Unless the view wants restingTouches, began / ended events are simlulated as touches transition from resting to active and vice versa.
 */
-- (void)setWantsRestingTouches:(BOOL)flag NS_AVAILABLE_MAC(10_6);
-- (BOOL)wantsRestingTouches NS_AVAILABLE_MAC(10_6);
+@property BOOL wantsRestingTouches NS_AVAILABLE_MAC(10_6);
 
 - (void)addCursorRect:(NSRect)aRect cursor:(NSCursor *)anObj;
 - (void)removeCursorRect:(NSRect)aRect cursor:(NSCursor *)anObj;
@@ -331,79 +318,62 @@ typedef NSInteger NSToolTipTag;
 
 /* Get and set how the layer should redraw when resizing and redisplaying. Prior to 10.8, the default value was always set to NSViewLayerContentsRedrawDuringViewResize when an AppKit managed layer was created. In 10.8 and higher, the value is initialized to the appropriate thing for each individual AppKit view. Generally, the default value is NSViewLayerContentsRedrawOnSetNeedsDisplay if the view responds YES to -wantsUpdateLayer. Otherwise, the value is usually NSViewLayerContentsRedrawDuringViewResize, indicating that the view needs to redraw on each step of an animation via a setFrame: change. On 10.8, the value is not encoded by the view.
 */
-- (NSViewLayerContentsRedrawPolicy)layerContentsRedrawPolicy NS_AVAILABLE_MAC(10_6);
-- (void)setLayerContentsRedrawPolicy:(NSViewLayerContentsRedrawPolicy)newPolicy NS_AVAILABLE_MAC(10_6);
+@property NSViewLayerContentsRedrawPolicy layerContentsRedrawPolicy NS_AVAILABLE_MAC(10_6);
 
-- (NSViewLayerContentsPlacement)layerContentsPlacement NS_AVAILABLE_MAC(10_6);
-- (void)setLayerContentsPlacement:(NSViewLayerContentsPlacement)newPlacement NS_AVAILABLE_MAC(10_6);
+@property NSViewLayerContentsPlacement layerContentsPlacement NS_AVAILABLE_MAC(10_6);
 
 /* Indicates if this view should be a "Layer Backed View". When layer backed, all subviews will subsequently also have a layer set on them (however, wantsLayer will only be YES on views that have had it explicitly set). Contents for a layer are specified in one of two ways: if -wantsUpdateLayer returns YES, then one can directly update the layer's contents (or other properties) in -updateLayer. If -wantsUpdateLayer returns NO, then the layer's contents is filled with whatever is drawn by -drawRect:
  */
-- (void)setWantsLayer:(BOOL)flag NS_AVAILABLE_MAC(10_5);
-- (BOOL)wantsLayer NS_AVAILABLE_MAC(10_5);
+@property BOOL wantsLayer NS_AVAILABLE_MAC(10_5);
 
 /* Get and set the CALayer for this view. The layer is not encoded by the view.
  */
-- (void)setLayer:(CALayer *)newLayer NS_AVAILABLE_MAC(10_5);
-- (CALayer *)layer NS_AVAILABLE_MAC(10_5);
+@property (strong) CALayer *layer NS_AVAILABLE_MAC(10_5);
 
 /* Layer Backed Views: Return YES if this view supports directly setting the layer properties (such as the contents and backgroundColor) as opposed to filling in the contents with a drawRect: implementation. Most AppKit controls return YES if there is no subclassing involved that would alter the drawing appearance. It will return NO for views that do have subclassing that AppKit does not know about (such as, overriding drawRect:, or other drawing methods).
  */
-- (BOOL)wantsUpdateLayer NS_AVAILABLE_MAC(10_8);
+@property (readonly) BOOL wantsUpdateLayer NS_AVAILABLE_MAC(10_8);
 
-/* Layer Backed Views: If the view responds YES to wantsUpdateLayer, then updateLayer will be called as opposed to drawRect:. This method should be used for better performance; it is faster to directly set the layer.contents with a shared image and inform it how to stretch with the layer.contentsCenter property instead of drawing into a context with drawRect:. In general, one should also set the layerContentsRedrawPolicy to an appropriate value in the init method (frequently NSViewLayerContentsRedrawOnSetNeedsDisplay is desired). To signal a refresh of the layer contents, one will then call [view setNeedsDisplay:YES], and -updateLayer will be lazily called when the layer needs its contents. One should not alter geometry or add/remove subviews (or layers) during this method. To add subviews (or layers) use -layout. -layout will stil be called even if autolayout is not enabled, and wantsUpdateLayer returns YES.
+/* Layer Backed Views: If the view responds YES to wantsUpdateLayer, then updateLayer will be called as opposed to drawRect:. This method should be used for better performance; it is faster to directly set the layer.contents with a shared image and inform it how to stretch with the layer.contentsCenter property instead of drawing into a context with drawRect:. In general, one should also set the layerContentsRedrawPolicy to an appropriate value in the init method (frequently NSViewLayerContentsRedrawOnSetNeedsDisplay is desired). To signal a refresh of the layer contents, one will then call [view setNeedsDisplay:YES], and -updateLayer will be lazily called when the layer needs its contents. One should not alter geometry or add/remove subviews (or layers) during this method. To add subviews (or layers) use -layout. -layout will still be called even if autolayout is not enabled, and wantsUpdateLayer returns YES.
  */
 - (void)updateLayer NS_AVAILABLE_MAC(10_8);
 
 /* When canDrawSubviewsIntoLayer is set to YES, and the view is layer-backed (either explicitly with -wantsLayer=YES, or by having a parent view that is layer-backed), the layer will draw all subviews into this view's layer, and each subview will not get an individual layer (the exception to this is a subview which has wantsLayer explicitly set to YES). This is useful for layer-backing a complex set of views that can not be refactored to take advantage of proper resizing and -wantsUpdateLayer==YES. If canDrawSubviewsIntoLayer is YES, the value returned from wantsUpdateLayer will be ignored, and the layer will always have drawRect: invoked to get the layer's contents. The default value is NO. NOTE: These methods should NOT be overridden, and the setter should always be used.
  */
-- (void)setCanDrawSubviewsIntoLayer:(BOOL)flag NS_AVAILABLE_MAC(10_9);
-- (BOOL)canDrawSubviewsIntoLayer NS_AVAILABLE_MAC(10_9);
+@property BOOL canDrawSubviewsIntoLayer NS_AVAILABLE_MAC(10_9);
 
-- (void)setAlphaValue:(CGFloat)viewAlpha NS_AVAILABLE_MAC(10_5);
-- (CGFloat)alphaValue NS_AVAILABLE_MAC(10_5);
+@property CGFloat alphaValue NS_AVAILABLE_MAC(10_5);
 
 /* If you have set a custom layer on your view, and it (or one of its sublayers) uses CIFilters, you should set this. You do not need to set this if you are using the backgroundFilters, compositingFilter, or contentFilters properties below. See the release notes for more information.
  */
-- (void)setLayerUsesCoreImageFilters:(BOOL)usesFilters NS_AVAILABLE_MAC(10_9);
-- (BOOL)layerUsesCoreImageFilters NS_AVAILABLE_MAC(10_9);
+@property BOOL layerUsesCoreImageFilters NS_AVAILABLE_MAC(10_9);
 
-- (void)setBackgroundFilters:(NSArray *)filters NS_AVAILABLE_MAC(10_5);
-- (NSArray *)backgroundFilters NS_AVAILABLE_MAC(10_5);
+@property (copy) NSArray *backgroundFilters NS_AVAILABLE_MAC(10_5);
 
-- (void)setCompositingFilter:(CIFilter *)filter NS_AVAILABLE_MAC(10_5);
-- (CIFilter *)compositingFilter NS_AVAILABLE_MAC(10_5);
+@property (strong) CIFilter *compositingFilter NS_AVAILABLE_MAC(10_5);
 
-- (void)setContentFilters:(NSArray *)filters NS_AVAILABLE_MAC(10_5);
-- (NSArray *)contentFilters NS_AVAILABLE_MAC(10_5);
+@property (copy) NSArray *contentFilters NS_AVAILABLE_MAC(10_5);
 
-- (void)setShadow:(NSShadow *)shadow NS_AVAILABLE_MAC(10_5);
-- (NSShadow *)shadow NS_AVAILABLE_MAC(10_5);
+@property (copy) NSShadow *shadow NS_AVAILABLE_MAC(10_5);
 
 /* The following methods are meant to be invoked, and probably don't need to be overridden
 */
 - (void)addTrackingArea:(NSTrackingArea *)trackingArea NS_AVAILABLE_MAC(10_5);
 - (void)removeTrackingArea:(NSTrackingArea *)trackingArea NS_AVAILABLE_MAC(10_5);
-- (NSArray *)trackingAreas NS_AVAILABLE_MAC(10_5);
+@property (readonly, copy) NSArray *trackingAreas NS_AVAILABLE_MAC(10_5);
 
 /* updateTrackingAreas should be overridden to remove out of date tracking areas and add recomputed tracking areas, and should call super.
 */
 - (void)updateTrackingAreas NS_AVAILABLE_MAC(10_5);
 
-/* shouldDrawColor is no longer used by AppKit. 
- */
-- (BOOL)shouldDrawColor;
+@property BOOL postsBoundsChangedNotifications;
 
-- (void)setPostsBoundsChangedNotifications:(BOOL)flag;
-- (BOOL)postsBoundsChangedNotifications;
-
-- (NSScrollView *)enclosingScrollView;
+@property (readonly, strong) NSScrollView *enclosingScrollView;
 
 - (NSMenu *)menuForEvent:(NSEvent *)event;
 + (NSMenu *)defaultMenu;
 
-- (void)setToolTip:(NSString *)string;
-- (NSString *)toolTip;
+@property (copy) NSString *toolTip;
 - (NSToolTipTag)addToolTipRect:(NSRect)aRect owner:(id)anObject userData:(void *)data;
 - (void)removeToolTip:(NSToolTipTag)tag;
 - (void)removeAllToolTips;
@@ -418,15 +388,15 @@ typedef NSInteger NSToolTipTag;
 
 /* inLiveResize can be called at any time to determine if the window is performing a live resize or not. Drawing optimizations can be done when the view is being live-resized.
  */
-- (BOOL)inLiveResize;
+@property (readonly) BOOL inLiveResize;
 
 /* A view that returns YES for -preservesContentDuringLiveResize is responsible for invalidating its own dirty rects during live resize 
  */
-- (BOOL)preservesContentDuringLiveResize;
+@property (readonly) BOOL preservesContentDuringLiveResize;
 
 /* -rectPreservedDuringLiveResize indicates the rect the view previously occupied, in the current coordinate system of the view 
  */
-- (NSRect)rectPreservedDuringLiveResize;
+@property (readonly) NSRect rectPreservedDuringLiveResize;
 
 /* On return from -getRectsExposedDuringLiveResize, exposedRects indicates the parts of the view that are newly exposed (at most 4 rects).  *count indicates how many rects are in the exposedRects list */
 - (void)getRectsExposedDuringLiveResize:(NSRect[4])exposedRects count:(NSInteger *)count;
@@ -434,7 +404,7 @@ typedef NSInteger NSToolTipTag;
 /* Text Input */
 /* Returns NSTextInputContext object for the receiver. Returns nil if the receiver doesn't conform to NSTextInputClient protocol.
  */
-- (NSTextInputContext *)inputContext NS_AVAILABLE_MAC(10_6);
+@property (readonly, strong) NSTextInputContext *inputContext NS_AVAILABLE_MAC(10_6);
 
 /* Return the complete rect of the most appropriate content grouping at the specified location. For example, if your content is divided into three columns, return the entire rect of the column that contains the location. NSScrollView will attempt to magnify such that the width fits inside the scroll view while remaining within the minMagnification, maxMagnification range.
  
@@ -446,8 +416,7 @@ typedef NSInteger NSToolTipTag;
 
 /* Get and set the user interface layout direction. By default, a basic NSView may not respect the User Interface Layout Direction that is uniquely set on it, and it is up to the developer and supporting subclasses to correctly implement a Right To Left layout implementation. The default value is set to [NSApp userInterfaceLayoutDirection]. 
  */
-- (NSUserInterfaceLayoutDirection)userInterfaceLayoutDirection NS_AVAILABLE_MAC(10_8);
-- (void)setUserInterfaceLayoutDirection:(NSUserInterfaceLayoutDirection)value NS_AVAILABLE_MAC(10_8);
+@property NSUserInterfaceLayoutDirection userInterfaceLayoutDirection NS_AVAILABLE_MAC(10_8);
 
 /* The View Based NSTableView allows views to be reused. Sometimes it is necessary to prepare a view with some initial state before it is to be reused. This method can be overridden to allow a view to be prepared back to the default state. Override this method to do the preparation. By default, NSView will do some setup, such as setting the view to not be hidden and have a 1.0 alpha. It is important to call super to get this work done. This method was made public in 10.9, but exists back to 10.7.
  */
@@ -461,10 +430,15 @@ typedef NSInteger NSToolTipTag;
  */
 - (void)prepareContentInRect:(NSRect)rect NS_AVAILABLE_MAC(10_9);
 
-/* The preparedContentRect is the area of the NSView that has full content coverage. In general, this should be called with the area that is filled in fully with views. It should always include the visibleRect. Set this with a value equal to the visibleRect to have overdraw start from the visibleRect and automatically grow larger on idle, as is needed for optimal system performance.
+/* The preparedContentRect is the area of the NSView that has full content coverage. In general, this should be called with the area that is filled in fully with views.  Set this with a value equal to the visibleRect to have overdraw start from the visibleRect and automatically grow larger on idle, as is needed for optimal system performance. The result of preparedContentRect may include the visibleRect, and may not include it if the previously prepared area has been scrolled away.
  */
 @property NSRect preparedContentRect NS_AVAILABLE_MAC(10_9);
 
+/* allowsVibrancy is queried when a vibrant appearance is used on a view hierarchy. When allowsVibrancy returns YES, the view will have an appropriate measure taken to ensure it is vibrant on top of its given material.
+ 
+ Specific subclasses, such as NSControl, will answer this question based on the artwork they draw for a given appearance.
+ */
+@property (readonly) BOOL allowsVibrancy NS_AVAILABLE_MAC(10_10);
 
 @end
 
@@ -481,22 +455,20 @@ typedef NSInteger NSToolTipTag;
 @end
 
 @interface NSView(NSKeyboardUI)
-- (void)setNextKeyView:(NSView *)next;
-- (NSView *)nextKeyView;
-- (NSView *)previousKeyView;
-- (NSView *)nextValidKeyView;
-- (NSView *)previousValidKeyView;
+@property (assign) NSView *nextKeyView;
+@property (readonly, assign) NSView *previousKeyView;
+@property (readonly, assign) NSView *nextValidKeyView;
+@property (readonly, assign) NSView *previousValidKeyView;
 
-- (BOOL)canBecomeKeyView;
+@property (readonly) BOOL canBecomeKeyView;
 
 - (void)setKeyboardFocusRingNeedsDisplayInRect:(NSRect)rect;
 
-- (void)setFocusRingType:(NSFocusRingType)focusRingType;
-- (NSFocusRingType)focusRingType;
+@property NSFocusRingType focusRingType;
 + (NSFocusRingType)defaultFocusRingType;
 
 - (void)drawFocusRingMask NS_AVAILABLE_MAC(10_7);
-- (NSRect)focusRingMaskBounds NS_AVAILABLE_MAC(10_7);
+@property (readonly) NSRect focusRingMaskBounds NS_AVAILABLE_MAC(10_7);
 - (void)noteFocusRingMaskChanged NS_AVAILABLE_MAC(10_7);
 
 @end
@@ -514,22 +486,22 @@ typedef NSInteger NSToolTipTag;
 
 /* Pagination */
 - (BOOL)knowsPageRange:(NSRangePointer)range;
-- (CGFloat)heightAdjustLimit;
-- (CGFloat)widthAdjustLimit;
+@property (readonly) CGFloat heightAdjustLimit;
+@property (readonly) CGFloat widthAdjustLimit;
 - (void)adjustPageWidthNew:(CGFloat *)newRight left:(CGFloat)oldLeft right:(CGFloat)oldRight limit:(CGFloat)rightLimit;
 - (void)adjustPageHeightNew:(CGFloat *)newBottom top:(CGFloat)oldTop bottom:(CGFloat)oldBottom limit:(CGFloat)bottomLimit;
 - (NSRect)rectForPage:(NSInteger)page;
 - (NSPoint)locationOfPrintRect:(NSRect)aRect;
 - (void)drawPageBorderWithSize:(NSSize)borderSize;
-- (NSAttributedString *)pageHeader;
-- (NSAttributedString *)pageFooter;
+@property (readonly, copy) NSAttributedString *pageHeader;
+@property (readonly, copy) NSAttributedString *pageFooter;
 
 /*** This method is obsolete.  It will never be invoked from within AppKit, and NSView's implementation of it does nothing. ***/
 - (void)drawSheetBorderWithSize:(NSSize)borderSize;
 
 /* Printing */
 /* Returns print job title. Default implementation first tries its window's NSDocument (displayName), then window's title */
-- (NSString *)printJobTitle;
+@property (readonly, copy) NSString *printJobTitle;
 - (void)beginDocument;
 - (void)endDocument;
 
@@ -545,9 +517,9 @@ typedef NSInteger NSToolTipTag;
 
 /* This drag method as been deprecated in favor of beginDraggingSessionWithItems:event:source:
 */ 
-- (void)dragImage:(NSImage *)anImage at:(NSPoint)viewLocation offset:(NSSize)initialOffset event:(NSEvent *)event pasteboard:(NSPasteboard *)pboard source:(id)sourceObj slideBack:(BOOL)slideFlag;
+- (void)dragImage:(NSImage *)anImage at:(NSPoint)viewLocation offset:(NSSize)initialOffset event:(NSEvent *)event pasteboard:(NSPasteboard *)pboard source:(id)sourceObj slideBack:(BOOL)slideFlag NS_DEPRECATED_MAC(10_0, 10_7, "Use -beginDraggingSessionWithItems:event:source: instead");
 
-- (NSArray *)registeredDraggedTypes;
+@property (readonly, copy) NSArray *registeredDraggedTypes;
 - (void)registerForDraggedTypes:(NSArray *)newTypes;
 - (void)unregisterDraggedTypes;
 
@@ -558,7 +530,7 @@ typedef NSInteger NSToolTipTag;
 @interface NSView (NSFullScreenMode) 
 - (BOOL)enterFullScreenMode:(NSScreen *)screen withOptions:(NSDictionary *)options NS_AVAILABLE_MAC(10_5);
 - (void)exitFullScreenModeWithOptions:(NSDictionary *)options NS_AVAILABLE_MAC(10_5);
-- (BOOL)isInFullScreenMode NS_AVAILABLE_MAC(10_5); 
+@property (getter=isInFullScreenMode, readonly) BOOL inFullScreenMode NS_AVAILABLE_MAC(10_5); 
 @end
 
 /* Constants for options when entering and exiting full screen mode */
@@ -576,7 +548,6 @@ APPKIT_EXTERN NSString * const NSFullScreenModeApplicationPresentationOptions NS
  */
 - (void)showDefinitionForAttributedString:(NSAttributedString *)attrString atPoint:(NSPoint)textBaselineOrigin NS_AVAILABLE_MAC(10_6);
 
-#if NS_BLOCKS_AVAILABLE
 /* Takes a whole attributed string with the target range (normally, this is the selected range), and shows a window displaying the definition of the specified range.  The caller can pass a zero-length range and the appropriate range will be auto-detected around the range's offset.  That's the recommended approach when there is no selection.
  
  This method also an 'options' dictionary containing options described below as key-value pairs (can be nil).
@@ -586,7 +557,6 @@ APPKIT_EXTERN NSString * const NSFullScreenModeApplicationPresentationOptions NS
  If the receiver is an NSTextView, both attrString and originProvider may be nil, in which case the text view will automatically supply values suitable for displaying definitions for the specified range within its text content.  This method does not cause scrolling, so clients should perform any necessary scrolling before calling this method.
  */
 - (void)showDefinitionForAttributedString:(NSAttributedString *)attrString range:(NSRange)targetRange options:(NSDictionary *)options baselineOriginProvider:(NSPoint (^)(NSRange adjustedRange))originProvider NS_AVAILABLE_MAC(10_6);
-#endif
 
 @end
 
@@ -601,8 +571,16 @@ APPKIT_EXTERN NSString * const NSDefinitionPresentationTypeDictionaryApplication
 
 /* When this method returns YES, the receiver or one of its ancestors is being drawn for a find indicator, meaning the receiver should draw so its contents will be easily readable.
  */
-- (BOOL)isDrawingFindIndicator NS_AVAILABLE_MAC(10_7);
+@property (getter=isDrawingFindIndicator, readonly) BOOL drawingFindIndicator NS_AVAILABLE_MAC(10_7);
 
+@end
+
+
+
+@interface NSView (NSGestureRecognizer)
+@property (copy) NSArray *gestureRecognizers NS_AVAILABLE_MAC(10_10);
+- (void)addGestureRecognizer:(NSGestureRecognizer *)gestureRecognizer NS_AVAILABLE_MAC(10_10);
+- (void)removeGestureRecognizer:(NSGestureRecognizer *)gestureRecognizer NS_AVAILABLE_MAC(10_10);
 @end
 
 @interface NSView(NSDeprecated)
@@ -611,6 +589,19 @@ APPKIT_EXTERN NSString * const NSDefinitionPresentationTypeDictionaryApplication
  */
 - (BOOL)performMnemonic:(NSString *)theString NS_DEPRECATED_MAC(10_0, 10_8);
 
+/* shouldDrawColor is no longer used by AppKit.
+ */
+- (BOOL)shouldDrawColor NS_DEPRECATED_MAC(10_0, 10_10);
+
+
+/* The gState class of methods are deprecatd and in many cases did not do anything, or not what one would expect.
+ */
+- (NSInteger)gState NS_DEPRECATED_MAC(10_0, 10_10);
+- (void)allocateGState NS_DEPRECATED_MAC(10_0, 10_10);
+- (oneway void)releaseGState NS_DEPRECATED_MAC(10_0, 10_10);
+- (void)setUpGState NS_DEPRECATED_MAC(10_0, 10_10);
+- (void)renewGState NS_DEPRECATED_MAC(10_0, 10_10);
+                                      
 @end
 
 

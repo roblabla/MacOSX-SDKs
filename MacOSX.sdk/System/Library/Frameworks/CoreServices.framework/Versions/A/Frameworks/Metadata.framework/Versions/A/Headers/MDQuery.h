@@ -1,5 +1,5 @@
 /*      MDQuery.h
-        Copyright (c) 2003-2005, Apple Computer, Inc. All rights reserved.
+        Copyright (c) 2003-2005, Apple Inc. All rights reserved.
 */
 
 /*!

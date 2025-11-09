@@ -1,6 +1,6 @@
 /*	
     NSURLDownload.h
-    Copyright (c) 2003-2013, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2014, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -47,7 +47,7 @@
     @param delegate The delegate of the download.
     @result An initialized NSURLDownload object.
 */
-- (id)initWithRequest:(NSURLRequest *)request delegate:(id <NSURLDownloadDelegate>)delegate;
+- (instancetype)initWithRequest:(NSURLRequest *)request delegate:(id <NSURLDownloadDelegate>)delegate;
 
 /*!
     @method initWithResumeData:delegate:path:
@@ -57,7 +57,7 @@
     @param path The path of the incomplete downloaded file.
     @result An initialized NSURLDownload object.
 */
-- (id)initWithResumeData:(NSData *)resumeData delegate:(id <NSURLDownloadDelegate>)delegate path:(NSString *)path;
+- (instancetype)initWithResumeData:(NSData *)resumeData delegate:(id <NSURLDownloadDelegate>)delegate path:(NSString *)path;
 
 /*!
     @method cancel
@@ -83,7 +83,7 @@
     @abstract Returns the request of the download.
     @result The request of the download.
 */
-- (NSURLRequest *)request;
+@property (readonly, copy) NSURLRequest *request;
 
 /*!
     @method resumeData
@@ -96,24 +96,17 @@
     The protocol of the download as well as the server must support resuming for non-nil to be returned.
     In order to later resume a download, be sure to call setDeletesFileUponFailure: with NO.
 */
-- (NSData *)resumeData;
+@property (readonly, copy) NSData *resumeData;
 
 /*!
-    @method setDeletesFileUponFailure:
+    @method deletesFileUponFailure
     @abstract Sets whether or not the downloaded file should be deleted upon failure.
     @param deletesFileUponFailure The value of deletesFileUponFailure.
     @description To allow the download to be resumed in case the download ends prematurely,
     deletesFileUponFailure must be set to NO as soon as possible to prevent the downloaded file
-    from being deleted.
+    from being deleted. deletesFileUponFailure is YES by default.
 */
-- (void)setDeletesFileUponFailure:(BOOL)deletesFileUponFailure;
-
-/*!
-    @method deletesFileUponFailure
-    @abstract Returns whether or not the downloaded file should be deleted upon failure.
-    @result The value of deletesFileUponFailure. deletesFileUponFailure is YES by default.
-*/
-- (BOOL)deletesFileUponFailure;
+@property BOOL deletesFileUponFailure;
 
 @end
 

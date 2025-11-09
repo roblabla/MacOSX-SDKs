@@ -2,7 +2,7 @@
 //	CalCalendar.h
 //	Calendar Store Framework
 //	
-//  Copyright 2006 Apple Computer, Inc. All rights reserved.
+//  Copyright 2006 Apple Inc. All rights reserved.
 //	
 //	This class can be used to get attributes of a calendar, but cannot be used to get the list of events or tasks in a calendar. 
 //	Instead use CalCalendarStore's eventsFromPredicate: and tasksFromPredicate: methods.

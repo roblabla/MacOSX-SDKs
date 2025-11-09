@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2013 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2014 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -95,6 +95,7 @@
 #include <sys/appleapiopts.h>
 
 #include <sys/kern_event.h>
+#include <net/ethernet.h>
 
 /*
  * pltime/vltime are just for future reference (required to implements 2
@@ -370,6 +371,7 @@ struct kev_in6_data {
 	u_int32_t ia_plen;		/* prefix length */
 	u_int32_t ia6_flags;		/* address flags from in6_ifaddr */
 	struct kev_in6_addrlifetime ia_lifetime; /* address life info */
+	uint8_t	ia_mac[ETHER_ADDR_LEN];
 };
 
 /*
@@ -455,23 +457,21 @@ struct kev_in6_data {
 #define	SIOCDADDRCTL_POLICY	_IOW('u', 109, struct in6_addrpolicy)
 
 
-#define	IN6_IFF_ANYCAST		0x01	/* anycast address */
-#define	IN6_IFF_TENTATIVE	0x02	/* tentative address */
-#define	IN6_IFF_DUPLICATED	0x04	/* DAD detected duplicate */
-#define	IN6_IFF_DETACHED	0x08	/* may be detached from the link */
-#define	IN6_IFF_DEPRECATED	0x10	/* deprecated address */
+#define	IN6_IFF_ANYCAST		0x0001	/* anycast address */
+#define	IN6_IFF_TENTATIVE	0x0002	/* tentative address */
+#define	IN6_IFF_DUPLICATED	0x0004	/* DAD detected duplicate */
+#define	IN6_IFF_DETACHED	0x0008	/* may be detached from the link */
+#define	IN6_IFF_DEPRECATED	0x0010	/* deprecated address */
 
 /* don't perform DAD on this address (used only at first SIOC* call) */
-#define	IN6_IFF_NODAD		0x20
+#define	IN6_IFF_NODAD		0x0020
 
-#define	IN6_IFF_AUTOCONF	0x40	/* autoconfigurable address. */
-#define	IN6_IFF_TEMPORARY	0x80	/* temporary (anonymous) address. */
-#define	IN6_IFF_DYNAMIC		0x100	/* assigned by DHCPv6 service */
-#define	IN6_IFF_OPTIMISTIC	0x200	/* optimistic DAD, i.e. RFC 4429 */
-#define	IN6_IFF_SECURED		0x400	/* cryptographically generated */
-
-/* skip kernel prefix management. XXX: this should be temporary. */
-#define	IN6_IFF_NOPFX		0x8000
+#define	IN6_IFF_AUTOCONF	0x0040	/* autoconfigurable address. */
+#define	IN6_IFF_TEMPORARY	0x0080	/* temporary (anonymous) address. */
+#define	IN6_IFF_DYNAMIC		0x0100	/* assigned by DHCPv6 service */
+#define	IN6_IFF_OPTIMISTIC	0x0200	/* optimistic DAD, i.e. RFC 4429 */
+#define	IN6_IFF_SECURED		0x0400	/* cryptographically generated */
+#define	IN6_IFF_NOPFX		0x8000	/* Depreciated. Don't use. */
 
 /* Duplicate Address Detection [DAD] in progress. */
 #define	IN6_IFF_DADPROGRESS	(IN6_IFF_TENTATIVE|IN6_IFF_OPTIMISTIC)

@@ -1,6 +1,6 @@
 /*
 	NSScriptStandardSuiteCommands.h
-	Copyright (c) 1997-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1997-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSScriptCommand.h>
@@ -24,14 +24,14 @@ typedef NS_ENUM(NSUInteger, NSSaveOptions) {
 - (void)setReceiversSpecifier:(NSScriptObjectSpecifier *)receiversRef;
     // Splits off the inner-most child specifier.  The rest is the receiver specifier while the child is the key specifier.
 
-- (NSScriptObjectSpecifier *)keySpecifier;
+@property (readonly, retain) NSScriptObjectSpecifier *keySpecifier;
 
 @end
 
 
 @interface NSCloseCommand : NSScriptCommand {}
 
-- (NSSaveOptions)saveOptions;
+@property (readonly) NSSaveOptions saveOptions;
     // This converts the "SaveOptions" argument into a constant that can be easily tested.  You should use this instead of accessing the SaveOptions argument directly.
 
 @end
@@ -47,10 +47,10 @@ typedef NS_ENUM(NSUInteger, NSSaveOptions) {
     id _moreVars2;
 }
 
-- (NSScriptClassDescription *)createClassDescription;
+@property (readonly, retain) NSScriptClassDescription *createClassDescription;
     // Returns the class description for the class that is to be created (using the "ObjectClass" argument to figure it out).
 
-- (NSDictionary *)resolvedKeyDictionary;
+@property (readonly, copy) NSDictionary *resolvedKeyDictionary;
     // The actual "KeyDictionary" argument has appleEventCodes as keys.  This method returns a version that has those codes resolved to actual key names (using the -createClassDescription to resolve the keys).
 
 @end
@@ -64,7 +64,7 @@ typedef NS_ENUM(NSUInteger, NSSaveOptions) {
 - (void)setReceiversSpecifier:(NSScriptObjectSpecifier *)receiversRef;
     // Splits off the inner-most child specifier.  The rest is the receiver specifier while the child is the key specifier.
 
-- (NSScriptObjectSpecifier *)keySpecifier;
+@property (readonly, retain) NSScriptObjectSpecifier *keySpecifier;
 
 @end
 
@@ -87,14 +87,14 @@ typedef NS_ENUM(NSUInteger, NSSaveOptions) {
 - (void)setReceiversSpecifier:(NSScriptObjectSpecifier *)receiversRef;
     // Splits off the inner-most child specifier.  The rest is the receiver specifier while the child is the key specifier.
 
-- (NSScriptObjectSpecifier *)keySpecifier;
+@property (readonly, retain) NSScriptObjectSpecifier *keySpecifier;
 
 @end
 
 
 @interface NSQuitCommand : NSScriptCommand {}
 
-- (NSSaveOptions)saveOptions;
+@property (readonly) NSSaveOptions saveOptions;
     // This converts the "SaveOptions" argument into a constant that can be easily tested.  You should use this instead of accessing the SaveOptions argument directly.
 
 @end
@@ -108,6 +108,6 @@ typedef NS_ENUM(NSUInteger, NSSaveOptions) {
 - (void)setReceiversSpecifier:(NSScriptObjectSpecifier *)receiversRef;
     // Splits off the inner-most child specifier.  The rest is the receiver specifier while the child is the key specifier.
 
-- (NSScriptObjectSpecifier *)keySpecifier;
+@property (readonly, retain) NSScriptObjectSpecifier *keySpecifier;
 
 @end

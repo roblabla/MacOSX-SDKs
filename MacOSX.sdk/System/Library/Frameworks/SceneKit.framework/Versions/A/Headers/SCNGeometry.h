@@ -1,14 +1,13 @@
 //
 //  SCNGeometry.h
 //
-//  Copyright (c) 2012-2013 Apple Inc. All rights reserved.
+//  Copyright (c) 2012-2014 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <SceneKit/SCNAnimation.h>
 #import <SceneKit/SCNBoundingVolume.h>
 #import <SceneKit/SCNShadable.h>
-
 
 @class SCNGeometrySource;
 @class SCNGeometryElement;
@@ -17,21 +16,25 @@ typedef NS_ENUM(NSInteger, SCNGeometryPrimitiveType) {
 	SCNGeometryPrimitiveTypeTriangles     = 0,
 	SCNGeometryPrimitiveTypeTriangleStrip = 1,
 	SCNGeometryPrimitiveTypeLine          = 2,
-	SCNGeometryPrimitiveTypePoint		  = 3	
+	SCNGeometryPrimitiveTypePoint         = 3
 };
 
 SCN_EXTERN NSString * const SCNGeometrySourceSemanticVertex;
 SCN_EXTERN NSString * const SCNGeometrySourceSemanticNormal;
 SCN_EXTERN NSString * const SCNGeometrySourceSemanticColor;
 SCN_EXTERN NSString * const SCNGeometrySourceSemanticTexcoord;
+SCN_EXTERN NSString * const SCNGeometrySourceSemanticVertexCrease SCENEKIT_AVAILABLE(10_10, 8_0);
+SCN_EXTERN NSString * const SCNGeometrySourceSemanticEdgeCrease SCENEKIT_AVAILABLE(10_10, 8_0);
+SCN_EXTERN NSString * const SCNGeometrySourceSemanticBoneWeights SCENEKIT_AVAILABLE(10_10, 8_0);
+SCN_EXTERN NSString * const SCNGeometrySourceSemanticBoneIndices SCENEKIT_AVAILABLE(10_10, 8_0);
 
 /*!
  @class SCNGeometry
  @abstract SCNGeometry is an abstract class that represents the geometry that can be attached to a SCNNode. 
  */
 
-SCENEKIT_CLASS_AVAILABLE(10_8, NA)
-@interface SCNGeometry : NSObject <SCNAnimatable, SCNBoundingVolume, SCNShadable, NSCopying>
+SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
+@interface SCNGeometry : NSObject <SCNAnimatable, SCNBoundingVolume, SCNShadable, NSCopying, NSSecureCoding>
 {
 @private
 	id _geometryReserved;
@@ -42,7 +45,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, NA)
  @abstract Creates and returns an empty geometry object.
  @discussion An empty geometry may be used as the lowest level of detail of a geometry.
  */
-+ (instancetype)geometry SCENEKIT_AVAILABLE(10_9, NA);
++ (instancetype)geometry SCENEKIT_AVAILABLE(10_9, 8_0);
 
 /*! 
  @property name
@@ -129,7 +132,28 @@ SCENEKIT_CLASS_AVAILABLE(10_8, NA)
  @abstract Determines the receiver's levels of detail. Defaults to nil.
  @discussion levelsOfDetail is an array of SCNLevelOfDetail instance.
  */
-@property(nonatomic, copy) NSArray *levelsOfDetail SCENEKIT_AVAILABLE(10_9, NA);
+@property(nonatomic, copy) NSArray *levelsOfDetail SCENEKIT_AVAILABLE(10_9, 8_0);
+
+/*!
+ @property subdivisionLevel
+ @abstract Specifies the subdivision level of the receiver. Defaults to 0.
+ @discussion A subdivision level of 0 means no subdivision.
+ */
+@property(nonatomic) NSUInteger subdivisionLevel SCENEKIT_AVAILABLE(10_10, 8_0);
+
+/*!
+ @property edgeCreasesElement
+ @abstract Specifies the edges creases that control the subdivision. Defaults to nil.
+ @discussion The primitive type of this geometry element must be SCNGeometryPrimitiveTypeLine. See subdivisionLevel above to control the level of subdivision. See edgeCreasesElement above to specify edges for edge creases.
+ */
+@property(nonatomic, retain) SCNGeometryElement *edgeCreasesElement SCENEKIT_AVAILABLE(10_10, 8_0);
+
+/*!
+ @property edgeCreasesSource
+ @abstract Specifies the crease value of the edges specified by edgeCreasesElement. Defaults to nil.
+ @discussion The semantic of this geometry source must be "SCNGeometrySourceSemanticEdgeCrease". The creases values are floating values between 0 and 10, where 0 means smooth and 10 means infinitely sharp. See subdivisionLevel above to control the level of subdivision. See edgeCreasesElement above to specify edges for edge creases.
+ */
+@property(nonatomic, retain) SCNGeometrySource *edgeCreasesSource SCENEKIT_AVAILABLE(10_10, 8_0);
 
 @end
 
@@ -139,8 +163,8 @@ SCENEKIT_CLASS_AVAILABLE(10_8, NA)
  @abstract A geometry source contains geometry data for a specific semantic. The data format is described by properties.
  */
 
-SCENEKIT_CLASS_AVAILABLE(10_8, NA)
-@interface SCNGeometrySource : NSObject
+SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
+@interface SCNGeometrySource : NSObject <NSSecureCoding>
 {
 @private
 	id _reserved;
@@ -167,7 +191,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, NA)
  @param count The number of vertices.
  @discussion Input vertices are copied to an optimized data format. The actual format is described by the properties of the resulting instance.
  */
-+ (instancetype)geometrySourceWithVertices:(SCNVector3 *)vertices count:(NSInteger)count;
++ (instancetype)geometrySourceWithVertices:(const SCNVector3 *)vertices count:(NSInteger)count;
 
 /*!
  @method geometrySourceWithNormals:count:
@@ -176,7 +200,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, NA)
  @param count The number of normals.
  @discussion Input normals are copied to an optimized data format. The actual format is described by the properties of the resulting instance.
  */
-+ (instancetype)geometrySourceWithNormals:(SCNVector3 *)normals count:(NSInteger)count;
++ (instancetype)geometrySourceWithNormals:(const SCNVector3 *)normals count:(NSInteger)count;
 
 /*!
  @method geometrySourceWithTextureCoordinates:count:
@@ -185,7 +209,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, NA)
  @param count The number of texture coordinate points.
  @discussion Input texture coordinates are copied to an optimized data format. The actual format is described by the properties of the resulting instance.
  */
-+ (instancetype)geometrySourceWithTextureCoordinates:(CGPoint *)texcoord count:(NSInteger)count;
++ (instancetype)geometrySourceWithTextureCoordinates:(const CGPoint *)texcoord count:(NSInteger)count;
 
 /*! 
  @property data
@@ -243,8 +267,8 @@ SCENEKIT_CLASS_AVAILABLE(10_8, NA)
  @abstract A geometry element describes how vertices from a geometry source are connected together.
  */
 
-SCENEKIT_CLASS_AVAILABLE(10_8, NA)
-@interface SCNGeometryElement : NSObject
+SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
+@interface SCNGeometryElement : NSObject <NSSecureCoding>
 {
 @private
 	id _reserved;

@@ -1,5 +1,5 @@
 /*	NSPathUtilities.h
-	Copyright (c) 1994-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSString.h>
@@ -8,30 +8,30 @@
 @interface NSString (NSStringPathExtensions)
 
 + (NSString *)pathWithComponents:(NSArray *)components;
-- (NSArray *)pathComponents;
+@property (readonly, copy) NSArray *pathComponents;
 
-- (BOOL)isAbsolutePath;
+@property (getter=isAbsolutePath, readonly) BOOL absolutePath;
 
-- (NSString *)lastPathComponent;
-- (NSString *)stringByDeletingLastPathComponent;
+@property (readonly, copy) NSString *lastPathComponent;
+@property (readonly, copy) NSString *stringByDeletingLastPathComponent;
 - (NSString *)stringByAppendingPathComponent:(NSString *)str;
 
-- (NSString *)pathExtension;
-- (NSString *)stringByDeletingPathExtension;
+@property (readonly, copy) NSString *pathExtension;
+@property (readonly, copy) NSString *stringByDeletingPathExtension;
 - (NSString *)stringByAppendingPathExtension:(NSString *)str;
 
-- (NSString *)stringByAbbreviatingWithTildeInPath;
-- (NSString *)stringByExpandingTildeInPath;
+@property (readonly, copy) NSString *stringByAbbreviatingWithTildeInPath;
+@property (readonly, copy) NSString *stringByExpandingTildeInPath;
 
-- (NSString *)stringByStandardizingPath;
+@property (readonly, copy) NSString *stringByStandardizingPath;
 
-- (NSString *)stringByResolvingSymlinksInPath;
+@property (readonly, copy) NSString *stringByResolvingSymlinksInPath;
 
 - (NSArray *)stringsByAppendingPaths:(NSArray *)paths;
 
 - (NSUInteger)completePathIntoString:(NSString **)outputName caseSensitive:(BOOL)flag matchesIntoArray:(NSArray **)outputArray filterTypes:(NSArray *)filterTypes;
 
-- (__strong const char *)fileSystemRepresentation NS_RETURNS_INNER_POINTER;
+@property (readonly) __strong const char *fileSystemRepresentation NS_RETURNS_INNER_POINTER;
 - (BOOL)getFileSystemRepresentation:(char *)cname maxLength:(NSUInteger)max;
 
 @end

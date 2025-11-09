@@ -1,14 +1,14 @@
 /* IKFilterBrowserView  
 
 
-   Copyright (c) 2006 Apple Computer, Inc.
+   Copyright (c) 2006 Apple Inc.
    All rights reserved. */
 
 #import <AppKit/AppKit.h>
 #import <QuartzCore/QuartzCore.h>
 /*!
     @header IKFilterBrowserView
-	@copyright 2006 Apple Computer, Inc. All rights reserved.
+	@copyright 2006 Apple Inc. All rights reserved.
 	@availability Coming to a Leopard installation near you
     @abstract   View containing the elements of the IKFilterBrowser
     @discussion See discussion in IKFilterBrowserPanel

@@ -1,18 +1,18 @@
 /*
- * "$Id: cups.h 11093 2013-07-03 20:48:42Z msweet $"
+ * "$Id: cups.h 12104 2014-08-20 15:23:40Z msweet $"
  *
- *   API definitions for CUPS.
+ * API definitions for CUPS.
  *
- *   Copyright 2007-2013 by Apple Inc.
- *   Copyright 1997-2007 by Easy Software Products.
+ * Copyright 2007-2014 by Apple Inc.
+ * Copyright 1997-2007 by Easy Software Products.
  *
- *   These coded instructions, statements, and computer programs are the
- *   property of Apple Inc. and are protected by Federal copyright
- *   law.  Distribution and use rights are outlined in the file "LICENSE.txt"
- *   which should have been included with this file.  If this file is
- *   file is missing or damaged, see the license at "http://www.cups.org/".
+ * These coded instructions, statements, and computer programs are the
+ * property of Apple Inc. and are protected by Federal copyright
+ * law.  Distribution and use rights are outlined in the file "LICENSE.txt"
+ * which should have been included with this file.  If this file is
+ * file is missing or damaged, see the license at "http://www.cups.org/".
  *
- *   This file is subject to the Apple OS-Developed Software exception.
+ * This file is subject to the Apple OS-Developed Software exception.
  */
 
 #ifndef _CUPS_CUPS_H_
@@ -29,10 +29,6 @@
 /* Windows does not support the ssize_t type, so map it to off_t... */
 typedef off_t ssize_t;			/* @private@ */
 #  endif /* WIN32 && !__CUPS_SSIZE_T_DEFINED */
-
-#  ifdef __BLOCKS__
-#    include <dispatch/dispatch.h>
-#  endif /* __BLOCKS__ */
 
 #  include "file.h"
 #  include "ipp.h"
@@ -53,9 +49,9 @@ extern "C" {
  * Constants...
  */
 
-#  define CUPS_VERSION			1.0700
-#  define CUPS_VERSION_MAJOR		1
-#  define CUPS_VERSION_MINOR		7
+#  define CUPS_VERSION			2.0000
+#  define CUPS_VERSION_MAJOR		2
+#  define CUPS_VERSION_MINOR		0
 #  define CUPS_VERSION_PATCH		0
 
 #  define CUPS_BC_FD			3
@@ -619,6 +615,11 @@ extern int		cupsGetDestMediaDefault(http_t *http, cups_dest_t *dest,
 extern void		cupsSetUserAgent(const char *user_agent) _CUPS_API_1_7;
 extern const char	*cupsUserAgent(void) _CUPS_API_1_7;
 
+/* New in CUPS 2.0/OS X 10.10 */
+extern cups_dest_t	*cupsGetDestWithURI(const char *name, const char *uri) _CUPS_API_2_0;
+extern const char	*cupsLocalizeDestMedia(http_t *http, cups_dest_t *dest, cups_dinfo_t *info, unsigned flags, cups_size_t *size) _CUPS_API_2_0;
+extern int		cupsMakeServerCredentials(const char *path, const char *common_name, int num_alt_names, const char **alt_names, time_t expiration_date) _CUPS_API_2_0;
+extern int		cupsSetServerCredentials(const char *path, const char *common_name, int auto_create) _CUPS_API_2_0;
 
 #  ifdef __cplusplus
 }
@@ -627,5 +628,5 @@ extern const char	*cupsUserAgent(void) _CUPS_API_1_7;
 #endif /* !_CUPS_CUPS_H_ */
 
 /*
- * End of "$Id: cups.h 11093 2013-07-03 20:48:42Z msweet $".
+ * End of "$Id: cups.h 12104 2014-08-20 15:23:40Z msweet $".
  */

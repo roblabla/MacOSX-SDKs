@@ -655,6 +655,7 @@ struct in_pktinfo {
 #undef __KAME_NETINET_IN_H_INCLUDED_
 
 
+
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
 __BEGIN_DECLS
 int        bindresvport(int, struct sockaddr_in *);

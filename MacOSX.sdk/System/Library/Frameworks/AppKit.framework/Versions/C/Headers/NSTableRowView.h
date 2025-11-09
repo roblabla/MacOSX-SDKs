@@ -1,7 +1,7 @@
 /*
     NSTableRowView.h
     Application Kit
-    Copyright (c) 2008-2013, Apple Inc.
+    Copyright (c) 2008-2014, Apple Inc.
     All rights reserved.
 */
 
@@ -14,7 +14,7 @@
 /* View Based TableView: The NSTableRowView is the view shown for a row in the table. It is responsible for drawing things associated with the row, including the selection highlight, and group row look. Properties can be changed on a row-by-row basis by using the table delegate method -tableView:didAddRowView:forRow:. Modifications of the properties are NOT reflected by the NSTableView instance; the NSTableRowView is simply a representation of the state. In other words, setting rowView.selected will NOT change the -selectedRowIndexes in NSTableView.
  */
 NS_CLASS_AVAILABLE(10_7, NA)
-@interface NSTableRowView : NSView {
+@interface NSTableRowView : NSView <NSAccessibilityRow> {
 @private
     NSView **_columnViews;
     NSInteger _columnCount;
@@ -41,8 +41,14 @@ NS_CLASS_AVAILABLE(10_7, NA)
     unsigned int _gridStyleMask:4;
     unsigned int _updatingBackgroundStyle:1;
     unsigned int _locationNeedsUpdating:1;
+    unsigned int _isStatic:1;
+    unsigned int _hasSelectedBackgroundView:1;
+    unsigned int _selectionBlendingMode:1;
+    unsigned int _checkingFontRefColor:1;
+    unsigned int _forDeletion:1;
+    unsigned int _emphasizedForDropOperation:1;
 #if !__LP64__    
-    unsigned int _reserved2:13;
+    unsigned int _reserved2:7;
 #endif
 }
 
@@ -62,11 +68,16 @@ NS_CLASS_AVAILABLE(10_7, NA)
  */
 @property(getter=isSelected) BOOL selected;
 
+/* Next and previous row selection state. Allows subclassers to draw selection differently based on the previous next row being selected. State is automatically updated by NSTableView, however, the changing of the state does not invalidate the row view. If a row view depends on this state, it should override the particular setter and call [self setNeedsDisplay:YES] before or after calling super.
+ */
+@property(getter=isPreviousRowSelected) BOOL previousRowSelected NS_AVAILABLE_MAC(10_10);
+@property(getter=isNextRowSelected) BOOL nextRowSelected;
+
 /* Floating is a temporary attribute that is set when a particular group row is actually floating above other rows. The state may change dynamically based on the position of the group row. Drawing may be different for rows that are currently 'floating'. The TableView's delegate must implement tableView:isGroupRow: (or outlineView:isGroupItem:) to enable floating group rows.
  */
 @property(getter=isFloating) BOOL floating;
 
-/* Drag and drop state. When targetForDropOperation is set to YES, the NSTableRowView will draw a drop on indicator based on the current draggingDestinationFeedbackStyle. The indentationForDropOperation is set appropriately by NSOutlineView if the drop target row should be indented. Otherwise it is 0.
+/* Drag and drop state. When targetForDropOperation is set to YES, the NSTableRowView will draw a drop on indicator based on the current draggingDestinationFeedbackStyle. The indentationForDropOperation is set appropriately by NSOutlineView if the drop target row should be indented. Otherwise it is 0. On Mac OS 10.0.2, the indentation is always 0, and the feedback style is now drawn similar to selection.
 */ 
 @property(getter=isTargetForDropOperation) BOOL targetForDropOperation;
 @property NSTableViewDraggingDestinationFeedbackStyle draggingDestinationFeedbackStyle;
@@ -98,6 +109,8 @@ NS_CLASS_AVAILABLE(10_7, NA)
 - (void)drawBackgroundInRect:(NSRect)dirtyRect;
 
 /* Override point for drawing the selection. 'dirtyRect' is the current dirty rect passed from -drawRect:. This method is only called if the selection should be drawn. The selection will automatically be alpha-blended if the selection is animating in or out. The default selection drawn is dependent on the selectionHighlightStyle.  It is also recommended to override interiorBackgroundStyle when overriding this method.
+ 
+   Note: For 10.10 drawSelectionInRect: will not be called when the selectionHighlightStyle is set to NSTableViewSelectionHighlightStyleSourceList.
  */
 - (void)drawSelectionInRect:(NSRect)dirtyRect;
 

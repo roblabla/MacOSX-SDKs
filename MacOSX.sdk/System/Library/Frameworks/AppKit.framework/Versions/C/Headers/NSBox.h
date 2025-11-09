@@ -1,7 +1,7 @@
 /*
     NSBox.h
     Application Kit
-    Copyright (c) 1994-2013, Apple Inc.
+    Copyright (c) 1994-2014, Apple Inc.
     All rights reserved.
 */
 
@@ -9,7 +9,7 @@
 
 @class NSFont;
 
-enum {
+typedef NS_ENUM(NSUInteger, NSTitlePosition) {
     NSNoTitle				= 0,
     NSAboveTop				= 1,
     NSAtTop				= 2,
@@ -18,18 +18,14 @@ enum {
     NSAtBottom				= 5,
     NSBelowBottom			= 6
 };
-typedef NSUInteger NSTitlePosition;
 
-enum {
+typedef NS_ENUM(NSUInteger, NSBoxType) {
     NSBoxPrimary	= 0,	// group subviews with a standard look. default
     NSBoxSecondary	= 1,    // same as primary since 10.3
     NSBoxSeparator	= 2,    // vertical or horizontal separtor line.  Not used with subviews.
     NSBoxOldStyle	= 3,    // 10.2 and earlier style boxes
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-    NSBoxCustom		= 4     // draw based entirely on user parameters, not human interface guidelines
-#endif
+    NSBoxCustom	NS_ENUM_AVAILABLE_MAC(10_5)	= 4     // draw based entirely on user parameters, not human interface guidelines
 };
-typedef NSUInteger NSBoxType;
 
 @interface NSBox : NSView
 {
@@ -54,53 +50,41 @@ typedef NSUInteger NSBoxType;
     id _unused;
 }
 
-- (NSBorderType)borderType;
-- (NSTitlePosition)titlePosition;
-- (void)setBorderType:(NSBorderType)aType;
-- (void)setBoxType:(NSBoxType)boxType;
-- (NSBoxType)boxType;
-- (void)setTitlePosition:(NSTitlePosition)aPosition;
-- (NSString *)title;
-- (void)setTitle:(NSString *)aString;
-- (NSFont *)titleFont;
-- (void)setTitleFont:(NSFont *)fontObj;
-- (NSRect)borderRect;
-- (NSRect)titleRect;
-- (id)titleCell;
+@property NSBorderType borderType;
+@property NSTitlePosition titlePosition;
+@property NSBoxType boxType;
+@property (copy) NSString *title;
+@property (strong) NSFont *titleFont;
+@property (readonly) NSRect borderRect;
+@property (readonly) NSRect titleRect;
+@property (readonly, strong) id titleCell;
 - (void)sizeToFit;
-- (NSSize)contentViewMargins;
-- (void)setContentViewMargins:(NSSize)offsetSize;
+@property NSSize contentViewMargins;
 - (void)setFrameFromContentFrame:(NSRect)contentFrame;
 
 /* Get and set the content view for the box. Note that subviews added to the NSBox will be really added as subviews of the contentView.
  */
-- (id)contentView;
-- (void)setContentView:(NSView *)aView;
+@property (assign) id /* NSView * */ contentView;
 
 /* Transparent boxes do not draw anything.  Subview drawing is unaffected.  The 'transparent' property corresponds to the binding 'NSTransparentBinding'.
  */
-- (BOOL)isTransparent NS_AVAILABLE_MAC(10_5);
-- (void)setTransparent:(BOOL)flag NS_AVAILABLE_MAC(10_5);
+@property (getter=isTransparent) BOOL transparent NS_AVAILABLE_MAC(10_5);
 
 /* For boxType == NSBoxCustom: Get and set the border width of the box. The default value is 1.0.
  */
-- (CGFloat)borderWidth NS_AVAILABLE_MAC(10_5);
-- (void)setBorderWidth:(CGFloat)borderWidth NS_AVAILABLE_MAC(10_5);
+@property CGFloat borderWidth NS_AVAILABLE_MAC(10_5);
 
 /* For boxType == NSBoxCustom: Get and set the corner raduis of the box. The default value is 0.0 (no corner raduis).
  */
-- (CGFloat)cornerRadius NS_AVAILABLE_MAC(10_5);
-- (void)setCornerRadius:(CGFloat)cornerRadius NS_AVAILABLE_MAC(10_5);
+@property CGFloat cornerRadius NS_AVAILABLE_MAC(10_5);
 
 /* For boxType == NSBoxCustom: Get and set the border color the box. The default value is black with some alpha, and may vary release-to-release.
  */
-- (NSColor *)borderColor NS_AVAILABLE_MAC(10_5);
-- (void)setBorderColor:(NSColor *)borderColor NS_AVAILABLE_MAC(10_5);
+@property (copy) NSColor *borderColor NS_AVAILABLE_MAC(10_5);
 
 /* For boxType == NSBoxCustom: Get and set the fill (background) color the box. The default value is NSColor.clearColor.
  */
-- (NSColor *)fillColor NS_AVAILABLE_MAC(10_5);
-- (void)setFillColor:(NSColor *)fillColor NS_AVAILABLE_MAC(10_5);
+@property (copy) NSColor *fillColor NS_AVAILABLE_MAC(10_5);
 
 @end
 

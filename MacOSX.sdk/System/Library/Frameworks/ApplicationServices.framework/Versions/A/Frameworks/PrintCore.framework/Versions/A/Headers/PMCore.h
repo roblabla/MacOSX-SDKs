@@ -280,9 +280,7 @@ PMSessionEndPageNoDialog(PMPrintSession printSession)         AVAILABLE_MAC_OS_X
  *    This function returns the CGContextRef for the printing session.
  *    This function must be called for each page. To use
  *    PMSessionGetCGGraphicsContext you MUST call
- *    PMSessionBeginCGDocument or PMSessionBeginCGDocumentNoDialog
- *    instead of PMSessionBeginDocument or
- *    PMSessionBeginDocumentNoDialog.
+ *    PMSessionBeginCGDocument or PMSessionBeginCGDocumentNoDialog.
  *  
  *  Parameters:
  *    

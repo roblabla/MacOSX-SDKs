@@ -191,6 +191,14 @@
  */
 #define kAXUIElementDestroyedNotification		CFSTR("AXUIElementDestroyed")
 
+/*!
+ @defined kAXElementBusyChangedNotification
+ @abstract Notification that an element's busy state has changed.
+ @discussion
+    Value is the (un)busy UIElement.
+ */
+#define kAXElementBusyChangedNotification		CFSTR("AXElementBusyChanged")
+
 /*-----------------------------------------*/
 /*! @group Menu Notifications              */
 /*-----------------------------------------*/

@@ -103,14 +103,12 @@
  * type given below. Each sysctl level defines a set of name/type
  * pairs to be used by sysctl(1) in manipulating the subsystem.
  *
- * When declaring new sysctl names, unless your sysctl is callable
- * from the paging path, please use the CTLFLAG_LOCKED flag in the
+ * When declaring new sysctl names, use the CTLFLAG_LOCKED flag in the
  * type to indicate that all necessary locking will be handled
  * within the sysctl.
  *
  * Any sysctl defined without CTLFLAG_LOCKED is considered legacy
- * and will be protected by both wiring the user process pages and,
- * if it is a 32 bit legacy KEXT, by the obsolete kernel funnel.
+ * and will be protected by a global mutex.
  *
  * Note:	This is not optimal, so it is best to handle locking
  *		yourself, if you are able to do so.  A simple design
@@ -330,7 +328,7 @@ struct ctlname {
 /* Don't use 13 as it is overloaded with KERN_VNODE */
 #define KERN_KDPIDEX            14
 #define KERN_KDSETRTCDEC        15
-#define KERN_KDGETENTROPY       16
+#define KERN_KDGETENTROPY       16		/* Obsolescent */
 #define KERN_KDWRITETR		17
 #define KERN_KDWRITEMAP		18
 #define KERN_KDENABLE_BG_TRACE	19

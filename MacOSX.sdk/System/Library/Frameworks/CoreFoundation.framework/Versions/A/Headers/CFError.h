@@ -1,5 +1,5 @@
 /*	CFError.h
-	Copyright (c) 2006-2013, Apple Inc. All rights reserved.
+	Copyright (c) 2006-2014, Apple Inc. All rights reserved.
 */
 
 /*!
@@ -40,7 +40,7 @@ CF_EXTERN_C_BEGIN
 	@typedef CFErrorRef
 	    This is the type of a reference to CFErrors.  CFErrorRef is toll-free bridged with NSError.
 */
-typedef struct __CFError * CFErrorRef;
+typedef struct CF_BRIDGED_TYPE(NSError) __CFError * CFErrorRef;
 
 /*!
 	@function CFErrorGetTypeID

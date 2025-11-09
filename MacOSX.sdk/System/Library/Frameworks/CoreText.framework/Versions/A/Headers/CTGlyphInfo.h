@@ -2,7 +2,7 @@
  *	CTGlyphInfo.h
  *	CoreText
  *
- *	Copyright (c) 2006-2012 Apple Inc. All rights reserved.
+ *	Copyright (c) 2006-2012, 2014 Apple Inc. All rights reserved.
  *
  */
 
@@ -30,7 +30,11 @@ extern "C" {
 /* Glyph Info Types */
 /* --------------------------------------------------------------------------- */
 
+#if TARGET_OS_IPHONE
 typedef const struct __CTGlyphInfo * CTGlyphInfoRef;
+#else
+typedef const struct CT_BRIDGED_TYPE(NSGlyphInfo) __CTGlyphInfo * CTGlyphInfoRef;
+#endif
 
 /*!
 	@function	CTGlyphInfoGetTypeID

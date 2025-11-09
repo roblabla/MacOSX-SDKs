@@ -11,10 +11,10 @@
  *    notice, this list of conditions and the following disclaimer in the
  *    documentation and/or other materials provided with the distribution.
  *
- * THIS SOFTWARE IS PROVIDED BY APPLE COMPUTER, INC. ``AS IS'' AND ANY
+ * THIS SOFTWARE IS PROVIDED BY APPLE INC. ``AS IS'' AND ANY
  * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL APPLE COMPUTER, INC. OR
+ * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL APPLE INC. OR
  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
@@ -26,26 +26,23 @@
 
 #import <WebKit/DOMNode.h>
 
-#if WEBKIT_VERSION_MAX_ALLOWED >= WEBKIT_VERSION_1_3
-
 @class NSString;
 
+NS_CLASS_AVAILABLE_MAC(10_4)
 @interface DOMCharacterData : DOMNode
-@property(copy) NSString *data;
-@property(readonly) unsigned length;
+@property (copy) NSString *data;
+@property (readonly) unsigned length;
 
-- (NSString *)substringData:(unsigned)offset length:(unsigned)length AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+- (NSString *)substringData:(unsigned)offset length:(unsigned)length NS_AVAILABLE_MAC(10_5);
 - (void)appendData:(NSString *)data;
-- (void)insertData:(unsigned)offset data:(NSString *)data AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-- (void)deleteData:(unsigned)offset length:(unsigned)length AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-- (void)replaceData:(unsigned)offset length:(unsigned)length data:(NSString *)data AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+- (void)insertData:(unsigned)offset data:(NSString *)data NS_AVAILABLE_MAC(10_5);
+- (void)deleteData:(unsigned)offset length:(unsigned)length NS_AVAILABLE_MAC(10_5);
+- (void)replaceData:(unsigned)offset length:(unsigned)length data:(NSString *)data NS_AVAILABLE_MAC(10_5);
 @end
 
 @interface DOMCharacterData (DOMCharacterDataDeprecated)
-- (NSString *)substringData:(unsigned)offset :(unsigned)length AVAILABLE_WEBKIT_VERSION_1_3_AND_LATER_BUT_DEPRECATED_IN_WEBKIT_VERSION_3_0;
-- (void)insertData:(unsigned)offset :(NSString *)data AVAILABLE_WEBKIT_VERSION_1_3_AND_LATER_BUT_DEPRECATED_IN_WEBKIT_VERSION_3_0;
-- (void)deleteData:(unsigned)offset :(unsigned)length AVAILABLE_WEBKIT_VERSION_1_3_AND_LATER_BUT_DEPRECATED_IN_WEBKIT_VERSION_3_0;
-- (void)replaceData:(unsigned)offset :(unsigned)length :(NSString *)data AVAILABLE_WEBKIT_VERSION_1_3_AND_LATER_BUT_DEPRECATED_IN_WEBKIT_VERSION_3_0;
+- (NSString *)substringData:(unsigned)offset :(unsigned)length NS_DEPRECATED_MAC(10_4, 10_5);
+- (void)insertData:(unsigned)offset :(NSString *)data NS_DEPRECATED_MAC(10_4, 10_5);
+- (void)deleteData:(unsigned)offset :(unsigned)length NS_DEPRECATED_MAC(10_4, 10_5);
+- (void)replaceData:(unsigned)offset :(unsigned)length :(NSString *)data NS_DEPRECATED_MAC(10_4, 10_5);
 @end
-
-#endif

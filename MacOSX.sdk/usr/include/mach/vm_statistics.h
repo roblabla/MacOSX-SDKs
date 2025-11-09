@@ -257,22 +257,13 @@ typedef struct vm_purgeable_info	*vm_purgeable_info_t;
 #define VM_FLAGS_PURGABLE	0x0002
 #define VM_FLAGS_NO_CACHE	0x0010
 #define VM_FLAGS_OVERWRITE	0x4000	/* delete any existing mappings first */
-#define VM_FLAGS_RETURN_DATA_ADDR	0x100000 /* Return address of target data, rather than base of page */
 /*
  * VM_FLAGS_SUPERPAGE_MASK
  *	3 bits that specify whether large pages should be used instead of
  *	base pages (!=0), as well as the requested page size.
  */
 #define VM_FLAGS_SUPERPAGE_MASK	0x70000	/* bits 0x10000, 0x20000, 0x40000 */
-#define VM_FLAGS_SUPERPAGE_SHIFT 16
-
-#define SUPERPAGE_NONE			0	/* no superpages, if all bits are 0 */
-#define SUPERPAGE_SIZE_ANY		1
-#define VM_FLAGS_SUPERPAGE_NONE     (SUPERPAGE_NONE     << VM_FLAGS_SUPERPAGE_SHIFT)
-#define VM_FLAGS_SUPERPAGE_SIZE_ANY (SUPERPAGE_SIZE_ANY << VM_FLAGS_SUPERPAGE_SHIFT)
-#define SUPERPAGE_SIZE_2MB		2
-#define VM_FLAGS_SUPERPAGE_SIZE_2MB (SUPERPAGE_SIZE_2MB<<VM_FLAGS_SUPERPAGE_SHIFT)
-
+#define VM_FLAGS_RETURN_DATA_ADDR	0x100000 /* Return address of target data, rather than base of page */
 #define VM_FLAGS_ALIAS_MASK	0xFF000000
 #define VM_GET_FLAGS_ALIAS(flags, alias)			\
 		(alias) = ((flags) & VM_FLAGS_ALIAS_MASK) >> 24	
@@ -288,11 +279,20 @@ typedef struct vm_purgeable_info	*vm_purgeable_info_t;
 				 VM_FLAGS_OVERWRITE |		\
 				 VM_FLAGS_SUPERPAGE_MASK |	\
 				 VM_FLAGS_ALIAS_MASK)
-#define VM_FLAGS_USER_MAP	(VM_FLAGS_USER_ALLOCATE | VM_FLAGS_RETURN_DATA_ADDR)
+#define VM_FLAGS_USER_MAP	(VM_FLAGS_USER_ALLOCATE |	\
+				 VM_FLAGS_RETURN_DATA_ADDR)
 #define VM_FLAGS_USER_REMAP	(VM_FLAGS_FIXED |    \
 				 VM_FLAGS_ANYWHERE | \
 				 VM_FLAGS_OVERWRITE| \
 				 VM_FLAGS_RETURN_DATA_ADDR)
+
+#define VM_FLAGS_SUPERPAGE_SHIFT 16
+#define SUPERPAGE_NONE			0	/* no superpages, if all bits are 0 */
+#define SUPERPAGE_SIZE_ANY		1
+#define VM_FLAGS_SUPERPAGE_NONE     (SUPERPAGE_NONE     << VM_FLAGS_SUPERPAGE_SHIFT)
+#define VM_FLAGS_SUPERPAGE_SIZE_ANY (SUPERPAGE_SIZE_ANY << VM_FLAGS_SUPERPAGE_SHIFT)
+#define SUPERPAGE_SIZE_2MB		2
+#define VM_FLAGS_SUPERPAGE_SIZE_2MB (SUPERPAGE_SIZE_2MB<<VM_FLAGS_SUPERPAGE_SHIFT)
 
 #define VM_MEMORY_MALLOC 1
 #define VM_MEMORY_MALLOC_SMALL 2
@@ -397,6 +397,12 @@ typedef struct vm_purgeable_info	*vm_purgeable_info_t;
 
 /* CoreUI image block data */
 #define VM_MEMORY_COREUI 76
+
+/* CoreUI image file */
+#define VM_MEMORY_COREUIFILE 77
+
+/* Genealogy buffers */
+#define VM_MEMORY_GENEALOGY 78
 
 /* Reserve 240-255 for application */
 #define VM_MEMORY_APPLICATION_SPECIFIC_1 240

@@ -1,7 +1,7 @@
 /*
 	NSTreeController.h
 	Application Kit
-	Copyright (c) 2003-2013, Apple Inc.
+	Copyright (c) 2003-2014, Apple Inc.
 	All rights reserved.
  */
 
@@ -43,20 +43,14 @@
 - (void)rearrangeObjects; // triggers rearranging the content objects for the user interface, including sorting (and filtering if provided by subclasses); subclasses can invoke this method if any parameter that affects the arranged objects changes
 
 // proxy for the root tree node responds to -childNodes and -descendantNodeAtIndexPath:(NSIndexPath *)indexPath
-- (id)arrangedObjects; 
+@property (readonly, strong) id arrangedObjects; 
+@property (copy) NSString *childrenKeyPath; // key used to find the children of a model object.
+@property (copy) NSString *countKeyPath; // optional for performance
+@property (copy) NSString *leafKeyPath; // optional. inserting/adding children disabled for leaf nodes
 
-- (void)setChildrenKeyPath:(NSString *)keyPath; // key used to find the children of a model object.
-- (NSString *)childrenKeyPath;
-- (void)setCountKeyPath:(NSString *)keyPath; // optional for performance
-- (NSString *)countKeyPath;
-- (void)setLeafKeyPath:(NSString *)keyPath; // optional. inserting/adding children disabled for leaf nodes
-- (NSString *)leafKeyPath;
+@property (copy) NSArray *sortDescriptors;
 
-- (void)setSortDescriptors:(NSArray *)sortDescriptors;
-- (NSArray *)sortDescriptors;
-
-- (id)content;
-- (void)setContent:(id)content;
+@property (strong) id content;
 
 - (void)add:(id)sender;    // adds a new sibling node to the end of the selected objects
 - (void)remove:(id)sender; 	//removes the currently selected objects from the tree
@@ -64,9 +58,9 @@
 - (void)insert:(id)sender;    // inserts a peer in front of first selected node
 - (void)insertChild:(id)sender;    // inserts a new first child into the children array of the first selected node
 
-- (BOOL)canInsert;
-- (BOOL)canInsertChild;
-- (BOOL)canAddChild;
+@property (readonly) BOOL canInsert;
+@property (readonly) BOOL canInsertChild;
+@property (readonly) BOOL canAddChild;
 
 - (void)insertObject:(id)object atArrangedObjectIndexPath:(NSIndexPath *)indexPath;
 - (void)insertObjects:(NSArray *)objects atArrangedObjectIndexPaths:(NSArray *)indexPaths;
@@ -74,27 +68,23 @@
 - (void)removeObjectsAtArrangedObjectIndexPaths:(NSArray *)indexPaths;
 
 	// functionality here is parallel to what is in array controller
-- (void)setAvoidsEmptySelection:(BOOL)flag;    // default: YES
-- (BOOL)avoidsEmptySelection;
-- (void)setPreservesSelection:(BOOL)flag;    // default: YES
-- (BOOL)preservesSelection;
-- (void)setSelectsInsertedObjects:(BOOL)flag;    // default: YES
-- (BOOL)selectsInsertedObjects;
-- (void)setAlwaysUsesMultipleValuesMarker:(BOOL)flag;
-- (BOOL)alwaysUsesMultipleValuesMarker;
+@property BOOL avoidsEmptySelection;   // default: YES
+@property BOOL preservesSelection;   // default: YES
+@property BOOL selectsInsertedObjects;   // default: YES
+@property BOOL alwaysUsesMultipleValuesMarker;
 
 	/* All selection modification methods returning a BOOL indicate through that flag whether changing the selection was successful (changing the selection might trigger a commitEditing call which fails and thus deny's the selection change).
 	*/
-- (NSArray *)selectedObjects;
+@property (readonly, copy) NSArray *selectedObjects;
 
 - (BOOL)setSelectionIndexPaths:(NSArray *)indexPaths;
-- (NSArray *)selectionIndexPaths;
+@property (readonly, copy) NSArray *selectionIndexPaths;
 - (BOOL)setSelectionIndexPath:(NSIndexPath *)indexPath;
-- (NSIndexPath *)selectionIndexPath;
+@property (readonly, copy) NSIndexPath *selectionIndexPath;
 - (BOOL)addSelectionIndexPaths:(NSArray *)indexPaths;
 - (BOOL)removeSelectionIndexPaths:(NSArray *)indexPaths;
 
-- (NSArray *)selectedNodes NS_AVAILABLE_MAC(10_5);
+@property (readonly, copy) NSArray *selectedNodes NS_AVAILABLE_MAC(10_5);
 
 - (void)moveNode:(NSTreeNode *)node toIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_MAC(10_5);
 - (void)moveNodes:(NSArray *)nodes toIndexPath:(NSIndexPath *)startingIndexPath NS_AVAILABLE_MAC(10_5);

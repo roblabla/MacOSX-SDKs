@@ -139,8 +139,8 @@ extern "C" {
 typedef struct X509_objects_st
 	{
 	int nid;
-	int (*a2i)(void);
-	int (*i2a)(void);
+	int (*a2i)(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+	int (*i2a)(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 	} X509_OBJECTS;
 
 struct X509_algor_st
@@ -313,7 +313,7 @@ DECLARE_ASN1_SET_OF(X509)
 typedef struct x509_trust_st {
 	int trust;
 	int flags;
-	int (*check_trust)(struct x509_trust_st *, X509 *, int);
+	int (*check_trust)(struct x509_trust_st *, X509 *, int) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 	char *name;
 	int arg1;
 	void *arg2;
@@ -872,6 +872,7 @@ X509_ALGOR *X509_ALGOR_dup(X509_ALGOR *xn) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_A
 int X509_ALGOR_set0(X509_ALGOR *alg, ASN1_OBJECT *aobj, int ptype, void *pval) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 void X509_ALGOR_get0(ASN1_OBJECT **paobj, int *pptype, void **ppval,
 						X509_ALGOR *algor) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int X509_ALGOR_cmp(const X509_ALGOR *a, const X509_ALGOR *b) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 X509_NAME *X509_NAME_dup(X509_NAME *xn) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 X509_NAME_ENTRY *X509_NAME_ENTRY_dup(X509_NAME_ENTRY *ne) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;

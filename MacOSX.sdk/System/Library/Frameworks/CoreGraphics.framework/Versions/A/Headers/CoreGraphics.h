@@ -44,7 +44,6 @@
 #include <CoreGraphics/CGEvent.h>
 #include <CoreGraphics/CGEventSource.h>
 #include <CoreGraphics/CGEventTypes.h>
-#include <CoreGraphics/CGGLContext.h>
 #include <CoreGraphics/CGPSConverter.h>
 #include <CoreGraphics/CGRemoteOperation.h>
 #include <CoreGraphics/CGSession.h>

@@ -92,21 +92,16 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 	@param			timeRange
 					Specifies the timeRange of the track to be inserted.
 	@param			track
-					Specifies the source track to be inserted. Only AVAssetTracks of AVURLAssets are supported.
+					Specifies the source track to be inserted. Only AVAssetTracks of AVURLAssets and AVCompositions are supported (AVCompositions starting in MacOS X 10.10 and iOS 8.0).
 	@param			startTime
-					Specifies the time at which the inserted track is to be presented by the composition track.
-					You may pass kCMTimeInvalid for startTime to indicate that the timeRange should be appended 
-					to the end of the track.
+					Specifies the time at which the inserted track is to be presented by the composition track. You may pass kCMTimeInvalid for startTime to indicate that the timeRange should be appended to the end of the track.
 	@param			error
-					Describes failures that may be reported to the user, e.g. the asset
-					that was selected for insertion in the composition is restricted by copy-protection.
+					Describes failures that may be reported to the user, e.g. the asset that was selected for insertion in the composition is restricted by copy-protection.
 	@result			A BOOL value indicating the success of the insertion.
 	@discussion	
-		You provide a reference to an AVAssetTrack and the timeRange within it that you want to insert.  
-		You specify the start time in the target composition track at which the timeRange should be inserted.
+		You provide a reference to an AVAssetTrack and the timeRange within it that you want to insert. You specify the start time in the target composition track at which the timeRange should be inserted.
 		
-		Note that the inserted track timeRange will be presented at its natural duration and rate. It can be
-		scaled to a different duration (and presented at a different rate) via -scaleTimeRange:toDuration:.
+		Note that the inserted track timeRange will be presented at its natural duration and rate. It can be scaled to a different duration (and presented at a different rate) via -scaleTimeRange:toDuration:.
 */
 - (BOOL)insertTimeRange:(CMTimeRange)timeRange ofTrack:(AVAssetTrack *)track atTime:(CMTime)startTime error:(NSError **)error;
 
@@ -117,21 +112,14 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 					Specifies the timeRanges to be inserted.  An NSArray of NSValues containing CMTimeRange. 
 					See +[NSValue valueWithCMTimeRange:] in AVTime.h.
 	@param			tracks
-					Specifies the source tracks to be inserted. Only AVAssetTracks of AVURLAssets are supported.
+					Specifies the source tracks to be inserted. Only AVAssetTracks of AVURLAssets and AVCompositions are supported (AVCompositions starting in MacOS X 10.10 and iOS 8.0).
 	@param			startTime
-					Specifies the time at which the inserted tracks are to be presented by the composition track.
-					You may pass kCMTimeInvalid for startTime to indicate that the timeRanges should be appended 
-					to the end of the track.
+					Specifies the time at which the inserted tracks are to be presented by the composition track. You may pass kCMTimeInvalid for startTime to indicate that the timeRanges should be appended to the end of the track.
 	@param			error
-					Describes failures that may be reported to the user, e.g. the asset
-					that was selected for insertion in the composition is restricted by copy-protection.
+					Describes failures that may be reported to the user, e.g. the asset that was selected for insertion in the composition is restricted by copy-protection.
 	@result			A BOOL value indicating the success of the insertion.
 	@discussion	
-		This method is equivalent to (but more efficient than) calling -insertTimeRange:ofTrack:atTime:error: for each 
-		timeRange/track pair.
-		If this method returns an error, none of the time ranges will be inserted into the composition track.
-		To specify an empty time range, pass NSNull for the track and a time range of starting at kCMTimeInvalid with a duration
-		of the desired empty edit.
+		This method is equivalent to (but more efficient than) calling -insertTimeRange:ofTrack:atTime:error: for each timeRange/track pair. If this method returns an error, none of the time ranges will be inserted into the composition track. To specify an empty time range, pass NSNull for the track and a time range of starting at kCMTimeInvalid with a duration of the desired empty edit.
 */
 - (BOOL)insertTimeRanges:(NSArray *)timeRanges ofTracks:(NSArray *)tracks atTime:(CMTime)startTime error:(NSError **)error NS_AVAILABLE(10_8, 5_0);
 

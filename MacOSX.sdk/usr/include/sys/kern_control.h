@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2004, 2012 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2004, 2012-2014 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -135,13 +135,14 @@ struct ctl_info {
 	@field sc_reserved Reserved, must be set to zero.
 */
 struct sockaddr_ctl {
-    u_char		sc_len;		/* depends on size of bundle ID string */
-    u_char		sc_family;	/* AF_SYSTEM */
+    u_char	sc_len;		/* depends on size of bundle ID string */
+    u_char	sc_family;	/* AF_SYSTEM */
     u_int16_t 	ss_sysaddr;	/* AF_SYS_KERNCONTROL */
     u_int32_t	sc_id; 		/* Controller unique identifier  */
     u_int32_t 	sc_unit;	/* Developer private unit number */
     u_int32_t 	sc_reserved[5];
 };
+
 
 
 #endif /* KPI_KERN_CONTROL_H */

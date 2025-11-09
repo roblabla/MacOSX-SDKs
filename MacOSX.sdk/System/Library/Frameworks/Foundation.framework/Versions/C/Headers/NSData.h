@@ -1,5 +1,5 @@
 /*	NSData.h
-	Copyright (c) 1994-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -67,19 +67,19 @@ typedef NS_OPTIONS(NSUInteger, NSDataBase64DecodingOptions) {
 
 @interface NSData : NSObject <NSCopying, NSMutableCopying, NSSecureCoding>
 
-- (NSUInteger)length;
+@property (readonly) NSUInteger length;
 /*
  The -bytes method returns a pointer to a contiguous region of memory managed by the receiver.
  If the regions of memory represented by the receiver are already contiguous, it does so in O(1) time, otherwise it may take longer
  Using -enumerateByteRangesUsingBlock: will be efficient for both contiguous and discontiguous data.
  */
-- (const void *)bytes NS_RETURNS_INNER_POINTER;
+@property (readonly) const void *bytes NS_RETURNS_INNER_POINTER;
 
 @end
 
 @interface NSData (NSExtendedData)
 
-- (NSString *)description;
+@property (readonly, copy) NSString *description;
 - (void)getBytes:(void *)buffer length:(NSUInteger)length;
 - (void)getBytes:(void *)buffer range:(NSRange)range;
 - (BOOL)isEqualToData:(NSData *)other;
@@ -93,34 +93,30 @@ typedef NS_OPTIONS(NSUInteger, NSDataBase64DecodingOptions) {
 /*
  'block' is called once for each contiguous region of memory in the receiver (once total for contiguous NSDatas), until either all bytes have been enumerated, or the 'stop' parameter is set to YES.
  */
-#if NS_BLOCKS_AVAILABLE
 - (void) enumerateByteRangesUsingBlock:(void (^)(const void *bytes, NSRange byteRange, BOOL *stop))block NS_AVAILABLE(10_9, 7_0);
-#endif
 
 @end
 
 @interface NSData (NSDataCreation)
 
-+ (id)data;
-+ (id)dataWithBytes:(const void *)bytes length:(NSUInteger)length;
-+ (id)dataWithBytesNoCopy:(void *)bytes length:(NSUInteger)length;
-+ (id)dataWithBytesNoCopy:(void *)bytes length:(NSUInteger)length freeWhenDone:(BOOL)b;
-+ (id)dataWithContentsOfFile:(NSString *)path options:(NSDataReadingOptions)readOptionsMask error:(NSError **)errorPtr;
-+ (id)dataWithContentsOfURL:(NSURL *)url options:(NSDataReadingOptions)readOptionsMask error:(NSError **)errorPtr;
-+ (id)dataWithContentsOfFile:(NSString *)path;
-+ (id)dataWithContentsOfURL:(NSURL *)url;
-- (id)initWithBytes:(const void *)bytes length:(NSUInteger)length;
-- (id)initWithBytesNoCopy:(void *)bytes length:(NSUInteger)length;
-- (id)initWithBytesNoCopy:(void *)bytes length:(NSUInteger)length freeWhenDone:(BOOL)b;
-#if NS_BLOCKS_AVAILABLE
-- (id)initWithBytesNoCopy:(void *)bytes length:(NSUInteger)length deallocator:(void (^)(void *bytes, NSUInteger length))deallocator NS_AVAILABLE(10_9, 7_0);
-#endif
-- (id)initWithContentsOfFile:(NSString *)path options:(NSDataReadingOptions)readOptionsMask error:(NSError **)errorPtr;
-- (id)initWithContentsOfURL:(NSURL *)url options:(NSDataReadingOptions)readOptionsMask error:(NSError **)errorPtr;
-- (id)initWithContentsOfFile:(NSString *)path;
-- (id)initWithContentsOfURL:(NSURL *)url;
-- (id)initWithData:(NSData *)data;
-+ (id)dataWithData:(NSData *)data;
++ (instancetype)data;
++ (instancetype)dataWithBytes:(const void *)bytes length:(NSUInteger)length;
++ (instancetype)dataWithBytesNoCopy:(void *)bytes length:(NSUInteger)length;
++ (instancetype)dataWithBytesNoCopy:(void *)bytes length:(NSUInteger)length freeWhenDone:(BOOL)b;
++ (instancetype)dataWithContentsOfFile:(NSString *)path options:(NSDataReadingOptions)readOptionsMask error:(NSError **)errorPtr;
++ (instancetype)dataWithContentsOfURL:(NSURL *)url options:(NSDataReadingOptions)readOptionsMask error:(NSError **)errorPtr;
++ (instancetype)dataWithContentsOfFile:(NSString *)path;
++ (instancetype)dataWithContentsOfURL:(NSURL *)url;
+- (instancetype)initWithBytes:(const void *)bytes length:(NSUInteger)length;
+- (instancetype)initWithBytesNoCopy:(void *)bytes length:(NSUInteger)length;
+- (instancetype)initWithBytesNoCopy:(void *)bytes length:(NSUInteger)length freeWhenDone:(BOOL)b;
+- (instancetype)initWithBytesNoCopy:(void *)bytes length:(NSUInteger)length deallocator:(void (^)(void *bytes, NSUInteger length))deallocator NS_AVAILABLE(10_9, 7_0);
+- (instancetype)initWithContentsOfFile:(NSString *)path options:(NSDataReadingOptions)readOptionsMask error:(NSError **)errorPtr;
+- (instancetype)initWithContentsOfURL:(NSURL *)url options:(NSDataReadingOptions)readOptionsMask error:(NSError **)errorPtr;
+- (instancetype)initWithContentsOfFile:(NSString *)path;
+- (instancetype)initWithContentsOfURL:(NSURL *)url;
+- (instancetype)initWithData:(NSData *)data;
++ (instancetype)dataWithData:(NSData *)data;
 
 @end
 
@@ -128,7 +124,7 @@ typedef NS_OPTIONS(NSUInteger, NSDataBase64DecodingOptions) {
 
 /* Create an NSData from a Base-64 encoded NSString using the given options. By default, returns nil when the input is not recognized as valid Base-64.
 */
-- (id)initWithBase64EncodedString:(NSString *)base64String options:(NSDataBase64DecodingOptions)options NS_AVAILABLE(10_9, 7_0);
+- (instancetype)initWithBase64EncodedString:(NSString *)base64String options:(NSDataBase64DecodingOptions)options NS_AVAILABLE(10_9, 7_0);
 
 /* Create a Base-64 encoded NSString from the receiver's contents using the given options.
 */
@@ -136,7 +132,7 @@ typedef NS_OPTIONS(NSUInteger, NSDataBase64DecodingOptions) {
 
 /* Create an NSData from a Base-64, UTF-8 encoded NSData. By default, returns nil when the input is not recognized as valid Base-64.
 */
-- (id)initWithBase64EncodedData:(NSData *)base64Data options:(NSDataBase64DecodingOptions)options NS_AVAILABLE(10_9, 7_0);
+- (instancetype)initWithBase64EncodedData:(NSData *)base64Data options:(NSDataBase64DecodingOptions)options NS_AVAILABLE(10_9, 7_0);
 
 /* Create a Base-64, UTF-8 encoded NSData from the receiver's contents using the given options.
 */
@@ -147,14 +143,9 @@ typedef NS_OPTIONS(NSUInteger, NSDataBase64DecodingOptions) {
 
 @interface NSData (NSDeprecated)
 
-/* This method is unsafe because it could potentially cause buffer overruns. You should use -getBytes:length: or -getBytes:range: instead.
-*/
-- (void)getBytes:(void *)buffer;
-
-/* These methods are deprecated. You should use +dataWithContentsOfURL:options:error: or -initWithContentsOfURL:options:error: with NSDataReadingMappedIfSafe or NSDataReadingMappedAlways instead.
-*/
-+ (id)dataWithContentsOfMappedFile:(NSString *)path;
-- (id)initWithContentsOfMappedFile:(NSString *)path;
+- (void)getBytes:(void *)buffer NS_DEPRECATED(10_0, 10_10, 2_0, 8_0, "This method is unsafe because it could potentially cause buffer overruns. Use -getBytes:length: instead.");
++ (id)dataWithContentsOfMappedFile:(NSString *)path NS_DEPRECATED(10_0, 10_10, 2_0, 8_0, "Use +dataWithContentsOfURL:options:error: and NSDataReadingMappedIfSafe or NSDataReadingMappedAlways instead.");
+- (id)initWithContentsOfMappedFile:(NSString *)path  NS_DEPRECATED(10_0, 10_10, 2_0, 8_0, "Use -initWithContentsOfURL:options:error: and NSDataReadingMappedIfSafe or NSDataReadingMappedAlways instead.");
 
 /* These methods first appeared in NSData.h on OS X 10.9 and iOS 7.0. They are deprecated in the same releases in favor of the methods in the NSDataBase64Encoding category. However, these methods have existed for several releases, so they may be used for applications targeting releases prior to OS X 10.9 and iOS 7.0.
 */
@@ -167,8 +158,8 @@ typedef NS_OPTIONS(NSUInteger, NSDataBase64DecodingOptions) {
 
 @interface NSMutableData : NSData
 
-- (void *)mutableBytes NS_RETURNS_INNER_POINTER;
-- (void)setLength:(NSUInteger)length;
+@property (readonly) void *mutableBytes NS_RETURNS_INNER_POINTER;
+@property NSUInteger length;
 
 @end
 
@@ -186,10 +177,10 @@ typedef NS_OPTIONS(NSUInteger, NSDataBase64DecodingOptions) {
 
 @interface NSMutableData (NSMutableDataCreation)
 
-+ (id)dataWithCapacity:(NSUInteger)aNumItems;
-+ (id)dataWithLength:(NSUInteger)length;
-- (id)initWithCapacity:(NSUInteger)capacity;
-- (id)initWithLength:(NSUInteger)length;
++ (instancetype)dataWithCapacity:(NSUInteger)aNumItems;
++ (instancetype)dataWithLength:(NSUInteger)length;
+- (instancetype)initWithCapacity:(NSUInteger)capacity;
+- (instancetype)initWithLength:(NSUInteger)length;
 
 @end
 

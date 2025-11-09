@@ -1,7 +1,7 @@
 /*
         NSPICTImageRep.h
         Application Kit
-        Copyright (c) 1997-2013, Apple Inc.
+        Copyright (c) 1997-2014, Apple Inc.
         All rights reserved.
 */
 
@@ -23,10 +23,10 @@
 #endif
 }
 
-+ (id)imageRepWithData:(NSData*)pictData;
-- (id)initWithData:(NSData*)pictData;
++ (instancetype)imageRepWithData:(NSData*)pictData;
+- (instancetype)initWithData:(NSData*)pictData;
 
-- (NSData*) PICTRepresentation;
-- (NSRect)  boundingBox;
+@property (readonly, copy) NSData *PICTRepresentation;
+@property (readonly) NSRect boundingBox;
 
 @end

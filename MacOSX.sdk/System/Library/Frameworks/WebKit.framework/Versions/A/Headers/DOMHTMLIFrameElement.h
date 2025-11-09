@@ -11,10 +11,10 @@
  *    notice, this list of conditions and the following disclaimer in the
  *    documentation and/or other materials provided with the distribution.
  *
- * THIS SOFTWARE IS PROVIDED BY APPLE COMPUTER, INC. ``AS IS'' AND ANY
+ * THIS SOFTWARE IS PROVIDED BY APPLE INC. ``AS IS'' AND ANY
  * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL APPLE COMPUTER, INC. OR
+ * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL APPLE INC. OR
  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
@@ -26,25 +26,22 @@
 
 #import <WebKit/DOMHTMLElement.h>
 
-#if WEBKIT_VERSION_MAX_ALLOWED >= WEBKIT_VERSION_1_3
-
 @class DOMAbstractView;
 @class DOMDocument;
 @class NSString;
 
+NS_CLASS_AVAILABLE_MAC(10_4)
 @interface DOMHTMLIFrameElement : DOMHTMLElement
-@property(copy) NSString *align;
-@property(copy) NSString *frameBorder;
-@property(copy) NSString *height;
-@property(copy) NSString *longDesc;
-@property(copy) NSString *marginHeight;
-@property(copy) NSString *marginWidth;
-@property(copy) NSString *name;
-@property(copy) NSString *scrolling;
-@property(copy) NSString *src;
-@property(copy) NSString *width;
-@property(readonly, retain) DOMDocument *contentDocument;
-@property(readonly, retain) DOMAbstractView *contentWindow AVAILABLE_IN_WEBKIT_VERSION_4_0;
+@property (copy) NSString *align;
+@property (copy) NSString *frameBorder;
+@property (copy) NSString *height;
+@property (copy) NSString *longDesc;
+@property (copy) NSString *marginHeight;
+@property (copy) NSString *marginWidth;
+@property (copy) NSString *name;
+@property (copy) NSString *scrolling;
+@property (copy) NSString *src;
+@property (copy) NSString *width;
+@property (readonly, strong) DOMDocument *contentDocument;
+@property (readonly, strong) DOMAbstractView *contentWindow NS_AVAILABLE_MAC(10_6);
 @end
-
-#endif

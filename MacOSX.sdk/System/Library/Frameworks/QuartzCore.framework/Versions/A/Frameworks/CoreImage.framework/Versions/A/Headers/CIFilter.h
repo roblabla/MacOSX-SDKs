@@ -1,6 +1,6 @@
 /* CoreImage - CIFilter.h
 
-   Copyright (c) 2004 Apple Computer, Inc.
+   Copyright (c) 2004 Apple, Inc.
    All rights reserved. */
 
 
@@ -184,6 +184,8 @@ CORE_IMAGE_CLASS_EXPORT
     void *_priv[8];
 }
 
+@property (readonly, nonatomic) CIImage *outputImage __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_5_0);
+
 /** Returns an array containing the names of all inputs in the filter. */
 - (NSArray *)inputKeys;
 
@@ -220,13 +222,19 @@ CORE_IMAGE_CLASS_EXPORT
  Use these methods to create filters and find filters. */
 @interface CIFilter (CIFilterRegistry)
 
-/** Creates a new filter of type 'name'. All input values will be undefined. */
+/** Creates a new filter of type 'name'. 
+ All input values will be undefined. */
 + (CIFilter *) filterWithName:(NSString *) name;
 
 /** Creates a new filter of type 'name'.
- 
- Convenience method that creates a filter objects with the specified key-value pairs set as input values on it; the argument list is terminated by a nil value.*/
+ The filter's input parameters are set from the list of key-value pairs which must be nil-terminated.
+ Any of the filter's input parameters not specified in the list will be undefined. */
 + (CIFilter *)filterWithName:(NSString *)name keysAndValues:key0, ... NS_REQUIRES_NIL_TERMINATION;
+
+/** Creates a new filter of type 'name'.
+ The filter's input parameters are set from the dictionary of key-value pairs.
+ Any of the filter's input parameters not specified in the list will be will be undefined. */
++ (CIFilter *)filterWithName:(NSString *)name withInputParameters:(NSDictionary*)params __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
 
 /** Returns an array containing all published filter names in a category. */
 + (NSArray *)filterNamesInCategory:(NSString *)category;

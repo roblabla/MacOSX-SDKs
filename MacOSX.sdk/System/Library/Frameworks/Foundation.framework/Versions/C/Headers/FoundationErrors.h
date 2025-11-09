@@ -1,5 +1,5 @@
 /*	FoundationErrors.h
-	Copyright (c) 2004-2013, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -58,6 +58,7 @@ enum {
     NSPropertyListReadUnknownVersionError NS_ENUM_AVAILABLE(10_6, 4_0) = 3841,  // The version number in the property list is unknown
     NSPropertyListReadStreamError NS_ENUM_AVAILABLE(10_6, 4_0) = 3842,          // Stream error reading a property list
     NSPropertyListWriteStreamError NS_ENUM_AVAILABLE(10_6, 4_0) = 3851,         // Stream error writing a property list
+    NSPropertyListWriteInvalidError NS_ENUM_AVAILABLE(10_10, 8_0) = 3852,       // Invalid property list object or invalid property list type specified when writing
 
     NSPropertyListErrorMinimum NS_ENUM_AVAILABLE(10_6, 4_0) = 3840,
     NSPropertyListErrorMaximum NS_ENUM_AVAILABLE(10_6, 4_0) = 4095,
@@ -74,6 +75,14 @@ enum {
     NSUbiquitousFileUbiquityServerNotAvailable NS_ENUM_AVAILABLE(10_9, 7_0) = 4355, // NSURLUbiquitousItemDownloadingErrorKey and NSURLUbiquitousItemUploadingErrorKey contain an error with this code when connecting to the iCloud servers failed
 
     NSUbiquitousFileErrorMinimum NS_ENUM_AVAILABLE(10_9, 7_0) = 4352,
-    NSUbiquitousFileErrorMaximum NS_ENUM_AVAILABLE(10_9, 7_0) = 4607
+    NSUbiquitousFileErrorMaximum NS_ENUM_AVAILABLE(10_9, 7_0) = 4607,
+
+    NSUserActivityHandoffFailedError NS_ENUM_AVAILABLE(10_10, 8_0) = 4608,	// The data for the user activity was not available (e.g. if the remote device became unavailable.)
+    NSUserActivityConnectionUnavailableError NS_ENUM_AVAILABLE(10_10, 8_0) = 4609,  // The user activity could not be continued because a required connection was not available
+    NSUserActivityRemoteApplicationTimedOutError NS_ENUM_AVAILABLE(10_10, 8_0) = 4610, // The remote application failed to send data in time
+    NSUserActivityHandoffUserInfoTooLargeError NS_ENUM_AVAILABLE(10_10, 8_0) = 4611, // The NSUserActivity userInfo dictionary was too large to receive
+
+    NSUserActivityErrorMinimum NS_ENUM_AVAILABLE(10_10, 8_0) = 4608,
+    NSUserActivityErrorMaximum NS_ENUM_AVAILABLE(10_10, 8_0) = 4863,
 };
 

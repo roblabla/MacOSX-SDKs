@@ -44,6 +44,7 @@ typedef struct mach_timebase_info	mach_timebase_info_data_t;
 __BEGIN_DECLS
 
 uint64_t			mach_absolute_time(void);
+uint64_t			mach_approximate_time(void);
 __END_DECLS
 
 #endif /* _MACH_MACH_TIME_H_ */

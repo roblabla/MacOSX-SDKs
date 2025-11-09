@@ -42,6 +42,16 @@ extern	IOReturn	IOBluetoothNSStringToDeviceAddress( NSString * inNameString, Blu
 
 extern	NSString *	IOBluetoothNSStringFromDeviceAddress( const BluetoothDeviceAddress *deviceAddress );
 
+//---------------------------------------------------------------------------------------------------------------------------
+/*!	@function	IOBluetoothNSStringFromDeviceAddressColon
+@abstract	Convenience routine to take a device address structure and create an NSString.
+@param		deviceAddress		A valid bluetooth device structure.
+@result		Returns the created address string.
+@discussion	The resultant string will be in this format: "00:11:22:33:44:55"
+*/
+
+extern  NSString *	IOBluetoothNSStringFromDeviceAddressColon(const BluetoothDeviceAddress *deviceAddress);
+        
 #pragma mark -
 #pragma mark === File Utilities ===
 

@@ -1,6 +1,6 @@
 /* CoreAnimation - CATransform3D.h
 
-   Copyright (c) 2006-2012 Apple Inc.
+   Copyright (c) 2006-2014, Apple Inc.
    All rights reserved. */
 
 #ifndef CATRANSFORM_H
@@ -124,7 +124,7 @@ CA_EXTERN_C_END
 
 + (NSValue *)valueWithCATransform3D:(CATransform3D)t;
 
-- (CATransform3D)CATransform3DValue;
+@property(readonly) CATransform3D CATransform3DValue;
 
 @end
 

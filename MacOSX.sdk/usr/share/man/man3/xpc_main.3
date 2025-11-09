@@ -77,7 +77,12 @@ The XPC runtime automatically keeps track of message activity to determine
 whether a service is busy or idle. If the service remains idle after a period
 of inactivity (defined by the system),
 .Fn xpc_main
-will exit the process.
+will exit the process. This behavior is automatically enabled for XPC services,
+but
+.Xr launchd 8
+jobs wishing to opt into the same behavior may do so by adding the
+EnablePressuredExit key to their
+.Xr launchd.plist 5 .
 .Pp
 Activity is tracked with a transaction count maintained by the XPC runtime.
 A service is deemed idle when its transaction count is zero.
@@ -107,20 +112,6 @@ as quickly as possible and not begin any new work, as the system will terminate
 the process if it does not exit in a timely fashion. After this event is
 received, no further messages will be delivered to the peers, and the end of the
 service's last outstanding transaction will automatically terminate the process.
-.Pp
-.Em Important :
-.Fn xpc_transaction_begin
-and
-.Fn xpc_transaction_end
-are not safe to call before
-.Fn xpc_main .
-In general, an XPC service's
-.Fn main
-should have no other code in it other than a call to
-.Fn xpc_main
-followed by a call to
-.Xr exit 2 
-as illustrated above.
 .Pp
 The XPC runtime will also automatically manage the service's priority based on
 where a message came from. If an app sends a message to the service, the

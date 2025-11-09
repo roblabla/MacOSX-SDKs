@@ -1,7 +1,7 @@
 /*
 	NSDatePicker.h
 	Application Kit
-	Copyright (c) 2004-2013, Apple Inc.
+	Copyright (c) 2004-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -17,63 +17,47 @@
 
 #pragma mark *** Appearance Control ***
 
-- (NSDatePickerStyle)datePickerStyle;
-- (void)setDatePickerStyle:(NSDatePickerStyle)newStyle;
+@property NSDatePickerStyle datePickerStyle;
 
-- (BOOL)isBezeled;
-- (void)setBezeled:(BOOL)flag;
+@property (getter=isBezeled) BOOL bezeled;
 
-- (BOOL)isBordered;
-- (void)setBordered:(BOOL)flag;
+@property (getter=isBordered) BOOL bordered;
 
-- (BOOL)drawsBackground;
-- (void)setDrawsBackground:(BOOL)flag;
+@property BOOL drawsBackground;
 
-- (NSColor *)backgroundColor;
-- (void)setBackgroundColor:(NSColor *)color;
+@property (copy) NSColor *backgroundColor;
 
-- (NSColor *)textColor;
-- (void)setTextColor:(NSColor *)color;
+@property (copy) NSColor *textColor;
 
 #pragma mark *** Range Mode Control ***
 
-- (NSDatePickerMode)datePickerMode;
-- (void)setDatePickerMode:(NSDatePickerMode)newMode;
+@property NSDatePickerMode datePickerMode;
 
 #pragma mark *** Date Presentation Control ***
 
-- (NSDatePickerElementFlags)datePickerElements;
-- (void)setDatePickerElements:(NSDatePickerElementFlags)elementFlags;
+@property NSDatePickerElementFlags datePickerElements;
 
-- (NSCalendar *)calendar;
-- (void)setCalendar:(NSCalendar *)newCalendar;
+@property (copy) NSCalendar *calendar;
 
-- (NSLocale *)locale;
-- (void)setLocale:(NSLocale *)newLocale;
+@property (copy) NSLocale *locale;
 
-- (NSTimeZone *)timeZone;
-- (void)setTimeZone:(NSTimeZone *)newTimeZone;
+@property (copy) NSTimeZone *timeZone;
 
 #pragma mark *** Object Value Access ***
 
-- (NSDate *)dateValue;
-- (void)setDateValue:(NSDate *)newStartDate;
+@property (copy) NSDate *dateValue;
 
-- (NSTimeInterval)timeInterval;
-- (void)setTimeInterval:(NSTimeInterval)newTimeInterval;
+@property NSTimeInterval timeInterval;
 
 #pragma mark *** Constraints on Displayable/Selectable Range ***
 
-- (NSDate *)minDate;
-- (void)setMinDate:(NSDate *)date;
+@property (copy) NSDate *minDate;
 
-- (NSDate *)maxDate;
-- (void)setMaxDate:(NSDate *)date;
+@property (copy) NSDate *maxDate;
 
 #pragma mark *** Delegate ***
 
-- (id <NSDatePickerCellDelegate>)delegate;
-- (void)setDelegate:(id <NSDatePickerCellDelegate>)anObject;
+@property (assign) id<NSDatePickerCellDelegate> delegate;
 
 @end
 

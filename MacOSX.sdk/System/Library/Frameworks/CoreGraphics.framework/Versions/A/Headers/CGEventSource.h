@@ -36,7 +36,7 @@
    These programs should use the `kCGEventSourceStatePrivate' value in
    creating their event source. An independent state table and unique source
    state ID (`CGEventSourceStateID') are created to track the event source's
-   state. This independent sate table is owned by the creating event source
+   state. This independent state table is owned by the creating event source
    and released with it. */
 
 /* Return the CFTypeID for CGEventSourceRefs. */

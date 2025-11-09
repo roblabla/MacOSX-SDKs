@@ -11,10 +11,10 @@
  *    notice, this list of conditions and the following disclaimer in the
  *    documentation and/or other materials provided with the distribution.
  *
- * THIS SOFTWARE IS PROVIDED BY APPLE COMPUTER, INC. ``AS IS'' AND ANY
+ * THIS SOFTWARE IS PROVIDED BY APPLE INC. ``AS IS'' AND ANY
  * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL APPLE COMPUTER, INC. OR
+ * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL APPLE INC. OR
  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
@@ -26,26 +26,23 @@
 
 #import <WebKit/DOMHTMLElement.h>
 
-#if WEBKIT_VERSION_MAX_ALLOWED >= WEBKIT_VERSION_1_3
-
 @class DOMAbstractView;
 @class DOMDocument;
 @class NSString;
 
+NS_CLASS_AVAILABLE_MAC(10_4)
 @interface DOMHTMLFrameElement : DOMHTMLElement
-@property(copy) NSString *frameBorder;
-@property(copy) NSString *longDesc;
-@property(copy) NSString *marginHeight;
-@property(copy) NSString *marginWidth;
-@property(copy) NSString *name;
+@property (copy) NSString *frameBorder;
+@property (copy) NSString *longDesc;
+@property (copy) NSString *marginHeight;
+@property (copy) NSString *marginWidth;
+@property (copy) NSString *name;
 @property BOOL noResize;
-@property(copy) NSString *scrolling;
-@property(copy) NSString *src;
-@property(readonly, retain) DOMDocument *contentDocument;
-@property(readonly, retain) DOMAbstractView *contentWindow AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-@property(copy) NSString *location AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-@property(readonly) int width AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-@property(readonly) int height AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+@property (copy) NSString *scrolling;
+@property (copy) NSString *src;
+@property (readonly, strong) DOMDocument *contentDocument;
+@property (readonly, strong) DOMAbstractView *contentWindow NS_AVAILABLE_MAC(10_5);
+@property (copy) NSString *location NS_AVAILABLE_MAC(10_5);
+@property (readonly) int width NS_AVAILABLE_MAC(10_5);
+@property (readonly) int height NS_AVAILABLE_MAC(10_5);
 @end
-
-#endif

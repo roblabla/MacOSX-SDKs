@@ -2,7 +2,7 @@
 /*
 	File:		QTMovieModernizer.h
 
-	Copyright:	(c) 2013 by Apple Inc. All rights reserved.
+	Copyright:	(c) 2013-2014 by Apple Inc. All rights reserved.
 
 */
 #else // not forPublicRelease
@@ -68,7 +68,12 @@ QTKIT_EXTERN NSString *const QTMovieModernizerOutputFormat_AppleProRes4444      
  
     @abstract		QTMovieModernizer is a class whose instances manage the "modernization" of legacy media. 
  
-    @discussion     QTMovieModernizer objects convert legacy media resources (here defined as any media that is not supported by the AVFoundation framework) into a format that AVFoundation supports. This class exposes only four methods, which can be used to determine whether a media resource needs to be modernized, to set up and configure a modernization object, and to perform or cancel the modernization operation.
+    @discussion     QTMovieModernizer objects convert legacy media resources (here defined as any media that is not supported by the AVFoundation framework) into a format that AVFoundation supports. This class exposes only four methods, which can be used to determine whether a media resource needs to be modernized, to set up and configure a modernization object, and to perform or cancel the modernization operation. Before using the QTMovieModernizer class in 32-bit, the QTMovie class must be initialized on the main thread. This can be done by:
+ 
+ 			QTMovie *movie = [[QTMovie alloc] init];
+ 			[movie release];
+ 
+			QTMovieModernizer uses NSProgress to report progress during the modernization process. The QTMovieModernizer will call [NSProgress currentProgress] when modernizeWithCompletionHandler is called and will use that NSProgress as the parent NSProgress object.
  */
 
 #if (defined(MAC_OS_X_VERSION_10_9) && (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_9))

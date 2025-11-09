@@ -1,7 +1,7 @@
 /*
         NSBezierPath.h
         Application Kit
-        Copyright (c) 1997-2013, Apple Inc.
+        Copyright (c) 1997-2014, Apple Inc.
         All rights reserved.
 */
 
@@ -11,33 +11,29 @@
 
 @class NSAffineTransform;
 
-enum {
+typedef NS_ENUM(NSUInteger, NSLineCapStyle) {
     NSButtLineCapStyle = 0,
     NSRoundLineCapStyle = 1,
     NSSquareLineCapStyle = 2
 };
-typedef NSUInteger NSLineCapStyle;
 
-enum {
+typedef NS_ENUM(NSUInteger, NSLineJoinStyle) {
     NSMiterLineJoinStyle = 0,
     NSRoundLineJoinStyle = 1,
     NSBevelLineJoinStyle = 2
 };
-typedef NSUInteger NSLineJoinStyle;
 
-enum {
+typedef NS_ENUM(NSUInteger, NSWindingRule) {
     NSNonZeroWindingRule = 0,
     NSEvenOddWindingRule = 1
 };
-typedef NSUInteger NSWindingRule;
 
-enum {
+typedef NS_ENUM(NSUInteger, NSBezierPathElement) {
     NSMoveToBezierPathElement,
     NSLineToBezierPathElement,
     NSCurveToBezierPathElement,
     NSClosePathBezierPathElement
 };
-typedef NSUInteger NSBezierPathElement;
 
 @interface NSBezierPath : NSObject <NSCopying, NSCoding>
 {
@@ -120,18 +116,12 @@ typedef NSUInteger NSBezierPathElement;
 
 // Path rendering parameters.
 
-- (CGFloat)lineWidth;
-- (void)setLineWidth:(CGFloat)lineWidth;
-- (NSLineCapStyle)lineCapStyle;
-- (void)setLineCapStyle:(NSLineCapStyle)lineCapStyle;
-- (NSLineJoinStyle)lineJoinStyle;
-- (void)setLineJoinStyle:(NSLineJoinStyle)lineJoinStyle;
-- (NSWindingRule)windingRule;
-- (void)setWindingRule:(NSWindingRule)windingRule;
-- (CGFloat)miterLimit;
-- (void)setMiterLimit:(CGFloat)miterLimit;
-- (CGFloat)flatness;
-- (void)setFlatness:(CGFloat)flatness;
+@property CGFloat lineWidth;
+@property NSLineCapStyle lineCapStyle;
+@property NSLineJoinStyle lineJoinStyle;
+@property NSWindingRule windingRule;
+@property CGFloat miterLimit;
+@property CGFloat flatness;
 - (void)getLineDash:(CGFloat *)pattern count:(NSInteger *)count phase:(CGFloat *)phase;
 - (void)setLineDash:(const CGFloat *)pattern count:(NSInteger)count phase:(CGFloat)phase;
 
@@ -144,8 +134,8 @@ typedef NSUInteger NSBezierPathElement;
 
 // Path modifications.
 
-- (NSBezierPath *)bezierPathByFlatteningPath;
-- (NSBezierPath *)bezierPathByReversingPath;
+@property (readonly, copy) NSBezierPath *bezierPathByFlatteningPath;
+@property (readonly, copy) NSBezierPath *bezierPathByReversingPath;
 
 // Applying transformations.
 
@@ -153,14 +143,14 @@ typedef NSUInteger NSBezierPathElement;
 
 // Path info
 
-- (BOOL)isEmpty;
-- (NSPoint)currentPoint;
-- (NSRect)controlPointBounds;
-- (NSRect)bounds;
+@property (getter=isEmpty, readonly) BOOL empty;
+@property (readonly) NSPoint currentPoint;
+@property (readonly) NSRect controlPointBounds;
+@property (readonly) NSRect bounds;
 
 // Elements.
 
-- (NSInteger)elementCount;
+@property (readonly) NSInteger elementCount;
 
 // `points' should contain space for at least three points.  `points'
 // may be NULL.  In the case of NSCurveToBezierPathElement, the order

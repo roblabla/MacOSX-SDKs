@@ -246,7 +246,9 @@ struct sadb_x_sa2 {
   union {
     u_int8_t sadb_x_sa2_reserved1;
   };
-  u_int16_t sadb_x_sa2_reserved2;
+  union {
+    u_int16_t sadb_x_sa2_reserved2;
+  };
   u_int32_t sadb_x_sa2_sequence;
   u_int32_t sadb_x_sa2_reqid;
 };
@@ -424,7 +426,8 @@ struct sadb_sastat {
 #define SADB_X_EXT_RAWCPI	0x0080	/* use well known CPI (IPComp) */
 #endif
 
-#define SADB_KEY_FLAGS_MAX	0x0fff
+#define SADB_KEY_FLAGS_MAX	0x7fff
+
 
 /* SPI size for PF_KEYv2 */
 #define PFKEY_SPI_SIZE	sizeof(u_int32_t)

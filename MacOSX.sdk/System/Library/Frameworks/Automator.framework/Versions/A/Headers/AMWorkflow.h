@@ -1,6 +1,6 @@
 /*	
     AMWorkflow.h
-    Copyright (C) 2005-2006 Apple Computer, Inc. All rights reserved.    
+    Copyright (C) 2005-2006, 2014 Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -42,7 +42,7 @@
 
 + (id)runWorkflowAtURL:(NSURL *)fileURL withInput:(id)input error:(NSError **)error;
 
-- (id)initWithContentsOfURL:(NSURL *)fileURL error:(NSError **)outError;
+- (instancetype)initWithContentsOfURL:(NSURL *)fileURL error:(NSError **)outError;
 
 - (BOOL)writeToURL:(NSURL *)fileURL error:(NSError **)outError;
 

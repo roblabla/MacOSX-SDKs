@@ -1,5 +1,5 @@
 /*	NSHashTable.h
-	Copyright (c) 1994-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSPointerFunctions.h>
@@ -31,24 +31,24 @@ typedef NSUInteger NSHashTableOptions;
 NS_CLASS_AVAILABLE(10_5, 6_0)
 @interface NSHashTable : NSObject <NSCopying, NSCoding, NSFastEnumeration>
 
-- (id)initWithOptions:(NSPointerFunctionsOptions)options capacity:(NSUInteger)initialCapacity;
-- (id)initWithPointerFunctions:(NSPointerFunctions *)functions capacity:(NSUInteger)initialCapacity;
+- (instancetype)initWithOptions:(NSPointerFunctionsOptions)options capacity:(NSUInteger)initialCapacity NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithPointerFunctions:(NSPointerFunctions *)functions capacity:(NSUInteger)initialCapacity NS_DESIGNATED_INITIALIZER;
 
 // conveniences
 
-+ (id)hashTableWithOptions:(NSPointerFunctionsOptions)options;
++ (NSHashTable *)hashTableWithOptions:(NSPointerFunctionsOptions)options;
 
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || TARGET_OS_WIN32
 + (id)hashTableWithWeakObjects NS_DEPRECATED_MAC(10_5, 10_8);  // GC zeroing, otherwise unsafe unretained
 #endif
 
-+ (id)weakObjectsHashTable NS_AVAILABLE(10_8, 6_0); // entries are not necessarily purged right away when the weak object is reclaimed
++ (NSHashTable *)weakObjectsHashTable NS_AVAILABLE(10_8, 6_0); // entries are not necessarily purged right away when the weak object is reclaimed
 
 
 /* return an NSPointerFunctions object reflecting the functions in use.  This is a new autoreleased object that can be subsequently modified and/or used directly in the creation of other pointer "collections". */
-- (NSPointerFunctions *)pointerFunctions;
+@property (readonly, copy) NSPointerFunctions *pointerFunctions;
 
-- (NSUInteger)count;
+@property (readonly) NSUInteger count;
 - (id)member:(id)object;
 - (NSEnumerator *)objectEnumerator;
 
@@ -58,9 +58,9 @@ NS_CLASS_AVAILABLE(10_5, 6_0)
 
 - (void)removeAllObjects;
 
-- (NSArray *)allObjects;    // convenience
+@property (readonly, copy) NSArray *allObjects;    // convenience
 
-- (id)anyObject;
+@property (nonatomic, readonly) id anyObject;
 - (BOOL)containsObject:(id)anObject;
 
 - (BOOL)intersectsHashTable:(NSHashTable *)other;
@@ -71,7 +71,7 @@ NS_CLASS_AVAILABLE(10_5, 6_0)
 - (void)unionHashTable:(NSHashTable *)other;
 - (void)minusHashTable:(NSHashTable *)other;
 
-- (NSSet *)setRepresentation;  // create a set of the contents
+@property (readonly, copy) NSSet *setRepresentation;  // create a set of the contents
 
 @end
 

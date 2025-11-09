@@ -51,4 +51,8 @@
 #include <SearchKit/SearchKit.h>
 #endif
 
+#ifndef __FSEVENTS__
+#include <FSEvents/FSEvents.h>
+#endif
+
 #endif /* __CORESERVICES__ */

@@ -1,5 +1,5 @@
 /*	NSFileManager.h
-	Copyright (c) 1994-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -49,6 +49,12 @@ typedef NS_OPTIONS(NSUInteger, NSFileManagerItemReplacementOptions) {
      NSFileManagerItemReplacementWithoutDeletingBackupItem = 1UL << 1
 } NS_ENUM_AVAILABLE(10_6, 4_0);
 
+typedef NS_ENUM(NSInteger, NSURLRelationship) {
+    NSURLRelationshipContains,
+    NSURLRelationshipSame,
+    NSURLRelationshipOther
+} NS_ENUM_AVAILABLE(10_10, 8_0);
+
 /* Notification sent after the current ubiquity identity has changed.
 */
 extern NSString * const NSUbiquityIdentityDidChangeNotification NS_AVAILABLE(10_8, 6_0);
@@ -82,6 +88,14 @@ extern NSString * const NSUbiquityIdentityDidChangeNotification NS_AVAILABLE(10_
  */
 - (NSURL *)URLForDirectory:(NSSearchPathDirectory)directory inDomain:(NSSearchPathDomainMask)domain appropriateForURL:(NSURL *)url create:(BOOL)shouldCreate error:(NSError **)error NS_AVAILABLE(10_6, 4_0);
 
+/* Sets 'outRelationship' to NSURLRelationshipContains if the directory at 'directoryURL' directly or indirectly contains the item at 'otherURL', meaning 'directoryURL' is found while enumerating parent URLs starting from 'otherURL'. Sets 'outRelationship' to NSURLRelationshipSame if 'directoryURL' and 'otherURL' locate the same item, meaning they have the same NSURLFileResourceIdentifierKey value. If 'directoryURL' is not a directory, or does not contain 'otherURL' and they do not locate the same file, then sets 'outRelationship' to NSURLRelationshipOther. If an error occurs, returns NO and sets 'error'.
+ */
+- (BOOL)getRelationship:(NSURLRelationship *)outRelationship ofDirectoryAtURL:(NSURL *)directoryURL toItemAtURL:(NSURL *)otherURL error:(NSError **)error NS_AVAILABLE(10_10, 8_0);
+
+/* Similar to -[NSFileManager getRelationship:ofDirectoryAtURL:toItemAtURL:error:], except that the directory is instead defined by an NSSearchPathDirectory and NSSearchPathDomainMask. Pass 0 for domainMask to instruct the method to automatically choose the domain appropriate for 'url'. For example, to discover if a file is contained by a Trash directory, call [fileManager getRelationship:&result ofDirectory:NSTrashDirectory inDomain:0 toItemAtURL:url error:&error].
+ */
+- (BOOL)getRelationship:(NSURLRelationship *)outRelationship ofDirectory:(NSSearchPathDirectory)directory inDomain:(NSSearchPathDomainMask)domainMask toItemAtURL:(NSURL *)url error:(NSError **)error NS_AVAILABLE(10_10, 8_0);
+
 /* createDirectoryAtURL:withIntermediateDirectories:attributes:error: creates a directory at the specified URL. If you pass 'NO' for withIntermediateDirectories, the directory must not exist at the time this call is made. Passing 'YES' for withIntermediateDirectories will create any necessary intermediate directories. This method returns YES if all directories specified in 'url' were created and attributes were set. Directories are created with attributes specified by the dictionary passed to 'attributes'. If no dictionary is supplied, directories are created according to the umask of the process. This method returns NO if a failure occurs at any stage of the operation. If an error parameter was provided, a presentable NSError will be returned by reference.
  */
 - (BOOL)createDirectoryAtURL:(NSURL *)url withIntermediateDirectories:(BOOL)createIntermediates attributes:(NSDictionary *)attributes error:(NSError **)error NS_AVAILABLE(10_7, 5_0);
@@ -92,8 +106,7 @@ extern NSString * const NSUbiquityIdentityDidChangeNotification NS_AVAILABLE(10_
 
 /* Instances of NSFileManager may now have delegates. Each instance has one delegate, and the delegate is not retained. In versions of Mac OS X prior to 10.5, the behavior of calling [[NSFileManager alloc] init] was undefined. In Mac OS X 10.5 "Leopard" and later, calling [[NSFileManager alloc] init] returns a new instance of an NSFileManager.
  */
-- (void)setDelegate:(id)delegate NS_AVAILABLE(10_5, 2_0);
-- (id)delegate NS_AVAILABLE(10_5, 2_0);
+@property (assign) id <NSFileManagerDelegate> delegate NS_AVAILABLE(10_5, 2_0);
 
 /* setAttributes:ofItemAtPath:error: returns YES when the attributes specified in the 'attributes' dictionary are set successfully on the item specified by 'path'. If this method returns NO, a presentable NSError will be provided by-reference in the 'error' parameter. If no error is required, you may pass 'nil' for the error.
  
@@ -143,14 +156,14 @@ extern NSString * const NSUbiquityIdentityDidChangeNotification NS_AVAILABLE(10_
  */
 - (NSString *)destinationOfSymbolicLinkAtPath:(NSString *)path error:(NSError **)error NS_AVAILABLE(10_5, 2_0);
 
-/* These methods replace their non-error returning counterparts below. See the NSFileManagerFileOperationAdditions category below for methods that are dispatched to the NSFileManager instance's delegate.
+/* These methods replace their non-error returning counterparts below. See the NSFileManagerDelegate protocol below for methods that are dispatched to the NSFileManager instance's delegate.
  */
 - (BOOL)copyItemAtPath:(NSString *)srcPath toPath:(NSString *)dstPath error:(NSError **)error NS_AVAILABLE(10_5, 2_0);
 - (BOOL)moveItemAtPath:(NSString *)srcPath toPath:(NSString *)dstPath error:(NSError **)error NS_AVAILABLE(10_5, 2_0);
 - (BOOL)linkItemAtPath:(NSString *)srcPath toPath:(NSString *)dstPath error:(NSError **)error NS_AVAILABLE(10_5, 2_0);
 - (BOOL)removeItemAtPath:(NSString *)path error:(NSError **)error NS_AVAILABLE(10_5, 2_0);
 
-/* These methods are URL-taking equivalents of the four methods above. Their delegate methods are defined in the NSFileManagerFileOperationAdditions category below.
+/* These methods are URL-taking equivalents of the four methods above. Their delegate methods are defined in the NSFileManagerDelegate protocol below.
  */
 - (BOOL)copyItemAtURL:(NSURL *)srcURL toURL:(NSURL *)dstURL error:(NSError **)error NS_AVAILABLE(10_6, 4_0);
 - (BOOL)moveItemAtURL:(NSURL *)srcURL toURL:(NSURL *)dstURL error:(NSError **)error NS_AVAILABLE(10_6, 4_0);
@@ -158,6 +171,8 @@ extern NSString * const NSUbiquityIdentityDidChangeNotification NS_AVAILABLE(10_
 - (BOOL)removeItemAtURL:(NSURL *)URL error:(NSError **)error NS_AVAILABLE(10_6, 4_0);
 
 /* trashItemAtURL:resultingItemURL:error: returns YES if the item at 'url' was successfully moved to a Trash. Since the operation may require renaming the file to avoid collisions, it also returns by reference the resulting URL that the item was moved to. If this method returns NO, the item was not moved and an NSError will be returned by reference in the 'error' parameter.
+
+    To easily discover if an item is in the Trash, you may use [fileManager getRelationship:&result ofDirectory:NSTrashDirectory inDomain:0 toItemAtURL:url error:&error] && result == NSURLRelationshipContains.
  */
 - (BOOL)trashItemAtURL:(NSURL *)url resultingItemURL:(NSURL **)outResultingURL error:(NSError **)error NS_AVAILABLE_MAC(10_8);
 
@@ -180,7 +195,7 @@ extern NSString * const NSUbiquityIdentityDidChangeNotification NS_AVAILABLE(10_
 
 /* Process working directory management. Despite the fact that these are instance methods on NSFileManager, these methods report and change (respectively) the working directory for the entire process. Developers are cautioned that doing so is fraught with peril.
  */
-- (NSString *)currentDirectoryPath;
+@property (readonly, copy) NSString *currentDirectoryPath;
 - (BOOL)changeCurrentDirectoryPath:(NSString *)path;
 
 /* The following methods are of limited utility. Attempting to predicate behavior based on the current state of the filesystem or a particular file on the filesystem is encouraging odd behavior in the face of filesystem race conditions. It's far better to attempt an operation (like loading a file or creating a directory) and handle the error gracefully than it is to try to figure out ahead of time whether the operation will succeed.
@@ -208,13 +223,11 @@ extern NSString * const NSUbiquityIdentityDidChangeNotification NS_AVAILABLE(10_
  */
 - (NSDirectoryEnumerator *)enumeratorAtPath:(NSString *)path;
 
-#if NS_BLOCKS_AVAILABLE
 /* enumeratorAtURL:includingPropertiesForKeys:options:errorHandler: returns an NSDirectoryEnumerator rooted at the provided directory URL. The NSDirectoryEnumerator returns NSURLs from the -nextObject method. The optional 'includingPropertiesForKeys' parameter indicates which resource properties should be pre-fetched and cached with each enumerated URL. The optional 'errorHandler' block argument is invoked when an error occurs. Parameters to the block are the URL on which an error occurred and the error. When the error handler returns YES, enumeration continues if possible. Enumeration stops immediately when the error handler returns NO.
 
     If you wish to only receive the URLs and no other attributes, then pass '0' for 'options' and an empty NSArray ('[NSArray array]') for 'keys'. If you wish to have the property caches of the vended URLs pre-populated with a default set of attributes, then pass '0' for 'options' and 'nil' for 'keys'.
  */
 - (NSDirectoryEnumerator *)enumeratorAtURL:(NSURL *)url includingPropertiesForKeys:(NSArray *)keys options:(NSDirectoryEnumerationOptions)mask errorHandler:(BOOL (^)(NSURL *url, NSError *error))handler NS_AVAILABLE(10_6, 4_0);
-#endif
 
 /* subpathsAtPath: returns an NSArray of all contents and subpaths recursively from the provided path. This may be very expensive to compute for deep filesystem hierarchies, and should probably be avoided.
  */
@@ -271,7 +284,7 @@ extern NSString * const NSUbiquityIdentityDidChangeNotification NS_AVAILABLE(10_
 
     If you don't need the container URL and just want to check if ubiquity containers are available you should use this method instead of checking -URLForUbiquityContainerIdentifier:.
 */
-- (id <NSObject, NSCopying, NSCoding>)ubiquityIdentityToken NS_AVAILABLE(10_8, 6_0);
+@property (readonly, copy) id<NSObject,NSCopying,NSCoding> ubiquityIdentityToken NS_AVAILABLE(10_8, 6_0);
 
 /* Returns the container directory associated with the specified security application group ID.
  */
@@ -354,14 +367,14 @@ extern NSString * const NSUbiquityIdentityDidChangeNotification NS_AVAILABLE(10_
 
 /* For NSDirectoryEnumerators created with -enumeratorAtPath:, the -fileAttributes and -directoryAttributes methods return an NSDictionary containing the keys listed below. For NSDirectoryEnumerators created with -enumeratorAtURL:includingPropertiesForKeys:options:errorHandler:, these two methods return nil.
  */
-- (NSDictionary *)fileAttributes;
-- (NSDictionary *)directoryAttributes;
+@property (readonly, copy) NSDictionary *fileAttributes;
+@property (readonly, copy) NSDictionary *directoryAttributes;
 
 - (void)skipDescendents;
 
 /* This method returns the number of levels deep the current object is in the directory hierarchy being enumerated. The directory passed to -enumeratorAtURL:includingPropertiesForKeys:options:errorHandler: is considered to be level 0.
  */
-- (NSUInteger)level NS_AVAILABLE(10_6, 4_0);
+@property (readonly) NSUInteger level NS_AVAILABLE(10_6, 4_0);
 
 /* This method is spelled correctly.
  */

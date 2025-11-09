@@ -1,5 +1,5 @@
 /*	NSPredicate.h
-	Copyright (c) 2004-2013, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -29,13 +29,11 @@ NS_CLASS_AVAILABLE(10_4, 3_0)
 
 + (NSPredicate *)predicateWithValue:(BOOL)value;    // return predicates that always evaluate to true/false
 
-#if NS_BLOCKS_AVAILABLE
-+ (NSPredicate*)predicateWithBlock:(BOOL (^)(id evaluatedObject, NSDictionary *bindings))block NS_AVAILABLE(10_6, 4_0); 
-#endif
++ (NSPredicate*)predicateWithBlock:(BOOL (^)(id evaluatedObject, NSDictionary *bindings))block NS_AVAILABLE(10_6, 4_0);
 
-- (NSString *)predicateFormat;    // returns the format string of the predicate
+@property (readonly, copy) NSString *predicateFormat;    // returns the format string of the predicate
 
-- (NSPredicate *)predicateWithSubstitutionVariables:(NSDictionary *)variables;    // substitute constant values for variables
+- (instancetype)predicateWithSubstitutionVariables:(NSDictionary *)variables;    // substitute constant values for variables
 
 - (BOOL)evaluateWithObject:(id)object;    // evaluate a predicate against a single object
 

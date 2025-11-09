@@ -1,5 +1,5 @@
 /*	NSObject.h
-	Copyright (c) 1994-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2014, Apple Inc. All rights reserved.
 */
 
 #include <TargetConditionals.h>
@@ -27,7 +27,7 @@
 @protocol NSCoding
 
 - (void)encodeWithCoder:(NSCoder *)aCoder;
-- (id)initWithCoder:(NSCoder *)aDecoder;
+- (id)initWithCoder:(NSCoder *)aDecoder; // NS_DESIGNATED_INITIALIZER
 
 @end
 
@@ -47,7 +47,7 @@
 
 + (NSInteger)version;
 + (void)setVersion:(NSInteger)aVersion;
-- (Class)classForCoder;
+@property (readonly) Class classForCoder;
 - (id)replacementObjectForCoder:(NSCoder *)aCoder;
 - (id)awakeAfterUsingCoder:(NSCoder *)aDecoder NS_REPLACES_RECEIVER;
 
@@ -77,9 +77,8 @@ UNAVAILABLE_ATTRIBUTE
 @end
 
 @interface NSObject (NSDiscardableContentProxy)
-- (id)autoContentAccessingProxy NS_AVAILABLE(10_6, 4_0);
+@property (readonly, retain) id autoContentAccessingProxy NS_AVAILABLE(10_6, 4_0);
 @end
-
 
 /***********	Object Allocation / Deallocation		*******/
     

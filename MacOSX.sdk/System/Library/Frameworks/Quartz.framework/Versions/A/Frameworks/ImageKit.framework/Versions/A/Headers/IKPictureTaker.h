@@ -2,7 +2,7 @@
 //  IKPictureTaker.h
 //  ImageKit
 //
-//  Copyright (c) 2006 Apple Computer, Inc. All rights reserved.
+//  Copyright (c) 2006 Apple Inc. All rights reserved.
 //
 
 /*!
@@ -45,7 +45,7 @@
   @param delegate the object to invoke didEndSelector when the PictureTaker terminates.
   @param didEndSelector the selector to invoke when the PictureTaker terminates.
   @param contextInfo Any data that will be passed as an argument to the delegate through didEndSelector after the session has ended.
-  @discussion didEndSelector should have the following signature: - (void)pictureTakerDidEnd:(IKPictureTaker *)sheet returnCode:(NSInteger)returnCode contextInfo:(void  *)contextInfo;
+  @discussion didEndSelector should have the following signature: - (void)pictureTakerDidEnd:(IKPictureTaker *)pictureTaker returnCode:(NSInteger)returnCode contextInfo:(void  *)contextInfo;
   returnCode value is set to NSOKButton if the user validate, or to NSCancelButton if the user cancel.
 */
 - (void) beginPictureTakerWithDelegate:(id) delegate didEndSelector:(SEL) didEndSelector contextInfo:(void *) contextInfo; 
@@ -56,7 +56,7 @@
   @param delegate the object to invoke didEndSelector when the PictureTaker terminates 
   @param didEndSelector the selector to invoke when the PictureTaker terminates 
   @param contextInfo Any data that will be passed as an argument to the delegate through didEndSelector after the session has ended
-  @discussion didEndSelector should have the following signature: - (void)pictureTakerDidEnd:(IKPictureTaker *)sheet returnCode:(NSInteger)returnCode contextInfo:(void  *)contextInfo;
+  @discussion didEndSelector should have the following signature: - (void)pictureTakerDidEnd:(IKPictureTaker *)pictureTaker returnCode:(NSInteger)returnCode contextInfo:(void  *)contextInfo;
   returnCode value is set to NSOKButton if the user validate, or to NSCancelButton if the user cancel.
 */
 - (void) beginPictureTakerSheetForWindow:(NSWindow *)aWindow withDelegate:(id) delegate didEndSelector:(SEL) didEndSelector contextInfo:(void *) contextInfo; 
@@ -67,7 +67,7 @@
   @param delegate the object to invoke didEndSelector when the PictureTaker terminates.
   @param didEndSelector the selector to invoke when the PictureTaker terminates.
   @param contextInfo Any data that will be passed as an argument to the delegate through didEndSelector after the session has ended.
-  @discussion didEndSelector should have the following signature: - (void)pictureTakerDidEnd:(IKPictureTaker *)sheet returnCode:(NSInteger)returnCode contextInfo:(void  *)contextInfo;
+  @discussion didEndSelector should have the following signature: - (void)pictureTakerDidEnd:(IKPictureTaker *)pictureTaker returnCode:(NSInteger)returnCode contextInfo:(void  *)contextInfo;
   returnCode value is set to NSOKButton if the user validate, or to NSCancelButton if the user cancel.
 */
 - (void) popUpRecentsMenuForView:(NSView *) aView withDelegate:(id) delegate didEndSelector:(SEL) didEndSelector contextInfo:(void *) contextInfo; 

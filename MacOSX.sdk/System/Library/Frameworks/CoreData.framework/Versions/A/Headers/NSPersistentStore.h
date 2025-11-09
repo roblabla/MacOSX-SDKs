@@ -43,31 +43,27 @@ NS_CLASS_AVAILABLE(10_5, 3_0)
 + (Class)migrationManagerClass NS_AVAILABLE(10_6, 3_0);
 
 /* the designated initializer for object stores. */
-- (id)initWithPersistentStoreCoordinator:(NSPersistentStoreCoordinator *)root configurationName:(NSString *)name URL:(NSURL *)url options:(NSDictionary *)options ;
+- (instancetype)initWithPersistentStoreCoordinator:(NSPersistentStoreCoordinator *)root configurationName:(NSString *)name URL:(NSURL *)url options:(NSDictionary *)options NS_DESIGNATED_INITIALIZER;
 
 /*  Store metadata must be accessible before -load: is called, but there is no way to return an error if the store is invalid 
 */
 -(BOOL)loadMetadata:(NSError **)error; 
 
 /* the bridge between the control & access layers. */
-- (NSPersistentStoreCoordinator*) persistentStoreCoordinator;
+@property (nonatomic, readonly, weak) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
-- (NSString *)configurationName; // Which configuration does this store contain 
-- (NSDictionary *)options; // the options the store was initialized with
+@property (readonly, copy) NSString *configurationName; // Which configuration does this store contain 
+@property (readonly, strong) NSDictionary *options; // the options the store was initialized with
 
-- (NSURL *)URL;
-- (void)setURL:(NSURL *)url;
+@property (strong) NSURL *URL;
 
-- (NSString *)identifier;
-- (void)setIdentifier:(NSString *)identifier;
+@property (copy) NSString *identifier;
 
-- (NSString *)type; // stores always know their type
+@property (readonly, copy) NSString *type; // stores always know their type
 
-- (BOOL)isReadOnly;     // Do we know a priori the store is read only? 
-- (void)setReadOnly:(BOOL)flag;
+@property (getter=isReadOnly) BOOL readOnly;     // Do we know a priori the store is read only? 
 
-- (NSDictionary *)metadata; // includes store type and UUID
-- (void)setMetadata:(NSDictionary *)storeMetadata;
+@property (nonatomic, strong) NSDictionary *metadata; // includes store type and UUID
 
 // Gives the store a chance to do any post-init work that's necessary
 - (void)didAddToPersistentStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator;

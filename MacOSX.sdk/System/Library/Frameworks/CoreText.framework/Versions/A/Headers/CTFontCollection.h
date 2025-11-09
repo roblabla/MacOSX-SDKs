@@ -2,7 +2,7 @@
  *  CTFontCollection.h
  *  CoreText
  *
- *  Copyright (c) 2006-2012 Apple Inc. All rights reserved.
+ *  Copyright (c) 2006-2014 Apple Inc. All rights reserved.
  *
  */
 
@@ -35,7 +35,11 @@ extern "C" {
     @abstract   The Core Text font collection reference.
     @discussion An opaque reference to an immutable font collection.
 */
+#if TARGET_OS_IPHONE
 typedef const struct __CTFontCollection * CTFontCollectionRef;
+#else
+typedef const struct CT_BRIDGED_TYPE(NSFontCollection) __CTFontCollection * CTFontCollectionRef;
+#endif
 
 /*!
     @typedef    CTMutableFontCollectionRef
@@ -73,7 +77,7 @@ typedef CFComparisonResult (*CTFontCollectionSortDescriptorsCallback)(
 extern const CFStringRef kCTFontCollectionRemoveDuplicatesOption    CT_AVAILABLE(10_5, 3_2);
 
 /*!
-    @defined    kCTFontCollectionIncludeDisabledOption
+    @defined    kCTFontCollectionIncludeDisabledFontsOption
     @abstract   Option key to include disabled fonts in the matching results.
     @discussion Specify this option key in the options dictionary with a non-zero value to enable matching of disabled fonts. You can pass font descriptors specifying disabled fonts to CTFontManagerEnableFontDescriptors, but you cannot use such a font descriptor to query font attributes from the system database or create a CTFontRef.
 */
@@ -304,7 +308,7 @@ typedef uint32_t CTFontCollectionCopyOptions;
     @param      options
                 Options to alter the return value.
 
-    @result     This function returns a retained reference to a CFArray, or NULL on error. The caller is responsible for releasing the array. The array contains one value for each descriptor, in the same order as the results from CTFontCollectionCreateMatchingDescriptors. When the kCTFontCollectionCopyUnique is set, duplicate values will be removed. When kCTFontCollectionCopyStandardSort is set, the values will be sorted in standard UI order.
+    @result     This function returns a retained reference to a CFArray, or NULL on error. The caller is responsible for releasing the array. The array contains one value for each descriptor, in the same order as the results from CTFontCollectionCreateMatchingFontDescriptors. When the kCTFontCollectionCopyUnique is set, duplicate values will be removed. When kCTFontCollectionCopyStandardSort is set, the values will be sorted in standard UI order.
  */
 CFArrayRef CTFontCollectionCopyFontAttribute(
     CTFontCollectionRef         collection,
@@ -324,7 +328,7 @@ CFArrayRef CTFontCollectionCopyFontAttribute(
     @param      options
                 Options to alter the return value.
 
-    @result     This function returns a retained reference to a CFArray, or NULL on error. The caller is responsible for releasing the array. The array contains one value for each descriptor, in the same order as the results from CTFontCollectionCreateMatchingDescriptors. When the kCTFontCollectionCopyUnique is set, duplicate values will be removed. When kCTFontCollectionCopyStandardSort is set, the values will be sorted in standard UI order.
+    @result     This function returns a retained reference to a CFArray, or NULL on error. The caller is responsible for releasing the array. The array contains one value for each descriptor, in the same order as the results from CTFontCollectionCreateMatchingFontDescriptors. When the kCTFontCollectionCopyUnique is set, duplicate values will be removed. When kCTFontCollectionCopyStandardSort is set, the values will be sorted in standard UI order.
  */
 CFArrayRef CTFontCollectionCopyFontAttributes(
     CTFontCollectionRef         collection,

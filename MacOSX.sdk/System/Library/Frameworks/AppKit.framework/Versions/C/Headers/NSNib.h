@@ -1,7 +1,7 @@
 /*
 	NSNib.h
 	Application Kit
-	Copyright (c) 2003-2013, Apple Inc.
+	Copyright (c) 2003-2014, Apple Inc.
 	All rights reserved.
 
 NSNib serves as a wrapper around a single InterfaceBuilder nib.  When an NSNib instance is created from a nib file, all of the data needed to instantiate the nib (the object graph as well as images and sounds that might be in the nib bundle) are read from the disk, however the nib is not instantiated until you call one of the instantiation methods.
@@ -28,7 +28,8 @@ As are all NSObjects, instantiated nib objects are allocated in a memory zone (N
     struct _NSNibFlags {
         unsigned int _isKeyed:1;
         unsigned int _inheritsDecodeTimeBundle:1;
-        unsigned int _reserved:30;
+        unsigned int _inheritsDecodeTimePath:1;
+        unsigned int _reserved:29;
     } _flags;
     NSString *_path;
     id reserved2;
@@ -40,12 +41,12 @@ As are all NSObjects, instantiated nib objects are allocated in a memory zone (N
 // The resulting bundle is used for locating resources such as images and localized
 // strings.
 //
-- (id)initWithNibNamed:(NSString *)nibName bundle:(NSBundle *)bundle;
+- (instancetype)initWithNibNamed:(NSString *)nibName bundle:(NSBundle *)bundle;
 
 // Initializes an instance with nib data and specified bundle for locating resources
 // such as images and localized strings. If bundle is nil, the main bundle is assumed.
 // 
-- (id)initWithNibData:(NSData *)nibData bundle:(NSBundle *)bundle NS_AVAILABLE_MAC(10_8);
+- (instancetype)initWithNibData:(NSData *)nibData bundle:(NSBundle *)bundle NS_AVAILABLE_MAC(10_8);
 
 // Instantiates objects in the nib file with the specified owner.
 // Upon success, the method returns YES and the optional out-parameter topLevelObjects is

@@ -1,6 +1,6 @@
 /*	
     AMAction.h
-    Copyright (C) 2004-2007 Apple Inc. All rights reserved.    
+    Copyright (C) 2004-2007, 2014 Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -13,14 +13,13 @@
 // AMAction
 // =======
 
-enum {
+
+typedef NS_ENUM(NSUInteger, AMLogLevel) {
 	AMLogLevelDebug = 0, 
 	AMLogLevelInfo = 1, 
 	AMLogLevelWarn = 2, 
 	AMLogLevelError = 3
 };
-
-typedef NSUInteger AMLogLevel;
 
 @interface AMAction : NSObject 
 {
@@ -45,26 +44,23 @@ typedef NSUInteger AMLogLevel;
 }
 
 // Construction
-- (id)initWithDefinition:(NSDictionary *)dict fromArchive:(BOOL)archived;
-- (id)initWithContentsOfURL:(NSURL *)fileURL error:(NSError **)outError AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (instancetype)initWithDefinition:(NSDictionary *)dict fromArchive:(BOOL)archived;
+- (instancetype)initWithContentsOfURL:(NSURL *)fileURL error:(NSError **)outError AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 // Accessors
 #ifndef __LP64__
 - (NSMutableDictionary *)definition AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED;
 #endif
 
-- (NSString *)name AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (BOOL)ignoresInput AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+@property (readonly, strong) NSString *name AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+@property (readonly) BOOL ignoresInput AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 // The selected[Input, Output]Type must be a UTI in the action's Info.plist.  Set these to nil to restore default behavior.
-- (NSString *)selectedInputType AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-- (void)setSelectedInputType:(NSString *)inputType AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-- (NSString *)selectedOutputType AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-- (void)setSelectedOutputType:(NSString *)outputType AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+@property (strong) NSString *selectedInputType AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+@property (strong) NSString *selectedOutputType AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 // Values from 0 to 1 are used to show or determinate progress
-- (CGFloat)progressValue AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-- (void)setProgressValue:(CGFloat)value AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+@property CGFloat progressValue AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 // Operations
 - (id)runWithInput:(id)input fromAction:(AMAction *)anAction error:(NSDictionary **)errorInfo AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED;
@@ -76,8 +72,7 @@ typedef NSUInteger AMLogLevel;
 - (void)didFinishRunningWithError:(NSDictionary *)errorInfo AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED;
 - (void)finishRunningWithError:(NSError *)error AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-- (id)output AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (void)setOutput:(id)theOutput AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+@property (strong) id output AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 - (void)stop;
 - (void)reset;
@@ -92,6 +87,6 @@ typedef NSUInteger AMLogLevel;
 
 - (void)logMessageWithLevel:(AMLogLevel)level format:(NSString *)format, ... NS_FORMAT_FUNCTION (2,3) AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-- (BOOL)isStopped;
+@property (getter=isStopped, readonly) BOOL stopped;
 
 @end

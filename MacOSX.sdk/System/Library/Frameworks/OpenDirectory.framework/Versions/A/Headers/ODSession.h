@@ -70,7 +70,7 @@ FOUNDATION_EXPORT NSString *const ODSessionProxyPassword NS_AVAILABLE(10_6, NA);
     @discussion Returns a shared instance of a local ODSession.  This can be used for most situations unless
                 more control is needed over the session.
 */
-+ (id)defaultSession NS_AVAILABLE(10_6, NA);
++ (ODSession *)defaultSession NS_AVAILABLE(10_6, NA);
 
 /*!
     @method     sessionWithOptions:error:
@@ -86,7 +86,7 @@ FOUNDATION_EXPORT NSString *const ODSessionProxyPassword NS_AVAILABLE(10_6, NA);
                     ODSessionProxyUsername       NSString(username)
                     ODSessionProxyPassword       NSString(password)
 */
-+ (id)sessionWithOptions:(NSDictionary *)inOptions error:(NSError **)outError NS_AVAILABLE(10_6, NA);
++ (instancetype)sessionWithOptions:(NSDictionary *)inOptions error:(NSError **)outError NS_AVAILABLE(10_6, NA);
 
 /*!
     @method     initWithOptions:error:
@@ -102,7 +102,7 @@ FOUNDATION_EXPORT NSString *const ODSessionProxyPassword NS_AVAILABLE(10_6, NA);
                     ODSessionProxyUsername       NSString(username)
                     ODSessionProxyPassword       NSString(password)
 */
-- (id)initWithOptions:(NSDictionary *)inOptions error:(NSError **)outError NS_AVAILABLE(10_6, NA);
+- (instancetype)initWithOptions:(NSDictionary *)inOptions error:(NSError **)outError NS_AVAILABLE(10_6, NA);
 
 /*!
     @method     nodeNamesAndReturnError:
@@ -123,7 +123,7 @@ FOUNDATION_EXPORT NSString *const ODSessionProxyPassword NS_AVAILABLE(10_6, NA);
  * have pre-configured modules and/or mappings.  Useful for re-using existing configurations
  * that may change with operating system without changing the actual configuration.
  */
-- (NSArray *) configurationTemplateNames NS_AVAILABLE_MAC(10_9);
+@property (readonly, copy) NSArray *configurationTemplateNames NS_AVAILABLE_MAC(10_9);
 
 /*!
  * @method mappingTemplateNames
@@ -135,7 +135,7 @@ FOUNDATION_EXPORT NSString *const ODSessionProxyPassword NS_AVAILABLE(10_6, NA);
  * Returns a list names as NSStrings for all available mapping templates.  Mapping templates have pre-configured
  * record/attribute mappings.  Useful if a configuration uses a common layout of mappings for a type of server.
  */
-- (NSArray *) mappingTemplateNames NS_AVAILABLE_MAC(10_9);
+@property (readonly, copy) NSArray *mappingTemplateNames NS_AVAILABLE_MAC(10_9);
 
 /*!
  * @method configurationAuthorizationAllowingUserInteraction:

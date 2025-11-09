@@ -42,6 +42,8 @@ extern "C" {
 
 #pragma pack(push, 4)
 
+CF_IMPLICIT_BRIDGING_ENABLED
+
 /*!
 	@typedef	CMTimeRange
 	@abstract	A time range represented as two CMTime structures.
@@ -309,6 +311,8 @@ CM_EXPORT CFStringRef CMTimeRangeCopyDescription(
 CM_EXPORT void CMTimeRangeShow(
 				CMTimeRange range)				/*! @param range			The CMTimeRange to show. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #pragma pack(pop)
 

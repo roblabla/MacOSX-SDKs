@@ -1,6 +1,6 @@
 .\" see 'man mdoc' for syntax examples
 .\" this should go in /usr/share/man/man1/
-.Dd March 04, 2013
+.Dd July 31, 2014
 .Dt profiles 1
 .Os MacOSX
 .Sh NAME
@@ -10,7 +10,7 @@
 .Nm
 .Oo
 .Op Fl I \*(Ba R \*(Ba i
-.Op Fl F Ar file_path_to_profile
+.Op Fl F Ar file_path_to_profile \*(Ba -
 .Oc
 .Oo
 .Op Fl L
@@ -21,8 +21,9 @@
 .Op Fl p Ar profile_id
 .Op Fl u Ar uuid
 .Op Fl o Ar output_file_path
+.Op Fl Y Ar shortname
 .Oc
-.Op Fl PHDdCchfvxVz
+.Op Fl PHDdCchfvxVzY
 .Pp
 .Sh DESCRIPTION          \" Section Header - required - don't modify
 .Nm
@@ -42,7 +43,7 @@ Remove a provisioning profile given a identifier and uuid.
 .It Fl L
 List configuration profile information for a particular user, or the current user if no Username was specified.
 .It Fl F
-Specify the file path to the profile file.
+Specify the file path to the profile file.   Use '-' as the file path to input the configuration profile (not provisioning profile) XML plist via stdin.
 .It Fl U
 Specify the short username.   Since you can only install profiles for the current user, this is only useful for validation.
 .It Fl H
@@ -60,7 +61,7 @@ A uuid identifier used to locate the provisioning profile.  The uuid must be in 
 .It Fl z
 The profile removal password.   If not specified and the profile requires a removal password, you will be prompted.
 .It Fl o
-The output file path for profile information (-L, -P, -C, -c) as a plist file.   The path argument must be specified to use this option, Use 'stdout' to send this informaton to the console.  File output will be written as an XML plist file.  The toplevel key will contain the user name, or _computerLevel for device or provisioning profile information.
+The output file path for profile information (-L, -P, -C, -c) as a plist file.   The path argument must be specified to use this option, Use 'stdout' to send this informaton to the console.  File output will be written as an XML plist file, or you can use 'stdout-xml' to write XML to the console.  The toplevel key will contain the user name, or _computerLevel for device or provisioning profile information.
 .It Fl h
 Displays help information.
 .It Fl v
@@ -75,6 +76,8 @@ Deletes all existing configuration profiles.  It will not update any existing ma
 Deletes all existing provisioning profiles. (Requires root privileges)
 .It Fl s
 Sets profile for startup. (Requires root privileges)
+.It Fl Y
+Specify the shortname of a local user that will be enrolled with MDM if the configuration profile being installed contains a MDM payload. Will only be used if the profile is being installed as root.
 .El
 .Pp
 .Sh EXAMPLES
@@ -100,6 +103,8 @@ Removes all configuration profile inforamtion on the system.  (see important cav
 Removes any installed profiles with the identifier com.example.profile1 in the current user and using a removal password of 'pass'.
 .It "profiles -s -F /startupprofile.mobileconfig -f"
 Sets up the profile as a startup profile to be triggered at the next system startup time.   If the profile can't be installed, it will try again at next startup time.
+.It "profiles -I -F - < /configprofile.mobileconfig"
+Installs the configuration profile read in from stdin.   The stdin data must be a fully formed XML plist containing the configuration profile information.
 .El                      \" Ends the list
 .Pp
 .Sh CAVEATS

@@ -1,7 +1,7 @@
 /*
 	NSTokenField.h
 	Application Kit
-	Copyright (c) 2004-2013, Apple Inc.
+	Copyright (c) 2004-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -30,15 +30,12 @@
 
 /* Sets the default token style used for each new token.  However, if the delegate implements tokenField:styleForRepresentedObject:, that return value will be used instead.
 */
-- (void)setTokenStyle: (NSTokenStyle) style;
-- (NSTokenStyle)tokenStyle;
+@property NSTokenStyle tokenStyle;
 
-- (void)setCompletionDelay: (NSTimeInterval) delay;
-- (NSTimeInterval)completionDelay;
+@property NSTimeInterval completionDelay;
 + (NSTimeInterval)defaultCompletionDelay;
 
-- (void)setTokenizingCharacterSet:(NSCharacterSet *)characterSet;
-- (NSCharacterSet *)tokenizingCharacterSet;
+@property (copy) NSCharacterSet *tokenizingCharacterSet;
 + (NSCharacterSet *)defaultTokenizingCharacterSet;
 
 @end

@@ -36,7 +36,7 @@ EVENTKIT_CLASS_AVAILABLE(10_8, 4_0)
                 effectively read-only after that. That is, you can create a calendar, 
                 but you cannot move it to another source.
 */
-@property(nonatomic, retain) EKSource        *source;
+@property(nonatomic, strong) EKSource        *source;
 
 /*!
     @property   calendarIdentifier

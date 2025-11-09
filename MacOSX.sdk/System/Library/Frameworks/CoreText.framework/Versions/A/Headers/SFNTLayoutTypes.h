@@ -2,7 +2,7 @@
  *  SFNTLayoutTypes.h
  *  CoreText
  *
- *  Copyright 1994-2012 Apple Inc. All rights reserved.
+ *  Copyright 1994-2015 Apple Inc. All rights reserved.
  *
  */
 
@@ -801,6 +801,11 @@ struct STXEntryTwo {
 };
 typedef struct STXEntryTwo              STXEntryTwo;
 /* --------------------------------------------------------------------------- */
+/* GENERAL FORMATS FOR STATE TABLES to be used with 'kerx' tables -- prefix "STK" */
+enum {
+  kSTKCrossStreamReset          = 0x2000
+};
+/* --------------------------------------------------------------------------- */
 /* FORMATS FOR TABLE: 'lcar' */
 /* CONSTANTS */
 enum {
@@ -1114,6 +1119,7 @@ enum {
   kMORXCoverVertical            = (int)0x80000000,
   kMORXCoverDescending          = 0x40000000,
   kMORXCoverIgnoreVertical      = 0x20000000,
+  kMORXCoverLogicalOrder        = 0x10000000,
   kMORXCoverTypeMask            = 0x000000FF
 };
 
@@ -1193,18 +1199,18 @@ enum {
   kPROPRDirectionClass          = 1,    /* Right-to-Left */
   kPROPALDirectionClass         = 2,    /* Right-to-Left Arabic Letter */
   kPROPENDirectionClass         = 3,    /* European Number */
-  kPROPESDirectionClass         = 4,    /* European Number Seperator */
+  kPROPESDirectionClass         = 4,    /* European Number Separator */
   kPROPETDirectionClass         = 5,    /* European Number Terminator */
   kPROPANDirectionClass         = 6,    /* Arabic Number */
-  kPROPCSDirectionClass         = 7,    /* Common Number Seperator */
-  kPROPPSDirectionClass         = 8,    /* Paragraph Seperator (also referred to as Block Separator) */
-  kPROPSDirectionClass          = 9,    /* Segment Seperator */
+  kPROPCSDirectionClass         = 7,    /* Common Number Separator */
+  kPROPPSDirectionClass         = 8,    /* Paragraph Separator (also referred to as Block Separator) */
+  kPROPSDirectionClass          = 9,    /* Segment Separator */
   kPROPWSDirectionClass         = 10,   /* Whitespace */
   kPROPONDirectionClass         = 11,   /* Other Neutral */
   kPROPSENDirectionClass        = 12,   /* Special European Number (not a Unicode class) */
-  kPROPLREDirectionClass        = 13,   /* Left-to-Right Embeding */
+  kPROPLREDirectionClass        = 13,   /* Left-to-Right Embedding */
   kPROPLRODirectionClass        = 14,   /* Left-to-Right Override */
-  kPROPRLEDirectionClass        = 15,   /* Right-to-Left Embeding */
+  kPROPRLEDirectionClass        = 15,   /* Right-to-Left Embedding */
   kPROPRLODirectionClass        = 16,   /* Right-to-Left Override */
   kPROPPDFDirectionClass        = 17,   /* Pop Directional Format */
   kPROPNSMDirectionClass        = 18,   /* Non-Spacing Mark */
@@ -1283,7 +1289,7 @@ enum {
   kKERNOrderedList              = 0,    /* ordered list of kerning pairs */
   kKERNStateTable               = 1,    /* state table for n-way contextual kerning */
   kKERNSimpleArray              = 2,    /* simple n X m array of kerning values */
-  kKERNIndexArray               = 3     /* modifed version of SimpleArray */
+  kKERNIndexArray               = 3     /* modified version of SimpleArray */
 };
 
 /* Message Type Flags */
@@ -1379,7 +1385,7 @@ typedef KernOffsetTable *               KernOffsetTablePtr;
 /*
     KernSimpleArray:
     
-    The array is an nXm array of kenring values. Each row in the array
+    The array is an nXm array of kerning values. Each row in the array
     represents one left-hand glyph, and each column one right-hand glyph.
     The zeroth row and column always represent glyphs that are out of bounds
     and will always contain zero.
@@ -1450,7 +1456,8 @@ enum {
   kKERXResetCrossStream         = 0x8000, /* this value in a cross-stream table means reset to zero */
   kKERXCrossStream              = 0x40000000, /* set if this table contains cross-stream kerning values */
   kKERXVariation                = 0x20000000, /* set if this table contains variation kerning values */
-  kKERXUnusedBits               = 0x1FFFFF00, /* UNUSED, MUST BE ZERO */
+  kKERXDescending               = 0x10000000,
+  kKERXUnusedBits               = 0x0FFFFF00, /* UNUSED, MUST BE ZERO */
   kKERXFormatMask               = 0x000000FF /* format of this subtable */
 };
 
@@ -1458,7 +1465,7 @@ enum {
   kKERXOrderedList              = 0,    /* ordered list of kerning pairs */
   kKERXStateTable               = 1,    /* state table for n-way contextual kerning */
   kKERXSimpleArray              = 2,    /* simple n X m array of kerning values */
-  kKERXIndexArray               = 3,    /* modifed version of SimpleArray */
+  kKERXIndexArray               = 3,    /* modified version of SimpleArray */
   kKERXControlPoint             = 4     /* state table for control point positioning */
 };
 
@@ -1572,7 +1579,7 @@ typedef struct KerxCoordinateAction     KerxCoordinateAction;
 /*
  KerxSimpleArray:
  
- The array is an nXm array of kenring values. Each row in the array
+ The array is an nXm array of kerning values. Each row in the array
  represents one left-hand glyph, and each column one right-hand glyph.
  The zeroth row and column always represent glyphs that are out of bounds
  and will always contain zero.
@@ -1616,7 +1623,7 @@ typedef union KerxFormatSpecificHeader  KerxFormatSpecificHeader;
 /* Overall Subtable header format */
 struct KerxSubtableHeader {
   UInt32              length;                 /* length in bytes (including this header) */
-  KerxSubtableCoverage  stInfo;               /* subtable converage */
+  KerxSubtableCoverage  stInfo;               /* subtable coverage */
   UInt32              tupleIndex;             /* tuple index for variation subtables */
   KerxFormatSpecificHeader  fsHeader;         /* format specific sub-header */
 };

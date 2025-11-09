@@ -143,11 +143,12 @@
 #include <sys/_types.h>
 
 #include <machine/_mcontext.h>
+
+
 #include <sys/_types/_sigaltstack.h>
 #include <sys/_types/_ucontext.h>
 
 #include <sys/_types/_pid_t.h>
-#include <sys/_types/_pthread_attr_t.h>
 #include <sys/_types/_sigset_t.h>
 #include <sys/_types/_size_t.h>
 #include <sys/_types/_uid_t.h>
@@ -162,13 +163,6 @@ union sigval {
 #define	SIGEV_SIGNAL	1	/* aio - completion notification */
 #define	SIGEV_THREAD	3	/* [NOTIMP] [RTS] call notification function */
 
-struct sigevent {
-	int				sigev_notify;				/* Notification type */
-	int				sigev_signo;				/* Signal number */
-	union sigval	sigev_value;				/* Signal value */
-	void			(*sigev_notify_function)(union sigval);	  /* Notification function */
-	pthread_attr_t	*sigev_notify_attributes;	/* Notification attributes */
-};
 
 
 typedef struct __siginfo {

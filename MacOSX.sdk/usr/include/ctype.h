@@ -138,14 +138,14 @@ isascii(int _c)
 }
 
 #ifdef USE_ASCII
-__DARWIN_CTYPE_inline int     
+__DARWIN_CTYPE_inline int
 __maskrune(__darwin_ct_rune_t _c, unsigned long _f)
 {
-	return _DefaultRuneLocale.__runetype[_c & 0xff] & _f;
+	return (int)_DefaultRuneLocale.__runetype[_c & 0xff] & (__uint32_t)_f;
 }
 #else /* !USE_ASCII */
 __BEGIN_DECLS
-int             	__maskrune(__darwin_ct_rune_t, unsigned long);   
+int             	__maskrune(__darwin_ct_rune_t, unsigned long);
 __END_DECLS
 #endif /* USE_ASCII */
 

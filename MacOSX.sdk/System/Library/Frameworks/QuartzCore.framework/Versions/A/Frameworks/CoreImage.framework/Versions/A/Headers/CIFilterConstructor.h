@@ -1,6 +1,6 @@
 /* CoreImage - CIFilter.h
  
- Copyright (c) 2010 Apple Computer, Inc.
+ Copyright (c) 2010 Apple, Inc.
  All rights reserved. */
 
 

@@ -64,12 +64,11 @@ AVF_EXPORT NSString *const AVPlayerItemFailedToPlayToEndTimeErrorKey     NS_AVAI
 	Indicates that the player item can no longer be played because of an error. The error is described by the value of
 	the player item's error property.
  */
-enum {
+typedef NS_ENUM(NSInteger, AVPlayerItemStatus) {
 	AVPlayerItemStatusUnknown,
 	AVPlayerItemStatusReadyToPlay,
 	AVPlayerItemStatusFailed
 };
-typedef NSInteger AVPlayerItemStatus;
 
 @class AVPlayer;
 @class AVAsset;
@@ -114,7 +113,6 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  				An NSArray of NSStrings, each representing a property key defined by AVAsset. See AVAsset.h for property keys, e.g. duration.
  @result		An instance of AVPlayerItem.
  @discussion	The value of each key in automaticallyLoadedAssetKeys will be automatically be loaded by the underlying AVAsset before the receiver achieves the status AVPlayerItemStatusReadyToPlay; i.e. when the item is ready to play, the value of -[[AVPlayerItem asset] statusOfValueForKey:error:] will be one of the terminal status values greater than AVKeyValueStatusLoading.
- 				Exceptions: the asset keys @"playable" and @"compatibleWithSavedPhotosAlbum" are not eligible for automatic loading by AVPlayerItem. You must use -[AVAsset loadValuesAsynchronouslyForKeys:completionHandler:] to load the values of those keys asynchronously.
  */
 + (AVPlayerItem *)playerItemWithAsset:(AVAsset *)asset automaticallyLoadedAssetKeys:(NSArray *)automaticallyLoadedAssetKeys NS_AVAILABLE(10_9, 7_0);
 
@@ -125,7 +123,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  @result		An instance of AVPlayerItem
  @discussion	Equivalent to -initWithAsset:, passing [AVAsset assetWithURL:URL] as the value of asset.
  */
-- (id)initWithURL:(NSURL *)URL;
+- (instancetype)initWithURL:(NSURL *)URL;
 
 /*!
  @method		initWithAsset:
@@ -134,7 +132,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  @result		An instance of AVPlayerItem
  @discussion	Equivalent to -initWithAsset:automaticallyLoadedAssetKeys:, passing @[ @"duration" ] as the value of automaticallyLoadedAssetKeys.
  */
-- (id)initWithAsset:(AVAsset *)asset;
+- (instancetype)initWithAsset:(AVAsset *)asset;
 
 /*!
  @method		initWithAsset:automaticallyLoadedAssetKeys:
@@ -145,9 +143,8 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  				An NSArray of NSStrings, each representing a property key defined by AVAsset. See AVAsset.h for property keys, e.g. duration.
  @result		An instance of AVPlayerItem
  @discussion	The value of each key in automaticallyLoadedAssetKeys will be automatically be loaded by the underlying AVAsset before the receiver achieves the status AVPlayerItemStatusReadyToPlay; i.e. when the item is ready to play, the value of -[[AVPlayerItem asset] statusOfValueForKey:error:] will be one of the terminal status values greater than AVKeyValueStatusLoading.
- 				Exceptions: the asset keys @"playable" and @"compatibleWithSavedPhotosAlbum" are not eligible for automatic loading by AVPlayerItem. You must use -[AVAsset loadValuesAsynchronouslyForKeys:completionHandler:] to load the values of those keys asynchronously.
  */
-- (id)initWithAsset:(AVAsset *)asset automaticallyLoadedAssetKeys:(NSArray *)automaticallyLoadedAssetKeys NS_AVAILABLE(10_9, 7_0);
+- (instancetype)initWithAsset:(AVAsset *)asset automaticallyLoadedAssetKeys:(NSArray *)automaticallyLoadedAssetKeys NS_AVAILABLE(10_9, 7_0);
 
 /*!
  @property status
@@ -250,7 +247,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 @interface AVPlayerItem (AVPlayerItemRateAndSteppingSupport)
 
 /* For releases of OS X prior to 10.9 and releases of iOS prior to 7.0, indicates whether the item can be played at rates greater than 1.0.
-   Starting with OS X 9.0 and iOS 7.0, all AVPlayerItems with status AVPlayerItemReadyToPlay can be played at rates between 1.0 and 2.0, inclusive, even if canPlayFastForward is NO; for those releases canPlayFastForward indicates whether the item can be played at rates greater than 2.0.
+   Starting with OS X 10.9 and iOS 7.0, all AVPlayerItems with status AVPlayerItemReadyToPlay can be played at rates between 1.0 and 2.0, inclusive, even if canPlayFastForward is NO; for those releases canPlayFastForward indicates whether the item can be played at rates greater than 2.0.
 */
 @property (nonatomic, readonly) BOOL canPlayFastForward NS_AVAILABLE(10_8, 5_0);
 
@@ -481,6 +478,10 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 /*!
  @property textStyleRules
  @abstract An array of AVTextStyleRules representing text styling that can be applied to subtitles and other legible media.
+ @discussion
+	The styling information contained in each AVTextStyleRule object in the array is used only when no equivalent styling information is provided by the media resource being played.  For example, if the text style rules specify Courier font but the media resource specifies Helvetica font, the text will be drawn using Helvetica font.
+ 
+	This property has an effect only for tracks with media subtype kCMSubtitleFormatType_WebVTT.
 */
 @property (nonatomic, copy) NSArray *textStyleRules NS_AVAILABLE(10_9, 6_0);
 
@@ -492,8 +493,9 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 /*!
  @property	audioTimePitchAlgorithm
  @abstract	Indicates the processing algorithm used to manage audio pitch at varying rates and for scaled audio edits.
- 			Constants for various time pitch algorithms, e.g. AVAudioTimePitchSpectral, are defined in AVAudioProcessingSettings.h.
- 			The default value on iOS is AVAudioTimePitchAlgorithmLowQualityZeroLatency and on OS X is AVAudioTimePitchAlgorithmSpectral.
+ @discussion
+   Constants for various time pitch algorithms, e.g. AVAudioTimePitchSpectral, are defined in AVAudioProcessingSettings.h.
+   The default value on iOS is AVAudioTimePitchAlgorithmLowQualityZeroLatency and on OS X is AVAudioTimePitchAlgorithmSpectral.
 */
 @property (nonatomic, copy) NSString *audioTimePitchAlgorithm NS_AVAILABLE(10_9, 7_0);
 
@@ -540,6 +542,22 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 
 /* indicates that playback has consumed all buffered media and that playback will stall or end */
 @property (nonatomic, readonly, getter=isPlaybackBufferEmpty) BOOL playbackBufferEmpty;
+
+@end
+
+
+@interface AVPlayerItem (AVPlayerItemBitRateControl) 
+
+/*!
+ @property preferredPeakBitRate
+ @abstract Indicates the desired limit of network bandwidth consumption for this item.
+
+ @discussion
+	Set preferredPeakBitRate to non-zero to indicate that the player should attempt to limit item playback to that bit rate, expressed in bits per second.
+
+	If network bandwidth consumption cannot be lowered to meet the preferredPeakBitRate, it will be reduced as much as possible while continuing to play the item.
+*/
+@property (nonatomic) double preferredPeakBitRate NS_AVAILABLE(10_10, 8_0);
 
 @end
 
@@ -673,13 +691,12 @@ NS_CLASS_AVAILABLE(10_7, 4_3)
 - (NSData *)extendedLogData;
 
 /*!
- @method		extendedLogDataStringEncoding
+ @property		extendedLogDataStringEncoding
  @abstract		Returns the NSStringEncoding for extendedLogData, see above.
  @discussion	A string suitable for console output is obtainable by: 
  				[[NSString alloc] initWithData:[myLog extendedLogData] encoding:[myLog extendedLogDataStringEncoding]]
- @result		An NSStringEncoding.
  */
- - (NSStringEncoding)extendedLogDataStringEncoding;
+ @property (nonatomic, readonly) NSStringEncoding extendedLogDataStringEncoding;
 
 /*!
  @property		events
@@ -715,13 +732,12 @@ NS_CLASS_AVAILABLE(10_7, 4_3)
 - (NSData *)extendedLogData;
 
 /*!
- @method		extendedLogDataStringEncoding
+ @property		extendedLogDataStringEncoding
  @abstract		Returns the NSStringEncoding for extendedLogData, see above.
  @discussion	A string suitable for console output is obtainable by: 
  				[[NSString alloc] initWithData:[myLog extendedLogData] encoding:[myLog extendedLogDataStringEncoding]]
- @result		An NSStringEncoding.
  */
- - (NSStringEncoding)extendedLogDataStringEncoding;
+ @property (nonatomic, readonly) NSStringEncoding extendedLogDataStringEncoding;
 
 /*!
  @property		events

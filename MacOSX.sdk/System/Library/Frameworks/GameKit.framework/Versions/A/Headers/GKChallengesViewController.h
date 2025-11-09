@@ -2,35 +2,26 @@
  *  GKChallengesViewController.h
  *  GameKit
  *
- *  Copyright 2010 Apple Inc. All rights reserved.
+ *  Copyright 2010-2013 Apple Inc. All rights reserved.
  */
 
-#if TARGET_OS_IPHONE
-#import <UIKit/UIKit.h>
+#if !TARGET_OS_IPHONE
+
 #import <GameKit/GKGameCenterViewController.h>
-#else
-#import <AppKit/AppKit.h>
-#endif
 
 @protocol GKChallengesViewControllerDelegate;
 
 // View controller that provides the standard user interface for challenges. Present modally from the top view controller.
-#if TARGET_OS_IPHONE
-NS_CLASS_AVAILABLE(NA, 4_1)
-@interface GKChallengesViewController : GKGameCenterViewController
-@end
-#else
-#include <GameKit/GKDialogController.h>
-NS_CLASS_AVAILABLE(10_8, NA)
+#import <GameKit/GKDialogController.h>
+NS_DEPRECATED_MAC(10_8, 10_10)
 @interface GKChallengesViewController : NSViewController <GKViewController> {
 	id _internal1,_internal2,_internal3,_internal4;
 }
-@end
-#endif
-
-@interface GKChallengesViewController ()
 @property (assign, NS_NONATOMIC_IOSONLY) id<GKChallengesViewControllerDelegate> challengeDelegate;
 @end
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 
 // Optional delegate
 @protocol GKChallengesViewControllerDelegate
@@ -38,3 +29,7 @@ NS_CLASS_AVAILABLE(10_8, NA)
 // The challenge view has finished
 - (void)challengesViewControllerDidFinish:(GKChallengesViewController *)viewController;
 @end
+#pragma clang diagnostic pop
+
+#endif
+

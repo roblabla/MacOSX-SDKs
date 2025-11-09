@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-    Copyright 2010-2013 Apple Inc. All rights reserved.
+    Copyright 2010-2014 Apple Inc. All rights reserved.
 
 */
 
@@ -50,9 +50,9 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 	Indicates whether or not the data in buffers gets copied before being vended to the client.
  
  @discussion
-	When this property is YES, the AVAssetReaderOutput will always vend a buffer with copied data to the client.  Data in such buffers can be freely modified by the client. When this property is NO, the buffers vended to the client may not be copied.  Such buffers may still be referenced by other entities. The result of modifying a buffer whose data hasn't been copied is undefined.  Requesting buffers whose data hasn't been copied when possible can lead to performance improvements.
+	When the value of this property is YES, the AVAssetReaderOutput will always vend a buffer with copied data to the client.  Data in such buffers can be freely modified by the client. When the value of this property is NO, the buffers vended to the client may not be copied.  Such buffers may still be referenced by other entities. The result of modifying a buffer whose data hasn't been copied is undefined.  Requesting buffers whose data hasn't been copied when possible can lead to performance improvements.
  
-	Default is YES
+	The default value is YES.
  */
 @property (nonatomic) BOOL alwaysCopiesSampleData NS_AVAILABLE(10_8, 5_0);
 
@@ -67,7 +67,61 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  @discussion
 	The client is responsible for calling CFRelease on the returned CMSampleBuffer object when finished with it. This method will return NULL if there are no more sample buffers available for the receiver within the time range specified by its AVAssetReader's timeRange property, or if there is an error that prevents the AVAssetReader from reading more media data. When this method returns NULL, clients should check the value of the associated AVAssetReader's status property to determine why no more samples could be read.
  */
-- (CMSampleBufferRef)copyNextSampleBuffer;
+- (CMSampleBufferRef)copyNextSampleBuffer CF_RETURNS_RETAINED;
+
+@end
+
+
+@interface AVAssetReaderOutput (AVAssetReaderOutputRandomAccess)
+
+/*!
+ @property supportsRandomAccess
+ @abstract
+	Indicates whether the asset reader output supports reconfiguration of the time ranges to read.
+ 
+ @discussion
+	When the value of this property is YES, the time ranges read by the asset reader output can be reconfigured during reading using the -resetForReadingTimeRanges: method.  This also prevents the attached AVAssetReader from progressing to AVAssetReaderStatusCompleted until -markConfigurationAsFinal has been invoked.
+ 
+	The default value is NO, which means that the asset reader output may not be reconfigured once reading has begin.  When the value of this property is NO, AVAssetReader may be able to read media data more efficiently, particularly when multiple asset reader outputs are attached.
+ 
+	This property may not be set after -startReading has been called on the attached asset reader.
+ */
+@property (nonatomic) BOOL supportsRandomAccess NS_AVAILABLE(10_10, 8_0);
+
+/*!
+ @method resetForReadingTimeRanges:
+ @abstract
+	Starts reading over with a new set of time ranges.
+ 
+ @param timeRanges
+	An NSArray of NSValue objects, each representing a single CMTimeRange structure
+ 
+ @discussion
+	This method may only be used if supportsRandomAccess has been set to YES and may not be called after -markConfigurationAsFinal has been invoked.
+ 
+	This method is often used in conjunction with AVAssetWriter multi-pass (see AVAssetWriterInput category AVAssetWriterInputMultiPass).  In this usage, the caller will invoke -copyNextSampleBuffer until that method returns NULL and then ask the AVAssetWriterInput for a set of time ranges from which it thinks media data should be re-encoded.  These time ranges are then given to this method to set up the asset reader output for the next pass.
+ 
+	The time ranges set here override the time range set on AVAssetReader.timeRange.  Just as with that property, for each time range in the array the intersection of that time range and CMTimeRangeMake(kCMTimeZero, asset.duration) will take effect.  If the start times of each time range in the array are not strictly increasing or if two or more time ranges in the array overlap, an NSInvalidArgumentException will be raised.  It is an error to include a time range with a non-numeric start time or duration (see CMTIME_IS_NUMERIC), unless the duration is kCMTimePositiveInfinity.
+ 
+	If this method is invoked after the status of the attached AVAssetReader has become AVAssetReaderStatusFailed or AVAssetReaderStatusCancelled, no change in status will occur and the result of the next call to -copyNextSampleBuffer will be NULL.
+ 
+	If this method is invoked before all media data has been read (i.e. -copyNextSampleBuffer has not yet returned NULL), an exception will be thrown.  This method may not be called before -startReading has been invoked on the attached asset reader.
+ */
+- (void)resetForReadingTimeRanges:(NSArray *)timeRanges NS_AVAILABLE(10_10, 8_0);
+
+/*!
+ @method markConfigurationAsFinal
+ @abstract
+	Informs the receiver that no more reconfiguration of time ranges is necessary and allows the attached AVAssetReader to advance to AVAssetReaderStatusCompleted.
+ 
+ @discussion
+	When the value of supportsRandomAccess is YES, the attached asset reader will not advance to AVAssetReaderStatusCompleted until this method is called.
+ 
+	When the destination of media data vended by the receiver is an AVAssetWriterInput configured for multi-pass encoding, a convenient time to invoke this method is after the asset writer input indicates that no more passes will be performed.
+ 
+	Once this method has been called, further invocations of -resetForReadingTimeRanges: are disallowed.
+ */
+- (void)markConfigurationAsFinal NS_AVAILABLE(10_10, 8_0);
 
 @end
 
@@ -110,7 +164,6 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 		AVVideoCleanApertureKey
 		AVVideoPixelAspectRatioKey
 		AVVideoScalingModeKey
-		AVVideoColorPropertiesKey
 	
 	When constructing video output settings the choice of pixel format will affect the performance and quality of the decompression. For optimal performance when decompressing video the requested pixel format should be one that the decoder supports natively to avoid unnecessary conversions. Below are some recommendations:
 
@@ -122,7 +175,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 
 	ProRes 4444 encoded media can contain a mathematically lossless alpha channel. To preserve the alpha channel during decompression use a pixel format with an alpha component such as kCVPixelFormatType_4444AYpCbCr16 or kCVPixelFormatType_64ARGB. To test whether your source contains an alpha channel check that the track's format description has kCMFormatDescriptionExtension_Depth and that its value is 32.
  */
-+ (AVAssetReaderTrackOutput *)assetReaderTrackOutputWithTrack:(AVAssetTrack *)track outputSettings:(NSDictionary *)outputSettings;
++ (instancetype)assetReaderTrackOutputWithTrack:(AVAssetTrack *)track outputSettings:(NSDictionary *)outputSettings;
 
 /*!
  @method initWithTrack:outputSettings:
@@ -146,7 +199,6 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 		AVVideoCleanApertureKey
 		AVVideoPixelAspectRatioKey
 		AVVideoScalingModeKey
-		AVVideoColorPropertiesKey
 
 	When constructing video output settings the choice of pixel format will affect the performance and quality of the decompression. For optimal performance when decompressing video the requested pixel format should be one that the decoder supports natively to avoid unnecessary conversions. Below are some recommendations:
 
@@ -158,7 +210,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 
 	ProRes 4444 encoded media can contain a mathematically lossless alpha channel. To preserve the alpha channel during decompression use a pixel format with an alpha component such as kCVPixelFormatType_4444AYpCbCr16 or kCVPixelFormatType_64ARGB.  To test whether your source contains an alpha channel check that the track's format description has kCMFormatDescriptionExtension_Depth and that its value is 32.
  */
-- (id)initWithTrack:(AVAssetTrack *)track outputSettings:(NSDictionary *)outputSettings;
+- (instancetype)initWithTrack:(AVAssetTrack *)track outputSettings:(NSDictionary *)outputSettings;
 
 /*!
  @property track
@@ -229,7 +281,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 	
 	The audio settings dictionary must contain values for keys in AVAudioSettings.h (linear PCM only). A value of nil configures the output to return samples in a convenient uncompressed format, with sample rate and other properties determined according to the properties of the specified audio tracks. Initialization will fail if the audio settings cannot be used with the specified tracks.  AVSampleRateConverterAudioQualityKey is not supported.
  */
-+ (AVAssetReaderAudioMixOutput *)assetReaderAudioMixOutputWithAudioTracks:(NSArray *)audioTracks audioSettings:(NSDictionary *)audioSettings;
++ (instancetype)assetReaderAudioMixOutputWithAudioTracks:(NSArray *)audioTracks audioSettings:(NSDictionary *)audioSettings;
 
 /*!
  @method initWithAudioTracks:audioSettings:
@@ -248,7 +300,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 	
 	The audio settings dictionary must contain values for keys in AVAudioSettings.h (linear PCM only). A value of nil configures the output to return samples in a convenient uncompressed format, with sample rate and other properties determined according to the properties of the specified audio tracks. Initialization will fail if the audio settings cannot be used with the specified tracks.  AVSampleRateConverterAudioQualityKey is not supported.
  */
-- (id)initWithAudioTracks:(NSArray *)audioTracks audioSettings:(NSDictionary *)audioSettings;
+- (instancetype)initWithAudioTracks:(NSArray *)audioTracks audioSettings:(NSDictionary *)audioSettings;
 
 /*!
  @property audioTracks
@@ -336,9 +388,8 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 		AVVideoCleanApertureKey
 		AVVideoPixelAspectRatioKey
 		AVVideoScalingModeKey
-		AVVideoColorPropertiesKey
  */
-+ (AVAssetReaderVideoCompositionOutput *)assetReaderVideoCompositionOutputWithVideoTracks:(NSArray *)videoTracks videoSettings:(NSDictionary *)videoSettings;
++ (instancetype)assetReaderVideoCompositionOutputWithVideoTracks:(NSArray *)videoTracks videoSettings:(NSDictionary *)videoSettings;
 
 /*!
  @method initWithVideoTracks:videoSettings:
@@ -361,9 +412,8 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 		AVVideoCleanApertureKey
 		AVVideoPixelAspectRatioKey
 		AVVideoScalingModeKey
-		AVVideoColorPropertiesKey
  */
-- (id)initWithVideoTracks:(NSArray *)videoTracks videoSettings:(NSDictionary *)videoSettings;
+- (instancetype)initWithVideoTracks:(NSArray *)videoTracks videoSettings:(NSDictionary *)videoSettings;
 
 /*!
  @property videoTracks
@@ -406,5 +456,146 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  	This property is nil if there is no video compositor, or if the internal video compositor is in use.
  */
 @property (nonatomic, readonly) id<AVVideoCompositing>customVideoCompositor NS_AVAILABLE(10_9, 7_0);
+
+@end
+
+
+@class AVTimedMetadataGroup;
+@class AVAssetReaderOutputMetadataAdaptorInternal;
+
+/*!
+ @class AVAssetReaderOutputMetadataAdaptor
+ @abstract
+	Defines an interface for reading metadata, packaged as instances of AVTimedMetadataGroup, from a single AVAssetReaderTrackOutput object.
+ */
+
+NS_CLASS_AVAILABLE(10_10, 8_0)
+@interface AVAssetReaderOutputMetadataAdaptor : NSObject
+{
+@private
+	AVAssetReaderOutputMetadataAdaptorInternal *_internal;
+}
+
+/*!
+ @method assetReaderOutputMetadataAdaptorWithAssetReaderTrackOutput:
+ @abstract
+	Creates a new timed metadata group adaptor for retrieving timed metadata group objects from an asset reader output.
+
+ @param	assetReaderOutput
+	An instance of AVAssetReaderTrackOutput that vends sample buffers containing metadata, e.g. an AVAssetReaderTrackOutput object initialized with a track of media type AVMediaTypeMetadata and nil outputSettings.
+ @result
+	An instance of AVAssetReaderOutputMetadataAdaptor
+
+ @discussion
+	It is an error to create a timed metadata group adaptor with an asset reader output that does not vend metadata.  It is also an error to create a timed metadata group adaptor with an asset reader output whose asset reader has already started reading, or an asset reader output that already has been used to initialize another timed metadata group adaptor.
+	
+	Clients should not mix calls to -[AVAssetReaderTrackOutput copyNextSampleBuffer] and -[AVAssetReaderOutputMetadataAdaptor nextTimedMetadataGroup].  Once an AVAssetReaderTrackOutput instance has been used to initialize an AVAssetReaderOutputMetadataAdaptor, calling -copyNextSampleBuffer on that instance will result in an exception being thrown.
+ */
++ (instancetype)assetReaderOutputMetadataAdaptorWithAssetReaderTrackOutput:(AVAssetReaderTrackOutput *)trackOutput;
+
+/*!
+ @method initWithAssetReaderTrackOutput:
+ @abstract
+	Creates a new timed metadata group adaptor for retrieving timed metadata group objects from an asset reader output.
+
+ @param	assetReaderOutput
+	An instance of AVAssetReaderTrackOutput that vends sample buffers containing metadata, e.g. an AVAssetReaderTrackOutput object initialized with a track of media type AVMediaTypeMetadata and nil outputSettings.
+ @result
+	An instance of AVAssetReaderTrackOutputTimedMetadataGroupAdaptor
+
+ @discussion
+	It is an error to create a timed metadata group adaptor with an asset reader output that does not vend metadata.  It is also an error to create a timed metadata group adaptor with an asset reader output whose asset reader has already started reading, or an asset reader output that already has been used to initialize another timed metadata group adaptor.
+	
+	Clients should not mix calls to -[AVAssetReaderTrackOutput copyNextSampleBuffer] and -[AVAssetReaderOutputMetadataAdaptor nextTimedMetadataGroup].  Once an AVAssetReaderTrackOutput instance has been used to initialize an AVAssetReaderOutputMetadataAdaptor, calling -copyNextSampleBuffer on that instance will result in an exception being thrown.
+ */
+- (instancetype)initWithAssetReaderTrackOutput:(AVAssetReaderTrackOutput *)trackOutput;
+
+/*!
+ @property assetReaderTrackOutput
+ @abstract
+	The asset reader track output from which the receiver pulls timed metadata groups.
+ */
+@property (nonatomic, readonly) AVAssetReaderTrackOutput *assetReaderTrackOutput;
+
+/*!
+ @method nextTimedMetadataGroup
+ @abstract
+	Returns the next timed metadata group for the asset reader output, synchronously.
+	
+ @result
+	An instance of AVTimedMetadataGroup, representing the next logical segment of metadata coming from the source asset reader output.
+	
+ @discussion
+	This method will return nil when all timed metadata groups have been read from the asset reader output, or if there is an error that prevents the timed metadata group adaptor from reading more timed metadata groups.  When this method returns nil, clients should check the value of the associated AVAssetReader's status property to determine why no more samples could be read.
+	
+	Unlike -[AVAssetReaderTrackOutput copyNextSampleBuffer], this method returns an autoreleased object.
+ 
+	Before calling this method, you must ensure that the output which underlies the receiver is attached to an AVAssetReader via a prior call to -addOutput: and that -startReading has been called on the asset reader.
+ */
+- (AVTimedMetadataGroup *)nextTimedMetadataGroup;
+
+@end
+
+
+@class AVAssetReaderSampleReferenceOutputInternal;
+
+/*!
+ @class AVAssetReaderSampleReferenceOutput
+ @abstract
+	AVAssetReaderSampleReferenceOutput is a concrete subclass of AVAssetReaderOutput that defines an interface for reading sample references from a single AVAssetTrack of an AVAssetReader's AVAsset.
+ @discussion
+	Clients can extract information about the location (file URL and offset) of samples in a track by adding an instance of AVAssetReaderSampleReferenceOutput to an AVAssetReader using the -[AVAssetReader addOutput:] method. No actual sample data can be extracted using this class. The location of the sample data is described by the kCMSampleBufferAttachmentKey_SampleReferenceURL and kCMSampleBufferAttachmentKey_SampleReferenceByteOffset attachments on the extracted sample buffers. More information about sample buffers describing sample references can be found in the CMSampleBuffer documentation.
+ 
+	Sample buffers extracted using this class can also be appended to an AVAssetWriterInput to create movie tracks that are not self-contained and reference data in the original file instead.  Currently, only instances of AVAssetWriter configured to write files of type AVFileTypeQuickTimeMovie can be used to write tracks that are not self-contained.
+ 
+	Since no sample data is ever returned by instances of AVAssetReaderSampleReferenceOutput, the value of the alwaysCopiesSampleData property is ignored.
+ */
+
+NS_CLASS_AVAILABLE(10_10, 8_0)
+@interface AVAssetReaderSampleReferenceOutput : AVAssetReaderOutput
+{
+@private
+	AVAssetReaderSampleReferenceOutputInternal	*_sampleReferenceOutputInternal;
+}
+
+/*!
+ @method assetReaderSampleReferenceOutputWithTrack:
+ @abstract
+	Returns an instance of AVAssetReaderSampleReferenceOutput for supplying sample references.
+ 
+ @param track
+	The AVAssetTrack for which the resulting AVAssetReaderSampleReferenceOutput should provide sample references.
+ @result
+	An instance of AVAssetReaderSampleReferenceOutput.
+ 
+ @discussion
+	The track must be one of the tracks contained by the target AVAssetReader's asset.
+ */
++ (AVAssetReaderSampleReferenceOutput *)assetReaderSampleReferenceOutputWithTrack:(AVAssetTrack *)track;
+
+/*!
+ @method initWithTrack:
+ @abstract
+	Returns an instance of AVAssetReaderSampleReferenceOutput for supplying sample references.
+ 
+ @param track
+	The AVAssetTrack for which the resulting AVAssetReaderSampleReferenceOutput should provide sample references.
+ @result
+	An instance of AVAssetReaderTrackOutput.
+ 
+ @discussion
+	The track must be one of the tracks contained by the target AVAssetReader's asset.
+  */
+- (instancetype)initWithTrack:(AVAssetTrack *)track;
+
+/*!
+ @property track
+ @abstract
+	The track from which the receiver extracts sample references.
+ 
+ @discussion
+	The value of this property is an AVAssetTrack owned by the target AVAssetReader's asset.
+ */
+@property (nonatomic, readonly) AVAssetTrack *track;
 
 @end

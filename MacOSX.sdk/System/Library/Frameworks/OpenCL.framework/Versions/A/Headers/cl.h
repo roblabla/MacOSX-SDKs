@@ -439,7 +439,7 @@ typedef struct _cl_buffer_region {
 #define CL_SAMPLER_NORMALIZED_COORDS                0x1152
 #define CL_SAMPLER_ADDRESSING_MODE                  0x1153
 #define CL_SAMPLER_FILTER_MODE                      0x1154
-
+  
 /* cl_map_flags - bitfield */
 #define CL_MAP_READ                                 (1 << 0)
 #define CL_MAP_WRITE                                (1 << 1)
@@ -719,7 +719,6 @@ clCreateSampler(cl_context          /* context */,
                 cl_addressing_mode  /* addressing_mode */, 
                 cl_filter_mode      /* filter_mode */,
                 cl_int *            /* errcode_ret */) CL_API_SUFFIX__VERSION_1_0;
-
 extern CL_API_ENTRY cl_int CL_API_CALL
 clRetainSampler(cl_sampler /* sampler */) CL_API_SUFFIX__VERSION_1_0;
 

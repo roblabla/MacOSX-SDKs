@@ -21,7 +21,6 @@ NS_CLASS_AVAILABLE(10_4,3_0)
 }
 
 // As part of the predicate for a fetched property, you can use the two variables $FETCH_SOURCE (which is the managed object fetching the property) and $FETCHED_PROPERTY (which is the NSFetchedPropertyDescription instance).
-- (NSFetchRequest *)fetchRequest;
-- (void)setFetchRequest:(NSFetchRequest *)fetchRequest;
+@property (strong) NSFetchRequest *fetchRequest;
 
 @end

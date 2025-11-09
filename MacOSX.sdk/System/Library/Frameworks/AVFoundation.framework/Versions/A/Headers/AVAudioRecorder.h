@@ -24,7 +24,7 @@ NS_CLASS_AVAILABLE(10_7, 3_0)
 
 
 /* The file type to record is inferred from the file extension. Will overwrite a file at the specified url if a file exists */
-- (id)initWithURL:(NSURL *)url settings:(NSDictionary *)settings error:(NSError **)outError;
+- (instancetype)initWithURL:(NSURL *)url settings:(NSDictionary *)settings error:(NSError **)outError;
 
 /* transport control */
 /* methods that return BOOL return YES on success and NO on failure. */
@@ -68,7 +68,7 @@ NS_CLASS_AVAILABLE(10_7, 3_0)
 /* The channels property lets you assign the output to record specific channels as described by AVAudioSession's channels property */
 /* This property is nil valued until set. */
 /* The array must have the same number of channels as returned by the numberOfChannels property. */
-@property(nonatomic, copy) NSArray* channelAssignments NS_AVAILABLE(10_9, 7_0); /* Array of AVAudioSessionChannelDescription objects */
+@property(nonatomic, copy) NSArray *channelAssignments NS_AVAILABLE(10_9, 7_0); /* Array of AVAudioSessionChannelDescription objects */
 #endif
 
 @end
@@ -86,12 +86,14 @@ NS_CLASS_AVAILABLE(10_7, 3_0)
 
 #if TARGET_OS_IPHONE
 
+/* AVAudioRecorder INTERRUPTION NOTIFICATIONS ARE DEPRECATED - Use AVAudioSession instead. */
+
 /* audioRecorderBeginInterruption: is called when the audio session has been interrupted while the recorder was recording. The recorded file will be closed. */
-- (void)audioRecorderBeginInterruption:(AVAudioRecorder *)recorder;
+- (void)audioRecorderBeginInterruption:(AVAudioRecorder *)recorder NS_DEPRECATED_IOS(2_2, 8_0);
 
 /* audioRecorderEndInterruption:withOptions: is called when the audio session interruption has ended and this recorder had been interrupted while recording. */
 /* Currently the only flag is AVAudioSessionInterruptionFlags_ShouldResume. */
-- (void)audioRecorderEndInterruption:(AVAudioRecorder *)recorder withOptions:(NSUInteger)flags NS_AVAILABLE_IOS(6_0);
+- (void)audioRecorderEndInterruption:(AVAudioRecorder *)recorder withOptions:(NSUInteger)flags NS_DEPRECATED_IOS(6_0, 8_0);
 
 - (void)audioRecorderEndInterruption:(AVAudioRecorder *)recorder withFlags:(NSUInteger)flags NS_DEPRECATED_IOS(4_0, 6_0);
 

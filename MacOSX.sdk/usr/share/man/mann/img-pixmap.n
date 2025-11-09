@@ -1,5 +1,5 @@
 '\"
-'\" Generated from file '/SourceCache/tcl/tcl-102/tcl_ext/tkimg/tkimg/doc/img-pixmap.man' by tcllib/doctools with format 'nroff'
+'\" Generated from file '/SourceCache/tcl/tcl-105/tcl_ext/tkimg/tkimg/doc/img-pixmap.man' by tcllib/doctools with format 'nroff'
 '\" Copyright (c) 1995-2003 Jan Nijtmans <nijtmans@users.sourceforge.net>
 '\"
 '\" The definitions below are for supplemental macros used in Tcl/Tk

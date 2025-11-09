@@ -1,7 +1,7 @@
 /*
     NSTouch.h
     Application Kit
-    Copyright (c) 2009-2013, Apple Inc.
+    Copyright (c) 2009-2014, Apple Inc.
     All rights reserved.
 */
 
@@ -11,8 +11,7 @@
 
 @class NSView;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
-enum {
+typedef NS_OPTIONS(NSUInteger, NSTouchPhase) {
     NSTouchPhaseBegan           = 1U << 0,
     NSTouchPhaseMoved           = 1U << 1,
     NSTouchPhaseStationary      = 1U << 2,
@@ -21,9 +20,7 @@ enum {
 
     NSTouchPhaseTouching        = NSTouchPhaseBegan | NSTouchPhaseMoved | NSTouchPhaseStationary,
     NSTouchPhaseAny             = NSUIntegerMax
-};
-#endif
-typedef NSUInteger NSTouchPhase;
+} NS_ENUM_AVAILABLE_MAC(10_7);
 
 
 /* Unlike the iPhone, NSTouch objects do not persist for the life of the touch.
@@ -37,8 +34,8 @@ NS_CLASS_AVAILABLE(10_6, NA)
     NSPoint _normalizedPosition;
     NSInteger _privateFlags;
     NSView *_view;
-#if ! __LP64__
     id _reserved1;
+#if ! __LP64__
     id _reserved2;
     id _reserved3;
     id _reserved4;
@@ -56,17 +53,17 @@ NS_CLASS_AVAILABLE(10_6, NA)
 /* Properties of this touch */
 /* Use the identity property to track changes to a particular touch during the touch's life. While touch identities may be re-used, they are unique during the life of the touch, even when multiple devices are present. Note: identity objects implement the NSCopying protocol so that they may be used as keys in an NSDictionary. Use isEqual: to compare two touch identities.
 */
-@property(readonly, retain) id<NSObject, NSCopying> identity; 
-@property(readonly) NSTouchPhase phase;
-@property(readonly) NSPoint normalizedPosition; // Scaled absolute position is in [0,1], where (0, 0) is the lower left of the surface.
-@property(readonly) BOOL isResting;
+@property (readonly, strong) id<NSObject, NSCopying> identity;
+@property (readonly) NSTouchPhase phase;
+@property (readonly) NSPoint normalizedPosition; // Scaled absolute position is in [0,1], where (0, 0) is the lower left of the surface.
+@property (readonly, getter=isResting) BOOL resting;
 
 /* Properties of the underlying touch device */ 
-@property(readonly, retain) id device; // The digitizer that generated the touch. Useful to distinguish touches emanating from multiple-device scenario
+@property (readonly, strong) id device; // The digitizer that generated the touch. Useful to distinguish touches emanating from multiple-device scenario
 
 /* The range of the touch device in points (72ppi). Note: 0,0 is the lower left of the surface.
 */
-@property(readonly) NSSize  deviceSize;
+@property (readonly) NSSize deviceSize;
 
 @end
 

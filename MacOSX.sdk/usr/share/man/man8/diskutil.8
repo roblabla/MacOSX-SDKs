@@ -1,5 +1,5 @@
 .\"
-.\" Copyright (c) 1998-2013 Apple Inc. All rights reserved.
+.\" Copyright (c) 1998-2014 Apple Inc. All rights reserved.
 .\"
 .\" This file contains Original Code and/or Modifications of Original Code
 .\" as defined in and that are subject to the Apple Public Source License
@@ -16,7 +16,7 @@
 .\" Please see the License for the specific language governing rights and
 .\" limitations under the License.
 .\"
-.Dd 13 June 2013
+.Dd 2 June 2014
 .Os "Mac OS X"
 .Dt DISKUTIL 8
 .Pp
@@ -55,7 +55,7 @@ Each verb is listed with its description and individual arguments.
 List disks.  If no argument is given, then all disks and all of their partitions are listed.
 .Pp
 If
-.Nm -plist
+.Sy -plist
 is specified, then a property list will be emitted instead of the normal user-readable
 output.
 If a
@@ -64,30 +64,30 @@ is specified, then instead of listing all families of whole disks and their part
 family is listed.  In that case, specifying either the whole disk or any of its slices will work.
 .Pp
 A script could interpret the results of the
-.Nm diskutil
-.Nm list
-.Nm -plist
+.Sy diskutil
+.Sy list
+.Sy -plist
 output and use
-.Nm diskutil
-.Nm info
-.Nm -plist
+.Sy diskutil
+.Sy info
+.Sy -plist
 as well as
-.Nm diskutil
-.Nm listFilesystems
-.Nm -plist
+.Sy diskutil
+.Sy listFilesystems
+.Sy -plist
 for more detailed information.
 .Pp
 See the
-.Nm DEVICES
+.Sy DEVICES
 section below for the various forms that the
 .Ar device
 specification may take for this and all of the other
-.Nm diskutil
+.Nm
 verbs.
 .Pp
 The top-to-bottom appearance of partitions in
-.Nm diskutil
-.Nm list
+.Sy diskutil
+.Sy list
 always indicates the on-disk ordering.
 BSD disk identifiers may, in certain circumstances, not appear in slice-numerical order
 when viewed this way.  This is normal and is likely the result of a recent partition map
@@ -100,7 +100,7 @@ editing operation in which volumes were kept mounted.
 .br
 Get detailed information about a specific whole disk or partition.
 If
-.Nm -plist
+.Sy -plist
 is specified, then a property list instead of the normal user-readable output will be emitted.
 .\"
 .\"             -- activity --
@@ -119,7 +119,7 @@ For debugging
 information, such as the monitoring of applications dissenting (attempting to deny) activities
 for disks
 for which they have registered an interest, you must use the logging features of the
-.Nm diskarbitrationd
+.Sy diskarbitrationd
 daemon. Programs needing this information must become Disk Arbitration clients.
 .\"
 .\"             -- listFilesystems --
@@ -127,16 +127,16 @@ daemon. Programs needing this information must become Disk Arbitration clients.
 .Op Nm -plist
 .br
 Show the file system personalities available for formatting in
-.Nm diskutil
+.Sy diskutil
 when using the erasing and partitioning verbs.
 This is a subset of the complete set of
 personalities exported by the various file system bundles that may be installed in the system.
 Also shown are some shortcut aliases for common personalities.
 See the
-.Nm FORMAT
+.Sy FORMAT
 section below for more details.
 If
-.Nm -plist
+.Sy -plist
 is specified, then a property list instead of the normal user-readable output will be emitted.
 .\"
 .\"             -- unmount --
@@ -145,9 +145,9 @@ is specified, then a property list instead of the normal user-readable output wi
 .Ar device
 .br
 Unmount a single volume.
-.Nm Force
+.Sy Force
 will force-unmount the volume (less kind to any open files; see also
-.Nm umount
+.Sy umount
 (8)).
 .\"
 .\"             -- unmountDisk --
@@ -156,9 +156,9 @@ will force-unmount the volume (less kind to any open files; see also
 .Ar device
 .br
 Unmount an entire disk (all volumes).
-.Nm Force
+.Sy Force
 will force-unmount the volumes (less kind to any open files; see also
-.Nm umount
+.Sy umount
 (8)).
 You should specify a whole disk, but all volumes of the whole disk are attempted to be unmounted even if you specify a partition.
 .\"
@@ -177,16 +177,16 @@ physical (motorized) eject sequence.
 .br
 Mount a single volume.
 If
-.Nm readOnly
+.Sy readOnly
 is specified, then the file system is mounted read-only, even if the
 volume's underlying file system and/or device and/or media
 supports writing; even the super-user may not write to it; this is the same as the
-.Nm rdonly
+.Sy rdonly
 option to
-.Nm mount
+.Sy mount
 (8).
 If a
-.Nm -mountPoint
+.Sy -mountPoint
 is specified, then that path, rather than the standard path of /Volumes/VolumeName, will
 be used as the view into the volume file content; a directory at that path must already exist.
 .\"
@@ -216,35 +216,50 @@ Ownership of the affected disk is required.
 .br
 Disable journaling on an HFS+ volume.  This normally works whether or not the volume is currently
 mounted (the volume is temporarily mounted if necessary).  If the
-.Nm force
+.Sy force
 option is specified, then journaling is disabled directly on disk; in this case, the volume
 must not be mounted.
 Ownership of the affected disk is required.
 .\"
-.\"             -- moveJournal --
+.\"             -- moveJournal external --
 .It Sy moveJournal
-.Nm external | internal
-.Op Ar journalDevice
+.Sy external
+.Ar journalDevice
 .Ar device
 .br
-.Nm external 
-will create a 512MB Apple_Journal partition out of
+Create a 512MB Apple_Journal partition using the
 .Ar journalDevice
-and an HFS+ partition will be created out of the remaining space if available;
+partition to serve as a journal for the volume
+.Ar device.
+For best results,
 .Ar journalDevice
-must be a partition, not a whole-disk. The journal for
-.Ar device
-will then be moved externally onto the newly created Apple_Journal partition.
+should be a partition on a different whole-disk than the volume itself.
 .Pp
-.Nm internal 
-will move the journal for
+The journal for
 .Ar device
-back locally.
+will be moved externally onto the newly created Apple_Journal partition.
+.Pp
+Since the
+.Ar journalDevice
+you specify will invariably be larger than 512MB, a new HFS+ partition will be created
+following the Apple_Journal partition to fill the remaining space.
 .Pp
 Moving the journal works whether or not the volume is mounted, provided
 journaling is enabled on that volume. No errors are currently supported to flag attempts to
 move journals on volumes that do not have journaling enabled.
-Ownership of the affected disk(s) is required.
+If you have multiple volumes for which you want external journals, each must have its own
+external Apple_Journal partition.
+Ownership of the affected disks is required.
+.\"
+.\"             -- moveJournal internal --
+.It Sy moveJournal
+.Sy internal
+.Ar device
+.br
+Move the journal for
+.Ar device
+back locally (onto that same device).
+Ownership of the affected disk is required.
 .\"
 .\"             -- enableOwnership --
 .It Sy enableOwnership Ar device
@@ -270,14 +285,14 @@ having to enable ownership is when a disk is to contain FSOs whose User and Grou
 behavior overall, is critically important, such as when the plug-in disk contains system files to be changed or added to.
 .Pp
 See also the
-.Nm vsdbutil
+.Xr vsdbutil 8
 command.  Running as root is required.
 .\"
 .\"             -- disableOwnership --
 .It Sy disableOwnership Ar device
 .br
 Disable ownership of a volume.  See
-.Nm enableOwnership
+.Sy enableOwnership
 above.
 Running as root is required.
 .\"
@@ -341,7 +356,7 @@ containing one new empty file system volume.  If the partitioning scheme is not
 specified, then an appropriate one for the current machine is chosen.
 .Ar Format
 is discussed below in the section for the
-.Nm partitionDisk
+.Sy partitionDisk
 verb.
 Ownership of the affected disk is required.
 .\"
@@ -354,7 +369,7 @@ Ownership of the affected disk is required.
 Erase an existing volume or write out a new empty file system if there was none.
 .Ar Format
 is discussed below in the section for the
-.Nm partitionDisk
+.Sy partitionDisk
 verb.
 Ownership of the affected disk is required.
 .\"
@@ -371,7 +386,7 @@ Ownership of the affected disk is required.
 .Ar device
 .br
 Erase optical media (CD/RW, DVD/RW, etc.).
-.Nm Quick
+.Sy Quick
 specifies whether the disc recording system software should do a full erase or a quick erase.
 Ownership of the affected disk is required.
 .\"
@@ -383,17 +398,17 @@ Erase a device, writing zeros to the media.  The device can be a whole-disk or a
 In either case, in order to be useful again, zero'd whole-disks
 will need to be (re)partitioned, or
 zero'd partitions will need to be (re)formatted with a file system, e.g. by using the
-.Nm partitionDisk,
-.Nm eraseDisk,
+.Sy partitionDisk,
+.Sy eraseDisk,
 or
-.Nm eraseVolume
+.Sy eraseVolume
 verbs.
 If you desire a more sophisticated erase algorithm or if you need
 to erase only free space not in use for files, use the
-.Nm secureErase
+.Sy secureErase
 verb.
 The
-.Nm force
+.Sy force
 parameter causes best-effort, non-error-terminating, forced unmounts and shared-mode writes to be attempted;
 however, this is still no guarantee against drivers which claim the disk exclusively. In such cases, you
 may have to first unmount all overlying logical volumes (e.g. CoreStorage or AppleRAID), or, if a disk is partially
@@ -412,13 +427,13 @@ The device can be a whole-disk or a partition.
 In either case, in order to be useful again, randomized whole-disks
 will need to be (re)partitioned, or
 randomized partitions will need to be (re)formatted with a file system, e.g. by using the
-.Nm partitionDisk
+.Sy partitionDisk
 or
-.Nm eraseDisk
+.Sy eraseDisk
 verbs.
 If you desire a more sophisticated erase algorithm or if you need
 to erase only free space not in use for files, use the
-.Nm secureErase
+.Sy secureErase
 verb.
 Ownership of the affected disk is required.
 .\"
@@ -437,9 +452,9 @@ with the exception that it will not be possible to recover deleted files
 or data using utility software.
 If you need to erase all contents of a partition but not its hosting
 whole-disk, use the
-.Nm zeroDisk
+.Sy zeroDisk
 or
-.Nm randomDisk
+.Sy randomDisk
 verbs.
 Ownership of the affected disk is required.
 .Pp
@@ -482,17 +497,17 @@ suitable default is chosen.  They are:
 .\" List-Begin-PartitioningSchemes
 .Bl -bullet -offset indent
 .It
-.Nm APM[Format]
+.Sy APM[Format]
 specifies that an Apple Partition Map scheme should be used.
 This is the traditional Apple partitioning scheme
 used to start up a PowerPC-based Macintosh computer, to use the disk as a non-startup disk with any Mac,
 or to create a multiplatform compatible startup disk.
 .It
-.Nm MBR[Format]
+.Sy MBR[Format]
 specifies that a Master Boot Record scheme should be used.
 This is the DOS/Windows-compatible partitioning scheme.
 .It
-.Nm GPT[Format]
+.Sy GPT[Format]
 specifies that a GUID Partitioning Table scheme should be used.
 This is the partitioning scheme
 used to start up an Intel-based Macintosh computer.
@@ -502,7 +517,7 @@ used to start up an Intel-based Macintosh computer.
 .Pp
 For each partition, a triplet of the desired file system format, volume name, and size must be specified.
 Several other
-.Nm diskutil
+.Sy diskutil
 verbs allow these triplets as well (and for them, the
 .Ar numberOfPartitions
 parameter is also optional).  The triplets must be as follows:
@@ -510,49 +525,48 @@ parameter is also optional).  The triplets must be as follows:
 .Bl -bullet -offset indent
 .It
 .Ar Format
-names are of the form HFS+, MS-DOS, etc.; a list of formatable file systems (more precisely, personalities exported by
+names are of the form HFS+, MS-DOS, etc.; a list of formattable file systems (more precisely, personalities exported by
 the installed file system bundles)
 and common aliases is available from the
-.Nm listFilesystems
+.Sy listFilesystems
 verb.
 .Ar Format
 guides
-.Nm diskutil
+.Sy diskutil
 both in what partition type to set for the partitions (slices) as well as what file system structures to lay down therein,
-using the file system bundle's plist's FormatExecutable setting (which usually points to the appropriate formatter program such as
-.Nm newfs_hfs
-(8)).  You can also specify a
+using the file system bundle's plist's FormatExecutable setting which usually points to the appropriate formatter program such as
+.Xr newfs_hfs 8
+or you can also specify a
 .Ar format
 of
-.Nm Free Space
+.Sy Free Space
 to skip an area of the disk.  Additionally, you can specify the partition (personality) type manually and directly with a
 .Ar format
 of %<human-readable partition type>%
 such as
-.Nm %Apple_HFS%
+.Sy %Apple_HFS%
 or %<GPT partition type UUID constant>%
 such as
-.Nm %48465300-0000-11AA-AA11-00306543ECAC%;
+.Sy %48465300-0000-11AA-AA11-00306543ECAC%;
 these imply a
 .Ar name
 of
-.Nm %noformat%
+.Sy %noformat%
 (below).  Human-readable types must be known to the system but UUID types (GPT scheme only) can be arbitrary.
 .It
 .Ar Names
 are the initial volume names; they must conform to file system specific restrictions.
 If a name of
-.Nm %noformat%
+.Sy %noformat%
 is specified, then the partition is left blank such that the partition space is carved out, the partition type is set
 according to the file system format name, the partition space is partially erased, but a file system structure
 is not laid down with any file system's formatter program (e.g.
-.Nm newfs_hfs
-(8)); this is useful for setting up partitions that will
+.Ns Xr newfs_hfs 8 ; this is useful for setting up partitions that will
 contain user-defined (not necessarily file system) data.
 For a triplet whose
 .Ar format
 is
-.Nm Free Space
+.Sy Free Space
 or a directly-specified partition type, its
 .Ar name
 is ignored but a dummy name must be present.
@@ -567,15 +581,15 @@ section at the end of this page (e.g. 165536000B, 55.3T, 678M, 75%, R).
 The last partition may be lengthened to the end of the disk.
 You can specify an exact size for your last partition by specifying it as the penultimate
 triplet and specifying an additional (last) triplet as
-.Nm "Free Space".
+.Sy "Free Space".
 .Pp
 Ownership of the affected disk is required.
 .\"
 .\"             -- resizeVolume --
 .It Sy resizeVolume Ar device [
-.Nm limits
+.Sy limits
 |
-.Nm R
+.Sy R
 |
 .Ar size 
 .Op Ar numberOfPartitions
@@ -588,16 +602,16 @@ Non-destructively resize a volume. You may increase or decrease its size.
 A
 .Ar size
 of
-.Nm limits
+.Sy limits
 will print the range of valid values for the target partition, taking into account current file system and partition map conditions
 such as files in use and other (immovable) partitions following the target.
 .Pp
 You can grow a volume (back) to its maximum size possible, provided no new partitions have been created that are in the way, by specifying
-.Nm R
+.Sy R
 for the new volume size. You should use
-.Nm R
+.Sy R
 instead of attempting an absolute value such as
-.Nm 100%
+.Sy 100%
 because the latter cannot count partition map overhead.
 .Pp
 When decreasing the size, new partitions may optionally be created to fill the newly-freed space.
@@ -608,14 +622,14 @@ To do this, specify the
 and
 .Ar size
 parameters in the same manner as the triplet description for the
-.Nm partitionDisk
+.Sy partitionDisk
 verb.
 .Pp
 Resizing a volume that is currently set as the computer's startup disk will invalidate that setting; use the 
-.Nm Startup
-.Nm Disk
+.Sy Startup
+.Sy Disk
 System Preferences panel or
-.Nm bless
+.Sy bless
 (8) to reset the resized volume as the startup disk.
 .Pp
 .Ar Device
@@ -641,7 +655,7 @@ in the space of the old partition; specify these with the
 and
 .Ar size
 parameters in the same manner as the triplet description for the
-.Nm partitionDisk
+.Sy partitionDisk
 verb.
 .Pp
 .Ar Device
@@ -655,28 +669,28 @@ Ownership of the affected disk is required.
 .br
 Merge two or more partitions on a disk.  All data on merged partitions other than the first will be lost.
 Data on the first partition will be lost as well if the
-.Nm force
+.Sy force
 argument is given.
 .Pp
 If
-.Nm force
+.Sy force
 is not given, and the first partition has a resizable file system
 (e.g. JHFS+), the file system will be preserved and grown in a data-preserving manner; your
 .Ar format
 and
 .Ar name
 parameters are ignored in this case. If
-.Nm force
+.Sy force
 is not given, and the first partition is not resizable, you are prompted if you want to format.
 You will also be prompted to format if the first partition has an (HFS) Allocation Block Size
 which is too small to support the required growth of the first partition; see the
-.Nm -b
+.Sy -b
 option for
-.Nm newfs_hfs
+.Sy newfs_hfs
 (8).
 .Pp
 If
-.Nm force
+.Sy force
 is given, the final resulting partition is always (re)formatted. You should do this if you wish to (re)format to a new file system type.
 You will be prompted to confirm.
 .Pp
@@ -684,12 +698,12 @@ You will be prompted to confirm.
 and
 .Ar name
 must always be given, but they have an effect only when
-.Nm force
+.Sy force
 is given.
 .Pp
 Merged partitions are required to be ordered sequentially on disk (see
-.Nm diskutil
-.Nm list
+.Sy diskutil
+.Sy list
 for the actual on-disk ordering).
 All partitions in the range, except for the first one, must be unmountable.
 Ownership of the affected disk is required.
@@ -749,7 +763,7 @@ AppleRAID is not a replacement for backing up your data.
 Backups should be always be performed on a regular basis and before modifying any RAID set using these commands.
 .Pp
 The following is a list of
-.Nm appleRAID
+.Sy appleRAID
 sub-verbs with their descriptions and individual arguments.
 .br
 .\"
@@ -764,19 +778,22 @@ If
 .Ar UUID
 is specified, only list the RAID set with that AppleRAID Set UUID.
 If
-.Nm -plist
+.Sy -plist
 is specified, then a property list will be emitted instead of user-formatted output.
 The
-.Nm -plist
+.Sy -plist
 and
 .Ar UUID
 arguments may not both be specified.
-.Nm diskutil
-.Nm listRAID
-is a deprecated synonym for
-.Nm diskutil
-.Nm appleRAID
-.Nm list.
+.Sy diskutil
+.Sy listRAID
+and
+.Sy diskutil
+.Sy checkRAID
+are deprecated synonyms for
+.Sy diskutil
+.Sy appleRAID
+.Sy list.
 .\"
 .\"             -- appleRAID > create  --
 .It Sy create Nm mirror | stripe | concat
@@ -791,12 +808,12 @@ set itself (as displayed in
 .Sy list Ns ).
 e.g. 'diskutil createRAID stripe MyArray JHFS+ disk1 disk2 disk3 disk4'.
 Ownership of the affected disks is required.
-.Nm diskutil
-.Nm createRAID
+.Sy diskutil
+.Sy createRAID
 is a deprecated synonym for
-.Nm diskutil
-.Nm appleRAID
-.Nm create.
+.Sy diskutil
+.Sy appleRAID
+.Sy create.
 .\"
 .\"             -- appleRAID > delete  --
 .It Sy delete Ar raidVolume
@@ -813,12 +830,12 @@ will attempt to shrink the
 file system to fit on the first member partition and convert that
 to a non-RAID volume.
 Ownership of the affected disks is required.
-.Nm diskutil
-.Nm destroyRAID
+.Sy diskutil
+.Sy destroyRAID
 is a deprecated synonym for
-.Nm diskutil
-.Nm appleRAID
-.Nm delete.
+.Sy diskutil
+.Sy appleRAID
+.Sy delete.
 .\"
 .\"             -- appleRAID > repairMirror --
 .It Sy repairMirror Ar raidVolume Ar newDevice
@@ -829,16 +846,16 @@ to the RAID mirror set whose exported disk device or set UUID is given as
 .Ar raidVolume.
 The new disk must be the same size or larger than the existing disks in the RAID set.
 After running this command, you should manually remove the old (orphaned, failed) member(s) with
-.Nm diskutil
-.Nm appleRAID
-.Nm remove.
+.Sy diskutil
+.Sy appleRAID
+.Sy remove.
 Ownership of the affected disk is required.
-.Nm diskutil
-.Nm repairMirror
+.Sy diskutil
+.Sy repairMirror
 is a deprecated synonym for
-.Nm diskutil
-.Nm appleRAID
-.Nm repairMirror.
+.Sy diskutil
+.Sy appleRAID
+.Sy repairMirror.
 .\"
 .\"             -- appleRAID > add --
 .It Sy add Ar type Ar newDevice Ar raidVolume
@@ -855,12 +872,12 @@ When adding to a mirrored RAID set, the new disk must be the same size or larger
 Adding a hot spare to a mirror will enable autorebuilding for that mirror.
 Adding a new member to a concatenated RAID set appends the member and expands the RAID volume.
 Ownership of the affected disk is required.
-.Nm diskutil
-.Nm addToRAID
+.Sy diskutil
+.Sy addToRAID
 is a deprecated synonym for
-.Nm diskutil
-.Nm appleRAID
-.Nm add.
+.Sy diskutil
+.Sy appleRAID
+.Sy add.
 .\"
 .\"             -- appleRAID > remove --
 .It Sy remove Ar oldDevice Ar raidVolume
@@ -876,12 +893,12 @@ For resizable file systems
 .Sy remove
 will first attempt to shrink the concatenated RAID set so that the file system fits on the remaining disks.
 Ownership of the affected disk is required.
-.Nm diskutil
-.Nm removeFromRAID
+.Sy diskutil
+.Sy removeFromRAID
 is a deprecated synonym for
-.Nm diskutil
-.Nm appleRAID
-.Nm remove.
+.Sy diskutil
+.Sy appleRAID
+.Sy remove.
 .\"
 .\"             -- appleRAID > enable --
 .It Sy enable Nm mirror | concat
@@ -893,12 +910,12 @@ RAID set.
 Disks that were originally partitioned on Mac OS X 10.2 Jaguar or earlier 
 or were partitioned to be Mac OS 9 compatible may not be resizable.
 Ownership of the affected disk is required.
-.Nm diskutil
-.Nm enableRAID
+.Sy diskutil
+.Sy enableRAID
 is a deprecated synonym for
-.Nm diskutil
-.Nm appleRAID
-.Nm enable.
+.Sy diskutil
+.Sy appleRAID
+.Sy enable.
 .\"
 .\"             -- appleRAID > update --
 .It Sy update Ar key Ar value Ar raidVolume
@@ -910,26 +927,26 @@ Valid keys are:
 .\" List-Begin-AppleRAIDKeys
 .Bl -bullet -offset indent
 .It
-.Nm AutoRebuild
+.Sy AutoRebuild
 - If true, the system attempts to rebuild degraded mirrored volumes automatically.
 When looking for devices for rebuild, AppleRAID first looks for hot spares and then degraded members.
 Use a
 .Ar value
 of "1" for true and "0" for false.
 .It
-.Nm SetTimeout
+.Sy SetTimeout
 - Controls how long the system waits (in seconds) for a missing device before degrading a mirrored raid set.
 Also controls the amount of time you have to disconnect all devices from an unmounted mirror without degrading it.
 .\" List-End-AppleRAIDKeys
 .El
 .Pp
 Ownership of the affected disk is required.
-.Nm diskutil
-.Nm updateRAID
+.Sy diskutil
+.Sy updateRAID
 is a deprecated synonym for
-.Nm diskutil
-.Nm appleRAID
-.Nm update.
+.Sy diskutil
+.Sy appleRAID
+.Sy update.
 .\"
 .\" List-End-AppleRAIDVerbs
 .El
@@ -973,14 +990,14 @@ A Logical Volume Family (LVF) exports one or more Logical Volumes (LVs).
 A Logical Volume (LV) exports a dev node, upon which a file system (such as Journaled HFS+) resides.
 .Pp
 For more information on specifying device arguments, see the
-.Nm DEVICES
+.Sy DEVICES
 section below.
 .Pp
 CoreStorage is not a replacement for backing up your data.
 Backups should be always be performed on a regular basis and before modifying any CoreStorage volumes using these commands.
 .Pp
 The following is a list of
-.Nm coreStorage
+.Sy coreStorage
 sub-verbs with their descriptions and individual arguments.
 .br
 .\"
@@ -993,18 +1010,18 @@ sub-verbs with their descriptions and individual arguments.
 Display a tree view of the CoreStorage world for all current logical volume groups (LVGs) with
 member disks (PVs) and exported volumes (LVFs and LVs), with properties and status for each level.
 If
-.Nm -plist
+.Sy -plist
 is specified then a property list will be emitted instead of the formatted tree output; the UUIDs can be
 used with the
-.Nm diskutil
-.Nm coreStorage
-.Nm information
+.Sy diskutil
+.Sy coreStorage
+.Sy information
 verb to get properties for the object represented by that UUID.
 If
 .Ar UUID
 is specified then an attempt is made to list only that UUID (whatever type of CoreStorage object it may represent).
 The
-.Nm -plist
+.Sy -plist
 and
 .Ar UUID
 arguments may not both be specified.
@@ -1026,14 +1043,14 @@ Convert a regular Journaled HFS+ or Case-sensitive Journaled HFS+ volume
 into a CoreStorage logical volume.
 .Pp
 If
-.Nm -passphrase
+.Sy -passphrase
 is specified, the on-disk bytes will be encrypted. You will be prompted for a new passphrase
 interactively, or you can specify the
 .Ar passphrase
 on the command line. Alternatively, if you specify
-.Nm -stdinpassphrase
+.Sy -stdinpassphrase
 the standard input is read for the passphrase so that a program could execute
-.Nm diskutil
+.Sy diskutil
 and send the passphrase through a pipe without having to expose it as a command-line parameter.
 .Pp
 The volume must be resizable (the above types are) and also mounted. Conversion is done live and in-place;
@@ -1050,9 +1067,9 @@ At this point, the new CoreStorage PV/LVG/LVF/LV stack is ready for use, althoug
 (now the PV) is the current boot volume.
 .Pp
 Just before exiting,
-.Nm diskutil
-.Nm coreStorage
-.Nm convert
+.Sy diskutil
+.Sy coreStorage
+.Sy convert
 will try to unmount the target disk (which is now the "old" mount point and the new PV). If successful
 (target is not the boot disk), the volume now becomes mounted from the LV. If unsuccessful (target is the boot disk),
 a reboot is necessary.
@@ -1060,9 +1077,9 @@ a reboot is necessary.
 At this point, if no encryption was specified, all is done. Otherwise, the bytes-on-disk will begin to be
 encrypted in-place by CoreStorage automatically "in the background" while the PV/LVG/LVF/LV stack continues
 to be usable. Encryption progress may be monitored with
-.Nm diskutil
-.Nm coreStorage
-.Nm list.
+.Sy diskutil
+.Sy coreStorage
+.Sy list.
 .Pp
 When encryption is finished, a passphrase will be required the next time the LV is ejected and re-attached.
 If the LV is hosting the boot volume, this passphrase requirement will thus occur at the next reboot.
@@ -1082,12 +1099,16 @@ Ownership of the affected disk is required.
 .br
 Convert a CoreStorage logical volume back to its native type.
 The volume must have been created by means of conversion, e.g. with
-.Nm diskutil
-.Nm coreStorage
-.Nm convert.
+.Sy diskutil
+.Sy coreStorage
+.Sy convert.
 .Pp
 If the volume was not created with a passphrase, then simple ownership of the affected disk is required;
-otherwise, a passphrase must be supplied, either interactively or via one of the parameters.
+otherwise, a passphrase must be supplied, either interactively or via one of the parameters or a keychain
+file in the same manner as
+.Sy diskutil
+.Sy coreStorage
+.Sy unlockVolume.
 .\"
 .\"             -- coreStorage > create --
 .It Sy create | createLVG Ar lvgName Ar devices ...
@@ -1105,6 +1126,12 @@ Ownership of the affected disk is required.
 Delete a CoreStorage logical volume group. All logical volume families with their logical volumes are removed, the
 logical volume group is destroyed, and the now-orphaned physical volumes are erased and partition-typed as Journaled HFS+.
 .\"
+.\"             -- coreStorage > rename --
+.It Sy rename | renameLVG Ar lvgUUID | lvgName Ar newName
+.br
+Rename a CoreStorage logical volume group. Do not confuse this name with the LV name or the volume name of the
+fiesystem volume on the LV.
+.\"
 .\"             -- coreStorage > createVolume --
 .It Sy createVolume | createLV Ar lvgUUID | lvgName Ar type Ar name Ar size
 .Op Nm -stdinpassphrase | -passphrase Op Ar passphrase
@@ -1117,19 +1144,19 @@ are Journaled HFS+ or Case-sensitive Journaled HFS+ or their aliases.
 .Ar Size
 is the amount of space to allocate from the parent LVG. It is given in the same manner as the
 triplet description for the
-.Nm partitionDisk
+.Sy partitionDisk
 verb, and you can also specify with
-.Nm %
-a percentage of the current size of the LVG.
+.Sy %
+a percentage of the currently remaining unallocated space in the LVG.
 .Pp
 If
-.Nm -passphrase
+.Sy -passphrase
 or
-.Nm -stdinpassphrase
+.Sy -stdinpassphrase
 is specified, in the same manner as with
-.Nm diskutil
-.Nm coreStorage
-.Nm convert
+.Sy diskutil
+.Sy coreStorage
+.Sy convert
 above, on-disk data will be stored in an encrypted form as the Logical Volume is filled; otherwise, the data
 will remain plain.
 .\"
@@ -1157,22 +1184,22 @@ That is, the on-disk bytes that are backing the user data are all visited,
 read, and re-written in an encrypted form; this process can take a long time (minutes to hours). This process
 continues seamlessly across reboots. The logical volume remains usable at all times.
 When this command returns, the operation will be ongoing; you can check progress with
-.Nm diskutil
-.Nm coreStorage
-.Nm list.
+.Sy diskutil
+.Sy coreStorage
+.Sy list.
 .Pp
 The entire logical volume family (LVF) is affected since all LVs in an LVF share the same encryption settings.
 .Pp
 Any new user data written while this background operation is in progress will be in encrypted form.
 .Pp
 Specifying
-.Nm -passphrase
+.Sy -passphrase
 or
-.Nm -stdinpassphrase
+.Sy -stdinpassphrase
 or interactively entering a passphrase is mandatory; you do so in the same manner as with
-.Nm diskutil
-.Nm coreStorage
-.Nm convert
+.Sy diskutil
+.Sy coreStorage
+.Sy convert
 above.
 .\"
 .\"             -- coreStorage > decryptVolume --
@@ -1187,23 +1214,22 @@ CoreStorage logical volume (LV). Bytes are read, decrypted, and written back to 
 The LV must be unlocked before beginning this operation.
 .Pp
 Like as in
-.Nm diskutil
-.Nm coreStorage
-.Nm encryptVolume
+.Sy diskutil
+.Sy coreStorage
+.Sy encryptVolume
 above, all on-disk bytes are visited and converted, the process is seamless across reboots, the
 logical volume remains usable at all times, the entire logical volume family (LVF) is affected,
 any new user data written will be in plain form, and the operation will be ongoing when this
 command returns.
 .Pp
-Specifying
-.Nm -passphrase
+Credentials must be supplied; you can use
+.Sy -passphrase
 or
-.Nm -stdinpassphrase
-or interactively entering a passphrase is mandatory; you do so in the same manner as with
-.Nm diskutil
-.Nm coreStorage
-.Nm convert
-above.
+.Sy -stdinpassphrase
+or specify that a recovery keychain file be used, in the same manner as
+.Sy diskutil
+.Sy coreStorage
+.Sy unlockVolume.
 .\"
 .\"             -- coreStorage > unlockVolume --
 .It Sy unlockVolume | unlockLV Ar lvUUID
@@ -1225,25 +1251,25 @@ authentication; as the LVs thus appear as dev nodes,
 any file systems upon them are automatically mounted.
 .Pp
 To "re-lock" the volume, make it offline again by ejecting it, e.g. with
-.Nm diskutil
-.Nm eject.
+.Sy diskutil
+.Sy eject.
 .Pp
 Credentials must be supplied. You must either enter a passphrase interactively, specify one of the
-.Nm -passphrase
+.Sy -passphrase
 or
-.Nm -stdinpassphrase
+.Sy -stdinpassphrase
 parameters in the same manner as with
-.Nm diskutil
-.Nm coreStorage
-.Nm convert
+.Sy diskutil
+.Sy coreStorage
+.Sy convert
 above, or specify that a recovery keychain file be used.
 .Pp
 You can specify
-.Nm -recoverykeychain
+.Sy -recoverykeychain
 with a path to a keychain file.
-The keychain must be unlocked (see
-.Nm security
-(1)).
+The keychain must be unlocked; see
+.Ns Xr security 1 
+for more information.
 .\"
 .\"             -- coreStorage > changeVolumePassphrase --
 .It Sy changeVolumePassphrase | passwd Ar lvUUID
@@ -1256,23 +1282,23 @@ Change the passphrase of an existing encrypted volume. It need not be unlocked n
 must be given in the above order.
 .Pp
 You must authenticate either via the
-.Nm -oldpassphrase
+.Sy -oldpassphrase
 parameter, via the
-.Nm -stdinpassphrase
+.Sy -stdinpassphrase
 parameter (with newline or eof-terminated data given to stdin), or via an interactive prompt (if no parameters are given),
 in the same manner as
-.Nm diskutil
-.Nm coreStorage
-.Nm convert
+.Sy diskutil
+.Sy coreStorage
+.Sy convert
 above.
 Alternatively, you can authenticate by specifying
-.Nm -recoverykeychain
+.Sy -recoverykeychain
 with a path to a keychain file.
 .Pp
 A new passphrase must be supplied, again via one of the three methods above (interactive,
-.Nm -newpassphrase,
+.Sy -newpassphrase,
 or
-.Nm -stdinpassphrase).
+.Sy -stdinpassphrase).
 .Pp
 If you are supplying both the old and new passphrases via stdin, they must be separated with a newline character.
 .\"
@@ -1365,7 +1391,7 @@ slices with file systems) is stored.
 Wherever a size is supplied as an output, it is always presented as a base-ten approximation with one decimal
 digit and a base-ten SI multiplier, often accompanied by a precise count in bytes. Scripts should refrain from parsing the
 normal output and use the
-.Nm -plist
+.Sy -plist
 option instead.
 .Pp
 Wherever a
@@ -1498,15 +1524,15 @@ file system's minimum unit of backing store usage, often formatting-option-depen
 Examples: 10G (10 gigabytes), 4.23tb (4.23 terabytes), 5M (5 megabytes), 4GiB (exactly 2^32 bytes), 25.4% (25.4 percent of whole disk size).
 .Sh FORMAT
 The
-.Nm format
+.Sy format
 parameter for the erasing and partitioning verbs is the file system personality name.
 You can determine this name by looking in a file system bundle's
 .Pa /System/Library/Filesystems/<fs>.fs/Contents/Info.plist
 or by using the
-.Nm listFilesystems
+.Sy listFilesystems
 verb, which also lists shortcut aliases for common
 personalities (these shortcuts are defined by
-.Nm diskutil
+.Sy diskutil
 for use with it only).
 .Pp
 Common examples include JHFS+, MS-DOS, etc.
@@ -1586,11 +1612,11 @@ diskutil enableRAID mirror /Volumes/ExistingVolume
 .\"
 .Pp
 .Sh ERRORS
-.Nm diskutil
+.Sy diskutil
 will exit with status 0 if successful or 1 if it cannot complete the requested operation;
 this includes cases in which usage text is printed.
 Before
-.Nm diskutil
+.Sy diskutil
 returns with status 1, it prints a message which might include
 an explanation local to diskutil,
 an error string from the DiskManagement or MediaKit frameworks,

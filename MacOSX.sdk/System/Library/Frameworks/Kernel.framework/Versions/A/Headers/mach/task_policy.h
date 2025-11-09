@@ -107,6 +107,9 @@ kern_return_t	task_policy_get(
 #define TASK_POLICY_STATE		4
 #define TASK_BASE_QOS_POLICY		8
 #define TASK_OVERRIDE_QOS_POLICY	9
+#define TASK_BASE_LATENCY_QOS_POLICY	10
+#define TASK_BASE_THROUGHPUT_QOS_POLICY	11
+
 
 enum task_role {
 	TASK_RENICED = -1,
@@ -141,6 +144,7 @@ enum task_latency_qos {
 	LATENCY_QOS_TIER_3 = ((0xFF<<16) | 4),
 	LATENCY_QOS_TIER_4 = ((0xFF<<16) | 5),
 	LATENCY_QOS_TIER_5 = ((0xFF<<16) | 6)
+
 };
 typedef integer_t	task_latency_qos_t;
 enum task_throughput_qos {
@@ -167,6 +171,7 @@ typedef struct task_qos_policy *task_qos_policy_t;
 #define TASK_QOS_POLICY_COUNT	((mach_msg_type_number_t) \
 	(sizeof (struct task_qos_policy) / sizeof (integer_t)))
 
+/* These should be removed - they belong in proc_info.h */
 #define PROC_FLAG_DARWINBG           0x8000    /* process in darwin background */
 #define PROC_FLAG_EXT_DARWINBG		 0x10000   /* process in darwin background - external enforcement */
 #define PROC_FLAG_IOS_APPLEDAEMON    0x20000   /* process is apple ios daemon */
@@ -175,7 +180,9 @@ typedef struct task_qos_policy *task_qos_policy_t;
 #define PROC_FLAG_ADAPTIVE_IMPORTANT 0x200000  /* Process is adaptive, and is currently important */
 #define PROC_FLAG_IMPORTANCE_DONOR   0x400000  /* Process is marked as an importance donor */
 #define PROC_FLAG_SUPPRESSED         0x800000  /* Process is suppressed */
-#define PROC_FLAG_IOS_APPLICATION	 0x1000000 /* Process is an application */
+#define PROC_FLAG_APPLICATION        0x1000000 /* Process is an application */
+#define PROC_FLAG_IOS_APPLICATION PROC_FLAG_APPLICATION /* Process is an application */
+
 
 
 

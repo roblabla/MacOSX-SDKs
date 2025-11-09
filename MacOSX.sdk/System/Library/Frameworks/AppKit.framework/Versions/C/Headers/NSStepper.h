@@ -1,13 +1,13 @@
 /*
         NSStepper.h
         Application Kit
-        Copyright (c) 2000-2013, Apple Inc.
+        Copyright (c) 2000-2014, Apple Inc.
         All rights reserved.
 */
 
 #import <AppKit/NSControl.h>
 
-@interface NSStepper : NSControl {
+@interface NSStepper : NSControl <NSAccessibilityStepper> {
   @private
     unsigned int _reserved1;
     unsigned int _reserved2;
@@ -15,19 +15,14 @@
     unsigned int _reserved4;
 }
 
-- (double)minValue;
-- (void)setMinValue:(double)minValue;
+@property double minValue;
 
-- (double)maxValue;
-- (void)setMaxValue:(double)maxValue;
+@property double maxValue;
 
-- (double)increment;
-- (void)setIncrement:(double)increment;
+@property double increment;
 
-- (BOOL)valueWraps;
-- (void)setValueWraps:(BOOL)valueWraps;
+@property BOOL valueWraps;
 
-- (BOOL)autorepeat;
-- (void)setAutorepeat:(BOOL)autorepeat;
+@property BOOL autorepeat;
 
 @end

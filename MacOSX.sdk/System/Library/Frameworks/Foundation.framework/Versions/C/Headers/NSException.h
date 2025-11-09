@@ -1,5 +1,5 @@
 /*	NSException.h
-	Copyright (c) 1994-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -44,14 +44,14 @@ __attribute__((__objc_exception__))
 }
 
 + (NSException *)exceptionWithName:(NSString *)name reason:(NSString *)reason userInfo:(NSDictionary *)userInfo;
-- (id)initWithName:(NSString *)aName reason:(NSString *)aReason userInfo:(NSDictionary *)aUserInfo;
+- (instancetype)initWithName:(NSString *)aName reason:(NSString *)aReason userInfo:(NSDictionary *)aUserInfo NS_DESIGNATED_INITIALIZER;
 
-- (NSString *)name;
-- (NSString *)reason;
-- (NSDictionary *)userInfo;
+@property (readonly, copy) NSString *name;
+@property (readonly, copy) NSString *reason;
+@property (readonly, copy) NSDictionary *userInfo;
 
-- (NSArray *)callStackReturnAddresses NS_AVAILABLE(10_5, 2_0);
-- (NSArray *)callStackSymbols NS_AVAILABLE(10_6, 4_0);
+@property (readonly, copy) NSArray *callStackReturnAddresses NS_AVAILABLE(10_5, 2_0);
+@property (readonly, copy) NSArray *callStackSymbols NS_AVAILABLE(10_6, 4_0);
 
 - (void)raise;
 

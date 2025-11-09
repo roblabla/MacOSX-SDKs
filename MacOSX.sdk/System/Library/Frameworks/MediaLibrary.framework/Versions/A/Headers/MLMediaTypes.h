@@ -30,15 +30,43 @@ extern NSString* const MLiTunesRootGroupTypeIdentifier;
 extern NSString* const MLiTunesPlaylistTypeIdentifier;
 extern NSString* const MLiTunesPurchasedPlaylistTypeIdentifier;
 extern NSString* const MLiTunesPodcastPlaylistTypeIdentifier;
+extern NSString* const MLiTunesVideoPlaylistTypeIdentifier;
 extern NSString* const MLiTunesSmartPlaylistTypeIdentifier;
 extern NSString* const MLiTunesFolderPlaylistTypeIdentifier;
 extern NSString* const MLiTunesMoviesPlaylistTypeIdentifier;
 extern NSString* const MLiTunesTVShowsPlaylistTypeIdentifier;
 extern NSString* const MLiTunesAudioBooksPlaylistTypeIdentifier;
 extern NSString* const MLiTunesMusicPlaylistTypeIdentifier;
+extern NSString* const MLiTunesMusicVideosPlaylistTypeIdentifier;
 extern NSString* const MLiTunesGeniusPlaylistTypeIdentifier;
 extern NSString* const MLiTunesSavedGeniusPlaylistTypeIdentifier;
 extern NSString* const MLiTunesiTunesUPlaylistTypeIdentifier;
+
+// Photos
+extern NSString* const MLPhotosRootGroupTypeIdentifier;
+extern NSString* const MLPhotosSharedGroupTypeIdentifier;
+extern NSString* const MLPhotosAlbumsGroupTypeIdentifier;
+extern NSString* const MLPhotosAlbumTypeIdentifier;
+extern NSString* const MLPhotosFolderTypeIdentifier;
+extern NSString* const MLPhotosSmartAlbumTypeIdentifier;
+extern NSString* const MLPhotosPublishedAlbumTypeIdentifier;
+extern NSString* const MLPhotosAllMomentsGroupTypeIdentifier;
+extern NSString* const MLPhotosMomentGroupTypeIdentifier;
+extern NSString* const MLPhotosAllCollectionsGroupTypeIdentifier;
+extern NSString* const MLPhotosCollectionGroupTypeIdentifier;
+extern NSString* const MLPhotosAllYearsGroupTypeIdentifier;
+extern NSString* const MLPhotosYearGroupTypeIdentifier;
+extern NSString* const MLPhotosLastImportGroupTypeIdentifier;
+extern NSString* const MLPhotosMyPhotoStreamTypeIdentifier;
+extern NSString* const MLPhotosSharedPhotoStreamTypeIdentifier;
+extern NSString* const MLPhotosFavoritesGroupTypeIdentifier;
+extern NSString* const MLPhotosPanoramasGroupTypeIdentifier;
+extern NSString* const MLPhotosVideosGroupTypeIdentifier;
+extern NSString* const MLPhotosSloMoGroupTypeIdentifier;
+extern NSString* const MLPhotosTimelapseGroupTypeIdentifier;
+extern NSString* const MLPhotosBurstGroupTypeIdentifier;
+extern NSString* const MLPhotosFacesAlbumTypeIdentifier;
+extern NSString* const MLPhotosAllPhotosAlbumTypeIdentifier;
 
 // iPhoto
 extern NSString* const MLiPhotoRootGroupTypeIdentifier;

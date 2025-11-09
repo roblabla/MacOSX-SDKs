@@ -1,7 +1,7 @@
 /*
 	NSSplitView.h
 	Application Kit
-	Copyright (c) 1994-2013, Apple Inc.
+	Copyright (c) 1994-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -11,16 +11,11 @@
 @class NSNotification;
 @protocol NSSplitViewDelegate;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-enum {
+typedef NS_ENUM(NSInteger, NSSplitViewDividerStyle) {
     NSSplitViewDividerStyleThick = 1,
     NSSplitViewDividerStyleThin = 2,
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAX_OS_X_VERSION_10_6
-    NSSplitViewDividerStylePaneSplitter = 3,
-#endif
-};
-#endif
-typedef NSInteger NSSplitViewDividerStyle;
+    NSSplitViewDividerStylePaneSplitter NS_ENUM_AVAILABLE_MAC(10_6) = 3,
+} NS_ENUM_AVAILABLE_MAC(10_5);
 
 
 @interface NSSplitView : NSView {
@@ -30,25 +25,21 @@ typedef NSInteger NSSplitViewDividerStyle;
 
 /* Set or get whether the long axes of a split view's dividers are oriented up-and-down (YES) or left-and-right (NO).
 */
-- (void)setVertical:(BOOL)flag;
-- (BOOL)isVertical;
+@property (getter=isVertical) BOOL vertical;
 
 
 /* What kind of divider to use. NSSplitViewThickDividerStyle is the default.
 */
-- (void)setDividerStyle:(NSSplitViewDividerStyle)dividerStyle NS_AVAILABLE_MAC(10_5);
-- (NSSplitViewDividerStyle)dividerStyle NS_AVAILABLE_MAC(10_5);
+@property NSSplitViewDividerStyle dividerStyle NS_AVAILABLE_MAC(10_5);
 
 /* The name to use when autosaving the positions of dividers, and whether or not subviews are collapsed, to preferences. If this value is nil or the string is empty no autosaving is done.
 */
-- (void)setAutosaveName:(NSString *)autosaveName NS_AVAILABLE_MAC(10_5);
-- (NSString *)autosaveName NS_AVAILABLE_MAC(10_5);
+@property (copy) NSString *autosaveName NS_AVAILABLE_MAC(10_5);
 
 
 /* Set or get the delegate of the split view. The delegate will be sent NSSplitViewDelegate messages to which it responds.
 */
-- (void)setDelegate:(id <NSSplitViewDelegate>)delegate;
-- (id <NSSplitViewDelegate>)delegate;
+@property (assign) id<NSSplitViewDelegate> delegate;
 
 /* Draw the divider between two of the split view's subviews. The rectangle describes the entire divider rectangle in the receiver's coordinates. You can override this method to change the appearance of dividers.
 */
@@ -57,12 +48,12 @@ typedef NSInteger NSSplitViewDividerStyle;
 
 /* Return the color of the dividers that the split view is drawing between subviews. The default implementation of this method returns [NSColor clearColor] for the thick divider style. It will also return [NSColor clearColor] for the thin divider style when the split view is in a textured window. All other thin dividers are drawn with a color that looks good between two white panes. You can override this method to change the color of dividers.
 */
-- (NSColor *)dividerColor NS_AVAILABLE_MAC(10_5);
+@property (readonly, copy) NSColor *dividerColor NS_AVAILABLE_MAC(10_5);
 
 
 /* Return the thickness of the dividers that the split view is drawing between subviews. The default implementation returns a value that depends on the divider style. You can override this method to change the size of dividers.
 */
-- (CGFloat)dividerThickness;
+@property (readonly) CGFloat dividerThickness;
 
 /* Set the frames of the split view's subviews so that they, plus the dividers, fill the split view. The default implementation of this method resizes all of the subviews proportionally so that the ratio of heights (in the horizontal split view case) or widths (in the vertical split view case) doesn't change, even though the absolute sizes of the subviews do change. This message should be sent to split views from which subviews have been added or removed, to reestablish the consistency of subview placement.
 */

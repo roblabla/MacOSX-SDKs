@@ -1,5 +1,5 @@
 /*	NSUndoManager.h
-	Copyright (c) 1995-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1995-2014, Apple Inc. All rights reserved.
 */
 
 
@@ -38,35 +38,32 @@ NS_CLASS_AVAILABLE(10_0, 3_0)
 - (void)endUndoGrouping;
     // These nest.
 
-- (NSInteger)groupingLevel;
+@property (readonly) NSInteger groupingLevel;
     // Zero means no open group.
 
         /* Enable/Disable registration */
 
 - (void)disableUndoRegistration;
 - (void)enableUndoRegistration;
-- (BOOL)isUndoRegistrationEnabled;
+@property (readonly, getter=isUndoRegistrationEnabled) BOOL undoRegistrationEnabled;
 
         /* Groups By Event */
 
-- (BOOL)groupsByEvent;
-- (void)setGroupsByEvent:(BOOL)groupsByEvent;
+@property BOOL groupsByEvent;
     // If groupsByEvent is enabled, the undoManager automatically groups
     // all undos registered during a single NSRunLoop event together in
     // a single top-level group. This featured is enabled by default.
 
         /* Undo levels */
 
-- (void)setLevelsOfUndo:(NSUInteger)levels;
-- (NSUInteger)levelsOfUndo;
+@property NSUInteger levelsOfUndo;
     // Sets the number of complete groups (not operations) that should
     // be kept my the manager.  When limit is reached, oldest undos are
     // thrown away.  0 means no limit !
 
         /* Run Loop Modes */
 
-- (void)setRunLoopModes:(NSArray *)runLoopModes;
-- (NSArray *)runLoopModes;
+@property (copy) NSArray *runLoopModes;
 
         /* Undo/Redo */
 
@@ -81,12 +78,12 @@ NS_CLASS_AVAILABLE(10_0, 3_0)
     // Undoes a nested grouping without first trying to close a top level
     // undo group.
 
-- (BOOL)canUndo;
-- (BOOL)canRedo;
+@property (readonly) BOOL canUndo;
+@property (readonly) BOOL canRedo;
     // returns whether or not the UndoManager has anything to undo or redo
 
-- (BOOL)isUndoing;
-- (BOOL)isRedoing;
+@property (readonly, getter=isUndoing) BOOL undoing;
+@property (readonly, getter=isRedoing) BOOL redoing;
     // returns whether or not the undo manager is currently in the process
     // of invoking undo or redo operations.
 
@@ -114,14 +111,14 @@ NS_CLASS_AVAILABLE(10_0, 3_0)
 // This key is set on the user info dictionary of the NSUndoManagerDidCloseUndoGroupNotification, with a NSNumber boolean value of YES, if the undo group as a whole is discardable.
 FOUNDATION_EXPORT NSString * const NSUndoManagerGroupIsDiscardableKey NS_AVAILABLE(10_7, 5_0);
 
-- (BOOL)undoActionIsDiscardable NS_AVAILABLE(10_7, 5_0);
-- (BOOL)redoActionIsDiscardable NS_AVAILABLE(10_7, 5_0);
+@property (readonly) BOOL undoActionIsDiscardable NS_AVAILABLE(10_7, 5_0);
+@property (readonly) BOOL redoActionIsDiscardable NS_AVAILABLE(10_7, 5_0);
    // Call to see if the next undo or redo action is discardable.
 
     	/* Undo/Redo action name */
 
-- (NSString *)undoActionName;
-- (NSString *)redoActionName;
+@property (readonly, copy) NSString *undoActionName;
+@property (readonly, copy) NSString *redoActionName;
     // Call undoActionName or redoActionName to get the name of the next action to be undone or redone.
     // Returns @"" if there is nothing to undo/redo or no action names were registered.
 
@@ -131,8 +128,8 @@ FOUNDATION_EXPORT NSString * const NSUndoManagerGroupIsDiscardableKey NS_AVAILAB
 
     	/* Undo/Redo menu item title */
 
-- (NSString *)undoMenuItemTitle;
-- (NSString *)redoMenuItemTitle;
+@property (readonly, copy) NSString *undoMenuItemTitle;
+@property (readonly, copy) NSString *redoMenuItemTitle;
     // Call undoMenuItemTitle or redoMenuItemTitle to get the string for the undo or redo menu item.
     // In English they will return "Undo <action name>"/"Redo <action name>" or "Undo"/"Redo" if there is
     // nothing to undo/redo or no action names were set.

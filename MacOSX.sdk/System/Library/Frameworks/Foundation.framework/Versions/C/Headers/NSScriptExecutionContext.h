@@ -1,6 +1,6 @@
 /*
 	NSScriptExecutionContext.h
-	Copyright (c) 1997-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1997-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -17,13 +17,8 @@
 
 + (NSScriptExecutionContext *)sharedScriptExecutionContext;
 
-- (id)topLevelObject;
-- (void)setTopLevelObject:(id)obj;
-
-- (id)objectBeingTested;
-- (void)setObjectBeingTested:(id)obj;
-
-- (id)rangeContainerObject;
-- (void)setRangeContainerObject:(id)obj;
+@property (retain) id topLevelObject;
+@property (retain) id objectBeingTested;
+@property (retain) id rangeContainerObject;
 
 @end

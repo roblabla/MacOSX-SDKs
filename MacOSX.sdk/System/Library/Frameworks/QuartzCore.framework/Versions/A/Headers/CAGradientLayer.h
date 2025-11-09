@@ -1,6 +1,6 @@
 /* CoreAnimation - CAGradientLayer.h
 
-   Copyright (c) 2008-2012 Apple Inc.
+   Copyright (c) 2008-2014, Apple Inc.
    All rights reserved. */
 
 /* The gradient layer draws a color gradient over its background color,

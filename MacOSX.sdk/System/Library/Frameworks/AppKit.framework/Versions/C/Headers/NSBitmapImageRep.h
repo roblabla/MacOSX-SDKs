@@ -1,7 +1,7 @@
 /*
 	NSBitmapImageRep.h
 	Application Kit
-	Copyright (c) 1994-2013, Apple Inc.
+	Copyright (c) 1994-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -12,7 +12,7 @@
 @class NSColor;
 @class NSColorSpace;
 
-enum {
+typedef NS_ENUM(NSUInteger, NSTIFFCompression) {
     NSTIFFCompressionNone		= 1,
     NSTIFFCompressionCCITTFAX3		= 3,		/* 1 bps only */
     NSTIFFCompressionCCITTFAX4		= 4,		/* 1 bps only */
@@ -22,9 +22,8 @@ enum {
     NSTIFFCompressionPackBits		= 32773,
     NSTIFFCompressionOldJPEG		= 32865		/* No longer supported for input or output */
 };
-typedef NSUInteger NSTIFFCompression;
 
-enum {
+typedef NS_ENUM(NSUInteger, NSBitmapImageFileType) {
     NSTIFFFileType,
     NSBMPFileType,
     NSGIFFileType,
@@ -32,9 +31,8 @@ enum {
     NSPNGFileType,
     NSJPEG2000FileType
 };
-typedef NSUInteger NSBitmapImageFileType;
 
-enum {
+typedef NS_ENUM(NSInteger, NSImageRepLoadStatus) {
     NSImageRepLoadStatusUnknownType     = -1, // not enough data to determine image format. please feed me more data
     NSImageRepLoadStatusReadingHeader   = -2, // image format known, reading header. not yet valid. more data needed
     NSImageRepLoadStatusWillNeedAllData = -3, // can't read incrementally. will wait for complete data to become avail.
@@ -42,14 +40,17 @@ enum {
     NSImageRepLoadStatusUnexpectedEOF   = -5, // ran out of data before full image was decompressed.
     NSImageRepLoadStatusCompleted       = -6  // all is well, the full pixelsHigh image is valid.
 };
-typedef NSInteger NSImageRepLoadStatus;
 
-enum {
+typedef NS_OPTIONS(NSUInteger, NSBitmapFormat) {
     NSAlphaFirstBitmapFormat            = 1 << 0,       // 0 means is alpha last (RGBA, CMYKA, etc.)
     NSAlphaNonpremultipliedBitmapFormat = 1 << 1,       // 0 means is premultiplied
-    NSFloatingPointSamplesBitmapFormat  = 1 << 2	// 0 is integer
+    NSFloatingPointSamplesBitmapFormat  = 1 << 2,	// 0 is integer
+    
+    NS16BitLittleEndianBitmapFormat NS_ENUM_AVAILABLE_MAC(10_10) = (1 << 8),
+    NS32BitLittleEndianBitmapFormat NS_ENUM_AVAILABLE_MAC(10_10) = (1 << 9),
+    NS16BitBigEndianBitmapFormat NS_ENUM_AVAILABLE_MAC(10_10) = (1 << 10),
+    NS32BitBigEndianBitmapFormat NS_ENUM_AVAILABLE_MAC(10_10) = (1 << 11)
 };
-typedef NSUInteger NSBitmapFormat;
 
 APPKIT_EXTERN NSString* NSImageCompressionMethod;	// TIFF input/output (NSTIFFCompression in NSNumber)
 APPKIT_EXTERN NSString* NSImageCompressionFactor;	// TIFF/JPEG input/output (float in NSNumber)
@@ -66,7 +67,7 @@ APPKIT_EXTERN NSString* NSImageProgressive          ;	// JPEG input/output (BOOL
 APPKIT_EXTERN NSString* NSImageEXIFData             ;	// JPEG input/output (NSDictionary)
 APPKIT_EXTERN NSString* NSImageFallbackBackgroundColor  NS_AVAILABLE_MAC(10_5); // JPEG output (NSColor)
 
-@interface NSBitmapImageRep : NSImageRep {
+@interface NSBitmapImageRep : NSImageRep <NSSecureCoding> {
     /*All instance variables are private*/
     struct __bitmapRepFlags {
         unsigned int bitsPerPixel:8;	
@@ -89,32 +90,32 @@ APPKIT_EXTERN NSString* NSImageFallbackBackgroundColor  NS_AVAILABLE_MAC(10_5); 
     id _properties;
 }
 
-- (id)initWithFocusedViewRect:(NSRect)rect;
+- (instancetype)initWithFocusedViewRect:(NSRect)rect;
 
-- (id)initWithBitmapDataPlanes:(unsigned char **)planes pixelsWide:(NSInteger)width pixelsHigh:(NSInteger)height bitsPerSample:(NSInteger)bps samplesPerPixel:(NSInteger)spp hasAlpha:(BOOL)alpha isPlanar:(BOOL)isPlanar colorSpaceName:(NSString *)colorSpaceName bytesPerRow:(NSInteger)rBytes bitsPerPixel:(NSInteger)pBits;
-- (id)initWithBitmapDataPlanes:(unsigned char **)planes pixelsWide:(NSInteger)width pixelsHigh:(NSInteger)height bitsPerSample:(NSInteger)bps samplesPerPixel:(NSInteger)spp hasAlpha:(BOOL)alpha isPlanar:(BOOL)isPlanar colorSpaceName:(NSString *)colorSpaceName  bitmapFormat:(NSBitmapFormat)bitmapFormat bytesPerRow:(NSInteger)rBytes bitsPerPixel:(NSInteger)pBits;
-- (id)initWithCGImage:(CGImageRef)cgImage NS_AVAILABLE_MAC(10_5);
-- (id)initWithCIImage:(CIImage *)ciImage NS_AVAILABLE_MAC(10_5);
+- (instancetype)initWithBitmapDataPlanes:(unsigned char **)planes pixelsWide:(NSInteger)width pixelsHigh:(NSInteger)height bitsPerSample:(NSInteger)bps samplesPerPixel:(NSInteger)spp hasAlpha:(BOOL)alpha isPlanar:(BOOL)isPlanar colorSpaceName:(NSString *)colorSpaceName bytesPerRow:(NSInteger)rBytes bitsPerPixel:(NSInteger)pBits;
+- (instancetype)initWithBitmapDataPlanes:(unsigned char **)planes pixelsWide:(NSInteger)width pixelsHigh:(NSInteger)height bitsPerSample:(NSInteger)bps samplesPerPixel:(NSInteger)spp hasAlpha:(BOOL)alpha isPlanar:(BOOL)isPlanar colorSpaceName:(NSString *)colorSpaceName  bitmapFormat:(NSBitmapFormat)bitmapFormat bytesPerRow:(NSInteger)rBytes bitsPerPixel:(NSInteger)pBits;
+- (instancetype)initWithCGImage:(CGImageRef)cgImage NS_AVAILABLE_MAC(10_5);
+- (instancetype)initWithCIImage:(CIImage *)ciImage NS_AVAILABLE_MAC(10_5);
 
 + (NSArray *)imageRepsWithData:(NSData *)data;	/* some file formats can contain multiple images */
 
-+ (id)imageRepWithData:(NSData *)data;	/* Convenience of initWithData: */
-- (id)initWithData:(NSData *)data;
++ (instancetype)imageRepWithData:(NSData *)data;	/* Convenience of initWithData: */
+- (instancetype)initWithData:(NSData *)data;
 
-- (unsigned char *)bitmapData NS_RETURNS_INNER_POINTER;
+@property (readonly) unsigned char *bitmapData NS_RETURNS_INNER_POINTER;
 - (void)getBitmapDataPlanes:(unsigned char **)data;
-- (BOOL)isPlanar;
-- (NSInteger)samplesPerPixel;
-- (NSInteger)bitsPerPixel;
-- (NSInteger)bytesPerRow;
-- (NSInteger)bytesPerPlane;
-- (NSInteger)numberOfPlanes;
-- (NSBitmapFormat)bitmapFormat;
+@property (getter=isPlanar, readonly) BOOL planar;
+@property (readonly) NSInteger samplesPerPixel;
+@property (readonly) NSInteger bitsPerPixel;
+@property (readonly) NSInteger bytesPerRow;
+@property (readonly) NSInteger bytesPerPlane;
+@property (readonly) NSInteger numberOfPlanes;
+@property (readonly) NSBitmapFormat bitmapFormat;
 
 - (void)getCompression:(NSTIFFCompression *)compression factor:(float *)factor;
 - (void)setCompression:(NSTIFFCompression)compression factor:(float)factor;
 
-- (NSData *)TIFFRepresentation;
+@property (readonly, copy) NSData *TIFFRepresentation;
 - (NSData *)TIFFRepresentationUsingCompression:(NSTIFFCompression)comp factor:(float)factor;
 
 + (NSData *)TIFFRepresentationOfImageRepsInArray:(NSArray *)array;
@@ -130,7 +131,7 @@ Works on images with 8-bit SPP; thus either 8-bit gray or 24-bit color (with opt
 */
 - (void)colorizeByMappingGray:(CGFloat)midPoint toColor:(NSColor *)midPointColor blackMapping:(NSColor *)shadowColor whiteMapping:(NSColor *)lightColor;
 
-- (id)initForIncrementalLoad;
+- (instancetype)initForIncrementalLoad;
 - (NSInteger)incrementalLoadFromData:(NSData*)data complete:(BOOL)complete;
 
 - (void)setColor:(NSColor*)color atX:(NSInteger)x y:(NSInteger)y;
@@ -139,10 +140,10 @@ Works on images with 8-bit SPP; thus either 8-bit gray or 24-bit color (with opt
 - (void)getPixel:(NSUInteger[])p atX:(NSInteger)x y:(NSInteger)y;
 - (void)setPixel:(NSUInteger[])p atX:(NSInteger)x y:(NSInteger)y;
 
-- (CGImageRef)CGImage NS_AVAILABLE_MAC(10_5);
+@property (readonly) CGImageRef CGImage NS_AVAILABLE_MAC(10_5);
 
 
-- (NSColorSpace *)colorSpace NS_AVAILABLE_MAC(10_6);
+@property (readonly, strong) NSColorSpace *colorSpace NS_AVAILABLE_MAC(10_6);
 
 - (NSBitmapImageRep *)bitmapImageRepByConvertingToColorSpace:(NSColorSpace *)targetSpace renderingIntent:(NSColorRenderingIntent)renderingIntent NS_AVAILABLE_MAC(10_6);
 - (NSBitmapImageRep *)bitmapImageRepByRetaggingWithColorSpace:(NSColorSpace *)newSpace NS_AVAILABLE_MAC(10_6);

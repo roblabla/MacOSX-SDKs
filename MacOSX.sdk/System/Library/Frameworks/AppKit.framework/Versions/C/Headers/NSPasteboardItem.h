@@ -1,7 +1,7 @@
 /*
 	NSPasteboardItem.h
 	Application Kit
-	Copyright (c) 2008-2013, Apple Inc.
+	Copyright (c) 2008-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -43,7 +43,7 @@ NS_CLASS_AVAILABLE(10_6, NA)
 
 /* Returns an array of UTI strings of the data types supported by the receiver.
 */
-- (NSArray *)types;
+@property (readonly, copy) NSArray *types;
 
 /* Given an array of types, will return the first type contained in the pasteboard item, according to the sender's ordering of types.  It will check for UTI conformance of the requested types, preferring an exact match to conformance.
 */

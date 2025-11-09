@@ -51,13 +51,12 @@ AVF_EXPORT NSString *const AVAssetImageGeneratorApertureModeProductionAperture N
 */
 AVF_EXPORT NSString *const AVAssetImageGeneratorApertureModeEncodedPixels NS_AVAILABLE(10_7, 4_0);
 
-enum
+typedef NS_ENUM(NSInteger, AVAssetImageGeneratorResult)
 {
 	AVAssetImageGeneratorSucceeded,
 	AVAssetImageGeneratorFailed,
 	AVAssetImageGeneratorCancelled,
 };
-typedef NSInteger AVAssetImageGeneratorResult;
 
 NS_CLASS_AVAILABLE(10_7, 4_0)
 @interface AVAssetImageGenerator : NSObject
@@ -105,9 +104,12 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 					Clients may wish to test whether an asset has any tracks with the visual characteristic via
 					-[AVAsset tracksWithMediaCharacteristic:].
 					
-					Note also that assets that represent mutable compositions may gain visual tracks after
-					initialization of an associated AVAssetImageGenerator.
+					Note also that assets that belong to a mutable subclass of AVAsset, AVMutableComposition or AVMutableMovie,
+					may gain visual tracks after initialization of an associated AVAssetImageGenerator.
 					
+					However, the results of image generation are undefined if mutations of the asset occur while images
+					are being generated. 
+
 					AVAssetImageGenerator will use the default enabled video track(s) to generate images.
 */
 + (AVAssetImageGenerator *)assetImageGeneratorWithAsset:(AVAsset *)asset;
@@ -122,12 +124,15 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 					Clients may wish to test whether an asset has any tracks with the visual characteristic via
 					-[AVAsset tracksWithMediaCharacteristic:].
 					
-					Note also that assets that represent mutable compositions may gain visual tracks after
-					initialization of an associated AVAssetImageGenerator.
+					Note also that assets that belong to a mutable subclass of AVAsset, AVMutableComposition or AVMutableMovie,
+					may gain visual tracks after initialization of an associated AVAssetImageGenerator.
 					
+					However, the results of image generation are undefined if mutations of the asset occur while images
+					are being generated. 
+
 					AVAssetImageGenerator will use the default enabled video track(s) to generate images.
 */
-- (id)initWithAsset:(AVAsset *)asset;
+- (instancetype)initWithAsset:(AVAsset *)asset;
 
 /*!
 	@method			copyCGImageAtTime:actualTime:error:
@@ -142,7 +147,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 	@result			A CGImageRef.
 	@discussion		Returns the CGImage synchronously. Ownership follows the Create Rule.
 */
-- (CGImageRef)copyCGImageAtTime:(CMTime)requestedTime actualTime:(CMTime *)actualTime error:(NSError **)outError;
+- (CGImageRef)copyCGImageAtTime:(CMTime)requestedTime actualTime:(CMTime *)actualTime error:(NSError **)outError CF_RETURNS_RETAINED;
 
 /* error object indicates the reason for failure if the result is AVAssetImageGeneratorFailed */
 typedef void (^AVAssetImageGeneratorCompletionHandler)(CMTime requestedTime, CGImageRef image, CMTime actualTime, AVAssetImageGeneratorResult result, NSError *error);

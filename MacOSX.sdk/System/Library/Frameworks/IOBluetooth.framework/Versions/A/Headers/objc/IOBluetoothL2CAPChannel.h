@@ -145,7 +145,7 @@ typedef void (*IOBluetoothL2CAPChannelIncomingEventListener)(IOBluetoothL2CAPCha
 				If no matching L2CAP channel exists, nil is returned.
 */
 
-+ (IOBluetoothL2CAPChannel *)withObjectID:(IOBluetoothObjectID)objectID;
++ (instancetype)withObjectID:(IOBluetoothObjectID)objectID;
 
 /*!
     @method		closeChannel

@@ -1,7 +1,7 @@
 //
 //  SCNConstraint.h
 //
-//  Copyright (c) 2013 Apple Inc. All rights reserved.
+//  Copyright (c) 2013-2014 Apple Inc. All rights reserved.
 //
 
 /*!
@@ -9,12 +9,19 @@
  @abstract A SCNConstraint is an abstract class that represents a single constraint that can be applied to a node.
  */
 
-SCENEKIT_CLASS_AVAILABLE(10_9, NA)
-@interface SCNConstraint : NSObject <NSCopying, SCNAnimatable>
+SCENEKIT_CLASS_AVAILABLE(10_9, 8_0)
+@interface SCNConstraint : NSObject <NSCopying, NSSecureCoding, SCNAnimatable>
 {
 @protected
 	id _constraintReserved;
 }
+
+/*!
+ @property influenceFactor
+ @abstract Specifies the inflence factor of the receiver. Defaults to 1. Animatable
+ */
+@property(nonatomic) CGFloat influenceFactor SCENEKIT_AVAILABLE(10_10, 8_0);
+
 @end
 
 /*!
@@ -22,7 +29,7 @@ SCENEKIT_CLASS_AVAILABLE(10_9, NA)
  @abstract A SCNLookAtConstraint applies on a node's orientation so that it always look at another node.
  */
 
-SCENEKIT_CLASS_AVAILABLE(10_9, NA)
+SCENEKIT_CLASS_AVAILABLE(10_9, 8_0)
 @interface SCNLookAtConstraint : SCNConstraint
 {
 @private
@@ -55,7 +62,7 @@ SCENEKIT_CLASS_AVAILABLE(10_9, NA)
  @class SCNTransformConstraint
  @abstract A SCNTransformConstraint applies on the transform of a node via a custom block.
  */
-SCENEKIT_CLASS_AVAILABLE(10_9, NA)
+SCENEKIT_CLASS_AVAILABLE(10_9, 8_0)
 @interface SCNTransformConstraint : SCNConstraint
 {
 @private
@@ -69,6 +76,47 @@ SCENEKIT_CLASS_AVAILABLE(10_9, NA)
  @param block The custom block to call to evaluate the constraint.
  @discussion The node and its transform are passed to the block. The transform returned by the block will be used to render the node.
  */
-+ (instancetype)transformConstraintInWorldSpace:(BOOL)world withBlock:(CATransform3D(^)(SCNNode *node, CATransform3D transform))block;
++ (instancetype)transformConstraintInWorldSpace:(BOOL)world withBlock:(SCNMatrix4(^)(SCNNode *node, SCNMatrix4 transform))block;
+
+@end
+
+
+/*!
+ @class SCNIKConstraint
+ @abstract A SCNIKConstraint applies an inverse kinematics constraint
+ */
+SCENEKIT_CLASS_AVAILABLE(10_10, 8_0)
+@interface SCNIKConstraint : SCNConstraint
+{
+@private
+	id _reserved;
+}
+
+/*!
+ @method inverseKinematicsConstraintWithChainRootNode:
+ @abstract Creates and returns a SCNIKConstraint object with the specified parameter.
+ @param chainRootNode The root node of the kinematic chain.
+ @discussion "chainRootNode" must be an ancestor of the node on which the constraint is applied.
+*/
++ (instancetype)inverseKinematicsConstraintWithChainRootNode:(SCNNode *)chainRootNode;
+
+/*!
+ @property chainRootNode
+ @abstract Specifies the root node of the kinematic chain.
+ */
+@property(nonatomic, readonly) SCNNode *chainRootNode;
+
+/*!
+ @property target
+ @abstract Specifies the target position (in world space coordinates) of the end joint (i.e the node that owns the IK constraint). Defaults to (0,0,0). Animatable.
+ */
+@property(nonatomic) SCNVector3 targetPosition;
+
+/*!
+ @method setMaxAllowedRotationAngle:forJoint:
+ @abstract Specifies the maximum rotation allowed (in degrees) for the specified joint from its initial orientation. Defaults to 180.
+ */
+- (void)setMaxAllowedRotationAngle:(CGFloat)angle forJoint:(SCNNode *)node;
+- (CGFloat)maxAllowedRotationAngleForJoint:(SCNNode *)node;
 
 @end

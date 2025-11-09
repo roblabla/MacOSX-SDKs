@@ -191,6 +191,8 @@ COREDATA_EXTERN NSString * const NSPersistentStoreRebuildFromUbiquitousContentOp
 NS_CLASS_AVAILABLE(10_4, 3_0)
 @interface NSPersistentStoreCoordinator : NSObject <NSLocking> {
 @private
+    volatile id _queueOwner;
+    void *_dispatchQueue;
     struct _persistentStoreCoordinatorFlags {
         unsigned int _isRegistered:1;
         unsigned int _reservedFlags:31;
@@ -199,12 +201,51 @@ NS_CLASS_AVAILABLE(10_4, 3_0)
 	uint32_t _reserved32;
 #endif
     long _miniLock;
-    NSMutableArray *_extendedStoreURLs;
-    id _externalRecordsHelper;
+    id *_additionalPrivateIvars;
     NSManagedObjectModel *_managedObjectModel;
-    id _coreLock;
     NSArray *_persistentStores;
 }
+
+- (instancetype)initWithManagedObjectModel:(NSManagedObjectModel *)model NS_DESIGNATED_INITIALIZER;
+
+@property (readonly, strong) NSManagedObjectModel *managedObjectModel;
+
+@property (readonly, strong) NSArray *persistentStores;
+
+/* custom name for a coordinator.  Coordinators will set the label on their queue */
+@property (copy) NSString *name  NS_AVAILABLE(10_10, 8_0);
+
+- (NSPersistentStore *)persistentStoreForURL:(NSURL *)URL;
+- (NSURL *)URLForPersistentStore:(NSPersistentStore *)store;
+
+/* Sets the URL for the specified store in the coordinator.  For atomic stores, this will alter the location to which the next save operation will persist the file;  for non-atomic stores, invoking this method will release the existing connection and create a new one at the specified URL.  (For non-atomic stores, a store must pre-exist at the destination URL; a new store will not be created.)
+ */
+- (BOOL)setURL:(NSURL*)url forPersistentStore:(NSPersistentStore *)store NS_AVAILABLE(10_5, 3_0);
+
+/* Adds the store at the specified URL (of the specified type) to the coordinator with the model configuration and options.  The configuration can be nil -- then it's the complete model; storeURL is usually the file location of the database
+ */
+- (NSPersistentStore *)addPersistentStoreWithType:(NSString *)storeType configuration:(NSString *)configuration URL:(NSURL *)storeURL options:(NSDictionary *)options error:(NSError **)error;
+
+- (BOOL)removePersistentStore:(NSPersistentStore *)store error:(NSError **)error;
+
+/* Sets the metadata stored in the persistent store during the next save operation executed on it; the store type and UUID (NSStoreTypeKey and NSStoreUUIDKey) are always added automatically (but NSStoreUUIDKey is only added if it is not set manually as part of the dictionary argument)
+ */
+- (void)setMetadata:(NSDictionary *)metadata forPersistentStore:(NSPersistentStore *)store;
+
+/* Returns the metadata currently stored or to-be-stored in the persistent store
+ */
+- (NSDictionary *)metadataForPersistentStore:(NSPersistentStore *)store;
+
+/* Given a URI representation of an object ID, returns an object ID if a matching store is available or nil if a matching store cannot be found (the URI representation contains a UUID of the store the ID is coming from, and the coordinator can match it against the stores added to it)
+ */
+- (NSManagedObjectID *)managedObjectIDForURIRepresentation:(NSURL *)url;
+
+/* Sends a request to all of the stores associated with this coordinator.
+ Returns an array if successful,  nil if not.
+ The contents of the array will vary depending on the request type: NSFetchRequest results will be an array of managed objects, managed object IDs, or NSDictionaries;
+ NSSaveChangesRequests will an empty array. User defined requests will return arrays of arrays, where the nested array is the result returned form a single store.
+ */
+- (id)executeRequest:(NSPersistentStoreRequest *)request withContext:(NSManagedObjectContext *)context error:(NSError**)error NS_AVAILABLE(10_7,  5_0);
 
 /* Returns a dictionary of the registered store types:  the keys are the store type strings and the values are the NSPersistentStore subclasses wrapped in NSValues.
 */
@@ -241,54 +282,23 @@ NS_CLASS_AVAILABLE(10_4, 3_0)
 */
 - (NSPersistentStore *)importStoreWithIdentifier:(NSString *)storeIdentifier fromExternalRecordsDirectory:(NSURL *)externalRecordsURL toURL:(NSURL *)destinationURL options:(NSDictionary *)options withType:(NSString *)storeType error:(NSError **)error NS_AVAILABLE(10_6, NA);
 
-/* Sets the metadata stored in the persistent store during the next save operation executed on it; the store type and UUID (NSStoreTypeKey and NSStoreUUIDKey) are always added automatically (but NSStoreUUIDKey is only added if it is not set manually as part of the dictionary argument) 
-*/
-- (void)setMetadata:(NSDictionary *)metadata forPersistentStore:(NSPersistentStore *)store;    
-
-/* Returns the metadata currently stored or to-be-stored in the persistent store
-*/
-- (NSDictionary *)metadataForPersistentStore:(NSPersistentStore *)store;    
-
-- (id)initWithManagedObjectModel:(NSManagedObjectModel *)model;
-
-- (NSManagedObjectModel *)managedObjectModel;
-
-- (NSArray *)persistentStores;
-- (NSPersistentStore *)persistentStoreForURL:(NSURL *)URL;
-- (NSURL *)URLForPersistentStore:(NSPersistentStore *)store;
-
-/* Sets the URL for the specified store in the coordinator.  For atomic stores, this will alter the location to which the next save operation will persist the file;  for non-atomic stores, invoking this method will release the existing connection and create a new one at the specified URL.  (For non-atomic stores, a store must pre-exist at the destination URL; a new store will not be created.) 
-*/
-- (BOOL)setURL:(NSURL*)url forPersistentStore:(NSPersistentStore *)store NS_AVAILABLE(10_5, 3_0);    
-
-/* Adds the store at the specified URL (of the specified type) to the coordinator with the model configuration and options.  The configuration can be nil -- then it's the complete model; storeURL is usually the file location of the database 
-*/
-- (NSPersistentStore *)addPersistentStoreWithType:(NSString *)storeType configuration:(NSString *)configuration URL:(NSURL *)storeURL options:(NSDictionary *)options error:(NSError **)error;    
-- (BOOL)removePersistentStore:(NSPersistentStore *)store error:(NSError **)error;
-
-
 /* Used for save as - performance may vary depending on the type of old and new store; the old store is usually removed from the coordinator by the migration operation, and therefore is no longer a useful reference after invoking this method 
 */
 - (NSPersistentStore *)migratePersistentStore:(NSPersistentStore *)store toURL:(NSURL *)URL options:(NSDictionary *)options withType:(NSString *)storeType error:(NSError **)error;    
 
-/* Given a URI representation of an object ID, returns an object ID if a matching store is available or nil if a matching store cannot be found (the URI representation contains a UUID of the store the ID is coming from, and the coordinator can match it against the stores added to it) 
-*/
-- (NSManagedObjectID *)managedObjectIDForURIRepresentation:(NSURL *)url;    
+/* asynchronously performs the block on the coordinator's queue.  Encapsulates an autorelease pool. */
+- (void)performBlock:(void (^)())block  NS_AVAILABLE(10_10, 8_0);
 
-/* Sends a request to all of the stores associated with this coordinator. 
-   Returns an array if successful,  nil if not.
-   The contents of the array will vary depending on the request type: NSFetchRequest results will be an array of managed objects, managed object IDs, or NSDictionaries;  
-   NSSaveChangesRequests will an empty array. User defined requests will return arrays of arrays, where the nested array is the result returned form a single store.
- */
-- (id)executeRequest:(NSPersistentStoreRequest *)request withContext:(NSManagedObjectContext *)context error:(NSError**)error NS_AVAILABLE(10_7,  5_0);
-
-- (void)lock;
-- (void)unlock;
-- (BOOL)tryLock;
+/* synchronously performs the block on the coordinator's queue.  May safely be called reentrantly. Encapsulates an autorelease pool. */
+- (void)performBlockAndWait:(void (^)())block  NS_AVAILABLE(10_10, 8_0);
 
 /*
     Deprecated
  */
 + (NSDictionary *)metadataForPersistentStoreWithURL:(NSURL *)url error:(NSError **)error NS_DEPRECATED_MAC(10_4,10_5);
+
+- (void)lock NS_DEPRECATED(10_4, 10_10, 3_0, 8_0, "Use -performBlockAndWait: instead");
+- (void)unlock NS_DEPRECATED(10_4, 10_10, 3_0, 8_0, "Use -performBlockAndWait: instead");
+- (BOOL)tryLock NS_DEPRECATED(10_4, 10_10, 3_0, 8_0, "Use -performBlock: instead");
 
 @end

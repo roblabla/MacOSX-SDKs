@@ -1,6 +1,6 @@
 /* CoreImage - CIKernel.h
 
-   Copyright (c) 2004 Apple Computer, Inc.
+   Copyright (c) 2004 Apple, Inc.
    All rights reserved. */
 
 #import <Foundation/NSObject.h>
@@ -21,6 +21,10 @@ CORE_IMAGE_CLASS_EXPORT
  * converted to a CIKernel object, all objects are then returned in
  * an array. */
 + (NSArray *)kernelsWithString:(NSString *)s;
+
+/* This method is identical to the one above but only returns a single
+ * kernel */
++ (CIKernel *)kernelWithString:(NSString *)s __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_5_0);
 
 /* Returns the name of the kernel. */
 - (NSString *)name;

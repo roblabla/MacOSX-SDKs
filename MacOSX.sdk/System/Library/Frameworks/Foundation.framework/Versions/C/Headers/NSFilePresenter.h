@@ -1,6 +1,6 @@
 /*
 	NSFilePresenter.h
-	Copyright (c) 2010-2013, Apple Inc.
+	Copyright (c) 2010-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -22,21 +22,19 @@ You can consider "item" in method names in this header file to be an abbreviatio
 
 For example, NSDocument has a -presentedItemURL method that usually returns [self fileURL]. In a shoebox application that stores the user's data in files somewhere on the user's computer you can implement this method to specify the directory that contains those files.
 */
-@property (readonly) NSURL *presentedItemURL;
+@property (readonly, copy) NSURL *presentedItemURL;
 
 /* The operation queue in which all of the other NSFilePresenter messages except -presentedItemURL will be sent to the receiver. Implementations of this method must be prepared to be invoked by Cocoa in any queue, at any time, including from within invocations of NSFileCoordinator methods. A nil value is not valid.
 
 For example, NSDocument has a -presentedItemOperationQueue method that returns a private queue. In very simple cases you can return [NSOperationQueue mainQueue], but doing so is often an invitation to deadlocks.
 */
-@property (readonly) NSOperationQueue *presentedItemOperationQueue;
+@property (readonly, retain) NSOperationQueue *presentedItemOperationQueue;
 
 @optional
 
 /* Support for App Sandbox on OS X. Some applications, given a user-selected file, require access to additional files or directories with related names. For example, a movie player might have to automatically load subtitles for a movie that the user opened. By convention, the subtitle file has the same name as the movie, but a different file extension. If the movie player is sandboxed, its use of NSOpenPanel will grant it access to the user-selected movie (the primary item). However, access to the subtitle file (the secondary item) will not be granted by NSOpenPanel. To get access to a secondary item, a process can register an NSFilePresenter for it and unregister the NSFilePresenter once the application is finished accessing it. Each NSFilePresenter of a secondary item must return an NSURL to the primary item on request. You make that happen by providing an implementation of -primaryPresentedItemURL that returns an NSURL for the primary item.
 */
-@property (readonly) NSURL *primaryPresentedItemURL NS_AVAILABLE(10_8, NA);
-
-#if NS_BLOCKS_AVAILABLE
+@property (readonly, copy) NSURL *primaryPresentedItemURL NS_AVAILABLE(10_8, NA);
 
 /* Given that something in the system is waiting to read from the presented file or directory, do whatever it takes to ensure that the application will behave properly while that reading is happening, and then invoke the completion handler. The definition of "properly" depends on what kind of ownership model the application implements. Implementations of this method must always invoke the passed-in reader block because other parts of the system will wait until it is invoked or until the user loses patience and cancels the waiting. When an implementation of this method invokes the passed-in block it can pass that block yet another block, which will be invoked in the receiver's operation queue when reading is complete.
 
@@ -65,8 +63,6 @@ For example, NSDocument has an implementation of this method that closes the doc
 The file coordination mechanism does not always send -relinquishPresentedItemToReader: or -relinquishPresentedItemToWriter: to your NSFilePresenter before sending this message. For example, other process' use of -[NSFileCoordinator prepareForReadingItemsAtURLs:options:writingItemsAtURLs:options:error:byAccessor:] can cause this to happen.
 */
 - (void)accommodatePresentedItemDeletionWithCompletionHandler:(void (^)(NSError *errorOrNil))completionHandler;
-
-#endif
 
 /* Be notified that the file or directory has been moved or renamed, or a directory containing it has been moved or renamed. A typical implementation of this method will cause subsequent invocations of -presentedItemURL to return the new URL.
 
@@ -104,15 +100,11 @@ For example, NSDocument has implementations of these methods that help decide wh
 /* These methods are sent by the file coordination machinery only when the presented item is a directory. "Contained by the directory" in these comments means contained by the directory, a directory contained by the directory, and so on.
 */
 
-#if NS_BLOCKS_AVAILABLE
-
 /* Given that something in the system is waiting to delete a file or directory contained by the directory, do whatever it takes to ensure that the deleting will succeed and that the receiver's application will behave properly when the deleting has happened, and then invoke the completion handler. If successful (including when there is simply nothing to do) pass nil to the completion handler, or if not successful pass an NSError that encapsulates the reason why preparation failed. Implementations of this method must always invoke the completion handler because other parts of the system will wait until it is invoked or until the user loses patience and cancels the waiting.
 
 The file coordination mechanism does not always send -relinquishPresentedItemToReader: or -relinquishPresentedItemToWriter: to your NSFilePresenter before sending this message. For example, other process' use of -[NSFileCoordinator prepareForReadingItemsAtURLs:options:writingItemsAtURLs:options:error:byAccessor:] can cause this to happen.
 */
 - (void)accommodatePresentedSubitemDeletionAtURL:(NSURL *)url completionHandler:(void (^)(NSError *errorOrNil))completionHandler;
-
-#endif
 
 /* Be notified that a file or directory contained by the directory has been added. If this method is not implemented but -presentedItemDidChange is, and the directory is actually a file package, then the file coordination machinery will invoke -presentedItemDidChange instead.
 

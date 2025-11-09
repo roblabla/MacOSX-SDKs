@@ -1,7 +1,7 @@
 /*
         NSPredicateEditor.h
 	Application Kit
-	Copyright (c) 2006-2013, Apple Inc.
+	Copyright (c) 2006-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -24,13 +24,11 @@ NS_CLASS_AVAILABLE(10_5, NA)
     id _predicateEditorReserved[3];
 }
 
-/* Sets the NSPredicateEditorRowTemplates for the NSPredicateEditor.  When created, NSPredicateEditor contains a template representing compound predicates; if you wish to keep it, you should take care to include it in this array.
+/* Setter - Sets the NSPredicateEditorRowTemplates for the NSPredicateEditor.  When created, NSPredicateEditor contains a template representing compound predicates; if you wish to keep it, you should take care to include it in this array.
 */
-- (void)setRowTemplates:(NSArray *)rowTemplates;
-
-/* Returns the row templates for this NSPredicateEditor.
+/* Getter - Returns the row templates for this NSPredicateEditor.
 */
-- (NSArray *)rowTemplates;
+@property (copy) NSArray *rowTemplates;
 
 @end
 

@@ -2,7 +2,7 @@
  *  CVPixelFormatDescription.h
  *  CoreVideo
  *
- *  Copyright (c) 2013 Apple Computer, Inc. All rights reserved.
+ *  Copyright (c) 2013-2014 Apple Inc. All rights reserved.
  *
  */
 
@@ -38,6 +38,12 @@ CV_EXPORT const CFStringRef kCVPixelFormatFourCC __OSX_AVAILABLE_STARTING(__MAC_
 /* kCFBooleanTrue indicates that the format contains alpha and some images may be considered transparent;
    kCFBooleanFalse indicates that there is no alpha and images are always opaque. */
 CV_EXPORT const CFStringRef kCVPixelFormatContainsAlpha __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_3);
+	
+/* kCFBooleanTrue indicates that the format contains YCbCr data; */
+CV_EXPORT const CFStringRef kCVPixelFormatContainsYCbCr __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+	
+/* kCFBooleanTrue indicates that the format contains RGB data; */
+CV_EXPORT const CFStringRef kCVPixelFormatContainsRGB __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 /* All buffers have one or more image planes.  Each plane may contain a single or an interleaved set of components */   
 /* For simplicity sake, pixel formats that are not planar may place the required format keys at the top
@@ -95,7 +101,7 @@ CV_EXPORT const CFStringRef kCVPixelFormatCGBitmapContextCompatibility __OSX_AVA
 CV_EXPORT const CFStringRef kCVPixelFormatCGImageCompatibility __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 CV_EXPORT const CFStringRef kCVPixelFormatOpenGLCompatibility __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 CV_EXPORT const CFStringRef kCVPixelFormatOpenGLESCompatibility __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_5_0);
-
+    
 /* This callback routine implements code to handle the functionality of CVPixelBufferFillExtendedPixels.  
    For custom pixel formats where you will never need to use that call, this is not required. */
 typedef Boolean (*CVFillExtendedPixelsCallBack)( CVPixelBufferRef pixelBuffer, void *refCon);

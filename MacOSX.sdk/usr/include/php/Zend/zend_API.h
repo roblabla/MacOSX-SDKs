@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | Zend Engine                                                          |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1998-2013 Zend Technologies Ltd. (http://www.zend.com) |
+   | Copyright (c) 1998-2014 Zend Technologies Ltd. (http://www.zend.com) |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.00 of the Zend license,     |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -258,6 +258,8 @@ ZEND_API char *zend_zval_type_name(const zval *arg);
 ZEND_API int zend_parse_method_parameters(int num_args TSRMLS_DC, zval *this_ptr, const char *type_spec, ...);
 ZEND_API int zend_parse_method_parameters_ex(int flags, int num_args TSRMLS_DC, zval *this_ptr, const char *type_spec, ...);
 
+ZEND_API int zend_parse_parameter(int flags, int arg_num TSRMLS_DC, zval **arg, const char *spec, ...);
+
 /* End of parameter parsing API -- andrei */
 
 ZEND_API int zend_register_functions(zend_class_entry *scope, const zend_function_entry *functions, HashTable *function_table, int type TSRMLS_DC);
@@ -423,6 +425,8 @@ ZEND_API int add_get_index_long(zval *arg, ulong idx, long l, void **dest);
 ZEND_API int add_get_index_double(zval *arg, ulong idx, double d, void **dest);
 ZEND_API int add_get_index_string(zval *arg, ulong idx, const char *str, void **dest, int duplicate);
 ZEND_API int add_get_index_stringl(zval *arg, ulong idx, const char *str, uint length, void **dest, int duplicate);
+
+ZEND_API int array_set_zval_key(HashTable *ht, zval *key, zval *value);
 
 ZEND_API int add_property_long_ex(zval *arg, const char *key, uint key_len, long l TSRMLS_DC);
 ZEND_API int add_property_null_ex(zval *arg, const char *key, uint key_len TSRMLS_DC);

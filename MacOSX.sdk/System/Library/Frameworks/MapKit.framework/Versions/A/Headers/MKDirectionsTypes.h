@@ -2,7 +2,7 @@
 //  MKDirectionsTypes.h
 //  MapKit
 //
-//  Copyright (c) 2013, Apple Inc. All rights reserved.
+//  Copyright (c) 2013-2014, Apple Inc. All rights reserved.
 //
 
 #import <MapKit/MKFoundation.h>

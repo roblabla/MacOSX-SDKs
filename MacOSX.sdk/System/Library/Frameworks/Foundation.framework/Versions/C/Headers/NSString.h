@@ -1,5 +1,5 @@
 /*	NSString.h
-	Copyright (c) 1994-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2014, Apple Inc. All rights reserved.
 */
 
 typedef unsigned short unichar;
@@ -75,8 +75,10 @@ FOUNDATION_EXPORT NSString * const NSCharacterConversionException;
 
 /* NSString primitive (funnel) methods. A minimal subclass of NSString just needs to implement these, although we also recommend getCharacters:range:. See below for the other methods.
 */
-- (NSUInteger)length;			
+@property (readonly) NSUInteger length;
 - (unichar)characterAtIndex:(NSUInteger)index;
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
 @end
 
@@ -107,6 +109,12 @@ FOUNDATION_EXPORT NSString * const NSCharacterConversionException;
 - (BOOL)hasPrefix:(NSString *)aString;
 - (BOOL)hasSuffix:(NSString *)aString;
 
+/* containsString: returns YES if the target string is contained within the receiver. Same as calling rangeOfString:options: with no options, thus doing a case-sensitive, non-literal search. localizedCaseInsensitiveContainsString: is the case-insensitive variant. Note that it takes the current locale into effect as well.  Locale-independent case-insensitive operation, and other needs can be achieved by calling rangeOfString:options:range:locale: directly.
+ */
+- (BOOL)containsString:(NSString *)aString NS_AVAILABLE(10_10, 8_0);
+- (BOOL)localizedCaseInsensitiveContainsString:(NSString *)aString NS_AVAILABLE(10_10, 8_0);
+
+
 /* These methods return length==0 if the target string is not found. So, to check for containment: ([str rangeOfString:@"target"].length > 0).  Note that the length of the range returned by these methods might be different than the length of the target string, due composed characters and such.
 */
 - (NSRange)rangeOfString:(NSString *)aString;
@@ -128,12 +136,12 @@ FOUNDATION_EXPORT NSString * const NSCharacterConversionException;
 
 /* The following convenience methods all skip initial space characters (whitespaceSet) and ignore trailing characters. NSScanner can be used for more "exact" parsing of numbers.
 */
-- (double)doubleValue;
-- (float)floatValue;
-- (int)intValue;
-- (NSInteger)integerValue NS_AVAILABLE(10_5, 2_0);
-- (long long)longLongValue NS_AVAILABLE(10_5, 2_0);
-- (BOOL)boolValue NS_AVAILABLE(10_5, 2_0);  // Skips initial space characters (whitespaceSet), or optional -/+ sign followed by zeroes. Returns YES on encountering one of "Y", "y", "T", "t", or a digit 1-9. It ignores any trailing characters.
+@property (readonly) double doubleValue;
+@property (readonly) float floatValue;
+@property (readonly) int intValue;
+@property (readonly) NSInteger integerValue NS_AVAILABLE(10_5, 2_0);
+@property (readonly) long long longLongValue NS_AVAILABLE(10_5, 2_0);
+@property (readonly) BOOL boolValue NS_AVAILABLE(10_5, 2_0);  // Skips initial space characters (whitespaceSet), or optional -/+ sign followed by zeroes. Returns YES on encountering one of "Y", "y", "T", "t", or a digit 1-9. It ignores any trailing characters.
 
 - (NSArray *)componentsSeparatedByString:(NSString *)separator;
 - (NSArray *)componentsSeparatedByCharactersInSet:(NSCharacterSet *)separator NS_AVAILABLE(10_5, 2_0);
@@ -142,9 +150,9 @@ FOUNDATION_EXPORT NSString * const NSCharacterConversionException;
 
 /* The following three case methods perform the canonical (non-localized) mappings. They are suitable for programming operations that require stable results not depending on the user's locale preference.  For localized case mapping for strings presented to users, use their corresponding methods with locale argument below.
  */
-- (NSString *)uppercaseString;
-- (NSString *)lowercaseString;
-- (NSString *)capitalizedString;
+@property (readonly, copy) NSString *uppercaseString;
+@property (readonly, copy) NSString *lowercaseString;
+@property (readonly, copy) NSString *capitalizedString;
 
 /* The following methods perform localized case mappings based on the locale specified. Passing nil indicates the canonical mapping.  For the user preference locale setting, specify +[NSLocale currentLocale].
  */
@@ -161,7 +169,6 @@ FOUNDATION_EXPORT NSString * const NSCharacterConversionException;
 - (void)getParagraphStart:(NSUInteger *)startPtr end:(NSUInteger *)parEndPtr contentsEnd:(NSUInteger *)contentsEndPtr forRange:(NSRange)range;
 - (NSRange)paragraphRangeForRange:(NSRange)range;
 
-#if NS_BLOCKS_AVAILABLE
 typedef NS_OPTIONS(NSUInteger, NSStringEnumerationOptions) {
     // Pass in one of the "By" options:
     NSStringEnumerationByLines = 0,                       // Equivalent to lineRangeForRange:
@@ -179,16 +186,15 @@ typedef NS_OPTIONS(NSUInteger, NSStringEnumerationOptions) {
 */
 - (void)enumerateSubstringsInRange:(NSRange)range options:(NSStringEnumerationOptions)opts usingBlock:(void (^)(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop))block NS_AVAILABLE(10_6, 4_0);
 - (void)enumerateLinesUsingBlock:(void (^)(NSString *line, BOOL *stop))block NS_AVAILABLE(10_6, 4_0);
-#endif
 
-- (NSString *)description;
+@property (readonly, copy) NSString *description;
 
-- (NSUInteger)hash;
+@property (readonly) NSUInteger hash;
 
 /*** Encoding methods ***/
 
-- (NSStringEncoding)fastestEncoding;    	// Result in O(1) time; a rough estimate
-- (NSStringEncoding)smallestEncoding;   	// Result in O(n) time; the encoding in which the string is most compact
+@property (readonly) NSStringEncoding fastestEncoding;    	// Result in O(1) time; a rough estimate
+@property (readonly) NSStringEncoding smallestEncoding;   	// Result in O(n) time; the encoding in which the string is most compact
 
 - (NSData *)dataUsingEncoding:(NSStringEncoding)encoding allowLossyConversion:(BOOL)lossy;   // External representation
 - (NSData *)dataUsingEncoding:(NSStringEncoding)encoding;                                    // External representation
@@ -218,10 +224,10 @@ typedef NS_OPTIONS(NSUInteger, NSStringEnumerationOptions) {
 - (NSUInteger)maximumLengthOfBytesUsingEncoding:(NSStringEncoding)enc;	// Result in O(1) time; the estimate may be way over what's needed. Returns 0 on error (overflow)
 - (NSUInteger)lengthOfBytesUsingEncoding:(NSStringEncoding)enc;		// Result in O(n) time; the result is exact. Returns 0 on error (cannot convert to specified encoding, or overflow)
 
-- (NSString *)decomposedStringWithCanonicalMapping;
-- (NSString *)precomposedStringWithCanonicalMapping;
-- (NSString *)decomposedStringWithCompatibilityMapping;
-- (NSString *)precomposedStringWithCompatibilityMapping;
+@property (readonly, copy) NSString *decomposedStringWithCanonicalMapping;
+@property (readonly, copy) NSString *precomposedStringWithCanonicalMapping;
+@property (readonly, copy) NSString *decomposedStringWithCompatibilityMapping;
+@property (readonly, copy) NSString *precomposedStringWithCompatibilityMapping;
 
 /* Returns a string with the character folding options applied. theOptions is a mask of compare flags with *InsensitiveSearch suffix.
 */
@@ -239,7 +245,7 @@ typedef NS_OPTIONS(NSUInteger, NSStringEnumerationOptions) {
 */
 - (NSString *)stringByReplacingCharactersInRange:(NSRange)range withString:(NSString *)replacement NS_AVAILABLE(10_5, 2_0);
 
-- (__strong const char *)UTF8String NS_RETURNS_INNER_POINTER;	// Convenience to return null-terminated UTF8 representation
+@property (readonly) __strong const char *UTF8String NS_RETURNS_INNER_POINTER;	// Convenience to return null-terminated UTF8 representation
 
 /* User-dependent encoding who value is derived from user's default language and potentially other factors. The use of this encoding might sometimes be needed when interpreting user documents with unknown encodings, in the absence of other hints.  This encoding should be used rarely, if at all. Note that some potential values here might result in unexpected encoding conversions of even fairly straightforward NSString content --- for instance, punctuation characters with a bidirectional encoding.
 */
@@ -252,7 +258,6 @@ typedef NS_OPTIONS(NSUInteger, NSStringEnumerationOptions) {
 
 /* In general creation methods in NSString do not apply to subclassers, as subclassers are assumed to provide their own init methods which create the string in the way the subclass wishes.  Designated initializers of NSString are thus init and initWithCoder:.
 */
-- (instancetype)init;
 - (instancetype)initWithCharactersNoCopy:(unichar *)characters length:(NSUInteger)length freeWhenDone:(BOOL)freeBuffer;	/* "NoCopy" is a hint */
 - (instancetype)initWithCharacters:(const unichar *)characters length:(NSUInteger)length;
 - (instancetype)initWithUTF8String:(const char *)nullTerminatedCString;
@@ -315,8 +320,8 @@ typedef NS_OPTIONS(NSUInteger, NSStringEnumerationOptions) {
 
 /* In addition to these two, NSMutableString responds properly to all NSString creation methods.
 */
-- (id)initWithCapacity:(NSUInteger)capacity;
-+ (id)stringWithCapacity:(NSUInteger)capacity;
+- (NSMutableString *)initWithCapacity:(NSUInteger)capacity;
++ (NSMutableString *)stringWithCapacity:(NSUInteger)capacity;
 
 /* This method replaces all occurrences of the target string with the replacement string, in the specified range of the receiver string, and returns the number of replacements. NSBackwardsSearch means the search is done from the end of the range (the results could be different); NSAnchoredSearch means only anchored (but potentially multiple) instances will be replaced. NSLiteralSearch and NSCaseInsensitiveSearch also apply. NSNumericSearch is ignored. Use NSMakeRange(0, [receiver length]) to process whole string. If NSRegularExpressionSearch is specified, the replacement is treated as a template, as in the corresponding NSRegularExpression methods, and no other options can apply except NSCaseInsensitiveSearch and NSAnchoredSearch.
 */
@@ -324,7 +329,53 @@ typedef NS_OPTIONS(NSUInteger, NSStringEnumerationOptions) {
 
 @end
 
+@interface NSString (NSStringEncodingDetection)
 
+/*
+ This API is used to detect the string encoding of a given raw data. It can also do lossy string conversion. It converts the data to a string in the detected string encoding. The data object contains the raw bytes, and the option dictionary contains the hints and parameters for the analysis. The opts dictionary can be nil. If the string parameter is not NULL, the string created by the detected string encoding is returned. The lossy substitution string is emitted in the output string for characters that could not be converted when lossy conversion is enabled. The usedLossyConversion indicates if there is any lossy conversion in the resulted string. If no encoding can be detected, 0 is returned.
+ 
+ The possible items for the dictionary are:
+ 1) an array of suggested string encodings (without specifying the 3rd option in this list, all string encodings are considered but the ones in the array will have a higher preference; moreover, the order of the encodings in the array is important: the first encoding has a higher preference than the second one in the array)
+ 2) an array of string encodings not to use (the string encodings in this list will not be considered at all)
+ 3) a boolean option indicating whether only the suggested string encodings are considered
+ 4) a boolean option indicating whether lossy is allowed
+ 5) an option that gives a specific string to substitude for mystery bytes
+ 6) the current user's language
+ 7) a boolean option indicating whether the data is generated by Windows
+ 
+ If the values in the dictionary have wrong types (for example, the value of NSStringEncodingDetectionSuggestedEncodingsKey is not an array), an exception is thrown.
+ If the values in the dictionary are unknown (for example, the value in the array of suggested string encodings is not a valid encoding), the values will be ignored.
+ */
++ (NSStringEncoding)stringEncodingForData:(NSData *)data
+                          encodingOptions:(NSDictionary *)opts
+                          convertedString:(NSString **)string
+                      usedLossyConversion:(BOOL *)usedLossyConversion NS_AVAILABLE(10_10, 8_0);
+
+@end
+
+/*
+ The following keys may be used in the option dictionary.
+ */
+// NSArray of NSNumbers which contain NSStringEncoding values; if this key is not present in the dictionary, all encodings are weighted the same
+FOUNDATION_EXPORT NSString * const NSStringEncodingDetectionSuggestedEncodingsKey NS_AVAILABLE(10_10, 8_0);
+
+// NSArray of NSNumbers which contain NSStringEncoding values; if this key is not present in the dictionary, all encodings are considered
+FOUNDATION_EXPORT NSString * const NSStringEncodingDetectionDisallowedEncodingsKey NS_AVAILABLE(10_10, 8_0);
+
+// NSNumber boolean value; if this key is not present in the dictionary, the default value is NO
+FOUNDATION_EXPORT NSString * const NSStringEncodingDetectionUseOnlySuggestedEncodingsKey NS_AVAILABLE(10_10, 8_0);
+
+// NSNumber boolean value; if this key is not present in the dictionary, the default value is YES
+FOUNDATION_EXPORT NSString * const NSStringEncodingDetectionAllowLossyKey NS_AVAILABLE(10_10, 8_0);
+
+// NSNumber boolean value; if this key is not present in the dictionary, the default value is NO
+FOUNDATION_EXPORT NSString * const NSStringEncodingDetectionFromWindowsKey NS_AVAILABLE(10_10, 8_0);
+
+// NSString value; if this key is not present in the dictionary, the default value is U+FFFD
+FOUNDATION_EXPORT NSString * const NSStringEncodingDetectionLossySubstitutionKey NS_AVAILABLE(10_10, 8_0);
+
+// NSString value; ISO language code; if this key is not present in the dictionary, no such information is considered
+FOUNDATION_EXPORT NSString * const NSStringEncodingDetectionLikelyLanguageKey NS_AVAILABLE(10_10, 8_0);
 
 @interface NSString (NSExtendedStringPropertyListParsing)
 
@@ -341,8 +392,8 @@ typedef NS_OPTIONS(NSUInteger, NSStringEnumerationOptions) {
 
 /* The following methods are deprecated and will be removed from this header file in the near future. These methods use [NSString defaultCStringEncoding] as the encoding to convert to, which means the results depend on the user's language and potentially other settings. This might be appropriate in some cases, but often these methods are misused, resulting in issues when running in languages other then English. UTF8String in general is a much better choice when converting arbitrary NSStrings into 8-bit representations. Additional potential replacement methods are being introduced in NSString as appropriate.
 */
-- (const char *)cString NS_DEPRECATED(10_0, 10_4, 2_0, 2_0);
-- (const char *)lossyCString NS_DEPRECATED(10_0, 10_4, 2_0, 2_0);
+- (const char *)cString NS_RETURNS_INNER_POINTER NS_DEPRECATED(10_0, 10_4, 2_0, 2_0);
+- (const char *)lossyCString NS_RETURNS_INNER_POINTER NS_DEPRECATED(10_0, 10_4, 2_0, 2_0);
 - (NSUInteger)cStringLength NS_DEPRECATED(10_0, 10_4, 2_0, 2_0);
 - (void)getCString:(char *)bytes NS_DEPRECATED(10_0, 10_4, 2_0, 2_0);
 - (void)getCString:(char *)bytes maxLength:(NSUInteger)maxLength NS_DEPRECATED(10_0, 10_4, 2_0, 2_0);	
@@ -372,8 +423,6 @@ enum {
     NSProprietaryStringEncoding = 65536    /* Installation-specific encoding */
 };
 
-
-
 /* The rest of this file is bookkeeping stuff that has to be here. Don't use this stuff, don't refer to it.
 */
 #if !defined(_OBJC_UNICHAR_H_)
@@ -398,4 +447,6 @@ enum {
 #else
 extern void *_NSConstantStringClassReference;
 #endif
+
+
 

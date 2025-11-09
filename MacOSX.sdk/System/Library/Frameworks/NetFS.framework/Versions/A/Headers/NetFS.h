@@ -309,7 +309,8 @@ NetFSMountURLSync(
 	CFStringRef passwd, 			// Auth password (overrides URL)
 	CFMutableDictionaryRef open_options,	// Options for session open (see below)
 	CFMutableDictionaryRef mount_options,	// Options for mounting (see below)
-	CFArrayRef *mountpoints);		// Array of mountpoints
+	CFArrayRef *mountpoints)		// Array of mountpoints
+	__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
 
 /*
  * This is the block called at completion of NetFSMountURLAsync
@@ -339,15 +340,15 @@ NetFSMountURLAsync(
 	CFMutableDictionaryRef mount_options,	// Options for mounting (see below)
 	AsyncRequestID *requestID,		// ID of this pending request (see cancel)
 	dispatch_queue_t dispatchq,		// Dispatch queue for the block
-	NetFSMountURLBlock mount_report);	// Called at mount completion
-
+	NetFSMountURLBlock mount_report)	// Called at mount completion
+	__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
 /*
  * Cancel a pending async mount request.
  * The AsyncRequestID is that returned by NetFSMountURLAsync().
  * The NetFSMountURLBlock is not called.
  */
 int
-NetFSMountURLCancel(AsyncRequestID requestID);
+NetFSMountURLCancel(AsyncRequestID requestID) 	__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
 
 /*
  * The following dictionary keys for open_options are supported:
@@ -393,6 +394,17 @@ NetFSMountURLCancel(AsyncRequestID requestID);
  */
 CFStringRef
 NetFSMountURLProbe(CFStringRef hostname);
+        
+/*
+ * Given a CFURLRef localPathURL that refers to a location on a 
+ * mounted network share, return the URL needed to remount that
+ * volume.
+ *
+ * The return value is a CFURLRef of the server, or NULL if localPathURL
+ * isn't a mounted network share.
+ */
+CFURLRef
+NetFSCopyURLForRemountingVolume(CFURLRef localPathURL);
 
 #ifdef __cplusplus
 }

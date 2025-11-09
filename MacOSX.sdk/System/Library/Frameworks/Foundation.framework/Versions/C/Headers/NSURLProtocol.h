@@ -1,6 +1,6 @@
 /*	
     NSURLProtocol.h
-    Copyright (c) 2003-2013, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2014, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -17,7 +17,7 @@
 @class NSURLProtocolInternal;
 @class NSURLRequest;
 @class NSURLResponse;
-
+@class NSURLSessionTask;
 
 /*!
     @header NSURLProtocol.h
@@ -175,28 +175,28 @@ implementors.
     interface the protocol implementation can use to report results back
     to the URL loading system.
 */
-- (id)initWithRequest:(NSURLRequest *)request cachedResponse:(NSCachedURLResponse *)cachedResponse client:(id <NSURLProtocolClient>)client;
+- (instancetype)initWithRequest:(NSURLRequest *)request cachedResponse:(NSCachedURLResponse *)cachedResponse client:(id <NSURLProtocolClient>)client;
 
 /*! 
     @method client
     @abstract Returns the NSURLProtocolClient of the receiver. 
     @result The NSURLProtocolClient of the receiver.  
 */
-- (id <NSURLProtocolClient>)client;
+@property (readonly, retain) id <NSURLProtocolClient> client;
 
 /*! 
     @method request
     @abstract Returns the NSURLRequest of the receiver. 
     @result The NSURLRequest of the receiver. 
 */
-- (NSURLRequest *)request;
+@property (readonly, copy) NSURLRequest *request;
 
 /*! 
     @method cachedResponse
     @abstract Returns the NSCachedURLResponse of the receiver.  
     @result The NSCachedURLResponse of the receiver. 
 */
-- (NSCachedURLResponse *)cachedResponse;
+@property (readonly, copy) NSCachedURLResponse *cachedResponse;
 
 /*======================================================================
   Begin responsibilities for protocol implementors
@@ -347,3 +347,9 @@ implementors.
 
 @end
 
+
+@interface NSURLProtocol (NSURLSessionTaskAdditions)
++ (BOOL)canInitWithTask:(NSURLSessionTask *)task NS_AVAILABLE(10_10, 8_0);
+- (instancetype)initWithTask:(NSURLSessionTask *)task cachedResponse:(NSCachedURLResponse *)cachedResponse client:(id <NSURLProtocolClient>)client NS_AVAILABLE(10_10, 8_0);
+@property (readonly, copy) NSURLSessionTask *task NS_AVAILABLE(10_10, 8_0);
+@end

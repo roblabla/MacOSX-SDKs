@@ -10,7 +10,7 @@
 @interface MLMediaLibrary : NSObject
 
 // The designated initializer
-- (id) initWithOptions: (NSDictionary *) options;
+- (instancetype)initWithOptions:(NSDictionary *)options NS_DESIGNATED_INITIALIZER;
 
 // Returns a dictionary of media sources by identifier.
 // This will return nil the first time, which will kick off an async load of the media sources.
@@ -21,6 +21,7 @@
 
 // Media Source Identifiers
 
+extern NSString* const MLMediaSourcePhotosIdentifier;
 extern NSString* const MLMediaSourceiPhotoIdentifier;
 extern NSString* const MLMediaSourceiTunesIdentifier;
 extern NSString* const MLMediaSourceApertureIdentifier;

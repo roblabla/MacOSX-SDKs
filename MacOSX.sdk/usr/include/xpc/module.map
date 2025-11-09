@@ -1,6 +1,0 @@
-module XPC [system] {
-  umbrella header "xpc.h"
-  module * { export * }
-  export *
-}
-

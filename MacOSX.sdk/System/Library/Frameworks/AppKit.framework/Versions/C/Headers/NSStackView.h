@@ -1,7 +1,7 @@
 /*
  NSStackView.h
  Application Kit
- Copyright (c) 2012-2013, Apple Inc.
+ Copyright (c) 2012-2014, Apple Inc.
  All rights reserved.
  */
 
@@ -66,12 +66,21 @@ typedef NS_ENUM(NSInteger, NSStackViewGravity) {
  - clippingResistancePriority
  - detachedViews
  */
-enum {
-    NSStackViewVisibilityPriorityMustHold = 1000, //Maximum, default - the view will never be detached
-    NSStackViewVisibilityPriorityDetachOnlyIfNecessary = 900,
-    NSStackViewVisibilityPriorityNotVisible = 0 //Minimum - will force a view to be detached
-} NS_ENUM_AVAILABLE_MAC(10_9);
 typedef float NSStackViewVisibilityPriority NS_AVAILABLE_MAC(10_9);
+
+static const NSStackViewVisibilityPriority NSStackViewVisibilityPriorityMustHold NS_AVAILABLE_MAC(10_9) = 1000; //Maximum, default - the view will never be detached
+static const NSStackViewVisibilityPriority NSStackViewVisibilityPriorityDetachOnlyIfNecessary NS_AVAILABLE_MAC(10_9) = 900;
+static const NSStackViewVisibilityPriority NSStackViewVisibilityPriorityNotVisible NS_AVAILABLE_MAC(10_9) = 0; //Minimum - will force a view to be detached
+
+
+/*
+ A value of NSStackViewSpacingUseDefault signifies that the spacing is the default spacing set with the StackView property.
+
+ See also:
+ - setCustomSpacing:afterView:
+ - customSpacingAfterView:
+ */
+static const CGFloat NSStackViewSpacingUseDefault NS_AVAILABLE_MAC(10_9) = FLT_MAX;
 
 #pragma mark - NSStackViewLayout
 NS_CLASS_AVAILABLE(10_9, NA)
@@ -102,13 +111,13 @@ NS_CLASS_AVAILABLE(10_9, NA)
     } _flags;
 }
 
-+ (id) stackViewWithViews:(NSArray *)views; // Returns an autoreleased horizontal StackView with the provided views set as the leading views, and has translatesAutoresizingMaskIntoConstraints set to NO.
++ (instancetype)stackViewWithViews:(NSArray *)views; // Returns an autoreleased horizontal StackView with the provided views set as the leading views, and has translatesAutoresizingMaskIntoConstraints set to NO.
 
 #pragma mark General StackView Properties
 
 @property (assign) id<NSStackViewDelegate> delegate;
 @property NSUserInterfaceLayoutOrientation orientation; // Orientation of the StackView, defaults to NSUserInterfaceLayoutOrientationHorizontal
-@property NSLayoutAttribute alignment; // Describes how subviews are aligned within the StackView, defaults to NSLayoutAttributeCenterY for horizontal stacks, NSLayoutAttributeCenterX for vertical stacks. Setting NSLayoutAttributeNotAnAttribute will cause the internal alignment constraints to not be created, and could result in an ambiguous layout. Setting an inapplicable attribute for the set orientation will result in the alignment being ignored (similar to its handling with NSLayoutAttributeNotAnAttribute). The alignment constraints are established at a priority of NSStackViewVisibilityPriorityDefaultLow and is therefore overridable on an individual view basis.
+@property NSLayoutAttribute alignment; // Describes how subviews are aligned within the StackView, defaults to NSLayoutAttributeCenterY for horizontal stacks, NSLayoutAttributeCenterX for vertical stacks. Setting NSLayoutAttributeNotAnAttribute will cause the internal alignment constraints to not be created, and could result in an ambiguous layout. Setting an inapplicable attribute for the set orientation will result in the alignment being ignored (similar to its handling with NSLayoutAttributeNotAnAttribute). The alignment constraints are established at a priority of NSLayoutPriorityDefaultLow and is therefore overridable on an individual view basis.
 @property NSEdgeInsets edgeInsets; // Default padding inside the StackView, around all of the subviews. Edge insets do not flip or rotate for changes to orientation or R2L languages.
 
 
@@ -142,8 +151,8 @@ NS_CLASS_AVAILABLE(10_9, NA)
  Returns an array of all the views managed by this StackView, regardless of detach-status or gravity area.
  This is indexed in the order of indexing within the StackView. Detached views are indexed at the positions they would have been if they were still attached.
  */
-@property (readonly) NSArray *views;
-@property (readonly) NSArray *detachedViews; // Returns the list of all of the detached views, regardless of gravity area
+@property (readonly, copy) NSArray *views;
+@property (readonly, copy) NSArray *detachedViews; // Returns the list of all of the detached views, regardless of gravity area
 
 /*
  Sets and gets the visibility priorities for views in the StackView.
@@ -180,7 +189,6 @@ NS_CLASS_AVAILABLE(10_9, NA)
  A value of NSStackViewSpacingUseDefault signifies that the spacing is the default spacing set with the StackView property.
  aView must be managed by the StackView, an exception will be raised if not.
  */
-#define NSStackViewSpacingUseDefault (FLT_MAX)
 - (void)setCustomSpacing:(CGFloat)spacing afterView:(NSView *)aView;
 - (CGFloat)customSpacingAfterView:(NSView *)aView;
 

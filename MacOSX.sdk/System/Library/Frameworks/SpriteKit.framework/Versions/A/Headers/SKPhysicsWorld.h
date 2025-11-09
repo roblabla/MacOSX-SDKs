@@ -1,6 +1,6 @@
 //
 //  SKPhysicsWorld.h
-//  SpriteKitMac
+//  SpriteKit
 //
 //  Copyright (c) 2011 Apple Inc. All rights reserved.
 //
@@ -10,6 +10,7 @@
 #import <SpriteKit/SpriteKitBase.h>
 
 @class SKPhysicsJoint;
+@class SKFieldNode;
 
 SK_EXPORT @protocol SKPhysicsContactDelegate<NSObject>
 @optional
@@ -22,15 +23,16 @@ SK_EXPORT @interface SKPhysicsWorld : NSObject<NSCoding>
 /**
  A global 2D vector specifying the field force acceleration due to gravity. The unit is meters per second so standard earth gravity would be { 0.0, +/-9.8 }.
  */
-@property (SK_NONATOMIC_IOSONLY) CGPoint gravity;
-@property (SK_NONATOMIC_IOSONLY) CGFloat speed;
+@property (nonatomic) CGVector gravity;
+@property (nonatomic) CGFloat speed;
 
-@property (SK_NONATOMIC_IOSONLY, assign) id<SKPhysicsContactDelegate> contactDelegate;
+@property (nonatomic, assign) id<SKPhysicsContactDelegate> contactDelegate;
 
 - (void)addJoint:(SKPhysicsJoint *)joint;
 - (void)removeJoint:(SKPhysicsJoint *)joint;
-
 - (void)removeAllJoints;
+
+- (vector_float3)sampleFieldsAt:(vector_float3)position NS_AVAILABLE(10_10, 8_0);
 
 - (SKPhysicsBody *)bodyAtPoint:(CGPoint)point;
 - (SKPhysicsBody *)bodyInRect:(CGRect)rect;

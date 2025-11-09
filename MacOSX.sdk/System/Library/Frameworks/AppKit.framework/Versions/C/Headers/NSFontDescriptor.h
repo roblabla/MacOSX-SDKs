@@ -1,7 +1,7 @@
 /*
 	NSFontDescriptor.h
 	Application Kit
-	Copyright (c) 2003-2013, Apple Inc.
+	Copyright (c) 2003-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -56,7 +56,7 @@ enum {
 
 @class NSMutableDictionary, NSDictionary, NSArray, NSSet, NSAffineTransform;
 
-@interface NSFontDescriptor: NSObject <NSCopying, NSCoding> {
+@interface NSFontDescriptor: NSObject <NSCopying, NSSecureCoding> {
 /* All instance variables are private */
     NSMutableDictionary *_attributes;
     id _reserved1;
@@ -67,21 +67,21 @@ enum {
 }
 
 /* Core attribute access */
-- (NSString *)postscriptName;
-- (CGFloat)pointSize;
-- (NSAffineTransform *)matrix;
-- (NSFontSymbolicTraits)symbolicTraits;
+@property (readonly, copy) NSString *postscriptName;
+@property (readonly) CGFloat pointSize;
+@property (readonly, copy) NSAffineTransform *matrix;
+@property (readonly) NSFontSymbolicTraits symbolicTraits;
 
 - (id)objectForKey:(NSString *)anAttribute;
 
-- (NSDictionary *)fontAttributes;
+@property (readonly, copy) NSDictionary *fontAttributes;
 
 /* Instantiation */
 + (NSFontDescriptor *)fontDescriptorWithFontAttributes:(NSDictionary *)attributes;
 + (NSFontDescriptor *)fontDescriptorWithName:(NSString *)fontName size:(CGFloat)size;
 + (NSFontDescriptor *)fontDescriptorWithName:(NSString *)fontName matrix:(NSAffineTransform *)matrix;
 
-- (id)initWithFontAttributes:(NSDictionary *)attributes;
+- (instancetype)initWithFontAttributes:(NSDictionary *)attributes;
 /* Instance conversion */
 /* Returns "normalized" font descriptors matching the receiver. mandatoryKeys is an NSSet instance containing keys that are required to be identical in order to be matched. mandatoryKeys can be nil.
 */

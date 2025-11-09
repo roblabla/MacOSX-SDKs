@@ -95,8 +95,7 @@ enum {
     An indication that the power flags represent the state of the root power
     domain. This bit must not be set in the IOPMPowerState structure.
     Power Management may pass this bit to initialPowerStateForDomainState()
-    or powerStateForDomainState() to map from a global system state to the
-    desired device state.
+    to map from a global system state to the desired device state.
 */
 typedef unsigned long IOPMPowerFlags;
 enum {
@@ -684,18 +683,27 @@ enum {
 #define kIOPMThermalLevelWarningKey                     "Thermal_Level_Warning"
 
 /* Thermal Warning Level values
- *      kIOPMThermalWarningLevelNormal - under normal operating conditions
- *      kIOPMThermalWarningLevelDanger - thermal pressure may cause system slowdown
- *      kIOPMThermalWarningLevelCrisis - thermal conditions may cause imminent shutdown
+ *      kIOPMThermalLevelNormal   - under normal operating conditions
+ *      kIOPMThermalLevelDanger   - thermal pressure may cause system slowdown
+ *      kIOPMThermalLevelCritical - thermal conditions may cause imminent shutdown
  *
  * The platform may define additional thermal levels if necessary.
+ * Platform specific values are defined from 100 and above
  */
 enum {
-  kIOPMThermalWarningLevelNormal    = 0,
-  kIOPMThermalWarningLevelDanger    = 5,
-  kIOPMThermalWarningLevelCrisis    = 10
+  kIOPMThermalLevelNormal    = 0,
+  kIOPMThermalLevelDanger    = 5,
+  kIOPMThermalLevelCritical  = 10,
+
+  kIOPMThermalLevelWarning = 100,
+  kIOPMThermalLevelTrap    = 110,
+
+  kIOPMThermalLevelUnknown = 255,
 };
 
+#define kIOPMThermalWarningLevelNormal kIOPMThermalLevelNormal
+#define kIOPMThermalWarningLevelDanger kIOPMThermalLevelWarning
+#define kIOPMThermalWarningLevelCrisis kIOPMThermalLevelCritical
 
 // PM Settings Controller setting types
 // Settings types used primarily with:

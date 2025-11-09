@@ -78,10 +78,10 @@ extern "C"
 	typedef const char *LPCTSTR ;
 	typedef char *LPCWSTR
 #ifdef __GNUC__
-		/* __attribute__ is a GCC only extension */
-		__attribute__ ((deprecated))
+    /* __attribute__ is a GCC only extension */
+    __attribute__ ((deprecated))
 #endif
-		;
+    ;
 
 #else
 #include <windows.h>

@@ -99,6 +99,68 @@ enum {
 
 #pragma mark Apple Specific
 
+// Parameters for the AUSpatialMixer unit
+enum {
+    // Input, Degrees, -180->180, 0
+    kSpatialMixerParam_Azimuth		= 0,
+    
+    // Input, Degrees, -90->90, 0
+    kSpatialMixerParam_Elevation		= 1,
+    
+    // Input, Metres, 0->10000, 0
+    kSpatialMixerParam_Distance		= 2,
+    
+    // Input/Output, dB, -120->20, 0
+    kSpatialMixerParam_Gain			= 3,
+	
+    // Input, rate scaler	0.5 -> 2.0
+    kSpatialMixerParam_PlaybackRate	= 4,
+    
+    // bus enable : 0.0 or 1.0
+    kSpatialMixerParam_Enable       = 5,
+    
+    // Minimum input gain constraint : 0.0 -> 1.0
+    kSpatialMixerParam_MinGain      = 6,
+    
+    // Maximum input gain constraint : 0.0 -> 1.0
+    kSpatialMixerParam_MaxGain      = 7,
+	
+    // Input, Dry/Wet equal-power blend, %	  0.0 -> 100.0
+    kSpatialMixerParam_ReverbBlend		= 8,
+    
+    // Global, dB,		-40.0 -> +40.0
+    kSpatialMixerParam_GlobalReverbGain	= 9,
+	
+    // Input, Lowpass filter attenuation at 5KHz :		decibels -100.0dB -> 0.0dB
+    // smaller values make both direct and reverb sound more muffled; a value of 0.0 indicates no filtering
+    // Occlusion is a filter applied to the sound prior to the reverb send
+    kSpatialMixerParam_OcclusionAttenuation	= 10,
+	
+    // Input, Lowpass filter attenuation at 5KHz :		decibels -100.0dB -> 0.0dB
+    // smaller values make direct sound more muffled; a value of 0.0 indicates no filtering
+    // Obstruction is a filter applied to the "direct" part of the sound (so is post reverb send)
+    kSpatialMixerParam_ObstructionAttenuation = 11
+};
+
+// Reverb parameters applicable to AUSpatialMixer
+enum {
+    // Global, Hertz, 10.0 -> 20000.0, 800.0
+	kReverbParam_FilterFrequency					= 14,
+    
+    // Global, Octaves, 0.05 -> 4.0, 3.0
+	kReverbParam_FilterBandwidth					= 15,
+    
+    // Global, Decibels, -18.0 -> +18.0, 0.0
+	kReverbParam_FilterGain							= 16,
+    
+    // Global, Indexed, 0->kNumAUNBandEQFilterTypes-1, 0
+    kReverbParam_FilterType                         = 17,       // only available for AUSpatialMixer
+    
+    // Global, Boolean, 0->1, 1
+    kReverbParam_FilterEnable                       = 18        // only available for AUSpatialMixer
+};
+
+
 // Parameters for the AUMixer3D unit
 enum {
         // Input, Degrees, -180->180, 0
@@ -152,17 +214,6 @@ enum {
 	k3DMixerParam_PostPeakHoldLevel	= 4000
 };
 
-// Reverb parameters applicable to the 3DMixer
-enum {
-		// Global, Hertz, 10.0 -> 20000.0, 800.0
-	kReverbParam_FilterFrequency					= 14,
-
-		// Global, Octaves, 0.05 -> 4.0, 3.0
-	kReverbParam_FilterBandwidth					= 15,
-
-		// Global, Decibels, -18.0 -> +18.0, 0.0
-	kReverbParam_FilterGain							= 16
-};
 
 // Parameters for the AUMultiChannelMixer unit
 // these are available for both desktop and iphone
@@ -534,6 +585,23 @@ enum {
 };
 
 
+// Parameters for the AURoundTripAACParam unit
+enum {
+		// Global, indexed : AAC, HE-AAC, HE-AACv2
+	kRoundTripAACParam_Format				= 0,
+	
+		// Global, indexed
+	kRoundTripAACParam_EncodingStrategy = 1,
+
+		// Global, indexed
+	kRoundTripAACParam_RateOrQuality = 2,
+
+		// These are deprecated:
+	kRoundTripAACParam_BitRate				= 1,
+	kRoundTripAACParam_Quality 				= 2,
+	kRoundTripAACParam_CompressedFormatSampleRate = 3
+};
+
 #pragma mark Apple Specific - Desktop
 
 
@@ -800,22 +868,6 @@ enum {
 // See the MusicDevice.h header file for more about using the extended control semantics 
 // of this API.	
 
-// Parameters for the AURoundTripAACParam unit
-enum {
-		// Global, indexed : AAC, AAC HE, AAC HEv2, AAC ELD
-	kRoundTripAACParam_Format				= 0,
-	
-		// Global, indexed
-	kRoundTripAACParam_EncodingStrategy = 1,
-
-		// Global, indexed
-	kRoundTripAACParam_RateOrQuality = 2,
-	
-		// These are deprecated:
-	kRoundTripAACParam_BitRate				= 1,
-	kRoundTripAACParam_Quality 				= 2,
-	kRoundTripAACParam_CompressedFormatSampleRate = 3
-};
 
 // `Analog' AudioUnits
 

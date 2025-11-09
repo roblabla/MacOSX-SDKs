@@ -1,6 +1,6 @@
 /* CoreImage - CIFilterGenerator.h
 
-   Copyright (c) 2006 Apple Computer, Inc.
+   Copyright (c) 2006 Apple, Inc.
    All rights reserved. */
 
 #import <Foundation/NSObject.h>

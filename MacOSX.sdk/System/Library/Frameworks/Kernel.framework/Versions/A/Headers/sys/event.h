@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003-2012 Apple Inc. All rights reserved.
+ * Copyright (c) 2003-2015 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -152,14 +152,20 @@ struct kevent64_s {
  * (which always returns true for regular files - regardless of the amount
  * of unread data in the file).
  *
- * On input, EV_OOBAND specifies that only OOB data should be looked for.
- * The returned data count is the number of bytes beyond the current OOB marker.
+ * On input, EV_OOBAND specifies that filter should actively return in the
+ * presence of OOB on the descriptor. It implies that filter will return
+ * if there is OOB data available to read OR when any other condition
+ * for the read are met (for example number of bytes regular data becomes >=
+ * low-watermark).
+ * If EV_OOBAND is not set on input, it implies that the filter should not actively
+ * return for out of band data on the descriptor. The filter will then only return
+ * when some other condition for read is met (ex: when number of regular data bytes
+ * >=low-watermark OR when socket can't receive more data (SS_CANTRCVMORE)).
  *
- * On output, EV_OOBAND indicates that OOB data is present
+ * On output, EV_OOBAND indicates the presence of OOB data on the descriptor.
  * If it was not specified as an input parameter, then the data count is the
- * number of bytes before the current OOB marker. If at the marker, the
- * data count indicates the number of bytes available after it.  In either
- * case, it's the amount of data one could expect to receive next.
+ * number of bytes before the current OOB marker, else data count is the number
+ * of bytes beyond OOB marker.
  */
 #define EV_POLL	EV_FLAG0
 #define EV_OOBAND	EV_FLAG1
@@ -227,15 +233,6 @@ enum {
 #define	NOTE_SIGNAL		0x08000000	/* shared with EVFILT_SIGNAL */
 #define	NOTE_EXITSTATUS		0x04000000	/* exit status to be returned, valid for child process only */
 #define	NOTE_EXIT_DETAIL	0x02000000	/* provide details on reasons for exit */
-
-#if CONFIG_EMBEDDED
-/* App states notification */
-#define	NOTE_APPACTIVE		0x00800000	/* app went to active state */
-#define	NOTE_APPBACKGROUND	0x00400000	/* app went to background */
-#define	NOTE_APPNONUI		0x00200000	/* app went to active with no UI */
-#define	NOTE_APPINACTIVE	0x00100000	/* app went to inactive state */
-#define NOTE_APPALLSTATES	0x00f00000
-#endif /* CONFIG_EMBEDDED */
 
 #define	NOTE_PDATAMASK	0x000fffff		/* mask for signal & exit status */
 #define	NOTE_PCTRLMASK	(~NOTE_PDATAMASK)

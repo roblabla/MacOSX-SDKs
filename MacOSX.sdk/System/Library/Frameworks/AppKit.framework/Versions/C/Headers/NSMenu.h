@@ -1,7 +1,7 @@
 /*
  NSMenu.h
  Application Kit
- Copyright (c) 1996-2013, Apple Inc.
+ Copyright (c) 1996-2014, Apple Inc.
  All rights reserved.
 */
 
@@ -41,18 +41,18 @@
         unsigned int allowsDifferentSelection:1;
         unsigned int noTopPadding:1;
         unsigned int noBottomPadding:1;
-        unsigned int RESERVED:13;
+	unsigned int hasNCStyle:1;
+        unsigned int RESERVED:12;
     } _mFlags;
     NSString *_uiid;
 }
 
 /* Designated initializer.  If this menu is used as a submenu of an item in the application's main menu, then the title is what appears in the menu bar.  Otherwise, the title is ignored.  Do not pass nil (an exception will result), but you may pass an empty string.
  */
-- (id)initWithTitle:(NSString *)aTitle;
+- (instancetype)initWithTitle:(NSString *)aTitle;
 
 /* Set and get the menu's title.  The titles of the submenus of the application's main menu items appear in the menu bar. */
-- (void)setTitle:(NSString *)aString;
-- (NSString *)title;
+@property (copy) NSString *title;
 
 /* Pops up the receiver as a context menu.  The menu is positioned such that the top left corner lies at the given event's location, interpreted in the coordinate system of the given view.  If this would cause the menu to scroll offscreen, it will be moved up to be onscreen.  The event must not be nil.
  
@@ -72,11 +72,9 @@
 + (void)setMenuBarVisible:(BOOL)visible;
 + (BOOL)menuBarVisible;
 
-/* Returns the menu containing the item that has the receiver as a submenu, or nil if this menu is not the submenu of an item in a menu. */
-- (NSMenu *)supermenu;
- 
-/* If a menu item has the receiver as a submenu, then this method will be called when the menu containing that item changes.  You should never call this, but you may override it to take some action when the supermenu changes. */
- - (void)setSupermenu:(NSMenu *)supermenu;
+/* Getter: Returns the menu containing the item that has the receiver as a submenu, or nil if this menu is not the submenu of an item in a menu. 
+   Setter: If a menu item has the receiver as a submenu, then this method will be called when the menu containing that item changes.  You should never call this, but you may override it to take some action when the supermenu changes. */
+@property (assign) NSMenu *supermenu;
 
 /* Inserts a menu item at the given index, which must be at least zero and no more than the receiver's item count.  If newItem is nil, this raises an exception. */
 - (void)insertItem:(NSMenuItem *)newItem atIndex:(NSInteger)index;
@@ -105,10 +103,10 @@
 - (void)removeAllItems NS_AVAILABLE_MAC(10_6);
 
 /* Returns an array containing the receiver's menu items. */
-- (NSArray *)itemArray;
+@property (readonly, copy) NSArray *itemArray;
 
 /* Returns the number of menu items in the menu. */
-- (NSInteger)numberOfItems;
+@property (readonly) NSInteger numberOfItems;
 
 /* Returns the item at the given index, which must be at least zero and less than the number of items. */
  - (NSMenuItem *)itemAtIndex:(NSInteger)index;
@@ -128,8 +126,7 @@
 - (NSMenuItem *)itemWithTag:(NSInteger)tag;
 
 /* Set and get whether the menu autoenables items.  If a menu autoenables items, then calls to -[NSMenuItem setEnabled:] are ignored, and the enabled state is computed via the NSMenuValidation informal protocol below.  Autoenabling is on by default. */
-- (void)setAutoenablesItems:(BOOL)flag;
-- (BOOL)autoenablesItems;
+@property BOOL autoenablesItems;
  
  /* If the receiver is set to autoenable items, then this triggers autovalidation of all menu items according to the NSMenuValidation informal protocol; otherwise this does nothing.  It is normally not necessary to call this; it will be called for you at the right time. */
 - (void)update;
@@ -147,12 +144,11 @@
 - (void)performActionForItemAtIndex:(NSInteger)index;
 
 /* Set and get the delegate for the menu.  See the NSMenuDelegate protocol for methods that the delegate may implement. */
-- (void)setDelegate:(id <NSMenuDelegate>)anObject;
-- (id <NSMenuDelegate>)delegate;
+@property (assign) id<NSMenuDelegate> delegate;
 
 /* If called on the main menu, returns the height of the menu bar in pixels.  If called on any other menu, returns 0.
  */
-- (CGFloat)menuBarHeight;
+@property (readonly) CGFloat menuBarHeight;
 
 /* Dismisses the menu and ends all menu tracking */
 - (void)cancelTracking NS_AVAILABLE_MAC(10_5);
@@ -161,39 +157,34 @@
 - (void)cancelTrackingWithoutAnimation NS_AVAILABLE_MAC(10_6);
 
 /* Returns the highlighted item in the menu, or nil if no item in the menu is highlighted */
-- (NSMenuItem *)highlightedItem NS_AVAILABLE_MAC(10_5);
+@property (readonly, strong) NSMenuItem *highlightedItem NS_AVAILABLE_MAC(10_5);
 
 /* Set the minimum width of the menu, in screen coordinates. The menu will prefer to not draw smaller than its minimum width, but may draw larger if it needs more space. The default value is 0.
 */
-- (CGFloat)minimumWidth NS_AVAILABLE_MAC(10_6);
-- (void)setMinimumWidth:(CGFloat)width NS_AVAILABLE_MAC(10_6);
+@property CGFloat minimumWidth NS_AVAILABLE_MAC(10_6);
 
 /* Returns the size of the menu, in screen coordinates.  The menu may draw at a smaller size when shown, depending on its positioning and display configuration.
 */
-- (NSSize)size NS_AVAILABLE_MAC(10_6);
+@property (readonly) NSSize size NS_AVAILABLE_MAC(10_6);
 
 /* Sets the font for the menu.  This also affects the font of all submenus that do not have their own font.
 */
-- (NSFont *)font NS_AVAILABLE_MAC(10_6);
-- (void)setFont:(NSFont *)font NS_AVAILABLE_MAC(10_6);
+@property (strong) NSFont *font NS_AVAILABLE_MAC(10_6);
 
 /* Determines whether contextual menu plugins may be appended to the menu, if used as a context menu. The default is YES.
 */
-- (BOOL)allowsContextMenuPlugIns NS_AVAILABLE_MAC(10_6);
-- (void)setAllowsContextMenuPlugIns:(BOOL)allows NS_AVAILABLE_MAC(10_6);
+@property BOOL allowsContextMenuPlugIns NS_AVAILABLE_MAC(10_6);
 
 /* Determines whether the menu contains a column for the state image.  The default is YES. */
-- (void)setShowsStateColumn:(BOOL)showsState NS_AVAILABLE_MAC(10_5);
-- (BOOL)showsStateColumn NS_AVAILABLE_MAC(10_5);
+@property BOOL showsStateColumn NS_AVAILABLE_MAC(10_5);
 
 /* Returns the zone used to allocate NSMenu objects.  This is left in for compatibility and always returns NSDefaultMallocZone().  It is not necessary to use this - menus can be allocated the usual way. */
 + (NSZone *)menuZone;
 
 /* In SnowLeopard, the following methods no longer do anything useful. */
-- (void)setMenuChangedMessagesEnabled:(BOOL)flag;
-- (BOOL)menuChangedMessagesEnabled;
+@property BOOL menuChangedMessagesEnabled;
 - (void)helpRequested:(NSEvent *)eventPtr;
-- (BOOL)isTornOff;
+@property (getter=isTornOff, readonly) BOOL tornOff;
 
 @end
 
@@ -231,7 +222,7 @@
 
 /* The NSMenuProperties type is a bitmask used for specifying a set of menu or menu item properties, used in the following method.
  */
-enum {
+typedef NS_OPTIONS(NSUInteger, NSMenuProperties) {
     NSMenuPropertyItemTitle = 1 << 0,            // the menu item's title
     NSMenuPropertyItemAttributedTitle = 1 << 1,  // the menu item's attributed title
     NSMenuPropertyItemKeyEquivalent = 1 << 2,    // the menu item's key equivalent
@@ -239,14 +230,13 @@ enum {
     NSMenuPropertyItemEnabled = 1 << 4,          // whether the menu item is enabled or disabled
     NSMenuPropertyItemAccessibilityDescription = 1 << 5 // the menu item's accessibility description
 };
-typedef NSUInteger NSMenuProperties;
 
 /* The following method may be called from delegate callbacks to determine which properties need to be updated and which may be skipped.  It is intended to allow more efficient updating of the menu in certain circumstances.  For example, if the NSMenuPropertyItemImage bit is zero, your delegate does not need to update the images of the menu items, because the images are not needed (for example, during key equivalent matching).  Calling this is optional: it is always acceptable to fully update the menu.
  
  This may be called from the menu delegate method -menuNeedsUpdate:.  Calling this at other times will raise an exception.
  */
 @interface NSMenu (NSMenuPropertiesToUpdate)
-- (NSMenuProperties)propertiesToUpdate NS_AVAILABLE_MAC(10_6);
+@property (readonly) NSMenuProperties propertiesToUpdate NS_AVAILABLE_MAC(10_6);
 @end
 
 APPKIT_EXTERN NSString *NSMenuWillSendActionNotification;

@@ -27,14 +27,13 @@ COREDATA_EXTERN id NSOverwriteMergePolicy NS_AVAILABLE(10_4, 3_0);
 COREDATA_EXTERN id NSRollbackMergePolicy NS_AVAILABLE(10_4, 3_0);    
 
 
-enum {
+typedef NS_ENUM(NSUInteger, NSMergePolicyType) {
     NSErrorMergePolicyType                      = 0x00,
     NSMergeByPropertyStoreTrumpMergePolicyType	= 0x01,
     NSMergeByPropertyObjectTrumpMergePolicyType = 0x02,
     NSOverwriteMergePolicyType                  = 0x03,
     NSRollbackMergePolicyType                   = 0x04
 };
-typedef NSUInteger NSMergePolicyType;
 
 NS_CLASS_AVAILABLE(10_7, 5_0)
 @interface NSMergeConflict : NSObject {
@@ -69,7 +68,7 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
  *
  *  A newVersion number of 0 means the object was deleted and the corresponding snapshot is nil.
  */
-- (id)initWithSource:(NSManagedObject*)srcObject newVersion:(NSUInteger)newvers oldVersion:(NSUInteger)oldvers cachedSnapshot:(NSDictionary*)cachesnap persistedSnapshot:(NSDictionary*)persnap;
+- (instancetype)initWithSource:(NSManagedObject*)srcObject newVersion:(NSUInteger)newvers oldVersion:(NSUInteger)oldvers cachedSnapshot:(NSDictionary*)cachesnap persistedSnapshot:(NSDictionary*)persnap NS_DESIGNATED_INITIALIZER;
 
 @end
 
@@ -89,7 +88,7 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
  * This will make it easier to use the superclass's implementation of -resolveConflicts:error:, and then customize the results.  You are strongly encouraged to do so.
  * Due to the complexity of merging to-many relationships, this class is designed with the expectation that you call super as the base implemenation.
  */
-- (id)initWithMergeType:(NSMergePolicyType)ty;
+- (id)initWithMergeType:(NSMergePolicyType)ty NS_DESIGNATED_INITIALIZER;
 
 /*
  * In a subclass, you are strongly encouraged to override initWithMergeType: and customize the results from calling super instead of performing your own actions from scratch.

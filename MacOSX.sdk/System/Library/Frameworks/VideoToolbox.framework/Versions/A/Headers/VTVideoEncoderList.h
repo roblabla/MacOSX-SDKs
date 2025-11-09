@@ -29,14 +29,14 @@ extern "C"
 */
 VT_EXPORT OSStatus VTCopyVideoEncoderList( 
 	CFDictionaryRef options, // pass NULL
-	CFArrayRef *listOfVideoEncodersOut ) VT_AVAILABLE_STARTING(10_8);
+	CFArrayRef *listOfVideoEncodersOut ) __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0);
 
 // returns CFArray of CFDictionaries with following keys:
-VT_EXPORT const CFStringRef kVTVideoEncoderList_CodecType VT_AVAILABLE_STARTING(10_8); // CFNumber for four-char-code (eg, 'avc1')
-VT_EXPORT const CFStringRef kVTVideoEncoderList_EncoderID VT_AVAILABLE_STARTING(10_8); // CFString, reverse-DNS-style unique identifier for this encoder; may be passed as kVTVideoEncoderSpecification_EncoderID
-VT_EXPORT const CFStringRef kVTVideoEncoderList_CodecName VT_AVAILABLE_STARTING(10_8); // CFString, for display to user (eg, "H.264")
-VT_EXPORT const CFStringRef kVTVideoEncoderList_EncoderName VT_AVAILABLE_STARTING(10_8); // CFString, for display to user (eg, "Apple H.264")
-VT_EXPORT const CFStringRef kVTVideoEncoderList_DisplayName VT_AVAILABLE_STARTING(10_8); // CFString (same as CodecName if there is only one encoder for that format, otherwise same as EncoderName)
+VT_EXPORT const CFStringRef kVTVideoEncoderList_CodecType __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0); // CFNumber for four-char-code (eg, 'avc1')
+VT_EXPORT const CFStringRef kVTVideoEncoderList_EncoderID __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0); // CFString, reverse-DNS-style unique identifier for this encoder; may be passed as kVTVideoEncoderSpecification_EncoderID
+VT_EXPORT const CFStringRef kVTVideoEncoderList_CodecName __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0); // CFString, for display to user (eg, "H.264")
+VT_EXPORT const CFStringRef kVTVideoEncoderList_EncoderName __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0); // CFString, for display to user (eg, "Apple H.264")
+VT_EXPORT const CFStringRef kVTVideoEncoderList_DisplayName __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0); // CFString (same as CodecName if there is only one encoder for that format, otherwise same as EncoderName)
 
 
 #pragma pack(pop)

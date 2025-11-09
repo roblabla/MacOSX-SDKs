@@ -96,10 +96,9 @@ enum OBEXErrorCodes
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------------
-/*! @defined		OBEX Convenience Macros.
-	@abstract		Convenience Macros for working with OBEX Header Identifiers.
-	@discussion		The API should shield you from using these, they are included here to completeness.
-*/
+/*! @defineblock OBEX Convenience Macros
+ *	Convenience Macros for OBEX Header Identifiers. The API should shield you from using these, they are included here to completeness.
+ */
 
 #define 	GET_HEADER_ID_IS_NULL_TERMINATED_UNICODE_TEXT( HEADER_ID )		( (HEADER_ID & 0xC0) == 0x00 )
 #define 	GET_HEADER_ID_IS_BYTE_SEQUENCE( HEADER_ID )						( (HEADER_ID & 0xC0) == 0x40 )
@@ -111,7 +110,9 @@ enum OBEXErrorCodes
 #define 	SET_HEADER_ID_IS_4_BYTE_QUANTITY( HEADER_ID )					( (HEADER_ID & 0x3F) | 0xC0 )
 #define 	IS_RESPONSE_CODE_FINAL_BIT_SET( RESPONSE_CODE )					( RESPONSE_CODE >> 7L )
 #define 	STRIP_RESPONSE_CODE_FINAL_BIT( RESPONSE_CODE )					( RESPONSE_CODE & 0x7F )
-
+		
+/*! @/defineblock */
+		
 //===========================================================================================================================
 //	OBEXHeaderIdentifiers
 //===========================================================================================================================
@@ -898,7 +899,7 @@ OBEXError	OBEXSessionGetMaxPacketLength( OBEXSessionRef inSessionRef, OBEXMaxPac
 OBEXError	OBEXSessionGetAvailableCommandPayloadLength( OBEXSessionRef inSessionRef, OBEXOpCode inOpCode, OBEXMaxPacketLength * outLength )	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 //---------------------------------------------------------------------------------------------------------------------------
-/*!	@function	OBEXSessionGetAvailableCommandPayloadLength
+/*!	@function	OBEXSessionGetAvailableCommandResponsePayloadLength
 	@abstract	Gets space available for your data for a particular command response you are trying to send.
 	@param		inSessionRef	A valid session reference.
 	@param		inOpCode		A command opcode that you are responding to. For example, if you receiving a Put command,
@@ -1068,7 +1069,7 @@ OBEXError	OBEXSessionAbort(	OBEXSessionRef				inSessionRef,
 								void* 						inOptionalHeaders,
 								size_t						inOptionalHeadersLength,
 								OBEXSessionEventCallback	inCallback,
-								void *						inUserRefcon )	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
+								void *						inUserRefCon )	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 											
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function	OBEXSessionSetPath
@@ -1097,7 +1098,7 @@ OBEXError	OBEXSessionSetPath(	OBEXSessionRef				inSessionRef,
 								void* 						inOptionalHeaders,
 								size_t						inOptionalHeadersLength,
 								OBEXSessionEventCallback	inCallback,
-								void*						inUserRefcon )	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
+								void*						inUserRefCon )	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 #if 0
 #pragma mark -
@@ -1114,7 +1115,6 @@ OBEXError	OBEXSessionSetPath(	OBEXSessionRef				inSessionRef,
 	@param		inSessionRef			A valid session reference.
 	@param		inResponseOpCode		What response code you want to send to the remote client.
 	@param		inFlags					Flags, as defined in the OBEX spec for this command.
-	@param		inConstants				Constants, as defined in the OBEX spec for this command.
 	@param		inMaxPacketLength		Max packet length you want to support. Must be smaller or equal to the max packet
 										length specified by the remote client. 
 	@param		inOptionalHeaders		Ptr to optional headers you can supply to the command. DO NOT dispose of this
@@ -1627,8 +1627,8 @@ OBEXError OBEXAddLengthHeader(	uint32_t				length,
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function		OBEXAddTypeHeader
 	@abstract		Add a CFStringRef to a dictionary of OBEXheaders.
-	@param			description		Description containing the name you want to add to the OBEX header dictionary.			
-	@param			dictRef			dictionary you have allocated to hold the headers. Make sure it's mutable.		
+	@param			type			String containing the type of header to add.
+ 	@param			dictRef			dictionary you have allocated to hold the headers. Make sure it's mutable.
 	@result			Error code, kOBEXSuccess (0) if success.
 	@discussion		Type header - OBEX Spec, 2.2.3: 1-byte Null terminated ascii string.
 */

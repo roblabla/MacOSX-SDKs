@@ -343,6 +343,10 @@ typedef struct AudioFormatListItem AudioFormatListItem;
 					The channel coordinates are only significant if the channel label is kAudioChannelLabel_UseCoordinates.
 					The specifier is an array of two pointers to AudioChannelLayout structures. 
 					The value is a pointer to the UInt32 result.
+    @constant   kAudioFormatProperty_ChannelLayoutHash
+					Returns a UInt32 which represents the hash of the provided channel layout.
+					The specifier is a pointer to an AudioChannelLayout structure.
+					The value is a pointer to the UInt32 result.
     @constant   kAudioFormatProperty_TagsForNumberOfChannels
 					returns an array of AudioChannelLayoutTags for the number of channels specified.
 					The specifier is a UInt32 number of channels. 
@@ -410,6 +414,7 @@ enum
     kAudioFormatProperty_ChannelMap						= 'chmp',
 	kAudioFormatProperty_NumberOfChannelsForLayout		= 'nchm',
 	kAudioFormatProperty_AreChannelLayoutsEquivalent	= 'cheq',
+    kAudioFormatProperty_ChannelLayoutHash              = 'chha',
 	kAudioFormatProperty_ValidateChannelLayout			= 'vacl',
 	kAudioFormatProperty_ChannelLayoutForTag			= 'cmpl',
 	kAudioFormatProperty_TagForChannelLayout			= 'cmpt',

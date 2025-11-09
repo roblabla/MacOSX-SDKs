@@ -1,4 +1,4 @@
-framework module AudioUnit [system] {
+framework module AudioUnit [extern_c] [system] {
   umbrella header "AudioUnit.h"
 
   export *
@@ -12,11 +12,6 @@ framework module AudioUnit [system] {
 
   explicit module AudioUnitCarbonView {
     header "AudioUnitCarbonView.h"
-    export *
-  }
-
-  explicit module LogicAUProperties {
-    header "LogicAUProperties.h"
     export *
   }
 

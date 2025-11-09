@@ -1,7 +1,7 @@
 /*
 	NSImage.h
 	Application Kit
-	Copyright (c) 1994-2013, Apple Inc.
+	Copyright (c) 1994-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -11,33 +11,37 @@
 #import <AppKit/NSGraphics.h>
 #import <AppKit/NSBitmapImageRep.h>
 #import <AppKit/NSPasteboard.h>
+#import <AppKit/NSLayoutConstraint.h>
 #import <ApplicationServices/ApplicationServices.h>
 
 @class NSArray, NSColor, NSImageRep, NSGraphicsContext, NSURL;
 @protocol NSImageDelegate;
 
 
-enum {
+typedef NS_ENUM(NSUInteger, NSImageLoadStatus) {
     NSImageLoadStatusCompleted,
     NSImageLoadStatusCancelled,
     NSImageLoadStatusInvalidData,
     NSImageLoadStatusUnexpectedEOF,
     NSImageLoadStatusReadError
 };
-typedef NSUInteger NSImageLoadStatus;
 
-enum {
+typedef NS_ENUM(NSUInteger, NSImageCacheMode) {
     NSImageCacheDefault,    // unspecified. use image rep's default
     NSImageCacheAlways,     // always generate a cache when drawing
     NSImageCacheBySize,     // cache if cache size is smaller than original data
     NSImageCacheNever       // never cache, always draw direct
 };
-typedef NSUInteger NSImageCacheMode;
+
+typedef NS_ENUM(NSInteger, NSImageResizingMode) {
+    NSImageResizingModeStretch,
+    NSImageResizingModeTile
+} NS_AVAILABLE_MAC(10_10);
 
 
 @class _NSImageAuxiliary;
 
-@interface NSImage : NSObject <NSCopying, NSCoding, NSPasteboardReading, NSPasteboardWriting>
+@interface NSImage : NSObject <NSCopying, NSCoding, NSSecureCoding, NSPasteboardReading, NSPasteboardWriting>
 {
     /*All instance variables are private*/
     NSString *_name;
@@ -70,39 +74,31 @@ typedef NSUInteger NSImageCacheMode;
     _NSImageAuxiliary *_imageAuxiliary;
 }
 
-+ (id)imageNamed:(NSString *)name;	/* If this finds & creates the image, only name is saved when archived */
++ (NSImage *)imageNamed:(NSString *)name;	/* If this finds & creates the image, only name is saved when archived */
 
-- (id)initWithSize:(NSSize)aSize;
-- (id)initWithData:(NSData *)data;			/* When archived, saves contents */
-- (id)initWithContentsOfFile:(NSString *)fileName;	/* When archived, saves contents */
-- (id)initWithContentsOfURL:(NSURL *)url;               /* When archived, saves contents */
-- (id)initByReferencingFile:(NSString *)fileName;	/* When archived, saves fileName */
-- (id)initByReferencingURL:(NSURL *)url;		/* When archived, saves url, supports progressive loading */
-- (id)initWithIconRef:(IconRef)iconRef NS_AVAILABLE_MAC(10_5);
-- (id)initWithPasteboard:(NSPasteboard *)pasteboard;
+- (instancetype)initWithSize:(NSSize)aSize;
+- (instancetype)initWithData:(NSData *)data;			/* When archived, saves contents */
+- (instancetype)initWithContentsOfFile:(NSString *)fileName;	/* When archived, saves contents */
+- (instancetype)initWithContentsOfURL:(NSURL *)url;               /* When archived, saves contents */
+- (instancetype)initByReferencingFile:(NSString *)fileName;	/* When archived, saves fileName */
+- (instancetype)initByReferencingURL:(NSURL *)url;		/* When archived, saves url, supports progressive loading */
+- (instancetype)initWithIconRef:(IconRef)iconRef NS_AVAILABLE_MAC(10_5);
+- (instancetype)initWithPasteboard:(NSPasteboard *)pasteboard;
 
 // not for general use, but useful for compatibility with old NSImage behavior.  Ignore exif orientation tags in JPEG and such.  See AppKit release notes.
-- (id)initWithDataIgnoringOrientation:(NSData *)data NS_AVAILABLE_MAC(10_6);
+- (instancetype)initWithDataIgnoringOrientation:(NSData *)data NS_AVAILABLE_MAC(10_6);
 
 // Note that the block passed to the below method may be invoked whenever and on whatever thread the image itself is drawn on. Care should be taken to ensure that all state accessed within the drawingHandler block is done so in a thread safe manner.
-#if NS_BLOCKS_AVAILABLE
-+ (id)imageWithSize:(NSSize)size flipped:(BOOL)drawingHandlerShouldBeCalledWithFlippedContext drawingHandler:(BOOL (^)(NSRect dstRect))drawingHandler NS_AVAILABLE_MAC(10_8);
-#endif
++ (NSImage *)imageWithSize:(NSSize)size flipped:(BOOL)drawingHandlerShouldBeCalledWithFlippedContext drawingHandler:(BOOL (^)(NSRect dstRect))drawingHandler NS_AVAILABLE_MAC(10_8);
 
-- (void)setSize:(NSSize)aSize;
-- (NSSize)size;
+@property NSSize size;
 - (BOOL)setName:(NSString *)string;
 - (NSString *)name;
-- (void)setBackgroundColor:(NSColor *)aColor;
-- (NSColor *)backgroundColor;
-- (void)setUsesEPSOnResolutionMismatch:(BOOL)flag;
-- (BOOL)usesEPSOnResolutionMismatch;
-- (void)setPrefersColorMatch:(BOOL)flag;
-- (BOOL)prefersColorMatch;
-- (void)setMatchesOnMultipleResolution:(BOOL)flag;
-- (BOOL)matchesOnMultipleResolution;
-- (BOOL)matchesOnlyOnBestFittingAxis NS_AVAILABLE_MAC(10_7); // Available in MacOSX 10.7.4
-- (void)setMatchesOnlyOnBestFittingAxis:(BOOL)flag NS_AVAILABLE_MAC(10_7); // Available in MacOSX 10.7.4
+@property (copy) NSColor *backgroundColor;
+@property BOOL usesEPSOnResolutionMismatch;
+@property BOOL prefersColorMatch;
+@property BOOL matchesOnMultipleResolution;
+@property BOOL matchesOnlyOnBestFittingAxis NS_AVAILABLE_MAC(10_7); // Available in MacOSX 10.7.4 // Available in MacOSX 10.7.4
 
 - (void)drawAtPoint:(NSPoint)point fromRect:(NSRect)fromRect operation:(NSCompositingOperation)op fraction:(CGFloat)delta;
 - (void)drawInRect:(NSRect)rect fromRect:(NSRect)fromRect operation:(NSCompositingOperation)op fraction:(CGFloat)delta;
@@ -114,15 +110,15 @@ typedef NSUInteger NSImageCacheMode;
 - (void)drawInRect:(NSRect)rect NS_AVAILABLE_MAC(10_9);
 
 - (void)recache;
-- (NSData *)TIFFRepresentation;
+@property (readonly, strong) NSData *TIFFRepresentation;
 - (NSData *)TIFFRepresentationUsingCompression:(NSTIFFCompression)comp factor:(float)aFloat;
 
-- (NSArray *)representations;
+@property (readonly, copy) NSArray *representations;
 - (void)addRepresentations:(NSArray *)imageReps;
 - (void)addRepresentation:(NSImageRep *)imageRep;
 - (void)removeRepresentation:(NSImageRep *)imageRep;
 
-- (BOOL)isValid;
+@property (getter=isValid, readonly) BOOL valid;
 - (void)lockFocus;
 - (void)lockFocusFlipped:(BOOL)flipped NS_AVAILABLE_MAC(10_6);
 - (void)unlockFocus;
@@ -130,15 +126,14 @@ typedef NSUInteger NSImageCacheMode;
 // use -[NSImage bestRepresentationForRect:context:hints:] instead.  Any deviceDescription dictionary is also a valid hints dictionary.
 - (NSImageRep *)bestRepresentationForDevice:(NSDictionary *)deviceDescription NS_DEPRECATED_MAC(10_0, 10_6);
 
-- (void)setDelegate:(id <NSImageDelegate>)anObject;
-- (id <NSImageDelegate>)delegate;
+@property (assign) id<NSImageDelegate> delegate;
 
 /* These return union of all the types registered with NSImageRep.
 */
-+ (NSArray *)imageUnfilteredFileTypes;
-+ (NSArray *)imageUnfilteredPasteboardTypes;
-+ (NSArray *)imageFileTypes;
-+ (NSArray *)imagePasteboardTypes;
++ (NSArray *)imageUnfilteredFileTypes NS_DEPRECATED_MAC(10_0, 10_10, "Use +imageUnfilteredTypes instead");
++ (NSArray *)imageUnfilteredPasteboardTypes NS_DEPRECATED_MAC(10_0, 10_10, "Use +imageUnfilteredTypes instead");
++ (NSArray *)imageFileTypes NS_DEPRECATED_MAC(10_0, 10_10, "Use +imageTypes instead");
++ (NSArray *)imagePasteboardTypes NS_DEPRECATED_MAC(10_0, 10_10, "Use +imageTypes instead");
 
 + (NSArray *)imageTypes NS_AVAILABLE_MAC(10_5);
 + (NSArray *)imageUnfilteredTypes NS_AVAILABLE_MAC(10_5);
@@ -147,8 +142,7 @@ typedef NSUInteger NSImageCacheMode;
 
 - (void)cancelIncrementalLoad;
 
--(void)setCacheMode:(NSImageCacheMode)mode;
--(NSImageCacheMode)cacheMode;
+@property NSImageCacheMode cacheMode;
 
 /* The alignmentRect of an image is metadata that a client may use to help determine layout. The bottom of the rect gives the baseline of the image. The other edges give similar information in other directions.
  
@@ -158,8 +152,7 @@ typedef NSUInteger NSImageCacheMode;
  
  The default alignmentRect of an image is {{0,0},imageSize}. The rect is adjusted when setSize: is called. 
  */
-- (NSRect)alignmentRect NS_AVAILABLE_MAC(10_5);
-- (void)setAlignmentRect:(NSRect)rect NS_AVAILABLE_MAC(10_5);
+@property NSRect alignmentRect NS_AVAILABLE_MAC(10_5);
 
 /* The 'template' property is metadata that allows clients to be smarter about image processing.  An image should be marked as a template if it is basic glpyh-like black and white art that is intended to be processed into derived images for use on screen.
  
@@ -170,8 +163,7 @@ typedef NSUInteger NSImageCacheMode;
 
 /* An accessibility description can be set on an image.  This description will be used automatically by interface elements that display images.  Like all accessibility descriptions, the string should be a short localized string that does not include the name of the interface element.  For instance, "delete" rather than "delete button". 
 */
-- (NSString *)accessibilityDescription	NS_AVAILABLE_MAC(10_6);
-- (void)setAccessibilityDescription:(NSString *)description NS_AVAILABLE_MAC(10_6);
+@property (copy) NSString *accessibilityDescription	NS_AVAILABLE_MAC(10_6);
 
 /* Make an NSImage referencing a CGImage.  The client should not assume anything about the image, other than that drawing it is equivalent to drawing the CGImage.
  
@@ -181,7 +173,7 @@ typedef NSUInteger NSImageCacheMode;
  
  Size of an NSImage is distinct from pixel dimensions.  If an NSImage is placed in an NSButton, it will be drawn in a rect with the provided size in the ambient coordinate system.
  */
-- (id)initWithCGImage:(CGImageRef)cgImage size:(NSSize)size NS_AVAILABLE_MAC(10_6);
+- (instancetype)initWithCGImage:(CGImageRef)cgImage size:(NSSize)size NS_AVAILABLE_MAC(10_6);
 
 /* Returns a CGImage capturing the drawing of the receiver.  This method returns an existing CGImage if one is available, or creates one if not.  It behaves the same as drawing the image with respect to caching and related behaviors.  This method is typically called, not overridden.  
  
@@ -213,6 +205,10 @@ typedef NSUInteger NSImageCacheMode;
 
 - (CGFloat)recommendedLayerContentsScale:(CGFloat)preferredContentsScale NS_AVAILABLE_MAC(10_7);
 - (id)layerContentsForContentsScale:(CGFloat)layerContentsScale NS_AVAILABLE_MAC(10_7);
+
+@property NSEdgeInsets capInsets NS_AVAILABLE_MAC(10_10);
+@property NSImageResizingMode resizingMode NS_AVAILABLE_MAC(10_10);
+
 @end
 
 APPKIT_EXTERN NSString *const NSImageHintCTM NS_AVAILABLE_MAC(10_6); // value is NSAffineTransform
@@ -241,29 +237,29 @@ APPKIT_EXTERN NSString *const NSImageHintInterpolation NS_AVAILABLE_MAC(10_6); /
 @interface NSImage (NSDeprecated)
 
 // the concept of flippedness for NSImage is deprecated.  Please see the AppKit 10.6 release notes for a discussion of why, and for how to replace existing usage.
-- (void)setFlipped:(BOOL)flag;
-- (BOOL)isFlipped;
+- (void)setFlipped:(BOOL)flag NS_DEPRECATED_MAC(10_0, 10_6);
+- (BOOL)isFlipped NS_DEPRECATED_MAC(10_0, 10_6);
 
 // these methods have surprising semantics.  Prefer to use the 'draw' methods (and note the new draw method taking respectContextIsFlipped as a parameter).  Please see the AppKit 10.6 release notes for exactly what's going on.
-- (void)dissolveToPoint:(NSPoint)point fraction:(CGFloat)aFloat;
-- (void)dissolveToPoint:(NSPoint)point fromRect:(NSRect)rect fraction:(CGFloat)aFloat;
-- (void)compositeToPoint:(NSPoint)point operation:(NSCompositingOperation)op;
-- (void)compositeToPoint:(NSPoint)point fromRect:(NSRect)rect operation:(NSCompositingOperation)op;
-- (void)compositeToPoint:(NSPoint)point operation:(NSCompositingOperation)op fraction:(CGFloat)delta;
-- (void)compositeToPoint:(NSPoint)point fromRect:(NSRect)rect operation:(NSCompositingOperation)op fraction:(CGFloat)delta;
+- (void)dissolveToPoint:(NSPoint)point fraction:(CGFloat)aFloat NS_DEPRECATED_MAC(10_0, 10_6, "Use -drawAtPoint:... or -drawInRect:... methods instead");
+- (void)dissolveToPoint:(NSPoint)point fromRect:(NSRect)rect fraction:(CGFloat)aFloat NS_DEPRECATED_MAC(10_0, 10_6, "Use -drawAtPoint:... or -drawInRect:... methods instead");
+- (void)compositeToPoint:(NSPoint)point operation:(NSCompositingOperation)op NS_DEPRECATED_MAC(10_0, 10_6, "Use -drawAtPoint:... or -drawInRect:... methods instead");
+- (void)compositeToPoint:(NSPoint)point fromRect:(NSRect)rect operation:(NSCompositingOperation)op NS_DEPRECATED_MAC(10_0, 10_6, "Use -drawAtPoint:... or -drawInRect:... methods instead");
+- (void)compositeToPoint:(NSPoint)point operation:(NSCompositingOperation)op fraction:(CGFloat)delta NS_DEPRECATED_MAC(10_0, 10_6, "Use -drawAtPoint:... or -drawInRect:... methods instead");
+- (void)compositeToPoint:(NSPoint)point fromRect:(NSRect)rect operation:(NSCompositingOperation)op fraction:(CGFloat)delta NS_DEPRECATED_MAC(10_0, 10_6, "Use -drawAtPoint:... or -drawInRect:... methods instead");
 
 // this method doesn't do what people expect.  See AppKit 10.6 release notes.  Briefly, you can replace invocation of this method with code that locks focus on the image and then draws the rep in the image.
-- (void)lockFocusOnRepresentation:(NSImageRep *)imageRepresentation;
+- (void)lockFocusOnRepresentation:(NSImageRep *)imageRepresentation NS_DEPRECATED_MAC(10_0, 10_6, "Use -lockFocus followed by -[NSImageRep drawInRect:] instead. See documentation for more info.");
 
 // these methods have to do with NSImage's caching behavior.  You should be able to remove use of these methods without any replacement.  See 10.6 AppKit release notes for details.
-- (void)setScalesWhenResized:(BOOL)flag;
-- (BOOL)scalesWhenResized;
-- (void)setDataRetained:(BOOL)flag;
-- (BOOL)isDataRetained;
-- (void)setCachedSeparately:(BOOL)flag;
-- (BOOL)isCachedSeparately;
-- (void)setCacheDepthMatchesImageDepth:(BOOL)flag;
-- (BOOL)cacheDepthMatchesImageDepth;
+- (void)setScalesWhenResized:(BOOL)flag NS_DEPRECATED_MAC(10_0, 10_6);
+- (BOOL)scalesWhenResized NS_DEPRECATED_MAC(10_0, 10_6);
+- (void)setDataRetained:(BOOL)flag NS_DEPRECATED_MAC(10_0, 10_6);
+- (BOOL)isDataRetained NS_DEPRECATED_MAC(10_0, 10_6);
+- (void)setCachedSeparately:(BOOL)flag NS_DEPRECATED_MAC(10_0, 10_6);
+- (BOOL)isCachedSeparately NS_DEPRECATED_MAC(10_0, 10_6);
+- (void)setCacheDepthMatchesImageDepth:(BOOL)flag NS_DEPRECATED_MAC(10_0, 10_6);
+- (BOOL)cacheDepthMatchesImageDepth NS_DEPRECATED_MAC(10_0, 10_6);
 
 @end
 
@@ -341,7 +337,7 @@ APPKIT_EXTERN NSString *const NSImageNameNetwork NS_AVAILABLE_MAC(10_5);
 
 /* NSImageNameDotMac will continue to work for the forseeable future, and will return the same image as NSImageNameMobileMe.
  */
-APPKIT_EXTERN NSString *const NSImageNameDotMac NS_AVAILABLE_MAC(10_5); // informally deprecated
+APPKIT_EXTERN NSString *const NSImageNameDotMac NS_DEPRECATED_MAC(10_5, 10_7);
 APPKIT_EXTERN NSString *const NSImageNameMobileMe NS_AVAILABLE_MAC(10_6);
 
 /* This image is appropriate as a drag image for multiple items.

@@ -17,20 +17,20 @@ NS_CLASS_AVAILABLE(10_7,5_0)
     NSSet *_updatedObjects;
     NSSet *_deletedObjects;
     NSSet* _optimisticallyLockedObjects;
+	uintptr_t _flags;
 	void* _reserved1;
-	void* _reserved2;
 }
 
 // Default initializer.
-- (id)initWithInsertedObjects:(NSSet*)insertedObjects updatedObjects:(NSSet*)updatedObjects deletedObjects:(NSSet*)deletedObjects lockedObjects:(NSSet*)lockedObjects;
+- (instancetype)initWithInsertedObjects:(NSSet*)insertedObjects updatedObjects:(NSSet*)updatedObjects deletedObjects:(NSSet*)deletedObjects lockedObjects:(NSSet*)lockedObjects;
 
 // Objects that were inserted into the calling context.
-- (NSSet *)insertedObjects;
+@property (readonly, strong) NSSet *insertedObjects;
 // Objects that were modified in the calling context.
-- (NSSet *)updatedObjects;
+@property (readonly, strong) NSSet *updatedObjects;
 // Objects that were deleted from the calling context.
-- (NSSet *)deletedObjects;
+@property (readonly, strong) NSSet *deletedObjects;
 // Objects that were flagged for optimistic locking on the calling context via detectConflictsForObject:.
-- (NSSet *)lockedObjects;
+@property (readonly, strong) NSSet *lockedObjects;
 
 @end

@@ -232,6 +232,31 @@ typedef struct thread_background_policy 	*thread_background_policy_t;
 	(sizeof (thread_background_policy_data_t) / sizeof (integer_t)))
 
 
+#define THREAD_LATENCY_QOS_POLICY	7
+typedef integer_t	thread_latency_qos_t;
+
+struct thread_latency_qos_policy {
+	thread_latency_qos_t thread_latency_qos_tier;
+};
+
+typedef struct thread_latency_qos_policy	thread_latency_qos_policy_data_t;
+typedef struct thread_latency_qos_policy 	*thread_latency_qos_policy_t;
+
+#define THREAD_LATENCY_QOS_POLICY_COUNT	((mach_msg_type_number_t)	\
+	    (sizeof (thread_latency_qos_policy_data_t) / sizeof (integer_t)))
+
+#define THREAD_THROUGHPUT_QOS_POLICY	8
+typedef integer_t	thread_throughput_qos_t;
+
+struct thread_throughput_qos_policy {
+	thread_throughput_qos_t thread_throughput_qos_tier;
+};
+
+typedef struct thread_throughput_qos_policy	thread_throughput_qos_policy_data_t;
+typedef struct thread_throughput_qos_policy 	*thread_throughput_qos_policy_t;
+
+#define THREAD_THROUGHPUT_QOS_POLICY_COUNT	((mach_msg_type_number_t) \
+	    (sizeof (thread_throughput_qos_policy_data_t) / sizeof (integer_t)))
 
 
 #endif	/* _MACH_THREAD_POLICY_H_ */

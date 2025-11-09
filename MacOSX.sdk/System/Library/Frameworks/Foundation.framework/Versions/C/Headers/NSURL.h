@@ -1,5 +1,5 @@
 /*	NSURL.h
-	Copyright (c) 1997-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1997-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -31,51 +31,51 @@ FOUNDATION_EXPORT NSString *NSURLFileScheme;
 
 /* Convenience initializers
  */
-- (id)initWithScheme:(NSString *)scheme host:(NSString *)host path:(NSString *)path; // this call percent-encodes both the host and path, so this cannot be used to set a username/password or port in the hostname part or with a IPv6 '[...]' type address; use initWithString: and construct the string yourself in those cases
+- (instancetype)initWithScheme:(NSString *)scheme host:(NSString *)host path:(NSString *)path; // this call percent-encodes both the host and path, so this cannot be used to set a username/password or port in the hostname part or with a IPv6 '[...]' type address; use initWithString: and construct the string yourself in those cases
 
-- (id)initFileURLWithPath:(NSString *)path isDirectory:(BOOL)isDir NS_AVAILABLE(10_5, 2_0);
-- (id)initFileURLWithPath:(NSString *)path;  // Better to use initFileURLWithPath:isDirectory: if you know if the path is a directory vs non-directory, as it saves an i/o.
+- (instancetype)initFileURLWithPath:(NSString *)path isDirectory:(BOOL)isDir NS_AVAILABLE(10_5, 2_0) NS_DESIGNATED_INITIALIZER;
+- (instancetype)initFileURLWithPath:(NSString *)path NS_DESIGNATED_INITIALIZER;  // Better to use initFileURLWithPath:isDirectory: if you know if the path is a directory vs non-directory, as it saves an i/o.
 
-+ (id)fileURLWithPath:(NSString *)path isDirectory:(BOOL) isDir NS_AVAILABLE(10_5, 2_0);
-+ (id)fileURLWithPath:(NSString *)path; // Better to use fileURLWithPath:isDirectory: if you know if the path is a directory vs non-directory, as it saves an i/o.
++ (NSURL *)fileURLWithPath:(NSString *)path isDirectory:(BOOL) isDir NS_AVAILABLE(10_5, 2_0);
++ (NSURL *)fileURLWithPath:(NSString *)path; // Better to use fileURLWithPath:isDirectory: if you know if the path is a directory vs non-directory, as it saves an i/o.
 
 /* Initializes a newly created URL referencing the local file or directory at the file system representation of the path. File system representation is a null-terminated C string with canonical UTF-8 encoding.
  */
-- (id)initFileURLWithFileSystemRepresentation:(const char *)path isDirectory:(BOOL)isDir relativeToURL:(NSURL *)baseURL NS_AVAILABLE(10_9, 7_0);
+- (instancetype)initFileURLWithFileSystemRepresentation:(const char *)path isDirectory:(BOOL)isDir relativeToURL:(NSURL *)baseURL NS_AVAILABLE(10_9, 7_0) NS_DESIGNATED_INITIALIZER;
 
 /* Initializes and returns a newly created URL referencing the local file or directory at the file system representation of the path. File system representation is a null-terminated C string with canonical UTF-8 encoding.
  */
-+ (id)fileURLWithFileSystemRepresentation:(const char *)path isDirectory:(BOOL) isDir relativeToURL:(NSURL *)baseURL NS_AVAILABLE(10_9, 7_0);
++ (NSURL *)fileURLWithFileSystemRepresentation:(const char *)path isDirectory:(BOOL) isDir relativeToURL:(NSURL *)baseURL NS_AVAILABLE(10_9, 7_0);
 
 /* These methods expect their string arguments to contain any percent escape codes that are necessary. It is an error for URLString to be nil.
  */
-- (id)initWithString:(NSString *)URLString;
-- (id)initWithString:(NSString *)URLString relativeToURL:(NSURL *)baseURL;
-+ (id)URLWithString:(NSString *)URLString;
-+ (id)URLWithString:(NSString *)URLString relativeToURL:(NSURL *)baseURL;
+- (instancetype)initWithString:(NSString *)URLString;
+- (instancetype)initWithString:(NSString *)URLString relativeToURL:(NSURL *)baseURL NS_DESIGNATED_INITIALIZER;
++ (instancetype)URLWithString:(NSString *)URLString;
++ (instancetype)URLWithString:(NSString *)URLString relativeToURL:(NSURL *)baseURL;
 
 
-- (NSString *)absoluteString;
-- (NSString *)relativeString; // The relative portion of a URL.  If baseURL is nil, or if the receiver is itself absolute, this is the same as absoluteString
-- (NSURL *)baseURL; // may be nil.
-- (NSURL *)absoluteURL; // if the receiver is itself absolute, this will return self.
+@property (readonly, copy) NSString *absoluteString;
+@property (readonly, copy) NSString *relativeString; // The relative portion of a URL.  If baseURL is nil, or if the receiver is itself absolute, this is the same as absoluteString
+@property (readonly, copy) NSURL *baseURL; // may be nil.
+@property (readonly, copy) NSURL *absoluteURL; // if the receiver is itself absolute, this will return self.
 
 /* Any URL is composed of these two basic pieces.  The full URL would be the concatenation of [myURL scheme], ':', [myURL resourceSpecifier]
  */
-- (NSString *)scheme;
-- (NSString *)resourceSpecifier;
+@property (readonly, copy) NSString *scheme;
+@property (readonly, copy) NSString *resourceSpecifier;
 
 /* If the URL conforms to rfc 1808 (the most common form of URL), the following accessors will return the various components; otherwise they return nil.  The litmus test for conformance is as recommended in RFC 1808 - whether the first two characters of resourceSpecifier is @"//".  In all cases, they return the component's value after resolving the receiver against its base URL.
  */
-- (NSString *)host;
-- (NSNumber *)port;
-- (NSString *)user;
-- (NSString *)password;
-- (NSString *)path;
-- (NSString *)fragment;
-- (NSString *)parameterString;
-- (NSString *)query;
-- (NSString *)relativePath; // The same as path if baseURL is nil
+@property (readonly, copy) NSString *host;
+@property (readonly, copy) NSNumber *port;
+@property (readonly, copy) NSString *user;
+@property (readonly, copy) NSString *password;
+@property (readonly, copy) NSString *path;
+@property (readonly, copy) NSString *fragment;
+@property (readonly, copy) NSString *parameterString;
+@property (readonly, copy) NSString *query;
+@property (readonly, copy) NSString *relativePath; // The same as path if baseURL is nil
 
 /* Returns the URL's path in file system representation. File system representation is a null-terminated C string with canonical UTF-8 encoding.
  */
@@ -83,11 +83,11 @@ FOUNDATION_EXPORT NSString *NSURLFileScheme;
 
 /* Returns the URL's path in file system representation. File system representation is a null-terminated C string with canonical UTF-8 encoding. The returned C string will be automatically freed just as a returned object would be released; your code should copy the representation or use getFileSystemRepresentation:maxLength: if it needs to store the representation outside of the autorelease context in which the representation is created.
  */
-- (__strong const char *)fileSystemRepresentation NS_RETURNS_INNER_POINTER NS_AVAILABLE(10_9, 7_0);
+@property (readonly) __strong const char *fileSystemRepresentation NS_RETURNS_INNER_POINTER NS_AVAILABLE(10_9, 7_0);
 
-- (BOOL)isFileURL; // Whether the scheme is file:; if [myURL isFileURL] is YES, then [myURL path] is suitable for input into NSFileManager or NSPathUtilities.
+@property (readonly, getter=isFileURL) BOOL fileURL; // Whether the scheme is file:; if [myURL isFileURL] is YES, then [myURL path] is suitable for input into NSFileManager or NSPathUtilities.
 
-- (NSURL *)standardizedURL;
+@property (readonly, copy) NSURL *standardizedURL;
 
 
 /* Returns whether the URL's resource exists and is reachable. This method synchronously checks if the resource's backing store is reachable. Checking reachability is appropriate when making decisions that do not require other immediate operations on the resource, e.g. periodic maintenance of UI state that depends on the existence of a specific document. When performing operations such as opening a file or copying resource properties, it is more efficient to simply try the operation and handle failures. If this method returns NO, the optional error is populated. This method is currently applicable only to URLs for file system resources. For other URL types, NO is returned. Symbol is present in iOS 4, but performs no operation.
@@ -108,7 +108,7 @@ FOUNDATION_EXPORT NSString *NSURLFileScheme;
 
 /* Returns a file path URL that refers to the same resource as a specified URL. File path URLs use a file system style path. An error will occur if the url parameter is not a file URL. A file reference URL's resource must exist and be reachable to be converted to a file path URL. Symbol is present in iOS 4, but performs no operation.
  */
-- (NSURL *)filePathURL NS_AVAILABLE(10_6, 4_0);
+@property (readonly, copy) NSURL *filePathURL NS_AVAILABLE(10_6, 4_0);
 
 
 /* Resource access
@@ -189,11 +189,15 @@ FOUNDATION_EXPORT NSString * const NSURLPreferredIOBlockSizeKey        NS_AVAILA
 FOUNDATION_EXPORT NSString * const NSURLIsReadableKey                  NS_AVAILABLE(10_7, 5_0); // true if this process (as determined by EUID) can read the resource. (Read-only, value type boolean NSNumber)
 FOUNDATION_EXPORT NSString * const NSURLIsWritableKey                  NS_AVAILABLE(10_7, 5_0); // true if this process (as determined by EUID) can write to the resource. (Read-only, value type boolean NSNumber)
 FOUNDATION_EXPORT NSString * const NSURLIsExecutableKey                NS_AVAILABLE(10_7, 5_0); // true if this process (as determined by EUID) can execute a file resource or search a directory resource. (Read-only, value type boolean NSNumber)
-FOUNDATION_EXPORT NSString * const NSURLFileSecurityKey                NS_AVAILABLE(10_7, 5_0); // The file system object's security information encapsulated in a NSFileSecurity object. (Value type NSFileSecurity)
+FOUNDATION_EXPORT NSString * const NSURLFileSecurityKey                NS_AVAILABLE(10_7, 5_0); // The file system object's security information encapsulated in a NSFileSecurity object. (Read-write, Value type NSFileSecurity)
 FOUNDATION_EXPORT NSString * const NSURLIsExcludedFromBackupKey        NS_AVAILABLE(10_8, 5_1); // true if resource should be excluded from backups, false otherwise (Read-write, value type boolean NSNumber). This property is only useful for excluding cache and other application support files which are not needed in a backup. Some operations commonly made to user documents will cause this property to be reset to false and so this property should not be used on user documents.
 FOUNDATION_EXPORT NSString * const NSURLTagNamesKey                    NS_AVAILABLE(10_9, NA);	// The array of Tag names (Read-write, value type NSArray of NSString)
 FOUNDATION_EXPORT NSString * const NSURLPathKey                        NS_AVAILABLE(10_8, 6_0); // the URL's path as a file system path (Read-only, value type NSString)
 FOUNDATION_EXPORT NSString * const NSURLIsMountTriggerKey              NS_AVAILABLE(10_7, 5_0); // true if this URL is a file system trigger directory. Traversing or opening a file system trigger will cause an attempt to mount a file system on the trigger directory. (Read-only, value type boolean NSNumber)
+FOUNDATION_EXPORT NSString * const NSURLGenerationIdentifierKey NS_AVAILABLE(10_10, 8_0); // An opaque generation identifier which can be compared using isEqual: to determine if the data in a document has been modified. For URLs which refer to the same file inode, the generation identifier will change when the data in the file's data fork is changed (changes to extended attributes or other file system metadata do not change the generation identifier). For URLs which refer to the same directory inode, the generation identifier will change when direct children of that directory are added, removed or renamed (changes to the data of the direct children of that directory will not change the generation identifier). The generation identifier is persistent across system restarts. The generation identifier is tied to a specific document on a specific volume and is not transferred when the document is copied to another volume. This property is not supported by all volumes. (Read-only, value type id <NSCopying, NSCoding, NSObject>
+FOUNDATION_EXPORT NSString * const NSURLDocumentIdentifierKey NS_AVAILABLE(10_10, 8_0); // The document identifier -- a value assigned by the kernel to a document (which can be either a file or directory) and is used to identify the document regardless of where it gets moved on a volume. The document identifier survives "safe save” operations; i.e it is sticky to the path it was assigned to (-replaceItemAtURL:withItemAtURL:backupItemName:options:resultingItemURL:error: is the preferred safe-save API). The document identifier is persistent across system restarts. The document identifier is not transferred when the file is copied. Document identifiers are only unique within a single volume. This property is not supported by all volumes. (Read-only, value type NSNumber)
+FOUNDATION_EXPORT NSString * const NSURLAddedToDirectoryDateKey NS_AVAILABLE(10_10, 8_0); // The date the resource was created, or renamed into or within its parent directory. Note that inconsistent behavior may be observed when this attribute is requested on hard-linked items. This property is not supported by all volumes. (Read-only, value type NSDate)
+FOUNDATION_EXPORT NSString * const NSURLQuarantinePropertiesKey NS_AVAILABLE(10_10, NA); // The quarantine properties as defined in LSQuarantine.h. To remove quarantine information from a file, pass NSNull as the value when setting this property. (Read-write, value type NSDictionary)
 FOUNDATION_EXPORT NSString * const NSURLFileResourceTypeKey            NS_AVAILABLE(10_7, 5_0); // Returns the file system object type. (Read-only, value type NSString)
 
 /* The file system object type values returned for the NSURLFileResourceTypeKey
@@ -206,6 +210,13 @@ FOUNDATION_EXPORT NSString * const NSURLFileResourceTypeRegular        NS_AVAILA
 FOUNDATION_EXPORT NSString * const NSURLFileResourceTypeSymbolicLink   NS_AVAILABLE(10_7, 5_0);
 FOUNDATION_EXPORT NSString * const NSURLFileResourceTypeSocket         NS_AVAILABLE(10_7, 5_0);
 FOUNDATION_EXPORT NSString * const NSURLFileResourceTypeUnknown        NS_AVAILABLE(10_7, 5_0);
+
+FOUNDATION_EXPORT NSString * const NSURLThumbnailDictionaryKey         NS_AVAILABLE(10_10, 8_0); // dictionary of NSImage/UIImage objects keyed by size
+FOUNDATION_EXPORT NSString * const NSURLThumbnailKey                   NS_AVAILABLE_MAC(10_10); // returns all thumbnails as a single NSImage
+
+/* size keys for the dictionary returned by NSURLThumbnailDictionaryKey
+ */
+FOUNDATION_EXPORT NSString * const NSThumbnail1024x1024SizeKey         NS_AVAILABLE(10_10, 8_0); // size key for a 1024 x 1024 thumbnail image
 
 /* Resource keys applicable only to regular files
  */
@@ -248,7 +259,7 @@ FOUNDATION_EXPORT NSString * const NSURLVolumeIsReadOnlyKey                 NS_A
 FOUNDATION_EXPORT NSString * const NSURLVolumeCreationDateKey               NS_AVAILABLE(10_7, 5_0); // The volume's creation date, or nil if this cannot be determined. (Read-only, value type NSDate)
 FOUNDATION_EXPORT NSString * const NSURLVolumeURLForRemountingKey           NS_AVAILABLE(10_7, 5_0); // The NSURL needed to remount a network volume, or nil if not available. (Read-only, value type NSURL)
 FOUNDATION_EXPORT NSString * const NSURLVolumeUUIDStringKey                 NS_AVAILABLE(10_7, 5_0); // The volume's persistent UUID as a string, or nil if a persistent UUID is not available for the volume. (Read-only, value type NSString)
-FOUNDATION_EXPORT NSString * const NSURLVolumeNameKey                       NS_AVAILABLE(10_7, 5_0); // The name of the volume (settable if NSURLVolumeSupportsRenamingKey is YES, value type NSString)
+FOUNDATION_EXPORT NSString * const NSURLVolumeNameKey                       NS_AVAILABLE(10_7, 5_0); // The name of the volume (Read-write if NSURLVolumeSupportsRenamingKey is YES, otherwise read-only, value type NSString)
 FOUNDATION_EXPORT NSString * const NSURLVolumeLocalizedNameKey              NS_AVAILABLE(10_7, 5_0); // The user-presentable name of the volume (Read-only, value type NSString)
 
 /* Ubiquitous item resource keys
@@ -262,8 +273,10 @@ FOUNDATION_EXPORT NSString * const NSURLUbiquitousItemIsUploadingKey            
 FOUNDATION_EXPORT NSString * const NSURLUbiquitousItemPercentDownloadedKey      NS_DEPRECATED(10_7, 10_8, 5_0, 6_0); // Use NSMetadataQuery and NSMetadataUbiquitousItemPercentDownloadedKey on NSMetadataItem instead
 FOUNDATION_EXPORT NSString * const NSURLUbiquitousItemPercentUploadedKey        NS_DEPRECATED(10_7, 10_8, 5_0, 6_0); // Use NSMetadataQuery and NSMetadataUbiquitousItemPercentUploadedKey on NSMetadataItem instead
 FOUNDATION_EXPORT NSString * const NSURLUbiquitousItemDownloadingStatusKey      NS_AVAILABLE(10_9, 7_0); // returns the download status of this item. (Read-only, value type NSString). Possible values below.
-FOUNDATION_EXPORT NSString * const NSURLUbiquitousItemDownloadingErrorKey       NS_AVAILABLE(10_9, 7_0); // returns the error when downloading the item from iCloud failed, see the NSUbiquitousFile section in FoundationErrors.h
-FOUNDATION_EXPORT NSString * const NSURLUbiquitousItemUploadingErrorKey         NS_AVAILABLE(10_9, 7_0); // returns the error when uploading the item to iCloud failed, see the NSUbiquitousFile section in FoundationErrors.h
+FOUNDATION_EXPORT NSString * const NSURLUbiquitousItemDownloadingErrorKey       NS_AVAILABLE(10_9, 7_0); // returns the error when downloading the item from iCloud failed, see the NSUbiquitousFile section in FoundationErrors.h (Read-only, value type NSError)
+FOUNDATION_EXPORT NSString * const NSURLUbiquitousItemUploadingErrorKey         NS_AVAILABLE(10_9, 7_0); // returns the error when uploading the item to iCloud failed, see the NSUbiquitousFile section in FoundationErrors.h (Read-only, value type NSError)
+FOUNDATION_EXPORT NSString * const NSURLUbiquitousItemDownloadRequestedKey      NS_AVAILABLE(10_10, 8_0); // returns whether a download of this item has already been requested with an API like -startDownloadingUbiquitousItemAtURL:error: (Read-only, value type boolean NSNumber)
+FOUNDATION_EXPORT NSString * const NSURLUbiquitousItemContainerDisplayNameKey   NS_AVAILABLE(10_10, 8_0); // returns the name of this item's container as displayed to users.
 
 
 /* The values returned for the NSURLUbiquitousItemDownloadingStatusKey
@@ -277,52 +290,90 @@ FOUNDATION_EXPORT NSString * const NSURLUbiquitousItemDownloadingStatusCurrent  
 
 typedef NS_OPTIONS(NSUInteger, NSURLBookmarkCreationOptions) {
     NSURLBookmarkCreationPreferFileIDResolution NS_ENUM_DEPRECATED(10_6, 10_9, 4_0, 7_0) = ( 1UL << 8 ), /* This option does nothing and has no effect on bookmark resolution */
-    NSURLBookmarkCreationMinimalBookmark = ( 1UL << 9 ), /* Creates a bookmark with "less" information, which may be smaller but still be able to resolve in certain ways */
-    NSURLBookmarkCreationSuitableForBookmarkFile = ( 1UL << 10 ), /* include properties required in Finder alias files in created bookmark */
+    NSURLBookmarkCreationMinimalBookmark = ( 1UL << 9 ), /* creates bookmark data with "less" information, which may be smaller but still be able to resolve in certain ways */
+    NSURLBookmarkCreationSuitableForBookmarkFile = ( 1UL << 10 ), /* include the properties required by writeBookmarkData:toURL:options: in the bookmark data created */
     NSURLBookmarkCreationWithSecurityScope NS_ENUM_AVAILABLE(10_7, NA) = ( 1 << 11 ), /* include information in the bookmark data which allows the same sandboxed process to access the resource after being relaunched */
     NSURLBookmarkCreationSecurityScopeAllowOnlyReadAccess NS_ENUM_AVAILABLE(10_7, NA) = ( 1 << 12 ), /* if used with kCFURLBookmarkCreationWithSecurityScope, at resolution time only read access to the resource will be granted */
 } NS_ENUM_AVAILABLE(10_6, 4_0);
 
 typedef NS_OPTIONS(NSUInteger, NSURLBookmarkResolutionOptions) {
-    NSURLBookmarkResolutionWithoutUI = ( 1UL << 8 ), /* don't perform any UI during bookmark resolution */
+    NSURLBookmarkResolutionWithoutUI = ( 1UL << 8 ), /* don't perform any user interaction during bookmark resolution */
     NSURLBookmarkResolutionWithoutMounting = ( 1UL << 9 ), /* don't mount a volume during bookmark resolution */
     NSURLBookmarkResolutionWithSecurityScope NS_ENUM_AVAILABLE(10_7, NA) = ( 1 << 10 ) /* use the secure information included at creation time to provide the ability to access the resource in a sandboxed process */
-};
+} NS_ENUM_AVAILABLE(10_6, 4_0);
 
 typedef NSUInteger NSURLBookmarkFileCreationOptions;
 
-/* Create a NSData containing a externalizable representation from a given url, which can later be resolved or interrogated for properties
+/* Returns bookmark data for the URL, created with specified options and resource values. If this method returns nil, the optional error is populated.
  */
 - (NSData *)bookmarkDataWithOptions:(NSURLBookmarkCreationOptions)options includingResourceValuesForKeys:(NSArray *)keys relativeToURL:(NSURL *)relativeURL error:(NSError **)error NS_AVAILABLE(10_6, 4_0);
 
-/* Resolve bookmark data into a url; init and factory methods
+/* Initializes a newly created NSURL that refers to a location specified by resolving bookmark data. If this method returns nil, the optional error is populated.
  */
-- (id)initByResolvingBookmarkData:(NSData *)bookmarkData options:(NSURLBookmarkResolutionOptions)options relativeToURL:(NSURL *)relativeURL bookmarkDataIsStale:(BOOL *)isStale error:(NSError **)error NS_AVAILABLE(10_6, 4_0);
-+ (id)URLByResolvingBookmarkData:(NSData *)bookmarkData options:(NSURLBookmarkResolutionOptions)options relativeToURL:(NSURL *)relativeURL bookmarkDataIsStale:(BOOL *)isStale error:(NSError **)error NS_AVAILABLE(10_6, 4_0);
+- (instancetype)initByResolvingBookmarkData:(NSData *)bookmarkData options:(NSURLBookmarkResolutionOptions)options relativeToURL:(NSURL *)relativeURL bookmarkDataIsStale:(BOOL *)isStale error:(NSError **)error NS_AVAILABLE(10_6, 4_0);
+/* Creates and Initializes an NSURL that refers to a location specified by resolving bookmark data. If this method returns nil, the optional error is populated.
+ */
++ (instancetype)URLByResolvingBookmarkData:(NSData *)bookmarkData options:(NSURLBookmarkResolutionOptions)options relativeToURL:(NSURL *)relativeURL bookmarkDataIsStale:(BOOL *)isStale error:(NSError **)error NS_AVAILABLE(10_6, 4_0);
 
-/* Property access.  Given a NSData* created with bookmarkDataWithOptions, return the value for the given property from the data.
+/* Returns the resource values for properties identified by a specified array of keys contained in specified bookmark data. If the result dictionary does not contain a resource value for one or more of the requested resource keys, it means those resource properties are not available in the bookmark data.
  */
 + (NSDictionary *)resourceValuesForKeys:(NSArray *)keys fromBookmarkData:(NSData *)bookmarkData NS_AVAILABLE(10_6, 4_0);
 
-/* Create a bookmark file on disk at bookmarkFileURL which can be resolved back to the file system item represented by bookmarkData, using the given options. If relativeToURL is non-NULL, create a relative url. The bookmark data must have been created with the NSURLBookmarkCreationSuitableForBookmarkFile flag or this routine will fail.  If bookmarkFileURL is a directory then the file will be created in that directory with the name of the item represented by the bookmarkData with ".alias" appended.  If bookmarkFileURL is a file url then its extension will be changed to ".alias", if not present.
+/* Creates an alias file on disk at a specified location with specified bookmark data. bookmarkData must have been created with the NSURLBookmarkCreationSuitableForBookmarkFile option. bookmarkFileURL must either refer to an existing file (which will be overwritten), or to location in an existing directory. If this method returns NO, the optional error is populated.
 */
 + (BOOL)writeBookmarkData:(NSData *)bookmarkData toURL:(NSURL *)bookmarkFileURL options:(NSURLBookmarkFileCreationOptions)options error:(NSError **)error NS_AVAILABLE(10_6, 4_0);
 
-/* Given the url of a file which is a Finder "alias" file, return a NSData with the bookmark data from the file.  If bookmarkFileURL points to an alias file created before SnowLeopard which contains Alias Manager information and no bookmark data, then a NSData will be synthesized which contains a approximation of the alias information in a format which can be used to resolve the bookmark.  If an error prevents reading the data or if it is corrupt, nil will be returned and error will be filled in if errorRef is non-NULL.
+/* Initializes and returns bookmark data derived from an alias file pointed to by a specified URL. If bookmarkFileURL refers to an alias file created prior to OS X v10.6 that contains Alias Manager information but no bookmark data, this method synthesizes bookmark data for the file. If this method returns nil, the optional error is populated.
 */
 + (NSData *)bookmarkDataWithContentsOfURL:(NSURL *)bookmarkFileURL error:(NSError **)error NS_AVAILABLE(10_6, 4_0);
 
-/*  Given a NSURL created by resolving a bookmark data created with security scope, make the resource referenced by the
-    url accessible to the process.  When access to this resource is no longer needed the client should call
-    stopAccessingSecurityScopedResource.  Each call to startAccessingSecurityScopedResource must be balanced
-    with a call to stopAccessingSecurityScopedResource
+/* Creates and initializes a NSURL that refers to the location specified by resolving the alias file at url. If the url argument does not refer to an alias file as defined by the NSURLIsAliasFileKey property, the NSURL returned is the same as url argument. This method fails and returns nil if the url argument is unreachable, or if the original file or directory could not be located or is not reachable, or if the original file or directory is on a volume that could not be located or mounted. If this method fails, the optional error is populated. The NSURLBookmarkResolutionWithSecurityScope option is not supported by this method.
  */
-- (BOOL)startAccessingSecurityScopedResource NS_AVAILABLE(10_7, NA);
++ (instancetype)URLByResolvingAliasFileAtURL:(NSURL *)url options:(NSURLBookmarkResolutionOptions)options error:(NSError **)error NS_AVAILABLE(10_10, 8_0);
 
-/*  Revokes the access granted to the url by a prior successful call to startAccessingSecurityScopedResource
+/*  Given a NSURL created by resolving a bookmark data created with security scope, make the resource referenced by the url accessible to the process. When access to this resource is no longer needed the client must call stopAccessingSecurityScopedResource. Each call to startAccessingSecurityScopedResource must be balanced with a call to stopAccessingSecurityScopedResource (Note: this is not reference counted).
  */
-- (void)stopAccessingSecurityScopedResource NS_AVAILABLE(10_7, NA);
+- (BOOL)startAccessingSecurityScopedResource NS_AVAILABLE(10_7, 8_0);
 
+/*  Revokes the access granted to the url by a prior successful call to startAccessingSecurityScopedResource.
+ */
+- (void)stopAccessingSecurityScopedResource NS_AVAILABLE(10_7, 8_0);
+
+@end
+
+
+@interface NSURL (NSPromisedItems)
+
+/* Get resource values from URLs of 'promised' items. A promised item is not guaranteed to have its contents in the file system until you use NSFileCoordinator to perform a coordinated read on its URL, which causes the contents to be downloaded or otherwise generated. Promised item URLs are returned by various APIs, including currently:
+ - NSMetadataQueryUbiquitousDataScope
+ - NSMetadataQueryUbiquitousDocumentsScope
+ - An NSFilePresenter presenting the contents of the directory located by -URLForUbiquitousContainerIdentifier: or a subdirectory thereof
+ 
+ The following methods behave identically to their similarly named methods above (-getResourceValue:forKey:error:, etc.), except that they allow you to get resource values and check for presence regardless of whether the promised item's contents currently exist at the URL. You must use these APIs instead of the normal NSURL resource value APIs if and only if any of the following are true:
+ - You are using a URL that you know came directly from one of the above APIs
+ - You are inside the accessor block of a coordinated read or write that used NSFileCoordinatorReadingImmediatelyAvailableMetadataOnly, NSFileCoordinatorWritingForDeleting, NSFileCoordinatorWritingForMoving, or NSFileCoordinatorWritingContentIndependentMetadataOnly
+ 
+ Most of the NSURL resource value keys will work with these APIs. However, there are some that are tied to the item's contents that will not work, such as NSURLContentAccessDateKey or NSURLGenerationIdentifierKey. If one of these keys is used, the method will return YES, but the value for the key will be nil.
+*/
+- (BOOL)getPromisedItemResourceValue:(id *)value forKey:(NSString *)key error:(NSError **)error NS_AVAILABLE(10_10, 8_0);
+- (NSDictionary *)promisedItemResourceValuesForKeys:(NSArray *)keys error:(NSError **)error NS_AVAILABLE(10_10, 8_0);
+- (BOOL)checkPromisedItemIsReachableAndReturnError:(NSError **)error NS_AVAILABLE(10_10, 8_0);
+
+@end
+
+
+
+NS_CLASS_AVAILABLE(10_10, 8_0)
+// NSURLQueryItem encapsulates a single query name-value pair. The name and value strings of a query name-value pair are not percent encoded. For use with the NSURLComponents queryItems property.
+@interface NSURLQueryItem : NSObject <NSSecureCoding, NSCopying> {
+@private
+    NSString *_name;
+    NSString *_value;
+}
+- (instancetype)initWithName:(NSString *)name value:(NSString *)value NS_DESIGNATED_INITIALIZER;
++ (instancetype)queryItemWithName:(NSString *)name value:(NSString *)value;
+@property (readonly) NSString *name;
+@property (readonly) NSString *value;
 @end
 
 
@@ -330,25 +381,28 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 @interface NSURLComponents : NSObject <NSCopying>
 
 // Initialize a NSURLComponents with all components undefined. Designated initializer.
-- (id)init;
+- (instancetype)init;
 
 // Initialize a NSURLComponents with the components of a URL. If resolvingAgainstBaseURL is YES and url is a relative URL, the components of [url absoluteURL] are used. If the url string from the NSURL is malformed, nil is returned.
-- (id)initWithURL:(NSURL *)url resolvingAgainstBaseURL:(BOOL)resolve;
+- (instancetype)initWithURL:(NSURL *)url resolvingAgainstBaseURL:(BOOL)resolve;
 
 // Initializes and returns a newly created NSURLComponents with the components of a URL. If resolvingAgainstBaseURL is YES and url is a relative URL, the components of [url absoluteURL] are used. If the url string from the NSURL is malformed, nil is returned.
-+ (id)componentsWithURL:(NSURL *)url resolvingAgainstBaseURL:(BOOL)resolve;
++ (instancetype)componentsWithURL:(NSURL *)url resolvingAgainstBaseURL:(BOOL)resolve;
 
 // Initialize a NSURLComponents with a URL string. If the URLString is malformed, nil is returned.
-- (id)initWithString:(NSString *)URLString;
+- (instancetype)initWithString:(NSString *)URLString;
 
 // Initializes and returns a newly created NSURLComponents with a URL string. If the URLString is malformed, nil is returned.
-+ (id)componentsWithString:(NSString *)URLString;
++ (instancetype)componentsWithString:(NSString *)URLString;
 
 // Returns a URL created from the NSURLComponents. If the NSURLComponents has an authority component (user, password, host or port) and a path component, then the path must either begin with "/" or be an empty string. If the NSURLComponents does not have an authority component (user, password, host or port) and has a path component, the path component must not start with "//". If those requirements are not met, nil is returned.
-- (NSURL *)URL;
+@property (readonly, copy) NSURL *URL;
 
 // Returns a URL created from the NSURLComponents relative to a base URL. If the NSURLComponents has an authority component (user, password, host or port) and a path component, then the path must either begin with "/" or be an empty string. If the NSURLComponents does not have an authority component (user, password, host or port) and has a path component, the path component must not start with "//". If those requirements are not met, nil is returned.
 - (NSURL *)URLRelativeToURL:(NSURL *)baseURL;
+
+// Returns a URL string created from the NSURLComponents. If the NSURLComponents has an authority component (user, password, host or port) and a path component, then the path must either begin with "/" or be an empty string. If the NSURLComponents does not have an authority component (user, password, host or port) and has a path component, the path component must not start with "//". If those requirements are not met, nil is returned.
+@property (readonly, copy) NSString *string NS_AVAILABLE(10_10, 8_0);
 
 // Warning: IETF STD 66 (rfc3986) says the use of the format "user:password" in the userinfo subcomponent of a URI is deprecated because passing authentication information in clear text has proven to be a security risk. However, there are cases where this practice is still needed, and so the user and password components and methods are provided.
 
@@ -362,13 +416,18 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 @property (copy) NSString *query;
 @property (copy) NSString *fragment;
 
-// Getting these properties retains any percent encoding these components may have. Setting these properties assumes the component string is already correctly percent encoded. Attempting to set an incorrectly percent encoded string will cause an exception. Although ';' is a legal path character, it is recommended that it be percent-encoded for best compatibility with NSURL (-stringByAddingPercentEncodingWithAllowedCharacters: will percent-encode any ';' chraracters if you pass the URLPathAllowedCharacterSet).
+// Getting these properties retains any percent encoding these components may have. Setting these properties assumes the component string is already correctly percent encoded. Attempting to set an incorrectly percent encoded string will cause an exception. Although ';' is a legal path character, it is recommended that it be percent-encoded for best compatibility with NSURL (-stringByAddingPercentEncodingWithAllowedCharacters: will percent-encode any ';' characters if you pass the URLPathAllowedCharacterSet).
 @property (copy) NSString *percentEncodedUser;
 @property (copy) NSString *percentEncodedPassword;
 @property (copy) NSString *percentEncodedHost;
 @property (copy) NSString *percentEncodedPath;
 @property (copy) NSString *percentEncodedQuery;
 @property (copy) NSString *percentEncodedFragment;
+
+// The getter method that underlies the queryItems property parses the query string based on these delimiters and returns an NSArray containing any number of NSURLQueryItem objects, each of which represents a single key-value pair, in the order in which they appear in the original query string.  Note that a name may appear more than once in a single query string, so the name values are not guaranteed to be unique. If the NSURLComponents object has an empty query component, queryItems returns an empty NSArray. If the NSURLComponents object has no query component, queryItems returns nil.
+// The setter method that underlies the queryItems property combines an NSArray containing any number of NSURLQueryItem objects, each of which represents a single key-value pair, into a query string and sets the NSURLComponents' query property. Passing an empty NSArray to setQueryItems sets the query component of the NSURLComponents object to an empty string. Passing nil to setQueryItems removes the query component of the NSURLComponents object.
+// Note: If a name-value pair in a query is empty (i.e. the query string starts with '&', ends with '&', or has "&&" within it), you get a NSURLQueryItem with a zero-length name and and a nil value. If a query's name-value pair has nothing before the equals sign, you get a zero-length name. If a query's name-value pair has nothing after the equals sign, you get a zero-length value. If a query's name-value pair has no equals sign, the query name-value pair string is the name and you get a nil value.
+@property (copy) NSArray *queryItems NS_AVAILABLE(10_10, 8_0);
 
 @end
 
@@ -378,22 +437,22 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 // Predefined character sets for the six URL components and subcomponents which allow percent encoding. These character sets are passed to -stringByAddingPercentEncodingWithAllowedCharacters:.
 
 // Returns a character set containing the characters allowed in an URL's user subcomponent.
-+ (id)URLUserAllowedCharacterSet NS_AVAILABLE(10_9, 7_0);
++ (NSCharacterSet *)URLUserAllowedCharacterSet NS_AVAILABLE(10_9, 7_0);
 
 // Returns a character set containing the characters allowed in an URL's password subcomponent.
-+ (id)URLPasswordAllowedCharacterSet NS_AVAILABLE(10_9, 7_0);
++ (NSCharacterSet *)URLPasswordAllowedCharacterSet NS_AVAILABLE(10_9, 7_0);
 
 // Returns a character set containing the characters allowed in an URL's host subcomponent.
-+ (id)URLHostAllowedCharacterSet NS_AVAILABLE(10_9, 7_0);
++ (NSCharacterSet *)URLHostAllowedCharacterSet NS_AVAILABLE(10_9, 7_0);
 
-// Returns a character set containing the characters allowed in an URL's path component. ';' is a legal path character, but it is recommended that it be percent-encoded for best compatibility with NSURL (-stringByAddingPercentEncodingWithAllowedCharacters: will percent-encode any ';' chraracters if you pass the URLPathAllowedCharacterSet).
-+ (id)URLPathAllowedCharacterSet NS_AVAILABLE(10_9, 7_0);
+// Returns a character set containing the characters allowed in an URL's path component. ';' is a legal path character, but it is recommended that it be percent-encoded for best compatibility with NSURL (-stringByAddingPercentEncodingWithAllowedCharacters: will percent-encode any ';' characters if you pass the URLPathAllowedCharacterSet).
++ (NSCharacterSet *)URLPathAllowedCharacterSet NS_AVAILABLE(10_9, 7_0);
 
 // Returns a character set containing the characters allowed in an URL's query component.
-+ (id)URLQueryAllowedCharacterSet NS_AVAILABLE(10_9, 7_0);
++ (NSCharacterSet *)URLQueryAllowedCharacterSet NS_AVAILABLE(10_9, 7_0);
 
 // Returns a character set containing the characters allowed in an URL's fragment component.
-+ (id)URLFragmentAllowedCharacterSet NS_AVAILABLE(10_9, 7_0);
++ (NSCharacterSet *)URLFragmentAllowedCharacterSet NS_AVAILABLE(10_9, 7_0);
 
 @end
 
@@ -404,7 +463,7 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 - (NSString *)stringByAddingPercentEncodingWithAllowedCharacters:(NSCharacterSet *)allowedCharacters NS_AVAILABLE(10_9, 7_0);
 
 // Returns a new string made from the receiver by replacing all percent encoded sequences with the matching UTF-8 characters.
-- (NSString *)stringByRemovingPercentEncoding NS_AVAILABLE(10_9, 7_0);
+@property (readonly, copy) NSString *stringByRemovingPercentEncoding NS_AVAILABLE(10_9, 7_0);
 
 
 /* Adds all percent escapes necessary to convert the receiver into a legal URL string.  Uses the given encoding to determine the correct percent escapes (returning nil if the given encoding cannot encode a particular character).  See CFURLCreateStringByAddingPercentEscapes in CFURL.h for more complex transformations
@@ -423,19 +482,19 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 /* The following methods work on the path portion of a URL in the same manner that the NSPathUtilities methods on NSString do.
  */
 + (NSURL *)fileURLWithPathComponents:(NSArray *)components NS_AVAILABLE(10_6, 4_0);
-- (NSArray *)pathComponents NS_AVAILABLE(10_6, 4_0);
-- (NSString *)lastPathComponent NS_AVAILABLE(10_6, 4_0);
-- (NSString *)pathExtension NS_AVAILABLE(10_6, 4_0);
+@property (readonly, copy) NSArray *pathComponents NS_AVAILABLE(10_6, 4_0);
+@property (readonly, copy) NSString *lastPathComponent NS_AVAILABLE(10_6, 4_0);
+@property (readonly, copy) NSString *pathExtension NS_AVAILABLE(10_6, 4_0);
 - (NSURL *)URLByAppendingPathComponent:(NSString *)pathComponent NS_AVAILABLE(10_6, 4_0);
 - (NSURL *)URLByAppendingPathComponent:(NSString *)pathComponent isDirectory:(BOOL)isDirectory NS_AVAILABLE(10_7, 5_0);
-- (NSURL *)URLByDeletingLastPathComponent NS_AVAILABLE(10_6, 4_0);
+@property (readonly, copy) NSURL *URLByDeletingLastPathComponent NS_AVAILABLE(10_6, 4_0);
 - (NSURL *)URLByAppendingPathExtension:(NSString *)pathExtension NS_AVAILABLE(10_6, 4_0);
-- (NSURL *)URLByDeletingPathExtension NS_AVAILABLE(10_6, 4_0);
+@property (readonly, copy) NSURL *URLByDeletingPathExtension NS_AVAILABLE(10_6, 4_0);
 
 /* The following methods work only on `file:` scheme URLs; for non-`file:` scheme URLs, these methods return the URL unchanged.
  */
-- (NSURL *)URLByStandardizingPath NS_AVAILABLE(10_6, 4_0);
-- (NSURL *)URLByResolvingSymlinksInPath NS_AVAILABLE(10_6, 4_0) ;
+@property (readonly, copy) NSURL *URLByStandardizingPath NS_AVAILABLE(10_6, 4_0);
+@property (readonly, copy) NSURL *URLByResolvingSymlinksInPath NS_AVAILABLE(10_6, 4_0);
 
 @end
 
@@ -443,8 +502,9 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 #if (TARGET_OS_MAC || (TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
 /* NSFileSecurity encapsulates a file system object's security information. NSFileSecurity and CFFileSecurity are toll-free bridged. Use the CFFileSecurity API for access to the low-level file security properties encapsulated by NSFileSecurity.
  */
+NS_CLASS_AVAILABLE(10_7, 5_0)
 @interface NSFileSecurity : NSObject <NSCopying, NSCoding>
-
+- (instancetype) initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 @end
 #endif
 
@@ -453,6 +513,9 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
  */
 
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+/* NSURLClient and NSURLLoading are deprecated; use NSURLConnection instead.
+ */
+
 /* Client informal protocol for use with the deprecated loadResourceDataNotifyingClient: below.
  */
 @interface NSObject (NSURLClient)
@@ -462,8 +525,6 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 - (void)URL:(NSURL *)sender resourceDidFailLoadingWithReason:(NSString *)reason NS_DEPRECATED(10_0, 10_4, 2_0, 2_0);
 @end
 
-/* This entire protocol is deprecated; use NSURLConnection instead.
- */
 @interface NSURL (NSURLLoading)
 - (NSData *)resourceDataUsingCache:(BOOL)shouldUseCache NS_DEPRECATED(10_0, 10_4, 2_0, 2_0); // Blocks to load the data if necessary.  If shouldUseCache is YES, then if an equivalent URL has already been loaded and cached, its resource data will be returned immediately.  If shouldUseCache is NO, a new load will be started
 - (void)loadResourceDataNotifyingClient:(id)client usingCache:(BOOL)shouldUseCache NS_DEPRECATED(10_0, 10_4, 2_0, 2_0); // Starts an asynchronous load of the data, registering delegate to receive notification.  Only one such background load can proceed at a time.
@@ -475,6 +536,5 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 - (BOOL)setProperty:(id)property forKey:(NSString *)propertyKey NS_DEPRECATED(10_0, 10_4, 2_0, 2_0);
 
 - (NSURLHandle *)URLHandleUsingCache:(BOOL)shouldUseCache NS_DEPRECATED(10_0, 10_4, 2_0, 2_0); // Sophisticated clients will want to ask for this, then message the handle directly.  If shouldUseCache is NO, a newly instantiated handle is returned, even if an equivalent URL has been loaded
-
 @end
 #endif

@@ -393,6 +393,31 @@ UTTypeCopyPreferredTagWithClass(
 
 
 /*
+ *  UTTypeCopyAllTagsWithClass()
+ *  
+ *  Discussion:
+ *    Returns each of the identified type's tags with the specified
+ *    tag class as a CFArray of CFStrings.
+ *  
+ *  Parameters:
+ *    
+ *    inUTI:
+ *      the uniform type identifier
+ *    
+ *    inTagClass:
+ *      the class of tags to return
+ *  
+ *  Result:
+ *    an array of tag strings, or NULL if there is no tag of the specified class.
+ */
+extern CFArrayRef 
+UTTypeCopyAllTagsWithClass(
+  CFStringRef   inUTI,
+  CFStringRef   inTagClass)                                   __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+
+
+
+/*
  *  UTTypeEqual()
  *  
  *  Discussion:
@@ -466,6 +491,46 @@ UTTypeConformsTo(
  */
 extern CFStringRef 
 UTTypeCopyDescription(CFStringRef inUTI)                      __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
+
+
+
+/*
+ *  UTTypeIsDeclared()
+ *  
+ *  Discussion:
+ *    Returns whether or not the specified UTI has a declaration
+ *    registered on the current system. Dynamic UTIs are never
+ *    registered.
+ *  
+ *  Parameters:
+ *    
+ *    inUTI:
+ *      the uniform type identifier
+ *  
+ *  Result:
+ *    Whether or not the UTI is registered.
+ */
+extern Boolean
+UTTypeIsDeclared(CFStringRef inUTI)                           __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+
+
+
+/*
+ *  UTTypeIsDynamic()
+ *  
+ *  Discussion:
+ *    Returns whether or not the specified UTI is a dynamic UTI.
+ *
+ *  Parameters:
+ *    
+ *    inUTI:
+ *      the uniform type identifier
+ *  
+ *  Result:
+ *    Whether or not the UTI is dynamic.
+ */
+extern Boolean
+UTTypeIsDynamic(CFStringRef inUTI)                            __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
 
 
 

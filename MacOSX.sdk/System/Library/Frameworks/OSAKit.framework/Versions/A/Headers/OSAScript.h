@@ -1,6 +1,6 @@
 /*	
     OSAScript.h
-    Copyright (C) 2005, 2009, 2012 Apple Inc. All rights reserved.    
+    Copyright (C) 2005-2014 Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -50,7 +50,7 @@ extern NSString * const OSAStorageTextType;
 // Storage Options
 // ===============
 
-typedef enum
+typedef NS_OPTIONS(NSUInteger, OSAStorageOptions)
 {
 	OSANull						= 0x00000000,
 	OSAPreventGetSource			= 0x00000001,	// May be used when initing with a compiled script, writing or getting compiled data
@@ -58,7 +58,7 @@ typedef enum
 	OSADontSetScriptLocation	= 0x01000000,	// May be used when initing with a URL or fromURL
 	OSAStayOpenApplet			= 0x10000000,	// May be used when writing
 	OSAShowStartupScreen		= 0x20000000,	// May be used when writing
-} OSAStorageOptions;
+};
 
 
 // OSAScript
@@ -86,24 +86,22 @@ typedef enum
 
 // fromURL: arguments are optional and may be nil. URL arguments may be used to indicate the origin of scripts. In AppleScript, for example, this URL may be used for the value of "path to me", unless you use the OSADontSetScriptLocation storage option.
 // languageInstance: parameters are optional and may be nil, in which case the shared instance of the current default language will be used.
-- (id)initWithSource:(NSString *)source;
-- (id)initWithSource:(NSString *)source language:(OSALanguage *)language;
-- (id)initWithSource:(NSString *)source fromURL:(NSURL *)url languageInstance:(OSALanguageInstance *)instance usingStorageOptions:(OSAStorageOptions)storageOptions AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-- (id)initWithContentsOfURL:(NSURL *)url error:(NSDictionary **)errorInfo;
+- (instancetype)initWithSource:(NSString *)source;
+- (instancetype)initWithSource:(NSString *)source language:(OSALanguage *)language;
+- (instancetype)initWithSource:(NSString *)source fromURL:(NSURL *)url languageInstance:(OSALanguageInstance *)instance usingStorageOptions:(OSAStorageOptions)storageOptions AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (instancetype)initWithContentsOfURL:(NSURL *)url error:(NSDictionary **)errorInfo;
 - (id)initWithContentsOfURL:(NSURL *)url language:(OSALanguage *)language error:(NSDictionary **)errorInfo DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
-- (id)initWithContentsOfURL:(NSURL *)url languageInstance:(OSALanguageInstance *)instance usingStorageOptions:(OSAStorageOptions)storageOptions error:(NSError **)errorInfo AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (instancetype)initWithContentsOfURL:(NSURL *)url languageInstance:(OSALanguageInstance *)instance usingStorageOptions:(OSAStorageOptions)storageOptions error:(NSError **)errorInfo AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 - (id)initWithCompiledData:(NSData *)data error:(NSDictionary **)errorInfo DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
-- (id)initWithCompiledData:(NSData *)data fromURL:(NSURL *)url usingStorageOptions:(OSAStorageOptions)storageOptions error:(NSError **)errorInfo AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-- (id)initWithScriptDataDescriptor:(NSAppleEventDescriptor *)data fromURL:(NSURL *)url languageInstance:(OSALanguageInstance *)instance usingStorageOptions:(OSAStorageOptions)storageOptions error:(NSError **)errorInfo AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (instancetype)initWithCompiledData:(NSData *)data fromURL:(NSURL *)url usingStorageOptions:(OSAStorageOptions)storageOptions error:(NSError **)errorInfo AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (instancetype)initWithScriptDataDescriptor:(NSAppleEventDescriptor *)data fromURL:(NSURL *)url languageInstance:(OSALanguageInstance *)instance usingStorageOptions:(OSAStorageOptions)storageOptions error:(NSError **)errorInfo AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 // Accessors
-- (NSString *)source;
-- (NSURL *)url;
-- (OSALanguage *)language;
-- (void)setLanguage:(OSALanguage *)language;
-- (OSALanguageInstance *)languageInstance AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-- (void)setLanguageInstance:(OSALanguageInstance *)languageInstance AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-- (BOOL)isCompiled;
+@property (readonly, copy) NSString *source;
+@property (readonly, copy) NSURL *url;
+@property (strong) OSALanguage *language;
+@property (strong) OSALanguageInstance *languageInstance AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+@property (getter=isCompiled, readonly) BOOL compiled;
 
 // Operations
 - (BOOL)compileAndReturnError:(NSDictionary **)errorInfo;
@@ -111,7 +109,7 @@ typedef enum
 - (NSAppleEventDescriptor *)executeAppleEvent:(NSAppleEventDescriptor *)event error:(NSDictionary **)errorInfo;
 - (NSAppleEventDescriptor *)executeAndReturnDisplayValue:(NSAttributedString **)displayValue error:(NSDictionary **)errorInfo;
 - (NSAppleEventDescriptor *)executeHandlerWithName:(NSString *)name arguments:(NSArray *)arguments error:(NSDictionary **)errorInfo;
-- (NSAttributedString *)richTextSource;
+@property (readonly, copy) NSAttributedString *richTextSource;
 - (NSAttributedString *)richTextFromDescriptor:(NSAppleEventDescriptor *)descriptor;
 - (BOOL)writeToURL:(NSURL *)url ofType:(NSString *)type error:(NSDictionary **)errorInfo;
 - (BOOL)writeToURL:(NSURL *)url ofType:(NSString *)type usingStorageOptions:(OSAStorageOptions)storageOptions error:(NSDictionary **)errorInfo;

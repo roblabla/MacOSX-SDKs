@@ -2,12 +2,12 @@
  *  CVPixelBufferIOSurface.h
  *  CoreVideo
  *
- *  Copyright (c) 2010 Apple Computer, Inc. All rights reserved.
+ *  Copyright (c) 2010-2014 Apple Inc. All rights reserved.
  *
  */
  
   /*! @header CVPixelBufferIOSurface.h
-	@copyright 2010 Apple Computer, Inc. All rights reserved.
+	@copyright 2010-2014 Apple Inc. All rights reserved.
 	@availability Mac OS X 10.4 or later
     @discussion routines for accessing and manipulating IOSurface backings for CVPixelBuffers
 		   
@@ -37,7 +37,7 @@ CV_EXPORT const CFStringRef kCVPixelBufferIOSurfaceCoreAnimationCompatibilityKey
 CV_EXPORT const CFStringRef kCVPixelBufferIOSurfaceOpenGLESTextureCompatibilityKey __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_5_0);	// CFBoolean
 // Ensures that OpenGLES can create a valid texture object from IOSurface-backed CVPixelBuffers AND that the resulting texture may be used as a color buffer attachment to a OpenGLES frame buffer object.
 CV_EXPORT const CFStringRef kCVPixelBufferIOSurfaceOpenGLESFBOCompatibilityKey __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_5_0);	// CFBoolean
-
+    
 #if COREVIDEO_SUPPORTS_IOSURFACE
 
 /*!

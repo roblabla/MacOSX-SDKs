@@ -1,42 +1,41 @@
 //
 //  GKMatch.h
-//  GameKit
+//  Game Center
 //
-//  Copyright 2010 Apple Inc. All rights reserved.
+//  Copyright 2010-2015 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import <GameKit/GKDefines.h>
 
 @class GKVoiceChat;
+@class GKPlayer;
+@class GKThreadsafeDictionary;
 
 @protocol GKMatchDelegate;
 
-enum {
+typedef NS_ENUM(NSInteger, GKMatchSendDataMode) {
     GKMatchSendDataReliable,         // a.s.a.p. but requires fragmentation and reassembly for large messages, may stall if network congestion occurs
     GKMatchSendDataUnreliable        // Preferred method. Best effort and immediate, but no guarantees of delivery or order; will not stall.
 };
-typedef NSInteger GKMatchSendDataMode;
 
-enum {
+typedef NS_ENUM(NSInteger, GKPlayerConnectionState) {
     GKPlayerStateUnknown,       // initial player state
     GKPlayerStateConnected,     // connected to the match
     GKPlayerStateDisconnected   // disconnected from the match
 };
-typedef NSInteger GKPlayerConnectionState;
+
 
 // GKMatch represents an active networking sessions between players. It handles network communications and can report player connection status. All matches are created by a GKMatchmaker.
 NS_CLASS_AVAILABLE(10_8, 4_1)
 @interface GKMatch : NSObject
-@end
 
-@interface GKMatch (GKAdditions)
-@property(readonly, NS_NONATOMIC_IOSONLY) NSArray *playerIDs;    // NSStrings of player identifiers in the match
-@property(assign, NS_NONATOMIC_IOSONLY) id<GKMatchDelegate> delegate;
-@property(readonly, NS_NONATOMIC_IOSONLY) NSUInteger expectedPlayerCount;
+@property(nonatomic, readonly) NSArray *players NS_AVAILABLE(10_10, 8_0);    // GKPlayers in the match
+@property(nonatomic, assign) id<GKMatchDelegate> delegate;
+@property(nonatomic, readonly) NSUInteger expectedPlayerCount;
 
-// Asynchronously send data to one or more players. Returns YES if delivery started, NO if unable to start sending and error will be set.
-- (BOOL)sendData:(NSData *)data toPlayers:(NSArray *)playerIDs withDataMode:(GKMatchSendDataMode)mode error:(NSError **)error;
+// Asynchronously send data to one or more GKPlayers. Returns YES if delivery started, NO if unable to start sending and error will be set.
+- (BOOL)sendData:(NSData *)data toPlayers:(NSArray *)players dataMode:(GKMatchSendDataMode)mode error:(NSError **)error NS_AVAILABLE(10_10, 8_0);
+
 // Asynchronously broadcasts data to all players. Returns YES if delivery started, NO if unable to start sending and error will be set.
 - (BOOL)sendDataToAllPlayers:(NSData *)data withDataMode:(GKMatchSendDataMode)mode error:(NSError **)error;
 
@@ -48,29 +47,40 @@ NS_CLASS_AVAILABLE(10_8, 4_1)
 - (GKVoiceChat *)voiceChatWithName:(NSString *)name;
 
 // Choose the best host from among the connected players using gathered estimates for bandwidth and packet loss. This is intended for applications that wish to implement a client-server model on top of the match. The returned player ID will be nil if the best host cannot currently be determined (e.g. players are still connecting).
-- (void)chooseBestHostPlayerWithCompletionHandler:(void(^)(NSString *playerID))completionHandler __OSX_AVAILABLE_STARTING(__MAC_10_9,__IPHONE_6_0);
+- (void)chooseBestHostingPlayerWithCompletionHandler:(void(^)(GKPlayer *player))completionHandler NS_AVAILABLE(10_10, 8_0);
 
 // Auto-matching to recreate a previous peer-to-peer match that became disconnected. A new match with the same set of players will be returned by the completion handler. All players should perform this when the match has ended for auto-matching to succeed. Error will be nil on success.
 // Possible reasons for error:
 // 1. Communications failure
 // 2. Timeout
-- (void)rematchWithCompletionHandler:(void(^)(GKMatch *match, NSError *error))completionHandler __OSX_AVAILABLE_STARTING(__MAC_10_9,__IPHONE_6_0);
+- (void)rematchWithCompletionHandler:(void(^)(GKMatch *match, NSError *error))completionHandler NS_AVAILABLE(10_9, 6_0);
 
 @end
 
 @protocol GKMatchDelegate <NSObject>
-@required
-// The match received data sent from the player.
-- (void)match:(GKMatch *)match didReceiveData:(NSData *)data fromPlayer:(NSString *)playerID;
-
 @optional
+
+// The match received data sent from the player.
+- (void)match:(GKMatch *)match didReceiveData:(NSData *)data fromRemotePlayer:(GKPlayer *)player NS_AVAILABLE(10_10, 8_0);
+- (void)match:(GKMatch *)match didReceiveData:(NSData *)data fromPlayer:(NSString *)playerID NS_DEPRECATED(10_8, 10_10, 4_1, 8_0, "use match:didReceiveData:fromRemotePlayer:");
+
 // The player state changed (eg. connected or disconnected)
-- (void)match:(GKMatch *)match player:(NSString *)playerID didChangeState:(GKPlayerConnectionState)state;
+- (void)match:(GKMatch *)match player:(GKPlayer *)player didChangeConnectionState:(GKPlayerConnectionState)state NS_AVAILABLE(10_8, 4_1);
+- (void)match:(GKMatch *)match player:(NSString *)playerID didChangeState:(GKPlayerConnectionState)state NS_DEPRECATED(10_8, 10_8, 4_1, 8_0, "use match:player:didChangeConnectionState:");
 
 // The match was unable to be established with any players due to an error.
-- (void)match:(GKMatch *)match didFailWithError:(NSError *)error;
+- (void)match:(GKMatch *)match didFailWithError:(NSError *)error NS_AVAILABLE(10_8, 4_1);
 
 // This method is called when the match is interrupted; if it returns YES, a new invite will be sent to attempt reconnection. This is supported only for 1v1 games
-- (BOOL)match:(GKMatch *)match shouldReinvitePlayer:(NSString *)playerID;
+- (BOOL)match:(GKMatch *)match shouldReinviteDisconnectedPlayer:(GKPlayer *)player NS_AVAILABLE(10_10, 8_0);
+- (BOOL)match:(GKMatch *)match shouldReinvitePlayer:(NSString *)playerID NS_DEPRECATED(10_8, 10_10, 5_0, 8_0, "use shouldReinviteDisconnectedPlayer:");
+
+@end
+
+@interface GKMatch (Deprecated)
+
+- (void)chooseBestHostPlayerWithCompletionHandler:(void(^)(NSString *playerID))completionHandler NS_DEPRECATED(10_9, 10_10, 6_0, 8_0, "use chooseBestHostingPlayerWithCompletionHandler:");
+- (BOOL)sendData:(NSData *)data toPlayers:(NSArray *)playerIDs withDataMode:(GKMatchSendDataMode)mode error:(NSError **)error NS_DEPRECATED(10_8, 10_10, 4_1, 8_0, "use sendData:toPlayers:dataMode:error:");
+@property(nonatomic, readonly) NSArray *playerIDs NS_DEPRECATED(10_8, 10_10, 4_1, 8_0, "use players");    // NSStrings of player identifiers in the match
 
 @end

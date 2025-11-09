@@ -2,7 +2,7 @@
 //  CalTask.h
 //	Calendar Store Framework
 //  
-//  Copyright 2006 Apple Computer, Inc. All rights reserved.
+//  Copyright 2006 Apple Inc. All rights reserved.
 //  
 //  This class allows the client to access data about a specific CalTask.
 //

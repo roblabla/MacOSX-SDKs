@@ -1,7 +1,7 @@
 /*
 	NSDocumentController.h
 	Application Kit
-	Copyright (c) 1997-2013, Apple Inc.
+	Copyright (c) 1997-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -30,21 +30,22 @@
 
 /* The designated initializer. The first instance of NSDocumentController to be allocate and initialized during application launch is used as the shared document controller.
 */
-- (id)init;
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 
 #pragma mark *** Currently Open Documents ***
 
 /* Return an array of all open documents.
 */
-- (NSArray *)documents;
+@property (readonly, copy) NSArray *documents;
 
 /* Return the active document, or nil if there is no active document. The "active" document is the one corresponding to the key window, or the one corresponding to the main window if the key window has no document.
 */
-- (id)currentDocument;
+@property (readonly, strong) id currentDocument;
 
 /* Return the path of the directory containing the active document's file or file package, if there is an active document and it has a file or file package. Return nil otherwise. The default implementation of -URLsFromRunningOpenPanel invokes this to find the current directory to set in the open panel before presenting it.
 */
-- (NSString *)currentDirectory;
+@property (readonly, copy) NSString *currentDirectory;
 
 /* Given a URL, return the open document whose file or file package is located by the URL, or nil if there is no such open document. The default implementation of this method queries each open document to find one whose URL matches, and returns the first one whose URL does match.
 
@@ -89,13 +90,12 @@ For backward binary compatibility with Mac OS 10.3 and earlier, the default impl
 
 /* Present an application-modal open panel to the user and, if the user selects one or more files and indicates that they are to be opened, return an array of those files' URLs. Return nil otherwise. The default implementation of this method invokes -runModalOpenPanel:forTypes: after it has set up an open panel.
 */
-- (NSArray *)URLsFromRunningOpenPanel;
+@property (readonly, copy) NSArray *URLsFromRunningOpenPanel;
 
 /* Present the application-modal open panel to the user, specifying a list of UTIs (in Mac OS 10.5), file name extensions, and encoded HFS file types for openable files. Return NSOKButton or NSCancelButton depending on how the user dismisses the panel.
 */
 - (NSInteger)runModalOpenPanel:(NSOpenPanel *)openPanel forTypes:(NSArray *)types;
 
-#if NS_BLOCKS_AVAILABLE
 /* Present an open panel, which may or may not be application-modal, to the user and, if the user selects one or more files and indicates that they are to be opened, invoke the completion handler with an array of those files' URLs. Invoke the completion handler with nil otherwise. The default implementation of this method invokes -beginOpenPanel:forTypes:completionHandler:. However, for backward binary compatibility, it invokes -runModalOpenPanel:forTypes: instead if you override it in a subclass and not -beginOpenPanel:forTypes:completionHandler:.
 
 If you override -[NSDocumentController openDocument:], you would typically want to invoke this method instead of -beginOpenPanel:forTypes:completionHandler: or -URLsFromRunningOpenPanel directly. You typically would not override this method without calling super.
@@ -122,8 +122,6 @@ For backward binary compatibility with Mac OS 10.6 and earlier, the default impl
 */
 - (void)openDocumentWithContentsOfURL:(NSURL *)url display:(BOOL)displayDocument completionHandler:(void (^)(NSDocument *document, BOOL documentWasAlreadyOpen, NSError *error))completionHandler NS_AVAILABLE_MAC(10_7);
 
-#endif /* NS_BLOCKS_AVAILABLE */
-
 /* Instantiate a document located by a URL, of a specified type, and return it if successful. If not successful, return nil after setting *outError to an NSError that encapsulates the reason why the document could not be instantiated. The default implementation of this method invokes -documentClassForType: to find out the class of document to instantiate, allocates a document object, and initializes it by sending it an -initWithContentsOfURL:ofType:error: message.
 
 For backward binary compatibility with Mac OS 10.3 and earlier, the default implementation of this method instead invokes [self makeDocumentWithContentsOfFile:[url path] ofType:typeName] if -makeDocumentWithContentsOfFile:ofType: is overridden and the URL uses the "file:" scheme.
@@ -131,8 +129,6 @@ For backward binary compatibility with Mac OS 10.3 and earlier, the default impl
 - (id)makeDocumentWithContentsOfURL:(NSURL *)url ofType:(NSString *)typeName error:(NSError **)outError;
 
 #pragma mark *** Document Reopening ***
-
-#if NS_BLOCKS_AVAILABLE
 
 /* Reopen a document, perhaps located by a URL, perhaps not, by reading the contents for the document from another URL, which may or may not be a different URL, present its user interface if displayDocument is YES, and invoke the passed-in completion handler at some point in the future, perhaps after the method invocation has returned. The completion handler must be invoked on the main thread. If successful, pass the document to the completion handler, and also whether the document was already open or being opened before this method was invoked. If not successful, pass a nil document and an NSError that encapsulates the reason why the document could not be opened. A nil URL indicates that the opened document is to have no fileURL, much like an untitled document has.
  
@@ -146,8 +142,6 @@ For backward binary compatibility with Mac OS 10.6 and earlier, the default impl
 */
 - (void)reopenDocumentForURL:(NSURL *)urlOrNil withContentsOfURL:(NSURL *)contentsURL display:(BOOL)displayDocument completionHandler:(void (^)(NSDocument *document, BOOL documentWasAlreadyOpen, NSError *error))completionHandler NS_AVAILABLE_MAC(10_7);
 
-#endif
-
 /* Instantiate a document, perhaps located by a URL, perhaps not, by reading the contents for the document from another URL, which may or may not be a different URL, and return it if successful. If not successful, return nil after setting *outError to an NSError that encapsulates the reason why the document could not be instantiated. The default implementation of this method invokes -documentClassForType: to find out the class of document to instantiate, allocates a document object, and initializes it by sending it an -initForURL:withContentsOfURL:ofType:error: message.
 */
 - (id)makeDocumentForURL:(NSURL *)urlOrNil withContentsOfURL:(NSURL *)contentsURL ofType:(NSString *)typeName error:(NSError **)outError;
@@ -156,8 +150,7 @@ For backward binary compatibility with Mac OS 10.6 and earlier, the default impl
 
 /* The time interval in seconds for periodic autosaving. A value of 0 indicates that periodic autosaving should not be done at all. NSDocument will use this number as the minimum amount of time to wait between detecting that a document has unautosaved changes and sending the document an -autosaveDocumentWithDelegate:didAutosaveSelector:contextInfo: message. The default value is 0. You can change it to enable periodic autosaving.
 */
-- (void)setAutosavingDelay:(NSTimeInterval)autosavingDelay;
-- (NSTimeInterval)autosavingDelay;
+@property NSTimeInterval autosavingDelay;
 
 #pragma mark *** Document Saving ***
 
@@ -169,7 +162,7 @@ For backward binary compatibility with Mac OS 10.6 and earlier, the default impl
 
 /* Return YES if any open document is modified, NO otherwise. This method is invoked at application quitting time, to determine whether -reviewUnsavedDocumentsWithAlertTitle:cancellable:delegate:didReviewAllSelector:contextInfo: should be invoked.
 */
-- (BOOL)hasEditedDocuments;
+@property (readonly) BOOL hasEditedDocuments;
 
 /* If there is more than one modified document, present an application-modal alert panel telling the user that there are unsaved documents and giving the option of canceling, not saving the documents, or saving the documents. If the user indicates that saving should be done, or if there was only one modified document in the first place, invoke -closeAllDocumentsWithDelegate:didCloseAllSelector:didReviewAll:contextInfo: to attempt to close all modified documents, doing whatever saving is necessary to not lose data. Finally, send the message selected by didReviewAllSelector to the delegate, with the contextInfo as the last argument. The default implementation of this method ignores the passed-in title string (which is passed in only as the result of a historical quirk). The method selected by didReviewAllSelector must have the same signature as:
 
@@ -215,7 +208,7 @@ You can customize the presentation of errors for all kinds of documents by overr
 
 /* Return the maximum number of items that may be presented in the standard Open Recent menu. A value of 0 indicates that NSDocumentController will not attempt to add an Open Recent menu to your application's File menu, though NSDocumentController will not attempt to remove any Open Recent menu item if there is one already there. The default implementation returns a value that is subject to change and may or may not be derived from a setting made by the user in a System Preferences panel.
 */
-- (NSUInteger)maximumRecentDocumentCount;
+@property (readonly) NSUInteger maximumRecentDocumentCount;
 
 /* The action of the Open Recent menu's Clear Menu item.
 */
@@ -231,7 +224,7 @@ You can customize the presentation of errors for all kinds of documents by overr
 
 /* Return an array of URLs for the entries currently appearing in the Open Recent menu.
 */
-- (NSArray *)recentDocumentURLs;
+@property (readonly, copy) NSArray *recentDocumentURLs;
 
 #pragma mark *** Document Types ***
 
@@ -247,7 +240,7 @@ For backward binary compatibility with Mac OS 10.4 and earlier, the default impl
 
 /* Return the names of NSDocument subclasses supported by this application. The default implementation of this method returns information derived from the application's Info.plist. You can override it to return the names of document classes that are dynamically loaded from plugins.
 */
-- (NSArray *)documentClassNames;
+@property (readonly, copy) NSArray *documentClassNames;
 
 /* Given a document type name, return the subclass of NSDocument that should be instantiated when opening a document of that type, or nil for failure.
 */
@@ -269,10 +262,10 @@ For backward binary compatibility with Mac OS 10.4 and earlier, the default impl
 
 #pragma mark *** Backward Compatibility
 
-/* Methods that were deprecated in Mac OS 10.6. See the comments above for information about when your overrides of them are still invoked, for backward binary compatibility.
+/* Methods that were deprecated in Mac OS 10.7. See the comments above for information about when your overrides of them are still invoked, for backward binary compatibility.
 */
-- (id)openDocumentWithContentsOfURL:(NSURL *)url display:(BOOL)displayDocument error:(NSError **)outError;
-- (BOOL)reopenDocumentForURL:(NSURL *)url withContentsOfURL:(NSURL *)contentsURL error:(NSError **)outError;
+- (id)openDocumentWithContentsOfURL:(NSURL *)url display:(BOOL)displayDocument error:(NSError **)outError NS_DEPRECATED_MAC(10_4, 10_7, "Use -openDocumentWithContentsOfURL:display:completionHandler: instead");
+- (BOOL)reopenDocumentForURL:(NSURL *)url withContentsOfURL:(NSURL *)contentsURL error:(NSError **)outError NS_DEPRECATED_MAC(10_4, 10_7, "Use -reopenDocumentForURL:withContentsOfURL:display:completionHandler: instead");
 
 /* Methods that were deprecated in Mac OS 10.5, and don't work well in applications whose document types are declared with UTIs. In general, if each of the application's CFBundleDocumentTypes Info.plist entries has a valid LSItemContentTypes subentry, and the application doesn't invoke deprecated methods like -fileNamesFromRunningOpenPanel, then these methods will never be invoked from within Cocoa.
 */

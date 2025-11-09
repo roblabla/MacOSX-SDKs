@@ -1,11 +1,12 @@
-.Dd 16 Aug 2013
-.\" hdid(8) content merged in for 10.9
+.Dd 20 May 2014
+.\" general revision for 10.10 includes chunk size additions and
+.\" step 1 of removing IDME (declare the verb deprecated).
 .\" preview changes to this file with 'man Documentation/hdiutil.1'
 .Os "OS X"
 .Dt HDIUTIL 1
 .Sh NAME
 .Nm hdiutil
-.Nd manipulate disk images (attach, verify, burn, etc)
+.Nd manipulate disk images (attach, verify, create, etc)
 .Sh SYNOPSIS
 .Nm
 .Ar verb
@@ -19,13 +20,13 @@ Common verbs include
 .Sy "verify",
 .Sy "create",
 .Sy "convert",
-.Sy "compact",
 and
-.Sy "burn".
+.Sy "compact".
 .Pp
 The rest of the verbs are currently:
 .Sy "help",
 .Sy "info",
+.Sy "burn",
 .Sy "checksum",
 .Sy "chpass",
 .Sy "erasekeys",
@@ -54,7 +55,7 @@ distinction is critical to understanding how disk images work.  The terms
 connected to and disconnected from a system.  "Mount" and "unmount" are
 the parallel filesystems options.
 .Pp
-For example, when you double-click a disk image in the Mac OS X Finder,
+For example, when you double-click a disk image in the OS X Finder,
 two separate things happen.  First, the image is "attached" to the system
 just like an external drive.  Then, the kernel and Disk Arbitration probe
 the new device for recognized file structures.  If any are discovered that
@@ -136,7 +137,7 @@ is only a synonym if there is no input image).
 .Pp
 .It Fl encryption Op Ar AES-128|AES-256
 specify a particular type of encryption or, if not specified, the default
-encryption algorithm.  As of 10.7, the default algorithm is the AES cipher
+encryption algorithm.  As of OS X 10.7, the default algorithm is the AES cipher
 running in CBC mode on 512-byte blocks with a 128-bit key.
 .It Fl stdinpass
 read a null-terminated passphrase from standard input.  If the standard
@@ -188,7 +189,7 @@ server is desired when the server name doesn't match what is in the
 certificate.
 .Pp
 .\"
-.\"             -- -shadow (sync w/hdid) --
+.\"             -- -shadow --
 .It Fl shadow Op Ar shadowfile
 Use a shadow file in conjunction with the data in the primary image file.
 This option prevents modification of the original image and allows
@@ -211,7 +212,7 @@ and
 Verbs that create images automatically append the correct extension to any
 filenames if the extension is not already present.  The creation engine
 also examines the filename extension of the provided filename and changes
-its behavior accordingly.  For example, a sparse image can be created
+its behavior accordingly.  For example, a sparse bundle image can be created
 without specifying -type SPARSEBUNDLE simply by appending the .sparsebundle
 extension to the provided filename.
 .\"
@@ -250,7 +251,7 @@ behavior.
 .Pp
 The output of
 .Sy attach
-has been stable since OS X 10.0 (though it was called
+has been stable since Mac OS X 10.0 (though it was called
 .Xr hdid 8
 then) and is intended to be program-readable.  It consists of the /dev
 node, a tab, a content hint (if applicable), another tab, and a mount
@@ -277,14 +278,15 @@ force the resulting device to be read-only
 attempt to override the DiskImages framework's decision to attach a
 particular image read-only.  For example,
 .Fl readwrite
-can be used to modify the HFS filesystem on a HFS/ISO hybrid CD image.
+can be used to modify the HFS+ filesystem on a HFS+/ISO hybrid CD image.
 .It Fl nokernel
-attach with a helper process.  This is (again) the default as of Mac OS X 10.5.
+attach with a helper process.  This is (again) the default as of Mac OS
+X 10.5.
 .It Fl kernel
 attempt to attach this image without a helper process; fail if unsupported.
 Only UDRW, UDRO, UDZO, and UDSP images are supported in-kernel.  Encryption
 and HTTP are supported by the kernel driver.
-
+.\"
 .It Fl notremovable
 prevent this image from being detached.  Only root can use this option.
 A reboot is necessary to cleanly detach an image attached with
@@ -308,7 +310,7 @@ instead of under
 .Ar path
 must exist.
 Full mount point paths must be less than MNAMELEN characters (increased
-from 90 to 1024 in OS X 10.6).
+from 90 to 1024 in Mac OS X 10.6).
 .\" 4063851 tracks better than "no mountable fsys" error for ENOENT here
 .It Fl mountrandom Ar path
 like
@@ -410,7 +412,7 @@ Preferences key: auto-fsck
 .br
 detach a disk image and terminate any associated process.
 .Ar dev_name
-is a partial /dev node path (e.g. "disk1").  As of OS X 10.4,
+is a partial /dev node path (e.g. "disk1").  As of Mac OS X 10.4,
 .Ar dev_name
 can also be a mountpoint.  If Disk Arbitration is running,
 .Sy detach
@@ -556,14 +558,15 @@ and
 and
 .Fl imagekey Ar di-shadow-puma-compatible=TRUE
 will create, respectively, sparse and shadow images that can be
-attached on OS X 10.1.
+attached on Mac OS X 10.1.
 .Fl imagekey Ar encrypted-encoding-version
 can select between version 1 and version 2 of the encrypted encoding.
 The framework preferences have a corresponding key to change the default
-for all images.  Version 2 is not compatible with OS X 10.2 but is more
-robust for SPARSE (UDSP) images.  Version 1 is the default for non-sparse
-images.  As of OS X 10.4.7, sparse encrypted images always use version 2
-and as of OS X 10.5, all encrypted images default to version 2.
+for all images.  Version 2 is not compatible with Mac OS X 10.2 but is
+more robust for SPARSE (UDSP) images.  Version 1 is the default for
+non-sparse images.  As of Mac OS X 10.4.7, sparse encrypted images always
+use version 2 and as of Mac OS X 10.5, all encrypted images default to
+version 2.
 .Pp
 General options:
 .Bl -hang -width "-volname" -compact
@@ -610,7 +613,7 @@ PERSISTENT SPARSE IMAGES below.
 .br
 where
 .Ar filesystem
-is one of HFS+, HFS+J (JHFS+), HFSX, JHFS+X, MS-DOS, or UDF.
+is one of HFS+, HFS+J (JHFS+), HFSX, JHFS+X, FAT32, ExFAT, or UDF.
 .Fl fs
 causes a filesystem of the specified type to be written to the image.
 .Fl fs
@@ -620,6 +623,9 @@ will not make any size adjustments: if the image is the wrong size for the
 specified filesystem,
 .Sy create
 will fail.
+.Sy create
+.Fl help
+lists all supported filesystems.
 .Fl fs
 is invalid and ignored when using
 .Fl srcdevice .
@@ -637,8 +643,7 @@ is invalid and ignored when using
 the root of the newly-created volume will be owned by the given numeric
 user id.  99 maps to the magic
 .Ql unknown
-user (see
-.Xr hdid 8 Ns ).
+user (see PERMISSIONS VS. OWNERS).
 .It Fl gid Ar gid
 the root of the newly-created volume will be owned by the given numeric
 group id.  99 maps to
@@ -712,7 +717,7 @@ the default layout is
 .Ql GPTSPUD
 (PPC systems used
 .Ql SPUD
-prior to OS X 10.6).  Other layouts include
+prior to Mac OS X 10.6).  Other layouts include
 .Ql MBRSPUD
 and
 .Ql ISOCD .
@@ -830,7 +835,7 @@ UDCO - UDIF ADC-compressed image
 .It
 UDZO - UDIF zlib-compressed image
 .It
-UDBZ - UDIF bzip2-compressed image (OS X 10.4+ only)
+UDBZ - UDIF bzip2-compressed image (Mac OS X 10.4+ only)
 .It
 UFBI - UDIF entire image with MD5 checksum
 .It
@@ -858,7 +863,7 @@ DC42 - Disk Copy 4.2 image
 .El
 .Pp
 In addition to the compression offered by some formats, the UDIF and NDIF
-read-only formats skip unused space in HFS, UFS, and MS-DOS (FAT)
+read-only formats skip unused space in HFS, ExFAT, and MS-DOS (FAT, FAT32)
 filesystems.  For UDZO,
 .Fl imagekey Ar zlib-level=value
 allows the zlib compression level to be specified ala
@@ -901,7 +906,7 @@ when
 is specified alone is 2*1024*1024 (1 GB worth of sectors) for UDTO images
 and 4*1024*1024 (2 GB segments) for all other image types.
 .Ar size_spec
-can also be specified ??b|??k|??m|??g|??t??p|??e like
+can also be specified ??b|??k|??m|??g|??t|??p|??e like
 .Sy "create" Ns 's
 .Fl size
 flag.
@@ -929,7 +934,7 @@ and
 .Fl "stdinpass".
 .Pp
 Other options:
-.Bl -hang -width "noskipfinalfree" -compact
+.Bl -hang -width "[no]skipfinalfree" -compact
 .It Fl device
 specify a device to use for burning.  See
 .Fl list Ns .
@@ -939,7 +944,7 @@ don't turn on laser (laser defaults to on).
 explicitly allow burning to devices not qualified by Apple (kept for
 backwards compatibility as
 .Sy burn
-will burn to any device by default as of OS X 10.4).
+will burn to any device by default as of Mac OS X 10.4).
 .Pp
 .It Fl [no]eject
 do [not] eject disc after burning. The default is to eject the disc.
@@ -961,7 +966,7 @@ reference the empty space.  The default is to skip burning a final free partitio
 .Pp
 .It Fl [no]optimizeimage
 do [not] optimize filesystem for burning.  Optimization can reduce the
-size of an HFS or HFS+ volume to the size of the data contained on the
+size of an HFS+ volume to the size of the data contained on the
 volume.  This option will change what is burned such that the disc will
 have a different checksum than the image it came from.  The default is to
 burn all blocks of the disk image (minus any trailing Apple_Free).
@@ -975,8 +980,8 @@ Disable the default buffer underrun protection.
 .Pp
 .It Fl [no]synthesize
 [Don't] Synthesize a hybrid filesystem for the disc.  The default is to
-create a new (HFS/ISO) filesystem when the source image's blocks could
-not be legally burned to a disc.
+create a new (HFS+/ISO) filesystem when burning the source image's blocks
+would not result in a valid disc.
 .Pp
 .It Fl speed Ar x_factor
 1, 2, 4, 6, ...
@@ -997,16 +1002,16 @@ Note that some drives have a minimum burn speed in which case any slower
 speed specified will result in a burn at the drive's minimum speed.
 .Pp
 .It Fl sizequery
-calculate the size of disc required (the size returned is in sectors)
-without burning anything.
+calculate the size of disc required without burning anything.  The size is
+returned in sectors.
 .Pp
 .It Fl erase
 prompt for optical media (DVD-RW/CD-RW) and then, if the hardware supports
 it, quickly erase the media.  If an image is specified, it will be burned
 to the media after the media has been erased.
 .It Fl fullerase
-erase all sectors of the disc (this usually takes quit a bit longer than
-.Fl erase Ns ).
+erase all sectors of the disc.  This usually takes quite a bit longer than
+.Fl erase Ns .
 .It Fl list
 list all burning devices, with OpenFirmware paths suitable for
 .Fl device Ns .
@@ -1030,11 +1035,8 @@ or converted to another read-only format with
 By default, the filesystem will be readable on most modern computing
 platforms.  The generated filesystem is not intended for conversion
 to read/write, but can safely have its files copied to a read/write
-filesystem by
-.Xr ditto 8
-or
-.Xr asr 8
-(in file-copy mode).
+filesystem using
+.Xr ditto 8 .
 .Pp
 .Nm
 supports generating El Torito-style bootable ISO9660 filesystems, which are
@@ -1056,21 +1058,21 @@ Filesystem options:
 Generate an HFS+ filesystem.  This filesystem can be present on an image
 simultaneously with an ISO9660 or Joliet or UDF filesystem.  On operating
 systems that understand HFS+ as well as ISO9660 and UDF, like Mac OS 9
-or Mac OS X, it is usually the preferred filesystem.
+or OS X, HFS+ is usually the preferred filesystem.
 .It Fl iso
 Generate an ISO9660 Level 2 filesystem with Rock Ridge extensions.  This
 filesystem can be present on an image simultaneously with an HFS+ or
 Joliet or UDF filesystem.  ISO9660 is the standard cross-platform
 interchange format for CDs and some DVDs, and is understood by virtually
 all operating systems.  If an ISO9660 or Joliet filesystem is present on
-a disk image or CD, but not HFS+, Mac OS X will use the ISO9660 (or Joliet)
+a disk image or CD, but not HFS+, OS X will use the ISO9660 (or Joliet)
 filesystem.
 .It Fl joliet
 Generate Joliet extensions to ISO9660.  This view of the filesystem can
 be present on an image simultaneously with HFS+, and requires the presence
 of an ISO9660 filesystem.  Joliet supports Unicode filenames, but is only
 supported on some operating systems.  If both an ISO9660 and Joliet
-filesystem are present on a disk image or CD, but not HFS+, Mac OS X will
+filesystem are present on a disk image or CD, but not HFS+, OS X will
 prefer the Joliet filesystem.
 .It Fl udf
 Generate a UDF filesystem. This filesystem can be present on an image
@@ -1092,7 +1094,7 @@ Other options (most take a single argument):
 .It Fl hfs-blessed-directory
 Path to directory which should be
 .Qo blessed Qc
-for Mac OS X booting on the generated filesystem.  This assumes the directory
+for OS X booting on the generated filesystem.  This assumes the directory
 has been otherwise prepared, for example with
 bless
 .Fl bootinfo
@@ -1211,7 +1213,7 @@ A glob expression of files and directories that should not be exposed via
 the ISO filesystem, although the data may still be present for use by other
 filesystems (ISO9660 only).  Per above, the Joliet hierarchy will supersede
 the ISO hierarchy when the hybrid is mounted as an ISO 9660 filesystem on
-Mac OS X.  Therefore, if Joliet is being generated (the default)
+OS X.  Therefore, if Joliet is being generated (the default)
 .Fl hide-joliet
 will also be needed to hide the file from
 .Xr mount_cd9660 8 .
@@ -1283,15 +1285,24 @@ must exist directly in the source directory, not a sub-directory,
 and must have an 8.3 name for compatibility with ISO9660 Level 1.
 .\"
 .\"             -- compact --
-.It Sy compact Ar image
+.It Sy compact Ar image Op Ar options
 .br
 scans the bands of a sparse (SPARSE or SPARSEBUNDLE) disk image containing
-an HFS filesystem, removing those parts of the image which are no longer
+an HFS+ filesystem, removing those parts of the image which are no longer
 being used by the filesystem.  Depending on the location of files in the
 hosted filesystem,
 .Sy compact
 may or may not shrink the image.  For SPARSEBUNDLE images, completely
 unused band files are simply removed.
+.Pp
+Options:
+.Bl -hang -width "batteryallowed" -compact
+.It Fl batteryallowed
+allow compacting on battery power. SPARSE images could be damaged if power is
+lost during a compact operation. The default is not allowed.
+.It Fl sleepallowed
+allow machine to sleep while compacting. The default is not allowed.
+.El
 .Pp
 Common options:
 .Fl "encryption",
@@ -1377,11 +1388,15 @@ to be read from the standard input in the same manner as with
 .\"             -- erasekeys --
 .It Sy erasekeys Ar image
 .br
-securely overwrite keys used to access an encrypted image, quickly rendering
-the image completely inaccessible.  Once
+securely overwrite keys used to access an encrypted image, quickly
+rendering the image inaccessible.  This does not prevent other copies of
+the keys from later being broken and used to decrypt the data.  In addition
+to additional copies of the image, modern storage systems such as solid
+state disks do not overwrite data.  As a result,
 .Sy erasekeys
-has been run on an encrypted image, there is no feasible way to recover data
-from the image file.
+cannot protect against all attacks.  For higher security, a tool like
+.Xr srm 1
+should be used on the entire file.
 .Pp
 Common options:
 .Fl "plist"
@@ -1407,7 +1422,7 @@ and
 .br
 Flatten a read-only (or compressed) UDIF disk image into a single-fork
 file.  By default, metadata will be stored both as XML (for the kernel's
-use) and in an embedded resource fork (for OS X 10.1 and earlier).
+use) and in an embedded resource fork (for Mac OS X 10.1 and earlier).
 .Pp
 Common options:
 .Fl "srcimagekey",
@@ -1428,19 +1443,19 @@ don't embed XML data for in-kernel attachment.  The image will never
 attach in-kernel.
 .It Fl norsrcfork
 don't embed resource fork data.  The image will not attach on OS X versions
-prior to OS X 10.2.
+prior to Mac OS X 10.2.
 .El
 .\"
 .\"             -- fsid --
 .It Sy fsid Ar image
 .br
-Print information about file systems on a given disk image.
+Print information about filesystems on a given disk image.
 Per DEVICE SPECIAL FILES,
 .Ar image
 can be a
 .Pa /dev
 entry corresponding to a disk.  More detailed information is presented
-for HFS file systems.
+for HFS+ filesystems.
 .Pp
 Common options:
 .Fl "encryption",
@@ -1467,11 +1482,11 @@ Note that
 .Sy mountvol
 (rather than
 .Sy mount ,
-though it often works in OS X 10.5 and later)
+though it often works in Mac OS X 10.5 and later)
 is the correct way to remount a volume after it has been unmounted by
 .Sy unmount .
 .Pp
-Prior to OS X 10.5,
+Prior to Mac OS X 10.5,
 .Sy mount Ns / Ns Sy attach
 would treat a /dev entry as a disk image to be attached (creating another
 /dev entry).  That behavior was undesirable.
@@ -1500,9 +1515,17 @@ unmount filesystem regardless of open files on that filesystem.  Similar
 to umount -f.
 .El
 .\"             -- imageinfo --
-.It Sy imageinfo Ar image
+.It Sy imageinfo Ar image Op Ar options
 .br
 Print out information about a disk image.
+.Pp
+Options are any of:
+.Bl -hang -width "checksum" -compact
+.It Fl format
+only print out the image format
+.It Fl checksum
+only print out the image checksum
+.El
 .Pp
 Common options:
 .Fl "encryption",
@@ -1511,14 +1534,6 @@ Common options:
 .Fl "shadow"
 and related, and
 .Fl "plist".
-.Pp
-Options are any of:
-.Bl -hang -width "checksum" -compact
-.It Fl format
-just print out the image format
-.It Fl checksum
-just print out the image checksum
-.El
 .\"
 .\"             -- isencrypted --
 .It Sy isencrypted Ar image
@@ -1552,20 +1567,9 @@ Common options:
 .Fl query
 .Ar image
 .br
-Enable or disable download post-processing (IDME).
-.Fl yes
-is the default.  When enabled, a browser (or Disk Copy 10.2.3+) will
-.Qq unpack
-the contents: the image's visible contents will be copied into the
-directory containing the image and the image will be put into the trash
-with IDME disabled.
-.Pp
-Common options:
-.Fl "encryption",
-.Fl "stdinpass",
-.Fl "srcimagekey",
-and
-.Fl "plist".
+.Sy internet-enable
+is deprecated.  As of OS X 10.7, nothing in OS X processes images
+configured for IDME.
 .\"
 .\"             -- resize --
 .It Sy resize Ar size_spec image
@@ -1579,7 +1583,7 @@ end of the hosted structures with the end of the image.
 cannot resize filesystems other than HFS+ and its variants.
 .Pp
 .Sy resize
-can shrink an image so that its HFS/HFS+ partition can be converted to
+can shrink an image so that its HFS+ partition can be converted to
 CD-R/DVD-R format and still be burned.
 .Nm
 .Sy resize
@@ -1599,7 +1603,7 @@ partition scheme, the hosted filesystem, and the filesystem hosting the
 image.  In the case of HFS+ inside of GPT inside of a UDRW on HFS+ with
 adequate free space, the limit is approximately 2^63 bytes.  Older images
 created with an APM partition scheme are limited by it to 2TB.  Before
-OS X 10.4,
+Mac OS X 10.4,
 .Sy resize
 was limited by how the filesystem was created (see
 .Nm
@@ -1623,7 +1627,7 @@ and related, and
 .Pp
 Size specifiers:
 .Bl -hang -width "partitionNumber" -compact
-.It Fl size Ar ??b|??k|??m|??g|??t??p|??e
+.It Fl size Ar ??b|??k|??m|??g|??t|??p|??e
 .It Fl sectors Ar sector_count | min
 .br
 Specify the number of 512-byte sectors to which the partition should be
@@ -1678,7 +1682,7 @@ does not modify the image.
 .br
 .Sy segment Fl o Ar firstSegname Fl segmentSize Ar size image Op opts
 .br
-segment a NDIF or UDIF disk image.  Segmented images work around
+segment an NDIF or UDIF disk image.  Segmented images work around
 limitations in file size which are sometimes imposed by filesystems,
 network protocols, or media.  Note: whether or not the segments are
 encrypted is determined by the options passed to
@@ -1695,7 +1699,7 @@ and
 .Fl "plist".
 .Pp
 Options:
-.Bl -hang -width "segmentsize" -compact
+.Bl -hang -width "segmentCount" -compact
 .It Fl segmentCount Ar segment_count
 .br
 Specify the number of segments.  Only one of
@@ -1714,7 +1718,7 @@ shorter than the others.  Only one of
 or
 .Fl segmentSize
 will be honored.  Segmenting read/write (UDRW) images is not supported (as
-of OS X 10.3).
+of Mac OS X 10.3).
 .Pp
 .It Fl firstSegmentSize Ar segment_size
 .br
@@ -1838,6 +1842,25 @@ converts the disk /dev/disk1 to a read/write device image file.
 authopen(1) will be used if read access to /dev/rdisk1 is not
 available.  Note use of the block-special device.
 .Ed
+.Dl hdiutil convert image.dmg -o image.sparsebundle
+.Bd -ragged -offset indent-two -compact
+converts image.dmg to format UDSB by automatically detecting
+the file extension .sparsebundle.
+.Ed
+.Bd -literal -offset indent -compact
+hdiutil convert files.sparsebundle -format UDZO \\
+    -imagekey zlib-level 5 -o files
+.Ed
+.Bd -ragged -offset indent-two -compact
+converts files.sparsebundle to files.dmg: a read-only,
+compressed disk image using zlib level 5 instead of the
+default.
+.Ed
+.Dl hdiutil convert stuff.dmg -format UDZO -encryption -o stuff-enc
+.Bd -ragged -offset indent-two -compact
+create a copy of stuff.dmg named stuff-enc.dmg which is
+encrypted with AES-128.
+.Ed
 .Pp
 Burning:
 .Dl hdiutil burn myImage.dmg
@@ -1850,23 +1873,23 @@ burns the image without verifying the burn or ejecting
 the disc.  Volumes will be mounted after burning.
 .Ed
 .Pp
-Creating a 50 MB encrypted image:
+Creating a 50 MB read/write encrypted image:
 .Dl hdiutil create -encryption -size 50m e.dmg -fs HFS+J
 .Pp
-Creating a 50 MB encrypted image protected with public key only:
+Creating a 50 MB read/write encrypted image protected with public key only:
 .Bd -literal -offset indent -compact
 hdiutil create -encryption -size 50m e.dmg -fs HFS+J \\
     -pubkey F534A3B0C2AEE3B988308CC89AA04ABE7FDB5F30
 .Ed
 .Pp
-Creating a 50 MB encrypted image protected with public key and password:
+Creating a 50 MB read/write encrypted image protected with public key and password:
 .Bd -literal -offset indent -compact
 hdiutil create -encryption -size 50m e.dmg -fs HFS+J -agentpass \\
     -pubkey F534A3B0C2AEE3B988308CC89AA04ABE7FDB5F30
 .Ed
 .Pp
 Note that these two -pubkey usage examples assume a certificate
-corresponding to this public key is currently in the user's keychain or smart 
+corresponding to this public key is currently in the user's keychain or smart
 card.
 For additional information on smart card authorization setup see
 .Xr sc_auth 8 .
@@ -1875,33 +1898,36 @@ Creating an encrypted single-partition image without user interaction:
 .Dl printf pp|hdiutil create -encryption -stdinpass -size 9m sp.dmg
 .Pp
 Creating a "1 GB" SPARSE image (a 1 GB filesystem in a growable file):
-.Dl hdiutil create -type SPARSE -size 1g -fs HFS+ growableTo1g
+.Dl hdiutil create -type SPARSE -size 1g -fs HFS+J growableTo1g
 .Pp
 Creating a "1 GB" SPARSEBUNDLE (a 1 GB filesystem in a growable bundle):
-.Dl hdiutil create -type SPARSEBUNDLE -size 1g -fs HFS+ growableTo1g
+.Dl hdiutil create -type SPARSEBUNDLE -size 1g -fs HFS+J growableTo1g
 .Pp
 Creating a new mounted volume backed by an image:
 .Dl hdiutil create -volname Dick -size 1.3m -fs HFS+ -attach Moby.dmg
 .Pp
 Attaching an image on a web server to the system, with any writes going
 to a local file:
-.Dl hdiutil attach http://my.webserver.com/master.dmg -shadow /tmp/mastershadowfile
+.Bd -literal -offset indent -compact
+hdiutil attach https://my.webserver.com/master.dmg \\
+    -shadow /tmp/mastershadowfile
+.Ed
 .Pp
-Using a shadow file to attach a read-only image read-write to modify it,
+Using a shadow file to attach a read-only image read/write to modify it,
 then convert it back to a read-only image. This method eliminates the
-time/space required to convert a image to read-write before modifying it.
+time/space required to convert a image to read/write before modifying it.
 .Bd -literal -offset indent
 hdiutil attach -owners on Moby.dmg -shadow
 /dev/disk2   Apple_partition_scheme
 /dev/disk2s1 Apple_partition_map
-/dev/disk2s2 Apple_HFS               /Volumes/Moby
+/dev/disk2s2 Apple_HFS               /Volumes/Dick
 
-ditto /Applications/Preview.app /Volumes/Moby
+ditto /Applications/Preview.app /Volumes/Dick
 hdiutil detach /dev/disk2
 hdiutil convert -format UDZO Moby.dmg -shadow
 .Ed
 .Pp
-Creating a RAM-backed device and filesystem.
+Creating a RAM-backed device and filesystem:
 .Bd -literal -offset indent
 NUMSECTORS=128000       # a sector is 512 bytes
 mydev=`hdiutil attach -nomount ram://$NUMSECTORS`
@@ -1911,7 +1937,7 @@ mount -t hfs $mydev /tmp/mymount
 .Ed
 .Pp
 Using makehybrid to create cross-platform data with files overlapping
-between filesystem views.  With these files:
+between filesystem views, containing these files:
 .Bd -literal -offset indent -compact
 albumlist.txt song2.wma     song4.m4a     song6.mp3     song8.mp3
 song1.wma     song3.m4a     song5.mp3     song7.mp3
@@ -1931,28 +1957,20 @@ the .wma files. The ISO9660 filesystem, typically the default filesystem
 for optical media on many platforms, will only show the .mp3 files. All
 three filesystems will include the "albumlist.txt" files.
 .Pp
-Image from directory (new-style):
+Image from directory:
 .Dl hdiutil create -srcfolder mydir mydir.dmg
+.Bd -ragged -offset indent-two -compact
+This method uses the least disk space during image creation, but the
+resulting image may be slightly less space efficient.
+.Ed
 .Pp
-Image from directory (10.1-style; of historical interest):
-.Bd -literal -offset indent -compact
-du -s myFolder             # du(1) will count resource forks
-10542
-hdiutil create -sectors 10642 folder     # add ~1% for filesytem
-hdid -nomount folder.dmg
-\&\...
-/dev/disk1s2            Apple_HFS
-newfs_hfs -v myFolderImage /dev/rdisk1s2
-hdiutil detach disk1
-hdid folder.dmg
-\&\...
-/dev/disk1s2            Apple_HFS         /Volumes/myFolderImage
-sudo mount -u -t hfs -o perm /dev/disk1s2 /Volumes/myFolderImage
-# optionally enable owners; sudo unneeded if manually mounted
-
-ditto -rsrcFork myFolder /Volumes/myFolderImage
-hdiutil detach disk1s2          # all done
-hdiutil convert -format UDZO -o folder.z.dmg folder.dmg # compress
+Image from directory using an intermediate sparse bundle:
+.Dl hdiutil create -srcfolder mydir -format UDSB mydir.sparsebundle
+.Dl hdiutil convert mydir.sparsebundle -format UDZO -o mydir.dmg
+.Bd -ragged -offset indent-two -compact
+This method produces space-optimal images, but requires much more disk
+space during image creation. The intermediate sparse bundle image can
+be removed after the process is complete.
 .Ed
 .Pp
 Manually changing ownership settings of a read-only disk image:
@@ -1990,20 +2008,16 @@ similar to
 but works even with, for example,
 .Sy create Fl attach .
 .It Ev com_apple_hdid_kernel
-attempt to attach in-kernel first (like
+Make
 .Sy attach
-.Fl kernel Ns ).
-In OS X 10.4.x, in-kernel was the default behavior for UDRW and SPARSE
-images.  On OS X 10.5, these and other kernel-compatible images, including
-RAM-based images described in
-.Xr hdid 8 ,
-will attach with a user process unless
-.Sy attach Fl kernel
-is used or the corresponding variable is set.  If an image is not
-"kernel-compatible" and
+behave as if
 .Fl kernel
-is specified, the attach will fail.
-(WARNING: ram:// images currently use wired memory when attached in-kernel).
+was passed.  In Mac OS X 10.4.x, in-kernel was the default behavior for UDRW
+and SPARSE images.  In Mac OS X 10.5 and later, these and other
+kernel-compatible images again default to attaching with a user process.
+If an image is not "kernel-compatible" and in-kernel mounting is specified,
+the attach will fail.  WARNING: ram:// images use wired memory when
+attached in-kernel.
 .It Ev com_apple_diskimages_insecureHTTP
 disable SSL peer verification the same way
 .Fl insecurehttp
@@ -2032,7 +2046,7 @@ The "No mountable filesystems" error from
 .Sy attach
 means that no filesystems could be recognized or mounted after the disk
 image was attached.  The default behavior in this case is to detach the
-disk image.  See 
+disk image.  See
 .Sy attach
 for options modifying this behavior.  This error can occur if the disk
 image or contained filesystem is corrupt.  It can also occur if an image
@@ -2046,8 +2060,8 @@ Device not configured.  This error is returned explicitly by DiskImages
 when its kernel driver or framework helper cannot be contacted.  It also
 often shows up when a device has been removed while I/O is still active.
 One common case of the helper not being found is when Foundation's
-Distributed Objects RPC mechanism cannot be configured.  D.O. doesn't work
-under dead Mach bootstrap contexts such as can exist in a reattached
+Distributed Objects RPC mechanism cannot be configured.  D.O. doesn't
+work under dead Mach bootstrap contexts such as can exist in a reattached
 .Xr screen 1
 session.  Root users can take advantage of
 .Xr StartupItemContext 8
@@ -2080,8 +2094,10 @@ for more information about verification of SSL peers.
 .It Bq Er EBUSY
 Resource busy.  Used if necessary exclusive access cannot be obtained.
 This error often appears when a volume can't be unmounted.
+.Xr lsof 8
+may help determine which open files could be causing the error.
 .It Bq Er EAGAIN
-Resource temporarily unavailable.  As of OS X 10.5, DiskImages uses
+Resource temporarily unavailable.  As of Mac OS X 10.5, DiskImages uses
 read/write locks on its image files to prevent images from being attached
 on more than one machine at a time (e.g. over the network).
 .Er EAGAIN
@@ -2095,20 +2111,27 @@ operation.
 .El
 .\"
 .Sh USING PERSISTENT SPARSE IMAGES
-As of OS X 10.5, a more reliable, efficient, and scalable sparse format,
-UDSB (SPARSEBUNDLE), is recommended for persistent sparse images as long
-as a backing bundle (directory) is acceptable.  OS X 10.5 also introduced
-F_FULLFSYNC over AFP (on client and server), allowing proper journal
-flushes for HFS+J-bearing images.  Critical data should never be stored
-in sparse disk images on file servers that don't support F_FULLFSYNC.
+As of Mac OS X 10.5, a more reliable, efficient, and scalable sparse
+format, UDSB (SPARSEBUNDLE), is recommended for persistent sparse images
+as long as a backing bundle (directory) is acceptable.  Mac OS X 10.5 also
+introduced F_FULLFSYNC over AFP (on client and server), allowing proper
+journal flushes for HFS+J-bearing images.  Critical data should never be
+stored in sparse disk images on file servers that don't support
+F_FULLFSYNC.
 .Pp
 SPARSE (UDSP) images and shadow files were designed for intermediate use
 when creating other images (e.g. UDZO) when final image sizes are unknown.
-As of OS X 10.3.2, partially-updated SPARSE images are properly handled
-and are thus safe for persistent storage.  SPARSE images are not
-recommended for persistent storage on versions of OS X earlier than 10.3.2
-and should be avoided in favor of SPARSEBUNDLE images or UDRW images and
+Generally speaking, SPARSE images are not recommended for persistent storage,
+though they are relatively safe on Mac OS X 10.3.2 and later. On versions
+earlier than 10.3.2, SPARSE should be avoided in favor of UDRW images and
 .Sy resize .
+On Mac OS X 10.5 and later, the more robust and faster SPARSEBUNDLE type
+is preferred.
+.Pp
+Note that both sparse formats, UDSP and UDSB, are growable only up to a limit:
+the size parameter specified when they were created. They will take up less space
+on the hosting filesystem if they contain less data than their created size,
+and grow up to that size as data is added.
 .Pp
 If more space is needed than is referenced by the hosted filesystem,
 .Nm
@@ -2124,13 +2147,15 @@ that sparse images can enhance the effects of any fragmentation in the
 hosted filesystem.
 .Pp
 To prevent errors when a filesystem inside of a sparse image has more free
-space than the volume holding the sparse image, HFS volumes inside sparse
+space than the volume holding the sparse image, HFS+ volumes inside sparse
 images will report an amount of free space slightly less than the amount
 of free space on the volume on which image resides.  The image filesystem
 currently only behaves this way as a result of a direct
 .Sy attach
 action and will not behave this way if, for example, the filesystem is
-unmounted and remounted.
+unmounted and remounted.  Moving the image file to a different volume
+with sufficient free space will allow the image's filesystem to grow to
+its full size.
 .\"
 .Sh DEVICE SPECIAL FILES
 Since any
@@ -2193,32 +2218,40 @@ pose challenges for unmanaged, shared filesystems such as those typically
 present in disk images.  OS X's solution to this problem is to make owners
 optional, both while creating files and enforcing permissions.
 .Pp
-By default, unknown HFS filesystems on "external" devices (including disk
-images) mount with their owners ignored (mount -o noowners).  When owners
-are ignored, the system dynamically substitutes the current user's identify
-for any owners recorded in the filesystem.  When creating new files, a
-special UID and GID of _unknown are recorded on the disk.  Even if a
-filesystem is later mounted with on-disk owners honored, files with stored
-UID or GID of _unknown will continue to substitute the current user's
-credentials any time the given file is accessed.  The net result is that
-shared volumes behave as expected even when connected to systems where
-their on-disk owners are honored.
+By default, unknown HFS+ filesystems on "external" devices (including
+disk images) mount with their owners ignored (mount -o noowners).  Normally
+when owners are ignored, the system uses a special _unknown user and group
+to dynamically substitute the current user's identity for any owners
+recorded in the filesystem.  These _unknown owners are even written to
+the volume when creating new files.  The new files will continue to have
+"floating" ownership when mounted with owners honored.  The net result
+is that shared volumes behave as expected regardless of how they are
+accessed.
 .Pp
-On modern OS X systems, root (UID 0) can "see through" the _unknown
+The behavior is different when disk images are attached.  With disk images,
+the owner of all files in a filesystem mount for which owners are ignored
+is the user attaching the disk image.  The attaching owner is also used
+when creating new files.
+.Pp
+On modern OS X systems, root (UID 0) can "see through" the "owners ignored"
 user mappings.  Thus
 .Dl sudo ls -l /Volumes/imageVol
 will show whatever is really stored in the filesystem (possibly _unknown)
-regardless of whether owners are currently being respected on that volume.
-In contrast, non-root users will see themselves any time owners are ignored
-(either via mount -o noowners or stored _unknown): mary running ls -l
-will see that mary owns any owners-ignored filesystems objects while joe
-running ls -l on the same objects will see that joe owns them.
+regardless of whether owners are currently being honored on that volume.
+In contrast, non-root users will see themselves any time _unknown is in
+effect, whether the default for the mount when owners are ignored or
+because _unknown is stored on disk.  For disk images, non-root users will
+see owners matching the user that attached the disk image.
 .Pp
 Unlike owners, permissions are never optional.  A non-writable file will
 not be writable just because owners are ignored.  However, a file that
-is writable by its owner will be writable by everyone if owners are ignored
-for that file.  Because anyone accessing an owners-ignored file is treated
-as the owner, everyone is effectively the owner.
+is writable by its owner will be writable by everyone if _unknown is the
+effective owner of the file for that file.  Because anyone accessing an
+owners-ignored file is treated as the owner, everyone is effectively the
+owner.  Because the default behavior for disk image filesystems is for
+all files to be owned by the user attaching the disk image, other users
+will be treated per the 'group' (if applicable) and 'other' permission
+modes.
 .Pp
 .Xr diskutil 8 Ns 's
 .Sy enableOwnership
@@ -2235,9 +2268,9 @@ can make many requests over a single connection, responsiveness can be
 improved by modifying HTTP server settings such as apache's
 MaxKeepAliveRequests and KeepAliveTimeout.
 .Pp
-OS X 10.0 supported the disk images of Disk Copy 6 on Mac OS 9.  OS X
+Mac OS X 10.0 supported the disk images of Disk Copy 6 on Mac OS 9.  OS X
 10.1 added sparse, encrypted, and zlib-compressed images.  These images
-will not be recognized on OS X 10.0 (or will attach read/write, possibly
+will not be recognized on Mac OS X 10.0 (or will attach read/write, possibly
 allowing for their destruction).  As the sparse, shadow, and encrypted
 formats have evolved, switches have been added to facilitate the creation
 of images that are compatible with older OS versions (at the expense of
@@ -2245,31 +2278,31 @@ the performance and reliability improvements offered by the format
 enhancements).  In particular, sparse images should not be expected to
 attach on versions of OS X older than that which created them.
 .Pp
-With OS X 10.2, the most common image formats went "in-kernel" (i.e. the
+With Mac OS X 10.2, the most common image formats went "in-kernel" (i.e. the
 DiskImages kernel extension served them without a helper process), image
 meta-data began being stored both as XML and in the embedded resource fork,
 and the default Disk Copy.app "compressed" format became UDZO (breaking
-compatibility with 10.0).  OS X 10.4 introduced bzip2 compression in the
+compatibility with 10.0).  Mac OS X 10.4 introduced bzip2 compression in the
 UDBZ format which provides smaller images (especially when combined with
 .Sy makehybrid )
 at the expense of backwards compatibility.
 .Pp
-In OS X 10.4.7, the resource forks previously embedded in UDIF images
+In Mac OS X 10.4.7, the resource forks previously embedded in UDIF images
 were abandoned entirely to avoid metadata length limitations imposed by
 resource fork structures.
 As a result, UDIF images created on 10.4.7 and later will not, by default,
-be recognized by either OS X 10.1 or OS X 10.0.
+be recognized by either Mac OS X 10.1 or Mac OS X 10.0.
 .Sy flatten
 can be used to customize the type of metadata stored in the image.
 .Pp
-OS X
+Mac OS X
 10.5 introduced sparse bundle images which
 .Sy compact
-quickly but are not recognized by previous OS versions.  OS X 10.6
+quickly but are not recognized by previous OS versions.  Mac OS X 10.6
 removed support for attaching SPARSEBUNDLE images from network file
-servers that don't support F_FULLFSYNC. OS X 10.7 removed double-click
+servers that don't support F_FULLFSYNC.  OS X 10.7 removed double-click
 support for images using legacy metadata; these can be rehabilitated
-using 
+using
 .Sy flatten
 and
 .Sy unflatten Ns ,
@@ -2308,12 +2341,17 @@ recognizes the filesystems.  They can also be burned with
 .Ns Sy burn .
 .\"
 .Sh WHAT'S NEW
-OS X 10.7 added the ability to quickly render encrypted images inaccessible
-using the new
+OS X 10.10 quadrupled the default UDIF chunk size without affecting backward
+compatibility.  UDIF images created or converted on 10.10 will benefit from
+smaller metadata and more efficient compression for UDZO and especially UDBZ
+formats.
+.Pp
+OS X 10.7 added the ability to quickly render encrypted images
+inaccessible using the new
 .Sy erasekeys
 verb, which saves time versus securely overwriting the entire image.
 .Pp
-In OS X 10.6,
+In Mac OS X 10.6,
 .Sy pmap
 was rewritten to use MediaKit's latest reporting routines so that it can
 properly support GPT partition maps.  Also
@@ -2322,7 +2360,7 @@ now implies
 .Fl verbose
 for all verbs.
 .Pp
-OS X 10.5 changed the behavior of
+Mac OS X 10.5 changed the behavior of
 .Sy attach
 when run on an existing image or /dev node: if the image was attached but
 no volume was mounted, the volume would be mounted.  Prior systems would
@@ -2333,9 +2371,10 @@ removes the ability to create a second /dev node from an existing one.
 .Ns Xr authopen 1 ,
 .Ns Xr diskutil 8 ,
 .Ns Xr ditto 8 ,
+.Ns Xr asr 8 ,
 .Ns Xr ioreg 8 ,
 .Ns Xr drutil 1 ,
 .Ns Xr msdos.util 8 ,
+.Ns Xr exfat.util 8 ,
 .Ns Xr hfs.util 8 ,
-.Ns Xr diskarbitrationd 8 ,
-.Ns Pa /System/Library/CoreServices/DiskImageMounter.app .
+.Ns Xr diskarbitrationd 8 .

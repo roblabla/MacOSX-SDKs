@@ -133,7 +133,6 @@ format:(CIFormat)f colorSpace:(CGColorSpaceRef)c;
 - (id)initWithIOSurface:(IOSurfaceRef)surface __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
 - (id)initWithIOSurface:(IOSurfaceRef)surface options:(NSDictionary *)d __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
 
-// FIXME: SPI for now?
 - (id)initWithIOSurface:(IOSurfaceRef)surface plane:(size_t)plane format:(CIFormat)format options:(NSDictionary *)d /*__OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA)*/;
 
 - (id)initWithCVImageBuffer:(CVImageBufferRef)imageBuffer __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
@@ -148,11 +147,35 @@ format:(CIFormat)f colorSpace:(CGColorSpaceRef)c;
  * 'matrix' appended to it. */
 - (CIImage *)imageByApplyingTransform:(CGAffineTransform)matrix;
 
-/* Return a new image cropped to the rectangle or shape. */
+/* Returns a new image representing the original image with a transform
+ * appied to it based on an orientation value.
+ * Orientation values from 1 to 8 as defined in the TIFF spec are supporrted.
+ * Returns original image if the image is of infinite extent. */
+- (CIImage *)imageByApplyingOrientation:(int)orientation __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+
+/* Returns a CGAffineTransform for an orientation value that can be appied to an image.
+ * Orientation values from 1 to 8 as defined in the TIFF spec are supporrted.
+ * Returns CGAffineTransformIdentity if the image is of infinite extent.*/
+- (CGAffineTransform)imageTransformForOrientation:(int)orientation __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+
+/* Return a new image formed by compositing the receiver image over 'dest'. */
+- (CIImage *)imageByCompositingOverImage:(CIImage *)dest __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_8_0);
+
+/* Return a new image cropped to a rectangle. */
 - (CIImage *)imageByCroppingToRect:(CGRect)r;
+
+/* Return a new infinte image by replicating the pixels of the receiver image's extent. */
+- (CIImage *)imageByClampingToExtent __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
 
 /* Return a rect the defines the bounds of non-(0,0,0,0) pixels */
 - (CGRect)extent;
+
+/* A convenience method for applying a filter to an image.
+ * The method returns outputImage of the filter after setting the
+ * filter's inputImage to the method receiver and other parameters
+ * from from the key/value pairs of 'params'. */
+- (CIImage *)imageByApplyingFilter:(NSString *)filterName withInputParameters:(NSDictionary*)params __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+
 
 /* Returns the metadata properties of an image. If the image is the
  * output of one or more CIFilters, then the metadata of the root inputImage
@@ -192,12 +215,22 @@ CORE_IMAGE_EXPORT NSString *kCIImageAutoAdjustRedEye __OSX_AVAILABLE_STARTING(__
 
 /* If value is an array of detected CIFeatures, then use these features
  * to determine the AutoAdjustEnhance and or AutoAdjustRedEye filters.
- * If not specified, reciever will call CIDetector.
+ * If not specified, receiver will call CIDetector.
  */
 CORE_IMAGE_EXPORT NSString *kCIImageAutoAdjustFeatures __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_5_0);
 
+/* If CFBoolean value is false then don't attempt to apply crop filter.
+ * If not specified, the option is assumed to be present and false.
+ */
+CORE_IMAGE_EXPORT NSString *kCIImageAutoAdjustCrop __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
 
-/* Return an array of filters to apply to an image to improve its 
+/* If CFBoolean value is false then don't attempt to apply auto-level.
+ * If not specified, the option is assumed to be present and false.
+ */
+CORE_IMAGE_EXPORT NSString *kCIImageAutoAdjustLevel __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+
+
+/* Return an array of filters to apply to an image to improve its
  * skin tones, saturation, contrast, shadows and repair red-eyes or LED-eyes.
  *
  * The options dictionary can contain a CIDetectorImageOrientation key value. 

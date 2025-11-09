@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2007 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -127,6 +127,22 @@
 #define	FMARK		0x1000		/* mark during gc() */
 #define	FDEFER		0x2000		/* defer for next gc pass */
 #define	FHASLOCK	0x4000		/* descriptor holds advisory lock */
+
+#if __DARWIN_C_LEVEL >= 200809L 
+/*
+ * Descriptor value for the current working directory
+ */
+#define AT_FDCWD	-2
+
+/*
+ * Flags for the at functions
+ */
+#define AT_EACCESS		0x0010	/* Use effective ids in access check */
+#define AT_SYMLINK_NOFOLLOW	0x0020	/* Act on the symlink itself not the target */
+#define AT_SYMLINK_FOLLOW	0x0040	/* Act on target of symlink */
+#define AT_REMOVEDIR		0x0080	/* Path refers to directory */
+#endif
+
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
 #define	O_EVTONLY	0x8000		/* descriptor requested for event notifications only */
 #endif
@@ -256,7 +272,7 @@
 #define F_SETBACKINGSTORE	70	/* Mark the file as being the backing store for another filesystem */
 #define F_GETPATH_MTMINFO	71 	/* return the full path of the FD, but error in specific mtmd circumstances */
 
-/* 72 is free.  It used to be F_GETENCRYPTEDDATA, which is now removed. */
+#define F_GETCODEDIR		72	/* Returns the code directory, with associated hashes, to the caller */
 
 #define F_SETNOSIGPIPE		73	/* No SIGPIPE generated on EPIPE */
 #define F_GETNOSIGPIPE		74	/* Status of SIGPIPE for this fd */
@@ -294,6 +310,7 @@
 #define	F_PROV		0x080		/* Non-coalesced provisional lock */
 #define F_WAKE1_SAFE    0x100           /* its safe to only wake one waiter */
 #define	F_ABORT		0x200		/* lock attempt aborted (force umount) */
+
 
 /*
  * [XSI] The values used for l_whence shall be defined as described
@@ -359,6 +376,37 @@ struct radvisory {
 };
 
 #pragma pack()
+
+
+typedef struct user32_fcodeblobs {
+	user32_addr_t	f_cd_hash;
+	user32_size_t	f_hash_size;
+	user32_addr_t	f_cd_buffer;
+	user32_size_t	f_cd_size;
+	user32_addr_t	f_out_size;
+	int		f_arch;
+} user32_fcodeblobs_t;
+
+/* LP64 version of fcodeblobs */
+typedef struct user64_fcodeblobs {
+	user64_addr_t	f_cd_hash;
+	user64_size_t	f_hash_size;
+	user64_addr_t	f_cd_buffer;
+	user64_size_t	f_cd_size;
+	user64_addr_t	f_out_size;
+	int		f_arch;
+	int		__padding;
+} user64_fcodeblobs_t;
+
+/* kernel version of fcodeblobs */
+typedef struct user_fcodeblobs {
+	user_addr_t	f_cd_hash;
+	user_size_t	f_hash_size;
+	user_addr_t	f_cd_buffer;
+	user_size_t	f_cd_size;
+	user_addr_t	f_out_size;
+	int		f_arch;
+} user_fcodeblobs_t;
 
 /*
  * detached code signatures data type -

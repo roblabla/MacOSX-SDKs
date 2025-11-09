@@ -214,6 +214,8 @@ int	madvise(void *, size_t, int);
 int	mincore(const void *, size_t, char *);
 int	minherit(void *, size_t, int);
 #endif
+
+
 __END_DECLS
 
 #endif /* !_SYS_MMAN_H_ */

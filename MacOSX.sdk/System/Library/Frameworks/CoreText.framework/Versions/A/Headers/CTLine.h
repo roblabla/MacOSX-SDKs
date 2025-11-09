@@ -2,7 +2,7 @@
  *  CTLine.h
  *  CoreText
  *
- *  Copyright (c) 2003-2012 Apple Inc. All rights reserved.
+ *  Copyright (c) 2003-2012, 2014 Apple Inc. All rights reserved.
  *
  */
 
@@ -39,6 +39,9 @@ typedef const struct __CTLine * CTLineRef;
     @enum       CTLineBoundsOptions
     @abstract   Options for CTLineGetBoundsWithOptions.
 
+    @discussion Passing 0 (no options) returns the typographic bounds,
+                including typographic leading and shifts.
+
     @constant   kCTLineBoundsExcludeTypographicLeading
                 Pass this option to exclude typographic leading.
 
@@ -58,6 +61,13 @@ typedef const struct __CTLine * CTLineRef;
     @constant   kCTLineBoundsUseOpticalBounds
                 Pass this option to use optical bounds. This option overrides
                 kCTLineBoundsUseGlyphPathBounds.
+                
+    @constant   kCTLineBoundsIncludeLanguageExtents
+                Pass this option to include additional space based on common
+                glyph sequences for various languages. The result is intended
+                to be used when drawing to avoid clipping that may be caused
+                by the typographic bounds. This option does not have any effect
+                when used with kCTLineBoundsUseGlyphPathBounds.
 */
 
 typedef CF_OPTIONS(CFOptionFlags, CTLineBoundsOptions) {
@@ -65,7 +75,8 @@ typedef CF_OPTIONS(CFOptionFlags, CTLineBoundsOptions) {
     kCTLineBoundsExcludeTypographicShifts   = 1 << 1,
     kCTLineBoundsUseHangingPunctuation      = 1 << 2,
     kCTLineBoundsUseGlyphPathBounds         = 1 << 3,
-    kCTLineBoundsUseOpticalBounds           = 1 << 4
+    kCTLineBoundsUseOpticalBounds           = 1 << 4,
+    kCTLineBoundsIncludeLanguageExtents CT_ENUM_AVAILABLE_IOS(8_0) = 1 << 5,
 };
 
 
@@ -304,9 +315,9 @@ void CTLineDraw(
     @function   CTLineGetTypographicBounds
     @abstract   Calculates the typographic bounds for a line.
 
-	@discussion A line's typographic width is the distance to the rightmost
-	            glyph advance width edge. Note that this distance includes
-	            trailing whitespace glyphs.
+    @discussion A line's typographic width is the distance to the rightmost
+                glyph advance width edge. Note that this distance includes
+                trailing whitespace glyphs.
 
     @param      line
                 The line that you want to calculate the typographic bounds for.

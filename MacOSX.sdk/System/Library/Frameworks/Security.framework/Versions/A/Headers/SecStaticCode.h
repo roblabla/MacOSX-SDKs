@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006 Apple Computer, Inc. All Rights Reserved.
+ * Copyright (c) 2006,2011-2014 Apple Inc. All Rights Reserved.
  * 
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -125,6 +125,10 @@ OSStatus SecStaticCodeCreateWithPathAndAttributes(CFURLRef path, SecCSFlags flag
 	@constant kSecCSCheckNestedCode
 	For code in bundle form, locate and recursively check embedded code. Only code
 	in standard locations is considered.
+	@constant kSecCSStrictValidate
+	For code in bundle form, perform additional checks to verify that the bundle
+	is not structured in a way that would allow tampering, and reject any resource
+	envelope that introduces weaknesses into the signature.
 	
 	@param requirement On optional code requirement specifying additional conditions
 	the staticCode object must satisfy to be considered valid. If NULL, no additional
@@ -142,6 +146,9 @@ enum {
 	kSecCSDoNotValidateResources = 1 << 2,
 	kSecCSBasicValidateOnly = kSecCSDoNotValidateExecutable | kSecCSDoNotValidateResources,
 	kSecCSCheckNestedCode = 1 << 3,
+	kSecCSStrictValidate = 1 << 4,
+	kSecCSFullReport = 1 << 5,
+	kSecCSCheckGatekeeperArchitectures = (1 << 6) | kSecCSCheckAllArchitectures,
 };
 
 OSStatus SecStaticCodeCheckValidity(SecStaticCodeRef staticCode, SecCSFlags flags,

@@ -1,7 +1,7 @@
 /*
 	NSTokenFieldCell.h
 	Application Kit
-	Copyright (c) 2004-2013, Apple Inc.
+	Copyright (c) 2004-2014, Apple Inc.
 	All rights reserved.
 
 */
@@ -13,13 +13,18 @@
 @class NSMutableArray, NSMutableCharacterSet, NSMutableDictionary, NSTextContainer;
 @protocol NSTokenFieldCellDelegate;
 
-enum {
-    NSDefaultTokenStyle,             // Style best used for keyword type tokens.  Currently a rounded style, but this may change in future releases.
-    NSPlainTextTokenStyle,	     // Style to use for data you want represented as plain-text and without any token background.
-    NSRoundedTokenStyle              // Style best used for address type tokens.
+typedef NS_ENUM(NSUInteger, NSTokenStyle) {
+    NSTokenStyleDefault, // This is equivalent to NSTokenStyleRounded. This may change in future releases.
+    NSTokenStyleNone, // Style to use for data you want represented as plain-text and without any token background.
+    NSTokenStyleRounded, // A token with rounded edges.
+    NSTokenStyleSquared NS_ENUM_AVAILABLE_MAC(10_10), // A token with squared edges.
+    NSTokenStylePlainSquared NS_ENUM_AVAILABLE_MAC(10_10), // A token with squared edges that has no background unless selected or highlighted.
 };
-typedef NSUInteger NSTokenStyle;
 
+// Deprecated in 10.10. Use the above NSTokenStyles instead.
+static const NSTokenStyle NSDefaultTokenStyle = NSTokenStyleDefault;
+static const NSTokenStyle NSPlainTextTokenStyle = NSTokenStyleNone;
+static const NSTokenStyle NSRoundedTokenStyle = NSTokenStyleRounded;
 
 @interface NSTokenFieldCell : NSTextFieldCell {
 @private
@@ -50,21 +55,17 @@ typedef NSUInteger NSTokenStyle;
 
 /* Sets the default token style used for each new token.  However, if the delegate implements tokenField:styleForRepresentedObject:, that return value will be used instead.
 */
-- (void)setTokenStyle:(NSTokenStyle)style;
-- (NSTokenStyle)tokenStyle;
+@property NSTokenStyle tokenStyle;
 
 /* Sets the auto-completion delay before the list of possible completions automatically pops up.  Completions are only offered if the delegate implements the completion delegate API.  A negative delay will disable completion while a delay of 0.0 will make completion UI presentation immediate.
 */
-- (void)setCompletionDelay:(NSTimeInterval)delay;
-- (NSTimeInterval)completionDelay;
+@property NSTimeInterval completionDelay;
 + (NSTimeInterval)defaultCompletionDelay;
 
-- (void)setTokenizingCharacterSet:(NSCharacterSet *)characterSet;
-- (NSCharacterSet *)tokenizingCharacterSet;
+@property (copy) NSCharacterSet *tokenizingCharacterSet;
 + (NSCharacterSet *)defaultTokenizingCharacterSet;
 
-- (void)setDelegate:(id <NSTokenFieldCellDelegate>)anObject;
-- (id <NSTokenFieldCellDelegate>)delegate;
+@property (assign) id<NSTokenFieldCellDelegate> delegate;
 
 @end
 

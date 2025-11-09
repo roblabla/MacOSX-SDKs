@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2012 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2014 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -144,7 +144,14 @@ struct tcphdr {
 #define	TCPOPT_SACK_HDR		(TCPOPT_NOP<<24|TCPOPT_NOP<<16|TCPOPT_SACK<<8)
 /* Miscellaneous constants */
 #define	MAX_SACK_BLKS	6	/* Max # SACK blocks stored at sender side */
-#define	TCP_MAX_SACK	3	/* MAX # SACKs sent in any segment */
+
+/*
+ * A SACK option that specifies n blocks will have a length of (8*n + 2)
+ * bytes, so the 40 bytes available for TCP options can specify a
+ * maximum of 4 blocks.
+ */
+
+#define	TCP_MAX_SACK	4	/* MAX # SACKs sent in any segment */
 
 
 /*
@@ -209,6 +216,12 @@ struct tcphdr {
 #define	TCP_KEEPINTVL		0x101	/* interval between keepalives */
 #define	TCP_KEEPCNT		0x102	/* number of keepalives before close */
 #define	TCP_SENDMOREACKS	0x103	/* always ack every other packet */
+#define	TCP_ENABLE_ECN		0x104	/* Enable ECN on a connection */
+
+
+
+#define	TCP_NOTSENT_LOWAT	0x201	/* Low water mark for TCP unsent data */
+
 #endif /* (_POSIX_C_SOURCE && !_DARWIN_C_SOURCE) */
 
 #endif

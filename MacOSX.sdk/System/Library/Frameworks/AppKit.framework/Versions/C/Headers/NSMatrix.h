@@ -1,7 +1,7 @@
 /*
 	NSMatrix.h
 	Application Kit
-	Copyright (c) 1994-2013, Apple Inc.
+	Copyright (c) 1994-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -13,13 +13,12 @@
 
 /* Matrix Constants */
 
-enum {
+typedef NS_ENUM(NSUInteger, NSMatrixMode) {
     NSRadioModeMatrix			= 0,
     NSHighlightModeMatrix		= 1,
     NSListModeMatrix			= 2,
     NSTrackModeMatrix			= 3
 };
-typedef NSUInteger NSMatrixMode;
 
 typedef struct __MFlags {
 #ifdef __BIG_ENDIAN__
@@ -89,11 +88,14 @@ typedef struct __MFlags {
 #endif
 } _MFlags;
 
+/*
+    NSMatrix is deprecated and will be unsupported in future releases.  For radio button grouping, sibling radio buttons that share the same action will operate in an exclusive mode.
+ */
 @interface NSMatrix : NSControl <NSUserInterfaceValidations>
 {
     /*All instance variables are private*/
-    id                  _target;
-    SEL                 _action;
+    id                  _reserved2;
+    SEL                 _reserved3;
     SEL                 _doubleAction;
     SEL                 _errorAction;
     id                  _delegate;
@@ -114,53 +116,42 @@ typedef struct __MFlags {
 }
 
 
-- (id)initWithFrame:(NSRect)frameRect;
-- (id)initWithFrame:(NSRect)frameRect mode:(NSMatrixMode)aMode prototype:(NSCell *)aCell numberOfRows:(NSInteger)rowsHigh numberOfColumns:(NSInteger)colsWide;
-- (id)initWithFrame:(NSRect)frameRect mode:(NSMatrixMode)aMode cellClass:(Class)factoryId numberOfRows:(NSInteger)rowsHigh numberOfColumns:(NSInteger)colsWide;
+- (instancetype)initWithFrame:(NSRect)frameRect;
+- (instancetype)initWithFrame:(NSRect)frameRect mode:(NSMatrixMode)aMode prototype:(NSCell *)aCell numberOfRows:(NSInteger)rowsHigh numberOfColumns:(NSInteger)colsWide;
+- (instancetype)initWithFrame:(NSRect)frameRect mode:(NSMatrixMode)aMode cellClass:(Class)factoryId numberOfRows:(NSInteger)rowsHigh numberOfColumns:(NSInteger)colsWide;
 
 
-- (void)setCellClass:(Class)factoryId;
-- (Class)cellClass;
-- (id)prototype;
-- (void)setPrototype:(NSCell *)aCell;
+@property (assign) Class cellClass;
+@property (copy) id /* NSCell * */ prototype;
 - (NSCell *)makeCellAtRow:(NSInteger)row column:(NSInteger)col;
-- (NSMatrixMode)mode;
-- (void)setMode:(NSMatrixMode)aMode;
-- (void)setAllowsEmptySelection:(BOOL)flag;
-- (BOOL)allowsEmptySelection;
+@property NSMatrixMode mode;
+@property BOOL allowsEmptySelection;
 - (void)sendAction:(SEL)aSelector to:(id)anObject forAllCells:(BOOL)flag;
-- (NSArray *)cells;
+@property (readonly, copy) NSArray *cells;
 - (void)sortUsingSelector:(SEL)comparator;
 - (void)sortUsingFunction:(NSInteger (*)(id, id, void *))compare context:(void *)context;
-- (id)selectedCell;
-- (NSArray *)selectedCells;
-- (NSInteger)selectedRow;
-- (NSInteger)selectedColumn;
-- (void)setSelectionByRect:(BOOL)flag;
-- (BOOL)isSelectionByRect;
+@property (readonly, strong) id selectedCell;
+@property (readonly, copy) NSArray *selectedCells;
+@property (readonly) NSInteger selectedRow;
+@property (readonly) NSInteger selectedColumn;
+@property (getter=isSelectionByRect) BOOL selectionByRect;
 - (void)setSelectionFrom:(NSInteger)startPos to:(NSInteger)endPos anchor:(NSInteger)anchorPos highlight:(BOOL)lit;
 - (void)deselectSelectedCell;
 - (void)deselectAllCells;
 - (void)selectCellAtRow:(NSInteger)row column:(NSInteger)col;
 - (void)selectAll:(id)sender;
 - (BOOL)selectCellWithTag:(NSInteger)anInt;
-- (NSSize)cellSize;
-- (void)setCellSize:(NSSize)aSize;
-- (NSSize)intercellSpacing;
-- (void)setIntercellSpacing:(NSSize)aSize;
+@property NSSize cellSize;
+@property NSSize intercellSpacing;
 - (void)setScrollable:(BOOL)flag;
-- (void)setBackgroundColor:(NSColor *)color;
-- (NSColor *)backgroundColor;
-- (void)setCellBackgroundColor:(NSColor *)color;
-- (NSColor *)cellBackgroundColor;
-- (void)setDrawsCellBackground:(BOOL)flag;
-- (BOOL)drawsCellBackground;
-- (void)setDrawsBackground:(BOOL)flag;
-- (BOOL)drawsBackground;
+@property (copy) NSColor *backgroundColor;
+@property (copy) NSColor *cellBackgroundColor;
+@property BOOL drawsCellBackground;
+@property BOOL drawsBackground;
 - (void)setState:(NSInteger)value atRow:(NSInteger)row column:(NSInteger)col;
 - (void)getNumberOfRows:(NSInteger *)rowCount columns:(NSInteger *)colCount;
-- (NSInteger)numberOfRows;
-- (NSInteger)numberOfColumns;
+@property (readonly) NSInteger numberOfRows;
+@property (readonly) NSInteger numberOfColumns;
 - (id)cellAtRow:(NSInteger)row column:(NSInteger)col;
 - (NSRect)cellFrameAtRow:(NSInteger)row column:(NSInteger)col;
 - (BOOL)getRow:(NSInteger *)row column:(NSInteger *)col ofCell:(NSCell *)aCell;
@@ -178,25 +169,21 @@ typedef struct __MFlags {
 - (void)insertColumn:(NSInteger)column withCells:(NSArray *)newCells;
 - (void)removeColumn:(NSInteger)col;
 - (id)cellWithTag:(NSInteger)anInt;
-- (SEL)doubleAction;
-- (void)setDoubleAction:(SEL)aSelector;
-- (void)setAutosizesCells:(BOOL)flag;
-- (BOOL)autosizesCells;
+@property SEL doubleAction;
+@property BOOL autosizesCells;
 - (void)sizeToCells;
 - (void)setValidateSize:(BOOL)flag;
 - (void)drawCellAtRow:(NSInteger)row column:(NSInteger)col;
 - (void)highlightCell:(BOOL)flag atRow:(NSInteger)row column:(NSInteger)col;
 
-- (void)setAutoscroll:(BOOL)flag;
-- (BOOL)isAutoscroll;
+@property (getter=isAutoscroll) BOOL autoscroll;
 - (void)scrollCellToVisibleAtRow:(NSInteger)row column:(NSInteger)col;
-- (NSInteger)mouseDownFlags;
+@property (readonly) NSInteger mouseDownFlags;
 - (void)mouseDown:(NSEvent *)theEvent;
 - (BOOL)performKeyEquivalent:(NSEvent *)theEvent;
 - (BOOL)sendAction;
 - (void)sendDoubleAction;
-- (id <NSMatrixDelegate>)delegate;
-- (void)setDelegate:(id <NSMatrixDelegate>)anObject;
+@property (assign) id<NSMatrixDelegate> delegate;
 - (BOOL)textShouldBeginEditing:(NSText *)textObject;
 - (BOOL)textShouldEndEditing:(NSText *)textObject;
 - (void)textDidBeginEditing:(NSNotification *)notification;
@@ -213,16 +200,13 @@ typedef struct __MFlags {
  
    The default is NO. When using autolayout, you typically want this to be set to YES.
  */
-- (void)setAutorecalculatesCellSize:(BOOL)flag NS_AVAILABLE_MAC(10_8);
-- (BOOL)autorecalculatesCellSize NS_AVAILABLE_MAC(10_8);
+@property BOOL autorecalculatesCellSize NS_AVAILABLE_MAC(10_8);
 
 @end
 
 @interface NSMatrix(NSKeyboardUI)
-- (void)setTabKeyTraversesCells:(BOOL)flag;
-- (BOOL)tabKeyTraversesCells;
-- (void)setKeyCell:(NSCell *)keyCell;
-- (id)keyCell;
+@property BOOL tabKeyTraversesCells;
+@property (assign) id /* NSCell * */ keyCell;
 @end
 
 @protocol NSMatrixDelegate <NSControlTextEditingDelegate> @end

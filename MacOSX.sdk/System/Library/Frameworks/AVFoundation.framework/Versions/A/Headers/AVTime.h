@@ -18,14 +18,13 @@
 @interface NSValue (NSValueAVFoundationExtensions)
 
 + (NSValue *)valueWithCMTime:(CMTime)time NS_AVAILABLE(10_7, 4_0);
-
-- (CMTime)CMTimeValue NS_AVAILABLE(10_7, 4_0);
+@property (readonly) CMTime CMTimeValue NS_AVAILABLE(10_7, 4_0);
 
 + (NSValue *)valueWithCMTimeRange:(CMTimeRange)timeRange NS_AVAILABLE(10_7, 4_0);
-- (CMTimeRange)CMTimeRangeValue NS_AVAILABLE(10_7, 4_0);
+@property (readonly) CMTimeRange CMTimeRangeValue NS_AVAILABLE(10_7, 4_0);
 
 + (NSValue *)valueWithCMTimeMapping:(CMTimeMapping)timeMapping NS_AVAILABLE(10_7, 4_0);
-- (CMTimeMapping)CMTimeMappingValue NS_AVAILABLE(10_7, 4_0);
+@property (readonly) CMTimeMapping CMTimeMappingValue NS_AVAILABLE(10_7, 4_0);
 
 @end
 

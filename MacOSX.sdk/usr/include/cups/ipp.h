@@ -1,18 +1,18 @@
 /*
- * "$Id: ipp.h 11093 2013-07-03 20:48:42Z msweet $"
+ * "$Id: ipp.h 11830 2014-04-24 12:10:41Z msweet $"
  *
- *   Internet Printing Protocol definitions for CUPS.
+ * Internet Printing Protocol definitions for CUPS.
  *
- *   Copyright 2007-2013 by Apple Inc.
- *   Copyright 1997-2006 by Easy Software Products.
+ * Copyright 2007-2014 by Apple Inc.
+ * Copyright 1997-2006 by Easy Software Products.
  *
- *   These coded instructions, statements, and computer programs are the
- *   property of Apple Inc. and are protected by Federal copyright
- *   law.  Distribution and use rights are outlined in the file "LICENSE.txt"
- *   which should have been included with this file.  If this file is
- *   file is missing or damaged, see the license at "http://www.cups.org/".
+ * These coded instructions, statements, and computer programs are the
+ * property of Apple Inc. and are protected by Federal copyright
+ * law.  Distribution and use rights are outlined in the file "LICENSE.txt"
+ * which should have been included with this file.  If this file is
+ * file is missing or damaged, see the license at "http://www.cups.org/".
  *
- *   This file is subject to the Apple OS-Developed Software exception.
+ * This file is subject to the Apple OS-Developed Software exception.
  */
 
 #ifndef _CUPS_IPP_H_
@@ -67,6 +67,13 @@ extern "C" {
 #  define IPP_MAX_URISCHEME	64	/* Maximum length of uriScheme values w/nul */
 #  define IPP_MAX_VALUES	8	/* Power-of-2 allocation increment */
 
+/*
+ * Macro to flag a text string attribute as "const" (static storage) vs.
+ * allocated.
+ */
+
+#  define IPP_CONST_TAG(x) (ipp_tag_t)(IPP_TAG_CUPS_CONST | (x))
+
 
 /*
  * Types and structures...
@@ -103,6 +110,8 @@ typedef enum ipp_finishings_e		/**** Finishings ****/
   IPP_FINISHINGS_BALE,			/* Bale (any type) */
   IPP_FINISHINGS_BOOKLET_MAKER,		/* Fold to make booklet */
   IPP_FINISHINGS_JOG_OFFSET,		/* Offset for binding (any type) */
+  IPP_FINISHINGS_COAT,			/* Apply protective liquid or powder coating */
+  IPP_FINISHINGS_LAMINATE,		/* Apply protective (solid) material */
   IPP_FINISHINGS_STAPLE_TOP_LEFT = 20,	/* Staple top left corner */
   IPP_FINISHINGS_STAPLE_BOTTOM_LEFT,	/* Staple bottom left corner */
   IPP_FINISHINGS_STAPLE_TOP_RIGHT,	/* Staple top right corner */
@@ -115,6 +124,10 @@ typedef enum ipp_finishings_e		/**** Finishings ****/
   IPP_FINISHINGS_STAPLE_DUAL_TOP,	/* Two staples on top */
   IPP_FINISHINGS_STAPLE_DUAL_RIGHT,	/* Two staples on right */
   IPP_FINISHINGS_STAPLE_DUAL_BOTTOM,	/* Two staples on bottom */
+  IPP_FINISHINGS_STAPLE_TRIPLE_LEFT,	/* Three staples on left */
+  IPP_FINISHINGS_STAPLE_TRIPLE_TOP,	/* Three staples on top */
+  IPP_FINISHINGS_STAPLE_TRIPLE_RIGHT,	/* Three staples on right */
+  IPP_FINISHINGS_STAPLE_TRIPLE_BOTTOM,	/* Three staples on bottom */
   IPP_FINISHINGS_BIND_LEFT = 50,	/* Bind on left */
   IPP_FINISHINGS_BIND_TOP,		/* Bind on top */
   IPP_FINISHINGS_BIND_RIGHT,		/* Bind on right */
@@ -251,8 +264,8 @@ typedef enum ipp_op_e			/**** IPP operations ****/
   IPP_OP_SET_PRINTER_ATTRIBUTES,	/* Set printer attributes @private@ */
   IPP_OP_SET_JOB_ATTRIBUTES,		/* Set job attributes */
   IPP_OP_GET_PRINTER_SUPPORTED_VALUES,	/* Get supported attribute values */
-  IPP_OP_CREATE_PRINTER_SUBSCRIPTION,	/* Create a printer subscription @since CUPS 1.2/OS X 10.5@ */
-  IPP_OP_CREATE_JOB_SUBSCRIPTION,	/* Create a job subscription @since CUPS 1.2/OS X 10.5@ */
+  IPP_OP_CREATE_PRINTER_SUBSCRIPTIONS,	/* Create one or more printer subscriptions @since CUPS 1.2/OS X 10.5@ */
+  IPP_OP_CREATE_JOB_SUBSCRIPTIONS,	/* Create one of more job subscriptions @since CUPS 1.2/OS X 10.5@ */
   IPP_OP_GET_SUBSCRIPTION_ATTRIBUTES,	/* Get subscription attributes @since CUPS 1.2/OS X 10.5@ */
   IPP_OP_GET_SUBSCRIPTIONS,		/* Get list of subscriptions @since CUPS 1.2/OS X 10.5@ */
   IPP_OP_RENEW_SUBSCRIPTION,		/* Renew a printer subscription @since CUPS 1.2/OS X 10.5@ */
@@ -331,8 +344,10 @@ typedef enum ipp_op_e			/**** IPP operations ****/
 #    define IPP_SET_PRINTER_ATTRIBUTES		IPP_OP_SET_PRINTER_ATTRIBUTES
 #    define IPP_SET_JOB_ATTRIBUTES		IPP_OP_SET_JOB_ATTRIBUTES
 #    define IPP_GET_PRINTER_SUPPORTED_VALUES	IPP_OP_GET_PRINTER_SUPPORTED_VALUES
-#    define IPP_CREATE_PRINTER_SUBSCRIPTION	IPP_OP_CREATE_PRINTER_SUBSCRIPTION
-#    define IPP_CREATE_JOB_SUBSCRIPTION		IPP_OP_CREATE_JOB_SUBSCRIPTION
+#    define IPP_CREATE_PRINTER_SUBSCRIPTION	IPP_OP_CREATE_PRINTER_SUBSCRIPTIONS
+#    define IPP_CREATE_JOB_SUBSCRIPTION		IPP_OP_CREATE_JOB_SUBSCRIPTIONS
+#    define IPP_OP_CREATE_PRINTER_SUBSCRIPTION	IPP_OP_CREATE_PRINTER_SUBSCRIPTIONS
+#    define IPP_OP_CREATE_JOB_SUBSCRIPTION		IPP_OP_CREATE_JOB_SUBSCRIPTIONS
 #    define IPP_GET_SUBSCRIPTION_ATTRIBUTES	IPP_OP_GET_SUBSCRIPTION_ATTRIBUTES
 #    define IPP_GET_SUBSCRIPTIONS		IPP_OP_GET_SUBSCRIPTIONS
 #    define IPP_RENEW_SUBSCRIPTION		IPP_OP_RENEW_SUBSCRIPTION
@@ -398,7 +413,8 @@ typedef enum ipp_orient_e		/**** Orientation values ****/
   IPP_ORIENT_PORTRAIT = 3,		/* No rotation */
   IPP_ORIENT_LANDSCAPE,			/* 90 degrees counter-clockwise */
   IPP_ORIENT_REVERSE_LANDSCAPE,		/* 90 degrees clockwise */
-  IPP_ORIENT_REVERSE_PORTRAIT		/* 180 degrees */
+  IPP_ORIENT_REVERSE_PORTRAIT,		/* 180 degrees */
+  IPP_ORIENT_NONE			/* No rotation */
 
 #  ifndef _CUPS_NO_DEPRECATED
 #    define IPP_PORTRAIT		IPP_ORIENT_PORTRAIT
@@ -501,15 +517,21 @@ typedef enum ipp_status_e		/**** IPP status codes ****/
   IPP_STATUS_ERROR_DOCUMENT_PERMISSION,	/* client-error-document-permission-error */
   IPP_STATUS_ERROR_DOCUMENT_SECURITY,	/* client-error-document-security-error */
   IPP_STATUS_ERROR_DOCUMENT_UNPRINTABLE,/* client-error-document-unprintable-error */
+  IPP_STATUS_ERROR_ACCOUNT_INFO_NEEDED,	/* client-error-account-info-needed */
+  IPP_STATUS_ERROR_ACCOUNT_CLOSED,	/* client-error-account-closed */
+  IPP_STATUS_ERROR_ACCOUNT_LIMIT_REACHED,
+					/* client-error-account-limit-reached */
+  IPP_STATUS_ERROR_ACCOUNT_AUTHORIZATION_FAILED,
+					/* client-error-account-authorization-failed */
 
-  /* Proposed extensions for paid printing */
+  /* Legacy status codes for paid printing */
   IPP_STATUS_ERROR_CUPS_ACCOUNT_INFO_NEEDED = 0x049C,
-					/* cups-error-account-info-needed @since CUPS 1.7/OS X 10.9@ */
-  IPP_STATUS_ERROR_CUPS_ACCOUNT_CLOSED,	/* cups-error-account-closed @since CUPS 1.7/OS X 10.9@ */
+					/* cups-error-account-info-needed @deprecated@ */
+  IPP_STATUS_ERROR_CUPS_ACCOUNT_CLOSED,	/* cups-error-account-closed @deprecate@ */
   IPP_STATUS_ERROR_CUPS_ACCOUNT_LIMIT_REACHED,
-					/* cups-error-account-limit-reached @since CUPS 1.7/OS X 10.9@ */
+					/* cups-error-account-limit-reached @deprecated@ */
   IPP_STATUS_ERROR_CUPS_ACCOUNT_AUTHORIZATION_FAILED,
-					/* cups-error-account-authorization-failed @since CUPS 1.7/OS X 10.9@ */
+					/* cups-error-account-authorization-failed @deprecated@ */
 
   IPP_STATUS_ERROR_INTERNAL = 0x0500,	/* server-error-internal-error */
   IPP_STATUS_ERROR_OPERATION_NOT_SUPPORTED,
@@ -788,6 +810,9 @@ struct _ipp_s				/**** IPP Request/Response/Notification ****/
 
 /**** New in CUPS 1.4.4 ****/
   int			use;		/* Use count @since CUPS 1.4.4/OS X 10.6.?@ */
+/**** New in CUPS 2.0 ****/
+  int			atend,		/* At end of list? */
+			curindex;	/* Current attribute index for hierarchical search */
 };
 #  endif /* _IPP_PRIVATE_STRUCTURES */
 
@@ -982,6 +1007,10 @@ extern int		ippValidateAttribute(ipp_attribute_t *attr)
 extern int		ippValidateAttributes(ipp_t *ipp) _CUPS_API_1_7;
 
 
+/**** New in CUPS 2.0 ****/
+extern const char	*ippStateString(ipp_state_t state) _CUPS_API_2_0;
+
+
 /*
  * C++ magic...
  */
@@ -992,5 +1021,5 @@ extern int		ippValidateAttributes(ipp_t *ipp) _CUPS_API_1_7;
 #endif /* !_CUPS_IPP_H_ */
 
 /*
- * End of "$Id: ipp.h 11093 2013-07-03 20:48:42Z msweet $".
+ * End of "$Id: ipp.h 11830 2014-04-24 12:10:41Z msweet $".
  */

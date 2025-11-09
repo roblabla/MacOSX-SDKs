@@ -1,5 +1,5 @@
 /*	NSPortNameServer.h
-	Copyright (c) 1993-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1993-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -82,8 +82,7 @@
 // the following may be used in the future, but for now nameServerPortNumber arguments are ignored
 - (NSPort *)portForName:(NSString *)name host:(NSString *)host nameServerPortNumber:(uint16_t)portNumber;
 - (BOOL)registerPort:(NSPort *)port name:(NSString *)name nameServerPortNumber:(uint16_t)portNumber;
-- (void)setDefaultNameServerPortNumber:(uint16_t)portNumber;
-- (uint16_t)defaultNameServerPortNumber;
+@property uint16_t defaultNameServerPortNumber;
 
 @end
 

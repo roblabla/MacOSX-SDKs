@@ -1,6 +1,6 @@
 /* CoreAnimation - CAAnimation.h
 
-   Copyright (c) 2006-2012 Apple Inc.
+   Copyright (c) 2006-2014, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CALayer.h>
@@ -20,7 +20,7 @@
 
 /* Creates a new animation object. */
 
-+ (id)animation;
++ (instancetype)animation;
 
 /* Animations implement the same property model as defined by CALayer.
  * See CALayer.h for more details. */
@@ -31,13 +31,13 @@
 /* A timing function defining the pacing of the animation. Defaults to
  * nil indicating linear pacing. */
 
-@property(retain) CAMediaTimingFunction *timingFunction;
+@property(strong) CAMediaTimingFunction *timingFunction;
 
 /* The delegate of the animation. This object is retained for the
  * lifetime of the animation object. Defaults to nil. See below for the
  * supported delegate methods. */
 
-@property(retain) id delegate;
+@property(strong) id delegate;
 
 /* When true, the animation is removed from the render tree once its
  * active duration has passed. Defaults to YES. */
@@ -71,7 +71,7 @@
 /* Creates a new animation object with its `keyPath' property set to
  * 'path'. */
 
-+ (id)animationWithKeyPath:(NSString *)path;
++ (instancetype)animationWithKeyPath:(NSString *)path;
 
 /* The key-path describing the property to be animated. */
 
@@ -97,7 +97,7 @@
  * before they are set as the new presentation value of the animation's
  * target property. Defaults to nil. */
 
-@property(retain) CAValueFunction *valueFunction;
+@property(strong) CAValueFunction *valueFunction;
 
 @end
 
@@ -130,7 +130,7 @@
  * - `byValue' non-nil. Interpolates between the layer's current value
  * of the property in the render tree and that plus `byValue'. */
 
-@property(retain) id fromValue, toValue, byValue;
+@property(strong) id fromValue, toValue, byValue;
 
 @end
 
@@ -255,7 +255,7 @@ CA_EXTERN NSString * const kCAAnimationRotateAutoReverse
  * the `inputExtent' key, which will be set to a rectangle describing
  * the region in which the transition should run. Defaults to nil. */
 
-@property(retain) id filter;
+@property(strong) id filter;
 
 @end
 

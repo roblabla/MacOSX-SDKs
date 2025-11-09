@@ -20,7 +20,7 @@
 
 
 /*!
-	@method		initObjectPushWithBluetoothDevice: withFiles: andEventDelegate:
+	@method		initObjectPushWithBluetoothDevice: withFiles: delegate:
 	@abstract	Creates and returns a new IOBluetoothObjectPush object
 	@discussion	The event delegate should implement a single delegate method:
  

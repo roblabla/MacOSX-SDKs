@@ -450,6 +450,18 @@ enum
     kAudioDeviceUnknown                     = kAudioObjectUnknown
 };
 
+/*!
+    @enum           Transport Type IDs
+    @abstract       Commonly used values for kAudioDevicePropertyTransportType and
+                    kAudioTransportManagerPropertyTransportType
+    @constant       kAudioDeviceTransportTypeAutoAggregate
+                        The transport type ID for automatically generated aggregate devices.
+*/
+enum
+{
+    kAudioDeviceTransportTypeAutoAggregate  = 'fgrp',
+};
+
 //==================================================================================================
 #pragma mark AudioDevice Properties
 

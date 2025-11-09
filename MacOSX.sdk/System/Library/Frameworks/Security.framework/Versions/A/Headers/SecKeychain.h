@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2004 Apple Computer, Inc. All Rights Reserved.
+ * Copyright (c) 2000-2004,2011,2013-2014 Apple Inc. All Rights Reserved.
  * 
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -449,7 +449,7 @@ OSStatus SecKeychainGetPath(SecKeychainRef keychain, UInt32 *ioPathLength, char 
 	@function SecKeychainAttributeInfoForItemID
 	@abstract Obtains tags for all possible attributes for a given item class.
     @param keychain A keychain reference.
-	@param itemID The relation identifier of the item tags (an itemID is a CSSM_DB_RECORDTYPE defined in cssmtype.h).
+	@param itemID The relation identifier of the item tags (an itemID is a CSSM_DB_RECORDTYPE defined in cssmapple.h).
 	@param info On return, a pointer to the keychain attribute information. User should call the SecKeychainFreeAttributeInfo function to release the structure when done with it. 
     @result A result code.  See "Security Error Codes" (SecBase.h). In addition, errSecParam (-50) may be returned if not enough valid parameters were supplied (NULL).
 	@discussion Warning, this call returns more attributes than are support by the old style Keychain API and passing them into older calls will yield an invalid attribute error. The recommended call to retrieve the attribute values is the SecKeychainItemCopyAttributesAndData function.

@@ -1,7 +1,7 @@
 /*
 	NSPrintOperation.h
 	Application Kit
-	Copyright (c) 1994-2013, Apple Inc.
+	Copyright (c) 1994-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -13,16 +13,14 @@
 
 /* Values for -setPageOrder:/-pageOrder.
 */
-enum {
+typedef NS_ENUM(NSInteger, NSPrintingPageOrder) {
     NSDescendingPageOrder		= -1,
     NSSpecialPageOrder			= 0, // Tells spooler to not rearrange
     NSAscendingPageOrder		= 1,
     NSUnknownPageOrder			= 2  // No page order written out
 };
-typedef NSInteger NSPrintingPageOrder;
 
-#if MAC_OS_X_VERSION_10_7 <= MAC_OS_X_VERSION_MAX_ALLOWED
-enum {
+typedef NS_ENUM(NSInteger, NSPrintRenderingQuality) {
     /* Render at the best quality you can regardless of how slow that may be
     */
     NSPrintRenderingQualityBest,
@@ -31,9 +29,7 @@ enum {
        Note: Only do this after establishing that best quality rendering does indeed make the user interface unresponsive.
     */
     NSPrintRenderingQualityResponsive
-};
-#endif
-typedef NSInteger NSPrintRenderingQuality;
+} NS_ENUM_AVAILABLE_MAC(10_7);
 
 /* An exception that may be thrown by the factory methods described below.
 */
@@ -63,46 +59,39 @@ APPKIT_EXTERN NSString *NSPrintOperationExistsException;
 
 /* Return YES if the operation for copying to PDF or EPS, NO if it's for printing.
 */
-- (BOOL)isCopyingOperation;
+@property (getter=isCopyingOperation, readonly) BOOL copyingOperation;
 
 /* If the print sheet is unresponsive or sluggish due to the time is takes you to fully render a page, you can check this method in drawRect and other printing methods such as beginDocument and knowsPageRage: to determine if the print operation prefers speed over fidelity. Please see the comments for NSPrintRenderingQuality. Most applications render each page fast enough and do not need to call this method.
 */
-- (NSPrintRenderingQuality)preferredRenderingQuality NS_AVAILABLE_MAC(10_7);
+@property (readonly) NSPrintRenderingQuality preferredRenderingQuality NS_AVAILABLE_MAC(10_7);
 
 /* The title of the print job. If a job title is set it overrides anything that might be gotten by sending the printed view an [NSView(NSPrinting) printJobTitle] message.
 */
-- (void)setJobTitle:(NSString *)jobTitle NS_AVAILABLE_MAC(10_5);
-- (NSString *)jobTitle NS_AVAILABLE_MAC(10_5);
+@property (copy) NSString *jobTitle NS_AVAILABLE_MAC(10_5);
 
 
 
 /* Whether the print and progress panels are shown during the operation.
 */
-- (void)setShowsPrintPanel:(BOOL)flag;
-- (BOOL)showsPrintPanel;
-- (void)setShowsProgressPanel:(BOOL)flag;
-- (BOOL)showsProgressPanel;
+@property BOOL showsPrintPanel;
+@property BOOL showsProgressPanel;
 
 
 /* The print panel to be presented by the operation when it is run, if showsProgressPanel is YES and isCopyingOperation is NO. -printPanel will create a new NSPrintPanel if one hasn't been set yet.
 */
-- (void)setPrintPanel:(NSPrintPanel *)panel;
-- (NSPrintPanel *)printPanel;
+@property (strong) NSPrintPanel *printPanel;
 
 /* The panel to be presented by the operation when it is run, if [[self printInfo] jobDisposition] is NSPrintSaveJob and [[[self printInfo] dictionary] objectForKey:NSPrintJobSavingURL] is nil. -PDFPanel will create a new NSPDFPanel if one hasn't been set yet. NSPrintOperation will throw an exception if panel.options contains NSPDFPanelRequestsParentDirectory when it attempts to display the panel.
 */
-- (void)setPDFPanel:(NSPDFPanel *)panel NS_AVAILABLE_MAC(10_9);
-- (NSPDFPanel *)PDFPanel NS_AVAILABLE_MAC(10_9);
+@property (strong) NSPDFPanel *PDFPanel NS_AVAILABLE_MAC(10_9);
 
 /* Whether the print operation should spawn a separate thread in which to run itself.
 */
-- (void)setCanSpawnSeparateThread:(BOOL)canSpawnSeparateThread;
-- (BOOL)canSpawnSeparateThread;
+@property BOOL canSpawnSeparateThread;
 
 /* The page order that will be used to generate the pages in this job. This is the physical page order of the pages. It depends on the stacking order of the printer, the capability of the app to reverse page order, etc.
 */
-- (void)setPageOrder:(NSPrintingPageOrder)pageOrder;
-- (NSPrintingPageOrder)pageOrder;
+@property NSPrintingPageOrder pageOrder;
 
 /* Do the print operation, with panels that are document-modal to a specific window. When the operation has been completed, send the message selected by didRunSelector to the delegate, with the contextInfo as the last argument. The method selected by didRunSelector must have the same signature as:
 
@@ -118,25 +107,24 @@ This can only be invoked once. Create a new NSPrintOperation instance for each o
 
 /* The view being printed.
 */
-- (NSView *)view;
+@property (readonly, strong) NSView *view;
 
 /* The print info of the operation. -printInfo always returns a copy of the NSPrintInfo passed into the factory method used to create the print operation, unless -setPrintInfo: has been invoked, in which case it returns the exact same object passed into -setPrintInfo:. So, the factory methods listed above copy the passed-in NSPrintInfo, but -setPrintInfo: doesn't.
 */
-- (NSPrintInfo *)printInfo;
-- (void)setPrintInfo:(NSPrintInfo *)printInfo;
+@property (copy) NSPrintInfo *printInfo;
 
 /* The context for the output of this operation.
 */
-- (NSGraphicsContext *)context;
+@property (readonly, strong) NSGraphicsContext *context;
 
 /* The first through last one-based page numbers of the operation as it's being previewed or printed. The first page number might not be 1, and the page count might be NSIntegerMax to indicate that the number of pages is not known, depending on what the printed view returned when sent an [NSView(NSPrinting) knowsPageRange:] message.
 */
-- (NSRange)pageRange NS_AVAILABLE_MAC(10_5);
+@property (readonly) NSRange pageRange NS_AVAILABLE_MAC(10_5);
 
 
 /* The current one-based page number of the operation as it's being previewed or printed.
 */
-- (NSInteger)currentPage;
+@property (readonly) NSInteger currentPage;
 
 /* Methods that are invoked by the print operation itself as it proceeds. You should not invoke them.
 */

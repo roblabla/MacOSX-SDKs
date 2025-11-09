@@ -57,12 +57,11 @@ AVF_EXPORT NSString *const AVAudioBitRateStrategy_Variable              NS_AVAIL
 AVF_EXPORT NSString *const AVSampleRateConverterAlgorithm_Normal        NS_AVAILABLE(10_9, 7_0);
 AVF_EXPORT NSString *const AVSampleRateConverterAlgorithm_Mastering     NS_AVAILABLE(10_9, 7_0);
 
-enum {
+typedef NS_ENUM(NSInteger, AVAudioQuality) {
 	AVAudioQualityMin    = 0,
 	AVAudioQualityLow    = 0x20,
 	AVAudioQualityMedium = 0x40,
 	AVAudioQualityHigh   = 0x60,
 	AVAudioQualityMax    = 0x7F
 };
-typedef NSInteger AVAudioQuality;
 

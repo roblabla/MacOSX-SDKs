@@ -1,6 +1,6 @@
 /*
 	NSAppleEventManager.h
-	Copyright (c) 1997-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1997-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -35,10 +35,10 @@ extern NSString *NSAppleEventManagerWillProcessFirstEventNotification;
 - (OSErr)dispatchRawAppleEvent:(const AppleEvent *)theAppleEvent withRawReply:(AppleEvent *)theReply handlerRefCon:(SRefCon)handlerRefCon;
 
 // If an Apple event is being handled on the current thread (i.e., a handler that was registered with -setEventHandler:andSelector:forEventClass:andEventID: is being messaged at this instant or -setCurrentAppleEventAndReplyEventWithSuspensionID: has just been invoked), return the descriptor for the event.  Return nil otherwise.  The effects of mutating or retaining the returned descriptor are undefined, though it may be copied.
-- (NSAppleEventDescriptor *)currentAppleEvent;
+@property (readonly, retain) NSAppleEventDescriptor *currentAppleEvent;
 
 // If an Apple event is being handled on the current thread (i.e., -currentAppleEvent would not return nil), return the corresponding reply event descriptor.  Return nil otherwise.  This descriptor, including any mutatations, will be returned to the sender of the current event when all handling of the event has been completed, if the sender has requested a reply.  The effects of retaining the descriptor are undefined; it may be copied, but mutations of the copy will not be returned to the sender of the current event.
-- (NSAppleEventDescriptor *)currentReplyAppleEvent;
+@property (readonly, retain) NSAppleEventDescriptor *currentReplyAppleEvent;
 
 // If an Apple event is being handled on the current thread (i.e., -currentAppleEvent would not return nil), suspend the handling of the event, returning an ID that must be used to resume the handling of the event.  Return zero otherwise.  The suspended event will no longer be the current event after this method has returned.
 - (NSAppleEventManagerSuspensionID)suspendCurrentAppleEvent NS_RETURNS_INNER_POINTER;

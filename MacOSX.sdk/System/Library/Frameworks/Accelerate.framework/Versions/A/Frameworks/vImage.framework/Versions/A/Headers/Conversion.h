@@ -1,10 +1,34 @@
-/*
- *  Conversion.h
+/*!
+ *  @header Conversion.h
  *  vImage_Framework
  *
- *  Copyright (c) 2003 Apple Computer. All rights reserved.
+ *  @discussion  This header lists conversions between the many different image formats supported by vImage.  The core formats:
+ *      <pre> @textblock
+ *          Planar 8        Planar 16U      Planar 16S      Float
+ *          ARGB8888        ARGB16U         ARGB16S         ARGBFFFF        (also available in other channel orderings)
+ *      @/textblock </pre>
+ *  are supported generally throughout vImage. Other formats may need to be converted to a core format before much can be
+ *  done with them. Many conversions between core formats as well as those between core formats and non-core formats are available here.
+ *  Please also see vImage_Utilities.h and vImage_CVUtilities.h for interfaces that allow for conversion between various CoreGraphics
+ *  and CoreVideo formats.  In many cases, those interfaces can serve as a simpler entrypoint into these APIs. They should be strongly 
+ *  considered in cases where your code has to handle a variety of different image formats. These interfaces provide direct access to 
+ *  the low-level workhorse functions for the case when you know exactly what image formats you are working with and want to just call
+ *  the right conversion directly.
+ *
+ *  Generally speaking, conversions are much faster than other image filters. When tiled correctly, they do not add a lot of extra cost
+ *  in cases where you find that your image format is not directly supported by other image filters. They are usually fast enough that 
+ *  their performance is bottlenecked by throughput to L2, L3, etc. caches.  They benefit greatly from tiling, usually performing best 
+ *  with wide tile sizes that are less than half the size of the L1 cache. Because of the L1 cache residency requirement for best performance,
+ *  they are often not internally multithreaded (it wouldn't help for out-of-cache performance and would cause slowdowns for in-cache) 
+ *  and may need  to be used within the context of your tiling engine (or vImageConvert_AnyToAny) to reach peak performance. If you are calling
+ *  vImage functions within your own multithreaded tiling engine, it is recommended that you use the kvImageDoNotTile flag to make sure that
+ *  vImage does its work on the calling thread. This will help ensure that the data just produced on that thread by a previous pass 
+ *  is resident in the correct L1 cache for the next pass.
+ *
+ *  @copyright Copyright (c) 2003-2014 Apple Computer. All rights reserved.
  *
  */
+
 
 #ifndef VIMAGE_CONVERSION_H
 #define VIMAGE_CONVERSION_H
@@ -60,7 +84,326 @@ vImage_Error vImageConvert_Planar8toPlanarF(const vImage_Buffer *src, const vIma
  *
  */
 vImage_Error vImageConvert_PlanarFtoPlanar8(const vImage_Buffer *src, const vImage_Buffer *dest, Pixel_F maxFloat, Pixel_F minFloat, vImage_Flags flags) VIMAGE_NON_NULL(1,2)    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
+    
+/*!
+ * @function vImageConvert_PlanarFtoPlanar8_dithered
+ *
+ * @abstract Convert an array of floating point data to 8 bit integer data with dithering. 
+ *
+ * @discussion For each pixel, do the following:
+ *
+ *          <pre>
+ *          @textblock
+ *         uint8_t result = SATURATED_CLIP_0_to_255( 255.0f * ( srcPixel - minFloat ) / (maxFloat - minFloat) + random_float[0,1) );
+ *          @/textblock
+ *          </pre>
+ *
+ *         Caution: unlike vImageConvert_PlanarFtoPlanar8, vImageConvert_PlanarFtoPlanar8_dithered usually should not be used for 
+ *                  multichannel data. Otherwise the dithering will occur in the chrominance dimensions and the noise will cause
+ *                  grain with varying hue.
+ *
+ *      This function can work in place provided the following are true:
+ *          if src overlaps with dest,
+ *                  src->data must be equal to dest->data and src->rowBytes >= dest->rowBytes
+ *          If an overlapping src has a different rowBytes from dest, kvImageDoNotTile must be also passed in the flags
+ *
+ *
+ *
+ * @param src               A pointer to a valid and initialized vImage_Buffer struct, that points to a buffer containing the source pixels.
+ *
+ * @param dest              A pointer to a valid and initialized vImage_Buffer struct, that points to a allocated buffer to receive the result pixels.
+ *
+ * @param maxFloat          The encoding for 1.0 in the src buffer, full intensity. Typically, this is 1.0 for floating-point data in the range[0,1] but if your data is [0,65535] then you would pass 65535.0f here.
+ *
+ * @param minFloat          The encoding for 0.0 in the src buffer, no light.  Typically this is 0.0 for floating-point data in the range [0,1], but if your data is [-.5,0.5] then you would pass -0.5f here.
+ *
+ * @param dither            The type of random noise to use for the dither. The following values are accepted:
+ *
+ *          <pre>
+ *          @textblock
+ *                  kvImageConvert_DitherNone - Same as vImageConvert_PlanarFtoPlanar8().  Rounds to nearest.
+ *
+ *                  kvImageConvert_DitherOrdered - pre-computed blue noise is added to the image before rounding to the values in
+ *                      the destination format.  The offset into this blue noise is randomized per-call to avoid visible artifacts
+ *                      if you do your own tiling or call the function on sequential frames of video.
+ *
+ *                  kvImageConvert_DitherOrderedReproducible - pre-computed blue noise is added to the image before rounding to the
+ *                      values in the destination format.  The offset into the blue noise is the same for every call to allow users
+ *                      to get reproducible results. Fine for still images. For video kvImageConvert_DitherOrdered is a better choice.
+ *          @/textblock
+ *          </pre>
+ *                  The ordered dither methods may be further influenced by shaping the distribution of the noise using the gaussian and uniform options below.
+ *                  These options are OR-ed with kvImageConvert_DitherOrdered / kvImageConvert_DitherOrderedReproducible:
+ *          <pre>
+ *          @textblock
+ *                  kvImageConvert_OrderedGaussianBlue - when using an ordered dither pattern, distribute the noise according to a gaussian
+ *                      distribution. This generally gives more pleasing images --  less noisy and perhaps a little more saturated -- but color
+ *                      fidelity can suffer. Its effect is between kvImageConvert_DitherNone and kvImageConvert_DitherOrdered | kvImageConvert_DitherUniform.
+ *                      This is the default for kvImageConvert_DitherOrdered and kvImageConvert_DitherOrderedReproducible.
+ *
+ *                  kvImageConvert_OrderedUniformBlue - when using an ordered dither pattern, distribute the noise uniformly. This generally gives
+ *                      best color fidelity, but the resulting image is noisier and more obviously dithered. This is usually the best choice when low
+ *                      bitdepth content is drawn next to high bitdepth content and in other circumstances where subtle changes to color arising from the conversion
+ *                      could be easily noticed. It may be a poor choice when the image is likely to be enlarged -- this would cause the noise to become
+ *                      more evident-- and for very flat / synthetic content with little inherent noise. The enlargement problem may be avoided by enlarging
+ *                      first at high bitdepth, then convert to lower bitdepth.
+ *          @/textblock
+ *          </pre>
+ *
+ *                  To clarify: "Blue" noise does not look blue, nor does it operate solely on the blue color channel. Blue noise is monochrome noise that is added to all color
+ *                  channels equally. The name arises from blue light, which has a higher frequency than other colors of visible light. Thus, blue noise is noise which is
+ *                  weighted heavily towards high frequencies. Low frequency noise tends to have visible shapes in it that would become apparent in an image if it was added in,
+ *                  so it is excluded from the dither pattern.
+ *
+ * @param   flags       The following flags are honored:
+ *          <pre>
+ *          @textblock
+ *                      kvImageNoFlags              Default operation
+ *
+ *                      kvImageDoNotTile            Disable internal multithreading.  You should use this if you are doing your own threading / tiling.
+ *                                                  
+ *                      kvImageGetTempBufferSize    Returns 0.  Does no work. Does not touch data.
+ *
+ *          @/textblock
+ *          </pre>
+ *
+ *
+ * @return  The following error codes may be returned:
+ *
+ *          <pre>
+ *          @textblock
+ *              kvImageNoError                      Success
+ *
+ *              kvImageRoiLargerThanInputBuffer     The height and width of the destination must be less than or equal to the height and width of the src buffer, respectively.
+ *
+ *              kvImageUnknownFlagsBit              Not all vImage flags are understood by this function. See description of flags parameter for supported flags. 
+ *
+ *              kvImageInvalidParameter             An unknown / unsupported dithering mode was requested.
+ *          @/textblock
+ *          </pre>
+ *
+ */
+vImage_Error vImageConvert_PlanarFtoPlanar8_dithered(const vImage_Buffer *src, const vImage_Buffer *dest, Pixel_F maxFloat, Pixel_F minFloat, int dither, vImage_Flags flags) VIMAGE_NON_NULL(1,2)    __OSX_AVAILABLE_STARTING( __MAC_10_10, __IPHONE_8_0 );
+    
+/*!
+ * @function vImageConvert_RGBFFFtoRGB888_dithered
+ *
+ * @abstract Convert an array of floating point data to 8 bit integer data with dithering.
+ *
+ * @discussion For each pixel, do the following:
+ *
+ *          <pre>
+ *          @textblock
+ *          // convert to uint8_t
+ *          result[0] = SATURATED_CLIP_0_to_255( 255.0f * ( srcPixel[0] - minFloat[0] ) / (maxFloat[0] - minFloat[0]) + random_float[0,1) );
+ *          result[1] = SATURATED_CLIP_0_to_255( 255.0f * ( srcPixel[1] - minFloat[1] ) / (maxFloat[1] - minFloat[1]) + random_float[0,1) );
+ *          result[2] = SATURATED_CLIP_0_to_255( 255.0f * ( srcPixel[2] - minFloat[2] ) / (maxFloat[2] - minFloat[2]) + random_float[0,1) );
+ *
+ *          @/textblock
+ *          </pre>
+ *
+ *          This function will work for other channel orders, such as BGR, and other colorspaces such as L*a*b*.
+ *          If you need to change channel orders, please see vImagePermuteChannels_RGB888().
+ *
+ *      This function can work in place provided the following are true:
+ *          if src overlaps with dest,
+ *                  src->data must be equal to dest->data and src->rowBytes >= dest->rowBytes
+ *          If an overlapping src has a different rowBytes from dest, kvImageDoNotTile must be also passed in the flags
+ *
+ *
+ *
+ * @param src               A pointer to a valid and initialized vImage_Buffer struct that points to a buffer containing the source pixels.
+ *
+ * @param dest              A pointer to a valid and initialized vImage_Buffer struct that points to a allocated buffer to receive the result pixels.
+ *
+ * @param maxFloat          The encoding for 1.0 in the src buffer, full intensity. Typically, this is 1.0 for floating-point data in the range[0,1] but if your data is [0,65535] then you would pass 65535.0f here.
+ *                          A separate value is provided for each of the four channels.
+ *
+ * @param minFloat          The encoding for 0.0 in the src buffer, no light.  Typically this is 0.0 for floating-point data in the range [0,1], but if your data is [-.5,0.5] then you would pass -0.5f here.
+ *                          A separate value is provided for each of the four channels.
+ *
+ * @param dither            The type of random noise to use for the dither. The following values are accepted:
+ *
+ *          <pre>
+ *          @textblock
+ *                  kvImageConvert_DitherNone - Rounds to nearest.
+ *
+ *                  kvImageConvert_DitherOrdered - pre-computed blue noise is added to the image before rounding to the values in
+ *                      the destination format.  The offset into this blue noise is randomized per-call to avoid visible artifacts
+ *                      if you do your own tiling or call the function on sequential frames of video.
+ *
+ *                  kvImageConvert_DitherOrderedReproducible - pre-computed blue noise is added to the image before rounding to the
+ *                      values in the destination format.  The offset into the blue noise is the same for every call to allow users
+ *                      to get reproducible results. Fine for still images. For video kvImageConvert_DitherOrdered is a better choice.
+ *          @/textblock
+ *          </pre>
+ *                  The ordered dither methods may be further influenced by shaping the distribution of the noise using the gaussian and uniform options below.
+ *                  These options are OR-ed with kvImageConvert_DitherOrdered / kvImageConvert_DitherOrderedReproducible:
+ *          <pre>
+ *          @textblock
+ *                  kvImageConvert_OrderedGaussianBlue - when using an ordered dither pattern, distribute the noise according to a gaussian
+ *                      distribution. This generally gives more pleasing images --  less noisy and perhaps a little more saturated -- but color
+ *                      fidelity can suffer. Its effect is between kvImageConvert_DitherNone and kvImageConvert_DitherOrdered | kvImageConvert_DitherUniform.
+ *                      This is the default for kvImageConvert_DitherOrdered and kvImageConvert_DitherOrderedReproducible.
+ *
+ *                  kvImageConvert_OrderedUniformBlue - when using an ordered dither pattern, distribute the noise uniformly. This generally gives
+ *                      best color fidelity, but the resulting image is noisier and more obviously dithered. This is usually the best choice when low
+ *                      bitdepth content is drawn next to high bitdepth content and in other circumstances where subtle changes to color arising from the conversion
+ *                      could be easily noticed. It may be a poor choice when the image is likely to be enlarged -- this would cause the noise to become
+ *                      more evident-- and for very flat / synthetic content with little inherent noise. The enlargement problem may be avoided by enlarging
+ *                      first at high bitdepth, then convert to lower bitdepth.
+ *          @/textblock
+ *          </pre>
+ *
+ *                  To clarify: "Blue" noise does not look blue, nor does it operate solely on the blue color channel. Blue noise is monochrome noise that is added to all color
+ *                  channels equally. The name arises from blue light, which has a higher frequency than other colors of visible light. Thus, blue noise is noise which is
+ *                  weighted heavily towards high frequencies. Low frequency noise tends to have visible shapes in it that would become apparent in an image if it was added in,
+ *                  so it is excluded from the dither pattern.
+ *
+ * @param   flags       The following flags are honored:
+ *          <pre>
+ *          @textblock
+ *                      kvImageNoFlags              Default operation
+ *
+ *                      kvImageDoNotTile            Disable internal multithreading.  You should use this if you are doing your own threading / tiling.
+ *
+ *                      kvImageGetTempBufferSize    Returns 0.  Does no work. Does not touch data.
+ *
+ *          @/textblock
+ *          </pre>
+ *
+ *
+ * @return  The following error codes may be returned:
+ *
+ *          <pre>
+ *          @textblock
+ *              kvImageNoError                      Success
+ *
+ *              kvImageRoiLargerThanInputBuffer     The height and width of the destination must be less than or equal to the height and width of the src buffer, respectively.
+ *
+ *              kvImageUnknownFlagsBit              Not all vImage flags are understood by this function. See description of flags parameter for supported flags.
+ *
+ *              kvImageInvalidParameter             An unknown / unsupported dithering mode was requested.
+ *          @/textblock
+ *          </pre>
+ *
+ */
+vImage_Error vImageConvert_RGBFFFtoRGB888_dithered(const vImage_Buffer *src, const vImage_Buffer *dest, const Pixel_F maxFloat[3], const Pixel_F minFloat[3], int dither, vImage_Flags flags) VIMAGE_NON_NULL(1,2,3,4)    __OSX_AVAILABLE_STARTING( __MAC_10_10, __IPHONE_8_0 );
 
+/*!
+ * @function vImageConvert_ARGBFFFFtoARGB8888_dithered
+ *
+ * @abstract Convert an array of floating point data to 8 bit integer data with dithering.
+ *
+ * @discussion For each pixel, do the following:
+ *
+ *          <pre>
+ *          @textblock
+ *          // convert to uint8_t
+ *          Pixel_8888 temp;
+ *          temp[0] = SATURATED_CLIP_0_to_255( 255.0f * ( srcPixel[0] - minFloat[0] ) / (maxFloat[0] - minFloat[0]) + random_float[0,1) );
+ *          temp[1] = SATURATED_CLIP_0_to_255( 255.0f * ( srcPixel[1] - minFloat[1] ) / (maxFloat[1] - minFloat[1]) + random_float[0,1) );
+ *          temp[2] = SATURATED_CLIP_0_to_255( 255.0f * ( srcPixel[2] - minFloat[2] ) / (maxFloat[2] - minFloat[2]) + random_float[0,1) );
+ *          temp[3] = SATURATED_CLIP_0_to_255( 255.0f * ( srcPixel[3] - minFloat[3] ) / (maxFloat[3] - minFloat[3]) + random_float[0,1) );
+ *
+ *          // place in requested output order
+ *          Pixel_8888 result;
+ *          result[0] = temp[permuteMap[0]];
+ *          result[1] = temp[permuteMap[1]];
+ *          result[2] = temp[permuteMap[2]];
+ *          result[3] = temp[permuteMap[3]];
+ *          @/textblock
+ *          </pre>
+ *
+ *         This function will work for other channel orders, such as RGBA and BGRA.
+ *
+ *      This function can work in place provided the following are true:
+ *          if src overlaps with dest,
+ *                  src->data must be equal to dest->data and src->rowBytes >= dest->rowBytes
+ *          If an overlapping src has a different rowBytes from dest, kvImageDoNotTile must be also passed in the flags
+ *
+ *
+ *
+ * @param src               A pointer to a valid and initialized vImage_Buffer struct that points to a buffer containing the source pixels.
+ *
+ * @param dest              A pointer to a valid and initialized vImage_Buffer struct that points to a allocated buffer to receive the result pixels.
+ *
+ * @param maxFloat          The encoding for 1.0 in the src buffer, full intensity. Typically, this is 1.0 for floating-point data in the range[0,1] but if your data is [0,65535] then you would pass 65535.0f here.
+ *                          A separate value is provided for each of the four channels.
+ *
+ * @param minFloat          The encoding for 0.0 in the src buffer, no light.  Typically this is 0.0 for floating-point data in the range [0,1], but if your data is [-.5,0.5] then you would pass -0.5f here.
+ *                          A separate value is provided for each of the four channels.
+ *
+ * @param dither            The type of random noise to use for the dither. The following values are accepted:
+ *
+ *          <pre>
+ *          @textblock
+ *                  kvImageConvert_DitherNone - Rounds to nearest.
+ *
+ *                  kvImageConvert_DitherOrdered - pre-computed blue noise is added to the image before rounding to the values in
+ *                      the destination format.  The offset into this blue noise is randomized per-call to avoid visible artifacts
+ *                      if you do your own tiling or call the function on sequential frames of video.
+ *
+ *                  kvImageConvert_DitherOrderedReproducible - pre-computed blue noise is added to the image before rounding to the
+ *                      values in the destination format.  The offset into the blue noise is the same for every call to allow users
+ *                      to get reproducible results. Fine for still images. For video kvImageConvert_DitherOrdered is a better choice.
+ *          @/textblock
+ *          </pre>
+ *                  The ordered dither methods may be further influenced by shaping the distribution of the noise using the gaussian and uniform options below.
+ *                  These options are OR-ed with kvImageConvert_DitherOrdered / kvImageConvert_DitherOrderedReproducible:
+ *          <pre>
+ *          @textblock
+ *                  kvImageConvert_OrderedGaussianBlue - when using an ordered dither pattern, distribute the noise according to a gaussian
+ *                      distribution. This generally gives more pleasing images --  less noisy and perhaps a little more saturated -- but color
+ *                      fidelity can suffer. Its effect is between kvImageConvert_DitherNone and kvImageConvert_DitherOrdered | kvImageConvert_DitherUniform.
+ *                      This is the default for kvImageConvert_DitherOrdered and kvImageConvert_DitherOrderedReproducible.
+ *
+ *                  kvImageConvert_OrderedUniformBlue - when using an ordered dither pattern, distribute the noise uniformly. This generally gives
+ *                      best color fidelity, but the resulting image is noisier and more obviously dithered. This is usually the best choice when low
+ *                      bitdepth content is drawn next to high bitdepth content and in other circumstances where subtle changes to color arising from the conversion
+ *                      could be easily noticed. It may be a poor choice when the image is likely to be enlarged -- this would cause the noise to become
+ *                      more evident-- and for very flat / synthetic content with little inherent noise. The enlargement problem may be avoided by enlarging
+ *                      first at high bitdepth, then convert to lower bitdepth.
+ *          @/textblock
+ *          </pre>
+ *
+ *                  To clarify: "Blue" noise does not look blue, nor does it operate solely on the blue color channel. Blue noise is monochrome noise that is added to all color
+ *                  channels equally. The name arises from blue light, which has a higher frequency than other colors of visible light. Thus, blue noise is noise which is
+ *                  weighted heavily towards high frequencies. Low frequency noise tends to have visible shapes in it that would become apparent in an image if it was added in,
+ *                  so it is excluded from the dither pattern.
+ *
+ * @param   permuteMap  A 4 element array giving the order of the result channels.  This allows you to convert a ARGB float buffer to a BGRA result buffer by providing the
+ *                      order {3,2,1,0}.
+ *
+ * @param   flags       The following flags are honored:
+ *          <pre>
+ *          @textblock
+ *                      kvImageNoFlags              Default operation
+ *
+ *                      kvImageDoNotTile            Disable internal multithreading.  You should use this if you are doing your own threading / tiling.
+ *
+ *                      kvImageGetTempBufferSize    Returns 0.  Does no work. Does not touch data.
+ *
+ *          @/textblock
+ *          </pre>
+ *
+ *
+ * @return  The following error codes may be returned:
+ *
+ *          <pre>
+ *          @textblock
+ *              kvImageNoError                      Success
+ *
+ *              kvImageRoiLargerThanInputBuffer     The height and width of the destination must be less than or equal to the height and width of the src buffer, respectively.
+ *
+ *              kvImageUnknownFlagsBit              Not all vImage flags are understood by this function. See description of flags parameter for supported flags.
+ *
+ *              kvImageInvalidParameter             An unknown / unsupported dithering mode was requested.
+ *          @/textblock
+ *          </pre>
+ *
+ */
+vImage_Error vImageConvert_ARGBFFFFtoARGB8888_dithered(const vImage_Buffer *src, const vImage_Buffer *dest, const Pixel_FFFF maxFloat, const Pixel_FFFF minFloat, int dither, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2,3,4)    __OSX_AVAILABLE_STARTING( __MAC_10_10, __IPHONE_8_0 );
 
 /*  
  *  vImageConvert_Planar8toARGB8888:
@@ -339,7 +682,7 @@ vImageConvert_16Fto16U( const vImage_Buffer *src, const vImage_Buffer *dest,
  *							to use vImageLookupTable_Planar8toPlanarF. Use the desired ARGB8888 (32 bits/pixel) pixels in place of the planar 
  *							32-bit floats in the lookup table. See vImage/Tiger.h.
  */
-vImage_Error vImageTableLookUp_ARGB8888(const vImage_Buffer *src, const vImage_Buffer *dest, const Pixel_8 alphaTable[256], const Pixel_8 redTable[256], const  Pixel_8 greenTable[256], const  Pixel_8 blueTable[256], vImage_Flags flags) VIMAGE_NON_NULL(1,2,3,4,5,6)    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
+vImage_Error vImageTableLookUp_ARGB8888(const vImage_Buffer *src, const vImage_Buffer *dest, const Pixel_8 alphaTable[256], const Pixel_8 redTable[256], const  Pixel_8 greenTable[256], const  Pixel_8 blueTable[256], vImage_Flags flags) VIMAGE_NON_NULL(1,2)    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_5_0 );
 
 /*
  *  vImageTableLookUp_Planar8:
@@ -408,7 +751,175 @@ vImage_Error vImageOverwriteChannelsWithScalar_Planar8(	Pixel_8     scalar,
 vImage_Error vImageOverwriteChannelsWithScalar_PlanarF( Pixel_F     scalar,
                                                         const vImage_Buffer *dest,      /* A planar buffer */
                                                         vImage_Flags    flags ) VIMAGE_NON_NULL(2)		__OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_5_0 );
+    
+/*
+ *  Fill the dest buffer with the scalar value
+ */
+vImage_Error vImageOverwriteChannelsWithScalar_Planar16S(	Pixel_16S     scalar,
+                                                        const vImage_Buffer *dest,      /* A planar buffer */
+                                                        vImage_Flags    flags ) VIMAGE_NON_NULL(2)		__OSX_AVAILABLE_STARTING( __MAC_10_10, __IPHONE_8_0 );
+    
+vImage_Error vImageOverwriteChannelsWithScalar_Planar16U(	Pixel_16U     scalar,
+                                                             const vImage_Buffer *dest,      /* A planar buffer */
+                                                             vImage_Flags    flags ) VIMAGE_NON_NULL(2)		__OSX_AVAILABLE_STARTING( __MAC_10_10, __IPHONE_8_0 );
+    
 
+/*!
+ *  @function vImageExtractChannel_ARGB8888
+ *
+ *  @abstract Extract one channel from a 4-channel interleaved 8-bit per component buffer
+ *
+ *  @discussion  This is the opposite operation from vImageOverwriteChannels_ARGB8888. It reads one component
+ *               from the four channel 8-bit per component buffer and writes it into a Planar8 buffer.
+ *
+ *               <pre>@textblock
+ *
+ *                  for each pixel i in src:
+ *
+ *                      Pixel_8888 *src_pixel;
+ *                      Pixel_8 *dest_pixel;
+ *
+ *                      dest_pixel[i] = src_pixel[i][channelIndex];
+ *
+ *               @/textblock </pre>
+ *
+ *
+ *  @param       src        A valid pointer to a vImage_Buffer struct which describes a 8-bit per component, four channel buffer.
+ *                          It does not have to be ARGB8888. It can be BGRA, RGBA, CMYK, etc.
+ *
+ *  @param       dest       A valid pointer to a vImage_Buffer struct which describes a 8-bit per component, one channel buffer.
+ *                          The buffer pointed to by dest should be allocated by you. It will be overwritten with one of the 
+ *                          channels.  This function does work in place, so long as the rowBytes is the same for src and dest
+ *                          images and the start address also matches.
+ *
+ *  @param       channelIndex   The index of the channel to extract. For alpha in a ARGB image, this is 0.  For alpha in a BGRA image, this is 3.
+ *
+ *  @param       flags      The following flags are allowed:  kvImageDoNotTile, kvImageGetTempBufferSize, kvImageNoFlags, kvImagePrintDiagnosticsToConsole
+ *
+ *  @result      The following errors may be returned:
+ *
+ *               <pre>@textblock
+ *
+ *                  kvImageNoError                      Success. However, see also 0 below, if the kvImageGetTempBufferSize flag is passed.
+ *
+ *                      0                               If the kvImageGetTempBufferSize flag is passed, this function returns 0 and does no work.
+ *
+ *                  kvImageRoiLargerThanInputBuffer     The destination height or width is larger than the src height or width, respectively.
+ *
+ *                  kvImageUnknownFlagsBit              A flag was used which was not among the approved set of flags. See flags param description above.
+ *
+ *                  kvImageInvalidParameter             channelIndex must be in the range [0,3]
+ *
+ *               @/textblock </pre>
+ */
+vImage_Error vImageExtractChannel_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, long channelIndex, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_10, __IPHONE_8_0 );
+
+/*!
+ *  @function vImageExtractChannel_ARGB16U
+ *
+ *  @abstract Extract one channel from a 4-channel interleaved 16-bit per component buffer. 
+ *
+ *  @discussion  vImageExtractChannel_ARGB16U reads one component from the four channel 16-bit per component buffer 
+ *                  and writes it into a Planar16U buffer.  Since this just copies data around, the data may be any 
+ *                  16-bit per component data type, including signed 16 bit integers and half-precision floating point,
+ *                  of any endianness. Likewise, the channel order does not need to be ARGB. RGBA, BGRA, CMYK, etc. all work.
+ *
+ *               <pre>@textblock
+ *
+ *                  for each pixel i in src:
+ *
+ *                      Pixel_ARGB_16U *src_pixel;
+ *                      Pixel_16U *dest_pixel;
+ *
+ *                      dest_pixel[i] = src_pixel[i][channelIndex];
+ *
+ *               @/textblock </pre>
+ *
+ *
+ *  @param       src        A valid pointer to a vImage_Buffer struct which describes a 16-bit per component, four channel buffer.
+ *                          It does not have to be ARGB16U. It can be BGRA, RGBA, CMYK, etc. The data can be any 16-bit per component
+ *                          type such as int16_t or half-precision floating-point. Data must be at least 2-byte aligned.
+ *
+ *  @param       dest       A valid pointer to a vImage_Buffer struct which describes a 16-bit per component, one channel buffer.
+ *                          The buffer pointed to by dest should be allocated by you. It will be overwritten with one of the
+ *                          channels.  This function does work in place, so long as the rowBytes is the same for src and dest
+ *                          images and the start address also matches. The data returned will be in the same format (uint16_t, 
+ *                          int16_t, half-float, etc.) as the data provided in the src format, except that only a single channel
+ *                          is present. Data must be at least 2-byte aligned.
+ *
+ *  @param       channelIndex   The index of the channel to extract. For alpha in a ARGB image, this is 0.  For alpha in a BGRA image, this is 3.
+ *
+ *  @param       flags      The following flags are allowed:  kvImageDoNotTile, kvImageGetTempBufferSize, kvImageNoFlags, kvImagePrintDiagnosticsToConsole
+ *
+ *  @result      The following errors may be returned:
+ *
+ *               <pre>@textblock
+ *
+ *                  kvImageNoError                      Success. However, see also 0 below, if the kvImageGetTempBufferSize flag is passed.
+ *
+ *                      0                               If the kvImageGetTempBufferSize flag is passed, this function returns 0 and does no work.
+ *
+ *                  kvImageRoiLargerThanInputBuffer     The destination height or width is larger than the src height or width, respectively.
+ *
+ *                  kvImageUnknownFlagsBit              A flag was used which was not among the approved set of flags. See flags param description above.
+ *
+ *                  kvImageInvalidParameter             channelIndex must be in the range [0,3]
+ *
+ *               @/textblock </pre>
+ */
+vImage_Error vImageExtractChannel_ARGB16U( const vImage_Buffer *src, const vImage_Buffer *dest, long channelIndex, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_10, __IPHONE_8_0 );
+
+/*!
+ *  @function vImageExtractChannel_ARGBFFFF
+ *
+ *  @abstract Extract one channel from a 4-channel interleaved 32-bit per component buffer
+ *
+ *  @discussion  This is the opposite operation from vImageOverwriteChannels_ARGBFFFF. It reads one component
+ *               from the four channel 32-bit per component buffer and writes it into a PlanarF buffer. NaNs and 
+ *               and sNaNs are not modified. Sign of zero shall be preserved.
+ *
+ *               <pre>@textblock
+ *
+ *                  for each pixel i in src:
+ *
+ *                      Pixel_FFFF *src_pixel;
+ *                      Pixel_F *dest_pixel;
+ *
+ *                      dest_pixel[i] = src_pixel[i][channelIndex];
+ *
+ *               @/textblock </pre>
+ *
+ *
+ *  @param       src        A valid pointer to a vImage_Buffer struct which describes a 32-bit per component, four channel buffer.
+ *                          It does not have to be ARGBFFFF. It can be BGRA, RGBA, CMYK, etc. of any endianness. Data must be at 
+ *                          least 4-byte aligned.
+ *
+ *  @param       dest       A valid pointer to a vImage_Buffer struct which describes a 32-bit per component, one channel buffer.
+ *                          The buffer pointed to by dest should be allocated by you. It will be overwritten with one of the
+ *                          channels.  This function does work in place, so long as the rowBytes is the same for src and dest
+ *                          images and the start address also matches. Data must be at least 4 byte aligned.
+ *
+ *  @param       channelIndex   The index of the channel to extract. For alpha in a ARGB image, this is 0.  For alpha in a BGRA image, this is 3.
+ *
+ *  @param       flags      The following flags are allowed:  kvImageDoNotTile, kvImageGetTempBufferSize, kvImageNoFlags, kvImagePrintDiagnosticsToConsole
+ *
+ *  @result      The following errors may be returned:
+ *
+ *               <pre>@textblock
+ *
+ *                  kvImageNoError                      Success. However, see also 0 below, if the kvImageGetTempBufferSize flag is passed.
+ *
+ *                      0                               If the kvImageGetTempBufferSize flag is passed, this function returns 0 and does no work.
+ *
+ *                  kvImageRoiLargerThanInputBuffer     The destination height or width is larger than the src height or width, respectively.
+ *
+ *                  kvImageUnknownFlagsBit              A flag was used which was not among the approved set of flags. See flags param description above.
+ *
+ *                  kvImageInvalidParameter             channelIndex must be in the range [0,3]
+ *
+ *               @/textblock </pre>
+ */
+vImage_Error vImageExtractChannel_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, long channelIndex, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING( __MAC_10_10, __IPHONE_8_0 );
 
 
 /*
@@ -987,6 +1498,7 @@ vImage_Error    vImageConvert_ARGB8888toARGB1555( const vImage_Buffer *src, cons
 vImage_Error vImageConvert_RGB565toARGB8888(Pixel_8 alpha, const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags) VIMAGE_NON_NULL(2,3) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0);
 vImage_Error vImageConvert_RGB565toRGBA8888(Pixel_8 alpha, const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags) VIMAGE_NON_NULL(2,3) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
 vImage_Error vImageConvert_RGB565toBGRA8888(Pixel_8 alpha, const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags) VIMAGE_NON_NULL(2,3) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+vImage_Error vImageConvert_RGB565toRGB888( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags )  VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
     
 /*  Convert from 32 bit/pixel ARGB8888 or RGBA8888 or BGRA8888 formats
  *  to 16 bit/pixel RGB565. for each pixel:
@@ -1060,7 +1572,259 @@ vImage_Error vImageConvert_BGRA8888toRGB565(const vImage_Buffer *src, const vIma
  
 vImage_Error vImageConvert_RGB565toPlanar8(const vImage_Buffer *src, const vImage_Buffer *destR, const vImage_Buffer *destG, const vImage_Buffer *destB, vImage_Flags flags) VIMAGE_NON_NULL(1,2,3,4) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0);
 vImage_Error vImageConvert_Planar8toRGB565(const vImage_Buffer *srcR, const vImage_Buffer *srcG, const vImage_Buffer *srcB, const vImage_Buffer *dest, vImage_Flags flags) VIMAGE_NON_NULL(1,2,3,4) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0);
-
+    
+/*!
+ * @function vImageConvert_RGBA5551toRGB565
+ * @abstract Convert from RGBA5551 to RGB565 image format
+ * @discussion  Convert (with loss of alpha) from RGBA5551 to RGB565 format.
+ *              If you need something fancier done with alpha first, such as unpremultiplication or flattening, convert to 8 bit per channel first. 
+ *              Both RGB565 and RGBA5551 are defined by vImage to be host-endian formats. On Intel and ARM and other little endian systems, these are
+ *              little endian uint16_t's in memory. On a big endian system, these are big endian uint16_t's.
+ *
+ * @param src           A pointer to a vImage_Buffer struct which describes a memory region full of RGBA5551 pixels
+ *
+ * @param dest          A pointer to a vImage_Buffer struct which describes a preallocated memory region to be overwritten by RGB565 pixels
+ *
+ * @param flags           The following flags are understood by this function:
+ *
+ *          <pre>
+ *          @textblock
+ *          kvImageNoFlags                      Default operation.
+ *
+ *          kvImageDoNotTile                    Turn internal multithreading off. This may be helpful in cases where you already have
+ *                                              many such operations going concurrently, and in cases where it is desirable to keep
+ *                                              CPU utilization to a single core.
+ *
+ *          kvImageGetTempBufferSize            Returns 0.  Reads and writes no pixels.
+ *          @/textblock
+ *          </pre>
+ *
+ * @return 
+ *          <pre>
+ *          @textblock
+ *          kvImageNoError                          Success
+ *
+ *          kvImageBufferSizeMismatch               dest->height > src->height OR dest->width > src->width.  There are not enough pixels to fill the destination buffer.
+ *          @/textblock
+ *          </pre>
+ */
+vImage_Error vImageConvert_RGBA5551toRGB565( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+    
+/*!
+ * @function vImageConvert_ARGB1555toRGB565
+ * @abstract Convert from ARGB1555 to RGB565 image format
+ * @discussion  Convert (with loss of alpha) from ARGB1555 to RGB565 format.
+ *              If you need something fancier done with alpha first, such as unpremultiplication or flattening, convert to 8 bit per channel first.
+ *              Both RGB565 and ARGB1555 are defined by vImage to be host-endian formats. On Intel and ARM and other little endian systems, these are
+ *              little endian uint16_t's in memory. On a big endian system, these are big endian uint16_t's.
+ *
+ * @param src           A pointer to a vImage_Buffer struct which describes a memory region full of ARGB1555 pixels
+ *
+ * @param dest          A pointer to a vImage_Buffer struct which describes a preallocated memory region to be overwritten by RGB565 pixels
+ *
+ * @param flags           The following flags are understood by this function:
+ *
+ *          <pre>
+ *          @textblock
+ *          kvImageNoFlags                      Default operation.
+ *
+ *          kvImageDoNotTile                    Turn internal multithreading off. This may be helpful in cases where you already have
+ *                                              many such operations going concurrently, and in cases where it is desirable to keep
+ *                                              CPU utilization to a single core.
+ *
+ *          kvImageGetTempBufferSize            Returns 0.  Reads and writes no pixels.
+ *          @/textblock
+ *          </pre>
+ *
+ * @return
+ *          <pre>
+ *          @textblock
+ *          kvImageNoError                          Success
+ *
+ *          kvImageBufferSizeMismatch               dest->height > src->height OR dest->width > src->width.  There are not enough pixels to fill the destination buffer.
+ *          @/textblock
+ *          </pre>
+ */
+vImage_Error vImageConvert_ARGB1555toRGB565( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+    
+/*!
+ * @function vImageConvert_RGB565toRGBA5551
+ * @abstract Convert from RGB565 to RGBA5551 image format
+ * @discussion  Convert from RGB565 to RGBA5551 format.  The new alpha is set to 1.
+ *              Both RGB565 and RGBA5551 are defined by vImage to be host-endian formats. On Intel and ARM and other little endian systems, these are
+ *              little endian uint16_t's in memory. On a big endian system, these are big endian uint16_t's.
+ *
+ * @param src           A pointer to a vImage_Buffer struct which describes a memory region full of RGB565 pixels
+ *
+ * @param dest          A pointer to a vImage_Buffer struct which describes a preallocated memory region to be overwritten by RGBA5551 pixels
+ *
+ * @param dither        A dithering method for the green channel.   Options:
+ *
+ *                  kvImageConvert_DitherNone - apply no dithering; input values
+ *                      are rounded to the nearest value representable in the
+ *                      destination format.
+ *                  kvImageConvert_DitherOrdered - pre-computed blue noise is
+ *                      added to the image before rounding to the values in
+ *                      the destination format.  The offset into this blue
+ *                      noise is randomized per-call to avoid visible artifacts
+ *                      if you do your own tiling or call the function on
+ *                      sequential frames of video.
+ *                  kvImageConvert_DitherOrderedReproducible - pre-computed
+ *                      blue noise is added to the image before rounding to the
+ *                      values in the destination format.  The offset into the
+ *                      blue noise is the same for every call to allow users
+ *                      to get reproducible results.
+ *
+ *                  The ordered dither methods may be further influenced by shaping the
+ *                  distribution of the noise using the gaussian and uniform options below.
+ *                  These options are OR-ed with kvImageConvert_DitherOrdered / kvImageCon-
+ *                  vert_DitherOrderedReproducible:
+ *
+ *                  kvImageConvert_OrderedGaussianBlue - when using an ordered dither
+ *                      pattern, distribute the noise according to a gaussian
+ *                      distribution. This generally gives more pleasing images --
+ *                      less noisy and perhaps a little more saturated -- but color
+ *                      fidelity can suffer. Its effect is between kvImageConvert_DitherNone
+ *                      and kvImageConvert_DitherOrdered | kvImageConvert_DitherUniform.
+ *                      This is the default for kvImageConvert_DitherOrdered and
+ *                      kvImageConvert_DitherOrderedReproducible.
+ *
+ *                  kvImageConvert_OrderedUniformBlue - when using an ordered dither
+ *                      pattern, distribute the noise uniformly. This generally gives
+ *                      best color fidelity, but the resulting image is noisier and more
+ *                      obviously dithered. This is usually the best choice when low
+ *                      bitdepth content is drawn next to high bitdepth content and in other
+ *                      circumstances where subtle changes to color arising from the conversion
+ *                      could be easily noticed. It may be a poor choice when the image
+ *                      is likely to be enlarged -- this would cause the noise to become
+ *                      more evident-- and for very flat / synthetic content with little
+ *                      inherent noise. The enlargement problem may be avoided by enlarging
+ *                      first at high bitdepth, then convert to lower bitdepth.
+ *
+ *                  To clarify: "Blue" noise is not blue, nor does it operate solely on the blue
+ *                  color channel. Blue noise is monochrome noise that is added to all color
+ *                  channels equally. The name arises from blue light, which has a higher frequency
+ *                  than other colors of visible light. Thus, blue noise is noise which is
+ *                  weighted heavily towards high frequencies. Low frequency noise tends to have
+ *                  visible shapes in it that would become apparent in an image if it was added in,
+ *                  so it is excluded from the dither pattern.
+ *
+ * @param flags           The following flags are understood by this function:
+ *
+ *          <pre>
+ *          @textblock
+ *          kvImageNoFlags                      Default operation.
+ *
+ *          kvImageDoNotTile                    Turn internal multithreading off. This may be helpful in cases where you already have
+ *                                              many such operations going concurrently, and in cases where it is desirable to keep
+ *                                              CPU utilization to a single core.
+ *
+ *          kvImageGetTempBufferSize            Returns 0.  Reads and writes no pixels.
+ *          @/textblock
+ *          </pre>
+ *
+ * @return
+ *          <pre>
+ *          @textblock
+ *          kvImageNoError                          Success
+ *
+ *          kvImageBufferSizeMismatch               dest->height > src->height OR dest->width > src->width.  There are not enough pixels to fill the destination buffer.
+ *
+ *          kvImageInvalidParameter                 Invalid / unknown dither value
+ *          @/textblock
+ *          </pre>
+ */
+vImage_Error vImageConvert_RGB565toRGBA5551( const vImage_Buffer *src, const vImage_Buffer *dest, int dither, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+    
+/*!
+ * @function vImageConvert_RGB565toARGB1555
+ * @abstract Convert from RGB565 to ARGB1555 image format
+ * @discussion  Convert from RGB565 to ARGB1555 format.  The new alpha is set to 1.
+ *              Both RGB565 and ARGB1555 are defined by vImage to be host-endian formats. On Intel and ARM and other little endian systems, these are
+ *              little endian uint16_t's in memory. On a big endian system, these are big endian uint16_t's.
+ *
+ * @param src           A pointer to a vImage_Buffer struct which describes a memory region full of RGB565 pixels
+ *
+ * @param dest          A pointer to a vImage_Buffer struct which describes a preallocated memory region to be overwritten by ARGB1555 pixels
+ *
+ * @param dither        A dithering method for the green channel.   Options:
+ *
+ *                  kvImageConvert_DitherNone - apply no dithering; input values
+ *                      are rounded to the nearest value representable in the
+ *                      destination format.
+ *                  kvImageConvert_DitherOrdered - pre-computed blue noise is
+ *                      added to the image before rounding to the values in
+ *                      the destination format.  The offset into this blue
+ *                      noise is randomized per-call to avoid visible artifacts
+ *                      if you do your own tiling or call the function on
+ *                      sequential frames of video.
+ *                  kvImageConvert_DitherOrderedReproducible - pre-computed
+ *                      blue noise is added to the image before rounding to the
+ *                      values in the destination format.  The offset into the
+ *                      blue noise is the same for every call to allow users
+ *                      to get reproducible results.
+ *
+ *                  The ordered dither methods may be further influenced by shaping the
+ *                  distribution of the noise using the gaussian and uniform options below.
+ *                  These options are OR-ed with kvImageConvert_DitherOrdered / kvImageCon-
+ *                  vert_DitherOrderedReproducible:
+ *
+ *                  kvImageConvert_OrderedGaussianBlue - when using an ordered dither
+ *                      pattern, distribute the noise according to a gaussian
+ *                      distribution. This generally gives more pleasing images --
+ *                      less noisy and perhaps a little more saturated -- but color
+ *                      fidelity can suffer. Its effect is between kvImageConvert_DitherNone
+ *                      and kvImageConvert_DitherOrdered | kvImageConvert_DitherUniform.
+ *                      This is the default for kvImageConvert_DitherOrdered and
+ *                      kvImageConvert_DitherOrderedReproducible.
+ *
+ *                  kvImageConvert_OrderedUniformBlue - when using an ordered dither
+ *                      pattern, distribute the noise uniformly. This generally gives
+ *                      best color fidelity, but the resulting image is noisier and more
+ *                      obviously dithered. This is usually the best choice when low
+ *                      bitdepth content is drawn next to high bitdepth content and in other
+ *                      circumstances where subtle changes to color arising from the conversion
+ *                      could be easily noticed. It may be a poor choice when the image
+ *                      is likely to be enlarged -- this would cause the noise to become
+ *                      more evident-- and for very flat / synthetic content with little
+ *                      inherent noise. The enlargement problem may be avoided by enlarging
+ *                      first at high bitdepth, then convert to lower bitdepth.
+ *
+ *                  To clarify: "Blue" noise is not blue, nor does it operate solely on the blue
+ *                  color channel. Blue noise is monochrome noise that is added to all color
+ *                  channels equally. The name arises from blue light, which has a higher frequency
+ *                  than other colors of visible light. Thus, blue noise is noise which is
+ *                  weighted heavily towards high frequencies. Low frequency noise tends to have
+ *                  visible shapes in it that would become apparent in an image if it was added in,
+ *                  so it is excluded from the dither pattern.
+ *
+ * @param flags           The following flags are understood by this function:
+ *
+ *          <pre>
+ *          @textblock
+ *          kvImageNoFlags                      Default operation.
+ *
+ *          kvImageDoNotTile                    Turn internal multithreading off. This may be helpful in cases where you already have
+ *                                              many such operations going concurrently, and in cases where it is desirable to keep
+ *                                              CPU utilization to a single core.
+ *
+ *          kvImageGetTempBufferSize            Returns 0.  Reads and writes no pixels.
+ *          @/textblock
+ *          </pre>
+ *
+ * @return
+ *          <pre>
+ *          @textblock
+ *          kvImageNoError                          Success
+ *
+ *          kvImageBufferSizeMismatch               dest->height > src->height OR dest->width > src->width.  There are not enough pixels to fill the destination buffer.
+ *
+ *          kvImageInvalidParameter                 Invalid / unknown dither value
+ *          @/textblock
+ *          </pre>
+ */
+vImage_Error vImageConvert_RGB565toARGB1555( const vImage_Buffer *src, const vImage_Buffer *dest, int dither, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+    
 /*
  *  Convert between 16 bit floats to 32 bit float format.
  *  The 16 bit floating point format is identical to OpenEXR. It has a layout as follows:
@@ -2725,7 +3489,7 @@ vImage_Error vImageConvert_Indexed4toPlanar8(const vImage_Buffer *src, const vIm
  *                  These options are OR-ed with kvImageConvert_DitherOrdered / kvImageCon-
  *                  vert_DitherOrderedReproducible:
  *
- *                  kvImageConvert_DitherGaussianBlue - when using an ordered dither
+ *                  kvImageConvert_OrderedGaussianBlue - when using an ordered dither
  *                      pattern, distribute the noise according to a gaussian
  *                      distribution. This generally gives more pleasing images --
  *                      less noisy and perhaps a little more saturated -- but color 
@@ -2734,7 +3498,7 @@ vImage_Error vImageConvert_Indexed4toPlanar8(const vImage_Buffer *src, const vIm
  *                      This is the default for kvImageConvert_DitherOrdered and 
  *                      kvImageConvert_DitherOrderedReproducible.
  *
- *                  kvImageConvert_DitherUniformBlue - when using an ordered dither
+ *                  kvImageConvert_OrderedUniformBlue - when using an ordered dither
  *                      pattern, distribute the noise uniformly. This generally gives 
  *                      best color fidelity, but the resulting image is noisier and more
  *                      obviously dithered. This is usually the best choice when low 
@@ -3079,8 +3843,4236 @@ vImage_Error vImageConvert_Fto16Q12(const vImage_Buffer *src, const vImage_Buffe
 
 vImage_Error vImageConvert_16Q12to16U(const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
 vImage_Error vImageConvert_16Uto16Q12(const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+    
+
+/*
+     
+     YpCbCr image formats:
+     =====================
+     Some details about video formats are provided below to provide some context for interpreting parameters passed to YpCbCr conversion functions.
+     
+     Luminance and Chrominance
+     -------------------------
+     Luminance is the brightness in an image. An example might be the image visible on a black and white television. Luminance (Y, Y’ or Yp)
+     is defined as a weighted sum of the color components, usually weighted according to the relative ability of red, green and blue to cause
+     perceived brightness changes in an image. For example for ITU-Recommendation BT.709 images, the Y component is given as:
+     
+     Y = 0.2126*R + 0.7152*G + 0.0722*B
+     
+     Chrominance (Cb and Cr) is the correction applied to the luminance to add color information. For ITU-R BT.709 they would be:
+     
+     Cb  = 0.5389*(B-Y)
+     Cr  = 0.6350*(R-Y)
+     
+     Together, these can be written as an invertible 3x3 color matrix that converts {R,G,B} to {Yp, Cb, Cr}.
+     
+     Since chrominance is calculated as the difference between two unsigned values, it itself is signed. Typically, a large bias is added to
+     the chrominance value when it is encoded as an unsigned integer to make negative values representable. For example, 8-bit chrominance
+     values typically have an implicit +128 in them. To convert a full range 8-bit chroma value to an unbiased floating point representation,
+     it would be:
+     
+     Pb = (Cb - 128) / 127
+     
+     and so a full range chrominance value actually varies in the range [1,255] indicating [-1.0, 1.0]. See also Video Range.
+     
+     YpCbCr video color representations are typically specified in terms of a RGB colorspace and a typically 3x3 matrix to convert RGB to YpCbCr.
+     The RGB colorspace itself is also defined relative to an absolute XYZ colorspace.  This is typically done using some x,y,z (little xyz!)
+     primaries defining the size of the color cube and a transfer function that describes the conversion from linear color to non-linear RGB. The
+     transfer function is usually of a form that can be evaluated with vImagePiecewiseGamma_<fmt> (see vImage/Transform.h). It should be noted that
+     both of these are customarily defined in the opposite direction from an ICC profile. Whereas an ICC profile is conversion from display colorspace
+     to linear XYZ, video formats are from XYZ to YpCbCr. Thus, the matrices and the gamma are inverted.
+     
+     Chroma subsampling
+     ------------------
+     Since the human eye is better at getting positional information from luminance changes than chrominance changes, the chrominance signal is
+     often subsampled relative to luminance. (For each chrominance sample, there may be 2 or 4 luminance ones.) This saves memory. See
+     [sampling ratio] below.
+     
+     Chroma Siting
+     -------------
+     Chroma subsampling also brings with it the possibility of differences in how the chroma samples are positioned relative to the luminance samples.
+     For example for 422, they may overlap the left one, or the right one, or be positioned between them. This is called chroma siting. Many video
+     formats are available for a diversity of siting options. However, for OS X.10 and iOS 8, vImage does only the centered variant
+     (kCVImageBufferChromaLocation_Center). Please file a bug report to request other siting modes where they are found to be necessary.
+     
+     Video Range
+     -----------
+     Video formats commonly do not use the entire representable range available to them to encode video data. A 8-bit video range signal may use
+     the range [16,235] instead of [0,255] to represent the range of signal strengths [0,1.0] for luminance, and [16,240] for chroma. A video signal
+     that uses the full [0,255] ([1,255] for chroma) is said to be full range.
+     
+     Pixel Blocks
+     -------------
+     Since some channels are sampled at a higher rate than other channels, it is common to group multiple pixels together in a block which is
+     encoded or decoded as a unit. Blocks are useful because they are an integer multiple of a byte in size and describe a particular
+     repeating component order that can be serviced in a loop. See [sampling ratio] below for common ways in which multiple YpCbCr pixels fit
+     together in a block. An example might be a 2vuy image (422CbYpCrYp8 to vImage) which has luminance and chrominance for two pixels packed
+     together in a block as {Cb, Yp, Cr, Yp}.  The chrominance is shared between the two pixels, but each has its own luminance.
+ 
+     In all cases, the beginning of a scanline must also be the beginning of a block, and must be at least byte aligned.  We do not support cases where
+     a block spans multiple block rows. If the width of an image is not a multiple of the block width (or height is not a multiple of a block height)
+     and you are writing to a YpCbCr format, then the edge pixels are in effect duplicated (see kvImageEdgeExtend) until the image is a multiple of
+     the block size and the larger image is encoded to YpCbCr. If you are converting from a subsampled YpCbCr image to a non-subsampled format, then
+     we only write out the pixels that fit in the vImage_Buffer.height and vImage_Buffer.width provided. You should be careful to keep the original
+     height and width, since edges of the wider images may look like image artifacts if they appear onscreen.
+ 
+     Nomenclature used in vImage
+     ---------------------------
+     To cover the many different packing orders, chroma subsamplings and separate image planes, we adopt the following naming convention here 
+     as an extension of that commonly used here for RGB images:
+     
+     [sampling ratio][order of appearance of components in block][bitdepth](_[sampling ratio][order of appearance of components in block] for plane 2)...
+     
+     Examples:
+     
+     444YpCbCrA8		Each chunk is one pixel. Channels are 8-bit interleaved in the order A, Yp, Cb, Cr.  kCVPixelFormatType_4444YpCbCrA8
+     422CbYpCrYp8		Each chunk is two horizontally adjacent pixels. Channels are 8-bit interleaved in the order Cb, Yp0, Cr, Yp0. (2vuy)
+     422CbYpCrYp8_AA8   Like 422CbYpCrYp8 but with a separate alpha channel added. (kCVPixelFormatType_422YpCbCr_4A_8BiPlanar)
+ 
+     The fields and behavior details of such formats are described below:
+     
+     [sampling ratio]
+     ----------------
+     The format begins with a three digit code commonly used for video formats that describes the relative frequencies with which luminance
+     (Yp) and chrominance (Cb, Cr) are sampled, to enable rapid indexing of the formats for experienced professionals. For the rest of us,
+     these are:
+     
+     444  Luminance and chrominance are sampled at the same rate
+     422  Luminance is sampled at twice the rate of chrominance components in the horizontal dimension
+     420  Luminance is sampled at twice the rate of chrominance components in both dimensions.
+     ...
+     
+     If there is an alpha channel, it is assumed to be sampled at the same rate as luminance.
+     
+     [order of appearance of components in block]:
+     --------------------------------------------
+     For a 444 block, each component appears once and the block holds one pixel, so you
+     just see the order of the components such as AYpCbCr much like we write ARGB. For a 422 block, there are two luminance for each Cb or Cr, so
+     you will see a block order like YpCbYpCr and the block represents two pixels in a fully decoded image. Noticed that Yp is repeated twice.
+     The pixels have different luminance but share the same chrominance values. In the case of 420 and 411, there is also vertical subsampling.
+     In this case, the vImage_Buffer.rowBytes describes the stride from one block row to the next. (Each block row is two pixels tall.)
+     
+     In extreme cases with blocks that span more than two pixels, the block packing can become complicated, resulting in an exceptionally long name.
+     This can happen for bit depths that are not a multiple of a byte, where the block size not only accommodates subsampling, but also byte alignment.  
+     Such cases may be abbreviated with the “P” character, indicating Packed. An example is 422PCbYpCrYp10, which would otherwise have to be named 
+     422CrYpCbYpCbYpCbYpCrYpCrYp10. In such cases, the actual layout is given in the comments.
+     
+ 
+     [bitdepth]
+     ----------
+     This is the number of bits per component. Typically, all the channels have the same bit depth so it just appears at the end of the plane name.
+     If there is a heterogeneous format, the bit depths are inserted between the channels where they change (e.g. 444Yp12CbCr10) for 12 bit Yp and
+     10 bit CbCr in a 32-bit 444 block.
+     
+     [additional planes]
+     -------------------
+     Some YpCbCr formats have multiple planes. (That is, multiple vImage_Buffers.) It is common to have the Y data in one plane and CbCr packed in
+     another plane, or perhaps alpha stored  separately. An underbar ‘_’ shall separate the planes and the new plane will be named according to order
+     of appearance of the block components. Subsampling may cause components in a plane to appear multiple times.  For example: 411YpYpCbYpYpCr8_AAAA8
+     is a 411 format with alpha in a separate plane.  We see AAAA instead of A because each block holds 4 pixels and so the block contains alpha four
+     times in that plane. Blocks in all planes have the same height and width for a particular format.
+     
+     
+     Conversion to RGB and other colorspaces
+     ----------------------------------------
+     
+     Unfortunately, the RGB colorspaces that commonly underlie YpCbCr formats are generally not the same as ones commonly used for RGB imaging in
+     CoreGraphics. For example, ITU-R BT.709 is similar to sRGB but not the same. Consequently, simple conversion from YpCbCr data to RGB using
+     the matrix functions provided here may not be the only step required for good color fidelity. A RGB -> RGB colorspace conversion may be
+     required too.  Typically, this involves converting to linear color, applying a RGB->RGB conversion matrix, and then applying the new gamma.
+     This can be done using vImagePiecewiseGamma_<fmt> and vImageMatrixMultiply_<fmt>. (We recommend planar 16Q12 for 8- and 10-bpc formats and
+     floating point for higher bit depths.) However, some may find it simpler to use the interfaces on vImage_CVUtilities.h instead, which handle
+     such details for you.
+     
+*/
+
+    
+/*!
+     @function vImageConvert_YpCbCrToARGB_GenerateConversion
+     
+     @abstract Generates the conversion from a YpCbCr to a ARGB pixel format.
+     
+     @param matrix
+     A pointer to vImage_YpCbCrToARGBMatrix that contains the matrix coefficients for the conversion
+     from a YpCbCr to a ARGB pixel format.
+ 
+     @param pixelRange
+     A pointer to vImage_YpCbCrPixelRange that contains the pixel range information for the conversion
+     from a YpCbCr to a ARGB pixel format.
+ 
+     @param outInfo
+     A pointer to vImage_YpCbCrToRGB will be initialized with the information for the conversion function
+     will use later.
+ 
+     @param inYpCbCrType
+     A YpCbCrType to specify the input YpCbCr format.
+     
+     @param outARGBType
+     A ARGBType to specify the output ARGB format.
+ 
+     @param flags
+     kvImagePrintDiagnosticsToConsole   Directs the function to print diagnostic information to the console in the event of failure.
+ 
+     @discussion This function is used to create the vImage_YpCbCrToARGB conversion information necessary for all
+     of YUV -> RGB conversion functions.
+ 
+     For example, if we want to prepare for the conversion from 'yuvs' with ITU 601 video range to ARGB8888, then we
+     need to do the following:
+ 
+     <pre> @textblock
+     vImage_Error err = kvImageNoError;
+     vImage_Flags flags = kvImageNoFlags;
+     vImage_YpCbCrPixelRange pixelRange;
+     vImage_YpCbCrToARGB outInfo;
+ 
+     pixelRange.Yp_bias         =   16;     // encoding for Y' = 0.0
+     pixelRange.CbCr_bias       =  128;     // encoding for CbCr = 0.0
+     pixelRange.YpRangeMax      =  235;     // encoding for Y'= 1.0
+     pixelRange.CbCrRangeMax    =  240;     // encoding for CbCr = 0.5
+     pixelRange.YpMax           =  255;     // a clamping limit above which the value is not allowed to go. 255 is fastest. Use pixelRange.YpRangeMax if you don't want Y' > 1.
+     pixelRange.YpMin           =    0;     // a clamping limit below which the value is not allowed to go. 0 is fastest. Use pixelRange.Yp_bias if you don't want Y' < 0.
+     pixelRange.CbCrMax         =  255;     // a clamping limit above which the value is not allowed to go. 255 is fastest.  Use pixelRange.CbCrRangeMax, if you don't want CbCr > 0.5
+     pixelRange.CbCrMin         =    0;     // a clamping limit above which the value is not allowed to go. 0 is fastest.  Use (2*pixelRange.CbCr_bias - pixelRange.CbCrRangeMax), if you don't want CbCr < -0.5
+                                            //                ( pixelRange.CbCr_bias - (pixelRange.CbCrRangeMax - pixelRange.CbCr_bias) = 2*pixelRange.CbCr_bias - pixelRange.CbCrRangeMax )
+ 
+     err = vImageConvert_YpCbCrToARGB_GenerateConversion(kvImageITU601_YpCbCrToARGBMatrix, &pixelRange, &outInfo, kvImage422YpCbYpCr8, kvImageARGB8888, flags);
+     @/textblock </pre>
+ 
+     If we want to define our own conversion coefficents, then we can do
+ 
+ <pre> @textblock
+     vImage_YpCbCrToARGBMatrix matrix;
+     vImage_YpCbCrPixelRange pixelRange;
+ 
+     matrix.Yp                  =  1.0f;
+     matrix.Cb_G                = -0.3441f;
+     matrix.Cb_B                =  1.772f;
+     matrix.Cr_R                =  1.402f;
+     matrix.Cr_G                = -0.7141f;
+ 
+     pixelRange.Yp_bias         =   16;     // encoding for Y' = 0.0
+     pixelRange.CbCr_bias       =  128;     // encoding for CbCr = 0.0
+     pixelRange.YpRangeMax      =  235;     // encoding for Y'= 1.0
+     pixelRange.CbCrRangeMax    =  240;     // encoding for CbCr = 0.5
+     pixelRange.YpMax           =  255;     // a clamping limit above which the value is not allowed to go. 255 is fastest. Use pixelRange.YpRangeMax if you don't want Y' > 1.
+     pixelRange.YpMin           =    0;     // a clamping limit below which the value is not allowed to go. 0 is fastest. Use pixelRange.Yp_bias if you don't want Y' < 0.
+     pixelRange.CbCrMax         =  255;     // a clamping limit above which the value is not allowed to go. 255 is fastest.  Use pixelRange.CbCrRangeMax, if you don't want CbCr > 0.5
+     pixelRange.CbCrMin         =    0;     // a clamping limit above which the value is not allowed to go. 0 is fastest.  Use (2*pixelRange.CbCr_bias - pixelRange.CbCrRangeMax), if you don't want CbCr < -0.5
+                                            //                ( pixelRange.CbCr_bias - (pixelRange.CbCrRangeMax - pixelRange.CbCr_bias) = 2*pixelRange.CbCr_bias - pixelRange.CbCrRangeMax )
+ 
+     err = vImageConvert_YpCbCrToARGB_GenerateConversion(&matrix, &pixelRange, &outInfo, kvImage422YpCbYpCr8, kvImageARGB8888, flags).
+ @/textblock </pre>
+ 
+ 
+     vImage_YpCbCrToARGB created may be reused multiple times from multiple threads concurrently.
+ 
+     Here are the conversions available currently.
+ 
+ <pre>
+ @textblock
+             RGB8   RGB16Q12    RGB16
+     YUV8     Y        N          N
+     YUV10    Y        Y          N
+     YUV12    Y        Y          N
+     YUV14    Y        N          Y
+     YUV16    Y        N          Y
+ @/textblock
+ </pre>
+ 
+     @return
+     <pre> @textblock
+     kvImageNoError                  Is returned when there was no error.
+     kvImageUnknownFlagsBit          Is returned when there is a unknown flag.
+     kvImageUnsupportedConversion    Is returned when there is no conversion in vImage for inYpCbCrType & outARGBType.
+     @/textblock  </pre>
+ */
+
+vImage_Error vImageConvert_YpCbCrToARGB_GenerateConversion(const vImage_YpCbCrToARGBMatrix *matrix, const vImage_YpCbCrPixelRange *pixelRange, vImage_YpCbCrToARGB *outInfo, vImageYpCbCrType inYpCbCrType, vImageARGBType outARGBType, vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+    
+/*!
+     @function vImageConvert_ARGBToYpCbCr_GenerateConversion
+     
+     @abstract Generates the conversion from a ARGB to a YpCbCr pixel format.
+     
+     @param matrix
+     A pointer to vImage_ARGBToYpCbCrMatrix that contains the matrix coefficients for the conversion
+     from a ARGB to a YpCbCr pixel format.
+ 
+     @param pixelRange
+     A pointer to vImage_YpCbCrPixelRange that contains the pixel range information for the conversion
+     from a ARGB to a YpCbCr pixel format.
+ 
+     @param outInfo
+     A pointer to vImage_ARGBToYpCbCr will be initialized with the information for the conversion function
+     will use later.
+ 
+     @param inARGBType
+     A ARGBType to specify the output ARGB format.
+ 
+     @param outYpCbCrType
+     A YpCbCrType to specify the input YpCbCr format.
+ 
+     @param flags
+     kvImagePrintDiagnosticsToConsole   Directs the function to print diagnostic information to the console in the event of failure.
+ 
+     @discussion This function is used to create the vImage_ARGBToYpCbCr conversion information necessary for all
+     of RGB -> YUV conversion functions.
+ 
+     For example, if we want to prepare for the conversion from ARGB8888 'yuvs' with ITU 601 video range, then we
+     need to do the following:
+
+     <pre> @textblock
+     vImage_Error err = kvImageNoError;
+     vImage_Flags flags = kvImageNoFlags;
+     vImage_YpCbCrPixelRange pixelRange;
+     vImage_ARGBToYpCbCr outInfo;
+     
+     pixelRange.Yp_bias         =   16;     // encoding for Y' = 0.0
+     pixelRange.CbCr_bias       =  128;     // encoding for CbCr = 0.0
+     pixelRange.YpRangeMax      =  235;     // encoding for Y'= 1.0
+     pixelRange.CbCrRangeMax    =  240;     // encoding for CbCr = 0.5
+     pixelRange.YpMax           =  255;     // a clamping limit above which the value is not allowed to go. 255 is fastest. Use pixelRange.YpRangeMax if you don't want Y' > 1.
+     pixelRange.YpMin           =    0;     // a clamping limit below which the value is not allowed to go. 0 is fastest. Use pixelRange.Yp_bias if you don't want Y' < 0.
+     pixelRange.CbCrMax         =  255;     // a clamping limit above which the value is not allowed to go. 255 is fastest.  Use pixelRange.CbCrRangeMax, if you don't want CbCr > 0.5
+     pixelRange.CbCrMin         =    0;     // a clamping limit above which the value is not allowed to go. 0 is fastest.  Use (2*pixelRange.CbCr_bias - pixelRange.CbCrRangeMax), if you don't want CbCr < -0.5
+ 
+     err = vImageConvert_ARGBToYpCbCr_GenerateConversion(kvImage_ARGBToYpCbCrMatrix_ITU_R_601_4, &pixelRange, &outInfo, kvImageARGB8888, kvImage422YpCbYpCr8, flags);
+ 
+ 
+     If we want to define our own conversion coefficents, then we can do
+ 
+     vImage_ARGBToYpCbCrMatrix matrix;;
+     vImage_YpCbCrPixelRange pixelRange;
+ 
+     matrix.R_Yp          =  0.2989f;
+     matrix.G_Yp          =  0.5866f;
+     matrix.B_Yp          =  0.1144f;
+     matrix.R_Cb          = -0.1688f;
+     matrix.G_Cb          = -0.3312f;
+     matrix.B_Cb_R_Cr     =  0.5f;
+     matrix.G_Cr          = -0.4183f;
+     matrix.B_Cr          = -0.0816f;
+     pixelRange.Yp_bias         =   16;     // encoding for Y' = 0.0
+     pixelRange.CbCr_bias       =  128;     // encoding for CbCr = 0.0
+     pixelRange.YpRangeMax      =  235;     // encoding for Y'= 1.0
+     pixelRange.CbCrRangeMax    =  240;     // encoding for CbCr = 0.5
+     pixelRange.YpMax           =  255;     // a clamping limit above which the value is not allowed to go. 255 is fastest. Use pixelRange.YpRangeMax if you don't want Y' > 1.
+     pixelRange.YpMin           =    0;     // a clamping limit below which the value is not allowed to go. 0 is fastest. Use pixelRange.Yp_bias if you don't want Y' < 0.
+     pixelRange.CbCrMax         =  255;     // a clamping limit above which the value is not allowed to go. 255 is fastest.  Use pixelRange.CbCrRangeMax, if you don't want CbCr > 0.5
+     pixelRange.CbCrMin         =    0;     // a clamping limit above which the value is not allowed to go. 0 is fastest.  Use (2*pixelRange.CbCr_bias - pixelRange.CbCrRangeMax), if you don't want CbCr < -0.5
+ 
+     err = vImageConvert_ARGBToYpCbCr_GenerateConversion(&matrix, &pixelRange, &outInfo, kvImageARGB8888, kvImage422YpCbYpCr8, flags);
+ 
+ 
+     vImage_ARGBToYpCbCr created may be reused multiple times from multiple threads concurrently.
+ 
+     Here are the conversions available currently.
+     
+             RGB8   RGB16Q12    RGB16
+     YUV8     Y        N          N
+     YUV10    Y        Y          N
+     YUV12    Y        Y          N
+     YUV14    Y        N          Y
+     YUV16    Y        N          Y
+ @/textblock </pre>
+ 
+     @return
+     <pre> @textblock
+     kvImageNoError                  Is returned when there was no error.
+     kvImageUnknownFlagsBit          Is returned when there is a unknown flag.
+     kvImageUnsupportedConversion    Is returned when there is no conversion in vImage for inARGBType & outYpCbCrType.
+     @/textblock </pre>
+*/
+    
+vImage_Error vImageConvert_ARGBToYpCbCr_GenerateConversion(const vImage_ARGBToYpCbCrMatrix *matrix, const vImage_YpCbCrPixelRange *pixelRange, vImage_ARGBToYpCbCr *outInfo, vImageARGBType inARGBType, vImageYpCbCrType outYpCbCrType, vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+    
+    
+/*!
+     @function vImageConvert_422YpCbYpCr8ToARGB8888
+     
+     @abstract Convert YUV 422YpCbYpCr8 format to ARGB8888
+     
+     @param src
+     A pointer to vImage_Buffer that references YUV 422YpCbYpCr8 source pixels.
+     
+     @param dest
+     A pointer to vImage_Buffer that references 8-bit ARGB interleaved destination pixels.
+     
+     @param info
+     A pointer to vImage_YpCbCrToRGBConversionInfo which contains info coeffcient and preBias values.
+     
+     @param permuteMap
+     Values that can be used to switch the channel order of dest.
+     For exmaple, permuteMap[4] = {0, 1, 2, 3} or NULL are ARGB8888.
+     permuteMap[4] = {3, 2, 1, 0} is BGRA8888.
+     Any order of permuteMap is allowed when each permuteMap value is 0, 1, 2, or 3.
+     
+     @param alpha
+     A value for alpha channel in dest.
+     
+     @param flags
+ <pre> @textblock
+     kvImageGetTempBufferSize    Returns 0. Does no work.
+     kvImageDoNotTile            Disables internal multithreading, if any.
+  @/textblock </pre>     
+ 
+     @discussion Convert YUV 422YpCbYpCr8 format to ARGB8888
+     
+     
+     Yp0 Cb0 Yp1 Cr0  =>  A0 R0 G0 B0  A1 R1 G1 B1
+     
+     
+     YUV 422YpCbYpCr8 can be used for 'yuvs' and 'yuvf' that are defined in CVPixelBuffer.h.
+ 
+     For example, if we want to use this function to convert ARGB8888 to 'yuvs' with ITU 601 video range, then we need
+     generate vImage_YpCbCrToARGB by vImageConvert_YpCbCrToARGB_GenerateConversion().
+ 
+     Yp_bias, CbCr_bias, CbCr_bias, Yp, Cr_R, Cb_G, Cr_G, and Cb_B are calculated and converted into the right
+     format by vImageConvert_YpCbCrToARGB_GenerateConversion() inside of vImage_YpCbCrToARGB.
+ 
+ 
+     The per-pixel operation is:
+     
+     <pre>
+     @textblock
+     uint8_t *srcPixel = src.data;
+     Yp0 = srcPixel[0];
+     Cb0 = srcPixel[1];
+     Yp1 = srcPixel[2];
+     Cr0 = srcPixel[3];
+     srcPixel += 4;
+     
+     A0 = alpha
+     R0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp0 - Yp_bias) * Yp                            + (Cr0 - CbCr_bias) * Cr_R), 255 )
+     G0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp0 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_G + (Cr0 - CbCr_bias) * Cr_G), 255 )
+     B0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp0 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_B                              ), 255 )
+     A1 = alpha
+     R1 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp1 - Yp_bias) * Yp                            + (Cr0 - CbCr_bias) * Cr_R), 255 )
+     G1 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp1 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_G + (Cr0 - CbCr_bias) * Cr_G), 255 )
+     B1 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp1 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_B                              ), 255 )
+     
+     uint8_t ARGB[8];
+     ARGB[0] = A0;
+     ARGB[1] = R0;
+     ARGB[2] = G0;
+     ARGB[3] = B0;
+     ARGB[4] = A1;
+     ARGB[5] = R1;
+     ARGB[6] = G1;
+     ARGB[7] = B1;
+     
+     uint8_t *destPixel = dest.data;
+     destPixel[0] = ARGB[permuteMap[0]];
+     destPixel[1] = ARGB[permuteMap[1]];
+     destPixel[2] = ARGB[permuteMap[2]];
+     destPixel[3] = ARGB[permuteMap[3]];
+     destPixel[4] = ARGB[permuteMap[0]+4];
+     destPixel[5] = ARGB[permuteMap[1]+4];
+     destPixel[6] = ARGB[permuteMap[2]+4];
+     destPixel[7] = ARGB[permuteMap[3]+4];
+     destPixel += 8;
+     @/textblock
+     </pre>
+ 
+    @return
+    <pre> @textblock
+     kvImageNoError                  Is returned when there was no error.
+     kvImageUnknownFlagsBit          Is returned when there is a unknown flag.
+     kvImageRoiLargerThanInputBuffer Is returned when src.width < dest.width || src.height < dest.height
+    @/textblock </pre>
+ 
+     Results are guaranteed to be faithfully rounded.
+*/
+    
+/*! @functiongroup 422YpCbYpCr8 ('yuvs' and 'yuvf') */
+    
+vImage_Error vImageConvert_422YpCbYpCr8ToARGB8888(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_YpCbCrToARGB *info, const uint8_t permuteMap[4], const uint8_t alpha, vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+    
+/*!
+     @function vImageConvert_ARGB8888To422YpCbYpCr8
+     
+     @abstract Convert ARGB8888 to YUV 422YpCbYpCr8 format.
+     
+     @param src
+     A pointer to vImage_Buffer that references 8-bit ARGB interleaved source pixels.
+     
+     @param dest
+     A pointer to vImage_Buffer that references YUV 422YpCbYpCr8 destination pixels.
+     
+     @param info
+     A pointer to vImage_RGBToYpCbCrConversionInfo which contains info coeffcient and postBias values.
+     
+     @param permuteMap
+     Values that can be used to switch the channel order of dest.
+     For exmaple, permuteMap[4] = {0, 1, 2, 3} or NULL are ARGB8888.
+     permuteMap[4] = {3, 2, 1, 0} is BGRA8888.
+     Any order of permuteMap is allowed when each permuteMap value is 0, 1, 2, or 3, as long as each channel appears only once.
+ 
+     @param flags
+ <pre> @textblock
+     kvImageGetTempBufferSize    Returns 0. Does no work.
+     kvImageDoNotTile            Disables internal multithreading, if any.
+  @/textblock </pre>     
+     @discussion Convert ARGB8888 to YUV 422YpCbYpCr8 format
+     
+     A0 R0 G0 B0  A1 R1 G1 B1 => Yp0 Cb0 Yp1 Cr0
+     
+ 
+     YUV 422YpCbYpCr8 can be used for 'yuvs' and 'yuvf' that are defined in CVPixelBuffer.h.
+     
+     For example, if we want to use this function to convert ARGB8888 to 'yuvs' with ITU 601 video range, then we need
+     generate vImage_ARGBToYpCbCr by vImageConvert_ARGBToYpCbCr_GenerateConversion() and call this function.
+ 
+     Yp_bias, CbCr_bias, CbCr_bias, R_Yp, G_Yp, B_Yp, R_Cb, G_Cb, B_Cb_R_Cr, G_Cr and B_Cr are calculated and
+     converted into the right format by vImageConvert_ARGBToYpCbCr_GenerateConversion() inside of vImage_ARGBToYpCbCr.
+ 
+     The per-pixel operation is:
+     
+ <pre>
+ @textblock
+     uint8_t *srcPixel = src.data;
+     A0 = srcPixel[permuteMap[0]];
+     R0 = srcPixel[permuteMap[1]];
+     G0 = srcPixel[permuteMap[2]];
+     B0 = srcPixel[permuteMap[3]];
+     srcPixel += 4;
+     A1 = srcPixel[permuteMap[0]];
+     R1 = srcPixel[permuteMap[1]];
+     G1 = srcPixel[permuteMap[2]];
+     B1 = srcPixel[permuteMap[3]];
+     srcPixel += 4;
+     
+     Yp0 = ROUND_TO_NEAREST_INTEGER( Yp_bias   +   R0 * R_Yp      + G0 * G_Yp + B0 * B_Yp     )
+     Yp1 = ROUND_TO_NEAREST_INTEGER( Yp_bias   +   R1 * R_Yp      + G1 * G_Yp + B1 * B_Yp     )
+     Cb0 = ROUND_TO_NEAREST_INTEGER( CbCr_bias + ( R0 * R_Cb      + G0 * G_Cb + B0 * B_Cb_R_Cr
+                                                   +   R1 * R_Cb      + G1 * G_Cb + B1 * B_Cb_R_Cr) / 2 )
+     Cr0 = ROUND_TO_NEAREST_INTEGER( CbCr_bias + ( R0 * B_Cb_R_Cr + G0 * G_Cr + B0 * B_Cr
+                                                   +   R1 * B_Cb_R_Cr + G1 * G_Cr + B1 * B_Cr     ) / 2 )
+     
+     uint8_t *destPixel = dest.data;
+     destPixel[0] = Yp0;
+     destPixel[1] = Cb0;
+     destPixel[2] = Yp1;
+     destPixel[3] = Cr0;
+     destPixel += 4;
+ @/textblock
+ </pre>
+
+@return 
+ <pre>
+ @textblock
+ 
+     kvImageNoError                  Is returned when there was no error.
+     kvImageUnknownFlagsBit          Is returned when there is a unknown flag.
+     kvImageRoiLargerThanInputBuffer Is returned when src.width < dest.width || src.height < dest.height
+@/textblock
+ </pre>
+ 
+     Results are guaranteed to be faithfully rounded.
+     Chroma is sampled at center by default.
+*/
+    
+vImage_Error vImageConvert_ARGB8888To422YpCbYpCr8(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_ARGBToYpCbCr *info, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+
+    
+/*! @functiongroup 422CbYpCrYp8 ('2vuy' and '2vuf') */
+
+/*!
+     @function vImageConvert_422CbYpCrYp8ToARGB8888
+ 
+     @abstract Convert YUV 422CbYpCrYp8 format to ARGB8888
+ 
+     @param src
+     A pointer to vImage_Buffer that references YUV 422CbYpCrYp8 source pixels.
+ 
+     @param dest
+     A pointer to vImage_Buffer that references 8-bit ARGB interleaved destination pixels.
+ 
+     @param info
+     A pointer to vImage_YpCbCrToRGBConversionInfo which contains info coeffcient and preBias values.
+     
+     @param permuteMap
+     Values that can be used to switch the channel order of dest.
+     For exmaple, permuteMap[4] = {0, 1, 2, 3} or NULL are ARGB8888.
+     permuteMap[4] = {3, 2, 1, 0} is BGRA8888.
+     Any order of permuteMap is allowed when each permuteMap value is 0, 1, 2, or 3.
+ 
+     @param alpha
+     A value for alpha channel in dest.
+     
+     @param flags
+ <pre> @textblock
+     kvImageGetTempBufferSize    Returns 0. Does no work.
+     kvImageDoNotTile            Disables internal multithreading, if any.
+  @/textblock </pre>     
+     @discussion Convert YUV 422CbYpCrYp8 format to ARGB8888
+     
+     
+     Cb0 Yp0 Cr0 Yp1  =>  A0 R0 G0 B0  A1 R1 G1 B1
+     
+     
+     YUV 422CbYpCrYp8 can be used for '2vuy' and '2vuf' that are defined in CVPixelBuffer.h.
+ 
+     For example, if we want to use this function to convert '2vuy' with ITU 601 video range to ARGB8888, then we need 
+     generate vImage_YpCbCrToARGB by vImageConvert_YpCbCrToARGB_GenerateConversion() and call this function.
+ 
+     Yp_bias, CbCr_bias, CbCr_bias, Yp, Cr_R, Cb_G, Cr_G, and Cb_B are calculated and converted into the right
+     format by vImageConvert_YpCbCrToARGB_GenerateConversion() inside of vImage_YpCbCrToARGB.
+ 
+     
+     The per-pixel operation is:
+     
+     <pre>
+     @textblock
+     uint8_t *srcPixel = src.data;
+     Cb0 = srcPixel[0];
+     Yp0 = srcPixel[1];
+     Cr0 = srcPixel[2];
+     Yp1 = srcPixel[3];
+     srcPixel += 4;
+     
+     A0 = alpha
+     R0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp0 - Yp_bias) * Yp                            + (Cr0 - CbCr_bias) * Cr_R), 255 )
+     G0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp0 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_G + (Cr0 - CbCr_bias) * Cr_G), 255 )
+     B0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp0 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_B                           ), 255 )
+     A1 = alpha
+     R1 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp1 - Yp_bias) * Yp                            + (Cr0 - CbCr_bias) * Cr_R), 255 )
+     G1 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp1 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_G + (Cr0 - CbCr_bias) * Cr_G), 255 )
+     B1 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp1 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_B                            ), 255 )
+     
+     uint8_t ARGB[8];
+     ARGB[0] = A0;
+     ARGB[1] = R0;
+     ARGB[2] = G0;
+     ARGB[3] = B0;
+     ARGB[4] = A1;
+     ARGB[5] = R1;
+     ARGB[6] = G1;
+     ARGB[7] = B1;
+     
+     uint8_t *destPixel = dest.data;
+     destPixel[0] = ARGB[permuteMap[0]];
+     destPixel[1] = ARGB[permuteMap[1]];
+     destPixel[2] = ARGB[permuteMap[2]];
+     destPixel[3] = ARGB[permuteMap[3]];
+     destPixel[4] = ARGB[permuteMap[0]+4];
+     destPixel[5] = ARGB[permuteMap[1]+4];
+     destPixel[6] = ARGB[permuteMap[2]+4];
+     destPixel[7] = ARGB[permuteMap[3]+4];
+     destPixel += 8;
+ @/textblock
+ </pre>
+ 
+ @return
+   <pre>
+   @textblock
+     kvImageNoError                  Is returned when there was no error.
+     kvImageUnknownFlagsBit          Is returned when there is a unknown flag.
+     kvImageRoiLargerThanInputBuffer Is returned when src.width < dest.width || src.height < dest.height
+   @/textblock
+   </pre>
+ 
+     Note: Results are guaranteed to be faithfully rounded.
+*/
+vImage_Error vImageConvert_422CbYpCrYp8ToARGB8888(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_YpCbCrToARGB *info, const uint8_t permuteMap[4], const uint8_t alpha, vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+    
+    
+/*!
+     @function vImageConvert_ARGB8888To422CbYpCrYp8
+     
+     @abstract Convert ARGB8888 to YUV 422CbYpCrYp8 format
+     
+     @param src
+     A pointer to vImage_Buffer that references 8-bit ARGB interleaved source pixels.
+     
+     @param dest
+     A pointer to vImage_Buffer that references YUV 422CbYpCrYp8 destination pixels.
+     
+     @param info
+     A pointer to vImage_RGBToYpCbCrConversionInfo which contains info coeffcient and postBias values.
+     
+     @param permuteMap
+     Values that can be used to switch the channel order of dest.
+     For exmaple, permuteMap[4] = {0, 1, 2, 3} or NULL are ARGB8888.
+     permuteMap[4] = {3, 2, 1, 0} is BGRA8888.
+     Any order of permuteMap is allowed when each permuteMap value is 0, 1, 2, or 3, as long as each channel appears only once in the ordering.
+ 
+     @param flags
+ <pre> @textblock
+     kvImageGetTempBufferSize    Returns 0. Does no work.
+     kvImageDoNotTile            Disables internal multithreading, if any.
+  @/textblock </pre>     
+     @discussion Convert ARGB8888 to YUV 422CbYpCrYp8 format. Can be used for 2vuy.
+     
+     
+     A0 R0 G0 B0  A1 R1 G1 B1 => Cb0 Yp0 Cr0 Yp1
+     
+     
+     YUV 422CbYpCrYp8 can be used for '2vuy' and '2vuf' that are defined in CVPixelBuffer.h.
+ 
+     For example, if we want to use this function to convert ARGB8888 to '2vuy' with ITU 601 video range, then we need
+     generate vImage_ARGBToYpCbCr by vImageConvert_ARGBToYpCbCr_GenerateConversion() and call this function.
+ 
+     Yp_bias, CbCr_bias, CbCr_bias, R_Yp, G_Yp, B_Yp, R_Cb, G_Cb, B_Cb_R_Cr, G_Cr and B_Cr are calculated and
+     converted into the right format by vImageConvert_ARGBToYpCbCr_GenerateConversion() inside of vImage_ARGBToYpCbCr.
+ 
+ 
+     The per-pixel operation is:
+     
+ <pre>
+ @textblock
+     uint8_t *srcPixel = src.data;
+     A0 = srcPixel[permuteMap[0]];
+     R0 = srcPixel[permuteMap[1]];
+     G0 = srcPixel[permuteMap[2]];
+     B0 = srcPixel[permuteMap[3]];
+     srcPixel += 4;
+     A1 = srcPixel[permuteMap[0]];
+     R1 = srcPixel[permuteMap[1]];
+     G1 = srcPixel[permuteMap[2]];
+     B1 = srcPixel[permuteMap[3]];
+     srcPixel += 4;
+     
+     Yp0 = ROUND_TO_NEAREST_INTEGER( Yp_bias   +   R0 * R_Yp      + G0 * G_Yp + B0 * B_Yp     )
+     Yp1 = ROUND_TO_NEAREST_INTEGER( Yp_bias   +   R1 * R_Yp      + G1 * G_Yp + B1 * B_Yp     )
+     Cb0 = ROUND_TO_NEAREST_INTEGER( CbCr_bias + ( R0 * R_Cb      + G0 * G_Cb + B0 * B_Cb_R_Cr
+                                                   +   R1 * R_Cb      + G1 * G_Cb + B1 * B_Cb_R_Cr) / 2 )
+     Cr0 = ROUND_TO_NEAREST_INTEGER( CbCr_bias + ( R0 * B_Cb_R_Cr + G0 * G_Cr + B0 * B_Cr
+                                                   +   R1 * B_Cb_R_Cr + G1 * G_Cr + B1 * B_Cr     ) / 2 )
+     
+     uint8_t *destPixel = dest.data;
+     destPixel[0] = Cb0;
+     destPixel[1] = Yp0;
+     destPixel[2] = Cr0;
+     destPixel[3] = Yp1;
+     destPixel += 4;
+ @/textblock
+ </pre>
+ 
+ @return
+ <pre>
+ @textblock
+     kvImageNoError                  Is returned when there was no error.
+     kvImageUnknownFlagsBit          Is returned when there is a unknown flag.
+     kvImageRoiLargerThanInputBuffer Is returned when src.width < dest.width || src.height < dest.height
+ @/textblock
+ </pre>
+ 
+     Results are guaranteed to be faithfully rounded.
+     Chroma is sampled at center by default.
+*/
+    
+    
+vImage_Error vImageConvert_ARGB8888To422CbYpCrYp8(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_ARGBToYpCbCr *info, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+    
+/*! @functiongroup 422CbYpCrYp8_AA8 ('a2vy') */
+
+/*!
+     @function vImageConvert_422CbYpCrYp8_AA8ToARGB8888
+     
+     @abstract Convert YUV 422CbYpCrYp8_AA8 format to ARGB8888
+     
+     @param src
+     A pointer to vImage_Buffer that references YUV 422CbYpCrYp8_AA8 source pixels.
+ 
+     @param srcA
+     A pointer to vImage_Buffer that references 8-bit alpha source pixels.
+ 
+     @param dest
+     A pointer to vImage_Buffer that references 8-bit ARGB interleaved destination pixels.
+     
+     @param info
+     A pointer to vImage_YpCbCrToRGBConversionInfo which contains info coeffcient and preBias values.
+     
+     @param permuteMap
+     Values that can be used to switch the channel order of dest.
+     For exmaple, permuteMap[4] = {0, 1, 2, 3} or NULL are ARGB8888.
+     permuteMap[4] = {3, 2, 1, 0} is BGRA8888.
+     Any order of permuteMap is allowed when each permuteMap value is 0, 1, 2, or 3.
+ 
+     @param alpha
+     A value for alpha channel in dest.
+     
+     @param flags
+ <pre> @textblock
+     kvImageGetTempBufferSize    Returns 0. Does no work.
+     kvImageDoNotTile            Disables internal multithreading, if any.
+  @/textblock </pre>     
+     @discussion Convert YUV 422CbYpCrYp8_AA8 format to ARGB8888
+     
+     
+     Cb0 Yp0 Cr0 Yp1  =>  A0 R0 G0 B0  A1 R1 G1 B1
+ 
+     A0 A1
+     
+     
+     YUV 422CbYpCrYp8_AA8 can be used for 'a2vy' that is defined in CVPixelBuffer.h.
+ 
+     For example, if we want to use this function to convert 'a2vy' with ITU 601 video range to ARGB8888, then we need
+     generate vImage_YpCbCrToARGB by vImageConvert_YpCbCrToARGB_GenerateConversion() and call this function.
+ 
+     Yp_bias, CbCr_bias, CbCr_bias, Yp, Cr_R, Cb_G, Cr_G, and Cb_B are calculated and converted into the right
+     format by vImageConvert_YpCbCrToARGB_GenerateConversion() inside of vImage_YpCbCrToARGB.
+ 
+ 
+     The per-pixel operation is:
+     
+ <pre>
+ @textblock
+     uint8_t *srcPixel = src.data;
+     Cb0 = srcPixel[0];
+     Yp0 = srcPixel[1];
+     Cr0 = srcPixel[2];
+     Yp1 = srcPixel[3];
+     srcPixel += 4;
+ 
+     uint8_t *alpha = srcA.data;
+     A0 = alpha[0];
+     A1 = alpha[1];
+     alpha += 2;
+     
+     R0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp0 - Yp_bias) * Yp                            + (Cr0 - CbCr_bias) * Cr_R), 255 )
+     G0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp0 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_G + (Cr0 - CbCr_bias) * Cr_G), 255 )
+     B0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp0 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_B                           ), 255 )
+     R1 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp1 - Yp_bias) * Yp                            + (Cr0 - CbCr_bias) * Cr_R), 255 )
+     G1 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp1 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_G + (Cr0 - CbCr_bias) * Cr_G), 255 )
+     B1 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp1 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_B                           ), 255 )
+     
+     uint8_t ARGB[8];
+     ARGB[0] = A0;
+     ARGB[1] = R0;
+     ARGB[2] = G0;
+     ARGB[3] = B0;
+     ARGB[4] = A1;
+     ARGB[5] = R1;
+     ARGB[6] = G1;
+     ARGB[7] = B1;
+     
+     uint8_t *destPixel = dest.data;
+     destPixel[0] = ARGB[permuteMap[0]];
+     destPixel[1] = ARGB[permuteMap[1]];
+     destPixel[2] = ARGB[permuteMap[2]];
+     destPixel[3] = ARGB[permuteMap[3]];
+     destPixel[4] = ARGB[permuteMap[0]+4];
+     destPixel[5] = ARGB[permuteMap[1]+4];
+     destPixel[6] = ARGB[permuteMap[2]+4];
+     destPixel[7] = ARGB[permuteMap[3]+4];
+     destPixel += 8;
+ @/textblock
+ </pre>
+ 
+ @return 
+    <pre>
+    @textblock
+     kvImageNoError                  Is returned when there was no error.
+     kvImageUnknownFlagsBit          Is returned when there is a unknown flag.
+     kvImageRoiLargerThanInputBuffer Is returned when src.width < dest.width || src.height < dest.height
+    @/textblock
+    </pre>
+ 
+    Results are guaranteed to be faithfully rounded.
+*/
+    
+vImage_Error vImageConvert_422CbYpCrYp8_AA8ToARGB8888(const vImage_Buffer *src, const vImage_Buffer *srcA, const vImage_Buffer *dest, const vImage_YpCbCrToARGB *info, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2,3,4) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+    
+/*!
+     @function vImageConvert_ARGB8888To422CbYpCrYp8_AA8
+     
+     @abstract Convert ARGB8888 to YUV 422CbYpCrYp8_AA8 format
+     
+     @param src
+     A pointer to vImage_Buffer that references 8-bit ARGB interleaved source pixels.
+     
+     @param dest
+     A pointer to vImage_Buffer that references YUV 422CbYpCrYp8_AA8 destination pixels.
+     
+     @param info
+     A pointer to vImage_RGBToYpCbCrConversionInfo which contains info coeffcient and postBias values.
+     
+     @param permuteMap
+     Values that can be used to switch the channel order of dest.
+     For exmaple, permuteMap[4] = {0, 1, 2, 3} or NULL are ARGB8888.
+     permuteMap[4] = {3, 2, 1, 0} is BGRA8888.
+     Any order of permuteMap is allowed when each permuteMap value is 0, 1, 2, or 3, as long as each channel appears exactly once.
+ 
+     @param flags
+ <pre> @textblock
+     kvImageGetTempBufferSize    Returns 0. Does no work.
+     kvImageDoNotTile            Disables internal multithreading, if any.
+  @/textblock </pre>     
+     @discussion Convert ARGB8888 to YUV 422CbYpCrYp8_AA8 format
+     
+     
+     A0 R0 G0 B0  A1 R1 G1 B1 => Cb0 Yp0 Cr0 Yp1
+ 
+                                 A0 A1
+     
+ 
+     For example, if we want to use this function to convert ARGB8888 to 'a2vy' with ITU 601 video range, then we need
+     generate vImage_ARGBToYpCbCr by vImageConvert_ARGBToYpCbCr_GenerateConversion() and call this function.
+ 
+     Yp_bias, CbCr_bias, CbCr_bias, R_Yp, G_Yp, B_Yp, R_Cb, G_Cb, B_Cb_R_Cr, G_Cr and B_Cr are calculated and
+     converted into the right format by vImageConvert_ARGBToYpCbCr_GenerateConversion() inside of vImage_ARGBToYpCbCr.
+ 
+     The per-pixel operation is:
+     
+     <pre>
+     @textblock
+ 
+     uint8_t *srcPixel = src.data;
+     A0 = srcPixel[permuteMap[0]];
+     R0 = srcPixel[permuteMap[1]];
+     G0 = srcPixel[permuteMap[2]];
+     B0 = srcPixel[permuteMap[3]];
+     srcPixel += 4;
+     A1 = srcPixel[permuteMap[0]];
+     R1 = srcPixel[permuteMap[1]];
+     G1 = srcPixel[permuteMap[2]];
+     B1 = srcPixel[permuteMap[3]];
+     srcPixel += 4;
+     
+     Yp0 = ROUND_TO_NEAREST_INTEGER( Yp_bias   +   R0 * R_Yp      + G0 * G_Yp + B0 * B_Yp     )
+     Yp1 = ROUND_TO_NEAREST_INTEGER( Yp_bias   +   R1 * R_Yp      + G1 * G_Yp + B1 * B_Yp     )
+     Cb0 = ROUND_TO_NEAREST_INTEGER( CbCr_bias + ( R0 * R_Cb      + G0 * G_Cb + B0 * B_Cb_R_Cr
+                                                   +   R1 * R_Cb      + G1 * G_Cb + B1 * B_Cb_R_Cr) / 2 )
+     Cr0 = ROUND_TO_NEAREST_INTEGER( CbCr_bias + ( R0 * B_Cb_R_Cr + G0 * G_Cr + B0 * B_Cr
+                                                   +   R1 * B_Cb_R_Cr + G1 * G_Cr + B1 * B_Cr     ) / 2 )
+     
+     uint8_t *destPixel = dest.data;
+     destPixel[0] = Cb0;
+     destPixel[1] = Yp0;
+     destPixel[2] = Cr0;
+     destPixel[3] = Yp1;
+     destPixel += 4;
+ 
+     uint8_t *alpha = destA.data;
+     alpha[0] = A0;
+     alpha[1] = A1;
+     alpha += 2;
+ 
+     @/textblock
+     </pre>
+     
+    @return
+     <pre>
+     @textblock
+     kvImageNoError                  Is returned when there was no error.
+     kvImageUnknownFlagsBit          Is returned when there is a unknown flag.
+     kvImageRoiLargerThanInputBuffer Is returned when src.width < dest.width || src.height < dest.height
+    @/textblock
+    <pre>
+ 
+     Results are guaranteed to be faithfully rounded.
+     Chroma is sampled at center by default.
+*/
+    
+vImage_Error vImageConvert_ARGB8888To422CbYpCrYp8_AA8(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_Buffer *destA, const vImage_ARGBToYpCbCr *info, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2,3,4) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+    
+/*! @functiongroup 444AYpCbCr8 ('r408' and 'y408') */
+    
+/*!
+     @function vImageConvert_444AYpCbCr8ToARGB8888
+     
+     @abstract Convert YUV 444AYpCbCr8 format to ARGB8888
+     
+     @param src
+     A pointer to vImage_Buffer that references YUV 444AYpCbCr8 source pixels.
+     
+     @param dest
+     A pointer to vImage_Buffer that references 8-bit ARGB interleaved destination pixels.
+     
+     @param info
+     A pointer to vImage_YpCbCrToRGBConversionInfo which contains info coeffcient and preBias values.
+     
+     @param permuteMap
+     Values that can be used to switch the channel order of dest.
+     For exmaple, permuteMap[4] = {0, 1, 2, 3} or NULL are ARGB8888.
+     permuteMap[4] = {3, 2, 1, 0} is BGRA8888.
+     Any order of permuteMap is allowed when each permuteMap value is 0, 1, 2, or 3.
+ 
+     @param flags
+ <pre> @textblock
+     kvImageGetTempBufferSize    Returns 0. Does no work.
+     kvImageDoNotTile            Disables internal multithreading, if any.
+  @/textblock </pre>     
+     @discussion Convert YUV 444AYpCbCr8 format to ARGB8888
+     
+     
+     A0 Yp0 Cb0 Cr0  =>  A0 R0 G0 B0
+ 
+ 
+     YUV 444AYpCbCr8 can be used for 'r408' and 'y408' that are defined in CVPixelBuffer.h.
+ 
+     For example, if we want to use this function to convert 'y408' with ITU 601 video range to ARGB8888, then we need
+     generate vImage_YpCbCrToARGB by vImageConvert_YpCbCrToARGB_GenerateConversion() and call this function.
+ 
+     Yp_bias, CbCr_bias, CbCr_bias, Yp, Cr_R, Cb_G, Cr_G, and Cb_B are calculated and converted into the right
+     format by vImageConvert_YpCbCrToARGB_GenerateConversion() inside of vImage_YpCbCrToARGB.
+ 
+ 
+     The per-pixel operation is:
+     
+    <pre>
+    @textblock
+ 
+     uint8_t *srcPixel = src.data;
+     A0  = srcPixel[0];
+     Yp0 = srcPixel[1];
+     Cb0 = srcPixel[2];
+     Cr0 = srcPixel[3];
+     srcPixel += 4;
+ 
+     R0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp0 - Yp_bias) * Yp                            + (Cr0 - CbCr_bias) * Cr_R), 255 )
+     G0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp0 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_G + (Cr0 - CbCr_bias) * Cr_G), 255 )
+     B0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp0 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_B                           ), 255 )
+ 
+     uint8_t ARGB[4];
+     ARGB[0] = A0;
+     ARGB[1] = R0;
+     ARGB[2] = G0;
+     ARGB[3] = B0;
+ 
+     uint8_t *destPixel = dest.data;
+     destPixel[0] = ARGB[permuteMap[0]];
+     destPixel[1] = ARGB[permuteMap[1]];
+     destPixel[2] = ARGB[permuteMap[2]];
+     destPixel[3] = ARGB[permuteMap[3]];
+     destPixel += 4;
+     
+    @/textblock
+    <pre>
+ 
+    @return
+    <pre>
+    @textblock
+     kvImageNoError                  Is returned when there was no error.
+     kvImageUnknownFlagsBit          Is returned when there is a unknown flag.
+     kvImageRoiLargerThanInputBuffer Is returned when src.width < dest.width || src.height < dest.height
+    @/textblock
+    </pre>
+ 
+     Results are guaranteed to be faithfully rounded.
+     This function can work in place.
+*/
+    
+vImage_Error vImageConvert_444AYpCbCr8ToARGB8888(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_YpCbCrToARGB *info, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+    
+/*!
+     @function vImageConvert_ARGB8888To444AYpCbCr8
+     
+     @abstract Convert ARGB8888 to YUV 444AYpCbCr8 format
+     
+     @param src
+     A pointer to vImage_Buffer that references 8-bit ARGB interleaved source pixels.
+     
+     @param dest
+     A pointer to vImage_Buffer that references YUV 444AYpCbCr8 destination pixels.
+     
+     @param info
+     A pointer to vImage_RGBToYpCbCrConversionInfo which contains info coeffcient and postBias values.
+     
+     @param permuteMap
+     Values that can be used to switch the channel order of dest.
+     For exmaple, permuteMap[4] = {0, 1, 2, 3} or NULL are ARGB8888.
+     permuteMap[4] = {3, 2, 1, 0} is BGRA8888.
+     Any order of permuteMap is allowed when each permuteMap value is 0, 1, 2, or 3, as long as each channel appears exactly once.
+ 
+     @param flags
+ <pre> @textblock
+     kvImageGetTempBufferSize    Returns 0. Does no work.
+     kvImageDoNotTile            Disables internal multithreading, if any.
+  @/textblock </pre>     
+     @discussion Convert ARGB8888 to YUV 444AYpCbCr8 format
+     
+     
+     A0 R0 G0 B0  =>  A0 Yp0 Cb0 Cr0
+ 
+ 
+     YUV 444AYpCbCr8 can be used for 'r408' and 'y408' that are defined in CVPixelBuffer.h.
+ 
+     For example, if we want to use this function to convert ARGB8888 to 'y408' with ITU 601 video range, then we need
+     generate vImage_ARGBToYpCbCr by vImageConvert_ARGBToYpCbCr_GenerateConversion() and call this function.
+ 
+     Yp_bias, CbCr_bias, CbCr_bias, R_Yp, G_Yp, B_Yp, R_Cb, G_Cb, B_Cb_R_Cr, G_Cr and B_Cr are calculated and
+     converted into the right format by vImageConvert_ARGBToYpCbCr_GenerateConversion() inside of vImage_ARGBToYpCbCr.
+ 
+     The per-pixel operation is:
+     
+ <pre>
+ @textblock
+     uint8_t *srcPixel = src.data;
+     A0 = srcPixel[permuteMap[0]];
+     R0 = srcPixel[permuteMap[1]];
+     G0 = srcPixel[permuteMap[2]];
+     B0 = srcPixel[permuteMap[3]];
+     srcPixel += 4;
+ 
+     Yp0 = ROUND_TO_NEAREST_INTEGER( Yp_bias   + R0 * R_Yp      + G0 * G_Yp + B0 * B_Yp     )
+     Cb0 = ROUND_TO_NEAREST_INTEGER( CbCr_bias + R0 * R_Cb      + G0 * G_Cb + B0 * B_Cb_R_Cr)
+     Cr0 = ROUND_TO_NEAREST_INTEGER( CbCr_bias + R0 * B_Cb_R_Cr + G0 * G_Cr + B0 * B_Cr     )
+ 
+     uint8_t *destPixel = dest.data;
+     destPixel[0] = A0;
+     destPixel[1] = Yp0;
+     destPixel[2] = Cb0;
+     destPixel[3] = Cr0;
+     destPixel += 4;
+ @/textblock
+ </pre>
+ 
+ 
+ @return
+   <pre>
+   @textblock
+     kvImageNoError                  Is returned when there was no error.
+     kvImageUnknownFlagsBit          Is returned when there is a unknown flag.
+     kvImageRoiLargerThanInputBuffer Is returned when src.width < dest.width || src.height < dest.height
+   @/textblock
+   <pre>
+ 
+     Results are guaranteed to be faithfully rounded.
+     This function can work in place.
+*/
+    
+vImage_Error vImageConvert_ARGB8888To444AYpCbCr8(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_ARGBToYpCbCr *info, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+    
+    
+/*! @functiongroup 444CbYpCrA8 ('v408') */
+/*!
+     @function vImageConvert_444CbYpCrA8ToARGB8888
+     
+     @abstract Convert YUV 444CbYpCrA8 format to ARGB8888
+     
+     @param src
+     A pointer to vImage_Buffer that references YUV 444CbYpCrA8 source pixels.
+     
+     @param dest
+     A pointer to vImage_Buffer that references 8-bit ARGB interleaved destination pixels.
+     
+     @param info
+     A pointer to vImage_YpCbCrToRGBConversionInfo which contains info coeffcient and preBias values.
+     
+     @param permuteMap
+     Values that can be used to switch the channel order of dest.
+     For exmaple, permuteMap[4] = {0, 1, 2, 3} or NULL are ARGB8888.
+     permuteMap[4] = {3, 2, 1, 0} is BGRA8888.
+     Any order of permuteMap is allowed when each permuteMap value is 0, 1, 2, or 3.
+ 
+     @param flags
+ <pre> @textblock
+     kvImageGetTempBufferSize    Returns 0. Does no work.
+     kvImageDoNotTile            Disables internal multithreading, if any.
+  @/textblock </pre>     
+     @discussion Convert YUV 444CbYpCrA8 format to ARGB8888
+     
+     
+     Cb0 Yp0 Cr0 A0  =>  A0 R0 G0 B0
+     
+     
+     YUV 444CbYpCrA8 can be used for 'v408' that is defined in CVPixelBuffer.h.
+     
+     For example, if we want to use this function to convert 'v408' with ITU 601 video range to ARGB8888, then we need
+     generate vImage_YpCbCrToARGB by vImageConvert_YpCbCrToARGB_GenerateConversion() and call this function.
+ 
+     Yp_bias, CbCr_bias, CbCr_bias, Yp, Cr_R, Cb_G, Cr_G, and Cb_B are calculated and converted into the right
+     format by vImageConvert_YpCbCrToARGB_GenerateConversion() inside of vImage_YpCbCrToARGB.
+ 
+ 
+     The per-pixel operation is:
+     
+   <pre> @textblock
+     uint8_t *srcPixel = src.data;
+     Cb0 = srcPixel[0];
+     Yp0 = srcPixel[1];
+     Cr0 = srcPixel[2];
+     A0  = srcPixel[3];
+     srcPixel += 4;
+     
+     R0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp0 - Yp_bias) * Yp                            + (Cr0 - CbCr_bias) * Cr_R), 255 )
+     G0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp0 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_G + (Cr0 - CbCr_bias) * Cr_G), 255 )
+     B0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp0 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_B                           ), 255 )
+     
+     uint8_t ARGB[4];
+     ARGB[0] = A0;
+     ARGB[1] = R0;
+     ARGB[2] = G0;
+     ARGB[3] = B0;
+     
+     uint8_t *destPixel = dest.data;
+     destPixel[0] = ARGB[permuteMap[0]];
+     destPixel[1] = ARGB[permuteMap[1]];
+     destPixel[2] = ARGB[permuteMap[2]];
+     destPixel[3] = ARGB[permuteMap[3]];
+     destPixel += 4;
+   @/textblock    </pre>
+ 
+ 
+ @return
+   <pre>
+   @textblock
+     kvImageNoError                  Is returned when there was no error.
+     kvImageUnknownFlagsBit          Is returned when there is a unknown flag.
+     kvImageRoiLargerThanInputBuffer Is returned when src.width < dest.width || src.height < dest.height
+   @/textblock
+   </pre>
+ 
+     Results are guaranteed to be faithfully rounded.
+     This function can work in place.
+*/
+    
+vImage_Error vImageConvert_444CbYpCrA8ToARGB8888(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_YpCbCrToARGB *info, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+    
+/*!
+     @function vImageConvert_ARGB8888To444CbYpCrA8
+     
+     @abstract Convert ARGB8888 to YUV 444CbYpCrA8 format
+     
+     @param src
+     A pointer to vImage_Buffer that references 8-bit ARGB interleaved source pixels.
+     
+     @param dest
+     A pointer to vImage_Buffer that references YUV 444CbYpCrA8 destination pixels.
+     
+     @param info
+     A pointer to vImage_RGBToYpCbCrConversionInfo which contains info coeffcient and postBias values.
+     
+     @param permuteMap
+     Values that can be used to switch the channel order of dest.
+     For exmaple, permuteMap[4] = {0, 1, 2, 3} or NULL are ARGB8888.
+     permuteMap[4] = {3, 2, 1, 0} is BGRA8888.
+     Any order of permuteMap is allowed when each permuteMap value is 0, 1, 2, or 3, provided that each channel appears only once.
+ 
+     @param flags
+ <pre> @textblock
+     kvImageGetTempBufferSize    Returns 0. Does no work.
+     kvImageDoNotTile            Disables internal multithreading, if any.
+  @/textblock </pre>     
+     @discussion Convert ARGB8888 to YUV 444CbYpCrA8 format
+     
+     
+     A0 R0 G0 B0  =>  Cb0 Yp0 Cr0 A0
+     
+     
+     YUV 444CbYpCrA8 can be used for 'v408' that is defined in CVPixelBuffer.h.
+     
+     For example, if we want to use this function to convert ARGB8888 to 'v408' with ITU 601 video range, then we need
+     generate vImage_ARGBToYpCbCr by vImageConvert_ARGBToYpCbCr_GenerateConversion() and call this function.
+ 
+     Yp_bias, CbCr_bias, CbCr_bias, R_Yp, G_Yp, B_Yp, R_Cb, G_Cb, B_Cb_R_Cr, G_Cr and B_Cr are calculated and
+     converted into the right format by vImageConvert_ARGBToYpCbCr_GenerateConversion() inside of vImage_ARGBToYpCbCr.
+ 
+     The per-pixel operation is:
+     
+ <pre> @textblock
+    uint8_t *srcPixel = src.data;
+     A0 = srcPixel[permuteMap[0]];
+     R0 = srcPixel[permuteMap[1]];
+     G0 = srcPixel[permuteMap[2]];
+     B0 = srcPixel[permuteMap[3]];
+     srcPixel += 4;
+     
+     Yp0 = ROUND_TO_NEAREST_INTEGER( Yp_bias   + R0 * R_Yp      + G0 * G_Yp + B0 * B_Yp     )
+     Cb0 = ROUND_TO_NEAREST_INTEGER( CbCr_bias + R0 * R_Cb      + G0 * G_Cb + B0 * B_Cb_R_Cr)
+     Cr0 = ROUND_TO_NEAREST_INTEGER( CbCr_bias + R0 * B_Cb_R_Cr + G0 * G_Cr + B0 * B_Cr     )
+     
+     uint8_t *destPixel = dest.data;
+     destPixel[0] = Cb0;
+     destPixel[1] = Yp0;
+     destPixel[2] = Cr0;
+     destPixel[3] = A0;
+     destPixel += 4;
+ @/textblock </pre>
+ 
+@return
+ <pre> @textblock
+     kvImageNoError                  Is returned when there was no error.
+     kvImageUnknownFlagsBit          Is returned when there is a unknown flag.
+     kvImageRoiLargerThanInputBuffer Is returned when src.width < dest.width || src.height < dest.height
+ @/textblock </pre>
+ 
+     Results are guaranteed to be faithfully rounded.
+     This function can work in place.
+*/
+    
+vImage_Error vImageConvert_ARGB8888To444CbYpCrA8(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_ARGBToYpCbCr *info, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+    
+/*! @functiongroup 444CrYpCb8 ('v308')  */
+    
+/*!
+     @function vImageConvert_444CrYpCb8ToARGB8888
+     
+     @abstract Convert YUV 444CrYpCb8 format to ARGB8888
+     
+     @param src
+     A pointer to vImage_Buffer that references YUV 444CrYpCb8 source pixels.
+     
+     @param dest
+     A pointer to vImage_Buffer that references 8-bit ARGB interleaved destination pixels.
+     
+     @param info
+     A pointer to vImage_YpCbCrToRGBConversionInfo which contains info coeffcient and preBias values.
+     
+     @param permuteMap
+     Values that can be used to switch the channel order of dest.
+     For exmaple, permuteMap[4] = {0, 1, 2, 3} or NULL are ARGB8888.
+     permuteMap[4] = {3, 2, 1, 0} is BGRA8888.
+     Any order of permuteMap is allowed when each permuteMap value is 0, 1, 2, or 3.
+ 
+     @param alpha
+     A value for alpha channel in dest.
+     
+     @param flags
+ <pre> @textblock
+     kvImageGetTempBufferSize    Returns 0. Does no work.
+     kvImageDoNotTile            Disables internal multithreading, if any.
+  @/textblock </pre>     
+     @discussion Convert YUV 444CrYpCb8 format to ARGB8888
+     
+     
+     Cr0 Yp0 Cb0  =>  A0 R0 G0 B0
+     
+     
+     YUV 444CrYpCb8 can be used for 'v308' that is defined in CVPixelBuffer.h.
+ 
+     For example, if we want to use this function to convert 'v308' with ITU 601 video range to ARGB8888, then we need
+     generate vImage_YpCbCrToARGB by vImageConvert_YpCbCrToARGB_GenerateConversion() and call this function.
+ 
+     Yp_bias, CbCr_bias, CbCr_bias, Yp, Cr_R, Cb_G, Cr_G, and Cb_B are calculated and converted into the right
+     format by vImageConvert_YpCbCrToARGB_GenerateConversion() inside of vImage_YpCbCrToARGB.
+ 
+ 
+     The per-pixel operation is:
+    <pre>
+    @textblock
+     
+     uint8_t *srcPixel = src.data;
+     Cr0 = srcPixel[0];
+     Yp0 = srcPixel[1];
+     Cb0 = srcPixel[2];
+     srcPixel += 3;
+     
+     R0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp0 - Yp_bias) * Yp                            + (Cr0 - CbCr_bias) * Cr_R), 255 )
+     G0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp0 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_G + (Cr0 - CbCr_bias) * Cr_G), 255 )
+     B0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp0 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_B                           ), 255 )
+     
+     uint8_t ARGB[4];
+     ARGB[0] = alpha;
+     ARGB[1] = R0;
+     ARGB[2] = G0;
+     ARGB[3] = B0;
+     
+     uint8_t *destPixel = dest.data;
+     destPixel[0] = ARGB[permuteMap[0]];
+     destPixel[1] = ARGB[permuteMap[1]];
+     destPixel[2] = ARGB[permuteMap[2]];
+     destPixel[3] = ARGB[permuteMap[3]];
+     destPixel += 4;
+   @/textblock
+   </pre>
+ 
+ 
+   @return
+    <pre>
+    @textblock
+     kvImageNoError                  Is returned when there was no error.
+     kvImageUnknownFlagsBit          Is returned when there is a unknown flag.
+     kvImageRoiLargerThanInputBuffer Is returned when src.width < dest.width || src.height < dest.height
+    @/textblock
+   </pre>
+ 
+     Results are guaranteed to be faithfully rounded.
+*/
+    
+vImage_Error vImageConvert_444CrYpCb8ToARGB8888(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_YpCbCrToARGB *info, const uint8_t permuteMap[4], const uint8_t alpha, vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+    
+/*!
+     @function vImageConvert_ARGB8888To444CrYpCb8
+     
+     @abstract Convert ARGB8888 to YUV 444CrYpCb8 format
+     
+     @param src
+     A pointer to vImage_Buffer that references 8-bit ARGB interleaved source pixels.
+     
+     @param dest
+     A pointer to vImage_Buffer that references YUV 444CrYpCb8 destination pixels.
+     
+     @param info
+     A pointer to vImage_RGBToYpCbCrConversionInfo which contains info coeffcient and postBias values.
+     
+     @param permuteMap
+     Values that can be used to switch the channel order of dest.
+     For exmaple, permuteMap[4] = {0, 1, 2, 3} or NULL are ARGB8888.
+     permuteMap[4] = {3, 2, 1, 0} is BGRA8888.
+     Any order of permuteMap is allowed when each permuteMap value is 0, 1, 2, or 3, provided that each channel appears only once.
+ 
+     @param flags
+ <pre> @textblock
+     kvImageGetTempBufferSize    Returns 0. Does no work.
+     kvImageDoNotTile            Disables internal multithreading, if any.
+  @/textblock </pre>     
+     @discussion Convert ARGB8888 to YUV 444CrYpCb8 format
+     
+     
+     A0 R0 G0 B0  =>  Cr0 Yp0 Cb0
+     
+     
+     YUV 444CrYpCb8 can be used for 'v308' that is defined in CVPixelBuffer.h.
+ 
+     For example, if we want to use this function to convert ARGB8888 to 'v308' with ITU 601 video range, then we need
+     generate vImage_ARGBToYpCbCr by vImageConvert_ARGBToYpCbCr_GenerateConversion() and call this function.
+ 
+     Yp_bias, CbCr_bias, CbCr_bias, R_Yp, G_Yp, B_Yp, R_Cb, G_Cb, B_Cb_R_Cr, G_Cr and B_Cr are calculated and
+     converted into the right format by vImageConvert_ARGBToYpCbCr_GenerateConversion() inside of vImage_ARGBToYpCbCr.
+ 
+ 
+     The per-pixel operation is:
+     
+ <pre>
+ @textblock
+     uint8_t *srcPixel = src.data;
+     A0 = srcPixel[permuteMap[0]];
+     R0 = srcPixel[permuteMap[1]];
+     G0 = srcPixel[permuteMap[2]];
+     B0 = srcPixel[permuteMap[3]];
+     srcPixel += 4;
+     
+     Yp0 = ROUND_TO_NEAREST_INTEGER( Yp_bias   + R0 * R_Yp      + G0 * G_Yp + B0 * B_Yp     )
+     Cb0 = ROUND_TO_NEAREST_INTEGER( CbCr_bias + R0 * R_Cb      + G0 * G_Cb + B0 * B_Cb_R_Cr)
+     Cr0 = ROUND_TO_NEAREST_INTEGER( CbCr_bias + R0 * B_Cb_R_Cr + G0 * G_Cr + B0 * B_Cr     )
+     
+     uint8_t *destPixel = dest.data;
+     destPixel[0] = Cr0;
+     destPixel[1] = Yp0;
+     destPixel[2] = Cb0;
+     destPixel += 3;
+  @/textblock
+  </pre>
+     
+  @return
+ <pre>
+ @textblock
+ 
+     kvImageNoError                  Is returned when there was no error.
+     kvImageUnknownFlagsBit          Is returned when there is a unknown flag.
+     kvImageRoiLargerThanInputBuffer Is returned when src.width < dest.width || src.height < dest.height
+ @/textblock
+ </pre>
+ 
+     Note: Results are guaranteed to be faithfully rounded.
+*/
+    
+vImage_Error vImageConvert_ARGB8888To444CrYpCb8(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_ARGBToYpCbCr *info, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+    
+/*! @functiongroup 420Yp8_Cb8_Cr8 ('y420' and 'f420') */
+    
+/*!
+     @function vImageConvert_420Yp8_Cb8_Cr8ToARGB8888
+     
+     @abstract Convert YUV 420Yp8_Cb8_Cr8 format to ARGB8888
+     
+     @param src
+     A pointer to vImage_Buffer that references YUV 420Yp8_Cb8_Cr8 source pixels.
+     
+     @param dest
+     A pointer to vImage_Buffer that references 8-bit ARGB interleaved destination pixels.
+     
+     @param info
+     A pointer to vImage_YpCbCrToRGBConversionInfo which contains info coeffcient and preBias values.
+     
+     @param permuteMap
+     Values that can be used to switch the channel order of dest.
+     For exmaple, permuteMap[4] = {0, 1, 2, 3} or NULL are ARGB8888.
+     permuteMap[4] = {3, 2, 1, 0} is BGRA8888.
+     Any order of permuteMap is allowed when each permuteMap value is 0, 1, 2, or 3.
+ 
+     @param alpha
+     A value for alpha channel in dest.
+     
+     @param flags
+ <pre> @textblock
+     kvImageGetTempBufferSize    Returns 0. Does no work.
+     kvImageDoNotTile            Disables internal multithreading, if any.
+  @/textblock </pre>     
+     @discussion Convert YUV 420Yp8_Cb8_Cr8 format to ARGB8888
+     
+     
+     Ypt0 Ypt1  =>  At0 Rt0 Gt0 Bt0  At1 Rt1 Gt1 Bt1
+ 
+     Ypb0 Ypb1      Ab0 Rb0 Gb0 Bb0  Ab1 Rb1 Gb1 Bb1
+ 
+     Cb0
+ 
+     Cr0
+     
+     
+     YUV 420Yp8_Cb8_Cr8 can be used for 'y420' and 'f420' that are defined in CVPixelBuffer.h.
+     
+     For example, if we want to use this function to convert 'y420' with ITU 601 video range to ARGB8888, then we need
+     generate vImage_YpCbCrToARGB by vImageConvert_YpCbCrToARGB_GenerateConversion() and call this function.
+ 
+     Yp_bias, CbCr_bias, CbCr_bias, Yp, Cr_R, Cb_G, Cr_G, and Cb_B are calculated and converted into the right
+     format by vImageConvert_YpCbCrToARGB_GenerateConversion() inside of vImage_YpCbCrToARGB.
+ 
+ 
+     The per-pixel operation is:
+  <pre>
+  @textblock
+     
+     uint8_t *srcYtPixel = srcY.data;
+     uint8_t *srcYbPixel = srcY.data + srcY.rowBytes;
+     Ypt0 = srcYtPixel[0];
+     Ypt1 = srcYtPixel[1];
+     srcYtPixel += 2;
+     Ypb0 = srcYbPixel[0];
+     Ypb1 = srcYbPixel[1];
+     srcYbPixel += 2;
+ 
+     uint8_t *srcCbPixel = srcCb.data;
+     uint8_t *srcCrPixel = srcCr.data;
+     Cb0 = srcCbPixel[0];
+     srcCbPixel += 1;
+     Cr0 = srcCrPixel[0];
+     srcCrPixel += 1;
+     
+     At0 = alpha
+     Rt0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Ypt0 + Yp_bias) * Yp                               + (Cr0 + CbCr_bias) * Cr_R), 255 )
+     Gt0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Ypt0 + Yp_bias) * Yp + (Cb0 + CbCr_bias) * Cb_G + (Cr0 + CbCr_bias) * Cr_G), 255 )
+     Bt0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Ypt0 + Yp_bias) * Yp + (Cb0 + CbCr_bias) * Cb_B                              ), 255 )
+     At1 = alpha
+     Rt1 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Ypt1 + Yp_bias) * Yp                               + (Cr0 + CbCr_bias) * Cr_R), 255 )
+     Gt1 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Ypt1 + Yp_bias) * Yp + (Cb0 + CbCr_bias) * Cb_G + (Cr0 + CbCr_bias) * Cr_G), 255 )
+     Bt1 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Ypt1 + Yp_bias) * Yp + (Cb0 + CbCr_bias) * Cb_B                              ), 255 )
+     Ab0 = alpha
+     Rb0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Ypb0 + Yp_bias) * Yp                               + (Cr0 + CbCr_bias) * Cr_R), 255 )
+     Gb0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Ypb0 + Yp_bias) * Yp + (Cb0 + CbCr_bias) * Cb_G + (Cr0 + CbCr_bias) * Cr_G), 255 )
+     Bb0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Ypb0 + Yp_bias) * Yp + (Cb0 + CbCr_bias) * Cb_B                              ), 255 )
+     Ab1 = alpha
+     Rb1 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Ypb1 + Yp_bias) * Yp                               + (Cr0 + CbCr_bias) * Cr_R), 255 )
+     Gb1 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Ypb1 + Yp_bias) * Yp + (Cb0 + CbCr_bias) * Cb_G + (Cr0 + CbCr_bias) * Cr_G), 255 )
+     Bb1 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Ypb1 + Yp_bias) * Yp + (Cb0 + CbCr_bias) * Cb_B                              ), 255 )
+ 
+     uint8_t ARGB[16];
+     ARGB[0]  = At0;
+     ARGB[1]  = Rt0;
+     ARGB[2]  = Gt0;
+     ARGB[3]  = Bt0;
+     ARGB[4]  = At1;
+     ARGB[5]  = Rt1;
+     ARGB[6]  = Gt1;
+     ARGB[7]  = Bt1;
+     ARGB[8]  = Ab0;
+     ARGB[9]  = Rb0;
+     ARGB[10] = Gb0;
+     ARGB[11] = Bb0;
+     ARGB[12] = Ab1;
+     ARGB[13] = Rb1;
+     ARGB[14] = Gb1;
+     ARGB[15] = Bb1;
+ 
+     uint8_t *destTPixel = dest.data;
+     destTPixel[0]  = ARGB[permuteMap[0]];
+     destTPixel[1]  = ARGB[permuteMap[1]];
+     destTPixel[2]  = ARGB[permuteMap[2]];
+     destTPixel[3]  = ARGB[permuteMap[3]];
+     destTPixel[4]  = ARGB[permuteMap[0]+4];
+     destTPixel[5]  = ARGB[permuteMap[1]+4];
+     destTPixel[6]  = ARGB[permuteMap[2]+4];
+     destTPixel[7]  = ARGB[permuteMap[3]+4];
+     destTPixel += 8;
+     uint8_t *destBPixel = dest.data + dest.rowBytes;
+     destBPixel[0]  = ARGB[permuteMap[0]+8];
+     destBPixel[1]  = ARGB[permuteMap[1]+8];
+     destBPixel[2]  = ARGB[permuteMap[2]+8];
+     destBPixel[3]  = ARGB[permuteMap[3]+8];
+     destBPixel[4]  = ARGB[permuteMap[0]+12];
+     destBPixel[5]  = ARGB[permuteMap[1]+12];
+     destBPixel[6]  = ARGB[permuteMap[2]+12];
+     destBPixel[7]  = ARGB[permuteMap[3]+12];
+     destBPixel += 8;
+ 
+   @/textblock
+   </pre>
+ 
+@return
+     kvImageNoError                  Is returned when there was no error.
+     kvImageUnknownFlagsBit          Is returned when there is a unknown flag.
+     kvImageRoiLargerThanInputBuffer Is returned when src.width < dest.width || src.height < dest.height
+ 
+     Note: Results are guaranteed to be faithfully rounded.
+*/
+    
+vImage_Error vImageConvert_420Yp8_Cb8_Cr8ToARGB8888(const vImage_Buffer *srcYp, const vImage_Buffer *srcCb, const vImage_Buffer *srcCr, const vImage_Buffer *dest, const vImage_YpCbCrToARGB *info, const uint8_t permuteMap[4], const uint8_t alpha, vImage_Flags flags) VIMAGE_NON_NULL(1,2,3,4,5) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+    
+/*!
+     @function vImageConvert_ARGB8888To420Yp8_Cb8_Cr8
+     
+     @abstract Convert ARGB8888 to YUV 420Yp8_Cb8_Cr8 format.
+     
+     @param src
+     A pointer to vImage_Buffer that references 8-bit ARGB interleaved source pixels.
+     
+     @param dest
+     A pointer to vImage_Buffer that references YUV 420Yp8_Cb8_Cr8 destination pixels.
+     
+     @param info
+     A pointer to vImage_RGBToYpCbCrConversionInfo which contains info coeffcient and postBias values.
+     
+     @param permuteMap
+     Values that can be used to switch the channel order of dest.
+     For exmaple, permuteMap[4] = {0, 1, 2, 3} or NULL are ARGB8888.
+     permuteMap[4] = {3, 2, 1, 0} is BGRA8888.
+     Any order of permuteMap is allowed when each permuteMap value is 0, 1, 2, or 3, provided that each channel appears only once.
+ 
+     @param flags
+ <pre> @textblock
+     kvImageGetTempBufferSize    Returns 0. Does no work.
+     kvImageDoNotTile            Disables internal multithreading, if any.
+  @/textblock </pre>     
+     @discussion Convert ARGB8888 to YUV 420Yp8_Cb8_Cr8 format
+     
+     
+ <pre> @textblock
+     At0 Rt0 Gt0 Bt0  At1 Rt1 Gt1 Bt1  =>  Ypt0 Ypt1
+ 
+     Ab0 Rb0 Gb0 Bb0  Ab1 Rb1 Gb1 Bb1      Ypb0 Ypb1
+ 
+                                           Cb0
+ 
+                                           Cr0
+ 
+   @/textblock </pre>
+
+     YUV 420Yp8_Cb8_Cr8 can be used for 'y420' and 'f420' that are defined in CVPixelBuffer.h.
+     
+     For example, if we want to use this function to convert ARGB8888 to 'y420' with ITU 601 video range, then we need
+     generate vImage_ARGBToYpCbCr by vImageConvert_ARGBToYpCbCr_GenerateConversion() and call this function.
+ 
+     Yp_bias, CbCr_bias, CbCr_bias, R_Yp, G_Yp, B_Yp, R_Cb, G_Cb, B_Cb_R_Cr, G_Cr and B_Cr are calculated and
+     converted into the right format by vImageConvert_ARGBToYpCbCr_GenerateConversion() inside of vImage_ARGBToYpCbCr.
+ 
+     The per-pixel operation is:
+  <pre>
+  @textblock
+     uint8_t *srcTPixel = src.data;
+     At0 = srcTPixel[permuteMap[0]];
+     Rt0 = srcTPixel[permuteMap[1]];
+     Gt0 = srcTPixel[permuteMap[2]];
+     Bt0 = srcTPixel[permuteMap[3]];
+     srcTPixel += 4;
+     At1 = srcTPixel[permuteMap[0]];
+     Rt1 = srcTPixel[permuteMap[1]];
+     Gt1 = srcTPixel[permuteMap[2]];
+     Bt1 = srcTPixel[permuteMap[3]];
+     srcTPixel += 4;
+     uint8_t *srcBPixel = src.data + src.rowBytes;
+     Ab0 = srcBPixel[permuteMap[0]];
+     Rb0 = srcBPixel[permuteMap[1]];
+     Gb0 = srcBPixel[permuteMap[2]];
+     Bb0 = srcBPixel[permuteMap[3]];
+     srcBPixel += 4;
+     Ab1 = srcBPixel[permuteMap[0]];
+     Rb1 = srcBPixel[permuteMap[1]];
+     Gb1 = srcBPixel[permuteMap[2]];
+     Bb1 = srcBPixel[permuteMap[3]];
+     srcBPixel += 4;
+ 
+     Ypt0 = ROUND_TO_NEAREST_INTEGER( Yp_bias   +   Rt0 * R_Yp      + Gt0 * G_Yp + Bt0 * B_Yp     )
+     Ypt1 = ROUND_TO_NEAREST_INTEGER( Yp_bias   +   Rt1 * R_Yp      + Gt1 * G_Yp + Bt1 * B_Yp     )
+     Ypb0 = ROUND_TO_NEAREST_INTEGER( Yp_bias   +   Rb0 * R_Yp      + Gb0 * G_Yp + Bb0 * B_Yp     )
+     Ypb1 = ROUND_TO_NEAREST_INTEGER( Yp_bias   +   Rb1 * R_Yp      + Gb1 * G_Yp + Bb1 * B_Yp     )
+     Cb0  = ROUND_TO_NEAREST_INTEGER( CbCr_bias + ( Rt0 * R_Cb      + Gt0 * G_Cb + Bt0 * B_Cb_R_Cr
+                                                    +   Rt1 * R_Cb      + Gt1 * G_Cb + Bt1 * B_Cb_R_Cr
+                                                    +   Rb0 * R_Cb      + Gb0 * G_Cb + Bb0 * B_Cb_R_Cr
+                                                    +   Rb1 * R_Cb      + Gb1 * G_Cb + Bb1 * B_Cb_R_Cr) / 4 )
+     Cr0  = ROUND_TO_NEAREST_INTEGER( CbCr_bias + ( Rt0 * B_Cb_R_Cr + Gt0 * G_Cr + Bt0 * B_Cr
+                                                    +   Rt1 * B_Cb_R_Cr + Gt1 * G_Cr + Bt1 * B_Cr
+                                                    +   Rb0 * B_Cb_R_Cr + Gb0 * G_Cr + Bb0 * B_Cr
+                                                    +   Rb1 * B_Cb_R_Cr + Gb1 * G_Cr + Bb1 * B_Cr     ) / 4 )
+     
+     uint8_t *destYptPixel = destYp.data;
+     uint8_t *destYpbPixel = destYp.data + destYp.rowBytes;
+     destYptPixel[0] = Ypt0;
+     destYptPixel[1] = Ypt1;
+     destYpbPixel[0] = Ypb0;
+     destYpbPixel[1] = Ypb1;
+     destYptPixel += 2;
+     destYpbPixel += 2;
+     
+     uint8_t *destCbPixel = destCb.data;
+     uint8_t *destCrPixel = destCr.data;
+     destCbPixel[0] = Cb0;
+     destCrPixel[0] = Cr0;
+     destCbPixel += 1;
+     destCrPixel += 1;
+   @/textblock
+   </pre>
+ 
+  @return
+    <pre>
+    @textblock
+     kvImageNoError                  Is returned when there was no error.
+     kvImageUnknownFlagsBit          Is returned when there is a unknown flag.
+     kvImageRoiLargerThanInputBuffer Is returned when src.width < dest.width || src.height < dest.height
+    @/textblock
+    </pre>
+
+     Results are guaranteed to be faithfully rounded.
+     Chroma is sampled at center by default.
+*/
+    
+vImage_Error vImageConvert_ARGB8888To420Yp8_Cb8_Cr8(const vImage_Buffer *src, const vImage_Buffer *destYp, const vImage_Buffer *destCb, const vImage_Buffer *destCr, const vImage_ARGBToYpCbCr *info, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2,3,4,5) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+   
+/*! @functiongroup 420Yp8_CbCr8 ('420v' and '420f') */
+    
+/*!
+     @function vImageConvert_420Yp8_CbCr8ToARGB8888
+     
+     @abstract Convert YUV 420Yp8_CbCr8 format to ARGB8888
+     
+     @param src
+     A pointer to vImage_Buffer that references YUV 420Yp8_CbCr8 source pixels.
+     
+     @param dest
+     A pointer to vImage_Buffer that references 8-bit ARGB interleaved destination pixels.
+     
+     @param info
+     A pointer to vImage_YpCbCrToRGBConversionInfo which contains info coeffcient and preBias values.
+     
+     @param permuteMap
+     Values that can be used to switch the channel order of dest.
+     For exmaple, permuteMap[4] = {0, 1, 2, 3} or NULL are ARGB8888.
+     permuteMap[4] = {3, 2, 1, 0} is BGRA8888.
+     Any order of permuteMap is allowed when each permuteMap value is 0, 1, 2, or 3.
+ 
+     @param alpha
+     A value for alpha channel in dest.
+     
+     @param flags
+ <pre> @textblock
+     kvImageGetTempBufferSize    Returns 0. Does no work.
+     kvImageDoNotTile            Disables internal multithreading, if any.
+  @/textblock </pre>     
+     @discussion Convert YUV 420Yp8_CbCr8 format to ARGB8888
+     
+     
+     Ypt0 Ypt1  =>  At0 Rt0 Gt0 Bt0  At1 Rt1 Gt1 Bt1
+     
+     Ypb0 Ypb1      Ab0 Rb0 Gb0 Bb0  Ab1 Rb1 Gb1 Bb1
+     
+     Cb0 Cr0
+ 
+     
+     YUV 420Yp8_CbCr8 can be used for '420v' and '420f' that are defined in CVPixelBuffer.h.
+     
+     For example, if we want to use this function to convert '420v' with ITU 601 video range to ARGB8888, then we need
+     generate vImage_YpCbCrToARGB by vImageConvert_YpCbCrToARGB_GenerateConversion() and call this function.
+ 
+     Yp_bias, CbCr_bias, CbCr_bias, Yp, Cr_R, Cb_G, Cr_G, and Cb_B are calculated and converted into the right
+     format by vImageConvert_YpCbCrToARGB_GenerateConversion() inside of vImage_YpCbCrToARGB.
+ 
+ 
+     The per-pixel operation is:
+  <pre>
+  @textblock
+ 
+     uint8_t *srcYtPixel = srcY.data;
+     uint8_t *srcYbPixel = srcY.data + srcY.rowBytes;
+     Ypt0 = srcYtPixel[0];
+     Ypt1 = srcYtPixel[1];
+     srcYtPixel += 2;
+     Ypb0 = srcYbPixel[0];
+     Ypb1 = srcYbPixel[1];
+     srcYbPixel += 2;
+     
+     uint8_t *srcCbCrPixel = srcCbCr.data;
+     Cb0 = srcCbCrPixel[0];
+     Cr0 = srcCbCrPixel[1];
+     srcCrPixel += 2;
+     
+     At0 = alpha
+     Rt0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Ypt0 - Yp_bias) * Yp                            + (Cr0 - CbCr_bias) * Cr_R), 255 )
+     Gt0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Ypt0 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_G + (Cr0 - CbCr_bias) * Cr_G), 255 )
+     Bt0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Ypt0 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_B                              ), 255 )
+     At1 = alpha
+     Rt1 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Ypt1 - Yp_bias) * Yp                            + (Cr0 - CbCr_bias) * Cr_R), 255 )
+     Gt1 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Ypt1 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_G + (Cr0 - CbCr_bias) * Cr_G), 255 )
+     Bt1 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Ypt1 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_B                              ), 255 )
+     Ab0 = alpha
+     Rb0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Ypb0 - Yp_bias) * Yp                            + (Cr0 - CbCr_bias) * Cr_R), 255 )
+     Gb0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Ypb0 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_G + (Cr0 - CbCr_bias) * Cr_G), 255 )
+     Bb0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Ypb0 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_B                              ), 255 )
+     Ab1 = alpha
+     Rb1 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Ypb1 - Yp_bias) * Yp                            + (Cr0 - CbCr_bias) * Cr_R), 255 )
+     Gb1 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Ypb1 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_G + (Cr0 - CbCr_bias) * Cr_G), 255 )
+     Bb1 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Ypb1 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_B                              ), 255 )
+     
+     uint8_t ARGB[16];
+     ARGB[0]  = At0;
+     ARGB[1]  = Rt0;
+     ARGB[2]  = Gt0;
+     ARGB[3]  = Bt0;
+     ARGB[4]  = At1;
+     ARGB[5]  = Rt1;
+     ARGB[6]  = Gt1;
+     ARGB[7]  = Bt1;
+     ARGB[8]  = Ab0;
+     ARGB[9]  = Rb0;
+     ARGB[10] = Gb0;
+     ARGB[11] = Bb0;
+     ARGB[12] = Ab1;
+     ARGB[13] = Rb1;
+     ARGB[14] = Gb1;
+     ARGB[15] = Bb1;
+     
+     uint8_t *destTPixel = dest.data;
+     destTPixel[0]  = ARGB[permuteMap[0]];
+     destTPixel[1]  = ARGB[permuteMap[1]];
+     destTPixel[2]  = ARGB[permuteMap[2]];
+     destTPixel[3]  = ARGB[permuteMap[3]];
+     destTPixel[4]  = ARGB[permuteMap[0]+4];
+     destTPixel[5]  = ARGB[permuteMap[1]+4];
+     destTPixel[6]  = ARGB[permuteMap[2]+4];
+     destTPixel[7]  = ARGB[permuteMap[3]+4];
+     destTPixel += 8;
+     uint8_t *destBPixel = dest.data + dest.rowBytes;
+     destBPixel[0]  = ARGB[permuteMap[0]+8];
+     destBPixel[1]  = ARGB[permuteMap[1]+8];
+     destBPixel[2]  = ARGB[permuteMap[2]+8];
+     destBPixel[3]  = ARGB[permuteMap[3]+8];
+     destBPixel[4]  = ARGB[permuteMap[0]+12];
+     destBPixel[5]  = ARGB[permuteMap[1]+12];
+     destBPixel[6]  = ARGB[permuteMap[2]+12];
+     destBPixel[7]  = ARGB[permuteMap[3]+12];
+     destBPixel += 8;
+     
+   @/textblock
+   </pre>
+ 
+  @return
+    <pre> @textblock
+     kvImageNoError                  Is returned when there was no error.
+     kvImageUnknownFlagsBit          Is returned when there is a unknown flag.
+     kvImageRoiLargerThanInputBuffer Is returned when src.width < dest.width || src.height < dest.height
+    @/textblock </pre> 
+ 
+     Results are guaranteed to be faithfully rounded.
+*/
+    
+vImage_Error vImageConvert_420Yp8_CbCr8ToARGB8888(const vImage_Buffer *srcYp, const vImage_Buffer *srcCbCr, const vImage_Buffer *dest, const vImage_YpCbCrToARGB *info, const uint8_t permuteMap[4], const uint8_t alpha, vImage_Flags flags) VIMAGE_NON_NULL(1,2,3,4) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+    
+/*!
+     @function vImageConvert_ARGB8888To420Yp8_CbCr8
+     
+     @abstract Convert ARGB8888 to YUV 420Yp8_CbCr8 format.
+     
+     @param src
+     A pointer to vImage_Buffer that references 8-bit ARGB interleaved source pixels.
+     
+     @param dest
+     A pointer to vImage_Buffer that references YUV 420Yp8_CbCr8 destination pixels.
+     
+     @param info
+     A pointer to vImage_RGBToYpCbCrConversionInfo which contains info coeffcient and postBias values.
+     
+     @param permuteMap
+     Values that can be used to switch the channel order of dest.
+     For exmaple, permuteMap[4] = {0, 1, 2, 3} or NULL are ARGB8888.
+     permuteMap[4] = {3, 2, 1, 0} is BGRA8888.
+     Any order of permuteMap is allowed when each permuteMap value is 0, 1, 2, or 3, as long as the channels don't repeat. For example, the pirate colorspace {0,1,1,1} (ARRR) is not supported, because the red channel appears more than once. (Pirates see red.)
+ 
+     @param flags
+ <pre> @textblock
+     kvImageGetTempBufferSize    Returns 0. Does no work.
+     kvImageDoNotTile            Disables internal multithreading, if any.
+  @/textblock </pre>     
+     @discussion Convert ARGB8888 to YUV 420Yp8_CbCr8 format
+     
+     
+ <pre> @textblock
+     At0 Rt0 Gt0 Bt0  At1 Rt1 Gt1 Bt1  =>  Ypt0 Ypt1
+     
+     Ab0 Rb0 Gb0 Bb0  Ab1 Rb1 Gb1 Bb1      Ypb0 Ypb1
+     
+                                           Cb0 Cr0
+ @/textblock </pre>
+ 
+     
+     YUV 420Yp8_CbCr8 can be used for '420v' and '420f' that are defined in CVPixelBuffer.h.
+     
+     For example, if we want to use this function to convert ARGB8888 to '420v' with ITU 601 video range, then we need
+     generate vImage_ARGBToYpCbCr by vImageConvert_ARGBToYpCbCr_GenerateConversion() and call this function.
+ 
+     Yp_bias, CbCr_bias, CbCr_bias, R_Yp, G_Yp, B_Yp, R_Cb, G_Cb, B_Cb_R_Cr, G_Cr and B_Cr are calculated and
+     converted into the right format by vImageConvert_ARGBToYpCbCr_GenerateConversion() inside of vImage_ARGBToYpCbCr.
+ 
+     The per-pixel operation is:
+  <pre> @textblock
+     uint8_t *srcTPixel = src.data;
+     At0 = srcTPixel[permuteMap[0]];
+     Rt0 = srcTPixel[permuteMap[1]];
+     Gt0 = srcTPixel[permuteMap[2]];
+     Bt0 = srcTPixel[permuteMap[3]];
+     srcTPixel += 4;
+     At1 = srcTPixel[permuteMap[0]];
+     Rt1 = srcTPixel[permuteMap[1]];
+     Gt1 = srcTPixel[permuteMap[2]];
+     Bt1 = srcTPixel[permuteMap[3]];
+     srcTPixel += 4;
+     uint8_t *srcBPixel = src.data + src.rowBytes;
+     Ab0 = srcBPixel[permuteMap[0]];
+     Rb0 = srcBPixel[permuteMap[1]];
+     Gb0 = srcBPixel[permuteMap[2]];
+     Bb0 = srcBPixel[permuteMap[3]];
+     srcBPixel += 4;
+     Ab1 = srcBPixel[permuteMap[0]];
+     Rb1 = srcBPixel[permuteMap[1]];
+     Gb1 = srcBPixel[permuteMap[2]];
+     Bb1 = srcBPixel[permuteMap[3]];
+     srcBPixel += 4;
+     
+     Ypt0 = ROUND_TO_NEAREST_INTEGER( Yp_bias   +   Rt0 * R_Yp      + Gt0 * G_Yp + Bt0 * B_Yp     )
+     Ypt1 = ROUND_TO_NEAREST_INTEGER( Yp_bias   +   Rt1 * R_Yp      + Gt1 * G_Yp + Bt1 * B_Yp     )
+     Ypb0 = ROUND_TO_NEAREST_INTEGER( Yp_bias   +   Rb0 * R_Yp      + Gb0 * G_Yp + Bb0 * B_Yp     )
+     Ypb1 = ROUND_TO_NEAREST_INTEGER( Yp_bias   +   Rb1 * R_Yp      + Gb1 * G_Yp + Bb1 * B_Yp     )
+     Cb0  = ROUND_TO_NEAREST_INTEGER( CbCr_bias + ( Rt0 * R_Cb      + Gt0 * G_Cb + Bt0 * B_Cb_R_Cr
+                                                    +   Rt1 * R_Cb      + Gt1 * G_Cb + Bt1 * B_Cb_R_Cr
+                                                    +   Rb0 * R_Cb      + Gb0 * G_Cb + Bb0 * B_Cb_R_Cr
+                                                    +   Rb1 * R_Cb      + Gb1 * G_Cb + Bb1 * B_Cb_R_Cr) / 4 )
+     Cr0  = ROUND_TO_NEAREST_INTEGER( CbCr_bias + ( Rt0 * B_Cb_R_Cr + Gt0 * G_Cr + Bt0 * B_Cr
+                                                    +   Rt1 * B_Cb_R_Cr + Gt1 * G_Cr + Bt1 * B_Cr
+                                                    +   Rb0 * B_Cb_R_Cr + Gb0 * G_Cr + Bb0 * B_Cr
+                                                    +   Rb1 * B_Cb_R_Cr + Gb1 * G_Cr + Bb1 * B_Cr     ) / 4 )
+     
+     uint8_t *destYptPixel = destYp.data;
+     uint8_t *destYpbPixel = destYp.data + destYp.rowBytes;
+     destYptPixel[0] = Ypt0;
+     destYptPixel[1] = Ypt1;
+     destYpbPixel[0] = Ypb0;
+     destYpbPixel[1] = Ypb1;
+     destYptPixel += 2;
+     destYpbPixel += 2;
+     
+     uint8_t *destCbCrPixel = destCbCr.data;
+     destCbCrPixel[0] = Cb0;
+     destCbCrPixel[1] = Cr0;
+     destCbCrPixel += 2;
+  @/textblock </pre>
+ 
+ 
+  @return
+    <pre> @textblock
+     kvImageNoError                  Is returned when there was no error.
+     kvImageUnknownFlagsBit          Is returned when there is a unknown flag.
+     kvImageRoiLargerThanInputBuffer Is returned when src.width < dest.width || src.height < dest.height
+   @/textblock 
+   </pre>
+ 
+
+     Results are guaranteed to be faithfully rounded.
+     Chroma is sampled at center by default.
+*/
+    
+vImage_Error vImageConvert_ARGB8888To420Yp8_CbCr8(const vImage_Buffer *src, const vImage_Buffer *destYp, const vImage_Buffer *destCbCr, const vImage_ARGBToYpCbCr *info, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2,3,4) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+    
+    
+/*! @functiongroup 444AYpCbCr16 ('y416') */
+    
+/*!
+     @function vImageConvert_444AYpCbCr16ToARGB8888
+     
+     @abstract Convert YUV 444AYpCbCr16 format to ARGB8888
+     
+     @param src
+     A pointer to vImage_Buffer that references YUV 444AYpCbCr16 source pixels.
+     
+     @param dest
+     A pointer to vImage_Buffer that references 8-bit ARGB interleaved destination pixels.
+     
+     @param info
+     A pointer to vImage_YpCbCrToRGBConversionInfo which contains info coeffcient and preBias values.
+     
+     @param permuteMap
+     Values that can be used to switch the channel order of dest.
+     For exmaple, permuteMap[4] = {0, 1, 2, 3} or NULL are ARGB8888.
+     permuteMap[4] = {3, 2, 1, 0} is BGRA8888.
+     Any order of permuteMap is allowed when each permuteMap value is 0, 1, 2, or 3.
+ 
+     @param flags
+ <pre> @textblock
+     kvImageGetTempBufferSize    Returns 0. Does no work.
+     kvImageDoNotTile            Disables internal multithreading, if any.
+  @/textblock </pre>     
+     @discussion Convert YUV 444AYpCbCr16 format to ARGB8888
+     
+     
+     A0 Yp0 Cb0 Cr0  =>  A0 R0 G0 B0
+     
+     
+     YUV 444AYpCbCr8 can be used for 'y416' that is defined in CVPixelBuffer.h.
+     
+     For example, if we want to use this function to convert 'y416' with ITU 601 video range to ARGB8888, then we need
+     generate vImage_YpCbCrToARGB by vImageConvert_YpCbCrToARGB_GenerateConversion() and call this function.
+ 
+     Yp_bias, CbCr_bias, CbCr_bias, Yp, Cr_R, Cb_G, Cr_G, and Cb_B are calculated and converted into the right
+     format by vImageConvert_YpCbCrToARGB_GenerateConversion() inside of vImage_YpCbCrToARGB.
+ 
+ 
+     The per-pixel operation is:
+ <pre> @textblock
+     uint16_t *srcPixel = src.data;
+     A0  = srcPixel[0];
+     Yp0 = srcPixel[1];
+     Cb0 = srcPixel[2];
+     Cr0 = srcPixel[3];
+     srcPixel += 4;
+     
+     R0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp0 - Yp_bias) * Yp                            + (Cr0 - CbCr_bias) * Cr_R), 255 )
+     G0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp0 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_G + (Cr0 - CbCr_bias) * Cr_G), 255 )
+     B0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp0 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_B                           ), 255 )
+     
+     uint8_t ARGB[4];
+     ARGB[0] = A0;
+     ARGB[1] = R0;
+     ARGB[2] = G0;
+     ARGB[3] = B0;
+     
+     uint8_t *destPixel = dest.data;
+     destPixel[0] = ARGB[permuteMap[0]];
+     destPixel[1] = ARGB[permuteMap[1]];
+     destPixel[2] = ARGB[permuteMap[2]];
+     destPixel[3] = ARGB[permuteMap[3]];
+     destPixel += 4;
+ @/textblock </pre>
+
+ @result
+   <pre> @textblock
+     kvImageNoError                  Is returned when there was no error.
+     kvImageUnknownFlagsBit          Is returned when there is a unknown flag.
+     kvImageRoiLargerThanInputBuffer Is returned when src.width < dest.width || src.height < dest.height
+   @/textblock </pre>
+ 
+     Results are guaranteed to be faithfully rounded.
+*/
+    
+vImage_Error vImageConvert_444AYpCbCr16ToARGB8888(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_YpCbCrToARGB *info, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+    
+/*!
+     @function vImageConvert_ARGB8888To444AYpCbCr16
+     
+     @abstract Convert ARGB8888 to YUV 444AYpCbCr16 format
+     
+     @param src
+     A pointer to vImage_Buffer that references 8-bit ARGB interleaved source pixels.
+     
+     @param dest
+     A pointer to vImage_Buffer that references YUV 444AYpCbCr16 destination pixels.
+     
+     @param info
+     A pointer to vImage_RGBToYpCbCrConversionInfo which contains info coeffcient and postBias values.
+     
+     @param permuteMap
+     Values that can be used to switch the channel order of dest.
+     For exmaple, permuteMap[4] = {0, 1, 2, 3} or NULL are ARGB8888.
+     permuteMap[4] = {3, 2, 1, 0} is BGRA8888.
+     Any order of permuteMap is allowed when each permuteMap value is 0, 1, 2, or 3, as long as the values are unique.
+ 
+     @param flags
+ <pre> @textblock
+     kvImageGetTempBufferSize    Returns 0. Does no work.
+     kvImageDoNotTile            Disables internal multithreading, if any.
+  @/textblock </pre>     
+     @discussion Convert ARGB8888 to YUV 444AYpCbCr16 format
+     
+     
+     A0 R0 G0 B0  =>  A0 Yp0 Cb0 Cr0
+     
+     
+     YUV 444AYpCbCr8 can be used for 'y416' that is defined in CVPixelBuffer.h.
+     
+     For example, if we want to use this function to convert ARGB8888 to 'y416' with ITU 601 video range, then we need
+     generate vImage_ARGBToYpCbCr by vImageConvert_ARGBToYpCbCr_GenerateConversion() and call this function.
+ 
+     Yp_bias, CbCr_bias, CbCr_bias, R_Yp, G_Yp, B_Yp, R_Cb, G_Cb, B_Cb_R_Cr, G_Cr and B_Cr are calculated and
+     converted into the right format by vImageConvert_ARGBToYpCbCr_GenerateConversion() inside of vImage_ARGBToYpCbCr.
+ 
+ 
+     The per-pixel operation is:
+  <pre> @textblock
+     uint8_t *srcPixel = src.data;
+     A0 = srcPixel[permuteMap[0]];
+     R0 = srcPixel[permuteMap[1]];
+     G0 = srcPixel[permuteMap[2]];
+     B0 = srcPixel[permuteMap[3]];
+     srcPixel += 4;
+     
+     Yp0 = ROUND_TO_NEAREST_INTEGER( Yp_bias   + R0 * R_Yp      + G0 * G_Yp + B0 * B_Yp     )
+     Cb0 = ROUND_TO_NEAREST_INTEGER( CbCr_bias + R0 * R_Cb      + G0 * G_Cb + B0 * B_Cb_R_Cr)
+     Cr0 = ROUND_TO_NEAREST_INTEGER( CbCr_bias + R0 * B_Cb_R_Cr + G0 * G_Cr + B0 * B_Cr     )
+     
+     uint16_t *destPixel = dest.data;
+     destPixel[0] = A0;
+     destPixel[1] = Yp0;
+     destPixel[2] = Cb0;
+     destPixel[3] = Cr0;
+     destPixel += 4;
+  @/textblock </pre>
+ 
+  @return
+  <pre> @textblock
+     kvImageNoError                  Is returned when there was no error.
+     kvImageUnknownFlagsBit          Is returned when there is a unknown flag.
+     kvImageRoiLargerThanInputBuffer Is returned when src.width < dest.width || src.height < dest.height
+  @/textblock </pre>
+ 
+     Results are guaranteed to be faithfully rounded.
+*/
+    
+vImage_Error vImageConvert_ARGB8888To444AYpCbCr16(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_ARGBToYpCbCr *info, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+    
+/*!
+     @function vImageConvert_444AYpCbCr16ToARGB16U
+     
+     @abstract Convert YUV 444AYpCbCr16 format to ARGB16U
+     
+     @param src
+     A pointer to vImage_Buffer that references YUV 444AYpCbCr16 source pixels.
+     
+     @param dest
+     A pointer to vImage_Buffer that references 16-bit ARGB interleaved destination pixels.
+     
+     @param info
+     A pointer to vImage_YpCbCrToRGBConversionInfo which contains info coeffcient and preBias values.
+     
+     @param permuteMap
+     Values that can be used to switch the channel order of dest.
+     permuteMap[4] = {0, 1, 2, 3} or NULL are ARGB16U.
+     permuteMap[4] = {3, 2, 1, 0} is BGRA16U.
+     
+     @param flags
+ <pre> @textblock
+     kvImageGetTempBufferSize    Returns 0. Does no work.
+     kvImageDoNotTile            Disables internal multithreading, if any.
+  @/textblock </pre>     
+     @discussion Convert YUV 444AYpCbCr16 format to ARGB16U
+     
+     
+     A0 Yp0 Cb0 Cr0  =>  A0 R0 G0 B0
+     
+     
+     YUV 444AYpCbCr8 can be used for 'y416' that is defined in CVPixelBuffer.h.
+     
+     For example, if we want to use this function to convert 'y416' with ITU 601 video range to ARGB16U, then we need
+     generate vImage_YpCbCrToARGB by vImageConvert_YpCbCrToARGB_GenerateConversion() and call this function.
+     
+     Yp_bias, CbCr_bias, CbCr_bias, Yp, Cr_R, Cb_G, Cr_G, and Cb_B are calculated and converted into the right
+     format by vImageConvert_YpCbCrToARGB_GenerateConversion() inside of vImage_YpCbCrToARGB.
+     
+     
+     The per-pixel operation is:
+  <pre> @textblock
+     uint16_t *srcPixel = src.data;
+     A0  = srcPixel[0];
+     Yp0 = srcPixel[1];
+     Cb0 = srcPixel[2];
+     Cr0 = srcPixel[3];
+     srcPixel += 4;
+     
+     R0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp0 - Yp_bias) * Yp                            + (Cr0 - CbCr_bias) * Cr_R), 65535 )
+     G0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp0 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_G + (Cr0 - CbCr_bias) * Cr_G), 65535 )
+     B0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp0 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_B                           ), 65535 )
+     
+     uint16_t ARGB[4];
+     ARGB[0] = A0;
+     ARGB[1] = R0;
+     ARGB[2] = G0;
+     ARGB[3] = B0;
+     
+     uint16_t *destPixel = dest.data;
+     destPixel[0] = ARGB[permuteMap[0]];
+     destPixel[1] = ARGB[permuteMap[1]];
+     destPixel[2] = ARGB[permuteMap[2]];
+     destPixel[3] = ARGB[permuteMap[3]];
+     destPixel += 4;
+  @/textblock </pre>
+ 
+  @return
+    <pre> @textblock
+     kvImageNoError                  Is returned when there was no error.
+     kvImageUnknownFlagsBit          Is returned when there is a unknown flag.
+     kvImageRoiLargerThanInputBuffer Is returned when src.width < dest.width || src.height < dest.height
+    @/textblock </pre>
+
+   Results are guaranteed to be faithfully rounded.
+   This function can work in place.
+*/
+    
+vImage_Error vImageConvert_444AYpCbCr16ToARGB16U(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_YpCbCrToARGB *info, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+    
+/*!
+     @function vImageConvert_ARGB16UTo444AYpCbCr16
+     
+     @abstract Convert ARGB8888 to YUV 444AYpCbCr16 format
+     
+     @param src
+     A pointer to vImage_Buffer that references 16-bit ARGB interleaved source pixels.
+     
+     @param dest
+     A pointer to vImage_Buffer that references YUV 444AYpCbCr16 destination pixels.
+     
+     @param info
+     A pointer to vImage_RGBToYpCbCrConversionInfo which contains info coeffcient and postBias values.
+     
+     @param permuteMap
+     Values that can be used to switch the channel order of dest.
+     permuteMap[4] = {0, 1, 2, 3} or NULL are ARGB16U.
+     permuteMap[4] = {3, 2, 1, 0} is BGRA16U.
+     Any ordering of channels is supported as long as each channel appears only once.
+     
+     @param flags
+ <pre> @textblock
+     kvImageGetTempBufferSize    Returns 0. Does no work.
+     kvImageDoNotTile            Disables internal multithreading, if any.
+  @/textblock </pre>     
+     @discussion Convert ARGB16U to YUV 444AYpCbCr16 format
+     
+     
+     A0 R0 G0 B0  =>  A0 Yp0 Cb0 Cr0
+     
+     
+     YUV 444AYpCbCr8 can be used for 'y416' that is defined in CVPixelBuffer.h.
+     
+     For example, if we want to use this function to convert ARGB16U to 'y416' with ITU 601 video range, then we need
+     generate vImage_ARGBToYpCbCr by vImageConvert_ARGBToYpCbCr_GenerateConversion() and call this function.
+     
+     Yp_bias, CbCr_bias, CbCr_bias, R_Yp, G_Yp, B_Yp, R_Cb, G_Cb, B_Cb_R_Cr, G_Cr and B_Cr are calculated and
+     converted into the right format by vImageConvert_ARGBToYpCbCr_GenerateConversion() inside of vImage_ARGBToYpCbCr.
+     
+     
+     The per-pixel operation is:
+  <pre> @textblock
+     uint16_t *srcPixel = src.data;
+     A0 = srcPixel[permuteMap[0]];
+     R0 = srcPixel[permuteMap[1]];
+     G0 = srcPixel[permuteMap[2]];
+     B0 = srcPixel[permuteMap[3]];
+     srcPixel += 4;
+     
+     Yp0 = ROUND_TO_NEAREST_INTEGER( Yp_bias   + R0 * R_Yp      + G0 * G_Yp + B0 * B_Yp     )
+     Cb0 = ROUND_TO_NEAREST_INTEGER( CbCr_bias + R0 * R_Cb      + G0 * G_Cb + B0 * B_Cb_R_Cr)
+     Cr0 = ROUND_TO_NEAREST_INTEGER( CbCr_bias + R0 * B_Cb_R_Cr + G0 * G_Cr + B0 * B_Cr     )
+     
+     uint16_t *destPixel = dest.data;
+     destPixel[0] = A0;
+     destPixel[1] = Yp0;
+     destPixel[2] = Cb0;
+     destPixel[3] = Cr0;
+     destPixel += 4;
+  @/textblock </pre>
+ 
+  @return
+   <pre> @textblock
+     kvImageNoError                  Is returned when there was no error.
+     kvImageUnknownFlagsBit          Is returned when there is a unknown flag.
+     kvImageRoiLargerThanInputBuffer Is returned when src.width < dest.width || src.height < dest.height
+    @/textblock </pre>
+
+     Results are guaranteed to be faithfully rounded.
+     This function can work in place.
+*/
+    
+vImage_Error vImageConvert_ARGB16UTo444AYpCbCr16(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_ARGBToYpCbCr *info, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+
+/*! @functiongroup 444CrYpCb10 ('v410') */
+    
+/*!
+     @function vImageConvert_444CrYpCb10ToARGB8888
+     
+     @abstract Convert YUV 444CrYpCb10 format to ARGB8888
+     
+     @param src
+     A pointer to vImage_Buffer that references YUV 444CrYpCb10 source pixels.
+     
+     @param dest
+     A pointer to vImage_Buffer that references 8-bit ARGB interleaved destination pixels.
+     
+     @param info
+     A pointer to vImage_YpCbCrToRGBConversionInfo which contains info coeffcient and preBias values.
+     
+     @param permuteMap
+     Values that can be used to switch the channel order of dest.
+     For exmaple, permuteMap[4] = {0, 1, 2, 3} or NULL are ARGB8888.
+     permuteMap[4] = {3, 2, 1, 0} is BGRA8888.
+     Any order of permuteMap is allowed when each permuteMap value is 0, 1, 2, or 3.
+ 
+     @param alpha
+     A value for alpha channel in dest.
+     
+     @param flags
+ <pre> @textblock
+     kvImageGetTempBufferSize    Returns 0. Does no work.
+     kvImageDoNotTile            Disables internal multithreading, if any.
+  @/textblock </pre>     
+     @discussion Convert YUV 444CrYpCb10 format to ARGB8888
+     
+     
+      3 10-bit unsigned components are packed into a 32-bit little-endian word.
+ 
+ <pre> @textblock
+           Decreasing Address order (32-bit little-endian)
+      byte3           byte2            byte1            byte0
+      10-bit Cr            10-bit Yp            10-bit Cb                   =>  A0 R0 G0 B0
+      9 8 7 6 5 4 3 2 1 0  9 8 7 6 5 4 3 2 1 0  9 8 7 6 5 4 3 2 1 0  X X
+ @/textblock </pre>
+ 
+     
+     YUV 444CrYpCb10 can be used for 'v410' that is defined in CVPixelBuffer.h.
+     
+     For example, if we want to use this function to convert 'v410' with ITU 601 video range to ARGB8888, then we need
+     generate vImage_YpCbCrToARGB by vImageConvert_YpCbCrToARGB_GenerateConversion() and call this function.
+     
+     Yp_bias, CbCr_bias, CbCr_bias, Yp, Cr_R, Cb_G, Cr_G, and Cb_B are calculated and converted into the right
+     format by vImageConvert_YpCbCrToARGB_GenerateConversion() inside of vImage_YpCbCrToARGB.
+     
+     
+     The per-pixel operation is:
+    <pre> @textblock
+     uint32_t *srcPixel = src.data;
+     uint32_t pixel = *srcPixel;
+     srcPixel += 1;
+ 
+     Yp0 = getYpFromv410(pixel);
+     Cb0 = getCbFromv410(pixel);
+     Cr0 = getCrFromv410(pixel);
+ 
+     R0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp0 - Yp_bias) * Yp                            + (Cr0 - CbCr_bias) * Cr_R), 255 )
+     G0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp0 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_G + (Cr0 - CbCr_bias) * Cr_G), 255 )
+     B0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp0 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_B                           ), 255 )
+     
+     uint8_t ARGB[4];
+     ARGB[0] = alpha;
+     ARGB[1] = R0;
+     ARGB[2] = G0;
+     ARGB[3] = B0;
+     
+     uint8_t *destPixel = dest.data;
+     destPixel[0] = ARGB[permuteMap[0]];
+     destPixel[1] = ARGB[permuteMap[1]];
+     destPixel[2] = ARGB[permuteMap[2]];
+     destPixel[3] = ARGB[permuteMap[3]];
+     destPixel += 4;
+   @/textblock </pre>
+ 
+  @return
+   <pre> @textblock
+     kvImageNoError                  Is returned when there was no error.
+     kvImageUnknownFlagsBit          Is returned when there is a unknown flag.
+     kvImageRoiLargerThanInputBuffer Is returned when src.width < dest.width || src.height < dest.height
+   @/textblock </pre>
+ 
+
+    Results are guaranteed to be faithfully rounded.
+    This function can work in place.
+*/
+    
+vImage_Error vImageConvert_444CrYpCb10ToARGB8888(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_YpCbCrToARGB *info, const uint8_t permuteMap[4], const uint8_t alpha, vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+    
+/*!
+ *   @function vImageConvert_ARGB8888To444CrYpCb10
+ *
+ *   @abstract Convert ARGB8888 to YUV 444CrYpCb10 format
+ *
+ *   @param src
+ *   A pointer to vImage_Buffer that references 8-bit ARGB interleaved source pixels.
+ *
+ *   @param dest
+ *   A pointer to vImage_Buffer that references YUV 444CrYpCb10 destination pixels.
+ *
+ *   @param info
+ *   A pointer to vImage_RGBToYpCbCrConversionInfo which contains info coeffcient and postBias values.
+ *
+ *   @param permuteMap
+ *   Values that can be used to switch the channel order of dest.
+ *   For exmaple, permuteMap[4] = {0, 1, 2, 3} or NULL are ARGB8888.
+ *   permuteMap[4] = {3, 2, 1, 0} is BGRA8888.
+ *   Any order of permuteMap is allowed when each permuteMap value is 0, 1, 2, or 3, as long as each channel appears only once.
+ *
+ *   @param flags
+ *   kvImageGetTempBufferSize    Returns 0. Does no work.
+ *   kvImageDoNotTile            Disables internal multithreading, if any.
+ *
+ *   @discussion Convert ARGB8888 to YUV 444CrYpCb10 format
+ *
+ *
+ *   3 10-bit unsigned components are packed into a 32-bit little-endian word.
+ *
+ *                          Decreasing Address order (32-bit little-endian)
+ *                    byte3           byte2            byte1            byte0
+ *   A0 R0 G0 B0  =>  10-bit Cr            10-bit Yp            10-bit Cb
+ *                    9 8 7 6 5 4 3 2 1 0  9 8 7 6 5 4 3 2 1 0  9 8 7 6 5 4 3 2 1 0  X X
+ *
+ *
+ *   YUV 444CrYpCb10 can be used for 'v410' that is defined in CVPixelBuffer.h.
+ *
+ *   For example, if we want to use this function to convert ARGB8888 to 'v410' with ITU 601 video range, then we need
+ *   generate vImage_ARGBToYpCbCr by vImageConvert_ARGBToYpCbCr_GenerateConversion() and call this function.
+ *
+ *   Yp_bias, CbCr_bias, CbCr_bias, R_Yp, G_Yp, B_Yp, R_Cb, G_Cb, B_Cb_R_Cr, G_Cr and B_Cr are calculated and
+ *   converted into the right format by vImageConvert_ARGBToYpCbCr_GenerateConversion() inside of vImage_ARGBToYpCbCr.
+ *
+ *
+ *   The per-pixel operation is:
+ *  <pre> @textblock
+ *   uint8_t *srcPixel = src.data;
+ *   R0 = srcPixel[permuteMap[1]];
+ *   G0 = srcPixel[permuteMap[2]];
+ *   B0 = srcPixel[permuteMap[3]];
+ *   srcPixel += 4;
+ *
+ *   Yp0 = ROUND_TO_NEAREST_INTEGER( Yp_bias   + R0 * R_Yp      + G0 * G_Yp + B0 * B_Yp     )
+ *   Cb0 = ROUND_TO_NEAREST_INTEGER( CbCr_bias + R0 * R_Cb      + G0 * G_Cb + B0 * B_Cb_R_Cr)
+ *   Cr0 = ROUND_TO_NEAREST_INTEGER( CbCr_bias + R0 * B_Cb_R_Cr + G0 * G_Cr + B0 * B_Cr     )
+ *
+ *   pixel = makev410(Yp0, Cb0, Cr0);
+ *
+ *   uint32_t *destPixel = dest.data;
+ *   *destPixel = pixel;
+ *   destPixel += 1;
+ *  @/textblock </pre>
+ *
+ *  @return
+ *  <pre> @textblock
+ *   kvImageNoError                  Is returned when there was no error.
+ *   kvImageUnknownFlagsBit          Is returned when there is a unknown flag.
+ *   kvImageRoiLargerThanInputBuffer Is returned when src.width < dest.width || src.height < dest.height
+ *  @/textblock </pre>
+ *
+ *
+ *   Results are guaranteed to be faithfully rounded.
+ *   This function can work in place.
+ */
+    
+vImage_Error vImageConvert_ARGB8888To444CrYpCb10(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_ARGBToYpCbCr *info, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+    
+/*!
+     @function vImageConvert_444CrYpCb10ToARGB16Q12
+     
+     @abstract Convert YUV 444CrYpCb10 format to ARGB16Q12
+     
+     @param src
+     A pointer to vImage_Buffer that references YUV 444CrYpCb10 source pixels.
+     
+     @param dest
+     A pointer to vImage_Buffer that references 16Q12 ARGB interleaved destination pixels.
+     
+     @param info
+     A pointer to vImage_YpCbCrToRGBConversionInfo which contains info coeffcient and preBias values.
+     
+     @param permuteMap
+     Values that can be used to switch the channel order of dest.
+     permuteMap[4] = {0, 1, 2, 3} or NULL are ARGB16Q12.
+     permuteMap[4] = {3, 2, 1, 0} is BGRA16Q12.
+     
+     @param alpha
+     A 16Q12 value for alpha channel in dest.
+     
+     @param flags
+ <pre> @textblock
+     kvImageGetTempBufferSize    Returns 0. Does no work.
+     kvImageDoNotTile            Disables internal multithreading, if any.
+  @/textblock </pre>     
+     @discussion Convert YUV 444CrYpCb10 format to ARGB16Q12
+     
+     
+     3 10-bit unsigned components are packed into a 32-bit little-endian word.
+     
+          Decreasing Address order (32-bit little-endian)
+     byte3           byte2            byte1            byte0
+     10-bit Cr            10-bit Yp            10-bit Cb                   =>  A0 R0 G0 B0
+     9 8 7 6 5 4 3 2 1 0  9 8 7 6 5 4 3 2 1 0  9 8 7 6 5 4 3 2 1 0  X X
+     
+     
+     YUV 444CrYpCb10 can be used for 'v410' that is defined in CVPixelBuffer.h.
+     
+     For example, if we want to use this function to convert 'v410' with ITU 601 video range to ARGB16Q12, then we need
+     generate vImage_YpCbCrToARGB by vImageConvert_YpCbCrToARGB_GenerateConversion() and call this function.
+     
+     Yp_bias, CbCr_bias, CbCr_bias, Yp, Cr_R, Cb_G, Cr_G, and Cb_B are calculated and converted into the right
+     format by vImageConvert_YpCbCrToARGB_GenerateConversion() inside of vImage_YpCbCrToARGB.
+     
+     
+     The per-pixel operation is:
+     <pre> @textblock
+     uint32_t *srcPixel = src.data;
+     uint32_t pixel = *srcPixel;
+     srcPixel += 1;
+     
+     Yp0 = getYpFromv410(pixel);
+     Cb0 = getCbFromv410(pixel);
+     Cr0 = getCrFromv410(pixel);
+     
+     R0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp0 - Yp_bias) * Yp                            + (Cr0 - CbCr_bias) * Cr_R), 4096 )
+     G0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp0 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_G + (Cr0 - CbCr_bias) * Cr_G), 4096 )
+     B0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp0 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_B                            ), 4096 )
+     
+     uint16_t ARGB[4];
+     ARGB[0] = alpha;
+     ARGB[1] = R0;
+     ARGB[2] = G0;
+     ARGB[3] = B0;
+     
+     uint16_t *destPixel = dest.data;
+     destPixel[0] = ARGB[permuteMap[0]];
+     destPixel[1] = ARGB[permuteMap[1]];
+     destPixel[2] = ARGB[permuteMap[2]];
+     destPixel[3] = ARGB[permuteMap[3]];
+     destPixel += 4;
+    @/textblock </pre>
+ 
+   @return
+     <pre> @textblock
+     kvImageNoError                  Is returned when there was no error.
+     kvImageUnknownFlagsBit          Is returned when there is a unknown flag.
+     kvImageRoiLargerThanInputBuffer Is returned when src.width < dest.width || src.height < dest.height
+    @/textblock </pre>
+ 
+     Results are guaranteed to be faithfully rounded.
+*/
+    
+vImage_Error vImageConvert_444CrYpCb10ToARGB16Q12(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_YpCbCrToARGB *info, const uint8_t permuteMap[4], const Pixel_16Q12 alpha, vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+    
+/*!
+     @function vImageConvert_ARGB16Q12To444CrYpCb10
+     
+     @abstract Convert ARGB16Q12 to YUV 444CrYpCb10 format
+     
+     @param src
+     A pointer to vImage_Buffer that references 16Q12 ARGB interleaved source pixels.
+     
+     @param dest
+     A pointer to vImage_Buffer that references YUV 444CrYpCb10 destination pixels.
+     
+     @param info
+     A pointer to vImage_RGBToYpCbCrConversionInfo which contains info coeffcient and postBias values.
+     
+     @param permuteMap
+     Values that can be used to switch the channel order of dest.
+     permuteMap[4] = {0, 1, 2, 3} or NULL are ARGB16Q12.
+     permuteMap[4] = {3, 2, 1, 0} is BGRA16Q12.
+    Any ordering of channels is supported as long as each channel appears only once.
+
+ 
+     @param flags
+ <pre> @textblock
+     kvImageGetTempBufferSize    Returns 0. Does no work.
+     kvImageDoNotTile            Disables internal multithreading, if any.
+  @/textblock </pre>     
+     @discussion Convert ARGB16Q12 to YUV 444CrYpCb10 format
+     
+     
+     3 10-bit unsigned components are packed into a 32-bit little-endian word.
+     <pre> @textblock
+                           Decreasing Address order (32-bit little-endian)
+                      byte3           byte2            byte1            byte0
+     A0 R0 G0 B0  =>  10-bit Cr            10-bit Yp            10-bit Cb
+                      9 8 7 6 5 4 3 2 1 0  9 8 7 6 5 4 3 2 1 0  9 8 7 6 5 4 3 2 1 0  X X
+     @/textblock </pre>
+     
+     
+     YUV 444CrYpCb10 can be used for 'v410' that is defined in CVPixelBuffer.h.
+     
+     For example, if we want to use this function to convert ARGB16Q12 to 'v410' with ITU 601 video range, then we need
+     generate vImage_ARGBToYpCbCr by vImageConvert_ARGBToYpCbCr_GenerateConversion() and call this function.
+     
+     Yp_bias, CbCr_bias, CbCr_bias, R_Yp, G_Yp, B_Yp, R_Cb, G_Cb, B_Cb_R_Cr, G_Cr and B_Cr are calculated and
+     converted into the right format by vImageConvert_ARGBToYpCbCr_GenerateConversion() inside of vImage_ARGBToYpCbCr.
+     
+     
+     The per-pixel operation is:
+     <pre> @textblock
+     uint16_t *srcPixel = src.data;
+     R0 = srcPixel[permuteMap[1]];
+     G0 = srcPixel[permuteMap[2]];
+     B0 = srcPixel[permuteMap[3]];
+     srcPixel += 4;
+     
+     Yp0 = ROUND_TO_NEAREST_INTEGER( Yp_bias   + R0 * R_Yp      + G0 * G_Yp + B0 * B_Yp     )
+     Cb0 = ROUND_TO_NEAREST_INTEGER( CbCr_bias + R0 * R_Cb      + G0 * G_Cb + B0 * B_Cb_R_Cr)
+     Cr0 = ROUND_TO_NEAREST_INTEGER( CbCr_bias + R0 * B_Cb_R_Cr + G0 * G_Cr + B0 * B_Cr     )
+     
+     pixel = makev410(Yp0, Cb0, Cr0);
+     
+     uint32_t *destPixel = dest.data;
+     destPixel[0] = pixel;
+     destPixel += 1;
+     @/textblock </pre>
+ 
+@return
+    <pre> @textblock
+     kvImageNoError                  Is returned when there was no error.
+     kvImageUnknownFlagsBit          Is returned when there is a unknown flag.
+     kvImageRoiLargerThanInputBuffer Is returned when src.width < dest.width || src.height < dest.height
+    @/textblock </pre>
+ 
+     Results are guaranteed to be faithfully rounded.
+*/
+    
+vImage_Error vImageConvert_ARGB16Q12To444CrYpCb10(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_ARGBToYpCbCr *info, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+    
+
+/*! @functiongroup 422CrYpCbYpCbYpCbYpCrYpCrYp10 ('v210')   */
+    
+/*!
+     @function vImageConvert_422CrYpCbYpCbYpCbYpCrYpCrYp10ToARGB8888
+     
+     @abstract Convert YUV 422CrYpCbYpCbYpCbYpCrYpCrYp10 format to ARGB8888
+     
+     @param src
+     A pointer to vImage_Buffer that references YUV 422CrYpCbYpCbYpCbYpCrYpCrYp10 source pixels.
+     
+     @param dest
+     A pointer to vImage_Buffer that references 8-bit ARGB interleaved destination pixels.
+     
+     @param info
+     A pointer to vImage_YpCbCrToRGBConversionInfo which contains info coeffcient and preBias values.
+     
+     @param permuteMap
+     Values that can be used to switch the channel order of dest.
+     For exmaple, permuteMap[4] = {0, 1, 2, 3} or NULL are ARGB8888.
+     permuteMap[4] = {3, 2, 1, 0} is BGRA8888.
+     Any order of permuteMap is allowed when each permuteMap value is 0, 1, 2, or 3.
+ 
+     @param alpha
+     A value for alpha channel in dest.
+     
+     @param flags
+ <pre> @textblock
+     kvImageGetTempBufferSize    Returns 0. Does no work.
+     kvImageDoNotTile            Disables internal multithreading, if any.
+  @/textblock </pre>     
+     @discussion Convert YUV 422CrYpCbYpCbYpCbYpCrYpCrYp10 format to ARGB8888
+ 
+
+     6 packed YUV pixels are getting mapped into 6 ARGB8888 pixels.
+ 
+     12 10-bit unsigned components are packed into 4 32-bit little-endian words.
+ <pre> @textblock
+
+                         Word0
+         Decreasing Address order (32-bit little-endian)
+     byte3           byte2            byte1            byte0
+         10-bit Cr0           10-bit Y0            10-bit Cb0
+     X X 9 8 7 6 5 4 3 2 1 0  9 8 7 6 5 4 3 2 1 0  9 8 7 6 5 4 3 2 1 0
+
+                         Word1
+         Decreasing Address order (32-bit little-endian)
+     byte3           byte2            byte1            byte0
+         10-bit Y2            10-bit Cb1           10-bit Y1
+     X X 9 8 7 6 5 4 3 2 1 0  9 8 7 6 5 4 3 2 1 0  9 8 7 6 5 4 3 2 1 0
+
+                         Word2
+         Decreasing Address order (32-bit little-endian)
+     byte3           byte2            byte1            byte0
+         10-bit Cb2           10-bit Y3            10-bit Cr1
+     X X 9 8 7 6 5 4 3 2 1 0  9 8 7 6 5 4 3 2 1 0  9 8 7 6 5 4 3 2 1 0
+
+                         Word3
+         Decreasing Address order (32-bit little-endian)
+     byte3           byte2            byte1            byte0
+         10-bit Y5            10-bit Cr2           10-bit Y4
+     X X 9 8 7 6 5 4 3 2 1 0  9 8 7 6 5 4 3 2 1 0  9 8 7 6 5 4 3 2 1 0
+ 
+     
+     =>  A0 R0 G0 B0  A1 R1 G1 B1  A2 R2 G2 B2  A3 R3 G3 B3  A4 R4 G4 B4  A5 R5 G5 B5
+   @/textblock </pre>
+ 
+     YUV 422CrYpCbYpCbYpCbYpCrYpCrYp10 can be used for 'v210' that is defined in CVPixelBuffer.h.
+     
+     For example, if we want to use this function to convert ARGB8888 to 'v210' with ITU 601 video range, then we need
+     generate vImage_YpCbCrToARGB by vImageConvert_YpCbCrToARGB_GenerateConversion() and call this function.
+     
+     Yp_bias, CbCr_bias, CbCr_bias, Yp, Cr_R, Cb_G, Cr_G, and Cb_B are calculated and converted into the right
+     format by vImageConvert_YpCbCrToARGB_GenerateConversion() inside of vImage_YpCbCrToARGB.
+     
+     
+     The per-pixel operation is:
+     <pre> @textblock
+     uint32_t *srcPixel = src.data;
+     pixel0 = srcPixel[0];
+     pixel1 = srcPixel[1];
+     pixel2 = srcPixel[2];
+     pixel3 = srcPixel[3];
+     srcPixel += 4;
+ 
+     Yp0 = getYp0Fromv210(pixel0, pixel1, pixel2, pixel3);
+     Yp1 = getYp1Fromv210(pixel0, pixel1, pixel2, pixel3);
+     Yp2 = getYp2Fromv210(pixel0, pixel1, pixel2, pixel3);
+     Yp3 = getYp3Fromv210(pixel0, pixel1, pixel2, pixel3);
+     Yp4 = getYp4Fromv210(pixel0, pixel1, pixel2, pixel3);
+     Yp5 = getYp5Fromv210(pixel0, pixel1, pixel2, pixel3);
+     Cb0 = getCb0Fromv210(pixel0, pixel1, pixel2, pixel3);
+     Cb1 = getCb1Fromv210(pixel0, pixel1, pixel2, pixel3);
+     Cb2 = getCb2Fromv210(pixel0, pixel1, pixel2, pixel3);
+     Cr0 = getCr0Fromv210(pixel0, pixel1, pixel2, pixel3);
+     Cr1 = getCr1Fromv210(pixel0, pixel1, pixel2, pixel3);
+     Cr2 = getCr2Fromv210(pixel0, pixel1, pixel2, pixel3);
+     
+     A0 = alpha
+     R0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp0 - Yp_bias) * Yp                            + (Cr0 - CbCr_bias) * Cr_R), 255 )
+     G0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp0 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_G + (Cr0 - CbCr_bias) * Cr_G), 255 )
+     B0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp0 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_B                           ), 255 )
+     A1 = alpha
+     R1 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp1 - Yp_bias) * Yp                            + (Cr0 - CbCr_bias) * Cr_R), 255 )
+     G1 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp1 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_G + (Cr0 - CbCr_bias) * Cr_G), 255 )
+     B1 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp1 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_B                           ), 255 )
+     A2 = alpha
+     R2 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp2 - Yp_bias) * Yp                            + (Cr1 - CbCr_bias) * Cr_R), 255 )
+     G2 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp2 - Yp_bias) * Yp + (Cb1 - CbCr_bias) * Cb_G + (Cr1 - CbCr_bias) * Cr_G), 255 )
+     B2 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp2 - Yp_bias) * Yp + (Cb1 - CbCr_bias) * Cb_B                           ), 255 )
+     A3 = alpha
+     R3 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp3 - Yp_bias) * Yp                            + (Cr1 - CbCr_bias) * Cr_R), 255 )
+     G3 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp3 - Yp_bias) * Yp + (Cb1 - CbCr_bias) * Cb_G + (Cr1 - CbCr_bias) * Cr_G), 255 )
+     B3 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp3 - Yp_bias) * Yp + (Cb1 - CbCr_bias) * Cb_B                           ), 255 )
+     A4 = alpha
+     R4 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp4 - Yp_bias) * Yp                            + (Cr2 - CbCr_bias) * Cr_R), 255 )
+     G4 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp4 - Yp_bias) * Yp + (Cb2 - CbCr_bias) * Cb_G + (Cr2 - CbCr_bias) * Cr_G), 255 )
+     B4 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp4 - Yp_bias) * Yp + (Cb2 - CbCr_bias) * Cb_B                           ), 255 )
+     A5 = alpha
+     R5 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp5 - Yp_bias) * Yp                            + (Cr2 - CbCr_bias) * Cr_R), 255 )
+     G5 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp5 - Yp_bias) * Yp + (Cb2 - CbCr_bias) * Cb_G + (Cr2 - CbCr_bias) * Cr_G), 255 )
+     B5 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp5 - Yp_bias) * Yp + (Cb2 - CbCr_bias) * Cb_B                           ), 255 )
+ 
+     uint8_t ARGB[24];
+     ARGB[0] = A0;
+     ARGB[1] = R0;
+     ARGB[2] = G0;
+     ARGB[3] = B0;
+     ARGB[4] = A1;
+     ARGB[5] = R1;
+     ARGB[6] = G1;
+     ARGB[7] = B1;
+     ARGB[8] = A2;
+     ARGB[9] = R2;
+     ARGB[10] = G2;
+     ARGB[11] = B2;
+     ARGB[12] = A3;
+     ARGB[13] = R3;
+     ARGB[14] = G3;
+     ARGB[15] = B3;
+     ARGB[16] = A4;
+     ARGB[17] = R4;
+     ARGB[18] = G4;
+     ARGB[19] = B4;
+     ARGB[20] = A5;
+     ARGB[21] = R5;
+     ARGB[22] = G5;
+     ARGB[23] = B5;
+ 
+     uint8_t *destPixel = dest.data;
+     destPixel[0] = ARGB[permuteMap[0]];
+     destPixel[1] = ARGB[permuteMap[1]];
+     destPixel[2] = ARGB[permuteMap[2]];
+     destPixel[3] = ARGB[permuteMap[3]];
+     destPixel[4] = ARGB[permuteMap[0]+4];
+     destPixel[5] = ARGB[permuteMap[1]+4];
+     destPixel[6] = ARGB[permuteMap[2]+4];
+     destPixel[7] = ARGB[permuteMap[3]+4];
+     destPixel[8] = ARGB[permuteMap[0]+8];
+     destPixel[9] = ARGB[permuteMap[1]+8];
+     destPixel[10] = ARGB[permuteMap[2]+8];
+     destPixel[11] = ARGB[permuteMap[3]+8];
+     destPixel[12] = ARGB[permuteMap[0]+12];
+     destPixel[13] = ARGB[permuteMap[1]+12];
+     destPixel[14] = ARGB[permuteMap[2]+12];
+     destPixel[15] = ARGB[permuteMap[3]+12];
+     destPixel[16] = ARGB[permuteMap[0]+16];
+     destPixel[17] = ARGB[permuteMap[1]+16];
+     destPixel[18] = ARGB[permuteMap[2]+16];
+     destPixel[19] = ARGB[permuteMap[3]+16];
+     destPixel[20] = ARGB[permuteMap[0]+20];
+     destPixel[21] = ARGB[permuteMap[1]+20];
+     destPixel[22] = ARGB[permuteMap[2]+20];
+     destPixel[23] = ARGB[permuteMap[3]+20];
+     destPixel += 24;
+    @/textblock </pre>
+ 
+
+  @return
+    <pre> @textblock
+     kvImageNoError                  Is returned when there was no error.
+     kvImageUnknownFlagsBit          Is returned when there is a unknown flag.
+     kvImageRoiLargerThanInputBuffer Is returned when src.width < dest.width || src.height < dest.height
+    @/textblock </pre>
+ 
+    Results are guaranteed to be faithfully rounded.
+*/
+    
+vImage_Error vImageConvert_422CrYpCbYpCbYpCbYpCrYpCrYp10ToARGB8888(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_YpCbCrToARGB *info, const uint8_t permuteMap[4], const uint8_t alpha, vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+    
+/*!
+     @function vImageConvert_ARGB8888To422CrYpCbYpCbYpCbYpCrYpCrYp10
+     
+     @abstract Convert ARGB8888 to YUV 422CrYpCbYpCbYpCbYpCrYpCrYp10 format.
+     
+     @param src
+     A pointer to vImage_Buffer that references 8-bit ARGB interleaved source pixels.
+     
+     @param dest
+     A pointer to vImage_Buffer that references YUV 422CrYpCbYpCbYpCbYpCrYpCrYp10 destination pixels.
+     
+     @param info
+     A pointer to vImage_RGBToYpCbCrConversionInfo which contains info coeffcient and postBias values.
+     
+     @param permuteMap
+     Values that can be used to switch the channel order of dest.
+     For exmaple, permuteMap[4] = {0, 1, 2, 3} or NULL are ARGB8888.
+     permuteMap[4] = {3, 2, 1, 0} is BGRA8888.
+     Any order of permuteMap is allowed when each permuteMap value is 0, 1, 2, or 3, as long as each channel appears only once.
+ 
+     @param flags
+ <pre> @textblock
+     kvImageGetTempBufferSize    Returns 0. Does no work.
+     kvImageDoNotTile            Disables internal multithreading, if any.
+  @/textblock </pre>     
+     @discussion Convert ARGB8888 to YUV 422CrYpCbYpCbYpCbYpCrYpCrYp10 format
+ 
+ 
+     6 ARGB8888 pixels are getting mapped into 6 packed YUV pixels.
+ 
+     A0 R0 G0 B0  A1 R1 G1 B1  A2 R2 G2 B2  A3 R3 G3 B3  A4 R4 G4 B4  A5 R5 G5 B5  =>
+ 
+     12 10-bit unsigned components are packed into 4 32-bit little-endian words.
+ 
+    <pre> @textblock
+     Word0
+     Decreasing Address order (32-bit little-endian)
+     byte3           byte2            byte1            byte0
+     10-bit Cr0           10-bit Y0            10-bit Cb0
+     X X 9 8 7 6 5 4 3 2 1 0  9 8 7 6 5 4 3 2 1 0  9 8 7 6 5 4 3 2 1 0
+ 
+     Word1
+     Decreasing Address order (32-bit little-endian)
+     byte3           byte2            byte1            byte0
+     10-bit Y2            10-bit Cb1           10-bit Y1
+     X X 9 8 7 6 5 4 3 2 1 0  9 8 7 6 5 4 3 2 1 0  9 8 7 6 5 4 3 2 1 0
+ 
+     Word2
+     Decreasing Address order (32-bit little-endian)
+     byte3           byte2            byte1            byte0
+     10-bit Cb2           10-bit Y3            10-bit Cr1
+     X X 9 8 7 6 5 4 3 2 1 0  9 8 7 6 5 4 3 2 1 0  9 8 7 6 5 4 3 2 1 0
+ 
+     Word3
+     Decreasing Address order (32-bit little-endian)
+     byte3           byte2            byte1            byte0
+     10-bit Y5            10-bit Cr2           10-bit Y4
+     X X 9 8 7 6 5 4 3 2 1 0  9 8 7 6 5 4 3 2 1 0  9 8 7 6 5 4 3 2 1 0
+    @/textblock </pre>
+ 
+     YUV 422CrYpCbYpCbYpCbYpCrYpCrYp10 can be used for 'v210' that is defined in CVPixelBuffer.h.
+ 
+     For example, if we want to use this function to convert ARGB8888 to 'v210' with ITU 601 video range, then we need
+     generate vImage_ARGBToYpCbCr by vImageConvert_ARGBToYpCbCr_GenerateConversion() and call this function.
+     
+     Yp_bias, CbCr_bias, CbCr_bias, R_Yp, G_Yp, B_Yp, R_Cb, G_Cb, B_Cb_R_Cr, G_Cr and B_Cr are calculated and
+     converted into the right format by vImageConvert_ARGBToYpCbCr_GenerateConversion() inside of vImage_ARGBToYpCbCr.
+     
+     The per-pixel operation is:
+   <pre> @textblock
+     uint8_t *srcPixel = src.data;
+     A0 = srcPixel[permuteMap[0]];
+     R0 = srcPixel[permuteMap[1]];
+     G0 = srcPixel[permuteMap[2]];
+     B0 = srcPixel[permuteMap[3]];
+     srcPixel += 4;
+     A1 = srcPixel[permuteMap[0]];
+     R1 = srcPixel[permuteMap[1]];
+     G1 = srcPixel[permuteMap[2]];
+     B1 = srcPixel[permuteMap[3]];
+     srcPixel += 4;
+     A2 = srcPixel[permuteMap[0]];
+     R2 = srcPixel[permuteMap[1]];
+     G2 = srcPixel[permuteMap[2]];
+     B2 = srcPixel[permuteMap[3]];
+     srcPixel += 4;
+     A3 = srcPixel[permuteMap[0]];
+     R3 = srcPixel[permuteMap[1]];
+     G3 = srcPixel[permuteMap[2]];
+     B3 = srcPixel[permuteMap[3]];
+     srcPixel += 4;
+     A4 = srcPixel[permuteMap[0]];
+     R4 = srcPixel[permuteMap[1]];
+     G4 = srcPixel[permuteMap[2]];
+     B4 = srcPixel[permuteMap[3]];
+     srcPixel += 4;
+     A5 = srcPixel[permuteMap[0]];
+     R5 = srcPixel[permuteMap[1]];
+     G5 = srcPixel[permuteMap[2]];
+     B5 = srcPixel[permuteMap[3]];
+     srcPixel += 4;
+ 
+     Yp0 = ROUND_TO_NEAREST_INTEGER( Yp_bias   +   R0 * R_Yp      + G0 * G_Yp + B0 * B_Yp     )
+     Yp1 = ROUND_TO_NEAREST_INTEGER( Yp_bias   +   R1 * R_Yp      + G1 * G_Yp + B1 * B_Yp     )
+     Cb0 = ROUND_TO_NEAREST_INTEGER( CbCr_bias + ( R0 * R_Cb      + G0 * G_Cb + B0 * B_Cb_R_Cr
+                                                   +   R1 * R_Cb      + G1 * G_Cb + B1 * B_Cb_R_Cr) / 2 )
+     Cr0 = ROUND_TO_NEAREST_INTEGER( CbCr_bias + ( R0 * B_Cb_R_Cr + G0 * G_Cr + B0 * B_Cr
+                                                   +   R1 * B_Cb_R_Cr + G1 * G_Cr + B1 * B_Cr     ) / 2 )
+     Yp2 = ROUND_TO_NEAREST_INTEGER( Yp_bias   +   R2 * R_Yp      + G2 * G_Yp + B2 * B_Yp     )
+     Yp3 = ROUND_TO_NEAREST_INTEGER( Yp_bias   +   R3 * R_Yp      + G3 * G_Yp + B3 * B_Yp     )
+     Cb1 = ROUND_TO_NEAREST_INTEGER( CbCr_bias + ( R2 * R_Cb      + G2 * G_Cb + B2 * B_Cb_R_Cr
+                                                   +   R3 * R_Cb      + G3 * G_Cb + B3 * B_Cb_R_Cr) / 2 )
+     Cr1 = ROUND_TO_NEAREST_INTEGER( CbCr_bias + ( R2 * B_Cb_R_Cr + G2 * G_Cr + B2 * B_Cr
+                                                   +   R3 * B_Cb_R_Cr + G3 * G_Cr + B3 * B_Cr     ) / 2 )
+     Yp4 = ROUND_TO_NEAREST_INTEGER( Yp_bias   +   R4 * R_Yp      + G4 * G_Yp + B4 * B_Yp     )
+     Yp5 = ROUND_TO_NEAREST_INTEGER( Yp_bias   +   R5 * R_Yp      + G5 * G_Yp + B5 * B_Yp     )
+     Cb2 = ROUND_TO_NEAREST_INTEGER( CbCr_bias + ( R4 * R_Cb      + G4 * G_Cb + B4 * B_Cb_R_Cr
+                                                   +   R5 * R_Cb      + G5 * G_Cb + B5 * B_Cb_R_Cr) / 2 )
+     Cr2 = ROUND_TO_NEAREST_INTEGER( CbCr_bias + ( R4 * B_Cb_R_Cr + G4 * G_Cr + B4 * B_Cr
+                                                   +   R5 * B_Cb_R_Cr + G5 * G_Cr + B5 * B_Cr     ) / 2 )
+ 
+     uint32_t *destPixel = dest.data;
+     packv210AndStore(destPixel, Yp0, Yp1, Yp2, Yp3, Yp4, Yp5, Cb0, Cb1, Cb2, Cr0, Cr1, Cr2);
+     destPixel += 4;
+   @/textblock </pre>
+ 
+
+  @return 
+    <pre> @textblock
+     kvImageNoError                  Is returned when there was no error.
+     kvImageUnknownFlagsBit          Is returned when there is a unknown flag.
+     kvImageRoiLargerThanInputBuffer Is returned when src.width < dest.width || src.height < dest.height
+    @/textblock </pre>
+ 
+     Results are guaranteed to be faithfully rounded.
+     Chroma is sampled at center by default.
+*/
+    
+vImage_Error vImageConvert_ARGB8888To422CrYpCbYpCbYpCbYpCrYpCrYp10(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_ARGBToYpCbCr *info, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+    
+/*!
+     @function vImageConvert_422CrYpCbYpCbYpCbYpCrYpCrYp10ToARGB16Q12
+     
+     @abstract Convert YUV 422CrYpCbYpCbYpCbYpCrYpCrYp10 format to ARGB16Q12
+     
+     @param src
+     A pointer to vImage_Buffer that references YUV 422CrYpCbYpCbYpCbYpCrYpCrYp10 source pixels.
+     
+     @param dest
+     A pointer to vImage_Buffer that references 16Q12 ARGB interleaved destination pixels.
+     
+     @param info
+     A pointer to vImage_YpCbCrToRGBConversionInfo which contains info coeffcient and preBias values.
+     
+     @param permuteMap
+     Values that can be used to switch the channel order of dest.
+     permuteMap[4] = {0, 1, 2, 3} or NULL are ARGB16Q12.
+     permuteMap[4] = {3, 2, 1, 0} is BGRA16Q12.
+     
+     @param alpha
+     A value for alpha channel in dest.
+     
+     @param flags
+ <pre> @textblock
+     kvImageGetTempBufferSize    Returns 0. Does no work.
+     kvImageDoNotTile            Disables internal multithreading, if any.
+  @/textblock </pre>     
+     @discussion Convert YUV 422CrYpCbYpCbYpCbYpCrYpCrYp10 format to ARGB16Q12
+     
+     
+     6 packed YUV pixels are getting mapped into 6 ARGB16Q12 pixels.
+     
+     12 10-bit unsigned components are packed into 4 32-bit little-endian words.
+     <pre> @textblock
+     Word0
+     Decreasing Address order (32-bit little-endian)
+     byte3           byte2            byte1            byte0
+     10-bit Cr0           10-bit Y0            10-bit Cb0
+     X X 9 8 7 6 5 4 3 2 1 0  9 8 7 6 5 4 3 2 1 0  9 8 7 6 5 4 3 2 1 0
+     
+     Word1
+     Decreasing Address order (32-bit little-endian)
+     byte3           byte2            byte1            byte0
+     10-bit Y2            10-bit Cb1           10-bit Y1
+     X X 9 8 7 6 5 4 3 2 1 0  9 8 7 6 5 4 3 2 1 0  9 8 7 6 5 4 3 2 1 0
+     
+     Word2
+     Decreasing Address order (32-bit little-endian)
+     byte3           byte2            byte1            byte0
+     10-bit Cb2           10-bit Y3            10-bit Cr1
+     X X 9 8 7 6 5 4 3 2 1 0  9 8 7 6 5 4 3 2 1 0  9 8 7 6 5 4 3 2 1 0
+     
+     Word3
+     Decreasing Address order (32-bit little-endian)
+     byte3           byte2            byte1            byte0
+     10-bit Y5            10-bit Cr2           10-bit Y4
+     X X 9 8 7 6 5 4 3 2 1 0  9 8 7 6 5 4 3 2 1 0  9 8 7 6 5 4 3 2 1 0
+     
+     
+     =>  A0 R0 G0 B0  A1 R1 G1 B1  A2 R2 G2 B2  A3 R3 G3 B3  A4 R4 G4 B4  A5 R5 G5 B5
+     @/textblock </pre>
+     
+     YUV 422CrYpCbYpCbYpCbYpCrYpCrYp10 can be used for 'v210' that is defined in CVPixelBuffer.h.
+     
+     For example, if we want to use this function to convert ARGB16Q12 to 'v210' with ITU 601 video range, then we need
+     generate vImage_YpCbCrToARGB by vImageConvert_YpCbCrToARGB_GenerateConversion() and call this function.
+     
+     Yp_bias, CbCr_bias, CbCr_bias, Yp, Cr_R, Cb_G, Cr_G, and Cb_B are calculated and converted into the right
+     format by vImageConvert_YpCbCrToARGB_GenerateConversion() inside of vImage_YpCbCrToARGB.
+     
+     
+     The per-pixel operation is:
+    <pre> @textblock
+ 
+     uint32_t *srcPixel = src.data;
+     pixel0 = srcPixel[0];
+     pixel1 = srcPixel[1];
+     pixel2 = srcPixel[2];
+     pixel3 = srcPixel[3];
+     srcPixel += 4;
+     
+     Yp0 = getYp0Fromv210(pixel0, pixel1, pixel2, pixel3);
+     Yp1 = getYp1Fromv210(pixel0, pixel1, pixel2, pixel3);
+     Yp2 = getYp2Fromv210(pixel0, pixel1, pixel2, pixel3);
+     Yp3 = getYp3Fromv210(pixel0, pixel1, pixel2, pixel3);
+     Yp4 = getYp4Fromv210(pixel0, pixel1, pixel2, pixel3);
+     Yp5 = getYp5Fromv210(pixel0, pixel1, pixel2, pixel3);
+     Cb0 = getCb0Fromv210(pixel0, pixel1, pixel2, pixel3);
+     Cb1 = getCb1Fromv210(pixel0, pixel1, pixel2, pixel3);
+     Cb2 = getCb2Fromv210(pixel0, pixel1, pixel2, pixel3);
+     Cr0 = getCr0Fromv210(pixel0, pixel1, pixel2, pixel3);
+     Cr1 = getCr1Fromv210(pixel0, pixel1, pixel2, pixel3);
+     Cr2 = getCr2Fromv210(pixel0, pixel1, pixel2, pixel3);
+     
+     A0 = alpha
+     R0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp0 - Yp_bias) * Yp                            + (Cr0 - CbCr_bias) * Cr_R), 4096 )
+     G0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp0 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_G + (Cr0 - CbCr_bias) * Cr_G), 4096 )
+     B0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp0 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_B                           ), 4096 )
+     A1 = alpha
+     R1 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp1 - Yp_bias) * Yp                            + (Cr0 - CbCr_bias) * Cr_R), 4096 )
+     G1 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp1 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_G + (Cr0 - CbCr_bias) * Cr_G), 4096 )
+     B1 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp1 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_B                           ), 4096 )
+     A2 = alpha
+     R2 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp2 - Yp_bias) * Yp                            + (Cr1 - CbCr_bias) * Cr_R), 4096 )
+     G2 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp2 - Yp_bias) * Yp + (Cb1 - CbCr_bias) * Cb_G + (Cr1 - CbCr_bias) * Cr_G), 4096 )
+     B2 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp2 - Yp_bias) * Yp + (Cb1 - CbCr_bias) * Cb_B                           ), 4096 )
+     A3 = alpha
+     R3 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp3 - Yp_bias) * Yp                            + (Cr1 - CbCr_bias) * Cr_R), 4096 )
+     G3 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp3 - Yp_bias) * Yp + (Cb1 - CbCr_bias) * Cb_G + (Cr1 - CbCr_bias) * Cr_G), 4096 )
+     B3 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp3 - Yp_bias) * Yp + (Cb1 - CbCr_bias) * Cb_B                           ), 4096 )
+     A4 = alpha
+     R4 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp4 - Yp_bias) * Yp                            + (Cr2 - CbCr_bias) * Cr_R), 4096 )
+     G4 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp4 - Yp_bias) * Yp + (Cb2 - CbCr_bias) * Cb_G + (Cr2 - CbCr_bias) * Cr_G), 4096 )
+     B4 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp4 - Yp_bias) * Yp + (Cb2 - CbCr_bias) * Cb_B                           ), 4096 )
+     A5 = alpha
+     R5 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp5 - Yp_bias) * Yp                            + (Cr2 - CbCr_bias) * Cr_R), 4096 )
+     G5 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp5 - Yp_bias) * Yp + (Cb2 - CbCr_bias) * Cb_G + (Cr2 - CbCr_bias) * Cr_G), 4096 )
+     B5 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp5 - Yp_bias) * Yp + (Cb2 - CbCr_bias) * Cb_B                           ), 4096 )
+     
+     uint16_t ARGB[24];
+     ARGB[0] = A0;
+     ARGB[1] = R0;
+     ARGB[2] = G0;
+     ARGB[3] = B0;
+     ARGB[4] = A1;
+     ARGB[5] = R1;
+     ARGB[6] = G1;
+     ARGB[7] = B1;
+     ARGB[8] = A2;
+     ARGB[9] = R2;
+     ARGB[10] = G2;
+     ARGB[11] = B2;
+     ARGB[12] = A3;
+     ARGB[13] = R3;
+     ARGB[14] = G3;
+     ARGB[15] = B3;
+     ARGB[16] = A4;
+     ARGB[17] = R4;
+     ARGB[18] = G4;
+     ARGB[19] = B4;
+     ARGB[20] = A5;
+     ARGB[21] = R5;
+     ARGB[22] = G5;
+     ARGB[23] = B5;
+     
+     uint16_t *destPixel = dest.data;
+     destPixel[0] = ARGB[permuteMap[0]];
+     destPixel[1] = ARGB[permuteMap[1]];
+     destPixel[2] = ARGB[permuteMap[2]];
+     destPixel[3] = ARGB[permuteMap[3]];
+     destPixel[4] = ARGB[permuteMap[0]+4];
+     destPixel[5] = ARGB[permuteMap[1]+4];
+     destPixel[6] = ARGB[permuteMap[2]+4];
+     destPixel[7] = ARGB[permuteMap[3]+4];
+     destPixel[8] = ARGB[permuteMap[0]+8];
+     destPixel[9] = ARGB[permuteMap[1]+8];
+     destPixel[10] = ARGB[permuteMap[2]+8];
+     destPixel[11] = ARGB[permuteMap[3]+8];
+     destPixel[12] = ARGB[permuteMap[0]+12];
+     destPixel[13] = ARGB[permuteMap[1]+12];
+     destPixel[14] = ARGB[permuteMap[2]+12];
+     destPixel[15] = ARGB[permuteMap[3]+12];
+     destPixel[16] = ARGB[permuteMap[0]+16];
+     destPixel[17] = ARGB[permuteMap[1]+16];
+     destPixel[18] = ARGB[permuteMap[2]+16];
+     destPixel[19] = ARGB[permuteMap[3]+16];
+     destPixel[20] = ARGB[permuteMap[0]+20];
+     destPixel[21] = ARGB[permuteMap[1]+20];
+     destPixel[22] = ARGB[permuteMap[2]+20];
+     destPixel[23] = ARGB[permuteMap[3]+20];
+     destPixel += 24;
+     @/textblock </pre>
+ 
+
+ @return 
+   <pre> @textblock
+     kvImageNoError                  Is returned when there was no error.
+     kvImageUnknownFlagsBit          Is returned when there is a unknown flag.
+     kvImageRoiLargerThanInputBuffer Is returned when src.width < dest.width || src.height < dest.height
+   @/textblock </pre>
+ 
+     Note: Results are guaranteed to be faithfully rounded.
+*/
+    
+vImage_Error vImageConvert_422CrYpCbYpCbYpCbYpCrYpCrYp10ToARGB16Q12(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_YpCbCrToARGB *info, const uint8_t permuteMap[4], const Pixel_16Q12 alpha, vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+    
+/*!
+     @function vImageConvert_ARGB16Q12To422CrYpCbYpCbYpCbYpCrYpCrYp10
+     
+     @abstract Convert ARGB16Q12 to YUV 422CrYpCbYpCbYpCbYpCrYpCrYp10 format.
+     
+     @param src
+     A pointer to vImage_Buffer that references 16Q12 ARGB interleaved source pixels.
+     
+     @param dest
+     A pointer to vImage_Buffer that references YUV 422CrYpCbYpCbYpCbYpCrYpCrYp10 destination pixels.
+     
+     @param info
+     A pointer to vImage_RGBToYpCbCrConversionInfo which contains info coeffcient and postBias values.
+     
+     @param permuteMap
+     Values that can be used to switch the channel order of dest.
+     permuteMap[4] = {0, 1, 2, 3} or NULL are ARGB16Q12.
+     permuteMap[4] = {3, 2, 1, 0} is BGRA16Q12.
+     Any ordering of channels is supported as long as each channel appears only once.
+
+ 
+     @param flags
+ <pre> @textblock
+     kvImageGetTempBufferSize    Returns 0. Does no work.
+     kvImageDoNotTile            Disables internal multithreading, if any.
+  @/textblock </pre>     
+     @discussion Convert ARGB16Q12 to YUV 422CrYpCbYpCbYpCbYpCrYpCrYp10 format
+     
+     
+     6 ARGB16Q12 pixels are getting mapped into 6 packed YUV pixels.
+     <pre> @textblock
+ 
+     A0 R0 G0 B0  A1 R1 G1 B1  A2 R2 G2 B2  A3 R3 G3 B3  A4 R4 G4 B4  A5 R5 G5 B5  =>
+     
+     12 10-bit unsigned components are packed into 4 32-bit little-endian words.
+     
+     Word0
+     Decreasing Address order (32-bit little-endian)
+     byte3           byte2            byte1            byte0
+     10-bit Cr0           10-bit Y0            10-bit Cb0
+     X X 9 8 7 6 5 4 3 2 1 0  9 8 7 6 5 4 3 2 1 0  9 8 7 6 5 4 3 2 1 0
+     
+     Word1
+     Decreasing Address order (32-bit little-endian)
+     byte3           byte2            byte1            byte0
+     10-bit Y2            10-bit Cb1           10-bit Y1
+     X X 9 8 7 6 5 4 3 2 1 0  9 8 7 6 5 4 3 2 1 0  9 8 7 6 5 4 3 2 1 0
+     
+     Word2
+     Decreasing Address order (32-bit little-endian)
+     byte3           byte2            byte1            byte0
+     10-bit Cb2           10-bit Y3            10-bit Cr1
+     X X 9 8 7 6 5 4 3 2 1 0  9 8 7 6 5 4 3 2 1 0  9 8 7 6 5 4 3 2 1 0
+     
+     Word3
+     Decreasing Address order (32-bit little-endian)
+     byte3           byte2            byte1            byte0
+     10-bit Y5            10-bit Cr2           10-bit Y4
+     X X 9 8 7 6 5 4 3 2 1 0  9 8 7 6 5 4 3 2 1 0  9 8 7 6 5 4 3 2 1 0
+     @/textblock </pre>
+     
+     YUV 422CrYpCbYpCbYpCbYpCrYpCrYp10 can be used for 'v210' that is defined in CVPixelBuffer.h.
+     
+     For example, if we want to use this function to convert ARGB16Q12 to 'v210' with ITU 601 video range, then we need
+     generate vImage_ARGBToYpCbCr by vImageConvert_ARGBToYpCbCr_GenerateConversion() and call this function.
+     
+     Yp_bias, CbCr_bias, CbCr_bias, R_Yp, G_Yp, B_Yp, R_Cb, G_Cb, B_Cb_R_Cr, G_Cr and B_Cr are calculated and
+     converted into the right format by vImageConvert_ARGBToYpCbCr_GenerateConversion() inside of vImage_ARGBToYpCbCr.
+     
+     The per-pixel operation is:
+     
+    <pre> @textblock
+ 
+     uint16_t *srcPixel = src.data;
+     A0 = srcPixel[permuteMap[0]];
+     R0 = srcPixel[permuteMap[1]];
+     G0 = srcPixel[permuteMap[2]];
+     B0 = srcPixel[permuteMap[3]];
+     srcPixel += 4;
+     A1 = srcPixel[permuteMap[0]];
+     R1 = srcPixel[permuteMap[1]];
+     G1 = srcPixel[permuteMap[2]];
+     B1 = srcPixel[permuteMap[3]];
+     srcPixel += 4;
+     A2 = srcPixel[permuteMap[0]];
+     R2 = srcPixel[permuteMap[1]];
+     G2 = srcPixel[permuteMap[2]];
+     B2 = srcPixel[permuteMap[3]];
+     srcPixel += 4;
+     A3 = srcPixel[permuteMap[0]];
+     R3 = srcPixel[permuteMap[1]];
+     G3 = srcPixel[permuteMap[2]];
+     B3 = srcPixel[permuteMap[3]];
+     srcPixel += 4;
+     A4 = srcPixel[permuteMap[0]];
+     R4 = srcPixel[permuteMap[1]];
+     G4 = srcPixel[permuteMap[2]];
+     B4 = srcPixel[permuteMap[3]];
+     srcPixel += 4;
+     A5 = srcPixel[permuteMap[0]];
+     R5 = srcPixel[permuteMap[1]];
+     G5 = srcPixel[permuteMap[2]];
+     B5 = srcPixel[permuteMap[3]];
+     srcPixel += 4;
+     
+     Yp0 = ROUND_TO_NEAREST_INTEGER( Yp_bias   +   R0 * R_Yp      + G0 * G_Yp + B0 * B_Yp     )
+     Yp1 = ROUND_TO_NEAREST_INTEGER( Yp_bias   +   R1 * R_Yp      + G1 * G_Yp + B1 * B_Yp     )
+     Cb0 = ROUND_TO_NEAREST_INTEGER( CbCr_bias + ( R0 * R_Cb      + G0 * G_Cb + B0 * B_Cb_R_Cr
+                                                   +   R1 * R_Cb      + G1 * G_Cb + B1 * B_Cb_R_Cr) / 2 )
+     Cr0 = ROUND_TO_NEAREST_INTEGER( CbCr_bias + ( R0 * B_Cb_R_Cr + G0 * G_Cr + B0 * B_Cr
+                                                   +   R1 * B_Cb_R_Cr + G1 * G_Cr + B1 * B_Cr     ) / 2 )
+     Yp2 = ROUND_TO_NEAREST_INTEGER( Yp_bias   +   R2 * R_Yp      + G2 * G_Yp + B2 * B_Yp     )
+     Yp3 = ROUND_TO_NEAREST_INTEGER( Yp_bias   +   R3 * R_Yp      + G3 * G_Yp + B3 * B_Yp     )
+     Cb1 = ROUND_TO_NEAREST_INTEGER( CbCr_bias + ( R2 * R_Cb      + G2 * G_Cb + B2 * B_Cb_R_Cr
+                                                   +   R3 * R_Cb      + G3 * G_Cb + B3 * B_Cb_R_Cr) / 2 )
+     Cr1 = ROUND_TO_NEAREST_INTEGER( CbCr_bias + ( R2 * B_Cb_R_Cr + G2 * G_Cr + B2 * B_Cr
+                                                   +   R3 * B_Cb_R_Cr + G3 * G_Cr + B3 * B_Cr     ) / 2 )
+     Yp4 = ROUND_TO_NEAREST_INTEGER( Yp_bias   +   R4 * R_Yp      + G4 * G_Yp + B4 * B_Yp     )
+     Yp5 = ROUND_TO_NEAREST_INTEGER( Yp_bias   +   R5 * R_Yp      + G5 * G_Yp + B5 * B_Yp     )
+     Cb2 = ROUND_TO_NEAREST_INTEGER( CbCr_bias + ( R4 * R_Cb      + G4 * G_Cb + B4 * B_Cb_R_Cr
+                                                   +   R5 * R_Cb      + G5 * G_Cb + B5 * B_Cb_R_Cr) / 2 )
+     Cr2 = ROUND_TO_NEAREST_INTEGER( CbCr_bias + ( R4 * B_Cb_R_Cr + G4 * G_Cr + B4 * B_Cr
+                                                   +   R5 * B_Cb_R_Cr + G5 * G_Cr + B5 * B_Cr     ) / 2 )
+     
+     uint32_t *destPixel = dest.data;
+     packv210AndStore(destPixel, Yp0, Yp1, Yp2, Yp3, Yp4, Yp5, Cb0, Cb1, Cb2, Cr0, Cr1, Cr2);
+     destPixel += 4;
+     @/textblock </pre>
+     
+  @return     
+    <pre> @textblock
+     kvImageNoError                  Is returned when there was no error.
+     kvImageUnknownFlagsBit          Is returned when there is a unknown flag.
+     kvImageRoiLargerThanInputBuffer Is returned when src.width < dest.width || src.height < dest.height
+    @/textblock </pre>
+ 
+     Results are guaranteed to be faithfully rounded.
+     Chroma is sampled at center by default.
+*/
+    
+vImage_Error vImageConvert_ARGB16Q12To422CrYpCbYpCbYpCbYpCrYpCrYp10(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_ARGBToYpCbCr *info, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+    
+    
+/*! @functiongroup 422CbYpCrYp16(bitdepth) ('v216')    */
+    
+/*!
+     @function vImageConvert_422CbYpCrYp16ToARGB8888
+     
+     @abstract Convert YUV 422CbYpCrYp16 format to ARGB8888
+     
+     @param src
+     A pointer to vImage_Buffer that references YUV 422CbYpCrYp16 source pixels.
+     
+     @param dest
+     A pointer to vImage_Buffer that references 8-bit ARGB interleaved destination pixels.
+     
+     @param info
+     A pointer to vImage_YpCbCrToRGBConversionInfo which contains info coeffcient and preBias values.
+     
+     @param permuteMap
+     Values that can be used to switch the channel order of dest.
+     For exmaple, permuteMap[4] = {0, 1, 2, 3} or NULL are ARGB8888.
+     permuteMap[4] = {3, 2, 1, 0} is BGRA8888.
+     Any order of permuteMap is allowed when each permuteMap value is 0, 1, 2, or 3.
+ 
+     @param alpha
+     A value for alpha channel in dest.
+     
+     @param flags
+ <pre> @textblock
+     kvImageGetTempBufferSize    Returns 0. Does no work.
+     kvImageDoNotTile            Disables internal multithreading, if any.
+  @/textblock </pre>  
+ 
+     @discussion Convert YUV 422CbYpCrYp16 format to ARGB8888
+     <pre> @textblock
+     
+                            pixel0-1
+     byte0 byte1   byte2 byte3   byte4 byte5   byte6 byte7
+     LE-16-bit-Cb  LE-16-bit-Y0  LE-16-bit-Cr  LE-16-bit-Y1  =>  A0 R0 G0 B0  A1 R1 G1 B1
+     
+     (LE and left-justified 16-bit-per-component)
+     @/textblock </pre>
+     
+     YUV 422CbYpCrYp16 can be used for 16-bit 'v216' that is defined in CVPixelBuffer.h.
+     
+     For example, if we want to use this function to convert ARGB8888 to 16-bit 'v216' with ITU 601 video range, then we need
+     generate vImage_YpCbCrToARGB by vImageConvert_YpCbCrToARGB_GenerateConversion() and call this function.
+     
+     Yp_bias, CbCr_bias, CbCr_bias, Yp, Cr_R, Cb_G, Cr_G, and Cb_B are calculated and converted into the right
+     format by vImageConvert_YpCbCrToARGB_GenerateConversion() inside of vImage_YpCbCrToARGB.
+     
+     
+     The per-pixel operation is:
+     <pre> @textblock
+ 
+     uint64_t *srcPixel = src.data;
+     uint64_t pixel = *srcPixel;
+     Yp0 = getYp0From16bitv216(pixel);
+     Cb0 = getCb0From16bitv216(pixel);
+     Yp1 = getYp1From16bitv216(pixel);
+     Cr0 = getCr0From16bitv216(pixel);
+     srcPixel += 1;
+     
+     A0 = alpha
+     R0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp0 - Yp_bias) * Yp                            + (Cr0 - CbCr_bias) * Cr_R), 255 )
+     G0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp0 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_G + (Cr0 - CbCr_bias) * Cr_G), 255 )
+     B0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp0 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_B                           ), 255 )
+     A1 = alpha
+     R1 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp1 - Yp_bias) * Yp                            + (Cr0 - CbCr_bias) * Cr_R), 255 )
+     G1 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp1 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_G + (Cr0 - CbCr_bias) * Cr_G), 255 )
+     B1 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp1 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_B                           ), 255 )
+     
+     uint8_t ARGB[8];
+     ARGB[0] = A0;
+     ARGB[1] = R0;
+     ARGB[2] = G0;
+     ARGB[3] = B0;
+     ARGB[4] = A1;
+     ARGB[5] = R1;
+     ARGB[6] = G1;
+     ARGB[7] = B1;
+     
+     uint8_t *destPixel = dest.data;
+     destPixel[0] = ARGB[permuteMap[0]];
+     destPixel[1] = ARGB[permuteMap[1]];
+     destPixel[2] = ARGB[permuteMap[2]];
+     destPixel[3] = ARGB[permuteMap[3]];
+     destPixel[4] = ARGB[permuteMap[0]+4];
+     destPixel[5] = ARGB[permuteMap[1]+4];
+     destPixel[6] = ARGB[permuteMap[2]+4];
+     destPixel[7] = ARGB[permuteMap[3]+4];
+     destPixel += 8;
+    @/textblock </pre>
+ 
+ 
+@return
+    <pre> @textblock
+     kvImageNoError                  Is returned when there was no error.
+     kvImageUnknownFlagsBit          Is returned when there is a unknown flag.
+     kvImageRoiLargerThanInputBuffer Is returned when src.width < dest.width || src.height < dest.height
+    @/textblock <pre>
+ 
+     Results are guaranteed to be faithfully rounded.
+     This function can work in place.
+*/
+    
+vImage_Error vImageConvert_422CbYpCrYp16ToARGB8888(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_YpCbCrToARGB *info, const uint8_t permuteMap[4], const uint8_t alpha, vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+    
+/*!
+     @function vImageConvert_ARGB8888To422CbYpCrYp16
+     
+     @abstract Convert ARGB8888 to YUV 422CbYpCrYp16 format.
+     
+     @param src
+     A pointer to vImage_Buffer that references 8-bit ARGB interleaved source pixels.
+     
+     @param dest
+     A pointer to vImage_Buffer that references YUV 422CbYpCrYp16 destination pixels.
+     
+     @param info
+     A pointer to vImage_RGBToYpCbCrConversionInfo which contains info coeffcient and postBias values.
+     
+     @param permuteMap
+     Values that can be used to switch the channel order of dest.
+     For exmaple, permuteMap[4] = {0, 1, 2, 3} or NULL are ARGB8888.
+     permuteMap[4] = {3, 2, 1, 0} is BGRA8888.
+     Any order of permuteMap is allowed when each permuteMap value is 0, 1, 2, or 3, as long as each channel appears only once.
+ 
+     @param flags
+ <pre> @textblock
+     kvImageGetTempBufferSize    Returns 0. Does no work.
+     kvImageDoNotTile            Disables internal multithreading, if any.
+  @/textblock </pre>     
+     @discussion Convert ARGB8888 to YUV 422CbYpCrYp16 format
+     <pre> @textblock
+     
+                                                        pixel0-1
+                                   byte0 byte1   byte2 byte3   byte4 byte5   byte6 byte7
+     A0 R0 G0 B0  A1 R1 G1 B1  =>  LE-16-bit-Cb  LE-16-bit-Y0  LE-16-bit-Cr  LE-16-bit-Y1
+     
+     (LE and left-justified 16-bit-per-component)
+     @/textblock </pre>
+     
+     YUV 422CbYpCrYp16 can be used for 16-bit 'v216' that is defined in CVPixelBuffer.h.
+     
+     For example, if we want to use this function to convert ARGB8888 to 16-bit 'v216' with ITU 601 video range, then we need
+     generate vImage_ARGBToYpCbCr by vImageConvert_ARGBToYpCbCr_GenerateConversion() and call this function.
+     
+     Yp_bias, CbCr_bias, CbCr_bias, R_Yp, G_Yp, B_Yp, R_Cb, G_Cb, B_Cb_R_Cr, G_Cr and B_Cr are calculated and
+     converted into the right format by vImageConvert_ARGBToYpCbCr_GenerateConversion() inside of vImage_ARGBToYpCbCr.
+     
+     The per-pixel operation is:
+     <pre> @textblock
+ 
+     uint8_t *srcPixel = src.data;
+     A0 = srcPixel[permuteMap[0]];
+     R0 = srcPixel[permuteMap[1]];
+     G0 = srcPixel[permuteMap[2]];
+     B0 = srcPixel[permuteMap[3]];
+     srcPixel += 4;
+     A1 = srcPixel[permuteMap[0]];
+     R1 = srcPixel[permuteMap[1]];
+     G1 = srcPixel[permuteMap[2]];
+     B1 = srcPixel[permuteMap[3]];
+     srcPixel += 4;
+     
+     Yp0 = ROUND_TO_NEAREST_INTEGER( Yp_bias   +   R0 * R_Yp      + G0 * G_Yp + B0 * B_Yp     )
+     Yp1 = ROUND_TO_NEAREST_INTEGER( Yp_bias   +   R1 * R_Yp      + G1 * G_Yp + B1 * B_Yp     )
+     Cb0 = ROUND_TO_NEAREST_INTEGER( CbCr_bias + ( R0 * R_Cb      + G0 * G_Cb + B0 * B_Cb_R_Cr
+                                                   +   R1 * R_Cb      + G1 * G_Cb + B1 * B_Cb_R_Cr) / 2 )
+     Cr0 = ROUND_TO_NEAREST_INTEGER( CbCr_bias + ( R0 * B_Cb_R_Cr + G0 * G_Cr + B0 * B_Cr
+                                                   +   R1 * B_Cb_R_Cr + G1 * G_Cr + B1 * B_Cr     ) / 2 )
+     
+     uint64_t *destPixel = dest.data;
+     pack16bitv216AndStore(destPixel, Yp0, Yp1, Cb0, Cr0);
+     destPixel += 1;
+   
+     @/textblock </pre>
+ 
+  @return
+    <pre> @textblock
+     kvImageNoError                  Is returned when there was no error.
+     kvImageUnknownFlagsBit          Is returned when there is a unknown flag.
+     kvImageRoiLargerThanInputBuffer Is returned when src.width < dest.width || src.height < dest.height
+    @/textblock </pre>
+ 
+     Results are guaranteed to be faithfully rounded.
+     Chroma is sampled at center by default.
+     This function can work in place.
+*/
+    
+vImage_Error vImageConvert_ARGB8888To422CbYpCrYp16(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_ARGBToYpCbCr *info, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+    
+/*!
+     @function vImageConvert_422CbYpCrYp16ToARGB16U
+     
+     @abstract Convert YUV 422CbYpCrYp16 format to ARGB16U
+     
+     @param src
+     A pointer to vImage_Buffer that references YUV 422CbYpCrYp16 source pixels.
+     
+     @param dest
+     A pointer to vImage_Buffer that references 16-bit ARGB interleaved destination pixels.
+     
+     @param info
+     A pointer to vImage_YpCbCrToRGBConversionInfo which contains info coeffcient and preBias values.
+     
+     @param permuteMap
+     Values that can be used to switch the channel order of dest.
+     permuteMap[4] = {0, 1, 2, 3} or NULL are ARGB16U.
+     permuteMap[4] = {3, 2, 1, 0} is BGRA16U.
+     
+     @param alpha
+     A 16-bit value for alpha channel in dest.
+     
+     @param flags
+ <pre> @textblock
+     kvImageGetTempBufferSize    Returns 0. Does no work.
+     kvImageDoNotTile            Disables internal multithreading, if any.
+ @/textblock </pre>
+ 
+     @discussion Convert YUV 422CbYpCrYp16 format to ARGB16U
+     <pre> @textblock
+     
+                            pixel0-1
+     byte0 byte1   byte2 byte3   byte4 byte5   byte6 byte7
+     LE-16-bit-Cb  LE-16-bit-Y0  LE-16-bit-Cr  LE-16-bit-Y1  =>  A0 R0 G0 B0  A1 R1 G1 B1
+     
+     (LE and left-justified 16-bit-per-component)
+     @/textblock </pre>
+     
+     YUV 422CbYpCrYp16 can be used for 16-bit 'v216' that is defined in CVPixelBuffer.h.
+     
+     For example, if we want to use this function to convert ARGB16U to 16-bit 'v216' with ITU 601 video range, then we need
+     generate vImage_YpCbCrToARGB by vImageConvert_YpCbCrToARGB_GenerateConversion() and call this function.
+     
+     Yp_bias, CbCr_bias, CbCr_bias, Yp, Cr_R, Cb_G, Cr_G, and Cb_B are calculated and converted into the right
+     format by vImageConvert_YpCbCrToARGB_GenerateConversion() inside of vImage_YpCbCrToARGB.
+     
+     
+     The per-pixel operation is:
+ <pre> @textblock
+ 
+     uint64_t *srcPixel = src.data;
+     uint64_t pixel = *srcPixel;
+     Yp0 = getYp0From16bitv216(pixel);
+     Cb0 = getCb0From16bitv216(pixel);
+     Yp1 = getYp1From16bitv216(pixel);
+     Cr0 = getCr0From16bitv216(pixel);
+     srcPixel += 1;
+     
+     A0 = alpha
+     R0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp0 - Yp_bias) * Yp                            + (Cr0 - CbCr_bias) * Cr_R), 65535 )
+     G0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp0 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_G + (Cr0 - CbCr_bias) * Cr_G), 65535 )
+     B0 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp0 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_B                           ), 65535 )
+     A1 = alpha
+     R1 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp1 - Yp_bias) * Yp                            + (Cr0 - CbCr_bias) * Cr_R), 65535 )
+     G1 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp1 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_G + (Cr0 - CbCr_bias) * Cr_G), 65535 )
+     B1 = CLAMP(0, ROUND_TO_NEAREST_INTEGER((Yp1 - Yp_bias) * Yp + (Cb0 - CbCr_bias) * Cb_B                           ), 65535 )
+     
+     uint16_t ARGB[8];
+     ARGB[0] = A0;
+     ARGB[1] = R0;
+     ARGB[2] = G0;
+     ARGB[3] = B0;
+     ARGB[4] = A1;
+     ARGB[5] = R1;
+     ARGB[6] = G1;
+     ARGB[7] = B1;
+     
+     uint16_t *destPixel = dest.data;
+     destPixel[0] = ARGB[permuteMap[0]];
+     destPixel[1] = ARGB[permuteMap[1]];
+     destPixel[2] = ARGB[permuteMap[2]];
+     destPixel[3] = ARGB[permuteMap[3]];
+     destPixel[4] = ARGB[permuteMap[0]+4];
+     destPixel[5] = ARGB[permuteMap[1]+4];
+     destPixel[6] = ARGB[permuteMap[2]+4];
+     destPixel[7] = ARGB[permuteMap[3]+4];
+     destPixel += 8;
+
+ @/textblock </pre>
 
 
+ @return 
+ <pre> @textblock
+     kvImageNoError                  Is returned when there was no error.
+     kvImageUnknownFlagsBit          Is returned when there is a unknown flag.
+     kvImageRoiLargerThanInputBuffer Is returned when src.width < dest.width || src.height < dest.height
+ @/textblock </pre>
+ 
+     Results are guaranteed to be faithfully rounded.
+*/
+    
+vImage_Error vImageConvert_422CbYpCrYp16ToARGB16U(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_YpCbCrToARGB *info, const uint8_t permuteMap[4], const uint16_t alpha, vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+    
+/*!
+     @function vImageConvert_ARGB16UTo422CbYpCrYp16
+     
+     @abstract Convert ARGB16U to YUV 422CbYpCrYp16 format.
+     
+     @param src
+     A pointer to vImage_Buffer that references 16-bit ARGB interleaved source pixels.
+     
+     @param dest
+     A pointer to vImage_Buffer that references YUV 422CbYpCrYp16 destination pixels.
+     
+     @param info
+     A pointer to vImage_RGBToYpCbCrConversionInfo which contains info coeffcient and postBias values.
+     This is generated by vImageConvert_ARGBToYpCbCr_GenerateConversion().
+     
+     @param permuteMap
+     Values that can be used to switch the channel order of src.
+     permuteMap[4] = {0, 1, 2, 3} or NULL are ARGB16U.
+     permuteMap[4] = {3, 2, 1, 0} is BGRA16U.
+     
+     @param flags
+ <pre> @textblock
+     kvImageGetTempBufferSize    Returns 0. Does no work.
+     kvImageDoNotTile            Disables internal multithreading, if any.
+ @/textblock </pre>
+ 
+ 
+     @discussion Convert ARGB16U to YUV 422CbYpCrYp16 format
+     <pre> @textblock
+     
+                                                        pixel0-1
+                                   byte0 byte1   byte2 byte3   byte4 byte5   byte6 byte7
+     A0 R0 G0 B0  A1 R1 G1 B1  =>  LE-16-bit-Cb  LE-16-bit-Y0  LE-16-bit-Cr  LE-16-bit-Y1
+     
+     (LE and left-justified 16-bit-per-component)
+     @/textblock </pre>
+     
+     YUV 422CbYpCrYp16 can be used for 16-bit 'v216' that is defined in CVPixelBuffer.h.
+     
+     For example, if we want to use this function to convert ARGB16U to 16-bit 'v216' with ITU 601 video range, then we need
+     generate vImage_ARGBToYpCbCr by vImageConvert_ARGBToYpCbCr_GenerateConversion() and call this function.
+     
+     Yp_bias, CbCr_bias, CbCr_bias, R_Yp, G_Yp, B_Yp, R_Cb, G_Cb, B_Cb_R_Cr, G_Cr and B_Cr are calculated and
+     converted into the right format by vImageConvert_ARGBToYpCbCr_GenerateConversion() inside of vImage_ARGBToYpCbCr.
+     
+     The per-pixel operation is:
+     <pre> @textblock
+ 
+     uint16_t *srcPixel = src.data;
+     A0 = srcPixel[permuteMap[0]];
+     R0 = srcPixel[permuteMap[1]];
+     G0 = srcPixel[permuteMap[2]];
+     B0 = srcPixel[permuteMap[3]];
+     srcPixel += 4;
+     A1 = srcPixel[permuteMap[0]];
+     R1 = srcPixel[permuteMap[1]];
+     G1 = srcPixel[permuteMap[2]];
+     B1 = srcPixel[permuteMap[3]];
+     srcPixel += 4;
+     
+     Yp0 = Yp_bias + ROUND_TO_NEAREST_INTEGER( R0 * R_Yp + G0 * G_Yp + B0 * B_Yp )
+     Yp1 = Yp_bias + ROUND_TO_NEAREST_INTEGER( R1 * R_Yp + G1 * G_Yp + B1 * B_Yp )
+     R0 += R1;  G0 += G1;   B0 += B1;
+     Cb0 = CbCr_bias + ROUND_TO_NEAREST_INTEGER( ( R0 * R_Cb + G0 * G_Cb + B0 * B_Cb_R_Cr) / 2 )
+     Cr0 = CbCr_bias + ROUND_TO_NEAREST_INTEGER( ( R0 * B_Cb_R_Cr + G0 * G_Cr + B0 * B_Cr) / 2 )
+     
+     uint64_t *destPixel = dest.data;
+     pack16bitv216AndStore(destPixel, Yp0, Yp1, Cb0, Cr0);
+     destPixel += 1;
+        
+    @/textblock </pre>
+ 
+ 
+  @return
+   <pre> @textblock
+     kvImageNoError                  Is returned when there was no error.
+     kvImageUnknownFlagsBit          Is returned when there is a unknown flag.
+     kvImageRoiLargerThanInputBuffer Is returned when src.width < dest.width || src.height < dest.height
+   @/textblock </pre>
+ 
+     Results are guaranteed to be faithfully rounded.
+     Chroma is sampled at center by default.
+ 
+     Note: vImage doesn't do anything with the alpha here. It is just thrown away. The operation is therefore best suited for kCGImageAlphaNoneSkip<First/Last>
+           images.  If it has alpha, you may wish to composite against an opaque background first, before the transparency information is lost.
+           If it is premultiplied by alpha, you at minimum should unpremultiply it first, or composite it against an opaque background. See
+           vImageUnpremultiplyData_ARGB16U() and vImageFlatten_ARGB16U().
+*/
+    
+vImage_Error vImageConvert_ARGB16UTo422CbYpCrYp16(const vImage_Buffer *src, const vImage_Buffer *dest, const vImage_ARGBToYpCbCr *info, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2,3) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+    
+/*! @functiongroup RGBA1010102    */
+
+/*!
+     @function vImageConvert_RGBA1010102ToARGB8888
+     
+     @abstract Convert RGBA1010102 to ARGB8888 format.
+     
+     @param src
+     A pointer to vImage_Buffer that references 10-bit RGB interleaved source pixels. Source pixels must be at least 4 byte aligned.
+     
+     @param dest
+     A pointer to vImage_Buffer that references 8-bit ARGB interleaved destination pixels. Destination pixels may have any alignment.
+ 
+     @param RGB101010RangeMax
+     A maximum value for 10-bit RGB pixel.
+ 
+     @param RGB101010RangeMin
+     A minimum value for 10-bit RGB pixel.
+ 
+     @param permuteMap
+     Values that can be used to switch the channel order of dest.
+     For exmaple, permuteMap[4] = {0, 1, 2, 3} or NULL are ARGB8888.
+     permuteMap[4] = {3, 2, 1, 0} is BGRA8888.
+     Any order of permuteMap is allowed when each permuteMap value is 0, 1, 2, or 3.
+ 
+     @param flags
+ <pre> @textblock
+     kvImageDoNotTile            Disables internal multithreading, if any.
+ @/textblock <pre>
+ 
+     @discussion Convert RGBA1010102 to ARGB8888 format
+     
+     RGBA1010102 is almost the same format that is defined in CVPixelBuffer.h as 'kCVPixelFormatType_30RGB'
+     except that this format uses the least significant 2 bits for alpha channel.
+ 
+     This format is 10-bit big endian 32-bit pixels.
+ 
+     RGB101010RangeMax & RGB101010RangeMin are available for non-full-range pixel values.
+     For full-range pixel values, the user can set these as
+ 
+     RGB101010RangeMax  = 1023;
+     RGB101010RangeMin  = 0;
+ 
+     The per-pixel operation is:
+     <pre> @textblock
+ 
+     uint32_t *srcPixel = src.data;
+     uint32_t pixel = ntohl(srcPixel[0]);
+     srcPixel += 1;
+ 
+     int32_t A2  = pixel & 0x3;
+     int32_t R10 = (pixel >> 22) & 0x3ff;
+     int32_t G10 = (pixel >> 12) & 0x3ff;
+     int32_t B10 = (pixel >>  2) & 0x3ff;
+     int32_t range10 = RGB101010RangeMax - RGB101010RangeMin;
+ 
+     A2  = (A2 * UCHAR_MAX + 1) / 3;
+     R10 = ((R10 - RGB101010RangeMin) * UCHAR_MAX + (range10 >> 1)) / range10;
+     G10 = ((G10 - RGB101010RangeMin) * UCHAR_MAX + (range10 >> 1)) / range10;
+     B10 = ((B10 - RGB101010RangeMin) * UCHAR_MAX + (range10 >> 1)) / range10;
+ 
+     uint8_t R8, G8, B8;
+     R8 = CLAMP(0, R10, UCHAR_MAX);
+     G8 = CLAMP(0, G10, UCHAR_MAX);
+     B8 = CLAMP(0, B10, UCHAR_MAX);
+ 
+     uint8_t ARGB[4];
+     ARGB[0] = A2;
+     ARGB[1] = R8;
+     ARGB[2] = G8;
+     ARGB[3] = B8;
+ 
+     uint8_t *destPixel = dest.data;
+     destPixel[0] = ARGB[permuteMap[0]];
+     destPixel[1] = ARGB[permuteMap[1]];
+     destPixel[2] = ARGB[permuteMap[2]];
+     destPixel[3] = ARGB[permuteMap[3]];
+     destPixel += 4;
+     @/textblock <pre>
+ 
+@return
+ <pre> @textblock
+     kvImageNoError                  Is returned when there was no error.
+     kvImageUnknownFlagsBit          Is returned when there is a unknown flag.
+     kvImageRoiLargerThanInputBuffer Is returned when src.width < dest.width || src.height < dest.height
+     kvImageInvalidParameter         Is returned when RGB101010RangeMin is bigger than RGB101010RangeMax.
+ @/textblock </pre>
+ 
+     Note: Results are guaranteed to be faithfully rounded.
+*/
+    
+vImage_Error vImageConvert_RGBA1010102ToARGB8888(const vImage_Buffer *src, const vImage_Buffer *dest, int32_t RGB101010RangeMin, int32_t RGB101010RangeMax, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+    
+/*!
+     @function vImageConvert_ARGB8888ToRGBA1010102
+     
+     @abstract Convert ARGB8888 to RGBA1010102 format.
+     
+     @param src
+     A pointer to vImage_Buffer that references 8-bit ARGB interleaved source pixels. Source pixels may have any alignment.
+     
+     @param dest
+     A pointer to vImage_Buffer that references 10-bit RGB interleaved destination pixels.  Destination pixels must be at least 4 byte aligned.
+     
+     @param RGB101010RangeMax
+     A maximum value for 10-bit RGB pixel.
+ 
+     @param RGB101010RangeMin
+     A minimum value for 10-bit RGB pixel.
+ 
+     @param permuteMap
+     Values that can be used to switch the channel order of src.
+     For exmaple, permuteMap[4] = {0, 1, 2, 3} or NULL are ARGB8888.
+     permuteMap[4] = {3, 2, 1, 0} is BGRA8888.
+     Any order of permuteMap is allowed when each permuteMap value is 0, 1, 2, or 3.
+     
+     @param flags
+ <pre> @textblock
+     kvImageDoNotTile            Disables internal multithreading, if any.
+ @/textblock </pre>
+ 
+     @discussion Convert ARGB8888 to RGBA1010102 format.
+     
+     RGBA1010102 is almost the same format that is defined in CVPixelBuffer.h as 'kCVPixelFormatType_30RGB'
+     except that this format uses the least significant 2 bits for alpha channel.
+ 
+     This format is 10-bit big endian 32-bit pixels.
+ 
+     RGB101010RangeMax & RGB101010RangeMin are available for non-full-range pixel values.
+     For full-range pixel values, the user can set these as
+ 
+ <pre> @textblock
+     RGB101010RangeMax  = 1023;
+     RGB101010RangeMin  = 0;
+ @/textblock </pre>
+ 
+     The per-pixel operation is:
+ <pre> @textblock
+ 
+     uint8_t *srcPixel = src.data;
+     A8 = srcPixel[permuteMap[0]];
+     R8 = srcPixel[permuteMap[1]];
+     G8 = srcPixel[permuteMap[2]];
+     B8 = srcPixel[permuteMap[3]];
+     srcPixel += 4;
+ 
+     int32_t R10, G10, B10;
+     int32_t range10 = RGB101010RangeMax - RGB101010RangeMin;
+     int32_t rounding = UCHAR_MAX >> 1;
+     R10 = ((R8 * range10 + rounding) / UCHAR_MAX) + RGB101010RangeMin;
+     G10 = ((G8 * range10 + rounding) / UCHAR_MAX) + RGB101010RangeMin;
+     B10 = ((B8 * range10 + rounding) / UCHAR_MAX) + RGB101010RangeMin;
+     A10 = ((A10 * 3 + rounding) / UCHAR_MAX);
+ 
+     uint32_t *destPixel = dest.data;
+     destPixel[0] = htonl((R10 << 22) | (G10 << 12) | (B10 << 2) | A10);
+     destPixel += 1;
+ @/textblock </pre>
+ 
+@return
+ <pre> @textblock
+     kvImageNoError                  Is returned when there was no error.
+     kvImageUnknownFlagsBit          Is returned when there is a unknown flag.
+     kvImageRoiLargerThanInputBuffer Is returned when src.width < dest.width || src.height < dest.height
+     kvImageInvalidParameter         Is returned when RGB101010RangeMin is bigger than RGB101010RangeMax.
+ @/textblock </pre>
+ 
+     Note
+     ----
+     Results are guaranteed to be faithfully rounded.
+*/
+    
+vImage_Error vImageConvert_ARGB8888ToRGBA1010102(const vImage_Buffer *src, const vImage_Buffer *dest, int32_t RGB101010RangeMin, int32_t RGB101010RangeMax, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+    
+/*!
+     @function vImageConvert_RGBA1010102ToARGB16Q12
+     
+     @abstract Convert RGBA1010102 to ARGB16Q12 format.
+     
+     @param src
+     A pointer to vImage_Buffer that references 10-bit RGB interleaved source pixels.  Samples must be at least 4 byte aligned.
+     
+     @param dest
+     A pointer to vImage_Buffer that references 16Q12 ARGB interleaved destination pixels.  Samples must be at least 2 byte aligned.
+     
+     @param RGB101010RangeMax
+     A maximum value for 10-bit RGB pixel.
+     
+     @param RGB101010RangeMin
+     A minimum value for 10-bit RGB pixel.
+     
+     @param permuteMap
+     Values that can be used to switch the channel order of dest.
+     For exmaple, permuteMap[4] = {0, 1, 2, 3} or NULL are ARGB16Q12.
+     permuteMap[4] = {3, 2, 1, 0} is BGRA16Q12.
+     Any order of permuteMap is allowed when each permuteMap value is 0, 1, 2, or 3, as long as each channel is unique.  That is, ARRG is not an allowed order
+     because R is repeated.
+ 
+     @param flags
+ <pre> @textblock
+     kvImageDoNotTile            Disables internal multithreading, if any.
+ @/textblock </pre>
+ 
+     @discussion Convert RGBA1010102 to ARGB16Q12 format
+     
+     RGBA1010102 is almost the same format that is defined in CVPixelBuffer.h as 'kCVPixelFormatType_30RGB'
+     except that this format uses the least significant 2 bits for alpha channel.
+     
+     This format is 10-bit big endian 32-bit pixels.
+     
+     RGB101010RangeMax & RGB101010RangeMin are available for non-full-range pixel values.
+     For full-range pixel values, the user can set these as
+     
+ <pre> @textblock
+     RGB101010RangeMax  = 1023;
+     RGB101010RangeMin  = 0;
+ @/textblock </pre>
+ 
+     The per-pixel operation is:
+     
+ <pre> @textblock
+     uint32_t *srcPixel = src.data;
+     uint32_t pixel = ntohl(srcPixel[0]);
+     srcPixel += 1;
+     
+     int32_t A2  = pixel & 0x3;
+     int32_t R10 = (pixel >> 22) & 0x3ff;
+     int32_t G10 = (pixel >> 12) & 0x3ff;
+     int32_t B10 = (pixel >>  2) & 0x3ff;
+     int32_t range10 = RGB101010RangeMax - RGB101010RangeMin;
+     
+     int16_t R16, G16, B16;
+     A2  = (A2 * 4096 + 1) / 3;
+     R16 = ((R10 - RGB101010RangeMin) * 4096 + (range10 >> 1)) / range10;
+     G16 = ((G10 - RGB101010RangeMin) * 4096 + (range10 >> 1)) / range10;
+     B16 = ((B10 - RGB101010RangeMin) * 4096 + (range10 >> 1)) / range10;
+     
+     R16 = CLAMP(INT16_MIN, R16, INT16_MAX);
+     G16 = CLAMP(INT16_MIN, G16, INT16_MAX);
+     B16 = CLAMP(INT16_MIN, B16, INT16_MAX);
+     
+     int16_t ARGB[4];
+     ARGB[0] = A2;
+     ARGB[1] = R16;
+     ARGB[2] = G16;
+     ARGB[3] = B16;
+     
+     int16_t *destPixel = dest.data;
+     destPixel[0] = ARGB[permuteMap[0]];
+     destPixel[1] = ARGB[permuteMap[1]];
+     destPixel[2] = ARGB[permuteMap[2]];
+     destPixel[3] = ARGB[permuteMap[3]];
+     destPixel += 4;
+ @/textblock </pre>
+ 
+@return
+ <pre> @textblock
+     kvImageNoError                  Is returned when there was no error.
+     kvImageUnknownFlagsBit          Is returned when there is a unknown flag.
+     kvImageRoiLargerThanInputBuffer Is returned when src.width < dest.width || src.height < dest.height
+     kvImageInvalidParameter         Is returned when RGB101010RangeMin is bigger than RGB101010RangeMax.
+ @/textblock </pre>
+ 
+     Note: Results are guaranteed to be faithfully rounded.
+*/
+    
+vImage_Error vImageConvert_RGBA1010102ToARGB16Q12(const vImage_Buffer *src, const vImage_Buffer *dest, int32_t RGB101010RangeMin, int32_t RGB101010RangeMax, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+    
+/*!
+     @function vImageConvert_ARGB16Q12ToRGBA1010102
+     
+     @abstract Convert ARGB16Q12 to RGBA1010102 format.
+     
+     @param src
+     A pointer to vImage_Buffer that references 16Q12 ARGB interleaved source pixels.   ARGB16Q12 pixels must be at least 2 byte aligned.
+     
+     @param dest
+     A pointer to vImage_Buffer that references 10-bit RGB interleaved destination pixels.  RGBA1010102 pixels must be at least 4 byte aligned.
+     
+     @param RGB101010RangeMax
+     A maximum value for the range of 10-bit RGB pixel.
+ 
+     @param RGB101010RangeMin
+     A minimum value for the range of 10-bit RGB pixel.
+ 
+     @param RGB101010Max
+     A maximum value for 10-bit RGB pixel.
+ 
+     @param RGB101010Min
+     A minimum value for 10-bit RGB pixel.
+     
+     @param permuteMap
+     Values that can be used to switch the channel order of dest.
+     For exmaple, permuteMap[4] = {0, 1, 2, 3} or NULL are ARGB16Q12.
+     permuteMap[4] = {3, 2, 1, 0} is BGRA16Q12.
+     
+     @param flags
+  <pre> @textblock
+     kvImageDoNotTile            Disables internal multithreading, if any.
+  @/textblock </pre>     
+     @discussion Convert ARGB16Q12 to RGBA1010102 format.
+     
+     RGBA1010102 is almost the same format that is defined in CVPixelBuffer.h as 'kCVPixelFormatType_30RGB'
+     except that this format uses the least significant 2 bits for alpha channel.
+     
+     This format is 10-bit big endian 32-bit pixels.
+     
+     RGB101010RangeMax & RGB101010RangeMin are available for non-full-range pixel values.
+     For full-range pixel values, the user can set these as
+     
+ <pre> @textblock
+     RGB101010RangeMax  = 1023;
+     RGB101010RangeMin  = 0;
+ @/textblock </pre>
+ 
+     RGB101010Max & RGB101010Min are available to specify the min / max of the representation.
+     This will be used as clipping the results.
+ 
+ <pre> @textblock
+     RGB101010Max  = 1023;
+     RGB101010Min  = 0;
+ @/textblock </pre>
+
+     This is needed because 16Q12 has a chance to be outside of [0.0, 1.0] range and we are converting those
+     values into video-range. Then, there will be some numbers outside of 10-bit video-range and we want those 
+     values to be representable as much as possible.
+ 
+     The per-pixel operation is:
+ <pre> @textblock
+ 
+     int16_t *srcPixel = src.data;
+     A16 = srcPixel[permuteMap[0]];
+     R16 = srcPixel[permuteMap[1]];
+     G16 = srcPixel[permuteMap[2]];
+     B16 = srcPixel[permuteMap[3]];
+     srcPixel += 4;
+     
+     int32_t R10, G10, B10;
+     int32_t range10 = RGB101010RangeMax - RGB101010RangeMin;
+     R10 = CLAMP(RGB101010Min, ((R16 * range10 + 2048) >> 12) + RGB101010RangeMin, RGB101010Max);
+     G10 = CLAMP(RGB101010Min, ((G16 * range10 + 2048) >> 12) + RGB101010RangeMin, RGB101010Max);
+     B10 = CLAMP(RGB101010Min, ((B16 * range10 + 2048) >> 12) + RGB101010RangeMin, RGB101010Max);
+     A10 = CLAMP( 0, (A16 * 3 + 2048) >> 12), 3);
+     
+     uint32_t *destPixel = dest.data;
+     destPixel[0] = htonl((R10 << 22) | (G10 << 12) | (B10 << 2) | A10);
+     destPixel += 1;
+ @/textblock </pre>
+ 
+@return
+ <pre> @textblock
+     kvImageNoError                  Is returned when there was no error.
+     kvImageUnknownFlagsBit          Is returned when there is a unknown flag.
+     kvImageRoiLargerThanInputBuffer Is returned when src.width < dest.width || src.height < dest.height
+     kvImageInvalidParameter         Is returned when RGB101010Min > RGB101010Max || RGB101010RangeMin > RGB101010RangeMax
+ @/textblock </pre>
+ 
+     Results are guaranteed to be faithfully rounded.
+*/
+    
+vImage_Error vImageConvert_ARGB16Q12ToRGBA1010102(const vImage_Buffer *src, const vImage_Buffer *dest, int32_t RGB101010RangeMin, int32_t RGB101010RangeMax, int32_t RGB101010Min, int32_t RGB101010Max, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+    
+    
+/*!
+     @function vImageConvert_RGBA1010102ToARGB16U
+     
+     @abstract Convert RGBA1010102 to ARGB16U format.
+     
+     @param src
+     A pointer to vImage_Buffer that references 10-bit RGB interleaved source pixels.
+     
+     @param dest
+     A pointer to vImage_Buffer that references 16-bit ARGB interleaved destination pixels.
+     
+     @param RGB101010RangeMax
+     A maximum value for 10-bit RGB pixel.
+     
+     @param RGB101010RangeMin
+     A minimum value for 10-bit RGB pixel.
+     
+     @param permuteMap
+     Values that can be used to switch the channel order of dest.
+     For exmaple, permuteMap[4] = {0, 1, 2, 3} or NULL are ARGB16U.
+     permuteMap[4] = {3, 2, 1, 0} is BGRA16U.
+     Any order of permuteMap is allowed when each permuteMap value is 0, 1, 2, or 3.
+ 
+     @param flags
+  <pre> @textblock
+     kvImageDoNotTile            Disables internal multithreading, if any.
+  @/textblock </pre>     
+     @discussion Convert RGBA1010102 to ARGB16U format
+     
+     RGBA1010102 is almost the same format that is defined in CVPixelBuffer.h as 'kCVPixelFormatType_30RGB'
+     except that this format uses the least significant 2 bits for alpha channel.
+ 
+     This format is 10-bit big endian 32-bit pixels.
+ 
+     RGB101010RangeMax & RGB101010RangeMin are available for non-full-range pixel values.
+     For full-range pixel values, the user can set these as
+     
+ <pre> @textblock
+     RGB101010RangeMax  = 1023;
+     RGB101010RangeMin  = 0;
+ @/textblock </pre>
+ 
+     The per-pixel operation is:
+ <pre> @textblock
+ 
+     uint32_t *srcPixel = src.data;
+     uint32_t pixel = ntohl(srcPixel[0]);
+     srcPixel += 1;
+     
+     int32_t A2  = pixel & 0x3;
+     int32_t R10 = (pixel >> 22) & 0x3ff;
+     int32_t G10 = (pixel >> 12) & 0x3ff;
+     int32_t B10 = (pixel >>  2) & 0x3ff;
+     int32_t range10 = RGB101010RangeMax - RGB101010RangeMin;
+     
+     A2  = (A2 * USHRT_MAX + 1) / 3;
+     R10 = ((R10 - RGB101010RangeMin) * USHRT_MAX + (range10 >> 1)) / range10;
+     G10 = ((G10 - RGB101010RangeMin) * USHRT_MAX + (range10 >> 1)) / range10;
+     B10 = ((B10 - RGB101010RangeMin) * USHRT_MAX + (range10 >> 1)) / range10;
+     
+     uint16_t R16, G16, B16;
+     R16 = CLAMP(0, R10, USHRT_MAX);
+     G16 = CLAMP(0, G10, USHRT_MAX);
+     B16 = CLAMP(0, B10, USHRT_MAX);
+     
+     uint16_t ARGB[4];
+     ARGB[0] = A2;
+     ARGB[1] = R16;
+     ARGB[2] = G16;
+     ARGB[3] = B16;
+     
+     uint16_t *destPixel = dest.data;
+     destPixel[0] = ARGB[permuteMap[0]];
+     destPixel[1] = ARGB[permuteMap[1]];
+     destPixel[2] = ARGB[permuteMap[2]];
+     destPixel[3] = ARGB[permuteMap[3]];
+     destPixel += 4;
+ @/textblock </pre>
+ 
+@return
+ <pre> @textblock
+     kvImageNoError                  Is returned when there was no error.
+     kvImageUnknownFlagsBit          Is returned when there is a unknown flag.
+     kvImageRoiLargerThanInputBuffer Is returned when src.width < dest.width || src.height < dest.height
+     kvImageInvalidParameter         Is returned when RGB101010RangeMin is bigger than RGB101010RangeMax.
+ @/textblock </pre>
+ 
+     Note: Results are guaranteed to be faithfully rounded.
+*/
+    
+vImage_Error vImageConvert_RGBA1010102ToARGB16U(const vImage_Buffer *src, const vImage_Buffer *dest, int32_t RGB101010RangeMin, int32_t RGB101010RangeMax, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+    
+/*!
+     @function vImageConvert_ARGB16UToRGBA1010102
+     
+     @abstract Convert ARGB16U to RGBA1010102 format.
+     
+     @param src
+     A pointer to vImage_Buffer that references 16-bit ARGB interleaved source pixels.
+     
+     @param dest
+     A pointer to vImage_Buffer that references 10-bit RGB interleaved destination pixels.
+     
+     @param RGB101010RangeMax
+     A maximum value for 10-bit RGB pixel.
+     
+     @param RGB101010RangeMin
+     A minimum value for 10-bit RGB pixel.
+     
+     @param permuteMap
+     Values that can be used to switch the channel order of dest.
+     For exmaple, permuteMap[4] = {0, 1, 2, 3} or NULL are ARGB16U.
+     permuteMap[4] = {3, 2, 1, 0} is BGRA16U.
+     Any order of permuteMap is allowed when each permuteMap value is 0, 1, 2, or 3, as long as each channel appears only once.
+     
+     @param flags
+  <pre> @textblock
+     kvImageDoNotTile            Disables internal multithreading, if any.
+  @/textblock </pre>     
+     @discussion Convert ARGB16U to RGB101010 format.
+     
+     RGB101010 is almost the same format that is defined in CVPixelBuffer.h as 'kCVPixelFormatType_30RGB'
+     except that this format uses the least significant 2 bits for alpha channel.
+ 
+     This format is 10-bit big endian 32-bit pixels. 
+ 
+     RGB101010RangeMax & RGB101010RangeMin are available for non-full-range pixel values.
+     For full-range pixel values, the user can set these as
+     
+     RGB101010RangeMax  = 1023;
+     RGB101010RangeMin  = 0;
+     
+     The per-pixel operation is:
+     
+     uint16_t *srcPixel = src.data;
+     A16 = srcPixel[permuteMap[0]];
+     R16 = srcPixel[permuteMap[1]];
+     G16 = srcPixel[permuteMap[2]];
+     B16 = srcPixel[permuteMap[3]];
+     srcPixel += 4;
+     
+     int32_t R10, G10, B10;
+     int32_t range10 = RGB101010RangeMax - RGB101010RangeMin;
+     R10 = ((R16 * range10 + (USHRT_MAX >> 1)) / USHRT_MAX) + RGB101010RangeMin;
+     G10 = ((G16 * range10 + (USHRT_MAX >> 1)) / USHRT_MAX) + RGB101010RangeMin;
+     B10 = ((B16 * range10 + (USHRT_MAX >> 1)) / USHRT_MAX) + RGB101010RangeMin;
+     A10 = ((A16 * 3 + (USHRT_MAX >> 1)) / USHRT_MAX);
+ 
+     uint32_t *destPixel = dest.data;
+     destPixel[0] = htonl((R10 << 22) | (G10 << 12) | (B10 << 2) | A10);
+     destPixel += 1;
+     
+@return
+ <pre> @textblock
+     kvImageNoError                  Is returned when there was no error.
+     kvImageUnknownFlagsBit          Is returned when there is a unknown flag.
+     kvImageRoiLargerThanInputBuffer Is returned when src.width < dest.width || src.height < dest.height
+     kvImageInvalidParameter         Is returned when RGB101010RangeMin is bigger than RGB101010RangeMax.
+ @/textblock </pre>
+ 
+     Results are guaranteed to be faithfully rounded.
+*/
+    
+vImage_Error vImageConvert_ARGB16UToRGBA1010102(const vImage_Buffer *src, const vImage_Buffer *dest, int32_t RGB101010RangeMin, int32_t RGB101010RangeMax, const uint8_t permuteMap[4], vImage_Flags flags) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+    
+/*! @functiongroup RGB888 */
+    
+/*!
+     @function vImagePermuteChannels_RGB888
+     
+     @abstract Reorder 3 color channels within the buffer according to the permute map.
+     
+     @param src
+     A pointer to vImage_Buffer that references 8-bit 3-channel interleaved source pixels.
+     
+     @param dest
+     A pointer to vImage_Buffer that references 8-bit 3-channel interleaved destination pixels.
+ 
+     @param permuteMap
+     Values that can be used to switch the channel order of dest.
+     For exmaple, permuteMap[3] = {0, 1, 2} or NULL will produce the same dest pixels as the src.
+     permuteMap[3] = {2, 1, 0} is the reverse ordered dest pixels from the dest.
+     Any order of permuteMap is allowed when each permuteMap value is 0, 1, or 2.
+     
+     @param flags
+  <pre> @textblock
+     kvImageDoNotTile            Disables internal multithreading, if any.
+  @/textblock </pre>     
+     @discussion This function can be used to reorder 3 color channel buffer.
+ 
+     The per-pixel operation is:
+     <pre> @textblock
+ 
+     uint8_t *srcRow = src.data;
+     uint8_t *destRow = dest.data;
+ 
+     R = srcRow[permuteMap[0]];
+     G = srcRow[permuteMap[1]];
+     B = srcRow[permuteMap[2]];
+     srcRow += 3;
+ 
+     destRow[0] = R;
+     destRow[1] = G;
+     destRow[2] = B;
+     destRow += 3;
+    
+     @/textblock </pre>
+ 
+@return
+ <pre> @textblock
+     kvImageNoError                  Is returned when there was no error.
+     kvImageUnknownFlagsBit          Is returned when there is a unknown flag.
+     kvImageRoiLargerThanInputBuffer Is returned when src.width < dest.width || src.height < dest.height
+ @/textblock </pre>
+
+   Works in place.
+*/
+    
+vImage_Error vImagePermuteChannels_RGB888(const vImage_Buffer *src, const vImage_Buffer *dest, const uint8_t permuteMap[3], vImage_Flags flags) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+
+/*!
+     @function vImageCopyBuffer
+ 
+     @abstract Copy vImage buffer from src to dest.
+ 
+     @param src
+     A pointer to source vImage_Buffer.
+ 
+     @param dest
+     A pointer to destination vImage_Buffer.
+ 
+     @param pixelSize
+     Number of bytes for one pixel.
+ 
+     @param flags
+  <pre> @textblock
+     kvImageDoNotTile            Disables internal multithreading, if any.
+     kvImageGetTempBufferSize    Returns 0. Does no work.
+  @/textblock </pre>
+ 
+@return
+ <pre> @textblock
+     kvImageNoError                  Is returned when there was no error.
+     kvImageBufferSizeMismatch       Is returned when src.width < dest.width || src.height < dest.height
+ @/textblock </pre>
+*/
+
+vImage_Error vImageCopyBuffer(const vImage_Buffer *src, const vImage_Buffer *dest, size_t pixelSize, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
     
 #ifdef __cplusplus
 }

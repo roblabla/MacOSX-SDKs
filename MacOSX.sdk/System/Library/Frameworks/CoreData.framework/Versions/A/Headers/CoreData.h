@@ -37,6 +37,10 @@
 
 #import <CoreData/NSIncrementalStore.h>
 #import <CoreData/NSIncrementalStoreNode.h>
+
 #import <CoreData/NSPersistentStoreRequest.h>
+#import <CoreData/NSPersistentStoreResult.h>
 #import <CoreData/NSSaveChangesRequest.h>
+#import <CoreData/NSBatchUpdateRequest.h>
+
 #import <CoreData/NSMergePolicy.h>

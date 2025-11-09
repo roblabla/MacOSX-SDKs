@@ -1,7 +1,7 @@
 /*
         NSActionCell.h
 	Application Kit
-	Copyright (c) 1994-2013, Apple Inc.
+	Copyright (c) 1994-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -16,11 +16,8 @@
     id		_controlView; // this was always private, but it isn't used for storage of the control view now either.  Please use the accessors -[NSCell controlView] and -[NSCell setControlView:].      
 }
 
-- (id)target;
-- (void)setTarget:(id)anObject;
-- (SEL)action;
-- (void)setAction:(SEL)aSelector;
-- (NSInteger)tag;
-- (void)setTag:(NSInteger)anInt;
+@property (weak) id target; // Target is weak for zeroing-weak compatible objects in apps linked on 10.10 or later. Otherwise the behavior of this property is 'assign’.
+@property SEL action;
+@property NSInteger tag;
 
 @end

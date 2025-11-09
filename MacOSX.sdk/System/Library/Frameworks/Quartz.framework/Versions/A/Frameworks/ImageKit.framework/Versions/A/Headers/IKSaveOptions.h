@@ -59,7 +59,7 @@
  @method initWithImageProperties:imageUTType:
  @abstract Initializes IKSaveOptions with metadata and UTType.
  */
-- (id)initWithImageProperties: (NSDictionary *)imageProperties imageUTType: (NSString *)imageUTType; 
+- (instancetype)initWithImageProperties: (NSDictionary *)imageProperties imageUTType: (NSString *)imageUTType; 
 
 /*! 
  @method addSaveOptionsAccessoryViewToSavePanel:

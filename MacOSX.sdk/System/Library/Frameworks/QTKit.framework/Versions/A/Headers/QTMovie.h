@@ -218,7 +218,7 @@ QTKIT_EXTERN NSString * const QTMovieCopyrightAttribute						AVAILABLE_QTKIT_VER
 
 /*!
 	@constant		QTMovieCreationTimeAttribute
-	@abstract		The creation time of a QTMovie object; the value for this key is of type NSDate.
+	@abstract		The creation time of the container from which a QTMovie object was initialized; the value for this key is of type NSDate.
 	@discussion		This attribute can be read but not written.
 					This attribute can be read but not written when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */

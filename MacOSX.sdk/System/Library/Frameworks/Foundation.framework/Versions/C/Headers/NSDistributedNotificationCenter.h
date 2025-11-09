@@ -1,5 +1,5 @@
 /*	NSDistributedNotificationCenter.h
-	Copyright (c) 1996-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1996-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSNotification.h>
@@ -27,7 +27,7 @@ typedef NS_ENUM(NSUInteger, NSNotificationSuspensionBehavior) {
 + (NSDistributedNotificationCenter *)notificationCenterForType:(NSString *)notificationCenterType;
 // Currently there is only one type.
 
-+ (id)defaultCenter;
++ (NSDistributedNotificationCenter *)defaultCenter;
 // Returns the default distributed notification center - cover for [NSDistributedNotificationCenter notificationCenterForType:NSLocalNotificationCenterType]
 
 - (void)addObserver:(id)observer selector:(SEL)selector name:(NSString *)name object:(NSString *)object suspensionBehavior:(NSNotificationSuspensionBehavior)suspensionBehavior;
@@ -45,10 +45,9 @@ enum {
 - (void)postNotificationName:(NSString *)name object:(NSString *)object userInfo:(NSDictionary *)userInfo options:(NSUInteger)options;
 
 
-- (void)setSuspended:(BOOL)suspended;
-    // Called with suspended = YES, enables the variety of suspension behaviors enumerated above.  Called with suspended = NO disables them (immediate delivery of notifications is resumed).
 
-- (BOOL)suspended;
+// Called with suspended = YES, enables the variety of suspension behaviors enumerated above.  Called with suspended = NO disables them (immediate delivery of notifications is resumed).
+@property BOOL suspended;
 
 // Methods from NSNotificationCenter that are re-declared in part because the anObject argument is typed to be an NSString.
 - (void)addObserver:(id)observer selector:(SEL)aSelector name:(NSString *)aName object:(NSString *)anObject;

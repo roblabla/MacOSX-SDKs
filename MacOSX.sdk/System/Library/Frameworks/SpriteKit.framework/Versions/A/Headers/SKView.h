@@ -18,28 +18,43 @@
  */
 
 #if TARGET_OS_IPHONE
+
+#import <UIKit/UIKit.h>
 SK_EXPORT @interface SKView : UIView
+
 #else
+
+#import <Cocoa/Cocoa.h>
 SK_EXPORT @interface SKView : NSView
+
 #endif
 
 /**
  Pause the entire view
  */
-@property (SK_NONATOMIC_IOSONLY, getter = isPaused) BOOL paused;
+@property (nonatomic, getter = isPaused) BOOL paused;
 
 /**
  Toggles display of performance stats in the view. All default to false.
  */
-@property (SK_NONATOMIC_IOSONLY) BOOL showsFPS;
-@property (SK_NONATOMIC_IOSONLY) BOOL showsDrawCount;
-@property (SK_NONATOMIC_IOSONLY) BOOL showsNodeCount;
+@property (nonatomic) BOOL showsFPS;
+@property (nonatomic) BOOL showsDrawCount;
+@property (nonatomic) BOOL showsNodeCount;
+@property (nonatomic) BOOL showsQuadCount NS_AVAILABLE(10_10, 8_0);
+@property (nonatomic) BOOL showsPhysics NS_AVAILABLE(10_10, 8_0);
+@property (nonatomic) BOOL showsFields NS_AVAILABLE(10_10, 8_0);
 
 
 /**
- Toggles whether the view updates is rendered asynchronously or aligned with Core Animation updates. Defaults to true.
+ Toggles whether the view updates is rendered asynchronously or aligned with Core Animation updates. Defaults to YES.
  */
-@property (SK_NONATOMIC_IOSONLY, getter=isAsynchronous) BOOL asynchronous;
+@property (nonatomic, getter=isAsynchronous) BOOL asynchronous;
+
+/**
+ Toggles whether the view allows transparent rendering. This allows content under the view to show through if
+ a non-opaque backgroundColor is set on the scene. Defaults to NO.
+ */
+@property (nonatomic) BOOL allowsTransparency NS_AVAILABLE(10_10, 8_0);
 
 /**
  Ignores sibling and traversal order to sort the rendered contents of a scene into the most efficient batching possible.
@@ -50,10 +65,12 @@ SK_EXPORT @interface SKView : NSView
  Setting this to YES for a complex scene may substantially increase performance, but care must be taken as only zPosition
  determines render order before the efficiency heuristics are used.
  */
-@property (SK_NONATOMIC_IOSONLY) BOOL ignoresSiblingOrder;
+@property (nonatomic) BOOL ignoresSiblingOrder;
 
-/* Number of hardware vsycs between callbacks, same behaviour as CADisplayLink. Defualts to 1 (render every vsync) */
-@property (SK_NONATOMIC_IOSONLY) NSInteger frameInterval;
+@property (nonatomic) BOOL shouldCullNonVisibleNodes NS_AVAILABLE(10_10, 8_0);
+
+/* Number of hardware vsyncs between callbacks, same behaviour as CADisplayLink. Defaults to 1 (render every vsync) */
+@property (nonatomic) NSInteger frameInterval;
 
 /**
  Present an SKScene in the view, replacing the current scene.
@@ -75,13 +92,22 @@ SK_EXPORT @interface SKView : NSView
 /**
  The currently presented scene, otherwise nil. If in a transition, the 'incoming' scene is returned.
  */
-@property (SK_NONATOMIC_IOSONLY, readonly) SKScene *scene;
+@property (nonatomic, readonly) SKScene *scene;
 
 /**
  Create an SKTexture containing a snapshot of how it would have been rendered in this view.
+ The texture is tightly cropped to the size of the node.
  @param node the node subtree to render to the texture.
  */
 - (SKTexture *)textureFromNode:(SKNode *)node;
+
+/**
+ Create an SKTexture containing a snapshot of how it would have been rendered in this view.
+ The texture is cropped to the specified rectangle
+ @param node the node subtree to render to the texture.
+ @param rect the crop
+ */
+- (SKTexture *)textureFromNode:(SKNode *)node crop:(CGRect)crop;
 
 /**
  Converts a point from view space to scene space.

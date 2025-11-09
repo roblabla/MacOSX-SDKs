@@ -27,7 +27,7 @@ COREDATA_EXTERN NSString * const NSPersistentStoreSaveConflictsErrorKey NS_AVAIL
 
 COREDATA_EXTERN NSString * const NSSQLiteErrorDomain NS_AVAILABLE(10_5,3_0);           // Predefined domain for SQLite errors, value of "code" will correspond to preexisting values in SQLite.
 
-enum {
+enum : NSInteger {
     NSManagedObjectValidationError                   = 1550,   // generic validation error
     NSValidationMultipleErrorsError                  = 1560,   // generic message for error containing multiple validation errors
     NSValidationMissingMandatoryPropertyError        = 1570,   // non-optional property with a nil value

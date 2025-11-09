@@ -1,5 +1,5 @@
 '\"
-'\" Generated from file '/SourceCache/tcl/tcl-102/tcl_ext/tcllib/tcllib/modules/mime/mime.man' by tcllib/doctools with format 'nroff'
+'\" Generated from file '/SourceCache/tcl/tcl-105/tcl_ext/tcllib/tcllib/modules/mime/mime.man' by tcllib/doctools with format 'nroff'
 '\" Copyright (c) 1999-2000 Marshall T. Rose
 '\"
 '\" The definitions below are for supplemental macros used in Tcl/Tk

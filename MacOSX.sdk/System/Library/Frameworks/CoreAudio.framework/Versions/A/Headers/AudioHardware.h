@@ -82,6 +82,7 @@
 #include <Availability.h>
 #include <CoreAudio/CoreAudioTypes.h>
 #include <CoreAudio/AudioHardwareBase.h>
+#include <CoreFoundation/CoreFoundation.h>
 
 #if defined(__BLOCKS__)
     #include <dispatch/dispatch.h>
@@ -623,6 +624,32 @@ enum
 */
 extern OSStatus
 AudioHardwareUnload()                                                                               __OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_2_0);
+
+/*!
+    @function       AudioHardwareCreateAggregateDevice
+    @abstract       This routine creates a new AudioAggregateDevice using the provided description.
+    @param          inDescription
+                        The CFDictionary that specifies how to build the AudioAggregateDevice. The
+                        supported keys are described in the AudioAggregateDevice Constants section.
+    @param          outDeviceID
+                        The AudioObjectID of the newly created AudioAggregateDevice.
+    @result         An OSStatus indicating success or failure.
+*/
+extern OSStatus
+AudioHardwareCreateAggregateDevice( CFDictionaryRef inDescription,
+                                    AudioObjectID*  outDeviceID)                                    __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+
+/*!
+    @function       AudioHardwareDestroyAggregateDevice
+    @abstract       This routine destroys the given AudioAggregateDevice.
+    @discussion     The actual desctruction of the device is asynchronous and may take place after
+                    the call to this routine has returned.
+    @param          inDeviceID
+                        The AudioObjectID of the AudioAggregateDevice to destroy.
+    @result         An OSStatus indicating success or failure.
+*/
+extern OSStatus
+AudioHardwareDestroyAggregateDevice(AudioObjectID inDeviceID)                                       __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
 
 //==================================================================================================
 #pragma mark -

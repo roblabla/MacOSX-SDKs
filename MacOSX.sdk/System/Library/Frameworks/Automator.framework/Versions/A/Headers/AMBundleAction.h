@@ -1,6 +1,6 @@
 /*	
     AMBundleAction.h
-    Copyright (C) 2004-2006 Apple Computer, Inc. All rights reserved.    
+    Copyright (C) 2004-2006, 2014 Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -27,16 +27,15 @@
 }
 
 // Construction
-- (id)initWithDefinition:(NSDictionary *)dict fromArchive:(BOOL)archived;
+- (instancetype)initWithDefinition:(NSDictionary *)dict fromArchive:(BOOL)archived;
 
 // Operations
 - (void)awakeFromBundle;
-- (BOOL)hasView;
+@property (readonly) BOOL hasView;
 
 // Accessors
-- (NSView *)view;
-- (NSBundle *)bundle;
-- (NSMutableDictionary *)parameters;
-- (void)setParameters:(NSMutableDictionary *)newParameters;
+@property (readonly, strong) NSView *view;
+@property (readonly, strong) NSBundle *bundle;
+@property (strong) NSMutableDictionary *parameters;
 
 @end

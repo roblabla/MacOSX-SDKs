@@ -25,7 +25,8 @@
 .Fc
 .Ft bool
 .Fo xpc_equal
-.Fa "xpc_object_t object"
+.Fa "xpc_object_t object1"
+.Fa "xpc_object_t object2"
 .Fc
 .Ft size_t
 .Fo xpc_hash
@@ -248,9 +249,9 @@ collection type:
 .Xr xpc_array_get_uuid 3
 .It
 .Xr xpc_dictionary_set_fd 3 ,
-.Xr xpc_dictionary_get_fd 3 ,
+.Xr xpc_dictionary_dup_fd 3 ,
 .Xr xpc_array_set_fd 3 ,
-.Xr xpc_array_get_fd 3
+.Xr xpc_array_dup_fd 3
 .It
 .Xr xpc_dictionary_set_connection 3 ,
 .Xr xpc_dictionary_get_connection 3 ,
@@ -258,9 +259,9 @@ collection type:
 .Xr xpc_array_get_connection 3
 .El
 .Pp
-When the requested key or index is not present in the collection,
-or if the value for the requested key or index is not of the expected type,
-these functions will return sensible default values:
+When the requested key or index is not present in the collection, or if the
+value for the requested key or index is not of the expected type, these
+functions will return sensible default values:
 .Pp
 .Bl -tag -width "XXconnection" -compact -offset indent
 .It \(bu bool
@@ -300,7 +301,7 @@ function.
 Objects must be of the same type as returned by
 .Fn xpc_get_type
 in order to be considered equal. No casting or transformation is performed
-on the underlyin value in order to determine equality.
+on the underlying value in order to determine equality.
 .Pp
 Collection types are compared for deep equality, that is to say, two arrays
 are equal only if they contain the same values in the same order, and two

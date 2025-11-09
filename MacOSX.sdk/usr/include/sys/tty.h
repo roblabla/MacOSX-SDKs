@@ -116,6 +116,7 @@ struct clist;
 #endif
 
 #define	TS_IOCTL_NOT_OK	0x1000000	/* Workaround <rdar://....> */
+#define	TS_PGRPHUP	0x2000000       /* Don't change Foregroud process group */
 
 
 /* Character type information. */

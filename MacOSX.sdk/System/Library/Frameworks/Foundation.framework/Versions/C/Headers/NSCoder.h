@@ -1,5 +1,5 @@
 /*	NSCoder.h
-	Copyright (c) 1993-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1993-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -40,9 +40,9 @@
 - (void)setObjectZone:(NSZone *)zone NS_AUTOMATED_REFCOUNT_UNAVAILABLE;
 - (NSZone *)objectZone NS_AUTOMATED_REFCOUNT_UNAVAILABLE;
 
-- (unsigned)systemVersion;
+@property (readonly) unsigned int systemVersion;
 
-- (BOOL)allowsKeyedCoding;
+@property (readonly) BOOL allowsKeyedCoding;
 
 - (void)encodeObject:(id)objv forKey:(NSString *)key;
 - (void)encodeConditionalObject:(id)objv forKey:(NSString *)key;
@@ -68,7 +68,7 @@
 - (NSInteger)decodeIntegerForKey:(NSString *)key NS_AVAILABLE(10_5, 2_0);
 
 // Returns YES if this coder requires secure coding. Secure coders check a list of allowed classes before decoding objects, and all objects must implement NSSecureCoding.
-- (BOOL)requiresSecureCoding NS_AVAILABLE(10_8, 6_0);
+@property (readonly) BOOL requiresSecureCoding NS_AVAILABLE(10_8, 6_0);
 
 // Specify what the expected class of the allocated object is. If the coder responds YES to -requiresSecureCoding, then an exception will be thrown if the class to be decoded does not implement NSSecureCoding or is not isKindOfClass: of the argument. If the coder responds NO to -requiresSecureCoding, then the class argument is ignored and no check of the class of the decoded object is performed, exactly as if decodeObjectForKey: had been called.
 - (id)decodeObjectOfClass:(Class)aClass forKey:(NSString *)key NS_AVAILABLE(10_8, 6_0);
@@ -80,7 +80,7 @@
 - (id)decodePropertyListForKey:(NSString *)key NS_AVAILABLE(10_8, 6_0);
 
 // Get the current set of allowed classes.
-- (NSSet *)allowedClasses NS_AVAILABLE(10_8, 6_0);
+@property (readonly, copy) NSSet *allowedClasses NS_AVAILABLE(10_8, 6_0);
 
 @end
 

@@ -1,10 +1,10 @@
 /*  NSIndexPath.h
-    Copyright (c) 2003-2013, Apple Inc. All rights reserved.
+    Copyright (c) 2003-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
-@interface NSIndexPath : NSObject <NSCopying, NSCoding> {
+@interface NSIndexPath : NSObject <NSCopying, NSSecureCoding> {
 	@private
 	__strong NSUInteger *_indexes;
 #if !__OBJC2__
@@ -17,8 +17,7 @@
 + (instancetype)indexPathWithIndex:(NSUInteger)index;
 + (instancetype)indexPathWithIndexes:(const NSUInteger [])indexes length:(NSUInteger)length;
 
-- (instancetype)init;	/* designated initializer */
-- (instancetype)initWithIndexes:(const NSUInteger [])indexes length:(NSUInteger)length;	/* designated initializer */
+- (instancetype)initWithIndexes:(const NSUInteger [])indexes length:(NSUInteger)length NS_DESIGNATED_INITIALIZER;
 
 - (instancetype)initWithIndex:(NSUInteger)index;
 
@@ -27,7 +26,7 @@
 - (NSIndexPath *)indexPathByRemovingLastIndex;
 
 - (NSUInteger)indexAtPosition:(NSUInteger)position;
-- (NSUInteger)length;
+@property (readonly) NSUInteger length;
 
 - (void)getIndexes:(NSUInteger *)indexes;
 

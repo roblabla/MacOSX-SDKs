@@ -1,5 +1,5 @@
 /*	CFArray.h
-	Copyright (c) 1998-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1998-2014, Apple Inc. All rights reserved.
 */
 
 /*!
@@ -105,13 +105,13 @@ typedef void (*CFArrayApplierFunction)(const void *value, void *context);
 	@typedef CFArrayRef
 	This is the type of a reference to immutable CFArrays.
 */
-typedef const struct __CFArray * CFArrayRef;
+typedef const struct CF_BRIDGED_TYPE(NSArray) __CFArray * CFArrayRef;
 
 /*!
 	@typedef CFMutableArrayRef
 	This is the type of a reference to mutable CFArrays.
 */
-typedef struct __CFArray * CFMutableArrayRef;
+typedef struct CF_BRIDGED_MUTABLE_TYPE(NSMutableArray) __CFArray * CFMutableArrayRef;
 
 /*!
 	@function CFArrayGetTypeID

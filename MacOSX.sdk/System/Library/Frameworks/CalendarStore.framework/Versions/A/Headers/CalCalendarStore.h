@@ -2,7 +2,7 @@
 //	CalCalendarStore.h
 //	Calendar Store Framework
 //	
-//  Copyright 2006 Apple Computer, Inc. All rights reserved.
+//  Copyright 2006 Apple Inc. All rights reserved.
 //	
 //	Allows the client to access the user's calendars, events, and tasks. Clients can also save changes to an event, task,
 //  or calendar.

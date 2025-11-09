@@ -287,6 +287,12 @@ must be sent to the connection returned by
 .Fn xpc_dictionary_get_remote_connection ,
 at which point the sender's reply block will be invoked when the reply message
 is received.
+.Pp
+.Em Note :
+Message dictionaries have side effects attached to their lifetimes and the
+lifetimes of reply messages created from them, so close attention should be paid
+to the lifetimes of such dictionaries. For details, see
+.Xr xpc_transaction_begin 3 .
 .Sh DICTIONARIES AS ERRORS
 Errors encountered by the XPC framework are delivered to the event handler
 of a connection as a dictionary of type

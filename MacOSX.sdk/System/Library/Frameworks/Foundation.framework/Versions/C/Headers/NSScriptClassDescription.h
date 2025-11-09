@@ -1,6 +1,6 @@
 /*
 	NSScriptClassDescription.h
-	Copyright (c) 1997-2013, Apple Inc.
+	Copyright (c) 1997-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -27,24 +27,24 @@
 
 /* Initialize, given a scripting suite name, class name, and class declaration dictionary of the sort that is valid in .scriptSuite property list files.
 */
-- (id)initWithSuiteName:(NSString *)suiteName className:(NSString *)className dictionary:(NSDictionary *)classDeclaration;
+- (instancetype)initWithSuiteName:(NSString *)suiteName className:(NSString *)className dictionary:(NSDictionary *)classDeclaration NS_DESIGNATED_INITIALIZER;
 
 /* Return the suite name or class name provided at initialization time.
 */
-- (NSString *)suiteName;
-- (NSString *)className;
+@property (readonly, copy) NSString *suiteName;
+@property (readonly, copy) NSString *className;
 
 /* Return the name of the Objective-C that implements the described scriptable class.
 */
-- (NSString *)implementationClassName;
+@property (readonly, copy) NSString *implementationClassName;
 
 /* Return the scripting class description of the superclass of the class described by the receiver.
 */
-- (NSScriptClassDescription *)superclassDescription;
+@property (readonly, retain) NSScriptClassDescription *superclassDescription;
 
 /* Return the primary four character code used to identify the described class in Apple events.
 */
-- (FourCharCode)appleEventCode;
+@property (readonly) FourCharCode appleEventCode;
 
 /* Return YES if the four character code identifies the described class in Apple events. Return NO otherwise.
 */
@@ -76,7 +76,7 @@
 
 /* Return the value of the DefaultSubcontainerAttribute entry of the class declaration dictionary provided when the receiver was instantiated, or nil if there was no such entry.
 */
-- (NSString *)defaultSubcontainerAttributeKey;
+@property (readonly, copy) NSString *defaultSubcontainerAttributeKey;
 
 /* Return YES if creation of objects for the relationship specified by the key, in containers of the class described by the receiver, requires an explicitly specified insertion location. Return NO otherwise. For example, NSCreateCommand uses this method to determine whether or not a specific Make command must have an at parameter.
 */
@@ -103,10 +103,10 @@
 
 /* Return the four character code identifying the receiver's class in Apple events.
 */
-- (FourCharCode)classCode;
+@property (readonly) FourCharCode classCode;
 
 /* Return the Objective-C name of the receiver's class.
 */
-- (NSString *)className;
+@property (readonly, copy) NSString *className;
 
 @end

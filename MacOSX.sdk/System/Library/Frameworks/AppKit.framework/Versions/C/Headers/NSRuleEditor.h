@@ -1,7 +1,7 @@
 /*
         NSRuleEditor.h
 	Application Kit
-	Copyright (c) 2006-2013, Apple Inc.
+	Copyright (c) 2006-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -37,21 +37,19 @@ NSRuleEditor exposes one binding, "rows."  The "rows" binding may be bound to an
 @class NSMutableArray, NSIndexSet, NSView, NSPredicate, NSString, NSViewAnimation;
 @protocol NSRuleEditorDelegate;
 
-enum {
+typedef NS_ENUM(NSUInteger, NSRuleEditorNestingMode) {
     NSRuleEditorNestingModeSingle,	    /* Only a single row is allowed.  Plus/minus buttons will not be shown */
     NSRuleEditorNestingModeList,	    /* Allows a single list, with no nesting and no compound rows */
     NSRuleEditorNestingModeCompound,	    /* Unlimited nesting and compound rows; this is the default */
     NSRuleEditorNestingModeSimple	    /* One compound row at the top with subrows beneath it, and no further nesting allowed */
 };
 
-typedef NSUInteger NSRuleEditorNestingMode;
 
-enum {
+typedef NS_ENUM(NSUInteger, NSRuleEditorRowType) {
     NSRuleEditorRowTypeSimple,
     NSRuleEditorRowTypeCompound
 };
 
-typedef NSUInteger NSRuleEditorRowType;
 
 @interface NSRuleEditor : NSControl {
     @private
@@ -102,40 +100,33 @@ typedef NSUInteger NSRuleEditorRowType;
 /* -- Configuring NSRuleEditor -- */
 
 /* Clients can call this method to set and get the delegate for the NSRuleEditor.  NSRuleEditor requires a delegate that implements the required NSRuleEditorDelegateMethods methods to function. */
-- (void)setDelegate:(id <NSRuleEditorDelegate>)delegate;
-- (id <NSRuleEditorDelegate>)delegate;
+@property (assign) id<NSRuleEditorDelegate> delegate;
 
 /* Clients can call this to automatically set a formatting dictionary based on the strings file with the given name.  Setting a formatting strings file searches the main bundle, and the bundle containing this nib, for a (possibly localized) strings file resource with the given name, loads it, and sets it as the formatting dictionary.  The resulting dictionary can be obtained with -[NSRuleEditor formattingDictionary].  If you set the formatting dictionary explicitly with -[NSRuleEditor setFormattingDictionary:], then it sets the current formattingStringsFilename to nil */
-- (void)setFormattingStringsFilename:(NSString *)stringsFilename;
-- (NSString *)formattingStringsFilename;
+@property (copy) NSString *formattingStringsFilename;
 
 /* Clients can call this to set (and get) a formatting dictionary on the NSRuleEditor.  The formatting dictionary should have NSString keys and NSString values.  The syntax of the keys and values is the same as the syntax for strings files. */
-- (void)setFormattingDictionary:(NSDictionary *)dictionary;
-- (NSDictionary *)formattingDictionary;
+@property (copy) NSDictionary *formattingDictionary;
 
 /* Clients can call this to indicate that the available criteria may have changed and should be refetched from the delegate, and the popups recalculated.  If any item in a given row is "orphaned" (no longer reported as a child of its previous parent), those rows have their critieria and display values set to valid choices. */
 - (void)reloadCriteria;
 
 /* Clients call this to set and get the nesting mode for the NSRuleEditor.  This is generally set at view creation time and not modified after.  The default is NSRuleEditorNestingModeCompound. */
-- (void)setNestingMode:(NSRuleEditorNestingMode)mode;
-- (NSRuleEditorNestingMode)nestingMode;
+@property NSRuleEditorNestingMode nestingMode;
 
 /* Clients call this to set and get the height of each row.  This method changes the receiver's frame and marks it for redisplay.  */
-- (void)setRowHeight:(CGFloat)height;
-- (CGFloat)rowHeight;
+@property CGFloat rowHeight;
 
 /* Clients call this to set the editable property of the control.  Users can only interact with editable NSRuleEditors.  The default is YES. */
-- (void)setEditable:(BOOL)editable;
-- (BOOL)isEditable;
+@property (getter=isEditable) BOOL editable;
 
 /* Rule editors that have the canRemoveAllRows property set to NO prevent the user from emptying the rule editor by deleting all the rows.  The rule editor can still be emptied programatically.  The default is YES. */
-- (void)setCanRemoveAllRows:(BOOL)val;
-- (BOOL)canRemoveAllRows;
+@property BOOL canRemoveAllRows;
 
 /* -- Predicate support -- */
 
 /* Clients can call this to obtain the predicate for the view if the delegate implements - ruleEditor: predicatePartsForItem: withValue: inRow:row: .  If the delegate does not, or if the delegate does not return enough parts to construct a full predicate, this method returns nil. */
-- (NSPredicate *)predicate;
+@property (readonly, strong) NSPredicate *predicate;
 
 /* Clients can call this to indicates that the predicate should be generated again from the delegate (by invoking the corresponding delegate method), typically because something has changed (for example, a view's value). */
 - (void)reloadPredicate;
@@ -146,7 +137,7 @@ typedef NSUInteger NSRuleEditorRowType;
 /* -- Obtaining row information -- */
 
 /* Clients can call this to determine the number of rows */
-- (NSInteger)numberOfRows;
+@property (readonly) NSInteger numberOfRows;
 
 /* Clients can call this to determine the immediate subrows of the given row.  Pass -1 to get the top-level rows.  Rows are numbered starting at 0.  If rowIndex is less than -1 or greater than or equal to the number of rows, this raises an NSRangeException.  */
 - (NSIndexSet *)subrowIndexesForRow:(NSInteger)rowIndex;
@@ -184,7 +175,7 @@ typedef NSUInteger NSRuleEditorRowType;
 - (void)removeRowsAtIndexes:(NSIndexSet *)rowIndexes includeSubrows:(BOOL)includeSubrows;
 
 /* Clients call this to determine the indexes of the selected rows.  */
-- (NSIndexSet *)selectedRowIndexes;
+@property (readonly, copy) NSIndexSet *selectedRowIndexes;
 
 /* Clients call this to modify the selected row indexes. Raises NSRangeException if any index in rowIndexes is equal to or larger than the number of rows, or less than 0. */
 - (void)selectRowIndexes:(NSIndexSet *)indexes byExtendingSelection:(BOOL)extend;
@@ -192,24 +183,19 @@ typedef NSUInteger NSRuleEditorRowType;
 /* -- Bindings support -- */
 
 /* Sets the class used when creating a new row in the "rows" binding; this class should be KVC and KVO compliant for the key paths listed below.  By default this is NSMutableDictionary */
-- (void)setRowClass:(Class)rowClass;
-- (Class)rowClass;
+@property (assign) Class rowClass;
 
 /* Set and get the key path for the row type, which is used to get the row type in the "rows" binding.  The row type is a value property of type NSRuleEditorRowType.  The default is @"rowType". */
-- (void)setRowTypeKeyPath:(NSString *)keyPath;
-- (NSString *)rowTypeKeyPath;
+@property (copy) NSString *rowTypeKeyPath;
 
 /* Set and get the key path for the subrows, which is used to determined nested rows in the "rows" binding.  The subrows property is an ordered to-many relationship containing additional bound row objects. The default is @"subrows". */
-- (void)setSubrowsKeyPath:(NSString *)keyPath;
-- (NSString *)subrowsKeyPath;
+@property (copy) NSString *subrowsKeyPath;
 
 /* Set and get the criteria key path, which determines the criteria for a row in the "rows" binding.  (The criteria objects are what the delegate returns from - ruleEditor: child: forCriterion: withRowType:).  The criteria property is an ordered to-many relationship. The default is @"criteria". */
-- (void)setCriteriaKeyPath:(NSString *)keyPath;
-- (NSString *)criteriaKeyPath;
+@property (copy) NSString *criteriaKeyPath;
 
 /* Set and get the display values key path, which determines the display values for a row (the display values are what the delegate returns from - ruleEditor: displayValueForCriterion: inRow:).  The criteria property is an ordered to-many relationship. The default is @"displayValues". */
-- (void)setDisplayValuesKeyPath:(NSString *)keyPath;
-- (NSString *)displayValuesKeyPath;
+@property (copy) NSString *displayValuesKeyPath;
 
 @end
 

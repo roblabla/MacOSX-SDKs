@@ -1,7 +1,7 @@
 //
 //  SCNSceneSource.h
 //
-//  Copyright (c) 2012-2013 Apple Inc. All rights reserved.
+//  Copyright (c) 2012-2014 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -45,7 +45,7 @@ SCN_EXTERN NSString * const SCNSceneSourceCreateNormalsIfAbsentKey;
  @abstract Pass YES in order to perform the document validation. 
  @discussion This option can be set in the options dictionary of the SCNScene and SCNSceneSource loading methods.
  The value for this option should be a boolean NSNumber. If its boolean value is YES (the default is NO),
- SceneKit will attempt to check the document for consistency. 
+ SceneKit will attempt to check the document for consistency.
  If the document doesn't pass the consistency check it is then not loaded and an error is returned.
  This is slower, but for security reasons it should be set to YES if you are not sure the files you load are valid and have not been tampered with. 
  */
@@ -56,7 +56,7 @@ SCN_EXTERN NSString * const SCNSceneSourceCheckConsistencyKey;
  @abstract Pass YES to flatten the scene graph when possible.
  @discussion This option can be set in the options dictionary of the SCNScene and SCNSceneSource loading methods.
  The value for this option should be a boolean NSNumber. If its boolean value is YES (the default is NO),
- SceneKit will attempt to reduce the scene graph by merging the geometries. 
+ SceneKit will attempt to reduce the scene graph by merging the geometries.
  This option is suitable to preview a 3D scene efficiently and when manipulating the scene graph is not needed.
  */
 SCN_EXTERN NSString * const SCNSceneSourceFlattenSceneKey;
@@ -98,6 +98,52 @@ SCN_EXTERN NSString * const SCNSceneSourceOverrideAssetURLsKey;
              SceneKit will instead only consider features which are part of the file format specification.
  */
 SCN_EXTERN NSString * const SCNSceneSourceStrictConformanceKey;
+
+/*!
+ @constant SCNSceneSourceConvertUnitsToMetersKey
+ @abstract Pass the units you want the scene to be converted to (in meter).
+ @discussion Use this with a floating value encapsulated in a NSNumber. The default value is nil which means no conversion done. Passing a non-zero value will convert the scene coordinates so that 1 unit corresponds to N meters. For example pass 0.01 for 1 unit == 1 centimeter, pass 0.3048 for 1 unit == 1 foot...
+     For better physics simulation it is recommended to use 1 unit equals to 1 meter.
+     This option has no effect if the asset is already compressed by Xcode (use the compression options instead).
+ */
+SCN_EXTERN NSString * const SCNSceneSourceConvertUnitsToMetersKey SCENEKIT_AVAILABLE(10_10, NA);
+
+/*!
+ @constant SCNSceneSourceConvertToYUpKey
+ @abstract Pass YES if a scene should be converted to Y up if it currently has a different up axis.
+ @discussion Use this with a boolean value encapsulated in a NSNumber. The default value is NO.
+ This option has no effect if the asset is already compressed by Xcode (use the compression options instead).
+ */
+SCN_EXTERN NSString * const SCNSceneSourceConvertToYUpKey SCENEKIT_AVAILABLE(10_10, NA);
+
+/*!
+ @constant SCNSceneSourceAnimationImportPolicyKey
+ @abstract Pass one of the value below to specify what to do with loaded animations.
+ @discussion See below for the description of each individual key. Defaults to SCNSceneSourceAnimationImportPolicyPlayRepeatedly. On 10.9 and before the behavior is SCNSceneSourceAnimationImportPolicyPlayUsingSceneTimeBase. For compatibility reason if the application was built on 10.9 or before the default behavior is SCNSceneSourceAnimationImportPolicyPlayUsingSceneTimeBase.
+ */
+SCN_EXTERN NSString * const SCNSceneSourceAnimationImportPolicyKey SCENEKIT_AVAILABLE(10_10, 8_0);
+
+/* values for SCNSceneSourceAnimationImportPolicyKey */
+/*!
+ @constant SCNSceneSourceAnimationImportPolicyPlay
+ @abstract Add animations to the scene and play them once (repeatCount set to 1).
+ */
+SCN_EXTERN NSString * const SCNSceneSourceAnimationImportPolicyPlay SCENEKIT_AVAILABLE(10_10, 8_0);
+/*!
+ @constant SCNSceneSourceAnimationImportPolicyPlayRepeatedly
+ @abstract Add animations to the scene and play them repeatedly (repeatCount set to infinity).
+ */
+SCN_EXTERN NSString * const SCNSceneSourceAnimationImportPolicyPlayRepeatedly SCENEKIT_AVAILABLE(10_10, 8_0);
+/*!
+ @constant SCNSceneSourceAnimationImportPolicyDoNotPlay
+ @abstract Only keep animations in the SCNSceneSource and don't add to the animatable elements of the scene.
+ */
+SCN_EXTERN NSString * const SCNSceneSourceAnimationImportPolicyDoNotPlay SCENEKIT_AVAILABLE(10_10, 8_0);
+/*!
+ @constant SCNSceneSourceAnimationImportPolicyPlayUsingSceneTimeBase
+ @abstract Add animations to the scene and play them using the SCNView/SCNRenderer's scene time (usesSceneTimeBase set to YES)
+ */
+SCN_EXTERN NSString * const SCNSceneSourceAnimationImportPolicyPlayUsingSceneTimeBase SCENEKIT_AVAILABLE(10_10, 8_0);
 
 /*!
  @constant SCNDetailedErrorsKey
@@ -169,7 +215,7 @@ typedef void (^SCNSceneSourceStatusHandler)(float totalProgress, SCNSceneSourceS
  After creating a SCNSceneSource object for the appropriate source, you can obtain scenes using SCNSceneSource methods.
  */
 
-SCENEKIT_CLASS_AVAILABLE(10_8, NA)
+SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
 @interface SCNSceneSource : NSObject 
 {
 @private
@@ -271,6 +317,6 @@ SCENEKIT_CLASS_AVAILABLE(10_8, NA)
  @param predicate The block to apply to entries in the library. The block takes three arguments: "entry" is an entry in the library, "identifier" is the ID of this entry and "stop" is a reference to a Boolean value. The block can set the value to YES to stop further processing of the library. The stop argument is an out-only argument. You should only ever set this Boolean to YES within the Block. The Block returns a Boolean value that indicates whether "entry" passed the test.
  @discussion The entry is an instance of one of following classes: SCNMaterial, SCNScene, SCNGeometry, SCNNode, CAAnimation, SCNLight, SCNCamera, SCNSkinner, SCNMorpher, NSImage.
  */
-- (NSArray *)entriesPassingTest:(BOOL (^)(id entry, NSString *identifier, BOOL *stop))predicate SCENEKIT_AVAILABLE(10_9, NA);
+- (NSArray *)entriesPassingTest:(BOOL (^)(id entry, NSString *identifier, BOOL *stop))predicate SCENEKIT_AVAILABLE(10_9, 8_0);
 
 @end

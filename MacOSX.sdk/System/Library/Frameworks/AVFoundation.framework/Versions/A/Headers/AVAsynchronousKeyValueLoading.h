@@ -10,15 +10,27 @@
 #import <AVFoundation/AVBase.h>
 #import <Foundation/Foundation.h>
 
-enum {
+typedef NS_ENUM(NSInteger, AVKeyValueStatus) {
 	AVKeyValueStatusUnknown,
 	AVKeyValueStatusLoading,
 	AVKeyValueStatusLoaded,
 	AVKeyValueStatusFailed,
 	AVKeyValueStatusCancelled
 };
-typedef NSInteger AVKeyValueStatus;
 
+/*!
+	@protocol	AVAsynchronousKeyValueLoading
+ 
+	@abstract	The AVAsynchronousKeyValueLoading protocol defines methods that let clients use an AVAsset or AVAssetTrack object without blocking a thread. Using methods in the protocol, one can find out the current status of a key (for example, whether the corresponding value has been loaded); and ask the object to load values asynchronously, informing the client when the operation has completed.
+ 
+	@discussion
+		Because of the nature of timed audiovisual media, successful initialization of an asset does not necessarily mean that all its data is immediately available. Instead, an asset will wait to load data until an operation is performed on it (for example, directly invoking any relevant AVAsset methods, playback via an AVPlayerItem object, export using AVAssetExportSession, reading using an instance of AVAssetReader, and so on). This means that although you can request the value of any key at any time, and its value will be returned synchronously, the calling thread may be blocked until the request can be satisfied. To avoid blocking, you can:
+
+			1. First, determine whether the value for a given key is available using statusOfValueForKey:error:.
+			2. If a value has not been loaded yet, you can ask for to load one or more values and be notified when they become available using loadValuesAsynchronouslyForKeys:completionHandler:.
+		
+		Even for use cases that may typically support ready access to some keys (such as for assets initialized with URLs for files in the local filesystem), slow I/O may require AVAsset to block before returning their values. Although blocking may be acceptable for OS X API clients in cases where assets are being prepared on background threads or in operation queues, in all cases in which blocking should be avoided you should use loadValuesAsynchronouslyForKeys:completionHandler:. For iOS clients, blocking to obtain the value of a key synchronously is never recommended under any circumstances.
+*/
 @protocol AVAsynchronousKeyValueLoading
 @required
 

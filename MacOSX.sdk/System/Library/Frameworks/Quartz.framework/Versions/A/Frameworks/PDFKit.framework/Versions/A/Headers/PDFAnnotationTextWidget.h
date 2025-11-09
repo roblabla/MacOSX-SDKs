@@ -62,4 +62,12 @@
 
 #endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_9
+
+// Configuring multiline PDF text fields
+- (BOOL) isMultiline;
+- (void) setIsMultiline: (BOOL) multiline;
+
+#endif // MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_9
+
 @end

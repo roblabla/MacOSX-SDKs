@@ -11,10 +11,10 @@
  *    notice, this list of conditions and the following disclaimer in the
  *    documentation and/or other materials provided with the distribution.
  *
- * THIS SOFTWARE IS PROVIDED BY APPLE COMPUTER, INC. ``AS IS'' AND ANY
+ * THIS SOFTWARE IS PROVIDED BY APPLE INC. ``AS IS'' AND ANY
  * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL APPLE COMPUTER, INC. OR
+ * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL APPLE INC. OR
  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
@@ -26,20 +26,17 @@
 
 #import <WebKit/DOMHTMLElement.h>
 
-#if WEBKIT_VERSION_MAX_ALLOWED >= WEBKIT_VERSION_1_3
-
 @class DOMHTMLFormElement;
 @class NSString;
 
+NS_CLASS_AVAILABLE_MAC(10_4)
 @interface DOMHTMLOptionElement : DOMHTMLElement
 @property BOOL disabled;
-@property(readonly, retain) DOMHTMLFormElement *form;
-@property(copy) NSString *label;
+@property (readonly, strong) DOMHTMLFormElement *form;
+@property (copy) NSString *label;
 @property BOOL defaultSelected;
 @property BOOL selected;
-@property(copy) NSString *value;
-@property(readonly, copy) NSString *text;
-@property(readonly) int index;
+@property (copy) NSString *value;
+@property (readonly, copy) NSString *text;
+@property (readonly) int index;
 @end
-
-#endif

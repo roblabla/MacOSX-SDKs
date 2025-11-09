@@ -1,5 +1,5 @@
 /*	NSByteCountFormatter.h
-	Copyright (c) 2012-2013, Apple Inc. All rights reserved.
+	Copyright (c) 2012-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSFormatter.h>
@@ -38,9 +38,9 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
     unsigned int _allowedUnits;
     char _countStyle;
     BOOL _allowsNonnumericFormatting, _includesUnit, _includesCount, _includesActualByteCount, _adaptive, _zeroPadsFractionDigits;
-    int _reserved[6];
+    int _formattingContext;
+    int _reserved[5];
 }
-
 
 /* Shortcut for converting a byte count into a string without creating an NSByteCountFormatter and an NSNumber. If you need to specify options other than countStyle, create an instance of NSByteCountFormatter first.
  */
@@ -78,5 +78,9 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
 /* Choose whether to zero pad fraction digits so a consistent number of fraction digits are displayed, causing updating displays to remain more stable. For instance, if the adaptive algorithm is used, this option formats 1.19 and 1.2 GB as "1.19 GB" and "1.20 GB" respectively, while without the option the latter would be displayed as "1.2 GB". Default value is NO.
 */
 @property BOOL zeroPadsFractionDigits;
+
+/* Specify the formatting context for the formatted string. Default is NSFormattingContextUnknown.
+*/
+@property NSFormattingContext formattingContext NS_AVAILABLE(10_10, 8_0);
 
 @end

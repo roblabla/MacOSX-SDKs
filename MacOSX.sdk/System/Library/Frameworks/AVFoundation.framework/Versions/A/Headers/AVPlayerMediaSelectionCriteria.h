@@ -7,6 +7,15 @@
  
  */
 
+/*!
+	@class		AVPlayerMediaSelectionCriteria
+	
+	@abstract	The AVPlayerMediaSelectionCriteria class specifies the preferred languages and media characteristics for an AVPlayer instance.
+ 
+	@discussion
+		The languages and media characteristics of assets containing media selection options that an AVPlayer instance should attempt to select automatically when preparing and playing items. The languages and media characteristics are specified in the preferred order.
+*/
+
 #import <AVFoundation/AVBase.h>
 #import <Foundation/Foundation.h>
 
@@ -38,7 +47,7 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 				An NSArray of NSStrings indicating additional media characteristics, in order of desirability, that are preferred when selecting media with the characteristic for which the receiver is set on the AVPlayer as the selection criteria. Can be nil.
   @result		An instance of AVPlayerMediaSelectionCriteria.
 */
-- (id)initWithPreferredLanguages:(NSArray *)preferredLanguages preferredMediaCharacteristics:(NSArray *)preferredMediaCharacteristics;
+- (instancetype)initWithPreferredLanguages:(NSArray *)preferredLanguages preferredMediaCharacteristics:(NSArray *)preferredMediaCharacteristics;
 
 @end
 

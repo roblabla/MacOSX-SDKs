@@ -1,5 +1,5 @@
 /*	NSClassDescription.h
-	Copyright (c) 1995-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1995-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -13,19 +13,19 @@
 + (void)invalidateClassDescriptionCache;
 + (NSClassDescription *)classDescriptionForClass:(Class)aClass;
 
-- (NSArray *)attributeKeys;
-- (NSArray *)toOneRelationshipKeys;
-- (NSArray *)toManyRelationshipKeys;
+@property (readonly, copy) NSArray *attributeKeys;
+@property (readonly, copy) NSArray *toOneRelationshipKeys;
+@property (readonly, copy) NSArray *toManyRelationshipKeys;
 - (NSString *)inverseForRelationshipKey:(NSString *)relationshipKey;
 
 @end
 
 @interface NSObject (NSClassDescriptionPrimitives)
 
-- (NSClassDescription *)classDescription;
-- (NSArray *)attributeKeys;
-- (NSArray *)toOneRelationshipKeys;
-- (NSArray *)toManyRelationshipKeys;
+@property (readonly, copy) NSClassDescription *classDescription;
+@property (readonly, copy) NSArray *attributeKeys;
+@property (readonly, copy) NSArray *toOneRelationshipKeys;
+@property (readonly, copy) NSArray *toManyRelationshipKeys;
 - (NSString *)inverseForRelationshipKey:(NSString *)relationshipKey;
 
 @end

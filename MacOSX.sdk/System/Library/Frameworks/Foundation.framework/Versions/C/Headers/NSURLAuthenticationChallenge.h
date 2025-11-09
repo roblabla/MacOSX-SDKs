@@ -1,6 +1,6 @@
 /*	
     NSURLAuthenticationChallenge.h
-    Copyright (c) 2003-2013, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2014, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -78,7 +78,7 @@
     @param error The NSError for the authentication failure, if applicable, else nil
     @result An authentication challenge initialized with the specified parameters
 */
-- (id)initWithProtectionSpace:(NSURLProtectionSpace *)space proposedCredential:(NSURLCredential *)credential previousFailureCount:(NSInteger)previousFailureCount failureResponse:(NSURLResponse *)response error:(NSError *)error sender:(id<NSURLAuthenticationChallengeSender>)sender;
+- (instancetype)initWithProtectionSpace:(NSURLProtectionSpace *)space proposedCredential:(NSURLCredential *)credential previousFailureCount:(NSInteger)previousFailureCount failureResponse:(NSURLResponse *)response error:(NSError *)error sender:(id<NSURLAuthenticationChallengeSender>)sender;
 
 /*!
     @method initWithAuthenticationChallenge:
@@ -88,14 +88,14 @@
     @discussion This initializer may be useful to subclassers that want to proxy
     one type of authentication challenge to look like another type.
 */
-- (id)initWithAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge sender:(id<NSURLAuthenticationChallengeSender>)sender;
+- (instancetype)initWithAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge sender:(id<NSURLAuthenticationChallengeSender>)sender;
 
 /*!
     @method protectionSpace
     @abstract Get a description of the protection space that requires authentication
     @result The protection space that needs authentication
 */
-- (NSURLProtectionSpace *)protectionSpace;
+@property (readonly, copy) NSURLProtectionSpace *protectionSpace;
 
 /*!
     @method proposedCredential
@@ -109,14 +109,14 @@
     credential is not ready to use as-is, but provides a default
     username the client could use when prompting.
 */
-- (NSURLCredential *)proposedCredential;
+@property (readonly, copy) NSURLCredential *proposedCredential;
 
 /*!
     @method previousFailureCount
     @abstract Get count of previous failed authentication attempts
     @result The count of previous failures
 */
-- (NSInteger)previousFailureCount;
+@property (readonly) NSInteger previousFailureCount;
 
 /*!
     @method failureResponse
@@ -127,7 +127,7 @@
     then this method will return the response. Otherwise it will
     return nil.
 */
-- (NSURLResponse *)failureResponse;
+@property (readonly, copy) NSURLResponse *failureResponse;
 
 /*!
     @method error
@@ -137,7 +137,7 @@
     then this method will return the error. Otherwise it will
     return nil.
 */
-- (NSError *)error;
+@property (readonly, copy) NSError *error;
 
 /*!
     @method sender
@@ -145,6 +145,6 @@
     @result The sender of the challenge
     @discussion The sender is the object you should reply to when done processing the challenge.
 */
-- (id<NSURLAuthenticationChallengeSender>)sender;
+@property (readonly, retain) id<NSURLAuthenticationChallengeSender> sender;
 
 @end

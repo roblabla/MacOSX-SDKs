@@ -3,7 +3,7 @@
  
 	Framework:  CoreMedia
  
-	Copyright 2006-2012 Apple Inc. All rights reserved.
+	Copyright © 2006-2014 Apple Inc. All rights reserved.
  
 */
 
@@ -51,6 +51,8 @@ CMAudioDeviceClockCreateFromAudioDeviceID(
 		CMClockRef *clockOut)
 			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
 
+CF_IMPLICIT_BRIDGING_ENABLED
+
 /*!
 	@function	CMAudioDeviceClockSetAudioDeviceUID
 	@abstract	Changes the CoreAudio device the clock is tracking.
@@ -92,6 +94,8 @@ CM_EXPORT OSStatus CMAudioDeviceClockGetAudioDevice(
 			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
 
 #endif // ! TARGET_OS_IPHONE
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #pragma pack(pop)
     

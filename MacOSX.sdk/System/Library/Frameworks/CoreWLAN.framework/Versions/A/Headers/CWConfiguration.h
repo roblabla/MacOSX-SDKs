@@ -1,8 +1,6 @@
 /*!
  * @header CWConfiguration.h
- * @copyright 2010 Apple Inc. All rights reserved.
- * @updated 2010-03-09
- * @version 2.0.0
+ * @copyright 2009-2014 Apple Inc. All rights reserved.
  */
 
 #ifndef _CORE_WLAN_CONFIGURATION_H_
@@ -10,107 +8,227 @@
 
 #import <Foundation/Foundation.h>
 
-#pragma mark -
-@class SFAuthorization, CWNetworkProfile;
+@class CWNetworkProfile;
 
 /*!
  * @class
- * @abstract Encapsulates an immutable configuration for an AirPort WLAN interface. 
+ *
+ * @abstract 
+ * Encapsulates the system configuration for a given Wi-Fi interface.
+ *
+ * @discussion
+ * The CWConfiguration class contains basic network configuration settings and also the list of preferred networks.
+ * CWConfiguration is an immutable object. For changing configuration settings and/or the preferred networks list, see CWMutableConfiguration.
  */
-@interface CWConfiguration : NSObject <NSCopying, NSMutableCopying, NSSecureCoding> {
-@private
-	NSDictionary *_info;
-@protected
-	NSOrderedSet *_networkProfiles;
-	BOOL _rememberJoinedNetworks;
-	BOOL _requireAdministratorForAssociation;
-	BOOL _requireAdministratorForPower;
-	BOOL _requireAdministratorForIBSSMode;
+NS_CLASS_AVAILABLE_MAC(10_6)
+@interface CWConfiguration : NSObject <NSCopying, NSMutableCopying, NSSecureCoding>
+{
+    @private
+	
+        NSDictionary    *_info;
+
+    @protected
+	
+        NSOrderedSet    *_networkProfiles;
+    
+        BOOL            _rememberJoinedNetworks;
+    
+        BOOL            _requireAdministratorForAssociation;
+    
+        BOOL            _requireAdministratorForPower;
+    
+        BOOL            _requireAdministratorForIBSSMode;
 }
 
 /*!
  * @property
- * @abstract An array of remembered CWNetworkProfile objects.
- * @discussion The order of this array corresponds to the order in which the the CWNetworkProfile 
- * objects participate in the auto-join process.
+ *
+ * @result
+ * An NSOrderedSet of CWNetworkProfile objects.
+ *
+ * @abstract
+ * Returns the preferred networks list.
+ *
+ * @discussion 
+ * The order of the ordered set corresponds to the order the preferred networks list.
  */
 @property(readonly, copy) NSOrderedSet *networkProfiles NS_AVAILABLE_MAC(10_7);
 
 /*!
  * @property
- * @abstract Require an administrator password to change networks.
+ *
+ * @result
+ * YES if the preference is enabled, NO otherwise.
+ *
+ * @abstract 
+ * Returns the preference to require an administrator password to change networks.
+ *
+ * @discussion
+ * If YES, the user may be prompted to enter an administrator password upon attempting to join a Wi-Fi network.
+ * This preference is enforced at the API layer.
  */
-@property(readonly, assign) BOOL requireAdministratorForAssociation NS_AVAILABLE_MAC(10_7);
+@property(readonly) BOOL requireAdministratorForAssociation NS_AVAILABLE_MAC(10_7);
 
 /*!
  * @property
- * @abstract Require an administrator password to change the interface power state.
+ *
+ * @result
+ * YES if the preference is enabled, NO otherwise.
+ *
+ * @abstract 
+ * Returns the preference to require an administrator password to change the interface power state.
+ *
+ * @discussion
+ * If YES, the user may be prompted to enter an administrator password upon attempting to turn Wi-Fi on or off.
+ * This preference is enforced at the API layer.
  */
-@property(readonly, assign) BOOL requireAdministratorForPower NS_AVAILABLE_MAC(10_7);
+@property(readonly) BOOL requireAdministratorForPower NS_AVAILABLE_MAC(10_7);
 
 /*!
  * @property
- * @abstract Require an administrator password to create a computer-to-computer network.
+ *
+ * @result
+ * YES if the preference is enabled, NO otherwise.
+ *
+ * @abstract
+ * Returns the preference to require an administrator password to create a computer-to-computer network.
+ *
+ * @discussion
+ * If YES, the user may be prompted to enter an administrator password upon attempting to create an IBSS network.
+ * This preference is enforced at the API layer.
  */
-@property(readonly, assign) BOOL requireAdministratorForIBSSMode NS_AVAILABLE_MAC(10_7);
+@property(readonly) BOOL requireAdministratorForIBSSMode NS_AVAILABLE_MAC(10_7);
 
 /*!
  * @property
- * @abstract AirPort client will remember all joined networks.
+ *
+ * @result
+ * YES if the preference is enabled, NO otherwise.
+ *
+ * @abstract
+ * Returns the preference to remember all Wi-Fi networks joined unless otherwise specified by the user when joining a particular Wi-Fi network.
  */
-@property(readonly, assign) BOOL rememberJoinedNetworks NS_AVAILABLE_MAC(10_7);
+@property(readonly) BOOL rememberJoinedNetworks NS_AVAILABLE_MAC(10_7);
 
-/*! @methodgroup Creating a configuration */
-/*!
- * @method
- * @abstract Convenience method for getting an empty CWConfiguration object.
- */
-+ (id)configuration NS_AVAILABLE_MAC(10_6);
-
-/*!
- * @method
- * @abstract Creates an empty CWConfiguration object.
- */
-- (id)init NS_AVAILABLE_MAC(10_6);
+/*! @functiongroup Creating a Wi-Fi Configuration */
 
 /*!
  * @method
- * @param configuration The CWConfiguration object to use to initialize a new CWConfiguration object.
- * @result A CWConfiguration object.
- * @abstract Creates and returns a CWConfiguration object initialized with the given CWConfiguration object.
+ *
+ * @abstract 
+ * Convenience method for getting a CWConfiguration object.
  */
-- (id)initWithConfiguration:(CWConfiguration*)configuration NS_AVAILABLE_MAC(10_7);
++ (instancetype)configuration NS_AVAILABLE_MAC(10_6);
 
 /*!
  * @method
- * @param configuration The CWConfiguration object to use to initialize a new CWConfiguration object.
- * @result A CWConfiguration object.
- * @abstract Convenience method for getting a CWConfiguration object initialized with the given CWConfiguration object.
+ *
+ * @abstract 
+ * Initializes a CWConfiguration object.
  */
-+ (id)configurationWithConfiguration:(CWConfiguration*)configuration NS_AVAILABLE_MAC(10_7);
+- (instancetype)init NS_AVAILABLE_MAC(10_6);
 
-/*! @methodgroup Comparing configurations */
 /*!
  * @method
- * @param configuration The CWConfiguration object with which to compare the receiver.
- * @result <i>YES</i> if the objects are equal.
- * @abstract Determine CWConfiguration object equality.
- * @discussion CWConfiguration objects are considered equal if all their corresponding properties are equal. 
+ *
+ * @param configuration 
+ * A CWConfiguration object.
+ *
+ * @result 
+ * A CWConfiguration object.
+ *
+ * @abstract 
+ * Initializes a CWConfiguration object with the properties of an existing CWConfiguration object.
  */
-- (BOOL)isEqualToConfiguration:(CWConfiguration*)configuration NS_AVAILABLE_MAC(10_6);
+- (instancetype)initWithConfiguration:(CWConfiguration *)configuration NS_AVAILABLE_MAC(10_7);
+
+/*!
+ * @method
+ *
+ * @param configuration
+ * A CWConfiguration object.
+ *
+ * @result
+ * A CWConfiguration object.
+ *
+ * @abstract
+ * Convenience method for getting a CWConfiguration object initialized with the properties of an existing CWConfiguration object.
+ */
++ (instancetype)configurationWithConfiguration:(CWConfiguration *)configuration NS_AVAILABLE_MAC(10_7);
+
+/*! @functiongroup Comparing Wi-Fi Configurations */
+
+/*!
+ * @method
+ *
+ * @param configuration 
+ * The CWConfiguration with which to compare the receiver.
+ *
+ * @result 
+ * YES if the objects are equal, NO otherwise.
+ *
+ * @abstract 
+ * Determine CWConfiguration equality.
+ *
+ * @discussion 
+ * CWConfiguration objects are considered equal if all their corresponding properties are equal.
+ */
+- (BOOL)isEqualToConfiguration:(CWConfiguration *)configuration NS_AVAILABLE_MAC(10_6);
+
 @end
 
-#pragma mark -
 /*!
  * @class
- * @abstract Encapsulates a mutable configuration for an AirPort WLAN interface. 
+ *
+ * @abstract
+ * Mutable subclass of CWConfiguration.  Use this class for changing configuration settings and/or the preferred networks list.
+ *
+ * @discussion
+ * To commit configuration changes, use -[CWInterface commitConfiguration:authorization:error:].
  */
+NS_CLASS_AVAILABLE_MAC(10_6)
 @interface CWMutableConfiguration : CWConfiguration
-@property(readwrite, copy) NSOrderedSet *networkProfiles NS_AVAILABLE_MAC(10_7);
-@property(readwrite, assign) BOOL requireAdministratorForAssociation NS_AVAILABLE_MAC(10_7);
-@property(readwrite, assign) BOOL requireAdministratorForPower NS_AVAILABLE_MAC(10_7);
-@property(readwrite, assign) BOOL requireAdministratorForIBSSMode NS_AVAILABLE_MAC(10_7);
-@property(readwrite, assign) BOOL rememberJoinedNetworks NS_AVAILABLE_MAC(10_7);
+
+/*!
+ * @property
+ *
+ * @abstract
+ * Add, remove, or update the preferred networks list.
+ */
+@property(copy) NSOrderedSet *networkProfiles NS_AVAILABLE_MAC(10_7);
+
+/*!
+ * @property
+ *
+ * @abstract
+ * Set the preference to require an administrator password to change networks.
+ */
+@property BOOL requireAdministratorForAssociation NS_AVAILABLE_MAC(10_7);
+
+/*!
+ * @property
+ *
+ * @abstract
+ * Set the preference to require an administrator password to change the interface power state.
+ */
+@property BOOL requireAdministratorForPower NS_AVAILABLE_MAC(10_7);
+
+/*!
+ * @property
+ *
+ * @abstract
+ * Set the preference to require an administrator password to change networks.
+ */
+@property BOOL requireAdministratorForIBSSMode NS_AVAILABLE_MAC(10_7);
+
+/*!
+ * @property
+ *
+ * @abstract
+ * Set the preference to require an administrator password to create a computer-to-computer network.
+ */
+@property BOOL rememberJoinedNetworks NS_AVAILABLE_MAC(10_7);
+
 @end
 
 #endif /* _CORE_WLAN_CONFIGURATION_H_ */

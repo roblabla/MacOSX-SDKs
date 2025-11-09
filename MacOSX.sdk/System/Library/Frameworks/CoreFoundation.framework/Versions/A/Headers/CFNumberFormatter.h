@@ -1,5 +1,5 @@
 /*	CFNumberFormatter.h
-	Copyright (c) 2003-2013, Apple Inc. All rights reserved.
+	Copyright (c) 2003-2014, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFNUMBERFORMATTER__)
@@ -9,6 +9,7 @@
 #include <CoreFoundation/CFNumber.h>
 #include <CoreFoundation/CFLocale.h>
 
+CF_IMPLICIT_BRIDGING_ENABLED
 CF_EXTERN_C_BEGIN
 
 typedef struct __CFNumberFormatter *CFNumberFormatterRef;
@@ -156,6 +157,7 @@ Boolean CFNumberFormatterGetDecimalInfoForCurrencyCode(CFStringRef currencyCode,
 	// Not localized because these are properties of the currency.
 
 CF_EXTERN_C_END
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif /* ! __COREFOUNDATION_CFNUMBERFORMATTER__ */
 

@@ -1,17 +1,16 @@
 /*
     NSTextFieldCell.h
     Application Kit
-    Copyright (c) 1994-2013, Apple Inc.
+    Copyright (c) 1994-2014, Apple Inc.
     All rights reserved.
 */
 
 #import <AppKit/NSActionCell.h>
 
-enum {
+typedef NS_ENUM(NSUInteger, NSTextFieldBezelStyle) {
     NSTextFieldSquareBezel  = 0,
     NSTextFieldRoundedBezel = 1
 };
-typedef NSUInteger NSTextFieldBezelStyle;
 
 @class NSColor;
 
@@ -33,32 +32,28 @@ typedef NSUInteger NSTextFieldBezelStyle;
         unsigned int inToolbar:1;
         unsigned int hasTextLayer:1;
         unsigned int isButtonTitle:1;
-        unsigned int reservedTextFieldCell:13;
+        unsigned int allowTightening:1;
+        unsigned int thcHighlighted:1;
+        unsigned int shouldNotClipToBounds:1;
+        unsigned int reservedTextFieldCell:10;
     } _tfFlags;
 }
 
-- (void)setBackgroundColor:(NSColor *)color;
-- (NSColor *)backgroundColor;
-- (void)setDrawsBackground:(BOOL)flag;
-- (BOOL)drawsBackground;
-- (void)setTextColor:(NSColor *)color;
-- (NSColor *)textColor;
+@property (copy) NSColor *backgroundColor;
+@property BOOL drawsBackground;
+@property (copy) NSColor *textColor;
 - (NSText *)setUpFieldEditorAttributes:(NSText *)textObj;
 
-- (void)setBezelStyle:(NSTextFieldBezelStyle)style;
-- (NSTextFieldBezelStyle)bezelStyle;
+@property NSTextFieldBezelStyle bezelStyle;
 
-- (void)setPlaceholderString:(NSString*)string;
-- (NSString*)placeholderString;
-- (void)setPlaceholderAttributedString:(NSAttributedString*)string;
-- (NSAttributedString*)placeholderAttributedString;
+@property (copy) NSString *placeholderString;
+@property (copy) NSAttributedString *placeholderAttributedString;
 
 - (void)setWantsNotificationForMarkedText:(BOOL)flag NS_AVAILABLE_MAC(10_5);
 
 /* Returns an array of locale identifiers representing keyboard input sources allowed to be enabled when the receiver has the keyboard focus.
  */
-- (NSArray *)allowedInputSourceLocales NS_AVAILABLE_MAC(10_5);
-- (void)setAllowedInputSourceLocales:(NSArray *)localeIdentifiers NS_AVAILABLE_MAC(10_5);
+@property (copy) NSArray *allowedInputSourceLocales NS_AVAILABLE_MAC(10_5);
 
 @end
 

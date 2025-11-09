@@ -1,7 +1,7 @@
 /*
 	NSSortDescriptor.h
 	Foundation
-	Copyright (c) 2002-2013, Apple Inc. All rights reserved.
+	Copyright (c) 2002-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSArray.h>
@@ -17,28 +17,27 @@
     id _selectorOrBlock;
 }
 
-+ (id)sortDescriptorWithKey:(NSString *)key ascending:(BOOL)ascending NS_AVAILABLE(10_6, 4_0);
-+ (id)sortDescriptorWithKey:(NSString *)key ascending:(BOOL)ascending selector:(SEL)selector NS_AVAILABLE(10_6, 4_0);
++ (instancetype)sortDescriptorWithKey:(NSString *)key ascending:(BOOL)ascending NS_AVAILABLE(10_6, 4_0);
++ (instancetype)sortDescriptorWithKey:(NSString *)key ascending:(BOOL)ascending selector:(SEL)selector NS_AVAILABLE(10_6, 4_0);
 
 // keys may be key paths
-- (id)initWithKey:(NSString *)key ascending:(BOOL)ascending;
-- (id)initWithKey:(NSString *)key ascending:(BOOL)ascending selector:(SEL)selector;
+- (instancetype)initWithKey:(NSString *)key ascending:(BOOL)ascending;
+- (instancetype)initWithKey:(NSString *)key ascending:(BOOL)ascending selector:(SEL)selector;
 
-- (NSString *)key;
-- (BOOL)ascending;
-- (SEL)selector;
+@property (readonly, copy) NSString *key;
+@property (readonly) BOOL ascending;
+@property (readonly) SEL selector;
 
 - (void)allowEvaluation NS_AVAILABLE(10_9, 7_0); // Force a sort descriptor which was securely decoded to allow evaluation
 
-#if NS_BLOCKS_AVAILABLE
-+ (id)sortDescriptorWithKey:(NSString *)key ascending:(BOOL)ascending comparator:(NSComparator)cmptr NS_AVAILABLE(10_6, 4_0);
++ (instancetype)sortDescriptorWithKey:(NSString *)key ascending:(BOOL)ascending comparator:(NSComparator)cmptr NS_AVAILABLE(10_6, 4_0);
 
-- (id)initWithKey:(NSString *)key ascending:(BOOL)ascending comparator:(NSComparator)cmptr NS_AVAILABLE(10_6, 4_0);
-- (NSComparator)comparator NS_AVAILABLE(10_6, 4_0);
-#endif
+- (instancetype)initWithKey:(NSString *)key ascending:(BOOL)ascending comparator:(NSComparator)cmptr NS_AVAILABLE(10_6, 4_0);
+
+@property (readonly) NSComparator comparator NS_AVAILABLE(10_6, 4_0);
 
 - (NSComparisonResult)compareObject:(id)object1 toObject:(id)object2;    // primitive - override this method if you want to perform comparisons differently (not key based for example)
-- (id)reversedSortDescriptor;    // primitive - override this method to return a sort descriptor instance with reversed sort order
+@property (readonly, retain) id reversedSortDescriptor;    // primitive - override this method to return a sort descriptor instance with reversed sort order
 
 @end
 

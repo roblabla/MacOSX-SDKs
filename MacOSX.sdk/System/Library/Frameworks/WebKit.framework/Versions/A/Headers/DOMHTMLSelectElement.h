@@ -11,10 +11,10 @@
  *    notice, this list of conditions and the following disclaimer in the
  *    documentation and/or other materials provided with the distribution.
  *
- * THIS SOFTWARE IS PROVIDED BY APPLE COMPUTER, INC. ``AS IS'' AND ANY
+ * THIS SOFTWARE IS PROVIDED BY APPLE INC. ``AS IS'' AND ANY
  * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL APPLE COMPUTER, INC. OR
+ * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL APPLE INC. OR
  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
@@ -26,36 +26,33 @@
 
 #import <WebKit/DOMHTMLElement.h>
 
-#if WEBKIT_VERSION_MAX_ALLOWED >= WEBKIT_VERSION_1_3
-
 @class DOMHTMLElement;
 @class DOMHTMLFormElement;
 @class DOMHTMLOptionsCollection;
 @class DOMNode;
 @class NSString;
 
+NS_CLASS_AVAILABLE_MAC(10_4)
 @interface DOMHTMLSelectElement : DOMHTMLElement
-@property BOOL autofocus AVAILABLE_IN_WEBKIT_VERSION_4_0;
+@property BOOL autofocus NS_AVAILABLE_MAC(10_6);
 @property BOOL disabled;
-@property(readonly, retain) DOMHTMLFormElement *form;
+@property (readonly, strong) DOMHTMLFormElement *form;
 @property BOOL multiple;
-@property(copy) NSString *name;
+@property (copy) NSString *name;
 @property int size;
-@property(readonly, copy) NSString *type;
-@property(readonly, retain) DOMHTMLOptionsCollection *options;
-@property(readonly) int length;
+@property (readonly, copy) NSString *type;
+@property (readonly, strong) DOMHTMLOptionsCollection *options;
+@property (readonly) int length;
 @property int selectedIndex;
-@property(copy) NSString *value;
-@property(readonly) BOOL willValidate AVAILABLE_IN_WEBKIT_VERSION_4_0;
+@property (copy) NSString *value;
+@property (readonly) BOOL willValidate NS_AVAILABLE_MAC(10_6);
 
-- (DOMNode *)item:(unsigned)index AVAILABLE_IN_WEBKIT_VERSION_4_0;
-- (DOMNode *)namedItem:(NSString *)name AVAILABLE_IN_WEBKIT_VERSION_4_0;
-- (void)add:(DOMHTMLElement *)element before:(DOMHTMLElement *)before AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+- (DOMNode *)item:(unsigned)index NS_AVAILABLE_MAC(10_6);
+- (DOMNode *)namedItem:(NSString *)name NS_AVAILABLE_MAC(10_6);
+- (void)add:(DOMHTMLElement *)element before:(DOMHTMLElement *)before NS_AVAILABLE_MAC(10_5);
 - (void)remove:(int)index;
 @end
 
 @interface DOMHTMLSelectElement (DOMHTMLSelectElementDeprecated)
-- (void)add:(DOMHTMLElement *)element :(DOMHTMLElement *)before AVAILABLE_WEBKIT_VERSION_1_3_AND_LATER_BUT_DEPRECATED_IN_WEBKIT_VERSION_3_0;
+- (void)add:(DOMHTMLElement *)element :(DOMHTMLElement *)before NS_DEPRECATED_MAC(10_4, 10_5);
 @end
-
-#endif

@@ -2,7 +2,7 @@
  *  CTFontDescriptor.h
  *  CoreText
  *
- *  Copyright (c) 2006-2012 Apple Inc. All rights reserved.
+ *  Copyright (c) 2006-2014 Apple Inc. All rights reserved.
  *
  */
 
@@ -42,7 +42,11 @@ extern "C" {
     @abstract   The Core Text Font Descriptor reference.
     @discussion This is a opaque reference to a font descriptor.
 */
-typedef const struct __CTFontDescriptor * CTFontDescriptorRef;
+#if TARGET_OS_IPHONE
+typedef const struct CT_BRIDGED_TYPE(UIFontDescriptor) __CTFontDescriptor * CTFontDescriptorRef;
+#else
+typedef const struct CT_BRIDGED_TYPE(NSFontDescriptor) __CTFontDescriptor * CTFontDescriptorRef;
+#endif
 
 /*!
     @function   CTFontDescriptorGetTypeID
@@ -125,7 +129,7 @@ extern const CFStringRef kCTFontCharacterSetAttribute CT_AVAILABLE(10_5, 3_2);
 /*!
     @defined    kCTFontLanguagesAttribute
     @abstract   The list of supported languages.
-    @discussion This key is used to specify or obtain a list of covered languages for a font reference. The value for this key is a CFArrayRef of CFStringRefs. If specified this restricts the search to matching fonts that support the specified languages. The language identifier string should conform to the BCP 47 standard. If unspecified this attribute is ignored.
+    @discussion This key is used to specify or obtain a list of covered languages for a font reference. The value for this key is a CFArrayRef of CFStringRefs. If specified this restricts the search to matching fonts that support the specified languages. The language identifier string should conform to UTS #35. If unspecified this attribute is ignored.
 */
 extern const CFStringRef kCTFontLanguagesAttribute CT_AVAILABLE(10_5, 3_2);
 /*!
@@ -148,8 +152,14 @@ extern const CFStringRef kCTFontMacintoshEncodingsAttribute CT_AVAILABLE(10_5, 3
 extern const CFStringRef kCTFontFeaturesAttribute CT_AVAILABLE(10_5, 3_2);
 /*!
     @defined    kCTFontFeatureSettingsAttribute
-    @abstract   The array of font settings.
-    @discussion This key is used to specify or obtain the font features settings for a font reference. The value associated with this key is a CFArrayRef of font feature setting dictionaries. A setting dictionary contains a tuple of a kCTFontFeatureTypeIdentifierKey key-value pair and a kCTFontFeatureSelectorIdentifierKey key-value pair. Each setting dictionary indicates which setting should be turned on. In the case of duplicate or conflicting setting the last setting in the list will take precedence. It is the caller's responsibility to handle exclusive and non-exclusive settings as necessary.
+    @abstract   The array of typographic feature settings.
+    @discussion This key is used to specify an array of zero or more feature settings. In the case of duplicate or conflicting settings the last setting in the list will take precedence. In the case of AAT settings, it is the caller's responsibility to handle exclusive and non-exclusive settings as necessary.
+                An AAT setting dictionary contains a tuple of a kCTFontFeatureTypeIdentifierKey key-value pair and a kCTFontFeatureSelectorIdentifierKey key-value pair.
+                An OpenType setting dictionary contains a tuple of a kCTFontOpenTypeFeatureTag key-value pair and a kCTFontOpenTypeFeatureValue key-value pair. Each setting dictionary indicates which setting should applied. In the case of duplicate or conflicting settings the last setting in the list will take precedence.
+
+                Starting with OS X 10.10 and iOS 8.0, settings are also accepted (but not returned) in the following simplified forms:
+                An OpenType setting can be either an array pair of tag string and value number, or a tag string on its own. For example: @[ @"c2sc", @1 ] or simply @"c2sc". An unspecified value enables the feature and a value of zero disables it.
+                An AAT setting can be specified as an array pair of type and selector numbers. For example: @[ @(kUpperCaseType), @(kUpperCaseSmallCapsSelector) ].
 */
 extern const CFStringRef kCTFontFeatureSettingsAttribute CT_AVAILABLE(10_5, 3_2);
 /*!
@@ -459,7 +469,7 @@ extern const CFStringRef kCTFontDescriptorMatchingDescriptors CT_AVAILABLE(10_8,
 /* CFArray; Array of matched font descriptors.   Valid when state is kCTFontDescriptorMatchingDidMatch or CTFontDescriptorMatchingEnd. */
 extern const CFStringRef kCTFontDescriptorMatchingResult CT_AVAILABLE(10_8, 6_0);
 
-/* CFNumber; Progress in 0 - 100 for the current descriptor.   Valid during Downloading state. */
+/* CFNumber; Download progress in 0 - 100.   Valid during Downloading state. */
 extern const CFStringRef kCTFontDescriptorMatchingPercentage CT_AVAILABLE(10_8, 6_0);
 
 /* CFNumber; Byte size to download for the current descriptor.   Valid during Downloading state. */
@@ -547,7 +557,7 @@ CFTypeRef CTFontDescriptorCopyAttribute(
                 The requested font attribute.
 
     @param      language
-                If non-NULL, this will be receive a retained reference to the matched language. The language identifier will conform to the BCP 47 standard.
+                If non-NULL, this will be receive a retained reference to the matched language. The language identifier will conform to UTS #35.
 
     @result     A retained reference to the requested attribute, or NULL if the requested attribute is not present. Refer to the attribute definitions for documentation as to how each attribute is packaged as a CFType.
 */

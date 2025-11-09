@@ -1,7 +1,7 @@
 /*
     NSCollectionView.h
     Application Kit
-    Copyright (c) 2005-2013, Apple Inc.
+    Copyright (c) 2005-2014, Apple Inc.
     All rights reserved.
  */
 
@@ -12,8 +12,6 @@
 
 @class NSCollectionView, NSImageView, NSIndexSet, NSMutableIndexSet, NSNib, NSTextField;
 @protocol NSCollectionViewDelegate;
-
-typedef NSInteger NSCollectionViewDropOperation;
 
 NS_CLASS_AVAILABLE(10_5, NA)
 @interface NSCollectionViewItem : NSViewController <NSCopying> {
@@ -41,6 +39,11 @@ NS_CLASS_AVAILABLE(10_5, NA)
 @property (readonly) NSArray *draggingImageComponents NS_AVAILABLE_MAC(10_7);
 
 @end
+
+typedef NS_ENUM(NSInteger, NSCollectionViewDropOperation) {
+    NSCollectionViewDropOn = 0,
+    NSCollectionViewDropBefore = 1,
+} NS_ENUM_AVAILABLE_MAC(10_6);
 
 NS_CLASS_AVAILABLE(10_5, NA)
 @interface NSCollectionView : NSView <NSDraggingSource, NSDraggingDestination> {
@@ -97,36 +100,24 @@ NS_CLASS_AVAILABLE(10_5, NA)
     void *_reserved[13];
 }
 
-- (void)setDelegate:(id <NSCollectionViewDelegate>)aDelegate;
-- (id <NSCollectionViewDelegate>)delegate;
+@property (assign) id<NSCollectionViewDelegate> delegate;
 
-- (BOOL)isFirstResponder;    // fully KVO compliant - can be used determine different selection colors, etc.
+@property (getter=isFirstResponder, readonly) BOOL firstResponder;    // fully KVO compliant - can be used determine different selection colors, etc.
 
-- (void)setContent:(NSArray *)content;
-- (NSArray *)content;
-- (void)setSelectable:(BOOL)flag;
-- (BOOL)isSelectable;
-- (void)setAllowsMultipleSelection:(BOOL)flag;    // default: YES
-- (BOOL)allowsMultipleSelection;
-- (void)setSelectionIndexes:(NSIndexSet *)indexes;
-- (NSIndexSet *)selectionIndexes;
+@property (copy) NSArray *content;
+@property (getter=isSelectable) BOOL selectable;
+@property BOOL allowsMultipleSelection;    // default: YES
+@property (copy) NSIndexSet *selectionIndexes;
 
 - (NSCollectionViewItem *)newItemForRepresentedObject:(id)object;    // override if item should not be generated from prototype (or if view needs to be customized) - the returned object should not be autoreleased
 
-- (void)setItemPrototype:(NSCollectionViewItem *)prototype;
-- (NSCollectionViewItem *)itemPrototype;
+@property (strong) NSCollectionViewItem *itemPrototype;
 
-- (void)setMaxNumberOfRows:(NSUInteger)number;    // default: 0, which means no limit 
-- (NSUInteger)maxNumberOfRows;
-- (void)setMaxNumberOfColumns:(NSUInteger)number;    // default: 0, which means no limit 
-- (NSUInteger)maxNumberOfColumns;
-- (void)setMinItemSize:(NSSize)size;    // default: (0; 0)
-- (NSSize)minItemSize;
-- (void)setMaxItemSize:(NSSize)size;    // default: (0; 0), which means no limit
-- (NSSize)maxItemSize;
-
-- (void)setBackgroundColors:(NSArray *)colors;    // passing nil or an empty array resets the background colors back to the default
-- (NSArray *)backgroundColors;
+@property NSUInteger maxNumberOfRows;   // default: 0, which means no limit 
+@property NSUInteger maxNumberOfColumns;   // default: 0, which means no limit
+@property NSSize minItemSize;   // default: (0; 0)
+@property NSSize maxItemSize;   // default: (0; 0), which means no limit
+@property (copy) NSArray *backgroundColors;   // passing nil or an empty array resets the background colors back to the default
 
 /* Returns the NSCollectionViewItem instance associated with the represented object at the given index. You can also use this to access the view at the given index.
  */
@@ -151,15 +142,6 @@ NS_CLASS_AVAILABLE(10_5, NA)
 - (NSImage *)draggingImageForItemsAtIndexes:(NSIndexSet *)indexes withEvent:(NSEvent *)event offset:(NSPointPointer)dragImageOffset NS_AVAILABLE_MAC(10_6);
 
 @end
-
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
-
-enum {
-    NSCollectionViewDropOn = 0,
-    NSCollectionViewDropBefore = 1,
-};
-
-#endif
 
 @protocol NSCollectionViewDelegate <NSObject>
 @optional

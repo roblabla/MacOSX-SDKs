@@ -37,14 +37,19 @@ SK_EXPORT @interface SKVideoNode : SKNode
  
  Initialize a video node from an AVPlayer. You can use the AVPlayer to control playback.
  */
-- (instancetype)initWithAVPlayer:(AVPlayer*)player;
+- (instancetype)initWithAVPlayer:(AVPlayer*)player NS_DESIGNATED_INITIALIZER;
 
 /**
  Initialize a video node from a file.
  */
-- (instancetype)initWithVideoFileNamed:(NSString *)videoFile;
+- (instancetype)initWithVideoFileNamed:(NSString *)videoFile NS_DESIGNATED_INITIALIZER;
 
-- (instancetype)initWithVideoURL:(NSURL *)url;
+- (instancetype)initWithVideoURL:(NSURL *)url NS_DESIGNATED_INITIALIZER;
+
+/**
+ Support coding and decoding via NSKeyedArchiver.
+ */
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
 - (void)play;
 - (void)pause;
@@ -52,11 +57,11 @@ SK_EXPORT @interface SKVideoNode : SKNode
 /**
  The display size of the video (in parent's coordinate space)
  */
-@property (SK_NONATOMIC_IOSONLY) CGSize size;
+@property (nonatomic) CGSize size;
 
 /**
  The location in the video that maps to its 'position' in the parent's coordinate space. (0.0-1.0)
  */
-@property (SK_NONATOMIC_IOSONLY) CGPoint anchorPoint;
+@property (nonatomic) CGPoint anchorPoint;
 
 @end

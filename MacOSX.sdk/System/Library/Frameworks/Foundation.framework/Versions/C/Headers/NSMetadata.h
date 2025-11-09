@@ -1,5 +1,5 @@
 /*	NSMetadata.h
-	Copyright (c) 2004-2013, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSMetadataAttributes.h>
@@ -20,69 +20,51 @@ NS_CLASS_AVAILABLE(10_4, 5_0)
     __strong void *_reserved;
 }
 
-- (id)init;
+@property (assign) id<NSMetadataQueryDelegate> delegate;
+@property (copy) NSPredicate *predicate;
+@property (copy) NSArray *sortDescriptors;
+@property (copy) NSArray *valueListAttributes;
+@property (copy) NSArray *groupingAttributes;
+@property NSTimeInterval notificationBatchingInterval;
 
-- (id <NSMetadataQueryDelegate>)delegate;
-- (void)setDelegate:(id <NSMetadataQueryDelegate>)delegate;
-
-- (NSPredicate *)predicate;
-- (void)setPredicate:(NSPredicate *)predicate;
-
-- (NSArray *)sortDescriptors;
-- (void)setSortDescriptors:(NSArray *)descriptors;
-
-- (NSArray *)valueListAttributes;
-- (void)setValueListAttributes:(NSArray *)attrs;
-
-- (NSArray *)groupingAttributes;
-- (void)setGroupingAttributes:(NSArray *)attrs;
-
-- (NSTimeInterval)notificationBatchingInterval;
-- (void)setNotificationBatchingInterval:(NSTimeInterval)ti;
-
-- (NSArray *)searchScopes;
-- (void)setSearchScopes:(NSArray *)scopes;
+@property (copy) NSArray *searchScopes;
 // scopes is an NSArray of NSURL objects (file URLs only) and/or string
 // paths and/or the special string constants below, which specifies the
 // locations to which the search is limited; an empty array means no
 // limits, which is the default state.
 
-- (NSArray *)searchItems NS_AVAILABLE(10_9, 7_0);
-- (void)setSearchItems:(NSArray *)items NS_AVAILABLE(10_9, 7_0);
+@property (copy) NSArray *searchItems NS_AVAILABLE(10_9, 7_0);
 // items can be a mixture of NSMetadataItem, NSURL objects (file URLs only)
 // and/or string paths; the getter returns the same mixture as was set
 
-- (NSOperationQueue *)operationQueue NS_AVAILABLE(10_9, 7_0);
-- (void)setOperationQueue:(NSOperationQueue *)operationQueue NS_AVAILABLE(10_9, 7_0);
+@property (retain) NSOperationQueue *operationQueue NS_AVAILABLE(10_9, 7_0);
 // optional operation queue for notifications and delegate method calls
 
 - (BOOL)startQuery;
 - (void)stopQuery;
 
-- (BOOL)isStarted;
-- (BOOL)isGathering;
-- (BOOL)isStopped;
+@property (readonly, getter=isStarted) BOOL started;
+@property (readonly, getter=isGathering) BOOL gathering;
+@property (readonly, getter=isStopped) BOOL stopped;
 
 - (void)disableUpdates; // these nest
 - (void)enableUpdates;
 
 
 // Results are NSMetadataItems, or whatever the delegate replaces that with
-- (NSUInteger)resultCount;
+@property (readonly) NSUInteger resultCount;
 - (id)resultAtIndex:(NSUInteger)idx;
 
-#if NS_BLOCKS_AVAILABLE
 - (void)enumerateResultsUsingBlock:(void (^)(id result, NSUInteger idx, BOOL *stop))block NS_AVAILABLE(10_9, 7_0);
 - (void)enumerateResultsWithOptions:(NSEnumerationOptions)opts usingBlock:(void (^)(id result, NSUInteger idx, BOOL *stop))block NS_AVAILABLE(10_9, 7_0);
-#endif
 
-- (NSArray *)results;   // this is for K-V Bindings, and causes side-effects on the query
+@property (readonly, copy) NSArray *results;   // this is for K-V Bindings, and causes side-effects on the query
 
 - (NSUInteger)indexOfResult:(id)result;
 
-- (NSDictionary *)valueLists; // values are arrays of NSMetadataQueryAttributeValueTuple
+@property (readonly, copy) NSDictionary *valueLists; // values are arrays of NSMetadataQueryAttributeValueTuple
 
-- (NSArray *)groupedResults; // array of NSMetadataQueryResultGroups, for first grouping attribute
+@property (readonly, copy) NSArray *groupedResults; // array of NSMetadataQueryResultGroups, for first grouping attribute
 
 - (id)valueOfAttribute:(NSString *)attrName forResultAtIndex:(NSUInteger)idx;
 
@@ -103,9 +85,9 @@ FOUNDATION_EXPORT NSString * const NSMetadataQueryDidFinishGatheringNotification
 FOUNDATION_EXPORT NSString * const NSMetadataQueryDidUpdateNotification NS_AVAILABLE(10_4, 5_0);
 
 // keys for use with notification info dictionary
-FOUNDATION_EXPORT NSString * const NSMetadataQueryUpdateAddedItemsKey NS_AVAILABLE(10_9, 7_0);
-FOUNDATION_EXPORT NSString * const NSMetadataQueryUpdateChangedItemsKey NS_AVAILABLE(10_9, 7_0);
-FOUNDATION_EXPORT NSString * const NSMetadataQueryUpdateRemovedItemsKey NS_AVAILABLE(10_9, 7_0);
+FOUNDATION_EXPORT NSString * const NSMetadataQueryUpdateAddedItemsKey NS_AVAILABLE(10_9, 8_0);
+FOUNDATION_EXPORT NSString * const NSMetadataQueryUpdateChangedItemsKey NS_AVAILABLE(10_9, 8_0);
+FOUNDATION_EXPORT NSString * const NSMetadataQueryUpdateRemovedItemsKey NS_AVAILABLE(10_9, 8_0);
 
 FOUNDATION_EXPORT NSString * const NSMetadataQueryResultContentRelevanceAttribute NS_AVAILABLE(10_4, 5_0);
 
@@ -120,6 +102,7 @@ FOUNDATION_EXPORT NSString * const NSMetadataQueryIndexedNetworkScope NS_AVAILAB
 // -setSearchScopes: will throw an exception if the given array contains a mix of the scope constants below with constants above.
 FOUNDATION_EXPORT NSString * const NSMetadataQueryUbiquitousDocumentsScope NS_AVAILABLE(10_7, 5_0); // "Documents" subdirectory in the application's Ubiquity container
 FOUNDATION_EXPORT NSString * const NSMetadataQueryUbiquitousDataScope NS_AVAILABLE(10_7, 5_0); // application's Ubiquity container, excluding the "Documents" subdirectory
+FOUNDATION_EXPORT NSString * const NSMetadataQueryAccessibleUbiquitousExternalDocumentsScope NS_AVAILABLE(10_10, 8_0); // documents from outside the application's container that are accessible without user interaction. NSMetadataItemURLKey attributes of results are security-scoped NSURLs.
 
 
 NS_CLASS_AVAILABLE(10_4, 5_0)
@@ -129,12 +112,12 @@ NS_CLASS_AVAILABLE(10_4, 5_0)
     __strong void *_reserved;
 }
 
-- (id)initWithURL:(NSURL *)url NS_AVAILABLE_MAC(10_9);
+- (instancetype)initWithURL:(NSURL *)url NS_DESIGNATED_INITIALIZER NS_AVAILABLE_MAC(10_9);
 
 - (id)valueForAttribute:(NSString *)key;
 - (NSDictionary *)valuesForAttributes:(NSArray *)keys;
 
-- (NSArray *)attributes;
+@property (readonly, copy) NSArray *attributes;
 
 @end
 
@@ -147,9 +130,9 @@ NS_CLASS_AVAILABLE(10_4, 5_0)
     void *_reserved;
 }
 
-- (NSString *)attribute;
-- (id)value;
-- (NSUInteger)count;
+@property (readonly, copy) NSString *attribute;
+@property (readonly, retain) id value;
+@property (readonly) NSUInteger count;
 
 @end
 
@@ -161,14 +144,14 @@ NS_CLASS_AVAILABLE(10_4, 5_0)
     void *_reserved;
 }
 
-- (NSString *)attribute;
-- (id)value;
+@property (readonly, copy) NSString *attribute;
+@property (readonly, retain) id value;
 
-- (NSArray *)subgroups; // nil if this is a leaf
+@property (readonly, copy) NSArray *subgroups; // nil if this is a leaf
 
-- (NSUInteger)resultCount;
+@property (readonly) NSUInteger resultCount;
 - (id)resultAtIndex:(NSUInteger)idx; // uncertain whether this will do anything useful for non-leaf groups
 
-- (NSArray *)results;   // this is for K-V Bindings, and causes side-effects on the query
+@property (readonly, copy) NSArray *results;   // this is for K-V Bindings, and causes side-effects on the query
 
 @end

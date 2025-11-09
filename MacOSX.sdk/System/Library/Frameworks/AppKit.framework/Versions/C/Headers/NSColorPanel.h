@@ -1,7 +1,7 @@
 /*
 	NSColorPanel.h
 	Application Kit
-	Copyright (c) 1994-2013, Apple Inc.
+	Copyright (c) 1994-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -10,13 +10,9 @@
 
 @class NSColorList, NSMutableArray;
 
-typedef NSInteger NSColorPanelMode;
-
-enum {
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+typedef NS_ENUM(NSInteger, NSColorPanelMode) {
     /* If the color panel is not displaying a mode, the NSNoModeColorPanel will be returned */
-    NSNoModeColorPanel                  = -1,
-#endif
+    NSNoModeColorPanel NS_ENUM_AVAILABLE_MAC(10_5) = -1,
     NSGrayModeColorPanel		= 0,
     NSRGBModeColorPanel			= 1,
     NSCMYKModeColorPanel		= 2,
@@ -27,7 +23,7 @@ enum {
     NSCrayonModeColorPanel		= 7
 };
 
-enum {
+typedef NS_OPTIONS(NSUInteger, NSColorPanelOptions) {
     NSColorPanelGrayModeMask		= 0x00000001,
     NSColorPanelRGBModeMask		= 0x00000002,
     NSColorPanelCMYKModeMask		= 0x00000004,
@@ -45,7 +41,7 @@ enum {
 {
     /*All instance variables are private*/
     id			_colorSwatch;
-    id			_reserved1;
+    id                  _accessoryContainerView;
     id			_colorWell;
     NSMutableArray     *_pickersWithLoadedViews;
     id			_magnifyButton;
@@ -58,42 +54,40 @@ enum {
     id			_customViewsList;
     id			_customPickerList;
     id			_currViewObject;
-    id			_boxAboveSwatch;
+    id			_bottomConstraint;
     id			_target;
     id			_accessoryView;
     SEL			_action;
     NSSize		_minColorPanelSize;
     NSSize		_maxColorPanelSize;
-    NSSize		_reserved2;
-    NSSize		_reserved3;
+    id                  _accessoryContainerViewHeight;
+    id                  _opacityViewHeight;
+    id                  _reserved1;
+    id                  _reserved2;
     id			_resizeDimple;
-    BOOL		_reserved5;
-    BOOL		_reserved6;
+    BOOL                _reserved3;
+    BOOL		_reserved4;
     BOOL		_handlingOpacityMoveAction;
     BOOL		_ignoreConstraints;
     BOOL		_continuous;
     BOOL		_allowColorSetting;
     BOOL		_stillInitializing;
+    BOOL                _reserved5;
     id			_opacityTextController;
 }
 
 + (NSColorPanel *)sharedColorPanel;
 + (BOOL)sharedColorPanelExists;
 + (BOOL)dragColor:(NSColor *)color withEvent:(NSEvent *)theEvent fromView:(NSView *)sourceView;
-+ (void)setPickerMask:(NSUInteger)mask;
++ (void)setPickerMask:(NSColorPanelOptions)mask;
 + (void)setPickerMode:(NSColorPanelMode)mode;
 
-- (void)setAccessoryView:(NSView *)aView;
-- (NSView *)accessoryView;
-- (void)setContinuous:(BOOL)flag;
-- (BOOL)isContinuous;
-- (void)setShowsAlpha:(BOOL)flag;
-- (BOOL)showsAlpha;
-- (void)setMode:(NSColorPanelMode)mode;
-- (NSColorPanelMode)mode;
-- (void)setColor:(NSColor *)color;
-- (NSColor *)color;
-- (CGFloat)alpha;
+@property (strong) NSView *accessoryView;
+@property (getter=isContinuous) BOOL continuous;
+@property BOOL showsAlpha;
+@property NSColorPanelMode mode;
+@property (copy) NSColor *color;
+@property (readonly) CGFloat alpha;
 - (void)setAction:(SEL)aSelector;
 - (void)setTarget:(id)anObject;
 - (void)attachColorList:(NSColorList *)colorList;

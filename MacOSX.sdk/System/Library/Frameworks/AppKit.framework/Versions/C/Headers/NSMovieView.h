@@ -1,6 +1,6 @@
 /*
         NSMovieView.h
-        Copyright (c) 1998-2013, Apple Inc. All rights reserved.
+        Copyright (c) 1998-2014, Apple Inc. All rights reserved.
 */
 
 // Please note that NSMovie and NSMovieView are deprecated. NSMovieView does not exist in 64-bit.
@@ -28,6 +28,7 @@ typedef struct __MVFlags {
     unsigned int        reserved:25;
 } _MVFlags;
 
+NS_DEPRECATED_MAC(10_0, 10_5, "Use QTMovieView instead")
 @interface NSMovieView : NSView <NSUserInterfaceValidations>
 {
   @protected

@@ -31,11 +31,9 @@ NS_CLASS_AVAILABLE(10_6,3_0)
 	NSAttributeType _expressionResultType;
 }
 
-- (NSExpression *)expression;
-- (void)setExpression:(NSExpression *)expression;
+@property (strong) NSExpression *expression;
 
-- (NSAttributeType)expressionResultType;
-- (void)setExpressionResultType:(NSAttributeType)type;
+@property () NSAttributeType expressionResultType;
 
 @end
 

@@ -1,7 +1,7 @@
 /*
     NSUserInterfaceItemIdentification.h
     Application Kit
-    Copyright (c) 2006-2013, Apple Inc.
+    Copyright (c) 2006-2014, Apple Inc.
     All rights reserved.
 */
 

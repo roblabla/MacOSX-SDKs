@@ -1,5 +1,5 @@
 /*	NSDistantObject.h
-	Copyright (c) 1989-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1989-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSProxy.h>
@@ -20,15 +20,17 @@
 
 // Do not attempt to subclass NSDistantObject -- it is futile
 // Do not use these next two methods
-+ (NSDistantObject *)proxyWithTarget:(id)target connection:(NSConnection *)connection;
-- (id)initWithTarget:(id)target connection:(NSConnection *)connection;
++ (id)proxyWithTarget:(id)target connection:(NSConnection *)connection;
+- (instancetype)initWithTarget:(id)target connection:(NSConnection *)connection;
 
-+ (NSDistantObject *)proxyWithLocal:(id)target connection:(NSConnection *)connection;
-- (id)initWithLocal:(id)target connection:(NSConnection *)connection;
++ (id)proxyWithLocal:(id)target connection:(NSConnection *)connection;
+- (instancetype)initWithLocal:(id)target connection:(NSConnection *)connection;
+
+- (instancetype)initWithCoder:(NSCoder *)inCoder NS_DESIGNATED_INITIALIZER;
 
 - (void)setProtocolForProxy:(Protocol *)proto;
 
-- (NSConnection *)connectionForProxy;
+@property (readonly, retain) NSConnection *connectionForProxy;
 
 @end
 

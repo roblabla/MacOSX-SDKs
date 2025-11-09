@@ -2,7 +2,7 @@
 //  CalAttendee.h
 //	Calendar Store Framework
 //
-//  Copyright 2006 Apple Computer, Inc. All rights reserved.
+//  Copyright 2006 Apple Inc. All rights reserved.
 //
 //  The Calendar Store framework is deprecated.  Please use the Event Kit framework instead.
 

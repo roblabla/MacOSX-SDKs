@@ -2,12 +2,12 @@
  *  CVImageBuffer.h
  *  CoreVideo
  *
- *  Copyright (c) 2004 Apple Computer, Inc. All rights reserved.
+ *  Copyright (c) 2004-2014 Apple Inc. All rights reserved.
  *
  */
  
  /*! @header CVImageBuffer.h
-	@copyright 2004 Apple Computer, Inc. All rights reserved.
+	@copyright 2004-2014 Apple Inc. All rights reserved.
 	@availability Mac OS X 10.4 or later
     @discussion CVImageBufferRef types are abstract and define various attachments and convenience
 		calls for retreiving image related bits of data.
@@ -98,6 +98,9 @@ CV_EXPORT const CFStringRef	kCVImageBufferChromaSubsampling_420 __OSX_AVAILABLE_
 CV_EXPORT const CFStringRef	kCVImageBufferChromaSubsampling_422 __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_4_0);
 CV_EXPORT const CFStringRef	kCVImageBufferChromaSubsampling_411 __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_4_0);
 
+// Can be set to kCFBooleanTrue as a hint that the alpha channel is fully opaque.  Not used if the pixel format type has no alpha channel.
+CV_EXPORT const CFStringRef	kCVImageBufferAlphaChannelIsOpaque __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+	
 #pragma mark CVImageBufferRef
 
 /*!

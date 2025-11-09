@@ -1,5 +1,5 @@
 /*	CFSocket.h
-	Copyright (c) 1999-2013, Apple Inc.  All rights reserved.
+	Copyright (c) 1999-2014, Apple Inc.  All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFSOCKET__)
@@ -8,6 +8,7 @@
 #include <CoreFoundation/CFRunLoop.h>
 #include <CoreFoundation/CFData.h>
 
+CF_IMPLICIT_BRIDGING_ENABLED
 CF_EXTERN_C_BEGIN
 
 typedef struct __CFSocket * CFSocketRef;
@@ -208,6 +209,7 @@ CF_EXPORT const CFStringRef kCFSocketRegisterCommand;
 CF_EXPORT const CFStringRef kCFSocketRetrieveCommand;
 
 CF_EXTERN_C_END
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif /* ! __COREFOUNDATION_CFSOCKET__ */
 

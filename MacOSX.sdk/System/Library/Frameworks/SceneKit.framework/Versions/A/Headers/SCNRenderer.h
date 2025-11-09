@@ -1,19 +1,20 @@
 //
 //  SCNRenderer.h
 //
-//  Copyright (c) 2012 Apple Inc. All rights reserved.
+//  Copyright (c) 2012-2014 Apple Inc. All rights reserved.
 //
 
 #import <SceneKit/SCNSceneRenderer.h>
+#import <SceneKit/SCNTechnique.h>
 
 /*! @class SCNRenderer
 	@abstract SCNRenderer lets you use the SceneKit renderer in an OpenGL context of your own.
  */
 
-SCENEKIT_CLASS_AVAILABLE(10_8, NA)
-@interface SCNRenderer : NSObject <SCNSceneRenderer>
+SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
+@interface SCNRenderer : NSObject <SCNSceneRenderer, SCNTechniqueSupport>
 {
-@private
+@protected
 	id _reserved;
 }
 
@@ -33,9 +34,21 @@ SCENEKIT_CLASS_AVAILABLE(10_8, NA)
 
 /*! 
  @method render
- @abstract renders the current scene at the current time.
+ @abstract renders the receiver's scene at the current system time.
  */
-- (void) render;
+- (void)render;
+
+/*!
+ @method render
+ @abstract renders the receiver's scene at the specified time (system time).
+ */
+- (void)renderAtTime:(CFTimeInterval) time SCENEKIT_AVAILABLE(10_10, 8_0);
+
+/*!
+ @property nextFrameTime
+ @abstract Returns the time at which the next update should happen. If infinite no update needs to be scheduled yet. If the current frame time, a continuous animation is running and an update should be scheduled after a "natural" delay.
+ */
+@property(nonatomic, readonly) CFTimeInterval nextFrameTime SCENEKIT_AVAILABLE(10_10, 8_0);
 
 @end
 

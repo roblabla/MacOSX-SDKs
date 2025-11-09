@@ -17,7 +17,6 @@ NS_CLASS_AVAILABLE(10_7, NA)
 @interface SKRequest : NSObject {
 @private
     id _requestInternal;
-    NSValue* _serverConnection; //if request uses sustained connection
 }
 
 @property(assign) id <SKRequestDelegate> delegate;

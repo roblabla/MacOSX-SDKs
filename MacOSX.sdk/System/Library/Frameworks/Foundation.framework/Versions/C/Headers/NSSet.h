@@ -1,5 +1,5 @@
 /*	NSSet.h
-	Copyright (c) 1994-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -11,18 +11,21 @@
 
 @interface NSSet : NSObject <NSCopying, NSMutableCopying, NSSecureCoding, NSFastEnumeration>
 
-- (NSUInteger)count;
+@property (readonly) NSUInteger count;
 - (id)member:(id)object;
 - (NSEnumerator *)objectEnumerator;
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithObjects:(const id [])objects count:(NSUInteger)cnt NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
 @end
 
 @interface NSSet (NSExtendedSet)
 
-- (NSArray *)allObjects;
+@property (readonly, copy) NSArray *allObjects;
 - (id)anyObject;
 - (BOOL)containsObject:(id)anObject;
-- (NSString *)description;
+@property (readonly, copy) NSString *description;
 - (NSString *)descriptionWithLocale:(id)locale;
 - (BOOL)intersectsSet:(NSSet *)otherSet;
 - (BOOL)isEqualToSet:(NSSet *)otherSet;
@@ -35,13 +38,11 @@
 - (NSSet *)setByAddingObjectsFromSet:(NSSet *)other NS_AVAILABLE(10_5, 2_0);
 - (NSSet *)setByAddingObjectsFromArray:(NSArray *)other NS_AVAILABLE(10_5, 2_0);
 
-#if NS_BLOCKS_AVAILABLE
 - (void)enumerateObjectsUsingBlock:(void (^)(id obj, BOOL *stop))block NS_AVAILABLE(10_6, 4_0);
 - (void)enumerateObjectsWithOptions:(NSEnumerationOptions)opts usingBlock:(void (^)(id obj, BOOL *stop))block NS_AVAILABLE(10_6, 4_0);
 
 - (NSSet *)objectsPassingTest:(BOOL (^)(id obj, BOOL *stop))predicate NS_AVAILABLE(10_6, 4_0);
 - (NSSet *)objectsWithOptions:(NSEnumerationOptions)opts passingTest:(BOOL (^)(id obj, BOOL *stop))predicate NS_AVAILABLE(10_6, 4_0);
-#endif
 
 @end
 
@@ -53,9 +54,6 @@
 + (instancetype)setWithObjects:(id)firstObj, ... NS_REQUIRES_NIL_TERMINATION;
 + (instancetype)setWithSet:(NSSet *)set;
 + (instancetype)setWithArray:(NSArray *)array;
-
-- (instancetype)init;	/* designated initializer */
-- (instancetype)initWithObjects:(const id [])objects count:(NSUInteger)cnt;	/* designated initializer */
 
 - (instancetype)initWithObjects:(id)firstObj, ... NS_REQUIRES_NIL_TERMINATION;
 - (instancetype)initWithSet:(NSSet *)set;
@@ -70,6 +68,9 @@
 
 - (void)addObject:(id)object;
 - (void)removeObject:(id)object;
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCapacity:(NSUInteger)numItems NS_DESIGNATED_INITIALIZER;
 
 @end
 
@@ -89,9 +90,6 @@
 
 + (instancetype)setWithCapacity:(NSUInteger)numItems;
 
-- (instancetype)init;	/* designated initializer */
-- (instancetype)initWithCapacity:(NSUInteger)numItems;	/* designated initializer */
-
 @end
 
 /****************	Counted Set	****************/
@@ -102,10 +100,10 @@
     void *_reserved;
 }
 
-- (id)initWithCapacity:(NSUInteger)numItems; // designated initializer
+- (instancetype)initWithCapacity:(NSUInteger)numItems; // designated initializer
 
-- (id)initWithArray:(NSArray *)array;
-- (id)initWithSet:(NSSet *)set;
+- (instancetype)initWithArray:(NSArray *)array;
+- (instancetype)initWithSet:(NSSet *)set;
 
 - (NSUInteger)countForObject:(id)object;
 

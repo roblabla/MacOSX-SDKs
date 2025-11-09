@@ -1,5 +1,5 @@
 /*	NSProtocolChecker.h
-	Copyright (c) 1995-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1995-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSProxy.h>
@@ -7,15 +7,15 @@
 
 @interface NSProtocolChecker : NSProxy
 
-- (Protocol *)protocol;
-- (NSObject *)target;
+@property (readonly) Protocol *protocol;
+@property (readonly, retain) NSObject *target;
 
 @end
 
 @interface NSProtocolChecker (NSProtocolCheckerCreation)
 
-+ (id)protocolCheckerWithTarget:(NSObject *)anObject protocol:(Protocol *)aProtocol;
-- (id)initWithTarget:(NSObject *)anObject protocol:(Protocol *)aProtocol;
++ (instancetype)protocolCheckerWithTarget:(NSObject *)anObject protocol:(Protocol *)aProtocol;
+- (instancetype)initWithTarget:(NSObject *)anObject protocol:(Protocol *)aProtocol;
 
 @end
 

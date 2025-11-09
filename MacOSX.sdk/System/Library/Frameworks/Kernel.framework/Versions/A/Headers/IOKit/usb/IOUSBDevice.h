@@ -49,6 +49,7 @@
 
 class IOUSBController;
 class IOUSBControllerV2;
+class IOUSBControllerV3;
 class IOUSBInterface;
 class IOUSBHubPolicyMaker;
 /*!
@@ -130,7 +131,11 @@ protected:
 		UInt32					_wakeUSB3PowerAllocated;			// how much extra "USB3" power during wake did we already give our client
 		bool					_attachedToEnclosureAndUsingExtraWakePower;
 		bool					_deviceIsOnThunderbolt;					// Will be set if all our upstream hubs are on Thunderbolt
-
+        UInt16                  _isochDelay;
+        IOUSBControllerV3 *     _controllerV3;
+        IOService *             _interfacePowerParent;                // default parent for joinPMTree for interface drivers
+        bool                    _loadingDriverAfterReEnumerate;
+        bool                    _hasMSCInterface;                   // True if any of the IOUSBInterfaces are mass storage class
     };
     ExpansionData * _expansionData;
 
@@ -163,9 +168,13 @@ public:
     virtual void		stop( IOService *provider );
     virtual bool		finalize(IOOptionBits options);
 	virtual void		free( void );	
+	virtual void        joinPMtree ( IOService * driver );
 
 	// IOUSBDevice methods
     virtual void SetProperties();
+    
+    // simple accessor methods
+    IOService       *GetInterfacePowerParent(void);
     
     static IOUSBDevice *NewDevice(void);
     
@@ -364,7 +373,11 @@ public:
     UInt8   GetDeviceSubClass(void);
     UInt8	GetProtocol(void);
     UInt32  GetLocationID(void);
+    UInt16  GetIsochDelay(void);
+    bool	IsDeviceInternal(void);
+	
 	void	SetBusPowerAvailable(UInt32 newPower);
+    IOService   *GetDevicePowerParent(void);
 
     OSMetaClassDeclareReservedUsed(IOUSBDevice,  0);
     /*!
@@ -544,12 +557,18 @@ public:
     OSMetaClassDeclareReservedUsed(IOUSBDevice,  16);
     /*!
 	 @function SetAddress
-	 @param 	Sets the bus address of the device
+	 @param 	address Sets the bus address of the device
 	 */
     virtual void 			SetAddress(USBDeviceAddress address);
     
-
-    OSMetaClassDeclareReservedUnused(IOUSBDevice,  17);
+    OSMetaClassDeclareReservedUsed(IOUSBDevice,  17);
+    /*!
+	 @function SetIsochDelay
+	 @param 	delay Sets the delay, in nanoseconds, from the time a host transmits a packet to the time it is received by the device.  Sum of all the wHubDelay's for the
+     upstream hubs.
+	 */
+    virtual IOReturn 			SetIsochDelay(UInt16 delay);
+    
     OSMetaClassDeclareReservedUnused(IOUSBDevice,  18);
     OSMetaClassDeclareReservedUnused(IOUSBDevice,  19);
 
@@ -570,7 +589,8 @@ private:
     
     UInt32              SimpleUnicodeToUTF8(UInt16 uChar, UInt8 utf8Bytes[4]);
     void                SwapUniWords (UInt16  **unicodeString, UInt32 uniSize);
-
+    void                TrimStringDescriptor(UInt16  **unicodeString, SInt32 *uniSize);
+    
     IOReturn			TakeGetConfigLock(void);
     IOReturn			ReleaseGetConfigLock(void);
     static IOReturn		ChangeGetConfigLock(OSObject *target, void *arg0, void *arg1, void *arg2, void *arg3);

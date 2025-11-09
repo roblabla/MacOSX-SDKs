@@ -19,7 +19,7 @@
 
  @constant      AVAudioTimePitchAlgorithmTimeDomain
 				Modest quality, less expensive. Suitable for voice.
-                Variable rate from 0.5 to 2.0
+                Variable rate from 1/32 to 32.
 
  @constant      AVAudioTimePitchAlgorithmSpectral
 				Highest quality, most computationally expensive. Suitable for music.

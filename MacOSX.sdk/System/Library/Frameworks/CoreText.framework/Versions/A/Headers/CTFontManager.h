@@ -359,13 +359,12 @@ CTFontManagerAutoActivationSetting CTFontManagerGetAutoActivationSetting(
     @constant   kCTFontManagerRegisteredFontsChangedNotification
     @abstract   Notification name for font registry changes.
     @discussion This is the string to use as the notification name when subscribing
-                to CTFontManager notifications. This notification will be posted
-                when fonts are added to the font registry. The client is responsible for
-                registered with the distributed notification center to receive notifications
-                for changes to the session or user scopes, and with a local notification
-                for changes to the process scope.
+                to CTFontManager notifications.  This notification will be posted when fonts are added or removed.
+                OS X clients should register as an observer of the notification with the distributed notification center
+                for changes in session or user scopes and with the local notification center for changes in process scope.
+                iOS clients should register as an observer of the notification with the local notification center for all changes.
 */
-extern const CFStringRef kCTFontManagerRegisteredFontsChangedNotification CT_AVAILABLE_MAC(10_6);
+extern const CFStringRef kCTFontManagerRegisteredFontsChangedNotification CT_AVAILABLE(10_6, 7_0);
 
 #if defined(__cplusplus)
 }

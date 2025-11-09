@@ -11,7 +11,10 @@
 SK_EXPORT @interface SKTextureAtlas : NSObject <NSCoding>
 
 /* Atlas with .png and .plist file name*/
-+ (SKTextureAtlas *)atlasNamed:(NSString *)name;
++ (instancetype)atlasNamed:(NSString *)name;
+
+/* Create a texture atlas on the fly */
++ (instancetype)atlasWithDictionary:(NSDictionary *)properties NS_AVAILABLE(10_10, 8_0);
 
 /* Individual texture for image name within the atlas */
 - (SKTexture *)textureNamed:(NSString *)name;
@@ -32,6 +35,6 @@ SK_EXPORT @interface SKTextureAtlas : NSObject <NSCoding>
 
 
 /* Returns the array of valid textures in the atlas */
-@property (SK_NONATOMIC_IOSONLY, readonly) NSArray *textureNames;
+@property (nonatomic, readonly) NSArray *textureNames;
 
 @end

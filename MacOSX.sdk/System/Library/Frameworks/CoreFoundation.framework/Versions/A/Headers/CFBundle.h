@@ -1,5 +1,5 @@
 /*	CFBundle.h
-	Copyright (c) 1999-2013, Apple Inc.  All rights reserved.
+	Copyright (c) 1999-2014, Apple Inc.  All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFBUNDLE__)
@@ -12,6 +12,7 @@
 #include <CoreFoundation/CFString.h>
 #include <CoreFoundation/CFURL.h>
 
+CF_IMPLICIT_BRIDGING_ENABLED
 CF_EXTERN_C_BEGIN
 
 typedef struct __CFBundle *CFBundleRef;
@@ -328,6 +329,7 @@ CF_EXPORT
 void CFBundleCloseBundleResourceMap(CFBundleRef bundle, CFBundleRefNum refNum);
 
 CF_EXTERN_C_END
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif /* ! __COREFOUNDATION_CFBUNDLE__ */
 

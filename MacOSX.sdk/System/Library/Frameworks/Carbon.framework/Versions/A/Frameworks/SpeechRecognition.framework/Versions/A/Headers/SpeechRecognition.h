@@ -3,7 +3,7 @@
  
      Contains:   Apple Speech Recognition Toolbox Interfaces.
  
-     Copyright:  © 1992-2008 by Apple Computer, Inc., all rights reserved.
+     Copyright:  ï¿½ 1992-2008 by Apple Computer, Inc., all rights reserved.
  
      Warning:    *** APPLE INTERNAL USE ONLY ***
                  This file may contain unreleased API's
@@ -319,7 +319,7 @@ enum {
 /*          callback, it has essentially been created on your behalf and so     */
 /*          you are responsible for releasing it as above                       */
 /*                                                                              */
-/*      *   when you close a SRRecognitionSystem, all remaining objects which       */
+/*      *   when you close a SRRecognitionSystem, all remaining objects which   */
 /*          were allocated with it will be forcefully released and any          */
 /*          remaining references to those objects will be invalid.              */
 /*                                                                              */

@@ -29,7 +29,7 @@ EVENTKIT_CLASS_AVAILABLE(10_8, 6_0)
     @abstract   The start date of the task, as date components.
     @discussion The use of date components allows the start date and its time zone to be represented in a single property. 
                 A nil time zone represents a floating date.  Setting a date component without a hour, minute and second component will set allDay to YES.
-                If you set this property, the calendar must be set to NSGregorianCalendar. An exception is raised otherwise.
+                If you set this property, the calendar must be set to NSCalendarIdentifierGregorian. An exception is raised otherwise.
  */
 @property(nonatomic, copy) NSDateComponents *startDateComponents;
 
@@ -38,7 +38,7 @@ EVENTKIT_CLASS_AVAILABLE(10_8, 6_0)
     @abstract   The date by which this reminder should be completed.
     @discussion The use of date components allows the due date and its time zone to be represented in a single property. 
                 A nil time zone represents a floating date.  Setting a date component without a hour, minute and second component will set allDay to YES.
-                If you set this property, the calendar must be set to NSGregorianCalendar. An exception is raised otherwise.
+                If you set this property, the calendar must be set to NSCalendarIdentifierGregorian. An exception is raised otherwise.
  
                 On iOS, if you set the due date for a reminder, you must also set a start date, otherwise you will receive
                 an error (EKErrorNoStartDate) when attempting to save this reminder. This is not a requirement on OS X.

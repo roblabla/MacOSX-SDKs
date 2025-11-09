@@ -1,5 +1,5 @@
 /*	CFPlugIn.h
-	Copyright (c) 1999-2013, Apple Inc.  All rights reserved.
+	Copyright (c) 1999-2014, Apple Inc.  All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFPLUGIN__)
@@ -16,6 +16,7 @@
 #include <CoreFoundation/CFURL.h>
 #include <CoreFoundation/CFUUID.h>
 
+CF_IMPLICIT_BRIDGING_ENABLED
 CF_EXTERN_C_BEGIN
 
 /* ================ Standard Info.plist keys for plugIns ================ */
@@ -108,6 +109,7 @@ CF_EXPORT CFTypeID CFPlugInInstanceGetTypeID(void);
 CF_EXPORT CFPlugInInstanceRef CFPlugInInstanceCreateWithInstanceDataSize(CFAllocatorRef allocator, CFIndex instanceDataSize, CFPlugInInstanceDeallocateInstanceDataFunction deallocateInstanceFunction, CFStringRef factoryName, CFPlugInInstanceGetInterfaceFunction getInterfaceFunction);
 
 CF_EXTERN_C_END
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #if !COREFOUNDATION_CFPLUGINCOM_SEPARATE
 #include <CoreFoundation/CFPlugInCOM.h>

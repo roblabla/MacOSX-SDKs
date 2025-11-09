@@ -436,7 +436,7 @@ enum
     @param      inSourceFormat
                     The format of the source audio to be converted.
     @param      inDestinationFormat
-                    The destination format to which the audio is to be converter.
+                    The destination format to which the audio is to be converted.
     @param      outAudioConverter
                     On successful return, points to a new AudioConverter instance.
     @result     An OSStatus result code.
@@ -481,7 +481,7 @@ AudioConverterNew(      const AudioStreamBasicDescription*  inSourceFormat,
     @param      inSourceFormat
                     The format of the source audio to be converted.
     @param      inDestinationFormat
-                    The destination format to which the audio is to be converter.
+                    The destination format to which the audio is to be converted.
     @param      inNumberClassDescriptions
                     The number of class descriptions.
     @param      inClassDescriptions

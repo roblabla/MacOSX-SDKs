@@ -37,7 +37,7 @@ typedef int32_t eODModuleType;
 typedef eODCallbackResponse (*odm_customfunction_t)(od_request_t request, od_connection_t connection, xpc_object_t custom_payload);
 
 struct odmodule_vtable_s {
-#define ODMODULE_VTABLE_VERSION 1
+#define ODMODULE_VTABLE_VERSION 2
     int version; /* set to ODMODULE_VTABLE_VERSION */
     
     /* Callbacks not associated with API calls */
@@ -113,6 +113,39 @@ struct odmodule_vtable_s {
                                                const char *recordname, xpc_object_t policies_dict, xpc_object_t addinfo_dict);
     eODCallbackResponse (*odm_RecordRemovePolicy)(od_request_t request, od_connection_t connection, const char *record_type, const char *metarecordname,
                                                   const char *recordname, const char *policyType, xpc_object_t addinfo_dict);
+
+    /*
+     * Version 2 additions
+     */
+
+    eODCallbackResponse (*odm_NodeAddAccountPolicy)(od_request_t request, od_connection_t connection, const char *policyCategory, xpc_object_t policy);
+    eODCallbackResponse (*odm_NodeRemoveAccountPolicy)(od_request_t request, od_connection_t connection, const char *policyCategory, xpc_object_t policy);
+    eODCallbackResponse (*odm_NodeSetAccountPolicies)(od_request_t request, od_connection_t connection, xpc_object_t policies);
+    eODCallbackResponse (*odm_NodeCopyAccountPolicies)(od_request_t request, od_connection_t connection);
+    eODCallbackResponse (*odm_NodePasswordContentCheck)(od_request_t request, od_connection_t connection, const char *recordtype, const char *recordname, const char *password);
+
+    eODCallbackResponse (*odm_RecordAddAccountPolicy)(od_request_t request, od_connection_t connection, const char *record_type, const char *metarecordname,
+                                                      const char *recordname, const char *policyCategory, xpc_object_t policy, xpc_object_t addinfo_dict);
+    eODCallbackResponse (*odm_RecordRemoveAccountPolicy)(od_request_t request, od_connection_t connection, const char *record_type, const char *metarecordname,
+                                                         const char *recordname, const char *policyCategory, xpc_object_t policy, xpc_object_t addinfo_dict);
+    eODCallbackResponse (*odm_RecordSetAccountPolicies)(od_request_t request, od_connection_t connection, const char *record_type, const char *metarecordname,
+                                                        const char *recordname, xpc_object_t policies, xpc_object_t addinfo_dict);
+    eODCallbackResponse (*odm_RecordCopyAccountPolicies)(od_request_t request, od_connection_t connection, const char *record_type, const char *metarecordname,
+                                                         const char *recordname, xpc_object_t addinfo_dict);
+
+    eODCallbackResponse (*odm_RecordAuthenticationAllowed)(od_request_t request, od_connection_t connection, const char *record_type, const char *metarecordname,
+                                                           const char *recordname, xpc_object_t addinfo_dict);
+    eODCallbackResponse (*odm_RecordPasswordChangeAllowed)(od_request_t request, od_connection_t connection, const char *record_type, const char *metarecordname,
+                                                           const char *recordname, const char *password, xpc_object_t addinfo_dict);
+    eODCallbackResponse (*odm_RecordWillAuthenticationsExpire)(od_request_t request, od_connection_t connection, const char *record_type, const char *metarecordname,
+                                                               const char *recordname, int64_t expires_in, xpc_object_t addinfo_dict);
+    eODCallbackResponse (*odm_RecordWillPasswordExpire)(od_request_t request, od_connection_t connection, const char *record_type, const char *metarecordname,
+                                                        const char *recordname, int64_t expires_in, xpc_object_t addinfo_dict);
+    eODCallbackResponse (*odm_RecordSecondsUntilAuthenticationsExpire)(od_request_t request, od_connection_t connection, const char *record_type, const char *metarecordname,
+                                                                       const char *recordname, xpc_object_t addinfo_dict);
+    eODCallbackResponse (*odm_RecordSecondsUntilPasswordExpires)(od_request_t request, od_connection_t connection, const char *record_type, const char *metarecordname,
+                                                                 const char *recordname, xpc_object_t addinfo_dict);
+
 };
 
 typedef struct odmodule_vtable_s *odmodule_vtable_t;

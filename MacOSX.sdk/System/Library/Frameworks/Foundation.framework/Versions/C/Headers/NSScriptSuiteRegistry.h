@@ -1,6 +1,6 @@
 /*
 	NSScriptSuiteRegistry.h
-	Copyright (c) 1997-2013, Apple Inc.
+	Copyright (c) 1997-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -48,7 +48,7 @@
 
 /* Return a list of all registered suite names.
 */
-- (NSArray *)suiteNames;
+@property (readonly, copy) NSArray *suiteNames;
 
 /* Return the four character code used to identify the named suite.
 */

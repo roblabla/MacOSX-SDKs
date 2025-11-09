@@ -74,7 +74,7 @@
 	@discussion The inquiry is NOT automatically started. You musts call -start on it to start the search for in-range devices.
 */
 
-+ (IOBluetoothDeviceInquiry *)inquiryWithDelegate:(id)delegate;
++ (instancetype)inquiryWithDelegate:(id)delegate;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@method		initWithDelegate
@@ -83,7 +83,7 @@
 	@result		A pointer to the initialized IOBluetoothDeviceInquiry object.
 */
 
-- (id)initWithDelegate:(id)delegate;
+- (instancetype)initWithDelegate:(id)delegate;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@method		start

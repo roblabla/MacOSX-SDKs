@@ -22,6 +22,8 @@
 /*
  * Copyright 2007 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
+ *
+ * Portions Copyright (c) 2012 by Delphix. All rights reserved.
  */
 
 #ifndef _SYS_DTRACE_IMPL_H
@@ -45,6 +47,11 @@ extern "C" {
  */
 
 #include <sys/dtrace.h>
+
+/*
+ * DTrace Implementation Locks
+ */
+extern lck_mtx_t dtrace_procwaitfor_lock;
 
 /*
  * DTrace Implementation Constants and Typedefs
@@ -197,15 +204,18 @@ typedef struct dtrace_hash {
  * predicate is non-NULL, the DIF object is executed.  If the result is
  * non-zero, the action list is processed, with each action being executed
  * accordingly.  When the action list has been completely executed, processing
- * advances to the next ECB.  processing advances to the next ECB.  If the
- * result is non-zero; For each ECB, it first determines the The ECB
- * abstraction allows disjoint consumers to multiplex on single probes.
+ * advances to the next ECB. The ECB abstraction allows disjoint consumers
+ * to multiplex on single probes.
+ *
+ * Execution of the ECB results in consuming dte_size bytes in the buffer
+ * to record data.  During execution, dte_needed bytes must be available in
+ * the buffer.  This space is used for both recorded data and tuple data.
  */
 struct dtrace_ecb {
 	dtrace_epid_t dte_epid;			/* enabled probe ID */
 	uint32_t dte_alignment;			/* required alignment */
-	size_t dte_needed;			/* bytes needed */
-	size_t dte_size;			/* total size of payload */
+	size_t dte_needed;			/* space needed for execution */
+	size_t dte_size;			/* size of recorded payload */
 	dtrace_predicate_t *dte_predicate;	/* predicate, if any */
 	dtrace_action_t *dte_action;		/* actions, if any */
 	dtrace_ecb_t *dte_next;			/* next ECB on probe */
@@ -263,27 +273,30 @@ typedef struct dtrace_aggregation {
  * the EPID, the consumer can determine the data layout.  (The data buffer
  * layout is shown schematically below.)  By assuring that one can determine
  * data layout from the EPID, the metadata stream can be separated from the
- * data stream -- simplifying the data stream enormously.
+ * data stream -- simplifying the data stream enormously.  The ECB always
+ * proceeds the recorded data as part of the dtrace_rechdr_t structure that
+ * includes the EPID and a high-resolution timestamp used for output ordering
+ * consistency.
  *
- *      base of data buffer --->  +------+--------------------+------+
- *                                | EPID | data               | EPID |
- *                                +------+--------+------+----+------+
- *                                | data          | EPID | data      |
- *                                +---------------+------+-----------+
- *                                | data, cont.                      |
- *                                +------+--------------------+------+
- *                                | EPID | data               |      |
- *                                +------+--------------------+      |
- *                                |                ||                |
- *                                |                ||                |
- *                                |                \/                |
- *                                :                                  :
- *                                .                                  .
- *                                .                                  .
- *                                .                                  .
- *                                :                                  :
- *                                |                                  |
- *     limit of data buffer --->  +----------------------------------+
+ *      base of data buffer --->  +--------+--------------------+--------+
+ *                                | rechdr | data               | rechdr |
+ *                                +--------+------+--------+----+--------+
+ *                                | data          | rechdr | data        |
+ *                                +---------------+--------+-------------+
+ *                                | data, cont.                          |
+ *                                +--------+--------------------+--------+
+ *                                | rechdr | data               |        |
+ *                                +--------+--------------------+        |
+ *                                |                ||                    |
+ *                                |                ||                    |
+ *                                |                \/                    |
+ *                                :                                      :
+ *                                .                                      .
+ *                                .                                      .
+ *                                .                                      .
+ *                                :                                      :
+ *                                |                                      |
+ *     limit of data buffer --->  +--------------------------------------+
  *
  * When evaluating an ECB, dtrace_probe() determines if the ECB's needs of the
  * principal buffer (both scratch and payload) exceed the available space.  If
@@ -421,6 +434,8 @@ typedef struct dtrace_buffer {
 #ifndef _LP64
 	uint64_t dtb_pad1;
 #endif
+	uint64_t dtb_switched;			/* time of last switch */
+	uint64_t dtb_interval;			/* observed switch interval */
 } dtrace_buffer_t;
 
 /*
@@ -892,6 +907,7 @@ typedef struct dtrace_vstate {
 #define	DTRACE_MSTATE_WALLTIMESTAMP	0x00000100
 #define	DTRACE_MSTATE_USTACKDEPTH	0x00000200
 #define	DTRACE_MSTATE_UCALLER		0x00000400
+#define	DTRACE_MSTATE_MACHTIMESTAMP	0x00000800
 
 typedef struct dtrace_mstate {
 	uintptr_t dtms_scratch_base;		/* base of scratch space */
@@ -902,6 +918,7 @@ typedef struct dtrace_mstate {
 	dtrace_epid_t dtms_epid;		/* current EPID */
 	uint64_t dtms_timestamp;		/* cached timestamp */
 	hrtime_t dtms_walltimestamp;		/* cached wall timestamp */
+	uint64_t dtms_machtimestamp;		/* cached mach absolute timestamp */
 	int dtms_stackdepth;			/* cached stackdepth */
 	int dtms_ustackdepth;			/* cached ustackdepth */
 	struct dtrace_probe *dtms_probe;	/* current probe */
@@ -978,9 +995,9 @@ typedef enum dtrace_activity {
 	DTRACE_ACTIVITY_KILLED			/* killed */
 } dtrace_activity_t;
 
-#if defined(__APPLE__)
+
 /*
- * DTrace dof modes
+ * APPLE NOTE:  DTrace dof modes implementation
  *
  * DTrace has four "dof modes". They are:
  *
@@ -1047,7 +1064,6 @@ typedef enum dtrace_activity {
 #define DTRACE_KERNEL_SYMBOLS_FROM_USERSPACE		2
 #define DTRACE_KERNEL_SYMBOLS_ALWAYS_FROM_KERNEL	3
 	
-#endif /* __APPLE__ */
 
 /*
  * DTrace Helper Implementation
@@ -1202,9 +1218,7 @@ struct dtrace_state {
 	dtrace_optval_t dts_options[DTRACEOPT_MAX]; /* options */
 	dtrace_cred_t dts_cred;			/* credentials */
 	size_t dts_nretained;			/* number of retained enabs */
-#if defined(__APPLE__)
 	uint64_t dts_arg_error_illval;
-#endif /* __APPLE__ */
 };
 
 struct dtrace_provider {
@@ -1215,15 +1229,15 @@ struct dtrace_provider {
 	void *dtpv_arg;				/* provider argument */
 	uint_t dtpv_defunct;			/* boolean: defunct provider */
 	struct dtrace_provider *dtpv_next;	/* next provider */
-	uint64_t probe_count;			/* no. of associated probes */
-	uint64_t ecb_count;			/* no. of associated enabled ECBs */
+	uint64_t dtpv_probe_count;		/* number of associated probes */
+	uint64_t dtpv_ecb_count;		/* number of associated enabled ECBs */
 };
 
 struct dtrace_meta {
 	dtrace_mops_t dtm_mops;			/* meta provider operations */
 	char *dtm_name;				/* meta provider name */
 	void *dtm_arg;				/* meta provider user arg */
-	uint64_t dtm_count;			/* no. of associated provs. */
+	uint64_t dtm_count;			/* number of associated providers */
 };
 
 /*
@@ -1314,58 +1328,37 @@ extern int dtrace_getipl(void);
 extern uintptr_t dtrace_caller(int);
 extern uint32_t dtrace_cas32(uint32_t *, uint32_t, uint32_t);
 extern void *dtrace_casptr(void *, void *, void *);
-#if !defined(__APPLE__)
-extern void dtrace_copyin(uintptr_t, uintptr_t, size_t, volatile uint16_t *);
-extern void dtrace_copyinstr(uintptr_t, uintptr_t, size_t, volatile uint16_t *);
-extern void dtrace_copyout(uintptr_t, uintptr_t, size_t, volatile uint16_t *);
-extern void dtrace_copyoutstr(uintptr_t, uintptr_t, size_t,
-    volatile uint16_t *);
-#else
 extern void dtrace_copyin(user_addr_t, uintptr_t, size_t, volatile uint16_t *);
 extern void dtrace_copyinstr(user_addr_t, uintptr_t, size_t, volatile uint16_t *);
 extern void dtrace_copyout(uintptr_t, user_addr_t, size_t, volatile uint16_t *);
 extern void dtrace_copyoutstr(uintptr_t, user_addr_t, size_t, volatile uint16_t *);
-#endif /* __APPLE__ */
 extern void dtrace_getpcstack(pc_t *, int, int, uint32_t *);
-#if !defined(__APPLE__)
-extern ulong_t dtrace_getreg(struct regs *, uint_t);
-#else
 extern uint64_t dtrace_getreg(struct regs *, uint_t);
-#endif /* __APPLE__ */
 extern int dtrace_getstackdepth(int);
 extern void dtrace_getupcstack(uint64_t *, int);
 extern void dtrace_getufpstack(uint64_t *, uint64_t *, int);
 extern int dtrace_getustackdepth(void);
 extern uintptr_t dtrace_fulword(void *);
-#if !defined(__APPLE__)
-extern uint8_t dtrace_fuword8(void *);
-extern uint16_t dtrace_fuword16(void *);
-extern uint32_t dtrace_fuword32(void *);
-extern uint64_t dtrace_fuword64(void *);
-extern void dtrace_probe_error(dtrace_state_t *, dtrace_epid_t, int, int,
-    int, uintptr_t);
-#else
 extern uint8_t dtrace_fuword8(user_addr_t);
 extern uint16_t dtrace_fuword16(user_addr_t);
 extern uint32_t dtrace_fuword32(user_addr_t);
 extern uint64_t dtrace_fuword64(user_addr_t);
+extern int dtrace_proc_waitfor(dtrace_procdesc_t*);
 extern void dtrace_probe_error(dtrace_state_t *, dtrace_epid_t, int, int,
     int, uint64_t);
-#endif /* __APPLE__ */
 extern int dtrace_assfail(const char *, const char *, int);
 extern int dtrace_attached(void);
 extern hrtime_t dtrace_gethrestime(void);
 extern void dtrace_isa_init(void);
 
-#ifdef __sparc
-extern void dtrace_flush_windows(void);
-extern void dtrace_flush_user_windows(void);
-extern uint_t dtrace_getotherwin(void);
-extern uint_t dtrace_getfprs(void);
-#else
 extern void dtrace_copy(uintptr_t, uintptr_t, size_t);
 extern void dtrace_copystr(uintptr_t, uintptr_t, size_t, volatile uint16_t *);
-#endif
+
+/*
+ * DTrace restriction checks
+ */
+extern boolean_t dtrace_is_restricted(void);
+extern boolean_t dtrace_can_attach_to_proc(proc_t);
 
 /*
  * DTrace Assertions

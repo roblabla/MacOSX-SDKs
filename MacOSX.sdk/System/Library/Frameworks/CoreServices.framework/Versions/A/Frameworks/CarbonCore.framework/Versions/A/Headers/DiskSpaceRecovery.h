@@ -55,6 +55,7 @@ typedef void (^CSDiskSpaceRecoveryCallback)(Boolean succeeded, UInt64 bytesFree,
  *  CSDiskSpaceStartRecovery()
  *  
  *  Discussion:
+ *
  *    Asynchronously attempts to recover free space on the specified
  *    volume and continues until at least the specified amount of space
  *    is available or until no more space can be recovered. The
@@ -130,6 +131,7 @@ CSDiskSpaceStartRecovery(
  *  CSDiskSpaceCancelRecovery()
  *  
  *  Discussion:
+ *
  *    Cancels the specified space recovery operation. Cancelation may
  *    take a significant amount of time but this function will return
  *    immediately. Once cancelation is successful the callback provided
@@ -157,6 +159,7 @@ CSDiskSpaceCancelRecovery(CFUUIDRef operationUUID)            __OSX_AVAILABLE_ST
  *  CSDiskSpaceGetRecoveryEstimate()
  *  
  *  Discussion:
+ *
  *    Returns a quick, conservative estimate of the number of
  *    recoverable bytes on the specified volume. This estimated value
  *    is only intended for display in the user interface. The actual

@@ -2,7 +2,7 @@
 //  MKAnnotation.h
 //  MapKit
 //
-//  Copyright (c) 2009-2013, Apple Inc. All rights reserved.
+//  Copyright (c) 2009-2014, Apple Inc. All rights reserved.
 //
 
 #import <CoreGraphics/CoreGraphics.h>
@@ -11,7 +11,7 @@
 
 @protocol MKAnnotation <NSObject>
 
-// Center latitude and longitude of the annotion view.
+// Center latitude and longitude of the annotation view.
 // The implementation of this property must be KVO compliant.
 @property (nonatomic, readonly) CLLocationCoordinate2D coordinate;
 

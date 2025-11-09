@@ -1,6 +1,6 @@
 /* CoreAnimation - CATextLayer.h
 
-   Copyright (c) 2006-2012 Apple Inc.
+   Copyright (c) 2006-2014, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CALayer.h>

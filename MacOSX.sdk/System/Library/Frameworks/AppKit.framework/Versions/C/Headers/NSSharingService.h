@@ -1,7 +1,7 @@
 /*
  NSSharingService.h
  Application Kit
- Copyright (c) 2011-2013, Apple Inc.
+ Copyright (c) 2011-2014, Apple Inc.
  All rights reserved.
  */
 
@@ -46,8 +46,8 @@ NS_CLASS_AVAILABLE(10_8, NA)
 }
 @property (assign) id <NSSharingServiceDelegate> delegate;
 @property (readonly, copy) NSString *title;
-@property (readonly, retain) NSImage *image;
-@property (readonly, retain) NSImage *alternateImage;
+@property (readonly, strong) NSImage *image;
+@property (readonly, strong) NSImage *alternateImage;
 
 /* Title of the service in the Share menu. Can be modified. */
 @property (copy) NSString *menuItemTitle NS_AVAILABLE_MAC(10_9); 
@@ -80,11 +80,9 @@ NS_CLASS_AVAILABLE(10_8, NA)
 + (NSSharingService *)sharingServiceNamed:(NSString *)serviceName;
 
 
-#if NS_BLOCKS_AVAILABLE
-/* Creates a custom NSSharingService object. Custom sharing services can be added to the NSSharingServicePicker with the sharingServicePicker:sharingServicesForItems:proposedSharingServices: delegate method. 
+/* Creates a custom NSSharingService object. Custom sharing services can be added to the NSSharingServicePicker with the sharingServicePicker:sharingServicesForItems:proposedSharingServices: delegate method.
  */
-- (id)initWithTitle:(NSString *)title image:(NSImage *)image alternateImage:(NSImage *)alternateImage handler:(void (^)(void))block;
-#endif
+- (instancetype)initWithTitle:(NSString *)title image:(NSImage *)image alternateImage:(NSImage *)alternateImage handler:(void (^)(void))block;
 
 
 /* Returns whether a service can do something with all the provided items. This can be used to validate a custom UI such as a dedicated Twitter button. If items is nil, the method will return YES when the service is configured. Therefore you could call it once at launch time with nil items to check whether to display the button or not, and then with real items to enable and disable the button depending on the context or selection.
@@ -144,7 +142,7 @@ NS_CLASS_AVAILABLE(10_8, NA)
 
 /*  Returns a new picker. The items represent the objects to be shared and must conform to the <NSPasteboardWriting> protocol. (e.g. NSString, NSImage, NSURL, etc.)
  */
-- (id)initWithItems:(NSArray *)items;
+- (instancetype)initWithItems:(NSArray *)items;
 
 
 /* Shows the picker, populated with sharing services related to the instance items. When the user selects one of the sharing services, the sharing service will be performed. Note that this method must be called on mouseDown.

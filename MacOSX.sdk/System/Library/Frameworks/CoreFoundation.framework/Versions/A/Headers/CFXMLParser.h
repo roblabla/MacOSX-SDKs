@@ -1,5 +1,5 @@
 /*	CFXMLParser.h
-	Copyright (c) 1998-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1998-2014, Apple Inc. All rights reserved.
 */
 
 /*  CFXMLParser is deprecated as of Mac OS X 10.8. The suggested replacements are the Foundation classes NSXMLParser and NSXMLDocument, or the libxml2 library. */
@@ -15,6 +15,7 @@
 #include <CoreFoundation/CFURL.h>
 #include <CoreFoundation/CFXMLNode.h>
 
+CF_IMPLICIT_BRIDGING_ENABLED
 CF_EXTERN_C_BEGIN
 
 typedef struct __CFXMLParser * CFXMLParserRef;
@@ -264,6 +265,7 @@ CF_EXPORT const CFStringRef kCFXMLTreeErrorStatusCode;
     /* value is a CFNumber containing the error status code. */
 
 CF_EXTERN_C_END
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif /* ! __COREFOUNDATION_CFXMLPARSER__ */
 

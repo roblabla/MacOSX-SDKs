@@ -401,6 +401,13 @@ and block buffered otherwise.
 .Pp
 .El
 If no file arguments are specified, the standard input is used.
+.Sh ENVIRONMENT
+.Bl -tag -width "GREP_OPTIONS"
+.It Ev GREP_OPTIONS
+May be used to specify default options that will be placed at the beginning
+of the argument list.
+Backslash-escaping is not supported, unlike the behavior in GNU grep.
+.El
 .Sh EXIT STATUS
 The
 .Nm grep
@@ -486,3 +493,8 @@ The
 .Nm grep
 command first appeared in
 .At v6 .
+.Sh BUGS
+The
+.Nm
+utility does not normalize Unicode input, so a pattern containing composed
+characters will not match decomposed input, and vice versa.

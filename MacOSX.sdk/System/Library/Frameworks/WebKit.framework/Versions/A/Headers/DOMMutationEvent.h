@@ -11,10 +11,10 @@
  *    notice, this list of conditions and the following disclaimer in the
  *    documentation and/or other materials provided with the distribution.
  *
- * THIS SOFTWARE IS PROVIDED BY APPLE COMPUTER, INC. ``AS IS'' AND ANY
+ * THIS SOFTWARE IS PROVIDED BY APPLE INC. ``AS IS'' AND ANY
  * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL APPLE COMPUTER, INC. OR
+ * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL APPLE INC. OR
  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
@@ -26,8 +26,6 @@
 
 #import <WebKit/DOMEvent.h>
 
-#if WEBKIT_VERSION_MAX_ALLOWED >= WEBKIT_VERSION_1_3
-
 @class DOMNode;
 @class NSString;
 
@@ -35,20 +33,19 @@ enum {
     DOM_MODIFICATION = 1,
     DOM_ADDITION = 2,
     DOM_REMOVAL = 3
-};
+} NS_ENUM_AVAILABLE_MAC(10_4);
 
+NS_CLASS_AVAILABLE_MAC(10_4)
 @interface DOMMutationEvent : DOMEvent
-@property(readonly, retain) DOMNode *relatedNode;
-@property(readonly, copy) NSString *prevValue;
-@property(readonly, copy) NSString *newValue;
-@property(readonly, copy) NSString *attrName;
-@property(readonly) unsigned short attrChange;
+@property (readonly, strong) DOMNode *relatedNode;
+@property (readonly, copy) NSString *prevValue;
+@property (readonly, copy) NSString *newValue;
+@property (readonly, copy) NSString *attrName;
+@property (readonly) unsigned short attrChange;
 
-- (void)initMutationEvent:(NSString *)type canBubble:(BOOL)canBubble cancelable:(BOOL)cancelable relatedNode:(DOMNode *)relatedNode prevValue:(NSString *)prevValue newValue:(NSString *)newValue attrName:(NSString *)attrName attrChange:(unsigned short)attrChange AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+- (void)initMutationEvent:(NSString *)type canBubble:(BOOL)canBubble cancelable:(BOOL)cancelable relatedNode:(DOMNode *)relatedNode prevValue:(NSString *)prevValue newValue:(NSString *)newValue attrName:(NSString *)attrName attrChange:(unsigned short)attrChange NS_AVAILABLE_MAC(10_5);
 @end
 
 @interface DOMMutationEvent (DOMMutationEventDeprecated)
-- (void)initMutationEvent:(NSString *)type :(BOOL)canBubble :(BOOL)cancelable :(DOMNode *)relatedNode :(NSString *)prevValue :(NSString *)newValue :(NSString *)attrName :(unsigned short)attrChange AVAILABLE_WEBKIT_VERSION_1_3_AND_LATER_BUT_DEPRECATED_IN_WEBKIT_VERSION_3_0;
+- (void)initMutationEvent:(NSString *)type :(BOOL)canBubble :(BOOL)cancelable :(DOMNode *)relatedNode :(NSString *)prevValue :(NSString *)newValue :(NSString *)attrName :(unsigned short)attrChange NS_DEPRECATED_MAC(10_4, 10_5);
 @end
-
-#endif

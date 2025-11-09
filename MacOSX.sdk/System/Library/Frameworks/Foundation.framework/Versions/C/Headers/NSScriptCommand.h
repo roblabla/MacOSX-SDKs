@@ -1,6 +1,6 @@
 /*
 	NSScriptCommand.h
-	Copyright (c) 1997-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1997-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -42,29 +42,27 @@ enum {
 
 }
 
-- (id)initWithCommandDescription:(NSScriptCommandDescription *)commandDef;
+- (instancetype)initWithCommandDescription:(NSScriptCommandDescription *)commandDef NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCoder:(NSCoder *)inCoder;
 
-- (NSScriptCommandDescription *)commandDescription;
+@property (readonly, retain) NSScriptCommandDescription *commandDescription;
     // The command description is immutable once the command is created.
 
-- (void)setDirectParameter:(id)directParameter;
-- (id)directParameter;
+@property (retain) id directParameter;
     // Accessors for the object that corresponds to the keyDirectObject parameter of the Apple event from which this command derives.
 
-- (void)setReceiversSpecifier:(NSScriptObjectSpecifier *)receiversRef;
-- (NSScriptObjectSpecifier *)receiversSpecifier;
+@property (retain) NSScriptObjectSpecifier *receiversSpecifier;
     // Accessors for the specifier of the object(s) that will be given a chance to handle the command, if the direct parameter of the original event was an object specifier.  For backwards compatibility, -[NSScriptCommand setDirectParameter:] sends a [self setReceiversSpecifier:] message if the direct parameter is an object specifier.
     // Some types of commands may treat this somewhat specially.  For instance, the Set command backs off the innermost component of this specifier and uses the innermost component as the key to be set within that specifiers container specifier.
 
-- (id)evaluatedReceivers;
+@property (readonly, retain) id evaluatedReceivers;
     // If the direct parameter of the original event was an object specifier, and that object specifier can be (or already has been) evaluated successfully, return the specified object(s).  Return nil otherwise.
 
-- (void)setArguments:(NSDictionary *)args;
-- (NSDictionary *)arguments;
-- (NSDictionary *)evaluatedArguments;
+@property (copy) NSDictionary *arguments;
+@property (readonly, copy) NSDictionary *evaluatedArguments;
     // Arguments can be either normal objects or object specifiers.  If they are object specifiers they will be evaluated before being used.
 
-- (BOOL)isWellFormed;
+@property (getter=isWellFormed, readonly) BOOL wellFormed;
     // This checks the command against the command's description.  It makes sure there is a defined command and that the number of arguments and the types of non-specifier arguments is well formed with respect to the command description.
 
 // Given that the command has no receivers that explicitly handle the command, do some appropriate action.  -[NSScriptCommand executeCommand] invokes this method, and it is not meant to be invoked from anywhere else.  You can override this method when creating a new kind of command class that is not handled by the receivers of the command.
@@ -76,22 +74,16 @@ enum {
 - (id)executeCommand;
 
 // Set the error number, offending object descriptor, type descriptor, or message, respectively, that will be put in the reply to the Apple event from which this command was constructed, when execution of the command is completed, if the sender of the event requested a reply. If -setScriptErrorNumber: is invoked during an invocation of -executeCommand, the invocation of -executeCommand may stop invoking command handling methods in the receiver and return early.
-- (void)setScriptErrorNumber:(int)errorNumber;
-- (void)setScriptErrorOffendingObjectDescriptor:(NSAppleEventDescriptor *)errorOffendingObjectDescriptor NS_AVAILABLE(10_5, NA);
-- (void)setScriptErrorExpectedTypeDescriptor:(NSAppleEventDescriptor *)errorExpectedTypeDescriptor NS_AVAILABLE(10_5, NA);
-- (void)setScriptErrorString:(NSString *)errorString;
-
-// Getters that match the above setters.
-- (int)scriptErrorNumber;
-- (NSAppleEventDescriptor *)scriptErrorOffendingObjectDescriptor NS_AVAILABLE(10_5, NA);
-- (NSAppleEventDescriptor *)scriptErrorExpectedTypeDescriptor NS_AVAILABLE(10_5, NA);
-- (NSString *)scriptErrorString;
+@property int scriptErrorNumber;
+@property (retain) NSAppleEventDescriptor *scriptErrorOffendingObjectDescriptor NS_AVAILABLE(10_5, NA);
+@property (retain) NSAppleEventDescriptor *scriptErrorExpectedTypeDescriptor NS_AVAILABLE(10_5, NA);
+@property (copy) NSString *scriptErrorString;
 
 // If a command is being executed in the current thread by Cocoa Scripting's built-in Apple event handling (i.e., an instance of NSScriptCommand is handling an -executeCommand message at this instant, as the result of the dispatch of an Apple event), return the command.  Return nil otherwise.  -setScriptErrorNumber: and -setScriptErrorString: messages sent to the returned command object will affect the reply event sent to the sender of the event from which the command was constructed, if the sender has requested a reply.
 + (NSScriptCommand *)currentCommand;
 
 // If the receiver was constructed by Cocoa Scripting's built-in Apple event handling, the Apple event descriptor from which it was constructed.  The effects of mutating or retaining this descriptor are undefined, though it may be copied.
-- (NSAppleEventDescriptor *)appleEvent;
+@property (readonly, copy) NSAppleEventDescriptor *appleEvent;
 
 // If the receiver is being executed in the current thread by Cocoa Scripting's built-in Apple event handling (i.e., would be returned by [NSScriptCommand currentCommand]), suspend the execution of the command.  Otherwise, do nothing.  A matching invocation of -resumeExecutionWithResult: must be made.
 - (void)suspendExecution;

@@ -1,5 +1,5 @@
 /*	CFPreferences.h
-	Copyright (c) 1998-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1998-2014, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFPREFERENCES__)
@@ -9,6 +9,7 @@
 #include <CoreFoundation/CFArray.h>
 #include <CoreFoundation/CFString.h>
 
+CF_IMPLICIT_BRIDGING_ENABLED
 CF_EXTERN_C_BEGIN
 
 CF_EXPORT
@@ -126,6 +127,7 @@ Boolean CFPreferencesAppValueIsForced(CFStringRef key, CFStringRef applicationID
 #endif
 
 CF_EXTERN_C_END
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif /* ! __COREFOUNDATION_CFPREFERENCES__ */
 

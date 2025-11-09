@@ -1,6 +1,6 @@
 /*    
     NSURLConnection.h
-    Copyright (c) 2003-2013, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2014, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -110,13 +110,13 @@
 }
 
 /* Designated initializer */
-- (id)initWithRequest:(NSURLRequest *)request delegate:(id)delegate startImmediately:(BOOL)startImmediately NS_AVAILABLE(10_5, 2_0);
+- (instancetype)initWithRequest:(NSURLRequest *)request delegate:(id)delegate startImmediately:(BOOL)startImmediately NS_AVAILABLE(10_5, 2_0);
 
-- (id)initWithRequest:(NSURLRequest *)request delegate:(id)delegate;
+- (instancetype)initWithRequest:(NSURLRequest *)request delegate:(id)delegate;
 + (NSURLConnection*)connectionWithRequest:(NSURLRequest *)request delegate:(id)delegate;
 
-- (NSURLRequest *)originalRequest NS_AVAILABLE(10_8, 5_0);
-- (NSURLRequest *)currentRequest NS_AVAILABLE(10_8, 5_0);
+@property (readonly, copy) NSURLRequest *originalRequest NS_AVAILABLE(10_8, 5_0);
+@property (readonly, copy) NSURLRequest *currentRequest NS_AVAILABLE(10_8, 5_0);
 
 - (void)start NS_AVAILABLE(10_5, 2_0);
 - (void)cancel;
@@ -206,11 +206,9 @@
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error;
 - (BOOL)connectionShouldUseCredentialStorage:(NSURLConnection *)connection;
 - (void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge;
-
-// Deprecated authentication delegates.
-- (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace;
-- (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge;
-- (void)connection:(NSURLConnection *)connection didCancelAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge;
+- (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace NS_DEPRECATED(10_6, 10_10, 3_0, 8_0, "Use -connection:willSendRequestForAuthenticationChallenge: instead.");
+- (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge NS_DEPRECATED(10_2, 10_10, 2_0, 8_0, "Use -connection:willSendRequestForAuthenticationChallenge: instead.");
+- (void)connection:(NSURLConnection *)connection didCancelAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge NS_DEPRECATED(10_2, 10_10, 2_0, 8_0, "Use -connection:willSendRequestForAuthenticationChallenge: instead.");
 @end
 
 /*!
@@ -406,8 +404,6 @@
 
 @end
 
-#if NS_BLOCKS_AVAILABLE
-
 /*!
     @category NSURLConnection(NSURLConnectionQueuedLoading)
 
@@ -459,4 +455,3 @@
            
 @end
                    
-#endif   

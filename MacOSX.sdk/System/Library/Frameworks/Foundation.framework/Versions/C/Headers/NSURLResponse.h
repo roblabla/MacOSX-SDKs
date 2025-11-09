@@ -1,6 +1,6 @@
 /*	
     NSURLResponse.h
-    Copyright (c) 2003-2013, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2014, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -44,14 +44,14 @@
     @result The initialized NSURLResponse.
     @discussion This is the designated initializer for NSURLResponse.
 */
-- (id)initWithURL:(NSURL *)URL MIMEType:(NSString *)MIMEType expectedContentLength:(NSInteger)length textEncodingName:(NSString *)name;
+- (instancetype)initWithURL:(NSURL *)URL MIMEType:(NSString *)MIMEType expectedContentLength:(NSInteger)length textEncodingName:(NSString *)name;
 
 /*! 
     @method URL
     @abstract Returns the URL of the receiver. 
     @result The URL of the receiver. 
 */
-- (NSURL *)URL;
+@property (readonly, copy) NSURL *URL;
 
 /*! 
     @method MIMEType
@@ -64,7 +64,7 @@
     be made if the origin source did not report any such information.
     @result The MIME type of the receiver.
 */
-- (NSString *)MIMEType;
+@property (readonly, copy) NSString *MIMEType;
 
 /*! 
     @method expectedContentLength
@@ -79,7 +79,7 @@
     there is no expectation that can be arrived at regarding expected
     content length.
 */
-- (long long)expectedContentLength;
+@property (readonly) long long expectedContentLength;
 
 /*! 
     @method textEncodingName
@@ -92,7 +92,7 @@
     @result The name of the text encoding of the receiver, or nil if no
     text encoding was specified. 
 */
-- (NSString *)textEncodingName;
+@property (readonly, copy) NSString *textEncodingName;
 
 /*!
     @method suggestedFilename
@@ -106,7 +106,7 @@
     This method always returns a valid filename.
     @result A suggested filename to use if saving the resource to disk.
 */
-- (NSString *)suggestedFilename;
+@property (readonly, copy) NSString *suggestedFilename;
 
 @end
 
@@ -138,14 +138,14 @@
   @result 	the instance of the object, or NULL if an error occurred during initialization.
   @discussion This API was introduced in Mac OS X 10.7.2 and iOS 5.0 and is not available prior to those releases.
 */
--(id)initWithURL:(NSURL*) url statusCode:(NSInteger) statusCode HTTPVersion:(NSString*) HTTPVersion headerFields:(NSDictionary*) headerFields NS_AVAILABLE(10_7, 5_0);
+- (instancetype)initWithURL:(NSURL *)url statusCode:(NSInteger)statusCode HTTPVersion:(NSString *)HTTPVersion headerFields:(NSDictionary *)headerFields NS_AVAILABLE(10_7, 5_0);
 
 /*! 
     @method statusCode
     @abstract Returns the HTTP status code of the receiver. 
     @result The HTTP status code of the receiver. 
 */
-- (NSInteger)statusCode;
+@property (readonly) NSInteger statusCode;
 
 /*! 
     @method allHeaderFields
@@ -158,7 +158,7 @@
     @result A dictionary containing all the HTTP header fields of the
     receiver.
 */
-- (NSDictionary *)allHeaderFields;
+@property (readonly, copy) NSDictionary *allHeaderFields;
 
 /*! 
     @method localizedStringForStatusCode:

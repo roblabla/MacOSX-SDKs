@@ -1,7 +1,7 @@
 /*
 	NSTextAlternatives.h
 	Application Kit
-	Copyright (c) 2011-2013, Apple Inc.
+	Copyright (c) 2011-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -18,10 +18,10 @@ NS_CLASS_AVAILABLE(10_8, NA)
     id _internal;
 }
 
-- (id)initWithPrimaryString:(NSString *)primaryString alternativeStrings:(NSArray *)alternativeStrings;
+- (instancetype)initWithPrimaryString:(NSString *)primaryString alternativeStrings:(NSArray *)alternativeStrings;
 
-@property (readonly) NSString *primaryString;
-@property (readonly) NSArray *alternativeStrings;
+@property (readonly, copy) NSString *primaryString;
+@property (readonly, copy) NSArray *alternativeStrings;
 
 - (void)noteSelectedAlternativeString:(NSString *)alternativeString;
 

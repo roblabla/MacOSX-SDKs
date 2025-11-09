@@ -1,6 +1,6 @@
 /*	
     OSALanguage.h
-    Copyright (C) 2005, 2009 Apple Inc. All rights reserved.    
+    Copyright (C) 2005-2014 Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -15,7 +15,7 @@
 // Language Options
 // ================
 
-typedef enum 
+typedef NS_OPTIONS(NSUInteger, OSALanguageFeatures) 
 {
   OSASupportsCompiling		= 0x0002,
   OSASupportsGetSource		= 0x0004,
@@ -25,7 +25,7 @@ typedef enum
   OSASupportsConvenience	= 0x0040,
   OSASupportsDialects		= 0x0080,
   OSASupportsEventHandling  = 0x0100
-} OSALanguageFeatures;
+};
 
 
 // OSALanguage
@@ -45,18 +45,18 @@ typedef enum
 + (void)setDefaultLanguage:(OSALanguage *)defaultLanguage;
 
 // Construction
-- (id)initWithComponent:(Component)component;
+- (instancetype)initWithComponent:(Component)component;
 
 // Accessors
 - (OSALanguageInstance *)sharedLanguageInstance AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-- (ComponentInstance)componentInstance;
-- (NSString *)name;
-- (NSString *)info;
-- (NSString *)version;
-- (OSType)type;
-- (OSType)subType;
-- (OSType)manufacturer;
-- (OSALanguageFeatures)features;
-- (BOOL)isThreadSafe AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+@property (readonly) ComponentInstance componentInstance;
+@property (readonly, copy) NSString *name;
+@property (readonly, copy) NSString *info;
+@property (readonly, copy) NSString *version;
+@property (readonly) OSType type;
+@property (readonly) OSType subType;
+@property (readonly) OSType manufacturer;
+@property (readonly) OSALanguageFeatures features;
+@property (getter=isThreadSafe, readonly) BOOL threadSafe AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 @end

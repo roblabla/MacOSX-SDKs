@@ -1,7 +1,7 @@
 /*
         NSStepperCell.h
         Application Kit
-        Copyright (c) 2000-2013, Apple Inc.
+        Copyright (c) 2000-2014, Apple Inc.
         All rights reserved.
 */
 
@@ -17,7 +17,8 @@
         unsigned int valueWraps:1;
         unsigned int autorepeat:1;
         unsigned int drawing:1;
-        unsigned int reserved:29;
+        unsigned int stats1:1;
+        unsigned int reserved:28;
     } _stFlags;
     unsigned int _reserved1;
     unsigned int _reserved2;
@@ -25,20 +26,15 @@
     unsigned int _reserved4;
 }
 
-- (double)minValue;
-- (void)setMinValue:(double)minValue;
+@property double minValue;
 
-- (double)maxValue;
-- (void)setMaxValue:(double)maxValue;
+@property double maxValue;
 
-- (double)increment;
-- (void)setIncrement:(double)increment;
+@property double increment;
 
-- (BOOL)valueWraps;
-- (void)setValueWraps:(BOOL)valueWraps;
+@property BOOL valueWraps;
 
-- (BOOL)autorepeat;
-- (void)setAutorepeat:(BOOL)autorepeat;
+@property BOOL autorepeat;
 
 @end
 

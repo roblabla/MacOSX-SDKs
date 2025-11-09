@@ -2,12 +2,12 @@
  *  CVOpenGLBuffer.h
  *  CoreVideo
  *
- *  Copyright (c) 2004 Apple Computer, Inc. All rights reserved.
+ *  Copyright (c) 2004-2014 Apple Inc. All rights reserved.
  *
  */
  
  /*! @header CVOpenGLBuffer.h
-	@copyright 2004 Apple Computer, Inc. All rights reserved.
+	@copyright 2004-2014 Apple Inc. All rights reserved.
 	@availability Mac OS X 10.4 or later
     @discussion A CoreVideo buffer derives from a generic buffer and can be an ImageBuffer or PixelBuffer. 
 		   

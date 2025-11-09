@@ -14,7 +14,8 @@ enum {
     SKPaymentTransactionStatePurchasing,    // Transaction is being added to the server queue.
     SKPaymentTransactionStatePurchased,     // Transaction is in queue, user has been charged.  Client should complete the transaction.
     SKPaymentTransactionStateFailed,        // Transaction was cancelled or failed before being added to the server queue.
-    SKPaymentTransactionStateRestored       // Transaction was restored from user's purchase history.  Client should complete the transaction.
+    SKPaymentTransactionStateRestored,      // Transaction was restored from user's purchase history.  Client should complete the transaction.
+    SKPaymentTransactionStateDeferred,		// Transaction is neither purchased nor failed, yet.
 };
 typedef NSInteger SKPaymentTransactionState;
 

@@ -1,4 +1,4 @@
-.Dd 04/03/12
+.Dd 03/18/14
 .Dt netlog 1
 .Os Darwin
 .\"---------
@@ -12,6 +12,7 @@
 .Nm
 .Op Fl v
 .Op Fl i Ar interval
+.Op Fl I Ar iterations
 .\"---------
 .Sh DESCRIPTION
 .\"---------
@@ -30,6 +31,12 @@ A list of flags and their descriptions:
 Verbose output
 .It Fl i Ar interval
 Report socket statistics periodically
+.It Fl I Ar iterations
+Used in combination with
+.Fl i ,
+will make
+.Nm
+exit after the specified number of iterations.
 .El
 .\"---------
 .\" .Sh BUGS              \" Document known, unremedied bugs 

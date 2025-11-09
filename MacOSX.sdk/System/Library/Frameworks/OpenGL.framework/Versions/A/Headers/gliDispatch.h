@@ -12,6 +12,7 @@
 extern "C" {
 #endif
 
+
 /*
 ** GL function dispatch table type
 */
@@ -1098,6 +1099,7 @@ typedef struct __GLIFunctionDispatchRec
 	void (*texture_barrier_NV) (GLIContext ctx);
 
 } GLIFunctionDispatch;
+
 
 #ifdef __cplusplus
 }

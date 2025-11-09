@@ -3,7 +3,7 @@
 .Dt xpc_objects 3
 .Os Darwin
 .Sh NAME
-.Nm xpc
+.Nm xpc_objects
 .Nd boxed XPC objects reference
 .Sh SYNOPSIS
 .Fd #include <xpc/xpc.h>
@@ -129,7 +129,13 @@
 .Fc
 .Sh DESCRIPTION
 Most XPC objects are boxed representations of primitive C language types or
-low-level operating system handles. These boxed objects are immutable.
+low-level operating system handles. These boxed objects are immutable. In
+general, the getter methods for each object type will check to see if the given
+object is of the proper type and, if it is not, will return a sensible default
+value as described in
+.Xr xpc_object 3 .
+If an improper object is given to another type of method, the behavior is
+undefined.
 .Pp
 See
 .Xr xpc_object 3

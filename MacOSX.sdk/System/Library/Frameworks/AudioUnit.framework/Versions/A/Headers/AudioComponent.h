@@ -96,6 +96,13 @@
                     <key>temporary-exception.files.all.read-write</key>
                     </true>
                 </dict>
+ 
+                <!-- An AudioComponent can define its tags -->
+                <key>tags</key>
+                <array>
+                    <string>Effect</string>
+                    <string>Equalizer</string>
+                </array>
             </dict>
         </array>
 
@@ -147,6 +154,21 @@
     system will ask the user whether or not it is acceptable for the process to open the unsafe
     AudioComponent. If the user says yes, the system will suspend the process's sandbox and allow
     the unsafe AudioComponent to be opened and used.
+ 
+    The "tags" key is an array of tags associated with the defined AudioComponent. The following are 
+ 	the set of predefined standard tags that are localized and can be used in the audio unit definition.
+ 	"Equalizer", "Dynamics", "Distortion", "Synthesizer", "Effects", "Filter",
+ 	"Dynamics Processor", "Delay", "Reverb", "Pitch", "Panner", "Imaging", "Sampler", "Mixer", 
+ 	"Format Converter", "Time Effect", "Output", "Offline Effect", "Drums", "Guitar", "Vocal", 
+ 	"Bass", "MIDI". 
+ 
+ 	These standard tags should not be localized in the audio unit.
+ 
+    Localizing the tags is similar to localizing AudioUnit parameter strings. Create a strings 
+    resource file and name it "AudioUnitTags.strings".
+    For more information on strings resource file please check
+    https://developer.apple.com/library/mac/documentation/macosx/conceptual/bpinternational/Articles/StringsFiles.html
+ 
 */
 
 #include <Availability.h>
@@ -216,20 +238,18 @@ typedef struct AudioComponentDescription {
                     manufacturer.
                     
                     It can have properties associated with it (such as a name, a version).
-                    
+
                     It is then used as a factory (like a class in an object-oriented programming
-                    language) from which to create particular instances. The instances are used
-                    to do the actual work.
-                    
-                    For example:
-                    'aufx', 'dely', 'appl' describes the digital delay, audio unit effect from
-                    Apple, Inc. You can find this component through searching explicitly for the
-                    audio component that matches this pattern (this is an unique identifier -
-                    there is only one match to this triple ID). Then once found, the Apple delay
-                    effect audio unit can be created from its audio component and used to apply
-                    that effect to an audio signal. While the audio component is a singleton,
-                    you can of course create as many instances of a given audio component that
-                    you need to do the work you need to do.
+                    language) from which to create instances. The instances are used to do the
+                    actual work.
+
+                    For example: the AudioComponentDescription 'aufx'/'dely'/'appl' describes the
+                    delay audio unit effect from Apple, Inc. You can find this component by
+                    searching explicitly for the audio component that matches this pattern (this is
+                    an unique identifier - there is only one match to this triple ID). Then once
+                    found, instances of the Apple delay effect audio unit can be created from its
+                    audio component and used to apply that effect to an audio signal. A single
+                    component can create any number of component instances.
 */
 typedef struct OpaqueAudioComponent *   AudioComponent;
 

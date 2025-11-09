@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2013 Apple Inc. All rights reserved.
+	Copyright 2010-2014 Apple Inc. All rights reserved.
 
 */
 
@@ -47,15 +47,11 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 	AVMetadataItemInternal	*_priv;
 }
 
-/* indicates the key of the metadata item */
-@property (readonly, copy) id<NSObject, NSCopying> key;
+/* Indicates the identifier of the metadata item. Publicly defined identifiers are declared in AVMetadataIdentifiers.h. */
+@property (readonly, copy) NSString *identifier NS_AVAILABLE(10_10, 8_0);
 
-/* indicates the common key of the metadata item */
-@property (readonly, copy) NSString *commonKey;
-
-/* indicates the keyspace of the metadata item's key; this will typically
-   be the default keyspace for the metadata container in which the metadata item is stored */
-@property (readonly, copy) NSString *keySpace;
+/* indicates the IETF BCP 47 (RFC 4646) language identifier of the metadata item; may be nil if no language tag information is available */
+@property (readonly, copy) NSString *extendedLanguageTag NS_AVAILABLE(10_10, 8_0);
 
 /* indicates the locale of the metadata item; may be nil if no locale information is available for the metadata item */
 @property (readonly, copy) NSLocale *locale;
@@ -65,6 +61,9 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 
 /* indicates the duration of the metadata item */
 @property (readonly) CMTime duration NS_AVAILABLE(10_7, 4_2);
+
+/* indicates the data type of the metadata item's value.  Publicly defined data types are declared in <CoreMedia/CMMetadata.h> */
+@property (readonly, copy) NSString *dataType NS_AVAILABLE(10_10, 8_0);
 
 /* provides the value of the metadata item */
 @property (readonly, copy) id<NSObject, NSCopying> value;
@@ -117,33 +116,15 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 + (NSArray *)metadataItemsFromArray:(NSArray *)metadataItems filteredAndSortedAccordingToPreferredLanguages:(NSArray *)preferredLanguages NS_AVAILABLE(10_8, 6_0);
 
 /*!
-	@method			metadataItemsFromArray:withLocale:
-	@abstract		Filters an array of AVMetadataItems according to locale.
+	@method			metadataItemsFromArray:filteredByIdentifier:
+	@abstract			Filters an array of AVMetadataItems according to identifier.
 	@param			metadataItems
-					An array of AVMetadataItems to be filtered by locale.
-	@param			locale
-					The NSLocale that must be matched for a metadata item to be copied to the output array.
-	@result			An instance of NSArray containing the metadata items of the target NSArray that match the specified locale.
+	An array of AVMetadataItems to be filtered by identifier.
+	@param			identifier
+	The identifier that must be matched for a metadata item to be copied to the output array. Items are considered a match not only when their identifiers are equal to the specified identifier, and also when their identifiers conform to the specified identifier.
+	@result			An instance of NSArray containing the metadata items of the target NSArray that match the specified identifier.
 */
-+ (NSArray *)metadataItemsFromArray:(NSArray *)metadataItems withLocale:(NSLocale *)locale;
-
-/*!
-	@method			metadataItemsFromArray:withKey:keySpace:
-	@abstract		Filters an array of AVMetadataItems according to key and/or keySpace.
-	@param			metadataItems
-					An array of AVMetadataItems to be filtered by key and/or keyspace.
-	@param			key
-					The key that must be matched for a metadata item to be copied to the output array.
-					Note that to match item keys with any of the common keys, e.g. AVMetadataCommonKeyTitle, it's necessary
-					to pass AVMetadataKeySpaceCommon as the keyspace parameter.
-					If no filtering according to key is desired, pass nil. 
-	@param			keySpace
-					The keySpace that must be matched for a metadata item to be copied to the output array.
-					If no filtering according to keySpace is desired, pass nil. (See special note above about the use of common keys.)
-	@result			An instance of NSArray containing the metadata items of the target NSArray that match the specified
-					key and/or keySpace.
-*/
-+ (NSArray *)metadataItemsFromArray:(NSArray *)metadataItems withKey:(id)key keySpace:(NSString *)keySpace;
++ (NSArray *)metadataItemsFromArray:(NSArray *)metadataItems filteredByIdentifier:(NSString *)identifier NS_AVAILABLE(10_10, 8_0);
 
 /*!
 	@method			metadataItemsFromArray:filteredByMetadataItemFilter:
@@ -158,6 +139,40 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 
 @end
 
+@interface AVMetadataItem (AVMetadataItemKeyAndKeyspace)
+
+/*!
+	@method			identifierForKey:keySpace:
+	@abstract		Provides the metadata identifier that’s equivalent to a key and keySpace.
+	@param			key
+					The metadata key.
+	@param			keySpace
+					The metadata keySpace.
+	@result			A metadata identifier equivalent to the given key and keySpace, or nil if no identifier can be constructed from the given key and keySpace.
+	@discussion
+		Metadata keys that are not instances of NSString, NSNumber, or NSData cannot be converted to metadata identifiers; they also cannot be written to media resources via AVAssetExportSession or AVAssetWriter.  Metadata item keySpaces must be a string of one to four printable ASCII characters.
+ 
+		For custom identifiers, the keySpace AVMetadataKeySpaceQuickTimeMetadata is recommended.  This keySpace defines its key values to be expressed as reverse-DNS strings, which allows third parties to define their own keys in a well established way that avoids collisions.
+*/
++ (NSString *)identifierForKey:(id)key keySpace:(NSString *)keySpace NS_AVAILABLE(10_10, 8_0);
+
+/* provides the metadata keySpace indicated by the identifier  */
++ (NSString *)keySpaceForIdentifier:(NSString *)identifier NS_AVAILABLE(10_10, 8_0);
+
+/* provides the metadata key indicated by the identifier  */
++ (id)keyForIdentifier:(NSString *)identifier NS_AVAILABLE(10_10, 8_0);
+
+/* indicates the key of the metadata item */
+@property (readonly, copy) id<NSObject, NSCopying> key;
+
+/* indicates the common key of the metadata item */
+@property (readonly, copy) NSString *commonKey;
+
+/* indicates the keyspace of the metadata item's key; this will typically
+ be the default keyspace for the metadata container in which the metadata item is stored */
+@property (readonly, copy) NSString *keySpace;
+
+@end
 
 /*!
     @class			AVMutableMetadataItem
@@ -177,11 +192,11 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 	AVMutableMetadataItemInternal	*_mutablePriv;
 }
 
-@property (readwrite, copy) id<NSObject, NSCopying> key;
+/* Indicates the identifier of the metadata item. Publicly defined identifiers are declared in AVMetadataIdentifiers.h. */
+@property (readwrite, copy) NSString *identifier NS_AVAILABLE(10_10, 8_0);
 
-/* indicates the keyspace of the metadata item's key; this will typically
-   be the default keyspace for the metadata container in which the metadata item is stored */
-@property (readwrite, copy) NSString *keySpace;
+/* indicates the IETF BCP 47 (RFC 4646) language identifier of the metadata item; may be nil if no language tag information is available */
+@property (readwrite, copy) NSString *extendedLanguageTag NS_AVAILABLE(10_10, 8_0);
 
 /* indicates the locale of the metadata item; may be nil if no locale information is available for the metadata item */
 @property (readwrite, copy) NSLocale *locale;
@@ -192,10 +207,13 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 /* indicates the duration of the metadata item */
 @property (readwrite) CMTime duration NS_AVAILABLE(10_7, 4_2);
 
+/* indicates the data type of the metadata item's value.  Publicly defined data types are declared in <CoreMedia/CMMetadata.h> */
+@property (readwrite, copy) NSString *dataType NS_AVAILABLE(10_10, 8_0);
+
 /* provides the value of the metadata item */
 @property (readwrite, copy) id<NSObject, NSCopying> value;
 
-/* provides a dictionary of the additional attributes */
+/* Provides a dictionary of the additional attributes. Extra attributes of metadata items are related to specifics of their carriage in their container format. Keys for extra attributes are declared in AVMetadataFormat.h. */
 @property (readwrite, copy) NSDictionary *extraAttributes;
 
 /*!
@@ -203,6 +221,16 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 	@abstract		Returns an instance of AVMutableMetadataItem.
 */
 + (AVMutableMetadataItem *)metadataItem;
+
+@end
+
+@interface AVMutableMetadataItem (AVMutableMetadataItemKeyAndKeyspace)
+
+/* Indicates the keyspace of the metadata item's key; this will typically be the default keyspace for the metadata container in which the metadata item is stored. */
+@property (readwrite, copy) NSString *keySpace;
+
+/* Indicates the key of the metadata item. Metadata item keys that are not instances NSString, NSNumber, or NSData cannot be converted to metadata identifiers; they also cannot be written to media resources via AVAssetExportSession or AVAssetWriter. */
+@property (readwrite, copy) id<NSObject, NSCopying> key;
 
 @end
 
@@ -227,3 +255,18 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 
 @end
 
+@interface AVMetadataItem (AVMetadataItemArrayFilteringDeprecable)
+
+/*!
+ @method			metadataItemsFromArray:withLocale:
+ @discussion		Instead, use metadataItemsFromArray:filteredAndSortedAccordingToPreferredLanguages:.
+ */
++ (NSArray *)metadataItemsFromArray:(NSArray *)metadataItems withLocale:(NSLocale *)locale;
+
+/*!
+ @method			metadataItemsFromArray:withKey:keySpace:
+ @discussion		Instead, use metadataItemsFromArray:filteredByIdentifier:.
+ */
++ (NSArray *)metadataItemsFromArray:(NSArray *)metadataItems withKey:(id)key keySpace:(NSString *)keySpace;
+
+@end

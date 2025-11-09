@@ -1,6 +1,6 @@
 /*	
     OSALanguageInstance.h
-    Copyright (C) 2009 Apple Inc. All rights reserved.    
+    Copyright (C) 2009-2014 Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -22,12 +22,16 @@
 }
 
 // Construction
-+ (id)languageInstanceWithLanguage:(OSALanguage *)language;
-- (id)initWithLanguage:(OSALanguage *)language;
++ (instancetype)languageInstanceWithLanguage:(OSALanguage *)language;
+- (instancetype)initWithLanguage:(OSALanguage *)language;
 
 // Accessors
-- (OSALanguage *)language;
-- (ComponentInstance)componentInstance; // If this is the shared instance for the language, this is the same as the language's component instance.
+@property (readonly, strong) OSALanguage *language;
+@property (readonly) ComponentInstance componentInstance; // If this is the shared instance for the language, this is the same as the language's component instance.
+@property (strong) NSAppleEventDescriptor *defaultTarget NS_AVAILABLE_MAC(10_10); // The default target application for Apple event sending. It also establishes the default target from which terminologies come. It is effectively like having an AppleScript "tell" statement around the entire program. When nil, the default target is the current application.
+
+// Operations
+- (NSAttributedString *)richTextFromDescriptor:(NSAppleEventDescriptor *)descriptor NS_AVAILABLE_MAC(10_10); // Get source text for a descriptor using the language instance for context.
 
 @end
 

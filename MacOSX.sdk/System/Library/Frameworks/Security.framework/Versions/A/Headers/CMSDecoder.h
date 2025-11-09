@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2010 Apple Inc. All Rights Reserved.
+ * Copyright (c) 2006-2013 Apple Inc. All Rights Reserved.
  * 
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -335,6 +335,23 @@ OSStatus CMSDecoderCopySignerTimestamp(
 	size_t				signerIndex,
 	CFAbsoluteTime      *timestamp)			/* RETURNED */
     __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
+
+    /*
+     * Obtain the timestamp of signer 'signerIndex' of a CMS message, if
+     * present. This timestamp is an authenticated timestamp provided by
+     * a timestamping authority. Use the policy provided as a parameter
+     *
+     * Returns errSecParam if the CMS message was not signed or if signerIndex
+     * is greater than the number of signers of the message minus one.
+     *
+     * This cannot be called until after CMSDecoderFinalizeMessage() is called.
+     */
+OSStatus CMSDecoderCopySignerTimestampWithPolicy(
+                                                    CMSDecoderRef		cmsDecoder,
+                                                    CFTypeRef           timeStampPolicy,
+                                                    size_t				signerIndex,        /* usually 0 */
+                                                    CFAbsoluteTime      *timestamp)			/* RETURNED */
+    __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_NA);
 
 /*
  * Obtain an array of the certificates in a timestamp response. Elements of the 

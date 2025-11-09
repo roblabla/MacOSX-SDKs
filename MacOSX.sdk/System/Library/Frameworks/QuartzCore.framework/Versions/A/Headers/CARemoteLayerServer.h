@@ -1,6 +1,6 @@
 /* CoreAnimation - CARemoteLayerServer.h
 
-   Copyright (c) 2010-2012 Apple Inc.
+   Copyright (c) 2010-2014, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CALayer.h>

@@ -17,7 +17,7 @@ ACCOUNTS_CLASS_AVAILABLE(10_8, 5_0)
 @interface ACAccount : NSObject
 
 // Creates a new account object with a specified account type.
-- (id)initWithAccountType:(ACAccountType *)type;
+- (instancetype)initWithAccountType:(ACAccountType *)type NS_DESIGNATED_INITIALIZER;
 
 // This identifier can be used to look up the account using [ACAccountStore accountWithIdentifier:].
 @property (readonly, weak, NS_NONATOMIC_IOSONLY) NSString      *identifier;
@@ -34,6 +34,10 @@ ACCOUNTS_CLASS_AVAILABLE(10_8, 5_0)
 // The username for the account. This property can be set and saved during account creation. The username is
 // only available to applications that have been granted access to the account by the user.
 @property (copy, NS_NONATOMIC_IOSONLY)     NSString            *username;
+
+// For accounts that support it (currently only Facebook accounts), you can get the user's full name for display
+// purposes without having to talk to the network.
+@property (readonly, NS_NONATOMIC_IOSONLY)  NSString           *userFullName NS_AVAILABLE_IOS(NA);
 
 // The credential for the account. This property can be set and saved during account creation. It is 
 // inaccessible once the account has been saved.

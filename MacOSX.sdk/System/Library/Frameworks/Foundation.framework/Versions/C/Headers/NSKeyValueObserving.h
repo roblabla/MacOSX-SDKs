@@ -1,6 +1,6 @@
 /*
 	NSKeyValueObserving.h
-	Copyright (c) 2003-2013, Apple Inc.
+	Copyright (c) 2003-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -34,7 +34,7 @@ When this option is specified, the change dictionary in a notification sent afte
 
 /* Possible values in the NSKeyValueChangeKindKey entry in change dictionaries. See the comments for -observeValueForKeyPath:ofObject:change:context: for more information.
 */
-typedef NS_OPTIONS(NSUInteger, NSKeyValueChange) {
+typedef NS_ENUM(NSUInteger, NSKeyValueChange) {
     NSKeyValueChangeSetting = 1,
     NSKeyValueChangeInsertion = 2,
     NSKeyValueChangeRemoval = 3,
@@ -43,7 +43,7 @@ typedef NS_OPTIONS(NSUInteger, NSKeyValueChange) {
 
 /* Possible kinds of set mutation for use with -willChangeValueForKey:withSetMutation:usingObjects: and -didChangeValueForKey:withSetMutation:usingObjects:. Their semantics correspond exactly to NSMutableSet's -unionSet:, -minusSet:, -intersectSet:, and -setSet: method, respectively.
 */
-typedef NS_OPTIONS(NSUInteger, NSKeyValueSetMutationKind) {
+typedef NS_ENUM(NSUInteger, NSKeyValueSetMutationKind) {
     NSKeyValueUnionSetMutation = 1,
     NSKeyValueMinusSetMutation = 2,
     NSKeyValueIntersectSetMutation = 3,
@@ -180,8 +180,7 @@ You can't really override this method when you add a computed property to an exi
 
 /* Take or return a pointer that identifies information about all of the observers that are registered with the receiver, the options that were used at registration-time, etc. The default implementation of these methods store observation info in a global dictionary keyed by the receivers' pointers. For improved performance, you can override these methods to store the opaque data pointer in an instance variable. Overrides of these methods must not attempt to send Objective-C messages to the passed-in observation info, including -retain and -release.
 */
-- (void)setObservationInfo:(void *)observationInfo;
-- (void *)observationInfo NS_RETURNS_INNER_POINTER;
+@property void *observationInfo NS_RETURNS_INNER_POINTER;
 
 @end
 

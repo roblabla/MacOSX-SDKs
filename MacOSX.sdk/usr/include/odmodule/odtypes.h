@@ -383,4 +383,20 @@ ODM_CALLBACK_DECL(NodeCopySupportedPolicies);
 ODM_CALLBACK_DECL(NodeSetPolicies);
 ODM_CALLBACK_DECL(NodeRemovePolicy);
 
+ODM_CALLBACK_DECL(RecordAddAccountPolicy);
+ODM_CALLBACK_DECL(RecordRemoveAccountPolicy);
+ODM_CALLBACK_DECL(RecordSetAccountPolicies);
+ODM_CALLBACK_DECL(RecordCopyAccountPolicies);
+ODM_CALLBACK_DECL(RecordAuthenticationAllowed);
+ODM_CALLBACK_DECL(RecordPasswordChangeAllowed);
+ODM_CALLBACK_DECL(RecordWillPasswordExpire);
+ODM_CALLBACK_DECL(RecordWillAuthenticationsExpire);
+ODM_CALLBACK_DECL(RecordSecondsUntilPasswordExpires);
+ODM_CALLBACK_DECL(RecordSecondsUntilAuthenticationsExpire);
+ODM_CALLBACK_DECL(NodeAddAccountPolicy);
+ODM_CALLBACK_DECL(NodeRemoveAccountPolicy);
+ODM_CALLBACK_DECL(NodeSetAccountPolicies);
+ODM_CALLBACK_DECL(NodeCopyAccountPolicies);
+ODM_CALLBACK_DECL(NodePasswordContentCheck);
+
 #endif // __ODTYPES__

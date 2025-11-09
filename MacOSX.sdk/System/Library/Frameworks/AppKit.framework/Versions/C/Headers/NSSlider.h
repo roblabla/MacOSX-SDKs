@@ -1,23 +1,22 @@
 /*
 	NSSlider.h
 	Application Kit
-	Copyright (c) 1994-2013, Apple Inc.
+	Copyright (c) 1994-2014, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/NSControl.h>
 #import <AppKit/NSSliderCell.h>
 
-@interface NSSlider : NSControl
+@interface NSSlider : NSControl <NSAccessibilitySlider>
 
-- (double)minValue;
-- (void)setMinValue:(double)aDouble;
-- (double)maxValue;
-- (void)setMaxValue:(double)aDouble;
-- (void)setAltIncrementValue:(double)incValue;
-- (double)altIncrementValue;
-- (CGFloat)knobThickness;
-- (NSInteger)isVertical;
+@property NSSliderType sliderType NS_AVAILABLE_MAC(10_10);
+
+@property double minValue;
+@property double maxValue;
+@property double altIncrementValue;
+@property (readonly) CGFloat knobThickness;
+@property (getter=isVertical, readonly) NSInteger vertical;
 - (BOOL)acceptsFirstMouse:(NSEvent *)theEvent;
 
 /* These methods have never done anything, and are formally deprecated as of 10.9*/
@@ -38,19 +37,16 @@
 
 // For setting and retrieving the number of tick marks on a slider.
 //   0 indicates no tick marks are present, which is the default
-- (void)setNumberOfTickMarks:(NSInteger)count;
-- (NSInteger)numberOfTickMarks;
+@property NSInteger numberOfTickMarks;
 
 // For setting and retrieving the position tick marks will be displayed in.
 //   This has no effect if numberOfTickMarks is 0.
-- (void)setTickMarkPosition:(NSTickMarkPosition)position;
-- (NSTickMarkPosition)tickMarkPosition;
+@property NSTickMarkPosition tickMarkPosition;
 
 // For setting and retrieving whether values on the slider can be anything
 //   the slider normally allows, or only values that correspond to a tick mark.
 //   This has no effect if numberOfTickMarks is 0.
-- (void)setAllowsTickMarkValuesOnly:(BOOL)yorn;
-- (BOOL)allowsTickMarkValuesOnly;
+@property BOOL allowsTickMarkValuesOnly;
 
 // Determine the slider value for a particular tick mark.
 //   An NSRangeException will be raised if the index is invalid.

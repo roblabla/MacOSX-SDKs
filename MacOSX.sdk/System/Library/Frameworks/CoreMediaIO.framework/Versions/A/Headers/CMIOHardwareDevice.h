@@ -454,42 +454,45 @@ enum
                         Identical to kCMIODevicePropertyLinkedCoreAudioDeviceUID, except that it only returns a UID if the linked CoreAudio device shares the same hardware clock (CFStringRef)
     @constant       kCMIODevicePropertyIIDCInitialUnitSpace
                         A UInt32 which specifies the initial unit space for IIDC cameras as described in "IIDC 1394-based Digital Camera Specification Version 1.31" (1394 Trade Association
-						Document 2003017)." This property is never settable.
+                        Document 2003017)." This property is never settable.
     @constant       kCMIODevicePropertyIIDCCSRData
-						A UInt32 which provides access to control and status registers for IIDC cameras. The qualifier contains a UInt32 that specifies the register to access.
-						If the register's offset is relative to the initial unit space, then the qualifier should be the value returned by kCMIODevicePropertyIIDCInitialUnitSpace + offset.
-						If the register's offset is relative to the initial register space, then the qualifier should be $F0000000 + offset.
-						Changes in this property never result in a property changed notification.
+                        A UInt32 which provides access to control and status registers for IIDC cameras. The qualifier contains a UInt32 that specifies the register to access.
+                        If the register's offset is relative to the initial unit space, then the qualifier should be the value returned by kCMIODevicePropertyIIDCInitialUnitSpace + offset.
+                        If the register's offset is relative to the initial register space, then the qualifier should be $F0000000 + offset.
+                        Changes in this property never result in a property changed notification.
+   @constant       kCMIODevicePropertyCanSwitchFrameRatesWithoutFrameDrops
+                        A UInt32 where a value of 0 indicates the device's streams will drop frames when altering frame rates, and a value of 1 means that they won't.
 */
 enum
 {
-    kCMIODevicePropertyPlugIn                       = 'plug',
-    kCMIODevicePropertyDeviceUID                    = 'uid ',
-    kCMIODevicePropertyModelUID                     = 'muid',
-    kCMIODevicePropertyTransportType                = 'tran',
-    kCMIODevicePropertyDeviceIsAlive                = 'livn',
-    kCMIODevicePropertyDeviceHasChanged             = 'diff',
-    kCMIODevicePropertyDeviceIsRunning              = 'goin',
-    kCMIODevicePropertyDeviceIsRunningSomewhere     = 'gone',
-    kCMIODevicePropertyDeviceCanBeDefaultDevice     = 'dflt',
-    kCMIODevicePropertyHogMode                      = 'oink',
-    kCMIODevicePropertyLatency                      = 'ltnc',
-    kCMIODevicePropertyStreams                      = 'stm#',
-    kCMIODevicePropertyStreamConfiguration          = 'slay',
-    kCMIODevicePropertyDeviceMaster                 = 'pmnh',
-    kCMIODevicePropertyExcludeNonDALAccess          = 'ixna',
-    kCMIODevicePropertyClientSyncDiscontinuity      = 'pmcs',
-    kCMIODevicePropertySMPTETimeCallback            = 'pmsc',
-    kCMIODevicePropertyCanProcessAVCCommand         = 'pmac',
-    kCMIODevicePropertyAVCDeviceType                = 'pmat',
-    kCMIODevicePropertyAVCDeviceSignalMode          = 'pmsm',
-    kCMIODevicePropertyCanProcessRS422Command       = 'r422',
-    kCMIODevicePropertyLinkedCoreAudioDeviceUID     = 'plud',
-    kCMIODevicePropertyVideoDigitizerComponents     = 'vdig', 
-    kCMIODevicePropertySuspendedByUser              = 'sbyu',
-    kCMIODevicePropertyLinkedAndSyncedCoreAudioDeviceUID	= 'plsd',
-    kCMIODevicePropertyIIDCInitialUnitSpace			= 'iuns',
-    kCMIODevicePropertyIIDCCSRData					= 'csrd'
+    kCMIODevicePropertyPlugIn                               = 'plug',
+    kCMIODevicePropertyDeviceUID                            = 'uid ',
+    kCMIODevicePropertyModelUID                             = 'muid',
+    kCMIODevicePropertyTransportType                        = 'tran',
+    kCMIODevicePropertyDeviceIsAlive                        = 'livn',
+    kCMIODevicePropertyDeviceHasChanged                     = 'diff',
+    kCMIODevicePropertyDeviceIsRunning                      = 'goin',
+    kCMIODevicePropertyDeviceIsRunningSomewhere             = 'gone',
+    kCMIODevicePropertyDeviceCanBeDefaultDevice             = 'dflt',
+    kCMIODevicePropertyHogMode                              = 'oink',
+    kCMIODevicePropertyLatency                              = 'ltnc',
+    kCMIODevicePropertyStreams                              = 'stm#',
+    kCMIODevicePropertyStreamConfiguration                  = 'slay',
+    kCMIODevicePropertyDeviceMaster                         = 'pmnh',
+    kCMIODevicePropertyExcludeNonDALAccess                  = 'ixna',
+    kCMIODevicePropertyClientSyncDiscontinuity              = 'pmcs',
+    kCMIODevicePropertySMPTETimeCallback                    = 'pmsc',
+    kCMIODevicePropertyCanProcessAVCCommand                 = 'pmac',
+    kCMIODevicePropertyAVCDeviceType                        = 'pmat',
+    kCMIODevicePropertyAVCDeviceSignalMode                  = 'pmsm',
+    kCMIODevicePropertyCanProcessRS422Command               = 'r422',
+    kCMIODevicePropertyLinkedCoreAudioDeviceUID             = 'plud',
+    kCMIODevicePropertyVideoDigitizerComponents             = 'vdig',
+    kCMIODevicePropertySuspendedByUser                      = 'sbyu',
+    kCMIODevicePropertyLinkedAndSyncedCoreAudioDeviceUID    = 'plsd',
+    kCMIODevicePropertyIIDCInitialUnitSpace                 = 'iuns',
+    kCMIODevicePropertyIIDCCSRData                          = 'csrd',
+    kCMIODevicePropertyCanSwitchFrameRatesWithoutFrameDrops = 'frnd'
 };
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

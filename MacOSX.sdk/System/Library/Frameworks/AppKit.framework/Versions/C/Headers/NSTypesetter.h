@@ -1,6 +1,6 @@
 /* 
 	NSTypesetter.h
-	Copyright (c) 1994-2013, Apple Inc.  All rights reserved. 
+	Copyright (c) 1994-2014, Apple Inc.  All rights reserved. 
 
 	An abstract class to lay glyphs out in horizontal or vertical boxes	
 */
@@ -10,7 +10,7 @@
 #import <AppKit/NSLayoutManager.h>
 #import <AppKit/NSParagraphStyle.h>
 
-enum {
+typedef NS_OPTIONS(NSUInteger, NSTypesetterControlCharacterAction) {
     NSTypesetterZeroAdvancementAction = (1 << 0), // glyphs with this action are flitered out from layout (notShownAttribute == YES)
     NSTypesetterWhitespaceAction = (1 << 1), // the width for glyphs with this action are determined by -boundingBoxForControlGlyphAtIndex:forTextContainer:proposedLineFragment:glyphPosition:characterIndex: if the method is implemented; otherwise, same as NSTypesetterZeroAdvancementAction
     NSTypesetterHorizontalTabAction = (1 << 2), // Treated as tab character
@@ -18,7 +18,6 @@ enum {
     NSTypesetterParagraphBreakAction = (1 << 4), // Causes paragraph break; firstLineIndent will be used for the following glyph
     NSTypesetterContainerBreakAction = (1 << 5) // Causes container break
 };
-typedef NSUInteger NSTypesetterControlCharacterAction;
     
 @interface NSTypesetter : NSObject {
 #if __LP64__
@@ -32,24 +31,20 @@ typedef NSUInteger NSTypesetterControlCharacterAction;
 /* NSLayoutManager attributes */
 /* Controls whether leading value specified by fonts affects line spacing
 */
-- (BOOL)usesFontLeading;
-- (void)setUsesFontLeading:(BOOL)flag;
+@property BOOL usesFontLeading;
 
 /* Controls various typesetting behavior for backward compatibility
 */
-- (NSTypesetterBehavior)typesetterBehavior;
-- (void)setTypesetterBehavior:(NSTypesetterBehavior)behavior;
+@property NSTypesetterBehavior typesetterBehavior;
 
 /* Controls hyphenation factor. The value should be between 0.0 and 1.0.
 */
-- (float)hyphenationFactor;
-- (void)setHyphenationFactor:(float)factor;
+@property float hyphenationFactor;
 
 /* NSTextContainer attributes */
 /* Controls padding at both ends of line fragment.
 */
-- (CGFloat)lineFragmentPadding;
-- (void)setLineFragmentPadding:(CGFloat)padding;
+@property CGFloat lineFragmentPadding;
 
 /* Screen/printer font mapping */
 - (NSFont *)substituteFontForFont:(NSFont *)originalFont;
@@ -62,17 +57,15 @@ typedef NSUInteger NSTypesetterControlCharacterAction;
 /* Bidi control */
 /* Controls whether to perform bi-directional processing.  You can disable the layout stage if you know the parapgraph does not need this stage (i.e. the backing-store is in the display order).
 */
-- (BOOL)bidiProcessingEnabled;
-- (void)setBidiProcessingEnabled:(BOOL)flag;
+@property BOOL bidiProcessingEnabled;
 
-/* Accessors for required paragraph typesetting settings */
-- (void)setAttributedString:(NSAttributedString *)attrString; // Note this method does not retain attrString
-- (NSAttributedString *)attributedString;
+/* Accessors for required paragraph typesetting settings */ // Note this method does not retain attrString
+@property (assign) NSAttributedString *attributedString;
 - (void)setParagraphGlyphRange:(NSRange)paragraphRange separatorGlyphRange:(NSRange)paragraphSeparatorRange;
-- (NSRange)paragraphGlyphRange; // does not include paragraphSeparatorGlyphRange
-- (NSRange)paragraphSeparatorGlyphRange;
-- (NSRange)paragraphCharacterRange;
-- (NSRange)paragraphSeparatorCharacterRange;
+@property (readonly) NSRange paragraphGlyphRange; // does not include paragraphSeparatorGlyphRange
+@property (readonly) NSRange paragraphSeparatorGlyphRange;
+@property (readonly) NSRange paragraphCharacterRange;
+@property (readonly) NSRange paragraphSeparatorCharacterRange;
 
 /* layout primitive */
 /* lineFragmentOrigin specifies the upper-left corner of line fragment rect.  On return, set to the next origin. The method returns the next glyph index. Usually the index right after paragraph separator but can be inside the paragraph range (i.e. text container exhaustion). Concrete subclasses must implement this method. A concrete implementation must invoke -beginParagraph, -endParagraph, -beginLineWithGlyphAtIndex: and -endLineWithGlyphRange:.
@@ -98,7 +91,7 @@ typedef NSUInteger NSTypesetterControlCharacterAction;
 /* Extra line fragment handling */
 /* This method returns the attributes used to layout the extra line fragment. The default implementation tries to use -[NSTextView typingAttributes] if possible; otherwise, uses attributes for the last character.
 */
-- (NSDictionary *)attributesForExtraLineFragment;
+@property (readonly, copy) NSDictionary *attributesForExtraLineFragment;
 
 /* Control/format character handling */
 /* This method returns the action associated with a control character.
@@ -107,10 +100,10 @@ typedef NSUInteger NSTypesetterControlCharacterAction;
 
 /* Cocoa Text System specific interface methods */
 /* Friend class accessors */
-- (NSLayoutManager *)layoutManager;
-- (NSArray *)textContainers;
-- (NSTextContainer *)currentTextContainer;
-- (NSParagraphStyle *)currentParagraphStyle;
+@property (readonly, assign) NSLayoutManager *layoutManager;
+@property (readonly, assign) NSArray *textContainers;
+@property (readonly, assign) NSTextContainer *currentTextContainer;
+@property (readonly, copy) NSParagraphStyle *currentParagraphStyle;
 
 /* Forces NSLayoutManager to invalidate glyph cache in range when invalidating layout.
 */

@@ -546,6 +546,8 @@ enum
                         The transport type ID for AudioDevices connected via FireWire.
     @constant       kAudioDeviceTransportTypeBluetooth
                         The transport type ID for AudioDevices connected via Bluetooth.
+    @constant       kAudioDeviceTransportTypeBluetoothLE
+                        The transport type ID for AudioDevices connected via Bluetooth Low Energy.
     @constant       kAudioDeviceTransportTypeHDMI
                         The transport type ID for AudioDevices connected via HDMI.
     @constant       kAudioDeviceTransportTypeDisplayPort
@@ -562,12 +564,12 @@ enum
     kAudioDeviceTransportTypeUnknown        = 0,
     kAudioDeviceTransportTypeBuiltIn        = 'bltn',
     kAudioDeviceTransportTypeAggregate      = 'grup',
-    kAudioDeviceTransportTypeAutoAggregate  = 'fgrp',
     kAudioDeviceTransportTypeVirtual        = 'virt',
     kAudioDeviceTransportTypePCI            = 'pci ',
     kAudioDeviceTransportTypeUSB            = 'usb ',
     kAudioDeviceTransportTypeFireWire       = '1394',
     kAudioDeviceTransportTypeBluetooth      = 'blue',
+    kAudioDeviceTransportTypeBluetoothLE    = 'blea',
     kAudioDeviceTransportTypeHDMI           = 'hdmi',
     kAudioDeviceTransportTypeDisplayPort    = 'dprt',
     kAudioDeviceTransportTypeAirPlay        = 'airp',

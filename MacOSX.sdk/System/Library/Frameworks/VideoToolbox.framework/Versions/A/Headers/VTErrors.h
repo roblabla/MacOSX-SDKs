@@ -44,6 +44,12 @@ enum {
 	kVTVideoDecoderAuthorizationErr			= -12210,
 	kVTVideoEncoderAuthorizationErr			= -12211,
 	kVTColorCorrectionPixelTransferFailedErr	= -12212,
+	kVTMultiPassStorageIdentifierMismatchErr	= -12213,
+	kVTMultiPassStorageInvalidErr			= -12214,
+	kVTFrameSiloInvalidTimeStampErr			= -12215,
+	kVTFrameSiloInvalidTimeRangeErr			= -12216,
+	kVTCouldNotFindTemporalFilterErr		= -12217,
+	kVTPixelTransferNotPermittedErr			= -12218,
 };
 
 /*!
@@ -79,6 +85,7 @@ typedef UInt32 VTDecodeInfoFlags;
 enum {
 	kVTDecodeInfo_Asynchronous = 1UL << 0,
 	kVTDecodeInfo_FrameDropped = 1UL << 1,
+	kVTDecodeInfo_ImageBufferModifiable = 1UL << 2,
 };
 
 // Informational status for encoding -- non-error flags 

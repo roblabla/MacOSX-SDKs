@@ -1,5 +1,5 @@
 /*	NSPortMessage.h
-	Copyright (c) 1994-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -16,15 +16,14 @@
     void		*reserved;
 }
 
-- (id)initWithSendPort:(NSPort *)sendPort receivePort:(NSPort *)replyPort components:(NSArray *)components;
+- (instancetype)initWithSendPort:(NSPort *)sendPort receivePort:(NSPort *)replyPort components:(NSArray *)components NS_DESIGNATED_INITIALIZER;
 
-- (NSArray *)components;
-- (NSPort *)receivePort;
-- (NSPort *)sendPort;
+@property (readonly, copy) NSArray *components;
+@property (readonly, retain) NSPort *receivePort;
+@property (readonly, retain) NSPort *sendPort;
 - (BOOL)sendBeforeDate:(NSDate *)date;
 
-- (uint32_t)msgid;
-- (void)setMsgid:(uint32_t)msgid;
+@property uint32_t msgid;
 
 @end
 

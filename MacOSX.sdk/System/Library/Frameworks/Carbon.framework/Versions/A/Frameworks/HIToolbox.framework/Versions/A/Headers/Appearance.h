@@ -673,7 +673,8 @@ typedef UInt32                          ThemeCursor;
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 enum {
   kThemeMenuBarNormal           = 0,
-  kThemeMenuBarSelected         = 1
+  kThemeMenuBarSelected         = 1,
+  kThemeMenuBarInactive			= 2
 };
 
 typedef UInt16                          ThemeMenuBarState;

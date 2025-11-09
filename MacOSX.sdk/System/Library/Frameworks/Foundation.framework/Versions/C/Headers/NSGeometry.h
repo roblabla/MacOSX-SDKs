@@ -1,5 +1,5 @@
 /*	NSGeometry.h
-	Copyright (c) 1994-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2014, Apple Inc. All rights reserved.
 */
 
 #import <AvailabilityMacros.h>
@@ -74,6 +74,14 @@ typedef enum {
 
 #endif
 
+#define NSEDGEINSETS_DEFINED 1
+typedef struct NSEdgeInsets {
+    CGFloat top;
+    CGFloat left;
+    CGFloat bottom;
+    CGFloat right;
+} NSEdgeInsets;
+
 typedef NS_OPTIONS(unsigned long long, NSAlignmentOptions) {
     NSAlignMinXInward   = 1ULL << 0,
     NSAlignMinYInward   = 1ULL << 1,
@@ -109,6 +117,7 @@ typedef NS_OPTIONS(unsigned long long, NSAlignmentOptions) {
 FOUNDATION_EXPORT const NSPoint NSZeroPoint;
 FOUNDATION_EXPORT const NSSize NSZeroSize;
 FOUNDATION_EXPORT const NSRect NSZeroRect;
+FOUNDATION_EXPORT const NSEdgeInsets NSEdgeInsetsZero NS_AVAILABLE(10_10, 8_0);
 
 NS_INLINE NSPoint NSMakePoint(CGFloat x, CGFloat y) {
     NSPoint p;
@@ -195,10 +204,20 @@ NS_INLINE CGSize NSSizeToCGSize(NSSize nssize) {
     return ((union _ *)&nssize)->cg;
 }
 
+NS_INLINE NSEdgeInsets NSEdgeInsetsMake(CGFloat top, CGFloat left, CGFloat bottom, CGFloat right) {
+    NSEdgeInsets e;
+    e.top = top;
+    e.left = left;
+    e.bottom = bottom;
+    e.right = right;
+    return e;
+}
+
 FOUNDATION_EXPORT BOOL NSEqualPoints(NSPoint aPoint, NSPoint bPoint);
 FOUNDATION_EXPORT BOOL NSEqualSizes(NSSize aSize, NSSize bSize);
 FOUNDATION_EXPORT BOOL NSEqualRects(NSRect aRect, NSRect bRect);
 FOUNDATION_EXPORT BOOL NSIsEmptyRect(NSRect aRect);
+FOUNDATION_EXPORT BOOL NSEdgeInsetsEqual(NSEdgeInsets aInsets, NSEdgeInsets bInsets) NS_AVAILABLE(10_10, 8_0);
 
 FOUNDATION_EXPORT NSRect NSInsetRect(NSRect aRect, CGFloat dX, CGFloat dY);
 FOUNDATION_EXPORT NSRect NSIntegralRect(NSRect aRect);
@@ -224,10 +243,12 @@ FOUNDATION_EXPORT NSRect NSRectFromString(NSString *aString);
 + (NSValue *)valueWithPoint:(NSPoint)point;
 + (NSValue *)valueWithSize:(NSSize)size;
 + (NSValue *)valueWithRect:(NSRect)rect;
++ (NSValue *)valueWithEdgeInsets:(NSEdgeInsets)insets NS_AVAILABLE(10_10, 8_0);
 
-- (NSPoint)pointValue;
-- (NSSize)sizeValue;
-- (NSRect)rectValue;
+@property (readonly) NSPoint pointValue;
+@property (readonly) NSSize sizeValue;
+@property (readonly) NSRect rectValue;
+@property (readonly) NSEdgeInsets edgeInsetsValue NS_AVAILABLE(10_10, 8_0);
 
 @end
 

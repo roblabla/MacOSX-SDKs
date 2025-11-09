@@ -20,7 +20,7 @@
  */
 
 NS_CLASS_AVAILABLE(10_8,5_0)
-@interface CLPlacemark : NSObject <NSCopying, NSCoding>
+@interface CLPlacemark : NSObject <NSCopying, NSSecureCoding>
 {
 @private
     CLPlacemarkInternal *_internal;
@@ -32,7 +32,7 @@ NS_CLASS_AVAILABLE(10_8,5_0)
  * Discussion:
  *   Initialize a newly allocated placemark from another placemark, copying its data.
  */
-- (id)initWithPlacemark:(CLPlacemark *)placemark;
+- (instancetype)initWithPlacemark:(CLPlacemark *)placemark;
 
 /*
  *  location
@@ -40,7 +40,7 @@ NS_CLASS_AVAILABLE(10_8,5_0)
  *  Discussion:
  *    Returns the geographic location associated with the placemark.
  */
-@property (nonatomic, readonly) CLLocation *location;
+@property (nonatomic, readonly, copy) CLLocation *location;
 
 /*
  *  region
@@ -48,7 +48,7 @@ NS_CLASS_AVAILABLE(10_8,5_0)
  *  Discussion:
  *    Returns the geographic region associated with the placemark.
  */
-@property (nonatomic, readonly) CLRegion *region;
+@property (nonatomic, readonly, copy) CLRegion *region;
 
 /*
  *  addressDictionary
@@ -57,20 +57,20 @@ NS_CLASS_AVAILABLE(10_8,5_0)
  *    This dictionary can be formatted as an address using ABCreateStringWithAddressDictionary,
  *    defined in the AddressBookUI framework.
  */
-@property (nonatomic, readonly) NSDictionary *addressDictionary;
+@property (nonatomic, readonly, copy) NSDictionary *addressDictionary;
 
 // address dictionary properties
-@property (nonatomic, readonly) NSString *name; // eg. Apple Inc.
-@property (nonatomic, readonly) NSString *thoroughfare; // street address, eg. 1 Infinite Loop
-@property (nonatomic, readonly) NSString *subThoroughfare; // eg. 1
-@property (nonatomic, readonly) NSString *locality; // city, eg. Cupertino
-@property (nonatomic, readonly) NSString *subLocality; // neighborhood, common name, eg. Mission District
-@property (nonatomic, readonly) NSString *administrativeArea; // state, eg. CA
-@property (nonatomic, readonly) NSString *subAdministrativeArea; // county, eg. Santa Clara
-@property (nonatomic, readonly) NSString *postalCode; // zip code, eg. 95014
-@property (nonatomic, readonly) NSString *ISOcountryCode; // eg. US
-@property (nonatomic, readonly) NSString *country; // eg. United States
-@property (nonatomic, readonly) NSString *inlandWater; // eg. Lake Tahoe
-@property (nonatomic, readonly) NSString *ocean; // eg. Pacific Ocean
-@property (nonatomic, readonly) NSArray *areasOfInterest; // eg. Golden Gate Park
+@property (nonatomic, readonly, copy) NSString *name; // eg. Apple Inc.
+@property (nonatomic, readonly, copy) NSString *thoroughfare; // street address, eg. 1 Infinite Loop
+@property (nonatomic, readonly, copy) NSString *subThoroughfare; // eg. 1
+@property (nonatomic, readonly, copy) NSString *locality; // city, eg. Cupertino
+@property (nonatomic, readonly, copy) NSString *subLocality; // neighborhood, common name, eg. Mission District
+@property (nonatomic, readonly, copy) NSString *administrativeArea; // state, eg. CA
+@property (nonatomic, readonly, copy) NSString *subAdministrativeArea; // county, eg. Santa Clara
+@property (nonatomic, readonly, copy) NSString *postalCode; // zip code, eg. 95014
+@property (nonatomic, readonly, copy) NSString *ISOcountryCode; // eg. US
+@property (nonatomic, readonly, copy) NSString *country; // eg. United States
+@property (nonatomic, readonly, copy) NSString *inlandWater; // eg. Lake Tahoe
+@property (nonatomic, readonly, copy) NSString *ocean; // eg. Pacific Ocean
+@property (nonatomic, readonly, copy) NSArray *areasOfInterest; // eg. Golden Gate Park
 @end

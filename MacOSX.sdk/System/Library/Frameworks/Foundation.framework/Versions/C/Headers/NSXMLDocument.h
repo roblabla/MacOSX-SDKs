@@ -1,5 +1,5 @@
 /*	NSXMLDocument.h
-	Copyright (c) 2004-2013, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSXMLNode.h>
@@ -65,29 +65,31 @@ typedef NS_ENUM(NSUInteger, NSXMLDocumentContentKind) {
 	NSXMLDocumentContentKind _contentKind;
 }
 
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
+
 /*!
     @method initWithXMLString:options:error:
     @abstract Returns a document created from either XML or HTML, if the HTMLTidy option is set. Parse errors are returned in <tt>error</tt>.
 */
-- (id)initWithXMLString:(NSString *)string options:(NSUInteger)mask error:(NSError **)error;
+- (instancetype)initWithXMLString:(NSString *)string options:(NSUInteger)mask error:(NSError **)error;
 
 /*!
     @method initWithContentsOfURL:options:error:
     @abstract Returns a document created from the contents of an XML or HTML URL. Connection problems such as 404, parse errors are returned in <tt>error</tt>.
 */
-- (id)initWithContentsOfURL:(NSURL *)url options:(NSUInteger)mask error:(NSError **)error;
+- (instancetype)initWithContentsOfURL:(NSURL *)url options:(NSUInteger)mask error:(NSError **)error;
 
 /*!
     @method initWithData:options:error:
     @abstract Returns a document created from data. Parse errors are returned in <tt>error</tt>.
 */
-- (id)initWithData:(NSData *)data options:(NSUInteger)mask error:(NSError **)error; //primitive
+- (instancetype)initWithData:(NSData *)data options:(NSUInteger)mask error:(NSError **)error NS_DESIGNATED_INITIALIZER; //primitive
 
 /*!
     @method initWithRootElement:
     @abstract Returns a document with a single child, the root element.
 */
-- (id)initWithRootElement:(NSXMLElement *)element;
+- (instancetype)initWithRootElement:(NSXMLElement *)element NS_DESIGNATED_INITIALIZER;
 
 #if 0
 #pragma mark --- Properties ---
@@ -96,82 +98,46 @@ typedef NS_ENUM(NSUInteger, NSXMLDocumentContentKind) {
 + (Class)replacementClassForClass:(Class)cls;
 
 /*!
-    @method setCharacterEncoding:
+    @method characterEncoding
     @abstract Sets the character encoding to an IANA type.
 */
-- (void)setCharacterEncoding:(NSString *)encoding; //primitive
-
-/*!
-    @method characterEncoding
-    @abstract The character encoding or nil.
-*/
-- (NSString *)characterEncoding; //primitive
-
-/*!
-    @method setVersion:
-    @abstract Sets the XML version. Should be 1.0 or 1.1.
-*/
-- (void)setVersion:(NSString *)version; //primitive
+@property (copy) NSString *characterEncoding; //primitive
 
 /*!
     @method version
-    @abstract The version or nil.
+    @abstract Sets the XML version. Should be 1.0 or 1.1.
 */
-- (NSString *)version; //primitive
+@property (copy) NSString *version; //primitive
 
 /*!
-    @method setStandalone:
+    @method standalone
     @abstract Set whether this document depends on an external DTD. If this option is set the standalone declaration will appear on output.
 */
-- (void)setStandalone:(BOOL)standalone; //primitive
-
-/*!
-    @method isStandalone
-    @abstract Returns whether this document depends on an external DTD.
-*/
-- (BOOL)isStandalone; //primitive
-
-/*!
-    @method setDocumentContentKind:
-    @abstract Set the kind of document.
-*/
-- (void)setDocumentContentKind:(NSXMLDocumentContentKind)kind; //primitive
+@property (getter=isStandalone) BOOL standalone; //primitive
 
 /*!
     @method documentContentKind
     @abstract The kind of document.
 */
-- (NSXMLDocumentContentKind)documentContentKind; //primitive
-
-/*!
-    @method setMIMEType:
-    @abstract Set the MIME type, eg text/xml.
-*/
-- (void)setMIMEType:(NSString *)MIMEType; //primitive
+@property NSXMLDocumentContentKind documentContentKind; //primitive
 
 /*!
     @method MIMEType
-    @abstract The MIME type as set.
+    @abstract Set the MIME type, eg text/xml.
 */
-- (NSString *)MIMEType; //primitive
-
-/*!
-    @method setDTD:
-    @abstract Set the associated DTD. This DTD will be output with the document.
-*/
-- (void)setDTD:(NSXMLDTD *)documentTypeDeclaration; //primitive
+@property (copy) NSString *MIMEType; //primitive
 
 /*!
     @method DTD
-    @abstract The associated inline DTD.
+    @abstract Set the associated DTD. This DTD will be output with the document.
 */
-- (NSXMLDTD *)DTD; //primitive
+@property (copy) NSXMLDTD *DTD; //primitive
 
 /*!
     @method setRootElement:
     @abstract Set the root element. Removes all other children including comments and processing-instructions.
 */
-- (void)setRootElement:(NSXMLNode *)root;
+- (void)setRootElement:(NSXMLElement *)root;
 
 /*!
     @method rootElement
@@ -227,7 +193,7 @@ typedef NS_ENUM(NSUInteger, NSXMLDocumentContentKind) {
     @method XMLData
     @abstract Invokes XMLDataWithOptions with NSXMLNodeOptionsNone.
 */
-- (NSData *)XMLData;
+@property (readonly, copy) NSData *XMLData;
 
 /*!
     @method XMLDataWithOptions:

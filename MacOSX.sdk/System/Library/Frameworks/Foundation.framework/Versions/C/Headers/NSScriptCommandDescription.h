@@ -1,6 +1,6 @@
 /*
 	NSScriptCommandDescription.h
-	Copyright (c) 1997-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1997-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -19,35 +19,39 @@
     id _moreVars;
 }
 
+- (id)init NS_UNAVAILABLE;
+
 /* Initialize, given a scripting suite name, command name, and command declaration dictionary of the sort that is valid in .scriptSuite property list files.
 */
-- (id)initWithSuiteName:(NSString *)suiteName commandName:(NSString *)commandName dictionary:(NSDictionary *)commandDeclaration;
+- (instancetype)initWithSuiteName:(NSString *)suiteName commandName:(NSString *)commandName dictionary:(NSDictionary *)commandDeclaration NS_DESIGNATED_INITIALIZER;
+
+- (instancetype)initWithCoder:(NSCoder *)inCoder NS_DESIGNATED_INITIALIZER;
 
 /* Return the suite name or command name provided at initialization time.
 */
-- (NSString *)suiteName;
-- (NSString *)commandName;
+@property (readonly, copy) NSString *suiteName;
+@property (readonly, copy) NSString *commandName;
 
 /* Return the four character codes that identify the command in Apple events.
 */
-- (FourCharCode)appleEventClassCode;
-- (FourCharCode)appleEventCode;
+@property (readonly) FourCharCode appleEventClassCode;
+@property (readonly) FourCharCode appleEventCode;
 
 /* Return the Objective-C class name for instances of the described command.
 */
-- (NSString *)commandClassName;
+@property (readonly, copy) NSString *commandClassName;
 
 /* Return the declared type name for the result of execution of the described command, or nil if the described command is not declared to return a result.
 */
-- (NSString *)returnType;
+@property (readonly, copy) NSString *returnType;
 
 /* Return the four character code that identifies in Apple events the declared type of the result of execution of the described command.
 */
-- (FourCharCode)appleEventCodeForReturnType;
+@property (readonly) FourCharCode appleEventCodeForReturnType;
 
 /* Return the strings valid for use as keys into argument dictionaries in instances of the described command.
 */
-- (NSArray *)argumentNames;
+@property (readonly, copy) NSArray *argumentNames;
 
 /* Return the declared type of the named argument in instances of the described command.
 */

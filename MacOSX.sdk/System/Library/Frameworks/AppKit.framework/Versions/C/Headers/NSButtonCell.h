@@ -1,7 +1,7 @@
 /*
 	NSButtonCell.h
 	Application Kit
-	Copyright (c) 1994-2013, Apple Inc.
+	Copyright (c) 1994-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -18,6 +18,9 @@ typedef NS_ENUM(NSUInteger, NSButtonType) {
     NSMomentaryChangeButton		= 5,
     NSOnOffButton			= 6,
     NSMomentaryPushInButton		= 7,	// was NSMomentaryLight
+    NSAcceleratorButton NS_ENUM_AVAILABLE_MAC(10_10_3)			= 8,
+    NSMultiLevelAcceleratorButton NS_ENUM_AVAILABLE_MAC(10_10_3)	= 9,
+    
     /* These constants were accidentally reversed so that NSMomentaryPushButton lit and
        NSMomentaryLight pushed. These names are now deprecated */
     NSMomentaryPushButton NS_ENUM_DEPRECATED_MAC(10_0, 10_9)    = 0, // NSMomentaryLightButton should be used instead
@@ -71,9 +74,11 @@ typedef struct __BCFlags {
     unsigned int        hasTitleTextField:1;
     unsigned int        useButtonImageSource:1;
     unsigned int        isDrawingFocus:1;
-    unsigned int        __reserved:7;
+    unsigned int        allowTitleTightening:1;
+    unsigned int        __reserved:6;
 #else
-    unsigned int        __reserved:7;
+    unsigned int        __reserved:6;
+    unsigned int        allowTitleTightening:1;
     unsigned int        isDrawingFocus:1;
     unsigned int        useButtonImageSource:1;
     unsigned int        hasTitleTextField:1;
@@ -134,41 +139,30 @@ typedef struct __BCFlags2 {
 }
 
 
-- (NSString *)title;
-- (void)setTitle:(NSString *)aString;
-- (NSString *)alternateTitle;
-- (void)setAlternateTitle:(NSString *)aString;
+@property (copy) NSString *title;
+@property (copy) NSString *alternateTitle;
 
-- (NSImage *)alternateImage;
-- (void)setAlternateImage:(NSImage *)image;
-- (NSCellImagePosition)imagePosition;
-- (void)setImagePosition:(NSCellImagePosition)aPosition;
-- (NSImageScaling)imageScaling NS_AVAILABLE_MAC(10_5);
-- (void)setImageScaling:(NSImageScaling)scaling NS_AVAILABLE_MAC(10_5);
+@property (strong) NSImage *alternateImage;
+@property NSCellImagePosition imagePosition;
+@property NSImageScaling imageScaling NS_AVAILABLE_MAC(10_5);
 
-- (NSInteger)highlightsBy;
-- (void)setHighlightsBy:(NSInteger)aType;
-- (NSInteger)showsStateBy;
-- (void)setShowsStateBy:(NSInteger)aType;
+@property NSCellStyleMask highlightsBy;
+@property NSCellStyleMask showsStateBy;
 - (void)setButtonType:(NSButtonType)aType;
-- (BOOL)isOpaque;
-- (void)setFont:(NSFont *)fontObj;
-- (BOOL)isTransparent;
-- (void)setTransparent:(BOOL)flag;
+@property (getter=isOpaque, readonly) BOOL opaque;
+@property (getter=isTransparent) BOOL transparent;
 - (void)setPeriodicDelay:(float)delay interval:(float)interval;
 - (void)getPeriodicDelay:(float *)delay interval:(float *)interval;
-- (NSString *)keyEquivalent;
-- (void)setKeyEquivalent:(NSString *)aKeyEquivalent;
-- (NSUInteger)keyEquivalentModifierMask;
-- (void)setKeyEquivalentModifierMask:(NSUInteger)mask;
-- (NSFont *)keyEquivalentFont;
-- (void)setKeyEquivalentFont:(NSFont *)fontObj;
+@property (copy) NSString *keyEquivalent;
+@property NSUInteger keyEquivalentModifierMask;
+@property (strong) NSFont *keyEquivalentFont;
 - (void)setKeyEquivalentFont:(NSString *)fontName size:(CGFloat)fontSize;
 - (void)performClick:(id)sender; // Significant NSCell override, actually clicks itself.
 
 - (void)drawImage:(NSImage*)image withFrame:(NSRect)frame inView:(NSView*)controlView;
 - (NSRect)drawTitle:(NSAttributedString*)title withFrame:(NSRect)frame inView:(NSView*)controlView;
 - (void)drawBezelWithFrame:(NSRect)frame inView:(NSView*)controlView;
+
 @end
 
 // NSGradientType :
@@ -189,42 +183,34 @@ typedef NS_ENUM(NSUInteger, NSGradientType) {
 @interface NSButtonCell(NSButtonCellExtensions)
 
 // NOTE: gradientType is not used
-- (NSGradientType)gradientType;
-- (void)setGradientType:(NSGradientType)type;
+@property NSGradientType gradientType;
 
 // When disabled, the image and text of an NSButtonCell are normally dimmed with gray.
 // Radio buttons and switches use (imageDimsWhenDisabled == NO) so only their text is dimmed.
-- (void)setImageDimsWhenDisabled:(BOOL)flag;
-- (BOOL)imageDimsWhenDisabled;
+@property BOOL imageDimsWhenDisabled;
 
-- (void)setShowsBorderOnlyWhileMouseInside:(BOOL)show;
-- (BOOL)showsBorderOnlyWhileMouseInside;
+@property BOOL showsBorderOnlyWhileMouseInside;
 
 - (void)mouseEntered:(NSEvent*)event;
 - (void)mouseExited:(NSEvent*)event;
 
-- (NSColor *)backgroundColor;
-- (void)setBackgroundColor:(NSColor *)color;
+@property (copy) NSColor *backgroundColor;
 
 @end
 
 @interface NSButtonCell(NSButtonCellAttributedStringMethods)
-- (NSAttributedString *)attributedTitle;
-- (void)setAttributedTitle:(NSAttributedString *)obj;
-- (NSAttributedString *)attributedAlternateTitle;
-- (void)setAttributedAlternateTitle:(NSAttributedString *)obj;
+@property (copy) NSAttributedString *attributedTitle;
+@property (copy) NSAttributedString *attributedAlternateTitle;
 @end
 
 @interface NSButtonCell(NSButtonCellBezelStyles)
 
-- (void)setBezelStyle:(NSBezelStyle)bezelStyle;
-- (NSBezelStyle)bezelStyle;
+@property NSBezelStyle bezelStyle;
 
 @end
 
 @interface NSButtonCell (NSButtonCellSoundExtensions)
-- (void)setSound:(NSSound *)aSound;
-- (NSSound *)sound;
+@property (strong) NSSound *sound;
 @end
 
 /* In 10.8 and higher, all the *Mnemonic* methods are deprecated. On MacOS they have typically not been used.

@@ -1,12 +1,12 @@
 /*
 	NSFileCoordinator.h
-	Copyright (c) 2010-2013, Apple Inc.
+	Copyright (c) 2010-2014, Apple Inc.
 	All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
-@class NSArray, NSError, NSMutableDictionary, NSURL;
+@class NSArray, NSError, NSMutableDictionary, NSOperationQueue, NSURL;
 
 @protocol NSFilePresenter;
 
@@ -18,7 +18,17 @@ typedef NS_OPTIONS(NSUInteger, NSFileCoordinatorReadingOptions) {
 
     /* Whether reading of an item that might be a symbolic link file causes the resolution of the link if it is. This affects the URL passed to the block passed to an invocation of one of the -coordinateReadingItemAtURL:... methods. This is not a valid option to use with -prepareForReadingItemsAtURLs:options:writingItemsAtURLs:options:error:byAccessor:.
     */
-    NSFileCoordinatorReadingResolvesSymbolicLink = 1 << 1
+    NSFileCoordinatorReadingResolvesSymbolicLink = 1 << 1,
+
+    /* Whether the reading to be done will only attempt to get an item's metadata that is immediately available (name, modification date, tags, and other attributes), and not its contents. For ubiquitous items, specifying this option will cause coordinated reads to be granted immediately (barring other coordinated readers or writers or file presenters on the same system on the same system preventing this) instead of waiting for any downloading of contents or additional metadata like conflicting versions or thumbnails. Attempting to read the item's contents during such a coordinated read may give you unexpected results or fail.
+     */
+    NSFileCoordinatorReadingImmediatelyAvailableMetadataOnly NS_ENUM_AVAILABLE(10_10, 8_0) = 1 << 2,
+
+    /* Whether reading of an item is being done for the purpose of uploading. When using this option, NSFileCoordinator will create a temporary snapshot of the item being read and will relinquish its claim on the file once that snapshot is made to avoid blocking other coordinated writes during a potentially long upload. If the item at the URL being read is a directory (such as a document package), then the snapshot will be a new file that contains the zipped contents of that directory, and the URL passed to the accessor block will locate that file.
+     
+    When using this option, you may upload the document outside of the accessor block. However, you should open a file descriptor to the file or relocate the file within the accessor block before you do so, because NSFileCoordinator will unlink the file after the block returns, rendering it inaccessible via the URL.
+    */
+    NSFileCoordinatorReadingForUploading NS_ENUM_AVAILABLE(10_10, 8_0) = 1 << 3,
 
 };
 
@@ -49,9 +59,27 @@ typedef NS_OPTIONS(NSUInteger, NSFileCoordinatorWritingOptions) {
 
     For another example, the most accurate and safe way to coordinate a move is to invoke -coordinateWritingItemAtURL:options:writingItemAtURL:options:error:byAccessor: using the NSFileCoordinatorWritingForMoving option with the source URL and NSFileCoordinatorWritingForReplacing with the destination URL.
     */
-    NSFileCoordinatorWritingForReplacing = 1 << 3
+    NSFileCoordinatorWritingForReplacing = 1 << 3,
+
+    /* Whether the writing to be done will change the item's metadata only and not its contents. If the item being written to is ubiquitous, then changes to the item's contents during this coordinated write may not be preserved or fail. When using this option, changing metadata that is related to the item's contents is not supported for ubiquitous items and such changes may not be preserved. For example, changing the value of NSURLTagNamesKey is supported, but changing the value of NSURLContentModificationDateKey is not.
+     */
+    NSFileCoordinatorWritingContentIndependentMetadataOnly NS_ENUM_AVAILABLE(10_10, 8_0) = 1 << 4
 
 };
+
+
+NS_CLASS_AVAILABLE(10_10, 8_0)
+@interface NSFileAccessIntent : NSObject {
+@private
+    NSURL *_url;
+    BOOL _isRead;
+    NSInteger _options;
+}
++ (instancetype)readingIntentWithURL:(NSURL *)url options:(NSFileCoordinatorReadingOptions)options;
++ (instancetype)writingIntentWithURL:(NSURL *)url options:(NSFileCoordinatorWritingOptions)options;
+@property (readonly, copy) NSURL *URL; // Use this URL within the accessor block. This property may change from its original value in response to actions from other writers.
+@end
+
 
 NS_CLASS_AVAILABLE(10_7, 5_0)
 @interface NSFileCoordinator : NSObject {
@@ -87,56 +115,71 @@ You pass an NSFilePresenter to this initializer when the operation whose file ac
 
 For example, NSDocument creates a single NSFileCoordinator for all of the coordinated reading and writing it does during the saving of a document. It always creates the NSFileCoordinator in the main queue even when it is doing the actual coordinated reading and writing in a background queue to implement asynchronous saving.
 */
-- (id)initWithFilePresenter:(id<NSFilePresenter>)filePresenterOrNil;
+- (instancetype)initWithFilePresenter:(id<NSFilePresenter>)filePresenterOrNil NS_DESIGNATED_INITIALIZER;
 
-#if NS_BLOCKS_AVAILABLE
+#pragma mark *** Purpose Identifier ***
 
-#pragma mark *** Single File Coordination ***
+/* A string that uniquely identifies the file access that will be done by this NSFileCoordinator. Every NSFileCoordinator has a unique purpose identifier that is created during initialization. Coordinated reads and writes performed by NSFileCoordinators with the same purpose identifier never block each other, even if they exist in different processes. In addition to some of the reasons explained in the comments of -initWithFilePresenter:, you may want to set a custom purpose identifier for the following reasons:
+- Your application has an NSFileProviderExtension. Any file coordination done on behalf of the NSFileProviderExtension needs to be done using the same purpose identifier reported by your NSFileProviderExtension.
+- To avoid deadlocking when two separate subsystems need to work together to perform one high-level operation, and both subsystems perform their own coordinated reads or writes.
+ 
+If you are coordinating file access on behalf of an NSFilePresenter, you should use -initWithFilePresenter: and should not attempt to set a custom purpose identifier. Every NSFileCoordinator instance initialized with the same NSFilePresenter will have the same purpose identifier.
+ 
+When creating custom purpose identifiers, you can use a reverse DNS style string, such as "com.mycompany.myapplication.mypurpose", or a UUID string. Nil and zero-length strings are not allowed.
+ 
+Purpose identifiers can be set only once. If you attempt to set the purpose identifier of an NSFileCoordinator that you initialized with -initWithFilePresenter: or that you already assigned a purpose identifier, an exception will be thrown.
+*/
+@property (copy) NSString *purposeIdentifier NS_AVAILABLE(10_7, 5_0);
 
-/* You can consider "item" in method names in this header file to be an abbreviation of "fileOrDirectory." As always, a directory might actually be a file package.
+#pragma mark *** Asynchronous File Coordination ***
 
-The next two methods follow the same pattern: given a URL that locates a file or directory, each synchronously waits for certain other readers and writers and then, if no error occurs, invokes the passed-in block. Until the invocation of that block returns, certain other readers and writers are made to synchronously wait. If instead an error occurs then *outError is set to an NSError and the passed-in block is not invoked. When the block is invoked it is passed the URL that locates the item, taking into account the fact that the item might have been moved or renamed during the waiting.
+/* You can consider "item" in method names and comments in this header file to be an abbreviation of "fileOrDirectory." As always, a directory might actually be a file package.
 
-In general a coordinated reader waits for a coordinated writer of the same item, and a coordinated writer waits for coordinated readers and other coordinated writers of the same item. Coordinated readers do not wait for each other. Coordinated reading or writing of items in a file package is treated as coordinated reading or writing of the file package as a whole. A coordinated reader of a directory that is not a file package does not wait for coordinated writers of contained items, or cause such writers to wait. With one exception, a coordinated writer of a directory that is not a file package does not wait for coordinated readers and writers of contained items, or cause such readers and writers to wait. The exception is when you use NSFileCoordinatorWritingForDeleting, NSFileCoordinatorWritingForMoving, or NSFileCoordinatorWritingForReplacing. They make your coordinated writer wait for previously scheduled coordinated readers and writers of contained items, and causes subsequently scheduled coordinated readers and writers of contained items to wait.
-
-None of those rules apply to coordinated readers and writers that are using the exact same instance of NSFileCoordinator. Instances of NSFileCoordinator never block themselves. You can take advantage of that in a couple of ways but take care because doing so raises the possibility of deadlocking with other processes that are doing the same sort of thing. If you have a choice use one of the batched file coordination methods in the next section instead.
-
-You can invoke these methods to serialize your process' access of files and directories with other processes' access of the same files and directories so that inconsistencies due to overlapping reading and writing don't occur. They also cause messages to be sent to NSFilePresenters, and wait for NSFilePresenters to react, as described below. To accommodate the fact that file system items can be moved or renamed while one of these methods is waiting to invoke the block you passed when invoking it, the block you pass in should always use the passed-in URL do its work, not the one passed in the method invocation.
-
-Each of these methods returns an NSError by reference but are uncommon among Cocoa framework methods in that they don't also return a result indicating success or failure. The success of the waiting that they do is typically not interesting to invokers. Only the success of file system access done by the passed-in block is interesting. (The failure of either is of course interesting.) When invoking these methods it's cleanest to just declare a __block variable outside of the block and initialize it to a value that signals failure, and then inside the block set it to a value that signals success. If the waiting fails then the invoked method sets the error reference to an NSError that describes what went wrong, your block will not be invoked, your __block variable will not be set to a value that signals success, and all will be as it should be, with failure signaled and an NSError that describes the failure.
+The term "reader" refers to an invocation of -coordinateAccessWithIntents:queue:byAccessor: with at least one NSFileAccessIntent created with +readingIntentWithURL:options:. Similarly, the term "writer" refers to an invocation of -coordinateAccessWithIntents:queue:byAccessor: with at least one NSFileAccessIntent created with +writingIntentWithURL:optiosn:.
 */
 
-/* Readers do not wait for other readers, but they wait for writers, and they also wait for NSFilePresenters that are messaged as part of the coordinated reading.
-
+/* Given an array of one or more NSFileAccessIntent objects that specify reading and/or writing items located by the corresponding URLs, wait asynchronously for certain other readers and writers and then invoke the passed-in block on the given queue, which must not be nil. If an error occurs, file access is not granted and a non-nil error will be passed to the accessor block. If file access is successfully granted, then 'error' will be nil and you may perform the intended file access inside the accessor block.
+ 
+You must use the URL property on the NSFileAccessIntent objects when performing file access in the accessor block. Within the block, the NSFileAccessIntent objects' URLs may differ from their original values to account for items that have been moved or renamed while waiting for access to be granted. When access to the intended files is granted, certain other readers and writers are made to wait until the given block returns, which defines the end of that file access. Do not allow file access to continue after the accessor block returns by dispatching work to other threads or queues.
+ 
+You can invoke this method to serialize your process's access of files and directories with other processes' access of the same files and directories so that inconsistencies due to overlapping reading and writing don't occur. It also causes messages to be sent to NSFilePresenters, and wait for NSFilePresenters to react, as described below. The fact that file system items can be moved or renamed while this method is waiting to invoke the block you passed when invoking it is why it's critical to use the URL property on the NSFileAccessIntent objects, not the URLs you used when initializing them.
+ 
+In general a coordinated reader waits for a coordinated writer of the same item, and a coordinated writer waits for coordinated readers and other coordinated writers of the same item. Coordinated readers do not wait for each other. Coordinated reading or writing of items in a file package is treated as coordinated reading or writing of the file package as a whole. A coordinated reader of a directory that is not a file package does not wait for coordinated writers of contained items, or cause such writers to wait. With one exception, a coordinated writer of a directory that is not a file package does not wait for coordinated readers and writers of contained items, or cause such readers and writers to wait. The exception is when you use NSFileCoordinatorWritingForDeleting, NSFileCoordinatorWritingForMoving, or NSFileCoordinatorWritingForReplacing. They make your coordinated writer wait for previously scheduled coordinated readers and writers of contained items, and causes subsequently scheduled coordinated readers and writers of contained items to wait.
+ 
+None of those rules apply to coordinated readers and writers that are using the exact same instance of NSFileCoordinator, including arrays of multiple NSFileAccessIntent objects. Instances of NSFileCoordinator never block themselves. You can take advantage of that in a couple of ways when invoking -coordinateAccessWithIntents:queue:byAccessor: multiple times on the same NSFileCoordinator instance, but take care because doing so raises the possibility of deadlocking with other processes that are doing the same sort of thing. If you can, you should invoke -coordinateAccessWithIntents:queue:byAccessor: a single time with multiple NSFileAccessIntent objects instead of invoking it multiple times with a single NSFileAccssIntent object.
+ 
+In addition to waiting for writers, readers wait for NSFilePresenters that are messaged as part of the coordinated reading.
+ 
 Coordinated reading of an item triggers the sending of messages to NSFilePresenters that implement the corresponding optional methods, even those in other processes, except the one specified when -initWithFilePresenter: was invoked:
 - -relinquishPresentedItemToReader: is sent to NSFilePresenters of the item and, if the item is in a file package, NSFilePresenters of the file package. If there are nested file packages then the message is sent to NSFilePresenters of all of them.
 - If NSFileCoordinatorReadingWithoutChanges is not used then -savePresentedItemChangesWithCompletionHandler: is also sent to the same NSFilePresenters.
 
-If there are multiple NSFilePresenters involved then the order in which they are messaged is undefined. If an NSFilePresenter signals failure then waiting will fail and *outError will be set to an NSError describing the failure.
-*/
-- (void)coordinateReadingItemAtURL:(NSURL *)url options:(NSFileCoordinatorReadingOptions)options error:(NSError **)outError byAccessor:(void (^)(NSURL *newURL))reader;
-
-/* Writers wait for readers and other writers, and they also wait for NSFilePresenters that are messaged as part of the coordinated writing.
-
+In addition to waiting for readers and other writers, writers wait for NSFilePresenters that are messaged as part of the coordinated writing.
+ 
 Coordinated writing of an item triggers the sending of messages to NSFilePresenters that implement the corresponding optional methods, even those in other processes, except the one specified when -initWithFilePresenter: was invoked:
 - -relinquishPresentedItemToWriter: is sent to NSFilePresenters of the item and, if the item is in a file package, NSFilePresenters of the file package. If there are nested file packages then the message is sent to NSFilePresenters of all of them.
 - If NSFileCoordinatorWritingForDeleting, NSFileCoordinatorWritingForMoving, or NSFileCoordinatorWritingForReplacing is used and the item is a directory then -relinquishPresentedItemToWriter: is also sent to NSFilePresenters of each item contained by it.
 - If NSFileCoordinatorWritingForDeleting or NSFileCoordinatorWritingForReplacing is used then -accommodatePresentedItemDeletionWithCompletionHandler: is sent to NSFilePresenters of the item and, if the item is a directory, NSFilePresenters of each item contained by it. -accommodatePresentedSubitemDeletionAtURL:completionHandler: is sent to NSFilePresenters of each file package that contains the item.
 - When NSFileCoordinatorWritingForReplacing is used the the definition of "the item" depends on what happened while waiting for other writers. See the description of it above.
 - If NSFileCoordinatorWritingForMerging is used then -savePresentedItemChangesWithCompletionHandler: is sent to NSFilePresenters of the item and, if the item is in a file package, NSFilePresenters of the file package. If there are nested file packages then the message is sent to NSFilePresenters of all of them.
-
-If there are multiple NSFilePresenters involved then the order in which they are messaged is undefined. If an NSFilePresenter signals failure then waiting will fail and *outError will be set to an NSError describing the failure.
+ 
+For both coordinated reading and writing, if there are multiple NSFilePresenters involved then the order in which they are messaged is undefined. If an NSFilePresenter signals failure then waiting will fail and *outError will be set to an NSError describing the failure.
 */
+- (void)coordinateAccessWithIntents:(NSArray *)intents queue:(NSOperationQueue *)queue byAccessor:(void (^)(NSError *error))accessor NS_AVAILABLE(10_10, 8_0);
+
+#pragma mark *** Synchronous File Coordination ***
+
+/* The next four methods behave similarly to -coordinateAccessWithIntents:queue:byAccessor: with one or two NSFileAccessIntent objects with the following exceptions:
+
+Each of these methods wait synchronously on the same thread they were invoked on before invoking the passed-in accessor block on the same thread, instead of waiting asynchronously and scheduling invocation of the block on a specific queue.
+
+The accessor block of each of these methods is passed one or more URLs that locate the intended items, perhaps changed from the original URLs to take into account the fact that the item might have been moved or renamed during the waiting.
+ 
+Each of these methods returns an NSError by reference instead of passing it to the accessory block. However, these methods are uncommon among Cocoa framework methods in that they don't also return a result indicating success or failure. The success of the waiting that they do is typically not interesting to invokers. Only the success of file system access done by the passed-in block is interesting. (The failure of either is of course interesting.) When invoking these methods it's cleanest to just declare a __block variable outside of the block and initialize it to a value that signals failure, and then inside the block set it to a value that signals success. If the waiting fails then the invoked method sets the error reference to an NSError that describes what went wrong, your block will not be invoked, your __block variable will not be set to a value that signals success, and all will be as it should be, with failure signaled and an NSError that describes the failure.
+*/
+- (void)coordinateReadingItemAtURL:(NSURL *)url options:(NSFileCoordinatorReadingOptions)options error:(NSError **)outError byAccessor:(void (^)(NSURL *newURL))reader;
 - (void)coordinateWritingItemAtURL:(NSURL *)url options:(NSFileCoordinatorWritingOptions)options error:(NSError **)outError byAccessor:(void (^)(NSURL *newURL))writer;
-
-#pragma mark *** Multiple File Coordination ***
-
-/* Do the same thing that an invocation of -coordinateReadingItemAtURL:options:error:byAccessor: passed a block that invokes -coordinateWritingItemAtURL:options:error:byAccessor: would do, without the risk of deadlock that doing exactly that would introduce.
-*/
 - (void)coordinateReadingItemAtURL:(NSURL *)readingURL options:(NSFileCoordinatorReadingOptions)readingOptions writingItemAtURL:(NSURL *)writingURL options:(NSFileCoordinatorWritingOptions)writingOptions error:(NSError **)outError byAccessor:(void (^)(NSURL *newReadingURL, NSURL *newWritingURL))readerWriter;
-
-/* Do the same thing that an invocation of -coordinateWritingItemAtURL:options:error:byAccessor: passed a block that invokes -coordinateWritingItemAtURL:options:error:byAccessor: again would do, without the risk of deadlock that doing exactly that would introduce.
-*/
 - (void)coordinateWritingItemAtURL:(NSURL *)url1 options:(NSFileCoordinatorWritingOptions)options1 writingItemAtURL:(NSURL *)url2 options:(NSFileCoordinatorWritingOptions)options2 error:(NSError **)outError byAccessor:(void (^)(NSURL *newURL1, NSURL *newURL2))writer;
 
 #pragma mark *** Batched File Coordination ***
@@ -148,8 +191,6 @@ The -coordinate... methods must use interprocess communication to message instan
 In most cases it is redundant to pass the same reading or writing options in an invocation of this method as are passed to individual invocations of the -coordinate... methods invoked by the block passed to an invocation of this method. For example, when Finder invokes this method during a copy operation it does not pass NSFileCoordinatorReadingWithoutChanges because it is appropriate to trigger the saving of document changes right away, but it does pass it when doing the nested invocations of -coordinate... methods because it is not necessary to trigger saving again, even if the user changes the document before the Finder proceeds far enough to actually copy that document's file.
 */
 - (void)prepareForReadingItemsAtURLs:(NSArray *)readingURLs options:(NSFileCoordinatorReadingOptions)readingOptions writingItemsAtURLs:(NSArray *)writingURLs options:(NSFileCoordinatorWritingOptions)writingOptions error:(NSError **)outError byAccessor:(void (^)(void (^completionHandler)(void)))batchAccessor;
-
-#endif
 
 #pragma mark *** Renaming and Moving Notification ***
 
@@ -170,7 +211,7 @@ This triggers the sending of messages to NSFilePresenters that implement the cor
 
 This also balances invocations of -itemAtURL:willMoveToURL:, as described above.
 
-Useless invocations of this method are harmless, so you don't have to write code that compares NSURLs for equality, which is not straightforward. This method must be invoked from within the block passed to an invocation of -coordinateWritingItemAtURL:options:error:byAccessor: or -coordinateReadingItemAtURL:options:writingItemAtURL:options:error:byAccessor:.
+Useless invocations of this method are harmless, so you don't have to write code that compares NSURLs for equality, which is not straightforward. This method must be invoked from within the block passed to an invocation of -coordinateAccessWithIntents:queue:byAccessory:, -coordinateWritingItemAtURL:options:error:byAccessor:, or -coordinateReadingItemAtURL:options:writingItemAtURL:options:error:byAccessor:.
 */
 - (void)itemAtURL:(NSURL *)oldURL didMoveToURL:(NSURL *)newURL;
 

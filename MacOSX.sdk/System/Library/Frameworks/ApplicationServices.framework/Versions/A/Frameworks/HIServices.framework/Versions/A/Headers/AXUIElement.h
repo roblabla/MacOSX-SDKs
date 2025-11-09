@@ -24,12 +24,12 @@ extern "C" {
  Each accessible user interface element in an application is represented by an AXUIElementRef, which is a CFTypeRef. AXUIElementRefs (like all
  CFTypeRefs) can be used with all the Core Foundation polymorphic functions, such as @link //apple_ref/c/func/CFRetain CFRetain@/link, @link //apple_ref/c/func/CFRelease CFRelease@/link, and @link //apple_ref/c/func/CFEqual CFEqual@/link.
  
- All functions defined in this header file return <code>kAXErrorSuccess</code> on success.
+ All functions defined in this header file will return <code>kAXErrorSuccess</code> on success if the return type is AXError.
  If there is some sort of system memory failure, such as the failure to allocate
- an object, all functions can return <code>kAXErrorFailure</code>. In the unlikely event that some process does not fully support the accessibility API, a function can
+ an object, all functions of return type AXError can return <code>kAXErrorFailure</code>. In the unlikely event that some process does not fully support the accessibility API, a function of return type AXError can
  return <code>kAXErrorNotImplemented</code>.
  
- In addition, some functions can return the following error codes:
+ In addition, some functions of return type AXError can return the following error codes:
  <dl><dt><code>kAXErrorInvalidUIElement</code></dt><dd>The passed-in AXUIElementRef is invalid. All functions that include an AXUIElementRef parameter can return this error code.</dd>
  <dt><code>kAXErrorIllegalArgument</code></dt><dd>At least one of the arguments is illegal (for example, NIL passed in for a pointer).</dd>
  <dt><code>kAXErrorCannotComplete</code></dt><dd>There is a problem with messaging (such as when messaging to the server fails or when the accessible application is unresponsive

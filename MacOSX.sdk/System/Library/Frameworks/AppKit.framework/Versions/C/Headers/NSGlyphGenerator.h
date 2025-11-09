@@ -1,7 +1,7 @@
 /*
         NSGlyphGenerator.h
         Application Kit
-        Copyright (c) 1993-2013, Apple Inc.
+        Copyright (c) 1993-2014, Apple Inc.
         All rights reserved.
 */
 
@@ -28,5 +28,5 @@ enum {
 @interface NSGlyphGenerator : NSObject
 - (void)generateGlyphsForGlyphStorage:(id <NSGlyphStorage>)glyphStorage desiredNumberOfCharacters:(NSUInteger)nChars glyphIndex:(NSUInteger *)glyphIndex characterIndex:(NSUInteger *)charIndex;
 
-+ (id) sharedGlyphGenerator;
++ (NSGlyphGenerator *)sharedGlyphGenerator;
 @end

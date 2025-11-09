@@ -1,7 +1,7 @@
 /*
 	NSKeyValueBinding.h
 	Application Kit
-	Copyright (c) 2002-2013, Apple Inc.
+	Copyright (c) 2002-2014, Apple Inc.
 	All rights reserved.
  */
 
@@ -25,7 +25,7 @@ APPKIT_EXTERN NSString *NSOptionsKey;
 @interface NSObject (NSKeyValueBindingCreation)
 
 + (void)exposeBinding:(NSString *)binding;    // bindings specified here will be exposed automatically in -exposedBindings (unless implementations explicitly filter them out, for example in subclasses)
-- (NSArray *)exposedBindings;   // for a new key exposed through this method, the default implementation simply falls back to key-value coding
+@property (readonly, copy) NSArray *exposedBindings;   // for a new key exposed through this method, the default implementation simply falls back to key-value coding
 - (Class)valueClassForBinding:(NSString *)binding;    // optional - mostly for matching transformers
 
 /* Bindings are considered to be a property of the object which is bound (the object the following two methods are sent to) and all information related to bindings should be retained by the object; all standard bindings on AppKit objects (views, cells, table columns, controllers) unbind their bindings automatically when they are released, but if you create key-value bindings for other kind of objects, you need to make sure that you remove those bindings when you release them (observed objects don't retain their observers, so controllers/model objects might continue referencing and messaging the objects that was bound to them).

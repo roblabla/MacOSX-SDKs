@@ -138,12 +138,15 @@
 .Fn OSAtomicDequeue "OSQueueHead *list" "size_t offset"
 .Sh DESCRIPTION
 These functions are thread and multiprocessor safe.  For each function, there
-is a version that does and another that does not incorporate a memory barrier.
-Barriers strictly order memory access on a weakly-ordered
-architecture such as PPC.  All loads and stores executed in sequential program
+is a version which incorporates a memory barrier and another version which does
+not.
+Barriers strictly order memory access on a weakly-ordered architecture such as
+ARM. All loads and stores executed in sequential program
 order before the barrier will complete before any load or store executed after
-the barrier.  On a uniprocessor, the barrier operation is typically a nop.
-On a multiprocessor, the barrier can be quite expensive.
+the barrier.
+The barrier operation is typically a no-op on uniprocessor systems and
+fully enabled on multiprocessor systems. On some platforms, such as ARM,
+the barrier can be quite expensive.
 .Pp
 Most code will want to use the barrier functions to ensure that memory shared
 between threads is properly synchronized.  For example, if you want to initialize
@@ -169,10 +172,8 @@ operation (eg,
 .Pp
 The memory address
 .Fa theValue
-must be naturally aligned, ie 32-bit aligned for 32-bit operations and 64-bit
+must be naturally aligned, i.e. 32-bit aligned for 32-bit operations and 64-bit
 aligned for 64-bit operations.
-.Pp
-The 64-bit operations are not implemented for 32-bit processes on PPC platforms.
 .Pp
 The 
 .Fn OSAtomicCompareAndSwap

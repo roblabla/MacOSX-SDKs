@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2012-2013 Apple Inc. All rights reserved.
+	Copyright 2012-2014 Apple Inc. All rights reserved.
 
 */
 
@@ -20,6 +20,7 @@ AVF_EXPORT NSString * const AVOutputSettingsPreset640x480		NS_AVAILABLE(10_9, 7_
 AVF_EXPORT NSString * const AVOutputSettingsPreset960x540   	NS_AVAILABLE(10_9, 7_0);
 AVF_EXPORT NSString * const AVOutputSettingsPreset1280x720  	NS_AVAILABLE(10_9, 7_0);
 AVF_EXPORT NSString * const AVOutputSettingsPreset1920x1080		NS_AVAILABLE(10_9, 7_0);
+AVF_EXPORT NSString * const AVOutputSettingsPreset3840x2160		NS_AVAILABLE(10_10, NA);
 
 @class AVOutputSettingsAssistantInternal;
 
@@ -40,15 +41,30 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 }
 
 /*!
+	@method availableOutputSettingsPresets
+	@abstract
+		Returns the list of presets that can be used to create an instance of AVOutputSettingsAssistant
+	@result
+		An NSArray of NSString objects, each of which is a preset identifier
+	@discussion
+		Each preset in the returned list can be passed in to +outputSettingsAssistantWithPreset: to create a new instance of AVOutputSettingsAssistant.
+ 
+		On iOS, the returned array may be different between different device models.
+ */
++ (NSArray *)availableOutputSettingsPresets NS_AVAILABLE(10_10, 7_0);
+
+/*!
 	@method outputSettingsAssistantWithPreset:
 	@abstract
 		Returns an instance of AVOutputSettingsAssistant corresponding to the given preset
 	@param presetIdentifier
 		The string identifier, for example AVOutputSettingsPreset1280x720, for the desired preset
 	@result
-		An instance of AVOutputSettingsAssistant with properties corresponding to the given preset, or nil if there is no such preset.
+		An instance of AVOutputSettingsAssistant with properties corresponding to the given preset, or nil if there is no such available preset.
 	@discussion
 		The properties of the returned object can be used as a guide for creating and configuring an AVAssetWriter object and one or more AVAssetWriterInput objects.  If all the suggested properties are respected in creating the AVAssetWriter, the resulting media file will conform to the criteria implied by the preset.
+ 
+		Use +availableOutputSettingsPresets to get a list of presets identifiers that can be used with this method.
  */
 + (instancetype)outputSettingsAssistantWithPreset:(NSString *)presetIdentifier;
 
@@ -112,8 +128,27 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 	@abstract
 		A CMTime describing the average frame duration (reciprocal of average frame rate) of your video data
 	@discussion
-		Setting this property will allow the receiver to make a more informed recommendation for the video settings that should be used.  After setting this property, you should re-query the videoSettings property to get the new recommendation.  The default value is 1/30, which means that the receiver is assuming that your source video has a frame rate of 30fps.
+		Setting this property will allow the receiver to make a more informed recommendation for the video settings that should be used.  After setting this property, you should re-query the videoSettings property to get the new recommendation.
+ 
+		The default value is 1/30, which means that the receiver is assuming that your source video has an average frame rate of 30fps.
+ 
+		It is an error to set this property to a value that is not positive or not numeric.  See CMTIME_IS_NUMERIC.
  */
 @property (nonatomic) CMTime sourceVideoAverageFrameDuration;
+
+/*!
+	@property sourceVideoMinFrameDuration
+	@abstract
+		A CMTime describing the minimum frame duration (reciprocal of the maximum frame rate) of your video data
+	@discussion
+		Setting this property will allow the receiver to make a more informed recommendation for the video settings that should be used.  After setting this property, you should re-query the videoSettings property to get the new recommendation.
+ 
+		If your source of video data is an instance of AVAssetReaderOutput, you can discover the minimum frame duration of your source asset using the AVAssetTrack.minFrameDuration property.
+ 
+		The default value is 1/30, which means that the receiver is assuming that your source video has a maximum frame rate of 30fps.
+ 
+		It is an error to set this property to a value that is not positive or not numeric.  See CMTIME_IS_NUMERIC.
+ */
+@property (nonatomic) CMTime sourceVideoMinFrameDuration NS_AVAILABLE(10_10, 7_0);
 
 @end

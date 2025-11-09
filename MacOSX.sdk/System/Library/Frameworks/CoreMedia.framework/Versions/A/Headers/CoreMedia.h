@@ -3,7 +3,7 @@
 	
 	Framework:  CoreMedia
 
-    Copyright 2010-2012 Apple Inc. All rights reserved.
+    Copyright 2010-2014 Apple Inc. All rights reserved.
     
 	To report bugs, go to:  http://developer.apple.com/bugreporter/
 
@@ -13,6 +13,7 @@
 #include <CoreMedia/CMTime.h>
 #include <CoreMedia/CMTimeRange.h>
 #include <CoreMedia/CMFormatDescription.h>
+#include <CoreMedia/CMFormatDescriptionBridge.h>
 #include <CoreMedia/CMAttachment.h>
 #include <CoreMedia/CMBufferQueue.h>
 #include <CoreMedia/CMBlockBuffer.h>
@@ -21,6 +22,7 @@
 #include <CoreMedia/CMMemoryPool.h>
 #include <CoreMedia/CMSync.h>
 #include <CoreMedia/CMTextMarkup.h>
+#include <CoreMedia/CMMetadata.h>
 #if TARGET_OS_IPHONE
 #include <CoreMedia/CMAudioClock.h>
 #else

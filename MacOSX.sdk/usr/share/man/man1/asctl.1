@@ -1,40 +1,20 @@
-.Dd February 7, 2012 
+.Dd February 20, 2014
 .Dt asctl 1 
-.Os
+.Os Darwin
 .Sh NAME 
 .Nm asctl
 .Nd App Sandbox Control Tool
 .Sh SYNOPSIS
 .Nm
 .Op Fl p
-.Op Fl -container-path Ar <path>
+.Op Fl l
 .Ar command
 .Op Ar arguments
 .Sh DESCRIPTION
-Many commands require an application specification as one of their arguments.
-Applications can be specified any of the following ways:
-.Bl -tag -width -ident
-.It <name>
-The application name as it appears in the Applications folder, with or
-without the \.app extension.
-For example, "TextEdit".
-.It <path>
-The path to the application binary or bundle.
-For example, "/Applications/TextEdit.app".
-.It --file <path>
-Explicitly indicate the following argument is to be interpreted as the path
-to the application binary or bundle.
-The --file flag removes ambiguity when an argument can be interpreted as either
-an application name or a valid path to an application.
-For example, "--file /Applications/TextEdit.app".
-.It --bundle <bundle Id>
-Interpret the following argument as the bunder identifier of the application.
-For example, "--bundle com.apple.TextEdit".
-.It --pid <process Id>
-Interpret the following argument as the process identifier of a running
-application.
-For example, "--pid 1".
-.El
+.Nm 
+is a facility for manipulating the filesystem container for an applications using App Sandbox.
+A container is a per-application filesytem hierarchy rooted in
+.Pa ~/Library/Containers.
 .Sh GENERAL COMMANDS
 .Bl -tag -width -ident
 .It help
@@ -62,6 +42,11 @@ Existing containers are normally automatically upgraded to the latest
 container schema when their associated applications are run.
 This command upgrades an existing container without running the associated
 application.
+.It container repair <app specification>
+Repair a container's structure by re-creating missing files and symlinks,
+repairing file permissions so that files are owned by and accessible to the current user, and
+rebuilding the application's sandbox information.
+This operation may require authorization by the user.
 .El
 .Sh CONTAINER ACL MANAGEMENT COMMANDS
 Each container has an access control list comprised of code requirements.
@@ -166,6 +151,46 @@ By default,
 displays paths relative to the user's home directory.
 This flag causes any paths in the output to be displayed as absolute paths
 instead.
+.It Fl l
+Write internal logging information to a temporary file.
+.El
+.Sh APPLICATION SPECIFIERS
+Many commands require an application specification as one of their arguments.
+Applications can be specified any of the following ways:
+.Bl -tag -width -ident
+.It <name>
+The application name as it appears in the Applications folder, with or
+without the \.app extension.
+For example, "TextEdit".
+.It <path>
+The path to the application binary or bundle.
+For example, 
+.Dl "/Applications/TextEdit.app".
+.It --file <path>
+Explicitly indicate the following argument is to be interpreted as the path
+to the application binary or bundle.
+The --file flag removes ambiguity when an argument can be interpreted as either
+an application name or a valid path to an application.
+For example, 
+.Dl "--file /Applications/TextEdit.app".
+.It --bundle <bundle Id>
+Interpret the following argument as the bunder identifier of the application.
+For example, 
+.Dl "--bundle com.apple.TextEdit".
+.It --pid <process Id>
+Interpret the following argument as the process identifier of a running
+application.
+For example, 
+.Dl "--pid 1".
+.It --container-path <path to container>
+Interpret the following argument as a path to an existing container and determine the application for that container .
+For example, 
+.Dl "--container-path ~/Library/Containers/com.apple.TextEdit".
+.El
+.Sh FILES
+.Bl -tag -width -ident
+.It Pa ~/Library/Containers
+The user's containers folder.
 .El
 .Sh SEE ALSO
 .Xr codesign 1

@@ -1,10 +1,10 @@
 /* CoreImage - CoreImageDefines.h
  
- Copyright (c) 2009 Apple Computer, Inc.
+ Copyright (c) 2009 Apple, Inc.
  All rights reserved. */
 
-#ifndef COREIMAGEDEFINES_H_JUPUTD8M
-#define COREIMAGEDEFINES_H_JUPUTD8M
+#ifndef COREIMAGEDEFINES_H
+#define COREIMAGEDEFINES_H
 
 
 #import "AvailabilityMacros.h"
@@ -21,4 +21,4 @@
 
 
 
-#endif /* end of include guard: COREIMAGEDEFINES_H_JUPUTD8M */
+#endif /* COREIMAGEDEFINES_H */

@@ -106,6 +106,7 @@ typedef __uint64_t	rlim_t;
 #define	PRIO_DARWIN_THREAD	3		/* Second argument is always 0 (current thread) */
 #define	PRIO_DARWIN_PROCESS	4		/* Second argument is a PID */
 
+
 /*
  * Range limitations for the value of the third parameter to setpriority().
  */
@@ -121,7 +122,7 @@ typedef __uint64_t	rlim_t;
 
 /*
  * use PRIO_DARWIN_NONUI to restrict a process's ability to make calls to
- * the GPU.
+ * the GPU. (deprecated)
  */
 #define PRIO_DARWIN_NONUI 0x1001
 
@@ -186,7 +187,8 @@ struct	rusage {
 #define RUSAGE_INFO_V0	0
 #define RUSAGE_INFO_V1	1
 #define RUSAGE_INFO_V2	2
-#define	RUSAGE_INFO_CURRENT RUSAGE_INFO_V2
+#define RUSAGE_INFO_V3	3
+#define	RUSAGE_INFO_CURRENT RUSAGE_INFO_V3
 
 typedef void *rusage_info_t;
 
@@ -246,12 +248,45 @@ struct rusage_info_v2 {
 	uint64_t ri_diskio_byteswritten;
 };
 
+struct rusage_info_v3 {
+	uint8_t  ri_uuid[16];
+	uint64_t ri_user_time;
+	uint64_t ri_system_time;
+	uint64_t ri_pkg_idle_wkups;
+	uint64_t ri_interrupt_wkups;
+	uint64_t ri_pageins;
+	uint64_t ri_wired_size;
+	uint64_t ri_resident_size;	
+	uint64_t ri_phys_footprint;
+	uint64_t ri_proc_start_abstime;
+	uint64_t ri_proc_exit_abstime;
+	uint64_t ri_child_user_time;
+	uint64_t ri_child_system_time;
+	uint64_t ri_child_pkg_idle_wkups;
+	uint64_t ri_child_interrupt_wkups;
+	uint64_t ri_child_pageins;
+	uint64_t ri_child_elapsed_abstime;
+	uint64_t ri_diskio_bytesread;
+	uint64_t ri_diskio_byteswritten;
+	uint64_t ri_cpu_time_qos_default;
+	uint64_t ri_cpu_time_qos_maintenance;
+	uint64_t ri_cpu_time_qos_background;
+	uint64_t ri_cpu_time_qos_utility;
+	uint64_t ri_cpu_time_qos_legacy;
+	uint64_t ri_cpu_time_qos_user_initiated;
+	uint64_t ri_cpu_time_qos_user_interactive;
+	uint64_t ri_billed_system_time;
+	uint64_t ri_serviced_system_time;
+};
+
+typedef struct rusage_info_v3 rusage_info_current;
+
 #endif /* __DARWIN_C_LEVEL >= __DARWIN_C_FULL */
 
 
 struct rusage_superset {
 	struct rusage 			ru;
-	struct rusage_info_v2 	ri;
+	rusage_info_current 	ri;
 };
 
 struct rusage_info_child {
@@ -261,11 +296,6 @@ struct rusage_info_child {
 	uint64_t ri_child_interrupt_wkups;
 	uint64_t ri_child_pageins;
 	uint64_t ri_child_elapsed_abstime;
-};
-
-struct rusage_info_diskiobytes {
-	volatile uint64_t ri_bytesread __attribute__((aligned(8)));
-	volatile uint64_t ri_byteswritten __attribute__((aligned(8)));
 };
 
 struct	user64_rusage {
@@ -359,6 +389,7 @@ struct rlimit {
  */
 #define RLIMIT_WAKEUPS_MONITOR		0x1 /* Configure the wakeups monitor. */
 #define	RLIMIT_CPU_USAGE_MONITOR	0x2 /* Configure the CPU usage monitor. */
+#define	RLIMIT_THREAD_CPULIMITS		0x3 /* Configure a blocking, per-thread, CPU limits. */
 
 /*
  * Flags for wakeups monitor control.

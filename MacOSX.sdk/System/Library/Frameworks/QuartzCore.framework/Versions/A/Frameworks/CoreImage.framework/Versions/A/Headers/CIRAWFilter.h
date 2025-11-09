@@ -1,6 +1,6 @@
 /* CoreImage - CIKernel.h
  
- Copyright (c) 2006 Apple Computer, Inc.
+ Copyright (c) 2006 Apple, Inc.
  All rights reserved. */
 
 
@@ -80,6 +80,24 @@ CORE_IMAGE_EXPORT NSString *const kCIInputEnableChromaticNoiseTrackingKey AVAILA
 
 /** NSNumber (double) : The amount of noise reduction applied. Range is 0 to 1. */
 CORE_IMAGE_EXPORT NSString *const kCIInputNoiseReductionAmountKey AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+
+/** NSNumber (BOOL) : Determines if the default vendor lens correction be on. default = YES if raw image used for initialization contains lens distortion parameters. */
+CORE_IMAGE_EXPORT NSString *const kCIInputEnableVendorLensCorrectionKey AVAILABLE_MAC_OS_X_VERSION_10_10_AND_LATER;
+
+/** NSNumber (double) : The amount of luminance noise reduction applied. Range is 0 to 1. */
+CORE_IMAGE_EXPORT NSString *const kCIInputLuminanceNoiseReductionAmountKey AVAILABLE_MAC_OS_X_VERSION_10_10_AND_LATER;
+
+/** NSNumber (double) : The amount of color noise reduction applied. Range is 0 to 1. */
+CORE_IMAGE_EXPORT NSString *const kCIInputColorNoiseReductionAmountKey AVAILABLE_MAC_OS_X_VERSION_10_10_AND_LATER;
+
+/** NSNumber (double) : The amount of noise reduction sharpness applied. Range is 0 to 1. */
+CORE_IMAGE_EXPORT NSString *const kCIInputNoiseReductionSharpnessAmountKey AVAILABLE_MAC_OS_X_VERSION_10_10_AND_LATER;
+
+/** NSNumber (double) : The amount of noise reduction contrast applied. Range is 0 to 1. */
+CORE_IMAGE_EXPORT NSString *const kCIInputNoiseReductionContrastAmountKey AVAILABLE_MAC_OS_X_VERSION_10_10_AND_LATER;
+
+/** NSNumber (double) : The amount of noise reduction detail applied. Range is 0 to 1. */
+CORE_IMAGE_EXPORT NSString *const kCIInputNoiseReductionDetailAmountKey AVAILABLE_MAC_OS_X_VERSION_10_10_AND_LATER;
 
 /** NSNumber (float) : The amount to boost the shadow areas of the image. Can be used to lighten details in shadows. Has no effect if the image used for initialization was not RAW. */
 CORE_IMAGE_EXPORT NSString *const kCIInputBoostShadowAmountKey AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;

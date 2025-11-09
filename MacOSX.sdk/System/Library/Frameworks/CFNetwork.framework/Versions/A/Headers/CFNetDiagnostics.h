@@ -3,7 +3,7 @@
  
 	 Contains:   CFNetDiagnostics interface
   
-	 Copyright:  Copyright (c) 2004-2008 Apple Inc. All rights reserved.
+	 Copyright:  Copyright (c) 2004-2013 Apple Inc. All rights reserved.
  
 	 Bugs?:	  For bug reports, consult the following page on
 				 the World Wide Web:
@@ -25,19 +25,11 @@
 #include <stdint.h>
 
 
-#include <Availability.h>
-
 #if PRAGMA_ONCE
 #pragma once
 #endif
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#if PRAGMA_ENUM_ALWAYSINT
-	#pragma enumsalwaysint on
-#endif
+CF_EXTERN_C_BEGIN
 
 
 /*
@@ -55,22 +47,22 @@ typedef struct __CFNetDiagnostic*	   CFNetDiagnosticRef;
  *  Discussion:
  *	Values for CFNetDiagnosticStatus
  */
-enum CFNetDiagnosticStatusValues {
+typedef CF_ENUM(int, CFNetDiagnosticStatusValues) {
 
   /*
    * There is no status, but no error has occured
    */
-  kCFNetDiagnosticNoErr		 = 0,
+  kCFNetDiagnosticNoErr	= 0,
 
   /*
    * An error occured that prevented the call from completing
    */
-  kCFNetDiagnosticErr		   = -66560L,
+  kCFNetDiagnosticErr = -66560L,
 
   /*
    * The connection appears to be working
    */
-  kCFNetDiagnosticConnectionUp  = -66559L,
+  kCFNetDiagnosticConnectionUp = -66559L,
   kCFNetDiagnosticConnectionIndeterminate = -66558L,
 
   /*
@@ -78,7 +70,6 @@ enum CFNetDiagnosticStatusValues {
    */
   kCFNetDiagnosticConnectionDown = -66557L
 };
-typedef enum CFNetDiagnosticStatusValues CFNetDiagnosticStatusValues;
 
 
 /*
@@ -87,7 +78,8 @@ typedef enum CFNetDiagnosticStatusValues CFNetDiagnosticStatusValues;
  *  Discussion:
  *	Returned by the various status and diagnostic calls
  */
-typedef CFIndex						 CFNetDiagnosticStatus;
+typedef CFIndex	CFNetDiagnosticStatus;
+
 /*
  *  CFNetDiagnosticCreateWithStreams()
  *  
@@ -111,16 +103,9 @@ typedef CFIndex						 CFNetDiagnosticStatus;
  *  Result:
  *	A CFNetDiagnosticRef referring to the current networking issue.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.4 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT CFNetDiagnosticRef 
-CFNetDiagnosticCreateWithStreams(
-  CFAllocatorRef	 alloc,
-  CFReadStreamRef	readStream,
-  CFWriteStreamRef   writeStream)							 __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_2_0);
+CFNetDiagnosticCreateWithStreams(CFAllocatorRef alloc, CFReadStreamRef readStream, CFWriteStreamRef writeStream) CF_AVAILABLE(10_4, 2_0);
 
 
 /*
@@ -141,15 +126,9 @@ CFNetDiagnosticCreateWithStreams(
  *  Result:
  *	A CFNetDiagnosticRef referring to the current networking issue.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.4 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT CFNetDiagnosticRef 
-CFNetDiagnosticCreateWithURL(
-  CFAllocatorRef   alloc,
-  CFURLRef		 url)									   __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_2_0);
+CFNetDiagnosticCreateWithURL(CFAllocatorRef alloc, CFURLRef url) CF_AVAILABLE(10_4, 2_0);
 
 
 
@@ -172,15 +151,9 @@ CFNetDiagnosticCreateWithURL(
  *	  The localized name that should appear to the user when
  *	  referring to the application.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.4 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT void 
-CFNetDiagnosticSetName(
-  CFNetDiagnosticRef   details,
-  CFStringRef		  name)								  __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_2_0);
+CFNetDiagnosticSetName(CFNetDiagnosticRef details, CFStringRef name) CF_AVAILABLE(10_4, 2_0);
 
 
 
@@ -202,13 +175,9 @@ CFNetDiagnosticSetName(
  *	CFNetDiagnosticErr if there was an error attempting to run the
  *	diagnosis.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.4 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT CFNetDiagnosticStatus 
-CFNetDiagnosticDiagnoseProblemInteractively(CFNetDiagnosticRef details) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_2_0);
+CFNetDiagnosticDiagnoseProblemInteractively(CFNetDiagnosticRef details) CF_AVAILABLE(10_4, 2_0);
 
 
 
@@ -236,25 +205,13 @@ CFNetDiagnosticDiagnoseProblemInteractively(CFNetDiagnosticRef details) __OSX_AV
  *	  network status. May be NULL. If it is not NULL, the client must
  *	  call CFRelease on the returned object.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.4 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT CFNetDiagnosticStatus 
-CFNetDiagnosticCopyNetworkStatusPassively(
-  CFNetDiagnosticRef   details,
-  CFStringRef *		description)						   __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_2_0);
+CFNetDiagnosticCopyNetworkStatusPassively(CFNetDiagnosticRef details, CFStringRef *description) CF_AVAILABLE(10_4, 2_0);
 
 
 
-#if PRAGMA_ENUM_ALWAYSINT
-	#pragma enumsalwaysint reset
-#endif
-
-#ifdef __cplusplus
-}
-#endif
+CF_EXTERN_C_END
 
 #endif /* __CFNETDIAGNOSTICS__ */
 

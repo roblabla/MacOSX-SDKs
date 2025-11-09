@@ -95,7 +95,7 @@
 
 #if !defined(CG_EXTERN_32)
 # if defined(__LP64__)
-#  define CG_EXTERN_32 CG_LOCAL
+#  define CG_EXTERN_32 CG_LOCAL __attribute__((unused))
 # else /* !defined(__LP64__) */
 #  define CG_EXTERN_32 CG_EXTERN
 # endif /* defined(__LP64__) */

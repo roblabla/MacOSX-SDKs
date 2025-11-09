@@ -1,7 +1,7 @@
 //
 //  SCNMaterial.h
 //
-//  Copyright (c) 2012-2013 Apple Inc. All rights reserved.
+//  Copyright (c) 2012-2014 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -81,16 +81,11 @@ SCN_EXTERN NSString * const SCNLightingModelBlinn;
 SCN_EXTERN NSString * const SCNLightingModelLambert;
 SCN_EXTERN NSString * const SCNLightingModelConstant;
 
-//key for setSemantic:forSymbol:options: options
-SCN_EXTERN NSString * const SCNProgramMappingChannelKey;  /* This key is optional and may be used in association with the SCNGeometrySourceSemanticTexcoord semantic. It allows to associates a mapping channel from the geometry to a symbol from the program source code. The mapping channel allows to plug programs that work with multiple texture coordinates. The associated value must be a NSNumber(integer) greater than zero. */
-
-//face culling modes
 typedef NS_ENUM(NSInteger, SCNCullMode) {
 	SCNCullBack  = 0,
 	SCNCullFront = 1,
 };
 
-//transparency modes
 typedef NS_ENUM(NSInteger, SCNTransparencyMode) {
 	SCNTransparencyModeAOne    = 0, 
 	SCNTransparencyModeRGBZero = 1, 
@@ -106,8 +101,8 @@ typedef NS_ENUM(NSInteger, SCNTransparencyMode) {
  @abstract A SCNMaterial determines how a geometry is rendered. It encapsulates the colors and textures that define the appearance of 3d geometries.
  */
 
-SCENEKIT_CLASS_AVAILABLE(10_8, NA)
-@interface SCNMaterial : NSObject <SCNAnimatable, SCNShadable, NSCopying>
+SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
+@interface SCNMaterial : NSObject <SCNAnimatable, SCNShadable, NSCopying, NSSecureCoding>
 {	
 @private
 	id _reserved;
@@ -135,7 +130,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, NA)
 /*! 
  @property ambient
  @abstract Specifies the receiver's ambient property.
- @discussion The ambient property specifies the amount of ambient light to reflect. This property has no visual impact on scenes that have no ambient light.
+ @discussion The ambient property specifies the amount of ambient light to reflect. This property has no visual impact on scenes that have no ambient light. Setting the ambient has no effect if locksAmbientWithDiffuse is set to YES.
  */
 @property(nonatomic, readonly) SCNMaterialProperty *ambient;
 
@@ -224,7 +219,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, NA)
 
 /*! 
  @property locksAmbientWithDiffuse
- @abstract Makes the ambient property automatically match the diffuse property. Defaults to NO. Animatable.
+ @abstract Makes the ambient property automatically match the diffuse property. Defaults to NO on 10.9 and before, defaults to YES otherwise. Animatable.
  */
 @property(nonatomic) BOOL locksAmbientWithDiffuse;
 
@@ -238,14 +233,14 @@ SCENEKIT_CLASS_AVAILABLE(10_8, NA)
  @property readsFromDepthBuffer
  @abstract Determines whether the receiver reads from the depth buffer when rendered. Defaults to YES.
  */
-@property(nonatomic) BOOL readsFromDepthBuffer SCENEKIT_AVAILABLE(10_9, NA);
+@property(nonatomic) BOOL readsFromDepthBuffer SCENEKIT_AVAILABLE(10_9, 8_0);
 
 /*!
  @property fresnelExponent
  @abstract Specifies the receiver's fresnel exponent value. Defaults to 0.0. Animatable.
  @discussion The effect of the reflectivity property is modulated by this property. The fresnelExponent changes the exponent of the reflectance. The bigger the exponent, the more concentrated the reflection is around the edges.
  */
-@property(nonatomic) CGFloat fresnelExponent SCENEKIT_AVAILABLE(10_9, NA);
+@property(nonatomic) CGFloat fresnelExponent SCENEKIT_AVAILABLE(10_9, 8_0);
 
 
 @end

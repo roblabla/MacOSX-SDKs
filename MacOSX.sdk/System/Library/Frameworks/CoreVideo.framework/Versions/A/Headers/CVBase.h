@@ -2,12 +2,12 @@
  *  CVBase.h
  *  CoreVideo
  *
- *  Copyright (c) 2004-2008 Apple Computer, Inc. All rights reserved.
+ *  Copyright (c) 2004-2014 Apple Inc. All rights reserved.
  *
  */
  
  /*! @header CVBase.h
-	@copyright 2004 Apple Computer, Inc. All rights reserved.
+	@copyright 2004-2014 Apple Inc. All rights reserved.
 	@availability Mac OS X 10.4 or later
     @discussion Here you can find the type declarations for CoreVideo. CoreVideo uses a CVTimeStamp structure to store video display time stamps.
 */
@@ -40,6 +40,14 @@
 #define __AVAILABILITY_INTERNAL__MAC_10_9        __AVAILABILITY_INTERNAL_WEAK_IMPORT
 #endif
 
+#ifndef __AVAILABILITY_INTERNAL__MAC_10_10
+#define __AVAILABILITY_INTERNAL__MAC_10_10        __AVAILABILITY_INTERNAL_WEAK_IMPORT
+#endif
+
+#ifndef __AVAILABILITY_INTERNAL__IPHONE_8_0
+#define __AVAILABILITY_INTERNAL__IPHONE_8_0        __AVAILABILITY_INTERNAL_WEAK_IMPORT
+#endif
+
 #include <CoreFoundation/CFBase.h>
 
 #if defined(__cplusplus)
@@ -52,6 +60,7 @@ extern "C" {
 #define COREVIDEO_SUPPORTS_COLORSPACE 	((TARGET_OS_MAC && ! TARGET_OS_IPHONE) || (TARGET_OS_WIN32))
 #define COREVIDEO_SUPPORTS_DISPLAYLINK 	(TARGET_OS_MAC && ! TARGET_OS_IPHONE)
 #define COREVIDEO_SUPPORTS_IOSURFACE	(TARGET_OS_IPHONE ? TARGET_OS_EMBEDDED : (TARGET_OS_MAC && ((MAC_OS_X_VERSION_MAX_ALLOWED >= 1060))))
+#define COREVIDEO_SUPPORTS_METAL        (COREVIDEO_SUPPORTS_IOSURFACE && TARGET_OS_IPHONE)
 
 #if TARGET_OS_WIN32 && defined(CV_BUILDING_CV) && defined(__cplusplus)
 #define CV_EXPORT extern "C" __declspec(dllexport) 

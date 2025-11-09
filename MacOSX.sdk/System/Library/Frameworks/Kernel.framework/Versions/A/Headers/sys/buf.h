@@ -275,7 +275,7 @@ void	buf_seterror(buf_t, errno_t);
 /*!
  @function buf_setflags
  @abstract Set flags on a buffer.
- @discussion: buffer_flags |= flags
+ @discussion buffer_flags |= flags
  @param bp Buffer whose flags to set.
  @param flags Flags to add to buffer's mask. B_LOCKED/B_NOCACHE/B_ASYNC/B_READ/B_WRITE/B_PAGEIO/B_FUA
  @return void.
@@ -285,7 +285,7 @@ void	buf_setflags(buf_t, int32_t);
 /*!
  @function buf_clearflags
  @abstract Clear flags on a buffer.
- @discussion: buffer_flags &= ~flags
+ @discussion buffer_flags &= ~flags
  @param bp Buffer whose flags to clear.
  @param flags Flags to remove from buffer's mask. B_LOCKED/B_NOCACHE/B_ASYNC/B_READ/B_WRITE/B_PAGEIO/B_FUA
  @return void.
@@ -1002,7 +1002,7 @@ buf_t	buf_geteblk(int);
 /*!
  @function buf_clear_redundancy_flags
  @abstract Clear flags on a buffer.
- @discussion: buffer_redundancy_flags &= ~flags
+ @discussion buffer_redundancy_flags &= ~flags
  @param bp Buffer whose flags to clear.
  @param flags Flags to remove from buffer's mask
  @return void.
@@ -1020,7 +1020,7 @@ uint32_t	buf_redundancy_flags(buf_t);
 /*!
  @function buf_setredundancyflags
  @abstract Set redundancy flags on a buffer.
- @discussion: buffer_redundancy_flags |= flags
+ @discussion buffer_redundancy_flags |= flags
  @param bp Buffer whose flags to set.
  @param flags Flags to add to buffer's redundancy flags
  @return void.

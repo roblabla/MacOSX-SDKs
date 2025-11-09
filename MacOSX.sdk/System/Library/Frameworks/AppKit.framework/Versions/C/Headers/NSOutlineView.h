@@ -1,7 +1,7 @@
 /*
     NSOutlineView.h
     Application Kit
-    Copyright (c) 1997-2013, Apple Inc.
+    Copyright (c) 1997-2014, Apple Inc.
     All rights reserved.
 */
 
@@ -33,7 +33,7 @@ typedef struct __OvFlags {
     unsigned int delegateWillDisplayOutlineCell:1;
     unsigned int subclassRowForItem:1;
     unsigned int selectionAdjustmentDisabled:1;
-    unsigned int autoExpandFlashState:1;
+    unsigned int unused:1;
     unsigned int animateExpandAndCollapse:1;
     unsigned int delegateHeightOfRowByItem:1;
     unsigned int delayRowEntryFreeDisabled:1;
@@ -46,8 +46,8 @@ typedef struct __OvFlags {
     unsigned int delegateAutoExpandItem:1;
     unsigned int delegateAutoCollapseItem:1;
     unsigned int delegateShouldAutoExpandItem:1;
-    unsigned int flashingEntireRow:1;
-    unsigned int flashingOutlineCell:1;
+    unsigned int unused2:1;
+    unsigned int _isSpringLoadingFlashing:1;
     unsigned int dontRedisplayOnFrameChange:1;
     unsigned int allowAutomaticAnimations:1;
     unsigned int dataSourceObjectValueByItem:1;
@@ -57,8 +57,8 @@ typedef struct __OvFlags {
     unsigned int dataSourceObjectValueByItem:1;
     unsigned int allowAutomaticAnimations:1;
     unsigned int dontRedisplayOnFrameChange:1;
-    unsigned int flashingOutlineCell:1;
-    unsigned int flashingEntireRow:1;
+    unsigned int _isSpringLoadingFlashing:1;
+    unsigned int unused2:1;
     unsigned int delegateShouldAutoExpandItem:1;
     unsigned int delegateAutoCollapseItem:1;
     unsigned int delegateAutoExpandItem:1;
@@ -71,7 +71,7 @@ typedef struct __OvFlags {
     unsigned int delayRowEntryFreeDisabled:1;
     unsigned int delegateHeightOfRowByItem:1;
     unsigned int animateExpandAndCollapse:1;
-    unsigned int autoExpandFlashState:1;
+    unsigned int unused:1;
     unsigned int selectionAdjustmentDisabled:1;
     unsigned int subclassRowForItem:1;
     unsigned int delegateWillDisplayOutlineCell:1;
@@ -94,7 +94,7 @@ enum { NSOutlineViewDropOnItemIndex = -1 };
 
 @class _NSOVRowEntry;
 
-@interface NSOutlineView : NSTableView {
+@interface NSOutlineView : NSTableView <NSAccessibilityOutline> {
   @private
     NSInteger            _numberOfRows;    
     _NSOVRowEntry       *_rowEntryTree;
@@ -130,14 +130,21 @@ enum { NSOutlineViewDropOnItemIndex = -1 };
 
 /* The 'outlineTableColumn' is the column that displays data in a hierarchical fashion, indented one identationlevel per level, decorated with indentation marker (disclosure triangle) on rows that are expandable. A nil 'outlineTableColumn' is silently ignored. On 10.5 and higher, this value is saved in encodeWithCoder: and restored in initWithCoder:.
 */
-- (void)setOutlineTableColumn:(NSTableColumn *)outlineTableColumn;
-- (NSTableColumn *)outlineTableColumn;
+@property (assign) NSTableColumn *outlineTableColumn;
 
-/* Returns YES if 'item' is expandable and can contain other items. May call out to the delegate, if required. 
+/* Returns YES if 'item' is expandable and can contain other items. May call out to the delegate/datasource, if required.
 */
 - (BOOL)isExpandable:(id)item;
 
-/* Expands 'item', if not already expanded, and all children if 'expandChildren' is YES. On 10.5 and higher, passing 'nil' for 'item' will expand  each item under the root. 
+/* Returns the number of children for a given parent item. This is mostly useful for static outline views where the data was encoded at design time; however, it will work for both static and non-static outline views. This may call out to the datasource, if required.
+ */
+- (NSInteger)numberOfChildrenOfItem:(id)item NS_AVAILABLE_MAC(10_10);
+
+/* Returns the child item for a given parent item. This is mostly useful for static outline views where the data was encoded at design time, however, it will work for both static and non-static outline views. This may call out to the datasource, if required.
+ */
+- (id)child:(NSInteger)index ofItem:(id)item NS_AVAILABLE_MAC(10_10);
+
+/* Expands 'item', if not already expanded, and all children if 'expandChildren' is YES. On 10.5 and higher, passing 'nil' for 'item' will expand  each item under the root.
 */
 - (void)expandItem:(id)item expandChildren:(BOOL)expandChildren;
 
@@ -161,7 +168,7 @@ enum { NSOutlineViewDropOnItemIndex = -1 };
 */
 - (void)reloadItem:(id)item;
 
-/* Returns the parent for 'item', or nil, if the parent is the root. Available in 10.4 and higher.
+/* Returns the parent for 'item', or nil, if the parent is the root.
 */
 - (id)parentForItem:(id)item;
 
@@ -178,18 +185,15 @@ enum { NSOutlineViewDropOnItemIndex = -1 };
 
 /* Controls the amount of indentation per level. Negative values are ignored, and only integral values are accepted. The default value is 16.0. An indentationPerLevel of 0 can be used to eliminate all indentation and make an NSOutlineView appear more like an NSTableView.
 */
-- (void)setIndentationPerLevel:(CGFloat)indentationPerLevel;
-- (CGFloat)indentationPerLevel;
+@property CGFloat indentationPerLevel;
 
 /* The indentation marker is the visual indicator that shows an item is expandable (i.e. disclosure triangle). The default value is YES.
 */
-- (void)setIndentationMarkerFollowsCell:(BOOL)drawInCell; 
-- (BOOL)indentationMarkerFollowsCell;
+@property BOOL indentationMarkerFollowsCell;
 
 /* If autoresizesOutlineColumn is YES, then the outlineTableColumn will automatically resize when there is a new expanded child at a particular depth level. The default value is YES.
 */
-- (void)setAutoresizesOutlineColumn:(BOOL)resize;
-- (BOOL)autoresizesOutlineColumn;
+@property BOOL autoresizesOutlineColumn;
 
 /* Returns the frame of the outline cell for a particular row, considering the current indentation and indentationMarkerFollowsCell value. If 'row' is not an expandable row, it will return NSZeroRect. This method can be overridden by subclassers to return a custom frame for the outline button cell. If an empty rect is returned, no outline cell will be drawn for that row.
 */
@@ -208,25 +212,24 @@ enum { NSOutlineViewDropOnItemIndex = -1 };
 
 /* Persistence. The value for autosaveExpandedItems is saved out in the nib file on Mac OS 10.5 or higher. The default value is NO. Calling setAutosaveExpandedItems:YES requires you to implement outlineView:itemForPersistentObject: and outlineView:persistentObjectForItem:.
 */
-- (BOOL)autosaveExpandedItems;
-- (void)setAutosaveExpandedItems:(BOOL)save;
+@property BOOL autosaveExpandedItems;
 
 #pragma mark -
 #pragma mark ***** Animated Insert / Remove / Move Support *****
 
-/* This method parallels TableView's -insertRowIndexes:withAnimation:, and is used in a way similar to NSMutableArray's -insertObjects:atIndexes: This method inserts each a new item at 'indexes' in 'parent'. 'parent' and be nil to insert items into the root of the OutlineView. The operation will not do anything if 'parent' is not expanded. The actual item values are determined by the dataSource methods -outlineView:child:ofItem: (note that this will only be called after an -endUpdates happens to ensure dataSource integrity). Calling this method multiple times within the same beginUpdates/endUpdates block is allowed; new insertions will move previously inserted new items, just like modifying an array. Inserting an index beyond what is available will throw an exception.  The "Cell Based TableView" must first call -beginUpdates before calling this method. 
+/* This method parallels TableView's -insertRowIndexes:withAnimation:, and is used in a way similar to NSMutableArray's -insertObjects:atIndexes: This method inserts a new item at 'indexes' in 'parent'. 'parent' can be nil to insert items into the root of the OutlineView. The operation will not do anything if 'parent' is not expanded. The actual item values are determined by the dataSource methods -outlineView:child:ofItem: (note that this will only be called after an -endUpdates happens to ensure dataSource integrity). Calling this method multiple times within the same beginUpdates/endUpdates block is allowed; new insertions will move previously inserted new items, just like modifying an array. Inserting an index beyond what is available will throw an exception.  The "Cell Based TableView" must first call -beginUpdates before calling this method. This method can also be used when "usesStaticContents=YES".
  */
 - (void)insertItemsAtIndexes:(NSIndexSet *)indexes inParent:(id)parent withAnimation:(NSTableViewAnimationOptions)animationOptions NS_AVAILABLE_MAC(10_7);
 
-/* This method parallels TableView's -removeRowsAtIndexes:withAnimation:, and is used similar to NSMutableArray's -removeObjectsAtIndexes:. The items at the given indexes will be removed from the parent. The operation will not do anything if 'parent' is not expanded. If one of the children items is expanded, then all of its children rows will also be removed. Calling this method multiple times within the same beginUpdates/endUpdates block is allowed; changes work just like modifying an array. Deleting an index beyond what is available will throw an exception.  The "Cell Based TableView" must first call -beginUpdates before calling this method. 
+/* This method parallels TableView's -removeRowsAtIndexes:withAnimation:, and is used similar to NSMutableArray's -removeObjectsAtIndexes:. The items at the given indexes will be removed from the parent. The operation will not do anything if 'parent' is not expanded. If one of the children items is expanded, then all of its children rows will also be removed. Calling this method multiple times within the same beginUpdates/endUpdates block is allowed; changes work just like modifying an array. Deleting an index beyond what is available will throw an exception.  The "Cell Based TableView" must first call -beginUpdates before calling this method. This method can also be used when "usesStaticContents=YES".
  */
 - (void)removeItemsAtIndexes:(NSIndexSet *)indexes inParent:(id)parent withAnimation:(NSTableViewAnimationOptions)animationOptions NS_AVAILABLE_MAC(10_7);
 
-/* This method parallels TableView's -moveRowAtIndex:toIndex:. The item located at 'fromIndex' is moved from the existing 'oldParent' to the given index in 'newParent'. 'newParent' can be the same as 'oldParent' to reorder an item within the same parent. This method can be called multiple times within the same beginUpdates/endUpdates block. Moving from an invalid index, or to an invalid index will throw an exception.  The "Cell Based TableView" must first call -beginUpdates before calling this method. 
+/* This method parallels TableView's -moveRowAtIndex:toIndex:. The item located at 'fromIndex' is moved from the existing 'oldParent' to the given index in 'newParent'. 'newParent' can be the same as 'oldParent' to reorder an item within the same parent. This method can be called multiple times within the same beginUpdates/endUpdates block. Moving from an invalid index, or to an invalid index will throw an exception.  The "Cell Based TableView" must first call -beginUpdates before calling this method. This method can also be used when "usesStaticContents=YES".
  */
 - (void)moveItemAtIndex:(NSInteger)fromIndex inParent:(id)oldParent toIndex:(NSInteger)toIndex inParent:(id)newParent NS_AVAILABLE_MAC(10_7);
 
-/* Modifications to an OutlineView should be done with the insertItems:/deleteItems:/moveItem: methods, and not the NSTableView primatives. Internally, these methods are used in the implementation, and while they are unavailable for callers they can be overridden by subclasses.
+/* Modifications to an OutlineView should be done with the insertItems:/deleteItems:/moveItem: methods, and not the NSTableView primitives. Internally, these methods are used in the implementation, and while they are unavailable for callers they can be overridden by subclasses.
  */
 - (void)insertRowsAtIndexes:(NSIndexSet *)indexes withAnimation:(NSTableViewAnimationOptions)animationOptions UNAVAILABLE_ATTRIBUTE;
 - (void)removeRowsAtIndexes:(NSIndexSet *)indexes withAnimation:(NSTableViewAnimationOptions)animationOptions UNAVAILABLE_ATTRIBUTE;
@@ -236,8 +239,7 @@ enum { NSOutlineViewDropOnItemIndex = -1 };
 
 /* Get and set the user interface layout direction. When set to NSUserInterfaceLayoutDirectionRightToLeft, the Outline View will show the disclosure triangle to the right of the cell instead of the left. The default value is NSUserInterfaceLayoutDirectionLeftToRight. This method is available for NSOutlineView on 10.7 and higher.
  */
-- (NSUserInterfaceLayoutDirection)userInterfaceLayoutDirection NS_AVAILABLE_MAC(10_7);
-- (void)setUserInterfaceLayoutDirection:(NSUserInterfaceLayoutDirection)value NS_AVAILABLE_MAC(10_7);
+@property NSUserInterfaceLayoutDirection userInterfaceLayoutDirection NS_AVAILABLE_MAC(10_7);
 
 @end
 
@@ -250,6 +252,9 @@ enum { NSOutlineViewDropOnItemIndex = -1 };
 
 #pragma mark -
 #pragma mark ***** Required Methods (unless bindings is used) *****
+
+/* NOTE: it is not acceptable to call reloadData or reloadItem from the implementation of any of the following four methods, and doing so can cause corruption in NSOutlineViews internal structures.
+ */
 
 - (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item;
 - (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item;

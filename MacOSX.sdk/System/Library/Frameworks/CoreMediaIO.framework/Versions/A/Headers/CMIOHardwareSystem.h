@@ -98,6 +98,8 @@ enum
                         A UInt32 where a value of 0 indicates the hardware is not suspended due to a system action, and a value of 1 means that it is.
                         For example, if a fast user switch occurs, the system will suspend all devices. While suspended, no operartions can be performed on any devices.
                         This property is never settable.
+    @constant       kCMIOHardwarePropertyAllowScreenCaptureDevices
+                        A UInt32 where 1 means that screen capture devices will be presented to the process. A 0 means screen capture devices will be ignored. By default, this property is 1.
 */
 enum
 {
@@ -111,7 +113,8 @@ enum
     kCMIOHardwarePropertyUnloadingIsAllowed             = 'unld',
     kCMIOHardwarePropertyPlugInForBundleID              = 'pibi',
     kCMIOHardwarePropertyUserSessionIsActiveOrHeadless  = 'user',
-    kCMIOHardwarePropertySuspendedBySystem              = 'sbys'
+    kCMIOHardwarePropertySuspendedBySystem              = 'sbys',
+    kCMIOHardwarePropertyAllowScreenCaptureDevices      = 'yes '
 };
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -2,12 +2,12 @@
  *  CoreVideo.h
  *  CoreVideo
  *
- *  Copyright (c) 2004 Apple Computer, Inc. All rights reserved.
+ *  Copyright (c) 2004-2014 Apple Inc. All rights reserved.
  *
  */
 /*!
     @header CoreVideo
-	@copyright 2004 Apple Computer, Inc. All rights reserved.
+	@copyright 2004-2014 Apple Inc. All rights reserved.
 	@availability Mac OS X 10.4 or later
     @abstract   Umbrella header for the CoreVideo framework
     @discussion This header includes all necesssary headers for the CoreVideo API

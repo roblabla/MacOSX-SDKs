@@ -1,7 +1,7 @@
 /*
 	NSPrinter.h
 	Application Kit
-	Copyright (c) 1994-2013, Apple Inc.
+	Copyright (c) 1994-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -12,12 +12,11 @@
 
 /* Valid return values for -[NSPrinter statusForTable:].
 */
-enum {
+typedef NS_ENUM(NSUInteger, NSPrinterTableStatus) {
     NSPrinterTableOK = 0,
     NSPrinterTableNotFound = 1,
     NSPrinterTableError = 2
 };
-typedef NSUInteger NSPrinterTableStatus;
 
 @interface NSPrinter: NSObject<NSCopying, NSCoding> {
     @private
@@ -52,15 +51,15 @@ typedef NSUInteger NSPrinterTableStatus;
 
 /* Return the printer's human-readable name, or an empty string for failure.
 */
-- (NSString *)name;
+@property (readonly, copy) NSString *name;
 
 /* Return a human-readable description of the printer's make and model, or an empty string for failure.
 */
-- (NSString *)type;
+@property (readonly, copy) NSString *type;
 
 /* Return the PostScript language level of the printer if it is a PostScript printer, or 0 if it is not a PostScript printer or for failure.
 */
-- (NSInteger)languageLevel;
+@property (readonly) NSInteger languageLevel;
 
 /* Given a valid paper name, return the corresponding paper size in points, or NSZeroSize for failure.
 */
@@ -68,7 +67,7 @@ typedef NSUInteger NSPrinterTableStatus;
 
 /* Return a dictionary that describes the printing device using entries keyed by the NSDevice... strings declared in NSGraphics.h. The only entry that is guaranteed to exist in the returned dictionary is NSDeviceIsPrinter.
 */
-- (NSDictionary *)deviceDescription;
+@property (readonly, copy) NSDictionary *deviceDescription;
 
 @end
 

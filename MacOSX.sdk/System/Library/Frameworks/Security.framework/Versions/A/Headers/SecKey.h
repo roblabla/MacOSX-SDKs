@@ -1,15 +1,15 @@
 /*
- * Copyright (c) 2002-2010 Apple, Inc. All Rights Reserved.
+ * Copyright (c) 2002-2014 Apple Inc. All Rights Reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
- *
+ * 
  * This file contains Original Code and/or Modifications of Original Code
  * as defined in and that are subject to the Apple Public Source License
  * Version 2.0 (the 'License'). You may not use this file except in
  * compliance with the License. Please obtain a copy of the License at
  * http://www.opensource.apple.com/apsl/ and read it before using this
  * file.
- *
+ * 
  * The Original Code and all software distributed under the License are
  * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
@@ -17,7 +17,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
  * Please see the License for the specific language governing rights and
  * limitations under the License.
- *
+ * 
  * @APPLE_LICENSE_HEADER_END@
  */
 
@@ -215,10 +215,26 @@ enum
     kSecp521r1          = 521,  // Yes, 521
 
     // Boundaries for RSA KeySizes - default is currently 2048
-		// RSA keysizes must be multiples of 8
+    // RSA keysizes must be multiples of 8
     kSecRSAMin          = 1024,
     kSecRSAMax          = 4096
 };
+
+/*!
+	@enum Key Parameter Constants
+	@discussion Predefined key constants used to get or set values in a dictionary.
+	These are used to provide explicit parameters to key generation functions
+	when non-default values are desired. See the description of the
+	SecKeyGeneratePair API for usage information.
+	@constant kSecPrivateKeyAttrs The value for this key is a CFDictionaryRef
+	 containing attributes specific for the private key to be generated.
+	@constant kSecPublicKeyAttrs The value for this key is a CFDictionaryRef
+	 containing attributes specific for the public key to be generated.
+*/
+extern CFTypeRef kSecPrivateKeyAttrs
+    __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_2_0);
+extern CFTypeRef kSecPublicKeyAttrs
+    __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_2_0);
 
 
 /*!
@@ -233,18 +249,18 @@ CFTypeID SecKeyGetTypeID(void)
 	@function SecKeyCreatePair
 	@abstract Creates an asymmetric key pair and stores it in a specified keychain.
 	@param keychainRef A reference to the keychain in which to store the private and public key items. Specify NULL for the default keychain.
-    @param algorithm An algorithm for the key pair. This parameter is ignored if a valid (non-zero) contextHandle is supplied.
-    @param keySizeInBits A key size for the key pair. This parameter is ignored if a valid (non-zero) contextHandle is supplied.
+	@param algorithm An algorithm for the key pair. This parameter is ignored if a valid (non-zero) contextHandle is supplied.
+	@param keySizeInBits A key size for the key pair. This parameter is ignored if a valid (non-zero) contextHandle is supplied.
 	@param contextHandle (optional) A CSSM_CC_HANDLE, or 0. If this argument is supplied, the algorithm and keySizeInBits parameters are ignored. If extra parameters are needed to generate a key (some algorithms require this), you should create a context using CSSM_CSP_CreateKeyGenContext, using the CSPHandle obtained by calling SecKeychainGetCSPHandle. Then use CSSM_UpdateContextAttributes to add parameters, and dispose of the context using CSSM_DeleteContext after calling this function.
 	@param publicKeyUsage A bit mask indicating all permitted uses for the new public key. CSSM_KEYUSE bit mask values are defined in cssmtype.h.
-    @param publicKeyAttr A bit mask defining attribute values for the new public key. The bit mask values are equivalent to a CSSM_KEYATTR_FLAGS and are defined in cssmtype.h.
-    @param privateKeyUsage A bit mask indicating all permitted uses for the new private key. CSSM_KEYUSE bit mask values are defined in cssmtype.h.
-    @param privateKeyAttr A bit mask defining attribute values for the new private key. The bit mask values are equivalent to a CSSM_KEYATTR_FLAGS and are defined in cssmtype.h.
-    @param initialAccess (optional) A SecAccess object that determines the initial access rights to the private key. The public key is given "any/any" access rights by default.
-    @param publicKey (optional) On return, the keychain item reference of the generated public key. Use the SecKeyGetCSSMKey function to obtain the CSSM_KEY. The caller must call CFRelease on this value if it is returned. Pass NULL if a reference to this key is not required.
-    @param privateKey (optional) On return, the keychain item reference of the generated private key. Use the SecKeyGetCSSMKey function to obtain the CSSM_KEY. The caller must call CFRelease on this value if it is returned. Pass NULL if a reference to this key is not required.
+	@param publicKeyAttr A bit mask defining attribute values for the new public key. The bit mask values are equivalent to a CSSM_KEYATTR_FLAGS and are defined in cssmtype.h.
+	@param privateKeyUsage A bit mask indicating all permitted uses for the new private key. CSSM_KEYUSE bit mask values are defined in cssmtype.h.
+	@param privateKeyAttr A bit mask defining attribute values for the new private key. The bit mask values are equivalent to a CSSM_KEYATTR_FLAGS and are defined in cssmtype.h.
+	@param initialAccess (optional) A SecAccess object that determines the initial access rights to the private key. The public key is given "any/any" access rights by default.
+	@param publicKey (optional) On return, the keychain item reference of the generated public key. Use the SecKeyGetCSSMKey function to obtain the CSSM_KEY. The caller must call CFRelease on this value if it is returned. Pass NULL if a reference to this key is not required.
+	@param privateKey (optional) On return, the keychain item reference of the generated private key. Use the SecKeyGetCSSMKey function to obtain the CSSM_KEY. The caller must call CFRelease on this value if it is returned. Pass NULL if a reference to this key is not required.
 	@result A result code. See "Security Error Codes" (SecBase.h).
-	@discussion This API is deprecated for 10.7 Plese use the SecKeyGeneratePair API
+	@discussion This API is deprecated for 10.7. Please use the SecKeyGeneratePair API instead.
 */
 OSStatus SecKeyCreatePair(
         SecKeychainRef keychainRef,
@@ -264,15 +280,15 @@ OSStatus SecKeyCreatePair(
 	@function SecKeyGenerate
 	@abstract Creates a symmetric key and optionally stores it in a specified keychain.
 	@param keychainRef (optional) A reference to the keychain in which to store the generated key. Specify NULL to generate a transient key.
-    @param algorithm An algorithm for the symmetric key. This parameter is ignored if a valid (non-zero) contextHandle is supplied.
-    @param keySizeInBits A key size for the key pair. This parameter is ignored if a valid (non-zero) contextHandle is supplied.
+	@param algorithm An algorithm for the symmetric key. This parameter is ignored if a valid (non-zero) contextHandle is supplied.
+	@param keySizeInBits A key size for the key pair. This parameter is ignored if a valid (non-zero) contextHandle is supplied.
 	@param contextHandle (optional) A CSSM_CC_HANDLE, or 0. If this argument is supplied, the algorithm and keySizeInBits parameters are ignored. If extra parameters are needed to generate a key (some algorithms require this), you should create a context using CSSM_CSP_CreateKeyGenContext, using the CSPHandle obtained by calling SecKeychainGetCSPHandle. Then use CSSM_UpdateContextAttributes to add parameters, and dispose of the context using CSSM_DeleteContext after calling this function.
 	@param keyUsage A bit mask indicating all permitted uses for the new key. CSSM_KEYUSE bit mask values are defined in cssmtype.h.
-    @param keyAttr A bit mask defining attribute values for the new key. The bit mask values are equivalent to a CSSM_KEYATTR_FLAGS and are defined in cssmtype.h.
-    @param initialAccess (optional) A SecAccess object that determines the initial access rights for the key. This parameter is ignored if the keychainRef is NULL.
-    @param keyRef On return, a reference to the generated key. Use the SecKeyGetCSSMKey function to obtain the CSSM_KEY. The caller must call CFRelease on this value if it is returned.
+	@param keyAttr A bit mask defining attribute values for the new key. The bit mask values are equivalent to a CSSM_KEYATTR_FLAGS and are defined in cssmtype.h.
+	@param initialAccess (optional) A SecAccess object that determines the initial access rights for the key. This parameter is ignored if the keychainRef is NULL.
+	@param keyRef On return, a reference to the generated key. Use the SecKeyGetCSSMKey function to obtain the CSSM_KEY. The caller must call CFRelease on this value if it is returned.
 	@result A result code.  See "Security Error Codes" (SecBase.h).
-	@discussion This API is deprecated for 10.7.  Plese use the SecKeyGenerateSymmetric API
+	@discussion This API is deprecated for 10.7.  Please use the SecKeyGenerateSymmetric API instead.
 */
 OSStatus SecKeyGenerate(
         SecKeychainRef keychainRef,
@@ -381,8 +397,8 @@ SecKeyRef SecKeyGenerateSymmetric(CFDictionaryRef parameters, CFErrorRef *error)
 
 
 /*!
- @function	SecKeyCreateFromData
- @abstract	Creates a symmetric key with the given data and sets the
+ @function SecKeyCreateFromData
+ @abstract Creates a symmetric key with the given data and sets the
  algorithm type specified.
 
  @param parameters A dictionary containing one or more key-value pairs.
@@ -427,9 +443,12 @@ SecKeyRef SecKeyCreateFromData(CFDictionaryRef parameters,
  the requested key size in bits.  Example sizes for RSA keys are:
  512, 768, 1024, 2048.
 
- Setting the following attributes explicitly will override the defaults below.
- See SecItem.h for detailed information on these attributes including the types
- of the values.
+ The values below may be set either in the top-level dictionary or in a
+ dictionary that is the value of the kSecPrivateKeyAttrs or
+ kSecPublicKeyAttrs key in the top-level dictionary.  Setting these
+ attributes explicitly will override the defaults below.  See SecItem.h
+ for detailed information on these attributes including the types of
+ the values.
 
  * kSecAttrLabel default NULL
  * kSecUseKeychain default NULL, which specifies the default keychain
@@ -477,12 +496,9 @@ typedef void (^SecKeyGeneratePairBlock)(SecKeyRef publicKey, SecKeyRef privateKe
  containing the requested key size in bits.  Example sizes for RSA
  keys are: 512, 768, 1024, 2048.
 
- The values below may be set either in the top-level dictionary or in a
- dictionary that is the value of the kSecPrivateKeyAttrs or
- kSecPublicKeyAttrs key in the top-level dictionary.  Setting these
- attributes explicitly will override the defaults below.  See SecItem.h
- for detailed information on these attributes including the types of
- the values.
+ Setting the following attributes explicitly will override the defaults below.
+ See SecItem.h for detailed information on these attributes including the types
+ of the values.
 
  * kSecAttrLabel default NULL
  * kSecAttrIsPermanent if this key is present and has a Boolean

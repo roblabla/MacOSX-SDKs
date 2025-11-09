@@ -124,74 +124,85 @@
 .\" ========================================================================
 .\"
 .IX Title "PERLDELTA 1"
-.TH PERLDELTA 1 "2012-10-31" "perl v5.16.2" "Perl Programmers Reference Guide"
+.TH PERLDELTA 1 "2013-03-11" "perl v5.16.3" "Perl Programmers Reference Guide"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
 .nh
 .SH "NAME"
-perldelta \- what is new for perl v5.16.2
+perldelta \- what is new for perl v5.16.3
 .SH "DESCRIPTION"
 .IX Header "DESCRIPTION"
-This document describes differences between the 5.16.1 release and
-the 5.16.2 release.
+This document describes differences between the 5.16.2 release and
+the 5.16.3 release.
 .PP
-If you are upgrading from an earlier release such as 5.16.0, first read
-perl5161delta, which describes differences between 5.16.0 and
-5.16.1.
+If you are upgrading from an earlier release such as 5.16.1, first read
+perl5162delta, which describes differences between 5.16.1 and
+5.16.2.
+.SH "Core Enhancements"
+.IX Header "Core Enhancements"
+No changes since 5.16.0.
+.SH "Security"
+.IX Header "Security"
+This release contains one major and a number of minor security fixes.
+These latter are included mainly to allow the test suite to pass cleanly
+with the clang compiler's address sanitizer facility.
+.SS "\s-1CVE\-2013\-1667:\s0 memory exhaustion with arbitrary hash keys"
+.IX Subsection "CVE-2013-1667: memory exhaustion with arbitrary hash keys"
+With a carefully crafted set of hash keys (for example arguments on a
+\&\s-1URL\s0), it is possible to cause a hash to consume a large amount of memory
+and \s-1CPU\s0, and thus possibly to achieve a Denial-of-Service.
+.PP
+This problem has been fixed.
+.SS "wrap-around with \s-1IO\s0 on long strings"
+.IX Subsection "wrap-around with IO on long strings"
+Reading or writing strings greater than 2**31 bytes in size could segfault
+due to integer wraparound.
+.PP
+This problem has been fixed.
+.SS "memory leak in Encode"
+.IX Subsection "memory leak in Encode"
+The \s-1UTF\-8\s0 encoding implementation in Encode.xs had a memory leak which has been
+fixed.
 .SH "Incompatible Changes"
 .IX Header "Incompatible Changes"
-There are no changes intentionally incompatible with 5.16.0
-If any exist, they are bugs, and we request that you submit a
-report.  See \*(L"Reporting Bugs\*(R" below.
+There are no changes intentionally incompatible with 5.16.0. If any
+exist, they are bugs and reports are welcome.
+.SH "Deprecations"
+.IX Header "Deprecations"
+There have been no deprecations since 5.16.0.
 .SH "Modules and Pragmata"
 .IX Header "Modules and Pragmata"
 .SS "Updated Modules and Pragmata"
 .IX Subsection "Updated Modules and Pragmata"
 .IP "\(bu" 4
-Module::CoreList has been upgraded from version 2.70 to version 2.76.
-.SH "Configuration and Compilation"
-.IX Header "Configuration and Compilation"
+Encode has been upgraded from version 2.44 to version 2.44_01.
 .IP "\(bu" 4
-configuration should no longer be confused by ls colorization
-.SH "Platform Support"
-.IX Header "Platform Support"
-.SS "Platform-Specific Notes"
-.IX Subsection "Platform-Specific Notes"
-.IP "\s-1AIX\s0" 4
-.IX Item "AIX"
-Configure now always adds \-qlanglvl=extc99 to the \s-1CC\s0 flags on \s-1AIX\s0 when
-using xlC.  This will make it easier to compile a number of XS-based modules
-that assume C99 [perl #113778].
-.SH "Selected Bug Fixes"
-.IX Header "Selected Bug Fixes"
+Module::CoreList has been upgraded from version 2.76 to version 2.76_02.
 .IP "\(bu" 4
-fix /\eh/ equivalence with /[\eh]/
-.Sp
-see [perl #114220]
+XS::APItest has been upgraded from version 0.38 to version 0.39.
 .SH "Known Problems"
 .IX Header "Known Problems"
-There are no new known problems.
+None.
 .SH "Acknowledgements"
 .IX Header "Acknowledgements"
-Perl 5.16.2 represents approximately 2 months of development since Perl
-5.16.1 and contains approximately 740 lines of changes across 20 files
-from 9 authors.
+Perl 5.16.3 represents approximately 4 months of development since Perl 5.16.2
+and contains approximately 870 lines of changes across 39 files from 7 authors.
 .PP
-Perl continues to flourish into its third decade thanks to a vibrant
-community of users and developers. The following people are known to
-have contributed the improvements that became Perl 5.16.2:
+Perl continues to flourish into its third decade thanks to a vibrant community
+of users and developers. The following people are known to have contributed the
+improvements that became Perl 5.16.3:
 .PP
-Andy Dougherty, Craig A. Berry, Darin McBride, Dominic Hargreaves, Karen
-Etheridge, Karl Williamson, Peter Martini, Ricardo Signes, Tony Cook.
+Andy Dougherty, Chris 'BinGOs' Williams, Dave Rolsky, David Mitchell, Michael
+Schroeder, Ricardo Signes, Yves Orton.
 .PP
-The list above is almost certainly incomplete as it is automatically
-generated from version control history. In particular, it does not
-include the names of the (very much appreciated) contributors who
-reported issues to the Perl bug tracker.
+The list above is almost certainly incomplete as it is automatically generated
+from version control history. In particular, it does not include the names of
+the (very much appreciated) contributors who reported issues to the Perl bug
+tracker.
 .PP
-For a more complete list of all of Perl's historical contributors,
-please see the \fI\s-1AUTHORS\s0\fR file in the Perl source distribution.
+For a more complete list of all of Perl's historical contributors, please see
+the \fI\s-1AUTHORS\s0\fR file in the Perl source distribution.
 .SH "Reporting Bugs"
 .IX Header "Reporting Bugs"
 If you find what you think is a bug, you might check the articles

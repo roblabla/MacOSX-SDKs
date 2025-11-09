@@ -3,13 +3,14 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2013 Apple Inc. All rights reserved.
+	Copyright 2010-2014 Apple Inc. All rights reserved.
 
 */
 
 #import <AVFoundation/AVBase.h>
 #import <Foundation/Foundation.h>
 #import <CoreMedia/CMTime.h>
+#import <CoreMedia/CMTimeRange.h>
 #import <CoreMedia/CMSampleBuffer.h>
 #import <CoreVideo/CVPixelBuffer.h>
 #import <CoreMedia/CMFormatDescription.h>
@@ -19,12 +20,14 @@
 /*!
  @class AVAssetWriterInput
  @abstract
-	AVAssetWriterInput defines an interface for appending media samples packaged as CMSampleBuffer objects to a single track of the output file of an AVAssetWriter.
+	AVAssetWriterInput defines an interface for appending either new media samples or references to existing media samples packaged as CMSampleBuffer objects to a single track of the output file of an AVAssetWriter.
  
  @discussion
 	Clients that need to write multiple concurrent tracks of media data should use one AVAssetWriterInput instance per track. In order to write multiple concurrent tracks with ideal interleaving of media data, clients should observe the value returned by the readyForMoreMediaData property of each AVAssetWriterInput instance.
 	
 	AVAssetWriterInput also supports writing per-track metadata collections to the output file.
+
+	As of OS X 10.10 and iOS 8.0 AVAssetWriterInput can also be used to create tracks that are not self-contained.  Such tracks reference sample data that is located in another file. This is currently supported only for instances of AVAssetWriterInput attached to an instance of AVAssetWriter that writes files of type AVFileTypeQuickTimeMovie.
  */
 NS_CLASS_AVAILABLE(10_7, 4_1)
 @interface AVAssetWriterInput : NSObject
@@ -50,7 +53,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 	
 	Passing nil for output settings instructs the input to pass through appended samples, doing no processing before they are written to the output file.  This is useful if, for example, you are appending buffers that are already in a desirable compressed format.  However, if not writing to a QuickTime Movie file (i.e. the AVAssetWriter was initialized with a file type other than AVFileTypeQuickTimeMovie), AVAssetWriter only supports passing through a restricted set of media types and subtypes.  In order to pass through media data to files other than AVFileTypeQuickTimeMovie, a non-NULL format hint must be provided using +assetWriterInputWithMediaType:outputSettings:sourceFormatHint: instead of this method.
  
-	For AVMediaTypeAudio the following keys are not currently supported in the outputSettings dictionary: AVEncoderAudioQualityKey, AVEncoderAudioQualityForVBRKey, AVSampleRateConverterAudioQualityKey, and AVSampleRateConverterAlgorithmKey.  When using this method to construct a new instance, an audio settings dictionary must be fully specified, meaning that it must contain AVFormatIDKey, AVSampleRateKey, and AVNumberOfChannelsKey.  If no other channel layout information is available, a value of 1 for AVNumberOfChannelsKey will result in mono output and a value of 2 will result in stereo output.  If AVNumberOfChannelsKey specifies a channel count greater than 2, the dictionary must also specify a value for AVChannelLayoutKey.  For kAudioFormatLinearPCM, all relevant AVLinearPCM*Key keys must be included, and for kAudioFormatAppleLossless, AVEncoderBitDepthHintKey keys must be included.  See +assetWriterInputWithMediaType:outputSettings:sourceFormatHint: for a way to avoid having to specify a value for each of those keys.
+	For AVMediaTypeAudio the following keys are not currently supported in the outputSettings dictionary: AVEncoderAudioQualityKey and AVSampleRateConverterAudioQualityKey.  When using this method to construct a new instance, an audio settings dictionary must be fully specified, meaning that it must contain AVFormatIDKey, AVSampleRateKey, and AVNumberOfChannelsKey.  If no other channel layout information is available, a value of 1 for AVNumberOfChannelsKey will result in mono output and a value of 2 will result in stereo output.  If AVNumberOfChannelsKey specifies a channel count greater than 2, the dictionary must also specify a value for AVChannelLayoutKey.  For kAudioFormatLinearPCM, all relevant AVLinearPCM*Key keys must be included, and for kAudioFormatAppleLossless, AVEncoderBitDepthHintKey keys must be included.  See +assetWriterInputWithMediaType:outputSettings:sourceFormatHint: for a way to avoid having to specify a value for each of those keys.
  
 	For AVMediaTypeVideo, any output settings dictionary must request a compressed video format.  This means that the value passed in for outputSettings must follow the rules for compressed video output, as laid out in AVVideoSettings.h.  When using this method to construct a new instance, a video settings dictionary must be fully specified, meaning that it must contain AVVideoCodecKey, AVVideoWidthKey, and AVVideoHeightKey.  See +assetWriterInputWithMediaType:outputSettings:sourceFormatHint: for a way to avoid having to specify a value for each of those keys.  On iOS, the only values currently supported for AVVideoCodecKey are AVVideoCodecH264 and AVVideoCodecJPEG.  AVVideoCodecH264 is not supported on iPhone 3G.  For AVVideoScalingModeKey, the value AVVideoScalingModeFit is not supported.
  */
@@ -94,11 +97,11 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 	
 	Passing nil for output settings instructs the input to pass through appended samples, doing no processing before they are written to the output file.  This is useful if, for example, you are appending buffers that are already in a desirable compressed format.  However, if not writing to a QuickTime Movie file (i.e. the AVAssetWriter was initialized with a file type other than AVFileTypeQuickTimeMovie), AVAssetWriter only supports passing through a restricted set of media types and subtypes.  In order to pass through media data to files other than AVFileTypeQuickTimeMovie, a non-NULL format hint must be provided using -initWithMediaType:outputSettings:sourceFormatHint: instead of this method.
  
-	For AVMediaTypeAudio the following keys are not currently supported in the outputSettings dictionary: AVEncoderAudioQualityKey, AVEncoderAudioQualityForVBRKey, AVSampleRateConverterAudioQualityKey, and AVSampleRateConverterAlgorithmKey.  When using this initializer, an audio settings dictionary must be fully specified, meaning that it must contain AVFormatIDKey, AVSampleRateKey, and AVNumberOfChannelsKey.  If no other channel layout information is available, a value of 1 for AVNumberOfChannelsKey will result in mono output and a value of 2 will result in stereo output.  If AVNumberOfChannelsKey specifies a channel count greater than 2, the dictionary must also specify a value for AVChannelLayoutKey.  For kAudioFormatLinearPCM, all relevant AVLinearPCM*Key keys must be included, and for kAudioFormatAppleLossless, AVEncoderBitDepthHintKey keys must be included.  See -initWithMediaType:outputSettings:sourceFormatHint: for a way to avoid having to specify a value for each of those keys.
+	For AVMediaTypeAudio the following keys are not currently supported in the outputSettings dictionary: AVEncoderAudioQualityKey and AVSampleRateConverterAudioQualityKey.  When using this initializer, an audio settings dictionary must be fully specified, meaning that it must contain AVFormatIDKey, AVSampleRateKey, and AVNumberOfChannelsKey.  If no other channel layout information is available, a value of 1 for AVNumberOfChannelsKey will result in mono output and a value of 2 will result in stereo output.  If AVNumberOfChannelsKey specifies a channel count greater than 2, the dictionary must also specify a value for AVChannelLayoutKey.  For kAudioFormatLinearPCM, all relevant AVLinearPCM*Key keys must be included, and for kAudioFormatAppleLossless, AVEncoderBitDepthHintKey keys must be included.  See -initWithMediaType:outputSettings:sourceFormatHint: for a way to avoid having to specify a value for each of those keys.
  
 	For AVMediaTypeVideo, any output settings dictionary must request a compressed video format.  This means that the value passed in for outputSettings must follow the rules for compressed video output, as laid out in AVVideoSettings.h.  When using this initializer, a video settings dictionary must be fully specified, meaning that it must contain AVVideoCodecKey, AVVideoWidthKey, and AVVideoHeightKey.  See -initWithMediaType:outputSettings:sourceFormatHint: for a way to avoid having to specify a value for each of those keys.  On iOS, the only values currently supported for AVVideoCodecKey are AVVideoCodecH264 and AVVideoCodecJPEG.  AVVideoCodecH264 is not supported on iPhone 3G.  For AVVideoScalingModeKey, the value AVVideoScalingModeFit is not supported.
  */
-- (id)initWithMediaType:(NSString *)mediaType outputSettings:(NSDictionary *)outputSettings;
+- (instancetype)initWithMediaType:(NSString *)mediaType outputSettings:(NSDictionary *)outputSettings;
 
 /*!
  @method initWithMediaType:outputSettings:sourceFormatHint:
@@ -119,7 +122,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  
 	An NSInvalidArgumentException will be thrown if the media type of the format description does not match the media type string passed into this method.
  */
-- (id)initWithMediaType:(NSString *)mediaType outputSettings:(NSDictionary *)outputSettings sourceFormatHint:(CMFormatDescriptionRef)sourceFormatHint NS_AVAILABLE(10_8, 6_0);
+- (instancetype)initWithMediaType:(NSString *)mediaType outputSettings:(NSDictionary *)outputSettings sourceFormatHint:(CMFormatDescriptionRef)sourceFormatHint NS_AVAILABLE(10_8, 6_0);
 
 /*!
  @property mediaType
@@ -169,13 +172,13 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 	Indicates the readiness of the input to accept more media data.
  
  @discussion
-    When there are multiple inputs, AVAssetWriter tries to write media data in an ideal interleaving pattern for efficiency in storage and playback. Each of its inputs signals its readiness to receive media data for writing according to that pattern via the value of readyForMoreMediaData. If readyForMoreMediaData is YES, an input can accept additional media data while maintaining appropriate interleaving. If media data is appended to an input after readyForMoreMediaData becomes NO, AVAssetWriter may need to write media data to its output without regard for ideal interleaving.
- 
-    Generally, clients should append media data to an input only while its readyForMoreMediaData property is YES.
+    When there are multiple inputs, AVAssetWriter tries to write media data in an ideal interleaving pattern for efficiency in storage and playback. Each of its inputs signals its readiness to receive media data for writing according to that pattern via the value of readyForMoreMediaData. You can append media data to an input only while its readyForMoreMediaData property is YES.
  
     Clients writing media data from a non-real-time source, such as an instance of AVAssetReader, should hold off on generating or obtaining more media data to append to an input when the value of readyForMoreMediaData is NO. To help with control of the supply of non-real-time media data, such clients can use -requestMediaDataWhenReadyOnQueue:usingBlock in order to specify a block that the input should invoke whenever it's ready for input to be appended.
 
     Clients writing media data from a real-time source, such as an instance of AVCaptureOutput, should set the input's expectsMediaDataInRealTime property to YES to ensure that the value of readyForMoreMediaData is calculated appropriately. When expectsMediaDataInRealTime is YES, readyForMoreMediaData will become NO only when the input cannot process media samples as quickly as they are being provided by the client. If readyForMoreMediaData becomes NO for a real-time source, the client may need to drop samples or consider reducing the data rate of appended samples.
+ 
+	When the value of canPerformMultiplePasses is YES for any input attached to this input's asset writer, the value for this property may start as NO and/or be NO for long periods of time.
  
     The value of readyForMoreMediaData will often change from NO to YES asynchronously, as previously supplied media data is processed and written to the output.  It is possible for all of an AVAssetWriter's AVAssetWriterInputs temporarily to return NO for readyForMoreMediaData.
 	
@@ -190,6 +193,8 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 
  @discussion
     Clients appending media data to an input from a real-time source, such as an AVCaptureOutput, should set expectsMediaDataInRealTime to YES. This will ensure that readyForMoreMediaData is calculated appropriately for real-time usage.
+ 
+	It is an error to set this property to YES when the value for performsMultiPassEncodingIfSupported is YES.  It is also an error for an asset writer to contain an input with this property set to YES when any of its other inputs have a value of YES for performsMultiPassEncodingIfSupported.
 
 	This property cannot be set after writing on the receiver's AVAssetWriter has started.
  */
@@ -262,6 +267,8 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  
  	If you are working with high bit depth sources the following yuv pixel formats are recommended when encoding to ProRes: kCVPixelFormatType_4444AYpCbCr16, kCVPixelFormatType_422YpCbCr16, and kCVPixelFormatType_422YpCbCr10. When working in the RGB domain kCVPixelFormatType_64ARGB is recommended. Scaling and color matching are not currently supported when using AVAssetWriter with any of these high bit depth pixel formats. Please make sure that your track's output settings dictionary specifies the same width and height as the buffers you will be appending. Do not include AVVideoScalingModeKey or AVVideoColorPropertiesKey.
 
+	As of OS X 10.10 and iOS 8.0, this method can be used to add sample buffers that reference existing data in a file instead of containing media data to be appended to the file. This can be used to generate tracks that are not self-contained. In order to append such a sample reference to the track create a CMSampleBufferRef with a NULL dataBuffer and dataReady set to true and set the kCMSampleBufferAttachmentKey_SampleReferenceURL and kCMSampleBufferAttachmentKey_SampleReferenceByteOffset attachments on the sample buffer. Further documentation on how to create such a "sample reference" sample buffer can be found in the description of the kCMSampleBufferAttachmentKey_SampleReferenceURL and kCMSampleBufferAttachmentKey_SampleReferenceByteOffset attachment keys in the CMSampleBuffer documentation.
+
 	Before calling this method, you must ensure that the receiver is attached to an AVAssetWriter via a prior call to -addInput: and that -startWriting has been called on the asset writer.
  */
 - (BOOL)appendSampleBuffer:(CMSampleBufferRef)sampleBuffer;
@@ -273,6 +280,8 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 
  @discussion
 	Clients that are monitoring each input's readyForMoreMediaData value must call markAsFinished on an input when they are done appending buffers to it.  This is necessary to prevent other inputs from stalling, as they may otherwise wait forever for that input's media data, attempting to complete the ideal interleaving pattern.
+ 
+	After invoking this method from the serial queue passed to -requestMediaDataWhenReadyOnQueue:usingBlock:, the receiver is guaranteed to issue no more invocations of the block passed to that method.  The same is true of -respondToEachPassDescriptionOnQueue:usingBlock:.
  
 	Before calling this method, you must ensure that the receiver is attached to an AVAssetWriter via a prior call to -addInput: and that -startWriting has been called on the asset writer.
  */
@@ -293,7 +302,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 
 	This property cannot be set after writing on the receiver's AVAssetWriter has started.
  */
-@property (nonatomic, copy) NSString *languageCode NS_AVAILABLE(10_9, TBD);
+@property (nonatomic, copy) NSString *languageCode NS_AVAILABLE(10_9, 7_0);
 
 /*!
  @property extendedLanguageTag
@@ -305,7 +314,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 
 	This property cannot be set after writing on the receiver's AVAssetWriter has started.	
  */
-@property (nonatomic, copy) NSString *extendedLanguageTag NS_AVAILABLE(10_9, TBD);
+@property (nonatomic, copy) NSString *extendedLanguageTag NS_AVAILABLE(10_9, 7_0);
 
 @end
 
@@ -322,7 +331,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 
 	This property cannot be set after writing on the receiver's AVAssetWriter has started.
 */
-@property (nonatomic) CGSize naturalSize NS_AVAILABLE(10_9, TBD);
+@property (nonatomic) CGSize naturalSize NS_AVAILABLE(10_9, 7_0);
 
 /*!
  @property transform
@@ -347,11 +356,11 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 	The preferred volume level to be stored in the output file.
  
  @discussion
-	The value for this property should typically be in the range of 0.0 to 1.0.  The default value is 1.0, which is equivalent to a "normal" volume level.
+	The value for this property should typically be in the range of 0.0 to 1.0.  The default value is 1.0, which is equivalent to a "normal" volume level for audio media type. For all other media types the default value is 0.0.
  
 	This property cannot be set after writing on the receiver's AVAssetWriter has started.
  */
-@property (nonatomic) float preferredVolume NS_AVAILABLE(10_9, TBD);
+@property (nonatomic) float preferredVolume NS_AVAILABLE(10_9, 7_0);
 
 @end
 
@@ -364,11 +373,11 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 	For file types that support enabled and disabled tracks, such as QuickTime Movie files, specifies whether the track corresponding to the receiver should be enabled by default for playback and processing. The default value is YES.
  
  @discussion
-	When an input group is added to an AVAssetWriter (see -[AVAssetWriter addInputGroup:]), the value of marksOutputTrackAsEnabled will automatically be set to YES for the default input and set to NO for all of the other inputs in the group.
+	When an input group is added to an AVAssetWriter (see -[AVAssetWriter addInputGroup:]), the value of marksOutputTrackAsEnabled will automatically be set to YES for the default input and set to NO for all of the other inputs in the group.  In this case, if a new value is set on this property then an exception will be raised.
 
 	This property cannot be set after writing on the receiver's AVAssetWriter has started.
  */
-@property (nonatomic) BOOL marksOutputTrackAsEnabled NS_AVAILABLE(10_9, TBD);
+@property (nonatomic) BOOL marksOutputTrackAsEnabled NS_AVAILABLE(10_9, 7_0);
 
 /*!
  @property mediaTimeScale
@@ -381,6 +390,54 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 	This property cannot be set after writing has started.
  */
 @property (nonatomic) CMTimeScale mediaTimeScale NS_AVAILABLE(10_7, 4_3);
+
+/*!
+ @property preferredMediaChunkDuration
+ @abstract
+	For file types that support media chunk duration, such as QuickTime Movie files, specifies the duration to be used for each chunk of sample data in the output file.
+ 
+ @discussion
+	Chunk duration can influence the granularity of the I/O performed when reading a media file, e.g. during playback.  A larger chunk duration can result in fewer reads from disk, at the potential expense of a higher memory footprint.
+ 
+	A "chunk" contains one or more samples.  The total duration of the samples in a chunk is no greater than this preferred chunk duration, or the duration of a single sample if the sample's duration is greater than this preferred chunk duration.
+ 
+	The default value is kCMTimeInvalid, which means that the receiver will choose an appropriate default value.  It is an error to set a chunk duration that is negative or non-numeric.
+
+	This property cannot be set after -startWriting has been called on the receiver.
+ */
+@property (nonatomic) CMTime preferredMediaChunkDuration NS_AVAILABLE(10_10, 8_0);
+
+/*!
+ @property preferredMediaChunkAlignment
+ @abstract
+	For file types that support media chunk alignment, such as QuickTime Movie files, specifies the boundary for media chunk alignment in bytes (e.g. 512).
+ 
+ @discussion
+	The default value is 0, which means that the receiver will choose an appropriate default value.  A value of 1 implies that no padding should be used to achieve a particular chunk alignment.  It is an error to set a negative value for chunk alignment.
+ 
+	This property cannot be set after -startWriting has been called on the receiver.
+ */
+@property (nonatomic) NSInteger preferredMediaChunkAlignment NS_AVAILABLE(10_10, 8_0);
+
+/*!
+ @property sampleReferenceBaseURL
+ @abstract
+	For file types that support writing sample references, such as QuickTime Movie files, specifies the base URL sample references are relative to.
+
+ @discussion
+	If the value of this property can be resolved as an absolute URL, the sample locations written to the file when appending sample references will be relative to this URL. The URL must point to a location that is in a directory that is a parent of the sample reference location. 
+
+	Usage example:
+
+	Setting the sampleReferenceBaseURL property to "file:///User/johnappleseed/Movies/" and appending sample buffers with the kCMSampleBufferAttachmentKey_SampleReferenceURL attachment set to "file:///User/johnappleseed/Movies/data/movie1.mov" will cause the sample reference "data/movie1.mov" to be written to the movie.
+
+	If the value of the property cannot be resolved as an absolute URL or if it points to a location that is not in a parent directory of the sample reference location, the location referenced in the sample buffer will be written unmodified.
+
+ 	The default value is nil, which means that the location referenced in the sample buffer will be written unmodified.
+ 
+	This property cannot be set after -startWriting has been called on the receiver.
+ */
+@property (nonatomic, copy) NSURL *sampleReferenceBaseURL NS_AVAILABLE(10_10, 8_0);
 
 @end
 
@@ -400,7 +457,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  @discussion
 	If the type of association requires tracks of specific media types that don't match the media types of the inputs, or if the output file type does not support track associations, -canAddTrackAssociationWithTrackOfInput:type: will return NO.
  */
-- (BOOL)canAddTrackAssociationWithTrackOfInput:(AVAssetWriterInput *)input type:(NSString *)trackAssociationType NS_AVAILABLE(10_9, TBD);
+- (BOOL)canAddTrackAssociationWithTrackOfInput:(AVAssetWriterInput *)input type:(NSString *)trackAssociationType NS_AVAILABLE(10_9, 7_0);
 
 /*!
  @method addTrackAssociationWithTrackOfInput:type:
@@ -417,7 +474,136 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 
 	Track associations cannot be added after writing on the receiver's AVAssetWriter has started.
  */
-- (void)addTrackAssociationWithTrackOfInput:(AVAssetWriterInput *)input type:(NSString *)trackAssociationType NS_AVAILABLE(10_9, TBD);
+- (void)addTrackAssociationWithTrackOfInput:(AVAssetWriterInput *)input type:(NSString *)trackAssociationType NS_AVAILABLE(10_9, 7_0);
+
+@end
+
+
+@class AVAssetWriterInputPassDescription;
+
+@interface AVAssetWriterInput (AVAssetWriterInputMultiPass)
+
+/*!
+ @property performsMultiPassEncodingIfSupported
+ @abstract
+	Indicates whether the input should attempt to encode the source media data using multiple passes.
+ 
+ @discussion
+	The input may be able to achieve higher quality and/or lower data rate by performing multiple passes over the source media.  It does this by analyzing the media data that has been appended and re-encoding certain segments with different parameters.  In order to do this re-encoding, the media data for these segments must be appended again.  See -markCurrentPassAsFinished and the property currentPassDescription for the mechanism by which the input nominates segments for re-appending.
+ 
+	When the value of this property is YES, the value of readyForMoreMediaData for other inputs attached to the same AVAssetWriter may be NO more often and/or for longer periods of time.  In particular, the value of readyForMoreMediaData for inputs that do not (or cannot) perform multiple passes may start out as NO after -[AVAssetWriter startWriting] has been called and may not change to YES until after all multi-pass inputs have completed their final pass.
+ 
+	When the value of this property is YES, the input may store data in one or more temporary files before writing compressed samples to the output file.  Use the AVAssetWriter property directoryForTemporaryFiles if you need to control the location of temporary file writing.
+ 
+	The default value is NO, meaning that no additional analysis will occur and no segments will be re-encoded.  Not all asset writer input configurations (for example, inputs configured with certain media types or to use certain encoders) can benefit from performing multiple passes over the source media.  To determine whether the selected encoder can perform multiple passes, query the value of canPerformMultiplePasses after calling -startWriting.
+ 
+	It is an error to set this property to YES when the value for expectsMediaDataInRealTime is YES.  It is also an error for an asset writer to contain an input with this property set to YES when any of its other inputs have a value of YES for expectsMediaDataInRealTime.
+ 
+	This property cannot be set after writing on the receiver's AVAssetWriter has started.
+ */
+@property (nonatomic) BOOL performsMultiPassEncodingIfSupported NS_AVAILABLE(10_10, 8_0);
+
+/*!
+ @property canPerformMultiplePasses
+ @abstract
+	Indicates whether the input might perform multiple passes over appended media data.
+
+ @discussion
+	When the value for this property is YES, your source for media data should be configured for random access.  After appending all of the media data for the current pass (as specified by the currentPassDescription property), call -markCurrentPassAsFinished to start the process of determining whether additional passes are needed.  Note that it is still possible in this case for the input to perform only the initial pass, if it determines that there will be no benefit to performing multiple passes.
+ 
+	When the value for this property is NO, your source for media data only needs to support sequential access.  In this case, append all of the source media once and call -markAsFinished.
+ 
+	In the default configuration of AVAssetWriterInput, the value for this property will be NO.  Currently the only way for this property to become YES is when performsMultiPassEncodingIfSupported has been set to YES.  The final value will be available after -startWriting is called, when a specific encoder has been choosen.
+ 
+	This property is key-value observable.
+ */
+@property (nonatomic, readonly) BOOL canPerformMultiplePasses NS_AVAILABLE(10_10, 8_0);
+
+/*!
+ @property currentPassDescription
+ @abstract
+	Provides an object that describes the requirements, such as source time ranges to append or re-append, for the current pass.
+ 
+ @discussion
+	If the value of this property is nil, it means there is no request to be fulfilled and -markAsFinished should be called on the asset writer input.
+ 
+	During the first pass, the request will contain a single time range from zero to positive infinity, indicating that all media from the source should be appended.  This will also be true when canPerformMultiplePasses is NO, in which case only one pass will be performed.
+ 
+	The value of this property will be nil before -startWriting is called on the attached asset writer.  It will transition to an initial non-nil value during the call to -startWriting.  After that, the value of this property will change only after a call to -markCurrentPassAsFinished.  For an easy way to be notified at the beginning of each pass, see -respondToEachPassDescriptionOnQueue:usingBlock:.
+ 
+	This property is key-value observable.  Observers should not assume that they will be notified of changes on a specific thread.
+ */
+@property (readonly) AVAssetWriterInputPassDescription *currentPassDescription NS_AVAILABLE(10_10, 8_0);
+
+/*!
+ @method respondToEachPassDescriptionOnQueue:usingBlock:
+ @abstract
+	Instructs the receiver to invoke a client-supplied block whenever a new pass has begun.
+ 
+ @param queue
+	The queue on which the block should be invoked.
+ @param block
+	A block the receiver should invoke whenever a new pass has begun.
+
+ @discussion
+	A typical block passed to this method will perform the following steps:
+
+		1. Query the value of the receiver's currentPassDescription property and reconfigure the source of media data (e.g. AVAssetReader) accordingly
+		2. Call -requestMediaDataWhenReadyOnQueue:usingBlock: to begin appending data for the current pass
+		3. Exit
+
+	When all media data has been appended for the current request, call -markCurrentPassAsFinished to begin the process of determining whether an additional pass is warranted.  If an additional pass is warranted, the block passed to this method will be invoked to begin the next pass.  If no additional passes are needed, the block passed to this method will be invoked one final time so the client can invoke -markAsFinished in response to the value of currentPassDescription becoming nil.
+ 
+	Before calling this method, you must ensure that the receiver is attached to an AVAssetWriter via a prior call to -addInput: and that -startWriting has been called on the asset writer.
+ */
+- (void)respondToEachPassDescriptionOnQueue:(dispatch_queue_t)queue usingBlock:(dispatch_block_t)block NS_AVAILABLE(10_10, 8_0);
+
+/*!
+ @method markCurrentPassAsFinished
+ @abstract
+	Instructs the receiver to analyze the media data that has been appended and determine whether the results could be improved by re-encoding certain segments.
+ 
+ @discussion
+	When the value of canPerformMultiplePasses is YES, call this method after you have appended all of your media data.  After the receiver analyzes whether an additional pass is warranted, the value of currentPassDescription will change (usually asynchronously) to describe how to set up for the next pass.  Although it is possible to use key-value observing to determine when the value of currentPassDescription has changed, it is typically more convenient to invoke -respondToEachPassDescriptionOnQueue:usingBlock: in order to start the work for each pass.
+ 
+	After re-appending the media data for all of the time ranges of the new pass, call this method again to determine whether additional segments should be re-appended in another pass.
+ 
+	Calling this method effectively cancels any previous invocation of -requestMediaDataWhenReadyOnQueue:usingBlock:, meaning that -requestMediaDataWhenReadyOnQueue:usingBlock: can be invoked again for each new pass.  -respondToEachPassDescriptionOnQueue:usingBlock: provides a convenient way to consolidate these invocations in your code.
+ 
+	After each pass, you have the option of keeping the most recent results by calling -markAsFinished instead of this method.  If the value of currentPassDescription is nil at the beginning of a pass, call -markAsFinished to tell the receiver to not expect any further media data.
+ 
+	If the value of canPerformMultiplePasses is NO, the value of currentPassDescription will immediately become nil after calling this method.
+
+	Before calling this method, you must ensure that the receiver is attached to an AVAssetWriter via a prior call to -addInput: and that -startWriting has been called on the asset writer.
+ */
+- (void)markCurrentPassAsFinished NS_AVAILABLE(10_10, 8_0);
+
+@end
+
+
+@class AVAssetWriterInputPassDescriptionInternal;
+
+/*!
+ @class AVAssetWriterInputPassDescription
+ @abstract
+	Defines an interface for querying information about the requirements of the current pass, such as the time ranges of media data to append.
+ */
+NS_CLASS_AVAILABLE(10_10, 8_0)
+@interface AVAssetWriterInputPassDescription : NSObject
+{
+@private
+	AVAssetWriterInputPassDescriptionInternal *_internal;
+}
+
+/*!
+ @property sourceTimeRanges
+ @abstract
+	An NSArray of NSValue objects wrapping CMTimeRange structures, each representing one source time range.
+ 
+ @discussion
+	The value of this property is suitable for using as a parameter for -[AVAssetReaderOutput resetForReadingTimeRanges:].
+ */
+@property (nonatomic, readonly) NSArray *sourceTimeRanges;
 
 @end
 
@@ -460,7 +646,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 	
 	It is an error to initialize an instance of AVAssetWriterInputPixelBufferAdaptor with a sample buffer input that is already attached to another instance of AVAssetWriterInputPixelBufferAdaptor.
  */
-+ (AVAssetWriterInputPixelBufferAdaptor *)assetWriterInputPixelBufferAdaptorWithAssetWriterInput:(AVAssetWriterInput *)input sourcePixelBufferAttributes:(NSDictionary *)sourcePixelBufferAttributes;
++ (instancetype)assetWriterInputPixelBufferAdaptorWithAssetWriterInput:(AVAssetWriterInput *)input sourcePixelBufferAttributes:(NSDictionary *)sourcePixelBufferAttributes;
 
 /*!
  @method initWithAssetWriterInput:sourcePixelBufferAttributes:
@@ -483,7 +669,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 	
 	It is an error to initialize an instance of AVAssetWriterInputPixelBufferAdaptor with an asset writer input that is already attached to another instance of AVAssetWriterInputPixelBufferAdaptor.  It is also an error to initialize an instance of AVAssetWriterInputPixelBufferAdaptor with an asset writer input whose asset writer has progressed beyond AVAssetWriterStatusUnknown.
  */
-- (id)initWithAssetWriterInput:(AVAssetWriterInput *)input sourcePixelBufferAttributes:(NSDictionary *)sourcePixelBufferAttributes;
+- (instancetype)initWithAssetWriterInput:(AVAssetWriterInput *)input sourcePixelBufferAttributes:(NSDictionary *)sourcePixelBufferAttributes;
 
 /*!
  @property assetWriterInput
@@ -544,5 +730,82 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 	Before calling this method, you must ensure that the receiver is attached to an AVAssetWriter via a prior call to -addInput: and that -startWriting has been called on the asset writer.
  */
 - (BOOL)appendPixelBuffer:(CVPixelBufferRef)pixelBuffer withPresentationTime:(CMTime)presentationTime;
+
+@end
+
+
+@class AVTimedMetadataGroup;
+@class AVAssetWriterInputMetadataAdaptorInternal;
+
+/*!
+ @class AVAssetWriterInputMetadataAdaptor
+ @abstract
+	Defines an interface for writing metadata, packaged as instances of AVTimedMetadataGroup, to a single AVAssetWriterInput object.
+ */
+
+NS_CLASS_AVAILABLE(10_10, 8_0)
+@interface AVAssetWriterInputMetadataAdaptor : NSObject {
+    AVAssetWriterInputMetadataAdaptorInternal	*_internal;
+}
+
+/*!
+ @method assetWriterInputMetadataAdaptorWithAssetWriterInput:
+ @abstract
+	Creates a new timed metadata group adaptor to receive instances of AVTimedMetadataGroup for writing to the output file.
+ 
+ @param input
+	An instance of AVAssetWriterInput to which the receiver should append groups of timed metadata.  Only asset writer inputs that accept media data of type AVMediaTypeMetadata can be used to initialize a timed metadata group adaptor.
+ @result
+	An instance of AVAssetWriterInputMetadataAdaptor.
+ 
+ @discussion
+	The instance of AVAssetWriterInput passed in to this method must have been created with a format hint indicating all possible combinations of identifier (or, alternatively, key and keySpace), dataType, and extendedLanguageTag that will be appended to the metadata adaptor.  It is an error to append metadata items not represented in the input's format hint.
+ 
+	It is an error to initialize an instance of AVAssetWriterInputMetadataAdaptor with an asset writer input that is already attached to another instance of AVAssetWriterInputMetadataAdaptor.  It is also an error to initialize an instance of AVAssetWriterInputMetadataAdaptor with an asset writer input whose asset writer has progressed beyond AVAssetWriterStatusUnknown.
+ */
++ (instancetype)assetWriterInputMetadataAdaptorWithAssetWriterInput:(AVAssetWriterInput *)input;
+
+/*!
+ @method initWithAssetWriterInput:
+ @abstract
+	Creates a new timed metadator group adaptor to receive instances of AVTimedMetadataGroup for writing to the output file.
+ 
+ @param input
+	An instance of AVAssetWriterInput to which the receiver should append groups of timed metadata. Only asset writer inputs that accept media data of type AVMediaTypeMetadata can be used to initialize a timed metadata group adaptor.
+ @result
+	An instance of AVAssetWriterInputMetadataAdaptor.
+ 
+ @discussion
+	The instance of AVAssetWriterInput passed in to this method must have been created with a format hint indicating all possible combinations of identifier (or, alternatively, key and keySpace), dataType, and extendedLanguageTag that will be appended to the metadata adaptor.  It is an error to append metadata items not represented in the input's format hint.  For help creating a suitable format hint, see -[AVTimedMetadataGroup copyFormatDescription].
+
+	It is an error to initialize an instance of AVAssetWriterInputMetadataAdaptor with an asset writer input that is already attached to another instance of AVAssetWriterInputMetadataAdaptor.  It is also an error to initialize an instance of AVAssetWriterInputMetadataAdaptor with an asset writer input whose asset writer has progressed beyond AVAssetWriterStatusUnknown.
+ */
+- (instancetype)initWithAssetWriterInput:(AVAssetWriterInput *)input;
+
+/*!
+ @property assetWriterInput
+ @abstract
+	The asset writer input to which the receiver should append timed metadata groups.
+ */
+@property (nonatomic, readonly) AVAssetWriterInput *assetWriterInput;
+
+/*!
+ @method appendTimedMetadataGroup:
+ @abstract
+	Appends a timed metadata group to the receiver.
+ 
+ @param timedMetadataGroup
+	The AVTimedMetadataGroup to be appended.
+ @result
+	A BOOL value indicating success of appending the timed metadata group.  If a result of NO is returned, AVAssetWriter.error will contain more information about why apending the timed metadata group failed.
+ 
+ @discussion
+	The receiver will retain the AVTimedMetadataGroup until it is done with it, and then release it.
+ 
+	The timing of the metadata items in the output asset will correspond to the timeRange of the AVTimedMetadataGroup, regardless of the values of the time and duration properties of the individual items.
+ 
+	Before calling this method, you must ensure that the input that underlies the receiver is attached to an AVAssetWriter via a prior call to -addInput: and that -startWriting has been called on the asset writer.
+ */
+- (BOOL)appendTimedMetadataGroup:(AVTimedMetadataGroup *)timedMetadataGroup;
 
 @end

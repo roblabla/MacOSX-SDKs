@@ -2,7 +2,7 @@
  *  CVOpenGLTextureCache.h
  *  CoreVideo
  *
- *  Copyright 2004 Apple Computer, Inc. All rights reserved.
+ *  Copyright 2004-2014 Apple Inc. All rights reserved.
  *
  */
 

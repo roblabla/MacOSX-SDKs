@@ -213,7 +213,7 @@ enum {
 						of 2 channels on an input and 2 channels on an output.
 						
 						Negative numbers (-1, -2) are used to indicate *any* number of channels. So {-1, -1} means any number of channels on input and output as long as they are the same.
-						{1, -2} means any number of channels on input or output buses
+						{-1, -2} means any number of channels on input or output buses
 						
 						A negative number less than -2 is used to indicate a total number of channels across every bus on that scope, regardless of how many channels are set on any
 						particular bus.
@@ -772,18 +772,17 @@ enum
 	kAudioUnitProperty_FrequencyResponse			= 52,
 	kAudioUnitProperty_ParameterHistoryInfo			= 53,
 	kAudioUnitProperty_NickName                     = 54,
-    kAudioUnitProperty_OfflineRender				= 37
+    kAudioUnitProperty_OfflineRender				= 37,
+	kAudioUnitProperty_ParameterIDName				= 34,
+	kAudioUnitProperty_ParameterStringFromValue		= 33,
+	kAudioUnitProperty_ParameterValueFromString		= 38,
 
-	,
 	kAudioUnitProperty_FastDispatch					= 5,
 	kAudioUnitProperty_SetExternalBuffer			= 15,
 	kAudioUnitProperty_GetUIComponentList			= 18,
 	kAudioUnitProperty_ContextName					= 25,
 	kAudioUnitProperty_CocoaUI						= 31,
-	kAudioUnitProperty_ParameterIDName				= 34,
 	kAudioUnitProperty_ParameterClumpName			= 35,
-	kAudioUnitProperty_ParameterStringFromValue		= 33,
-	kAudioUnitProperty_ParameterValueFromString		= 38,
 	kAudioUnitProperty_IconLocation					= 39,
 	kAudioUnitProperty_PresentationLatency			= 40,
 	kAudioUnitProperty_AUHostIdentifier				= 46,
@@ -1309,6 +1308,7 @@ enum
 {
 	kAudioUnitParameterFlag_CFNameRelease		= (1L << 4),
 
+	kAudioUnitParameterFlag_OmitFromPresets		= (1L << 13),
 	kAudioUnitParameterFlag_PlotHistory			= (1L << 14),
 	kAudioUnitParameterFlag_MeterReadOnly		= (1L << 15),
 	
@@ -1377,10 +1377,8 @@ enum {
 	(((flags) & ~kAudioUnitParameterFlag_DisplayMask) | (displayType))
 
 
-
 /*
-	The following properties are used with display names and are only available
-	in the full desktop environment
+	The following properties are used with display names
 */
 
 /*!
@@ -1393,7 +1391,7 @@ enum {
 };
 
 /*!
-	@struct			AudioUnitParameterNameInfo
+	@struct			AudioUnitParameterIDName
 	@abstract		Used to provide shorter names for a specified parameter
 */
 typedef struct AudioUnitParameterNameInfo {
@@ -1421,7 +1419,6 @@ typedef struct AudioUnitParameterValueFromString {
 	CFStringRef					inString;
 	AudioUnitParameterValue		outValue;
 } AudioUnitParameterValueFromString;
-
 
 
 
@@ -1464,6 +1461,12 @@ typedef struct AudioUnitParameterValueFromString {
 				corresponding bus.
 */
 #define kAudioUnitConfigurationInfo_InitialOutputs	"InitialOutputs"
+
+/*!
+ @define		kAudioUnitConfigurationInfo_IconURL
+ @discussion	A CFURLRef value that indicates the location of an icon of the audio unit.
+ */
+#define kAudioUnitConfigurationInfo_IconURL			"IconURL"
 
 //=====================================================================================================================
 #pragma mark - Output Unit
@@ -1692,17 +1695,6 @@ typedef struct AUParameterMIDIMapping
     @enum           Instrument Unit (MusicDevice) Properties
     @abstract       The collection of Instrument Unit Property IDs
 
-	@constant		kMusicDeviceProperty_InstrumentCount
-	@discussion			Scope:				Global
-						Value Type:			UInt32
-						Access:				read
-						
-						For a mono-timbral music instrument, this property should return 0 (it should be implemented).
-						
-						For a multi-timbral music instrument, this property can return the number of independent patches that
-						are available to be chosen as an active patch for the instrument. For instance, for Apple's DLS Music Device
-						this value returns the number of patches that are found in a given DLS or SoundFont file when loaded.
-
 	@constant		kMusicDeviceProperty_MIDIXMLNames
 	@discussion			Scope:
 						Value Type:
@@ -1769,7 +1761,6 @@ typedef struct AUParameterMIDIMapping
 */	
 enum {
 // range  (1000 -> 1999)
-	kMusicDeviceProperty_InstrumentCount 			= 1000,
 	kMusicDeviceProperty_MIDIXMLNames				= 1006,
 	kMusicDeviceProperty_PartGroup					= 1010,
 	kMusicDeviceProperty_DualSchedulingMode			= 1013,
@@ -1777,12 +1768,13 @@ enum {
 };
 
 /*!
-	@enum			DualSchedulingMode
-*/
+    @enum			DualSchedulingMode
+ */
 enum {
 	kMusicDeviceSampleFrameMask_SampleOffset = 0xFFFFFF, // AND with this to obtain the sample offset
 	kMusicDeviceSampleFrameMask_IsScheduled = 0x01000000
 };
+
 
 //=====================================================================================================================
 #pragma mark - Offline Unit
@@ -2341,20 +2333,121 @@ typedef struct AudioUnitMeterClipping
 } AudioUnitMeterClipping;
 
 //=====================================================================================================================
-#pragma mark - _3DMixer
+#pragma mark - _SpatialMixer
 /*!
     @enum           Apple Mixer Property IDs
-    @abstract       The collection of property IDs for Apple mixers
-	
-	@constant		kAudioUnitProperty_ReverbRoomType
-	@discussion			Scope:
-						Value Type:
-						Access:
-
+    @abstract       The collection of property IDs for AUSpatialMixer
+    
+    @constant		kAudioUnitProperty_ReverbRoomType
+	@discussion			Scope:			Global
+						Value Type:		UInt32
+						Access:			Read / Write
+						
 	@constant		kAudioUnitProperty_UsesInternalReverb
-	@discussion			Scope:
-						Value Type:
-						Access:
+	@discussion			Scope:			Global
+						Value Type:		UInt32
+						Access:			Read / Write
+						
+	@constant		kAudioUnitProperty_SpatializationAlgorithm
+	@discussion			Scope:			Input
+						Value Type:		UInt32
+						Access:			Read / Write
+						
+						Used to set the spatialisation algorithm used by an input of AUSpatialMixer. See kSpatializationAlgorithm_
+						
+	@constant		kAudioUnitProperty_SpatialMixerRenderingFlags
+	@discussion			Scope:			Input
+						Value Type:		UInt32
+						Access:			Read / Write
+
+						Used to enable various rendering operations on a given input for the 3DMixer. See k3DMixerRenderingFlags_
+						
+	@constant		kAudioUnitProperty_SpatialMixerAttenuationCurve
+	@discussion			Scope:			Input
+						Value Type:		UInt32
+						Access:			Read / Write
+
+	@constant		kAudioUnitProperty_SpatialMixerDistanceParams
+	@discussion			Scope:			Input
+						Value Type:		MixerDistanceParams
+						Access:			Read / Write
+*/
+enum {
+	kAudioUnitProperty_ReverbRoomType				= 10,
+	kAudioUnitProperty_UsesInternalReverb			= 1005,
+	kAudioUnitProperty_SpatializationAlgorithm		= 3000,
+	kAudioUnitProperty_SpatialMixerDistanceParams	= 3010,
+	kAudioUnitProperty_SpatialMixerAttenuationCurve	= 3013,
+	kAudioUnitProperty_SpatialMixerRenderingFlags	= 3003,
+};
+
+/*!
+	@enum 	Spatialization Algorithms
+*/
+enum {
+	kSpatializationAlgorithm_EqualPowerPanning 		= 0,
+	kSpatializationAlgorithm_SphericalHead 			= 1,
+	kSpatializationAlgorithm_HRTF			 		= 2,
+	kSpatializationAlgorithm_SoundField		 		= 3,
+	kSpatializationAlgorithm_VectorBasedPanning		= 4,
+	kSpatializationAlgorithm_StereoPassThrough		= 5
+};
+
+/*!
+	@enum	Reverb Room Types
+	@discussion Used to specify room type (as identified by a factory preset number) on Apple audio 
+				units that use internal reverb.
+*/
+enum {
+	kReverbRoomType_SmallRoom		= 0,
+	kReverbRoomType_MediumRoom		= 1,
+	kReverbRoomType_LargeRoom		= 2,
+	kReverbRoomType_MediumHall		= 3,
+	kReverbRoomType_LargeHall		= 4,
+	kReverbRoomType_Plate			= 5,
+	kReverbRoomType_MediumChamber	= 6,
+	kReverbRoomType_LargeChamber	= 7,
+	kReverbRoomType_Cathedral		= 8,
+	kReverbRoomType_LargeRoom2		= 9,
+	kReverbRoomType_MediumHall2		= 10,
+	kReverbRoomType_MediumHall3		= 11,
+	kReverbRoomType_LargeHall2		= 12	
+};
+
+/*!
+	@enum AUSpatialMixer Attenuation Curves
+*/
+enum {
+	kSpatialMixerAttenuationCurve_Power					= 0,
+    kSpatialMixerAttenuationCurve_Exponential			= 1,
+    kSpatialMixerAttenuationCurve_Inverse				= 2,
+    kSpatialMixerAttenuationCurve_Linear				= 3
+};
+
+/*!
+	@struct			MixerDistanceParams
+*/
+typedef struct MixerDistanceParams {
+	Float32					mReferenceDistance;
+	Float32					mMaxDistance;
+	Float32					mMaxAttenuation;	// in decibels
+} MixerDistanceParams;
+
+/*!
+	@enum	AUSpatial Mixer Rendering Flags
+*/
+enum {
+	kSpatialMixerRenderingFlags_InterAuralDelay			= (1L << 0),
+	kSpatialMixerRenderingFlags_DistanceAttenuation		= (1L << 2),
+};
+
+//=====================================================================================================================
+#pragma mark - _3DMixer (Deprecated)
+/*!
+    // AUMixer3D is deprecated. Use AUSpatialMixer instead.
+ 
+    @enum           Apple Mixer Property IDs
+    @abstract       The collection of property IDs for Apple mixers
 
 	@constant		kAudioUnitProperty_MeteringMode
 	@discussion			Scope: { scope / element }
@@ -2362,13 +2455,6 @@ typedef struct AudioUnitMeterClipping
 						Access: read/write
 						
 						Enable or disable metering on a particular scope/element
-
-	@constant		kAudioUnitProperty_SpatializationAlgorithm
-	@discussion			Scope:			Input
-						Value Type:		UInt32
-						Access:			Read / Write
-						
-						Used to set the spatialisation algorithm used by an input of the 3DMixer. See kSpatializationAlgorithm_
 						
 	@constant		kAudioUnitProperty_DopplerShift
 	@discussion			Scope:			Input
@@ -2403,31 +2489,10 @@ typedef struct AudioUnitMeterClipping
 	@discussion			Scope:
 						Value Type:
 						Access:
-
-	@constant		kAudioUnitProperty_MatrixLevels
-	@discussion			Scope:
-						Value Type:
-						Access:
-
-	@constant		kAudioUnitProperty_MatrixDimensions
-	@discussion			Scope:
-						Value Type:
-						Access:
-
-	@constant		kAudioUnitProperty_MeterClipping
-	@discussion			Scope:
-						Value Type: AudioUnitMeterClipping
-						Access:
-							A mixer returns an AudioUnitMeterClipping structure.
-
 */
 enum {
-	kAudioUnitProperty_ReverbRoomType				= 10,
-	kAudioUnitProperty_UsesInternalReverb			= 1005,
-
 	kAudioUnitProperty_3DMixerDistanceParams		= 3010,
 	kAudioUnitProperty_3DMixerAttenuationCurve		= 3013,
-	kAudioUnitProperty_SpatializationAlgorithm		= 3000,
 	kAudioUnitProperty_DopplerShift					= 3002,
 	kAudioUnitProperty_3DMixerRenderingFlags		= 3003,
 	kAudioUnitProperty_3DMixerDistanceAtten			= 3004,
@@ -2435,24 +2500,16 @@ enum {
 };
 
 /*!
-	@enum	Reverb Room Types
-	@discussion Used to specify room type (as identified by a factory preset number) on Apple audio 
-				units that use internal reverb.
+	@enum	3D Mixer Rendering Flags
 */
 enum {
-	kReverbRoomType_SmallRoom		= 0,
-	kReverbRoomType_MediumRoom		= 1,
-	kReverbRoomType_LargeRoom		= 2,
-	kReverbRoomType_MediumHall		= 3,
-	kReverbRoomType_LargeHall		= 4,
-	kReverbRoomType_Plate			= 5,
-	kReverbRoomType_MediumChamber	= 6,
-	kReverbRoomType_LargeChamber	= 7,
-	kReverbRoomType_Cathedral		= 8,
-	kReverbRoomType_LargeRoom2		= 9,
-	kReverbRoomType_MediumHall2		= 10,
-	kReverbRoomType_MediumHall3		= 11,
-	kReverbRoomType_LargeHall2		= 12	
+	k3DMixerRenderingFlags_InterAuralDelay			= (1L << 0),
+	k3DMixerRenderingFlags_DopplerShift				= (1L << 1),
+	k3DMixerRenderingFlags_DistanceAttenuation		= (1L << 2),
+	k3DMixerRenderingFlags_DistanceFilter			= (1L << 3),
+	k3DMixerRenderingFlags_DistanceDiffusion		= (1L << 4),
+	k3DMixerRenderingFlags_LinearDistanceAttenuation = (1L << 5),
+	k3DMixerRenderingFlags_ConstantReverbBlend		= (1L << 6)
 };
 
 /*!
@@ -2465,146 +2522,115 @@ enum {
     k3DMixerAttenuationCurve_Linear					= 3
 };
 
-/*!
-	@struct			MixerDistanceParams
-*/
-typedef struct MixerDistanceParams {
-	Float32					mReferenceDistance;
-	Float32					mMaxDistance;
-	Float32					mMaxAttenuation;	// in decibels
-} MixerDistanceParams;
-
-
-/*!
-	@enum 	Spatialization Algorithms
-*/
-enum {
-	kSpatializationAlgorithm_EqualPowerPanning 		= 0,
-	kSpatializationAlgorithm_SphericalHead 			= 1,
-	kSpatializationAlgorithm_HRTF			 		= 2,
-	kSpatializationAlgorithm_SoundField		 		= 3,
-	kSpatializationAlgorithm_VectorBasedPanning		= 4,
-	kSpatializationAlgorithm_StereoPassThrough		= 5
-};
-
-/*!
-	@enum	3D Mixer Rendering Flags
-*/
-enum {
-	k3DMixerRenderingFlags_InterAuralDelay			= (1L << 0),
-	k3DMixerRenderingFlags_DopplerShift				= (1L << 1),
-	k3DMixerRenderingFlags_DistanceAttenuation		= (1L << 2),
-	k3DMixerRenderingFlags_DistanceFilter			= (1L << 3),
-	k3DMixerRenderingFlags_DistanceDiffusion		= (1L << 4),
-	k3DMixerRenderingFlags_LinearDistanceAttenuation	= (1L << 5),
-	k3DMixerRenderingFlags_ConstantReverbBlend		= (1L << 6)
-};
-
 //=====================================================================================================================
 #pragma mark - AUScheduledSoundPlayer
 /*!
     @enum           Apple AUScheduledSoundPlayer Property IDs
     @abstract       The collection of property IDs for the Apple AUScheduledSoundPlayer audio unit.
 
-	@discussion		The AUScheduledSoundPlayer audio unit lets a client schedule audio buffers for
-					future playback, with sample-accurate timing.
-					
-					
-					Elements and Formats
-					
-					This unit has one output element and no input elements. The output's format
-					should be a canonical audio unit stream format (native Float32, deinterleaved).
+    @discussion     The AUScheduledSoundPlayer audio unit lets a client schedule audio buffers for
+                    future playback, with sample-accurate timing.
+                    
+                    
+                    Elements and Formats
+                    
+                    This unit has one output element and no input elements. The output's format
+                    should be a canonical audio unit stream format (native Float32, deinterleaved).
 
 
-					Scheduling
+                    Scheduling
 
-					To schedule slices of audio for future playback, set the
-					kAudioUnitProperty_ScheduleAudioSlice property, with a ScheduledAudioSlice
-					structure as the property value. The slice's mTimeStamp.mSampleTime field
-					determines when the slice will be played. This sample number is relative to
-					the unit's start time, which you must set using the
-					kAudioUnitProperty_ScheduleStartTimeStamp property before playback will
-					begin.
+                    To schedule slices of audio for future playback, set the
+                    kAudioUnitProperty_ScheduleAudioSlice property, with a ScheduledAudioSlice
+                    structure as the property value. The slice's mTimeStamp.mSampleTime field
+                    determines when the slice will be played. This sample number is relative to
+                    the unit's start time, which you must set using the
+                    kAudioUnitProperty_ScheduleStartTimeStamp property before playback will
+                    begin.
 
-					You must retain, unmodified, the ScheduledAudioSlice structure, including
-					its mBufferList and the buffers to which it points, until the slice has been
-					completely played, or until you stop playback by uninitializing or resetting
-					the unit. The format of the slice's buffer list must match the unit's output
-					stream format.
-					
-					(The fields other than mSampleTime and mFlags in the mTimestamp structure are 
-					currently ignored.)
-					
-					
-					Completion
-					
-					To receive a callback when the slice has been played, store a pointer to a
-					callback function in the mCompletionProc field. This function will be called 
-					(from the audio unit's rendering thread) when the slice has been completely 
-					played -- or when the slice is determined to be unplayable due to an error. 
-					As an alternative, you may also poll the slice's 
-					(mFlags & kScheduledAudioSliceFlag_Complete).
+                    You must retain, unmodified, the ScheduledAudioSlice structure, including
+                    its mBufferList and the buffers to which it points, until the slice has been
+                    completely played, or until you stop playback by uninitializing or resetting
+                    the unit. The format of the slice's buffer list must match the unit's output
+                    stream format.
+                    
+                    As of OS X 10.10 and iOS 8.0, you can use an invalid time stamp (no flags set
+                    in mFlags) to indicate that the slice should be played immediately following the
+                    previous slice (or immediately, if there are no slices playing).
+                    
+                    (The fields other than mSampleTime and mFlags in the mTimestamp structure are
+                    currently ignored.)
+                    
+                    
+                    Completion
+                    
+                    To receive a callback when the slice has been played, store a pointer to a
+                    callback function in the mCompletionProc field. This function will be called 
+                    (from the audio unit's rendering thread) when the slice has been completely 
+                    played -- or when the slice is determined to be unplayable due to an error. 
+                    As an alternative, you may also poll the slice's 
+                    (mFlags & kScheduledAudioSliceFlag_Complete).
 
-					Upon completion, you can test (mFlags & kScheduledAudioSliceFlag_BeganToRenderLate) 
-					to determine whether some portion of the slice was not played due to its having 
-					been scheduled too late relative to the current playback time.
-					
-					
-					Start Time
-					
-					The audio unit will not play any slices following initialization or reset, until
-					its start time has been set. The start time establishes the beginning of a
-					timeline: the timestamps of all slices in the schedule are relative to the
-					start time.
+                    Upon completion, you can test (mFlags & kScheduledAudioSliceFlag_BeganToRenderLate) 
+                    to determine whether some portion of the slice was not played due to its having 
+                    been scheduled too late relative to the current playback time.
+                    
+                    
+                    Start Time
+                    
+                    The audio unit will not play any slices following initialization or reset, until
+                    its start time has been set. The start time establishes the beginning of a
+                    timeline: the timestamps of all slices in the schedule are relative to the
+                    start time.
 
-					Set a start time by setting the kAudioUnitProperty_ScheduleStartTimeStamp 
-					property with an AudioTimeStamp structure. If the timestamp contains a valid 
-					sample time (timestamp.mFlags & kAudioTimeStampSampleTimeValid), then playback 
-					begins when the timestamp passed to the AudioUnitRender function reaches the 
-					specified sample time. If the specified sample time is -1, playback begins on 
-					the next render cycle.
-					
-					If the start timestamp does not contain a valid sample time, but does contain a
-					valid host time (timestamp.mFlags & kAudioTimeStampHostTimeValid), then the
-					specified host time is translated to the sample time at which playback will
-					begin. A host time of 0 means "start on the next render cycle."
-					
-					The kAudioUnitProperty_ScheduleStartTimeStamp property may be queried to obtain 
-					the time at which playback began. If the start time has not yet been reached,
-					the timestamp returned will be whatever the host application last set.
-					
-					
-					Current play time
-					
-					The kAudioUnitProperty_CurrentPlayTime property may be queried to determine the 
-					audio unit's current time offset from its start time. This is useful, for 
-					example, to monitor playback progress.
-					
-					
-					Unscheduling events
-					
-					To clear an audio unit's play schedule, call the AudioUnitReset function. The 
-					completion proc (if any) for each slice in the schedule will called. Playback 
-					will not resume until a new start time has been set. This also happens when 
-					the audio unit is uninitialized.
-	
-	@constant		kAudioUnitProperty_ScheduleAudioSlice
-	@discussion			Scope:
-						Value Type: ScheduledAudioSlice
-						Access:
+                    Set a start time by setting the kAudioUnitProperty_ScheduleStartTimeStamp 
+                    property with an AudioTimeStamp structure. If the timestamp contains a valid 
+                    sample time (timestamp.mFlags & kAudioTimeStampSampleTimeValid), then playback 
+                    begins when the timestamp passed to the AudioUnitRender function reaches the 
+                    specified sample time. If the specified sample time is -1, playback begins on 
+                    the next render cycle.
+                    
+                    If the start timestamp does not contain a valid sample time, but does contain a
+                    valid host time (timestamp.mFlags & kAudioTimeStampHostTimeValid), then the
+                    specified host time is translated to the sample time at which playback will
+                    begin. A host time of 0 means "start on the next render cycle."
+                    
+                    The kAudioUnitProperty_ScheduleStartTimeStamp property may be queried to obtain 
+                    the time at which playback began. If the start time has not yet been reached,
+                    the timestamp returned will be whatever the host application last set.
+                    
+                    
+                    Current play time
+                    
+                    The kAudioUnitProperty_CurrentPlayTime property may be queried to determine the 
+                    audio unit's current time offset from its start time. This is useful, for 
+                    example, to monitor playback progress.
+                    
+                    
+                    Unscheduling events
+                    
+                    To clear an audio unit's play schedule, call the AudioUnitReset function. The 
+                    completion proc (if any) for each slice in the schedule will called. Playback 
+                    will not resume until a new start time has been set. This also happens when 
+                    the audio unit is uninitialized.
+    
+    @constant       kAudioUnitProperty_ScheduleAudioSlice
+    @discussion         Scope:
+                        Value Type: ScheduledAudioSlice
+                        Access:
 
-	@constant		kAudioUnitProperty_ScheduleStartTimeStamp
-	@discussion			Scope:
-						Value Type: AudioTimeStamp
-						Access:
-							Sample time or host time valid. Sample time takes precedence, 
-							-1 means "now". Host time of 0 means "now."
-							
-	@constant		kAudioUnitProperty_CurrentPlayTime
-	@discussion			Scope:
-						Value Type: AudioTimeStamp
-						Access:
-							AudioTimeStamp, relative to start time, sample time of -1 if not yet started.
+    @constant       kAudioUnitProperty_ScheduleStartTimeStamp
+    @discussion         Scope:
+                        Value Type: AudioTimeStamp
+                        Access:
+                            Sample time or host time valid. Sample time takes precedence, 
+                            -1 means "now". Host time of 0 means "now."
+                            
+    @constant       kAudioUnitProperty_CurrentPlayTime
+    @discussion         Scope:
+                        Value Type: AudioTimeStamp
+                        Access:
+                            AudioTimeStamp, relative to start time, sample time of -1 if not yet started.
 */
 enum {
 	kAudioUnitProperty_ScheduleAudioSlice			= 3300,
@@ -2613,19 +2639,34 @@ enum {
 };
 
 /*!
-	@enum			ScheduledAudioSlice
-	@abstract		bits in ScheduledAudioSlice.mFlags
-	@constant		kScheduledAudioSliceFlag_Complete
-						Set if the unit is done with this slice
-	@constant		kScheduledAudioSliceFlag_BeganToRender
-						Set if any portion of the buffer has been played
-	@constant		kScheduledAudioSliceFlag_BeganToRenderLate
-						Set if any portion of the buffer was not played because it was scheduled late
+    @enum           ScheduledAudioSlice
+    @abstract           bits in ScheduledAudioSlice.mFlags
+
+    @constant       kScheduledAudioSliceFlag_Complete
+    @abstract           Set if the unit is done with this slice
+    @constant       kScheduledAudioSliceFlag_BeganToRender
+    @abstract           Set if any portion of the buffer has been played
+    @constant       kScheduledAudioSliceFlag_BeganToRenderLate
+    @abstract           Set if any portion of the buffer was not played because it was scheduled late
+    @constant       kScheduledAudioSliceFlag_Loop
+    @abstract           specifies that the buffer should loop indefinitely
+    @constant       kScheduledAudioSliceFlag_Interrupt
+    @abstract           specifies that the buffer should interrupt any previously scheduled buffer
+                        (by default, buffers following a playing buffer are not played until the
+                        playing buffer has completed).
+    @constant       kScheduledAudioSliceFlag_InterruptAtLoop
+    @abstract           specifies that the buffer should interrupt any previously scheduled buffer,
+                        but only at a loop point in that buffer.
+
 */
 enum {
-	kScheduledAudioSliceFlag_Complete				= 1,
-	kScheduledAudioSliceFlag_BeganToRender			= 2,	
-	kScheduledAudioSliceFlag_BeganToRenderLate		= 4
+    kScheduledAudioSliceFlag_Complete               = 0x01,
+    kScheduledAudioSliceFlag_BeganToRender          = 0x02,
+    kScheduledAudioSliceFlag_BeganToRenderLate      = 0x04,
+
+    kScheduledAudioSliceFlag_Loop                   = 0x08, // new for OS X 10.10 and iOS 8.0
+    kScheduledAudioSliceFlag_Interrupt              = 0x10, // new for OS X 10.10 and iOS 8.0
+    kScheduledAudioSliceFlag_InterruptAtLoop        = 0x20  // new for OS X 10.10 and iOS 8.0
 };
 
 typedef struct ScheduledAudioSlice ScheduledAudioSlice; // forward dec, see definition below
@@ -2637,18 +2678,18 @@ typedef void (*ScheduledAudioSliceCompletionProc)(void *userData,
 				
 /*
 	@struct				ScheduledAudioSlice
-	@field				mTimeStamp;
-	@field				mCompletionProc;
+	@field				mTimeStamp
+	@field				mCompletionProc
 							May be null
-	@field				mCompletionProcUserData;
-	@field				mFlags;
-	@field				mReserved;
+	@field				mCompletionProcUserData
+	@field				mFlags
+	@field				mReserved
 							Must be 0
-	@field				mReserved2;
+	@field				mReserved2
 							For internal use
-	@field				mNumberFrames;
+	@field				mNumberFrames
 							Must be consistent with byte count of mBufferList
-	@field				mBufferList;
+	@field				mBufferList
 							Must contain deinterleaved Float32
 */
 struct ScheduledAudioSlice {
@@ -2829,73 +2870,126 @@ struct ScheduledAudioFileRegion {
 	UInt32						mFramesToPlay;
 };
 
-//=====================================================================================================================
-#pragma mark -
-#pragma mark Desktop Apple Specific Properties
-
-
 
 //=====================================================================================================================
-#pragma mark - DLSMusicDevice and Internal Reverb
+#pragma mark - Desktop-specific Music Device Properties used by DLSMusicDevice
 /*!
-    @enum           Generic Property IDs
-    @abstract       The collection of general audio unit property IDs
-	
-	@constant		kMusicDeviceProperty_InstrumentName
-	@discussion			Scope:
-						Value Type:
-						Access:
-
-	@constant		kMusicDeviceProperty_InstrumentNumber
-	@discussion			Scope:
-						Value Type:
-						Access:
-
-	@constant		kMusicDeviceProperty_BankName
-	@discussion			Scope:
-						Value Type:
-						Access:
-
-	@constant		kMusicDeviceProperty_SoundBankData
-	@discussion			Scope:
-						Value Type:
-						Access:
-
-	@constant		kMusicDeviceProperty_StreamFromDisk
-	@discussion			Scope:
-						Value Type:
-						Access:
-
-	@constant		kMusicDeviceProperty_SoundBankFSRef
-	@discussion			Scope:
-						Value Type:
-						Access:
-
-	@constant		kMusicDeviceProperty_SoundBankURL
-	@discussion			Scope:
-						Value Type:
-						Access:
-*/
+ @enum			Property IDs
+ @abstract       Desktop-only audio unit property IDs used by the DLSMusicDevice
+ 
+ @constant		kMusicDeviceProperty_SoundBankData
+ @discussion			Scope:
+ Value Type:
+ Access:
+ 
+ @constant		kMusicDeviceProperty_StreamFromDisk
+ @discussion			Scope:
+ Value Type:
+ Access:
+ 
+ @constant		kMusicDeviceProperty_SoundBankFSRef
+ @discussion			Scope:
+ Value Type:
+ Access:
+ 
+ */
 
 enum {
-	// DLS Music Device
-	kMusicDeviceProperty_InstrumentName				= 1001,
-	kMusicDeviceProperty_InstrumentNumber 			= 1004,
 	kMusicDeviceProperty_UsesInternalReverb			= kAudioUnitProperty_UsesInternalReverb,
-	kMusicDeviceProperty_BankName					= 1007,
 	kMusicDeviceProperty_SoundBankData				= 1008,
 	kMusicDeviceProperty_StreamFromDisk				= 1011,
-	kMusicDeviceProperty_SoundBankFSRef				= 1012,
+	kMusicDeviceProperty_SoundBankFSRef				= 1012
+};
+
+
+//=====================================================================================================================
+#pragma mark - Music Device Properties used by DLSMusicDevice
+
+/*!
+	@enum           Generic Property IDs
+	@abstract       Audio unit property IDs used by DLSMusicDevice (OSX)
+ 
+	@constant		kMusicDeviceProperty_InstrumentName
+	@discussion			Scope:				Global
+						Value Type:			CFURLRef
+						Access:				Read
+ 
+	@constant		kMusicDeviceProperty_InstrumentNumber
+	@discussion			Scope:				Global
+						Value Type: 		UInt32
+						Access:				Read
+ */
+
+enum {
+	kMusicDeviceProperty_InstrumentName				= 1001,
+	kMusicDeviceProperty_InstrumentNumber 			= 1004
+};
+
+//=====================================================================================================================
+#pragma mark - Music Device Properties used by DLSMusicDevice and AUMIDISynth
+
+/*!
+	@enum           Generic Property IDs
+	@abstract       Audio unit property IDs used by AUMIDISynth (iOS) and DLSMusicDevice (OSX)
+ 
+	@constant		kMusicDeviceProperty_InstrumentCount
+	@discussion			Scope:				Global
+						Value Type:			UInt32
+						Access:				Read
+ 
+					For a mono-timbral music instrument, this property should return 0 (it should be implemented).
+ 
+					For a multi-timbral music instrument, this property can return the number of independent patches that
+					are available to be chosen as an active patch for the instrument. For instance, for Apple's DLS Music Device
+					and AUMIDISynth, this value returns the number of patches that are found in a given DLS or SoundFont file when loaded.
+ 
+	@constant		kMusicDeviceProperty_BankName
+	@discussion			Scope:				Global
+						Value Type: 		CFStringRef
+						Access: 			Read
+ 
+	@constant		kMusicDeviceProperty_SoundBankURL
+	@discussion			Scope:				Global
+						Value Type:			CFURLRef
+						Access:				Read
+ */
+
+enum {
+	kMusicDeviceProperty_InstrumentCount 			= 1000,
+	kMusicDeviceProperty_BankName					= 1007,
 	kMusicDeviceProperty_SoundBankURL				= 1100
 };
 
+//=====================================================================================================================
+#pragma mark - AUMIDISynth
+
+/*!
+	@enum			Apple AUMIDISynth Property IDs
+	@abstract		The collection of property IDs for the Apple Midi Synth audio unit.
+ 
+	@discussion		The AUMIDISynth audio unit lets a client create fully GM-compatible Midi Synth.
+ 
+	@constant		kAUMIDISynthProperty_EnablePreload
+	@discussion			Scope:			Global
+						Value Type:		UInt32
+						Access: 		Write
+ 
+ 					Setting this property to 1 puts the MIDISynth in a mode where it will attempt to load
+ 					instruments from the bank or file when it receives a program change message.  This
+ 					is used internally by the MusicSequence.  It should only be used prior to MIDI playback,
+					and must be set back to 0 before attempting to start playback.
+ */
+
+enum {
+	kAUMIDISynthProperty_EnablePreload				= 4119
+};
 
 //=====================================================================================================================
 #pragma mark - AUSampler
 
 /*!
 	@enum			Apple AUSampler Property IDs
-	@abstract		The collection of property IDs for the Apple AUSampler audio unit.
+	@abstract		The collection of property IDs for the Apple Sampler audio unit.
  
 	@discussion		The AUSampler audio unit lets a client create an editable, interactive
 					sampler synthesizer instrument.

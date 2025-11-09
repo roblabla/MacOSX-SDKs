@@ -214,7 +214,10 @@
  * http://gcc.gnu.org/bugzilla/show_bug.cgi?id=55965
  */
 
-#if __STDC_VERSION__ >= 199901L && (!defined(__GNUC__) || defined(__clang__))
+#if defined(__cplusplus) || \
+    (__STDC_VERSION__ >= 199901L && \
+     !defined(__GNUC_GNU_INLINE__) && \
+     (!defined(__GNUC__) || defined(__clang__)))
 # define __header_inline           inline
 #elif defined(__GNUC__) && defined(__GNUC_STDC_INLINE__)
 # define __header_inline           extern __inline __attribute__((__gnu_inline__))
@@ -234,6 +237,27 @@
    * inline.  Oh well.
    */
 # define __header_always_inline    __header_inline
+#endif
+
+/*
+ * Compiler-dependent macros that bracket portions of code where the
+ * "-Wunreachable-code" warning should be ignored. Please use sparingly.
+ */
+#if defined(__clang__)
+# define __unreachable_ok_push \
+         _Pragma("clang diagnostic push") \
+         _Pragma("clang diagnostic ignored \"-Wunreachable-code\"")
+# define __unreachable_ok_pop \
+         _Pragma("clang diagnostic pop")
+#elif defined(__GNUC__) && ((__GNUC__ > 4) || (__GNUC__ == 4 && __GNUC_MINOR__ >= 6))
+# define __unreachable_ok_push \
+         _Pragma("GCC diagnostic push") \
+         _Pragma("GCC diagnostic ignored \"-Wunreachable-code\"")
+# define __unreachable_ok_pop \
+         _Pragma("GCC diagnostic pop")
+#else
+# define __unreachable_ok_push
+# define __unreachable_ok_pop
 #endif
 
 /*
@@ -464,6 +488,7 @@
 #define __DARWIN_ALIAS(sym)		__asm("_" __STRING(sym) __DARWIN_SUF_UNIX03)
 #define __DARWIN_ALIAS_C(sym)		__asm("_" __STRING(sym) __DARWIN_SUF_NON_CANCELABLE __DARWIN_SUF_UNIX03)
 #define __DARWIN_ALIAS_I(sym)		__asm("_" __STRING(sym) __DARWIN_SUF_64_BIT_INO_T __DARWIN_SUF_UNIX03)
+#define __DARWIN_NOCANCEL(sym)  	__asm("_" __STRING(sym) __DARWIN_SUF_NON_CANCELABLE)
 #define __DARWIN_INODE64(sym)		__asm("_" __STRING(sym) __DARWIN_SUF_64_BIT_INO_T)
 
 #define __DARWIN_1050(sym)		__asm("_" __STRING(sym) __DARWIN_SUF_1050)

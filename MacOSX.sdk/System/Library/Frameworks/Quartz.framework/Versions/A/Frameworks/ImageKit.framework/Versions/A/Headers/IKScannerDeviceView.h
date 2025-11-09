@@ -77,22 +77,19 @@
 
 
 
-enum 
+typedef NS_ENUM(NSInteger, IKScannerDeviceViewTransferMode)
 {
     IKScannerDeviceViewTransferModeFileBased = 0,
     IKScannerDeviceViewTransferModeMemoryBased
-    
 };
-typedef NSInteger IKScannerDeviceViewTransferMode;
 
 
 
-enum 
+typedef NS_ENUM(NSInteger, IKScannerDeviceViewDisplayMode)
 {
     IKScannerDeviceViewDisplayModeSimple,
     IKScannerDeviceViewDisplayModeAdvanced
 };
-typedef NSInteger IKScannerDeviceViewDisplayMode;
 
 
 

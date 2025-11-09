@@ -204,7 +204,7 @@ CGSize vImageBuffer_GetSize( const vImage_Buffer *buf )
 /* vImageCGImageFormat_GetComponentCount
  *
  * Convenience function to calculate number of channels (color + alpha) for a given image format
- * If format->colorSpace is NULL, device RGB is used.
+ * If format->colorSpace is NULL, sRGB is used.
  */
 uint32_t vImageCGImageFormat_GetComponentCount( const vImage_CGImageFormat *format )
     VIMAGE_NON_NULL(1)
@@ -215,7 +215,7 @@ uint32_t vImageCGImageFormat_GetComponentCount( const vImage_CGImageFormat *form
  *
  * returns nonzero if two vImage_CGImageFormats are the same
  * if either operand is NULL, the result is false.
- * if vImage_CGImageFormat.colorSpace is NULL, device RGB is used.
+ * if vImage_CGImageFormat.colorSpace is NULL, sRGB is used.
  */
 Boolean vImageCGImageFormat_IsEqual( const vImage_CGImageFormat *f1,  const vImage_CGImageFormat *f2 )
     __OSX_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 );
@@ -243,7 +243,7 @@ Boolean vImageCGImageFormat_IsEqual( const vImage_CGImageFormat *f1,  const vIma
  *                  vImageCGImageFormat_GetPixelBits, CGImageGetWidth and CGImageGetHeight helpful in sizing your buffer.
  *
  *  format          The desired image format associated with the output buf. You may pass NULL for the colorspace,
- *                  in which case device RGB will be used. 
+ *                  in which case sRGB will be used.
  *
  *  backgroundColor If the CGImageRef encodes an alpha (or mask) and the output format does not have alpha then the
  *                  result will be flattened against a background color. See vImageConverter_CreateWithCGImageFormat
@@ -287,11 +287,16 @@ Boolean vImageCGImageFormat_IsEqual( const vImage_CGImageFormat *f1,  const vIma
  *          kvImageInvalidParameter             format->decode is not NULL
  *          kvImageInvalidParameter             format->bitsPerComponent is not in {0,1,2,4,5,8,16,32}
  *          kvImageInvalidImageFormat           format->renderingIntent is not a known value
+ *          kvImageInvalidImageFormat           The format called for conversion to an input-only colorspace. Some color profiles
+ *                                              (e.g. those arising from a scanner) are described as input only, because the device can
+ *                                              not produce image output.
  *          kvImageNullPointerArgument          format may not be NULL
  *          kvImageNullPointerArgument          image may not be NULL
  *          kvImageInternalError                Something unexpected went wrong. Please file a bug. 
  *
  *  You are responsible for returning the memory referenced by buf->data to the system using free() when you are done with it. 
+ *  The CGImage may have other metadata associated with it, such as camera orientiation, which may require further
+ *  processing downstream.  vImage just does 1:1 pixel conversions from the raw image source.
  */
     
 vImage_Error vImageBuffer_InitWithCGImage(  vImage_Buffer        *  buf,            /* A pointer to a vImage_Buffer struct to be overwritten */
@@ -335,7 +340,7 @@ vImage_Error vImageBuffer_InitWithCGImage(  vImage_Buffer        *  buf,        
  *  buf             The vImage_Buffer from which to make the CGImageRef
  *
  *  format          The image format of the vImage_Buffer. format may not be NULL.  format->colorspace may be NULL, 
- *                  in which case device RGB will be used.  The colorspace is retained as needed by the new CGImage. 
+ *                  in which case sRGB will be used.  The colorspace is retained as needed by the new CGImage.
  *
  *  callback        In no-copy mode, this callback is called to destroy the buf->data when the CGImageRef no longer needs it. 
  *                  If NULL is passed for the callback, then free() will be used to destroy buf->data.  userData will be 
@@ -389,6 +394,19 @@ vImage_Error vImageBuffer_InitWithCGImage(  vImage_Buffer        *  buf,        
  *      kvImageNullPointerArgument          format may not be NULL
  *      kvImageNullPointerArgument          buf may not be NULL
  *
+ *
+ * CGImage Debugging Note:
+ *      The format parameter describes the image data you pass in, but there is no requirement that this is the
+ *      format that is actually used to represent the image data held by the CGImage. You should be able to get 
+ *      back the data in any format you like with vImageBuffer_InitWithCGImage. However, understand that if you 
+ *      request the data through another API like CGDataProviderCopyData(), it will be formatted as described by 
+ *      that API -- for CGDataProviderCopyData(), that would be as described by: CGImageGetBitmapInfo, CGImageGetDecode,
+ *      CGImageGetRenderingIntent, CGImageGetColorSpace, CGImageGetBytesPerRow, CGImageGetBitsPerPixel, 
+ *      CGImageGetBitsPerComponent, etc.  Furthermore, the format that those APIs report is also not necessarily 
+ *      the format of the data held by the CGImageRef.  Common image data consumers like CoreAnimation and 
+ *      CoreGraphics have their format preferences and vImage caters to them in order to deliver good performance.
+ *
+ *      CGImageRefs can also be made from vImage_Buffers using CGImageCreate() and CGDataProviderCreateWithData().
  */
     
 CGImageRef vImageCreateCGImageFromBuffer( const vImage_Buffer *buf,
@@ -403,23 +421,6 @@ CGImageRef vImageCreateCGImageFromBuffer( const vImage_Buffer *buf,
 
     
     
-/*
- *  vImageConverter
- *
- *  The vImageConverter is an opaque type which contains information needed to do a rapid conversion from
- *  one image type to another. Sometimes, it can take a significant amount of time to figure out how to convert
- *  from one format to another. It wouldn't be good to do that redundantly for a bunch of small images. The 
- *  vImageConversionSetup allows us to set up the conversion once and reuse the information many times, to 
- *  keep net latencies low. 
- *
- *  Note that creating a vImageConverter can at times take a while. While usually it is quick, it might have
- *  to do things like load other frameworks in the system (e.g. Colorsync) if they are not loaded already,
- *  or build a lookup table. It is a good idea to setup your conversions in advance and reuse the conversion
- *  objects.  The objects are thread safe. You can use the same object in multiple threads concurrently. They
- *  follow standard retain / release semantics and can be used as CFTypeRefs.
- */
-    
-typedef struct vImageConverter * vImageConverterRef;
 
 /*
  *  vImageConverter_Retain
@@ -450,12 +451,12 @@ void vImageConverter_Release( vImageConverterRef converter ) __OSX_AVAILABLE_STA
  *
  *  Parameters:
  *      srcFormat       a pointer to a populated vImage_CGImageFormat struct describing the image format
- *                      of the source image. If the CGColorSpaceRef is NULL, device RGB will be used
+ *                      of the source image. If the CGColorSpaceRef is NULL, sRGB will be used
  *                      as the default value. The CGColorSpaceRef will be retained by this function. It
  *                      will be released when the vImageConverter is destroyed.
  *
  *      destFormat      a pointer to a populated vImage_CGImageFormat struct describing the image format
- *                      of the destination image. If the CGColorSpaceRef is NULL, device RGB will be
+ *                      of the destination image. If the CGColorSpaceRef is NULL, sRGB will be
  *                      used as the default value. The CGColorSpaceRef will be retained by this function.
  *                      It will be released when the vImageConverter is destroyed.
  *
@@ -518,6 +519,9 @@ void vImageConverter_Release( vImageConverterRef converter ) __OSX_AVAILABLE_STA
  *                                          IEEE-754-2008 binary16 interchange format  (a.k.a. OpenEXR half float). 32-bit floats 
  *                                          are the standard IEEE-754-2008 binary32 interchange format. (a.k.a float in C/C++/ObjC)
  *      kvImageInvalidImageFormat           format->renderingIntent is not a known value
+ *      kvImageInvalidImageFormat           The conversion called for conversion to an input-only colorspace. Some color profiles 
+ *                                          (e.g. those arising from a scanner) are described as input only, because the device can
+ *                                          not produce image output.
  *
  *      kvImageInternalError                The converter was unable to find a path from the source format to the destination format.
  *                                          This should not happen and indicates incorrect operation of the function. Please file a bug.
@@ -646,6 +650,144 @@ vImage_Error vImageConverter_MustOperateOutOfPlace( const vImageConverterRef con
                 VIMAGE_NON_NULL(1)
                 __OSX_AVAILABLE_STARTING( __MAC_10_9, __IPHONE_7_0 );
     
+/*
+ *  vImageConverter_GetNumberOfSourceBuffers
+ *  vImageConverter_GetNumberOfDestinationBuffers
+ *
+ *  Parameters:
+ *
+ *      converter       The conversion for which you wish to know the number of source or result buffers
+ *
+ *  Return:
+ *  
+ *      On success, the number of source or destination buffers is returned.  On failure, 0 is returned.
+ *      kvImagePrintDiagnosticsToConsole may be useful to diagnose failures.
+ *
+ *  For older operating systems, where these functions are not available, the number of source and destination buffers is always 1.
+ */
+unsigned long vImageConverter_GetNumberOfSourceBuffers( const vImageConverterRef converter ) VIMAGE_NON_NULL(1) __OSX_AVAILABLE_STARTING( __MAC_10_10, __IPHONE_8_0 );
+unsigned long vImageConverter_GetNumberOfDestinationBuffers( const vImageConverterRef converter ) VIMAGE_NON_NULL(1) __OSX_AVAILABLE_STARTING( __MAC_10_10, __IPHONE_8_0 );
+    
+    
+typedef VIMAGE_CHOICE_ENUM(vImageBufferTypeCode, uint32_t)
+{
+    kvImageBufferTypeCode_EndOfList = 0,
+    
+    /* planar formats -- each buffer contains a single color channel, arising from an image described by a colorspace */
+    kvImageBufferTypeCode_ColorSpaceChannel1,
+    kvImageBufferTypeCode_ColorSpaceChannel2,
+    kvImageBufferTypeCode_ColorSpaceChannel3,
+    kvImageBufferTypeCode_ColorSpaceChannel4,
+    kvImageBufferTypeCode_ColorSpaceChannel5,
+    kvImageBufferTypeCode_ColorSpaceChannel6,
+    kvImageBufferTypeCode_ColorSpaceChannel7,
+    kvImageBufferTypeCode_ColorSpaceChannel8,
+    kvImageBufferTypeCode_ColorSpaceChannel9,
+    kvImageBufferTypeCode_ColorSpaceChannel10,
+    kvImageBufferTypeCode_ColorSpaceChannel11,
+    kvImageBufferTypeCode_ColorSpaceChannel12,
+    kvImageBufferTypeCode_ColorSpaceChannel13,
+    kvImageBufferTypeCode_ColorSpaceChannel14,
+    kvImageBufferTypeCode_ColorSpaceChannel15,
+    kvImageBufferTypeCode_ColorSpaceChannel16,
+    
+    /* Coverage component */
+    kvImageBufferTypeCode_Alpha,
+
+    /* indexed color spaces */
+    kvImageBufferTypeCode_Indexed,
+
+    /* YUV formats.  */
+    kvImageBufferTypeCode_CVPixelBuffer_YCbCr,          /* A YCbCr packed buffer formatted according to types in CVPixelBuffer.h. May be accompanied by an alpha channel */
+    kvImageBufferTypeCode_Luminance,                    /* A Luminance (Y) plane */
+    kvImageBufferTypeCode_Chroma,                       /* A two-channel chroma (CbCr) plane */
+    kvImageBufferTypeCode_Cb,                           /* A blue chroma (Cb) plane */
+    kvImageBufferTypeCode_Cr,                           /* A red chroma (Cr) plane */
+    
+    /* A interleaved (chunky) format with one or more channels, encodable as a vImage_CGImageFormat */
+    kvImageBufferTypeCode_CGFormat,                     /* always a singleton -- appearing as { kvImageBufferTypeCode_CGFormat, 0} */
+                                                        /* prior to OS X.10 and iOS 8.0, all vImageConvert_AnyToAny buffers have this type.*/
+
+    kvImageBufferTypeCode_Chunky,                       /* always a singleton -- appearing as { kvImageBufferTypeCode_Chunky, 0} */
+                                                        /* buffer format is not encodable as vImage_CGImageFormat. Not YpCbCr. */
+
+    /* must appear after last unique code */
+    kvImageBufferTypeCode_UniqueFormatCount,
+    
+    /* Convenience codes for better code readability */
+    kvImageBufferTypeCode_Monochrome = kvImageBufferTypeCode_ColorSpaceChannel1,
+    
+    
+    kvImageBufferTypeCode_RGB_Red = kvImageBufferTypeCode_ColorSpaceChannel1,
+    kvImageBufferTypeCode_RGB_Green = kvImageBufferTypeCode_ColorSpaceChannel2,
+    kvImageBufferTypeCode_RGB_Blue = kvImageBufferTypeCode_ColorSpaceChannel3,
+
+    kvImageBufferTypeCode_CMYK_Cyan = kvImageBufferTypeCode_ColorSpaceChannel1,
+    kvImageBufferTypeCode_CMYK_Magenta = kvImageBufferTypeCode_ColorSpaceChannel2,
+    kvImageBufferTypeCode_CMYK_Yellow = kvImageBufferTypeCode_ColorSpaceChannel3,
+    kvImageBufferTypeCode_CMYK_Black = kvImageBufferTypeCode_ColorSpaceChannel4,
+
+    kvImageBufferTypeCode_XYZ_X = kvImageBufferTypeCode_ColorSpaceChannel1,
+    kvImageBufferTypeCode_XYZ_Y = kvImageBufferTypeCode_ColorSpaceChannel2,
+    kvImageBufferTypeCode_XYZ_Z = kvImageBufferTypeCode_ColorSpaceChannel3,
+
+    kvImageBufferTypeCode_LAB_L = kvImageBufferTypeCode_ColorSpaceChannel1,
+    kvImageBufferTypeCode_LAB_A = kvImageBufferTypeCode_ColorSpaceChannel2,
+    kvImageBufferTypeCode_LAB_B = kvImageBufferTypeCode_ColorSpaceChannel3,
+};
+    
+/*
+ *  vImageConverter_GetSourceBufferOrder
+ *  vImageConverter_GetDestinationBufferOrder
+ *
+ *  These functions describe the identity of each buffer passed in the srcs / dests parameters of vImageConvert_AnyToAny,
+ *  to allow you to order the buffers correctly. It is provided for informational purposes, to help wire up image 
+ *  processing pipelines to vImage that are not supported through more direct means, CGImages, CVPixelBuffers, the alternative
+ *  handling of which is described at the end of this comment.
+ *
+ *  Parameters:
+ *
+ *      converter       The conversion for which you wish to know the ordering of source or result buffers.
+ *                      converter must be a valid vImageConverterRef.
+ *
+ *
+ *  Return Value:
+ *
+ *      The function returns a kvImageBufferTypeCode_EndOfList terminated array of buffer type codes. The type codes
+ *  indicate the order that the vImage_Buffers are passed in to vImageConvert_AnyToAny. The array is valid for the
+ *  lifetime of the vImageConverterRef.
+ *
+ *  Notes:
+ *
+ *  Prior to OS X.10 and iOS 8.0, only CG Image formats are handled by vImageConvert_AnyToAny. Had these functions existed
+ *  then, the result would always be {kvImageBufferTypeCode_CGFormat, kvImageBufferTypeCode_EndOfList}
+ *
+ *
+ *  Simplified Common Cases
+ *  -----------------------
+ *    CGImageRefs:
+ *      CoreGraphics formats always come as a single buffer, with one or more channels. No buffer ordering is 
+ *      requred. The buffer order is always kvImageBufferTypeCode_CGFormat. Prior to OS X.10 and iOS 8.0, only
+ *      converters to CG image formats are available, so where these functions are not available, the answer would
+ *      have always been { kvImageBufferTypeCode_CGFormat, 0}. As a point of trivia, the ordering of the channels 
+ *      within a buffer is by convention as follows:
+ *
+ *              number of channels = number of channels in colorspace + (alpha != kCGImageAlphaNone)
+ *              alpha is either first or last, given by the alpha component of the CGBitmapInfo
+ *              The ordering of the non-alpha channels is given by the colorspace, e.g. {R,G,B} for a RGB image.
+ *              For 8-bit images, the ordering of the channels may be reversed according to
+ *                  kCGBitmapByteOrderLittleEndian32 or kCGBitmapByteOrderLittleEndian16, but
+ *                  the pixel size must match the endian swap chunk size. This gives you access to formats
+ *                  like BGRA8888. If the endian is default or big endian, then no swap occurs.
+ *
+ *    CVPixelBufferRefs:
+ *      Though these APIs will work for this purpose, it is expected to be simpler to use vImageBuffer_InitForCopyToCVPixelBuffer 
+ *      or vImageBuffer_InitForCopyFromCVPixelBuffer to set up a vImage_Buffer array for srcs and dests. Pass kvImageDoNotAllocate 
+ *      to have it automatically alias a locked CVPixelBuffer. The conversion will then copy the data right into or out of the 
+ *      CVPixelBuffer without further copying or modification.  (It may still need to be copied out to the GPU, for example, however.)
+ */
+const vImageBufferTypeCode * vImageConverter_GetSourceBufferOrder( vImageConverterRef converter )  VIMAGE_NON_NULL(1) __OSX_AVAILABLE_STARTING( __MAC_10_10, __IPHONE_8_0 );
+const vImageBufferTypeCode * vImageConverter_GetDestinationBufferOrder( vImageConverterRef converter )  VIMAGE_NON_NULL(1) __OSX_AVAILABLE_STARTING( __MAC_10_10, __IPHONE_8_0 );
     
 /*
  *  vImageConvert_AnyToAny
@@ -656,11 +798,13 @@ vImage_Error vImageConverter_MustOperateOutOfPlace( const vImageConverterRef con
  *  Parameters:
  *      srcs        a pointer to an array of vImage_Buffer structs that describe the color planes that make
  *                  up the input image. Please see the description of the function that created the
- *                  vImageConverter for the ordering and number of input buffers.
+ *                  vImageConverter for the ordering and number of input buffers. The ordering can also be
+ *                  determined manually using vImageConverter_GetSourceBufferOrder.
  *
  *     dests        a pointer to an array of vImage_Buffer structs that describe the color planes that make
  *                  up the result image. Please see the description of the function that created the
- *                  vImageConverter for the ordering and number of output buffers.
+ *                  vImageConverter for the ordering and number of output buffers. The ordering can also be
+ *                  determined manually using vImageConverter_GetSourceBufferOrder.
  *
  *   tempBuffer     May be NULL. If not NULL, the memory pointed to by tempBuffer will be used as scratch space
  *                  by the function. The size of the tempBuffer can be determined by passing kvImageGetTempBufferSize

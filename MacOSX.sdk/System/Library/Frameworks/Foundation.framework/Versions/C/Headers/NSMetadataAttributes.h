@@ -1,5 +1,5 @@
 /*	NSMetadataAttributes.h
-        Copyright (c) 2004-2013, Apple Inc. All rights reserved.
+        Copyright (c) 2004-2014, Apple Inc. All rights reserved.
  */
 
 #import <Foundation/NSObject.h>
@@ -15,6 +15,8 @@ FOUNDATION_EXPORT NSString * const NSMetadataItemPathKey NS_AVAILABLE(10_7, 5_0)
 FOUNDATION_EXPORT NSString * const NSMetadataItemFSSizeKey NS_AVAILABLE(10_7, 5_0); // file size in bytes; unsigned long long NSNumber
 FOUNDATION_EXPORT NSString * const NSMetadataItemFSCreationDateKey NS_AVAILABLE(10_7, 5_0); // NSDate
 FOUNDATION_EXPORT NSString * const NSMetadataItemFSContentChangeDateKey NS_AVAILABLE(10_7, 5_0); // NSDate
+FOUNDATION_EXPORT NSString * const NSMetadataItemContentTypeKey NS_AVAILABLE(10_9, 8_0); // NSString
+FOUNDATION_EXPORT NSString * const NSMetadataItemContentTypeTreeKey NS_AVAILABLE(10_9, 8_0); // NSArray of NSString
 
 FOUNDATION_EXPORT NSString * const NSMetadataItemIsUbiquitousKey NS_AVAILABLE(10_7, 5_0); // boolean NSNumber
 
@@ -31,12 +33,14 @@ FOUNDATION_EXPORT NSString * const NSMetadataUbiquitousItemPercentDownloadedKey 
 FOUNDATION_EXPORT NSString * const NSMetadataUbiquitousItemPercentUploadedKey NS_AVAILABLE(10_7, 5_0); // double NSNumber; range [0..100]
 FOUNDATION_EXPORT NSString * const NSMetadataUbiquitousItemDownloadingErrorKey NS_AVAILABLE(10_9, 7_0); // NSError; the error when downloading the item from iCloud failed, see the NSUbiquitousFile section in FoundationErrors.h
 FOUNDATION_EXPORT NSString * const NSMetadataUbiquitousItemUploadingErrorKey NS_AVAILABLE(10_9, 7_0); // NSError; the error when uploading the item to iCloud failed, see the NSUbiquitousFile section in FoundationErrors.h
+FOUNDATION_EXPORT NSString * const NSMetadataUbiquitousItemDownloadRequestedKey NS_AVAILABLE(10_10, 8_0); // boolean NSNumber
+FOUNDATION_EXPORT NSString * const NSMetadataUbiquitousItemIsExternalDocumentKey NS_AVAILABLE(10_10, 8_0); // boolean NSNumber
+FOUNDATION_EXPORT NSString * const NSMetadataUbiquitousItemContainerDisplayNameKey NS_AVAILABLE(10_10, 8_0); // NSString
+FOUNDATION_EXPORT NSString * const NSMetadataUbiquitousItemURLInLocalContainerKey NS_AVAILABLE(10_10, 8_0); // NSURL
 
 // The following NSMetadataItem attributes are available on Mac OS for non-ubiquitious items only. The constants are equal to the corresponding ones in <Metadata/MDItem.h>.
 
 FOUNDATION_EXPORT NSString * const NSMetadataItemAttributeChangeDateKey NS_AVAILABLE_MAC(10_9); // NSDate
-FOUNDATION_EXPORT NSString * const NSMetadataItemContentTypeKey NS_AVAILABLE_MAC(10_9); // NSString
-FOUNDATION_EXPORT NSString * const NSMetadataItemContentTypeTreeKey NS_AVAILABLE_MAC(10_9); // NSArray of NSString
 FOUNDATION_EXPORT NSString * const NSMetadataItemKeywordsKey NS_AVAILABLE_MAC(10_9); // NSArray of NSString
 FOUNDATION_EXPORT NSString * const NSMetadataItemTitleKey NS_AVAILABLE_MAC(10_9); // NSString
 FOUNDATION_EXPORT NSString * const NSMetadataItemAuthorsKey NS_AVAILABLE_MAC(10_9); // NSArray of NSString

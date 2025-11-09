@@ -2,7 +2,7 @@
 //  MKLocalSearchRequest.h
 //  MapKit
 //
-//  Copyright (c) 2012-2013, Apple Inc. All rights reserved.
+//  Copyright (c) 2012-2014, Apple Inc. All rights reserved.
 //
 
 #import <MapKit/MKFoundation.h>

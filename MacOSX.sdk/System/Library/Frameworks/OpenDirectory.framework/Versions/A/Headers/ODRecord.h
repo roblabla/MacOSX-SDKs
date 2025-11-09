@@ -190,14 +190,14 @@
     @abstract   This will copy any policies configured for the record.
     @discussion This will copy any policies configured for the record.
 */
-- (NSDictionary *)policiesAndReturnError:(NSError **)error __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+- (NSDictionary *)policiesAndReturnError:(NSError **)error __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_9, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "use accountPoliciesAndReturnError:");
 
 /*!
     @method     effectivePoliciesAndReturnError:
     @abstract   This will copy any policies configured for the record.
     @discussion This will copy any policies configured for the record.
 */
-- (NSDictionary *)effectivePoliciesAndReturnError:(NSError **)error __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+- (NSDictionary *)effectivePoliciesAndReturnError:(NSError **)error __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_9, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "use authenticationAllowedAndReturnError: and similar methods");
 
 /*!
     @function   supportedPoliciesAndReturnError:
@@ -206,28 +206,204 @@
                 for the policy in question.  For example, if password history is available, it will state how much history is
                 supported.
 */
-- (NSDictionary *)supportedPoliciesAndReturnError:(NSError **)error __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+- (NSDictionary *)supportedPoliciesAndReturnError:(NSError **)error __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_9, __MAC_10_10, __IPHONE_NA, __IPHONE_NA);
 
 /*!
     @function   setPolicies:error:
     @abstract   This will set the policy for the record.
     @discussion This will set the policy for the record.  Policies are evaluated in combination with node-level policies.
 */
-- (BOOL)setPolicies:(NSDictionary *)policies error:(NSError **)error __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+- (BOOL)setPolicies:(NSDictionary *)policies error:(NSError **)error __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_9, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "use setAccountPolicies:error:");
 
 /*!
     @function   setPolicy:value:error:
     @abstract   This will set a specific policy setting for the record.
     @discussion This will set a specific policy setting for the record.
 */
-- (BOOL)setPolicy:(ODPolicyType)policy value:(id)value error:(NSError **)error __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+- (BOOL)setPolicy:(ODPolicyType)policy value:(id)value error:(NSError **)error __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_9, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "use addAccountPolicy:toCategory:error:");
 
 /*!
     @function   removePolicy:error:
     @abstract   This will remove a specific policy setting from the record.
     @discussion This will remove a specific policy setting from the record.
 */
-- (BOOL)removePolicy:(ODPolicyType)policy error:(NSError **)error __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+- (BOOL)removePolicy:(ODPolicyType)policy error:(NSError **)error __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_9, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "use removeAccountPolicy:fromCategory:error:");
+
+/*!
+    @method     addAccountPolicy:toCategory:error:
+    @abstract   This will add a specific policy to the specific category for the record.
+    @discussion This will add a specific policy to the specific category for the record.
+                The specified policy will be applied, in combination with any
+                node policies, to the specified record when policies are evaluated.
+    @param      policy a dictionary containing the specific policy to be added.
+                The dictionary may contain the following keys:
+                    kODPolicyKeyIdentifier a required key identifying the policy.
+                    kODPolicyKeyParameters an optional key containing a dictionary of
+                        parameters that can be used for informational purposes or in
+                        the policy format string.
+                    kODPolicyKeyContent a required key specifying the policy,
+                        from which a predicate will be created for evaluating
+                        the policy.
+    @param      category a valid ODPolicyCategoryType to which the policy will be added.
+    @param      error an optional NSError reference for error details.
+    @result     a BOOL which signifies if the policy addition succeeded, otherwise error is set.
+*/
+- (BOOL)addAccountPolicy:(NSDictionary *)policy toCategory:(ODPolicyCategoryType)category error:(NSError **)error __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_NA);
+
+/*!
+    @method     removeAccountPolicy:fromCategory:error:
+    @abstract   This will remove a specific policy from the specific category for the record.
+    @discussion This will remove a specific policy from the specific category for the record.
+    @param      policy a dictionary containing the specific policy to be
+                removed, with the same format as described in addAccountPolicy.
+    @param      category a valid ODPolicyCategoryType from which the policy will be removed.
+    @param      error an optional NSError reference for error details.
+    @result     a BOOL which signifies if the policy removal succeeded, otherwise error is set.
+*/
+- (BOOL)removeAccountPolicy:(NSDictionary *)policy fromCategory:(ODPolicyCategoryType)category error:(NSError **)error __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_NA);
+
+/*!
+    @method     setAccountPolicies:error:
+    @abstract   This will set the policies for the record.
+    @discussion This will set the policies for the record, replacing any
+                existing policies.  All of the policies in the set will be
+                applied to the record when policies are evaluated.
+    @param      policies a dictionary containing all of the policies to be set
+                for the node.  The dictionary may contain the following keys:
+                    kODPolicyCategoryAuthentication an optional key with a value
+                        of an array of policy dictionaries that specify when
+                        authentications should be allowed.
+                    kODPolicyCategoryPasswordContent an optional key with a
+                        value of an array of policy dictionaries the specify the
+                        required content of passwords. 
+                    kODPolicyCategoryPasswordChange an optional key with a value
+                        of an array of policy dictionaries that specify when
+                        passwords are required to be changed.
+    @param      error an optional NSError reference for error details.
+    @result     a BOOL which signifies if the policy set succeeded, otherwise error is set.
+*/
+- (BOOL)setAccountPolicies:(NSDictionary *)policies error:(NSError **)error __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_NA);
+
+/*!
+    @method     accountPoliciesAndReturnError:
+    @abstract   Returns a dictionary containing any policies configured for the record.
+    @discussion Returns a dictionary containing any policies configured for the record.
+                Does not include any policies set for the node.
+    @discussion Returns a dictionary containing any policies configured for the record.
+    @param      error an optional NSError reference for error details.
+    @result     a NSDictionary containing all currently set policies.  The
+                format of the dictionary is the same as described in
+                setAccountPolicies. 
+*/
+- (NSDictionary *)accountPoliciesAndReturnError:(NSError **)error __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_NA);
+
+/*!
+    @function   authenticationAllowedAndReturnError:
+    @abstract   Determines if policies allow the account to authenticate.
+    @discussion Determines if policies allow the account to authenticate.
+                Authentication and password change policies are evaluated.
+                Record-level and node-level policies are evaluated in
+                combination, with record-level taking precedence over node-level
+                policies.  The failure of any single policy will deny the
+                authentication.
+ 
+                This check is only definitive at the time it was requested. The
+                policy or the environment could change before the authentication
+                is actually requested.  Errors from the authentication request
+                should be consulted.
+
+                It is not necessary to call this function when calling
+                verifyPassword or verifyPasswordExtended since those methods
+                perform the same policy evaluation.
+
+    @param      error an optional NSError reference for error details.
+    @result     a bool which signifies if the authentication is allowed, otherwise error is set.
+ */
+- (BOOL)authenticationAllowedAndReturnError:(NSError **)error __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_NA);
+
+/*!
+    @method     passwordChangeAllowed:error:
+    @abstract   Determines if policies allow the password change.
+    @discussion Determines if policies allow the password change.  Password
+                content policies are evaluated. Record-level and node-level
+                policies are evaluated in combination, with record-level taking
+                precedence over node-level policies.  The failure of any single
+                policy will deny the password change.
+
+                This check is only definitive at the time it was requested. The
+                policy or the environment could change before the password change
+                is actually requested.  Errors from the password change request
+                should be consulted.
+
+    @param      newPassword contains the password to be evaluated.
+    @param      error an optional NSError reference for error details.
+    @result     a BOOL which signifies if the password change is allowed, otherwise error is set.
+ */
+- (BOOL)passwordChangeAllowed:(NSString *)newPassword error:(NSError **)error __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_NA);
+
+/*!
+    @method     willPasswordExpire:
+    @abstract   Determines if the password will expire within the specified time.
+    @discussion Determines if the password will expire (i.e. need to be changed)
+                between now and the specified number of seconds in the future. 
+                Password change policies are evaluated.  Record-level and
+                node-level policies are evaluated in combination, with
+                record-level taking precedence over node-level policies.
+    @param      willExpireIn the number of seconds from the current time to be
+                used as the upper-bound for the password expiration period.
+    @result     a BOOL which signifies if the password will expire within the
+                specified time.
+ */
+- (BOOL)willPasswordExpire:(uint64_t)willExpireIn __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_NA);
+
+/*!
+    @method     willAuthenticationsExpire:
+    @abstract   Determines if authentications will expire within the specified time.
+    @discussion Determines if authentications will expire (i.e. session and/or
+                account expires) between now and the specified number of seconds
+                in the future.  Authentication policies are evaluated.
+                Record-level and node-level policies are evaluated in
+                combination, with record-level taking precedence over node-level
+                policies. 
+    @param      willExpireIn the number of seconds from the current time to be
+                used as the upper-bound for the authentication expiration period.
+    @result     a BOOL which signifies if authentications will expire within the
+                specified time.
+ */
+- (BOOL)willAuthenticationsExpire:(uint64_t)willExpireIn __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_NA);
+
+/*!
+    @method     secondsUntilPasswordExpires
+    @abstract   Determines how many seconds until the password expires.
+    @discussion Determines how many seconds until the password expires (i.e.
+                needs changing).  Password change policies are evaluated.
+                Record-level and node-level policies are evaluated in
+                combination, with record-level taking precedence over node-level
+                policies. 
+    @result     the number of seconds until the password expires.  If multiple
+                policies will cause the password to expire, the soonest
+                expiration time is returned.  If already expired,
+                kODExpirationTimeExpired is returned.  If there are no password
+                change policies, kODExpirationTimeNeverExpires is returned. 
+ */
+@property (readonly) int64_t secondsUntilPasswordExpires __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_NA);
+
+/*!
+    @method     secondsUntilAuthenticationsExpire
+    @abstract   Determines how many seconds until authentications expire.
+    @discussion Determines how many seconds until authentications expire (i.e.
+                session and/or account expires). Authentication policies are
+                evaluated.   Record-level and node-level policies are evaluated
+                in combination, with record-level taking precedence over
+                node-level policies.
+    @result     the number of seconds until authentications expire.  If multiple
+                policies will cause authentications to expire, the soonest
+                expiration time is returned. If already expired,
+                kODExpirationTimeExpired is returned.  If there are no
+                authentication policies controlling expiration,
+                kODExpirationTimeNeverExpires is returned.  
+ */
+@property (readonly) int64_t secondsUntilAuthenticationsExpire __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_NA);
 
 @end
 

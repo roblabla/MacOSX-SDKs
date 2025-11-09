@@ -18,6 +18,8 @@
 #import <CoreLocation/CLErrorDomain.h>
 #import <CoreLocation/CLError.h>
 #import <CoreLocation/CLRegion.h>
+#import <CoreLocation/CLCircularRegion.h>
+#import <CoreLocation/CLBeaconRegion.h>
 #import <CoreLocation/CLHeading.h>
 #import <CoreLocation/CLLocation.h>
 #import <CoreLocation/CLLocationManager.h>

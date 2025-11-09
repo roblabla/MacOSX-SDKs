@@ -19,7 +19,7 @@
 # configuration parameters.
 
 APRUTIL_MAJOR_VERSION="1"
-APRUTIL_DOTTED_VERSION="1.3.12"
+APRUTIL_DOTTED_VERSION="1.5.2"
 
 prefix="/usr"
 exec_prefix="${prefix}"
@@ -27,16 +27,16 @@ bindir="${exec_prefix}/bin"
 libdir="${exec_prefix}/lib"
 includedir="${prefix}/include/apr-${APRUTIL_MAJOR_VERSION}"
 
-LIBS="-lexpat -liconv    -lsqlite3        -lldap -llber -llber"
+LIBS="-lexpat -liconv      -lsqlite3        -lldap -llber"
 INCLUDES=""
 LDFLAGS=""
-LDAP_LIBS="-lldap -llber -llber"
+LDAP_LIBS="-lldap -llber"
 DBM_LIBS="  "
 
 APRUTIL_LIBNAME="aprutil-${APRUTIL_MAJOR_VERSION}"
 
-APU_SOURCE_DIR="/SourceCache/apr/apr-30/apr-util/apr-util"
-APU_BUILD_DIR="/private/var/tmp/apr/apr-30~813/apr-util"
+APU_SOURCE_DIR="/SourceCache/apr/apr-32/apr-util/apr-util"
+APU_BUILD_DIR="/BinaryCache/apr/apr-32~217/Objects/apr-util"
 APR_XML_EXPAT_OLD="@APR_XML_EXPAT_OLD@"
 APU_DB_VERSION="0"
 
@@ -56,7 +56,7 @@ Known values for OPTION are:
   --ldflags         print linker flags
   --libs            print library information
   --avoid-ldap      do not include ldap library information with --libs
-  --ldap-libs       print additional library information to link with ldap
+  --ldap-libs       print library information to link with ldap
   --avoid-dbm       do not include DBM library information with --libs
   --dbm-libs        print additional library information to link with DBM
   --srcdir          print APR-util source directory

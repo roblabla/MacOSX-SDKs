@@ -42,16 +42,17 @@
 				anyone who's ever used a modern filesystem.  There are two kinds of objects in
 				this API; "real" objects and "virtual" objects, and the distinction is important.
 				
-				* A <i>real</i> file or folder object corresponds directly to a file or folder
+				<ul>
+				<li>A <i>real</i> file or folder object corresponds directly to a file or folder
 					on disk.  The data for a real file object comes directly from the on-disk file.
 					The hierarchy underneath a real folder object corresponds 1:1 to the
-					hierarchy underneath the folder in the on-disk filesystem.
+					hierarchy underneath the folder in the on-disk filesystem.</li>
 				
-				* A <i>virtual</i> file or folder object does not have any actual representation
+				<li>A <i>virtual</i> file or folder object does not have any actual representation
 					on disk.  The data for a virtual file object is specified through the API or
 					in a callback function.  The hierarchy underneath a virtual folder object 
-					is specified through the API.
-				
+					is specified through the API.</li>
+				</ul>
 				
 				<h3>Creating a Virtual Hierarchy</h3>
 				In the hierarchy specified through this API, only virtual folders may be assigned
@@ -104,12 +105,14 @@
 				
 				There are two APIs available for getting the specific name from an object:
 				
-				* @link //apple_ref/occ/instm/DRFSObject/specificNameForFilesystem: specificNameForFilesystem: @/link returns the unmodified specific name, which would be used if there were
-				no conflicts.  
+				<ul>
+				<li>@link //apple_ref/occ/instm/DRFSObject/specificNameForFilesystem: specificNameForFilesystem: @/link returns the unmodified specific name, which would be used if there were
+				no conflicts.</li>
 				
-				* @link //apple_ref/occ/instm/DRFSObject/mangledNameForFilesystem: mangledNameForFilesystem: @/link returns a modified specific name, mangled if necessary,
-				which is guaranteed to be unique amongst its siblings in the filesystem.  
-				
+				<li>@link //apple_ref/occ/instm/DRFSObject/mangledNameForFilesystem: mangledNameForFilesystem: @/link returns a modified specific name, mangled if necessary,
+				which is guaranteed to be unique amongst its siblings in the filesystem.</li>
+				</ul>
+ 
 				The filesystem keys are detailed in <b>Filesystem data accessors</b>.  Most of the keys are 
 				straightforward; however, ISO-9660
 				is a special case, since there are two possible naming conventions for ISO-9660, level 1
@@ -217,11 +220,13 @@
 				will be modified to contain something like the following.  Note that each component of
 				the path has been modified to conform to the rules of the target filesystem.
 				
-				* ISO-9660 level 1: "MYLONGLO/THISISAN.WIT"
-				* ISO-9660 level 2: "MY LONG LONG DIRECTORY/THIS: IS AN UNU.WITH_EXTENSION"
-				* Joliet:           "my long, long directory/this: is an unusual filename.with_extension"
-				* HFS+:             "my long, long directory/this: is an unusual$ filename.with_extension"
-			
+				<ul>
+				<li> ISO-9660 level 1: "MYLONGLO/THISISAN.WIT"</li>
+				<li> ISO-9660 level 2: "MY LONG LONG DIRECTORY/THIS: IS AN UNU.WITH_EXTENSION"</li>
+				<li> Joliet:           "my long, long directory/this: is an unusual filename.with_extension"</li>
+				<li> HFS+:             "my long, long directory/this: is an unusual$ filename.with_extension"</li>
+				</ul>
+
 				The burn engine will make an effort to appropriately translate each component of the path.
 				However, it's still possible that the symlink might break in complex cases.
 				(For example, in the case of a relative-path symlink which traverses through an absolute-path
@@ -291,15 +296,17 @@ enum {
 				anyone who's ever used a modern filesystem.  There are two kinds of objects in
 				this API; "real" objects and "virtual" objects, and the distinction is important.
 				
-				* A <i>real</i> file or folder object corresponds directly to a file or folder
+				<ul>
+				<li>A <i>real</i> file or folder object corresponds directly to a file or folder
 					on disk.  The data for a real file object comes directly from the on-disk file.
 					The hierarchy underneath a real folder object corresponds 1:1 to the
-					hierarchy underneath the folder in the on-disk filesystem.
+					hierarchy underneath the folder in the on-disk filesystem.</li>
 				
-				* A <i>virtual</i> file or folder object does not have any actual representation
+				<li>A <i>virtual</i> file or folder object does not have any actual representation
 					on disk.  The data for a virtual file object is specified through the API or
 					in a callback function.  The hierarchy underneath a virtual folder object 
-					is specified through the API.
+					is specified through the API.</li>
+				</ul>
 				
 				
 				<h3>Creating a Virtual Hierarchy</h3>
@@ -353,12 +360,14 @@ enum {
 				
 				There are two APIs available for getting the specific name from an object:
 				
-				* @link //apple_ref/occ/instm/DRFSObject/specificNameForFilesystem: specificNameForFilesystem: @/link returns the unmodified specific name, which would be used if there were
-				no conflicts.  
+				<ul>
+				<li>@link //apple_ref/occ/instm/DRFSObject/specificNameForFilesystem: specificNameForFilesystem: @/link returns the unmodified specific name, which would be used if there were
+				no conflicts.</li>
 				
-				* @link //apple_ref/occ/instm/DRFSObject/mangledNameForFilesystem: mangledNameForFilesystem: @/link returns a modified specific name, mangled if necessary,
-				which is guaranteed to be unique amongst its siblings in the filesystem.  
-				
+				<ul>@link //apple_ref/occ/instm/DRFSObject/mangledNameForFilesystem: mangledNameForFilesystem: @/link returns a modified specific name, mangled if necessary,
+				which is guaranteed to be unique amongst its siblings in the filesystem.</li>
+				</ul>
+ 
 				The filesystem keys are detailed in <b>Filesystem data accessors</b>.  Most of the keys are 
 				straightforward; however, ISO-9660
 				is a special case, since there are two possible naming conventions for ISO-9660, level 1
@@ -466,11 +475,13 @@ enum {
 				will be modified to contain something like the following.  Note that each component of
 				the path has been modified to conform to the rules of the target filesystem.
 				
-				* ISO-9660 level 1: "MYLONGLO/THISISAN.WIT"
-				* ISO-9660 level 2: "MY LONG LONG DIRECTORY/THIS: IS AN UNU.WITH_EXTENSION"
-				* Joliet:           "my long, long directory/this: is an unusual filename.with_extension"
-				* HFS+:             "my long, long directory/this: is an unusual$ filename.with_extension"
-			
+				<ul>
+				<li>ISO-9660 level 1: "MYLONGLO/THISISAN.WIT"</li>
+				<li>ISO-9660 level 2: "MY LONG LONG DIRECTORY/THIS: IS AN UNU.WITH_EXTENSION"</li>
+				<li>Joliet:           "my long, long directory/this: is an unusual filename.with_extension"</li>
+				<li>HFS+:             "my long, long directory/this: is an unusual$ filename.with_extension"</li>
+				</ul>
+ 
 				The burn engine will make an effort to appropriately translate each component of the path.
 				However, it's still possible that the symlink might break in complex cases.
 				(For example, in the case of a relative-path symlink which traverses through an absolute-path

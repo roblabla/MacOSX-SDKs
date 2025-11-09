@@ -11,10 +11,10 @@
  *    notice, this list of conditions and the following disclaimer in the
  *    documentation and/or other materials provided with the distribution.
  *
- * THIS SOFTWARE IS PROVIDED BY APPLE COMPUTER, INC. ``AS IS'' AND ANY
+ * THIS SOFTWARE IS PROVIDED BY APPLE INC. ``AS IS'' AND ANY
  * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL APPLE COMPUTER, INC. OR
+ * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL APPLE INC. OR
  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
@@ -26,44 +26,41 @@
 
 #import <WebKit/DOMHTMLElement.h>
 
-#if WEBKIT_VERSION_MAX_ALLOWED >= WEBKIT_VERSION_1_3
-
 @class DOMFileList;
 @class DOMHTMLFormElement;
 @class NSString;
 @class NSURL;
 
+NS_CLASS_AVAILABLE_MAC(10_4)
 @interface DOMHTMLInputElement : DOMHTMLElement
-@property(copy) NSString *accept;
-@property(copy) NSString *alt;
-@property BOOL autofocus AVAILABLE_IN_WEBKIT_VERSION_4_0;
+@property (copy) NSString *accept;
+@property (copy) NSString *alt;
+@property BOOL autofocus NS_AVAILABLE_MAC(10_6);
 @property BOOL defaultChecked;
 @property BOOL checked;
 @property BOOL disabled;
-@property(readonly, retain) DOMHTMLFormElement *form;
-@property(retain) DOMFileList *files AVAILABLE_IN_WEBKIT_VERSION_4_0;
-@property BOOL indeterminate AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+@property (readonly, strong) DOMHTMLFormElement *form;
+@property (strong) DOMFileList *files NS_AVAILABLE_MAC(10_6);
+@property BOOL indeterminate NS_AVAILABLE_MAC(10_5);
 @property int maxLength;
-@property BOOL multiple AVAILABLE_IN_WEBKIT_VERSION_4_0;
-@property(copy) NSString *name;
+@property BOOL multiple NS_AVAILABLE_MAC(10_6);
+@property (copy) NSString *name;
 @property BOOL readOnly;
-@property(copy) NSString *size;
-@property(copy) NSString *src;
-@property(copy) NSString *type;
-@property(copy) NSString *defaultValue;
-@property(copy) NSString *value;
-@property(readonly) BOOL willValidate AVAILABLE_IN_WEBKIT_VERSION_4_0;
-@property int selectionStart AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-@property int selectionEnd AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-@property(copy) NSString *align;
-@property(copy) NSString *useMap;
-@property(copy) NSString *accessKey AVAILABLE_WEBKIT_VERSION_1_3_AND_LATER_BUT_DEPRECATED_AFTER_WEBKIT_VERSION_5_1;
-@property(readonly, copy) NSString *altDisplayString AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-@property(readonly, copy) NSURL *absoluteImageURL AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+@property (copy) NSString *size;
+@property (copy) NSString *src;
+@property (copy) NSString *type;
+@property (copy) NSString *defaultValue;
+@property (copy) NSString *value;
+@property (readonly) BOOL willValidate NS_AVAILABLE_MAC(10_6);
+@property int selectionStart NS_AVAILABLE_MAC(10_5);
+@property int selectionEnd NS_AVAILABLE_MAC(10_5);
+@property (copy) NSString *align;
+@property (copy) NSString *useMap;
+@property (copy) NSString *accessKey NS_DEPRECATED_MAC(10_4, 10_8);
+@property (readonly, copy) NSString *altDisplayString NS_AVAILABLE_MAC(10_5);
+@property (readonly, copy) NSURL *absoluteImageURL NS_AVAILABLE_MAC(10_5);
 
 - (void)select;
-- (void)setSelectionRange:(int)start end:(int)end AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+- (void)setSelectionRange:(int)start end:(int)end NS_AVAILABLE_MAC(10_5);
 - (void)click;
 @end
-
-#endif

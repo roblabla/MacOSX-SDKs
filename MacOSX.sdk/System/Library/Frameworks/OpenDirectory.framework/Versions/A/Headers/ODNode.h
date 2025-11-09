@@ -42,7 +42,7 @@
     @discussion Autoreleased instance of an ODNode with a provided ODSession and ODNodeType.  outError is 
                 optional parameter, nil can be passed if error details are not needed.
 */
-+ (id)nodeWithSession:(ODSession *)inSession type:(ODNodeType)inType error:(NSError **)outError NS_AVAILABLE(10_6, NA);
++ (instancetype)nodeWithSession:(ODSession *)inSession type:(ODNodeType)inType error:(NSError **)outError NS_AVAILABLE(10_6, NA);
 
 /*!
     @method     nodeWithSession:name:error:
@@ -50,7 +50,7 @@
     @discussion autoreleased instance of an ODNode with a provided ODSession and node name.  outError is 
                 optional parameter, nil can be passed if error details are not needed.
 */
-+ (id)nodeWithSession:(ODSession *)inSession name:(NSString *)inName error:(NSError **)outError NS_AVAILABLE(10_6, NA);
++ (instancetype)nodeWithSession:(ODSession *)inSession name:(NSString *)inName error:(NSError **)outError NS_AVAILABLE(10_6, NA);
 
 /*!
     @method     initWithSession:type:error:
@@ -58,7 +58,7 @@
     @discussion initialize instance of an ODNode with a provided ODSession and ODNodeType.  outError is 
                 optional parameter, nil can be passed if error details are not needed.
 */
-- (id)initWithSession:(ODSession *)inSession type:(ODNodeType)inType error:(NSError **)outError NS_AVAILABLE(10_6, NA);
+- (instancetype)initWithSession:(ODSession *)inSession type:(ODNodeType)inType error:(NSError **)outError NS_AVAILABLE(10_6, NA);
 
 /*!
     @method     initWithSession:name:error:
@@ -66,7 +66,7 @@
     @discussion initialize instance of an ODNode with a provided ODSession and node name.  outError is optional
                 parameter, nil can be passed if error details are not needed.
 */
-- (id)initWithSession:(ODSession *)inSession name:(NSString *)inName error:(NSError **)outError NS_AVAILABLE(10_6, NA);
+- (instancetype)initWithSession:(ODSession *)inSession name:(NSString *)inName error:(NSError **)outError NS_AVAILABLE(10_6, NA);
 
 /*!
     @method     subnodeNamesAndReturnError:
@@ -197,14 +197,14 @@
  * @discussion
  * Returns an ODConfiguration object for the node.
  */
-- (ODConfiguration *)configuration;
+@property (readonly, strong) ODConfiguration *configuration;
 
 /*!
     @method     policiesAndReturnError:
     @abstract   This will copy any policies configured for the node.
     @discussion This will copy any policies configured for the node.
 */
-- (NSDictionary *)policiesAndReturnError:(NSError **)error __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+- (NSDictionary *)policiesAndReturnError:(NSError **)error __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_9, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "use accountPoliciesAndReturnError:");
 
 /*!
     @function   supportedPoliciesAndReturnError:
@@ -213,27 +213,112 @@
                 for the policy in question.  For example, if password history is available, it will state how much history is
                 supported.
 */
-- (NSDictionary *)supportedPoliciesAndReturnError:(NSError **)error __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+- (NSDictionary *)supportedPoliciesAndReturnError:(NSError **)error __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_9, __MAC_10_10, __IPHONE_NA, __IPHONE_NA);
 
 /*!
     @function   setPolicies:error:
     @abstract   This will set the policy for the node.
     @discussion This will set the policy for the node.  Policies are evaluated in combination with record-level policies.
 */
-- (BOOL)setPolicies:(NSDictionary *)policies error:(NSError **)error __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+- (BOOL)setPolicies:(NSDictionary *)policies error:(NSError **)error __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_9, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "use setAccountPolicies:error:");
 
 /*!
     @function   setPolicy:value:error:
     @abstract   This will set a specific policy setting for the node.
     @discussion This will set a specific policy setting for the node.
 */
-- (BOOL)setPolicy:(ODPolicyType)policy value:(id)value error:(NSError **)error __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+- (BOOL)setPolicy:(ODPolicyType)policy value:(id)value error:(NSError **)error __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_9, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "use addAccountPolicy:toCategory:error:");
 
 /*!
     @function   removePolicy:value:error:
     @abstract   This will remove a specific policy setting from the node.
     @discussion This will remove a specific policy setting from the node.
 */
-- (BOOL)removePolicy:(ODPolicyType)policy error:(NSError **)error __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+- (BOOL)removePolicy:(ODPolicyType)policy error:(NSError **)error __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_9, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "use removeAccountPolicy:fromCategory:error:");
 
+/*!
+    @method     addAccountPolicy:toCategory:error:
+    @abstract   This will add an account policy to the node for the specified category.
+    @discussion This will add an account policy to the node for the specified category.
+                The specified policy will be applied to all users in the
+                specified node when policies are evaluated.
+    @param      policy a dictionary containing the specific policy to be added.
+                The dictionary may contain the following keys:
+                    kODPolicyKeyIdentifier a required key identifying the policy.
+                    kODPolicyKeyParameters an optional key containing a dictionary of
+                        parameters that can be used for informational purposes or in
+                        the policy format string.
+                    kODPolicyKeyContent a required key specifying the policy,
+                        from which a predicate will be created for evaluating
+                        the policy.
+    @param      category a valid ODPolicyCategoryType to which the specified policy will be added.
+    @param      error an optional NSError reference for error details.
+    @result     a BOOL which signifies if the policy addition succeeded, otherwise error is set.
+*/
+- (BOOL)addAccountPolicy:(NSDictionary *)policy toCategory:(ODPolicyCategoryType)category error:(NSError **)error __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_NA);
+
+/*!
+    @method     removeAccountPolicy:fromCategory:error:
+    @abstract   This will remove an account policy from the node for the specified category.
+    @discussion This will remove an account policy from the node for the specified category.
+    @param      policy a dictionary containing the specific policy to be
+                removed, with the same format as described in addAccountPolicy.
+    @param      category a valid ODPolicyCategoryType from which the specified policy will be removed.
+    @param      error an optional NSError reference for error details.
+    @result     a BOOL which signifies if the policy removal succeeded, otherwise error is set.
+*/
+- (BOOL)removeAccountPolicy:(NSDictionary *)policy fromCategory:(ODPolicyCategoryType)category error:(NSError **)error __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_NA);
+
+/*!
+    @method     setAccountPolicies:error:
+    @abstract   This will set the policies for the node.
+    @discussion This will set the policies for the node, replacing any existing
+                policies.  All of the policies in the set will be applied to all
+                users in the specified node when policies are evaluated.
+    @param      policies a dictionary containing all of the policies to be set
+                for the node.  The dictionary may contain the following keys:
+                    kODPolicyCategoryAuthentication an optional key with a value
+                        of an array of policy dictionaries that specify when
+                        authentications should be allowed.
+                    kODPolicyCategoryPasswordContent an optional key with a
+                        value of an array of policy dictionaries the specify the
+                        required content of passwords. 
+                    kODPolicyCategoryPasswordChange an optional key with a value
+                    of an array of policy dictionaries that specify when
+                    passwords are required to be changed.
+    @param      error an optional NSError reference for error details.
+    @result     a BOOL which signifies if the policy set succeeded, otherwise error is set.
+*/
+- (BOOL)setAccountPolicies:(NSDictionary *)policies error:(NSError **)error __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_NA);
+
+/*!
+    @method     accountPoliciesAndReturnError:
+    @abstract   Returns a dictionary containing any policies configured for the node.
+    @discussion Returns a dictionary containing any policies configured for the node.
+    @param      error an optional NSError reference for error details.
+    @result     an NSDictionary containing all currently set policies.  The
+                format of the dictionary is the same as described in
+                setAccountPolicies.
+*/
+- (NSDictionary *)accountPoliciesAndReturnError:(NSError **)error __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_NA);
+
+/*!
+    @method     passwordContentCheck:forRecordName:error:
+    @abstract   Validates a password against the node's password content policies.
+    @discussion Validates a password against the node's password content policies.
+                The node's password content policies will be evaluated to
+                determine if the password is acceptable.  May be used prior to
+                creating the record.
+
+                This check is only definitive at the time it was requested. The
+                policy or the environment could change before the password change
+                is actually requested.  Errors from the password change request
+                should be consulted.
+
+    @param      password the password to be evaluated against the content policies.
+    @param      recordName the name of the record.
+    @param      error an optional NSError reference for error details.
+    @result     a bool which signifies if the password passes all content policies, otherwise error is set.
+ */
+- (BOOL)passwordContentCheck:(NSString *)password forRecordName:(NSString *)recordName error:(NSError **)error __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_NA);
 @end

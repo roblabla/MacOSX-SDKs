@@ -100,6 +100,9 @@ extern "C" {
 #define kPMUseOptionalPINStr	    		"com.apple.print.PrintSettings.PMUseOptionalPIN"
 #define kPMUseOptionalPINKey		    	CFSTR( kPMUseOptionalPINStr )			/* CFBoolean - requires PIN to print */
 
+#define kPMUseOptionalAccountIDStr	    	"com.apple.print.PrintSettings.PMUseOptionalAccountID"
+#define kPMUseOptionalAccountIDKey		    CFSTR( kPMUseOptionalAccountIDStr )		/* CFBoolean - Uses optional AccountID for job */
+	
 /* Fax Related */
 #define kPMFaxNumberStr						"phone"
 #define kPMFaxNumberKey		    			CFSTR( kPMFaxNumberStr )			/* CFString - fax number to dial */

@@ -3,7 +3,7 @@
  
 	 Contains:   CoreFoundation CFHost header
  
-	 Copyright:  Copyright (c) 2001-2008 Apple Inc. All rights reserved.
+	 Copyright:  Copyright (c) 2001-2013 Apple Inc. All rights reserved.
  
 	 Bugs?:	  For bug reports, consult the following page on
 				 the World Wide Web:
@@ -28,21 +28,13 @@
 
 
 
-#include <Availability.h>
-
 #if PRAGMA_ONCE
 #pragma once
 #endif
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+CF_EXTERN_C_BEGIN
 
 #pragma pack(push, 2)
-
-#if PRAGMA_ENUM_ALWAYSINT
-	#pragma enumsalwaysint on
-#endif
 
 
 /*
@@ -59,12 +51,8 @@ typedef struct __CFHost*				CFHostRef;
  *  Discussion:
  *	Errors listed in netdb.h
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.3 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
-CFN_EXPORT const SInt32 kCFStreamErrorDomainNetDB						__OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_2_0);
+CFN_EXPORT const SInt32 kCFStreamErrorDomainNetDB CF_AVAILABLE(10_3, 2_0);
 
 
 /*
@@ -73,12 +61,8 @@ CFN_EXPORT const SInt32 kCFStreamErrorDomainNetDB						__OSX_AVAILABLE_STARTING(
  *  Discussion:
  *	Errors listed in SystemConfiguration/SystemConfiguration.h
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.3 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
-CFN_EXPORT const SInt32 kCFStreamErrorDomainSystemConfiguration		  __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_2_0);
+CFN_EXPORT const SInt32 kCFStreamErrorDomainSystemConfiguration CF_AVAILABLE(10_3, 2_0);
 
 
 
@@ -88,7 +72,7 @@ CFN_EXPORT const SInt32 kCFStreamErrorDomainSystemConfiguration		  __OSX_AVAILAB
  *  Discussion:
  *	Host information types to be resolved.
  */
-enum CFHostInfoType {
+typedef CF_ENUM(int, CFHostInfoType) {
 
   /*
    * Results value is a CFArray of CFData's (each being a struct
@@ -107,7 +91,6 @@ enum CFHostInfoType {
    */
   kCFHostReachability		   = 2
 };
-typedef enum CFHostInfoType CFHostInfoType;
 
 
 /*
@@ -191,13 +174,9 @@ typedef CALLBACK_API_C( void , CFHostClientCallBack )(CFHostRef theHost, CFHostI
  *  Mac OS X threading:
  *	Thread safe
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.3 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT CFTypeID 
-CFHostGetTypeID(void)										 __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_2_0);
+CFHostGetTypeID(void) CF_AVAILABLE(10_3, 2_0);
 
 
 /*
@@ -225,15 +204,9 @@ CFHostGetTypeID(void)										 __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_2_0
  *	A valid CFHostRef which may now be resolved, or NULL if
  *	unsuccessful.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.3 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT CFHostRef 
-CFHostCreateWithName(
-  CFAllocatorRef   allocator,
-  CFStringRef	  hostname)								  __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_2_0);
+CFHostCreateWithName(CFAllocatorRef allocator, CFStringRef hostname) CF_AVAILABLE(10_3, 2_0);
 
 
 /*
@@ -261,15 +234,9 @@ CFHostCreateWithName(
  *	A valid CFHostRef which may now be resolved, or NULL if
  *	unsuccessful.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.3 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT CFHostRef 
-CFHostCreateWithAddress(
-  CFAllocatorRef   allocator,
-  CFDataRef		addr)									  __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_2_0);
+CFHostCreateWithAddress(CFAllocatorRef allocator, CFDataRef addr) CF_AVAILABLE(10_3, 2_0);
 
 
 /*
@@ -298,15 +265,9 @@ CFHostCreateWithAddress(
  *	resolved data from the original.  NULL is returned in the case of
  *	failure.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.3 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT CFHostRef 
-CFHostCreateCopy(
-  CFAllocatorRef   alloc,
-  CFHostRef		host)									  __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_2_0);
+CFHostCreateCopy(CFAllocatorRef alloc, CFHostRef host) CF_AVAILABLE(10_3, 2_0);
 
 
 /*
@@ -342,16 +303,9 @@ CFHostCreateCopy(
  *	mode, it will block until the resolve has completed or until the
  *	resolve is cancelled.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.3 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT Boolean 
-CFHostStartInfoResolution(
-  CFHostRef		theHost,
-  CFHostInfoType   info,
-  CFStreamError *  error)		 /* can be NULL */		   __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_2_0);
+CFHostStartInfoResolution(CFHostRef theHost, CFHostInfoType info, CFStreamError *error) CF_AVAILABLE(10_3, 2_0);
 
 
 /*
@@ -382,15 +336,9 @@ CFHostStartInfoResolution(
  *	  was not available (e.g. CFHostStartInfoResolution has not been
  *	  called), otherwise TRUE will be returned.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.3 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT CFArrayRef 
-CFHostGetAddressing(
-  CFHostRef   theHost,
-  Boolean *   hasBeenResolved)	   /* can be NULL */		__OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_2_0);
+CFHostGetAddressing(CFHostRef theHost, Boolean *hasBeenResolved) CF_AVAILABLE(10_3, 2_0);
 
 
 /*
@@ -418,17 +366,11 @@ CFHostGetAddressing(
  *	hasBeenResolved:
  *	  A reference to a Boolean which returns FALSE if the information
  *	  was not available (e.g. CFHostStartInfoResolution has not been
- *	  called), otherwise TRUE will be returned.
+ *	  called), otherwise TRUE will be returned. Can be NULL.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.3 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT CFArrayRef 
-CFHostGetNames(
-  CFHostRef   theHost,
-  Boolean *   hasBeenResolved)	   /* can be NULL */		__OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_2_0);
+CFHostGetNames(CFHostRef theHost, Boolean *hasBeenResolved) CF_AVAILABLE(10_3, 2_0);
 
 
 /*
@@ -460,17 +402,11 @@ CFHostGetNames(
  *	hasBeenResolved:
  *	  A reference to a Boolean which returns FALSE if the information
  *	  was not available (e.g. CFHostStartInfoResolution has not been
- *	  called), otherwise TRUE will be returned.
+ *	  called), otherwise TRUE will be returned. Can be NULL.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.3 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT CFDataRef 
-CFHostGetReachability(
-  CFHostRef   theHost,
-  Boolean *   hasBeenResolved)	   /* can be NULL */		__OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_2_0);
+CFHostGetReachability(CFHostRef theHost, Boolean *hasBeenResolved) CF_AVAILABLE(10_3, 2_0);
 
 
 /*
@@ -493,24 +429,18 @@ CFHostGetReachability(
  *	  The enum representing which resolution to be canceled.  If the
  *	  value is not a valid type, the behavior is undefined.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.3 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT void 
-CFHostCancelInfoResolution(
-  CFHostRef		theHost,
-  CFHostInfoType   info)									  __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_2_0);
+CFHostCancelInfoResolution(CFHostRef theHost, CFHostInfoType info) CF_AVAILABLE(10_3, 2_0);
 
 
 /*
  *  CFHostSetClient()
  *  
  *  Discussion:
- *	Associates a client context and callback function with a
- *	CFHostRef.  This is required for asynchronous usage.  If not set,
- *	resolve will take place synchronously.
+ *	Associates a client context and callback function with a CFHostRef.
+ *	This is required for asynchronous usage.  If not set, resolve will
+ *	take place synchronously.
  *  
  *  Mac OS X threading:
  *	Thread safe
@@ -537,16 +467,9 @@ CFHostCancelInfoResolution(
  *	Returns TRUE if the procedure was a success, otherwise it returns
  *	FALSE.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.3 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT Boolean 
-CFHostSetClient(
-  CFHostRef			  theHost,
-  CFHostClientCallBack   clientCB,			/* can be NULL */
-  CFHostClientContext *  clientContext)	   /* can be NULL */ __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_2_0);
+CFHostSetClient(CFHostRef theHost, CFHostClientCallBack clientCB, CFHostClientContext *clientContext) CF_AVAILABLE(10_3, 2_0);
 
 
 /*
@@ -576,16 +499,9 @@ CFHostSetClient(
  *	  running when notification occurs.  Must be non-NULL. If this
  *	  reference is not a valid CFStringRef, the behavior is undefined.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.3 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT void 
-CFHostScheduleWithRunLoop(
-  CFHostRef	  theHost,
-  CFRunLoopRef   runLoop,
-  CFStringRef	runLoopMode)								 __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_2_0);
+CFHostScheduleWithRunLoop(CFHostRef theHost, CFRunLoopRef runLoop, CFStringRef runLoopMode) CF_AVAILABLE(10_3, 2_0);
 
 
 /*
@@ -615,28 +531,15 @@ CFHostScheduleWithRunLoop(
  *	  and should be unscheduled.  Must be non-NULL. If this reference
  *	  is not a valid CFStringRef, the behavior is undefined.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.3 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT void 
-CFHostUnscheduleFromRunLoop(
-  CFHostRef	  theHost,
-  CFRunLoopRef   runLoop,
-  CFStringRef	runLoopMode)								 __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_2_0);
+CFHostUnscheduleFromRunLoop(CFHostRef theHost, CFRunLoopRef runLoop, CFStringRef runLoopMode) CF_AVAILABLE(10_3, 2_0);
 
 
-
-#if PRAGMA_ENUM_ALWAYSINT
-	#pragma enumsalwaysint reset
-#endif
 
 #pragma pack(pop)
 
-#ifdef __cplusplus
-}
-#endif
+CF_EXTERN_C_END
 
 #endif /* __CFHOST__ */
 

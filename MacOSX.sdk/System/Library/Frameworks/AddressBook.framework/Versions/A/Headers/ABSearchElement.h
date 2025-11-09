@@ -2,7 +2,7 @@
 //  ABSearchElement.h
 //  AddressBook Framework
 //
-//  Copyright (c) 2003-2007 Apple Inc.  All rights reserved.
+//  Copyright (c) 2003-2014 Apple Inc.  All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

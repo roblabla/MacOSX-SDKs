@@ -28,10 +28,6 @@
 #include <Print/PMApplication.h>
 #endif
 
-#ifndef __PMAPPLICATION_DEPRECATED__
-#include <Print/PMApplicationDeprecated.h>
-#endif
-
 
 #endif /* __PRINT__ */
 

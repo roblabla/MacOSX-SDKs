@@ -2,12 +2,12 @@
  *  CVReturn.h
  *  CoreVideo
  *
- *  Copyright (c) 2004 Apple Computer, Inc. All rights reserved.
+ *  Copyright (c) 2004-2014 Apple Inc. All rights reserved.
  *
  */
  
  /*! @header CVReturn.h
-	@copyright 2004 Apple Computer, Inc. All rights reserved.
+	@copyright 2004-2014 Apple Inc. All rights reserved.
 	@availability Mac OS X 10.4 or later
     @discussion Here you can find all the CoreVideo specific error codes. 
 		   
@@ -43,7 +43,8 @@ extern "C" {
     @constant   kCVReturnInvalidSize The requested size (most likely too big) is not supported for the CVBuffer type.
     @constant   kCVReturnInvalidPixelBufferAttributes A CVBuffer cannot be created with the given attributes.
     @constant   kCVReturnPixelBufferNotOpenGLCompatible The Buffer cannot be used with OpenGL as either its size, pixelformat or attributes are not supported by OpenGL.
-
+    @constant   kCVReturnPixelBufferNotMetalCompatible The Buffer cannot be used with Metal as either its size, pixelformat or attributes are not supported by Metal.
+ 
     @constant   kCVReturnWouldExceedAllocationThreshold The allocation request failed because it would have exceeded a specified allocation threshold (see kCVPixelBufferPoolAllocationThresholdKey).
     @constant   kCVReturnPoolAllocationFailed The allocation for the buffer pool failed. Most likely because of lack of resources. Check if your parameters are in range.
     @constant   kCVReturnInvalidPoolAttributes A CVBufferPool cannot be created with the given attributes.
@@ -70,6 +71,7 @@ enum _CVReturn
     kCVReturnInvalidSize                     = -6681,
     kCVReturnInvalidPixelBufferAttributes    = -6682,
     kCVReturnPixelBufferNotOpenGLCompatible  = -6683,
+    kCVReturnPixelBufferNotMetalCompatible   = -6684,
     
     // Buffer Pool related errors
     kCVReturnWouldExceedAllocationThreshold  = -6689,

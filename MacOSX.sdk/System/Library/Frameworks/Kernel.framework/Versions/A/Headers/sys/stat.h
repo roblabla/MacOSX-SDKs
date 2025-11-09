@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2008 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2014 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -321,7 +321,11 @@ struct stat64 __DARWIN_STRUCT_STAT64;
  */
 /* #define UF_NOUNLINK	0x00000010 */	/* file may not be removed or renamed */
 #define UF_COMPRESSED	0x00000020	/* file is hfs-compressed */
-#define UF_TRACKED		0x00000040	/* file renames and deletes are tracked */
+
+/* UF_TRACKED is used for dealing with document IDs.  We no longer issue
+   notifications for deletes or renames for files which have UF_TRACKED set. */
+#define UF_TRACKED		0x00000040
+
 /* Bits 0x0080 through 0x4000 are currently undefined. */
 #define UF_HIDDEN	0x00008000	/* hint that this item should not be */
 					/* displayed in a GUI */
@@ -332,6 +336,7 @@ struct stat64 __DARWIN_STRUCT_STAT64;
 #define	SF_ARCHIVED	0x00010000	/* file is archived */
 #define	SF_IMMUTABLE	0x00020000	/* file may not be changed */
 #define	SF_APPEND	0x00040000	/* writes to file may only append */
+#define SF_RESTRICTED	0x00080000	/* restricted access */
 
 /*
  * The following two bits are reserved for FreeBSD.  They are not

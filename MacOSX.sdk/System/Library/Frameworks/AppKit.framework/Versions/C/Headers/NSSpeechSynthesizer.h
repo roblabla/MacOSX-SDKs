@@ -1,7 +1,7 @@
 /*
 	NSSpeechSynthesizer.h
 	Application Kit
-	Copyright (c) 2003-2013, Apple Inc.
+	Copyright (c) 2003-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -29,15 +29,12 @@ APPKIT_EXTERN NSString *const NSVoiceGenderFemale;
 // NSVoiceLanguage has been replaced by NSVoiceLocaleIdentifier
 APPKIT_EXTERN NSString *const NSVoiceLanguage NS_DEPRECATED_MAC(10_0, 10_5);
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 // Values for NSSpeechBoundary
-enum {
+typedef NS_ENUM(NSUInteger, NSSpeechBoundary) {
     NSSpeechImmediateBoundary =  0,
     NSSpeechWordBoundary,
     NSSpeechSentenceBoundary
-};
-#endif
-typedef NSUInteger NSSpeechBoundary;
+} NS_ENUM_AVAILABLE_MAC(10_5);
 
 
 @interface NSSpeechSynthesizer : NSObject {
@@ -45,27 +42,23 @@ typedef NSUInteger NSSpeechBoundary;
     id	_privateNSSpeechSynthesizerVars;
 }
 
-- (id)initWithVoice:(NSString *)voice;
+- (instancetype)initWithVoice:(NSString *)voice;
 
 - (BOOL)startSpeakingString:(NSString *)string;
 - (BOOL)startSpeakingString:(NSString *)string toURL:(NSURL *)url;
 
-- (BOOL)isSpeaking;
+@property (getter=isSpeaking, readonly) BOOL speaking;
 - (void)stopSpeaking;
 - (void)stopSpeakingAtBoundary:(NSSpeechBoundary)boundary NS_AVAILABLE_MAC(10_5);
 - (void)pauseSpeakingAtBoundary:(NSSpeechBoundary)boundary NS_AVAILABLE_MAC(10_5);
 - (void)continueSpeaking NS_AVAILABLE_MAC(10_5);
 
-- (id <NSSpeechSynthesizerDelegate>)delegate;
-- (void)setDelegate:(id <NSSpeechSynthesizerDelegate>)anObject;
+@property (assign) id<NSSpeechSynthesizerDelegate> delegate;
 - (NSString *)voice;
 - (BOOL)setVoice:(NSString *)voice;
-- (float)rate NS_AVAILABLE_MAC(10_5);
-- (void)setRate:(float)rate NS_AVAILABLE_MAC(10_5);
-- (float)volume NS_AVAILABLE_MAC(10_5);
-- (void)setVolume:(float)volume NS_AVAILABLE_MAC(10_5);
-- (BOOL)usesFeedbackWindow;
-- (void)setUsesFeedbackWindow:(BOOL)flag;
+@property float rate NS_AVAILABLE_MAC(10_5);
+@property float volume NS_AVAILABLE_MAC(10_5);
+@property BOOL usesFeedbackWindow;
 
 - (void)addSpeechDictionary:(NSDictionary*)speechDictionary NS_AVAILABLE_MAC(10_5);
 - (NSString *)phonemesFromText:(NSString *)text NS_AVAILABLE_MAC(10_5);

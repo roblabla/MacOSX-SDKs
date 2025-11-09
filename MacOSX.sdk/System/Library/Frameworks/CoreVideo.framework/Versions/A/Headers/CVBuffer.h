@@ -2,12 +2,12 @@
  *  CVBuffer.h
  *  CoreVideo
  *
- *  Copyright (c) 2004 Apple Computer, Inc. All rights reserved.
+ *  Copyright (c) 2004-2014 Apple Inc. All rights reserved.
  *
  */
  
  /*! @header CVBuffer.h
-	@copyright 2004 Apple Computer, Inc. All rights reserved.
+	@copyright 2004-2014 Apple Inc. All rights reserved.
 	@availability Mac OS X 10.4 or later
     @discussion CVBufferRef types are abstract and only define ways to attach meta data to buffers (such as timestamps,
 	        colorspace information, etc.).    CVBufferRefs do not imply any particular kind of data storage.  It could

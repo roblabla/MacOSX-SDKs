@@ -1,7 +1,7 @@
 /*
 	NSComboBoxCell.h
 	Application Kit
-	Copyright (c) 1996-2013, Apple Inc.
+	Copyright (c) 1996-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -34,39 +34,31 @@
     void *_reserved;
  }
 
-- (BOOL)hasVerticalScroller;
-- (void)setHasVerticalScroller:(BOOL)flag;
-- (NSSize)intercellSpacing; 
-- (void)setIntercellSpacing:(NSSize)aSize; 
-- (CGFloat)itemHeight;
-- (void)setItemHeight:(CGFloat)itemHeight; 
-- (NSInteger)numberOfVisibleItems;
-- (void)setNumberOfVisibleItems:(NSInteger)visibleItems;
+@property BOOL hasVerticalScroller;
+@property NSSize intercellSpacing; 
+@property CGFloat itemHeight;
+@property NSInteger numberOfVisibleItems;
 
-- (void)setButtonBordered:(BOOL)flag;
-- (BOOL)isButtonBordered;
+@property (getter=isButtonBordered) BOOL buttonBordered;
 
 - (void)reloadData;
 - (void)noteNumberOfItemsChanged;
 
-- (void)setUsesDataSource:(BOOL)flag;
-- (BOOL)usesDataSource;
+@property BOOL usesDataSource;
 
 - (void)scrollItemAtIndexToTop:(NSInteger)index;
 - (void)scrollItemAtIndexToVisible:(NSInteger)index;
 
 - (void)selectItemAtIndex:(NSInteger)index;
 - (void)deselectItemAtIndex:(NSInteger)index;
-- (NSInteger)indexOfSelectedItem;
-- (NSInteger)numberOfItems;
+@property (readonly) NSInteger indexOfSelectedItem;
+@property (readonly) NSInteger numberOfItems;
 
-- (BOOL)completes;
-- (void)setCompletes:(BOOL)completes;
+@property BOOL completes;
 - (NSString *)completedString:(NSString *)string;
 
 /* These two methods can only be used when usesDataSource is YES */
-- (id <NSComboBoxCellDataSource>)dataSource;
-- (void)setDataSource:(id <NSComboBoxCellDataSource>)aSource; 
+@property (assign) id<NSComboBoxCellDataSource> dataSource;
 
 /* These methods can only be used when usesDataSource is NO */
 - (void)addItemWithObjectValue:(id)object;
@@ -77,9 +69,9 @@
 - (void)removeAllItems;
 - (void)selectItemWithObjectValue:(id)object;
 - (id)itemObjectValueAtIndex:(NSInteger)index;
-- (id)objectValueOfSelectedItem;
+@property (readonly, strong) id objectValueOfSelectedItem;
 - (NSInteger)indexOfItemWithObjectValue:(id)object;
-- (NSArray *)objectValues;
+@property (readonly, copy) NSArray *objectValues;
 
 @end
 

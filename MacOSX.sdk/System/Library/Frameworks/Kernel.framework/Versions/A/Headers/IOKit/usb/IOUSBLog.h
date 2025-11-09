@@ -1,5 +1,5 @@
 /*
- * Copyright ï¿½ 1998-2010 Apple Inc.  All rights reserved.
+ * Copyright © 1998-2014 Apple Inc.  All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -25,8 +25,73 @@
 #define _IOKIT_IOUSBLOG_H
 
 #ifdef KERNEL
-#include 	<IOKit/IOService.h>
-#include	<IOKit/IOLib.h>
+    #include 	<IOKit/IOService.h>
+    #include	<IOKit/IOLib.h>
+    #include    <AssertMacros.h>
+
+
+    // Other helpful macros (maybe some day these will make
+    // their way into /usr/include/AssertMacros.h)
+    #ifndef require_success
+        #define require_success( errorCode, exceptionLabel ) \
+        require( kIOReturnSuccess == (errorCode), exceptionLabel )
+    #endif
+
+    #ifndef require_success_action
+        #define require_success_action( errorCode, exceptionLabel, action ) \
+        require_action( kIOReturnSuccess == (errorCode), exceptionLabel, action )
+    #endif
+
+    #ifndef require_success_quiet
+        #define require_success_quiet( errorCode, exceptionLabel ) \
+        require_quiet( kIOReturnSuccess == (errorCode), exceptionLabel )
+    #endif
+
+    #ifndef require_success_action_quiet
+        #define require_success_action_quiet( errorCode, exceptionLabel, action ) \
+        require_action_quiet( kIOReturnSuccess == (errorCode), exceptionLabel, action )
+    #endif
+
+    #ifndef require_success_string
+        #define require_success_string( errorCode, exceptionLabel, message ) \
+        require_string( kIOReturnSuccess == (errorCode), exceptionLabel, message )
+    #endif
+
+    #ifndef require_success_action_string
+        #define require_success_action_string( errorCode, exceptionLabel, action, message ) \
+        require_action_string( kIOReturnSuccess == (errorCode), exceptionLabel, action, message )
+    #endif
+
+    #ifndef require_nonzero
+        #define require_nonzero( obj, exceptionLabel ) \
+        require( ( 0 != obj ), exceptionLabel )
+    #endif
+
+    #ifndef require_nonzero_action
+        #define require_nonzero_action( obj, exceptionLabel, action ) \
+        require_action( ( 0 != obj ), exceptionLabel, action )
+    #endif
+
+    #ifdef require_nonzero_quiet
+        #define require_nonzero_quiet( obj, exceptionLabel ) \
+        require_quiet( ( 0 != obj ), exceptionLabel )
+    #endif
+
+    #ifdef require_nonzero_action_quiet
+        #define require_nonzero_action_quiet( obj, exceptionLabel, action ) \
+        require_action_quiet( ( 0 != obj ), exceptionLabel, action )
+    #endif
+
+    #ifndef require_nonzero_string
+        #define require_nonzero_string( obj, exceptionLabel, message ) \
+        require_string( ( 0 != obj ), exceptionLabel, message )
+    #endif
+
+    #ifdef require_nonzero_action_string
+        #define require_nonzero_action_string( obj, exceptionLabel, action, message ) \
+        require_action_string( ( 0 != obj ), exceptionLabel, action, message )
+    #endif
+
 #endif
 
 #ifdef	__cplusplus
@@ -51,7 +116,7 @@
 // Allow clients to define their own debug level.
 
 #if ( !defined( DEBUG_LEVEL ) )
-	#define	DEBUG_LEVEL			DEBUG_LEVEL_PRODUCTION
+	#define	DEBUG_LEVEL			DEBUG_LEVEL_FINAL
 #endif
 
 // Index for user client methods
@@ -246,6 +311,6 @@ public:
 };
 
 
-#endif
-#endif
-#endif
+#endif              // __cplusplus
+#endif              // KERNEL
+#endif              // _IOKIT_IOUSBLOG_H

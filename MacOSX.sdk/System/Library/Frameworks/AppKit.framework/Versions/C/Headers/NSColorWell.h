@@ -1,7 +1,7 @@
 /*
 	NSColorWell.h
 	Application Kit
-	Copyright (c) 1994-2013, Apple Inc.
+	Copyright (c) 1994-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -11,8 +11,8 @@
 {
     /*All instance variables are private*/
     NSColor *_color;
-    id _target;
-    SEL _action;
+    id _reserved;
+    SEL _reserved2;
     struct __cwFlags {
 	unsigned int        isActive:1;
 	unsigned int        isBordered:1;
@@ -25,15 +25,13 @@
 
 - (void)deactivate;
 - (void)activate:(BOOL)exclusive;
-- (BOOL)isActive;
+@property (getter=isActive, readonly) BOOL active;
 
 - (void)drawWellInside:(NSRect)insideRect;
 
-- (BOOL)isBordered;
-- (void)setBordered:(BOOL)flag;
+@property (getter=isBordered) BOOL bordered;
 
 - (void)takeColorFrom:(id)sender;
-- (void)setColor:(NSColor *)color;
-- (NSColor *)color;
+@property (copy) NSColor *color;
 
 @end

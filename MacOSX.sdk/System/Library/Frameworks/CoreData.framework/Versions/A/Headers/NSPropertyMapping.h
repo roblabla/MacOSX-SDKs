@@ -27,17 +27,14 @@ NS_CLASS_AVAILABLE(10_5,3_0)
 
 /* Returns/sets the name of the property in the destination entity for the mapping.  
 */
-- (NSString *)name;
-- (void)setName:(NSString *)name;
+@property (copy) NSString *name;
 
 /* Returns/sets the value expression for the property mapping.  The expression is used to create the value for the destination property.
 */
-- (NSExpression *)valueExpression;
-- (void)setValueExpression:(NSExpression *)expression;
+@property (strong) NSExpression *valueExpression;
 
 /* Returns/sets the user info for the property mapping.
 */
-- (NSDictionary *)userInfo;
-- (void)setUserInfo:(NSDictionary *)userInfo;
+@property (strong) NSDictionary *userInfo;
 
 @end

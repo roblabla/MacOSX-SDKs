@@ -1,6 +1,6 @@
 /*
     CFURLEnumerator.h
-    Copyright (c) 2008-2013, Apple Inc. All rights reserved.
+    Copyright (c) 2008-2014, Apple Inc. All rights reserved.
  */
 
 #if (TARGET_OS_MAC || TARGET_OS_EMBEDDED || TARGET_OS_IPHONE) || CF_BUILDING_CF || NSBUILDINGFOUNDATION
@@ -13,6 +13,7 @@
 #include <CoreFoundation/CFError.h>
 #include <CoreFoundation/CFURL.h>
 
+CF_IMPLICIT_BRIDGING_ENABLED
 CF_EXTERN_C_BEGIN
 
 
@@ -97,6 +98,7 @@ Boolean CFURLEnumeratorGetSourceDidChange( CFURLEnumeratorRef enumerator ) CF_DE
 
 
 CF_EXTERN_C_END
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif /* ! __COREFOUNDATION_CFURLENUMERATOR__ */
 

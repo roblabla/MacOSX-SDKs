@@ -7,17 +7,26 @@
 .Dt mdimport 1
 .Os Mac\ OS X
 .Sh NAME
-.Nm mdimport
+.Nm mdimport ,
+.Nm mdimport32
 .Nd import file hierarchies into the metadata datastore.
 .Sh SYNOPSIS
-.Nm
+.Nm mdimport
+.Op Fl VXLArgn
+.Op Fl d Ar level | category
+.Op Fl w Ar delay
+.Ar file | directory
+.Nm mdimport32
 .Op Fl VXLArgn
 .Op Fl d Ar level | category
 .Op Fl w Ar delay
 .Ar file | directory
 .Sh DESCRIPTION
-.Nm
+.Nm mdimport
 is used to test Spotlight plug-ins, list the installed plug-ins and schema, and re-index files handled by a plug-in when a new plug-in is installed.
+.Pp
+.Nm mdimport32
+is used in exactly the same way, but for 32 bit plugins.
 .Pp
 The following options are available:
 .Bl -tag -width -d\ seconds
@@ -57,7 +66,6 @@ The
 .Fl f
 switch is obsolete in Leopard and beyond.
 .Sh SEE ALSO
-.Xr mdcheckschema 1 ,
 .Xr mdfind 1 ,
 .Xr mdutil 1 ,
 .Xr mdls 1

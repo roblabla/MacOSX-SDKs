@@ -1,13 +1,13 @@
 /*
 	NSColorList.h
 	Application Kit
-	Copyright (c) 1994-2013, Apple Inc.
+	Copyright (c) 1994-2014, Apple Inc.
 	All rights reserved.
 */
 
-/* An NSColorList is an ordered list of NSColors, identified by keys. These keys are used to identify the colors in the list and are used to display the color to the user in the color panel. Note that the key is only used in indentifying a color in a color list; it has nothing to do with the contents of the color, unless, of course the color list was set up in such a way that the keys matched the color names.
+/* An NSColorList is an ordered list of NSColors, identified by keys. These keys are used to identify the colors in the list and are used to display the color to the user in the color panel. Note that the key is only used in identifying a color in a color list; it has nothing to do with the contents of the color, unless, of course the color list was set up in such a way that the keys matched the color names.
 
-Instances of NSColorList are created for all user-created color lists (those in the color panel) and various color catalogs (such as Pantone) available on the system.
+Instances of NSColorList are created for all user-created color lists (those in the color panel) and various color catalogs available on the system.
 
 NSColorLists post "NSColorListDidChangeNotification" when changed.
 */
@@ -53,12 +53,12 @@ NSColorLists post "NSColorListDidChangeNotification" when changed.
 
 /* Creates a color list; specify @"" if you don't want a name. NOTE that this does not add the color list to availableColorLists until the color list is saved into the user's path with writeToFile:nil.
 */
-- (id)initWithName:(NSString *)name;			
-- (id)initWithName:(NSString *)name fromFile:(NSString *)path;	/* Load initial contents */
+- (instancetype)initWithName:(NSString *)name;			
+- (instancetype)initWithName:(NSString *)name fromFile:(NSString *)path;	/* Load initial contents */
 
 /* Name of the color list
 */
-- (NSString *)name;
+@property (readonly, copy) NSString *name;
 
 /* If key already exists, sets the corresponding color. Otherwise inserts the color at the end.
 */
@@ -78,11 +78,11 @@ NSColorLists post "NSColorListDidChangeNotification" when changed.
 
 /* Use this array to get count of colors and enumerate them according to the ordering specified when inserting.
 */
-- (NSArray *)allKeys;
+@property (readonly, copy) NSArray *allKeys;
 
 /* Depends on the source of the colorlist file
 */
-- (BOOL)isEditable;
+@property (getter=isEditable, readonly) BOOL editable;
 
 /* Use "nil" to save to the user's private colorlists directory. If the color list is named, this method will also insert the color list into availableColorLists.
 */

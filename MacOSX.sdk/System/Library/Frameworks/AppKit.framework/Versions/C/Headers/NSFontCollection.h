@@ -1,7 +1,7 @@
 /*
 	NSFontCollection.h
 	Application Kit
-	Copyright (c) 2010-2013, Apple Inc.
+	Copyright (c) 2010-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -18,7 +18,7 @@
 /*
  Named collection visibility
  */
-enum {
+typedef NS_OPTIONS(NSUInteger, NSFontCollectionVisibility) {
     // Visible within this process, not persistent
     NSFontCollectionVisibilityProcess = (1UL << 0),
     
@@ -28,7 +28,6 @@ enum {
     // Visible to all users, stored persistently
     NSFontCollectionVisibilityComputer = (1UL << 2)
 };
-typedef NSUInteger NSFontCollectionVisibility;
 
 
 /*
@@ -41,13 +40,13 @@ NS_CLASS_AVAILABLE(10_7, NA)
  Creating collections
  */
 // Return a font collection matching the given descriptors
-+ (id)fontCollectionWithDescriptors:(NSArray *)queryDescriptors;
++ (NSFontCollection *)fontCollectionWithDescriptors:(NSArray *)queryDescriptors;
 
 // Return a font collection matching all registered fonts
-+ (id)fontCollectionWithAllAvailableDescriptors;
++ (NSFontCollection *)fontCollectionWithAllAvailableDescriptors;
 
 // Return a collection with fonts for the specified locale.
-+ (id)fontCollectionWithLocale:(NSLocale *)locale;
++ (NSFontCollection *)fontCollectionWithLocale:(NSLocale *)locale;
 
 /* 
  Naming collections
@@ -74,25 +73,25 @@ NS_CLASS_AVAILABLE(10_7, NA)
 + (NSArray *)allFontCollectionNames;
 
 // Return the specified named collection
-+ (id)fontCollectionWithName:(NSString *)name;
++ (NSFontCollection *)fontCollectionWithName:(NSString *)name;
 
 // Return the specified named collection with specified visibility
-+ (id)fontCollectionWithName:(NSString *)name visibility:(NSFontCollectionVisibility)visibility;
++ (NSFontCollection *)fontCollectionWithName:(NSString *)name visibility:(NSFontCollectionVisibility)visibility;
 
 /*
  Descriptor matching
  */
 
 // The list of NSFontDescriptors to match. The matching descriptors are produced by matching this list of descriptors.
-- (NSArray *)queryDescriptors;
+@property (readonly, copy) NSArray *queryDescriptors;
 
 // A separate list of query descriptors. The matching results from this list are excluded from matchingDescriptors.
-- (NSArray *)exclusionDescriptors;
+@property (readonly, copy) NSArray *exclusionDescriptors;
 
 // Returns a list of descriptors matching the logical descriptors.
 // These are determined at runtime as (matching queryDescriptors - matching exclusionDescriptors).
 // options may be nil or a dictionary containing any combination of {NSFontCollectionIncludeDisabledFontsOption, NSFontCollectionRemoveDuplicatesOption, NSFontCollectionDisallowAutoActivationOption}.
-- (NSArray *)matchingDescriptors;
+@property (readonly, copy) NSArray *matchingDescriptors;
 - (NSArray *)matchingDescriptorsWithOptions:(NSDictionary *)options;
 
 // Return a list of matching descriptors for a particular family
@@ -107,11 +106,24 @@ NS_CLASS_AVAILABLE(10_7, NA)
 NS_CLASS_AVAILABLE(10_7, NA)
 @interface NSMutableFontCollection : NSFontCollection
 
-// See -queryDescriptors.
-- (void)setQueryDescriptors:(NSArray *)descriptors;
+// Return a font collection matching the given descriptors
++ (NSMutableFontCollection *)fontCollectionWithDescriptors:(NSArray *)queryDescriptors;
 
-// See -exclusionDescriptors.
-- (void)setExclusionDescriptors:(NSArray *)descriptors;
+// Return a font collection matching all registered fonts
++ (NSMutableFontCollection *)fontCollectionWithAllAvailableDescriptors;
+
+// Return a collection with fonts for the specified locale.
++ (NSMutableFontCollection *)fontCollectionWithLocale:(NSLocale *)locale;
+
+// Return the specified named collection
++ (NSMutableFontCollection *)fontCollectionWithName:(NSString *)name;
+
+// Return the specified named collection with specified visibility
++ (NSMutableFontCollection *)fontCollectionWithName:(NSString *)name visibility:(NSFontCollectionVisibility)visibility;
+
+@property (copy) NSArray *queryDescriptors;
+
+@property (copy) NSArray *exclusionDescriptors;
 
 // Edit the query and exclusion arrays to ensure that the results of querying the given descriptors are included in the matching descriptors.
 - (void)addQueryForDescriptors:(NSArray *)descriptors;

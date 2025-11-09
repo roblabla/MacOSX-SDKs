@@ -1,5 +1,5 @@
 /*	NSDate.h
-	Copyright (c) 1994-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -14,25 +14,29 @@ typedef double NSTimeInterval;
 
 @interface NSDate : NSObject <NSCopying, NSSecureCoding>
 
-- (NSTimeInterval)timeIntervalSinceReferenceDate;
+@property (readonly) NSTimeInterval timeIntervalSinceReferenceDate;
+
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithTimeIntervalSinceReferenceDate:(NSTimeInterval)ti NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
 @end
 
 @interface NSDate (NSExtendedDate)
 
 - (NSTimeInterval)timeIntervalSinceDate:(NSDate *)anotherDate;
-- (NSTimeInterval)timeIntervalSinceNow;
-- (NSTimeInterval)timeIntervalSince1970;
+@property (readonly) NSTimeInterval timeIntervalSinceNow;
+@property (readonly) NSTimeInterval timeIntervalSince1970;
 
 - (id)addTimeInterval:(NSTimeInterval)seconds NS_DEPRECATED(10_0, 10_6, 2_0, 4_0);
-- (id)dateByAddingTimeInterval:(NSTimeInterval)ti NS_AVAILABLE(10_6, 2_0);
+- (instancetype)dateByAddingTimeInterval:(NSTimeInterval)ti NS_AVAILABLE(10_6, 2_0);
 
 - (NSDate *)earlierDate:(NSDate *)anotherDate;
 - (NSDate *)laterDate:(NSDate *)anotherDate;
 - (NSComparisonResult)compare:(NSDate *)other;
 - (BOOL)isEqualToDate:(NSDate *)otherDate;
 
-- (NSString *)description;
+@property (readonly, copy) NSString *description;
 - (NSString *)descriptionWithLocale:(id)locale;
 
 + (NSTimeInterval)timeIntervalSinceReferenceDate;
@@ -49,9 +53,6 @@ typedef double NSTimeInterval;
 
 + (id /* NSDate * */)distantFuture;
 + (id /* NSDate * */)distantPast;
-
-- (instancetype)init;	/* designated initializer */
-- (instancetype)initWithTimeIntervalSinceReferenceDate:(NSTimeInterval)ti;	/* designated initializer */
 
 - (instancetype)initWithTimeIntervalSinceNow:(NSTimeInterval)secs;
 - (instancetype)initWithTimeIntervalSince1970:(NSTimeInterval)secs;

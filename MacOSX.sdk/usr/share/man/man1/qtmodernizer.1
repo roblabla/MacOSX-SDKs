@@ -23,7 +23,7 @@ does returns and does nothing. If any of the audio or video tracks are encoded w
 .It pathToSource must be a file path to a source media file or a directory. The file can be almost any modern or legacy media format. If pathToSource is a directory, then all files in the directory will be modernized.
 .It [pathToDestination] must be directory path or a full file path. If pathToDirectory is not specified, the directory of the source file will be used. If the path is to a directory, the name of created file will be the same as the source with "-modernized" added to the name. The created file will be a QuickTime movie (.mov) file. If no output file is specified, a file will be created in the same directory as the source with "-modernized" appended to the title.
 .Pp
-Command line options of qtmodernize:
+Command line options of qtmodernizer:
 .Bl -tag -width -indent
 .It Fl h | \-help
 .It Fl p | \-useprores
@@ -52,15 +52,15 @@ to display information about the tracks contained in the source file and what th
 .Pp
 .Sh EXAMPLES
 .Pp
-	qtmodernize legacy_movie.mov modern_movie.mov
+	qtmodernizer legacy_movie.mov modern_movie.mov
 .Pp
 Each legacy audio and video track would be re-encoded to a modern (H.264 or AAC) track with other tracks passed through. The resulting movie is saved as modern_movie.mov
 .Pp
-	qtmodernize -p legacy_movie.mov modern_movie.mov
+	qtmodernizer -p legacy_movie.mov modern_movie.mov
 .Pp
 Legacy audio and video tracks would be re-encoded like in the above example but the resulting codecs would be ProRes for video and LPCM for audio
 .Pp
-	qtmodernize ~/Movies/legacy_movie.mov
+	qtmodernizer ~/Movies/legacy_movie.mov
 .Pp
 This command will create a modernized movie in the ~/Movies directory named "legacy_movie-modernized.mov"
 .Sh HISTORY

@@ -32,6 +32,8 @@
 
 #include <AvailabilityMacros.h>
 
+#include <QD/ColorSyncDeprecated.h>
+
 #if PRAGMA_ONCE
 #pragma once
 #endif
@@ -48,8 +50,6 @@ typedef GrafPtr                         CGrafPtr;
 typedef CGrafPtr                        GWorldPtr;
 typedef short                           QDErr;
 typedef unsigned long                   GWorldFlags;
-
-#include <QD/ColorSyncDeprecated.h>
 
 /* For the convenience of QuickTime */
 enum {

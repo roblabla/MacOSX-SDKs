@@ -1,5 +1,5 @@
 /*	NSConnection.h
-	Copyright (c) 1989-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1989-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -44,65 +44,57 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
     id		reserved;
 }
 
-- (NSDictionary *)statistics;
+@property (readonly, copy) NSDictionary *statistics;
 
 + (NSArray *)allConnections;
 
 + (NSConnection *)defaultConnection NS_DEPRECATED(10_0, 10_6, NA, NA);
 
-+ (id)connectionWithRegisteredName:(NSString *)name host:(NSString *)hostName;
-+ (id)connectionWithRegisteredName:(NSString *)name host:(NSString *)hostName usingNameServer:(NSPortNameServer *)server;
++ (instancetype)connectionWithRegisteredName:(NSString *)name host:(NSString *)hostName;
++ (instancetype)connectionWithRegisteredName:(NSString *)name host:(NSString *)hostName usingNameServer:(NSPortNameServer *)server;
 + (NSDistantObject *)rootProxyForConnectionWithRegisteredName:(NSString *)name host:(NSString *)hostName;
 + (NSDistantObject *)rootProxyForConnectionWithRegisteredName:(NSString *)name host:(NSString *)hostName usingNameServer:(NSPortNameServer *)server;
 
-+ (id)serviceConnectionWithName:(NSString *)name rootObject:(id)root usingNameServer:(NSPortNameServer *)server NS_AVAILABLE(10_5, 2_0);
-+ (id)serviceConnectionWithName:(NSString *)name rootObject:(id)root NS_AVAILABLE(10_5, 2_0);
++ (instancetype)serviceConnectionWithName:(NSString *)name rootObject:(id)root usingNameServer:(NSPortNameServer *)server NS_AVAILABLE(10_5, 2_0);
++ (instancetype)serviceConnectionWithName:(NSString *)name rootObject:(id)root NS_AVAILABLE(10_5, 2_0);
 
-- (void)setRequestTimeout:(NSTimeInterval)ti;
-- (NSTimeInterval)requestTimeout;
-- (void)setReplyTimeout:(NSTimeInterval)ti;
-- (NSTimeInterval)replyTimeout;
+@property NSTimeInterval requestTimeout;
+@property NSTimeInterval replyTimeout;
+@property (retain) id rootObject;
+@property (assign) id<NSConnectionDelegate> delegate;
+@property BOOL independentConversationQueueing;
+@property (readonly, getter=isValid) BOOL valid;
 
-- (void)setRootObject:(id)anObject;
-- (id)rootObject;
-
-- (NSDistantObject *)rootProxy;
-  
-- (void)setDelegate:(id <NSConnectionDelegate>)anObject;
-- (id <NSConnectionDelegate>)delegate;
-
-- (void)setIndependentConversationQueueing:(BOOL)yorn;
-- (BOOL)independentConversationQueueing;
-
-- (BOOL)isValid;
+@property (readonly, retain) NSDistantObject *rootProxy;
 
 - (void)invalidate;
 
 - (void)addRequestMode:(NSString *)rmode;
 - (void)removeRequestMode:(NSString *)rmode;
-- (NSArray *)requestModes;
+@property (readonly, copy) NSArray *requestModes;
 
 - (BOOL)registerName:(NSString *) name;
 - (BOOL)registerName:(NSString *) name withNameServer:(NSPortNameServer *)server;
 
-+ (id)connectionWithReceivePort:(NSPort *)receivePort sendPort:(NSPort *)sendPort;
++ (instancetype)connectionWithReceivePort:(NSPort *)receivePort sendPort:(NSPort *)sendPort;
 
 + (id)currentConversation;
 
-- (id)initWithReceivePort:(NSPort *)receivePort sendPort:(NSPort *)sendPort;
-- (NSPort *)sendPort;
-- (NSPort *)receivePort;
+- (instancetype)initWithReceivePort:(NSPort *)receivePort sendPort:(NSPort *)sendPort;
+
+@property (readonly, retain) NSPort *sendPort;
+@property (readonly, retain) NSPort *receivePort;
 
 - (void)enableMultipleThreads;
-- (BOOL)multipleThreadsEnabled;
+@property (readonly) BOOL multipleThreadsEnabled;
 
 - (void)addRunLoop:(NSRunLoop *)runloop;
 - (void)removeRunLoop:(NSRunLoop *)runloop;
 
 - (void)runInNewThread;
 
-- (NSArray *)remoteObjects;
-- (NSArray *)localObjects;
+@property (readonly, copy) NSArray *remoteObjects;
+@property (readonly, copy) NSArray *localObjects;
 
 // NSPort subclasses should use this method to ask a connection object to dispatch Distributed Objects component data received over the wire. This will decode the data, authenticate, and send the message.
 - (void)dispatchWithComponents:(NSArray *)components NS_AVAILABLE(10_7, 5_0);
@@ -140,9 +132,9 @@ FOUNDATION_EXPORT NSString * const NSConnectionDidInitializeNotification;
 
 @interface NSDistantObjectRequest : NSObject
 
-- (NSInvocation *)invocation;
-- (NSConnection *)connection;
-- (id)conversation;
+@property (readonly, retain) NSInvocation *invocation;
+@property (readonly, retain) NSConnection *connection;
+@property (readonly, retain) id conversation;
 - (void)replyWithException:(NSException *)exception;
 
 @end

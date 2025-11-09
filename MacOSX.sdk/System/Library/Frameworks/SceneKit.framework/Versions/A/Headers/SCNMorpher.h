@@ -1,7 +1,7 @@
 //
 //  SCNMorpher.h
 //
-//  Copyright (c) 2013 Apple Inc. All rights reserved.
+//  Copyright (c) 2013-2014 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -13,12 +13,13 @@
  */
 
 typedef NS_ENUM(NSInteger, SCNMorpherCalculationMode) {
-    SCNMorpherCalculationModeNormalized, // (1 - w1 - w2 - ...) * BaseMesh + w1 * Target1 + w2 * Target2 + ...
-    SCNMorpherCalculationModeAdditive    // BaseMesh + w1 * Target1 + w2 * Target2 + ...
+    SCNMorpherCalculationModeNormalized, // (1 - w0 - w1 - ...) * BaseMesh + w0 * Target0 + w1 * Target1 + ...
+    SCNMorpherCalculationModeAdditive    // BaseMesh + w0 * Target0 + w1 * Target1 + ...
 };
 
-SCENEKIT_CLASS_AVAILABLE(10_9, NA)
-@interface SCNMorpher : NSObject <SCNAnimatable> {
+SCENEKIT_CLASS_AVAILABLE(10_9, 8_0)
+@interface SCNMorpher : NSObject <SCNAnimatable, NSSecureCoding>
+{
 @private
 	id _reserved;
 }
@@ -32,7 +33,7 @@ SCENEKIT_CLASS_AVAILABLE(10_9, NA)
 
 /*!
  @method setWeight:forTargetAtIndex:
- @abstract Sets the weight for the target at the specified index. Animatable implicitly or explicitly with the keyPath "weight[index]".
+ @abstract Sets the weight for the target at the specified index. Animatable implicitly or explicitly with the keyPath "weights[index]".
  */
 - (void)setWeight:(CGFloat)weight forTargetAtIndex:(NSUInteger)targetIndex;
 

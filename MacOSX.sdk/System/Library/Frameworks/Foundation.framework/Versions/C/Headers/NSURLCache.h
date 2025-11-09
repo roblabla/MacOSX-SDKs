@@ -1,6 +1,6 @@
 /*	
     NSURLCache.h
-    Copyright (c) 2003-2013, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2014, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -25,13 +25,12 @@
     NSURLCache is not allowed in any fashion, either in memory or on
     disk.
 */
-enum
+typedef NS_ENUM(NSUInteger, NSURLCacheStoragePolicy)
 {
     NSURLCacheStorageAllowed,
     NSURLCacheStorageAllowedInMemoryOnly,
     NSURLCacheStorageNotAllowed,
 };
-typedef NSUInteger NSURLCacheStoragePolicy;
 
 
 @class NSCachedURLResponseInternal;
@@ -39,6 +38,8 @@ typedef NSUInteger NSURLCacheStoragePolicy;
 @class NSDictionary;
 @class NSURLRequest;
 @class NSURLResponse;
+@class NSDate;
+@class NSURLSessionDataTask;
 
 /*!
     @class NSCachedURLResponse
@@ -47,7 +48,7 @@ typedef NSUInteger NSURLCacheStoragePolicy;
     It is used to maintain characteristics and attributes of a cached 
     object. 
 */
-@interface NSCachedURLResponse : NSObject <NSCoding, NSCopying>
+@interface NSCachedURLResponse : NSObject <NSSecureCoding, NSCopying>
 {
     @private
     NSCachedURLResponseInternal *_internal;
@@ -65,7 +66,7 @@ typedef NSUInteger NSURLCacheStoragePolicy;
     corresponding to the given response.
     @result an initialized NSCachedURLResponse.
 */
-- (id)initWithResponse:(NSURLResponse *)response data:(NSData *)data;
+- (instancetype)initWithResponse:(NSURLResponse *)response data:(NSData *)data;
 
 /*! 
     @method initWithResponse:data:userInfo:storagePolicy:
@@ -79,35 +80,35 @@ typedef NSUInteger NSURLCacheStoragePolicy;
     @param storagePolicy an NSURLCacheStoragePolicy constant.
     @result an initialized NSCachedURLResponse.
 */
-- (id)initWithResponse:(NSURLResponse *)response data:(NSData *)data userInfo:(NSDictionary *)userInfo storagePolicy:(NSURLCacheStoragePolicy)storagePolicy;
+- (instancetype)initWithResponse:(NSURLResponse *)response data:(NSData *)data userInfo:(NSDictionary *)userInfo storagePolicy:(NSURLCacheStoragePolicy)storagePolicy;
 
 /*! 
     @method response
     @abstract Returns the response wrapped by this instance. 
     @result The response wrapped by this instance. 
 */
-- (NSURLResponse *)response;
+@property (readonly, copy) NSURLResponse *response;
 
 /*! 
     @method data
     @abstract Returns the data of the receiver. 
     @result The data of the receiver. 
 */
-- (NSData *)data;
+@property (readonly, copy) NSData *data;
 
 /*! 
     @method userInfo
     @abstract Returns the userInfo dictionary of the receiver. 
     @result The userInfo dictionary of the receiver. 
 */
-- (NSDictionary *)userInfo;
+@property (readonly, copy) NSDictionary *userInfo;
 
 /*! 
     @method storagePolicy
     @abstract Returns the NSURLCacheStoragePolicy constant of the receiver. 
     @result The NSURLCacheStoragePolicy constant of the receiver. 
 */
-- (NSURLCacheStoragePolicy)storagePolicy;
+@property (readonly) NSURLCacheStoragePolicy storagePolicy;
 
 @end
 
@@ -167,7 +168,7 @@ typedef NSUInteger NSURLCacheStoragePolicy;
     @result an initialized NSURLCache, with the given capacity, backed
     by disk.
 */
-- (id)initWithMemoryCapacity:(NSUInteger)memoryCapacity diskCapacity:(NSUInteger)diskCapacity diskPath:(NSString *)path;
+- (instancetype)initWithMemoryCapacity:(NSUInteger)memoryCapacity diskCapacity:(NSUInteger)diskCapacity diskPath:(NSString *)path;
 
 /*! 
     @method cachedResponseForRequest:
@@ -208,39 +209,27 @@ typedef NSUInteger NSURLCacheStoragePolicy;
 */
 - (void)removeAllCachedResponses;
 
+/*!
+ @method removeCachedResponsesSince:
+ @abstract Clears the given cache of any cached responses since the provided date.
+ */
+- (void)removeCachedResponsesSinceDate:(NSDate *)date NS_AVAILABLE(10_10, 8_0);
+
 /*! 
     @method memoryCapacity
-    @abstract Returns the in-memory capacity of the receiver. 
+    @abstract In-memory capacity of the receiver. 
+    @discussion At the time this call is made, the in-memory cache will truncate its contents to the size given, if necessary.
     @result The in-memory capacity, measured in bytes, for the receiver. 
 */
-- (NSUInteger)memoryCapacity;
+@property NSUInteger memoryCapacity;
 
 /*! 
     @method diskCapacity
-    @abstract Returns the on-disk capacity of the receiver. 
-    @result The on-disk capacity, measured in bytes, for the receiver. 
+    @abstract The on-disk capacity of the receiver. 
+    @discussion At the time this call is made, the on-disk cache will truncate its contents to the size given, if necessary.
+    @param diskCapacity the new on-disk capacity, measured in bytes, for the receiver.
 */
-- (NSUInteger)diskCapacity;
-
-/*! 
-    @method setMemoryCapacity:
-    @abstract Sets the in-memory capacity of the receiver. 
-    @discussion At the time this call is made, the in-memory cache will
-    truncate its contents to the size given, if necessary.
-    @param memoryCapacity the new in-memory capacity, measured in
-    bytes, for the receiver.
-*/
-- (void)setMemoryCapacity:(NSUInteger)memoryCapacity;
-
-/*! 
-    @method setDiskCapacity:
-    @abstract Sets the on-disk capacity of the receiver. 
-    @discussion At the time this call is made, the on-disk cache will
-    truncate its contents to the size given, if necessary.
-    @param diskCapacity the new on-disk capacity, measured in
-    bytes, for the receiver.
-*/
-- (void)setDiskCapacity:(NSUInteger)diskCapacity;
+@property NSUInteger diskCapacity;
 
 /*! 
     @method currentMemoryUsage
@@ -250,7 +239,7 @@ typedef NSUInteger NSURLCacheStoragePolicy;
     usage of the in-memory cache. 
     @result the current usage of the in-memory cache of the receiver.
 */
-- (NSUInteger)currentMemoryUsage;
+@property (readonly) NSUInteger currentMemoryUsage;
 
 /*! 
     @method currentDiskUsage
@@ -260,6 +249,12 @@ typedef NSUInteger NSURLCacheStoragePolicy;
     usage of the on-disk cache. 
     @result the current usage of the on-disk cache of the receiver.
 */
-- (NSUInteger)currentDiskUsage;
+@property (readonly) NSUInteger currentDiskUsage;
 
+@end
+
+@interface NSURLCache (NSURLSessionTaskAdditions)
+- (void)storeCachedResponse:(NSCachedURLResponse *)cachedResponse forDataTask:(NSURLSessionDataTask *)dataTask NS_AVAILABLE(10_10, 8_0);
+- (void)getCachedResponseForDataTask:(NSURLSessionDataTask *)dataTask completionHandler:(void (^) (NSCachedURLResponse *cachedResponse))completionHandler NS_AVAILABLE(10_10, 8_0);
+- (void)removeCachedResponseForDataTask:(NSURLSessionDataTask *)dataTask NS_AVAILABLE(10_10, 8_0);
 @end

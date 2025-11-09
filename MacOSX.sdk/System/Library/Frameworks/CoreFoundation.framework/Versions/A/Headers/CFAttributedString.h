@@ -1,5 +1,5 @@
 /*	CFAttributedString.h
-	Copyright (c) 2004-2013, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2014, Apple Inc. All rights reserved.
 */
 
 /*! @header CFAttributedString
@@ -23,8 +23,8 @@ CF_EXTERN_C_BEGIN
 
 /* CFAttributedString comes in immutable and mutable flavors.
 */
-typedef const struct __CFAttributedString *CFAttributedStringRef;
-typedef struct __CFAttributedString *CFMutableAttributedStringRef;
+typedef const struct CF_BRIDGED_TYPE(NSAttributedString) __CFAttributedString *CFAttributedStringRef;
+typedef struct CF_BRIDGED_MUTABLE_TYPE(NSMutableAttributedString) __CFAttributedString *CFMutableAttributedStringRef;
 
 /*! @function CFAttributedStringGetTypeID
 Returns the type identifier of all CFAttributedString instances.

@@ -2,7 +2,7 @@
  *  CTFont.h
  *  CoreText
  *
- *  Copyright (c) 2006-2012 Apple Inc. All rights reserved.
+ *  Copyright (c) 2006-2014 Apple Inc. All rights reserved.
  *
  */
 
@@ -39,7 +39,11 @@ extern "C" {
     @abstract   The Core Text Font reference.
     @discussion This is a opaque reference to a core font object.
 */
-typedef const struct __CTFont * CTFontRef;
+#if TARGET_OS_IPHONE
+typedef const struct CT_BRIDGED_TYPE(UIFont) __CTFont * CTFontRef;
+#else
+typedef const struct CT_BRIDGED_TYPE(NSFont) __CTFont * CTFontRef;
+#endif
 
 /*!
     @function   CTFontGetTypeID
@@ -329,7 +333,7 @@ typedef CF_ENUM(uint32_t, CTFontUIFontType) {
                 The point size for the font reference. If 0.0 is specified, the default size for the requested uiType is used.
 
     @param      language
-                Language specifier string to select a font for a particular localization. If unspecified, the current system language is used. The format of the language identifier should conform to the BCP 47 standard.
+                Language identifier to select a font for a particular localization. If unspecified, the current system language is used. The format of the language identifier should conform to UTS #35.
 
     @result     This function returns the correct font for various UI uses. The only required parameter is the uiType selector, unspecified optional parameters will use default values.
 */
@@ -597,7 +601,7 @@ CFStringRef CTFontCopyName(
                 The name specifier. See name specifier constants.
 
     @param      actualLanguage
-                Pointer to a CFStringRef to receive the language identifier of the returned name string. The format of the language identifier will conform to the BCP 47 standard.
+                Pointer to a CFStringRef to receive the language identifier of the returned name string. The format of the language identifier will conform to UTS #35.
 
     @result     This function returns a specific localized name from the font reference. The name is localized based on the user's global language precedence. If the font does not have an entry for the requested name, NULL will be returned. The matched language will be returned in the caller's buffer.
 */
@@ -639,7 +643,7 @@ CFStringEncoding CTFontGetStringEncoding( CTFontRef font ) CT_AVAILABLE(10_5, 3_
     @param      font
                 The font reference.
 
-    @result     This function returns a retained reference to an array of languages supported by the font. The array contains language identifier strings as CFStringRefs. The format of the language identifier will conform to the BCP 47 standard.
+    @result     This function returns a retained reference to an array of languages supported by the font. The array contains language identifier strings as CFStringRefs. The format of the language identifier will conform to UTS #35.
 */
 CFArrayRef CTFontCopySupportedLanguages( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
 
@@ -1004,9 +1008,21 @@ CFArrayRef CTFontCopyVariationAxes( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
 CFDictionaryRef CTFontCopyVariation( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
 
 /*! --------------------------------------------------------------------------
-    @group Font Features              (only AAT features are supported on iOS)
+    @group Font Features
 *///--------------------------------------------------------------------------
 
+/*!
+    @defined    kCTFontOpenTypeFeatureTag
+    @abstract   Key to get the OpenType feature tag.
+    @discussion This key can be used with a font feature dictionary to get the tag as a CFStringRef.
+*/
+extern const CFStringRef kCTFontOpenTypeFeatureTag CT_AVAILABLE(10_10, 8_0);
+/*!
+    @defined    kCTFontOpenTypeFeatureValue
+    @abstract   Key to get the OpenType feature value.
+    @discussion This key can be used with a font feature dictionary to get the value as a CFNumberRef.
+*/
+extern const CFStringRef kCTFontOpenTypeFeatureValue CT_AVAILABLE(10_10, 8_0);
 /*!
     @defined    kCTFontFeatureTypeIdentifierKey
     @abstract   Key to get the font feature type value.
@@ -1212,6 +1228,7 @@ enum {
     kCTFontTableGSUB    = 'GSUB',   // Glyph substitution
     kCTFontTableJSTF    = 'JSTF',   // Justification
     kCTFontTableLTSH    = 'LTSH',   // Linear threshold
+    kCTFontTableMATH    = 'MATH',   // Math
     kCTFontTableOS2     = 'OS/2',   // OS/2 and Windows specific metrics
     kCTFontTablePCLT    = 'PCLT',   // PCL 5 data
     kCTFontTableVDMX    = 'VDMX',   // Vertical device metrics

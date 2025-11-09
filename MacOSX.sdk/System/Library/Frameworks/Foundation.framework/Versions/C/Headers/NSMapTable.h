@@ -1,5 +1,5 @@
 /*	NSMapTable.h
-	Copyright (c) 1994-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSPointerFunctions.h>
@@ -33,10 +33,10 @@ typedef NSUInteger NSMapTableOptions;
 NS_CLASS_AVAILABLE(10_5, 6_0)
 @interface NSMapTable : NSObject <NSCopying, NSCoding, NSFastEnumeration>
 
-- (id)initWithKeyOptions:(NSPointerFunctionsOptions)keyOptions valueOptions:(NSPointerFunctionsOptions)valueOptions capacity:(NSUInteger)initialCapacity;
-- (id)initWithKeyPointerFunctions:(NSPointerFunctions *)keyFunctions valuePointerFunctions:(NSPointerFunctions *)valueFunctions capacity:(NSUInteger)initialCapacity;
+- (instancetype)initWithKeyOptions:(NSPointerFunctionsOptions)keyOptions valueOptions:(NSPointerFunctionsOptions)valueOptions capacity:(NSUInteger)initialCapacity NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithKeyPointerFunctions:(NSPointerFunctions *)keyFunctions valuePointerFunctions:(NSPointerFunctions *)valueFunctions capacity:(NSUInteger)initialCapacity NS_DESIGNATED_INITIALIZER;
 
-+ (id)mapTableWithKeyOptions:(NSPointerFunctionsOptions)keyOptions valueOptions:(NSPointerFunctionsOptions)valueOptions;
++ (NSMapTable *)mapTableWithKeyOptions:(NSPointerFunctionsOptions)keyOptions valueOptions:(NSPointerFunctionsOptions)valueOptions;
 
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || TARGET_OS_WIN32
 + (id)mapTableWithStrongToStrongObjects NS_DEPRECATED_MAC(10_5, 10_8);
@@ -45,21 +45,21 @@ NS_CLASS_AVAILABLE(10_5, 6_0)
 + (id)mapTableWithWeakToWeakObjects NS_DEPRECATED_MAC(10_5, 10_8);
 #endif
 
-+ (id)strongToStrongObjectsMapTable NS_AVAILABLE(10_8, 6_0);
-+ (id)weakToStrongObjectsMapTable NS_AVAILABLE(10_8, 6_0); // entries are not necessarily purged right away when the weak key is reclaimed
-+ (id)strongToWeakObjectsMapTable NS_AVAILABLE(10_8, 6_0);
-+ (id)weakToWeakObjectsMapTable NS_AVAILABLE(10_8, 6_0); // entries are not necessarily purged right away when the weak key or object is reclaimed
++ (NSMapTable *)strongToStrongObjectsMapTable NS_AVAILABLE(10_8, 6_0);
++ (NSMapTable *)weakToStrongObjectsMapTable NS_AVAILABLE(10_8, 6_0); // entries are not necessarily purged right away when the weak key is reclaimed
++ (NSMapTable *)strongToWeakObjectsMapTable NS_AVAILABLE(10_8, 6_0);
++ (NSMapTable *)weakToWeakObjectsMapTable NS_AVAILABLE(10_8, 6_0); // entries are not necessarily purged right away when the weak key or object is reclaimed
 
 /* return an NSPointerFunctions object reflecting the functions in use.  This is a new autoreleased object that can be subsequently modified and/or used directly in the creation of other pointer "collections". */
-- (NSPointerFunctions *)keyPointerFunctions;
-- (NSPointerFunctions *)valuePointerFunctions;
+@property (readonly, copy) NSPointerFunctions *keyPointerFunctions;
+@property (readonly, copy) NSPointerFunctions *valuePointerFunctions;
 
 - (id)objectForKey:(id)aKey;
 
 - (void)removeObjectForKey:(id)aKey;
 - (void)setObject:(id)anObject forKey:(id)aKey;   // add/replace value (CFDictionarySetValue, NSMapInsert)
 
-- (NSUInteger)count;
+@property (readonly) NSUInteger count;
 
 - (NSEnumerator *)keyEnumerator;
 - (NSEnumerator *)objectEnumerator;

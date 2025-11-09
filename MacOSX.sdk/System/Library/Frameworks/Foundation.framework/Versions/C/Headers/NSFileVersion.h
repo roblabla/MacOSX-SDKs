@@ -1,6 +1,6 @@
 /*
 	NSFileVersion.h
-	Copyright (c) 2010-2013, Apple Inc.
+	Copyright (c) 2010-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -30,9 +30,9 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
 @interface NSFileVersion : NSObject {
 @private
     NSURL *_fileURL;
-    id _library;
-    NSString *_clientID;
-    NSString *_name;
+    id _addition;
+    id _deadVersionIdentifier;
+    id _nonLocalVersion;
     NSURL *_contentsURL;
     BOOL _isBackup;
     NSString *_localizedName;
@@ -40,8 +40,8 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
     NSDate *_modificationDate;
     BOOL _isResolved;
     BOOL _contentsURLIsAccessed;
-    id _reserved1;
-    id _reserved2;
+    NSString *_clientID;
+    NSString *_name;
 }
 
 /* Return an NSFileVersion that represents the contents of the file located by a URL, or nil if there is no such file.
@@ -55,6 +55,14 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
 /* Return an array of NSFileVersions that represent unresolved conflicts for the file located by a URL, or nil if there is no such file.
 */
 + (NSArray *)unresolvedConflictVersionsOfItemAtURL:(NSURL *)url;
+
+/* Asynchronously return an array of NSFileVersions associated with the file located by the given URL, or nil if there is no such file or another error occurs. Versions returned by this method do not initially have their contents stored locally on the device, so a download may be required before you are able to access them. File attributes are accessible via -[NSURL getPromisedItemResourceValue:forKey:error:]. You can request a download by performing a coordinated read with NSFileCoordinator on the URL property of the resulting NSFileVersions.
+ 
+When a version is successfully downloaded, its contents are cached locally, and the version will no longer be returned by this method. The version will be returned by +[NSFileVersion otherVersionsOfItemAtURL:] instead, but will retain the same persistentIdentifier value. If the local version is later discarded, future invocations of this method may resume returning the version.
+ 
+If you need to get all versions for a document, both local and non-local, you should use an NSFilePresenter that implements -presentedItemDidGainVersion: and -presentedItemDidLoseVersion: and invoke +[NSFileCoordinator addFilePresenter:], +[NSFileVersion otherVersionsOfItemAtURL:], and this method within a single coordinated read.
+*/
++ (void)getNonlocalVersionsOfItemAtURL:(NSURL *)url completionHandler:(void (^)(NSArray *nonlocalFileVersions, NSError *error))completionHandler NS_AVAILABLE(10_10, 8_0);
 
 /* For a file located by a URL, return the NSFileVersion identified by a persistent identifier of the sort returned by -persistentIdentifier, or nil if the version no longer exists.
 */
@@ -74,23 +82,23 @@ When adding or removing versions of a file you should do it as part of a "coordi
 
 /* The location of the receiver's storage, or possibly nil if the receiver's storage has been deleted. The storage is read-only. The URL will have an arcane path. You must not derive user-presentable text from it.
 */
-@property (readonly) NSURL *URL;
+@property (readonly, copy) NSURL *URL;
 
 /* The user-presentable name of the version, or possibly nil if the receiver's storage has been deleted. This will be different from the user-presentable name of the versioned file if, for example, the file has been renamed since the version was added.
 */
-@property (readonly) NSString *localizedName;
+@property (readonly, copy) NSString *localizedName;
 
 /* The user-presentable name of the computer on which the version was saved, or possibly nil if the receiver's storage has been deleted, or nil if no computer name was recorded. The computer name is guaranteed to have been recorded only if the version is a conflict version. This will be different from that computer's current name if the computer's name has been changed since the version was retrieved from that computer.
 */
-@property (readonly) NSString *localizedNameOfSavingComputer;
+@property (readonly, copy) NSString *localizedNameOfSavingComputer;
 
 /* The modification date of the version, or possibly nil if the receiver's storage has been deleted.
 */
-@property (readonly) NSDate *modificationDate;
+@property (readonly, copy) NSDate *modificationDate;
 
 /* An object that can be encoded and, after subsequent decoding, passed to -versionOfItemAtURL:forPersistentIdentifier: to create a new instance of NSFileVersion that is equal to the receiver.
 */
-@property (readonly) id<NSCoding> persistentIdentifier;
+@property (readonly, retain) id<NSCoding> persistentIdentifier;
 
 /* Whether the version was created as a result of the discovery of a conflict between two writers of the versioned file.
 */
@@ -115,6 +123,14 @@ You cannot make the versioned file itself discardable. Setting the value of this
 Versions can be discardable only on Mac OS X.
 */
 @property (getter=isDiscardable) BOOL discardable NS_AVAILABLE_MAC(10_7);
+
+/* Whether the version has local contents. Versions that are returned by +getNonlocalVersionsOfItemAtURL:completionHandler: do not initially have local contents. You can only access their contents, either directly via the URL or by invoking -replaceItemAtURL:options:error:, from within a coordinated read on the NSFileVersion's URL.
+*/
+@property (readonly) BOOL hasLocalContents NS_AVAILABLE(10_10, 8_0);
+
+/* Whether the version has a thumbnail image available. Thumbnails for versions from +getNonlocalVersionsOfItemAtURL:completionHandler: may not immediately be available. As soon as it becomes available, this property will change from NO to YES. You can use KVO to be notified of this change. If a thumbnail is available, you can access it using NSURLThumbnailKey or NSURLThumbnailDictionaryKey.
+*/
+@property (readonly) BOOL hasThumbnail NS_AVAILABLE(10_10, 8_0);
 
 /* If the passed-in URL locates a file, replace the file with a file whose contents are taken from the version but whose display name is taken from the file. If the passed-in URL does not locate a file then simply write one. If successful, return a URL that locates the resulting file; it may be different from the passed-in URL. The one exception to taking the display name from an existing file is if the version is of a different type than the overwritten file. In that case the file name extension will be taken from the version. (When file name extensions are being hidden in a user-friendly way this is not actually an exception.) If not successful, return NO after setting *outError to an NSError that encapsulates why not.
 

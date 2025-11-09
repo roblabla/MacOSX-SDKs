@@ -2,7 +2,7 @@
 //  AVBEthernetInterface.h
 //  AudioVideoBridging
 //
-//  Copyright 2010-2012 Apple Inc. All rights reserved.
+//  Copyright (c) 2010-2014 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

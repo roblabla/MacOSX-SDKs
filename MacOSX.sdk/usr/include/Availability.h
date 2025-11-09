@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007-2011 by Apple Inc.. All rights reserved.
+ * Copyright (c) 2007-2014 by Apple Inc.. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -126,27 +126,31 @@
 #define __MAC_10_7            1070
 #define __MAC_10_8            1080
 #define __MAC_10_9            1090
+#define __MAC_10_10         101000
+#define __MAC_10_10_2       101002
+#define __MAC_10_10_3       101003
 /* __MAC_NA is not defined to a value but is uses as a token by macros to indicate that the API is unavailable */
 
-#define __IPHONE_2_0         20000
-#define __IPHONE_2_1         20100
-#define __IPHONE_2_2         20200
-#define __IPHONE_3_0         30000
-#define __IPHONE_3_1         30100
-#define __IPHONE_3_2         30200
-#define __IPHONE_4_0         40000
-#define __IPHONE_4_1         40100
-#define __IPHONE_4_2         40200
-#define __IPHONE_4_3         40300
-#define __IPHONE_5_0         50000
-#define __IPHONE_5_1         50100
-#define __IPHONE_6_0         60000
-#define __IPHONE_6_1         60100
-#define __IPHONE_7_0         70000
+#define __IPHONE_2_0     20000
+#define __IPHONE_2_1     20100
+#define __IPHONE_2_2     20200
+#define __IPHONE_3_0     30000
+#define __IPHONE_3_1     30100
+#define __IPHONE_3_2     30200
+#define __IPHONE_4_0     40000
+#define __IPHONE_4_1     40100
+#define __IPHONE_4_2     40200
+#define __IPHONE_4_3     40300
+#define __IPHONE_5_0     50000
+#define __IPHONE_5_1     50100
+#define __IPHONE_6_0     60000
+#define __IPHONE_6_1     60100
+#define __IPHONE_7_0     70000
+#define __IPHONE_7_1     70100
+#define __IPHONE_8_0     80000
 /* __IPHONE_NA is not defined to a value but is uses as a token by macros to indicate that the API is unavailable */
 
 #include <AvailabilityInternal.h>
-
 
 #ifdef __IPHONE_OS_VERSION_MIN_REQUIRED
     #define __OSX_AVAILABLE_STARTING(_osx, _ios) __AVAILABILITY_INTERNAL##_ios
@@ -167,6 +171,38 @@
     #define __OSX_AVAILABLE_BUT_DEPRECATED(_osxIntro, _osxDep, _iosIntro, _iosDep)
     #define __OSX_AVAILABLE_BUT_DEPRECATED_MSG(_osxIntro, _osxDep, _iosIntro, _iosDep, _msg)
 #endif
+
+
+#if defined(__has_feature)
+  #if __has_feature(attribute_availability_with_message)
+    #define __OS_AVAILABILITY(_target, _availability)            __attribute__((availability(_target,_availability)))
+    #define __OS_AVAILABILITY_MSG(_target, _availability, _msg)  __attribute__((availability(_target,_availability,message=_msg)))
+  #else
+    #define __OS_AVAILABILITY(_target, _availability)
+    #define __OS_AVAILABILITY_MSG(_target, _availability, _msg)
+  #endif
+#else
+    #define __OS_AVAILABILITY(_target, _availability)
+    #define __OS_AVAILABILITY_MSG(_target, _availability, _msg)
+#endif
+
+
+/* for use to document app extension usage */
+#if defined(__has_feature)
+  #if __has_feature(attribute_availability_app_extension)
+    #define __OSX_EXTENSION_UNAVAILABLE(_msg)  __OS_AVAILABILITY_MSG(macosx_app_extension,unavailable,_msg)
+    #define __IOS_EXTENSION_UNAVAILABLE(_msg)  __OS_AVAILABILITY_MSG(ios_app_extension,unavailable,_msg)
+  #else
+    #define __OSX_EXTENSION_UNAVAILABLE(_msg)
+    #define __IOS_EXTENSION_UNAVAILABLE(_msg)
+  #endif
+#else
+    #define __OSX_EXTENSION_UNAVAILABLE(_msg)
+    #define __IOS_EXTENSION_UNAVAILABLE(_msg)
+#endif
+
+#define __OS_EXTENSION_UNAVAILABLE(_msg)  __OSX_EXTENSION_UNAVAILABLE(_msg) __IOS_EXTENSION_UNAVAILABLE(_msg)
+
 
 
 #endif /* __AVAILABILITY__ */

@@ -55,30 +55,24 @@ NS_CLASS_AVAILABLE(10_4,3_0)
 + (NSEntityDescription *)entityForName:(NSString *)entityName inManagedObjectContext:(NSManagedObjectContext *)context;
 + (id)insertNewObjectForEntityForName:(NSString *)entityName inManagedObjectContext:(NSManagedObjectContext *)context;
 
-- (NSManagedObjectModel *)managedObjectModel;
-- (NSString *)managedObjectClassName;
-- (void)setManagedObjectClassName:(NSString *)name;
+@property (readonly, assign) NSManagedObjectModel *managedObjectModel;
+@property (copy) NSString *managedObjectClassName;
 
-- (NSString *)name;
-- (void)setName:(NSString *)name;
+@property (copy) NSString *name;
 
-- (BOOL)isAbstract;
-- (void)setAbstract:(BOOL)flag;
-- (NSDictionary *)subentitiesByName;
-- (NSArray *)subentities;
-- (void)setSubentities:(NSArray *)array;
-- (NSEntityDescription *)superentity;
+@property (getter=isAbstract) BOOL abstract;
+@property (readonly, copy) NSDictionary *subentitiesByName;
+@property (strong) NSArray *subentities;
+@property (readonly, assign) NSEntityDescription *superentity;
 
-- (NSDictionary *)propertiesByName;
-- (NSArray *)properties;
-- (void)setProperties:(NSArray *)properties;
+@property (readonly, copy) NSDictionary *propertiesByName;
+@property (strong) NSArray *properties;
 
-- (NSDictionary *)userInfo;
-- (void)setUserInfo:(NSDictionary *)dictionary;
+@property (nonatomic, strong) NSDictionary *userInfo;
 
 // convenience methods to get the most common (and most relevant) types of properties for an entity
-- (NSDictionary *)attributesByName;
-- (NSDictionary *)relationshipsByName;
+@property (readonly, copy) NSDictionary *attributesByName;
+@property (readonly, copy) NSDictionary *relationshipsByName;
 - (NSArray *)relationshipsWithDestinationEntity:(NSEntityDescription *)entity;
 
 /* Returns a boolean indicating if the receiver is a subentity of the specified entity.  (This method is the Core Data entity inheritance equivalent of -isKindOfClass:)
@@ -87,21 +81,18 @@ NS_CLASS_AVAILABLE(10_4,3_0)
 
 /* Returns the version hash for the entity.  The version hash is used to uniquely identify an entity based on the collection and configuration of properties for the entity.  The version hash uses only values which affect the persistence of data and the user-defined versionHashModifier value.  (The values which affect persistence are the name of the entity, the version hash of the superentity (if present), if the entity is abstract, and all of the version hashes for the properties.)  This value is stored as part of the version information in the metadata for stores which use this entity, as well as a definition of an entity involved in an NSEntityMapping.
 */
-- (NSData *)versionHash NS_AVAILABLE(10_5,3_0);
+@property (readonly, copy) NSData *versionHash NS_AVAILABLE(10_5,3_0);
 
 /* Returns/sets the version hash modifier for the entity.  This value is included in the version hash for the entity, allowing developers to mark/denote an entity as being a different "version" than another, even if all of the values which affect persistence are equal.  (Such a difference is important in cases where the structure of an entity is unchanged, but the format or content of data has changed.)
 */
-- (NSString *)versionHashModifier NS_AVAILABLE(10_5,3_0);
-- (void)setVersionHashModifier:(NSString *)modifierString NS_AVAILABLE(10_5,3_0);
+@property (copy) NSString *versionHashModifier NS_AVAILABLE(10_5,3_0);
 
-- (NSString *)renamingIdentifier NS_AVAILABLE(10_6,3_0);
-- (void)setRenamingIdentifier:(NSString *)value NS_AVAILABLE(10_6,3_0);
+@property (copy) NSString *renamingIdentifier NS_AVAILABLE(10_6,3_0);
 
 /* Returns/sets the set of compound indices for the entity. Returns/takes an array of arrays, each of which contains one or more NSPropertyDescription or NSString instances (strings must be the names of properties of the entity on which the index is created).
     This value does not form part of the entity's version hash, and may be ignored by stores which do not natively support compound
     indexes.
  */
-- (NSArray *)compoundIndexes NS_AVAILABLE(10_7,5_0);
-- (void)setCompoundIndexes:(NSArray *)value NS_AVAILABLE(10_7,5_0);
+@property (strong) NSArray *compoundIndexes NS_AVAILABLE(10_7,5_0);
 
 @end

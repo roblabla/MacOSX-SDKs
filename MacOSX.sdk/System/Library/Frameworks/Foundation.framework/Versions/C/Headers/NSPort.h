@@ -1,5 +1,5 @@
 /*	NSPort.h
-	Copyright (c) 1994-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -24,7 +24,7 @@ FOUNDATION_EXPORT NSString * const NSPortDidBecomeInvalidNotification;
 + (NSPort *)port;
 
 - (void)invalidate;
-- (BOOL)isValid;
+@property (readonly, getter=isValid) BOOL valid;
 
 - (void)setDelegate:(id <NSPortDelegate>)anObject;
 - (id <NSPortDelegate>)delegate;
@@ -37,7 +37,8 @@ FOUNDATION_EXPORT NSString * const NSPortDidBecomeInvalidNotification;
 - (void)removeFromRunLoop:(NSRunLoop *)runLoop forMode:(NSString *)mode;
 
 // DO Transport API; subclassers should implement these methods
-- (NSUInteger)reservedSpaceLength;	// default is 0
+// default is 0
+@property (readonly) NSUInteger reservedSpaceLength;	
 - (BOOL)sendBeforeDate:(NSDate *)limitDate components:(NSMutableArray *)components from:(NSPort *) receivePort reserved:(NSUInteger)headerSpaceReserved;
 - (BOOL)sendBeforeDate:(NSDate *)limitDate msgid:(NSUInteger)msgID components:(NSMutableArray *)components from:(NSPort *)receivePort reserved:(NSUInteger)headerSpaceReserved;
 	// The components array consists of a series of instances
@@ -83,7 +84,7 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 }
 
 + (NSPort *)portWithMachPort:(uint32_t)machPort;
-- (id)initWithMachPort:(uint32_t)machPort;	// designated initializer
+- (instancetype)initWithMachPort:(uint32_t)machPort;
 
 - (void)setDelegate:(id <NSMachPortDelegate>)anObject;
 - (id <NSMachPortDelegate>)delegate;
@@ -95,9 +96,9 @@ enum {
 } NS_ENUM_AVAILABLE(10_5, 2_0);
 
 + (NSPort *)portWithMachPort:(uint32_t)machPort options:(NSUInteger)f NS_AVAILABLE(10_5, 2_0);
-- (id)initWithMachPort:(uint32_t)machPort options:(NSUInteger)f NS_AVAILABLE(10_5, 2_0);
+- (instancetype)initWithMachPort:(uint32_t)machPort options:(NSUInteger)f NS_AVAILABLE(10_5, 2_0) NS_DESIGNATED_INITIALIZER;
 
-- (uint32_t)machPort;
+@property (readonly) uint32_t machPort;
 
 - (void)scheduleInRunLoop:(NSRunLoop *)runLoop forMode:(NSString *)mode;
 - (void)removeFromRunLoop:(NSRunLoop *)runLoop forMode:(NSString *)mode;
@@ -148,17 +149,19 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
     NSUInteger _reserved;
 }
 
-- (id)init;
-- (id)initWithTCPPort:(unsigned short)port;
-- (id)initWithProtocolFamily:(int)family socketType:(int)type protocol:(int)protocol address:(NSData *)address;
-- (id)initWithProtocolFamily:(int)family socketType:(int)type protocol:(int)protocol socket:(NSSocketNativeHandle)sock;
-- (id)initRemoteWithTCPPort:(unsigned short)port host:(NSString *)hostName;
-- (id)initRemoteWithProtocolFamily:(int)family socketType:(int)type protocol:(int)protocol address:(NSData *)address;
-- (int)protocolFamily;
-- (int)socketType;
-- (int)protocol;
-- (NSData *)address;
-- (NSSocketNativeHandle)socket;
+- (instancetype)init;
+- (instancetype)initWithTCPPort:(unsigned short)port;
+- (instancetype)initWithProtocolFamily:(int)family socketType:(int)type protocol:(int)protocol address:(NSData *)address NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithProtocolFamily:(int)family socketType:(int)type protocol:(int)protocol socket:(NSSocketNativeHandle)sock NS_DESIGNATED_INITIALIZER;
+- (instancetype)initRemoteWithTCPPort:(unsigned short)port host:(NSString *)hostName;
+- (instancetype)initRemoteWithProtocolFamily:(int)family socketType:(int)type protocol:(int)protocol address:(NSData *)address NS_DESIGNATED_INITIALIZER;
+
+
+@property (readonly) int protocolFamily;
+@property (readonly) int socketType;
+@property (readonly) int protocol;
+@property (readonly, copy) NSData *address;
+@property (readonly) NSSocketNativeHandle socket;
 
 @end
 

@@ -1,7 +1,7 @@
 /*
 	NSColorPicker.h
 	Application Kit
-	Copyright (c) 1994-2013, Apple Inc.
+	Copyright (c) 1994-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -14,16 +14,16 @@
     NSColorPanel *_colorPanel;
     NSString *_buttonToolTip;
 }
-- (id)initWithPickerMask:(NSUInteger)mask colorPanel:(NSColorPanel *)owningColorPanel;
-- (NSColorPanel *)colorPanel;
-- (NSImage *)provideNewButtonImage;
+- (instancetype)initWithPickerMask:(NSUInteger)mask colorPanel:(NSColorPanel *)owningColorPanel;
+@property (readonly, strong) NSColorPanel *colorPanel;
+@property (readonly, strong) NSImage *provideNewButtonImage;
 - (void)insertNewButtonImage:(NSImage *)newButtonImage in:(NSButtonCell *)buttonCell;
 - (void)viewSizeChanged:(id)sender;
 - (void)attachColorList:(NSColorList *)colorList;
 - (void)detachColorList:(NSColorList *)colorList;
 - (void)setMode:(NSColorPanelMode)mode;
 // The default implementation of buttonToolTip returns the current classname
-- (NSString *)buttonToolTip;
+@property (readonly, copy) NSString *buttonToolTip;
 // The default implementation of minContentSize will look at your view's Autosizing behavior and do the right thing based on that.
-- (NSSize)minContentSize;
+@property (readonly) NSSize minContentSize;
 @end

@@ -1,6 +1,6 @@
 /*	
     OSAScriptView.h
-    Copyright (C) 2005 Apple Computer, Inc. All rights reserved.    
+    Copyright (C) 2005-2014 Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -20,19 +20,12 @@
 }
 
 // Accessors
-- (NSString *)source;
-- (void)setSource:(NSString *)source;
-- (BOOL)usesScriptAssistant;
-- (void)setUsesScriptAssistant:(BOOL)usesScriptAssistant;
-- (BOOL)usesTabs;
-- (void)setUsesTabs:(BOOL)usesTabs;
-- (NSUInteger)tabWidth;
-- (void)setTabWidth:(NSUInteger)tabWidth;
-- (BOOL)wrapsLines;
-- (void)setWrapsLines:(BOOL)wrapsLines;
-- (BOOL)indentsWrappedLines;
-- (void)setIndentsWrappedLines:(BOOL)indentsWrappedLines;
-- (NSUInteger)indentWidth;
-- (void)setIndentWidth:(NSUInteger)indentWidth;
+@property (copy) NSString *source;
+@property BOOL usesScriptAssistant;
+@property BOOL usesTabs;
+@property NSUInteger tabWidth;
+@property BOOL wrapsLines;
+@property BOOL indentsWrappedLines;
+@property NSUInteger indentWidth;
 
 @end

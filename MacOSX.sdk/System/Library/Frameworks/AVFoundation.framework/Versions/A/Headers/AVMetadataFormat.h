@@ -3,7 +3,7 @@
 
     Framework:  AVFoundation
  
-    Copyright 2010-2013 Apple Inc. All rights reserved.
+    Copyright 2010-2014 Apple Inc. All rights reserved.
 
 */
 
@@ -88,6 +88,7 @@ AVF_EXPORT NSString *const AVMetadataKeySpaceISOUserData								 NS_AVAILABLE(10
 
 // ISO UserData keys (includes 3GPP keys)
 AVF_EXPORT NSString *const AVMetadataISOUserDataKeyCopyright                             NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT NSString *const AVMetadataISOUserDataKeyTaggedCharacteristic                  NS_AVAILABLE(10_10, 8_0);
 AVF_EXPORT NSString *const AVMetadata3GPUserDataKeyCopyright                             NS_AVAILABLE(10_7, 4_0);
 AVF_EXPORT NSString *const AVMetadata3GPUserDataKeyAuthor                                NS_AVAILABLE(10_7, 4_0);
 AVF_EXPORT NSString *const AVMetadata3GPUserDataKeyPerformer                             NS_AVAILABLE(10_7, 4_0);
@@ -301,3 +302,29 @@ AVF_EXPORT NSString *const AVMetadataID3MetadataKeyOfficialInternetRadioStationH
 AVF_EXPORT NSString *const AVMetadataID3MetadataKeyPayment                               /* WPAY Payment */                                              NS_AVAILABLE(10_7, 4_0);
 AVF_EXPORT NSString *const AVMetadataID3MetadataKeyOfficialPublisherWebpage              /* WPUB Publishers official webpage */                          NS_AVAILABLE(10_7, 4_0);
 AVF_EXPORT NSString *const AVMetadataID3MetadataKeyUserURL                               /* WXXX User defined URL link frame */                          NS_AVAILABLE(10_7, 4_0);
+
+// Icecast/ShoutCAST streaming metadata
+AVF_EXPORT NSString *const AVMetadataKeySpaceIcy                                         NS_AVAILABLE(10_10, 8_0);
+
+AVF_EXPORT NSString *const AVMetadataIcyMetadataKeyStreamTitle                           NS_AVAILABLE(10_10, 8_0);
+AVF_EXPORT NSString *const AVMetadataIcyMetadataKeyStreamURL                             NS_AVAILABLE(10_10, 8_0);
+
+// HTTP Live Streaming metadata
+AVF_EXPORT NSString *const AVMetadataFormatHLSMetadata                                   NS_AVAILABLE(10_10, 8_0);
+// HLS Metadata does not define its own keySpace or keys. Use of the keySpace AVMetadataKeySpaceQuickTimeMetadata and its keys is recommended.
+
+// Extra attribute keys
+
+/*!
+ @constant		AVMetadataExtraAttributeValueURIKey
+ @abstract
+	When present in an item’s extraAttributes dictionary, identifies the resource to be used as the item's value. Values for this key are of type NSString.
+*/
+AVF_EXPORT NSString *const AVMetadataExtraAttributeValueURIKey							 NS_AVAILABLE(10_10, 8_0);
+
+/*!
+ @constant		AVMetadataExtraAttributeBaseURIKey
+ @abstract
+	When present in an item’s extraAttributes dictionary, identifies the base URI against which other URIs related to the item are to be resolved, e.g. AVMetadataExtraAttributeValueURIKey. Values for this key are of type NSString.
+*/
+AVF_EXPORT NSString *const AVMetadataExtraAttributeBaseURIKey							 NS_AVAILABLE(10_10, 8_0);

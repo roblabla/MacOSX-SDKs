@@ -1,6 +1,6 @@
 /*	
     OSAScriptController.h
-    Copyright (C) 2005 Apple Computer, Inc. All rights reserved.    
+    Copyright (C) 2005-2014 Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -13,12 +13,12 @@
 @class OSALanguage;
 @class OSAScriptControllerPrivate;
 
-typedef enum
+typedef NS_ENUM(NSInteger, OSAScriptState)
 {
 	OSAScriptStopped,
 	OSAScriptRunning,
 	OSAScriptRecording
-} OSAScriptState;
+};
 
 // OSAScriptController
 // =====================
@@ -34,16 +34,12 @@ typedef enum
 }
 
 // Accessors
-- (OSAScriptView *)scriptView;
-- (void)setScriptView:(OSAScriptView *)newScriptView;
-- (NSTextView *)resultView;
-- (void)setResultView:(NSTextView *)newResultView;
-- (OSAScript *)script;
-- (void)setScript:(OSAScript *)newScript;
-- (OSALanguage *)language;
-- (void)setLanguage:(OSALanguage *)newLanguage;
-- (OSAScriptState)scriptState;
-- (BOOL)isCompiling;
+@property (strong) OSAScriptView *scriptView;
+@property (strong) NSTextView *resultView;
+@property (copy) OSAScript *script;
+@property (strong) OSALanguage *language;
+@property (readonly) OSAScriptState scriptState;
+@property (getter=isCompiling, readonly) BOOL compiling;
 
 // Actions
 - (IBAction)compileScript:(id)sender;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004 Apple Computer, Inc.  All rights reserved.
+ * Copyright (C) 2004 Apple Inc.  All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -10,7 +10,7 @@
  * 2.  Redistributions in binary form must reproduce the above copyright
  *     notice, this list of conditions and the following disclaimer in the
  *     documentation and/or other materials provided with the distribution. 
- * 3.  Neither the name of Apple Computer, Inc. ("Apple") nor the names of
+ * 3.  Neither the name of Apple Inc. ("Apple") nor the names of
  *     its contributors may be used to endorse or promote products derived
  *     from this software without specific prior written permission. 
  *
@@ -26,8 +26,10 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import <Cocoa/Cocoa.h>
-#import <JavaScriptCore/WebKitAvailability.h>
+#import <Foundation/Foundation.h>
+#import <WebKit/WebKitAvailability.h>
+
+#import <AppKit/AppKit.h>
 
 /*!
     WebPlugIn is an informal protocol that enables interaction between an application
@@ -84,14 +86,14 @@
 - (void)webPlugInSetIsSelected:(BOOL)isSelected;
 
 /*!
-    @method objectForWebScript
+    @property objectForWebScript
     @discussion objectForWebScript is used to expose a plug-in's scripting interface.  The 
     methods of the object are exposed to the script environment.  See the WebScripting
     informal protocol for more details.
     @result Returns the object that exposes the plug-in's interface.  The class of this
     object can implement methods from the WebScripting informal protocol.
 */
-- (id)objectForWebScript;
+@property (nonatomic, readonly, strong) id objectForWebScript;
 
 /*!
     @method webPlugInMainResourceDidReceiveResponse:
@@ -100,7 +102,7 @@
     @discussion This method is only sent to the plug-in if the
     WebPlugInShouldLoadMainResourceKey argument passed to the plug-in was NO.
 */
-- (void)webPlugInMainResourceDidReceiveResponse:(NSURLResponse *)response WEBKIT_OBJC_METHOD_ANNOTATION(AVAILABLE_IN_WEBKIT_VERSION_4_0);
+- (void)webPlugInMainResourceDidReceiveResponse:(NSURLResponse *)response NS_AVAILABLE_MAC(10_6);
 
 /*!
     @method webPlugInMainResourceDidReceiveData:
@@ -109,7 +111,7 @@
     @discussion This method is only sent to the plug-in if the
     WebPlugInShouldLoadMainResourceKey argument passed to the plug-in was NO.
 */
-- (void)webPlugInMainResourceDidReceiveData:(NSData *)data WEBKIT_OBJC_METHOD_ANNOTATION(AVAILABLE_IN_WEBKIT_VERSION_4_0);
+- (void)webPlugInMainResourceDidReceiveData:(NSData *)data NS_AVAILABLE_MAC(10_6);
 
 /*!
     @method webPlugInMainResourceDidFailWithError:
@@ -118,7 +120,7 @@
     @discussion This method is only sent to the plug-in if the
     WebPlugInShouldLoadMainResourceKey argument passed to the plug-in was NO.
 */
-- (void)webPlugInMainResourceDidFailWithError:(NSError *)error WEBKIT_OBJC_METHOD_ANNOTATION(AVAILABLE_IN_WEBKIT_VERSION_4_0);
+- (void)webPlugInMainResourceDidFailWithError:(NSError *)error NS_AVAILABLE_MAC(10_6);
 
 /*!
     @method webPlugInMainResourceDidFinishLoading
@@ -127,6 +129,6 @@
     @discussion This method is only sent to the plug-in if the
     WebPlugInShouldLoadMainResourceKey argument passed to the plug-in was NO.
 */
-- (void)webPlugInMainResourceDidFinishLoading WEBKIT_OBJC_METHOD_ANNOTATION(AVAILABLE_IN_WEBKIT_VERSION_4_0);
+- (void)webPlugInMainResourceDidFinishLoading NS_AVAILABLE_MAC(10_6);
 
 @end

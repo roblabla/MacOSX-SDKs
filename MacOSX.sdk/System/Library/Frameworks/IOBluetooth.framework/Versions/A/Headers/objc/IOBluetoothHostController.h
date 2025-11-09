@@ -48,7 +48,7 @@
 	@result		A (autoreleased) pointer to the created IOBluetoothHostController object.
 */
 
-+ (IOBluetoothHostController *)defaultController;
++ (instancetype)defaultController;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@method		powerState

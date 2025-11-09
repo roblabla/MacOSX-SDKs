@@ -52,12 +52,11 @@
 	Indicates that the player can no longer play AVPlayerItem instances because of an error. The error is described by
 	the value of the player's error property.
  */
-enum {
+typedef NS_ENUM(NSInteger, AVPlayerStatus) {
 	AVPlayerStatusUnknown,
 	AVPlayerStatusReadyToPlay,
 	AVPlayerStatusFailed
 };
-typedef NSInteger AVPlayerStatus;
 
 NS_CLASS_AVAILABLE(10_7, 4_0)
 @interface AVPlayer : NSObject 
@@ -91,7 +90,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 	@result			An instance of AVPlayer
 	@discussion		Implicitly creates an AVPlayerItem. Clients can obtain the AVPlayerItem as it becomes the player's currentItem.
 */
-- (id)initWithURL:(NSURL *)URL;
+- (instancetype)initWithURL:(NSURL *)URL;
 
 /*!
 	@method			initWithPlayerItem:
@@ -100,7 +99,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 	@result			An instance of AVPlayer
 	@discussion		Useful in order to play items for which an AVAsset has previously been created. See -[AVPlayerItem initWithAsset:].
 */
-- (id)initWithPlayerItem:(AVPlayerItem *)item;
+- (instancetype)initWithPlayerItem:(AVPlayerItem *)item;
 
 /*!
  @property status
@@ -122,7 +121,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  
  @discussion
 	The value of this property is an NSError that describes what caused the receiver to no longer be able to play items.
-	If the receiver's status is not AVPlayerItemStatusFailed, the value of this property is nil.
+	If the receiver's status is not AVPlayerStatusFailed, the value of this property is nil.
  */
 @property (nonatomic, readonly) NSError *error;
 
@@ -183,13 +182,12 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 	elapses, according to its rate). After this, if the player's actionAtItemEnd is set to a value other than AVPlayerActionAtItemEndNone,
 	the player will immediately take the action appropriate to that value.
 */
-enum
+typedef NS_ENUM(NSInteger, AVPlayerActionAtItemEnd)
 {
     AVPlayerActionAtItemEndAdvance	= 0,
 	AVPlayerActionAtItemEndPause	= 1,
 	AVPlayerActionAtItemEndNone		= 2,
 };
-typedef NSInteger AVPlayerActionAtItemEnd;
 
 /* indicates the action that the player should perform when playback of an item reaches its end time */
 @property (nonatomic) AVPlayerActionAtItemEnd actionAtItemEnd;
@@ -459,7 +457,6 @@ typedef NSInteger AVPlayerActionAtItemEnd;
 
 @end
 
-
 #if TARGET_OS_IPHONE
 
 /*
@@ -471,11 +468,11 @@ typedef NSInteger AVPlayerActionAtItemEnd;
  
  @discussion
 	"External playback" is a mode where video data is sent to an external device such as Apple TV via AirPlay
-	and the mini-connector-based HDMI/VGA adapters for full screen playback at its original fidelity. AirPlay 
-	Video playback is also considered as an "external playback" mode.
+	and the Lightning-based HDMI/VGA adapters for full screen playback at its original fidelity. 
+	AirPlay Video playback is also considered as an "external playback" mode.
  
 	In "external screen" mode (also known as mirroring and second display), video data is rendered on the host 
-	device (e.g. iPhone), rendered video is recompressed and transferred to the external device, and the 
+	device (e.g. iPhone), rendered video is recompressed and transferred to the external device, and the
 	external device decompresses and displays the video.
  
 	AVPlayerExternalPlaybackSupport properties affect AirPlay Video playback and are the replacement for the 
@@ -593,7 +590,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
     @result
       An instance of AVQueuePlayer.
 */
-- (id)initWithItems:(NSArray *)items;
+- (instancetype)initWithItems:(NSArray *)items;
 
 /*!
     @method     items

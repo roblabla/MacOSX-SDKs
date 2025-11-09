@@ -1,5 +1,5 @@
 /*	NSOrderedSet.h
-	Copyright (c) 2007-2013, Apple Inc. All rights reserved.
+	Copyright (c) 2007-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -14,9 +14,12 @@
 NS_CLASS_AVAILABLE(10_7, 5_0)
 @interface NSOrderedSet : NSObject <NSCopying, NSMutableCopying, NSSecureCoding, NSFastEnumeration>
 
-- (NSUInteger)count;
+@property (readonly) NSUInteger count;
 - (id)objectAtIndex:(NSUInteger)idx;
 - (NSUInteger)indexOfObject:(id)object;
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithObjects:(const id [])objects count:(NSUInteger)cnt NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
 @end
 
@@ -24,8 +27,8 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
 
 - (void)getObjects:(id __unsafe_unretained [])objects range:(NSRange)range;
 - (NSArray *)objectsAtIndexes:(NSIndexSet *)indexes;
-- (id)firstObject;
-- (id)lastObject;
+@property (nonatomic, readonly) id firstObject;
+@property (nonatomic, readonly) id lastObject;
 
 - (BOOL)isEqualToOrderedSet:(NSOrderedSet *)other;
 
@@ -41,7 +44,7 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
 - (NSEnumerator *)objectEnumerator;
 - (NSEnumerator *)reverseObjectEnumerator;
 
-- (NSOrderedSet *)reversedOrderedSet;
+@property (readonly, copy) NSOrderedSet *reversedOrderedSet;
 
 // These two methods return a facade object for the receiving ordered set,
 // which acts like an immutable array or set (respectively).  Note that
@@ -49,10 +52,8 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
 // to the original ordered set will "show through" the facade and it will
 // appear to change spontaneously, since a copy of the ordered set is not
 // being made.
-- (NSArray *)array;
-- (NSSet *)set;
-
-#if NS_BLOCKS_AVAILABLE
+@property (readonly, copy) NSArray *array;
+@property (readonly, copy) NSSet *set;
 
 - (void)enumerateObjectsUsingBlock:(void (^)(id obj, NSUInteger idx, BOOL *stop))block;
 - (void)enumerateObjectsWithOptions:(NSEnumerationOptions)opts usingBlock:(void (^)(id obj, NSUInteger idx, BOOL *stop))block;
@@ -71,9 +72,7 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
 - (NSArray *)sortedArrayUsingComparator:(NSComparator)cmptr;
 - (NSArray *)sortedArrayWithOptions:(NSSortOptions)opts usingComparator:(NSComparator)cmptr;
 
-#endif
-
-- (NSString *)description;
+@property (readonly, copy) NSString *description;
 - (NSString *)descriptionWithLocale:(id)locale;
 - (NSString *)descriptionWithLocale:(id)locale indent:(NSUInteger)level;
 
@@ -91,9 +90,6 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
 + (instancetype)orderedSetWithArray:(NSArray *)array range:(NSRange)range copyItems:(BOOL)flag;
 + (instancetype)orderedSetWithSet:(NSSet *)set;
 + (instancetype)orderedSetWithSet:(NSSet *)set copyItems:(BOOL)flag;
-
-- (instancetype)init;	/* designated initializer */
-- (instancetype)initWithObjects:(const id [])objects count:(NSUInteger)cnt;	/* designated initializer */
 
 - (instancetype)initWithObject:(id)object;
 - (instancetype)initWithObjects:(id)firstObj, ... NS_REQUIRES_NIL_TERMINATION;
@@ -116,6 +112,9 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
 - (void)insertObject:(id)object atIndex:(NSUInteger)idx;
 - (void)removeObjectAtIndex:(NSUInteger)idx;
 - (void)replaceObjectAtIndex:(NSUInteger)idx withObject:(id)object;
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCapacity:(NSUInteger)numItems NS_DESIGNATED_INITIALIZER;
 
 @end
 
@@ -162,9 +161,6 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
 @interface NSMutableOrderedSet (NSMutableOrderedSetCreation)
 
 + (instancetype)orderedSetWithCapacity:(NSUInteger)numItems;
-
-- (instancetype)init;	/* designated initializer */
-- (instancetype)initWithCapacity:(NSUInteger)numItems;	/* designated initializer */
 
 @end
 

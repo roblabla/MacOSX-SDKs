@@ -68,7 +68,7 @@
 									it if you want to reference it later.
 */
 
-+(IOBluetoothOBEXSession*) withSDPServiceRecord:(IOBluetoothSDPServiceRecord*)inSDPServiceRecord;
++(instancetype) withSDPServiceRecord:(IOBluetoothSDPServiceRecord*)inSDPServiceRecord;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!	@method	withDevice
@@ -87,7 +87,7 @@
 									it if you want to reference it later.
 */
 		
-+(IOBluetoothOBEXSession*)withDevice:(IOBluetoothDevice*)inDevice
++(instancetype)withDevice:(IOBluetoothDevice*)inDevice
 		channelID:(BluetoothRFCOMMChannelID)inRFCOMMChannelID;
 
 //--------------------------------------------------------------------------------------------------------------------------
@@ -106,7 +106,7 @@
 									it if you want to reference it later.
 */
 	
-+(IOBluetoothOBEXSession*)withIncomingRFCOMMChannel:(IOBluetoothRFCOMMChannel*)inChannel
++(instancetype)withIncomingRFCOMMChannel:(IOBluetoothRFCOMMChannel*)inChannel
 		eventSelector:(SEL)inEventSelector
 		selectorTarget:(id)inEventSelectorTarget
 		refCon:(void *)inUserRefCon;
@@ -119,7 +119,7 @@
 	@discussion	
 */
 	
--(id) initWithSDPServiceRecord:(IOBluetoothSDPServiceRecord*)inSDPServiceRecord;
+-(instancetype) initWithSDPServiceRecord:(IOBluetoothSDPServiceRecord*)inSDPServiceRecord;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!	@method		initWithDevice
@@ -130,7 +130,7 @@
 	@discussion	
 */
 		
--(id) initWithDevice:(IOBluetoothDevice*)inDevice
+-(instancetype) initWithDevice:(IOBluetoothDevice*)inDevice
 		channelID:(BluetoothRFCOMMChannelID)inChannelID;
 
 //--------------------------------------------------------------------------------------------------------------------------
@@ -144,7 +144,7 @@
 	@discussion	
 */
 	
--(id) initWithIncomingRFCOMMChannel:(IOBluetoothRFCOMMChannel*)inChannel
+-(instancetype) initWithIncomingRFCOMMChannel:(IOBluetoothRFCOMMChannel*)inChannel
 		eventSelector:(SEL)inEventSelector
 		selectorTarget:(id)inEventSelectorTarget
 		refCon:(void *)inUserRefCon;

@@ -1,7 +1,7 @@
 /*
         NSTextFinder.h
         Application Kit
-        Copyright (c) 2003-2013, Apple Inc.
+        Copyright (c) 2003-2014, Apple Inc.
         All rights reserved.
 */
 
@@ -14,8 +14,7 @@
 @class NSArray, NSView, NSOperationQueue;
 @protocol NSTextFinderClient, NSTextFinderBarContainer;
 
-#if MAC_OS_X_VERSION_10_7 <= MAC_OS_X_VERSION_MAX_ALLOWED
-enum {
+typedef NS_ENUM(NSInteger, NSTextFinderAction) {
     NSTextFinderActionShowFindInterface = 1,
     NSTextFinderActionNextMatch = 2,
     NSTextFinderActionPreviousMatch = 3,
@@ -29,9 +28,7 @@ enum {
     NSTextFinderActionHideFindInterface = 11,
     NSTextFinderActionShowReplaceInterface = 12,
     NSTextFinderActionHideReplaceInterface = 13
-};
-#endif
-typedef NSInteger NSTextFinderAction;
+} NS_ENUM_AVAILABLE_MAC(10_7);
 
 
 /* Values for communicating NSTextFinder search options via pasteboard. Use the NSPasteboardTypeTextFinderOptions type.
@@ -39,15 +36,12 @@ typedef NSInteger NSTextFinderAction;
 APPKIT_EXTERN NSString *const NSTextFinderCaseInsensitiveKey NS_AVAILABLE_MAC(10_7);       // BOOL
 APPKIT_EXTERN NSString *const NSTextFinderMatchingTypeKey NS_AVAILABLE_MAC(10_7);          // NSNumber containing NSTextFinderMatchingType
 
-#if MAC_OS_X_VERSION_10_7 <= MAC_OS_X_VERSION_MAX_ALLOWED
-enum {
+typedef NS_ENUM(NSInteger, NSTextFinderMatchingType) {
     NSTextFinderMatchingTypeContains = 0,
     NSTextFinderMatchingTypeStartsWith = 1,
     NSTextFinderMatchingTypeFullWord = 2,
     NSTextFinderMatchingTypeEndsWith = 3
-};
-#endif
-typedef NSInteger NSTextFinderMatchingType;
+} NS_ENUM_AVAILABLE_MAC(10_7);
 
 
 NS_CLASS_AVAILABLE(10_7, NA)
@@ -63,7 +57,7 @@ NS_CLASS_AVAILABLE(10_7, NA)
     id _private;
 }
 
-- (id)init;
+- (instancetype)init;
 
 /* A text finder must be associated with an object which implements the NSTextFinderClient protocol for it to function. The client is responsible for providing the string to be searched, the location for the find bar, and methods which control feedback to the user about the search results. */
 @property (assign) IBOutlet id <NSTextFinderClient> client;
@@ -94,7 +88,7 @@ NS_CLASS_AVAILABLE(10_7, NA)
 @property BOOL incrementalSearchingShouldDimContentView;
 
 /* This array is updated periodically on the main queue as the incremental search operation on a background queue finds matches. You can use this property when incrementalSearchingShouldDimContentView is NO to know where to draw highlights for incremental matches. This array is KVO compliant and can be observed to know when to update your highlights. When NSKeyValueObservingOptionNew and NSKeyValueObservingOptionOld are used, the KVO change dictionary provides the ranges (and their indexes) that are added or removed so you can invalidate the minimal region needed to bring your highlights into sync with the NSTextFinder's results. If no incremental search is active, or there are no matches found, this array will be empty. If an incremental search is currently in progress, but not yet complete, this will return all the ranges found so far. */
-@property (readonly) NSArray *incrementalMatchRanges;
+@property (readonly, copy) NSArray *incrementalMatchRanges;
 
 /* If you set incrementalSearchingShouldDimContentView is NO to highlight incremental matches in your own view, you are encouraged to use this method to draw the highlight. */
 + (void)drawIncrementalMatchHighlightInRect:(NSRect)rect;
@@ -124,7 +118,7 @@ NS_CLASS_AVAILABLE(10_7, NA)
 /* The client must implement at least one of the following two sets of API to provide NSTextFinder access to the content to be searched. If both sets are implemented by the client, the last one will be preferred over the first. */
 
 /* If the client contains a single string, then the client can implement this property to return that string to be searched. */
-@property (readonly) NSString *string;
+@property (readonly, strong) NSString *string;
 
 /*
  If the client cannot logically or efficiently flatten itself into a single string, then the following two methods should be used instead. These methods require the client to conceptually map its content to a single string, which is composed of a concatenation of all its substrings.
@@ -161,7 +155,7 @@ NS_CLASS_AVAILABLE(10_7, NA)
 - (NSArray *)rectsForCharacterRange:(NSRange)range;
 
 /* NSTextFinder uses this property's value to determine which ranges it should search to show all of the incremental matches that are currently visible. If this property is not implemented, then the incremental matches cannot be shown. */
-@property (readonly) NSArray *visibleCharacterRanges;
+@property (readonly, copy) NSArray *visibleCharacterRanges;
 
 /* Draw the glyphs for the requested character range as they are drawn in the given content view. If the character range partially intersects a glyph range, then the full glyph is can be drawn to avoid additional layout. The given range is guaranteed to be completely contained by the given view. When this method is called, a drawing context effectively identical to the one provided to the view’s -drawRect: will be set up. This method is mainly used to draw find indicator contents, so implementations should check -isDrawingFindIndicator to ensure that the text will be easily readable against the background of the find indicator when it returns YES. If this method is not implemented, then the find indicator will be drawn using the content view’s -drawRect: method instead. */
 - (void)drawCharactersInRange:(NSRange)range forContentView:(NSView *)view;
@@ -174,7 +168,7 @@ NS_CLASS_AVAILABLE(10_7, NA)
 @required
 
 /* This property is used by NSTextFinder to assign a find bar to a container. The container may freely modify the view's width, but should not modify its height. This property is managed by NSTextFinder. You should not set this property. */
-@property (retain) NSView *findBarView;
+@property (strong) NSView *findBarView;
 
 /* This property controls whether the receiver should display its find bar or not. When this property is YES and the findBarView property is set, then the find bar should be displayed by the container. Otherwise, the find bar should not be displayed. The default value should be NO. */
 @property (getter=isFindBarVisible) BOOL findBarVisible;

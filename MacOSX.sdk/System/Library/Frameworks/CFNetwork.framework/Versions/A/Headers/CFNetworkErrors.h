@@ -3,7 +3,7 @@
  
 	 Contains:   CFNetwork error header
  
-	 Copyright:  Copyright (c) 2006-2008 Apple Inc. All rights reserved.
+	 Copyright:  Copyright (c) 2006-2013 Apple Inc. All rights reserved.
  
 	 Bugs?:	  For bug reports, consult the following page on
 				 the World Wide Web:
@@ -24,19 +24,11 @@
 
 
 
-#include <Availability.h>
-
 #if PRAGMA_ONCE
 #pragma once
 #endif
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#if PRAGMA_ENUM_ALWAYSINT
-	#pragma enumsalwaysint on
-#endif
+CF_EXTERN_C_BEGIN
 
 /*
  *  kCFErrorDomainCFNetwork
@@ -45,12 +37,8 @@ extern "C" {
  *	Error domain for all errors originating in CFNetwork. Error codes
  *	may be interpreted using the list below.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.5 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
-CFN_EXPORT const CFStringRef kCFErrorDomainCFNetwork					 __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+CFN_EXPORT const CFStringRef kCFErrorDomainCFNetwork CF_AVAILABLE(10_5, 2_0);
 
 /*
  *  kCFErrorDomainWinSock
@@ -59,12 +47,8 @@ CFN_EXPORT const CFStringRef kCFErrorDomainCFNetwork					 __OSX_AVAILABLE_STARTI
  *	On Windows, errors originating from WinSock are represented using
  *	this domain.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.5 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
-CFN_EXPORT const CFStringRef kCFErrorDomainWinSock					   __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+CFN_EXPORT const CFStringRef kCFErrorDomainWinSock CF_AVAILABLE(10_5, 2_0);
 
 
 /*
@@ -74,7 +58,8 @@ CFN_EXPORT const CFStringRef kCFErrorDomainWinSock					   __OSX_AVAILABLE_STARTI
  *	The list of all public error codes returned under the error domain
  *	kCFErrorDomainCFNetwork
  */
-enum CFNetworkErrors {
+typedef CF_ENUM(int, CFNetworkErrors) {
+
   kCFHostErrorHostNotFound = 1,
   kCFHostErrorUnknown = 2, // Query the kCFGetAddrInfoFailureKey to get the value returned from getaddrinfo; lookup in netdb.h
   // SOCKS errors; in all cases you may query kCFSOCKSStatusCodeKey to recover the status code returned by the server
@@ -108,6 +93,8 @@ enum CFNetworkErrors {
   kCFStreamErrorHTTPSProxyFailureUnexpectedResponseToCONNECTMethod = 311,
 	
   // Error codes for CFURLConnection and CFURLProtocol
+  kCFURLErrorBackgroundSessionInUseByAnotherProcess = -996,
+  kCFURLErrorBackgroundSessionWasDisconnected = -997,
   kCFURLErrorUnknown = -998,
   kCFURLErrorCancelled = -999,
   kCFURLErrorBadURL = -1000,
@@ -169,7 +156,6 @@ enum CFNetworkErrors {
   kCFNetServiceErrorTimeout = -72007L,
   kCFNetServiceErrorDNSServiceFailure = -73000L // An error from DNS discovery; look at kCFDNSServiceFailureKey to get the error number and interpret using dns_sd.h	
 };
-typedef enum CFNetworkErrors CFNetworkErrors;
 
 
 /* Keys used by CFNetwork to pass additional error information back to the user within CFError's userInfo dictionary */
@@ -180,12 +166,8 @@ typedef enum CFNetworkErrors CFNetworkErrors;
  *	When an NSURLConnection or NSURLDownload error occurs, this key's
  *  value is set to the URL which caused a load to fail
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.6 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
-CFN_EXPORT const CFStringRef kCFURLErrorFailingURLErrorKey				__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_2);
+CFN_EXPORT const CFStringRef kCFURLErrorFailingURLErrorKey CF_AVAILABLE(10_5, 2_2);
 
 /*
  *  kCFURLErrorFailingURLStringErrorKey
@@ -195,12 +177,8 @@ CFN_EXPORT const CFStringRef kCFURLErrorFailingURLErrorKey				__OSX_AVAILABLE_ST
  *  value is set to the CFString value of the URL which caused a load
  *  to fail
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.6 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
-CFN_EXPORT const CFStringRef kCFURLErrorFailingURLStringErrorKey		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_2);
+CFN_EXPORT const CFStringRef kCFURLErrorFailingURLStringErrorKey CF_AVAILABLE(10_5, 2_2);
 
 /*
  *  kCFGetAddrInfoFailureKey
@@ -210,12 +188,8 @@ CFN_EXPORT const CFStringRef kCFURLErrorFailingURLStringErrorKey		__OSX_AVAILABL
  *	value is set to a CFNumber containing the raw error value
  *	returned by getaddrinfo()
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.5 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
-CFN_EXPORT const CFStringRef kCFGetAddrInfoFailureKey					__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+CFN_EXPORT const CFStringRef kCFGetAddrInfoFailureKey CF_AVAILABLE(10_5, 2_0);
 
 /*
  *  kCFSOCKSStatusCodeKey
@@ -224,12 +198,8 @@ CFN_EXPORT const CFStringRef kCFGetAddrInfoFailureKey					__OSX_AVAILABLE_STARTI
  *	When a SOCKS failure has occurred, this key's value is set to a
  *	CFString containing the status value returned by the SOCKS server.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.5 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
-CFN_EXPORT const CFStringRef kCFSOCKSStatusCodeKey					   __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+CFN_EXPORT const CFStringRef kCFSOCKSStatusCodeKey CF_AVAILABLE(10_5, 2_0);
 
 /*
  *  kCFSOCKSVersionKey
@@ -239,12 +209,8 @@ CFN_EXPORT const CFStringRef kCFSOCKSStatusCodeKey					   __OSX_AVAILABLE_STARTI
  *	returned, this key's value is set to a CFString containing the
  *	version number requested by the server.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.5 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
-CFN_EXPORT const CFStringRef kCFSOCKSVersionKey						  __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+CFN_EXPORT const CFStringRef kCFSOCKSVersionKey CF_AVAILABLE(10_5, 2_0);
 
 /*
  *  kCFSOCKSNegotiationMethodKey
@@ -254,12 +220,8 @@ CFN_EXPORT const CFStringRef kCFSOCKSVersionKey						  __OSX_AVAILABLE_STARTING(
  *	returned, this key's value is set to a CFString containing the
  *	negotiation method requested by the server.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.5 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
-CFN_EXPORT const CFStringRef kCFSOCKSNegotiationMethodKey				__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+CFN_EXPORT const CFStringRef kCFSOCKSNegotiationMethodKey CF_AVAILABLE(10_5, 2_0);
 
 /*
  *  kCFDNSServiceFailureKey
@@ -269,12 +231,8 @@ CFN_EXPORT const CFStringRef kCFSOCKSNegotiationMethodKey				__OSX_AVAILABLE_STA
  *	returned, this key's value is set to a CFNumber containing the
  *	value returned from DNS; interret it using the values dns_sd.h
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.5 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
-CFN_EXPORT const CFStringRef kCFDNSServiceFailureKey					 __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+CFN_EXPORT const CFStringRef kCFDNSServiceFailureKey CF_AVAILABLE(10_5, 2_0);
 
 /*
  *  kCFFTPStatusCodeKey
@@ -284,21 +242,11 @@ CFN_EXPORT const CFStringRef kCFDNSServiceFailureKey					 __OSX_AVAILABLE_STARTI
  *	this key's value is set to a CFString containing the status code
  *	returned by the server
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.5 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
-CFN_EXPORT const CFStringRef kCFFTPStatusCodeKey						 __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
-
-#if PRAGMA_ENUM_ALWAYSINT
-	#pragma enumsalwaysint reset
-#endif
+CFN_EXPORT const CFStringRef kCFFTPStatusCodeKey CF_AVAILABLE(10_5, 2_0);
 
 
-#ifdef __cplusplus
-}
-#endif
+CF_EXTERN_C_END
 
 #endif /* __CFNETWORKERRORS__ */
 

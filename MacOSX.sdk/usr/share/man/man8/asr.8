@@ -197,6 +197,9 @@ will be present as a single logical volume (LV) exported from this LVG.
 If
 .Ar target
 is already a Core Storage LV, then this option has no effect.
+.It Fl -SHA256
+forces the restore to use the SHA-256 hash in the image during verification.
+If the image doesn't contain a SHA-256 hash, then an error will be raised.
 .El
 .It Sy restoreexact
 performs the same operation as
@@ -277,7 +280,7 @@ It's a number in the plist (-int when set with
 .El
 .It Sy imagescan
 calculate checksums of the data in the provided image and store them in
-the image.  These checksums are used to ensure proper restores.  
+the image.  These checksums are used to ensure proper restores.  SHA-1 and SHA-256 hashes are used.
 Also determines if the disk image is in order for multicasting, and rewrites the file in order if not.
 If the image has to be reordered, it will require free disk space equal to the size of the disk image 
 being scanned.

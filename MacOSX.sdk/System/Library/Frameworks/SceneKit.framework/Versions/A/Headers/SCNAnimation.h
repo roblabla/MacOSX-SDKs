@@ -1,7 +1,7 @@
 //
 //  SCNAnimation.h
 //
-//  Copyright (c) 2012-2013 Apple Inc. All rights reserved.
+//  Copyright (c) 2012-2014 Apple Inc. All rights reserved.
 //
 
 #import <QuartzCore/QuartzCore.h>
@@ -10,7 +10,7 @@
  @protocol SCNAnimatable
  @abstract The SCNAnimatable protocol defines an animatable property. Objects that implement this protocol can be animated through these methods.
 */
-@protocol SCNAnimatable
+@protocol SCNAnimatable <NSObject>
 
 /*!
  @method addAnimation:forKey:
@@ -53,21 +53,29 @@
  @abstract Pause the animation with the given identifier.
  @param key The identifier for the animation to pause.
  */
-- (void)pauseAnimationForKey:(NSString *)key SCENEKIT_AVAILABLE(10_9, NA);
+- (void)pauseAnimationForKey:(NSString *)key SCENEKIT_AVAILABLE(10_9, 8_0);
 
 /*!
  @method resumeAnimationForKey:
  @abstract Resume the animation with the given identifier.
  @param key The identifier for the animation to resume.
  */
-- (void)resumeAnimationForKey:(NSString *)key SCENEKIT_AVAILABLE(10_9, NA);
+- (void)resumeAnimationForKey:(NSString *)key SCENEKIT_AVAILABLE(10_9, 8_0);
 
 /*!
  @method isAnimationForKeyPaused:
  @abstract Returns whether the animation for the specified identifier is paused.
  @param key The identifier for the animation to query.
  */
-- (BOOL)isAnimationForKeyPaused:(NSString *)key SCENEKIT_AVAILABLE(10_9, NA);
+- (BOOL)isAnimationForKeyPaused:(NSString *)key SCENEKIT_AVAILABLE(10_9, 8_0);
+
+/*!
+ @method removeAnimationForKey:fadeOutDuration:
+ @abstract Smoothly remove the animation with the given identifier.
+ @param key The identifier for the animation to remove.
+ @param duration The fade out duration used to remove the animation.
+ */
+- (void)removeAnimationForKey:(NSString *)key fadeOutDuration:(CGFloat)duration SCENEKIT_AVAILABLE(10_10, 8_0);
 
 @end
 
@@ -81,7 +89,7 @@
 /*!
  @property usesSceneTimeBase
  @abstract Determines whether the receiver is evaluated using the scene time or the system time. Defaults to NO.
- @discussion A scene-time based animation is evaluated using the "currentTime" value of the renderer that renders the scene.
+ @discussion A scene-time based animation is evaluated using the "sceneTime" value of the renderer that renders the scene.
  */
 @property BOOL usesSceneTimeBase;
 
@@ -90,21 +98,21 @@
  @abstract Determines the receiver's fade-in duration.
  @discussion When the fadeInDuration is greater than zero, the effect of the animation progressively increase from 0% to 100% during the specified duration.
  */
-@property CGFloat fadeInDuration SCENEKIT_AVAILABLE(10_9, NA);
+@property CGFloat fadeInDuration SCENEKIT_AVAILABLE(10_9, 8_0);
  
 /*!
  @property fadeOutDuration
  @abstract Determines the receiver's fade-out duration.
  @discussion When the fadeOutDuration is greater than zero, the effect of the animation progressively decrease from 100% to 0% at the end of the animation duration.
  */
-@property CGFloat fadeOutDuration SCENEKIT_AVAILABLE(10_9, NA);
+@property CGFloat fadeOutDuration SCENEKIT_AVAILABLE(10_9, 8_0);
 
 /*!
  @property animationEvents
  @abstract Specifies the animation events attached to the receiver.
  @discussion animationEvents is an array of SCNAnimationEvent instances.
  */
-@property(nonatomic, retain) NSArray *animationEvents SCENEKIT_AVAILABLE(10_9, NA);
+@property(nonatomic, retain) NSArray *animationEvents SCENEKIT_AVAILABLE(10_9, 8_0);
 
 @end
 
@@ -120,9 +128,10 @@ typedef void (^SCNAnimationEventBlock)(CAAnimation *animation, id animatedObject
  @abstract SCNAnimationEvent encapsulate a block to trigger at a specific time.
  */
 
-SCENEKIT_CLASS_AVAILABLE(10_9, NA)
+SCENEKIT_CLASS_AVAILABLE(10_9, 8_0)
 @interface SCNAnimationEvent : NSObject
 {
+@private
     id _reserved;
 }
 

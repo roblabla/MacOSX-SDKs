@@ -1,8 +1,6 @@
 /*!
  * @header CoreWLANUtil.h
- * @copyright 2010 Apple Inc. All rights reserved.
- * @updated 2010-03-09
- * @version 2.0.0
+ * @copyright 2010-2014 Apple Inc. All rights reserved.
  */
 
 #ifndef _CORE_WLAN_UTIL_H_
@@ -10,191 +8,368 @@
 
 #import <Foundation/Foundation.h>
 
-#pragma mark -
-#pragma mark Keychain Methods
-#pragma mark -
-
-/*! @group Keychain Methods */
+/*! @functiongroup Accessing Wi-Fi Keychain Items */
 
 /*!
  * @method
- * @param domain The keychain domain, which determines which keychain will be used.
- * @param ssid The service set identifier.
- * @param password An NSString object passed by reference, which corresponds to the non-enterprise network password for the specified SSID.
- * @result An OSStatus error code which will indicate whether or not a failure occurred during execution.  <i>errSecSuccess</i> indicates no error occurred.
- * @abstract Finds and returns the password stored for the specified SSID and keychain domain.
+ *
+ * @param domain 
+ * The keychain domain, which determines which keychain will be used.
+ *
+ * @param ssid
+ * The service set identifier (SSID) which is used to uniquely identify the keychain item.
+ *
+ * @param password 
+ * An NSString passed by reference, which upon return will contain the Wi-Fi keychain password for the specified SSID.
+ * This parameter is optional.
+ *
+ * @result
+ * An OSStatus error code indicating whether or not a failure occurred.
+ * <i>errSecSuccess</i> indicates no error occurred.
+ *
+ * @abstract 
+ * Finds and returns (by reference) the password for the specified SSID and keychain domain.
  */
 OSStatus CWKeychainFindWiFiPassword( CWKeychainDomain domain, NSData *ssid, NSString **password ) NS_AVAILABLE_MAC(10_9);
 
 /*!
  * @method
- * @param domain The keychain domain, which determines which keychain will be used.
- * @param ssid The service set identifier.
- * @param password The network password.
- * @result An OSStatus error code which will indicate whether or not a failure occurred during execution.  <i>errSecSuccess</i> indicates no error occurred.
- * @abstract Sets the keychain password for the specified SSID and keychain domain.
+ *
+ * @param domain 
+ * The keychain domain, which determines which keychain will be used.
+ *
+ * @param ssid
+ * The service set identifier (SSID) which is used to uniquely identify the keychain item.
+ *
+ * @param password 
+ * The Wi-Fi network password.
+ *
+ * @result
+ * An OSStatus error code indicating whether or not a failure occurred.
+ * <i>errSecSuccess</i> indicates no error occurred.
+ *
+ * @abstract 
+ * Sets the Wi-Fi network keychain password for the specified SSID and keychain domain.
  */
 OSStatus CWKeychainSetWiFiPassword( CWKeychainDomain domain, NSData *ssid, NSString *password ) NS_AVAILABLE_MAC(10_9);
 
 /*!
  * @method
- * @param domain The keychain domain, which determines which keychain will be used.
- * @param ssid The service set identifier.
- * @abstract Deletes the password for the specified SSID and keychain domain.
+ *
+ * @param domain
+ * The keychain domain, which determines which keychain will be used.
+ *
+ * @param ssid
+ * The service set identifier (SSID) which is used to uniquely identify the keychain item.
+ *
+ * @result
+ * An OSStatus error code indicating whether or not a failure occurred.
+ * <i>errSecSuccess</i> indicates no error occurred.
+ *
+ * @abstract 
+ * Deletes the password for the specified SSID and keychain domain.
  */
 OSStatus CWKeychainDeleteWiFiPassword( CWKeychainDomain domain, NSData *ssid ) NS_AVAILABLE_MAC(10_9);
 
 /*!
  * @method
- * @param domain The keychain domain, which determines which keychain will be used.
- * @param ssid The service set identifier.
- * @param username An NSString object passed by reference, which corresponds to the 802.1X username for the specified SSID.
- * @param password An NSString object passed by reference, which corresponds to the 802.1X password for the specified SSID.
- * @result An OSStatus error code which will indicate whether or not a failure occurred during execution.  <i>errSecSuccess</i> indicates no error occurred.
- * @abstract Finds and returns the username and password stored for the specified SSID and keychain domain.
+ *
+ * @param domain
+ * The keychain domain, which determines which keychain will be used.
+ *
+ * @param ssid
+ * The service set identifier (SSID) which is used to uniquely identify the keychain item.
+ *
+ * @param username 
+ * An NSString passed by reference, which upon return will contain the 802.1X username for the specified SSID.
+ * This parameter is optional.
+ *
+ * @param password
+ * An NSString passed by reference, which upon return will contain the 802.1X password for the specified SSID.
+ * This parameter is optional.
+ *
+ * @result
+ * An OSStatus error code indicating whether or not a failure occurred.
+ * <i>errSecSuccess</i> indicates no error occurred.
+ *
+ * @abstract 
+ * Finds and returns the 802.1X username and password stored for the specified SSID and keychain domain.
  */
 OSStatus CWKeychainFindWiFiEAPUsernameAndPassword( CWKeychainDomain domain, NSData *ssid, NSString **username, NSString **password ) NS_AVAILABLE_MAC(10_9);
 
 /*!
  * @method
- * @param domain The keychain domain, which determines which keychain will be used.
- * @param ssid The service set identifier.
- * @param username The 802.1X username.
- * @param password The 802.1X password.
- * @result An OSStatus error code which will indicate whether or not a failure occurred during execution.  <i>errSecSuccess</i> indicates no error occurred.
- * @abstract Sets the keychain item containing the 802.1X username and password for the specified SSID and keychain domain.
+ *
+ * @param domain
+ * The keychain domain, which determines which keychain will be used.
+ *
+ * @param ssid
+ * The service set identifier (SSID) which is used to uniquely identify the keychain item.
+ *
+ * @param username
+ * The 802.1X username.
+ *
+ * @param password
+ * The 802.1X password. This parameter is optional.
+ *
+ * @result
+ * An OSStatus error code indicating whether or not a failure occurred.
+ * <i>errSecSuccess</i> indicates no error occurred.
+ *
+ * @abstract 
+ * Sets the 802.1X username and password for the specified SSID and keychain domain.
  */
 OSStatus CWKeychainSetWiFiEAPUsernameAndPassword( CWKeychainDomain domain, NSData *ssid, NSString *username, NSString *password ) NS_AVAILABLE_MAC(10_9);
 
 /*!
  * @method
- * @param domain The keychain domain, which determines which keychain will be used.
- * @param ssid The service set identifier.
- * @result An OSStatus error code which will indicate whether or not a failure occurred during execution.  <i>errSecSuccess</i> indicates no error occurred.
- * @abstract Deletes the keychain item containing the 802.1X username and password for the specified SSID and keychain domain.
+ *
+ * @param domain
+ * The keychain domain, which determines which keychain will be used.
+ *
+ * @param ssid
+ * The service set identifier (SSID) which is used to uniquely identify the keychain item.
+ *
+ * @result
+ * An OSStatus error code indicating whether or not a failure occurred.
+ * <i>errSecSuccess</i> indicates no error occurred.
+ *
+ * @abstract 
+ * Deletes the 802.1X username and password for the specified SSID and keychain domain.
  */
 OSStatus CWKeychainDeleteWiFiEAPUsernameAndPassword( CWKeychainDomain domain, NSData *ssid ) NS_AVAILABLE_MAC(10_9);
 
 /*!
  * @method
- * @param domain The keychain domain, which determines which keychain will be used.
- * @param ssid The service set identifier.
- * @param identity A SecIdentityRef object passed by reference, which contains the certificate to use for the specified SSID.
- * @result An OSStatus error code which will indicate whether or not a failure occurred during execution.  <i>errSecSuccess</i> indicates no error occurred.
- * @abstract Finds and returns the identity stored for the specified SSID and keychain domain.
- * @discussion If specified, the returned identity must be released by the caller.
+ *
+ * @param domain
+ * The keychain domain, which determines which keychain will be used.
+ *
+ * @param ssid
+ * The service set identifier (SSID) which is used to uniquely identify the keychain item.
+ *
+ * @param identity 
+ * A SecIdentityRef passed by reference, which upon return will contain the SecIdentityRef associated with the specified SSID.
+ * This parameter is optional.  The returned value must be released by the caller.
+ *
+ * @result
+ * An OSStatus error code indicating whether or not a failure occurred.
+ * <i>errSecSuccess</i> indicates no error occurred.
+ *
+ * @abstract 
+ * Finds and returns the identity stored for the specified SSID and keychain domain.
  */
 OSStatus CWKeychainCopyWiFiEAPIdentity( CWKeychainDomain domain, NSData *ssid, SecIdentityRef *identity ) NS_AVAILABLE_MAC(10_9);
 
 /*!
  * @method
- * @param domain The keychain domain, which determines which keychain will be used.
- * @param ssid The service set identifier.
- * @param identity The identity containing the certificate to use for 802.1X authentication.
- * @result An OSStatus error code which will indicate whether or not a failure occurred during execution.  <i>errSecSuccess</i> indicates no error occurred.
- * @abstract Associates an exisiting identity item to the specified SSID for the specified keychain domain.
- * @discussion If the <i>identity</i> is <i>nil<i/> the method will disassociate the specified SSID from its current identity.
+ *
+ * @param domain
+ * The keychain domain, which determines which keychain will be used.
+ *
+ * @param ssid
+ * The service set identifier (SSID) which is used to uniquely identify the keychain item.
+ *
+ * @param identity 
+ * The identity containing the certificate to use for 802.1X authentication.
+ * Passing nil clears any identity association for the specified SSID.
+ *
+ * @result
+ * An OSStatus error code indicating whether or not a failure occurred.
+ * <i>errSecSuccess</i> indicates no error occurred.
+ *
+ * @abstract 
+ * Associates an identity to the specified SSID and keychain domain.
  */
 OSStatus CWKeychainSetWiFiEAPIdentity( CWKeychainDomain domain, NSData *ssid, SecIdentityRef identity ) NS_AVAILABLE_MAC(10_9);
 
 /*!
  * @method
- * @param ssid The service set identifier.
- * @param identityList An NSArray object passed by reference, which will be populated with SecIdentityRef objects.
- * @result An OSStatus error code which will indicate whether or not a failure occurred during execution.  <i>errSecSuccess</i> indicates no error occurred.
- * @abstract Finds and returns the available identities stored in the keychain.
- * @discussion If there are no available identities, this method will return <i>nil</i>.
+ *
+ * @param identityList 
+ * A CFArrayRef passed by reference, which upon return will be populated with a list of SecIdentityRef objects.
+ * This parameter is optional.  The returned value must be released by the caller.
+ *
+ * @result
+ * An OSStatus error code indicating whether or not a failure occurred.
+ * <i>errSecSuccess</i> indicates no error occurred.
+ *
+ * @abstract 
+ * Finds and returns all available identities.
  */
-OSStatus CWKeychainCopyEAPIdentityList( CFArrayRef *list ) NS_DEPRECATED_MAC(10_7, 10_9);
+OSStatus CWKeychainCopyEAPIdentityList( CFArrayRef *list ) NS_AVAILABLE_MAC(10_7);
 
 /*!
  * @method
- * @param ssid The service set identifier.
- * @param username An NSString object passed by reference, which corresponds to the 802.1X username for the specified SSID.
- * @param password An NSString object passed by reference, which corresponds to the 802.1X password for the specified SSID.
- * @result An OSStatus error code which will indicate whether or not a failure occurred during execution.  <i>errSecSuccess</i> indicates no error occurred.
- * @abstract Finds and returns the username and password stored for the specified SSID and keychain domain.
- * @discussion If specified, the returned username and password must be released by the caller.
+ *
+ * @param ssidData
+ * The service set identifier (SSID) which is used to uniquely identify the keychain item.
+ *
+ * @param username
+ * A CFStringRef passed by reference, which upon return will contain the 802.1X username for the specified SSID.
+ * This parameter is optional.  The returned value must be released by the caller.
+ *
+ * @param password
+ * A CFStringRef passed by reference, which upon return will contain the 802.1X password for the specified SSID.
+ * This parameter is optional.  The returned value must be released by the caller.
+ *
+ * @result
+ * An OSStatus error code indicating whether or not a failure occurred.
+ * <i>errSecSuccess</i> indicates no error occurred.
+ *
+ * @abstract
+ * Finds and returns the 802.1X username and password stored for the specified SSID.
+ * The keychain used is determined by the SecPreferencesDomain of the caller as returned by SecKeychainGetPreferenceDomain().
  */
-OSStatus CWKeychainCopyEAPUsernameAndPassword( CFDataRef ssidData, CFStringRef *username, CFStringRef *password ) NS_DEPRECATED_MAC(10_7, 10_9);
+OSStatus CWKeychainCopyEAPUsernameAndPassword( CFDataRef ssidData, CFStringRef *username, CFStringRef *password ) NS_DEPRECATED_MAC(10_7, 10_9, "Use CWKeychainFindWiFiEAPUsernameAndPassword() instead");
 
 /*!
  * @method
- * @param ssid The service set identifier.
- * @param username The 802.1X username.
- * @param password The 802.1X password.
- * @result An OSStatus error code which will indicate whether or not a failure occurred during execution.  <i>errSecSuccess</i> indicates no error occurred.
- * @abstract Sets the keychain item containing the 802.1X username and password for the specified SSID and keychain domain.
+ *
+ * @param ssidData
+ * The service set identifier (SSID) which is used to uniquely identify the keychain item.
+ *
+ * @param username
+ * The 802.1X username.
+ *
+ * @param password
+ * The 802.1X password. This parameter is optional.
+ *
+ * @result
+ * An OSStatus error code indicating whether or not a failure occurred.
+ * <i>errSecSuccess</i> indicates no error occurred.
+ *
+ * @abstract
+ * Sets the 802.1X username and password for the specified SSID.
+ * The keychain used is determined by the SecPreferencesDomain of the caller as returned by SecKeychainGetPreferenceDomain().
  */
-OSStatus CWKeychainSetEAPUsernameAndPassword( CFDataRef ssidData, CFStringRef username, CFStringRef password ) NS_DEPRECATED_MAC(10_7, 10_9);
+OSStatus CWKeychainSetEAPUsernameAndPassword( CFDataRef ssidData, CFStringRef username, CFStringRef password ) NS_DEPRECATED_MAC(10_7, 10_9, "Use CWKeychainSetWiFiEAPUsernameAndPassword() instead");
 
 /*!
  * @method
- * @param domain The keychain domain, which determines which keychain will be used.
- * @param ssid The service set identifier.
- * @result An OSStatus error code which will indicate whether or not a failure occurred during execution.  <i>errSecSuccess</i> indicates no error occurred.
- * @abstract Deletes the keychain item containing the 802.1X username and password for the specified SSID and keychain domain.
+ *
+ * @param ssidData
+ * The service set identifier (SSID) which is used to uniquely identify the keychain item.
+ *
+ * @result
+ * An OSStatus error code indicating whether or not a failure occurred.
+ * <i>errSecSuccess</i> indicates no error occurred.
+ *
+ * @abstract
+ * Deletes the 802.1X username and password for the specified SSID.
+ * The keychain used is determined by the SecPreferencesDomain of the caller as returned by SecKeychainGetPreferenceDomain().
  */
-OSStatus CWKeychainDeleteEAPUsernameAndPassword( CFDataRef ssidData ) NS_DEPRECATED_MAC(10_7, 10_9);
+OSStatus CWKeychainDeleteEAPUsernameAndPassword( CFDataRef ssidData ) NS_DEPRECATED_MAC(10_7, 10_9, "Use CWKeychainDeleteWiFiEAPUsernameAndPassword() instead");
 
 /*!
  * @method
- * @param ssid The service set identifier.
- * @param identity A SecIdentityRef object passed by reference, which contains the certificate to use for the specified SSID.
- * @result An OSStatus error code which will indicate whether or not a failure occurred during execution.  <i>errSecSuccess</i> indicates no error occurred.
- * @abstract Finds and returns the identity stored for the specified SSID and keychain domain.
- * @discussion If specified, the returned identity must be released by the caller.
+ *
+ * @param ssidData
+ * The service set identifier (SSID) which is used to uniquely identify the keychain item.
+ *
+ * @param identity
+ * A SecIdentityRef passed by reference, which upon return will contain the SecIdentityRef associated with the specified SSID.
+ * This parameter is optional.  The returned value must be released by the caller.
+ *
+ * @result
+ * An OSStatus error code indicating whether or not a failure occurred.
+ * <i>errSecSuccess</i> indicates no error occurred.
+ *
+ * @abstract
+ * Finds and returns the identity stored for the specified SSID and keychain domain.
+ * The keychain used is determined by the SecPreferencesDomain of the caller as returned by SecKeychainGetPreferenceDomain().
  */
-OSStatus CWKeychainCopyEAPIdentity( CFDataRef ssidData, SecIdentityRef *identity ) NS_DEPRECATED_MAC(10_7, 10_9);
+OSStatus CWKeychainCopyEAPIdentity( CFDataRef ssidData, SecIdentityRef *identity ) NS_DEPRECATED_MAC(10_7, 10_9, "Use CWKeychainCopyWiFiEAPIdentity() instead");
 
 /*!
  * @method
- * @param ssid The service set identifier.
- * @param identity The identity containing the certificate to use for 802.1X authentication.
- * @result An OSStatus error code which will indicate whether or not a failure occurred during execution.  <i>errSecSuccess</i> indicates no error occurred.
- * @abstract Associates an exisiting identity item to the specified SSID for the specified keychain domain.
- * @discussion If the <i>identity</i> is <i>nil<i/> the method will disassociate the specified SSID from its current identity.
+ *
+ * @param ssidData
+ * The service set identifier (SSID) which is used to uniquely identify the keychain item.
+ *
+ * @param identity
+ * The identity containing the certificate to use for 802.1X authentication.
+ * Passing nil clears any identity association for the specified SSID.
+ *
+ * @result
+ * An OSStatus error code indicating whether or not a failure occurred.
+ * <i>errSecSuccess</i> indicates no error occurred.
+ *
+ * @abstract
+ * Associates an identity to the specified SSID.
+ * The keychain used is determined by the SecPreferencesDomain of the caller as returned by SecKeychainGetPreferenceDomain().
  */
-OSStatus CWKeychainSetEAPIdentity( CFDataRef ssidData, SecIdentityRef identity ) NS_DEPRECATED_MAC(10_7, 10_9);
+OSStatus CWKeychainSetEAPIdentity( CFDataRef ssidData, SecIdentityRef identity ) NS_DEPRECATED_MAC(10_7, 10_9, "Use CWKeychainSetWiFiEAPIdentity() instead");
 
 /*!
  * @method
- * @param ssid The service set identifier.
- * @param password The network password.
- * @result An OSStatus error code which will indicate whether or not a failure occurred during execution.  <i>errSecSuccess</i> indicates no error occurred.
- * @abstract Sets the keychain password for the specified SSID and keychain domain.
+ *
+ * @param ssidData
+ * The service set identifier (SSID) which is used to uniquely identify the keychain item.
+ *
+ * @param password
+ * The Wi-Fi network password.
+ *
+ * @result
+ * An OSStatus error code indicating whether or not a failure occurred.
+ * <i>errSecSuccess</i> indicates no error occurred.
+ *
+ * @abstract
+ * Sets the Wi-Fi network keychain password for the specified SSID.
+ * The keychain used is determined by the SecPreferencesDomain of the caller as returned by SecKeychainGetPreferenceDomain().
  */
-OSStatus CWKeychainSetPassword( CFDataRef ssidData, CFStringRef password ) NS_DEPRECATED_MAC(10_7, 10_9);
+OSStatus CWKeychainSetPassword( CFDataRef ssidData, CFStringRef password ) NS_DEPRECATED_MAC(10_7, 10_9, "Use CWKeychainSetWiFiPassword() instead");
 
 /*!
  * @method
- * @param ssid The service set identifier.
- * @param password An NSString object passed by reference, which corresponds to the non-enterprise network password for the specified SSID.
- * @result An OSStatus error code which will indicate whether or not a failure occurred during execution.  <i>errSecSuccess</i> indicates no error occurred.
- * @abstract Finds and returns the password stored for the specified SSID and keychain domain.
- * @discussion If specified, the returned password must be released by the caller.
+ *
+ * @param ssidData
+ * The service set identifier (SSID) which is used to uniquely identify the keychain item.
+ *
+ * @param password
+ * A CFStringRef passed by reference, which upon return will contain the Wi-Fi keychain password for the specified SSID.
+ * This parameter is optional.  The returned value must be released by the caller.
+ *
+ * @result
+ * An OSStatus error code indicating whether or not a failure occurred.
+ * <i>errSecSuccess</i> indicates no error occurred.
+ *
+ * @abstract
+ * Finds and returns (by reference) the password for the specified SSID.
+ * The keychain used is determined by the SecPreferencesDomain of the caller as returned by SecKeychainGetPreferenceDomain().
  */
-OSStatus CWKeychainCopyPassword( CFDataRef ssidData, CFStringRef *password ) NS_DEPRECATED_MAC(10_7, 10_9);
+OSStatus CWKeychainCopyPassword( CFDataRef ssidData, CFStringRef *password ) NS_DEPRECATED_MAC(10_7, 10_9, "Use CWKeychainFindWiFiPassword() instead");
 
 /*!
  * @method
- * @param ssid The service set identifier.
- * @abstract Deletes the password for the specified SSID and keychain domain.
+ *
+ * @param ssidData
+ * The service set identifier (SSID) which is used to uniquely identify the keychain item.
+ *
+ * @result
+ * An OSStatus error code indicating whether or not a failure occurred.
+ * <i>errSecSuccess</i> indicates no error occurred.
+ *
+ * @abstract
+ * Deletes the password for the specified SSID and keychain domain.
+ * The keychain used is determined by the SecPreferencesDomain of the caller as returned by SecKeychainGetPreferenceDomain().
  */
-OSStatus CWKeychainDeletePassword( CFDataRef ssidData ) NS_DEPRECATED_MAC(10_7, 10_9);
+OSStatus CWKeychainDeletePassword( CFDataRef ssidData ) NS_DEPRECATED_MAC(10_7, 10_9, "Use CWKeychainDeleteWiFiPassword() instead");
 
-#pragma mark -
-#pragma mark Utility Methods
-#pragma mark -
-
-/*! @group Merging Scan Results */
+/*! @functiongroup Merging Scan Results */
 
 /*!
  * @method
- * @param networks The set of networks to merge.
- * @abstract Merges the specified set of CWNetwork objects.
- * @discussion Duplicate networks are defined as networks with the same SSID, security type, and BSS type.  
- * When duplicates are found, the network with the best RSSI value will remain.
+ *
+ * @param networks 
+ * The set of networks to merge.
+ *
+ * @abstract 
+ * Merges the specified set of CWNetwork objects.
+ *
+ * @discussion 
+ * Duplicate networks are defined as networks with the same SSID, security type, and BSS type (IBSS or Infrastructure).
+ * When duplicate networks exist, the network with the best RSSI value will be chosen.
  */
 NSSet* CWMergeNetworks( NSSet *networks ) NS_AVAILABLE_MAC(10_7);
 

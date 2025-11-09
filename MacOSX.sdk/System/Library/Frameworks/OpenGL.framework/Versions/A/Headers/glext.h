@@ -163,7 +163,6 @@ extern "C" {
 #define GL_APPLE_ycbcr_422                                   1
 #define GL_ATI_blend_equation_separate                       1
 #define GL_ATI_blend_weighted_minmax                         1
-#define GL_ATI_point_cull_mode                               1
 #define GL_ATI_separate_stencil                              1
 #define GL_ATI_texture_compression_3dc                       1
 #define GL_ATI_texture_env_combine3                          1
@@ -207,6 +206,7 @@ extern "C" {
 #define GL_EXT_vertex_array                                  0
 #define GL_ATI_array_rev_comps_in_4_bytes                    0
 #define GL_ATI_pn_triangles                                  0
+#define GL_ATI_point_cull_mode                               0
 #define GL_ATI_text_fragment_shader                          0
 #define GL_ATIX_pn_triangles                                 0
 #define GL_HP_convolution_border_modes                       0

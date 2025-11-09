@@ -1,7 +1,7 @@
 /*
 	NSLayoutConstraint.h
 	Application Kit
-	Copyright (c) 2009-2013, Apple Inc.
+	Copyright (c) 2009-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -15,14 +15,13 @@
 @class NSArray, NSDictionary;
 
 
-enum {
+typedef NS_ENUM(NSInteger, NSLayoutRelation) {
     NSLayoutRelationLessThanOrEqual = -1,
     NSLayoutRelationEqual = 0,
     NSLayoutRelationGreaterThanOrEqual = 1,
 };
-typedef NSInteger NSLayoutRelation;
 
-enum {
+typedef NS_ENUM(NSInteger, NSLayoutAttribute) {
     NSLayoutAttributeLeft = 1,
     NSLayoutAttributeRight,
     NSLayoutAttributeTop,
@@ -37,9 +36,8 @@ enum {
     
     NSLayoutAttributeNotAnAttribute = 0
 };
-typedef NSInteger NSLayoutAttribute;
 
-enum {        
+typedef NS_OPTIONS(NSUInteger, NSLayoutFormatOptions) {        
     NSLayoutFormatAlignAllLeft = (1 << NSLayoutAttributeLeft),
     NSLayoutFormatAlignAllRight = (1 << NSLayoutAttributeRight),
     NSLayoutFormatAlignAllTop = (1 << NSLayoutAttributeTop),
@@ -60,14 +58,13 @@ enum {
     
     NSLayoutFormatDirectionMask = 0x3 << 16,  
 };
-typedef NSUInteger NSLayoutFormatOptions;
 
-enum {
+typedef NS_ENUM(NSInteger, NSLayoutConstraintOrientation) {
     NSLayoutConstraintOrientationHorizontal = 0,
     NSLayoutConstraintOrientationVertical = 1
 };
-typedef NSInteger NSLayoutConstraintOrientation;
 
+#ifndef NSEDGEINSETS_DEFINED
 typedef struct {
     CGFloat top; 
     CGFloat left; 
@@ -84,20 +81,20 @@ NS_INLINE NSEdgeInsets NSEdgeInsetsMake(CGFloat top, CGFloat left, CGFloat botto
     return e;
 }
 
+#endif
 
 /* Where AppKit's use of priority levels interacts with the user's use, we must define the priority levels involved.  Note that most of the time there is no interaction.  The use of priority levels is likely to be local to one sub-area of the window that is under the control of one author.  
  */
+typedef float NSLayoutPriority NS_AVAILABLE_MAC(10_7);
 
-enum {
-    NSLayoutPriorityRequired = 1000, // a required constraint.  Do not exceed this.
-    NSLayoutPriorityDefaultHigh = 750, // this is the priority level with which a button resists compressing its content.  Note that it is higher than NSLayoutPriorityWindowSizeStayPut.  Thus dragging to resize a window will not make buttons clip.  Rather the window frame is constrained.
-    NSLayoutPriorityDragThatCanResizeWindow = 510, // This is the appropriate priority level for a drag that may end up resizing the window.  This needn't be a drag whose explicit purpose is to resize the window. The user might be dragging around window contents, and it might be desirable that the window get bigger to accommodate.
-    NSLayoutPriorityWindowSizeStayPut = 500, // This is the priority level at which the window prefers to stay the same size.  It's generally not appropriate to make a constraint at exactly this priority. You want to be higher or lower.
-    NSLayoutPriorityDragThatCannotResizeWindow = 490, // This is the priority level at which a split view divider, say, is dragged.  It won't resize the window.
-    NSLayoutPriorityDefaultLow = 250, // this is the priority level at which a button hugs its contents horizontally.  
-    NSLayoutPriorityFittingSizeCompression = 50, // When you issue -[NSView fittingSize], the smallest size that is large enough for the view's contents is computed.  This is the priority level with which the view wants to be as small as possible in that computation.  It's quite low.  It is generally not appropriate to make a constraint at exactly this priority.  You want to be higher or lower.
-};
-typedef float NSLayoutPriority;
+static const NSLayoutPriority NSLayoutPriorityRequired NS_AVAILABLE_MAC(10_7) = 1000; // a required constraint.  Do not exceed this.
+static const NSLayoutPriority NSLayoutPriorityDefaultHigh NS_AVAILABLE_MAC(10_7) = 750; // this is the priority level with which a button resists compressing its content.  Note that it is higher than NSLayoutPriorityWindowSizeStayPut.  Thus dragging to resize a window will not make buttons clip.  Rather the window frame is constrained.
+static const NSLayoutPriority NSLayoutPriorityDragThatCanResizeWindow NS_AVAILABLE_MAC(10_7) = 510; // This is the appropriate priority level for a drag that may end up resizing the window.  This needn't be a drag whose explicit purpose is to resize the window. The user might be dragging around window contents, and it might be desirable that the window get bigger to accommodate.
+static const NSLayoutPriority NSLayoutPriorityWindowSizeStayPut NS_AVAILABLE_MAC(10_7) = 500; // This is the priority level at which the window prefers to stay the same size.  It's generally not appropriate to make a constraint at exactly this priority. You want to be higher or lower.
+static const NSLayoutPriority NSLayoutPriorityDragThatCannotResizeWindow NS_AVAILABLE_MAC(10_7) = 490; // This is the priority level at which a split view divider, say, is dragged.  It won't resize the window.
+static const NSLayoutPriority NSLayoutPriorityDefaultLow NS_AVAILABLE_MAC(10_7) = 250; // this is the priority level at which a button hugs its contents horizontally.
+static const NSLayoutPriority NSLayoutPriorityFittingSizeCompression NS_AVAILABLE_MAC(10_7) = 50; // When you issue -[NSView fittingSize], the smallest size that is large enough for the view's contents is computed.  This is the priority level with which the view wants to be as small as possible in that computation.  It's quite low.  It is generally not appropriate to make a constraint at exactly this priority.  You want to be higher or lower.
+
 
 NS_CLASS_AVAILABLE(10_7, NA)
 @interface NSLayoutConstraint : NSObject <NSAnimatablePropertyContainer>
@@ -136,7 +133,7 @@ APPKIT_EXTERN NSDictionary *_NSDictionaryOfVariableBindings(NSString *commaSepar
 /* Create constraints explicitly.  Constraints are of the form "view1.attr1 = view2.attr2 * multiplier + constant" 
  If your equation does not have a second view and attribute, use nil and NSLayoutAttributeNotAnAttribute.
  */
-+ (id)constraintWithItem:(id)view1 attribute:(NSLayoutAttribute)attr1 relatedBy:(NSLayoutRelation)relation toItem:(id)view2 attribute:(NSLayoutAttribute)attr2 multiplier:(CGFloat)multiplier constant:(CGFloat)c;
++ (instancetype)constraintWithItem:(id)view1 attribute:(NSLayoutAttribute)attr1 relatedBy:(NSLayoutRelation)relation toItem:(id)view2 attribute:(NSLayoutAttribute)attr2 multiplier:(CGFloat)multiplier constant:(CGFloat)c;
 
 /* If a constraint's priority level is less than NSLayoutPriorityRequired, then it is optional.  Higher priority constraints are met before lower priority constraints.
  Constraint satisfaction is not all or nothing.  If a constraint 'a == b' is optional, that means we will attempt to minimize 'abs(a-b)'.
@@ -163,6 +160,15 @@ APPKIT_EXTERN NSDictionary *_NSDictionaryOfVariableBindings(NSString *commaSepar
  */
 @property CGFloat constant;
 
+/* The receiver may be activated or deactivated by manipulating this property.  Only active constraints affect the calculated layout.  Attempting to activate a constraint whose items have no common ancestor will cause an exception to be thrown.  Defaults to NO for newly created constraints. */
+@property (getter=isActive) BOOL active NS_AVAILABLE(10_10, 8_0);
+
+/* Convenience method that activates each constraint in the contained array, in the same manner as setting active=YES. This is often more efficient than activating each constraint individually. */
++ (void)activateConstraints:(NSArray *)constraints NS_AVAILABLE(10_10, 8_0);
+
+/* Convenience method that deactivates each constraint in the contained array, in the same manner as setting active=NO. This is often more efficient than deactivating each constraint individually. */
++ (void)deactivateConstraints:(NSArray *)constraints NS_AVAILABLE(10_10, 8_0);
+
 @end
 
 @interface NSLayoutConstraint (NSIdentifier)
@@ -180,12 +186,12 @@ APPKIT_EXTERN NSDictionary *_NSDictionaryOfVariableBindings(NSString *commaSepar
  */
 @interface NSView (NSConstraintBasedLayoutInstallingConstraints)
 
-- (NSArray *)constraints NS_AVAILABLE_MAC(10_7);
+@property (readonly, copy) NSArray *constraints NS_AVAILABLE_MAC(10_7);	// This property is deprecated and should be avoided.  Instead, create IB outlets or otherwise maintain references to constraints you need to reference directly.
 
-- (void)addConstraint:(NSLayoutConstraint *)constraint NS_AVAILABLE_MAC(10_7);
-- (void)addConstraints:(NSArray *)constraints NS_AVAILABLE_MAC(10_7);
-- (void)removeConstraint:(NSLayoutConstraint *)constraint NS_AVAILABLE_MAC(10_7);
-- (void)removeConstraints:(NSArray *)constraints NS_AVAILABLE_MAC(10_7);
+- (void)addConstraint:(NSLayoutConstraint *)constraint NS_AVAILABLE_MAC(10_7);	// This method is deprecated and should be avoided.  Instead, set NSLayoutConstraint's active property to YES.
+- (void)addConstraints:(NSArray *)constraints NS_AVAILABLE_MAC(10_7);	// This method is deprecated and should be avoided.  Instead use +[NSLayoutConstraint activateConstraints:].
+- (void)removeConstraint:(NSLayoutConstraint *)constraint NS_AVAILABLE_MAC(10_7);	// This method is deprecated and should be avoided.  Instead set NSLayoutConstraint's active property to NO.
+- (void)removeConstraints:(NSArray *)constraints NS_AVAILABLE_MAC(10_7);	// This method is deprecated and should be avoided.  Instead use +[NSLayoutConstraint deactivateConstraints:].
 
 @end
 
@@ -208,13 +214,11 @@ APPKIT_EXTERN NSDictionary *_NSDictionaryOfVariableBindings(NSString *commaSepar
 @interface NSView (NSConstraintBasedLayoutCoreMethods) 
 - (void)updateConstraintsForSubtreeIfNeeded NS_AVAILABLE_MAC(10_7);
 - (void)updateConstraints NS_AVAILABLE_MAC(10_7);
-- (BOOL)needsUpdateConstraints NS_AVAILABLE_MAC(10_7);
-- (void)setNeedsUpdateConstraints:(BOOL)flag NS_AVAILABLE_MAC(10_7);
+@property BOOL needsUpdateConstraints NS_AVAILABLE_MAC(10_7);
 
 - (void)layoutSubtreeIfNeeded NS_AVAILABLE_MAC(10_7);
 - (void)layout NS_AVAILABLE_MAC(10_7);
-- (BOOL)needsLayout NS_AVAILABLE_MAC(10_7);
-- (void)setNeedsLayout:(BOOL)flag NS_AVAILABLE_MAC(10_7);
+@property BOOL needsLayout NS_AVAILABLE_MAC(10_7);
 @end
 
 #pragma mark Compatibility and Adoption
@@ -223,8 +227,7 @@ APPKIT_EXTERN NSDictionary *_NSDictionaryOfVariableBindings(NSString *commaSepar
 
 /* by default, the autoresizing mask on a view gives rise to constraints that fully determine the view's position.  To do anything interesting with constraints, you need to turn that off. IB will turn it off.
  */
-- (BOOL)translatesAutoresizingMaskIntoConstraints NS_AVAILABLE_MAC(10_7);
-- (void)setTranslatesAutoresizingMaskIntoConstraints:(BOOL)flag NS_AVAILABLE_MAC(10_7);
+@property BOOL translatesAutoresizingMaskIntoConstraints NS_AVAILABLE_MAC(10_7);
 
 /* constraint based layout engages lazily when someone tries to use it.  If you do all of your constraint set up in -updateConstraints, you might never even receive updateConstraints if no one makes a constraint.  To fix this chicken and egg problem, override this method to return YES if your view needs the window to use constraint based layout.  
  */
@@ -243,18 +246,18 @@ APPKIT_EXTERN NSDictionary *_NSDictionaryOfVariableBindings(NSString *commaSepar
  They may be overridden to provide arbitrary transforms between frame and alignment rect, though the two methods must be inverses of each other.
  However, the default implementation uses -alignmentRectInsets, so just override that if it's applicable.  It's easier to get right. If you do override these be sure to account for the top of your frame being either minY or maxY depending on the superview's flippedness.
  A view that displayed an image with some ornament would typically override these, because the ornamental part of an image would scale up with the size of the frame.  
- Set the NSUserDefault NSViewShowAlignmentRects to YES to see alignment rects drawn.
+ Set the NSUserDefault NSShowAlignmentRects to YES to see alignment rects drawn.
  */
 - (NSRect)alignmentRectForFrame:(NSRect)frame NS_AVAILABLE_MAC(10_7);
 - (NSRect)frameForAlignmentRect:(NSRect)alignmentRect NS_AVAILABLE_MAC(10_7);
 
 /* override this if the alignment rect is obtained from the frame by insetting each edge by a fixed amount.  This is only called by alignmentRectForFrame: and frameForAlignmentRect:.
  */
-- (NSEdgeInsets)alignmentRectInsets NS_AVAILABLE_MAC(10_7);
+@property (readonly) NSEdgeInsets alignmentRectInsets NS_AVAILABLE_MAC(10_7);
 
 /* override this to provide the distance between NSLayoutAttributeBottom and NSLayoutAttributeBaseline.  NSView's implementation returns zero.
  */
-- (CGFloat)baselineOffsetFromBottom NS_AVAILABLE_MAC(10_7);
+@property (readonly) CGFloat baselineOffsetFromBottom NS_AVAILABLE_MAC(10_7);
 
 
 /* Override this method to tell the layout system that there is something it doesn't natively understand in this view, and this is how large it intrinsically is.  A typical example would be a single line text field.  The layout system does not understand text - it must just be told that there's something in the view, and that that something will take a certain amount of space if not clipped.  
@@ -273,7 +276,7 @@ APPKIT_EXTERN NSDictionary *_NSDictionaryOfVariableBindings(NSString *commaSepar
  Note that not all views have an intrinsicContentSize.  A horizontal slider has an intrinsic height, but no intrinsic width - the slider artwork has no intrinsic best width.  A horizontal NSSlider returns (NSViewNoInstrinsicMetric, <slider height>) for intrinsicContentSize.  An NSBox returns (NSViewNoInstrinsicMetric, NSViewNoInstrinsicMetric).  The _intrinsic_ content size is concerned only with data that is in the view itself, not in other views.
  */
 APPKIT_EXTERN const CGFloat NSViewNoInstrinsicMetric; // -1
-- (NSSize)intrinsicContentSize NS_AVAILABLE_MAC(10_7);
+@property (readonly) NSSize intrinsicContentSize NS_AVAILABLE_MAC(10_7);
 - (void)invalidateIntrinsicContentSize NS_AVAILABLE_MAC(10_7); // call this when something changes that affects the intrinsicContentSize.  Otherwise AppKit won't notice that it changed.  
 
 - (NSLayoutPriority)contentHuggingPriorityForOrientation:(NSLayoutConstraintOrientation)orientation NS_AVAILABLE_MAC(10_7);
@@ -302,7 +305,7 @@ APPKIT_EXTERN const CGFloat NSViewNoInstrinsicMetric; // -1
 @interface NSView (NSConstraintBasedLayoutFittingSize)
 /* like sizeToFit, but for arbitrary views, and returns the size rather than changing the view's frame.  This considers everything in the receiver's subtree.
  */
-- (NSSize)fittingSize NS_AVAILABLE_MAC(10_7);
+@property (readonly) NSSize fittingSize NS_AVAILABLE_MAC(10_7);
 @end
 
 #pragma mark Debugging
@@ -310,7 +313,7 @@ APPKIT_EXTERN const CGFloat NSViewNoInstrinsicMetric; // -1
 /* Everything in this section should be used in debugging only, never in shipping code.  These methods may not exist in the future - no promises.  
  
  
- set default NSViewShowAlignmentRects to YES to see alignment rects drawn.  Useful in conjunction with NSShowAllViews, which shows frames.
+ set default NSShowAlignmentRects to YES to see alignment rects drawn.  Useful in conjunction with NSShowAllViews, which shows frames.
  the existing -[NSView _subtreeDescription] is also very useful
  */
 @interface NSView (NSConstraintBasedLayoutDebugging)
@@ -325,7 +328,7 @@ APPKIT_EXTERN const CGFloat NSViewNoInstrinsicMetric; // -1
  -hasAmbiguousLayout runs a check for whether there is any other frame the receiver could have that could also satisfy the constraints.
  -exerciseAmbiguousLayout does more.  It randomly changes the frames of views in your window to another of their valid possible layouts.  Making the UI jump back and forth can be helpful for figuring out where you're missing a constraint.  
  */
-- (BOOL)hasAmbiguousLayout NS_AVAILABLE_MAC(10_7);
+@property (readonly) BOOL hasAmbiguousLayout NS_AVAILABLE_MAC(10_7);
 - (void)exerciseAmbiguityInLayout NS_AVAILABLE_MAC(10_7); 
 @end
 

@@ -1,23 +1,21 @@
 /*
-        NSStatusItem.h
-        Application Kit
-        Copyright (c) 1997-2013, Apple Inc.  All rights reserved.
-        All rights reserved.
+    NSStatusItem.h
+    Application Kit
+    Copyright (c) 1997-2014, Apple Inc.
+    All rights reserved.
 */
 
 #import <Foundation/Foundation.h>
 
 @class NSAttributedString;
+@class NSStatusBarButton;
+@class NSStatusBar;
+@class NSWindow;
 @class NSImage;
 @class NSMenu;
-@class NSStatusBar;
-@class NSString;
 @class NSView;
-@class NSWindow;
 
-
-@interface NSStatusItem : NSObject
-{
+@interface NSStatusItem : NSObject {
  @private
     NSStatusBar* _fStatusBar;
     CGFloat        _fLength;
@@ -33,7 +31,9 @@
 	unsigned int inAdjustLength:1;
         unsigned int pendingReplicantDisplay:1;
         unsigned int disableImageReplicationCount:4;
-	unsigned int reserved:18;
+        unsigned int updatingReplicant:1;
+        unsigned int didInactiveTemplateStyling:1;
+        unsigned int reserved:16;
     }	 _fFlags;
     id		 _statusItemMenu;
     NSMutableDictionary *_replicants;
@@ -41,59 +41,47 @@
     NSString *_displayIdentifier;
 }
 
-- (NSStatusBar* )statusBar;
+/// The status bar that the receiver is displayed in.
+@property (readonly, assign) NSStatusBar *statusBar;
 
-- (CGFloat)length;
-- (void)setLength:(CGFloat)length;
+/// The amount of space in the status bar that should be allocated to the receiver. \c NSVariableStatusItemLength will adjust the length to the size of the status item's contents and \c NSSquareStatusItemLength will keep the length the same as the status bar's height.
+@property CGFloat length;
+
+/// The drop down menu that is displayed when the status item is pressed or clicked.
+@property (strong) NSMenu *menu;
+
+/// The button that is displayed in the status bar. This is created automatically on the creation of the StatusItem. Behavior customization for the button, such as image, target/action, tooltip, can be set with this property.
+@property (readonly, strong) NSStatusBarButton *button NS_AVAILABLE_MAC(10_10);
 
 @end
 
-@interface NSStatusItem (NSStatusItemCommon)
 
-- (SEL)action;
-- (void)setAction:(SEL)action;
+@interface NSStatusItem (NSStatusItemDeprecated)
 
-- (SEL)doubleAction;
-- (void)setDoubleAction:(SEL)action;
-
-- (id)target;
-- (void)setTarget:(id)target;
-
-- (NSString* )title;
-- (void)setTitle:(NSString*)title;
-
-- (NSAttributedString* )attributedTitle;
-- (void)setAttributedTitle:(NSAttributedString*)title;
-
-- (NSImage* )image;
-- (void)setImage:(NSImage*)image;
-
-- (NSImage *)alternateImage;
-- (void)setAlternateImage:(NSImage*)image;
-
-- (NSMenu* )menu;
-- (void)setMenu:(NSMenu*)menu;
-
-- (BOOL)isEnabled;
-- (void)setEnabled:(BOOL)enabled;
-
-- (NSString* )toolTip;
-- (void)setToolTip:(NSString*)toolTip;
-
-- (void)setHighlightMode:(BOOL)highlightMode;
-- (BOOL)highlightMode;
-
+/* 
+ These are softly deprecated methods of NSStatusItem.
+ Their past and current behavior is to forward their calls onto the button property.
+ They will be formally deprecated in a later release. 
+ */
+@property SEL action;
+@property SEL doubleAction;
+@property (weak) id target;
+@property (copy) NSString *title;
+@property (copy) NSAttributedString *attributedTitle;
+@property (strong) NSImage *image;
+@property (strong) NSImage *alternateImage;
+@property (getter=isEnabled) BOOL enabled;
+@property BOOL highlightMode;
+@property (copy) NSString *toolTip;
 - (NSInteger)sendActionOn:(NSInteger)mask;
 
-- (void)popUpStatusItemMenu:(NSMenu*)menu;
+/*
+ Custom views should not be set on a status item.
+ The button property with a template image will allow proper styling of the status item in various states and contexts and should be used instead.
+ */
+@property (strong) NSView *view;
 - (void)drawStatusBarBackgroundInRect:(NSRect)rect withHighlight:(BOOL)highlight;
-
-@end
-
-@interface NSStatusItem (NSStatusItemView)
-
-- (NSView* )view;
-- (void)setView:(NSView*)view;
+- (void)popUpStatusItemMenu:(NSMenu*)menu;
 
 @end
 

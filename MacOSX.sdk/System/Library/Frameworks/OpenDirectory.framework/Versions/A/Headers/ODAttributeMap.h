@@ -60,7 +60,7 @@ NS_CLASS_AVAILABLE(10_9, NA)
  * @discussion
  * Returns an initialized and autoreleased ODAttributeMap object with the given value mapped.
  */
-+ (id)attributeMapWithValue:(NSString *)value;
++ (instancetype)attributeMapWithValue:(NSString *)value;
 
 /*!
  * @method attributeMapWithStaticValue:
@@ -71,7 +71,7 @@ NS_CLASS_AVAILABLE(10_9, NA)
  * @discussion
  * Returns an initialized and autoreleased ODAttributeMap object with the given static value.
  */
-+ (id)attributeMapWithStaticValue:(NSString *)staticValue;
++ (instancetype)attributeMapWithStaticValue:(NSString *)staticValue;
 
 /*!
  * @method setStaticValue:

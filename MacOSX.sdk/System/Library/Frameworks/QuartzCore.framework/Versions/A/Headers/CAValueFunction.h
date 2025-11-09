@@ -1,6 +1,6 @@
 /* CoreAnimation - CAValueFunction.h
 
-   Copyright (c) 2008-2012 Apple Inc.
+   Copyright (c) 2008-2014, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CABase.h>
@@ -13,7 +13,7 @@
   void *_impl;
 }
 
-+ (id)functionWithName:(NSString *)name;
++ (instancetype)functionWithName:(NSString *)name;
 
 @property(readonly) NSString *name;
 

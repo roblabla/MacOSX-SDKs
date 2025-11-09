@@ -1,5 +1,5 @@
 /*	NSRunLoop.h
-	Copyright (c) 1994-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -24,8 +24,9 @@ FOUNDATION_EXPORT NSString * const NSRunLoopCommonModes NS_AVAILABLE(10_5, 2_0);
 + (NSRunLoop *)currentRunLoop;
 + (NSRunLoop *)mainRunLoop NS_AVAILABLE(10_5, 2_0);
 
-- (NSString *)currentMode;
-- (CFRunLoopRef)getCFRunLoop;
+@property (readonly, copy) NSString *currentMode;
+
+- (CFRunLoopRef)getCFRunLoop CF_RETURNS_NOT_RETAINED;
 
 - (void)addTimer:(NSTimer *)timer forMode:(NSString *)mode;
 

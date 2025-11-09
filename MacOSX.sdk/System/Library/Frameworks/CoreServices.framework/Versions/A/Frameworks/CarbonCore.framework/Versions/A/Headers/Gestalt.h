@@ -2076,7 +2076,7 @@ enum {
   gestaltSystemVersionMajor     = 'sys1', /* The major system version number; in 10.4.17 this would be the decimal value 10 */
   gestaltSystemVersionMinor     = 'sys2', /* The minor system version number; in 10.4.17 this would be the decimal value 4 */
   gestaltSystemVersionBugFix    = 'sys3' /* The bug fix system version number; in 10.4.17 this would be the decimal value 17 */
-};
+} __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA, "Use NSProcessInfo's operatingSystemVersion property instead.");
 
 enum {
   gestaltToolboxTable           = 'tbtt' /*  OS trap table base  */

@@ -27,7 +27,7 @@
  Even if authorization is completed by the user, there is no guarantee that the content will then be authorized.  The caller should re-check
  whether the content is authorized before proceeding.
  */
-enum {
+typedef NS_ENUM(NSInteger, AVContentAuthorizationStatus){
 	AVContentAuthorizationUnknown,
 	AVContentAuthorizationCompleted,
 	AVContentAuthorizationCancelled,
@@ -36,7 +36,6 @@ enum {
 	AVContentAuthorizationNotAvailable,
 	AVContentAuthorizationNotPossible,
 };
-typedef NSInteger AVContentAuthorizationStatus;
 
 #endif // (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
 

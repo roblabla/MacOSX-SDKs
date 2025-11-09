@@ -180,27 +180,26 @@ typedef LONG* LPLONG;
 #define FFEFF_OBJECTOFFSETS         0x00000002UL
 
 /*!
-    @enum FFCoordinateSystemFlag
+    @typedef FFCoordinateSystemFlag
     @discussion Different coordinates used by the Force Feedback framework.
     @constant FFEFF_CARTESIAN Cartesian coordinates
     @constant FFEFF_POLAR Polar coordinates
     @constant FFEFF_SPHERICAL Sperical coordinates
     */
 
-typedef UInt32		FFCoordinateSystemFlag;
 enum
 {
     FFEFF_CARTESIAN         = 0x00000010UL,
     FFEFF_POLAR             = 0x00000020UL,
     FFEFF_SPHERICAL         = 0x00000040UL
 };
+typedef UInt32		FFCoordinateSystemFlag;
 
 
 /*!
-    @enum FFEffectParameterFlag
+    @typedef FFEffectParameterFlag
     @discussion Effect Parameter flags for use in calls to <b>FFEffectGetParameters()</b> and <b>FFEffectSetParameters()</b>.
     */
-typedef UInt32		FFEffectParameterFlag;
 enum
 {
     FFEP_DURATION               = 0x00000001UL,
@@ -219,38 +218,38 @@ enum
     FFEP_NODOWNLOAD             = 0x80000000UL,
     FFEB_NOTRIGGER              = 0xFFFFFFFFUL
 };
+typedef UInt32		FFEffectParameterFlag;
 
 
 /*!
-    @enum FFEffectStartFlag
+    @typedef FFEffectStartFlag
     @discussion Effect Parameter flags for use in calls to <b>FFEffectStart()</b>.
     */
-typedef UInt32		FFEffectStartFlag;
 enum
 {
     FFES_SOLO                   = 0x00000001UL,
     FFES_NODOWNLOAD             = 0x80000000UL
 };
+typedef UInt32		FFEffectStartFlag;
 
 
 /*!
-    @enum FFEffectStatusFlag
+    @typedef FFEffectStatusFlag
     @discussion Effect Parameter flags for use in calls to <b>FFEffectGetEffectStatus()</b>.
     */
-typedef UInt32		FFEffectStatusFlag;
 enum
 {
     FFEGES_NOTPLAYING           = 0x00000000UL,
     FFEGES_PLAYING              = 0x00000001UL,
     FFEGES_EMULATED             = 0x00000002UL
 };
+typedef UInt32		FFEffectStatusFlag;
 
 
 /*!
-    @enum FFCommandFlag
+    @typedef FFCommandFlag
     @discussion Command flags for <b>FFDeviceSendForceFeedbackCommand()</b>.
     */
-typedef UInt32		FFCommandFlag;
 enum
 {
      FFSFFC_RESET            = 0x00000001UL,
@@ -260,12 +259,12 @@ enum
      FFSFFC_SETACTUATORSON   = 0x00000010UL,
      FFSFFC_SETACTUATORSOFF  = 0x00000020UL
 };
+typedef UInt32		FFCommandFlag;
 
 /*!
-    @enum FFState
+    @typedef FFState
     @discussion Device state flags returned by <b>FFDeviceGetForceFeedbackState()</b>.
     */
-typedef UInt32		FFState;
 enum
 {
      FFGFFS_EMPTY            = 0x00000001UL,
@@ -281,10 +280,11 @@ enum
      FFGFFS_USERFFSWITCHOFF  = 0x00000800UL,
      FFGFFS_DEVICELOST       = 0x80000000UL
 };
+    typedef UInt32		FFState;
 
 
 /*!
-    @defined FFJOFS_<i>i</i>
+    @defineblock FFJOFS_<i>i</i>
     @discussion Axis and Button field offsets, used in <b>FFEFFECT.dwTriggerButton</b> and <b>FFEFFECT.rgdwAxes[<i>n</i>]</b>.
 */
 #define FFJOFS_X            0
@@ -328,25 +328,27 @@ enum
 #define FFJOFS_BUTTON29     FFJOFS_BUTTON(29)
 #define FFJOFS_BUTTON30     FFJOFS_BUTTON(30)
 #define FFJOFS_BUTTON31     FFJOFS_BUTTON(31)
+/*!
+    @/defineblock
+ */
 
 
 /*!
-    @enum FFProperty
+    @typedef FFProperty
     @discussion Used for <b>FFDeviceGetForceFeedbackProperty()</b> and <b>FFDeviceSetForceFeedbackProperty()</b>.
     */
-typedef UInt32		FFProperty;
 enum
 {
     FFPROP_FFGAIN           = 1UL,
     FFPROP_AUTOCENTER       = 3UL
 };
+typedef UInt32		FFProperty;
 
 
 /*!
-    @enum FFCooperativeLevelFlag
+    @typedef FFCooperativeLevelFlag
     @discussion flags for <b>FFDeviceSetCooperativeLevel()</b>.
     */
-typedef UInt32		FFCooperativeLevelFlag;
 enum
 {
     FFSCL_EXCLUSIVE     = 0x00000001UL,
@@ -354,9 +356,10 @@ enum
     FFSCL_FOREGROUND    = 0x00000004UL,
     FFSCL_BACKGROUND    = 0x00000008UL
 };
+typedef UInt32		FFCooperativeLevelFlag;
 
 /*!
-@enum FFCapabilitiesEffectType
+@typedef FFCapabilitiesEffectType
  @discussion Types used in the emulatedEffects or supportedEffects members of the FFCAPABILITIES structure.  Used to describe whether the particular effect type is supported or emulated by the device.
  @constant FFCAP_ET_CONSTANTFORCE The effect represents a constant force effect.
  @constant FFCAP_ET_RAMPFORCE The effect represents a ramp force effect.
@@ -371,7 +374,6 @@ enum
  @constant FFCAP_ET_FRICTION The effect represents a friction force effect.
  @constant FFCAP_ET_CUSTOMFORCE The effect represents a custom force effect. The Force Feedback plugIn developer is required to provide additional documentation to the application writer on how the effect should be used.
  */
-typedef UInt32		FFCapabilitiesEffectType;
 enum
 {
     FFCAP_ET_CONSTANTFORCE	= 0x00000001UL,
@@ -387,18 +389,19 @@ enum
     FFCAP_ET_FRICTION		= 0x00000400UL,
     FFCAP_ET_CUSTOMFORCE	= 0x00000800UL
 };
+typedef UInt32		FFCapabilitiesEffectType;
 
 
 /*!
-    @enum FFCapabilitiesEffectSubType
+    @typedef FFCapabilitiesEffectSubType
     @discussion Flags used to specify the subtype of an effect.
     */
-typedef UInt32		FFCapabilitiesEffectSubType;
 enum
 {
     FFCAP_ST_KINESTHETIC	= 1,
     FFCAP_ST_VIBRATION		= 2
 };
+typedef UInt32		FFCapabilitiesEffectSubType;
 
 
 //-----------------------------------------------------------------------------

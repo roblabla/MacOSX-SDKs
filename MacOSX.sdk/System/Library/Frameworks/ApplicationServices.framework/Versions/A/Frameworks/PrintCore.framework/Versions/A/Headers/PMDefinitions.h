@@ -198,8 +198,7 @@ enum {
 #define kPMGraphicsContextDefault       CFSTR("com.apple.graphicscontext.default")
 #define kPMGraphicsContextCoreGraphics  CFSTR("com.apple.graphicscontext.coregraphics")
 /* PDF Workflow Keys */
-#define kPDFWorkFlowItemURLKey          CFSTR("itemURL")
-#define kPDFWorkflowFolderURLKey		CFSTR("folderURL")
+#define kPDFWorkflowItemURLKey          CFSTR("itemURL")
 #define kPDFWorkflowDisplayNameKey      CFSTR("displayName")
 #define kPDFWorkflowItemsKey            CFSTR("items")
 

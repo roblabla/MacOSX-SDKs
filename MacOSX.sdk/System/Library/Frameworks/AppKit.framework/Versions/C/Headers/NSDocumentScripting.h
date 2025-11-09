@@ -1,7 +1,7 @@
 /*
         NSDocumentScripting.h
         AppKit Framework
-        Copyright (c) 1997-2013, Apple Inc.
+        Copyright (c) 1997-2014, Apple Inc.
         All rights reserved.
 */
 
@@ -14,13 +14,12 @@
 
 @interface NSDocument (NSScripting)
 
-- (NSString *)lastComponentOfFileName;
-- (void)setLastComponentOfFileName:(NSString *)str;
+@property (copy) NSString *lastComponentOfFileName;
 
 - (id)handleSaveScriptCommand:(NSScriptCommand *)command;
 - (id)handleCloseScriptCommand:(NSCloseCommand *)command;
 - (id)handlePrintScriptCommand:(NSScriptCommand *)command;
 
-- (NSScriptObjectSpecifier *)objectSpecifier;
+@property (readonly, strong) NSScriptObjectSpecifier *objectSpecifier;
 
 @end

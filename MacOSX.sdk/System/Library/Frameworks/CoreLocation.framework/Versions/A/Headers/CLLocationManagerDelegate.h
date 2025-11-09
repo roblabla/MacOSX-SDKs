@@ -7,13 +7,13 @@
  *
  */
 
-#import <Availability.h>
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CLAvailability.h>
 #import <CoreLocation/CLLocationManager.h>
+#import <CoreLocation/CLRegion.h>
 
 @class CLLocation;
 @class CLHeading;
-@class CLRegion;
 
 /*
  *  CLLocationManagerDelegate
@@ -69,6 +69,43 @@
  *    will remain until heading is calibrated, unless dismissed early via dismissHeadingCalibrationDisplay.
  */
 - (BOOL)locationManagerShouldDisplayHeadingCalibration:(CLLocationManager *)manager  __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_3_0);
+
+/*
+ *  locationManager:didDetermineState:forRegion:
+ *
+ *  Discussion:
+ *    Invoked when there's a state transition for a monitored region or in response to a request for state via a
+ *    a call to requestStateForRegion:.
+ */
+- (void)locationManager:(CLLocationManager *)manager
+	didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_7_0);
+
+/*
+ *  locationManager:didRangeBeacons:inRegion:
+ *
+ *  Discussion:
+ *    Invoked when a new set of beacons are available in the specified region.
+ *    beacons is an array of CLBeacon objects.
+ *    If beacons is empty, it may be assumed no beacons that match the specified region are nearby.
+ *    Similarly if a specific beacon no longer appears in beacons, it may be assumed the beacon is no longer received
+ *    by the device.
+ */
+#if TARGET_OS_IPHONE
+- (void)locationManager:(CLLocationManager *)manager
+	didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_7_0);
+#endif
+
+/*
+ *  locationManager:rangingBeaconsDidFailForRegion:withError:
+ *
+ *  Discussion:
+ *    Invoked when an error has occurred ranging beacons in a region. Error types are defined in "CLError.h".
+ */
+#if TARGET_OS_IPHONE
+- (void)locationManager:(CLLocationManager *)manager
+	rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region
+	withError:(NSError *)error __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_7_0);
+#endif
 
 /*
  *  locationManager:didEnterRegion:

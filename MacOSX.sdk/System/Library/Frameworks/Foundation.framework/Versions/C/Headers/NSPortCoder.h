@@ -1,5 +1,5 @@
 /*	NSPortCoder.h
-	Copyright (c) 1994-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSCoder.h>
@@ -23,7 +23,7 @@
 
 @interface NSObject (NSDistributedObjects)
 
-- (Class)classForPortCoder;
+@property (readonly) Class classForPortCoder;
 
 - (id)replacementObjectForPortCoder:(NSPortCoder *)coder;
 

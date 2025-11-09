@@ -825,8 +825,8 @@ MusicSequenceFileLoadData (MusicSequence			inSequence,
 CF_INLINE SInt16 
 MusicSequenceSetSMPTEResolution (SignedByte fps, Byte ticks) 
 {
-	SInt16 res = fps < 0 ? fps : -fps;
-	res = res << 8;
+	SInt8 res8 = fps < 0 ? fps : -fps;
+	SInt16 res = (SInt16) (res8 << 8);
 	res += ticks;
 	return res;
 }
@@ -1024,8 +1024,13 @@ MusicSequenceBarBeatTimeToBeats(MusicSequence				inSequence,
 	@param		inSequence		the sequence
 	@result		a CFDictionary or NULL if the call fails.
 */
+
+CF_IMPLICIT_BRIDGING_ENABLED
+
 extern CFDictionaryRef
 MusicSequenceGetInfoDictionary(	MusicSequence				inSequence)			__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_5_0);
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 //=====================================================================================================================
 #pragma mark -

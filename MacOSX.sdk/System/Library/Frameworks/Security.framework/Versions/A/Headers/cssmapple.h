@@ -1,15 +1,15 @@
 /*
- * Copyright (c) 2000-2013 Apple Inc. All Rights Reserved.
+ * Copyright (c) 2000-2014 Apple Inc. All Rights Reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
- *
+ * 
  * This file contains Original Code and/or Modifications of Original Code
  * as defined in and that are subject to the Apple Public Source License
  * Version 2.0 (the 'License'). You may not use this file except in
  * compliance with the License. Please obtain a copy of the License at
  * http://www.opensource.apple.com/apsl/ and read it before using this
  * file.
- *
+ * 
  * The Original Code and all software distributed under the License are
  * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
@@ -17,7 +17,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
  * Please see the License for the specific language governing rights and
  * limitations under the License.
- *
+ * 
  * @APPLE_LICENSE_HEADER_END@
  *
  * cssmapple.h -- CSSM features specific to Apple's Implementation
@@ -534,7 +534,9 @@ enum
 	/* Extended key usage not marked critical */
 	CSSMERR_APPLETP_EXT_KEYUSAGE_NOT_CRITICAL =     CSSM_TP_PRIVATE_ERROR + 58,
 	/* Required name or identifier not present */
-	CSSMERR_APPLETP_IDENTIFIER_MISSING =            CSSM_TP_PRIVATE_ERROR + 59
+	CSSMERR_APPLETP_IDENTIFIER_MISSING =            CSSM_TP_PRIVATE_ERROR + 59,
+	/* Certificate authority pinning mismatch */
+	CSSMERR_APPLETP_CA_PIN_MISMATCH =               CSSM_TP_PRIVATE_ERROR + 60
 };
 
 /* Apple .mac TP private error codes. */

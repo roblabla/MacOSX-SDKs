@@ -51,20 +51,20 @@ typedef CFTypeRef  VTSessionRef;
 VT_EXPORT OSStatus 
 VTSessionCopySupportedPropertyDictionary(
   VTSessionRef       session,
-  CFDictionaryRef    *supportedPropertyDictionaryOut ) VT_AVAILABLE_STARTING(10_8);
+  CFDictionaryRef    *supportedPropertyDictionaryOut ) __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0);
 
-VT_EXPORT const CFStringRef kVTPropertyTypeKey VT_AVAILABLE_STARTING(10_8); // value is CFStringRef, one of the following:
-	VT_EXPORT const CFStringRef kVTPropertyType_Enumeration VT_AVAILABLE_STARTING(10_8); // value is one of a list of CFStrings
-	VT_EXPORT const CFStringRef kVTPropertyType_Boolean VT_AVAILABLE_STARTING(10_8); // value is a CFBoolean
-	VT_EXPORT const CFStringRef kVTPropertyType_Number VT_AVAILABLE_STARTING(10_8); // value is a CFNumber
-VT_EXPORT const CFStringRef kVTPropertyReadWriteStatusKey VT_AVAILABLE_STARTING(10_8);
-	VT_EXPORT const CFStringRef kVTPropertyReadWriteStatus_ReadOnly VT_AVAILABLE_STARTING(10_8);
-	VT_EXPORT const CFStringRef kVTPropertyReadWriteStatus_ReadWrite VT_AVAILABLE_STARTING(10_8);
-VT_EXPORT const CFStringRef kVTPropertyShouldBeSerializedKey VT_AVAILABLE_STARTING(10_8); // CFBoolean, false by default
-VT_EXPORT const CFStringRef kVTPropertySupportedValueMinimumKey VT_AVAILABLE_STARTING(10_8); // CFNumber
-VT_EXPORT const CFStringRef kVTPropertySupportedValueMaximumKey VT_AVAILABLE_STARTING(10_8); // CFNumber
-VT_EXPORT const CFStringRef kVTPropertySupportedValueListKey VT_AVAILABLE_STARTING(10_8); // CFArray of appropriate values
-VT_EXPORT const CFStringRef kVTPropertyDocumentationKey VT_AVAILABLE_STARTING(10_8); // a CFString for developer eyes only
+VT_EXPORT const CFStringRef kVTPropertyTypeKey __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0); // value is CFStringRef, one of the following:
+	VT_EXPORT const CFStringRef kVTPropertyType_Enumeration __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0); // value is one of a list of CFStrings
+	VT_EXPORT const CFStringRef kVTPropertyType_Boolean __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0); // value is a CFBoolean
+	VT_EXPORT const CFStringRef kVTPropertyType_Number __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0); // value is a CFNumber
+VT_EXPORT const CFStringRef kVTPropertyReadWriteStatusKey __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0);
+	VT_EXPORT const CFStringRef kVTPropertyReadWriteStatus_ReadOnly __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0);
+	VT_EXPORT const CFStringRef kVTPropertyReadWriteStatus_ReadWrite __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0);
+VT_EXPORT const CFStringRef kVTPropertyShouldBeSerializedKey __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0); // CFBoolean, false by default
+VT_EXPORT const CFStringRef kVTPropertySupportedValueMinimumKey __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0); // CFNumber
+VT_EXPORT const CFStringRef kVTPropertySupportedValueMaximumKey __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0); // CFNumber
+VT_EXPORT const CFStringRef kVTPropertySupportedValueListKey __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0); // CFArray of appropriate values
+VT_EXPORT const CFStringRef kVTPropertyDocumentationKey __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0); // a CFString for developer eyes only
 
 
 /*!
@@ -77,7 +77,7 @@ VT_EXPORT OSStatus
 VTSessionSetProperty(
   VTSessionRef       session,
   CFStringRef        propertyKey,
-  CFTypeRef          propertyValue ) VT_AVAILABLE_STARTING(10_8);
+  CFTypeRef          propertyValue ) __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0);
 
 /*!
 	@function	VTSessionCopyProperty
@@ -106,7 +106,7 @@ VTSessionCopyProperty(
   VTSessionRef       session,
   CFStringRef        propertyKey,
   CFAllocatorRef     allocator,
-  void *             propertyValueOut ) VT_AVAILABLE_STARTING(10_8);
+  void *             propertyValueOut ) __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0);
 
 /*!
 	@function	VTSessionSetProperties
@@ -117,7 +117,7 @@ VTSessionCopyProperty(
 VT_EXPORT OSStatus 
 VTSessionSetProperties(
   VTSessionRef       session,
-  CFDictionaryRef    propertyDictionary ) VT_AVAILABLE_STARTING(10_8);
+  CFDictionaryRef    propertyDictionary ) __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0);
 
 /*!
 	@function	VTSessionCopySerializableProperties
@@ -130,7 +130,7 @@ VT_EXPORT OSStatus
 VTSessionCopySerializableProperties(
   VTSessionRef       session,
   CFAllocatorRef     allocator,
-  CFDictionaryRef    *dictionaryOut ) VT_AVAILABLE_STARTING(10_8);
+  CFDictionaryRef    *dictionaryOut ) __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0);
 
 
 #pragma pack(pop)

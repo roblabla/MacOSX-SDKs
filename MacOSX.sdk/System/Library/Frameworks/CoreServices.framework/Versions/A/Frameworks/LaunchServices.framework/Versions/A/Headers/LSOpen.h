@@ -19,16 +19,20 @@
 #include <CoreFoundation/CoreFoundation.h>
 #endif
 
+#if !TARGET_OS_IPHONE
 #ifndef __CARBONCORE__
 #include <CarbonCore/CarbonCore.h>
+#endif
 #endif
 
 #ifndef __LSINFO__
 #include <LaunchServices/LSInfo.h>
 #endif
 
+#if !TARGET_OS_IPHONE
 #ifndef __AE__
 #include <AE/AE.h>
+#endif
 #endif
 
 
@@ -51,7 +55,7 @@ extern "C" {
 
 typedef OptionBits                      LSLaunchFlags;
 enum {
-  kLSLaunchDefaults             = 0x00000001, /* Defaults = open, async, use Info.plist, start Classic*/
+  kLSLaunchDefaults             = 0x00000001, /* Defaults = open, async, use Info.plist*/
   kLSLaunchAndPrint             = 0x00000002, /* Print items instead of open them*/
   kLSLaunchReserved2            = 0x00000004,
   kLSLaunchReserved3            = 0x00000008,
@@ -63,15 +67,16 @@ enum {
   kLSLaunchDontSwitch           = 0x00000200, /* Do not bring new app to the foreground.*/
   kLSLaunchNoParams             = 0x00000800, /* Use Info.plist to determine launch parameters*/
   kLSLaunchAsync                = 0x00010000, /* Asynchronous launch; return as soon as the app starts launching.*/
-  kLSLaunchStartClassic         = 0x00020000, /* Start up Classic environment if required for app.*/
-  kLSLaunchInClassic            = 0x00040000, /* Force app to launch in Classic environment.*/
+  kLSLaunchStartClassic         = 0x00020000, /* Start up Classic environment if required for app (deprecated.)*/
+  kLSLaunchInClassic            = 0x00040000, /* Force app to launch in Classic environment (deprecated.)*/
   kLSLaunchNewInstance          = 0x00080000, /* Instantiate app even if it is already running.*/
   kLSLaunchAndHide              = 0x00100000, /* Send child a "hide" request as soon as it checks in.*/
   kLSLaunchAndHideOthers        = 0x00200000, /* Hide all other apps when the app checks in.*/
-  kLSLaunchHasUntrustedContents = 0x00400000  /* Mark items to be opened as untrusted*/
+  kLSLaunchHasUntrustedContents = 0x00400000, /* Mark items to be opened as untrusted*/
 };
 
-struct LSLaunchFSRefSpec {
+#if !TARGET_OS_IPHONE
+typedef struct LSLaunchFSRefSpec {
   const FSRef *       appRef;                 /* app to use, can be NULL*/
   ItemCount           numDocs;                /* items to open/print, can be zero*/
   const FSRef *       itemRefs;               /* array of FSRefs, ignored when numDocs is zero*/
@@ -79,24 +84,23 @@ struct LSLaunchFSRefSpec {
                                               /* with keyword keyAEPropData (can be NULL)*/
   LSLaunchFlags       launchFlags;
   void *              asyncRefCon;            /* used if you register for app birth/death notification*/
-};
-typedef struct LSLaunchFSRefSpec        LSLaunchFSRefSpec;
-struct LSLaunchURLSpec {
+} LSLaunchFSRefSpec __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use LSLaunchURLSpec instead.");
+typedef struct LSLaunchURLSpec {
   CFURLRef            appURL;                 /* app to use, can be NULL*/
   CFArrayRef          itemURLs;               /* items to open/print, can be NULL*/
   const AEDesc *      passThruParams;         /* passed untouched to application as optional parameter (can be NULL)*/
   LSLaunchFlags       launchFlags;
   void *              asyncRefCon;            /* used if you register for app birth/death notification*/
-};
-typedef struct LSLaunchURLSpec          LSLaunchURLSpec;
-
+} LSLaunchURLSpec __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+#endif
 
 /* ======================================================================================================== */
 /* LaunchServices API                                                                                       */
 /* ======================================================================================================== */
 
+#if !TARGET_OS_IPHONE
 /*
- *  LSOpenFSRef()
+ *  LSOpenFSRef()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Open an application, document, or folder.
@@ -120,6 +124,9 @@ typedef struct LSLaunchURLSpec          LSLaunchURLSpec;
  *      The FSRef of the item actually launched. For inRefs that are
  *      documents, outLaunchedRef will be the application used to
  *      launch the document. Can be NULL.
+ *
+ *  Deprecated:
+ *    Use LSOpenCFURLRef or -[NSWorkspace openURL:] instead.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -129,8 +136,8 @@ typedef struct LSLaunchURLSpec          LSLaunchURLSpec;
 extern OSStatus 
 LSOpenFSRef(
   const FSRef *  inRef,
-  FSRef *        outLaunchedRef)       /* can be NULL */      __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
-
+  FSRef *        outLaunchedRef)       /* can be NULL */      __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use LSOpenCFURLRef or -[NSWorkspace openURL:] instead.");
+#endif
 
 
 /*
@@ -173,8 +180,9 @@ LSOpenCFURLRef(
 
 
 
+#if !TARGET_OS_IPHONE
 /*
- *  LSOpenFromRefSpec()
+ *  LSOpenFromRefSpec()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Opens an application or one or more documents or folders.
@@ -194,7 +202,10 @@ LSOpenCFURLRef(
  *      The FSRef of the item actually launched. For inRefs that are
  *      documents, outLaunchedRef will be the application used to
  *      launch the document. Can be NULL.
- *  
+ *
+ *  Deprecated:
+ *    Use LSOpenFromURLSpec or NSWorkspace instead.
+ *
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x
@@ -203,10 +214,12 @@ LSOpenCFURLRef(
 extern OSStatus 
 LSOpenFromRefSpec(
   const LSLaunchFSRefSpec *  inLaunchSpec,
-  FSRef *                    outLaunchedRef)       /* can be NULL */ __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  FSRef *                    outLaunchedRef)       /* can be NULL */ __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use LSOpenFromURLSpec or NSWorkspace instead.");
+#endif
 
 
 
+#if !TARGET_OS_IPHONE
 /*
  *  LSOpenFromURLSpec()
  *  
@@ -240,15 +253,16 @@ extern OSStatus
 LSOpenFromURLSpec(
   const LSLaunchURLSpec *  inLaunchSpec,
   CFURLRef *               outLaunchedURL)       /* can be NULL */ __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
-
+#endif
 
 
 /* ================================================================================== */
 /*   API for opening with a specific role and additional parameters                   */
 /* ================================================================================== */
 
+#if !TARGET_OS_IPHONE
 /*
- * LSApplicationParameters
+ * LSApplicationParameters   *** DEPRECATED ***
  *
  *    This structure is used by the new LSOpen functions to specify
  *    an application, launch flags, and additional parameters
@@ -256,8 +270,12 @@ LSOpenFromURLSpec(
  *
  *    A version field allows the structure to be extended in 
  *    future releases. 
+ *
+ *  Deprecated:
+ *    Use NSWorkspace instead.
+ *
  */
-struct LSApplicationParameters {
+typedef struct LSApplicationParameters {
   CFIndex             version;                /* This must be set to zero by the client */
   LSLaunchFlags       flags;                  /* See the LSLaunchFlags enum */
   const FSRef *       application;            /* The application to open (and possibly handle documents/URLs) */
@@ -267,10 +285,14 @@ struct LSApplicationParameters {
   CFArrayRef          argv;                   /* Note: argv is ignored on 10.4. On 10.5 and later, the array elements */
                                               /* (which must be CFStringRefs) are passed as arguments to main() in the launched process. */
   AppleEvent *        initialEvent;           /* The first Apple Event to be sent to the launched process. Can be NULL. */
-};
-typedef struct LSApplicationParameters  LSApplicationParameters;
+} LSApplicationParameters __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_4, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use NSWorkspace instead.");
+#endif
+
+
+
+#if !TARGET_OS_IPHONE
 /*
- *  LSOpenApplication()
+ *  LSOpenApplication()   *** DEPRECATED ***
  *  
  *    LSOpenApplication launches one application. This function
  *    is an updated alternative to the Process Manager's LaunchApplication().
@@ -284,13 +306,13 @@ typedef struct LSApplicationParameters  LSApplicationParameters;
  *    serial number of the launched (or activated) process. Note that for 
  *    asynchronous launches, the application may not have finished launching
  *    when this function returns.
- */
-/*
- *  LSOpenApplication()
- *  
+ *
  *  Mac OS X threading:
  *    Thread safe since version 10.4
- *  
+ *
+ *  Deprecated:
+ *    Use -[NSWorkspace launchApplicationAtURL:options:configuration:error:] instead.
+ *
  *  Availability:
  *    Mac OS X:         in version 10.4 and later in CoreServices.framework
  *    CarbonLib:        not available
@@ -299,12 +321,13 @@ typedef struct LSApplicationParameters  LSApplicationParameters;
 extern OSStatus 
 LSOpenApplication(
   const LSApplicationParameters *  appParams,
-  ProcessSerialNumber *            outPSN)          /* can be NULL */ __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+  ProcessSerialNumber *            outPSN)          /* can be NULL */ __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_4, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use -[NSWorkspace launchApplicationAtURL:options:configuration:error:] instead.");
+#endif
 
 
-
+#if !TARGET_OS_IPHONE
 /*
- *  LSOpenItemsWithRole()
+ *  LSOpenItemsWithRole()   *** DEPRECATED ***
  *  
  *    Opens the items specified as an array of FSRefs with the role
  *    specified by inRoleMask. If the role doesn't matter, use kLSRolesAll.
@@ -329,13 +352,13 @@ LSOpenApplication(
  *    If not NULL, the outPSNs buffer will be filled with the PSN which
  *    was used to open each item at the same index of the input FSRef array. The
  *    PSN capacity of the output buffer is specified by inMaxPSNCount.
- */
-/*
- *  LSOpenItemsWithRole()
- *  
+ *
  *  Mac OS X threading:
  *    Thread safe since version 10.4
- *  
+ *
+ *  Deprecated:
+ *    Use NSWorkspace instead.
+ *
  *  Availability:
  *    Mac OS X:         in version 10.4 and later in CoreServices.framework
  *    CarbonLib:        not available
@@ -349,12 +372,13 @@ LSOpenItemsWithRole(
   const AEKeyDesc *                inAEParam,           /* can be NULL */
   const LSApplicationParameters *  inAppParams,         /* can be NULL */
   ProcessSerialNumber *            outPSNs,             /* can be NULL */
-  CFIndex                          inMaxPSNCount)             __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+  CFIndex                          inMaxPSNCount)             __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_4, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use NSWorkspace instead.");
+#endif
 
 
-
+#if !TARGET_OS_IPHONE
 /*
- *  LSOpenURLsWithRole()
+ *  LSOpenURLsWithRole()   *** DEPRECATED ***
  *  
  *    Opens the URLs specified by inURLs (an array of CFURLRefs) with the role
  *    specified by inRoleMask. If the role doesn't matter, use kLSRolesAll.
@@ -382,12 +406,12 @@ LSOpenItemsWithRole(
  *    If not NULL, the outPSNs buffer will be filled with the PSN which
  *    was used to open each URL at the same index of the input URL array. The
  *    PSN capacity of the output buffer is specified by inMaxPSNCount.
- */
-/*
- *  LSOpenURLsWithRole()
- *  
+ *
  *  Mac OS X threading:
  *    Thread safe since version 10.4
+ *
+ *  Deprecated:
+ *    Use NSWorkspace instead.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.4 and later in CoreServices.framework
@@ -401,8 +425,8 @@ LSOpenURLsWithRole(
   const AEKeyDesc *                inAEParam,           /* can be NULL */
   const LSApplicationParameters *  inAppParams,         /* can be NULL */
   ProcessSerialNumber *            outPSNs,             /* can be NULL */
-  CFIndex                          inMaxPSNCount)             __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
-
+  CFIndex                          inMaxPSNCount)             __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_4, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use NSWorkspace instead.");
+#endif
 
 
 

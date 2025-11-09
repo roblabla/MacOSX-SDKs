@@ -23,6 +23,15 @@ typedef struct {
 	CGFloat		bottom;
 } AVEdgeWidths;
 
+/*!
+	@class		AVVideoCompositionRenderContext
+ 
+	@abstract	The AVVideoCompositionRenderContext class defines the context within which custom compositors render new output pixels buffers.
+ 
+	@discussion
+		An instance of AVVideoCompositionRenderContext provides size and scaling information and offers a service for efficiently providing pixel buffers from a managed pool of buffers.
+*/
+
 @class AVVideoComposition;
 @class AVAsynchronousVideoCompositionRequest;
 @protocol AVVideoCompositionInstruction;
@@ -152,6 +161,12 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 
 @end
 
+/*!
+	@class		AVAsynchronousVideoCompositionRequest
+ 
+	@abstract	An AVAsynchronousVideoCompositionRequest instance contains the information necessary for a video compositor to render an output pixel buffer. The video compositor must implement the AVVideoCompositing protocol.
+*/
+
 @class AVAsynchronousVideoCompositionRequestInternal;
 
 NS_CLASS_AVAILABLE(10_9, 7_0)
@@ -193,6 +208,11 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 
 @end
 
+/*!
+	@protocol	AVVideoCompositionInstruction
+ 
+	@abstract	The AVVideoCompositionInstruction protocol is implemented by objects to represent operations to be performed by a compositor.
+*/
 NS_CLASS_AVAILABLE(10_9, 7_0)
 @protocol AVVideoCompositionInstruction<NSObject>
 

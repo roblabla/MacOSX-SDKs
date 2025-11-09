@@ -1,7 +1,7 @@
 /*
     NSApplication.h
     Application Kit
-    Copyright (c) 1994-2013, Apple Inc.
+    Copyright (c) 1994-2014, Apple Inc.
     All rights reserved.
 */
 
@@ -13,6 +13,7 @@
 @class NSDate, NSDictionary, NSError, NSException, NSNotification;
 @class NSGraphicsContext, NSImage, NSPasteboard, NSWindow;
 @class NSDockTile;
+@class NSUserActivity;
 @protocol NSApplicationDelegate;
 
 /* The version of the AppKit framework */
@@ -42,6 +43,8 @@ APPKIT_EXTERN const double NSAppKitVersionNumber;
 #define NSAppKitVersionNumber10_7_3 1138.32
 #define NSAppKitVersionNumber10_7_4 1138.47
 #define NSAppKitVersionNumber10_8 1187
+#define NSAppKitVersionNumber10_9 1265
+#define NSAppKitVersionNumber10_10 1343
 
 
 /* Modes passed to NSRunLoop */
@@ -53,7 +56,7 @@ APPKIT_EXTERN NSString *NSEventTrackingRunLoopMode;
 enum {
     NSModalResponseStop                 = (-1000), // Also used as the default response for sheets
     NSModalResponseAbort                = (-1001),
-    NSModalResponseContinue             = (-1002), 
+    NSModalResponseContinue             = (-1002),
 } NS_ENUM_AVAILABLE_MAC(10_9);
 typedef NSInteger NSModalResponse NS_AVAILABLE_MAC(10_9);
 
@@ -96,7 +99,7 @@ typedef struct _NSModalSession *NSModalSession;
 // threading information
 typedef struct NSThreadPrivate _NSThreadPrivate;
 
-@interface NSApplication : NSResponder <NSUserInterfaceValidations>
+@interface NSApplication : NSResponder <NSUserInterfaceValidations, NSAccessibilityElement, NSAccessibility>
 {
     /*All instance variables are private*/
     NSEvent            *_currentEvent;
@@ -152,18 +155,17 @@ typedef struct NSThreadPrivate _NSThreadPrivate;
 }
 
 + (NSApplication *)sharedApplication;
-- (void)setDelegate:(id <NSApplicationDelegate>)anObject;
-- (id <NSApplicationDelegate>)delegate;
-- (NSGraphicsContext*)context;
+@property (assign) id<NSApplicationDelegate> delegate;
+@property (readonly, strong) NSGraphicsContext *context;
 - (void)hide:(id)sender;
 - (void)unhide:(id)sender;
 - (void)unhideWithoutActivation;
 - (NSWindow *)windowWithWindowNumber:(NSInteger)windowNum;
-- (NSWindow *)mainWindow;
-- (NSWindow *)keyWindow;
-- (BOOL)isActive;
-- (BOOL)isHidden;
-- (BOOL)isRunning;
+@property (readonly, assign) NSWindow *mainWindow;
+@property (readonly, assign) NSWindow *keyWindow;
+@property (getter=isActive, readonly) BOOL active;
+@property (getter=isHidden, readonly) BOOL hidden;
+@property (getter=isRunning, readonly) BOOL running;
 - (void)deactivate;
 - (void)activateIgnoringOtherApps:(BOOL)flag;
 
@@ -177,17 +179,16 @@ typedef struct NSThreadPrivate _NSThreadPrivate;
 - (void)stopModal;
 - (void)stopModalWithCode:(NSInteger)returnCode;
 - (void)abortModal;
-- (NSWindow *)modalWindow;
+@property (readonly, strong) NSWindow *modalWindow;
 - (NSModalSession)beginModalSessionForWindow:(NSWindow *)theWindow NS_RETURNS_INNER_POINTER;
 - (NSInteger)runModalSession:(NSModalSession)session;
 - (void)endModalSession:(NSModalSession)session;
 - (void)terminate:(id)sender;
 
-enum {
+typedef NS_ENUM(NSUInteger, NSRequestUserAttentionType) {
       NSCriticalRequest = 0,
       NSInformationalRequest = 10
 };
-typedef NSUInteger NSRequestUserAttentionType;
 
 // inform the user that this application needs attention - call this method only if your application is not already active
 - (NSInteger)requestUserAttention:(NSRequestUserAttentionType)requestType;
@@ -197,26 +198,23 @@ typedef NSUInteger NSRequestUserAttentionType;
 - (NSEvent *)nextEventMatchingMask:(NSUInteger)mask untilDate:(NSDate *)expiration inMode:(NSString *)mode dequeue:(BOOL)deqFlag;
 - (void)discardEventsMatchingMask:(NSUInteger)mask beforeEvent:(NSEvent *)lastEvent;
 - (void)postEvent:(NSEvent *)event atStart:(BOOL)flag;
-- (NSEvent *)currentEvent;
+@property (readonly, strong) NSEvent *currentEvent;
 
 - (void)sendEvent:(NSEvent *)theEvent;
 - (void)preventWindowOrdering;
 - (NSWindow *)makeWindowsPerform:(SEL)aSelector inOrder:(BOOL)flag;
-- (NSArray *)windows;
+@property (readonly, copy) NSArray *windows;
 - (void)setWindowsNeedUpdate:(BOOL)needUpdate;
 - (void)updateWindows;
 
-- (void)setMainMenu:(NSMenu *)aMenu;
-- (NSMenu *)mainMenu;
+@property (strong) NSMenu *mainMenu;
 
 /* Set or get the Help menu for the app.  If a non-nil menu is set as the Help menu, Spotlight for Help will be installed in it; otherwise AppKit will install Spotlight for Help into a menu of its choosing (and that menu is not returned from -helpMenu).  If you wish to completely suppress Spotlight for Help, you can set a menu that does not appear in the menu bar.  NSApplication retains its Help menu and releases it when a different menu is set.
  
  */
-- (void)setHelpMenu:(NSMenu *)helpMenu NS_AVAILABLE_MAC(10_6);
-- (NSMenu *)helpMenu NS_AVAILABLE_MAC(10_6);
+@property (strong) NSMenu *helpMenu NS_AVAILABLE_MAC(10_6);
 
-- (void)setApplicationIconImage:(NSImage *)image;
-- (NSImage *)applicationIconImage;
+@property (strong) NSImage *applicationIconImage;
 
 /* Returns the activation policy of the application.
  */
@@ -227,7 +225,7 @@ typedef NSUInteger NSRequestUserAttentionType;
 - (BOOL)setActivationPolicy:(NSApplicationActivationPolicy)activationPolicy NS_AVAILABLE_MAC(10_6);
 
 
-- (NSDockTile *)dockTile NS_AVAILABLE_MAC(10_5);
+@property (readonly, strong) NSDockTile *dockTile NS_AVAILABLE_MAC(10_5);
 
 - (BOOL)sendAction:(SEL)theAction to:(id)theTarget from:(id)sender;
 - (id)targetForAction:(SEL)theAction;
@@ -241,12 +239,11 @@ typedef NSUInteger NSRequestUserAttentionType;
 /*  If an application delegate returns NSTerminateLater from -applicationShouldTerminate:, -replyToApplicationShouldTerminate: must be called with YES or NO once the application decides if it can terminate */
 - (void)replyToApplicationShouldTerminate:(BOOL)shouldTerminate;
 
-enum {
+typedef NS_ENUM(NSUInteger, NSApplicationDelegateReply) {
     NSApplicationDelegateReplySuccess = 0,
     NSApplicationDelegateReplyCancel = 1,
     NSApplicationDelegateReplyFailure = 2
 };
-typedef NSUInteger NSApplicationDelegateReply;
 
 /* If an application delegate encounters an error while handling -application:openFiles: or -application:printFiles:, -replyToOpenOrPrint: should be called with NSApplicationDelegateReplyFailure.  If the user cancels the operation, NSApplicationDelegateReplyCancel should be used, and if the operation succeeds, NSApplicationDelegateReplySuccess should be used */
 - (void)replyToOpenOrPrint:(NSApplicationDelegateReply)reply;
@@ -257,20 +254,18 @@ typedef NSUInteger NSApplicationDelegateReply;
 
 /* Gets or sets the presentationOptions that should be in effect for the system when this application is the active application.  Only certain combinations of NSApplicationPresentationOptions flags are allowed, as detailed in the AppKit Release Notes and the reference documentation for -setPresentationOptions:.  When given an invalid combination of option flags, -setPresentationOptions: raises an exception.
 */
-- (NSApplicationPresentationOptions)presentationOptions NS_AVAILABLE_MAC(10_6);
-- (void)setPresentationOptions:(NSApplicationPresentationOptions)newOptions NS_AVAILABLE_MAC(10_6);
+@property NSApplicationPresentationOptions presentationOptions NS_AVAILABLE_MAC(10_6);
 
 /* Returns the set of application presentation options that are currently in effect for the system.  These are the presentation options that have been put into effect by the currently active application.
 */
-- (NSApplicationPresentationOptions)currentSystemPresentationOptions NS_AVAILABLE_MAC(10_6);
+@property (readonly) NSApplicationPresentationOptions currentSystemPresentationOptions NS_AVAILABLE_MAC(10_6);
 
-- (NSApplicationOcclusionState)occlusionState NS_AVAILABLE_MAC(10_9);
+@property (readonly) NSApplicationOcclusionState occlusionState NS_AVAILABLE_MAC(10_9);
 
 @end
 
 @interface NSApplication(NSWindowsMenu)
-- (void)setWindowsMenu:(NSMenu *)aMenu;
-- (NSMenu *)windowsMenu;
+@property (strong) NSMenu *windowsMenu;
 - (void)arrangeInFront:(id)sender;
 - (void)removeWindowsItem:(NSWindow *)win;
 - (void)addWindowsItem:(NSWindow *)win title:(NSString *)aString filename:(BOOL)isFilename;
@@ -282,25 +277,23 @@ typedef NSUInteger NSApplicationDelegateReply;
 @interface NSApplication(NSFullKeyboardAccess)
 /* Use this method to get the status of Full Keyboard Access, as configured in the Keyboard preference pane. You may use this status to implement your own key loop or to implement in-control tabbing behavior similar to NSTableView. Because of the nature of the preference storage, you will not be notified of changes to the key if you attempt to observe it via key-value observing; however, calling this method is fairly inexpensive, so you should always call it when you need the underlying value instead of caching it.
  */
-- (BOOL)isFullKeyboardAccessEnabled NS_AVAILABLE_MAC(10_6);
+@property (getter=isFullKeyboardAccessEnabled, readonly) BOOL fullKeyboardAccessEnabled NS_AVAILABLE_MAC(10_6);
 @end
 
 // return values for -applicationShouldTerminate:
-enum {
+typedef NS_ENUM(NSUInteger, NSApplicationTerminateReply) {
         NSTerminateCancel = 0,
         NSTerminateNow = 1, 
         NSTerminateLater = 2
 };
-typedef NSUInteger NSApplicationTerminateReply;
 
 // return values for -application:printFiles:withSettings:showPrintPanels:.
-enum {
+typedef NS_ENUM(NSUInteger, NSApplicationPrintReply) {
     NSPrintingCancelled = 0,
     NSPrintingSuccess = 1, 
     NSPrintingFailure = 3,
     NSPrintingReplyLater = 2
 };
-typedef NSUInteger NSApplicationPrintReply;
 
 @protocol NSApplicationDelegate <NSObject>
 @optional
@@ -337,7 +330,31 @@ typedef NSUInteger NSApplicationPrintReply;
 */
 - (void)application:(NSApplication *)app didDecodeRestorableState:(NSCoder *)coder NS_AVAILABLE_MAC(10_7);
 
+/* NSUserActivity support:
+ */
 
+/*
+ 
+ This will be called on the main thread as soon as the user indicates they want to continue an activity in your application. The NSUserActivity object may not be available instantly, so use this as an opportunity to show the user that an activity will be continued shortly. Return YES to indicate that you are doing so. Return NO (or leave it unimplemented) and AppKit/UIKit will put up a default UI.
+ 
+ For each application:willContinueUserActivityWithType: invocation, you are guaranteed to get exactly one invocation of application:continueUserActivity:restorationHandler: on success, or application:didFailToContinueUserActivityWithType:error: if an error was encountered.
+ */
+- (BOOL)application:(NSApplication *)application willContinueUserActivityWithType:(NSString *)userActivityType NS_AVAILABLE_MAC(10_10);
+
+/*
+ This will be called on the main thread after the NSUserActivity object is available. Use the data you stored in the NSUserActivity object to re-create what the user was doing. Return YES to indicate that the activity was handled. Return NO (or leave it unimplemented) and AppKit will attempt to continue the user activity.
+ 
+ You should create/fetch any restorable objects associated with the user activity, and pass them to the restorationHandler. They will then get the above restoreUserActivityState: method invoked with the user activity. Invoking the restorationHandler is optional. It may be copied and invoked later, but must be invoked on the main thread.
+ 
+ If this user activity was created automatically by having NSUbiquitousDocumentUserActivityType in a CFBundleDocumentTypes entry, AppKit can automatically restore the NSUserActivity on OS X if NO is returned, or this method is unimplemented. It will do so by creating a document of the appropriate type using the URL stored in the userInfo under the NSUserActivityDocumentURLKey. The document will have restoreUserActivity: called on it.
+ */
+- (BOOL)application:(NSApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void(^)(NSArray *restorableObjects))restorationHandler NS_AVAILABLE_MAC(10_10);
+
+/* There are instances where continuing a NSUserActivity may fail. This will get called on the main thread if it does so. If it is unimplemented, AppKit will present the error. */
+- (void)application:(NSApplication *)application didFailToContinueUserActivityWithType:(NSString *)userActivityType error:(NSError *)error NS_AVAILABLE_MAC(10_10);
+
+/* This will be called on the main thread when a user activity managed by AppKit/UIKit has been updated. You should use this as a last chance to add additional data to the userActivity. */
+- (void)application:(NSApplication *)application didUpdateUserActivity:(NSUserActivity *)userActivity NS_AVAILABLE_MAC(10_10);
 
 /* Notifications:
  */
@@ -356,11 +373,11 @@ typedef NSUInteger NSApplicationPrintReply;
 - (void)applicationWillTerminate:(NSNotification *)notification;
 - (void)applicationDidChangeScreenParameters:(NSNotification *)notification;
 - (void)applicationDidChangeOcclusionState:(NSNotification *)notification NS_AVAILABLE_MAC(10_9);
+
 @end
 
 @interface NSApplication(NSServicesMenu)
-- (void)setServicesMenu:(NSMenu *)aMenu;
-- (NSMenu *)servicesMenu;
+@property (strong) NSMenu *servicesMenu;
 - (void)registerServicesMenuSendTypes:(NSArray *)sendTypes returnTypes:(NSArray *)returnTypes;
 @end
 
@@ -371,8 +388,7 @@ typedef NSUInteger NSApplicationPrintReply;
 @end
 
 @interface NSApplication(NSServicesHandling)
-- (void)setServicesProvider:(id)provider;
-- (id)servicesProvider;
+@property (strong) id servicesProvider;
 @end
 
 @interface NSApplication(NSStandardAboutPanel)
@@ -407,14 +423,13 @@ If not specified, obtain from CFBundleShortVersionString key in infoDictionary. 
 
 /* Bi-directional User Interface
 */
-enum {
+typedef NS_ENUM(NSInteger, NSUserInterfaceLayoutDirection) {
     NSUserInterfaceLayoutDirectionLeftToRight = 0,
     NSUserInterfaceLayoutDirectionRightToLeft = 1
 };
-typedef NSInteger NSUserInterfaceLayoutDirection;
 
 @interface NSApplication (NSApplicationLayoutDirection)
-- (NSUserInterfaceLayoutDirection)userInterfaceLayoutDirection NS_AVAILABLE_MAC(10_6); // Returns the application-wide user interface layout direction.
+@property (readonly) NSUserInterfaceLayoutDirection userInterfaceLayoutDirection NS_AVAILABLE_MAC(10_6); // Returns the application-wide user interface layout direction.
 @end
 
 @interface NSApplication (NSRestorableUserInterface)
@@ -431,24 +446,19 @@ typedef NSInteger NSUserInterfaceLayoutDirection;
 - (void)enableRelaunchOnLogin NS_AVAILABLE_MAC(10_7);
 @end
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_7
-enum {
-    NSRemoteNotificationTypeNone    = 0,
-    NSRemoteNotificationTypeBadge   = 1 << 0,
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_8
-    NSRemoteNotificationTypeSound   = 1 << 1,
-    NSRemoteNotificationTypeAlert   = 1 << 2,
-#endif
+typedef NS_OPTIONS(NSUInteger, NSRemoteNotificationType) {
+    NSRemoteNotificationTypeNone NS_ENUM_AVAILABLE_MAC(10_7)    = 0,
+    NSRemoteNotificationTypeBadge NS_ENUM_AVAILABLE_MAC(10_7)   = 1 << 0,
+    NSRemoteNotificationTypeSound NS_ENUM_AVAILABLE_MAC(10_8)   = 1 << 1,
+    NSRemoteNotificationTypeAlert NS_ENUM_AVAILABLE_MAC(10_8)   = 1 << 2,
 };
-#endif
 
-typedef NSUInteger NSRemoteNotificationType;
 
 @interface NSApplication (NSRemoteNotifications)
 - (void)registerForRemoteNotificationTypes:(NSRemoteNotificationType)types NS_AVAILABLE_MAC(10_7);
 - (void)unregisterForRemoteNotifications NS_AVAILABLE_MAC(10_7);
 
-- (NSRemoteNotificationType)enabledRemoteNotificationTypes NS_AVAILABLE_MAC(10_7);
+@property (readonly) NSRemoteNotificationType enabledRemoteNotificationTypes NS_AVAILABLE_MAC(10_7);
 @end
 
 /* An Application's startup function */
@@ -511,13 +521,13 @@ APPKIT_EXTERN NSString * const NSApplicationDidChangeOcclusionStateNotification 
 
 /*
  ** runModalForWindow:relativeToWindow: was deprecated in Mac OS 10.0.  
- ** Please use beginSheet:modalForWindow:modalDelegate:didEndSelector:contextInfo:
+ ** Please use -[NSWindow beginSheet:completionHandler:] instead
  */
 - (NSInteger)runModalForWindow:(NSWindow *)theWindow relativeToWindow:(NSWindow *)docWindow NS_DEPRECATED_MAC(10_0, 10_0);
 
 /* 
  ** beginModalSessionForWindow:relativeToWindow: was deprecated in Mac OS 10.0.
- ** Please use beginSheet:modalForWindow:modalDelegate:didEndSelector:contextInfo:
+ ** Please use -[NSWindow beginSheet:completionHandler:] instead
  */
 - (NSModalSession)beginModalSessionForWindow:(NSWindow *)theWindow relativeToWindow:(NSWindow *)docWindow NS_RETURNS_INNER_POINTER NS_DEPRECATED_MAC(10_0, 10_0);
 
@@ -526,18 +536,18 @@ APPKIT_EXTERN NSString * const NSApplicationDidChangeOcclusionStateNotification 
 
 /* These constants are deprecated in 10.9 and will be formally deprecated in the following release */
 enum {
-    NSRunStoppedResponse		= (-1000), // NSModalResponseStop should be used instead
-    NSRunAbortedResponse		= (-1001), // NSModalResponseAbort should be used instead
-    NSRunContinuesResponse              = (-1002)  // NSModalResponseContinue should be used instead
+    NSRunStoppedResponse NS_ENUM_DEPRECATED_MAC(10_0, 10_10, "Use NSModalResponseStop instead") = (-1000),
+    NSRunAbortedResponse NS_ENUM_DEPRECATED_MAC(10_0, 10_10, "Use NSModalResponseAbort instead") = (-1001),
+    NSRunContinuesResponse NS_ENUM_DEPRECATED_MAC(10_0, 10_10, "Use NSModalResponseContinue instead") = (-1002)
 };
 
 /* These methods are deprecated in 10.9 and will be formally deprecated in the following release.
  NSWindow's -beginSheet:completionHandler: and -endSheet:returnCode: should be used instead.
  NSApplication's -beginSheet:modalForWindow:modalDelegate:didEndSelector:contextInfo: will continue to work as it previously did, leaking contextInfo and failing when there is already an existing sheet.
  */
-- (void)beginSheet:(NSWindow *)sheet modalForWindow:(NSWindow *)docWindow modalDelegate:(id)modalDelegate didEndSelector:(SEL)didEndSelector contextInfo:(void *)contextInfo;
-- (void)endSheet:(NSWindow *)sheet;
-- (void)endSheet:(NSWindow *)sheet returnCode:(NSInteger)returnCode;
+- (void)beginSheet:(NSWindow *)sheet modalForWindow:(NSWindow *)docWindow modalDelegate:(id)modalDelegate didEndSelector:(SEL)didEndSelector contextInfo:(void *)contextInfo NS_DEPRECATED_MAC(10_0, 10_10, "Use -[NSWindow beginSheet:completionHandler:] instead");
+- (void)endSheet:(NSWindow *)sheet NS_DEPRECATED_MAC(10_0, 10_10, "Use -[NSWindow endSheet:] instead");
+- (void)endSheet:(NSWindow *)sheet returnCode:(NSInteger)returnCode NS_DEPRECATED_MAC(10_0, 10_10, "Use -[NSWindow endSheet:returnCode:] instead");
 
 
 @end

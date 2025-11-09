@@ -88,7 +88,7 @@
             called.
 */
 
-+ (IOBluetoothSDPDataElement *)withElementValue:(NSObject *)element;
++ (instancetype)withElementValue:(NSObject *)element;
 
 /*!
     @method withType:sizeDescriptor:size:value:
@@ -107,7 +107,7 @@
                     object is to be referenced and kept around, retain should be called.
 */
 
-+ (IOBluetoothSDPDataElement *)withType:(BluetoothSDPDataElementTypeDescriptor)type sizeDescriptor:(BluetoothSDPDataElementSizeDescriptor)newSizeDescriptor size:(uint32_t)newSize value:(NSObject *)newValue;
++ (instancetype)withType:(BluetoothSDPDataElementTypeDescriptor)type sizeDescriptor:(BluetoothSDPDataElementSizeDescriptor)newSizeDescriptor size:(uint32_t)newSize value:(NSObject *)newValue;
 
 /*!
     @method	withSDPDataElementRef:
@@ -116,7 +116,7 @@
 	@result		Returns the IOBluetoothSDPDataElement * for the given IOBluetoothSDPDataElementRef.
 */
 
-+ (IOBluetoothSDPDataElement *)withSDPDataElementRef:(IOBluetoothSDPDataElementRef)sdpDataElementRef;
++ (instancetype)withSDPDataElementRef:(IOBluetoothSDPDataElementRef)sdpDataElementRef;
 
 /*!
     @method initWithElementValue:
@@ -127,7 +127,7 @@
     @result Returns self if successful.  Returns nil if there was an error parsing the element value.
 */
 
-- (id)initWithElementValue:(NSObject *)element;
+- (instancetype)initWithElementValue:(NSObject *)element;
 
 /*!
     @method initWithType:sizeDescriptor:size:value:
@@ -144,7 +144,7 @@
                     due to the limited error checking currently done).
 */
 
-- (id)initWithType:(BluetoothSDPDataElementTypeDescriptor)newType sizeDescriptor:(BluetoothSDPDataElementSizeDescriptor)newSizeDescriptor size:(uint32_t)newSize value:(NSObject *)newValue;
+- (instancetype)initWithType:(BluetoothSDPDataElementTypeDescriptor)newType sizeDescriptor:(BluetoothSDPDataElementSizeDescriptor)newSizeDescriptor size:(uint32_t)newSize value:(NSObject *)newValue;
 
 /*!
     @method	getSDPDataElementRef

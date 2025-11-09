@@ -42,6 +42,7 @@
  * conventions at compile time.
  */
 
+#if defined(DOXYGEN) || !defined(WIN32)
 /**
  * The public APR-UTIL functions are declared with APU_DECLARE(), so they may
  * use the most appropriate calling convention.  Public APR functions with 
@@ -66,6 +67,19 @@
  * declarations within headers to properly import the variable.
  */
 #define APU_DECLARE_DATA
+#elif defined(APU_DECLARE_STATIC)
+#define APU_DECLARE(type)            type __stdcall
+#define APU_DECLARE_NONSTD(type)     type __cdecl
+#define APU_DECLARE_DATA
+#elif defined(APU_DECLARE_EXPORT)
+#define APU_DECLARE(type)            __declspec(dllexport) type __stdcall
+#define APU_DECLARE_NONSTD(type)     __declspec(dllexport) type __cdecl
+#define APU_DECLARE_DATA             __declspec(dllexport)
+#else
+#define APU_DECLARE(type)            __declspec(dllimport) type __stdcall
+#define APU_DECLARE_NONSTD(type)     __declspec(dllimport) type __cdecl
+#define APU_DECLARE_DATA             __declspec(dllimport)
+#endif
 
 #if !defined(WIN32) || defined(APU_MODULE_DECLARE_STATIC)
 /**
@@ -101,6 +115,10 @@
 #define APU_HAVE_ORACLE        0
 #define APU_HAVE_FREETDS       0
 #define APU_HAVE_ODBC          0
+
+#define APU_HAVE_CRYPTO        0
+#define APU_HAVE_OPENSSL       0
+#define APU_HAVE_NSS           0
 
 #define APU_HAVE_APR_ICONV     0
 #define APU_HAVE_ICONV         1

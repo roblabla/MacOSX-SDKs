@@ -1,6 +1,6 @@
 /*
-vForce.h (from vecLib-423.32)
-Copyright 1999-2013 Apple Inc.  All rights reserved.
+vForce.h (from vecLib-516.0)
+Copyright 1999-2014 Apple Inc.  All rights reserved.
 
 @APPLE_LICENSE_HEADER_START@
 
@@ -66,6 +66,10 @@ void vvdiv (double * /* z */, const double * /* y */, const double * /* x */, co
 void vvsqrtf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0); 
 void vvsqrt (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0); 
 
+/* Set y[i] to the cube root of x[i], for i=0,..,n-1 */
+void vvcbrtf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+void vvcbrt (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+    
 /* Set y[i] to the reciprocal of the square root of x[i], for i=0,..,n-1 */
 void vvrsqrtf (float * /* y */, const float * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0); 
 void vvrsqrt (double * /* y */, const double * /* x */, const int * /* n */) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_5_0); 

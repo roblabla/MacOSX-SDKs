@@ -71,14 +71,16 @@ typedef SCSIDeviceIdentifier 	SCSITargetIdentifier;
 
 typedef SCSIDeviceIdentifier 	SCSIInitiatorIdentifier;
 
-/*! @The SCSI Primary Commands specification treats the 64-bits
-	@of LUN information as 4 2-byte structures.
-	@
-	@Use of the 64-bit SCSILogicalUnitNumber is now deprecated. Since it
-	@was not defined on Mac OS X how the 64-bits were encoded for hierarchical
-	@units and all usage was simply as a 64-bit number, changing the encoding
-	@scheme now would result in non-binary compatible code. New APIs have been
-	@added to retrieve the LUN bytes from the SCSITask and set them in the SCSITask.
+/*! @typedef SCSILogicalUnitBytes[8]
+    @abstract 8-Byte array to represent LUN information
+    @discussion The SCSI Primary Commands specification treats the 64-bits
+	of LUN information as 4 2-byte structures.
+	
+	Use of the 64-bit SCSILogicalUnitNumber is now deprecated. Since it
+	was not defined on Mac OS X how the 64-bits were encoded for hierarchical
+	units and all usage was simply as a 64-bit number, changing the encoding
+	scheme now would result in non-binary compatible code. New APIs have been
+	added to retrieve the LUN bytes from the SCSITask and set them in the SCSITask.
  */
 typedef UInt8					SCSILogicalUnitBytes[8];
 typedef UInt64					SCSILogicalUnitNumber;          // DEPRECATED

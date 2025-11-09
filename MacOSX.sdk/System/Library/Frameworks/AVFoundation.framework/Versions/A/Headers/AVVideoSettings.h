@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2013 Apple Inc. All rights reserved.
+	Copyright 2010-2014 Apple Inc. All rights reserved.
 
 */
 
@@ -47,7 +47,7 @@ AVF_EXPORT NSString *const AVVideoHeightKey /* NSNumber (encoded pixels) */					
  @discussion
 	The value for this key is an NSDictionary containing AVVideoPixelAspectRatio*Key keys.  If no value is specified for this key, the default value for the codec is used.  Usually this is 1:1, meaning square pixels.
  
-	Note that prior to OSX 10.9 and iOS 7.0, this key could only be specified as part of the dictionary given for AVVideoCompressionPropertiesKey.  As of OSX 10.9 and iOS 7.0, the top level of an AVVideoSettings dictionary is the preferred place to specify this key.
+	Note that prior to OS X 10.9 and iOS 7.0, this key could only be specified as part of the dictionary given for AVVideoCompressionPropertiesKey.  As of OS X 10.9 and iOS 7.0, the top level of an AVVideoSettings dictionary is the preferred place to specify this key.
 */
 AVF_EXPORT NSString *const AVVideoPixelAspectRatioKey										NS_AVAILABLE(10_7, 4_0);
 	AVF_EXPORT NSString *const AVVideoPixelAspectRatioHorizontalSpacingKey /* NSNumber */	NS_AVAILABLE(10_7, 4_0);
@@ -61,7 +61,7 @@ AVF_EXPORT NSString *const AVVideoPixelAspectRatioKey										NS_AVAILABLE(10_7
  
 	If no clean aperture region is specified, the entire frame will be displayed during playback.
  
-	Note that prior to OSX 10.9 and iOS 7.0, this key could only be specified as part of the dictionary given for AVVideoCompressionPropertiesKey.  As of OSX 10.9 and iOS 7.0, the top level of an AVVideoSettings dictionary is the preferred place to specify this key.
+	Note that prior to OS X 10.9 and iOS 7.0, this key could only be specified as part of the dictionary given for AVVideoCompressionPropertiesKey.  As of OS X 10.9 and iOS 7.0, the top level of an AVVideoSettings dictionary is the preferred place to specify this key.
 */
 AVF_EXPORT NSString *const AVVideoCleanApertureKey											NS_AVAILABLE(10_7, 4_0);
 	AVF_EXPORT NSString *const AVVideoCleanApertureWidthKey /* NSNumber */					NS_AVAILABLE(10_7, 4_0);
@@ -118,15 +118,28 @@ AVF_EXPORT NSString *const AVVideoColorPropertiesKey /* NSDictionary, all 3 belo
  @abstract
 	The value for this key is an instance of NSDictionary, containing properties to be passed down to the video encoder.
  @discussion
-	Package the below keys in an instance of NSDictionary and use it as the value for AVVideoCompressionPropertiesKey in the top-level AVVideoSettings dictionary.  In addition to the keys listed below, on OSX you can also include keys from VideoToolbox/VTCompressionProperties.h.
+	Package the below keys in an instance of NSDictionary and use it as the value for AVVideoCompressionPropertiesKey in the top-level AVVideoSettings dictionary.  In addition to the keys listed below, you can also include keys from VideoToolbox/VTCompressionProperties.h.
  
 	Most keys can only be used for certain encoders.  Look at individual keys for details.
  */
 AVF_EXPORT NSString *const AVVideoCompressionPropertiesKey /* NSDictionary */                                NS_AVAILABLE(10_7, 4_0);
 	AVF_EXPORT NSString *const AVVideoAverageBitRateKey /* NSNumber (bits per second, H.264 only) */         NS_AVAILABLE(10_7, 4_0);
 	AVF_EXPORT NSString *const AVVideoQualityKey /* NSNumber (0.0-1.0, JPEG only) */                         NS_AVAILABLE(10_7, 5_0);
-	AVF_EXPORT NSString *const AVVideoMaxKeyFrameIntervalKey /* NSNumber (1 means key frames only, H.264 only) */ NS_AVAILABLE(10_7, 4_0);
-	AVF_EXPORT NSString *const AVVideoMaxKeyFrameIntervalDurationKey /* NSNumber (0 means no limit, H.264 only) */ NS_AVAILABLE(10_9, 7_0);
+	AVF_EXPORT NSString *const AVVideoMaxKeyFrameIntervalKey /* NSNumber (frames, 1 means key frames only, H.264 only) */ NS_AVAILABLE(10_7, 4_0);
+	AVF_EXPORT NSString *const AVVideoMaxKeyFrameIntervalDurationKey /* NSNumber (seconds, 0.0 means no limit, H.264 only) */ NS_AVAILABLE(10_9, 7_0);
+
+	/*!
+	 @constant	AVVideoAllowFrameReorderingKey
+	 @abstract
+		 Enables or disables frame reordering.
+	 @discussion
+		 In order to achieve the best compression while maintaining image quality, some video encoders can reorder frames.  This means that the order in which the frames will be emitted and stored (the decode order) will be different from the order in which they are presented to the video encoder (the display order).
+		
+		Encoding using frame reordering requires more system resources than encoding without frame reordering, so encoding performance should be taken into account when deciding whether to enable frame reordering.  This is especially important when encoding video data from a real-time source, such as AVCaptureVideoDataOutput.  In this situation, using a value of @NO for AVVideoAllowFrameReorderingKey may yield the best results.
+	 
+		The default is @YES, which means that the encoder decides whether to enable frame reordering.
+	 */
+	AVF_EXPORT NSString *const AVVideoAllowFrameReorderingKey /* NSNumber (BOOL) */							 NS_AVAILABLE(10_10, 7_0);
 
 	AVF_EXPORT NSString *const AVVideoProfileLevelKey /* NSString, H.264 only, one of: */                    NS_AVAILABLE(10_8, 4_0);
 		AVF_EXPORT NSString *const AVVideoProfileLevelH264Baseline30 /* Baseline Profile Level 3.0 */        NS_AVAILABLE(10_8, 4_0);
@@ -142,3 +155,45 @@ AVF_EXPORT NSString *const AVVideoCompressionPropertiesKey /* NSDictionary */   
 		AVF_EXPORT NSString *const AVVideoProfileLevelH264High41 /* High Profile Level 4.1 */                NS_AVAILABLE(10_9, 6_0);
 		AVF_EXPORT NSString *const AVVideoProfileLevelH264HighAutoLevel /* High Profile Auto Level */        NS_AVAILABLE(10_9, 7_0);
 
+	/*!
+	 @constant	AVVideoH264EntropyModeKey
+	 @abstract
+		The entropy encoding mode for H.264 compression.
+	 @discussion
+		If supported by an H.264 encoder, this property controls whether the encoder should use Context-based Adaptive Variable Length Coding (CAVLC) or Context-based Adaptive Binary Arithmetic Coding (CABAC).  CABAC generally gives better compression at the expense of higher computational overhead.  The default value is encoder-specific and may change depending on other encoder settings.  Care should be taken when using this property -- changes may result in a configuration which is not compatible with a requested Profile and Level.  Results in this case are undefined, and could include encode errors or a non-compliant output stream.
+	*/
+	AVF_EXPORT NSString *const AVVideoH264EntropyModeKey     /* NSString, H.264 only, one of: */			 NS_AVAILABLE(10_10, 7_0);
+		AVF_EXPORT NSString *const AVVideoH264EntropyModeCAVLC /* Context-based Adaptive Variable Length Coding */   NS_AVAILABLE(10_10, 7_0);
+		AVF_EXPORT NSString *const AVVideoH264EntropyModeCABAC /* Context-based Adaptive Binary Arithmetic Coding */ NS_AVAILABLE(10_10, 7_0);
+
+	/*!
+	 @constant	AVVideoExpectedSourceFrameRateKey
+	 @abstract
+		Indicates the expected source frame rate, if known.
+	 @discussion
+		The frame rate is measured in frames per second. This is not used to control the frame rate; it is provided as a hint to the video encoder so that it can set up internal configuration before compression begins. The actual frame rate will depend on frame durations and may vary. This should be set if an AutoLevel AVVideoProfileLevelKey is used, or if the source content has a high frame rate (higher than 30 fps). The encoder might have to drop frames to satisfy bit stream requirements if this key is not specified.
+	 */
+	AVF_EXPORT NSString *const AVVideoExpectedSourceFrameRateKey /* NSNumber (frames per second) */				NS_AVAILABLE(10_10, 7_0);
+
+	/*!
+	 @constant	AVVideoAverageNonDroppableFrameRateKey
+	 @abstract
+		The desired average number of non-droppable frames to be encoded for each second of video.
+	 @discussion
+		Some video encoders can produce a flexible mixture of non-droppable frames and droppable frames.  The difference between these types is that it is necessary for a video decoder to decode a non-droppable frame in order to successfully decode subsequent frames, whereas droppable frames are optional and can be skipped without impact on decode of subsequent frames.  Having a proportion of droppable frames in a sequence has advantages for temporal scalability: at playback time more or fewer frames may be decoded depending on the play rate.  This property requests that the encoder emit an overall proportion of non-droppable and droppable frames so that there are the specified number of non-droppable frames per second.
+ 
+		For example, to specify that the encoder should include an average of 30 non-droppable frames for each second of video:
+ 
+		[myVideoSettings setObject:@30 forKey:AVVideoAverageNonDroppableFrameRateKey];
+	 */
+	AVF_EXPORT NSString *const AVVideoAverageNonDroppableFrameRateKey /* NSNumber (frames per second) */		NS_AVAILABLE(10_10, 7_0);
+
+/*!
+	@constant AVVideoEncoderSpecificationKey
+	@abstract
+		The video encoder specification includes options for choosing a specific video encoder.
+		
+	@discussion
+		The value for this key is a dictionary containing kVTVideoEncoderSpecification_* keys specified in the VideoToolbox framework.  This key should be specified at the top level of an AVVideoSettings dictionary.
+ */
+AVF_EXPORT NSString *const AVVideoEncoderSpecificationKey /* NSDictionary */ NS_AVAILABLE(10_10, NA);

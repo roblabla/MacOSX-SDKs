@@ -1,7 +1,7 @@
 /*
         NSPopUpButton.h
         Application Kit
-        Copyright (c) 1997-2013, Apple Inc.
+        Copyright (c) 1997-2014, Apple Inc.
         All rights reserved.
 */
 
@@ -23,21 +23,17 @@
 #endif
 }
 
-- (id)initWithFrame:(NSRect)buttonFrame pullsDown:(BOOL)flag;
+- (instancetype)initWithFrame:(NSRect)buttonFrame pullsDown:(BOOL)flag;
 
 // Overrides behavior of NSView.  This is the menu for the popup, not a context menu.  PopUpButtons do not have context menus.
-- (void)setMenu:(NSMenu *)menu;
-- (NSMenu *)menu;
+@property (strong) NSMenu *menu;
 
 // Behavior settings
-- (void)setPullsDown:(BOOL)flag;
-- (BOOL)pullsDown;
+@property BOOL pullsDown;
     
-- (void)setAutoenablesItems:(BOOL)flag;
-- (BOOL)autoenablesItems;
+@property BOOL autoenablesItems;
 
-- (void)setPreferredEdge:(NSRectEdge)edge;
-- (NSRectEdge)preferredEdge;
+@property NSRectEdge preferredEdge;
     // The preferred edge is used for pull down menus and for popups under severe screen position restrictions.  It indicates what edge of the cell the menu should pop out from.
 
 // Adding and removing items
@@ -51,8 +47,8 @@
 
 
 // Accessing the items
-- (NSArray *)itemArray;
-- (NSInteger)numberOfItems;
+@property (readonly, copy) NSArray *itemArray;
+@property (readonly) NSInteger numberOfItems;
 
 - (NSInteger)indexOfItem:(NSMenuItem *)item;
 - (NSInteger)indexOfItemWithTitle:(NSString *)title;
@@ -62,7 +58,7 @@
 
 - (NSMenuItem *)itemAtIndex:(NSInteger)index;
 - (NSMenuItem *)itemWithTitle:(NSString *)title;
-- (NSMenuItem *)lastItem;
+@property (readonly, strong) NSMenuItem *lastItem;
 
 
 // Dealing with selection
@@ -72,14 +68,15 @@
 - (BOOL)selectItemWithTag:(NSInteger)tag;
 - (void)setTitle:(NSString *)aString;
 
-- (NSMenuItem *)selectedItem;
-- (NSInteger)indexOfSelectedItem;
+@property (readonly, strong) NSMenuItem *selectedItem;
+@property (readonly) NSInteger indexOfSelectedItem;
+@property (readonly) NSInteger selectedTag;
 - (void)synchronizeTitleAndSelectedItem;
 
 // Title conveniences
 - (NSString *)itemTitleAtIndex:(NSInteger)index;
-- (NSArray *)itemTitles;
-- (NSString *)titleOfSelectedItem;
+@property (readonly, copy) NSArray *itemTitles;
+@property (readonly, copy) NSString *titleOfSelectedItem;
 
 @end
 

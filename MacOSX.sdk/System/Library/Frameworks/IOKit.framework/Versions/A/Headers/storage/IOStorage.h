@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2013 Apple Inc. All rights reserved.
+ * Copyright (c) 1998-2014 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -71,18 +71,6 @@
 #define kIOStorageFeaturesKey "IOStorageFeatures"
 
 /*!
- * @defined kIOStorageFeatureUnmap
- * @abstract
- * Describes the presence of the Unmap feature.
- * @discussion
- * This property describes the ability of the storage stack to delete unused
- * data from the media.  It is one of the feature entries listed under the top-
- * level kIOStorageFeaturesKey property table.  It has an OSBoolean value.
- */
-
-#define kIOStorageFeatureUnmap "Unmap"
-
-/*!
  * @defined kIOStorageFeatureForceUnitAccess
  * @abstract
  * Describes the presence of the Force Unit Access feature.
@@ -93,5 +81,29 @@
  */
 
 #define kIOStorageFeatureForceUnitAccess "Force Unit Access"
+
+/*!
+ * @defined kIOStorageFeaturePriority
+ * @abstract
+ * Describes the presence of the Priority feature.
+ * @discussion
+ * This property describes the ability of the storage stack to enforce the
+ * priority of a request.  It is one of the feature entries listed under the
+ * top-level kIOStorageFeaturesKey property table.  It has an OSBoolean value.
+ */
+
+#define kIOStorageFeaturePriority "Priority"
+
+/*!
+ * @defined kIOStorageFeatureUnmap
+ * @abstract
+ * Describes the presence of the Unmap feature.
+ * @discussion
+ * This property describes the ability of the storage stack to delete unused
+ * data from the media.  It is one of the feature entries listed under the top-
+ * level kIOStorageFeaturesKey property table.  It has an OSBoolean value.
+ */
+
+#define kIOStorageFeatureUnmap "Unmap"
 
 #endif /* !_IOSTORAGE_H */

@@ -11,9 +11,10 @@
 
 SK_EXPORT @interface SKPhysicsContact : NSObject
 
-@property (SK_NONATOMIC_IOSONLY, readonly) SKPhysicsBody *bodyA;
-@property (SK_NONATOMIC_IOSONLY, readonly) SKPhysicsBody *bodyB;
-@property (SK_NONATOMIC_IOSONLY, readonly) CGPoint contactPoint;
-@property (SK_NONATOMIC_IOSONLY, readonly) CGFloat collisionImpulse;
+@property (nonatomic, readonly) SKPhysicsBody *bodyA;
+@property (nonatomic, readonly) SKPhysicsBody *bodyB;
+@property (nonatomic, readonly) CGPoint contactPoint;
+@property (nonatomic, readonly) CGVector contactNormal;
+@property (nonatomic, readonly) CGFloat collisionImpulse;
 
 @end

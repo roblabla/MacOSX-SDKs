@@ -1,5 +1,5 @@
 /*	NSRange.h
-	Copyright (c) 1994-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSValue.h>
@@ -41,7 +41,7 @@ FOUNDATION_EXPORT NSRange NSRangeFromString(NSString *aString);
 @interface NSValue (NSValueRangeExtensions)
 
 + (NSValue *)valueWithRange:(NSRange)range;
-- (NSRange)rangeValue;
+@property (readonly) NSRange rangeValue;
 
 @end
 

@@ -1,7 +1,7 @@
 /*
     NSBrowser.h
     Application Kit
-    Copyright (c) 1994-2013, Apple Inc.
+    Copyright (c) 1994-2014, Apple Inc.
     All rights reserved.
 */
 
@@ -76,7 +76,7 @@ typedef struct __Brflags {
 } _Brflags;
 
 
-enum {
+typedef NS_ENUM(NSUInteger, NSBrowserColumnResizingType) {
 /* Column sizes are fixed and set by developer.     
  */
     NSBrowserNoColumnResizing = 0,
@@ -91,26 +91,20 @@ enum {
 };
 
 
-typedef NSUInteger NSBrowserColumnResizingType;
-
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
 /* In drag and drop, used to specify the drop operation from inside the delegate method browser:validateDrop:proposedRow:column:dropOperation. See the delegate method description for more information.
  */
-enum { 
-    NSBrowserDropOn, 
+typedef NS_ENUM(NSUInteger, NSBrowserDropOperation) { 
+    NSBrowserDropOn,
     NSBrowserDropAbove,
-};
+} NS_ENUM_AVAILABLE_MAC(10_5);
 
-#endif
-
-typedef NSUInteger NSBrowserDropOperation;
 
 @interface NSBrowser : NSControl
 {
     /* All instance variables are private */
-    id                  _target;
-    SEL                 _action;
+    id                  _nsreserved2;
+    SEL                 _nsreserved3;
     id                  _delegate;
     SEL                 _doubleAction;
     Class               _matrixClass;
@@ -132,45 +126,28 @@ typedef NSUInteger NSBrowserDropOperation;
 + (Class)cellClass;
 
 - (void)loadColumnZero;
-- (BOOL)isLoaded;
+@property (getter=isLoaded, readonly) BOOL loaded;
 
-- (void)setDoubleAction:(SEL)aSelector;
-- (SEL)doubleAction;
-- (void)setMatrixClass:(Class)factoryId;
-- (Class)matrixClass;
+@property SEL doubleAction;
 - (void)setCellClass:(Class)factoryId;
-- (void)setCellPrototype:(NSCell *)aCell;
-- (id)cellPrototype;
-- (void)setDelegate:(id <NSBrowserDelegate>)anObject;
-- (id <NSBrowserDelegate>)delegate;
-- (void)setReusesColumns:(BOOL)flag;
-- (BOOL)reusesColumns;
+@property (strong) id /* NSCell * */ cellPrototype;
+@property (assign) id<NSBrowserDelegate> delegate;
+@property BOOL reusesColumns;
 
-- (void)setHasHorizontalScroller:(BOOL)flag;
-- (BOOL)hasHorizontalScroller;
-- (void)setAutohidesScroller:(BOOL)flag NS_AVAILABLE_MAC(10_6);
-- (BOOL)autohidesScroller NS_AVAILABLE_MAC(10_6);
-- (void)setSeparatesColumns:(BOOL)flag;
-- (BOOL)separatesColumns;
-- (void)setTitled:(BOOL)flag;
-- (BOOL)isTitled;
-- (void)setMinColumnWidth:(CGFloat)columnWidth;
-- (CGFloat)minColumnWidth;
+@property BOOL hasHorizontalScroller;
+@property BOOL autohidesScroller NS_AVAILABLE_MAC(10_6);
+@property BOOL separatesColumns;
+@property (getter=isTitled) BOOL titled;
+@property CGFloat minColumnWidth;
 
-- (void)setMaxVisibleColumns:(NSInteger)columnCount;
-- (NSInteger)maxVisibleColumns;
+@property NSInteger maxVisibleColumns;
 
-- (void)setAllowsMultipleSelection:(BOOL)flag;
-- (BOOL)allowsMultipleSelection;
-- (void)setAllowsBranchSelection:(BOOL)flag;
-- (BOOL)allowsBranchSelection;
-- (void)setAllowsEmptySelection:(BOOL)flag;
-- (BOOL)allowsEmptySelection;
-- (void)setTakesTitleFromPreviousColumn:(BOOL)flag;
-- (BOOL)takesTitleFromPreviousColumn;
+@property BOOL allowsMultipleSelection;
+@property BOOL allowsBranchSelection;
+@property BOOL allowsEmptySelection;
+@property BOOL takesTitleFromPreviousColumn;
 
-- (void)setSendsActionOnArrowKeys:(BOOL)flag;
-- (BOOL)sendsActionOnArrowKeys;
+@property BOOL sendsActionOnArrowKeys;
 
 /* Returns the item at the given index path. This method can only be used if the delegate implements the item data source methods. The indexPath must be displayable in the browser.
  */
@@ -202,47 +179,38 @@ typedef NSUInteger NSBrowserDropOperation;
 
 - (void)setTitle:(NSString *)aString ofColumn:(NSInteger)column;
 - (NSString *)titleOfColumn:(NSInteger)column;
-- (void)setPathSeparator:(NSString *)newString;
-- (NSString *)pathSeparator;
+@property (copy) NSString *pathSeparator;
 - (BOOL)setPath:(NSString *)path;
 - (NSString *)path;
 - (NSString *)pathToColumn:(NSInteger)column;
 
 /* Returns the column and row clicked on to display a context menu. These methods will return -1 when no menu is active.
  */
-- (NSInteger)clickedColumn NS_AVAILABLE_MAC(10_6);
-- (NSInteger)clickedRow NS_AVAILABLE_MAC(10_6);
+@property (readonly) NSInteger clickedColumn NS_AVAILABLE_MAC(10_6);
+@property (readonly) NSInteger clickedRow NS_AVAILABLE_MAC(10_6);
 
-- (NSInteger)selectedColumn;
+@property (readonly) NSInteger selectedColumn;
 
 /* For the item based browser, selectedCell returns the prepared cell at the selected row in the selected column.
  */
-- (id)selectedCell;
+@property (readonly, strong) id selectedCell;
 - (id)selectedCellInColumn:(NSInteger)column;
 
 /* For the item based browser, selectedCells returns a copy of all prepared cells in the selected row in the selected column
  */
-- (NSArray *)selectedCells;
+@property (readonly, copy) NSArray *selectedCells;
 
 - (void)selectRow:(NSInteger)row inColumn:(NSInteger)column;
 
 - (NSInteger)selectedRowInColumn:(NSInteger)column;
 
-/* Returns the index path of the item selected in the browser, or nil if there is no selection.
+/* Returns the index path of the item selected in the browser, or nil if there is no selection. The setter sets the browser's selection to the item at path. Throws an exception if the path is invalid. This method can only be used if the delegate implements the item data source methods.
  */
-- (NSIndexPath *)selectionIndexPath NS_AVAILABLE_MAC(10_6);
+@property (copy) NSIndexPath *selectionIndexPath NS_AVAILABLE_MAC(10_6);
 
-/* Sets the browser's selection to the item at path. Throws an exception if the path is invalid. This method can only be used if the delegate implements the item data source methods.
+/* Returns the index paths of all items selected in the browser. The setter sets the browser's selection to the specified index paths. Throws an exception if any of the paths are invalid. This method can only be used if the delegate implements the item data source methods.
  */
-- (void)setSelectionIndexPath:(NSIndexPath *)path NS_AVAILABLE_MAC(10_6);
-
-/* Returns the index paths of all items selected in the browser. 
- */
-- (NSArray *)selectionIndexPaths NS_AVAILABLE_MAC(10_6);
-
-/* Sets the browser's selection to the specified index paths. Throws an exception if any of the paths are invalid. This method can only be used if the delegate implements the item data source methods.
- */
-- (void)setSelectionIndexPaths:(NSArray *)paths NS_AVAILABLE_MAC(10_6);
+@property (copy) NSArray *selectionIndexPaths NS_AVAILABLE_MAC(10_6);
 
 /* Sets the selected row 'indexes' in the matrix located at 'column'. 
  */
@@ -258,40 +226,29 @@ typedef NSUInteger NSBrowserDropOperation;
 - (void)scrollColumnsLeftBy:(NSInteger)shiftAmount;
 - (void)scrollColumnToVisible:(NSInteger)column;
 
-/* Returns the last loaded column. This is equal to the total number of columns minus 1.
+/* Returns the last loaded column. This is equal to the total number of columns minus 1. When setting. 'column' must be equal to or less than -lastColumn. To add more columns, use -addColumn.
  */
-- (NSInteger)lastColumn;
-
-/* Sets the last loaded column. 'column' must be equal to or less than -lastColumn. To add more columns, use -addColumn.
- */
-- (void)setLastColumn:(NSInteger)column;
+@property NSInteger lastColumn;
 
 /* Adds a column at the end. To remove columns, use -setLastColumn:
  */
 - (void)addColumn;
 
-- (NSInteger)numberOfVisibleColumns;
-- (NSInteger)firstVisibleColumn;
-- (NSInteger)lastVisibleColumn;
+@property (readonly) NSInteger numberOfVisibleColumns;
+@property (readonly) NSInteger firstVisibleColumn;
+@property (readonly) NSInteger lastVisibleColumn;
 
-/* Returns the column that matrix represents. This method will return -1 if the delegate does not implement the matrix data source methods.
- */
-- (NSInteger)columnOfMatrix:(NSMatrix *)matrix;
-
-/* Return the matrix representing column. This method will return nil if the delegate does not implement the matrix data source methods.
- */
-- (NSMatrix *)matrixInColumn:(NSInteger)column;
 
 - (id)loadedCellAtRow:(NSInteger)row column:(NSInteger)col;
 - (void)selectAll:(id)sender;
 - (void)tile;
 - (void)doClick:(id)sender;
 - (void)doDoubleClick:(id)sender;
-- (BOOL)sendAction;
+@property (readonly) BOOL sendAction;
 
 - (NSRect)titleFrameOfColumn:(NSInteger)column;
 - (void)drawTitleOfColumn:(NSInteger)column inRect:(NSRect)aRect;
-- (CGFloat)titleHeight;
+@property (readonly) CGFloat titleHeight;
 - (NSRect)frameOfColumn:(NSInteger)column;
 - (NSRect)frameOfInsideOfColumn:(NSInteger)column;
 
@@ -310,13 +267,11 @@ typedef NSUInteger NSBrowserDropOperation;
 
 /* Default is NSBrowserAutoColumnResizing.  This setting is persistent. 
  */
-- (void)setColumnResizingType:(NSBrowserColumnResizingType)columnResizingType;
-- (NSBrowserColumnResizingType)columnResizingType;
+@property NSBrowserColumnResizingType columnResizingType;
 
 /* Default is NO.  This setting is persistent.  This setting only applies to NSBrowserUserColumnResizing type browsers.  If YES, the browser defaults to resizing all columns simultaneously, otherwise it defaults to single column resizing. Holding down the option key while resizing switches the type of resizing used. 
  */
-- (void)setPrefersAllColumnUserResizing:(BOOL)prefersAllColumnResizing;
-- (BOOL)prefersAllColumnUserResizing;
+@property BOOL prefersAllColumnUserResizing;
 
 /* setWidth:ofColumn: does nothing if columnResizingType is NSBrowserAutoColumnResizing.  Otherwise, Sets the width of the specified column.  Due to binary compatibility constraints, you may still set the default width for new columns by passing a columnIndex of -1; you are encouraged to use -setDefaultColumnWidth: instead.  NSBrowserColumnConfigurationDidChangeNotification will be posted (not immediately) if necessary.  The receiver will autosave its column configuration if necessary. 
  */
@@ -325,8 +280,7 @@ typedef NSUInteger NSBrowserDropOperation;
 
 /* Get and set the rowHeight. The value must be greater than 0. Calling -setRowHeight: with a non-pixel aligning (fractional) value will be forced to a pixel aligning (integral) value. For variable row height browsers (ones that have the delegate implement -browser:heightOfRow:column:), -rowHeight will be used to draw alternating rows past the last row in each browser column. The default value is 17.0. Note: The rowHeight methods are only valid when using the item delegate methods introduced in Mac OS 10.6. (see NSObject(NSBrowserDelegate)). An exception is thrown if using the older matrix delegate methods 
  */
-- (void)setRowHeight:(CGFloat)height NS_AVAILABLE_MAC(10_6);
-- (CGFloat)rowHeight NS_AVAILABLE_MAC(10_6);
+@property CGFloat rowHeight NS_AVAILABLE_MAC(10_6);
 
 /* If the delegate implements -browser:heightOfRow:inColumn:, this method immediately re-tiles the browser columns using row heights it provides.
 */
@@ -340,8 +294,7 @@ typedef NSUInteger NSBrowserDropOperation;
 
 /* Sets the name used to automatically save the receivers column configuration.  This setting is persistent.  If name is different from the current name, this method also reads in the saved column configuration for the new name and applies the values to the browser.  Column configuration is defined as an array of column content widths.  One width is saved for each level the user has reached.  That is, browser saves column width based on depth, not based on unique paths.  To do more complex column persistence, you should register for NSBrowserColumnConfigurationDidChangeNotifications and handle persistence yourself. 
  */
-- (void)setColumnsAutosaveName:(NSString *)name;
-- (NSString *)columnsAutosaveName;
+@property (copy) NSString *columnsAutosaveName;
 
 /* Removes the column data stored under name from the applications user defaults. 
  */
@@ -367,13 +320,11 @@ typedef NSUInteger NSBrowserDropOperation;
 
 /* Allow type selection in this NSBrowser. The default for 'allowsTypeSelect' is YES.
  */
-- (BOOL)allowsTypeSelect NS_AVAILABLE_MAC(10_5);
-- (void)setAllowsTypeSelect:(BOOL)value NS_AVAILABLE_MAC(10_5);
+@property BOOL allowsTypeSelect NS_AVAILABLE_MAC(10_5);
 
 /* The background color to be drawn. By default, it will be set [NSColor whiteColor]. You can use [NSColor clearColor] to make the background transparent. NSBrowser will return YES from isOpaque if the backgroundColor has an alphaComponent of 1.0 and it doesn't have a title, otherwise, it will return NO. Calling setBackgroundColor: will cause all NSMatrix instances have setDrawsBackground:NO be called in order for the NSBrowser's background color to show through. When drawing with the background color, NSCompositeSourceOver is used for the compositing operation.
  */
-- (void)setBackgroundColor:(NSColor *)color NS_AVAILABLE_MAC(10_5);
-- (NSColor *)backgroundColor NS_AVAILABLE_MAC(10_5);
+@property (strong) NSColor *backgroundColor NS_AVAILABLE_MAC(10_5);
 
 /* Begins editing the item at the specified path. theEvent may be nil if programatically editing. The cell's contents will be selected if select is YES. Overriding this method will not affect the editing behavior of the browser.
  */
@@ -397,6 +348,7 @@ APPKIT_EXTERN NSString *NSBrowserColumnConfigurationDidChangeNotification;
 /* As of Mac OS X 10.6, browser has two different mechanisms for populating columns. You may implement either the matrix or item delegate methods listed below. Many newer features of the browser are only available if you implement the item delegate methods. */
 
 /* Implement one of the following two methods to populate the browser's columns with instances of NSMatrix.
+   Note: the matrix based NSBrowser is deprecated in Mac OS 10.10.  New code should use the item based interface.
  */
 /* Called by the browser to determine the number of rows in the given column. The delegate will be called with -browser:willDisplayCell:atRow:column: before displaying each cell, giving it a chance to fill in the NSBrowserCell properties.
  */
@@ -408,7 +360,7 @@ APPKIT_EXTERN NSString *NSBrowserColumnConfigurationDidChangeNotification;
 
 #pragma mark -
 
-/* Alternatively, implement all of the following methods, patterened after NSOutlineView's data source methods. Note that browsers with delegates implementing these methods do not use NSMatrix to populate columns; the implementation is private. The item parameter passed to each of these methods will be nil if the browser is querying about the root of the tree, unless -rootItemForBrowser: is implemented.
+/* Alternatively, implement all of the following methods, patterned after NSOutlineView's data source methods. Note that browsers with delegates implementing these methods do not use NSMatrix to populate columns; the implementation is private. The item parameter passed to each of these methods will be nil if the browser is querying about the root of the tree, unless -rootItemForBrowser: is implemented.
 */
 
 /* Return the number of children of the given item. */
@@ -477,7 +429,7 @@ APPKIT_EXTERN NSString *NSBrowserColumnConfigurationDidChangeNotification;
  */
 
 /* Optional for browsers with resize type NSBrowserNoColumnResizing, and NSBrowserUserColumnResizing.
- This method is used for both constraining column resize, and determining a columns initial size.  If 'forUserResize' is NO, this method should return the initial width for a newly added column.  If 'forUserResize' is YES, this method can be used to constrain resizing on a per-column basis.  (Currently per-column constraining is not implemented, so forUserResize will always be NO).
+ This method is used for both constraining column resize, and determining a columns initial size.  If 'forUserResize' is NO, this method should return the initial width for a newly added column.  If 'forUserResize' is YES, this method can be used to constrain resizing on a per-column basis.  (Currently per-column constraining is only implemented for single column resize).
  */
 - (CGFloat)browser:(NSBrowser *)browser shouldSizeColumn:(NSInteger)columnIndex forUserResize:(BOOL)forUserResize toWidth:(CGFloat)suggestedWidth;
 
@@ -598,5 +550,12 @@ APPKIT_EXTERN NSString *NSBrowserColumnConfigurationDidChangeNotification;
 /* Use of -updateScroller is deprecated in 10.3.  Continuous scrolling no longer requires this functionality.
  */
 - (void)updateScroller NS_DEPRECATED_MAC(10_0, 10_3);
+
+/* Matrix based NSBrowser is deprecated in 10.10.
+ */
+- (void)setMatrixClass:(Class)factoryId  NS_DEPRECATED_MAC(10_0, 10_10, "Use the item based NSBrowser instead");
+- (Class)matrixClass  NS_DEPRECATED_MAC(10_0, 10_10, "Use the item based NSBrowser instead");
+- (NSInteger)columnOfMatrix:(NSMatrix *)matrix  NS_DEPRECATED_MAC(10_0, 10_10, "Use the item based NSBrowser instead");
+- (NSMatrix *)matrixInColumn:(NSInteger)column  NS_DEPRECATED_MAC(10_0, 10_10, "Use the item based NSBrowser instead");
 
 @end

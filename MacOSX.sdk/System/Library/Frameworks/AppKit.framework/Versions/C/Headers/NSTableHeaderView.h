@@ -1,7 +1,7 @@
 /*
     NSTableHeaderView.h
     Application Kit
-    Copyright (c) 1995-2013, Apple Inc.
+    Copyright (c) 1995-2014, Apple Inc.
     All rights reserved.
 */
 
@@ -12,8 +12,7 @@
 @class NSImage;
 @class NSCursor;
 
-@interface NSTableHeaderView : NSView
-{
+@interface NSTableHeaderView : NSView {
     /* All instance variables are private */ 
     NSTableView	*_tableView;
     NSInteger _resizedColumn;
@@ -26,19 +25,21 @@
     unsigned int _toolTipRectsDirty:1;
     unsigned int _alignTitleWithDataCell:1;
     unsigned int _nextColumnAfterDrawnOneIsSelected:1;
-    unsigned int _reserved:27;    
+    unsigned int _wantsTranslucency:1;
+    unsigned int _addedBlurToClipView:1;
+    unsigned int _usedNewHeight:1;
+    unsigned int _reserved:24;
     BOOL _skipDrawingSeparator;
     id _viewDataX;
 }
 
-- (void)setTableView:(NSTableView *)tableView;
-- (NSTableView *)tableView;
+@property (assign) NSTableView *tableView;
 
 // Returns -1 if there is no column being dragged
-- (NSInteger)draggedColumn;
-- (CGFloat)draggedDistance;
+@property (readonly) NSInteger draggedColumn;
+@property (readonly) CGFloat draggedDistance;
 
-- (NSInteger)resizedColumn;
+@property (readonly) NSInteger resizedColumn;
 - (NSRect)headerRectOfColumn:(NSInteger)column;
 - (NSInteger)columnAtPoint:(NSPoint)point;
 

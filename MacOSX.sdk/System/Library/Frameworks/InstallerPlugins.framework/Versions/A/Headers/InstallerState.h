@@ -46,13 +46,13 @@ typedef struct InstallerState_Private InstallerState_Private;
     @method     licenseAgreed
     @abstract   Specifies the user agreed to the license, if there is no license, this will return NO.
 */
-- (BOOL)licenseAgreed;
+@property (NS_NONATOMIC_IOSONLY, readonly) BOOL licenseAgreed;
 
 /*!
     @method     licenseAgreedLanguage
     @abstract   Specifies the language the language was last viewed or agreed with.
 */
-- (NSString *)licenseAgreedLanguage;
+@property (NS_NONATOMIC_IOSONLY, readonly, strong) NSString *licenseAgreedLanguage;
 
 
 /*!
@@ -60,14 +60,14 @@ typedef struct InstallerState_Private InstallerState_Private;
     @abstract   Specifies the mount point of the selected target
     @discussion Only Available after target has been selected.
 */
-- (NSString *)targetVolumePath;
+@property (NS_NONATOMIC_IOSONLY, readonly, strong) NSString *targetVolumePath;
 
 /*!
     @method     targetPath
     @abstract   Full target path selected.
     @discussion Specifies the full path selected by the user.  This path contains the targetVolumePath.
 */
-- (NSString *)targetPath;
+@property (NS_NONATOMIC_IOSONLY, readonly, strong) NSString *targetPath;
 
 /*!
     @method     choiceDictionaries
@@ -76,7 +76,7 @@ typedef struct InstallerState_Private InstallerState_Private;
  				InstallerState_Choice_CustomLocation.  These keys specify a choice and whether they were installed or not.  This is only
  				available after choice selections have been made.
 */
-- (NSArray *)choiceDictionaries;
+@property (NS_NONATOMIC_IOSONLY, readonly, strong) NSArray *choiceDictionaries;
 
 /*!
     @method     choiceDictionaryForIdentifier:
@@ -91,12 +91,12 @@ typedef struct InstallerState_Private InstallerState_Private;
     @discussion Will return YES after an install has been initiated.  If YES is returned, you can assume the install has taken
  				place.
 */
-- (BOOL)installStarted;
+@property (NS_NONATOMIC_IOSONLY, readonly) BOOL installStarted;
 
 /*!
     @method     installSucceeded
     @abstract   Specifies if the install was successfull or not.
     @discussion This value is only valid if installStarted returns True.
 */
-- (BOOL)installSucceeded;
+@property (NS_NONATOMIC_IOSONLY, readonly) BOOL installSucceeded;
 @end

@@ -1,5 +1,5 @@
 /*	NSProxy.h
-	Copyright (c) 1994-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -19,8 +19,8 @@ NS_ROOT_CLASS
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)sel;
 - (void)dealloc;
 - (void)finalize;
-- (NSString *)description;
-- (NSString *)debugDescription;
+@property (readonly, copy) NSString *description;
+@property (readonly, copy) NSString *debugDescription;
 + (BOOL)respondsToSelector:(SEL)aSelector;
 
 - (BOOL)allowsWeakReference NS_UNAVAILABLE;

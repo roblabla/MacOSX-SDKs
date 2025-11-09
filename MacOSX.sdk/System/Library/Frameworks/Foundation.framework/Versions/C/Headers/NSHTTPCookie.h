@@ -1,6 +1,6 @@
 /*	
     NSHTTPCookie.h
-    Copyright (c) 2003-2013, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2014, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -232,7 +232,7 @@ FOUNDATION_EXPORT NSString * const NSHTTPCookiePort;
     dictionary keys is invalid, for example because a required key is
     missing, or a recognized key maps to an illegal value.
 */
-- (id)initWithProperties:(NSDictionary *)properties;
+- (instancetype)initWithProperties:(NSDictionary *)properties;
 
 /*!
     @method cookieWithProperties:
@@ -247,7 +247,7 @@ FOUNDATION_EXPORT NSString * const NSHTTPCookiePort;
     a required key is missing, or a recognized key maps to an illegal
     value.
 */
-+ (id)cookieWithProperties:(NSDictionary *)properties;
++ (NSHTTPCookie *)cookieWithProperties:(NSDictionary *)properties;
 
 /*!
     @method requestHeaderFieldsWithCookies:
@@ -282,7 +282,7 @@ FOUNDATION_EXPORT NSString * const NSHTTPCookiePort;
     for descriptions of the supported keys and values.
     @result The dictionary representation of the receiver.
 */
-- (NSDictionary *)properties;
+@property (readonly, copy) NSDictionary *properties;
 
 /*!
     @method version
@@ -291,21 +291,21 @@ FOUNDATION_EXPORT NSString * const NSHTTPCookiePort;
     Version 1 maps to RFC2965 cookies. There may be future versions.
     @result the version of the receiver.
 */
-- (NSUInteger)version;
+@property (readonly) NSUInteger version;
 
 /*!
     @method name
     @abstract Returns the name of the receiver.
     @result the name of the receiver.
 */
-- (NSString *)name;
+@property (readonly, copy) NSString *name;
 
 /*!
     @method value
     @abstract Returns the value of the receiver.
     @result the value of the receiver.
 */
-- (NSString *)value;
+@property (readonly, copy) NSString *value;
 
 /*!
     @method expiresDate
@@ -316,7 +316,7 @@ FOUNDATION_EXPORT NSString * const NSHTTPCookiePort;
     date. This will be the case only for "session-only" cookies.
     @result The expires date of the receiver.
 */
-- (NSDate *)expiresDate;
+@property (readonly, copy) NSDate *expiresDate;
 
 /*!
     @method isSessionOnly
@@ -325,7 +325,7 @@ FOUNDATION_EXPORT NSString * const NSHTTPCookiePort;
     session (regardless of expiration date), NO if receiver need not
     be discarded at the end of the session.
 */
-- (BOOL)isSessionOnly;
+@property (readonly, getter=isSessionOnly) BOOL sessionOnly;
 
 /*!
     @method domain
@@ -336,7 +336,7 @@ FOUNDATION_EXPORT NSString * const NSHTTPCookiePort;
     restrictions are valid. See RFC 2965 for more detail.
     @result The domain of the receiver.
 */
-- (NSString *)domain;
+@property (readonly, copy) NSString *domain;
 
 /*!
     @method path
@@ -346,7 +346,7 @@ FOUNDATION_EXPORT NSString * const NSHTTPCookiePort;
     be sent for children of that path, so "/" is the most general.
     @result The path of the receiver.
 */
-- (NSString *)path;
+@property (readonly, copy) NSString *path;
 
 /*!
     @method isSecure
@@ -359,7 +359,7 @@ FOUNDATION_EXPORT NSString * const NSHTTPCookiePort;
     @result YES if this cookie should be sent only over secure channels,
     NO otherwise.
 */
-- (BOOL)isSecure;
+@property (readonly, getter=isSecure) BOOL secure;
 
 /*!
     @method isHTTPOnly
@@ -373,7 +373,7 @@ FOUNDATION_EXPORT NSString * const NSHTTPCookiePort;
     @result YES if this cookie should only be sent via HTTP headers,
     NO otherwise.
 */
-- (BOOL)isHTTPOnly;
+@property (readonly, getter=isHTTPOnly) BOOL HTTPOnly;
 
 /*!
     @method comment
@@ -384,7 +384,7 @@ FOUNDATION_EXPORT NSString * const NSHTTPCookiePort;
     @result The comment of the receiver, or nil if the receiver has no
     comment.
 */
-- (NSString *)comment;
+@property (readonly, copy) NSString *comment;
 
 /*!
     @method commentURL
@@ -395,7 +395,7 @@ FOUNDATION_EXPORT NSString * const NSHTTPCookiePort;
     @result The comment URL of the receiver, or nil if the receiver
     has no comment URL.
 */
-- (NSURL *)commentURL;
+@property (readonly, copy) NSURL *commentURL;
 
 /*!
     @method portList
@@ -408,7 +408,7 @@ FOUNDATION_EXPORT NSString * const NSHTTPCookiePort;
     array may be nil, in which case this cookie can be sent to any
     port.
 */
-- (NSArray *)portList;
+@property (readonly, copy) NSArray *portList;
 
 @end
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2013 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2014 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -501,7 +501,19 @@ struct nfsstats {
  */
 #define NFSCLNT_LOCKDANS	0x200
 #define NFSCLNT_LOCKDNOTIFY	0x400
+#define NFSCLNT_TESTIDMAP	0x001
 
+#include <sys/_types/_guid_t.h> /* for guid_t below */
+#define MAXIDNAMELEN		1024
+struct nfs_testmapid {
+	uint32_t		ntm_name2id;	/* lookup name 2 id or id 2 name */
+	uint32_t		ntm_grpflag;	/* Is this a group or user maping */
+	uint32_t		ntm_id;		/* id to map or return */
+	uint32_t		pad;	
+	guid_t			ntm_guid;	/* intermidiate guid used in conversion */
+	char			ntm_name[MAXIDNAMELEN]; /* name to map or return */
+};
+	
 /*
  * fs.nfs sysctl(3) identifiers
  */

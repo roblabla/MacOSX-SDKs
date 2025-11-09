@@ -14,7 +14,8 @@
 @class NSManagedObjectContext;
 @class NSManagedObjectID;
 
-enum {
+
+typedef NS_OPTIONS(NSUInteger, NSSnapshotEventType) {
 	NSSnapshotEventUndoInsertion = 1 << 1,
 	NSSnapshotEventUndoDeletion = 1 << 2,
 	NSSnapshotEventUndoUpdate = 1 << 3,
@@ -22,8 +23,6 @@ enum {
 	NSSnapshotEventRefresh = 1 << 5,
 	NSSnapshotEventMergePolicy = 1 << 6
 };
-
-typedef NSUInteger NSSnapshotEventType;
 
 NS_CLASS_AVAILABLE(10_4,3_0) NS_REQUIRES_PROPERTY_DEFINITIONS
 @interface NSManagedObject : NSObject {
@@ -46,28 +45,28 @@ NS_CLASS_AVAILABLE(10_4,3_0) NS_REQUIRES_PROPERTY_DEFINITIONS
 + (BOOL)contextShouldIgnoreUnmodeledPropertyChanges NS_AVAILABLE(10_6,3_0);
 
 // The designated initializer.
-- (id)initWithEntity:(NSEntityDescription *)entity insertIntoManagedObjectContext:(NSManagedObjectContext *)context;    
+- (instancetype)initWithEntity:(NSEntityDescription *)entity insertIntoManagedObjectContext:(NSManagedObjectContext *)context NS_DESIGNATED_INITIALIZER;    
 
 // identity
-- (NSManagedObjectContext *)managedObjectContext;
-- (NSEntityDescription *)entity;
-- (NSManagedObjectID *)objectID;
+@property (nonatomic, readonly, assign) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, readonly, strong) NSEntityDescription *entity;
+@property (nonatomic, readonly, strong) NSManagedObjectID *objectID;
 
 // state - methods can be used through KVC, for example for enabling/disabling widgets based on the state of the object
-- (BOOL)isInserted;
-- (BOOL)isUpdated;
-- (BOOL)isDeleted;
+@property (nonatomic, getter=isInserted, readonly) BOOL inserted;
+@property (nonatomic, getter=isUpdated, readonly) BOOL updated;
+@property (nonatomic, getter=isDeleted, readonly) BOOL deleted;
 
-- (BOOL)hasChanges NS_AVAILABLE(10_7, 5_0);
+@property (nonatomic, readonly) BOOL hasChanges NS_AVAILABLE(10_7, 5_0);
 
 // this information is useful in many situations when computations are optional - this can be used to avoid growing the object graph unnecessarily (which allows to control performance as it can avoid time consuming fetches from databases)
-- (BOOL)isFault;    
+@property (nonatomic, getter=isFault, readonly) BOOL fault;    
 
 // returns a Boolean indicating if the relationship for the specified key is a fault.  If a value of NO is returned, the resulting relationship is a realized object;  otherwise the relationship is a fault.  If the specified relationship is a fault, calling this method does not result in the fault firing.
 - (BOOL)hasFaultForRelationshipNamed:(NSString *)key NS_AVAILABLE(10_5,3_0); 
 
 /* Allow developers to determine if an object is in a transitional phase when receiving a KVO notification.  Returns 0 if the object is fully initialized as a managed object and not transitioning to or from another state */
-- (NSUInteger)faultingState NS_AVAILABLE(10_5,3_0);
+@property (nonatomic, readonly) NSUInteger faultingState NS_AVAILABLE(10_5,3_0);
 
 // lifecycle/change management (includes key-value observing methods)
 - (void)willAccessValueForKey:(NSString *)key;      // read notification
@@ -78,10 +77,6 @@ NS_CLASS_AVAILABLE(10_4,3_0) NS_REQUIRES_PROPERTY_DEFINITIONS
 - (void)didChangeValueForKey:(NSString *)key;
 - (void)willChangeValueForKey:(NSString *)inKey withSetMutation:(NSKeyValueSetMutationKind)inMutationKind usingObjects:(NSSet *)inObjects;
 - (void)didChangeValueForKey:(NSString *)inKey withSetMutation:(NSKeyValueSetMutationKind)inMutationKind usingObjects:(NSSet *)inObjects;
-
-// KVO optimization
-- (void)setObservationInfo:(id)inObservationInfo; 
-- (id)observationInfo;    
 
 // invoked after a fetch or after unfaulting (commonly used for computing derived values from the persisted properties)
 - (void)awakeFromFetch;    
@@ -132,6 +127,9 @@ NS_CLASS_AVAILABLE(10_4,3_0) NS_REQUIRES_PROPERTY_DEFINITIONS
 - (BOOL)validateForDelete:(NSError **)error;
 - (BOOL)validateForInsert:(NSError **)error;
 - (BOOL)validateForUpdate:(NSError **)error;
+
+- (void)setObservationInfo:(id)inObservationInfo;
+- (id)observationInfo;
 
 @end
 

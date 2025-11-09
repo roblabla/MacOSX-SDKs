@@ -217,7 +217,7 @@ QTKIT_EXTERN NSString * const QTMediaCharacteristicHasVideoFrameRate		AVAILABLE_
 	// media attributes
 /*!
 	@constant		QTMediaCreationTimeAttribute
-	@abstract		The creation time of a QTMedia object; the value for this key is of type NSDate.
+	@abstract		The creation time of the container from which a QTMedia object was initialized; the value for this key is of type NSDate.
 	@discussion		This attribute can be read but not written.
 					This attribute can be read but not written when the movie containing this media has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */

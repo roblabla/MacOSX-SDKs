@@ -1,7 +1,7 @@
 /*
 	NSPageLayout.h
 	Application Kit
-	Copyright (c) 1994-2013, Apple Inc.
+	Copyright (c) 1994-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -34,7 +34,7 @@
 */
 - (void)addAccessoryController:(NSViewController *)accessoryController NS_AVAILABLE_MAC(10_5);
 - (void)removeAccessoryController:(NSViewController *)accessoryController NS_AVAILABLE_MAC(10_5);
-- (NSArray *)accessoryControllers NS_AVAILABLE_MAC(10_5);
+@property (readonly, copy) NSArray *accessoryControllers NS_AVAILABLE_MAC(10_5);
 
 
 /* Present a page setup panel to the user, document-modally. When the user has dismissed it, send the message selected by didEndSelector to the delegate, with the contextInfo as the last argument. The method selected by didEndSelector must have the same signature as:
@@ -50,7 +50,7 @@
 
 /* A simple accessor. Your -beginSheetWithPrintInfo:... delegate can use this so it doesn't have to keep a pointer to the NSPrintInfo elsewhere while waiting for the user to dismiss the print panel.
 */
-- (NSPrintInfo *)printInfo;
+@property (readonly, strong) NSPrintInfo *printInfo;
 
 @end
 

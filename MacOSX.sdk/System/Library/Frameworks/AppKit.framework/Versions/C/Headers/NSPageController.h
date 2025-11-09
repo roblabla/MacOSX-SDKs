@@ -1,7 +1,7 @@
 /*
  NSPageController.h
  Application Kit
- Copyright (c) 2011-2013, Apple Inc.
+ Copyright (c) 2011-2014, Apple Inc.
  All rights reserved.
  */
 
@@ -13,12 +13,11 @@
 @class NSMutableDictionary, NSMutableArray, NSView;
 @protocol NSPageControllerDelegate;
 
-enum {
+typedef NS_ENUM(NSInteger, NSPageControllerTransitionStyle) {
     NSPageControllerTransitionStyleStackHistory, // Pages are stacked on top of each other. Pages animate out to the right to reveal the previous page. Next pages animate in from the right. (See Safari as an example)
     NSPageControllerTransitionStyleStackBook,	 // Pages are stacked on top of each other. Pages animate out to the left to reveal the next page. Previous pages animate in from the left. (See Preview as an example)
     NSPageControllerTransitionStyleHorizontalStrip // Each page is laid out next to each other in one long horizontal strip
 } NS_ENUM_AVAILABLE(10_8, NA);
-typedef NSInteger NSPageControllerTransitionStyle;
 
 NS_CLASS_AVAILABLE(10_8, NA)
 @interface NSPageController : NSViewController <NSAnimatablePropertyContainer, NSCoding> {
@@ -60,11 +59,11 @@ NS_CLASS_AVAILABLE(10_8, NA)
     id _private;
 }
 
-@property(assign) IBOutlet id<NSPageControllerDelegate> delegate;
+@property (assign) IBOutlet id<NSPageControllerDelegate> delegate;
 
 /* The viewController associated with the selected arrangedObject. May be nil if delegate is not supplying viewControllers.
  */
-@property(retain, readonly) NSViewController *selectedViewController;
+@property (readonly, strong) NSViewController *selectedViewController;
 
 
 /* The animation style used when transitioning from one page to another. The default value is NSPageControllerTransitionStyleStackHistory */
@@ -72,7 +71,7 @@ NS_CLASS_AVAILABLE(10_8, NA)
 
 /* Array of all displayed objects (after sorting and potentially filtering by you). The delegate will be asked for snapshots as they are needed. Alternatively, you may never directly set this array and use the -navigateForwardToRepresentedObject API to create a history as the user navigates. This property is KVO compliant.
  */
-@property(copy) NSArray *arrangedObjects;
+@property (copy) NSArray *arrangedObjects;
 
 /* The index into the arrangedObjects that is being displayed. This property is KVO compliant. To animate a transition to a new index, use NSPageController's animator object. */
 @property NSInteger selectedIndex;

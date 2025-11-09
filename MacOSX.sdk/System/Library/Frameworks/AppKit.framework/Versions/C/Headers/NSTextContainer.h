@@ -1,7 +1,7 @@
 /*
         NSTextContainer.h
         Application Kit
-        Copyright (c) 1994-2013, Apple Inc.
+        Copyright (c) 1994-2014, Apple Inc.
         All rights reserved.
 */
 
@@ -15,23 +15,21 @@
 @class NSTextView;
 
 /* Values for NSLineSweepDirection */
-enum {
+typedef NS_ENUM(NSUInteger, NSLineSweepDirection) {
     NSLineSweepLeft     = 0,
     NSLineSweepRight    = 1,
     NSLineSweepDown     = 2,
     NSLineSweepUp       = 3
 };
-typedef NSUInteger NSLineSweepDirection;
 
 /* Values for NSLineMovementDirection */
-enum {
+typedef NS_ENUM(NSUInteger, NSLineMovementDirection) {
     NSLineDoesntMove    = 0, 
     NSLineMovesLeft     = 1,
     NSLineMovesRight    = 2,
     NSLineMovesDown     = 3,
     NSLineMovesUp       = 4
 };
-typedef NSUInteger NSLineMovementDirection;
 
 
 @interface NSTextContainer : NSObject <NSCoding, NSTextLayoutOrientationProvider> {
@@ -47,41 +45,36 @@ typedef NSUInteger NSLineMovementDirection;
         unsigned short widthTracksTextView:1;
         unsigned short heightTracksTextView:1;
         unsigned short observingFrameChanges:1;
-        unsigned short _reserved:13;
+        unsigned short lineBreakMode:4;
+        unsigned short _reserved:9;
     } _tcFlags;
 }
 
 /**************************** Initialization ****************************/
 
-- (id)initWithContainerSize:(NSSize)size;
+- (instancetype)initWithContainerSize:(NSSize)size;
 
 /**************************** Layout and View ****************************/
 
-- (NSLayoutManager *)layoutManager;
-- (void)setLayoutManager:(NSLayoutManager *)layoutManager;
+@property (assign) NSLayoutManager *layoutManager;
     // The set method generally should not be called directly, but you may want to override it.  Adding a container to a NSLayoutManager through the provided NSLayoutManager methods will cause the set method to be called appropriately.
 
 - (void)replaceLayoutManager:(NSLayoutManager *)newLayoutManager;
     // This method should be used instead of the primitive -setLayoutManager: if you need to replace a container's layoutManager with a new one leaving the rest of the web intact.  All the NSTextContainers on the old NSLayoutManager get transferred to the new one.  This method deals with all the work of making sure the containers don't get deallocated and removing the old layoutManager from the text storage and replacing it with the new one.
 
-- (NSTextView *)textView;
-- (void)setTextView:(NSTextView *)textView;
+@property (strong) NSTextView *textView;
     // Set/get the view which the container is drawn in.  Having a view is optional.
 
-- (void)setWidthTracksTextView:(BOOL)flag;
-- (BOOL)widthTracksTextView;
-- (void)setHeightTracksTextView:(BOOL)flag;
-- (BOOL)heightTracksTextView;
+@property BOOL widthTracksTextView;
+@property BOOL heightTracksTextView;
     // If a container tracks the size of it's view in one or both of these dimensions then those dimensions will be kept in synch with with the view's frame (taking into account the view's textContainerInset).
 
 /************************* Container size and padding *************************/
 
-- (void)setContainerSize:(NSSize)size;
-- (NSSize)containerSize;
+@property NSSize containerSize;
     // Sets/returns the current size of the container.  This size has nothing to do with how much text is in the container and how much space it takes up (which the container is not in a position to know).  It is basically the maximum flowable area of the container.  The NSTextView's size will not generally have much connection to this size.  The NSTextView will generally want to be big enough to display all the text which has been laid in the container at the moment and no bigger.  The NSLayoutManager will generally be in charge of telling the view what size it should be.
 
-- (void)setLineFragmentPadding:(CGFloat)pad;
-- (CGFloat)lineFragmentPadding;
+@property CGFloat lineFragmentPadding;
     // This value is used by the typesetter to inset the line fragment rects it gets along the sweep direction to give a little default pad to each fragment.
 
 /**************************** Line fragments ****************************/
@@ -89,7 +82,7 @@ typedef NSUInteger NSLineMovementDirection;
 - (NSRect)lineFragmentRectForProposedRect:(NSRect)proposedRect sweepDirection:(NSLineSweepDirection)sweepDirection movementDirection:(NSLineMovementDirection)movementDirection remainingRect:(NSRectPointer)remainingRect;
     // Returns the first and largest subrect of proposedRect which falls within the container's region.  All rects are given in the container's coordinate system.  sweepDirection determines what edge of the proposedRect to start from.  movementDirection determines in which direction (if any) the proposedRect can be translated if it is necessary to move the rect to find a non-empty fragment.  remainingRect is set to hold whatever portion of of the proposedRect (after any line movement translation) which is left after subtracting the returned fragment.  The proposed rect should fall within the frame area of the container.  remainingRect will only be non-empty if there are parts of the proposedRect left within the container's frame area ("after" the returned fragment rect in the sweep direction) that are not included in the returned rect.
 
-- (BOOL)isSimpleRectangularTextContainer;
+@property (getter=isSimpleRectangularTextContainer, readonly) BOOL simpleRectangularTextContainer;
     // Subclasses should override this method to return NO if the containers area is not truly rectangular with no holes or concavities.  NSLayoutManager uses this method to determine whether it can make certain optimizations when relaying text in the container.  NSTextContainer's implementation returns YES.
 
 /**************************** Hit testing ****************************/

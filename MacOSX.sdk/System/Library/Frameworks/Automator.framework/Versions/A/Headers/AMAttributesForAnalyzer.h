@@ -3,7 +3,7 @@
  *  Automator
  *
  *  Created by Michael Gorbach on 12/3/10.
- *  Copyright 2010 Apple Inc. All rights reserved.
+ *  Copyright 2010, 2014 Apple Inc. All rights reserved.
  *
  */
 

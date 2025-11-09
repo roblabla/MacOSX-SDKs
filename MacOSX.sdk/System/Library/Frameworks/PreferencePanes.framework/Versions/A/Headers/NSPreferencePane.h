@@ -35,7 +35,7 @@ APPKIT_EXTERN NSString * const				NSPrefPaneHelpMenuAnchorKey;
 
 #define	kNSPrefPaneHelpMenuInfoPListKey		@"NSPrefPaneHelpAnchors"
 #define	kNSPrefPaneHelpMenuTitleKey			@"title"		
-#define	kNSPrefPaneHelpMenuAnchorKey			@"anchor"				
+#define	kNSPrefPaneHelpMenuAnchorKey		@"anchor"
 
 #endif
 
@@ -63,9 +63,9 @@ APPKIT_EXTERN NSString * const				NSPrefPaneHelpMenuAnchorKey;
 		id _reserved3;
 }
 
-- (id) initWithBundle:(NSBundle *)bundle;
+- (instancetype) initWithBundle:(NSBundle *)bundle;
 
-- (NSBundle *) bundle;
+@property (readonly, strong) NSBundle *bundle;
 
 //
 //  loadMainView loads the main nib file and invokes assignMainView to
@@ -100,7 +100,7 @@ APPKIT_EXTERN NSString * const				NSPrefPaneHelpMenuAnchorKey;
 //
 //  The value returned must NOT include the ".nib" extension.
 //
-- (NSString *) mainNibName;
+@property (readonly, strong) NSString *mainNibName;
 
 //
 //  assignMainView is invoked by the default implementation of loadMainView,
@@ -130,7 +130,7 @@ APPKIT_EXTERN NSString * const				NSPrefPaneHelpMenuAnchorKey;
 //  replyToShouldUnselect: when it has determined whether or not to allow the
 //  unselect to occur.
 //
-- (NSPreferencePaneUnselectReply) shouldUnselect;
+@property (readonly) NSPreferencePaneUnselectReply shouldUnselect;
 
 //
 //  If you override shouldUnselect to return NSUnselectLater, you must call
@@ -151,12 +151,9 @@ APPKIT_EXTERN NSString * const				NSPrefPaneHelpMenuAnchorKey;
 //  not need to call this directly unless they override loadMainView or
 //  assignMainView.
 //
-- (void) setMainView:(NSView *)view;
-
-//
 //  Returns the main view of the preference pane.
 //
-- (NSView *) mainView;
+@property (strong) NSView *mainView;
 
 //
 //  Returns the view that should have the keyboard focus when the pane is selected.
@@ -166,12 +163,7 @@ APPKIT_EXTERN NSString * const				NSPrefPaneHelpMenuAnchorKey;
 //  A subclass can override this method if it needs to determine the
 //  initial key view dynamically.
 //
-- (NSView *) initialKeyView;
-
-//
-//  Sets _initialKeyView to view.
-//
-- (void) setInitialKeyView:(NSView *)view;
+@property (strong) NSView *initialKeyView;
 
 //
 //  Returns the view that is the first view in the keyboard focus chain.
@@ -181,12 +173,7 @@ APPKIT_EXTERN NSString * const				NSPrefPaneHelpMenuAnchorKey;
 //  A subclass can override this method if it needs to determine the
 //  first key view dynamically.
 //
-- (NSView *) firstKeyView;
-
-//
-//  Sets _firstKeyView to view.
-//
-- (void) setFirstKeyView:(NSView *)view;
+@property (strong) NSView *firstKeyView;
 
 //
 //  Returns the view that is the last view in the keyboard focus chain.
@@ -196,12 +183,8 @@ APPKIT_EXTERN NSString * const				NSPrefPaneHelpMenuAnchorKey;
 //  A subclass can override this method if it needs to determine the
 //  last key view dynamically.
 //
-- (NSView *) lastKeyView;
+@property (strong) NSView *lastKeyView;
 
-//
-//  Sets _lastKeyView to view.
-//
-- (void) setLastKeyView:(NSView *)view;
 
 // Default = YES
 // If set to YES, text fields will be forced to give up their responder status
@@ -209,12 +192,12 @@ APPKIT_EXTERN NSString * const				NSPrefPaneHelpMenuAnchorKey;
 // If overriden and set to NO, the preference pane will be responsible for 
 // forcing the fields to give up their responder status before saving them.
 //
-- (BOOL) autoSaveTextFields;
+@property (readonly) BOOL autoSaveTextFields;
 
 // Returns YES if preference pane is currently selected by user,
 // NO otherwise
 //
-- (BOOL) isSelected;
+@property (getter=isSelected, readonly) BOOL selected;
 
 // Help Menu support
 // A subclass can override this method if it needs to update help menu

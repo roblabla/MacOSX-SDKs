@@ -26,7 +26,7 @@ typedef function_table_entry   *function_table_t;
 #endif /* AUTOTEST */
 
 #ifndef	thread_act_MSG_COUNT
-#define	thread_act_MSG_COUNT	25
+#define	thread_act_MSG_COUNT	28
 #endif	/* thread_act_MSG_COUNT */
 
 #include <mach/std_types.h>
@@ -376,6 +376,44 @@ kern_return_t thread_set_policy
 	mach_msg_type_number_t limitCnt
 );
 
+/* Routine thread_get_mach_voucher */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+kern_return_t thread_get_mach_voucher
+(
+	thread_act_t thr_act,
+	mach_voucher_selector_t which,
+	ipc_voucher_t *voucher
+);
+
+/* Routine thread_set_mach_voucher */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+kern_return_t thread_set_mach_voucher
+(
+	thread_act_t thr_act,
+	ipc_voucher_t voucher
+);
+
+/* Routine thread_swap_mach_voucher */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+kern_return_t thread_swap_mach_voucher
+(
+	thread_act_t thr_act,
+	ipc_voucher_t new_voucher,
+	ipc_voucher_t *old_voucher
+);
+
 __END_DECLS
 
 /********************** Caution **************************/
@@ -719,6 +757,47 @@ __END_DECLS
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		mach_voucher_selector_t which;
+	} __Request__thread_get_mach_voucher_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t voucher;
+		/* end of the kernel processed data */
+	} __Request__thread_set_mach_voucher_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t new_voucher;
+		mach_msg_port_descriptor_t old_voucher;
+		/* end of the kernel processed data */
+	} __Request__thread_swap_mach_voucher_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Request__thread_act_subsystem__defined */
 
 /* union of all requests */
@@ -751,6 +830,9 @@ union __RequestUnion__thread_act_subsystem {
 	__Request__thread_assign_default_t Request_thread_assign_default;
 	__Request__thread_get_assignment_t Request_thread_get_assignment;
 	__Request__thread_set_policy_t Request_thread_set_policy;
+	__Request__thread_get_mach_voucher_t Request_thread_get_mach_voucher;
+	__Request__thread_set_mach_voucher_t Request_thread_set_mach_voucher;
+	__Request__thread_swap_mach_voucher_t Request_thread_swap_mach_voucher;
 };
 #endif /* !__RequestUnion__thread_act_subsystem__defined */
 /* typedefs for all replies */
@@ -1084,6 +1166,46 @@ union __RequestUnion__thread_act_subsystem {
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t voucher;
+		/* end of the kernel processed data */
+	} __Reply__thread_get_mach_voucher_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__thread_set_mach_voucher_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t old_voucher;
+		/* end of the kernel processed data */
+	} __Reply__thread_swap_mach_voucher_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Reply__thread_act_subsystem__defined */
 
 /* union of all replies */
@@ -1116,6 +1238,9 @@ union __ReplyUnion__thread_act_subsystem {
 	__Reply__thread_assign_default_t Reply_thread_assign_default;
 	__Reply__thread_get_assignment_t Reply_thread_get_assignment;
 	__Reply__thread_set_policy_t Reply_thread_set_policy;
+	__Reply__thread_get_mach_voucher_t Reply_thread_get_mach_voucher;
+	__Reply__thread_set_mach_voucher_t Reply_thread_set_mach_voucher;
+	__Reply__thread_swap_mach_voucher_t Reply_thread_swap_mach_voucher;
 };
 #endif /* !__RequestUnion__thread_act_subsystem__defined */
 
@@ -1145,7 +1270,10 @@ union __ReplyUnion__thread_act_subsystem {
     { "thread_assign", 3621 },\
     { "thread_assign_default", 3622 },\
     { "thread_get_assignment", 3623 },\
-    { "thread_set_policy", 3624 }
+    { "thread_set_policy", 3624 },\
+    { "thread_get_mach_voucher", 3625 },\
+    { "thread_set_mach_voucher", 3626 },\
+    { "thread_swap_mach_voucher", 3627 }
 #endif
 
 #ifdef __AfterMigUserHeader

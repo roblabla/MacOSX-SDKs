@@ -1,7 +1,7 @@
 /*
     NSLevelIndicatorCell.h
     Application Kit
-    Copyright (c) 2004-2013, Apple Inc.
+    Copyright (c) 2004-2014, Apple Inc.
     All rights reserved.
 */
 
@@ -9,13 +9,12 @@
 #import <AppKit/NSSliderCell.h>
 
 
-enum {
+typedef NS_ENUM(NSUInteger, NSLevelIndicatorStyle) {
     NSRelevancyLevelIndicatorStyle,
     NSContinuousCapacityLevelIndicatorStyle,
     NSDiscreteCapacityLevelIndicatorStyle,
     NSRatingLevelIndicatorStyle
 };
-typedef NSUInteger NSLevelIndicatorStyle;
 
 @interface NSLevelIndicatorCell : NSActionCell {
   @private
@@ -40,31 +39,23 @@ typedef NSUInteger NSLevelIndicatorStyle;
     int    _reserved4;
 }
 
-- (id)initWithLevelIndicatorStyle:(NSLevelIndicatorStyle)levelIndicatorStyle;
+- (instancetype)initWithLevelIndicatorStyle:(NSLevelIndicatorStyle)levelIndicatorStyle;
 
-- (NSLevelIndicatorStyle)levelIndicatorStyle;
-- (void)setLevelIndicatorStyle:(NSLevelIndicatorStyle)levelIndicatorStyle;
+@property NSLevelIndicatorStyle levelIndicatorStyle;
 
-- (double)minValue;
-- (void)setMinValue:(double)minValue;
+@property double minValue;
 
-- (double)maxValue;
-- (void)setMaxValue:(double)maxValue;
+@property double maxValue;
 
-- (double)warningValue;
-- (void)setWarningValue:(double)warningValue;
+@property double warningValue;
 
-- (double)criticalValue;
-- (void)setCriticalValue:(double)criticalValue;
+@property double criticalValue;
 
-- (void)setTickMarkPosition:(NSTickMarkPosition)position;
-- (NSTickMarkPosition)tickMarkPosition;
+@property NSTickMarkPosition tickMarkPosition;
 
-- (void)setNumberOfTickMarks:(NSInteger)count;
-- (NSInteger)numberOfTickMarks;
+@property NSInteger numberOfTickMarks;
 
-- (void)setNumberOfMajorTickMarks:(NSInteger)count;
-- (NSInteger)numberOfMajorTickMarks;
+@property NSInteger numberOfMajorTickMarks;
 
 - (NSRect)rectOfTickMarkAtIndex:(NSInteger)index;
 - (double)tickMarkValueAtIndex:(NSInteger)index;

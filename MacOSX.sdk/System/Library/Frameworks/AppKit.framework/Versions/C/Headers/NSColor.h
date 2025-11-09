@@ -1,7 +1,7 @@
 /*
 	NSColor.h
 	Application Kit
-	Copyright (c) 1994-2013, Apple Inc.
+	Copyright (c) 1994-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -41,7 +41,10 @@ Subclassers of NSColor need to implement the methods colorSpaceName, set, the va
 
 
 
-@interface NSColor : NSObject <NSCopying, NSCoding, NSPasteboardReading, NSPasteboardWriting>
+@interface NSColor : NSObject <NSCopying, NSSecureCoding, NSPasteboardReading, NSPasteboardWriting>
+
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 
 /* Create NSCalibratedWhiteColorSpace colors.
 */
@@ -123,6 +126,11 @@ Subclassers of NSColor need to implement the methods colorSpaceName, set, the va
 + (NSColor *)windowBackgroundColor;		// Background fill for window contents
 + (NSColor *)underPageBackgroundColor NS_AVAILABLE_MAC(10_8);   // Background areas revealed behind views
 
++ (NSColor *)labelColor NS_AVAILABLE_MAC(10_10);            // Text color for static text and related elements
++ (NSColor *)secondaryLabelColor NS_AVAILABLE_MAC(10_10);   // Text color for secondary static text and related elements
++ (NSColor *)tertiaryLabelColor NS_AVAILABLE_MAC(10_10);    // Text color for disabled static text and related elements
++ (NSColor *)quaternaryLabelColor NS_AVAILABLE_MAC(10_10);  // Text color for large secondary or disabled static text, separators, large glyphs/icons, etc
+
 + (NSColor *)scrollBarColor;			// Scroll bar slot color
 + (NSColor *)knobColor;     			// Knob face color for controls
 + (NSColor *)selectedKnobColor;       		// Knob face color for selected controls
@@ -149,7 +157,7 @@ Subclassers of NSColor need to implement the methods colorSpaceName, set, the va
 
 + (NSColor *)colorForControlTint:(NSControlTint)controlTint;	// pass in valid tint to get rough color matching. returns default if invalid tint
 
-+ (NSControlTint) currentControlTint;	// returns current system control tint
++ (NSControlTint)currentControlTint;	// returns current system control tint
 
 
 /* Set the color: Sets the fill and stroke colors in the current drawing context. If the color doesn't know about alpha, it's set to 1.0. Should be implemented by subclassers.
@@ -163,7 +171,7 @@ Subclassers of NSColor need to implement the methods colorSpaceName, set, the va
 
 /* Get the color space of the color. Should be implemented by subclassers.
 */
-- (NSString *)colorSpaceName;
+@property (readonly, copy) NSString *colorSpaceName;
 
 
 /* Convert the color to another colorspace, using a colorspace name. This may return nil if the specified conversion cannot be done. The abstract implementation of this method returns the receiver if the specified colorspace matches that of the receiver; otherwise it returns nil. Subclassers who can convert themselves to other colorspaces override this method to do something better.
@@ -197,54 +205,54 @@ If colorSpace is nil, then the most appropriate color space is used.
 
 /* Get the catalog and color name of standard colors from catalogs. These colors are special colors which are usually looked up on each device by their name.
 */
-- (NSString *)catalogNameComponent;
-- (NSString *)colorNameComponent;
+@property (readonly, copy) NSString *catalogNameComponent;
+@property (readonly, copy) NSString *colorNameComponent;
 
 /* Return localized versions of the above.
 */
-- (NSString *)localizedCatalogNameComponent;
-- (NSString *)localizedColorNameComponent;
+@property (readonly, copy) NSString *localizedCatalogNameComponent;
+@property (readonly, copy) NSString *localizedColorNameComponent;
 
 /* Get the red, green, or blue components of NSCalibratedRGB or NSDeviceRGB colors.  Starting in 10.7, it's also possible to call these on NSCustomColorSpace colors with color spaces with RGB model. 
 */
-- (CGFloat)redComponent;
-- (CGFloat)greenComponent;
-- (CGFloat)blueComponent;
+@property (readonly) CGFloat redComponent;
+@property (readonly) CGFloat greenComponent;
+@property (readonly) CGFloat blueComponent;
 - (void)getRed:(CGFloat *)red green:(CGFloat *)green blue:(CGFloat *)blue alpha:(CGFloat *)alpha;
 
 /* Get the components of NSCalibratedRGB or NSDeviceRGB colors as hue, saturation, or brightness. Starting in 10.7, it's also possible to call these on NSCustomColorSpace colors with color spaces with RGB model. 
 */
-- (CGFloat)hueComponent;
-- (CGFloat)saturationComponent;
-- (CGFloat)brightnessComponent;
+@property (readonly) CGFloat hueComponent;
+@property (readonly) CGFloat saturationComponent;
+@property (readonly) CGFloat brightnessComponent;
 - (void)getHue:(CGFloat *)hue saturation:(CGFloat *)saturation brightness:(CGFloat *)brightness alpha:(CGFloat *)alpha;
 
 
 /* Get the white component of NSCalibratedWhite or NSDeviceWhite colors. Starting in 10.7, it's possible to call these on NSCustomColorSpace colors with color spaces with grayscale model. 
 */
-- (CGFloat)whiteComponent;
+@property (readonly) CGFloat whiteComponent;
 - (void)getWhite:(CGFloat *)white alpha:(CGFloat *)alpha;
 
 
 /* Get the CMYK components of NSDeviceCMYK colors.  Starting in 10.7, it's possible to call these on NSCustomColorSpace colors with color spaces with CMYK model. 
 */
-- (CGFloat)cyanComponent;
-- (CGFloat)magentaComponent;
-- (CGFloat)yellowComponent;
-- (CGFloat)blackComponent;
+@property (readonly) CGFloat cyanComponent;
+@property (readonly) CGFloat magentaComponent;
+@property (readonly) CGFloat yellowComponent;
+@property (readonly) CGFloat blackComponent;
 - (void)getCyan:(CGFloat *)cyan magenta:(CGFloat *)magenta yellow:(CGFloat *)yellow black:(CGFloat *)black alpha:(CGFloat *)alpha;
 
 
 /* For colors with custom colorspace; get the colorspace and individual floating point components, including alpha. Note that all these methods will work for other NSColors which have floating point components. They will raise exceptions otherwise, like other existing colorspace-specific methods.
 */
-- (NSColorSpace *)colorSpace;
-- (NSInteger)numberOfComponents;
+@property (readonly, strong) NSColorSpace *colorSpace;
+@property (readonly) NSInteger numberOfComponents;
 - (void)getComponents:(CGFloat *)components;
 
 
 /* Get the alpha component. For colors which do not have alpha components, this will return 1.0 (opaque).
 */
-- (CGFloat)alphaComponent;
+@property (readonly) CGFloat alphaComponent;
 
 
 /* Pasteboard methods
@@ -256,7 +264,7 @@ If colorSpace is nil, then the most appropriate color space is used.
 /* Pattern methods. Note that colorWithPatternImage: mistakenly returns a non-autoreleased color in 10.1.x and earlier. This has been fixed in (NSAppKitVersionNumber >= NSAppKitVersionNumberWithPatternColorLeakFix), for apps linked post-10.1.x.
 */
 + (NSColor *)colorWithPatternImage:(NSImage*)image;
-- (NSImage *)patternImage; 
+@property (readonly, strong) NSImage *patternImage; 
 
 /* Draws the color and adorns it to indicate the type of color. Used by colorwells, swatches, and other UI objects that need to display colors. Implementation in NSColor simply draws the color (with an indication of transparency if the color isn't fully opaque); subclassers can draw more stuff as they see fit.
 */
@@ -266,7 +274,7 @@ If colorSpace is nil, then the most appropriate color space is used.
 /* Convert to and from CGColorRef.
 */
 + (NSColor *)colorWithCGColor:(CGColorRef)cgColor NS_AVAILABLE_MAC(10_8);   // May return nil
-- (CGColorRef)CGColor NS_RETURNS_INNER_POINTER NS_AVAILABLE_MAC(10_8);      // Returns an autoreleased CGColor. This will never be NULL, although the return value may be an approximation in some cases, so there isn't guaranteed round-trip fidelity.
+@property (readonly) CGColorRef CGColor NS_RETURNS_INNER_POINTER NS_AVAILABLE_MAC(10_8);      // Returns an autoreleased CGColor. This will never be NULL, although the return value may be an approximation in some cases, so there isn't guaranteed round-trip fidelity.
 
 
 /* Global flag for determining whether an application supports alpha.  This flag is consulted when an application imports alpha (through color dragging, for instance). The value of this flag also determines whether the color panel has an opacity slider. This value is YES by default, indicating that the opacity components of imported colors will be set to 1.0. If an application wants alpha, it can either set the "NSIgnoreAlpha" default to NO or call the set method below.
@@ -284,7 +292,7 @@ This method provides a global approach to removing alpha which might not always 
 @end
 
 @interface CIColor (NSAppKitAdditions)
-- (id)initWithColor:(NSColor *)color;
+- (instancetype)initWithColor:(NSColor *)color;
 @end
 
 @interface NSCoder(NSAppKitColorExtensions)

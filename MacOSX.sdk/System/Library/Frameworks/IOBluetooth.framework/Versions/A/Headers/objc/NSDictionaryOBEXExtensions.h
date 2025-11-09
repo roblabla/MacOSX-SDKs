@@ -16,8 +16,8 @@
 
 /* creation */
 
-+(NSMutableDictionary*)dictionaryWithOBEXHeadersData:(const void*)inHeadersData headersDataSize:(size_t)inDataSize;
-+(NSMutableDictionary*)dictionaryWithOBEXHeadersData:(NSData*)inHeadersData;
++(instancetype)dictionaryWithOBEXHeadersData:(const void*)inHeadersData headersDataSize:(size_t)inDataSize;
++(instancetype)dictionaryWithOBEXHeadersData:(NSData*)inHeadersData;
 
 /* Utilities */
 
@@ -47,7 +47,7 @@
 -(OBEXError)addImageHandleHeader:(NSString*)type;
 -(OBEXError)addImageDescriptorHeader:(const void*)inHeaderData	length:(uint32_t)inHeaderDataLength;
 
-+(NSMutableDictionary*)withOBEXHeadersData:(const void*)inHeadersData headersDataSize:(size_t)inDataSize DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
++(instancetype)withOBEXHeadersData:(const void*)inHeadersData headersDataSize:(size_t)inDataSize DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 
 @end

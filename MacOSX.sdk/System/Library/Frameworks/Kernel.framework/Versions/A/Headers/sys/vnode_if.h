@@ -1,6 +1,6 @@
 
 /*
- * Copyright (c) 2000-2002 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2014 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -89,7 +89,7 @@
 extern struct vnodeop_desc vnop_default_desc;
 extern struct vnodeop_desc vnop_lookup_desc;
 extern struct vnodeop_desc vnop_create_desc;
-extern struct vnodeop_desc vnop_whiteout_desc;
+extern struct vnodeop_desc vnop_whiteout_desc; // obsolete
 extern struct vnodeop_desc vnop_mknod_desc;
 extern struct vnodeop_desc vnop_open_desc;
 extern struct vnodeop_desc vnop_close_desc;
@@ -113,6 +113,7 @@ extern struct vnodeop_desc vnop_rmdir_desc;
 extern struct vnodeop_desc vnop_symlink_desc;
 extern struct vnodeop_desc vnop_readdir_desc;
 extern struct vnodeop_desc vnop_readdirattr_desc;
+extern struct vnodeop_desc vnop_getattrlistbulk_desc;
 extern struct vnodeop_desc vnop_readlink_desc;
 extern struct vnodeop_desc vnop_inactive_desc;
 extern struct vnodeop_desc vnop_reclaim_desc;
@@ -197,7 +198,7 @@ struct vnop_whiteout_args {
 
 /*!
  @function VNOP_WHITEOUT
- @abstract Call down to a filesystem to create a whiteout.
+ @abstract Obsolete - no longer supported.
  @discussion Whiteouts are used to support the union filesystem, whereby one filesystem is mounted "transparently"
  on top of another.  A whiteout in the upper layer of a union mount is a "deletion" of a file in the lower layer;
  lookups will catch the whiteout and fail, setting ISWHITEOUT in the componentname structure, even if an underlying 
@@ -739,6 +740,35 @@ struct vnop_readdirattr_args {
  @param eofflag Should be set to 1 if the end of the directory has been reached. 
  @param actualcount Should be set to number of files whose attributes were  written into buffer.
  @param ctx Context to authenticate for readdirattr request.
+ @return 0 for success, else an error code.
+ */
+
+struct vnop_getattrlistbulk_args {
+	struct vnodeop_desc *a_desc;
+	vnode_t a_vp;
+	struct attrlist *a_alist;
+	struct vnode_attr *a_vap;
+	struct uio *a_uio;
+	void *a_private;
+	uint64_t a_options;
+	int32_t *a_eofflag;
+	int32_t *a_actualcount;
+	vfs_context_t a_context;
+};
+
+/*!
+ @function VNOP_GETATTRLISTBULK
+ @abstract Call down to get file attributes for many files in a directory at once.
+ @discussion VNOP_GETATTRLISTBULK() packs a buffer  with file attributes, as if the results of many "getattrlist" calls.
+ @param vp Directory in which to enumerate entries' attributes.
+ @param alist Which attributes are wanted for each directory entry.
+ @param uio Destination information for resulting attributes.
+ @param vap initialised vnode_attr structure pointer. This structure also has memory allocated (MAXPATHLEN bytes) and assigned to the va_name field for filesystems to use.
+ @param private reserved for future use.
+ @param options
+ @param eofflag Should be set to 1 if the end of the directory has been reached.
+ @param actualcount Should be set to number of files whose attributes were  written into buffer.
+ @param ctx Context to authenticate for getattrlistbulk request.
  @return 0 for success, else an error code.
  */
 

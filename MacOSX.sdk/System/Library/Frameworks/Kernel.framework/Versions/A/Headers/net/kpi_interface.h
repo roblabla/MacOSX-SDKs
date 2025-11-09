@@ -58,6 +58,7 @@ struct ifnet_demux_desc;
 /*!
 	@enum Interface Families
 	@abstract Constants defining interface families.
+	@discussion
 	@constant IFNET_FAMILY_ANY Match interface of any family type.
 	@constant IFNET_FAMILY_LOOPBACK A software loopback interface.
 	@constant IFNET_FAMILY_ETHERNET An Ethernet interface.
@@ -106,6 +107,7 @@ typedef u_int32_t ifnet_family_t;
 /*!
 	@enum BPF tap mode
 	@abstract Constants defining interface families.
+	@discussion
 	@constant BPF_MODE_DISABLED Disable bpf.
 	@constant BPF_MODE_INPUT Enable input only.
 	@constant BPF_MODE_OUTPUT Enable output only.
@@ -134,6 +136,7 @@ typedef u_int32_t protocol_family_t;
 /*!
 	@enum Interface Abilities
 	@abstract Constants defining interface offload support.
+	@discussion
 	@constant IFNET_CSUM_IP Hardware will calculate IPv4 checksums.
 	@constant IFNET_CSUM_TCP Hardware will calculate TCP checksums.
 	@constant IFNET_CSUM_UDP Hardware will calculate UDP checksums.
@@ -1051,6 +1054,7 @@ extern errno_t ifnet_get_tso_mtu(ifnet_t interface, sa_family_t family,
 /*!
 	@enum Interface wake properties
 	@abstract Constants defining Interface wake properties.
+	@discussion
 	@constant IFNET_WAKE_ON_MAGIC_PACKET Wake on Magic Packet.
 */
 enum {

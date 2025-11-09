@@ -1,6 +1,6 @@
 /* CoreImage - CIVector.h
 
-   Copyright (c) 2004 Apple Computer, Inc.
+   Copyright (c) 2004 Apple, Inc.
    All rights reserved. */
 
 #import <CoreImage/CoreImageDefines.h>

@@ -1,6 +1,6 @@
 /* CoreAnimation - CARemoteLayerClient.h
 
-   Copyright (c) 2010-2012 Apple Inc.
+   Copyright (c) 2010-2014, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CABase.h>
@@ -33,6 +33,6 @@
 
 /* The root layer. Defaults to nil. */
 
-@property(retain) CALayer *layer;
+@property(strong) CALayer *layer;
 
 @end

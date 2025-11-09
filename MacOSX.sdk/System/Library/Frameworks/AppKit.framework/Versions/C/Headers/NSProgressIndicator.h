@@ -1,7 +1,7 @@
 /*
         NSProgressIndicator.h
         Application Kit
-        Copyright (c) 1997-2013, Apple Inc.
+        Copyright (c) 1997-2014, Apple Inc.
         All rights reserved.
 */
 
@@ -22,25 +22,22 @@ typedef struct __NSProgressIndicatorThreadInfo _NSProgressIndicatorThreadInfo;
 //	large		18		16
 //	Aqua		12		12
 
-enum {
+typedef NS_ENUM(NSUInteger, NSProgressIndicatorThickness) {
     NSProgressIndicatorPreferredThickness 	= 14,
     NSProgressIndicatorPreferredSmallThickness 	= 10,
     NSProgressIndicatorPreferredLargeThickness	= 18,
     NSProgressIndicatorPreferredAquaThickness	= 12
 };
-typedef NSUInteger NSProgressIndicatorThickness;
 
-
-enum {
+typedef NS_ENUM(NSUInteger, NSProgressIndicatorStyle) {
     NSProgressIndicatorBarStyle = 0,
     NSProgressIndicatorSpinningStyle = 1
 };
-typedef NSUInteger NSProgressIndicatorStyle;
 
 //================================================================================
 //	NSProgressIndicator interface
 //
-@interface NSProgressIndicator : NSView
+@interface NSProgressIndicator : NSView <NSAccessibilityProgressIndicator>
 {
 @private
     /* Persitent properties */
@@ -89,48 +86,38 @@ typedef NSUInteger NSProgressIndicatorStyle;
 
 	/* Options */
 
-- (BOOL)isIndeterminate;				
-- (void)setIndeterminate:(BOOL)flag;
+@property (getter=isIndeterminate) BOOL indeterminate;				
 
-- (BOOL)isBezeled;
-- (void)setBezeled:(BOOL)flag;
+@property (getter=isBezeled) BOOL bezeled;
 
-- (NSControlTint)controlTint;
-- (void)setControlTint:(NSControlTint)tint;
+@property NSControlTint controlTint;
 
-- (NSControlSize)controlSize;
-- (void)setControlSize:(NSControlSize)size;
+@property NSControlSize controlSize;
 
 	/* Determinate progress indicator */
 
-- (double)doubleValue;
-- (void)setDoubleValue:(double)doubleValue;
+@property double doubleValue;
 
 - (void)incrementBy:(double)delta;			// equivalent to [self setDoubleValue:[self doubleValue] + delta]
 
-- (double)minValue;
-- (double)maxValue;
-- (void)setMinValue:(double)newMinimum;
-- (void)setMaxValue:(double)newMaximum;
+@property double minValue;
+@property double maxValue;
 
 /* Indeterminate progress indicator */
 
-- (BOOL)usesThreadedAnimation;				// returns YES if the PI uses a thread instead of a timer (default in NO)
-- (void)setUsesThreadedAnimation:(BOOL)threadedAnimation;
+@property BOOL usesThreadedAnimation;				// returns YES if the PI uses a thread instead of a timer (default in NO)
 
 - (void)startAnimation:(id)sender;
 - (void)stopAnimation:(id)sender;
 
 
-- (void) setStyle: (NSProgressIndicatorStyle) style;
-- (NSProgressIndicatorStyle) style;
+@property NSProgressIndicatorStyle style;
 
 // For the spinning style, it will size the spinning arrows to their default size.  
 // For the bar style, the height will be set to the recommended height. 
 - (void) sizeToFit;
 
-- (BOOL) isDisplayedWhenStopped;
-- (void) setDisplayedWhenStopped: (BOOL) isDisplayed;
+@property (getter=isDisplayedWhenStopped) BOOL displayedWhenStopped;
 
 @end
 

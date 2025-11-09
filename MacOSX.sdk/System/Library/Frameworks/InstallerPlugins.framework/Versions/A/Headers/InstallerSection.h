@@ -53,7 +53,7 @@ typedef struct InstallerSection_Private InstallerSection_Private;
 			
 				Use this method to gain access to bundle resources.
 */
-- (NSBundle *)bundle;
+@property (NS_NONATOMIC_IOSONLY, readonly, strong) NSBundle *bundle;
 
 /*!
     @method		title
@@ -64,7 +64,7 @@ typedef struct InstallerSection_Private InstallerSection_Private;
 				Although subclasses can override this method and return a dynamic title at runtime, the title is only
 				retrieved for display once (immediatly following the shouldLoad method, if shouldLoad returns YES).
 */
-- (NSString *)title;
+@property (NS_NONATOMIC_IOSONLY, readonly, strong) NSString *title;
 
 
 /*!
@@ -72,7 +72,7 @@ typedef struct InstallerSection_Private InstallerSection_Private;
     @discussion Returns the first pane specified by the firstPane outlet.  This pane is the first
 				pane entered when the section first becomes active.
 */
-- (InstallerPane *)firstPane;
+@property (NS_NONATOMIC_IOSONLY, readonly, strong) InstallerPane *firstPane;
 
 /*!
 	@method     shouldLoad
@@ -81,7 +81,7 @@ typedef struct InstallerSection_Private InstallerSection_Private;
 				section makes sense.  Return NO and the section will not be further loaded.  sections are
 				never fully unloaded.
 */
-- (BOOL)shouldLoad;
+@property (NS_NONATOMIC_IOSONLY, readonly) BOOL shouldLoad;
 
 /*!
     @method willLoadMainNib
@@ -125,7 +125,7 @@ typedef struct InstallerSection_Private InstallerSection_Private;
  				at the given time.  Plugins cannot influence this state, it should only
  				be used for informational purposes.  See InstallerState.h for more details.
 */
-- (InstallerState *)installerState;
+@property (NS_NONATOMIC_IOSONLY, readonly, strong) InstallerState *installerState;
 
 /*!
     @method     activePane
@@ -133,7 +133,7 @@ typedef struct InstallerSection_Private InstallerSection_Private;
     @discussion If the section is active, it will return the current active page.  If the section
 				is not active, nil will be returned.
 */
-- (InstallerPane *)activePane;
+@property (NS_NONATOMIC_IOSONLY, readonly, strong) InstallerPane *activePane;
 
 /*!
     @method     gotoPane:

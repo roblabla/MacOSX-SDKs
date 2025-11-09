@@ -3,7 +3,7 @@
  
      Contains:   TextEncoding-related types and constants, and prototypes for related functions
  
-     Copyright:  © 1995-2012 Apple Inc. All rights reserved.
+     Copyright:  © 1995-2013 Apple Inc. All rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -96,6 +96,7 @@
 #define kTextEncodingUnicodeV5_1 		0x010B				/*  No constant for Unicode 5.2, but leave an opening. */
 #define kTextEncodingUnicodeV6_0 		0x010D				/*  Adds many symbols, including emoji support. */
 #define kTextEncodingUnicodeV6_1 		0x010E				/*  Adds emoji variation sequences, properties changes. */
+#define kTextEncodingUnicodeV6_3 		0x0110				/*  Adds new bidi controls. */
 
 #define kTextEncodingISOLatin1 			0x0201				/*  ISO 8859-1, Western European */
 #define kTextEncodingISOLatin2 			0x0202				/*  ISO 8859-2, Central European */
@@ -443,6 +444,11 @@
 #define kUCBidiCatPopDirectionalFormat 	17					/*  PDF    Pop Directional Format */
 #define kUCBidiCatNonSpacingMark 		18					/*  NSM    Non-Spacing Mark */
 #define kUCBidiCatBoundaryNeutral 		19					/*  BN Boundary Neutral */
+															/*  New categories for Unicode 6.3 */
+#define kUCBidiCatLeftRightIsolate 		20					/*  LRI    Left-to-Right Isolate */
+#define kUCBidiCatRightLeftIsolate 		21					/*  RLI    Right-to-Left Isolate */
+#define kUCBidiCatFirstStrongIsolate 	22					/*  FSI    First Strong Isolate */
+#define kUCBidiCatPopDirectionalIsolate  23					/*  PDI    Pop Directional Isolate */
 
 
 #endif /* __TEXTCOMMON_R__ */

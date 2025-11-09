@@ -1,5 +1,5 @@
 /*	NSSpellServer.h
-	Copyright (c) 1990-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1990-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -37,8 +37,7 @@ The server just handles all the checking in and IAC and delegates the real work 
     void *_reservedSpellServer;
 }
 
-- (void)setDelegate:(id <NSSpellServerDelegate>)anObject;
-- (id <NSSpellServerDelegate>)delegate;
+@property (assign) id<NSSpellServerDelegate> delegate;
 
 /* Used to check in */
 - (BOOL)registerLanguage:(NSString *)language byVendor:(NSString *)vendor;

@@ -95,10 +95,17 @@
 #define I386_PGBYTES		4096		/* bytes per 80386 page */
 #define I386_PGSHIFT		12		/* bitshift for pages */
 
-
 #define	PAGE_SIZE		I386_PGBYTES
 #define	PAGE_SHIFT		I386_PGSHIFT
 #define	PAGE_MASK		(PAGE_SIZE - 1)
+
+#define PAGE_MAX_SHIFT          PAGE_SHIFT
+#define PAGE_MAX_SIZE           PAGE_SIZE
+#define PAGE_MAX_MASK           PAGE_MASK
+
+#define PAGE_MIN_SHIFT          PAGE_SHIFT
+#define PAGE_MIN_SIZE           PAGE_SIZE
+#define PAGE_MIN_MASK           PAGE_MASK
 
 #define I386_LPGBYTES		2*1024*1024	/* bytes per large page */
 #define I386_LPGSHIFT		21		/* bitshift for large pages */

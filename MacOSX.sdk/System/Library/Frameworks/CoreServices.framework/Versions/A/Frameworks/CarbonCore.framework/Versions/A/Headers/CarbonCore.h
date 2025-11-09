@@ -216,10 +216,6 @@
 #include <CarbonCore/TextEncodingPlugin.h>
 #endif
 
-#ifndef __FSEVENTS__
-#include <CarbonCore/FSEvents.h>
-#endif
-
 
 #endif /* __CARBONCORE__ */
 

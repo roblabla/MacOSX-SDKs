@@ -1,6 +1,6 @@
 /*	
     NSURLError.h
-    Copyright (c) 2003-2013, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2014, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -52,7 +52,7 @@ FOUNDATION_EXPORT NSString * const NSURLErrorFailingURLPeerTrustErrorKey NS_AVAI
     @abstract The NSError userInfo dictionary key used to store and retrieve the NSNumber corresponding to the reason why a background
 	NSURLSessionTask was cancelled
  */
-FOUNDATION_EXPORT NSString * const NSURLErrorBackgroundTaskCancelledReasonKey NS_AVAILABLE(NA, 7_0);
+FOUNDATION_EXPORT NSString * const NSURLErrorBackgroundTaskCancelledReasonKey NS_AVAILABLE(10_10, 8_0);
 
 /*!
     @enum Codes associated with NSURLErrorBackgroundTaskCancelledReasonKey
@@ -63,7 +63,9 @@ enum
 {
     NSURLErrorCancelledReasonUserForceQuitApplication =    0,
     NSURLErrorCancelledReasonBackgroundUpdatesDisabled =   1,
-} NS_ENUM_AVAILABLE(NA, 7_0);
+    NSURLErrorCancelledReasonInsufficientSystemResources NS_ENUM_AVAILABLE(10_10, 8_0) = 2,
+    
+} NS_ENUM_AVAILABLE(10_10, 7_0);
 
 /*!
     @enum NSURL-related Error Codes
@@ -121,5 +123,9 @@ enum
     NSURLErrorCallIsActive NS_ENUM_AVAILABLE(10_7, 3_0) =                    kCFURLErrorCallIsActive,
     NSURLErrorDataNotAllowed NS_ENUM_AVAILABLE(10_7, 3_0) =                  kCFURLErrorDataNotAllowed,
     NSURLErrorRequestBodyStreamExhausted NS_ENUM_AVAILABLE(10_7, 3_0) =      kCFURLErrorRequestBodyStreamExhausted,
+    
+    NSURLErrorBackgroundSessionRequiresSharedContainer NS_ENUM_AVAILABLE(10_10, 8_0) = -995,
+    NSURLErrorBackgroundSessionInUseByAnotherProcess NS_ENUM_AVAILABLE(10_10, 8_0) = -996,
+    NSURLErrorBackgroundSessionWasDisconnected NS_ENUM_AVAILABLE(10_10, 8_0)= -997,
 };
 

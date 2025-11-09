@@ -1,5 +1,5 @@
 /*	CFDictionary.h
-	Copyright (c) 1998-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1998-2014, Apple Inc. All rights reserved.
 */
 
 /*!
@@ -178,13 +178,13 @@ typedef void (*CFDictionaryApplierFunction)(const void *key, const void *value, 
 	@typedef CFDictionaryRef
 	This is the type of a reference to immutable CFDictionarys.
 */
-typedef const struct __CFDictionary * CFDictionaryRef;
+typedef const struct CF_BRIDGED_TYPE(NSDictionary) __CFDictionary * CFDictionaryRef;
 
 /*!
 	@typedef CFMutableDictionaryRef
 	This is the type of a reference to mutable CFDictionarys.
 */
-typedef struct __CFDictionary * CFMutableDictionaryRef;
+typedef struct CF_BRIDGED_MUTABLE_TYPE(NSMutableDictionary) __CFDictionary * CFMutableDictionaryRef;
 
 /*!
 	@function CFDictionaryGetTypeID

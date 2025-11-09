@@ -3,7 +3,7 @@
 
 	Framework:  CoreMedia
  
-    Copyright 2005-2013 Apple Inc. All rights reserved.
+    Copyright 2005-2014 Apple Inc. All rights reserved.
 
 */
 
@@ -781,7 +781,7 @@ OSStatus CMVideoFormatDescriptionCreateForImageBuffer(
 	@function	CMVideoFormatDescriptionCreateFromH264ParameterSets
 	@abstract	Creates a format description for a video media stream described by H.264 parameter set NAL units.
 	@discussion	This function parses the dimensions provided by the parameter sets and creates a format description suitable for a raw H.264 stream.
-				The parameter sets data can come from raw NAL units and must have any emulation prevention bytes needed.
+				The parameter sets' data can come from raw NAL units and must have any emulation prevention bytes needed.
 				The supported NAL unit types to be included in the format description are 7 (sequence parameter set), 8 (picture parameter set) and 13 (sequence parameter set extension). At least one sequence parameter set and one picture parameter set must be provided.
 */
 CM_EXPORT
@@ -789,7 +789,7 @@ OSStatus CMVideoFormatDescriptionCreateFromH264ParameterSets(
 	 CFAllocatorRef allocator,						/*! @param allocator
 													CFAllocator to be used when creating the CMFormatDescription. Pass NULL to use the default allocator. */
 	 size_t parameterSetCount,						/*! @param parameterSetCount
-													The number of parameter sets to include in the format description. This parameter must be greater than two. */
+													The number of parameter sets to include in the format description. This parameter must be at least 2. */
 	 const uint8_t * const * parameterSetPointers,	/*! @param parameterSetPointers
 													Points to a C array containing parameterSetCount pointers to parameter sets. */
 	 const size_t * parameterSetSizes,				/*! @param parameterSetSizes
@@ -1001,6 +1001,16 @@ typedef FourCharCode CMClosedCaptionFormatType;
 
 
 #pragma mark CMTextFormatDescription
+
+/*! 
+	@functiongroup	Text-specific functions
+*/
+
+/*!
+	@typedef CMTextFormatDescriptionRef
+	Synonym type used for manipulating Text media CMFormatDescriptions
+*/
+typedef CMFormatDescriptionRef CMTextFormatDescriptionRef;
 
 /*!
 	@enum CMTextFormatType
@@ -1365,6 +1375,22 @@ CM_EXPORT const CFStringRef kCMFormatDescriptionExtensionKey_MetadataKeyTable
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 	CM_EXPORT const CFStringRef kCMMetadataFormatDescriptionKey_LocalID 	// CFNumber(OSType) native endian
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+	CM_EXPORT const CFStringRef kCMMetadataFormatDescriptionKey_DataType 	// CFData
+							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+	CM_EXPORT const CFStringRef kCMMetadataFormatDescriptionKey_DataTypeNamespace 	// CFNumber(SInt32) native endian
+							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+	CM_EXPORT const CFStringRef kCMMetadataFormatDescriptionKey_ConformingDataTypes // CFArray(CFDictionary) of DataType and DataTypeNamespace
+							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+	CM_EXPORT const CFStringRef kCMMetadataFormatDescriptionKey_LanguageTag	// CFString
+							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+
+CM_EXPORT const CFStringRef kCMMetadataFormatDescriptionMetadataSpecificationKey_Identifier				// CFString
+							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+CM_EXPORT const CFStringRef kCMMetadataFormatDescriptionMetadataSpecificationKey_DataType				// CFString
+							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+CM_EXPORT const CFStringRef kCMMetadataFormatDescriptionMetadataSpecificationKey_ExtendedLanguageTag	// CFString in BCP 47 format
+							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+
 
 CM_EXPORT
 OSStatus CMMetadataFormatDescriptionCreateWithKeys(
@@ -1379,8 +1405,37 @@ OSStatus CMMetadataFormatDescriptionCreateWithKeys(
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 CM_EXPORT
+OSStatus CMMetadataFormatDescriptionCreateWithMetadataSpecifications(
+	CFAllocatorRef allocator,					/*! @param allocator		CFAllocator to be used. kCFAllocatorDefault if you don't care. */
+	CMMetadataFormatType metadataType,			/*! @param metadataType		Currently the type must be kCMMetadataFormatType_Boxed. */
+	CFArrayRef metadataSpecifications,			/*! @param metadataSpecifications	An array of dictionaries, each dictionary supplies a metadata identifier, a datatype, and an optional language tag. */
+	CMMetadataFormatDescriptionRef *outDesc)	/*! @param outDesc			Returned newly created metadata CMFormatDescription */
+							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+
+CM_EXPORT
+OSStatus CMMetadataFormatDescriptionCreateWithMetadataFormatDescriptionAndMetadataSpecifications(
+	CFAllocatorRef allocator,					/*! @param allocator		CFAllocator to be used. kCFAllocatorDefault if you don't care. */
+	CMMetadataFormatDescriptionRef srcDesc,		/*! @param srcDesc			Source metadata format description being extended */
+	CFArrayRef metadataSpecifications,			/*! @param metadataSpecifications	An array of dictionaries, each dictionary supplies a metadata identifier, a datatype, and an optional language tag. */
+	CMMetadataFormatDescriptionRef *outDesc)	/*! @param outDesc			Returned newly created metadata CMFormatDescription */
+							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+
+CM_EXPORT
+OSStatus CMMetadataFormatDescriptionCreateByMergingMetadataFormatDescriptions(
+	CFAllocatorRef allocator,					/*! @param allocator		CFAllocator to be used. kCFAllocatorDefault if you don't care. */
+	CMMetadataFormatDescriptionRef srcDesc1,	/*! @param srcDesc1			Metadata format description being merged */
+	CMMetadataFormatDescriptionRef srcDesc2,	/*! @param srcDesc2			Metadata format description being merged */
+	CMMetadataFormatDescriptionRef *outDesc)	/*! @param outDesc			Returned newly created metadata CMFormatDescription */
+							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+
+CM_EXPORT
 CFDictionaryRef CMMetadataFormatDescriptionGetKeyWithLocalID( CMMetadataFormatDescriptionRef desc, OSType localKeyID)
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+
+CM_EXPORT
+CFArrayRef CMMetadataFormatDescriptionGetIdentifiers( CMMetadataFormatDescriptionRef desc)
+							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+
 
 #pragma pack(pop)
 

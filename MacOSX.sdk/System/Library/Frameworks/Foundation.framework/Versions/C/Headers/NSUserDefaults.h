@@ -1,5 +1,5 @@
 /*	NSUserDefaults.h
-	Copyright (c) 1994-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -19,8 +19,8 @@ FOUNDATION_EXPORT NSString * const NSRegistrationDomain;
 + (NSUserDefaults *)standardUserDefaults;
 + (void)resetStandardUserDefaults;
 
-- (id)init;
-- (id)initWithSuiteName:(NSString *)suitename NS_AVAILABLE(10_9, 7_0);
+- (instancetype)init;
+- (instancetype)initWithSuiteName:(NSString *)suitename NS_AVAILABLE(10_9, 7_0) NS_DESIGNATED_INITIALIZER; //nil suite means use the default search list that +standardUserDefaults uses
 - (id)initWithUser:(NSString *)username NS_DEPRECATED(10_0, 10_9, 2_0, 7_0);
 
 - (id)objectForKey:(NSString *)defaultName;
@@ -51,7 +51,7 @@ FOUNDATION_EXPORT NSString * const NSRegistrationDomain;
 
 - (NSDictionary *)dictionaryRepresentation;
 
-- (NSArray *)volatileDomainNames;
+@property (readonly, copy) NSArray *volatileDomainNames;
 - (NSDictionary *)volatileDomainForName:(NSString *)domainName;
 - (void)setVolatileDomain:(NSDictionary *)domain forName:(NSString *)domainName;
 - (void)removeVolatileDomainForName:(NSString *)domainName;

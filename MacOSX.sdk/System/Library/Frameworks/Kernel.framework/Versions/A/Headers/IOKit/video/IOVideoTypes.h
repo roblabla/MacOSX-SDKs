@@ -3,7 +3,7 @@
     
     Contains:   
 
-    Copyright:  © 2006-2012 by Apple Inc., all rights reserved.
+    Copyright:  © 2006-2014 by Apple Inc., all rights reserved.
 */
 
 #if !defined(__IOVideoTypes_h__)
@@ -19,7 +19,7 @@ extern "C"
 #endif
 
 /*!
-    @struct         IOVideoNotification
+    @struct         IOVideoDeviceNotification
     @abstract       This structure contains an individual notification from the driver.
     @field          mObjectID
                         The ID of the object to which the notification pertains.
@@ -53,9 +53,9 @@ typedef struct IOVideoDeviceNotification IOVideoDeviceNotification;
     @field          mClientData
                         The client data that was registered with the mach port.
     @field          mNumberNotifications
-                        The number of IOVideoNotifications in the mNotifications array.
+                        The number of IOVideoDeviceNotifications in the mNotifications array.
     @field          mNotifications
-                        A variable length array of IOVideoNotification structures that carry the actual notification data. The number of elements in this array is denoted by
+                        A variable length array of IOVideoDeviceNotification structures that carry the actual notification data. The number of elements in this array is denoted by
                         mNumberNotifications, but can also be inferred from the message size in the mach message header.
 */
 struct IOVideoDeviceNotificationMessage

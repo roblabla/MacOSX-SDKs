@@ -47,51 +47,51 @@ extern "C"
 {
 #endif
 
-typedef int32_t SCARDCONTEXT; /**< \p hContext returned by SCardEstablishContext() */
-typedef SCARDCONTEXT *PSCARDCONTEXT;
-typedef SCARDCONTEXT *LPSCARDCONTEXT;
-typedef int32_t SCARDHANDLE; /**< \p hCard returned by SCardConnect() */
-typedef SCARDHANDLE *PSCARDHANDLE;
-typedef SCARDHANDLE *LPSCARDHANDLE;
+    typedef int32_t SCARDCONTEXT; /**< \p hContext returned by SCardEstablishContext() */
+    typedef SCARDCONTEXT *PSCARDCONTEXT;
+    typedef SCARDCONTEXT *LPSCARDCONTEXT;
+    typedef int32_t SCARDHANDLE; /**< \p hCard returned by SCardConnect() */
+    typedef SCARDHANDLE *PSCARDHANDLE;
+    typedef SCARDHANDLE *LPSCARDHANDLE;
 
 #define MAX_ATR_SIZE			33	/**< Maximum ATR size */
 
-/* Set structure elements aligment on bytes
- * http://gcc.gnu.org/onlinedocs/gcc/Structure_002dPacking-Pragmas.html */
+    /* Set structure elements aligment on bytes
+     * http://gcc.gnu.org/onlinedocs/gcc/Structure_002dPacking-Pragmas.html */
 #ifdef __APPLE__
 #pragma pack(1)
 #else
 #pragma pack(push, 1)
 #endif
 
-typedef struct
-{
-	const char *szReader;
-	void *pvUserData;
-	uint32_t dwCurrentState;
-	uint32_t dwEventState;
-	uint32_t cbAtr;
-	unsigned char rgbAtr[MAX_ATR_SIZE];
-}
-SCARD_READERSTATE_A;
+    typedef struct
+    {
+        const char *szReader;
+        void *pvUserData;
+        uint32_t dwCurrentState;
+        uint32_t dwEventState;
+        uint32_t cbAtr;
+        unsigned char rgbAtr[MAX_ATR_SIZE];
+    }
+    SCARD_READERSTATE_A;
 
-typedef SCARD_READERSTATE_A SCARD_READERSTATE, *PSCARD_READERSTATE_A,
+    typedef SCARD_READERSTATE_A SCARD_READERSTATE, *PSCARD_READERSTATE_A,
 	*LPSCARD_READERSTATE_A;
 
-/** Protocol Control Information (PCI) */
-typedef struct _SCARD_IO_REQUEST
-{
-	uint32_t dwProtocol;	/**< Protocol identifier */
-	uint32_t cbPciLength;	/**< Protocol Control Inf Length */
-}
-SCARD_IO_REQUEST, *PSCARD_IO_REQUEST, *LPSCARD_IO_REQUEST;
+    /** Protocol Control Information (PCI) */
+    typedef struct _SCARD_IO_REQUEST
+    {
+        uint32_t dwProtocol;	/**< Protocol identifier */
+        uint32_t cbPciLength;	/**< Protocol Control Inf Length */
+    }
+    SCARD_IO_REQUEST, *PSCARD_IO_REQUEST, *LPSCARD_IO_REQUEST;
 
-typedef const SCARD_IO_REQUEST *LPCSCARD_IO_REQUEST;
+    typedef const SCARD_IO_REQUEST *LPCSCARD_IO_REQUEST;
 
-extern SCARD_IO_REQUEST g_rgSCardT0Pci, g_rgSCardT1Pci,
+    extern SCARD_IO_REQUEST g_rgSCardT0Pci, g_rgSCardT1Pci,
 	g_rgSCardRawPci;
 
-/* restore default structure elements alignment */
+    /* restore default structure elements alignment */
 #ifdef __APPLE__
 #pragma pack()
 #else
@@ -102,8 +102,8 @@ extern SCARD_IO_REQUEST g_rgSCardT0Pci, g_rgSCardT1Pci,
 #define SCARD_PCI_T1	(&g_rgSCardT1Pci) /**< protocol control information (PCI) for T=1 */
 #define SCARD_PCI_RAW	(&g_rgSCardRawPci) /**< protocol control information (PCI) for RAW protocol */
 
-/** error codes from http://msdn.microsoft.com/en-us/library/aa924526.aspx
- */
+    /** error codes from http://msdn.microsoft.com/en-us/library/aa924526.aspx
+     */
 #define SCARD_S_SUCCESS			0x00000000 /**< No error was encountered. */
 #define SCARD_F_INTERNAL_ERROR		0x80100001 /**< An internal consistency check failed. */
 #define SCARD_E_CANCELLED		0x80100002 /**< The action was cancelled by an SCardCancel request. */
@@ -138,16 +138,16 @@ extern SCARD_IO_REQUEST g_rgSCardT0Pci, g_rgSCardT1Pci,
 #define SCARD_E_UNEXPECTED		0x8010001F /**< An unexpected card error has occurred. */
 #define SCARD_E_ICC_INSTALLATION	0x80100020 /**< No primary provider can be found for the smart card. */
 #define SCARD_E_ICC_CREATEORDER		0x80100021 /**< The requested order of object creation is not supported. */
-/* #define SCARD_E_UNSUPPORTED_FEATURE	0x80100022 / **< This smart card does not support the requested feature. */
+    /* #define SCARD_E_UNSUPPORTED_FEATURE	0x80100022 / **< This smart card does not support the requested feature. */
 #define SCARD_E_DIR_NOT_FOUND		0x80100023 /**< The identified directory does not exist in the smart card. */
-#define SCARD_E_FILE_NOT_FOUND		0x80100024 /**< The identified file does not exist in the smart card. */ 
+#define SCARD_E_FILE_NOT_FOUND		0x80100024 /**< The identified file does not exist in the smart card. */
 #define SCARD_E_NO_DIR			0x80100025 /**< The supplied path does not represent a smart card directory. */
 #define SCARD_E_NO_FILE			0x80100026 /**< The supplied path does not represent a smart card file. */
 #define SCARD_E_NO_ACCESS		0x80100027 /**< Access is denied to this file. */
 #define SCARD_E_WRITE_TOO_MANY		0x80100028 /**< The smart card does not have enough memory to store the information. */
 #define SCARD_E_BAD_SEEK		0x80100029 /**< There was an error trying to set the smart card file object pointer. */
 #define SCARD_E_INVALID_CHV		0x8010002A /**< The supplied PIN is incorrect. */
-#define SCARD_E_UNKNOWN_RES_MNG		0x8010002B /**< An unrecognized error code was returned from a layered component. */ 
+#define SCARD_E_UNKNOWN_RES_MNG		0x8010002B /**< An unrecognized error code was returned from a layered component. */
 #define SCARD_E_NO_SUCH_CERTIFICATE	0x8010002C /**< The requested certificate does not exist. */
 #define SCARD_E_CERTIFICATE_UNAVAILABLE	0x8010002D /**< The requested certificate could not be obtained. */
 #define SCARD_E_NO_READERS_AVAILABLE    0x8010002E /**< Cannot find a smart card reader. */
@@ -211,7 +211,7 @@ extern SCARD_IO_REQUEST g_rgSCardT0Pci, g_rgSCardT1Pci,
 #define SCARD_STATE_MUTE		0x0200	/**< Unresponsive card */
 #define SCARD_STATE_UNPOWERED		0x0400	/**< Unpowered card */
 
-/** PC/SC Lite specific extensions */
+    /** PC/SC Lite specific extensions */
 #define SCARD_W_INSERTED_CARD		0x8010006A
 #define SCARD_E_UNSUPPORTED_FEATURE	0x8010001F
 
@@ -250,23 +250,23 @@ extern SCARD_IO_REQUEST g_rgSCardT0Pci, g_rgSCardT1Pci,
 #define PCSCLITE_MSG_KEY_LEN		16		/**< App ID key length */
 #define PCSCLITE_RW_ATTEMPTS		100		/**< Attempts to rd/wrt */
 
-/** Maximum applications */
+    /** Maximum applications */
 #define PCSCLITE_MAX_APPLICATIONS			16
-/** Maximum contexts by application */
+    /** Maximum contexts by application */
 #define PCSCLITE_MAX_APPLICATION_CONTEXTS		16
-/** Maximum of applications contexts that pcscd can accept */
+    /** Maximum of applications contexts that pcscd can accept */
 #define PCSCLITE_MAX_APPLICATIONS_CONTEXTS \
-	PCSCLITE_MAX_APPLICATIONS * PCSCLITE_MAX_APPLICATION_CONTEXTS
-/** Maximum channels on a reader context */
+PCSCLITE_MAX_APPLICATIONS * PCSCLITE_MAX_APPLICATION_CONTEXTS
+    /** Maximum channels on a reader context */
 #define PCSCLITE_MAX_READER_CONTEXT_CHANNELS		16
-/** Maximum channels on an application context */
+    /** Maximum channels on an application context */
 #define PCSCLITE_MAX_APPLICATION_CONTEXT_CHANNELS	16
-/** Maximum readers context (a slot is count as a reader) */
+    /** Maximum readers context (a slot is count as a reader) */
 #define PCSCLITE_MAX_READERS_CONTEXTS			16
 
-/* PCSCLITE_MAX_READERS is deprecated
- * use PCSCLITE_MAX_READERS_CONTEXTS instead */
-/* extern int PCSCLITE_MAX_READERS __attribute__ ((deprecated)); */
+    /* PCSCLITE_MAX_READERS is deprecated
+     * use PCSCLITE_MAX_READERS_CONTEXTS instead */
+    /* extern int PCSCLITE_MAX_READERS __attribute__ ((deprecated)); */
 
 #define PCSCLITE_MAX_THREADS		16	/**< Stat change threads */
 #define PCSCLITE_STATUS_WAIT		200000	/**< Status Change Sleep */
@@ -279,24 +279,24 @@ extern SCARD_IO_REQUEST g_rgSCardT0Pci, g_rgSCardT1Pci,
 #define SCARD_ATR_LENGTH		MAX_ATR_SIZE	/**< Maximum ATR size */
 #endif
 
-/* These are deprecated */
+    /* These are deprecated */
 #define PCSCLITE_MAX_CHANNELS           16	/* Maximum channels */
 #define PCSCLITE_MAX_CONTEXTS           16	/* Maximum readers */
 #define PCSCLITE_MAX_COMSIZE            64	/* Maximum arg size */
 
-/*
- * Enhanced messaging has been added to accomodate newer devices which have
- * more advanced capabilites, such as dedicated secure co-processors which
- * can stream and encrypt data over USB.  In order to used enhanced messaging
- * you must define PCSCLITE_ENHANCED_MESSAGING in the framework(library), 
- * the daemon, and your application
- */
+    /*
+     * Enhanced messaging has been added to accomodate newer devices which have
+     * more advanced capabilites, such as dedicated secure co-processors which
+     * can stream and encrypt data over USB.  In order to used enhanced messaging
+     * you must define PCSCLITE_ENHANCED_MESSAGING in the framework(library),
+     * the daemon, and your application
+     */
 
-/*
- * The message and buffer sizes must be multiples of 16.
- * The max message size must be at least large enough
- * to accomodate the transmit_struct
- */
+    /*
+     * The message and buffer sizes must be multiples of 16.
+     * The max message size must be at least large enough
+     * to accomodate the transmit_struct
+     */
 
 #ifndef PCSCLITE_ENHANCED_MESSAGING
 #define PCSCLITE_MAX_MESSAGE_SIZE	2048	/**< Transport msg len */
@@ -307,14 +307,14 @@ extern SCARD_IO_REQUEST g_rgSCardT0Pci, g_rgSCardT1Pci,
 #define MAX_BUFFER_SIZE                 (1<<15)  /* enhanced (32K) Tx/Rx Buffer */
 #define PCSCLITE_SERVER_ATTEMPTS         200     /* To allow larger data reads/writes */
 #endif
-
+    
 #define MAX_BUFFER_SIZE_EXTENDED	(4 + 3 + (1<<16) + 3)	/**< enhanced (64K + APDU + Lc + Le) Tx/Rx Buffer */
-
-/*
- * Gets a stringified error response 
- */
-char *pcsc_stringify_error(int32_t err);
-
+    
+    /*
+     * Gets a stringified error response 
+     */
+    char *pcsc_stringify_error(int32_t err);
+    
 #ifdef __cplusplus
 }
 #endif

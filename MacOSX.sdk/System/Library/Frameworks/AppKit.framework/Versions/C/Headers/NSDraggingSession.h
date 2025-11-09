@@ -1,7 +1,7 @@
 /*
 	NSDraggingSession.h
 	Application Kit
-	Copyright (c) 2010-2013, Apple Inc.
+	Copyright (c) 2010-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -66,11 +66,9 @@ NS_CLASS_AVAILABLE(10_7, NA)
    Note: All changes made here are only in effect while destination is not overriding them. When the drag exits the destination, all properties return to the last values set here.
 */
 
-#if NS_BLOCKS_AVAILABLE
 /* Enumerate through each dragging item. Any changes made to the properties of the draggingItem are reflected in the drag when the destination is not overriding them. Classes in the provided array must implement the NSPasteboardReading protocol. Cocoa classes that implement this protocol include NSImage, NSString, NSURL, NSColor, NSAttributedString, and NSPasteboardItem. For every item on the pasteboard, each class in the provided array will be queried for the types it can read using -readableTypesForPasteboard:. An instance will be created of the first class found in the provided array whose readable types match a conforming type contained in that pasteboard item. If an Instance is created from the pasteboard item data, it is placed into an NSDraggingItem along with the dragging properties of that item such as the drag image. The NSDraggingItem is then passed as a parameter to the provided block. Additional search options, such as restricting the search to file URLs with particular content types, can be specified with a search options dictionary.  See the comments for the Pasteboard Reading Options keys in NSPasteboard.h for a full description. Note: all coordinate properties in the NSDraggingItem are in the coordinate system of view. If view is nil, the screen coordinate space is used.
 */
 - (void)enumerateDraggingItemsWithOptions:(NSDraggingItemEnumerationOptions)enumOpts forView:(NSView *)view classes:(NSArray *)classArray searchOptions:(NSDictionary *)searchOptions usingBlock:(void (^)(NSDraggingItem *draggingItem, NSInteger idx, BOOL *stop))block;
-#endif
 @end
 
 

@@ -1,5 +1,5 @@
 /*	NSTextCheckingResult.h
-	Copyright (c) 2008-2013, Apple Inc. All rights reserved.
+	Copyright (c) 2008-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -45,19 +45,19 @@ NS_CLASS_AVAILABLE(10_6, 4_0)
 @interface NSTextCheckingResult (NSTextCheckingResultOptional)
 
 /* Optional properties, used with certain types of results. */
-@property (readonly) NSOrthography *orthography;
-@property (readonly) NSArray *grammarDetails;
-@property (readonly) NSDate *date;
-@property (readonly) NSTimeZone *timeZone;
+@property (readonly, copy) NSOrthography *orthography;
+@property (readonly, copy) NSArray *grammarDetails;
+@property (readonly, copy) NSDate *date;
+@property (readonly, copy) NSTimeZone *timeZone;
 @property (readonly) NSTimeInterval duration;
-@property (readonly) NSDictionary *components NS_AVAILABLE(10_7, 4_0);
-@property (readonly) NSURL *URL;
-@property (readonly) NSString *replacementString;
-@property (readonly) NSArray *alternativeStrings NS_AVAILABLE(10_9, 7_0);
-@property (readonly) NSRegularExpression *regularExpression NS_AVAILABLE(10_7, 4_0);
-@property (readonly) NSString *phoneNumber NS_AVAILABLE(10_7, 4_0);
+@property (readonly, copy) NSDictionary *components NS_AVAILABLE(10_7, 4_0);
+@property (readonly, copy) NSURL *URL;
+@property (readonly, copy) NSString *replacementString;
+@property (readonly, copy) NSArray *alternativeStrings NS_AVAILABLE(10_9, 7_0);
+@property (readonly, copy) NSRegularExpression *regularExpression NS_AVAILABLE(10_7, 4_0);
+@property (readonly, copy) NSString *phoneNumber NS_AVAILABLE(10_7, 4_0);
 
-@property (readonly) NSDictionary *addressComponents;
+@property (readonly, copy) NSDictionary *addressComponents;
 
 /* A result must have at least one range, but may optionally have more (for example, to represent regular expression capture groups).  The range at index 0 always matches the range property.  Additional ranges, if any, will have indexes from 1 to numberOfRanges-1. */
 @property (readonly) NSUInteger numberOfRanges NS_AVAILABLE(10_7, 4_0);

@@ -1,7 +1,7 @@
 /*
     NSPathComponentCell.h
     Application Kit
-    Copyright (c) 2006-2013, Apple Inc.
+    Copyright (c) 2006-2014, Apple Inc.
     All rights reserved.
 */
 
@@ -37,15 +37,11 @@ NS_CLASS_AVAILABLE(10_5, NA)
     id _aux;
 }
 
-/* Get and set the image (aka: icon) represented for this particular cell along the path. The NSPathComponentCell can display both an image and text set with stringValue/objectValue. Generally, you will want to use a 16x16 image when the pathStyle is NSPathStyleStandard or NSPathStylePopUp, and a 14x14 image when the style is NSPathStyleNavigationBar.
+/* See NSPathComponent.h for details on the image & URL properties.
 */
-- (NSImage *)image;
-- (void)setImage:(NSImage *)value;
+@property (copy) NSImage *image;
 
-/* Get and set the url portion to this particular NSPathComponentCell along the path of cells.
-*/
-- (NSURL *)URL;
-- (void)setURL:(NSURL *)url;
+@property (copy) NSURL *URL;
 
 @end
 

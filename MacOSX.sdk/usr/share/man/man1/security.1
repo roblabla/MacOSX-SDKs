@@ -389,7 +389,7 @@ as the algorithm, can be rsa, dh, dsa or fee (default rsa)
 .It Fl s Ar size
 Specify the keysize in bits (default 512)
 .It Fl f Ar date
-Make a key valid from the specified date
+Make a key valid from the specified date (ex: "13/11/10 3:30pm")
 .It Fl t Ar date
 Make a key valid to the specified date
 .It Fl d Ar days
@@ -1127,6 +1127,16 @@ Output trust settings file; default is user domain.
 .It Fl D
 Add default setting instead of per-cert setting. No certFile is specified when using this option
 .El
+.It
+.Sy Key usage codes:
+    -1 - Any
+     1 - Sign
+     2 - Encrypt/Decrypt Data
+     4 - Encrypt/Decrypt Key
+     8 - Sign certificate
+    16 - Sign revocation
+    32 - Key exchange
+    To specify more than one usage, add values together (except -1 - Any).
 .It
 .Sy Examples
 .Bl -tag -width -indent

@@ -1,6 +1,6 @@
 /*
         NSTextTable.h
-        Copyright (c) 2004-2013, Apple Inc.
+        Copyright (c) 2004-2014, Apple Inc.
         All rights reserved.
 
         Classes to represent text tables and other text blocks.
@@ -17,14 +17,13 @@
 
 
 /* Values for NSTextBlockValueType */
-enum {
+typedef NS_ENUM(NSUInteger, NSTextBlockValueType) {
     NSTextBlockAbsoluteValueType    = 0,    // Absolute value in points
     NSTextBlockPercentageValueType  = 1     // Percentage value (out of 100)
 };
-typedef NSUInteger NSTextBlockValueType;
 
 /* Values for NSTextBlockDimension */
-enum {
+typedef NS_ENUM(NSUInteger, NSTextBlockDimension) {
     NSTextBlockWidth            = 0,
     NSTextBlockMinimumWidth     = 1,
     NSTextBlockMaximumWidth     = 2,
@@ -32,31 +31,27 @@ enum {
     NSTextBlockMinimumHeight    = 5,
     NSTextBlockMaximumHeight    = 6
 };
-typedef NSUInteger NSTextBlockDimension;
 
 /* Values for NSTextBlockLayer */
-enum {
+typedef NS_ENUM(NSInteger, NSTextBlockLayer) {
     NSTextBlockPadding  = -1,
     NSTextBlockBorder   =  0,
     NSTextBlockMargin   =  1
 };
-typedef NSInteger NSTextBlockLayer;
 
 /* Values for NSTextBlockVerticalAlignment */
-enum {
+typedef NS_ENUM(NSUInteger, NSTextBlockVerticalAlignment) {
     NSTextBlockTopAlignment         = 0,
     NSTextBlockMiddleAlignment      = 1,
     NSTextBlockBottomAlignment      = 2,
     NSTextBlockBaselineAlignment    = 3
 };
-typedef NSUInteger NSTextBlockVerticalAlignment;
 
 /* Values for NSTextTableLayoutAlgorithm */
-enum {
+typedef NS_ENUM(NSUInteger, NSTextTableLayoutAlgorithm) {
     NSTextTableAutomaticLayoutAlgorithm = 0,
     NSTextTableFixedLayoutAlgorithm     = 1
 };
-typedef NSUInteger NSTextTableLayoutAlgorithm;
 
 /* NSTextBlock is the basic object for text block layout, and the superclass of the other classes. */
 @interface NSTextBlock : NSObject <NSCoding, NSCopying> {
@@ -70,7 +65,7 @@ typedef NSUInteger NSTextTableLayoutAlgorithm;
     void *_blockSecondary;
 }
 
-- (id)init;     // Designated initializer
+- (instancetype)init;     // Designated initializer
 
 /* Content size */
 - (void)setValue:(CGFloat)val type:(NSTextBlockValueType)type forDimension:(NSTextBlockDimension)dimension;
@@ -79,8 +74,8 @@ typedef NSUInteger NSTextTableLayoutAlgorithm;
 
 /* Convenience methods for content width in particular, using the above methods with dimension == NSTextBlockWidth */
 - (void)setContentWidth:(CGFloat)val type:(NSTextBlockValueType)type;
-- (CGFloat)contentWidth;
-- (NSTextBlockValueType)contentWidthValueType;
+@property (readonly) CGFloat contentWidth;
+@property (readonly) NSTextBlockValueType contentWidthValueType;
 
 /* Margin, border, and padding */
 - (void)setWidth:(CGFloat)val type:(NSTextBlockValueType)type forLayer:(NSTextBlockLayer)layer edge:(NSRectEdge)edge;
@@ -89,12 +84,10 @@ typedef NSUInteger NSTextTableLayoutAlgorithm;
 - (NSTextBlockValueType)widthValueTypeForLayer:(NSTextBlockLayer)layer edge:(NSRectEdge)edge;
 
 /* Alignment */
-- (void)setVerticalAlignment:(NSTextBlockVerticalAlignment)alignment;
-- (NSTextBlockVerticalAlignment)verticalAlignment;
+@property NSTextBlockVerticalAlignment verticalAlignment;
 
 /* Colors */
-- (void)setBackgroundColor:(NSColor *)color;
-- (NSColor *)backgroundColor;
+@property (copy) NSColor *backgroundColor;
 - (void)setBorderColor:(NSColor *)color forEdge:(NSRectEdge)edge;
 - (void)setBorderColor:(NSColor *)color;        // Convenience method sets all edges at once
 - (NSColor *)borderColorForEdge:(NSRectEdge)edge;
@@ -119,14 +112,14 @@ typedef NSUInteger NSTextTableLayoutAlgorithm;
     void *_tableBlockSecondary;
 }
 
-- (id)initWithTable:(NSTextTable *)table startingRow:(NSInteger)row rowSpan:(NSInteger)rowSpan startingColumn:(NSInteger)col columnSpan:(NSInteger)colSpan;     // Designated initializer
+- (instancetype)initWithTable:(NSTextTable *)table startingRow:(NSInteger)row rowSpan:(NSInteger)rowSpan startingColumn:(NSInteger)col columnSpan:(NSInteger)colSpan;     // Designated initializer
 
 /* These methods determine the block's role in its enclosing table. */
-- (NSTextTable *)table;
-- (NSInteger)startingRow;
-- (NSInteger)rowSpan;
-- (NSInteger)startingColumn;
-- (NSInteger)columnSpan;
+@property (readonly, strong) NSTextTable *table;
+@property (readonly) NSInteger startingRow;
+@property (readonly) NSInteger rowSpan;
+@property (readonly) NSInteger startingColumn;
+@property (readonly) NSInteger columnSpan;
 
 @end
 
@@ -140,14 +133,10 @@ typedef NSUInteger NSTextTableLayoutAlgorithm;
 }
 
 /* These methods control the basic parameters of the table. */
-- (NSUInteger)numberOfColumns;
-- (void)setNumberOfColumns:(NSUInteger)numCols;
-- (NSTextTableLayoutAlgorithm)layoutAlgorithm;
-- (void)setLayoutAlgorithm:(NSTextTableLayoutAlgorithm)algorithm;
-- (BOOL)collapsesBorders;
-- (void)setCollapsesBorders:(BOOL)flag;
-- (BOOL)hidesEmptyCells;
-- (void)setHidesEmptyCells:(BOOL)flag;
+@property NSUInteger numberOfColumns;
+@property NSTextTableLayoutAlgorithm layoutAlgorithm;
+@property BOOL collapsesBorders;
+@property BOOL hidesEmptyCells;
 
 /* An NSTextTableBlock delegates its layout and drawing operations to its enclosing table, using the following NSTextTable methods. */
 - (NSRect)rectForBlock:(NSTextTableBlock *)block layoutAtPoint:(NSPoint)startingPoint inRect:(NSRect)rect textContainer:(NSTextContainer *)textContainer characterRange:(NSRange)charRange;

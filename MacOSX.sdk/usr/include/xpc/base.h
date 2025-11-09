@@ -7,50 +7,26 @@
 
 __BEGIN_DECLS
 
-// Certain parts of the project use all the project's headers but have to build
-// against Zin -- liblaunch_host being the example. So we need to define these.
-#ifndef __MAC_10_9
-#define __MAC_10_9 1090
-#define __AVAILABILITY_INTERNAL__MAC_10_9 \
-	__attribute__((availability(macosx, introduced=10.9)))
-#endif
-
-#ifndef __IPHONE_7_0
-#define __IPHONE_7_0 70000
-#define __AVAILABILITY_INTERNAL__IPHONE_7_0 \
-	__attribute__((availability(ios, introduced=7.0)))
-#endif
-
-#ifndef __AVAILABILITY_INTERNAL__MAC_10_4_DEP__MAC_10_9
-#define __AVAILABILITY_INTERNAL__MAC_10_4_DEP__MAC_10_9
-#endif // __AVAILABILITY_INTERNAL__MAC_10_4_DEP__MAC_10_9
-
-#ifndef __AVAILABILITY_INTERNAL__MAC_10_5_DEP__MAC_10_9
-#define __AVAILABILITY_INTERNAL__MAC_10_5_DEP__MAC_10_9
-#endif // __AVAILABILITY_INTERNAL__MAC_10_5_DEP__MAC_10_9
-
-#ifndef __AVAILABILITY_INTERNAL__MAC_10_6_DEP__MAC_10_9
-#define __AVAILABILITY_INTERNAL__MAC_10_6_DEP__MAC_10_9
-#endif // __AVAILABILITY_INTERNAL__MAC_10_6_DEP__MAC_10_9
-
-#ifndef __AVAILABILITY_INTERNAL__MAC_10_7_DEP__MAC_10_9
-#define __AVAILABILITY_INTERNAL__MAC_10_7_DEP__MAC_10_9
-#endif // __AVAILABILITY_INTERNAL__MAC_10_7_DEP__MAC_10_9
-
 #if !defined(__has_include)
 #define __has_include(x) 0
-#endif
+#endif // !defined(__has_include)
 
 #if !defined(__has_attribute)
 #define __has_attribute(x) 0
-#endif
+#endif // !defined(__has_attribute)
 
 #if __has_include(<xpc/availability.h>)
 #include <xpc/availability.h>
-#else
+#else // __has_include(<xpc/availability.h>)
 #include <Availability.h>
 #define __XPC_IOS_SIMULATOR_AVAILABLE_STARTING(version)
-#endif
+#endif // __has_include(<xpc/availability.h>)
+
+#if XPC_SERVICE_MAIN_IN_LIBXPC
+#define XPC_HOSTING_OLD_MAIN 1
+#else // XPC_SERVICE_MAIN_IN_LIBXPC
+#define XPC_HOSTING_OLD_MAIN 0
+#endif // XPC_SERVICE_MAIN_IN_LIBXPC
 
 #ifndef __XPC_INDIRECT__
 #error "Please #include <xpc/xpc.h> instead of this file directly."
@@ -77,8 +53,8 @@ __BEGIN_DECLS
 #define XPC_PURE __attribute__((__pure__))
 #define XPC_WARN_RESULT __attribute__((__warn_unused_result__))
 #define XPC_MALLOC __attribute__((__malloc__))
-#define XPC_UNUSED __attribute__((unused))
-#define XPC_USED __attribute__((used))
+#define XPC_UNUSED __attribute__((__unused__))
+#define XPC_USED __attribute__((__used__))
 #define XPC_PACKED __attribute__((__packed__))
 #define XPC_PRINTF(m, n) __attribute__((format(printf, m, n)))
 #define XPC_INLINE static __inline__ __attribute__((__always_inline__))
@@ -97,12 +73,12 @@ __BEGIN_DECLS
 #define XPC_DEBUGGER_EXCL XPC_NOEXPORT XPC_USED
 #define XPC_TRANSPARENT_UNION __attribute__((transparent_union))
 #if __clang__
-#define XPC_DEPRECATED(m)	__attribute__((deprecated(m)))
-#else
-#define XPC_DEPRECATED(m)	__attribute__((deprecated))
+#define XPC_DEPRECATED(m) __attribute__((deprecated(m)))
+#else // __clang__
+#define XPC_DEPRECATED(m) __attribute__((deprecated))
 #endif // __clang 
 
-#if __OBJC__
+#if __has_feature(objc_arc)
 #define XPC_GIVES_REFERENCE __strong
 #define XPC_UNRETAINED __unsafe_unretained
 #define XPC_BRIDGE(xo) ((__bridge void *)(xo))
@@ -110,7 +86,7 @@ __BEGIN_DECLS
 #define XPC_BRIDGEREF_BEGIN_WITH_REF(xo) ((__bridge void *)(xo))
 #define XPC_BRIDGEREF_MIDDLE(xo) ((__bridge id)(xo))
 #define XPC_BRIDGEREF_END(xo) ((__bridge_transfer id)(xo))
-#else // __OBJC__
+#else // __has_feature(objc_arc)
 #define XPC_GIVES_REFERENCE
 #define XPC_UNRETAINED
 #define XPC_BRIDGE(xo)
@@ -118,7 +94,9 @@ __BEGIN_DECLS
 #define XPC_BRIDGEREF_BEGIN_WITH_REF(xo) (xo)
 #define XPC_BRIDGEREF_MIDDLE(xo) (xo)
 #define XPC_BRIDGEREF_END(xo) (xo)
-#endif // __OBJC__
+#endif // __has_feature(objc_arc)
+
+#define _xpc_unreachable() __builtin_unreachable()
 #else // __GNUC__ 
 /*! @parseOnly */
 #define XPC_CONSTRUCTOR
@@ -181,8 +159,6 @@ __BEGIN_DECLS
 /*! @parseOnly */
 #define XPC_UNAVAILABLE(m)
 #endif // __GNUC__ 
-
-#define XPC_PROJECT_EXPORT XPC_EXPORT
 
 __END_DECLS
 

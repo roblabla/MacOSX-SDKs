@@ -1,6 +1,6 @@
 .\" Copyright (c) 2011 Apple Inc. All rights reserved.
 .Dd 20 June, 2012
-.Dt xpc_object 3
+.Dt xpc_connection_create 3
 .Os Darwin
 .Sh NAME
 .Nm xpc_connection_create
@@ -176,7 +176,13 @@ argument to
 .Fn xpc_connection_set_target_queue ,
 .Fn xpc_connection_create
 or
-.Fn xpc_connection_create_mach_service
+.Fn xpc_connection_create_mach_service .
+Note that connections received either through the
+.Xr xpc_main 3
+event handler or the handler given to a connection created with the
+.Ft XPC_CONNECTION_MACH_SERVICE_LISTENER
+flag do not inherit the target queue of that connection. It must always be set
+explicitly.
 .Pp
 .Em Important :
 The result of calling
@@ -444,10 +450,10 @@ retrieve_uint64(dispatch_queue_t q, void (^handler)(uint64_t value))
 	// 'connection' is a previously-created singleton.
 	xpc_connection_send_message_with_reply(connection, message, q, ^(xpc_object_t reply) {
 		if (xpc_get_type(reply) == XPC_TYPE_DICTIONARY) {
-			uint64_t value = xpc_dictionary_get_uint64(reply, "Value");
+			uint64_t replyvalue = xpc_dictionary_get_uint64(reply, "Value");
 			// 'reply' is captured by this block and copied to the heap. It will
 			// be released when this block is disposed of.
-			handler(value);
+			handler(replyvalue);
 		} else {
 			// Invoke 'reply' with a value indicating that there was an error.
 		}
@@ -576,7 +582,7 @@ services.
 .Sh MACH SERVICES
 If a caller wishes to connect to a MachService advertised in a
 .Xr launchd.plist 5 ,
-it should pass the MachService name to which is wishes to connect to
+it should pass the MachService name to which it wishes to connect with
 .Fn xpc_connection_create_mach_service .
 If the destination service is advertised in the root Mach bootstrap (i.e. the
 .Xr launchd.plist 5
@@ -649,10 +655,15 @@ these allowances absolutely will
 .Em NOT
 be made in the production scenario.
 .Sh UNLOADING
-An XPC connection to a MachService advertised by a launchd job will receive the
-XPC_ERROR_CONNECTION_INVALID error if the job is unloaded. There will be no
-indication of when the job has been loaded again. Using job loading and
-unloading as a normal part of your job's operation is highly discouraged.
+An XPC connection to a MachService advertised by a
+.Xr launchd 8
+job will receive the
+.Ft XPC_ERROR_CONNECTION_INTERRUPTED
+error followed by the
+.Ft XPC_ERROR_CONNECTION_INVALID
+error if the job is unloaded. There will be no indication of when the job has
+been loaded again. Using job loading and unloading as a normal part of your
+job's operation is highly discouraged.
 .Sh ANONYMOUS CONNECTIONS
 If a caller wishes to create a listener connection that is not bound to a
 particular service name, it may create an anonymous listener connection by

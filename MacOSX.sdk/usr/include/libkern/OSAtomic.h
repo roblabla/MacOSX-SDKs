@@ -32,9 +32,10 @@
 #include    <Availability.h>
 
 /*! @header
- * These are the preferred versions of the atomic and synchronization operations.
+ * These are the preferred atomic and synchronization operations.
+ *
  * Their implementation is customized at boot time for the platform, including
- * late-breaking errata fixes as necessary.   They are thread safe.
+ * late-breaking errata fixes as necessary. They are thread safe.
  *
  * WARNING: all addresses passed to these functions must be "naturally aligned",
  * i.e.  * <code>int32_t</code> pointers must be 32-bit aligned (low 2 bits of
@@ -43,28 +44,30 @@
  *
  * Note that some versions of the atomic functions incorporate memory barriers
  * and some do not.  Barriers strictly order memory access on weakly-ordered
- * architectures such as PPC.  All loads and stores that appear (in sequential
+ * architectures such as ARM.  All loads and stores that appear (in sequential
  * program order) before the barrier are guaranteed to complete before any
  * load or store that appears after the barrier.
  *
- * On a uniprocessor system, the barrier operation is typically a no-op.  On a
- * multiprocessor system, the barrier can be quite expensive on some platforms,
- * such as PPC.
+ * The barrier operation is typically a no-op on uniprocessor systems and
+ * fully enabled on multiprocessor systems. On some platforms, such as ARM,
+ * the barrier can be quite expensive.
  *
- * Most code should use the barrier functions to ensure that memory shared between
- * threads is properly synchronized.  For example, if you want to initialize
- * a shared data structure and then atomically increment a variable to indicate
- * that the initialization is complete, you must use {@link OSAtomicIncrement32Barrier}
- * to ensure that the stores to your data structure complete before the atomic
- * increment.
+ * Most code should use the barrier functions to ensure that memory shared
+ * between threads is properly synchronized.  For example, if you want to
+ * initialize a shared data structure and then atomically increment a variable
+ * to indicate that the initialization is complete, you must use
+ * {@link OSAtomicIncrement32Barrier} to ensure that the stores to your data
+ * structure complete before the atomic increment.
  *
- * Likewise, the consumer of that data structure must use {@link OSAtomicDecrement32Barrier},
+ * Likewise, the consumer of that data structure must use
+ * {@link OSAtomicDecrement32Barrier},
  * in order to ensure that their loads of the structure are not executed before
- * the atomic decrement.  On the other hand, if you are simply incrementing a global
- * counter, then it is safe and potentially faster to use {@link OSAtomicIncrement32}.
+ * the atomic decrement.  On the other hand, if you are simply incrementing a
+ * global counter, then it is safe and potentially faster to use
+ * {@link OSAtomicIncrement32}.
  *
- * If you are unsure which version to use, prefer the barrier variants as they are
- * safer.
+ * If you are unsure which version to use, prefer the barrier variants as they
+ * are safer.
  *
  * The spinlock and queue operations always incorporate a barrier.
  *
@@ -85,7 +88,7 @@ __BEGIN_DECLS
 	This function adds the value given by <code>__theAmount</code> to the
 	value in the memory location referenced by <code>__theValue</code>,
  	storing the result back to that memory location atomically.
- @result Returns the new value.
+    @result Returns the new value.
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0)
 int32_t	OSAtomicAdd32( int32_t __theAmount, volatile int32_t *__theValue );
@@ -105,11 +108,13 @@ __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0)
 int32_t	OSAtomicAdd32Barrier( int32_t __theAmount, volatile int32_t *__theValue );
 
 
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_7_1
+
 /*! @abstract Atomically increments a 32-bit value.
+    @result Returns the new value.
  */
-__header_always_inline
-int32_t	OSAtomicIncrement32( volatile int32_t *__theValue )
-            { return OSAtomicAdd32(  1, __theValue); }
+__OSX_AVAILABLE_STARTING(__MAC_NA, __IPHONE_7_1)
+int32_t	OSAtomicIncrement32( volatile int32_t *__theValue );
 
 
 /*! @abstract Atomically increments a 32-bit value with a barrier.
@@ -118,24 +123,43 @@ int32_t	OSAtomicIncrement32( volatile int32_t *__theValue )
 	except that it also introduces a barrier.
     @result Returns the new value.
  */
-__header_always_inline
-int32_t	OSAtomicIncrement32Barrier( volatile int32_t *__theValue )
-            { return OSAtomicAdd32Barrier(  1, __theValue); }
+__OSX_AVAILABLE_STARTING(__MAC_NA, __IPHONE_7_1)
+int32_t	OSAtomicIncrement32Barrier( volatile int32_t *__theValue );
 
-/*! @abstract Atomically decrements a 32-bit value. */
-__header_always_inline
-int32_t	OSAtomicDecrement32( volatile int32_t *__theValue )
-            { return OSAtomicAdd32( -1, __theValue); }
 
-/*! @abstract Atomically increments a 32-bit value with a barrier.
+/*! @abstract Atomically decrements a 32-bit value.
+    @result Returns the new value.
+ */
+__OSX_AVAILABLE_STARTING(__MAC_NA, __IPHONE_7_1)
+int32_t	OSAtomicDecrement32( volatile int32_t *__theValue );
+
+
+/*! @abstract Atomically decrements a 32-bit value with a barrier.
     @discussion
 	This function is equivalent to {@link OSAtomicDecrement32}
 	except that it also introduces a barrier.
     @result Returns the new value.
  */
-__header_always_inline
+__OSX_AVAILABLE_STARTING(__MAC_NA, __IPHONE_7_1)
+int32_t	OSAtomicDecrement32Barrier( volatile int32_t *__theValue );
+
+#else
+__inline static
+int32_t	OSAtomicIncrement32( volatile int32_t *__theValue )
+            { return OSAtomicAdd32(  1, __theValue); }
+
+__inline static
+int32_t	OSAtomicIncrement32Barrier( volatile int32_t *__theValue )
+            { return OSAtomicAdd32Barrier(  1, __theValue); }
+
+__inline static
+int32_t	OSAtomicDecrement32( volatile int32_t *__theValue )
+            { return OSAtomicAdd32( -1, __theValue); }
+
+__inline static
 int32_t	OSAtomicDecrement32Barrier( volatile int32_t *__theValue )
             { return OSAtomicAdd32Barrier( -1, __theValue); }
+#endif
 
 
 /*! @abstract Atomically adds two 64-bit values.
@@ -143,6 +167,7 @@ int32_t	OSAtomicDecrement32Barrier( volatile int32_t *__theValue )
 	This function adds the value given by <code>__theAmount</code> to the
 	value in the memory location referenced by <code>__theValue</code>,
 	storing the result back to that memory location atomically.
+    @result Returns the new value.
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0)
 int64_t	OSAtomicAdd64( int64_t __theAmount, volatile int64_t *__theValue );
@@ -162,10 +187,14 @@ __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_3_2)
 int64_t	OSAtomicAdd64Barrier( int64_t __theAmount, volatile int64_t *__theValue );
 
 
-/*! @abstract Atomically increments a 64-bit value. */
-__header_always_inline
-int64_t	OSAtomicIncrement64( volatile int64_t *__theValue )
-            { return OSAtomicAdd64(  1, __theValue); }
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_7_1
+
+/*! @abstract Atomically increments a 64-bit value.
+    @result Returns the new value.
+ */
+__OSX_AVAILABLE_STARTING(__MAC_NA, __IPHONE_7_1)
+int64_t	OSAtomicIncrement64( volatile int64_t *__theValue );
+
 
 /*! @abstract Atomically increments a 64-bit value with a barrier.
     @discussion
@@ -173,20 +202,15 @@ int64_t	OSAtomicIncrement64( volatile int64_t *__theValue )
 	except that it also introduces a barrier.
     @result Returns the new value.
  */
-__header_always_inline
-int64_t	OSAtomicIncrement64Barrier( volatile int64_t *__theValue )
-            { return OSAtomicAdd64Barrier(  1, __theValue); }
+__OSX_AVAILABLE_STARTING(__MAC_NA, __IPHONE_7_1)
+int64_t	OSAtomicIncrement64Barrier( volatile int64_t *__theValue );
 
 
 /*! @abstract Atomically decrements a 64-bit value.
-    @discussion
-	This function is equivalent to {@link OSAtomicIncrement64}
-	except that it also introduces a barrier.
     @result Returns the new value.
  */
-__header_always_inline
-int64_t	OSAtomicDecrement64( volatile int64_t *__theValue )
-            { return OSAtomicAdd64( -1, __theValue); }
+__OSX_AVAILABLE_STARTING(__MAC_NA, __IPHONE_7_1)
+int64_t	OSAtomicDecrement64( volatile int64_t *__theValue );
 
 
 /*! @abstract Atomically decrements a 64-bit value with a barrier.
@@ -195,9 +219,26 @@ int64_t	OSAtomicDecrement64( volatile int64_t *__theValue )
 	except that it also introduces a barrier.
     @result Returns the new value.
  */
-__header_always_inline
+__OSX_AVAILABLE_STARTING(__MAC_NA, __IPHONE_7_1)
+int64_t	OSAtomicDecrement64Barrier( volatile int64_t *__theValue );
+
+#else
+__inline static
+int64_t	OSAtomicIncrement64( volatile int64_t *__theValue )
+            { return OSAtomicAdd64(  1, __theValue); }
+
+__inline static
+int64_t	OSAtomicIncrement64Barrier( volatile int64_t *__theValue )
+            { return OSAtomicAdd64Barrier(  1, __theValue); }
+
+__inline static
+int64_t	OSAtomicDecrement64( volatile int64_t *__theValue )
+            { return OSAtomicAdd64( -1, __theValue); }
+
+__inline static
 int64_t	OSAtomicDecrement64Barrier( volatile int64_t *__theValue )
             { return OSAtomicAdd64Barrier( -1, __theValue); }
+#endif
 
 
 /*! @group Boolean functions (AND, OR, XOR)
@@ -516,18 +557,22 @@ __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_3_2)
 bool    OSAtomicCompareAndSwap64Barrier( int64_t __oldValue, int64_t __newValue, volatile int64_t *__theValue );
 
 
-/* Test and set.  They return the original value of the bit, and operate on bit (0x80>>(n&7))
+/* Test and set.
+ * They return the original value of the bit, and operate on bit (0x80>>(n&7))
  * in byte ((char*)theAddress + (n>>3)).
  */
 /*! @abstract Atomic test and set
     @discussion
-	This function tests a bit in the value referenced by <code>__theAddress</code>
-	and if it is not set, sets it.  The bit is chosen by the value of <code>__n</code>.
-	The bits are numbered in order beginning with bit 1 as the lowest order bit.
+	This function tests a bit in the value referenced by
+	<code>__theAddress</code> and if it is not set, sets it.
+
+	The bit is chosen by the value of <code>__n</code> such that the
+	operation will be performed on bit <code>(0x80 >> (__n & 7))</code>
+	of byte <code>((char *)__theAddress + (n >> 3))</code>.
 
 	For example, if <code>__theAddress</code> points to a 64-bit value,
-	to compare the value of the highest bit, you would specify <code>64</code> for
-	<code>__n</code>.
+	to compare the value of the most significant bit, you would specify
+	<code>56</code> for <code>__n</code>.
     @result
 	Returns the original value of the bit being tested.
  */
@@ -538,12 +583,15 @@ bool    OSAtomicTestAndSet( uint32_t __n, volatile void *__theAddress );
 /*! @abstract Atomic test and set with barrier
     @discussion
 	This function tests a bit in the value referenced by <code>__theAddress</code>
-	and if it is not set, sets it.  The bit is chosen by the value of <code>__n</code>.
-	The bits are numbered in order beginning with bit 1 as the lowest order bit.
+	and if it is not set, sets it.
+
+	The bit is chosen by the value of <code>__n</code> such that the
+	operation will be performed on bit <code>(0x80 >> (__n & 7))</code>
+	of byte <code>((char *)__theAddress + (n >> 3))</code>.
 
 	For example, if <code>__theAddress</code> points to a 64-bit value,
-	to compare the value of the highest bit, you would specify <code>64</code> for
-	<code>__n</code>.
+	to compare the value of the most significant bit, you would specify
+	<code>56</code> for <code>__n</code>.
 
 	This function is equivalent to {@link OSAtomicTestAndSet}
 	except that it also introduces a barrier.
@@ -558,12 +606,16 @@ bool    OSAtomicTestAndSetBarrier( uint32_t __n, volatile void *__theAddress );
 /*! @abstract Atomic test and clear
     @discussion
 	This function tests a bit in the value referenced by <code>__theAddress</code>
-	and if it is not cleared, clears it.  The bit is chosen by the value of <code>__n</code>.
-	The bits are numbered in order beginning with bit 1 as the lowest order bit.
+	and if it is not cleared, clears it.
+
+	The bit is chosen by the value of <code>__n</code> such that the
+	operation will be performed on bit <code>(0x80 >> (__n & 7))</code>
+	of byte <code>((char *)__theAddress + (n >> 3))</code>.
 
 	For example, if <code>__theAddress</code> points to a 64-bit value,
-	to compare the value of the highest bit, you would specify <code>64</code> for
-	<code>__n</code>.
+	to compare the value of the most significant bit, you would specify
+	<code>56</code> for <code>__n</code>.
+ 
     @result
 	Returns the original value of the bit being tested.
  */
@@ -574,13 +626,16 @@ bool    OSAtomicTestAndClear( uint32_t __n, volatile void *__theAddress );
 /*! @abstract Atomic test and clear
     @discussion
 	This function tests a bit in the value referenced by <code>__theAddress</code>
-	and if it is not cleared, clears it.  The bit is chosen by the value of <code>__n</code>.
-	The bits are numbered in order beginning with bit 1 as the lowest order bit.
-
+	and if it is not cleared, clears it.
+ 
+	The bit is chosen by the value of <code>__n</code> such that the
+	operation will be performed on bit <code>(0x80 >> (__n & 7))</code>
+	of byte <code>((char *)__theAddress + (n >> 3))</code>.
+ 
 	For example, if <code>__theAddress</code> points to a 64-bit value,
-	to compare the value of the highest bit, you would specify <code>64</code> for
-	<code>__n</code>.
-
+	to compare the value of the most significant bit, you would specify
+	<code>56</code> for <code>__n</code>.
+ 
 	This function is equivalent to {@link OSAtomicTestAndSet}
 	except that it also introduces a barrier.
     @result

@@ -5,7 +5,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "CoreImageDefines.h"
+#import <CoreImage/CoreImageDefines.h>
 
 /** Generic feature found by a CIDetector. */
 CORE_IMAGE_CLASS_EXPORT
@@ -21,6 +21,7 @@ CORE_IMAGE_CLASS_EXPORT
 
 /** Specifies the type of a feature that is a face. */
 CORE_IMAGE_EXPORT NSString* const CIFeatureTypeFace;
+CORE_IMAGE_EXPORT NSString* const CIFeatureTypeRectangle;
 
 /** A face feature found by a CIDetector.
  All positions are relative to the original image. */
@@ -69,6 +70,52 @@ CORE_IMAGE_CLASS_EXPORT
 @property (readonly, assign) BOOL hasSmile;
 @property (readonly, assign) BOOL leftEyeClosed;
 @property (readonly, assign) BOOL rightEyeClosed;
+
+@end
+
+
+/** A rectangle feature found by a CIDetector.
+ All positions are relative to the original image. */
+CORE_IMAGE_CLASS_EXPORT
+@interface CIRectangleFeature : CIFeature
+{
+	CGRect bounds;
+	CGPoint topLeft;
+	CGPoint topRight;
+	CGPoint bottomLeft;
+	CGPoint bottomRight;
+	
+}
+
+@property (readonly, assign) CGRect bounds;
+@property (readonly, assign) CGPoint topLeft;
+@property (readonly, assign) CGPoint topRight;
+@property (readonly, assign) CGPoint bottomLeft;
+@property (readonly, assign) CGPoint bottomRight;
+
+@end
+
+/** A barcode feature found by a CIDetector
+ All positions are relative to the original image. */
+
+CORE_IMAGE_CLASS_EXPORT
+@interface CIQRCodeFeature : CIFeature
+{
+    CGRect bounds;
+	CGPoint topLeft;
+	CGPoint topRight;
+	CGPoint bottomLeft;
+	CGPoint bottomRight;
+    NSString* messageString;
+}
+
+@property (readonly, assign) CGRect bounds;
+@property (readonly, assign) CGPoint topLeft;
+@property (readonly, assign) CGPoint topRight;
+@property (readonly, assign) CGPoint bottomLeft;
+@property (readonly, assign) CGPoint bottomRight;
+@property (readonly, copy) NSString* messageString;
+
 
 @end
 

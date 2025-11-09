@@ -3,7 +3,7 @@
 	
 	Framework:  AVKit
 	
-	Copyright 2011-2013 Apple Inc. All rights reserved.
+	Copyright 2013-2014 Apple Inc. All rights reserved.
 	
  */
 
@@ -17,7 +17,7 @@
  */
 
 NS_CLASS_AVAILABLE_MAC(10_9)
-@interface AVPlayerView : NSView <NSCoding>
+@interface AVPlayerView : NSView
 
 /*!
 	@property	player
@@ -43,13 +43,39 @@ typedef NS_ENUM(NSInteger, AVPlayerViewControlsStyle) {
 	AVPlayerViewControlsStyleFloating,
 	AVPlayerViewControlsStyleMinimal,
 	AVPlayerViewControlsStyleDefault = AVPlayerViewControlsStyleInline
-} NS_ENUM_AVAILABLE(10_9, NA);
+} NS_ENUM_AVAILABLE_MAC(10_9);
 
 /*!
 	@property	controlsStyle
 	@abstract	The style of the playback controls pane currently associated with the view.
  */
 @property AVPlayerViewControlsStyle controlsStyle;
+
+/*!
+	@property	videoGravity
+	@abstract	A string defining how the video is displayed within an AVPlayerLayer bounds rect.
+	@discussion	Options are AVLayerVideoGravityResizeAspect, AVLayerVideoGravityResizeAspectFill and AVLayerVideoGravityResize. AVLayerVideoGravityResizeAspect is default.
+				See <AVFoundation/AVAnimation.h> for a description of these options.
+ */
+@property (copy) NSString *videoGravity NS_AVAILABLE_MAC(10_10);
+
+/*!
+	@property	readyForDisplay
+	@abstract	Boolean indicating that the first video frame has been made ready for display for the current item of the associated AVPlayer.
+ */
+@property (readonly, getter = isReadyForDisplay) BOOL readyForDisplay NS_AVAILABLE_MAC(10_10);
+
+/*!
+	@property	videoBounds
+	@abstract	The current size and position of the video image as displayed within the receiver's view's bounds.
+ */
+@property (readonly) NSRect videoBounds NS_AVAILABLE_MAC(10_10);
+
+/*!
+	@property	contentOverlayView
+	@abstract	Use the content overlay view to add additional custom views between the video content and the controls.
+ */
+@property (readonly) NSView *contentOverlayView NS_AVAILABLE_MAC(10_10);
 
 @end
 
@@ -100,7 +126,7 @@ typedef NS_ENUM(NSInteger, AVPlayerViewControlsStyle) {
 typedef NS_ENUM(NSInteger, AVPlayerViewTrimResult) {
 	AVPlayerViewTrimOKButton,
 	AVPlayerViewTrimCancelButton
-} NS_ENUM_AVAILABLE(10_9, NA);
+} NS_ENUM_AVAILABLE_MAC(10_9);
 
 /*!
 	@method		beginTrimmingWithCompletionHandler:

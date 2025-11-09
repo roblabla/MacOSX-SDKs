@@ -86,8 +86,10 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
 
 /*!
 	@property		suppressesPlayerRendering
-	@abstract		Indicates whether the output, when added to an AVPlayerItem, will be used in addition to normal rendering of media data by the player or instead of normal rendering. The default value is NO, indicating that the output will be used in addition to normal rendering. If you want to render the media data provided by the output yourself instead of allowing it to be rendered as in normally would be by	AVPlayer, set suppressesPlayerRendering to YES.
+	@abstract		Indicates whether the output, when added to an AVPlayerItem, will be used in addition to normal rendering of media data by the player or instead of normal rendering.
 	@discussion
+		The default value is NO, indicating that the output will be used in addition to normal rendering. If you want to render the media data provided by the output yourself instead of allowing it to be rendered as in normally would be by AVPlayer, set suppressesPlayerRendering to YES.
+ 
 		 Whenever any output is added to an AVPlayerItem that has suppressesPlayerRendering set to YES, the media data supplied to the output will not be rendered by AVPlayer. Other media data associated with the item but not provided to such an output is not affected. For example, if an output of class AVPlayerItemVideoOutput with a value of YES for suppressesPlayerRendering is added to an AVPlayerItem, video media for that item will not be rendered by the AVPlayer, while audio media, subtitle media, and other kinds of media, if present, will be rendered.
 */
 @property (nonatomic, readwrite) BOOL suppressesPlayerRendering NS_AVAILABLE(10_8, 6_0);
@@ -170,7 +172,7 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
 	@result			An instance of AVPlayerItemVideoOutput.
  */
 
-- (id)initWithPixelBufferAttributes:(NSDictionary *)pixelBufferAttributes;
+- (instancetype)initWithPixelBufferAttributes:(NSDictionary *)pixelBufferAttributes;
 
 /*!
 	@method			hasNewPixelBufferForItemTime:
@@ -199,7 +201,7 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
 					A CMTime pointer whose value will contain the true display deadline for the copied pixel buffer. Can be NULL.
  */
 
-- (CVPixelBufferRef)copyPixelBufferForItemTime:(CMTime)itemTime itemTimeForDisplay:(CMTime *)outItemTimeForDisplay;
+- (CVPixelBufferRef)copyPixelBufferForItemTime:(CMTime)itemTime itemTimeForDisplay:(CMTime *)outItemTimeForDisplay CF_RETURNS_RETAINED;
 
 /*!
 	@method			setDelegate:queue:
@@ -274,6 +276,8 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
 /*!
 	@class			AVPlayerItemLegibleOutput
 	@abstract		A subclass of AVPlayerItemOutput that can vend media with a legible characteristic as NSAttributedStrings.
+	@discussion
+		An instance of AVPlayerItemLegibleOutput is typically initialized using the -init method.
  */
 NS_CLASS_AVAILABLE(10_9, 7_0)
 @interface AVPlayerItemLegibleOutput : AVPlayerItemOutput
@@ -332,7 +336,7 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
  
 		If a media subtype for which there is no legible data in the current player item is included in the media subtypes array, no error will occur.  AVPlayerItemLegibleOutput will not vend closed caption data as CMSampleBuffers, so it is an error to include 'c608' in the media subtypes array.
  */	
-- (id)initWithMediaSubtypesForNativeRepresentation:(NSArray *)subtypes;	
+- (instancetype)initWithMediaSubtypesForNativeRepresentation:(NSArray *)subtypes;	
 
 @end
 
@@ -408,5 +412,94 @@ AVF_EXPORT NSString *const AVPlayerItemLegibleOutputTextStylingResolutionSourceA
 		This method is invoked after any seeking and change in playback direction. If you are maintaining any queued future media data, received previously, you may want to discard these after receiving this message.
  */
 - (void)outputSequenceWasFlushed:(AVPlayerItemOutput *)output;
+
+@end
+
+@protocol AVPlayerItemMetadataOutputPushDelegate;
+@class AVPlayerItemMetadataOutputInternal;
+
+/*!
+	@class			AVPlayerItemMetadataOutput
+	@abstract		A subclass of AVPlayerItemOutput that vends collections of metadata items carried in metadata tracks.
+ 
+	@discussion
+	Setting the value of suppressesPlayerRendering on an instance of AVPlayerItemMetadataOutput has no effect.
+ */
+NS_CLASS_AVAILABLE(10_10, 8_0)
+@interface AVPlayerItemMetadataOutput : AVPlayerItemOutput
+{
+@private
+	AVPlayerItemMetadataOutputInternal *_metadataOutputInternal;
+}
+
+/*!
+	@method			initWithIdentifiers:
+	@abstract		Creates an instance of AVPlayerItemMetadataOutput.
+	@param			identifiers
+	A array of metadata identifiers indicating the metadata items that the output should provide. See AVMetadataIdentifiers.h for publicly defined metadata identifiers. Pass nil to receive all of the timed metadata from all enabled AVPlayerItemTracks that carry timed metadata.
+ */
+- (instancetype)initWithIdentifiers:(NSArray *)identifiers;
+
+/*!
+	@method			setDelegate:queue:
+	@abstract		Sets the receiver's delegate and a dispatch queue on which the delegate will be called.
+	@param			delegate
+	An object conforming to AVPlayerItemMetadataOutputPushDelegate protocol.
+	@param			delegateQueue
+	A dispatch queue on which all delegate methods will be called.
+ */
+- (void)setDelegate:(id<AVPlayerItemMetadataOutputPushDelegate>)delegate queue:(dispatch_queue_t)delegateQueue;
+
+/*!
+	@property		delegate
+	@abstract		The receiver's delegate.
+ */
+@property (nonatomic, readonly) id<AVPlayerItemMetadataOutputPushDelegate> delegate;
+
+/*!
+	@property		delegateQueue
+	@abstract		The dispatch queue on which messages are sent to the delegate.
+ */
+
+@property (nonatomic, readonly) dispatch_queue_t delegateQueue;
+
+/*!
+	@property		advanceIntervalForDelegateInvocation
+	@abstract		Permits advance invocation of the associated delegate, if any.
+	@discussion
+	If it is possible, an AVPlayerItemMetadataOutput will message its delegate advanceIntervalForDelegateInvocation seconds earlier than otherwise. If the value you provide is large, effectively requesting provision of samples earlier than the AVPlayerItemMetadataOutput is prepared to act on them, the delegate will be invoked as soon as possible.
+ */
+
+@property (nonatomic, readwrite) NSTimeInterval advanceIntervalForDelegateInvocation;
+
+@end
+
+@class AVTimedMetadataGroup;
+@class AVPlayerItemTrack;
+
+/*!
+	@protocol		AVPlayerItemMetadataOutputPushDelegate
+	@abstract		Extends AVPlayerItemOutputPushDelegate to provide additional methods specific to metadata output.
+ */
+@protocol AVPlayerItemMetadataOutputPushDelegate <AVPlayerItemOutputPushDelegate>
+
+@optional
+/*!
+	@method			metadataOutput:didOutputTimedMetadataGroup:fromPlayerItemTrack:
+	@abstract		A delegate callback that delivers a new collection of metadata items.
+	@param			output
+	The AVPlayerItemMetadataOutput source.
+	@param			groups
+	An NSArray of AVTimedMetadataGroups that may contain metadata items with requested identifiers, according to the format descriptions associated with the underlying tracks.
+	@param			track
+	An instance of AVPlayerItemTrack that indicates the source of the metadata items in the group.
+	@discussion
+	Each group provided in a single invocation of this method will have timing that does not overlap with any other group in the array.
+	Note that for some timed metadata formats carried by HTTP live streaming, the timeRange of each group must be reported as kCMTimeIndefinite, because its duration will be unknown until the next metadata group in the stream arrives. In these cases, the groups parameter will always contain a single group.
+	Groups are typically packaged into arrays for delivery to your delegate according to the chunking or interleaving of the underlying metadata data.
+	Note that if the item carries multiple metadata tracks containing metadata with the same metadata identifiers, this method can be invoked for each one separately, each with reference to the associated AVPlayerItemTrack.
+ */
+
+- (void)metadataOutput:(AVPlayerItemMetadataOutput *)output didOutputTimedMetadataGroups:(NSArray *)groups fromPlayerItemTrack:(AVPlayerItemTrack *)track NS_AVAILABLE(10_10, 8_0);
 
 @end

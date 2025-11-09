@@ -2,7 +2,7 @@
 //  CalRecurrenceRule.h
 //	Calendar Store Framework
 //
-//  Copyright 2006 Apple Computer, Inc. All rights reserved.
+//  Copyright 2006 Apple Inc. All rights reserved.
 //	
 //	This class describes the recurrence pattern for a repeating event. The recurrence rules that can be expressed are 
 //  restricted to the recurrence patterns that can be set in iCal's UI. It is not possible to directly modify a 

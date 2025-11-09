@@ -35,7 +35,7 @@ NS_CLASS_AVAILABLE(10_7, NA)
  @param			inDelegate An object to act as delegate
  @result		A newly created IOBluetoothHandsFreeDevice object on success, nil on failure
  */
-- (id)initWithDevice:(IOBluetoothDevice *)device delegate:(id)delegate NS_AVAILABLE_MAC(10_7);
+- (instancetype)initWithDevice:(IOBluetoothDevice *)device delegate:(id)delegate NS_AVAILABLE_MAC(10_7);
 
 /*!
  @method		dialNumber:aNumber

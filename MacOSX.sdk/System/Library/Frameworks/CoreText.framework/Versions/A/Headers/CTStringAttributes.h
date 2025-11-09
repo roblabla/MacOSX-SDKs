@@ -2,7 +2,7 @@
  *  CTStringAttributes.h
  *  CoreText
  *
- *  Copyright (c) 2004-2012 Apple Inc. All rights reserved.
+ *  Copyright (c) 2004, 2006-2014 Apple Inc. All rights reserved.
  *
  */
 
@@ -94,8 +94,6 @@ extern const CFStringRef kCTKernAttributeName CT_AVAILABLE(10_5, 3_2);
                 if the font contains glyphs for any of U+FB00 through U+FB04 and
                 the font lacks AAT or OpenType shaping tables, but as of 6.0
                 shaping tables (or the lack thereof) are treated as definitive.
-                This character-based shaping will still be performed if this
-                attribute is explicitly specified with the default value of 1.
 */
 
 extern const CFStringRef kCTLigatureAttributeName CT_AVAILABLE(10_5, 3_2);
@@ -367,15 +365,15 @@ extern const CFStringRef kCTBaselineReferenceInfoAttributeName CT_AVAILABLE(10_8
                 kCTWritingDirectionEmbedding or kCTWritingDirectionOverride.
                 This array represents a sequence of nested bidirectional
                 embeddings or overrides, in order from outermost to innermost,
-                with (kCTWritingDirectionLeftToRight | kCTTextWritingDirectionEmbedding)
+                with (kCTWritingDirectionLeftToRight | kCTWritingDirectionEmbedding)
                 corresponding to a LRE/PDF pair in plain text or
                 <span dir="ltr"></span> in HTML, (kCTWritingDirectionRightToLeft
-                | kCTTextWritingDirectionEmbedding) corresponding to a RLE/PDF
+                | kCTWritingDirectionEmbedding) corresponding to a RLE/PDF
                 pair in plain text or a <span dir="rtl"></span> in HTML,
-                (kCTWritingDirectionLeftToRight | kCTTextWritingDirectionOverride)
+                (kCTWritingDirectionLeftToRight | kCTWritingDirectionOverride)
                 corresponding to a LRO/PDF pair in plain text or
                 <bdo dir="ltr"></span> in HTML, and (kCTWritingDirectionRightToLeft
-                | kCTTextWritingDirectionOverride) corresponding to a RLO/PDF
+                | kCTWritingDirectionOverride) corresponding to a RLO/PDF
                 pair in plain text or <bdo dir="rtl"></span> in HTML.
 
     @seealso    kCTWritingDirectionLeftToRight
@@ -402,6 +400,16 @@ enum {
     kCTWritingDirectionOverride = (1 << 1)
 };
 
+
+/*!
+    @const      kCTRubyAnnotationAttributeName
+    @abstract   Key to reference a CTRubyAnnotation.
+
+    @discussion Value must be a CTRubyAnnotationRef. See CTRubyAnnotation.h for
+                more information.
+ */
+
+extern const CFStringRef kCTRubyAnnotationAttributeName CT_AVAILABLE(10_10, 8_0);
 
 #if defined(__cplusplus)
 }

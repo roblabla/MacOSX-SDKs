@@ -11,10 +11,10 @@
  *    notice, this list of conditions and the following disclaimer in the
  *    documentation and/or other materials provided with the distribution.
  *
- * THIS SOFTWARE IS PROVIDED BY APPLE COMPUTER, INC. ``AS IS'' AND ANY
+ * THIS SOFTWARE IS PROVIDED BY APPLE INC. ``AS IS'' AND ANY
  * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL APPLE COMPUTER, INC. OR
+ * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL APPLE INC. OR
  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
@@ -24,17 +24,13 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
  */
 
-#import <WebKit/DOMNode.h>
-
-#if WEBKIT_VERSION_MAX_ALLOWED >= WEBKIT_VERSION_1_3
+#import <WebKit/DOMCharacterData.h>
 
 @class DOMStyleSheet;
 @class NSString;
 
-@interface DOMProcessingInstruction : DOMNode
-@property(readonly, copy) NSString *target;
-@property(copy) NSString *data;
-@property(readonly, retain) DOMStyleSheet *sheet AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+NS_CLASS_AVAILABLE_MAC(10_4)
+@interface DOMProcessingInstruction : DOMCharacterData
+@property (readonly, copy) NSString *target;
+@property (readonly, strong) DOMStyleSheet *sheet NS_AVAILABLE_MAC(10_4);
 @end
-
-#endif

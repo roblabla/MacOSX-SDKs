@@ -1,4 +1,4 @@
-module Darwin [system] {
+module Darwin [system] [extern_c] {
   // Headers that are repeatedly included, and therefore should not be 
   // assigned to any given module.
   exclude header "_structs.h"
@@ -126,6 +126,11 @@ module Darwin [system] {
 
     module wctype {
       header "wctype.h"
+      export *
+    }
+
+    module xlocale {
+      header "xlocale.h"
       export *
     }
 
@@ -278,8 +283,22 @@ module Darwin [system] {
 
     module pthread {
       header "pthread.h"
-      header "pthread_impl.h"
       export *
+     
+      module impl {
+        header "pthread_impl.h"
+        export *
+      }
+
+      module qos {
+        header "pthread/qos.h"
+        export *
+      }
+      
+      module spis {
+        header "pthread_spis.h"
+        export *
+      }
     }
 
     module pwd {
@@ -1041,6 +1060,14 @@ module Darwin [system] {
     }
   }
 
+  module device {
+
+    header "device/device_port.h"
+    export *
+
+    exclude header "device/device_types.h"
+  }
+
   module libkern {
     export *
 
@@ -1128,7 +1155,7 @@ module Darwin [system] {
 
 
 
-  module ncurses {
+  explicit module ncurses {
     header "ncurses.h" // note: same as curses.h
     export *
 
@@ -1171,6 +1198,21 @@ module Darwin [system] {
   }
 
   module sys {
+    module _pthread {
+      umbrella "sys/_pthread"
+
+      module * {
+        export *
+      }
+
+      export *
+    }
+
+    module qos {
+      header "sys/qos.h"
+      export *
+    }
+
 
     module acct {
       header "sys/acct.h"
@@ -1516,14 +1558,23 @@ module Darwin [system] {
   }
 }
 
-module os [system] {
+module os [system] [extern_c] {
+  module base {
+    header "os/base.h"
+    export *
+  }
   module object {
     header "os/object.h"
     export *
   }
+  explicit module activity {
+    header "os/activity.h"
+    export *
+  }
+  exclude header "os/trace.h"
 }
 
-module libkern [system] {
+module libkern [system] [extern_c] {
   module OSCacheControl {
     header "libkern/OSCacheControl.h"
     export *
@@ -1545,5 +1596,73 @@ module libkern [system] {
     export *
   }
 
+}
+
+
+module ldap [system] [extern_c] {
+  header "ldap.h"
+  export *
+
+  module lber {
+    header "lber.h"
+    header "lber_types.h"
+    export *
+  }
+
+  module ldap_cdefs {
+    header "ldap_cdefs.h"
+    export *
+  }
+
+  module ldap_features {
+    header "ldap_features.h"
+    export *
+  }
+
+  explicit module ldap_schema {
+    header "ldap_schema.h"
+    export *
+  }
+
+  explicit module ldap_utf8{
+    header "ldap_utf8.h"
+    export *
+  }
+}
+
+
+
+module krb5 [system] [extern_c] {
+  header "krb5/krb5.h"
+  export *
+
+  module com_err {
+    header "com_err.h"
+    export *
+  }
+
+  explicit module profile {
+    header "profile.h"
+    export *
+  }
+
+  explicit module locate_plugin {
+    header "krb5/locate_plugin.h"
+    export *
+  }
+
+  explicit module preauth_plugin {
+    header "krb5/preauth_plugin.h"
+    export *
+  }
+
+  exclude header "krb5.h" // deprecated
+}
+
+module XPC [system] [extern_c] {
+  umbrella header "xpc/xpc.h"
+  header "launch.h"
+  module * { export * }
+  export *
 }
 

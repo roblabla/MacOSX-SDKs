@@ -127,6 +127,8 @@ class IOBluetoothHIDDriver : public IOHIDDevice
 		UInt32					mDriverLoadTime;
 		
 		IOTimerEventSource*		mReadyToSleepTimer;
+		
+		bool					mHandleStopBeingCalled;
 
 		
     };
@@ -258,7 +260,12 @@ public:
     OSMetaClassDeclareReservedUsed( IOBluetoothHIDDriver,  9 );
 	virtual void			handleReadyToSleepTimerFired();
 
-    OSMetaClassDeclareReservedUnused( IOBluetoothHIDDriver, 10 );
+    OSMetaClassDeclareReservedUsed( IOBluetoothHIDDriver, 10 );
+	virtual	IOReturn		HIDCommandSleep (void		*	event,
+											 UInt32			milliseconds,
+											 char		*	calledByFunction,
+											 bool			panicMachine);
+	
     OSMetaClassDeclareReservedUnused( IOBluetoothHIDDriver, 11 );
     OSMetaClassDeclareReservedUnused( IOBluetoothHIDDriver, 12 );
     OSMetaClassDeclareReservedUnused( IOBluetoothHIDDriver, 13 );

@@ -1,5 +1,5 @@
 /*	NSFileHandle.h
-	Copyright (c) 1995-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1995-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -10,14 +10,14 @@
 
 @interface NSFileHandle : NSObject <NSSecureCoding>
 
-- (NSData *)availableData;
+@property (readonly, copy) NSData *availableData;
 
 - (NSData *)readDataToEndOfFile;
 - (NSData *)readDataOfLength:(NSUInteger)length;
 
 - (void)writeData:(NSData *)data;
 
-- (unsigned long long)offsetInFile;
+@property (readonly) unsigned long long offsetInFile;
 - (unsigned long long)seekToEndOfFile;
 - (void)seekToFileOffset:(unsigned long long)offset;
 
@@ -25,22 +25,25 @@
 - (void)synchronizeFile;
 - (void)closeFile;
 
+- (instancetype)initWithFileDescriptor:(int)fd closeOnDealloc:(BOOL)closeopt NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
+
 @end
 
 @interface NSFileHandle (NSFileHandleCreation)
 
-+ (id)fileHandleWithStandardInput;
-+ (id)fileHandleWithStandardOutput;
-+ (id)fileHandleWithStandardError;
-+ (id)fileHandleWithNullDevice;
++ (NSFileHandle *)fileHandleWithStandardInput;
++ (NSFileHandle *)fileHandleWithStandardOutput;
++ (NSFileHandle *)fileHandleWithStandardError;
++ (NSFileHandle *)fileHandleWithNullDevice;
 
-+ (id)fileHandleForReadingAtPath:(NSString *)path;
-+ (id)fileHandleForWritingAtPath:(NSString *)path;
-+ (id)fileHandleForUpdatingAtPath:(NSString *)path;
++ (instancetype)fileHandleForReadingAtPath:(NSString *)path;
++ (instancetype)fileHandleForWritingAtPath:(NSString *)path;
++ (instancetype)fileHandleForUpdatingAtPath:(NSString *)path;
 
-+ (id)fileHandleForReadingFromURL:(NSURL *)url error:(NSError **)error NS_AVAILABLE(10_6, 4_0);
-+ (id)fileHandleForWritingToURL:(NSURL *)url error:(NSError **)error NS_AVAILABLE(10_6, 4_0);
-+ (id)fileHandleForUpdatingURL:(NSURL *)url error:(NSError **)error NS_AVAILABLE(10_6, 4_0);
++ (instancetype)fileHandleForReadingFromURL:(NSURL *)url error:(NSError **)error NS_AVAILABLE(10_6, 4_0);
++ (instancetype)fileHandleForWritingToURL:(NSURL *)url error:(NSError **)error NS_AVAILABLE(10_6, 4_0);
++ (instancetype)fileHandleForUpdatingURL:(NSURL *)url error:(NSError **)error NS_AVAILABLE(10_6, 4_0);
 
 @end
 
@@ -78,19 +81,18 @@ FOUNDATION_EXPORT NSString * const NSFileHandleNotificationMonitorModes NS_DEPRE
 
 @interface NSFileHandle (NSFileHandlePlatformSpecific)
 
-- (id)initWithFileDescriptor:(int)fd closeOnDealloc:(BOOL)closeopt;
-- (id)initWithFileDescriptor:(int)fd;
-- (int)fileDescriptor;
+- (instancetype)initWithFileDescriptor:(int)fd;
+
+@property (readonly) int fileDescriptor;
 
 @end
 
 @interface NSPipe : NSObject
 
-- (NSFileHandle *)fileHandleForReading;
-- (NSFileHandle *)fileHandleForWriting;
+@property (readonly, retain) NSFileHandle *fileHandleForReading;
+@property (readonly, retain) NSFileHandle *fileHandleForWriting;
 
-- (id)init;
-+ (id)pipe;
++ (NSPipe *)pipe;
 
 @end
 

@@ -2,12 +2,14 @@
  *  AudioVideoBridging.h
  *  AudioVideoBridging
  *
- *  Copyright 2010-2012 Apple Inc. All rights reserved.
+ *  Copyright (c) 2010-2014 Apple Inc. All rights reserved.
  *
  */
 
 #ifndef AudioVideoBridging_H
 #define AudioVideoBridging_H
+
+#import <AudioVideoBridging/AVBCentralManager.h>
 
 #import <AudioVideoBridging/AVBConstants.h>
 

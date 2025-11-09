@@ -1,5 +1,5 @@
 /*	NSXMLDTDNode.h
-	Copyright (c) 2004-2013, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSXMLNode.h>
@@ -56,61 +56,41 @@ typedef NS_ENUM(NSUInteger, NSXMLDTDNodeKind) {
     @method initWithXMLString:
     @abstract Returns an element, attribute, entity, or notation DTD node based on the full XML string.
 */
-- (id)initWithXMLString:(NSString *)string; //primitive
+- (instancetype)initWithXMLString:(NSString *)string NS_DESIGNATED_INITIALIZER; //primitive
 
-/*!
-    @method setDTDKind:
-    @abstract Sets the DTD sub kind.
-*/
-- (void)setDTDKind:(NSXMLDTDNodeKind)kind; //primitive
+- (instancetype)initWithKind:(NSXMLNodeKind)kind options:(NSUInteger)options NS_DESIGNATED_INITIALIZER; //primitive
+
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
 
 /*!
     @method DTDKind
-    @abstract The DTD sub kind.
+    @abstract Sets the DTD sub kind.
 */
-- (NSXMLDTDNodeKind)DTDKind; //primitive
+@property NSXMLDTDNodeKind DTDKind; //primitive
 
 /*!
     @method isExternal
     @abstract True if the system id is set. Valid for entities and notations.
 */
-- (BOOL)isExternal; //primitive
-
-/*!
-    @method setPublicID:
-    @abstract Sets the public id. This identifier should be in the default catalog in /etc/xml/catalog or in a path specified by the environment variable XML_CATALOG_FILES. When the public id is set the system id must also be set. Valid for entities and notations.
-*/
-- (void)setPublicID:(NSString *)publicID; //primitive
+@property (readonly, getter=isExternal) BOOL external; //primitive
 
 /*!
     @method publicID
-    @abstract The public id.
+    @abstract Sets the public id. This identifier should be in the default catalog in /etc/xml/catalog or in a path specified by the environment variable XML_CATALOG_FILES. When the public id is set the system id must also be set. Valid for entities and notations.
 */
-- (NSString *)publicID; //primitive
-
-/*!
-    @method setSystemID:
-    @abstract Sets the system id. This should be a URL that points to a valid DTD. Valid for entities and notations.
-*/
-- (void)setSystemID:(NSString *)systemID; //primitive
+@property (copy) NSString *publicID; //primitive
 
 /*!
     @method systemID
-    @abstract The system id.
+    @abstract Sets the system id. This should be a URL that points to a valid DTD. Valid for entities and notations.
 */
-- (NSString *)systemID; //primitive
-
-/*!
-    @method setNotationName:
-    @abstract Set the notation name. Valid for entities only.
-*/
-- (void)setNotationName:(NSString *)notationName; //primitive
+@property (copy) NSString *systemID; //primitive
 
 /*!
     @method notationName
-    @abstract The notation name.
+    @abstract Set the notation name. Valid for entities only.
 */
-- (NSString *)notationName; //primitive
+@property (copy) NSString *notationName; //primitive
 
 @end
 

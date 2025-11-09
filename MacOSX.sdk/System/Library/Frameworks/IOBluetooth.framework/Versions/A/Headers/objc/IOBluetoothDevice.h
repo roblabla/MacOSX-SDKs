@@ -115,7 +115,7 @@
 // Creation/deletion.
 
 /*!
-    @method		registerForConnectNotifications:selector:
+    @property	registerForConnectNotifications:selector:
 	@abstract	Allows a client to register for device connect notifications for any connection.
 	@discussion	The given selector will be called on the target observer whenever any device connection is made.
 				The selector should accept two arguments.  The first is the user notification object.  The second
@@ -133,7 +133,7 @@
 + (IOBluetoothUserNotification *)registerForConnectNotifications:(id)observer selector:(SEL)inSelector;
 
 /*!
-    @method		registerForDisconnectNotification:selector:
+    @property	registerForDisconnectNotification:selector:
 	@abstract	Allows a client to register for device disconnect notification.
 	@discussion	The given selector will be called on the target observer when the target device's connection is 
 				closed.  The selector should contain two arguments.  The first is the user notification object.  The second
@@ -148,7 +148,7 @@
 - (IOBluetoothUserNotification *)registerForDisconnectNotification:(id)observer selector:(SEL)inSelector;
 
 /*!
-    @method		deviceWithAddress:
+    @property	deviceWithAddress:
 	@abstract	Returns the IOBluetoothDevice object for the given BluetoothDeviceAddress
 	@discussion	Within a single application, there will be only one instance of IOBluetoothDevice for a
                 given remote device address.
@@ -156,11 +156,11 @@
 	@result		Returns the IOBluetoothDevice object for the given BluetoothDeviceAddress
 */
 
-+ (IOBluetoothDevice *)deviceWithAddress:(const BluetoothDeviceAddress *)address;
-+ (IOBluetoothDevice *)withAddress:(const BluetoothDeviceAddress *)address DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
++ (instancetype)deviceWithAddress:(const BluetoothDeviceAddress *)address;
++ (instancetype)withAddress:(const BluetoothDeviceAddress *)address DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
- @method		deviceWithAddressString:
+ @property	deviceWithAddressString:
  @abstract	Returns the IOBluetoothDevice object for the given BluetoothDeviceAddress
  @discussion	Within a single application, there will be only one instance of IOBluetoothDevice for a
  given remote device address.
@@ -168,20 +168,20 @@
  @result		Returns the IOBluetoothDevice object for the given BluetoothDeviceAddress
  */
 
-+ (IOBluetoothDevice *)deviceWithAddressString:(NSString *)address ;
++ (instancetype)deviceWithAddressString:(NSString *)address ;
 
 /*!
-    @method		withDeviceRef:
+    @property	withDeviceRef:
 	@abstract	Method call to convert an IOBluetoothDeviceRef into an IOBluetoothDevice *.
 	@discussion	IOBluetoothDeviceRef and it's API are deprecated.  An IOBluetoothDeviceRef can be cast to a IOBluetoothDevice *
 	@param		deviceRef IOBluetoothDeviceRef for which an IOBluetoothDevice * is desired.
 	@result		Returns the IOBluetoothDevice * for the given IOBluetoothDeviceRef.
 */
 
-+ (IOBluetoothDevice *)withDeviceRef:(IOBluetoothDeviceRef)deviceRef DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
++ (instancetype)withDeviceRef:(IOBluetoothDeviceRef)deviceRef DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
-    @method		getDeviceRef
+    @property	getDeviceRef
 	@abstract	Returns an IOBluetoothDeviceRef representation of the target IOBluetoothDevice object.
 	@discussion	IOBluetoothDeviceRef and it's API are deprecated.  An IOBluetoothDeviceRef can be cast to a IOBluetoothDevice *
 	@result		Returns an IOBluetoothDeviceRef representation of the target IOBluetoothDevice object.
@@ -192,7 +192,7 @@
 // L2CAP channel.
 
 /*!
-    @method		openL2CAPChannelSync:withPSM:delegate:
+    @property	openL2CAPChannelSync:withPSM:delegate:
 	@abstract	Opens a new L2CAP channel to the target device. Returns only after the channel is opened.
 	@discussion	This method will begin the process of opening a new L2CAP channel to the target device.  
                 The baseband connection to the device will be opened if it is not open already.  The L2CAP
@@ -206,7 +206,7 @@
                                 requested to be opened.  The newChannel pointer will only be set if 
                                 kIOReturnSuccess is returned.
 	@param		withPSM			The L2CAP PSM value for the new channel.
-	@param		delegate the object that will play the role of delegate for the channel.
+	@param		channelDelegate the object that will play the role of delegate for the channel.
 				A channel delegate is the object the l2cap uses as target for  data and events. The
 				developer will implement only the the methods he/she is interested in. A list of the
 				possible methods is at the end of the file "IOBluetoothL2CAPChannel.h" in the definition
@@ -219,7 +219,7 @@
 - (IOReturn)openL2CAPChannelSync:(IOBluetoothL2CAPChannel **)newChannel withPSM:(BluetoothL2CAPPSM)psm delegate:(id)channelDelegate;
 
 /*!
-    @method		openL2CAPChannelAsync:withPSM:delegate:
+    @property	openL2CAPChannelAsync:withPSM:delegate:
 	@abstract	Opens a new L2CAP channel to the target device. Returns immediately after starting the opening process.
 	@discussion	This method will begin the process of opening a new L2CAP channel to the target device.  
                 The baseband connection to the device will be opened if it is not open already.  The L2CAP
@@ -233,7 +233,7 @@
                                 requested to be opened.  The newChannel pointer will only be set if 
                                 kIOReturnSuccess is returned.
 	@param		psm				The L2CAP PSM value for the new channel.
-	@param		delegate the object that will play the role of delegate for the channel.
+	@param		channelDelegate the object that will play the role of delegate for the channel.
 				A channel delegate is the object the l2cap uses as target for  data and events. The
 				developer will implement only the the methods he/she is interested in. A list of the
 				possible methods is at the end of the file "IOBluetoothL2CAPChannel.h" in the definition
@@ -246,7 +246,7 @@
 - (IOReturn)openL2CAPChannelAsync:(IOBluetoothL2CAPChannel **)newChannel withPSM:(BluetoothL2CAPPSM)psm delegate:(id)channelDelegate;
 
 /*!
-    @method		openL2CAPChannel:findExisting:newChannel:
+    @property	openL2CAPChannel:findExisting:newChannel:
 	@abstract	Opens a new L2CAP channel to the target device. Returns immedialty after starting the opening process.
 	@discussion	This method will begin the process of opening a new L2CAP channel to the target device.  
                 The baseband connection to the device will be opened if it is not open already.  The L2CAP
@@ -268,7 +268,7 @@
 - (IOReturn)openL2CAPChannel:(BluetoothL2CAPPSM)psm findExisting:(BOOL)findExisting newChannel:(IOBluetoothL2CAPChannel **)newChannel DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /*!
-    @method		sendL2CAPEchoRequest:length:
+    @property	sendL2CAPEchoRequest:length:
 	@abstract	Send an echo request over the L2CAP connection to a remote device.
 	@discussion	The current implementation returns when the request has been sent, but does not indicate when
                 a response is received.  Also, the baseband connection must be up for the echo request to be sent.
@@ -283,7 +283,7 @@
 - (IOReturn)sendL2CAPEchoRequest:(void *)data length:(UInt16)length;
 
 /*!
-    @method		openRFCOMMChannel:channel:
+    @property	openRFCOMMChannel:channel:
 	@abstract	Opens a new RFCOMM channel to the target device. Returns only once the channel is open or failed to open.
 	@discussion	This method will begin the process of opening a new RFCOMM channel to the target device.  
                 The baseband connection to the device will be opened if it is not open already.  The RFCOMM
@@ -300,7 +300,7 @@
 - (IOReturn)openRFCOMMChannel:(BluetoothRFCOMMChannelID)channelID channel:(IOBluetoothRFCOMMChannel **)rfcommChannel DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /*!
-    @method		openRFCOMMChannelSync:withChannelID:delegate:
+    @property	openRFCOMMChannelSync:withChannelID:delegate:
 	@abstract	Opens a new RFCOMM channel to the target device.  Returns only once the channel is open or failed to open.
 	@discussion	This method will begin the process of opening a new RFCOMM channel to the target device.  
                 The baseband connection to the device will be opened if it is not open already.  The RFCOMM
@@ -323,7 +323,7 @@
 
 	@param		channelID		The RFCOMM channel ID for the new channel.
 								
-	@param		delegate the object that will play the role of delegate for the channel.
+	@param		channelDelegate the object that will play the role of delegate for the channel.
 				A channel delegate is the object the rfcomm uses as target for  data and events. The
 				developer will implement only the the methods he/she is interested in. A list of the
 				possible methods is at the end of the file "IOBluetoothRFCOMMChannel.h" in the definition
@@ -336,7 +336,7 @@
 - (IOReturn)openRFCOMMChannelSync:(IOBluetoothRFCOMMChannel **)rfcommChannel withChannelID:(BluetoothRFCOMMChannelID)channelID delegate:(id)channelDelegate;
 
 /*!
-    @method		openRFCOMMChannelAsync:withChannelID:delegate:
+    @property	openRFCOMMChannelAsync:withChannelID:delegate:
 	@abstract	Opens a new RFCOMM channel to the target device. Returns immediately.
 	@discussion	This method will begin the process of opening a new RFCOMM channel to the target device.  
                 The baseband connection to the device will be opened if it is not open already.  The RFCOMM
@@ -359,7 +359,7 @@
 
 	@param		channelID		The RFCOMM channel ID for the new channel.
 								
-	@param		delegate the object that will play the role of delegate for the channel.
+	@param		channelDelegate the object that will play the role of delegate for the channel.
 				A channel delegate is the object the rfcomm uses as target for  data and events. The
 				developer will implement only the the methods he/she is interested in. A list of the
 				possible methods is at the end of the file "IOBluetoothRFCOMMChannel.h" in the definition
@@ -374,7 +374,7 @@
 // Setting/getting device info.
 
 /*!
-    @method		getClassOfDevice
+    @property	getClassOfDevice
 	@abstract	Gets the full class of device value for the remote device.
 	@discussion	This value is only meaningful if the target device has been seen during an inquiry.  This can be
                 by checking the result of -getLastInquiryUpdate.  If nil is returned, then the device hasn't been
@@ -386,7 +386,7 @@
 - (BluetoothClassOfDevice)getClassOfDevice DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
-    @method		getServiceClassMajor
+    @property	getServiceClassMajor
 	@abstract	Get the major service class of the device.
 	@discussion	This value is only meaningful if the target device has been seen during an inquiry.  This can be
                 by checking the result of -getLastInquiryUpdate.  If nil is returned, then the device hasn't been
@@ -398,7 +398,7 @@
 - (BluetoothServiceClassMajor)getServiceClassMajor DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
-    @method		getDeviceClassMajor
+    @property	getDeviceClassMajor
 	@abstract	Get the major device class of the device.
 	@discussion	This value is only meaningful if the target device has been seen during an inquiry.  This can be
                 by checking the result of -getLastInquiryUpdate.  If nil is returned, then the device hasn't been
@@ -410,7 +410,7 @@
 - (BluetoothDeviceClassMajor)getDeviceClassMajor DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
-    @method		getDeviceClassMinor
+    @property	getDeviceClassMinor
 	@abstract	Get the minor service class of the device.
 	@discussion	This value is only meaningful if the target device has been seen during an inquiry.  This can be
                 by checking the result of -getLastInquiryUpdate.  If nil is returned, then the device hasn't been
@@ -422,7 +422,7 @@
 - (BluetoothDeviceClassMinor)getDeviceClassMinor DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
-    @method		getName
+    @property	getName
 	@abstract	Get the human readable name of the remote device.
 	@discussion	This only returns a value if a remote name request has been performed on the target device.  If a
                 successful remote name request has not been completed, nil is returned.  To perform a remote
@@ -436,7 +436,7 @@
 - (NSString *)getName DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 /*!
-    @method		getNameOrAddress
+    @property	getNameOrAddress
 	@abstract	Get the human readable name of the remote device.  If the name is not present, it will return a string
                 containing the device's address.
 	@discussion	If a remote name request has been successfully completed, the device name will be returned.  If not,
@@ -448,7 +448,7 @@
 - (NSString *)getNameOrAddress DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 /*!
-    @method		getLastNameUpdate
+    @property	getLastNameUpdate
 	@abstract	Get the date/time of the last successful remote name request.
 	@result		Returns the date/time of the last successful remote name request.  If no remote name request has been
                 completed on the target device, nil is returned.
@@ -458,7 +458,7 @@
 - (NSDate *)getLastNameUpdate DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
-    @method		getAddress
+    @property	getAddress
 	@abstract	Get the Bluetooth device address for the target device.
 	@result		Returns a pointer to the Bluetooth device address of the target device.
 */
@@ -466,7 +466,7 @@
 - (const BluetoothDeviceAddress *)getAddress;
 
 /*!
-    @method		getAddressString
+    @property	getAddressString
 	@abstract	Get a string representation of the Bluetooth device address for the target device.  The
 				format of the string is the same as returned by IOBluetoothNSStringFromDeviceAddress().
 	@discussion	NOTE: This method is only available in Mac OS X 10.2.4 (Bluetooth v1.1) or later.
@@ -479,7 +479,7 @@
 // Connecting to the device.
 
 /*!
-    @method		getPageScanRepetitionMode
+    @property	getPageScanRepetitionMode
 	@abstract	Get the value of the page scan repetition mode for the device.
 	@discussion	This value is only meaningful if the target device has been seen during an inquiry.  This can be
                 by checking the result of -getLastInquiryUpdate.  If nil is returned, then the device hasn't been
@@ -490,7 +490,7 @@
 - (BluetoothPageScanRepetitionMode)getPageScanRepetitionMode;
 
 /*!
-    @method		getPageScanPeriodMode
+    @property	getPageScanPeriodMode
 	@abstract	Get the value of the page scan period mode for the device.
 	@discussion	This value is only meaningful if the target device has been seen during an inquiry.  This can be
                 by checking the result of -getLastInquiryUpdate.  If nil is returned, then the device hasn't been
@@ -501,7 +501,7 @@
 - (BluetoothPageScanPeriodMode)getPageScanPeriodMode;
 
 /*!
-    @method		getPageScanMode
+    @property	getPageScanMode
 	@abstract	Get the page scan mode for the device.
 	@discussion	This value is only meaningful if the target device has been seen during an inquiry.  This can be
                 by checking the result of -getLastInquiryUpdate.  If nil is returned, then the device hasn't been
@@ -512,7 +512,7 @@
 - (BluetoothPageScanMode)getPageScanMode;
 
 /*!
-    @method		getClockOffset
+    @property	getClockOffset
 	@abstract	Get the clock offset value of the device.
 	@discussion	This value is only meaningful if the target device has been seen during an inquiry.  This can be
                 by checking the result of -getLastInquiryUpdate.  If nil is returned, then the device hasn't been
@@ -523,7 +523,7 @@
 - (BluetoothClockOffset)getClockOffset;
 
 /*!
-    @method		getLastInquiryUpdate
+    @property	getLastInquiryUpdate
 	@abstract	Get the date/time of the last time the device was returned during an inquiry.
 	@result		Returns the date/time of the last time the device was seen during an inquiry.
                 If the device has never been seen during an inquiry, nil is returned.
@@ -532,7 +532,7 @@
 - (NSDate *)getLastInquiryUpdate;
 
 /*!
-    @method		RSSI
+    @property	RSSI
 	@abstract	Get the RSSI device (if connected), above or below the golden range. If the RSSI is within the golden
 				range, a value of 0 is returned. For the actual RSSI value, use getRawRSSI. For more information, see
 				the Bluetooth 4.0 Core Specification.
@@ -543,7 +543,7 @@
 - (BluetoothHCIRSSIValue)RSSI AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
-    @method		rawRSSI
+    @property	rawRSSI
 	@abstract	Get the raw RSSI device (if connected).
 	@result		Returns the raw RSSI of the device.
 	@discussion	This value is the perceived RSSI value, not relative the the golden range (see getRSSI for that value).
@@ -554,7 +554,7 @@
 - (BluetoothHCIRSSIValue)rawRSSI AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
-    @method		isConnected
+    @property	isConnected
 	@abstract	Indicates whether a baseband connection to the device exists.
 	@result		Returns YES if a baseband connection to the device exists.
 */
@@ -562,7 +562,7 @@
 - (BOOL)isConnected;
 
 /*!
-    @method		openConnection
+    @property	openConnection
 	@abstract	Create a baseband connection to the device.
 	@discussion	This method is synchronous and will not return until either a connection has been established
                 or the create connection has failed (perhaps timed out).  This method does the same thing as
@@ -579,7 +579,7 @@
 - (IOReturn)openConnection;
 
 /*!
-    @method		openConnection:
+    @property	openConnection:
 	@abstract	Create a baseband connection to the device.
 	@discussion	If a target is specified, the open connection call is asynchronous and on completion of the 
 				CREATE_CONNECTION command, the method -connectionComplete:status: will be called on the specified target.  
@@ -598,7 +598,7 @@
 - (IOReturn)openConnection:(id)target;
 
 /*!
-    @method		openConnection:withPageTimeout:authenticationRequired:
+    @property	openConnection:withPageTimeout:authenticationRequired:
 	@abstract	Create a baseband connection to the device.
 	@discussion	If a target is specified, the open connection call is asynchronous and on completion of the 
 				CREATE_CONNECTION command, the method -connectionComplete:status: will be called on the specified target.  
@@ -619,7 +619,7 @@
 - (IOReturn)openConnection:(id)target withPageTimeout:(BluetoothHCIPageTimeout)pageTimeoutValue authenticationRequired:(BOOL)authenticationRequired;
 
 /*!
-    @method		closeConnection
+    @property	closeConnection
 	@abstract	Close down the baseband connection to the device.
 	@discussion	This method is synchronous and will not return until the connection has been closed (or the 
                 command failed).  In the future this API will be changed to allow asynchronous operation.
@@ -629,7 +629,7 @@
 - (IOReturn)closeConnection;
 
 /*!
-    @method		remoteNameRequest:
+    @property	remoteNameRequest:
 	@abstract	Issues a remote name request to the target device.
 	@discussion	If a target is specified, the request is asynchronous and on completion of the request, the method
  
@@ -647,7 +647,7 @@
 - (IOReturn)remoteNameRequest:(id)target;
 
 /*!
-    @method		remoteNameRequest:withPageTimeout:
+    @property	remoteNameRequest:withPageTimeout:
 	@abstract	Issues a remote name request to the target device.
 	@discussion	If a target is specified, the request is asynchronous and on completion of the REMOTE_NAME_REQUEST
                 command, the method -remoteNameRequestComplete:status:name: will be called on the specified target.
@@ -664,7 +664,7 @@
 - (IOReturn)remoteNameRequest:(id)target withPageTimeout:(BluetoothHCIPageTimeout)pageTimeoutValue;
 
 /*!
-    @method		requestAuthentication
+    @property	requestAuthentication
 	@abstract	Requests that the existing baseband connection be authenticated.
 	@discussion	In order to authenticate a baseband connection, a link key needs to be generated as a result of 
                 the pairing process.  This call will synchronously initiate the pairing process with the target device
@@ -677,7 +677,7 @@
 - (IOReturn)requestAuthentication;
 
 /*!
-    @method		getConnectionHandle
+    @property	getConnectionHandle
 	@abstract	Get the connection handle for the baseband connection.
 	@discussion	This method only returns a valid result if a baseband connection is present (-isConnected returns TRUE).
 	@result		Returns the connection handle for the baseband connection.  If no baseband connection is present,
@@ -688,7 +688,7 @@
 - (BluetoothConnectionHandle)getConnectionHandle DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
-    @method		isIncoming
+    @property	isIncoming
 	@abstract	Returns TRUE if the device connection was generated by the remote host.
     @discussion	Returns TRUE if the device connection was generated by the remote host. False if the connection was generated by some other device that connected to the local host.
 
@@ -699,7 +699,7 @@
 - (BOOL)isIncoming;
 
 /*!
-    @method		getLinkType
+    @property	getLinkType
 	@abstract	Get the link type for the baseband connection.
 	@discussion	This method only returns a valid result if a baseband connection is present (-isConnected returns TRUE).
 	@result		Returns the link type for the baseband connection.  If no baseband connection is present,
@@ -709,7 +709,7 @@
 - (BluetoothLinkType)getLinkType;
 
 /*!
-    @method		getEncryptionMode
+    @property	getEncryptionMode
 	@abstract	Get the encryption mode for the baseband connection.
 	@discussion	This method only returns a valid result if a baseband connection is present (-isConnected returns TRUE).
 	@result		Returns the encryption mode for the baseband connection.  If no baseband connection is present,
@@ -719,7 +719,7 @@
 - (BluetoothHCIEncryptionMode)getEncryptionMode;
 
 /*!
-    @method		performSDPQuery:
+    @property	performSDPQuery:
 	@abstract	Performs an SDP query on the target device.
 	@discussion	As a result of this call, a baseband connection will be built to the device (if not already connected).
 				Then, an L2CAP channel will be opened to the SDP server on the device.  At that point, a Service
@@ -737,7 +737,7 @@
 - (IOReturn)performSDPQuery:(id)target;
 
 /*!
- @method		performSDPQuery:uuids:
+ @property	performSDPQuery:uuids:
  @abstract	Performs an SDP query on the target device with the specified service UUIDs.
  @discussion	As a result of this call, a baseband connection will be built to the device (if not already connected).
  Then, an L2CAP channel will be opened to the SDP server on the device.  At that point, a Service
@@ -756,7 +756,7 @@
 - (IOReturn)performSDPQuery:(id)target uuids:(NSArray *)uuidArray AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
-    @method		services
+    @property	services
 	@abstract	Gets an array of service records for the device.
 	@discussion	The resulting array contains IOBluetoothSDPServiceRecord objects.  The service records are only
                 present if an SDP query has been done on the target object.  This can be determined by calling
@@ -773,7 +773,7 @@
 - (NSArray *)getServices DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
-    @method		getLastServicesUpdate
+    @property	getLastServicesUpdate
 	@abstract	Get the date/time of the last SDP query.
 	@result		Returns the date/time of the last SDP query.  If an SDP query has never been performed on the
                 device, nil is returned.
@@ -782,7 +782,7 @@
 - (NSDate *)getLastServicesUpdate;
 
 /*!
-    @method		getServiceRecordForUUID
+    @property	getServiceRecordForUUID
 	@abstract	Search for a service record containing the given UUID.
 	@discussion	This method searches through the device's services to find a service that contains the given
                 UUID.  Only the first service record will be returned.  This method only operates on services
@@ -796,7 +796,7 @@
 - (IOBluetoothSDPServiceRecord *)getServiceRecordForUUID:(IOBluetoothSDPUUID *)sdpUUID;
 
 /*!
-    @method		favoriteDevices
+    @property	favoriteDevices
 	@abstract	Gets an array of the user's favorite devices.
 	@discussion	The resulting array contains IOBluetoothDevice objects.
 
@@ -808,7 +808,7 @@
 + (NSArray *)favoriteDevices;
 
 /*!
-    @method		isFavorite
+    @property	isFavorite
 	@abstract	Reports whether the target device is a favorite for the user.
 	@discussion	NOTE: This method is only available in Mac OS X 10.2.4 (Bluetooth v1.1) or later.
 	@result		Returns TRUE if the target device is a favorite for the user, FALSE if not.
@@ -817,7 +817,7 @@
 - (BOOL)isFavorite;
 
 /*!
-    @method		addToFavorites
+    @property	addToFavorites
 	@abstract	Adds the target device to the user's favorite devices list.
 	@discussion	NOTE: This method is only available in Mac OS X 10.2.4 (Bluetooth v1.1) or later.
 	@result		Returns kIOReturnSuccess if the device was successfully added to the user's
@@ -827,7 +827,7 @@
 - (IOReturn)addToFavorites;
 
 /*!
-    @method		removeFromFavorites
+    @property	removeFromFavorites
 	@abstract	Removes the target device from the user's favorite devices list.
 	@discussion	NOTE: This method is only available in Mac OS X 10.2.4 (Bluetooth v1.1) or later.
 	@result		Returns kIOReturnSuccess if the device was successfully removed from the user's
@@ -837,7 +837,7 @@
 - (IOReturn)removeFromFavorites;
 
 /*!
-    @method		recentDevices
+    @property	recentDevices
 	@abstract	Gets an array of recently used Bluetooth devices.
 	@discussion	The resulting array contains IOBluetoothDevice objects sorted in reverse chronological order.
 				The most recently accessed devices are first.  If the numDevices parameter is 0, all devices 
@@ -853,7 +853,7 @@
 + (NSArray *)recentDevices:(unsigned long)numDevices;
 
 /*!
-    @method		recentAccessDate
+    @property	recentAccessDate
 	@abstract	Returns the date/time of the most recent access of the target device.
 	@discussion	This is the date that -recentDevices uses to sort its list of the most recently accessed
 				devices.
@@ -866,7 +866,7 @@
 - (NSDate *)recentAccessDate;
 
 /*!
-    @method		pairedDevices
+    @property	pairedDevices
 	@abstract	Gets an array of all of the paired devices on the system.
 	@discussion	The resulting array contains IOBluetoothDevice objects.  The paired devices are currently NOT stored
 				per user, so this is all devices paired by any user.
@@ -879,7 +879,7 @@
 + (NSArray *)pairedDevices;
 
 /*!
-    @method		isPaired
+    @property	isPaired
 	@abstract	Returns whether the target device is paired.
 	@discussion	NOTE: This method is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
 	@result		Returns TRUE if the target device is paired, FALSE if not.
@@ -888,7 +888,7 @@
 - (BOOL)isPaired;
 
 /*!
-    @method		setSupervisionTimeout
+    @property	setSupervisionTimeout
 	@abstract	Sets the connection supervision timeout.
 	@discussion	NOTE: This method is only available in Mac OS X 10.5 (Bluetooth v2.0) or later.
 	@param		timeout A client-supplied link supervision timeout value to use to monitor the connection. The timeout
@@ -900,7 +900,7 @@
 - (IOReturn)setSupervisionTimeout:(UInt16)timeout;
 
 /*!
-    @method		openL2CAPChannelSync:withPSM:withConfiguration:delegate:
+    @property	openL2CAPChannelSync:withPSM:withConfiguration:delegate:
 	@abstract	Opens a new L2CAP channel to the target device. Returns only after the channel is opened.
 	@discussion	This method will begin the process of opening a new L2CAP channel to the target device.  
                 The baseband connection to the device will be opened if it is not open already.  The L2CAP
@@ -917,7 +917,7 @@
 	@param		withPSM			The L2CAP PSM value for the new channel.
 	@param		channelConfiguration the dictionary that describes the initial configuration for
 				the channel.
-	@param		delegate the object that will play the role of delegate for the channel.
+	@param		channelDelegate the object that will play the role of delegate for the channel.
 				A channel delegate is the object the l2cap uses as target for  data and events. The
 				developer will implement only the the methods he/she is interested in. A list of the
 				possible methods is at the end of the file "IOBluetoothL2CAPChannel.h" in the definition
@@ -930,7 +930,7 @@
 - (IOReturn)openL2CAPChannelSync:(IOBluetoothL2CAPChannel **)newChannel withPSM:(BluetoothL2CAPPSM)psm withConfiguration:(NSDictionary*)channelConfiguration delegate:(id)channelDelegate;
 
 /*!
-    @method		openL2CAPChannelAsync:withPSM:withConfiguration:delegate:
+    @property	openL2CAPChannelAsync:withPSM:withConfiguration:delegate:
 	@abstract	Opens a new L2CAP channel to the target device. Returns immediately after starting the opening process.
 	@discussion	This method will begin the process of opening a new L2CAP channel to the target device.  
                 The baseband connection to the device will be opened if it is not open already.  The L2CAP
@@ -947,7 +947,7 @@
 	@param		psm				The L2CAP PSM value for the new channel.
 	@param		channelConfiguration the dictionary that describes the initial configuration for
 				the channel.
-	@param		delegate the object that will play the role of delegate for the channel.
+	@param		channelDelegate the object that will play the role of delegate for the channel.
 				A channel delegate is the object the l2cap uses as target for  data and events. The
 				developer will implement only the the methods he/she is interested in. A list of the
 				possible methods is at the end of the file "IOBluetoothL2CAPChannel.h" in the definition

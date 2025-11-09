@@ -65,7 +65,7 @@ NS_CLASS_AVAILABLE_MAC(10_9)
  * @discussion
  * Returns an initialized and autoreleased ODRecordMap object.
  */
-+ (id)recordMap;
++ (instancetype)recordMap;
 
 /*!
  * @method attributeMapForStandardAttribute:

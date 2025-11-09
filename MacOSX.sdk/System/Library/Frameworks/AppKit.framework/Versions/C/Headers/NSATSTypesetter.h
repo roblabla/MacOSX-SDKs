@@ -1,7 +1,7 @@
 /*
         NSATSTypesetter.h
         Application Kit
-        Copyright (c) 2002-2013, Apple Inc.
+        Copyright (c) 2002-2014, Apple Inc.
         All rights reserved.
 */
 
@@ -37,7 +37,7 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 }
 
 // Factory methods
-+ (id)sharedTypesetter;
++ (NSATSTypesetter *)sharedTypesetter;
 @end
 
 @interface NSATSTypesetter (NSPantherCompatibility)
@@ -51,16 +51,12 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 @interface NSATSTypesetter (NSPrimitiveInterface)
 /* Privmitive typesetting methods */
 // NSLayoutManager attributes
-- (BOOL)usesFontLeading;
-- (void)setUsesFontLeading:(BOOL)flag;
-- (NSTypesetterBehavior)typesetterBehavior;
-- (void)setTypesetterBehavior:(NSTypesetterBehavior)behavior;
-- (float)hyphenationFactor;
-- (void)setHyphenationFactor:(float)factor;
+@property BOOL usesFontLeading;
+@property NSTypesetterBehavior typesetterBehavior;
+@property float hyphenationFactor;
 
 // NSTextContainer attributes
-- (CGFloat)lineFragmentPadding;
-- (void)setLineFragmentPadding:(CGFloat)padding;
+@property CGFloat lineFragmentPadding;
 
 // Screen/printer font mapping
 - (NSFont *)substituteFontForFont:(NSFont *)originalFont;
@@ -69,15 +65,13 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 - (NSTextTab *)textTabForGlyphLocation:(CGFloat)glyphLocation writingDirection:(NSWritingDirection)direction maxLocation:(CGFloat)maxLocation;
 
 // Bidi control
-- (BOOL)bidiProcessingEnabled;
-- (void)setBidiProcessingEnabled:(BOOL)flag; // Controls whether to perform bi-directional processing.  You can disable the layout stage if you know the parapgraph does not need this stage (i.e. the backing-store is in the display order) in -fillAttributesForGlyphsInRange:andParagraphSeparatorRange:.
+@property BOOL bidiProcessingEnabled; // Controls whether to perform bi-directional processing.  You can disable the layout stage if you know the parapgraph does not need this stage (i.e. the backing-store is in the display order) in -fillAttributesForGlyphsInRange:andParagraphSeparatorRange:.
 
 // Accessors for required paragraph typesetting ivars (attributedString, paragraphGlyphRange, paragraphSeparatorGlyphRange
-- (void)setAttributedString:(NSAttributedString *)attrString; // Note this method does not retain attrString
-- (NSAttributedString *)attributedString;
+@property (assign) NSAttributedString *attributedString; // Note this method does not retain attrString
 - (void)setParagraphGlyphRange:(NSRange)paragraphRange separatorGlyphRange:(NSRange)paragraphSeparatorRange;
-- (NSRange)paragraphGlyphRange;
-- (NSRange)paragraphSeparatorGlyphRange;
+@property (readonly) NSRange paragraphGlyphRange;
+@property (readonly) NSRange paragraphSeparatorGlyphRange;
 
 // layout primitive
 - (NSUInteger)layoutParagraphAtPoint:(NSPoint *)lineFragmentOrigin; // lineFragmentOrigin specifies the upper-left corner of line fragment rect.  On return, set to the next origin. The method returns the next glyph index. Usually the index right after paragraph separator but can be inside the paragraph range (i.e. text container exhaustion)
@@ -90,8 +84,8 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 /* Cocoa Text System interface methods */
 
 // Friend classes
-- (NSLayoutManager *)layoutManager;
-- (NSTextContainer *)currentTextContainer;
+@property (readonly, assign) NSLayoutManager *layoutManager;
+@property (readonly, assign) NSTextContainer *currentTextContainer;
 
 // Forces NSLayoutManager to invalidate glyph cache in range when invalidating layout
 - (void)setHardInvalidation:(BOOL)flag forGlyphRange:(NSRange)glyphRange;

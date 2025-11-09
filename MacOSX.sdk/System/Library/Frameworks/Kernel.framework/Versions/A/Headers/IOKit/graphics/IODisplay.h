@@ -37,6 +37,7 @@ extern const OSSymbol * gIODisplayContrastKey;
 extern const OSSymbol * gIODisplayBrightnessKey;
 extern const OSSymbol * gIODisplayLinearBrightnessKey;
 extern const OSSymbol * gIODisplayUsableLinearBrightnessKey;
+extern const OSSymbol * gIODisplayBrightnessFadeKey;
 extern const OSSymbol * gIODisplayHorizontalPositionKey;
 extern const OSSymbol * gIODisplayHorizontalSizeKey;
 extern const OSSymbol * gIODisplayVerticalPositionKey;
@@ -52,6 +53,7 @@ extern const OSSymbol * gIODisplaySelectedColorModeKey;
 extern const OSSymbol * gIODisplayRedGammaScaleKey;
 extern const OSSymbol * gIODisplayGreenGammaScaleKey;
 extern const OSSymbol * gIODisplayBlueGammaScaleKey;
+extern const OSSymbol * gIODisplayGammaScaleKey;
 
 extern const OSSymbol * gIODisplayParametersTheatreModeKey;
 extern const OSSymbol * gIODisplayParametersTheatreModeWindowKey;
@@ -80,6 +82,16 @@ extern const OSSymbol * gIODisplayCapabilityStringKey;
 extern const OSSymbol * gIODisplayParametersCommitKey;
 extern const OSSymbol * gIODisplayParametersDefaultKey;
 extern const OSSymbol * gIODisplayParametersFlushKey;
+
+extern const OSSymbol * gIODisplayFadeTime1Key;
+extern const OSSymbol * gIODisplayFadeTime2Key;
+extern const OSSymbol * gIODisplayFadeTime3Key;
+extern const OSSymbol * gIODisplayFadeStyleKey;
+
+extern UInt32 gIODisplayFadeTime1;
+extern UInt32 gIODisplayFadeTime2;
+extern UInt32 gIODisplayFadeTime3;
+extern UInt32 gIODisplayFadeStyle;
 
 enum {
     kIODisplayNumPowerStates = 4,
@@ -170,7 +182,6 @@ public:
 
     // power management methods
     virtual IOReturn setPowerState( unsigned long, IOService * );
-    void setDisplayPowerState(unsigned long state);
     virtual unsigned long maxCapabilityForDomainState( IOPMPowerFlags );
     virtual unsigned long initialPowerStateForDomainState( IOPMPowerFlags );
     virtual unsigned long powerStateForDomainState( IOPMPowerFlags );
@@ -179,6 +190,7 @@ public:
     virtual void initPowerManagement( IOService * provider);
     virtual void dropOneLevel( void );
     virtual void makeDisplayUsable( void );
+    void setDisplayPowerState(unsigned long state);
 
 private:
     OSMetaClassDeclareReservedUnused(IODisplay, 0);

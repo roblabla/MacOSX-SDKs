@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2013 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2014 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -78,15 +78,6 @@ struct name {				\
 #define _TCPCB_PTR(x)			x
 #define _TCPCB_LIST_HEAD(name, type)	LIST_HEAD(name, type)
 #endif
-
-#define TCP_RETRANSHZ	1000	/* granularity of TCP timestamps, 1ms */		
-#define TCP_TIMERHZ	100		/* frequency of TCP fast timer, 100 ms */
-
-/* Minimum time quantum within which the timers are coalesced */
-#define TCP_FASTTIMER_QUANTUM   TCP_TIMERHZ	/* fast mode, once every 100ms */
-#define TCP_SLOWTIMER_QUANTUM   (TCP_RETRANSHZ/2) /* slow mode, once every 500ms */
-
-#define TCP_RETRANSHZ_TO_USEC 1000
 
 struct tseg_qent;
 _TCPCB_LIST_HEAD(tsegqe_head, tseg_qent);
@@ -339,6 +330,24 @@ struct	tcpstat {
 	u_int32_t	tcps_mp_sndpacks;	/* number of data packs sent */
 	u_int32_t	tcps_mp_sndbytes;	/* number of bytes sent */
 	u_int32_t	tcps_join_rxmts;	/* join ack retransmits */
+	u_int32_t	tcps_tailloss_rto;	/* RTO due to tail loss */
+	u_int32_t	tcps_reordered_pkts;	/* packets reorderd */
+	u_int32_t	tcps_recovered_pkts;	/* recovered after loss */
+	u_int32_t	tcps_pto;		/* probe timeout */
+	u_int32_t	tcps_rto_after_pto;	/* RTO after a probe */
+	u_int32_t	tcps_tlp_recovery;	/* TLP induced fast recovery */
+	u_int32_t	tcps_tlp_recoverlastpkt; /* TLP recoverd last pkt */
+	u_int32_t	tcps_ecn_setup;		/* connection negotiated ECN */
+	u_int32_t	tcps_sent_cwr;		/* Sent CWR, ECE received */
+	u_int32_t	tcps_sent_ece;		/* Sent ECE notification */
+	u_int32_t	tcps_detect_reordering; /* Detect pkt reordering */
+	u_int32_t	tcps_delay_recovery;	/* Delay fast recovery */
+	u_int32_t	tcps_avoid_rxmt;	/* Retransmission was avoided */
+	u_int32_t	tcps_unnecessary_rxmt;	/* Retransmission was not needed */
+	u_int32_t	tcps_nostretchack;	/* disabled stretch ack algorithm on a connection */
+	u_int32_t	tcps_rescue_rxmt;	/* SACK rescue retransmit */
+	u_int32_t	tcps_pto_in_recovery;	/* PTO during fast recovery */
+	u_int32_t	tcps_pmtudbh_reverted;	/* PMTU Blackhole detection, segement size reverted */
 };
 
 struct tcpstat_local {

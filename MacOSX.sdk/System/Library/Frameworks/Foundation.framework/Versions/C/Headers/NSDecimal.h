@@ -1,5 +1,5 @@
 /*	NSDecimal.h
-	Copyright (c) 1995-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1995-2014, Apple Inc. All rights reserved.
 */
 
 #include <limits.h>

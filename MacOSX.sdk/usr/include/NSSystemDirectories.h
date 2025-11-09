@@ -48,9 +48,8 @@
 #ifndef __NS_SYSTEM_DIRECTORIES_H__
 #define __NS_SYSTEM_DIRECTORIES_H__
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#include <sys/cdefs.h>
+#include <Availability.h>
 
 // Directories
 
@@ -93,18 +92,58 @@ typedef enum {
 
 typedef unsigned int NSSearchPathEnumerationState;
 
-/* Enumeration
- Call NSStartSearchPathEnumeration() once, then call NSGetNextSearchPathEnumeration() one or more times with the returned state.
- The return value of NSGetNextSearchPathEnumeration() should be used as the state next time around.
- When NSGetNextSearchPathEnumeration() returns 0, you're done.
-*/
+__BEGIN_DECLS
 
-extern NSSearchPathEnumerationState NSStartSearchPathEnumeration(NSSearchPathDirectory dir, NSSearchPathDomainMask domainMask);
+/*!
+ * @function NSStartSearchPathEnumeration
+ *
+ * @discussion
+ * Call this function to begin enumeration of the filesystem paths for the
+ * specified directory in the desired domains. The return value should be
+ * passed to one or more calls to NSGetNextSearchPathEnumeration() to obtain
+ * the filesystem path and continue the enumeration.
+ *
+ * @param dir
+ * The special directory to enumerate.
+ *
+ * @param domainMask
+ * The domains in which the special directory should be enumerated.
+ *
+ * @return
+ * An enumeration state value to pass to NSGetNextSearchPathEnumeration().
+ */
+__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0)
+extern NSSearchPathEnumerationState
+NSStartSearchPathEnumeration(NSSearchPathDirectory dir,
+			     NSSearchPathDomainMask domainMask);
 
-extern NSSearchPathEnumerationState NSGetNextSearchPathEnumeration(NSSearchPathEnumerationState state, char *path);
+/*!
+ * @function NSGetNextSearchPathEnumeration
+ *
+ * @discussion
+ * Returns the filesystem path for a special directory in the domain(s)
+ * specified by the state value returned by NSStartSearchPathEnumeration().
+ * Subsequent calls to NSGetNextSearchPathEnumeration() should pass the state
+ * value returned by the previous call to continue the enumeration in each
+ * domain. A state value of zero will be returned when all domains have been
+ * enumerated.
+ *
+ * @param state
+ * The state value returned by NSStartSearchPathEnumeration() or by a previous
+ * call to this function.
+ *
+ * @param path
+ * A buffer to which the NUL-terminated filesystem path of the special
+ * directory will be written. The buffer size must be at least PATH_MAX bytes.
+ *
+ * @return
+ * An enumeration state value to pass to a subsequent call to
+ * NSGetNextSearchPathEnumeration(), or zero if enumeration is complete.
+ */
+__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0)
+extern NSSearchPathEnumerationState
+NSGetNextSearchPathEnumeration(NSSearchPathEnumerationState state, char *path);
 
-#ifdef __cplusplus
-}
-#endif
+__END_DECLS
 
 #endif /* __NS_SYSTEM_DIRECTORIES_H__ */

@@ -98,7 +98,7 @@
         @param	rfcommChannelRef IOBluetoothRFCOMMChannelRef for which an IOBluetoothRFCOMMChannel * is desired.
 	@result		Returns the IOBluetoothRFCOMMChannel * for the given IOBluetoothRFCOMMChannelRef.
 */
-+ (IOBluetoothRFCOMMChannel *)withRFCOMMChannelRef:(IOBluetoothRFCOMMChannelRef)rfcommChannelRef;
++ (instancetype)withRFCOMMChannelRef:(IOBluetoothRFCOMMChannelRef)rfcommChannelRef;
 
 /*!
     @method	withObjectID:
@@ -110,7 +110,7 @@
 				If no matching RFCOMM channel exists, nil is returned.
 */
 
-+ (IOBluetoothRFCOMMChannel *)withObjectID:(IOBluetoothObjectID)objectID;
++ (instancetype)withObjectID:(IOBluetoothObjectID)objectID;
 
 /*!	@method	getRFCOMMChannelRef
 	@abstract	Returns an IOBluetoothRFCOMMChannelRef representation of the target IOBluetoothRFCOMMChannel object.

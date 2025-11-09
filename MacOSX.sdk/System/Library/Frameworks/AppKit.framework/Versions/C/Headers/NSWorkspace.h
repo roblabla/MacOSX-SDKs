@@ -1,7 +1,7 @@
 /*
 	NSWorkspace.h
 	Application Kit
-	Copyright (c) 1994-2013, Apple Inc.
+	Copyright (c) 1994-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -12,8 +12,7 @@
 
 @class NSArray, NSError, NSImage, NSView, NSNotificationCenter, NSURL, NSScreen, NSRunningApplication;
 
-typedef NSUInteger NSWorkspaceLaunchOptions;
-enum {
+typedef NS_OPTIONS(NSUInteger, NSWorkspaceLaunchOptions) {
      NSWorkspaceLaunchAndPrint =                 0x00000002,
      NSWorkspaceLaunchWithErrorPresentation    = 0x00000040,
      NSWorkspaceLaunchInhibitingBackgroundOnly = 0x00000080,
@@ -25,12 +24,10 @@ enum {
      NSWorkspaceLaunchNewInstance              = 0x00080000,
      NSWorkspaceLaunchAndHide                  = 0x00100000,
      NSWorkspaceLaunchAndHideOthers            = 0x00200000,
-     NSWorkspaceLaunchDefault = NSWorkspaceLaunchAsync | 
-NSWorkspaceLaunchAllowingClassicStartup
+     NSWorkspaceLaunchDefault = NSWorkspaceLaunchAsync | NSWorkspaceLaunchAllowingClassicStartup
 };
 
-typedef NSUInteger NSWorkspaceIconCreationOptions;
-enum {
+typedef NS_OPTIONS(NSUInteger, NSWorkspaceIconCreationOptions) {
     NSExcludeQuickDrawElementsIconCreationOption    = 1 << 1,
     NSExclude10_4ElementsIconCreationOption	    = 1 << 2
 };
@@ -50,7 +47,7 @@ enum {
 + (NSWorkspace *)sharedWorkspace;
 
 /* Returns the NSNotificationCenter for this NSWorkspace.  All notifications in this header file must be registered on this notifcation center.  If you register on other notification centers, you will not receive the notifications. */
-- (NSNotificationCenter *)notificationCenter;
+@property (readonly, strong) NSNotificationCenter *notificationCenter;
 
 /* Open a file at some path.  If you use the variant without the withApplication: parameter, or if you pass nil for this parameter, the default application is used.  The appName parameter may be a full path to an application, or just the application's name, with or without the .app extension.  If you pass YES for andDeactivate:, or call a variant without this parameter, the calling app is deactivated before the new app is launched, so that the new app may come to the foreground unless the user switches to another application in the interim.  Passing YES for andDeactivate: is generally recommended.
  */
@@ -72,6 +69,12 @@ enum {
   The configuration dictionary can be used to pass additional options to the app.  Possible keys are listed later in this file (search for NSWorkspaceLaunchConfiguration). The configuration dictionary may be nil, in which case default behavior applies.
 */
 - (NSRunningApplication *)launchApplicationAtURL:(NSURL *)url options:(NSWorkspaceLaunchOptions)options configuration:(NSDictionary *)configuration error:(NSError **)error NS_AVAILABLE_MAC(10_6);
+
+/* Opens the given URL in an the application that claims it. An NSRunningApplication instance representing the app that the URL was opened in is returned. If the app could not be launched or no app claims the URL, nil is returned and an NSError is returned by reference. The options and configuration parameters are the same as those in launchApplicationAtURL:options:configuration:error:. */
+- (NSRunningApplication *)openURL:(NSURL *)url options:(NSWorkspaceLaunchOptions)options configuration:(NSDictionary *)configuration error:(NSError **)error NS_AVAILABLE_MAC(10_10);
+
+/* Opens the given URLs in the application at applicationURL. Returns the NSRunningApplication for the app the URLs were opened in. If the app could not be launched, nil is returned and an NSError is returned by reference. The options and configuration parameters are the same as those in launchApplicationAtURL:options:configuration:error:. */
+- (NSRunningApplication *)openURLs:(NSArray *)urls withApplicationAtURL:(NSURL *)applicationURL options:(NSWorkspaceLaunchOptions)options configuration:(NSDictionary *)configuration error:(NSError **)error NS_AVAILABLE_MAC(10_10);
 
 /* This currently does the same thing as launchApplication:.  Its use is discouraged. */
 - (BOOL)launchApplication:(NSString *)appName showIcon:(BOOL)showIcon autolaunch:(BOOL)autolaunch;
@@ -112,12 +115,11 @@ enum {
 - (BOOL)setIcon:(NSImage *)image forFile:(NSString *)fullPath options:(NSWorkspaceIconCreationOptions)options;
 
 /* Get the array of file labels as NSStrings.  The file label index for a particular file is available as a property on the URL.  You may listen for NSWorkspaceDidChangeFileLabelsNotification to be notified when these change. */
-- (NSArray *)fileLabels NS_AVAILABLE_MAC(10_6);
+@property (readonly, copy) NSArray *fileLabels NS_AVAILABLE_MAC(10_6);
 
 /* Get the corresponding array of file label colors.  This array has the same number of elements as fileLabels, and the color at a given index corresponds to the label at the same index . You may listen for NSWorkspaceDidChangeFileLabelsNotification to be notified when these change. */
-- (NSArray *)fileLabelColors NS_AVAILABLE_MAC(10_6);
+@property (readonly, copy) NSArray *fileLabelColors NS_AVAILABLE_MAC(10_6);
 
-#if NS_BLOCKS_AVAILABLE
 /* Asynchronous file operations.  recycleURLs moves the given files to the trash, and duplicateURLs duplicates them in the same manner as the Finder.  If completionHandler is not nil, it will be called when the operation is complete, on the same dispatch queue that was used for the recycleURLs: call.  Within the completion handler, the newURLs dictionary parameter maps the given URLs to their new URLs in the Trash.  Files that could not be moved to the Trash will not be present in the dictionary.
  
 If the operation succeeded for every file, the error parameter will be nil.  If it failed for one or more files, the error parameter will describe the overall result of the operation in a manner suitable for presentation to the user.  The completionHandler may be nil if you are not interested in the results.
@@ -126,7 +128,6 @@ If the operation succeeded for every file, the error parameter will be nil.  If 
 */
 - (void)recycleURLs:(NSArray *)URLs completionHandler:(void (^)(NSDictionary *newURLs, NSError *error))handler NS_AVAILABLE_MAC(10_6);
 - (void)duplicateURLs:(NSArray *)URLs completionHandler:(void (^)(NSDictionary *newURLs, NSError *error))handler NS_AVAILABLE_MAC(10_6);
-#endif
 
 /* Gets information about the filesystem.  fullPath is the path to any file or directory on the filesystem, including the filesystem's mount point.  The returned values have the following significance:
    - isRemovable: whether the filesytem is backed by removable media, such as a CD or floppy disk.
@@ -172,10 +173,10 @@ If the application is already running, and NSWorkspaceLaunchNewInstance is not s
 
 
 /* Gets the frontmost application, which is the application that will receive key events.  This is observable through KVO. */
-- (NSRunningApplication *)frontmostApplication NS_AVAILABLE_MAC(10_7);
+@property (readonly, strong) NSRunningApplication *frontmostApplication NS_AVAILABLE_MAC(10_7);
 
 /* Gets the menu bar owning application, which is the application that currently owns and draws the menu bar. This is observable through KVO. */
-- (NSRunningApplication *)menuBarOwningApplication NS_AVAILABLE_MAC(10_7);
+@property (readonly, strong) NSRunningApplication *menuBarOwningApplication NS_AVAILABLE_MAC(10_7);
 
 
 /* Given an absolute file path, return the uniform type identifier (UTI) of the file, if one can be determined. Otherwise, return nil after setting *outError to an NSError that encapsulates the reason why the file's type could not be determined. If the file at the end of the path is a symbolic link the type of the symbolic link will be returned.
@@ -309,7 +310,7 @@ APPKIT_EXTERN NSString * const NSWorkspaceDidChangeFileLabelsNotification NS_AVA
 APPKIT_EXTERN NSString * const NSWorkspaceActiveSpaceDidChangeNotification NS_AVAILABLE_MAC(10_6);
 
 
-/* The following keys can be used in the configuration dictionary of the launchApplicationAtURL: method.  Each key is optional, and if omitted, default behavior is applied. */
+/* The following keys can be used in the configuration dictionary of the launchApplicationAtURL:, openURL:, and openURL:withApplicationAtURL: methods.  Each key is optional, and if omitted, default behavior is applied. */
 
 APPKIT_EXTERN NSString * const NSWorkspaceLaunchConfigurationAppleEvent NS_AVAILABLE_MAC(10_6); //the first NSAppleEventDescriptor to send to the new app.  If an instance of the app is already running, this is sent to that app.
 APPKIT_EXTERN NSString * const NSWorkspaceLaunchConfigurationArguments NS_AVAILABLE_MAC(10_6); //an NSArray of NSStrings, passed to the new app in the argv parameter.  Ignored if a new instance is not launched.

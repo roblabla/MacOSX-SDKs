@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2013 Apple Inc. All rights reserved.
+	Copyright 2010-2014 Apple Inc. All rights reserved.
 
 */
 
@@ -32,14 +32,13 @@
  @constant	 AVAssetWriterStatusCancelled
 	Indicates that the asset writer can no longer write samples because writing was canceled with the cancelWriting method.
  */
-enum {
+typedef NS_ENUM(NSInteger, AVAssetWriterStatus) {
 	AVAssetWriterStatusUnknown = 0,
 	AVAssetWriterStatusWriting,
 	AVAssetWriterStatusCompleted,
 	AVAssetWriterStatusFailed,
 	AVAssetWriterStatusCancelled
 };
-typedef NSInteger AVAssetWriterStatus;
 
 @class AVAssetWriterInternal;
 
@@ -81,7 +80,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 	
 	UTIs for container formats that can be written are declared in AVMediaFormat.h.
  */
-+ (AVAssetWriter *)assetWriterWithURL:(NSURL *)outputURL fileType:(NSString *)outputFileType error:(NSError **)outError;
++ (instancetype)assetWriterWithURL:(NSURL *)outputURL fileType:(NSString *)outputFileType error:(NSError **)outError;
 
 /*!
  @method initWithURL:fileType:error:
@@ -102,7 +101,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 	
 	UTIs for container formats that can be written are declared in AVMediaFormat.h.
  */
-- (id)initWithURL:(NSURL *)outputURL fileType:(NSString *)outputFileType error:(NSError **)outError;
+- (instancetype)initWithURL:(NSURL *)outputURL fileType:(NSString *)outputFileType error:(NSError **)outError;
 
 /*!
  @property outputURL
@@ -173,6 +172,20 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 	This property cannot be set after writing has started.
  */
 @property (nonatomic) BOOL shouldOptimizeForNetworkUse;
+
+/*!
+ @property directoryForTemporaryFiles
+ @abstract 
+	Specifies a directory that is suitable for containing temporary files generated during the process of writing an asset.
+ 
+ @discussion
+	AVAssetWriter may need to write temporary files when configured in certain ways, such as when performsMultiPassEncodingIfSupported is set to YES on one or more of its inputs.  This property can be used to control where in the filesystem those temporary files are created.  All temporary files will be deleted when asset writing is completed, is canceled, or fails.
+ 
+	When the value of this property is nil, the asset writer will choose a suitable location when writing temporary files.  The default value is nil.
+	
+	This property cannot be set after writing has started.  The asset writer will fail if a file cannot be created in this directory (for example, due to insufficient permissions).
+ */
+@property (nonatomic, copy) NSURL *directoryForTemporaryFiles NS_AVAILABLE(10_10, 8_0);
 
 /*!
  @property inputs
@@ -385,7 +398,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  @discussion
 	If outputFileType specifies a container format that does not support mutually exclusive relationships among tracks, or if the specified instance of AVAssetWriterInputGroup contains inputs with media types that cannot be related, the group cannot be added to the AVAssetWriter.
  */
-- (BOOL)canAddInputGroup:(AVAssetWriterInputGroup *)inputGroup NS_AVAILABLE(10_9, TBD);
+- (BOOL)canAddInputGroup:(AVAssetWriterInputGroup *)inputGroup NS_AVAILABLE(10_9, 7_0);
 
 /*
  @method addInputGroup:
@@ -400,7 +413,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 
 	Input groups cannot be added after writing has started.
  */
-- (void)addInputGroup:(AVAssetWriterInputGroup *)inputGroup NS_AVAILABLE(10_9, TBD);
+- (void)addInputGroup:(AVAssetWriterInputGroup *)inputGroup NS_AVAILABLE(10_9, 7_0);
 
 /*!
  @property inputGroups
@@ -410,7 +423,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  @discussion
 	The value of this property is an NSArray containing concrete instances of AVAssetWriterInputGroup.  Input groups can be added to the receiver using the addInputGroup: method.
  */
-@property (nonatomic, readonly) NSArray *inputGroups NS_AVAILABLE(10_9, TBD);
+@property (nonatomic, readonly) NSArray *inputGroups NS_AVAILABLE(10_9, 7_0);
 
 @end
 
@@ -427,7 +440,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 	Note that because AVAssetWriterInputGroup is a subclass of AVMediaSelectionGroup, clients can examine the media selection options that will be available on the output asset before the asset is written.  Best results for examining the options of the AVAssetWriterInputGroup will be obtained after associating the AVAssetWriterInputs of the AVAsset as appropriate via -[AVAssetWriterInput addTrackAssociationWithTrackOfInput:type:] and by initializing each AVAssetWriterInput with a source format hint, where appropriate.
  */
 
-NS_CLASS_AVAILABLE(10_9, TBD)
+NS_CLASS_AVAILABLE(10_9, 7_0)
 @interface AVAssetWriterInputGroup : AVMediaSelectionGroup
 {
 @private
@@ -460,7 +473,7 @@ NS_CLASS_AVAILABLE(10_9, TBD)
  @result
 	An instance of AVAssetWriterInputGroup, for use with -[AVAssetWriter addInputGroup:].
  */
-- (id)initWithInputs:(NSArray *)inputs defaultInput:(AVAssetWriterInput *)defaultInput;
+- (instancetype)initWithInputs:(NSArray *)inputs defaultInput:(AVAssetWriterInput *)defaultInput;
 
 /*!
  @property inputs

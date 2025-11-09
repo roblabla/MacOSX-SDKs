@@ -1,7 +1,7 @@
 /*
 	NSSpeechRecognizer.h
 	Application Kit
-	Copyright (c) 2003-2013, Apple Inc.
+	Copyright (c) 2003-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -17,25 +17,20 @@
     id	_privateNSSpeechRecognizerVars;
 }
 
-- (id)init;
+- (instancetype)init;
 
 - (void)startListening;
 - (void)stopListening;
 
-- (id <NSSpeechRecognizerDelegate>)delegate;
-- (void)setDelegate:(id <NSSpeechRecognizerDelegate>)anObject;
+@property (assign) id<NSSpeechRecognizerDelegate> delegate;
 
-- (NSArray *)commands;
-- (void)setCommands:(NSArray *)commands;
+@property (copy) NSArray *commands;
 
-- (NSString *)displayedCommandsTitle;
-- (void)setDisplayedCommandsTitle:(NSString *)title;
+@property (copy) NSString *displayedCommandsTitle;
 
-- (BOOL)listensInForegroundOnly;
-- (void)setListensInForegroundOnly:(BOOL)flag;
+@property BOOL listensInForegroundOnly;
 
-- (BOOL)blocksOtherRecognizers;
-- (void)setBlocksOtherRecognizers:(BOOL)flag;
+@property BOOL blocksOtherRecognizers;
 
 @end
 

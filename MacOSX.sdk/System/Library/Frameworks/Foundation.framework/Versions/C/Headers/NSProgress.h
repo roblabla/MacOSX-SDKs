@@ -1,6 +1,6 @@
 /*
 	NSProgress.h
-	Copyright (c) 2011-2013, Apple Inc.
+	Copyright (c) 2011-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -15,12 +15,10 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
     int64_t _reserved4;
     id _values;
     id _reserved5;
-#if NS_BLOCKS_AVAILABLE
     void (^_cancellationHandler)(void);
     void (^_pausingHandler)(void);
     void (^_prioritizationHandler)(void);
-#endif
-    int64_t _reserved3;
+    uint64_t _flags;
     id _userInfoProxy;
     NSString *_publisherID;
     NSXPCConnection *_connection;
@@ -46,7 +44,7 @@ You can invoke this method on one thread and then message the returned NSProgres
 
 /* The designated initializer. If a parent NSProgress object is passed then progress reporting and cancellation checking done by the receiver will notify or consult the parent. The only valid arguments to the first argument of this method are nil (indicating no parent) or [NSProgress currentProgress]. Any other value will throw an exception.
 */
-- (instancetype)initWithParent:(NSProgress *)parentProgressOrNil userInfo:(NSDictionary *)userInfoOrNil;
+- (instancetype)initWithParent:(NSProgress *)parentProgressOrNil userInfo:(NSDictionary *)userInfoOrNil NS_DESIGNATED_INITIALIZER;
 
 /* Make the receiver the current thread's current progress object, returned by +currentProgress. At the same time, record how large a portion of the work represented by the receiver will be represented by the next progress object initialized by invoking -initWithParent:userInfo: in the current thread with the receiver as the parent. This will be used when that child is sent -setCompletedUnitCount: and the receiver is notified of that.
  
@@ -100,10 +98,8 @@ You can invoke this method on one thread and then message the returned NSProgres
 
 /* A block to be invoked when -cancel or -pause is invoked, respectively. The block will be invoked even when the method is invoked on an ancestor of the receiver, or an instance of NSProgress in another process that resulted from publishing the receiver or an ancestor of the receiver. Your block won't be invoked on any particular queue. If it must do work on a specific queue then it should schedule that work on that queue.
 */
-#if NS_BLOCKS_AVAILABLE
 @property (copy) void (^cancellationHandler)(void);
 @property (copy) void (^pausingHandler)(void);
-#endif
 
 /* Set a value in the dictionary returned by invocations of -userInfo, with appropriate KVO notification for properties whose values can depend on values in the user info dictionary, like localizedDescription. If a nil value is passed then the dictionary entry is removed.
 */
@@ -132,7 +128,7 @@ You can invoke this method on one thread and then message the returned NSProgres
 
 /* Arbitrary values associated with the receiver. Returns a KVO-compliant dictionary that changes as -setUserInfoObject:forKey: is sent to the receiver. The dictionary will send all of its KVO notifications on the thread which updates the property. Some entries have meanings that are recognized by the NSProgress class itself. See the NSProgress...Key string constants listed below.
 */
-- (NSDictionary *)userInfo;
+@property (readonly, copy) NSDictionary *userInfo;
 
 /* Either a string identifying what kind of progress is being made, like NSProgressKindFile, or nil. If the value of the localizedDescription property has not been set to a non-nil value then the default implementation of -localizedDescription uses the progress kind to determine how to use the values of other properties, as well as values in the user info dictionary, to create a string that is presentable to the user. This is most useful when -localizedDescription is actually being invoked in another process, whose localization language may be different, as a result of using the publish and subscribe mechanism described here.
 */
@@ -154,14 +150,12 @@ You can publish an instance of NSProgress at most once.
 
 #pragma mark *** Observing and Controlling File Progress by Other Processes (OS X Only) ***
 
-#if NS_BLOCKS_AVAILABLE
 typedef void (^NSProgressUnpublishingHandler)(void);
 typedef NSProgressUnpublishingHandler (^NSProgressPublishingHandler)(NSProgress *progress);
 
 /* Register to hear about file progress. The passed-in block will be invoked when -publish has been sent to an NSProgress whose NSProgressFileURLKey user info dictionary entry is an NSURL locating the same item located by the passed-in NSURL, or an item directly contained by it. The NSProgress passed to your block will be a proxy of the one that was published. The passed-in block may return another block. If it does, then that returned block will be invoked when the corresponding invocation of -unpublish is made, or the publishing process terminates, or +removeSubscriber: is invoked. Your blocks will be invoked on the main thread.
 */
 + (id)addSubscriberForFileURL:(NSURL *)url withPublishingHandler:(NSProgressPublishingHandler)publishingHandler NS_AVAILABLE(10_9, NA);
-#endif
 
 /* Given the object returned by a previous invocation of -addSubscriberForFileURL:withPublishingHandler:, deregister.
 */
@@ -169,7 +163,7 @@ typedef NSProgressUnpublishingHandler (^NSProgressPublishingHandler)(NSProgress 
 
 /* Return YES if the receiver represents progress that was published before the invocation of +addSubscriberForFileURL:withPublishingHandler: that resulted in the receiver appearing in this process, NO otherwise. The publish and subscribe mechanism described here is generally "level triggered," in that when you invoke +addSubscriberForFileURL:withPublishingHandler: your block will be invoked for every relevant NSProgress that has already been published and not yet unpublished. Sometimes however you need to implement "edge triggered" behavior, in which you do something either exactly when new progress begins or not at all. In the example described above, the Dock does not animate file icon flying when this method returns YES.
 
-Note that there is no reliable definition of "before" in this case, which involves multiple processes in a preemptively scheduled system. You should not use this method for anything more important than best efforts at animating perfectly in the face of processes coming and going due to unpredictable user actions. Continuing with our example, the Dock invokes -acknowledgeWithSuccess: regardless of what this method returns.
+Note that there is no reliable definition of "before" in this case, which involves multiple processes in a preemptively scheduled system. You should not use this method for anything more important than best efforts at animating perfectly in the face of processes coming and going due to unpredictable user actions.
 */
 @property (readonly, getter=isOld) BOOL old NS_AVAILABLE(10_9, NA);
 
@@ -211,7 +205,7 @@ FOUNDATION_EXPORT NSString *const NSProgressFileURLKey NS_AVAILABLE(10_9, 7_0);
 FOUNDATION_EXPORT NSString *const NSProgressFileTotalCountKey NS_AVAILABLE(10_9, 7_0);
 FOUNDATION_EXPORT NSString *const NSProgressFileCompletedCountKey NS_AVAILABLE(10_9, 7_0);
 
-/* User info dictionary keys. The value for the first entry must be an NSImage, typically an icon. The value for the second entry must be an NSValue containing an NSRect, in screen coordinates, locating the image where it initially appears on the screen. These entries are optional but, if they are both present and the Dock has an item for the folder containing the file on which progress is being made, like the Downloads folder, the Dock will use them to show an animation of the file flying into the Dock, and then invoke -acknowledgeWithSuccess:.
+/* User info dictionary keys. The value for the first entry must be an NSImage, typically an icon. The value for the second entry must be an NSValue containing an NSRect, in screen coordinates, locating the image where it initially appears on the screen.
 */
 FOUNDATION_EXPORT NSString *const NSProgressFileAnimationImageKey NS_AVAILABLE(10_9, NA);
 FOUNDATION_EXPORT NSString *const NSProgressFileAnimationImageOriginalRectKey NS_AVAILABLE(10_9, NA);

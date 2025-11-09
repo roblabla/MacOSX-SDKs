@@ -143,11 +143,13 @@
 #include <sys/_types.h>
 
 #include <machine/_mcontext.h>
+
+#include <sys/_pthread/_pthread_attr_t.h>
+
 #include <sys/_types/_sigaltstack.h>
 #include <sys/_types/_ucontext.h>
 
 #include <sys/_types/_pid_t.h>
-#include <sys/_types/_pthread_attr_t.h>
 #include <sys/_types/_sigset_t.h>
 #include <sys/_types/_size_t.h>
 #include <sys/_types/_uid_t.h>

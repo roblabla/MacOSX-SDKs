@@ -1,6 +1,6 @@
 /*	
     NSURLRequest.h
-    Copyright (c) 2003-2013, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2014, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -92,7 +92,7 @@
     confirms its validity, otherwise the URL is loaded from the
     origin source.  Unimplemented.
 */
-enum
+typedef NS_ENUM(NSUInteger, NSURLRequestCachePolicy)
 {
     NSURLRequestUseProtocolCachePolicy = 0,
 
@@ -105,7 +105,6 @@ enum
 
     NSURLRequestReloadRevalidatingCacheData = 5, // Unimplemented
 };
-typedef NSUInteger NSURLRequestCachePolicy;
 
 /*!
  @enum NSURLRequestNetworkServiceType
@@ -130,7 +129,7 @@ typedef NSUInteger NSURLRequestCachePolicy;
  @constant NSURLNetworkServiceTypeVoice Specifies that the request is for voice data.
 
 */
-enum
+typedef NS_ENUM(NSUInteger, NSURLRequestNetworkServiceType)
 {
     NSURLNetworkServiceTypeDefault = 0,	// Standard internet traffic
     NSURLNetworkServiceTypeVoIP = 1,	// Voice over IP control traffic
@@ -138,7 +137,6 @@ enum
     NSURLNetworkServiceTypeBackground = 3, // Background traffic
     NSURLNetworkServiceTypeVoice = 4	   // Voice data
 };
-typedef NSUInteger NSURLRequestNetworkServiceType;
 
 
 /*!
@@ -188,7 +186,7 @@ typedef NSUInteger NSURLRequestNetworkServiceType;
     @param URL The URL for the request.
     @result A newly-created and autoreleased NSURLRequest instance.
 */
-+ (id)requestWithURL:(NSURL *)URL;
++ (instancetype)requestWithURL:(NSURL *)URL;
 
 /*
     @method supportsSecureCoding
@@ -208,7 +206,7 @@ typedef NSUInteger NSURLRequestNetworkServiceType;
     timeout intervals.
     @result A newly-created and autoreleased NSURLRequest instance. 
 */
-+ (id)requestWithURL:(NSURL *)URL cachePolicy:(NSURLRequestCachePolicy)cachePolicy timeoutInterval:(NSTimeInterval)timeoutInterval;
++ (instancetype)requestWithURL:(NSURL *)URL cachePolicy:(NSURLRequestCachePolicy)cachePolicy timeoutInterval:(NSTimeInterval)timeoutInterval;
 
 /*! 
     @method initWithURL:
@@ -219,7 +217,7 @@ typedef NSUInteger NSURLRequestNetworkServiceType;
     @param URL The URL for the request. 
     @result An initialized NSURLRequest. 
 */
-- (id)initWithURL:(NSURL *)URL;
+- (instancetype)initWithURL:(NSURL *)URL;
 
 /*! 
     @method initWithURL:
@@ -234,21 +232,21 @@ typedef NSUInteger NSURLRequestNetworkServiceType;
     timeout intervals.
     @result An initialized NSURLRequest. 
 */
-- (id)initWithURL:(NSURL *)URL cachePolicy:(NSURLRequestCachePolicy)cachePolicy timeoutInterval:(NSTimeInterval)timeoutInterval;
+- (instancetype)initWithURL:(NSURL *)URL cachePolicy:(NSURLRequestCachePolicy)cachePolicy timeoutInterval:(NSTimeInterval)timeoutInterval;
 
 /*! 
     @method URL
     @abstract Returns the URL of the receiver. 
     @result The URL of the receiver. 
 */
-- (NSURL *)URL;
+@property (readonly, copy) NSURL *URL;
 
 /*! 
     @method cachePolicy
     @abstract Returns the cache policy of the receiver. 
     @result The cache policy of the receiver. 
 */
-- (NSURLRequestCachePolicy)cachePolicy;
+@property (readonly) NSURLRequestCachePolicy cachePolicy;
 
 /*! 
     @method timeoutInterval
@@ -265,7 +263,7 @@ typedef NSUInteger NSURLRequestNetworkServiceType;
     in seconds.
     @result The timeout interval of the receiver. 
 */
-- (NSTimeInterval)timeoutInterval;
+@property (readonly) NSTimeInterval timeoutInterval;
 
 /*!
     @method mainDocumentURL
@@ -278,7 +276,7 @@ typedef NSUInteger NSURLRequestNetworkServiceType;
     in the future. 
     @result The main document URL.
 */
-- (NSURL *)mainDocumentURL;
+@property (readonly, copy) NSURL *mainDocumentURL;
 
 /*!
  @method networkServiceType
@@ -287,7 +285,7 @@ typedef NSUInteger NSURLRequestNetworkServiceType;
  not explicitly set a networkServiceType (using the setNetworkServiceType method).
  @result The NSURLRequestNetworkServiceType associated with this request.
  */
-- (NSURLRequestNetworkServiceType)networkServiceType NS_AVAILABLE(10_7, 4_0);
+@property (readonly) NSURLRequestNetworkServiceType networkServiceType NS_AVAILABLE(10_7, 4_0);
 
 /*! 
  @method allowsCellularAccess:
@@ -296,7 +294,7 @@ typedef NSUInteger NSURLRequestNetworkServiceType;
  @result YES if the receiver is allowed to use the built in cellular radios to
  satify the request, NO otherwise.
  */
-- (BOOL)allowsCellularAccess  NS_AVAILABLE(10_8, 6_0);
+@property (readonly) BOOL allowsCellularAccess  NS_AVAILABLE(10_8, 6_0);
 
 @end
 
@@ -334,18 +332,18 @@ typedef NSUInteger NSURLRequestNetworkServiceType;
 @interface NSMutableURLRequest : NSURLRequest
 
 /*! 
-    @method setURL
+    @method URL
     @abstract Sets the URL of the receiver. 
     @param URL The new URL for the receiver. 
 */
-- (void)setURL:(NSURL *)URL;
+@property (copy) NSURL *URL;
 
 /*! 
     @method setCachePolicy:
-    @abstract Sets the cache policy of the receiver. 
+    @abstract The cache policy of the receiver. 
     @param policy The new NSURLRequestCachePolicy for the receiver. 
 */
-- (void)setCachePolicy:(NSURLRequestCachePolicy)policy;
+@property NSURLRequestCachePolicy cachePolicy;
 
 /*! 
     @method setTimeoutInterval:
@@ -362,7 +360,7 @@ typedef NSUInteger NSURLRequestNetworkServiceType;
     in seconds.
     @param seconds The new timeout interval of the receiver. 
 */
-- (void)setTimeoutInterval:(NSTimeInterval)seconds;
+@property NSTimeInterval timeoutInterval;
 
 /*!
     @method setMainDocumentURL:
@@ -378,7 +376,7 @@ typedef NSUInteger NSURLRequestNetworkServiceType;
     framework. A fully functional version of this method will be available 
     in the future. 
 */
-- (void)setMainDocumentURL:(NSURL *)URL;
+@property (copy) NSURL *mainDocumentURL;
 
 /*!
  @method setNetworkServiceType:
@@ -387,7 +385,7 @@ typedef NSUInteger NSURLRequestNetworkServiceType;
  @discussion This method is used to provide the network layers with a hint as to the purpose
  of the request.  Most clients should not need to use this method.
  */
-- (void)setNetworkServiceType:(NSURLRequestNetworkServiceType)networkServiceType NS_AVAILABLE(10_7, 4_0);
+@property NSURLRequestNetworkServiceType networkServiceType NS_AVAILABLE(10_7, 4_0);
 
 /*! 
  @method setAllowsCellularAccess
@@ -396,7 +394,7 @@ typedef NSUInteger NSURLRequestNetworkServiceType;
  @param allow NO if the receiver should not be allowed to use the built in
  cellular radios to satisfy the request, YES otherwise.  The default is YES.
  */
-- (void)setAllowsCellularAccess:(BOOL)allow NS_AVAILABLE(10_8, 6_0);
+@property BOOL allowsCellularAccess NS_AVAILABLE(10_8, 6_0);
 
 @end
 
@@ -414,7 +412,7 @@ typedef NSUInteger NSURLRequestNetworkServiceType;
     @abstract Returns the HTTP request method of the receiver. 
     @result the HTTP request method of the receiver. 
 */
-- (NSString *)HTTPMethod;
+@property (readonly, copy) NSString *HTTPMethod;
 
 /*! 
     @method allHTTPHeaderFields
@@ -423,7 +421,7 @@ typedef NSUInteger NSURLRequestNetworkServiceType;
     @result a dictionary containing all the HTTP header fields of the
     receiver.
 */
-- (NSDictionary *)allHTTPHeaderFields;
+@property (readonly, copy) NSDictionary *allHTTPHeaderFields;
 
 /*! 
     @method valueForHTTPHeaderField:
@@ -444,7 +442,7 @@ typedef NSUInteger NSURLRequestNetworkServiceType;
     in done in an HTTP POST request.
     @result The request body data of the receiver. 
 */
-- (NSData *)HTTPBody;
+@property (readonly, copy) NSData *HTTPBody;
 
 /*!
     @method HTTPBodyStream
@@ -458,7 +456,7 @@ typedef NSUInteger NSURLRequestNetworkServiceType;
     NSCoding protocol
     @result The request body stream of the receiver.
 */
-- (NSInputStream *)HTTPBodyStream;
+@property (readonly, retain) NSInputStream *HTTPBodyStream;
 
 /*! 
     @method HTTPShouldHandleCookies
@@ -468,7 +466,7 @@ typedef NSUInteger NSURLRequestNetworkServiceType;
     @result YES if cookies will be sent with and set for this request; 
     otherwise NO.
 */
-- (BOOL)HTTPShouldHandleCookies;
+@property (readonly) BOOL HTTPShouldHandleCookies;
 
 /*!
  @method HTTPShouldUsePipelining
@@ -478,7 +476,7 @@ typedef NSUInteger NSURLRequestNetworkServiceType;
  is received.  NO if the receiver should wait for the previous response
  before transmitting.
  */
-- (BOOL)HTTPShouldUsePipelining NS_AVAILABLE(10_7, 4_0);
+@property (readonly) BOOL HTTPShouldUsePipelining NS_AVAILABLE(10_7, 4_0);
 
 @end
 
@@ -492,14 +490,14 @@ typedef NSUInteger NSURLRequestNetworkServiceType;
 @interface NSMutableURLRequest (NSMutableHTTPURLRequest) 
 
 /*! 
-    @method setHTTPMethod:
+    @method HTTPMethod:
     @abstract Sets the HTTP request method of the receiver. 
     @param method the new HTTP request method for the receiver.
 */
-- (void)setHTTPMethod:(NSString *)method;
+@property (copy) NSString *HTTPMethod;
 
 /*! 
-    @method setAllHTTPHeaderFields:
+    @method allHTTPHeaderFields:
     @abstract Sets the HTTP header fields of the receiver to the given
     dictionary.
     @discussion This method replaces all header fields that may have
@@ -511,7 +509,7 @@ typedef NSUInteger NSURLRequestNetworkServiceType;
     message, the key-value pair is skipped.
     @param headerFields a dictionary containing HTTP header fields.
 */
-- (void)setAllHTTPHeaderFields:(NSDictionary *)headerFields;
+@property (copy) NSDictionary *allHTTPHeaderFields;
 
 /*! 
     @method setValue:forHTTPHeaderField:
@@ -542,16 +540,16 @@ typedef NSUInteger NSURLRequestNetworkServiceType;
 - (void)addValue:(NSString *)value forHTTPHeaderField:(NSString *)field;
 
 /*! 
-    @method setHTTPBody:
+    @method HTTPBody:
     @abstract Sets the request body data of the receiver.
     @discussion This data is sent as the message body of the request, as
     in done in an HTTP POST request.
     @param data the new request body data for the receiver.
 */
-- (void)setHTTPBody:(NSData *)data;
+@property (copy) NSData *HTTPBody;
 
 /*!
-    @method setHTTPBodyStream:
+    @method HTTPBodyStream:
     @abstract Sets the request body to be the contents of the given stream. 
     @discussion The provided stream should be unopened; the request will take
     over the stream's delegate.  The entire stream's contents will be 
@@ -560,10 +558,10 @@ typedef NSUInteger NSURLRequestNetworkServiceType;
     - setting one will clear the other. 
     @param inputStream the new input stream for use by the receiver
 */
-- (void)setHTTPBodyStream:(NSInputStream *)inputStream;
+@property (retain) NSInputStream *HTTPBodyStream;
 
-/*! 
-    @method setHTTPShouldHandleCookies
+/*!
+    @method HTTPShouldHandleCookies
     @abstract Decide whether default cookie handling will happen for 
     this request.
     @param YES if cookies should be sent with and set for this request; 
@@ -572,10 +570,10 @@ typedef NSUInteger NSURLRequestNetworkServiceType;
     stored to the cookie manager by default.
     NOTE: In releases prior to 10.3, this value is ignored
 */
-- (void)setHTTPShouldHandleCookies:(BOOL)should;
+@property BOOL HTTPShouldHandleCookies;
 
 /*!
- @method setHTTPShouldUsePipelining
+ @method HTTPShouldUsePipelining
  @abstract Sets whether the request should not wait for the previous response 
  before transmitting.
  @param YES if the receiver should transmit before the previous response is
@@ -592,7 +590,7 @@ typedef NSUInteger NSURLRequestNetworkServiceType;
  pipelining (disconnecting, sending resources misordered, omitting part of
  a resource, etc.).
  */
-- (void)setHTTPShouldUsePipelining:(BOOL)shouldUsePipelining NS_AVAILABLE(10_7, 4_0);
+@property BOOL HTTPShouldUsePipelining NS_AVAILABLE(10_7, 4_0);
 
 @end
 

@@ -1,5 +1,5 @@
 /*	Foundation.h
-	Copyright (c) 1994-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2014, Apple Inc. All rights reserved.
 */
 
 
@@ -17,6 +17,10 @@
 #import <Foundation/NSData.h>
 #import <Foundation/NSDate.h>
 #import <Foundation/NSDateFormatter.h>
+#import <Foundation/NSDateIntervalFormatter.h>
+#import <Foundation/NSMassFormatter.h>
+#import <Foundation/NSLengthFormatter.h>
+#import <Foundation/NSEnergyFormatter.h>
 #import <Foundation/NSDecimal.h>
 #import <Foundation/NSDecimalNumber.h>
 #import <Foundation/NSDictionary.h>
@@ -93,11 +97,16 @@
 #import <Foundation/NSCache.h>
 #import <Foundation/NSComparisonPredicate.h>
 #import <Foundation/NSCompoundPredicate.h>
+#import <Foundation/NSDateComponentsFormatter.h>
 #import <Foundation/NSExpression.h>
+#import <Foundation/NSExtensionContext.h>
+#import <Foundation/NSExtensionItem.h>
+#import <Foundation/NSExtensionRequestHandling.h>
 #import <Foundation/NSFileCoordinator.h>
 #import <Foundation/NSFilePresenter.h>
 #import <Foundation/NSFileVersion.h>
 #import <Foundation/NSFileWrapper.h>
+#import <Foundation/NSItemProvider.h>
 #import <Foundation/NSLinguisticTagger.h>
 #import <Foundation/NSMetadata.h>
 #import <Foundation/NSMetadataAttributes.h>
@@ -107,13 +116,14 @@
 #import <Foundation/NSUbiquitousKeyValueStore.h>
 #import <Foundation/NSUndoManager.h>
 #import <Foundation/NSURLSession.h>
+#import <Foundation/NSUserActivity.h>
 #import <Foundation/NSUUID.h>
-
 #endif
 
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || TARGET_OS_WIN32
 
 #import <Foundation/NSArchiver.h>
+#import <Foundation/NSBackgroundActivityScheduler.h>
 #import <Foundation/NSCalendarDate.h>
 #import <Foundation/NSConnection.h>
 #import <Foundation/NSDistantObject.h>

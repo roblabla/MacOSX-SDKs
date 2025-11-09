@@ -2,12 +2,12 @@
  *  CVPixelBuffer.h
  *  CoreVideo
  *
- *  Copyright (c) 2004 Apple Computer, Inc. All rights reserved.
+ *  Copyright (c) 2004-2014 Apple Inc. All rights reserved.
  *
  */
  
   /*! @header CVPixelBuffer.h
-	@copyright 2004 Apple Computer, Inc. All rights reserved.
+	@copyright 2004-2014 Apple Inc. All rights reserved.
 	@availability Mac OS X 10.4 or later
     @discussion CVPixelBuffers are CVImageBuffers that hold the pixels in main memory
 		   
@@ -138,7 +138,8 @@ CV_EXPORT const CFStringRef kCVPixelBufferOpenGLCompatibilityKey __OSX_AVAILABLE
 CV_EXPORT const CFStringRef kCVPixelBufferPlaneAlignmentKey __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_4_0);		    // CFNumber
 CV_EXPORT const CFStringRef kCVPixelBufferIOSurfacePropertiesKey __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_4_0);     // CFDictionary; presence requests buffer allocation via IOSurface
 CV_EXPORT const CFStringRef kCVPixelBufferOpenGLESCompatibilityKey __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_6_0);	    // CFBoolean
-
+CV_EXPORT const CFStringRef kCVPixelBufferMetalCompatibilityKey __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_8_0);	    // CFBoolean
+    
 /*!
     @typedef	CVPixelBufferRef
     @abstract   Based on the image buffer type. The pixel buffer implements the memory storage for an image buffer.

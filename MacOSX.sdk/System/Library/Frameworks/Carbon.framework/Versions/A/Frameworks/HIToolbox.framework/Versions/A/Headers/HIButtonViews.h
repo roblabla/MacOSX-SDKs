@@ -219,9 +219,9 @@ enum {
   kControlPushButtonIconAlignmentTag = 'cpia',
 
   /*
-   * Data is a Boolean indicating if a push button should animate. Will
-   * be True by default even if the button is not a default button and
-   * is not currently pulsing. Available in Mac OS X 10.5 and later.
+	 * Data is a Boolean. On 10.10 and later, getting this value always
+	 * returns false, and setting this value is ignored.  Available in Mac
+	 * OS X 10.5 and later.
    */
   kControlPushButtonAnimatingTag = 'anim'
 };

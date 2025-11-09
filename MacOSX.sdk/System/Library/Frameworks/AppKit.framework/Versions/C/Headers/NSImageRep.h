@@ -1,7 +1,7 @@
 /*
 	NSImageRep.h
 	Application Kit
-	Copyright (c) 1994-2013, Apple Inc.
+	Copyright (c) 1994-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -38,6 +38,9 @@ enum {
     int _pixelsHigh;
 }
 
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
+
 /* Drawing methods. draw is the only primitive.  
 */
 - (BOOL)draw;
@@ -47,20 +50,13 @@ enum {
 
 /* Methods to return info about the image. NSImageRep provides storage for all of these; however, it's illegal to set them in some subclasses.
 */
-- (void)setSize:(NSSize)aSize;
-- (NSSize)size;
-- (void)setAlpha:(BOOL)flag;
-- (BOOL)hasAlpha;
-- (void)setOpaque:(BOOL)flag;
-- (BOOL)isOpaque;
-- (void)setColorSpaceName:(NSString *)string;
-- (NSString *)colorSpaceName;
-- (void)setBitsPerSample:(NSInteger)anInt;
-- (NSInteger)bitsPerSample;
-- (void)setPixelsWide:(NSInteger)anInt;
-- (NSInteger)pixelsWide;
-- (void)setPixelsHigh:(NSInteger)anInt;
-- (NSInteger)pixelsHigh;
+@property NSSize size;
+@property (getter=hasAlpha) BOOL alpha;
+@property (getter=isOpaque) BOOL opaque;
+@property (copy) NSString *colorSpaceName;
+@property NSInteger bitsPerSample;
+@property NSInteger pixelsWide;
+@property NSInteger pixelsHigh;
 
 /* The rest of the methods all deal with subclassers which can read/write data in files or pasteboards. 
 */
@@ -70,8 +66,8 @@ enum {
 + (void)registerImageRepClass:(Class)imageRepClass;
 + (void)unregisterImageRepClass:(Class)imageRepClass;
 + (NSArray *)registeredImageRepClasses;
-+ (Class)imageRepClassForFileType:(NSString *)type;
-+ (Class)imageRepClassForPasteboardType:(NSString *)type;
++ (Class)imageRepClassForFileType:(NSString *)type NS_DEPRECATED_MAC(10_0, 10_10, "Use +imageRepClassForType: instead");
++ (Class)imageRepClassForPasteboardType:(NSString *)type NS_DEPRECATED_MAC(10_0, 10_10, "Use +imageRepClassForType: instead");
 + (Class)imageRepClassForType:(NSString *)type NS_AVAILABLE_MAC(10_5);
 + (Class)imageRepClassForData:(NSData *)data;
 	
@@ -81,13 +77,13 @@ enum {
 
 /* Implemented by subclassers to indicate what data types they can deal with.
 */
-+ (NSArray *)imageUnfilteredFileTypes;
-+ (NSArray *)imageUnfilteredPasteboardTypes;
++ (NSArray *)imageUnfilteredFileTypes NS_DEPRECATED_MAC(10_0, 10_10, "Use +imageUnfilteredTypes instead");
++ (NSArray *)imageUnfilteredPasteboardTypes NS_DEPRECATED_MAC(10_0, 10_10, "Use +imageUnfilteredTypes instead");
 
 /* These expand the unfiltered lists returned by imageUnfilteredFileTypes and imageUnfilteredPasteboardTypes.
 */
-+ (NSArray *)imageFileTypes;
-+ (NSArray *)imagePasteboardTypes;
++ (NSArray *)imageFileTypes NS_DEPRECATED_MAC(10_0, 10_10, "Use +imageTypes instead");
++ (NSArray *)imagePasteboardTypes NS_DEPRECATED_MAC(10_0, 10_10, "Use +imageTypes instead");
 
 
 /* Implemented by subclassers to indicate what UTI-identified data types they can deal with.

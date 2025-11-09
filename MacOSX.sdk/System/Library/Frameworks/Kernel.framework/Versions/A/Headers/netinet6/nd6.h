@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2013 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2014 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -103,6 +103,7 @@ struct nd_ifinfo {
 #define	ND6_IFF_PERFORMNUD		0x1
 #define	ND6_IFF_PROXY_PREFIXES		0x20
 #define	ND6_IFF_IGNORE_NA		0x40
+#define	ND6_IFF_REPLICATED		0x100	/* sleep proxy registered */
 
 struct in6_nbrinfo {
 	char ifname[IFNAMSIZ];	/* if name, e.g. "en0" */

@@ -14,6 +14,8 @@
 
 @class NSError;
 @class NSFetchRequest;
+@class NSPersistentStoreRequest;
+@class NSPersistentStoreResult;
 @class NSManagedObject;
 @class NSManagedObjectID;
 @class NSPersistentStore;
@@ -54,20 +56,20 @@ COREDATA_EXTERN id NSOverwriteMergePolicy NS_AVAILABLE(10_4, 3_0);
 // This singleton policy discards all state for the changed objects in conflict. The persistent store's version of the object is used.
 COREDATA_EXTERN id NSRollbackMergePolicy NS_AVAILABLE(10_4, 3_0);    
 
-enum {
-    NSConfinementConcurrencyType		= 0x00,
+typedef NS_ENUM(NSUInteger, NSManagedObjectContextConcurrencyType) {
+    NSConfinementConcurrencyType		= 0x00,    /* this option is obsolete and not recommended for new code. */
     NSPrivateQueueConcurrencyType		= 0x01,
     NSMainQueueConcurrencyType			= 0x02
-};
-typedef NSUInteger NSManagedObjectContextConcurrencyType;
+} NS_ENUM_AVAILABLE(10_7,  5_0);
 
 NS_CLASS_AVAILABLE(10_4,3_0)
 @interface NSManagedObjectContext : NSObject <NSCoding, NSLocking> {
 @private
+  volatile id _queueOwner;
+  void *_dispatchQueue;
+  void* _reserved1;
   int32_t _spinLock;
   id _parentObjectStore;
-  NSUndoManager *_undoManager;
-  void *_dispatchQueue;
   struct _managedObjectContextFlags {
       unsigned int _registeredForCallback:1;
       unsigned int _propagatesDeletesAtEndOfEvent:1;
@@ -90,7 +92,8 @@ NS_CLASS_AVAILABLE(10_4,3_0)
       unsigned int _isParentStoreContext:1;
       unsigned int _postSaveNotifications:1;
       unsigned int _isMerging:1;
-      unsigned int _reservedFlags:11;
+      unsigned int _concurrencyType:1;
+      unsigned int _reservedFlags:10;
   } _flags;
   NSMutableSet *_unprocessedChanges;
   NSMutableSet *_unprocessedDeletes;
@@ -107,41 +110,39 @@ NS_CLASS_AVAILABLE(10_4,3_0)
   long _lockCount;
   long _objectStoreLockCount;
   NSTimeInterval _fetchTimestamp;
-  id _delegate;
+  id _reserved2;
   id _referenceQueue;
-  id _userinfo;
-  id _mergePolicy;
+  id _reserved3;
+  id _reserved4;
   int32_t _cd_rc;
   int32_t _ignoreChangeNotification;
-  id _editors;
-  id* _debuggingRecords;
-  id _tombstonedIDs;
-  id _childIDMappings;
+  id _reserved6;
+  NSString* _contextLabel;
+  id* _additionalPrivateIvars;
 }
 
-- (id)initWithConcurrencyType:(NSManagedObjectContextConcurrencyType)ct NS_AVAILABLE(10_7,  5_0);
+- (instancetype)init;  /* this method is obsolete.  Use -initWithConcurrencyType: instead  */
+- (instancetype)initWithConcurrencyType:(NSManagedObjectContextConcurrencyType)ct NS_DESIGNATED_INITIALIZER  NS_AVAILABLE(10_7,  5_0);
 
-#if NS_BLOCKS_AVAILABLE
 /* asynchronously performs the block on the context's queue.  Encapsulates an autorelease pool and a call to processPendingChanges */
 - (void)performBlock:(void (^)())block NS_AVAILABLE(10_7,  5_0);
 
 /* synchronously performs the block on the context's queue.  May safely be called reentrantly.  */
 - (void)performBlockAndWait:(void (^)())block NS_AVAILABLE(10_7,  5_0);
-#endif /* NS_BLOCKS_AVAILABLE */
 
 /* coordinator which provides model and handles persistency (multiple contexts can share a coordinator) */
-- (void)setPersistentStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator;
-- (NSPersistentStoreCoordinator *)persistentStoreCoordinator;
+@property (strong) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
-- (void)setParentContext:(NSManagedObjectContext*)parent NS_AVAILABLE(10_7,  5_0);
-- (NSManagedObjectContext*)parentContext NS_AVAILABLE(10_7,  5_0);
+@property (strong) NSManagedObjectContext *parentContext NS_AVAILABLE(10_7,  5_0);
 
-- (void)setUndoManager:(NSUndoManager *)undoManager;
-- (NSUndoManager *)undoManager;
+/* custom label for a context.  NSPrivateQueueConcurrencyType contexts will set the label on their queue */
+@property (copy) NSString *name NS_AVAILABLE(10_10, 8_0);
 
-- (BOOL)hasChanges;
-- (NSMutableDictionary*)userInfo NS_AVAILABLE(10_7,  5_0);
-- (NSManagedObjectContextConcurrencyType)concurrencyType NS_AVAILABLE(10_7,  5_0);
+@property (nonatomic, strong) NSUndoManager *undoManager;
+
+@property (nonatomic, readonly) BOOL hasChanges;
+@property (nonatomic, readonly, strong) NSMutableDictionary *userInfo NS_AVAILABLE(10_7,  5_0);
+@property (readonly) NSManagedObjectContextConcurrencyType concurrencyType NS_AVAILABLE(10_7,  5_0);
 
 /* returns the object for the specified ID if it is registered in the context already or nil. It never performs I/O. */
 - (NSManagedObject *)objectRegisteredForID:(NSManagedObjectID *)objectID;    
@@ -157,6 +158,14 @@ NS_CLASS_AVAILABLE(10_4,3_0)
 
 // returns the number of objects a fetch request would have returned if it had been passed to -executeFetchRequest:error:.   If an error occurred during the processing of the request, this method will return NSNotFound. 
 - (NSUInteger) countForFetchRequest: (NSFetchRequest *)request error: (NSError **)error NS_AVAILABLE(10_5, 3_0);    
+
+// Method to pass a request to the store without affecting the contents of the managed object context.
+// Will return an NSPersistentStoreResult which may contain additional information about the result of the action
+// (ie a batch update result may contain the object IDs of the objects that were modified during the update).
+// A request may succeed in some stores and fail in others. In this case, the error will contain information
+// about each individual store failure.
+// Will always reject NSSaveChangesRequests.
+- (NSPersistentStoreResult *)executeRequest:(NSPersistentStoreRequest*)request error:(NSError **)error NS_AVAILABLE(10_10, 8_0);
 
 - (void)insertObject:(NSManagedObject *)object;
 - (void)deleteObject:(NSManagedObject *)object;
@@ -176,10 +185,10 @@ NS_CLASS_AVAILABLE(10_4,3_0)
 // specifies the store a newly inserted object will be saved in.  Unnecessary unless there are multiple writable persistent stores added to the NSPersistentStoreCoordinator which support this object's entity.
 - (void)assignObject:(id)object toPersistentStore:(NSPersistentStore *)store;    
 
-- (NSSet *)insertedObjects;
-- (NSSet *)updatedObjects;
-- (NSSet *)deletedObjects;
-- (NSSet *)registeredObjects;
+@property (nonatomic, readonly, strong) NSSet *insertedObjects;
+@property (nonatomic, readonly, strong) NSSet *updatedObjects;
+@property (nonatomic, readonly, strong) NSSet *deletedObjects;
+@property (nonatomic, readonly, strong) NSSet *registeredObjects;
 
 - (void)undo;
 - (void)redo;
@@ -187,24 +196,20 @@ NS_CLASS_AVAILABLE(10_4,3_0)
 - (void)rollback;
 - (BOOL)save:(NSError **)error;
 
-- (void)lock;
-- (void)unlock;
-- (BOOL)tryLock;
+- (void)lock NS_DEPRECATED(10_4, 10_10, 3_0, 8_0, "Use a queue style context and -performBlockAndWait: instead");
+- (void)unlock NS_DEPRECATED(10_4, 10_10, 3_0, 8_0, "Use a queue style context and -performBlockAndWait: instead");
+- (BOOL)tryLock NS_DEPRECATED(10_4, 10_10, 3_0, 8_0, "Use a queue style context and -performBlock: instead");
 
 // whether or not the context propagates deletes to related objects at the end of the event, or only at save time
-- (BOOL)propagatesDeletesAtEndOfEvent;  
-- (void)setPropagatesDeletesAtEndOfEvent:(BOOL)flag;  // The default is YES.
+@property (nonatomic) BOOL propagatesDeletesAtEndOfEvent;   // The default is YES.
 
 // whether or not the context holds a retain on all registered objects, or only upon objects necessary for a pending save (inserted, updated, deleted, or locked)
-- (BOOL)retainsRegisteredObjects;  
-- (void)setRetainsRegisteredObjects:(BOOL)flag;  // The default is NO.
+@property (nonatomic) BOOL retainsRegisteredObjects;   // The default is NO.
 
 // Staleness interval is the relative time until cached data should be considered stale. The value is applied on a per object basis. For example, a value of 300.0 informs the context to utilize cached information for no more than 5 minutes after that object was originally fetched. This does not affect objects currently in use. Principly, this controls whether fulfilling a fault uses data previously fetched by the application, or issues a new fetch.  It is a hint which may not be supported by all persistent store types.
-- (NSTimeInterval)stalenessInterval;
-- (void)setStalenessInterval:(NSTimeInterval)expiration;  // a negative value is considered infinite.  The default is infinite staleness.
-
-- (void)setMergePolicy:(id)mergePolicy;  // acceptable merge policies are listed above as id constants
-- (id)mergePolicy;    // default: NSErrorMergePolicy
+@property () NSTimeInterval stalenessInterval; // a negative value is considered infinite.  The default is infinite staleness.
+ // acceptable merge policies are listed above as id constants
+@property (strong) id mergePolicy;    // default: NSErrorMergePolicy
 
 /* Converts the object IDs of the specified objects to permanent IDs.  This implementation will convert the object ID of each managed object in the specified array to a permanent ID.  Any object in the target array with a permanent ID will be ignored;  additionally, any managed object in the array not already assigned to a store will be assigned, based on the same rules Core Data uses for assignment during a save operation (first writable store supporting the entity, and appropriate for the instance and its related items.)  Although the object will have a permanent ID, it will still respond positively to -isInserted until it is saved.  If an error is encountered obtaining an identifier, the return value will be NO.
 */

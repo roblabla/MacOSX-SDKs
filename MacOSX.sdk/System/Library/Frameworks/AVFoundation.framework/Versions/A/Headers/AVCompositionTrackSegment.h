@@ -73,7 +73,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 	@discussion		To specify that the segment be played at the asset's normal rate, set source.duration == target.duration in the timeMapping.
 					Otherwise, the segment will be played at a rate equal to the ratio source.duration / target.duration.
 */
-- (id)initWithURL:(NSURL *)URL trackID:(CMPersistentTrackID)trackID sourceTimeRange:(CMTimeRange)sourceTimeRange targetTimeRange:(CMTimeRange)targetTimeRange;
+- (instancetype)initWithURL:(NSURL *)URL trackID:(CMPersistentTrackID)trackID sourceTimeRange:(CMTimeRange)sourceTimeRange targetTimeRange:(CMTimeRange)targetTimeRange;
 
 /*!
 	@method			initWithTimeRange:
@@ -82,7 +82,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 					The timeRange of the empty AVCompositionTrackSegment.
 	@result			An instance of AVCompositionTrackSegment.
 */
-- (id)initWithTimeRange:(CMTimeRange)timeRange;
+- (instancetype)initWithTimeRange:(CMTimeRange)timeRange;
 
 /* indicates whether the AVCompositionTrackSegment is an empty segment;
    an empty segment has a valid target time range but nil sourceURL and kCMTimeInvalid source start time; all other fields are undefined */

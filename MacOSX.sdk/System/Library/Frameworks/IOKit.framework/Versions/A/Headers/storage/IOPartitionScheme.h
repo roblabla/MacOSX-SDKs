@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2013 Apple Inc. All rights reserved.
+ * Copyright (c) 1998-2014 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -39,6 +39,18 @@
  */
 
 #define kIOPartitionSchemeClass "IOPartitionScheme"
+
+/*!
+ * @defined kIOMediaBaseKey
+ * @abstract
+ * A property of IOMedia objects.
+ * @discussion
+ * The kIOMediaBaseKey property has an OSNumber value and is placed into an
+ * IOMedia instance created via the partition scheme. It describes the byte
+ * offset of the partition relative to the provider media.
+ */
+
+#define kIOMediaBaseKey "Base"
 
 /*!
  * @defined kIOMediaLiveKey

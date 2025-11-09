@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2013 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2014 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -102,6 +102,8 @@
 #define	KEV_DL_MASTER_ELECTED			23
 #define	KEV_DL_ISSUES				24
 #define	KEV_DL_IFDELEGATE_CHANGED		25
+#define	KEV_DL_AWDL_RESTRICTED			26
+#define	KEV_DL_AWDL_UNRESTRICTED		27
 
 #include <net/if_var.h>
 #include <sys/types.h>
@@ -172,7 +174,9 @@ struct if_clonereq {
 	IFCAP_VLAN_HWTAGGING | IFCAP_JUMBO_MTU | IFCAP_AV | IFCAP_TXSTATUS)
 
 #define	IFQ_MAXLEN	128
-#define	IFNET_SLOWHZ	1		/* granularity is 1 second */
+#define	IFNET_SLOWHZ	1	/* granularity is 1 second */
+#define	IFQ_TARGET_DELAY	(10ULL * 1000 * 1000)	/* 10 ms */
+#define	IFQ_UPDATE_INTERVAL	(100ULL * 1000 * 1000)	/* 100 ms */
 
 /*
  * Message format for use in obtaining information about interfaces
@@ -433,18 +437,6 @@ struct kev_dl_proto_data {
 	struct net_event_data   	link_data;
 	u_int32_t			proto_family;
 	u_int32_t			proto_remaining_count;
-};
-
-/*
- * Structure for SIOC[AGD]LIFADDR
- */
-struct if_laddrreq {
-	char			iflr_name[IFNAMSIZ];
-	unsigned int		flags;
-#define	IFLR_PREFIX	0x8000  /* in: prefix given  out: kernel fills id */
-	unsigned int		prefixlen;	/* in/out */
-	struct sockaddr_storage	addr;		/* in/out */
-	struct sockaddr_storage	dstaddr;	/* out */
 };
 
 

@@ -11,10 +11,10 @@
  *    notice, this list of conditions and the following disclaimer in the
  *    documentation and/or other materials provided with the distribution.
  *
- * THIS SOFTWARE IS PROVIDED BY APPLE COMPUTER, INC. ``AS IS'' AND ANY
+ * THIS SOFTWARE IS PROVIDED BY APPLE INC. ``AS IS'' AND ANY
  * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL APPLE COMPUTER, INC. OR
+ * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL APPLE INC. OR
  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
@@ -26,27 +26,24 @@
 
 #import <WebKit/DOMEvent.h>
 
-#if WEBKIT_VERSION_MAX_ALLOWED >= WEBKIT_VERSION_1_3
-
 @class DOMAbstractView;
 @class NSString;
 
+NS_CLASS_AVAILABLE_MAC(10_4)
 @interface DOMUIEvent : DOMEvent
-@property(readonly, retain) DOMAbstractView *view;
-@property(readonly) int detail;
-@property(readonly) int keyCode AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-@property(readonly) int charCode AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-@property(readonly) int layerX AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER_BUT_DEPRECATED;
-@property(readonly) int layerY AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER_BUT_DEPRECATED;
-@property(readonly) int pageX AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-@property(readonly) int pageY AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-@property(readonly) int which AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+@property (readonly, strong) DOMAbstractView *view;
+@property (readonly) int detail;
+@property (readonly) int keyCode NS_AVAILABLE_MAC(10_5);
+@property (readonly) int charCode NS_AVAILABLE_MAC(10_5);
+@property (readonly) int layerX NS_DEPRECATED_MAC(10_5, 10_5);
+@property (readonly) int layerY NS_DEPRECATED_MAC(10_5, 10_5);
+@property (readonly) int pageX NS_AVAILABLE_MAC(10_5);
+@property (readonly) int pageY NS_AVAILABLE_MAC(10_5);
+@property (readonly) int which NS_AVAILABLE_MAC(10_5);
 
-- (void)initUIEvent:(NSString *)type canBubble:(BOOL)canBubble cancelable:(BOOL)cancelable view:(DOMAbstractView *)view detail:(int)detail AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+- (void)initUIEvent:(NSString *)type canBubble:(BOOL)canBubble cancelable:(BOOL)cancelable view:(DOMAbstractView *)view detail:(int)detail NS_AVAILABLE_MAC(10_5);
 @end
 
 @interface DOMUIEvent (DOMUIEventDeprecated)
-- (void)initUIEvent:(NSString *)type :(BOOL)canBubble :(BOOL)cancelable :(DOMAbstractView *)view :(int)detail AVAILABLE_WEBKIT_VERSION_1_3_AND_LATER_BUT_DEPRECATED_IN_WEBKIT_VERSION_3_0;
+- (void)initUIEvent:(NSString *)type :(BOOL)canBubble :(BOOL)cancelable :(DOMAbstractView *)view :(int)detail NS_DEPRECATED_MAC(10_4, 10_5);
 @end
-
-#endif

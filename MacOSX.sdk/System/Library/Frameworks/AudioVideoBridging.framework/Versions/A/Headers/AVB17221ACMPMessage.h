@@ -2,7 +2,7 @@
 //  AVB17221ACMPMessage.h
 //  AudioVideoBridging
 //
-//  Copyright 2011-2012 Apple Inc. All rights reserved.
+//  Copyright (c) 2011-2014 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -11,8 +11,8 @@
 
 /*!
 	@class		AVB17221ACMPMessage
-	@abstract	AVB17221ACMPMessage encapsulates an IEEE P1722.1 AVDECC Connection Management Protocol message.
-	@discussion	AVB17221ACMPMessage encapsulates an IEEE P1722.1 AVDECC Connection Management Protocol (ACMP) message.
+	@abstract	AVB17221ACMPMessage encapsulates an IEEE Std 1722.1™-2013 AVDECC Connection Management Protocol message.
+	@discussion	AVB17221ACMPMessage encapsulates an IEEE Std 1722.1™-2013 AVDECC Connection Management Protocol (ACMP) message.
  */
 NS_CLASS_AVAILABLE(10_8, NA)
 @interface AVB17221ACMPMessage : NSObject <NSCopying>
@@ -30,6 +30,7 @@ NS_CLASS_AVAILABLE(10_8, NA)
 	uint16_t connectionCount;
 	uint16_t sequenceID;
 	AVB17221ACMPFlags flags;
+	uint16_t vlanID;
 	
 	AVBMACAddress *sourceMAC;
 	AVBMACAddress *destinationMAC;
@@ -111,6 +112,11 @@ NS_CLASS_AVAILABLE(10_8, NA)
 	@abstract	The flags field of the ACMP message.
  */
 @property (assign) AVB17221ACMPFlags flags;
+/*!
+	@property	vlanID
+	@abstract	The stream_vlan_id field of the ACMP message.
+ */
+@property (assign) uint16_t vlanID;
 
 /*!
 	@property	sourceMAC

@@ -114,7 +114,7 @@ enum
 - (NSRect) characterBoundsAtIndex: (NSInteger) index;
 
 // Returns the index of the character at point (in page space).  Returns NSNotFound if no character at point.
-// Earlier viresion of PDF Kit (prior to Lion) returned -1 if no character at point.
+// Earlier version of PDF Kit (prior to Lion) returned -1 if no character at point.
 - (NSInteger) characterIndexAtPoint: (NSPoint) point;
 
 // -------- selections

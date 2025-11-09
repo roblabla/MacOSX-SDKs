@@ -1,7 +1,7 @@
 /*
     NSSavePanel.h
     Application Kit
-    Copyright (c) 1994-2013, Apple Inc.
+    Copyright (c) 1994-2014, Apple Inc.
     All rights reserved.
 */
 
@@ -14,8 +14,8 @@
 /* Return codes from the open/save panel.
 */
 enum {
-    NSFileHandlingPanelCancelButton	= NSCancelButton,
-    NSFileHandlingPanelOKButton	= NSOKButton,
+    NSFileHandlingPanelCancelButton	= NSModalResponseCancel,
+    NSFileHandlingPanelOKButton	= NSModalResponseOK,
 };
 
 typedef struct __SPFlags {
@@ -44,7 +44,9 @@ typedef struct __SPFlags {
     unsigned int accessoryViewDisclosed:1;
     unsigned int delegate_isValidFilename:1;
     unsigned int delegate_userEnteredFilename:1;
-    unsigned int reserved:7;
+    unsigned int delegate_panel_willExpand:1;
+    unsigned int canResolveUbiquitousConflicts:1;
+    unsigned int reserved:5;
 } _SPFlags;
 
 @class NSSavePanelAuxiliary;
@@ -84,8 +86,8 @@ typedef struct __SPFlags {
     NSSavePanelAuxiliary *_spAuxiliaryStorage;
     
 @private
-    char _directorySet:1;
-#if !__LP64__    
+    char _unused:1;
+#if !__LP64__
     char _reserved[4];
 #endif
     IBOutlet NSProgressIndicator *_openProgressIndicator;
@@ -101,111 +103,94 @@ typedef struct __SPFlags {
 /* NSSavePanel: Returns the URL to save the file at. A file may already exist at 'URL' if the user choose to overwrite it.
    NSOpenPanel: Returns the single filename selected by the user. Note: if -allowsMultipleSelection is set, you should use the -URLs on NSOpenPanel instead.
 */
-- (NSURL *)URL;
+@property (readonly, copy) NSURL *URL;
 
 #pragma mark -
 #pragma mark Configuration Properties
 
 /* NSSavePanel/NSOpenPanel: Gets and sets the directoryURL shown. A value of nil indicates that the last directory shown to the user will be used. This method will not block to resolve the URL, and the directory will asyncronously be set, if required.
 */
-- (NSURL *)directoryURL NS_AVAILABLE_MAC(10_6);
-- (void)setDirectoryURL:(NSURL *)url NS_AVAILABLE_MAC(10_6);
+@property (copy) NSURL *directoryURL NS_AVAILABLE_MAC(10_6);
 
 /* 
     NSSavePanel: An array of NSStrings specifying the file types the user can save the file as. The file type can be a common file extension, or a UTI. A nil value indicates that any file type can be used. If the array is not nil and the array contains no items, an exception will be raised. If no extension is given by the user, the first item in the allowedFileTypes will be used as the extension for the save panel. If the user specifies a type not in the array, and 'allowsOtherFileTypes' is YES, they will be presented with another dialog when prompted to save. The default value is 'nil'.
     NSOpenPanel: On versions less than 10.6, this property is ignored. For applications that link against 10.6 and higher, this property will determine which files should be enabled in the open panel. Using the deprecated methods to show the open panel (the ones that take a "types:" parameter) will overwrite this value, and should not be used. The allowedFileTypes can be changed while the panel is running (ie: from an accessory view). The file type can be a common file extension, or a UTI. This is also known as the "enabled file types". A nil value indicates that all files should be enabled.
 */
-- (NSArray *)allowedFileTypes;
-- (void)setAllowedFileTypes:(NSArray *)types;
+@property (copy) NSArray *allowedFileTypes;
 
 /*  NSSavePanel: Returns a BOOL value that indicates whether the receiver allows the user to save files with an extension that's not in the list of 'allowedFileTypes'.
     NSOpenPanel: Not used.
 */
-- (BOOL)allowsOtherFileTypes;
-- (void)setAllowsOtherFileTypes:(BOOL)flag;
+@property BOOL allowsOtherFileTypes;
 
 /* Gets and sets the accessory view shown in the panel. For applications that link on SnowLeopard and higher, the accessoryView's frame will be observed, and any changes the programmer makes to the frame will automatically be reflected in the panel (including animated changes to the frame height).
 */
-- (NSView *)accessoryView;
-- (void)setAccessoryView:(NSView *)view;
+@property (strong) NSView *accessoryView;
 
 /* Gets and sets the delegate.
 */
-- (id <NSOpenSavePanelDelegate>)delegate;
-- (void)setDelegate:(id<NSOpenSavePanelDelegate>)delegate;
+@property (assign) id<NSOpenSavePanelDelegate> delegate;
 
 /*  NSSavePanel: Returns YES if the panel is expanded. Defaults to NO, and persists in the user defaults.
     NSOpenPanel: Not used.
 */
-- (BOOL)isExpanded;
+@property (getter=isExpanded, readonly) BOOL expanded;
 
 /*  NSSavePanel/NSOpenPanel: Set to YES to allow the "New Folder" button to be shown.
 */
-- (BOOL)canCreateDirectories;
-- (void)setCanCreateDirectories:(BOOL)flag;
+@property BOOL canCreateDirectories;
 
 /*  NSSavePanel: Set to YES to show the extension-hiding checkbox.
     NSOpenPanel: Should not be used.
 */
-- (BOOL)canSelectHiddenExtension;
-- (void)setCanSelectHiddenExtension:(BOOL)flag;
+@property BOOL canSelectHiddenExtension;
 
 /*  NSSavePanel: Set to YES if the extension-hiding checkbox should checked. The value persists in the user defaults specific for the application.
     NSOpenPanel: Should not be used.
 */
-- (BOOL)isExtensionHidden;
-- (void)setExtensionHidden:(BOOL)flag;
+@property (getter=isExtensionHidden) BOOL extensionHidden;
 
 /* NSSavePanel/NSOpenPanel: If set to YES, the user can open into file packages, as though they were directories.
 */
-- (BOOL)treatsFilePackagesAsDirectories;
-- (void)setTreatsFilePackagesAsDirectories:(BOOL)flag;
+@property BOOL treatsFilePackagesAsDirectories;
 
 /* NSSavePanel/NSOpenPanel: Sets the text shown on the Open or Save button. If set to an empty string, it will show a localized "Open" for the NSOpenPanel and "Save" for the NSSavePanel. The default value will be the correct localized prompt for the open or save panel, as appropriate.
 */
-- (NSString *)prompt;
-- (void)setPrompt:(NSString *)prompt;
+@property (copy) NSString *prompt;
 
 /* NSSavePanel/NSOpenPanel: Gets and sets the title for the panel shown at the top of the window.
 */
-- (NSString *)title;
-- (void)setTitle:(NSString *)title;
+@property (copy) NSString *title;
 
 /*  NSSavePanel: Gets and sets the text shown to the left of the "name field". Default value is a localized "Save As:" string.
     NSOpenPanel: Not used.
 */
-- (NSString *)nameFieldLabel;
-- (void)setNameFieldLabel:(NSString *)label;
+@property (copy) NSString *nameFieldLabel;
 
 /*  NSSavePanel: Gets and sets the user-editable file name shown in the name field. 'value' must not be nil. NOTE: calling the deprecated methods that take a "name:" parameter will overwrite any values set before the panel was shown. Note that 'value' may have the file extension stripped, if [panel isExtensionHidden] is set to YES.
     NSOpenPanel: Not used.
 */
-- (NSString *)nameFieldStringValue NS_AVAILABLE_MAC(10_6);
-- (void)setNameFieldStringValue:(NSString *)value NS_AVAILABLE_MAC(10_6);
+@property (copy) NSString *nameFieldStringValue NS_AVAILABLE_MAC(10_6);
 
 /*  NSSavePanel/NSOpenPanel: Gets and sets the message shown under title of the panel. 'message' must not be nil.
 */
-- (NSString *)message;
-- (void)setMessage:(NSString *)message;
+@property (copy) NSString *message;
 
 - (void)validateVisibleColumns;
 
 /* NSSavePanel/NSOpenPanel: If showsHiddenFiles is set to YES, files that are normally hidden from the user are displayed. This method was published in Mac OS 10.6, but has existed since Mac OS 10.4. This property is KVO compliant. The user may invoke the keyboard shortcut (cmd-shift-.) to show or hide hidden files. Any user interface shown in an an accessory view should be updated by using key value observing (KVO) to watch for changes of this property. Alternatively, the user interface can be directly bound to this property. The default value is NO.
 */
-- (BOOL)showsHiddenFiles;
-- (void)setShowsHiddenFiles:(BOOL)flag;
+@property BOOL showsHiddenFiles;
 
 /*  NSSavePanel: Shows or hides the "Tags" field in the receiver. By passing YES, you become responsible for setting Tag names on the resulting file after saving is complete.
     NSOpenPanel: Should not be used.
 */
-- (void)setShowsTagField:(BOOL)flag NS_AVAILABLE_MAC(10_9);
-- (BOOL)showsTagField NS_AVAILABLE_MAC(10_9);
+@property BOOL showsTagField NS_AVAILABLE_MAC(10_9);
 
 /*  NSSavePanel: When -showsTagField returns YES, set any initial Tag names to be displayed, if necessary, prior to displaying the receiver. Also, if the user clicks "Save", take the result of -tagNames, and set them on the resulting file after saving is complete. Tag names are NSStrings, arrays of which can be used directly with the NSURLTagNamesKey API for getting and setting tags on files. Passing nil or an empty array to -setTagNames: will result in no initial Tag names appearing in the receiver. When -showsTagField returns YES, -tagNames always returns a non-nil array, and when NO, -tagNames always returns nil.
     NSOpenPanel: Should not be used.
 */
-- (void)setTagNames:(NSArray *)tagNames NS_AVAILABLE_MAC(10_9);
-- (NSArray *)tagNames NS_AVAILABLE_MAC(10_9);
+@property (copy) NSArray *tagNames NS_AVAILABLE_MAC(10_9);
 
 #pragma mark -
 #pragma mark Actions
@@ -216,8 +201,6 @@ typedef struct __SPFlags {
 #pragma mark -
 #pragma mark Displaying/Showing
 
-#if NS_BLOCKS_AVAILABLE
-
 /* NSSavePanel/NSOpenPanel: Presents the panel as a sheet modal to 'window' and returns immediately. Desired properties of the panel should be properly setup before calling this method. The completion handler block will be called after the user has closed the panel, however, the open/save panel sheet may still be on screen. If you require the sheet to be offscreen (for example, to show an alert), first call [savePanel orderOut:nil] to close it. The passed in 'result' will be NSFileHandlingPanelOKButton==1 or NSFileHandlingPanelCancelButton==0.
 */
 - (void)beginSheetModalForWindow:(NSWindow *)window completionHandler:(void (^)(NSInteger result))handler NS_AVAILABLE_MAC(10_6);
@@ -225,8 +208,6 @@ typedef struct __SPFlags {
 /* NSSavePanel/NSOpenPanel: Presents the panel as a modeless window and returns immediately. Desired properties of the panel should be properly setup before calling this method. The completion handler block will be called after the user has closed the panel. The passed in 'result' will be NSFileHandlingPanelOKButton==1 or NSFileHandlingPanelCancelButton==0.
 */
 - (void)beginWithCompletionHandler:(void (^)(NSInteger result))handler NS_AVAILABLE_MAC(10_6);
-
-#endif
 
 /* NSSavePanel/NSOpenPanel: Presents the panel as an application modal window. It returns only after the user has closed the panel. The return value is NSFileHandlingPanelOKButton==1 or NSFileHandlingPanelCancelButton==0.
 */
@@ -272,19 +253,19 @@ typedef struct __SPFlags {
 
 /* This method is deprecated in 10.6, and will be formally deprecated in a future release. Use panel:validateURL:error: instead. If both methods are implemented, the URL version will be called.
 */
-- (BOOL)panel:(id)sender isValidFilename:(NSString *)filename;
+- (BOOL)panel:(id)sender isValidFilename:(NSString *)filename NS_DEPRECATED_MAC(10_0, 10_6, "Use -panel:validateURL:error: instead");
 
 /* This method is deprecated in 10.6, and will be formally deprecated in a future release. Use panel:didChangeToDirectoryURL: instead.
 */
-- (void)panel:(id)sender directoryDidChange:(NSString *)path;
+- (void)panel:(id)sender directoryDidChange:(NSString *)path NS_DEPRECATED_MAC(10_3, 10_6, "Use -panel:didChangeToDirectoryURL: instead");
 
 /* This method is deprecated in 10.6, and will be formally deprecated in a future release. This method should not be used anymore to control sort ordering.
 */
- - (NSComparisonResult)panel:(id)sender compareFilename:(NSString *)name1 with:(NSString *)name2 caseSensitive:(BOOL)caseSensitive;
+- (NSComparisonResult)panel:(id)sender compareFilename:(NSString *)name1 with:(NSString *)name2 caseSensitive:(BOOL)caseSensitive NS_DEPRECATED_MAC(10_0, 10_6);
 
 /* This method is deprecated in 10.6, and will be formally deprecated in a future release. Use panel:shouldEnableURL:  instead
 */
-- (BOOL)panel:(id)sender shouldShowFilename:(NSString *)filename;
+- (BOOL)panel:(id)sender shouldShowFilename:(NSString *)filename NS_DEPRECATED_MAC(10_0, 10_6, "Use -panel:shouldEnableURL: instead");
 
 @end
 

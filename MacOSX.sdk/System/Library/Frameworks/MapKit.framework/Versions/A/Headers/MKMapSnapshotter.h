@@ -2,7 +2,7 @@
 //  MKMapSnapshotter.h
 //  MapKit
 //
-//  Copyright (c) 2013, Apple Inc. All rights reserved.
+//  Copyright (c) 2013-2014, Apple Inc. All rights reserved.
 //
 
 #import <MapKit/MKFoundation.h>
@@ -15,7 +15,7 @@ typedef void (^MKMapSnapshotCompletionHandler)(MKMapSnapshot *snapshot, NSError 
 MK_CLASS_AVAILABLE(10_9, 7_0)
 @interface MKMapSnapshotter : NSObject
 
-- (instancetype)initWithOptions:(MKMapSnapshotOptions *)options;
+- (instancetype)initWithOptions:(MKMapSnapshotOptions *)options NS_DESIGNATED_INITIALIZER;
 
 - (void)startWithCompletionHandler:(MKMapSnapshotCompletionHandler)completionHandler; // defaults to the main queue
 - (void)startWithQueue:(dispatch_queue_t)queue completionHandler:(MKMapSnapshotCompletionHandler)completionHandler;

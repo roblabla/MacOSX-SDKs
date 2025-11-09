@@ -2,7 +2,7 @@
 //  MKOverlayPathRenderer.h
 //  MapKit
 //
-//  Copyright (c) 2013, Apple Inc. All rights reserved.
+//  Copyright (c) 2013-2014, Apple Inc. All rights reserved.
 //
 
 #import <MapKit/MKFoundation.h>
@@ -17,11 +17,11 @@ MK_CLASS_AVAILABLE(10_9, 7_0)
 @interface MKOverlayPathRenderer : MKOverlayRenderer
 
 #if TARGET_OS_IPHONE
-@property (retain) UIColor *fillColor;
-@property (retain) UIColor *strokeColor;
+@property (strong) UIColor *fillColor;
+@property (strong) UIColor *strokeColor;
 #else
-@property (retain) NSColor *fillColor;
-@property (retain) NSColor *strokeColor;
+@property (strong) NSColor *fillColor;
+@property (strong) NSColor *strokeColor;
 #endif
 
 @property CGFloat lineWidth; // defaults to 0, which is MKRoadWidthAtZoomScale(currentZoomScale)

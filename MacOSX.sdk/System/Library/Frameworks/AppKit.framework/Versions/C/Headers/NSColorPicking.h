@@ -1,7 +1,7 @@
 /*
     NSColorPicking.h
     Application Kit
-    Copyright (c) 1994-2013, Apple Inc.
+    Copyright (c) 1994-2014, Apple Inc.
     All rights reserved.
 */
 
@@ -29,7 +29,7 @@
     FOR PERFORMANCE, DO NOT LOAD .NIBS, ETC. HERE!! WAIT UNTIL provideNewView: in NSColorPickingCustom!
 */
 
-- (id)initWithPickerMask:(NSUInteger)mask colorPanel:(NSColorPanel *)owningColorPanel;
+- (instancetype)initWithPickerMask:(NSUInteger)mask colorPanel:(NSColorPanel *)owningColorPanel;
 
 /* Allows you to return a new image used in the toolbar. By default, you can simply have a .tiff file with the same name as your custom color picker class in the bundle, and will not need to implement this method. 
 */

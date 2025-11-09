@@ -375,7 +375,7 @@
 
 #define kAXHelpTagRole					CFSTR("AXHelpTag")
 
-#define kAXMatteRole					CFSTR("AXMatteRole")
+#define kAXMatteRole					CFSTR("AXMatte")
 
 #define kAXDockItemRole					CFSTR("AXDockItem")
 

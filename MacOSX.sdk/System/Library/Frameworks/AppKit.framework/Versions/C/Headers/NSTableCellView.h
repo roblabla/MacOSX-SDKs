@@ -1,7 +1,7 @@
 /*
     NSTableCellView.h
     Application Kit
-    Copyright (c) 2009-2013, Apple Inc.
+    Copyright (c) 2009-2014, Apple Inc.
     All rights reserved.
 */
 
@@ -31,12 +31,12 @@ NS_CLASS_AVAILABLE(10_7, NA)
 
 /* The 'objectValue' is automatically set by the table when using bindings, or the result from the dataSource method -tableView:objectValueForTableColumn:row:. Key Value Observing (KVO) compliant so user interface elements can be bound to the 'objectValue'. 
  */
-@property(retain) id objectValue;
+@property (strong) id objectValue;
 
 /* The following two properties are provided for the developer to hook up as outlets. These outlets can then be accessed in -tableView:viewForTableColumn:row: and modified. Additional outlets can be added by subclassing NSTableCellView, adding appropriate ivars and properties, and hooking it up in Interface Builder.
  */
-@property(assign) IBOutlet NSTextField *textField;
-@property(assign) IBOutlet NSImageView *imageView;
+@property (assign) IBOutlet NSTextField *textField;
+@property (assign) IBOutlet NSImageView *imageView;
 
 /* The backgroundStyle property is automatically set by the enclosing NSTableRowView to let this view know what its background looks like. For instance, when the -backgroundStyle is NSBackgroundStyleDark, the view should use a light text color. Upon setting, the default implementation automatically forwards calls to all subviews that implement -setBackgroundStyle: or are an NSControl (which have NSCells that respond to -setBackgroundStyle:).
  */
@@ -48,6 +48,6 @@ NS_CLASS_AVAILABLE(10_7, NA)
 
 /* Multi-Item Drag Support. The default implementation will return an array of up to two NSDraggingImageComponent instances -- one for the imageView and another for the textField (if not nil). These methods can be subclassed and overridden to provide a custom set of NSDraggingImageComponents to create the drag image from this view.
  */
-@property(retain, readonly) NSArray *draggingImageComponents;
+@property (readonly, strong) NSArray *draggingImageComponents;
 
 @end

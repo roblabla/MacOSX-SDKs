@@ -1,5 +1,5 @@
 /*	CFXMLNode.h
-	Copyright (c) 1998-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1998-2014, Apple Inc. All rights reserved.
 */
 
 /*  CFXMLParser (and thus CFXMLNode) are deprecated as of Mac OS X 10.8 and iOS 6.0. The suggested replacements are the Foundation classes NSXMLParser and NSXMLDocument, or the libxml2 library. */
@@ -13,6 +13,7 @@
 #include <CoreFoundation/CFTree.h>
 #include <CoreFoundation/CFURL.h>
 
+CF_IMPLICIT_BRIDGING_ENABLED
 CF_EXTERN_C_BEGIN
 
 enum {
@@ -180,6 +181,7 @@ CF_EXPORT
 CFXMLNodeRef CFXMLTreeGetNode(CFXMLTreeRef xmlTree) CF_DEPRECATED(10_0, 10_8, 2_0, 6_0);
 
 CF_EXTERN_C_END
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif /* ! __COREFOUNDATION_CFXMLNODE__ */
 

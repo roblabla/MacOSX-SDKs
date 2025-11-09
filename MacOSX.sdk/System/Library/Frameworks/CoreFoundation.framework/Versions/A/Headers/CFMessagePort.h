@@ -1,5 +1,5 @@
 /*	CFMessagePort.h
-	Copyright (c) 1998-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1998-2014, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFMESSAGEPORT__)
@@ -10,9 +10,10 @@
 #include <CoreFoundation/CFData.h>
 #include <dispatch/dispatch.h>
 
+CF_IMPLICIT_BRIDGING_ENABLED
 CF_EXTERN_C_BEGIN
 
-typedef struct __CFMessagePort * CFMessagePortRef;
+typedef struct CF_BRIDGED_MUTABLE_TYPE(NSMessagePort) __CFMessagePort * CFMessagePortRef;
 
 enum {
     kCFMessagePortSuccess = 0,
@@ -57,6 +58,7 @@ CF_EXPORT CFRunLoopSourceRef	CFMessagePortCreateRunLoopSource(CFAllocatorRef all
 CF_EXPORT void CFMessagePortSetDispatchQueue(CFMessagePortRef ms, dispatch_queue_t queue) CF_AVAILABLE(10_6, 4_0);
 
 CF_EXTERN_C_END
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif /* ! __COREFOUNDATION_CFMESSAGEPORT__ */
 

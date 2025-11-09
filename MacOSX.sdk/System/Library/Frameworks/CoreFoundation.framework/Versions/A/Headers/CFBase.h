@@ -1,5 +1,5 @@
 /*	CFBase.h
-	Copyright (c) 1998-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1998-2014, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFBASE__)
@@ -232,6 +232,35 @@ CF_EXTERN_C_BEGIN
 #endif
 #endif
 
+#if __has_attribute(objc_bridge)
+
+#ifdef __OBJC__
+@class NSArray;
+@class NSAttributedString;
+@class NSString;
+@class NSNull;
+@class NSCharacterSet;
+@class NSData;
+@class NSDate;
+@class NSTimeZone;
+@class NSDictionary;
+@class NSError;
+@class NSLocale;
+@class NSNumber;
+@class NSNumber;
+@class NSSet;
+@class NSURL;
+#endif
+
+#define CF_BRIDGED_TYPE(T)		__attribute__((objc_bridge(T)))
+#define CF_BRIDGED_MUTABLE_TYPE(T)	__attribute__((objc_bridge_mutable(T)))
+#define CF_RELATED_TYPE(T,C,I)		__attribute__((objc_bridge_related(T,C,I)))
+#else
+#define CF_BRIDGED_TYPE(T)
+#define CF_BRIDGED_MUTABLE_TYPE(T)
+#define CF_RELATED_TYPE(T,C,I)
+#endif
+
 
 CF_EXPORT double kCFCoreFoundationVersionNumber;
 
@@ -307,10 +336,13 @@ CF_EXPORT double kCFCoreFoundationVersionNumber;
 #define kCFCoreFoundationVersionNumber10_8_2    744.12
 #define kCFCoreFoundationVersionNumber10_8_3    744.18
 #define kCFCoreFoundationVersionNumber10_8_4    744.19
+#define kCFCoreFoundationVersionNumber10_9      855.11
+#define kCFCoreFoundationVersionNumber10_9_1    855.11
+#define kCFCoreFoundationVersionNumber10_9_2    855.14
 #endif
 
 #if TARGET_OS_IPHONE
-#define kCFCoreFoundationVersionNumber_iPhoneOS_2_0	478.23
+#define kCFCoreFoundationVersionNumber_iPhoneOS_2_0 478.23
 #define kCFCoreFoundationVersionNumber_iPhoneOS_2_1 478.26
 #define kCFCoreFoundationVersionNumber_iPhoneOS_2_2 478.29
 #define kCFCoreFoundationVersionNumber_iPhoneOS_3_0 478.47
@@ -324,6 +356,8 @@ CF_EXPORT double kCFCoreFoundationVersionNumber;
 #define kCFCoreFoundationVersionNumber_iOS_5_1 690.10
 #define kCFCoreFoundationVersionNumber_iOS_6_0 793.00
 #define kCFCoreFoundationVersionNumber_iOS_6_1 793.00
+#define kCFCoreFoundationVersionNumber_iOS_7_0 847.20
+#define kCFCoreFoundationVersionNumber_iOS_7_1 847.24
 #endif
 
 #if __LLP64__
@@ -341,8 +375,8 @@ typedef signed long CFIndex;
 /* Base "type" of all "CF objects", and polymorphic functions on them */
 typedef const void * CFTypeRef;
 
-typedef const struct __CFString * CFStringRef;
-typedef struct __CFString * CFMutableStringRef;
+typedef const struct CF_BRIDGED_TYPE(NSString) __CFString * CFStringRef;
+typedef struct CF_BRIDGED_MUTABLE_TYPE(NSMutableString) __CFString * CFMutableStringRef;
 
 /*
         Type to mean any instance of a property list type;
@@ -392,7 +426,7 @@ CFRange __CFRangeMake(CFIndex loc, CFIndex len);
 
 /* Null representant */
 
-typedef const struct __CFNull * CFNullRef;
+typedef const struct CF_BRIDGED_TYPE(NSNull) __CFNull * CFNullRef;
 
 CF_EXPORT
 CFTypeID CFNullGetTypeID(void);

@@ -1,5 +1,5 @@
 /*	CFFileDescriptor.h
-	Copyright (c) 2006-2013, Apple Inc. All rights reserved.
+	Copyright (c) 2006-2014, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFFILEDESCRIPTOR__)
@@ -7,7 +7,7 @@
 
 #include <CoreFoundation/CFRunLoop.h>
 
-
+CF_IMPLICIT_BRIDGING_ENABLED
 CF_EXTERN_C_BEGIN
 
 typedef int CFFileDescriptorNativeDescriptor;
@@ -48,7 +48,7 @@ CF_EXPORT CFRunLoopSourceRef	CFFileDescriptorCreateRunLoopSource(CFAllocatorRef 
 
 
 CF_EXTERN_C_END
-
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif /* ! __COREFOUNDATION_CFFILEDESCRIPTOR__ */
 

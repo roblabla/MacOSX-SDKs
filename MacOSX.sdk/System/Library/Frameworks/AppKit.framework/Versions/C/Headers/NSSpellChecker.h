@@ -1,7 +1,7 @@
 /*
         NSSpellChecker.h
         Application Kit
-        Copyright (c) 1990-2013, Apple Inc.
+        Copyright (c) 1990-2014, Apple Inc.
         All rights reserved.
 */
 
@@ -84,10 +84,8 @@ The usual usage of this is to implement a checkSpelling: method in an object tha
 /* Requests unified text checking for the given range of the given string.  The checkingTypes should be a bitmask of checking types from NSTextCheckingResult.h, describing which types of checking are desired.  The options dictionary allows clients to pass in options for certain types of checking.  The orthography and wordCount arguments will return by reference these two attributes of the range as a whole, while the return value is an array of NSTextCheckingResult objects describing particular items found during checking and their individual ranges, sorted by range origin, then range end, then result type. */  
 - (NSArray *)checkString:(NSString *)stringToCheck range:(NSRange)range types:(NSTextCheckingTypes)checkingTypes options:(NSDictionary *)options inSpellDocumentWithTag:(NSInteger)tag orthography:(NSOrthography **)orthography wordCount:(NSInteger *)wordCount NS_AVAILABLE_MAC(10_6);
 
-#if NS_BLOCKS_AVAILABLE
 /* Requests unified text checking in the background.  The return value is a monotonically increasing sequence number that can be used to keep track of requests in flight.  The completion handler will be called (in an arbitrary context) when results are available, with the sequence number and results.  The arguments and results are otherwise the same as for the previous method. */
 - (NSInteger)requestCheckingOfString:(NSString *)stringToCheck range:(NSRange)range types:(NSTextCheckingTypes)checkingTypes options:(NSDictionary *)options inSpellDocumentWithTag:(NSInteger)tag completionHandler:(void (^)(NSInteger sequenceNumber, NSArray *results, NSOrthography *orthography, NSInteger wordCount))completionHandler NS_AVAILABLE_MAC(10_6);
-#endif /* NS_BLOCKS_AVAILABLE */
 
 /* Provides a menu containing contextual menu items suitable for certain kinds of detected results (notably date/time/address results).  The options dictionary allows clients to pass in information associated with the document.  */
 - (NSMenu *)menuForResult:(NSTextCheckingResult *)result string:(NSString *)checkedString options:(NSDictionary *)options atLocation:(NSPoint)location inView:(NSView *)view NS_AVAILABLE_MAC(10_6);
@@ -105,7 +103,7 @@ APPKIT_EXTERN NSString *NSTextCheckingRegularExpressionsKey NS_AVAILABLE_MAC(10_
 
 /* Methods for obtaining the default values for NSTextCheckingQuotesKey and NSTextCheckingReplacementsKey. */
 - (NSArray *)userQuotesArrayForLanguage:(NSString *)language NS_AVAILABLE_MAC(10_6);
-- (NSDictionary *)userReplacementsDictionary NS_AVAILABLE_MAC(10_6);
+@property (readonly, copy) NSDictionary *userReplacementsDictionary NS_AVAILABLE_MAC(10_6);
 
 /* The checkSpellingOfString:... methods return the range of the misspelled word found.  It is up to the client to select that word in their document and to cause the spelling panel to update itself to reflect the found misspelling.  Clients should call updateSpellPanelWithMisspelledWord: to inform the spelling panel of the word to be displayed. */
 - (void)updateSpellingPanelWithMisspelledWord:(NSString *)word;
@@ -114,14 +112,12 @@ APPKIT_EXTERN NSString *NSTextCheckingRegularExpressionsKey NS_AVAILABLE_MAC(10_
 - (void)updateSpellingPanelWithGrammarString:(NSString *)string detail:(NSDictionary *)detail NS_AVAILABLE_MAC(10_5);
 
 /* Set and get attributes of the spelling and grammar panel. */
-- (NSPanel *)spellingPanel;
-- (NSView *)accessoryView;
-- (void)setAccessoryView:(NSView *)aView;
+@property (readonly, strong) NSPanel *spellingPanel;
+@property (strong) NSView *accessoryView;
 
 /* Set and get attributes of the substitutions panel. */
-- (NSPanel *)substitutionsPanel NS_AVAILABLE_MAC(10_6);
-- (NSViewController *)substitutionsPanelAccessoryViewController NS_AVAILABLE_MAC(10_6);
-- (void)setSubstitutionsPanelAccessoryViewController:(NSViewController *)accessoryController NS_AVAILABLE_MAC(10_6);
+@property (readonly, strong) NSPanel *substitutionsPanel NS_AVAILABLE_MAC(10_6);
+@property (strong) NSViewController *substitutionsPanelAccessoryViewController NS_AVAILABLE_MAC(10_6);
 
 /* This method should be called when a client changes some relevant setting, such as what kind of spelling, grammar checking, or substitutions it uses. */
 - (void)updatePanels NS_AVAILABLE_MAC(10_6);
@@ -166,18 +162,15 @@ typedef NS_ENUM(NSInteger, NSCorrectionIndicatorType) {
     NSCorrectionIndicatorTypeGuesses        // Shows multiple alternatives from which the user may choose
 };
 
-#if NS_BLOCKS_AVAILABLE
 - (void)showCorrectionIndicatorOfType:(NSCorrectionIndicatorType)type primaryString:(NSString *)primaryString alternativeStrings:(NSArray *)alternativeStrings forStringInRect:(NSRect)rectOfTypedString view:(NSView *)view completionHandler:(void (^)(NSString *acceptedString))completionBlock NS_AVAILABLE_MAC(10_7);
-#endif
 
 - (void)dismissCorrectionIndicatorForView:(NSView *)view NS_AVAILABLE_MAC(10_7);
 
 
 /* Entries in the availableLanguages list are all available spellchecking languages in user preference order, as described in the spellchecker's info dictionary, usually language abbreviations such as en_US.  The userPreferredLanguages will be a subset of the availableLanguages, as selected by the user for use with spellchecking, in preference order.  If automaticallyIdentifiesLanguages is YES, then text checking will automatically use these as appropriate; otherwise, it will use the language set by setLanguage:.  The older checkSpellingOfString:... and checkGrammarOfString:... methods will use the language set by setLanguage:, if they are called with a nil language argument.  */
-- (NSArray *)availableLanguages NS_AVAILABLE_MAC(10_5);
-- (NSArray *)userPreferredLanguages NS_AVAILABLE_MAC(10_6);
-- (BOOL)automaticallyIdentifiesLanguages NS_AVAILABLE_MAC(10_6);
-- (void)setAutomaticallyIdentifiesLanguages:(BOOL)flag NS_AVAILABLE_MAC(10_6);
+@property (readonly, copy) NSArray *availableLanguages NS_AVAILABLE_MAC(10_5);
+@property (readonly, copy) NSArray *userPreferredLanguages NS_AVAILABLE_MAC(10_6);
+@property BOOL automaticallyIdentifiesLanguages NS_AVAILABLE_MAC(10_6);
 
 /* Allows programmatic setting of the misspelled word field. */
 - (void)setWordFieldStringValue:(NSString *)aString;
@@ -210,7 +203,7 @@ APPKIT_EXTERN NSString * const NSSpellCheckerDidChangeAutomaticDashSubstitutionN
 @interface NSSpellChecker(NSDeprecated)
 
 /* This is the pre-10.6 equivalent of guessesForWordRange:inString:language:inSpellDocumentWithTag:. */
-- (NSArray *)guessesForWord:(NSString *)word;
+- (NSArray *)guessesForWord:(NSString *)word NS_DEPRECATED_MAC(10_0, 10_6, "Use -guessesForWordRange:inString:language:inSpellDocumentWithTag instead");
 
 /* This is the deprecated pre-10.5 equivalent of unlearnWord:. */
 - (void)forgetWord:(NSString *)word NS_DEPRECATED_MAC(10_0, 10_5);

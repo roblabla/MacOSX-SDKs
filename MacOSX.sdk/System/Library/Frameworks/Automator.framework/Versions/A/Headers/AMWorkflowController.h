@@ -1,6 +1,6 @@
 /*	
     AMWorkflowController.h
-    Copyright (C) 2005-2006 Apple Computer, Inc. All rights reserved.    
+    Copyright (C) 2005-2006, 2014 Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -56,20 +56,17 @@
 	AM_UNUSED_FOR_ANALYZER id _future4;
 }
 
-- (AMWorkflow *)workflow;
-- (void)setWorkflow:(AMWorkflow *)workflow;
-- (AMWorkflowView *)workflowView;
-- (void)setWorkflowView:(AMWorkflowView *)view;
-- (id)delegate;
-- (void)setDelegate:(id)delegate;
+@property (strong) AMWorkflow *workflow;
+@property (strong) AMWorkflowView *workflowView;
+@property (assign) id delegate;
 
-- (BOOL)canRun;
-- (BOOL)isRunning;
+@property (readonly) BOOL canRun;
+@property (getter=isRunning, readonly) BOOL running;
 
 - (IBAction)run:(id)sender;
 - (IBAction)stop:(id)sender;
 
-- (BOOL)isPaused;
+@property (getter=isPaused, readonly) BOOL paused;
 - (IBAction)pause:(id)sender;
 - (IBAction)step:(id)sender;
 - (IBAction)reset:(id)sender;

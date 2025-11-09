@@ -1,7 +1,7 @@
 /*
         NSDrawer.h
         Application Kit
-        Copyright (c) 1999-2013, Apple Inc.
+        Copyright (c) 1999-2014, Apple Inc.
         All rights reserved.
 */
 
@@ -20,15 +20,14 @@
 @class NSNotification;
 @protocol NSDrawerDelegate;
 
-enum {
+typedef NS_ENUM(NSUInteger, NSDrawerState) {
     NSDrawerClosedState			= 0,
     NSDrawerOpeningState 		= 1,
     NSDrawerOpenState 			= 2,
     NSDrawerClosingState 		= 3
 };
-typedef NSUInteger NSDrawerState;
 
-@interface NSDrawer : NSResponder
+@interface NSDrawer : NSResponder <NSAccessibilityElement, NSAccessibility>
 {
     /*All instance variables are private*/
     NSDrawerState 	_drawerState;
@@ -54,16 +53,12 @@ typedef NSUInteger NSDrawerState;
     __strong CFRunLoopObserverRef _drawerObserver;
 }
 
-- (id)initWithContentSize:(NSSize)contentSize preferredEdge:(NSRectEdge)edge;
+- (instancetype)initWithContentSize:(NSSize)contentSize preferredEdge:(NSRectEdge)edge;
 
-- (void)setParentWindow:(NSWindow *)parent;
-- (NSWindow *)parentWindow;
-- (void)setContentView:(NSView *)aView;
-- (NSView *)contentView;
-- (void)setPreferredEdge:(NSRectEdge)edge;
-- (NSRectEdge)preferredEdge;
-- (void)setDelegate:(id <NSDrawerDelegate>)anObject;
-- (id <NSDrawerDelegate>)delegate;
+@property (assign) NSWindow *parentWindow;
+@property (strong) NSView *contentView;
+@property NSRectEdge preferredEdge;
+@property (assign) id<NSDrawerDelegate> delegate;
 
 - (void)open;
 - (void)openOnEdge:(NSRectEdge)edge;
@@ -73,26 +68,21 @@ typedef NSUInteger NSDrawerState;
 - (void)close:(id)sender;
 - (void)toggle:(id)sender;
 
-- (NSInteger)state;
-- (NSRectEdge)edge;
+@property (readonly) NSInteger state;
+@property (readonly) NSRectEdge edge;
 
-- (void)setContentSize:(NSSize)size;
-- (NSSize)contentSize;
-- (void)setMinContentSize:(NSSize)size;
-- (NSSize)minContentSize;
-- (void)setMaxContentSize:(NSSize)size;
-- (NSSize)maxContentSize;
+@property NSSize contentSize;
+@property NSSize minContentSize;
+@property NSSize maxContentSize;
 
-- (void)setLeadingOffset:(CGFloat)offset;
-- (CGFloat)leadingOffset;
-- (void)setTrailingOffset:(CGFloat)offset;
-- (CGFloat)trailingOffset;
+@property CGFloat leadingOffset;
+@property CGFloat trailingOffset;
 
 @end
 
 @interface NSWindow(Drawers)
 
-- (NSArray *)drawers;
+@property (readonly, copy) NSArray *drawers;
 
 @end
 

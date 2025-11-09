@@ -1,7 +1,7 @@
 /*
 	NSDictionaryController.h
 	Application Kit
-	Copyright (c) 2002-2013, Apple Inc.
+	Copyright (c) 2002-2014, Apple Inc.
 	All rights reserved.
  */
 
@@ -51,22 +51,16 @@ NS_CLASS_AVAILABLE(10_5, NA)
 - (id)newObject;    // overridden from the superclass to create a key-value pair to represent an entry in the content dictionary of the controller; method is invoked for insertions of new key-value pairs as well as transforming existing dictionary entries into key-value pairs for display
 
 // Inital key and value are assigned to newly inserted entries. The initial key will be copied, the initial value will be retained when inserted into the dictionary (not copied), and must implement NSCoding if the dictionary controller gets archived.
-- (void)setInitialKey:(NSString *)key;
-- (NSString *)initialKey;
-- (void)setInitialValue:(id)value;
-- (id)initialValue;
+@property (copy) NSString *initialKey;
+@property (strong) id initialValue;
 
 // Included keys are always represented by a key-value pair in the display array, whether present in the underlying dictionary or not. Excluded keys are always suppressed in the display array.
-- (void)setIncludedKeys:(NSArray *)keys;
-- (NSArray *)includedKeys;
-- (void)setExcludedKeys:(NSArray *)keys;
-- (NSArray *)excludedKeys;
+@property (copy) NSArray *includedKeys;
+@property (copy) NSArray *excludedKeys;
 
 // Localized key dictionary allows to specify a (typically localized) string for each key in the dictionary (the dictionary needs to contain the keys as keys and the localized keys as values).
-- (void)setLocalizedKeyDictionary:(NSDictionary *)dictionary;
-- (NSDictionary *)localizedKeyDictionary;
-- (void)setLocalizedKeyTable:(NSString *)stringsFileName;
-- (NSString *)localizedKeyTable;
+@property (copy) NSDictionary *localizedKeyDictionary;
+@property (copy) NSString *localizedKeyTable;
 
 @end
 

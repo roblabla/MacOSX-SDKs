@@ -2,7 +2,7 @@
 //  MKDirectionsRequest.h
 //  MapKit
 //
-//  Copyright (c) 2012-2013, Apple Inc. All rights reserved.
+//  Copyright (c) 2012-2014, Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -34,7 +34,7 @@ MK_CLASS_AVAILABLE(10_9, 6_0)
 
 @interface MKDirectionsRequest (MKDirectionsURL)
 
-- (id)initWithContentsOfURL:(NSURL *)url NS_AVAILABLE(10_9, 6_0);
+- (instancetype)initWithContentsOfURL:(NSURL *)url NS_AVAILABLE(10_9, 6_0);
 + (BOOL)isDirectionsRequestURL:(NSURL *)url NS_AVAILABLE(10_9, 6_0);
 
 @end

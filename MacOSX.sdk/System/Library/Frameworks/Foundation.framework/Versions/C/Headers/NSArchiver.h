@@ -1,5 +1,5 @@
 /*	NSArchiver.h
-	Copyright (c) 1994-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSCoder.h>
@@ -19,9 +19,9 @@
     void		*reserved;
 }
 
-- (id)initForWritingWithMutableData:(NSMutableData *)mdata;
+- (instancetype)initForWritingWithMutableData:(NSMutableData *)mdata NS_DESIGNATED_INITIALIZER;
     
-- (NSMutableData *)archiverData;
+@property (readonly, retain) NSMutableData *archiverData;
 
 - (void)encodeRootObject:(id)rootObject;
 - (void)encodeConditionalObject:(id)object;
@@ -58,14 +58,14 @@
     id			reserved;
 }
 
-- (id)initForReadingWithData:(NSData *)data;
+- (instancetype)initForReadingWithData:(NSData *)data NS_DESIGNATED_INITIALIZER;
 
 - (void)setObjectZone:(NSZone *)zone NS_AUTOMATED_REFCOUNT_UNAVAILABLE;
 - (NSZone *)objectZone NS_AUTOMATED_REFCOUNT_UNAVAILABLE;
 
-- (BOOL)isAtEnd;
+@property (getter=isAtEnd, readonly) BOOL atEnd;
 
-- (unsigned)systemVersion;
+@property (readonly) unsigned int systemVersion;
 
 + (id)unarchiveObjectWithData:(NSData *)data;
 + (id)unarchiveObjectWithFile:(NSString *)path;
@@ -89,7 +89,7 @@ FOUNDATION_EXPORT NSString * const NSInconsistentArchiveException;
 
 @interface NSObject (NSArchiverCallback)
 
-- (Class)classForArchiver;
+@property (readonly) Class classForArchiver;
 - (id)replacementObjectForArchiver:(NSArchiver *)archiver;
 
 @end

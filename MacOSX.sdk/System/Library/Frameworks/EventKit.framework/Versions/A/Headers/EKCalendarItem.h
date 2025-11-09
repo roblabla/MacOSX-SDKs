@@ -15,7 +15,7 @@ EVENTKIT_CLASS_AVAILABLE(10_8, 5_0)
 
 }
 
-@property(nonatomic, retain) EKCalendar *calendar;
+@property(nonatomic, strong) EKCalendar *calendar;
 
 /*!
     @property   calendarItemIdentifier
@@ -91,7 +91,6 @@ EVENTKIT_CLASS_AVAILABLE(10_8, 5_0)
     @abstract   Removes an alarm from this item.
 */
 - (void)removeAlarm:(EKAlarm *)alarm;
-
 
 /*!
     @property   recurrenceRules

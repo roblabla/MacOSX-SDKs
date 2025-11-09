@@ -1,7 +1,7 @@
 /*
         NSQuickDrawView.h
         Application Kit
-        Copyright (c) 1999-2013, Apple Inc.
+        Copyright (c) 1999-2014, Apple Inc.
         All rights reserved.
 */
 
@@ -10,6 +10,7 @@
 #if !__LP64__
 #import <AppKit/NSView.h>
 
+NS_CLASS_DEPRECATED_MAC(10_0, 10_4)
 @interface NSQuickDrawView : NSView
 {
 @private

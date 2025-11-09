@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1999-2002,2004 Apple Computer, Inc. All Rights Reserved.
+ * Copyright (c) 1999-2002,2004,2011,2014 Apple Inc. All Rights Reserved.
  * 
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -304,7 +304,7 @@ EISL_LocateProcedureAddress (ISL_VERIFIED_MODULE_PTR Module,
 #ifdef MACOSX
 #define EISL_GetReturnAddress(Address) \
 {\
-    /* Platform specific code in here */
+    /* Platform specific code in here */ \
 }
 #endif
 

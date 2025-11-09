@@ -164,6 +164,15 @@ typedef CFComparisonResult (*CMBufferCompareCallback)(
 	void *refcon);		/*! @param refcon Client refcon. Can be NULL. */
 
 /*!
+	 @typedef	CMBufferGetSizeCallback
+	 @abstract	Client callback that returns a size_t from a CMBufferRef
+	 @discussion	There is one callback of this type that can be provided to CMBufferQueueCreate: getTotalSize.
+ */
+typedef size_t (*CMBufferGetSizeCallback)(
+	CMBufferRef buf,	/*! @param buf Buffer being interrogated. */
+	void *refcon);		/*! @param refcon Client refcon. Can be NULL. */
+	
+/*!
 	@typedef	CMBufferCallbacks
 	@abstract	Callbacks provided to CMBufferQueueCreate, for use by the queue in interrogating the buffers that it will see.
 	@discussion	With the exception of isDataReady, all these callbacks must always return the same result for the same arguments.
@@ -173,7 +182,7 @@ typedef CFComparisonResult (*CMBufferCompareCallback)(
 */
 typedef struct {
 	uint32_t					version;						/*! @field version
-																	Must be 0. */
+																	Must be 0 or 1. */
 	void						*refcon;						/*! @field refcon
 																	Client refcon to be passed to all callbacks (can be NULL,
 																	if the callbacks don't require it). */
@@ -206,6 +215,9 @@ typedef struct {
 																	If triggers of type kCMBufferQueueTrigger_WhenDataBecomesReady are installed,
 																	the queue will listen for this notification on the head buffer. 
 																	Can be NULL (then the queue won't listen for it). */
+	CMBufferGetSizeCallback		getSize;						/*! @field getSize
+																	This callback is called (once) during enqueue and dequeue operation to
+																	update the total size of the queue. Can be NULL.  Ignored if version < 1. */
 } CMBufferCallbacks;
 
 /*!
@@ -475,6 +487,20 @@ CM_EXPORT CMTime CMBufferQueueGetEndPresentationTimeStamp(
 	CMBufferQueueRef queue)		/*! @param queue
 									CMBufferQueue being interrogated. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+
+	
+/*!
+	 @function	CMBufferQueueGetTotalSize
+	 @abstract	Gets the total size of all sample buffers of a CMBufferQueue.
+ @discussion	The total size of the CMBufferQueue is the sum of all the individual
+				buffer sizes, as reported by the getTotalSize callback (provided to
+				CMBufferQueueCreate).  If there are no buffers in the queue,
+				0 will be returned.
+ */
+CM_EXPORT size_t CMBufferQueueGetTotalSize(
+	CMBufferQueueRef queue)		/*! @param queue
+									CMBufferQueue being interrogated. */
+							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_7_1);
 
 /*!
 	@typedef	CMBufferQueueTriggerToken

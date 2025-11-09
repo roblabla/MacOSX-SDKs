@@ -167,8 +167,8 @@ CFStringRef ODRecordGetRecordName(ODRecordRef record) __OSX_AVAILABLE_STARTING(_
 
 /*!
     @function   ODRecordCopyValues
-    @abstract   Returns the value of an attribute as a CFArrayRef of CFStringRef or CFDataRef types
-    @discussion Returns the value of an attribute as a CFArrayRef of CFStringRef or CFDataRef, depending on
+    @abstract   Returns the value of an attribute as an array of CFStringRef or CFDataRef types
+    @discussion Returns the value of an attribute as an array of CFStringRef or CFDataRef, depending on
                 whether the data is Binary or not.  If the value has been fetched from the directory previously
                 a copy of the internal storage will be returned without going to the directory.  If it has not been fetched
                 previously, then it will be fetched at that time.
@@ -317,7 +317,7 @@ bool ODRecordContainsMember(ODRecordRef group, ODRecordRef member, CFErrorRef *e
     @result     a CFDictionaryRef containing all currently configured policies
 */
 CF_EXPORT
-CFDictionaryRef ODRecordCopyPolicies(ODRecordRef record, CFErrorRef *error) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+CFDictionaryRef ODRecordCopyPolicies(ODRecordRef record, CFErrorRef *error) __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_9, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "use ODRecordCopyAccountPolicies");
 
 /*!
     @function   ODRecordCopyEffectivePolicies
@@ -328,7 +328,7 @@ CFDictionaryRef ODRecordCopyPolicies(ODRecordRef record, CFErrorRef *error) __OS
     @result     a CFDictionaryRef containing all currently configured policies (merging any node-level policies)
 */
 CF_EXPORT
-CFDictionaryRef ODRecordCopyEffectivePolicies(ODRecordRef record, CFErrorRef *error) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+CFDictionaryRef ODRecordCopyEffectivePolicies(ODRecordRef record, CFErrorRef *error) __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_9, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "use ODRecordAuthenticationAllowed and similar functions");
 
 /*!
     @function   ODRecordCopySupportedPolicies
@@ -341,7 +341,7 @@ CFDictionaryRef ODRecordCopyEffectivePolicies(ODRecordRef record, CFErrorRef *er
     @result     a CFDictionaryRef containing all currently supported policies
 */
 CF_EXPORT
-CFDictionaryRef ODRecordCopySupportedPolicies(ODRecordRef record, CFErrorRef *error) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+CFDictionaryRef ODRecordCopySupportedPolicies(ODRecordRef record, CFErrorRef *error) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_9, __MAC_10_10, __IPHONE_NA, __IPHONE_NA);
 
 /*!
     @function   ODRecordSetPolicies
@@ -353,7 +353,7 @@ CFDictionaryRef ODRecordCopySupportedPolicies(ODRecordRef record, CFErrorRef *er
     @result     a bool which signifies if the policy set succeeded, otherwise error is set. 
 */
 CF_EXPORT
-bool ODRecordSetPolicies(ODRecordRef record, CFDictionaryRef policies, CFErrorRef *error) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+bool ODRecordSetPolicies(ODRecordRef record, CFDictionaryRef policies, CFErrorRef *error) __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_9, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "use ODRecordSetAccountPolicies");
 
 /*!
     @function   ODRecordSetPolicy
@@ -366,7 +366,7 @@ bool ODRecordSetPolicies(ODRecordRef record, CFDictionaryRef policies, CFErrorRe
     @result     a bool which signifies if the policy set succeeded, otherwise error is set.
 */
 CF_EXPORT
-bool ODRecordSetPolicy(ODRecordRef record, ODPolicyType policy, CFTypeRef value, CFErrorRef *error) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+bool ODRecordSetPolicy(ODRecordRef record, ODPolicyType policy, CFTypeRef value, CFErrorRef *error) __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_9, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "use ODRecordAddAccountPolicy");
 
 /*!
     @function   ODRecordRemovePolicy
@@ -378,7 +378,200 @@ bool ODRecordSetPolicy(ODRecordRef record, ODPolicyType policy, CFTypeRef value,
     @result     a bool which signifies if the policy removal succeeded, otherwise error is set.
 */
 CF_EXPORT
-bool ODRecordRemovePolicy(ODRecordRef record, ODPolicyType policy, CFErrorRef *error) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+bool ODRecordRemovePolicy(ODRecordRef record, ODPolicyType policy, CFErrorRef *error) __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_9, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "use ODRecordRemoveAccountPolicy");
+
+/*!
+    @function   ODRecordAddAccountPolicy
+    @abstract   This will add an account policy to the record for the specified category.
+    @discussion This will add an account policy to the record for the specified category.
+                The node-level and record-level policies will be combined and
+				evaluated as appropriate, ensuring the strongest policy is enforced.
+    @param      record an ODRecordRef to use.
+    @param      policy a dictionary containing the specific policy to be added.
+                The dictionary may contain the following keys:
+                    kODPolicyKeyIdentifier a required key identifying the policy.
+                    kODPolicyKeyParameters an optional key containing a dictionary of
+                        parameters that can be used for informational purposes or in
+                        the policy format string.
+                    kODPolicyKeyContent a required key specifying the policy,
+                        from which a predicate will be created for evaluating
+                        the policy.
+    @param      category a valid ODPolicyCategoryType to which the policy will be added.
+    @param      error is an optional CFErrorRef reference for error details.
+    @result     a bool which signifies if the policy addition succeeded, otherwise error is set.
+*/
+CF_EXPORT
+bool ODRecordAddAccountPolicy(ODRecordRef record, CFDictionaryRef policy, ODPolicyCategoryType category, CFErrorRef *error) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_NA);
+
+/*!
+    @function   ODRecordRemoveAccountPolicy
+    @abstract   This will remove an account policy from the record for the specified category.
+    @discussion This will remove an account policy from the record for the specified category.
+    @param      record an ODRecordRef to use.
+    @param      policy a dictionary containing the specific policy to be
+                removed, with the same format as described in ODRecordAddAccountPolicy.
+    @param      category a valid ODPolicyCategoryType from which the policy will be removed.
+    @param      error an optional CFErrorRef reference for error details.
+    @result     a bool which signifies if the policy removal succeeded, otherwise error is set.
+*/
+CF_EXPORT
+bool ODRecordRemoveAccountPolicy(ODRecordRef record, CFDictionaryRef policy, ODPolicyCategoryType category, CFErrorRef *error) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_NA);
+
+/*!
+    @function   ODRecordSetAccountPolicies
+    @abstract   This will set the policies for the record.
+    @discussion This will set the policies for the record, replacing any
+                existing policies.  All of the policies in the set will be
+                applied to the record when policies are evaluated.
+    @param      record an ODRecordRef to use.
+    @param      policies a dictionary containing all of the policies to be set
+                for the node.  The dictionary may contain the following keys:
+                    kODPolicyCategoryAuthentication an optional key with a value
+                        of an array of policy dictionaries that specify when
+                        authentications should be allowed.
+                    kODPolicyCategoryPasswordContent an optional key with a
+                        value of an array of policy dictionaries the specify the
+                        required content of passwords. 
+                    kODPolicyCategoryPasswordChange an optional key with a value
+                    of an array of policy dictionaries that specify when
+                    passwords are required to be changed.
+    @param      error an optional CFErrorRef reference for error details.
+    @result     a bool which signifies if the policy set succeeded, otherwise error is set.
+*/
+CF_EXPORT
+bool ODRecordSetAccountPolicies(ODRecordRef record, CFDictionaryRef policies, CFErrorRef *error) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_NA);
+
+/*!
+    @function   ODRecordCopyAccountPolicies
+    @abstract   This will copy any policies configured for the record.
+    @discussion This will copy any policies configured for the record.  Does not
+                copy any policies set for the node.
+    @param      record an ODRecordRef to use.
+    @param      error an optional CFErrorRef reference for error details.
+    @result     a CFDictionaryRef containing all currently set policies.  The
+                format of the dictionary is the same as described in
+                ODRecordSetAccountPolicies(). 
+*/
+CF_EXPORT CF_RETURNS_RETAINED
+CFDictionaryRef ODRecordCopyAccountPolicies(ODRecordRef record, CFErrorRef *error) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_NA);
+
+/*!
+    @function   ODRecordAuthenticationAllowed
+    @abstract   Determines if policies allow the account to authenticate.
+    @discussion Determines if policies allow the account to authenticate.
+                Authentication and password change policies are evaluated.
+                Record-level and node-level policies are evaluated in
+                combination, with record-level taking precedence over node-level
+                policies.  The failure of any single policy will deny the
+                authentication.
+ 
+                This check is only definitive at the time it was requested. The
+                policy or the environment could change before the authentication
+                is actually requested.  Errors from the authentication request
+                should be consulted.
+
+                It is not necessary to call this function when callingg
+                ODRecordVerifyPassword or ODRecordVerifyPasswordExtended
+                since those functions perform same policy evaluation.
+
+    @param      record an ODRecordRef to use.
+    @param      error an optional CFErrorRef reference for error details.
+    @result     a bool which signifies if the authentication is allowed, otherwise error is set.
+ */
+CF_EXPORT
+bool ODRecordAuthenticationAllowed(ODRecordRef record, CFErrorRef *error) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_NA);
+
+/*!
+    @function   ODRecordPasswordChangeAllowed
+    @abstract   Determines if policies allow the password change.
+    @discussion Determines if policies allow the password change.  Password
+                content policies are evaluated. Record-level and node-level
+                policies are evaluated in combination, with record-level taking
+                precedence over node-level policies.  The failure of any single
+                policy will deny the password change.
+ 
+                This check is only definitive at the time it was requested. The
+                policy or the environment could change before the password change
+                is actually requested.  Errors from the password change request
+                should be consulted.
+
+    @param      record an ODRecordRef to use.
+    @param      newPassword contains the password to be evaluated.
+    @param      error an optional CFErrorRef reference for error details.
+    @result     a bool which signifies if the password change is allowed, otherwise error is set.
+ */
+CF_EXPORT
+bool ODRecordPasswordChangeAllowed(ODRecordRef record, CFStringRef newPassword, CFErrorRef *error) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_NA);
+
+/*!
+    @function   ODRecordWillPasswordExpire
+    @abstract   Determines if the password will expire within the specified time.
+    @discussion Determines if the password will expire (i.e. need to be changed)
+                between now and the specified number of seconds in the future. 
+                Record-level and node-level policies are evaluated
+                together, with record-level taking precedence over node-level
+                policies.
+    @param      record an ODRecordRef to use.
+    @param      willExpireIn the number of seconds from the current time to be
+                used as the upper-bound for the password expiration period.
+    @result     a bool which signifies if the password will expire within the
+                specified time.
+ */
+CF_EXPORT
+bool ODRecordWillPasswordExpire(ODRecordRef record, uint64_t willExpireIn) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_NA);
+
+/*!
+    @function   ODRecordWillAuthenticationsExpire
+    @abstract   Determines if authentications will expire within the specified time.
+    @discussion Determines if authentications will expire (i.e. session and/or
+                account expires) between now and the specified number of seconds
+                in the future.  Record-level and node-level policies are evaluated
+                together, with record-level taking precedence over node-level
+                policies. 
+    @param      record an ODRecordRef to use.
+    @param      willExpireIn the number of seconds from the current time to be
+                used as the upper-bound for the authentication expiration period.
+    @result     a bool which signifies if authentications will expire within the
+                specified time.
+ */
+CF_EXPORT
+bool ODRecordWillAuthenticationsExpire(ODRecordRef record, uint64_t willExpireIn) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_NA);
+
+/*!
+    @function   ODRecordSecondsUntilPasswordExpires
+    @abstract   Determines how many seconds until the password expires.
+    @discussion Determines how many seconds until the password expires (i.e.
+                needs changing).  Password change policies are evaluated.
+                Record-level and node-level policies are evaluated in
+                combination, with record-level taking precedence over node-level
+                policies. 
+    @param      record an ODRecordRef to use.
+    @result     the number of seconds until the password expires.  If multiple
+                policies will cause the password to expire, the soonest
+                expiration time is returned.  If already expired,
+                kODExpirationTimeExpired is returned.  If there are no password
+                change policies, kODExpirationTimeNeverExpires is returned. 
+ */
+CF_EXPORT
+int64_t ODRecordSecondsUntilPasswordExpires(ODRecordRef record) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_NA);
+
+/*!
+    @function   ODRecordSecondsUntilAuthenticationsExpire
+    @abstract   Determines how many seconds until authentications expire.
+    @discussion Determines how many seconds until authentications expire (i.e.
+                session and/or account expires). Record-level and node-level 
+                policies are evaluated together, with record-level taking 
+                precedence over node-level policies
+    @param      record an ODRecordRef to use.
+    @result     the number of seconds until authentications expire.  If multiple
+                policies will cause authentications to expire, the soonest
+                expiration time is returned. If already expired,
+                kODExpirationTimeExpired is returned.  If there are no
+                authentication policies controlling expiration,
+                kODExpirationTimeNeverExpires is returned.  
+ */
+CF_EXPORT
+int64_t ODRecordSecondsUntilAuthenticationsExpire(ODRecordRef record) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_NA);
 
 __END_DECLS
 

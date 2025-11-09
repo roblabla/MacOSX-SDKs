@@ -296,6 +296,7 @@ At the top level, this property list is a dictionary, with the following keys:
 .It Sy gl-renderer Ta "Required OpenGL capabilities (string)"
 .It Sy cl-device Ta "Required OpenCL capabilities (string)"
 .It Sy single-graphics-device Ta "Must OpenGL and OpenCL requirements be met by a single device? (Boolean)"
+.It Sy sysctl-requirements Ta "Additional required hardware properties (string)"
 .It Sy home Ta "Should installation be allowed in user home directory? (Boolean)"
 .El
 .Pp
@@ -390,6 +391,33 @@ The
 requirement is ignored on versions of Mac OS X before 10.7. For this reason, specifying
 .Sy cl-device
 will cause the minimum system version to be raised to 10.7. This may override the values set via the
+.Sy os
+key.
+.It
+The
+.Sy sysctl-requirements
+key specifies a predicate, against which additional hardware requirements will be checked. The predicate
+uses the
+.Xr sysctl 2
+facility to obtain hardware properties for the system in use. Note that only a subset of
+.Xr sysctl 2
+variables are available, including most of the hw.* tree and kern.ostype, kern.osrelease, kern.osrevision,
+and kern.version from the kern.* tree. For example:
+.Bd -literal
+   hw.physicalcpu > 1
+.Ed
+.Pp
+Or:
+.Bd -literal
+   ( hw.optional.aes == 1 AND hw.memsize >= 4294967296 )
+.Ed
+.Pp
+.Em NOTE:
+The
+.Sy sysctl-requirements
+predicate is ignored on versions of OS X before 10.10. For this reason, specifying
+.Sy sysctl-requirements
+will cause the minimum system version to be raised to 10.10. This may override the values set via the
 .Sy os
 key.
 .It

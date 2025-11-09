@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2010 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2014 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -80,7 +80,7 @@
 #include <sys/queue.h>		/* XXX needed for user builds */
 #include <Availability.h>
 
-typedef struct fsid { int32_t val[2]; } fsid_t;	/* file system id type */
+#include <sys/_types/_fsid_t.h> /* file system id type */
 
 /*
  * file system statistics
@@ -266,7 +266,6 @@ struct vfsstatfs {
 #define VFS_MAXTYPENUM	1	/* int: highest defined filesystem type */
 #define VFS_CONF	2	/* struct: vfsconf for filesystem given
 				   as next argument */
-#define VFS_SET_PACKAGE_EXTS 3	/* set package extension list */
 
 /*
  * Flags for various system call interfaces.
@@ -320,6 +319,7 @@ struct vfsidctl {
 #define VFS_CTL_SADDR	0x00010007	/* get server address */
 #define VFS_CTL_DISC    0x00010008	/* server disconnected */
 #define VFS_CTL_SERVERINFO  0x00010009  /* information about fs server */
+#define VFS_CTL_NSTATUS 0x0001000A	/* netfs mount status */
 
 struct vfsquery {
 	u_int32_t	vq_flags;
@@ -329,6 +329,17 @@ struct vfsquery {
 struct vfs_server {
      int32_t  vs_minutes;                       /* minutes until server goes down. */
      u_int8_t vs_server_name[MAXHOSTNAMELEN*3]; /* UTF8 server name to display (null terminated) */
+};
+
+/*
+ * NetFS mount status - returned by VFS_CTL_NSTATUS
+ */
+struct netfs_status {
+	u_int32_t	ns_status;		// Current status of mount (vfsquery flags)
+	char		ns_mountopts[512];	// Significant mount options
+	uint32_t	ns_waittime;		// Time waiting for reply (sec)
+	uint32_t	ns_threadcount;		// Number of threads blocked on network calls
+	uint64_t	ns_threadids[0];	// Thread IDs of those blocked threads
 };
 
 /* vfsquery flags */

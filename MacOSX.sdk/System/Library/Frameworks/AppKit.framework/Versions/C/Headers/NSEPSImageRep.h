@@ -1,7 +1,7 @@
 /*
 	NSEPSImageRep.h
 	Application Kit
-	Copyright (c) 1994-2013, Apple Inc.
+	Copyright (c) 1994-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -16,14 +16,15 @@
     NSPDFImageRep* _pdfImageRep;
 }
 
-+ (id)imageRepWithData:(NSData *)epsData;	/* Convenience of initWithData: */
-- (id)initWithData:(NSData *)epsData;
++ (instancetype)imageRepWithData:(NSData *)epsData;	/* Convenience of initWithData: */
+- (instancetype)initWithData:(NSData *)epsData;
 
-- (void)prepareGState;
+/* prepareGState is unused */
+- (void)prepareGState NS_DEPRECATED_MAC(10_0, 10_10);
 
-- (NSData *)EPSRepresentation;
+@property (readonly, copy) NSData *EPSRepresentation;
 
-- (NSRect)boundingBox;
+@property (readonly) NSRect boundingBox;
 
 @end
 

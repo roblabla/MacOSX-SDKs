@@ -1,7 +1,7 @@
 /*
 	NSGradient.h
 	Application Kit
-	Copyright (c) 2006-2013, Apple Inc.
+	Copyright (c) 2006-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -60,12 +60,12 @@ NS_CLASS_AVAILABLE(10_5, NA)
 
 /* Initializes a gradient with starting color at location 0.0 and ending color at location 1.0  The color space returned by [NSColorSpace genericRGBColorSpace] is used.
 */
-- (id)initWithStartingColor:(NSColor *)startingColor endingColor:(NSColor *)endingColor;
+- (instancetype)initWithStartingColor:(NSColor *)startingColor endingColor:(NSColor *)endingColor;
 
 
 /* Initializes a gradient with the first color in the array at 0.0, the last color in the array at 1.0, and intervening colors at equal intervals in between. The color space returned by [NSColorSpace genericRGBColorSpace] is used.
 */
-- (id)initWithColors:(NSArray *)colorArray;
+- (instancetype)initWithColors:(NSArray *)colorArray;
 
 
 /* This initializer takes the first color, then the first location as a CGFloat, then an alternating list of colors and CGFloats, terminated by nil.  If no color is provided for 0.0 or 1.0, the created color gradient will use the color provided at the locations closest to 0.0 and 1.0 for those values.  The color space returned by [NSColorSpace genericRGBColorSpace] is used.
@@ -74,12 +74,12 @@ NS_CLASS_AVAILABLE(10_5, NA)
     NSGradient *gradient = [[NSGradient alloc] initWithColorsAndLocations: [NSColor blackColor], 0.0, [NSColor blueColor], 0.33, [NSColor cyanColor], 0.45, [NSColor orangeColor], 0.72, [NSColor redColor], 1.0, nil];
 
 */
-- (id)initWithColorsAndLocations:(NSColor *)firstColor, ... NS_REQUIRES_NIL_TERMINATION;
+- (instancetype)initWithColorsAndLocations:(NSColor *)firstColor, ... NS_REQUIRES_NIL_TERMINATION;
 
 
 /* Initializes a gradient by pairing the colors provided in the color array with the locations provided in the locations array.    Each location should be a CGFloat between 0.0 and 1.0.  The color array and location array should not be empty, and should contain the same number of items.  If no color is provided for 0.0 or 1.0, the created color gradient will use the color provided at the locations closest to 0.0 and 1.0 for those values.  This is the designated initializer.
 */
-- (id)initWithColors:(NSArray *)colorArray atLocations:(const CGFloat *)locations colorSpace:(NSColorSpace *)colorSpace;
+- (instancetype)initWithColors:(NSArray *)colorArray atLocations:(const CGFloat *)locations colorSpace:(NSColorSpace *)colorSpace;
 
 
 /* DRAWING LINEAR GRADIENTS */
@@ -126,11 +126,11 @@ NS_CLASS_AVAILABLE(10_5, NA)
 */
 
 /* Returns the color space of the gradient */
-- (NSColorSpace *)colorSpace;
+@property (readonly, strong) NSColorSpace *colorSpace;
 
 
 /* The number of color stops in the color gradient */
-- (NSInteger)numberOfColorStops;
+@property (readonly) NSInteger numberOfColorStops;
 
 
 /* Returns the color and location at a particular index in the color gradient */

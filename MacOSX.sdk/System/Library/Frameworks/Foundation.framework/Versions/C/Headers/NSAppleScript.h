@@ -1,6 +1,6 @@
 /*
 	NSAppleScript.h
-	Copyright (c) 2002-2013, Apple Inc. All rights reserved.
+	Copyright (c) 2002-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -24,16 +24,16 @@ FOUNDATION_EXPORT NSString *const NSAppleScriptErrorRange NS_AVAILABLE(10_2, NA)
 }
 
 // Given a URL that locates a script, in either text or compiled form, initialize.  Return nil and a pointer to an error information dictionary if an error occurs.  This is a designated initializer for this class.
-- (id)initWithContentsOfURL:(NSURL *)url error:(NSDictionary **)errorInfo;
+- (instancetype)initWithContentsOfURL:(NSURL *)url error:(NSDictionary **)errorInfo NS_DESIGNATED_INITIALIZER;
 
 // Given a string containing the AppleScript source code of a script, initialize.  Return nil if an error occurs.  This is also a designated initializer for this class.
-- (id)initWithSource:(NSString *)source;
+- (instancetype)initWithSource:(NSString *)source NS_DESIGNATED_INITIALIZER;
 
 // Return the source code of the script if it is available, nil otherwise.  It is possible for an NSAppleScript that has been instantiated with -initWithContentsOfURL:error: to be a script for which the source code is not available, but is nonetheless executable.
-- (NSString *)source;
+@property (readonly, copy) NSString *source;
 
 // Return yes if the script is already compiled, no otherwise.
-- (BOOL)isCompiled;
+@property (readonly, getter=isCompiled) BOOL compiled;
 
 // Compile the script, if it is not already compiled.  Return yes for success or if the script was already compiled, no and a pointer to an error information dictionary otherwise.
 - (BOOL)compileAndReturnError:(NSDictionary **)errorInfo;

@@ -1,6 +1,6 @@
 /* CoreAnimation - CAEmitterCell.h
 
-   Copyright (c) 2007-2012 Apple Inc.
+   Copyright (c) 2007-2014, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CALayer.h>
@@ -13,7 +13,7 @@
   uint32_t _flags;
 }
 
-+ (id)emitterCell;
++ (instancetype)emitterCell;
 
 /* Emitter cells implement the same property model as defined by CALayer.
  * See CALayer.h for more details. */
@@ -95,7 +95,7 @@
 /* The cell contents, typically a CGImageRef. Defaults to nil.
  * Animatable. */
 
-@property(retain) id contents;
+@property(strong) id contents;
 
 /* The sub-rectangle of the contents image that will be drawn. See
  * CALayer.h for more details. Defaults to the unit rectangle [0 0 1 1].

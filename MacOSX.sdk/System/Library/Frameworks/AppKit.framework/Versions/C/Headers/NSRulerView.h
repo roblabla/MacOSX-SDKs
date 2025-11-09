@@ -1,7 +1,7 @@
 /*
         NSRulerView.h
         Application Kit
-        Copyright (c) 1994-2013, Apple Inc.
+        Copyright (c) 1994-2014, Apple Inc.
         All rights reserved.
 */
 
@@ -10,11 +10,10 @@
 @class NSScrollView, NSRulerMarker, NSMutableArray;
 
 /* Values for NSRulerOrientation */
-enum {
+typedef NS_ENUM(NSUInteger, NSRulerOrientation) {
     NSHorizontalRuler,
     NSVerticalRuler
 };
-typedef NSUInteger NSRulerOrientation;
 
 @interface NSRulerView : NSView {
   /*All instance variables are private*/
@@ -52,66 +51,56 @@ typedef NSUInteger NSRulerOrientation;
 
 /**************************** Initialization ****************************/
 
-- (id)initWithScrollView:(NSScrollView *)scrollView orientation:(NSRulerOrientation)orientation;
+- (instancetype)initWithScrollView:(NSScrollView *)scrollView orientation:(NSRulerOrientation)orientation;
     // The designated initializer.  A ruler's size is controlled by its NSScrollView. initWithFrame: is overridden to call this.  The view is initialized with an unrealistically small default frame which will be reset in due time by the NSScrollView.
 
 /**************************** Basic setup ****************************/
 
-- (void)setScrollView:(NSScrollView *)scrollView;
-- (NSScrollView *)scrollView;
+@property (assign) NSScrollView *scrollView;
     // A ruler uses its scrollView to finds it's document view to see whether it should be flipped.  The set method is generally called only by the scroll view itself.  You should not have to set this.
 
-- (void)setOrientation:(NSRulerOrientation)orientation;
-- (NSRulerOrientation)orientation;
+@property NSRulerOrientation orientation;
     // Either NSHorizontalRuler or NSVerticalRuler.  The set method is generally called by the ruler's scroll view.  You should not have to set this.
 
 
 /**************************** Ruler geometry ****************************/
 
-- (CGFloat)baselineLocation;
+@property (readonly) CGFloat baselineLocation;
     // Returns the location of the baseline.  The location is a y position for horizontal rulers and an x position for vertical ones.  The value is based on the sizes of the various areas of the ruler, some of which can be set below.
 
-- (CGFloat)requiredThickness;
+@property (readonly) CGFloat requiredThickness;
     // The required height for a horizontal ruler or the required width for a vertical ruler.  Used by the scrollview when tiling.  The value is based on the sizes of the various areas of the ruler, some of which can be set below.
 
-- (void)setRuleThickness:(CGFloat)thickness;
-- (CGFloat)ruleThickness;
+@property CGFloat ruleThickness;
     // The rule size is the height of the area used to draw the ruler hash-marks in a horizontal ruler or the width of that area in a vertical ruler.  This value will be interpretted in the coordinate system of the ruler's superview (like the ruler's frame).
 
-- (void)setReservedThicknessForMarkers:(CGFloat)thickness;
-- (CGFloat)reservedThicknessForMarkers;
+@property CGFloat reservedThicknessForMarkers;
     // This indicates to the ruler how much room it should leave for objects which sit above or to the left of the rule (such as tab stops, margins, etc...).  Default is 15.0.  If you expect that no view in your document view will ever put objects on the ruler, you can set this to 0.0.  If objects are ever set on the ruler, and not enough space was reserved for them, the ruler grows itself and retiles the scroll view.
 
-- (void)setReservedThicknessForAccessoryView:(CGFloat)thickness;
-- (CGFloat)reservedThicknessForAccessoryView;
+@property CGFloat reservedThicknessForAccessoryView;
     // This indicates to the ruler how much room it should leave for the accessory view.  Default is 0.0.  If you expect that a view in your document view will put an accessory view in the ruler, you can set this to make room fror it from the start.  If an accessory view is ever set for the ruler, and space was not reserved for it or it is bigger than the space reserved, the ruler grows the reserved space to be big enough and retiles the scroll view.  If you know that several different accessory views will be used it is best to set this to the height of the tallest one for horizontal rulers or the width of the widest one for vertical rulers.  If the reserved thickness is larger than an actual accessory view set into the ruler, the accessory view is centered in the thickness.
 
 /**************************** Rule configuration ****************************/
 
-- (void)setMeasurementUnits:(NSString *)unitName;
-- (NSString *)measurementUnits;
+@property (copy) NSString *measurementUnits;
     // The units of the ruler start out with the user's preferred measurement.  They can be changed if desired.  The units set must be registered with the ruler factory.  By default Inches, Centimeters, Picas, and Points are supported.
 
-- (void)setOriginOffset:(CGFloat)offset;
-- (CGFloat)originOffset;
+@property CGFloat originOffset;
     // How far to offset the ruler's zero hashmark (and label) from the document view's bounds origin.
 
 /**************************** Client view setup ****************************/
 
-- (void)setClientView:(NSView *)client;
-- (NSView *)clientView;
+@property (assign) NSView *clientView;
 
-- (void)setMarkers:(NSArray *)markers;
 - (void)addMarker:(NSRulerMarker *)marker;
 - (void)removeMarker:(NSRulerMarker *)marker;
-- (NSArray *)markers;
+@property (copy) NSArray *markers;
     // Ruler objects sit on the ruler at a specific location.  They can be manipulatable by the user, and if they are manipulated the current client is informed of the change.  Once a bunch of objects has been set, objects can be added or removed individually.
 
 - (BOOL)trackMarker:(NSRulerMarker *)marker withMouseEvent:(NSEvent *)event;
     // Given a ruler object and a mouse event (either MouseDown or MouseDragged) this will take over the tracking of the mouse until MouseUp.  While tracking it will snap to the baseline of the ruler when it gets within a certain distance.  At that point it becomes stuck to the baseline (this may happen immediately) and won't come off below (or to the right of) the ruler.  It may still be dragged off the baseline upward (or leftward) if its removable.  It is strongly recommended that any ruler object that acan be added to the ruler should be removable as well and it must be movable.  When the mouse goes up, if the object is currently stuck to the baseline it is added to the ruler (and the client object is notified), if its not stuck on the baseline, it is not added.
 
-- (void)setAccessoryView:(NSView *)accessory;
-- (NSView *)accessoryView;
+@property (strong) NSView *accessoryView;
     // A rulers accessory view is drawn below or to the right of the rule.  It can contain arbitrary controls.
 
 - (void)moveRulerlineFromLocation:(CGFloat)oldLocation toLocation:(CGFloat)newLocation;
@@ -130,7 +119,7 @@ typedef NSUInteger NSRulerOrientation;
 
 /**************************** Key overrides ****************************/
 
-- (BOOL)isFlipped;
+@property (getter=isFlipped, readonly) BOOL flipped;
     // A vertical ruler mimics the flippedness of the documentView of it's scrollView.  A horizontal ruler is always flipped (for ease of drawing).
 
 @end

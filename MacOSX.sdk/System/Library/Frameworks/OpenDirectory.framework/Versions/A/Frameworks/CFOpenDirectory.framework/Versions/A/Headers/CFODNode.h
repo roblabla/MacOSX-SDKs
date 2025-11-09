@@ -233,17 +233,16 @@ ODRecordRef ODNodeCreateRecord(ODNodeRef node, ODRecordType recordType, CFString
                 kODAttributeTypeAllAttributes will fetch all attributes up front.  If just standard attributes are needed, then
                 kODAttributeTypeStandardOnly can be passed.
     @param      error an optional CFErrorRef reference for error details
-    @result     returns a valid ODRecordRef.  If the record copy fails, outError can be checked for details.
+    @result     returns a valid ODRecordRef.  If the record copy fails, the error can be checked for details.
+                If the record is not found, will return NULL with a NULL error.
 */
 CF_EXPORT
 ODRecordRef ODNodeCopyRecord(ODNodeRef node, ODRecordType recordType, CFStringRef recordName, CFTypeRef attributes, CFErrorRef *error) __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
 
 /*!
     @function   ODNodeCustomCall
-    @abstract   This will send a custom call to a node along with the inSendData and response in outResponseData
-    @discussion This will send a custom call to a node along with the inSendData and response in outResponseData.
-                The outResponseData should be a CFMutableDataRef with a data object set to the size of the expected
-                response.  If the responseData is not large enough for the custom call, unexpected results may occurr.
+    @abstract   Sends a custom call to a node.
+    @discussion This will send a custom call to a node along with the specified data, returning the result.
     @param      node an ODNodeRef to use
     @param      customCode the custom code to be sent to the node
     @param      data a data blob expected by the custom code, can be NULL of no send data
@@ -291,7 +290,7 @@ ODNodeCustomFunction(ODNodeRef node, CFStringRef function, CFTypeRef payload, CF
     @result     a CFDictionaryRef containing all currently set policies
 */
 CF_EXPORT
-CFDictionaryRef ODNodeCopyPolicies(ODNodeRef node, CFErrorRef *error) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+CFDictionaryRef ODNodeCopyPolicies(ODNodeRef node, CFErrorRef *error) __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_9, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "use ODNodeCopyAccountPolicies");
 
 /*!
     @function   ODNodeCopySupportedPolicies
@@ -304,7 +303,7 @@ CFDictionaryRef ODNodeCopyPolicies(ODNodeRef node, CFErrorRef *error) __OSX_AVAI
     @result     a CFDictionaryRef containing all currently supported policies.  The values will be the maximum value allowed.
 */
 CF_EXPORT
-CFDictionaryRef ODNodeCopySupportedPolicies(ODNodeRef node, CFErrorRef *error) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+CFDictionaryRef ODNodeCopySupportedPolicies(ODNodeRef node, CFErrorRef *error) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_9, __MAC_10_10, __IPHONE_NA, __IPHONE_NA);
 
 /*!
     @function   ODNodeSetPolicies
@@ -316,7 +315,7 @@ CFDictionaryRef ODNodeCopySupportedPolicies(ODNodeRef node, CFErrorRef *error) _
     @result     a bool which signifies if the policy set succeeded, otherwise error is set. 
 */
 CF_EXPORT
-bool ODNodeSetPolicies(ODNodeRef node, CFDictionaryRef policies, CFErrorRef *error) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+bool ODNodeSetPolicies(ODNodeRef node, CFDictionaryRef policies, CFErrorRef *error) __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_9, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "use ODNodeSetAccountPolicies");
 
 /*!
     @function   ODNodeSetPolicy
@@ -329,7 +328,7 @@ bool ODNodeSetPolicies(ODNodeRef node, CFDictionaryRef policies, CFErrorRef *err
     @result     a bool which signifies if the policy set succeeded, otherwise error is set.
 */
 CF_EXPORT
-bool ODNodeSetPolicy(ODNodeRef node, ODPolicyType policyType, CFTypeRef value, CFErrorRef *error) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+bool ODNodeSetPolicy(ODNodeRef node, ODPolicyType policyType, CFTypeRef value, CFErrorRef *error) __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_9, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "use ODNodeAddAccountPolicy");
 
 /*!
     @function   ODNodeRemovePolicy
@@ -341,7 +340,102 @@ bool ODNodeSetPolicy(ODNodeRef node, ODPolicyType policyType, CFTypeRef value, C
     @result     a bool which signifies if the policy removal succeeded, otherwise error is set.
 */
 CF_EXPORT
-bool ODNodeRemovePolicy(ODNodeRef node, ODPolicyType policyType, CFErrorRef *error) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+bool ODNodeRemovePolicy(ODNodeRef node, ODPolicyType policyType, CFErrorRef *error) __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_9, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "use ODNodeRemoveAccountPolicy");
+
+/*!
+    @function   ODNodeAddAccountPolicy
+    @abstract   This will add an account policy to the node for the specified category.
+    @discussion This will add an account policy to the node for the specified category.
+                The specified policy will be applied to all users in the
+                specified node when policies are evaluated.
+    @param      node an ODNodeRef to use.
+    @param      policy a dictionary containing the specific policy to be added.
+                The dictionary may contain the following keys:
+                    kODPolicyKeyIdentifier a required key identifying the policy.
+                    kODPolicyKeyParameters an optional key containing a dictionary of
+                        parameters that can be used for informational purposes or in
+                        the policy format string.
+                    kODPolicyKeyContent a required key specifying the policy,
+                        from which a predicate will be created for evaluating
+                        the policy.
+    @param      category a valid ODPolicyCategoryType to which the specified policy will be added.
+    @param      error an optional CFErrorRef reference for error details.
+    @result     a bool which signifies if the policy addition succeeded, otherwise error is set.
+*/
+CF_EXPORT
+bool ODNodeAddAccountPolicy(ODNodeRef node, CFDictionaryRef policy, ODPolicyCategoryType category, CFErrorRef *error) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_NA);
+
+/*!
+    @function   ODNodeRemoveAccountPolicy
+    @abstract   This will remove an account policy from the node for the specified category.
+    @discussion This will remove an account policy from the node for the specified category.
+    @param      node an ODNodeRef to use.
+    @param      policy a dictionary containing the specific policy to be
+                removed, with the same format as described in ODNodeAddAccountPolicy.
+    @param      category a valid ODPolicyCategoryType from which the specified policy will be removed.
+    @param      error an optional CFErrorRef reference for error details.
+    @result     a bool which signifies if the policy removal succeeded, otherwise error is set.
+*/
+CF_EXPORT
+bool ODNodeRemoveAccountPolicy(ODNodeRef node, CFDictionaryRef policy, ODPolicyCategoryType category, CFErrorRef *error) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_NA);
+
+/*!
+    @function   ODNodeSetAccountPolicies
+    @abstract   This will set the policies for the node.
+    @discussion This will set the policies for the node, replacing any existing
+                policies.
+    @param      node an ODNodeRef to use.
+    @param      policies a dictionary containing all of the policies to be set
+                for the node.  The dictionary may contain the following keys:
+                    kODPolicyCategoryAuthentication an optional key with a value
+                        of an array of policy dictionaries that specify when
+                        authentications should be allowed.
+                    kODPolicyCategoryPasswordContent an optional key with a
+                        value of an array of policy dictionaries the specify the
+                        required content of passwords. 
+                    kODPolicyCategoryPasswordChange an optional key with a value
+                    of an array of policy dictionaries that specify when
+                    passwords are required to be changed.
+    @param      error an optional CFErrorRef reference for error details.
+    @result     a bool which signifies if the policy set succeeded, otherwise error is set.
+*/
+CF_EXPORT
+bool ODNodeSetAccountPolicies(ODNodeRef node, CFDictionaryRef policies, CFErrorRef *error) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_NA);
+
+/*!
+    @function   ODNodeCopyAccountPolicies
+    @abstract   This will copy any policies configured for the node.
+    @discussion This will copy any policies configured for the node.
+    @param      node an ODNodeRef to use.
+    @param      error an optional CFErrorRef reference for error details.
+    @result     a CFDictionaryRef containing all currently set policies.  The
+                format of the dictionary is the same as described in
+                ODNodeSetAccountPolicies(). 
+*/
+CF_EXPORT CF_RETURNS_RETAINED
+CFDictionaryRef ODNodeCopyAccountPolicies(ODNodeRef node, CFErrorRef *error) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_NA);
+
+/*!
+    @function   ODNodePasswordContentCheck
+    @abstract   Validates a password against the node's password content policies.
+    @discussion Validates a password against the node's password content policies.
+                The node's password content policies will be evaluated to
+                determine if the password is acceptable.  May be used prior to
+                creating the record.
+
+                This check is only definitive at the time it was requested. The
+                policy or the environment could change before the password change
+                is actually requested.  Errors from the password change request
+                should be consulted.
+
+    @param      node an ODNodeRef to use.
+    @param      password the password to be evaluated against the content policies.
+    @param      recordName the name of the record.
+    @param      error an optional CFErrorRef reference for error details.
+    @result     a bool which signifies if the password passes all content policies, otherwise error is set.
+ */
+CF_EXPORT
+bool ODNodePasswordContentCheck(ODNodeRef node, CFStringRef password, CFStringRef recordName, CFErrorRef *error) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_NA);
 
 __END_DECLS
 

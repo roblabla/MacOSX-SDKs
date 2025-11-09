@@ -26,7 +26,7 @@ typedef function_table_entry   *function_table_t;
 #endif /* AUTOTEST */
 
 #ifndef	mach_host_MSG_COUNT
-#define	mach_host_MSG_COUNT	22
+#define	mach_host_MSG_COUNT	25
 #endif	/* mach_host_MSG_COUNT */
 
 #include <mach/std_types.h>
@@ -290,6 +290,50 @@ kern_return_t mach_zone_info
 	mach_msg_type_number_t *infoCnt
 );
 
+/* Routine host_create_mach_voucher */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+kern_return_t host_create_mach_voucher
+(
+	host_t host,
+	mach_voucher_attr_raw_recipe_array_t recipes,
+	mach_msg_type_number_t recipesCnt,
+	ipc_voucher_t *voucher
+);
+
+/* Routine host_register_mach_voucher_attr_manager */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+kern_return_t host_register_mach_voucher_attr_manager
+(
+	host_t host,
+	mach_voucher_attr_manager_t attr_manager,
+	mach_voucher_attr_value_handle_t default_value,
+	mach_voucher_attr_key_t *new_key,
+	ipc_voucher_attr_control_t *new_attr_control
+);
+
+/* Routine host_register_well_known_mach_voucher_attr_manager */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+kern_return_t host_register_well_known_mach_voucher_attr_manager
+(
+	host_t host,
+	mach_voucher_attr_manager_t attr_manager,
+	mach_voucher_attr_value_handle_t default_value,
+	mach_voucher_attr_key_t key,
+	ipc_voucher_attr_control_t *new_attr_control
+);
+
 __END_DECLS
 
 /********************** Caution **************************/
@@ -522,6 +566,52 @@ __END_DECLS
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		mach_msg_type_number_t recipesCnt;
+		uint8_t recipes[5120];
+	} __Request__host_create_mach_voucher_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t attr_manager;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		mach_voucher_attr_value_handle_t default_value;
+	} __Request__host_register_mach_voucher_attr_manager_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t attr_manager;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		mach_voucher_attr_value_handle_t default_value;
+		mach_voucher_attr_key_t key;
+	} __Request__host_register_well_known_mach_voucher_attr_manager_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Request__mach_host_subsystem__defined */
 
 /* union of all requests */
@@ -547,6 +637,9 @@ union __RequestUnion__mach_host_subsystem {
 	__Request__host_lockgroup_info_t Request_host_lockgroup_info;
 	__Request__host_statistics64_t Request_host_statistics64;
 	__Request__mach_zone_info_t Request_mach_zone_info;
+	__Request__host_create_mach_voucher_t Request_host_create_mach_voucher;
+	__Request__host_register_mach_voucher_attr_manager_t Request_host_register_mach_voucher_attr_manager;
+	__Request__host_register_well_known_mach_voucher_attr_manager_t Request_host_register_well_known_mach_voucher_attr_manager;
 };
 #endif /* !__RequestUnion__mach_host_subsystem__defined */
 /* typedefs for all replies */
@@ -821,6 +914,50 @@ union __RequestUnion__mach_host_subsystem {
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t voucher;
+		/* end of the kernel processed data */
+	} __Reply__host_create_mach_voucher_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t new_attr_control;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		mach_voucher_attr_key_t new_key;
+	} __Reply__host_register_mach_voucher_attr_manager_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t new_attr_control;
+		/* end of the kernel processed data */
+	} __Reply__host_register_well_known_mach_voucher_attr_manager_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Reply__mach_host_subsystem__defined */
 
 /* union of all replies */
@@ -846,6 +983,9 @@ union __ReplyUnion__mach_host_subsystem {
 	__Reply__host_lockgroup_info_t Reply_host_lockgroup_info;
 	__Reply__host_statistics64_t Reply_host_statistics64;
 	__Reply__mach_zone_info_t Reply_mach_zone_info;
+	__Reply__host_create_mach_voucher_t Reply_host_create_mach_voucher;
+	__Reply__host_register_mach_voucher_attr_manager_t Reply_host_register_mach_voucher_attr_manager;
+	__Reply__host_register_well_known_mach_voucher_attr_manager_t Reply_host_register_well_known_mach_voucher_attr_manager;
 };
 #endif /* !__RequestUnion__mach_host_subsystem__defined */
 
@@ -868,7 +1008,10 @@ union __ReplyUnion__mach_host_subsystem {
     { "host_request_notification", 217 },\
     { "host_lockgroup_info", 218 },\
     { "host_statistics64", 219 },\
-    { "mach_zone_info", 220 }
+    { "mach_zone_info", 220 },\
+    { "host_create_mach_voucher", 222 },\
+    { "host_register_mach_voucher_attr_manager", 223 },\
+    { "host_register_well_known_mach_voucher_attr_manager", 224 }
 #endif
 
 #ifdef __AfterMigUserHeader

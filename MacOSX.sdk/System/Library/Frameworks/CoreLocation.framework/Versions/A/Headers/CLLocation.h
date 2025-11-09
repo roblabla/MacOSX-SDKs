@@ -101,7 +101,7 @@ extern const CLLocationAccuracy kCLLocationAccuracyThreeKilometers;
  *  Discussion:
  *  	Used to specify the maximum CLLocationDistance
  */
-extern const CLLocationDistance CLLocationDistanceMax;
+extern const CLLocationDistance CLLocationDistanceMax __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_6_0);
 
 /*
  *  CLTimeIntervalMax
@@ -109,7 +109,7 @@ extern const CLLocationDistance CLLocationDistanceMax;
  *  Discussion:
  *  	Used to specify the maximum NSTimeInterval
  */
-extern const NSTimeInterval CLTimeIntervalMax;
+extern const NSTimeInterval CLTimeIntervalMax __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_6_0);
 
 /*
  *  kCLLocationCoordinate2DInvalid
@@ -150,7 +150,7 @@ CLLocationCoordinate2D CLLocationCoordinate2DMake(CLLocationDegrees latitude, CL
  *    Represents a geographical coordinate along with accuracy and timestamp information.
  */
 NS_CLASS_AVAILABLE(10_6, 2_0)
-@interface CLLocation : NSObject <NSCopying, NSCoding>
+@interface CLLocation : NSObject <NSCopying, NSSecureCoding>
 {
 @private
 	id _internal;
@@ -162,7 +162,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *  Discussion:
  *    Initialize with the specified latitude and longitude.
  */
-- (id)initWithLatitude:(CLLocationDegrees)latitude
+- (instancetype)initWithLatitude:(CLLocationDegrees)latitude
 	longitude:(CLLocationDegrees)longitude;
 
 /*
@@ -171,7 +171,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *  Discussion:
  *    Initialize with the specified parameters.
  */
-- (id)initWithCoordinate:(CLLocationCoordinate2D)coordinate
+- (instancetype)initWithCoordinate:(CLLocationCoordinate2D)coordinate
 	altitude:(CLLocationDistance)altitude
 	horizontalAccuracy:(CLLocationAccuracy)hAccuracy
 	verticalAccuracy:(CLLocationAccuracy)vAccuracy
@@ -183,7 +183,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *  Discussion:
  *    Initialize with the specified parameters.
  */
-- (id)initWithCoordinate:(CLLocationCoordinate2D)coordinate
+- (instancetype)initWithCoordinate:(CLLocationCoordinate2D)coordinate
     altitude:(CLLocationDistance)altitude
     horizontalAccuracy:(CLLocationAccuracy)hAccuracy
     verticalAccuracy:(CLLocationAccuracy)vAccuracy
@@ -248,7 +248,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *  Discussion:
  *    Returns the timestamp when this location was determined.
  */
-@property(readonly, nonatomic) NSDate *timestamp;
+@property(readonly, nonatomic, copy) NSDate *timestamp;
 
 /*
  *  description
@@ -256,7 +256,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *  Discussion:
  *    Returns a string representation of the location.
  */
-- (NSString *)description;
+@property (nonatomic, readonly, copy) NSString *description;
 
 /*
  *  getDistanceFrom:

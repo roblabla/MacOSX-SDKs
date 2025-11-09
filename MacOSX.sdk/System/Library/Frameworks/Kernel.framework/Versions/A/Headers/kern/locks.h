@@ -45,8 +45,9 @@ typedef	unsigned int		lck_sleep_action_t;
 #define	LCK_SLEEP_SHARED	0x02	/* Reclaim the lock in shared mode (RW only) */
 #define	LCK_SLEEP_EXCLUSIVE	0x04	/* Reclaim the lock in exclusive mode (RW only) */
 #define	LCK_SLEEP_SPIN		0x08	/* Reclaim the lock in spin mode (mutex only) */
+#define	LCK_SLEEP_PROMOTED_PRI	0x10	/* Sleep at a promoted priority */
 
-#define	LCK_SLEEP_MASK		0x0f	/* Valid actions */
+#define	LCK_SLEEP_MASK		0x1f	/* Valid actions */
 
 typedef struct __lck_grp__ lck_grp_t;
 

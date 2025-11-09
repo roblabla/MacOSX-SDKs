@@ -6,13 +6,14 @@
  */
 
 #import <Foundation/NSArray.h>
+@class NSFetchRequest;
+@class NSAsynchronousFetchResult;
 
-enum {
+typedef NS_ENUM(NSUInteger, NSPersistentStoreRequestType) {
     NSFetchRequestType = 1,
-    NSSaveRequestType, 
+    NSSaveRequestType,
+    NSBatchUpdateRequestType = 6
 };
-
-typedef NSUInteger NSPersistentStoreRequestType;
 
 NS_CLASS_AVAILABLE(10_7, 5_0)
 @interface NSPersistentStoreRequest : NSObject <NSCopying> {
@@ -21,11 +22,27 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
 }
 
 // Stores this request should be sent to.
-- (NSArray*)affectedStores;
-- (void)setAffectedStores:(NSArray*)stores;
+@property (nonatomic, strong) NSArray *affectedStores;
 
 // The type of the request.
-- (NSPersistentStoreRequestType)requestType;
+@property (readonly) NSPersistentStoreRequestType requestType;
 
 @end
 
+typedef void (^NSPersistentStoreAsynchronousFetchResultCompletionBlock)(NSAsynchronousFetchResult *result);
+
+
+NS_CLASS_AVAILABLE(10_10,8_0)
+@interface NSAsynchronousFetchRequest : NSPersistentStoreRequest {
+@private
+    NSFetchRequest* _fetchRequest;
+    id _requestCompletionBlock;
+    NSInteger _estimatedResultCount;
+}
+@property (strong, readonly) NSFetchRequest* fetchRequest;
+@property (strong, readonly) NSPersistentStoreAsynchronousFetchResultCompletionBlock completionBlock;
+@property (nonatomic) NSInteger estimatedResultCount;
+
+- (instancetype)initWithFetchRequest:(NSFetchRequest*)request completionBlock:(NSPersistentStoreAsynchronousFetchResultCompletionBlock)blk;
+
+@end

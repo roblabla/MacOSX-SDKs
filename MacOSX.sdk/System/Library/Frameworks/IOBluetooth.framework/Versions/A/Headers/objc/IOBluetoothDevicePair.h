@@ -57,7 +57,7 @@
 	@result		Returns an IOReturn or Bluetooth error code, if the pairing could not be started.
 */
 
-+ (IOBluetoothDevicePair *)pairWithDevice:(IOBluetoothDevice*)device;
++ (instancetype)pairWithDevice:(IOBluetoothDevice*)device;
 
 /*!
     @method		start

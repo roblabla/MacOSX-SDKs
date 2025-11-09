@@ -71,7 +71,12 @@
 
 @interface ABRecord(ABRecord_Convenience)
 
-- (NSString *)uniqueId;
+@property (readonly, copy) NSString * uniqueId;
     // Convenience method to return the unique ID of a record.
     // Equivalent to -valueForProperty:kABUIDProperty
+
+@property (readonly, copy) NSString * displayName AVAILABLE_MAC_OS_X_VERSION_10_10_AND_LATER;
+    // Returns a formatted name suitable for displaying to the user.
+    // The return value is only defined for ABPerson and ABGroup.
+
 @end

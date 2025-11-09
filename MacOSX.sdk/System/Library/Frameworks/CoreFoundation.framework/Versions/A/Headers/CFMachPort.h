@@ -1,5 +1,5 @@
 /*	CFMachPort.h
-	Copyright (c) 1998-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1998-2014, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFMACHPORT__)
@@ -8,9 +8,10 @@
 #include <CoreFoundation/CFRunLoop.h>
 #include <mach/port.h>
 
+CF_IMPLICIT_BRIDGING_ENABLED
 CF_EXTERN_C_BEGIN
 
-typedef struct __CFMachPort * CFMachPortRef;
+typedef struct CF_BRIDGED_MUTABLE_TYPE(NSMachPort) __CFMachPort * CFMachPortRef;
 
 typedef struct {
     CFIndex	version;
@@ -38,6 +39,7 @@ CF_EXPORT void		CFMachPortSetInvalidationCallBack(CFMachPortRef port, CFMachPort
 CF_EXPORT CFRunLoopSourceRef	CFMachPortCreateRunLoopSource(CFAllocatorRef allocator, CFMachPortRef port, CFIndex order);
 
 CF_EXTERN_C_END
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif /* ! __COREFOUNDATION_CFMACHPORT__ */
 

@@ -1,7 +1,7 @@
 /*
         NSLayoutManager.h
         Application Kit
-        Copyright (c) 1994-2013, Apple Inc.
+        Copyright (c) 1994-2014, Apple Inc.
         All rights reserved.
 */
 
@@ -12,6 +12,7 @@
 #import <AppKit/NSFont.h>
 #import <AppKit/NSImageCell.h>
 #import <AppKit/NSGlyphGenerator.h>
+#import <AppKit/NSTextStorage.h>
 
 @class NSTextStorage;
 @class NSTypesetter;
@@ -47,33 +48,30 @@ enum {
 };
 
 /* Values for NSGlyphInscription.  The inscribe attribute of a glyph determines how it is laid out relative to the previous glyph. */
-enum {
+typedef NS_ENUM(NSUInteger, NSGlyphInscription) {
     NSGlyphInscribeBase         = 0,
     NSGlyphInscribeBelow        = 1,
     NSGlyphInscribeAbove        = 2,
     NSGlyphInscribeOverstrike   = 3,
     NSGlyphInscribeOverBelow    = 4
 };
-typedef NSUInteger NSGlyphInscription;
 
 /* Values for NSTypesetterBehavior */
-enum {
+typedef NS_ENUM(NSInteger, NSTypesetterBehavior) {
     NSTypesetterLatestBehavior                  = -1,
     NSTypesetterOriginalBehavior                = 0,    // Mac OS X versions 10.0 and 10.1 (uses NSSimpleHorizontalTypesetter)
     NSTypesetterBehavior_10_2_WithCompatibility = 1,    // 10.2 with backward compatibility layout (uses new ATS-based typestter)
     NSTypesetterBehavior_10_2                   = 2,
     NSTypesetterBehavior_10_3                   = 3,
     NSTypesetterBehavior_10_4                   = 4
-}; 
-typedef NSInteger NSTypesetterBehavior;
+};
 
 
 /* Values for NSTextLayoutOrientation */
-enum {
+typedef NS_ENUM(NSInteger, NSTextLayoutOrientation) {
     NSTextLayoutOrientationHorizontal = 0, // Lines rendered horizontally, grow top to bottom
     NSTextLayoutOrientationVertical = 1, // Lines rendered vertically, grow right to left
 };
-typedef NSInteger NSTextLayoutOrientation;
 
 @protocol NSTextLayoutOrientationProvider
 - (NSTextLayoutOrientation)layoutOrientation NS_AVAILABLE_MAC(10_7);
@@ -116,7 +114,7 @@ typedef NSInteger NSTextLayoutOrientation;
         unsigned int displayInvalidationInProgress:1;
         unsigned int insertionPointNeedsUpdate:1;
         unsigned int layoutManagerInDirtyList:1;
-        unsigned int usingGlyphCache:1;
+        unsigned int originalFontOverride:1;
         unsigned int showInvisibleCharacters:1;
         unsigned int showControlCharacters:1;
         unsigned int delegateRespondsToDidInvalidate:1;
@@ -127,10 +125,10 @@ typedef NSInteger NSTextLayoutOrientation;
         unsigned int containersChanged:1;
         unsigned int isGeneratingGlyphs:1;
         unsigned int hasNonGeneratedGlyphData:1;
-        unsigned int loggedBGLayoutException:1;
-        unsigned int isLayoutRequestedFromSubthread:1;
+        unsigned int inBackgroundLayout:1;
+        unsigned int syncAlignmentToDirection:1;
         unsigned int defaultAttachmentScaling:2;
-        unsigned int isInUILayoutMode:1;
+        unsigned int usesFontLeading:1;
         unsigned int seenRightToLeft:1;
         unsigned int ignoresViewTransformations:1;
         unsigned int needToFlushGlyph:1;
@@ -186,36 +184,32 @@ typedef NSInteger NSTextLayoutOrientation;
 
 /**************************** Initialization ****************************/
 
-- (id)init;
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
     // Designated Initializer.  Sets up this instance.  The NSLayoutManager starts off without an NSTextStorage.
 
 /*************************** Helper objects ***************************/
 
-- (NSTextStorage *)textStorage;
-- (void)setTextStorage:(NSTextStorage *)textStorage;
+@property (assign) NSTextStorage *textStorage;
     // The set method generally should not be called directly, but you may wish to override it.  Used to get and set the text storage.  The set method is called by NSTextStorage's addLayoutManager:/removeLayoutManager: methods.
 
-- (NSAttributedString *)attributedString;
+@property (readonly, strong) NSAttributedString *attributedString;
     // Part of the NSGlyphStorage protocol, for use by the glyph generator.  For NSLayoutManager the attributed string is equivalent to the text storage.
 
 - (void)replaceTextStorage:(NSTextStorage *)newTextStorage;
     // This method should be used instead of the primitive -setTextStorage: if you need to replace a NSLayoutManager's NSTextStorage with a new one, leaving all related objects intact.  This method deals with all the work of making sure the NSLayoutManager doesn't get deallocated and transferring all the NSLayoutManagers on the old NSTextStorage to the new one.
     
-- (NSGlyphGenerator *)glyphGenerator;
-- (void)setGlyphGenerator:(NSGlyphGenerator *)glyphGenerator;
+@property (strong) NSGlyphGenerator *glyphGenerator;
     // By default an NSLayoutManager uses the shared default glyph generator.  Setting the glyph generator invalidates all glyphs and layout in the NSLayoutManager.
 
-- (NSTypesetter *)typesetter;
-- (void)setTypesetter:(NSTypesetter *)typesetter;
+@property (strong) NSTypesetter *typesetter;
     // By default an NSLayoutManager uses the shared default typesetter.  Setting the typesetter invalidates all glyphs in the NSLayoutManager.  It can't just invalidate layout because the typesetter may have contributed to the actual glyphs as well (e.g. hyphenation).
 
-- (id <NSLayoutManagerDelegate>)delegate;
-- (void)setDelegate:(id <NSLayoutManagerDelegate>)delegate;
+@property (assign) id<NSLayoutManagerDelegate> delegate;
     // Sets or gets the NSLayoutManager's delegate.
 
 /**************************** Text containers ****************************/
 
-- (NSArray *)textContainers;
+@property (readonly, copy) NSArray *textContainers;
 
 - (void)addTextContainer:(NSTextContainer *)container;
     // Add a container to the end of the array.  Must invalidate layout of all glyphs after the previous last container (i.e., glyphs that were not previously laid out because they would not fit anywhere).
@@ -232,41 +226,33 @@ typedef NSInteger NSTextLayoutOrientation;
 
 /*********************** Global layout manager options ***********************/
 
-- (void)setBackgroundLayoutEnabled:(BOOL)flag;
-- (BOOL)backgroundLayoutEnabled;
+@property BOOL backgroundLayoutEnabled;
     // These methods allow you to set/query whether the NSLayoutManager will lay out text in the background, i.e. on the main thread when it is idle.  The default is YES, but this should be set to NO whenever the layout manager is being accessed from other threads.  
 
-- (void)setUsesScreenFonts:(BOOL)flag;
-- (BOOL)usesScreenFonts;
+@property BOOL usesScreenFonts;
     // Sets whether this layoutManager will use screen fonts when it is possible to do so.  The default is YES, but this should be set to NO if the layout manager will be used to draw scaled or rotated text.
 
-- (void)setShowsInvisibleCharacters:(BOOL)flag;
-- (BOOL)showsInvisibleCharacters;
+@property BOOL showsInvisibleCharacters;
     // If YES, then whitespace and other "invisible" unicodes will be shown with special glyphs or other drawing.  The default is NO.
 
-- (void)setShowsControlCharacters:(BOOL)flag;
-- (BOOL)showsControlCharacters;
+@property BOOL showsControlCharacters;
     // If YES, then control characters will be rendered visibly (usually like "^M").  The default is NO.
 
-- (void)setHyphenationFactor:(float)factor;
-- (float)hyphenationFactor;
+@property float hyphenationFactor;
     // 0.0 - 1.0.  Whenever (width of the real contents of the line) / (the line fragment width) is below this value, hyphenation will be attempted when laying out the line.  By default, the value is 0.0, meaning hyphenation is off.  A value of 1.0 causes hyphenation to be attempted always.  Note that hyphenation will slow down text layout and increase memory usage, so it should be used sparingly.  Maybe overridden on a per-paragraph basis by the NSParagraphStyle's hyphenationFactor.
 
-- (void)setDefaultAttachmentScaling:(NSImageScaling)scaling;
-- (NSImageScaling)defaultAttachmentScaling;
+@property NSImageScaling defaultAttachmentScaling;
     // Specifies the default behavior desired if an attachment image is too large to fit in a text container.  Note that attachment cells control their own size and drawing, so this setting can only be advisory for them, but kit-supplied attachment cells will respect it.  The default is NSImageScaleNone, meaning that images will clip rather than scaling.
 
-- (void)setTypesetterBehavior:(NSTypesetterBehavior)theBehavior;
-- (NSTypesetterBehavior)typesetterBehavior;
+@property NSTypesetterBehavior typesetterBehavior;
     // Specifies the typesetter behavior (compatibility setting) value for the layout manager.  The default is determined by the version of AppKit against which the application is linked.
 
-- (NSUInteger)layoutOptions;
+@property (readonly) NSUInteger layoutOptions;
     // Part of the NSGlyphStorage protocol, for use by the glyph generator.  Allows the glyph generator to ask which options the layout manager requests.
 
-- (void)setAllowsNonContiguousLayout:(BOOL)flag NS_AVAILABLE_MAC(10_5);
-- (BOOL)allowsNonContiguousLayout NS_AVAILABLE_MAC(10_5);
+@property BOOL allowsNonContiguousLayout NS_AVAILABLE_MAC(10_5);
     // If YES, then the layout manager may perform glyph generation and layout for a given portion of the text, without having glyphs or layout for preceding portions.  The default is NO.  Turning this setting on will significantly alter which portions of the text will have glyph generation or layout performed when a given generation-causing method is invoked.  It also gives significant performance benefits, especially for large documents.
-- (BOOL)hasNonContiguousLayout NS_AVAILABLE_MAC(10_5);
+@property (readonly) BOOL hasNonContiguousLayout NS_AVAILABLE_MAC(10_5);
     // Even if non-contiguous layout is allowed, it may not always be used, and there may not always be layout holes.  This method returns YES if there might currently be non-contiguous portions of the text laid out.
 
 /************************** Invalidation **************************/
@@ -282,7 +268,7 @@ typedef NSInteger NSTextLayoutOrientation;
 - (void)invalidateDisplayForGlyphRange:(NSRange)glyphRange;
     // Invalidates display for the glyph or character range given.  For the character range variant, unlaid parts of the range are remembered and will be redisplayed at some point later when the layout is available.  For the glyph range variant any part of the range that does not yet have glyphs generated is ignored.  Neither method actually causes layout.
 
-- (void)textStorage:(NSTextStorage *)str edited:(NSUInteger)editedMask range:(NSRange)newCharRange changeInLength:(NSInteger)delta invalidatedRange:(NSRange)invalidatedCharRange;
+- (void)textStorage:(NSTextStorage *)str edited:(NSTextStorageEditedOptions)editedMask range:(NSRange)newCharRange changeInLength:(NSInteger)delta invalidatedRange:(NSRange)invalidatedCharRange;
     // Sent from processEditing in NSTextStorage.  The newCharRange is the range in the final string which was explicitly edited.  The invalidatedRange includes portions that changed as a result of attribute fixing. invalidatedRange is either equal to newCharRange or larger.  Layout managers should not change the contents of the text storage during the execution of this message.
 
 /************************ Causing glyph generation and layout ************************/
@@ -322,7 +308,7 @@ typedef NSInteger NSTextLayoutOrientation;
 
 /************************ Get glyphs and glyph attributes ************************/
 
-- (NSUInteger)numberOfGlyphs;
+@property (readonly) NSUInteger numberOfGlyphs;
     // Returns the total number of glyphs.  If non-contiguous layout is not enabled, this will force generation of glyphs for all characters.
 
 - (NSGlyph)glyphAtIndex:(NSUInteger)glyphIndex isValidIndex:(BOOL *)isValidIndex;
@@ -379,8 +365,8 @@ typedef NSInteger NSTextLayoutOrientation;
 // These three methods are used to inquire about the state of layout.  They cause no generation.
 
 - (void)getFirstUnlaidCharacterIndex:(NSUInteger *)charIndex glyphIndex:(NSUInteger *)glyphIndex;
-- (NSUInteger)firstUnlaidCharacterIndex;
-- (NSUInteger)firstUnlaidGlyphIndex;
+@property (readonly) NSUInteger firstUnlaidCharacterIndex;
+@property (readonly) NSUInteger firstUnlaidGlyphIndex;
     // Returns (by reference for the "get" method) the character index or glyph index or both of the first unlaid character/glyph in the layout manager at this time.
 
 // Except as otherwise indicated, these methods will cause glyph generation and layout as needed.
@@ -402,9 +388,9 @@ typedef NSInteger NSTextLayoutOrientation;
 - (NSTextContainer *)textContainerForGlyphAtIndex:(NSUInteger)glyphIndex effectiveRange:(NSRangePointer)effectiveGlyphRange withoutAdditionalLayout:(BOOL)flag;
     // If flag is YES, the withoutAdditionalLayout variants will not generate glyphs or perform layout in attempting to answer, so should not be used unless layout is known to be complete for the range in question, or unless non-contiguous layout is enabled.  Primarily for use from within NSTypesetter, after layout is complete for the range in question, but before the layout manager's call to NSTypesetter has returned.  In that case glyph and layout holes have not yet been recalculated, so the layout manager does not yet know that layout is complete for that range, and the withoutAdditionalLayout variants must be used.  Line fragment rects and line fragment used rects are always in container coordinates.  Note that in each case the method variants with and without the withoutAdditionalLayout argument are both primitive, and those overriding one should override the other.
 
-- (NSRect)extraLineFragmentRect;
-- (NSRect)extraLineFragmentUsedRect;
-- (NSTextContainer *)extraLineFragmentTextContainer;
+@property (readonly) NSRect extraLineFragmentRect;
+@property (readonly) NSRect extraLineFragmentUsedRect;
+@property (readonly, strong) NSTextContainer *extraLineFragmentTextContainer;
     // Return info about the extra line fragment.  Line fragment rects and line fragment used rects are always in container coordinates.
 
 - (NSPoint)locationForGlyphAtIndex:(NSUInteger)glyphIndex;
@@ -494,8 +480,7 @@ typedef NSInteger NSTextLayoutOrientation;
     // Returns the default line height specified by the layout manager's typesetter behavior for the given font.
 - (CGFloat)defaultBaselineOffsetForFont:(NSFont *)theFont;
     // Returns the default baseline offset specified by the layout manager's typesetter behavior for the given font.
-- (BOOL)usesFontLeading;
-- (void)setUsesFontLeading:(BOOL)flag;
+@property BOOL usesFontLeading;
     // By default, a layout manager will use leading as specified by the font.  However, this is not appropriate for most UI text, for which a fixed leading is usually specified by UI layout guidelines.  These methods allow the use of the font's leading to be turned off.
 
 @end
@@ -513,9 +498,9 @@ typedef NSInteger NSTextLayoutOrientation;
 - (BOOL)layoutManagerOwnsFirstResponderInWindow:(NSWindow *)window;
     // Returns YES if the firstResponder of the given window is one of the NSTextViews attached to this NSLayoutManager.
 
-- (NSTextView *)firstTextView;
+@property (readonly, assign) NSTextView *firstTextView;
 
-- (NSTextView *)textViewForBeginningOfSelection;
+@property (readonly, assign) NSTextView *textViewForBeginningOfSelection;
     // This method is special in that it won't cause layout if the beginning of the selected range is not yet laid out.  Other than that this method could be done through other API.
 
 /************************ Drawing support ************************/

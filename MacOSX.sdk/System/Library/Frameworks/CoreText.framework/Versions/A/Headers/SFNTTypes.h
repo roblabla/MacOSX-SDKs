@@ -2,7 +2,7 @@
  *  SFNTTypes.h
  *  CoreText
  *
- *  Copyright 1994-2012 Apple Inc. All rights reserved.
+ *  Copyright 1994-2013 Apple Inc. All rights reserved.
  *
  */
 

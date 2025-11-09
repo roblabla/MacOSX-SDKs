@@ -451,7 +451,10 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 
 @class AVCaptureFileOutputInternal;
 @protocol AVCaptureFileOutputRecordingDelegate;
+
+#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
 @protocol AVCaptureFileOutputDelegate;
+#endif
 
 /*!
  @class AVCaptureFileOutput
@@ -826,6 +829,8 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 
 @end
 
+#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+
 /*!
  @protocol AVCaptureFileOutputDelegate
  @abstract
@@ -833,8 +838,6 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
     boundaries.
 */
 @protocol AVCaptureFileOutputDelegate <NSObject>
-
-#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
 
 @required
 
@@ -906,9 +909,9 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 */
 - (void)captureOutput:(AVCaptureFileOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection NS_AVAILABLE(10_7, NA);
 
-#endif // (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
-
 @end
+
+#endif // (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
 
 
 @class AVCaptureMovieFileOutputInternal;

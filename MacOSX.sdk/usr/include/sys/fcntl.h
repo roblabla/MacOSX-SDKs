@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2007 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -125,6 +125,22 @@
 #define	O_CREAT		0x0200		/* create if nonexistant */
 #define	O_TRUNC		0x0400		/* truncate to zero length */
 #define	O_EXCL		0x0800		/* error if already exists */
+
+#if __DARWIN_C_LEVEL >= 200809L 
+/*
+ * Descriptor value for the current working directory
+ */
+#define AT_FDCWD	-2
+
+/*
+ * Flags for the at functions
+ */
+#define AT_EACCESS		0x0010	/* Use effective ids in access check */
+#define AT_SYMLINK_NOFOLLOW	0x0020	/* Act on the symlink itself not the target */
+#define AT_SYMLINK_FOLLOW	0x0040	/* Act on target of symlink */
+#define AT_REMOVEDIR		0x0080	/* Path refers to directory */
+#endif
+
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
 #define	O_EVTONLY	0x8000		/* descriptor requested for event notifications only */
 #endif
@@ -239,7 +255,7 @@
 #define F_SETBACKINGSTORE	70	/* Mark the file as being the backing store for another filesystem */
 #define F_GETPATH_MTMINFO	71 	/* return the full path of the FD, but error in specific mtmd circumstances */
 
-/* 72 is free.  It used to be F_GETENCRYPTEDDATA, which is now removed. */
+#define F_GETCODEDIR		72	/* Returns the code directory, with associated hashes, to the caller */
 
 #define F_SETNOSIGPIPE		73	/* No SIGPIPE generated on EPIPE */
 #define F_GETNOSIGPIPE		74	/* Status of SIGPIPE for this fd */
@@ -271,6 +287,7 @@
 #define	F_RDLCK		1		/* shared or read lock */
 #define	F_UNLCK		2		/* unlock */
 #define	F_WRLCK		3		/* exclusive or write lock */
+
 
 /*
  * [XSI] The values used for l_whence shall be defined as described
@@ -333,6 +350,18 @@ struct radvisory {
        off_t   ra_offset;
        int     ra_count;
 };
+
+
+/** Information the user passes in to get the codeblobs out of the kernel */
+typedef struct fcodeblobs {
+	void 		*f_cd_hash;
+	size_t		f_hash_size;
+	void		*f_cd_buffer;
+	size_t		f_cd_size;
+	unsigned int	*f_out_size;
+	int		f_arch;
+	int		__padding;
+} fcodeblobs_t;
 
 
 /*
@@ -437,12 +466,18 @@ typedef enum {
 
 __BEGIN_DECLS
 int	open(const char *, int, ...) __DARWIN_ALIAS_C(open);
+#if __DARWIN_C_LEVEL >= 200809L
+int	openat(int, const char *, int, ...) __DARWIN_NOCANCEL(openat) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+#endif
 int	creat(const char *, mode_t) __DARWIN_ALIAS_C(creat);
 int	fcntl(int, int, ...) __DARWIN_ALIAS_C(fcntl);
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
 
 int	openx_np(const char *, int, filesec_t);
-/* data-protected non-portable open(2) */
+/* 
+ * data-protected non-portable open(2) :
+ int open_dprotected_np(user_addr_t path, int flags, int class, int dpflags, int mode)
+ */ 
 int open_dprotected_np ( const char *, int, int, int, ...);
 int	flock(int, int);
 filesec_t filesec_init(void);

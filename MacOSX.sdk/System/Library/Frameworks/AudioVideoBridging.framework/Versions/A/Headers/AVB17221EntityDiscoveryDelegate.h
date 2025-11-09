@@ -2,7 +2,7 @@
 //  AVB17221EntityDiscoveryDelegate.h
 //  AudioVideoBridging
 //
-//  Copyright 2010-2012 Apple Inc. All rights reserved.
+//  Copyright (c) 2010-2014 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -10,7 +10,8 @@
 @class AVB17221Entity;
 @class AVB17221EntityDiscovery;
 
-enum
+
+typedef NS_OPTIONS(NSUInteger, AVB17221EntityPropertyChanged)
 {
 /*!
 	@constant	AVB17221EntityPropertyChangedTimeToLive
@@ -113,8 +114,6 @@ enum
  */
 	AVB17221EntityPropertyChangedGPTPDomainNumber NS_ENUM_AVAILABLE(10_9, NA) =				0x00080000,
 } NS_ENUM_AVAILABLE(10_8, NA);
-
-typedef NSInteger AVB17221EntityPropertyChanged;
 
 
 /*!

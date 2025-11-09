@@ -1,5 +1,5 @@
 /*	CFStringTokenizer.h
-	Copyright (c) 2006-2013, Apple Inc. All rights reserved.
+	Copyright (c) 2006-2014, Apple Inc. All rights reserved.
 */
 
 /*!
@@ -64,13 +64,12 @@ typedef struct __CFStringTokenizer * CFStringTokenizerRef;
 	Tokenization options
 */
 enum {
-	/*!
-	Tokenization Unit
-	Use one of tokenization unit options with CFStringTokenizerCreate to
-	specify how the string should be tokenized. 
-	*/
-    /* kCFStringTokenizerUnitWord is not locale sensitive. It doesn't return
-    space between words as a token. */
+    /*!
+      Tokenization Unit
+      Use one of tokenization unit options with CFStringTokenizerCreate to
+      specify how the string should be tokenized. 
+    */
+    /* kCFStringTokenizerUnitWord doesn't return space between words as a token. */
     kCFStringTokenizerUnitWord                           = 0,
     kCFStringTokenizerUnitSentence                       = 1,
     kCFStringTokenizerUnitParagraph                      = 2,
@@ -81,15 +80,15 @@ enum {
     kCFStringTokenizerUnitWordBoundary returns space between words as a token. */
     kCFStringTokenizerUnitWordBoundary                   = 4,
 
-	/*!
-    Attribute Specifier
-    Use attribute specifier to tell tokenizer to prepare the specified attribute
-	when it tokenizes the given string. The attribute value can be retrieved by
-	calling CFStringTokenizerCopyCurrentTokenAttribute with one of the attribute
-	option. 
-	*/	
+    /*!
+      Attribute Specifier
+      Use attribute specifier to tell tokenizer to prepare the specified attribute
+      when it tokenizes the given string. The attribute value can be retrieved by
+      calling CFStringTokenizerCopyCurrentTokenAttribute with one of the attribute
+      option. 
+    */
     /* Latin Transcription. Used with kCFStringTokenizerUnitWord or
-        kCFStringTokenizerUnitWordBoundary */
+       kCFStringTokenizerUnitWordBoundary */
     kCFStringTokenizerAttributeLatinTranscription        = 1UL << 16,
     /* Language in BCP 47 string. Used with kCFStringTokenizerUnitSentence
 	   or kCFStringTokenizerUnitParagraph. */
@@ -102,22 +101,22 @@ enum {
 	the type of current token.
 */
 typedef CF_OPTIONS(CFOptionFlags, CFStringTokenizerTokenType) {
-	/* Have no token. */
+    /* Have no token. */
     kCFStringTokenizerTokenNone                                      = 0,
     
-	/* Normal token */
+    /* Normal token */
     kCFStringTokenizerTokenNormal                                    = 1UL << 0,
     
-	/*!
-    Compound token which may contain subtokens but with no derived subtokens.
-    Its subtokens can be obtained by calling CFStringTokenizerGetCurrentSubTokens.
+    /*!
+        Compound token which may contain subtokens but with no derived subtokens.
+        Its subtokens can be obtained by calling CFStringTokenizerGetCurrentSubTokens.
     */
     kCFStringTokenizerTokenHasSubTokensMask                          = 1UL << 1,
     
-	/*!
-    Compound token which may contain derived subtokens. 
-    Its subtokens and derived subtokens can be obtained by calling
-    CFStringTokenizerGetCurrentSubTokens.
+    /*!
+        Compound token which may contain derived subtokens.
+        Its subtokens and derived subtokens can be obtained by calling
+        CFStringTokenizerGetCurrentSubTokens.
     */
     kCFStringTokenizerTokenHasDerivedSubTokensMask                   = 1UL << 2,
     

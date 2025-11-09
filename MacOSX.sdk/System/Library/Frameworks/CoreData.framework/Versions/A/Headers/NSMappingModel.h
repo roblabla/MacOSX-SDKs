@@ -36,17 +36,16 @@ NS_CLASS_AVAILABLE(10_5,3_0)
 
 /* Loads the mapping model from the specified URL.
 */
-- (id)initWithContentsOfURL:(NSURL *)url;
+- (instancetype)initWithContentsOfURL:(NSURL *)url;
 
 
 /* Returns/sets the collection of entity mappings for the model.  The order of the mappings dictates the order in which they will be processed during migration.
 */
-- (NSArray *)entityMappings;
-- (void)setEntityMappings:(NSArray *)mappings;
+@property (strong) NSArray *entityMappings;
 
 
 /* Returns a dictionary of the entity mappings for the model, keyed by their respective name.  (This API is provided for quick access to a mapping by name, rather than iterating the ordered entityMapping array.)
 */
-- (NSDictionary *)entityMappingsByName;
+@property (readonly, copy) NSDictionary *entityMappingsByName;
 
 @end

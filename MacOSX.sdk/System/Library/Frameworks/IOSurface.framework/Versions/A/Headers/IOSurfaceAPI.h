@@ -305,7 +305,7 @@ size_t	IOSurfaceAlignProperty(CFStringRef property, size_t value)
    particularly important when IOSurface objects are being shared across process boundaries and the normal
    mechanisms one might use would not be viable.
    
-   The IOSurface use count is similar in concept to any othe reference counting scheme.  When the global use
+   The IOSurface use count is similar in concept to any other reference counting scheme.  When the global use
    count of an IOSurface goes to zero, it is no longer considered "in use".   When it is anything other than
    zero, then the IOSurface is still "in use" by someone and therefore anyone attempting to maintain a pool
    of IOSurfaces to be recycled should not reclaim that IOSurface.

@@ -11,10 +11,10 @@
  *    notice, this list of conditions and the following disclaimer in the
  *    documentation and/or other materials provided with the distribution.
  *
- * THIS SOFTWARE IS PROVIDED BY APPLE COMPUTER, INC. ``AS IS'' AND ANY
+ * THIS SOFTWARE IS PROVIDED BY APPLE INC. ``AS IS'' AND ANY
  * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL APPLE COMPUTER, INC. OR
+ * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL APPLE INC. OR
  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
@@ -26,17 +26,14 @@
 
 #import <WebKit/DOMObject.h>
 
-#if WEBKIT_VERSION_MAX_ALLOWED >= WEBKIT_VERSION_1_3
-
 @class DOMCSSPrimitiveValue;
 @class NSColor;
 
+NS_CLASS_AVAILABLE_MAC(10_4)
 @interface DOMRGBColor : DOMObject
-@property(readonly, retain) DOMCSSPrimitiveValue *red;
-@property(readonly, retain) DOMCSSPrimitiveValue *green;
-@property(readonly, retain) DOMCSSPrimitiveValue *blue;
-@property(readonly, retain) DOMCSSPrimitiveValue *alpha;
-@property(readonly, copy) NSColor *color AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+@property (readonly, strong) DOMCSSPrimitiveValue *red;
+@property (readonly, strong) DOMCSSPrimitiveValue *green;
+@property (readonly, strong) DOMCSSPrimitiveValue *blue;
+@property (readonly, strong) DOMCSSPrimitiveValue *alpha;
+@property (readonly, copy) NSColor *color NS_AVAILABLE_MAC(10_5);
 @end
-
-#endif

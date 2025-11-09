@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2013 Apple Inc. All rights reserved.
+	Copyright 2010-2014 Apple Inc. All rights reserved.
 
 */
 
@@ -56,7 +56,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 @interface AVAsset : NSObject <NSCopying, AVAsynchronousKeyValueLoading>
 {
 @private
-	AVAssetInternal *_assetInternal;
+	AVAssetInternal *_asset;
 }
 
 /*!
@@ -127,7 +127,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
   @constant		AVAssetReferenceRestrictionForbidAll
 	Indicates that only references to media data stored within the asset's container file should be allowed.
 */
-enum {
+typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
 	AVAssetReferenceRestrictionForbidNone = 0UL,
 	AVAssetReferenceRestrictionForbidRemoteReferenceToLocal = (1UL << 0),
 	AVAssetReferenceRestrictionForbidLocalReferenceToRemote = (1UL << 1),
@@ -135,7 +135,6 @@ enum {
 	AVAssetReferenceRestrictionForbidLocalReferenceToLocal = (1UL << 3),
 	AVAssetReferenceRestrictionForbidAll = 0xFFFFUL,
 };
-typedef NSUInteger AVAssetReferenceRestrictions;
 
 /*!
   @property		referenceRestrictions
@@ -209,9 +208,13 @@ typedef NSUInteger AVAssetReferenceRestrictions;
 */
 @property (nonatomic, readonly) NSString *lyrics;
 
-/* Provides access to an array of AVMetadataItems for each common metadata key for which a value is available; can be filtered according to language via +[AVMetadataItem metadataItemsFromArray:filteredAndSortedAccordingToPreferredLanguages:], according to locale via +[AVMetadataItem metadataItemsFromArray:withLocale:], or according to key via +[AVMetadataItem metadataItemsFromArray:withKey:keySpace:].
+/* Provides access to an array of AVMetadataItems for each common metadata key for which a value is available; items can be filtered according to language via +[AVMetadataItem metadataItemsFromArray:filteredAndSortedAccordingToPreferredLanguages:] and according to identifier via +[AVMetadataItem metadataItemsFromArray:filteredByIdentifier:].
 */
 @property (nonatomic, readonly) NSArray *commonMetadata;
+
+/* Provides access to an array of AVMetadataItems for all metadata identifiers for which a value is available; items can be filtered according to language via +[AVMetadataItem metadataItemsFromArray:filteredAndSortedAccordingToPreferredLanguages:] and according to identifier via +[AVMetadataItem metadataItemsFromArray:filteredByIdentifier:].
+*/
+@property (nonatomic, readonly) NSArray *metadata NS_AVAILABLE(10_10, 8_0);
 
 /* Provides an NSArray of NSStrings, each representing a metadata format that's available to the asset (e.g. ID3, iTunes metadata, etc.). Metadata formats are defined in AVMetadataFormat.h.
 */
@@ -329,7 +332,7 @@ typedef NSUInteger AVAssetReferenceRestrictions;
 */
 @property (nonatomic, readonly, getter=isReadable) BOOL readable NS_AVAILABLE(10_7, 4_3);
 
-/* indicates whether the receiver can be used within a segment of an AVCompositionTrack
+/* indicates whether the receiver can be used to build an AVMutableComposition
 */
 @property (nonatomic, readonly, getter=isComposable) BOOL composable NS_AVAILABLE(10_7, 4_3);
 
@@ -372,6 +375,23 @@ AVF_EXPORT NSString *const AVURLAssetPreferPreciseDurationAndTimingKey NS_AVAILA
 AVF_EXPORT NSString *const AVURLAssetReferenceRestrictionsKey NS_AVAILABLE(10_7, 5_0);
 
 /*!
+ @constant		AVURLAssetHTTPCookiesKey
+ @abstract
+	HTTP cookies that the AVURLAsset may send with HTTP requests
+	Standard cross-site policy still applies: cookies will only be sent to domains to which they apply.
+ @discussion
+	By default, an AVURLAsset will only have access to cookies in the client's default cookie storage 
+	that apply to the AVURLAsset's URL.  You can supplement the cookies available to the asset
+	via use of this initialization option 
+	
+	HTTP cookies do not apply to non-HTTP(S) URLS.
+	In HLS, many HTTP requests (e.g., media, crypt key, variant index) might be issued to different paths or hosts.
+	In both of these cases, HTTP requests will be missing any cookies that do not apply to the AVURLAsset's URL.  
+	This init option allows the AVURLAsset to use additional HTTP cookies for those HTTP(S) requests.
+ */
+AVF_EXPORT NSString *const AVURLAssetHTTPCookiesKey NS_AVAILABLE_IOS(8_0);
+
+/*!
   @class		AVURLAsset
 
   @abstract		AVURLAsset provides access to the AVAsset model for timed audiovisual media referenced by URL.
@@ -389,7 +409,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 @interface AVURLAsset : AVAsset
 {
 @private
-	AVURLAssetInternal *_asset;
+	AVURLAssetInternal *_URLAsset;
 }
 
 /*!
@@ -434,7 +454,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 				An instance of NSDictionary that contains keys for specifying options for the initialization of the AVURLAsset. See AVURLAssetPreferPreciseDurationAndTimingKey and AVURLAssetReferenceRestrictionsKey above.
   @result		An instance of AVURLAsset.
 */
-- (id)initWithURL:(NSURL *)URL options:(NSDictionary *)options;
+- (instancetype)initWithURL:(NSURL *)URL options:(NSDictionary *)options;
 
 /* indicates the URL with which the instance of AVURLAsset was initialized
 */

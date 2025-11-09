@@ -1,7 +1,7 @@
 /*
 	NSButton.h
 	Application Kit
-	Copyright (c) 1994-2013, Apple Inc.
+	Copyright (c) 1994-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -11,62 +11,49 @@
 
 @class NSSound;
 
-@interface NSButton : NSControl <NSUserInterfaceValidations>
+@interface NSButton : NSControl <NSUserInterfaceValidations, NSAccessibilityButton>
 
-- (NSString *)title;
-- (void)setTitle:(NSString *)aString;
-- (NSString *)alternateTitle;
-- (void)setAlternateTitle:(NSString *)aString;
-- (NSImage *)image;
-- (void)setImage:(NSImage *)image;
-- (NSImage *)alternateImage;
-- (void)setAlternateImage:(NSImage *)image;
-- (NSCellImagePosition)imagePosition;
-- (void)setImagePosition:(NSCellImagePosition)aPosition;
+@property (copy) NSString *title;
+@property (copy) NSString *alternateTitle;
+@property (strong) NSImage *image;
+@property (strong) NSImage *alternateImage;
+@property NSCellImagePosition imagePosition;
 - (void)setButtonType:(NSButtonType)aType;
-- (NSInteger)state;
-- (void)setState:(NSInteger)value;
-- (BOOL)isBordered;
-- (void)setBordered:(BOOL)flag;
-- (BOOL)isTransparent;
-- (void)setTransparent:(BOOL)flag;
+@property NSInteger state;
+@property (getter=isBordered) BOOL bordered;
+@property (getter=isTransparent) BOOL transparent;
 - (void)setPeriodicDelay:(float)delay interval:(float)interval;
 - (void)getPeriodicDelay:(float *)delay interval:(float *)interval;
-- (NSString *)keyEquivalent;
-- (void)setKeyEquivalent:(NSString *)charCode;
-- (NSUInteger)keyEquivalentModifierMask;
-- (void)setKeyEquivalentModifierMask:(NSUInteger)mask;
+@property (copy) NSString *keyEquivalent;
+@property NSUInteger keyEquivalentModifierMask;
 - (void)highlight:(BOOL)flag;
 - (BOOL)performKeyEquivalent:(NSEvent *)key;
+
+@property (getter=isSpringLoaded) BOOL springLoaded NS_AVAILABLE_MAC(10_10_3); // sends action on deep-press or extended hover while dragging. Defaults to NO.
+@property NSInteger maxAcceleratorLevel NS_AVAILABLE_MAC(10_10_3);	// Configures the maximum allowed level for an NSMultiLevelAcceleratorButton, allowed values range from [1,5]. Defaults to 2.
 
 @end
 
 @interface NSButton(NSButtonAttributedStringMethods)
-- (NSAttributedString *)attributedTitle;
-- (void)setAttributedTitle:(NSAttributedString *)aString;
-- (NSAttributedString *)attributedAlternateTitle;
-- (void)setAttributedAlternateTitle:(NSAttributedString *)obj;
+@property (copy) NSAttributedString *attributedTitle;
+@property (copy) NSAttributedString *attributedAlternateTitle;
 @end
 
 @interface NSButton(NSButtonBezelStyles)
-- (void) setBezelStyle:(NSBezelStyle)bezelStyle;
-- (NSBezelStyle)bezelStyle;
+@property NSBezelStyle bezelStyle;
 @end
 
 @interface NSButton(NSButtonMixedState)
-- (void)setAllowsMixedState:(BOOL)flag;
-- (BOOL)allowsMixedState;
+@property BOOL allowsMixedState;
 - (void)setNextState;
 @end
 
 @interface NSButton(NSButtonBorder)
-- (void) setShowsBorderOnlyWhileMouseInside:(BOOL)show;
-- (BOOL) showsBorderOnlyWhileMouseInside;
+@property BOOL showsBorderOnlyWhileMouseInside;
 @end
 
 @interface NSButton (NSButtonSoundExtensions)
-- (void)setSound:(NSSound *)aSound;
-- (NSSound *)sound;
+@property (strong) NSSound *sound;
 @end
 
 

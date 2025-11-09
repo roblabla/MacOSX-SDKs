@@ -1,6 +1,6 @@
 /*	
     Automator.h
-    Copyright (C) 2004-2006 Apple Computer, Inc. All rights reserved.    
+    Copyright (C) 2004-2006, 2014 Apple Inc. All rights reserved.    
     
     Public header file.
 */

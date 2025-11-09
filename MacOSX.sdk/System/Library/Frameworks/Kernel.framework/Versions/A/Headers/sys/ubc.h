@@ -40,7 +40,7 @@
 #include <mach/memory_object_types.h>
 #include <sys/ucred.h>
 
-/* defns for ubc_sync_range() and ubc_msync */
+/* defns for ubc_msync() and ubc_msync */
 
 #define	UBC_PUSHDIRTY	0x01	/* clean any dirty pages in the specified range to the backing store */
 #define	UBC_PUSHALL	0x02	/* push both dirty and precious pages to the backing store */
@@ -54,11 +54,11 @@ daddr64_t	ubc_offtoblk(struct vnode *, off_t);
 off_t	ubc_getsize(struct vnode *);
 int	ubc_setsize(struct vnode *, off_t);
 
+
 kauth_cred_t ubc_getcred(struct vnode *);
 struct thread;
 int	ubc_setthreadcred(struct vnode *, struct proc *, struct thread *);
 
-int     ubc_sync_range(vnode_t, off_t, off_t, int);
 errno_t ubc_msync(vnode_t, off_t, off_t, off_t *, int);
 int	ubc_pages_resident(vnode_t);
 int	ubc_page_op(vnode_t, off_t, int, ppnum_t *, int *);

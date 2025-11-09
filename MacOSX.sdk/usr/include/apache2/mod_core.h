@@ -39,11 +39,11 @@ extern "C" {
 #endif
 
 /* Handles for core filters */
-extern AP_DECLARE_DATA ap_filter_rec_t *ap_http_input_filter_handle;
-extern AP_DECLARE_DATA ap_filter_rec_t *ap_http_header_filter_handle;
-extern AP_DECLARE_DATA ap_filter_rec_t *ap_chunk_filter_handle;
-extern AP_DECLARE_DATA ap_filter_rec_t *ap_http_outerror_filter_handle;
-extern AP_DECLARE_DATA ap_filter_rec_t *ap_byterange_filter_handle;
+AP_DECLARE_DATA extern ap_filter_rec_t *ap_http_input_filter_handle;
+AP_DECLARE_DATA extern ap_filter_rec_t *ap_http_header_filter_handle;
+AP_DECLARE_DATA extern ap_filter_rec_t *ap_chunk_filter_handle;
+AP_DECLARE_DATA extern ap_filter_rec_t *ap_http_outerror_filter_handle;
+AP_DECLARE_DATA extern ap_filter_rec_t *ap_byterange_filter_handle;
 
 /*
  * These (input) filters are internal to the mod_core operation.
@@ -68,14 +68,14 @@ char *ap_response_code_string(request_rec *r, int error_index);
  * @warning Modules should be very careful about using this, and should
  *          the default behavior.  Much of the HTTP/1.1 implementation
  *          correctness depends on the full headers.
- * @deffunc void ap_basic_http_header(request_rec *r, apr_bucket_brigade *bb)
+ * @fn void ap_basic_http_header(request_rec *r, apr_bucket_brigade *bb)
  */
 AP_DECLARE(void) ap_basic_http_header(request_rec *r, apr_bucket_brigade *bb);
- 
+
 /**
  * Send an appropriate response to an http TRACE request.
  * @param r The current request
- * @tip returns DONE or the HTTP status error if it handles the TRACE,
+ * @note returns DONE or the HTTP status error if it handles the TRACE,
  * or DECLINED if the request was not for TRACE.
  * request method was not TRACE.
  */
@@ -87,9 +87,17 @@ AP_DECLARE_NONSTD(int) ap_send_http_trace(request_rec *r);
  */
 AP_DECLARE(int) ap_send_http_options(request_rec *r);
 
+/* Used for multipart/byteranges boundary string */
+AP_DECLARE_DATA extern const char *ap_multipart_boundary;
+
+/* Init RNG at startup */
+AP_CORE_DECLARE(void) ap_init_rng(apr_pool_t *p);
+/* Update RNG state in parent after fork */
+AP_CORE_DECLARE(void) ap_random_parent_after_fork(void);
+
 #ifdef __cplusplus
 }
 #endif
 
-#endif	/* !MOD_CORE_H */
+#endif  /* !MOD_CORE_H */
 /** @} */

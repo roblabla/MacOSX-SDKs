@@ -52,7 +52,7 @@ QTKIT_EXTERN NSString * const QTTrackBoundsAttribute						AVAILABLE_QTKIT_VERSIO
 
 /*!
 	@constant		QTTrackCreationTimeAttribute
-	@abstract		The creation time of a QTTrack object; the value for this key is of type NSDate.
+	@abstract		The creation time of the container from which a QTTrack object was initialized; the value for this key is of type NSDate.
 	@discussion		This attribute can be read but not written.
 					This attribute can be read but not written when the movie containing this track has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
  */

@@ -1,7 +1,7 @@
 //
 //  SCNScene.h
 //
-//  Copyright (c) 2012-2013 Apple Inc. All rights reserved.
+//  Copyright (c) 2012-2014 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -9,6 +9,7 @@
 #import <SceneKit/SCNMaterialProperty.h>
 
 @class SCNNode;
+@class SCNPhysicsWorld;
 @protocol SCNSceneExportDelegate;
 
 /*!
@@ -27,7 +28,7 @@ typedef void (^SCNSceneExportProgressHandler)(float totalProgress, NSError *erro
  @abstract Specifies the final destination (as a NSURL) of the scene being exported.
  @discussion The destination URL is required if the scene is exported to a temporary directory and then moved to a final destination. This enables the exported document to get correct relative paths to referenced images.
  */
-SCN_EXTERN NSString * const SCNSceneExportDestinationURL SCENEKIT_AVAILABLE(10_9, NA);
+SCN_EXTERN NSString * const SCNSceneExportDestinationURL SCENEKIT_AVAILABLE(10_9, 8_0);
 
 
 /*! @group Scene attributes
@@ -40,14 +41,16 @@ SCN_EXTERN NSString * const SCNSceneStartTimeAttributeKey;
 SCN_EXTERN NSString * const SCNSceneEndTimeAttributeKey;
 /*! A floating point value, encapsulated in a NSNumber, containing the framerate of the scene. */
 SCN_EXTERN NSString * const SCNSceneFrameRateAttributeKey;
+/*! A vector3 value, encapsulated in a NSValue, containing the up axis of the scene. This is just for information, setting the up axis as no effect */
+SCN_EXTERN NSString * const SCNSceneUpAxisAttributeKey SCENEKIT_AVAILABLE(10_10, 8_0);
 
 /*!
  @class SCNScene
  @abstract SCNScene is the class that describes a 3d scene. It encapsulates a node hierarchy.
  */
 
-SCENEKIT_CLASS_AVAILABLE(10_8, NA)
-@interface SCNScene : NSObject 
+SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
+@interface SCNScene : NSObject <NSSecureCoding>
 {
 @private
 	id _reserved;
@@ -63,6 +66,13 @@ SCENEKIT_CLASS_AVAILABLE(10_8, NA)
  of the SCNScene's root node.
  */
 @property(nonatomic, readonly) SCNNode *rootNode;
+
+/*!
+ @property physicsWorld
+ @abstract Specifies the physics world of the receiver.
+ @discussion Every scene automatically creates a physics world object to simulate physics on nodes in the scene. You use this property to access the scene’s global physics properties, such as gravity. To add physics to a particular node, see physicsBody.
+ */
+@property(nonatomic, readonly) SCNPhysicsWorld *physicsWorld SCENEKIT_AVAILABLE(10_10, 8_0);
 
 /*!
  @method attributeForKey:
@@ -86,7 +96,10 @@ SCENEKIT_CLASS_AVAILABLE(10_8, NA)
  @abstract Specifies the background of the receiver.
  @discussion The background is rendered before the rest of the scene. The background can be rendered as a skybox by setting a NSArray of six images to its contents (see SCNMaterialProperty.h).
  */
-@property(nonatomic, readonly) SCNMaterialProperty *background SCENEKIT_AVAILABLE(10_9, NA);
+@property(nonatomic, readonly) SCNMaterialProperty *background SCENEKIT_AVAILABLE(10_9, 8_0);
+
+
+#pragma mark - Loading
 
 /*!
  @method sceneNamed:
@@ -94,7 +107,17 @@ SCENEKIT_CLASS_AVAILABLE(10_8, NA)
  @param name The name of the file. The method looks for a file with the specified name in the application’s main bundle.
  @discussion This method initializes with no options and does not check for errors. The resulting object is not cached.
  */
-+ (instancetype)sceneNamed:(NSString *)name SCENEKIT_AVAILABLE(10_9, NA);
++ (instancetype)sceneNamed:(NSString *)name SCENEKIT_AVAILABLE(10_9, 8_0);
+
+/*!
+ @method sceneNamed:options:
+ @abstract Creates and returns a scene associated with the specified filename.
+ @param name The name of the file. The method looks for a file with the specified name in the application’s main bundle.
+ @param directory The name of the bundle sub-directory to search into.
+ @param options An options dictionary. The relevant keys are documented in the SCNSceneSource class.
+ @discussion This method initializes with no options and does not check for errors. The resulting object is not cached.
+ */
++ (instancetype)sceneNamed:(NSString *)name inDirectory:(NSString *)directory options:(NSDictionary *)options SCENEKIT_AVAILABLE(10_10, 8_0);
 
 /*!
  @method sceneWithURL:options:error:
@@ -107,6 +130,8 @@ SCENEKIT_CLASS_AVAILABLE(10_8, NA)
  */
 + (instancetype)sceneWithURL:(NSURL *)url options:(NSDictionary *)options error:(NSError **)error;
 
+#pragma mark - Writing
+
 /*!
  @method writeToURL:options:delegate:progressHandler:
  @abstract write the scene to the specified url.
@@ -116,14 +141,51 @@ SCENEKIT_CLASS_AVAILABLE(10_8, NA)
  @param progressHandler an optional block to handle the progress of the operation.
  @return Returns YES if the operation succeeded, NO otherwise. Errors checking can be done via the "error"
  parameter of the 'progressHandler'.
- @discussion Currently only the COLLADA format is supported.
+ @discussion Currently only exporting to .dae files is supported.
  */
 - (BOOL)writeToURL:(NSURL *)url options:(NSDictionary *)options delegate:(id <SCNSceneExportDelegate>)delegate progressHandler:(SCNSceneExportProgressHandler)progressHandler SCENEKIT_AVAILABLE(10_9, NA);
 
+#pragma mark - Fog
+
+/*!
+ @property fogStartDistance
+ @abstract Specifies the receiver's fog start distance. Animatable. Defaults to 0.
+ */
+@property(nonatomic) CGFloat fogStartDistance SCENEKIT_AVAILABLE(10_10, 8_0);
+
+/*!
+ @property fogEndDistance
+ @abstract Specifies the receiver's fog end distance. Animatable. Defaults to 0.
+ */
+@property(nonatomic) CGFloat fogEndDistance SCENEKIT_AVAILABLE(10_10, 8_0);
+
+/*!
+ @property fogDensityExponent
+ @abstract Specifies the receiver's fog power exponent. Animatable. Defaults to 1.
+ @discussion Controls the attenuation between the start and end fog distances. 0 means a constant fog, 1 a linear fog and 2 a quadratic fog, but any positive value will work.
+ */
+@property(nonatomic) CGFloat fogDensityExponent SCENEKIT_AVAILABLE(10_10, 8_0);
+
+/*!
+ @property fogColor
+ @abstract Specifies the receiver's fog color (NSColor or CGColorRef). Animatable. Defaults to white.
+ @discussion The initial value is a NSColor.
+ */
+@property(nonatomic, retain) id fogColor SCENEKIT_AVAILABLE(10_10, 8_0);
+
+
+#pragma mark - Pause
+
+/*!
+ @property paused
+ @abstract Controls whether or not the scene is paused. Defaults to NO.
+ @discussion Pausing a scene will pause animations, actions, particles and physics.
+ */
+@property (nonatomic, getter = isPaused) BOOL paused SCENEKIT_AVAILABLE(10_10, 8_0);
+
 @end
 
-
-@protocol SCNSceneExportDelegate
+@protocol SCNSceneExportDelegate <NSObject>
 @optional
 /*!
  @method writeImage:withSceneDocumentURL:originalImageURL:

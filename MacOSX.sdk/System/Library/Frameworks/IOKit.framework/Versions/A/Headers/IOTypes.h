@@ -198,7 +198,8 @@ enum {
 
     kIOMapStatic		= 0x01000000,
     kIOMapReference		= 0x02000000,
-    kIOMapUnique		= 0x04000000
+    kIOMapUnique		= 0x04000000,
+    kIOMapPrefault		= 0x10000000,
 };
 
 /*! @enum Scale Factors

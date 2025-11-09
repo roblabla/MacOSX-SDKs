@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2013 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2014 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -144,6 +144,7 @@
 #define SO_WANTMORE	0x4000		/* APPLE: Give hint when more data ready */
 #define SO_WANTOOBFLAG	0x8000		/* APPLE: Want OOB in MSG_FLAG on receive */
 
+
 #endif  /* (!__APPLE__) */
 #endif	/* (!_POSIX_C_SOURCE || _DARWIN_C_SOURCE) */
 
@@ -177,6 +178,9 @@
 #define SO_RANDOMPORT   0x1082  /* APPLE: request local port randomization */
 #define SO_NP_EXTENSIONS	0x1083	/* To turn off some POSIX behavior */
 #endif
+
+
+#define SO_NUMRCVPKT		0x1112	/* number of datagrams in receive socket buffer */
 
 #endif	/* (!_POSIX_C_SOURCE || _DARWIN_C_SOURCE) */
 
@@ -418,6 +422,7 @@ struct msghdr {
 	socklen_t	msg_controllen;	/* [XSI] ancillary data buffer len */
 	int		msg_flags;	/* [XSI] flags on received message */
 };
+
 
 
 #define	MSG_OOB		0x1		/* process out-of-band data */

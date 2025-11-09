@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2010 Apple Inc. All Rights Reserved.
+ * Copyright (c) 2006-2012 Apple Inc. All Rights Reserved.
  * 
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -394,6 +394,13 @@ OSStatus CMSEncoderCopySignerTimestamp(
 	size_t				signerIndex,        /* usually 0 */
 	CFAbsoluteTime      *timestamp)			/* RETURNED */
     __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
+
+OSStatus CMSEncoderCopySignerTimestampWithPolicy(
+    CMSEncoderRef		cmsEncoder,
+    CFTypeRef            timeStampPolicy,
+    size_t				signerIndex,        /* usually 0 */
+    CFAbsoluteTime      *timestamp)			/* RETURNED */
+    __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_NA);
 
 #ifdef __cplusplus
 }

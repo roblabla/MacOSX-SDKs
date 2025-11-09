@@ -120,6 +120,7 @@ public:
     virtual void		stop(IOService *  provider);
     virtual bool		terminate( IOOptionBits options = 0 );
     virtual void		free();	
+	virtual void		joinPMtree ( IOService * driver );
 
 	// IOUSBInterface class methods
 	virtual bool		init(	const IOUSBConfigurationDescriptor *cfDesc,

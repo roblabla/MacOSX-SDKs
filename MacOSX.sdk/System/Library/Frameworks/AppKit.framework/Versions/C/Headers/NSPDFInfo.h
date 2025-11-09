@@ -1,7 +1,7 @@
 /*
         NSPDFInfo.h
         Application Kit
-        Copyright (c) 2013, Apple Inc.
+        Copyright (c) 2013-2014, Apple Inc.
         All rights reserved.
 */
 

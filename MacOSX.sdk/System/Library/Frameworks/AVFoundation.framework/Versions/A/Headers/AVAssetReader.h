@@ -33,14 +33,13 @@
  @constant	 AVAssetReaderStatusCancelled
 	Indicates that the asset reader can no longer read samples because reading was canceled with the cancelReading method.
  */
-enum {
+typedef NS_ENUM(NSInteger, AVAssetReaderStatus) {
     AVAssetReaderStatusUnknown = 0,
     AVAssetReaderStatusReading,
     AVAssetReaderStatusCompleted,
     AVAssetReaderStatusFailed,
     AVAssetReaderStatusCancelled,
 };
-typedef NSInteger AVAssetReaderStatus;
 
 /*!
  @class AVAssetReader
@@ -73,8 +72,10 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  @param outError
 	On return, if initialization of the AVAssetReader fails, points to an NSError describing the nature of the failure.
  @result An instance of AVAssetReader.
+ @discussion
+	If the specified asset belongs to a mutable subclass of AVAsset, AVMutableComposition or AVMutableMovie, the results of any asset reading operation are undefined if you mutate the asset after invoking -startReading.
  */
-+ (AVAssetReader *)assetReaderWithAsset:(AVAsset *)asset error:(NSError **)outError;
++ (instancetype)assetReaderWithAsset:(AVAsset *)asset error:(NSError **)outError;
 
 /*!
  @method initWithAsset:error:
@@ -87,8 +88,10 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
 	On return, if initialization of the AVAssetReader fails, points to an NSError describing the nature of the failure.
  @result
 	An instance of AVAssetReader.
+ @discussion
+	If the specified asset belongs to a mutable subclass of AVAsset, AVMutableComposition or AVMutableMovie, the results of any asset reading operation are undefined if you mutate the asset after invoking -startReading.
  */
-- (id)initWithAsset:(AVAsset *)asset error:(NSError **)outError;
+- (instancetype)initWithAsset:(AVAsset *)asset error:(NSError **)outError;
 
 /*!
  @property asset

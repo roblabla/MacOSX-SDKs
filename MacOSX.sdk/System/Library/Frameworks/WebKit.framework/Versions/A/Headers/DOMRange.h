@@ -11,10 +11,10 @@
  *    notice, this list of conditions and the following disclaimer in the
  *    documentation and/or other materials provided with the distribution.
  *
- * THIS SOFTWARE IS PROVIDED BY APPLE COMPUTER, INC. ``AS IS'' AND ANY
+ * THIS SOFTWARE IS PROVIDED BY APPLE INC. ``AS IS'' AND ANY
  * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL APPLE COMPUTER, INC. OR
+ * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL APPLE INC. OR
  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
@@ -28,8 +28,6 @@
 #import <WebKit/DOMCore.h>
 #import <WebKit/DOMDocument.h>
 #import <WebKit/DOMRangeException.h>
-
-#if WEBKIT_VERSION_MAX_ALLOWED >= WEBKIT_VERSION_1_3
 
 @class DOMDocumentFragment;
 @class DOMNode;
@@ -45,19 +43,20 @@ enum {
     DOM_NODE_AFTER = 1,
     DOM_NODE_BEFORE_AND_AFTER = 2,
     DOM_NODE_INSIDE = 3
-};
+} NS_ENUM_AVAILABLE_MAC(10_4);
 
+NS_CLASS_AVAILABLE_MAC(10_4)
 @interface DOMRange : DOMObject
-@property(readonly, retain) DOMNode *startContainer;
-@property(readonly) int startOffset;
-@property(readonly, retain) DOMNode *endContainer;
-@property(readonly) int endOffset;
-@property(readonly) BOOL collapsed;
-@property(readonly, retain) DOMNode *commonAncestorContainer;
-@property(readonly, copy) NSString *text AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+@property (readonly, strong) DOMNode *startContainer;
+@property (readonly) int startOffset;
+@property (readonly, strong) DOMNode *endContainer;
+@property (readonly) int endOffset;
+@property (readonly) BOOL collapsed;
+@property (readonly, strong) DOMNode *commonAncestorContainer;
+@property (readonly, copy) NSString *text NS_AVAILABLE_MAC(10_5);
 
-- (void)setStart:(DOMNode *)refNode offset:(int)offset AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-- (void)setEnd:(DOMNode *)refNode offset:(int)offset AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+- (void)setStart:(DOMNode *)refNode offset:(int)offset NS_AVAILABLE_MAC(10_5);
+- (void)setEnd:(DOMNode *)refNode offset:(int)offset NS_AVAILABLE_MAC(10_5);
 - (void)setStartBefore:(DOMNode *)refNode;
 - (void)setStartAfter:(DOMNode *)refNode;
 - (void)setEndBefore:(DOMNode *)refNode;
@@ -65,7 +64,7 @@ enum {
 - (void)collapse:(BOOL)toStart;
 - (void)selectNode:(DOMNode *)refNode;
 - (void)selectNodeContents:(DOMNode *)refNode;
-- (short)compareBoundaryPoints:(unsigned short)how sourceRange:(DOMRange *)sourceRange AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+- (short)compareBoundaryPoints:(unsigned short)how sourceRange:(DOMRange *)sourceRange NS_AVAILABLE_MAC(10_5);
 - (void)deleteContents;
 - (DOMDocumentFragment *)extractContents;
 - (DOMDocumentFragment *)cloneContents;
@@ -74,17 +73,15 @@ enum {
 - (DOMRange *)cloneRange;
 - (NSString *)toString;
 - (void)detach;
-- (DOMDocumentFragment *)createContextualFragment:(NSString *)html AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-- (BOOL)intersectsNode:(DOMNode *)refNode AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-- (short)compareNode:(DOMNode *)refNode AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-- (short)comparePoint:(DOMNode *)refNode offset:(int)offset AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-- (BOOL)isPointInRange:(DOMNode *)refNode offset:(int)offset AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+- (DOMDocumentFragment *)createContextualFragment:(NSString *)html NS_AVAILABLE_MAC(10_5);
+- (BOOL)intersectsNode:(DOMNode *)refNode NS_AVAILABLE_MAC(10_5);
+- (short)compareNode:(DOMNode *)refNode NS_AVAILABLE_MAC(10_5);
+- (short)comparePoint:(DOMNode *)refNode offset:(int)offset NS_AVAILABLE_MAC(10_5);
+- (BOOL)isPointInRange:(DOMNode *)refNode offset:(int)offset NS_AVAILABLE_MAC(10_5);
 @end
 
 @interface DOMRange (DOMRangeDeprecated)
-- (void)setStart:(DOMNode *)refNode :(int)offset AVAILABLE_WEBKIT_VERSION_1_3_AND_LATER_BUT_DEPRECATED_IN_WEBKIT_VERSION_3_0;
-- (void)setEnd:(DOMNode *)refNode :(int)offset AVAILABLE_WEBKIT_VERSION_1_3_AND_LATER_BUT_DEPRECATED_IN_WEBKIT_VERSION_3_0;
-- (short)compareBoundaryPoints:(unsigned short)how :(DOMRange *)sourceRange AVAILABLE_WEBKIT_VERSION_1_3_AND_LATER_BUT_DEPRECATED_IN_WEBKIT_VERSION_3_0;
+- (void)setStart:(DOMNode *)refNode :(int)offset NS_DEPRECATED_MAC(10_4, 10_5);
+- (void)setEnd:(DOMNode *)refNode :(int)offset NS_DEPRECATED_MAC(10_4, 10_5);
+- (short)compareBoundaryPoints:(unsigned short)how :(DOMRange *)sourceRange NS_DEPRECATED_MAC(10_4, 10_5);
 @end
-
-#endif

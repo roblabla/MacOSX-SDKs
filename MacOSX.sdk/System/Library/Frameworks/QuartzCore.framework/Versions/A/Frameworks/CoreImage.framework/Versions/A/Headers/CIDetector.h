@@ -4,7 +4,7 @@
  All rights reserved. */
 
 
-#import "CoreImageDefines.h"
+#import <CoreImage/CoreImageDefines.h>
 #import <Foundation/Foundation.h>
 
 @class CIImage;
@@ -50,6 +50,13 @@ CORE_IMAGE_CLASS_EXPORT
 /* Specifies a detector type for face recognition. */
 CORE_IMAGE_EXPORT NSString* const CIDetectorTypeFace __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0);
 
+/* Specifies a detector type for rectangle recognition. */
+CORE_IMAGE_EXPORT NSString* const CIDetectorTypeRectangle __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+
+/* Specifies a detector type for barcode recognition. */
+CORE_IMAGE_EXPORT NSString* const CIDetectorTypeQRCode __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+
+
 
 // Options that can be used with +[CIDetector detectorOfType:context:options:]
 
@@ -69,6 +76,8 @@ CORE_IMAGE_EXPORT NSString* const CIDetectorTracking __OSX_AVAILABLE_STARTING(__
 /* The key in the options dictionary used to specify the minimum size that the 
  detector will recognize as a feature.  The value for this key is an float NSNumber 
  from 0.0 ... 1.0 that represents a fraction of the minor dimension of the image. */
+
+/* For rectangle detector, the value for this key is from 0.2 ... 1.0*/
 CORE_IMAGE_EXPORT NSString* const CIDetectorMinFeatureSize __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
 
 
@@ -86,4 +95,10 @@ CORE_IMAGE_EXPORT NSString *const CIDetectorEyeBlink __OSX_AVAILABLE_STARTING(__
 
 /* The value for this key is a bool NSNumber. If true, facial expressions, such as smile are extracted */
 CORE_IMAGE_EXPORT NSString *const CIDetectorSmile __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+
+/* The value for this key is a float NSNumber. Specifies the per frame focal length.  */
+CORE_IMAGE_EXPORT NSString* const CIDetectorFocalLength __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+
+/* The value for this key is a float NSNumber. Specifies the aspect ratio of the rectangle detected.  */
+CORE_IMAGE_EXPORT NSString* const CIDetectorAspectRatio __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
 

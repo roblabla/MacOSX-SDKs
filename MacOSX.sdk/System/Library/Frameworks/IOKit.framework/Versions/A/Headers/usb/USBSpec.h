@@ -252,6 +252,7 @@ enum {
     kUSBHubClass                	= 9,
     kUSBDataClass               	= 10,
 	kUSBPersonalHealthcareClass		= 15,
+    kUSBBillBoardClass              = 17,
     kUSBDiagnosticClass				= 220,
     kUSBWirelessControllerClass 	= 224,
     kUSBMiscellaneousClass			= 239,
@@ -514,6 +515,7 @@ enum {
 #define kUSBProductID               "idProduct"         // good name
 #define kUSBProductName             kUSBProductID       // bad name - keep for backward compatibility
 #define kUSBDeviceReleaseNumber     "bcdDevice"
+#define kUSBSpecReleaseNumber       "bcdUSB"
 #define kUSBManufacturerStringIndex "iManufacturer"
 #define kUSBProductStringIndex      "iProduct"
 #define kUSBSerialNumberStringIndex "iSerialNumber"

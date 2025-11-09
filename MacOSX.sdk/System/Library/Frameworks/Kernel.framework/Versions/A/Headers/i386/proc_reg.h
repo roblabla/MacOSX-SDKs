@@ -145,6 +145,7 @@
 /*
  * CR4
  */
+#define CR4_SMAP	0x00200000	/* Supervisor-Mode Access Protect */
 #define CR4_SMEP	0x00100000	/* Supervisor-Mode Execute Protect */
 #define CR4_OSXSAVE	0x00040000	/* OS supports XSAVE */
 #define CR4_PCIDE	0x00020000	/* PCID Enable */
@@ -166,18 +167,16 @@
 /*
  * XCR0 - XFEATURE_ENABLED_MASK (a.k.a. XFEM) register
  */
-#define	XCR0_YMM 0x0000000000000004ULL /* YMM state available */
-#define	XFEM_YMM XCR0_YMM
-#define XCR0_SSE 0x0000000000000002ULL	/* SSE supported by XSAVE/XRESTORE */
-#define XCR0_X87 0x0000000000000001ULL	/* x87, FPU/MMX (always set) */
-#define XFEM_SSE XCR0_SSE
-#define XFEM_X87 XCR0_X87
+#define XCR0_X87 	(1ULL << 0)	/* x87, FPU/MMX (always set) */
+#define XCR0_SSE	(1ULL << 1)	/* SSE supported by XSAVE/XRESTORE */
+#define	XCR0_YMM	(1ULL << 2)	/* YMM state available */
+#define XFEM_X87	XCR0_X87
+#define XFEM_SSE	XCR0_SSE
+#define	XFEM_YMM	XCR0_YMM
 #define XCR0 (0)
 
 #define	PMAP_PCID_PRESERVE (1ULL << 63)
 #define	PMAP_PCID_MASK (0xFFF)
-
-#define RDRAND_RAX 	.byte 0x48, 0x0f, 0xc7, 0xf0
 
 #ifndef	ASSEMBLER
 
@@ -365,6 +364,16 @@ static inline void invlpg(uintptr_t addr)
 	__asm__  volatile("invlpg (%0)" :: "r" (addr) : "memory");
 }
 
+static inline void clac(void)
+{
+	__asm__  volatile("clac");
+}
+
+static inline void stac(void)
+{
+	__asm__  volatile("stac");
+}
+
 /*
  * Access to machine-specific registers (available on 586 and better only)
  * Note: the rd* operations modify the parameters directly (without using
@@ -379,6 +388,9 @@ static inline void invlpg(uintptr_t addr)
 
 #define rdtsc(lo,hi) \
 	__asm__ volatile("lfence; rdtsc; lfence" : "=a" (lo), "=d" (hi))
+
+#define rdtsc_nofence(lo,hi) \
+	__asm__ volatile("rdtsc" : "=a" (lo), "=d" (hi))
 
 #define write_tsc(lo,hi) wrmsr(0x10, lo, hi)
 
@@ -459,6 +471,8 @@ __END_DECLS
 
 #define MSR_IA32_PERFCTR0			0xc1
 #define MSR_IA32_PERFCTR1			0xc2
+#define MSR_IA32_PERFCTR3			0xc3
+#define MSR_IA32_PERFCTR4			0xc4
 
 #define MSR_PLATFORM_INFO			0xce
 
@@ -477,6 +491,8 @@ __END_DECLS
 
 #define MSR_IA32_EVNTSEL0			0x186
 #define MSR_IA32_EVNTSEL1			0x187
+#define MSR_IA32_EVNTSEL2			0x188
+#define MSR_IA32_EVNTSEL3			0x189
 
 #define MSR_FLEX_RATIO				0x194
 #define MSR_IA32_PERF_STS			0x198
@@ -533,17 +549,25 @@ __END_DECLS
 #define MSR_IA32_MC0_ADDR			0x402
 #define MSR_IA32_MC0_MISC			0x403
 
-#define MSR_IA32_VMX_BASE			0x480
-#define MSR_IA32_VMX_BASIC			MSR_IA32_VMX_BASE
-#define MSR_IA32_VMXPINBASED_CTLS		MSR_IA32_VMX_BASE+1
-#define MSR_IA32_PROCBASED_CTLS			MSR_IA32_VMX_BASE+2
-#define MSR_IA32_VMX_EXIT_CTLS			MSR_IA32_VMX_BASE+3
-#define MSR_IA32_VMX_ENTRY_CTLS			MSR_IA32_VMX_BASE+4
-#define MSR_IA32_VMX_MISC			MSR_IA32_VMX_BASE+5
-#define MSR_IA32_VMX_CR0_FIXED0			MSR_IA32_VMX_BASE+6
-#define MSR_IA32_VMX_CR0_FIXED1			MSR_IA32_VMX_BASE+7
-#define MSR_IA32_VMX_CR4_FIXED0			MSR_IA32_VMX_BASE+8
-#define MSR_IA32_VMX_CR4_FIXED1			MSR_IA32_VMX_BASE+9
+#define MSR_IA32_VMX_BASE					0x480
+#define MSR_IA32_VMX_BASIC					MSR_IA32_VMX_BASE
+#define MSR_IA32_VMX_PINBASED_CTLS			MSR_IA32_VMX_BASE+1
+#define MSR_IA32_VMX_PROCBASED_CTLS			MSR_IA32_VMX_BASE+2
+#define MSR_IA32_VMX_EXIT_CTLS				MSR_IA32_VMX_BASE+3
+#define MSR_IA32_VMX_ENTRY_CTLS				MSR_IA32_VMX_BASE+4
+#define MSR_IA32_VMX_MISC					MSR_IA32_VMX_BASE+5
+#define MSR_IA32_VMX_CR0_FIXED0				MSR_IA32_VMX_BASE+6
+#define MSR_IA32_VMX_CR0_FIXED1				MSR_IA32_VMX_BASE+7
+#define MSR_IA32_VMX_CR4_FIXED0				MSR_IA32_VMX_BASE+8
+#define MSR_IA32_VMX_CR4_FIXED1				MSR_IA32_VMX_BASE+9
+#define MSR_IA32_VMX_VMCS_ENUM				MSR_IA32_VMX_BASE+10
+#define MSR_IA32_VMX_PROCBASED_CTLS2		MSR_IA32_VMX_BASE+11
+#define MSR_IA32_VMX_EPT_VPID_CAP			MSR_IA32_VMX_BASE+12
+#define MSR_IA32_VMX_TRUE_PINBASED_CTLS		MSR_IA32_VMX_BASE+13
+#define MSR_IA32_VMX_TRUE_PROCBASED_CTLS	MSR_IA32_VMX_BASE+14
+#define MSR_IA32_VMX_TRUE_VMEXIT_CTLS		MSR_IA32_VMX_BASE+15
+#define MSR_IA32_VMX_TRUE_VMENTRY_CTLS		MSR_IA32_VMX_BASE+16
+#define MSR_IA32_VMX_VMFUNC					MSR_IA32_VMX_BASE+17
 
 #define MSR_IA32_DS_AREA			0x600
 

@@ -1,5 +1,5 @@
 /*	NSArray.h
-	Copyright (c) 1994-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -13,9 +13,12 @@
 
 @interface NSArray : NSObject <NSCopying, NSMutableCopying, NSSecureCoding, NSFastEnumeration>
 
-- (NSUInteger)count;
+@property (readonly) NSUInteger count;
 - (id)objectAtIndex:(NSUInteger)index;
-    
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithObjects:(const id [])objects count:(NSUInteger)cnt NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+
 @end
 
 @interface NSArray (NSExtendedArray)
@@ -24,7 +27,7 @@
 - (NSArray *)arrayByAddingObjectsFromArray:(NSArray *)otherArray;
 - (NSString *)componentsJoinedByString:(NSString *)separator;
 - (BOOL)containsObject:(id)anObject;
-- (NSString *)description;
+@property (readonly, copy) NSString *description;
 - (NSString *)descriptionWithLocale:(id)locale;
 - (NSString *)descriptionWithLocale:(id)locale indent:(NSUInteger)level;
 - (id)firstObjectCommonWithArray:(NSArray *)otherArray;
@@ -34,11 +37,11 @@
 - (NSUInteger)indexOfObjectIdenticalTo:(id)anObject;
 - (NSUInteger)indexOfObjectIdenticalTo:(id)anObject inRange:(NSRange)range;
 - (BOOL)isEqualToArray:(NSArray *)otherArray;
-- (id)firstObject NS_AVAILABLE(10_6, 4_0);
-- (id)lastObject;
+@property (nonatomic, readonly) id firstObject NS_AVAILABLE(10_6, 4_0);
+@property (nonatomic, readonly) id lastObject;
 - (NSEnumerator *)objectEnumerator;
 - (NSEnumerator *)reverseObjectEnumerator;
-- (NSData *)sortedArrayHint;
+@property (readonly, copy) NSData *sortedArrayHint;
 - (NSArray *)sortedArrayUsingFunction:(NSInteger (*)(id, id, void *))comparator context:(void *)context;
 - (NSArray *)sortedArrayUsingFunction:(NSInteger (*)(id, id, void *))comparator context:(void *)context hint:(NSData *)hint;
 - (NSArray *)sortedArrayUsingSelector:(SEL)comparator;
@@ -53,7 +56,6 @@
 
 - (id)objectAtIndexedSubscript:(NSUInteger)idx NS_AVAILABLE(10_8, 6_0);
 
-#if NS_BLOCKS_AVAILABLE
 - (void)enumerateObjectsUsingBlock:(void (^)(id obj, NSUInteger idx, BOOL *stop))block NS_AVAILABLE(10_6, 4_0);
 - (void)enumerateObjectsWithOptions:(NSEnumerationOptions)opts usingBlock:(void (^)(id obj, NSUInteger idx, BOOL *stop))block NS_AVAILABLE(10_6, 4_0);
 - (void)enumerateObjectsAtIndexes:(NSIndexSet *)s options:(NSEnumerationOptions)opts usingBlock:(void (^)(id obj, NSUInteger idx, BOOL *stop))block NS_AVAILABLE(10_6, 4_0);
@@ -77,8 +79,6 @@ typedef NS_OPTIONS(NSUInteger, NSBinarySearchingOptions) {
 
 - (NSUInteger)indexOfObject:(id)obj inSortedRange:(NSRange)r options:(NSBinarySearchingOptions)opts usingComparator:(NSComparator)cmp NS_AVAILABLE(10_6, 4_0); // binary search
 
-#endif
-
 @end
 
 @interface NSArray (NSArrayCreation)
@@ -89,17 +89,14 @@ typedef NS_OPTIONS(NSUInteger, NSBinarySearchingOptions) {
 + (instancetype)arrayWithObjects:(id)firstObj, ... NS_REQUIRES_NIL_TERMINATION;
 + (instancetype)arrayWithArray:(NSArray *)array;
 
-- (instancetype)init;	/* designated initializer */
-- (instancetype)initWithObjects:(const id [])objects count:(NSUInteger)cnt;	/* designated initializer */
-
 - (instancetype)initWithObjects:(id)firstObj, ... NS_REQUIRES_NIL_TERMINATION;
 - (instancetype)initWithArray:(NSArray *)array;
 - (instancetype)initWithArray:(NSArray *)array copyItems:(BOOL)flag;
 
-+ (id /* NSArray * */)arrayWithContentsOfFile:(NSString *)path;
-+ (id /* NSArray * */)arrayWithContentsOfURL:(NSURL *)url;
-- (id /* NSArray * */)initWithContentsOfFile:(NSString *)path;
-- (id /* NSArray * */)initWithContentsOfURL:(NSURL *)url;
++ (NSArray *)arrayWithContentsOfFile:(NSString *)path;
++ (NSArray *)arrayWithContentsOfURL:(NSURL *)url;
+- (NSArray *)initWithContentsOfFile:(NSString *)path;
+- (NSArray *)initWithContentsOfURL:(NSURL *)url;
 
 @end
 
@@ -120,6 +117,9 @@ typedef NS_OPTIONS(NSUInteger, NSBinarySearchingOptions) {
 - (void)removeLastObject;
 - (void)removeObjectAtIndex:(NSUInteger)index;
 - (void)replaceObjectAtIndex:(NSUInteger)index withObject:(id)anObject;
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCapacity:(NSUInteger)numItems NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
 @end
 
@@ -147,10 +147,8 @@ typedef NS_OPTIONS(NSUInteger, NSBinarySearchingOptions) {
 
 - (void)setObject:(id)obj atIndexedSubscript:(NSUInteger)idx NS_AVAILABLE(10_8, 6_0);
 
-#if NS_BLOCKS_AVAILABLE
 - (void)sortUsingComparator:(NSComparator)cmptr NS_AVAILABLE(10_6, 4_0);
 - (void)sortWithOptions:(NSSortOptions)opts usingComparator:(NSComparator)cmptr NS_AVAILABLE(10_6, 4_0);
-#endif
 
 @end
 
@@ -158,8 +156,10 @@ typedef NS_OPTIONS(NSUInteger, NSBinarySearchingOptions) {
 
 + (instancetype)arrayWithCapacity:(NSUInteger)numItems;
 
-- (instancetype)init;	/* designated initializer */
-- (instancetype)initWithCapacity:(NSUInteger)numItems;	/* designated initializer */
++ (NSMutableArray *)arrayWithContentsOfFile:(NSString *)path;
++ (NSMutableArray *)arrayWithContentsOfURL:(NSURL *)url;
+- (NSMutableArray *)initWithContentsOfFile:(NSString *)path;
+- (NSMutableArray *)initWithContentsOfURL:(NSURL *)url;
 
 @end
 

@@ -22,6 +22,7 @@
 #include <CoreMedia/CMSampleBuffer.h>
 #include <CoreMedia/CMFormatDescription.h>
 #include <CoreMedia/CMTime.h>
+#include <CoreMedia/CMTimeRange.h>
 
 #include <VideoToolbox/VTSession.h>
 #include <VideoToolbox/VTCompressionProperties.h>
@@ -34,6 +35,8 @@ extern "C"
 #endif
     
 #pragma pack(push, 4)
+	
+CF_IMPLICIT_BRIDGING_ENABLED
 
 /*!
 	@typedef	VTCompressionSessionRef
@@ -91,9 +94,10 @@ typedef void (*VTCompressionOutputCallback)(
 		The EncoderID CFString may be obtained from the kVTVideoEncoderList_EncoderID entry in
 		the array returned by VTCopyVideoEncoderList.
 */
-VT_EXPORT const CFStringRef kVTVideoEncoderSpecification_EncoderID VT_AVAILABLE_STARTING(10_8); // CFString
+VT_EXPORT const CFStringRef kVTVideoEncoderSpecification_EncoderID __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_8_0); // CFString
 
-
+CF_IMPLICIT_BRIDGING_DISABLED
+	
 /*!
 	@function	VTCompressionSessionCreate
 	@abstract	Creates a session for compressing video frames.
@@ -138,8 +142,10 @@ VTCompressionSessionCreate(
 	CFAllocatorRef								compressedDataAllocator,	/* can be NULL */
 	VTCompressionOutputCallback					outputCallback,
 	void *										outputCallbackRefCon,
-	VTCompressionSessionRef *					compressionSessionOut) VT_AVAILABLE_STARTING(10_8);
+	VTCompressionSessionRef *					compressionSessionOut) __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_8_0);
 
+CF_IMPLICIT_BRIDGING_ENABLED
+	
 /*!
 	@function	VTCompressionSessionInvalidate
 	@abstract	Tears down a compression session.
@@ -151,14 +157,14 @@ VTCompressionSessionCreate(
     	Calling VTCompressionSessionInvalidate ensures a deterministic, orderly teardown.
 */
 VT_EXPORT void 
-VTCompressionSessionInvalidate( VTCompressionSessionRef session ) VT_AVAILABLE_STARTING(10_8);
+VTCompressionSessionInvalidate( VTCompressionSessionRef session ) __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_8_0);
 
 /*!
 	@function VTCompressionSessionGetTypeID
 	@abstract Returns the CFTypeID for compression sessions.  
 */
 VT_EXPORT CFTypeID 
-VTCompressionSessionGetTypeID(void) VT_AVAILABLE_STARTING(10_8);
+VTCompressionSessionGetTypeID(void) __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_8_0);
 
 /*!
 	@function	VTCompressionSessionGetPixelBufferPool
@@ -180,7 +186,7 @@ VTCompressionSessionGetTypeID(void) VT_AVAILABLE_STARTING(10_8);
 */
 VT_EXPORT CVPixelBufferPoolRef 
 VTCompressionSessionGetPixelBufferPool(
-	VTCompressionSessionRef		session ) VT_AVAILABLE_STARTING(10_8);
+	VTCompressionSessionRef		session ) __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_8_0);
 
 /*!
 	@function	VTCompressionSessionPrepareToEncodeFrames
@@ -196,7 +202,7 @@ VTCompressionSessionGetPixelBufferPool(
 		The compression session.
 */
 VT_EXPORT OSStatus
-VTCompressionSessionPrepareToEncodeFrames( VTCompressionSessionRef session ) VT_AVAILABLE_STARTING(10_9);
+VTCompressionSessionPrepareToEncodeFrames( VTCompressionSessionRef session ) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_8_0);
 	
 /*!
 	@function	VTCompressionSessionEncodeFrame
@@ -238,7 +244,7 @@ VTCompressionSessionEncodeFrame(
 	CMTime						duration, // may be kCMTimeInvalid
 	CFDictionaryRef				frameProperties, // may be NULL
 	void *						sourceFrameRefCon,
-	VTEncodeInfoFlags			*infoFlagsOut /* may be NULL */ ) VT_AVAILABLE_STARTING(10_8);
+	VTEncodeInfoFlags			*infoFlagsOut /* may be NULL */ ) __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_8_0);
 
 /*!
 	@function VTCompressionSessionCompleteFrames
@@ -252,10 +258,75 @@ VTCompressionSessionEncodeFrame(
 VT_EXPORT OSStatus
 VTCompressionSessionCompleteFrames(
 	VTCompressionSessionRef		session,
-	CMTime						completeUntilPresentationTimeStamp) VT_AVAILABLE_STARTING(10_8); // complete all frames if non-numeric
+	CMTime						completeUntilPresentationTimeStamp) __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_8_0); // complete all frames if non-numeric
+	
+#pragma mark Multi-pass
+	
+/*
+	When multi-pass encoding has been enabled by setting kVTCompressionPropertyKey_MultiPassStorage, you must call VTCompressionSessionBeginPass before each pass in which you call VTCompressionSessionEncodeFrame for source frames; you must call VTCompressionSessionEndPass to end each pass; and in each pass you must pass an identical sequence of source frames, frame properties and timestamps (except that source frames outside a pass' time ranges should be skipped).  See kVTCompressionPropertyKey_MultiPassStorage for additional rules and guidance.
+*/
+	
+	
+typedef CF_OPTIONS(uint32_t, VTCompressionSessionOptionFlags) {
+	kVTCompressionSessionBeginFinalPass = 1<<0
+};
+
+/*!
+	@function	VTCompressionSessionBeginPass
+	@abstract	Call to announce the start of a specific compression pass.
+	@discussion
+		During multi-pass encoding, this function must be called before VTCompressionSessionEncodeFrame.
+		It is an error to call this function when multi-pass encoding has not been enabled by setting kVTCompressionPropertyKey_MultiPassStorage.
+	@param	beginPassFlags
+		Pass kVTCompressionSessionBeginFinalPass to inform the encoder that the pass must be the final pass.
+*/
+VT_EXPORT OSStatus
+VTCompressionSessionBeginPass(
+	VTCompressionSessionRef			session,
+	VTCompressionSessionOptionFlags	beginPassFlags,
+	uint32_t						*reserved /* pass NULL */ ) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+	
+/*!
+	@function	VTCompressionSessionEndPass
+	@abstract	Call to announce the end of a pass.
+	@discussion
+		VTCompressionSessionEndPass can take a long time, since the video encoder may perform significant processing between passes.
+		VTCompressionSessionEndPass will indicate via the furtherPassesRequestedOut argument whether the video encoder would like to perform another pass.  There is no particular bound on the number of passes the video encoder may request, but the client is free to disregard this request and use the last-emitted set of frames.
+		It is an error to call this function when multi-pass encoding has not been enabled by setting kVTCompressionPropertyKey_MultiPassStorage.
+	@param furtherPassesRequestedOut
+		Points to a Boolean that will be set to true if the video encoder would like to perform another pass, false otherwise.
+		You may pass NULL to indicate that the client is certain to use this as the final pass, in which case the video encoder can skip that evaluation step.
+*/
+VT_EXPORT OSStatus
+VTCompressionSessionEndPass(
+	VTCompressionSessionRef		session,
+	Boolean						*furtherPassesRequestedOut,
+	uint32_t					*reserved /* pass NULL */ ) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+	
+/*!
+	 @function	VTCompressionSessionGetTimeRangesForNextPass
+	 @abstract	Retrieves the time ranges for the next pass.
+	 @discussion
+		If VTCompressionSessionEndPass sets *furtherPassesRequestedOut to true, call VTCompressionSessionGetTimeRangesForNextPass to find out the time ranges for the next pass.  Source frames outside these time ranges should be skipped.
+		Each time range is considered to include any frame at its start time and not to include any frame at its end time.
+		It is an error to call this function when multi-pass encoding has not been enabled by setting kVTCompressionPropertyKey_MultiPassStorage, or when VTCompressionSessionEndPass did not set *furtherPassesRequestedOut to true.
+	 @param timeRangeCountOut
+		Points to a CMItemCount to receive the number of CMTimeRanges.
+	 @param timeRangeArrayOut
+		Points to a const CMTimeRange * to receive a pointer to a C array of CMTimeRanges.
+		The storage for this array belongs to the VTCompressionSession and should not be modified.
+		The pointer will be valid until the next call to VTCompressionSessionEndPass, or until the VTCompressionSession is invalidated or finalized.
+*/
+VT_EXPORT OSStatus
+VTCompressionSessionGetTimeRangesForNextPass(
+	VTCompressionSessionRef		session,
+	CMItemCount *				timeRangeCountOut,
+	const CMTimeRange **		timeRangeArrayOut ) __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0); /* returned pointer will be valid until next call to VTCompressionSessionEndPass */
 
 // See VTSession.h for property access APIs on VTCompressionSessions.
 // See VTCompressionProperties.h for standard property keys and values for compression sessions.
+	
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #pragma pack(pop)
     

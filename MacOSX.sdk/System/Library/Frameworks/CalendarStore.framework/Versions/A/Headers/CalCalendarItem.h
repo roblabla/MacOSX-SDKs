@@ -2,7 +2,7 @@
 //  CalCalendarItem.h
 //	Calendar Store Framework
 //
-//  Copyright 2006 Apple Computer, Inc. All rights reserved.
+//  Copyright 2006 Apple Inc. All rights reserved.
 //
 //  This class and its subclasses should be used to get information about CalEvent and CalTasks. Accessors for 
 //  properties common to both of these classes are included here.

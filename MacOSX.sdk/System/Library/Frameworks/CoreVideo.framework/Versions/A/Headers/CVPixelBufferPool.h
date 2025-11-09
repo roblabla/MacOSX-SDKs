@@ -2,12 +2,12 @@
  *  CVPixelBufferPool.h
  *  CoreVideo
  *
- *  Copyright 2004 Apple Computer, Inc. All rights reserved.
+ *  Copyright 2004-2014 Apple Inc. All rights reserved.
  *
  */
 
  /*! @header CVPixelBufferPool.h
-	@copyright 2004 Apple Computer, Inc. All rights reserved.
+	@copyright 2004-2014 Apple Inc. All rights reserved.
 	@availability Mac OS X 10.4 or later
     @discussion CVPixelBufferPool is a utility object for managing a set of CVPixelBuffer objects that are going to be recycled.
 		   

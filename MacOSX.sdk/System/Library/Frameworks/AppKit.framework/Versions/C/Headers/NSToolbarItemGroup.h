@@ -1,7 +1,7 @@
 /*
 	NSToolbarItemGroup.h
 	Application Kit
-	Copyright (c) 2000-2013, Apple Inc.
+	Copyright (c) 2000-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -25,8 +25,7 @@ NS_CLASS_AVAILABLE(10_5, NA)
 
 /* Set or get the array of subitems for the toolbar item.  By default, a NSToolbarItemGroup has an empty array of subitems.  You should call this to set the subitems before returning the item to the toolbar.  NSToolbarItemGroups may not contain other NSToolbarItemGroups as subitems.
 */
-- (void)setSubitems:(NSArray *)subitems;
-- (NSArray *)subitems;
+@property (copy) NSArray *subitems;
 
 @end
 

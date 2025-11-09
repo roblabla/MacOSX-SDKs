@@ -3,7 +3,7 @@
  
 	 Contains:   CoreFoundation Network HTTP authentication header
  
-	 Copyright:  Copyright (c) 2001-2008 Apple Inc. All rights reserved.
+	 Copyright:  Copyright (c) 2001-2013 Apple Inc. All rights reserved.
  
 	 Bugs?:	  For bug reports, consult the following page on
 				 the World Wide Web:
@@ -28,20 +28,11 @@
 
 
 
-
-#include <Availability.h>
-
 #if PRAGMA_ONCE
 #pragma once
 #endif
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#if PRAGMA_ENUM_ALWAYSINT
-	#pragma enumsalwaysint on
-#endif
+CF_EXTERN_C_BEGIN
 
 
 /*
@@ -61,7 +52,7 @@ typedef struct _CFHTTPAuthentication*   CFHTTPAuthenticationRef;
  *	to apply authentication to a request.  These errors are in the
  *	kCFStreamErrorDomainHTTP domain.
  */
-enum CFStreamErrorHTTPAuthentication {
+typedef CF_ENUM(int, CFStreamErrorHTTPAuthentication) {
 
   /*
    * The type of authentication to be applied to a request is not
@@ -81,7 +72,6 @@ enum CFStreamErrorHTTPAuthentication {
    */
   kCFStreamErrorHTTPAuthenticationBadPassword = -1002
 };
-typedef enum CFStreamErrorHTTPAuthentication CFStreamErrorHTTPAuthentication;
 
 
 /*
@@ -92,12 +82,8 @@ typedef enum CFStreamErrorHTTPAuthentication CFStreamErrorHTTPAuthentication;
  *	username for authentication as a CFString.  Needs to be added if
  *	CFHTTPAuthenticationRequiresUserNameAndPassword returns TRUE.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.4 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
-CFN_EXPORT const CFStringRef kCFHTTPAuthenticationUsername			   __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_2_0);
+CFN_EXPORT const CFStringRef kCFHTTPAuthenticationUsername CF_AVAILABLE(10_4, 2_0);
 
 /*
  *  kCFHTTPAuthenticationPassword
@@ -107,12 +93,8 @@ CFN_EXPORT const CFStringRef kCFHTTPAuthenticationUsername			   __OSX_AVAILABLE_
  *	password for authentication as a CFString.  Needs to be added if
  *	CFHTTPAuthenticationRequiresUserNameAndPassword returns TRUE.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.4 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
-CFN_EXPORT const CFStringRef kCFHTTPAuthenticationPassword			   __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_2_0);
+CFN_EXPORT const CFStringRef kCFHTTPAuthenticationPassword CF_AVAILABLE(10_4, 2_0);
 
 /*
  *  kCFHTTPAuthenticationAccountDomain
@@ -122,12 +104,8 @@ CFN_EXPORT const CFStringRef kCFHTTPAuthenticationPassword			   __OSX_AVAILABLE_
  *	domain for authentication as a CFString.  Needs to be added if
  *	CFHTTPAuthenticationRequiresAccountDomain returns TRUE.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.4 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
-CFN_EXPORT const CFStringRef kCFHTTPAuthenticationAccountDomain		  __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_2_0);
+CFN_EXPORT const CFStringRef kCFHTTPAuthenticationAccountDomain CF_AVAILABLE(10_4, 2_0);
 
 /*
  *  CFHTTPAuthenticationGetTypeID()
@@ -138,13 +116,9 @@ CFN_EXPORT const CFStringRef kCFHTTPAuthenticationAccountDomain		  __OSX_AVAILAB
  *  Mac OS X threading:
  *	Thread safe
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.2 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT CFTypeID 
-CFHTTPAuthenticationGetTypeID(void)						   __OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
+CFHTTPAuthenticationGetTypeID(void) CF_AVAILABLE(10_2, 2_0);
 
 
 
@@ -174,15 +148,9 @@ CFHTTPAuthenticationGetTypeID(void)						   __OSX_AVAILABLE_STARTING(__MAC_10_2,
  *	A freshly created authentication object useful for applying
  *	authentication credentials to new requests.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.2 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT CFHTTPAuthenticationRef 
-CFHTTPAuthenticationCreateFromResponse(
-  CFAllocatorRef	 alloc,
-  CFHTTPMessageRef   response)								__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
+CFHTTPAuthenticationCreateFromResponse(CFAllocatorRef alloc, CFHTTPMessageRef response) CF_AVAILABLE(10_2, 2_0);
 
 
 
@@ -220,15 +188,9 @@ CFHTTPAuthenticationCreateFromResponse(
  *	TRUE or FALSE depending on whether the authentication object is
  *	good for applying credentials to further requests.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.2 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT Boolean 
-CFHTTPAuthenticationIsValid(
-  CFHTTPAuthenticationRef   auth,
-  CFStreamError *		   error)	   /* can be NULL */	__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
+CFHTTPAuthenticationIsValid(CFHTTPAuthenticationRef auth, CFStreamError *error) CF_AVAILABLE(10_2, 2_0);
 
 
 
@@ -257,15 +219,9 @@ CFHTTPAuthenticationIsValid(
  *	TRUE if the given authentication information should be applied to
  *	the request, otherwise FALSE is returned.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.2 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT Boolean 
-CFHTTPAuthenticationAppliesToRequest(
-  CFHTTPAuthenticationRef   auth,
-  CFHTTPMessageRef		  request)						  __OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
+CFHTTPAuthenticationAppliesToRequest(CFHTTPAuthenticationRef auth, CFHTTPMessageRef request) CF_AVAILABLE(10_2, 2_0);
 
 
 
@@ -292,13 +248,9 @@ CFHTTPAuthenticationAppliesToRequest(
  *	Returns TRUE if the given authentication method requires ordered
  *	requests.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.2 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT Boolean 
-CFHTTPAuthenticationRequiresOrderedRequests(CFHTTPAuthenticationRef auth) __OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
+CFHTTPAuthenticationRequiresOrderedRequests(CFHTTPAuthenticationRef auth) CF_AVAILABLE(10_2, 2_0);
 
 
 
@@ -341,18 +293,14 @@ CFHTTPAuthenticationRequiresOrderedRequests(CFHTTPAuthenticationRef auth) __OSX_
  *	TRUE will be returned if the application of the credentials to
  *	the request was successful, otherwise FALSE is returned.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.2 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT Boolean 
 CFHTTPMessageApplyCredentials(
-  CFHTTPMessageRef		  request,
+  CFHTTPMessageRef          request,
   CFHTTPAuthenticationRef   auth,
-  CFStringRef			   username,
-  CFStringRef			   password,
-  CFStreamError *		   error)		  /* can be NULL */ __OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
+  CFStringRef               username,
+  CFStringRef               password,
+  CFStreamError *           error)          CF_AVAILABLE(10_2, 2_0);
 
 
 
@@ -393,17 +341,13 @@ CFHTTPMessageApplyCredentials(
  *	TRUE will be returned if the application of the credentials to
  *	the request was successful, otherwise FALSE is returned.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.4 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT Boolean 
 CFHTTPMessageApplyCredentialDictionary(
-  CFHTTPMessageRef		  request,
+  CFHTTPMessageRef          request,
   CFHTTPAuthenticationRef   auth,
-  CFDictionaryRef		   dict,
-  CFStreamError *		   error)		 /* can be NULL */  __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_2_0);
+  CFDictionaryRef           dict,
+  CFStreamError *           error)          CF_AVAILABLE(10_4, 2_0);
 
 
 
@@ -432,13 +376,9 @@ CFHTTPMessageApplyCredentialDictionary(
  *	This call will return the authentication information's namespace
  *	if there is one, otherwise it will return NULL.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.2 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT CFStringRef 
-CFHTTPAuthenticationCopyRealm(CFHTTPAuthenticationRef auth)   __OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
+CFHTTPAuthenticationCopyRealm(CFHTTPAuthenticationRef auth) CF_AVAILABLE(10_2, 2_0);
 
 
 
@@ -467,13 +407,9 @@ CFHTTPAuthenticationCopyRealm(CFHTTPAuthenticationRef auth)   __OSX_AVAILABLE_ST
  *	Returns a list of domain URL's on which the given authentication
  *	should be applied.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.2 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT CFArrayRef 
-CFHTTPAuthenticationCopyDomains(CFHTTPAuthenticationRef auth) __OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
+CFHTTPAuthenticationCopyDomains(CFHTTPAuthenticationRef auth) CF_AVAILABLE(10_2, 2_0);
 
 
 
@@ -500,13 +436,9 @@ CFHTTPAuthenticationCopyDomains(CFHTTPAuthenticationRef auth) __OSX_AVAILABLE_ST
  *	Returns the method of authentication which will be performed when
  *	applying credentials.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.2 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT CFStringRef 
-CFHTTPAuthenticationCopyMethod(CFHTTPAuthenticationRef auth)  __OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
+CFHTTPAuthenticationCopyMethod(CFHTTPAuthenticationRef auth) CF_AVAILABLE(10_2, 2_0);
 
 
 
@@ -532,13 +464,9 @@ CFHTTPAuthenticationCopyMethod(CFHTTPAuthenticationRef auth)  __OSX_AVAILABLE_ST
  *	Returns TRUE if the chosen authentication scheme requires a
  *	username and password.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.3 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT Boolean 
-CFHTTPAuthenticationRequiresUserNameAndPassword(CFHTTPAuthenticationRef auth) __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_2_0);
+CFHTTPAuthenticationRequiresUserNameAndPassword(CFHTTPAuthenticationRef auth) CF_AVAILABLE(10_3, 2_0);
 
 
 
@@ -565,23 +493,13 @@ CFHTTPAuthenticationRequiresUserNameAndPassword(CFHTTPAuthenticationRef auth) __
  *	Returns TRUE if the chosen authentication scheme requires a
  *	domain for authentication.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.4 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT Boolean 
-CFHTTPAuthenticationRequiresAccountDomain(CFHTTPAuthenticationRef auth) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_2_0);
+CFHTTPAuthenticationRequiresAccountDomain(CFHTTPAuthenticationRef auth) CF_AVAILABLE(10_4, 2_0);
 
 
 
-#if PRAGMA_ENUM_ALWAYSINT
-	#pragma enumsalwaysint reset
-#endif
-
-#ifdef __cplusplus
-}
-#endif
+CF_EXTERN_C_END
 
 #endif /* __CFHTTPAUTHENTICATION__ */
 

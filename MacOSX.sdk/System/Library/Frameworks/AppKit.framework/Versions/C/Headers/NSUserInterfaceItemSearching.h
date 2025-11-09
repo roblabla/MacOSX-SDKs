@@ -1,16 +1,14 @@
 /*
     NSUserInterfaceItemSearching.h
     Application Kit
-    Copyright (c) 2008-2013, Apple Inc.
+    Copyright (c) 2008-2014, Apple Inc.
     All rights reserved.
 */
 
 #import <Foundation/NSString.h>
 #import <AppKit/NSApplication.h>
 
-
 @protocol NSUserInterfaceItemSearching <NSObject>
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
 
 @required
 
@@ -18,9 +16,7 @@
 
     The handleMatchedItems block can be invoked from any thread desired.  If it is called more than once the additional results will be appended after previous items until the maximum is reached.
  */
-#if NS_BLOCKS_AVAILABLE
 - (void)searchForItemsWithSearchString:(NSString *)searchString resultLimit:(NSInteger)resultLimit matchedItemHandler:(void (^)(NSArray *items))handleMatchedItems;
-#endif
 
 /* return an array of strings (localized for display in the menu) that will be combined with separators to form the menu item title
  */
@@ -36,7 +32,6 @@
  */
 - (void)showAllHelpTopicsForSearchString:(NSString *)searchString;
 
-#endif
 @end
 
 

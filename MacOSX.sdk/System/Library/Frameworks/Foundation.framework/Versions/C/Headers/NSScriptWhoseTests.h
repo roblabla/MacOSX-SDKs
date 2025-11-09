@@ -1,6 +1,6 @@
 /*
 	NSScriptWhoseTests.h
-	Copyright (c) 1997-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1997-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -24,6 +24,8 @@ typedef NS_ENUM(NSUInteger, NSTestComparisonOperation) {
 @interface NSScriptWhoseTest : NSObject <NSCoding> {}
 
 - (BOOL)isTrue;
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCoder:(NSCoder *)inCoder NS_DESIGNATED_INITIALIZER;
 
 @end
 
@@ -34,9 +36,9 @@ typedef NS_ENUM(NSUInteger, NSTestComparisonOperation) {
     id _subTests;
 }
 
-- (id)initAndTestWithTests:(NSArray *)subTests;
-- (id)initOrTestWithTests:(NSArray *)subTests;
-- (id)initNotTestWithTest:(NSScriptWhoseTest *)subTest;
+- (instancetype)initAndTestWithTests:(NSArray *)subTests NS_DESIGNATED_INITIALIZER;
+- (instancetype)initOrTestWithTests:(NSArray *)subTests NS_DESIGNATED_INITIALIZER;
+- (instancetype)initNotTestWithTest:(NSScriptWhoseTest *)subTest NS_DESIGNATED_INITIALIZER;
 
 @end
 
@@ -50,8 +52,9 @@ typedef NS_ENUM(NSUInteger, NSTestComparisonOperation) {
     NSScriptObjectSpecifier *_object1;
     id _object2;
 }
-
-- (id)initWithObjectSpecifier:(NSScriptObjectSpecifier *)obj1 comparisonOperator:(NSTestComparisonOperation)compOp testObject:(id)obj2;
+- (instancetype)init NS_UNAVAILABLE;
+- (instancetype)initWithCoder:(NSCoder *)inCoder NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithObjectSpecifier:(NSScriptObjectSpecifier *)obj1 comparisonOperator:(NSTestComparisonOperation)compOp testObject:(id)obj2 NS_DESIGNATED_INITIALIZER;
 
 @end
 

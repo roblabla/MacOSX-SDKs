@@ -57,4 +57,10 @@
 #   endif
 #endif
 
+#if (TARGET_OS_MAC && !TARGET_IPHONE_SIMULATOR) || TARGET_OS_EMBEDDED
+#    define IIO_HAS_IOSURFACE 1
+#else
+#    define IIO_HAS_IOSURFACE 0
+#endif
+
 #endif	/* __IMAGEIOBASE__ */

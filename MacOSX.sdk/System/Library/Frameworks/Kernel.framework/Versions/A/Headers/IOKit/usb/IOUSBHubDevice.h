@@ -1,5 +1,5 @@
 /*
- * Copyright © 2006, 2012 Apple Inc.  All rights reserved.
+ * Copyright © 2006-2014 Apple Inc.  All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -26,6 +26,7 @@
 #define _IOKIT_IOUSBHUBDEVICE_H
 
 #include <IOKit/usb/IOUSBDevice.h>						// our superclass
+#include <IOKit/usb/IOUSBControllerV3.h>
 #include <IOKit/usb/IOUSBHubPolicyMaker.h>
 
 // forward refeference. we don't include the header file because it would cause a circular reference

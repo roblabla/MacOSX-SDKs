@@ -11,10 +11,10 @@
  *    notice, this list of conditions and the following disclaimer in the
  *    documentation and/or other materials provided with the distribution.
  *
- * THIS SOFTWARE IS PROVIDED BY APPLE COMPUTER, INC. ``AS IS'' AND ANY
+ * THIS SOFTWARE IS PROVIDED BY APPLE INC. ``AS IS'' AND ANY
  * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL APPLE COMPUTER, INC. OR
+ * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL APPLE INC. OR
  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
@@ -26,23 +26,20 @@
 
 #import <WebKit/DOMMouseEvent.h>
 
-#if WEBKIT_VERSION_MAX_ALLOWED >= WEBKIT_VERSION_3_0
-
 @class DOMAbstractView;
 
 enum {
     DOM_DOM_DELTA_PIXEL = 0x00,
     DOM_DOM_DELTA_LINE = 0x01,
     DOM_DOM_DELTA_PAGE = 0x02
-};
+} NS_ENUM_AVAILABLE_MAC(10_5);
 
+NS_CLASS_AVAILABLE_MAC(10_5)
 @interface DOMWheelEvent : DOMMouseEvent
-@property(readonly) int wheelDeltaX AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-@property(readonly) int wheelDeltaY AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-@property(readonly) int wheelDelta;
-@property(readonly) BOOL isHorizontal;
+@property (readonly) int wheelDeltaX NS_AVAILABLE_MAC(10_5);
+@property (readonly) int wheelDeltaY NS_AVAILABLE_MAC(10_5);
+@property (readonly) int wheelDelta;
+@property (readonly) BOOL isHorizontal;
 
-- (void)initWheelEvent:(int)wheelDeltaX wheelDeltaY:(int)wheelDeltaY view:(DOMAbstractView *)view screenX:(int)screenX screenY:(int)screenY clientX:(int)clientX clientY:(int)clientY ctrlKey:(BOOL)ctrlKey altKey:(BOOL)altKey shiftKey:(BOOL)shiftKey metaKey:(BOOL)metaKey AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+- (void)initWheelEvent:(int)wheelDeltaX wheelDeltaY:(int)wheelDeltaY view:(DOMAbstractView *)view screenX:(int)screenX screenY:(int)screenY clientX:(int)clientX clientY:(int)clientY ctrlKey:(BOOL)ctrlKey altKey:(BOOL)altKey shiftKey:(BOOL)shiftKey metaKey:(BOOL)metaKey NS_AVAILABLE_MAC(10_5);
 @end
-
-#endif

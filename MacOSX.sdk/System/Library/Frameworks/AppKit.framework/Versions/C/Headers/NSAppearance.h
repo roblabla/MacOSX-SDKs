@@ -1,7 +1,7 @@
 /*
         NSAppearance.h
         Application Kit
-        Copyright (c) 2011-2013, Apple Inc.
+        Copyright (c) 2011-2014, Apple Inc.
         All rights reserved.
 */
 
@@ -17,10 +17,13 @@ NS_CLASS_AVAILABLE_MAC(10_9)
     NSBundle *_bundle;
     void *_private;
     id _reserved;
+    id _auxiliary;
 #if !__LP64__
-    id _extra[3];
+    id _extra[2];
 #endif
 }
+
+@property (readonly, copy) NSString *name NS_AVAILABLE_MAC(10_9);
 
 // Setting and identifying the current appearance in the thread.
 + (NSAppearance *)currentAppearance;
@@ -35,7 +38,11 @@ NS_CLASS_AVAILABLE_MAC(10_9)
 /* Creates an NSAppearance by searching the specified bundle for a file with the specified name (without path extension).
     If bundle is nil, the main bundle is assumed.
  */
-- (id)initWithAppearanceNamed:(NSString *)name bundle:(NSBundle *)bundle;
+- (instancetype)initWithAppearanceNamed:(NSString *)name bundle:(NSBundle *)bundle;
+
+/* Query allowsVibrancy to see if the given appearance actually needs vibrant drawing. You may want to draw differently if the current apperance is vibrant.
+ */
+@property (readonly) BOOL allowsVibrancy NS_AVAILABLE_MAC(10_10);
 
 @end
 
@@ -43,17 +50,22 @@ NS_CLASS_AVAILABLE_MAC(10_9)
 #pragma mark Standard Appearances
 
 APPKIT_EXTERN NSString *const NSAppearanceNameAqua NS_AVAILABLE_MAC(10_9);
-APPKIT_EXTERN NSString *const NSAppearanceNameLightContent NS_AVAILABLE_MAC(10_9);
+APPKIT_EXTERN NSString *const NSAppearanceNameLightContent NS_DEPRECATED_MAC(10_9, 10_10, "Light content should use the default Aqua apppearance.");
+
+/* The following two Vibrant appearances should only be set on an NSVisualEffectView, or one of its container subviews.
+ */
+APPKIT_EXTERN NSString *const NSAppearanceNameVibrantDark NS_AVAILABLE_MAC(10_10);
+APPKIT_EXTERN NSString *const NSAppearanceNameVibrantLight NS_AVAILABLE_MAC(10_10);
 
 #pragma mark -
 
 @protocol NSAppearanceCustomization <NSObject>
 @required
 
-@property(retain) NSAppearance *appearance NS_AVAILABLE_MAC(10_9);
+@property (strong) NSAppearance *appearance NS_AVAILABLE_MAC(10_9);
 
 /* This returns the appearance that would be used when drawing the receiver, taking inherited appearances into account.
  */
-@property(readonly) NSAppearance *effectiveAppearance NS_AVAILABLE_MAC(10_9);
+@property (readonly, strong) NSAppearance *effectiveAppearance NS_AVAILABLE_MAC(10_9);
 
 @end

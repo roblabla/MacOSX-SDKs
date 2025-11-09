@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2013 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2014 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -166,7 +166,6 @@ struct bpf_version {
 #define BIOCSDLT        _IOW('B',120, u_int)
 #define BIOCGDLTLIST    _IOWR('B',121, struct bpf_dltlist)
 #define BIOCSETFNR      _IOW('B', 126, struct bpf_program)
-
 /*
  * Structure prepended to each packet.
  */

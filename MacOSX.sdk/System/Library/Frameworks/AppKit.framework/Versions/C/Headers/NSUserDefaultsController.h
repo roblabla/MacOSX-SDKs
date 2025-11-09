@@ -1,7 +1,7 @@
 /*
 	NSUserDefaultsController.h
 	Application Kit
-	Copyright (c) 2002-2013, Apple Inc.
+	Copyright (c) 2002-2014, Apple Inc.
 	All rights reserved.
  */
 
@@ -26,20 +26,19 @@
     } _userDefaultsControllerFlags;
 }
 
-+ (id)sharedUserDefaultsController;
++ (NSUserDefaultsController *)sharedUserDefaultsController;
 
-- (id)initWithDefaults:(NSUserDefaults *)defaults initialValues:(NSDictionary *)initialValues;    // designated initializer; // if defaults is nil, the controller uses [NSUserDefaults standardUserDefaults]; if initialValues is nil, revertToInitialValues: has no effect
+- (instancetype)initWithDefaults:(NSUserDefaults *)defaults initialValues:(NSDictionary *)initialValues NS_DESIGNATED_INITIALIZER;    // if defaults is nil, the controller uses [NSUserDefaults standardUserDefaults]; if initialValues is nil, revertToInitialValues: has no effect
+- (instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 
-- (NSUserDefaults *)defaults;
-- (void)setInitialValues:(NSDictionary *)initialValues;
-- (NSDictionary *)initialValues;
+@property (readonly, strong) NSUserDefaults *defaults;
+@property (copy) NSDictionary *initialValues;
 
-- (void)setAppliesImmediately:(BOOL)flag;   // default: YES
-- (BOOL)appliesImmediately;
+@property BOOL appliesImmediately;   // default: YES
 
-- (BOOL)hasUnappliedChanges;
+@property (readonly) BOOL hasUnappliedChanges;
 
-- (id)values;    // accessor object for default values (independent of whether they are derived directly from the NSUserDefaults or from the initial values)
+@property (readonly, strong) id values;    // accessor object for default values (independent of whether they are derived directly from the NSUserDefaults or from the initial values)
 
 - (void)revert:(id)sender;
 - (void)save:(id)sender;    // no effect if applies immediately

@@ -1,5 +1,5 @@
 /*	NSXPCConnection.h
-        Copyright (c) 2011-2013, Apple Inc. All rights reserved.
+        Copyright (c) 2011-2014, Apple Inc. All rights reserved.
  */
 
 #import <dispatch/dispatch.h>
@@ -20,10 +20,8 @@
 // Returns a proxy object with no error handling block. Messages sent to the proxy object will be sent over the wire to the other side of the connection. All messages must be 'oneway void' return type. Control may be returned to the caller before the message is sent. This proxy object will conform with the NSXPCProxyCreating protocol.
 - (id)remoteObjectProxy;
 
-#if NS_BLOCKS_AVAILABLE
 // Returns a proxy object which will invoke the error handling block if an error occurs on the connection. If the message sent to the proxy has a reply handler, then either the error handler or the reply handler will be called exactly once. This proxy object will also conform with the NSXPCProxyCreating protocol.
 - (id)remoteObjectProxyWithErrorHandler:(void (^)(NSError *error))handler;
-#endif
 
 @end
 
@@ -40,16 +38,14 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
 @interface NSXPCConnection : NSObject <NSXPCProxyCreating> {
 @private
     void *_xconnection;
-    id _incomingReplyInfo;
+    id _repliesExpected;
     dispatch_queue_t _userQueue;
     uint32_t _state;
     uint32_t _state2;
-#if NS_BLOCKS_AVAILABLE
     void (^_interruptionHandler)();
     void (^_invalidationHandler)();
-#endif
     id _exportInfo;
-    id _replyInfo;
+    id _repliesRequested;
     id _importInfo;
     id <NSObject> _otherInfo;
     id _reserved1;
@@ -61,16 +57,16 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
     id _dCache;
 }
 
-// Initialize an NSXPCConnection that will connect to the specified service name.
-- (id)initWithServiceName:(NSString *)serviceName;
-@property (readonly) NSString *serviceName;
+// Initialize an NSXPCConnection that will connect to the specified service name. Note: Receiving a non-nil result from this init method does not mean the service name is valid or the service has been launched. The init method simply constructs the local object.
+- (instancetype)initWithServiceName:(NSString *)serviceName;
+@property (readonly, copy) NSString *serviceName;
 
-// Use this if looking up a name advertised in a launchd.plist. For example, an agent with a launchd.plist in ~/Library/LaunchAgents. If the connection is being made to something in a privileged Mach bootstrap (for example, a daemon with a launchd.plist in /Library/LaunchDaemons), then use the NSXPCConnectionPrivileged option.
-- (id)initWithMachServiceName:(NSString *)name options:(NSXPCConnectionOptions)options;
+// Use this if looking up a name advertised in a launchd.plist. For example, an agent with a launchd.plist in ~/Library/LaunchAgents. If the connection is being made to something in a privileged Mach bootstrap (for example, a daemon with a launchd.plist in /Library/LaunchDaemons), then use the NSXPCConnectionPrivileged option. Note: Receiving a non-nil result from this init method does not mean the service name is valid or the service has been launched. The init method simply constructs the local object.
+- (instancetype)initWithMachServiceName:(NSString *)name options:(NSXPCConnectionOptions)options;
 
 // Initialize an NSXPCConnection that will connect to an NSXPCListener (identified by its NSXPCListenerEndpoint).
-- (id)initWithListenerEndpoint:(NSXPCListenerEndpoint *)endpoint;
-@property (readonly) NSXPCListenerEndpoint *endpoint;
+- (instancetype)initWithListenerEndpoint:(NSXPCListenerEndpoint *)endpoint;
+@property (readonly, retain) NSXPCListenerEndpoint *endpoint;
 
 // The interface that describes messages that are allowed to be received by the exported object on this connection. This value is required if a exported object is set.
 @property (retain) NSXPCInterface *exportedInterface;
@@ -82,19 +78,20 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
 @property (retain) NSXPCInterface *remoteObjectInterface;
 
 // Get a proxy for the remote object (that is, the object exported from the other side of this connection). See descriptions in NSXPCProxyCreating for more details.
-- (id)remoteObjectProxy;
-#if NS_BLOCKS_AVAILABLE
+@property (readonly, retain) id remoteObjectProxy;
+
 - (id)remoteObjectProxyWithErrorHandler:(void (^)(NSError *error))handler;
 
-// The interruption handler will be called if the remote process exits or crashes. It may be possible to re-establish the connection by simply sending another message. The handler will be invoked on the same queue as reply messages and other handlers, and it will always be executed after any error handlers for remote proxies with outstanding requests.
+// The interruption handler will be called if the remote process exits or crashes. It may be possible to re-establish the connection by simply sending another message. The handler will be invoked on the same queue as replies and other handlers, but there is no guarantee of ordering between those callbacks and this one.
+// The interruptionHandler property is cleared after the connection becomes invalid. This is to mitigate the impact of a retain cycle created by referencing the NSXPCConnection instance inside this block.
 @property (copy) void (^interruptionHandler)(void);
 
-// The invalidation handler will be called if the connection can not be formed or the connection has terminated and may not be re-established. The handler will be invoked on the same queue as reply messages and other handlers. It will always be executed last, after any error handlers for remote proxies with outstanding requests. You may not send messages over the connection from within an invalidation handler block.
+// The invalidation handler will be called if the connection can not be formed or the connection has terminated and may not be re-established. The handler will be invoked on the same queue as replies and other handlers, but there is no guarantee of ordering between those callbacks and this one.
+// You may not send messages over the connection from within an invalidation handler block.
+// The invalidationHandler property is cleared after the connection becomes invalid. This is to mitigate the impact of a retain cycle created by referencing the NSXPCConnection instance inside this block.
 @property (copy) void (^invalidationHandler)(void);
 
-#endif
-
-// All connections start suspended. You must resume them before they will start processing received messages or sending messages through the remoteObjectProxy.
+// All connections start suspended. You must resume them before they will start processing received messages or sending messages through the remoteObjectProxy. Note: Calling resume does not immediately launch the XPC service. The service will be started on demand when the first message is sent. However, if the name specified when creating the connection is determined to be invalid, your invalidation handler will be called immediately (and asynchronously) after calling resume.
 - (void)resume;
 
 // Suspend the connection. Suspends must be balanced with resumes before the connection may be invalidated.
@@ -127,19 +124,19 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
 }
 
 // If your listener is an XPCService (that is, in the XPCServices folder of an application or framework), then use this method to get the shared, singleton NSXPCListener object that will await new connections. When the resume method is called on this listener, it will not return. Instead it hands over control to the object and allows it to service the listener as appropriate. This makes it ideal for use in your main() function. For more info on XPCServices, please refer to the developer documentation.
-+ (id)serviceListener;
++ (NSXPCListener *)serviceListener;
 
 // Create an anonymous listener connection. Other processes may connect to this listener by passing this listener object's endpoint to NSXPCConnection's -initWithListenerEndpoint: method.
-+ (id)anonymousListener;
++ (NSXPCListener *)anonymousListener;
 
 // Use this if listening on name advertised in a launchd.plist For example, an agent with a launchd.plist in ~/Library/LaunchAgents, or a daemon with a launchd.plist in /Library/LaunchDaemons.
-- (id)initWithMachServiceName:(NSString *)name;
+- (instancetype)initWithMachServiceName:(NSString *)name NS_DESIGNATED_INITIALIZER;
 
 // The delegate for the connection listener. If no delegate is set, all new connections will be rejected. See the protocol for more information on how to implement it.
 @property (assign) id <NSXPCListenerDelegate> delegate;
 
 // Get an endpoint object which may be sent over an existing connection. This allows the receiver of the endpoint to create a new connection to this NSXPCListener. The NSXPCListenerEndpoint uniquely names this listener object across connections.
-- (NSXPCListenerEndpoint *)endpoint;
+@property (readonly, retain) NSXPCListenerEndpoint *endpoint;
 
 // All listeners start suspended and must be resumed before they will process incoming requests. If called on the serviceListener, this method will never return. Call it as the last step inside your main function in your XPC service after setting up desired initial state and the listener itself. If called on any other NSXPCListener, the connection is resumed and the method returns immediately.
 - (void)resume;

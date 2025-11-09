@@ -99,8 +99,9 @@ GAMECONTROLLER_EXPORT
 /**
  Gets the profile for the controller that suits current application.
  
- There are only two supported profiles. Each controller may be able to map its inputs into all profiles or just one kind of
- profile. Query for the controller profile that suits your game, the simplest kind will be supported by the broadest variety
+ There are two supported profiles, with an additional optional profile for motion as well. 
+ Each controller may be able to map its inputs into all profiles or just one kind of profile. Query for the controller
+ profile that suits your game, the simplest kind will be supported by the broadest variety
  of controllers. A controller supporting the Extended Gamepad profile for example supports the Gamepad profile and more.
  As such it can always be used just in the Gamepad profile if that suits the game.
  
@@ -109,9 +110,18 @@ GAMECONTROLLER_EXPORT
  
  If a controller does not support the given profile the returned value will be nil. Use this to filter controllers if the
  application requires a specific kind of profile.
+ @see motion
  */
 @property (retain, readonly) GCGamepad *gamepad;
 @property (retain, readonly) GCExtendedGamepad *extendedGamepad;
+
+/**
+ Gets the motion input profile. This profile is optional and may be available if the controller is attached to a device that supports motion.
+ If this is nil the controller does not support motion input and only the gamepad & extendedGamepad profiles are available.
+ @see gamepad
+ @see extendedGamepad
+ */
+@property (retain, readonly) GCMotion *motion NS_AVAILABLE(10_10, 8_0);
 
 /**
  Get a list of controllers currently attached to the system.

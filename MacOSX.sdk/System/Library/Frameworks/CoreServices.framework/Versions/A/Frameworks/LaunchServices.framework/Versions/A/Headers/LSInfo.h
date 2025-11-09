@@ -19,10 +19,11 @@
 #include <CoreFoundation/CoreFoundation.h>
 #endif
 
+#if !TARGET_OS_IPHONE
 #ifndef __CARBONCORE__
 #include <CarbonCore/CarbonCore.h>
 #endif
-
+#endif
 
 #include <Availability.h>
 
@@ -57,7 +58,7 @@ enum {
   kLSDataErr                    = -10817, /* Not used in 10.4 and later*/
   kLSLaunchInProgressErr        = -10818, /* E.g. launching an already launching application*/
   kLSNotRegisteredErr           = -10819, /* Not used in 10.3 and later*/
-  kLSAppDoesNotClaimTypeErr     = -10820, /* Not used in 10.3 and later*/
+  kLSAppDoesNotClaimTypeErr     = -10820, /* One or more documents are of types (and/or one or more URLs are of schemes) not supported by the target application (sandboxed callers only)*/
   kLSAppDoesNotSupportSchemeWarning = -10821, /* Not used in 10.2 and later*/
   kLSServerCommunicationErr     = -10822, /* The server process (registration and recent items) is not available*/
   kLSCannotSetInfoErr           = -10823, /* The extension visibility on this item cannot be changed*/
@@ -167,7 +168,7 @@ enum {
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-LSInit(LSInitializeFlags inFlags)                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_3, __IPHONE_NA, __IPHONE_NA);
+LSInit(LSInitializeFlags inFlags)                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_3, __IPHONE_4_0, __IPHONE_4_0);
 
 
 
@@ -188,7 +189,7 @@ LSTerm(void)                                                  __OSX_AVAILABLE_BU
 
 
 /*
- *  LSCopyItemInfoForRef()
+ *  LSCopyItemInfoForRef()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Return information about an item.
@@ -204,12 +205,15 @@ LSTerm(void)                                                  __OSX_AVAILABLE_BU
  *    
  *    inItemRef:
  *      The FSRef of the item about which information is requested.
- *    
+ *
  *    inWhichInfo:
  *      Flags indicating which information to return
  *    
  *    outItemInfo:
  *      Information is returned in this structure. Must not be NULL
+ *
+ *  Deprecated:
+ *    Use LSCopyItemInfoForURL or URL resource properties instead.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -220,7 +224,7 @@ extern OSStatus
 LSCopyItemInfoForRef(
   const FSRef *       inItemRef,
   LSRequestedInfo     inWhichInfo,
-  LSItemInfoRecord *  outItemInfo)                            __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  LSItemInfoRecord *  outItemInfo)                            __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use LSCopyItemInfoForURL or URL resource properties instead.");
 
 
 
@@ -300,7 +304,7 @@ LSGetExtensionInfo(
 
 
 /*
- *  LSCopyDisplayNameForRef()
+ *  LSCopyDisplayNameForRef()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Get the display name for an FSRef.
@@ -320,7 +324,11 @@ LSGetExtensionInfo(
  *    outDisplayName:
  *      Pointer to the CFString into which the display name should be
  *      copied. Callers must dispose of the resulting CFString.
- *  
+ *
+ *  Deprecated:
+ *    Use LSCopyDisplayNameForURL or the URL resource property
+ *    kCFURLLocalizedNameKey or NSURLLocalizedNameKey instead.
+ *
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in CoreServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x
@@ -329,7 +337,7 @@ LSGetExtensionInfo(
 extern OSStatus 
 LSCopyDisplayNameForRef(
   const FSRef *  inRef,
-  CFStringRef *  outDisplayName)                              __OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_NA);
+  CFStringRef *  outDisplayName)                              __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_1, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use LSCopyDisplayNameForURL or the URL resource property kCFURLLocalizedNameKey or NSURLLocalizedNameKey instead.");
 
 
 
@@ -368,7 +376,7 @@ LSCopyDisplayNameForURL(
 
 
 /*
- *  LSSetExtensionHiddenForRef()
+ *  LSSetExtensionHiddenForRef()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Sets whether the extension for an FSRef is hidden or not.
@@ -389,7 +397,11 @@ LSCopyDisplayNameForURL(
  *    
  *    inHide:
  *      True to hide inRef's extension, false to show it.
- *  
+ *
+ *  Deprecated:
+ *    Use LSSetExtensionHiddenForURL or the URL resource property
+ *    kCFURLHasHiddenExtensionKey or NSURLHasHiddenExtensionKey instead.
+ *
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in CoreServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x
@@ -398,7 +410,7 @@ LSCopyDisplayNameForURL(
 extern OSStatus 
 LSSetExtensionHiddenForRef(
   const FSRef *  inRef,
-  Boolean        inHide)                                      __OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_NA);
+  Boolean        inHide)                                      __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_1, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use LSSetExtensionHiddenForURL or the URL resource property kCFURLHasHiddenExtensionKey or NSURLHasHiddenExtensionKey instead.");
 
 
 
@@ -438,7 +450,7 @@ LSSetExtensionHiddenForURL(
 
 
 /*
- *  LSCopyKindStringForRef()
+ *  LSCopyKindStringForRef()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Get the kind string for an item.
@@ -458,7 +470,11 @@ LSSetExtensionHiddenForURL(
  *    outKindString:
  *      A CFStringRef* to receive the copied kind string object. This
  *      CFStringRef must be released eventually.
- *  
+ *
+ *  Deprecated:
+ *    Use LSCopyKindStringForURL or the URL resource property
+ *    kCFURLLocalizedTypeDescriptionKey or NSURLLocalizedTypeDescriptionKey instead.
+ *
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x
@@ -467,7 +483,7 @@ LSSetExtensionHiddenForURL(
 extern OSStatus 
 LSCopyKindStringForRef(
   const FSRef *  inFSRef,
-  CFStringRef *  outKindString)                               __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  CFStringRef *  outKindString)                               __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use LSCopyKindStringForURL or the URL resource property kCFURLLocalizedTypeDescriptionKey or NSURLLocalizedTypeDescriptionKey instead.");
 
 
 
@@ -506,7 +522,7 @@ LSCopyKindStringForURL(
 
 
 /*
- *  LSCopyKindStringForTypeInfo()
+ *  LSCopyKindStringForTypeInfo()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Return the kind string for items like the provided info
@@ -544,6 +560,9 @@ LSCopyKindStringForURL(
  *      A CFStringRef* to receive the copied kind string object. This
  *      CFStringRef must be released eventually.
  *  
+ *  Deprecated:
+ *    Use UTTypeCopyDescription instead.
+ *
  *  Availability:
  *    Mac OS X:         in version 10.2 and later in CoreServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x
@@ -554,12 +573,12 @@ LSCopyKindStringForTypeInfo(
   OSType         inType,
   OSType         inCreator,
   CFStringRef    inExtension,         /* can be NULL */
-  CFStringRef *  outKindString)                               __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+  CFStringRef *  outKindString)                               __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_2, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use UTTypeCopyDescription instead.");
 
 
 
 /*
- *  LSCopyKindStringForMIMEType()
+ *  LSCopyKindStringForMIMEType()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Get the kind string for the specified MIME type.
@@ -580,6 +599,9 @@ LSCopyKindStringForTypeInfo(
  *      A CFStringRef* to receive the copied kind string object. This
  *      CFStringRef must be released eventually.
  *  
+ *  Deprecated:
+ *    Use UTTypeCopyDescription instead.
+ *
  *  Availability:
  *    Mac OS X:         in version 10.2 and later in CoreServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x
@@ -588,11 +610,11 @@ LSCopyKindStringForTypeInfo(
 extern OSStatus 
 LSCopyKindStringForMIMEType(
   CFStringRef    inMIMEType,
-  CFStringRef *  outKindString)                               __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+  CFStringRef *  outKindString)                               __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_2, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use UTTypeCopyDescription instead.");
 
 
 /*
- *  LSGetApplicationForItem()
+ *  LSGetApplicationForItem()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Return the application used to open an item.
@@ -625,7 +647,10 @@ LSCopyKindStringForMIMEType(
  *      THIS FUNCTION, DESPITE ITS NAME, RETAINS THE URL REFERENCE ON
  *      BEHALF OF THE CALLER. THE CALLER MUST EVENTUALLY RELEASE THE
  *      RETURNED URL REFERENCE.
- *  
+ *
+ *  Deprecated:
+ *    Use LSCopyDefaultApplicationURLForURL instead.
+ *
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x
@@ -636,12 +661,12 @@ LSGetApplicationForItem(
   const FSRef *  inItemRef,
   LSRolesMask    inRoleMask,
   FSRef *        outAppRef,        /* can be NULL */
-  CFURLRef *     outAppURL)        /* can be NULL */          __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  CFURLRef *     outAppURL)        /* can be NULL */          __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use LSCopyDefaultApplicationURLForURL instead.");
 
 
-
+	
 /*
- *  LSGetApplicationForInfo()
+ *  LSGetApplicationForInfo()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Return the application used to open items with particular data.
@@ -682,7 +707,10 @@ LSGetApplicationForItem(
  *      THIS FUNCTION, DESPITE ITS NAME, RETAINS THE URL REFERENCE ON
  *      BEHALF OF THE CALLER. THE CALLER MUST EVENTUALLY RELEASE THE
  *      RETURNED URL REFERENCE.
- *  
+ *
+ *  Deprecated:
+ *    Use LSCopyDefaultApplicationURLForContentType instead.
+ *
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x
@@ -695,12 +723,12 @@ LSGetApplicationForInfo(
   CFStringRef   inExtension,       /* can be NULL */
   LSRolesMask   inRoleMask,
   FSRef *       outAppRef,         /* can be NULL */
-  CFURLRef *    outAppURL)         /* can be NULL */          __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  CFURLRef *    outAppURL)         /* can be NULL */          __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use LSCopyDefaultApplicationURLForContentType instead.");
 
 
 
 /*
- *  LSCopyApplicationForMIMEType()
+ *  LSCopyApplicationForMIMEType()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Return the application used to handle data with the specified
@@ -728,7 +756,10 @@ LSGetApplicationForInfo(
  *    outAppURL:
  *      Receives the copied CFURLRef, which must be released by the
  *      caller.
- *  
+ *
+ *  Deprecated:
+ *    Use LSCopyDefaultApplicationURLForContentType instead.
+ *
  *  Availability:
  *    Mac OS X:         in version 10.2 and later in CoreServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x
@@ -738,12 +769,12 @@ extern OSStatus
 LSCopyApplicationForMIMEType(
   CFStringRef   inMIMEType,
   LSRolesMask   inRoleMask,
-  CFURLRef *    outAppURL)                                    __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
+  CFURLRef *    outAppURL)                                    __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_2, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use LSCopyDefaultApplicationURLForContentType instead.");
 
 
 
 /*
- *  LSGetApplicationForURL()
+ *  LSGetApplicationForURL()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Return the application used to open an item.
@@ -776,7 +807,10 @@ LSCopyApplicationForMIMEType(
  *      THIS FUNCTION, DESPITE ITS NAME, RETAINS THE URL REFERENCE ON
  *      BEHALF OF THE CALLER. THE CALLER MUST EVENTUALLY RELEASE THE
  *      RETURNED URL REFERENCE.
- *  
+ *
+ *  Deprecated:
+ *    Use LSCopyDefaultApplicationURLForURL instead.
+ *
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x
@@ -787,12 +821,12 @@ LSGetApplicationForURL(
   CFURLRef      inURL,
   LSRolesMask   inRoleMask,
   FSRef *       outAppRef,        /* can be NULL */
-  CFURLRef *    outAppURL)        /* can be NULL */           __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  CFURLRef *    outAppURL)        /* can be NULL */           __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use LSCopyDefaultApplicationURLForURL instead.");
 
 
 
 /*
- *  LSFindApplicationForInfo()
+ *  LSFindApplicationForInfo()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Locate a specific application.
@@ -827,7 +861,10 @@ LSGetApplicationForURL(
  *      THIS FUNCTION, DESPITE ITS NAME, RETAINS THE URL REFERENCE ON
  *      BEHALF OF THE CALLER. THE CALLER MUST EVENTUALLY RELEASE THE
  *      RETURNED URL REFERENCE.
- *  
+ *
+ *  Deprecated:
+ *    Use LSCopyApplicationURLsForBundleIdentifier instead.
+ *
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x
@@ -839,12 +876,179 @@ LSFindApplicationForInfo(
   CFStringRef   inBundleID,       /* can be NULL */
   CFStringRef   inName,           /* can be NULL */
   FSRef *       outAppRef,        /* can be NULL */
-  CFURLRef *    outAppURL)        /* can be NULL */           __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  CFURLRef *    outAppURL)        /* can be NULL */           __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use LSCopyApplicationURLsForBundleIdentifier instead.");
 
 
-
+	
 /*
- *  LSCanRefAcceptItem()
+ *  LSCopyDefaultApplicationURLForURL()
+ *  
+ *  Summary:
+ *    Return the application used to open an item.
+ *  
+ *  Discussion:
+ *    Consults the binding tables to return the application that would
+ *    be used to open inURL if it were double-clicked in the
+ *    Finder. This application will be the user-specified override if
+ *    appropriate or the default otherwise.
+ *  
+ *  Parameters:
+ *    
+ *    inURL:
+ *      The URL of the item for which the application is requested.
+ *
+ *    inRoleMask:
+ *      Whether to return the editor or viewer for inURL. If you
+ *      don't care which, use kLSRolesAll.
+ *    
+ *    outError:
+ *      On failure, set to a CFError describing the problem. If you are
+ *      not interested in this information, pass NULL. The caller is
+ *      responsible for releasing this object.
+ *
+ *  Result:
+ *    If an acceptable application is found, its URL is returned.
+ *    If the URL is a file:// URL, the application bound to the specified
+ *    file or directory's type is returned. If the URL's scheme is something
+ *    else, its default scheme handler is returned. If no application could
+ *    be found, NULL is returned and outError (if not NULL) is populated.
+ *    with kLSApplicationNotFoundErr.
+ *    The caller is responsible for releasing this URL.
+ */
+extern CFURLRef
+LSCopyDefaultApplicationURLForURL(
+  CFURLRef      inURL,
+  LSRolesMask   inRoleMask,
+  CFErrorRef *  outError)                                     __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_NA);
+	
+	
+	
+/*
+ *  LSCopyDefaultApplicationURLForContentType()
+ *  
+ *  Summary:
+ *    Return the application used to open a content type (UTI).
+ *  
+ *  Discussion:
+ *    Consults the binding tables to return the application that would
+ *    be used to open a file of type inContentType if it were double-clicked
+ *    in the Finder. This application will be the user-specified override if
+ *    appropriate or the default otherwise.
+ *  
+ *  Parameters:
+ *    
+ *    inContentType:
+ *      The Uniform Type Identifier (UTI) of the item for which the
+ *      application is requested.
+ *
+ *    inRoleMask:
+ *      Whether to return the editor or viewer for inContentType. If you
+ *      don't care which, use kLSRolesAll.
+ *    
+ *    outError:
+ *      On failure, set to a CFError describing the problem. If you are
+ *      not interested in this information, pass NULL. The caller is
+ *      responsible for releasing this object.
+ *
+ *  Result:
+ *    If an acceptable application is found, its URL is returned.
+ *    If no application could be found, NULL is returned and
+ *    outError (if not NULL) is populated with kLSApplicationNotFoundErr.
+ *    The caller is responsible for releasing this URL.
+ */
+extern CFURLRef
+LSCopyDefaultApplicationURLForContentType(
+  CFStringRef   inContentType,
+  LSRolesMask   inRoleMask,
+  CFErrorRef *  outError)                                     __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_NA);
+	
+	
+	
+/*
+ *  LSCopyApplicationURLsForBundleIdentifier()
+ *  
+ *  Summary:
+ *    Given a bundle identifier (such as com.apple.finder), find
+ *    all URLs to the corresponding application.
+ *  
+ *  Discussion:
+ *    Returns zero or more URLs to applications that have the specified
+ *    bundle identifier.
+ *  
+ *  Parameters:
+ *    
+ *    inBundleIdentifier:
+ *      The bundle identifier of interest, such as "com.apple.finder". Must
+ *      not be NULL.
+ *    
+ *    outError:
+ *      On failure, set to a CFError describing the problem. If you are
+ *      not interested in this information, pass NULL. The caller is
+ *      responsible for releasing this object.
+ *    
+ *  Result:
+ *    If any applications with the specified bundle identifier are found,
+ *    their URLs are returned in a CFArray. If no application could be found,
+ *    NULL is returned and outError (if not NULL) is populated with kLSApplicationNotFoundErr.
+ *    The order of elements in the array is undefined.
+ *    The caller is responsible for releasing this array.
+ *
+ */
+extern CFArrayRef
+LSCopyApplicationURLsForBundleIdentifier(
+  CFStringRef   inBundleIdentifier,
+  CFErrorRef *  outError)                                     __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_NA);
+	
+	
+	
+/*
+ *  LSCopyApplicationURLsForURL()
+ *  
+ *  Discussion:
+ *    Returns an array of URLs to applications that offer the requested
+ *    role(s) for the input item.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
+ *  
+ *  Parameters:
+ *    
+ *    inURL:
+ *      The CFURLRef of the item for which all suitable applications
+ *      are desired. If the URL is a file URL, it is treated as a
+ *      document, and applications are selected based on the document's
+ *      type information. Otherwise, applications are selected based on
+ *      the URL's scheme.
+ *    
+ *    inRoleMask:
+ *      The role(s) which must intersect with the role provided by an
+ *      application for the specified item in order for the application
+ *      to be included in the result. Pass kLSRolesAll if any role is
+ *      acceptable.
+ *  
+ *  Result:
+ *    An array of CFURLRefs, one for each application which can open
+ *    inURL with at least one of the roles in inRoleMask, or NULL if no
+ *    applications can open the item. When an array is returned, you
+ *    must eventually release it.
+ *
+ *    The order of the resulting array is undefined. If you need the
+ *    default application for the specified URL, use LSCopyDefaultApplicationURLForURL.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in CoreServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x
+ *    Non-Carbon CFM:   not available
+ */
+extern CFArrayRef 
+LSCopyApplicationURLsForURL(
+  CFURLRef      inURL,
+  LSRolesMask   inRoleMask)                                   __OSX_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_NA);
+
+	
+	
+/*
+ *  LSCanRefAcceptItem()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Determine whether an item can accept another item.
@@ -875,7 +1079,10 @@ LSFindApplicationForInfo(
  *    
  *    outAcceptsItem:
  *      Filled in with result. Must not be NULL.
- *  
+ *
+ *  Deprecated:
+ *    Use LSCanURLAcceptURL instead.
+ *
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x
@@ -887,7 +1094,7 @@ LSCanRefAcceptItem(
   const FSRef *       inTargetRef,
   LSRolesMask         inRoleMask,
   LSAcceptanceFlags   inFlags,
-  Boolean *           outAcceptsItem)                         __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  Boolean *           outAcceptsItem)                         __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use LSCanURLAcceptURL instead.");
 
 
 
@@ -975,11 +1182,11 @@ LSCanURLAcceptURL(
 extern OSStatus 
 LSRegisterURL(
   CFURLRef   inURL,
-  Boolean    inUpdate)                                        __OSX_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_NA);
+  Boolean    inUpdate)                                        __OSX_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_4_0);
 
 
 /*
- *  LSRegisterFSRef()
+ *  LSRegisterFSRef()   *** DEPRECATED ***
  *  
  *  Discussion:
  *    If the specified FSRef refers to an application or other bundle
@@ -1005,7 +1212,10 @@ LSRegisterURL(
  *    An OSStatus value: noErr - Success kLSNoRegistrationInfoErr - The
  *    item does not contain info requiring registration kLSDataErr -
  *    The item's property list info is malformed.
- *  
+ *
+ *  Deprecated:
+ *    Use LSRegisterURL instead.
+ *
  *  Availability:
  *    Mac OS X:         in version 10.3 and later in CoreServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x
@@ -1014,50 +1224,7 @@ LSRegisterURL(
 extern OSStatus 
 LSRegisterFSRef(
   const FSRef *  inRef,
-  Boolean        inUpdate)                                    __OSX_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_NA);
-
-
-
-/*
- *  LSCopyApplicationURLsForURL()
- *  
- *  Discussion:
- *    Returns an array of URLs to applications that offer the requested
- *    role(s) for the input item.
- *  
- *  Mac OS X threading:
- *    Thread safe since version 10.3
- *  
- *  Parameters:
- *    
- *    inURL:
- *      The CFURLRef of the item for which all suitable applications
- *      are desired. If the URL is a file URL, it is treated as a
- *      document, and applications are selected based on the document's
- *      type information. Otherwise, applications are selected based on
- *      the URL's scheme.
- *    
- *    inRoleMask:
- *      The role(s) which must intersect with the role provided by an
- *      application for the specified item in order for the application
- *      to be included in the result. Pass kLSRolesAll if any role is
- *      acceptable.
- *  
- *  Result:
- *    An array of CFURLRefs, one for each application which can open
- *    inURL with at least one of the roles in inRoleMask, or NULL if no
- *    applications can open the item. When an array is returned, you
- *    must eventually release it.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.3 and later in CoreServices.framework
- *    CarbonLib:        not available in CarbonLib 1.x
- *    Non-Carbon CFM:   not available
- */
-extern CFArrayRef 
-LSCopyApplicationURLsForURL(
-  CFURLRef      inURL,
-  LSRolesMask   inRoleMask)                                   __OSX_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_NA);
+  Boolean        inUpdate)                                    __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_3, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use LSRegisterURL instead.");
 
 
 
@@ -1132,97 +1299,132 @@ LSCopyApplicationURLsForURL(
  *    Value type CFDictionaryRef. May be NULL.
  */
 /*
- *  kLSItemContentType
+ *  kLSItemContentType   *** DEPRECATED ***
  *  
+ *  Deprecated:
+ *    Use the URL resource property kCFURLTypeIdentifierKey or NSURLTypeIdentifierKey instead.
+ *
  *  Availability:
  *    Mac OS X:         in version 10.4 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kLSItemContentType                          __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+extern const CFStringRef kLSItemContentType                          __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_4, __MAC_10_10, __IPHONE_4_0, __IPHONE_8_0, "Use the URL resource property kCFURLTypeIdentifierKey or NSURLTypeIdentifierKey instead.");
 /*
- *  kLSItemFileType
- *  
+ *  kLSItemFileType   *** DEPRECATED ***
+ *
+ *  Deprecated:
+ *    Use the URL resource property kCFURLTypeIdentifierKey or NSURLTypeIdentifierKey to get the file's UTI instead.
+ *
  *  Availability:
  *    Mac OS X:         in version 10.4 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kLSItemFileType                             __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+extern const CFStringRef kLSItemFileType                             __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_4, __MAC_10_10, __IPHONE_4_0, __IPHONE_8_0, "Use the URL resource property kCFURLTypeIdentifierKey or NSURLTypeIdentifierKey to get the file's UTI instead.");
 /*
- *  kLSItemFileCreator
+ *  kLSItemFileCreator   *** DEPRECATED ***
  *  
+ *  Deprecated:
+ *    Use the URL resource property kCFURLTypeIdentifierKey or NSURLTypeIdentifierKey to get the file's UTI instead.
+ *
  *  Availability:
  *    Mac OS X:         in version 10.4 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kLSItemFileCreator                          __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+extern const CFStringRef kLSItemFileCreator                          __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_4, __MAC_10_10, __IPHONE_4_0, __IPHONE_8_0, "Use the URL resource property kCFURLTypeIdentifierKey or NSURLTypeIdentifierKey to get the file's UTI instead.");
 /*
- *  kLSItemExtension
+ *  kLSItemExtension   *** DEPRECATED ***
  *  
+ *  Deprecated:
+ *    Use CFURLCopyPathExtension or -[NSURL pathExtension] instead.
+ *
  *  Availability:
  *    Mac OS X:         in version 10.4 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kLSItemExtension                            __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+extern const CFStringRef kLSItemExtension                            __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_4, __MAC_10_10, __IPHONE_4_0, __IPHONE_8_0, "Use CFURLCopyPathExtension or -[NSURL pathExtension] instead.");
 /*
- *  kLSItemDisplayName
+ *  kLSItemDisplayName   *** DEPRECATED ***
  *  
+ *  Deprecated:
+ *    Use LSCopyDisplayNameForURL or the URL resource property
+ *    kCFURLLocalizedNameKey or NSURLLocalizedNameKey instead.
+ *
  *  Availability:
  *    Mac OS X:         in version 10.4 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kLSItemDisplayName                          __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+extern const CFStringRef kLSItemDisplayName                          __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_4, __MAC_10_10, __IPHONE_4_0, __IPHONE_8_0, "Use LSCopyDisplayNameForURL or the URL resource property kCFURLLocalizedNameKey or NSURLLocalizedNameKey instead.");
 /*
- *  kLSItemDisplayKind
+ *  kLSItemDisplayKind   *** DEPRECATED ***
  *  
+ *  Deprecated:
+ *    Use LSCopyKindStringForURL or the URL resource property
+ *    kCFURLLocalizedTypeDescriptionKey or NSURLLocalizedTypeDescriptionKey instead.
+ *
  *  Availability:
  *    Mac OS X:         in version 10.4 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kLSItemDisplayKind                          __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+extern const CFStringRef kLSItemDisplayKind                          __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_4, __MAC_10_10, __IPHONE_4_0, __IPHONE_8_0, "Use LSCopyKindStringForURL or the URL resource property kCFURLLocalizedTypeDescriptionKey or NSURLLocalizedTypeDescriptionKey instead.");
 /*
- *  kLSItemRoleHandlerDisplayName
+ *  kLSItemRoleHandlerDisplayName   *** DEPRECATED ***
  *  
+ *  Deprecated:
+ *    Instead, resolve the desired role handler for the file, then use the URL resource
+ *    property kCFURLLocalizedNameKey or NSURLLocalizedNameKey on the role handler's URL.
+ *
  *  Availability:
  *    Mac OS X:         in version 10.4 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kLSItemRoleHandlerDisplayName               __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+extern const CFStringRef kLSItemRoleHandlerDisplayName               __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_4, __MAC_10_10, __IPHONE_4_0, __IPHONE_8_0, "Instead, resolve the desired role handler for the file, then use the URL resource property kCFURLLocalizedNameKey or NSURLLocalizedNameKey on the role handler's URL.");
 /*
- *  kLSItemIsInvisible
+ *  kLSItemIsInvisible   *** DEPRECATED ***
  *  
+ *  Deprecated:
+ *    Use the URL resource property kCFURLIsHiddenKey or NSURLIsHiddenKey instead.
+ *
  *  Availability:
  *    Mac OS X:         in version 10.4 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kLSItemIsInvisible                          __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+extern const CFStringRef kLSItemIsInvisible                          __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_4, __MAC_10_10, __IPHONE_4_0, __IPHONE_8_0, "Use the URL resource property kCFURLIsHiddenKey or NSURLIsHiddenKey instead.");
 /*
- *  kLSItemExtensionIsHidden
+ *  kLSItemExtensionIsHidden   *** DEPRECATED ***
  *  
+ *  Deprecated:
+ *    Use LSSetExtensionHiddenForURL or the URL resource property
+ *    kCFURLHasHiddenExtensionKey or NSURLHasHiddenExtensionKey instead.
+ *
  *  Availability:
  *    Mac OS X:         in version 10.4 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kLSItemExtensionIsHidden                    __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+extern const CFStringRef kLSItemExtensionIsHidden                    __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_4, __MAC_10_10, __IPHONE_4_0, __IPHONE_8_0, "Use LSSetExtensionHiddenForURL or the URL resource property kCFURLHasHiddenExtensionKey or NSURLHasHiddenExtensionKey instead.");
 /*
- *  kLSItemQuarantineProperties
+ *  kLSItemQuarantineProperties   *** DEPRECATED ***
  *  
+ *  Deprecated:
+ *    Use the URL resource property kCFURLQuarantinePropertiesKey or NSURLQuarantinePropertiesKey instead.
+ *
  *  Availability:
  *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kLSItemQuarantineProperties                 __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+extern const CFStringRef kLSItemQuarantineProperties                 __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_5, __MAC_10_10, __IPHONE_4_0, __IPHONE_8_0, "Use the URL resource property kCFURLQuarantinePropertiesKey or NSURLQuarantinePropertiesKey instead.");
+
 /*
- *  LSCopyItemAttribute()
+ *  LSCopyItemAttribute()   *** DEPRECATED ***
  *  
  *  Discussion:
  *    Assigns the value of the specified item's attribute (or NULL, if
@@ -1251,7 +1453,10 @@ extern const CFStringRef kLSItemQuarantineProperties                 __OSX_AVAIL
  *  Result:
  *    an OSStatus value. Returns kLSAttributeNotFoundErr if the item
  *    does not have the requested attribute.
- *  
+ *
+ *  Deprecated:
+ *    Use CFURLCopyResourcePropertyForKey or -[NSURL getResourceValue:forKey:error:] instead.
+ *
  *  Availability:
  *    Mac OS X:         in version 10.4 and later in CoreServices.framework
  *    CarbonLib:        not available
@@ -1262,12 +1467,12 @@ LSCopyItemAttribute(
   const FSRef *  inItem,
   LSRolesMask    inRoles,
   CFStringRef    inAttributeName,
-  CFTypeRef *    outValue)                                    __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+  CFTypeRef *    outValue)                                    __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_4, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use CFURLCopyResourcePropertyForKey or -[NSURL getResourceValue:forKey:error:] instead.");
 
 
 
 /*
- *  LSCopyItemAttributes()
+ *  LSCopyItemAttributes()   *** DEPRECATED ***
  *  
  *  Discussion:
  *    Creates a dictionary containing the specified attribute values
@@ -1299,7 +1504,10 @@ LSCopyItemAttribute(
  *  
  *  Result:
  *    an OSStatus value.
- *  
+ *
+ *  Deprecated:
+ *    Use CFURLCopyResourcePropertiesForKeys or -[NSURL resourceValuesForKeys:error:] instead.
+ *
  *  Availability:
  *    Mac OS X:         in version 10.4 and later in CoreServices.framework
  *    CarbonLib:        not available
@@ -1310,12 +1518,12 @@ LSCopyItemAttributes(
   const FSRef *      inItem,
   LSRolesMask        inRoles,
   CFArrayRef         inAttributeNames,
-  CFDictionaryRef *  outValues)                               __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+  CFDictionaryRef *  outValues)                               __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_4, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use CFURLCopyResourcePropertiesForKeys or -[NSURL resourceValuesForKeys:error:] instead.");
 
 
 
 /*
- *  LSSetItemAttribute()
+ *  LSSetItemAttribute()   *** DEPRECATED ***
  *  
  *  Discussion:
  *    Sets the value of a settable item's attribute. Currently, only
@@ -1343,7 +1551,10 @@ LSCopyItemAttributes(
  *  Result:
  *    an OSStatus value. Returns kLSAttributeNotSettableErr if the
  *    attribute is read-only.
- *  
+ *
+ *  Deprecated:
+ *    Use CFURLSetResourcePropertyForKey or -[NSURL setResourceValue:forKey:error:] instead.
+ *
  *  Availability:
  *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
@@ -1354,7 +1565,7 @@ LSSetItemAttribute(
   const FSRef *  inItem,
   LSRolesMask    inRoles,
   CFStringRef    inAttributeName,
-  CFTypeRef      inValue)               /* can be NULL */     __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+  CFTypeRef      inValue)               /* can be NULL */     __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_5, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use CFURLSetResourcePropertyForKey or -[NSURL setResourceValue:forKey:error:] instead.");
 
 
 
@@ -1384,7 +1595,7 @@ LSSetItemAttribute(
 extern CFStringRef 
 LSCopyDefaultRoleHandlerForContentType(
   CFStringRef   inContentType,
-  LSRolesMask   inRole)                                       __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+  LSRolesMask   inRole)                                       __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 
@@ -1439,7 +1650,7 @@ extern OSStatus
 LSSetDefaultRoleHandlerForContentType(
   CFStringRef   inContentType,
   LSRolesMask   inRole,
-  CFStringRef   inHandlerBundleID)                            __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+  CFStringRef   inHandlerBundleID)                            __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 
@@ -1478,7 +1689,7 @@ enum {
  *    Non-Carbon CFM:   not available
  */
 extern LSHandlerOptions 
-LSGetHandlerOptionsForContentType(CFStringRef inContentType)  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+LSGetHandlerOptionsForContentType(CFStringRef inContentType)  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 
@@ -1501,7 +1712,7 @@ LSGetHandlerOptionsForContentType(CFStringRef inContentType)  __OSX_AVAILABLE_ST
 extern OSStatus 
 LSSetHandlerOptionsForContentType(
   CFStringRef        inContentType,
-  LSHandlerOptions   inOptions)                               __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+  LSHandlerOptions   inOptions)                               __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 
@@ -1524,7 +1735,7 @@ LSSetHandlerOptionsForContentType(
  *    Non-Carbon CFM:   not available
  */
 extern CFStringRef 
-LSCopyDefaultHandlerForURLScheme(CFStringRef inURLScheme)     __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+LSCopyDefaultHandlerForURLScheme(CFStringRef inURLScheme)     __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 
@@ -1549,7 +1760,7 @@ LSCopyDefaultHandlerForURLScheme(CFStringRef inURLScheme)     __OSX_AVAILABLE_ST
  *    Non-Carbon CFM:   not available
  */
 extern CFArrayRef 
-LSCopyAllHandlersForURLScheme(CFStringRef inURLScheme)        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+LSCopyAllHandlersForURLScheme(CFStringRef inURLScheme)        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 
@@ -1574,7 +1785,7 @@ LSCopyAllHandlersForURLScheme(CFStringRef inURLScheme)        __OSX_AVAILABLE_ST
 extern OSStatus 
 LSSetDefaultHandlerForURLScheme(
   CFStringRef   inURLScheme,
-  CFStringRef   inHandlerBundleID)                            __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+  CFStringRef   inHandlerBundleID)                            __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 

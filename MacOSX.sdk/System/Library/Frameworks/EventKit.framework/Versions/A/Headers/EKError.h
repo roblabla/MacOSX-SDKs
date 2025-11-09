@@ -85,6 +85,5 @@ typedef enum EKErrorCode {
     EKErrorInvalidEntityType,
     EKErrorProcedureAlarmsNotMutable,
     EKErrorEventStoreNotAuthorized,
-    
     EKErrorLast // used internally
 } EKErrorCode;

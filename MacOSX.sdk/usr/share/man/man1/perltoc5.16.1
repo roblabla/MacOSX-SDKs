@@ -124,7 +124,7 @@
 .\" ========================================================================
 .\"
 .IX Title "PERLTOC 1"
-.TH PERLTOC 1 "2013-08-18" "perl v5.16.2" "Perl Programmers Reference Guide"
+.TH PERLTOC 1 "2014-09-09" "perl v5.16.3" "Perl Programmers Reference Guide"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
@@ -7311,13 +7311,29 @@ Oriented Perl\fR, \fIData Munging with Perl\fR, \fIMastering Perl/Tk\fR,
 .IP "\s-1THE\s0 \s-1KEEPERS\s0 \s-1OF\s0 \s-1THE\s0 \s-1RECORDS\s0" 4
 .IX Item "THE KEEPERS OF THE RECORDS"
 .PD
-.SS "perldelta \- what is new for perl v5.16.2"
-.IX Subsection "perldelta - what is new for perl v5.16.2"
+.SS "perldelta \- what is new for perl v5.16.3"
+.IX Subsection "perldelta - what is new for perl v5.16.3"
 .IP "\s-1DESCRIPTION\s0" 4
 .IX Item "DESCRIPTION"
 .PD 0
+.IP "Core Enhancements" 4
+.IX Item "Core Enhancements"
+.IP "Security" 4
+.IX Item "Security"
+.RS 4
+.IP "\s-1CVE\-2013\-1667:\s0 memory exhaustion with arbitrary hash keys" 4
+.IX Item "CVE-2013-1667: memory exhaustion with arbitrary hash keys"
+.IP "wrap-around with \s-1IO\s0 on long strings" 4
+.IX Item "wrap-around with IO on long strings"
+.IP "memory leak in Encode" 4
+.IX Item "memory leak in Encode"
+.RE
+.RS 4
+.RE
 .IP "Incompatible Changes" 4
 .IX Item "Incompatible Changes"
+.IP "Deprecations" 4
+.IX Item "Deprecations"
 .IP "Modules and Pragmata" 4
 .IX Item "Modules and Pragmata"
 .RS 4
@@ -7326,27 +7342,8 @@ Oriented Perl\fR, \fIData Munging with Perl\fR, \fIMastering Perl/Tk\fR,
 .RE
 .RS 4
 .RE
-.IP "Configuration and Compilation" 4
-.IX Item "Configuration and Compilation"
-.PD
-configuration should no longer be confused by ls colorization
-.IP "Platform Support" 4
-.IX Item "Platform Support"
-.RS 4
-.PD 0
-.IP "Platform-Specific Notes" 4
-.IX Item "Platform-Specific Notes"
-.PD
-\&\s-1AIX\s0
-.RE
-.RS 4
-.RE
-.IP "Selected Bug Fixes" 4
-.IX Item "Selected Bug Fixes"
-fix /\eh/ equivalence with /[\eh]/
 .IP "Known Problems" 4
 .IX Item "Known Problems"
-.PD 0
 .IP "Acknowledgements" 4
 .IX Item "Acknowledgements"
 .IP "Reporting Bugs" 4
@@ -7354,8 +7351,48 @@ fix /\eh/ equivalence with /[\eh]/
 .IP "\s-1SEE\s0 \s-1ALSO\s0" 4
 .IX Item "SEE ALSO"
 .PD
-.SS "perl5162delta, perldelta \- what is new for perl v5.16.2"
-.IX Subsection "perl5162delta, perldelta - what is new for perl v5.16.2"
+.SS "perl5163delta, perldelta \- what is new for perl v5.16.3"
+.IX Subsection "perl5163delta, perldelta - what is new for perl v5.16.3"
+.IP "\s-1DESCRIPTION\s0" 4
+.IX Item "DESCRIPTION"
+.PD 0
+.IP "Core Enhancements" 4
+.IX Item "Core Enhancements"
+.IP "Security" 4
+.IX Item "Security"
+.RS 4
+.IP "\s-1CVE\-2013\-1667:\s0 memory exhaustion with arbitrary hash keys" 4
+.IX Item "CVE-2013-1667: memory exhaustion with arbitrary hash keys"
+.IP "wrap-around with \s-1IO\s0 on long strings" 4
+.IX Item "wrap-around with IO on long strings"
+.IP "memory leak in Encode" 4
+.IX Item "memory leak in Encode"
+.RE
+.RS 4
+.RE
+.IP "Incompatible Changes" 4
+.IX Item "Incompatible Changes"
+.IP "Deprecations" 4
+.IX Item "Deprecations"
+.IP "Modules and Pragmata" 4
+.IX Item "Modules and Pragmata"
+.RS 4
+.IP "Updated Modules and Pragmata" 4
+.IX Item "Updated Modules and Pragmata"
+.RE
+.RS 4
+.RE
+.IP "Known Problems" 4
+.IX Item "Known Problems"
+.IP "Acknowledgements" 4
+.IX Item "Acknowledgements"
+.IP "Reporting Bugs" 4
+.IX Item "Reporting Bugs"
+.IP "\s-1SEE\s0 \s-1ALSO\s0" 4
+.IX Item "SEE ALSO"
+.PD
+.SS "perl5162delta \- what is new for perl v5.16.2"
+.IX Subsection "perl5162delta - what is new for perl v5.16.2"
 .IP "\s-1DESCRIPTION\s0" 4
 .IX Item "DESCRIPTION"
 .PD 0

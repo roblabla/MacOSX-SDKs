@@ -619,7 +619,7 @@ extern NSString* const DRSerialCopyManagementStateKey	AVAILABLE_MAC_OS_X_VERSION
 	@const		DRVerificationTypeProduceAgain
 	@discussion	One of the possible values of the @link DRVerificationTypeKey DRVerificationTypeKey @/link.
 				The engine will simply begin another production cycle and start calling 
-				<@link //apple_ref/occ/intfm/DRTrackDataProduction/produceDataForTrack:intoBuffer:length:atAddress:blockSize:ioFlags: produceDataForTrack:intoBuffer:length:atAddress:blockSize:ioFlags: @/link again.
+				@link //apple_ref/occ/intfm/DRTrackDataProduction/produceDataForTrack:intoBuffer:length:atAddress:blockSize:ioFlags: produceDataForTrack:intoBuffer:length:atAddress:blockSize:ioFlags: @/link again.
 */
 extern NSString* const DRVerificationTypeProduceAgain	AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 

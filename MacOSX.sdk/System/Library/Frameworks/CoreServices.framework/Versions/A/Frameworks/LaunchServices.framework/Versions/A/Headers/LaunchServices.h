@@ -15,9 +15,13 @@
 #ifndef __LAUNCHSERVICES__
 #define __LAUNCHSERVICES__
 
+#include <TargetConditionals.h>
+
+#if !TARGET_OS_IPHONE
 #ifndef __ICONSCORE__
 #include <LaunchServices/IconsCore.h>
 #endif
+#endif //!TARGET_OS_IPHONE
 
 #ifndef __LSINFO__
 #include <LaunchServices/LSInfo.h>

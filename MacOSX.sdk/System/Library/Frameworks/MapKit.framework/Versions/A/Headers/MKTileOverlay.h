@@ -2,7 +2,7 @@
 //  MKTileOverlay.h
 //  MapKit
 //
-//  Copyright (c) 2013, Apple Inc. All rights reserved.
+//  Copyright (c) 2013-2014, Apple Inc. All rights reserved.
 //
 
 #import <MapKit/MKFoundation.h>
@@ -12,7 +12,7 @@
 MK_CLASS_AVAILABLE(10_9, 7_0)
 @interface MKTileOverlay : NSObject <MKOverlay>
 
-- (id)initWithURLTemplate:(NSString *)URLTemplate; // URL template is a string where the substrings "{x}", "{y}", "{z}", and "{scale}" are replaced with values from a tile path to create a URL to load. For example: http://server/path?x={x}&y={y}&z={z}&scale={scale}.
+- (instancetype)initWithURLTemplate:(NSString *)URLTemplate NS_DESIGNATED_INITIALIZER; // URL template is a string where the substrings "{x}", "{y}", "{z}", and "{scale}" are replaced with values from a tile path to create a URL to load. For example: http://server/path?x={x}&y={y}&z={z}&scale={scale}.
 
 @property CGSize tileSize; // default is 256x256
 

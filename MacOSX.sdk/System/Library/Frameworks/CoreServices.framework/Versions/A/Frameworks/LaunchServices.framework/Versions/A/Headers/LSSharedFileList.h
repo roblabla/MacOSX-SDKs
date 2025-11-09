@@ -132,7 +132,7 @@ extern CFStringRef kLSSharedFileListSessionLoginItems                __OSX_AVAIL
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern CFStringRef kLSSharedFileListGlobalLoginItems                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5, __MAC_10_9, __IPHONE_NA, __IPHONE_NA);
+extern CFStringRef kLSSharedFileListGlobalLoginItems                 __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_5, __MAC_10_9, __IPHONE_NA, __IPHONE_NA, "Use a LaunchAgent instead.");
 
 
 /* LSSharedFileList property keys */
@@ -167,18 +167,21 @@ extern CFStringRef kLSSharedFileListRecentItemsMaxAmount             __OSX_AVAIL
 extern CFStringRef kLSSharedFileListVolumesComputerVisible           __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 /*
- *  kLSSharedFileListVolumesIDiskVisible
+ *  kLSSharedFileListVolumesIDiskVisible   *** DEPRECATED ***
  *  
  *  Discussion:
  *    is iDisk item visible in favorite volumes list. Associated
  *    property is CFBoolean.
+ *
+ *  Deprecated:
+ *    iDisk is no longer available.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern CFStringRef kLSSharedFileListVolumesIDiskVisible              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
+extern CFStringRef kLSSharedFileListVolumesIDiskVisible              __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_5, __MAC_10_8, __IPHONE_NA, __IPHONE_NA, "iDisk is no longer available.");
 
 /*
  *  kLSSharedFileListVolumesNetworkVisible
@@ -255,7 +258,8 @@ extern CFStringRef kLSSharedFileListItemHidden                       __OSX_AVAIL
  */
 extern CFStringRef kLSSharedFileListLoginItemHidden                  __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
 
-/* LSSharedFileListItemResolve flags */
+/* LSSharedFileListItemCopyResolvedURL flags */
+typedef UInt32 LSSharedFileListResolutionFlags;
 enum {
   kLSSharedFileListNoUserInteraction = 1 << 0, /* no user interaction during resolution */
   kLSSharedFileListDoNotMountVolumes = 1 << 1 /* do not mount volumes during resolution */
@@ -678,7 +682,7 @@ LSSharedFileListInsertItemURL(
 
 
 /*
- *  LSSharedFileListInsertItemFSRef()
+ *  LSSharedFileListInsertItemFSRef()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Insert item into shared list.
@@ -723,6 +727,9 @@ LSSharedFileListInsertItemURL(
  *    Reference to new item. Has to be released with CFRelease when the
  *    item is not needed anymore.
  *  
+ *  Deprecated:
+ *    Use LSSharedFileListInsertItemURL instead.
+ *
  *  Availability:
  *    Mac OS X:         in version 10.5 and later in CoreServices.framework
  *    CarbonLib:        not available
@@ -736,7 +743,7 @@ LSSharedFileListInsertItemFSRef(
   IconRef                   inIconRef,
   const FSRef *             inFSRef,
   CFDictionaryRef           inPropertiesToSet,
-  CFArrayRef                inPropertiesToClear)              __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+  CFArrayRef                inPropertiesToClear)              __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_5, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use LSSharedFileListInsertItemURL instead.");
 
 
 /*
@@ -902,7 +909,7 @@ LSSharedFileListItemCopyDisplayName(LSSharedFileListItemRef inItem) __OSX_AVAILA
 
 
 /*
- *  LSSharedFileListItemResolve()
+ *  LSSharedFileListItemResolve()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Resolve LSSharedFileListItemRef's item and return its FSRef.
@@ -927,18 +934,53 @@ LSSharedFileListItemCopyDisplayName(LSSharedFileListItemRef inItem) __OSX_AVAILA
  *    
  *    outRef:
  *      FSRef of original item. Can be NULL.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.5 and later in CoreServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
+ *
+ *  Deprecated:
+ *    Use LSSharedFileListItemCopyResolvedURL instead.
+ *
  */
 extern OSStatus 
 LSSharedFileListItemResolve(
-  LSSharedFileListItemRef   inItem,
-  UInt32                    inFlags,
-  CFURLRef *                outURL,
-  FSRef *                   outRef)                           __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+  LSSharedFileListItemRef           inItem,
+  LSSharedFileListResolutionFlags   inFlags,
+  CFURLRef *                        outURL,
+  FSRef *                           outRef)                   __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_5, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use LSSharedFileListItemCopyResolvedURL instead.");
+
+
+/*
+ *  LSSharedFileListItemCopyResolvedURL()
+ *  
+ *  Summary:
+ *    Resolve the shared file list item and return its URL.
+ *  
+ *  Discussion:
+ *    Resolves the shared file list item and returns its URL.
+ *  
+ *  Parameters:
+ *    
+ *    inItem:
+ *      The item to resolve. Must not be NULL.
+ *    
+ *    inFlags:
+ *      Resolution flags. Pass zero for default resolution flags.
+ *    
+ *    outError:
+ *      On failure, set to a CFError describing the problem. If you are
+ *      not interested in this information, pass NULL. The caller is
+ *      responsible for releasing this object.
+ *
+ *  Result:
+ *    A URL corresponding to the shared file list item, if available,
+ *    or NULL if it cannot be resolved. Note that an item may be present in
+ *    a shared file list but no longer present in the file system, in
+ *    which case NULL will be returned.
+ *    The caller is responsible for releasing this URL.
+ */
+extern CFURLRef
+LSSharedFileListItemCopyResolvedURL(
+  LSSharedFileListItemRef           inItem,
+  LSSharedFileListResolutionFlags   inFlags,
+  CFErrorRef *                      outError)                 __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_NA);
 
 
 /*

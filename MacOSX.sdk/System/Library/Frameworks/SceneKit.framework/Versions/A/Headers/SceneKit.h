@@ -1,7 +1,7 @@
 //
 //  SceneKit.h
 //
-//  Copyright (c) 2012-2013 Apple Inc. All rights reserved.
+//  Copyright (c) 2012-2014 Apple Inc. All rights reserved.
 //
 
 /*! @framework SceneKit
@@ -41,4 +41,14 @@
 #import <SceneKit/SCNSkinner.h>
 #import <SceneKit/SCNConstraint.h>
 #import <SceneKit/SCNLevelOfDetail.h>
+#import <SceneKit/SCNParticleSystem.h>
+#import <SceneKit/SCNPhysicsBody.h>
+#import <SceneKit/SCNPhysicsField.h>
+#import <SceneKit/SCNPhysicsShape.h>
+#import <SceneKit/SCNPhysicsWorld.h>
+#import <SceneKit/SCNPhysicsContact.h>
+#import <SceneKit/SCNPhysicsBehavior.h>
+#import <SceneKit/SCNTechnique.h>
 
+//scripting
+#import <SceneKit/SCNJavascript.h>

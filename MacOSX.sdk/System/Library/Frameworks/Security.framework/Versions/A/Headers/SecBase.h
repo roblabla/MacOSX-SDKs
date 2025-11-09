@@ -1,15 +1,15 @@
 /*
- * Copyright (c) 2000-2013 Apple Inc. All Rights Reserved.
+ * Copyright (c) 2000-2014 Apple Inc. All Rights Reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
- *
+ * 
  * This file contains Original Code and/or Modifications of Original Code
  * as defined in and that are subject to the Apple Public Source License
  * Version 2.0 (the 'License'). You may not use this file except in
  * compliance with the License. Please obtain a copy of the License at
  * http://www.opensource.apple.com/apsl/ and read it before using this
  * file.
- *
+ * 
  * The Original Code and all software distributed under the License are
  * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
@@ -17,7 +17,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
  * Please see the License for the specific language governing rights and
  * limitations under the License.
- *
+ * 
  * @APPLE_LICENSE_HEADER_END@
  */
 
@@ -153,6 +153,12 @@ typedef struct OpaqueSecKeyRef *SecKeyRef;
 typedef struct OpaqueSecTrustRef *SecACLRef;
 
 /*!
+    @typedef SecAccessControlRef
+    @abstract CFType representing access control for an item.
+*/
+typedef struct OpaqueSecAccessControl *SecAccessControlRef;
+
+/*!
     @typedef SecPasswordRef
     @abstract Contains information about a password.
 */
@@ -181,8 +187,8 @@ typedef struct SecKeychainAttributeInfo  SecKeychainAttributeInfo;
     @reserved Reserved for future use. Your code should pass NULL in this parameter.
     @result A reference to an error string, or NULL if no error string is available for the specified result code. Your code must release this reference by calling the CFRelease function.
 */
-CFStringRef SecCopyErrorMessageString(OSStatus status, void *reserved);
-
+CFStringRef SecCopyErrorMessageString(OSStatus status, void *reserved)
+    __OSX_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_NA);
 /*!
 @enum Security Error Codes
 @abstract Result codes returned from Security framework functions.
@@ -627,7 +633,7 @@ enum
 	errSecTimestampUnacceptedPolicy			= -67890,	/* The requested policy is not supported by the Timestamp Authority. */
 	errSecTimestampUnacceptedExtension			= -67891,	/* The requested extension is not supported by the Timestamp Authority. */
 	errSecTimestampAddInfoNotAvailable			= -67892,	/* The additional information requested is not available. */
-	errSecTimestampSystemFailure				= -67893,	/* The timestamp request cannot be handled due to system failure . */
+	errSecTimestampSystemFailure				= -67893,	/* The timestamp request cannot be handled due to system failure. */
 	errSecSigningTimeMissing					= -67894,	/* A signing time was expected but was not found. */
 	errSecTimestampRejection					= -67895,	/* A timestamp transaction was rejected. */
 	errSecTimestampWaiting                      = -67896,	/* A timestamp transaction is waiting. */

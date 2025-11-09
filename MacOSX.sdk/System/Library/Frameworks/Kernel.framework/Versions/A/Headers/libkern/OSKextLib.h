@@ -481,7 +481,6 @@ typedef uint32_t  OSKextLoadTag;
 #define  kOSKextInvalidLoadTag  ((OSKextLoadTag)(-1))
 
 
-
 /* Make these visible to kexts only and *not* the kernel.
  */
 

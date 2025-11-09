@@ -36,6 +36,8 @@ extern "C" {
 
 #pragma pack(push, 4)
 
+CF_IMPLICIT_BRIDGING_ENABLED
+
 /*!
 	@typedef	CMTimeValue
 	@abstract	Numerator of rational CMTime.
@@ -69,7 +71,7 @@ typedef int64_t CMTimeEpoch;
 	@constant	kCMTimeFlags_Indefinite Set if the CMTime is indefinite/unknown. Example of usage: duration of a live broadcast.
 										 "Implied value" flag (other struct fields are ignored).
 */
-enum {
+typedef CF_OPTIONS( uint32_t, CMTimeFlags ) {
 	kCMTimeFlags_Valid = 1UL<<0,
 	kCMTimeFlags_HasBeenRounded = 1UL<<1,
 	kCMTimeFlags_PositiveInfinity = 1UL<<2,
@@ -77,7 +79,6 @@ enum {
 	kCMTimeFlags_Indefinite = 1UL<<4,
 	kCMTimeFlags_ImpliedValueFlagsMask = kCMTimeFlags_PositiveInfinity | kCMTimeFlags_NegativeInfinity | kCMTimeFlags_Indefinite
 };
-typedef uint32_t CMTimeFlags;
 
 /*!
 	@typedef	CMTime
@@ -260,7 +261,7 @@ Float64 CMTimeGetSeconds(
 	@constant	kCMTimeRoundingMethod_RoundTowardPositiveInfinity	Round towards +inf if fraction is != 0.
 	@constant	kCMTimeRoundingMethod_RoundTowardNegativeInfinity	Round towards -inf if fraction is != 0.
 */
-enum {
+typedef CF_ENUM( uint32_t, CMTimeRoundingMethod ) {
 	kCMTimeRoundingMethod_RoundHalfAwayFromZero = 1,
 	kCMTimeRoundingMethod_RoundTowardZero = 2,
 	kCMTimeRoundingMethod_RoundAwayFromZero = 3,
@@ -270,7 +271,6 @@ enum {
 	
 	kCMTimeRoundingMethod_Default = kCMTimeRoundingMethod_RoundHalfAwayFromZero
 };
-typedef uint32_t CMTimeRoundingMethod;
 
 /*!
 	@function	CMTimeConvertScale
@@ -435,6 +435,33 @@ CMTime CMTimeMultiplyByFloat64(
 				Float64 multiplier)		/*! @param multiplier	The Float64 it will be multiplied by. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
+/*!
+	@function	CMTimeMultiplyByRatio
+    @abstract   Returns the result of multiplying a CMTime by an integer, then dividing by another integer.
+    @discussion The exact rational value will be preserved, if possible without overflow.  If an overflow
+				would occur, a new timescale will be chosen so as to minimize the rounding error.
+				Default rounding will be applied when converting the result to this timescale.  If the
+				result value still overflows when timescale == 1, then the result will be either positive
+				or negative infinity, depending on the direction of the overflow.
+
+				If any rounding occurs for any reason, the result's kCMTimeFlags_HasBeenRounded flag will be
+				set.  This flag will also be set if the CMTime operand has kCMTimeFlags_HasBeenRounded set.
+
+				If the denominator, and either the time or the numerator, are zero, the result will be
+				kCMTimeInvalid.  If only the denominator is zero, the result will be either kCMTimePositiveInfinity
+				or kCMTimeNegativeInfinity, depending on the signs of the other arguments.
+
+				If time is invalid, the result will be invalid. If time is infinite, the result will be
+				similarly infinite. If time is indefinite, the result will be indefinite. 								
+
+    @result     (time * multiplier) / divisor
+*/
+CM_EXPORT
+CMTime CMTimeMultiplyByRatio(
+				CMTime time,			/*! @param time			The CMTime to be multiplied then divided. */
+				int32_t multiplier,		/*! @param multiplier	The value by which to multiply. */
+				int32_t divisor)		/*! @param divisor	The value by which to divide. */
+							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_7_1);
 
 /*!
 	@function	CMTimeCompare
@@ -589,6 +616,7 @@ void CMTimeShow(
 	CMTime time)					/*! @param time			CMTime to show. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #pragma pack(pop)
 

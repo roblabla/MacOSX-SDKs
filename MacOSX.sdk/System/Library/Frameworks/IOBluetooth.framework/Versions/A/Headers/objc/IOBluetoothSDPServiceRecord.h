@@ -75,7 +75,7 @@
  @param		serviceDict	A dictionary containing the attributes for the new service 
 */
 
-+ (IOBluetoothSDPServiceRecord *)publishedServiceRecordWithDictionary:(NSDictionary *)serviceDict;
++ (instancetype)publishedServiceRecordWithDictionary:(NSDictionary *)serviceDict;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!	@function	removeServiceRecord
@@ -92,7 +92,7 @@
 	@result		Returns an IOBluetoothSDPServiceRecord * with the attributes specified in the provided dictionary.
 */
 
-+ (IOBluetoothSDPServiceRecord *)withServiceDictionary:(NSDictionary *)serviceDict	device:(IOBluetoothDevice *)device;
++ (instancetype)withServiceDictionary:(NSDictionary *)serviceDict	device:(IOBluetoothDevice *)device;
 
 /*!
     @method		initWithServiceDictionary
@@ -101,7 +101,7 @@
 	@result		Returns an initialized IOBluetoothSDPServiceRecord * with the attributes specified in the provided dictionary.
 */
 
-- (id) initWithServiceDictionary:(NSDictionary *)serviceDict device:(IOBluetoothDevice *)device;
+- (instancetype) initWithServiceDictionary:(NSDictionary *)serviceDict device:(IOBluetoothDevice *)device;
 
 /*!
     @method		withSDPServiceRecordRef:
@@ -110,7 +110,7 @@
 	@result		Returns the IOBluetoothSDPServiceRecord * for the given IOBluetoothSDPServiceRecordRef.
 */
 
-+ (IOBluetoothSDPServiceRecord *)withSDPServiceRecordRef:(IOBluetoothSDPServiceRecordRef)sdpServiceRecordRef;
++ (instancetype)withSDPServiceRecordRef:(IOBluetoothSDPServiceRecordRef)sdpServiceRecordRef;
 
 /*!
     @method	getSDPServiceRecordRef

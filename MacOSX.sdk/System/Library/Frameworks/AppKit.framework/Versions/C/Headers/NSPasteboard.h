@@ -1,7 +1,7 @@
 /*
 	NSPasteboard.h
 	Application Kit
-	Copyright (c) 1994-2013, Apple Inc.
+	Copyright (c) 1994-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -65,9 +65,9 @@ APPKIT_EXTERN NSString *NSDragPboard;
 + (NSPasteboard *)pasteboardWithName:(NSString *)name;
 + (NSPasteboard *)pasteboardWithUniqueName;
 
-- (NSString *)name;
+@property (readonly, copy) NSString *name;
 
-- (NSInteger)changeCount;
+@property (readonly) NSInteger changeCount;
 
 - (oneway void)releaseGlobally;
 
@@ -91,7 +91,7 @@ Example: there are five items on the pasteboard, two contain TIFF data, two cont
 
 /* Returns all pasteboard items.  Returns nil if there is an error retrieving pasteboard items.
 */
-- (NSArray *)pasteboardItems NS_AVAILABLE_MAC(10_6);
+@property (readonly, copy) NSArray *pasteboardItems NS_AVAILABLE_MAC(10_6);
 
 
 /* The index of the provided pasteboard item in the pasteboard.  If the pasteboard item has not been added to any pasteboard, or is owned by another pasteboard, returns the value NSNotFound.  An item's index in the pasteboard is useful for a pasteboard item data provider that has promised data for multiple items, to be able to easily match the pasteboard item to an array of source data from which to derive the promised data.
@@ -122,7 +122,7 @@ Example: there are five items on the pasteboard, two contain TIFF data, two cont
 
 /* These methods provide information about the types available from the entire pasteboard.
 */
-- (NSArray *)types;
+@property (readonly, copy) NSArray *types;
 - (NSString *)availableTypeFromArray:(NSArray *)types;
 
 /* These methods set data for the specified type on the first pasteboard item.
@@ -174,15 +174,11 @@ APPKIT_EXTERN NSString *const NSPasteboardURLReadingContentsConformToTypesKey NS
 /*** NSPasteboardWriting and NSPasteboardReading Protocols ***/
 
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
-
 /* The NSPasteboardWriting protocol enables instances of a class to be used with the -writeObjects: method of NSPasteboard.  The Cocoa framework classes NSString, NSAttributedString, NSURL, NSColor, NSSound, NSImage, and NSPasteboardItem implement this protocol.  The protocol can also be implemented by custom application classes for use with -writeObjects:
 */ 
-enum {
+typedef NS_OPTIONS(NSUInteger, NSPasteboardWritingOptions) {
     NSPasteboardWritingPromised = 1 << 9, // Data for a type with this option will be promised, not immediately written
-};
-#endif
-typedef NSUInteger NSPasteboardWritingOptions;
+} NS_ENUM_AVAILABLE_MAC(10_6);
 
 
 @protocol NSPasteboardWriting <NSObject>
@@ -214,15 +210,12 @@ typedef NSUInteger NSPasteboardWritingOptions;
 
 /*  NSPasteboardReadingOptions specify how data is read from the pasteboard.  You can specify only one option from this list.  If you do not specify an option, the default NSPasteboardReadingAsData is used.  The first three options specify how and if pasteboard data should be pre-processed by the pasteboard before being passed to -initWithPasteboardPropertyList:ofType.  The fourth option, NSPasteboardReadingAsKeyedArchive, should be used when the data on the pasteboard is a keyed archive of this class.  Using this option, a keyed unarchiver will be used and -initWithCoder: will be called to initialize the new instance. 
 */
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
-enum {
-    NSPasteboardReadingAsData 		= 0,	  // Reads data from the pasteboard as-is and returns it as an NSData
-    NSPasteboardReadingAsString 	= 1 << 0, // Reads data from the pasteboard and converts it to an NSString
-    NSPasteboardReadingAsPropertyList 	= 1 << 1, // Reads data from the pasteboard and un-serializes it as a property list
-    NSPasteboardReadingAsKeyedArchive 	= 1 << 2, // Reads data from the pasteboard and uses initWithCoder: to create the object
-};
-#endif
-typedef NSUInteger NSPasteboardReadingOptions;
+typedef NS_OPTIONS(NSUInteger, NSPasteboardReadingOptions) {
+    NSPasteboardReadingAsData           = 0,	  // Reads data from the pasteboard as-is and returns it as an NSData
+    NSPasteboardReadingAsString         = 1 << 0, // Reads data from the pasteboard and converts it to an NSString
+    NSPasteboardReadingAsPropertyList   = 1 << 1, // Reads data from the pasteboard and un-serializes it as a property list
+    NSPasteboardReadingAsKeyedArchive   = 1 << 2, // Reads data from the pasteboard and uses initWithCoder: to create the object
+} NS_ENUM_AVAILABLE_MAC(10_6);
 
 
 @protocol NSPasteboardReading <NSObject>

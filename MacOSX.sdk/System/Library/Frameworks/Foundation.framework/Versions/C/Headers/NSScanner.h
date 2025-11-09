@@ -1,5 +1,5 @@
 /*	NSScanner.h
-	Copyright (c) 1994-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -8,20 +8,17 @@
 
 @interface NSScanner : NSObject <NSCopying>
 
-- (NSString *)string;
-- (NSUInteger)scanLocation;
-- (void)setScanLocation:(NSUInteger)pos;
-- (void)setCharactersToBeSkipped:(NSCharacterSet *)set;
-- (void)setCaseSensitive:(BOOL)flag;
-- (void)setLocale:(id)locale;
+@property (readonly, copy) NSString *string;
+@property NSUInteger scanLocation;
+@property (copy) NSCharacterSet *charactersToBeSkipped;
+@property BOOL caseSensitive;
+@property (retain) id locale;
+
+- (instancetype)initWithString:(NSString *)string NS_DESIGNATED_INITIALIZER;
 
 @end
 
 @interface NSScanner (NSExtendedScanner)
-
-- (NSCharacterSet *)charactersToBeSkipped;
-- (BOOL)caseSensitive;
-- (id)locale;
 
 // On overflow, the below methods will return success and clamp
 - (BOOL)scanInt:(int *)result;
@@ -41,10 +38,9 @@
 - (BOOL)scanUpToString:(NSString *)string intoString:(NSString **)result;
 - (BOOL)scanUpToCharactersFromSet:(NSCharacterSet *)set intoString:(NSString **)result;
 
-- (BOOL)isAtEnd;
+@property (getter=isAtEnd, readonly) BOOL atEnd;
 
-- (id)initWithString:(NSString *)string;
-+ (id)scannerWithString:(NSString *)string;
++ (instancetype)scannerWithString:(NSString *)string;
 + (id)localizedScannerWithString:(NSString *)string;
 
 @end

@@ -1,5 +1,5 @@
 /*	NSDictionary.h
-	Copyright (c) 1994-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -11,19 +11,26 @@
 
 @interface NSDictionary : NSObject <NSCopying, NSMutableCopying, NSSecureCoding, NSFastEnumeration>
 
-- (NSUInteger)count;
+@property (readonly) NSUInteger count;
 - (id)objectForKey:(id)aKey;
 - (NSEnumerator *)keyEnumerator;
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
+#if TARGET_OS_WIN32
+- (instancetype)initWithObjects:(const id [])objects forKeys:(const id [])keys count:(NSUInteger)cnt;
+#else
+- (instancetype)initWithObjects:(const id [])objects forKeys:(const id <NSCopying> [])keys count:(NSUInteger)cnt NS_DESIGNATED_INITIALIZER;
+#endif
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
 @end
 
 @interface NSDictionary (NSExtendedDictionary)
 
-- (NSArray *)allKeys;
+@property (readonly, copy) NSArray *allKeys;
 - (NSArray *)allKeysForObject:(id)anObject;    
-- (NSArray *)allValues;
-- (NSString *)description;
-- (NSString *)descriptionInStringsFileFormat;
+@property (readonly, copy) NSArray *allValues;
+@property (readonly, copy) NSString *description;
+@property (readonly, copy) NSString *descriptionInStringsFileFormat;
 - (NSString *)descriptionWithLocale:(id)locale;
 - (NSString *)descriptionWithLocale:(id)locale indent:(NSUInteger)level;
 - (BOOL)isEqualToDictionary:(NSDictionary *)otherDictionary;
@@ -37,7 +44,6 @@
 
 - (id)objectForKeyedSubscript:(id)key NS_AVAILABLE(10_8, 6_0);
 
-#if NS_BLOCKS_AVAILABLE
 - (void)enumerateKeysAndObjectsUsingBlock:(void (^)(id key, id obj, BOOL *stop))block NS_AVAILABLE(10_6, 4_0);
 - (void)enumerateKeysAndObjectsWithOptions:(NSEnumerationOptions)opts usingBlock:(void (^)(id key, id obj, BOOL *stop))block NS_AVAILABLE(10_6, 4_0);
 
@@ -46,7 +52,6 @@
 
 - (NSSet *)keysOfEntriesPassingTest:(BOOL (^)(id key, id obj, BOOL *stop))predicate NS_AVAILABLE(10_6, 4_0);
 - (NSSet *)keysOfEntriesWithOptions:(NSEnumerationOptions)opts passingTest:(BOOL (^)(id key, id obj, BOOL *stop))predicate NS_AVAILABLE(10_6, 4_0);
-#endif
 
 @end
 
@@ -63,22 +68,15 @@
 + (instancetype)dictionaryWithDictionary:(NSDictionary *)dict;
 + (instancetype)dictionaryWithObjects:(NSArray *)objects forKeys:(NSArray *)keys;
 
-- (instancetype)init;	/* designated initializer */
-#if TARGET_OS_WIN32
-- (instancetype)initWithObjects:(const id [])objects forKeys:(const id [])keys count:(NSUInteger)cnt;
-#else
-- (instancetype)initWithObjects:(const id [])objects forKeys:(const id <NSCopying> [])keys count:(NSUInteger)cnt;	/* designated initializer */
-#endif
-
 - (instancetype)initWithObjectsAndKeys:(id)firstObject, ... NS_REQUIRES_NIL_TERMINATION;
 - (instancetype)initWithDictionary:(NSDictionary *)otherDictionary;
 - (instancetype)initWithDictionary:(NSDictionary *)otherDictionary copyItems:(BOOL)flag;
 - (instancetype)initWithObjects:(NSArray *)objects forKeys:(NSArray *)keys;
 
-+ (id /* NSDictionary * */)dictionaryWithContentsOfFile:(NSString *)path;
-+ (id /* NSDictionary * */)dictionaryWithContentsOfURL:(NSURL *)url;
-- (id /* NSDictionary * */)initWithContentsOfFile:(NSString *)path;
-- (id /* NSDictionary * */)initWithContentsOfURL:(NSURL *)url;
++ (NSDictionary *)dictionaryWithContentsOfFile:(NSString *)path;
++ (NSDictionary *)dictionaryWithContentsOfURL:(NSURL *)url;
+- (NSDictionary *)initWithContentsOfFile:(NSString *)path;
+- (NSDictionary *)initWithContentsOfURL:(NSURL *)url;
 
 @end
 
@@ -88,6 +86,9 @@
 
 - (void)removeObjectForKey:(id)aKey;
 - (void)setObject:(id)anObject forKey:(id <NSCopying>)aKey;
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCapacity:(NSUInteger)numItems NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
 @end
 
@@ -105,8 +106,10 @@
 
 + (instancetype)dictionaryWithCapacity:(NSUInteger)numItems;
 
-- (instancetype)init;	/* designated initializer */
-- (instancetype)initWithCapacity:(NSUInteger)numItems;	/* designated initializer */
++ (NSMutableDictionary *)dictionaryWithContentsOfFile:(NSString *)path;
++ (NSMutableDictionary *)dictionaryWithContentsOfURL:(NSURL *)url;
+- (NSMutableDictionary *)initWithContentsOfFile:(NSString *)path;
+- (NSMutableDictionary *)initWithContentsOfURL:(NSURL *)url;
 
 @end
 
@@ -132,6 +135,6 @@
  If keyset is nil, an exception is thrown.
  If keyset is not an object returned by +sharedKeySetForKeys:, an exception is thrown.
  */
-+ (id /* NSMutableDictionary * */)dictionaryWithSharedKeySet:(id)keyset NS_AVAILABLE(10_8, 6_0);
++ (NSMutableDictionary *)dictionaryWithSharedKeySet:(id)keyset NS_AVAILABLE(10_8, 6_0);
 
 @end

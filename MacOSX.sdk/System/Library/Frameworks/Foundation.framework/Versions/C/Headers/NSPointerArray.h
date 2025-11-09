@@ -1,6 +1,6 @@
 /*
  *  NSPointerArray.h
- *  Copyright (c) 2005-2013, Apple Inc. All rights reserved.
+ *  Copyright (c) 2005-2014, Apple Inc. All rights reserved.
  *
  */
  
@@ -24,14 +24,14 @@
 NS_CLASS_AVAILABLE(10_5, 6_0)
 @interface NSPointerArray : NSObject <NSFastEnumeration, NSCopying, NSCoding>
 // construction
-- initWithOptions:(NSPointerFunctionsOptions)options;
-- initWithPointerFunctions:(NSPointerFunctions *)functions;
+- (instancetype)initWithOptions:(NSPointerFunctionsOptions)options NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithPointerFunctions:(NSPointerFunctions *)functions NS_DESIGNATED_INITIALIZER;
 
-+ pointerArrayWithOptions:(NSPointerFunctionsOptions)options;
-+ pointerArrayWithPointerFunctions:(NSPointerFunctions *)functions;
++ (NSPointerArray *)pointerArrayWithOptions:(NSPointerFunctionsOptions)options;
++ (NSPointerArray *)pointerArrayWithPointerFunctions:(NSPointerFunctions *)functions;
 
 /* return an NSPointerFunctions object reflecting the functions in use.  This is a new autoreleased object that can be subsequently modified and/or used directly in the creation of other pointer "collections". */
-- (NSPointerFunctions *)pointerFunctions;
+@property (readonly, copy) NSPointerFunctions *pointerFunctions;
 
 - (void *)pointerAtIndex:(NSUInteger)index;
 
@@ -44,8 +44,9 @@ NS_CLASS_AVAILABLE(10_5, 6_0)
 
 - (void)compact;   // eliminate NULLs
 
-- (NSUInteger)count;    // the number of elements in the array, including NULLs
-- (void)setCount:(NSUInteger)count;    // set desired number of elements, adding NULLs or removing items as necessary.
+// Getter: the number of elements in the array, including NULLs
+// Setter: sets desired number of elements, adding NULLs or removing items as necessary.
+@property NSUInteger count;
 
 @end
 
@@ -58,10 +59,10 @@ NS_CLASS_AVAILABLE(10_5, 6_0)
 + pointerArrayWithWeakObjects NS_DEPRECATED_MAC(10_5, 10_8); // weak objects
 #endif
 
-+ (id)strongObjectsPointerArray NS_AVAILABLE(10_8, 6_0);
-+ (id)weakObjectsPointerArray NS_AVAILABLE(10_8, 6_0);
++ (NSPointerArray *)strongObjectsPointerArray NS_AVAILABLE(10_8, 6_0);
++ (NSPointerArray *)weakObjectsPointerArray NS_AVAILABLE(10_8, 6_0);
 
-- (NSArray *)allObjects;
+@property (readonly, copy) NSArray *allObjects;
 
 @end
 

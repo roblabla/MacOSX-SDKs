@@ -1,5 +1,5 @@
 /*	MDSchema.h
-	Copyright (c) 2003-2004, Apple Computer, Inc. All rights reserved.
+	Copyright (c) 2003-2004, Apple Inc. All rights reserved.
 */
 
 /*!

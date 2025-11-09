@@ -34,12 +34,13 @@ multithreaded Accelerate.framework functions run hundreds of times faster than t
 .Pp
 Accelerate.framework is intended to help you towards greater application performance regardless of your current investment in high performance technologies. 
 If you have already written your own threading engine, you can use methods such as the kvImageDoNotTile flag or the VECLIB_MAXIMUM_THREADS environment 
-variable to disable internal multithreading so that it does not contend with your threading engine. If you have pseudo-real-time scheduling needs, Accelerate.framework 
-functions that otherwise might allocate their own temporary memory on the heap allow you to pass in preallocated temporary buffers, so as to avoid potential 
-locking in malloc. If you are interested in writing your own vector code, perhaps to speed up areas of your application which is not covered by Accelerate 
-functionality, the framework headers provide cross platform vector types that you can use to enhance the portability of some vector code and facilitate debugging, 
-as well as a number of basic library routines to make writing vector code easier, such as the interfaces found in vMathLib, a library of math routines (e.g. sin, 
-cos, pow, etc.) for SIMD vectors. 
+variable to disable internal multithreading so that it does not contend with your threading engine (note: the value of VECLIB_MAXIMUM_THREADS may be cached
+by the library and reused; if you need to ensure single-threaded execution, you should set VECLIB_MAXIMUM_THREADS before making any Accelerate calls).
+If you have pseudo-real-time scheduling needs, Accelerate.framework functions that otherwise might allocate their own temporary memory on the heap allow
+you to pass in preallocated temporary buffers, so as to avoid potential locking in malloc. If you are interested in writing your own vector code, perhaps to
+speed up areas of your application which is not covered by Accelerate functionality, the framework headers provide cross platform vector types that you can
+use to enhance the portability of some vector code and facilitate debugging, as well as a number of basic library routines to make writing vector code easier,
+such as the interfaces found in vMathLib, a library of math routines (e.g. sin, cos, pow, etc.) for SIMD vectors. 
 .Pp
 To use Accelerate.framework headers: 
 .br

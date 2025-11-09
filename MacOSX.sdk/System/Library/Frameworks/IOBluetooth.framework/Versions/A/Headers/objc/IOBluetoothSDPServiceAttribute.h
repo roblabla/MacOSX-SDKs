@@ -35,7 +35,7 @@
             should be called.
 */
 
-+ (IOBluetoothSDPServiceAttribute *)withID:(BluetoothSDPServiceAttributeID)newAttributeID attributeElementValue:(NSObject *)attributeElementValue;
++ (instancetype)withID:(BluetoothSDPServiceAttributeID)newAttributeID attributeElementValue:(NSObject *)attributeElementValue;
 
 /*!
     @method withID:attributeElement:
@@ -48,7 +48,7 @@
             should be called.
 */
 
-+ (IOBluetoothSDPServiceAttribute *)withID:(BluetoothSDPServiceAttributeID)newAttributeID attributeElement:(IOBluetoothSDPDataElement *)attributeElement;
++ (instancetype)withID:(BluetoothSDPServiceAttributeID)newAttributeID attributeElement:(IOBluetoothSDPDataElement *)attributeElement;
 
 /*!
     @method initWithID:attributeElementValue:
@@ -60,7 +60,7 @@
     @result Returns self if successful.  Returns nil if there was an error parsing the element value.
 */
 
-- (id)initWithID:(BluetoothSDPServiceAttributeID)newAttributeID attributeElementValue:(NSObject *)attributeElementValue;
+- (instancetype)initWithID:(BluetoothSDPServiceAttributeID)newAttributeID attributeElementValue:(NSObject *)attributeElementValue;
 
 /*!
     @method initWithID:attributeElement:
@@ -70,7 +70,7 @@
     @result Returns self if successful.  Returns nil if there was an error.
 */
 
-- (id)initWithID:(BluetoothSDPServiceAttributeID)newAttributeID attributeElement:(IOBluetoothSDPDataElement *)attributeElement;
+- (instancetype)initWithID:(BluetoothSDPServiceAttributeID)newAttributeID attributeElement:(IOBluetoothSDPDataElement *)attributeElement;
 
 /*!
     @method getAttributeID

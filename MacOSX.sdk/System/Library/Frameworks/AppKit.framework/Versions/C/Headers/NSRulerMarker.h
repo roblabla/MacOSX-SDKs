@@ -1,7 +1,7 @@
 /*
         NSRulerMarker.h
         Application Kit
-        Copyright (c) 1994-2013, Apple Inc.
+        Copyright (c) 1994-2014, Apple Inc.
         All rights reserved.
 */
 
@@ -30,46 +30,40 @@
 
 /**************************** Initialization ****************************/
 
-- (id)initWithRulerView:(NSRulerView *)ruler markerLocation:(CGFloat)location image:(NSImage *)image imageOrigin:(NSPoint)imageOrigin;
+- (instancetype)initWithRulerView:(NSRulerView *)ruler markerLocation:(CGFloat)location image:(NSImage *)image imageOrigin:(NSPoint)imageOrigin;
     // Designated initializer.  Location is expressed in the client view's bounds coordinates.  Location is the x position if the ruler is horizontal or the y position if the ruler is vertical.  The image will not be scaled or rotated.  The image origin indicates the point in the image that will be placed on the ruler's baseline at the given location and is expressed in the image's coordinate system.  NSRulerMarkers are movable but not removable by default.  A removable object should have its dimmed image set.
 
 /*********************** Query/Set basic attributes ***********************/
 
-- (NSRulerView *)ruler;
+@property (readonly, assign) NSRulerView *ruler;
     // Returns the ruler.
 
 
-- (void)setMarkerLocation:(CGFloat)location;
-- (CGFloat)markerLocation;
+@property CGFloat markerLocation;
     // The location is set by the -init... method and the -setLocation: method.  Location is an x position for horizontal rulers or a y position for vertical rulers.  It is expressed in the client view's coordinate system.
 
-- (void)setImage:(NSImage *)image;
-- (NSImage *)image;
+@property (strong) NSImage *image;
     // The image is what's drawn in the ruler.
 
-- (void)setImageOrigin:(NSPoint)imageOrigin;
-- (NSPoint)imageOrigin;
+@property NSPoint imageOrigin;
     // The image is drawn such that the image origin is on the baseline of the ruler at the object's location.
 
-- (void)setMovable:(BOOL)flag;
-- (void)setRemovable:(BOOL)flag;
-- (BOOL)isMovable;
-- (BOOL)isRemovable;
+@property (getter=isMovable) BOOL movable;
+@property (getter=isRemovable) BOOL removable;
     // Objects are movable, but not removable by default.  Movable means the ruler object can be dragged by the user.  Removable means it can be deleted by the user.
 
-- (BOOL)isDragging;
+@property (getter=isDragging, readonly) BOOL dragging;
     // Returns YES if the ruler object is currently being dragged.
 
-- (void)setRepresentedObject:(id <NSCopying>)representedObject;
-- (id <NSCopying>)representedObject;
+@property (strong) id<NSCopying> representedObject;
     // The representedObject of an NSRulerMarker is purely for the client's use.  It must be able to copy itself.  A represented object should be some small object.  The text object uses NSStrings for most ruler objects or NSTextTab objects for tab stops.
 
 /************************** Ruler facilities **************************/
 
-- (NSRect)imageRectInRuler;
+@property (readonly) NSRect imageRectInRuler;
     // Returns the rect that would be occupied by the object's image in the ruler's bounds coordinates.  This takes the flippedness of the ruler into account.
 
-- (CGFloat)thicknessRequiredInRuler;
+@property (readonly) CGFloat thicknessRequiredInRuler;
     // Returns the height or width (depending on the ruler's orientation) required in the ruler to display the object.
 
 - (void)drawRect:(NSRect)rect;

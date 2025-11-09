@@ -1,5 +1,5 @@
 /*	NSAttributedString.h
-	Copyright (c) 1994-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2014, Apple Inc. All rights reserved.
 */
 
 
@@ -7,16 +7,16 @@
 #import <Foundation/NSDictionary.h>
 
 NS_CLASS_AVAILABLE(10_0, 3_2)
-@interface NSAttributedString : NSObject <NSCopying, NSMutableCopying, NSCoding>
+@interface NSAttributedString : NSObject <NSCopying, NSMutableCopying, NSSecureCoding>
 
-- (NSString *)string;
+@property (readonly, copy) NSString *string;
 - (NSDictionary *)attributesAtIndex:(NSUInteger)location effectiveRange:(NSRangePointer)range;
 
 @end
 
 @interface NSAttributedString (NSExtendedAttributedString)
 
-- (NSUInteger)length;
+@property (readonly) NSUInteger length;
 - (id)attribute:(NSString *)attrName atIndex:(NSUInteger)location effectiveRange:(NSRangePointer)range;
 - (NSAttributedString *)attributedSubstringFromRange:(NSRange)range;
 
@@ -25,19 +25,17 @@ NS_CLASS_AVAILABLE(10_0, 3_2)
 
 - (BOOL)isEqualToAttributedString:(NSAttributedString *)other;
 
-- (id)initWithString:(NSString *)str;
-- (id)initWithString:(NSString *)str attributes:(NSDictionary *)attrs;
-- (id)initWithAttributedString:(NSAttributedString *)attrStr;
+- (instancetype)initWithString:(NSString *)str;
+- (instancetype)initWithString:(NSString *)str attributes:(NSDictionary *)attrs;
+- (instancetype)initWithAttributedString:(NSAttributedString *)attrStr;
 
 typedef NS_OPTIONS(NSUInteger, NSAttributedStringEnumerationOptions) {
   NSAttributedStringEnumerationReverse = (1UL << 1),
   NSAttributedStringEnumerationLongestEffectiveRangeNotRequired = (1UL << 20)
 };
 
-#if NS_BLOCKS_AVAILABLE
 - (void)enumerateAttributesInRange:(NSRange)enumerationRange options:(NSAttributedStringEnumerationOptions)opts usingBlock:(void (^)(NSDictionary *attrs, NSRange range, BOOL *stop))block NS_AVAILABLE(10_6, 4_0);
 - (void)enumerateAttribute:(NSString *)attrName inRange:(NSRange)enumerationRange options:(NSAttributedStringEnumerationOptions)opts usingBlock:(void (^)(id value, NSRange range, BOOL *stop))block NS_AVAILABLE(10_6, 4_0);
-#endif
 
 @end
 
@@ -51,7 +49,7 @@ NS_CLASS_AVAILABLE(10_0, 3_2)
 
 @interface NSMutableAttributedString (NSExtendedMutableAttributedString)
 
-- (NSMutableString *)mutableString;
+@property (readonly, retain) NSMutableString *mutableString;
 
 - (void)addAttribute:(NSString *)name value:(id)value range:(NSRange)range;
 - (void)addAttributes:(NSDictionary *)attrs range:(NSRange)range;

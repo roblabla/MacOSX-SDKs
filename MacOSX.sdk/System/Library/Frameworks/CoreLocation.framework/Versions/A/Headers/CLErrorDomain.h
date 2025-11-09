@@ -14,5 +14,7 @@
  *  
  *  Discussion:
  *    Error returned as the domain to NSError from CoreLocation.
+ *
+ *  The file CLError.h defines constants for the errors in kCLErrorDomain.
  */
 extern NSString *const kCLErrorDomain;

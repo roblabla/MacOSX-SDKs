@@ -1,5 +1,5 @@
 /*	NSLocale.h
-	Copyright (c) 2003-2013, Apple Inc. All rights reserved.
+	Copyright (c) 2003-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -15,26 +15,28 @@
 
 - (NSString *)displayNameForKey:(id)key value:(id)value;
 
+- (instancetype)initWithLocaleIdentifier:(NSString *)string NS_DESIGNATED_INITIALIZER;
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+
 @end
 
 @interface NSLocale (NSExtendedLocale)
 
-- (NSString *)localeIdentifier;  // same as NSLocaleIdentifier
+@property (readonly, copy) NSString *localeIdentifier;  // same as NSLocaleIdentifier
 
 @end
 
 @interface NSLocale (NSLocaleCreation)
 
-+ (id /* NSLocale * */)autoupdatingCurrentLocale NS_AVAILABLE(10_5, 2_0); // generally you should use this method
++ (NSLocale *)autoupdatingCurrentLocale NS_AVAILABLE(10_5, 2_0); // generally you should use this method
 
-+ (id /* NSLocale * */)currentLocale;	// an object representing the user's current locale
-+ (id /* NSLocale * */)systemLocale;	// the default generic root locale with little localization
++ (NSLocale *)currentLocale;	// an object representing the user's current locale
++ (NSLocale *)systemLocale;	// the default generic root locale with little localization
 
 + (instancetype)localeWithLocaleIdentifier:(NSString *)ident NS_AVAILABLE(10_6, 4_0);
 
-- (instancetype)initWithLocaleIdentifier:(NSString *)string;	/* designated initializer */
-
-- (id)init;     /* do not invoke; not a valid initializer for this class */
+- (instancetype)init NS_UNAVAILABLE;     /* do not invoke; not a valid initializer for this class */
 
 @end
 
@@ -96,7 +98,7 @@ FOUNDATION_EXPORT NSString * const NSLocaleAlternateQuotationEndDelimiterKey NS_
 
 
 #if !defined(NS_CALENDAR_ENUM_DEPRECATED)
-#if NS_ENABLE_CALENDAR_DEPRECATIONS
+#if 1 || NS_ENABLE_CALENDAR_DEPRECATIONS
 #define NS_CALENDAR_ENUM_DEPRECATED(A, B, C, D, ...) NS_ENUM_DEPRECATED(A, B, C, D, __VA_ARGS__)
 #define NS_CALENDAR_DEPRECATED(A, B, C, D, ...) NS_DEPRECATED(A, B, C, D, __VA_ARGS__)
 #define NS_CALENDAR_DEPRECATED_MAC(A, B, ...) NS_DEPRECATED_MAC(A, B, __VA_ARGS__)
@@ -108,15 +110,15 @@ FOUNDATION_EXPORT NSString * const NSLocaleAlternateQuotationEndDelimiterKey NS_
 #endif
 
 // Values for NSCalendar identifiers (not the NSLocaleCalendar property key)
-FOUNDATION_EXPORT NSString * const NSGregorianCalendar NS_CALENDAR_DEPRECATED(10_4, 10_9, 2_0, 7_0, "Use NSCalendarIdentifierGregorian instead");
-FOUNDATION_EXPORT NSString * const NSBuddhistCalendar NS_CALENDAR_DEPRECATED(10_4, 10_9, 2_0, 7_0, "Use NSCalendarIdentifierBuddhist instead");
-FOUNDATION_EXPORT NSString * const NSChineseCalendar NS_CALENDAR_DEPRECATED(10_4, 10_9, 2_0, 7_0, "Use NSCalendarIdentifierChinese instead");
-FOUNDATION_EXPORT NSString * const NSHebrewCalendar NS_CALENDAR_DEPRECATED(10_4, 10_9, 2_0, 7_0, "Use NSCalendarIdentifierHebrew instead");
-FOUNDATION_EXPORT NSString * const NSIslamicCalendar NS_CALENDAR_DEPRECATED(10_4, 10_9, 2_0, 7_0, "Use NSCalendarIdentifierIslamic instead");
-FOUNDATION_EXPORT NSString * const NSIslamicCivilCalendar NS_CALENDAR_DEPRECATED(10_4, 10_9, 2_0, 7_0, "Use NSCalendarIdentifierIslamicCivil instead");
-FOUNDATION_EXPORT NSString * const NSJapaneseCalendar NS_CALENDAR_DEPRECATED(10_4, 10_9, 2_0, 7_0, "Use NSCalendarIdentifierJapanese instead");
-FOUNDATION_EXPORT NSString * const NSRepublicOfChinaCalendar NS_CALENDAR_DEPRECATED(10_6, 10_9, 4_0, 7_0, "Use NSCalendarIdentifierRepublicOfChina instead");
-FOUNDATION_EXPORT NSString * const NSPersianCalendar NS_CALENDAR_DEPRECATED(10_6, 10_9, 4_0, 7_0, "Use NSCalendarIdentifierPersian instead");
-FOUNDATION_EXPORT NSString * const NSIndianCalendar NS_CALENDAR_DEPRECATED(10_6, 10_9, 4_0, 7_0, "Use NSCalendarIdentifierIndian instead");
-FOUNDATION_EXPORT NSString * const NSISO8601Calendar NS_CALENDAR_DEPRECATED(10_6, 10_9, 4_0, 7_0, "Use NSCalendarIdentifierISO8601 instead");
+FOUNDATION_EXPORT NSString * const NSGregorianCalendar NS_CALENDAR_DEPRECATED(10_4, 10_10, 2_0, 8_0, "Use NSCalendarIdentifierGregorian instead");
+FOUNDATION_EXPORT NSString * const NSBuddhistCalendar NS_CALENDAR_DEPRECATED(10_4, 10_10, 2_0, 8_0, "Use NSCalendarIdentifierBuddhist instead");
+FOUNDATION_EXPORT NSString * const NSChineseCalendar NS_CALENDAR_DEPRECATED(10_4, 10_10, 2_0, 8_0, "Use NSCalendarIdentifierChinese instead");
+FOUNDATION_EXPORT NSString * const NSHebrewCalendar NS_CALENDAR_DEPRECATED(10_4, 10_10, 2_0, 8_0, "Use NSCalendarIdentifierHebrew instead");
+FOUNDATION_EXPORT NSString * const NSIslamicCalendar NS_CALENDAR_DEPRECATED(10_4, 10_10, 2_0, 8_0, "Use NSCalendarIdentifierIslamic instead");
+FOUNDATION_EXPORT NSString * const NSIslamicCivilCalendar NS_CALENDAR_DEPRECATED(10_4, 10_10, 2_0, 8_0, "Use NSCalendarIdentifierIslamicCivil instead");
+FOUNDATION_EXPORT NSString * const NSJapaneseCalendar NS_CALENDAR_DEPRECATED(10_4, 10_10, 2_0, 8_0, "Use NSCalendarIdentifierJapanese instead");
+FOUNDATION_EXPORT NSString * const NSRepublicOfChinaCalendar NS_CALENDAR_DEPRECATED(10_6, 10_10, 4_0, 8_0, "Use NSCalendarIdentifierRepublicOfChina instead");
+FOUNDATION_EXPORT NSString * const NSPersianCalendar NS_CALENDAR_DEPRECATED(10_6, 10_10, 4_0, 8_0, "Use NSCalendarIdentifierPersian instead");
+FOUNDATION_EXPORT NSString * const NSIndianCalendar NS_CALENDAR_DEPRECATED(10_6, 10_10, 4_0, 8_0, "Use NSCalendarIdentifierIndian instead");
+FOUNDATION_EXPORT NSString * const NSISO8601Calendar NS_CALENDAR_DEPRECATED(10_6, 10_10, 4_0, 8_0, "Use NSCalendarIdentifierISO8601 instead");
 

@@ -2,12 +2,12 @@
  *  CVDisplayLink.h
  *  CoreVideo
  *
- *  Copyright (c) 2004 Apple Computer, Inc. All rights reserved.
+ *  Copyright (c) 2004-2014 Apple Inc. All rights reserved.
  *
  */
  
   /*! @header CVDisplayLink.h
-	@copyright 2004 Apple Computer, Inc. All rights reserved.
+	@copyright 2004-2014 Apple Inc. All rights reserved.
 	@availability Mac OS X 10.4 or later
     @discussion The main purpose of the CoreVideo DisplayLink API is to provide a worker thread to the VideoUnit subsystem that is clocked based on the refresh rate of a CGDirectDisplay device. In the current implementation, these DisplayLinks are created automatically by the Video Unit display nodes, and the developer does not have to deal with them directly.
 		A CoreVideo DisplayLink is represented in code by a CVDisplayLinkRef. The CVDisplayLinkRef API uses the CoreFoundation class system internally to provide reference counting behaviour and other such goodies. There are three different ways to create a CVDisplayLinkRef in the current API. The first call is the most general case, and the other two are provided as a convenience (the third will probably go away, as it's only marginally useful). 
@@ -46,7 +46,7 @@ CV_EXPORT CFTypeID CVDisplayLinkGetTypeID(void) AVAILABLE_MAC_OS_X_VERSION_10_4_
     @param      displayArray array of CGDirectDisplayIDs
     @param      count   number of displays in the displayArray
     @param      displayLisk The new display link will be returned here
-    @result	returns kCVReturnSuccesss on success.
+    @result	returns kCVReturnSuccess on success.
 */
 CV_EXPORT CVReturn CVDisplayLinkCreateWithCGDisplays(CGDirectDisplayID *displayArray, CFIndex count, CVDisplayLinkRef *displayLinkOut) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
@@ -56,7 +56,7 @@ CV_EXPORT CVReturn CVDisplayLinkCreateWithCGDisplays(CGDirectDisplayID *displayA
     @discussion Use this call to create a CVDisplayLink for a CGOpenGLDisplayMask.
     @param      mask CGOpenGLDisplayMask describing the display
     @param      displayLisk The new display link will be returned here
-    @result	returns kCVReturnSuccesss on success.
+    @result	returns kCVReturnSuccess on success.
 */
 CV_EXPORT CVReturn CVDisplayLinkCreateWithOpenGLDisplayMask(CGOpenGLDisplayMask mask, CVDisplayLinkRef *displayLinkOut) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
@@ -66,7 +66,7 @@ CV_EXPORT CVReturn CVDisplayLinkCreateWithOpenGLDisplayMask(CGOpenGLDisplayMask 
     @discussion Use this call to create a CVDisplayLink for a single CGDirectDisplay.
     @param      displayID CGDirectDisplayID of the target display
     @param      displayLisk The new display link will be returned here
-    @result	returns kCVReturnSuccesss on success.
+    @result	returns kCVReturnSuccess on success.
 */
 CV_EXPORT CVReturn CVDisplayLinkCreateWithCGDisplay(CGDirectDisplayID displayID, CVDisplayLinkRef *displayLinkOut) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
@@ -85,7 +85,7 @@ CV_EXPORT CVReturn CVDisplayLinkCreateWithActiveCGDisplays(CVDisplayLinkRef *dis
                 discontinuity in the video time stamp
     @param      displayLink target CVDisplayLinkRef
     @param      displayID target CGDirectDisplayID
-    @result     CVReturn. kCVReturnSuccesss if successfull.
+    @result     CVReturn. kCVReturnSuccess if successfull.
 */
 CV_EXPORT CVReturn CVDisplayLinkSetCurrentCGDisplay(CVDisplayLinkRef displayLink, CGDirectDisplayID displayID) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
@@ -116,7 +116,7 @@ CV_EXPORT CGDirectDisplayID CVDisplayLinkGetCurrentCGDisplay(CVDisplayLinkRef di
     @param      displayLink target CVDisplayLinkRef
     @param	callback	CVDisplayLinkOutputCallback function
     @param	userInfo  User data for the callback to identify the context.
-    @result     CVReturn. kCVReturnSuccesss if successfull.
+    @result     CVReturn. kCVReturnSuccess if successfull.
 */
 CV_EXPORT CVReturn CVDisplayLinkSetOutputCallback(CVDisplayLinkRef displayLink, CVDisplayLinkOutputCallback callback, void *userInfo) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
@@ -125,7 +125,7 @@ CV_EXPORT CVReturn CVDisplayLinkSetOutputCallback(CVDisplayLinkRef displayLink, 
     @abstract   Start timer for DisplayLink
     @discussion (description)
     @param      displayLink target CVDisplayLinkRef
-    @result     CVReturn. kCVReturnSuccesss if successfull.
+    @result     CVReturn. kCVReturnSuccess if successfull.
                 kCVReturnDisplayLinkCallbacksNotSet The DisplayLink cannot be started untill both callbacks are set.
 */
 CV_EXPORT CVReturn CVDisplayLinkStart(CVDisplayLinkRef displayLink) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
@@ -135,7 +135,7 @@ CV_EXPORT CVReturn CVDisplayLinkStart(CVDisplayLinkRef displayLink) AVAILABLE_MA
     @abstract   Stop timer for DisplayLink
     @discussion (description)
     @param      displayLink target CVDisplayLinkRef
-    @result     CVReturn. kCVReturnSuccesss if successfull.
+    @result     CVReturn. kCVReturnSuccess if successfull.
 */
 CV_EXPORT CVReturn CVDisplayLinkStop(CVDisplayLinkRef displayLink) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 

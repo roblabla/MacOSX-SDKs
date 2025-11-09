@@ -2,7 +2,7 @@
 //  AVB17221EntityDiscovery.h
 //  AudioVideoBridging
 //
-//  Copyright 2010-2012 Apple Inc. All rights reserved.
+//  Copyright (c) 2010-2014 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -12,8 +12,8 @@
 
 /*!
 	@class		AVB17221EntityDiscovery
-	@abstract	AVB17221EntityDiscovery provides access to the IEEE P1722.1 AVDECC Discovery Protocol (ADP) interface.
-	@discussion	AVB17221EntityDiscovery provides access to the IEEE P1722.1 AVDECC Discovery Protocol (ADP) interface.
+	@abstract	AVB17221EntityDiscovery provides access to the IEEE Std 1722.1™-2013 AVDECC Discovery Protocol (ADP) interface.
+	@discussion	AVB17221EntityDiscovery provides access to the IEEE Std 1722.1™-2013 AVDECC Discovery Protocol (ADP) interface.
 				It provides a delegate with callbacks whenever an entity is added or removed, 
 				either locally or remotely. AVB17221EntityDiscovery objects are typically not created 
 				directly but are created indirectly and accessed via the entityDiscovery property of 
@@ -76,7 +76,7 @@ NS_CLASS_AVAILABLE(10_8, NA)
 	@param		anInterfaceName	The BSD interface name for the interface to perform discovery on.
 	@result		The initialized receiver.
  */
-- (id)initWithInterfaceName:(NSString *)anInterfaceName;
+- (instancetype)initWithInterfaceName:(NSString *)anInterfaceName;
 
 /*!
 	@method		primeIterators
@@ -88,13 +88,13 @@ NS_CLASS_AVAILABLE(10_8, NA)
 
 /*!
 	@method		discoverEntities
-	@abstract	Triggers the IEEE P1722.1 ADP service to perform an ENTITY_DISCOVER for all entities (an entity_id of 0).
+	@abstract	Triggers the IEEE Std 1722.1™-2013 ADP service to perform an ENTITY_DISCOVER for all entities (an entity_id of 0).
 	@result		A boolean indicating if the call succedded.
  */
 - (BOOL)discoverEntities;
 /*!
 	@method		discoverEntity:
-	@abstract	Triggers the IEEE P1722.1 ADP service to perform an ENTITY_DISCOVER for a specified entity.
+	@abstract	Triggers the IEEE Std 1722.1™-2013 ADP service to perform an ENTITY_DISCOVER for a specified entity.
 	@param		entityID	The entity_id of the entity to look for.
 	@result		A boolean indicating if the call succedded.
  */

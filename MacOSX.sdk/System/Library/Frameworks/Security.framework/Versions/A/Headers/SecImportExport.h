@@ -1,15 +1,15 @@
 /*
- * Copyright (c) 2000-2010,2013 Apple Inc. All Rights Reserved.
+ * Copyright (c) 2000-2011,2013-2014 Apple Inc. All Rights Reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
- *
+ * 
  * This file contains Original Code and/or Modifications of Original Code
  * as defined in and that are subject to the Apple Public Source License
  * Version 2.0 (the 'License'). You may not use this file except in
  * compliance with the License. Please obtain a copy of the License at
  * http://www.opensource.apple.com/apsl/ and read it before using this
  * file.
- *
+ * 
  * The Original Code and all software distributed under the License are
  * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
@@ -17,7 +17,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
  * Please see the License for the specific language governing rights and
  * limitations under the License.
- *
+ * 
  * @APPLE_LICENSE_HEADER_END@
  */
 
@@ -207,6 +207,9 @@ typedef struct
  * can be a SecKeychainItem. Otherwise this argument is a CFArrayRef
  * containing a number of SecKeychainItems.
  *
+ * The exported item(s) is (are) returned to the caller via the
+ * CFDataRef *exportedData argument. Caller must CFRelease the result.
+ *
  * The following SecKeychainItems may be exported:
  *
  *   SecCertificateRef
@@ -263,6 +266,9 @@ OSStatus SecKeychainItemExport(
  * If exactly one item is to be exported, the keychainItemOrArray argument
  * can be a SecKeychainItem. Otherwise this argument is a CFArrayRef
  * containing a number of SecKeychainItems.
+ *
+ * The exported item(s) is (are) returned to the caller via the
+ * CFDataRef *exportedData argument. Caller must CFRelease the result.
  *
  * The following SecKeychainItems may be exported:
  *
@@ -349,7 +355,7 @@ OSStatus SecItemExport(
  *    If importKeychain is NULL, this step does not occur.
  *
  * -- The imported item(s) is (are) returned to the caller via the
- *    CRArrayRef *outItems argument. If outItems is NULL, this step
+ *    CFArrayRef *outItems argument. If outItems is NULL, this step
  *    does not occur. If outItems is NON-NULL, then *outItems will be
  *    a CFArrayRef containing a number of SecKeychainItems upon return.
  *    Caller must CFRelease the result.
@@ -508,7 +514,7 @@ OSStatus SecKeychainItemImport(
  *    If importKeychain is NULL, this step does not occur.
  *
  * -- The imported item(s) is (are) returned to the caller via the
- *    CRArrayRef *outItems argument. If outItems is NULL, this step
+ *    CFArrayRef *outItems argument. If outItems is NULL, this step
  *    does not occur. If outItems is NON-NULL, then *outItems will be
  *    a CFArrayRef containing a number of SecKeychainItems upon return.
  *    Caller must CFRelease the result.

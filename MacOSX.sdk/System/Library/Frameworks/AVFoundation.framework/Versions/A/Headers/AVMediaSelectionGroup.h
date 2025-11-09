@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2011-2013 Apple Inc. All rights reserved.
+	Copyright 2011-2014 Apple Inc. All rights reserved.
 
 */
 
@@ -32,6 +32,14 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
  @discussion	An NSArray of AVMediaSelectionOption*.
 */
 @property (nonatomic, readonly) NSArray *options;
+
+/*!
+ @property		defaultOption
+ @abstract		Indicates the default option in the group, i.e. the option that's intended for use in the absence of a specific end-user selection or preference.
+ @discussion
+	Can be nil, indicating that without a specific end-user selection or preference, no option in the group is intended to be selected.
+*/
+@property (nonatomic, readonly) AVMediaSelectionOption *defaultOption NS_AVAILABLE(10_10, 8_0);
 
 /*!
  @property		allowsEmptySelection
@@ -254,15 +262,17 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
   @param		locale
   				Localize manufactured portions of the string using the specificed locale.
   @discussion
-   May use this option's common metadata, media characteristics and locale properties in addition to the provided locale to formulate an NSString intended for display.
+   May use this option's common metadata, media characteristics and locale properties in addition to the provided locale to formulate an NSString intended for display. Will only consider common metadata with the specified locale.
 */
 - (NSString *)displayNameWithLocale:(NSLocale *)locale NS_AVAILABLE(10_9, 7_0);
 
 /*!
-  @method		displayName
+  @property		displayName
   @abstract		Provides an NSString suitable for display using the current system locale.
   @discussion
-   May use this option's common metadata, media characteristics and locale properties in addition to the current system locale to formulate an NSString intended for display. Equivalent to -[AVMediaSelectionOption displayNameWithLocale:[NSLocale currentLocale]].
+   May use this option's common metadata, media characteristics and locale properties in addition to the current system locale to formulate an NSString intended for display.
+   In the event that common metadata is not available in the specified locale, displayName will fall back to considering locales with the multilingual ("mul") then undetermined ("und") locale identifiers.
+   For a display name strictly with the specified locale use displayNameWithLocale: instead.
 */
 @property (nonatomic, readonly) NSString *displayName NS_AVAILABLE(10_9, 7_0);
 

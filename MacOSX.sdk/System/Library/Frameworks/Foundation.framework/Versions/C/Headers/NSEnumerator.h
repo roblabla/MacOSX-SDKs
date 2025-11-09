@@ -1,5 +1,5 @@
 /*	NSEnumerator.h
-	Copyright (c) 1995-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1995-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -37,7 +37,7 @@ typedef struct {
 
 @interface NSEnumerator (NSExtendedEnumerator)
 
-- (NSArray *)allObjects;
+@property (readonly, copy) NSArray *allObjects;
 
 @end
 

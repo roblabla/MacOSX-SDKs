@@ -1,7 +1,7 @@
 /*
 	NSSearchFieldCell.h
 	Application Kit
-	Copyright (c) 2003-2013, Apple Inc.
+	Copyright (c) 2003-2014, Apple Inc.
 	All rights reserved.
  */
 
@@ -35,8 +35,12 @@
 	unsigned int menuTracking:1;
 	unsigned int deferredUpdate:1;
 	unsigned int sendsImmediately:1;
-
-	unsigned int reserved:16;
+        unsigned int centeredLook:1;
+        unsigned int renderingCentered:1;
+        unsigned int becomeTransition:1;
+        unsigned int resignTransition:1;
+        
+	unsigned int reserved:12;
     } _sfFlags;
     NSButtonCell*   _searchButtonCell;
     NSButtonCell*   _cancelButtonCell;
@@ -51,12 +55,10 @@
     unsigned int _reserved4;    
 }
 
-- (NSButtonCell*) searchButtonCell;
-- (void) setSearchButtonCell:(NSButtonCell*)cell;
+@property (strong) NSButtonCell *searchButtonCell;
     // can modify, set or cancel search button.
 
-- (NSButtonCell*) cancelButtonCell;
-- (void) setCancelButtonCell:(NSButtonCell*)cell;
+@property (strong) NSButtonCell *cancelButtonCell;
     // can modify, set or clear cancel button.
 
 - (void) resetSearchButtonCell;
@@ -68,28 +70,22 @@
 - (NSRect) cancelButtonRectForBounds:(NSRect)rect;
     // for custom layout or to get current sizes
 
-- (void) setSearchMenuTemplate:(NSMenu*)menu;
-- (NSMenu*)searchMenuTemplate;
+@property (strong) NSMenu *searchMenuTemplate;
     // set/get search menu template. Menu can use custom tagged items to indicate special items. this menu isn't actually set but used to construct the dynamic search menu. if cleared, then we don't track recents.
 
-- (void) setSendsWholeSearchString:(BOOL)flag;
-- (BOOL) sendsWholeSearchString;
+@property BOOL sendsWholeSearchString;
     // if clear, send action on each key stroke (after sufficient amount of time so we don't interfere with typing). if set, send only on return/enter or clicking magnifying search button
 
-- (void) setMaximumRecents:(NSInteger)maxRecents;
-- (NSInteger) maximumRecents;
+@property NSInteger maximumRecents;
     // set/get limit max recents. allowable between 0 and 254. setting -1 will use default.
 
-- (void) setRecentSearches:(NSArray*)searches;
-- (NSArray*) recentSearches;
+@property (copy) NSArray *recentSearches;
     // if app wants to do custom search lists. will return empty array if no searches
 
-- (void) setRecentsAutosaveName:(NSString*)string;
-- (NSString*) recentsAutosaveName;
+@property (copy) NSString *recentsAutosaveName;
     // must be set to use. default is nil which means no autosave.
 
-- (BOOL) sendsSearchStringImmediately;
-- (void) setSendsSearchStringImmediately:(BOOL)flag;
+@property BOOL sendsSearchStringImmediately;
 
 @end
 

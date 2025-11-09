@@ -1,5 +1,5 @@
 /*	NSOrthography.h
-	Copyright (c) 2008-2013, Apple Inc. All rights reserved.
+	Copyright (c) 2008-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -12,28 +12,29 @@ NS_CLASS_AVAILABLE(10_6, 4_0)
 @interface NSOrthography : NSObject <NSCopying, NSCoding>
 
 /* These are the primitive properties which a subclass must implement.  The dominantScript should be a script tag (such as Latn, Cyrl, and so forth) and the languageMap should be a dictionary whose keys are script tags and whose values are arrays of language tags (such as en, fr, de, and so forth). */
-@property (readonly) NSString *dominantScript;
-@property (readonly) NSDictionary *languageMap;
+@property (readonly, copy) NSString *dominantScript;
+@property (readonly, copy) NSDictionary *languageMap;
+- (instancetype)initWithDominantScript:(NSString *)script languageMap:(NSDictionary *)map NS_AVAILABLE(10_6, 4_0) NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
 @end
 
 @interface NSOrthography (NSOrthographyExtended)
 
 /* languagesForScript: returns the list of languages for the specified script, and dominantLanguageForScript: returns the first item on that list. */
-- (NSArray *)languagesForScript:(NSString *)script;
-- (NSString *)dominantLanguageForScript:(NSString *)script;
+- (NSArray *)languagesForScript:(NSString *)script NS_AVAILABLE(10_6, 4_0);
+- (NSString *)dominantLanguageForScript:(NSString *)script NS_AVAILABLE(10_6, 4_0);
 
 /*  The dominantLanguage is the first in the list of languages for the dominant script, allScripts includes the dominant script and all others appearing as keys in the language map, and allLanguages includes all languages appearing in the values of the language map. */
-@property (readonly) NSString *dominantLanguage;
-@property (readonly) NSArray *allScripts;
-@property (readonly) NSArray *allLanguages;
+@property (readonly, copy) NSString *dominantLanguage NS_AVAILABLE(10_6, 4_0);
+@property (readonly, copy) NSArray *allScripts NS_AVAILABLE(10_6, 4_0);
+@property (readonly, copy) NSArray *allLanguages NS_AVAILABLE(10_6, 4_0);
 
 @end
 
 @interface NSOrthography (NSOrthographyCreation)
 
-+ (id)orthographyWithDominantScript:(NSString *)script languageMap:(NSDictionary *)map;
-- (id)initWithDominantScript:(NSString *)script languageMap:(NSDictionary *)map;
++ (instancetype)orthographyWithDominantScript:(NSString *)script languageMap:(NSDictionary *)map NS_AVAILABLE(10_6, 4_0);
 
 @end
 

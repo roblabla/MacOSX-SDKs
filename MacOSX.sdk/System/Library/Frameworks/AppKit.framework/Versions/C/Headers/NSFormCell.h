@@ -1,7 +1,7 @@
 /*
 	NSFormCell.h
 	Application Kit
-	Copyright (c) 1994-2013, Apple Inc.
+	Copyright (c) 1994-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -18,28 +18,19 @@
 #endif
 }
 
-- (id)initTextCell:(NSString *)aString;
+- (instancetype)initTextCell:(NSString *)aString;
 
 - (CGFloat)titleWidth:(NSSize)aSize;
-- (CGFloat)titleWidth;
-- (void)setTitleWidth:(CGFloat)width;
-- (NSString *)title;
-- (void)setTitle:(NSString *)aString;
-- (NSFont *)titleFont;
-- (void)setTitleFont:(NSFont *)fontObj;
-- (NSTextAlignment)titleAlignment;
-- (void)setTitleAlignment:(NSTextAlignment)mode;
-- (BOOL)isOpaque;
+@property CGFloat titleWidth;
+@property (copy) NSString *title;
+@property (strong) NSFont *titleFont;
+@property NSTextAlignment titleAlignment;
+@property (getter=isOpaque, readonly) BOOL opaque;
 
-- (void)setPreferredTextFieldWidth:(CGFloat)preferredWidth;
-- (CGFloat)preferredTextFieldWidth;
-- (void)setPlaceholderString:(NSString*)string;
-- (NSString*)placeholderString;
-- (void)setPlaceholderAttributedString:(NSAttributedString*)string;
-- (NSAttributedString*)placeholderAttributedString;
+@property (copy) NSString *placeholderString;
+@property (copy) NSAttributedString *placeholderAttributedString;
 
-- (NSWritingDirection)titleBaseWritingDirection;
-- (void)setTitleBaseWritingDirection:(NSWritingDirection)writingDirection;
+@property NSWritingDirection titleBaseWritingDirection;
 
 
 /* Determine the preferred width of the text field portion of the receiver. The preferred width is reflected in the cell's cellSize, which will be large enough to accommodate the title, bezel, and a text field of width preferredTextWidth. It is also reflected in the intrinsicContentSize of the NSForm. That is, under autolayout, the NSForm will try to size itself so that the text field cell is the given width, according to the usual content size constraint priorities.
@@ -48,8 +39,7 @@
  
  This method can aid migration to autolayout, and is sufficient for simple cases. However, for new apps, prefer to use NSTextFields directly instead of NSForm.
  */
-- (void)setPreferredTextFieldWidth:(CGFloat)width NS_AVAILABLE_MAC(10_8);
-- (CGFloat)preferredTextFieldWidth NS_AVAILABLE_MAC(10_8);
+@property CGFloat preferredTextFieldWidth NS_AVAILABLE_MAC(10_8);
 
 @end
 
@@ -60,6 +50,5 @@
 @end
 
 @interface NSFormCell(NSFormCellAttributedStringMethods)
-- (NSAttributedString *)attributedTitle;
-- (void)setAttributedTitle:(NSAttributedString *)obj;
+@property (copy) NSAttributedString *attributedTitle;
 @end

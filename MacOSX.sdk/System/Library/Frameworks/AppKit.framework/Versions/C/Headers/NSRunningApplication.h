@@ -1,7 +1,7 @@
 /*
 	NSRunningApplication.h
 	Application Kit
-	Copyright (c) 1994-2013, Apple Inc.
+	Copyright (c) 1994-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -24,7 +24,7 @@
 #import <AppKit/NSWorkspace.h>
 
 /* The following flags are for activateWithOptions:. */
-enum {
+typedef NS_OPTIONS(NSUInteger, NSApplicationActivationOptions) {
     /* By default, activation brings only the main and key windows forward.  If you specify NSApplicationActivateAllWindows, all of the application's windows are brought forward. */
     NSApplicationActivateAllWindows = 1 << 0,
     
@@ -33,11 +33,10 @@ enum {
      You ALMOST NEVER want to pass this flag, because stealing key focus produces a very bad user experience. */
     NSApplicationActivateIgnoringOtherApps = 1 << 1
 };
-typedef NSUInteger NSApplicationActivationOptions;
 
 
 /* The following activation policies control whether and how an application may be activated.  They are determined by the Info.plist. */
-enum {
+typedef NS_ENUM(NSInteger, NSApplicationActivationPolicy) {
     /* The application is an ordinary app that appears in the Dock and may have a user interface.  This is the default for bundled apps, unless overridden in the Info.plist. */
     NSApplicationActivationPolicyRegular, 
     
@@ -47,7 +46,6 @@ enum {
     /* The application does not appear in the Dock and may not create windows or be activated.  This corresponds to LSBackgroundOnly=1 in the Info.plist.  This is also the default for unbundled executables that do not have Info.plists. */
     NSApplicationActivationPolicyProhibited
 };
-typedef NSInteger NSApplicationActivationPolicy;
 
 
 @class NSLock, NSDate, NSImage, NSURL;
@@ -105,25 +103,25 @@ NS_CLASS_AVAILABLE(10_6, NA)
 @property (readonly) NSApplicationActivationPolicy activationPolicy;
 
 /* Indicates the name of the application.  This is dependent on the current localization of the referenced app, and is suitable for presentation to the user. */
-@property (readonly) NSString *localizedName;
+@property (readonly, copy) NSString *localizedName;
 
 /* Indicates the CFBundleIdentifier of the application, or nil if the application does not have an Info.plist. */
-@property (readonly) NSString *bundleIdentifier;
+@property (readonly, copy) NSString *bundleIdentifier;
 
 /* Indicates the URL to the application's bundle, or nil if the application does not have a bundle. */
-@property (readonly) NSURL *bundleURL;
+@property (readonly, copy) NSURL *bundleURL;
 
 /* Indicates the URL to the application's executable. */
-@property (readonly) NSURL *executableURL;
+@property (readonly, copy) NSURL *executableURL;
 
 /* Indicates the process identifier (pid) of the application.  Do not rely on this for comparing processes.  Use isEqual: instead.  Not all applications have a pid.  Applications without a pid return -1 from this method. This is observable through KVO (an application's pid may change if it is automatically terminated). */
 @property (readonly) pid_t processIdentifier;
 
 /* Indicates the date when the application was launched.  This property is not available for all applications.  Specifically, it is not available for applications that were launched without going through LaunchServices.   */
-@property (readonly) NSDate *launchDate;
+@property (readonly, copy) NSDate *launchDate;
 
 /* Returns the icon of the application. */
-@property (readonly) NSImage *icon;
+@property (readonly, strong) NSImage *icon;
 
 /* Indicates the executing processor architecture for the application, as an NSBundleExecutableArchitecture from NSBundle.h. */
 @property (readonly) NSInteger executableArchitecture;
@@ -145,10 +143,10 @@ NS_CLASS_AVAILABLE(10_6, NA)
 + (NSArray *)runningApplicationsWithBundleIdentifier:(NSString *)bundleIdentifier;
 
 /* Returns the running application with the given process identifier, or nil if no application has that pid.  Applications that do not have PIDs cannot be returned from this method. */
-+ (NSRunningApplication *)runningApplicationWithProcessIdentifier:(pid_t)pid;
++ (instancetype)runningApplicationWithProcessIdentifier:(pid_t)pid;
 
 /* Returns an NSRunningApplication representing this application. */
-+ (NSRunningApplication *)currentApplication;
++ (instancetype)currentApplication;
 
 /*
  *  Cause any applications that are invisibly still running (see NSProcessInfo.h automatic termination methods and docs) to terminate as if triggered by system memory pressure
@@ -166,7 +164,7 @@ NS_CLASS_AVAILABLE(10_6, NA)
  
  This property is thread safe, in that it may be called from background threads and the result is returned atomically.  This property is observable through KVO.
  */
-- (NSArray *)runningApplications NS_AVAILABLE_MAC(10_6);
+@property (readonly, copy) NSArray *runningApplications NS_AVAILABLE_MAC(10_6);
 
 @end
 

@@ -22,7 +22,7 @@ NS_CLASS_AVAILABLE(10_5,3_0)
 }
 
 // API method that may be overriden by subclasses for custom initialization
-- (id)initWithPersistentStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator configurationName:(NSString *)configurationName URL:(NSURL *)url options:(NSDictionary *)options;
+- (instancetype)initWithPersistentStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator configurationName:(NSString *)configurationName URL:(NSURL *)url options:(NSDictionary *)options;
 
 // API method that must be overriden by subclasses
 - (BOOL)load:(NSError **)error;

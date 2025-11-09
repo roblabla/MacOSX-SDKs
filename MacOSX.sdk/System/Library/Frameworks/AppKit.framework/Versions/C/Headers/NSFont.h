@@ -1,7 +1,7 @@
 /*
 	NSFont.h
 	Application Kit
-	Copyright (c) 1994-2013, Apple Inc.
+	Copyright (c) 1994-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -30,22 +30,20 @@ APPKIT_EXTERN const CGFloat *NSFontIdentityMatrix;
 /********* Glyph packing *********/
 /* Other glyph packing modes are deprecated.
 */
-enum {
+typedef NS_ENUM(NSUInteger, NSMultibyteGlyphPacking) {
     NSNativeShortGlyphPacking = 5
 };
-typedef NSUInteger NSMultibyteGlyphPacking;
 
 /********* Screen Font Rendering Mode *********/
-enum {
+typedef NS_ENUM(NSUInteger, NSFontRenderingMode) {
     NSFontDefaultRenderingMode = 0, // Determines the actual mode based on the user preference settings
     NSFontAntialiasedRenderingMode = 1, // Antialiased, floating-point advancements rendering mode (synonym to printerFont)
     NSFontIntegerAdvancementsRenderingMode = 2, // integer advancements rendering mode
     NSFontAntialiasedIntegerAdvancementsRenderingMode = 3 // Antialiased, integer advancements rendering mode
 };
-typedef NSUInteger NSFontRenderingMode;
 
 NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
-@interface NSFont : NSObject <NSCopying, NSCoding> {
+@interface NSFont : NSObject <NSCopying, NSSecureCoding> {
     /* All instance variables are private */
     NSString *_name;
     CGFloat _size;
@@ -104,36 +102,36 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 + (CGFloat)systemFontSizeForControlSize:(NSControlSize)controlSize;
 
 /********* Core font attribute *********/
-- (NSString *)fontName;
-- (CGFloat)pointSize;
-- (const CGFloat *)matrix NS_RETURNS_INNER_POINTER;
-- (NSString *)familyName;
-- (NSString *)displayName;
-- (NSFontDescriptor *)fontDescriptor;
-- (NSAffineTransform *)textTransform;
+@property (readonly, copy) NSString *fontName;
+@property (readonly) CGFloat pointSize;
+@property (readonly) const CGFloat *matrix NS_RETURNS_INNER_POINTER;
+@property (readonly, copy) NSString *familyName;
+@property (readonly, copy) NSString *displayName;
+@property (readonly, strong) NSFontDescriptor *fontDescriptor;
+@property (readonly, copy) NSAffineTransform *textTransform;
 
 /********* Glyph coverage *********/
-- (NSUInteger)numberOfGlyphs;
-- (NSStringEncoding)mostCompatibleStringEncoding;
+@property (readonly) NSUInteger numberOfGlyphs;
+@property (readonly) NSStringEncoding mostCompatibleStringEncoding;
 - (NSGlyph)glyphWithName:(NSString *)aName;
-- (NSCharacterSet *)coveredCharacterSet;
+@property (readonly, strong) NSCharacterSet *coveredCharacterSet;
 
 /********* Font instance-wide metrics *********/
 /* These methods return scaled numbers.  If the font was created with a matrix, the matrix is applied automatically; otherwise the coordinates are multiplied by size.
 */
-- (NSRect)boundingRectForFont;
-- (NSSize)maximumAdvancement;
+@property (readonly) NSRect boundingRectForFont;
+@property (readonly) NSSize maximumAdvancement;
 
-- (CGFloat)ascender;
-- (CGFloat)descender;
-- (CGFloat)leading;
+@property (readonly) CGFloat ascender;
+@property (readonly) CGFloat descender;
+@property (readonly) CGFloat leading;
 
-- (CGFloat)underlinePosition;
-- (CGFloat)underlineThickness;
-- (CGFloat)italicAngle;
-- (CGFloat)capHeight;
-- (CGFloat)xHeight;
-- (BOOL)isFixedPitch;
+@property (readonly) CGFloat underlinePosition;
+@property (readonly) CGFloat underlineThickness;
+@property (readonly) CGFloat italicAngle;
+@property (readonly) CGFloat capHeight;
+@property (readonly) CGFloat xHeight;
+@property (getter=isFixedPitch, readonly) BOOL fixedPitch;
 
 /********* Glyph metrics *********/
 - (NSRect)boundingRectForGlyph:(NSGlyph)aGlyph;
@@ -149,17 +147,17 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 - (void)setInContext:(NSGraphicsContext *)graphicsContext;
 
 /********* Rendering mode *********/
-- (NSFont *)printerFont;
-- (NSFont *)screenFont; // Same as screenFontWithRenderingMode:NSFontDefaultRenderingMode
+@property (readonly, copy) NSFont *printerFont;
+@property (readonly, copy) NSFont *screenFont; // Same as screenFontWithRenderingMode:NSFontDefaultRenderingMode
 - (NSFont *)screenFontWithRenderingMode:(NSFontRenderingMode)renderingMode;
-- (NSFontRenderingMode)renderingMode;
+@property (readonly) NSFontRenderingMode renderingMode;
 
 /********* Vertical mode *********/
 /* Returns a vertical version of the receiver if such a configuration is supported.  Returns the receiver if no vertical variant available.  A vertical font applies appropriate rotation to the text matrix in -setInContext:, returns vertical metrics, and enables the vertical glyph substitution feature by default. */
-- (NSFont *)verticalFont NS_AVAILABLE_MAC(10_7);
+@property (readonly, copy) NSFont *verticalFont NS_AVAILABLE_MAC(10_7);
 
 /* Returns YES if a vertical variant */
-- (BOOL)isVertical NS_AVAILABLE_MAC(10_7);
+@property (getter=isVertical, readonly) BOOL vertical NS_AVAILABLE_MAC(10_7);
 @end
 
 /********* Glyph packing *********/

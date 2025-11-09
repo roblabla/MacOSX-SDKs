@@ -1,7 +1,7 @@
 /*
 	NSColorSpace.h
 	Application Kit
-	Copyright (c) 2004-2013, Apple Inc.
+	Copyright (c) 2004-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -14,7 +14,7 @@
 
 
 
-enum {
+typedef NS_ENUM(NSInteger, NSColorSpaceModel) {
     NSUnknownColorSpaceModel = -1,
     NSGrayColorSpaceModel,
     NSRGBColorSpaceModel,
@@ -24,11 +24,10 @@ enum {
     NSIndexedColorSpaceModel,
     NSPatternColorSpaceModel
 };
-typedef NSInteger NSColorSpaceModel;
 
 
 NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
-@interface NSColorSpace : NSObject <NSCoding> {
+@interface NSColorSpace : NSObject <NSSecureCoding> {
     id _profile;
     struct {
 	unsigned int colorSpaceID:8;
@@ -44,23 +43,23 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
     void *_reserved[4];
 }
 
-- (id)initWithICCProfileData:(NSData *)iccData;
-- (NSData *)ICCProfileData;
+- (instancetype)initWithICCProfileData:(NSData *)iccData;
+@property (readonly, strong) NSData *ICCProfileData;
 
-- (id)initWithColorSyncProfile:(void * /* ColorSyncProfileRef */)prof;
-- (void * /* ColorSyncProfileRef */)colorSyncProfile NS_RETURNS_INNER_POINTER;
+- (instancetype)initWithColorSyncProfile:(void * /* ColorSyncProfileRef */)prof;
+@property (readonly) void * /* ColorSyncProfileRef */colorSyncProfile NS_RETURNS_INNER_POINTER;
 
 /* Create NSColorSpace from a CGColorSpace.  Might return nil if the CGColorSpace is one not supported by NSColorSpace. Internally the NSColorSpace might retain or create a new copy of the provided CGColorSpace; do not rely on pointer equality of the CGColorSpace provided to this function, when later queried. Archiving, for instance, might not persist the pointer equality/identity of the CGColorSpace.
 */
-- (id)initWithCGColorSpace:(CGColorSpaceRef)cgColorSpace  NS_AVAILABLE_MAC(10_5);
+- (instancetype)initWithCGColorSpace:(CGColorSpaceRef)cgColorSpace  NS_AVAILABLE_MAC(10_5);
 
 /* Might return NULL if the NSColorSpace space cannot be represented as a CGColorSpace.
 */
-- (CGColorSpaceRef)CGColorSpace  NS_AVAILABLE_MAC(10_5);
+@property (readonly) CGColorSpaceRef CGColorSpace  NS_AVAILABLE_MAC(10_5);
 
-- (NSInteger)numberOfColorComponents;		// Does not include alpha
-- (NSColorSpaceModel)colorSpaceModel;
-- (NSString *)localizedName;			// Will return nil if no localized name
+@property (readonly) NSInteger numberOfColorComponents;		// Does not include alpha
+@property (readonly) NSColorSpaceModel colorSpaceModel;
+@property (readonly, copy) NSString *localizedName;			// Will return nil if no localized name
 
 + (NSColorSpace *)genericRGBColorSpace;		// NSColorSpace corresponding to Cocoa color space name NSCalibratedRGBColorSpace
 + (NSColorSpace *)genericGrayColorSpace;	// NSColorSpace corresponding to Cocoa color space name NSCalibratedWhiteColorSpace

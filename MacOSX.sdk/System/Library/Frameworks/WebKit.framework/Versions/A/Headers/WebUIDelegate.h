@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003, 2004, 2005, 2006 Apple Computer, Inc.  All rights reserved.
+ * Copyright (C) 2003, 2004, 2005, 2006 Apple Inc.  All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -10,7 +10,7 @@
  * 2.  Redistributions in binary form must reproduce the above copyright
  *     notice, this list of conditions and the following disclaimer in the
  *     documentation and/or other materials provided with the distribution. 
- * 3.  Neither the name of Apple Computer, Inc. ("Apple") nor the names of
+ * 3.  Neither the name of Apple Inc. ("Apple") nor the names of
  *     its contributors may be used to endorse or promote products derived
  *     from this software without specific prior written permission. 
  *
@@ -26,9 +26,11 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
 #import <Foundation/NSURLRequest.h>
-#import <JavaScriptCore/WebKitAvailability.h>
+#import <WebKit/WebKitAvailability.h>
+
+#import <AppKit/AppKit.h>
 
 /*!
     @enum WebMenuItemTag
@@ -81,13 +83,13 @@ enum {
     @constant WebDragDestinationActionLoad Allows a location change from the drag
     @constant WebDragDestinationActionAny Allows any of the above to occur
 */
-typedef enum {
+typedef NS_OPTIONS(NSUInteger, WebDragDestinationAction) {
     WebDragDestinationActionNone    = 0,
     WebDragDestinationActionDHTML   = 1,
     WebDragDestinationActionEdit    = 2,
     WebDragDestinationActionLoad    = 4,
     WebDragDestinationActionAny     = UINT_MAX
-} WebDragDestinationAction;
+};
 
 /*!
     @enum WebDragSourceAction
@@ -99,14 +101,14 @@ typedef enum {
     @constant WebDragSourceActionSelection Allows a selection drag to occur
     @constant WebDragSourceActionAny Allows any of the above to occur
 */
-typedef enum {
+typedef NS_OPTIONS(NSUInteger, WebDragSourceAction) {
     WebDragSourceActionNone         = 0,
     WebDragSourceActionDHTML        = 1,
     WebDragSourceActionImage        = 2,
     WebDragSourceActionLink         = 4,
     WebDragSourceActionSelection    = 8,
     WebDragSourceActionAny          = UINT_MAX
-} WebDragSourceAction;
+};
 
 /*!
     @protocol WebOpenPanelResultListener
@@ -127,7 +129,7 @@ typedef enum {
     @abstract Call this method to return an array of filenames from the file open panel.
     @param fileNames
 */
-- (void)chooseFilenames:(NSArray *)fileNames WEBKIT_OBJC_METHOD_ANNOTATION(AVAILABLE_IN_WEBKIT_VERSION_4_0);
+- (void)chooseFilenames:(NSArray *)fileNames NS_AVAILABLE_MAC(10_6);
 
 /*!
     @method cancel
@@ -415,7 +417,7 @@ typedef enum {
     @discussion This method is passed a callback object instead of giving a return
     value so that it can be handled with a sheet.
 */
-- (void)webView:(WebView *)sender runOpenPanelForFileButtonWithResultListener:(id<WebOpenPanelResultListener>)resultListener allowMultipleFiles:(BOOL)allowMultipleFiles WEBKIT_OBJC_METHOD_ANNOTATION(AVAILABLE_IN_WEBKIT_VERSION_4_0);
+- (void)webView:(WebView *)sender runOpenPanelForFileButtonWithResultListener:(id<WebOpenPanelResultListener>)resultListener allowMultipleFiles:(BOOL)allowMultipleFiles NS_AVAILABLE_MAC(10_6);
 
 /*!
     @method webView:mouseDidMoveOverElement:modifierFlags:
@@ -558,12 +560,12 @@ typedef enum {
 
 // The following delegate methods are deprecated in favor of the ones above that specify
 // the WebFrame whose JavaScript initiated this call.
-- (void)webView:(WebView *)sender runJavaScriptAlertPanelWithMessage:(NSString *)message WEBKIT_OBJC_METHOD_ANNOTATION(AVAILABLE_WEBKIT_VERSION_1_0_AND_LATER_BUT_DEPRECATED_IN_WEBKIT_VERSION_3_0);
-- (BOOL)webView:(WebView *)sender runJavaScriptConfirmPanelWithMessage:(NSString *)message WEBKIT_OBJC_METHOD_ANNOTATION(AVAILABLE_WEBKIT_VERSION_1_0_AND_LATER_BUT_DEPRECATED_IN_WEBKIT_VERSION_3_0);
-- (NSString *)webView:(WebView *)sender runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(NSString *)defaultText WEBKIT_OBJC_METHOD_ANNOTATION(AVAILABLE_WEBKIT_VERSION_1_0_AND_LATER_BUT_DEPRECATED_IN_WEBKIT_VERSION_3_0);
+- (void)webView:(WebView *)sender runJavaScriptAlertPanelWithMessage:(NSString *)message NS_DEPRECATED_MAC(10_3, 10_5);
+- (BOOL)webView:(WebView *)sender runJavaScriptConfirmPanelWithMessage:(NSString *)message NS_DEPRECATED_MAC(10_3, 10_5);
+- (NSString *)webView:(WebView *)sender runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(NSString *)defaultText NS_DEPRECATED_MAC(10_3, 10_5);
 
 // The following delegate methods are deprecated. Content rect calculations are now done automatically.
-- (void)webView:(WebView *)sender setContentRect:(NSRect)frame WEBKIT_OBJC_METHOD_ANNOTATION(AVAILABLE_WEBKIT_VERSION_1_0_AND_LATER_BUT_DEPRECATED_IN_WEBKIT_VERSION_3_0);
-- (NSRect)webViewContentRect:(WebView *)sender WEBKIT_OBJC_METHOD_ANNOTATION(AVAILABLE_WEBKIT_VERSION_1_0_AND_LATER_BUT_DEPRECATED_IN_WEBKIT_VERSION_3_0);
+- (void)webView:(WebView *)sender setContentRect:(NSRect)frame NS_DEPRECATED_MAC(10_3, 10_5);
+- (NSRect)webViewContentRect:(WebView *)sender NS_DEPRECATED_MAC(10_3, 10_5);
 
 @end

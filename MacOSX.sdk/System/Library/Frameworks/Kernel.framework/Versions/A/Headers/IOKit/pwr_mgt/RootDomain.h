@@ -30,25 +30,26 @@
 
 #include <IOKit/IOService.h>
 #include <IOKit/pwr_mgt/IOPM.h>
-#include <IOKit/IOBufferMemoryDescriptor.h> 
+#include <IOKit/IOBufferMemoryDescriptor.h>
+#include <sys/vnode.h>
 
 
 /*!
  * Types for PM Assertions
  * For creating, releasing, and getting PM assertion levels.
  */
- 
+
 /*! IOPMDriverAssertionType
  * A bitfield describing a set of assertions. May be used to specify which assertions
- * to set with <link>IOPMrootDomain::createPMAssertion</link>; or to query which 
+ * to set with <link>IOPMrootDomain::createPMAssertion</link>; or to query which
  * assertions are set with <link>IOPMrootDomain::releasePMAssertion</link>.
  */
 typedef uint64_t IOPMDriverAssertionType;
 
 /* IOPMDriverAssertionID
  * Drivers may create PM assertions to request system behavior (keep the system awake,
- *  or keep the display awake). When a driver creates an assertion via 
- *  <link>IOPMrootDomain::createPMAssertion</link>, PM returns a handle to 
+ *  or keep the display awake). When a driver creates an assertion via
+ *  <link>IOPMrootDomain::createPMAssertion</link>, PM returns a handle to
  *  the assertion of type IOPMDriverAssertionID.
  */
 typedef uint64_t IOPMDriverAssertionID;
@@ -66,13 +67,13 @@ typedef uint32_t IOPMDriverAssertionLevel;
  * Flags for get/setSleepSupported()
  */
 enum {
-    kRootDomainSleepNotSupported	= 0x00000000,
-    kRootDomainSleepSupported 		= 0x00000001,
-    kFrameBufferDeepSleepSupported	= 0x00000002,
+    kRootDomainSleepNotSupported    = 0x00000000,
+    kRootDomainSleepSupported         = 0x00000001,
+    kFrameBufferDeepSleepSupported    = 0x00000002,
     kPCICantSleep                   = 0x00000004
 };
 
-/* 
+/*
  *IOPMrootDomain registry property keys
  */
 #define kRootDomainSupportedFeatures        "Supported Features"
@@ -116,9 +117,9 @@ typedef IOReturn (*IOPMSettingControllerCallback)
 __BEGIN_DECLS
 IONotifier *    registerSleepWakeInterest(
                     IOServiceInterestHandler, void *, void * = 0);
-               
+
 IONotifier *    registerPrioritySleepWakeInterest(
-                    IOServiceInterestHandler handler, 
+                    IOServiceInterestHandler handler,
                     void * self, void * ref = 0);
 
 IOReturn        acknowledgeSleepWakeNotification(void * );
@@ -126,7 +127,7 @@ IOReturn        acknowledgeSleepWakeNotification(void * );
 IOReturn        vetoSleepWakeNotification(void * PMrefcon);
 __END_DECLS
 
-#define IOPM_ROOTDOMAIN_REV		2
+#define IOPM_ROOTDOMAIN_REV        2
 
 class IOPMrootDomain: public IOService
 {
@@ -158,12 +159,17 @@ public:
     @result kIOReturnSuccess on success */
 
     IOReturn            systemPowerEventOccurred(
-                                    const OSSymbol *event, 
+                                    const OSSymbol *event,
                                     uint32_t intValue );
 
     IOReturn            systemPowerEventOccurred(
-                                    const OSSymbol *event, 
+                                    const OSSymbol *event,
                                     OSObject *value );
+
+    void 				claimSystemWakeEvent( IOService     *device,
+                                              IOOptionBits  flags,
+                                              const char    *reason,
+                                              OSObject      *details = 0 );
 
     virtual IOReturn    receivePowerNotification( UInt32 msg );
 
@@ -176,18 +182,18 @@ public:
     // KEXT driver announces support of power management feature
 
     void                publishFeature( const char *feature );
-    
+
     // KEXT driver announces support of power management feature
     // And specifies power sources with kIOPMSupportedOn{AC/Batt/UPS} bitfield.
     // Returns a unique uint32_t identifier for later removing support for this
-    // feature. 
+    // feature.
     // NULL is acceptable for uniqueFeatureID for kexts without plans to unload.
 
-    void                publishFeature( const char *feature, 
+    void                publishFeature( const char *feature,
                                         uint32_t supportedWhere,
                                         uint32_t *uniqueFeatureID);
 
-    // KEXT driver announces removal of a previously published power management 
+    // KEXT driver announces removal of a previously published power management
     // feature. Pass 'uniqueFeatureID' returned from publishFeature()
 
     IOReturn            removePublishedFeature( uint32_t removeFeatureID );
@@ -202,8 +208,8 @@ public:
 
 /*! @function registerPMSettingController
     @abstract Register for callbacks on changes to certain PM settings.
-    @param settings NULL terminated array of C strings, each string for a PM 
-        setting that the caller is interested in and wants to get callbacks for. 
+    @param settings NULL terminated array of C strings, each string for a PM
+        setting that the caller is interested in and wants to get callbacks for.
     @param callout C function ptr or member function cast as such.
     @param target The target of the callback, usually 'this'
     @param refcon Will be passed to caller in callback; for caller's use.
@@ -221,8 +227,8 @@ public:
 
 /*! @function registerPMSettingController
     @abstract Register for callbacks on changes to certain PM settings.
-    @param settings NULL terminated array of C strings, each string for a PM 
-        setting that the caller is interested in and wants to get callbacks for. 
+    @param settings NULL terminated array of C strings, each string for a PM
+        setting that the caller is interested in and wants to get callbacks for.
     @param supportedPowerSources bitfield indicating which power sources these
         settings are supported for (kIOPMSupportedOnAC, etc.)
     @param callout C function ptr or member function cast as such.
@@ -269,7 +275,7 @@ public:
 
 /* @function setPMAssertionLevel
    @abstract Modify the level of a pre-existing assertion.
-   @discussion Change the value of a PM assertion to influence system behavior, 
+   @discussion Change the value of a PM assertion to influence system behavior,
     without undergoing the work required to create or destroy an assertion. Suggested
     for clients who will assert and de-assert needs for PM behavior several times over
     their lifespan.
@@ -281,13 +287,13 @@ public:
 
 /*! @function getPMAssertionLevel
     @absract Returns the active level of the specified assertion(s).
-    @discussion Returns <link>kIOPMDriverAssertionLevelOff</link> or 
+    @discussion Returns <link>kIOPMDriverAssertionLevelOff</link> or
         <link>kIOPMDriverAssertionLevelOn</link>. If multiple assertions are specified
         in the bitfield, only returns <link>kIOPMDriverAssertionLevelOn</link>
         if all assertions are active.
     @param whichAssertionBits Bits defining the assertion or assertions the caller is interested in
         the level of. If in doubt, pass <link>kIOPMDriverAssertionCPUBit</link> as the argument.
-    @result Returns <link>kIOPMDriverAssertionLevelOff</link> or 
+    @result Returns <link>kIOPMDriverAssertionLevelOff</link> or
         <link>kIOPMDriverAssertionLevelOn</link> indicating the specified assertion's levels, if available.
         If the assertions aren't supported on this machine, or aren't recognized by the OS, the
         result is undefined.
@@ -299,6 +305,12 @@ public:
     @result On success, returns a new assertion of type IOPMDriverAssertionID *
 */
     IOReturn releasePMAssertion(IOPMDriverAssertionID releaseAssertion);
+
+/*! @function restartWithStackshot
+    @abstract Take a stackshot of the system and restart the system.
+    @result Return kIOReturnSuccess if it work, kIOReturnError if the service is not available.
+*/
+    IOReturn restartWithStackshot();
 
 private:
     virtual IOReturn    changePowerStateTo( unsigned long ordinal );

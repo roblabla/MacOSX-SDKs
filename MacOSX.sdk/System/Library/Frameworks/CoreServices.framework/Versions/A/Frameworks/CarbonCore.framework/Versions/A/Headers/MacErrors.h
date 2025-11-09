@@ -727,7 +727,8 @@ enum {
   errOSACorruptData             = errAECorruptData,
   errOSARecordingIsAlreadyOn    = errAERecordingIsAlreadyOn,
   errOSAComponentMismatch       = -1761, /* Parameters are from 2 different components */
-  errOSACantOpenComponent       = -1762 /* Can't connect to scripting system with that ID */
+  errOSACantOpenComponent       = -1762, /* Can't connect to scripting system with that ID */
+  errOSACantStorePointers       = -1763  /* Can't store memory pointers in a saved script */
 };
 
 

@@ -5,6 +5,13 @@
  *
  */
 
+#ifndef VIMAGE_H
+#define VIMAGE_H
+
+/*!
+ *  @charset utf-8
+ */
+
 
 /*  Data Formats
     ------------
@@ -180,8 +187,6 @@
     
 */
 
-#ifndef VIMAGE_H
-#define VIMAGE_H
 
 #include <vImage/vImage_Types.h>
 #include <vImage/Alpha.h>
@@ -193,5 +198,6 @@
 #include <vImage/BasicImageTypes.h>         /* New for MacOS X.4 and later */
 #include <vImage/Transform.h>               /* New for MacOS X.4 and later */
 #include <vImage/vImage_Utilities.h>
+#include <vImage/vImage_CVUtilities.h>
 
 #endif /* VIMAGE_H */

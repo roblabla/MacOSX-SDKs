@@ -1,7 +1,7 @@
 /*
 	NSInputServer.h
 	Application Kit
-	Copyright (c) 1994-2013, Apple Inc.
+	Copyright (c) 1994-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -59,6 +59,7 @@
 - (void) mouseUpOnCharacterIndex:(NSUInteger)theIndex atCoordinate:(NSPoint)thePoint withModifier:(NSUInteger)theFlags client:(id)sender NS_DEPRECATED_MAC(10_0, 10_6);
 @end
 
+NS_CLASS_DEPRECATED_MAC(10_0, 10_6)
 @interface NSInputServer : NSObject <NSInputServiceProvider, NSInputServerMouseTracker> {
     NSString *_name;
     id _delegate;

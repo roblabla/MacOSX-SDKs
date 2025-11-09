@@ -1,7 +1,7 @@
 /*
         NSPDFImageRep.h
         Application Kit
-        Copyright (c) 1999-2013, Apple Inc.
+        Copyright (c) 1999-2014, Apple Inc.
         All rights reserved.
 */
 
@@ -17,15 +17,13 @@
     id      _private;
 }
 
-+ (id)imageRepWithData:(NSData*)pdfData;
-- (id)initWithData:(NSData*)pdfData;
++ (instancetype)imageRepWithData:(NSData*)pdfData;
+- (instancetype)initWithData:(NSData*)pdfData;
 
-- (NSData*)PDFRepresentation;
-- (NSRect)bounds;			// for current page
-
-- (void) setCurrentPage:(NSInteger)page;	// 0 based
-- (NSInteger)  currentPage;
-- (NSInteger)  pageCount;
+@property (readonly, strong) NSData *PDFRepresentation;
+@property (readonly) NSRect bounds;			// for current page
+@property NSInteger currentPage;	// 0 based
+@property (readonly) NSInteger pageCount;
 
 @end
 

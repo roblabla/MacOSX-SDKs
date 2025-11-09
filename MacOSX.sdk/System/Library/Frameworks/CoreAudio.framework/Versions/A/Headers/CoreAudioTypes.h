@@ -30,6 +30,8 @@
     #include <CFBase.h>
 #endif
 
+// CA_PREFER_FIXED_POINT is true on iOS, but this is no longer true in general. This symbol may
+// be removed in a future release.
 #if !defined(CA_PREFER_FIXED_POINT)
     #if TARGET_OS_IPHONE
         #if (TARGET_CPU_X86 || TARGET_CPU_X86_64 || TARGET_CPU_PPC || TARGET_CPU_PPC64) && !TARGET_IPHONE_SIMULATOR
@@ -41,6 +43,13 @@
         #define CA_PREFER_FIXED_POINT 0
     #endif
 #endif
+
+#if defined(__has_feature) && __has_feature(attribute_deprecated_with_message)
+	#define CA_CANONICAL_DEPRECATED __attribute__((deprecated("The concept of canonical formats is deprecated")))
+#else
+	#define CA_CANONICAL_DEPRECATED
+#endif
+
 
 #if defined(__cplusplus)
     #include <string.h>
@@ -175,16 +184,35 @@ typedef struct AudioBufferList  AudioBufferList;
 /*!
     @typedef        AudioSampleType
     @abstract       The canonical audio sample type used by the various CoreAudio APIs
+	@discussion
+		These types are deprecated. Code performing signal processing should use concrete types
+		(e.g. float, Float32, SInt16, SInt32). Format-agnostic code, instead of relying on the sizes
+		of these types, should calculate the size of a sample from an AudioStreamBasicDescription's
+		mBytesPerChannel, mChannelsPerFrame, and (mFlags & kLinearPCMFormatFlagIsNonInterleaved).
+		For interleaved formats, the size of a sample is mBytesPerFrame / mChannelsPerFrame.
+		For non-interleaved formats, it is simply mBytesPerFrame.
 */
 #if !CA_PREFER_FIXED_POINT
-typedef Float32     AudioSampleType;
-typedef Float32     AudioUnitSampleType;
+CA_CANONICAL_DEPRECATED typedef Float32     AudioSampleType;
+CA_CANONICAL_DEPRECATED typedef Float32     AudioUnitSampleType;
 #else
-typedef SInt16      AudioSampleType;
-typedef SInt32      AudioUnitSampleType;
+CA_CANONICAL_DEPRECATED typedef SInt16      AudioSampleType;
+CA_CANONICAL_DEPRECATED typedef SInt32      AudioUnitSampleType;
 #define kAudioUnitSampleFractionBits 24
 #endif
 
+/*!
+    @typedef        AudioFormatID
+    @abstract       A four char code indicating the general kind of data in the stream.
+*/
+typedef UInt32	AudioFormatID;
+    
+/*!
+    @typedef        AudioFormatFlags
+    @abstract       Flags that are specific to each format.
+*/
+typedef UInt32	AudioFormatFlags;
+    
 /*!
     @struct         AudioStreamBasicDescription
     @abstract       This structure encapsulates all the information for describing the basic
@@ -204,12 +232,13 @@ typedef SInt32      AudioUnitSampleType;
                     one frame, (mFramesPerPacket == 1). In compressed audio, a Packet is an
                     indivisible chunk of compressed data, for example an AAC packet will contain
                     1024 sample frames.
+ 
     @field          mSampleRate
                         The number of sample frames per second of the data in the stream.
     @field          mFormatID
-                        A four char code indicating the general kind of data in the stream.
+                        The AudioFormatID indicating the general kind of data in the stream.
     @field          mFormatFlags
-                        Flags specific to each format.
+                        The AudioFormatFlags for the format indicated by mFormatID.
     @field          mBytesPerPacket
                         The number of bytes in a packet of data.
     @field          mFramesPerPacket
@@ -225,15 +254,15 @@ typedef SInt32      AudioUnitSampleType;
 */
 struct AudioStreamBasicDescription
 {
-    Float64 mSampleRate;
-    UInt32  mFormatID;
-    UInt32  mFormatFlags;
-    UInt32  mBytesPerPacket;
-    UInt32  mFramesPerPacket;
-    UInt32  mBytesPerFrame;
-    UInt32  mChannelsPerFrame;
-    UInt32  mBitsPerChannel;
-    UInt32  mReserved;
+    Float64             mSampleRate;
+    AudioFormatID       mFormatID;
+    AudioFormatFlags    mFormatFlags;
+    UInt32              mBytesPerPacket;
+    UInt32              mFramesPerPacket;
+    UInt32              mBytesPerFrame;
+    UInt32              mChannelsPerFrame;
+    UInt32              mBitsPerChannel;
+    UInt32              mReserved;
 };
 typedef struct AudioStreamBasicDescription  AudioStreamBasicDescription;
 
@@ -251,7 +280,7 @@ enum
 
 /*!
     @enum           Format IDs
-    @abstract       The four char code IDs used to identify individual formats of audio data.
+    @abstract       The AudioFormatIDs used to identify individual formats of audio data.
     @constant       kAudioFormatLinearPCM
                         Linear PCM, uses the standard flags.
     @constant       kAudioFormatAC3
@@ -323,6 +352,8 @@ enum
                         MPEG-4 Spatial Audio audio object, has no flags.
     @constant       kAudioFormatAMR
                         The AMR Narrow Band speech codec.
+    @constant       kAudioFormatAMR_WB
+                        The AMR Wide Band speech codec.
     @constant       kAudioFormatAudible
                         The format used for Audible audio books. It has no flags.
     @constant       kAudioFormatiLBC
@@ -368,6 +399,7 @@ enum
     kAudioFormatMPEG4AAC_HE_V2          = 'aacp',
     kAudioFormatMPEG4AAC_Spatial        = 'aacs',
     kAudioFormatAMR                     = 'samr',
+    kAudioFormatAMR_WB                  = 'sawb',
     kAudioFormatAudible                 = 'AUDB',
     kAudioFormatiLBC                    = 'ilbc',
     kAudioFormatDVIIntelIMA             = 0x6D730011,
@@ -376,8 +408,8 @@ enum
 };
 
 /*!
-    @enum           Standard Flag Values for AudioStreamBasicDescription
-    @abstract       These are the standard flags for use in the mFormatFlags field of the
+    @enum           Standard AudioFormatFlags Values for AudioStreamBasicDescription
+    @abstract       These are the standard AudioFormatFlags for use in the mFormatFlags field of the
                     AudioStreamBasicDescription structure.
     @discussion     Typically, when an ASBD is being used, the fields describe the complete layout
                     of the sample data in the buffers that are represented by this description -
@@ -490,7 +522,7 @@ enum
 };
 
 /*!
-    @enum           Commonly Used Combinations of ASBD Flags
+    @enum           Commonly Used Combinations of AudioFormatFlags
     @abstract       Some commonly used combinations of flags for AudioStreamBasicDescriptions.
     @constant       kAudioFormatFlagsNativeEndian
                         Defined to set or clear kAudioFormatFlagIsBigEndian depending on the
@@ -502,6 +534,15 @@ enum
                         AudioUnitSampleType.
     @constant       kAudioFormatFlagsNativeFloatPacked
                         The flags for fully packed, native endian floating point data.
+	
+	@discussion
+		The "canonical" flags are deprecated. CA_PREFER_FIXED_POINT is discouraged because floating-
+		point performance on iOS is such that fixed point is no longer truly preferred. All Apple-
+		supplied AudioUnits support floating point. Replacement should be done with careful
+		consideration of the format being specified or expected, but often
+		kAudioFormatFlagsCanonical can be replaced with kAudioFormatFlagsNativeFloatPacked, and
+		kAudioFormatFlagsAudioUnitCanonical with kAudioFormatFlagsNativeFloatPacked |
+		kAudioFormatFlagIsNonInterleaved.
 */
 enum
 {
@@ -511,11 +552,11 @@ enum
     kAudioFormatFlagsNativeEndian       = 0,
 #endif
 #if !CA_PREFER_FIXED_POINT
-    kAudioFormatFlagsCanonical          = kAudioFormatFlagIsFloat | kAudioFormatFlagsNativeEndian | kAudioFormatFlagIsPacked,
-    kAudioFormatFlagsAudioUnitCanonical = kAudioFormatFlagIsFloat | kAudioFormatFlagsNativeEndian | kAudioFormatFlagIsPacked | kAudioFormatFlagIsNonInterleaved,
+    kAudioFormatFlagsCanonical CA_CANONICAL_DEPRECATED          = kAudioFormatFlagIsFloat | kAudioFormatFlagsNativeEndian | kAudioFormatFlagIsPacked,
+    kAudioFormatFlagsAudioUnitCanonical CA_CANONICAL_DEPRECATED = kAudioFormatFlagIsFloat | kAudioFormatFlagsNativeEndian | kAudioFormatFlagIsPacked | kAudioFormatFlagIsNonInterleaved,
 #else
-    kAudioFormatFlagsCanonical          = kAudioFormatFlagIsSignedInteger | kAudioFormatFlagsNativeEndian | kAudioFormatFlagIsPacked,
-    kAudioFormatFlagsAudioUnitCanonical = kAudioFormatFlagIsSignedInteger | kAudioFormatFlagsNativeEndian | kAudioFormatFlagIsPacked | kAudioFormatFlagIsNonInterleaved | (kAudioUnitSampleFractionBits << kLinearPCMFormatFlagsSampleFractionShift),
+    kAudioFormatFlagsCanonical CA_CANONICAL_DEPRECATED          = kAudioFormatFlagIsSignedInteger | kAudioFormatFlagsNativeEndian | kAudioFormatFlagIsPacked,
+    kAudioFormatFlagsAudioUnitCanonical CA_CANONICAL_DEPRECATED = kAudioFormatFlagIsSignedInteger | kAudioFormatFlagsNativeEndian | kAudioFormatFlagIsPacked | kAudioFormatFlagIsNonInterleaved | (kAudioUnitSampleFractionBits << kLinearPCMFormatFlagsSampleFractionShift),
 #endif
     kAudioFormatFlagsNativeFloatPacked  = kAudioFormatFlagIsFloat | kAudioFormatFlagsNativeEndian | kAudioFormatFlagIsPacked
 };
@@ -556,7 +597,7 @@ static inline bool IsAudioFormatNativeEndian(const AudioStreamBasicDescription& 
     @result     A UInt32 containing the format flags.
 */
 #if defined(__cplusplus)
-static inline UInt32    CalculateLPCMFlags(UInt32 inValidBitsPerChannel, UInt32 inTotalBitsPerChannel, bool inIsFloat, bool inIsBigEndian, bool inIsNonInterleaved = false) { return (inIsFloat ? kAudioFormatFlagIsFloat : kAudioFormatFlagIsSignedInteger) | (inIsBigEndian ? ((UInt32)kAudioFormatFlagIsBigEndian) : 0) | ((inValidBitsPerChannel == inTotalBitsPerChannel) ? kAudioFormatFlagIsPacked : kAudioFormatFlagIsAlignedHigh) | (inIsNonInterleaved ? ((UInt32)kAudioFormatFlagIsNonInterleaved) : 0); }
+static inline AudioFormatFlags    CalculateLPCMFlags(UInt32 inValidBitsPerChannel, UInt32 inTotalBitsPerChannel, bool inIsFloat, bool inIsBigEndian, bool inIsNonInterleaved = false) { return (inIsFloat ? kAudioFormatFlagIsFloat : kAudioFormatFlagIsSignedInteger) | (inIsBigEndian ? ((UInt32)kAudioFormatFlagIsBigEndian) : 0) | ((inValidBitsPerChannel == inTotalBitsPerChannel) ? kAudioFormatFlagIsPacked : kAudioFormatFlagIsAlignedHigh) | (inIsNonInterleaved ? ((UInt32)kAudioFormatFlagIsNonInterleaved) : 0); }
 #endif
 
 /*!

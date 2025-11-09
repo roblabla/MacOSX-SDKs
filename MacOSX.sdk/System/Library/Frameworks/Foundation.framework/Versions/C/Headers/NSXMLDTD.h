@@ -1,5 +1,5 @@
 /*	NSXMLDTD.h
-	Copyright (c) 2004-2013, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSXMLNode.h>
@@ -32,32 +32,22 @@
 #pragma mark --- Properties ---
 #endif
 
-- (id)initWithContentsOfURL:(NSURL *)url options:(NSUInteger)mask error:(NSError **)error;
-- (id)initWithData:(NSData *)data options:(NSUInteger)mask error:(NSError **)error; //primitive
-
-/*!
-    @method setPublicID:
-    @abstract Sets the public id. This identifier should be in the default catalog in /etc/xml/catalog or in a path specified by the environment variable XML_CATALOG_FILES. When the public id is set the system id must also be set.
-*/
-- (void)setPublicID:(NSString *)publicID; //primitive
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithKind:(NSXMLNodeKind)kind options:(NSUInteger)options NS_UNAVAILABLE;
+- (instancetype)initWithContentsOfURL:(NSURL *)url options:(NSUInteger)mask error:(NSError **)error;
+- (instancetype)initWithData:(NSData *)data options:(NSUInteger)mask error:(NSError **)error NS_DESIGNATED_INITIALIZER; //primitive
 
 /*!
     @method publicID
-    @abstract The public id.
+    @abstract Sets the public id. This identifier should be in the default catalog in /etc/xml/catalog or in a path specified by the environment variable XML_CATALOG_FILES. When the public id is set the system id must also be set.
 */
-- (NSString *)publicID; //primitive
-
-/*!
-    @method setSystemID:
-    @abstract Sets the system id. This should be a URL that points to a valid DTD.
-*/
-- (void)setSystemID:(NSString *)systemID; //primitive
+@property (copy) NSString *publicID; //primitive
 
 /*!
     @method systemID
-    @abstract The system id.
+    @abstract Sets the system id. This should be a URL that points to a valid DTD.
 */
-- (NSString *)systemID; //primitive
+@property (copy) NSString *systemID; //primitive
 
 #if 0
 #pragma mark --- Children ---

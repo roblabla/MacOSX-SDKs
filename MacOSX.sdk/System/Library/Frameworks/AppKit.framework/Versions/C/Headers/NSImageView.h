@@ -1,14 +1,14 @@
 /*
     NSImageView.h
     Application Kit
-    Copyright (c) 1994-2013, Apple Inc.
+    Copyright (c) 1994-2014, Apple Inc.
     All rights reserved.
 */
 
 #import <AppKit/NSControl.h>
 #import <AppKit/NSImageCell.h>
 
-@interface NSImageView : NSControl {
+@interface NSImageView : NSControl <NSAccessibilityImage> {
     /*All instance variables are private*/
     struct __IVFlags {
         unsigned int _hasImageView:1;
@@ -24,23 +24,16 @@
     SEL _action;                   // call here after an image drag-drop
 }
 
-- (NSImage *)image;
-- (void)setImage:(NSImage *)newImage;
+@property (strong) NSImage *image;
 
-- (NSImageAlignment)imageAlignment;
-- (void)setImageAlignment:(NSImageAlignment)newAlign;
-- (NSImageScaling)imageScaling;
-- (void)setImageScaling:(NSImageScaling)newScaling;
-- (NSImageFrameStyle)imageFrameStyle;
-- (void)setImageFrameStyle:(NSImageFrameStyle)newStyle;
-- (void)setEditable:(BOOL)yn;
-- (BOOL)isEditable;
+@property NSImageAlignment imageAlignment;
+@property NSImageScaling imageScaling;
+@property NSImageFrameStyle imageFrameStyle;
+@property (getter=isEditable) BOOL editable;
 
-- (void)setAnimates:(BOOL)flag;
-- (BOOL)animates;
+@property BOOL animates;
 
-- (BOOL)allowsCutCopyPaste;
-- (void)setAllowsCutCopyPaste:(BOOL)allow;
+@property BOOL allowsCutCopyPaste;
 
 @end
 

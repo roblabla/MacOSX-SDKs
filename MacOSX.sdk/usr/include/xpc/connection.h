@@ -101,8 +101,9 @@ const struct _xpc_dictionary_s _xpc_error_termination_imminent;
 /*!
  * @typedef xpc_finalizer_f
  * A function that is invoked when a connection is being torn down and its
- * context needs to be freed. It is not safe to reference the connection from
- * within this function.
+ * context needs to be freed. The sole argument is the value that was given to
+ * {@link xpc_connection_set_context} or NULL if no context has been set. It is
+ * not safe to reference the connection from within this function.
  *
  * @param value
  * The context object that is to be disposed of.
@@ -518,7 +519,7 @@ xpc_connection_send_message_with_reply(xpc_connection_t connection,
  * Be judicious about your use of this API. It can block indefinitely, so if you
  * are using it to implement an API that can be called from the main thread, you
  * may wish to consider allowing the API to take a queue and callback block so
- * that results may be delivered asynchrously if possible.
+ * that results may be delivered asynchronously if possible.
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0)
 XPC_EXPORT XPC_NONNULL_ALL XPC_WARN_RESULT XPC_RETURNS_RETAINED
@@ -613,9 +614,9 @@ xpc_connection_get_egid(xpc_connection_t connection);
  * @discussion
  * A given PID is not guaranteed to be unique across an entire boot cycle.
  * Great care should be taken when dealing with this information, as it can go
- * stale after the connection is established. Mac OS X recycles PIDs, and
- * therefore another process could spawn and claim the PID before a message is 
- * actually received from the connection.
+ * stale after the connection is established. OS X recycles PIDs, and therefore
+ * another process could spawn and claim the PID before a message is actually
+ * received from the connection.
  *
  * XPC will deliver an error to your event handler if the remote process goes
  * away, but there are no guarantees as to the timing of this notification's
@@ -694,6 +695,9 @@ xpc_connection_get_context(xpc_connection_t connection);
  * dropped to zero and is being torn down.
  *
  * @discussion
+ * This method disposes of the context value associated with a connection, as
+ * set by {@link xpc_connection_set_context}.
+ *
  * For many uses of context objects, this API allows for a convenient shorthand
  * for freeing them. For example, for a context object allocated with malloc(3):
  *

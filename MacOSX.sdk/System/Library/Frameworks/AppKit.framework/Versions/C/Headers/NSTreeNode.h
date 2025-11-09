@@ -1,7 +1,7 @@
 /*
         NSTreeNode.h
 	AppKit
-	Copyright (c) 2007-2013, Apple Inc.
+	Copyright (c) 2007-2014, Apple Inc.
 	All rights reserved.
  */
 
@@ -24,20 +24,20 @@ NS_CLASS_AVAILABLE(10_5, NA)
     } _NSTreeNodeFlags;
 }
 
-+ (id)treeNodeWithRepresentedObject:(id)modelObject;
-- (id)initWithRepresentedObject:(id)modelObject;
++ (instancetype)treeNodeWithRepresentedObject:(id)modelObject;
+- (instancetype)initWithRepresentedObject:(id)modelObject;
 
-- (id)representedObject;
+@property (readonly, strong) id representedObject;
 
     // stats
-- (NSIndexPath *)indexPath; // represents the receivers location in entire tree
-- (BOOL)isLeaf; // determined by (count of child nodes == 0)
+@property (readonly, strong) NSIndexPath *indexPath; // represents the receivers location in entire tree
+@property (getter=isLeaf, readonly) BOOL leaf; // determined by (count of child nodes == 0)
     
-- (NSArray *)childNodes;    // traversal
-- (NSMutableArray *)mutableChildNodes; // returns a mutable proxy - parentNode of inserted/removed child nodes is automatically updated
+@property (readonly, copy) NSArray *childNodes;    // traversal
+@property (readonly, strong) NSMutableArray *mutableChildNodes; // returns a mutable proxy - parentNode of inserted/removed child nodes is automatically updated
 - (NSTreeNode *)descendantNodeAtIndexPath:(NSIndexPath *)indexPath; // traversal begins with receiver
 
-- (NSTreeNode *)parentNode;
+@property (readonly, assign) NSTreeNode *parentNode;
 
     // sorts the entire subtree
 - (void)sortWithSortDescriptors:(NSArray *)sortDescriptors recursively:(BOOL)recursively;

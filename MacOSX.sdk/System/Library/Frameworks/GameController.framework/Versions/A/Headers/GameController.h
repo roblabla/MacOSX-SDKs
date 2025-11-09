@@ -21,6 +21,8 @@
 #import <GameController/GCControllerButtonInput.h>
 #import <GameController/GCControllerDirectionPad.h>
 
+#import <GameController/GCMotion.h>
+
 #import <GameController/GCGamepad.h>
 #import <GameController/GCGamepadSnapshot.h>
 

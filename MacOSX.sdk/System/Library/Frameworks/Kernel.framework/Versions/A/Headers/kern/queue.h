@@ -70,6 +70,10 @@
 #include <mach/mach_types.h>
 #include <kern/macro_help.h>
 
+#include <sys/cdefs.h>
+
+__BEGIN_DECLS
+
 /*
  *	Queue of abstract objects.  Queue is maintained
  *	within that object.
@@ -112,46 +116,7 @@ typedef	struct queue_entry	*queue_entry_t;
 #define enqueue(queue,elt)	enqueue_tail(queue, elt)
 #define	dequeue(queue)		dequeue_head(queue)
 
-#if	!defined(__GNUC__)
-
-#include <sys/cdefs.h>
-__BEGIN_DECLS
-
-/* Enqueue element to head of queue */
-extern void		enqueue_head(
-				queue_t		que,
-				queue_entry_t	elt);
-
-/* Enqueue element to tail of queue */
-extern void		enqueue_tail(
-				queue_t		que,
-				queue_entry_t	elt);
-
-/* Dequeue element from head of queue */
-extern queue_entry_t	dequeue_head(
-				queue_t	que);
-
-/* Dequeue element from tail of queue */
-extern queue_entry_t	dequeue_tail(
-				queue_t	que);
-
-/* Dequeue element */
-extern void		remqueue(
-				queue_entry_t	elt);
-
-/* Enqueue element after a particular elem */
-extern void		insque(
-				queue_entry_t	entry,
-				queue_entry_t	pred);
-
-/* Dequeue element */
-extern void		remque(
-				queue_entry_t elt);
-
-__END_DECLS
-
-#else	/* !__GNUC__ */
-
+#define __QUEUE_ELT_VALIDATE(elt) do { } while (0)
 #define __DEQUEUE_ELT_CLEANUP(elt) do { } while(0)
 
 static __inline__ void
@@ -159,9 +124,13 @@ enqueue_head(
 	queue_t		que,
 	queue_entry_t	elt)
 {
-	elt->next = que->next;
+	queue_entry_t	old_head;
+
+	__QUEUE_ELT_VALIDATE((queue_entry_t)que);
+	old_head = que->next;
+	elt->next = old_head;
 	elt->prev = que;
-	elt->next->prev = elt;
+	old_head->prev = elt;
 	que->next = elt;
 }
 
@@ -170,9 +139,13 @@ enqueue_tail(
 		queue_t		que,
 		queue_entry_t	elt)
 {
+	queue_entry_t	old_tail;
+
+	__QUEUE_ELT_VALIDATE((queue_entry_t)que);
+	old_tail = que->prev;
 	elt->next = que;
-	elt->prev = que->prev;
-	elt->prev->next = elt;
+	elt->prev = old_tail;
+	old_tail->next = elt;
 	que->prev = elt;
 }
 
@@ -180,12 +153,15 @@ static __inline__ queue_entry_t
 dequeue_head(
 	queue_t	que)
 {
-	register queue_entry_t	elt = (queue_entry_t) 0;
+	queue_entry_t	elt = (queue_entry_t) 0;
+	queue_entry_t	new_head;
 
 	if (que->next != que) {
 		elt = que->next;
-		elt->next->prev = que;
-		que->next = elt->next;
+		__QUEUE_ELT_VALIDATE(elt);
+		new_head = elt->next; /* new_head may point to que if elt was the only element */
+		new_head->prev = que;
+		que->next = new_head;
 		__DEQUEUE_ELT_CLEANUP(elt);
 	}
 
@@ -196,12 +172,15 @@ static __inline__ queue_entry_t
 dequeue_tail(
 	queue_t	que)
 {
-	register queue_entry_t	elt = (queue_entry_t) 0;
+	queue_entry_t	elt = (queue_entry_t) 0;
+	queue_entry_t	new_tail;
 
 	if (que->prev != que) {
 		elt = que->prev;
-		elt->prev->next = que;
-		que->prev = elt->prev;
+		__QUEUE_ELT_VALIDATE(elt);
+		new_tail = elt->prev; /* new_tail may point to queue if elt was the only element */
+		new_tail->next = que;
+		que->prev = new_tail;
 		__DEQUEUE_ELT_CLEANUP(elt);
 	}
 
@@ -212,8 +191,13 @@ static __inline__ void
 remqueue(
 	queue_entry_t	elt)
 {
-	elt->next->prev = elt->prev;
-	elt->prev->next = elt->next;
+	queue_entry_t	next_elt, prev_elt;
+
+	__QUEUE_ELT_VALIDATE(elt);
+	next_elt = elt->next;
+	prev_elt = elt->prev; /* next_elt may equal prev_elt (and the queue head) if elt was the only element */
+	next_elt->prev = prev_elt;
+	prev_elt->next = next_elt;
 	__DEQUEUE_ELT_CLEANUP(elt);
 }
 
@@ -222,22 +206,29 @@ insque(
 	queue_entry_t	entry,
 	queue_entry_t	pred)
 {
-	entry->next = pred->next;
+	queue_entry_t	successor;
+
+	__QUEUE_ELT_VALIDATE(pred);
+	successor = pred->next;
+	entry->next = successor;
 	entry->prev = pred;
-	(pred->next)->prev = entry;
+	successor->prev = entry;
 	pred->next = entry;
 }
 
 static __inline__ void
 remque(
-	register queue_entry_t elt)
+	queue_entry_t elt)
 {
-	(elt->next)->prev = elt->prev;
-	(elt->prev)->next = elt->next;
+	queue_entry_t	next_elt, prev_elt;
+
+	__QUEUE_ELT_VALIDATE(elt);
+	next_elt = elt->next;
+	prev_elt = elt->prev; /* next_elt may equal prev_elt (and the queue head) if elt was the only element */
+	next_elt->prev = prev_elt;
+	prev_elt->next = next_elt;
 	__DEQUEUE_ELT_CLEANUP(elt);
 }
-
-#endif	/* !__GNUC__ */
 
 /*
  *	Macro:		queue_init
@@ -336,7 +327,7 @@ MACRO_END
  */
 #define queue_enter(head, elt, type, field)			\
 MACRO_BEGIN							\
-	register queue_entry_t __prev;				\
+	queue_entry_t __prev;					\
 								\
 	__prev = (head)->prev;					\
 	if ((head) == __prev) {					\
@@ -364,7 +355,7 @@ MACRO_END
  */
 #define queue_enter_first(head, elt, type, field)		\
 MACRO_BEGIN							\
-	register queue_entry_t __next;				\
+	queue_entry_t __next;					\
 								\
 	__next = (head)->next;					\
 	if ((head) == __next) {					\
@@ -393,7 +384,7 @@ MACRO_END
  */
 #define queue_insert_before(head, elt, cur, type, field)		\
 MACRO_BEGIN								\
-	register queue_entry_t __prev;					\
+	queue_entry_t __prev;						\
 									\
 	if ((head) == (queue_entry_t)(cur)) {				\
 		(elt)->field.next = (head);				\
@@ -435,7 +426,7 @@ MACRO_END
  */
 #define queue_insert_after(head, elt, cur, type, field)			\
 MACRO_BEGIN								\
-	register queue_entry_t __next;					\
+	queue_entry_t __next;						\
 									\
 	if ((head) == (queue_entry_t)(cur)) {				\
 		(elt)->field.prev = (head);				\
@@ -482,7 +473,7 @@ MACRO_END
  */
 #define	queue_remove(head, elt, type, field)			\
 MACRO_BEGIN							\
-	register queue_entry_t	__next, __prev;			\
+	queue_entry_t	__next, __prev;				\
 								\
 	__next = (elt)->field.next;				\
 	__prev = (elt)->field.prev;				\
@@ -512,7 +503,7 @@ MACRO_END
  */
 #define	queue_remove_first(head, entry, type, field)		\
 MACRO_BEGIN							\
-	register queue_entry_t	__next;				\
+	queue_entry_t	__next;					\
 								\
 	(entry) = (type)(void *) ((head)->next);		\
 	__next = (entry)->field.next;				\
@@ -538,7 +529,7 @@ MACRO_END
  */
 #define	queue_remove_last(head, entry, type, field)		\
 MACRO_BEGIN							\
-	register queue_entry_t	__prev;				\
+	queue_entry_t	__prev;					\
 								\
 	(entry) = (type)(void *) ((head)->prev);		\
 	__prev = (entry)->field.prev;				\
@@ -605,5 +596,7 @@ MACRO_END
 	     !queue_end((head), (queue_entry_t)(elt));		\
 	     (elt) = (type)(void *) queue_next(&(elt)->field))
 
+
+__END_DECLS
 
 #endif	/* _KERN_QUEUE_H_ */

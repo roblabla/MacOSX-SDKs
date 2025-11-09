@@ -11,10 +11,10 @@
  *    notice, this list of conditions and the following disclaimer in the
  *    documentation and/or other materials provided with the distribution.
  *
- * THIS SOFTWARE IS PROVIDED BY APPLE COMPUTER, INC. ``AS IS'' AND ANY
+ * THIS SOFTWARE IS PROVIDED BY APPLE INC. ``AS IS'' AND ANY
  * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL APPLE COMPUTER, INC. OR
+ * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL APPLE INC. OR
  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
@@ -26,24 +26,21 @@
 
 #import <WebKit/DOMHTMLElement.h>
 
-#if WEBKIT_VERSION_MAX_ALLOWED >= WEBKIT_VERSION_1_3
-
 @class DOMHTMLCollection;
 @class DOMHTMLElement;
 @class NSString;
 
+NS_CLASS_AVAILABLE_MAC(10_4)
 @interface DOMHTMLTableRowElement : DOMHTMLElement
-@property(readonly) int rowIndex;
-@property(readonly) int sectionRowIndex;
-@property(readonly, retain) DOMHTMLCollection *cells;
-@property(copy) NSString *align;
-@property(copy) NSString *bgColor;
-@property(copy) NSString *ch;
-@property(copy) NSString *chOff;
-@property(copy) NSString *vAlign;
+@property (readonly) int rowIndex;
+@property (readonly) int sectionRowIndex;
+@property (readonly, strong) DOMHTMLCollection *cells;
+@property (copy) NSString *align;
+@property (copy) NSString *bgColor;
+@property (copy) NSString *ch;
+@property (copy) NSString *chOff;
+@property (copy) NSString *vAlign;
 
 - (DOMHTMLElement *)insertCell:(int)index;
 - (void)deleteCell:(int)index;
 @end
-
-#endif

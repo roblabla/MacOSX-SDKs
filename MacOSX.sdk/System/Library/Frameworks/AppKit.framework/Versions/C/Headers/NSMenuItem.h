@@ -1,7 +1,7 @@
 /*
         NSMenuItem.h
         Application Kit
-        Copyright (c) 1996-2013, Apple Inc.
+        Copyright (c) 1996-2014, Apple Inc.
         All rights reserved.
 */
 
@@ -53,7 +53,8 @@
         unsigned int indent:4;
         unsigned int keShareMode:3;
         unsigned int state:2;
-        unsigned int RESERVED1:2;
+        unsigned int destructive:1;
+        unsigned int RESERVED1:1;
         unsigned int limitedView:1;
         unsigned int nextItemIsAlternate:1;
         unsigned int blockKE:1;
@@ -69,69 +70,51 @@
 
 + (NSMenuItem *)separatorItem;
 
-- (id)initWithTitle:(NSString *)aString action:(SEL)aSelector keyEquivalent:(NSString *)charCode;
+- (instancetype)initWithTitle:(NSString *)aString action:(SEL)aSelector keyEquivalent:(NSString *)charCode;
 
-- (void)setMenu:(NSMenu *)menu;
-- (NSMenu *)menu;
+@property (assign) NSMenu *menu;
     // Never call the set method directly it is there only for subclassers.
 
 
-- (BOOL)hasSubmenu;
-- (void)setSubmenu:(NSMenu *)submenu;
-- (NSMenu *)submenu;
+@property (readonly) BOOL hasSubmenu;
+@property (strong) NSMenu *submenu;
 
 /* Returns the NSMenuItem whose submenu contains the receiver, or nil if the receiver does not have a parent item.
 */
-- (NSMenuItem *)parentItem NS_AVAILABLE_MAC(10_6);
+@property (readonly, assign) NSMenuItem *parentItem NS_AVAILABLE_MAC(10_6);
 
-- (void)setTitle:(NSString *)aString;
-- (NSString *)title;
-- (void)setAttributedTitle:(NSAttributedString*)string;
-- (NSAttributedString*)attributedTitle;
+@property (copy) NSString *title;
+@property (copy) NSAttributedString *attributedTitle;
 
-- (BOOL)isSeparatorItem;
+@property (getter=isSeparatorItem, readonly) BOOL separatorItem;
 
-- (void)setKeyEquivalent:(NSString *)aKeyEquivalent;
-- (NSString *)keyEquivalent;
-- (void)setKeyEquivalentModifierMask:(NSUInteger)mask;
-- (NSUInteger)keyEquivalentModifierMask;
+@property (copy) NSString *keyEquivalent;
+@property NSUInteger keyEquivalentModifierMask;
 
-- (NSString *)userKeyEquivalent;
+@property (readonly, copy) NSString *userKeyEquivalent;
 
 - (void)setTitleWithMnemonic:(NSString *)stringWithAmpersand;
 
-- (void)setImage:(NSImage *)menuImage;
-- (NSImage *)image;
+@property (strong) NSImage *image;
 
-- (void)setState:(NSInteger)state;
-- (NSInteger)state;
-- (void)setOnStateImage:(NSImage *)image;  // checkmark by default
-- (NSImage *)onStateImage;
-- (void)setOffStateImage:(NSImage *)image;  // none by default
-- (NSImage *)offStateImage;
-- (void)setMixedStateImage:(NSImage *)image;  // horizontal line by default?
-- (NSImage *)mixedStateImage;
+@property NSInteger state;
+@property (strong) NSImage *onStateImage; // checkmark by default
+@property (strong) NSImage *offStateImage; // none by default
+@property (strong) NSImage *mixedStateImage; // horizontal line by default?
 
-- (void)setEnabled:(BOOL)flag;
-- (BOOL)isEnabled;
+@property (getter=isEnabled) BOOL enabled;
 
 
-- (void)setAlternate:(BOOL)isAlternate;
-- (BOOL)isAlternate;
+@property (getter=isAlternate) BOOL alternate;
 
-- (void)setIndentationLevel:(NSInteger)indentationLevel;
-- (NSInteger)indentationLevel;
+@property NSInteger indentationLevel;
 
-- (void)setTarget:(id)anObject;
-- (id)target;
-- (void)setAction:(SEL)aSelector;
-- (SEL)action;
+@property (weak) id target;
+@property SEL action;
 
-- (void)setTag:(NSInteger)anInt;
-- (NSInteger)tag;
+@property NSInteger tag;
 
-- (void)setRepresentedObject:(id)anObject;
-- (id)representedObject;
+@property (strong) id representedObject;
 
 /* Set (and get) the view for a menu item.  By default, a menu item has a nil view.
 A menu item with a view does not draw its title, state, font, or other standard drawing attributes, and assigns drawing responsibility entirely to the view.  Keyboard equivalents and type-select continue to use the key equivalent and title as normal.
@@ -140,26 +123,23 @@ A view in a menu item will receive mouse and keyboard events normally.  During n
 Animation is possible via the usual mechanism (set a timer to call setNeedsDisplay: or display), but because menu tracking occurs in the NSEventTrackingRunLoopMode, you must add the timer to the run loop in that mode.
 When the menu is opened, the view is added to a window; when the menu is closed the view is removed from the window.  Override viewDidMoveToWindow in your view for a convenient place to start/stop animations, reset tracking rects, etc., but do not attempt to move or otherwise modify the window.
 When a menu item is copied via NSCopying, any attached view is copied via archiving/unarchiving.  Menu item views are not supported in the Dock menu. */
-- (void)setView:(NSView *)view NS_AVAILABLE_MAC(10_5);
-- (NSView *)view NS_AVAILABLE_MAC(10_5);
+@property (strong) NSView *view NS_AVAILABLE_MAC(10_5);
 
 /* Indicates whether the menu item should be drawn highlighted or not. */
-- (BOOL)isHighlighted NS_AVAILABLE_MAC(10_5);
+@property (getter=isHighlighted, readonly) BOOL highlighted NS_AVAILABLE_MAC(10_5);
 
 /* Set (and get) the visibility of a menu item.  Hidden menu items (or items with a hidden superitem) do not appear in a menu and do not participate in command key matching.  isHiddenOrHasHiddenAncestor returns YES if the item is hidden or any of its superitems are hidden. */
-- (void)setHidden:(BOOL)hidden NS_AVAILABLE_MAC(10_5);
-- (BOOL)isHidden NS_AVAILABLE_MAC(10_5);
-- (BOOL)isHiddenOrHasHiddenAncestor NS_AVAILABLE_MAC(10_5);
+@property (getter=isHidden) BOOL hidden NS_AVAILABLE_MAC(10_5);
+@property (getter=isHiddenOrHasHiddenAncestor, readonly) BOOL hiddenOrHasHiddenAncestor NS_AVAILABLE_MAC(10_5);
 
 
-- (void) setToolTip:(NSString*)toolTip;
-- (NSString*)toolTip;
+@property (copy) NSString *toolTip;
 
 @end
 
 @interface NSView (NSViewEnclosingMenuItem)
 /* Returns the menu item containing the receiver or any of its superviews in the view hierarchy, or nil if the receiver's view hierarchy is not in a menu item. */
-- (NSMenuItem *)enclosingMenuItem NS_AVAILABLE_MAC(10_5);
+@property (readonly, strong) NSMenuItem *enclosingMenuItem NS_AVAILABLE_MAC(10_5);
 @end
 
 // The NSMenuItem protocol is deprecated.  Use the NSMenuItem class in your code.

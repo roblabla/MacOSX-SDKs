@@ -1,7 +1,7 @@
 /*
 	NSArrayController.h
 	Application Kit
-	Copyright (c) 2002-2013, Apple Inc.
+	Copyright (c) 2002-2014, Apple Inc.
 	All rights reserved.
  */
 
@@ -44,60 +44,52 @@
 
 - (void)rearrangeObjects;    // triggers rearranging the content objects for the user interface, including sorting and filtering; subclasses can override and invoke this method if any parameter that affects the arranged objects changes
 
-- (void)setAutomaticallyRearrangesObjects:(BOOL)flag NS_AVAILABLE_MAC(10_5);    // default: NO
-- (BOOL)automaticallyRearrangesObjects NS_AVAILABLE_MAC(10_5);
+@property BOOL automaticallyRearrangesObjects NS_AVAILABLE_MAC(10_5);   // default: NO
 
-- (NSArray *)automaticRearrangementKeyPaths NS_AVAILABLE_MAC(10_5);    // computes the array of key paths that trigger automatic rearranging from the sort descriptors and filter predicates; subclasses may override this method to customize the default behavior (for example if additional arrangement criteria are used in custom implementations of -rearrangeObjects)
+@property (readonly, copy) NSArray *automaticRearrangementKeyPaths NS_AVAILABLE_MAC(10_5);    // computes the array of key paths that trigger automatic rearranging from the sort descriptors and filter predicates; subclasses may override this method to customize the default behavior (for example if additional arrangement criteria are used in custom implementations of -rearrangeObjects)
 - (void)didChangeArrangementCriteria NS_AVAILABLE_MAC(10_5);    // invoked by the controller itself when any criteria for arranging objects change (sort descriptors or filter predicates) to reset the key paths for automatic rearranging; subclasses should invoke this method if additional arrangement criteria are used in custom implementations of -rearrangeObjects and those criteria change
 
-- (void)setSortDescriptors:(NSArray *)sortDescriptors;
-- (NSArray *)sortDescriptors;
+@property (copy) NSArray *sortDescriptors;
 
-- (void)setFilterPredicate:(NSPredicate *)filterPredicate;
-- (NSPredicate *)filterPredicate;
+@property (strong) NSPredicate *filterPredicate;
 
 /* Indicates whether the controller should nil out its filter predicate before inserting (or adding) new objects. When set to yes, this eliminates the problem of inserting a new object into the array that would otherwise immediately be filtered out of the array of arranged objects.
 */
-- (void)setClearsFilterPredicateOnInsertion:(BOOL)flag; // default: YES
-- (BOOL)clearsFilterPredicateOnInsertion;
+@property BOOL clearsFilterPredicateOnInsertion; // default: YES
 
 - (NSArray *)arrangeObjects:(NSArray *)objects;    // returns objects to be arranged in the user interface for the content object array objects - method can be overridden to use a different kind of sort mechanism or to filter the display objects
-- (id)arrangedObjects;     // array of all displayed objects (after sorting and potentially filtering)
+@property (readonly, strong) id arrangedObjects;     // array of all displayed objects (after sorting and potentially filtering)
 
-- (void)setAvoidsEmptySelection:(BOOL)flag;    // default: YES
-- (BOOL)avoidsEmptySelection;
-- (void)setPreservesSelection:(BOOL)flag;    // default: YES
-- (BOOL)preservesSelection;
-- (void)setSelectsInsertedObjects:(BOOL)flag;    // default: YES
-- (BOOL)selectsInsertedObjects;
+@property BOOL avoidsEmptySelection;   // default: YES
+@property BOOL preservesSelection;   // default: YES
+@property BOOL selectsInsertedObjects;    // default: YES
 
 /* Indicates whether the controller should indicate all multiple selections through the NSMultipleValuesMarker, whether the selected values are equal or not (by default, the controller will only use the NSMultipleValuesMarker if the selected objects actually have different values) - this may act as a performance enhancement in certain applications.
 */
-- (void)setAlwaysUsesMultipleValuesMarker:(BOOL)flag;
-- (BOOL)alwaysUsesMultipleValuesMarker;
+@property BOOL alwaysUsesMultipleValuesMarker;
 
 /* All selection modification methods returning a BOOL indicate through that flag whether changing the selection was successful (changing the selection might trigger an commitEditing call which fails and thus deny's the selection change).
 */
 - (BOOL)setSelectionIndexes:(NSIndexSet *)indexes;    // to deselect all: empty index set, to select all: index set with indexes [0...count - 1]
-- (NSIndexSet *)selectionIndexes;
+@property (readonly, copy) NSIndexSet *selectionIndexes;
 - (BOOL)setSelectionIndex:(NSUInteger)index;
-- (NSUInteger)selectionIndex;
+@property (readonly) NSUInteger selectionIndex;
 - (BOOL)addSelectionIndexes:(NSIndexSet *)indexes;
 - (BOOL)removeSelectionIndexes:(NSIndexSet *)indexes;
 
 - (BOOL)setSelectedObjects:(NSArray *)objects;
-- (NSArray *)selectedObjects;
+@property (readonly, copy) NSArray *selectedObjects;
 - (BOOL)addSelectedObjects:(NSArray *)objects;
 - (BOOL)removeSelectedObjects:(NSArray *)objects;
 
 - (void)add:(id)sender;    // overridden to add a new object to the content objects and to the arranged objects
 - (void)remove:(id)sender;    // overridden to remove the selected objects
 - (void)insert:(id)sender;
-- (BOOL)canInsert;    // can be used in bindings controlling the enabling of buttons, for example
+@property (readonly) BOOL canInsert;    // can be used in bindings controlling the enabling of buttons, for example
 - (void)selectNext:(id)sender;
 - (void)selectPrevious:(id)sender;
-- (BOOL)canSelectNext;
-- (BOOL)canSelectPrevious;
+@property (readonly) BOOL canSelectNext;
+@property (readonly) BOOL canSelectPrevious;
 
 - (void)addObject:(id)object;    // overridden to add to the content objects and to the arranged objects if all filters currently applied are matched
 - (void)addObjects:(NSArray *)objects;

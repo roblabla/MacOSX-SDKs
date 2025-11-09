@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2006 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2014 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -72,6 +72,7 @@
  * DKIOCGETCOMMANDPOOLSIZE               get device's queue depth
  */
 
+#define DK_FEATURE_PRIORITY                   0x00000004
 #define DK_FEATURE_UNMAP                      0x00000010
 
 typedef struct
@@ -110,12 +111,14 @@ typedef struct
     dk_extent_t *          extents;
     uint32_t               extentsCount;
 
-#ifdef __LP64__
+    uint32_t               options;
+
+#ifndef __LP64__
     uint8_t                reserved0096[4];        /* reserved, clear to zero */
-#else /* !__LP64__ */
-    uint8_t                reserved0064[8];        /* reserved, clear to zero */
 #endif /* !__LP64__ */
 } dk_unmap_t;
+
+
 
 #define DKIOCEJECT                            _IO('d', 21)
 #define DKIOCSYNCHRONIZECACHE                 _IO('d', 22)
@@ -132,6 +135,7 @@ typedef struct
 
 #define DKIOCREQUESTIDLE                      _IO('d', 30)
 #define DKIOCUNMAP                            _IOW('d', 31, dk_unmap_t)
+#define _DKIOCCORESTORAGE		      _IO('d', 32)
 
 #define DKIOCGETMAXBLOCKCOUNTREAD             _IOR('d', 64, uint64_t)
 #define DKIOCGETMAXBLOCKCOUNTWRITE            _IOR('d', 65, uint64_t)

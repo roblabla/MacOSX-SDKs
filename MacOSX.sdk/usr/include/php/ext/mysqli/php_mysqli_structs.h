@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2013 The PHP Group                                |
+  | Copyright (c) 1997-2014 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -116,6 +116,10 @@ typedef struct {
 	BIND_BUFFER	param;
 	BIND_BUFFER	result;
 	char		*query;
+#ifndef MYSQLI_USE_MYSQLND
+	/* used to manage refcount with libmysql (already implement in mysqlnd) */
+	zend_object_handle link_handle;
+#endif
 } MY_STMT;
 
 typedef struct {
@@ -129,12 +133,6 @@ typedef struct {
 	int				async_result_fetch_type;
 #endif
 } MY_MYSQL;
-
-typedef struct {
-	int			mode;
-	int			socket;
-	FILE		*fp;
-} PROFILER;
 
 typedef struct {
 	void				*ptr;		/* resource: (mysql, result, stmt)   */
@@ -164,12 +162,6 @@ typedef struct _mysqli_property_entry {
 	int (*w_func)(mysqli_object *obj, zval *value TSRMLS_DC);
 } mysqli_property_entry;
 
-#if !defined(MYSQLI_USE_MYSQLND)
-typedef struct {
-	char	error_msg[LOCAL_INFILE_ERROR_LEN];
-  	void	*userdata;
-} mysqli_local_infile;
-#endif
 
 typedef struct {
 	zend_ptr_stack free_links;

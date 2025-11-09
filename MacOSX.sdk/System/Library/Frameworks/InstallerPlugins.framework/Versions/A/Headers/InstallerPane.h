@@ -23,11 +23,11 @@
 				is "jumped" to rather than moved to going forward or back, InstallerDirectionUndefined is used.
 */
 
-typedef enum{
+typedef NS_ENUM(NSInteger, InstallerSectionDirection){
 	InstallerDirectionForward = 0,
 	InstallerDirectionBackward,
 	InstallerDirectionUndefined
-} InstallerSectionDirection;
+} ;
 
 #pragma mark -
 
@@ -71,7 +71,7 @@ typedef struct InstallerPane_Private InstallerPane_Private;
     @method     initWithSection
     @discussion Init method for InstallerPane.  This method takes it's parent section as an argument.
 */
-- (id)initWithSection:(id)parent;
+- (instancetype)initWithSection:(id)parent;
 
 /*!
     @method     title
@@ -80,13 +80,13 @@ typedef struct InstallerPane_Private InstallerPane_Private;
  
 				You must override this method if you would like a title for a custom pane.
 */
-- (NSString *)title;
+@property (NS_NONATOMIC_IOSONLY, readonly, strong) NSString *title;
 
 /*!
     @method     section
     @discussion The parent section for this pane.
 */
-- (InstallerSection *)section;
+@property (NS_NONATOMIC_IOSONLY, readonly, strong) InstallerSection *section;
    
 /*!
     @method     contentView
@@ -186,26 +186,24 @@ typedef struct InstallerPane_Private InstallerPane_Private;
 	@discussion Call this method to enable or disable the user from leaving this InstallerSection pane in the forward
 				direction. Subclasses should not override this method.
 */
-- (void)setNextEnabled:(BOOL)enabled;
 
 /*!
 	@method     nextEnabled
 	@discussion Specifies whether going to the next pane is enabled in the UI.
 */
-- (BOOL)nextEnabled;
+@property (NS_NONATOMIC_IOSONLY) BOOL nextEnabled;
 
 /*!
 	@method     setPreviousEnabled:
 	@discussion Call this method to enable or disable the user from leaving this InstallerSection pane in the backward
 	 direction. Subclasses should not override this method.
 */
-- (void)setPreviousEnabled:(BOOL)enabled;
 
 /*!
 	@method     previousEnabled
 	@discussion Specifies whether going to the previous pane is enabled in the UI.
 */
-- (BOOL)previousEnabled;
+@property (NS_NONATOMIC_IOSONLY) BOOL previousEnabled;
 
 /*!
     @method     gotoNextPane
@@ -213,7 +211,7 @@ typedef struct InstallerPane_Private InstallerPane_Private;
 				shouldExit: method to be skipped.
 	@result		gotoNextPane will return NO if there is no nextPane (in any sections) or there is an error loading the nextPane.
 */
-- (BOOL)gotoNextPane;
+@property (NS_NONATOMIC_IOSONLY, readonly) BOOL gotoNextPane;
 
 //  gotoPreviousPane resign's active for the current pane and causes the previous
 //  pane to become active
@@ -223,6 +221,6 @@ typedef struct InstallerPane_Private InstallerPane_Private;
 				gotoNextPane causes this pane's shouldExit: method to be skipped.
 	@result		gotoPreviousPane will return NO if there is no previous (in any sections) or there is an error loading the previousPane.
 */
-- (BOOL)gotoPreviousPane;
+@property (NS_NONATOMIC_IOSONLY, readonly) BOOL gotoPreviousPane;
 
 @end

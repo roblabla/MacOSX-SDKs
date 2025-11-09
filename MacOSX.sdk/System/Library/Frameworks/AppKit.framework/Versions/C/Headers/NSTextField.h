@@ -1,7 +1,7 @@
 /*
 	NSTextField.h
 	Application Kit
-	Copyright (c) 1994-2013, Apple Inc.
+	Copyright (c) 1994-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -11,7 +11,7 @@
 
 @protocol NSTextFieldDelegate;
 
-@interface NSTextField : NSControl <NSUserInterfaceValidations>
+@interface NSTextField : NSControl <NSUserInterfaceValidations, NSAccessibilityNavigableStaticText>
 {
     /*All instance variables are private*/
     id	_delegate;
@@ -21,45 +21,36 @@
 #endif
 }
 
-- (void)setBackgroundColor:(NSColor *)color;
-- (NSColor *)backgroundColor;
-- (void)setDrawsBackground:(BOOL)flag;
-- (BOOL)drawsBackground;
-- (void)setTextColor:(NSColor *)color;
-- (NSColor *)textColor;
-- (BOOL)isBordered;
-- (void)setBordered:(BOOL)flag;
-- (BOOL)isBezeled;
-- (void)setBezeled:(BOOL)flag;
-- (BOOL)isEditable;
-- (void)setEditable:(BOOL)flag;
-- (BOOL)isSelectable;
-- (void)setSelectable:(BOOL)flag;
+@property (copy) NSString *placeholderString NS_AVAILABLE_MAC(10_10);
+@property (copy) NSAttributedString *placeholderAttributedString NS_AVAILABLE_MAC(10_10);
+
+@property (copy) NSColor *backgroundColor;
+@property BOOL drawsBackground;
+@property (copy) NSColor *textColor;
+@property (getter=isBordered) BOOL bordered;
+@property (getter=isBezeled) BOOL bezeled;
+@property (getter=isEditable) BOOL editable;
+@property (getter=isSelectable) BOOL selectable;
 - (void)selectText:(id)sender;
-- (id <NSTextFieldDelegate>)delegate;
-- (void)setDelegate:(id <NSTextFieldDelegate>)anObject;
+@property (assign) id<NSTextFieldDelegate> delegate;
 - (BOOL)textShouldBeginEditing:(NSText *)textObject;
 - (BOOL)textShouldEndEditing:(NSText *)textObject;
 - (void)textDidBeginEditing:(NSNotification *)notification;
 - (void)textDidEndEditing:(NSNotification *)notification;
 - (void)textDidChange:(NSNotification *)notification;
-- (BOOL)acceptsFirstResponder;
+@property (readonly) BOOL acceptsFirstResponder;
 
-- (void)setBezelStyle:(NSTextFieldBezelStyle)style;
-- (NSTextFieldBezelStyle)bezelStyle;
+@property NSTextFieldBezelStyle bezelStyle;
 
 /* The preferredMaxLayoutWidth determines the maximum width of the intrinsicContentSize. If the text field wraps, the intrinsic height will be large enough to show the entire text contents at that width. The default is 0, which implies no maximum preferred width.
  */
-- (void)setPreferredMaxLayoutWidth:(CGFloat)width NS_AVAILABLE_MAC(10_8);
-- (CGFloat)preferredMaxLayoutWidth NS_AVAILABLE_MAC(10_8);
+@property CGFloat preferredMaxLayoutWidth NS_AVAILABLE_MAC(10_8);
 
 @end
 
 @interface NSTextField(NSTextFieldAttributedStringMethods)
-- (BOOL)allowsEditingTextAttributes;
-- (void)setAllowsEditingTextAttributes:(BOOL)flag;
-- (BOOL)importsGraphics;
-- (void)setImportsGraphics:(BOOL)flag;
+@property BOOL allowsEditingTextAttributes;
+@property BOOL importsGraphics;
 @end
 
 @protocol NSTextFieldDelegate <NSControlTextEditingDelegate> @end

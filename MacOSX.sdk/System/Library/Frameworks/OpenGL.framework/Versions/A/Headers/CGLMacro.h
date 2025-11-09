@@ -1586,7 +1586,7 @@
 	(*(CGL_MACRO_CONTEXT)->disp.vertex_attrib4Nub_ARB)(CGL_MACRO_CONTEXT_RENDERER, index, x, y, x, w)
 
 #define glVertexAttrib4Nubv(index, v) \
-	(*(CGL_MACRO_CONTEXT)->disp.vertex_attrib4ubv_ARB)(CGL_MACRO_CONTEXT_RENDERER, index, v)
+	(*(CGL_MACRO_CONTEXT)->disp.vertex_attrib4Nubv_ARB)(CGL_MACRO_CONTEXT_RENDERER, index, v)
 
 #define glVertexAttrib4Nuiv(index, v) \
 	(*(CGL_MACRO_CONTEXT)->disp.vertex_attrib4Nuiv_ARB)(CGL_MACRO_CONTEXT_RENDERER, index, v)
@@ -2083,10 +2083,10 @@
 
 /* GL_EXT_gpu_program_parameters */
 #define glProgramEnvParameters4fvEXT(target, index, count, params) \
-(*(CGL_MACRO_CONTEXT)->disp.program_env_parameters4fv_EXT)(CGL_MACRO_CONTEXT_RENDERER, target, index, count, params)
+	(*(CGL_MACRO_CONTEXT)->disp.program_env_parameters4fv_EXT)(CGL_MACRO_CONTEXT_RENDERER, target, index, count, params)
 
 #define glProgramLocalParameters4fvEXT(target, index, count, params) \
-(*(CGL_MACRO_CONTEXT)->disp.program_local_parameters4fv_EXT)(CGL_MACRO_CONTEXT_RENDERER, target, index, count, params)
+	(*(CGL_MACRO_CONTEXT)->disp.program_local_parameters4fv_EXT)(CGL_MACRO_CONTEXT_RENDERER, target, index, count, params)
 
 /* GL_ARB_vertex_blend */
 #define glWeightbvARB(size, weights) \

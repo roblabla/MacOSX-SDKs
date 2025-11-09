@@ -2,7 +2,7 @@
 //  SocialDefines.h
 //  Social
 //
-//  Copyright (c) 2012 Apple Inc. All rights reserved.
+//  Copyright (c) 2014 Apple Inc. All rights reserved.
 //
 
 #ifdef __cplusplus
@@ -12,4 +12,6 @@
 #endif
 
 #define SOCIAL_CLASS_AVAILABLE(_desktopIntro, _iphoneIntro) __attribute__((visibility("default"))) NS_CLASS_AVAILABLE(_desktopIntro, _iphoneIntro)
+#define SOCIAL_CLASS_AVAILABLE_IOS(_iphoneIntro) __attribute__((visibility("default"))) NS_CLASS_AVAILABLE_IOS(_iphoneIntro)
+#define SOCIAL_CLASS_AVAILABLE_MAC(_desktopIntro) __attribute__((visibility("default"))) NS_CLASS_AVAILABLE_MAC(_desktopIntro)
 

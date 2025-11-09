@@ -3,7 +3,7 @@
 	
 	Contains:	
 
-	Copyright:	© 2006-2012 by Apple Inc., all rights reserved.
+	Copyright:	© 2006-2013 by Apple Inc., all rights reserved.
 */
 
 #if !defined(__IOKIT_IOVIDEODEVICE_H)
@@ -15,6 +15,14 @@
 
 class IOVideoStream;
 
+/*!
+    @class		IOVideoDevice
+    @abstract	A class representing a video device.
+    @discussion The IOVideoDevice class defines a mechanism for accessing the IOVideoStreams that a device presents.
+
+    Although it is expected that the client of an IOVideoDevice will be in user space, this is not required.
+
+ */
 class IOVideoDevice : public IOService
 {
 // Construction/Destruction

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2013 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2014 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -2467,7 +2467,7 @@ extern const CFStringRef kSCPropUsersConsoleUserGID;
 		      ,"AirPort"                                        \
 		      ,CFDictionary                                     )
 
-#if !TARGET_OS_IPHONE
+#if	!TARGET_OS_IPHONE
 
   SC_SCHEMA_DECLARATION(kSCEntNetAppleTalk, __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_1,__MAC_10_6,__IPHONE_NA,__IPHONE_NA))
   #define kSCEntNetAppleTalk                                            \
@@ -2475,7 +2475,7 @@ extern const CFStringRef kSCPropUsersConsoleUserGID;
 		      ,"AppleTalk"                                      \
 		      ,CFDictionary                                     )
 
-#endif // !TARGET_OS_IPHONE
+#endif	// !TARGET_OS_IPHONE
 
   SC_SCHEMA_DECLARATION(kSCEntNetDHCP, __OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA))
   #define kSCEntNetDHCP                                                 \
@@ -2543,7 +2543,7 @@ extern const CFStringRef kSCPropUsersConsoleUserGID;
 		      ,"Modem"                                          \
 		      ,CFDictionary                                     )
 
-#if !TARGET_OS_IPHONE
+#if	!TARGET_OS_IPHONE
 
   SC_SCHEMA_DECLARATION(kSCEntNetNetInfo, __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_1,__MAC_10_5,__IPHONE_NA,__IPHONE_NA))
   #define kSCEntNetNetInfo                                              \
@@ -2551,7 +2551,7 @@ extern const CFStringRef kSCPropUsersConsoleUserGID;
 		      ,"NetInfo"                                        \
 		      ,CFDictionary                                     )
 
-#endif // !TARGET_OS_IPHONE
+#endif	// !TARGET_OS_IPHONE
 
   SC_SCHEMA_DECLARATION(kSCEntNetPPP, __OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA))
   #define kSCEntNetPPP                                                  \
@@ -2583,7 +2583,7 @@ extern const CFStringRef kSCPropUsersConsoleUserGID;
 		      ,"Proxies"                                        \
 		      ,CFDictionary                                     )
 
-#if !TARGET_OS_IPHONE
+#if	!TARGET_OS_IPHONE
 
   SC_SCHEMA_DECLARATION(kSCEntNetSMB, __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA))
   #define kSCEntNetSMB                                                  \
@@ -2591,7 +2591,7 @@ extern const CFStringRef kSCPropUsersConsoleUserGID;
 		      ,"SMB"                                            \
 		      ,CFDictionary                                     )
 
-#endif // !TARGET_OS_IPHONE
+#endif	// !TARGET_OS_IPHONE
 
   SC_SCHEMA_DECLARATION(kSCEntNet6to4, __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_NA))
   #define kSCEntNet6to4                                                 \
@@ -2707,7 +2707,7 @@ extern const CFStringRef kSCPropUsersConsoleUserGID;
 		      ,"Keychain"                                       \
 		      ,                                                 )
 
-#if !TARGET_OS_IPHONE
+#if	!TARGET_OS_IPHONE
 
   SC_SCHEMA_DECLARATION(kSCPropNetAppleTalkComputerName, __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_1,__MAC_10_6,__IPHONE_NA,__IPHONE_NA))
   #define kSCPropNetAppleTalkComputerName                               \
@@ -2781,7 +2781,7 @@ extern const CFStringRef kSCPropUsersConsoleUserGID;
 		      ,"SeedRouter"                                     \
 		      ,                                                 )
 
-#endif // !TARGET_OS_IPHONE
+#endif	// !TARGET_OS_IPHONE
 
   SC_SCHEMA_DECLARATION(kSCPropNetDNSDomainName, __OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA))
   #define kSCPropNetDNSDomainName                                       \
@@ -3365,7 +3365,7 @@ extern const CFStringRef kSCPropUsersConsoleUserGID;
 		      ,"WaitForDialTone"                                \
 		      ,                                                 )
 
-#if !TARGET_OS_IPHONE
+#if	!TARGET_OS_IPHONE
 
   SC_SCHEMA_DECLARATION(kSCPropNetNetInfoBindingMethods, __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_1,__MAC_10_5,__IPHONE_NA,__IPHONE_NA))
   #define kSCPropNetNetInfoBindingMethods                               \
@@ -3415,7 +3415,7 @@ extern const CFStringRef kSCPropUsersConsoleUserGID;
 		      ,"network"                                        \
 		      ,                                                 )
 
-#endif // !TARGET_OS_IPHONE
+#endif	// !TARGET_OS_IPHONE
 
   SC_SCHEMA_DECLARATION(kSCPropNetPPPACSPEnabled, __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_NA))
   #define kSCPropNetPPPACSPEnabled                                      \
@@ -3951,7 +3951,7 @@ extern const CFStringRef kSCPropUsersConsoleUserGID;
 		      ,"ProxyAutoDiscoveryEnable"                       \
 		      ,CFNumber (0 or 1)                                )
 
-#if !TARGET_OS_IPHONE
+#if	!TARGET_OS_IPHONE
 
   SC_SCHEMA_DECLARATION(kSCPropNetSMBNetBIOSName, __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA))
   #define kSCPropNetSMBNetBIOSName                                      \
@@ -4007,9 +4007,9 @@ extern const CFStringRef kSCPropUsersConsoleUserGID;
 		      ,"Hybrid"                                         \
 		      ,                                                 )
 
-#endif // !TARGET_OS_IPHONE
+#endif	// !TARGET_OS_IPHONE
 
-#if !TARGET_OS_IPHONE
+#if	!TARGET_OS_IPHONE
 
   SC_SCHEMA_DECLARATION(kSCEntUsersConsoleUser, __OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA))
   #define kSCEntUsersConsoleUser                                        \
@@ -4017,7 +4017,7 @@ extern const CFStringRef kSCPropUsersConsoleUserGID;
 		      ,"ConsoleUser"                                    \
 		      ,                                                 )
 
-#endif // !TARGET_OS_IPHONE
+#endif	// !TARGET_OS_IPHONE
 
   SC_SCHEMA_DECLARATION(kSCPropSystemComputerName, __OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA))
   #define kSCPropSystemComputerName                                     \
@@ -4097,7 +4097,7 @@ extern const CFStringRef kSCPropUsersConsoleUserGID;
 		      ,"ServiceIDs"                                     \
 		      ,CFArray[CFString]                                )
 
-#if !TARGET_OS_IPHONE
+#if	!TARGET_OS_IPHONE
 
   SC_SCHEMA_DECLARATION(kSCPropUsersConsoleUserName, __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_1,__MAC_10_4,__IPHONE_NA,__IPHONE_NA))
   #define kSCPropUsersConsoleUserName                                   \
@@ -4117,6 +4117,6 @@ extern const CFStringRef kSCPropUsersConsoleUserGID;
 		      ,"GID"                                            \
 		      ,CFNumber                                         )
 
-#endif // !TARGET_OS_IPHONE
+#endif	// !TARGET_OS_IPHONE
 
 #endif	/* _SCSCHEMADEFINITIONS_H */

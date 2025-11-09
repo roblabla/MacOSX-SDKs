@@ -1,7 +1,7 @@
 /*
 	NSBrowserCell.h
 	Application Kit
-	Copyright (c) 1994-2013, Apple Inc.
+	Copyright (c) 1994-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -16,15 +16,11 @@
 
 - (NSColor *)highlightColorInView:(NSView *)controlView;
 
-- (BOOL)isLeaf;
-- (void)setLeaf:(BOOL)flag;
-- (BOOL)isLoaded;
-- (void)setLoaded:(BOOL)flag;
+@property (getter=isLeaf) BOOL leaf;
+@property (getter=isLoaded) BOOL loaded;
 - (void)reset;
 - (void)set;
-- (void)setImage:(NSImage *)image;
-- (NSImage *)image;
-- (void)setAlternateImage:(NSImage *)newAltImage;
-- (NSImage *)alternateImage;
+@property (strong) NSImage *image;
+@property (strong) NSImage *alternateImage;
 
 @end

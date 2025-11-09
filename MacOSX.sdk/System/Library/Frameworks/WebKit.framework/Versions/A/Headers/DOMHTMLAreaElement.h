@@ -11,10 +11,10 @@
  *    notice, this list of conditions and the following disclaimer in the
  *    documentation and/or other materials provided with the distribution.
  *
- * THIS SOFTWARE IS PROVIDED BY APPLE COMPUTER, INC. ``AS IS'' AND ANY
+ * THIS SOFTWARE IS PROVIDED BY APPLE INC. ``AS IS'' AND ANY
  * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL APPLE COMPUTER, INC. OR
+ * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL APPLE INC. OR
  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
@@ -26,27 +26,24 @@
 
 #import <WebKit/DOMHTMLElement.h>
 
-#if WEBKIT_VERSION_MAX_ALLOWED >= WEBKIT_VERSION_1_3
-
 @class NSString;
 @class NSURL;
 
+NS_CLASS_AVAILABLE_MAC(10_4)
 @interface DOMHTMLAreaElement : DOMHTMLElement
-@property(copy) NSString *alt;
-@property(copy) NSString *coords;
-@property(copy) NSString *href;
+@property (copy) NSString *alt;
+@property (copy) NSString *coords;
+@property (copy) NSString *href;
 @property BOOL noHref;
-@property(copy) NSString *shape;
-@property(copy) NSString *target;
-@property(copy) NSString *accessKey AVAILABLE_WEBKIT_VERSION_1_3_AND_LATER_BUT_DEPRECATED_AFTER_WEBKIT_VERSION_5_1;
-@property(readonly, copy) NSString *hashName AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-@property(readonly, copy) NSString *host AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-@property(readonly, copy) NSString *hostname AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-@property(readonly, copy) NSString *pathname AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-@property(readonly, copy) NSString *port AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-@property(readonly, copy) NSString *protocol AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-@property(readonly, copy) NSString *search AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-@property(readonly, copy) NSURL *absoluteLinkURL AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+@property (copy) NSString *shape;
+@property (copy) NSString *target;
+@property (copy) NSString *accessKey NS_DEPRECATED_MAC(10_4, 10_8);
+@property (readonly, copy) NSString *hashName NS_AVAILABLE_MAC(10_5);
+@property (readonly, copy) NSString *host NS_AVAILABLE_MAC(10_5);
+@property (readonly, copy) NSString *hostname NS_AVAILABLE_MAC(10_5);
+@property (readonly, copy) NSString *pathname NS_AVAILABLE_MAC(10_5);
+@property (readonly, copy) NSString *port NS_AVAILABLE_MAC(10_5);
+@property (readonly, copy) NSString *protocol NS_AVAILABLE_MAC(10_5);
+@property (readonly, copy) NSString *search NS_AVAILABLE_MAC(10_5);
+@property (readonly, copy) NSURL *absoluteLinkURL NS_AVAILABLE_MAC(10_5);
 @end
-
-#endif

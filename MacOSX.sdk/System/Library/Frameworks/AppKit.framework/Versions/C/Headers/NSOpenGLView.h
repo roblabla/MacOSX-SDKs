@@ -1,7 +1,7 @@
 /*
         NSOpenGLView.h
         Application Kit
-        Copyright (c) 2000-2013, Apple Inc.
+        Copyright (c) 2000-2014, Apple Inc.
         All rights reserved.
 */
 
@@ -20,17 +20,15 @@
 
 + (NSOpenGLPixelFormat*)defaultPixelFormat;
 
-- (id)initWithFrame:(NSRect)frameRect pixelFormat:(NSOpenGLPixelFormat*)format;
+- (instancetype)initWithFrame:(NSRect)frameRect pixelFormat:(NSOpenGLPixelFormat*)format;
 
-- (void)setOpenGLContext:(NSOpenGLContext*)context;
-- (NSOpenGLContext*)openGLContext;
+@property (strong) NSOpenGLContext *openGLContext;
 - (void)clearGLContext;
 
 - (void)update;		// moved or resized
 - (void)reshape;	// scrolled, moved or resized
 
-- (void)setPixelFormat:(NSOpenGLPixelFormat*)pixelFormat;
-- (NSOpenGLPixelFormat*)pixelFormat;
+@property (strong) NSOpenGLPixelFormat *pixelFormat;
 
 - (void)prepareOpenGL;
 @end
@@ -45,7 +43,6 @@ This property is archived (keyed archiving required).
 
 For testing purposes only, the effect of this property can be overridden globally for all views in a process, using the "NSSurfaceResolution" user default.  If NSSurfaceResolution is set to "Device", all views that have surfaces (including not only OpenGL surfaces, but layer tree render surfaces as well) will be opted into using the best resolution surface for the primary display the view is presented on.  This can be used to quickly assess whether an apps view's are ready for non-1x surfaces.  If NSSurfaceResolution is set to "1x", all views that have surfaces will be opted into using 1x (1 pixel per point) surfaces, independent of the display or backing scale factor.  If NSSurfaceResolution is set to any other value, or no value is present for it, then wantsBestResolutionOpenGLSurface will be consulted as described above for views that perform NSOpenGL rendering, and AppKit will separately determine the appropriate resolution for other surfaces, as also described above.
 */
-- (BOOL)wantsBestResolutionOpenGLSurface NS_AVAILABLE_MAC(10_7);
-- (void)setWantsBestResolutionOpenGLSurface:(BOOL)flag NS_AVAILABLE_MAC(10_7);
+@property BOOL wantsBestResolutionOpenGLSurface NS_AVAILABLE_MAC(10_7);
 
 @end

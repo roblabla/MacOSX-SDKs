@@ -2,7 +2,7 @@
 //  SLRequest.h
 //  Social
 //
-//  Copyright (c) 2012 Apple Inc. All rights reserved.
+//  Copyright (c) 2014 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -29,16 +29,16 @@ SOCIAL_CLASS_AVAILABLE(10_8, 6_0)
 + (SLRequest *)requestForServiceType:(NSString *)serviceType requestMethod:(SLRequestMethod)requestMethod URL:(NSURL *)url parameters:(NSDictionary *)parameters;
 
 // Optional account information used to authenticate the request. Defaults to nil.
-@property (retain, NS_NONATOMIC_IOSONLY) ACAccount *account;
+@property (retain, nonatomic) ACAccount *account;
 
 // The request method
-@property (readonly, NS_NONATOMIC_IOSONLY) SLRequestMethod requestMethod;
+@property (readonly, nonatomic) SLRequestMethod requestMethod;
 
 // The request URL
-@property (readonly, NS_NONATOMIC_IOSONLY) NSURL *URL;
+@property (readonly, nonatomic) NSURL *URL;
 
 // The parameters 
-@property (readonly, NS_NONATOMIC_IOSONLY) NSDictionary *parameters;
+@property (readonly, nonatomic) NSDictionary *parameters;
 
 // Specify a named MIME multi-part value. If you set parameters,
 // the parameters will automatically be added as form data in the multi-part data.

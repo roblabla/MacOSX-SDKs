@@ -2,7 +2,7 @@
 //  AVB1722ControlInterface.h
 //  AudioVideoBridging
 //
-//  Copyright 2010-2012 Apple Inc. All rights reserved.
+//  Copyright (c) 2010-2014 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -78,6 +78,6 @@ NS_CLASS_AVAILABLE(10_8, NA)
 	@param		anInterfaceName	The BSD name of the interface on which to create the object.
 	@result		The initialized receiver.
  */
-- (id)initWithInterfaceName:(NSString *)anInterfaceName NS_AVAILABLE(10_9, NA);
+- (instancetype)initWithInterfaceName:(NSString *)anInterfaceName NS_AVAILABLE(10_9, NA);
 
 @end

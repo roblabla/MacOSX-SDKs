@@ -1,7 +1,7 @@
 /*
 	NSFontPanel.h
 	Application Kit
-	Copyright (c) 1994-2013, Apple Inc.
+	Copyright (c) 1994-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -25,21 +25,21 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
     id _targetObject;
 
     id			_familyList;
-    id                  _faceList; 
-    id                  _sizeList; 
+    id                  _faceList;
+    id                  _sizeList;
     id                  _mainCollectionList;
     id			_sizeField;
     id                  _sizeSlider;
     id                  _sizeSliderBox;
     id			_preview;
-    id			_previewCaption;
+    id			_previewContainer;
     id                  _mainSplitView;
     id			_mmCollectionList;	
     id			_mmFamilyList;
     id                  _mmFaceList;
     id                  _mmSizeList;
-    id			_extrasPopup; 	
-    id			_searchField;	
+    id			_fullSizeHeightConstraint;
+    id                  _searchField;
     id			_fixedListButton;
     id		        _sliderButton; 
     id		        _accessoryView; 
@@ -54,17 +54,18 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 	unsigned int	    _sizeDisabled:1; // used by validate font panel modes. 
 	unsigned int	    _faceDisabled:1; // used by validate font panel modes. 
         unsigned int        showEffects:1;
-        unsigned int _uiMode:8;
-        unsigned int _reserved:14;
+        unsigned int        _uiMode:8;
+        unsigned int        _miniMode:1;
+        unsigned int _reserved:13;
     } _fpFlags;
 
     id			_regularModeBox; 
     id			_miniModeBox; 
-    id			_modeBoxSuperview; 
+    id			_sizeBox;
     id			_collectionLabel; 
     id			_sizeLabel; 
-    id			_faceLabel; 
-    id			_familyLabel; 
+    id                  _faceDivider;
+    id                  _familyLabel;
     id			_sizeStyleButton; 
     id			_newSizeField; 
     id			_editSizeList; 
@@ -84,41 +85,27 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
     id _fontEffectsBox;
     int _sizeStyle;
 
+    NSInteger _mode;
+
 #if !__LP64__
-    id _fpUnused[72];
+    id _fpUnused[71];
 #endif /* !__LP64__ */
 }
 
 + (NSFontPanel *)sharedFontPanel;
 + (BOOL)sharedFontPanelExists;
 
-- (NSView *)accessoryView;
-- (void)setAccessoryView:(NSView *)aView;
+@property (strong) NSView *accessoryView;
 - (void)setPanelFont:(NSFont *)fontObj isMultiple:(BOOL)flag;
 - (NSFont *)panelConvertFont:(NSFont *)fontObj;
-- (BOOL)worksWhenModal;
-- (BOOL)isEnabled;
-- (void)setEnabled:(BOOL)flag;
+@property BOOL worksWhenModal;
+@property (getter=isEnabled) BOOL enabled;
 
 /* This method triggers a re-load to the default state, so that the delegate will be called, and have an opportunity to scrutinize the default list of fonts to be displayed in the panel.
 */
 - (void) reloadDefaultFontFamilies;
 
 @end
-
-
-/* Tags of views in the FontPanel
-    THESE ARE ALL OBSOLETE and should not be used.
-*/
-enum {
-    NSFPPreviewButton			= 131,
-    NSFPRevertButton			= 130,
-    NSFPSetButton			= 132,
-    NSFPPreviewField			= 128,
-    NSFPSizeField			= 129,
-    NSFPSizeTitle			= 133,
-    NSFPCurrentField			= 134
-};
 
 
 enum {
@@ -134,3 +121,16 @@ enum {
     NSFontPanelStandardModesMask = 0xFFFF,
     NSFontPanelAllModesMask = 0xFFFFFFFF
 };
+
+/* Tags of views in the FontPanel
+ THESE ARE ALL OBSOLETE and should not be used.
+ */
+enum {
+    NSFPPreviewButton			= 131,
+    NSFPRevertButton			= 130,
+    NSFPSetButton			= 132,
+    NSFPPreviewField			= 128,
+    NSFPSizeField			= 129,
+    NSFPSizeTitle			= 133,
+    NSFPCurrentField			= 134
+} NS_ENUM_DEPRECATED_MAC(10_0, 10_0);

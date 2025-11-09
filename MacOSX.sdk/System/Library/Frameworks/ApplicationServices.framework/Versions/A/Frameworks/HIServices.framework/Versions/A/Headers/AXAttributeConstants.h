@@ -51,6 +51,7 @@
 	kAXTitleUIElementAttribute
 	kAXServesAsTitleForUIElementsAttribute
 	kAXLinkedUIElementsAttribute
+    kAXSharedFocusElementsAttribute
 	
 	// visual state attributes
 	kAXEnabledAttribute
@@ -167,6 +168,8 @@
 	kAXShownMenuUIElementAttribute
 	kAXIsApplicationRunningAttribute
 	kAXFocusedApplicationAttribute
+ 	kAXElementBusyAttribute
+	kAXAlternateUIVisibleAttribute
 */
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
@@ -450,6 +453,20 @@
 
 
 /*!
+    @define kAXElementBusyAttribute
+ 
+    Indicates that an element is busy. This status conveys
+    that an element is in the process of updating or loading and that
+    new information will be available when the busy state completes.
+ 
+    Value: A CFBooleanRef. True means busy, false means not busy.
+ 
+    Writable? Yes.
+ */
+#define kAXElementBusyAttribute				CFSTR("AXElementBusy")
+
+
+/*!
 	@define kAXFocusedAttribute
 	
 	Indicates whether the element is the current keyboard focus. It should be writable
@@ -588,7 +605,7 @@
 	Value: An AXValueRef with type kAXValueCGPointType. 0,0 is the top-left
 	corner of the screen that displays the menu bar. The value of the horizontal
 	axis increases to the right. The value of the vertical axis increases
-	downward. Units are pixels.
+	downward. Units are points.
 	
 	Writable? Generally no. However, some elements that can be moved by the user
 	through direct manipulation (like windows) should offer a writable position
@@ -605,7 +622,7 @@
 	
 	The vertical and horizontal dimensions of the element.
 	
-	Value: An AXValueRef with type kAXValueCGSizeType. Units are pixels.
+	Value: An AXValueRef with type kAXValueCGSizeType. Units are points.
 	
 	Writable? Generally no. However, some elements that can be resized by the user
 	through direct manipulation (like windows) should offer a writable size attribute.
@@ -752,10 +769,29 @@
 */
 #define kAXSharedCharacterRangeAttribute		CFSTR("AXSharedCharacterRange")
 
+
+/*!
+    @define kAXSharedFocusElementsAttribute
+ 
+    Returns an array of elements that also have keyboard focus when a given element has
+    keyboard focus. A common usage of this attribute is to report that both a search
+    text field and a list of resulting suggestions share keyboard focus because keyboard
+    events can be handled by either UI element. In this example, the text field would be
+    the first responder and it would report the list of suggestions as an element in the
+    array returned for kAXSharedFocusElementsAttribute.
+ 
+    Value: A CFArrayRef of AXUIElementsRefs.
+ 
+    Writable? No.
+ */
+#define kAXSharedFocusElementsAttribute         CFSTR("AXSharedFocusElements")
+
+
 /*!
 	@define kAXInsertionPointLineNumberAttribute
  */
 #define kAXInsertionPointLineNumberAttribute		CFSTR("AXInsertionPointLineNumber")
+
 
 /*!
 	@define kAXMainAttribute
@@ -1253,6 +1289,8 @@ typedef UInt32 AXMenuItemModifiers;
 // UI element identification attributes
 #define kAXIdentifierAttribute				CFSTR("AXIdentifier")
 
+// UI supporting transient state attributes
+#define kAXAlternateUIVisibleAttribute      CFSTR("AXAlternateUIVisible")
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /*! @group Parameterized Attributes                                                     */

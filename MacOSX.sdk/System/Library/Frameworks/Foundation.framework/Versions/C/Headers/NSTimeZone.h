@@ -1,5 +1,5 @@
 /*	NSTimeZone.h
-	Copyright (c) 1994-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -9,8 +9,8 @@
 
 @interface NSTimeZone : NSObject <NSCopying, NSSecureCoding>
 
-- (NSString *)name;
-- (NSData *)data;
+@property (readonly, copy) NSString *name;
+@property (readonly, copy) NSData *data;
 
 - (NSInteger)secondsFromGMTForDate:(NSDate *)aDate;
 - (NSString *)abbreviationForDate:(NSDate *)aDate;
@@ -37,13 +37,13 @@
 
 + (NSString *)timeZoneDataVersion NS_AVAILABLE(10_6, 4_0);
 
-- (NSInteger)secondsFromGMT;
-- (NSString *)abbreviation;
-- (BOOL)isDaylightSavingTime;
-- (NSTimeInterval)daylightSavingTimeOffset NS_AVAILABLE(10_5, 2_0); // for current instant
-- (NSDate *)nextDaylightSavingTimeTransition NS_AVAILABLE(10_5, 2_0); // after current instant
+@property (readonly) NSInteger secondsFromGMT;
+@property (readonly, copy) NSString *abbreviation;
+@property (readonly, getter=isDaylightSavingTime) BOOL daylightSavingTime;
+@property (readonly) NSTimeInterval daylightSavingTimeOffset NS_AVAILABLE(10_5, 2_0); // for current instant
+@property (readonly, copy) NSDate *nextDaylightSavingTimeTransition NS_AVAILABLE(10_5, 2_0); // after current instant
 
-- (NSString *)description;
+@property (readonly, copy) NSString *description;
 
 - (BOOL)isEqualToTimeZone:(NSTimeZone *)aTimeZone;
 
@@ -65,18 +65,18 @@ typedef NS_ENUM(NSInteger, NSTimeZoneNameStyle) {
 // Primary creation method is +timeZoneWithName:; the
 // data-taking variants should rarely be used directly
 
-+ (id)timeZoneWithName:(NSString *)tzName;
-+ (id)timeZoneWithName:(NSString *)tzName data:(NSData *)aData;
++ (instancetype)timeZoneWithName:(NSString *)tzName;
++ (instancetype)timeZoneWithName:(NSString *)tzName data:(NSData *)aData;
 
-- (id)initWithName:(NSString *)tzName;
-- (id)initWithName:(NSString *)tzName data:(NSData *)aData;
+- (instancetype)initWithName:(NSString *)tzName;
+- (instancetype)initWithName:(NSString *)tzName data:(NSData *)aData;
 
 // Time zones created with this never have daylight savings and the
 // offset is constant no matter the date; the name and abbreviation
 // do NOT follow the POSIX convention (of minutes-west).
-+ (id)timeZoneForSecondsFromGMT:(NSInteger)seconds;
++ (instancetype)timeZoneForSecondsFromGMT:(NSInteger)seconds;
 
-+ (id)timeZoneWithAbbreviation:(NSString *)abbreviation;
++ (instancetype)timeZoneWithAbbreviation:(NSString *)abbreviation;
 
 @end
 

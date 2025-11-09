@@ -17,6 +17,16 @@ typedef NS_ENUM(NSInteger, SKSceneScaleMode) {
     SKSceneScaleModeResizeFill      /* Modify the SKScene's actual size to exactly match the SKView. */
 } NS_ENUM_AVAILABLE(10_9, 7_0);
 
+NS_AVAILABLE(10_10, 8_0) @protocol SKSceneDelegate <NSObject>
+@optional
+- (void)update:(NSTimeInterval)currentTime forScene:(SKScene *)scene;
+- (void)didEvaluateActionsForScene:(SKScene *)scene;
+- (void)didSimulatePhysicsForScene:(SKScene *)scene;
+
+- (void)didApplyConstraintsForScene:(SKScene *)scene;
+- (void)didFinishUpdateForScene:(SKScene *)scene;
+@end
+
 /**
  A scene is the root node of your content. It is used to display SpriteKit content on an SKView.
  
@@ -37,25 +47,27 @@ SK_EXPORT @interface SKScene : SKEffectNode
 
 + (instancetype)sceneWithSize:(CGSize)size;
 
-@property (SK_NONATOMIC_IOSONLY) CGSize size;
+@property (nonatomic) CGSize size;
 
 /**
  Used to determine how to scale the scene to match the SKView it is being displayed in.
  */
-@property (SK_NONATOMIC_IOSONLY) SKSceneScaleMode scaleMode;
+@property (nonatomic) SKSceneScaleMode scaleMode;
 
 /* Background color, defaults to gray */
-@property (SK_NONATOMIC_IOSONLY, retain) SKColor *backgroundColor;
+@property (nonatomic, retain) SKColor *backgroundColor;
+
+@property (nonatomic, assign) id<SKSceneDelegate> delegate NS_AVAILABLE(10_10, 8_0);
 
 /**
  Used to choose the origin of the scene's coordinate system
  */
-@property (SK_NONATOMIC_IOSONLY) CGPoint anchorPoint;
+@property (nonatomic) CGPoint anchorPoint;
 
 /**
  Physics simulation functionality
  */
-@property (SK_NONATOMIC_IOSONLY, readonly) SKPhysicsWorld *physicsWorld;
+@property (nonatomic, readonly) SKPhysicsWorld *physicsWorld;
 
 - (CGPoint)convertPointFromView:(CGPoint)point;
 - (CGPoint)convertPointToView:(CGPoint)point;
@@ -63,7 +75,7 @@ SK_EXPORT @interface SKScene : SKEffectNode
 /**
  The SKView this scene is currently presented in, or nil if it is not being presented.
  */
-@property (SK_NONATOMIC_IOSONLY, weak, readonly) SKView *view;
+@property (nonatomic, weak, readonly) SKView *view;
 
 /**
  Override this to perform per-frame game logic. Called exactly once per frame before any actions are evaluated and any physics are simulated.
@@ -81,6 +93,18 @@ SK_EXPORT @interface SKScene : SKEffectNode
  Override this to perform game logic. Called exactly once per frame after any actions have been evaluated and any physics have been simulated. Any additional actions applied is not evaluated until the next update. Any changes to physics bodies is not simulated until the next update.
  */
 - (void)didSimulatePhysics;
+
+/**
+ Override this to perform game logic. Called exactly once per frame after any enabled constraints have been applied. Any additional actions applied is not evaluated until the next update. Any changes to physics bodies is not simulated until the next update. Any changes to constarints will not be applied until the next update.
+ */
+- (void)didApplyConstraints NS_AVAILABLE(10_10, 8_0);
+
+/**
+ Override this to perform game logic. Called after all update logic has been completed. Any additional actions applied are not evaluated until the next update. Any changes to physics bodies are not simulated until the next update. Any changes to constarints will not be applied until the next update.
+ 
+ No futher update logic will be applied to the scene after this call. Any values set on nodes here will be used when the scene is rendered for the current frame.
+ */
+- (void)didFinishUpdate NS_AVAILABLE(10_10, 8_0);
 
 - (void)didMoveToView:(SKView *)view;
 - (void)willMoveFromView:(SKView *)view;

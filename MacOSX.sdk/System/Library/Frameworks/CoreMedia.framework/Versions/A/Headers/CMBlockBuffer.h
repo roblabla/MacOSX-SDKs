@@ -3,7 +3,7 @@
  
 	Framework:  CoreMedia
 
-    Copyright 2005-2012 Apple Inc. All rights reserved.
+    Copyright 2005-2014 Apple Inc. All rights reserved.
 
 */
 
@@ -67,6 +67,7 @@ enum {
 	kCMBlockBufferBadPointerParameterErr		= -12705,
 	kCMBlockBufferEmptyBBufErr					= -12706,
 	kCMBlockBufferUnallocatedBlockErr			= -12707,
+	kCMBlockBufferInsufficientSpaceErr			= -12708,
 };
 
 /*!

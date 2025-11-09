@@ -51,6 +51,7 @@ kern_return_t		mach_wait_until(
 
 
 uint64_t			mach_absolute_time(void);
+uint64_t			mach_approximate_time(void);
 __END_DECLS
 
 #endif /* _MACH_MACH_TIME_H_ */

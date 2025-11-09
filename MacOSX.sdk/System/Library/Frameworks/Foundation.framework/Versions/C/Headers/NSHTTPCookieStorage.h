@@ -1,6 +1,6 @@
 /*	
     NSHTTPCookieStorage.h
-    Copyright (c) 2003-2013, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2014, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -10,6 +10,8 @@
 @class NSArray;
 @class NSHTTPCookie;
 @class NSURL;
+@class NSDate;
+@class NSURLSessionTask;
 
 /*!
     @enum NSHTTPCookieAcceptPolicy
@@ -55,7 +57,7 @@ typedef NS_ENUM(NSUInteger, NSHTTPCookieAcceptPolicy) {
     @abstract Get all the cookies
     @result An NSArray of NSHTTPCookies
 */
-- (NSArray *)cookies;
+@property (readonly, copy) NSArray *cookies;
 
 /*!
     @method setCookie:
@@ -70,6 +72,12 @@ typedef NS_ENUM(NSUInteger, NSHTTPCookieAcceptPolicy) {
     @abstract Delete the specified cookie
 */
 - (void)deleteCookie:(NSHTTPCookie *)cookie;
+
+/*!
+ @method removeCookiesSince:
+ @abstract Delete all cookies from the cookie storage since the provided date.
+ */
+- (void)removeCookiesSinceDate:(NSDate *)date NS_AVAILABLE(10_10, 8_0);
 
 /*!
     @method cookiesForURL:
@@ -104,19 +112,10 @@ typedef NS_ENUM(NSUInteger, NSHTTPCookieAcceptPolicy) {
 
 /*!
     @method cookieAcceptPolicy
-    @abstract Returns the cookie accept policy preference of the
+    @abstract The cookie accept policy preference of the
     receiver.
-    @result The cookie accept policy preference of the receiver.
 */
-- (NSHTTPCookieAcceptPolicy)cookieAcceptPolicy;
-
-/*!
-    @method setCookieAcceptPolicy:
-    @abstract Sets the cookie accept policy preference of the
-    receiver.
-    @param cookieAcceptPolicy The new cookie accept policy for the receiver.
-*/
-- (void)setCookieAcceptPolicy:(NSHTTPCookieAcceptPolicy)cookieAcceptPolicy;
+@property NSHTTPCookieAcceptPolicy cookieAcceptPolicy;
 
 /*!
   @method sortedCookiesUsingDescriptors:
@@ -126,6 +125,11 @@ typedef NS_ENUM(NSUInteger, NSHTTPCookieAcceptPolicy) {
 */
 - (NSArray*)sortedCookiesUsingDescriptors:(NSArray*) sortOrder NS_AVAILABLE(10_7, 5_0);
 
+@end
+
+@interface NSHTTPCookieStorage (NSURLSessionTaskAdditions)
+- (void)storeCookies:(NSArray *)cookies forTask:(NSURLSessionTask *)task NS_AVAILABLE(10_10, 8_0);
+- (void)getCookiesForTask:(NSURLSessionTask *)task completionHandler:(void (^) (NSArray *cookies))completionHandler NS_AVAILABLE(10_10, 8_0);
 @end
 
 /*!

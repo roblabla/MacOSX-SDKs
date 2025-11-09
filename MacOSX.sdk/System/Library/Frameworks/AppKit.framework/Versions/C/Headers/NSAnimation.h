@@ -1,14 +1,14 @@
 /*
     NSAnimation.h
     Application Kit
-    Copyright (c) 2004-2013, Apple Inc.
+    Copyright (c) 2004-2014, Apple Inc.
     All rights reserved.
 */
 
 #import <AppKit/AppKitDefines.h>
 #import <Foundation/Foundation.h>
 
-@class NSArray, NSGraphicsContext, NSMutableArray, NSString, NSTimer;
+@class NSArray, NSGraphicsContext, NSMutableArray, NSString, NSDisplayLink;
 @protocol NSAnimationDelegate;
 
 typedef NS_ENUM(NSUInteger, NSAnimationCurve) {
@@ -35,7 +35,7 @@ APPKIT_EXTERN NSString *NSAnimationProgressMark; // NSNumber(float) with NSAnima
     NSAnimationProgress  _currentProgress;
     float                 _framesPerSecond;
     id                   _delegate;
-    NSTimer             *_timer;
+    NSDisplayLink       *_displayLink;
     NSTimeInterval       _startTime;
     NSMutableArray      *_progressMarks;
     NSAnimation         *_startAnimation;
@@ -49,7 +49,8 @@ APPKIT_EXTERN NSString *NSAnimationProgressMark; // NSNumber(float) with NSAnima
 	unsigned int delegateAnimationDidReachProgressMark:1;
 	unsigned int animating:1;
 	unsigned int blocking:1;
-	unsigned int reserved:25;
+        unsigned int sendProgressAllTheTime:1;
+	unsigned int reserved:24;
     } _aFlags;
     struct __aSettings {
 	unsigned int animationCurve:8;
@@ -62,34 +63,27 @@ APPKIT_EXTERN NSString *NSAnimationProgressMark; // NSNumber(float) with NSAnima
     NSInteger _reserved4;
 }
 
-- (id)initWithDuration:(NSTimeInterval)duration animationCurve:(NSAnimationCurve)animationCurve;
+- (instancetype)initWithDuration:(NSTimeInterval)duration animationCurve:(NSAnimationCurve)animationCurve;
 
 - (void)startAnimation;
 - (void)stopAnimation;
-- (BOOL)isAnimating;
+@property (getter=isAnimating, readonly) BOOL animating;
 
-- (NSAnimationProgress)currentProgress;
-- (void)setCurrentProgress:(NSAnimationProgress)progress;
+@property NSAnimationProgress currentProgress;
 
-- (void)setDuration:(NSTimeInterval)duration;
-- (NSTimeInterval)duration;
+@property NSTimeInterval duration;
 
-- (NSAnimationBlockingMode)animationBlockingMode;
-- (void)setAnimationBlockingMode:(NSAnimationBlockingMode)animationBlockingMode;
+@property NSAnimationBlockingMode animationBlockingMode;
 
-- (void)setFrameRate:(float)framesPerSecond;
-- (float)frameRate;
+@property float frameRate;
 
-- (void)setAnimationCurve:(NSAnimationCurve)curve;
-- (NSAnimationCurve)animationCurve;
+@property NSAnimationCurve animationCurve;
 
-- (float)currentValue;
+@property (readonly) float currentValue;
 
-- (void)setDelegate:(id <NSAnimationDelegate>)delegate;
-- (id <NSAnimationDelegate>)delegate;
+@property (assign) id<NSAnimationDelegate> delegate;
 
-- (NSArray *)progressMarks;
-- (void)setProgressMarks:(NSArray *)progressMarks;
+@property (copy) NSArray *progressMarks;
 
 - (void)addProgressMark:(NSAnimationProgress)progressMark;
 - (void)removeProgressMark:(NSAnimationProgress)progressMark;
@@ -100,7 +94,7 @@ APPKIT_EXTERN NSString *NSAnimationProgressMark; // NSNumber(float) with NSAnima
 - (void)clearStartAnimation;
 - (void)clearStopAnimation;
 
-- (NSArray *)runLoopModesForAnimating;
+@property (readonly, copy) NSArray *runLoopModesForAnimating;
 
 @end
 
@@ -139,10 +133,9 @@ APPKIT_EXTERN NSString *NSViewAnimationFadeOutEffect;
     NSUInteger                  _reserved8;    
 }
 
-- (id)initWithViewAnimations:(NSArray *)viewAnimations;
+- (instancetype)initWithViewAnimations:(NSArray *)viewAnimations;
 
-- (NSArray *)viewAnimations;
-- (void)setViewAnimations:(NSArray *)viewAnimations;
+@property (copy) NSArray *viewAnimations;
 
 @end
 

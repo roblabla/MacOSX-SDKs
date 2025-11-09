@@ -1,6 +1,6 @@
 /*	
     NSURLProtectionSpace.h
-    Copyright (c) 2003-2013, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2014, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -129,7 +129,7 @@ FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodServerTrust NS_AVAIL
     valid values include nil (default method), @"digest" and @"form".
     @result The initialized object.
 */
-- (id)initWithHost:(NSString *)host port:(NSInteger)port protocol:(NSString *)protocol realm:(NSString *)realm authenticationMethod:(NSString *)authenticationMethod;
+- (instancetype)initWithHost:(NSString *)host port:(NSInteger)port protocol:(NSString *)protocol realm:(NSString *)realm authenticationMethod:(NSString *)authenticationMethod;
 
 /*!
     @method initWithProxyHost:port:type:realm:authenticationMethod:
@@ -145,7 +145,7 @@ FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodServerTrust NS_AVAIL
     valid values include nil (default method) and @"digest"
     @result The initialized object.
 */
-- (id)initWithProxyHost:(NSString *)host port:(NSInteger)port type:(NSString *)type realm:(NSString *)realm  authenticationMethod:(NSString *)authenticationMethod;
+- (instancetype)initWithProxyHost:(NSString *)host port:(NSInteger)port type:(NSString *)type realm:(NSString *)realm  authenticationMethod:(NSString *)authenticationMethod;
 
 /*!
     @method realm
@@ -155,56 +155,56 @@ FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodServerTrust NS_AVAIL
     authentication, and may be nil otherwise.
     @result The realm string
 */
-- (NSString *)realm;
+@property (readonly, copy) NSString *realm;
 
 /*!
     @method receivesCredentialSecurely
     @abstract Determine if the password for this protection space can be sent securely
     @result YES if a secure authentication method or protocol will be used, NO otherwise
 */
-- (BOOL)receivesCredentialSecurely;
+@property (readonly) BOOL receivesCredentialSecurely;
 
 /*!
     @method isProxy
     @abstract Determine if this authenticating protection space is a proxy server
     @result YES if a proxy, NO otherwise
 */
-- (BOOL)isProxy;
+@property (readonly) BOOL isProxy;
 
 /*!
     @method host
     @abstract Get the proxy host if this is a proxy authentication, or the host from the URL.
     @result The host for this protection space.
 */
-- (NSString *)host;
+@property (readonly, copy) NSString *host;
 
 /*!
     @method port
     @abstract Get the proxy port if this is a proxy authentication, or the port from the URL.
     @result The port for this protection space, or 0 if not set.
 */
-- (NSInteger)port;
+@property (readonly) NSInteger port;
 
 /*!
     @method proxyType
     @abstract Get the type of this protection space, if a proxy
     @result The type string, or nil if not a proxy.
  */
-- (NSString *)proxyType;
+@property (readonly, copy) NSString *proxyType;
 
 /*!
     @method protocol
     @abstract Get the protocol of this protection space, if not a proxy
     @result The type string, or nil if a proxy.
 */
-- (NSString *)protocol;
+@property (readonly, copy) NSString *protocol;
 
 /*!
     @method authenticationMethod
     @abstract Get the authentication method to be used for this protection space
     @result The authentication method
 */
-- (NSString *)authenticationMethod;
+@property (readonly, copy) NSString *authenticationMethod;
 
 @end
 
@@ -219,7 +219,7 @@ FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodServerTrust NS_AVAIL
     @abstract Returns an array of acceptable certificate issuing authorities for client certification authentication. Issuers are identified by their distinguished name and returned as a DER encoded data.
     @result An array of NSData objects.  (Nil if the authenticationMethod is not NSURLAuthenticationMethodClientCertificate)
  */
-- (NSArray *)distinguishedNames NS_AVAILABLE(10_6, 3_0);
+@property (readonly, copy) NSArray *distinguishedNames NS_AVAILABLE(10_6, 3_0);
 
 @end
 
@@ -234,6 +234,6 @@ FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodServerTrust NS_AVAIL
     @abstract Returns a SecTrustRef which represents the state of the servers SSL transaction state
     @result A SecTrustRef from Security.framework.  (Nil if the authenticationMethod is not NSURLAuthenticationMethodServerTrust)
  */
-- (SecTrustRef)serverTrust NS_AVAILABLE(10_6, 3_0);
+@property (readonly) SecTrustRef serverTrust NS_AVAILABLE(10_6, 3_0);
 
 @end

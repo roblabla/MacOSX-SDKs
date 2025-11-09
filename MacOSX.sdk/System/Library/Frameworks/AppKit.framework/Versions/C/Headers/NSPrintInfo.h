@@ -1,7 +1,7 @@
 /*
 	NSPrintInfo.h
 	Application Kit
-	Copyright (c) 1994-2013, Apple Inc.
+	Copyright (c) 1994-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -20,12 +20,11 @@ typedef NS_ENUM(NSInteger, NSPaperOrientation) {
 
 /* Valid values for the NSPrintHorizontalPagination and NSPrintVerticalPagination attributes.
 */
-enum {
+typedef NS_ENUM(NSUInteger, NSPrintingPaginationMode) {
     NSAutoPagination = 0,
     NSFitPagination = 1,
     NSClipPagination = 2
 };
-typedef NSUInteger NSPrintingPaginationMode;
 
 /* Valid values for the NSPrintJobDisposition attribute.
 */
@@ -89,7 +88,7 @@ APPKIT_EXTERN NSString *const NSPrintHeaderAndFooter; // a boolean NSNumber for 
 
 /* Given a dictionary that contains attribute entries, initialize. Attributes that are recognized by the NSPrintInfo class will be silently validated in the context of the printer selected by the attributes dictionary, or the default printer if the attributes dictionary selects no printer. Attributes that are not recognized by the NSPrintInfo class will be preserved, and returned in the dictionary returned by the -dictionary method, but otherwise ignored. This is the designated initializer for this class.
 */
-- (id)initWithDictionary:(NSDictionary *)attributes;
+- (instancetype)initWithDictionary:(NSDictionary *)attributes;
 
 /* Return a dictionary that contains attribute entries. This dictionary may contain attributes that were not specified in the dictionary originally passed to this object by -initWithDictionary. Changes to this dictionary will be reflected in the values returned by subsequent invocations of other of this class' methods.
 */
@@ -97,43 +96,29 @@ APPKIT_EXTERN NSString *const NSPrintHeaderAndFooter; // a boolean NSNumber for 
 
 /* Set or get the values of the paper attributes.  Because an NSPrintInfo's paper name, paper size, and orientation attributes must be kept consistent, invocation of any of the setting methods in this group may affect the values returned by subsequent invocations of any of the getting methods in this group.  For example, paper name and paper size must always agree, and the value returned by -paperSize always takes orientation into account.
 */
-- (void)setPaperName:(NSString *)name;
-- (void)setPaperSize:(NSSize)size;
-- (void)setOrientation:(NSPaperOrientation)orientation;
-- (void)setScalingFactor:(CGFloat)scalingFactor NS_AVAILABLE_MAC(10_6);
-- (NSString *)paperName;
-- (NSSize)paperSize;
-- (NSPaperOrientation)orientation;
-- (CGFloat)scalingFactor NS_AVAILABLE_MAC(10_6);
+@property (copy) NSString *paperName;
+@property NSSize paperSize;
+@property NSPaperOrientation orientation;
+@property CGFloat scalingFactor NS_AVAILABLE_MAC(10_6);
 
 /* Set or get the values of the pagination attributes.
 */
-- (void)setLeftMargin:(CGFloat)margin;
-- (void)setRightMargin:(CGFloat)margin;
-- (void)setTopMargin:(CGFloat)margin;
-- (void)setBottomMargin:(CGFloat)margin;
-- (CGFloat)leftMargin;
-- (CGFloat)rightMargin;
-- (CGFloat)topMargin;
-- (CGFloat)bottomMargin;
-- (void)setHorizontallyCentered:(BOOL)flag;
-- (void)setVerticallyCentered:(BOOL)flag;
-- (BOOL)isHorizontallyCentered;
-- (BOOL)isVerticallyCentered;
-- (void)setHorizontalPagination:(NSPrintingPaginationMode)mode;
-- (void)setVerticalPagination:(NSPrintingPaginationMode)mode;
-- (NSPrintingPaginationMode)horizontalPagination;
-- (NSPrintingPaginationMode)verticalPagination;
+@property CGFloat leftMargin;
+@property CGFloat rightMargin;
+@property CGFloat topMargin;
+@property CGFloat bottomMargin;
+@property (getter=isHorizontallyCentered) BOOL horizontallyCentered;
+@property (getter=isVerticallyCentered) BOOL verticallyCentered;
+@property NSPrintingPaginationMode horizontalPagination;
+@property NSPrintingPaginationMode verticalPagination;
 
 /* Set or get the value of the job disposition attribute.
 */
-- (void)setJobDisposition:(NSString *)disposition;
-- (NSString *)jobDisposition;
+@property (copy) NSString *jobDisposition;
 
 /* Set or get the destination printer specified by this object.
 */
-- (void)setPrinter:(NSPrinter *)printer;
-- (NSPrinter *)printer;
+@property (copy) NSPrinter *printer;
 
 /* Validate all of the attributes encapsulated by this object. This method is invoked automatically before the object is used by an NSPrintOperation. This method may be overridden to perform validation of attributes that are not recognized by the NSPrintInfo class.
 */
@@ -142,13 +127,13 @@ APPKIT_EXTERN NSString *const NSPrintHeaderAndFooter; // a boolean NSNumber for 
 
 /* Return the imageable area of a page specified by this object, taking into account the current printer, paper, and orientation settings, but not scaling. "Imageable area" is the maximum area that can possibly be marked on by the printer hardware, not the area defined by the current margin settings. The rectangle is in a coordinate space measured by points, with (0, 0) being the lower-left corner of the oriented page and (paperWidth, paperHeight) being the upper-right corner of the oriented page. The imageable bounds may extend past the edges of the page when, for example, a printer driver specifies it so that borderless printing can be done reliably.
 */
-- (NSRect)imageablePageBounds;
+@property (readonly) NSRect imageablePageBounds;
 
 
 
 /* Return the human-readable name of the currently selected paper size, suitable for presentation in user interfaces.  This will typically be different from the name returned by -paperName, which is almost never suitable for presentation to to the user.
 */
-- (NSString *)localizedPaperName;
+@property (readonly, copy) NSString *localizedPaperName;
 
 
 /* Return the default printer, if one has been selected by the user, nil otherwise.
@@ -158,7 +143,7 @@ APPKIT_EXTERN NSString *const NSPrintHeaderAndFooter; // a boolean NSNumber for 
 
 /* The print info's print settings. You can put values in this dictionary to store them in any preset that the user creates while editing this print info with a print panel. Such values must be property list objects. This class is key-value coding (KVC) and key-value observing (KVO) compliant for "printSettings" so you can often bind controls in print panel accessory views directly to entries in this dictionary. You can also use this dictionary to get values that have been set by other parts of the printing system, like a printer driver's print dialog extension (the same sort of values that are returned by the Carbon Printing Manager's PMPrintSettingsGetValue() function). Other parts of the printing system often use key strings like "com.apple.print.PrintSettings.PMColorSyncProfileID" but dots like those in key strings wouldn't work well with KVC, so those dots are replaced with underscores in keys that appear in this dictionary, as in "com_apple_print_PrintSettings_PMColorSyncProfileID". You should use the same convention when adding entries to this dictionary.
 */
-- (NSMutableDictionary *)printSettings NS_AVAILABLE_MAC(10_5);
+@property (readonly, strong) NSMutableDictionary *printSettings NS_AVAILABLE_MAC(10_5);
 
 /* Return a Printing Manager PMPrintSession, PMPageFormat, or PMPrintSettings object, respectively. The returned object is always consistent with the state of the NSPrintInfo at the moment the method is invoked, but isn't necessarily updated immediately if other NSPrintInfo methods like -setPaperSize: and -setPaperOrientation: are invoked. The returned object will always be valid (in the Printing Manager sense). If you set any values in the returned PMPageFormat or PMPrintSettings you should afterward invoke -updateFromPMPageFormat or -updateFromPMPrintSettings, respectively. You don't also have to call PMSessionValidatePageFormat() or PMSessionValidatePrintSettings() if you do that. You should not call PMRelease() for the returned object, except of course to balance any calls of PMRetain() you do.
 */
@@ -175,8 +160,7 @@ APPKIT_EXTERN NSString *const NSPrintHeaderAndFooter; // a boolean NSNumber for 
 
 /* Set or get whether only the selected content should be printed.
 */
-- (void)setSelectionOnly:(BOOL)selectionOnly NS_AVAILABLE_MAC(10_6);
-- (BOOL)isSelectionOnly NS_AVAILABLE_MAC(10_6);
+@property (getter=isSelectionOnly) BOOL selectionOnly NS_AVAILABLE_MAC(10_6);
 
 /* Update the receiver with all settings and attributes present in the given NSPDFInfo. Entries in the given NSPDFInfo's attributes dictionary will be copied into the receiver's attributes dictionary ([self dictionary]). If inPDFInfo is the result of an NSPDFPanel with the NSPDFPanelRequestsParentDirectory option enabled, you must first modify inPDFInfo.URL by appending a file name. If inPDFInfo.URL points to a directory, this method will throw an exception.
 */
@@ -206,12 +190,11 @@ APPKIT_EXTERN NSString *const NSPrintPaperFeed NS_DEPRECATED_MAC(10_0, 10_2);
 
 /* A key for an attribute that was deprecated in Mac OS 10.6. You can use NSPrintJobSavingURL instead.
 */
-APPKIT_EXTERN NSString *const NSPrintSavePath;
+APPKIT_EXTERN NSString *const NSPrintSavePath NS_DEPRECATED_MAC(10_0, 10_6, "Use NSPrintJobSavingURL instead");
 
 /* An enum NSPrintOrientation values that was deprecated in OS X 10.9. You can use NSPaperOrientation instead.
 */
-enum {
+typedef NS_ENUM(NSUInteger, NSPrintingOrientation) {
     NSPortraitOrientation = 0,
     NSLandscapeOrientation = 1
 };
-typedef NSUInteger NSPrintingOrientation;

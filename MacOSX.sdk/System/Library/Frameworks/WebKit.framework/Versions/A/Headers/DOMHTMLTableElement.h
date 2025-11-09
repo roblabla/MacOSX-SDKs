@@ -11,10 +11,10 @@
  *    notice, this list of conditions and the following disclaimer in the
  *    documentation and/or other materials provided with the distribution.
  *
- * THIS SOFTWARE IS PROVIDED BY APPLE COMPUTER, INC. ``AS IS'' AND ANY
+ * THIS SOFTWARE IS PROVIDED BY APPLE INC. ``AS IS'' AND ANY
  * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL APPLE COMPUTER, INC. OR
+ * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL APPLE INC. OR
  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
@@ -26,29 +26,28 @@
 
 #import <WebKit/DOMHTMLElement.h>
 
-#if WEBKIT_VERSION_MAX_ALLOWED >= WEBKIT_VERSION_1_3
-
 @class DOMHTMLCollection;
 @class DOMHTMLElement;
 @class DOMHTMLTableCaptionElement;
 @class DOMHTMLTableSectionElement;
 @class NSString;
 
+NS_CLASS_AVAILABLE_MAC(10_4)
 @interface DOMHTMLTableElement : DOMHTMLElement
-@property(retain) DOMHTMLTableCaptionElement *caption;
-@property(retain) DOMHTMLTableSectionElement *tHead;
-@property(retain) DOMHTMLTableSectionElement *tFoot;
-@property(readonly, retain) DOMHTMLCollection *rows;
-@property(readonly, retain) DOMHTMLCollection *tBodies;
-@property(copy) NSString *align;
-@property(copy) NSString *bgColor;
-@property(copy) NSString *border;
-@property(copy) NSString *cellPadding;
-@property(copy) NSString *cellSpacing;
-@property(copy) NSString *frameBorders;
-@property(copy) NSString *rules;
-@property(copy) NSString *summary;
-@property(copy) NSString *width;
+@property (strong) DOMHTMLTableCaptionElement *caption;
+@property (strong) DOMHTMLTableSectionElement *tHead;
+@property (strong) DOMHTMLTableSectionElement *tFoot;
+@property (readonly, strong) DOMHTMLCollection *rows;
+@property (readonly, strong) DOMHTMLCollection *tBodies;
+@property (copy) NSString *align;
+@property (copy) NSString *bgColor;
+@property (copy) NSString *border;
+@property (copy) NSString *cellPadding;
+@property (copy) NSString *cellSpacing;
+@property (copy) NSString *frameBorders;
+@property (copy) NSString *rules;
+@property (copy) NSString *summary;
+@property (copy) NSString *width;
 
 - (DOMHTMLElement *)createTHead;
 - (void)deleteTHead;
@@ -59,5 +58,3 @@
 - (DOMHTMLElement *)insertRow:(int)index;
 - (void)deleteRow:(int)index;
 @end
-
-#endif

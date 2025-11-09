@@ -11,10 +11,10 @@
  *    notice, this list of conditions and the following disclaimer in the
  *    documentation and/or other materials provided with the distribution.
  *
- * THIS SOFTWARE IS PROVIDED BY APPLE COMPUTER, INC. ``AS IS'' AND ANY
+ * THIS SOFTWARE IS PROVIDED BY APPLE INC. ``AS IS'' AND ANY
  * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL APPLE COMPUTER, INC. OR
+ * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL APPLE INC. OR
  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
@@ -26,8 +26,6 @@
 
 #import <WebKit/DOMObject.h>
 
-#if WEBKIT_VERSION_MAX_ALLOWED >= WEBKIT_VERSION_1_3
-
 @class NSString;
 @protocol DOMEventTarget;
 
@@ -36,27 +34,26 @@ enum {
     DOM_CAPTURING_PHASE = 1,
     DOM_AT_TARGET = 2,
     DOM_BUBBLING_PHASE = 3
-};
+} NS_ENUM_AVAILABLE_MAC(10_4);
 
+NS_CLASS_AVAILABLE_MAC(10_4)
 @interface DOMEvent : DOMObject
-@property(readonly, copy) NSString *type;
-@property(readonly, retain) id <DOMEventTarget> target;
-@property(readonly, retain) id <DOMEventTarget> currentTarget;
-@property(readonly) unsigned short eventPhase;
-@property(readonly) BOOL bubbles;
-@property(readonly) BOOL cancelable;
-@property(readonly) DOMTimeStamp timeStamp;
-@property(readonly, retain) id <DOMEventTarget> srcElement AVAILABLE_IN_WEBKIT_VERSION_4_0;
-@property BOOL returnValue AVAILABLE_IN_WEBKIT_VERSION_4_0;
-@property BOOL cancelBubble AVAILABLE_IN_WEBKIT_VERSION_4_0;
+@property (readonly, copy) NSString *type;
+@property (readonly, strong) id <DOMEventTarget> target;
+@property (readonly, strong) id <DOMEventTarget> currentTarget;
+@property (readonly) unsigned short eventPhase;
+@property (readonly) BOOL bubbles;
+@property (readonly) BOOL cancelable;
+@property (readonly) DOMTimeStamp timeStamp;
+@property (readonly, strong) id <DOMEventTarget> srcElement NS_AVAILABLE_MAC(10_6);
+@property BOOL returnValue NS_AVAILABLE_MAC(10_6);
+@property BOOL cancelBubble NS_AVAILABLE_MAC(10_6);
 
 - (void)stopPropagation;
 - (void)preventDefault;
-- (void)initEvent:(NSString *)eventTypeArg canBubbleArg:(BOOL)canBubbleArg cancelableArg:(BOOL)cancelableArg AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+- (void)initEvent:(NSString *)eventTypeArg canBubbleArg:(BOOL)canBubbleArg cancelableArg:(BOOL)cancelableArg NS_AVAILABLE_MAC(10_5);
 @end
 
 @interface DOMEvent (DOMEventDeprecated)
-- (void)initEvent:(NSString *)eventTypeArg :(BOOL)canBubbleArg :(BOOL)cancelableArg AVAILABLE_WEBKIT_VERSION_1_3_AND_LATER_BUT_DEPRECATED_IN_WEBKIT_VERSION_3_0;
+- (void)initEvent:(NSString *)eventTypeArg :(BOOL)canBubbleArg :(BOOL)cancelableArg NS_DEPRECATED_MAC(10_4, 10_5);
 @end
-
-#endif

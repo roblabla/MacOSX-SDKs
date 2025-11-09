@@ -1,5 +1,5 @@
 /*	CFRunLoop.h
-	Copyright (c) 1998-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1998-2014, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFRUNLOOP__)
@@ -13,6 +13,7 @@
 #include <mach/port.h>
 #endif
 
+CF_IMPLICIT_BRIDGING_ENABLED
 CF_EXTERN_C_BEGIN
 
 typedef struct __CFRunLoop * CFRunLoopRef;
@@ -21,7 +22,7 @@ typedef struct __CFRunLoopSource * CFRunLoopSourceRef;
 
 typedef struct __CFRunLoopObserver * CFRunLoopObserverRef;
 
-typedef struct __CFRunLoopTimer * CFRunLoopTimerRef;
+typedef struct CF_BRIDGED_MUTABLE_TYPE(NSTimer) __CFRunLoopTimer * CFRunLoopTimerRef;
 
 /* Reasons for CFRunLoopRunInMode() to Return */
 enum {
@@ -176,6 +177,7 @@ CF_EXPORT CFTimeInterval CFRunLoopTimerGetTolerance(CFRunLoopTimerRef timer) CF_
 CF_EXPORT void CFRunLoopTimerSetTolerance(CFRunLoopTimerRef timer, CFTimeInterval tolerance) CF_AVAILABLE(10_9, 7_0);
 
 CF_EXTERN_C_END
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif /* ! __COREFOUNDATION_CFRUNLOOP__ */
 

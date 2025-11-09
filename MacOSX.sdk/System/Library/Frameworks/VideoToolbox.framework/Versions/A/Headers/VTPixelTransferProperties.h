@@ -17,7 +17,7 @@
 #include <CoreFoundation/CoreFoundation.h>
 
 #ifndef VT_SUPPORT_COLORSYNC_PIXEL_TRANSFER
-#define VT_SUPPORT_COLORSYNC_PIXEL_TRANSFER TARGET_OS_MAC && ! TARGET_OS_IPHONE && ( MAC_OS_X_VERSION_MIN_REQUIRED >= 1080 )
+#define VT_SUPPORT_COLORSYNC_PIXEL_TRANSFER ( TARGET_OS_MAC && ! TARGET_OS_IPHONE && ( MAC_OS_X_VERSION_MIN_REQUIRED >= 1080 ) )
 #endif // VT_SUPPORT_COLORSYNC_PIXEL_TRANSFER
 
 #if defined(__cplusplus)
@@ -158,18 +158,6 @@ VT_EXPORT const CFStringRef kVTPixelTransferPropertyKey_DestinationColorPrimarie
 VT_EXPORT const CFStringRef kVTPixelTransferPropertyKey_DestinationTransferFunction VT_AVAILABLE_STARTING(10_8); // Read/write, CFString (see kCMFormatDescriptionExtension_TransferFunction), Optional
 
 /*!
-	@constant	kVTPixelTransferPropertyKey_DestinationYCbCrMatrix
-	@abstract
-		Specifies the color matrix to be used for YCbCr->RGB conversions
-		involving the destination image buffers.  
-	@discussion
-		Specifying this value may lead to performance degradation, as a color
-		matching operation may need to be performed between the source and
-		the destination.
-*/
-VT_EXPORT const CFStringRef kVTPixelTransferPropertyKey_DestinationYCbCrMatrix VT_AVAILABLE_STARTING(10_8); // Read/write, CFString (see kCMFormatDescriptionExtension_YCbCrMatrix), Optional
-
-/*!
 	@constant	kVTPixelTransferPropertyKey_DestinationICCProfile
 	@abstract
 		Specifies the ICC profile for destination image buffers.  
@@ -181,6 +169,18 @@ VT_EXPORT const CFStringRef kVTPixelTransferPropertyKey_DestinationYCbCrMatrix V
 VT_EXPORT const CFStringRef kVTPixelTransferPropertyKey_DestinationICCProfile VT_AVAILABLE_STARTING(10_8); // Read/write, CFData (see kCMFormatDescriptionExtension_ICCProfile), Optional
 
 #endif // VT_SUPPORT_COLORSYNC_PIXEL_TRANSFER
+    
+/*!
+	@constant	kVTPixelTransferPropertyKey_DestinationYCbCrMatrix
+	@abstract
+		Specifies the color matrix to be used for YCbCr->RGB conversions
+		involving the destination image buffers.
+	@discussion
+		Specifying this value may lead to performance degradation, as a color
+		matching operation may need to be performed between the source and
+		the destination.
+*/
+VT_EXPORT const CFStringRef kVTPixelTransferPropertyKey_DestinationYCbCrMatrix VT_AVAILABLE_STARTING(10_8); // Read/write, CFString (see kCMFormatDescriptionExtension_YCbCrMatrix), Optional
 
 
 #pragma pack(pop)

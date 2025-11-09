@@ -1,11 +1,19 @@
 /*	NSXMLParser.h
-        Copyright (c) 2003-2013, Apple Inc. All rights reserved.
+        Copyright (c) 2003-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
-@class NSData, NSDictionary, NSError, NSString, NSURL, NSInputStream;
+@class NSData, NSDictionary, NSError, NSString, NSURL, NSInputStream, NSSet;
 @protocol NSXMLParserDelegate;
+
+NS_ENUM_AVAILABLE(10_9, 8_0)
+typedef NS_ENUM(NSUInteger, NSXMLParserExternalEntityResolvingPolicy) {
+    NSXMLParserResolveExternalEntitiesNever = 0, // default
+    NSXMLParserResolveExternalEntitiesNoNetwork,
+    NSXMLParserResolveExternalEntitiesSameOriginOnly, //only applies to NSXMLParser instances initialized with -initWithContentsOfURL:
+    NSXMLParserResolveExternalEntitiesAlways
+};
 
 @interface NSXMLParser : NSObject {
 @private
@@ -15,34 +23,39 @@
     id _reserved2;
     id _reserved3;
 }
-- (id)initWithContentsOfURL:(NSURL *)url;  // initializes the parser with the specified URL.
-- (id)initWithData:(NSData *)data; // create the parser from data
-- (id)initWithStream:(NSInputStream *)stream NS_AVAILABLE(10_7, 5_0); //create a parser that incrementally pulls data from the specified stream and parses it.
+- (instancetype)initWithContentsOfURL:(NSURL *)url;  // initializes the parser with the specified URL.
+- (instancetype)initWithData:(NSData *)data; // create the parser from data
+- (instancetype)initWithStream:(NSInputStream *)stream NS_AVAILABLE(10_7, 5_0); //create a parser that incrementally pulls data from the specified stream and parses it.
 
 // delegate management. The delegate is not retained.
-- (id <NSXMLParserDelegate>)delegate;
-- (void)setDelegate:(id <NSXMLParserDelegate>)delegate;
+@property (assign) id <NSXMLParserDelegate> delegate;
 
-- (void)setShouldProcessNamespaces:(BOOL)shouldProcessNamespaces;
-- (void)setShouldReportNamespacePrefixes:(BOOL)shouldReportNamespacePrefixes;
-- (void)setShouldResolveExternalEntities:(BOOL)shouldResolveExternalEntities;
+@property BOOL shouldProcessNamespaces;
+@property BOOL shouldReportNamespacePrefixes;
     
-- (BOOL)shouldProcessNamespaces;
-- (BOOL)shouldReportNamespacePrefixes;
-- (BOOL)shouldResolveExternalEntities;
+// The next two properties are really only available in OS X 10.9.5 or later
+@property NSXMLParserExternalEntityResolvingPolicy externalEntityResolvingPolicy NS_AVAILABLE(10_9, 8_0); //defaults to NSXMLNodeLoadExternalEntitiesNever
+
+@property (copy) NSSet *allowedExternalEntityURLs NS_AVAILABLE(10_9, 8_0);
 
 - (BOOL)parse;	// called to start the event-driven parse. Returns YES in the event of a successful parse, and NO in case of error.
 - (void)abortParsing;	// called by the delegate to stop the parse. The delegate will get an error message sent to it.
 
-- (NSError *)parserError;	// can be called after a parse is over to determine parser state.
+@property (readonly, copy) NSError *parserError;	// can be called after a parse is over to determine parser state.
+
+//Toggles between disabling external entities entirely, and the current setting of the 'externalEntityResolvingPolicy'.
+//The 'externalEntityResolvingPolicy' property should be used instead of this, unless targeting 10.9/7.0 or earlier
+@property BOOL shouldResolveExternalEntities;
+
 @end
 
 // Once a parse has begun, the delegate may be interested in certain parser state. These methods will only return meaningful information during parsing, or after an error has occurred.
 @interface NSXMLParser (NSXMLParserLocatorAdditions)
-- (NSString *)publicID;
-- (NSString *)systemID;
-- (NSInteger)lineNumber;
-- (NSInteger)columnNumber;
+@property (readonly, copy) NSString *publicID;
+@property (readonly, copy) NSString *systemID;
+@property (readonly) NSInteger lineNumber;
+@property (readonly) NSInteger columnNumber;
+
 @end
 
 /*

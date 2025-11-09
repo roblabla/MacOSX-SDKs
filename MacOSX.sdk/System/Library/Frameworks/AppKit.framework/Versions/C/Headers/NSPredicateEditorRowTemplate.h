@@ -1,7 +1,7 @@
 /*
         NSPredicateEditorRowTemplate.h
 	Application Kit
-	Copyright (c) 2006-2013, Apple Inc.
+	Copyright (c) 2006-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -38,7 +38,7 @@ NS_CLASS_AVAILABLE(10_5, NA)
 
 /* returns the list of views that are placed in the row.  NSPopUpButtons are treated specially in that the items of multiple templates are merged together; other views are added as-is.  Developers can override this to return views in addition to or instead of the default views.
 */
-- (NSArray *)templateViews;
+@property (readonly, copy) NSArray *templateViews;
 
 /* sets the value of the views according to the given predicate.  This is only called if matchForPredicate: returns a positive value for the given predicate.  Developers can override this to set the values of their custom views.
 */
@@ -53,25 +53,25 @@ NS_CLASS_AVAILABLE(10_5, NA)
 
 /* creates a template of the popup-popup-popup form, with the left and right popups representing the left and right expression arrays, and the center popup representing the operators.
 */
-- (id)initWithLeftExpressions:(NSArray *)leftExpressions rightExpressions:(NSArray *)rightExpressions modifier:(NSComparisonPredicateModifier)modifier operators:(NSArray *)operators options:(NSUInteger)options;
+- (instancetype)initWithLeftExpressions:(NSArray *)leftExpressions rightExpressions:(NSArray *)rightExpressions modifier:(NSComparisonPredicateModifier)modifier operators:(NSArray *)operators options:(NSUInteger)options;
 
 /* creates a template of the popup-popup-view form, with the left popups representing the left expressions, the right view representing an arbitrary value, and the center popup representing the operators.
 */
-- (id)initWithLeftExpressions:(NSArray *)leftExpressions rightExpressionAttributeType:(NSAttributeType)attributeType modifier:(NSComparisonPredicateModifier)modifier operators:(NSArray *)operators options:(NSUInteger)options;
+- (instancetype)initWithLeftExpressions:(NSArray *)leftExpressions rightExpressionAttributeType:(NSAttributeType)attributeType modifier:(NSComparisonPredicateModifier)modifier operators:(NSArray *)operators options:(NSUInteger)options;
 
 /* creates a template suitable for displaying compound predicates.  NSPredicateEditor contains such a template by default.
 */
-- (id)initWithCompoundTypes:(NSArray *)compoundTypes;
+- (instancetype)initWithCompoundTypes:(NSArray *)compoundTypes;
 
 /* returns the various values set in the initializers, or zero/nil if they do not apply
 */
-- (NSArray *)leftExpressions;
-- (NSArray *)rightExpressions;
-- (NSAttributeType)rightExpressionAttributeType;
-- (NSComparisonPredicateModifier)modifier;
-- (NSArray *)operators;
-- (NSUInteger)options;
-- (NSArray *)compoundTypes;
+@property (readonly, copy) NSArray *leftExpressions;
+@property (readonly, copy) NSArray *rightExpressions;
+@property (readonly) NSAttributeType rightExpressionAttributeType;
+@property (readonly) NSComparisonPredicateModifier modifier;
+@property (readonly, copy) NSArray *operators;
+@property (readonly) NSUInteger options;
+@property (readonly, copy) NSArray *compoundTypes;
 
 /* CoreData convenience method: creates an array of templates of the popup-popup-view variety from the given key paths.  The key paths may cross relationships but must terminate in attributes.
 */

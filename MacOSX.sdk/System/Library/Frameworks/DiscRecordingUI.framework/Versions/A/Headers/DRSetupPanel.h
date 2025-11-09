@@ -82,11 +82,9 @@
 									didEndSelector may dismiss the save panel itself; otherwise it will 
 									be dismissed on return from the method. didEndSelector should have 
 									the following signature:
-									<br/>
-
-									<code>- (void)setupPanelDidEnd:(DRSetupPanel*)panel returnCode:(int)returnCode contextInfo:(void*)contextInfo;</code>
-									
-									<br/>
+									<pre>@textblock
+										- (void)setupPanelDidEnd:(DRSetupPanel*)panel returnCode:(int)returnCode contextInfo:(void*)contextInfo;									
+									@/textblock</pre>
 	@param		contextInfo			Context information to be passed when the selector named by didEndSelector
 									is invoked.
 */

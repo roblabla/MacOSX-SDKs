@@ -1,11 +1,20 @@
 /*	NSOperation.h
-	Copyright (c) 2006-2013, Apple Inc. All rights reserved.
+	Copyright (c) 2006-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
-
+#import <sys/qos.h>
+#import <dispatch/dispatch.h>
 
 @class NSArray, NSSet;
+
+
+#define NSOperationQualityOfService NSQualityOfService
+#define NSOperationQualityOfServiceUserInteractive NSQualityOfServiceUserInteractive
+#define NSOperationQualityOfServiceUserInitiated NSQualityOfServiceUserInitiated
+#define NSOperationQualityOfServiceUtility NSQualityOfServiceUtility
+#define NSOperationQualityOfServiceBackground NSQualityOfServiceBackground
+
 
 NS_CLASS_AVAILABLE(10_5, 2_0)
 @interface NSOperation : NSObject {
@@ -17,25 +26,22 @@ NS_CLASS_AVAILABLE(10_5, 2_0)
 #endif
 }
 
-- (id)init; // designated initializer
-
 - (void)start;
 - (void)main;
 
-- (BOOL)isCancelled;
+@property (readonly, getter=isCancelled) BOOL cancelled;
 - (void)cancel;
 
-- (BOOL)isExecuting;
-- (BOOL)isFinished;
-
-- (BOOL)isConcurrent;
-
-- (BOOL)isReady;
+@property (readonly, getter=isExecuting) BOOL executing;
+@property (readonly, getter=isFinished) BOOL finished;
+@property (readonly, getter=isConcurrent) BOOL concurrent; // To be deprecated; use and override 'asynchronous' below
+@property (readonly, getter=isAsynchronous) BOOL asynchronous NS_AVAILABLE(10_8, 7_0);
+@property (readonly, getter=isReady) BOOL ready;
 
 - (void)addDependency:(NSOperation *)op;
 - (void)removeDependency:(NSOperation *)op;
 
-- (NSArray *)dependencies;
+@property (readonly, copy) NSArray *dependencies;
 
 typedef NS_ENUM(NSInteger, NSOperationQueuePriority) {
 	NSOperationQueuePriorityVeryLow = -8L,
@@ -45,18 +51,17 @@ typedef NS_ENUM(NSInteger, NSOperationQueuePriority) {
 	NSOperationQueuePriorityVeryHigh = 8
 };
 
-- (NSOperationQueuePriority)queuePriority;
-- (void)setQueuePriority:(NSOperationQueuePriority)p;
+@property NSOperationQueuePriority queuePriority;
 
-#if NS_BLOCKS_AVAILABLE
-- (void (^)(void))completionBlock NS_AVAILABLE(10_6, 4_0);
-- (void)setCompletionBlock:(void (^)(void))block NS_AVAILABLE(10_6, 4_0);
-#endif
+@property (copy) void (^completionBlock)(void) NS_AVAILABLE(10_6, 4_0);
 
 - (void)waitUntilFinished NS_AVAILABLE(10_6, 4_0);
 
-- (double)threadPriority NS_AVAILABLE(10_6, 4_0);
-- (void)setThreadPriority:(double)p NS_AVAILABLE(10_6, 4_0);
+@property double threadPriority NS_DEPRECATED(10_6, 10_10, 4_0, 8_0);
+
+@property NSQualityOfService qualityOfService NS_AVAILABLE(10_10, 8_0);
+
+@property (copy) NSString *name NS_AVAILABLE(10_10, 8_0);
 
 @end
 
@@ -69,12 +74,10 @@ NS_CLASS_AVAILABLE(10_6, 4_0)
     void *_reserved2;
 }
 
-#if NS_BLOCKS_AVAILABLE
-+ (id)blockOperationWithBlock:(void (^)(void))block;
++ (instancetype)blockOperationWithBlock:(void (^)(void))block;
 
 - (void)addExecutionBlock:(void (^)(void))block;
-- (NSArray *)executionBlocks;
-#endif
+@property (readonly, copy) NSArray *executionBlocks;
 
 @end
 
@@ -87,12 +90,12 @@ NS_CLASS_AVAILABLE(10_5, 2_0)
     void *_reserved2;
 }
 
-- (id)initWithTarget:(id)target selector:(SEL)sel object:(id)arg;
-- (id)initWithInvocation:(NSInvocation *)inv;		// designated initializer
+- (instancetype)initWithTarget:(id)target selector:(SEL)sel object:(id)arg;
+- (instancetype)initWithInvocation:(NSInvocation *)inv NS_DESIGNATED_INITIALIZER;
 
-- (NSInvocation *)invocation;
+@property (readonly, retain) NSInvocation *invocation;
 
-- (id)result;
+@property (readonly, retain) id result;
 
 @end
 
@@ -109,32 +112,31 @@ NS_CLASS_AVAILABLE(10_5, 2_0)
 - (void)addOperation:(NSOperation *)op;
 - (void)addOperations:(NSArray *)ops waitUntilFinished:(BOOL)wait NS_AVAILABLE(10_6, 4_0);
 
-#if NS_BLOCKS_AVAILABLE
 - (void)addOperationWithBlock:(void (^)(void))block NS_AVAILABLE(10_6, 4_0);
-#endif
 
-- (NSArray *)operations;
-- (NSUInteger)operationCount NS_AVAILABLE(10_6, 4_0);
+@property (readonly, copy) NSArray *operations;
+@property (readonly) NSUInteger operationCount NS_AVAILABLE(10_6, 4_0);
 
-- (NSInteger)maxConcurrentOperationCount;
-- (void)setMaxConcurrentOperationCount:(NSInteger)cnt;
+@property NSInteger maxConcurrentOperationCount;
 
 enum {
     NSOperationQueueDefaultMaxConcurrentOperationCount = -1
 };
 
-- (void)setSuspended:(BOOL)b;
-- (BOOL)isSuspended;
+@property (getter=isSuspended) BOOL suspended;
 
-- (void)setName:(NSString *)n NS_AVAILABLE(10_6, 4_0);
-- (NSString *)name NS_AVAILABLE(10_6, 4_0);
+@property (copy) NSString *name NS_AVAILABLE(10_6, 4_0);
+
+@property NSQualityOfService qualityOfService NS_AVAILABLE(10_10, 8_0);
+
+@property (assign /* actually retain */) dispatch_queue_t underlyingQueue NS_AVAILABLE(10_10, 8_0);
 
 - (void)cancelAllOperations;
 
 - (void)waitUntilAllOperationsAreFinished;
 
-+ (id)currentQueue NS_AVAILABLE(10_6, 4_0);
-+ (id)mainQueue NS_AVAILABLE(10_6, 4_0);
++ (NSOperationQueue *)currentQueue NS_AVAILABLE(10_6, 4_0);
++ (NSOperationQueue *)mainQueue NS_AVAILABLE(10_6, 4_0);
 
 @end
 

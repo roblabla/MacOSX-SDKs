@@ -1,5 +1,5 @@
 /*	NSLinguisticTagger.h
-	Copyright (c) 2009-2013, Apple Inc. All rights reserved.
+	Copyright (c) 2009-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -81,10 +81,10 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
 
 /* An instance of NSLinguisticTagger is created with an array of tag schemes.  The tagger will be able to supply tags corresponding to any of the schemes in this array.
 */
-- (id)initWithTagSchemes:(NSArray *)tagSchemes options:(NSUInteger)opts NS_AVAILABLE(10_7, 5_0);
-- (NSArray *)tagSchemes NS_AVAILABLE(10_7, 5_0);
-- (void)setString:(NSString *)string NS_AVAILABLE(10_7, 5_0);
-- (NSString *)string NS_AVAILABLE(10_7, 5_0);
+- (instancetype)initWithTagSchemes:(NSArray *)tagSchemes options:(NSUInteger)opts NS_DESIGNATED_INITIALIZER NS_AVAILABLE(10_7, 5_0);
+
+@property (readonly, copy) NSArray *tagSchemes NS_AVAILABLE(10_7, 5_0);
+@property (retain) NSString *string NS_AVAILABLE(10_7, 5_0);
 
 /* Clients wishing to know the tag schemes supported in NSLinguisticTagger for a particular language may query them with this method.  The language should be specified using a standard abbreviation as with NSOrthography.
 */
@@ -101,9 +101,7 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
 
 /* The tagger will segment the string as needed into sentences and tokens, and return those ranges along with a tag for any scheme in its array of tag schemes.  The fundamental tagging method on NSLinguisticTagger is a block iterator, that iterates over all tokens intersecting a given range, supplying tags and ranges.  There are several additional convenience methods, for obtaining a sentence range, information about a single token, or for obtaining information about all tokens intersecting a given range at once, in arrays.  In each case, the charIndex or range passed in must not extend beyond the end of the tagger's string, or the methods will raise an exception.  Note that a given instance of NSLinguisticTagger should not be used from more than one thread simultaneously.
 */
-#if NS_BLOCKS_AVAILABLE
 - (void)enumerateTagsInRange:(NSRange)range scheme:(NSString *)tagScheme options:(NSLinguisticTaggerOptions)opts usingBlock:(void (^)(NSString *tag, NSRange tokenRange, NSRange sentenceRange, BOOL *stop))block NS_AVAILABLE(10_7, 5_0);
-#endif /* NS_BLOCKS_AVAILABLE */
 
 - (NSRange)sentenceRangeForRange:(NSRange)range NS_AVAILABLE(10_7, 5_0);
 - (NSString *)tagAtIndex:(NSUInteger)charIndex scheme:(NSString *)tagScheme tokenRange:(NSRangePointer)tokenRange sentenceRange:(NSRangePointer)sentenceRange NS_AVAILABLE(10_7, 5_0);
@@ -117,9 +115,7 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
 /* Clients wishing to analyze a given string once may use these NSString APIs without having to create an instance of NSLinguisticTagger.  If more than one tagging operation is needed on a given string, it is more efficient to use an explicit NSLinguisticTagger instance.
 */
 - (NSArray *)linguisticTagsInRange:(NSRange)range scheme:(NSString *)tagScheme options:(NSLinguisticTaggerOptions)opts orthography:(NSOrthography *)orthography tokenRanges:(NSArray **)tokenRanges NS_AVAILABLE(10_7, 5_0);
-#if NS_BLOCKS_AVAILABLE
 - (void)enumerateLinguisticTagsInRange:(NSRange)range scheme:(NSString *)tagScheme options:(NSLinguisticTaggerOptions)opts orthography:(NSOrthography *)orthography usingBlock:(void (^)(NSString *tag, NSRange tokenRange, NSRange sentenceRange, BOOL *stop))block NS_AVAILABLE(10_7, 5_0);
-#endif /* NS_BLOCKS_AVAILABLE */
 
 @end
 

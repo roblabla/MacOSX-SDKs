@@ -1,7 +1,7 @@
 //
 //  SCNParametricGeometry.h
 //
-//  Copyright (c) 2012-2013 Apple Inc. All rights reserved.
+//  Copyright (c) 2012-2014 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -13,7 +13,7 @@
  @abstract SCNPlane represents a rectangle with controllable width and height. The plane has one visible side.
  */
 
-SCENEKIT_CLASS_AVAILABLE(10_8, NA)
+SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
 @interface SCNPlane : SCNGeometry
 {
 @private
@@ -61,14 +61,14 @@ SCENEKIT_CLASS_AVAILABLE(10_8, NA)
  @abstract The corner radius. Animatable.
  @discussion If the value is strictly less than 0, the geometry is empty. The default value is 0.
  */
-@property(nonatomic) CGFloat cornerRadius SCENEKIT_AVAILABLE(10_9, NA);
+@property(nonatomic) CGFloat cornerRadius SCENEKIT_AVAILABLE(10_9, 8_0);
 
 /*!
  @property cornerSegmentCount
  @abstract The number of subdivisions for the rounded corners. Animatable.
  @discussion If the value is less than 1, the behavior is undefined. The default value is 10.
  */
-@property(nonatomic) NSInteger cornerSegmentCount SCENEKIT_AVAILABLE(10_9, NA);
+@property(nonatomic) NSInteger cornerSegmentCount SCENEKIT_AVAILABLE(10_9, 8_0);
 
 @end
 
@@ -78,7 +78,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, NA)
  @abstract SCNBox represents a box with rectangular sides and optional chamfers.
  */
 
-SCENEKIT_CLASS_AVAILABLE(10_8, NA)
+SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
 @interface SCNBox : SCNGeometry
 {
 @private
@@ -144,7 +144,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, NA)
  */
 @property(nonatomic) NSInteger lengthSegmentCount;
 
-/*! 
+/*!
  @property chamferSegmentCount
  @abstract The number of chamfer subdivisions. Animatable.
  @discussion If the value is less than 1, the behavior is undefined. The default value is 10.
@@ -159,7 +159,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, NA)
  @abstract SCNPyramid represents a right pyramid with a rectangular base.
  */
 
-SCENEKIT_CLASS_AVAILABLE(10_8, NA)
+SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
 @interface SCNPyramid : SCNGeometry
 {
 @private
@@ -225,7 +225,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, NA)
  @abstract SCNSphere represents a sphere with controllable radius
  */
 
-SCENEKIT_CLASS_AVAILABLE(10_8, NA)
+SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
 @interface SCNSphere : SCNGeometry
 {
 @private
@@ -253,7 +253,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, NA)
  */
 @property(nonatomic, getter=isGeodesic) BOOL geodesic;
 
-/*! 
+/*!
  @property segmentCount
  @abstract The number of segments along both spherical coordinates. Animatable.
  @discussion If the value is less than 3, the behavior is undefined. The default value is 48.
@@ -268,7 +268,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, NA)
  @abstract SCNCylinder represents a cylinder with controllable height and radius.
  */
 
-SCENEKIT_CLASS_AVAILABLE(10_8, NA)
+SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
 @interface SCNCylinder : SCNGeometry
 {
 @private
@@ -319,7 +319,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, NA)
  @abstract SCNCone represents a cone with controllable height, top radius and bottom radius.
  */
 
-SCENEKIT_CLASS_AVAILABLE(10_8, NA)
+SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
 @interface SCNCone : SCNGeometry
 {
 @private
@@ -378,7 +378,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, NA)
  @abstract SCNTube represents a tube with controllable height, inner radius and outer radius.
  */
 
-SCENEKIT_CLASS_AVAILABLE(10_8, NA)
+SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
 @interface SCNTube : SCNGeometry
 {
 @private
@@ -437,7 +437,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, NA)
  @abstract SCNCapsule represents a capsule with controllable height and cap radius.
  */
 
-SCENEKIT_CLASS_AVAILABLE(10_8, NA)
+SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
 @interface SCNCapsule : SCNGeometry
 {
 @private
@@ -495,7 +495,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, NA)
  @abstract SCNTorus represents a torus with controllable ring radius and pipe radius.
  */
 
-SCENEKIT_CLASS_AVAILABLE(10_8, NA)
+SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
 @interface SCNTorus : SCNGeometry
 {
 @private
@@ -546,7 +546,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, NA)
  @abstract SCNFloor represents an infinite plane geometry. 
  */
 
-SCENEKIT_CLASS_AVAILABLE(10_8, NA)
+SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
 @interface SCNFloor : SCNGeometry 
 {
 @private
@@ -581,6 +581,13 @@ SCENEKIT_CLASS_AVAILABLE(10_8, NA)
  */
 @property(nonatomic) CGFloat reflectionFalloffEnd;
 
+/*!
+ @property reflectionResolutionScaleFactor
+ @abstract Specifies the resolution scale factor of the buffer used to render the reflection.
+ @discussion Defaults to 1.0.
+*/
+@property(nonatomic) CGFloat reflectionResolutionScaleFactor SCENEKIT_AVAILABLE(10_10, 8_0);
+
 @end
 
 /*!
@@ -588,7 +595,7 @@ SCENEKIT_CLASS_AVAILABLE(10_8, NA)
  @abstract SCNText represents a block of text that has been extruded
  */
 
-SCENEKIT_CLASS_AVAILABLE(10_8, NA)
+SCENEKIT_CLASS_AVAILABLE(10_8, 8_0)
 @interface SCNText : SCNGeometry 
 {
 @private
@@ -677,14 +684,14 @@ SCENEKIT_CLASS_AVAILABLE(10_8, NA)
  @abstract Describes the profile used to when "chamferRadius" is not nil. When "chamferProfile" is nil we fallback on a path representing a quadrant.
  @discussion The profile should be a 2D curve beginning at (0,1) and ending at (1,0). The "flatness" property is also used to flatten this path. The default value is nil.
  */
-@property(nonatomic, copy) NSBezierPath *chamferProfile SCENEKIT_AVAILABLE(10_9, NA);
+@property(nonatomic, copy) NSBezierPath *chamferProfile SCENEKIT_AVAILABLE(10_9, 8_0);
 
 /*!
  @property flatness
  @abstract Specifies the accuracy (or smoothness) with which fonts are rendered.
  @discussion Smaller numbers give smoother curves at the expense of more computation and heavier geometries in terms of vertices. The default value is 0.6, which yields smooth curves.
  */
-@property(nonatomic) CGFloat flatness SCENEKIT_AVAILABLE(10_9, NA);
+@property(nonatomic) CGFloat flatness SCENEKIT_AVAILABLE(10_9, 8_0);
 
 @end
 
@@ -697,9 +704,9 @@ typedef NS_ENUM(NSInteger, SCNChamferMode) {
     SCNChamferModeBoth,
     SCNChamferModeFront,
     SCNChamferModeBack
-} NS_ENUM_AVAILABLE(10_9, NA);
+} NS_ENUM_AVAILABLE(10_9, 8_0);
 
-SCENEKIT_CLASS_AVAILABLE(10_9, NA)
+SCENEKIT_CLASS_AVAILABLE(10_9, 8_0)
 @interface SCNShape : SCNGeometry
 {
 @private

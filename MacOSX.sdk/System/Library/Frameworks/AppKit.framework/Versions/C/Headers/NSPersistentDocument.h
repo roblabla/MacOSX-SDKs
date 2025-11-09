@@ -1,7 +1,7 @@
 /*
 	NSPersistentDocument.h
 	Application Kit
-	Copyright (c) 2004-2013, Apple Inc.
+	Copyright (c) 2004-2014, Apple Inc.
 	All rights reserved.
  */
 
@@ -21,10 +21,9 @@
 }
 
 // Persistent documents always have a managed context (and a persistent store coordinator through that context).
-- (NSManagedObjectContext *)managedObjectContext;
-- (void)setManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
+@property (strong) NSManagedObjectContext *managedObjectContext;
 
-- (id)managedObjectModel;    // By default the framework will create a merged model of all models found in an application and its frameworks. Subclasses can return a specific model to use for creating persistent stores.
+@property (readonly, strong) id managedObjectModel;    // By default the framework will create a merged model of all models found in an application and its frameworks. Subclasses can return a specific model to use for creating persistent stores.
 
 
 // Configures the persistent store coordinator with the appropriate stores. Subclasses can create the store to save to or load from (invoked from within the other NSDocument methods to read/write files), which gives developers the ability to load/save from/to different persistent store types (default type is XML).

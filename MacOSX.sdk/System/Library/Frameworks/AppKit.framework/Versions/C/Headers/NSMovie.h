@@ -1,7 +1,7 @@
 /*
         NSMovie.h
         Application Kit
-        Copyright (c) 2000-2013, Apple Inc.
+        Copyright (c) 2000-2014, Apple Inc.
         All rights reserved.
 */
 
@@ -16,8 +16,10 @@
 #endif
 
 #if !__LP64__
+NS_CLASS_DEPRECATED_MAC(10_0, 10_5, "Use QTMovie instead")
 @interface NSMovie : NSObject <NSCopying, NSCoding> {
 #else
+NS_CLASS_DEPRECATED_MAC(10_0, 10_5, "Use QTMovie instead")
 @interface NSMovie : NSObject <NSCoding> {
 #endif
 

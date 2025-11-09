@@ -11,10 +11,10 @@
  *    notice, this list of conditions and the following disclaimer in the
  *    documentation and/or other materials provided with the distribution.
  *
- * THIS SOFTWARE IS PROVIDED BY APPLE COMPUTER, INC. ``AS IS'' AND ANY
+ * THIS SOFTWARE IS PROVIDED BY APPLE INC. ``AS IS'' AND ANY
  * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL APPLE COMPUTER, INC. OR
+ * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL APPLE INC. OR
  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
@@ -26,36 +26,33 @@
 
 #import <WebKit/DOMUIEvent.h>
 
-#if WEBKIT_VERSION_MAX_ALLOWED >= WEBKIT_VERSION_1_3
-
 @class DOMAbstractView;
 @class DOMNode;
 @class NSString;
 @protocol DOMEventTarget;
 
+NS_CLASS_AVAILABLE_MAC(10_4)
 @interface DOMMouseEvent : DOMUIEvent
-@property(readonly) int screenX;
-@property(readonly) int screenY;
-@property(readonly) int clientX;
-@property(readonly) int clientY;
-@property(readonly) BOOL ctrlKey;
-@property(readonly) BOOL shiftKey;
-@property(readonly) BOOL altKey;
-@property(readonly) BOOL metaKey;
-@property(readonly) unsigned short button;
-@property(readonly, retain) id <DOMEventTarget> relatedTarget;
-@property(readonly) int offsetX AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-@property(readonly) int offsetY AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-@property(readonly) int x AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-@property(readonly) int y AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-@property(readonly, retain) DOMNode *fromElement AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-@property(readonly, retain) DOMNode *toElement AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+@property (readonly) int screenX;
+@property (readonly) int screenY;
+@property (readonly) int clientX;
+@property (readonly) int clientY;
+@property (readonly) BOOL ctrlKey;
+@property (readonly) BOOL shiftKey;
+@property (readonly) BOOL altKey;
+@property (readonly) BOOL metaKey;
+@property (readonly) unsigned short button;
+@property (readonly, strong) id <DOMEventTarget> relatedTarget;
+@property (readonly) int offsetX NS_AVAILABLE_MAC(10_5);
+@property (readonly) int offsetY NS_AVAILABLE_MAC(10_5);
+@property (readonly) int x NS_AVAILABLE_MAC(10_5);
+@property (readonly) int y NS_AVAILABLE_MAC(10_5);
+@property (readonly, strong) DOMNode *fromElement NS_AVAILABLE_MAC(10_5);
+@property (readonly, strong) DOMNode *toElement NS_AVAILABLE_MAC(10_5);
 
-- (void)initMouseEvent:(NSString *)type canBubble:(BOOL)canBubble cancelable:(BOOL)cancelable view:(DOMAbstractView *)view detail:(int)detail screenX:(int)screenX screenY:(int)screenY clientX:(int)clientX clientY:(int)clientY ctrlKey:(BOOL)ctrlKey altKey:(BOOL)altKey shiftKey:(BOOL)shiftKey metaKey:(BOOL)metaKey button:(unsigned short)button relatedTarget:(id <DOMEventTarget>)relatedTarget AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+- (void)initMouseEvent:(NSString *)type canBubble:(BOOL)canBubble cancelable:(BOOL)cancelable view:(DOMAbstractView *)view detail:(int)detail screenX:(int)screenX screenY:(int)screenY clientX:(int)clientX clientY:(int)clientY ctrlKey:(BOOL)ctrlKey altKey:(BOOL)altKey shiftKey:(BOOL)shiftKey metaKey:(BOOL)metaKey button:(unsigned short)button relatedTarget:(id <DOMEventTarget>)relatedTarget NS_AVAILABLE_MAC(10_5);
 @end
 
 @interface DOMMouseEvent (DOMMouseEventDeprecated)
-- (void)initMouseEvent:(NSString *)type :(BOOL)canBubble :(BOOL)cancelable :(DOMAbstractView *)view :(int)detail :(int)screenX :(int)screenY :(int)clientX :(int)clientY :(BOOL)ctrlKey :(BOOL)altKey :(BOOL)shiftKey :(BOOL)metaKey :(unsigned short)button :(id <DOMEventTarget>)relatedTarget AVAILABLE_WEBKIT_VERSION_1_3_AND_LATER_BUT_DEPRECATED_IN_WEBKIT_VERSION_3_0;
+- (void)initMouseEvent:(NSString *)type :(BOOL)canBubble :(BOOL)cancelable :(DOMAbstractView *)view :(int)detail :(int)screenX :(int)screenY :(int)clientX :(int)clientY :(BOOL)ctrlKey :(BOOL)altKey :(BOOL)shiftKey :(BOOL)metaKey :(unsigned short)button :(id <DOMEventTarget>)relatedTarget NS_DEPRECATED_MAC(10_4, 10_5);
 @end
-
-#endif

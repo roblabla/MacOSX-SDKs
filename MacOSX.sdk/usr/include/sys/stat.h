@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2008 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2014 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -318,7 +318,11 @@ struct stat64 __DARWIN_STRUCT_STAT64;
  */
 /* #define UF_NOUNLINK	0x00000010 */	/* file may not be removed or renamed */
 #define UF_COMPRESSED	0x00000020	/* file is hfs-compressed */
-#define UF_TRACKED		0x00000040	/* file renames and deletes are tracked */
+
+/* UF_TRACKED is used for dealing with document IDs.  We no longer issue
+   notifications for deletes or renames for files which have UF_TRACKED set. */
+#define UF_TRACKED		0x00000040
+
 /* Bits 0x0080 through 0x4000 are currently undefined. */
 #define UF_HIDDEN	0x00008000	/* hint that this item should not be */
 					/* displayed in a GUI */
@@ -329,6 +333,7 @@ struct stat64 __DARWIN_STRUCT_STAT64;
 #define	SF_ARCHIVED	0x00010000	/* file is archived */
 #define	SF_IMMUTABLE	0x00020000	/* file may not be changed */
 #define	SF_APPEND	0x00040000	/* writes to file may only append */
+#define SF_RESTRICTED	0x00080000	/* restricted access */
 
 /*
  * The following two bits are reserved for FreeBSD.  They are not
@@ -352,6 +357,12 @@ int	mkfifo(const char *, mode_t);
 int	stat(const char *, struct stat *) __DARWIN_INODE64(stat);
 int	mknod(const char *, mode_t, dev_t);
 mode_t	umask(mode_t);
+
+#if __DARWIN_C_LEVEL >= 200809L
+int	fchmodat(int, const char *, mode_t, int) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+int	fstatat(int, const char *, struct stat *, int) __DARWIN_INODE64(fstatat) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+int	mkdirat(int, const char *, mode_t) __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+#endif
 
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
 

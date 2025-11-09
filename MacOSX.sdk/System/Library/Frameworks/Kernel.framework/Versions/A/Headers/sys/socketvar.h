@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2013 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2014 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -110,8 +110,8 @@ struct	xsocket {
 	short			so_linger;
 	short			so_state;
 	_XSOCKET_PTR(caddr_t)	so_pcb;		/* another convenient handle */
-	int				xso_protocol;
-	int				xso_family;
+	int			xso_protocol;
+	int			xso_family;
 	short			so_qlen;
 	short			so_incqlen;
 	short			so_qlimit;
@@ -119,8 +119,8 @@ struct	xsocket {
 	u_short			so_error;
 	pid_t			so_pgid;
 	u_int32_t		so_oobmark;
-	struct xsockbuf	so_rcv;
-	struct xsockbuf	so_snd;
+	struct xsockbuf		so_rcv;
+	struct xsockbuf		so_snd;
 	uid_t			so_uid;		/* XXX */
 };
 

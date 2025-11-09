@@ -72,7 +72,7 @@
                 returnAttributes is equivalent to passing kODAttributeTypeStandardOnly. outError is optional parameter,
                 nil can be passed if error details are not needed.
 */
-- (id)initWithNode:(ODNode *)inNode forRecordTypes:(id)inRecordTypeOrList attribute:(ODAttributeType)inAttribute
+- (instancetype)initWithNode:(ODNode *)inNode forRecordTypes:(id)inRecordTypeOrList attribute:(ODAttributeType)inAttribute
          matchType:(ODMatchType)inMatchType queryValues:(id)inQueryValueOrList 
   returnAttributes:(id)inReturnAttributeOrList maximumResults:(NSInteger)inMaximumResults error:(NSError **)outError NS_AVAILABLE(10_6, NA);
 

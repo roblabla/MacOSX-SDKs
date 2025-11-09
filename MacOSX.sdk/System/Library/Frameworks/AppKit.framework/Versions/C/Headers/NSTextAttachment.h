@@ -1,6 +1,6 @@
 /* 
         NSTextAttachment.h
-        Copyright (c) 1994-2013, Apple Inc.
+        Copyright (c) 1994-2014, Apple Inc.
         All rights reserved.
 
         Classes to represent text attachments.
@@ -61,23 +61,22 @@ enum {
     struct {
         unsigned int cellWasExplicitlySet:1;
         unsigned int ignoresOrientation:1;
-        unsigned int :30;
+        unsigned int allowsEditingContents:1;
+        unsigned int :29;
     } _flags;
 }
 
 /* Designated initializer.
  */
-- (id)initWithFileWrapper:(NSFileWrapper *)fileWrapper;
+- (instancetype)initWithFileWrapper:(NSFileWrapper *)fileWrapper;
 
 /* The fileWrapper is the meat of most types of attachment.  It can be set or queried with these methods.  An NSTextAttachment usually has a fileWrapper.  setFileWrapper does not update the attachment's cell in any way.
  */
-- (void)setFileWrapper:(NSFileWrapper *)fileWrapper;
-- (NSFileWrapper *)fileWrapper;
+@property (strong) NSFileWrapper *fileWrapper;
 
 /* The cell which handles user interaction. By default an instance of NSTextAttachmentCell is used.
  */
-- (id <NSTextAttachmentCell>)attachmentCell;
-- (void)setAttachmentCell:(id <NSTextAttachmentCell>)cell;
+@property (strong) id<NSTextAttachmentCell> attachmentCell;
 
 @end
 

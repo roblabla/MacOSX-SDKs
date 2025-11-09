@@ -1,5 +1,5 @@
 /*	NSAffineTransform.h
-        Copyright (c) 1997-2013, Apple Inc. All rights reserved.
+        Copyright (c) 1997-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -21,7 +21,8 @@ typedef struct {
 + (NSAffineTransform *)transform;
 
 // Initialization
-- (id)initWithTransform:(NSAffineTransform *)transform;
+- (instancetype)initWithTransform:(NSAffineTransform *)transform;
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
 
 // Translating
 - (void)translateXBy:(CGFloat)deltaX yBy:(CGFloat)deltaY;
@@ -46,8 +47,7 @@ typedef struct {
 - (NSSize)transformSize:(NSSize)aSize;
 
 // Transform Struct
-- (NSAffineTransformStruct)transformStruct;
-- (void)setTransformStruct:(NSAffineTransformStruct)transformStruct;
+@property NSAffineTransformStruct transformStruct;
 
 @end
 

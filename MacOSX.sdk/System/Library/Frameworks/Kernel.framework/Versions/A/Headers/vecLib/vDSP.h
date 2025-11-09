@@ -3,9 +3,9 @@
 
     Contains:   AltiVec DSP Interfaces
 
-    Version:    vecLib-423.32
+    Version:    vecLib-516.0
 
-    Copyright:  � 2000-2013 by Apple Computer, Inc., all rights reserved.
+    Copyright:  � 2000-2015 by Apple Inc., all rights reserved.
 
     For vDSP documentation, search for "vDSP" at <http://developer.apple.com>
     or search for one of the routine names below.
@@ -109,7 +109,7 @@
 
             |x| is the absolute value of x.
 
-    Exactness:
+   Exactness, IEEE 754 conformance:
 
         vDSP routines are not expected to produce results identical to the
         pseudo-code in the descriptions, because vDSP routines are free to
@@ -118,6 +118,11 @@
         if exact arithmetic were used.  However, floating-point arithmetic
         is approximate, and the rounding errors will often be different when
         operations are rearranged.
+
+        Generally, vDSP routines are not expected to conform to IEEE 754.
+        Notably, results may be not correctly rounded to the last bit even for
+        elementary operations, and operations involving infinities and NaNs may
+        be handled differently than IEEE 754 specifies.
 
     Const:
 
@@ -211,8 +216,8 @@ extern "C" {
     vDSP_Version0 is a major version number.
     vDSP_Version1 is a minor version number.
 */
-#define vDSP_Version0   423
-#define vDSP_Version1   32
+#define vDSP_Version0   516
+#define vDSP_Version1   0
 
 
 /*  Define types:
@@ -277,21 +282,12 @@ enum {
     vDSP_HANN_NORM                = 2
 };
     
-/*
-    The following types are used to define 24 bit data.
-*/
-typedef struct { uint8_t bytes[3];} vDSP_uint24;    // unsigned integer
-typedef struct { uint8_t bytes[3];} vDSP_int24;     // signed integer
 
-    
-/*  A filter object to be used with a multi-channel cascaded biquad IIR.  This
-    object carries internal state which may be modified by any routine which
-    uses it.  Upon creation the state is initialized such that all delay
-    elements are zero.
- 
-    A single filter object should only be used in a single thread at a time.
+/*  The following types define 24-bit data.
 */
-typedef struct vDSP_biquadm_SetupStruct *vDSP_biquadm_Setup;
+typedef struct { uint8_t bytes[3]; } vDSP_uint24; // Unsigned 24-bit integer.
+typedef struct { uint8_t bytes[3]; } vDSP_int24;  // Signed 24-bit integer.
+
 
 /*  The following types are pointers to structures that contain data used
     inside vDSP routines to assist FFT and biquad filter operations.  The
@@ -304,11 +300,23 @@ typedef struct OpaqueFFTSetupD          *FFTSetupD;
 typedef struct vDSP_biquad_SetupStruct  *vDSP_biquad_Setup;
 typedef struct vDSP_biquad_SetupStructD *vDSP_biquad_SetupD;
 
+    
+/*  vDSP_biquadm_Setup or vDSP_biquadm_SetupD is a pointer to a filter object
+    to be used with a multi-channel cascaded biquad IIR.  This object carries
+    internal state which may be modified by any routine which uses it.  Upon
+    creation, the state is initialized such that all delay elements are zero.
+ 
+    Each filter object should only be used in a single thread at a time.
+*/
+typedef struct vDSP_biquadm_SetupStruct  *vDSP_biquadm_Setup;
+typedef struct vDSP_biquadm_SetupStructD *vDSP_biquadm_SetupD;
+
 
 /*  vDSP_create_fftsetup and vDSP_create_ffsetupD allocate memory and prepare
     constants used by single- and double-precision FFT routines, respectively.
 
-    vDSP_destroy_fftsetup and vDSP_destroy_fftsetupD free the memory.
+    vDSP_destroy_fftsetup and vDSP_destroy_fftsetupD free the memory.  They
+    may be passed a null pointer, in which case they have no effect.
 */
 extern FFTSetup vDSP_create_fftsetup(
     vDSP_Length __vDSP_Log2n,
@@ -317,6 +325,55 @@ extern FFTSetup vDSP_create_fftsetup(
 
 extern void vDSP_destroy_fftsetup(FFTSetup __vDSP_setup)
         __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+
+/*  vDSP_biquadm_CreateSetup (for float) or vDSP_biquadm_CreateSetupD (for
+    double) allocates memory and prepares the coefficients for processing a
+    multi-channel cascaded biquad IIR filter.  Delay values are set to zero.
+
+    Unlike some other setup objects in vDSP, a vDSP_biquadm_Setup or
+    vDSP_biquadm_SetupD contains data that is modified during a vDSP_biquadm or
+    vDSP_biquadmD call, and it therefore may not be used more than once
+    simultaneously, as in multiple threads.
+ 
+    vDSP_biquadm_DestroySetup (for single) or vDSP_biquadm_DestroySetupD (for
+    double) frees the memory allocated by the corresponding create-setup
+    routine.
+*/
+extern vDSP_biquadm_Setup vDSP_biquadm_CreateSetup(
+    const double *__vDSP_coeffs,
+    vDSP_Length   __vDSP_M,
+    vDSP_Length   __vDSP_N)
+        __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+extern vDSP_biquadm_SetupD vDSP_biquadm_CreateSetupD(
+    const double *__vDSP_coeffs,
+    vDSP_Length   __vDSP_M,
+    vDSP_Length   __vDSP_N)
+        __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+extern void vDSP_biquadm_DestroySetup(vDSP_biquadm_Setup __vDSP_setup)
+        __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+extern void vDSP_biquadm_DestroySetupD(vDSP_biquadm_SetupD __vDSP_setup)
+        __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+
+/*  vDSP_biquadm_CopyState (for float) or vDSP_biquadm_CopyStateD (for double)
+    copies the current state between two biquadm setup objects.  The two
+    objects must have been created with the same number of channels and
+    sections.
+ 
+    vDSP_biquadm_ResetState (for float) or vDSP_biquadm_ResetStateD (for
+    double) sets the delay values of a biquadm setup object to zero.
+*/
+extern void vDSP_biquadm_CopyState(
+    vDSP_biquadm_Setup                     __vDSP_dest,
+    const struct vDSP_biquadm_SetupStruct *__vDSP_src)
+        __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+extern void vDSP_biquadm_CopyStateD(
+    vDSP_biquadm_SetupD                     __vDSP_dest,
+    const struct vDSP_biquadm_SetupStructD *__vDSP_src)
+        __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+extern void vDSP_biquadm_ResetState(vDSP_biquadm_Setup __vDSP_setup)
+        __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+extern void vDSP_biquadm_ResetStateD(vDSP_biquadm_SetupD __vDSP_setup)
+        __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
 
 
 // Convert a complex array to a complex-split array.
@@ -460,6 +517,77 @@ extern void vDSP_fft_zrip(
     */
 
 
+
+/*  vDSP_biquadm (for float) or vDSP_biquadmD (for double) applies a
+    multi-channel biquadm IIR filter created with vDSP_biquadm_CreateSetup or
+    vDSP_biquadm_CreateSetupD, respectively.
+ */
+extern void vDSP_biquadm(
+    vDSP_biquadm_Setup   __vDSP_Setup,
+    const float        **__vDSP_X, vDSP_Stride __vDSP_IX,
+    float              **__vDSP_Y, vDSP_Stride __vDSP_IY,
+    vDSP_Length          __vDSP_N)
+        __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+extern void vDSP_biquadmD(
+     vDSP_biquadm_SetupD   __vDSP_Setup,
+     const double        **__vDSP_X, vDSP_Stride __vDSP_IX,
+     double              **__vDSP_Y, vDSP_Stride __vDSP_IY,
+     vDSP_Length          __vDSP_N)
+        __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+    /*  These routines perform the same function as M calls to vDSP_biquad or
+        vDSP_biquadD, where M, the delay values, and the biquad setups are
+        derived from the biquadm setup:
+
+            for (m = 0; m < M; ++M)
+                vDSP_biquad(
+                    setup derived from vDSP_biquadm setup,
+                    delays derived from vDSP_biquadm setup,
+                    X[m], IX,
+                    Y[m], IY,
+                    N);
+    */
+
+
+/*  Convolution and correlation.
+*/
+extern void vDSP_conv(
+    const float *__vDSP_A,  // Input signal.
+    vDSP_Stride  __vDSP_IA,
+    const float *__vDSP_F,  // Filter.
+    vDSP_Stride  __vDSP_IF,
+    float       *__vDSP_C,  // Output signal.
+    vDSP_Stride  __vDSP_IC,
+    vDSP_Length  __vDSP_N,  // Output length.
+    vDSP_Length  __vDSP_P)  // Filter length.
+        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+/*  Split-complex matrix multiply.
+*/
+extern void vDSP_zmmul(
+    const DSPSplitComplex *__vDSP_A,
+    vDSP_Stride            __vDSP_IA,
+    const DSPSplitComplex *__vDSP_B,
+    vDSP_Stride            __vDSP_IB,
+    const DSPSplitComplex *__vDSP_C,
+    vDSP_Stride            __vDSP_IC,
+    vDSP_Length            __vDSP_M,
+    vDSP_Length            __vDSP_N,
+    vDSP_Length            __vDSP_P)
+        __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
+    /*  Maps:
+
+            Pseudocode:     Memory:
+            A[m][p]         A->realp[(m*P+p)*IA] + i * A->imagp[(m*P+p)*IA].
+            B[p][n]         B->realp[(p*N+n)*IB] + i * B->imagp[(p*N+n)*IB].
+            C[m][n]         C->realp[(m*N+n)*IC] + i * C->imagp[(m*N+n)*IC].
+
+        These compute:
+
+            for (m = 0; m < M; ++m)
+            for (n = 0; n < N; ++n)
+                C[m][n] = sum(A[m][p] * B[p][n], 0 <= p < P);
+    */
+
+
 // Vector add.
 extern void vDSP_vadd(
     const float *__vDSP_A,
@@ -479,6 +607,147 @@ extern void vDSP_vadd(
     */
 
 
+// Vector subtract.
+extern void vDSP_vsub(
+    const float *__vDSP_B,  // Caution:  A and B are swapped!
+    vDSP_Stride  __vDSP_IB,
+    const float *__vDSP_A,  // Caution:  A and B are swapped!
+    vDSP_Stride  __vDSP_IA,
+    float       *__vDSP_C,
+    vDSP_Stride  __vDSP_IC,
+    vDSP_Length  __vDSP_N)
+        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+    /*  Maps:  The default maps are used.
+
+        These compute:
+
+            for (n = 0; n < N; ++n)
+                C[n] = A[n] - B[n];
+    */
+
+
+// Vector multiply.
+extern void vDSP_vmul(
+    const float *__vDSP_A,
+    vDSP_Stride  __vDSP_IA,
+    const float *__vDSP_B,
+    vDSP_Stride  __vDSP_IB,
+    float       *__vDSP_C,
+    vDSP_Stride  __vDSP_IC,
+    vDSP_Length  __vDSP_N)
+        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+    /*  Maps:  The default maps are used.
+
+        These compute:
+
+            for (n = 0; n < N; ++n)
+                C[n] = A[n] * B[n];
+    */
+
+
+// Vector divide.
+extern void vDSP_vdiv(
+    const float *__vDSP_B,  // Caution:  A and B are swapped!
+    vDSP_Stride  __vDSP_IB,
+    const float *__vDSP_A,  // Caution:  A and B are swapped!
+    vDSP_Stride  __vDSP_IA,
+    float       *__vDSP_C,
+    vDSP_Stride  __vDSP_IC,
+    vDSP_Length  __vDSP_N)
+        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+extern void vDSP_zvdiv(
+    const DSPSplitComplex *__vDSP_B,    // Caution:  A and B are swapped!
+    vDSP_Stride            __vDSP_IB,
+    const DSPSplitComplex *__vDSP_A,    // Caution:  A and B are swapped!
+    vDSP_Stride            __vDSP_IA,
+    const DSPSplitComplex *__vDSP_C,
+    vDSP_Stride            __vDSP_IC,
+    vDSP_Length            __vDSP_N)
+        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+    /*  Maps:  The default maps are used.
+
+        These compute:
+
+            for (n = 0; n < N; ++n)
+                C[n] = A[n] / B[n];
+    */
+
+
+// Vector-scalar multiply.
+extern void vDSP_vsmul(
+    const float *__vDSP_A,
+    vDSP_Stride  __vDSP_IA,
+    const float *__vDSP_B,
+    float       *__vDSP_C,
+    vDSP_Stride  __vDSP_IC,
+    vDSP_Length  __vDSP_N)
+        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+    /*  Maps:  The default maps are used.
+
+        These compute:
+
+            for (n = 0; n < N; ++n)
+                C[n] = A[n] * B[0];
+    */
+
+
+// Vector multiply and add.
+extern void vDSP_vma(
+    const float *__vDSP_A,
+    vDSP_Stride  __vDSP_IA,
+    const float *__vDSP_B,
+    vDSP_Stride  __vDSP_IB,
+    const float *__vDSP_C,
+    vDSP_Stride  __vDSP_IC,
+    float       *__vDSP_D,
+    vDSP_Stride  __vDSP_ID,
+    vDSP_Length  __vDSP_N)
+        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+    /*  Maps:  The default maps are used.
+
+        These compute:
+
+            for (n = 0; n < N; ++n)
+                D[n] = A[n] * B[n] + C[n];
+    */
+
+
+// Complex multiplication with optional conjugation.
+extern void vDSP_zvmul(
+    const DSPSplitComplex *__vDSP_A,
+    vDSP_Stride            __vDSP_IA,
+    const DSPSplitComplex *__vDSP_B,
+    vDSP_Stride            __vDSP_IB,
+    const DSPSplitComplex *__vDSP_C,
+    vDSP_Stride            __vDSP_IC,
+    vDSP_Length            __vDSP_N,
+    int                    __vDSP_Conjugate)
+        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
+    /*  Maps:  The default maps are used.
+
+        These compute:
+
+            If Conjugate is +1:
+
+                for (n = 0; n < N; ++n)
+                    C[n] = A[n] * B[n];
+
+            If Conjugate is -1:
+
+                for (n = 0; n < N; ++n)
+                    C[n] = conj(A[n]) * B[n];
+    */
+
+
+
+// Vector absolute value.
+extern void vDSP_vabs(
+    const float *__vDSP_A,
+    vDSP_Stride  __vDSP_IA,
+    float       *__vDSP_C,
+    vDSP_Stride  __vDSP_IC,
+    vDSP_Length  __vDSP_N)
+        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 extern void vDSP_zvabs(
     const DSPSplitComplex *__vDSP_A,
     vDSP_Stride            __vDSP_IA,
@@ -494,6 +763,217 @@ extern void vDSP_zvabs(
                 C[n] = |A[n]|;
     */
 
+
+// Vector fill.
+extern void vDSP_vfill(
+    const float *__vDSP_A,
+    float       *__vDSP_C,
+    vDSP_Stride  __vDSP_IA,
+    vDSP_Length  __vDSP_N)
+        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+    /*  Maps:  The default maps are used.
+
+        These compute:
+
+            for (n = 0; n < N; ++n)
+                C[n] = A[0];
+    */
+
+
+// Vector-scalar add.
+extern void vDSP_vsadd(
+    const float *__vDSP_A,
+    vDSP_Stride  __vDSP_IA,
+    const float *__vDSP_B,
+    float       *__vDSP_C,
+    vDSP_Stride  __vDSP_IC,
+    vDSP_Length  __vDSP_N)
+        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+    /*  Maps:  The default maps are used.
+
+        These compute:
+
+            for (n = 0; n < N; ++n)
+                C[n] = A[n] + B[0];
+    */
+
+
+// Complex-split vector move.
+extern void vDSP_zvmov(
+    const DSPSplitComplex *__vDSP_A,
+    vDSP_Stride            __vDSP_IA,
+    const DSPSplitComplex *__vDSP_C,
+    vDSP_Stride            __vDSP_IC,
+    vDSP_Length            __vDSP_N)
+        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+    /*  Maps:  The default maps are used.
+
+        These compute:
+
+            for (n = 0; n < N; ++n)
+                C[n] = A[n];
+    */
+
+
+
+// Difference equation, 2 poles, 2 zeros.
+extern void vDSP_deq22(
+    const float *__vDSP_A,
+    vDSP_Stride  __vDSP_IA,
+    const float *__vDSP_B,
+    float       *__vDSP_C,
+    vDSP_Stride  __vDSP_IC,
+    vDSP_Length  __vDSP_N)
+        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+    /*  Maps:  The default maps are used.
+
+        These compute:
+
+            for (n = 2; n < N+2; ++n)   // Note outputs start with C[2].
+                C[n] =
+                    + A[n-0]*B[0]
+                    + A[n-1]*B[1]
+                    + A[n-2]*B[2]
+                    - C[n-1]*B[3]
+                    - C[n-2]*B[4];
+    */
+
+// Maximum magnitude of vector.
+extern void vDSP_maxmgv(
+    const float *__vDSP_A,
+    vDSP_Stride  __vDSP_IA,
+    float       *__vDSP_C,
+    vDSP_Length  __vDSP_N)
+        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+    /*  Maps:  The default maps are used.
+
+        C[0] is set to the greatest value of |A[n]| for 0 <= n < N.
+    */
+
+// Maximum value of vector.
+extern void vDSP_maxv(
+    const float *__vDSP_A,
+    vDSP_Stride  __vDSP_IA,
+    float       *__vDSP_C,
+    vDSP_Length  __vDSP_N)
+        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+    /*  Maps:  The default maps are used.
+
+        C[0] is set to the greatest value of A[n] for 0 <= n < N.
+    */
+
+
+// Minimum value of vector.
+extern void vDSP_minv(
+    const float *__vDSP_A,
+    vDSP_Stride  __vDSP_IA,
+    float       *__vDSP_C,
+    vDSP_Length  __vDSP_N)
+        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+    /*  Maps:  The default maps are used.
+
+        C[0] is set to the least value of A[n] for 0 <= n < N.
+    */
+
+
+
+// Root-mean-square of vector.
+extern void vDSP_rmsqv(
+    const float *__vDSP_A,
+    vDSP_Stride  __vDSP_IA,
+    float       *__vDSP_C,
+    vDSP_Length  __vDSP_N)
+        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+    /*  Maps:  The default maps are used.
+
+        These compute:
+
+            C[0] = sqrt(sum(A[n] ** 2, 0 <= n < N) / N);
+    */
+
+
+// Scalar-vector divide.
+extern void vDSP_svdiv(
+    const float *__vDSP_A,
+    const float *__vDSP_B,
+    vDSP_Stride  __vDSP_IB,
+    float       *__vDSP_C,
+    vDSP_Stride  __vDSP_IC,
+    vDSP_Length  __vDSP_N)
+        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+    /*  Maps:  The default maps are used.
+
+        These compute:
+
+            for (n = 0; n < N; ++n)
+                C[n] = A[0] / B[n];
+
+        When A[0] is not zero or NaN and B[n] is zero, C[n] is set to an
+        infinity.
+    */
+
+
+// Sum of vector elements.
+extern void vDSP_sve(
+    const float *__vDSP_A,
+    vDSP_Stride  __vDSP_I,
+    float       *__vDSP_C,
+    vDSP_Length  __vDSP_N)
+        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+    /*  Maps:  The default maps are used.
+
+        These compute:
+
+            C[0] = sum(A[n], 0 <= n < N);
+    */
+
+
+
+// Sum of vector elements' squares.
+extern void vDSP_svesq(
+    const float *__vDSP_A,
+    vDSP_Stride  __vDSP_IA,
+    float       *__vDSP_C,
+    vDSP_Length  __vDSP_N)
+        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+    /*  Maps:  The default maps are used.
+
+        These compute:
+
+            C[0] = sum(A[n] ** 2, 0 <= n < N);
+    */
+
+
+// Sum of vector elements and sum of vector elements' squares.
+extern void vDSP_sve_svesq(
+    const float  *__vDSP_A,
+    vDSP_Stride   __vDSP_IA,
+    float        *__vDSP_Sum,
+    float        *__vDSP_SumOfSquares,
+    vDSP_Length   __vDSP_N)
+        __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+    /*  Maps:  The default maps are used.
+
+        These compute:
+
+            Sum[0]          = sum(A[n],      0 <= n < N);
+            SumOfSquares[0] = sum(A[n] ** 2, 0 <= n < N);
+    */
+
+
+// Sum of vector elements' signed squares.
+extern void vDSP_svs(
+    const float *__vDSP_A,
+    vDSP_Stride  __vDSP_IA,
+    float       *__vDSP_C,
+    vDSP_Length  __vDSP_N)
+        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+    /*  Maps:  The default maps are used.
+
+        These compute:
+
+            C[0] = sum(A[n] * |A[n]|, 0 <= n < N);
+    */
 
 // Vector clip.
 extern void vDSP_vclip(
@@ -573,6 +1053,52 @@ extern void vDSP_vmax(
 
             for (n = 0; n < N; ++n)
                 C[n] = B[n] <= A[n] ? A[n] : B[n];
+    */
+
+
+// Vector maximum magnitude.
+extern void vDSP_vmaxmg(
+    const float *__vDSP_A,
+    vDSP_Stride  __vDSP_IA,
+    const float *__vDSP_B,
+    vDSP_Stride  __vDSP_IB,
+    float       *__vDSP_C,
+    vDSP_Stride  __vDSP_IC,
+    vDSP_Length  __vDSP_N)
+        __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+    /*  Maps:  The default maps are used.
+
+        These compute:
+
+            for (n = 0; n < N; ++n)
+                C[n] = |B[n]| <= |A[n]| ? |A[n]| : |B[n]|;
+    */
+
+
+// Vector sliding window maxima.
+extern void vDSP_vswmax(
+    const float *__vDSP_A,
+    vDSP_Stride  __vDSP_IA,
+    float       *__vDSP_C,
+    vDSP_Stride  __vDSP_IC,
+    vDSP_Length  __vDSP_N,
+    vDSP_Length  __vDSP_WindowLength)
+        __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
+    /*  Maps:  The default maps are used.
+
+        These compute the maximum value within a window to the input vector.
+        A maximum is calculated for each window position:
+
+            for (n = 0; n < N; ++n)
+                C[n] = the greatest value of A[w] for n <= w < n+WindowLength.
+
+        A must contain N+WindowLength-1 elements, and C must contain space for
+        N+WindowLength-1 elements.  Although only N outputs are provided in C,
+        the additional elements may be used for intermediate computation.
+
+        A and C may not overlap.
+
+        WindowLength must be positive (zero is not supported).
     */
 
 

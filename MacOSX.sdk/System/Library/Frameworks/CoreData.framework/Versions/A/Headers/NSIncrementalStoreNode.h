@@ -36,17 +36,17 @@ NS_CLASS_AVAILABLE(10_7,5_0)
 //          -newValueForRelationship:forObjectWithID:withContext:error: on the NSPersistentStore
 //
 // version -> The revision number of this state; used for conflict detection and merging 
-- (id)initWithObjectID:(NSManagedObjectID*)objectID withValues:(NSDictionary*)values version:(uint64_t)version;
+- (instancetype)initWithObjectID:(NSManagedObjectID*)objectID withValues:(NSDictionary*)values version:(uint64_t)version;
 
 // Update the values and version to reflect new data being saved to or loaded from the external store.  
 // The values dictionary is in the same format as the initializer
 - (void)updateWithValues:(NSDictionary *)values version:(uint64_t)version;
 
 // Return the object ID that identifies the data stored by this node
-- (NSManagedObjectID*)objectID;
+@property (nonatomic, readonly, strong) NSManagedObjectID *objectID;
 
 // Return the version of data in this node.
-- (uint64_t)version;
+@property (nonatomic, readonly) uint64_t version;
 
 // May return NSNull for to-one relationships.  If a relationship is nil, clients should  invoke -newValueForRelationship:forObjectWithID:withContext:error: on the NSPersistentStore
 - (id)valueForPropertyDescription:(NSPropertyDescription*)prop;

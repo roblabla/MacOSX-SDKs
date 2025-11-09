@@ -105,9 +105,7 @@ InvokePMSheetDoneUPP(
  *    PMSessionBeginDocument except that during a print job, the caller
  *    cannot obtain a Quickdraw grafPort for the printing context but
  *    can only obtain a Quartz graphics context (CGContextRef). This
- *    function should be used in conjunction with
- *    PMSessionGetCGGraphicsContext instead of
- *    PMSessionGetGraphicsContext.
+ *    function should be used in conjunction with PMSessionGetCGGraphicsContext.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.4 and later in Carbon.framework  [32-bit only]

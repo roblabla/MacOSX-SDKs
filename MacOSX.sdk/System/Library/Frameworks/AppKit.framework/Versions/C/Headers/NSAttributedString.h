@@ -1,6 +1,6 @@
 /*
         NSAttributedString.h
-        Copyright (c) 1994-2013, Apple Inc.
+        Copyright (c) 1994-2014, Apple Inc.
         All rights reserved.
 
         This file defines Application Kit extensions to NSAttributedString and NSMutableAttributedString.
@@ -61,6 +61,8 @@ APPKIT_EXTERN NSString *NSVerticalGlyphFormAttributeName NS_AVAILABLE_MAC(10_7);
 /* An NSTextAlternatives object.  Used primarily as a temporary attribute, with primaryString equal to the substring for the range to which it is attached, and alternativeStrings representing alternatives for that string that may be presented to the user. */
 APPKIT_EXTERN NSString *NSTextAlternativesAttributeName NS_AVAILABLE_MAC(10_8);
 
+APPKIT_EXTERN NSString *const NSTextEffectAttributeName NS_AVAILABLE(10_10, 7_0);      // NSString, default nil: no text effect. Can be set to NSTextEffectLetterpressStyle.
+APPKIT_EXTERN NSString *const NSTextEffectLetterpressStyle NS_AVAILABLE(10_10, 7_0);   // Can be set as the value for the NSTextEffectAttributeName attribute to apply the letterpress effect to an attributed string.
 
 /* This defines currently supported values for NSUnderlineStyleAttributeName and NSStrikethroughStyleAttributeName, as of Mac OS X version 10.3.  The style, pattern, and optionally by-word mask are or'd together to produce the value.  The previous constants are still supported, but deprecated (except for NSUnderlineByWordMask); including NSUnderlineStrikethroughMask in the underline style will still produce a strikethrough, but that is deprecated in favor of setting NSStrikethroughStyleAttributeName using the values described here.
 */
@@ -85,14 +87,12 @@ APPKIT_EXTERN NSUInteger NSUnderlineByWordMask;
 */
 APPKIT_EXTERN NSString *NSSpellingStateAttributeName;  // int, default 0: no spelling or grammar indicator
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 /* Flag values supported for NSSpellingStateAttributeName as of Mac OS X version 10.5.  Prior to 10.5, any non-zero value caused the spelling indicator to be shown.
 */
 enum {
-    NSSpellingStateSpellingFlag = (1 << 0),
-    NSSpellingStateGrammarFlag  = (1 << 1)
+    NSSpellingStateSpellingFlag NS_ENUM_AVAILABLE_MAC(10_5) = (1 << 0),
+    NSSpellingStateGrammarFlag NS_ENUM_AVAILABLE_MAC(10_5)  = (1 << 1)
 };
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */
 
 
 /* Values returned for the NSDocumentTypeDocumentAttribute key in the document attributes dictionary when reading text documents.  Note that other values are possible, and this set might grow in the future.
@@ -109,7 +109,7 @@ APPKIT_EXTERN NSString *NSOfficeOpenXMLTextDocumentType NS_AVAILABLE_MAC(10_5);
 APPKIT_EXTERN NSString *NSOpenDocumentTextDocumentType  NS_AVAILABLE_MAC(10_5);
 
 
-/* NSDictionary keys for NSLayoutOrientationSectionsAttribute.
+/* NSDictionary keys for NSTextLayoutSectionsAttribute.
  */
 APPKIT_EXTERN NSString *NSTextLayoutSectionOrientation NS_AVAILABLE_MAC(10_7); // NSNumber containing NSTextLayoutOrientation value. default: NSTextLayoutOrientationHorizontal
 APPKIT_EXTERN NSString *NSTextLayoutSectionRange NS_AVAILABLE_MAC(10_7); // NSValue containing NSRange representing a character range. default: a range covering the whole document
@@ -174,7 +174,7 @@ APPKIT_EXTERN NSString *NSFileTypeDocumentOption                NS_AVAILABLE_MAC
 /* In Mac OS X 10.4 and later, WebKit is always used for HTML documents, and all of the above options are recognized.  In Mac OS X 10.3, there is an additional options key, @"UseWebKit" (NSNumber containing integer; if present and positive, specifies that WebKit-based HTML importing is to be used).  In Mac OS X 10.3, the Timeout, WebPreferences, and WebResourceLoadDelegate options are recognized only when WebKit-based HTML importing is used.
 */
 
-@interface NSAttributedString (NSAttributedStringKitAdditions) <NSPasteboardReading, NSPasteboardWriting>
+@interface NSAttributedString (NSAttributedStringKitAdditions)
 
 /* Attributes which should be copied/pasted with "copy font".
 */
@@ -184,7 +184,7 @@ APPKIT_EXTERN NSString *NSFileTypeDocumentOption                NS_AVAILABLE_MAC
 */
 - (NSDictionary *)rulerAttributesInRange:(NSRange)range;
 
-- (BOOL)containsAttachments;
+@property (readonly) BOOL containsAttachments;
 
 /* Returns NSNotFound if no line break location found in the specified range; otherwise returns the index of the first character that should go on the NEXT line.
 */
@@ -198,11 +198,6 @@ APPKIT_EXTERN NSString *NSFileTypeDocumentOption                NS_AVAILABLE_MAC
 */
 - (NSURL *)URLAtIndex:(NSUInteger)location effectiveRange:(NSRangePointer)effectiveRange NS_AVAILABLE_MAC(10_5);
 
-/* Methods to determine what types can be loaded as NSAttributedStrings.
-*/
-+ (NSArray *)textTypes NS_AVAILABLE_MAC(10_5);
-+ (NSArray *)textUnfilteredTypes NS_AVAILABLE_MAC(10_5);
-
 /* Convenience methods for calculating the range of an individual text block, range of an entire table, range of a list, and the index within a list.
 */
 - (NSRange)rangeOfTextBlock:(NSTextBlock *)block atIndex:(NSUInteger)location;
@@ -214,26 +209,26 @@ APPKIT_EXTERN NSString *NSFileTypeDocumentOption                NS_AVAILABLE_MAC
 */
 /* These first two general methods supersede the previous versions shown below.  They take a dictionary of options to specify how the document should be loaded.  The various possible options are specified above, as NS...DocumentOption.  If NSDocumentTypeDocumentOption is specified, the document will be treated as being in the specified format.  If NSDocumentTypeDocumentOption is not specified, these methods will examine the document and do their best to load it using whatever format it seems to contain.
 */
-- (id)initWithURL:(NSURL *)url options:(NSDictionary *)options documentAttributes:(NSDictionary **)dict error:(NSError **)error;
-- (id)initWithData:(NSData *)data options:(NSDictionary *)options documentAttributes:(NSDictionary **)dict error:(NSError **)error;
+- (instancetype)initWithURL:(NSURL *)url options:(NSDictionary *)options documentAttributes:(NSDictionary **)dict error:(NSError **)error;
+- (instancetype)initWithData:(NSData *)data options:(NSDictionary *)options documentAttributes:(NSDictionary **)dict error:(NSError **)error;
 
 /* These two superseded methods are similar to the first listed above except that they lack the options dictionary and error return arguments.  They will always attempt to determine the format from the document.
 */
-- (id)initWithPath:(NSString *)path documentAttributes:(NSDictionary **)dict;
-- (id)initWithURL:(NSURL *)url documentAttributes:(NSDictionary **)dict;
+- (instancetype)initWithPath:(NSString *)path documentAttributes:(NSDictionary **)dict;
+- (instancetype)initWithURL:(NSURL *)url documentAttributes:(NSDictionary **)dict;
 
 /* The following methods should now be considered as conveniences for various common document types.
 */
-- (id)initWithRTF:(NSData *)data documentAttributes:(NSDictionary **)dict;
-- (id)initWithRTFD:(NSData *)data documentAttributes:(NSDictionary **)dict;
-- (id)initWithHTML:(NSData *)data documentAttributes:(NSDictionary **)dict;
-- (id)initWithHTML:(NSData *)data baseURL:(NSURL *)base documentAttributes:(NSDictionary **)dict;
-- (id)initWithDocFormat:(NSData *)data documentAttributes:(NSDictionary **)dict;
-- (id)initWithHTML:(NSData *)data options:(NSDictionary *)options documentAttributes:(NSDictionary **)dict;
+- (instancetype)initWithRTF:(NSData *)data documentAttributes:(NSDictionary **)dict;
+- (instancetype)initWithRTFD:(NSData *)data documentAttributes:(NSDictionary **)dict;
+- (instancetype)initWithHTML:(NSData *)data documentAttributes:(NSDictionary **)dict;
+- (instancetype)initWithHTML:(NSData *)data baseURL:(NSURL *)base documentAttributes:(NSDictionary **)dict;
+- (instancetype)initWithDocFormat:(NSData *)data documentAttributes:(NSDictionary **)dict;
+- (instancetype)initWithHTML:(NSData *)data options:(NSDictionary *)options documentAttributes:(NSDictionary **)dict;
 
 /* A separate method is available for initializing from an RTFD file wrapper.  No options apply in this case.
 */
-- (id)initWithRTFDFileWrapper:(NSFileWrapper *)wrapper documentAttributes:(NSDictionary **)dict;
+- (instancetype)initWithRTFDFileWrapper:(NSFileWrapper *)wrapper documentAttributes:(NSDictionary **)dict;
 
 /* Methods to produce data for saving text documents in various formats.  These methods take a document attributes dictionary to allow writing out various document-wide attributes.  The various possible attributes are specified above, as NS...DocumentAttribute.  The attributes supported vary by document type; for RTF and RTFD all are supported except NSCharacterEncodingDocumentAttribute, NSCocoaVersionDocumentAttribute, NSConvertedDocumentAttribute, and NSExcludedElementsDocumentAttribute.
 */
@@ -250,6 +245,13 @@ APPKIT_EXTERN NSString *NSFileTypeDocumentOption                NS_AVAILABLE_MAC
 - (NSFileWrapper *)RTFDFileWrapperFromRange:(NSRange)range documentAttributes:(NSDictionary *)dict;
 - (NSData *)docFormatFromRange:(NSRange)range documentAttributes:(NSDictionary *)dict;
 
+@end
+
+@interface NSAttributedString (NSAttributedStringPasteboardAdditions)  <NSPasteboardReading, NSPasteboardWriting>
+/* Methods to determine what types can be loaded as NSAttributedStrings.
+ */
++ (NSArray *)textTypes NS_AVAILABLE_MAC(10_5);
++ (NSArray *)textUnfilteredTypes NS_AVAILABLE_MAC(10_5);
 @end
 
 @interface NSAttributedString(NSDeprecatedKitAdditions)

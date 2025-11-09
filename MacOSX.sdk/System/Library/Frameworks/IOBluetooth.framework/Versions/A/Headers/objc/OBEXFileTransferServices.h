@@ -82,7 +82,7 @@
 	@param			inOBEXSession A valid IOBluetoothOBEXSession
 	@result			A newly created OBEXFileTransferServices object on success, nil on failure
 */
-+ (OBEXFileTransferServices*) withOBEXSession: (IOBluetoothOBEXSession*) inOBEXSession;
++ (instancetype) withOBEXSession: (IOBluetoothOBEXSession*) inOBEXSession;
 
 
 /*!
@@ -95,7 +95,7 @@
 	@param			inOBEXSession A valid IOBluetoothOBEXSession
 	@result			A newly created OBEXFileTransferServices object on success, nil on failure
 */
-- (id) initWithOBEXSession:(IOBluetoothOBEXSession*)inOBEXSession;
+- (instancetype) initWithOBEXSession:(IOBluetoothOBEXSession*)inOBEXSession;
 
 
 #pragma mark -

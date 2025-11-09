@@ -1,5 +1,5 @@
 /*	CFStream.h
-	Copyright (c) 2000-2013, Apple Inc. All rights reserved.
+	Copyright (c) 2000-2014, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFSTREAM__)
@@ -45,8 +45,8 @@ typedef struct {
     CFStringRef (*copyDescription)(void *info);
 } CFStreamClientContext;
 
-typedef struct __CFReadStream * CFReadStreamRef;
-typedef struct __CFWriteStream * CFWriteStreamRef;
+typedef struct CF_BRIDGED_MUTABLE_TYPE(NSInputStream) __CFReadStream * CFReadStreamRef;
+typedef struct CF_BRIDGED_MUTABLE_TYPE(NSOutputStream) __CFWriteStream * CFWriteStreamRef;
 
 typedef void (*CFReadStreamClientCallBack)(CFReadStreamRef stream, CFStreamEventType type, void *clientCallBackInfo);
 typedef void (*CFWriteStreamClientCallBack)(CFWriteStreamRef stream, CFStreamEventType type, void *clientCallBackInfo);

@@ -307,7 +307,7 @@ extern "C" {
 
 /* Is the O_NONBLOCK flag inherited from listening sockets?
 */
-#define APR_O_NONBLOCK_INHERITED 1
+#define APR_O_NONBLOCK_INHERITED 0
 
 /* Typedefs that APR needs. */
 

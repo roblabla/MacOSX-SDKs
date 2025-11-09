@@ -3,7 +3,7 @@
  
 	 Contains:   CoreFoundation Network socket streams header
  
-	 Copyright:  Copyright (c) 2001-2008 Apple Inc. All rights reserved.
+	 Copyright:  Copyright (c) 2001-2013 Apple Inc. All rights reserved.
  
 	 Bugs?:	  For bug reports, consult the following page on
 				 the World Wide Web:
@@ -28,15 +28,11 @@
 
 
 
-#include <Availability.h>
-
 #if PRAGMA_ONCE
 #pragma once
 #endif
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+CF_EXTERN_C_BEGIN
 
 /*
  *  kCFHTTPVersion1_0
@@ -44,13 +40,8 @@ extern "C" {
  *  Discussion:
  *	Version string for HTTP 1.0.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.1 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
-CFN_EXPORT const CFStringRef kCFHTTPVersion1_0						   __OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_2_0);
-
+CFN_EXPORT const CFStringRef kCFHTTPVersion1_0 CF_AVAILABLE(10_1, 2_0);
 
 /*
  *  kCFHTTPVersion1_1
@@ -58,13 +49,8 @@ CFN_EXPORT const CFStringRef kCFHTTPVersion1_0						   __OSX_AVAILABLE_STARTING(
  *  Discussion:
  *	Version string for HTTP 1.1.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.1 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
-CFN_EXPORT const CFStringRef kCFHTTPVersion1_1						   __OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_2_0);
-
+CFN_EXPORT const CFStringRef kCFHTTPVersion1_1 CF_AVAILABLE(10_1, 2_0);
 
 /*
  *  kCFHTTPAuthenticationSchemeBasic
@@ -72,13 +58,8 @@ CFN_EXPORT const CFStringRef kCFHTTPVersion1_1						   __OSX_AVAILABLE_STARTING(
  *  Discussion:
  *	HTTP Basic authentication scheme.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.2 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
-CFN_EXPORT const CFStringRef kCFHTTPAuthenticationSchemeBasic			__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
-
+CFN_EXPORT const CFStringRef kCFHTTPAuthenticationSchemeBasic CF_AVAILABLE(10_2, 2_0);
 
 /*
  *  kCFHTTPAuthenticationSchemeDigest
@@ -86,12 +67,8 @@ CFN_EXPORT const CFStringRef kCFHTTPAuthenticationSchemeBasic			__OSX_AVAILABLE_
  *  Discussion:
  *	HTTP Digest Access authentication scheme.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.2 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
-CFN_EXPORT const CFStringRef kCFHTTPAuthenticationSchemeDigest		   __OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
+CFN_EXPORT const CFStringRef kCFHTTPAuthenticationSchemeDigest CF_AVAILABLE(10_2, 2_0);
 
 /*
  *  kCFHTTPAuthenticationSchemeNTLM
@@ -99,12 +76,17 @@ CFN_EXPORT const CFStringRef kCFHTTPAuthenticationSchemeDigest		   __OSX_AVAILAB
  *  Discussion:
  *	HTTP NTLM authentication scheme.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.5 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
-CFN_EXPORT const CFStringRef kCFHTTPAuthenticationSchemeNTLM			 __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+CFN_EXPORT const CFStringRef kCFHTTPAuthenticationSchemeNTLM CF_AVAILABLE(10_5, 2_0);
+
+/*
+ *  kCFHTTPAuthenticationSchemeKerberos
+ *
+ *  Discussion:
+ *	HTTP Negotiate authentication scheme.
+ *
+ */
+CFN_EXPORT const CFStringRef kCFHTTPAuthenticationSchemeKerberos CF_AVAILABLE(10_5, 2_0);
 
 /*
  *  kCFHTTPAuthenticationSchemeNegotiate
@@ -112,12 +94,8 @@ CFN_EXPORT const CFStringRef kCFHTTPAuthenticationSchemeNTLM			 __OSX_AVAILABLE_
  *  Discussion:
  *	HTTP Negotiate authentication scheme.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.5 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
-CFN_EXPORT const CFStringRef kCFHTTPAuthenticationSchemeNegotiate		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+CFN_EXPORT const CFStringRef kCFHTTPAuthenticationSchemeNegotiate CF_AVAILABLE(10_5, 2_0);
 	
 /*
  *  kCFHTTPAuthenticationSchemeNegotiate2
@@ -125,12 +103,8 @@ CFN_EXPORT const CFStringRef kCFHTTPAuthenticationSchemeNegotiate		__OSX_AVAILAB
  *  Discussion:
  *	HTTP Negotiate v2 authentication scheme.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.6 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
-CFN_EXPORT const CFStringRef kCFHTTPAuthenticationSchemeNegotiate2		__OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_3_0);
+CFN_EXPORT const CFStringRef kCFHTTPAuthenticationSchemeNegotiate2 CF_AVAILABLE(10_6, 3_0);
 	
 /*
  *  kCFHTTPAuthenticationSchemeXMobileMeAuthToken
@@ -138,26 +112,8 @@ CFN_EXPORT const CFStringRef kCFHTTPAuthenticationSchemeNegotiate2		__OSX_AVAILA
  *  Discussion:
  *	HTTP XMobileMeAuthToken authentication scheme.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.6 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
-CFN_EXPORT const CFStringRef kCFHTTPAuthenticationSchemeXMobileMeAuthToken		__OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_4_3);	
-	
-
-/*
- *  kCFHTTPAuthenticationSchemeKerberos
- *  
- *  Discussion:
- *	HTTP Negotiate authentication scheme.
- *  
- *  Availability:
- *	Mac OS X:		 in version 10.7 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
- */
-CFN_EXPORT const CFStringRef kCFHTTPAuthenticationSchemeKerberos		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
+CFN_EXPORT const CFStringRef kCFHTTPAuthenticationSchemeXMobileMeAuthToken CF_AVAILABLE(10_6, 4_3);
 
 /*
  *  kCFHTTPAuthenticationSchemeOAuth1
@@ -165,12 +121,8 @@ CFN_EXPORT const CFStringRef kCFHTTPAuthenticationSchemeKerberos		__OSX_AVAILABL
  *  Discussion:
  *	HTTP OAuth 1.0 authentication scheme.
  *
- *  Availability:
- *	Mac OS X:		 in version 10.9 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
-CFN_EXPORT const CFStringRef kCFHTTPAuthenticationSchemeOAuth1		__OSX_AVAILABLE_STARTING(__MAC_10_9,__IPHONE_NA);
+CFN_EXPORT const CFStringRef kCFHTTPAuthenticationSchemeOAuth1 CF_AVAILABLE(10_9, 7_0);
 
 	
 /*
@@ -194,13 +146,9 @@ typedef struct __CFHTTPMessage*		 CFHTTPMessageRef;
  *  Result:
  *	A unique CFType for CFHTTPMessage.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.1 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT CFTypeID 
-CFHTTPMessageGetTypeID(void)								  __OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_2_0);
+CFHTTPMessageGetTypeID(void) CF_AVAILABLE(10_1, 2_0);
 
 
 /*
@@ -237,17 +185,9 @@ CFHTTPMessageGetTypeID(void)								  __OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHO
  *	caller's responsibilty to release the memory allocated for the
  *	message.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.1 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT CFHTTPMessageRef 
-CFHTTPMessageCreateRequest(
-  CFAllocatorRef   alloc,
-  CFStringRef	  requestMethod,
-  CFURLRef		 url,
-  CFStringRef	  httpVersion)							   __OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_2_0);
+CFHTTPMessageCreateRequest(CFAllocatorRef alloc, CFStringRef requestMethod, CFURLRef url, CFStringRef httpVersion) CF_AVAILABLE(10_1, 2_0);
 
 
 /*
@@ -284,17 +224,13 @@ CFHTTPMessageCreateRequest(
  *	caller's responsibilty to release the memory allocated for the
  *	message.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.1 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT CFHTTPMessageRef 
 CFHTTPMessageCreateResponse(
-  CFAllocatorRef   alloc,
-  CFIndex		  statusCode,
-  CFStringRef	  statusDescription,
-  CFStringRef	  httpVersion)							   __OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_2_0);
+  CFAllocatorRef  alloc,
+  CFIndex         statusCode,
+  CFStringRef     statusDescription,
+  CFStringRef     httpVersion)              CF_AVAILABLE(10_1, 2_0);
 
 
 /*
@@ -324,15 +260,9 @@ CFHTTPMessageCreateResponse(
  *	caller's responsibilty to release the memory allocated for the
  *	message.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.1 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT CFHTTPMessageRef 
-CFHTTPMessageCreateEmpty(
-  CFAllocatorRef   alloc,
-  Boolean		  isRequest)								 __OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_2_0);
+CFHTTPMessageCreateEmpty(CFAllocatorRef alloc, Boolean isRequest) CF_AVAILABLE(10_1, 2_0);
 
 
 /*
@@ -361,15 +291,9 @@ CFHTTPMessageCreateEmpty(
  *	caller's responsibilty to release the memory allocated for the
  *	message.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.1 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT CFHTTPMessageRef 
-CFHTTPMessageCreateCopy(
-  CFAllocatorRef	 alloc,
-  CFHTTPMessageRef   message)								 __OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_2_0);
+CFHTTPMessageCreateCopy(CFAllocatorRef alloc, CFHTTPMessageRef message) CF_AVAILABLE(10_1, 2_0);
 
 
 /*
@@ -392,13 +316,9 @@ CFHTTPMessageCreateCopy(
  *	request. A value of kCFBooleanFalse indicates the message is a
  *	response.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.1 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT Boolean 
-CFHTTPMessageIsRequest(CFHTTPMessageRef message)			  __OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_2_0);
+CFHTTPMessageIsRequest(CFHTTPMessageRef message) CF_AVAILABLE(10_1, 2_0);
 
 
 /*
@@ -420,13 +340,9 @@ CFHTTPMessageIsRequest(CFHTTPMessageRef message)			  __OSX_AVAILABLE_STARTING(__
  *	A pointer to a CFString, or NULL if failed. It is caller's
  *	responsibilty to release the memory allocated for the string.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.1 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT CFStringRef 
-CFHTTPMessageCopyVersion(CFHTTPMessageRef message)			__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_2_0);
+CFHTTPMessageCopyVersion(CFHTTPMessageRef message) CF_AVAILABLE(10_1, 2_0);
 
 
 /*
@@ -448,13 +364,9 @@ CFHTTPMessageCopyVersion(CFHTTPMessageRef message)			__OSX_AVAILABLE_STARTING(__
  *	A pointer to a CFData, or NULL if failed. It is caller's
  *	responsibilty to release the memory allocated for the data.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.1 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT CFDataRef 
-CFHTTPMessageCopyBody(CFHTTPMessageRef message)			   __OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_2_0);
+CFHTTPMessageCopyBody(CFHTTPMessageRef message) CF_AVAILABLE(10_1, 2_0);
 
 
 /*
@@ -476,15 +388,9 @@ CFHTTPMessageCopyBody(CFHTTPMessageRef message)			   __OSX_AVAILABLE_STARTING(__
  *	  A pointer to a CFData containing the body to be set. If the
  *	  bodyData is NULL, the behavior is undefined.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.1 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT void 
-CFHTTPMessageSetBody(
-  CFHTTPMessageRef   message,
-  CFDataRef		  bodyData)								__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_2_0);
+CFHTTPMessageSetBody(CFHTTPMessageRef message, CFDataRef bodyData) CF_AVAILABLE(10_1, 2_0);
 
 
 /*
@@ -510,15 +416,9 @@ CFHTTPMessageSetBody(
  *	A pointer to a CFString, or NULL if failed. It is caller's
  *	responsibilty to release the memory allocated for the string.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.1 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT CFStringRef 
-CFHTTPMessageCopyHeaderFieldValue(
-  CFHTTPMessageRef   message,
-  CFStringRef		headerField)							 __OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_2_0);
+CFHTTPMessageCopyHeaderFieldValue(CFHTTPMessageRef message, CFStringRef headerField) CF_AVAILABLE(10_1, 2_0);
 
 
 /*
@@ -540,13 +440,9 @@ CFHTTPMessageCopyHeaderFieldValue(
  *	A pointer to a CFDictionary, or NULL if failed. It is caller's
  *	responsibilty to release the memory allocated for the dictionary.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.1 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT CFDictionaryRef 
-CFHTTPMessageCopyAllHeaderFields(CFHTTPMessageRef message)	__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_2_0);
+CFHTTPMessageCopyAllHeaderFields(CFHTTPMessageRef message) CF_AVAILABLE(10_1, 2_0);
 
 
 /*
@@ -572,16 +468,9 @@ CFHTTPMessageCopyAllHeaderFields(CFHTTPMessageRef message)	__OSX_AVAILABLE_START
  *	  A pointer to the CFString containing the value to set. Set the
  *	  value to NULL to remove the header field.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.1 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT void 
-CFHTTPMessageSetHeaderFieldValue(
-  CFHTTPMessageRef   message,
-  CFStringRef		headerField,
-  CFStringRef		value)								   __OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_2_0);
+CFHTTPMessageSetHeaderFieldValue(CFHTTPMessageRef message, CFStringRef headerField, CFStringRef value) CF_AVAILABLE(10_1, 2_0);
 
 
 /*
@@ -611,16 +500,9 @@ CFHTTPMessageSetHeaderFieldValue(
  *  Result:
  *	A Boolean indicating success or failure.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.1 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT Boolean 
-CFHTTPMessageAppendBytes(
-  CFHTTPMessageRef   message,
-  const UInt8 *	  newBytes,
-  CFIndex			numBytes)								__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_2_0);
+CFHTTPMessageAppendBytes(CFHTTPMessageRef message, const UInt8 *newBytes, CFIndex numBytes) CF_AVAILABLE(10_1, 2_0);
 
 
 /*
@@ -642,13 +524,9 @@ CFHTTPMessageAppendBytes(
  *	A Boolean. A value of kCFBooleanTrue indicates the header is
  *	complete and no further data is expected.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.1 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT Boolean 
-CFHTTPMessageIsHeaderComplete(CFHTTPMessageRef message)	   __OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_2_0);
+CFHTTPMessageIsHeaderComplete(CFHTTPMessageRef message) CF_AVAILABLE(10_1, 2_0);
 
 
 /*
@@ -671,13 +549,9 @@ CFHTTPMessageIsHeaderComplete(CFHTTPMessageRef message)	   __OSX_AVAILABLE_START
  *	A pointer to a CFData, or NULL if failed. It is caller's
  *	responsibilty to release the memory allocated for the data.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.1 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT CFDataRef 
-CFHTTPMessageCopySerializedMessage(CFHTTPMessageRef message)  __OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_2_0);
+CFHTTPMessageCopySerializedMessage(CFHTTPMessageRef message) CF_AVAILABLE(10_1, 2_0);
 
 
 /*********************/
@@ -702,13 +576,9 @@ CFHTTPMessageCopySerializedMessage(CFHTTPMessageRef message)  __OSX_AVAILABLE_ST
  *	A pointer to a CFURL, or NULL if failed. It is caller's
  *	responsibilty to release the memory allocated for the url.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.1 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT CFURLRef 
-CFHTTPMessageCopyRequestURL(CFHTTPMessageRef request)		 __OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_2_0);
+CFHTTPMessageCopyRequestURL(CFHTTPMessageRef request) CF_AVAILABLE(10_1, 2_0);
 
 
 /*
@@ -729,13 +599,9 @@ CFHTTPMessageCopyRequestURL(CFHTTPMessageRef request)		 __OSX_AVAILABLE_STARTING
  *	A pointer to a CFString, or NULL if failed. It is caller's
  *	responsibilty to release the memory allocated for the string.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.1 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT CFStringRef 
-CFHTTPMessageCopyRequestMethod(CFHTTPMessageRef request)	  __OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_2_0);
+CFHTTPMessageCopyRequestMethod(CFHTTPMessageRef request) CF_AVAILABLE(10_1, 2_0);
 
 
 /*
@@ -778,19 +644,15 @@ CFHTTPMessageCopyRequestMethod(CFHTTPMessageRef request)	  __OSX_AVAILABLE_START
  *	A pointer to a CFString, or NULL if failed. It is caller's
  *	responsibilty to release the memory allocated for the string.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.1 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT Boolean 
 CFHTTPMessageAddAuthentication(
   CFHTTPMessageRef   request,
   CFHTTPMessageRef   authenticationFailureResponse,
-  CFStringRef		username,
-  CFStringRef		password,
-  CFStringRef		authenticationScheme,
-  Boolean			forProxy)								__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_2_0);
+  CFStringRef        username,
+  CFStringRef        password,
+  CFStringRef        authenticationScheme,
+  Boolean            forProxy)              CF_AVAILABLE(10_1, 2_0);
 
 
 /**********************/
@@ -815,13 +677,9 @@ CFHTTPMessageAddAuthentication(
  *  Result:
  *	A UInt32 indicating the status code.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.1 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT CFIndex 
-CFHTTPMessageGetResponseStatusCode(CFHTTPMessageRef response) __OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_2_0);
+CFHTTPMessageGetResponseStatusCode(CFHTTPMessageRef response) CF_AVAILABLE(10_1, 2_0);
 
 
 /*
@@ -844,19 +702,13 @@ CFHTTPMessageGetResponseStatusCode(CFHTTPMessageRef response) __OSX_AVAILABLE_ST
  *	caller's responsibilty to release the memory allocated for the
  *	string.
  *  
- *  Availability:
- *	Mac OS X:		 in version 10.1 and later in CoreServices.framework
- *	CarbonLib:		not available
- *	Non-Carbon CFM:   not available
  */
 CFN_EXPORT CFStringRef 
-CFHTTPMessageCopyResponseStatusLine(CFHTTPMessageRef response) __OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_2_0);
+CFHTTPMessageCopyResponseStatusLine(CFHTTPMessageRef response) CF_AVAILABLE(10_1, 2_0);
 
 
 
-#ifdef __cplusplus
-}
-#endif
+CF_EXTERN_C_END
 
 #endif /* __CFHTTPMESSAGE__ */
 

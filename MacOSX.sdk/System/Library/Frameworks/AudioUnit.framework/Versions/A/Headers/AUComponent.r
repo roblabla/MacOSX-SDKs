@@ -28,7 +28,7 @@
 
 #define kAudioUnitType_MusicDevice				'aumu'
 #define kAudioUnitSubType_DLSSynth				'dls '
-#define kAudioUnitSubType_GMSynth				'gms '
+#define kAudioUnitSubType_MIDISynth				'msyn'
 #define kAudioUnitSubType_Sampler				'samp'
 
 #define kAudioUnitType_MusicEffect				'aumf'

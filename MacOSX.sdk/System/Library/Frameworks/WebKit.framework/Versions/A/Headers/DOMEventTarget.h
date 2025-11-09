@@ -11,10 +11,10 @@
  *    notice, this list of conditions and the following disclaimer in the
  *    documentation and/or other materials provided with the distribution.
  *
- * THIS SOFTWARE IS PROVIDED BY APPLE COMPUTER, INC. ``AS IS'' AND ANY
+ * THIS SOFTWARE IS PROVIDED BY APPLE INC. ``AS IS'' AND ANY
  * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL APPLE COMPUTER, INC. OR
+ * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL APPLE INC. OR
  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
@@ -24,20 +24,17 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
  */
 
-#import <JavaScriptCore/WebKitAvailability.h>
-
-#if WEBKIT_VERSION_MAX_ALLOWED >= WEBKIT_VERSION_1_3
+#import <WebKit/WebKitAvailability.h>
 
 @class DOMEvent;
 @class NSString;
 @protocol DOMEventListener;
 
+NS_CLASS_AVAILABLE_MAC(10_4)
 @protocol DOMEventTarget <NSObject, NSCopying>
-- (void)addEventListener:(NSString *)type listener:(id <DOMEventListener>)listener useCapture:(BOOL)useCapture AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-- (void)removeEventListener:(NSString *)type listener:(id <DOMEventListener>)listener useCapture:(BOOL)useCapture AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+- (void)addEventListener:(NSString *)type listener:(id <DOMEventListener>)listener useCapture:(BOOL)useCapture NS_AVAILABLE_MAC(10_5);
+- (void)removeEventListener:(NSString *)type listener:(id <DOMEventListener>)listener useCapture:(BOOL)useCapture NS_AVAILABLE_MAC(10_5);
 - (BOOL)dispatchEvent:(DOMEvent *)event;
-- (void)addEventListener:(NSString *)type :(id <DOMEventListener>)listener :(BOOL)useCapture AVAILABLE_WEBKIT_VERSION_1_3_AND_LATER_BUT_DEPRECATED_IN_WEBKIT_VERSION_3_0;
-- (void)removeEventListener:(NSString *)type :(id <DOMEventListener>)listener :(BOOL)useCapture AVAILABLE_WEBKIT_VERSION_1_3_AND_LATER_BUT_DEPRECATED_IN_WEBKIT_VERSION_3_0;
+- (void)addEventListener:(NSString *)type :(id <DOMEventListener>)listener :(BOOL)useCapture NS_DEPRECATED_MAC(10_4, 10_5);
+- (void)removeEventListener:(NSString *)type :(id <DOMEventListener>)listener :(BOOL)useCapture NS_DEPRECATED_MAC(10_4, 10_5);
 @end
-
-#endif

@@ -1,7 +1,7 @@
 /*
 	NSText.h
 	Application Kit
-	Copyright (c) 1994-2013, Apple Inc.
+	Copyright (c) 1994-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -26,22 +26,20 @@ enum {
 };
 
 /* Values for NSTextAlignment */
-enum {
+typedef NS_ENUM(NSUInteger, NSTextAlignment) {
     NSLeftTextAlignment		= 0,    // Visually left aligned
     NSRightTextAlignment	= 1,    // Visually right aligned
     NSCenterTextAlignment	= 2,    // Visually centered
     NSJustifiedTextAlignment	= 3,    // Fully-justified. The last line in a paragraph is natural-aligned.
     NSNaturalTextAlignment	= 4     // Indicates the default alignment for script
 };
-typedef NSUInteger NSTextAlignment;
 
 /* Values for NSWritingDirection */
-enum {
+typedef NS_ENUM(NSInteger, NSWritingDirection) {
     NSWritingDirectionNatural       = -1,   // Determines direction using the Unicode Bidi Algorithm rules P2 and P3
     NSWritingDirectionLeftToRight   = 0,    // Left to right writing direction
     NSWritingDirectionRightToLeft   = 1     // Right to left writing direction
 };
-typedef NSInteger NSWritingDirection;
 
 /* Additional values to be added to NSWritingDirectionLeftToRight or NSWritingDirectionRightToLeft, when used with NSWritingDirectionAttributeName */
 enum {
@@ -69,8 +67,10 @@ enum {
     id _ivars;
 }
 
-- (NSString *)string;
-- (void)setString:(NSString *)string;
+- (instancetype)initWithFrame:(NSRect)frameRect NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
+
+@property (copy) NSString *string;
 
 - (void)replaceCharactersInRange:(NSRange)range withString:(NSString *)aString;
 - (void)replaceCharactersInRange:(NSRange)range withRTF:(NSData *)rtfData;
@@ -82,54 +82,36 @@ enum {
 - (BOOL)writeRTFDToFile:(NSString *)path atomically:(BOOL)flag;
 - (BOOL)readRTFDFromFile:(NSString *)path;
 
-- (id <NSTextDelegate>)delegate;
-- (void)setDelegate:(id <NSTextDelegate>)anObject;
+@property (assign) id<NSTextDelegate> delegate;
 
-- (BOOL)isEditable;
-- (void)setEditable:(BOOL)flag;
-- (BOOL)isSelectable;
-- (void)setSelectable:(BOOL)flag;
-- (BOOL)isRichText;
-- (void)setRichText:(BOOL)flag;         //If NO, also clears setImportsGraphics:
-- (BOOL)importsGraphics;
-- (void)setImportsGraphics:(BOOL)flag;  // If YES, also sets setRichText:
-- (BOOL)isFieldEditor;
-- (void)setFieldEditor:(BOOL)flag;      // Indicates whether to end editing on CR, TAB, etc.
-- (BOOL)usesFontPanel;
-- (void)setUsesFontPanel:(BOOL)flag;
-- (BOOL)drawsBackground;
-- (void)setDrawsBackground:(BOOL)flag;
-- (NSColor *)backgroundColor;
-- (void)setBackgroundColor:(NSColor *)color;
+@property (getter=isEditable) BOOL editable;
+@property (getter=isSelectable) BOOL selectable;
+@property (getter=isRichText) BOOL richText;        //If NO, also clears setImportsGraphics:
+@property BOOL importsGraphics; // If YES, also sets setRichText:
+@property (getter=isFieldEditor) BOOL fieldEditor;     // Indicates whether to end editing on CR, TAB, etc.
+@property BOOL usesFontPanel;
+@property BOOL drawsBackground;
+@property (copy) NSColor *backgroundColor;
 
-- (BOOL)isRulerVisible;
+@property (getter=isRulerVisible, readonly) BOOL rulerVisible;
 
-- (NSRange)selectedRange;
-- (void)setSelectedRange:(NSRange)range;
+@property NSRange selectedRange;
 
 - (void)scrollRangeToVisible:(NSRange)range;
 
-- (void)setFont:(NSFont *)obj;
-- (NSFont *)font;
-- (void)setTextColor:(NSColor *)color;
-- (NSColor *)textColor;
-- (NSTextAlignment)alignment;
-- (void)setAlignment:(NSTextAlignment)mode;
-- (NSWritingDirection)baseWritingDirection;
-- (void)setBaseWritingDirection:(NSWritingDirection)writingDirection;
+@property (strong) NSFont *font;
+@property (copy) NSColor *textColor;
+@property NSTextAlignment alignment;
+@property NSWritingDirection baseWritingDirection;
 
 - (void)setTextColor:(NSColor *)color range:(NSRange)range;
 - (void)setFont:(NSFont *)font range:(NSRange)range;
 
-- (NSSize)maxSize;
-- (void)setMaxSize:(NSSize)newMaxSize;
-- (NSSize)minSize;
-- (void)setMinSize:(NSSize)newMinSize;
+@property NSSize maxSize;
+@property NSSize minSize;
 
-- (BOOL)isHorizontallyResizable;
-- (void)setHorizontallyResizable:(BOOL)flag;
-- (BOOL)isVerticallyResizable;
-- (void)setVerticallyResizable:(BOOL)flag;
+@property (getter=isHorizontallyResizable) BOOL horizontallyResizable;
+@property (getter=isVerticallyResizable) BOOL verticallyResizable;
 
 - (void)sizeToFit;
 

@@ -1,5 +1,5 @@
 /*	NSCompoundPredicate.h
-	Copyright (c) 2004-2013, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSPredicate.h>
@@ -22,14 +22,14 @@ NS_CLASS_AVAILABLE(10_4, 3_0)
     NSArray *_subpredicates;
 }
 
-- (id)initWithType:(NSCompoundPredicateType)type subpredicates:(NSArray *)subpredicates;
+- (instancetype)initWithType:(NSCompoundPredicateType)type subpredicates:(NSArray *)subpredicates;
 
-- (NSCompoundPredicateType)compoundPredicateType;
-- (NSArray *)subpredicates;
+@property (readonly) NSCompoundPredicateType compoundPredicateType;
+@property (readonly, copy) NSArray *subpredicates;
 
 /*** Convenience Methods ***/
-+ (NSPredicate *)andPredicateWithSubpredicates:(NSArray *)subpredicates;
-+ (NSPredicate *)orPredicateWithSubpredicates:(NSArray *)subpredicates;
-+ (NSPredicate *)notPredicateWithSubpredicate:(NSPredicate *)predicate;
++ (NSCompoundPredicate *)andPredicateWithSubpredicates:(NSArray *)subpredicates;
++ (NSCompoundPredicate *)orPredicateWithSubpredicates:(NSArray *)subpredicates;
++ (NSCompoundPredicate *)notPredicateWithSubpredicate:(NSPredicate *)predicate;
 @end
 

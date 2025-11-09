@@ -1,5 +1,5 @@
 /*	NSDecimalNumber.h
-	Copyright (c) 1995-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1995-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSValue.h>
@@ -44,14 +44,14 @@ FOUNDATION_EXPORT NSString * const NSDecimalNumberDivideByZeroException;
     unsigned short _mantissa[0]; /* GCC */
 }
 
-- (id)initWithMantissa:(unsigned long long)mantissa exponent:(short)exponent isNegative:(BOOL)flag;
-- (id)initWithDecimal:(NSDecimal)dcm;
-- (id)initWithString:(NSString *)numberValue;
-- (id)initWithString:(NSString *)numberValue locale:(id)locale;
+- (instancetype)initWithMantissa:(unsigned long long)mantissa exponent:(short)exponent isNegative:(BOOL)flag;
+- (instancetype)initWithDecimal:(NSDecimal)dcm NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithString:(NSString *)numberValue;
+- (instancetype)initWithString:(NSString *)numberValue locale:(id)locale;
 
 - (NSString *)descriptionWithLocale:(id)locale;
 
-- (NSDecimal)decimalValue;
+@property (readonly) NSDecimal decimalValue;
 
 + (NSDecimalNumber *)decimalNumberWithMantissa:(unsigned long long)mantissa exponent:(short)exponent isNegative:(BOOL)flag;
 + (NSDecimalNumber *)decimalNumberWithDecimal:(NSDecimal)dcm;
@@ -98,10 +98,10 @@ FOUNDATION_EXPORT NSString * const NSDecimalNumberDivideByZeroException;
     //   ignore exactnessException
     //   raise on overflow, underflow and divide by zero.
 
-- (const char *)objCType NS_RETURNS_INNER_POINTER;
+@property (readonly) const char *objCType NS_RETURNS_INNER_POINTER;
     // return 'd' for double
     
-- (double)doubleValue;
+@property (readonly) double doubleValue;
     // return an approximate double value
     
 @end
@@ -121,15 +121,15 @@ FOUNDATION_EXPORT NSString * const NSDecimalNumberDivideByZeroException;
     void *_reserved;
 }
 
-+ (id)defaultDecimalNumberHandler;
++ (NSDecimalNumberHandler *)defaultDecimalNumberHandler;
     // rounding mode: NSRoundPlain
     // scale: No defined scale (full precision)
     // ignore exactnessException (return nil)
     // raise on overflow, underflow and divide by zero.
 
-- (id)initWithRoundingMode:(NSRoundingMode)roundingMode scale:(short)scale raiseOnExactness:(BOOL)exact raiseOnOverflow:(BOOL)overflow raiseOnUnderflow:(BOOL)underflow raiseOnDivideByZero:(BOOL)divideByZero;
+- (instancetype)initWithRoundingMode:(NSRoundingMode)roundingMode scale:(short)scale raiseOnExactness:(BOOL)exact raiseOnOverflow:(BOOL)overflow raiseOnUnderflow:(BOOL)underflow raiseOnDivideByZero:(BOOL)divideByZero NS_DESIGNATED_INITIALIZER;
 
-+ (id)decimalNumberHandlerWithRoundingMode:(NSRoundingMode)roundingMode scale:(short)scale raiseOnExactness:(BOOL)exact raiseOnOverflow:(BOOL)overflow raiseOnUnderflow:(BOOL)underflow raiseOnDivideByZero:(BOOL)divideByZero;
++ (instancetype)decimalNumberHandlerWithRoundingMode:(NSRoundingMode)roundingMode scale:(short)scale raiseOnExactness:(BOOL)exact raiseOnOverflow:(BOOL)overflow raiseOnUnderflow:(BOOL)underflow raiseOnDivideByZero:(BOOL)divideByZero;
 
 @end
 
@@ -137,7 +137,7 @@ FOUNDATION_EXPORT NSString * const NSDecimalNumberDivideByZeroException;
 
 @interface NSNumber (NSDecimalNumberExtensions)
 
-- (NSDecimal)decimalValue;
+@property (readonly) NSDecimal decimalValue;
     // Could be silently inexact for float and double.
 
 @end

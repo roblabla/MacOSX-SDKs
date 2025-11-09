@@ -23,6 +23,7 @@ typedef enum {
 	IBOutlet NSImageView *		mBackgroundImage;
 	
 	BOOL						usePasskeyNotifications;
+    BOOL                        isIncomingRequest;
     BOOL						showFeedback;
     NSString *					passkey;
     IBOutlet NSTextField *		mPasskeyString;
@@ -36,6 +37,7 @@ typedef enum {
 
 // Private
 @property (assign)	BOOL			usePasskeyNotificaitons;
+@property (assign)	BOOL			isIncomingRequest;
 @property (copy)	NSString *		passkey;
 @property (retain)	NSImage *		returnImage;
 @property (retain)	NSImage *		returnHighlightImage;

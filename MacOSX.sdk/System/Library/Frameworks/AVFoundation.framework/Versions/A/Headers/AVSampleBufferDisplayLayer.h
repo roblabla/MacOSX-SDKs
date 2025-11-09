@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2011-2013 Apple Inc. All rights reserved.
+	Copyright 2011-2014 Apple Inc. All rights reserved.
 
 */
 
@@ -21,7 +21,27 @@
 
 @class AVSampleBufferDisplayLayerInternal;
 
-NS_CLASS_AVAILABLE(10_8, 6_0)
+/*!
+	@enum		 AVQueuedSampleBufferRenderingStatus
+	@abstract	 These constants are the possible values of the AVSampleBufferDisplayLayer status property.
+	@constant	 AVQueuedSampleBufferRenderingStatusUnknown
+	Indicates that the receiver is in a fresh state without any sample buffers enqueued on it.
+	@constant	 AVQueuedSampleBufferRenderingStatusRendering
+	Indicates at least one sample buffer has been enqueued on the receiver.
+	@constant	 AVQueuedSampleBufferRenderingStatusFailed
+	Terminal state indicating that the receiver can no longer render sample buffers because of an error. The error is described by
+	the value of AVSampleBufferDisplayLayer's error property.
+ */
+typedef NS_ENUM(NSInteger, AVQueuedSampleBufferRenderingStatus) {
+	AVQueuedSampleBufferRenderingStatusUnknown,
+	AVQueuedSampleBufferRenderingStatusRendering,
+	AVQueuedSampleBufferRenderingStatusFailed
+} NS_AVAILABLE(10_10, 8_0);
+
+AVF_EXPORT NSString *const AVSampleBufferDisplayLayerFailedToDecodeNotification NS_AVAILABLE(10_10, 8_0); // decode failed, see NSError in notification payload
+AVF_EXPORT NSString *const AVSampleBufferDisplayLayerFailedToDecodeNotificationErrorKey NS_AVAILABLE(10_10, 8_0); // NSError
+
+NS_CLASS_AVAILABLE(10_8, 8_0)
 @interface AVSampleBufferDisplayLayer : CALayer
 {
 @private
@@ -43,7 +63,7 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
 					If you are synchronizing video to audio, you can use a timebase whose master clock
 					is a CMAudioDeviceClock for the appropriate audio device to prevent drift.
 					
-					The control timebase can not be changed after enqueueSampleBuffer: is called.
+					Note that prior to OSX 10.10 and iOS 8.0, the control timebase could not be changed after enqueueSampleBuffer: was called.  As of OSX 10.10 and iOS 8.0, the control timebase may be changed at any time.
 */
 @property (retain) __attribute__((NSObject)) CMTimebaseRef controlTimebase;
 
@@ -55,6 +75,20 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
 					See <AVFoundation/AVAnimation.h> for a description of these options.
  */
 @property(copy) NSString *videoGravity;
+
+/*!
+	@property		status
+	@abstract		The ability of the display layer to be used for enqueuing sample buffers.
+	@discussion		The value of this property is an AVQueuedSampleBufferRenderingStatus that indicates whether the receiver can be used for enqueuing sample buffers. When the value of this property is AVQueuedSampleBufferRenderingStatusFailed, the receiver can no longer be used and a new instance needs to be created in its place. When this happens, clients can check the value of the error property to determine the failure. This property is key value observable.
+ */
+@property (nonatomic, readonly) AVQueuedSampleBufferRenderingStatus status NS_AVAILABLE(10_10, 8_0);
+
+/*!
+	@property		error
+	@abstract		If the display layer's status is AVQueuedSampleBufferRenderingStatusFailed, this describes the error that caused the failure.
+	@discussion		The value of this property is an NSError that describes what caused the display layer to no longer be able to enqueue sample buffers. If the status is not AVQueuedSampleBufferRenderingStatusFailed, the value of this property is nil.
+ */
+@property (nonatomic, readonly) NSError *error NS_AVAILABLE(10_10, 8_0);
 
 @end
 

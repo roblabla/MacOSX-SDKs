@@ -214,6 +214,21 @@ extern NSString *const ICDownloadSidecarFiles;
 */
 - (void)deviceDidBecomeReadyWithCompleteContentCatalog:(ICDevice*)device;
 
+/*!
+ @method cameraDevice:shouldGetThumbnailOfItem:
+ @abstract This message is sent when the camera device is about to execute queued requests for the thumbnail of a specific item.
+ If the request is no longer wanted, eg: the item is no longer displayed on the screen, the client can return NO and abort sending
+ a request down to the camera device, speeding up the exection queue.
+ */
+- (BOOL)cameraDevice:(ICCameraDevice*)cameraDevice shouldGetThumbnailOfItem:(ICCameraItem*)item;
+
+/*!
+ @abstract This message is sent when the camera device is about to execute queued requests for the metadata of a specific item.
+ If the request is no longer wanted, eg: the item is no longer displayed on the screen, the client can return NO and abort sending
+ a request down to the camera device, speeding up the execution queue.
+ */
+- (BOOL)cameraDevice:(ICCameraDevice*)cameraDevice shouldGetMetadataOfItem:(ICCameraItem*)item;
+
 @end
 
 //----------------------------------------------------------------------------------------------- ICCameraDeviceDownloadDelegate

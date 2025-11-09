@@ -1,23 +1,34 @@
 //
 //  SceneKitTypes.h
 //
-//  Copyright (c) 2012-2013 Apple Inc. All rights reserved.
+//  Copyright (c) 2012-2014 Apple Inc. All rights reserved.
 //
 
 #import <QuartzCore/QuartzCore.h>
 #import <GLKit/GLKMathTypes.h>
 
 /*! @header SceneKitTypes
-    @abstract Various types and utility functions used throughout Scene Kit
+    @abstract Various types and utility functions used throughout SceneKit
  */
 
-typedef struct {
+
+typedef CATransform3D SCNMatrix4;
+
+typedef struct SCNVector3 {
 	CGFloat x, y, z;
 } SCNVector3;
 
-typedef struct {
+typedef struct SCNVector4 {
 	CGFloat x, y, z, w;
 } SCNVector4;
+
+typedef SCNVector4 SCNQuaternion;
+
+
+
+SCN_EXTERN const SCNMatrix4 SCNMatrix4Identity SCENEKIT_AVAILABLE (10_10, 8_0);
+SCN_EXTERN const SCNVector3 SCNVector3Zero SCENEKIT_AVAILABLE (10_10, 8_0);
+SCN_EXTERN const SCNVector4 SCNVector4Zero SCENEKIT_AVAILABLE (10_10, 8_0);
 
 /*! Returns true if 'a' is exactly equal to 'b'. */
 SCN_EXTERN bool SCNVector3EqualToVector3 (SCNVector3 a, SCNVector3 b);
@@ -37,9 +48,42 @@ NS_INLINE SCNVector4 SCNVector4Make(CGFloat x, CGFloat y, CGFloat z, CGFloat w) 
     return v;
 }
 
+NS_INLINE SCNMatrix4 SCNMatrix4MakeTranslation(CGFloat x, CGFloat y, CGFloat z) {
+    SCNMatrix4 m = SCNMatrix4Identity;
+    m.m41 = x;
+    m.m42 = y;
+    m.m43 = z;
+    return m;
+}
+
+NS_INLINE SCNMatrix4 SCNMatrix4MakeScale(CGFloat sx, CGFloat sy, CGFloat sz) {
+    SCNMatrix4 m = SCNMatrix4Identity;
+    m.m11 = sx;
+    m.m22 = sy;
+    m.m33 = sz;
+    return m;
+}
+
+NS_INLINE SCNMatrix4 SCNMatrix4Translate(SCNMatrix4 mat, CGFloat x, CGFloat y, CGFloat z) {
+    mat.m41 += x;
+    mat.m42 += y;
+    mat.m43 += z;
+    return mat;
+}
+
+SCN_EXTERN SCNMatrix4 SCNMatrix4MakeRotation(CGFloat angle, CGFloat x, CGFloat y, CGFloat z) SCENEKIT_AVAILABLE(10_10, 8_0);
+SCN_EXTERN SCNMatrix4 SCNMatrix4Scale(SCNMatrix4 mat, CGFloat x, CGFloat y, CGFloat z) SCENEKIT_AVAILABLE(10_10, 8_0);
+SCN_EXTERN SCNMatrix4 SCNMatrix4Rotate(SCNMatrix4 mat, CGFloat angle, CGFloat x, CGFloat y, CGFloat z) SCENEKIT_AVAILABLE(10_10, 8_0);
+
+SCN_EXTERN SCNMatrix4 SCNMatrix4Invert(SCNMatrix4 mat) SCENEKIT_AVAILABLE(10_10, 8_0);
+SCN_EXTERN SCNMatrix4 SCNMatrix4Mult(SCNMatrix4 matA, SCNMatrix4 matB) SCENEKIT_AVAILABLE(10_10, 8_0);
+SCN_EXTERN bool       SCNMatrix4IsIdentity(SCNMatrix4 mat) SCENEKIT_AVAILABLE(10_10, 8_0);
+SCN_EXTERN bool       SCNMatrix4EqualToMatrix4(SCNMatrix4 matA, SCNMatrix4 matB) SCENEKIT_AVAILABLE(10_10, 8_0);
+
+/* GLKit bridge */
 NS_INLINE SCNVector3 SCNVector3FromGLKVector3(GLKVector3 vector) {
 #if CGFLOAT_IS_DOUBLE
-    SCNVector3 v = {vector.x, vector.y, vector.z};
+    SCNVector3 v = {vector.v[0], vector.v[1], vector.v[2]};
     return v;
 #else
     return *(SCNVector3 *)&vector;
@@ -57,7 +101,7 @@ NS_INLINE GLKVector3 SCNVector3ToGLKVector3(SCNVector3 vector) {
 
 NS_INLINE SCNVector4 SCNVector4FromGLKVector4(GLKVector4 vector) {
 #if CGFLOAT_IS_DOUBLE
-    SCNVector4 v = {vector.x, vector.y, vector.z, vector.w};
+    SCNVector4 v = {vector.v[0], vector.v[1], vector.v[2], vector.v[3]};
     return v;
 #else
     return *(SCNVector4 *)&vector;
@@ -73,33 +117,15 @@ NS_INLINE GLKVector4 SCNVector4ToGLKVector4(SCNVector4 vector) {
 #endif
 }
 
-NS_INLINE GLKMatrix4 _SCNGLKMatrix4FromCATransform3D(CATransform3D transform) {
-#if CGFLOAT_IS_DOUBLE
-    GLKMatrix4 m = {{(float)transform.m11, (float)transform.m12, (float)transform.m13, (float)transform.m14,
-        (float)transform.m21, (float)transform.m22, (float)transform.m23, (float)transform.m24,
-        (float)transform.m31, (float)transform.m32, (float)transform.m33, (float)transform.m34,
-        (float)transform.m41, (float)transform.m42, (float)transform.m43, (float)transform.m44}};
-    return m;
-#else
-    return *(GLKMatrix4 *)&transform;
-#endif
-}
+SCN_EXTERN GLKMatrix4 SCNMatrix4ToGLKMatrix4(SCNMatrix4 mat) SCENEKIT_AVAILABLE(10_10, 8_0);
+SCN_EXTERN SCNMatrix4 SCNMatrix4FromGLKMatrix4(GLKMatrix4 mat) SCENEKIT_AVAILABLE(10_10, 8_0);
+#define GLKMatrix4FromCATransform3D(X) SCNMatrix4ToGLKMatrix4(X)
+#define GLKMatrix4ToCATransform3D(X)   SCNMatrix4FromGLKMatrix4(X)
+    
+//SIMD bridge
+#import <SceneKit/SceneKit_simd.h>
 
-NS_INLINE CATransform3D _SCNGLKMatrix4ToCATransform3D(GLKMatrix4 matrix) {
-#if CGFLOAT_IS_DOUBLE
-    CATransform3D transform = {matrix.m00, matrix.m01, matrix.m02, matrix.m03,
-        matrix.m10, matrix.m11, matrix.m12, matrix.m13,
-        matrix.m20, matrix.m21, matrix.m22, matrix.m23,
-        matrix.m30, matrix.m31, matrix.m32, matrix.m33};
-    return transform;
-#else
-    return *(CATransform3D *)&matrix;
-#endif
-}
-
-#define GLKMatrix4FromCATransform3D(X) _SCNGLKMatrix4FromCATransform3D(X)
-#define GLKMatrix4ToCATransform3D(X)   _SCNGLKMatrix4ToCATransform3D(X)
-
+    
 #ifdef __OBJC__
 
 /*! @category NSValue(SceneKitAdditions)
@@ -110,9 +136,11 @@ NS_INLINE CATransform3D _SCNGLKMatrix4ToCATransform3D(GLKMatrix4 matrix) {
 
 + (NSValue *)valueWithSCNVector3:(SCNVector3)v;
 + (NSValue *)valueWithSCNVector4:(SCNVector4)v;
++ (NSValue *)valueWithSCNMatrix4:(SCNMatrix4)v SCENEKIT_AVAILABLE(10_10, 8_0);
 
-- (SCNVector3)SCNVector3Value;
-- (SCNVector4)SCNVector4Value;
+@property(readonly) SCNVector3 SCNVector3Value;
+@property(readonly) SCNVector4 SCNVector4Value;
+@property(readonly) SCNMatrix4 SCNMatrix4Value SCENEKIT_AVAILABLE (10_10, 8_0);
 
 @end
 

@@ -1,7 +1,7 @@
 /*
         NSTabView.h
         Application Kit
-        Copyright (c) 2000-2013, Apple Inc.
+        Copyright (c) 2000-2014, Apple Inc.
         All rights reserved.
 */
 
@@ -14,7 +14,7 @@
 
 #define NSAppKitVersionNumberWithDirectionalTabs 631.0
 
-enum {
+typedef NS_ENUM(NSUInteger, NSTabViewType) {
     NSTopTabsBezelBorder	= 0,			// the default
     NSLeftTabsBezelBorder	= 1,
     NSBottomTabsBezelBorder	= 2,
@@ -23,12 +23,10 @@ enum {
     NSNoTabsLineBorder		= 5,
     NSNoTabsNoBorder		= 6
 };
-typedef NSUInteger NSTabViewType;
 
 @interface NSTabView : NSView
 {
-    @private
-    	
+@private
     	/* Persistent properties */
     
     id	_tabViewItems;                          	// array of NSTabViewItem
@@ -70,7 +68,9 @@ typedef NSUInteger NSTabViewType;
         unsigned int originalNextKeyViewChanged:1;
 	unsigned int liveResizeSkippedResetToolTips:1;
         unsigned int subviewsAddedForTabs:1;
-        unsigned int reserved:21;
+        unsigned int allowsPropertyChange:1;
+        unsigned int ownedByTabViewController:1;
+        unsigned int reserved:19;
     } _flags;
     NSTabViewItem 	*_focusedTabViewItem;			
     void		*_tabViewUnused2;
@@ -92,24 +92,15 @@ typedef NSUInteger NSTabViewType;
 
 	/* Getters */
 
-- (NSTabViewItem *)selectedTabViewItem;					// return nil if none are selected
-- (NSFont *)font;							// returns font used for all tab labels.
-- (NSTabViewType)tabViewType;
-- (NSArray *)tabViewItems;
-- (BOOL)allowsTruncatedLabels;
-- (NSSize)minimumSize;							// returns the minimum size of the tab view
-- (BOOL)drawsBackground;  						// only relevant for borderless tab view type
-- (NSControlTint)controlTint;
-- (NSControlSize)controlSize;
-
-	/* Setters */
-
-- (void)setFont:(NSFont *)font;
-- (void)setTabViewType:(NSTabViewType)tabViewType;
-- (void)setAllowsTruncatedLabels:(BOOL)allowTruncatedLabels;
-- (void)setDrawsBackground:(BOOL)flag;  					// only relevant for borderless tab view type
-- (void)setControlTint:(NSControlTint)controlTint;
-- (void)setControlSize:(NSControlSize)controlSize;
+@property (readonly, strong) NSTabViewItem *selectedTabViewItem;					// return nil if none are selected
+@property (strong) NSFont *font;							// returns font used for all tab labels.
+@property NSTabViewType tabViewType;
+@property (readonly, copy) NSArray *tabViewItems;
+@property BOOL allowsTruncatedLabels;
+@property (readonly) NSSize minimumSize;							// returns the minimum size of the tab view
+@property BOOL drawsBackground;  						// only relevant for borderless tab view type
+@property NSControlTint controlTint;
+@property NSControlSize controlSize;
 
 	/* Add/Remove tabs */
 
@@ -119,8 +110,7 @@ typedef NSUInteger NSTabViewType;
 
 	/* Delegate */
 
-- (void)setDelegate:(id <NSTabViewDelegate>)anObject;
-- (id <NSTabViewDelegate>)delegate;
+@property (assign) id<NSTabViewDelegate> delegate;
 
 	/* Hit testing */
 
@@ -128,11 +118,11 @@ typedef NSUInteger NSTabViewType;
 
 	/* Geometry */
 
-- (NSRect)contentRect;							// Return the rect available for a "page". 
+@property (readonly) NSRect contentRect;							// Return the rect available for a "page". 
 
 	/* Query */
 
-- (NSInteger)numberOfTabViewItems;
+@property (readonly) NSInteger numberOfTabViewItems;
 - (NSInteger)indexOfTabViewItem:(NSTabViewItem *)tabViewItem;			// NSNotFound if not found
 - (NSTabViewItem *)tabViewItemAtIndex:(NSInteger)index;			// May raise an NSRangeException	
 - (NSInteger)indexOfTabViewItemWithIdentifier:(id)identifier;			// NSNotFound if not found

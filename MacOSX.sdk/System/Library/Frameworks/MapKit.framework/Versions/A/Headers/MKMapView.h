@@ -2,7 +2,7 @@
 //  MKMapView.h
 //  MapKit
 //
-//  Copyright (c) 2009-2013, Apple Inc. All rights reserved.
+//  Copyright (c) 2009-2014, Apple Inc. All rights reserved.
 //
 
 #import <MapKit/MKAnnotationView.h>
@@ -34,7 +34,7 @@ MK_CLASS_AVAILABLE(10_9, NA)
 @interface MKMapView : NSView <NSCoding>
 #endif
 
-@property (nonatomic, assign) id <MKMapViewDelegate> delegate;
+@property (nonatomic, weak) id <MKMapViewDelegate> delegate;
 
 // Changing the map type or region can cause the map to start loading map content.
 // The loading delegate methods will be called as map content is loaded.
@@ -94,6 +94,7 @@ MK_CLASS_AVAILABLE(10_9, NA)
 #if !TARGET_OS_IPHONE
 @property (nonatomic) BOOL showsCompass NS_AVAILABLE(10_9, NA);
 @property (nonatomic) BOOL showsZoomControls NS_AVAILABLE(10_9, NA);
+@property (nonatomic) BOOL showsScale NS_AVAILABLE(10_10, NA);
 #endif
 
 @property (nonatomic) BOOL showsPointsOfInterest NS_AVAILABLE(10_9, 7_0); // Affects MKMapTypeStandard and MKMapTypeHybrid
@@ -170,7 +171,7 @@ typedef NS_ENUM(NSInteger, MKOverlayLevel) {
 @property (nonatomic, readonly) NSArray *overlays NS_AVAILABLE(10_9, 4_0);
 - (NSArray *)overlaysInLevel:(MKOverlayLevel)level NS_AVAILABLE(10_9, 7_0);
 
-// Current renderer for overlay; returns nil if the overlay is not not shown.
+// Current renderer for overlay; returns nil if the overlay is not shown.
 - (MKOverlayRenderer *)rendererForOverlay:(id <MKOverlay>)overlay NS_AVAILABLE(10_9, 7_0);
 
 #if TARGET_OS_IPHONE

@@ -1,7 +1,7 @@
 /*
         NSStatusBar.h
         Application Kit
-        Copyright (c) 1997-2013, Apple Inc.
+        Copyright (c) 1997-2014, Apple Inc.
         All rights reserved.
 */
 
@@ -13,8 +13,8 @@
 @class NSStatusItem;
 @class NSMutableArray;
 
-#define	NSVariableStatusItemLength	(-1)
-#define	NSSquareStatusItemLength	(-2)
+static const CGFloat NSVariableStatusItemLength = -1.0;
+static const CGFloat NSSquareStatusItemLength = -2.0;
 
 @interface NSStatusBar : NSObject
 {
@@ -30,7 +30,7 @@
 - (NSStatusItem*)statusItemWithLength:(CGFloat)length;
 - (void)removeStatusItem:(NSStatusItem*)item;
 
-- (BOOL)isVertical;
-- (CGFloat)thickness;
+@property (getter=isVertical, readonly) BOOL vertical;
+@property (readonly) CGFloat thickness;
 
 @end

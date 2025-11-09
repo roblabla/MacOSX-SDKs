@@ -12,7 +12,7 @@
 
 /*  mapping types */
 
-enum {
+typedef NS_ENUM(NSUInteger, NSEntityMappingType) {
     NSUndefinedEntityMappingType    = 0x00,
     NSCustomEntityMappingType       = 0x01,         /* developer handles destination instance creation */
     NSAddEntityMappingType          = 0x02,         /* new entity in destination */
@@ -20,7 +20,6 @@ enum {
     NSCopyEntityMappingType         = 0x04,         /* migrate instances as-is */
     NSTransformEntityMappingType    = 0x05,         /* entity exists in source and destination and is mapped */
 };
-typedef NSUInteger NSEntityMappingType;
 
 NS_CLASS_AVAILABLE(10_5,3_0)
 @interface NSEntityMapping : NSObject {
@@ -50,57 +49,46 @@ NS_CLASS_AVAILABLE(10_5,3_0)
 
 /* Returns/sets the name of the mapping. The name is used only as a means of distinguishing mappings in a model.  If not specified, defaults to the string composed by the source entity name followed by the destination entity name (ex. SourceName->DestinationName)
 */
-- (NSString *)name;
-- (void)setName:(NSString *)name;
+@property (copy) NSString *name;
 
 /* Returns/sets the mapping type.  (If a custom entity mapping type is utilized, the developer must specify a migrationPolicyClassName as well.) 
 */
-- (NSEntityMappingType)mappingType;
-- (void)setMappingType:(NSEntityMappingType)type;
+@property () NSEntityMappingType mappingType;
 
 /* Returns/sets the source entity name for the mapping.  (Mappings are not directly bound to NSEntityDescriptions;  developers can use the sourceEntityForEntityMapping: API on the NSMigrationManager to retrieve the entity description for this name.)
 */
-- (NSString *)sourceEntityName;
-- (void)setSourceEntityName:(NSString *)name;
+@property (copy) NSString *sourceEntityName;
 
 /* Returns/sets the version hash for the source entity for the mapping.  VersionHashes are calculated by the Core Data framework (see NSEntityDescrition's versionHash method). The sourceEntityVersionHash must equal the version hash of the source entity represented by the mapping.
 */
-- (NSData *)sourceEntityVersionHash;
-- (void)setSourceEntityVersionHash:(NSData *)vhash;
+@property (copy) NSData *sourceEntityVersionHash;
 
 /* Returns/sets the destination entity name for the mapping.  (Mappings are not directly bound to NSEntityDescriptions;  developers can use the destinationEntityForEntityMapping: API on the NSMigrationManager to retrieve the entity description for this name.)
 */
-- (NSString *)destinationEntityName;
-- (void)setDestinationEntityName:(NSString *)name;
+@property (copy) NSString *destinationEntityName;
 
 /* Returns/sets the version hash for the destination entity for the mapping.  VersionHashes are calculated by the Core Data framework (see NSEntityDescrition's versionHash method). The destinationEntityVersionHash must equal the version hash of the destination entity represented by the mapping.
 */
-- (NSData *)destinationEntityVersionHash;
-- (void)setDestinationEntityVersionHash:(NSData *)vhash;
+@property (copy) NSData *destinationEntityVersionHash;
 
 /* Returns/sets the array of attribute mappings for the entity mapping.  The order of mappings in this collection dictates the order in which the mappings will be processed during a migration.
 */
-- (NSArray *)attributeMappings;
-- (void)setAttributeMappings:(NSArray *)mappings;
+@property (strong) NSArray *attributeMappings;
 
 /* Returns/sets the array of relationship mappings for the entity mapping.  The order of mappings in this collection dictates the order in which the mappings will be processed during a migration.
 */
-- (NSArray *)relationshipMappings;
-- (void)setRelationshipMappings:(NSArray *)mappings;
+@property (strong) NSArray *relationshipMappings;
 
 /* Returns/sets the source expression for the mapping.  The source expression is used to obtain the collection of managed object instances to process through the mapping.  The expression can be a fetch request expression, or any other expression which evaluates to a collection.  
 */
-- (NSExpression *)sourceExpression;
-- (void)setSourceExpression:(NSExpression *)source;
+@property (strong) NSExpression *sourceExpression;
 
 /* Returns/sets the user info dictionary for the mapping
 */
-- (NSDictionary *)userInfo;
-- (void)setUserInfo:(NSDictionary *)dict;
+@property (nonatomic, strong) NSDictionary *userInfo;
 
 /* Returns/sets the class name of the migration policy for the class.  If not specified, the default migration class name is NSEntityMigrationPolicy, though developers can specify a subclass for specific behavior.
 */
-- (NSString *)entityMigrationPolicyClassName;
-- (void)setEntityMigrationPolicyClassName:(NSString *)name;
+@property (copy) NSString *entityMigrationPolicyClassName;
 
 @end

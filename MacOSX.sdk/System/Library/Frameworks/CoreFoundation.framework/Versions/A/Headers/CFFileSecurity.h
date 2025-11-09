@@ -2,7 +2,7 @@
  *  CFFileSecurity.h
  *  NSFileSecurity and CFFileSecurity are toll-free bridged.
  *
- *  Copyright (c) 2010-2013, Apple Inc. All rights reserved.
+ *  Copyright (c) 2010-2014, Apple Inc. All rights reserved.
  */
 
 #if (TARGET_OS_MAC || TARGET_OS_EMBEDDED || TARGET_OS_IPHONE) || CF_BUILDING_CF || NSBUILDINGFOUNDATION
@@ -15,13 +15,14 @@
 #include <sys/fcntl.h>
 #include <CoreFoundation/CFUUID.h>
 
+CF_IMPLICIT_BRIDGING_ENABLED
 CF_EXTERN_C_BEGIN
 
 /*
  *	A CFFileSecurity object encapulates a file system object's security information
  *	in a CF object.
  */
-typedef struct __CFFileSecurity* CFFileSecurityRef;
+typedef struct CF_BRIDGED_MUTABLE_TYPE(NSFileSecurity) __CFFileSecurity* CFFileSecurityRef;
 
 /*
  *	Returns the type identifier for the CFFileSecurity opaque type.
@@ -284,6 +285,7 @@ Boolean CFFileSecurityClearProperties(CFFileSecurityRef fileSec, CFFileSecurityC
 
 
 CF_EXTERN_C_END
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #endif /* ! __COREFOUNDATION_CFFILESECURITY__ */
 #endif

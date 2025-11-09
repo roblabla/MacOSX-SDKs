@@ -231,6 +231,9 @@ const xpc_object_t XPC_ACTIVITY_CHECK_IN;
  *
  * @param identifier
  * A unique identifier for the activity. Each application has its own namespace.
+ * The identifier should remain constant across registrations, relaunches of
+ * the application, and reboots. It should identify the kind of work being done,
+ * not a particular invocation of the work.
  *
  * @param criteria
  * A dictionary of criteria for the activity.
@@ -311,7 +314,13 @@ xpc_activity_set_criteria(xpc_activity_t activity, xpc_object_t criteria);
  * that the activity should be deferred (placed back into the WAIT state) until
  * a time when its criteria are met again. Deferring an activity does not reset
  * any of its time-based criteria (in other words, it will remain past due).
+ *
+ * IMPORTANT:
  * This should be done in response to observing xpc_activity_should_defer().
+ * It should not be done unilaterally. If you determine that conditions are bad
+ * to do your activity's work for reasons you can't express in a criteria
+ * dictionary, you should set the activity's state to XPC_ACTIVITY_STATE_DONE.
+ *
  *
  * @constant XPC_ACTIVITY_STATE_CONTINUE
  * An application may pass this value to xpc_activity_set_state() to indicate

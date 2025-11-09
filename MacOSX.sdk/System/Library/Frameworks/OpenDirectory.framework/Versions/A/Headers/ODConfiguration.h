@@ -170,7 +170,7 @@ NS_CLASS_AVAILABLE(10_9, NA)
  * @discussion
  * Returns an initialized and autoreleased ODConfiguration object.
  */
-+ (id)configuration;
++ (instancetype)configuration;
 
 /*!
  * @method suggestedTrustAccount:

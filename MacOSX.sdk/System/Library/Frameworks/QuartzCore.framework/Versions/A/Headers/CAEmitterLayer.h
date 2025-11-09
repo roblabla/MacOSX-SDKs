@@ -1,6 +1,6 @@
 /* CoreAnimation - CAEmitterLayer.h
 
-   Copyright (c) 2007-2012 Apple Inc.
+   Copyright (c) 2007-2014, Apple Inc.
    All rights reserved. */
 
 /* Particle emitter layer.

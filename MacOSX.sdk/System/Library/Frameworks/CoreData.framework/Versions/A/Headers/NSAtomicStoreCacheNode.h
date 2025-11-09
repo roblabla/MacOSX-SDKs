@@ -20,18 +20,14 @@ NS_CLASS_AVAILABLE(10_5,3_0)
 }
 
 /* The designated initializer for the cache node. */
-- (id)initWithObjectID:(NSManagedObjectID *)moid;
+- (instancetype)initWithObjectID:(NSManagedObjectID *)moid;
 
 /* Returns the managed object ID for the cache node. */
-- (NSManagedObjectID*)objectID;
+@property (nonatomic, readonly, strong) NSManagedObjectID *objectID;
 
 /* Returns the property cache dictionary for the cache node.  This dictionary is used by -valueForKey: and -setValue:forKey: for property values.  The default implementation will return nil unless the companion -setPropertyCache: method is invoked, or -setValue:forKey: is invoked on the cache node with non-nil property values.
 */
-- (NSMutableDictionary *)propertyCache;
-
-/* Sets the property cache dictionary for the cache node.
-*/
-- (void)setPropertyCache:(NSMutableDictionary *)propertyCache;
+@property (nonatomic, strong) NSMutableDictionary *propertyCache;
 
 
 /* Returns the value for the specified key.  Subclasses must return the appropriate object value for all property keys (as specified by the names of the NSPropertyDescriptions for the entity of this cache node.)  For attributes, these are instances of NSObject; for to-one relationships, the return value must be another cache node instance; for a to-many relationship, the return value must be an NSSet of the related cache nodes.  

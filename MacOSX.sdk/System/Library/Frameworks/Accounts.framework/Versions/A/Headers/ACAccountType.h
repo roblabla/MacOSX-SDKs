@@ -40,12 +40,12 @@ ACCOUNTS_CLASS_AVAILABLE(10_8, 5_0)
 @interface ACAccountType : NSObject
 
 // A human readable description of the account type.
-@property (readonly, NS_NONATOMIC_IOSONLY) NSString *accountTypeDescription;
+@property (readonly, nonatomic) NSString *accountTypeDescription;
 
 // A unique identifier for the account type. Well known system account type identifiers are listed above.
-@property (readonly, NS_NONATOMIC_IOSONLY) NSString *identifier;
+@property (readonly, nonatomic) NSString *identifier;
 
 // A boolean indicating whether the user has granted access to accounts of this type for your application.
-@property (readonly, NS_NONATOMIC_IOSONLY) BOOL     accessGranted;
+@property (readonly, nonatomic) BOOL     accessGranted;
 
 @end

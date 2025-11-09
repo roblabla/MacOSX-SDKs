@@ -1,5 +1,5 @@
 /*	NSPropertyList.h
-	Copyright (c) 2002-2013, Apple Inc. All rights reserved.
+	Copyright (c) 2002-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -47,13 +47,13 @@ typedef NSUInteger NSPropertyListWriteOptions;
 + (id)propertyListWithStream:(NSInputStream *)stream options:(NSPropertyListReadOptions)opt format:(NSPropertyListFormat *)format error:(out NSError **)error NS_AVAILABLE(10_6, 4_0);
 
 
-/* This method is obsolete and will be deprecated soon. Use dataWithPropertyList:format:options:error: instead.
+/* This method is deprecated. Use dataWithPropertyList:format:options:error: instead.
  */
-+ (NSData *)dataFromPropertyList:(id)plist format:(NSPropertyListFormat)format errorDescription:(out __strong NSString **)errorString;
++ (NSData *)dataFromPropertyList:(id)plist format:(NSPropertyListFormat)format errorDescription:(out __strong NSString **)errorString NS_DEPRECATED(10_0, 10_10, 2_0, 8_0, "Use dataWithPropertyList:format:options:error: instead.");
 
-/* This method is obsolete and will be deprecated soon. Use propertyListWithData:options:format:error: instead.
+/* This method is deprecated. Use propertyListWithData:options:format:error: instead.
  */
-+ (id)propertyListFromData:(NSData *)data mutabilityOption:(NSPropertyListMutabilityOptions)opt format:(NSPropertyListFormat *)format errorDescription:(out __strong NSString **)errorString;
++ (id)propertyListFromData:(NSData *)data mutabilityOption:(NSPropertyListMutabilityOptions)opt format:(NSPropertyListFormat *)format errorDescription:(out __strong NSString **)errorString NS_DEPRECATED(10_0, 10_10, 2_0, 8_0, "Use propertyListWithData:options:format:error: instead.");
 
 @end
 

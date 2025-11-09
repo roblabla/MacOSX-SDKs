@@ -716,13 +716,16 @@ AudioFileWriteBytes (	AudioFileID  	inAudioFile,
 /*!
     @function	AudioFileReadPacketData
     @abstract   Read packets of audio data from the audio file.
-    @discussion For all uncompressed formats, packets == frames.
+    @discussion AudioFileReadPacketData reads as many of the requested number of packets
+				as will fit in the buffer size given by ioNumPackets.
+				Unlike the deprecated AudioFileReadPackets, ioNumPackets must be initialized.
 				If the byte size of the number packets requested is 
 				less than the buffer size, ioNumBytes will be reduced.
 				If the buffer is too small for the number of packets 
 				requested, ioNumPackets and ioNumBytes will be reduced 
 				to the number of packets that can be accommodated and their byte size.
 				Returns kAudioFileEndOfFileError when read encounters end of file.
+				For all uncompressed formats, packets == frames.
 
     @param inAudioFile				an AudioFileID.
     @param inUseCache 				true if it is desired to cache the data upon read, else false
@@ -751,9 +754,13 @@ AudioFileReadPacketData (	AudioFileID  					inAudioFile,
 /*!
     @function	AudioFileReadPackets
     @abstract   Read packets of audio data from the audio file.
-    @discussion For all uncompressed formats, packets == frames.
-				ioNumPackets less than requested indicates end of file.
-
+    @discussion AudioFileReadPackets is DEPRECATED. Use AudioFileReadPacketData instead.
+				READ THE HEADER DOC FOR AudioFileReadPacketData. It is not a drop-in replacement.
+				In particular, for AudioFileReadPacketData ioNumBytes must be initialized to the buffer size.
+				AudioFileReadPackets assumes you have allocated your buffer to ioNumPackets times the maximum packet size.
+				For many compressed formats this will only use a portion of the buffer since the ratio of the maximum 
+				packet size to the typical packet size can be large. Use AudioFileReadPacketData instead.
+	
     @param inAudioFile				an AudioFileID.
     @param inUseCache 				true if it is desired to cache the data upon read, else false
     @param outNumBytes				on output, the number of bytes actually returned
@@ -775,7 +782,7 @@ AudioFileReadPackets (	AudioFileID  					inAudioFile,
                         AudioStreamPacketDescription	*outPacketDescriptions,
                         SInt64							inStartingPacket, 
                         UInt32  						*ioNumPackets, 
-                        void							*outBuffer)			__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
+                        void							*outBuffer)			__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_10, __IPHONE_2_0,__IPHONE_8_0);
 
 /*!
     @function	AudioFileWritePackets

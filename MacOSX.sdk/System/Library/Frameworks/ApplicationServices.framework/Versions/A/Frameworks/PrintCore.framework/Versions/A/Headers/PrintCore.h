@@ -22,24 +22,12 @@
 #include <ColorSync/ColorSync.h>
 #endif
 
-#ifndef __QD__
-#include <QD/QD.h>
-#endif
-
 #ifndef __PMDEFINITIONS__
 #include <PrintCore/PMDefinitions.h>
 #endif
 
 #ifndef __PMCORE__
 #include <PrintCore/PMCore.h>
-#endif
-
-#ifndef __PMDEFINITIONS_DEPRECATED__
-#include <PrintCore/PMDefinitionsDeprecated.h>
-#endif
-
-#ifndef __PMCORE_DEPRECATED__
-#include <PrintCore/PMCoreDeprecated.h>
 #endif
 
 #ifndef __PMPrintAETypes__

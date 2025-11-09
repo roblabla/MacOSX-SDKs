@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2008-2013 Apple Inc. All rights reserved.
+ * Copyright (c) 2008-2014 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -202,10 +202,7 @@ typedef u_int32_t mbuf_csum_performed_flags_t;
 /*!
 	@enum mbuf_how_t
 	@abstract Method of allocating an mbuf.
-	@discussion Blocking will cause the funnel to be dropped. If the
-		funnel is dropped, other threads may make changes to networking
-		data structures. This can lead to very bad things happening.
-		Blocking on the input our output path can also impact
+	@discussion Blocking on the input or output path can impact
 		performance. There are some cases where making a blocking call
 		is acceptable. When in doubt, use MBUF_DONTWAIT.
 	@constant MBUF_WAITOK Allow a call to allocate an mbuf to block.
@@ -947,6 +944,7 @@ extern size_t mbuf_pkthdr_len(const mbuf_t mbuf);
  */
 extern void mbuf_pkthdr_setlen(mbuf_t mbuf, size_t len);
 
+
 /*!
 	@function mbuf_pkthdr_adjustlen
 	@discussion Adjusts the length of the packet in the packet header.
@@ -1354,6 +1352,7 @@ extern errno_t mbuf_set_traffic_class(mbuf_t mbuf, mbuf_traffic_class_t tc);
 	@result Non-zero if privileged, 0 otherwise.
  */
 extern int mbuf_is_traffic_class_privileged(mbuf_t mbuf);
+
 
 
 /* IF_QUEUE interaction */

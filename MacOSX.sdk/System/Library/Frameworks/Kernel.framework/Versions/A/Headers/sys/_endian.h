@@ -112,10 +112,16 @@ __END_DECLS
 #define htonl(x)        ((__uint32_t)(x))
 #define htons(x)        ((__uint16_t)(x))
 
+
+#define ntohll(x)       ((__uint64_t)(x))
+#define htonll(x)       ((__uint64_t)(x))
+
 #define NTOHL(x)        (x)
 #define NTOHS(x)        (x)
+#define NTOHLL(x)       (x)
 #define HTONL(x)        (x)
 #define HTONS(x)        (x)
+#define HTONLL(x)       (x)
 
 #else	/* __DARWIN_BYTE_ORDER == __DARWIN_LITTLE_ENDIAN */
 
@@ -127,9 +133,15 @@ __END_DECLS
 #define ntohl(x)	__DARWIN_OSSwapInt32(x)
 #define htonl(x)	__DARWIN_OSSwapInt32(x)
 
+
+#define ntohll(x)       __DARWIN_OSSwapInt64(x)
+#define htonll(x)       __DARWIN_OSSwapInt64(x)
+
 #define	NTOHL(x)	(x) = ntohl((__uint32_t)x)
 #define	NTOHS(x)	(x) = ntohs((__uint16_t)x)
+#define	NTOHLL(x)	(x) = ntohll((__uint64_t)x)
 #define	HTONL(x)	(x) = htonl((__uint32_t)x)
 #define	HTONS(x)	(x) = htons((__uint16_t)x)
+#define	HTONLL(x)	(x) = htonll((__uint64_t)x)
 #endif /* __DARWIN_BYTE_ORDER */
 #endif /* !_SYS__ENDIAN_H_ */

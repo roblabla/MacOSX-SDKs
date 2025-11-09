@@ -1,7 +1,7 @@
 /*
 	NSForm.h
 	Application Kit
-	Copyright (c) 1994-2013, Apple Inc.
+	Copyright (c) 1994-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -9,6 +9,7 @@
 
 @class NSFormCell;
 
+NS_CLASS_DEPRECATED_MAC(10_0, 10_10, "Use NSTextField directly instead, and consider NSStackView for layout assistance")
 @interface  NSForm : NSMatrix
 
 - (NSInteger)indexOfSelectedItem;

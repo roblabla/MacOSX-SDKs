@@ -11,10 +11,10 @@
  *    notice, this list of conditions and the following disclaimer in the
  *    documentation and/or other materials provided with the distribution.
  *
- * THIS SOFTWARE IS PROVIDED BY APPLE COMPUTER, INC. ``AS IS'' AND ANY
+ * THIS SOFTWARE IS PROVIDED BY APPLE INC. ``AS IS'' AND ANY
  * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL APPLE COMPUTER, INC. OR
+ * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL APPLE INC. OR
  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
@@ -26,20 +26,17 @@
 
 #import <WebKit/DOMObject.h>
 
-#if WEBKIT_VERSION_MAX_ALLOWED >= WEBKIT_VERSION_1_3
-
 @class DOMHTMLOptionElement;
 @class DOMNode;
 @class NSString;
 
+NS_CLASS_AVAILABLE_MAC(10_4)
 @interface DOMHTMLOptionsCollection : DOMObject
-@property int selectedIndex AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+@property int selectedIndex NS_AVAILABLE_MAC(10_5);
 @property unsigned length;
 
 - (DOMNode *)namedItem:(NSString *)name;
-- (void)add:(DOMHTMLOptionElement *)option index:(unsigned)index AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
-- (void)remove:(unsigned)index AVAILABLE_IN_WEBKIT_VERSION_4_0;
+- (void)add:(DOMHTMLOptionElement *)option index:(unsigned)index NS_AVAILABLE_MAC(10_5);
+- (void)remove:(unsigned)index NS_AVAILABLE_MAC(10_6);
 - (DOMNode *)item:(unsigned)index;
 @end
-
-#endif

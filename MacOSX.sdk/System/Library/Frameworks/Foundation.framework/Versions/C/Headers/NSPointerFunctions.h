@@ -1,7 +1,7 @@
 /*
  *  NSPointerFunctions.h
  *
- *  Copyright (c) 2005-2013, Apple Inc. All rights reserved.
+ *  Copyright (c) 2005-2014, Apple Inc. All rights reserved.
  *
  */
  
@@ -56,8 +56,8 @@ typedef NSUInteger NSPointerFunctionsOptions;
 NS_CLASS_AVAILABLE(10_5, 6_0)
 @interface NSPointerFunctions : NSObject <NSCopying>
 // construction
-- (id)initWithOptions:(NSPointerFunctionsOptions)options;
-+ (id)pointerFunctionsWithOptions:(NSPointerFunctionsOptions)options;
+- (instancetype)initWithOptions:(NSPointerFunctionsOptions)options NS_DESIGNATED_INITIALIZER;
++ (NSPointerFunctions *)pointerFunctionsWithOptions:(NSPointerFunctionsOptions)options;
 
 // pointer personality functions
 @property NSUInteger (*hashFunction)(const void *item, NSUInteger (*size)(const void *item));

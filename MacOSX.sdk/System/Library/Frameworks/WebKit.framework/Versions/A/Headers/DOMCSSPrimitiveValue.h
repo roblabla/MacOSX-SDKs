@@ -11,10 +11,10 @@
  *    notice, this list of conditions and the following disclaimer in the
  *    documentation and/or other materials provided with the distribution.
  *
- * THIS SOFTWARE IS PROVIDED BY APPLE COMPUTER, INC. ``AS IS'' AND ANY
+ * THIS SOFTWARE IS PROVIDED BY APPLE INC. ``AS IS'' AND ANY
  * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL APPLE COMPUTER, INC. OR
+ * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL APPLE INC. OR
  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
@@ -25,8 +25,6 @@
  */
 
 #import <WebKit/DOMCSSValue.h>
-
-#if WEBKIT_VERSION_MAX_ALLOWED >= WEBKIT_VERSION_1_3
 
 @class DOMCounter;
 @class DOMRGBColor;
@@ -64,14 +62,15 @@ enum {
     DOM_CSS_VH = 27,
     DOM_CSS_VMIN = 28,
     DOM_CSS_VMAX = 29
-};
+} NS_ENUM_AVAILABLE_MAC(10_4);
 
+NS_CLASS_AVAILABLE_MAC(10_4)
 @interface DOMCSSPrimitiveValue : DOMCSSValue
-@property(readonly) unsigned short primitiveType;
+@property (readonly) unsigned short primitiveType;
 
-- (void)setFloatValue:(unsigned short)unitType floatValue:(float)floatValue AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+- (void)setFloatValue:(unsigned short)unitType floatValue:(float)floatValue NS_AVAILABLE_MAC(10_5);
 - (float)getFloatValue:(unsigned short)unitType;
-- (void)setStringValue:(unsigned short)stringType stringValue:(NSString *)stringValue AVAILABLE_WEBKIT_VERSION_3_0_AND_LATER;
+- (void)setStringValue:(unsigned short)stringType stringValue:(NSString *)stringValue NS_AVAILABLE_MAC(10_5);
 - (NSString *)getStringValue;
 - (DOMCounter *)getCounterValue;
 - (DOMRect *)getRectValue;
@@ -79,8 +78,6 @@ enum {
 @end
 
 @interface DOMCSSPrimitiveValue (DOMCSSPrimitiveValueDeprecated)
-- (void)setFloatValue:(unsigned short)unitType :(float)floatValue AVAILABLE_WEBKIT_VERSION_1_3_AND_LATER_BUT_DEPRECATED_IN_WEBKIT_VERSION_3_0;
-- (void)setStringValue:(unsigned short)stringType :(NSString *)stringValue AVAILABLE_WEBKIT_VERSION_1_3_AND_LATER_BUT_DEPRECATED_IN_WEBKIT_VERSION_3_0;
+- (void)setFloatValue:(unsigned short)unitType :(float)floatValue NS_DEPRECATED_MAC(10_4, 10_5);
+- (void)setStringValue:(unsigned short)stringType :(NSString *)stringValue NS_DEPRECATED_MAC(10_4, 10_5);
 @end
-
-#endif

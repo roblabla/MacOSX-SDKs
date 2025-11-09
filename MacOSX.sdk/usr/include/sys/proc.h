@@ -183,7 +183,7 @@ struct extern_proc {
 
 #define	P_DEPENDENCY_CAPABLE	0x00100000	/* process is ok to call vfs_markdependency() */
 #define	P_REBOOT	0x00200000	/* Process called reboot() */
-#define	P_TBE		0x00400000	/* Process is TBE */
+#define	P_RESV6		0x00400000	/* used to be P_TBE */
 #define	P_RESV7		0x00800000	/* (P_SIGEXC)signal exceptions */
 
 #define	P_THCWD		0x01000000	/* process has thread cwd  */
@@ -212,6 +212,7 @@ struct extern_proc {
 #define P_DIRTY_BUSY                            0x00000040      /* serialization flag */
 #define P_DIRTY_MARKED                          0x00000080      /* marked dirty previously */
 #define P_DIRTY_DEFER_IN_PROGRESS               0x00000100      /* deferral to idle-band in process */
+#define P_DIRTY_LAUNCH_IN_PROGRESS              0x00000200      /* launch is in progress */
 
 #define P_DIRTY_IS_DIRTY                        (P_DIRTY | P_DIRTY_SHUTDOWN)
 #define P_DIRTY_IDLE_EXIT_ENABLED               (P_DIRTY_TRACK|P_DIRTY_ALLOW_IDLE_EXIT)

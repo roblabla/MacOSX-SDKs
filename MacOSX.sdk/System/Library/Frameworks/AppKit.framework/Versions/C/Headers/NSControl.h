@@ -1,19 +1,20 @@
 /*
 	NSControl.h
 	Application Kit
-	Copyright (c) 1994-2013, Apple Inc.
+	Copyright (c) 1994-2014, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/NSView.h>
 #import <AppKit/NSText.h>
+#import <AppKit/NSCell.h>
 
-@class NSCell, NSFont, NSTextView, NSNotification, NSAttributedString, NSFormatter;
+@class NSCell, NSFont, NSTextView, NSNotification, NSAttributedString, NSFormatter, NSControlAuxiliary;
 
 @interface NSControl : NSView
 {
     /*All instance variables are private*/
-    NSInteger	_tag;
+    NSControlAuxiliary *_aux;
     id		_cell;
     struct __conFlags {
         unsigned int enabled:1;
@@ -30,51 +31,31 @@
     } _conFlags;
 }
 
-+ (void)setCellClass:(Class)factoryId;
-+ (Class)cellClass;
+@property (weak) id target; // Target is weak for zeroing-weak compatible objects in apps linked on 10.10 or later. Otherwise the behavior of this property is 'assign’.
+@property SEL action;
+@property NSInteger tag;
+@property BOOL ignoresMultiClick;
+@property (getter=isContinuous) BOOL continuous;
+@property (getter=isEnabled) BOOL enabled;
+@property BOOL refusesFirstResponder;
+@property (getter=isHighlighted) BOOL highlighted NS_AVAILABLE_MAC(10_10);
+@property NSControlSize controlSize NS_AVAILABLE_MAC(10_10);
+@property (strong) id /* NSFormatter* */ formatter;
 
-- (id)initWithFrame:(NSRect)frameRect;
+@property (copy) NSString *stringValue;
+@property (copy) NSAttributedString *attributedStringValue;
+@property (copy) id  /* id<NSCopying> */ objectValue;
+@property int intValue;
+@property NSInteger integerValue;
+@property float floatValue;
+@property double doubleValue;
+
+
+- (NSSize)sizeThatFits:(NSSize)size NS_AVAILABLE_MAC(10_10);
+- (instancetype)initWithFrame:(NSRect)frameRect NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 - (void)sizeToFit;
-- (void)calcSize;
-- (id)cell;
-- (void)setCell:(NSCell *)aCell;
-- (id)selectedCell;
-- (id)target;
-- (void)setTarget:(id)anObject;
-- (SEL)action;
-- (void)setAction:(SEL)aSelector;
-- (NSInteger)tag;
-- (void)setTag:(NSInteger)anInt;
-- (NSInteger)selectedTag;
-- (void)setIgnoresMultiClick:(BOOL)flag;
-- (BOOL)ignoresMultiClick;
 - (NSInteger)sendActionOn:(NSInteger)mask;
-- (BOOL)isContinuous;
-- (void)setContinuous:(BOOL)flag;
-- (BOOL)isEnabled;
-- (void)setEnabled:(BOOL)flag;
-- (NSTextAlignment)alignment;
-- (void)setAlignment:(NSTextAlignment)mode;
-- (NSFont *)font;
-- (void)setFont:(NSFont *)fontObj;
-- (void)setFormatter:(NSFormatter *)newFormatter;
-- (id)formatter;
-- (void)setObjectValue:(id<NSCopying>)obj;
-- (void)setStringValue:(NSString *)aString;
-- (void)setIntValue:(int)anInt;
-- (void)setFloatValue:(float)aFloat;
-- (void)setDoubleValue:(double)aDouble;
-- (id)objectValue;
-- (NSString *)stringValue;
-- (int)intValue;
-- (float)floatValue;
-- (double)doubleValue;
-- (void)setNeedsDisplay;
-- (void)updateCell:(NSCell *)aCell;
-- (void)updateCellInside:(NSCell *)aCell;
-- (void)drawCellInside:(NSCell *)aCell;
-- (void)drawCell:(NSCell *)aCell;
-- (void)selectCell:(NSCell *)aCell;
 
 - (BOOL)sendAction:(SEL)theAction to:(id)theTarget;
 - (void)takeIntValueFrom:(id)sender;
@@ -82,52 +63,70 @@
 - (void)takeDoubleValueFrom:(id)sender;
 - (void)takeStringValueFrom:(id)sender;
 - (void)takeObjectValueFrom:(id)sender;
-- (NSText *)currentEditor;
-- (BOOL)abortEditing;
-- (void)validateEditing;
-- (void)mouseDown:(NSEvent *)theEvent;
-
-- (NSWritingDirection)baseWritingDirection;
-- (void)setBaseWritingDirection:(NSWritingDirection)writingDirection;
-
-- (NSInteger)integerValue NS_AVAILABLE_MAC(10_5);
-- (void)setIntegerValue:(NSInteger)anInteger NS_AVAILABLE_MAC(10_5);
 - (void)takeIntegerValueFrom:(id)sender NS_AVAILABLE_MAC(10_5);
 
-/* Gets and sets the ability for expansion tool tips to be shown or not. Expansion tooltips are automatically shown when the cell can not show the full content. This is controlled by the NSCell API expansionFrameWithFrame:inView: and is drawn by drawWithExpansionFrame:inView:. The default value is NO.
-    This value is encoded along with the control. In general, it is recommended to turn this on for NSTextFields in a View Based NSTableView.
- */
-- (BOOL)allowsExpansionToolTips NS_AVAILABLE_MAC(10_8);
-- (void)setAllowsExpansionToolTips:(BOOL)value NS_AVAILABLE_MAC(10_8);
-
-/* Get and set the user interface layout direction. This method is a cover method for userInterfaceLayoutDirection on NSCell. Some subclasses, such as NSOutlineView, may override this and provide more customized behavior.
- */
-- (NSUserInterfaceLayoutDirection)userInterfaceLayoutDirection NS_AVAILABLE_MAC(10_8);
-- (void)setUserInterfaceLayoutDirection:(NSUserInterfaceLayoutDirection)value NS_AVAILABLE_MAC(10_8);
+- (void)mouseDown:(NSEvent *)theEvent;
 
 @end
 
 @interface NSControl(NSKeyboardUI)
-- (void)performClick:sender;
+- (void)performClick:(id)sender;
 - (void)setRefusesFirstResponder:(BOOL)flag;
 - (BOOL)refusesFirstResponder;
 @end
 
-@interface NSObject(NSControlSubclassNotifications)
 
-- (void)controlTextDidBeginEditing:(NSNotification *)obj;
-- (void)controlTextDidEndEditing:(NSNotification *)obj;
-- (void)controlTextDidChange:(NSNotification *)obj;
+/* The following category applies only to controls with apparent textual content of some sort (buttons with labels, textfields, etc.).
+ */
+@interface NSControl(NSControlTextMethods)
+
+@property NSTextAlignment alignment;
+@property (copy) NSFont *font;
+@property NSLineBreakMode lineBreakMode NS_AVAILABLE_MAC(10_10);
+@property BOOL usesSingleLineMode NS_AVAILABLE_MAC(10_10);
+
+@property NSWritingDirection baseWritingDirection;
+
+/* Gets and sets the ability for expansion tool tips to be shown or not. Expansion tooltips are automatically shown when the cell can not show the full content. This is controlled by the NSCell API expansionFrameWithFrame:inView: and is drawn by drawWithExpansionFrame:inView:. The default value is NO.
+    This value is encoded along with the control. In general, it is recommended to turn this on for NSTextFields in a View Based NSTableView.
+ */
+@property BOOL allowsExpansionToolTips NS_AVAILABLE_MAC(10_8);
+
+/*  Allows the control to return an expansion tool tip frame if contentFrame is too small for the entire contents in the view. When the mouse is hovered over the text in certain controls, the full contents will be shown in a special floating tool tip view. If the frame is not too small, return an empty rect, and no expansion tool tip view will be shown. By default, NSControl returns NSZeroRect, while some subclasses (such as NSTextField) will return the proper frame when required.
+ */
+- (NSRect)expansionFrameWithFrame:(NSRect)contentFrame NS_AVAILABLE_MAC(10_10);
+
+/* Allows the control to perform custom expansion tool tip drawing. Note that the view may be different from the original view that the text appeared in.
+ */
+- (void)drawWithExpansionFrame:(NSRect)contentFrame inView:(NSView *)view NS_AVAILABLE_MAC(10_10);
 
 @end
 
+
+/* The following category applies only to controls with editable text, like NSTextField.
+ */
+@interface NSControl(NSControlEditableTextMethods)
+- (NSText *)currentEditor;
+- (BOOL)abortEditing;
+- (void)validateEditing;
+
+- (void)editWithFrame:(NSRect)aRect editor:(NSText *)textObj delegate:(id)anObject event:(NSEvent *)theEvent NS_AVAILABLE_MAC(10_10);
+- (void)selectWithFrame:(NSRect)aRect editor:(NSText *)textObj delegate:(id)anObject start:(NSInteger)selStart length:(NSInteger)selLength NS_AVAILABLE_MAC(10_10);
+- (void)endEditing:(NSText *)textObj NS_AVAILABLE_MAC(10_10);
+@end
+
+
+@interface NSObject(NSControlSubclassNotifications)
+- (void)controlTextDidBeginEditing:(NSNotification *)obj;
+- (void)controlTextDidEndEditing:(NSNotification *)obj;
+- (void)controlTextDidChange:(NSNotification *)obj;
+@end
 
 
 @protocol NSControlTextEditingDelegate <NSObject>
 @optional
 
 // These delegate and notification methods are sent from NSControl subclasses that allow text editing such as NSTextField and NSMatrix.  The classes that need to send these have delegates.  NSControl does not.
-
 - (BOOL)control:(NSControl *)control textShouldBeginEditing:(NSText *)fieldEditor;
 - (BOOL)control:(NSControl *)control textShouldEndEditing:(NSText *)fieldEditor;
 - (BOOL)control:(NSControl *)control didFailToFormatString:(NSString *)string errorDescription:(NSString *)error;
@@ -143,15 +142,28 @@ APPKIT_EXTERN NSString *NSControlTextDidBeginEditingNotification;	//	@"NSFieldEd
 APPKIT_EXTERN NSString *NSControlTextDidEndEditingNotification;	//	@"NSFieldEditor"
 APPKIT_EXTERN NSString *NSControlTextDidChangeNotification;		//	@"NSFieldEditor"
 
-@interface NSControl(NSControlAttributedStringMethods)
-- (NSAttributedString *)attributedStringValue;
-- (void)setAttributedStringValue:(NSAttributedString *)obj;
-@end
 
 @interface NSControl (NSDeprecated)
 
 // Use formatters instead.  See -[NSControl formatter] and -[NSControl setFormatter:].
 - (void)setFloatingPointFormat:(BOOL)autoRange left:(NSUInteger)leftDigits right:(NSUInteger)rightDigits NS_DEPRECATED_MAC(10_0, 10_0);
+
++ (void)setCellClass:(Class)factoryId;
++ (Class)cellClass;
+
+- (id)cell;
+- (void)setCell:(NSCell *)aCell;
+- (id)selectedCell;
+- (NSInteger)selectedTag;
+
+- (void)setNeedsDisplay;    // Use setNeedsDisplay:YES instead.
+- (void)calcSize;
+
+- (void)updateCell:(NSCell *)aCell;
+- (void)updateCellInside:(NSCell *)aCell;
+- (void)drawCellInside:(NSCell *)aCell;
+- (void)drawCell:(NSCell *)aCell;
+- (void)selectCell:(NSCell *)aCell;
 
 @end
 

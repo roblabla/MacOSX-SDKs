@@ -1,16 +1,11 @@
-framework module * [system] {
+framework module * [extern_c] [system] {
   exclude Kernel
   exclude System
 
   
   exclude Tk
   exclude Ruby
-
-
-
-
-
-
+  exclude SocialPlugin
 
 }
 

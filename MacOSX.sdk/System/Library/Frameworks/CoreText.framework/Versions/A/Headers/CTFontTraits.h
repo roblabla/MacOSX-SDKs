@@ -54,7 +54,7 @@ enum {
 /*!
     @enum       CTFontSymbolicTraits
     @abstract   Symbolic representation of stylistic font attributes.
-    @discussion CTFontSymbolicTraits symbolically describes stylistic aspects of a font. The upper 16 bits is used to describe appearance of the font whereas the lower 16 bits for typeface. The font appearance information represented by the upper 16 bits can be used for stylistic font matching.
+    @discussion CTFontSymbolicTraits symbolically describes stylistic aspects of a font. The top 4 bits is used to describe appearance of the font while the lower 28 bits for typeface. The font appearance information represented by the upper 4 bits can be used for stylistic font matching.
 */
 typedef CF_OPTIONS(uint32_t, CTFontSymbolicTraits) {
     kCTFontTraitItalic              = (1 << 0),     // Additional detail available via kCTFontSlantTrait

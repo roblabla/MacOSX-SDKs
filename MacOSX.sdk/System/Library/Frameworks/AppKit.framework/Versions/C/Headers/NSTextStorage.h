@@ -1,6 +1,6 @@
 /* 
         NSTextStorage.h
-        Copyright (c) 1994-2013, Apple Inc.
+        Copyright (c) 1994-2014, Apple Inc.
         All rights reserved.
 
 NSTextStorage is a semi-abstract subclass of NSMutableAttributedString. It implements change management (beginEditing/endEditing), verification of attributes, delegate handling, and layout management notification. The one aspect it does not implement is the actual attributed string storage --- this is left up to the subclassers, which need to override the two NSMutableAttributedString primitives:
@@ -21,9 +21,9 @@ These primitives should perform the change then call edited:range:changeInLength
 
 /* These values are or'ed together in notifications to indicate what got changed.
 */
-enum {
-    NSTextStorageEditedAttributes = 1,
-    NSTextStorageEditedCharacters = 2
+typedef NS_OPTIONS(NSUInteger, NSTextStorageEditedOptions) {
+    NSTextStorageEditedAttributes = 1UL << 0,
+    NSTextStorageEditedCharacters = 1UL << 1
 };
 
 @interface NSTextStorage : NSMutableAttributedString {
@@ -46,7 +46,7 @@ enum {
 */   
 - (void)addLayoutManager:(NSLayoutManager *)obj;     /* Retains & calls setTextStorage: on the item */
 - (void)removeLayoutManager:(NSLayoutManager *)obj;
-- (NSArray *)layoutManagers;
+@property (readonly, copy) NSArray *layoutManagers;
 
 /* If there are no outstanding beginEditing calls, this method calls processEditing to cause post-editing stuff to happen. This method has to be called by the primitives after changes are made. The range argument to edited:... is the range in the original string (before the edit).
 */
@@ -64,18 +64,17 @@ enum {
 
 /* This API can control whether the instance fixes attributes lazily.  By default custom NSTextStorage subclasses are not lazy to provide backward compatibilty.  But the default concrete subclass is lazy by default. */
 
-- (BOOL)fixesAttributesLazily;
+@property (readonly) BOOL fixesAttributesLazily;
 
 /* These methods return information about the editing status. Especially useful when there are outstanding beginEditing calls or during processEditing... editedRange.location will be NSNotFound if nothing has been edited.
 */       
-- (NSUInteger)editedMask;
-- (NSRange)editedRange;
-- (NSInteger)changeInLength;
+@property (readonly) NSUInteger editedMask;
+@property (readonly) NSRange editedRange;
+@property (readonly) NSInteger changeInLength;
 
 /* Set/get the delegate
 */
-- (void)setDelegate:(id <NSTextStorageDelegate>)delegate;
-- (id <NSTextStorageDelegate>)delegate;
+@property (assign) id<NSTextStorageDelegate> delegate;
 
 @end
 

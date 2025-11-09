@@ -1,11 +1,11 @@
 /*
         NSOpenGL.h
         Application Kit
-        Copyright (c) 2000-2013, Apple Inc.
+        Copyright (c) 2000-2014, Apple Inc.
         All rights reserved.
 */
 
-#import <Foundation/NSObject.h>
+#import <Foundation/Foundation.h>
 #import <OpenGL/gltypes.h>
 
 @class NSData, NSView, NSScreen;
@@ -22,7 +22,7 @@ typedef enum {
 	NSOpenGLGORetainRenderers  = 503,	/* Whether to retain loaded renderers in memory  */
 	NSOpenGLGOUseBuildCache    = 506,	/* Enable the function compilation block cache.  Off by default.  Must be enabled at startup. */
 
-	NSOpenGLGOResetLibrary /* NS_ENUM_DEPRECATED_MAC(10_0, 10_4) */ = 504
+	NSOpenGLGOResetLibrary NS_ENUM_DEPRECATED_MAC(10_0, 10_4) = 504
 } NSOpenGLGlobalOption;
 
 
@@ -78,52 +78,52 @@ enum {
  	NSOpenGLPFAOpenGLProfile NS_ENUM_AVAILABLE_MAC(10_7)     =  99,	/* specify an OpenGL Profile to use             */
    
         /* The following attributes are deprecated. */
-	NSOpenGLPFAOffScreen /* NS_ENUM_DEPRECATED_MAC(10_0, 10_7) */        =  53,
-	NSOpenGLPFAFullScreen /* NS_ENUM_DEPRECATED_MAC(10_0, 10_6) */        =  54,
-	NSOpenGLPFASingleRenderer /* NS_ENUM_DEPRECATED_MAC(10_0, 10_9) */    =  71,
-	NSOpenGLPFAWindow /* NS_ENUM_DEPRECATED_MAC(10_0, 10_9) */            =  80,
-	NSOpenGLPFACompliant /* NS_ENUM_DEPRECATED_MAC(10_0, 10_9) */         =  83,
-	NSOpenGLPFAPixelBuffer /* NS_ENUM_DEPRECATED_MAC(10_3, 10_7) */       =  90,
-	NSOpenGLPFARemotePixelBuffer /* NS_ENUM_DEPRECATED_MAC(10_3, 10_7) */ =  91,
+	NSOpenGLPFAOffScreen NS_ENUM_DEPRECATED_MAC(10_0, 10_7)        =  53,
+	NSOpenGLPFAFullScreen NS_ENUM_DEPRECATED_MAC(10_0, 10_6)       =  54,
+	NSOpenGLPFASingleRenderer  NS_ENUM_DEPRECATED_MAC(10_0, 10_9)  =  71,
+	NSOpenGLPFAWindow NS_ENUM_DEPRECATED_MAC(10_0, 10_9)           =  80,
+	NSOpenGLPFACompliant NS_ENUM_DEPRECATED_MAC(10_0, 10_9)        =  83,
+	NSOpenGLPFAPixelBuffer NS_ENUM_DEPRECATED_MAC(10_3, 10_7)      =  90,
+	NSOpenGLPFARemotePixelBuffer NS_ENUM_DEPRECATED_MAC(10_3, 10_7) =  91,
 
-	NSOpenGLPFARobust /* NS_ENUM_DEPRECATED_MAC(10_0, 10_5) */           =  75,
-	NSOpenGLPFAMPSafe /* NS_ENUM_DEPRECATED_MAC(10_0, 10_5) */            =  78,
-	NSOpenGLPFAMultiScreen /* NS_ENUM_DEPRECATED_MAC(10_0, 10_5) */      =  81,
+	NSOpenGLPFARobust NS_ENUM_DEPRECATED_MAC(10_0, 10_5)           =  75,
+	NSOpenGLPFAMPSafe NS_ENUM_DEPRECATED_MAC(10_0, 10_5)           =  78,
+	NSOpenGLPFAMultiScreen NS_ENUM_DEPRECATED_MAC(10_0, 10_5)      =  81,
 };
 typedef uint32_t NSOpenGLPixelFormatAttribute;
 
 /* NSOpenGLPFAOpenGLProfile values */
 enum {
-	NSOpenGLProfileVersionLegacy NS_ENUM_AVAILABLE_MAC(10_7)   = 0x1000,   /* choose a Legacy/Pre-OpenGL 3.0 Implementation */
-	NSOpenGLProfileVersion3_2Core NS_ENUM_AVAILABLE_MAC(10_7)  = 0x3200    /* choose an OpenGL 3.2 Core Implementation      */
+	NSOpenGLProfileVersionLegacy    NS_ENUM_AVAILABLE_MAC(10_7)     = 0x1000,   /* choose a Legacy/Pre-OpenGL 3.0 Implementation */
+	NSOpenGLProfileVersion3_2Core   NS_ENUM_AVAILABLE_MAC(10_7)     = 0x3200,   /* choose an OpenGL 3.2 Core Implementation      */
+        NSOpenGLProfileVersion4_1Core   NS_ENUM_AVAILABLE_MAC(10_10)    = 0x4100    /* choose an OpenGL 4.1 Core Implementation      */
 };
 
 /*
 ** NSOpenGLPixelFormat interface.
 */
-typedef struct _CGLPixelFormatObject NSOpenGLPixelFormatAuxiliary;
 
 @interface NSOpenGLPixelFormat : NSObject <NSCoding>
 {
 @private
-    NSOpenGLPixelFormatAuxiliary* _pixelFormatAuxiliary;
-    NSData*                       _pixelAttributes;
-    NSInteger                         _reserved1;
-    NSInteger                         _reserved2;
-    NSInteger                         _reserved3;
+    struct _CGLPixelFormatObject *_CGLPixelFormat;
+    void *_reserved1;
+    void *_reserved2;
+    void *_reserved3;
+    void *_reserved4;
 }
 
-- (id)initWithAttributes:(const NSOpenGLPixelFormatAttribute *)attribs;
-- (id)initWithData:(NSData*)attribs;
-- (id)initWithCGLPixelFormatObj:(void *)format NS_AVAILABLE_MAC(10_6);
+- (instancetype)initWithAttributes:(const NSOpenGLPixelFormatAttribute *)attribs;
+- (id)initWithData:(NSData*)attribs NS_DEPRECATED_MAC(10_0, 10_6, "Use -initWithAttributes: instead");
+- (NSOpenGLPixelFormat *)initWithCGLPixelFormatObj:(struct _CGLPixelFormatObject *)format NS_AVAILABLE_MAC(10_6);
 
-- (NSData*)attributes;
-- (void)setAttributes:(NSData*)attribs;
+- (NSData*)attributes NS_DEPRECATED_MAC(10_0, 10_6);
+- (void)setAttributes:(NSData*)attribs NS_DEPRECATED_MAC(10_0, 10_6);
 
 - (void)getValues:(GLint *)vals forAttribute:(NSOpenGLPixelFormatAttribute)attrib forVirtualScreen:(GLint)screen;
-- (GLint)numberOfVirtualScreens;
+@property (readonly) GLint numberOfVirtualScreens;
 
-- (void *)CGLPixelFormatObj NS_RETURNS_INNER_POINTER;
+@property (readonly) struct _CGLPixelFormatObject *CGLPixelFormatObj NS_RETURNS_INNER_POINTER;
 
 @end
 
@@ -133,11 +133,11 @@ typedef struct _CGLPixelFormatObject NSOpenGLPixelFormatAuxiliary;
 
 /* NOTE: PBuffers should be considered deprecated as of 10.7.  Use GL_EXT_framebuffer_object instead.
 */
-/* NS_DEPRECATED_MAC(10_2, 10_7) */
+NS_CLASS_DEPRECATED_MAC(10_2, 10_7, "Use GL_EXT_framebuffer_object instead")
 @interface NSOpenGLPixelBuffer : NSObject
 {
 @private
-    struct _CGLPBufferObject	*_pixelBufferAuxiliary;
+    struct _CGLPBufferObject *_CGLPBuffer;
     void			*_reserved1;
     void			*_reserved2;
 }
@@ -150,14 +150,14 @@ typedef struct _CGLPixelFormatObject NSOpenGLPixelFormatAuxiliary;
 ** maxLevel specifies the desired maximum mipmap level, starting with 0.  Must be 0 for
 ** TEXTURE_RECTANGLE targets.
 */
-- (id)initWithTextureTarget:(GLenum)target textureInternalFormat:(GLenum)format textureMaxMipMapLevel:(GLint)maxLevel pixelsWide:(GLsizei)pixelsWide pixelsHigh:(GLsizei)pixelsHigh /* NS_DEPRECATED_MAC(10_2, 10_7) */ ; /* Use IOSurface instead of NSOpenGLPixelBuffer on Mac OS 10.7 and newer. */
-- (id)initWithCGLPBufferObj:(void *)pbuffer NS_AVAILABLE_MAC(10_6) /* NS_DEPRECATED_MAC(10_6, 10_7) */ ; /* Use IOSurface instead of NSOpenGLPixelBuffer on Mac OS 10.7 and newer. */
-- (void *)CGLPBufferObj NS_RETURNS_INNER_POINTER NS_AVAILABLE_MAC(10_6) /* NS_DEPRECATED_MAC(10_6, 10_7) */ ; /* Use IOSurface instead of NSOpenGLPixelBuffer on Mac OS 10.7 and newer. */
-- (GLsizei)pixelsWide /* NS_DEPRECATED_MAC(10_2, 10_7) */ ; /* Use IOSurface instead of NSOpenGLPixelBuffer on Mac OS 10.7 and newer. */
-- (GLsizei)pixelsHigh /* NS_DEPRECATED_MAC(10_2, 10_7) */ ; /* Use IOSurface instead of NSOpenGLPixelBuffer on Mac OS 10.7 and newer. */
-- (GLenum)textureTarget /* NS_DEPRECATED_MAC(10_2, 10_7) */ ; /* Use IOSurface instead of NSOpenGLPixelBuffer on Mac OS 10.7 and newer. */
-- (GLenum)textureInternalFormat /* NS_DEPRECATED_MAC(10_2, 10_7) */ ; /* Use IOSurface instead of NSOpenGLPixelBuffer on Mac OS 10.7 and newer. */
-- (GLint)textureMaxMipMapLevel /* NS_DEPRECATED_MAC(10_2, 10_7) */ ; /* Use IOSurface instead of NSOpenGLPixelBuffer on Mac OS 10.7 and newer. */
+- (instancetype)initWithTextureTarget:(GLenum)target textureInternalFormat:(GLenum)format textureMaxMipMapLevel:(GLint)maxLevel pixelsWide:(GLsizei)pixelsWide pixelsHigh:(GLsizei)pixelsHigh NS_DEPRECATED_MAC(10_2, 10_7); /* Use IOSurface instead of NSOpenGLPixelBuffer on Mac OS 10.7 and newer. */
+- (NSOpenGLPixelBuffer *)initWithCGLPBufferObj:(struct _CGLPBufferObject *)pbuffer NS_DEPRECATED_MAC(10_6, 10_7); /* Use IOSurface instead of NSOpenGLPixelBuffer on Mac OS 10.7 and newer. */
+- (struct _CGLPBufferObject *)CGLPBufferObj NS_RETURNS_INNER_POINTER NS_AVAILABLE_MAC(10_6) NS_DEPRECATED_MAC(10_6, 10_7); /* Use IOSurface instead of NSOpenGLPixelBuffer on Mac OS 10.7 and newer. */
+- (GLsizei)pixelsWide NS_DEPRECATED_MAC(10_2, 10_7); /* Use IOSurface instead of NSOpenGLPixelBuffer on Mac OS 10.7 and newer. */
+- (GLsizei)pixelsHigh NS_DEPRECATED_MAC(10_2, 10_7); /* Use IOSurface instead of NSOpenGLPixelBuffer on Mac OS 10.7 and newer. */
+- (GLenum)textureTarget NS_DEPRECATED_MAC(10_2, 10_7); /* Use IOSurface instead of NSOpenGLPixelBuffer on Mac OS 10.7 and newer. */
+- (GLenum)textureInternalFormat NS_DEPRECATED_MAC(10_2, 10_7); /* Use IOSurface instead of NSOpenGLPixelBuffer on Mac OS 10.7 and newer. */
+- (GLint)textureMaxMipMapLevel NS_DEPRECATED_MAC(10_2, 10_7); /* Use IOSurface instead of NSOpenGLPixelBuffer on Mac OS 10.7 and newer. */
 @end
 
 
@@ -166,7 +166,7 @@ typedef struct _CGLPixelFormatObject NSOpenGLPixelFormatAuxiliary;
 *****************/
 
 /* Parameter names for NSOpenGLContext -setValues:forParameter: and -getValues:forParameter: */
-typedef enum {
+typedef NS_ENUM(NSInteger, NSOpenGLContextParameter) {
     NSOpenGLCPSwapInterval           = 222, /* 1 param.  0 -> Don't sync, 1 -> Sync to vertical retrace     */
     NSOpenGLCPSurfaceOrder           = 235, /* 1 param.  1 -> Above Window (default), -1 -> Below Window    */
     NSOpenGLCPSurfaceOpacity         = 236, /* 1 param.  1-> Surface is opaque (default), 0 -> non-opaque   */
@@ -184,7 +184,7 @@ typedef enum {
     NSOpenGLCPRasterizationEnable    = 221, /* Enable or disable all rasterization                          */
     NSOpenGLCPStateValidation        = 301, /* Validate state for multi-screen functionality                */
     NSOpenGLCPSurfaceSurfaceVolatile = 306, /* 1 param.   Surface volatile state                            */
-} NSOpenGLContextParameter;
+} ;
 
 
 /*
@@ -192,25 +192,26 @@ typedef enum {
 */
 typedef struct _CGLContextObject NSOpenGLContextAuxiliary;
 
-@interface NSOpenGLContext : NSObject
+@interface NSOpenGLContext : NSObject <NSLocking>
 {
 @private
 	__weak NSView            *_view;
-	NSOpenGLContextAuxiliary *_contextAuxiliary;
+    struct _CGLContextObject *_CGLContext;
 }
 
 /* Context creation */
-- (id)initWithFormat:(NSOpenGLPixelFormat *)format shareContext:(NSOpenGLContext *)share;
-- (id)initWithCGLContextObj:(void *)context NS_AVAILABLE_MAC(10_6);
+- (instancetype)initWithFormat:(NSOpenGLPixelFormat *)format shareContext:(NSOpenGLContext *)share;
+- (NSOpenGLContext *)initWithCGLContextObj:(struct _CGLContextObject *)context NS_AVAILABLE_MAC(10_6);
+
+@property (readonly, strong) NSOpenGLPixelFormat *pixelFormat NS_AVAILABLE_MAC(10_10);
 
 /* Drawable management */
-- (void)setView:(NSView *)view;
-- (NSView *)view;
-- (void)setFullScreen /* NS_DEPRECATED_MAC(10_0, 10_7) */; /* Use a fullscreen NSOpenGLView instead. */
+@property (assign) NSView *view;
+- (void)setFullScreen NS_DEPRECATED_MAC(10_0, 10_7, "Use a fullscreen NSOpenGLView instead");
 
 /* Deprecated in 10.7.  The -setOffScreen:width:height:rowbytes: API forces use of the software rasterizer, which is much slower than GPU rendering.  It is generally much better nowadays to use a normal pixel format with either an off-screen window or an FBO (GL_EXT_framebuffer_object), and then call glReadPixels() to read the rendered result back to CPU memory (if that's where it is needed).
 */
-- (void)setOffScreen:(void *)baseaddr width:(GLsizei)width height:(GLsizei)height rowbytes:(GLint)rowbytes /* NS_DEPRECATED_MAC(10_0, 10_7) */;
+- (void)setOffScreen:(void *)baseaddr width:(GLsizei)width height:(GLsizei)height rowbytes:(GLint)rowbytes NS_DEPRECATED_MAC(10_0, 10_7);
 
 - (void)clearDrawable;
 - (void)update;
@@ -224,7 +225,7 @@ typedef struct _CGLContextObject NSOpenGLContextAuxiliary;
 + (NSOpenGLContext *)currentContext;
 
 /* Copy attributes from another context */
-- (void)copyAttributesFromContext:(NSOpenGLContext *)context withMask:(GLbitfield)mask /* NS_DEPRECATED_MAC(10_0, 10_8) */ ;
+- (void)copyAttributesFromContext:(NSOpenGLContext *)context withMask:(GLbitfield)mask NS_DEPRECATED_MAC(10_0, 10_8);
 
 /* Context Parameter handling */
 - (void)setValues:(const GLint *)vals forParameter:(NSOpenGLContextParameter)param;
@@ -232,15 +233,16 @@ typedef struct _CGLContextObject NSOpenGLContextAuxiliary;
 
 
 /* virtual screens */
-- (void)setCurrentVirtualScreen:(GLint)screen;
-- (GLint)currentVirtualScreen;
+@property GLint currentVirtualScreen;
 
 /* creating textures */
-- (void)createTexture:(GLenum)target fromView:(NSView *)view internalFormat:(GLenum)format /* NS_DEPRECATED_MAC(10_0, 10_8) */ ;
+- (void)createTexture:(GLenum)target fromView:(NSView *)view internalFormat:(GLenum)format NS_DEPRECATED_MAC(10_2, 10_8);
 
+@property (readonly) struct _CGLContextObject *CGLContextObj NS_RETURNS_INNER_POINTER;
 
-- (void *)CGLContextObj NS_RETURNS_INNER_POINTER;
+@end
 
+@interface NSOpenGLContext (NSOpenGLPixelBufer)
 /*
 ** NOTE: PBuffers have been Deprecated as of 10.7.  Use GL_EXT_framebuffer_object instead.
 **
@@ -252,10 +254,10 @@ typedef struct _CGLContextObject NSOpenGLContextAuxiliary;
 ** If applicable, the virtual screen should be set to the same value as the current virtual screen you are using
 ** to render on-screen with.
 */
-- (void)setPixelBuffer:(NSOpenGLPixelBuffer *)pixelBuffer cubeMapFace:(GLenum)face mipMapLevel:(GLint)level currentVirtualScreen:(GLint)screen /* NS_DEPRECATED_MAC(10_0, 10_7) */ ; /* Use IOSurface instead of NSOpenGLPixelBuffer on Mac OS 10.7 and newer. */
-- (NSOpenGLPixelBuffer *)pixelBuffer /* NS_DEPRECATED_MAC(10_0, 10_7) */ ; /* Use IOSurface instead of NSOpenGLPixelBuffer on Mac OS 10.7 and newer. */
-- (GLenum)pixelBufferCubeMapFace /* NS_DEPRECATED_MAC(10_0, 10_7) */ ; /* Use IOSurface instead of NSOpenGLPixelBuffer on Mac OS 10.7 and newer. */
-- (GLint)pixelBufferMipMapLevel /* NS_DEPRECATED_MAC(10_0, 10_7) */ ; /* Use IOSurface instead of NSOpenGLPixelBuffer on Mac OS 10.7 and newer. */
+- (void)setPixelBuffer:(NSOpenGLPixelBuffer *)pixelBuffer cubeMapFace:(GLenum)face mipMapLevel:(GLint)level currentVirtualScreen:(GLint)screen NS_DEPRECATED_MAC(10_3, 10_7); /* Use IOSurface instead of NSOpenGLPixelBuffer on Mac OS 10.7 and newer. */
+- (NSOpenGLPixelBuffer *)pixelBuffer NS_DEPRECATED_MAC(10_3, 10_7); /* Use IOSurface instead of NSOpenGLPixelBuffer on Mac OS 10.7 and newer. */
+- (GLenum)pixelBufferCubeMapFace NS_DEPRECATED_MAC(10_3, 10_7); /* Use IOSurface instead of NSOpenGLPixelBuffer on Mac OS 10.7 and newer. */
+- (GLint)pixelBufferMipMapLevel NS_DEPRECATED_MAC(10_3, 10_7); /* Use IOSurface instead of NSOpenGLPixelBuffer on Mac OS 10.7 and newer. */
 
 /*
 ** NOTE: PBuffers have been Deprecated as of 10.7.  Use GL_EXT_framebuffer_object instead.
@@ -264,7 +266,5 @@ typedef struct _CGLContextObject NSOpenGLContextAuxiliary;
 ** to the currently bound texture object.   Source specifies which of the PBuffer's color buffers should be used,
 ** and should be one of GL_FRONT, GL_BACK, GL_AUX0, etc.
 */
-- (void)setTextureImageToPixelBuffer:(NSOpenGLPixelBuffer *)pixelBuffer colorBuffer:(GLenum)source /* NS_DEPRECATED_MAC(10_0, 10_7) */ ; /* Use IOSurface instead of NSOpenGLPixelBuffer on Mac OS 10.7 and newer. */
-
+- (void)setTextureImageToPixelBuffer:(NSOpenGLPixelBuffer *)pixelBuffer colorBuffer:(GLenum)source NS_DEPRECATED_MAC(10_3, 10_7); /* Use IOSurface instead of NSOpenGLPixelBuffer on Mac OS 10.7 and newer. */
 @end
-

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2013 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2014 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -75,6 +75,13 @@
 #include <sys/queue.h>
 
 #include <netinet6/ipsec.h> /* for IPSEC */
+#if NECP
+#include <net/necp.h>
+#endif
+
+#if IPSEC
+#include <netinet6/ipsec.h> /* for IPSEC */
+#endif
 
 typedef	u_quad_t	inp_gen_t;
 

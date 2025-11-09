@@ -91,14 +91,13 @@ enum IOBluetoothDeviceSearchOptionsBits
 };
 
 //--------------------------------------------------------------------------------------------------------------------------
-/*!	@enum		IOBluetoothDeviceSearchDeviceAttributes
+/*!	@typedef	IOBluetoothDeviceSearchDeviceAttributes
 	@abstract	Structure used to search for particular devices.
 	@discussion Make sure you specify all fields! If you do not set deviceClassMajor for example, and the value is
 				0, that is mapped to kBluetoothDeviceClassMajorMiscellaneous, which is probably not what you want. To
 				search for all device types, you must pass kBluetoothDeviceClassMajorAny and its relatives. 
 */
 
-typedef	struct	IOBluetoothDeviceSearchDeviceAttributes	IOBluetoothDeviceSearchDeviceAttributes;
 struct 	IOBluetoothDeviceSearchDeviceAttributes
 {
 	BluetoothDeviceAddress				address;				// 00 08 22 44 AB 56, etc.
@@ -107,6 +106,7 @@ struct 	IOBluetoothDeviceSearchDeviceAttributes
 	BluetoothDeviceClassMajor			deviceClassMajor;		// Computer, Phone, Audio, etc.
 	BluetoothDeviceClassMinor			deviceClassMinor;		// Desktop, cordless, headset, etc.
 };
+typedef	struct	IOBluetoothDeviceSearchDeviceAttributes	IOBluetoothDeviceSearchDeviceAttributes;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!	@struct		IOBluetoothDeviceSearchAttributes
@@ -116,7 +116,6 @@ struct 	IOBluetoothDeviceSearchDeviceAttributes
 				out block of attributes is NOT equivalent to passing in NULL!	
 */ 
 
-typedef	struct	IOBluetoothDeviceSearchAttributes	IOBluetoothDeviceSearchAttributes;
 struct 	IOBluetoothDeviceSearchAttributes
 {
 	IOBluetoothDeviceSearchOptions	options;				// Options.
@@ -125,6 +124,7 @@ struct 	IOBluetoothDeviceSearchAttributes
 
 	IOBluetoothDeviceSearchDeviceAttributes	*attributeList;	
 };
+typedef	struct	IOBluetoothDeviceSearchAttributes	IOBluetoothDeviceSearchAttributes;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!	@typedef		IOBluetoothDeviceSearchTypes
@@ -224,11 +224,11 @@ extern	void	IOBluetoothRemoveIgnoredHIDDevice( IOBluetoothDeviceRef	device );
 				IOBluetoothSDPServiceRecordRef when done.
 	@result		Returns kIOReturnSuccess if successful.
  
- THIS CALL IS DEPRECATED.  PLEASE USE +[IOBluetoothSDPServiceRecord publishedServiceRecordWithDictionary:]
+ THIS CALL IS DEPRECATED IN 10.9.  PLEASE USE +[IOBluetoothSDPServiceRecord publishedServiceRecordWithDictionary:]
 
 */
 
-extern IOReturn IOBluetoothAddServiceDict(CFDictionaryRef serviceDict, IOBluetoothSDPServiceRecordRef *outServiceRecord) DEPRECATED_IN_MAC_OS_X_VERSION_10_8_AND_LATER;
+extern IOReturn IOBluetoothAddServiceDict(CFDictionaryRef serviceDict, IOBluetoothSDPServiceRecordRef *outServiceRecord) DEPRECATED_IN_MAC_OS_X_VERSION_10_9_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothRemoveServiceWithRecordHandle
@@ -238,11 +238,11 @@ extern IOReturn IOBluetoothAddServiceDict(CFDictionaryRef serviceDict, IOBluetoo
 	@param		serviceRecordHandle The handle of the service to be removed.
 	@result		Returns kIOReturnSuccess if successful.
  
-    THIS CALL IS DEPRECATED.  PLEASE USE -[IOBluetoothSDPServiceRecord removeServiceRecord]
+    THIS CALL IS DEPRECATED IN 10.9.  PLEASE USE -[IOBluetoothSDPServiceRecord removeServiceRecord]
 
 */
 
-extern IOReturn IOBluetoothRemoveServiceWithRecordHandle( BluetoothSDPServiceRecordHandle serviceRecordHandle ) DEPRECATED_IN_MAC_OS_X_VERSION_10_8_AND_LATER;
+extern IOReturn IOBluetoothRemoveServiceWithRecordHandle( BluetoothSDPServiceRecordHandle serviceRecordHandle ) DEPRECATED_IN_MAC_OS_X_VERSION_10_9_AND_LATER;
 
 
 #if 0
@@ -445,7 +445,7 @@ IOBluetoothUserNotificationRef IOBluetoothRFCOMMChannelRegisterForChannelCloseNo
  @param		configDict	Configuration dictionary containing a description of the audio controls to be attached to the driver.  Passing NULL will result in default controls
  @result		Returns kIOReturnSuccess if the audio driver was successfully created, error if hardware does not support SCO or device is not paired. On 10.9 it will always return kIOReturnSuccess.
  */
-extern IOReturn IOBluetoothAddSCOAudioDevice( IOBluetoothDeviceRef device, CFDictionaryRef configDict ) DEPRECATED_IN_MAC_OS_X_VERSION_10_8_AND_LATER;
+extern IOReturn IOBluetoothAddSCOAudioDevice( IOBluetoothDeviceRef device, CFDictionaryRef configDict ) DEPRECATED_IN_MAC_OS_X_VERSION_10_9_AND_LATER;
 
 /*!
  @function	IOBluetoothRemoveSCOAudioDevice
@@ -453,7 +453,7 @@ extern IOReturn IOBluetoothAddSCOAudioDevice( IOBluetoothDeviceRef device, CFDic
  @param		device	Bluetooth audio device to remove
  @result		Returns kIOReturnSuccess if the audio driver was successfully removed. On 10.9 it will always return kIOReturnSuccess
  */
-extern IOReturn IOBluetoothRemoveSCOAudioDevice( IOBluetoothDeviceRef device ) DEPRECATED_IN_MAC_OS_X_VERSION_10_8_AND_LATER;
+extern IOReturn IOBluetoothRemoveSCOAudioDevice( IOBluetoothDeviceRef device ) DEPRECATED_IN_MAC_OS_X_VERSION_10_9_AND_LATER;
 
 
 #ifdef	__cplusplus

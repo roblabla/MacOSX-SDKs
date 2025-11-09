@@ -52,8 +52,8 @@ typedef struct OpaqueVTDecompressionSession*  VTDecompressionSessionRef;
 
 /*!
 	@typedef	VTDecompressionOutputCallback
-    @abstract   Prototype for callback invoked when frame decompression is complete.
-    @discussion 
+	@abstract	Prototype for callback invoked when frame decompression is complete.
+	@discussion 
 		When you create a decompression session, you pass in a callback function to be called 
 		for decompressed frames.  This function will not necessarily be called in display order.
 	@param	decompressionOutputRefCon
@@ -68,10 +68,12 @@ typedef struct OpaqueVTDecompressionSession*  VTDecompressionSessionRef;
 		Contains information about the decode operation.
 		The kVTDecodeInfo_Asynchronous bit may be set if the decode ran asynchronously.
 		The kVTDecodeInfo_FrameDropped bit may be set if the frame was dropped.
+		If the kVTDecodeInfo_ImageBufferModifiable bit is set, it is safe for the client to modify the imageBuffer.
 	@param	imageBuffer
 		Contains the decompressed frame, if decompression was successful; otherwise, NULL.
-		IMPORTANT: Do not modify the image in this buffer.  The video decoder may retain it
-		and use it for generating subsequent frames.
+		IMPORTANT: The video decompressor may still be referencing the imageBuffer returned in this
+		callback if the kVTDecodeInfo_ImageBufferModifiable flag is not set.  Unless this flag
+		is set, it is not safe to modify the returned imageBuffer.
 	@param	presentationTimeStamp
 		The frame's presentation timestamp; kCMTimeInvalid if not available.
 	@param	presentationDuration
@@ -121,7 +123,7 @@ VTDecompressionSessionCreate(
 	CFDictionaryRef								videoDecoderSpecification,                /* can be NULL */
 	CFDictionaryRef                             destinationImageBufferAttributes,         /* can be NULL */
 	const VTDecompressionOutputCallbackRecord * outputCallback,
-	VTDecompressionSessionRef *                 decompressionSessionOut) VT_AVAILABLE_STARTING(10_8);
+	VTDecompressionSessionRef *                 decompressionSessionOut) __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0);
 
 /*!
 	@function	VTDecompressionSessionInvalidate
@@ -134,14 +136,14 @@ VTDecompressionSessionCreate(
     	Calling VTDecompressionSessionInvalidate ensures a deterministic, orderly teardown.
 */
 VT_EXPORT void 
-VTDecompressionSessionInvalidate( VTDecompressionSessionRef session ) VT_AVAILABLE_STARTING(10_8);
+VTDecompressionSessionInvalidate( VTDecompressionSessionRef session ) __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0);
 
 /*!
 	@function VTDecompressionSessionGetTypeID
 	@abstract Returns the CFTypeID for decompression sessions.  
 */
 VT_EXPORT CFTypeID 
-VTDecompressionSessionGetTypeID(void) VT_AVAILABLE_STARTING(10_8);
+VTDecompressionSessionGetTypeID(void) __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0);
 
 /*!
 	@function	VTDecompressionSessionDecodeFrame
@@ -176,7 +178,7 @@ VTDecompressionSessionDecodeFrame(
 	CMSampleBufferRef               sampleBuffer,
 	VTDecodeFrameFlags              decodeFlags, // bit 0 is enableAsynchronousDecompression
 	void *                          sourceFrameRefCon,
-	VTDecodeInfoFlags               *infoFlagsOut /* may be NULL */ ) VT_AVAILABLE_STARTING(10_8);
+	VTDecodeInfoFlags               *infoFlagsOut /* may be NULL */ ) __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0);
 
 /*!
 	@function VTDecompressionSessionFinishDelayedFrames
@@ -190,7 +192,7 @@ VTDecompressionSessionDecodeFrame(
 */
 VT_EXPORT OSStatus
 VTDecompressionSessionFinishDelayedFrames(
-	VTDecompressionSessionRef		session) VT_AVAILABLE_STARTING(10_8);
+	VTDecompressionSessionRef		session) __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0);
 
 /*!
 	@function VTDecompressionSessionCanAcceptFormatDescription
@@ -203,7 +205,7 @@ VTDecompressionSessionFinishDelayedFrames(
 VT_EXPORT Boolean 
 VTDecompressionSessionCanAcceptFormatDescription( 
 	VTDecompressionSessionRef		session, 
-	CMFormatDescriptionRef			newFormatDesc ) VT_AVAILABLE_STARTING(10_8);
+	CMFormatDescriptionRef			newFormatDesc ) __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0);
 
 /*!
 	@function VTDecompressionSessionWaitForAsynchronousFrames
@@ -214,7 +216,7 @@ VTDecompressionSessionCanAcceptFormatDescription(
 */
 VT_EXPORT OSStatus
 VTDecompressionSessionWaitForAsynchronousFrames(
-	VTDecompressionSessionRef       session) VT_AVAILABLE_STARTING(10_8);
+	VTDecompressionSessionRef       session) __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0);
 
 /*!
 	@function	VTDecompressionSessionCopyBlackPixelBuffer
@@ -230,7 +232,7 @@ VTDecompressionSessionWaitForAsynchronousFrames(
 VT_EXPORT OSStatus
 VTDecompressionSessionCopyBlackPixelBuffer(
    VTDecompressionSessionRef		session,
-   CVPixelBufferRef					*pixelBufferOut ) VT_AVAILABLE_STARTING(10_8);
+   CVPixelBufferRef					*pixelBufferOut ) __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0);
 	
 // See VTSession.h for property access APIs on VTDecompressionSessions.
 // See VTDecompressionProperties.h for standard property keys and values for decompression sessions.

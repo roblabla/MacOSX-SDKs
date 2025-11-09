@@ -26,36 +26,38 @@ typedef NS_ENUM(NSInteger, SKLabelHorizontalAlignmentMode) {
  */
 SK_EXPORT @interface SKLabelNode : SKNode
 
++ (instancetype)labelNodeWithText:(NSString *)text;
+
 + (instancetype)labelNodeWithFontNamed:(NSString *)fontName;
 
 - (instancetype)initWithFontNamed:(NSString *)fontName;
 
-@property (SK_NONATOMIC_IOSONLY) SKLabelVerticalAlignmentMode verticalAlignmentMode;
-@property (SK_NONATOMIC_IOSONLY) SKLabelHorizontalAlignmentMode horizontalAlignmentMode;
+@property (nonatomic) SKLabelVerticalAlignmentMode verticalAlignmentMode;
+@property (nonatomic) SKLabelHorizontalAlignmentMode horizontalAlignmentMode;
 
-@property (SK_NONATOMIC_IOSONLY, copy) NSString *fontName;
-@property (SK_NONATOMIC_IOSONLY, copy) NSString *text;
-@property (SK_NONATOMIC_IOSONLY) CGFloat fontSize;
+@property (nonatomic, copy) NSString *fontName;
+@property (nonatomic, copy) NSString *text;
+@property (nonatomic) CGFloat fontSize;
 
 /**
  Base color that the text is rendered with (if supported by the font)
  */
-@property (SK_NONATOMIC_IOSONLY, retain) SKColor *fontColor;
+@property (nonatomic, retain) SKColor *fontColor;
 
 /**
  Controls the blending between the rendered text and a color. The valid interval of values is from 0.0 up to and including 1.0. A value above or below that interval is clamped to the minimum (0.0) if below or the maximum (1.0) if above.
  */
-@property (SK_NONATOMIC_IOSONLY) CGFloat colorBlendFactor;
+@property (nonatomic) CGFloat colorBlendFactor;
 
 /**
  Color to be blended with the text based on the colorBlendFactor
  */
-@property (SK_NONATOMIC_IOSONLY, retain) SKColor *color;
+@property (nonatomic, retain) SKColor *color;
 
 /**
  Sets the blend mode to use when composing the sprite with the final framebuffer.
  @see SKNode.SKBlendMode
  */
-@property (SK_NONATOMIC_IOSONLY) SKBlendMode blendMode;
+@property (nonatomic) SKBlendMode blendMode;
 
 @end

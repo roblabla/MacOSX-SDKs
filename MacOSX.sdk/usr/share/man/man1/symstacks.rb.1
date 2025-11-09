@@ -72,6 +72,12 @@ thread, and signals that thread to begin symbolication using
 when a snapshot is triggered. The current implementation may take several
 seconds to perform the address-symbol translations, depending on the state of the system. The symbolicated trace file is appended to:
 .Pa /Library/Logs/stackshot-syms.log.
+.It Fl l
+Gather information on the loaded binary images as part of the stackshot.
+.It Fl O
+Gather OS trace information as part of the stackshot (this may time out).
+.It Fl I
+Include the list of importance donors per process in the output log.
 .El                      \" Ends the list
 .Sh SYMBOLICATION
 Symbolication (as with the -t or -u options, or the symstacks.rb script described

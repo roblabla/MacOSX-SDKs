@@ -1,5 +1,5 @@
 /*	CFNumber.h
-	Copyright (c) 1999-2013, Apple Inc. All rights reserved.
+	Copyright (c) 1999-2014, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFNUMBER__)
@@ -10,7 +10,7 @@
 CF_IMPLICIT_BRIDGING_ENABLED
 CF_EXTERN_C_BEGIN
 
-typedef const struct __CFBoolean * CFBooleanRef;
+typedef const struct CF_BRIDGED_TYPE(NSNumber) __CFBoolean * CFBooleanRef;
 
 CF_EXPORT
 const CFBooleanRef kCFBooleanTrue;
@@ -46,7 +46,7 @@ typedef CF_ENUM(CFIndex, CFNumberType) {
     kCFNumberMaxType = 16
 };
 
-typedef const struct __CFNumber * CFNumberRef;
+typedef const struct CF_BRIDGED_TYPE(NSNumber) __CFNumber * CFNumberRef;
 
 CF_EXPORT
 const CFNumberRef kCFNumberPositiveInfinity;

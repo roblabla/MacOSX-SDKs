@@ -1,7 +1,6 @@
-.Dd 29 Apr 2003
-.Os "Mac OS X"
+.Dd 13 May 2014
+.Os "OS X"
 .Dt hdik 8
-.Pp
 .Sh NAME
 .Nm hdik
 .Nd lightweight tool to attach and mount disk images in-kernel
@@ -9,32 +8,47 @@
 .Nm hdik
 .Ar imagefile
 .Op options
+.Nm
+.Fl e
+.Ar device
 .Sh DESCRIPTION
 .Nm
-is a lightweight tool that can be used to attach disk images in-kernel (i.e. without a
-user-land process to provide the backing store).  Only a subset of disk images can be mounted
-in this manner including read/write disk images, UDIF disk images that use zlib compression, 
-shadowed disk images, and sparse disk images.
+is a simple tool that can be used to attach disk images directly to the
+DiskImages driver.  The end result is functionally similar to passing
+.Fl kernel
+to 
+.Xr hdiutil 1 Ns 's
+.Sy attach
+verb.
+.Nm
+does not rely upon the presence of DiskImages or other high-level frameworks.
 .Pp
-.Nm 
-is intended for use in situations where linking against the DiskImages framework is problematic
-or an extremely lightweight mechanism for attaching a disk image is needed.
+The DiskImages driver only supports the most common disk image formats:
+UDRW, UDRO, UDZO, SPARSE.  It also supports shadow files.
+.Xr hdiutil 1 Ns 's
+.Sy imageinfo
+verb indicates whether a particular image is kernel compatible.
 .Pp
-You can specify that the image should not be processed by Disk Arbitration
-by specifying the
-.Fl nomount 
-option.  You can also specify that the image be mounted with a shadow file by using the 
-.Fl shadow
-option.
+.Nm
+requires root access to perform its functions.
 .Pp
-The following argument must be specified:
-.Pp
-.Bl -tag -width "123456789A" -compact
+In the first form, an image to attach must be provided:
+.Bl -tag -width "123456789A"
 .It Ar imagefile
-the disk image to be mounted.
+path to the disk image file to attach.
 .El
+.Pp
+In its second form, 
+.Nm
+issues an eject command to the specified
+.Ar device .
+The argument is the full device node path (e.g.
+.Pa /dev/disk2 Ns ).
+Any volumes mounted from the device must be unmounted first, or the command
+will fail.  See
+.Xr umount 8 .
 .Sh OPTIONS
-.Bl -tag -width "123456789A" -compact
+.Bl -tag -width "123456789A"
 .It Fl shadow Op Ar shadowfile 
 Use a shadow file in conjunction with the data in the image.  This option
 prevents modification of the original image and allows read-only images
@@ -46,14 +60,16 @@ file.  If not specified,
 defaults to <imagename>.shadow.  If the
 shadow file does not exist, it is created.
 .It Fl nomount
-Suppress automatic mounting of the image or partitions on it.  This will
-result in /dev entries being created, but will not mount any volumes.
+Suppress automatic mounting of filesystems contained within the image.  This
+will result in /dev entries being created, but will not mount any volumes.
 .It Fl drivekey Ar keyname=value
 Specify a key/value pair for the IOHDIXHDDrive object created (shows up
-in the IOKit registry of devices which is viewable with ioreg(8)).
+in the IOKit registry of devices which is viewable with 
+.Xr ioreg 8) .
 .El
 .Sh SEE ALSO
 .Ns Xr hdiutil 1 ,
 .Ns Xr diskarbitrationd 8 ,
 .Ns Xr diskutil 8 ,
+.Ns Xr umount 8 ,
 .Ns Xr ioreg 8

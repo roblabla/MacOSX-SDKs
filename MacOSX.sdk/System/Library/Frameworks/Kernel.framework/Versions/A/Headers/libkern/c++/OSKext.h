@@ -226,17 +226,6 @@ private:
         uint32_t     compressedSize,
         uint32_t     fullSize);
 
-    static OSReturn readMkext1Archive(
-        OSData   * mkextData,
-        uint32_t * checksumPtr);
-    bool initWithMkext1Info(
-        OSDictionary * anInfoDict,
-        OSData       * executableWrapper,
-        OSData       * mkextData);
-    static OSData * extractMkext1Entry(
-        const void * mkextFileBase,
-        const void * entry);
-
    /* Dependencies.
     */
     virtual bool resolveDependencies(
@@ -378,22 +367,23 @@ private:
         vm_offset_t   * addr,
         unsigned int    cnt,
         int          (* printf_func)(const char *fmt, ...),
-        bool            lockFlag);
+        bool            lockFlag,
+        bool            doUnslide);
     static boolean_t summaryIsInBacktrace(
         OSKextLoadedKextSummary * summary,
         vm_offset_t             * addr,
         unsigned int              cnt);
     static void printSummary(
         OSKextLoadedKextSummary * summary,
-        int                    (* printf_func)(const char *fmt, ...));
+        int                    (* printf_func)(const char *fmt, ...),
+        bool                      doUnslide);
 
-    static uint32_t saveLoadedKextPanicListTyped(
+    static int saveLoadedKextPanicListTyped(
         const char * prefix,
         int          invertFlag,
         int          libsFlag,
         char       * paniclist,
-        uint32_t     list_size,
-        uint32_t   * list_length_ptr);
+        uint32_t     list_size);
     static void saveLoadedKextPanicList(void);
     void savePanicString(bool isLoading);
     static void printKextPanicLists(int (*printf_func)(const char *fmt, ...));

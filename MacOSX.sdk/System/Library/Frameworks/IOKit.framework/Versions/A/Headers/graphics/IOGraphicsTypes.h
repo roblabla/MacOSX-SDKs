@@ -31,7 +31,7 @@
 extern "C" {
 #endif
 
-#define IOGRAPHICSTYPES_REV     37
+#define IOGRAPHICSTYPES_REV     42
 
 typedef SInt32  IOIndex;
 typedef UInt32  IOSelect;
@@ -176,7 +176,8 @@ enum {
     kDisplayModeValidForMirroringFlag   = 0x00200000,
     kDisplayModeAcceleratorBackedFlag   = 0x00400000,
     kDisplayModeValidForHiResFlag       = 0x00800000,
-    kDisplayModeValidForAirPlayFlag     = 0x01000000
+    kDisplayModeValidForAirPlayFlag     = 0x01000000,
+    kDisplayModeNativeFlag              = 0x02000000
 };
 enum {
     kDisplayModeValidFlag               = 0x00000001,
@@ -260,6 +261,7 @@ enum {
     kIOCursorControlAttribute           = 'crsc',
 
     kIOSystemPowerAttribute             = 'spwr',
+    kIOWindowServerActiveAttribute      = 'wsrv',
     kIOVRAMSaveAttribute                = 'vrsv',
     kIODeferCLUTSetAttribute            = 'vclt',
 
@@ -706,6 +708,10 @@ enum {
     kConnectionRedGammaScale            = 'rgsc',
     kConnectionGreenGammaScale          = 'ggsc',
     kConnectionBlueGammaScale           = 'bgsc',
+    kConnectionGammaScale               = 'gsc ',
+    kConnectionFlushParameters          = 'flus',
+
+    kConnectionVBLMultiplier            = 'vblm',
 
     kConnectionHandleDisplayPortEvent   = 'dpir',
 
@@ -1036,6 +1042,7 @@ enum {
     kIOTimingIDVESA_1024x768_75hz    = 204,     /* 1024x768  (75 Hz) VESA 1K-75Hz timing (very similar to kIOTimingIDApple_1024x768_75hz). */
     kIOTimingIDVESA_1024x768_85hz    = 208,     /* 1024x768  (85 Hz) VESA timing. */
     kIOTimingIDApple_1024x768_75hz   = 210,     /* 1024x768  (75 Hz) Apple 19" RGB. */
+    kIOTimingIDVESA_1152x864_75hz    = 215,     /* 1152x864  (75 Hz) VESA timing. */
     kIOTimingIDApple_1152x870_75hz   = 220,     /* 1152x870  (75 Hz) Apple 21" RGB. */
     kIOTimingIDAppleNTSC_ST          = 230,     /*  512x384  (60 Hz, interlaced, non-convolved). */
     kIOTimingIDAppleNTSC_FF          = 232,     /*  640x480  (60 Hz, interlaced, non-convolved). */
@@ -1105,6 +1112,8 @@ enum {
 #define kIOFBGammaWidthKey              "IOFBGammaWidth"
 #define kIOFBGammaCountKey              "IOFBGammaCount"
 #define kIOFBCLUTDeferKey               "IOFBCLUTDefer"
+
+#define kIOFBDisplayPortConfigurationDataKey    "dpcd-registers"
         
 // exists on the hibernate progress display device
 #ifndef kIOHibernatePreviewActiveKey
@@ -1306,6 +1315,7 @@ enum {
 #define kIODisplayBrightnessKey             "brightness"
 #define kIODisplayLinearBrightnessKey       "linear-brightness"
 #define kIODisplayUsableLinearBrightnessKey "usable-linear-brightness"
+#define kIODisplayBrightnessFadeKey         "brightness-fade"
 #define kIODisplayContrastKey               "contrast"
 #define kIODisplayHorizontalPositionKey     "horizontal-position"
 #define kIODisplayHorizontalSizeKey     	"horizontal-size"
@@ -1340,6 +1350,7 @@ enum {
 #define kIODisplayRedGammaScaleKey      "rgsc"
 #define kIODisplayGreenGammaScaleKey    "ggsc"
 #define kIODisplayBlueGammaScaleKey     "bgsc"
+#define kIODisplayGammaScaleKey         "gsc "
 
 #define kIODisplayParametersCommitKey   "commit"
 #define kIODisplayParametersDefaultKey  "defaults"

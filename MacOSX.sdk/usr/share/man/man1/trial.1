@@ -1,8 +1,8 @@
-.TH TRIAL "1" "Oct 2007" "" ""
+.TH TRIAL "1" "Jun 2013" "" ""
 .SH NAME
 trial \- run unit tests
 .SH SYNOPSIS
-\fBtrial\fR [ \fIoptions\fR ] [ \fIfile\fR | \fIpackage\fR | \fImodule\fR | \fITestCase\fR | \fItestmethod\fR ] ... 
+\fBtrial\fR [ \fIoptions\fR ] [ \fIfile\fR | \fIpackage\fR | \fImodule\fR | \fITestCase\fR | \fItestmethod\fR ] ...
 .PP
 \fBtrial --help\fR | \fB-h\fR
 .SH DESCRIPTION
@@ -13,7 +13,8 @@ packages and files listed on the command line.
 trial will take either filenames or fully qualified Python names as
 arguments.  Thus `trial myproject/foo.py', `trial myproject.foo' and
 `trial myproject.foo.SomeTestCase.test_method' are all valid ways to
-invoke trial.
+invoke trial. Multiple such arguments are also accepted, and their order will
+determine the order in which the corresponding tests are run.
 .PP
 After running the given test suite, the default test reporter prints a summary
 of the test run. This consists of the word "PASSED" (if all tests ran as
@@ -58,13 +59,17 @@ for some reason the test succeeded. These are marked "SUCCESS!?!" in
 the normal test output.
 .SH OPTIONS
 .TP
+\fB-j\fR, \fB--jobs\fR \fInumber\fR
+Set the number of process workers to run. It conflicts with the debug,
+exitfirst and profile options.
+.TP
 \fB-b\fR, \fB--debug\fR
-Run the tests in the Python debugger. Also does post-mortem
-debugging on exceptions. Will load `.pdbrc' from current directory if
-it exists.
+Run the tests in a debugger. If that debugger is 'pdb' (which is the default if
+unspecified), a `.pdbrc' will be loaded from the current directory if it
+exists. Also does post-mortem debugging on exceptions.
 .TP
 \fB-B\fR, \fB--debug-stacktraces\fR
-Report Deferred creation and callback stack traces
+Report Deferred creation and callback stack traces.
 .TP
 \fB--coverage\fR
 Generate coverage information in the `coverage' subdirectory of the trial temp
@@ -86,6 +91,11 @@ Note that this functionality uses Python's sys.settrace() function, so tests
 that call sys.settrace() themselves are likely to break trial's coverage
 functionality.
 .TP
+\fB--debugger\fR
+Specifies the debugger to use when the --debug option is passed. The argument
+should be the fully qualified name of an object that implements the same
+interface as the standard library's `pdb'.
+.TP
 \fB--disablegc\fR
 Disable the garbage collector for the duration of the test run. As each test is
 run, trial saves the TestResult objects, which means that Python's garbage
@@ -97,7 +107,7 @@ tests slightly more deterministic, which might help debugging in extreme
 circumstances.
 .TP
 \fB-e\fR, \fB--rterrors\fR
-Print tracebacks to standard output as soon as they occur
+Print tracebacks to standard output as soon as they occur.
 .TP
 \fB--force-gc\fR
 Run gc.collect() before and after each test case. This can be used to
@@ -106,6 +116,10 @@ the default, except it makes tests run about ten times slower.
 .TP
 \fB-h\fR, \fB--help\fR
 Print a usage message to standard output, then exit.
+.TP
+\fB--help-order\fR
+Print a list of possible orders that TestCase test methods can be run in, then
+exit. The orders can be used with the --order option described below.
 .TP
 \fB--help-reporters\fR
 Print a list of valid reporters to standard output, then exit. Reporters can
@@ -131,18 +145,28 @@ every subpackage.  Unless, that is, you specify this option.
 Don't automatically jump into debugger for post-mortem analysis of
 exceptions.  Only usable in conjunction with --debug.
 .TP
+\fB--order\fR \fIorder\fR
+Specify what order to run the individual test methods within the given
+TestCases. By default, they are run alphabetically. See --help-order for a list
+of other valid values.
+.TP
 \fB--profile\fR
 Run tests under the Python profiler.
 .TP
 \fB-r\fR, \fB--reactor\fR \fIreactor\fR
 Choose which reactor to use.  See --help-reactors for a list.
 .TP
-\fB--recursionlimit\fR
-Set Python's recursion limit. See sys.setrecursionlimit()
+\fB--recursionlimit\fR \fIlimit\fR
+Set Python's recursion limit. See sys.setrecursionlimit().
 .TP
-\fB--reporter\fR
+\fB--reporter\fR \fIreporter\fR
 Select the reporter to use for trial's output.  Use the --help-reporters
 option to see a list of valid reporters.
+.TP
+\fB-x\fR, \fB--exitfirst\fR
+Stop the test run after the first test which does not succeed. This includes
+failures, errors, or unexpected successes. Won't work with the --jobs option
+currently.
 .TP
 \fB--spew\fR
 Print an insanely verbose log of everything that happens. Useful when
@@ -153,7 +177,7 @@ Format to display tracebacks with. Acceptable values are `default', `brief'
 and `verbose'. `brief' produces tracebacks that play nicely with Emacs' GUD.
 .TP
 \fB--temp-directory\fR \fIdirectory\fR
-WARNING: Do not use this options unless you know what you are doing. 
+WARNING: Do not use this option unless you know what you are doing.
 By default, trial creates a directory called _trial_temp under the current
 working directory.  When trial runs, it first \fIdeletes\fR this directory,
 then creates it, then changes into the directory to run the tests. The log
@@ -183,8 +207,9 @@ Simulate the lack of the specified comma-separated list of modules. This makes
 it look like the modules are not present in the system, causing tests to check
 the behavior for that configuration.
 .TP
-\fB-z\fR, \fB--random\fR [\fIseed\fR]
-Run the tests in random order using the specified seed.
+\fB-z\fR, \fB--random\fR \fIseed\fR
+Run the tests in random order using the specified seed. Don't pass this option
+if you also are passing --order.
 .PP
 .SH SEE ALSO
 The latest version of the trial documentation can be found at
@@ -194,7 +219,7 @@ Written by Jonathan M. Lange
 .SH "REPORTING BUGS"
 To report a bug, visit http://twistedmatrix.com/trac/newticket
 .SH COPYRIGHT
-Copyright \(co 2003-2011 Twisted Matrix Laboratories
+Copyright \(co 2003-2013 Twisted Matrix Laboratories
 .br
 This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.

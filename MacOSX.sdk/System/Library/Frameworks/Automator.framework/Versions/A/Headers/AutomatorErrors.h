@@ -1,6 +1,6 @@
 /*	
     AutomatorErrors.h
-    Copyright (C) 2006 Apple Computer, Inc. All rights reserved.    
+    Copyright (C) 2006, 2014 Apple Inc. All rights reserved.
     
     Public header file.
 */
@@ -42,6 +42,11 @@ enum {
 	AMActionPropertyListInvalidError					= -214,		// The action's property list is invalid
 	AMActionInsufficientDataError						= -215,		// The action requires input data to run but none was supplied
 	AMActionIsDeprecatedError							= -216,		// The action is deprecated
+    AMActionFailedGatekeeperError                       = -217,     // The action signature doesn't meet Gatekeeper policy
+    AMActionSignatureCorruptError                       = -218,     // The action signature is corrupt
+    AMActionQuarantineError                             = -219,     // The action is quarantined
+    AMActionXProtectError                               = -220,     // The action could not be analyzed by XProtect
+    AMActionMalwareError                                = -221,     // The action has been detected as malware by XProtect
 	
 	// Data conversion errors
 	AMConversionNotPossibleError						= -300,		// Conversion not possible

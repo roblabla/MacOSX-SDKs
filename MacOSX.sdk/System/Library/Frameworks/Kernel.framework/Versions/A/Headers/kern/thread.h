@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2012 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2014 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -113,6 +113,14 @@ __END_DECLS
 
 
 __BEGIN_DECLS
+
+extern uint64_t	 		thread_tid(thread_t thread);
+
+__END_DECLS
+
+
+__BEGIN_DECLS
+
 
 
 /*! @function kernel_thread_start

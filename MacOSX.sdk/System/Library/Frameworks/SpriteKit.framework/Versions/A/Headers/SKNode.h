@@ -11,7 +11,7 @@
 
 #import <SpriteKit/SpriteKitBase.h>
 
-@class SKView, SKAction, SKScene, SKTexture, SKPhysicsBody;
+@class SKView, SKAction, SKScene, SKTexture, SKPhysicsBody, SKFieldNode, SKReachConstraints, SKConstraint;
 
 /**
  Blend modes that the SKNode uses to compose with the framebuffer to produce blended colors.
@@ -37,9 +37,18 @@ SK_EXPORT @interface SKNode : UIResponder <NSCopying, NSCoding>
 SK_EXPORT @interface SKNode : NSResponder <NSCopying, NSCoding>
 #endif
 
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
+
+/**
+ Support coding and decoding via NSKeyedArchiver.
+ */
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+
 + (instancetype)node;
 
-@property (SK_NONATOMIC_IOSONLY, readonly) CGRect frame;
++ (instancetype)nodeWithFileNamed:(NSString*)filename;
+
+@property (nonatomic, readonly) CGRect frame;
 
 /**
  Calculates the bounding box including all child nodes in parents coordinate system.
@@ -49,65 +58,65 @@ SK_EXPORT @interface SKNode : NSResponder <NSCopying, NSCoding>
 /**
  The position of the node in the parent's coordinate system
  */
-@property (SK_NONATOMIC_IOSONLY) CGPoint position;
+@property (nonatomic) CGPoint position;
 
 /**
  The z-order of the node (used for ordering). Negative z is "into" the screen, Positive z is "out" of the screen. A greater zPosition will sort in front of a lesser zPosition.
  */
-@property (SK_NONATOMIC_IOSONLY) CGFloat zPosition;
+@property (nonatomic) CGFloat zPosition;
 
 /**
  The Euler rotation about the z axis (in radians)
  */
-@property (SK_NONATOMIC_IOSONLY) CGFloat zRotation;
+@property (nonatomic) CGFloat zRotation;
 
 /**
  The scaling in the X axis
  */
-@property (SK_NONATOMIC_IOSONLY) CGFloat xScale;
+@property (nonatomic) CGFloat xScale;
 /**
  The scaling in the Y axis
  */
-@property (SK_NONATOMIC_IOSONLY) CGFloat yScale;
+@property (nonatomic) CGFloat yScale;
 
 /**
  The speed multiplier applied to all actions run on this node. Inherited by its children.
  */
-@property (SK_NONATOMIC_IOSONLY) CGFloat speed;
+@property (nonatomic) CGFloat speed;
 
 /**
  Alpha of this node (multiplied by the output color to give the final result)
  */
-@property (SK_NONATOMIC_IOSONLY) CGFloat alpha;
+@property (nonatomic) CGFloat alpha;
 
 /**
  Controls whether or not the node's actions is updated or paused.
  */
-@property (SK_NONATOMIC_IOSONLY, getter = isPaused) BOOL paused;
+@property (nonatomic, getter = isPaused) BOOL paused;
 
 /**
  Controls whether or not the node and its children are rendered.
  */
-@property (SK_NONATOMIC_IOSONLY, getter = isHidden) BOOL hidden;
+@property (nonatomic, getter = isHidden) BOOL hidden;
 
 /**
  Controls whether or not the node receives touch events
  */
-@property(getter=isUserInteractionEnabled) BOOL userInteractionEnabled;
+@property (nonatomic, getter=isUserInteractionEnabled) BOOL userInteractionEnabled;
 
 /**
  The parent of the node.
  
  If this is nil the node has not been added to another group and is thus the root node of its own graph.
  */
-@property (SK_NONATOMIC_IOSONLY, readonly) SKNode *parent;
+@property (nonatomic, readonly) SKNode *parent;
 
 
 /**
  The children of this node.
  
  */
-@property (SK_NONATOMIC_IOSONLY, readonly) NSArray *children;
+@property (nonatomic, readonly) NSArray *children;
 
 
 /**
@@ -115,19 +124,35 @@ SK_EXPORT @interface SKNode : NSResponder <NSCopying, NSCoding>
  
  In general, this should be unique among peers in the scene graph.
  */
-@property (SK_NONATOMIC_IOSONLY, copy) NSString *name;
+@property (nonatomic, copy) NSString *name;
 
 /**
  The scene that the node is currently in.
  */
-@property (SK_NONATOMIC_IOSONLY, readonly) SKScene* scene;
-
-@property (SK_NONATOMIC_IOSONLY, retain) SKPhysicsBody *physicsBody;
+@property (nonatomic, readonly) SKScene* scene;
 
 /**
- An optional dictionary that can be used to hold user data pretaining to the node. Defaults to nil. 
+ Physics body attached to the node, with synchronized scale, rotation, and position
  */
-@property (SK_NONATOMIC_IOSONLY, retain) NSMutableDictionary *userData;
+@property (nonatomic, retain) SKPhysicsBody *physicsBody;
+
+/**
+ An optional dictionary that can be used to store your own data in a node. Defaults to nil.
+ */
+@property (nonatomic, retain) NSMutableDictionary *userData;
+
+/**
+ Kinematic constraints, used in IK solving
+ */
+@property (nonatomic, copy) SKReachConstraints *reachConstraints;
+
+
+/**
+ Optional array of SKConstraints
+ Constraints are evaluated each frame after actions and physics.
+ The node's transform will be changed to satisfy the constraint.
+ */
+@property (nonatomic, copy) NSArray *constraints;
 
 /**
  Sets both the x & y scale
@@ -154,6 +179,19 @@ SK_EXPORT @interface SKNode : NSResponder <NSCopying, NSCoding>
 
 - (SKNode *)childNodeWithName:(NSString *)name;
 - (void)enumerateChildNodesWithName:(NSString *)name usingBlock:(void (^)(SKNode *node, BOOL *stop))block;
+
+/**
+ * Simplified shorthand for enumerateChildNodesWithName that returns an array of the matching nodes.
+ * This allows subscripting of the form:
+ *      NSArray *childrenMatchingName = node[@"name"]
+ *
+ * or even complex like:
+ *      NSArray *siblingsBeginningWithA = node[@"../a*"]
+ *
+ * @param name An Xpath style path that can include simple regular expressions for matching node names.
+ * @see enumerateChildNodesWithName:usingBlock:
+ */
+- (NSArray *)objectForKeyedSubscript:(NSString *)name NS_AVAILABLE(10_10, 8_0);
 
 /* Returns true if the specified parent is in this node's chain of parents */
 

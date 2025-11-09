@@ -1029,7 +1029,6 @@ vImage_Error vImageMultidimensionalTable_Release( vImage_MultidimensionalTable t
  *  nearby gridpoints are considered. If the vImage_InterpolationMethod is kvImageHalfInterpolation, then the {0,0,0...}, {1,1,1...} verticies 
  *  along the gray axis are considered along with N-1 nearest other vertices. 
  *
- *      <insert formula here>
  *
  *  Parameters:
  *

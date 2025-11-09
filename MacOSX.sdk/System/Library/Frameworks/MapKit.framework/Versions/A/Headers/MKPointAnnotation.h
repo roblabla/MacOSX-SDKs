@@ -2,7 +2,7 @@
 //  MKPointAnnotation.h
 //  MapKit
 //
-//  Copyright (c) 2010-2013, Apple Inc. All rights reserved.
+//  Copyright (c) 2010-2014, Apple Inc. All rights reserved.
 //
 
 #import <MapKit/MKFoundation.h>

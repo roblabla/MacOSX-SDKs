@@ -1,7 +1,7 @@
 /*
 	NSCursor.h
 	Application Kit
-	Copyright (c) 1994-2013, Apple Inc.
+	Copyright (c) 1994-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -55,23 +55,23 @@
 + (NSCursor *)contextualMenuCursor NS_AVAILABLE_MAC(10_6);
 + (NSCursor *)IBeamCursorForVerticalLayout NS_AVAILABLE_MAC(10_7);
 
-- (id)initWithImage:(NSImage *)newImage hotSpot:(NSPoint)aPoint;
-- (id)initWithImage:(NSImage *)newImage	foregroundColorHint:(NSColor *)fg backgroundColorHint:(NSColor *)bg hotSpot:(NSPoint)hotSpot;
+- (instancetype)initWithImage:(NSImage *)newImage hotSpot:(NSPoint)aPoint;
+- (instancetype)initWithImage:(NSImage *)newImage	foregroundColorHint:(NSColor *)fg backgroundColorHint:(NSColor *)bg hotSpot:(NSPoint)hotSpot;
 
 + (void)hide;
 + (void)unhide;
 + (void)setHiddenUntilMouseMoves:(BOOL)flag;
 + (void)pop;
 
-- (NSImage *)image;
-- (NSPoint)hotSpot;
+@property (readonly, strong) NSImage *image;
+@property (readonly) NSPoint hotSpot;
 - (void)push;
 - (void)pop;
 - (void)set;
 - (void)setOnMouseExited:(BOOL)flag;
 - (void)setOnMouseEntered:(BOOL)flag;
-- (BOOL)isSetOnMouseExited;
-- (BOOL)isSetOnMouseEntered;
+@property (getter=isSetOnMouseExited, readonly) BOOL setOnMouseExited;
+@property (getter=isSetOnMouseEntered, readonly) BOOL setOnMouseEntered;
 - (void)mouseEntered:(NSEvent *)theEvent;
 - (void)mouseExited:(NSEvent *)theEvent;
 

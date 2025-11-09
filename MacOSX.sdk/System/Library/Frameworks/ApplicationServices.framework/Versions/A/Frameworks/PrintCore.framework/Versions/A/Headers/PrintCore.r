@@ -19,10 +19,6 @@
 #include <CoreServices/CoreServices.r>
 #endif
 
-#ifndef __QD_R__
-#include <QD/QD.r>
-#endif
-
 #ifndef __PMPrintAETypes_R__
 #include <PrintCore/PMPrintAETypes.r>
 #endif

@@ -14,7 +14,7 @@
 //      interface ABPerson
 // ================================================================================
 // ABPerson is a subclass of ABRecord and represents a person. See ABGlobals.h for
-// a list of built-in properties
+// a list of built-in properties.
 
 @interface ABPerson : ABRecord
 

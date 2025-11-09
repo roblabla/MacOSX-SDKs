@@ -3,7 +3,7 @@
  
     Contains:   Routines for creating MIDI play-through connections.
  
- 	Copyright:  (c) 2000-2008 by Apple Inc., all rights reserved.
+    Copyright:  (c) 2000-2008 by Apple Inc., all rights reserved.
  
     Bugs?:      For bug reports, consult the following page on
                 the World Wide Web:
@@ -43,7 +43,7 @@
 #if __LP64__
 typedef MIDIObjectRef MIDIThruConnectionRef;
 #else
-typedef struct OpaqueMIDIThruConnection *		MIDIThruConnectionRef;
+typedef struct OpaqueMIDIThruConnection *       MIDIThruConnectionRef;
 #endif
 
 /*!
@@ -145,6 +145,16 @@ typedef struct MIDITransform MIDITransform;
         All transformations are done internally using 14-bit values, so for example, when doing
         an add/min/max transform on a 7-bit control value, the parameter must be a 14-bit value.
         For example, to add 10 to a control value, param must be (10 << 7) = 1280.
+
+        As per the MIDI specification, a number of controls are interpreted specially:
+
+        <ul>
+        <li>32-63 are the LSBs of 0-31</li>
+        <li>6/38 is data entry</li>
+        <li>96,97 are data increment, decrement</li>
+        <li>98-101 are NRPN/RPN</li>
+        </ul>
+ 
     @field  controlType         The type of control specified by controlNumber
     @field  remappedControlType If transform is kMIDITransform_MapControl, the output control type
     @field  controlNumber       The control number to be affected.

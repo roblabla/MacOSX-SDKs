@@ -50,7 +50,11 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 */
 + (AVMutableAudioMix *)audioMix;
 
-/* Indicates parameters for inputs to the mix; an NSArray of instances of AVAudioMixInputParameters. Note that an instance of AVAudioMixInputParameters is not required for each audio track that contributes to the mix; audio for those without associated AVAudioMixInputParameters will be included in the mix, processed according to default behavior.  */
+/*!
+ @property		inputParameters
+ @abstract		Indicates parameters for inputs to the mix; an NSArray of instances of AVAudioMixInputParameters.
+ @discussion	Note that an instance of AVAudioMixInputParameters is not required for each audio track that contributes to the mix; audio for those without associated AVAudioMixInputParameters will be included in the mix, processed according to default behavior.
+*/
 @property (nonatomic, copy) NSArray *inputParameters;
 
 @end
@@ -84,10 +88,25 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
     AVAudioMixInputParametersInternal    *_inputParameters;
 }
 
-/* indicates the trackID of the audio track to which the parameters should be applied */
+/*!
+ @property		trackID
+ @abstract		Indicates the trackID of the audio track to which the parameters should be applied.
+*/
 @property (nonatomic, readonly) CMPersistentTrackID trackID;
 
-/* obtains an audio processing tap on the audio track */
+/*!
+ @property		audioTimePitchAlgorithm
+ @abstract		Indicates the processing algorithm used to manage audio pitch at varying rates and for scaled audio edits.
+ @discussion
+   Constants for various time pitch algorithms, e.g. AVAudioTimePitchSpectral, are defined in AVAudioProcessingSettings.h.
+   Can be nil, in which case the audioTimePitchAlgorithm set on the AVPlayerItem, AVAssetExportSession, or AVAssetReaderAudioMixOutput on which the AVAudioMix is set will be used for the associated track.
+*/
+@property (nonatomic, readonly, copy) NSString *audioTimePitchAlgorithm NS_AVAILABLE(10_10, 7_0);
+
+/*!
+ @property		audioTapProcessor
+ @abstract		Indicates the audio processing tap that will be used for the audio track.
+*/
 @property (nonatomic, readonly, retain) __attribute__((NSObject)) MTAudioProcessingTapRef audioTapProcessor NS_AVAILABLE(10_9, 6_0);
 
 /*  
@@ -134,16 +153,37 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 */
 + (AVMutableAudioMixInputParameters *)audioMixInputParameters;
 
-/* indicates the trackID of the audio track to which the parameters should be applied */
+/*!
+ @property		trackID
+ @abstract		Indicates the trackID of the audio track to which the parameters should be applied.
+*/
 @property (nonatomic) CMPersistentTrackID trackID;
 
-/* sets an audio processing tap to the audio track */
+/*!
+ @property		audioTimePitchAlgorithm
+ @abstract		Indicates the processing algorithm used to manage audio pitch at varying rates and for scaled audio edits.
+ @discussion
+   Constants for various time pitch algorithms, e.g. AVAudioTimePitchSpectral, are defined in AVAudioProcessingSettings.h.
+   Can be nil, in which case the audioTimePitchAlgorithm set on the AVPlayerItem, AVAssetExportSession, or AVAssetReaderAudioMixOutput on which the AVAudioMix is set will be used for the associated track.
+*/
+@property (nonatomic, copy) NSString *audioTimePitchAlgorithm NS_AVAILABLE(10_10, 7_0);
+
+/*!
+ @property		audioTapProcessor
+ @abstract		Indicates the audio processing tap that will be used for the audio track.
+*/
 @property (nonatomic, retain) __attribute__((NSObject)) MTAudioProcessingTapRef audioTapProcessor NS_AVAILABLE(10_9, 6_0);
 
-/* sets a volume ramp to apply during the specified timeRange */
+/*  
+ @method		setVolumeRampFromStartVolume:toEndVolume:timeRange:
+ @abstract		Sets a volume ramp to apply during the specified timeRange.
+*/
 - (void)setVolumeRampFromStartVolume:(float)startVolume toEndVolume:(float)endVolume timeRange:(CMTimeRange)timeRange;
 
-/* sets the value of the audio volume at a specific time */
+/*  
+ @method		setVolume:atTime:
+ @abstract		Sets the value of the audio volume at a specific time.
+*/
 - (void)setVolume:(float)volume atTime:(CMTime)time;
 
 @end

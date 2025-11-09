@@ -3,7 +3,7 @@
  
 	Framework:  CoreMedia
  
-	Copyright 2006-2013 Apple Inc. All rights reserved.
+	Copyright © 2006-2014 Apple Inc. All rights reserved.
  
 */
 
@@ -19,6 +19,8 @@ extern "C" {
 #endif
     
 #pragma pack(push, 4)
+
+CF_IMPLICIT_BRIDGING_ENABLED
 
 /*!
 	@typedef	CMClock
@@ -183,6 +185,8 @@ CM_EXPORT CFTypeID
 CMTimebaseGetTypeID( void )
 	__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
 
+CF_IMPLICIT_BRIDGING_DISABLED
+
 /*!
 	@function	CMTimebaseCreateWithMasterClock
 	@abstract	Creates a timebase driven by the given clock.  
@@ -209,6 +213,8 @@ CMTimebaseCreateWithMasterTimebase(
 		CMTimebaseRef masterTimebase,
 		CMTimebaseRef *timebaseOut )
 			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+
+CF_IMPLICIT_BRIDGING_ENABLED
 
 /*!
 	@function	CMTimebaseGetMasterTimebase
@@ -632,6 +638,8 @@ CM_EXPORT const CFStringRef kCMTimebaseNotification_TimeJumped
 // Payload key for the time at which a change in effective rate or a discontinuous time jump occurred.
 CM_EXPORT const CFStringRef kCMTimebaseNotificationKey_EventTime
 								__OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+
+CF_IMPLICIT_BRIDGING_DISABLED
 
 #pragma pack(pop)
     

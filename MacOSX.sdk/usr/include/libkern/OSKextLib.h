@@ -457,11 +457,6 @@ __BEGIN_DECLS
  * A kext can get its own load tag in the <code>kmod_info_t</code>
  * structure passed into its module start routine, as the
  * <code>id</code> field (cast to this type).
- * You can use the load tag with the functions
- * <code>@link OSKextRetainKextWithLoadTag
- * OSKextRetainKextWithLoadTag@/link</code> and
- * <code>@link OSKextReleaseKextWithLoadTag
- * OSKextReleaseKextWithLoadTag@/link</code>.
  */
 typedef uint32_t  OSKextLoadTag;
 
@@ -473,7 +468,6 @@ typedef uint32_t  OSKextLoadTag;
  * indicates kext not found.
  */
 #define  kOSKextInvalidLoadTag  ((OSKextLoadTag)(-1))
-
 
 
 __END_DECLS

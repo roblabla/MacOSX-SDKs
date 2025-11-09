@@ -1,5 +1,5 @@
 /*      NSCache.h
-        Copyright (c) 2008-2013, Apple Inc. All rights reserved.
+        Copyright (c) 2008-2014, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -15,11 +15,9 @@ NS_CLASS_AVAILABLE(10_6, 4_0)
     void *_reserved;
 }
 
-- (void)setName:(NSString *)n;
-- (NSString *)name;
+@property (copy) NSString *name;
 
-- (void)setDelegate:(id <NSCacheDelegate>)d;
-- (id <NSCacheDelegate>)delegate;
+@property (assign) id<NSCacheDelegate> delegate;
 
 - (id)objectForKey:(id)key;
 - (void)setObject:(id)obj forKey:(id)key; // 0 cost
@@ -28,14 +26,9 @@ NS_CLASS_AVAILABLE(10_6, 4_0)
 
 - (void)removeAllObjects;
 
-- (void)setTotalCostLimit:(NSUInteger)lim;
-- (NSUInteger)totalCostLimit;	// limits are imprecise/not strict
-
-- (void)setCountLimit:(NSUInteger)lim;
-- (NSUInteger)countLimit;	// limits are imprecise/not strict
-
-- (BOOL)evictsObjectsWithDiscardedContent;
-- (void)setEvictsObjectsWithDiscardedContent:(BOOL)b;
+@property NSUInteger totalCostLimit;	// limits are imprecise/not strict
+@property NSUInteger countLimit;	// limits are imprecise/not strict
+@property BOOL evictsObjectsWithDiscardedContent;
 
 @end
 

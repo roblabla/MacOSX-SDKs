@@ -290,7 +290,7 @@ CG_EXTERN void CGDisplayRestoreColorSyncSettings(void)
 
 enum {
   kCGCaptureNoOptions = 0,	/* Default behavior. */
-  kCGCaptureNoFill = (1 << 0)	/* Disables fill with black on capture. */
+  kCGCaptureNoFill __CG_DEPRECATED_ENUMERATOR = (1 << 0)	/* Disables fill with black on capture. */
 };
 typedef uint32_t CGCaptureOptions;
 

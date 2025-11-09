@@ -31,6 +31,7 @@ extern NSString * const kABMaidenNameProperty;            // kABStringProperty
 
 extern NSString * const kABBirthdayProperty;              // Birth date - kABDateProperty
 extern NSString * const kABBirthdayComponentsProperty AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;  // Birth date - kABDateComponentsProperty
+extern NSString * const kABAlternateBirthdayComponentsProperty; //Alternate non-Gregorian birth date - kABDateComponentsProperty
 
 extern NSString * const kABOrganizationProperty;          // Company name - kABStringProperty
 
@@ -220,6 +221,7 @@ extern NSString * const kABSocialProfileProperty                    AVAILABLE_MA
         extern NSString * const kABSocialProfileServiceMySpace      AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
         extern NSString * const kABSocialProfileServiceSinaWeibo    AVAILABLE_MAC_OS_X_VERSION_10_8_AND_LATER;
         extern NSString * const kABSocialProfileServiceTencentWeibo AVAILABLE_MAC_OS_X_VERSION_10_9_AND_LATER;
+        extern NSString * const kABSocialProfileServiceYelp         AVAILABLE_MAC_OS_X_VERSION_10_9_AND_LATER;
 
 extern NSString * const kABNoteProperty;                   // Note - kABStringProperty
 

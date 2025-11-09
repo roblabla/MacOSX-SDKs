@@ -296,8 +296,7 @@ typedef CF_ENUM(int8_t, CTWritingDirection) {
 
     @constant   kCTParagraphStyleSpecifierMaximumLineSpacing
                 The maximum space in points between lines within the paragraph
-                (commonly known as leading). This value is always
-                nonnegative.
+                (commonly known as leading).
 
                 Type: CGFloat
                 Default: some large number.
@@ -306,8 +305,7 @@ typedef CF_ENUM(int8_t, CTWritingDirection) {
  
     @constant   kCTParagraphStyleSpecifierMinimumLineSpacing
                 The minimum space in points between lines within the paragraph
-                (commonly known as leading). This value is always
-                nonnegative.
+                (commonly known as leading).
 
                 Type: CGFloat
                 Default: 0.0

@@ -1,7 +1,7 @@
 /*
 	NSScreen.h
 	Application Kit
-	Copyright (c) 1994-2013, Apple Inc.
+	Copyright (c) 1994-2014, Apple Inc.
 	All rights reserved.
 */
 
@@ -30,13 +30,13 @@ typedef struct NSScreenAuxiliary NSScreenAuxiliaryOpaque;
 */
 + (BOOL)screensHaveSeparateSpaces NS_AVAILABLE_MAC(10_9);
 
-- (NSWindowDepth)depth;
-- (NSRect)frame;
-- (NSRect)visibleFrame;
-- (NSDictionary *)deviceDescription;
-- (NSColorSpace *)colorSpace NS_AVAILABLE_MAC(10_6);
+@property (readonly) NSWindowDepth depth;
+@property (readonly) NSRect frame;
+@property (readonly) NSRect visibleFrame;
+@property (readonly, copy) NSDictionary *deviceDescription;
+@property (readonly, strong) NSColorSpace *colorSpace NS_AVAILABLE_MAC(10_6);
 
-- (const NSWindowDepth *)supportedWindowDepths NS_RETURNS_INNER_POINTER; /* 0 terminated */
+@property (readonly) const NSWindowDepth *supportedWindowDepths NS_RETURNS_INNER_POINTER; /* 0 terminated */
 
 /* Convert to/from the device pixel aligned coordinates sytem of a display 
  */
@@ -49,7 +49,7 @@ typedef struct NSScreenAuxiliary NSScreenAuxiliaryOpaque;
 
 /* Returns the scale factor representing the number of backing store pixels corresponding to each linear unit in screen space on this NSScreen. This method is provided for rare cases when the explicit scale factor is needed.  Please use -convert*ToBacking: methods whenever possible. 
  */
-- (CGFloat)backingScaleFactor NS_AVAILABLE_MAC(10_7); 
+@property (readonly) CGFloat backingScaleFactor NS_AVAILABLE_MAC(10_7); 
 
 @end
 
@@ -62,6 +62,6 @@ APPKIT_EXTERN NSString * const NSScreenColorSpaceDidChangeNotification NS_AVAILA
 /*  This method is deprecated and should not be used by applications targeting Mac OS X 10.7 or later.
  The implementation of this method will always return 1.0.  Please use -convertRectToBacking: or -backingScaleFactor instead.
  */
-- (CGFloat)userSpaceScaleFactor;
+- (CGFloat)userSpaceScaleFactor NS_DEPRECATED_MAC(10_4, 10_7, "Use -convertRectToBacking: or -backingScaleFactor instead");
 
 @end
